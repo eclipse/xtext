@@ -234,15 +234,15 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *     ((val1=ID val2=ID) | (val1=ID val3=ID) | (val1=ID val4=ID?))
 	 *
 	 * Features:
-	 *    val1[3, 3]
-	 *    val2[1, 1]
+	 *    val1[0, 3]
+	 *    val2[0, 1]
 	 *         EXCLUDE_IF_UNSET val1
 	 *         MANDATORY_IF_SET val1
 	 *         EXCLUDE_IF_SET val1
 	 *         EXCLUDE_IF_SET val3
 	 *         EXCLUDE_IF_SET val1
 	 *         EXCLUDE_IF_SET val4
-	 *    val3[1, 1]
+	 *    val3[0, 1]
 	 *         EXCLUDE_IF_UNSET val1
 	 *         MANDATORY_IF_SET val1
 	 *         EXCLUDE_IF_SET val1
@@ -266,14 +266,14 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *     ((val1+=ID val2=ID) | (val1+=ID val1+=ID* val3=ID))
 	 *
 	 * Features:
-	 *    val1[2, *]
-	 *    val2[1, 1]
+	 *    val1[0, *]
+	 *    val2[0, 1]
 	 *         EXCLUDE_IF_UNSET val1
 	 *         MANDATORY_IF_SET val1
 	 *         EXCLUDE_IF_SET val1
 	 *         EXCLUDE_IF_SET val1
 	 *         EXCLUDE_IF_SET val3
-	 *    val3[1, 1]
+	 *    val3[0, 1]
 	 *         EXCLUDE_IF_UNSET val1
 	 *         MANDATORY_IF_SET val1
 	 *         MANDATORY_IF_SET val1
@@ -309,8 +309,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *     (val=ID | (val=ID flag?='kw1'))
 	 *
 	 * Features:
-	 *    val[1, 2]
-	 *    flag[1, 1]
+	 *    val[0, 2]
+	 *    flag[0, 1]
 	 *         EXCLUDE_IF_UNSET val
 	 *         MANDATORY_IF_SET val
 	 *         EXCLUDE_IF_SET val
@@ -325,8 +325,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *     ((val+=ID val+=ID+) | (val+=ID+ flag?='kw1'))
 	 *
 	 * Features:
-	 *    val[3, *]
-	 *    flag[1, 1]
+	 *    val[0, *]
+	 *    flag[0, 1]
 	 *         EXCLUDE_IF_UNSET val
 	 *         MANDATORY_IF_SET val
 	 *         EXCLUDE_IF_SET val

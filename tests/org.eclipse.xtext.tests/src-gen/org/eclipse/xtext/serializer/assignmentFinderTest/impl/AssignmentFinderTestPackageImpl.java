@@ -19,14 +19,15 @@ import org.eclipse.xtext.serializer.assignmentFinderTest.ContainmentRef;
 import org.eclipse.xtext.serializer.assignmentFinderTest.ContainmentRefN;
 import org.eclipse.xtext.serializer.assignmentFinderTest.CrossRef;
 import org.eclipse.xtext.serializer.assignmentFinderTest.EnumBool;
-import org.eclipse.xtext.serializer.assignmentFinderTest.EnumN;
 import org.eclipse.xtext.serializer.assignmentFinderTest.EnumVal;
 import org.eclipse.xtext.serializer.assignmentFinderTest.KeywordBool;
 import org.eclipse.xtext.serializer.assignmentFinderTest.KeywordVal;
 import org.eclipse.xtext.serializer.assignmentFinderTest.MixedBool;
+import org.eclipse.xtext.serializer.assignmentFinderTest.MixedValue;
 import org.eclipse.xtext.serializer.assignmentFinderTest.Model;
 import org.eclipse.xtext.serializer.assignmentFinderTest.TerminalBool;
 import org.eclipse.xtext.serializer.assignmentFinderTest.TerminalVal;
+import org.eclipse.xtext.serializer.assignmentFinderTest.TestEnum;
 
 /**
  * <!-- begin-user-doc -->
@@ -97,6 +98,13 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass mixedValueEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass containmentRefEClass = null;
 
   /**
@@ -118,7 +126,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
-  private EEnum enumNEEnum = null;
+  private EEnum testEnumEEnum = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -268,7 +276,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_ContainmentRef()
+  public EReference getModel_MixedValue()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(7);
   }
@@ -278,9 +286,19 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_CrossRef()
+  public EReference getModel_ContainmentRef()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(8);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_CrossRef()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(9);
   }
 
   /**
@@ -428,6 +446,26 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getMixedValue()
+  {
+    return mixedValueEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getMixedValue_Val()
+  {
+    return (EAttribute)mixedValueEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getContainmentRef()
   {
     return containmentRefEClass;
@@ -508,9 +546,9 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
-  public EEnum getEnumN()
+  public EEnum getTestEnum()
   {
-    return enumNEEnum;
+    return testEnumEEnum;
   }
 
   /**
@@ -551,6 +589,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
     createEReference(modelEClass, MODEL__TERMINAL_BOOL);
     createEReference(modelEClass, MODEL__ENUM_BOOL);
     createEReference(modelEClass, MODEL__MIXED_BOOL);
+    createEReference(modelEClass, MODEL__MIXED_VALUE);
     createEReference(modelEClass, MODEL__CONTAINMENT_REF);
     createEReference(modelEClass, MODEL__CROSS_REF);
 
@@ -575,6 +614,9 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
     mixedBoolEClass = createEClass(MIXED_BOOL);
     createEAttribute(mixedBoolEClass, MIXED_BOOL__VAL);
 
+    mixedValueEClass = createEClass(MIXED_VALUE);
+    createEAttribute(mixedValueEClass, MIXED_VALUE__VAL);
+
     containmentRefEClass = createEClass(CONTAINMENT_REF);
     createEReference(containmentRefEClass, CONTAINMENT_REF__CTX);
 
@@ -587,7 +629,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
     createEReference(crossRefEClass, CROSS_REF__CROSS_REF);
 
     // Create enums
-    enumNEEnum = createEEnum(ENUM_N);
+    testEnumEEnum = createEEnum(TEST_ENUM);
   }
 
   /**
@@ -629,6 +671,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
     initEReference(getModel_TerminalBool(), this.getTerminalBool(), null, "terminalBool", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_EnumBool(), this.getEnumBool(), null, "enumBool", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_MixedBool(), this.getMixedBool(), null, "mixedBool", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_MixedValue(), this.getMixedValue(), null, "mixedValue", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_ContainmentRef(), this.getContainmentRef(), null, "containmentRef", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_CrossRef(), this.getCrossRef(), null, "crossRef", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -639,7 +682,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
     initEAttribute(getTerminalVal_Term(), ecorePackage.getEString(), "term", null, 0, 1, TerminalVal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(enumValEClass, EnumVal.class, "EnumVal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEnumVal_En(), this.getEnumN(), "en", null, 0, 1, EnumVal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEnumVal_En(), this.getTestEnum(), "en", null, 0, 1, EnumVal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(keywordBoolEClass, KeywordBool.class, "KeywordBool", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getKeywordBool_Kw(), ecorePackage.getEBoolean(), "kw", null, 0, 1, KeywordBool.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -653,6 +696,9 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
     initEClass(mixedBoolEClass, MixedBool.class, "MixedBool", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getMixedBool_Val(), ecorePackage.getEBoolean(), "val", null, 0, 1, MixedBool.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(mixedValueEClass, MixedValue.class, "MixedValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getMixedValue_Val(), this.getTestEnum(), "val", null, 0, 1, MixedValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(containmentRefEClass, ContainmentRef.class, "ContainmentRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getContainmentRef_Ctx(), this.getContainmentRefN(), null, "ctx", null, 0, 1, ContainmentRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -665,9 +711,10 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
     initEReference(getCrossRef_CrossRef(), this.getCrossRef(), null, "crossRef", null, 0, 1, CrossRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
-    initEEnum(enumNEEnum, EnumN.class, "EnumN");
-    addEEnumLiteral(enumNEEnum, EnumN.LIT1);
-    addEEnumLiteral(enumNEEnum, EnumN.LIT2);
+    initEEnum(testEnumEEnum, TestEnum.class, "TestEnum");
+    addEEnumLiteral(testEnumEEnum, TestEnum.LIT1);
+    addEEnumLiteral(testEnumEEnum, TestEnum.LIT2);
+    addEEnumLiteral(testEnumEEnum, TestEnum.LIT3);
 
     // Create resource
     createResource(eNS_URI);

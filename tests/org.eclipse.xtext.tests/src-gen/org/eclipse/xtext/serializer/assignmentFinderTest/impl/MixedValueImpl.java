@@ -13,50 +13,50 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.serializer.assignmentFinderTest.AssignmentFinderTestPackage;
-import org.eclipse.xtext.serializer.assignmentFinderTest.EnumVal;
+import org.eclipse.xtext.serializer.assignmentFinderTest.MixedValue;
 import org.eclipse.xtext.serializer.assignmentFinderTest.TestEnum;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Enum Val</b></em>'.
+ * An implementation of the model object '<em><b>Mixed Value</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.serializer.assignmentFinderTest.impl.EnumValImpl#getEn <em>En</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.assignmentFinderTest.impl.MixedValueImpl#getVal <em>Val</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class EnumValImpl extends MinimalEObjectImpl.Container implements EnumVal
+public class MixedValueImpl extends MinimalEObjectImpl.Container implements MixedValue
 {
   /**
-   * The default value of the '{@link #getEn() <em>En</em>}' attribute.
+   * The default value of the '{@link #getVal() <em>Val</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getEn()
+   * @see #getVal()
    * @generated
    * @ordered
    */
-  protected static final TestEnum EN_EDEFAULT = TestEnum.LIT1;
+  protected static final TestEnum VAL_EDEFAULT = TestEnum.LIT1;
 
   /**
-   * The cached value of the '{@link #getEn() <em>En</em>}' attribute.
+   * The cached value of the '{@link #getVal() <em>Val</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getEn()
+   * @see #getVal()
    * @generated
    * @ordered
    */
-  protected TestEnum en = EN_EDEFAULT;
+  protected TestEnum val = VAL_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected EnumValImpl()
+  protected MixedValueImpl()
   {
     super();
   }
@@ -69,7 +69,7 @@ public class EnumValImpl extends MinimalEObjectImpl.Container implements EnumVal
   @Override
   protected EClass eStaticClass()
   {
-    return AssignmentFinderTestPackage.Literals.ENUM_VAL;
+    return AssignmentFinderTestPackage.Literals.MIXED_VALUE;
   }
 
   /**
@@ -77,9 +77,9 @@ public class EnumValImpl extends MinimalEObjectImpl.Container implements EnumVal
    * <!-- end-user-doc -->
    * @generated
    */
-  public TestEnum getEn()
+  public TestEnum getVal()
   {
-    return en;
+    return val;
   }
 
   /**
@@ -87,12 +87,12 @@ public class EnumValImpl extends MinimalEObjectImpl.Container implements EnumVal
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setEn(TestEnum newEn)
+  public void setVal(TestEnum newVal)
   {
-    TestEnum oldEn = en;
-    en = newEn == null ? EN_EDEFAULT : newEn;
+    TestEnum oldVal = val;
+    val = newVal == null ? VAL_EDEFAULT : newVal;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AssignmentFinderTestPackage.ENUM_VAL__EN, oldEn, en));
+      eNotify(new ENotificationImpl(this, Notification.SET, AssignmentFinderTestPackage.MIXED_VALUE__VAL, oldVal, val));
   }
 
   /**
@@ -105,8 +105,8 @@ public class EnumValImpl extends MinimalEObjectImpl.Container implements EnumVal
   {
     switch (featureID)
     {
-      case AssignmentFinderTestPackage.ENUM_VAL__EN:
-        return getEn();
+      case AssignmentFinderTestPackage.MIXED_VALUE__VAL:
+        return getVal();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -121,8 +121,8 @@ public class EnumValImpl extends MinimalEObjectImpl.Container implements EnumVal
   {
     switch (featureID)
     {
-      case AssignmentFinderTestPackage.ENUM_VAL__EN:
-        setEn((TestEnum)newValue);
+      case AssignmentFinderTestPackage.MIXED_VALUE__VAL:
+        setVal((TestEnum)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -138,8 +138,8 @@ public class EnumValImpl extends MinimalEObjectImpl.Container implements EnumVal
   {
     switch (featureID)
     {
-      case AssignmentFinderTestPackage.ENUM_VAL__EN:
-        setEn(EN_EDEFAULT);
+      case AssignmentFinderTestPackage.MIXED_VALUE__VAL:
+        setVal(VAL_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -155,8 +155,8 @@ public class EnumValImpl extends MinimalEObjectImpl.Container implements EnumVal
   {
     switch (featureID)
     {
-      case AssignmentFinderTestPackage.ENUM_VAL__EN:
-        return en != EN_EDEFAULT;
+      case AssignmentFinderTestPackage.MIXED_VALUE__VAL:
+        return val != VAL_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }
@@ -172,10 +172,10 @@ public class EnumValImpl extends MinimalEObjectImpl.Container implements EnumVal
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (en: ");
-    result.append(en);
+    result.append(" (val: ");
+    result.append(val);
     result.append(')');
     return result.toString();
   }
 
-} //EnumValImpl
+} //MixedValueImpl

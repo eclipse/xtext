@@ -134,13 +134,22 @@ public interface AssignmentFinderTestPackage extends EPackage
   int MODEL__MIXED_BOOL = 6;
 
   /**
+   * The feature id for the '<em><b>Mixed Value</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__MIXED_VALUE = 7;
+
+  /**
    * The feature id for the '<em><b>Containment Ref</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL__CONTAINMENT_REF = 7;
+  int MODEL__CONTAINMENT_REF = 8;
 
   /**
    * The feature id for the '<em><b>Cross Ref</b></em>' containment reference.
@@ -149,7 +158,7 @@ public interface AssignmentFinderTestPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MODEL__CROSS_REF = 8;
+  int MODEL__CROSS_REF = 9;
 
   /**
    * The number of structural features of the '<em>Model</em>' class.
@@ -158,7 +167,7 @@ public interface AssignmentFinderTestPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 9;
+  int MODEL_FEATURE_COUNT = 10;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.assignmentFinderTest.impl.KeywordValImpl <em>Keyword Val</em>}' class.
@@ -357,6 +366,34 @@ public interface AssignmentFinderTestPackage extends EPackage
   int MIXED_BOOL_FEATURE_COUNT = 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.assignmentFinderTest.impl.MixedValueImpl <em>Mixed Value</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.assignmentFinderTest.impl.MixedValueImpl
+   * @see org.eclipse.xtext.serializer.assignmentFinderTest.impl.AssignmentFinderTestPackageImpl#getMixedValue()
+   * @generated
+   */
+  int MIXED_VALUE = 8;
+
+  /**
+   * The feature id for the '<em><b>Val</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MIXED_VALUE__VAL = 0;
+
+  /**
+   * The number of structural features of the '<em>Mixed Value</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MIXED_VALUE_FEATURE_COUNT = 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.assignmentFinderTest.impl.ContainmentRefImpl <em>Containment Ref</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -364,7 +401,7 @@ public interface AssignmentFinderTestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.assignmentFinderTest.impl.AssignmentFinderTestPackageImpl#getContainmentRef()
    * @generated
    */
-  int CONTAINMENT_REF = 8;
+  int CONTAINMENT_REF = 9;
 
   /**
    * The feature id for the '<em><b>Ctx</b></em>' containment reference.
@@ -392,7 +429,7 @@ public interface AssignmentFinderTestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.assignmentFinderTest.impl.AssignmentFinderTestPackageImpl#getContainmentRefN()
    * @generated
    */
-  int CONTAINMENT_REF_N = 9;
+  int CONTAINMENT_REF_N = 10;
 
   /**
    * The feature id for the '<em><b>Val1</b></em>' attribute.
@@ -429,7 +466,7 @@ public interface AssignmentFinderTestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.assignmentFinderTest.impl.AssignmentFinderTestPackageImpl#getCrossRef()
    * @generated
    */
-  int CROSS_REF = 10;
+  int CROSS_REF = 11;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -459,14 +496,14 @@ public interface AssignmentFinderTestPackage extends EPackage
   int CROSS_REF_FEATURE_COUNT = 2;
 
   /**
-   * The meta object id for the '{@link org.eclipse.xtext.serializer.assignmentFinderTest.EnumN <em>Enum N</em>}' enum.
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.assignmentFinderTest.TestEnum <em>Test Enum</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.serializer.assignmentFinderTest.EnumN
-   * @see org.eclipse.xtext.serializer.assignmentFinderTest.impl.AssignmentFinderTestPackageImpl#getEnumN()
+   * @see org.eclipse.xtext.serializer.assignmentFinderTest.TestEnum
+   * @see org.eclipse.xtext.serializer.assignmentFinderTest.impl.AssignmentFinderTestPackageImpl#getTestEnum()
    * @generated
    */
-  int ENUM_N = 11;
+  int TEST_ENUM = 12;
 
 
   /**
@@ -555,6 +592,17 @@ public interface AssignmentFinderTestPackage extends EPackage
    * @generated
    */
   EReference getModel_MixedBool();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.assignmentFinderTest.Model#getMixedValue <em>Mixed Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Mixed Value</em>'.
+   * @see org.eclipse.xtext.serializer.assignmentFinderTest.Model#getMixedValue()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_MixedValue();
 
   /**
    * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.assignmentFinderTest.Model#getContainmentRef <em>Containment Ref</em>}'.
@@ -726,6 +774,27 @@ public interface AssignmentFinderTestPackage extends EPackage
   EAttribute getMixedBool_Val();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.assignmentFinderTest.MixedValue <em>Mixed Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Mixed Value</em>'.
+   * @see org.eclipse.xtext.serializer.assignmentFinderTest.MixedValue
+   * @generated
+   */
+  EClass getMixedValue();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.assignmentFinderTest.MixedValue#getVal <em>Val</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val</em>'.
+   * @see org.eclipse.xtext.serializer.assignmentFinderTest.MixedValue#getVal()
+   * @see #getMixedValue()
+   * @generated
+   */
+  EAttribute getMixedValue_Val();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.assignmentFinderTest.ContainmentRef <em>Containment Ref</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -811,14 +880,14 @@ public interface AssignmentFinderTestPackage extends EPackage
   EReference getCrossRef_CrossRef();
 
   /**
-   * Returns the meta object for enum '{@link org.eclipse.xtext.serializer.assignmentFinderTest.EnumN <em>Enum N</em>}'.
+   * Returns the meta object for enum '{@link org.eclipse.xtext.serializer.assignmentFinderTest.TestEnum <em>Test Enum</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for enum '<em>Enum N</em>'.
-   * @see org.eclipse.xtext.serializer.assignmentFinderTest.EnumN
+   * @return the meta object for enum '<em>Test Enum</em>'.
+   * @see org.eclipse.xtext.serializer.assignmentFinderTest.TestEnum
    * @generated
    */
-  EEnum getEnumN();
+  EEnum getTestEnum();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -908,6 +977,14 @@ public interface AssignmentFinderTestPackage extends EPackage
      * @generated
      */
     EReference MODEL__MIXED_BOOL = eINSTANCE.getModel_MixedBool();
+
+    /**
+     * The meta object literal for the '<em><b>Mixed Value</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__MIXED_VALUE = eINSTANCE.getModel_MixedValue();
 
     /**
      * The meta object literal for the '<em><b>Containment Ref</b></em>' containment reference feature.
@@ -1052,6 +1129,24 @@ public interface AssignmentFinderTestPackage extends EPackage
     EAttribute MIXED_BOOL__VAL = eINSTANCE.getMixedBool_Val();
 
     /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.assignmentFinderTest.impl.MixedValueImpl <em>Mixed Value</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.assignmentFinderTest.impl.MixedValueImpl
+     * @see org.eclipse.xtext.serializer.assignmentFinderTest.impl.AssignmentFinderTestPackageImpl#getMixedValue()
+     * @generated
+     */
+    EClass MIXED_VALUE = eINSTANCE.getMixedValue();
+
+    /**
+     * The meta object literal for the '<em><b>Val</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute MIXED_VALUE__VAL = eINSTANCE.getMixedValue_Val();
+
+    /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.assignmentFinderTest.impl.ContainmentRefImpl <em>Containment Ref</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1122,14 +1217,14 @@ public interface AssignmentFinderTestPackage extends EPackage
     EReference CROSS_REF__CROSS_REF = eINSTANCE.getCrossRef_CrossRef();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.xtext.serializer.assignmentFinderTest.EnumN <em>Enum N</em>}' enum.
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.assignmentFinderTest.TestEnum <em>Test Enum</em>}' enum.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.serializer.assignmentFinderTest.EnumN
-     * @see org.eclipse.xtext.serializer.assignmentFinderTest.impl.AssignmentFinderTestPackageImpl#getEnumN()
+     * @see org.eclipse.xtext.serializer.assignmentFinderTest.TestEnum
+     * @see org.eclipse.xtext.serializer.assignmentFinderTest.impl.AssignmentFinderTestPackageImpl#getTestEnum()
      * @generated
      */
-    EEnum ENUM_N = eINSTANCE.getEnumN();
+    EEnum TEST_ENUM = eINSTANCE.getTestEnum();
 
   }
 

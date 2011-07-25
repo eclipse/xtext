@@ -57,22 +57,22 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == ContextFinderTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case ContextFinderTestPackage.ATTRIBUTE_EXCLUSION_TEST:
-				if(context == grammarAccess.getAttributeExclusionTest1Rule()) {
-					sequence_AttributeExclusionTest1_AttributeExclusionTest(context, (AttributeExclusionTest) semanticObject); 
+				if(context == grammarAccess.getAttributeExclusionTest2Rule()) {
+					sequence_AttributeExclusionTest2_AttributeExclusionTest(context, (AttributeExclusionTest) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getAttributeExclusionTest2Rule()) {
-					sequence_AttributeExclusionTest2_AttributeExclusionTest(context, (AttributeExclusionTest) semanticObject); 
+				else if(context == grammarAccess.getAttributeExclusionTest1Rule()) {
+					sequence_AttributeExclusionTest1_AttributeExclusionTest(context, (AttributeExclusionTest) semanticObject); 
 					return; 
 				}
 				else break;
 			case ContextFinderTestPackage.MODEL:
-				if(context == grammarAccess.getModel2Rule()) {
-					sequence_Model2_Model(context, (Model) semanticObject); 
+				if(context == grammarAccess.getModelRule()) {
+					sequence_Model_Model(context, (Model) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getModelRule()) {
-					sequence_Model_Model(context, (Model) semanticObject); 
+				else if(context == grammarAccess.getModel2Rule()) {
+					sequence_Model2_Model(context, (Model) semanticObject); 
 					return; 
 				}
 				else break;
@@ -115,12 +115,12 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 				}
 				else break;
 			case ContextFinderTestPackage.NESTED_TYPE_TEST:
-				if(context == grammarAccess.getNestedTypeTest1Rule()) {
-					sequence_NestedTypeTest1_NestedTypeTest(context, (NestedTypeTest) semanticObject); 
+				if(context == grammarAccess.getNestedTypeTest2Rule()) {
+					sequence_NestedTypeTest2_NestedTypeTest(context, (NestedTypeTest) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getNestedTypeTest2Rule()) {
-					sequence_NestedTypeTest2_NestedTypeTest(context, (NestedTypeTest) semanticObject); 
+				else if(context == grammarAccess.getNestedTypeTest1Rule()) {
+					sequence_NestedTypeTest1_NestedTypeTest(context, (NestedTypeTest) semanticObject); 
 					return; 
 				}
 				else break;
@@ -147,12 +147,12 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 				}
 				else break;
 			case ContextFinderTestPackage.QUANTITY_EXCLUSION_TEST:
-				if(context == grammarAccess.getQuantityExclusionTest2Rule()) {
-					sequence_QuantityExclusionTest2_QuantityExclusionTest(context, (QuantityExclusionTest) semanticObject); 
+				if(context == grammarAccess.getQuantityExclusionTest1Rule()) {
+					sequence_QuantityExclusionTest1_QuantityExclusionTest(context, (QuantityExclusionTest) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getQuantityExclusionTest1Rule()) {
-					sequence_QuantityExclusionTest1_QuantityExclusionTest(context, (QuantityExclusionTest) semanticObject); 
+				else if(context == grammarAccess.getQuantityExclusionTest2Rule()) {
+					sequence_QuantityExclusionTest2_QuantityExclusionTest(context, (QuantityExclusionTest) semanticObject); 
 					return; 
 				}
 				else break;

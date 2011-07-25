@@ -78,9 +78,9 @@ ruleModel returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-((	otherlv_0='#0' 
+((	otherlv_0='#00' 
     {
-    	newLeafNode(otherlv_0, grammarAccess.getModelAccess().getNumberSignDigitZeroKeyword_0_0());
+    	newLeafNode(otherlv_0, grammarAccess.getModelAccess().getNumberSignDigitZeroDigitZeroKeyword_0_0());
     }
 (
 (
@@ -101,9 +101,9 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |(	otherlv_2='#1' 
+    |(	otherlv_2='#01' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getModelAccess().getNumberSignDigitOneKeyword_1_0());
+    	newLeafNode(otherlv_2, grammarAccess.getModelAccess().getNumberSignDigitZeroDigitOneKeyword_1_0());
     }
 (
 (
@@ -124,9 +124,9 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |(	otherlv_4='#2' 
+    |(	otherlv_4='#02' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getModelAccess().getNumberSignDigitTwoKeyword_2_0());
+    	newLeafNode(otherlv_4, grammarAccess.getModelAccess().getNumberSignDigitZeroDigitTwoKeyword_2_0());
     }
 (
 (
@@ -147,9 +147,9 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |(	otherlv_6='#3' 
+    |(	otherlv_6='#03' 
     {
-    	newLeafNode(otherlv_6, grammarAccess.getModelAccess().getNumberSignDigitThreeKeyword_3_0());
+    	newLeafNode(otherlv_6, grammarAccess.getModelAccess().getNumberSignDigitZeroDigitThreeKeyword_3_0());
     }
 (
 (
@@ -170,9 +170,9 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |(	otherlv_8='#4' 
+    |(	otherlv_8='#04' 
     {
-    	newLeafNode(otherlv_8, grammarAccess.getModelAccess().getNumberSignDigitFourKeyword_4_0());
+    	newLeafNode(otherlv_8, grammarAccess.getModelAccess().getNumberSignDigitZeroDigitFourKeyword_4_0());
     }
 (
 (
@@ -193,9 +193,9 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |(	otherlv_10='#5' 
+    |(	otherlv_10='#05' 
     {
-    	newLeafNode(otherlv_10, grammarAccess.getModelAccess().getNumberSignDigitFiveKeyword_5_0());
+    	newLeafNode(otherlv_10, grammarAccess.getModelAccess().getNumberSignDigitZeroDigitFiveKeyword_5_0());
     }
 (
 (
@@ -216,9 +216,9 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |(	otherlv_12='#6' 
+    |(	otherlv_12='#06' 
     {
-    	newLeafNode(otherlv_12, grammarAccess.getModelAccess().getNumberSignDigitSixKeyword_6_0());
+    	newLeafNode(otherlv_12, grammarAccess.getModelAccess().getNumberSignDigitZeroDigitSixKeyword_6_0());
     }
 (
 (
@@ -239,46 +239,69 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |(	otherlv_14='#7' 
+    |(	otherlv_14='#07' 
     {
-    	newLeafNode(otherlv_14, grammarAccess.getModelAccess().getNumberSignDigitSevenKeyword_7_0());
+    	newLeafNode(otherlv_14, grammarAccess.getModelAccess().getNumberSignDigitZeroDigitSevenKeyword_7_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getModelAccess().getContainmentRefContainmentRefParserRuleCall_7_1_0()); 
+	        newCompositeNode(grammarAccess.getModelAccess().getMixedValueMixedValueParserRuleCall_7_1_0()); 
 	    }
-		lv_containmentRef_15_0=ruleContainmentRef		{
+		lv_mixedValue_15_0=ruleMixedValue		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"mixedValue",
+        		lv_mixedValue_15_0, 
+        		"MixedValue");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))
+    |(	otherlv_16='#08' 
+    {
+    	newLeafNode(otherlv_16, grammarAccess.getModelAccess().getNumberSignDigitZeroDigitEightKeyword_8_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getContainmentRefContainmentRefParserRuleCall_8_1_0()); 
+	    }
+		lv_containmentRef_17_0=ruleContainmentRef		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getModelRule());
 	        }
        		set(
        			$current, 
        			"containmentRef",
-        		lv_containmentRef_15_0, 
+        		lv_containmentRef_17_0, 
         		"ContainmentRef");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
 ))
-    |(	otherlv_16='#8' 
+    |(	otherlv_18='#09' 
     {
-    	newLeafNode(otherlv_16, grammarAccess.getModelAccess().getNumberSignDigitEightKeyword_8_0());
+    	newLeafNode(otherlv_18, grammarAccess.getModelAccess().getNumberSignDigitZeroDigitNineKeyword_9_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getModelAccess().getCrossRefCrossRefParserRuleCall_8_1_0()); 
+	        newCompositeNode(grammarAccess.getModelAccess().getCrossRefCrossRefParserRuleCall_9_1_0()); 
 	    }
-		lv_crossRef_17_0=ruleCrossRef		{
+		lv_crossRef_19_0=ruleCrossRef		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getModelRule());
 	        }
        		set(
        			$current, 
        			"crossRef",
-        		lv_crossRef_17_0, 
+        		lv_crossRef_19_0, 
         		"CrossRef");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -748,6 +771,91 @@ ruleBoolean returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()
 
 
 
+// Entry rule entryRuleMixedValue
+entryRuleMixedValue returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getMixedValueRule()); }
+	 iv_ruleMixedValue=ruleMixedValue 
+	 { $current=$iv_ruleMixedValue.current; } 
+	 EOF 
+;
+
+// Rule MixedValue
+ruleMixedValue returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getMixedValueAccess().getValEnum1EnumRuleCall_0_0()); 
+	    }
+		lv_val_0_0=ruleEnum1		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getMixedValueRule());
+	        }
+       		set(
+       			$current, 
+       			"val",
+        		lv_val_0_0, 
+        		"Enum1");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getMixedValueAccess().getValDatEnumParserRuleCall_1_0()); 
+	    }
+		lv_val_1_0=ruleDatEnum		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getMixedValueRule());
+	        }
+       		set(
+       			$current, 
+       			"val",
+        		lv_val_1_0, 
+        		"DatEnum");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))
+;
+
+
+
+
+
+// Entry rule entryRuleDatEnum
+entryRuleDatEnum returns [String current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getDatEnumRule()); } 
+	 iv_ruleDatEnum=ruleDatEnum 
+	 { $current=$iv_ruleDatEnum.current.getText(); }  
+	 EOF 
+;
+
+// Rule DatEnum
+ruleDatEnum returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+
+	kw='lit3' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getDatEnumAccess().getLit3Keyword()); 
+    }
+
+    ;
+
+
+
+
+
 // Entry rule entryRuleContainmentRef
 entryRuleContainmentRef returns [EObject current=null] 
 	:
@@ -999,6 +1107,8 @@ ruleEnum2 returns [Enumerator current=null]
         newLeafNode(enumLiteral_0, grammarAccess.getEnum2Access().getLit2EnumLiteralDeclaration()); 
     }
 );
+
+
 
 
 

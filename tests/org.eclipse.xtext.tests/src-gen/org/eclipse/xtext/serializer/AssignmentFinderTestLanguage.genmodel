@@ -9,9 +9,10 @@
     editorPluginID="org.eclipse.xtext.tests.editor">
   <genPackages prefix="AssignmentFinderTest" basePackage="org.eclipse.xtext.serializer"
       disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/AssignmentFinderTestLanguage.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/AssignmentFinderTestLanguage.ecore#//EnumN">
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/AssignmentFinderTestLanguage.ecore#//EnumN/lit1"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/AssignmentFinderTestLanguage.ecore#//EnumN/lit2"/>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/AssignmentFinderTestLanguage.ecore#//TestEnum">
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/AssignmentFinderTestLanguage.ecore#//TestEnum/lit1"/>
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/AssignmentFinderTestLanguage.ecore#//TestEnum/lit2"/>
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/AssignmentFinderTestLanguage.ecore#//TestEnum/lit3"/>
     </genEnums>
     <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/AssignmentFinderTestLanguage.ecore#//Model">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/AssignmentFinderTestLanguage.ecore#//Model/keywordVal"/>
@@ -21,6 +22,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/AssignmentFinderTestLanguage.ecore#//Model/terminalBool"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/AssignmentFinderTestLanguage.ecore#//Model/enumBool"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/AssignmentFinderTestLanguage.ecore#//Model/mixedBool"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/AssignmentFinderTestLanguage.ecore#//Model/mixedValue"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/AssignmentFinderTestLanguage.ecore#//Model/containmentRef"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/AssignmentFinderTestLanguage.ecore#//Model/crossRef"/>
     </genClasses>
@@ -44,6 +46,9 @@
     </genClasses>
     <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/AssignmentFinderTestLanguage.ecore#//MixedBool">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/AssignmentFinderTestLanguage.ecore#//MixedBool/val"/>
+    </genClasses>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/AssignmentFinderTestLanguage.ecore#//MixedValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/AssignmentFinderTestLanguage.ecore#//MixedValue/val"/>
     </genClasses>
     <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/AssignmentFinderTestLanguage.ecore#//ContainmentRef">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/AssignmentFinderTestLanguage.ecore#//ContainmentRef/ctx"/>

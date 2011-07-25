@@ -39,10 +39,11 @@ protected class ThisRootNode extends RootToken {
 			case 5: return new TerminalBool_Alternatives(this, this, 5, inst);
 			case 6: return new EnumBool_Alternatives(this, this, 6, inst);
 			case 7: return new MixedBool_Alternatives(this, this, 7, inst);
-			case 8: return new ContainmentRef_Alternatives(this, this, 8, inst);
-			case 9: return new ContainmentRef1_Group(this, this, 9, inst);
-			case 10: return new ContainmentRef2_Group(this, this, 10, inst);
-			case 11: return new CrossRef_Group(this, this, 11, inst);
+			case 8: return new MixedValue_Alternatives(this, this, 8, inst);
+			case 9: return new ContainmentRef_Alternatives(this, this, 9, inst);
+			case 10: return new ContainmentRef1_Group(this, this, 10, inst);
+			case 11: return new ContainmentRef2_Group(this, this, 11, inst);
+			case 12: return new CrossRef_Group(this, this, 12, inst);
 			default: return null;
 		}	
 	}	
@@ -52,15 +53,15 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	"#0" keywordVal=KeywordVal | "#1" terminalVal=TerminalVal | "#2" enumVal=EnumVal | "#3" keywordBool=KeywordBool | "#4"
- * 	terminalBool=TerminalBool | "#5" enumBool=EnumBool | "#6" mixedBool=MixedBool | "#7" containmentRef=ContainmentRef |
- * 	"#8" crossRef=CrossRef;
+ * 	"#00" keywordVal=KeywordVal | "#01" terminalVal=TerminalVal | "#02" enumVal=EnumVal | "#03" keywordBool=KeywordBool |
+ * 	"#04" terminalBool=TerminalBool | "#05" enumBool=EnumBool | "#06" mixedBool=MixedBool | "#07" mixedValue=MixedValue |
+ * 	"#08" containmentRef=ContainmentRef | "#09" crossRef=CrossRef;
  *
  **/
 
-// "#0" keywordVal=KeywordVal | "#1" terminalVal=TerminalVal | "#2" enumVal=EnumVal | "#3" keywordBool=KeywordBool | "#4"
-// terminalBool=TerminalBool | "#5" enumBool=EnumBool | "#6" mixedBool=MixedBool | "#7" containmentRef=ContainmentRef |
-// "#8" crossRef=CrossRef
+// "#00" keywordVal=KeywordVal | "#01" terminalVal=TerminalVal | "#02" enumVal=EnumVal | "#03" keywordBool=KeywordBool |
+// "#04" terminalBool=TerminalBool | "#05" enumBool=EnumBool | "#06" mixedBool=MixedBool | "#07" mixedValue=MixedValue |
+// "#08" containmentRef=ContainmentRef | "#09" crossRef=CrossRef
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -84,6 +85,7 @@ protected class Model_Alternatives extends AlternativesToken {
 			case 6: return new Model_Group_6(lastRuleCallOrigin, this, 6, inst);
 			case 7: return new Model_Group_7(lastRuleCallOrigin, this, 7, inst);
 			case 8: return new Model_Group_8(lastRuleCallOrigin, this, 8, inst);
+			case 9: return new Model_Group_9(lastRuleCallOrigin, this, 9, inst);
 			default: return null;
 		}	
 	}
@@ -97,7 +99,7 @@ protected class Model_Alternatives extends AlternativesToken {
 
 }
 
-// "#0" keywordVal=KeywordVal
+// "#00" keywordVal=KeywordVal
 protected class Model_Group_0 extends GroupToken {
 	
 	public Model_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -119,16 +121,16 @@ protected class Model_Group_0 extends GroupToken {
 
 }
 
-// "#0"
-protected class Model_NumberSignDigitZeroKeyword_0_0 extends KeywordToken  {
+// "#00"
+protected class Model_NumberSignDigitZeroDigitZeroKeyword_0_0 extends KeywordToken  {
 	
-	public Model_NumberSignDigitZeroKeyword_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Model_NumberSignDigitZeroDigitZeroKeyword_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getModelAccess().getNumberSignDigitZeroKeyword_0_0();
+		return grammarAccess.getModelAccess().getNumberSignDigitZeroDigitZeroKeyword_0_0();
 	}
 
     @Override
@@ -180,14 +182,14 @@ protected class Model_KeywordValAssignment_0_1 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Model_NumberSignDigitZeroKeyword_0_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new Model_NumberSignDigitZeroDigitZeroKeyword_0_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 
-// "#1" terminalVal=TerminalVal
+// "#01" terminalVal=TerminalVal
 protected class Model_Group_1 extends GroupToken {
 	
 	public Model_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -209,16 +211,16 @@ protected class Model_Group_1 extends GroupToken {
 
 }
 
-// "#1"
-protected class Model_NumberSignDigitOneKeyword_1_0 extends KeywordToken  {
+// "#01"
+protected class Model_NumberSignDigitZeroDigitOneKeyword_1_0 extends KeywordToken  {
 	
-	public Model_NumberSignDigitOneKeyword_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Model_NumberSignDigitZeroDigitOneKeyword_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getModelAccess().getNumberSignDigitOneKeyword_1_0();
+		return grammarAccess.getModelAccess().getNumberSignDigitZeroDigitOneKeyword_1_0();
 	}
 
     @Override
@@ -270,14 +272,14 @@ protected class Model_TerminalValAssignment_1_1 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Model_NumberSignDigitOneKeyword_1_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new Model_NumberSignDigitZeroDigitOneKeyword_1_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 
-// "#2" enumVal=EnumVal
+// "#02" enumVal=EnumVal
 protected class Model_Group_2 extends GroupToken {
 	
 	public Model_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -299,16 +301,16 @@ protected class Model_Group_2 extends GroupToken {
 
 }
 
-// "#2"
-protected class Model_NumberSignDigitTwoKeyword_2_0 extends KeywordToken  {
+// "#02"
+protected class Model_NumberSignDigitZeroDigitTwoKeyword_2_0 extends KeywordToken  {
 	
-	public Model_NumberSignDigitTwoKeyword_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Model_NumberSignDigitZeroDigitTwoKeyword_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getModelAccess().getNumberSignDigitTwoKeyword_2_0();
+		return grammarAccess.getModelAccess().getNumberSignDigitZeroDigitTwoKeyword_2_0();
 	}
 
     @Override
@@ -360,14 +362,14 @@ protected class Model_EnumValAssignment_2_1 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Model_NumberSignDigitTwoKeyword_2_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new Model_NumberSignDigitZeroDigitTwoKeyword_2_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 
-// "#3" keywordBool=KeywordBool
+// "#03" keywordBool=KeywordBool
 protected class Model_Group_3 extends GroupToken {
 	
 	public Model_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -389,16 +391,16 @@ protected class Model_Group_3 extends GroupToken {
 
 }
 
-// "#3"
-protected class Model_NumberSignDigitThreeKeyword_3_0 extends KeywordToken  {
+// "#03"
+protected class Model_NumberSignDigitZeroDigitThreeKeyword_3_0 extends KeywordToken  {
 	
-	public Model_NumberSignDigitThreeKeyword_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Model_NumberSignDigitZeroDigitThreeKeyword_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getModelAccess().getNumberSignDigitThreeKeyword_3_0();
+		return grammarAccess.getModelAccess().getNumberSignDigitZeroDigitThreeKeyword_3_0();
 	}
 
     @Override
@@ -450,14 +452,14 @@ protected class Model_KeywordBoolAssignment_3_1 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Model_NumberSignDigitThreeKeyword_3_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new Model_NumberSignDigitZeroDigitThreeKeyword_3_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 
-// "#4" terminalBool=TerminalBool
+// "#04" terminalBool=TerminalBool
 protected class Model_Group_4 extends GroupToken {
 	
 	public Model_Group_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -479,16 +481,16 @@ protected class Model_Group_4 extends GroupToken {
 
 }
 
-// "#4"
-protected class Model_NumberSignDigitFourKeyword_4_0 extends KeywordToken  {
+// "#04"
+protected class Model_NumberSignDigitZeroDigitFourKeyword_4_0 extends KeywordToken  {
 	
-	public Model_NumberSignDigitFourKeyword_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Model_NumberSignDigitZeroDigitFourKeyword_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getModelAccess().getNumberSignDigitFourKeyword_4_0();
+		return grammarAccess.getModelAccess().getNumberSignDigitZeroDigitFourKeyword_4_0();
 	}
 
     @Override
@@ -540,14 +542,14 @@ protected class Model_TerminalBoolAssignment_4_1 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Model_NumberSignDigitFourKeyword_4_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new Model_NumberSignDigitZeroDigitFourKeyword_4_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 
-// "#5" enumBool=EnumBool
+// "#05" enumBool=EnumBool
 protected class Model_Group_5 extends GroupToken {
 	
 	public Model_Group_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -569,16 +571,16 @@ protected class Model_Group_5 extends GroupToken {
 
 }
 
-// "#5"
-protected class Model_NumberSignDigitFiveKeyword_5_0 extends KeywordToken  {
+// "#05"
+protected class Model_NumberSignDigitZeroDigitFiveKeyword_5_0 extends KeywordToken  {
 	
-	public Model_NumberSignDigitFiveKeyword_5_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Model_NumberSignDigitZeroDigitFiveKeyword_5_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getModelAccess().getNumberSignDigitFiveKeyword_5_0();
+		return grammarAccess.getModelAccess().getNumberSignDigitZeroDigitFiveKeyword_5_0();
 	}
 
     @Override
@@ -630,14 +632,14 @@ protected class Model_EnumBoolAssignment_5_1 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Model_NumberSignDigitFiveKeyword_5_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new Model_NumberSignDigitZeroDigitFiveKeyword_5_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 
-// "#6" mixedBool=MixedBool
+// "#06" mixedBool=MixedBool
 protected class Model_Group_6 extends GroupToken {
 	
 	public Model_Group_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -659,16 +661,16 @@ protected class Model_Group_6 extends GroupToken {
 
 }
 
-// "#6"
-protected class Model_NumberSignDigitSixKeyword_6_0 extends KeywordToken  {
+// "#06"
+protected class Model_NumberSignDigitZeroDigitSixKeyword_6_0 extends KeywordToken  {
 	
-	public Model_NumberSignDigitSixKeyword_6_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Model_NumberSignDigitZeroDigitSixKeyword_6_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getModelAccess().getNumberSignDigitSixKeyword_6_0();
+		return grammarAccess.getModelAccess().getNumberSignDigitZeroDigitSixKeyword_6_0();
 	}
 
     @Override
@@ -720,14 +722,14 @@ protected class Model_MixedBoolAssignment_6_1 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Model_NumberSignDigitSixKeyword_6_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new Model_NumberSignDigitZeroDigitSixKeyword_6_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 
-// "#7" containmentRef=ContainmentRef
+// "#07" mixedValue=MixedValue
 protected class Model_Group_7 extends GroupToken {
 	
 	public Model_Group_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -742,23 +744,113 @@ protected class Model_Group_7 extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_ContainmentRefAssignment_7_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Model_MixedValueAssignment_7_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
 }
 
-// "#7"
-protected class Model_NumberSignDigitSevenKeyword_7_0 extends KeywordToken  {
+// "#07"
+protected class Model_NumberSignDigitZeroDigitSevenKeyword_7_0 extends KeywordToken  {
 	
-	public Model_NumberSignDigitSevenKeyword_7_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Model_NumberSignDigitZeroDigitSevenKeyword_7_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getModelAccess().getNumberSignDigitSevenKeyword_7_0();
+		return grammarAccess.getModelAccess().getNumberSignDigitZeroDigitSevenKeyword_7_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+}
+
+// mixedValue=MixedValue
+protected class Model_MixedValueAssignment_7_1 extends AssignmentToken  {
+	
+	public Model_MixedValueAssignment_7_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getMixedValueAssignment_7_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new MixedValue_Alternatives(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("mixedValue",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("mixedValue");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getMixedValueRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getModelAccess().getMixedValueMixedValueParserRuleCall_7_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new Model_NumberSignDigitZeroDigitSevenKeyword_7_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+
+// "#08" containmentRef=ContainmentRef
+protected class Model_Group_8 extends GroupToken {
+	
+	public Model_Group_8(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getModelAccess().getGroup_8();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Model_ContainmentRefAssignment_8_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "#08"
+protected class Model_NumberSignDigitZeroDigitEightKeyword_8_0 extends KeywordToken  {
+	
+	public Model_NumberSignDigitZeroDigitEightKeyword_8_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getModelAccess().getNumberSignDigitZeroDigitEightKeyword_8_0();
 	}
 
     @Override
@@ -771,15 +863,15 @@ protected class Model_NumberSignDigitSevenKeyword_7_0 extends KeywordToken  {
 }
 
 // containmentRef=ContainmentRef
-protected class Model_ContainmentRefAssignment_7_1 extends AssignmentToken  {
+protected class Model_ContainmentRefAssignment_8_1 extends AssignmentToken  {
 	
-	public Model_ContainmentRefAssignment_7_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Model_ContainmentRefAssignment_8_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getModelAccess().getContainmentRefAssignment_7_1();
+		return grammarAccess.getModelAccess().getContainmentRefAssignment_8_1();
 	}
 
     @Override
@@ -798,7 +890,7 @@ protected class Model_ContainmentRefAssignment_7_1 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getContainmentRefRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getModelAccess().getContainmentRefContainmentRefParserRuleCall_7_1_0(); 
+				element = grammarAccess.getModelAccess().getContainmentRefContainmentRefParserRuleCall_8_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -810,45 +902,45 @@ protected class Model_ContainmentRefAssignment_7_1 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Model_NumberSignDigitSevenKeyword_7_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new Model_NumberSignDigitZeroDigitEightKeyword_8_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 
-// "#8" crossRef=CrossRef
-protected class Model_Group_8 extends GroupToken {
+// "#09" crossRef=CrossRef
+protected class Model_Group_9 extends GroupToken {
 	
-	public Model_Group_8(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Model_Group_9(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.getModelAccess().getGroup_8();
+		return grammarAccess.getModelAccess().getGroup_9();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_CrossRefAssignment_8_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Model_CrossRefAssignment_9_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
 }
 
-// "#8"
-protected class Model_NumberSignDigitEightKeyword_8_0 extends KeywordToken  {
+// "#09"
+protected class Model_NumberSignDigitZeroDigitNineKeyword_9_0 extends KeywordToken  {
 	
-	public Model_NumberSignDigitEightKeyword_8_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Model_NumberSignDigitZeroDigitNineKeyword_9_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getModelAccess().getNumberSignDigitEightKeyword_8_0();
+		return grammarAccess.getModelAccess().getNumberSignDigitZeroDigitNineKeyword_9_0();
 	}
 
     @Override
@@ -861,15 +953,15 @@ protected class Model_NumberSignDigitEightKeyword_8_0 extends KeywordToken  {
 }
 
 // crossRef=CrossRef
-protected class Model_CrossRefAssignment_8_1 extends AssignmentToken  {
+protected class Model_CrossRefAssignment_9_1 extends AssignmentToken  {
 	
-	public Model_CrossRefAssignment_8_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Model_CrossRefAssignment_9_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getModelAccess().getCrossRefAssignment_8_1();
+		return grammarAccess.getModelAccess().getCrossRefAssignment_9_1();
 	}
 
     @Override
@@ -888,7 +980,7 @@ protected class Model_CrossRefAssignment_8_1 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getCrossRefRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getModelAccess().getCrossRefCrossRefParserRuleCall_8_1_0(); 
+				element = grammarAccess.getModelAccess().getCrossRefCrossRefParserRuleCall_9_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -900,7 +992,7 @@ protected class Model_CrossRefAssignment_8_1 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Model_NumberSignDigitEightKeyword_8_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new Model_NumberSignDigitZeroDigitNineKeyword_9_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -1726,6 +1818,114 @@ protected class MixedBool_ValAssignment_1 extends AssignmentToken  {
 
 
 /************ end Rule MixedBool ****************/
+
+
+
+/************ begin Rule MixedValue ****************
+ *
+ * MixedValue:
+ * 	val=Enum1 | val=DatEnum;
+ *
+ **/
+
+// val=Enum1 | val=DatEnum
+protected class MixedValue_Alternatives extends AlternativesToken {
+
+	public MixedValue_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getMixedValueAccess().getAlternatives();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new MixedValue_ValAssignment_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new MixedValue_ValAssignment_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getMixedValueRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// val=Enum1
+protected class MixedValue_ValAssignment_0 extends AssignmentToken  {
+	
+	public MixedValue_ValAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getMixedValueAccess().getValAssignment_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("val",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("val");
+		if(enumLitSerializer.isValid(obj.getEObject(), grammarAccess.getMixedValueAccess().getValEnum1EnumRuleCall_0_0(), value, null)) { 
+			type = AssignmentType.ENUM_RULE_CALL;
+			element = grammarAccess.getMixedValueAccess().getValEnum1EnumRuleCall_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// val=DatEnum
+protected class MixedValue_ValAssignment_1 extends AssignmentToken  {
+	
+	public MixedValue_ValAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getMixedValueAccess().getValAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("val",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("val");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getMixedValueAccess().getValDatEnumParserRuleCall_1_0(), value, null)) {
+			type = AssignmentType.DATATYPE_RULE_CALL;
+			element = grammarAccess.getMixedValueAccess().getValDatEnumParserRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule MixedValue ****************/
 
 
 

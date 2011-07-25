@@ -13,57 +13,63 @@
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <elements xsi:type="xtext:Group">
-          <elements xsi:type="xtext:Keyword" value="#0"/>
+          <elements xsi:type="xtext:Keyword" value="#00"/>
           <elements xsi:type="xtext:Assignment" feature="keywordVal" operator="=">
             <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
           </elements>
         </elements>
         <elements xsi:type="xtext:Group">
-          <elements xsi:type="xtext:Keyword" value="#1"/>
+          <elements xsi:type="xtext:Keyword" value="#01"/>
           <elements xsi:type="xtext:Assignment" feature="terminalVal" operator="=">
             <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
           </elements>
         </elements>
         <elements xsi:type="xtext:Group">
-          <elements xsi:type="xtext:Keyword" value="#2"/>
+          <elements xsi:type="xtext:Keyword" value="#02"/>
           <elements xsi:type="xtext:Assignment" feature="enumVal" operator="=">
             <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
           </elements>
         </elements>
         <elements xsi:type="xtext:Group">
-          <elements xsi:type="xtext:Keyword" value="#3"/>
+          <elements xsi:type="xtext:Keyword" value="#03"/>
           <elements xsi:type="xtext:Assignment" feature="keywordBool" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
-          </elements>
-        </elements>
-        <elements xsi:type="xtext:Group">
-          <elements xsi:type="xtext:Keyword" value="#4"/>
-          <elements xsi:type="xtext:Assignment" feature="terminalBool" operator="=">
             <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
           </elements>
         </elements>
         <elements xsi:type="xtext:Group">
-          <elements xsi:type="xtext:Keyword" value="#5"/>
-          <elements xsi:type="xtext:Assignment" feature="enumBool" operator="=">
+          <elements xsi:type="xtext:Keyword" value="#04"/>
+          <elements xsi:type="xtext:Assignment" feature="terminalBool" operator="=">
             <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.10"/>
           </elements>
         </elements>
         <elements xsi:type="xtext:Group">
-          <elements xsi:type="xtext:Keyword" value="#6"/>
-          <elements xsi:type="xtext:Assignment" feature="mixedBool" operator="=">
+          <elements xsi:type="xtext:Keyword" value="#05"/>
+          <elements xsi:type="xtext:Assignment" feature="enumBool" operator="=">
             <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.11"/>
           </elements>
         </elements>
         <elements xsi:type="xtext:Group">
-          <elements xsi:type="xtext:Keyword" value="#7"/>
-          <elements xsi:type="xtext:Assignment" feature="containmentRef" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.13"/>
+          <elements xsi:type="xtext:Keyword" value="#06"/>
+          <elements xsi:type="xtext:Assignment" feature="mixedBool" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.12"/>
           </elements>
         </elements>
         <elements xsi:type="xtext:Group">
-          <elements xsi:type="xtext:Keyword" value="#8"/>
-          <elements xsi:type="xtext:Assignment" feature="crossRef" operator="=">
+          <elements xsi:type="xtext:Keyword" value="#07"/>
+          <elements xsi:type="xtext:Assignment" feature="mixedValue" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.14"/>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Group">
+          <elements xsi:type="xtext:Keyword" value="#08"/>
+          <elements xsi:type="xtext:Assignment" feature="containmentRef" operator="=">
             <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Group">
+          <elements xsi:type="xtext:Keyword" value="#09"/>
+          <elements xsi:type="xtext:Assignment" feature="crossRef" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.19"/>
           </elements>
         </elements>
       </alternatives>
@@ -136,20 +142,29 @@
     </rules>
     <rules xsi:type="xtext:EnumRule" name="Enum1">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EEnum" href="http://www.eclipse.org/2009/tmf/xtext/assignmentfindertestlanguage#//EnumN"/>
+        <classifier xsi:type="ecore:EEnum" href="http://www.eclipse.org/2009/tmf/xtext/assignmentfindertestlanguage#//TestEnum"/>
       </type>
       <alternatives xsi:type="xtext:EnumLiteralDeclaration">
-        <enumLiteral href="http://www.eclipse.org/2009/tmf/xtext/assignmentfindertestlanguage#//EnumN/lit1"/>
+        <enumLiteral href="http://www.eclipse.org/2009/tmf/xtext/assignmentfindertestlanguage#//TestEnum/lit1"/>
         <literal value="lit1"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:EnumRule" name="Enum2">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EEnum" href="http://www.eclipse.org/2009/tmf/xtext/assignmentfindertestlanguage#//EnumN"/>
+        <classifier xsi:type="ecore:EEnum" href="http://www.eclipse.org/2009/tmf/xtext/assignmentfindertestlanguage#//TestEnum"/>
       </type>
       <alternatives xsi:type="xtext:EnumLiteralDeclaration">
-        <enumLiteral href="http://www.eclipse.org/2009/tmf/xtext/assignmentfindertestlanguage#//EnumN/lit2"/>
+        <enumLiteral href="http://www.eclipse.org/2009/tmf/xtext/assignmentfindertestlanguage#//TestEnum/lit2"/>
         <literal value="lit2"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:EnumRule" name="Enum3">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EEnum" href="http://www.eclipse.org/2009/tmf/xtext/assignmentfindertestlanguage#//TestEnum"/>
+      </type>
+      <alternatives xsi:type="xtext:EnumLiteralDeclaration">
+        <enumLiteral href="http://www.eclipse.org/2009/tmf/xtext/assignmentfindertestlanguage#//TestEnum/lit3"/>
+        <literal value="lit3"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="KeywordBool">
@@ -203,7 +218,7 @@
           <terminal xsi:type="xtext:Keyword" value="kw1"/>
         </elements>
         <elements xsi:type="xtext:Assignment" feature="val" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.12"/>
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.13"/>
         </elements>
       </alternatives>
     </rules>
@@ -216,16 +231,35 @@
         <elements xsi:type="xtext:Keyword" value="false"/>
       </alternatives>
     </rules>
+    <rules xsi:type="xtext:ParserRule" name="MixedValue">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/assignmentfindertestlanguage#//MixedValue"/>
+      </type>
+      <alternatives xsi:type="xtext:Alternatives">
+        <elements xsi:type="xtext:Assignment" feature="val" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="val" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.15"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="DatEnum">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EEnum" href="http://www.eclipse.org/2009/tmf/xtext/assignmentfindertestlanguage#//TestEnum"/>
+      </type>
+      <alternatives xsi:type="xtext:Keyword" value="lit3"/>
+    </rules>
     <rules xsi:type="xtext:ParserRule" name="ContainmentRef">
       <type metamodel="/0/@metamodelDeclarations.0">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/assignmentfindertestlanguage#//ContainmentRef"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <elements xsi:type="xtext:Assignment" feature="ctx" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.14"/>
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.17"/>
         </elements>
         <elements xsi:type="xtext:Assignment" feature="ctx" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.15"/>
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
         </elements>
       </alternatives>
     </rules>

@@ -13,14 +13,14 @@ import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>Enum N</b></em>',
+ * A representation of the literals of the enumeration '<em><b>Test Enum</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see org.eclipse.xtext.serializer.assignmentFinderTest.AssignmentFinderTestPackage#getEnumN()
+ * @see org.eclipse.xtext.serializer.assignmentFinderTest.AssignmentFinderTestPackage#getTestEnum()
  * @model
  * @generated
  */
-public enum EnumN implements Enumerator
+public enum TestEnum implements Enumerator
 {
   /**
    * The '<em><b>Lit1</b></em>' literal object.
@@ -40,7 +40,17 @@ public enum EnumN implements Enumerator
    * @generated
    * @ordered
    */
-  LIT2(0, "lit2", "lit2");
+  LIT2(0, "lit2", "lit2"),
+
+  /**
+   * The '<em><b>Lit3</b></em>' literal object.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #LIT3_VALUE
+   * @generated
+   * @ordered
+   */
+  LIT3(0, "lit3", "lit3");
 
   /**
    * The '<em><b>Lit1</b></em>' literal value.
@@ -73,37 +83,53 @@ public enum EnumN implements Enumerator
   public static final int LIT2_VALUE = 0;
 
   /**
-   * An array of all the '<em><b>Enum N</b></em>' enumerators.
+   * The '<em><b>Lit3</b></em>' literal value.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>Lit3</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @see #LIT3
+   * @model name="lit3"
+   * @generated
+   * @ordered
+   */
+  public static final int LIT3_VALUE = 0;
+
+  /**
+   * An array of all the '<em><b>Test Enum</b></em>' enumerators.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private static final EnumN[] VALUES_ARRAY =
-    new EnumN[]
+  private static final TestEnum[] VALUES_ARRAY =
+    new TestEnum[]
     {
       LIT1,
       LIT2,
+      LIT3,
     };
 
   /**
-   * A public read-only list of all the '<em><b>Enum N</b></em>' enumerators.
+   * A public read-only list of all the '<em><b>Test Enum</b></em>' enumerators.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  public static final List<EnumN> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+  public static final List<TestEnum> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
   /**
-   * Returns the '<em><b>Enum N</b></em>' literal with the specified literal value.
+   * Returns the '<em><b>Test Enum</b></em>' literal with the specified literal value.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  public static EnumN get(String literal)
+  public static TestEnum get(String literal)
   {
     for (int i = 0; i < VALUES_ARRAY.length; ++i)
     {
-      EnumN result = VALUES_ARRAY[i];
+      TestEnum result = VALUES_ARRAY[i];
       if (result.toString().equals(literal))
       {
         return result;
@@ -113,16 +139,16 @@ public enum EnumN implements Enumerator
   }
 
   /**
-   * Returns the '<em><b>Enum N</b></em>' literal with the specified name.
+   * Returns the '<em><b>Test Enum</b></em>' literal with the specified name.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  public static EnumN getByName(String name)
+  public static TestEnum getByName(String name)
   {
     for (int i = 0; i < VALUES_ARRAY.length; ++i)
     {
-      EnumN result = VALUES_ARRAY[i];
+      TestEnum result = VALUES_ARRAY[i];
       if (result.getName().equals(name))
       {
         return result;
@@ -132,12 +158,12 @@ public enum EnumN implements Enumerator
   }
 
   /**
-   * Returns the '<em><b>Enum N</b></em>' literal with the specified integer value.
+   * Returns the '<em><b>Test Enum</b></em>' literal with the specified integer value.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  public static EnumN get(int value)
+  public static TestEnum get(int value)
   {
     switch (value)
     {
@@ -173,7 +199,7 @@ public enum EnumN implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
-  private EnumN(int value, String name, String literal)
+  private TestEnum(int value, String name, String literal)
   {
     this.value = value;
     this.name = name;
@@ -222,4 +248,4 @@ public enum EnumN implements Enumerator
     return literal;
   }
   
-} //EnumN
+} //TestEnum

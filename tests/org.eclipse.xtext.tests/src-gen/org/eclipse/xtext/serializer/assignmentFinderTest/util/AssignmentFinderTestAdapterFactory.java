@@ -118,6 +118,11 @@ public class AssignmentFinderTestAdapterFactory extends AdapterFactoryImpl
         return createMixedBoolAdapter();
       }
       @Override
+      public Adapter caseMixedValue(MixedValue object)
+      {
+        return createMixedValueAdapter();
+      }
+      @Override
       public Adapter caseContainmentRef(ContainmentRef object)
       {
         return createContainmentRefAdapter();
@@ -270,6 +275,21 @@ public class AssignmentFinderTestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createMixedBoolAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.assignmentFinderTest.MixedValue <em>Mixed Value</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.assignmentFinderTest.MixedValue
+   * @generated
+   */
+  public Adapter createMixedValueAdapter()
   {
     return null;
   }

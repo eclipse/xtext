@@ -151,6 +151,13 @@ public class AssignmentFinderTestSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case AssignmentFinderTestPackage.MIXED_VALUE:
+      {
+        MixedValue mixedValue = (MixedValue)theEObject;
+        T result = caseMixedValue(mixedValue);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case AssignmentFinderTestPackage.CONTAINMENT_REF:
       {
         ContainmentRef containmentRef = (ContainmentRef)theEObject;
@@ -300,6 +307,22 @@ public class AssignmentFinderTestSwitch<T>
    * @generated
    */
   public T caseMixedBool(MixedBool object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Mixed Value</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Mixed Value</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMixedValue(MixedValue object)
   {
     return null;
   }

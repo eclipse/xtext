@@ -22,6 +22,7 @@ import org.eclipse.xtext.serializer.assignmentFinderTest.EnumVal;
 import org.eclipse.xtext.serializer.assignmentFinderTest.KeywordBool;
 import org.eclipse.xtext.serializer.assignmentFinderTest.KeywordVal;
 import org.eclipse.xtext.serializer.assignmentFinderTest.MixedBool;
+import org.eclipse.xtext.serializer.assignmentFinderTest.MixedValue;
 import org.eclipse.xtext.serializer.assignmentFinderTest.Model;
 import org.eclipse.xtext.serializer.assignmentFinderTest.TerminalBool;
 import org.eclipse.xtext.serializer.assignmentFinderTest.TerminalVal;
@@ -40,6 +41,7 @@ import org.eclipse.xtext.serializer.assignmentFinderTest.TerminalVal;
  *   <li>{@link org.eclipse.xtext.serializer.assignmentFinderTest.impl.ModelImpl#getTerminalBool <em>Terminal Bool</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.assignmentFinderTest.impl.ModelImpl#getEnumBool <em>Enum Bool</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.assignmentFinderTest.impl.ModelImpl#getMixedBool <em>Mixed Bool</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.assignmentFinderTest.impl.ModelImpl#getMixedValue <em>Mixed Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.assignmentFinderTest.impl.ModelImpl#getContainmentRef <em>Containment Ref</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.assignmentFinderTest.impl.ModelImpl#getCrossRef <em>Cross Ref</em>}</li>
  * </ul>
@@ -118,6 +120,16 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @ordered
    */
   protected MixedBool mixedBool;
+
+  /**
+   * The cached value of the '{@link #getMixedValue() <em>Mixed Value</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getMixedValue()
+   * @generated
+   * @ordered
+   */
+  protected MixedValue mixedValue;
 
   /**
    * The cached value of the '{@link #getContainmentRef() <em>Containment Ref</em>}' containment reference.
@@ -501,6 +513,54 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  public MixedValue getMixedValue()
+  {
+    return mixedValue;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetMixedValue(MixedValue newMixedValue, NotificationChain msgs)
+  {
+    MixedValue oldMixedValue = mixedValue;
+    mixedValue = newMixedValue;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AssignmentFinderTestPackage.MODEL__MIXED_VALUE, oldMixedValue, newMixedValue);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setMixedValue(MixedValue newMixedValue)
+  {
+    if (newMixedValue != mixedValue)
+    {
+      NotificationChain msgs = null;
+      if (mixedValue != null)
+        msgs = ((InternalEObject)mixedValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AssignmentFinderTestPackage.MODEL__MIXED_VALUE, null, msgs);
+      if (newMixedValue != null)
+        msgs = ((InternalEObject)newMixedValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AssignmentFinderTestPackage.MODEL__MIXED_VALUE, null, msgs);
+      msgs = basicSetMixedValue(newMixedValue, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AssignmentFinderTestPackage.MODEL__MIXED_VALUE, newMixedValue, newMixedValue));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public ContainmentRef getContainmentRef()
   {
     return containmentRef;
@@ -616,6 +676,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return basicSetEnumBool(null, msgs);
       case AssignmentFinderTestPackage.MODEL__MIXED_BOOL:
         return basicSetMixedBool(null, msgs);
+      case AssignmentFinderTestPackage.MODEL__MIXED_VALUE:
+        return basicSetMixedValue(null, msgs);
       case AssignmentFinderTestPackage.MODEL__CONTAINMENT_REF:
         return basicSetContainmentRef(null, msgs);
       case AssignmentFinderTestPackage.MODEL__CROSS_REF:
@@ -648,6 +710,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return getEnumBool();
       case AssignmentFinderTestPackage.MODEL__MIXED_BOOL:
         return getMixedBool();
+      case AssignmentFinderTestPackage.MODEL__MIXED_VALUE:
+        return getMixedValue();
       case AssignmentFinderTestPackage.MODEL__CONTAINMENT_REF:
         return getContainmentRef();
       case AssignmentFinderTestPackage.MODEL__CROSS_REF:
@@ -686,6 +750,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return;
       case AssignmentFinderTestPackage.MODEL__MIXED_BOOL:
         setMixedBool((MixedBool)newValue);
+        return;
+      case AssignmentFinderTestPackage.MODEL__MIXED_VALUE:
+        setMixedValue((MixedValue)newValue);
         return;
       case AssignmentFinderTestPackage.MODEL__CONTAINMENT_REF:
         setContainmentRef((ContainmentRef)newValue);
@@ -728,6 +795,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
       case AssignmentFinderTestPackage.MODEL__MIXED_BOOL:
         setMixedBool((MixedBool)null);
         return;
+      case AssignmentFinderTestPackage.MODEL__MIXED_VALUE:
+        setMixedValue((MixedValue)null);
+        return;
       case AssignmentFinderTestPackage.MODEL__CONTAINMENT_REF:
         setContainmentRef((ContainmentRef)null);
         return;
@@ -762,6 +832,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return enumBool != null;
       case AssignmentFinderTestPackage.MODEL__MIXED_BOOL:
         return mixedBool != null;
+      case AssignmentFinderTestPackage.MODEL__MIXED_VALUE:
+        return mixedValue != null;
       case AssignmentFinderTestPackage.MODEL__CONTAINMENT_REF:
         return containmentRef != null;
       case AssignmentFinderTestPackage.MODEL__CROSS_REF:

@@ -13,6 +13,7 @@ import org.eclipse.xtext.serializer.assignmentFinderTest.EnumVal;
 import org.eclipse.xtext.serializer.assignmentFinderTest.KeywordBool;
 import org.eclipse.xtext.serializer.assignmentFinderTest.KeywordVal;
 import org.eclipse.xtext.serializer.assignmentFinderTest.MixedBool;
+import org.eclipse.xtext.serializer.assignmentFinderTest.MixedValue;
 import org.eclipse.xtext.serializer.assignmentFinderTest.Model;
 import org.eclipse.xtext.serializer.assignmentFinderTest.TerminalBool;
 import org.eclipse.xtext.serializer.assignmentFinderTest.TerminalVal;
@@ -59,12 +60,12 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 				}
 				else break;
 			case AssignmentFinderTestPackage.CONTAINMENT_REF_N:
-				if(context == grammarAccess.getContainmentRef1Rule()) {
-					sequence_ContainmentRef1_ContainmentRefN(context, (ContainmentRefN) semanticObject); 
+				if(context == grammarAccess.getContainmentRef2Rule()) {
+					sequence_ContainmentRef2_ContainmentRefN(context, (ContainmentRefN) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getContainmentRef2Rule()) {
-					sequence_ContainmentRef2_ContainmentRefN(context, (ContainmentRefN) semanticObject); 
+				else if(context == grammarAccess.getContainmentRef1Rule()) {
+					sequence_ContainmentRef1_ContainmentRefN(context, (ContainmentRefN) semanticObject); 
 					return; 
 				}
 				else break;
@@ -101,6 +102,12 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 			case AssignmentFinderTestPackage.MIXED_BOOL:
 				if(context == grammarAccess.getMixedBoolRule()) {
 					sequence_MixedBool_MixedBool(context, (MixedBool) semanticObject); 
+					return; 
+				}
+				else break;
+			case AssignmentFinderTestPackage.MIXED_VALUE:
+				if(context == grammarAccess.getMixedValueRule()) {
+					sequence_MixedValue_MixedValue(context, (MixedValue) semanticObject); 
 					return; 
 				}
 				else break;
@@ -237,6 +244,18 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	
 	/**
 	 * Constraint:
+	 *     (val=Enum1 | val=DatEnum)
+	 *
+	 * Features:
+	 *    val[0, 2]
+	 */
+	protected void sequence_MixedValue_MixedValue(EObject context, MixedValue semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     (
 	 *         keywordVal=KeywordVal | 
 	 *         terminalVal=TerminalVal | 
@@ -245,6 +264,7 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	 *         terminalBool=TerminalBool | 
 	 *         enumBool=EnumBool | 
 	 *         mixedBool=MixedBool | 
+	 *         mixedValue=MixedValue | 
 	 *         containmentRef=ContainmentRef | 
 	 *         crossRef=CrossRef
 	 *     )
@@ -257,6 +277,7 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	 *         EXCLUDE_IF_SET terminalBool
 	 *         EXCLUDE_IF_SET enumBool
 	 *         EXCLUDE_IF_SET mixedBool
+	 *         EXCLUDE_IF_SET mixedValue
 	 *         EXCLUDE_IF_SET containmentRef
 	 *         EXCLUDE_IF_SET crossRef
 	 *    terminalVal[0, 1]
@@ -266,6 +287,7 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	 *         EXCLUDE_IF_SET terminalBool
 	 *         EXCLUDE_IF_SET enumBool
 	 *         EXCLUDE_IF_SET mixedBool
+	 *         EXCLUDE_IF_SET mixedValue
 	 *         EXCLUDE_IF_SET containmentRef
 	 *         EXCLUDE_IF_SET crossRef
 	 *    enumVal[0, 1]
@@ -275,6 +297,7 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	 *         EXCLUDE_IF_SET terminalBool
 	 *         EXCLUDE_IF_SET enumBool
 	 *         EXCLUDE_IF_SET mixedBool
+	 *         EXCLUDE_IF_SET mixedValue
 	 *         EXCLUDE_IF_SET containmentRef
 	 *         EXCLUDE_IF_SET crossRef
 	 *    keywordBool[0, 1]
@@ -284,6 +307,7 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	 *         EXCLUDE_IF_SET terminalBool
 	 *         EXCLUDE_IF_SET enumBool
 	 *         EXCLUDE_IF_SET mixedBool
+	 *         EXCLUDE_IF_SET mixedValue
 	 *         EXCLUDE_IF_SET containmentRef
 	 *         EXCLUDE_IF_SET crossRef
 	 *    terminalBool[0, 1]
@@ -293,6 +317,7 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	 *         EXCLUDE_IF_SET keywordBool
 	 *         EXCLUDE_IF_SET enumBool
 	 *         EXCLUDE_IF_SET mixedBool
+	 *         EXCLUDE_IF_SET mixedValue
 	 *         EXCLUDE_IF_SET containmentRef
 	 *         EXCLUDE_IF_SET crossRef
 	 *    enumBool[0, 1]
@@ -302,6 +327,7 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	 *         EXCLUDE_IF_SET keywordBool
 	 *         EXCLUDE_IF_SET terminalBool
 	 *         EXCLUDE_IF_SET mixedBool
+	 *         EXCLUDE_IF_SET mixedValue
 	 *         EXCLUDE_IF_SET containmentRef
 	 *         EXCLUDE_IF_SET crossRef
 	 *    mixedBool[0, 1]
@@ -311,6 +337,17 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	 *         EXCLUDE_IF_SET keywordBool
 	 *         EXCLUDE_IF_SET terminalBool
 	 *         EXCLUDE_IF_SET enumBool
+	 *         EXCLUDE_IF_SET mixedValue
+	 *         EXCLUDE_IF_SET containmentRef
+	 *         EXCLUDE_IF_SET crossRef
+	 *    mixedValue[0, 1]
+	 *         EXCLUDE_IF_SET keywordVal
+	 *         EXCLUDE_IF_SET terminalVal
+	 *         EXCLUDE_IF_SET enumVal
+	 *         EXCLUDE_IF_SET keywordBool
+	 *         EXCLUDE_IF_SET terminalBool
+	 *         EXCLUDE_IF_SET enumBool
+	 *         EXCLUDE_IF_SET mixedBool
 	 *         EXCLUDE_IF_SET containmentRef
 	 *         EXCLUDE_IF_SET crossRef
 	 *    containmentRef[0, 1]
@@ -321,6 +358,7 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	 *         EXCLUDE_IF_SET terminalBool
 	 *         EXCLUDE_IF_SET enumBool
 	 *         EXCLUDE_IF_SET mixedBool
+	 *         EXCLUDE_IF_SET mixedValue
 	 *         EXCLUDE_IF_SET crossRef
 	 *    crossRef[0, 1]
 	 *         EXCLUDE_IF_SET keywordVal
@@ -330,6 +368,7 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	 *         EXCLUDE_IF_SET terminalBool
 	 *         EXCLUDE_IF_SET enumBool
 	 *         EXCLUDE_IF_SET mixedBool
+	 *         EXCLUDE_IF_SET mixedValue
 	 *         EXCLUDE_IF_SET containmentRef
 	 */
 	protected void sequence_Model_Model(EObject context, Model semanticObject) {

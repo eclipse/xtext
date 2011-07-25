@@ -27,7 +27,7 @@ public interface EnumVal extends EObject
 {
   /**
    * Returns the value of the '<em><b>En</b></em>' attribute.
-   * The literals are from the enumeration {@link org.eclipse.xtext.serializer.assignmentFinderTest.EnumN}.
+   * The literals are from the enumeration {@link org.eclipse.xtext.serializer.assignmentFinderTest.TestEnum}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>En</em>' attribute isn't clear,
@@ -35,23 +35,23 @@ public interface EnumVal extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>En</em>' attribute.
-   * @see org.eclipse.xtext.serializer.assignmentFinderTest.EnumN
-   * @see #setEn(EnumN)
+   * @see org.eclipse.xtext.serializer.assignmentFinderTest.TestEnum
+   * @see #setEn(TestEnum)
    * @see org.eclipse.xtext.serializer.assignmentFinderTest.AssignmentFinderTestPackage#getEnumVal_En()
    * @model
    * @generated
    */
-  EnumN getEn();
+  TestEnum getEn();
 
   /**
    * Sets the value of the '{@link org.eclipse.xtext.serializer.assignmentFinderTest.EnumVal#getEn <em>En</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>En</em>' attribute.
-   * @see org.eclipse.xtext.serializer.assignmentFinderTest.EnumN
+   * @see org.eclipse.xtext.serializer.assignmentFinderTest.TestEnum
    * @see #getEn()
    * @generated
    */
-  void setEn(EnumN value);
+  void setEn(TestEnum value);
 
 } // EnumVal

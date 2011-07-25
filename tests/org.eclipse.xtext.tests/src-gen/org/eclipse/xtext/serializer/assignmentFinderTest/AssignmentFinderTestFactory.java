@@ -98,6 +98,15 @@ public interface AssignmentFinderTestFactory extends EFactory
   MixedBool createMixedBool();
 
   /**
+   * Returns a new object of class '<em>Mixed Value</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Mixed Value</em>'.
+   * @generated
+   */
+  MixedValue createMixedValue();
+
+  /**
    * Returns a new object of class '<em>Containment Ref</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

@@ -76,6 +76,7 @@ public class AssignmentFinderTestFactoryImpl extends EFactoryImpl implements Ass
       case AssignmentFinderTestPackage.TERMINAL_BOOL: return createTerminalBool();
       case AssignmentFinderTestPackage.ENUM_BOOL: return createEnumBool();
       case AssignmentFinderTestPackage.MIXED_BOOL: return createMixedBool();
+      case AssignmentFinderTestPackage.MIXED_VALUE: return createMixedValue();
       case AssignmentFinderTestPackage.CONTAINMENT_REF: return createContainmentRef();
       case AssignmentFinderTestPackage.CONTAINMENT_REF_N: return createContainmentRefN();
       case AssignmentFinderTestPackage.CROSS_REF: return createCrossRef();
@@ -94,8 +95,8 @@ public class AssignmentFinderTestFactoryImpl extends EFactoryImpl implements Ass
   {
     switch (eDataType.getClassifierID())
     {
-      case AssignmentFinderTestPackage.ENUM_N:
-        return createEnumNFromString(eDataType, initialValue);
+      case AssignmentFinderTestPackage.TEST_ENUM:
+        return createTestEnumFromString(eDataType, initialValue);
       default:
         throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
     }
@@ -111,8 +112,8 @@ public class AssignmentFinderTestFactoryImpl extends EFactoryImpl implements Ass
   {
     switch (eDataType.getClassifierID())
     {
-      case AssignmentFinderTestPackage.ENUM_N:
-        return convertEnumNToString(eDataType, instanceValue);
+      case AssignmentFinderTestPackage.TEST_ENUM:
+        return convertTestEnumToString(eDataType, instanceValue);
       default:
         throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
     }
@@ -211,6 +212,17 @@ public class AssignmentFinderTestFactoryImpl extends EFactoryImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  public MixedValue createMixedValue()
+  {
+    MixedValueImpl mixedValue = new MixedValueImpl();
+    return mixedValue;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public ContainmentRef createContainmentRef()
   {
     ContainmentRefImpl containmentRef = new ContainmentRefImpl();
@@ -244,9 +256,9 @@ public class AssignmentFinderTestFactoryImpl extends EFactoryImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
-  public EnumN createEnumNFromString(EDataType eDataType, String initialValue)
+  public TestEnum createTestEnumFromString(EDataType eDataType, String initialValue)
   {
-    EnumN result = EnumN.get(initialValue);
+    TestEnum result = TestEnum.get(initialValue);
     if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
     return result;
   }
@@ -256,7 +268,7 @@ public class AssignmentFinderTestFactoryImpl extends EFactoryImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
-  public String convertEnumNToString(EDataType eDataType, Object instanceValue)
+  public String convertTestEnumToString(EDataType eDataType, Object instanceValue)
   {
     return instanceValue == null ? null : instanceValue.toString();
   }

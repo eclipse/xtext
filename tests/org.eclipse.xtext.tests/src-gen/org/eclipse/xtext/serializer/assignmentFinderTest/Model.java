@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.serializer.assignmentFinderTest.Model#getTerminalBool <em>Terminal Bool</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.assignmentFinderTest.Model#getEnumBool <em>Enum Bool</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.assignmentFinderTest.Model#getMixedBool <em>Mixed Bool</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.assignmentFinderTest.Model#getMixedValue <em>Mixed Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.assignmentFinderTest.Model#getContainmentRef <em>Containment Ref</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.assignmentFinderTest.Model#getCrossRef <em>Cross Ref</em>}</li>
  * </ul>
@@ -214,6 +215,32 @@ public interface Model extends EObject
    * @generated
    */
   void setMixedBool(MixedBool value);
+
+  /**
+   * Returns the value of the '<em><b>Mixed Value</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Mixed Value</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Mixed Value</em>' containment reference.
+   * @see #setMixedValue(MixedValue)
+   * @see org.eclipse.xtext.serializer.assignmentFinderTest.AssignmentFinderTestPackage#getModel_MixedValue()
+   * @model containment="true"
+   * @generated
+   */
+  MixedValue getMixedValue();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.assignmentFinderTest.Model#getMixedValue <em>Mixed Value</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Mixed Value</em>' containment reference.
+   * @see #getMixedValue()
+   * @generated
+   */
+  void setMixedValue(MixedValue value);
 
   /**
    * Returns the value of the '<em><b>Containment Ref</b></em>' containment reference.
