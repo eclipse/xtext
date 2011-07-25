@@ -58,14 +58,17 @@ public class AssignmentFinder implements IAssignmentFinder {
 
 	public Iterable<AbstractElement> findAssignmentsByValue(EObject semanticObj,
 			Iterable<AbstractElement> assignedElements, Object value, INode node) {
-		EStructuralFeature feature = FeatureFinderUtil.getFeature(assignedElements.iterator().next(), semanticObj.eClass());
+		EStructuralFeature feature = FeatureFinderUtil.getFeature(assignedElements.iterator().next(),
+				semanticObj.eClass());
 		if (feature instanceof EAttribute) {
-			if (feature.getEType() instanceof EEnum)
+			Class<?> clazz = feature.getEType().getInstanceClass();
+			if (clazz == Boolean.class || clazz == boolean.class)
+				return findValidBooleanAssignments(semanticObj, assignedElements, value);
+			else if (feature.getEType() instanceof EEnum)
 				return findValidAssignmentsForEnum(semanticObj, assignedElements, value);
 			else
 				return findValidAssignmentsForDatatype(semanticObj, assignedElements, value);
-		}
-		if (feature instanceof EReference) {
+		} else if (feature instanceof EReference) {
 			EReference ref = (EReference) feature;
 			if (ref.isContainment())
 				return findValidAssignmentsForContainmentRef(semanticObj, assignedElements, (EObject) value);
@@ -73,6 +76,20 @@ public class AssignmentFinder implements IAssignmentFinder {
 				return findValidAssignmentsForCrossRef(semanticObj, assignedElements, (EObject) value, node);
 		}
 		throw new RuntimeException("unknown feature type");
+	}
+
+	protected Iterable<AbstractElement> findValidBooleanAssignments(EObject semanticObj,
+			Iterable<AbstractElement> assignedElements, Object value) {
+		List<AbstractElement> result = Lists.newArrayList();
+		for (AbstractElement ele : assignedElements)
+			if (GrammarUtil.isBooleanAssignment(GrammarUtil.containingAssignment(ele))) {
+				if (Boolean.TRUE.equals(value))
+					result.add(ele);
+			} else {
+				if (ele instanceof RuleCall && valueSerializer.isValid(semanticObj, (RuleCall) ele, value, null))
+					result.add(ele);
+			}
+		return result;
 	}
 
 	protected Iterable<AbstractElement> findValidAssignmentsForContainmentRef(EObject semanticObj,
@@ -103,7 +120,6 @@ public class AssignmentFinder implements IAssignmentFinder {
 		return result;
 	}
 
-	// keywords have precedence over everything else
 	protected Iterable<AbstractElement> findValidAssignmentsForDatatype(EObject semanticObj,
 			Iterable<AbstractElement> assignedElements, Object value) {
 		// keywords have precedence over everything else

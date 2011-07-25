@@ -49,5 +49,10 @@ Workflow {
 			fragment = @ TestLanguagesFragments auto-inject {}
 			fragment = serializer.SerializerFragment {}
 		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/serializer/AssignmentFinderTestLanguage.xtext"
+			fragment = @ TestLanguagesFragments auto-inject {}
+			fragment = serializer.SerializerFragment {}
+		}
 	}
 }
