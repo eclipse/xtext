@@ -101,7 +101,7 @@ public class SerializerTester {
 		if (semanticObject.eResource().getContents().contains(semanticObject)) {
 			List<Pair<EObject, ICompositeNode>> nodes = detachNodeModel(semanticObject);
 			String serialized = serializer.serialize(semanticObject);
-			parsed = parseHelper.parse(serialized);
+			parsed = parseHelper.parse(serialized, semanticObject.eResource().getResourceSet());
 			reattachNodes(nodes);
 		} else {
 			INode oldNode = NodeModelUtils.getNode(semanticObject);
@@ -111,8 +111,7 @@ public class SerializerTester {
 			String serialized = serializer.serialize(semanticObject);
 			String newtext = oldtext.substring(0, oldNode.getOffset()) + serialized
 					+ oldtext.substring(oldNode.getOffset() + oldNode.getLength());
-//			System.out.println(newtext);
-			EObject newmodel = parseHelper.parse(newtext);
+			EObject newmodel = parseHelper.parse(newtext, semanticObject.eResource().getResourceSet());
 			parsed = newmodel.eResource().getEObject(oldURI);
 			reattachNodes(nodes);
 		}
