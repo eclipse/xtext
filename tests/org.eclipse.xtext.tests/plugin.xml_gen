@@ -592,6 +592,15 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://www.eclipse.org/2009/tmf/xtext/assignmentfindertestlanguage" 
+       class = "org.eclipse.xtext.serializer.assignmentFinderTest.AssignmentFinderTestPackage"
+       genModel = "org/eclipse/xtext/serializer/AssignmentFinderTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://simple/unassignedtext" 
        class = "org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.UnassignedtextPackage"
        genModel = "org/eclipse/xtext/parsetree/unassignedtext/UnassignedTextTestLanguage.genmodel" /> 
