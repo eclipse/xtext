@@ -48,16 +48,24 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final Alternatives cParentRefAlternatives_4_1_0 = (Alternatives)cParentRefAssignment_4_1.eContents().get(0);
 		private final RuleCall cParentRefParentRefTest1ParserRuleCall_4_1_0_0 = (RuleCall)cParentRefAlternatives_4_1_0.eContents().get(0);
 		private final RuleCall cParentRefParentRefTest2ParserRuleCall_4_1_0_1 = (RuleCall)cParentRefAlternatives_4_1_0.eContents().get(1);
+		private final Group cGroup_5 = (Group)cAlternatives.eContents().get(5);
+		private final Keyword cNumberSignDigitFiveKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final Assignment cQuantityExclusionAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
+		private final Alternatives cQuantityExclusionAlternatives_5_1_0 = (Alternatives)cQuantityExclusionAssignment_5_1.eContents().get(0);
+		private final RuleCall cQuantityExclusionQuantityExclusionTest1ParserRuleCall_5_1_0_0 = (RuleCall)cQuantityExclusionAlternatives_5_1_0.eContents().get(0);
+		private final RuleCall cQuantityExclusionQuantityExclusionTest2ParserRuleCall_5_1_0_1 = (RuleCall)cQuantityExclusionAlternatives_5_1_0.eContents().get(1);
 		
 		//Model:
 		//	"#0" model=Model2 | "#1" attributeExclusion=(AttributeExclusionTest1 | AttributeExclusionTest2) | "#2"
 		//	nestedType=(NestedTypeTest1 | NestedTypeTest2) | "#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1 |
-		//	NestedTypeRecursiveTest2) | "#4" parentRef=(ParentRefTest1 | ParentRefTest2);
+		//	NestedTypeRecursiveTest2) | "#4" parentRef=(ParentRefTest1 | ParentRefTest2) | "#5"
+		//	quantityExclusion=(QuantityExclusionTest1 | QuantityExclusionTest2);
 		public ParserRule getRule() { return rule; }
 
 		//"#0" model=Model2 | "#1" attributeExclusion=(AttributeExclusionTest1 | AttributeExclusionTest2) | "#2"
 		//nestedType=(NestedTypeTest1 | NestedTypeTest2) | "#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1 |
-		//NestedTypeRecursiveTest2) | "#4" parentRef=(ParentRefTest1 | ParentRefTest2)
+		//NestedTypeRecursiveTest2) | "#4" parentRef=(ParentRefTest1 | ParentRefTest2) | "#5"
+		//quantityExclusion=(QuantityExclusionTest1 | QuantityExclusionTest2)
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//"#0" model=Model2
@@ -143,6 +151,24 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 
 		//ParentRefTest2
 		public RuleCall getParentRefParentRefTest2ParserRuleCall_4_1_0_1() { return cParentRefParentRefTest2ParserRuleCall_4_1_0_1; }
+
+		//"#5" quantityExclusion=(QuantityExclusionTest1 | QuantityExclusionTest2)
+		public Group getGroup_5() { return cGroup_5; }
+
+		//"#5"
+		public Keyword getNumberSignDigitFiveKeyword_5_0() { return cNumberSignDigitFiveKeyword_5_0; }
+
+		//quantityExclusion=(QuantityExclusionTest1 | QuantityExclusionTest2)
+		public Assignment getQuantityExclusionAssignment_5_1() { return cQuantityExclusionAssignment_5_1; }
+
+		//QuantityExclusionTest1 | QuantityExclusionTest2
+		public Alternatives getQuantityExclusionAlternatives_5_1_0() { return cQuantityExclusionAlternatives_5_1_0; }
+
+		//QuantityExclusionTest1
+		public RuleCall getQuantityExclusionQuantityExclusionTest1ParserRuleCall_5_1_0_0() { return cQuantityExclusionQuantityExclusionTest1ParserRuleCall_5_1_0_0; }
+
+		//QuantityExclusionTest2
+		public RuleCall getQuantityExclusionQuantityExclusionTest2ParserRuleCall_5_1_0_1() { return cQuantityExclusionQuantityExclusionTest2ParserRuleCall_5_1_0_1; }
 	}
 
 	public class Model2Elements extends AbstractParserRuleElementFinder {
@@ -480,6 +506,70 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//ParentRefTestChild2
 		public RuleCall getChildParentRefTestChild2ParserRuleCall_2_0() { return cChildParentRefTestChild2ParserRuleCall_2_0; }
 	}
+
+	public class QuantityExclusionTest1Elements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "QuantityExclusionTest1");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cKw1Keyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cAttr1Assignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cAttr1IDTerminalRuleCall_1_0 = (RuleCall)cAttr1Assignment_1.eContents().get(0);
+		private final Assignment cAttr2Assignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cAttr2IDTerminalRuleCall_2_0 = (RuleCall)cAttr2Assignment_2.eContents().get(0);
+		
+		//QuantityExclusionTest1 returns QuantityExclusionTest:
+		//	"kw1" attr1=ID attr2=ID?;
+		public ParserRule getRule() { return rule; }
+
+		//"kw1" attr1=ID attr2=ID?
+		public Group getGroup() { return cGroup; }
+
+		//"kw1"
+		public Keyword getKw1Keyword_0() { return cKw1Keyword_0; }
+
+		//attr1=ID
+		public Assignment getAttr1Assignment_1() { return cAttr1Assignment_1; }
+
+		//ID
+		public RuleCall getAttr1IDTerminalRuleCall_1_0() { return cAttr1IDTerminalRuleCall_1_0; }
+
+		//attr2=ID?
+		public Assignment getAttr2Assignment_2() { return cAttr2Assignment_2; }
+
+		//ID
+		public RuleCall getAttr2IDTerminalRuleCall_2_0() { return cAttr2IDTerminalRuleCall_2_0; }
+	}
+
+	public class QuantityExclusionTest2Elements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "QuantityExclusionTest2");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cKw2Keyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cAttr1Assignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cAttr1IDTerminalRuleCall_1_0 = (RuleCall)cAttr1Assignment_1.eContents().get(0);
+		private final Assignment cAttr2Assignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cAttr2IDTerminalRuleCall_2_0 = (RuleCall)cAttr2Assignment_2.eContents().get(0);
+		
+		//QuantityExclusionTest2 returns QuantityExclusionTest:
+		//	"kw2" attr1=ID? attr2=ID;
+		public ParserRule getRule() { return rule; }
+
+		//"kw2" attr1=ID? attr2=ID
+		public Group getGroup() { return cGroup; }
+
+		//"kw2"
+		public Keyword getKw2Keyword_0() { return cKw2Keyword_0; }
+
+		//attr1=ID?
+		public Assignment getAttr1Assignment_1() { return cAttr1Assignment_1; }
+
+		//ID
+		public RuleCall getAttr1IDTerminalRuleCall_1_0() { return cAttr1IDTerminalRuleCall_1_0; }
+
+		//attr2=ID
+		public Assignment getAttr2Assignment_2() { return cAttr2Assignment_2; }
+
+		//ID
+		public RuleCall getAttr2IDTerminalRuleCall_2_0() { return cAttr2IDTerminalRuleCall_2_0; }
+	}
 	
 	
 	private ModelElements pModel;
@@ -497,6 +587,8 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	private ParentRefTest2Elements pParentRefTest2;
 	private ParentRefTestChild1Elements pParentRefTestChild1;
 	private ParentRefTestChild2Elements pParentRefTestChild2;
+	private QuantityExclusionTest1Elements pQuantityExclusionTest1;
+	private QuantityExclusionTest2Elements pQuantityExclusionTest2;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -522,7 +614,8 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//Model:
 	//	"#0" model=Model2 | "#1" attributeExclusion=(AttributeExclusionTest1 | AttributeExclusionTest2) | "#2"
 	//	nestedType=(NestedTypeTest1 | NestedTypeTest2) | "#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1 |
-	//	NestedTypeRecursiveTest2) | "#4" parentRef=(ParentRefTest1 | ParentRefTest2);
+	//	NestedTypeRecursiveTest2) | "#4" parentRef=(ParentRefTest1 | ParentRefTest2) | "#5"
+	//	quantityExclusion=(QuantityExclusionTest1 | QuantityExclusionTest2);
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -669,6 +762,26 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	
 	public ParserRule getParentRefTestChild2Rule() {
 		return getParentRefTestChild2Access().getRule();
+	}
+
+	//QuantityExclusionTest1 returns QuantityExclusionTest:
+	//	"kw1" attr1=ID attr2=ID?;
+	public QuantityExclusionTest1Elements getQuantityExclusionTest1Access() {
+		return (pQuantityExclusionTest1 != null) ? pQuantityExclusionTest1 : (pQuantityExclusionTest1 = new QuantityExclusionTest1Elements());
+	}
+	
+	public ParserRule getQuantityExclusionTest1Rule() {
+		return getQuantityExclusionTest1Access().getRule();
+	}
+
+	//QuantityExclusionTest2 returns QuantityExclusionTest:
+	//	"kw2" attr1=ID? attr2=ID;
+	public QuantityExclusionTest2Elements getQuantityExclusionTest2Access() {
+		return (pQuantityExclusionTest2 != null) ? pQuantityExclusionTest2 : (pQuantityExclusionTest2 = new QuantityExclusionTest2Elements());
+	}
+	
+	public ParserRule getQuantityExclusionTest2Rule() {
+		return getQuantityExclusionTest2Access().getRule();
 	}
 
 	//terminal ID:

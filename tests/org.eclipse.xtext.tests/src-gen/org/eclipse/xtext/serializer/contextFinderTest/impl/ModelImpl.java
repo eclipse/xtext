@@ -20,6 +20,7 @@ import org.eclipse.xtext.serializer.contextFinderTest.ContextFinderTestPackage;
 import org.eclipse.xtext.serializer.contextFinderTest.Model;
 import org.eclipse.xtext.serializer.contextFinderTest.NestedTypeRecursiveTest;
 import org.eclipse.xtext.serializer.contextFinderTest.NestedTypeTest;
+import org.eclipse.xtext.serializer.contextFinderTest.QuantityExclusionTest;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,6 +34,7 @@ import org.eclipse.xtext.serializer.contextFinderTest.NestedTypeTest;
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.impl.ModelImpl#getNestedType <em>Nested Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.impl.ModelImpl#getNestedTypeRecursiveTest2 <em>Nested Type Recursive Test2</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.impl.ModelImpl#getParentRef <em>Parent Ref</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.impl.ModelImpl#getQuantityExclusion <em>Quantity Exclusion</em>}</li>
  * </ul>
  * </p>
  *
@@ -89,6 +91,16 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @ordered
    */
   protected EObject parentRef;
+
+  /**
+   * The cached value of the '{@link #getQuantityExclusion() <em>Quantity Exclusion</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getQuantityExclusion()
+   * @generated
+   * @ordered
+   */
+  protected QuantityExclusionTest quantityExclusion;
 
   /**
    * <!-- begin-user-doc -->
@@ -356,6 +368,54 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  public QuantityExclusionTest getQuantityExclusion()
+  {
+    return quantityExclusion;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetQuantityExclusion(QuantityExclusionTest newQuantityExclusion, NotificationChain msgs)
+  {
+    QuantityExclusionTest oldQuantityExclusion = quantityExclusion;
+    quantityExclusion = newQuantityExclusion;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ContextFinderTestPackage.MODEL__QUANTITY_EXCLUSION, oldQuantityExclusion, newQuantityExclusion);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setQuantityExclusion(QuantityExclusionTest newQuantityExclusion)
+  {
+    if (newQuantityExclusion != quantityExclusion)
+    {
+      NotificationChain msgs = null;
+      if (quantityExclusion != null)
+        msgs = ((InternalEObject)quantityExclusion).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ContextFinderTestPackage.MODEL__QUANTITY_EXCLUSION, null, msgs);
+      if (newQuantityExclusion != null)
+        msgs = ((InternalEObject)newQuantityExclusion).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ContextFinderTestPackage.MODEL__QUANTITY_EXCLUSION, null, msgs);
+      msgs = basicSetQuantityExclusion(newQuantityExclusion, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ContextFinderTestPackage.MODEL__QUANTITY_EXCLUSION, newQuantityExclusion, newQuantityExclusion));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -371,6 +431,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return basicSetNestedTypeRecursiveTest2(null, msgs);
       case ContextFinderTestPackage.MODEL__PARENT_REF:
         return basicSetParentRef(null, msgs);
+      case ContextFinderTestPackage.MODEL__QUANTITY_EXCLUSION:
+        return basicSetQuantityExclusion(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -395,6 +457,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return getNestedTypeRecursiveTest2();
       case ContextFinderTestPackage.MODEL__PARENT_REF:
         return getParentRef();
+      case ContextFinderTestPackage.MODEL__QUANTITY_EXCLUSION:
+        return getQuantityExclusion();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -423,6 +487,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return;
       case ContextFinderTestPackage.MODEL__PARENT_REF:
         setParentRef((EObject)newValue);
+        return;
+      case ContextFinderTestPackage.MODEL__QUANTITY_EXCLUSION:
+        setQuantityExclusion((QuantityExclusionTest)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -453,6 +520,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
       case ContextFinderTestPackage.MODEL__PARENT_REF:
         setParentRef((EObject)null);
         return;
+      case ContextFinderTestPackage.MODEL__QUANTITY_EXCLUSION:
+        setQuantityExclusion((QuantityExclusionTest)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -477,6 +547,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return nestedTypeRecursiveTest2 != null;
       case ContextFinderTestPackage.MODEL__PARENT_REF:
         return parentRef != null;
+      case ContextFinderTestPackage.MODEL__QUANTITY_EXCLUSION:
+        return quantityExclusion != null;
     }
     return super.eIsSet(featureID);
   }

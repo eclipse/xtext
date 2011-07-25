@@ -46,6 +46,8 @@ protected class ThisRootNode extends RootToken {
 			case 12: return new ParentRefTest2_Group(this, this, 12, inst);
 			case 13: return new ParentRefTestChild1_Group(this, this, 13, inst);
 			case 14: return new ParentRefTestChild2_Group(this, this, 14, inst);
+			case 15: return new QuantityExclusionTest1_Group(this, this, 15, inst);
+			case 16: return new QuantityExclusionTest2_Group(this, this, 16, inst);
 			default: return null;
 		}	
 	}	
@@ -57,13 +59,15 @@ protected class ThisRootNode extends RootToken {
  * Model:
  * 	"#0" model=Model2 | "#1" attributeExclusion=(AttributeExclusionTest1 | AttributeExclusionTest2) | "#2"
  * 	nestedType=(NestedTypeTest1 | NestedTypeTest2) | "#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1 |
- * 	NestedTypeRecursiveTest2) | "#4" parentRef=(ParentRefTest1 | ParentRefTest2);
+ * 	NestedTypeRecursiveTest2) | "#4" parentRef=(ParentRefTest1 | ParentRefTest2) | "#5"
+ * 	quantityExclusion=(QuantityExclusionTest1 | QuantityExclusionTest2);
  *
  **/
 
 // "#0" model=Model2 | "#1" attributeExclusion=(AttributeExclusionTest1 | AttributeExclusionTest2) | "#2"
 // nestedType=(NestedTypeTest1 | NestedTypeTest2) | "#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1 |
-// NestedTypeRecursiveTest2) | "#4" parentRef=(ParentRefTest1 | ParentRefTest2)
+// NestedTypeRecursiveTest2) | "#4" parentRef=(ParentRefTest1 | ParentRefTest2) | "#5"
+// quantityExclusion=(QuantityExclusionTest1 | QuantityExclusionTest2)
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -83,6 +87,7 @@ protected class Model_Alternatives extends AlternativesToken {
 			case 2: return new Model_Group_2(lastRuleCallOrigin, this, 2, inst);
 			case 3: return new Model_Group_3(lastRuleCallOrigin, this, 3, inst);
 			case 4: return new Model_Group_4(lastRuleCallOrigin, this, 4, inst);
+			case 5: return new Model_Group_5(lastRuleCallOrigin, this, 5, inst);
 			default: return null;
 		}	
 	}
@@ -580,6 +585,106 @@ protected class Model_ParentRefAssignment_4_1 extends AssignmentToken  {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new Model_NumberSignDigitFourKeyword_4_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+
+// "#5" quantityExclusion=(QuantityExclusionTest1 | QuantityExclusionTest2)
+protected class Model_Group_5 extends GroupToken {
+	
+	public Model_Group_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getModelAccess().getGroup_5();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Model_QuantityExclusionAssignment_5_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "#5"
+protected class Model_NumberSignDigitFiveKeyword_5_0 extends KeywordToken  {
+	
+	public Model_NumberSignDigitFiveKeyword_5_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getModelAccess().getNumberSignDigitFiveKeyword_5_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+}
+
+// quantityExclusion=(QuantityExclusionTest1 | QuantityExclusionTest2)
+protected class Model_QuantityExclusionAssignment_5_1 extends AssignmentToken  {
+	
+	public Model_QuantityExclusionAssignment_5_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getQuantityExclusionAssignment_5_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new QuantityExclusionTest1_Group(this, this, 0, inst);
+			case 1: return new QuantityExclusionTest2_Group(this, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("quantityExclusion",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("quantityExclusion");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getQuantityExclusionTest1Rule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getModelAccess().getQuantityExclusionQuantityExclusionTest1ParserRuleCall_5_1_0_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getQuantityExclusionTest2Rule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getModelAccess().getQuantityExclusionQuantityExclusionTest2ParserRuleCall_5_1_0_1(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new Model_NumberSignDigitFiveKeyword_5_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -2108,5 +2213,265 @@ protected class ParentRefTestChild2_ChildAssignment_2 extends AssignmentToken  {
 
 
 /************ end Rule ParentRefTestChild2 ****************/
+
+
+/************ begin Rule QuantityExclusionTest1 ****************
+ *
+ * QuantityExclusionTest1 returns QuantityExclusionTest:
+ * 	"kw1" attr1=ID attr2=ID?;
+ *
+ **/
+
+// "kw1" attr1=ID attr2=ID?
+protected class QuantityExclusionTest1_Group extends GroupToken {
+	
+	public QuantityExclusionTest1_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getQuantityExclusionTest1Access().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new QuantityExclusionTest1_Attr2Assignment_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new QuantityExclusionTest1_Attr1Assignment_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getQuantityExclusionTest1Rule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// "kw1"
+protected class QuantityExclusionTest1_Kw1Keyword_0 extends KeywordToken  {
+	
+	public QuantityExclusionTest1_Kw1Keyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getQuantityExclusionTest1Access().getKw1Keyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+}
+
+// attr1=ID
+protected class QuantityExclusionTest1_Attr1Assignment_1 extends AssignmentToken  {
+	
+	public QuantityExclusionTest1_Attr1Assignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getQuantityExclusionTest1Access().getAttr1Assignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new QuantityExclusionTest1_Kw1Keyword_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("attr1",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("attr1");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getQuantityExclusionTest1Access().getAttr1IDTerminalRuleCall_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getQuantityExclusionTest1Access().getAttr1IDTerminalRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// attr2=ID?
+protected class QuantityExclusionTest1_Attr2Assignment_2 extends AssignmentToken  {
+	
+	public QuantityExclusionTest1_Attr2Assignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getQuantityExclusionTest1Access().getAttr2Assignment_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new QuantityExclusionTest1_Attr1Assignment_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("attr2",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("attr2");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getQuantityExclusionTest1Access().getAttr2IDTerminalRuleCall_2_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getQuantityExclusionTest1Access().getAttr2IDTerminalRuleCall_2_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule QuantityExclusionTest1 ****************/
+
+
+/************ begin Rule QuantityExclusionTest2 ****************
+ *
+ * QuantityExclusionTest2 returns QuantityExclusionTest:
+ * 	"kw2" attr1=ID? attr2=ID;
+ *
+ **/
+
+// "kw2" attr1=ID? attr2=ID
+protected class QuantityExclusionTest2_Group extends GroupToken {
+	
+	public QuantityExclusionTest2_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getQuantityExclusionTest2Access().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new QuantityExclusionTest2_Attr2Assignment_2(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getQuantityExclusionTest2Rule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// "kw2"
+protected class QuantityExclusionTest2_Kw2Keyword_0 extends KeywordToken  {
+	
+	public QuantityExclusionTest2_Kw2Keyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getQuantityExclusionTest2Access().getKw2Keyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+}
+
+// attr1=ID?
+protected class QuantityExclusionTest2_Attr1Assignment_1 extends AssignmentToken  {
+	
+	public QuantityExclusionTest2_Attr1Assignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getQuantityExclusionTest2Access().getAttr1Assignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new QuantityExclusionTest2_Kw2Keyword_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("attr1",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("attr1");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getQuantityExclusionTest2Access().getAttr1IDTerminalRuleCall_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getQuantityExclusionTest2Access().getAttr1IDTerminalRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// attr2=ID
+protected class QuantityExclusionTest2_Attr2Assignment_2 extends AssignmentToken  {
+	
+	public QuantityExclusionTest2_Attr2Assignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getQuantityExclusionTest2Access().getAttr2Assignment_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new QuantityExclusionTest2_Attr1Assignment_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new QuantityExclusionTest2_Kw2Keyword_0(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("attr2",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("attr2");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getQuantityExclusionTest2Access().getAttr2IDTerminalRuleCall_2_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getQuantityExclusionTest2Access().getAttr2IDTerminalRuleCall_2_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule QuantityExclusionTest2 ****************/
 
 }

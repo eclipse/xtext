@@ -128,6 +128,11 @@ public class ContextFinderTestAdapterFactory extends AdapterFactoryImpl
         return createParentRefTestChildAdapter();
       }
       @Override
+      public Adapter caseQuantityExclusionTest(QuantityExclusionTest object)
+      {
+        return createQuantityExclusionTestAdapter();
+      }
+      @Override
       public Adapter caseNestedTypeRecursiveTest1(NestedTypeRecursiveTest1 object)
       {
         return createNestedTypeRecursiveTest1Adapter();
@@ -305,6 +310,21 @@ public class ContextFinderTestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createParentRefTestChildAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.contextFinderTest.QuantityExclusionTest <em>Quantity Exclusion Test</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.contextFinderTest.QuantityExclusionTest
+   * @generated
+   */
+  public Adapter createQuantityExclusionTestAdapter()
   {
     return null;
   }

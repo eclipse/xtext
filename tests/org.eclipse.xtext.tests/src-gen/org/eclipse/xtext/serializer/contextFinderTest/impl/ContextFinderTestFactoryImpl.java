@@ -77,6 +77,7 @@ public class ContextFinderTestFactoryImpl extends EFactoryImpl implements Contex
       case ContextFinderTestPackage.PARENT_REF_TEST1: return createParentRefTest1();
       case ContextFinderTestPackage.PARENT_REF_TEST2: return createParentRefTest2();
       case ContextFinderTestPackage.PARENT_REF_TEST_CHILD: return createParentRefTestChild();
+      case ContextFinderTestPackage.QUANTITY_EXCLUSION_TEST: return createQuantityExclusionTest();
       case ContextFinderTestPackage.NESTED_TYPE_RECURSIVE_TEST1: return createNestedTypeRecursiveTest1();
       case ContextFinderTestPackage.NESTED_TYPE_RECURSIVE_TEST2: return createNestedTypeRecursiveTest2();
       default:
@@ -192,6 +193,17 @@ public class ContextFinderTestFactoryImpl extends EFactoryImpl implements Contex
   {
     ParentRefTestChildImpl parentRefTestChild = new ParentRefTestChildImpl();
     return parentRefTestChild;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public QuantityExclusionTest createQuantityExclusionTest()
+  {
+    QuantityExclusionTestImpl quantityExclusionTest = new QuantityExclusionTestImpl();
+    return quantityExclusionTest;
   }
 
   /**

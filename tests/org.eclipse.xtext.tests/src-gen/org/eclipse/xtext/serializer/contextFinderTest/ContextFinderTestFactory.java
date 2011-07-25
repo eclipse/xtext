@@ -116,6 +116,15 @@ public interface ContextFinderTestFactory extends EFactory
   ParentRefTestChild createParentRefTestChild();
 
   /**
+   * Returns a new object of class '<em>Quantity Exclusion Test</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Quantity Exclusion Test</em>'.
+   * @generated
+   */
+  QuantityExclusionTest createQuantityExclusionTest();
+
+  /**
    * Returns a new object of class '<em>Nested Type Recursive Test1</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

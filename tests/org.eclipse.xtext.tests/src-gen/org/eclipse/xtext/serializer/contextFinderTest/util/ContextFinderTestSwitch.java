@@ -167,6 +167,13 @@ public class ContextFinderTestSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case ContextFinderTestPackage.QUANTITY_EXCLUSION_TEST:
+      {
+        QuantityExclusionTest quantityExclusionTest = (QuantityExclusionTest)theEObject;
+        T result = caseQuantityExclusionTest(quantityExclusionTest);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case ContextFinderTestPackage.NESTED_TYPE_RECURSIVE_TEST1:
       {
         NestedTypeRecursiveTest1 nestedTypeRecursiveTest1 = (NestedTypeRecursiveTest1)theEObject;
@@ -343,6 +350,22 @@ public class ContextFinderTestSwitch<T>
    * @generated
    */
   public T caseParentRefTestChild(ParentRefTestChild object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Quantity Exclusion Test</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Quantity Exclusion Test</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseQuantityExclusionTest(QuantityExclusionTest object)
   {
     return null;
   }

@@ -263,6 +263,47 @@ ruleModel returns [EObject current=null]
 )
 
 )
+))
+    |(	otherlv_10='#5' 
+    {
+    	newLeafNode(otherlv_10, grammarAccess.getModelAccess().getNumberSignDigitFiveKeyword_5_0());
+    }
+(
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getQuantityExclusionQuantityExclusionTest1ParserRuleCall_5_1_0_0()); 
+	    }
+		lv_quantityExclusion_11_1=ruleQuantityExclusionTest1		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"quantityExclusion",
+        		lv_quantityExclusion_11_1, 
+        		"QuantityExclusionTest1");
+	        afterParserOrEnumRuleCall();
+	    }
+
+    |		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getQuantityExclusionQuantityExclusionTest2ParserRuleCall_5_1_0_1()); 
+	    }
+		lv_quantityExclusion_11_2=ruleQuantityExclusionTest2		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"quantityExclusion",
+        		lv_quantityExclusion_11_2, 
+        		"QuantityExclusionTest2");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+
+)
 )))
 ;
 
@@ -813,6 +854,128 @@ ruleParentRefTestChild2 returns [EObject current=null]
 
 )
 )?)
+;
+
+
+
+
+
+// Entry rule entryRuleQuantityExclusionTest1
+entryRuleQuantityExclusionTest1 returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getQuantityExclusionTest1Rule()); }
+	 iv_ruleQuantityExclusionTest1=ruleQuantityExclusionTest1 
+	 { $current=$iv_ruleQuantityExclusionTest1.current; } 
+	 EOF 
+;
+
+// Rule QuantityExclusionTest1
+ruleQuantityExclusionTest1 returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='kw1' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getQuantityExclusionTest1Access().getKw1Keyword_0());
+    }
+(
+(
+		lv_attr1_1_0=RULE_ID
+		{
+			newLeafNode(lv_attr1_1_0, grammarAccess.getQuantityExclusionTest1Access().getAttr1IDTerminalRuleCall_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getQuantityExclusionTest1Rule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"attr1",
+        		lv_attr1_1_0, 
+        		"ID");
+	    }
+
+)
+)(
+(
+		lv_attr2_2_0=RULE_ID
+		{
+			newLeafNode(lv_attr2_2_0, grammarAccess.getQuantityExclusionTest1Access().getAttr2IDTerminalRuleCall_2_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getQuantityExclusionTest1Rule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"attr2",
+        		lv_attr2_2_0, 
+        		"ID");
+	    }
+
+)
+)?)
+;
+
+
+
+
+
+// Entry rule entryRuleQuantityExclusionTest2
+entryRuleQuantityExclusionTest2 returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getQuantityExclusionTest2Rule()); }
+	 iv_ruleQuantityExclusionTest2=ruleQuantityExclusionTest2 
+	 { $current=$iv_ruleQuantityExclusionTest2.current; } 
+	 EOF 
+;
+
+// Rule QuantityExclusionTest2
+ruleQuantityExclusionTest2 returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='kw2' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getQuantityExclusionTest2Access().getKw2Keyword_0());
+    }
+(
+(
+		lv_attr1_1_0=RULE_ID
+		{
+			newLeafNode(lv_attr1_1_0, grammarAccess.getQuantityExclusionTest2Access().getAttr1IDTerminalRuleCall_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getQuantityExclusionTest2Rule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"attr1",
+        		lv_attr1_1_0, 
+        		"ID");
+	    }
+
+)
+)?(
+(
+		lv_attr2_2_0=RULE_ID
+		{
+			newLeafNode(lv_attr2_2_0, grammarAccess.getQuantityExclusionTest2Access().getAttr2IDTerminalRuleCall_2_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getQuantityExclusionTest2Rule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"attr2",
+        		lv_attr2_2_0, 
+        		"ID");
+	    }
+
+)
+))
 ;
 
 

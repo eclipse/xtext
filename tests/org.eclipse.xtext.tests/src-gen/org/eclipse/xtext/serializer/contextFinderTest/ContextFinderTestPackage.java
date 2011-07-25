@@ -115,13 +115,22 @@ public interface ContextFinderTestPackage extends EPackage
   int MODEL__PARENT_REF = 4;
 
   /**
+   * The feature id for the '<em><b>Quantity Exclusion</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__QUANTITY_EXCLUSION = 5;
+
+  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 5;
+  int MODEL_FEATURE_COUNT = 6;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.contextFinderTest.impl.AttributeExclusionTestImpl <em>Attribute Exclusion Test</em>}' class.
@@ -385,6 +394,43 @@ public interface ContextFinderTestPackage extends EPackage
   int PARENT_REF_TEST_CHILD_FEATURE_COUNT = 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.contextFinderTest.impl.QuantityExclusionTestImpl <em>Quantity Exclusion Test</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.contextFinderTest.impl.QuantityExclusionTestImpl
+   * @see org.eclipse.xtext.serializer.contextFinderTest.impl.ContextFinderTestPackageImpl#getQuantityExclusionTest()
+   * @generated
+   */
+  int QUANTITY_EXCLUSION_TEST = 10;
+
+  /**
+   * The feature id for the '<em><b>Attr1</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int QUANTITY_EXCLUSION_TEST__ATTR1 = 0;
+
+  /**
+   * The feature id for the '<em><b>Attr2</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int QUANTITY_EXCLUSION_TEST__ATTR2 = 1;
+
+  /**
+   * The number of structural features of the '<em>Quantity Exclusion Test</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int QUANTITY_EXCLUSION_TEST_FEATURE_COUNT = 2;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.contextFinderTest.impl.NestedTypeRecursiveTest1Impl <em>Nested Type Recursive Test1</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -392,7 +438,7 @@ public interface ContextFinderTestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.contextFinderTest.impl.ContextFinderTestPackageImpl#getNestedTypeRecursiveTest1()
    * @generated
    */
-  int NESTED_TYPE_RECURSIVE_TEST1 = 10;
+  int NESTED_TYPE_RECURSIVE_TEST1 = 11;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -420,7 +466,7 @@ public interface ContextFinderTestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.contextFinderTest.impl.ContextFinderTestPackageImpl#getNestedTypeRecursiveTest2()
    * @generated
    */
-  int NESTED_TYPE_RECURSIVE_TEST2 = 11;
+  int NESTED_TYPE_RECURSIVE_TEST2 = 12;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -505,6 +551,17 @@ public interface ContextFinderTestPackage extends EPackage
    * @generated
    */
   EReference getModel_ParentRef();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.contextFinderTest.Model#getQuantityExclusion <em>Quantity Exclusion</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Quantity Exclusion</em>'.
+   * @see org.eclipse.xtext.serializer.contextFinderTest.Model#getQuantityExclusion()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_QuantityExclusion();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.contextFinderTest.AttributeExclusionTest <em>Attribute Exclusion Test</em>}'.
@@ -685,6 +742,38 @@ public interface ContextFinderTestPackage extends EPackage
   EReference getParentRefTestChild_Child();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.contextFinderTest.QuantityExclusionTest <em>Quantity Exclusion Test</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Quantity Exclusion Test</em>'.
+   * @see org.eclipse.xtext.serializer.contextFinderTest.QuantityExclusionTest
+   * @generated
+   */
+  EClass getQuantityExclusionTest();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.contextFinderTest.QuantityExclusionTest#getAttr1 <em>Attr1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Attr1</em>'.
+   * @see org.eclipse.xtext.serializer.contextFinderTest.QuantityExclusionTest#getAttr1()
+   * @see #getQuantityExclusionTest()
+   * @generated
+   */
+  EAttribute getQuantityExclusionTest_Attr1();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.contextFinderTest.QuantityExclusionTest#getAttr2 <em>Attr2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Attr2</em>'.
+   * @see org.eclipse.xtext.serializer.contextFinderTest.QuantityExclusionTest#getAttr2()
+   * @see #getQuantityExclusionTest()
+   * @generated
+   */
+  EAttribute getQuantityExclusionTest_Attr2();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.contextFinderTest.NestedTypeRecursiveTest1 <em>Nested Type Recursive Test1</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -776,6 +865,14 @@ public interface ContextFinderTestPackage extends EPackage
      * @generated
      */
     EReference MODEL__PARENT_REF = eINSTANCE.getModel_ParentRef();
+
+    /**
+     * The meta object literal for the '<em><b>Quantity Exclusion</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__QUANTITY_EXCLUSION = eINSTANCE.getModel_QuantityExclusion();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.contextFinderTest.impl.AttributeExclusionTestImpl <em>Attribute Exclusion Test</em>}' class.
@@ -930,6 +1027,32 @@ public interface ContextFinderTestPackage extends EPackage
      * @generated
      */
     EReference PARENT_REF_TEST_CHILD__CHILD = eINSTANCE.getParentRefTestChild_Child();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.contextFinderTest.impl.QuantityExclusionTestImpl <em>Quantity Exclusion Test</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.contextFinderTest.impl.QuantityExclusionTestImpl
+     * @see org.eclipse.xtext.serializer.contextFinderTest.impl.ContextFinderTestPackageImpl#getQuantityExclusionTest()
+     * @generated
+     */
+    EClass QUANTITY_EXCLUSION_TEST = eINSTANCE.getQuantityExclusionTest();
+
+    /**
+     * The meta object literal for the '<em><b>Attr1</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute QUANTITY_EXCLUSION_TEST__ATTR1 = eINSTANCE.getQuantityExclusionTest_Attr1();
+
+    /**
+     * The meta object literal for the '<em><b>Attr2</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute QUANTITY_EXCLUSION_TEST__ATTR2 = eINSTANCE.getQuantityExclusionTest_Attr2();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.contextFinderTest.impl.NestedTypeRecursiveTest1Impl <em>Nested Type Recursive Test1</em>}' class.
