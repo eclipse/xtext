@@ -166,6 +166,7 @@ public class SerializerTester {
 	//	}
 
 	protected List<Pair<EObject, ICompositeNode>> detachNodeModel(EObject eObject) {
+		EcoreUtil.resolveAll(eObject);
 		List<Pair<EObject, ICompositeNode>> result = Lists.newArrayList();
 		Iterator<Object> iterator = EcoreUtil.getAllContents(eObject.eResource(), false);
 		while (iterator.hasNext()) {
