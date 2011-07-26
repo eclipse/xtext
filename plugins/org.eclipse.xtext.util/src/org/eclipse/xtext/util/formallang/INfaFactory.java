@@ -10,9 +10,9 @@ package org.eclipse.xtext.util.formallang;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface INfaFactory<STATE, ITERABLE extends Iterable<? extends STATE>, TOKEN> {
+public interface INfaFactory<STATE, TOKEN> {
 
-	INfaAdapter<STATE, ITERABLE> createNfa(Iterable<STATE> startStates, Iterable<STATE> stopStates);
+	INfaAdapter<STATE> createNfa(Iterable<STATE> startStates, Iterable<STATE> stopStates);
 
 	STATE createEndState(TOKEN token);
 

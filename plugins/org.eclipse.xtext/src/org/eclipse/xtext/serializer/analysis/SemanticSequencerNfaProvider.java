@@ -45,7 +45,7 @@ import com.google.inject.Singleton;
 @Singleton
 public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvider {
 
-	protected static class SemNfa implements INfaAdapter<ISemState, List<ISemState>> {
+	protected static class SemNfa implements INfaAdapter<ISemState> {
 
 		protected List<ISemState> starts = Lists.newArrayList();
 		protected List<ISemState> stops = Lists.newArrayList();
@@ -117,14 +117,13 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 		}
 	}
 
-	protected static class SemStateFactory implements INfaFactory<ISemState, List<ISemState>, ISynAbsorberState> {
+	protected static class SemStateFactory implements INfaFactory<ISemState, ISynAbsorberState> {
 
 		public ISemState createEndState(ISynAbsorberState token) {
 			return new SemState(token.getEClass(), token.getGrammarElement());
 		}
 
-		public INfaAdapter<ISemState, List<ISemState>> createNfa(Iterable<ISemState> startStates,
-				Iterable<ISemState> stopStates) {
+		public INfaAdapter<ISemState> createNfa(Iterable<ISemState> startStates, Iterable<ISemState> stopStates) {
 			return new SemNfa(Lists.newArrayList(startStates), Lists.newArrayList(stopStates));
 		}
 
@@ -145,11 +144,11 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 	@Inject
 	protected ISyntacticSequencerPDAProvider pdaProvider;
 
-	protected Map<Pair<EObject, EClass>, INfaAdapter<ISemState, List<ISemState>>> cache = Maps.newHashMap();
+	protected Map<Pair<EObject, EClass>, INfaAdapter<ISemState>> cache = Maps.newHashMap();
 
-	public INfaAdapter<ISemState, List<ISemState>> getNFA(EObject context, EClass type) {
+	public INfaAdapter<ISemState> getNFA(EObject context, EClass type) {
 		Pair<EObject, EClass> key = Tuples.create(context, type);
-		INfaAdapter<ISemState, List<ISemState>> nfa = cache.get(key);
+		INfaAdapter<ISemState> nfa = cache.get(key);
 		if (nfa != null)
 			return nfa;
 		NfaUtil util = new NfaUtil();
@@ -185,7 +184,7 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 		return false;
 	}
 
-	protected void initContentValidationNeeded(EClass clazz, INfaAdapter<ISemState, List<ISemState>> nfa) {
+	protected void initContentValidationNeeded(EClass clazz, INfaAdapter<ISemState> nfa) {
 		Multimap<EStructuralFeature, AbstractElement> assignments = HashMultimap.create();
 		Set<ISemState> states = new NfaUtil().collect(nfa);
 		for (ISemState state : states)

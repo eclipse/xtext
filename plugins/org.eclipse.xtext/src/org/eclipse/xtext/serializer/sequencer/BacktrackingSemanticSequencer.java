@@ -299,7 +299,7 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 
 	public void createSequence(EObject context, final EObject obj) {
 		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(obj, null);
-		INfaAdapter<ISemState, List<ISemState>> nfa = nfaProvider.getNFA(context, obj.eClass());
+		INfaAdapter<ISemState> nfa = nfaProvider.getNFA(context, obj.eClass());
 		SerializableObject object = new SerializableObject(obj, nodes);
 		TraceItem co = new TraceItem(object);
 		List<TraceItem> trace = new NfaUtil().backtrack(nfa, co, new NfaUtil.BacktrackHandler<ISemState, TraceItem>() {

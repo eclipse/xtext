@@ -10,11 +10,11 @@ package org.eclipse.xtext.util.formallang;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface INfaAdapter<STATE, ITERABLE extends Iterable<? extends STATE>> {
+public interface INfaAdapter<STATE> {
 
-	ITERABLE getFinalStates();
+	Iterable<STATE> getFinalStates();
 
-	ITERABLE getFollowers(STATE node);
+	Iterable<STATE> getFollowers(STATE node);
 
-	ITERABLE getStartStates();
+	Iterable<STATE> getStartStates();
 }

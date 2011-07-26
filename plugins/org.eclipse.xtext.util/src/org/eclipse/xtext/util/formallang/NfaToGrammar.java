@@ -444,8 +444,8 @@ public class NfaToGrammar {
 		return state1.getFirst() > state2.getFirst();
 	}
 
-	public <ELEMENT, STATE, TOKEN, NFA extends INfaAdapter<STATE, ? extends Iterable<STATE>>> ELEMENT nfaToGrammar(
-			NFA nfa, Function<STATE, TOKEN> state2token, IGrammarFactory<ELEMENT, TOKEN> grammarFactory) {
+	public <ELEMENT, STATE, TOKEN, NFA extends INfaAdapter<STATE>> ELEMENT nfaToGrammar(NFA nfa,
+			Function<STATE, TOKEN> state2token, IGrammarFactory<ELEMENT, TOKEN> grammarFactory) {
 		StateAlias<TOKEN> stop = new StateAlias<TOKEN>(new ElementAlias<TOKEN>(null));
 		StateAlias<TOKEN> start = new StateAlias<TOKEN>(new ElementAlias<TOKEN>(null));
 		Set<STATE> stops = Sets.newHashSet(nfa.getFinalStates());
@@ -498,7 +498,7 @@ public class NfaToGrammar {
 		return null;
 	}
 
-	public <ELEMENT, STATE, TOKEN, NFA extends INfaAdapter<STATE, Iterable<STATE>> & ITokenAdapter<STATE, TOKEN>> ELEMENT nfaToGrammar(
+	public <ELEMENT, STATE, TOKEN, NFA extends INfaAdapter<STATE> & ITokenAdapter<STATE, TOKEN>> ELEMENT nfaToGrammar(
 			final NFA nfa, IGrammarFactory<ELEMENT, TOKEN> grammarFactory) {
 		return nfaToGrammar(nfa, new Function<STATE, TOKEN>() {
 			public TOKEN apply(STATE from) {
@@ -537,8 +537,8 @@ public class NfaToGrammar {
 		state.getIncoming().clear();
 	}
 
-	protected <STATE, TOKEN, NFA extends INfaAdapter<STATE, ? extends Iterable<STATE>>> StateAlias<TOKEN> toAlias(
-			NFA nfa, Function<STATE, TOKEN> state2token, STATE state, Set<STATE> stops, StateAlias<TOKEN> stop,
+	protected <STATE, TOKEN, NFA extends INfaAdapter<STATE>> StateAlias<TOKEN> toAlias(NFA nfa,
+			Function<STATE, TOKEN> state2token, STATE state, Set<STATE> stops, StateAlias<TOKEN> stop,
 			Map<STATE, StateAlias<TOKEN>> cache) {
 		StateAlias<TOKEN> result = cache.get(state);
 		if (result != null)

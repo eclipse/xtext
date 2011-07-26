@@ -35,5 +35,5 @@ public interface ISemanticSequencerNfaProvider {
 		List<AbstractElement> getToBeValidatedAssignedElements();
 	}
 
-	INfaAdapter<ISemState, List<ISemState>> getNFA(EObject context, EClass type);
+	INfaAdapter<ISemState> getNFA(EObject context, EClass type);
 }
