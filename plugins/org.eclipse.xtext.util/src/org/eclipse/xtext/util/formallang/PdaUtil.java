@@ -148,6 +148,14 @@ public class PdaUtil {
 		return null;
 	}
 
+	public <STATE, STACKITEM> List<STATE> shortestPathTo(IPdaAdapter<STATE, STACKITEM> pda, STATE start,
+			Iterator<STACKITEM> stack, Predicate<STATE> matches, Predicate<STATE> canPass) {
+		TraceItem<STATE, STACKITEM> trace = trace(pda, Collections.singleton(start), stack, matches, canPass);
+		if (trace != null)
+			return trace.asList();
+		return null;
+	}
+
 	public <STATE, STACKITEM> List<STATE> shortestPathTo(IPdaAdapter<STATE, STACKITEM> pda, Iterator<STACKITEM> stack,
 			Predicate<STATE> matches) {
 		return shortestPathTo(pda, pda.getStartStates(), stack, matches, Predicates.<STATE> alwaysTrue());
@@ -166,22 +174,22 @@ public class PdaUtil {
 
 	public <STATE, STACKITEM> List<STATE> shortestPathToFinalState(IPdaAdapter<STATE, STACKITEM> pda,
 			Iterator<STACKITEM> stack) {
-		final Set<STATE> ends = Sets.newHashSet(pda.getFinalStates());
-		if (ends.isEmpty()) {
-			if (pda.getStartStates().iterator().hasNext())
-				return null;
-			return Collections.emptyList();
-		}
-		return shortestPathTo(pda, pda.getStartStates(), stack, new Predicate<STATE>() {
-			public boolean apply(STATE input) {
-				return ends.contains(input);
-			}
-		}, Predicates.<STATE> alwaysTrue());
+		return shortestPathTo(pda, pda.getStartStates(), stack, Predicates.equalTo(pda.getFinalStates()),
+				Predicates.<STATE> alwaysTrue());
 	}
 
 	public <STATE, STACKITEM> List<STATE> shortestStackpruningPathTo(IPdaAdapter<STATE, STACKITEM> pda,
 			Iterable<STATE> starts, Iterator<STACKITEM> stack, Predicate<STATE> matches, Predicate<STATE> canPass) {
 		TraceItem<STATE, STACKITEM> trace = traceToWithPruningStack(pda, starts, stack, matches, canPass);
+		if (trace != null)
+			return trace.asList();
+		return null;
+	}
+
+	public <STATE, STACKITEM> List<STATE> shortestStackpruningPathTo(IPdaAdapter<STATE, STACKITEM> pda, STATE start,
+			Iterator<STACKITEM> stack, Predicate<STATE> matches, Predicate<STATE> canPass) {
+		TraceItem<STATE, STACKITEM> trace = traceToWithPruningStack(pda, Collections.singleton(start), stack, matches,
+				canPass);
 		if (trace != null)
 			return trace.asList();
 		return null;

@@ -12,7 +12,7 @@ package org.eclipse.xtext.util.formallang;
  */
 public interface INfaFactory<STATE, TOKEN> {
 
-	INfaAdapter<STATE> createNfa(Iterable<STATE> startStates, Iterable<STATE> stopStates);
+	INfaAdapter<STATE> createNfa(STATE start, STATE stop);
 
 	STATE createEndState(TOKEN token);
 
