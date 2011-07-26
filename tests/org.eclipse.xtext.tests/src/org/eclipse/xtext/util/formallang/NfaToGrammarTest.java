@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.eclipse.xtext.junit.AbstractXtextTests;
 
+import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
 /**
@@ -39,7 +40,13 @@ public class NfaToGrammarTest extends AbstractXtextTests {
 		}
 	}
 
-	private static class SimpleNFA implements Nfa<S>, ITokenAdapter<S, String> {
+	private static class S2Token implements Function<S, String> {
+		public String apply(S from) {
+			return from.name;
+		}
+	}
+
+	private static class SimpleNFA implements Nfa<S> {
 		private S start;
 		private S stop;
 
@@ -47,10 +54,6 @@ public class NfaToGrammarTest extends AbstractXtextTests {
 			super();
 			this.start = start;
 			this.stop = stop;
-		}
-
-		public String getToken(S owner) {
-			return owner.name;
 		}
 
 		public S getStart() {
@@ -69,7 +72,7 @@ public class NfaToGrammarTest extends AbstractXtextTests {
 
 	private String nfa2g(S starts, S stops) {
 		NfaToGrammar nfa2g = new NfaToGrammar();
-		return nfa2g.nfaToGrammar(new SimpleNFA(starts, stops), new GrammarStringFactory<String>());
+		return nfa2g.nfaToGrammar(new SimpleNFA(starts, stops), new S2Token(), new GrammarStringFactory<String>());
 	}
 
 	public void testSimple() {
