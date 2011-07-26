@@ -10,9 +10,8 @@ package org.eclipse.xtext.util.formallang;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface INfaAdapter<STATE> extends DirectedGraph<STATE> {
+public interface DirectedGraph<STATE> {
 
-	STATE getFinalStates();
+	Iterable<STATE> getFollowers(STATE state);
 
-	STATE getStartStates();
 }
