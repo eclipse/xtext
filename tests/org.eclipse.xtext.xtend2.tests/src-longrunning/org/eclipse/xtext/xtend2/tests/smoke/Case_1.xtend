@@ -2,14 +2,14 @@ package org.eclipse.xtext.xtend2.tests.smoke
 
 class Case_1 {
 
-	testFunction1() {
+	def testFunction1() {
 		42
 	}
 	
-	testFunction2() 
+	def testFunction2() 
 		42
 		
-	Integer testFunction3() 
+	def Integer testFunction3() 
 		42
 		
 }

@@ -2,14 +2,14 @@ package org.eclipse.xtext.xtend2.tests.smoke
 
 class Case_2 {
 
-	aOrB(String a, String b) {
+	def aOrB(String a, String b) {
 		if (a.isNullOrEmpty()) 
 			b
 		else
 			a 
 	}
 	
-	returnInIf() {
+	def returnInIf() {
 		if ('x'!='x') return 'xx' else return 'yy'
 	}
 

@@ -11,9 +11,9 @@ class Case_5 {
 //	ArrayList as list
 	
 	@Inject extension
-	String
+	String s
 
-	boolean something(int i) {
+	def boolean something(int i) {
 	  if (i.indexOf() == 0) {
 //	    return list.contains(i)
 	    return myList.contains(i)
