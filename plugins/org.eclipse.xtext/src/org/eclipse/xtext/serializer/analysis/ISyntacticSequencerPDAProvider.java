@@ -88,7 +88,7 @@ public interface ISyntacticSequencerPDAProvider {
 		ISynAbsorberState getSource();
 	}
 
-	public class SynAbsorberNfaAdapter implements INfaAdapter<ISynAbsorberState, Iterable<ISynAbsorberState>> {
+	public class SynAbsorberNfaAdapter implements INfaAdapter<ISynAbsorberState> {
 
 		protected ISynAbsorberState start;
 		protected ISynAbsorberState stop;

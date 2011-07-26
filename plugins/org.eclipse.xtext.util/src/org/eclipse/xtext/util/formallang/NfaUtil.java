@@ -44,7 +44,7 @@ public class NfaUtil {
 		}
 	}
 
-	public static class NFAImpl<STATE> implements INfaAdapter<STATE, List<STATE>> {
+	public static class NFAImpl<STATE> implements INfaAdapter<STATE> {
 
 		protected final List<STATE> startStates;
 		protected final List<STATE> finalStates;
@@ -77,9 +77,8 @@ public class NfaUtil {
 		}
 	}
 
-	protected <SRCSTATE, DSTSTATE, ITERABLE extends Iterable<? extends DSTSTATE>> DSTSTATE create(
-			INfaAdapter<SRCSTATE, ? extends Iterable<SRCSTATE>> source, SRCSTATE src,
-			INfaFactory<DSTSTATE, ITERABLE, SRCSTATE> factory, Map<SRCSTATE, DSTSTATE> src2dst) {
+	protected <SRCSTATE, DSTSTATE> DSTSTATE create(INfaAdapter<SRCSTATE> source, SRCSTATE src,
+			INfaFactory<DSTSTATE, SRCSTATE> factory, Map<SRCSTATE, DSTSTATE> src2dst) {
 		DSTSTATE dst = src2dst.get(src);
 		if (dst != null)
 			return dst;
@@ -92,9 +91,8 @@ public class NfaUtil {
 		return dst;
 	}
 
-	public <SRCSTATE, DSTSTATE, ITERABLE extends Iterable<? extends DSTSTATE>> INfaAdapter<DSTSTATE, ITERABLE> create(
-			INfaAdapter<SRCSTATE, ? extends Iterable<SRCSTATE>> source,
-			INfaFactory<DSTSTATE, ITERABLE, SRCSTATE> factory) {
+	public <SRCSTATE, DSTSTATE> INfaAdapter<DSTSTATE> create(INfaAdapter<SRCSTATE> source,
+			INfaFactory<DSTSTATE, SRCSTATE> factory) {
 		List<DSTSTATE> starts = Lists.newArrayList();
 		List<DSTSTATE> stops = Lists.newArrayList();
 		Map<SRCSTATE, DSTSTATE> src2dst = Maps.newHashMap();
@@ -117,7 +115,7 @@ public class NfaUtil {
 		return factory.createNfa(starts, stops);
 	}
 
-	public <STATE> INfaAdapter<STATE, List<STATE>> inverse(INfaAdapter<STATE, ? extends Iterable<STATE>> nfa) {
+	public <STATE> INfaAdapter<STATE> inverse(INfaAdapter<STATE> nfa) {
 		Map<STATE, List<STATE>> inverseMap = Maps.newHashMap();
 		for (STATE start : nfa.getStartStates())
 			collectedInverseMap(nfa, start, inverseMap, Sets.<STATE> newHashSet());
@@ -125,8 +123,8 @@ public class NfaUtil {
 
 	}
 
-	protected <STATE> void collectedInverseMap(INfaAdapter<STATE, ? extends Iterable<STATE>> nfa, STATE state,
-			Map<STATE, List<STATE>> inverseMap, Set<STATE> visited) {
+	protected <STATE> void collectedInverseMap(INfaAdapter<STATE> nfa, STATE state, Map<STATE, List<STATE>> inverseMap,
+			Set<STATE> visited) {
 		if (!visited.add(state))
 			return;
 		for (STATE follower : nfa.getFollowers(state)) {
@@ -138,7 +136,7 @@ public class NfaUtil {
 		}
 	}
 
-	public <STATE> Map<STATE, Integer> distanceToFinalStateMap(INfaAdapter<STATE, ? extends Iterable<STATE>> nfa) {
+	public <STATE> Map<STATE, Integer> distanceToFinalStateMap(INfaAdapter<STATE> nfa) {
 		final Set<STATE> stops = Sets.newHashSet(nfa.getFinalStates());
 		return distanceToStateMap(nfa, new Predicate<STATE>() {
 			public boolean apply(STATE input) {
@@ -147,21 +145,19 @@ public class NfaUtil {
 		});
 	}
 
-	public <STATE> Map<STATE, Integer> distanceToStateMap(INfaAdapter<STATE, ? extends Iterable<STATE>> nfa,
-			Predicate<STATE> matches) {
+	public <STATE> Map<STATE, Integer> distanceToStateMap(INfaAdapter<STATE> nfa, Predicate<STATE> matches) {
 		return distanceFromStateMap(inverse(nfa), matches);
 	}
 
-	public <STATE> Map<STATE, Integer> distanceFromStateMap(INfaAdapter<STATE, ? extends Iterable<STATE>> nfa,
-			Predicate<STATE> matches) {
+	public <STATE> Map<STATE, Integer> distanceFromStateMap(INfaAdapter<STATE> nfa, Predicate<STATE> matches) {
 		Map<STATE, Integer> distances = Maps.newHashMap();
 		for (STATE start : nfa.getStartStates())
 			collectDistancesForm(nfa, start, Integer.MAX_VALUE, distances, matches);
 		return distances;
 	}
 
-	protected <STATE> void collectDistancesForm(INfaAdapter<STATE, ? extends Iterable<STATE>> nfa, STATE from,
-			int distance, Map<STATE, Integer> distances, Predicate<STATE> matches) {
+	protected <STATE> void collectDistancesForm(INfaAdapter<STATE> nfa, STATE from, int distance,
+			Map<STATE, Integer> distances, Predicate<STATE> matches) {
 		Integer dist = distances.get(from);
 		if (dist != null && dist <= distance)
 			return;
@@ -194,7 +190,7 @@ public class NfaUtil {
 		}
 	}
 
-	public <STATE, RESULT> List<RESULT> backtrack(INfaAdapter<STATE, ? extends Iterable<STATE>> nfa, RESULT initial,
+	public <STATE, RESULT> List<RESULT> backtrack(INfaAdapter<STATE> nfa, RESULT initial,
 			BacktrackHandler<STATE, RESULT> handler) {
 		Stack<BacktrackingItem<RESULT, STATE>> trace = new Stack<NfaUtil.BacktrackingItem<RESULT, STATE>>();
 		trace.push(new BacktrackingItem<RESULT, STATE>(initial, nfa.getStartStates()));
@@ -222,8 +218,7 @@ public class NfaUtil {
 		return null;
 	}
 
-	public <STATE extends Comparable<STATE>> INfaAdapter<STATE, ? extends List<STATE>> sort(
-			INfaAdapter<STATE, ? extends Iterable<STATE>> nfa) {
+	public <STATE extends Comparable<STATE>> INfaAdapter<STATE> sort(INfaAdapter<STATE> nfa) {
 		Map<STATE, List<STATE>> followerMap = Maps.newHashMap();
 		for (STATE state : new NfaUtil().collect(nfa)) {
 			ArrayList<STATE> followers = Lists.newArrayList(nfa.getFollowers(state));
@@ -235,13 +230,12 @@ public class NfaUtil {
 		return new NFAImpl<STATE>(starts, stops, followerMap);
 	}
 
-	public <STATE, COMP extends Comparable<COMP>> INfaAdapter<STATE, ? extends List<STATE>> sort(
-			INfaAdapter<STATE, ? extends Iterable<STATE>> nfa, Map<STATE, COMP> comparator) {
+	public <STATE, COMP extends Comparable<COMP>> INfaAdapter<STATE> sort(INfaAdapter<STATE> nfa,
+			Map<STATE, COMP> comparator) {
 		return sort(nfa, new MappedComparator<STATE, COMP>(comparator));
 	}
 
-	public <STATE> INfaAdapter<STATE, ? extends List<STATE>> sort(INfaAdapter<STATE, ? extends Iterable<STATE>> nfa,
-			Comparator<STATE> comparator) {
+	public <STATE> INfaAdapter<STATE> sort(INfaAdapter<STATE> nfa, Comparator<STATE> comparator) {
 		Map<STATE, List<STATE>> followerMap = Maps.newHashMap();
 		for (STATE state : new NfaUtil().collect(nfa)) {
 			ArrayList<STATE> followers = Lists.newArrayList(nfa.getFollowers(state));
@@ -253,39 +247,22 @@ public class NfaUtil {
 		return new NFAImpl<STATE>(starts, stops, followerMap);
 	}
 
-	//	public <STATE extends Comparable<STATE>> void sortInplcae(INfaAdapter<STATE, ? extends List<STATE>> nfa) {
-	//		for (STATE state : collect(nfa))
-	//			Collections.sort(nfa.getFollowers(state));
-	//	}
-	//
-	//	public <STATE> void sortInplcae(INfaAdapter<STATE, ? extends List<STATE>> nfa, Comparator<STATE> comparator) {
-	//		for (STATE state : collect(nfa))
-	//			Collections.sort(nfa.getFollowers(state), comparator);
-	//	}
-	//
-	//	public <STATE, COMP extends Comparable<COMP>> void sortInplace(INfaAdapter<STATE, ? extends List<STATE>> nfa,
-	//			final Map<STATE, COMP> sortBy) {
-	//		Comparator<STATE> comparator = new MappedComparator<STATE, COMP>(sortBy);
-	//		for (STATE state : collect(nfa))
-	//			Collections.sort(nfa.getFollowers(state), comparator);
-	//	}
-
-	public <STATE> Set<STATE> collect(INfaAdapter<STATE, ? extends Iterable<STATE>> nfa) {
+	public <STATE> Set<STATE> collect(INfaAdapter<STATE> nfa) {
 		Set<STATE> result = Sets.newHashSet();
 		for (STATE s : nfa.getStartStates())
 			collect(nfa, s, result);
 		return result;
 	}
 
-	protected <STATE> void collect(INfaAdapter<STATE, ? extends Iterable<STATE>> nfa, STATE state, Set<STATE> visited) {
+	protected <STATE> void collect(INfaAdapter<STATE> nfa, STATE state, Set<STATE> visited) {
 		if (!visited.add(state))
 			return;
 		for (STATE s : nfa.getFollowers(state))
 			collect(nfa, s, visited);
 	}
 
-	protected <STATE> void collectFinalStates(INfaAdapter<STATE, ? extends Iterable<STATE>> nfa, STATE owner,
-			STATE last, Set<STATE> result, Set<STATE> visited, Set<STATE> ends, Predicate<STATE> filter) {
+	protected <STATE> void collectFinalStates(INfaAdapter<STATE> nfa, STATE owner, STATE last, Set<STATE> result,
+			Set<STATE> visited, Set<STATE> ends, Predicate<STATE> filter) {
 		if (!visited.add(owner))
 			return;
 		if (filter.apply(owner))
@@ -296,8 +273,7 @@ public class NfaUtil {
 			collectFinalStates(nfa, follower, last, result, visited, ends, filter);
 	}
 
-	protected <STATE, ITERABLE extends Iterable<? extends STATE>> void collectFollowers(
-			INfaAdapter<STATE, ITERABLE> nfa, STATE owner, Set<STATE> result, Set<STATE> visited,
+	protected <STATE> void collectFollowers(INfaAdapter<STATE> nfa, STATE owner, Set<STATE> result, Set<STATE> visited,
 			Predicate<STATE> filter) {
 		if (!visited.add(owner))
 			return;
@@ -309,9 +285,8 @@ public class NfaUtil {
 			collectFollowers(nfa, follower, result, visited, filter);
 	}
 
-	public <STATE> INfaAdapter<STATE, Set<STATE>> filter(final INfaAdapter<STATE, ? extends Iterable<STATE>> nfa,
-			final Predicate<STATE> filter) {
-		return new INfaAdapter<STATE, Set<STATE>>() {
+	public <STATE> INfaAdapter<STATE> filter(final INfaAdapter<STATE> nfa, final Predicate<STATE> filter) {
+		return new INfaAdapter<STATE>() {
 
 			public Set<STATE> getFinalStates() {
 				return filterFinalStates(nfa, filter);
@@ -351,8 +326,7 @@ public class NfaUtil {
 		};
 	}
 
-	public <STATE> Set<STATE> filterFinalStates(INfaAdapter<STATE, ? extends Iterable<STATE>> nfa,
-			Predicate<STATE> filter) {
+	public <STATE> Set<STATE> filterFinalStates(INfaAdapter<STATE> nfa, Predicate<STATE> filter) {
 		Set<STATE> ends = Sets.newHashSet(nfa.getFinalStates());
 		Set<STATE> result = Sets.newHashSet();
 		for (STATE start : nfa.getStartStates())
@@ -360,15 +334,14 @@ public class NfaUtil {
 		return result;
 	}
 
-	public <STATE, ITERABLE extends Iterable<? extends STATE>> Set<STATE> filterFollowers(
-			INfaAdapter<STATE, ITERABLE> nfa, Iterable<STATE> followers, Predicate<STATE> filter) {
+	public <STATE> Set<STATE> filterFollowers(INfaAdapter<STATE> nfa, Iterable<STATE> followers, Predicate<STATE> filter) {
 		Set<STATE> result = Sets.newHashSet();
 		for (STATE follower : followers)
 			collectFollowers(nfa, follower, result, Sets.<STATE> newHashSet(), filter);
 		return result;
 	}
 
-	public <STATE, ITERABLE extends Iterable<? extends STATE>> STATE find(INfaAdapter<STATE, ITERABLE> nfa,
+	public <STATE, ITERABLE extends Iterable<? extends STATE>> STATE find(INfaAdapter<STATE> nfa,
 			Iterable<STATE> starts, Predicate<STATE> matcher) {
 		Set<STATE> visited = Sets.newHashSet();
 		for (STATE s : starts) {
@@ -379,13 +352,13 @@ public class NfaUtil {
 		return null;
 	}
 
-	public <STATE, ITERABLE extends Iterable<? extends STATE>> boolean canReach(INfaAdapter<STATE, ITERABLE> nfa,
-			STATE state, Predicate<STATE> matcher) {
+	public <STATE, ITERABLE extends Iterable<? extends STATE>> boolean canReach(INfaAdapter<STATE> nfa, STATE state,
+			Predicate<STATE> matcher) {
 		return find(nfa, Collections.singleton(state), matcher) != null;
 	}
 
-	public <STATE, ITERABLE extends Iterable<? extends STATE>> boolean canReachFinalState(
-			INfaAdapter<STATE, ITERABLE> nfa, STATE state) {
+	public <STATE, ITERABLE extends Iterable<? extends STATE>> boolean canReachFinalState(INfaAdapter<STATE> nfa,
+			STATE state) {
 		final Set<STATE> stops = Sets.newHashSet(nfa.getFinalStates());
 		return find(nfa, Collections.singleton(state), new Predicate<STATE>() {
 			public boolean apply(STATE input) {
@@ -394,12 +367,12 @@ public class NfaUtil {
 		}) != null;
 	}
 
-	public <STATE> STATE find(INfaAdapter<STATE, ? extends Iterable<STATE>> nfa, Predicate<STATE> matcher) {
+	public <STATE> STATE find(INfaAdapter<STATE> nfa, Predicate<STATE> matcher) {
 		return find(nfa, nfa.getStartStates(), matcher);
 	}
 
-	protected <STATE, ITERABLE extends Iterable<? extends STATE>> STATE find(INfaAdapter<STATE, ITERABLE> nfa,
-			STATE state, Predicate<STATE> matcher, Set<STATE> visited) {
+	protected <STATE, ITERABLE extends Iterable<? extends STATE>> STATE find(INfaAdapter<STATE> nfa, STATE state,
+			Predicate<STATE> matcher, Set<STATE> visited) {
 		if (!visited.add(state))
 			return null;
 		if (matcher.apply(state))

@@ -111,7 +111,7 @@ public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnostic
 	}
 
 	public ISerializationDiagnostic createBacktrackingFailedDiagnostic(EObject semanticObject, EObject context,
-			INfaAdapter<ISemState, List<ISemState>> nfa) {
+			INfaAdapter<ISemState> nfa) {
 		String grammar = new NfaToGrammar().nfaToGrammar(nfa, new Function<ISemState, AbstractElement>() {
 			public AbstractElement apply(ISemState from) {
 				return from.getAssignedGrammarElement();

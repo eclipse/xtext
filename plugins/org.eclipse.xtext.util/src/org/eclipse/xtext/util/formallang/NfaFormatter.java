@@ -193,7 +193,7 @@ public class NfaFormatter {
 
 	}
 
-	public <STATE, ITERABLE extends Iterable<? extends STATE>> String format(INfaAdapter<STATE, ITERABLE> nfa) {
+	public <STATE> String format(INfaAdapter<STATE> nfa) {
 		Map<STATE, Integer> names = Maps.newLinkedHashMap();
 		List<Node> nodes = Lists.newArrayList();
 		for (STATE start : nfa.getStartStates())
@@ -232,8 +232,8 @@ public class NfaFormatter {
 
 	}
 
-	protected <STATE, ITERABLE extends Iterable<? extends STATE>> Node createNodes(INfaAdapter<STATE, ITERABLE> nfa,
-			STATE state, Map<STATE, Integer> names, Wrapper<Integer> lastName) {
+	protected <STATE> Node createNodes(INfaAdapter<STATE> nfa, STATE state, Map<STATE, Integer> names,
+			Wrapper<Integer> lastName) {
 		Integer name = names.get(state);
 		if (name != null)
 			return new Node(String.valueOf(name), true);
