@@ -39,11 +39,11 @@ public class NfaToGrammarTest extends AbstractXtextTests {
 		}
 	}
 
-	private static class NFA implements INfaAdapter<S>, ITokenAdapter<S, String> {
+	private static class SimpleNFA implements Nfa<S>, ITokenAdapter<S, String> {
 		private S start;
 		private S stop;
 
-		public NFA(S start, S stop) {
+		public SimpleNFA(S start, S stop) {
 			super();
 			this.start = start;
 			this.stop = stop;
@@ -53,7 +53,7 @@ public class NfaToGrammarTest extends AbstractXtextTests {
 			return owner.name;
 		}
 
-		public S getStartStates() {
+		public S getStart() {
 			return start;
 		}
 
@@ -61,7 +61,7 @@ public class NfaToGrammarTest extends AbstractXtextTests {
 			return node.followers;
 		}
 
-		public S getFinalStates() {
+		public S getStop() {
 			return stop;
 		}
 
@@ -69,7 +69,7 @@ public class NfaToGrammarTest extends AbstractXtextTests {
 
 	private String nfa2g(S starts, S stops) {
 		NfaToGrammar nfa2g = new NfaToGrammar();
-		return nfa2g.nfaToGrammar(new NFA(starts, stops), new GrammarStringFactory<String>());
+		return nfa2g.nfaToGrammar(new SimpleNFA(starts, stops), new GrammarStringFactory<String>());
 	}
 
 	public void testSimple() {
