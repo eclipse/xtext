@@ -277,29 +277,29 @@ public class NfaUtil {
 		};
 	}
 
-	public <S, TOKEN> ITokenNfaAdapter<S, TOKEN> filter(final ITokenNfaAdapter<S, TOKEN> nfa, final Predicate<S> filter) {
-		return new ITokenNfaAdapter<S, TOKEN>() {
-
-			public S getStop() {
-				//				return filterFinalStates(nfa, filter);
-				return nfa.getStop();
-			}
-
-			public Iterable<S> getFollowers(S node) {
-				return filterFollowers(nfa, nfa.getFollowers(node), filter);
-			}
-
-			public S getStart() {
-				//				return filterFollowers(nfa, nfa.getStartStates(), filter);
-				return nfa.getStart();
-			}
-
-			public TOKEN getToken(S owner) {
-				return filter.apply(owner) ? nfa.getToken(owner) : null;
-			}
-
-		};
-	}
+	//	public <S, TOKEN> ITokenNfaAdapter<S, TOKEN> filter(final ITokenNfaAdapter<S, TOKEN> nfa, final Predicate<S> filter) {
+	//		return new ITokenNfaAdapter<S, TOKEN>() {
+	//
+	//			public S getStop() {
+	//				//				return filterFinalStates(nfa, filter);
+	//				return nfa.getStop();
+	//			}
+	//
+	//			public Iterable<S> getFollowers(S node) {
+	//				return filterFollowers(nfa, nfa.getFollowers(node), filter);
+	//			}
+	//
+	//			public S getStart() {
+	//				//				return filterFollowers(nfa, nfa.getStartStates(), filter);
+	//				return nfa.getStart();
+	//			}
+	//
+	//			public TOKEN getToken(S owner) {
+	//				return filter.apply(owner) ? nfa.getToken(owner) : null;
+	//			}
+	//
+	//		};
+	//	}
 
 	//	public <S> Set<S> filterFinalStates(INfaAdapter<S> nfa, Predicate<S> filter) {
 	//		Set<S> ends = Sets.newHashSet(nfa.getFinalStates());

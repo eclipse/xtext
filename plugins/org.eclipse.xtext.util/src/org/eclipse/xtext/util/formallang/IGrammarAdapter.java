@@ -10,13 +10,15 @@ package org.eclipse.xtext.util.formallang;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface IGrammarAdapter<ELEMENT, TOKEN> extends ITokenAdapter<ELEMENT, TOKEN> {
+public interface IGrammarAdapter<ELEMENT, TOKEN> {
 
 	Iterable<ELEMENT> getAlternativeChildren(ELEMENT ele);
 
 	ELEMENT getParent(ELEMENT ele);
 
 	Iterable<ELEMENT> getSequentialChildren(ELEMENT ele);
+
+	TOKEN getToken(ELEMENT owner);
 
 	Iterable<ELEMENT> getUnorderedChildren(ELEMENT ele);
 

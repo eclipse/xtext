@@ -503,14 +503,14 @@ public class NfaToGrammar {
 		//		return null;
 	}
 
-	public <ELEMENT, STATE, TOKEN, N extends Nfa<STATE> & ITokenAdapter<STATE, TOKEN>> ELEMENT nfaToGrammar(
-			final N nfa, IGrammarFactory<ELEMENT, TOKEN> grammarFactory) {
-		return nfaToGrammar(nfa, new Function<STATE, TOKEN>() {
-			public TOKEN apply(STATE from) {
-				return nfa.getToken(from);
-			}
-		}, grammarFactory);
-	}
+	//	public <ELEMENT, STATE, TOKEN, N extends Nfa<STATE> & ITokenAdapter<STATE, TOKEN>> ELEMENT nfaToGrammar(
+	//			final N nfa, IGrammarFactory<ELEMENT, TOKEN> grammarFactory) {
+	//		return nfaToGrammar(nfa, new Function<STATE, TOKEN>() {
+	//			public TOKEN apply(STATE from) {
+	//				return nfa.getToken(from);
+	//			}
+	//		}, grammarFactory);
+	//	}
 
 	protected <T> void splitState(StateAlias<T> state) {
 		if (state.getIncoming().size() >= state.getOutgoing().size()) {
@@ -542,8 +542,8 @@ public class NfaToGrammar {
 		state.getIncoming().clear();
 	}
 
-	protected <STATE, TOKEN> StateAlias<TOKEN> toAlias(Nfa<STATE> nfa, Function<STATE, TOKEN> state2token,
-			STATE state, StateAlias<TOKEN> stop, Map<STATE, StateAlias<TOKEN>> cache) {
+	protected <STATE, TOKEN> StateAlias<TOKEN> toAlias(Nfa<STATE> nfa, Function<STATE, TOKEN> state2token, STATE state,
+			StateAlias<TOKEN> stop, Map<STATE, StateAlias<TOKEN>> cache) {
 		StateAlias<TOKEN> result = cache.get(state);
 		if (result != null)
 			return result;
