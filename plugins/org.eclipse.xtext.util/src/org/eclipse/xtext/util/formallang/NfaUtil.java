@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.util.formallang;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -25,22 +26,44 @@ import com.google.inject.internal.Maps;
  */
 public class NfaUtil {
 
+	public static class MappedComparator<STATE, COMPARABLE extends Comparable<COMPARABLE>> implements Comparator<STATE> {
+		private final Map<STATE, COMPARABLE> sortBy;
+
+		private MappedComparator(Map<STATE, COMPARABLE> sortBy) {
+			this.sortBy = sortBy;
+		}
+
+		public int compare(STATE o1, STATE o2) {
+			COMPARABLE c1 = sortBy.get(o1);
+			if (c1 == null)
+				return 1;
+			COMPARABLE c2 = sortBy.get(o2);
+			if (c2 == null)
+				return -1;
+			return c1.compareTo(c2);
+		}
+	}
+
 	public static class NFAImpl<STATE> implements INfaAdapter<STATE, List<STATE>> {
 
-		protected List<STATE> startStates;
-		protected List<STATE> finalStates;
-		protected Map<STATE, List<STATE>> followers;
+		protected final List<STATE> startStates;
+		protected final List<STATE> finalStates;
+		protected final Map<STATE, List<STATE>> followers;
 
 		public List<STATE> getFinalStates() {
 			return finalStates;
 		}
 
+		public NFAImpl(List<STATE> startStates, List<STATE> finalStates, Map<STATE, List<STATE>> followers) {
+			this.startStates = startStates;
+			this.finalStates = finalStates;
+			this.followers = followers;
+		}
+
 		public NFAImpl(Iterable<STATE> startStates, Iterable<STATE> finalStates, Map<STATE, List<STATE>> followers) {
 			super();
-			this.startStates = startStates instanceof List<?> ? (List<STATE>) startStates : Lists
-					.newArrayList(startStates);
-			this.finalStates = finalStates instanceof List<?> ? (List<STATE>) finalStates : Lists
-					.newArrayList(finalStates);
+			this.startStates = Lists.newArrayList(startStates);
+			this.finalStates = Lists.newArrayList(finalStates);
 			this.followers = followers;
 		}
 
@@ -199,32 +222,53 @@ public class NfaUtil {
 		return null;
 	}
 
-	public <STATE extends Comparable<STATE>> void sortInplcae(INfaAdapter<STATE, ? extends List<STATE>> nfa) {
-		for (STATE state : collect(nfa))
-			Collections.sort(nfa.getFollowers(state));
+	public <STATE extends Comparable<STATE>> INfaAdapter<STATE, ? extends List<STATE>> sort(
+			INfaAdapter<STATE, ? extends Iterable<STATE>> nfa) {
+		Map<STATE, List<STATE>> followerMap = Maps.newHashMap();
+		for (STATE state : new NfaUtil().collect(nfa)) {
+			ArrayList<STATE> followers = Lists.newArrayList(nfa.getFollowers(state));
+			Collections.sort(followers);
+			followerMap.put(state, followers);
+		}
+		List<STATE> starts = Lists.newArrayList(nfa.getStartStates());
+		List<STATE> stops = Lists.newArrayList(nfa.getFinalStates());
+		return new NFAImpl<STATE>(starts, stops, followerMap);
 	}
 
-	public <STATE> void sortInplcae(INfaAdapter<STATE, ? extends List<STATE>> nfa, Comparator<STATE> comparator) {
-		for (STATE state : collect(nfa))
-			Collections.sort(nfa.getFollowers(state), comparator);
+	public <STATE, COMP extends Comparable<COMP>> INfaAdapter<STATE, ? extends List<STATE>> sort(
+			INfaAdapter<STATE, ? extends Iterable<STATE>> nfa, Map<STATE, COMP> comparator) {
+		return sort(nfa, new MappedComparator<STATE, COMP>(comparator));
 	}
 
-	public <STATE, COMP extends Comparable<COMP>> void sortInplace(INfaAdapter<STATE, ? extends List<STATE>> nfa,
-			final Map<STATE, COMP> sortBy) {
-		Comparator<STATE> comparator = new Comparator<STATE>() {
-			public int compare(STATE o1, STATE o2) {
-				COMP c1 = sortBy.get(o1);
-				if (c1 == null)
-					return 1;
-				COMP c2 = sortBy.get(o2);
-				if (c2 == null)
-					return -1;
-				return c1.compareTo(c2);
-			}
-		};
-		for (STATE state : collect(nfa))
-			Collections.sort(nfa.getFollowers(state), comparator);
+	public <STATE> INfaAdapter<STATE, ? extends List<STATE>> sort(INfaAdapter<STATE, ? extends Iterable<STATE>> nfa,
+			Comparator<STATE> comparator) {
+		Map<STATE, List<STATE>> followerMap = Maps.newHashMap();
+		for (STATE state : new NfaUtil().collect(nfa)) {
+			ArrayList<STATE> followers = Lists.newArrayList(nfa.getFollowers(state));
+			Collections.sort(followers, comparator);
+			followerMap.put(state, followers);
+		}
+		List<STATE> starts = Lists.newArrayList(nfa.getStartStates());
+		List<STATE> stops = Lists.newArrayList(nfa.getFinalStates());
+		return new NFAImpl<STATE>(starts, stops, followerMap);
 	}
+
+	//	public <STATE extends Comparable<STATE>> void sortInplcae(INfaAdapter<STATE, ? extends List<STATE>> nfa) {
+	//		for (STATE state : collect(nfa))
+	//			Collections.sort(nfa.getFollowers(state));
+	//	}
+	//
+	//	public <STATE> void sortInplcae(INfaAdapter<STATE, ? extends List<STATE>> nfa, Comparator<STATE> comparator) {
+	//		for (STATE state : collect(nfa))
+	//			Collections.sort(nfa.getFollowers(state), comparator);
+	//	}
+	//
+	//	public <STATE, COMP extends Comparable<COMP>> void sortInplace(INfaAdapter<STATE, ? extends List<STATE>> nfa,
+	//			final Map<STATE, COMP> sortBy) {
+	//		Comparator<STATE> comparator = new MappedComparator<STATE, COMP>(sortBy);
+	//		for (STATE state : collect(nfa))
+	//			Collections.sort(nfa.getFollowers(state), comparator);
+	//	}
 
 	public <STATE> Set<STATE> collect(INfaAdapter<STATE, ? extends Iterable<STATE>> nfa) {
 		Set<STATE> result = Sets.newHashSet();
