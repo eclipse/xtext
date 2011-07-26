@@ -10,95 +10,15 @@ package org.eclipse.xtext.util.formallang;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import junit.framework.TestCase;
 
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Multimap;
-import com.google.inject.internal.Maps;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class PdaUtilTest extends TestCase {
-
-	private class PDA implements Pda<String, String> {
-
-		private String start;
-		private String stop;
-		private final Multimap<String, String> followers = HashMultimap.create();
-		private final Map<String, String> pushs = Maps.newHashMap();
-		private final Map<String, String> pops = Maps.newHashMap();
-
-		public class State {
-			private String name;
-
-			public State(String name) {
-				super();
-				this.name = name;
-			}
-
-			public State to(String... followers) {
-				for (String follower : followers)
-					PDA.this.followers.put(name, follower);
-				return this;
-			}
-
-			public State push(String push) {
-				PDA.this.pushs.put(name, push);
-				return this;
-			}
-
-			public State pop(String pop) {
-				PDA.this.pops.put(name, pop);
-				return this;
-			}
-
-			public State start() {
-				if (PDA.this.start != null)
-					throw new IllegalStateException("start is already set");
-				PDA.this.start = name;
-				return this;
-			}
-
-			public State stop() {
-				if (PDA.this.stop != null)
-					throw new IllegalStateException("stop is already set");
-				PDA.this.stop = name;
-				return this;
-			}
-		}
-
-		public State state(String name) {
-			return new State(name);
-		}
-
-		public String getStart() {
-			return start;
-		}
-
-		public Iterable<String> getFollowers(String node) {
-			return followers.get(node);
-		}
-
-		public String getStop() {
-			return stop;
-		}
-
-		public String getPush(String state) {
-			return pushs.get(state);
-		}
-
-		public String getPop(String state) {
-			return pops.get(state);
-		}
-	}
-
-	private PDA newPDA() {
-		return new PDA();
-	}
 
 	private PdaUtil util = new PdaUtil();
 
@@ -114,68 +34,58 @@ public class PdaUtilTest extends TestCase {
 	}
 
 	public void testShortestPathSimple() {
-		PDA pda = newPDA();
-		pda.state("A").start().to("B");
-		pda.state("B").to("C");
-		pda.state("C").stop();
+		StringPda pda = new StringPda("A", "C");
+		pda.state("A").followedBy("B");
+		pda.state("B").followedBy("C");
 		assertEquals("[A, B, C]", util.shortestPathTo(pda, newStack(), "C"));
 	}
 
-	//	public void testShortestPathSingleState() {
-	//		PDA pda = newPDA();
-	//		pda.state("A").start().stop();
-	//		assertEquals("[A]", util.shortestPathTo(pda, newStack(), "A"));
-	//	}
-
 	public void testShortestPathLoop() {
-		PDA pda = newPDA();
-		pda.state("A").start().to("B");
-		pda.state("B").to("C", "B");
-		pda.state("C").stop().to("B");
+		StringPda pda = new StringPda("A", "C");
+		pda.state("A").followedBy("B");
+		pda.state("B").followedBy("C", "B");
+		pda.state("C").followedBy("B");
 		assertEquals("[A, B, C]", util.shortestPathTo(pda, newStack(), "C"));
 	}
 
 	public void testShortestPathStackSimple() {
-		PDA pda = newPDA();
-		pda.state("A").start().to("B");
-		pda.state("B").to("C").pop("X");
-		pda.state("C").stop();
+		StringPda pda = new StringPda("A", "C");
+		pda.state("A").followedBy("B");
+		pda.state("B").followedBy("C").pop("X");
 		assertEquals("[A, B, C]", util.shortestPathTo(pda, newStack("X"), "C"));
 		assertEquals("null", util.shortestPathTo(pda, newStack(), "C"));
 	}
 
 	public void testShortestPathStackSimplePop() {
-		PDA pda = newPDA();
-		pda.state("A").start().to("B").pop("X");
-		pda.state("B").to("C").pop("Y");
-		pda.state("C").stop().pop("Z");
+		StringPda pda = new StringPda("A", "C");
+		pda.state("A").followedBy("B").pop("X");
+		pda.state("B").followedBy("C").pop("Y");
+		pda.state("C").pop("Z");
 		assertEquals("[A, B, C]", util.shortestPathTo(pda, newStack("Z", "Y"), "C"));
 		assertEquals("[A, B, C]", util.shortestPathTo(pda, newStack("Y"), "C"));
 	}
 
 	public void testShortestPathStackSimplePopLoop() {
-		PDA pda = newPDA();
-		pda.state("A").start().to("B", "A").pop("X");
-		pda.state("B").to("C", "B").pop("Y");
-		pda.state("C").stop().pop("Z");
+		StringPda pda = new StringPda("A", "C");
+		pda.state("A").followedBy("B", "A").pop("X");
+		pda.state("B").followedBy("C", "B").pop("Y");
+		pda.state("C").pop("Z");
 		assertEquals("[A, A, A, B, C]", util.shortestPathTo(pda, newStack("Y", "X", "X"), "C"));
 		assertEquals("[A, B, C]", util.shortestPathTo(pda, newStack("Y"), "C"));
 	}
 
 	public void testShortestStackemptyingPathStackSimplePopLoop() {
-		PDA pda = newPDA();
-		pda.state("A").start().to("B");
-		pda.state("B").to("C", "B").pop("Y");
-		pda.state("C").stop();
+		StringPda pda = new StringPda("A", "C");
+		pda.state("A").followedBy("B");
+		pda.state("B").followedBy("C", "B").pop("Y");
 		assertEquals("[A, B, B, C]", util.shortestStackpruningPathTo(pda, newStack("Y", "Y"), "C"));
 	}
 
 	public void testShortestStackemptyingPathTwoLoops() {
-		PDA pda = newPDA();
-		pda.state("A").start().to("B");
-		pda.state("B").to("C", "B").push("Y");
-		pda.state("C").to("D", "C").pop("Y");
-		pda.state("D").stop();
+		StringPda pda = new StringPda("A", "D");
+		pda.state("A").followedBy("B");
+		pda.state("B").followedBy("C", "B").push("Y");
+		pda.state("C").followedBy("D", "C").pop("Y");
 		assertEquals("[A, B, C, D]", util.shortestStackpruningPathTo(pda, newStack(), "D"));
 		assertEquals("[A, B, C, C, D]", util.shortestStackpruningPathTo(pda, newStack("Y"), "D"));
 		assertEquals("[A, B, C, C, C, D]", util.shortestStackpruningPathTo(pda, newStack("Y", "Y"), "D"));
@@ -189,9 +99,9 @@ public class PdaUtilTest extends TestCase {
 
 	//	public void testShortestStackemptyingPathLoops1() {
 	//		PDA pda = newPDA();
-	//		pda.state("A").start().to("B");
-	//		pda.state("B").to("C").pop("X");
-	//		pda.state("C").to("D", "C").pop("Y");
+	//		pda.state("A").start().followedBy("B");
+	//		pda.state("B").followedBy("C").pop("X");
+	//		pda.state("C").followedBy("D", "C").pop("Y");
 	//		pda.state("D").stop();
 	//		assertEquals("[A, B, C, D]", util.shortestStackpruningPathTo(pda, newStack(), "D"));
 	//		assertEquals("[A, B, C, C, D]", util.shortestStackpruningPathTo(pda, newStack("Y"), "D"));
