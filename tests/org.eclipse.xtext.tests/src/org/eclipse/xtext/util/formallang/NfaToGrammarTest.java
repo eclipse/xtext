@@ -7,339 +7,194 @@
  *******************************************************************************/
 package org.eclipse.xtext.util.formallang;
 
-import java.util.List;
-
 import org.eclipse.xtext.junit.AbstractXtextTests;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Lists;
+import com.google.common.base.Functions;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class NfaToGrammarTest extends AbstractXtextTests {
 
-	private static class S {
-		private String name;
-		private List<S> followers = Lists.newArrayList();
-
-		protected S(String name, S... s) {
-			super();
-			this.name = name;
-			add(s);
-		}
-
-		@Override
-		public String toString() {
-			return name;
-		}
-
-		public void add(S... s) {
-			for (S x : s)
-				followers.add(x);
-		}
-	}
-
-	private static class S2Token implements Function<S, String> {
-		public String apply(S from) {
-			return from.name;
-		}
-	}
-
-	private static class SimpleNFA implements Nfa<S> {
-		private S start;
-		private S stop;
-
-		public SimpleNFA(S start, S stop) {
-			super();
-			this.start = start;
-			this.stop = stop;
-		}
-
-		public S getStart() {
-			return start;
-		}
-
-		public Iterable<S> getFollowers(S node) {
-			return node.followers;
-		}
-
-		public S getStop() {
-			return stop;
-		}
-
-	}
-
-	private String nfa2g(S starts, S stops) {
+	private String nfa2g(Nfa<String> nfa) {
 		NfaToGrammar nfa2g = new NfaToGrammar();
-		return nfa2g.nfaToGrammar(new SimpleNFA(starts, stops), new S2Token(), new GrammarStringFactory<String>());
+		return nfa2g.nfaToGrammar(nfa, Functions.<String> identity(), new GrammarStringFactory<String>());
 	}
 
 	public void testSimple() {
-		S start = new S("start");
-		S stop = new S("stop");
-		start.add(stop);
-		assertEquals("start stop", nfa2g(start, stop));
+		StringNfa nfa = new StringNfa("start", "stop");
+		nfa.start().followedBy("stop");
+		assertEquals("start stop", nfa2g(nfa));
 	}
 
 	public void testSimpleOne() {
-		S start = new S("start");
-		S stop = new S("stop");
-		start.add(new S("x", stop));
-		assertEquals("start x stop", nfa2g(start, stop));
+		StringNfa nfa = new StringNfa("start", "stop");
+		nfa.start().followedBy("x");
+		nfa.state("x").followedBy("stop");
+		assertEquals("start x stop", nfa2g(nfa));
 	}
 
 	public void testSimpleOptional() {
-		S start = new S("start");
-		S stop = new S("stop");
-		start.add(new S("x", stop));
-		start.add(stop);
-		assertEquals("start x? stop", nfa2g(start, stop));
+		StringNfa nfa = new StringNfa("start", "stop");
+		nfa.start().followedBy("x", "stop");
+		nfa.state("x").followedBy("stop");
+		assertEquals("start x? stop", nfa2g(nfa));
 	}
 
 	public void testSimpleMany() {
-		S start = new S("start");
-		S stop = new S("stop");
-		S x = new S("x", stop);
-		start.add(x);
-		x.add(x);
-		assertEquals("start x+ stop", nfa2g(start, stop));
+		StringNfa nfa = new StringNfa("start", "stop");
+		nfa.start().followedBy("x");
+		nfa.state("x").followedBy("x", "stop");
+		assertEquals("start x+ stop", nfa2g(nfa));
 	}
 
 	public void testSimpleManyOptional() {
-		S start = new S("start");
-		S stop = new S("stop");
-		S x = new S("x", stop);
-		start.add(x);
-		x.add(x);
-		start.add(stop);
-		assertEquals("start x* stop", nfa2g(start, stop));
+		StringNfa nfa = new StringNfa("start", "stop");
+		nfa.start().followedBy("x", "stop");
+		nfa.state("x").followedBy("x", "stop");
+		assertEquals("start x* stop", nfa2g(nfa));
 	}
 
 	public void testSimpleManyOptional2() {
-		S start = new S("start");
-		S stop = new S("stop");
-		S x = new S("x");
-		S y = new S("y");
-		S z = new S("z");
-		start.add(x, stop);
-		x.add(y);
-		y.add(z);
-		z.add(x, stop);
-		assertEquals("start (x y z)* stop", nfa2g(start, stop));
+		StringNfa nfa = new StringNfa("start", "stop");
+		nfa.start().followedBy("x", "stop");
+		nfa.state("x").followedBy("y");
+		nfa.state("y").followedBy("z");
+		nfa.state("z").followedBy("x", "stop");
+		assertEquals("start (x y z)* stop", nfa2g(nfa));
 	}
 
 	public void testSimpleManyOptional3() {
-		S start = new S("start");
-		S stop = new S("stop");
-		S x = new S("x");
-		S y = new S("y");
-		S z = new S("z");
-		start.add(x, stop);
-		x.add(y, z);
-		y.add(z);
-		z.add(x, z, stop);
-		assertEquals("start (x y? z+)* stop", nfa2g(start, stop));
+		StringNfa nfa = new StringNfa("start", "stop");
+		nfa.start().followedBy("x", "stop");
+		nfa.state("x").followedBy("y", "z");
+		nfa.state("y").followedBy("z");
+		nfa.state("z").followedBy("x", "z", "stop");
+		assertEquals("start (x y? z+)* stop", nfa2g(nfa));
 	}
 
 	public void testAlternative() {
-		S start = new S("start");
-		S stop = new S("stop");
-		S x = new S("x");
-		S y = new S("y");
-		start.add(x, y);
-		x.add(stop);
-		y.add(stop);
-		assertEquals("start (x | y) stop", nfa2g(start, stop));
+		StringNfa nfa = new StringNfa("start", "stop");
+		nfa.start().followedBy("x", "y");
+		nfa.state("x").followedBy("stop");
+		nfa.state("y").followedBy("stop");
+		assertEquals("start (x | y) stop", nfa2g(nfa));
 	}
 
 	public void testAlternative2() {
-		S start = new S("start");
-		S stop = new S("stop");
-		S x = new S("x");
-		S y = new S("y");
-		S z = new S("z");
-		start.add(x, y, z);
-		x.add(stop);
-		y.add(stop);
-		z.add(stop);
-		assertEquals("start (x | y | z) stop", nfa2g(start, stop));
+		StringNfa nfa = new StringNfa("start", "stop");
+		nfa.start().followedBy("x", "y", "z");
+		nfa.state("x").followedBy("stop");
+		nfa.state("y").followedBy("stop");
+		nfa.state("z").followedBy("stop");
+		assertEquals("start (x | y | z) stop", nfa2g(nfa));
 	}
 
 	public void testAlternative3() {
-		S start = new S("start");
-		S stop = new S("stop");
-		S a = new S("a");
-		S b = new S("b");
-		S x = new S("x");
-		S y = new S("y");
-		S z = new S("z");
-		S v = new S("v");
-		S w = new S("w");
-		start.add(x, y, z, v, w);
-		x.add(a);
-		y.add(a);
-		z.add(a);
-		v.add(b);
-		w.add(b);
-		a.add(stop);
-		b.add(stop);
-		assertEquals("start ((v | w) b | (x | y | z) a) stop", nfa2g(start, stop));
+		StringNfa nfa = new StringNfa("start", "stop");
+		nfa.start().followedBy("x", "y", "z", "v", "w");
+		nfa.state("x").followedBy("a");
+		nfa.state("y").followedBy("a");
+		nfa.state("z").followedBy("a");
+		nfa.state("v").followedBy("b");
+		nfa.state("w").followedBy("b");
+		nfa.state("a").followedBy("stop");
+		nfa.state("b").followedBy("stop");
+		assertEquals("start ((v | w) b | (x | y | z) a) stop", nfa2g(nfa));
 	}
 
 	public void testAlternative4() {
-		S start = new S("start");
-		S stop = new S("stop");
-		S x = new S("x");
-		S y = new S("y");
-		start.add(x, y, stop);
-		x.add(stop);
-		y.add(stop);
-		assertEquals("start (x | y)? stop", nfa2g(start, stop));
+		StringNfa nfa = new StringNfa("start", "stop");
+		nfa.start().followedBy("x", "y", "stop");
+		nfa.state("x").followedBy("stop");
+		nfa.state("y").followedBy("stop");
+		assertEquals("start (x | y)? stop", nfa2g(nfa));
 	}
 
 	public void testAlternative5() {
-		S start = new S("start");
-		S stop = new S("stop");
-		S x = new S("x");
-		S y = new S("y");
-		start.add(x, y);
-		x.add(stop, x);
-		y.add(stop);
-		assertEquals("start (x+ | y) stop", nfa2g(start, stop));
+		StringNfa nfa = new StringNfa("start", "stop");
+		nfa.start().followedBy("x", "y");
+		nfa.state("x").followedBy("stop", "x");
+		nfa.state("y").followedBy("stop");
+		assertEquals("start (x+ | y) stop", nfa2g(nfa));
 	}
 
 	public void testAlternative6() {
-		S start = new S("start");
-		S stop = new S("stop");
-		S x = new S("x");
-		S y = new S("y");
-		start.add(x, y, stop);
-		x.add(stop, x);
-		y.add(stop);
-		assertEquals("start (x+ | y)? stop", nfa2g(start, stop));
+		StringNfa nfa = new StringNfa("start", "stop");
+		nfa.start().followedBy("x", "y", "stop");
+		nfa.state("x").followedBy("stop", "x");
+		nfa.state("y").followedBy("stop");
+		assertEquals("start (x+ | y)? stop", nfa2g(nfa));
 	}
 
 	public void testAlternative7() {
-		S start = new S("start");
-		S stop = new S("stop");
-		S a = new S("a");
-		S b = new S("b");
-		S x = new S("x");
-		S y = new S("y");
-		start.add(a, b);
-		a.add(x, y);
-		b.add(x, y);
-		x.add(stop);
-		y.add(stop);
-		assertEquals("start (a | b) (x | y) stop", nfa2g(start, stop));
+		StringNfa nfa = new StringNfa("start", "stop");
+		nfa.start().followedBy("a", "b");
+		nfa.state("a").followedBy("x", "y");
+		nfa.state("b").followedBy("x", "y");
+		nfa.state("x").followedBy("stop");
+		nfa.state("y").followedBy("stop");
+		assertEquals("start (a | b) (x | y) stop", nfa2g(nfa));
 	}
 
 	public void testAlternative8() {
-		S start = new S("start");
-		S stop = new S("stop");
-		S a = new S("a");
-		S b = new S("b");
-		S c = new S("c");
-		S d = new S("d");
-		S x = new S("x");
-		S y = new S("y");
-		start.add(a, b);
-		a.add(c, d);
-		b.add(c, d);
-		c.add(x, y);
-		d.add(x, y);
-		x.add(stop);
-		y.add(stop);
-		assertEquals("start (a | b) (c | d) (x | y) stop", nfa2g(start, stop));
+		StringNfa nfa = new StringNfa("start", "stop");
+		nfa.start().followedBy("a", "b");
+		nfa.state("a").followedBy("c", "d");
+		nfa.state("b").followedBy("c", "d");
+		nfa.state("c").followedBy("x", "y");
+		nfa.state("d").followedBy("x", "y");
+		nfa.state("x").followedBy("stop");
+		nfa.state("y").followedBy("stop");
+		assertEquals("start (a | b) (c | d) (x | y) stop", nfa2g(nfa));
 	}
 
 	public void testSplitStateCycle1() {
-		S start = new S("start");
-		S stop = new S("stop");
-		S x = new S("x");
-		S y = new S("y");
-		start.add(x);
-		x.add(y, stop);
-		y.add(x);
-		assertEquals("start x (y x)* stop", nfa2g(start, stop));
+		StringNfa nfa = new StringNfa("start", "stop");
+		nfa.start().followedBy("x");
+		nfa.state("x").followedBy("stop", "y");
+		nfa.state("y").followedBy("x");
+		assertEquals("start x (y x)* stop", nfa2g(nfa));
 	}
 
 	public void testSplitStateAlternatives1() {
-		S start = new S("start");
-		S stop = new S("stop");
-		S b = new S("b");
-		S c = new S("c");
-		S d = new S("d");
-		S e = new S("e");
-		start.add(b, c);
-		b.add(d, e);
-		c.add(e);
-		d.add(stop);
-		e.add(stop);
-		assertEquals("start (b (d | e) | c e) stop", nfa2g(start, stop));
+		StringNfa nfa = new StringNfa("start", "stop");
+		nfa.start().followedBy("b", "c");
+		nfa.state("b").followedBy("d", "e");
+		nfa.state("c").followedBy("e");
+		nfa.state("d").followedBy("stop");
+		nfa.state("e").followedBy("stop");
+		assertEquals("start (b (d | e) | c e) stop", nfa2g(nfa));
 	}
 
 	public void testSplitStateAlternatives2() {
-		S start = new S("start");
-		S stop = new S("stop");
-		S a = new S("a");
-		S b = new S("b");
-		S c = new S("c");
-		S d = new S("d");
-		S e = new S("e");
-		S f = new S("f");
-		S g = new S("g");
-		start.add(a, b);
-		a.add(c, d);
-		b.add(d, e);
-		c.add(f);
-		d.add(f, g);
-		e.add(g);
-		f.add(stop);
-		g.add(stop);
-		assertEquals("start ((a c f | b e g) | (a | b) d (f | g)) stop", nfa2g(start, stop));
+		StringNfa nfa = new StringNfa("start", "stop");
+		nfa.start().followedBy("a", "b");
+		nfa.state("a").followedBy("c", "d");
+		nfa.state("b").followedBy("d", "e");
+		nfa.state("c").followedBy("f");
+		nfa.state("d").followedBy("f", "g");
+		nfa.state("e").followedBy("g");
+		nfa.state("f").followedBy("stop");
+		nfa.state("g").followedBy("stop");
+		assertEquals("start ((a c f | b e g) | (a | b) d (f | g)) stop", nfa2g(nfa));
 	}
 
 	public void testOptionalChain1() {
-		S start = new S("start");
-		S stop = new S("stop");
-		S x = new S("x");
-		S y = new S("y");
-		start.add(x, y, stop);
-		x.add(y, stop);
-		y.add(stop);
-		assertEquals("start x? y? stop", nfa2g(start, stop));
+		StringNfa nfa = new StringNfa("start", "stop");
+		nfa.start().followedBy("x", "y", "stop");
+		nfa.state("x").followedBy("y", "stop");
+		nfa.state("y").followedBy("stop");
+		assertEquals("start x? y? stop", nfa2g(nfa));
 	}
 
 	public void testOptionalChain2() {
-		S start = new S("start");
-		S stop = new S("stop");
-		S x = new S("x");
-		S y = new S("y");
-		S z = new S("z");
-		start.add(x, y, z, stop);
-		x.add(y, z, stop);
-		y.add(z, stop);
-		z.add(stop);
-		assertEquals("start x? y? z? stop", nfa2g(start, stop));
+		StringNfa nfa = new StringNfa("start", "stop");
+		nfa.start().followedBy("x", "y", "z", "stop");
+		nfa.state("x").followedBy("y", "z", "stop");
+		nfa.state("y").followedBy("z", "stop");
+		nfa.state("z").followedBy("stop");
+		assertEquals("start x? y? z? stop", nfa2g(nfa));
 	}
 
-	//	public void testAmbiguousStart() {
-	//		S start1 = new S("start1");
-	//		S start2 = new S("start2");
-	//		S stop = new S("stop");
-	//		start1.add(stop);
-	//		start2.add(stop);
-	//		assertEquals("(start1 | start2) stop", nfa2g(Lists.newArrayList(start1, start2), stop));
-	//	}
-	//
-	//	public void testAmbiguousStop() {
-	//		S start = new S("start");
-	//		S stop1 = new S("stop");
-	//		S stop2 = new S("stop");
-	//		start.add(stop1);
-	//		start.add(stop2);
-	//		assertEquals("start (stop | stop)", nfa2g(start, Lists.newArrayList(stop1, stop2)));
-	//	}
 }
