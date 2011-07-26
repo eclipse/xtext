@@ -7,15 +7,15 @@ import org.eclipse.emf.ecore.EObject
 
 class Case_6 {
 
-	dispatch transform(EClass model) {
+	def dispatch transform(EClass model) {
 		model.ETypeParameters.map(e|transform(e))
 	}
 	 
-	dispatch transform(EPackage packageDecl) {
+	def dispatch transform(EPackage packageDecl) {
 		packageDecl.eContents.map(e|transform(e))
 	}
 	
-	dispatch transform(EStructuralFeature entity) {
+	def dispatch transform(EStructuralFeature entity) {
 		val inferredType = null
 		newArrayList(inferredType as EObject) 	 
 	}
