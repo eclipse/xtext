@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer.analysis;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -103,16 +102,16 @@ public interface ISyntacticSequencerPDAProvider {
 			});
 		}
 
-		public Iterable<ISynAbsorberState> getFinalStates() {
-			return Collections.singleton(stop);
+		public ISynAbsorberState getFinalStates() {
+			return stop;
 		}
 
 		public Iterable<ISynAbsorberState> getFollowers(ISynAbsorberState node) {
 			return node.getOutAbsorbers();
 		}
 
-		public Iterable<ISynAbsorberState> getStartStates() {
-			return Collections.singleton(start);
+		public ISynAbsorberState getStartStates() {
+			return start;
 		}
 
 	}

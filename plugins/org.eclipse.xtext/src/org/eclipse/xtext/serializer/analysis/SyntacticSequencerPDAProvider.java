@@ -70,8 +70,8 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			this.navigable = navigable;
 		}
 
-		public Iterable<ISynState> getFinalStates() {
-			return Collections.<ISynState> singleton(navigable.getTarget());
+		public ISynState getFinalStates() {
+			return navigable.getTarget();
 		}
 
 		public Iterable<ISynState> getFollowers(ISynState node) {
@@ -93,10 +93,10 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 					.getGrammarElement() : null;
 		}
 
-		public Iterable<ISynState> getStartStates() {
+		public ISynState getStartStates() {
 			if (navigable instanceof ISynTransition)
-				return Collections.<ISynState> singleton(((ISynTransition) navigable).getSource());
-			return Collections.singleton((ISynState) navigable);
+				return ((ISynTransition) navigable).getSource();
+			return (ISynState) navigable;
 		}
 
 		public AbstractElement getToken(ISynState owner) {

@@ -11,17 +11,12 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
-import org.eclipse.xtext.util.formallang.IPdaAdapter;
-import org.eclipse.xtext.util.formallang.PdaUtil;
 
 import junit.framework.TestCase;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Sets;
 import com.google.inject.internal.Maps;
 
 /**
@@ -31,8 +26,8 @@ public class PdaUtilTest extends TestCase {
 
 	private class PDA implements IPdaAdapter<String, String> {
 
-		private final Set<String> starts = Sets.newHashSet();
-		private final Set<String> finals = Sets.newHashSet();
+		private String start;
+		private String stop;
 		private final Multimap<String, String> followers = HashMultimap.create();
 		private final Map<String, String> pushs = Maps.newHashMap();
 		private final Map<String, String> pops = Maps.newHashMap();
@@ -62,12 +57,16 @@ public class PdaUtilTest extends TestCase {
 			}
 
 			public State start() {
-				PDA.this.starts.add(name);
+				if (PDA.this.start != null)
+					throw new IllegalStateException("start is already set");
+				PDA.this.start = name;
 				return this;
 			}
 
 			public State stop() {
-				PDA.this.finals.add(name);
+				if (PDA.this.stop != null)
+					throw new IllegalStateException("stop is already set");
+				PDA.this.stop = name;
 				return this;
 			}
 		}
@@ -76,16 +75,16 @@ public class PdaUtilTest extends TestCase {
 			return new State(name);
 		}
 
-		public Iterable<String> getStartStates() {
-			return starts;
+		public String getStartStates() {
+			return start;
 		}
 
 		public Iterable<String> getFollowers(String node) {
 			return followers.get(node);
 		}
 
-		public Iterable<String> getFinalStates() {
-			return finals;
+		public String getFinalStates() {
+			return stop;
 		}
 
 		public String getPush(String state) {

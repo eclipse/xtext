@@ -9,12 +9,10 @@ package org.eclipse.xtext.util.formallang;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.xtext.util.Wrapper;
 
 import com.google.common.base.Joiner;
-import com.google.common.collect.Sets;
 import com.google.inject.internal.Lists;
 import com.google.inject.internal.Maps;
 
@@ -196,16 +194,15 @@ public class NfaFormatter {
 	public <STATE> String format(INfaAdapter<STATE> nfa) {
 		Map<STATE, Integer> names = Maps.newLinkedHashMap();
 		List<Node> nodes = Lists.newArrayList();
-		for (STATE start : nfa.getStartStates())
-			nodes.add(createNodes(nfa, start, names, new Wrapper<Integer>(0)));
+		nodes.add(createNodes(nfa, nfa.getStartStates(), names, new Wrapper<Integer>(0)));
 		StringBuilder result = new StringBuilder();
-		Set<STATE> starts = Sets.newHashSet(nfa.getStartStates());
-		Set<STATE> stops = Sets.newHashSet(nfa.getFinalStates());
+		STATE starts = nfa.getStartStates();
+		STATE stops = nfa.getFinalStates();
 		for (Map.Entry<STATE, Integer> e : names.entrySet()) {
 			result.append(e.getValue() + ": " + e.getKey());
-			if (starts.contains(e.getKey()))
+			if (starts == e.getKey())
 				result.append(" (start)");
-			if (stops.contains(e.getKey()))
+			if (stops == e.getKey())
 				result.append(" (stop)");
 			if (!new NfaUtil().canReachFinalState(nfa, e.getKey()))
 				result.append(" (no connection to final state!)");

@@ -47,25 +47,25 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 
 	protected static class SemNfa implements INfaAdapter<ISemState> {
 
-		protected List<ISemState> starts = Lists.newArrayList();
-		protected List<ISemState> stops = Lists.newArrayList();
+		protected final ISemState start;
+		protected final ISemState stop;
 
-		public SemNfa(List<ISemState> starts, List<ISemState> stops) {
+		public SemNfa(ISemState starts, ISemState stops) {
 			super();
-			this.starts = starts;
-			this.stops = stops;
+			this.start = starts;
+			this.stop = stops;
 		}
 
-		public List<ISemState> getFinalStates() {
-			return stops;
+		public ISemState getFinalStates() {
+			return stop;
 		}
 
 		public List<ISemState> getFollowers(ISemState node) {
 			return node.getFollowers();
 		}
 
-		public List<ISemState> getStartStates() {
-			return starts;
+		public ISemState getStartStates() {
+			return start;
 		}
 
 	}
@@ -123,8 +123,8 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 			return new SemState(token.getEClass(), token.getGrammarElement());
 		}
 
-		public INfaAdapter<ISemState> createNfa(Iterable<ISemState> startStates, Iterable<ISemState> stopStates) {
-			return new SemNfa(Lists.newArrayList(startStates), Lists.newArrayList(stopStates));
+		public INfaAdapter<ISemState> createNfa(ISemState startStates, ISemState stopStates) {
+			return new SemNfa(startStates, stopStates);
 		}
 
 		public ISemState createStartState(ISynAbsorberState token) {

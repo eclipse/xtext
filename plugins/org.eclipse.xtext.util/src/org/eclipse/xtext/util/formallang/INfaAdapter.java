@@ -12,9 +12,9 @@ package org.eclipse.xtext.util.formallang;
  */
 public interface INfaAdapter<STATE> {
 
-	Iterable<STATE> getFinalStates();
+	STATE getFinalStates();
 
 	Iterable<STATE> getFollowers(STATE node);
 
-	Iterable<STATE> getStartStates();
+	STATE getStartStates();
 }
