@@ -25,7 +25,7 @@ import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstra
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.ISemState;
 import org.eclipse.xtext.serializer.sequencer.IContextFinder;
 import org.eclipse.xtext.util.formallang.GrammarStringFactory;
-import org.eclipse.xtext.util.formallang.INfaAdapter;
+import org.eclipse.xtext.util.formallang.Nfa;
 import org.eclipse.xtext.util.formallang.NfaToGrammar;
 
 import com.google.common.base.Function;
@@ -111,7 +111,7 @@ public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnostic
 	}
 
 	public ISerializationDiagnostic createBacktrackingFailedDiagnostic(EObject semanticObject, EObject context,
-			INfaAdapter<ISemState> nfa) {
+			Nfa<ISemState> nfa) {
 		String grammar = new NfaToGrammar().nfaToGrammar(nfa, new Function<ISemState, AbstractElement>() {
 			public AbstractElement apply(ISemState from) {
 				return from.getAssignedGrammarElement();

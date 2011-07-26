@@ -444,16 +444,16 @@ public class NfaToGrammar {
 		return state1.getFirst() > state2.getFirst();
 	}
 
-	public <ELEMENT, STATE, TOKEN, NFA extends INfaAdapter<STATE>> ELEMENT nfaToGrammar(NFA nfa,
-			Function<STATE, TOKEN> state2token, IGrammarFactory<ELEMENT, TOKEN> grammarFactory) {
-		StateAlias<TOKEN> stop = new StateAlias<TOKEN>(new ElementAlias<TOKEN>(state2token.apply(nfa.getFinalStates())));
+	public <ELEMENT, STATE, TOKEN> ELEMENT nfaToGrammar(Nfa<STATE> nfa, Function<STATE, TOKEN> state2token,
+			IGrammarFactory<ELEMENT, TOKEN> grammarFactory) {
+		StateAlias<TOKEN> stop = new StateAlias<TOKEN>(new ElementAlias<TOKEN>(state2token.apply(nfa.getStop())));
 		//		StateAlias<TOKEN> start = new StateAlias<TOKEN>(
 		//				new ElementAlias<TOKEN>(state2token.apply(nfa.getStartStates())));
 		//		Set<STATE> stops = Sets.newHashSet(nfa.getFinalStates());
 		HashMap<STATE, StateAlias<TOKEN>> cache = Maps.<STATE, StateAlias<TOKEN>> newHashMap();
 		//		cache.put(nfa.getStartStates(), start);
-		cache.put(nfa.getFinalStates(), stop);
-		StateAlias<TOKEN> start = toAlias(nfa, state2token, nfa.getStartStates(), stop, cache);
+		cache.put(nfa.getStop(), stop);
+		StateAlias<TOKEN> start = toAlias(nfa, state2token, nfa.getStart(), stop, cache);
 		//		for (STATE state : nfa.getStartStates()) {
 		//			start.getOutgoing().add(stateAlias);
 		//			stateAlias.getIncoming().add(start);
@@ -503,8 +503,8 @@ public class NfaToGrammar {
 		//		return null;
 	}
 
-	public <ELEMENT, STATE, TOKEN, NFA extends INfaAdapter<STATE> & ITokenAdapter<STATE, TOKEN>> ELEMENT nfaToGrammar(
-			final NFA nfa, IGrammarFactory<ELEMENT, TOKEN> grammarFactory) {
+	public <ELEMENT, STATE, TOKEN, N extends Nfa<STATE> & ITokenAdapter<STATE, TOKEN>> ELEMENT nfaToGrammar(
+			final N nfa, IGrammarFactory<ELEMENT, TOKEN> grammarFactory) {
 		return nfaToGrammar(nfa, new Function<STATE, TOKEN>() {
 			public TOKEN apply(STATE from) {
 				return nfa.getToken(from);
@@ -542,8 +542,8 @@ public class NfaToGrammar {
 		state.getIncoming().clear();
 	}
 
-	protected <STATE, TOKEN, NFA extends INfaAdapter<STATE>> StateAlias<TOKEN> toAlias(NFA nfa,
-			Function<STATE, TOKEN> state2token, STATE state, StateAlias<TOKEN> stop, Map<STATE, StateAlias<TOKEN>> cache) {
+	protected <STATE, TOKEN> StateAlias<TOKEN> toAlias(Nfa<STATE> nfa, Function<STATE, TOKEN> state2token,
+			STATE state, StateAlias<TOKEN> stop, Map<STATE, StateAlias<TOKEN>> cache) {
 		StateAlias<TOKEN> result = cache.get(state);
 		if (result != null)
 			return result;

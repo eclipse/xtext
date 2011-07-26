@@ -191,13 +191,13 @@ public class NfaFormatter {
 
 	}
 
-	public <STATE> String format(INfaAdapter<STATE> nfa) {
+	public <STATE> String format(Nfa<STATE> nfa) {
 		Map<STATE, Integer> names = Maps.newLinkedHashMap();
 		List<Node> nodes = Lists.newArrayList();
-		nodes.add(createNodes(nfa, nfa.getStartStates(), names, new Wrapper<Integer>(0)));
+		nodes.add(createNodes(nfa, nfa.getStart(), names, new Wrapper<Integer>(0)));
 		StringBuilder result = new StringBuilder();
-		STATE starts = nfa.getStartStates();
-		STATE stops = nfa.getFinalStates();
+		STATE starts = nfa.getStart();
+		STATE stops = nfa.getStop();
 		for (Map.Entry<STATE, Integer> e : names.entrySet()) {
 			result.append(e.getValue() + ": " + e.getKey());
 			if (starts == e.getKey())
@@ -229,7 +229,7 @@ public class NfaFormatter {
 
 	}
 
-	protected <STATE> Node createNodes(INfaAdapter<STATE> nfa, STATE state, Map<STATE, Integer> names,
+	protected <STATE> Node createNodes(Nfa<STATE> nfa, STATE state, Map<STATE, Integer> names,
 			Wrapper<Integer> lastName) {
 		Integer name = names.get(state);
 		if (name != null)

@@ -18,7 +18,7 @@ import org.eclipse.xtext.grammaranalysis.IPDAState;
 import org.eclipse.xtext.grammaranalysis.IPDAState.PDAStateType;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
 import org.eclipse.xtext.serializer.sequencer.RuleCallStack;
-import org.eclipse.xtext.util.formallang.INfaAdapter;
+import org.eclipse.xtext.util.formallang.Nfa;
 import org.eclipse.xtext.util.formallang.ITokenPdaAdapter;
 import org.eclipse.xtext.util.formallang.NfaUtil;
 
@@ -87,7 +87,7 @@ public interface ISyntacticSequencerPDAProvider {
 		ISynAbsorberState getSource();
 	}
 
-	public class SynAbsorberNfaAdapter implements INfaAdapter<ISynAbsorberState> {
+	public class SynAbsorberNfaAdapter implements Nfa<ISynAbsorberState> {
 
 		protected ISynAbsorberState start;
 		protected ISynAbsorberState stop;
@@ -102,7 +102,7 @@ public interface ISyntacticSequencerPDAProvider {
 			});
 		}
 
-		public ISynAbsorberState getFinalStates() {
+		public ISynAbsorberState getStop() {
 			return stop;
 		}
 
@@ -110,7 +110,7 @@ public interface ISyntacticSequencerPDAProvider {
 			return node.getOutAbsorbers();
 		}
 
-		public ISynAbsorberState getStartStates() {
+		public ISynAbsorberState getStart() {
 			return start;
 		}
 

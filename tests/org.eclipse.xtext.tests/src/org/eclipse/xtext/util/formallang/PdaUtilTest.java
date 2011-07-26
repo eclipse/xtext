@@ -24,7 +24,7 @@ import com.google.inject.internal.Maps;
  */
 public class PdaUtilTest extends TestCase {
 
-	private class PDA implements IPdaAdapter<String, String> {
+	private class PDA implements Pda<String, String> {
 
 		private String start;
 		private String stop;
@@ -75,7 +75,7 @@ public class PdaUtilTest extends TestCase {
 			return new State(name);
 		}
 
-		public String getStartStates() {
+		public String getStart() {
 			return start;
 		}
 
@@ -83,7 +83,7 @@ public class PdaUtilTest extends TestCase {
 			return followers.get(node);
 		}
 
-		public String getFinalStates() {
+		public String getStop() {
 			return stop;
 		}
 
