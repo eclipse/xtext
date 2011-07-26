@@ -127,11 +127,6 @@ public class PdaUtilTest extends TestCase {
 	//		assertEquals("[A]", util.shortestPathTo(pda, newStack(), "A"));
 	//	}
 
-	public void testShortestPathNoStates() {
-		PDA pda = newPDA();
-		assertEquals("[]", util.shortestPathToFinalState(pda, newStack()));
-	}
-
 	public void testShortestPathLoop() {
 		PDA pda = newPDA();
 		pda.state("A").start().to("B");
