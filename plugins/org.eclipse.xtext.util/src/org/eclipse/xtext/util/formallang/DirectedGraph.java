@@ -10,8 +10,8 @@ package org.eclipse.xtext.util.formallang;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface DirectedGraph<STATE> {
+public interface DirectedGraph<NODE> {
 
-	Iterable<STATE> getFollowers(STATE state);
+	Iterable<NODE> getFollowers(NODE state);
 
 }
