@@ -70,7 +70,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			this.navigable = navigable;
 		}
 
-		public ISynState getFinalStates() {
+		public ISynState getStop() {
 			return navigable.getTarget();
 		}
 
@@ -93,7 +93,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 					.getGrammarElement() : null;
 		}
 
-		public ISynState getStartStates() {
+		public ISynState getStart() {
 			if (navigable instanceof ISynTransition)
 				return ((ISynTransition) navigable).getSource();
 			return (ISynState) navigable;

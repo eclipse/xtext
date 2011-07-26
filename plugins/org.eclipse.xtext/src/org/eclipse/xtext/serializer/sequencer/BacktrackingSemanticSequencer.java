@@ -32,7 +32,7 @@ import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEOb
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
-import org.eclipse.xtext.util.formallang.INfaAdapter;
+import org.eclipse.xtext.util.formallang.Nfa;
 import org.eclipse.xtext.util.formallang.NfaUtil;
 
 import com.google.common.base.Joiner;
@@ -299,7 +299,7 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 
 	public void createSequence(EObject context, final EObject obj) {
 		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(obj, null);
-		INfaAdapter<ISemState> nfa = nfaProvider.getNFA(context, obj.eClass());
+		Nfa<ISemState> nfa = nfaProvider.getNFA(context, obj.eClass());
 		SerializableObject object = new SerializableObject(obj, nodes);
 		TraceItem co = new TraceItem(object);
 		List<TraceItem> trace = new NfaUtil().backtrack(nfa, co, new NfaUtil.BacktrackHandler<ISemState, TraceItem>() {

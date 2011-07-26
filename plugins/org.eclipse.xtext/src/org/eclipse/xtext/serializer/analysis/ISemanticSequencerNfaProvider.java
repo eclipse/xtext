@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.util.formallang.INfaAdapter;
+import org.eclipse.xtext.util.formallang.Nfa;
 
 import com.google.inject.ImplementedBy;
 
@@ -35,5 +35,5 @@ public interface ISemanticSequencerNfaProvider {
 		List<AbstractElement> getToBeValidatedAssignedElements();
 	}
 
-	INfaAdapter<ISemState> getNFA(EObject context, EClass type);
+	Nfa<ISemState> getNFA(EObject context, EClass type);
 }

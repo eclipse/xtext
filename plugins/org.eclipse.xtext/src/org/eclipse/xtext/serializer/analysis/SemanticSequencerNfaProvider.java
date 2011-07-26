@@ -28,8 +28,8 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.SynA
 import org.eclipse.xtext.serializer.impl.FeatureFinderUtil;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
-import org.eclipse.xtext.util.formallang.INfaAdapter;
-import org.eclipse.xtext.util.formallang.INfaFactory;
+import org.eclipse.xtext.util.formallang.Nfa;
+import org.eclipse.xtext.util.formallang.NfaFactory;
 import org.eclipse.xtext.util.formallang.NfaUtil;
 
 import com.google.common.collect.HashMultimap;
@@ -45,7 +45,7 @@ import com.google.inject.Singleton;
 @Singleton
 public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvider {
 
-	protected static class SemNfa implements INfaAdapter<ISemState> {
+	protected static class SemNfa implements Nfa<ISemState> {
 
 		protected final ISemState start;
 		protected final ISemState stop;
@@ -56,7 +56,7 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 			this.stop = stops;
 		}
 
-		public ISemState getFinalStates() {
+		public ISemState getStop() {
 			return stop;
 		}
 
@@ -64,7 +64,7 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 			return node.getFollowers();
 		}
 
-		public ISemState getStartStates() {
+		public ISemState getStart() {
 			return start;
 		}
 
@@ -117,13 +117,13 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 		}
 	}
 
-	protected static class SemStateFactory implements INfaFactory<ISemState, ISynAbsorberState> {
+	protected static class SemStateFactory implements NfaFactory<ISemState, ISynAbsorberState> {
 
 		public ISemState createEndState(ISynAbsorberState token) {
 			return new SemState(token.getEClass(), token.getGrammarElement());
 		}
 
-		public INfaAdapter<ISemState> createNfa(ISemState startStates, ISemState stopStates) {
+		public Nfa<ISemState> createNfa(ISemState startStates, ISemState stopStates) {
 			return new SemNfa(startStates, stopStates);
 		}
 
@@ -144,11 +144,11 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 	@Inject
 	protected ISyntacticSequencerPDAProvider pdaProvider;
 
-	protected Map<Pair<EObject, EClass>, INfaAdapter<ISemState>> cache = Maps.newHashMap();
+	protected Map<Pair<EObject, EClass>, Nfa<ISemState>> cache = Maps.newHashMap();
 
-	public INfaAdapter<ISemState> getNFA(EObject context, EClass type) {
+	public Nfa<ISemState> getNFA(EObject context, EClass type) {
 		Pair<EObject, EClass> key = Tuples.create(context, type);
-		INfaAdapter<ISemState> nfa = cache.get(key);
+		Nfa<ISemState> nfa = cache.get(key);
 		if (nfa != null)
 			return nfa;
 		NfaUtil util = new NfaUtil();
@@ -184,7 +184,7 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 		return false;
 	}
 
-	protected void initContentValidationNeeded(EClass clazz, INfaAdapter<ISemState> nfa) {
+	protected void initContentValidationNeeded(EClass clazz, Nfa<ISemState> nfa) {
 		Multimap<EStructuralFeature, AbstractElement> assignments = HashMultimap.create();
 		Set<ISemState> states = new NfaUtil().collect(nfa);
 		for (ISemState state : states)

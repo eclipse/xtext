@@ -79,21 +79,21 @@ public class PdaUtil {
 		}
 	}
 
-	protected class TraceItem<STATE, STACKITEM> {
-		protected TraceItem<STATE, STACKITEM> parent;
-		protected StackItem<STACKITEM> stackitem;
-		protected STATE state;
+	protected class TraceItem<S, P> {
+		protected TraceItem<S, P> parent;
+		protected StackItem<P> stackitem;
+		protected S state;
 
-		public TraceItem(TraceItem<STATE, STACKITEM> parent, STATE state, StackItem<STACKITEM> stackitem) {
+		public TraceItem(TraceItem<S, P> parent, S state, StackItem<P> stackitem) {
 			super();
 			this.parent = parent;
 			this.state = state;
 			this.stackitem = stackitem;
 		}
 
-		public List<STATE> asList() {
-			List<STATE> result = Lists.newArrayList();
-			TraceItem<STATE, STACKITEM> current = this;
+		public List<S> asList() {
+			List<S> result = Lists.newArrayList();
+			TraceItem<S, P> current = this;
 			while (current != null) {
 				result.add(current.state);
 				current = current.parent;
@@ -104,7 +104,7 @@ public class PdaUtil {
 
 		public int size() {
 			int result = 0;
-			TraceItem<STATE, STACKITEM> current = this;
+			TraceItem<S, P> current = this;
 			while (current != null) {
 				result++;
 				current = current.parent;
@@ -121,8 +121,7 @@ public class PdaUtil {
 
 	public final long UNREACHABLE = Long.MAX_VALUE;
 
-	public <STATE, STACKITEM> boolean canReach(IPdaAdapter<STATE, STACKITEM> pda, STATE state,
-			Iterator<STACKITEM> stack, Predicate<STATE> matches, Predicate<STATE> canPass) {
+	public <S, P> boolean canReach(Pda<S, P> pda, S state, Iterator<P> stack, Predicate<S> matches, Predicate<S> canPass) {
 		return distanceTo(pda, Collections.singleton(state), stack, matches, canPass) != UNREACHABLE;
 	}
 
@@ -132,112 +131,104 @@ public class PdaUtil {
 		return new StackItem<T>((StackItem<T>) null, null);
 	}
 
-	public <STATE, STACKITEM> long distanceTo(IPdaAdapter<STATE, STACKITEM> pda, Iterable<STATE> starts,
-			Iterator<STACKITEM> stack, Predicate<STATE> matches, Predicate<STATE> canPass) {
-		TraceItem<STATE, STACKITEM> trace = trace(pda, starts, stack, matches, canPass);
+	public <S, P> long distanceTo(Pda<S, P> pda, Iterable<S> starts, Iterator<P> stack, Predicate<S> matches,
+			Predicate<S> canPass) {
+		TraceItem<S, P> trace = trace(pda, starts, stack, matches, canPass);
 		if (trace != null)
 			return trace.size();
 		return UNREACHABLE;
 	}
 
-	public <STATE, STACKITEM> List<STATE> shortestPathTo(IPdaAdapter<STATE, STACKITEM> pda, Iterable<STATE> starts,
-			Iterator<STACKITEM> stack, Predicate<STATE> matches, Predicate<STATE> canPass) {
-		TraceItem<STATE, STACKITEM> trace = trace(pda, starts, stack, matches, canPass);
+	public <S, P> List<S> shortestPathTo(Pda<S, P> pda, Iterable<S> starts, Iterator<P> stack, Predicate<S> matches,
+			Predicate<S> canPass) {
+		TraceItem<S, P> trace = trace(pda, starts, stack, matches, canPass);
 		if (trace != null)
 			return trace.asList();
 		return null;
 	}
 
-	public <STATE, STACKITEM> List<STATE> shortestPathTo(IPdaAdapter<STATE, STACKITEM> pda, STATE start,
-			Iterator<STACKITEM> stack, Predicate<STATE> matches, Predicate<STATE> canPass) {
-		TraceItem<STATE, STACKITEM> trace = trace(pda, Collections.singleton(start), stack, matches, canPass);
+	public <S, P> List<S> shortestPathTo(Pda<S, P> pda, S start, Iterator<P> stack, Predicate<S> matches,
+			Predicate<S> canPass) {
+		TraceItem<S, P> trace = trace(pda, Collections.singleton(start), stack, matches, canPass);
 		if (trace != null)
 			return trace.asList();
 		return null;
 	}
 
-	public <STATE, STACKITEM> List<STATE> shortestPathTo(IPdaAdapter<STATE, STACKITEM> pda, Iterator<STACKITEM> stack,
-			Predicate<STATE> matches) {
-		return shortestPathTo(pda, pda.getStartStates(), stack, matches, Predicates.<STATE> alwaysTrue());
+	public <S, P> List<S> shortestPathTo(Pda<S, P> pda, Iterator<P> stack, Predicate<S> matches) {
+		return shortestPathTo(pda, pda.getStart(), stack, matches, Predicates.<S> alwaysTrue());
 	}
 
-	public <STATE, STACKITEM> List<STATE> shortestPathTo(IPdaAdapter<STATE, STACKITEM> pda, Iterator<STACKITEM> stack,
-			Predicate<STATE> matches, Predicate<STATE> canPass) {
-		return shortestPathTo(pda, pda.getStartStates(), stack, matches, canPass);
+	public <S, P> List<S> shortestPathTo(Pda<S, P> pda, Iterator<P> stack, Predicate<S> matches, Predicate<S> canPass) {
+		return shortestPathTo(pda, pda.getStart(), stack, matches, canPass);
 	}
 
-	public <STATE, STACKITEM> List<STATE> shortestPathTo(IPdaAdapter<STATE, STACKITEM> pda, Iterator<STACKITEM> stack,
-			STATE match) {
-		return shortestPathTo(pda, pda.getStartStates(), stack, Predicates.equalTo(match),
-				Predicates.<STATE> alwaysTrue());
+	public <S, P> List<S> shortestPathTo(Pda<S, P> pda, Iterator<P> stack, S match) {
+		return shortestPathTo(pda, pda.getStart(), stack, Predicates.equalTo(match), Predicates.<S> alwaysTrue());
 	}
 
-	public <STATE, STACKITEM> List<STATE> shortestPathToFinalState(IPdaAdapter<STATE, STACKITEM> pda,
-			Iterator<STACKITEM> stack) {
-		return shortestPathTo(pda, pda.getStartStates(), stack, Predicates.equalTo(pda.getFinalStates()),
-				Predicates.<STATE> alwaysTrue());
+	public <S, P> List<S> shortestPathToFinalState(Pda<S, P> pda, Iterator<P> stack) {
+		return shortestPathTo(pda, pda.getStart(), stack, Predicates.equalTo(pda.getStop()),
+				Predicates.<S> alwaysTrue());
 	}
 
-	public <STATE, STACKITEM> List<STATE> shortestStackpruningPathTo(IPdaAdapter<STATE, STACKITEM> pda,
-			Iterable<STATE> starts, Iterator<STACKITEM> stack, Predicate<STATE> matches, Predicate<STATE> canPass) {
-		TraceItem<STATE, STACKITEM> trace = traceToWithPruningStack(pda, starts, stack, matches, canPass);
+	public <S, P> List<S> shortestStackpruningPathTo(Pda<S, P> pda, Iterable<S> starts, Iterator<P> stack,
+			Predicate<S> matches, Predicate<S> canPass) {
+		TraceItem<S, P> trace = traceToWithPruningStack(pda, starts, stack, matches, canPass);
 		if (trace != null)
 			return trace.asList();
 		return null;
 	}
 
-	public <STATE, STACKITEM> List<STATE> shortestStackpruningPathTo(IPdaAdapter<STATE, STACKITEM> pda, STATE start,
-			Iterator<STACKITEM> stack, Predicate<STATE> matches, Predicate<STATE> canPass) {
-		TraceItem<STATE, STACKITEM> trace = traceToWithPruningStack(pda, Collections.singleton(start), stack, matches,
-				canPass);
+	public <S, P> List<S> shortestStackpruningPathTo(Pda<S, P> pda, S start, Iterator<P> stack, Predicate<S> matches,
+			Predicate<S> canPass) {
+		TraceItem<S, P> trace = traceToWithPruningStack(pda, Collections.singleton(start), stack, matches, canPass);
 		if (trace != null)
 			return trace.asList();
 		return null;
 	}
 
-	public <STATE, STACKITEM> List<STATE> shortestStackpruningPathTo(IPdaAdapter<STATE, STACKITEM> pda,
-			Iterator<STACKITEM> stack, Predicate<STATE> matches) {
-		return shortestStackpruningPathTo(pda, pda.getStartStates(), stack, matches, Predicates.<STATE> alwaysTrue());
+	public <S, P> List<S> shortestStackpruningPathTo(Pda<S, P> pda, Iterator<P> stack, Predicate<S> matches) {
+		return shortestStackpruningPathTo(pda, pda.getStart(), stack, matches, Predicates.<S> alwaysTrue());
 	}
 
-	public <STATE, STACKITEM> List<STATE> shortestStackpruningPathTo(IPdaAdapter<STATE, STACKITEM> pda,
-			Iterator<STACKITEM> stack, STATE matches) {
-		return shortestStackpruningPathTo(pda, pda.getStartStates(), stack, Predicates.equalTo(matches),
-				Predicates.<STATE> alwaysTrue());
+	public <S, P> List<S> shortestStackpruningPathTo(Pda<S, P> pda, Iterator<P> stack, S matches) {
+		return shortestStackpruningPathTo(pda, pda.getStart(), stack, Predicates.equalTo(matches),
+				Predicates.<S> alwaysTrue());
 	}
 
-	protected <STATE, STACKITEM> TraceItem<STATE, STACKITEM> trace(IPdaAdapter<STATE, STACKITEM> pda,
-			Iterable<STATE> starts, Iterator<STACKITEM> stack, Predicate<STATE> matches, Predicate<STATE> canPass) {
-		StackItem<STACKITEM> stackItem = createStack(stack);
-		List<TraceItem<STATE, STACKITEM>> current = Lists.newArrayList();
-		Set<STATE> visited = Sets.newHashSet(starts);
-		for (STATE start : starts) {
+	protected <S, P> TraceItem<S, P> trace(Pda<S, P> pda, Iterable<S> starts, Iterator<P> stack, Predicate<S> matches,
+			Predicate<S> canPass) {
+		StackItem<P> stackItem = createStack(stack);
+		List<TraceItem<S, P>> current = Lists.newArrayList();
+		Set<S> visited = Sets.newHashSet(starts);
+		for (S start : starts) {
 			//			if (matches.apply(start))
-			//				return new TraceItem<STATE, STACKITEM>(null, start, stackItem);
-			current.add(new TraceItem<STATE, STACKITEM>(null, start, stackItem));
+			//				return new TraceItem<S, P>(null, start, stackItem);
+			current.add(new TraceItem<S, P>(null, start, stackItem));
 		}
 		int counter = stackItem.size() * -1;
 		while (current.size() > 0 && counter < visited.size()) {
-			List<TraceItem<STATE, STACKITEM>> newCurrent = Lists.newArrayList();
-			for (TraceItem<STATE, STACKITEM> trace : current)
-				for (STATE follower : pda.getFollowers(trace.state)) {
+			List<TraceItem<S, P>> newCurrent = Lists.newArrayList();
+			for (TraceItem<S, P> trace : current)
+				for (S follower : pda.getFollowers(trace.state)) {
 					if (matches.apply(follower))
-						return new TraceItem<STATE, STACKITEM>(trace, follower, trace.stackitem);
+						return new TraceItem<S, P>(trace, follower, trace.stackitem);
 					if (canPass.apply(follower)) {
-						STACKITEM push = pda.getPush(follower);
+						P push = pda.getPush(follower);
 						visited.add(follower);
 						if (push != null) {
-							StackItem<STACKITEM> pushed = trace.stackitem.push(push);
-							newCurrent.add(new TraceItem<STATE, STACKITEM>(trace, follower, pushed));
+							StackItem<P> pushed = trace.stackitem.push(push);
+							newCurrent.add(new TraceItem<S, P>(trace, follower, pushed));
 						} else {
-							STACKITEM pop = pda.getPop(follower);
+							P pop = pda.getPop(follower);
 							if (pop != null) {
 								if (trace.stackitem != null && pop == trace.stackitem.peek()) {
-									StackItem<STACKITEM> popped = trace.stackitem.pop();
-									newCurrent.add(new TraceItem<STATE, STACKITEM>(trace, follower, popped));
+									StackItem<P> popped = trace.stackitem.pop();
+									newCurrent.add(new TraceItem<S, P>(trace, follower, popped));
 								}
 							} else
-								newCurrent.add(new TraceItem<STATE, STACKITEM>(trace, follower, trace.stackitem));
+								newCurrent.add(new TraceItem<S, P>(trace, follower, trace.stackitem));
 						}
 					}
 				}
@@ -247,26 +238,25 @@ public class PdaUtil {
 		return null;
 	}
 
-	protected <STATE, STACKITEM> TraceItem<STATE, STACKITEM> traceToWithPruningStack(IPdaAdapter<STATE, STACKITEM> pda,
-			Iterable<STATE> starts, Iterator<STACKITEM> stack, Predicate<STATE> matches, Predicate<STATE> canPass) {
-		StackItem<STACKITEM> stackItem = createStack(stack);
-		List<TraceItem<STATE, STACKITEM>> current = Lists.newArrayList();
-		Set<STATE> visited = Sets.newHashSet(starts);
-		TraceItem<STATE, STACKITEM> result = null;
-		for (STATE start : starts) {
-			TraceItem<STATE, STACKITEM> item = new TraceItem<STATE, STACKITEM>(null, start, stackItem);
+	protected <S, P> TraceItem<S, P> traceToWithPruningStack(Pda<S, P> pda, Iterable<S> starts, Iterator<P> stack,
+			Predicate<S> matches, Predicate<S> canPass) {
+		StackItem<P> stackItem = createStack(stack);
+		List<TraceItem<S, P>> current = Lists.newArrayList();
+		Set<S> visited = Sets.newHashSet(starts);
+		TraceItem<S, P> result = null;
+		for (S start : starts) {
+			TraceItem<S, P> item = new TraceItem<S, P>(null, start, stackItem);
 			//			if (matches.apply(start))
 			//				result = item;
 			current.add(item);
 		}
 		int counter = stackItem.size() * -1;
 		while (current.size() > 0 && counter < visited.size()) {
-			List<TraceItem<STATE, STACKITEM>> newCurrent = Lists.newArrayList();
-			for (TraceItem<STATE, STACKITEM> trace : current)
-				for (STATE follower : pda.getFollowers(trace.state)) {
+			List<TraceItem<S, P>> newCurrent = Lists.newArrayList();
+			for (TraceItem<S, P> trace : current)
+				for (S follower : pda.getFollowers(trace.state)) {
 					if (matches.apply(follower)) {
-						TraceItem<STATE, STACKITEM> found = new TraceItem<STATE, STACKITEM>(trace, follower,
-								trace.stackitem);
+						TraceItem<S, P> found = new TraceItem<S, P>(trace, follower, trace.stackitem);
 						if (found.stackitem == null)
 							return found;
 						if (result == null || result.stackitem.size() > found.stackitem.size()) {
@@ -278,20 +268,20 @@ public class PdaUtil {
 						}
 					}
 					if (canPass.apply(follower)) {
-						STACKITEM push = pda.getPush(follower);
+						P push = pda.getPush(follower);
 						visited.add(follower);
 						if (push != null) {
-							StackItem<STACKITEM> pushed = trace.stackitem.push(push);
-							newCurrent.add(new TraceItem<STATE, STACKITEM>(trace, follower, pushed));
+							StackItem<P> pushed = trace.stackitem.push(push);
+							newCurrent.add(new TraceItem<S, P>(trace, follower, pushed));
 						} else {
-							STACKITEM pop = pda.getPop(follower);
+							P pop = pda.getPop(follower);
 							if (pop != null) {
 								if (trace.stackitem != null && pop == trace.stackitem.peek()) {
-									StackItem<STACKITEM> popped = trace.stackitem.pop();
-									newCurrent.add(new TraceItem<STATE, STACKITEM>(trace, follower, popped));
+									StackItem<P> popped = trace.stackitem.pop();
+									newCurrent.add(new TraceItem<S, P>(trace, follower, popped));
 								}
 							} else
-								newCurrent.add(new TraceItem<STATE, STACKITEM>(trace, follower, trace.stackitem));
+								newCurrent.add(new TraceItem<S, P>(trace, follower, trace.stackitem));
 						}
 					}
 				}
