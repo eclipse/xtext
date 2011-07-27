@@ -8,6 +8,7 @@
 package org.eclipse.xtext.serializer.sequencer;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -45,6 +46,44 @@ import com.google.inject.Inject;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
+
+	protected static class FollowerSorter implements Comparator<ISemState> {
+
+		protected EObject nodeModelEle;
+
+		protected SerializableObject obj;
+
+		public FollowerSorter(SerializableObject obj, EObject nodeModelEle) {
+			super();
+			this.obj = obj;
+			this.nodeModelEle = nodeModelEle;
+		}
+
+		public int compare(ISemState o1, ISemState o2) {
+			if (nodeModelEle != null) {
+				if (o1.getAssignedGrammarElement() == nodeModelEle)
+					return -1;
+				if (o2.getAssignedGrammarElement() == nodeModelEle)
+					return 1;
+			}
+			if (o1.getAssignedGrammarElement() == null && o1.getAssignedGrammarElement() == null)
+				return 0;
+			if (o1.getAssignedGrammarElement() == null)
+				return 1;
+			if (o2.getAssignedGrammarElement() == null)
+				return -1;
+			boolean o1Opt = obj.isOptional(o1.getFeatureID());
+			boolean o2Opt = obj.isOptional(o2.getFeatureID());
+			if (o1Opt && o2Opt)
+				return 0;
+			if (o1Opt)
+				return 1;
+			if (o2Opt)
+				return -1;
+			return 0;
+		}
+
+	}
 
 	protected class SerializableObject {
 		protected EObject eObject;
@@ -346,7 +385,7 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 	public void createSequence(EObject context, final EObject obj) {
 		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(obj, null);
 		Nfa<ISemState> nfa = nfaProvider.getNFA(context, obj.eClass());
-		SerializableObject object = new SerializableObject(obj, nodes);
+		final SerializableObject object = new SerializableObject(obj, nodes);
 		TraceItem co = new TraceItem(object);
 		List<TraceItem> trace = new NfaUtil().backtrack(nfa, co, new NfaUtil.BacktrackHandler<ISemState, TraceItem>() {
 			public TraceItem handle(ISemState state, TraceItem previous) {
@@ -362,14 +401,8 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 
 			public Iterable<ISemState> sortFollowers(TraceItem result, Iterable<ISemState> followers) {
 				INode next = result.getNextNode();
-				if (next == null)
-					return followers;
 				List<ISemState> r = Lists.newArrayList(followers);
-				for (int i = 1; i < r.size(); i++)
-					if (r.get(i).getAssignedGrammarElement() == next.getGrammarElement()) {
-						Collections.swap(r, 0, i);
-						break;
-					}
+				Collections.sort(r, new FollowerSorter(object, next == null ? null : next.getGrammarElement()));
 				return r;
 			}
 		});
