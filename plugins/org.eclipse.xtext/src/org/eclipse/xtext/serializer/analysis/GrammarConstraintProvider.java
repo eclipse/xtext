@@ -809,10 +809,15 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			if (assignments.length < 2)
 				return contentValidationNeeded = false;
 			IConstraintElement first = assignments[0];
-			for (int i = 1; i < assignments.length; i++)
-				if (first.getCrossReferenceType() != assignments[i].getCrossReferenceType()
-						|| !EcoreUtil.equals(first.getGrammarElement(), assignments[i].getGrammarElement()))
+			if (first.getType() == ConstraintElementType.ASSIGNED_ACTION_CALL)
+				contentValidationNeeded = true;
+			for (int i = 1; i < assignments.length; i++) {
+				IConstraintElement a = assignments[i];
+				if (a.getType() == ConstraintElementType.ASSIGNED_ACTION_CALL
+						|| first.getCrossReferenceType() != a.getCrossReferenceType()
+						|| !EcoreUtil.equals(first.getGrammarElement(), a.getGrammarElement()))
 					return contentValidationNeeded = true;
+			}
 			return contentValidationNeeded = false;
 		}
 
