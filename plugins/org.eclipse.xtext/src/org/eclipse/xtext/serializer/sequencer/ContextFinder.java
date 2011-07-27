@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
@@ -44,6 +45,9 @@ import com.google.inject.Singleton;
 @Singleton
 public class ContextFinder implements IContextFinder {
 
+	@Inject
+	protected IAssignmentFinder assignmentFinder;
+
 	protected List<IConstraintContext> constraintContexts;
 
 	protected Map<Pair<EObject, EClass>, IConstraint> constraints;
@@ -52,25 +56,22 @@ public class ContextFinder implements IContextFinder {
 	protected IGrammarAccess grammar;
 
 	@Inject
-	protected IGrammarAccess grammarAccess;
-
-	@Inject
 	protected IGrammarConstraintProvider grammarConstraintProvider;
 
 	@Inject
 	protected TransientValueUtil transientValueUtil;
 
-	protected Collection<IConstraint> findContextsByConstraints(EObject semanicObj, EReference ref,
-			Iterable<IConstraint> constraints) {
-		Multimap<IConstraint, EObject> contexts = HashMultimap.create();
-		int refID = semanicObj.eClass().getFeatureID(ref);
-		for (IConstraint constraint : constraints)
-			contexts.putAll(constraint, constraint.getFeatures()[refID].getCalledContexts());
-		Set<EObject> validContexts = Sets.newHashSet(findContextsByReference(semanicObj, ref, contexts.values()));
-		for (IConstraint constraint : constraints)
-			if (Collections.disjoint(contexts.get(constraint), validContexts))
-				contexts.removeAll(constraint);
-		return contexts.keySet();
+	protected Iterable<AbstractElement> findAssignedElements(EObject obj, EStructuralFeature feature,
+			Iterable<AbstractElement> candidates) {
+		if (feature.isMany()) {
+			Set<AbstractElement> result = Sets.newHashSet();
+			for (Object value : transientValueUtil.getAllNonTransientValues(obj, feature))
+				Iterables.addAll(result, assignmentFinder.findAssignmentsByValue(obj, candidates, value, null));
+			return result;
+		} else {
+			Object value = obj.eGet(feature);
+			return assignmentFinder.findAssignmentsByValue(obj, candidates, value, null);
+		}
 	}
 
 	protected Iterable<EObject> findContextsByContainer(EObject semanticObject, Iterable<EObject> contextCandidates) {
@@ -128,9 +129,9 @@ public class ContextFinder implements IContextFinder {
 		if (constraints.size() < 2)
 			return Iterables.concat(constraints.values());
 
-		for (EReference ref : semanticObject.eClass().getEAllContainments())
-			if (transientValueUtil.isTransient(semanticObject, ref) != ValueTransient.YES) {
-				constraints.keySet().retainAll(findContextsByConstraints(semanticObject, ref, constraints.keySet()));
+		for (EStructuralFeature feat : semanticObject.eClass().getEAllStructuralFeatures())
+			if (transientValueUtil.isTransient(semanticObject, feat) == ValueTransient.NO) {
+				constraints.keySet().retainAll(findContextsByValue(semanticObject, feat, constraints.keySet()));
 				if (constraints.size() < 2)
 					return Iterables.concat(constraints.values());
 			}
@@ -146,17 +147,18 @@ public class ContextFinder implements IContextFinder {
 		return findContextsByContents(semanticObject, contextCandidates);
 	}
 
-	protected Iterable<EObject> findContextsByReference(EObject semanicObj, EReference ref,
-			Iterable<EObject> contextCandidates) {
-		if (ref.isMany()) {
-			Set<EObject> result = Sets.newHashSet();
-			for (EObject child : transientValueUtil.getAllNonTransientValues(semanicObj, ref))
-				Iterables.addAll(result, findContextsByContents(child, contextCandidates));
-			return result;
-		} else {
-			EObject child = (EObject) semanicObj.eGet(ref);
-			return findContextsByContents(child, contextCandidates);
-		}
+	protected Collection<IConstraint> findContextsByValue(EObject semanicObj, EStructuralFeature feature,
+			Iterable<IConstraint> constraints) {
+		Multimap<IConstraint, AbstractElement> contexts = HashMultimap.create();
+		int refID = semanicObj.eClass().getFeatureID(feature);
+		for (IConstraint constraint : constraints)
+			for (IConstraintElement ass : constraint.getFeatures()[refID].getAssignments())
+				contexts.put(constraint, ass.getGrammarElement());
+		Set<AbstractElement> ass = Sets.newHashSet(findAssignedElements(semanicObj, feature, contexts.values()));
+		for (IConstraint constraint : constraints)
+			if (Collections.disjoint(contexts.get(constraint), ass))
+				contexts.removeAll(constraint);
+		return contexts.keySet();
 	}
 
 	protected Map<IConstraint, List<EObject>> getConstraints(EClass cls) {
@@ -196,7 +198,7 @@ public class ContextFinder implements IContextFinder {
 	protected void initConstraints() {
 		if (constraintContexts == null) {
 			constraints = Maps.newHashMap();
-			constraintContexts = grammarConstraintProvider.getConstraints(grammarAccess.getGrammar());
+			constraintContexts = grammarConstraintProvider.getConstraints(grammar.getGrammar());
 			//			System.out.println(Joiner.on("\n").join(constraintContexts));
 			for (IConstraintContext ctx : constraintContexts)
 				for (IConstraint constraint : ctx.getConstraints())

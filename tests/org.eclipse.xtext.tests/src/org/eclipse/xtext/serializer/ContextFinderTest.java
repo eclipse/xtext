@@ -138,4 +138,14 @@ public class ContextFinderTest extends AbstractXtextTests {
 				findContextsByContents(model.getQuantityExclusion()));
 	}
 
+	public void testValueExclusionTest1() throws Exception {
+		Model model = parseHelper.parse("#6 lit1");
+		assertEquals("ValueExclusionTest1", findContextsByContents(model.getValueExclusion()));
+	}
+
+	public void testValueExclusionTest2() throws Exception {
+		Model model = parseHelper.parse("#6 lit2");
+		assertEquals("ValueExclusionTest2", findContextsByContents(model.getValueExclusion()));
+	}
+
 }
