@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.Model#getNestedTypeRecursiveTest2 <em>Nested Type Recursive Test2</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.Model#getParentRef <em>Parent Ref</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.Model#getQuantityExclusion <em>Quantity Exclusion</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.Model#getValueExclusion <em>Value Exclusion</em>}</li>
  * </ul>
  * </p>
  *
@@ -185,5 +186,31 @@ public interface Model extends EObject
    * @generated
    */
   void setQuantityExclusion(QuantityExclusionTest value);
+
+  /**
+   * Returns the value of the '<em><b>Value Exclusion</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Value Exclusion</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Value Exclusion</em>' containment reference.
+   * @see #setValueExclusion(ValueExclusionTest)
+   * @see org.eclipse.xtext.serializer.contextFinderTest.ContextFinderTestPackage#getModel_ValueExclusion()
+   * @model containment="true"
+   * @generated
+   */
+  ValueExclusionTest getValueExclusion();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.contextFinderTest.Model#getValueExclusion <em>Value Exclusion</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Value Exclusion</em>' containment reference.
+   * @see #getValueExclusion()
+   * @generated
+   */
+  void setValueExclusion(ValueExclusionTest value);
 
 } // Model

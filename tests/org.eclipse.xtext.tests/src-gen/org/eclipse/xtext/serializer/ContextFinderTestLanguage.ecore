@@ -17,6 +17,8 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="quantityExclusion" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//QuantityExclusionTest"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valueExclusion" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//ValueExclusionTest"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AttributeExclusionTest">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="attr1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -50,6 +52,14 @@
   <eClassifiers xsi:type="ecore:EClass" name="QuantityExclusionTest">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="attr1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="attr2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ValueExclusionTest">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EEnum platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//ValueExclusionTestEn"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ValueExclusionTestEn">
+    <eLiterals name="lit0" literal="lit0"/>
+    <eLiterals name="lit1" literal="lit1"/>
+    <eLiterals name="lit2" literal="lit2"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NestedTypeRecursiveTest1" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//NestedTypeRecursiveTest"/>
   <eClassifiers xsi:type="ecore:EClass" name="NestedTypeRecursiveTest2" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//NestedTypeRecursiveTest"/>

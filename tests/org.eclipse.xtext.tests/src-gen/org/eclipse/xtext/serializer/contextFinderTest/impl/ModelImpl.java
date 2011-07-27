@@ -21,6 +21,7 @@ import org.eclipse.xtext.serializer.contextFinderTest.Model;
 import org.eclipse.xtext.serializer.contextFinderTest.NestedTypeRecursiveTest;
 import org.eclipse.xtext.serializer.contextFinderTest.NestedTypeTest;
 import org.eclipse.xtext.serializer.contextFinderTest.QuantityExclusionTest;
+import org.eclipse.xtext.serializer.contextFinderTest.ValueExclusionTest;
 
 /**
  * <!-- begin-user-doc -->
@@ -35,6 +36,7 @@ import org.eclipse.xtext.serializer.contextFinderTest.QuantityExclusionTest;
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.impl.ModelImpl#getNestedTypeRecursiveTest2 <em>Nested Type Recursive Test2</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.impl.ModelImpl#getParentRef <em>Parent Ref</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.impl.ModelImpl#getQuantityExclusion <em>Quantity Exclusion</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.impl.ModelImpl#getValueExclusion <em>Value Exclusion</em>}</li>
  * </ul>
  * </p>
  *
@@ -101,6 +103,16 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @ordered
    */
   protected QuantityExclusionTest quantityExclusion;
+
+  /**
+   * The cached value of the '{@link #getValueExclusion() <em>Value Exclusion</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getValueExclusion()
+   * @generated
+   * @ordered
+   */
+  protected ValueExclusionTest valueExclusion;
 
   /**
    * <!-- begin-user-doc -->
@@ -416,6 +428,54 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  public ValueExclusionTest getValueExclusion()
+  {
+    return valueExclusion;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetValueExclusion(ValueExclusionTest newValueExclusion, NotificationChain msgs)
+  {
+    ValueExclusionTest oldValueExclusion = valueExclusion;
+    valueExclusion = newValueExclusion;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ContextFinderTestPackage.MODEL__VALUE_EXCLUSION, oldValueExclusion, newValueExclusion);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setValueExclusion(ValueExclusionTest newValueExclusion)
+  {
+    if (newValueExclusion != valueExclusion)
+    {
+      NotificationChain msgs = null;
+      if (valueExclusion != null)
+        msgs = ((InternalEObject)valueExclusion).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ContextFinderTestPackage.MODEL__VALUE_EXCLUSION, null, msgs);
+      if (newValueExclusion != null)
+        msgs = ((InternalEObject)newValueExclusion).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ContextFinderTestPackage.MODEL__VALUE_EXCLUSION, null, msgs);
+      msgs = basicSetValueExclusion(newValueExclusion, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ContextFinderTestPackage.MODEL__VALUE_EXCLUSION, newValueExclusion, newValueExclusion));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -433,6 +493,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return basicSetParentRef(null, msgs);
       case ContextFinderTestPackage.MODEL__QUANTITY_EXCLUSION:
         return basicSetQuantityExclusion(null, msgs);
+      case ContextFinderTestPackage.MODEL__VALUE_EXCLUSION:
+        return basicSetValueExclusion(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -459,6 +521,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return getParentRef();
       case ContextFinderTestPackage.MODEL__QUANTITY_EXCLUSION:
         return getQuantityExclusion();
+      case ContextFinderTestPackage.MODEL__VALUE_EXCLUSION:
+        return getValueExclusion();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -490,6 +554,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return;
       case ContextFinderTestPackage.MODEL__QUANTITY_EXCLUSION:
         setQuantityExclusion((QuantityExclusionTest)newValue);
+        return;
+      case ContextFinderTestPackage.MODEL__VALUE_EXCLUSION:
+        setValueExclusion((ValueExclusionTest)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -523,6 +590,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
       case ContextFinderTestPackage.MODEL__QUANTITY_EXCLUSION:
         setQuantityExclusion((QuantityExclusionTest)null);
         return;
+      case ContextFinderTestPackage.MODEL__VALUE_EXCLUSION:
+        setValueExclusion((ValueExclusionTest)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -549,6 +619,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return parentRef != null;
       case ContextFinderTestPackage.MODEL__QUANTITY_EXCLUSION:
         return quantityExclusion != null;
+      case ContextFinderTestPackage.MODEL__VALUE_EXCLUSION:
+        return valueExclusion != null;
     }
     return super.eIsSet(featureID);
   }

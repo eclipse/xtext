@@ -54,18 +54,26 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final Alternatives cQuantityExclusionAlternatives_5_1_0 = (Alternatives)cQuantityExclusionAssignment_5_1.eContents().get(0);
 		private final RuleCall cQuantityExclusionQuantityExclusionTest1ParserRuleCall_5_1_0_0 = (RuleCall)cQuantityExclusionAlternatives_5_1_0.eContents().get(0);
 		private final RuleCall cQuantityExclusionQuantityExclusionTest2ParserRuleCall_5_1_0_1 = (RuleCall)cQuantityExclusionAlternatives_5_1_0.eContents().get(1);
+		private final Group cGroup_6 = (Group)cAlternatives.eContents().get(6);
+		private final Keyword cNumberSignDigitSixKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Assignment cValueExclusionAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
+		private final Alternatives cValueExclusionAlternatives_6_1_0 = (Alternatives)cValueExclusionAssignment_6_1.eContents().get(0);
+		private final RuleCall cValueExclusionValueExclusionTest1ParserRuleCall_6_1_0_0 = (RuleCall)cValueExclusionAlternatives_6_1_0.eContents().get(0);
+		private final RuleCall cValueExclusionValueExclusionTest2ParserRuleCall_6_1_0_1 = (RuleCall)cValueExclusionAlternatives_6_1_0.eContents().get(1);
 		
 		//Model:
 		//	"#0" model=Model2 | "#1" attributeExclusion=(AttributeExclusionTest1 | AttributeExclusionTest2) | "#2"
 		//	nestedType=(NestedTypeTest1 | NestedTypeTest2) | "#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1 |
 		//	NestedTypeRecursiveTest2) | "#4" parentRef=(ParentRefTest1 | ParentRefTest2) | "#5"
-		//	quantityExclusion=(QuantityExclusionTest1 | QuantityExclusionTest2);
+		//	quantityExclusion=(QuantityExclusionTest1 | QuantityExclusionTest2) | "#6" valueExclusion=(ValueExclusionTest1 |
+		//	ValueExclusionTest2);
 		public ParserRule getRule() { return rule; }
 
 		//"#0" model=Model2 | "#1" attributeExclusion=(AttributeExclusionTest1 | AttributeExclusionTest2) | "#2"
 		//nestedType=(NestedTypeTest1 | NestedTypeTest2) | "#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1 |
 		//NestedTypeRecursiveTest2) | "#4" parentRef=(ParentRefTest1 | ParentRefTest2) | "#5"
-		//quantityExclusion=(QuantityExclusionTest1 | QuantityExclusionTest2)
+		//quantityExclusion=(QuantityExclusionTest1 | QuantityExclusionTest2) | "#6" valueExclusion=(ValueExclusionTest1 |
+		//ValueExclusionTest2)
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//"#0" model=Model2
@@ -169,6 +177,24 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 
 		//QuantityExclusionTest2
 		public RuleCall getQuantityExclusionQuantityExclusionTest2ParserRuleCall_5_1_0_1() { return cQuantityExclusionQuantityExclusionTest2ParserRuleCall_5_1_0_1; }
+
+		//"#6" valueExclusion=(ValueExclusionTest1 | ValueExclusionTest2)
+		public Group getGroup_6() { return cGroup_6; }
+
+		//"#6"
+		public Keyword getNumberSignDigitSixKeyword_6_0() { return cNumberSignDigitSixKeyword_6_0; }
+
+		//valueExclusion=(ValueExclusionTest1 | ValueExclusionTest2)
+		public Assignment getValueExclusionAssignment_6_1() { return cValueExclusionAssignment_6_1; }
+
+		//ValueExclusionTest1 | ValueExclusionTest2
+		public Alternatives getValueExclusionAlternatives_6_1_0() { return cValueExclusionAlternatives_6_1_0; }
+
+		//ValueExclusionTest1
+		public RuleCall getValueExclusionValueExclusionTest1ParserRuleCall_6_1_0_0() { return cValueExclusionValueExclusionTest1ParserRuleCall_6_1_0_0; }
+
+		//ValueExclusionTest2
+		public RuleCall getValueExclusionValueExclusionTest2ParserRuleCall_6_1_0_1() { return cValueExclusionValueExclusionTest2ParserRuleCall_6_1_0_1; }
 	}
 
 	public class Model2Elements extends AbstractParserRuleElementFinder {
@@ -570,7 +596,87 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//ID
 		public RuleCall getAttr2IDTerminalRuleCall_2_0() { return cAttr2IDTerminalRuleCall_2_0; }
 	}
+
+	public class ValueExclusionTest1Elements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ValueExclusionTest1");
+		private final Assignment cValAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cValValueExclusionTestEn1EnumRuleCall_0 = (RuleCall)cValAssignment.eContents().get(0);
+		
+		//ValueExclusionTest1 returns ValueExclusionTest:
+		//	val=ValueExclusionTestEn1;
+		public ParserRule getRule() { return rule; }
+
+		//val=ValueExclusionTestEn1
+		public Assignment getValAssignment() { return cValAssignment; }
+
+		//ValueExclusionTestEn1
+		public RuleCall getValValueExclusionTestEn1EnumRuleCall_0() { return cValValueExclusionTestEn1EnumRuleCall_0; }
+	}
+
+	public class ValueExclusionTest2Elements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ValueExclusionTest2");
+		private final Assignment cValAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cValValueExclusionTestEn2EnumRuleCall_0 = (RuleCall)cValAssignment.eContents().get(0);
+		
+		//ValueExclusionTest2 returns ValueExclusionTest:
+		//	val=ValueExclusionTestEn2;
+		public ParserRule getRule() { return rule; }
+
+		//val=ValueExclusionTestEn2
+		public Assignment getValAssignment() { return cValAssignment; }
+
+		//ValueExclusionTestEn2
+		public RuleCall getValValueExclusionTestEn2EnumRuleCall_0() { return cValValueExclusionTestEn2EnumRuleCall_0; }
+	}
 	
+	
+	public class ValueExclusionTestEn0Elements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "ValueExclusionTestEn0");
+		private final EnumLiteralDeclaration cLit0EnumLiteralDeclaration = (EnumLiteralDeclaration)rule.eContents().get(1);
+		private final Keyword cLit0Lit0Keyword_0 = (Keyword)cLit0EnumLiteralDeclaration.eContents().get(0);
+		
+		//enum ValueExclusionTestEn0 returns ValueExclusionTestEn:
+		//	lit0;
+		public EnumRule getRule() { return rule; }
+
+		//lit0
+		public EnumLiteralDeclaration getLit0EnumLiteralDeclaration() { return cLit0EnumLiteralDeclaration; }
+
+		//"lit0"
+		public Keyword getLit0Lit0Keyword_0() { return cLit0Lit0Keyword_0; }
+	}
+
+	public class ValueExclusionTestEn1Elements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "ValueExclusionTestEn1");
+		private final EnumLiteralDeclaration cLit1EnumLiteralDeclaration = (EnumLiteralDeclaration)rule.eContents().get(1);
+		private final Keyword cLit1Lit1Keyword_0 = (Keyword)cLit1EnumLiteralDeclaration.eContents().get(0);
+		
+		//enum ValueExclusionTestEn1 returns ValueExclusionTestEn:
+		//	lit1;
+		public EnumRule getRule() { return rule; }
+
+		//lit1
+		public EnumLiteralDeclaration getLit1EnumLiteralDeclaration() { return cLit1EnumLiteralDeclaration; }
+
+		//"lit1"
+		public Keyword getLit1Lit1Keyword_0() { return cLit1Lit1Keyword_0; }
+	}
+
+	public class ValueExclusionTestEn2Elements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "ValueExclusionTestEn2");
+		private final EnumLiteralDeclaration cLit2EnumLiteralDeclaration = (EnumLiteralDeclaration)rule.eContents().get(1);
+		private final Keyword cLit2Lit2Keyword_0 = (Keyword)cLit2EnumLiteralDeclaration.eContents().get(0);
+		
+		//enum ValueExclusionTestEn2 returns ValueExclusionTestEn:
+		//	lit2;
+		public EnumRule getRule() { return rule; }
+
+		//lit2
+		public EnumLiteralDeclaration getLit2EnumLiteralDeclaration() { return cLit2EnumLiteralDeclaration; }
+
+		//"lit2"
+		public Keyword getLit2Lit2Keyword_0() { return cLit2Lit2Keyword_0; }
+	}
 	
 	private ModelElements pModel;
 	private Model2Elements pModel2;
@@ -589,6 +695,11 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	private ParentRefTestChild2Elements pParentRefTestChild2;
 	private QuantityExclusionTest1Elements pQuantityExclusionTest1;
 	private QuantityExclusionTest2Elements pQuantityExclusionTest2;
+	private ValueExclusionTest1Elements pValueExclusionTest1;
+	private ValueExclusionTest2Elements pValueExclusionTest2;
+	private ValueExclusionTestEn0Elements unknownRuleValueExclusionTestEn0;
+	private ValueExclusionTestEn1Elements unknownRuleValueExclusionTestEn1;
+	private ValueExclusionTestEn2Elements unknownRuleValueExclusionTestEn2;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -615,7 +726,8 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//	"#0" model=Model2 | "#1" attributeExclusion=(AttributeExclusionTest1 | AttributeExclusionTest2) | "#2"
 	//	nestedType=(NestedTypeTest1 | NestedTypeTest2) | "#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1 |
 	//	NestedTypeRecursiveTest2) | "#4" parentRef=(ParentRefTest1 | ParentRefTest2) | "#5"
-	//	quantityExclusion=(QuantityExclusionTest1 | QuantityExclusionTest2);
+	//	quantityExclusion=(QuantityExclusionTest1 | QuantityExclusionTest2) | "#6" valueExclusion=(ValueExclusionTest1 |
+	//	ValueExclusionTest2);
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -782,6 +894,56 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	
 	public ParserRule getQuantityExclusionTest2Rule() {
 		return getQuantityExclusionTest2Access().getRule();
+	}
+
+	//ValueExclusionTest1 returns ValueExclusionTest:
+	//	val=ValueExclusionTestEn1;
+	public ValueExclusionTest1Elements getValueExclusionTest1Access() {
+		return (pValueExclusionTest1 != null) ? pValueExclusionTest1 : (pValueExclusionTest1 = new ValueExclusionTest1Elements());
+	}
+	
+	public ParserRule getValueExclusionTest1Rule() {
+		return getValueExclusionTest1Access().getRule();
+	}
+
+	//ValueExclusionTest2 returns ValueExclusionTest:
+	//	val=ValueExclusionTestEn2;
+	public ValueExclusionTest2Elements getValueExclusionTest2Access() {
+		return (pValueExclusionTest2 != null) ? pValueExclusionTest2 : (pValueExclusionTest2 = new ValueExclusionTest2Elements());
+	}
+	
+	public ParserRule getValueExclusionTest2Rule() {
+		return getValueExclusionTest2Access().getRule();
+	}
+
+	//enum ValueExclusionTestEn0 returns ValueExclusionTestEn:
+	//	lit0;
+	public ValueExclusionTestEn0Elements getValueExclusionTestEn0Access() {
+		return (unknownRuleValueExclusionTestEn0 != null) ? unknownRuleValueExclusionTestEn0 : (unknownRuleValueExclusionTestEn0 = new ValueExclusionTestEn0Elements());
+	}
+	
+	public EnumRule getValueExclusionTestEn0Rule() {
+		return getValueExclusionTestEn0Access().getRule();
+	}
+
+	//enum ValueExclusionTestEn1 returns ValueExclusionTestEn:
+	//	lit1;
+	public ValueExclusionTestEn1Elements getValueExclusionTestEn1Access() {
+		return (unknownRuleValueExclusionTestEn1 != null) ? unknownRuleValueExclusionTestEn1 : (unknownRuleValueExclusionTestEn1 = new ValueExclusionTestEn1Elements());
+	}
+	
+	public EnumRule getValueExclusionTestEn1Rule() {
+		return getValueExclusionTestEn1Access().getRule();
+	}
+
+	//enum ValueExclusionTestEn2 returns ValueExclusionTestEn:
+	//	lit2;
+	public ValueExclusionTestEn2Elements getValueExclusionTestEn2Access() {
+		return (unknownRuleValueExclusionTestEn2 != null) ? unknownRuleValueExclusionTestEn2 : (unknownRuleValueExclusionTestEn2 = new ValueExclusionTestEn2Elements());
+	}
+	
+	public EnumRule getValueExclusionTestEn2Rule() {
+		return getValueExclusionTestEn2Access().getRule();
 	}
 
 	//terminal ID:

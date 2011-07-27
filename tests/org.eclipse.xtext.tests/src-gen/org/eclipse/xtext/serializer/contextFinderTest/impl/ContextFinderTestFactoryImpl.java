@@ -6,6 +6,7 @@
 package org.eclipse.xtext.serializer.contextFinderTest.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -78,10 +79,45 @@ public class ContextFinderTestFactoryImpl extends EFactoryImpl implements Contex
       case ContextFinderTestPackage.PARENT_REF_TEST2: return createParentRefTest2();
       case ContextFinderTestPackage.PARENT_REF_TEST_CHILD: return createParentRefTestChild();
       case ContextFinderTestPackage.QUANTITY_EXCLUSION_TEST: return createQuantityExclusionTest();
+      case ContextFinderTestPackage.VALUE_EXCLUSION_TEST: return createValueExclusionTest();
       case ContextFinderTestPackage.NESTED_TYPE_RECURSIVE_TEST1: return createNestedTypeRecursiveTest1();
       case ContextFinderTestPackage.NESTED_TYPE_RECURSIVE_TEST2: return createNestedTypeRecursiveTest2();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+    }
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Object createFromString(EDataType eDataType, String initialValue)
+  {
+    switch (eDataType.getClassifierID())
+    {
+      case ContextFinderTestPackage.VALUE_EXCLUSION_TEST_EN:
+        return createValueExclusionTestEnFromString(eDataType, initialValue);
+      default:
+        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+    }
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String convertToString(EDataType eDataType, Object instanceValue)
+  {
+    switch (eDataType.getClassifierID())
+    {
+      case ContextFinderTestPackage.VALUE_EXCLUSION_TEST_EN:
+        return convertValueExclusionTestEnToString(eDataType, instanceValue);
+      default:
+        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
     }
   }
 
@@ -211,6 +247,17 @@ public class ContextFinderTestFactoryImpl extends EFactoryImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  public ValueExclusionTest createValueExclusionTest()
+  {
+    ValueExclusionTestImpl valueExclusionTest = new ValueExclusionTestImpl();
+    return valueExclusionTest;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public NestedTypeRecursiveTest1 createNestedTypeRecursiveTest1()
   {
     NestedTypeRecursiveTest1Impl nestedTypeRecursiveTest1 = new NestedTypeRecursiveTest1Impl();
@@ -226,6 +273,28 @@ public class ContextFinderTestFactoryImpl extends EFactoryImpl implements Contex
   {
     NestedTypeRecursiveTest2Impl nestedTypeRecursiveTest2 = new NestedTypeRecursiveTest2Impl();
     return nestedTypeRecursiveTest2;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ValueExclusionTestEn createValueExclusionTestEnFromString(EDataType eDataType, String initialValue)
+  {
+    ValueExclusionTestEn result = ValueExclusionTestEn.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertValueExclusionTestEnToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
   }
 
   /**

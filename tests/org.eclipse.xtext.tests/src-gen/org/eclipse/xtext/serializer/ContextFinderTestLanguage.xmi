@@ -60,6 +60,15 @@
             </terminal>
           </elements>
         </elements>
+        <elements xsi:type="xtext:Group">
+          <elements xsi:type="xtext:Keyword" value="#6"/>
+          <elements xsi:type="xtext:Assignment" feature="valueExclusion" operator="=">
+            <terminal xsi:type="xtext:Alternatives">
+              <elements xsi:type="xtext:RuleCall" rule="/0/@rules.17"/>
+              <elements xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
+            </terminal>
+          </elements>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Model2">
@@ -266,6 +275,49 @@
         <elements xsi:type="xtext:Assignment" feature="attr2" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
         </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="ValueExclusionTest1">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/contextfindertestlanguage#//ValueExclusionTest"/>
+      </type>
+      <alternatives xsi:type="xtext:Assignment" feature="val" operator="=">
+        <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.20"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="ValueExclusionTest2">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/contextfindertestlanguage#//ValueExclusionTest"/>
+      </type>
+      <alternatives xsi:type="xtext:Assignment" feature="val" operator="=">
+        <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.21"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:EnumRule" name="ValueExclusionTestEn0">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EEnum" href="http://www.eclipse.org/2009/tmf/xtext/contextfindertestlanguage#//ValueExclusionTestEn"/>
+      </type>
+      <alternatives xsi:type="xtext:EnumLiteralDeclaration">
+        <enumLiteral href="http://www.eclipse.org/2009/tmf/xtext/contextfindertestlanguage#//ValueExclusionTestEn/lit0"/>
+        <literal value="lit0"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:EnumRule" name="ValueExclusionTestEn1">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EEnum" href="http://www.eclipse.org/2009/tmf/xtext/contextfindertestlanguage#//ValueExclusionTestEn"/>
+      </type>
+      <alternatives xsi:type="xtext:EnumLiteralDeclaration">
+        <enumLiteral href="http://www.eclipse.org/2009/tmf/xtext/contextfindertestlanguage#//ValueExclusionTestEn/lit1"/>
+        <literal value="lit1"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:EnumRule" name="ValueExclusionTestEn2">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EEnum" href="http://www.eclipse.org/2009/tmf/xtext/contextfindertestlanguage#//ValueExclusionTestEn"/>
+      </type>
+      <alternatives xsi:type="xtext:EnumLiteralDeclaration">
+        <enumLiteral href="http://www.eclipse.org/2009/tmf/xtext/contextfindertestlanguage#//ValueExclusionTestEn/lit2"/>
+        <literal value="lit2"/>
       </alternatives>
     </rules>
   </xtext:Grammar>

@@ -9,6 +9,11 @@
     editorPluginID="org.eclipse.xtext.tests.editor">
   <genPackages prefix="ContextFinderTest" basePackage="org.eclipse.xtext.serializer"
       disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//ValueExclusionTestEn">
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//ValueExclusionTestEn/lit0"/>
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//ValueExclusionTestEn/lit1"/>
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//ValueExclusionTestEn/lit2"/>
+    </genEnums>
     <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//Model">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//Model/model"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//Model/attributeExclusion"/>
@@ -16,6 +21,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//Model/nestedTypeRecursiveTest2"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//Model/parentRef"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//Model/quantityExclusion"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//Model/valueExclusion"/>
     </genClasses>
     <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//AttributeExclusionTest">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//AttributeExclusionTest/attr1"/>
@@ -44,6 +50,9 @@
     <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//QuantityExclusionTest">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//QuantityExclusionTest/attr1"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//QuantityExclusionTest/attr2"/>
+    </genClasses>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//ValueExclusionTest">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//ValueExclusionTest/val"/>
     </genClasses>
     <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//NestedTypeRecursiveTest1"/>
     <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//NestedTypeRecursiveTest2"/>

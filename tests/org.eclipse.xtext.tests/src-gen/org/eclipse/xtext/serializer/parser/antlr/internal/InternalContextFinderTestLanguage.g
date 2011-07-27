@@ -24,6 +24,7 @@ import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
@@ -298,6 +299,47 @@ ruleModel returns [EObject current=null]
        			"quantityExclusion",
         		lv_quantityExclusion_11_2, 
         		"QuantityExclusionTest2");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+
+)
+))
+    |(	otherlv_12='#6' 
+    {
+    	newLeafNode(otherlv_12, grammarAccess.getModelAccess().getNumberSignDigitSixKeyword_6_0());
+    }
+(
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getValueExclusionValueExclusionTest1ParserRuleCall_6_1_0_0()); 
+	    }
+		lv_valueExclusion_13_1=ruleValueExclusionTest1		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"valueExclusion",
+        		lv_valueExclusion_13_1, 
+        		"ValueExclusionTest1");
+	        afterParserOrEnumRuleCall();
+	    }
+
+    |		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getValueExclusionValueExclusionTest2ParserRuleCall_6_1_0_1()); 
+	    }
+		lv_valueExclusion_13_2=ruleValueExclusionTest2		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"valueExclusion",
+        		lv_valueExclusion_13_2, 
+        		"ValueExclusionTest2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -979,6 +1021,112 @@ ruleQuantityExclusionTest2 returns [EObject current=null]
 ;
 
 
+
+
+
+// Entry rule entryRuleValueExclusionTest1
+entryRuleValueExclusionTest1 returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getValueExclusionTest1Rule()); }
+	 iv_ruleValueExclusionTest1=ruleValueExclusionTest1 
+	 { $current=$iv_ruleValueExclusionTest1.current; } 
+	 EOF 
+;
+
+// Rule ValueExclusionTest1
+ruleValueExclusionTest1 returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getValueExclusionTest1Access().getValValueExclusionTestEn1EnumRuleCall_0()); 
+	    }
+		lv_val_0_0=ruleValueExclusionTestEn1		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getValueExclusionTest1Rule());
+	        }
+       		set(
+       			$current, 
+       			"val",
+        		lv_val_0_0, 
+        		"ValueExclusionTestEn1");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)
+;
+
+
+
+
+
+// Entry rule entryRuleValueExclusionTest2
+entryRuleValueExclusionTest2 returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getValueExclusionTest2Rule()); }
+	 iv_ruleValueExclusionTest2=ruleValueExclusionTest2 
+	 { $current=$iv_ruleValueExclusionTest2.current; } 
+	 EOF 
+;
+
+// Rule ValueExclusionTest2
+ruleValueExclusionTest2 returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getValueExclusionTest2Access().getValValueExclusionTestEn2EnumRuleCall_0()); 
+	    }
+		lv_val_0_0=ruleValueExclusionTestEn2		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getValueExclusionTest2Rule());
+	        }
+       		set(
+       			$current, 
+       			"val",
+        		lv_val_0_0, 
+        		"ValueExclusionTestEn2");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)
+;
+
+
+
+
+
+
+
+// Rule ValueExclusionTestEn1
+ruleValueExclusionTestEn1 returns [Enumerator current=null] 
+    @init { enterRule(); }
+    @after { leaveRule(); }:
+(	enumLiteral_0='lit1' 
+	{
+        $current = grammarAccess.getValueExclusionTestEn1Access().getLit1EnumLiteralDeclaration().getEnumLiteral().getInstance();
+        newLeafNode(enumLiteral_0, grammarAccess.getValueExclusionTestEn1Access().getLit1EnumLiteralDeclaration()); 
+    }
+);
+
+
+
+// Rule ValueExclusionTestEn2
+ruleValueExclusionTestEn2 returns [Enumerator current=null] 
+    @init { enterRule(); }
+    @after { leaveRule(); }:
+(	enumLiteral_0='lit2' 
+	{
+        $current = grammarAccess.getValueExclusionTestEn2Access().getLit2EnumLiteralDeclaration().getEnumLiteral().getInstance();
+        newLeafNode(enumLiteral_0, grammarAccess.getValueExclusionTestEn2Access().getLit2EnumLiteralDeclaration()); 
+    }
+);
 
 
 

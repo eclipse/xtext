@@ -7,6 +7,7 @@ package org.eclipse.xtext.serializer.contextFinderTest;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -124,13 +125,22 @@ public interface ContextFinderTestPackage extends EPackage
   int MODEL__QUANTITY_EXCLUSION = 5;
 
   /**
+   * The feature id for the '<em><b>Value Exclusion</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__VALUE_EXCLUSION = 6;
+
+  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 6;
+  int MODEL_FEATURE_COUNT = 7;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.contextFinderTest.impl.AttributeExclusionTestImpl <em>Attribute Exclusion Test</em>}' class.
@@ -431,6 +441,34 @@ public interface ContextFinderTestPackage extends EPackage
   int QUANTITY_EXCLUSION_TEST_FEATURE_COUNT = 2;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.contextFinderTest.impl.ValueExclusionTestImpl <em>Value Exclusion Test</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.contextFinderTest.impl.ValueExclusionTestImpl
+   * @see org.eclipse.xtext.serializer.contextFinderTest.impl.ContextFinderTestPackageImpl#getValueExclusionTest()
+   * @generated
+   */
+  int VALUE_EXCLUSION_TEST = 11;
+
+  /**
+   * The feature id for the '<em><b>Val</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VALUE_EXCLUSION_TEST__VAL = 0;
+
+  /**
+   * The number of structural features of the '<em>Value Exclusion Test</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VALUE_EXCLUSION_TEST_FEATURE_COUNT = 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.contextFinderTest.impl.NestedTypeRecursiveTest1Impl <em>Nested Type Recursive Test1</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -438,7 +476,7 @@ public interface ContextFinderTestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.contextFinderTest.impl.ContextFinderTestPackageImpl#getNestedTypeRecursiveTest1()
    * @generated
    */
-  int NESTED_TYPE_RECURSIVE_TEST1 = 11;
+  int NESTED_TYPE_RECURSIVE_TEST1 = 12;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -466,7 +504,7 @@ public interface ContextFinderTestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.contextFinderTest.impl.ContextFinderTestPackageImpl#getNestedTypeRecursiveTest2()
    * @generated
    */
-  int NESTED_TYPE_RECURSIVE_TEST2 = 12;
+  int NESTED_TYPE_RECURSIVE_TEST2 = 13;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -485,6 +523,16 @@ public interface ContextFinderTestPackage extends EPackage
    * @ordered
    */
   int NESTED_TYPE_RECURSIVE_TEST2_FEATURE_COUNT = NESTED_TYPE_RECURSIVE_TEST_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.contextFinderTest.ValueExclusionTestEn <em>Value Exclusion Test En</em>}' enum.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.contextFinderTest.ValueExclusionTestEn
+   * @see org.eclipse.xtext.serializer.contextFinderTest.impl.ContextFinderTestPackageImpl#getValueExclusionTestEn()
+   * @generated
+   */
+  int VALUE_EXCLUSION_TEST_EN = 14;
 
 
   /**
@@ -562,6 +610,17 @@ public interface ContextFinderTestPackage extends EPackage
    * @generated
    */
   EReference getModel_QuantityExclusion();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.contextFinderTest.Model#getValueExclusion <em>Value Exclusion</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Value Exclusion</em>'.
+   * @see org.eclipse.xtext.serializer.contextFinderTest.Model#getValueExclusion()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_ValueExclusion();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.contextFinderTest.AttributeExclusionTest <em>Attribute Exclusion Test</em>}'.
@@ -774,6 +833,27 @@ public interface ContextFinderTestPackage extends EPackage
   EAttribute getQuantityExclusionTest_Attr2();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.contextFinderTest.ValueExclusionTest <em>Value Exclusion Test</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Value Exclusion Test</em>'.
+   * @see org.eclipse.xtext.serializer.contextFinderTest.ValueExclusionTest
+   * @generated
+   */
+  EClass getValueExclusionTest();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.contextFinderTest.ValueExclusionTest#getVal <em>Val</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val</em>'.
+   * @see org.eclipse.xtext.serializer.contextFinderTest.ValueExclusionTest#getVal()
+   * @see #getValueExclusionTest()
+   * @generated
+   */
+  EAttribute getValueExclusionTest_Val();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.contextFinderTest.NestedTypeRecursiveTest1 <em>Nested Type Recursive Test1</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -792,6 +872,16 @@ public interface ContextFinderTestPackage extends EPackage
    * @generated
    */
   EClass getNestedTypeRecursiveTest2();
+
+  /**
+   * Returns the meta object for enum '{@link org.eclipse.xtext.serializer.contextFinderTest.ValueExclusionTestEn <em>Value Exclusion Test En</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for enum '<em>Value Exclusion Test En</em>'.
+   * @see org.eclipse.xtext.serializer.contextFinderTest.ValueExclusionTestEn
+   * @generated
+   */
+  EEnum getValueExclusionTestEn();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -873,6 +963,14 @@ public interface ContextFinderTestPackage extends EPackage
      * @generated
      */
     EReference MODEL__QUANTITY_EXCLUSION = eINSTANCE.getModel_QuantityExclusion();
+
+    /**
+     * The meta object literal for the '<em><b>Value Exclusion</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__VALUE_EXCLUSION = eINSTANCE.getModel_ValueExclusion();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.contextFinderTest.impl.AttributeExclusionTestImpl <em>Attribute Exclusion Test</em>}' class.
@@ -1055,6 +1153,24 @@ public interface ContextFinderTestPackage extends EPackage
     EAttribute QUANTITY_EXCLUSION_TEST__ATTR2 = eINSTANCE.getQuantityExclusionTest_Attr2();
 
     /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.contextFinderTest.impl.ValueExclusionTestImpl <em>Value Exclusion Test</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.contextFinderTest.impl.ValueExclusionTestImpl
+     * @see org.eclipse.xtext.serializer.contextFinderTest.impl.ContextFinderTestPackageImpl#getValueExclusionTest()
+     * @generated
+     */
+    EClass VALUE_EXCLUSION_TEST = eINSTANCE.getValueExclusionTest();
+
+    /**
+     * The meta object literal for the '<em><b>Val</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute VALUE_EXCLUSION_TEST__VAL = eINSTANCE.getValueExclusionTest_Val();
+
+    /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.contextFinderTest.impl.NestedTypeRecursiveTest1Impl <em>Nested Type Recursive Test1</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1073,6 +1189,16 @@ public interface ContextFinderTestPackage extends EPackage
      * @generated
      */
     EClass NESTED_TYPE_RECURSIVE_TEST2 = eINSTANCE.getNestedTypeRecursiveTest2();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.contextFinderTest.ValueExclusionTestEn <em>Value Exclusion Test En</em>}' enum.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.contextFinderTest.ValueExclusionTestEn
+     * @see org.eclipse.xtext.serializer.contextFinderTest.impl.ContextFinderTestPackageImpl#getValueExclusionTestEn()
+     * @generated
+     */
+    EEnum VALUE_EXCLUSION_TEST_EN = eINSTANCE.getValueExclusionTestEn();
 
   }
 

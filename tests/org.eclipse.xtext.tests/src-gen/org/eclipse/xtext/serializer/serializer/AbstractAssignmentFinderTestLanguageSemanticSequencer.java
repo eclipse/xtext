@@ -60,12 +60,12 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 				}
 				else break;
 			case AssignmentFinderTestPackage.CONTAINMENT_REF_N:
-				if(context == grammarAccess.getContainmentRef2Rule()) {
-					sequence_ContainmentRef2_ContainmentRefN(context, (ContainmentRefN) semanticObject); 
+				if(context == grammarAccess.getContainmentRef1Rule()) {
+					sequence_ContainmentRef1_ContainmentRefN(context, (ContainmentRefN) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getContainmentRef1Rule()) {
-					sequence_ContainmentRef1_ContainmentRefN(context, (ContainmentRefN) semanticObject); 
+				else if(context == grammarAccess.getContainmentRef2Rule()) {
+					sequence_ContainmentRef2_ContainmentRefN(context, (ContainmentRefN) semanticObject); 
 					return; 
 				}
 				else break;

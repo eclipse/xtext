@@ -18,6 +18,7 @@ import org.eclipse.xtext.serializer.contextFinderTest.ParentRefTest1;
 import org.eclipse.xtext.serializer.contextFinderTest.ParentRefTest2;
 import org.eclipse.xtext.serializer.contextFinderTest.ParentRefTestChild;
 import org.eclipse.xtext.serializer.contextFinderTest.QuantityExclusionTest;
+import org.eclipse.xtext.serializer.contextFinderTest.ValueExclusionTest;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractSemanticSequencer;
@@ -57,12 +58,12 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == ContextFinderTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case ContextFinderTestPackage.ATTRIBUTE_EXCLUSION_TEST:
-				if(context == grammarAccess.getAttributeExclusionTest2Rule()) {
-					sequence_AttributeExclusionTest2_AttributeExclusionTest(context, (AttributeExclusionTest) semanticObject); 
+				if(context == grammarAccess.getAttributeExclusionTest1Rule()) {
+					sequence_AttributeExclusionTest1_AttributeExclusionTest(context, (AttributeExclusionTest) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getAttributeExclusionTest1Rule()) {
-					sequence_AttributeExclusionTest1_AttributeExclusionTest(context, (AttributeExclusionTest) semanticObject); 
+				else if(context == grammarAccess.getAttributeExclusionTest2Rule()) {
+					sequence_AttributeExclusionTest2_AttributeExclusionTest(context, (AttributeExclusionTest) semanticObject); 
 					return; 
 				}
 				else break;
@@ -91,14 +92,14 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 				}
 				else break;
 			case ContextFinderTestPackage.NESTED_TYPE_RECURSIVE_TEST:
-				if(context == grammarAccess.getNestedTypeRecursiveTest2Rule() ||
-				   context == grammarAccess.getNestedTypeRecursiveTest2Access().getNestedTypeRecursiveTestLeftAction_2_0()) {
-					sequence_NestedTypeRecursiveTest2_NestedTypeRecursiveTest(context, (NestedTypeRecursiveTest) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getNestedTypeRecursiveTest1Rule() ||
+				if(context == grammarAccess.getNestedTypeRecursiveTest1Rule() ||
 				   context == grammarAccess.getNestedTypeRecursiveTest1Access().getNestedTypeRecursiveTestLeftAction_2_0()) {
 					sequence_NestedTypeRecursiveTest1_NestedTypeRecursiveTest(context, (NestedTypeRecursiveTest) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getNestedTypeRecursiveTest2Rule() ||
+				   context == grammarAccess.getNestedTypeRecursiveTest2Access().getNestedTypeRecursiveTestLeftAction_2_0()) {
+					sequence_NestedTypeRecursiveTest2_NestedTypeRecursiveTest(context, (NestedTypeRecursiveTest) semanticObject); 
 					return; 
 				}
 				else break;
@@ -115,12 +116,12 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 				}
 				else break;
 			case ContextFinderTestPackage.NESTED_TYPE_TEST:
-				if(context == grammarAccess.getNestedTypeTest2Rule()) {
-					sequence_NestedTypeTest2_NestedTypeTest(context, (NestedTypeTest) semanticObject); 
+				if(context == grammarAccess.getNestedTypeTest1Rule()) {
+					sequence_NestedTypeTest1_NestedTypeTest(context, (NestedTypeTest) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getNestedTypeTest1Rule()) {
-					sequence_NestedTypeTest1_NestedTypeTest(context, (NestedTypeTest) semanticObject); 
+				else if(context == grammarAccess.getNestedTypeTest2Rule()) {
+					sequence_NestedTypeTest2_NestedTypeTest(context, (NestedTypeTest) semanticObject); 
 					return; 
 				}
 				else break;
@@ -153,6 +154,16 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 				}
 				else if(context == grammarAccess.getQuantityExclusionTest2Rule()) {
 					sequence_QuantityExclusionTest2_QuantityExclusionTest(context, (QuantityExclusionTest) semanticObject); 
+					return; 
+				}
+				else break;
+			case ContextFinderTestPackage.VALUE_EXCLUSION_TEST:
+				if(context == grammarAccess.getValueExclusionTest2Rule()) {
+					sequence_ValueExclusionTest2_ValueExclusionTest(context, (ValueExclusionTest) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getValueExclusionTest1Rule()) {
+					sequence_ValueExclusionTest1_ValueExclusionTest(context, (ValueExclusionTest) semanticObject); 
 					return; 
 				}
 				else break;
@@ -208,7 +219,9 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	 *         parentRef=ParentRefTest1 | 
 	 *         parentRef=ParentRefTest2 | 
 	 *         quantityExclusion=QuantityExclusionTest1 | 
-	 *         quantityExclusion=QuantityExclusionTest2
+	 *         quantityExclusion=QuantityExclusionTest2 | 
+	 *         valueExclusion=ValueExclusionTest1 | 
+	 *         valueExclusion=ValueExclusionTest2
 	 *     )
 	 *
 	 * Features:
@@ -223,6 +236,8 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	 *         EXCLUDE_IF_SET parentRef
 	 *         EXCLUDE_IF_SET quantityExclusion
 	 *         EXCLUDE_IF_SET quantityExclusion
+	 *         EXCLUDE_IF_SET valueExclusion
+	 *         EXCLUDE_IF_SET valueExclusion
 	 *    attributeExclusion[0, 2]
 	 *         EXCLUDE_IF_SET model
 	 *         EXCLUDE_IF_SET nestedType
@@ -233,6 +248,8 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	 *         EXCLUDE_IF_SET parentRef
 	 *         EXCLUDE_IF_SET quantityExclusion
 	 *         EXCLUDE_IF_SET quantityExclusion
+	 *         EXCLUDE_IF_SET valueExclusion
+	 *         EXCLUDE_IF_SET valueExclusion
 	 *    nestedType[0, 2]
 	 *         EXCLUDE_IF_SET model
 	 *         EXCLUDE_IF_SET attributeExclusion
@@ -243,6 +260,8 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	 *         EXCLUDE_IF_SET parentRef
 	 *         EXCLUDE_IF_SET quantityExclusion
 	 *         EXCLUDE_IF_SET quantityExclusion
+	 *         EXCLUDE_IF_SET valueExclusion
+	 *         EXCLUDE_IF_SET valueExclusion
 	 *    nestedTypeRecursiveTest2[0, 2]
 	 *         EXCLUDE_IF_SET model
 	 *         EXCLUDE_IF_SET attributeExclusion
@@ -253,6 +272,8 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	 *         EXCLUDE_IF_SET parentRef
 	 *         EXCLUDE_IF_SET quantityExclusion
 	 *         EXCLUDE_IF_SET quantityExclusion
+	 *         EXCLUDE_IF_SET valueExclusion
+	 *         EXCLUDE_IF_SET valueExclusion
 	 *    parentRef[0, 2]
 	 *         EXCLUDE_IF_SET model
 	 *         EXCLUDE_IF_SET attributeExclusion
@@ -263,6 +284,8 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	 *         EXCLUDE_IF_SET nestedTypeRecursiveTest2
 	 *         EXCLUDE_IF_SET quantityExclusion
 	 *         EXCLUDE_IF_SET quantityExclusion
+	 *         EXCLUDE_IF_SET valueExclusion
+	 *         EXCLUDE_IF_SET valueExclusion
 	 *    quantityExclusion[0, 2]
 	 *         EXCLUDE_IF_SET model
 	 *         EXCLUDE_IF_SET attributeExclusion
@@ -273,6 +296,20 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	 *         EXCLUDE_IF_SET nestedTypeRecursiveTest2
 	 *         EXCLUDE_IF_SET parentRef
 	 *         EXCLUDE_IF_SET parentRef
+	 *         EXCLUDE_IF_SET valueExclusion
+	 *         EXCLUDE_IF_SET valueExclusion
+	 *    valueExclusion[0, 2]
+	 *         EXCLUDE_IF_SET model
+	 *         EXCLUDE_IF_SET attributeExclusion
+	 *         EXCLUDE_IF_SET attributeExclusion
+	 *         EXCLUDE_IF_SET nestedType
+	 *         EXCLUDE_IF_SET nestedType
+	 *         EXCLUDE_IF_SET nestedTypeRecursiveTest2
+	 *         EXCLUDE_IF_SET nestedTypeRecursiveTest2
+	 *         EXCLUDE_IF_SET parentRef
+	 *         EXCLUDE_IF_SET parentRef
+	 *         EXCLUDE_IF_SET quantityExclusion
+	 *         EXCLUDE_IF_SET quantityExclusion
 	 */
 	protected void sequence_Model_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -500,5 +537,43 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	 */
 	protected void sequence_QuantityExclusionTest2_QuantityExclusionTest(EObject context, QuantityExclusionTest semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     val=ValueExclusionTestEn1
+	 *
+	 * Features:
+	 *    val[1, 1]
+	 */
+	protected void sequence_ValueExclusionTest1_ValueExclusionTest(EObject context, ValueExclusionTest semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, ContextFinderTestPackage.Literals.VALUE_EXCLUSION_TEST__VAL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ContextFinderTestPackage.Literals.VALUE_EXCLUSION_TEST__VAL));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getValueExclusionTest1Access().getValValueExclusionTestEn1EnumRuleCall_0(), semanticObject.getVal());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     val=ValueExclusionTestEn2
+	 *
+	 * Features:
+	 *    val[1, 1]
+	 */
+	protected void sequence_ValueExclusionTest2_ValueExclusionTest(EObject context, ValueExclusionTest semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, ContextFinderTestPackage.Literals.VALUE_EXCLUSION_TEST__VAL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ContextFinderTestPackage.Literals.VALUE_EXCLUSION_TEST__VAL));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getValueExclusionTest2Access().getValValueExclusionTestEn2EnumRuleCall_0(), semanticObject.getVal());
+		feeder.finish();
 	}
 }

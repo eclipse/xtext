@@ -7,6 +7,7 @@ package org.eclipse.xtext.serializer.contextFinderTest.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -27,6 +28,8 @@ import org.eclipse.xtext.serializer.contextFinderTest.ParentRefTest1;
 import org.eclipse.xtext.serializer.contextFinderTest.ParentRefTest2;
 import org.eclipse.xtext.serializer.contextFinderTest.ParentRefTestChild;
 import org.eclipse.xtext.serializer.contextFinderTest.QuantityExclusionTest;
+import org.eclipse.xtext.serializer.contextFinderTest.ValueExclusionTest;
+import org.eclipse.xtext.serializer.contextFinderTest.ValueExclusionTestEn;
 
 /**
  * <!-- begin-user-doc -->
@@ -118,6 +121,13 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass valueExclusionTestEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass nestedTypeRecursiveTest1EClass = null;
 
   /**
@@ -126,6 +136,13 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * @generated
    */
   private EClass nestedTypeRecursiveTest2EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EEnum valueExclusionTestEnEEnum = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -258,6 +275,16 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
   public EReference getModel_QuantityExclusion()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_ValueExclusion()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(6);
   }
 
   /**
@@ -465,6 +492,26 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getValueExclusionTest()
+  {
+    return valueExclusionTestEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getValueExclusionTest_Val()
+  {
+    return (EAttribute)valueExclusionTestEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getNestedTypeRecursiveTest1()
   {
     return nestedTypeRecursiveTest1EClass;
@@ -478,6 +525,16 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
   public EClass getNestedTypeRecursiveTest2()
   {
     return nestedTypeRecursiveTest2EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EEnum getValueExclusionTestEn()
+  {
+    return valueExclusionTestEnEEnum;
   }
 
   /**
@@ -517,6 +574,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
     createEReference(modelEClass, MODEL__NESTED_TYPE_RECURSIVE_TEST2);
     createEReference(modelEClass, MODEL__PARENT_REF);
     createEReference(modelEClass, MODEL__QUANTITY_EXCLUSION);
+    createEReference(modelEClass, MODEL__VALUE_EXCLUSION);
 
     attributeExclusionTestEClass = createEClass(ATTRIBUTE_EXCLUSION_TEST);
     createEAttribute(attributeExclusionTestEClass, ATTRIBUTE_EXCLUSION_TEST__ATTR1);
@@ -548,9 +606,15 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
     createEAttribute(quantityExclusionTestEClass, QUANTITY_EXCLUSION_TEST__ATTR1);
     createEAttribute(quantityExclusionTestEClass, QUANTITY_EXCLUSION_TEST__ATTR2);
 
+    valueExclusionTestEClass = createEClass(VALUE_EXCLUSION_TEST);
+    createEAttribute(valueExclusionTestEClass, VALUE_EXCLUSION_TEST__VAL);
+
     nestedTypeRecursiveTest1EClass = createEClass(NESTED_TYPE_RECURSIVE_TEST1);
 
     nestedTypeRecursiveTest2EClass = createEClass(NESTED_TYPE_RECURSIVE_TEST2);
+
+    // Create enums
+    valueExclusionTestEnEEnum = createEEnum(VALUE_EXCLUSION_TEST_EN);
   }
 
   /**
@@ -595,6 +659,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
     initEReference(getModel_NestedTypeRecursiveTest2(), this.getNestedTypeRecursiveTest(), null, "nestedTypeRecursiveTest2", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_ParentRef(), ecorePackage.getEObject(), null, "parentRef", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_QuantityExclusion(), this.getQuantityExclusionTest(), null, "quantityExclusion", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_ValueExclusion(), this.getValueExclusionTest(), null, "valueExclusion", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(attributeExclusionTestEClass, AttributeExclusionTest.class, "AttributeExclusionTest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getAttributeExclusionTest_Attr1(), ecorePackage.getEString(), "attr1", null, 0, 1, AttributeExclusionTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -626,9 +691,18 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
     initEAttribute(getQuantityExclusionTest_Attr1(), ecorePackage.getEString(), "attr1", null, 0, 1, QuantityExclusionTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getQuantityExclusionTest_Attr2(), ecorePackage.getEString(), "attr2", null, 0, 1, QuantityExclusionTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(valueExclusionTestEClass, ValueExclusionTest.class, "ValueExclusionTest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getValueExclusionTest_Val(), this.getValueExclusionTestEn(), "val", null, 0, 1, ValueExclusionTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(nestedTypeRecursiveTest1EClass, NestedTypeRecursiveTest1.class, "NestedTypeRecursiveTest1", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(nestedTypeRecursiveTest2EClass, NestedTypeRecursiveTest2.class, "NestedTypeRecursiveTest2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    // Initialize enums and add enum literals
+    initEEnum(valueExclusionTestEnEEnum, ValueExclusionTestEn.class, "ValueExclusionTestEn");
+    addEEnumLiteral(valueExclusionTestEnEEnum, ValueExclusionTestEn.LIT0);
+    addEEnumLiteral(valueExclusionTestEnEEnum, ValueExclusionTestEn.LIT1);
+    addEEnumLiteral(valueExclusionTestEnEEnum, ValueExclusionTestEn.LIT2);
 
     // Create resource
     createResource(eNS_URI);

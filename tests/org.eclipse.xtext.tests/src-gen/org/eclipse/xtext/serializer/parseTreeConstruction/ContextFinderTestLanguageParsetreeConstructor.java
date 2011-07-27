@@ -48,6 +48,8 @@ protected class ThisRootNode extends RootToken {
 			case 14: return new ParentRefTestChild2_Group(this, this, 14, inst);
 			case 15: return new QuantityExclusionTest1_Group(this, this, 15, inst);
 			case 16: return new QuantityExclusionTest2_Group(this, this, 16, inst);
+			case 17: return new ValueExclusionTest1_ValAssignment(this, this, 17, inst);
+			case 18: return new ValueExclusionTest2_ValAssignment(this, this, 18, inst);
 			default: return null;
 		}	
 	}	
@@ -60,14 +62,16 @@ protected class ThisRootNode extends RootToken {
  * 	"#0" model=Model2 | "#1" attributeExclusion=(AttributeExclusionTest1 | AttributeExclusionTest2) | "#2"
  * 	nestedType=(NestedTypeTest1 | NestedTypeTest2) | "#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1 |
  * 	NestedTypeRecursiveTest2) | "#4" parentRef=(ParentRefTest1 | ParentRefTest2) | "#5"
- * 	quantityExclusion=(QuantityExclusionTest1 | QuantityExclusionTest2);
+ * 	quantityExclusion=(QuantityExclusionTest1 | QuantityExclusionTest2) | "#6" valueExclusion=(ValueExclusionTest1 |
+ * 	ValueExclusionTest2);
  *
  **/
 
 // "#0" model=Model2 | "#1" attributeExclusion=(AttributeExclusionTest1 | AttributeExclusionTest2) | "#2"
 // nestedType=(NestedTypeTest1 | NestedTypeTest2) | "#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1 |
 // NestedTypeRecursiveTest2) | "#4" parentRef=(ParentRefTest1 | ParentRefTest2) | "#5"
-// quantityExclusion=(QuantityExclusionTest1 | QuantityExclusionTest2)
+// quantityExclusion=(QuantityExclusionTest1 | QuantityExclusionTest2) | "#6" valueExclusion=(ValueExclusionTest1 |
+// ValueExclusionTest2)
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -88,6 +92,7 @@ protected class Model_Alternatives extends AlternativesToken {
 			case 3: return new Model_Group_3(lastRuleCallOrigin, this, 3, inst);
 			case 4: return new Model_Group_4(lastRuleCallOrigin, this, 4, inst);
 			case 5: return new Model_Group_5(lastRuleCallOrigin, this, 5, inst);
+			case 6: return new Model_Group_6(lastRuleCallOrigin, this, 6, inst);
 			default: return null;
 		}	
 	}
@@ -685,6 +690,106 @@ protected class Model_QuantityExclusionAssignment_5_1 extends AssignmentToken  {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new Model_NumberSignDigitFiveKeyword_5_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+
+// "#6" valueExclusion=(ValueExclusionTest1 | ValueExclusionTest2)
+protected class Model_Group_6 extends GroupToken {
+	
+	public Model_Group_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getModelAccess().getGroup_6();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Model_ValueExclusionAssignment_6_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "#6"
+protected class Model_NumberSignDigitSixKeyword_6_0 extends KeywordToken  {
+	
+	public Model_NumberSignDigitSixKeyword_6_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getModelAccess().getNumberSignDigitSixKeyword_6_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+}
+
+// valueExclusion=(ValueExclusionTest1 | ValueExclusionTest2)
+protected class Model_ValueExclusionAssignment_6_1 extends AssignmentToken  {
+	
+	public Model_ValueExclusionAssignment_6_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getValueExclusionAssignment_6_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new ValueExclusionTest1_ValAssignment(this, this, 0, inst);
+			case 1: return new ValueExclusionTest2_ValAssignment(this, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("valueExclusion",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("valueExclusion");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getValueExclusionTest1Rule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getModelAccess().getValueExclusionValueExclusionTest1ParserRuleCall_6_1_0_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getValueExclusionTest2Rule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getModelAccess().getValueExclusionValueExclusionTest2ParserRuleCall_6_1_0_1(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new Model_NumberSignDigitSixKeyword_6_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -2473,5 +2578,95 @@ protected class QuantityExclusionTest2_Attr2Assignment_2 extends AssignmentToken
 
 
 /************ end Rule QuantityExclusionTest2 ****************/
+
+
+/************ begin Rule ValueExclusionTest1 ****************
+ *
+ * ValueExclusionTest1 returns ValueExclusionTest:
+ * 	val=ValueExclusionTestEn1;
+ *
+ **/
+
+// val=ValueExclusionTestEn1
+protected class ValueExclusionTest1_ValAssignment extends AssignmentToken  {
+	
+	public ValueExclusionTest1_ValAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getValueExclusionTest1Access().getValAssignment();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getValueExclusionTest1Rule().getType().getClassifier())
+			return null;
+		if((value = eObjectConsumer.getConsumable("val",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("val");
+		if(enumLitSerializer.isValid(obj.getEObject(), grammarAccess.getValueExclusionTest1Access().getValValueExclusionTestEn1EnumRuleCall_0(), value, null)) { 
+			type = AssignmentType.ENUM_RULE_CALL;
+			element = grammarAccess.getValueExclusionTest1Access().getValValueExclusionTestEn1EnumRuleCall_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+/************ end Rule ValueExclusionTest1 ****************/
+
+
+/************ begin Rule ValueExclusionTest2 ****************
+ *
+ * ValueExclusionTest2 returns ValueExclusionTest:
+ * 	val=ValueExclusionTestEn2;
+ *
+ **/
+
+// val=ValueExclusionTestEn2
+protected class ValueExclusionTest2_ValAssignment extends AssignmentToken  {
+	
+	public ValueExclusionTest2_ValAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getValueExclusionTest2Access().getValAssignment();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getValueExclusionTest2Rule().getType().getClassifier())
+			return null;
+		if((value = eObjectConsumer.getConsumable("val",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("val");
+		if(enumLitSerializer.isValid(obj.getEObject(), grammarAccess.getValueExclusionTest2Access().getValValueExclusionTestEn2EnumRuleCall_0(), value, null)) { 
+			type = AssignmentType.ENUM_RULE_CALL;
+			element = grammarAccess.getValueExclusionTest2Access().getValValueExclusionTestEn2EnumRuleCall_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+/************ end Rule ValueExclusionTest2 ****************/
 
 }
