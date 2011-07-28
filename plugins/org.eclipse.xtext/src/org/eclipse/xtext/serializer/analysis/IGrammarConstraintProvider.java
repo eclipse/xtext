@@ -97,6 +97,8 @@ public interface IGrammarConstraintProvider {
 		 */
 		String getName();
 
+		String getSimpleName();
+
 		/**
 		 * @return This constraint only applies to EObjects of this type.
 		 */
