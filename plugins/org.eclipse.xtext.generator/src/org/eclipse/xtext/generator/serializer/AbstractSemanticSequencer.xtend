@@ -30,6 +30,7 @@ import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic$Acceptor
 import com.google.inject.Provider
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider
 import org.eclipse.emf.ecore.ENamedElement
+import org.eclipse.xtext.serializer.analysis.Context2NameFunction
 
 class AbstractSemanticSequencer extends GeneratedFile {
 	
@@ -40,6 +41,8 @@ class AbstractSemanticSequencer extends GeneratedFile {
 	@Inject extension SemanticSequencerUtil sequencerUtil
 	
 	@Inject SemanticSequencer sequencer
+	
+	@Inject extension Context2NameFunction ctx2name
 	
 	override String getQualifiedName(Grammar grammar) {
 		grammar.getName("Abstract", "SemanticSequencer");		
@@ -164,8 +167,8 @@ class AbstractSemanticSequencer extends GeneratedFile {
 				«FOR type:pkg.accessedClasses»
 				case «file.importedGenIntLiteral(type)»:
 					«var ctxi = 0»
-					«FOR ctx: type.accessedConstraints.entrySet /* ITERATOR j-  */»
-						«IF (ctxi = ctxi + 1) > 1 /*!j.firstIteration  */»else «ENDIF»if(«FOR c:ctx.value SEPARATOR " ||\n   "»context == grammarAccess.«c.gaAccessor»«ENDFOR») {
+					«FOR ctx: type.accessedConstraints.entrySet.sortBy(e|e.key.name) /* ITERATOR j-  */»
+						«IF (ctxi = ctxi + 1) > 1 /*!j.firstIteration  */»else «ENDIF»if(«FOR c:ctx.value.sortBy(e|e.contextName) SEPARATOR " ||\n   "»context == grammarAccess.«c.gaAccessor»«ENDFOR») {
 							sequence_«ctx.key.name»(context, («file.importedGenTypeName(type)») semanticObject); 
 							return; 
 						}
