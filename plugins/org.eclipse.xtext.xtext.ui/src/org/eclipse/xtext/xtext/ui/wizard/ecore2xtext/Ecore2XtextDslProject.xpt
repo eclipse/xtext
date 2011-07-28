@@ -33,6 +33,7 @@ var runtimeProject = "../${projectName}"
 
 Workflow {
 	bean = StandaloneSetup {
+		scanClassPath  = true
 		platformUri = "${runtimeProject}/.."
 	«FOREACH EPackageInfos AS ePackageInfo»«IF ePackageInfo.EPackageJavaFQN!=null-»
 		registerGeneratedEPackage = "«ePackageInfo.EPackageJavaFQN»"
