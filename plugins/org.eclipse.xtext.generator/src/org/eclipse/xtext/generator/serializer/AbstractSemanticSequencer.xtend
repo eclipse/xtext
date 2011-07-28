@@ -169,7 +169,7 @@ class AbstractSemanticSequencer extends GeneratedFile {
 					«var ctxi = 0»
 					«FOR ctx: type.accessedConstraints.entrySet.sortBy(e|e.key.name) /* ITERATOR j-  */»
 						«IF (ctxi = ctxi + 1) > 1 /*!j.firstIteration  */»else «ENDIF»if(«FOR c:ctx.value.sortBy(e|e.contextName) SEPARATOR " ||\n   "»context == grammarAccess.«c.gaAccessor»«ENDFOR») {
-							sequence_«ctx.key.name»(context, («file.importedGenTypeName(type)») semanticObject); 
+							sequence_«ctx.key.simpleName»(context, («file.importedGenTypeName(type)») semanticObject); 
 							return; 
 						}
 					«ENDFOR»
@@ -191,7 +191,7 @@ class AbstractSemanticSequencer extends GeneratedFile {
 			«" *    "»«f.toString().replaceAll("\\n","\n *     ")»
 		«ENDFOR»
 		 */
-		protected void sequence_«c.name»(EObject context, «file.importedGenTypeName(c.type)» semanticObject) {
+		protected void sequence_«c.simpleName»(EObject context, «file.importedGenTypeName(c.type)» semanticObject) {
 			«IF !newHashSet(grammar, null).contains(c.mostConcreteGrammar)»
 				superSequencer.createSequence(context, semanticObject);
 			«ELSEIF c.canGenerate()»
