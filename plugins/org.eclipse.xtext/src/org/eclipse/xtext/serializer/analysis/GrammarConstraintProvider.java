@@ -806,19 +806,23 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		public boolean isContentValidationNeeded() {
 			if (contentValidationNeeded != null)
 				return contentValidationNeeded;
-			if (assignments.length < 2)
-				return contentValidationNeeded = false;
-			IConstraintElement first = assignments[0];
-			if (first.getType() == ConstraintElementType.ASSIGNED_ACTION_CALL)
-				contentValidationNeeded = true;
-			for (int i = 1; i < assignments.length; i++) {
-				IConstraintElement a = assignments[i];
-				if (a.getType() == ConstraintElementType.ASSIGNED_ACTION_CALL
-						|| first.getCrossReferenceType() != a.getCrossReferenceType()
-						|| !EcoreUtil.equals(first.getGrammarElement(), a.getGrammarElement()))
-					return contentValidationNeeded = true;
+			contentValidationNeeded = false;
+			if (assignments.length >= 2) {
+				IConstraintElement first = assignments[0];
+				if (first.getType() == ConstraintElementType.ASSIGNED_ACTION_CALL)
+					contentValidationNeeded = true;
+				else
+					for (int i = 1; i < assignments.length; i++) {
+						IConstraintElement a = assignments[i];
+						if (a.getType() == ConstraintElementType.ASSIGNED_ACTION_CALL
+								|| first.getCrossReferenceType() != a.getCrossReferenceType()
+								|| !EcoreUtil.equals(first.getGrammarElement(), a.getGrammarElement())) {
+							contentValidationNeeded = true;
+							break;
+						}
+					}
 			}
-			return contentValidationNeeded = false;
+			return contentValidationNeeded;
 		}
 
 		@Override
