@@ -90,6 +90,8 @@ public interface ISyntacticSequencerPDAProvider {
 
 		AbstractElementAlias getAmbiguousSyntax();
 
+		List<AbstractElementAlias> getAmbiguousSyntaxes();
+
 		ISynAbsorberState getSource();
 	}
 
