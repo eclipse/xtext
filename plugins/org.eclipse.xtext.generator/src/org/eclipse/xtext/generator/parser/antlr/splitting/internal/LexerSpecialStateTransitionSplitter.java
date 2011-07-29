@@ -33,6 +33,9 @@ public class LexerSpecialStateTransitionSplitter {
 			"\\s*(if\\s*\\(\\s*s\\s*>=0\\s*\\)\\s*return\\s*s;\\s*" + // if ( s>=0 ) return s; $8
 			"^\\s*break;$)" // break, end case
 			, Pattern.DOTALL | Pattern.MULTILINE);
+	
+	public static final Pattern STATE_PATTERN = Pattern.compile(
+			Pattern.quote("if (state.backtracking>0) {state.failed=true; return -1;}"));
 
 	/**
 	 * Allow to disable the guard for large number of cases in switch statement.
@@ -49,7 +52,10 @@ public class LexerSpecialStateTransitionSplitter {
 		StringBuffer result = new StringBuffer();
 		while(dfaMatcher.find()) {
 			String specialStateTransition = dfaMatcher.group(2);
-			String transformedDfa = "static $1" + extractSpecialStateMethods(specialStateTransition) + "$3";
+			String staticOrNot = "$1";
+			if (!STATE_PATTERN.matcher(specialStateTransition).find())
+				staticOrNot = "static $1";
+			String transformedDfa = staticOrNot + extractSpecialStateMethods(specialStateTransition) + "$3";
 			dfaMatcher.appendReplacement(result, transformedDfa);
 		}
 		dfaMatcher.appendTail(result);
