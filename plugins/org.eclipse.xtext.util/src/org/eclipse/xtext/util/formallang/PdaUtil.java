@@ -10,18 +10,33 @@ package org.eclipse.xtext.util.formallang;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Sets;
+import com.google.inject.Inject;
 import com.google.inject.internal.Join;
 import com.google.inject.internal.Lists;
+import com.google.inject.internal.Maps;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class PdaUtil {
+
+	protected final class IsPop<S, P> implements Predicate<S> {
+		private final Pda<S, P> pda;
+
+		private IsPop(Pda<S, P> pda) {
+			this.pda = pda;
+		}
+
+		public boolean apply(S input) {
+			return pda.getPop(input) != null;
+		}
+	}
 
 	protected class StackItem<T> {
 		protected StackItem<T> parent;
@@ -119,6 +134,9 @@ public class PdaUtil {
 
 	}
 
+	@Inject
+	protected NfaUtil nfaUtil = new NfaUtil();
+
 	public final long UNREACHABLE = Long.MAX_VALUE;
 
 	public <S, P> boolean canReach(Pda<S, P> pda, S state, Iterator<P> stack, Predicate<S> matches, Predicate<S> canPass) {
@@ -139,17 +157,52 @@ public class PdaUtil {
 		return UNREACHABLE;
 	}
 
+	public <S, P> Nfa<S> filterUnambiguousPaths(Pda<S, P> pda) {
+		Map<S, List<S>> followers = Maps.newHashMap();
+		Map<S, Integer> distanceMap = nfaUtil.distanceToFinalStateMap(pda);
+		filterUnambiguousPaths(pda, pda.getStart(), distanceMap, followers);
+		return new NfaUtil.NFAImpl<S>(pda.getStart(), pda.getStop(), followers);
+	}
+
+	protected <S, P> void filterUnambiguousPaths(final Pda<S, P> pda, S state, Map<S, Integer> dist,
+			Map<S, List<S>> followers) {
+		if (followers.containsKey(state))
+			return;
+		List<S> f = Lists.newArrayList(pda.getFollowers(state));
+		if (f.size() <= 1) {
+			followers.put(state, f);
+			if (f.size() == 1)
+				filterUnambiguousPaths(pda, f.get(0), dist, followers);
+			return;
+		}
+		int closestDist = dist.get(f.get(0));
+		S closest = f.get(0);
+		for (int i = 1; i < f.size(); i++) {
+			int d = dist.get(f.get(i));
+			if (d < closestDist) {
+				closestDist = d;
+				closest = f.get(i);
+			}
+		}
+		IsPop<S, P> isPop = new IsPop<S, P>(pda);
+		Set<S> closestPops = nfaUtil.findFirst(pda, Collections.singleton(closest), isPop);
+		Iterator<S> it = f.iterator();
+		while (it.hasNext()) {
+			S next = it.next();
+			if (next != closest) {
+				Set<S> nextPops = nfaUtil.findFirst(pda, Collections.singleton(next), isPop);
+				if (!closestPops.equals(nextPops))
+					it.remove();
+			}
+		}
+		followers.put(state, f);
+		for (S follower : f)
+			filterUnambiguousPaths(pda, follower, dist, followers);
+	}
+
 	public <S, P> List<S> shortestPathTo(Pda<S, P> pda, Iterable<S> starts, Iterator<P> stack, Predicate<S> matches,
 			Predicate<S> canPass) {
 		TraceItem<S, P> trace = trace(pda, starts, stack, matches, canPass);
-		if (trace != null)
-			return trace.asList();
-		return null;
-	}
-
-	public <S, P> List<S> shortestPathTo(Pda<S, P> pda, S start, Iterator<P> stack, Predicate<S> matches,
-			Predicate<S> canPass) {
-		TraceItem<S, P> trace = trace(pda, Collections.singleton(start), stack, matches, canPass);
 		if (trace != null)
 			return trace.asList();
 		return null;
@@ -167,6 +220,14 @@ public class PdaUtil {
 		return shortestPathTo(pda, pda.getStart(), stack, Predicates.equalTo(match), Predicates.<S> alwaysTrue());
 	}
 
+	public <S, P> List<S> shortestPathTo(Pda<S, P> pda, S start, Iterator<P> stack, Predicate<S> matches,
+			Predicate<S> canPass) {
+		TraceItem<S, P> trace = trace(pda, Collections.singleton(start), stack, matches, canPass);
+		if (trace != null)
+			return trace.asList();
+		return null;
+	}
+
 	public <S, P> List<S> shortestPathToFinalState(Pda<S, P> pda, Iterator<P> stack) {
 		return shortestPathTo(pda, pda.getStart(), stack, Predicates.equalTo(pda.getStop()),
 				Predicates.<S> alwaysTrue());
@@ -180,14 +241,6 @@ public class PdaUtil {
 		return null;
 	}
 
-	public <S, P> List<S> shortestStackpruningPathTo(Pda<S, P> pda, S start, Iterator<P> stack, Predicate<S> matches,
-			Predicate<S> canPass) {
-		TraceItem<S, P> trace = traceToWithPruningStack(pda, Collections.singleton(start), stack, matches, canPass);
-		if (trace != null)
-			return trace.asList();
-		return null;
-	}
-
 	public <S, P> List<S> shortestStackpruningPathTo(Pda<S, P> pda, Iterator<P> stack, Predicate<S> matches) {
 		return shortestStackpruningPathTo(pda, pda.getStart(), stack, matches, Predicates.<S> alwaysTrue());
 	}
@@ -195,6 +248,14 @@ public class PdaUtil {
 	public <S, P> List<S> shortestStackpruningPathTo(Pda<S, P> pda, Iterator<P> stack, S matches) {
 		return shortestStackpruningPathTo(pda, pda.getStart(), stack, Predicates.equalTo(matches),
 				Predicates.<S> alwaysTrue());
+	}
+
+	public <S, P> List<S> shortestStackpruningPathTo(Pda<S, P> pda, S start, Iterator<P> stack, Predicate<S> matches,
+			Predicate<S> canPass) {
+		TraceItem<S, P> trace = traceToWithPruningStack(pda, Collections.singleton(start), stack, matches, canPass);
+		if (trace != null)
+			return trace.asList();
+		return null;
 	}
 
 	protected <S, P> TraceItem<S, P> trace(Pda<S, P> pda, Iterable<S> starts, Iterator<P> stack, Predicate<S> matches,
