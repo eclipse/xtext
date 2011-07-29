@@ -33,4 +33,17 @@ public class RootNodeTest extends AbstractCompositeNodeTest {
 	protected RootNode createCompositeNode() {
 		return new RootNode();
 	}
+	
+	public void testIteratorForEmptyNode() {
+		RootNode rootNode = createCompositeNode();
+		BidiTreeIterator<AbstractNode> forwardIterator = rootNode.basicIterator();
+		assertTrue(forwardIterator.hasNext());
+		assertSame(rootNode, forwardIterator.next());
+		assertFalse(forwardIterator.hasNext());
+		
+		BidiTreeIterator<AbstractNode> backwardsIterator = rootNode.basicIterator();
+		assertTrue(backwardsIterator.hasPrevious());
+		assertSame(rootNode, backwardsIterator.next());
+		assertFalse(backwardsIterator.hasPrevious());
+	}
 }
