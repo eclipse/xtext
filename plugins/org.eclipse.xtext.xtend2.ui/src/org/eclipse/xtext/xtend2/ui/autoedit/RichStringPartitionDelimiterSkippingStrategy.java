@@ -18,7 +18,7 @@ import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategy;
  */
 public class RichStringPartitionDelimiterSkippingStrategy extends AbstractEditStrategy {
 
-	private final String partitionDelimiter = "'''";
+	private static final String partitionDelimiter = "'''";
 
 	@Override
 	protected void internalCustomizeDocumentCommand(IDocument document, DocumentCommand command)
