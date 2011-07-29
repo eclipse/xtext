@@ -40,7 +40,7 @@ public class GrammarConstraints extends GeneratedFile {
     {
       EList<Grammar> _usedGrammars = this.grammar.getUsedGrammars();
       boolean hasAnyElements = false;
-      for(final Grammar ug : _usedGrammars) {
+      for(Grammar ug : _usedGrammars) {
         if (!hasAnyElements) {
           hasAnyElements = true;
           _builder.append(" with ", "");
@@ -65,7 +65,7 @@ public class GrammarConstraints extends GeneratedFile {
     {
       List<IConstraintContext> _grammarConstraintContexts = this.sequencerUtil.getGrammarConstraintContexts(this.grammar);
       boolean hasAnyElements_1 = false;
-      for(final IConstraintContext gcc : _grammarConstraintContexts) {
+      for(IConstraintContext gcc : _grammarConstraintContexts) {
         if (!hasAnyElements_1) {
           hasAnyElements_1 = true;
         } else {
@@ -83,7 +83,7 @@ public class GrammarConstraints extends GeneratedFile {
         {
           List<IConstraint> _constraints = gcc.getConstraints();
           boolean hasAnyElements_2 = false;
-          for(final IConstraint constraint : _constraints) {
+          for(IConstraint constraint : _constraints) {
             if (!hasAnyElements_2) {
               hasAnyElements_2 = true;
             } else {
@@ -105,7 +105,7 @@ public class GrammarConstraints extends GeneratedFile {
     {
       Collection<IConstraint> _grammarConstraints = this.sequencerUtil.getGrammarConstraints(this.grammar);
       boolean hasAnyElements_3 = false;
-      for(final IConstraint constraint_1 : _grammarConstraints) {
+      for(IConstraint constraint_1 : _grammarConstraints) {
         if (!hasAnyElements_3) {
           hasAnyElements_3 = true;
         } else {

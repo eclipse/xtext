@@ -55,77 +55,77 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 		if(semanticObject.eClass().getEPackage() == AssignmentFinderTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case AssignmentFinderTestPackage.CONTAINMENT_REF:
 				if(context == grammarAccess.getContainmentRefRule()) {
-					sequence_ContainmentRef_ContainmentRef(context, (ContainmentRef) semanticObject); 
+					sequence_ContainmentRef(context, (ContainmentRef) semanticObject); 
 					return; 
 				}
 				else break;
 			case AssignmentFinderTestPackage.CONTAINMENT_REF_N:
 				if(context == grammarAccess.getContainmentRef1Rule()) {
-					sequence_ContainmentRef1_ContainmentRefN(context, (ContainmentRefN) semanticObject); 
+					sequence_ContainmentRef1(context, (ContainmentRefN) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getContainmentRef2Rule()) {
-					sequence_ContainmentRef2_ContainmentRefN(context, (ContainmentRefN) semanticObject); 
+					sequence_ContainmentRef2(context, (ContainmentRefN) semanticObject); 
 					return; 
 				}
 				else break;
 			case AssignmentFinderTestPackage.CROSS_REF:
 				if(context == grammarAccess.getCrossRefRule()) {
-					sequence_CrossRef_CrossRef(context, (CrossRef) semanticObject); 
+					sequence_CrossRef(context, (CrossRef) semanticObject); 
 					return; 
 				}
 				else break;
 			case AssignmentFinderTestPackage.ENUM_BOOL:
 				if(context == grammarAccess.getEnumBoolRule()) {
-					sequence_EnumBool_EnumBool(context, (EnumBool) semanticObject); 
+					sequence_EnumBool(context, (EnumBool) semanticObject); 
 					return; 
 				}
 				else break;
 			case AssignmentFinderTestPackage.ENUM_VAL:
 				if(context == grammarAccess.getEnumValRule()) {
-					sequence_EnumVal_EnumVal(context, (EnumVal) semanticObject); 
+					sequence_EnumVal(context, (EnumVal) semanticObject); 
 					return; 
 				}
 				else break;
 			case AssignmentFinderTestPackage.KEYWORD_BOOL:
 				if(context == grammarAccess.getKeywordBoolRule()) {
-					sequence_KeywordBool_KeywordBool(context, (KeywordBool) semanticObject); 
+					sequence_KeywordBool(context, (KeywordBool) semanticObject); 
 					return; 
 				}
 				else break;
 			case AssignmentFinderTestPackage.KEYWORD_VAL:
 				if(context == grammarAccess.getKeywordValRule()) {
-					sequence_KeywordVal_KeywordVal(context, (KeywordVal) semanticObject); 
+					sequence_KeywordVal(context, (KeywordVal) semanticObject); 
 					return; 
 				}
 				else break;
 			case AssignmentFinderTestPackage.MIXED_BOOL:
 				if(context == grammarAccess.getMixedBoolRule()) {
-					sequence_MixedBool_MixedBool(context, (MixedBool) semanticObject); 
+					sequence_MixedBool(context, (MixedBool) semanticObject); 
 					return; 
 				}
 				else break;
 			case AssignmentFinderTestPackage.MIXED_VALUE:
 				if(context == grammarAccess.getMixedValueRule()) {
-					sequence_MixedValue_MixedValue(context, (MixedValue) semanticObject); 
+					sequence_MixedValue(context, (MixedValue) semanticObject); 
 					return; 
 				}
 				else break;
 			case AssignmentFinderTestPackage.MODEL:
 				if(context == grammarAccess.getModelRule()) {
-					sequence_Model_Model(context, (Model) semanticObject); 
+					sequence_Model(context, (Model) semanticObject); 
 					return; 
 				}
 				else break;
 			case AssignmentFinderTestPackage.TERMINAL_BOOL:
 				if(context == grammarAccess.getTerminalBoolRule()) {
-					sequence_TerminalBool_TerminalBool(context, (TerminalBool) semanticObject); 
+					sequence_TerminalBool(context, (TerminalBool) semanticObject); 
 					return; 
 				}
 				else break;
 			case AssignmentFinderTestPackage.TERMINAL_VAL:
 				if(context == grammarAccess.getTerminalValRule()) {
-					sequence_TerminalVal_TerminalVal(context, (TerminalVal) semanticObject); 
+					sequence_TerminalVal(context, (TerminalVal) semanticObject); 
 					return; 
 				}
 				else break;
@@ -140,7 +140,7 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	 * Features:
 	 *    val1[1, 1]
 	 */
-	protected void sequence_ContainmentRef1_ContainmentRefN(EObject context, ContainmentRefN semanticObject) {
+	protected void sequence_ContainmentRef1(EObject context, ContainmentRefN semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -152,7 +152,7 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	 * Features:
 	 *    val2[1, 1]
 	 */
-	protected void sequence_ContainmentRef2_ContainmentRefN(EObject context, ContainmentRefN semanticObject) {
+	protected void sequence_ContainmentRef2(EObject context, ContainmentRefN semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -164,7 +164,7 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	 * Features:
 	 *    ctx[0, 2]
 	 */
-	protected void sequence_ContainmentRef_ContainmentRef(EObject context, ContainmentRef semanticObject) {
+	protected void sequence_ContainmentRef(EObject context, ContainmentRef semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -177,7 +177,7 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	 *    name[0, 2]
 	 *    crossRef[0, 2]
 	 */
-	protected void sequence_CrossRef_CrossRef(EObject context, CrossRef semanticObject) {
+	protected void sequence_CrossRef(EObject context, CrossRef semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -189,7 +189,7 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	 * Features:
 	 *    en[0, 2]
 	 */
-	protected void sequence_EnumBool_EnumBool(EObject context, EnumBool semanticObject) {
+	protected void sequence_EnumBool(EObject context, EnumBool semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -201,7 +201,7 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	 * Features:
 	 *    en[0, 2]
 	 */
-	protected void sequence_EnumVal_EnumVal(EObject context, EnumVal semanticObject) {
+	protected void sequence_EnumVal(EObject context, EnumVal semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -213,7 +213,7 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	 * Features:
 	 *    kw[0, 2]
 	 */
-	protected void sequence_KeywordBool_KeywordBool(EObject context, KeywordBool semanticObject) {
+	protected void sequence_KeywordBool(EObject context, KeywordBool semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -225,7 +225,7 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	 * Features:
 	 *    kw[0, 2]
 	 */
-	protected void sequence_KeywordVal_KeywordVal(EObject context, KeywordVal semanticObject) {
+	protected void sequence_KeywordVal(EObject context, KeywordVal semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -237,7 +237,7 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	 * Features:
 	 *    val[0, 2]
 	 */
-	protected void sequence_MixedBool_MixedBool(EObject context, MixedBool semanticObject) {
+	protected void sequence_MixedBool(EObject context, MixedBool semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -249,7 +249,7 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	 * Features:
 	 *    val[0, 2]
 	 */
-	protected void sequence_MixedValue_MixedValue(EObject context, MixedValue semanticObject) {
+	protected void sequence_MixedValue(EObject context, MixedValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -371,7 +371,7 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	 *         EXCLUDE_IF_SET mixedValue
 	 *         EXCLUDE_IF_SET containmentRef
 	 */
-	protected void sequence_Model_Model(EObject context, Model semanticObject) {
+	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -383,7 +383,7 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	 * Features:
 	 *    term[0, 3]
 	 */
-	protected void sequence_TerminalBool_TerminalBool(EObject context, TerminalBool semanticObject) {
+	protected void sequence_TerminalBool(EObject context, TerminalBool semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -395,7 +395,7 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	 * Features:
 	 *    term[0, 3]
 	 */
-	protected void sequence_TerminalVal_TerminalVal(EObject context, TerminalVal semanticObject) {
+	protected void sequence_TerminalVal(EObject context, TerminalVal semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 }

@@ -50,48 +50,48 @@ public class AbstractXtypeSemanticSequencer extends AbstractSemanticSequencer {
 		if(semanticObject.eClass().getEPackage() == TypesPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case TypesPackage.JVM_LOWER_BOUND:
 				if(context == grammarAccess.getJvmLowerBoundRule()) {
-					sequence_JvmLowerBound_JvmLowerBound(context, (JvmLowerBound) semanticObject); 
+					sequence_JvmLowerBound(context, (JvmLowerBound) semanticObject); 
 					return; 
 				}
 				else break;
 			case TypesPackage.JVM_PARAMETERIZED_TYPE_REFERENCE:
-				if(context == grammarAccess.getJvmTypeReferenceRule() ||
+				if(context == grammarAccess.getJvmArgumentTypeReferenceRule() ||
 				   context == grammarAccess.getJvmParameterizedTypeReferenceRule() ||
-				   context == grammarAccess.getJvmArgumentTypeReferenceRule()) {
-					sequence_JvmParameterizedTypeReference_JvmParameterizedTypeReference(context, (JvmParameterizedTypeReference) semanticObject); 
+				   context == grammarAccess.getJvmTypeReferenceRule()) {
+					sequence_JvmParameterizedTypeReference(context, (JvmParameterizedTypeReference) semanticObject); 
 					return; 
 				}
 				else break;
 			case TypesPackage.JVM_TYPE_PARAMETER:
 				if(context == grammarAccess.getJvmTypeParameterRule()) {
-					sequence_JvmTypeParameter_JvmTypeParameter(context, (JvmTypeParameter) semanticObject); 
+					sequence_JvmTypeParameter(context, (JvmTypeParameter) semanticObject); 
 					return; 
 				}
 				else break;
 			case TypesPackage.JVM_UPPER_BOUND:
 				if(context == grammarAccess.getJvmUpperBoundAndedRule()) {
-					sequence_JvmUpperBoundAnded_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
+					sequence_JvmUpperBoundAnded(context, (JvmUpperBound) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getJvmUpperBoundRule()) {
-					sequence_JvmUpperBound_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
+					sequence_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
 					return; 
 				}
 				else break;
 			case TypesPackage.JVM_WILDCARD_TYPE_REFERENCE:
 				if(context == grammarAccess.getJvmArgumentTypeReferenceRule() ||
 				   context == grammarAccess.getJvmWildcardTypeReferenceRule()) {
-					sequence_JvmWildcardTypeReference_JvmWildcardTypeReference(context, (JvmWildcardTypeReference) semanticObject); 
+					sequence_JvmWildcardTypeReference(context, (JvmWildcardTypeReference) semanticObject); 
 					return; 
 				}
 				else break;
 			}
 		else if(semanticObject.eClass().getEPackage() == XtypePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case XtypePackage.XFUNCTION_TYPE_REF:
-				if(context == grammarAccess.getJvmTypeReferenceRule() ||
-				   context == grammarAccess.getXFunctionTypeRefRule() ||
-				   context == grammarAccess.getJvmArgumentTypeReferenceRule()) {
-					sequence_XFunctionTypeRef_XFunctionTypeRef(context, (XFunctionTypeRef) semanticObject); 
+				if(context == grammarAccess.getJvmArgumentTypeReferenceRule() ||
+				   context == grammarAccess.getJvmTypeReferenceRule() ||
+				   context == grammarAccess.getXFunctionTypeRefRule()) {
+					sequence_XFunctionTypeRef(context, (XFunctionTypeRef) semanticObject); 
 					return; 
 				}
 				else break;
@@ -106,7 +106,7 @@ public class AbstractXtypeSemanticSequencer extends AbstractSemanticSequencer {
 	 * Features:
 	 *    typeReference[1, 1]
 	 */
-	protected void sequence_JvmLowerBound_JvmLowerBound(EObject context, JvmLowerBound semanticObject) {
+	protected void sequence_JvmLowerBound(EObject context, JvmLowerBound semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -119,7 +119,7 @@ public class AbstractXtypeSemanticSequencer extends AbstractSemanticSequencer {
 	 *    arguments[0, *]
 	 *    type[1, 1]
 	 */
-	protected void sequence_JvmParameterizedTypeReference_JvmParameterizedTypeReference(EObject context, JvmParameterizedTypeReference semanticObject) {
+	protected void sequence_JvmParameterizedTypeReference(EObject context, JvmParameterizedTypeReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -129,10 +129,10 @@ public class AbstractXtypeSemanticSequencer extends AbstractSemanticSequencer {
 	 *     (name=ValidID ((constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*) | constraints+=JvmLowerBound)?)
 	 *
 	 * Features:
-	 *    constraints[1, *]
+	 *    constraints[0, *]
 	 *    name[1, 1]
 	 */
-	protected void sequence_JvmTypeParameter_JvmTypeParameter(EObject context, JvmTypeParameter semanticObject) {
+	protected void sequence_JvmTypeParameter(EObject context, JvmTypeParameter semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -144,7 +144,7 @@ public class AbstractXtypeSemanticSequencer extends AbstractSemanticSequencer {
 	 * Features:
 	 *    typeReference[1, 1]
 	 */
-	protected void sequence_JvmUpperBoundAnded_JvmUpperBound(EObject context, JvmUpperBound semanticObject) {
+	protected void sequence_JvmUpperBoundAnded(EObject context, JvmUpperBound semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -156,7 +156,7 @@ public class AbstractXtypeSemanticSequencer extends AbstractSemanticSequencer {
 	 * Features:
 	 *    typeReference[1, 1]
 	 */
-	protected void sequence_JvmUpperBound_JvmUpperBound(EObject context, JvmUpperBound semanticObject) {
+	protected void sequence_JvmUpperBound(EObject context, JvmUpperBound semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -168,7 +168,7 @@ public class AbstractXtypeSemanticSequencer extends AbstractSemanticSequencer {
 	 * Features:
 	 *    constraints[0, 2]
 	 */
-	protected void sequence_JvmWildcardTypeReference_JvmWildcardTypeReference(EObject context, JvmWildcardTypeReference semanticObject) {
+	protected void sequence_JvmWildcardTypeReference(EObject context, JvmWildcardTypeReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -181,7 +181,7 @@ public class AbstractXtypeSemanticSequencer extends AbstractSemanticSequencer {
 	 *    paramTypes[0, *]
 	 *    returnType[1, 1]
 	 */
-	protected void sequence_XFunctionTypeRef_XFunctionTypeRef(EObject context, XFunctionTypeRef semanticObject) {
+	protected void sequence_XFunctionTypeRef(EObject context, XFunctionTypeRef semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 }

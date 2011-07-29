@@ -20,9 +20,8 @@ import org.eclipse.xtext.generator.serializer.JavaFile;
 import org.eclipse.xtext.generator.serializer.SyntacticSequencer;
 import org.eclipse.xtext.generator.serializer.SyntacticSequencerUtil;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
-import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
+import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ComparableExtensions;
@@ -63,9 +62,12 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       file.imported(org.eclipse.xtext.RuleCall.class);
       file.imported(org.eclipse.xtext.nodemodel.INode.class);
       file.imported(org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition.class);
+      file.imported(org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable.class);
       file.imported(com.google.inject.Inject.class);
       file.imported(org.eclipse.xtext.IGrammarAccess.class);
       file.imported(org.eclipse.emf.ecore.EObject.class);
+      file.imported(java.util.List.class);
+      file.imported(org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias.class);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("@SuppressWarnings(\"restriction\")");
       _builder.newLine();
@@ -83,15 +85,14 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       _builder.append(" grammarAccess;");
       _builder.newLineIfNotEmpty();
       {
-        List<Triple<String,AbstractElementAlias,List<ISynTransition>>> _allAmbiguousTransitionsBySyntax = this.util.getAllAmbiguousTransitionsBySyntax();
-        for(final Triple<String,AbstractElementAlias,List<ISynTransition>> group : _allAmbiguousTransitionsBySyntax) {
+        List<Pair<String,AbstractElementAlias>> _allAmbiguousTransitionsBySyntax = this.util.getAllAmbiguousTransitionsBySyntax();
+        for(Pair<String,AbstractElementAlias> group : _allAmbiguousTransitionsBySyntax) {
           _builder.append("\t");
           _builder.append("protected ");
           String _imported_1 = file.imported("org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias");
           _builder.append(_imported_1, "	");
           _builder.append(" match_");
-          final Triple<String,AbstractElementAlias,List<ISynTransition>> typeConverted_group = (Triple<String,AbstractElementAlias,List<ISynTransition>>)group;
-          String _first = typeConverted_group.getFirst();
+          String _first = group.getFirst();
           _builder.append(_first, "	");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
@@ -113,16 +114,14 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       _builder.append(") access;");
       _builder.newLineIfNotEmpty();
       {
-        List<Triple<String,AbstractElementAlias,List<ISynTransition>>> _allAmbiguousTransitionsBySyntax_1 = this.util.getAllAmbiguousTransitionsBySyntax();
-        for(final Triple<String,AbstractElementAlias,List<ISynTransition>> group_1 : _allAmbiguousTransitionsBySyntax_1) {
+        List<Pair<String,AbstractElementAlias>> _allAmbiguousTransitionsBySyntax_1 = this.util.getAllAmbiguousTransitionsBySyntax();
+        for(Pair<String,AbstractElementAlias> group_1 : _allAmbiguousTransitionsBySyntax_1) {
           _builder.append("\t\t");
           _builder.append("match_");
-          final Triple<String,AbstractElementAlias,List<ISynTransition>> typeConverted_group_1 = (Triple<String,AbstractElementAlias,List<ISynTransition>>)group_1;
-          String _first_1 = typeConverted_group_1.getFirst();
+          String _first_1 = group_1.getFirst();
           _builder.append(_first_1, "		");
           _builder.append(" = ");
-          final Triple<String,AbstractElementAlias,List<ISynTransition>> typeConverted_group_1_1 = (Triple<String,AbstractElementAlias,List<ISynTransition>>)group_1;
-          AbstractElementAlias _second = typeConverted_group_1_1.getSecond();
+          AbstractElementAlias _second = group_1.getSecond();
           String _elementAliasToConstructor = this.util.elementAliasToConstructor(_second, file);
           _builder.append(_elementAliasToConstructor, "		");
           _builder.append(";");
@@ -142,7 +141,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       _builder.newLine();
       {
         List<AbstractRule> _unassignedCalledTokenRules = this.unassignedCalledTokenRules();
-        for(final AbstractRule rule : _unassignedCalledTokenRules) {
+        for(AbstractRule rule : _unassignedCalledTokenRules) {
           _builder.append("\t");
           StringConcatenation _genGetUnassignedRuleCallToken = this.genGetUnassignedRuleCallToken(file, rule);
           _builder.append(_genGetUnassignedRuleCallToken, "	");
@@ -157,8 +156,8 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       {
-        List<Triple<String,AbstractElementAlias,List<ISynTransition>>> _allAmbiguousTransitionsBySyntax_2 = this.util.getAllAmbiguousTransitionsBySyntax();
-        for(final Triple<String,AbstractElementAlias,List<ISynTransition>> group_2 : _allAmbiguousTransitionsBySyntax_2) {
+        List<Pair<String,AbstractElementAlias>> _allAmbiguousTransitionsBySyntax_2 = this.util.getAllAmbiguousTransitionsBySyntax();
+        for(Pair<String,AbstractElementAlias> group_2 : _allAmbiguousTransitionsBySyntax_2) {
           _builder.append("\t");
           _builder.append("/**");
           _builder.newLine();
@@ -169,8 +168,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
           _builder.append("\t");
           _builder.append(" ");
           _builder.append("*     ");
-          final Triple<String,AbstractElementAlias,List<ISynTransition>> typeConverted_group_2 = (Triple<String,AbstractElementAlias,List<ISynTransition>>)group_2;
-          AbstractElementAlias _second_1 = typeConverted_group_2.getSecond();
+          AbstractElementAlias _second_1 = group_2.getSecond();
           _builder.append(_second_1, "	 ");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
@@ -179,14 +177,13 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
           _builder.newLine();
           _builder.append("\t");
           _builder.append("protected void emit_");
-          final Triple<String,AbstractElementAlias,List<ISynTransition>> typeConverted_group_2_1 = (Triple<String,AbstractElementAlias,List<ISynTransition>>)group_2;
-          String _first_2 = typeConverted_group_2_1.getFirst();
+          String _first_2 = group_2.getFirst();
           _builder.append(_first_2, "	");
-          _builder.append("(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {");
+          _builder.append("(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
           _builder.append("\t");
-          _builder.append("acceptNodes(transition, fromNode, toNode);");
+          _builder.append("acceptNodes(transition, nodes);");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("}");
@@ -357,7 +354,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     _builder.newLineIfNotEmpty();
     {
       List<AbstractRule> _unassignedCalledTokenRules = this.unassignedCalledTokenRules();
-      for(final AbstractRule rule : _unassignedCalledTokenRules) {
+      for(AbstractRule rule : _unassignedCalledTokenRules) {
         _builder.append("\t");
         {
           int _operator_plus = IntegerExtensions.operator_plus(((Integer)i), ((Integer)1));
@@ -423,18 +420,24 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     _builder.append("protected void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("if (!transition.isSyntacticallyAmbiguous())");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("return;");
+    _builder.append("if (transition.getAmbiguousSyntaxes().isEmpty()) return;");
     _builder.newLine();
     _builder.append("\t");
+    _builder.append("List<INode> transitionNodes = collectNodes(fromNode, toNode);");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);");
+    _builder.newLine();
+    _builder.append("\t\t");
     int i = 0;
     _builder.newLineIfNotEmpty();
     {
-      List<Triple<String,AbstractElementAlias,List<ISynTransition>>> _allAmbiguousTransitionsBySyntax = this.util.getAllAmbiguousTransitionsBySyntax();
-      for(final Triple<String,AbstractElementAlias,List<ISynTransition>> group : _allAmbiguousTransitionsBySyntax) {
-        _builder.append("\t");
+      List<Pair<String,AbstractElementAlias>> _allAmbiguousTransitionsBySyntax = this.util.getAllAmbiguousTransitionsBySyntax();
+      for(Pair<String,AbstractElementAlias> group : _allAmbiguousTransitionsBySyntax) {
+        _builder.append("\t\t");
         {
           int _operator_plus = IntegerExtensions.operator_plus(((Integer)i), ((Integer)1));
           int _i = i = _operator_plus;
@@ -444,30 +447,31 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
           }
         }
         _builder.append("if(match_");
-        final Triple<String,AbstractElementAlias,List<ISynTransition>> typeConverted_group = (Triple<String,AbstractElementAlias,List<ISynTransition>>)group;
-        String _first = typeConverted_group.getFirst();
-        _builder.append(_first, "	");
-        _builder.append(".equals(transition.getAmbiguousSyntax()))");
+        String _first = group.getFirst();
+        _builder.append(_first, "		");
+        _builder.append(".equals(syntax))");
         _builder.newLineIfNotEmpty();
-        _builder.append("\t");
+        _builder.append("\t\t");
         _builder.append("\t");
         _builder.append("emit_");
-        final Triple<String,AbstractElementAlias,List<ISynTransition>> typeConverted_group_1 = (Triple<String,AbstractElementAlias,List<ISynTransition>>)group;
-        String _first_1 = typeConverted_group_1.getFirst();
-        _builder.append(_first_1, "		");
-        _builder.append("(semanticObject, transition, fromNode, toNode);");
+        String _first_1 = group.getFirst();
+        _builder.append(_first_1, "			");
+        _builder.append("(semanticObject, getLastNavigableState(), syntaxNodes);");
         _builder.newLineIfNotEmpty();
       }
     }
-    _builder.append("\t");
+    _builder.append("\t\t");
     {
       boolean _operator_greaterThan_1 = ComparableExtensions.<Integer>operator_greaterThan(((Integer)i), ((Integer)0));
       if (_operator_greaterThan_1) {
         _builder.append("else ");
       }
     }
-    _builder.append("acceptNodes(transition, fromNode, toNode);");
+    _builder.append("acceptNodes(getLastNavigableState(), syntaxNodes);");
     _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
     _builder.append("}");
     _builder.newLine();
     return _builder;

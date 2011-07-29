@@ -59,112 +59,112 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == SyntacticsequencertestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case SyntacticsequencertestPackage.ADD0:
-				if(context == grammarAccess.getExp0Rule() ||
-				   context == grammarAccess.getAddition0Rule() ||
-				   context == grammarAccess.getAddition0Access().getAdd0LeftAction_1_0()) {
-					sequence_Addition0_Add0(context, (Add0) semanticObject); 
+				if(context == grammarAccess.getAddition0Rule() ||
+				   context == grammarAccess.getAddition0Access().getAdd0LeftAction_1_0() ||
+				   context == grammarAccess.getExp0Rule()) {
+					sequence_Addition0(context, (Add0) semanticObject); 
 					return; 
 				}
 				else break;
 			case SyntacticsequencertestPackage.ADD1:
-				if(context == grammarAccess.getExp1Rule() ||
-				   context == grammarAccess.getAddition1Rule() ||
+				if(context == grammarAccess.getAddition1Rule() ||
 				   context == grammarAccess.getAddition1Access().getAdd1LeftAction_1_0() ||
+				   context == grammarAccess.getExp1Rule() ||
 				   context == grammarAccess.getPrim1Rule()) {
-					sequence_Addition1_Add1(context, (Add1) semanticObject); 
+					sequence_Addition1(context, (Add1) semanticObject); 
 					return; 
 				}
 				else break;
 			case SyntacticsequencertestPackage.ADD2:
-				if(context == grammarAccess.getExp2Rule() ||
-				   context == grammarAccess.getAddition2Rule() ||
+				if(context == grammarAccess.getAddition2Rule() ||
 				   context == grammarAccess.getAddition2Access().getAdd2LeftAction_1_0() ||
+				   context == grammarAccess.getExp2Rule() ||
 				   context == grammarAccess.getMultiplication2Rule() ||
 				   context == grammarAccess.getMultiplication2Access().getMult2LeftAction_1_0() ||
 				   context == grammarAccess.getPrim2Rule()) {
-					sequence_Addition2_Add2(context, (Add2) semanticObject); 
+					sequence_Addition2(context, (Add2) semanticObject); 
 					return; 
 				}
 				else break;
 			case SyntacticsequencertestPackage.AMBIGUOUS_TRANSITION:
 				if(context == grammarAccess.getAmbiguousTransitionRule()) {
-					sequence_AmbiguousTransition_AmbiguousTransition(context, (AmbiguousTransition) semanticObject); 
+					sequence_AmbiguousTransition(context, (AmbiguousTransition) semanticObject); 
 					return; 
 				}
 				else break;
 			case SyntacticsequencertestPackage.BOOLEAN_ALTERNATIVE:
 				if(context == grammarAccess.getBooleanAlternativeRule()) {
-					sequence_BooleanAlternative_BooleanAlternative(context, (BooleanAlternative) semanticObject); 
+					sequence_BooleanAlternative(context, (BooleanAlternative) semanticObject); 
 					return; 
 				}
 				else break;
 			case SyntacticsequencertestPackage.BOOLEAN_ALTERNATIVE_LITERAL:
 				if(context == grammarAccess.getBooleanAlternativeLiteralRule()) {
-					sequence_BooleanAlternativeLiteral_BooleanAlternativeLiteral(context, (BooleanAlternativeLiteral) semanticObject); 
+					sequence_BooleanAlternativeLiteral(context, (BooleanAlternativeLiteral) semanticObject); 
 					return; 
 				}
 				else break;
 			case SyntacticsequencertestPackage.MANDATORY_KEYWORDS:
 				if(context == grammarAccess.getMandatoryKeywordsRule()) {
-					sequence_MandatoryKeywords_MandatoryKeywords(context, (MandatoryKeywords) semanticObject); 
+					sequence_MandatoryKeywords(context, (MandatoryKeywords) semanticObject); 
 					return; 
 				}
 				else break;
 			case SyntacticsequencertestPackage.MODEL:
 				if(context == grammarAccess.getModelRule()) {
-					sequence_Model_Model(context, (Model) semanticObject); 
+					sequence_Model(context, (Model) semanticObject); 
 					return; 
 				}
 				else break;
 			case SyntacticsequencertestPackage.MULT2:
-				if(context == grammarAccess.getExp2Rule() ||
-				   context == grammarAccess.getAddition2Rule() ||
+				if(context == grammarAccess.getAddition2Rule() ||
 				   context == grammarAccess.getAddition2Access().getAdd2LeftAction_1_0() ||
+				   context == grammarAccess.getExp2Rule() ||
 				   context == grammarAccess.getMultiplication2Rule() ||
 				   context == grammarAccess.getMultiplication2Access().getMult2LeftAction_1_0() ||
 				   context == grammarAccess.getPrim2Rule()) {
-					sequence_Multiplication2_Mult2(context, (Mult2) semanticObject); 
+					sequence_Multiplication2(context, (Mult2) semanticObject); 
 					return; 
 				}
 				else break;
 			case SyntacticsequencertestPackage.SINGLE_CROSS_REFERENCE:
 				if(context == grammarAccess.getSingleCrossReferenceRule()) {
-					sequence_SingleCrossReference_SingleCrossReference(context, (SingleCrossReference) semanticObject); 
+					sequence_SingleCrossReference(context, (SingleCrossReference) semanticObject); 
 					return; 
 				}
 				else break;
 			case SyntacticsequencertestPackage.UNASSIGNED_DATATYPE:
 				if(context == grammarAccess.getUnassignedDatatypeRule()) {
-					sequence_UnassignedDatatype_UnassignedDatatype(context, (UnassignedDatatype) semanticObject); 
+					sequence_UnassignedDatatype(context, (UnassignedDatatype) semanticObject); 
 					return; 
 				}
 				else break;
 			case SyntacticsequencertestPackage.VAL0:
-				if(context == grammarAccess.getExp0Rule() ||
-				   context == grammarAccess.getAddition0Rule() ||
+				if(context == grammarAccess.getAddition0Rule() ||
 				   context == grammarAccess.getAddition0Access().getAdd0LeftAction_1_0() ||
+				   context == grammarAccess.getExp0Rule() ||
 				   context == grammarAccess.getPrim0Rule()) {
-					sequence_Prim0_Val0(context, (Val0) semanticObject); 
+					sequence_Prim0(context, (Val0) semanticObject); 
 					return; 
 				}
 				else break;
 			case SyntacticsequencertestPackage.VAL1:
-				if(context == grammarAccess.getExp1Rule() ||
-				   context == grammarAccess.getAddition1Rule() ||
+				if(context == grammarAccess.getAddition1Rule() ||
 				   context == grammarAccess.getAddition1Access().getAdd1LeftAction_1_0() ||
+				   context == grammarAccess.getExp1Rule() ||
 				   context == grammarAccess.getPrim1Rule()) {
-					sequence_Prim1_Val1(context, (Val1) semanticObject); 
+					sequence_Prim1(context, (Val1) semanticObject); 
 					return; 
 				}
 				else break;
 			case SyntacticsequencertestPackage.VAL2:
-				if(context == grammarAccess.getExp2Rule() ||
-				   context == grammarAccess.getAddition2Rule() ||
+				if(context == grammarAccess.getAddition2Rule() ||
 				   context == grammarAccess.getAddition2Access().getAdd2LeftAction_1_0() ||
+				   context == grammarAccess.getExp2Rule() ||
 				   context == grammarAccess.getMultiplication2Rule() ||
 				   context == grammarAccess.getMultiplication2Access().getMult2LeftAction_1_0() ||
 				   context == grammarAccess.getPrim2Rule()) {
-					sequence_Prim2_Val2(context, (Val2) semanticObject); 
+					sequence_Prim2(context, (Val2) semanticObject); 
 					return; 
 				}
 				else break;
@@ -180,7 +180,7 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	 *    left[1, 1]
 	 *    right[1, 1]
 	 */
-	protected void sequence_Addition0_Add0(EObject context, Add0 semanticObject) {
+	protected void sequence_Addition0(EObject context, Add0 semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.ADD0__LEFT) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.ADD0__LEFT));
@@ -203,7 +203,7 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	 *    left[1, 1]
 	 *    right[1, 1]
 	 */
-	protected void sequence_Addition1_Add1(EObject context, Add1 semanticObject) {
+	protected void sequence_Addition1(EObject context, Add1 semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.ADD1__LEFT) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.ADD1__LEFT));
@@ -226,7 +226,7 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	 *    left[1, 1]
 	 *    right[1, 1]
 	 */
-	protected void sequence_Addition2_Add2(EObject context, Add2 semanticObject) {
+	protected void sequence_Addition2(EObject context, Add2 semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.ADD2__LEFT) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.ADD2__LEFT));
@@ -248,7 +248,7 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	 * Features:
 	 *    val[1, 1]
 	 */
-	protected void sequence_AmbiguousTransition_AmbiguousTransition(EObject context, AmbiguousTransition semanticObject) {
+	protected void sequence_AmbiguousTransition(EObject context, AmbiguousTransition semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.AMBIGUOUS_TRANSITION__VAL) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.AMBIGUOUS_TRANSITION__VAL));
@@ -267,7 +267,7 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	 * Features:
 	 *    isTrue[0, 1]
 	 */
-	protected void sequence_BooleanAlternativeLiteral_BooleanAlternativeLiteral(EObject context, BooleanAlternativeLiteral semanticObject) {
+	protected void sequence_BooleanAlternativeLiteral(EObject context, BooleanAlternativeLiteral semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -279,7 +279,7 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	 * Features:
 	 *    bool[1, 1]
 	 */
-	protected void sequence_BooleanAlternative_BooleanAlternative(EObject context, BooleanAlternative semanticObject) {
+	protected void sequence_BooleanAlternative(EObject context, BooleanAlternative semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.BOOLEAN_ALTERNATIVE__BOOL) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.BOOLEAN_ALTERNATIVE__BOOL));
@@ -300,7 +300,7 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	 *    val2[1, 1]
 	 *    val3[1, 1]
 	 */
-	protected void sequence_MandatoryKeywords_MandatoryKeywords(EObject context, MandatoryKeywords semanticObject) {
+	protected void sequence_MandatoryKeywords(EObject context, MandatoryKeywords semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.MANDATORY_KEYWORDS__VAL1) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.MANDATORY_KEYWORDS__VAL1));
@@ -397,7 +397,7 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	 *         EXCLUDE_IF_SET x6
 	 *         EXCLUDE_IF_SET x7
 	 */
-	protected void sequence_Model_Model(EObject context, Model semanticObject) {
+	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -410,7 +410,7 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	 *    left[1, 1]
 	 *    right[1, 1]
 	 */
-	protected void sequence_Multiplication2_Mult2(EObject context, Mult2 semanticObject) {
+	protected void sequence_Multiplication2(EObject context, Mult2 semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.MULT2__LEFT) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.MULT2__LEFT));
@@ -432,7 +432,7 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	 * Features:
 	 *    name[1, 1]
 	 */
-	protected void sequence_Prim0_Val0(EObject context, Val0 semanticObject) {
+	protected void sequence_Prim0(EObject context, Val0 semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.VAL0__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.VAL0__NAME));
@@ -451,7 +451,7 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	 * Features:
 	 *    name[1, 1]
 	 */
-	protected void sequence_Prim1_Val1(EObject context, Val1 semanticObject) {
+	protected void sequence_Prim1(EObject context, Val1 semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.VAL1__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.VAL1__NAME));
@@ -470,7 +470,7 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	 * Features:
 	 *    name[1, 1]
 	 */
-	protected void sequence_Prim2_Val2(EObject context, Val2 semanticObject) {
+	protected void sequence_Prim2(EObject context, Val2 semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.VAL2__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.VAL2__NAME));
@@ -499,7 +499,7 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	 *    ref3[0, 1]
 	 *    ref4[0, 1]
 	 */
-	protected void sequence_SingleCrossReference_SingleCrossReference(EObject context, SingleCrossReference semanticObject) {
+	protected void sequence_SingleCrossReference(EObject context, SingleCrossReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -511,7 +511,7 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	 * Features:
 	 *    val[1, 1]
 	 */
-	protected void sequence_UnassignedDatatype_UnassignedDatatype(EObject context, UnassignedDatatype semanticObject) {
+	protected void sequence_UnassignedDatatype(EObject context, UnassignedDatatype semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.UNASSIGNED_DATATYPE__VAL) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.UNASSIGNED_DATATYPE__VAL));

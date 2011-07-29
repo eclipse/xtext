@@ -9,9 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import org.eclipse.emf.codegen.ecore.genmodel.GenClass;
-import org.eclipse.emf.codegen.ecore.genmodel.GenFeature;
-import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.ENamedElement;
@@ -23,12 +20,12 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.generator.GenModelAccess;
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccess;
 import org.eclipse.xtext.generator.serializer.GeneratedFile;
-import org.eclipse.xtext.generator.serializer.JavaFile;
+import org.eclipse.xtext.generator.serializer.JavaEMFFile;
 import org.eclipse.xtext.generator.serializer.SemanticSequencer;
 import org.eclipse.xtext.generator.serializer.SemanticSequencerUtil;
+import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintElement;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IFeatureInfo;
@@ -59,6 +56,9 @@ public class AbstractSemanticSequencer extends GeneratedFile {
   
   @Inject
   private SemanticSequencer sequencer;
+  
+  @Inject
+  private Context2NameFunction ctx2name;
   
   public String getQualifiedName(final Grammar grammar) {
     String _name = this.getName(grammar, "Abstract", "SemanticSequencer");
@@ -168,12 +168,6 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     return _grammarConstraints;
   }
   
-  public ResourceSet getResourceSet() {
-    Resource _eResource = this.grammar.eResource();
-    ResourceSet _resourceSet = _eResource.getResourceSet();
-    return _resourceSet;
-  }
-  
   public HashSet<Grammar> getGrammars(final IConstraintElement ele) {
     {
       HashSet<Grammar> _newHashSet = CollectionLiterals.<Grammar>newHashSet();
@@ -211,7 +205,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
           };
         List<HashSet<Grammar>> _map = ListExtensions.<IConstraintElement, HashSet<Grammar>>map(_children_1, _function);
         Iterable<Grammar> _flatten = IterableExtensions.<Grammar>flatten(_map);
-        for (final Grammar g : _flatten) {
+        for (Grammar g : _flatten) {
           result.add(g);
         }
       }
@@ -293,9 +287,11 @@ public class AbstractSemanticSequencer extends GeneratedFile {
   public CharSequence getFileContents() {
     String _xblockexpression = null;
     {
+      Resource _eResource = this.grammar.eResource();
+      ResourceSet _resourceSet = _eResource.getResourceSet();
       String _packageName = this.getPackageName();
-      JavaFile _javaFile = new JavaFile(_packageName);
-      final JavaFile file = _javaFile;
+      JavaEMFFile _javaEMFFile = new JavaEMFFile(_resourceSet, _packageName);
+      final JavaEMFFile file = _javaEMFFile;
       file.imported(org.eclipse.emf.ecore.EObject.class);
       file.imported(org.eclipse.xtext.serializer.sequencer.GenericSequencer.class);
       file.imported(org.eclipse.xtext.serializer.sequencer.ISemanticSequencer.class);
@@ -455,7 +451,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     return _xblockexpression;
   }
   
-  public StringConcatenation genMethodCreateSequence(final JavaFile file) {
+  public StringConcatenation genMethodCreateSequence(final JavaEMFFile file) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("public void createSequence(EObject context, EObject semanticObject) {");
     _builder.newLine();
@@ -464,7 +460,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     _builder.newLineIfNotEmpty();
     {
       Iterable<EPackage> _accessedPackages = this.getAccessedPackages();
-      for(final EPackage pkg : _accessedPackages) {
+      for(EPackage pkg : _accessedPackages) {
         _builder.append("\t");
         {
           int _operator_plus = IntegerExtensions.operator_plus(((Integer)pkgi), ((Integer)1));
@@ -475,22 +471,18 @@ public class AbstractSemanticSequencer extends GeneratedFile {
           }
         }
         _builder.append("if(semanticObject.eClass().getEPackage() == ");
-        ResourceSet _resourceSet = this.getResourceSet();
-        GenPackage _genPackage = GenModelAccess.getGenPackage(pkg, _resourceSet);
-        String _qualifiedPackageInterfaceName = _genPackage.getQualifiedPackageInterfaceName();
-        String _imported = file.imported(_qualifiedPackageInterfaceName);
-        _builder.append(_imported, "	");
-        _builder.append(".eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {");
+        String _importedGenTypeLiteral = file.importedGenTypeLiteral(pkg);
+        _builder.append(_importedGenTypeLiteral, "	");
+        _builder.append(") switch(semanticObject.eClass().getClassifierID()) {");
         _builder.newLineIfNotEmpty();
         {
           Iterable<EClass> _accessedClasses = this.getAccessedClasses(pkg);
-          for(final EClass type : _accessedClasses) {
+          for(EClass type : _accessedClasses) {
             _builder.append("\t");
             _builder.append("\t");
             _builder.append("case ");
-            ResourceSet _resourceSet_1 = this.getResourceSet();
-            String _genIntLiteral = GenModelAccess.getGenIntLiteral(type, _resourceSet_1);
-            _builder.append(_genIntLiteral, "		");
+            String _importedGenIntLiteral = file.importedGenIntLiteral(type);
+            _builder.append(_importedGenIntLiteral, "		");
             _builder.append(":");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
@@ -501,7 +493,15 @@ public class AbstractSemanticSequencer extends GeneratedFile {
             {
               Map<IConstraint,List<EObject>> _accessedConstraints = this.getAccessedConstraints(type);
               Set<Entry<IConstraint,List<EObject>>> _entrySet = _accessedConstraints.entrySet();
-              for(final Entry<IConstraint,List<EObject>> ctx : _entrySet) {
+              final Function1<Entry<IConstraint,List<EObject>>,String> _function = new Function1<Entry<IConstraint,List<EObject>>,String>() {
+                  public String apply(final Entry<IConstraint,List<EObject>> e) {
+                    IConstraint _key = e.getKey();
+                    String _name = _key.getName();
+                    return _name;
+                  }
+                };
+              List<Entry<IConstraint,List<EObject>>> _sortBy = IterableExtensions.<Entry<IConstraint,List<EObject>>, String>sortBy(_entrySet, _function);
+              for(Entry<IConstraint,List<EObject>> ctx : _sortBy) {
                 _builder.append("\t");
                 _builder.append("\t");
                 _builder.append("\t");
@@ -516,8 +516,15 @@ public class AbstractSemanticSequencer extends GeneratedFile {
                 _builder.append("if(");
                 {
                   List<EObject> _value = ctx.getValue();
+                  final Function1<EObject,String> _function_1 = new Function1<EObject,String>() {
+                      public String apply(final EObject e_1) {
+                        String _contextName = AbstractSemanticSequencer.this.ctx2name.getContextName(e_1);
+                        return _contextName;
+                      }
+                    };
+                  List<EObject> _sortBy_1 = IterableExtensions.<EObject, String>sortBy(_value, _function_1);
                   boolean hasAnyElements = false;
-                  for(final EObject c : _value) {
+                  for(EObject c : _sortBy_1) {
                     if (!hasAnyElements) {
                       hasAnyElements = true;
                     } else {
@@ -535,15 +542,12 @@ public class AbstractSemanticSequencer extends GeneratedFile {
                 _builder.append("\t");
                 _builder.append("\t");
                 _builder.append("sequence_");
-                IConstraint _key = ctx.getKey();
-                String _name = _key.getName();
-                _builder.append(_name, "				");
+                IConstraint _key_1 = ctx.getKey();
+                String _simpleName = _key_1.getSimpleName();
+                _builder.append(_simpleName, "				");
                 _builder.append("(context, (");
-                ResourceSet _resourceSet_2 = this.getResourceSet();
-                GenClass _genClass = GenModelAccess.getGenClass(type, _resourceSet_2);
-                String _qualifiedInterfaceName = _genClass.getQualifiedInterfaceName();
-                String _imported_1 = file.imported(_qualifiedInterfaceName);
-                _builder.append(_imported_1, "				");
+                String _importedGenTypeName = file.importedGenTypeName(type);
+                _builder.append(_importedGenTypeName, "				");
                 _builder.append(") semanticObject); ");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t");
@@ -580,7 +584,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     return _builder;
   }
   
-  public StringConcatenation genMethodSequence(final JavaFile file, final IConstraint c) {
+  public StringConcatenation genMethodSequence(final JavaEMFFile file, final IConstraint c) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -621,7 +625,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
           }
         };
       Iterable<IFeatureInfo> _filter = IterableExtensions.<IFeatureInfo>filter(((Iterable<IFeatureInfo>)Conversions.doWrapArray(_features)), _function);
-      for(final IFeatureInfo f : _filter) {
+      for(IFeatureInfo f : _filter) {
         _builder.append(" *    ", "");
         String _string_1 = f.toString();
         String _replaceAll_1 = _string_1.replaceAll("\\n", "\n *     ");
@@ -633,15 +637,12 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     _builder.append("*/");
     _builder.newLine();
     _builder.append("protected void sequence_");
-    String _name_1 = c.getName();
-    _builder.append(_name_1, "");
+    String _simpleName = c.getSimpleName();
+    _builder.append(_simpleName, "");
     _builder.append("(EObject context, ");
     EClass _type_1 = c.getType();
-    ResourceSet _resourceSet = this.getResourceSet();
-    GenClass _genClass = GenModelAccess.getGenClass(_type_1, _resourceSet);
-    String _qualifiedInterfaceName = _genClass.getQualifiedInterfaceName();
-    String _imported = file.imported(_qualifiedInterfaceName);
-    _builder.append(_imported, "");
+    String _importedGenTypeName = file.importedGenTypeName(_type_1);
+    _builder.append(_importedGenTypeName, "");
     _builder.append(" semanticObject) {");
     _builder.newLineIfNotEmpty();
     {
@@ -667,38 +668,25 @@ public class AbstractSemanticSequencer extends GeneratedFile {
                 }
               };
             Iterable<IFeatureInfo> _filter_1 = IterableExtensions.<IFeatureInfo>filter(((Iterable<IFeatureInfo>)Conversions.doWrapArray(_features_1)), _function_1);
-            for(final IFeatureInfo f_1 : _filter_1) {
-              _builder.append("\t");
-              _builder.append("\t");
-              EStructuralFeature _feature = f_1.getFeature();
-              EClass _eContainingClass = _feature.getEContainingClass();
-              EPackage _ePackage = _eContainingClass.getEPackage();
-              ResourceSet _resourceSet_1 = this.getResourceSet();
-              GenPackage _genPackage = GenModelAccess.getGenPackage(_ePackage, _resourceSet_1);
-              String _qualifiedPackageInterfaceName = _genPackage.getQualifiedPackageInterfaceName();
-              String _imported_1 = file.imported(_qualifiedPackageInterfaceName);
-              final String x = _imported_1;
-              _builder.newLineIfNotEmpty();
+            for(IFeatureInfo f_1 : _filter_1) {
               _builder.append("\t");
               _builder.append("\t");
               _builder.append("if(transientValues.isValueTransient(semanticObject, ");
-              EStructuralFeature _feature_1 = f_1.getFeature();
-              ResourceSet _resourceSet_2 = this.getResourceSet();
-              String _genTypeLiteral = GenModelAccess.getGenTypeLiteral(_feature_1, _resourceSet_2);
-              _builder.append(_genTypeLiteral, "		");
+              EStructuralFeature _feature = f_1.getFeature();
+              String _importedGenTypeLiteral = file.importedGenTypeLiteral(_feature);
+              _builder.append(_importedGenTypeLiteral, "		");
               _builder.append(") == ");
-              String _imported_2 = file.imported(org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient.class);
-              _builder.append(_imported_2, "		");
+              String _imported = file.imported(org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient.class);
+              _builder.append(_imported, "		");
               _builder.append(".YES)");
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
               _builder.append("\t");
               _builder.append("\t");
               _builder.append("errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ");
-              EStructuralFeature _feature_2 = f_1.getFeature();
-              ResourceSet _resourceSet_3 = this.getResourceSet();
-              String _genTypeLiteral_1 = GenModelAccess.getGenTypeLiteral(_feature_2, _resourceSet_3);
-              _builder.append(_genTypeLiteral_1, "			");
+              EStructuralFeature _feature_1 = f_1.getFeature();
+              String _importedGenTypeLiteral_1 = file.importedGenTypeLiteral(_feature_1);
+              _builder.append(_importedGenTypeLiteral_1, "			");
               _builder.append("));");
               _builder.newLineIfNotEmpty();
             }
@@ -707,13 +695,13 @@ public class AbstractSemanticSequencer extends GeneratedFile {
           _builder.append("}");
           _builder.newLine();
           _builder.append("\t");
-          String _imported_3 = file.imported(org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider.class);
-          _builder.append(_imported_3, "	");
+          String _imported_1 = file.imported(org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider.class);
+          _builder.append(_imported_1, "	");
           _builder.append(" nodes = createNodeProvider(semanticObject);");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
-          String _imported_4 = file.imported(org.eclipse.xtext.serializer.acceptor.SequenceFeeder.class);
-          _builder.append(_imported_4, "	");
+          String _imported_2 = file.imported(org.eclipse.xtext.serializer.acceptor.SequenceFeeder.class);
+          _builder.append(_imported_2, "	");
           _builder.append(" feeder = createSequencerFeeder(semanticObject, nodes);");
           _builder.newLineIfNotEmpty();
           {
@@ -746,7 +734,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
               Iterable<IFeatureInfo> _map = IterableExtensions.<IConstraintElement, IFeatureInfo>map(_filter_2, _function_3);
               _xifexpression_1 = _map;
             }
-            for(final IFeatureInfo f_2 : _xifexpression_1) {
+            for(IFeatureInfo f_2 : _xifexpression_1) {
               _builder.append("\t");
               IConstraintElement[] _assignments = f_2.getAssignments();
               IConstraintElement _get = ((List<IConstraintElement>)Conversions.doWrapArray(_assignments)).get(0);
@@ -758,10 +746,8 @@ public class AbstractSemanticSequencer extends GeneratedFile {
               String _gaAccessor = this.grammarAccess.gaAccessor(_grammarElement);
               _builder.append(_gaAccessor, "	");
               _builder.append(", semanticObject.");
-              EStructuralFeature _feature_3 = f_2.getFeature();
-              ResourceSet _resourceSet_4 = this.getResourceSet();
-              GenFeature _genFeature = GenModelAccess.getGenFeature(_feature_3, _resourceSet_4);
-              String _getAccessor = _genFeature.getGetAccessor();
+              EStructuralFeature _feature_2 = f_2.getFeature();
+              String _getAccessor = file.getGetAccessor(_feature_2);
               _builder.append(_getAccessor, "	");
               _builder.append("());");
               _builder.newLineIfNotEmpty();

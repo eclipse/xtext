@@ -59,111 +59,111 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 		if(semanticObject.eClass().getEPackage() == ContextFinderTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case ContextFinderTestPackage.ATTRIBUTE_EXCLUSION_TEST:
 				if(context == grammarAccess.getAttributeExclusionTest1Rule()) {
-					sequence_AttributeExclusionTest1_AttributeExclusionTest(context, (AttributeExclusionTest) semanticObject); 
+					sequence_AttributeExclusionTest1(context, (AttributeExclusionTest) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getAttributeExclusionTest2Rule()) {
-					sequence_AttributeExclusionTest2_AttributeExclusionTest(context, (AttributeExclusionTest) semanticObject); 
+					sequence_AttributeExclusionTest2(context, (AttributeExclusionTest) semanticObject); 
 					return; 
 				}
 				else break;
 			case ContextFinderTestPackage.MODEL:
-				if(context == grammarAccess.getModelRule()) {
-					sequence_Model_Model(context, (Model) semanticObject); 
+				if(context == grammarAccess.getModel2Rule()) {
+					sequence_Model2(context, (Model) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getModel2Rule()) {
-					sequence_Model2_Model(context, (Model) semanticObject); 
+				else if(context == grammarAccess.getModelRule()) {
+					sequence_Model(context, (Model) semanticObject); 
 					return; 
 				}
 				else break;
 			case ContextFinderTestPackage.NESTED_TYPE_CHILD1:
 				if(context == grammarAccess.getNestedTypeChildRule() ||
 				   context == grammarAccess.getNestedTypeChild1Rule()) {
-					sequence_NestedTypeChild1_NestedTypeChild1(context, (NestedTypeChild1) semanticObject); 
+					sequence_NestedTypeChild1(context, (NestedTypeChild1) semanticObject); 
 					return; 
 				}
 				else break;
 			case ContextFinderTestPackage.NESTED_TYPE_CHILD2:
 				if(context == grammarAccess.getNestedTypeChildRule() ||
 				   context == grammarAccess.getNestedTypeChild2Rule()) {
-					sequence_NestedTypeChild2_NestedTypeChild2(context, (NestedTypeChild2) semanticObject); 
+					sequence_NestedTypeChild2(context, (NestedTypeChild2) semanticObject); 
 					return; 
 				}
 				else break;
 			case ContextFinderTestPackage.NESTED_TYPE_RECURSIVE_TEST:
 				if(context == grammarAccess.getNestedTypeRecursiveTest1Rule() ||
 				   context == grammarAccess.getNestedTypeRecursiveTest1Access().getNestedTypeRecursiveTestLeftAction_2_0()) {
-					sequence_NestedTypeRecursiveTest1_NestedTypeRecursiveTest(context, (NestedTypeRecursiveTest) semanticObject); 
+					sequence_NestedTypeRecursiveTest1(context, (NestedTypeRecursiveTest) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getNestedTypeRecursiveTest2Rule() ||
 				   context == grammarAccess.getNestedTypeRecursiveTest2Access().getNestedTypeRecursiveTestLeftAction_2_0()) {
-					sequence_NestedTypeRecursiveTest2_NestedTypeRecursiveTest(context, (NestedTypeRecursiveTest) semanticObject); 
+					sequence_NestedTypeRecursiveTest2(context, (NestedTypeRecursiveTest) semanticObject); 
 					return; 
 				}
 				else break;
 			case ContextFinderTestPackage.NESTED_TYPE_RECURSIVE_TEST1:
 				if(context == grammarAccess.getNestedTypeRecursiveTest1Access().getNestedTypeRecursiveTestLeftAction_2_0()) {
-					sequence_NestedTypeRecursiveTest1_NestedTypeRecursiveTest_2_0_NestedTypeRecursiveTest1(context, (NestedTypeRecursiveTest1) semanticObject); 
+					sequence_NestedTypeRecursiveTest1_NestedTypeRecursiveTest_2_0(context, (NestedTypeRecursiveTest1) semanticObject); 
 					return; 
 				}
 				else break;
 			case ContextFinderTestPackage.NESTED_TYPE_RECURSIVE_TEST2:
 				if(context == grammarAccess.getNestedTypeRecursiveTest2Access().getNestedTypeRecursiveTestLeftAction_2_0()) {
-					sequence_NestedTypeRecursiveTest2_NestedTypeRecursiveTest_2_0_NestedTypeRecursiveTest2(context, (NestedTypeRecursiveTest2) semanticObject); 
+					sequence_NestedTypeRecursiveTest2_NestedTypeRecursiveTest_2_0(context, (NestedTypeRecursiveTest2) semanticObject); 
 					return; 
 				}
 				else break;
 			case ContextFinderTestPackage.NESTED_TYPE_TEST:
 				if(context == grammarAccess.getNestedTypeTest1Rule()) {
-					sequence_NestedTypeTest1_NestedTypeTest(context, (NestedTypeTest) semanticObject); 
+					sequence_NestedTypeTest1(context, (NestedTypeTest) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getNestedTypeTest2Rule()) {
-					sequence_NestedTypeTest2_NestedTypeTest(context, (NestedTypeTest) semanticObject); 
+					sequence_NestedTypeTest2(context, (NestedTypeTest) semanticObject); 
 					return; 
 				}
 				else break;
 			case ContextFinderTestPackage.PARENT_REF_TEST1:
 				if(context == grammarAccess.getParentRefTest1Rule()) {
-					sequence_ParentRefTest1_ParentRefTest1(context, (ParentRefTest1) semanticObject); 
+					sequence_ParentRefTest1(context, (ParentRefTest1) semanticObject); 
 					return; 
 				}
 				else break;
 			case ContextFinderTestPackage.PARENT_REF_TEST2:
 				if(context == grammarAccess.getParentRefTest2Rule()) {
-					sequence_ParentRefTest2_ParentRefTest2(context, (ParentRefTest2) semanticObject); 
+					sequence_ParentRefTest2(context, (ParentRefTest2) semanticObject); 
 					return; 
 				}
 				else break;
 			case ContextFinderTestPackage.PARENT_REF_TEST_CHILD:
-				if(context == grammarAccess.getParentRefTestChild2Rule()) {
-					sequence_ParentRefTestChild2_ParentRefTestChild(context, (ParentRefTestChild) semanticObject); 
+				if(context == grammarAccess.getParentRefTestChild1Rule()) {
+					sequence_ParentRefTestChild1(context, (ParentRefTestChild) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getParentRefTestChild1Rule()) {
-					sequence_ParentRefTestChild1_ParentRefTestChild(context, (ParentRefTestChild) semanticObject); 
+				else if(context == grammarAccess.getParentRefTestChild2Rule()) {
+					sequence_ParentRefTestChild2(context, (ParentRefTestChild) semanticObject); 
 					return; 
 				}
 				else break;
 			case ContextFinderTestPackage.QUANTITY_EXCLUSION_TEST:
 				if(context == grammarAccess.getQuantityExclusionTest1Rule()) {
-					sequence_QuantityExclusionTest1_QuantityExclusionTest(context, (QuantityExclusionTest) semanticObject); 
+					sequence_QuantityExclusionTest1(context, (QuantityExclusionTest) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getQuantityExclusionTest2Rule()) {
-					sequence_QuantityExclusionTest2_QuantityExclusionTest(context, (QuantityExclusionTest) semanticObject); 
+					sequence_QuantityExclusionTest2(context, (QuantityExclusionTest) semanticObject); 
 					return; 
 				}
 				else break;
 			case ContextFinderTestPackage.VALUE_EXCLUSION_TEST:
-				if(context == grammarAccess.getValueExclusionTest2Rule()) {
-					sequence_ValueExclusionTest2_ValueExclusionTest(context, (ValueExclusionTest) semanticObject); 
+				if(context == grammarAccess.getValueExclusionTest1Rule()) {
+					sequence_ValueExclusionTest1(context, (ValueExclusionTest) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getValueExclusionTest1Rule()) {
-					sequence_ValueExclusionTest1_ValueExclusionTest(context, (ValueExclusionTest) semanticObject); 
+				else if(context == grammarAccess.getValueExclusionTest2Rule()) {
+					sequence_ValueExclusionTest2(context, (ValueExclusionTest) semanticObject); 
 					return; 
 				}
 				else break;
@@ -178,7 +178,7 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	 * Features:
 	 *    attr1[1, 1]
 	 */
-	protected void sequence_AttributeExclusionTest1_AttributeExclusionTest(EObject context, AttributeExclusionTest semanticObject) {
+	protected void sequence_AttributeExclusionTest1(EObject context, AttributeExclusionTest semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -190,7 +190,7 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	 * Features:
 	 *    attr2[1, 1]
 	 */
-	protected void sequence_AttributeExclusionTest2_AttributeExclusionTest(EObject context, AttributeExclusionTest semanticObject) {
+	protected void sequence_AttributeExclusionTest2(EObject context, AttributeExclusionTest semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -201,7 +201,7 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	 *
 	 * Features:
 	 */
-	protected void sequence_Model2_Model(EObject context, Model semanticObject) {
+	protected void sequence_Model2(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -311,7 +311,7 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	 *         EXCLUDE_IF_SET quantityExclusion
 	 *         EXCLUDE_IF_SET quantityExclusion
 	 */
-	protected void sequence_Model_Model(EObject context, Model semanticObject) {
+	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -323,7 +323,7 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	 * Features:
 	 *    val[1, 1]
 	 */
-	protected void sequence_NestedTypeChild1_NestedTypeChild1(EObject context, NestedTypeChild1 semanticObject) {
+	protected void sequence_NestedTypeChild1(EObject context, NestedTypeChild1 semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, ContextFinderTestPackage.Literals.NESTED_TYPE_CHILD__VAL) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ContextFinderTestPackage.Literals.NESTED_TYPE_CHILD__VAL));
@@ -342,7 +342,7 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	 * Features:
 	 *    val[1, 1]
 	 */
-	protected void sequence_NestedTypeChild2_NestedTypeChild2(EObject context, NestedTypeChild2 semanticObject) {
+	protected void sequence_NestedTypeChild2(EObject context, NestedTypeChild2 semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, ContextFinderTestPackage.Literals.NESTED_TYPE_CHILD__VAL) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ContextFinderTestPackage.Literals.NESTED_TYPE_CHILD__VAL));
@@ -361,7 +361,7 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	 * Features:
 	 *    left[1, 1]
 	 */
-	protected void sequence_NestedTypeRecursiveTest1_NestedTypeRecursiveTest(EObject context, NestedTypeRecursiveTest semanticObject) {
+	protected void sequence_NestedTypeRecursiveTest1(EObject context, NestedTypeRecursiveTest semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, ContextFinderTestPackage.Literals.NESTED_TYPE_RECURSIVE_TEST__LEFT) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ContextFinderTestPackage.Literals.NESTED_TYPE_RECURSIVE_TEST__LEFT));
@@ -379,7 +379,7 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	 *
 	 * Features:
 	 */
-	protected void sequence_NestedTypeRecursiveTest1_NestedTypeRecursiveTest_2_0_NestedTypeRecursiveTest1(EObject context, NestedTypeRecursiveTest1 semanticObject) {
+	protected void sequence_NestedTypeRecursiveTest1_NestedTypeRecursiveTest_2_0(EObject context, NestedTypeRecursiveTest1 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -391,7 +391,7 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	 * Features:
 	 *    left[1, 1]
 	 */
-	protected void sequence_NestedTypeRecursiveTest2_NestedTypeRecursiveTest(EObject context, NestedTypeRecursiveTest semanticObject) {
+	protected void sequence_NestedTypeRecursiveTest2(EObject context, NestedTypeRecursiveTest semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, ContextFinderTestPackage.Literals.NESTED_TYPE_RECURSIVE_TEST__LEFT) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ContextFinderTestPackage.Literals.NESTED_TYPE_RECURSIVE_TEST__LEFT));
@@ -409,7 +409,7 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	 *
 	 * Features:
 	 */
-	protected void sequence_NestedTypeRecursiveTest2_NestedTypeRecursiveTest_2_0_NestedTypeRecursiveTest2(EObject context, NestedTypeRecursiveTest2 semanticObject) {
+	protected void sequence_NestedTypeRecursiveTest2_NestedTypeRecursiveTest_2_0(EObject context, NestedTypeRecursiveTest2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -421,7 +421,7 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	 * Features:
 	 *    nested[1, 1]
 	 */
-	protected void sequence_NestedTypeTest1_NestedTypeTest(EObject context, NestedTypeTest semanticObject) {
+	protected void sequence_NestedTypeTest1(EObject context, NestedTypeTest semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, ContextFinderTestPackage.Literals.NESTED_TYPE_TEST__NESTED) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ContextFinderTestPackage.Literals.NESTED_TYPE_TEST__NESTED));
@@ -440,7 +440,7 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	 * Features:
 	 *    nested[1, 1]
 	 */
-	protected void sequence_NestedTypeTest2_NestedTypeTest(EObject context, NestedTypeTest semanticObject) {
+	protected void sequence_NestedTypeTest2(EObject context, NestedTypeTest semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, ContextFinderTestPackage.Literals.NESTED_TYPE_TEST__NESTED) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ContextFinderTestPackage.Literals.NESTED_TYPE_TEST__NESTED));
@@ -459,7 +459,7 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	 * Features:
 	 *    child1[1, 1]
 	 */
-	protected void sequence_ParentRefTest1_ParentRefTest1(EObject context, ParentRefTest1 semanticObject) {
+	protected void sequence_ParentRefTest1(EObject context, ParentRefTest1 semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, ContextFinderTestPackage.Literals.PARENT_REF_TEST1__CHILD1) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ContextFinderTestPackage.Literals.PARENT_REF_TEST1__CHILD1));
@@ -478,7 +478,7 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	 * Features:
 	 *    child2[1, 1]
 	 */
-	protected void sequence_ParentRefTest2_ParentRefTest2(EObject context, ParentRefTest2 semanticObject) {
+	protected void sequence_ParentRefTest2(EObject context, ParentRefTest2 semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, ContextFinderTestPackage.Literals.PARENT_REF_TEST2__CHILD2) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ContextFinderTestPackage.Literals.PARENT_REF_TEST2__CHILD2));
@@ -497,7 +497,7 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	 * Features:
 	 *    child[0, 1]
 	 */
-	protected void sequence_ParentRefTestChild1_ParentRefTestChild(EObject context, ParentRefTestChild semanticObject) {
+	protected void sequence_ParentRefTestChild1(EObject context, ParentRefTestChild semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -509,7 +509,7 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	 * Features:
 	 *    child[0, 1]
 	 */
-	protected void sequence_ParentRefTestChild2_ParentRefTestChild(EObject context, ParentRefTestChild semanticObject) {
+	protected void sequence_ParentRefTestChild2(EObject context, ParentRefTestChild semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -522,7 +522,7 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	 *    attr1[1, 1]
 	 *    attr2[0, 1]
 	 */
-	protected void sequence_QuantityExclusionTest1_QuantityExclusionTest(EObject context, QuantityExclusionTest semanticObject) {
+	protected void sequence_QuantityExclusionTest1(EObject context, QuantityExclusionTest semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -535,7 +535,7 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	 *    attr1[0, 1]
 	 *    attr2[1, 1]
 	 */
-	protected void sequence_QuantityExclusionTest2_QuantityExclusionTest(EObject context, QuantityExclusionTest semanticObject) {
+	protected void sequence_QuantityExclusionTest2(EObject context, QuantityExclusionTest semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -547,7 +547,7 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	 * Features:
 	 *    val[1, 1]
 	 */
-	protected void sequence_ValueExclusionTest1_ValueExclusionTest(EObject context, ValueExclusionTest semanticObject) {
+	protected void sequence_ValueExclusionTest1(EObject context, ValueExclusionTest semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, ContextFinderTestPackage.Literals.VALUE_EXCLUSION_TEST__VAL) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ContextFinderTestPackage.Literals.VALUE_EXCLUSION_TEST__VAL));
@@ -566,7 +566,7 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	 * Features:
 	 *    val[1, 1]
 	 */
-	protected void sequence_ValueExclusionTest2_ValueExclusionTest(EObject context, ValueExclusionTest semanticObject) {
+	protected void sequence_ValueExclusionTest2(EObject context, ValueExclusionTest semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, ContextFinderTestPackage.Literals.VALUE_EXCLUSION_TEST__VAL) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ContextFinderTestPackage.Literals.VALUE_EXCLUSION_TEST__VAL));
