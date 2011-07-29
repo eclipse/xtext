@@ -38,7 +38,7 @@ public class SchedulingRuleFactory {
 	/**
 	 * Rule allows only one job for each given lock object to run at a time
 	 */
-	class SerialPerObjectRule implements ISchedulingRule {
+	static class SerialPerObjectRule implements ISchedulingRule {
 		private Object lockObject = null;
 
 		public SerialPerObjectRule(Object lock) {

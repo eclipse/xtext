@@ -517,7 +517,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 				INode candidate = iterator.next();
 				if (candidate.getOffset() >= offsetPosition ) {
 					break;
-				} else if ((candidate instanceof ILeafNode || null == result) &&
+				} else if ((candidate instanceof ILeafNode) &&
 						   (candidate.getGrammarElement() == null ||
 								   candidate.getGrammarElement() instanceof AbstractElement ||
 								   candidate.getGrammarElement() instanceof ParserRule)) {
