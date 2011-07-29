@@ -63,7 +63,7 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 	 *     )
 	 */
 	@Override
-	protected void sequence_XAdditiveExpression_XBinaryOperation(EObject context, XBinaryOperation operation) {
+	protected void sequence_XAdditiveExpression(EObject context, XBinaryOperation operation) {
 		INodesForEObjectProvider nodes = createNodeProvider(operation);
 		SequenceFeeder acceptor = createSequencerFeeder(operation, nodes);
 		XAdditiveExpressionElements opAdd = grammarAccess.getXAdditiveExpressionAccess();
@@ -153,7 +153,7 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 	 *    declaringType[0, 1]
 	 */
 	@Override
-	protected void sequence_XFeatureCall_XFeatureCall(EObject context, XFeatureCall call) {
+	protected void sequence_XFeatureCall(EObject context, XFeatureCall call) {
 		INodesForEObjectProvider nodes = createNodeProvider(call);
 		SequenceFeeder acceptor = createSequencerFeeder(call, nodes);
 		XFeatureCallElements xfce = grammarAccess.getXFeatureCallAccess();
@@ -229,7 +229,7 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 	 *         EXCLUDE_IF_SET spreading
 	 */
 	@Override
-	protected void sequence_XMemberFeatureCall_XMemberFeatureCall(EObject context, XMemberFeatureCall semanticObject) {
+	protected void sequence_XMemberFeatureCall(EObject context, XMemberFeatureCall semanticObject) {
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder acceptor = createSequencerFeeder(semanticObject, nodes);
 		XMemberFeatureCallElements xmfce = grammarAccess.getXMemberFeatureCallAccess();
@@ -285,7 +285,7 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 	 *    typeArguments[0, *]
 	 */
 	@Override
-	protected void sequence_XConstructorCall_XConstructorCall(EObject context, XConstructorCall semanticObject) {
+	protected void sequence_XConstructorCall(EObject context, XConstructorCall semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 }
