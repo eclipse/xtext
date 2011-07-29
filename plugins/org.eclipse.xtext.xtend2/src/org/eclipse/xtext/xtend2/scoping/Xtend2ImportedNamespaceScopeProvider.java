@@ -43,7 +43,7 @@ public class Xtend2ImportedNamespaceScopeProvider extends XbaseImportedNamespace
 		if (!(context instanceof XtendFile))
 			return Collections.emptyList();
 		List<ImportNormalizer> importedNamespaceResolvers = super.internalGetImportedNamespaceResolvers(context, ignoreCase);
-		if (context instanceof XtendFile && !Strings.isEmpty(((XtendFile) context).getPackage())) {
+		if (!Strings.isEmpty(((XtendFile) context).getPackage())) {
 			importedNamespaceResolvers.add(new ImportNormalizer(nameConverter.toQualifiedName(((XtendFile) context)
 					.getPackage()), true, ignoreCase));
 		}
