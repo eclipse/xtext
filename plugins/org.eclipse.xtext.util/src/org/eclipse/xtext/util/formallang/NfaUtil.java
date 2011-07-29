@@ -18,6 +18,7 @@ import java.util.Stack;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.google.inject.internal.Lists;
 import com.google.inject.internal.Maps;
@@ -265,8 +266,14 @@ public class NfaUtil {
 				return nfa.getStop();
 			}
 
-			public Set<S> getFollowers(S node) {
-				return filterFollowers(nfa, nfa.getFollowers(node), filter);
+			public Set<S> getFollowers(final S node) {
+				final S start = nfa.getStart();
+				final S stop = nfa.getStop();
+				return filterFollowers(nfa, nfa.getFollowers(node), new Predicate<S>() {
+					public boolean apply(S input) {
+						return input == start || input == stop || filter.apply(input);
+					}
+				});
 			}
 
 			public S getStart() {
@@ -332,6 +339,27 @@ public class NfaUtil {
 
 	public <S, ITERABLE extends Iterable<? extends S>> boolean canReachFinalState(Nfa<S> nfa, S state) {
 		return find(nfa, Collections.singleton(state), Predicates.equalTo(nfa.getStop())) != null;
+	}
+
+	public <S> Set<S> findFirst(Nfa<S> nfa, Iterable<S> starts, Predicate<S> match) {
+		Set<S> current = Sets.newHashSet(starts);
+		Set<S> visited = Sets.newHashSet();
+		while (!current.isEmpty()) {
+			Set<S> result = Sets.newHashSet();
+			for (S s : current) {
+				if (match.apply(s))
+					result.add(s);
+			}
+			if (!result.isEmpty())
+				return result;
+			visited.addAll(current);
+			Set<S> newCurrent = Sets.newHashSet();
+			for (S s : current)
+				Iterables.addAll(newCurrent, nfa.getFollowers(s));
+			newCurrent.removeAll(visited);
+			current = newCurrent;
+		}
+		return Collections.emptySet();
 	}
 
 	public <S> S find(Nfa<S> nfa, Predicate<S> matcher) {
