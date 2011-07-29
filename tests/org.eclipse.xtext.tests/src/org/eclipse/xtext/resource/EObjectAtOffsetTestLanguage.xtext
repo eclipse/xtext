@@ -14,7 +14,7 @@ Model:
 	(foos+=Foo | bars+=AbstractBar)*;
 	
 AbstractBar:
-	Bar ({FooBar.bar=current} 'foobar' foo+=[Foo|ID])?;
+	'zonk'? INT? Bar ({FooBar.bar=current} 'foobar' foo+=[Foo|ID])? foo+=[Foo|ID]?;
 
 Bar:
 	'bar' name=ID foo+=[Foo|ID] (',' foo+=[Foo|ID])*;

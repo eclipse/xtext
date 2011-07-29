@@ -402,5 +402,8 @@ Export-Package: org.eclipse.xtext.generator.ecore,
  org.eclipse.xtext.parser.unorderedGroups.backtrackingBug325745TestLanguage,
  org.eclipse.xtext.parser.unorderedGroups.backtrackingBug325745TestLanguage.impl,
  org.eclipse.xtext.parser.unorderedGroups.backtrackingBug325745TestLanguage.util,
- org.eclipse.xtext.parser.antlr.parser.antlr.lexer
+ org.eclipse.xtext.parser.antlr.parser.antlr.lexer,
+ org.eclipse.xtext.resource.locationprovidertest,
+ org.eclipse.xtext.resource.locationprovidertest.impl,
+ org.eclipse.xtext.resource.locationprovidertest.util
 
