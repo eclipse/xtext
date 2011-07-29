@@ -210,7 +210,17 @@ public class NodeModelUtils {
 			return findActualSemanticObjectFor(node.getParent());
 		Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
 		if (assignment != null) {
-			return findActualSemanticObjectFor(node.getParent());
+			if (node.getParent().hasDirectSemanticElement())
+				return findActualSemanticObjectFor(node.getParent());
+			INode sibling = node.getParent().getFirstChild();
+			while(sibling != node) {
+				EObject siblingGrammarElement = sibling.getGrammarElement();
+				if (siblingGrammarElement != null && GrammarUtil.containingAssignment(siblingGrammarElement) == null) {
+					if (GrammarUtil.isEObjectRuleCall(siblingGrammarElement))
+						return findActualSemanticObjectFor(sibling);
+				}
+				sibling = sibling.getNextSibling();
+			}
 		} else {
 			EObject result = findActualSemanticObjectInChildren(node, grammarElement);
 			if (result != null)

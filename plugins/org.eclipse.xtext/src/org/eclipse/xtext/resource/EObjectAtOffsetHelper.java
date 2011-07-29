@@ -9,14 +9,10 @@ package org.eclipse.xtext.resource;
 
 import java.util.List;
 
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.TypeRef;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -57,39 +53,22 @@ public class EObjectAtOffsetHelper {
 	}
 
 	protected EObject resolveCrossReferencedElement(INode node) {
-		EObject referenceOwner = node.getSemanticElement();
+		EObject referenceOwner = NodeModelUtils.findActualSemanticObjectFor(node);
 		EReference crossReference = GrammarUtil.getReference((CrossReference) node.getGrammarElement(),
 				referenceOwner.eClass());
 		if (!crossReference.isMany()) {
 			return (EObject) referenceOwner.eGet(crossReference);
 		} else {
 			List<?> listValue = (List<?>) referenceOwner.eGet(crossReference);
-			ICompositeNode ownerNode = NodeModelUtils.getNode(referenceOwner);
+			List<INode> nodesForFeature = NodeModelUtils.findNodesForFeature(referenceOwner, crossReference);
 			int currentIndex = 0;
-			for (TreeIterator<INode> childrenIterator = ownerNode.getAsTreeIterable().iterator(); childrenIterator
-					.hasNext();) {
-				INode ownerChildNode = childrenIterator.next();
-				if (ownerChildNode == node) {
-					if (currentIndex >= listValue.size())
-						return null;
+			for(INode nodeForFeature: nodesForFeature) {
+				if (nodeForFeature.getTotalOffset() <= node.getTotalOffset() && nodeForFeature.getTotalEndOffset() >= node.getTotalEndOffset())
 					return (EObject) listValue.get(currentIndex);
-				}
-				EObject grammarElement = ownerChildNode.getGrammarElement();
-				if (grammarElement instanceof CrossReference) {
-					EReference crossReference2 = GrammarUtil.getReference((CrossReference) grammarElement,
-							referenceOwner.eClass());
-					if (crossReference == crossReference2) {
-						++currentIndex;
-					}
-					childrenIterator.prune();
-				}
-				if (grammarElement instanceof TypeRef || grammarElement instanceof RuleCall) {
-					if (ownerNode != ownerChildNode)
-						childrenIterator.prune();
-				}
+				currentIndex++;
 			}
 		}
 		return null;
 	}
-
+	
 }

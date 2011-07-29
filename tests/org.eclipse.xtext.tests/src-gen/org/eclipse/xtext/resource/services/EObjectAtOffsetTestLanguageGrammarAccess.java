@@ -48,41 +48,61 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 	public class AbstractBarElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractBar");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall cBarParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
-		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Action cFooBarBarAction_1_0 = (Action)cGroup_1.eContents().get(0);
-		private final Keyword cFoobarKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
-		private final Assignment cFooAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
-		private final CrossReference cFooFooCrossReference_1_2_0 = (CrossReference)cFooAssignment_1_2.eContents().get(0);
-		private final RuleCall cFooFooIDTerminalRuleCall_1_2_0_1 = (RuleCall)cFooFooCrossReference_1_2_0.eContents().get(1);
+		private final Keyword cZonkKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final RuleCall cINTTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		private final RuleCall cBarParserRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Action cFooBarBarAction_3_0 = (Action)cGroup_3.eContents().get(0);
+		private final Keyword cFoobarKeyword_3_1 = (Keyword)cGroup_3.eContents().get(1);
+		private final Assignment cFooAssignment_3_2 = (Assignment)cGroup_3.eContents().get(2);
+		private final CrossReference cFooFooCrossReference_3_2_0 = (CrossReference)cFooAssignment_3_2.eContents().get(0);
+		private final RuleCall cFooFooIDTerminalRuleCall_3_2_0_1 = (RuleCall)cFooFooCrossReference_3_2_0.eContents().get(1);
+		private final Assignment cFooAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final CrossReference cFooFooCrossReference_4_0 = (CrossReference)cFooAssignment_4.eContents().get(0);
+		private final RuleCall cFooFooIDTerminalRuleCall_4_0_1 = (RuleCall)cFooFooCrossReference_4_0.eContents().get(1);
 		
 		//AbstractBar:
-		//	Bar ({FooBar.bar=current} "foobar" foo+=[Foo])?;
+		//	"zonk"? INT? Bar ({FooBar.bar=current} "foobar" foo+=[Foo])? foo+=[Foo]?;
 		public ParserRule getRule() { return rule; }
 
-		//Bar ({FooBar.bar=current} "foobar" foo+=[Foo])?
+		//"zonk"? INT? Bar ({FooBar.bar=current} "foobar" foo+=[Foo])? foo+=[Foo]?
 		public Group getGroup() { return cGroup; }
 
+		//"zonk"?
+		public Keyword getZonkKeyword_0() { return cZonkKeyword_0; }
+
+		//INT?
+		public RuleCall getINTTerminalRuleCall_1() { return cINTTerminalRuleCall_1; }
+
 		//Bar
-		public RuleCall getBarParserRuleCall_0() { return cBarParserRuleCall_0; }
+		public RuleCall getBarParserRuleCall_2() { return cBarParserRuleCall_2; }
 
 		//({FooBar.bar=current} "foobar" foo+=[Foo])?
-		public Group getGroup_1() { return cGroup_1; }
+		public Group getGroup_3() { return cGroup_3; }
 
 		//{FooBar.bar=current}
-		public Action getFooBarBarAction_1_0() { return cFooBarBarAction_1_0; }
+		public Action getFooBarBarAction_3_0() { return cFooBarBarAction_3_0; }
 
 		//"foobar"
-		public Keyword getFoobarKeyword_1_1() { return cFoobarKeyword_1_1; }
+		public Keyword getFoobarKeyword_3_1() { return cFoobarKeyword_3_1; }
 
 		//foo+=[Foo]
-		public Assignment getFooAssignment_1_2() { return cFooAssignment_1_2; }
+		public Assignment getFooAssignment_3_2() { return cFooAssignment_3_2; }
 
 		//[Foo]
-		public CrossReference getFooFooCrossReference_1_2_0() { return cFooFooCrossReference_1_2_0; }
+		public CrossReference getFooFooCrossReference_3_2_0() { return cFooFooCrossReference_3_2_0; }
 
 		//ID
-		public RuleCall getFooFooIDTerminalRuleCall_1_2_0_1() { return cFooFooIDTerminalRuleCall_1_2_0_1; }
+		public RuleCall getFooFooIDTerminalRuleCall_3_2_0_1() { return cFooFooIDTerminalRuleCall_3_2_0_1; }
+
+		//foo+=[Foo]?
+		public Assignment getFooAssignment_4() { return cFooAssignment_4; }
+
+		//[Foo]
+		public CrossReference getFooFooCrossReference_4_0() { return cFooFooCrossReference_4_0; }
+
+		//ID
+		public RuleCall getFooFooIDTerminalRuleCall_4_0_1() { return cFooFooIDTerminalRuleCall_4_0_1; }
 	}
 
 	public class BarElements extends AbstractParserRuleElementFinder {
@@ -203,7 +223,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	//AbstractBar:
-	//	Bar ({FooBar.bar=current} "foobar" foo+=[Foo])?;
+	//	"zonk"? INT? Bar ({FooBar.bar=current} "foobar" foo+=[Foo])? foo+=[Foo]?;
 	public AbstractBarElements getAbstractBarAccess() {
 		return (pAbstractBar != null) ? pAbstractBar : (pAbstractBar = new AbstractBarElements());
 	}

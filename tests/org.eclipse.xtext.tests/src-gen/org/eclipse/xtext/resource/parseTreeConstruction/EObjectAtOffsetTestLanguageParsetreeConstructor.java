@@ -170,11 +170,11 @@ protected class Model_BarsAssignment_1 extends AssignmentToken  {
 /************ begin Rule AbstractBar ****************
  *
  * AbstractBar:
- * 	Bar ({FooBar.bar=current} "foobar" foo+=[Foo])?;
+ * 	"zonk"? INT? Bar ({FooBar.bar=current} "foobar" foo+=[Foo])? foo+=[Foo]?;
  *
  **/
 
-// Bar ({FooBar.bar=current} "foobar" foo+=[Foo])?
+// "zonk"? INT? Bar ({FooBar.bar=current} "foobar" foo+=[Foo])? foo+=[Foo]?
 protected class AbstractBar_Group extends GroupToken {
 	
 	public AbstractBar_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -189,8 +189,9 @@ protected class AbstractBar_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new AbstractBar_Group_1(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new AbstractBar_BarParserRuleCall_0(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new AbstractBar_FooAssignment_4(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new AbstractBar_Group_3(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new AbstractBar_BarParserRuleCall_2(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
 		}	
 	}
@@ -198,7 +199,7 @@ protected class AbstractBar_Group extends GroupToken {
     @Override
 	public IEObjectConsumer tryConsume() {
 		if(getEObject().eClass() != grammarAccess.getBarRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getAbstractBarAccess().getFooBarBarAction_1_0().getType().getClassifier())
+		   getEObject().eClass() != grammarAccess.getAbstractBarAccess().getFooBarBarAction_3_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
@@ -206,15 +207,15 @@ protected class AbstractBar_Group extends GroupToken {
 }
 
 // Bar
-protected class AbstractBar_BarParserRuleCall_0 extends RuleCallToken {
+protected class AbstractBar_BarParserRuleCall_2 extends RuleCallToken {
 	
-	public AbstractBar_BarParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public AbstractBar_BarParserRuleCall_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getAbstractBarAccess().getBarParserRuleCall_0();
+		return grammarAccess.getAbstractBarAccess().getBarParserRuleCall_2();
 	}
 
     @Override
@@ -242,28 +243,28 @@ protected class AbstractBar_BarParserRuleCall_0 extends RuleCallToken {
 }
 
 // ({FooBar.bar=current} "foobar" foo+=[Foo])?
-protected class AbstractBar_Group_1 extends GroupToken {
+protected class AbstractBar_Group_3 extends GroupToken {
 	
-	public AbstractBar_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public AbstractBar_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.getAbstractBarAccess().getGroup_1();
+		return grammarAccess.getAbstractBarAccess().getGroup_3();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new AbstractBar_FooAssignment_1_2(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new AbstractBar_FooAssignment_3_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getAbstractBarAccess().getFooBarBarAction_1_0().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getAbstractBarAccess().getFooBarBarAction_3_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
@@ -271,21 +272,21 @@ protected class AbstractBar_Group_1 extends GroupToken {
 }
 
 // {FooBar.bar=current}
-protected class AbstractBar_FooBarBarAction_1_0 extends ActionToken  {
+protected class AbstractBar_FooBarBarAction_3_0 extends ActionToken  {
 
-	public AbstractBar_FooBarBarAction_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public AbstractBar_FooBarBarAction_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getAbstractBarAccess().getFooBarBarAction_1_0();
+		return grammarAccess.getAbstractBarAccess().getFooBarBarAction_3_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new AbstractBar_BarParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new AbstractBar_BarParserRuleCall_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -300,21 +301,21 @@ protected class AbstractBar_FooBarBarAction_1_0 extends ActionToken  {
 }
 
 // "foobar"
-protected class AbstractBar_FoobarKeyword_1_1 extends KeywordToken  {
+protected class AbstractBar_FoobarKeyword_3_1 extends KeywordToken  {
 	
-	public AbstractBar_FoobarKeyword_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public AbstractBar_FoobarKeyword_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getAbstractBarAccess().getFoobarKeyword_1_1();
+		return grammarAccess.getAbstractBarAccess().getFoobarKeyword_3_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new AbstractBar_FooBarBarAction_1_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new AbstractBar_FooBarBarAction_3_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -322,21 +323,21 @@ protected class AbstractBar_FoobarKeyword_1_1 extends KeywordToken  {
 }
 
 // foo+=[Foo]
-protected class AbstractBar_FooAssignment_1_2 extends AssignmentToken  {
+protected class AbstractBar_FooAssignment_3_2 extends AssignmentToken  {
 	
-	public AbstractBar_FooAssignment_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public AbstractBar_FooAssignment_3_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getAbstractBarAccess().getFooAssignment_1_2();
+		return grammarAccess.getAbstractBarAccess().getFooAssignment_3_2();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new AbstractBar_FoobarKeyword_1_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new AbstractBar_FoobarKeyword_3_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -347,9 +348,9 @@ protected class AbstractBar_FooAssignment_1_2 extends AssignmentToken  {
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("foo");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getAbstractBarAccess().getFooFooCrossReference_1_2_0().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getAbstractBarAccess().getFooFooCrossReference_3_2_0().getType().getClassifier())) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getAbstractBarAccess().getFooFooCrossReference_1_2_0(); 
+				element = grammarAccess.getAbstractBarAccess().getFooFooCrossReference_3_2_0(); 
 				return obj;
 			}
 		}
@@ -358,6 +359,44 @@ protected class AbstractBar_FooAssignment_1_2 extends AssignmentToken  {
 
 }
 
+
+// foo+=[Foo]?
+protected class AbstractBar_FooAssignment_4 extends AssignmentToken  {
+	
+	public AbstractBar_FooAssignment_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getAbstractBarAccess().getFooAssignment_4();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new AbstractBar_Group_3(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new AbstractBar_BarParserRuleCall_2(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("foo",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("foo");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getAbstractBarAccess().getFooFooCrossReference_4_0().getType().getClassifier())) {
+				type = AssignmentType.CROSS_REFERENCE;
+				element = grammarAccess.getAbstractBarAccess().getFooFooCrossReference_4_0(); 
+				return obj;
+			}
+		}
+		return null;
+	}
+
+}
 
 
 /************ end Rule AbstractBar ****************/

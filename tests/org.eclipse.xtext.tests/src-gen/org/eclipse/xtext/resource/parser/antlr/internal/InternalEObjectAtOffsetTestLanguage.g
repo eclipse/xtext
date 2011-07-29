@@ -135,24 +135,32 @@ ruleAbstractBar returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(
-    { 
-        newCompositeNode(grammarAccess.getAbstractBarAccess().getBarParserRuleCall_0()); 
+((	otherlv_0='zonk' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getAbstractBarAccess().getZonkKeyword_0());
     }
-    this_Bar_0=ruleBar
+)?(this_INT_1=RULE_INT
     { 
-        $current = $this_Bar_0.current; 
+    newLeafNode(this_INT_1, grammarAccess.getAbstractBarAccess().getINTTerminalRuleCall_1()); 
+    }
+)?
+    { 
+        newCompositeNode(grammarAccess.getAbstractBarAccess().getBarParserRuleCall_2()); 
+    }
+    this_Bar_2=ruleBar
+    { 
+        $current = $this_Bar_2.current; 
         afterParserOrEnumRuleCall();
     }
 ((
     {
         $current = forceCreateModelElementAndSet(
-            grammarAccess.getAbstractBarAccess().getFooBarBarAction_1_0(),
+            grammarAccess.getAbstractBarAccess().getFooBarBarAction_3_0(),
             $current);
     }
-)	otherlv_2='foobar' 
+)	otherlv_4='foobar' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getAbstractBarAccess().getFoobarKeyword_1_1());
+    	newLeafNode(otherlv_4, grammarAccess.getAbstractBarAccess().getFoobarKeyword_3_1());
     }
 (
 (
@@ -161,13 +169,26 @@ ruleAbstractBar returns [EObject current=null]
 	            $current = createModelElement(grammarAccess.getAbstractBarRule());
 	        }
         }
-	otherlv_3=RULE_ID
+	otherlv_5=RULE_ID
 	{
-		newLeafNode(otherlv_3, grammarAccess.getAbstractBarAccess().getFooFooCrossReference_1_2_0()); 
+		newLeafNode(otherlv_5, grammarAccess.getAbstractBarAccess().getFooFooCrossReference_3_2_0()); 
 	}
 
 )
-))?)
+))?(
+(
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getAbstractBarRule());
+	        }
+        }
+	otherlv_6=RULE_ID
+	{
+		newLeafNode(otherlv_6, grammarAccess.getAbstractBarAccess().getFooFooCrossReference_4_0()); 
+	}
+
+)
+)?)
 ;
 
 
