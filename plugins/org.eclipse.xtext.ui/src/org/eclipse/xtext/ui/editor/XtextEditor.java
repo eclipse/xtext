@@ -13,10 +13,17 @@ import java.text.CharacterIterator;
 import java.util.Iterator;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.commands.operations.IOperationApprover;
+import org.eclipse.core.commands.operations.IOperationHistory;
+import org.eclipse.core.commands.operations.IUndoContext;
+import org.eclipse.core.commands.operations.IUndoableOperation;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuManager;
@@ -63,6 +70,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.texteditor.DefaultMarkerAnnotationAccess;
+import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.texteditor.ITextEditorActionConstants;
 import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
 import org.eclipse.ui.texteditor.IUpdate;
@@ -329,6 +337,41 @@ public class XtextEditor extends TextEditor {
 		ISourceViewer sourceViewer = getSourceViewer();
 		SourceViewerConfiguration configuration = getSourceViewerConfiguration();
 		action.configure(sourceViewer, configuration);
+	}
+	
+	@Override
+	protected IOperationApprover getUndoRedoOperationApprover(IUndoContext undoContext) {
+		final IOperationApprover result = super.getUndoRedoOperationApprover(undoContext);
+		/*
+		 * The undo approver is necessary for some strange cases, e.g.
+		 * 1) 2 editors for the same file
+		 * 2) modify one of the editors and hit save
+		 * 3) the other one will reflect the changes
+		 * 4) continue to type in the first editor
+		 * 5) use undo in the second to revert the contents
+		 */
+		return new IOperationApprover() {
+
+			public IStatus proceedRedoing(IUndoableOperation operation, IOperationHistory history, IAdaptable info) {
+				IStatus status = result.proceedRedoing(operation, history, info);
+				return validateEditorInputState(info, status);
+			}
+
+			public IStatus proceedUndoing(IUndoableOperation operation, IOperationHistory history, IAdaptable info) {
+				IStatus status = result.proceedUndoing(operation, history, info);
+				return validateEditorInputState(info, status);
+			}
+
+			protected IStatus validateEditorInputState(IAdaptable info, IStatus status) {
+				if (Status.OK_STATUS.equals(status) && info.getAdapter(ITextEditor.class) == XtextEditor.this) {
+					if (!XtextEditor.this.validateEditorInputState()) {
+						return Status.CANCEL_STATUS;
+					}
+				}
+				return status;
+			}
+			
+		};
 	}
 
 	/**

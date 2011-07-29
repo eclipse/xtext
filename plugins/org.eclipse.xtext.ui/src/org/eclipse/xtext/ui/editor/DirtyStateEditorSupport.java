@@ -195,6 +195,40 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 		
 	}
 	
+	/**
+	 * Simple delegate which can remove itself from the dirty
+	 * state manager. It is used to discard unmodified
+	 * resources which would otherwise cause unexpected conflicts
+	 * (see <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=340561">bug 340561</a>).
+	 */
+	private class ClientAwareDirtyResource implements IDirtyResource {
+
+		public String getContents() {
+			return dirtyResource.getContents();
+		}
+
+		public String getActualContents() {
+			return dirtyResource.getActualContents();
+		}
+
+		public IResourceDescription getDescription() {
+			return dirtyResource.getDescription();
+		}
+
+		public URI getURI() {
+			return dirtyResource.getURI();
+		}
+		
+		private boolean isDirty() {
+			return currentClient.isDirty();
+		}
+		
+		private void discardThisResource() {
+			markEditorClean(currentClient);
+		}
+		
+	}
+	
 	@Inject
 	private IDirtyStateManager dirtyStateManager;
 
@@ -203,6 +237,13 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	
 	@Inject
 	private DocumentBasedDirtyResource dirtyResource;
+	
+	/*
+	 * The client aware dirty resource is used as a delegate
+	 * since it exposes some more information than the document
+	 * based resource (which cannot be modified since it's API).
+	 */
+	private ClientAwareDirtyResource delegatingClientAwareResource;
 	
 	@Inject
 	private IConcurrentEditingCallback concurrentEditingWarningDialog;
@@ -232,9 +273,19 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	}
 	
 	public boolean doVerify() {
-		if (!dirtyStateManager.manageDirtyState(dirtyResource)) {
+		if (!dirtyStateManager.manageDirtyState(delegatingClientAwareResource)) {
+			if (dirtyStateManager instanceof DirtyStateManager) {
+				IDirtyResource other = ((DirtyStateManager) dirtyStateManager).getDirtyResource(delegatingClientAwareResource.getURI());
+				if (other instanceof ClientAwareDirtyResource) {
+					ClientAwareDirtyResource clientAwareDirtyResource = (ClientAwareDirtyResource) other;
+					if (!clientAwareDirtyResource.isDirty()) {
+						clientAwareDirtyResource.discardThisResource();
+						return doVerify();
+					}
+				}
+			}
 			if (!isConcurrentEditingIgnored()) {
-				dirtyStateManager.discardDirtyState(dirtyResource);
+				dirtyStateManager.discardDirtyState(delegatingClientAwareResource);
 				return false;
 			}
 		}
@@ -259,6 +310,7 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 
 	protected void initDirtyResource(IXtextDocument document) {
 		dirtyResource.connect(document);
+		delegatingClientAwareResource = new ClientAwareDirtyResource();
 	}
 	
 	public void removeDirtyStateSupport(IDirtyStateEditorSupportClient client) {
@@ -267,7 +319,7 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 		client.removeVerifyListener(this);
 		stateChangeEventBroker.removeListener(this);
 		if (dirtyResource.isInitialized()) 
-			dirtyStateManager.discardDirtyState(dirtyResource);
+			dirtyStateManager.discardDirtyState(delegatingClientAwareResource);
 		IXtextDocument document = client.getDocument();
 		if (document == null)
 			document = dirtyResource.getUnderlyingDocument();
@@ -275,13 +327,14 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 			dirtyResource.disconnect(document);
 			document.removeModelListener(this);
 		}
+		this.delegatingClientAwareResource = null;
 		this.currentClient = null;
 	}
 	
 	public void markEditorClean(IDirtyStateEditorSupportClient client) {
 		if (this.currentClient == null || this.currentClient != client)
 			throw new IllegalStateException("Was configured with another client or not configured at all."); //$NON-NLS-1$
-		dirtyStateManager.discardDirtyState(dirtyResource);
+		dirtyStateManager.discardDirtyState(delegatingClientAwareResource);
 		isDirty = false;
 	}
 	
@@ -315,12 +368,12 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	public void modelChanged(XtextResource resource) {
 		if (resource == null || !dirtyResource.isInitialized())
 			return;
-		if (isDirty || ((!resource.isTrackingModification() || resource.isModified()) && currentClient.isDirty() && dirtyStateManager.manageDirtyState(dirtyResource))) {
+		if (isDirty || ((!resource.isTrackingModification() || resource.isModified()) && currentClient.isDirty() && dirtyStateManager.manageDirtyState(delegatingClientAwareResource))) {
 			synchronized (dirtyStateManager) {
 				final IResourceDescription newDescription = resource.getResourceServiceProvider().getResourceDescriptionManager().getResourceDescription(resource);
 				if (haveEObjectDescriptionsChanged(newDescription)) {
 					dirtyResource.copyState(newDescription);
-					dirtyStateManager.announceDirtyStateChanged(dirtyResource);
+					dirtyStateManager.announceDirtyStateChanged(delegatingClientAwareResource);
 				}
 			}
 		}
