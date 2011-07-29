@@ -1312,7 +1312,7 @@ public class InternalUnassignedTextTestLanguageLexer extends Lexer {
         }
     }
 
-    class DFA19 extends DFA {
+    static class DFA19 extends DFA {
 
         public DFA19(BaseRecognizer recognizer) {
             this.recognizer = recognizer;

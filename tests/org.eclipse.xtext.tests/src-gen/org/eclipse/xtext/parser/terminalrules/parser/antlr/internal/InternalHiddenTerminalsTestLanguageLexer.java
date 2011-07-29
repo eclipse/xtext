@@ -714,7 +714,7 @@ public class InternalHiddenTerminalsTestLanguageLexer extends Lexer {
         }
     }
 
-    class DFA6 extends DFA {
+    static class DFA6 extends DFA {
 
         public DFA6(BaseRecognizer recognizer) {
             this.recognizer = recognizer;

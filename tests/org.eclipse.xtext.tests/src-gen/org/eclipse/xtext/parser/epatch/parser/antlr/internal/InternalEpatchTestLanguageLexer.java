@@ -1704,7 +1704,7 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
         }
     }
 
-    class DFA13 extends DFA {
+    static class DFA13 extends DFA {
 
         public DFA13(BaseRecognizer recognizer) {
             this.recognizer = recognizer;

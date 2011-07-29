@@ -912,7 +912,7 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
         }
     }
 
-    class DFA17 extends DFA {
+    static class DFA17 extends DFA {
 
         public DFA17(BaseRecognizer recognizer) {
             this.recognizer = recognizer;

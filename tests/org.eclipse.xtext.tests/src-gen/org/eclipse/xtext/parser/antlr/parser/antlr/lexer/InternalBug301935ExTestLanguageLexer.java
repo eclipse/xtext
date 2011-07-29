@@ -318,7 +318,7 @@ public class InternalBug301935ExTestLanguageLexer extends Lexer {
         }
     }
 
-    class DFA4 extends DFA {
+    static class DFA4 extends DFA {
 
         public DFA4(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
