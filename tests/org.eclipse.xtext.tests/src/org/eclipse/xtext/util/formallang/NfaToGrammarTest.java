@@ -34,11 +34,18 @@ public class NfaToGrammarTest extends AbstractXtextTests {
 		assertEquals("start x stop", nfa2g(nfa));
 	}
 
-	public void testSimpleOptional() {
+	public void testSimpleOptional1() {
 		StringNfa nfa = new StringNfa("start", "stop");
 		nfa.start().followedBy("x", "stop");
 		nfa.state("x").followedBy("stop");
 		assertEquals("start x? stop", nfa2g(nfa));
+	}
+
+	public void testSimpleStartStopIdentical() {
+		StringNfa nfa = new StringNfa("foo", "foo");
+		nfa.start().followedBy("x", "foo");
+		nfa.state("x").followedBy("foo");
+		assertEquals("foo x? foo", nfa2g(nfa));
 	}
 
 	public void testSimpleMany() {

@@ -446,14 +446,16 @@ public class NfaToGrammar {
 
 	public <ELEMENT, STATE, TOKEN> ELEMENT nfaToGrammar(Nfa<STATE> nfa, Function<STATE, TOKEN> state2token,
 			IGrammarFactory<ELEMENT, TOKEN> grammarFactory) {
-		StateAlias<TOKEN> stop = new StateAlias<TOKEN>(new ElementAlias<TOKEN>(state2token.apply(nfa.getStop())));
 		//		StateAlias<TOKEN> start = new StateAlias<TOKEN>(
 		//				new ElementAlias<TOKEN>(state2token.apply(nfa.getStartStates())));
 		//		Set<STATE> stops = Sets.newHashSet(nfa.getFinalStates());
 		HashMap<STATE, StateAlias<TOKEN>> cache = Maps.<STATE, StateAlias<TOKEN>> newHashMap();
 		//		cache.put(nfa.getStartStates(), start);
-		cache.put(nfa.getStop(), stop);
-		StateAlias<TOKEN> start = toAlias(nfa, state2token, nfa.getStart(), stop, cache);
+		if (nfa.getStart() != nfa.getStop())
+			cache.put(nfa.getStop(), new StateAlias<TOKEN>(new ElementAlias<TOKEN>(state2token.apply(nfa.getStop()))));
+		StateAlias<TOKEN> start = toAlias(nfa, state2token, nfa.getStart(), cache);
+		if (nfa.getStart() == nfa.getStop())
+			new StateAlias<TOKEN>(start.getElement()).absorbIncoming(start);
 		//		for (STATE state : nfa.getStartStates()) {
 		//			start.getOutgoing().add(stateAlias);
 		//			stateAlias.getIncoming().add(start);
@@ -543,14 +545,14 @@ public class NfaToGrammar {
 	}
 
 	protected <STATE, TOKEN> StateAlias<TOKEN> toAlias(Nfa<STATE> nfa, Function<STATE, TOKEN> state2token, STATE state,
-			StateAlias<TOKEN> stop, Map<STATE, StateAlias<TOKEN>> cache) {
+			Map<STATE, StateAlias<TOKEN>> cache) {
 		StateAlias<TOKEN> result = cache.get(state);
 		if (result != null)
 			return result;
 		result = new StateAlias<TOKEN>(new ElementAlias<TOKEN>(state2token.apply(state)));
 		cache.put(state, result);
 		for (STATE follower : nfa.getFollowers(state)) {
-			StateAlias<TOKEN> followerState = toAlias(nfa, state2token, follower, stop, cache);
+			StateAlias<TOKEN> followerState = toAlias(nfa, state2token, follower, cache);
 			result.getOutgoing().add(followerState);
 			followerState.getIncoming().add(result);
 		}
