@@ -7,7 +7,6 @@ import org.eclipse.xtext.Group
 import org.eclipse.xtext.Alternatives
 import org.eclipse.xtext.Keyword
 import org.eclipse.xtext.Grammar
-import static extension org.eclipse.xtext.generator.GenModelAccess.*
 import static extension org.eclipse.xtext.GrammarUtil.*
 import org.eclipse.xtext.generator.serializer.SemanticSequencerUtil.*
 import org.eclipse.emf.ecore.EPackage
@@ -25,8 +24,10 @@ import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.IGrammarAccess
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider$ISynTransition
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider$ISynNavigable
 import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.serializer.analysis.GrammarAlias$AbstractElementAlias
+import org.eclipse.xtext.serializer.analysis.GrammarAlias
 
 class AbstractSyntacticSequencer extends GeneratedFile {
 	
@@ -49,9 +50,12 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 		file.imported(typeof(RuleCall))
 		file.imported(typeof(INode))
 		file.imported(typeof(ISyntacticSequencerPDAProvider$ISynTransition))
+		file.imported(typeof(ISyntacticSequencerPDAProvider$ISynNavigable))
 		file.imported(typeof(Inject))
 		file.imported(typeof(IGrammarAccess))
 		file.imported(typeof(EObject))
+		file.imported(typeof(List))
+		file.imported(typeof(GrammarAlias$AbstractElementAlias))
 		
 		file.body = '''
 			@SuppressWarnings("restriction")
@@ -83,8 +87,8 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 					 * Syntax:
 					 *     «group.second»
 					 */
-					protected void emit_«group.first»(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {
-						acceptNodes(transition, fromNode, toNode);
+					protected void emit_«group.first»(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+						acceptNodes(transition, nodes);
 					}
 					
 				«ENDFOR»
@@ -143,14 +147,17 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 	def genEmitUnassignedTokens(JavaFile file) '''
 		@Override
 		protected void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {
-			if (!transition.isSyntacticallyAmbiguous())
-				return;
-			«var i = 0»
-			«FOR group:util.allAmbiguousTransitionsBySyntax»
-				«IF (i = i + 1) > 1»else «ENDIF»if(match_«group.first».equals(transition.getAmbiguousSyntax()))
-					emit_«group.first»(semanticObject, transition, fromNode, toNode);
-			«ENDFOR»
-			«IF i > 0»else «ENDIF»acceptNodes(transition, fromNode, toNode);
+			if (transition.getAmbiguousSyntaxes().isEmpty()) return;
+			List<INode> transitionNodes = collectNodes(fromNode, toNode);
+			for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
+				List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
+				«var i = 0»
+				«FOR group:util.allAmbiguousTransitionsBySyntax»
+					«IF (i = i + 1) > 1»else «ENDIF»if(match_«group.first».equals(syntax))
+						emit_«group.first»(semanticObject, getLastNavigableState(), syntaxNodes);
+				«ENDFOR»
+				«IF i > 0»else «ENDIF»acceptNodes(getLastNavigableState(), syntaxNodes);
+			}
 		}
 	'''
 }
