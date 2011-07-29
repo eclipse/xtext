@@ -8,6 +8,7 @@
 package org.eclipse.xtext.serializer.sequencer;
 
 import java.util.List;
+import java.util.Set;
 import java.util.Stack;
 
 import org.eclipse.emf.ecore.EObject;
@@ -25,6 +26,9 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenUtil;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.CompoundAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynEmitterState;
@@ -36,6 +40,8 @@ import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISyntacticSequencerDiagnosticProvider;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
@@ -47,7 +53,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 
 		protected EObject context;
 
-		private INode lastNode;
+		protected INode lastNode;
 
 		protected ISynFollowerOwner lastState;
 
@@ -225,6 +231,28 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		}
 	}
 
+	protected ISynNavigable getLastNavigableState() {
+		ISynFollowerOwner state = contexts.peek().lastState;
+		return state instanceof ISynNavigable ? (ISynNavigable) state : null;
+	}
+
+	protected void acceptNodes(ISynNavigable fromState, List<INode> nodes) {
+		if (nodes == null)
+			return;
+		RuleCallStack stack = contexts.peek().stack.clone();
+		for (INode next : nodes) {
+			List<ISynState> path = fromState.getShortestPathTo((AbstractElement) next.getGrammarElement(), stack);
+			if (path != null) {
+				if (path.get(path.size() - 1) instanceof ISynEmitterState)
+					fromState = (ISynEmitterState) path.get(path.size() - 1);
+				else
+					return;
+				acceptNode(next);
+			}
+		}
+		return;
+	}
+
 	public void acceptUnassignedAction(Action action) {
 		SyntacticalContext i = contexts.peek();
 		i.lastState = navigateToEmitter(i.lastState, i.getLastNode(), action, null, i.stack);
@@ -249,6 +277,20 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 	public void acceptUnassignedTerminal(RuleCall terminalRC, String value, ILeafNode node) {
 		navigateToEmitter(terminalRC, node);
 		delegate.acceptUnassignedTerminal(terminalRC, value, node);
+	}
+
+	protected void collectAbstractElements(AbstractElementAlias ele, Set<AbstractElement> elments) {
+		if (ele instanceof TokenAlias)
+			elments.add(((TokenAlias) ele).getToken());
+		else if (ele instanceof CompoundAlias)
+			for (AbstractElementAlias child : ((CompoundAlias) ele).getChildren())
+				collectAbstractElements(child, elments);
+	}
+
+	protected List<INode> collectNodes(INode fromNode, INode toNode) {
+		if (fromNode == null)
+			return null;
+		return Lists.newArrayList(new EmitterNodeIterator(fromNode, toNode, false, false));
 	}
 
 	protected abstract void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode,
@@ -304,6 +346,18 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		while (result instanceof ICompositeNode)
 			result = ((ICompositeNode) result).getLastChild();
 		return result != null ? result : node;
+	}
+
+	protected List<INode> getNodesFor(List<INode> nodes, AbstractElementAlias ele) {
+		if (nodes == null)
+			return null;
+		Set<AbstractElement> elments = Sets.newHashSet();
+		collectAbstractElements(ele, elments);
+		List<INode> result = Lists.newArrayList();
+		for (INode n : nodes)
+			if (elments.contains(n.getGrammarElement()))
+				result.add(n);
+		return result;
 	}
 
 	protected String getTokenText(INode node) {

@@ -39,6 +39,7 @@ import org.eclipse.xtext.grammaranalysis.impl.AbstractNFATransition;
 import org.eclipse.xtext.grammaranalysis.impl.AbstractPDAProvider;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.AlternativeAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.GrammarAliasFactory;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.GroupAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
@@ -658,6 +659,8 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 
 		protected AbstractElementAlias ambiguousSyntax = UNINITIALIZED;
 
+		protected List<AbstractElementAlias> ambiguousSyntaxes;
+
 		protected ISynAbsorberState source;
 
 		public SynTransition(ISynAbsorberState source, ISynAbsorberState target) {
@@ -688,6 +691,26 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 					ambiguousSyntax = null;
 			}
 			return ambiguousSyntax;
+		}
+
+		public List<AbstractElementAlias> getAmbiguousSyntaxes() {
+			if (ambiguousSyntaxes != null)
+				return ambiguousSyntaxes;
+			if (!isSyntacticallyAmbiguous())
+				return ambiguousSyntaxes = Collections.emptyList();
+			ambiguousSyntaxes = Lists.newArrayList();
+			Nfa<ISynState> nfa = new PdaUtil().filterUnambiguousPaths(getPathToTarget());
+			nfa = new NfaUtil().filter(nfa, new Filter());
+			AbstractElementAlias syntax = new NfaToGrammar().nfaToGrammar(nfa, new GetGrammarElement(),
+					new GrammarAliasFactory());
+			if (syntax instanceof GroupAlias) {
+				GroupAlias group = (GroupAlias) syntax;
+				for (AbstractElementAlias child : group.getChildren())
+					if (child.isMany() || child.isOptional() || child instanceof AlternativeAlias)
+						ambiguousSyntaxes.add(child);
+			} else
+				ambiguousSyntaxes.add(syntax);
+			return ambiguousSyntaxes;
 		}
 
 		public AbstractElementAlias getShortSyntax() {
