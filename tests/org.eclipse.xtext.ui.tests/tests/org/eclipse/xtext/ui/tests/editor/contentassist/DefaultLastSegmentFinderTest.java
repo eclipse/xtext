@@ -42,7 +42,8 @@ public class DefaultLastSegmentFinderTest extends TestCase {
 	}
 	
 	public void testGetLastSegment_04() {
-		assertEquals(null, finder.getLastSegment("prefix.aA", '.'));
+		assertEquals("aA", finder.getLastSegment("prefix.aA", '.'));
+		assertEquals("aa", finder.getLastSegment("prefix.aA.aa", '.'));
 		assertEquals("A", finder.getLastSegment("preFix.A", '.'));
 		assertEquals("AA", finder.getLastSegment("prefix.AA", '.'));
 		assertEquals("Aa", finder.getLastSegment("prefix.Aa", '.'));
