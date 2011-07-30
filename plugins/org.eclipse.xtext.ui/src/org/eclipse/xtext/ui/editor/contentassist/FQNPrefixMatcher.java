@@ -38,6 +38,7 @@ public class FQNPrefixMatcher extends PrefixMatcher {
 			if (fqn == null || fqn.length() == 0)
 				return null;
 			boolean lookForUppercase = true;
+			int lastDelimiterIndex = -1;
 			for(int i = 0; i < fqn.length(); i++) {
 				if (lookForUppercase) {
 					if (Character.isUpperCase(fqn.charAt(i))) {
@@ -45,7 +46,11 @@ public class FQNPrefixMatcher extends PrefixMatcher {
 					}
 				} 
 				lookForUppercase = delimiter == fqn.charAt(i);
+				if (lookForUppercase)
+					lastDelimiterIndex = i;
 			}
+			if (lastDelimiterIndex>=0 && lastDelimiterIndex < fqn.length() - 1)
+				return fqn.substring(lastDelimiterIndex + 1);
 			return null;
 		}
 		
