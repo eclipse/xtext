@@ -41,7 +41,9 @@ Workflow {
 		
 		language = {
 			uri = "classpath:/org/eclipse/xtext/generator/ecore/SuperTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {}
+			fragment = @TestLanguagesFragments {
+				srcGenOnly = false
+			}
 		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/generator/ecore/SubTestLanguage.xtext"
@@ -97,6 +99,7 @@ Workflow {
 		language = {
 			uri = "classpath:/org/eclipse/xtext/linking/AbstractIgnoreCaseLinkingTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {
+				srcGenOnly = false
 			}
 		}
 		language = {
@@ -146,7 +149,9 @@ Workflow {
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {}
+			fragment = @TestLanguagesFragments {
+				srcGenOnly = false
+			}
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/grammarinheritance/BaseInheritanceTestLanguage.xtext"
@@ -158,7 +163,9 @@ Workflow {
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {}
+			fragment = @TestLanguagesFragments {
+				srcGenOnly = false
+			}
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/grammarinheritance/InheritanceTest2Language.xtext"
@@ -212,7 +219,9 @@ Workflow {
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug301935TestLanguage.xtext"
-			fragment = @TestLanguagesFragments {}
+			fragment = @TestLanguagesFragments {
+				srcGenOnly = false
+			}
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug301935ExTestLanguage.xtext"
@@ -280,7 +289,9 @@ Workflow {
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/UnorderedGroupsTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {}
+			fragment = @TestLanguagesFragments {
+				srcGenOnly = false
+			}
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/SimpleUnorderedGroupsTestLanguage.xtext"
@@ -294,6 +305,7 @@ Workflow {
 			uri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/BacktrackingBug325745TestLanguage.xtext"
 			fragment = @TestLanguagesFragments {
 				backtrack = true
+				srcGenOnly = false
 			}
 		}
 		language = {
