@@ -66,7 +66,7 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 					child.setWorkRemaining(3);
 					if (pair.getFirst() instanceof IFile) {
 						IFile file = (IFile) pair.getFirst();
-						if (!file.isReadOnly() && !pair.getSecond().isHidden()) {
+						if (file.isAccessible() && pair.getSecond().isAccessible() && !pair.getSecond().isHidden()) {
 							Resource resource = resourceSet.getResource(delta.getNew().getURI(), true);
 							addMarkers(file, resource, child.newChild(2));
 						}
@@ -79,7 +79,7 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 				for (Pair<IStorage, IProject> pair : storages) {
 					if (pair.getFirst() instanceof IFile) {
 						IFile file = (IFile) pair.getFirst();
-						if (!file.isReadOnly() && file.isAccessible()) {
+						if (file.isAccessible() && pair.getSecond().isAccessible() && !pair.getSecond().isHidden()) {
 							try {
 								file.deleteMarkers(MarkerTypes.FAST_VALIDATION, true, IResource.DEPTH_ZERO);
 								file.deleteMarkers(MarkerTypes.NORMAL_VALIDATION, true, IResource.DEPTH_ZERO);
