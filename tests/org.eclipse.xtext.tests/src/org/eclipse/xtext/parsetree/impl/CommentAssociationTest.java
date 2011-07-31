@@ -149,9 +149,7 @@ public class CommentAssociationTest extends AbstractXtextTests {
 		model.getElements().add(y);
 		model.getElements().add(z);
 		String serialized = serialize(model);
-		// One would usually not expect a WS before parent but the current
-		// implementation adds WS between each token by default
-		assertEquals("element x // comment post x\n parent y element z", serialized);
+		assertEquals("element x // comment post x\nparent y element z", serialized);
 	}
 }
 
