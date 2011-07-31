@@ -71,8 +71,8 @@ public class StringBufferSequenceAcceptor implements ISequenceAcceptor {
 		buf.append(token);
 	}
 
-	public void acceptUnassignedKeyword(Keyword keyword, ILeafNode node) {
-		buf.append(keyword.getValue());
+	public void acceptUnassignedKeyword(Keyword keyword, String token, ILeafNode node) {
+		buf.append(token);
 	}
 
 	public void acceptUnassignedTerminal(RuleCall terminalRC, String token, ILeafNode node) {

@@ -119,10 +119,10 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 		delegate.acceptUnassignedEnum(enumRC, token, node);
 	}
 
-	public void acceptUnassignedKeyword(Keyword keyword, ILeafNode node) {
+	public void acceptUnassignedKeyword(Keyword keyword, String token, ILeafNode node) {
 		emitHiddenTokens(getHiddenNodesBetween(lastNode, node));
 		lastNode = node;
-		delegate.acceptUnassignedKeyword(keyword, node);
+		delegate.acceptUnassignedKeyword(keyword, token, node);
 	}
 
 	public void acceptUnassignedTerminal(RuleCall terminalRC, String token, ILeafNode node) {
@@ -163,8 +163,13 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 	}
 
 	public void finish() {
-		if (rootNode != null && rootNode == rootNode.getRootNode())
-			emitHiddenTokens(getRemainingHiddenNodesInContainer(lastNode, rootNode));
+		if (rootNode != null && rootNode == rootNode.getRootNode()) {
+			List<INode> hidden = getRemainingHiddenNodesInContainer(lastNode, rootNode);
+			if (!hidden.isEmpty()) {
+				emitHiddenTokens(hidden);
+				lastNode = rootNode;
+			}
+		}
 		delegate.finish();
 	}
 
@@ -236,8 +241,7 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 		return out;
 	}
 
-	public void init(EObject context, EObject semanticObject, ISequenceAcceptor sequenceAcceptor,
-			Acceptor errorAcceptor) {
+	public void init(EObject context, EObject semanticObject, ISequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
 		this.delegate = sequenceAcceptor;
 		this.lastNode = NodeModelUtils.findActualNodeFor(semanticObject);
 		this.rootNode = lastNode;

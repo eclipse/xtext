@@ -100,8 +100,8 @@ public class DebugSequenceAcceptor implements ISequenceAcceptor {
 		add(titles.doSwitch(enumRC), "'" + value + "'", "", -1, node);
 	}
 
-	public void acceptUnassignedKeyword(Keyword keyword, ILeafNode node) {
-		add(titles.doSwitch(keyword), "'" + keyword.getValue() + "'", "", -1, node);
+	public void acceptUnassignedKeyword(Keyword keyword, String token, ILeafNode node) {
+		add(titles.doSwitch(keyword), "'" + token + "'", "", -1, node);
 	}
 
 	public void acceptUnassignedTerminal(RuleCall terminalRC, String value, ILeafNode node) {
