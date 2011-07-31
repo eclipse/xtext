@@ -455,7 +455,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 			final ContentAssistContext contentAssistContext) {
 		return new DefaultProposalCreator(contentAssistContext, ruleName, getQualifiedNameConverter()) {
 			@Override
-			public ICompletionProposal apply(IEObjectDescription candidate) {
+			public ICompletionProposal apply(final IEObjectDescription candidate) {
 				IEObjectDescription myCandidate = candidate;
 				ContentAssistContext myContentAssistContext = contentAssistContext;
 				if (myCandidate instanceof MultiNameDescription) {
@@ -468,10 +468,18 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 							if (delegateMatcher.isCandidateMatchingPrefix(name, prefix))
 								return true;
 							IQualifiedNameConverter converter = getQualifiedNameConverter();
+							String unconvertedName = converter.toString(candidate.getName());
+							if (!unconvertedName.equals(name) && delegateMatcher.isCandidateMatchingPrefix(unconvertedName, prefix))
+								return true;
 							for(QualifiedName otherName: multiNamed.getOtherNames()) {
 								String alternative = converter.toString(otherName);
 								if (delegateMatcher.isCandidateMatchingPrefix(alternative, prefix))
 									return true;
+								String convertedAlternative = getValueConverter().toString(alternative, ruleName);
+								if (!convertedAlternative.equals(alternative) && 
+										delegateMatcher.isCandidateMatchingPrefix(convertedAlternative, prefix)) {
+									return true;
+								}
 							}
 							return false;
 						}
