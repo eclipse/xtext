@@ -50,7 +50,6 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 		file.imported(typeof(RuleCall))
 		file.imported(typeof(INode))
 		file.imported(typeof(ISyntacticSequencerPDAProvider$ISynTransition))
-		file.imported(typeof(ISyntacticSequencerPDAProvider$ISynNavigable))
 		file.imported(typeof(Inject))
 		file.imported(typeof(IGrammarAccess))
 		file.imported(typeof(EObject))
@@ -87,7 +86,7 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 					 * Syntax:
 					 *     «group.second»
 					 */
-					protected void emit_«group.first»(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+					protected void emit_«group.first»(EObject semanticObject, «file.imported(typeof(ISyntacticSequencerPDAProvider$ISynNavigable))» transition, List<INode> nodes) {
 						acceptNodes(transition, nodes);
 					}
 					
@@ -126,18 +125,18 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 	
 	def genGetUnassignedRuleCallTokens(JavaFile file) '''
 		@Override
-		protected String getUnassignedRuleCallToken(RuleCall ruleCall, INode node) {
+		protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 			«var i = 0»
 			«FOR rule:unassignedCalledTokenRules»
 				«IF (i = i + 1) > 1»else «ENDIF»if(ruleCall.getRule() == grammarAccess.«rule.gaAccessor»)
-					return «rule.unassignedCalledTokenRuleName»(ruleCall, node);
+					return «rule.unassignedCalledTokenRuleName»(semanticObject, ruleCall, node);
 			«ENDFOR»
 			return "";
 		}
 	'''
 	
 	def genGetUnassignedRuleCallToken(JavaFile file, AbstractRule rule) '''
-		protected String «rule.unassignedCalledTokenRuleName»(RuleCall ruleCall, INode node) {
+		protected String «rule.unassignedCalledTokenRuleName»(EObject semanticObject, RuleCall ruleCall, INode node) {
 			if (node != null)
 				return getTokenText(node);
 			return "«Strings::convertToJavaString(rule.alternatives.defaultValue(newHashSet))»";
