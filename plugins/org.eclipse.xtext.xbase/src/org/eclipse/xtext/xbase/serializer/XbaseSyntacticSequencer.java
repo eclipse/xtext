@@ -28,7 +28,7 @@ public class XbaseSyntacticSequencer extends AbstractXbaseSyntacticSequencer {
 				EObject cnt = semanticObject.eContainer();
 				if (cnt instanceof XExpression && !(cnt instanceof XBlockExpression)
 						&& !(cnt instanceof XForLoopExpression))
-					acceptUnassignedKeyword(kw, null);
+					acceptUnassignedKeyword(kw, kw.getValue(), null);
 			}
 		}
 
