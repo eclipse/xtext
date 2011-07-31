@@ -1,4 +1,4 @@
-module org.eclipse.xtext.TestLanguagesFragments
+module org.eclipse.xtext.TestLanguagesFragmentsParseTreeConstructor
 
 import org.eclipse.xtext.generator.*
 
@@ -13,7 +13,6 @@ var backtrack = false
 var memoize = false
 var generateDotDiagram = false
 var graphvizCommand = ""
-var srcGenOnly=true
 
 CompositeGeneratorFragment {
 	fragment = parser.antlr.XtextAntlrGeneratorFragment {
@@ -25,5 +24,4 @@ CompositeGeneratorFragment {
 	fragment = grammarAccess.GrammarAccessFragment {}
 	fragment = ecore.EcoreGeneratorFragment auto-inject {}
 	fragment = parseTreeConstructor.ParseTreeConstructorFragment auto-inject {}
-	fragment = serializer.SerializerFragment auto-inject {}
 }

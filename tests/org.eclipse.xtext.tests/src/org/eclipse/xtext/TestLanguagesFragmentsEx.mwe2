@@ -21,6 +21,7 @@ var ignoreCase = false
 var backtrackLexer = false
 var generateDotDiagram = false
 var graphvizCommand = ""
+var srcGenOnly=true
 
 CompositeGeneratorFragment {
 	fragment = parser.antlr.ex.rt.AntlrGeneratorFragment {
@@ -32,4 +33,5 @@ CompositeGeneratorFragment {
 	fragment = grammarAccess.GrammarAccessFragment {}
 	fragment = ecore.EcoreGeneratorFragment auto-inject {}
 	fragment = parseTreeConstructor.ParseTreeConstructorFragment auto-inject {}
+	fragment = serializer.SerializerFragment auto-inject {}
 }
