@@ -350,22 +350,13 @@ public interface FormattertestlanguagePackage extends EPackage
   int TEST_INDENTATION = 9;
 
   /**
-   * The feature id for the '<em><b>Sub</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TEST_INDENTATION__SUB = ROOT_FEATURE_COUNT + 0;
-
-  /**
    * The feature id for the '<em><b>Items</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TEST_INDENTATION__ITEMS = ROOT_FEATURE_COUNT + 1;
+  int TEST_INDENTATION__ITEMS = ROOT_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Semi</b></em>' attribute.
@@ -374,7 +365,7 @@ public interface FormattertestlanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int TEST_INDENTATION__SEMI = ROOT_FEATURE_COUNT + 2;
+  int TEST_INDENTATION__SEMI = ROOT_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>Test Indentation</em>' class.
@@ -383,7 +374,7 @@ public interface FormattertestlanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int TEST_INDENTATION_FEATURE_COUNT = ROOT_FEATURE_COUNT + 3;
+  int TEST_INDENTATION_FEATURE_COUNT = ROOT_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FqnObjImpl <em>Fqn Obj</em>}' class.
@@ -899,17 +890,6 @@ public interface FormattertestlanguagePackage extends EPackage
   EClass getTestIndentation();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestIndentation#getSub <em>Sub</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Sub</em>'.
-   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestIndentation#getSub()
-   * @see #getTestIndentation()
-   * @generated
-   */
-  EReference getTestIndentation_Sub();
-
-  /**
    * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestIndentation#getItems <em>Items</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1348,14 +1328,6 @@ public interface FormattertestlanguagePackage extends EPackage
      * @generated
      */
     EClass TEST_INDENTATION = eINSTANCE.getTestIndentation();
-
-    /**
-     * The meta object literal for the '<em><b>Sub</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference TEST_INDENTATION__SUB = eINSTANCE.getTestIndentation_Sub();
 
     /**
      * The meta object literal for the '<em><b>Items</b></em>' containment reference list feature.

@@ -7,7 +7,6 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
-import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 import org.eclipse.xtext.serializer.services.ContextFinderTestLanguageGrammarAccess;
@@ -23,7 +22,7 @@ public class AbstractContextFinderTestLanguageSyntacticSequencer extends Abstrac
 	}
 	
 	@Override
-	protected String getUnassignedRuleCallToken(RuleCall ruleCall, INode node) {
+	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		return "";
 	}
 	

@@ -79,4 +79,19 @@ public abstract class AbstractUnassignedTextTestLanguageRuntimeModule extends De
 		return org.eclipse.xtext.parsetree.unassignedtext.parseTreeConstruction.UnassignedTextTestLanguageParsetreeConstructor.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
+	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
+		return org.eclipse.xtext.parsetree.unassignedtext.serializer.UnassignedTextTestLanguageSemanticSequencer.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
+	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
+		return org.eclipse.xtext.parsetree.unassignedtext.serializer.UnassignedTextTestLanguageSyntacticSequencer.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
+	public Class<? extends org.eclipse.xtext.serializer.ISerializer> bindISerializer() {
+		return org.eclipse.xtext.serializer.impl.Serializer.class;
+	}
+
 }

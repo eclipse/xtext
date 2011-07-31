@@ -70,9 +70,9 @@ protected class Root_Group extends GroupToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getTestListRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getTestOptionalRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getTestRequiredRule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getTestListAccess().getTestListAction_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getTestOptionalAccess().getTestOptionalAction_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getTestRequiredAccess().getTestRequiredAction_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
@@ -146,7 +146,7 @@ protected class Root_TestRequiredParserRuleCall_1_0 extends RuleCallToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getTestRequiredRule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getTestRequiredAccess().getTestRequiredAction_0().getType().getClassifier())
 			return null;
 		if(checkForRecursion(TestRequired_Group.class, eObjectConsumer)) return null;
 		return eObjectConsumer;
@@ -183,7 +183,7 @@ protected class Root_TestOptionalParserRuleCall_1_1 extends RuleCallToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getTestOptionalRule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getTestOptionalAccess().getTestOptionalAction_0().getType().getClassifier())
 			return null;
 		if(checkForRecursion(TestOptional_Group.class, eObjectConsumer)) return null;
 		return eObjectConsumer;
@@ -220,7 +220,7 @@ protected class Root_TestListParserRuleCall_1_2 extends RuleCallToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getTestListRule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getTestListAccess().getTestListAction_0().getType().getClassifier())
 			return null;
 		if(checkForRecursion(TestList_Group.class, eObjectConsumer)) return null;
 		return eObjectConsumer;
@@ -243,11 +243,11 @@ protected class Root_TestListParserRuleCall_1_2 extends RuleCallToken {
 /************ begin Rule TestRequired ****************
  *
  * TestRequired:
- * 	"required" required1=INT required2=INT;
+ * 	{TestRequired} "required" required1=INT required2=INT;
  *
  **/
 
-// "required" required1=INT required2=INT
+// {TestRequired} "required" required1=INT required2=INT
 protected class TestRequired_Group extends GroupToken {
 	
 	public TestRequired_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -262,30 +262,30 @@ protected class TestRequired_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TestRequired_Required2Assignment_2(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new TestRequired_Required2Assignment_3(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getTestRequiredRule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getTestRequiredAccess().getTestRequiredAction_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
 
 }
 
-// "required"
-protected class TestRequired_RequiredKeyword_0 extends KeywordToken  {
-	
-	public TestRequired_RequiredKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+// {TestRequired}
+protected class TestRequired_TestRequiredAction_0 extends ActionToken  {
+
+	public TestRequired_TestRequiredAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getTestRequiredAccess().getRequiredKeyword_0();
+	public Action getGrammarElement() {
+		return grammarAccess.getTestRequiredAccess().getTestRequiredAction_0();
 	}
 
     @Override
@@ -295,24 +295,51 @@ protected class TestRequired_RequiredKeyword_0 extends KeywordToken  {
 		}	
 	}
 
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
+	}
 }
 
-// required1=INT
-protected class TestRequired_Required1Assignment_1 extends AssignmentToken  {
+// "required"
+protected class TestRequired_RequiredKeyword_1 extends KeywordToken  {
 	
-	public TestRequired_Required1Assignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public TestRequired_RequiredKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.getTestRequiredAccess().getRequired1Assignment_1();
+	public Keyword getGrammarElement() {
+		return grammarAccess.getTestRequiredAccess().getRequiredKeyword_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TestRequired_RequiredKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new TestRequired_TestRequiredAction_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// required1=INT
+protected class TestRequired_Required1Assignment_2 extends AssignmentToken  {
+	
+	public TestRequired_Required1Assignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTestRequiredAccess().getRequired1Assignment_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new TestRequired_RequiredKeyword_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -321,9 +348,9 @@ protected class TestRequired_Required1Assignment_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("required1",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("required1");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getTestRequiredAccess().getRequired1INTTerminalRuleCall_1_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getTestRequiredAccess().getRequired1INTTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getTestRequiredAccess().getRequired1INTTerminalRuleCall_1_0();
+			element = grammarAccess.getTestRequiredAccess().getRequired1INTTerminalRuleCall_2_0();
 			return obj;
 		}
 		return null;
@@ -332,21 +359,21 @@ protected class TestRequired_Required1Assignment_1 extends AssignmentToken  {
 }
 
 // required2=INT
-protected class TestRequired_Required2Assignment_2 extends AssignmentToken  {
+protected class TestRequired_Required2Assignment_3 extends AssignmentToken  {
 	
-	public TestRequired_Required2Assignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public TestRequired_Required2Assignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getTestRequiredAccess().getRequired2Assignment_2();
+		return grammarAccess.getTestRequiredAccess().getRequired2Assignment_3();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TestRequired_Required1Assignment_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new TestRequired_Required1Assignment_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -355,9 +382,9 @@ protected class TestRequired_Required2Assignment_2 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("required2",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("required2");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getTestRequiredAccess().getRequired2INTTerminalRuleCall_2_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getTestRequiredAccess().getRequired2INTTerminalRuleCall_3_0(), value, null)) {
 			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getTestRequiredAccess().getRequired2INTTerminalRuleCall_2_0();
+			element = grammarAccess.getTestRequiredAccess().getRequired2INTTerminalRuleCall_3_0();
 			return obj;
 		}
 		return null;
@@ -372,11 +399,11 @@ protected class TestRequired_Required2Assignment_2 extends AssignmentToken  {
 /************ begin Rule TestOptional ****************
  *
  * TestOptional:
- * 	"optional" opt1=INT? (":" opt2=INT)?;
+ * 	{TestOptional} "optional" opt1=INT? (":" opt2=INT)?;
  *
  **/
 
-// "optional" opt1=INT? (":" opt2=INT)?
+// {TestOptional} "optional" opt1=INT? (":" opt2=INT)?
 protected class TestOptional_Group extends GroupToken {
 	
 	public TestOptional_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -391,32 +418,32 @@ protected class TestOptional_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TestOptional_Group_2(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new TestOptional_Opt1Assignment_1(lastRuleCallOrigin, this, 1, inst);
-			case 2: return new TestOptional_OptionalKeyword_0(lastRuleCallOrigin, this, 2, inst);
+			case 0: return new TestOptional_Group_3(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new TestOptional_Opt1Assignment_2(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new TestOptional_OptionalKeyword_1(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
 		}	
 	}
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getTestOptionalRule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getTestOptionalAccess().getTestOptionalAction_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
 
 }
 
-// "optional"
-protected class TestOptional_OptionalKeyword_0 extends KeywordToken  {
-	
-	public TestOptional_OptionalKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+// {TestOptional}
+protected class TestOptional_TestOptionalAction_0 extends ActionToken  {
+
+	public TestOptional_TestOptionalAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getTestOptionalAccess().getOptionalKeyword_0();
+	public Action getGrammarElement() {
+		return grammarAccess.getTestOptionalAccess().getTestOptionalAction_0();
 	}
 
     @Override
@@ -426,24 +453,51 @@ protected class TestOptional_OptionalKeyword_0 extends KeywordToken  {
 		}	
 	}
 
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
+	}
 }
 
-// opt1=INT?
-protected class TestOptional_Opt1Assignment_1 extends AssignmentToken  {
+// "optional"
+protected class TestOptional_OptionalKeyword_1 extends KeywordToken  {
 	
-	public TestOptional_Opt1Assignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public TestOptional_OptionalKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.getTestOptionalAccess().getOpt1Assignment_1();
+	public Keyword getGrammarElement() {
+		return grammarAccess.getTestOptionalAccess().getOptionalKeyword_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TestOptional_OptionalKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new TestOptional_TestOptionalAction_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// opt1=INT?
+protected class TestOptional_Opt1Assignment_2 extends AssignmentToken  {
+	
+	public TestOptional_Opt1Assignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTestOptionalAccess().getOpt1Assignment_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new TestOptional_OptionalKeyword_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -452,9 +506,9 @@ protected class TestOptional_Opt1Assignment_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("opt1",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("opt1");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getTestOptionalAccess().getOpt1INTTerminalRuleCall_1_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getTestOptionalAccess().getOpt1INTTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getTestOptionalAccess().getOpt1INTTerminalRuleCall_1_0();
+			element = grammarAccess.getTestOptionalAccess().getOpt1INTTerminalRuleCall_2_0();
 			return obj;
 		}
 		return null;
@@ -463,21 +517,21 @@ protected class TestOptional_Opt1Assignment_1 extends AssignmentToken  {
 }
 
 // (":" opt2=INT)?
-protected class TestOptional_Group_2 extends GroupToken {
+protected class TestOptional_Group_3 extends GroupToken {
 	
-	public TestOptional_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public TestOptional_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.getTestOptionalAccess().getGroup_2();
+		return grammarAccess.getTestOptionalAccess().getGroup_3();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TestOptional_Opt2Assignment_2_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new TestOptional_Opt2Assignment_3_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -485,22 +539,22 @@ protected class TestOptional_Group_2 extends GroupToken {
 }
 
 // ":"
-protected class TestOptional_ColonKeyword_2_0 extends KeywordToken  {
+protected class TestOptional_ColonKeyword_3_0 extends KeywordToken  {
 	
-	public TestOptional_ColonKeyword_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public TestOptional_ColonKeyword_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getTestOptionalAccess().getColonKeyword_2_0();
+		return grammarAccess.getTestOptionalAccess().getColonKeyword_3_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TestOptional_Opt1Assignment_1(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new TestOptional_OptionalKeyword_0(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new TestOptional_Opt1Assignment_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new TestOptional_OptionalKeyword_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -508,21 +562,21 @@ protected class TestOptional_ColonKeyword_2_0 extends KeywordToken  {
 }
 
 // opt2=INT
-protected class TestOptional_Opt2Assignment_2_1 extends AssignmentToken  {
+protected class TestOptional_Opt2Assignment_3_1 extends AssignmentToken  {
 	
-	public TestOptional_Opt2Assignment_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public TestOptional_Opt2Assignment_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getTestOptionalAccess().getOpt2Assignment_2_1();
+		return grammarAccess.getTestOptionalAccess().getOpt2Assignment_3_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TestOptional_ColonKeyword_2_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new TestOptional_ColonKeyword_3_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -531,9 +585,9 @@ protected class TestOptional_Opt2Assignment_2_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("opt2",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("opt2");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getTestOptionalAccess().getOpt2INTTerminalRuleCall_2_1_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getTestOptionalAccess().getOpt2INTTerminalRuleCall_3_1_0(), value, null)) {
 			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getTestOptionalAccess().getOpt2INTTerminalRuleCall_2_1_0();
+			element = grammarAccess.getTestOptionalAccess().getOpt2INTTerminalRuleCall_3_1_0();
 			return obj;
 		}
 		return null;
@@ -549,11 +603,11 @@ protected class TestOptional_Opt2Assignment_2_1 extends AssignmentToken  {
 /************ begin Rule TestList ****************
  *
  * TestList:
- * 	"list" item+=INT*;
+ * 	{TestList} "list" item+=INT*;
  *
  **/
 
-// "list" item+=INT*
+// {TestList} "list" item+=INT*
 protected class TestList_Group extends GroupToken {
 	
 	public TestList_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -568,31 +622,31 @@ protected class TestList_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TestList_ItemAssignment_1(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new TestList_ListKeyword_0(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new TestList_ItemAssignment_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new TestList_ListKeyword_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getTestListRule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getTestListAccess().getTestListAction_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
 
 }
 
-// "list"
-protected class TestList_ListKeyword_0 extends KeywordToken  {
-	
-	public TestList_ListKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+// {TestList}
+protected class TestList_TestListAction_0 extends ActionToken  {
+
+	public TestList_TestListAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getTestListAccess().getListKeyword_0();
+	public Action getGrammarElement() {
+		return grammarAccess.getTestListAccess().getTestListAction_0();
 	}
 
     @Override
@@ -602,25 +656,52 @@ protected class TestList_ListKeyword_0 extends KeywordToken  {
 		}	
 	}
 
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
+	}
 }
 
-// item+=INT*
-protected class TestList_ItemAssignment_1 extends AssignmentToken  {
+// "list"
+protected class TestList_ListKeyword_1 extends KeywordToken  {
 	
-	public TestList_ItemAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public TestList_ListKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.getTestListAccess().getItemAssignment_1();
+	public Keyword getGrammarElement() {
+		return grammarAccess.getTestListAccess().getListKeyword_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TestList_ItemAssignment_1(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new TestList_ListKeyword_0(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new TestList_TestListAction_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// item+=INT*
+protected class TestList_ItemAssignment_2 extends AssignmentToken  {
+	
+	public TestList_ItemAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTestListAccess().getItemAssignment_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new TestList_ItemAssignment_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new TestList_ListKeyword_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -629,9 +710,9 @@ protected class TestList_ItemAssignment_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("item",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("item");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getTestListAccess().getItemINTTerminalRuleCall_1_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getTestListAccess().getItemINTTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getTestListAccess().getItemINTTerminalRuleCall_1_0();
+			element = grammarAccess.getTestListAccess().getItemINTTerminalRuleCall_2_0();
 			return obj;
 		}
 		return null;

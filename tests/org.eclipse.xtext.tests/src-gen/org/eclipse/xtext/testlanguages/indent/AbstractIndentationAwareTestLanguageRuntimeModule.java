@@ -79,4 +79,19 @@ public abstract class AbstractIndentationAwareTestLanguageRuntimeModule extends 
 		return org.eclipse.xtext.testlanguages.indent.parseTreeConstruction.IndentationAwareTestLanguageParsetreeConstructor.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
+	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
+		return org.eclipse.xtext.testlanguages.indent.serializer.AbstractIndentationAwareTestLanguageSemanticSequencer.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
+	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
+		return org.eclipse.xtext.testlanguages.indent.serializer.AbstractIndentationAwareTestLanguageSyntacticSequencer.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
+	public Class<? extends org.eclipse.xtext.serializer.ISerializer> bindISerializer() {
+		return org.eclipse.xtext.serializer.impl.Serializer.class;
+	}
+
 }

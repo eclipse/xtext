@@ -62,7 +62,6 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       file.imported(org.eclipse.xtext.RuleCall.class);
       file.imported(org.eclipse.xtext.nodemodel.INode.class);
       file.imported(org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition.class);
-      file.imported(org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable.class);
       file.imported(com.google.inject.Inject.class);
       file.imported(org.eclipse.xtext.IGrammarAccess.class);
       file.imported(org.eclipse.emf.ecore.EObject.class);
@@ -179,7 +178,10 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
           _builder.append("protected void emit_");
           String _first_2 = group_2.getFirst();
           _builder.append(_first_2, "	");
-          _builder.append("(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {");
+          _builder.append("(EObject semanticObject, ");
+          String _imported_3 = file.imported(org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable.class);
+          _builder.append(_imported_3, "	");
+          _builder.append(" transition, List<INode> nodes) {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
           _builder.append("\t");
@@ -347,7 +349,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@Override");
     _builder.newLine();
-    _builder.append("protected String getUnassignedRuleCallToken(RuleCall ruleCall, INode node) {");
+    _builder.append("protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {");
     _builder.newLine();
     _builder.append("\t");
     int i = 0;
@@ -374,7 +376,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
         _builder.append("return ");
         StringConcatenation _unassignedCalledTokenRuleName = this.unassignedCalledTokenRuleName(rule);
         _builder.append(_unassignedCalledTokenRuleName, "		");
-        _builder.append("(ruleCall, node);");
+        _builder.append("(semanticObject, ruleCall, node);");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -391,7 +393,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     _builder.append("protected String ");
     StringConcatenation _unassignedCalledTokenRuleName = this.unassignedCalledTokenRuleName(rule);
     _builder.append(_unassignedCalledTokenRuleName, "");
-    _builder.append("(RuleCall ruleCall, INode node) {");
+    _builder.append("(EObject semanticObject, RuleCall ruleCall, INode node) {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("if (node != null)");

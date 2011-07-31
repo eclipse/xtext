@@ -85,9 +85,9 @@ protected class Root_Group extends GroupToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getTestIndentationRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getTestLinewrapRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getTestLinewrapMinMaxRule().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getTestIndentationAccess().getTestIndentationAction_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getTestLinewrapAccess().getTestLinewrapAction_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getTestLinewrapMinMaxAccess().getTestLinewrapMinMaxAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getWrappingDataTypeTestRule().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
@@ -163,7 +163,7 @@ protected class Root_TestLinewrapParserRuleCall_1_0 extends RuleCallToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getTestLinewrapRule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getTestLinewrapAccess().getTestLinewrapAction_0().getType().getClassifier())
 			return null;
 		if(checkForRecursion(TestLinewrap_Group.class, eObjectConsumer)) return null;
 		return eObjectConsumer;
@@ -200,7 +200,7 @@ protected class Root_TestIndentationParserRuleCall_1_1 extends RuleCallToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getTestIndentationRule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getTestIndentationAccess().getTestIndentationAction_0().getType().getClassifier())
 			return null;
 		if(checkForRecursion(TestIndentation_Group.class, eObjectConsumer)) return null;
 		return eObjectConsumer;
@@ -237,7 +237,7 @@ protected class Root_TestLinewrapMinMaxParserRuleCall_1_2 extends RuleCallToken 
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getTestLinewrapMinMaxRule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getTestLinewrapMinMaxAccess().getTestLinewrapMinMaxAction_0().getType().getClassifier())
 			return null;
 		if(checkForRecursion(TestLinewrapMinMax_Group.class, eObjectConsumer)) return null;
 		return eObjectConsumer;
@@ -1700,11 +1700,11 @@ protected class Space_ValAssignment_1 extends AssignmentToken  {
 /************ begin Rule TestLinewrap ****************
  *
  * TestLinewrap:
- * 	"linewrap" items+=Line*;
+ * 	{TestLinewrap} "linewrap" items+=Line*;
  *
  **/
 
-// "linewrap" items+=Line*
+// {TestLinewrap} "linewrap" items+=Line*
 protected class TestLinewrap_Group extends GroupToken {
 	
 	public TestLinewrap_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1719,31 +1719,31 @@ protected class TestLinewrap_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TestLinewrap_ItemsAssignment_1(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new TestLinewrap_LinewrapKeyword_0(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new TestLinewrap_ItemsAssignment_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new TestLinewrap_LinewrapKeyword_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getTestLinewrapRule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getTestLinewrapAccess().getTestLinewrapAction_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
 
 }
 
-// "linewrap"
-protected class TestLinewrap_LinewrapKeyword_0 extends KeywordToken  {
-	
-	public TestLinewrap_LinewrapKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+// {TestLinewrap}
+protected class TestLinewrap_TestLinewrapAction_0 extends ActionToken  {
+
+	public TestLinewrap_TestLinewrapAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getTestLinewrapAccess().getLinewrapKeyword_0();
+	public Action getGrammarElement() {
+		return grammarAccess.getTestLinewrapAccess().getTestLinewrapAction_0();
 	}
 
     @Override
@@ -1753,18 +1753,45 @@ protected class TestLinewrap_LinewrapKeyword_0 extends KeywordToken  {
 		}	
 	}
 
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
+	}
+}
+
+// "linewrap"
+protected class TestLinewrap_LinewrapKeyword_1 extends KeywordToken  {
+	
+	public TestLinewrap_LinewrapKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getTestLinewrapAccess().getLinewrapKeyword_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new TestLinewrap_TestLinewrapAction_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
 }
 
 // items+=Line*
-protected class TestLinewrap_ItemsAssignment_1 extends AssignmentToken  {
+protected class TestLinewrap_ItemsAssignment_2 extends AssignmentToken  {
 	
-	public TestLinewrap_ItemsAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public TestLinewrap_ItemsAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getTestLinewrapAccess().getItemsAssignment_1();
+		return grammarAccess.getTestLinewrapAccess().getItemsAssignment_2();
 	}
 
     @Override
@@ -1783,7 +1810,7 @@ protected class TestLinewrap_ItemsAssignment_1 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getLineRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getTestLinewrapAccess().getItemsLineParserRuleCall_1_0(); 
+				element = grammarAccess.getTestLinewrapAccess().getItemsLineParserRuleCall_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -1795,8 +1822,8 @@ protected class TestLinewrap_ItemsAssignment_1 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new TestLinewrap_ItemsAssignment_1(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new TestLinewrap_LinewrapKeyword_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new TestLinewrap_ItemsAssignment_2(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new TestLinewrap_LinewrapKeyword_1(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -1809,11 +1836,11 @@ protected class TestLinewrap_ItemsAssignment_1 extends AssignmentToken  {
 /************ begin Rule TestLinewrapMinMax ****************
  *
  * TestLinewrapMinMax:
- * 	"wrapminmax" items+=Line*;
+ * 	{TestLinewrapMinMax} "wrapminmax" items+=Line*;
  *
  **/
 
-// "wrapminmax" items+=Line*
+// {TestLinewrapMinMax} "wrapminmax" items+=Line*
 protected class TestLinewrapMinMax_Group extends GroupToken {
 	
 	public TestLinewrapMinMax_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1828,31 +1855,31 @@ protected class TestLinewrapMinMax_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TestLinewrapMinMax_ItemsAssignment_1(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new TestLinewrapMinMax_WrapminmaxKeyword_0(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new TestLinewrapMinMax_ItemsAssignment_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new TestLinewrapMinMax_WrapminmaxKeyword_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getTestLinewrapMinMaxRule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getTestLinewrapMinMaxAccess().getTestLinewrapMinMaxAction_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
 
 }
 
-// "wrapminmax"
-protected class TestLinewrapMinMax_WrapminmaxKeyword_0 extends KeywordToken  {
-	
-	public TestLinewrapMinMax_WrapminmaxKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+// {TestLinewrapMinMax}
+protected class TestLinewrapMinMax_TestLinewrapMinMaxAction_0 extends ActionToken  {
+
+	public TestLinewrapMinMax_TestLinewrapMinMaxAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getTestLinewrapMinMaxAccess().getWrapminmaxKeyword_0();
+	public Action getGrammarElement() {
+		return grammarAccess.getTestLinewrapMinMaxAccess().getTestLinewrapMinMaxAction_0();
 	}
 
     @Override
@@ -1862,18 +1889,45 @@ protected class TestLinewrapMinMax_WrapminmaxKeyword_0 extends KeywordToken  {
 		}	
 	}
 
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
+	}
+}
+
+// "wrapminmax"
+protected class TestLinewrapMinMax_WrapminmaxKeyword_1 extends KeywordToken  {
+	
+	public TestLinewrapMinMax_WrapminmaxKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getTestLinewrapMinMaxAccess().getWrapminmaxKeyword_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new TestLinewrapMinMax_TestLinewrapMinMaxAction_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
 }
 
 // items+=Line*
-protected class TestLinewrapMinMax_ItemsAssignment_1 extends AssignmentToken  {
+protected class TestLinewrapMinMax_ItemsAssignment_2 extends AssignmentToken  {
 	
-	public TestLinewrapMinMax_ItemsAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public TestLinewrapMinMax_ItemsAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getTestLinewrapMinMaxAccess().getItemsAssignment_1();
+		return grammarAccess.getTestLinewrapMinMaxAccess().getItemsAssignment_2();
 	}
 
     @Override
@@ -1892,7 +1946,7 @@ protected class TestLinewrapMinMax_ItemsAssignment_1 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getLineRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getTestLinewrapMinMaxAccess().getItemsLineParserRuleCall_1_0(); 
+				element = grammarAccess.getTestLinewrapMinMaxAccess().getItemsLineParserRuleCall_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -1904,8 +1958,8 @@ protected class TestLinewrapMinMax_ItemsAssignment_1 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new TestLinewrapMinMax_ItemsAssignment_1(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new TestLinewrapMinMax_WrapminmaxKeyword_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new TestLinewrapMinMax_ItemsAssignment_2(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new TestLinewrapMinMax_WrapminmaxKeyword_1(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -1918,11 +1972,11 @@ protected class TestLinewrapMinMax_ItemsAssignment_1 extends AssignmentToken  {
 /************ begin Rule TestIndentation ****************
  *
  * TestIndentation:
- * 	"indentation" "{" (sub+=TestIndentation | items+=Line)* "}" semi?=";"?;
+ * 	{TestIndentation} "indentation" "{" items+=(Line | TestIndentation)* "}" semi?=";"?;
  *
  **/
 
-// "indentation" "{" (sub+=TestIndentation | items+=Line)* "}" semi?=";"?
+// {TestIndentation} "indentation" "{" items+=(Line | TestIndentation)* "}" semi?=";"?
 protected class TestIndentation_Group extends GroupToken {
 	
 	public TestIndentation_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1937,31 +1991,31 @@ protected class TestIndentation_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TestIndentation_SemiAssignment_4(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new TestIndentation_RightCurlyBracketKeyword_3(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new TestIndentation_SemiAssignment_5(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new TestIndentation_RightCurlyBracketKeyword_4(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getTestIndentationRule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getTestIndentationAccess().getTestIndentationAction_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
 
 }
 
-// "indentation"
-protected class TestIndentation_IndentationKeyword_0 extends KeywordToken  {
-	
-	public TestIndentation_IndentationKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+// {TestIndentation}
+protected class TestIndentation_TestIndentationAction_0 extends ActionToken  {
+
+	public TestIndentation_TestIndentationAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getTestIndentationAccess().getIndentationKeyword_0();
+	public Action getGrammarElement() {
+		return grammarAccess.getTestIndentationAccess().getTestIndentationAction_0();
 	}
 
     @Override
@@ -1971,129 +2025,96 @@ protected class TestIndentation_IndentationKeyword_0 extends KeywordToken  {
 		}	
 	}
 
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
+	}
 }
 
-// "{"
-protected class TestIndentation_LeftCurlyBracketKeyword_1 extends KeywordToken  {
+// "indentation"
+protected class TestIndentation_IndentationKeyword_1 extends KeywordToken  {
 	
-	public TestIndentation_LeftCurlyBracketKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public TestIndentation_IndentationKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getTestIndentationAccess().getLeftCurlyBracketKeyword_1();
+		return grammarAccess.getTestIndentationAccess().getIndentationKeyword_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TestIndentation_IndentationKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new TestIndentation_TestIndentationAction_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
 }
 
-// (sub+=TestIndentation | items+=Line)*
-protected class TestIndentation_Alternatives_2 extends AlternativesToken {
-
-	public TestIndentation_Alternatives_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+// "{"
+protected class TestIndentation_LeftCurlyBracketKeyword_2 extends KeywordToken  {
+	
+	public TestIndentation_LeftCurlyBracketKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Alternatives getGrammarElement() {
-		return grammarAccess.getTestIndentationAccess().getAlternatives_2();
+	public Keyword getGrammarElement() {
+		return grammarAccess.getTestIndentationAccess().getLeftCurlyBracketKeyword_2();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TestIndentation_SubAssignment_2_0(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new TestIndentation_ItemsAssignment_2_1(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new TestIndentation_IndentationKeyword_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
 }
 
-// sub+=TestIndentation
-protected class TestIndentation_SubAssignment_2_0 extends AssignmentToken  {
+// items+=(Line | TestIndentation)*
+protected class TestIndentation_ItemsAssignment_3 extends AssignmentToken  {
 	
-	public TestIndentation_SubAssignment_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.getTestIndentationAccess().getSubAssignment_2_0();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new TestIndentation_Group(this, this, 0, inst);
-			default: return null;
-		}	
-	}
-
-    @Override	
-	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("sub",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("sub");
-		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getTestIndentationRule().getType().getClassifier())) {
-				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getTestIndentationAccess().getSubTestIndentationParserRuleCall_2_0_0(); 
-				consumed = obj;
-				return param;
-			}
-		}
-		return null;
-	}
-
-    @Override
-	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
-		if(value == inst.getEObject() && !inst.isConsumed()) return null;
-		switch(index) {
-			case 0: return new TestIndentation_Alternatives_2(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new TestIndentation_LeftCurlyBracketKeyword_1(lastRuleCallOrigin, next, actIndex, consumed);
-			default: return null;
-		}	
-	}	
-}
-
-// items+=Line
-protected class TestIndentation_ItemsAssignment_2_1 extends AssignmentToken  {
-	
-	public TestIndentation_ItemsAssignment_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public TestIndentation_ItemsAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getTestIndentationAccess().getItemsAssignment_2_1();
+		return grammarAccess.getTestIndentationAccess().getItemsAssignment_3();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Line_Group(this, this, 0, inst);
+			case 1: return new TestIndentation_Group(this, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("items",true)) == null) return null;
+		if((value = eObjectConsumer.getConsumable("items",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("items");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getLineRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getTestIndentationAccess().getItemsLineParserRuleCall_2_1_0(); 
+				element = grammarAccess.getTestIndentationAccess().getItemsLineParserRuleCall_3_0_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getTestIndentationRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getTestIndentationAccess().getItemsTestIndentationParserRuleCall_3_0_1(); 
 				consumed = obj;
 				return param;
 			}
@@ -2105,31 +2126,30 @@ protected class TestIndentation_ItemsAssignment_2_1 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new TestIndentation_Alternatives_2(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new TestIndentation_LeftCurlyBracketKeyword_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new TestIndentation_ItemsAssignment_3(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new TestIndentation_LeftCurlyBracketKeyword_2(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
-
 // "}"
-protected class TestIndentation_RightCurlyBracketKeyword_3 extends KeywordToken  {
+protected class TestIndentation_RightCurlyBracketKeyword_4 extends KeywordToken  {
 	
-	public TestIndentation_RightCurlyBracketKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public TestIndentation_RightCurlyBracketKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getTestIndentationAccess().getRightCurlyBracketKeyword_3();
+		return grammarAccess.getTestIndentationAccess().getRightCurlyBracketKeyword_4();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TestIndentation_Alternatives_2(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new TestIndentation_LeftCurlyBracketKeyword_1(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new TestIndentation_ItemsAssignment_3(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new TestIndentation_LeftCurlyBracketKeyword_2(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -2137,21 +2157,21 @@ protected class TestIndentation_RightCurlyBracketKeyword_3 extends KeywordToken 
 }
 
 // semi?=";"?
-protected class TestIndentation_SemiAssignment_4 extends AssignmentToken  {
+protected class TestIndentation_SemiAssignment_5 extends AssignmentToken  {
 	
-	public TestIndentation_SemiAssignment_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public TestIndentation_SemiAssignment_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getTestIndentationAccess().getSemiAssignment_4();
+		return grammarAccess.getTestIndentationAccess().getSemiAssignment_5();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TestIndentation_RightCurlyBracketKeyword_3(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new TestIndentation_RightCurlyBracketKeyword_4(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2162,7 +2182,7 @@ protected class TestIndentation_SemiAssignment_4 extends AssignmentToken  {
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("semi");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KEYWORD;
-			element = grammarAccess.getTestIndentationAccess().getSemiSemicolonKeyword_4_0();
+			element = grammarAccess.getTestIndentationAccess().getSemiSemicolonKeyword_5_0();
 			return obj;
 		}
 		return null;

@@ -84,4 +84,19 @@ public abstract class AbstractSimpleBacktrackingBug325745TestLanguageRuntimeModu
 		return org.eclipse.xtext.parser.unorderedGroups.parseTreeConstruction.SimpleBacktrackingBug325745TestLanguageParsetreeConstructor.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
+	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
+		return org.eclipse.xtext.parser.unorderedGroups.serializer.AbstractSimpleBacktrackingBug325745TestLanguageSemanticSequencer.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
+	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
+		return org.eclipse.xtext.parser.unorderedGroups.serializer.AbstractSimpleBacktrackingBug325745TestLanguageSyntacticSequencer.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
+	public Class<? extends org.eclipse.xtext.serializer.ISerializer> bindISerializer() {
+		return org.eclipse.xtext.serializer.impl.Serializer.class;
+	}
+
 }

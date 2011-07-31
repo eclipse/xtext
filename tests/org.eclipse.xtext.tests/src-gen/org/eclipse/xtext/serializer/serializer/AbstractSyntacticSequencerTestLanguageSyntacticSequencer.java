@@ -34,13 +34,13 @@ public class AbstractSyntacticSequencerTestLanguageSyntacticSequencer extends Ab
 	}
 	
 	@Override
-	protected String getUnassignedRuleCallToken(RuleCall ruleCall, INode node) {
+	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if(ruleCall.getRule() == grammarAccess.getUnassignedDatatypeRuleRule())
-			return getUnassignedDatatypeRuleToken(ruleCall, node);
+			return getUnassignedDatatypeRuleToken(semanticObject, ruleCall, node);
 		return "";
 	}
 	
-	protected String getUnassignedDatatypeRuleToken(RuleCall ruleCall, INode node) {
+	protected String getUnassignedDatatypeRuleToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
 		return "kw1";

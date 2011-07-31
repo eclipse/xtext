@@ -22,6 +22,11 @@
         <classifier xsi:type="ecore:EClass" href="http://simple/transientvaluestest#//TestRequired"/>
       </type>
       <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://simple/transientvaluestest#//TestRequired"/>
+          </type>
+        </elements>
         <elements xsi:type="xtext:Keyword" value="required"/>
         <elements xsi:type="xtext:Assignment" feature="required1" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
@@ -36,6 +41,11 @@
         <classifier xsi:type="ecore:EClass" href="http://simple/transientvaluestest#//TestOptional"/>
       </type>
       <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://simple/transientvaluestest#//TestOptional"/>
+          </type>
+        </elements>
         <elements xsi:type="xtext:Keyword" value="optional"/>
         <elements xsi:type="xtext:Assignment" cardinality="?" feature="opt1" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
@@ -53,6 +63,11 @@
         <classifier xsi:type="ecore:EClass" href="http://simple/transientvaluestest#//TestList"/>
       </type>
       <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://simple/transientvaluestest#//TestList"/>
+          </type>
+        </elements>
         <elements xsi:type="xtext:Keyword" value="list"/>
         <elements xsi:type="xtext:Assignment" cardinality="*" feature="item" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>

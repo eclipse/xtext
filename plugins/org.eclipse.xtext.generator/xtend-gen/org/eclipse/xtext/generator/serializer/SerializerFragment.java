@@ -19,6 +19,7 @@ import org.eclipse.xtext.generator.serializer.SemanticSequencer;
 import org.eclipse.xtext.generator.serializer.SerializerFragmentState;
 import org.eclipse.xtext.generator.serializer.SyntacticSequencer;
 import org.eclipse.xtext.generator.serializer.SyntacticSequencerPDA2ExtendedDot;
+import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Pair;
 
@@ -65,19 +66,39 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
     return _generateDebugData;
   }
   
+  public boolean setSrcGenOnly(final boolean srcGen) {
+    SerializerFragmentState _state = this.state();
+    boolean _srcGenOnly = _state.srcGenOnly = srcGen;
+    return _srcGenOnly;
+  }
+  
   public Set<Binding> getGuiceBindingsRt(final Grammar grammar) {
     {
       BindFactory _bindFactory = new BindFactory();
       final BindFactory bf = _bindFactory;
-      String _name = org.eclipse.xtext.serializer.sequencer.ISemanticSequencer.class.getName();
-      String _qualifiedName = this.semanticSequencer.getQualifiedName();
-      bf.addTypeToType(_name, _qualifiedName);
-      String _name_1 = org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer.class.getName();
-      String _qualifiedName_1 = this.syntacticSequencer.getQualifiedName();
-      bf.addTypeToType(_name_1, _qualifiedName_1);
-      String _name_2 = org.eclipse.xtext.serializer.ISerializer.class.getName();
-      String _name_3 = org.eclipse.xtext.serializer.impl.Serializer.class.getName();
-      bf.addTypeToType(_name_2, _name_3);
+      SerializerFragmentState _state = this.state();
+      if (_state.srcGenOnly) {
+        {
+          String _name = org.eclipse.xtext.serializer.sequencer.ISemanticSequencer.class.getName();
+          String _qualifiedName = this.abstractSemanticSequencer.getQualifiedName();
+          bf.addTypeToType(_name, _qualifiedName);
+          String _name_1 = org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer.class.getName();
+          String _qualifiedName_1 = this.abstractSyntacticSequencer.getQualifiedName();
+          bf.addTypeToType(_name_1, _qualifiedName_1);
+        }
+      } else {
+        {
+          String _name_2 = org.eclipse.xtext.serializer.sequencer.ISemanticSequencer.class.getName();
+          String _qualifiedName_2 = this.semanticSequencer.getQualifiedName();
+          bf.addTypeToType(_name_2, _qualifiedName_2);
+          String _name_3 = org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer.class.getName();
+          String _qualifiedName_3 = this.syntacticSequencer.getQualifiedName();
+          bf.addTypeToType(_name_3, _qualifiedName_3);
+        }
+      }
+      String _name_4 = org.eclipse.xtext.serializer.ISerializer.class.getName();
+      String _name_5 = org.eclipse.xtext.serializer.impl.Serializer.class.getName();
+      bf.addTypeToType(_name_4, _name_5);
       Set<Binding> _bindings = bf.getBindings();
       return _bindings;
     }
@@ -85,20 +106,26 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
   
   public void generate(final Xtend2ExecutionContext ctx) {
     {
-      String _fileName = this.semanticSequencer.getFileName();
-      CharSequence _fileContents = this.semanticSequencer.getFileContents();
-      ctx.writeFile(Generator.SRC, _fileName, _fileContents);
-      String _fileName_1 = this.abstractSemanticSequencer.getFileName();
-      CharSequence _fileContents_1 = this.abstractSemanticSequencer.getFileContents();
-      ctx.writeFile(Generator.SRC_GEN, _fileName_1, _fileContents_1);
-      String _fileName_2 = this.syntacticSequencer.getFileName();
-      CharSequence _fileContents_2 = this.syntacticSequencer.getFileContents();
-      ctx.writeFile(Generator.SRC, _fileName_2, _fileContents_2);
+      SerializerFragmentState _state = this.state();
+      boolean _operator_not = BooleanExtensions.operator_not(_state.srcGenOnly);
+      if (_operator_not) {
+        {
+          String _fileName = this.semanticSequencer.getFileName();
+          CharSequence _fileContents = this.semanticSequencer.getFileContents();
+          ctx.writeFile(Generator.SRC, _fileName, _fileContents);
+          String _fileName_1 = this.syntacticSequencer.getFileName();
+          CharSequence _fileContents_1 = this.syntacticSequencer.getFileContents();
+          ctx.writeFile(Generator.SRC, _fileName_1, _fileContents_1);
+        }
+      }
+      String _fileName_2 = this.abstractSemanticSequencer.getFileName();
+      CharSequence _fileContents_2 = this.abstractSemanticSequencer.getFileContents();
+      ctx.writeFile(Generator.SRC_GEN, _fileName_2, _fileContents_2);
       String _fileName_3 = this.abstractSyntacticSequencer.getFileName();
       CharSequence _fileContents_3 = this.abstractSyntacticSequencer.getFileContents();
       ctx.writeFile(Generator.SRC_GEN, _fileName_3, _fileContents_3);
-      SerializerFragmentState _state = this.state();
-      if (_state.generateDebugData) {
+      SerializerFragmentState _state_1 = this.state();
+      if (_state_1.generateDebugData) {
         {
           String _fileName_4 = this.grammarConstraints.getFileName();
           CharSequence _fileContents_4 = this.grammarConstraints.getFileContents();

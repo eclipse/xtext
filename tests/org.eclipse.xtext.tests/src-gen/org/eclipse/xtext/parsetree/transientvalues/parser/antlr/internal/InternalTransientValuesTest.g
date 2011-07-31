@@ -131,15 +131,21 @@ ruleTestRequired returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(	otherlv_0='required' 
+((
     {
-    	newLeafNode(otherlv_0, grammarAccess.getTestRequiredAccess().getRequiredKeyword_0());
+        $current = forceCreateModelElement(
+            grammarAccess.getTestRequiredAccess().getTestRequiredAction_0(),
+            $current);
+    }
+)	otherlv_1='required' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getTestRequiredAccess().getRequiredKeyword_1());
     }
 (
 (
-		lv_required1_1_0=RULE_INT
+		lv_required1_2_0=RULE_INT
 		{
-			newLeafNode(lv_required1_1_0, grammarAccess.getTestRequiredAccess().getRequired1INTTerminalRuleCall_1_0()); 
+			newLeafNode(lv_required1_2_0, grammarAccess.getTestRequiredAccess().getRequired1INTTerminalRuleCall_2_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -148,16 +154,16 @@ ruleTestRequired returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"required1",
-        		lv_required1_1_0, 
+        		lv_required1_2_0, 
         		"INT");
 	    }
 
 )
 )(
 (
-		lv_required2_2_0=RULE_INT
+		lv_required2_3_0=RULE_INT
 		{
-			newLeafNode(lv_required2_2_0, grammarAccess.getTestRequiredAccess().getRequired2INTTerminalRuleCall_2_0()); 
+			newLeafNode(lv_required2_3_0, grammarAccess.getTestRequiredAccess().getRequired2INTTerminalRuleCall_3_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -166,7 +172,7 @@ ruleTestRequired returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"required2",
-        		lv_required2_2_0, 
+        		lv_required2_3_0, 
         		"INT");
 	    }
 
@@ -192,15 +198,21 @@ ruleTestOptional returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(	otherlv_0='optional' 
+((
     {
-    	newLeafNode(otherlv_0, grammarAccess.getTestOptionalAccess().getOptionalKeyword_0());
+        $current = forceCreateModelElement(
+            grammarAccess.getTestOptionalAccess().getTestOptionalAction_0(),
+            $current);
+    }
+)	otherlv_1='optional' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getTestOptionalAccess().getOptionalKeyword_1());
     }
 (
 (
-		lv_opt1_1_0=RULE_INT
+		lv_opt1_2_0=RULE_INT
 		{
-			newLeafNode(lv_opt1_1_0, grammarAccess.getTestOptionalAccess().getOpt1INTTerminalRuleCall_1_0()); 
+			newLeafNode(lv_opt1_2_0, grammarAccess.getTestOptionalAccess().getOpt1INTTerminalRuleCall_2_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -209,20 +221,20 @@ ruleTestOptional returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"opt1",
-        		lv_opt1_1_0, 
+        		lv_opt1_2_0, 
         		"INT");
 	    }
 
 )
-)?(	otherlv_2=':' 
+)?(	otherlv_3=':' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getTestOptionalAccess().getColonKeyword_2_0());
+    	newLeafNode(otherlv_3, grammarAccess.getTestOptionalAccess().getColonKeyword_3_0());
     }
 (
 (
-		lv_opt2_3_0=RULE_INT
+		lv_opt2_4_0=RULE_INT
 		{
-			newLeafNode(lv_opt2_3_0, grammarAccess.getTestOptionalAccess().getOpt2INTTerminalRuleCall_2_1_0()); 
+			newLeafNode(lv_opt2_4_0, grammarAccess.getTestOptionalAccess().getOpt2INTTerminalRuleCall_3_1_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -231,7 +243,7 @@ ruleTestOptional returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"opt2",
-        		lv_opt2_3_0, 
+        		lv_opt2_4_0, 
         		"INT");
 	    }
 
@@ -257,15 +269,21 @@ ruleTestList returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(	otherlv_0='list' 
+((
     {
-    	newLeafNode(otherlv_0, grammarAccess.getTestListAccess().getListKeyword_0());
+        $current = forceCreateModelElement(
+            grammarAccess.getTestListAccess().getTestListAction_0(),
+            $current);
+    }
+)	otherlv_1='list' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getTestListAccess().getListKeyword_1());
     }
 (
 (
-		lv_item_1_0=RULE_INT
+		lv_item_2_0=RULE_INT
 		{
-			newLeafNode(lv_item_1_0, grammarAccess.getTestListAccess().getItemINTTerminalRuleCall_1_0()); 
+			newLeafNode(lv_item_2_0, grammarAccess.getTestListAccess().getItemINTTerminalRuleCall_2_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -274,7 +292,7 @@ ruleTestList returns [EObject current=null]
        		addWithLastConsumed(
        			$current, 
        			"item",
-        		lv_item_1_0, 
+        		lv_item_2_0, 
         		"INT");
 	    }
 

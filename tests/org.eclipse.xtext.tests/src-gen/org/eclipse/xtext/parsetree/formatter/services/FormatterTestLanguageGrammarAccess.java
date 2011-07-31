@@ -336,101 +336,109 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public class TestLinewrapElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TestLinewrap");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cLinewrapKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cItemsAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cItemsLineParserRuleCall_1_0 = (RuleCall)cItemsAssignment_1.eContents().get(0);
+		private final Action cTestLinewrapAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cLinewrapKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cItemsAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cItemsLineParserRuleCall_2_0 = (RuleCall)cItemsAssignment_2.eContents().get(0);
 		
 		//TestLinewrap:
-		//	"linewrap" items+=Line*;
+		//	{TestLinewrap} "linewrap" items+=Line*;
 		public ParserRule getRule() { return rule; }
 
-		//"linewrap" items+=Line*
+		//{TestLinewrap} "linewrap" items+=Line*
 		public Group getGroup() { return cGroup; }
 
+		//{TestLinewrap}
+		public Action getTestLinewrapAction_0() { return cTestLinewrapAction_0; }
+
 		//"linewrap"
-		public Keyword getLinewrapKeyword_0() { return cLinewrapKeyword_0; }
+		public Keyword getLinewrapKeyword_1() { return cLinewrapKeyword_1; }
 
 		//items+=Line*
-		public Assignment getItemsAssignment_1() { return cItemsAssignment_1; }
+		public Assignment getItemsAssignment_2() { return cItemsAssignment_2; }
 
 		//Line
-		public RuleCall getItemsLineParserRuleCall_1_0() { return cItemsLineParserRuleCall_1_0; }
+		public RuleCall getItemsLineParserRuleCall_2_0() { return cItemsLineParserRuleCall_2_0; }
 	}
 
 	public class TestLinewrapMinMaxElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TestLinewrapMinMax");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cWrapminmaxKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cItemsAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cItemsLineParserRuleCall_1_0 = (RuleCall)cItemsAssignment_1.eContents().get(0);
+		private final Action cTestLinewrapMinMaxAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cWrapminmaxKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cItemsAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cItemsLineParserRuleCall_2_0 = (RuleCall)cItemsAssignment_2.eContents().get(0);
 		
 		//TestLinewrapMinMax:
-		//	"wrapminmax" items+=Line*;
+		//	{TestLinewrapMinMax} "wrapminmax" items+=Line*;
 		public ParserRule getRule() { return rule; }
 
-		//"wrapminmax" items+=Line*
+		//{TestLinewrapMinMax} "wrapminmax" items+=Line*
 		public Group getGroup() { return cGroup; }
 
+		//{TestLinewrapMinMax}
+		public Action getTestLinewrapMinMaxAction_0() { return cTestLinewrapMinMaxAction_0; }
+
 		//"wrapminmax"
-		public Keyword getWrapminmaxKeyword_0() { return cWrapminmaxKeyword_0; }
+		public Keyword getWrapminmaxKeyword_1() { return cWrapminmaxKeyword_1; }
 
 		//items+=Line*
-		public Assignment getItemsAssignment_1() { return cItemsAssignment_1; }
+		public Assignment getItemsAssignment_2() { return cItemsAssignment_2; }
 
 		//Line
-		public RuleCall getItemsLineParserRuleCall_1_0() { return cItemsLineParserRuleCall_1_0; }
+		public RuleCall getItemsLineParserRuleCall_2_0() { return cItemsLineParserRuleCall_2_0; }
 	}
 
 	public class TestIndentationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TestIndentation");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cIndentationKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
-		private final Assignment cSubAssignment_2_0 = (Assignment)cAlternatives_2.eContents().get(0);
-		private final RuleCall cSubTestIndentationParserRuleCall_2_0_0 = (RuleCall)cSubAssignment_2_0.eContents().get(0);
-		private final Assignment cItemsAssignment_2_1 = (Assignment)cAlternatives_2.eContents().get(1);
-		private final RuleCall cItemsLineParserRuleCall_2_1_0 = (RuleCall)cItemsAssignment_2_1.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Assignment cSemiAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final Keyword cSemiSemicolonKeyword_4_0 = (Keyword)cSemiAssignment_4.eContents().get(0);
+		private final Action cTestIndentationAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cIndentationKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cItemsAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final Alternatives cItemsAlternatives_3_0 = (Alternatives)cItemsAssignment_3.eContents().get(0);
+		private final RuleCall cItemsLineParserRuleCall_3_0_0 = (RuleCall)cItemsAlternatives_3_0.eContents().get(0);
+		private final RuleCall cItemsTestIndentationParserRuleCall_3_0_1 = (RuleCall)cItemsAlternatives_3_0.eContents().get(1);
+		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cSemiAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final Keyword cSemiSemicolonKeyword_5_0 = (Keyword)cSemiAssignment_5.eContents().get(0);
 		
 		//TestIndentation:
-		//	"indentation" "{" (sub+=TestIndentation | items+=Line)* "}" semi?=";"?;
+		//	{TestIndentation} "indentation" "{" items+=(Line | TestIndentation)* "}" semi?=";"?;
 		public ParserRule getRule() { return rule; }
 
-		//"indentation" "{" (sub+=TestIndentation | items+=Line)* "}" semi?=";"?
+		//{TestIndentation} "indentation" "{" items+=(Line | TestIndentation)* "}" semi?=";"?
 		public Group getGroup() { return cGroup; }
 
+		//{TestIndentation}
+		public Action getTestIndentationAction_0() { return cTestIndentationAction_0; }
+
 		//"indentation"
-		public Keyword getIndentationKeyword_0() { return cIndentationKeyword_0; }
+		public Keyword getIndentationKeyword_1() { return cIndentationKeyword_1; }
 
 		//"{"
-		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 
-		//(sub+=TestIndentation | items+=Line)*
-		public Alternatives getAlternatives_2() { return cAlternatives_2; }
+		//items+=(Line | TestIndentation)*
+		public Assignment getItemsAssignment_3() { return cItemsAssignment_3; }
 
-		//sub+=TestIndentation
-		public Assignment getSubAssignment_2_0() { return cSubAssignment_2_0; }
-
-		//TestIndentation
-		public RuleCall getSubTestIndentationParserRuleCall_2_0_0() { return cSubTestIndentationParserRuleCall_2_0_0; }
-
-		//items+=Line
-		public Assignment getItemsAssignment_2_1() { return cItemsAssignment_2_1; }
+		//Line | TestIndentation
+		public Alternatives getItemsAlternatives_3_0() { return cItemsAlternatives_3_0; }
 
 		//Line
-		public RuleCall getItemsLineParserRuleCall_2_1_0() { return cItemsLineParserRuleCall_2_1_0; }
+		public RuleCall getItemsLineParserRuleCall_3_0_0() { return cItemsLineParserRuleCall_3_0_0; }
+
+		//TestIndentation
+		public RuleCall getItemsTestIndentationParserRuleCall_3_0_1() { return cItemsTestIndentationParserRuleCall_3_0_1; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
+		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 
 		//semi?=";"?
-		public Assignment getSemiAssignment_4() { return cSemiAssignment_4; }
+		public Assignment getSemiAssignment_5() { return cSemiAssignment_5; }
 
 		//";"
-		public Keyword getSemiSemicolonKeyword_4_0() { return cSemiSemicolonKeyword_4_0; }
+		public Keyword getSemiSemicolonKeyword_5_0() { return cSemiSemicolonKeyword_5_0; }
 	}
 
 	public class FqnObjElements extends AbstractParserRuleElementFinder {
@@ -948,7 +956,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//TestLinewrap:
-	//	"linewrap" items+=Line*;
+	//	{TestLinewrap} "linewrap" items+=Line*;
 	public TestLinewrapElements getTestLinewrapAccess() {
 		return (pTestLinewrap != null) ? pTestLinewrap : (pTestLinewrap = new TestLinewrapElements());
 	}
@@ -958,7 +966,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//TestLinewrapMinMax:
-	//	"wrapminmax" items+=Line*;
+	//	{TestLinewrapMinMax} "wrapminmax" items+=Line*;
 	public TestLinewrapMinMaxElements getTestLinewrapMinMaxAccess() {
 		return (pTestLinewrapMinMax != null) ? pTestLinewrapMinMax : (pTestLinewrapMinMax = new TestLinewrapMinMaxElements());
 	}
@@ -968,7 +976,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//TestIndentation:
-	//	"indentation" "{" (sub+=TestIndentation | items+=Line)* "}" semi?=";"?;
+	//	{TestIndentation} "indentation" "{" items+=(Line | TestIndentation)* "}" semi?=";"?;
 	public TestIndentationElements getTestIndentationAccess() {
 		return (pTestIndentation != null) ? pTestIndentation : (pTestIndentation = new TestIndentationElements());
 	}

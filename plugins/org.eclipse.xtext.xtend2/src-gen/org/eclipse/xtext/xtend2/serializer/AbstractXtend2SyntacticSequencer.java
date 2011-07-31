@@ -37,13 +37,13 @@ public class AbstractXtend2SyntacticSequencer extends AbstractSyntacticSequencer
 	}
 	
 	@Override
-	protected String getUnassignedRuleCallToken(RuleCall ruleCall, INode node) {
+	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if(ruleCall.getRule() == grammarAccess.getOpSingleAssignRule())
-			return getOpSingleAssignToken(ruleCall, node);
+			return getOpSingleAssignToken(semanticObject, ruleCall, node);
 		return "";
 	}
 	
-	protected String getOpSingleAssignToken(RuleCall ruleCall, INode node) {
+	protected String getOpSingleAssignToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
 		return "=";

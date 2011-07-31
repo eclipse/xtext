@@ -136,6 +136,11 @@
         <classifier xsi:type="ecore:EClass" href="http://simple/formattertestlanguage#//TestLinewrap"/>
       </type>
       <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://simple/formattertestlanguage#//TestLinewrap"/>
+          </type>
+        </elements>
         <elements xsi:type="xtext:Keyword" value="linewrap"/>
         <elements xsi:type="xtext:Assignment" cardinality="*" feature="items" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
@@ -147,6 +152,11 @@
         <classifier xsi:type="ecore:EClass" href="http://simple/formattertestlanguage#//TestLinewrapMinMax"/>
       </type>
       <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://simple/formattertestlanguage#//TestLinewrapMinMax"/>
+          </type>
+        </elements>
         <elements xsi:type="xtext:Keyword" value="wrapminmax"/>
         <elements xsi:type="xtext:Assignment" cardinality="*" feature="items" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
@@ -158,15 +168,18 @@
         <classifier xsi:type="ecore:EClass" href="http://simple/formattertestlanguage#//TestIndentation"/>
       </type>
       <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://simple/formattertestlanguage#//TestIndentation"/>
+          </type>
+        </elements>
         <elements xsi:type="xtext:Keyword" value="indentation"/>
         <elements xsi:type="xtext:Keyword" value="{"/>
-        <elements xsi:type="xtext:Alternatives" cardinality="*">
-          <elements xsi:type="xtext:Assignment" feature="sub" operator="+=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
-          </elements>
-          <elements xsi:type="xtext:Assignment" feature="items" operator="+=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
-          </elements>
+        <elements xsi:type="xtext:Assignment" cardinality="*" feature="items" operator="+=">
+          <terminal xsi:type="xtext:Alternatives">
+            <elements xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+            <elements xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
+          </terminal>
         </elements>
         <elements xsi:type="xtext:Keyword" value="}"/>
         <elements xsi:type="xtext:Assignment" cardinality="?" feature="semi" operator="?=">

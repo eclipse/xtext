@@ -629,23 +629,29 @@ ruleTestLinewrap returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(	otherlv_0='linewrap' 
+((
     {
-    	newLeafNode(otherlv_0, grammarAccess.getTestLinewrapAccess().getLinewrapKeyword_0());
+        $current = forceCreateModelElement(
+            grammarAccess.getTestLinewrapAccess().getTestLinewrapAction_0(),
+            $current);
+    }
+)	otherlv_1='linewrap' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getTestLinewrapAccess().getLinewrapKeyword_1());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getTestLinewrapAccess().getItemsLineParserRuleCall_1_0()); 
+	        newCompositeNode(grammarAccess.getTestLinewrapAccess().getItemsLineParserRuleCall_2_0()); 
 	    }
-		lv_items_1_0=ruleLine		{
+		lv_items_2_0=ruleLine		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getTestLinewrapRule());
 	        }
        		add(
        			$current, 
        			"items",
-        		lv_items_1_0, 
+        		lv_items_2_0, 
         		"Line");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -672,23 +678,29 @@ ruleTestLinewrapMinMax returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(	otherlv_0='wrapminmax' 
+((
     {
-    	newLeafNode(otherlv_0, grammarAccess.getTestLinewrapMinMaxAccess().getWrapminmaxKeyword_0());
+        $current = forceCreateModelElement(
+            grammarAccess.getTestLinewrapMinMaxAccess().getTestLinewrapMinMaxAction_0(),
+            $current);
+    }
+)	otherlv_1='wrapminmax' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getTestLinewrapMinMaxAccess().getWrapminmaxKeyword_1());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getTestLinewrapMinMaxAccess().getItemsLineParserRuleCall_1_0()); 
+	        newCompositeNode(grammarAccess.getTestLinewrapMinMaxAccess().getItemsLineParserRuleCall_2_0()); 
 	    }
-		lv_items_1_0=ruleLine		{
+		lv_items_2_0=ruleLine		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getTestLinewrapMinMaxRule());
 	        }
        		add(
        			$current, 
        			"items",
-        		lv_items_1_0, 
+        		lv_items_2_0, 
         		"Line");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -715,60 +727,65 @@ ruleTestIndentation returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(	otherlv_0='indentation' 
-    {
-    	newLeafNode(otherlv_0, grammarAccess.getTestIndentationAccess().getIndentationKeyword_0());
-    }
-	otherlv_1='{' 
-    {
-    	newLeafNode(otherlv_1, grammarAccess.getTestIndentationAccess().getLeftCurlyBracketKeyword_1());
-    }
 ((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getTestIndentationAccess().getTestIndentationAction_0(),
+            $current);
+    }
+)	otherlv_1='indentation' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getTestIndentationAccess().getIndentationKeyword_1());
+    }
+	otherlv_2='{' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getTestIndentationAccess().getLeftCurlyBracketKeyword_2());
+    }
+(
+(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getTestIndentationAccess().getSubTestIndentationParserRuleCall_2_0_0()); 
+	        newCompositeNode(grammarAccess.getTestIndentationAccess().getItemsLineParserRuleCall_3_0_0()); 
 	    }
-		lv_sub_2_0=ruleTestIndentation		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getTestIndentationRule());
-	        }
-       		add(
-       			$current, 
-       			"sub",
-        		lv_sub_2_0, 
-        		"TestIndentation");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)
-    |(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getTestIndentationAccess().getItemsLineParserRuleCall_2_1_0()); 
-	    }
-		lv_items_3_0=ruleLine		{
+		lv_items_3_1=ruleLine		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getTestIndentationRule());
 	        }
        		add(
        			$current, 
        			"items",
-        		lv_items_3_0, 
+        		lv_items_3_1, 
         		"Line");
 	        afterParserOrEnumRuleCall();
 	    }
 
+    |		{ 
+	        newCompositeNode(grammarAccess.getTestIndentationAccess().getItemsTestIndentationParserRuleCall_3_0_1()); 
+	    }
+		lv_items_3_2=ruleTestIndentation		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getTestIndentationRule());
+	        }
+       		add(
+       			$current, 
+       			"items",
+        		lv_items_3_2, 
+        		"TestIndentation");
+	        afterParserOrEnumRuleCall();
+	    }
+
 )
-))*	otherlv_4='}' 
+
+)
+)*	otherlv_4='}' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getTestIndentationAccess().getRightCurlyBracketKeyword_3());
+    	newLeafNode(otherlv_4, grammarAccess.getTestIndentationAccess().getRightCurlyBracketKeyword_4());
     }
 (
 (
 		lv_semi_5_0=	';' 
     {
-        newLeafNode(lv_semi_5_0, grammarAccess.getTestIndentationAccess().getSemiSemicolonKeyword_4_0());
+        newLeafNode(lv_semi_5_0, grammarAccess.getTestIndentationAccess().getSemiSemicolonKeyword_5_0());
     }
  
 	    {
