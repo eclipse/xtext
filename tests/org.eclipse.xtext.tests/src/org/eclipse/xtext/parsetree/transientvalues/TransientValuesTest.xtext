@@ -14,10 +14,10 @@ Root:
 	"test" (TestRequired | TestOptional | TestList);
 	
 TestRequired: 
-	"required" required1=INT required2=INT;
+	{TestRequired} "required" required1=INT required2=INT;
 	
 TestOptional:
-	"optional" opt1=INT? (":" opt2=INT)?;
+	{TestOptional} "optional" opt1=INT? (":" opt2=INT)?;
 	
 TestList:
-	"list" item+=INT*;
+	{TestList} "list" item+=INT*;
