@@ -256,7 +256,7 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 
 	}
 
-	protected class Quantity {
+	protected static class Quantity {
 
 		protected IConstraintElement constraintElement;
 

@@ -159,7 +159,7 @@ public class NfaUtil {
 		boolean isSolution(RESULT result);
 	}
 
-	protected class BacktrackingItem<RESULT, S> {
+	protected static class BacktrackingItem<RESULT, S> {
 		protected Iterator<S> followers;
 
 		protected RESULT result;
