@@ -326,55 +326,51 @@ Workflow {
 		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/PartialSerializationTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {}
+			fragment = @TestLanguagesFragmentsParseTreeConstructor {}
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/Bug299395TestLanguage.xtext"
-			fragment = @TestLanguagesFragments {}
+			fragment = @TestLanguagesFragmentsParseTreeConstructor {}
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {}
+			fragment = @TestLanguagesFragmentsParseTreeConstructor {}
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {}
+			fragment = @TestLanguagesFragmentsParseTreeConstructor {}
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/SerializationBug269362TestLanguage.xtext"
-			fragment = @TestLanguagesFragments {}
+			fragment = @TestLanguagesFragmentsParseTreeConstructor {}
 		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/SerializationErrorTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {}
+			fragment = @TestLanguagesFragmentsParseTreeConstructor {}
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {}
+			fragment = @TestLanguagesFragmentsParseTreeConstructor {}
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/Bug302128TestLanguage.xtext"
-			fragment = @TestLanguagesFragments {}
+			fragment = @TestLanguagesFragmentsParseTreeConstructor {}
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/serializer/SequencerTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
-			fragment = serializer.SerializerFragment {}
 		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.xtext"
 			fragment = @TestLanguagesFragments auto-inject {}
-			fragment = serializer.SerializerFragment {}
 		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/serializer/ContextFinderTestLanguage.xtext"
 			fragment = @ TestLanguagesFragments auto-inject {}
-			fragment = serializer.SerializerFragment {}
 		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/serializer/AssignmentFinderTestLanguage.xtext"
 			fragment = @ TestLanguagesFragments auto-inject {}
-			fragment = serializer.SerializerFragment {}
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parsetree/unassignedtext/UnassignedTextTestLanguage.xtext"
