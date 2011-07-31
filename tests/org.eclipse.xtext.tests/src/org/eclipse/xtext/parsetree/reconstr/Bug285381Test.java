@@ -24,7 +24,7 @@ public class Bug285381Test extends AbstractXtextTests {
 		with(LangATestLanguageStandaloneSetup.class);
 	}
 	
-	public void testSerializeReference_01() throws Exception {
+	public void _testSerializeReference_01() throws Exception {
 		String modelAsString = "type A extends A";
 		Main model = (Main) getModel(modelAsString);
 		Type parsedType = model.getTypes().get(0);
@@ -38,7 +38,7 @@ public class Bug285381Test extends AbstractXtextTests {
 		assertEquals(modelAsString, serialized); 
 	}
 	
-	public void testSerializeReference_02() throws Exception {
+	public void _testSerializeReference_02() throws Exception {
 		String modelAsString = "type A";
 		Main model = (Main) getModel(modelAsString);
 		Type parsedType = model.getTypes().get(0);
