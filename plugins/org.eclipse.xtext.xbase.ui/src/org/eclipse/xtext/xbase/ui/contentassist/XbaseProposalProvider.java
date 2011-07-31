@@ -52,6 +52,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.conversion.StaticQualifierValueConverter;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IValidatedEObjectDescription;
+import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 
@@ -501,13 +502,18 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 					if (withParenths) {
 						proposal = proposal + "()";
 					}
+					int insignificantParameters = 0;
+					if (myCandidate instanceof JvmFeatureDescription) {
+						insignificantParameters = ((JvmFeatureDescription) myCandidate).getNumberOfIrrelevantArguments();
+					}
 					EObject objectOrProxy = myCandidate.getEObjectOrProxy();
-					StyledString displayString = objectOrProxy instanceof JvmFeature ? getStyledDisplayString((JvmFeature)objectOrProxy,
-							withParenths,
-							getQualifiedNameConverter().toString(myCandidate.getQualifiedName()),
-							getQualifiedNameConverter().toString(myCandidate.getName()))
+					StyledString displayString = objectOrProxy instanceof JvmFeature 
+							? getStyledDisplayString((JvmFeature)objectOrProxy,
+								withParenths, insignificantParameters,
+								getQualifiedNameConverter().toString(myCandidate.getQualifiedName()),
+								getQualifiedNameConverter().toString(myCandidate.getName()))
 							: getStyledDisplayString(objectOrProxy, getQualifiedNameConverter().toString(myCandidate.getQualifiedName()), 
-									getQualifiedNameConverter().toString(myCandidate.getName()));
+								getQualifiedNameConverter().toString(myCandidate.getName()));
 					result = createCompletionProposal(proposal, displayString, null, myContentAssistContext);
 					if (result instanceof ConfigurableCompletionProposal) {
 						ConfigurableCompletionProposal casted = (ConfigurableCompletionProposal) result;
@@ -528,13 +534,13 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		};
 	}
 	
-	protected StyledString getStyledDisplayString(JvmFeature feature, boolean withParenths, String qualifiedNameAsString, String shortName) {
+	protected StyledString getStyledDisplayString(JvmFeature feature, boolean withParenths, int insignificantParameters, String qualifiedNameAsString, String shortName) {
 		StyledString result = new StyledString(shortName);
 		if (feature instanceof JvmOperation) {
 			JvmOperation operation = (JvmOperation) feature;
 			if (withParenths) {
 				result.append('(');
-				appendParameters(result, (JvmExecutable)feature);
+				appendParameters(result, (JvmExecutable)feature, insignificantParameters);
 				result.append(')');
 			}
 			if (operation.getReturnType() != null) {
@@ -556,16 +562,16 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		} else if (feature instanceof JvmConstructor) {
 			if (withParenths) {
 				result.append('(');
-				appendParameters(result, (JvmExecutable)feature);
+				appendParameters(result, (JvmExecutable)feature, insignificantParameters);
 				result.append(')');
 			}
 		}
 		return result;
 	}
 
-	protected void appendParameters(StyledString result, JvmExecutable executable) {
+	protected void appendParameters(StyledString result, JvmExecutable executable, int insignificantParameters) {
 		boolean first = true;
-		for(JvmFormalParameter parameter: executable.getParameters()) {
+		for(JvmFormalParameter parameter: executable.getParameters().subList(insignificantParameters, executable.getParameters().size())) {
 			if (!first)
 				result.append(", ");
 			first = false;
