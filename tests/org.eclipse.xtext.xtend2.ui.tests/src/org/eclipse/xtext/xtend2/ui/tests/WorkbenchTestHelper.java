@@ -201,7 +201,7 @@ public class WorkbenchTestHelper extends Assert {
 		};
 	}
 
-	protected static IProject createPluginProject(String name) throws CoreException {
+	public static IProject createPluginProject(String name) throws CoreException {
 		Injector injector = Xtend2Activator.getInstance().getInjector("org.eclipse.xtext.xtend2.Xtend2");
 		PluginProjectFactory projectFactory = injector.getInstance(PluginProjectFactory.class);
 		projectFactory.setProjectName(name);
@@ -220,7 +220,7 @@ public class WorkbenchTestHelper extends Assert {
 		return result;
 	}
 
-	protected static void deleteProject(IProject project) throws CoreException {
+	public static void deleteProject(IProject project) throws CoreException {
 		if (project.exists()) {
 			if (project.isOpen()) {
 				project.close(null);
