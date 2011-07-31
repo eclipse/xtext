@@ -41,18 +41,29 @@ class SerializerFragment extends Xtend2GeneratorFragment {
 		state.generateDebugData = doGenerate
 	}
 	
+	def setSrcGenOnly(boolean srcGen) {
+		state.srcGenOnly = srcGen;
+	}
+	
 	override Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		val bf = new BindFactory();
-		bf.addTypeToType(typeof(ISemanticSequencer).name, semanticSequencer.qualifiedName);
-		bf.addTypeToType(typeof(ISyntacticSequencer).name, syntacticSequencer.qualifiedName);
+		if(state.srcGenOnly) {
+			bf.addTypeToType(typeof(ISemanticSequencer).name, abstractSemanticSequencer.qualifiedName);
+			bf.addTypeToType(typeof(ISyntacticSequencer).name, abstractSyntacticSequencer.qualifiedName);
+		} else {
+			bf.addTypeToType(typeof(ISemanticSequencer).name, semanticSequencer.qualifiedName);
+			bf.addTypeToType(typeof(ISyntacticSequencer).name, syntacticSequencer.qualifiedName);
+		}
 		bf.addTypeToType(typeof(ISerializer).name, typeof(Serializer).name);
 		return bf.bindings;
 	}
 	
 	override generate(Xtend2ExecutionContext ctx) {
-		ctx.writeFile(Generator::SRC, semanticSequencer.fileName, semanticSequencer.fileContents);
+		if(!state.srcGenOnly) {
+			ctx.writeFile(Generator::SRC, semanticSequencer.fileName, semanticSequencer.fileContents);
+			ctx.writeFile(Generator::SRC, syntacticSequencer.fileName, syntacticSequencer.fileContents);
+		}
 		ctx.writeFile(Generator::SRC_GEN, abstractSemanticSequencer.fileName, abstractSemanticSequencer.fileContents);
-		ctx.writeFile(Generator::SRC, syntacticSequencer.fileName, syntacticSequencer.fileContents);
 		ctx.writeFile(Generator::SRC_GEN, abstractSyntacticSequencer.fileName, abstractSyntacticSequencer.fileContents);
 		if(state.generateDebugData) {
 			ctx.writeFile(Generator::SRC_GEN, grammarConstraints.fileName, grammarConstraints.fileContents);

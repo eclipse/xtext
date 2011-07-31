@@ -8,5 +8,6 @@
 package org.eclipse.xtext.generator.serializer;
 
 public final class SerializerFragmentState {
-	public boolean generateDebugData;
+	public boolean generateDebugData = false;
+	public boolean srcGenOnly = false;
 }
