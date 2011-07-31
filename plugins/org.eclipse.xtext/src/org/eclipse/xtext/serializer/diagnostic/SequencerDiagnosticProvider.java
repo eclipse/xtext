@@ -60,7 +60,8 @@ public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnostic
 	protected IContextFinder contextFinder;
 
 	public ISerializationDiagnostic createFeatureValueMissing(EObject semanticObject, EStructuralFeature feature) {
-		return new SerializationDiagnostic(semanticObject, "foo bar");
+		String msg = "A value for feature '" + feature.getName() + "' is missing but required.";
+		return new SerializationDiagnostic(semanticObject, msg);
 	}
 
 	public ISerializationDiagnostic createInvalidContextOrTypeDiagnostic(EObject semanticObject, EObject context) {
