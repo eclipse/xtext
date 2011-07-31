@@ -132,11 +132,17 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 					switch (transientValueService.isValueTransient(eObject, feature)) {
 						case PREFERABLY:
 							optional[featureID] = true;
-						case NO:
-							Object value = eObject.eGet(feature);
-							values[featureID] = value;
+							Object value1 = eObject.eGet(feature);
+							values[featureID] = value1;
 							nodes[featureID] = Collections.singletonList(nodeProvider.getNodeForSingelValue(feature,
-									value));
+									value1));
+							break;
+						case NO:
+							Object value2 = eObject.eGet(feature);
+							values[featureID] = value2;
+							nodes[featureID] = Collections.singletonList(nodeProvider.getNodeForSingelValue(feature,
+									value2));
+							break;
 						case YES:
 					}
 			}
@@ -218,7 +224,7 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 		}
 	}
 
-	protected class TraceItem {
+	protected static class TraceItem {
 		protected int index;
 		protected int[] nextIndex;
 		protected INode node;
@@ -353,9 +359,6 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 
 	@Inject
 	protected ISemanticSequencerNfaProvider nfaProvider;
-
-	@Inject
-	protected ISemanticNodeProvider nodeProvider;
 
 	@Inject
 	protected ITransientValueService transientValueService;

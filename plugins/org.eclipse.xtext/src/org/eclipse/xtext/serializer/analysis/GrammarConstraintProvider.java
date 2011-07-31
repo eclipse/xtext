@@ -207,7 +207,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			if (!(obj instanceof Constraint))
 				return false;
 			Constraint c = (Constraint) obj;
-			return type == c.type && ((body == null && c.body == null) || body.equals(c.body));
+			return type == c.type && ((body == null && c.body == null) || (body != null && body.equals(c.body)));
 		}
 
 		public IConstraintElement[] getAssignments() {
@@ -453,6 +453,8 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			if (element == ce.element) {
 				if (children == null && ce.children == null)
 					return true;
+				if (children == null || ce.children == null)
+					return false;
 				else if (getType() == ConstraintElementType.ALTERNATIVE && children.size() == ce.children.size()) {
 					for (IConstraintElement child : children)
 						if (!ce.containsChild(child))

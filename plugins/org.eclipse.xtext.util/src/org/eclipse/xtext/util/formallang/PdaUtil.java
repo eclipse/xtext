@@ -26,7 +26,7 @@ import com.google.inject.internal.Maps;
  */
 public class PdaUtil {
 
-	protected final class IsPop<S, P> implements Predicate<S> {
+	protected static class IsPop<S, P> implements Predicate<S> {
 		private final Pda<S, P> pda;
 
 		private IsPop(Pda<S, P> pda) {

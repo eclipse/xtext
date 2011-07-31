@@ -105,7 +105,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 	}
 
 	public static class SequencerNFAProvider extends AbstractNFAProvider<SequencerNFAState, SequencerNFATransition> {
-		public class SequencerNFABuilder extends AbstractCachingNFABuilder<SequencerNFAState, SequencerNFATransition> {
+		public static class SequencerNFABuilder extends AbstractCachingNFABuilder<SequencerNFAState, SequencerNFATransition> {
 
 			@Override
 			public SequencerNFAState createState(AbstractElement ele) {
@@ -647,7 +647,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 
 	protected static class SynTransition extends SynNavigable implements ISynTransition {
 
-		private final class Filter implements Predicate<ISynState> {
+		private final static class Filter implements Predicate<ISynState> {
 			public boolean apply(ISynState input) {
 				AbstractElement ge = input.getGrammarElement();
 				return ge instanceof Keyword || GrammarUtil.isDatatypeRuleCall(ge) || GrammarUtil.isEnumRuleCall(ge)
