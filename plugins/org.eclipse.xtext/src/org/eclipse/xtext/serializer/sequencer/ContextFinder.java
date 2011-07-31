@@ -75,7 +75,7 @@ public class ContextFinder implements IContextFinder {
 	}
 
 	protected Iterable<EObject> findContextsByContainer(EObject semanticObject, Iterable<EObject> contextCandidates) {
-		if (semanticObject.eResource().getContents().contains(semanticObject))
+		if (semanticObject.eResource() != null && semanticObject.eResource().getContents().contains(semanticObject))
 			return Collections.singleton(getRootContext());
 		EReference ref = semanticObject.eContainmentFeature();
 		if (ref == null || (contextCandidates != null && Iterables.size(contextCandidates) < 2))
@@ -142,7 +142,7 @@ public class ContextFinder implements IContextFinder {
 			Iterable<EObject> contextCandidates) {
 		initConstraints();
 		contextCandidates = findContextsByContainer(semanticObject, contextCandidates);
-		if (Iterables.size(contextCandidates) < 2)
+		if (contextCandidates != null && Iterables.size(contextCandidates) < 2)
 			return contextCandidates;
 		return findContextsByContents(semanticObject, contextCandidates);
 	}
