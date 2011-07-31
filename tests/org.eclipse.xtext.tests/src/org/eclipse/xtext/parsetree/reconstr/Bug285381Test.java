@@ -23,7 +23,10 @@ public class Bug285381Test extends AbstractXtextTests {
 		super.setUp();
 		with(LangATestLanguageStandaloneSetup.class);
 	}
-	
+
+	public void testDummy() {
+	}
+
 	public void _testSerializeReference_01() throws Exception {
 		String modelAsString = "type A extends A";
 		Main model = (Main) getModel(modelAsString);
@@ -35,9 +38,9 @@ public class Bug285381Test extends AbstractXtextTests {
 		String serialized = serialize(model);
 		// we use the existing value from the node model
 		// since there is not string representation of the newType
-		assertEquals(modelAsString, serialized); 
+		assertEquals(modelAsString, serialized);
 	}
-	
+
 	public void _testSerializeReference_02() throws Exception {
 		String modelAsString = "type A";
 		Main model = (Main) getModel(modelAsString);
@@ -49,7 +52,7 @@ public class Bug285381Test extends AbstractXtextTests {
 		try {
 			serialize(model);
 			fail("expected XtextSerializationException");
-		} catch(XtextSerializationException e) {
+		} catch (XtextSerializationException e) {
 			// expected
 		}
 	}
