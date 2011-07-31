@@ -12,11 +12,14 @@ import java.io.IOException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
+import org.eclipse.xtext.parsetree.reconstr.ITokenStreamExtension;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.ExceptionDiagnostic;
 
@@ -35,15 +38,15 @@ public class TokenStreamSequenceAdapter implements ISequenceAcceptor {
 	}
 
 	public void acceptAssignedCrossRefDatatype(RuleCall rc, String token, EObject value, int index, ICompositeNode node) {
-		writeSemantic(rc, token);
+		writeSemantic(GrammarUtil.containingCrossReference(rc), token);
 	}
 
 	public void acceptAssignedCrossRefEnum(RuleCall enumRC, String token, EObject value, int index, ICompositeNode node) {
-		writeSemantic(enumRC, token);
+		writeSemantic(GrammarUtil.containingCrossReference(enumRC), token);
 	}
 
 	public void acceptAssignedCrossRefTerminal(RuleCall rc, String token, EObject value, int index, ILeafNode node) {
-		writeSemantic(rc, token);
+		writeSemantic(GrammarUtil.containingCrossReference(rc), token);
 	}
 
 	public void acceptAssignedDatatype(RuleCall datatypeRC, String token, Object value, int index, ICompositeNode node) {
@@ -81,8 +84,8 @@ public class TokenStreamSequenceAdapter implements ISequenceAcceptor {
 		writeSemantic(enumRC, token);
 	}
 
-	public void acceptUnassignedKeyword(Keyword keyword, ILeafNode node) {
-		writeSemantic(keyword, keyword.getValue());
+	public void acceptUnassignedKeyword(Keyword keyword, String token, ILeafNode node) {
+		writeSemantic(keyword, token);
 	}
 
 	public void acceptUnassignedTerminal(RuleCall terminalRC, String token, ILeafNode node) {
@@ -113,6 +116,12 @@ public class TokenStreamSequenceAdapter implements ISequenceAcceptor {
 		} catch (IOException e) {
 			if (errorAcceptor != null)
 				errorAcceptor.accept(new ExceptionDiagnostic(e));
+		}
+	}
+
+	public void init(EObject context) {
+		if (context instanceof ParserRule && out instanceof ITokenStreamExtension) {
+			((ITokenStreamExtension) out).init((ParserRule) context);
 		}
 	}
 

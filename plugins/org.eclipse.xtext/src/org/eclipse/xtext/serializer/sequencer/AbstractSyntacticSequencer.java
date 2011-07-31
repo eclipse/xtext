@@ -125,7 +125,8 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 				return;
 			case UNASSIGEND_KEYWORD:
 				Keyword keyword = (Keyword) emitter.getGrammarElement();
-				delegate.acceptUnassignedKeyword(keyword, (ILeafNode) node);
+				String token = node != null ? node.getText() : keyword.getValue();
+				delegate.acceptUnassignedKeyword(keyword, token, (ILeafNode) node);
 				return;
 			case UNASSIGNED_DATATYPE_RULE_CALL:
 				RuleCall rc3 = (RuleCall) emitter.getGrammarElement();
@@ -200,7 +201,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 	protected void acceptNode(INode node) {
 		Object ge = node.getGrammarElement();
 		if (ge instanceof Keyword)
-			acceptUnassignedKeyword((Keyword) ge, (ILeafNode) node);
+			acceptUnassignedKeyword((Keyword) ge, node.getText(), (ILeafNode) node);
 		else if (ge instanceof RuleCall) {
 			RuleCall rc = (RuleCall) ge;
 			if (rc.getRule() instanceof TerminalRule)
@@ -269,9 +270,9 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		delegate.acceptUnassignedEnum(enumRC, value, node);
 	}
 
-	public void acceptUnassignedKeyword(Keyword keyword, ILeafNode node) {
+	public void acceptUnassignedKeyword(Keyword keyword, String token, ILeafNode node) {
 		navigateToEmitter(keyword, node);
-		delegate.acceptUnassignedKeyword(keyword, node);
+		delegate.acceptUnassignedKeyword(keyword, token, node);
 	}
 
 	public void acceptUnassignedTerminal(RuleCall terminalRC, String value, ILeafNode node) {
@@ -364,7 +365,13 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		return tokenUtil.serializeNode(node);
 	}
 
-	protected abstract String getUnassignedRuleCallToken(RuleCall ruleCall, INode node);
+	protected String getUnassignedRuleCallToken(RuleCall ruleCall, INode node) {
+		return getUnassignedRuleCallToken(contexts.peek().semanticObject, ruleCall, node);
+	}
+
+	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		return "";
+	}
 
 	public void init(EObject context, EObject semanticObject, ISyntacticSequenceAcceptor sequenceAcceptor,
 			Acceptor errorAcceptor) {

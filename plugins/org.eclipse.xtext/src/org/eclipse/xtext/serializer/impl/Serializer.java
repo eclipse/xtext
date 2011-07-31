@@ -71,6 +71,8 @@ public class Serializer implements ISerializer {
 		semantic.init((ISemanticSequenceAcceptor) syntactic, errors);
 		syntactic.init(context, semanticObject, (ISyntacticSequenceAcceptor) hidden, errors);
 		hidden.init(context, semanticObject, tokens, errors);
+		if (tokens instanceof TokenStreamSequenceAdapter)
+			((TokenStreamSequenceAdapter) tokens).init(context);
 		semantic.createSequence(context, semanticObject);
 	}
 

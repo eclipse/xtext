@@ -108,10 +108,10 @@ public class AssertNodeModelAcceptor implements ISequenceAcceptor {
 			((ISyntacticSequenceAcceptor) delegate).acceptUnassignedEnum(enumRC, token, node);
 	}
 
-	public void acceptUnassignedKeyword(Keyword keyword, ILeafNode node) {
+	public void acceptUnassignedKeyword(Keyword keyword, String token, ILeafNode node) {
 		assertNode(node);
 		if (delegate != null)
-			((ISyntacticSequenceAcceptor) delegate).acceptUnassignedKeyword(keyword, node);
+			((ISyntacticSequenceAcceptor) delegate).acceptUnassignedKeyword(keyword, token, node);
 	}
 
 	public void acceptUnassignedTerminal(RuleCall terminalRC, String token, ILeafNode node) {
