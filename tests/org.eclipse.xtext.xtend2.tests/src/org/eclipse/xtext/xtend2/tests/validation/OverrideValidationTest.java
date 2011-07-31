@@ -151,7 +151,7 @@ public class OverrideValidationTest extends AbstractXtend2TestCase {
 
 	public void testClassMustBeAbstract() throws Exception {
 		XtendClass xtendClass = clazz("class Foo<S> implements Comparable<S> { }");
-		helper.assertError(xtendClass, XTEND_CLASS, CLASS_MUST_BE_ABSTRACT, "abstract", "not", "implement");
+		helper.assertError(xtendClass, XTEND_CLASS, CLASS_MUST_BE_ABSTRACT, "abstract", "not", "implement", "compareTo(S)");
 	}
 	
 	public void testOverrideFinalClass() throws Exception {
