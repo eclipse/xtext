@@ -293,7 +293,7 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 		JvmParameterizedTypeReference typeReference = getTypesFactory().createJvmParameterizedTypeReference();
 		final JvmGenericType inferredType = associations.getInferredType(xtendClass);
 		typeReference.setType(inferredType);
-		TypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getReceiverContext(typeReference);
+		final TypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getReceiverContext(typeReference);
 		Multimap<Pair<String, List<JvmType>>, JvmOperation> operationsPerSignature = HashMultimap.create();
 		for(JvmOperation operation: inferredType.getDeclaredOperations()) {
 			Pair<String,List<JvmType>> signature = getSignature(operation);
@@ -358,8 +358,15 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 						}
 					} 
 					if (!overridden) {
-						error("The class " + canonicalName(inferredType)
-							+ " must be defined abstract because it does not implement " + signature,
+						error("The class " + inferredType.getSimpleName()
+							+ " must be defined abstract because it does not implement " + 
+								getReadableSignature(operation.getSimpleName(), Lists.transform(operation.getParameters(), new Function<JvmFormalParameter, JvmTypeReference>() {
+									public JvmTypeReference apply(JvmFormalParameter from) {
+										JvmTypeReference parameterType = from.getParameterType();
+										JvmTypeReference result = typeArgumentContext.resolve(parameterType);
+										return result;
+									}
+								})),
 							xtendClass, XTEND_CLASS__NAME, CLASS_MUST_BE_ABSTRACT);						
 					}
 				}
@@ -432,13 +439,21 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 	protected String getReadableSignature(JvmIdentifiableElement element, List<JvmFormalParameter> parameters) {
 		if (element == null)
 			return "null";
-		StringBuilder result = new StringBuilder(element.getSimpleName());
+		return getReadableSignature(element.getSimpleName(), Lists.transform(parameters, new Function<JvmFormalParameter, JvmTypeReference>() {
+			public JvmTypeReference apply(JvmFormalParameter from) {
+				return from.getParameterType();
+			}
+		}));
+	}
+	
+	protected String getReadableSignature(String elementName, List<JvmTypeReference> parameters) {
+		StringBuilder result = new StringBuilder(elementName);
 		result.append('(');
 		for(int i = 0; i < parameters.size(); i++) {
 			if (i != 0) {
 				result.append(", ");
 			}
-			JvmTypeReference parameterType = parameters.get(i).getParameterType();
+			JvmTypeReference parameterType = parameters.get(i);
 			if (parameterType != null)
 				result.append(parameterType.getSimpleName());
 			else
