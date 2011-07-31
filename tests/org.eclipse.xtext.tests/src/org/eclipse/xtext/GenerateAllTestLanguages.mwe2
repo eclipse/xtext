@@ -289,17 +289,15 @@ Workflow {
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/UnorderedGroupsTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {
-				srcGenOnly = false
-			}
+			fragment = @TestLanguagesFragmentsParseTreeConstructor {}
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/SimpleUnorderedGroupsTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {}
+			fragment = @TestLanguagesFragmentsParseTreeConstructor {}
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/ExUnorderedGroupsTestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsEx {}
+			fragment = @TestLanguagesFragmentsExParseTreeConstructor {}
 		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/BacktrackingBug325745TestLanguage.xtext"
@@ -386,7 +384,9 @@ Workflow {
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parsetree/unassignedtext/UnassignedTextTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {}
+			fragment = @TestLanguagesFragments {
+				srcGenOnly = false
+			}
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xtext"
