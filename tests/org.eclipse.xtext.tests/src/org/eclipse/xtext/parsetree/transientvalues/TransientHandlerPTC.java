@@ -12,7 +12,7 @@ import org.eclipse.xtext.parsetree.reconstr.impl.DefaultTransientValueService;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class TransientHandler extends DefaultTransientValueService {
+public class TransientHandlerPTC extends DefaultTransientValueService {
 
 	@Override
 	public boolean isTransient(EObject owner, EStructuralFeature feature, int index) {

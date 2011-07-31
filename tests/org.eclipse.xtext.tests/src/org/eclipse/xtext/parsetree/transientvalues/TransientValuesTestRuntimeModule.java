@@ -12,7 +12,11 @@ public class TransientValuesTestRuntimeModule extends AbstractTransientValuesTes
 
 	@Override
 	public Class<? extends ITransientValueService> bindITransientValueService() {
-		return TransientHandler.class;
+		return TransientHandlerPTC.class;
 	}
-	
+
+	public Class<? extends org.eclipse.xtext.serializer.sequencer.ITransientValueService> bindTransientHandlerSerializer() {
+		return TransientHandlerSerializer.class;
+	}
+
 }
