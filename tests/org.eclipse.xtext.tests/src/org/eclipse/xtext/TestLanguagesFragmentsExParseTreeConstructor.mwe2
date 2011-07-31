@@ -1,0 +1,35 @@
+/*******************************************************************************
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+module org.eclipse.xtext.TestLanguagesFragmentsExParseTreeConstructor
+
+import org.eclipse.xtext.generator.*
+
+var basePackage = ""
+var javaModelDirectory = ""
+var xmiModelDirectory = ""
+var file.extensions = ""
+var classSplitting = true
+var skipGenerate = false
+var backtrack = false
+var memoize = false
+var ignoreCase = false
+var backtrackLexer = false
+var generateDotDiagram = false
+var graphvizCommand = ""
+
+CompositeGeneratorFragment {
+	fragment = parser.antlr.ex.rt.AntlrGeneratorFragment {
+		options = auto-inject {}
+	}
+	fragment = resourceFactory.ResourceFactoryFragment { 
+		fileExtensions = file.extensions
+	}
+	fragment = grammarAccess.GrammarAccessFragment {}
+	fragment = ecore.EcoreGeneratorFragment auto-inject {}
+	fragment = parseTreeConstructor.ParseTreeConstructorFragment auto-inject {}
+}
