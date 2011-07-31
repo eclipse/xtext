@@ -152,10 +152,12 @@ public class XtextLinkingService extends DefaultLinkingService {
 	}
 
 	private EPackage loadEPackage(String resourceOrNsURI, ResourceSet resourceSet) {
-		if (EPackage.Registry.INSTANCE.containsKey(resourceOrNsURI))
-			return EPackage.Registry.INSTANCE.getEPackage(resourceOrNsURI);
+		if (resourceSet.getPackageRegistry().containsKey(resourceOrNsURI))
+			return resourceSet.getPackageRegistry().getEPackage(resourceOrNsURI);
 		URI uri = URI.createURI(resourceOrNsURI);
 		try {
+			if ("http".equalsIgnoreCase(uri.scheme()))
+				return null;
 			if (uri.fragment() == null) {
 				Resource resource = resourceSet.getResource(uri, true);
 				EPackage result = (EPackage) resource.getContents().get(0);
