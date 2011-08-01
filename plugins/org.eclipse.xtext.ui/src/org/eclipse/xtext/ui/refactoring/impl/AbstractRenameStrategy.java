@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
+import org.eclipse.xtext.util.SimpleAttributeResolver;
 import org.eclipse.xtext.util.Strings;
 
 /**
@@ -32,6 +33,14 @@ public abstract class AbstractRenameStrategy implements IRenameStrategy {
 		this.originalName = targetElement.eGet(nameAttribute).toString();
 		if (Strings.isEmpty(originalName))
 			throw new RefactoringStatusException("Target element does not have a name", false);
+	}
+	
+	/**
+	 * @deprecated this constructor is only present for backwards compatibility reasons and will be removed in Xtext 2.1
+	 */
+	@Deprecated
+	protected AbstractRenameStrategy(EObject targetElement) {
+		this(targetElement, SimpleAttributeResolver.NAME_RESOLVER.getAttribute(targetElement));
 	}
 
 	public String getOriginalName() {

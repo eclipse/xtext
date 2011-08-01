@@ -44,6 +44,7 @@ import org.eclipse.xtext.ui.refactoring.impl.RefactoringResourceSetProvider;
 import org.eclipse.xtext.util.IAcceptor;
 
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -73,6 +74,13 @@ public class SimpleLinkedPositionGroupCalculator extends AbstractLinkedPositionG
 
 	@Inject
 	private IReferenceUpdater referenceUpdater;
+	
+	/**
+	 * @deprecated exists for backwards compatibility reasons only and will be removed in Xtext 2.1
+	 */
+	@Deprecated
+	@Inject
+	private Injector injector;
 
 	public LinkedPositionGroup getLinkedPositionGroup(IRenameElementContext renameElementContext,
 			IProgressMonitor monitor) {
@@ -87,6 +95,7 @@ public class SimpleLinkedPositionGroupCalculator extends AbstractLinkedPositionG
 		if (renameStrategy == null)
 			throw new IllegalArgumentException("Cannot find a rename strategy for "
 					+ notNull(renameElementContext.getTargetElementURI()));
+		injector.injectMembers(renameStrategy);
 		String newName = renameStrategy.getOriginalName();
 		Iterable<URI> dependentElementURIs = dependentElementsCalculator.getDependentElementURIs(targetElement,
 				progress.newChild(10));
