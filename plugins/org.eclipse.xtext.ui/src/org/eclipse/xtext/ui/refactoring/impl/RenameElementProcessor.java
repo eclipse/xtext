@@ -42,6 +42,7 @@ import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.ui.util.ResourceUtil;
 
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 import com.google.inject.Provider;
 import com.google.inject.name.Named;
 
@@ -88,6 +89,13 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 
 	@Inject
 	private Provider<IRefactoringUpdateAcceptor> updateAcceptorProvider;
+	
+	/**
+	 * @deprecated exists for backwards compatibility reasons only and will be removed in Xtext 2.1
+	 */
+	@Deprecated
+	@Inject
+	private Injector injector;
 
 	private ElementRenameArguments renameArguments;
 
@@ -129,7 +137,9 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 	}
 
 	protected IRenameStrategy createRenameElementStrategy(EObject targetElement, IRenameElementContext renameElementContext) {
-		return strategyProvider.get(targetElement, renameElementContext);
+		IRenameStrategy result = strategyProvider.get(targetElement, renameElementContext);
+		injector.injectMembers(result);
+		return result;
 	}
 	
 	@Override

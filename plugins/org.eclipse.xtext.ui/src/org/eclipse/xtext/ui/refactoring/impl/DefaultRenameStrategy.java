@@ -80,6 +80,16 @@ public class DefaultRenameStrategy extends AbstractRenameStrategy {
 	protected String nameRuleName;
 
 	protected IValueConverterService valueConverterService;
+	
+	/*
+	 * This is somewhat hacky but we have to maintain the reference to the object itself until 
+	 * we can inject the IValueConverterService for backwards compatibility reasons
+	 */
+	/**
+	 * @deprecated exists for backwards compatibility reasons only and will be removed in Xtext 2.1
+	 */
+	@Deprecated
+	private EObject temporaryObjectReference;
 
 	protected DefaultRenameStrategy(EObject targetElement, EAttribute nameAttribute, ITextRegion originalNameRegion,
 			String nameRuleName, IValueConverterService valueConverterService) {
@@ -87,6 +97,46 @@ public class DefaultRenameStrategy extends AbstractRenameStrategy {
 		this.originalNameRegion = originalNameRegion;
 		this.nameRuleName = nameRuleName;
 		this.valueConverterService = valueConverterService;
+	}
+
+	/**
+	 * @deprecated exists for backwards compatibility reasons only and will be removed in Xtext 2.1
+	 */
+	@Deprecated
+	protected DefaultRenameStrategy(EObject targetElement,
+			ILocationInFileProvider locationInFileProvider) {
+		super(targetElement);
+		originalNameRegion = locationInFileProvider.getFullTextRegion(targetElement, getNameAttribute(), 0);
+		this.temporaryObjectReference = targetElement;
+	}
+	
+	/**
+	 * @deprecated exists for backwards compatibility reasons only and will be removed in Xtext 2.1
+	 */
+	@SuppressWarnings("unused")
+	@Deprecated
+	@Inject
+	private void injectServicesForDeprecationReasons(IValueConverterService valueConverter) {
+		try {
+			if (nameRuleName != null)
+				return;
+			this.valueConverterService = valueConverter;
+			nameRuleName = getNameRuleName(temporaryObjectReference, getNameAttribute());
+		} finally {
+			temporaryObjectReference = null;
+		}
+	}
+	
+	/**
+	 * @deprecated exists for backwards compatibility reasons only and will be removed in Xtext 2.1
+	 */
+	@Deprecated
+	private String getNameRuleName(EObject targetElement, EAttribute nameAttribute) {
+		List<INode> nameNodes = NodeModelUtils.findNodesForFeature(targetElement, nameAttribute);
+		if (nameNodes.size() != 1 || !(nameNodes.get(0).getGrammarElement() instanceof RuleCall)) {
+			return null;
+		}
+		return ((RuleCall) nameNodes.get(0).getGrammarElement()).getRule().getName();
 	}
 
 	public void createDeclarationUpdates(String newName, ResourceSet resourceSet,
