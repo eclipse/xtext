@@ -192,24 +192,25 @@ class AbstractSemanticSequencer extends GeneratedFile {
 		«ENDFOR»
 		 */
 		protected void sequence_«c.simpleName»(EObject context, «file.importedGenTypeName(c.type)» semanticObject) {
+			«val cast = file.getEObjectCast(c.type)»
 			«IF !newHashSet(grammar, null).contains(c.mostConcreteGrammar)»
-				superSequencer.createSequence(context, semanticObject);
+				superSequencer.createSequence(context, «cast»semanticObject);
 			«ELSEIF c.canGenerate()»
 				if(errorAcceptor != null) {
 					«FOR f:c.features.filter(e|e != null)»
-						if(transientValues.isValueTransient(semanticObject, «file.importedGenTypeLiteral(f.feature)») == «file.imported(typeof(ITransientValueService$ValueTransient))».YES)
-							errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, «file.importedGenTypeLiteral(f.feature)»));
+						if(transientValues.isValueTransient(«cast»semanticObject, «file.importedGenTypeLiteral(f.feature)») == «file.imported(typeof(ITransientValueService$ValueTransient))».YES)
+							errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(«cast»semanticObject, «file.importedGenTypeLiteral(f.feature)»));
 					«ENDFOR»
 				}
-				«file.imported(typeof(ISemanticNodeProvider$INodesForEObjectProvider))» nodes = createNodeProvider(semanticObject);
-				«file.imported(typeof(SequenceFeeder))» feeder = createSequencerFeeder(semanticObject, nodes);
+				«file.imported(typeof(ISemanticNodeProvider$INodesForEObjectProvider))» nodes = createNodeProvider(«cast»semanticObject);
+				«file.imported(typeof(SequenceFeeder))» feeder = createSequencerFeeder(«cast»semanticObject, nodes);
 				«FOR f: if(c.body.featureInfo != null) newArrayList(c.body.featureInfo) else c.body.children.filter(e|e.featureInfo != null).map(e|e.featureInfo)»
 					«val assignment=f.assignments.get(0)»
 					feeder.accept(grammarAccess.«assignment.grammarElement.gaAccessor()», semanticObject.«file.getGetAccessor(f.feature)»());
 				«ENDFOR»
 				feeder.finish();
 			«ELSE»
-				genericSequencer.createSequence(context, semanticObject);
+				genericSequencer.createSequence(context, «cast»semanticObject);
 			«ENDIF»
 		}
 	'''
