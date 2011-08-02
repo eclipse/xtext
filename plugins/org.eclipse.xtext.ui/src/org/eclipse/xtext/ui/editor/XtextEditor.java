@@ -363,7 +363,7 @@ public class XtextEditor extends TextEditor {
 			}
 
 			protected IStatus validateEditorInputState(IAdaptable info, IStatus status) {
-				if (Status.OK_STATUS.equals(status) && info.getAdapter(ITextEditor.class) == XtextEditor.this) {
+				if (Status.OK_STATUS.equals(status) && info != null && info.getAdapter(ITextEditor.class) == XtextEditor.this) {
 					if (!XtextEditor.this.validateEditorInputState()) {
 						return Status.CANCEL_STATUS;
 					}
