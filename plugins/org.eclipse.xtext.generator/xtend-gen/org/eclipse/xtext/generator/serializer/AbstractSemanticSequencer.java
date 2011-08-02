@@ -645,6 +645,11 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     _builder.append(_importedGenTypeName, "");
     _builder.append(" semanticObject) {");
     _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    EClass _type_2 = c.getType();
+    String _eObjectCast = file.getEObjectCast(_type_2);
+    final String cast = _eObjectCast;
+    _builder.newLineIfNotEmpty();
     {
       HashSet<Grammar> _newHashSet = CollectionLiterals.<Grammar>newHashSet(this.grammar, null);
       Grammar _mostConcreteGrammar = this.getMostConcreteGrammar(c);
@@ -652,8 +657,10 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       boolean _operator_not = BooleanExtensions.operator_not(_contains);
       if (_operator_not) {
         _builder.append("\t");
-        _builder.append("superSequencer.createSequence(context, semanticObject);");
-        _builder.newLine();} else {
+        _builder.append("superSequencer.createSequence(context, ");
+        _builder.append(cast, "	");
+        _builder.append("semanticObject);");
+        _builder.newLineIfNotEmpty();} else {
         boolean _canGenerate = this.sequencerUtil.canGenerate(c);
         if (_canGenerate) {
           _builder.append("\t");
@@ -671,7 +678,9 @@ public class AbstractSemanticSequencer extends GeneratedFile {
             for(IFeatureInfo f_1 : _filter_1) {
               _builder.append("\t");
               _builder.append("\t");
-              _builder.append("if(transientValues.isValueTransient(semanticObject, ");
+              _builder.append("if(transientValues.isValueTransient(");
+              _builder.append(cast, "		");
+              _builder.append("semanticObject, ");
               EStructuralFeature _feature = f_1.getFeature();
               String _importedGenTypeLiteral = file.importedGenTypeLiteral(_feature);
               _builder.append(_importedGenTypeLiteral, "		");
@@ -683,7 +692,9 @@ public class AbstractSemanticSequencer extends GeneratedFile {
               _builder.append("\t");
               _builder.append("\t");
               _builder.append("\t");
-              _builder.append("errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ");
+              _builder.append("errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(");
+              _builder.append(cast, "			");
+              _builder.append("semanticObject, ");
               EStructuralFeature _feature_1 = f_1.getFeature();
               String _importedGenTypeLiteral_1 = file.importedGenTypeLiteral(_feature_1);
               _builder.append(_importedGenTypeLiteral_1, "			");
@@ -697,12 +708,16 @@ public class AbstractSemanticSequencer extends GeneratedFile {
           _builder.append("\t");
           String _imported_1 = file.imported(org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider.class);
           _builder.append(_imported_1, "	");
-          _builder.append(" nodes = createNodeProvider(semanticObject);");
+          _builder.append(" nodes = createNodeProvider(");
+          _builder.append(cast, "	");
+          _builder.append("semanticObject);");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
           String _imported_2 = file.imported(org.eclipse.xtext.serializer.acceptor.SequenceFeeder.class);
           _builder.append(_imported_2, "	");
-          _builder.append(" feeder = createSequencerFeeder(semanticObject, nodes);");
+          _builder.append(" feeder = createSequencerFeeder(");
+          _builder.append(cast, "	");
+          _builder.append("semanticObject, nodes);");
           _builder.newLineIfNotEmpty();
           {
             Iterable<IFeatureInfo> _xifexpression_1 = null;
@@ -757,8 +772,10 @@ public class AbstractSemanticSequencer extends GeneratedFile {
           _builder.append("feeder.finish();");
           _builder.newLine();} else {
           _builder.append("\t");
-          _builder.append("genericSequencer.createSequence(context, semanticObject);");
-          _builder.newLine();
+          _builder.append("genericSequencer.createSequence(context, ");
+          _builder.append(cast, "	");
+          _builder.append("semanticObject);");
+          _builder.newLineIfNotEmpty();
         }
       }
     }

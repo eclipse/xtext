@@ -7,9 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.serializer;
 
+import org.eclipse.emf.codegen.ecore.genmodel.GenClass;
+import org.eclipse.emf.codegen.ecore.genmodel.GenFeature;
+import org.eclipse.emf.common.util.BasicEMap;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -27,8 +31,23 @@ public class JavaEMFFile extends JavaFile {
 		this.resourceSet = rs;
 	}
 
+	public String getEObjectCast(EClass eClass) {
+		GenClass genClass = GenModelAccess.getGenClass(eClass, resourceSet);
+		if (genClass.isEObjectExtension())
+			return "";
+		return "(" + imported(EObject.class) + ")";
+	}
+
 	public String getGetAccessor(EStructuralFeature feature) {
-		return GenModelAccess.getGenFeature(feature, resourceSet).getGetAccessor();
+		GenFeature genFeature = GenModelAccess.getGenFeature(feature, resourceSet);
+		GenClass genClass = genFeature.getGenClass();
+		if (genClass.isMapEntry()) {
+			if (genFeature == genClass.getMapEntryKeyFeature())
+				return "getKey";
+			if (genFeature == genClass.getMapEntryValueFeature())
+				return "getValue";
+		}
+		return genFeature.getGetAccessor();
 	}
 
 	public String importedGenIntLiteral(EClass clazz, EStructuralFeature feature) {
@@ -57,7 +76,12 @@ public class JavaEMFFile extends JavaFile {
 	}
 
 	public String importedGenTypeName(EClass clazz) {
-		return imported(GenModelAccess.getGenClass(clazz, resourceSet).getQualifiedInterfaceName());
+		GenClass gc = GenModelAccess.getGenClass(clazz, resourceSet);
+		if (gc.isMapEntry()) {
+			String entryType = imported(BasicEMap.Entry.class);
+			return entryType + "<?, ?>";
+		}
+		return imported(gc.getQualifiedInterfaceName());
 	}
 
 	public String importedGenTypeName(EClassifier cls) {
