@@ -37,6 +37,8 @@ public class Xtend2DescriptionLabelProvider extends DefaultDescriptionLabelProvi
 			return images.forClass(0);
 		else if (eClass == XTEND_FUNCTION)
 			return images.forFunction(0);
+		else if (eClass == XTEND_FIELD)
+			return images.forField(false);
 		else if (eClass == TypesPackage.Literals.JVM_OPERATION)
 			return (descriptionFlags.isDispatcherOperation(element)) ? images.forDispatcherFunction(0) : images
 					.forFunction(0);
