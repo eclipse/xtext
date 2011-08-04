@@ -6,6 +6,7 @@ Bundle-Version: 2.0.1.qualifier
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.junit4,
+ org.eclipse.xtext.junit4.parameterized,
  org.eclipse.xtext.junit4.serializer,
  org.eclipse.xtext.junit4.util,
  org.eclipse.xtext.junit4.validation
@@ -13,14 +14,10 @@ Import-Package: com.google.common.base,
  com.google.common.collect,
  com.google.inject,
  com.google.inject.name,
- org.eclipse.emf.common.notify,
- org.eclipse.emf.common.util,
- org.eclipse.emf.ecore,
- org.eclipse.emf.ecore.impl,
- org.eclipse.emf.ecore.resource,
- org.eclipse.emf.ecore.util,
- org.eclipse.emf.ecore.xmi.impl,
  org.junit;version="4.5.0";resolution:=optional,
+ org.junit.runner,
+ org.junit.runner.notification,
  org.junit.runners;version="4.5.0";resolution:=optional,
  org.junit.runners.model;version="4.5.0";resolution:=optional
-Require-Bundle: org.eclipse.xtext;bundle-version="2.0.1"
+Require-Bundle: org.eclipse.xtext;bundle-version="2.0.1",
+ org.eclipse.emf;bundle-version="2.5.0"
