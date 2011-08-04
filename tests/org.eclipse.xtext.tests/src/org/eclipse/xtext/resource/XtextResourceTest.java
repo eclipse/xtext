@@ -138,5 +138,4 @@ public class XtextResourceTest extends AbstractXtextTests {
 		assertEquals(1, diag.getLength());
 	}
 
-
 }
