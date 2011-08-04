@@ -74,6 +74,11 @@ public class XtextResource extends ResourceImpl {
 	public static String OPTION_ENCODING = XtextResource.class.getName() + ".DEFAULT_ENCODING";
 
 	private boolean validationDisabled;
+	
+	/**
+	 * @since 2.1
+	 */
+	protected boolean isUpdating = false;
 
 	private IParser parser;
 
@@ -169,9 +174,14 @@ public class XtextResource extends ResourceImpl {
 	}
 
 	public void reparse(String newContent) throws IOException {
-		clearInternalState();
-		doLoad(new StringInputStream(newContent, getEncoding()), null);
-		setModified(false);
+		try {
+			isUpdating = true;
+			clearInternalState();
+			doLoad(new StringInputStream(newContent, getEncoding()), null);
+			setModified(false);
+		} finally {
+			isUpdating = false;
+		}
 	}
 
 	protected void reattachModificationTracker(EObject element) {
@@ -197,14 +207,19 @@ public class XtextResource extends ResourceImpl {
 		if (!isLoaded()) {
 			throw new IllegalStateException("You can't update an unloaded resource.");
 		}
-		IParseResult oldParseResult = parseResult;
-		ReplaceRegion replaceRegion = new ReplaceRegion(new TextRegion(offset, replacedTextLength), newText);
-		parseResult = parser.reparse(oldParseResult, replaceRegion);
-		if (oldParseResult.getRootASTElement() != null && oldParseResult.getRootASTElement() != parseResult.getRootASTElement()) {
-			unload(oldParseResult.getRootASTElement());
-			getContents().remove(oldParseResult.getRootASTElement());
+		try {
+			isUpdating = true;
+			IParseResult oldParseResult = parseResult;
+			ReplaceRegion replaceRegion = new ReplaceRegion(new TextRegion(offset, replacedTextLength), newText);
+			parseResult = parser.reparse(oldParseResult, replaceRegion);
+			if (oldParseResult.getRootASTElement() != null && oldParseResult.getRootASTElement() != parseResult.getRootASTElement()) {
+				unload(oldParseResult.getRootASTElement());
+				getContents().remove(oldParseResult.getRootASTElement());
+			}
+			updateInternalState(parseResult);
+		} finally {
+			isUpdating = false;
 		}
-		updateInternalState(parseResult);
 	}
 
 	protected void updateInternalState(IParseResult parseResult) {
