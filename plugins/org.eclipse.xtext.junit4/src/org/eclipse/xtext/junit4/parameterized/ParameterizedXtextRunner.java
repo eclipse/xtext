@@ -115,8 +115,9 @@ public class ParameterizedXtextRunner extends ParentRunner<ResourceRunner> {
 			for (String s : exp) {
 				int next = actual.indexOf(s, start);
 				if (next < 0) {
-					result.append(expected.substring(start));
-					return result.toString();
+					return expected;
+					//					result.append(expected.substring(start));
+					//					return result.toString();
 				} else {
 					result.append(actual.substring(start, next));
 					result.append(s);
