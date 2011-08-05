@@ -233,7 +233,7 @@ public class FunctionConversion {
 			}
 			return true;
 		}
-		return type != null && type.getType()!=null && type.getType().getIdentifier().startsWith(Functions.class.getCanonicalName());
+		return type != null && type.getType()!=null && !type.getType().eIsProxy() && type.getType().getIdentifier().startsWith(Functions.class.getCanonicalName());
 	}
 
 	/**
