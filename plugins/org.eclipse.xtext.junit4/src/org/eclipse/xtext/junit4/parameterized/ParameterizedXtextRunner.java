@@ -20,6 +20,7 @@ import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.junit4.IInjectorProvider;
+import org.eclipse.xtext.junit4.IRegistryConfigurator;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.parameterized.ParameterizedXtextRunner.ResourceRunner;
 import org.eclipse.xtext.resource.XtextResource;
@@ -50,81 +51,45 @@ public class ParameterizedXtextRunner extends ParentRunner<ResourceRunner> {
 
 	protected static class ParameterSetRunner {
 		protected Description description;
+		protected int index = -1;
 		protected FrameworkMethod method;
 		protected Object[] params;
 		protected ResourceRunner runner;
-		protected int index = -1;
-
-		protected Constructor<?> findConstructor() {
-			ROOT: for (Constructor<?> candidate : runner.clazz.getJavaClass().getConstructors())
-				if (candidate.getParameterTypes().length == params.length) {
-					for (int i = 0; i < params.length; i++)
-						if (!candidate.getParameterTypes()[i].isInstance(params[i]))
-							continue ROOT;
-					return candidate;
-				}
-			List<String> types = Lists.newArrayList();
-			for (Object p : params)
-				types.add(p.getClass().getName());
-			throw new RuntimeException("No valid constructor found in class " + runner.clazz.getName() + " for types "
-					+ Joiner.on(", ").join(types));
-		}
 
 		public Description getDescription() {
-			if (description == null) {
-				String name = method == null ? "" : method.getName();
-				if (index > -1)
-					name = name + ":" + index;
-				name = name + ":  " + runner.resource.getURI().lastSegment();
-				description = Description.createTestDescription(runner.clazz.getJavaClass(), name);
-			}
+			if (description == null)
+				description = Description.createTestDescription(runner.clazz.getJavaClass(), getTitle());
 			return description;
+		}
+
+		public IInjectorProvider getInjectorProvider() {
+			return runner.injectorProvider;
+		}
+
+		public FrameworkMethod getMethod() {
+			return method;
+		}
+
+		public Object[] getParams() {
+			return params;
+		}
+
+		public Class<?> getTestClass() {
+			return runner.clazz.getJavaClass();
+		}
+
+		public String getTitle() {
+			String name = method == null ? "" : method.getName();
+			if (index > -1)
+				name = name + ":" + index;
+			name = name + ": " + runner.resource.getURI().lastSegment();
+			return name;
 		}
 
 		public void init(ResourceRunner runner, FrameworkMethod method, Object[] params) {
 			this.runner = runner;
 			this.method = method;
 			this.params = params;
-		}
-
-		public void run(RunNotifier notifier) {
-			if (method == null)
-				notifier.fireTestIgnored(getDescription());
-			else {
-				notifier.fireTestStarted(getDescription());
-				try {
-					Object test = findConstructor().newInstance(params);
-					Object result = method.invokeExplosively(test);
-					if (result != null) {
-						String exp = migrate(params[1].toString(), result.toString());
-						if (!exp.equals(result.toString()))
-							throw new ComparisonFailure("", exp, result.toString());
-					}
-
-				} catch (Throwable e) {
-					notifier.fireTestFailure(new Failure(getDescription(), e));
-				}
-				notifier.fireTestFinished(getDescription());
-			}
-		}
-
-		protected String migrate(String expected, String actual) {
-			String[] exp = expected.split("\\s|\\?\\?\\?");
-			int start = 0;
-			StringBuilder result = new StringBuilder();
-			for (String s : exp) {
-				int next = actual.indexOf(s, start);
-				if (next < 0) {
-					return expected;
-					//					result.append(expected.substring(start));
-					//					return result.toString();
-				} else {
-					result.append(actual.substring(start, next));
-					result.append(s);
-					start = next + s.length();
-				}
-			}
-			return result.toString();
 		}
 
 	}
@@ -247,6 +212,21 @@ public class ParameterizedXtextRunner extends ParentRunner<ResourceRunner> {
 		return child.getDescription();
 	}
 
+	protected Constructor<?> findConstructor(Class<?> clazz, Object[] params) {
+		ROOT: for (Constructor<?> candidate : clazz.getConstructors())
+			if (candidate.getParameterTypes().length == params.length) {
+				for (int i = 0; i < params.length; i++)
+					if (!candidate.getParameterTypes()[i].isInstance(params[i]))
+						continue ROOT;
+				return candidate;
+			}
+		List<String> types = Lists.newArrayList();
+		for (Object p : params)
+			types.add(p.getClass().getName());
+		throw new RuntimeException("No valid constructor found in class " + clazz.getName() + " for types "
+				+ Joiner.on(", ").join(types));
+	}
+
 	@Override
 	protected List<ResourceRunner> getChildren() {
 		if (children == null) {
@@ -306,10 +286,55 @@ public class ParameterizedXtextRunner extends ParentRunner<ResourceRunner> {
 
 	}
 
+	protected String migrate(String expected, String actual) {
+		String[] exp = expected.split("\\s|\\?\\?\\?");
+		int start = 0;
+		StringBuilder result = new StringBuilder();
+		for (String s : exp) {
+			int next = actual.indexOf(s, start);
+			if (next < 0) {
+				return expected;
+				//					result.append(expected.substring(start));
+				//					return result.toString();
+			} else {
+				result.append(actual.substring(start, next));
+				result.append(s);
+				start = next + s.length();
+			}
+		}
+		return result.toString();
+	}
+
+	protected void runChild(ParameterSetRunner ps) throws Throwable {
+		Constructor<?> constructor = findConstructor(ps.getTestClass(), ps.getParams());
+		Object test = constructor.newInstance(ps.getParams());
+		if (ps.getInjectorProvider() instanceof IRegistryConfigurator)
+			((IRegistryConfigurator) ps.getInjectorProvider()).setupRegistry();
+		ps.getInjectorProvider().getInjector().injectMembers(test);
+		Object result = ps.getMethod().invokeExplosively(test);
+		if (ps.getInjectorProvider() instanceof IRegistryConfigurator)
+			((IRegistryConfigurator) ps.getInjectorProvider()).restoreRegistry();
+		if (result != null) {
+			String exp = migrate(ps.getParams()[1].toString(), result.toString());
+			if (!exp.equals(result.toString()))
+				throw new ComparisonFailure("", exp, result.toString());
+		}
+	}
+
 	@Override
-	protected void runChild(ResourceRunner arg0, RunNotifier arg1) {
+	protected void runChild(ResourceRunner arg0, RunNotifier notifier) {
 		for (ParameterSetRunner ps : arg0.getParameterSets())
-			ps.run(arg1);
+			if (ps.getMethod() == null)
+				notifier.fireTestIgnored(ps.getDescription());
+			else {
+				notifier.fireTestStarted(ps.getDescription());
+				try {
+					runChild(ps);
+				} catch (Throwable e) {
+					notifier.fireTestFailure(new Failure(ps.getDescription(), e));
+				}
+				notifier.fireTestFinished(ps.getDescription());
+			}
 	}
 
 }
