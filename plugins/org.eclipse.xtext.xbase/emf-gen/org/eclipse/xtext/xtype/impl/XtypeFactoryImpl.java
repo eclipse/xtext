@@ -68,6 +68,8 @@ public class XtypeFactoryImpl extends EFactoryImpl implements XtypeFactory
 		switch (eClass.getClassifierID())
 		{
 			case XtypePackage.XFUNCTION_TYPE_REF: return createXFunctionTypeRef();
+			case XtypePackage.XSYNONYM_TYPE_REFERENCE: return createXSynonymTypeReference();
+			case XtypePackage.XDELEGATE_TYPE_REFERENCE: return createXDelegateTypeReference();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -82,6 +84,28 @@ public class XtypeFactoryImpl extends EFactoryImpl implements XtypeFactory
 	{
 		XFunctionTypeRefImplCustom xFunctionTypeRef = new XFunctionTypeRefImplCustom();
 		return xFunctionTypeRef;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public XSynonymTypeReference createXSynonymTypeReference()
+	{
+		XSynonymTypeReferenceImplCustom xSynonymTypeReference = new XSynonymTypeReferenceImplCustom();
+		return xSynonymTypeReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public XDelegateTypeReference createXDelegateTypeReference()
+	{
+		XDelegateTypeReferenceImplCustom xDelegateTypeReference = new XDelegateTypeReferenceImplCustom();
+		return xDelegateTypeReference;
 	}
 
 	/**

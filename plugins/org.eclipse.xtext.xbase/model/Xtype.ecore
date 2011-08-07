@@ -10,4 +10,14 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XSynonymTypeReference" eSuperTypes="../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference">
+    <eOperations name="getPrimaryType" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="synonymes" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XDelegateTypeReference" eSuperTypes="../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="delegate" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"/>
+  </eClassifiers>
 </ecore:EPackage>

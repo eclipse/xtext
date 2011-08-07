@@ -107,6 +107,22 @@ public class XtypeSwitch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case XtypePackage.XSYNONYM_TYPE_REFERENCE:
+			{
+				XSynonymTypeReference xSynonymTypeReference = (XSynonymTypeReference)theEObject;
+				T result = caseXSynonymTypeReference(xSynonymTypeReference);
+				if (result == null) result = caseJvmTypeReference(xSynonymTypeReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XtypePackage.XDELEGATE_TYPE_REFERENCE:
+			{
+				XDelegateTypeReference xDelegateTypeReference = (XDelegateTypeReference)theEObject;
+				T result = caseXDelegateTypeReference(xDelegateTypeReference);
+				if (result == null) result = caseJvmTypeReference(xDelegateTypeReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -123,6 +139,38 @@ public class XtypeSwitch<T>
 	 * @generated
 	 */
 	public T caseXFunctionTypeRef(XFunctionTypeRef object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>XSynonym Type Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>XSynonym Type Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXSynonymTypeReference(XSynonymTypeReference object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>XDelegate Type Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>XDelegate Type Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXDelegateTypeReference(XDelegateTypeReference object)
 	{
 		return null;
 	}

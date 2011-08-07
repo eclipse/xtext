@@ -21,7 +21,9 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationsPackage
 
 import org.eclipse.xtext.xbase.impl.XbasePackageImpl;
 
+import org.eclipse.xtext.xtype.XDelegateTypeReference;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
+import org.eclipse.xtext.xtype.XSynonymTypeReference;
 import org.eclipse.xtext.xtype.XtypeFactory;
 import org.eclipse.xtext.xtype.XtypePackage;
 
@@ -39,6 +41,20 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 	 * @generated
 	 */
 	private EClass xFunctionTypeRefEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass xSynonymTypeReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass xDelegateTypeReferenceEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -149,6 +165,56 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getXSynonymTypeReference()
+	{
+		return xSynonymTypeReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXSynonymTypeReference_Synonymes()
+	{
+		return (EReference)xSynonymTypeReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXSynonymTypeReference_Type()
+	{
+		return (EReference)xSynonymTypeReferenceEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getXDelegateTypeReference()
+	{
+		return xDelegateTypeReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXDelegateTypeReference_Delegate()
+	{
+		return (EReference)xDelegateTypeReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public XtypeFactory getXtypeFactory()
 	{
 		return (XtypeFactory)getEFactoryInstance();
@@ -177,6 +243,13 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 		xFunctionTypeRefEClass = createEClass(XFUNCTION_TYPE_REF);
 		createEReference(xFunctionTypeRefEClass, XFUNCTION_TYPE_REF__PARAM_TYPES);
 		createEReference(xFunctionTypeRefEClass, XFUNCTION_TYPE_REF__RETURN_TYPE);
+
+		xSynonymTypeReferenceEClass = createEClass(XSYNONYM_TYPE_REFERENCE);
+		createEReference(xSynonymTypeReferenceEClass, XSYNONYM_TYPE_REFERENCE__SYNONYMES);
+		createEReference(xSynonymTypeReferenceEClass, XSYNONYM_TYPE_REFERENCE__TYPE);
+
+		xDelegateTypeReferenceEClass = createEClass(XDELEGATE_TYPE_REFERENCE);
+		createEReference(xDelegateTypeReferenceEClass, XDELEGATE_TYPE_REFERENCE__DELEGATE);
 	}
 
 	/**
@@ -212,11 +285,22 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 
 		// Add supertypes to classes
 		xFunctionTypeRefEClass.getESuperTypes().add(theTypesPackage.getJvmParameterizedTypeReference());
+		xSynonymTypeReferenceEClass.getESuperTypes().add(theTypesPackage.getJvmTypeReference());
+		xDelegateTypeReferenceEClass.getESuperTypes().add(theTypesPackage.getJvmTypeReference());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(xFunctionTypeRefEClass, XFunctionTypeRef.class, "XFunctionTypeRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXFunctionTypeRef_ParamTypes(), theTypesPackage.getJvmTypeReference(), null, "paramTypes", null, 0, -1, XFunctionTypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXFunctionTypeRef_ReturnType(), theTypesPackage.getJvmTypeReference(), null, "returnType", null, 0, 1, XFunctionTypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(xSynonymTypeReferenceEClass, XSynonymTypeReference.class, "XSynonymTypeReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getXSynonymTypeReference_Synonymes(), theTypesPackage.getJvmTypeReference(), null, "synonymes", null, 0, -1, XSynonymTypeReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXSynonymTypeReference_Type(), theTypesPackage.getJvmType(), null, "type", null, 0, 1, XSynonymTypeReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(xSynonymTypeReferenceEClass, theTypesPackage.getJvmTypeReference(), "getPrimaryType", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(xDelegateTypeReferenceEClass, XDelegateTypeReference.class, "XDelegateTypeReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getXDelegateTypeReference_Delegate(), theTypesPackage.getJvmTypeReference(), null, "delegate", null, 0, 1, XDelegateTypeReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

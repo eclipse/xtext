@@ -86,6 +86,16 @@ public class XtypeAdapterFactory extends AdapterFactoryImpl
 				return createXFunctionTypeRefAdapter();
 			}
 			@Override
+			public Adapter caseXSynonymTypeReference(XSynonymTypeReference object)
+			{
+				return createXSynonymTypeReferenceAdapter();
+			}
+			@Override
+			public Adapter caseXDelegateTypeReference(XDelegateTypeReference object)
+			{
+				return createXDelegateTypeReferenceAdapter();
+			}
+			@Override
 			public Adapter caseJvmTypeReference(JvmTypeReference object)
 			{
 				return createJvmTypeReferenceAdapter();
@@ -128,6 +138,36 @@ public class XtypeAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createXFunctionTypeRefAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtype.XSynonymTypeReference <em>XSynonym Type Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xtype.XSynonymTypeReference
+	 * @generated
+	 */
+	public Adapter createXSynonymTypeReferenceAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtype.XDelegateTypeReference <em>XDelegate Type Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xtype.XDelegateTypeReference
+	 * @generated
+	 */
+	public Adapter createXDelegateTypeReferenceAdapter()
 	{
 		return null;
 	}
