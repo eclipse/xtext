@@ -86,7 +86,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 
 	@Inject
 	private TypesFactory factory;
-
+	
 	@Inject
 	private FeatureCallToJavaMapping featureCall2javaMapping;
 
@@ -603,6 +603,14 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 
 	protected JvmTypeReference _type(XStringLiteral object, boolean rawType) {
 		return getTypeReferences().getTypeForName(String.class, object);
+//		if (object.getValue().length() != 1)
+//			return getTypeReferences().getTypeForName(String.class, object);
+//		JvmTypeReference stringType = getTypeReferences().getTypeForName(String.class, object);
+//		JvmTypeReference charType = getTypeReferences().getTypeForName(Character.TYPE, object);
+//		XSynonymTypeReference result = xtypesFactory.createXSynonymTypeReference();
+//		result.getSynonymes().add(stringType);
+//		result.getSynonymes().add(charType);
+//		return result;
 	}
 
 	protected JvmTypeReference _type(XClosure object, boolean rawType) {
