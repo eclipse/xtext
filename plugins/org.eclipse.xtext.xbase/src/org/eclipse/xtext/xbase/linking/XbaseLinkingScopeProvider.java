@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.impl.IDelegatingScopeProvider;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 
@@ -20,7 +21,7 @@ import com.google.inject.Provider;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class XbaseLinkingScopeProvider implements IScopeProvider {
+public class XbaseLinkingScopeProvider implements IDelegatingScopeProvider {
 	
 	@Inject
 	private IScopeProvider delegate;
@@ -55,5 +56,9 @@ public class XbaseLinkingScopeProvider implements IScopeProvider {
 		final FeatureCallChecker predicate = featureCallCheckerProvider.get();
 		predicate.initialize(context, reference);
 		return predicate;
+	}
+
+	public IScopeProvider getDelegate() {
+		return delegate;
 	}
 }

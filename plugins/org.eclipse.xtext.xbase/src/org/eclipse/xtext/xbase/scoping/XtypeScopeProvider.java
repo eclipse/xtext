@@ -15,14 +15,16 @@ import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
+import org.eclipse.xtext.scoping.impl.IDelegatingScopeProvider;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
 /**
+ * TODO: What the purpose of this class, especially of the implementation of #getScope? 
  * @author Sven Efftinge - Initial contribution and API
  */
-public class XtypeScopeProvider extends AbstractScopeProvider {
+public class XtypeScopeProvider extends AbstractScopeProvider implements IDelegatingScopeProvider {
 
 	public IScope getScope(EObject context, EReference reference) {
 		if (reference == TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE) {
