@@ -21,8 +21,8 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
-import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractGlobalScopeDelegatingScopeProvider;
+import org.eclipse.xtext.scoping.impl.IDelegatingScopeProvider;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -70,9 +70,9 @@ public class DefaultLinkingService extends AbstractLinkingService {
 		if (scopeProvider instanceof AbstractGlobalScopeDelegatingScopeProvider) {
 			AbstractGlobalScopeDelegatingScopeProvider provider = (AbstractGlobalScopeDelegatingScopeProvider) scopeProvider;
 			provider.setWrapper(null);
-		} else if (scopeProvider instanceof AbstractDeclarativeScopeProvider) {
-			AbstractDeclarativeScopeProvider declarativeScopeProvider = (AbstractDeclarativeScopeProvider) scopeProvider;
-			unRegisterImportedNamesAdapter(declarativeScopeProvider.getDelegate());
+		} else if (scopeProvider instanceof IDelegatingScopeProvider) {
+			IDelegatingScopeProvider delegatingScopeProvider = (IDelegatingScopeProvider) scopeProvider;
+			unRegisterImportedNamesAdapter(delegatingScopeProvider.getDelegate());
 		}
 	}
 
@@ -85,9 +85,9 @@ public class DefaultLinkingService extends AbstractLinkingService {
 			AbstractGlobalScopeDelegatingScopeProvider provider = (AbstractGlobalScopeDelegatingScopeProvider) scopeProvider;
 			ImportedNamesAdapter adapter = getImportedNamesAdapter(context);
 			provider.setWrapper(adapter);
-		} else if (scopeProvider instanceof AbstractDeclarativeScopeProvider) {
-			AbstractDeclarativeScopeProvider declarativeScopeProvider = (AbstractDeclarativeScopeProvider) scopeProvider;
-			registerImportedNamesAdapter(declarativeScopeProvider.getDelegate(), context);
+		} else if (scopeProvider instanceof IDelegatingScopeProvider) {
+			IDelegatingScopeProvider delegatingScopeProvider = (IDelegatingScopeProvider) scopeProvider;
+			registerImportedNamesAdapter(delegatingScopeProvider.getDelegate(), context);
 		}
 	}
 
