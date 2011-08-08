@@ -57,7 +57,7 @@ import com.google.inject.name.Named;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
-public abstract class AbstractDeclarativeScopeProvider extends AbstractScopeProvider {
+public abstract class AbstractDeclarativeScopeProvider extends AbstractScopeProvider implements IDelegatingScopeProvider {
 	
 	public final static String NAMED_DELEGATE = "org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.delegate";
 	public final static String NAMED_ERROR_HANDLER = "org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.errorHandler";
