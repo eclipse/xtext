@@ -386,4 +386,56 @@ public class Strings {
 		}
 		return original;
 	}
+	
+	/**
+	 * @since 2.1
+	 */
+	public static String wordWrap(String string, int maxCharsPerLine) {
+		StringBuilder document = new StringBuilder();
+		StringBuilder line = new StringBuilder();
+		StringBuilder word = new StringBuilder();
+		StringBuilder ws = new StringBuilder();
+		for (int i = 0; i < string.length(); i++) {
+			char c = string.charAt(i);
+			if (c == '\n') {
+				line.append(ws);
+				line.append(word);
+				line.append("\n");
+				document.append(line);
+				line = new StringBuilder();
+				word = new StringBuilder();
+				ws = new StringBuilder();
+			} else if (Character.isWhitespace(c)) {
+				if (line.length() + word.length() + 1 > maxCharsPerLine) {
+					line.append("\n");
+					document.append(line);
+					line = new StringBuilder();
+					line.append(word);
+					word = new StringBuilder();
+					ws = new StringBuilder();
+					ws.append(c);
+				} else if (word.length() == 0) {
+					ws.append(c);
+				} else {
+					line.append(ws);
+					line.append(word);
+					word = new StringBuilder();
+					ws = new StringBuilder();
+					ws.append(c);
+				}
+			} else {
+				word.append(c);
+			}
+		}
+		if (line.length() + word.length() + 1 > maxCharsPerLine) {
+			document.append(line);
+			document.append("\n");
+			document.append(word);
+		} else {
+			document.append(line);
+			document.append(ws);
+			document.append(word);
+		}
+		return document.toString();
+	}
 }
