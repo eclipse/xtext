@@ -4,12 +4,11 @@
 package org.eclipse.xtext.example.fowlerdsl.generator
 
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtext.generator.IGenerator
-import org.eclipse.xtext.generator.IFileSystemAccess
-import org.eclipse.xtext.example.fowlerdsl.statemachine.Statemachine
-import org.eclipse.xtext.example.fowlerdsl.statemachine.Event
 import org.eclipse.xtext.example.fowlerdsl.statemachine.Command
 import org.eclipse.xtext.example.fowlerdsl.statemachine.State
+import org.eclipse.xtext.example.fowlerdsl.statemachine.Statemachine
+import org.eclipse.xtext.generator.IFileSystemAccess
+import org.eclipse.xtext.generator.IGenerator
 
 class StatemachineGenerator implements IGenerator {
 	
