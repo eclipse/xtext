@@ -1,11 +1,14 @@
 package org.eclipse.xtext.generator.grammarAccess
 
-import org.eclipse.xtext.*
-import static extension org.eclipse.xtext.GrammarUtil.*
-import org.eclipse.xtext.generator.GrammarAccessUtil
-import org.eclipse.xtext.generator.Naming
-import org.eclipse.emf.ecore.EObject
 import com.google.inject.Inject
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.AbstractElement
+import org.eclipse.xtext.AbstractRule
+import org.eclipse.xtext.Grammar
+import org.eclipse.xtext.TypeRef
+import org.eclipse.xtext.generator.Naming
+
+import static extension org.eclipse.xtext.GrammarUtil.*
 
 // ******************************************************************************
 // ***  this API can be used by other templates to generate code             ****

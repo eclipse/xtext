@@ -1,11 +1,11 @@
 package org.eclipse.xtext.purexbase.jvmmodel
- 
-import org.eclipse.xtext.xbase.jvmmodel.*
+
+import com.google.inject.Inject
 import java.util.List
-import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.common.types.JvmDeclaredType
-import com.google.inject.Inject
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer
 
 /**
  * Infers a JVM model from the source model. 

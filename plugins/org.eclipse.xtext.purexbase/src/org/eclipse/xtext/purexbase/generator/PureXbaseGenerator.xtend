@@ -1,14 +1,14 @@
 package org.eclipse.xtext.purexbase.generator
 
-import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtext.generator.IGenerator
-import org.eclipse.xtext.generator.IFileSystemAccess
-import org.eclipse.xtext.xbase.compiler.XbaseCompiler
-import org.eclipse.xtext.purexbase.pureXbase.Model
-import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable
-import org.eclipse.xtext.xbase.compiler.ImportManager
-import org.eclipse.xtext.common.types.util.TypeReferences
 import com.google.inject.Inject
+import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtext.common.types.util.TypeReferences
+import org.eclipse.xtext.generator.IFileSystemAccess
+import org.eclipse.xtext.generator.IGenerator
+import org.eclipse.xtext.purexbase.pureXbase.Model
+import org.eclipse.xtext.xbase.compiler.ImportManager
+import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable
+import org.eclipse.xtext.xbase.compiler.XbaseCompiler
 
 class PureXbaseGenerator implements IGenerator {
 	

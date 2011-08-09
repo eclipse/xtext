@@ -7,17 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.annotations.compiler
 
+import org.eclipse.xtext.util.Strings
+import org.eclipse.xtext.xbase.XBooleanLiteral
+import org.eclipse.xtext.xbase.XFeatureCall
+import org.eclipse.xtext.xbase.XIntLiteral
+import org.eclipse.xtext.xbase.XStringLiteral
+import org.eclipse.xtext.xbase.XTypeLiteral
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueBinaryOperation
-import org.eclipse.xtext.xbase.XFeatureCall
-import org.eclipse.xtext.xbase.XStringLiteral
-import org.eclipse.xtext.xbase.XBooleanLiteral
-import org.eclipse.xtext.xbase.XIntLiteral
-import org.eclipse.xtext.xbase.XTypeLiteral
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray
 import org.eclipse.xtext.xbase.compiler.IAppendable
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair
-import org.eclipse.xtext.util.Strings
 
 /**
  * 

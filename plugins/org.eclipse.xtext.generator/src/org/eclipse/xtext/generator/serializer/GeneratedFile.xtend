@@ -1,8 +1,8 @@
 package org.eclipse.xtext.generator.serializer
 
+import com.google.inject.Inject
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.generator.Naming
-import com.google.inject.Inject
 
 class GeneratedFile {
 	

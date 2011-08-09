@@ -1,33 +1,25 @@
 package org.eclipse.xtext.generator.serializer
 
-import org.eclipse.xtext.generator.grammarAccess.GrammarAccess
-import java.util.List
-import org.eclipse.xtext.AbstractElement
-import org.eclipse.xtext.Group
-import org.eclipse.xtext.Alternatives
-import org.eclipse.xtext.Keyword
-import org.eclipse.xtext.Grammar
-import static extension org.eclipse.xtext.GrammarUtil.*
-import org.eclipse.xtext.generator.serializer.SemanticSequencerUtil.*
-import org.eclipse.emf.ecore.EPackage
-import org.eclipse.emf.ecore.EClass
-import com.google.common.collect.Lists
-import java.util.Map
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider
-import org.eclipse.emf.ecore.EcorePackage
 import com.google.inject.Inject
-import org.eclipse.xtext.AbstractRule
-import org.eclipse.xtext.AbstractElement
+import java.util.List
 import java.util.Set
-import org.eclipse.xtext.RuleCall
-import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.AbstractElement
+import org.eclipse.xtext.AbstractRule
+import org.eclipse.xtext.Alternatives
+import org.eclipse.xtext.Grammar
+import org.eclipse.xtext.Group
 import org.eclipse.xtext.IGrammarAccess
-import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider$ISynTransition
-import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider$ISynNavigable
-import org.eclipse.xtext.util.Strings
-import org.eclipse.xtext.serializer.analysis.GrammarAlias$AbstractElementAlias
+import org.eclipse.xtext.Keyword
+import org.eclipse.xtext.RuleCall
+import org.eclipse.xtext.generator.grammarAccess.GrammarAccess
+import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtext.serializer.analysis.GrammarAlias
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider
+import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer
+import org.eclipse.xtext.util.Strings
+
+import static extension org.eclipse.xtext.GrammarUtil.*
 
 class AbstractSyntacticSequencer extends GeneratedFile {
 	
