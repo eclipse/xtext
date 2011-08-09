@@ -115,6 +115,10 @@ public class OrganizeImports {
 		return xtendFile;
 	}
 
+	
+	/*
+	 * TODO traverse generically and use qualified name provider. 
+	 */
 	public void collectAllReferences(XtextResource resource, ReferenceAcceptor acceptor) {
 		XtendFile xtendFile = getXtendFile(resource);
 		TreeIterator<EObject> contents = EcoreUtil.getAllContents(xtendFile, true);

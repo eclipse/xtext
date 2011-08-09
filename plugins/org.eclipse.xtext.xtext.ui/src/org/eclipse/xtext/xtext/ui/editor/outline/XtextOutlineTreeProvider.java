@@ -59,7 +59,7 @@ public class XtextOutlineTreeProvider extends DefaultOutlineTreeProvider {
 
 	protected StyledString getReturnTypeText(AbstractRule rule) {
 		StringBuilder typeName = new StringBuilder(NAME_TYPE_SEPARATOR);
-		if (rule.getType() != null && rule.getType().getClassifier() != null) {
+		if (rule.getType() != null && rule.getType().getClassifier() != null && rule.getType().getMetamodel() != null) {
 			String alias = rule.getType().getMetamodel().getAlias();
 			if (alias != null) {
 				typeName.append(alias);
