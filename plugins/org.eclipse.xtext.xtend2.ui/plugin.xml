@@ -264,6 +264,10 @@
             description="Inserts an closing french quote"
             id="org.eclipse.xtext.xtend2.ui.insertRightGuillemet"
             name="Insert right guillemet"/>
+   	  <command
+            description="Organize Imports"
+            id="org.eclipse.xtext.xbase.ui.organizeImports"
+            name="Organize Imports"/>
    </extension>
    <extension
          point="org.eclipse.ui.bindings">
@@ -290,6 +294,12 @@
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M4+&gt;"
             commandId="org.eclipse.xtext.xtend2.ui.insertRightGuillemet">
+      </key>
+      <key
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+M2+O"
+            commandId="org.eclipse.xtext.xbase.ui.organizeImports">
       </key>
 <!--
       <key
@@ -320,6 +330,15 @@
       <handler
             class="org.eclipse.xtext.xtend2.ui.edit.InsertStringHandler$RightGuillemet"
             commandId="org.eclipse.xtext.xtend2.ui.insertRightGuillemet">
+           	<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtext.xtend2.Xtend2.Editor.opened">
+				</reference>
+			</activeWhen>
+      </handler>
+      <handler
+            class="org.eclipse.xtext.xtend2.ui.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.xtend2.ui.edit.OrganizeImportsHandler"
+            commandId="org.eclipse.xtext.xbase.ui.organizeImports">
            	<activeWhen>
 				<reference
 					definitionId="org.eclipse.xtext.xtend2.Xtend2.Editor.opened">
