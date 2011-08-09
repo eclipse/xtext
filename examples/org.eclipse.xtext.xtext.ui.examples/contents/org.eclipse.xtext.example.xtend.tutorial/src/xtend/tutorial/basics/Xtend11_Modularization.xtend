@@ -1,11 +1,7 @@
 package xtend.tutorial.basics
 
-import junit.framework.TestCase
-import com.google.inject.Guice
-import junit.framework.Assert
-import xtend.tutorial.util.Person
-import xtend.tutorial.util.XtendModule
 import com.google.inject.Inject
+import xtend.tutorial.util.Person
 
 class Xtend11_Modularization {
 	

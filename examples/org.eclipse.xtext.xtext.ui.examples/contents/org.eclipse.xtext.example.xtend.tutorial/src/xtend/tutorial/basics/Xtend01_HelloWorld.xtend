@@ -1,11 +1,7 @@
 package xtend.tutorial.basics
 
-/*
- * The classical hello world example
- */
-import junit.framework.TestCase
-import org.junit.Test$None
 import junit.framework.Assert
+import junit.framework.TestCase
 
 class Xtend01_HelloWorld extends TestCase {
 	

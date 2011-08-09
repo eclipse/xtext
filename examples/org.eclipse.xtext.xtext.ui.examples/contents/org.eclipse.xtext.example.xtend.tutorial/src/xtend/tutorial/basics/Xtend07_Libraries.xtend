@@ -1,10 +1,10 @@
 package xtend.tutorial.basics
 
+import junit.framework.TestCase
+
 /**
  * Xbase and Xtend come with libraies which are implicitly on the scope.
  */
-import junit.framework.TestCase
-
 class Xtend07_Libraries extends TestCase {
 	
 	def void testCollectionLiterals() {

@@ -1,10 +1,7 @@
 package xtend.tutorial.basics
 
-import xtend.tutorial.util.Person
-import java.util.Set
-import org.eclipse.xtext.xbase.lib.Pair
-import junit.framework.TestCase
 import junit.framework.Assert
+import junit.framework.TestCase
 import xtend.tutorial.util.NetNode
 
 /**
