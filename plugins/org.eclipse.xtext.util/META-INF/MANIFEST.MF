@@ -3,12 +3,13 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-Localization: plugin
 Bundle-SymbolicName: org.eclipse.xtext.util
-Bundle-Version: 2.0.1.qualifier
+Bundle-Version: 2.1.0.qualifier
 Bundle-Vendor: %providerName
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.util,
  org.eclipse.xtext.util.concurrent,
- org.eclipse.xtext.util.formallang;x-friends:="org.eclipse.xtext,org.eclipse.xtext.tests"
+ org.eclipse.xtext.util.formallang;x-friends:="org.eclipse.xtext,org.eclipse.xtext.tests",
+ org.eclipse.xtext.util.internal;x-friends:="org.eclipse.xtext,org.eclipse.xtext.tests,org.eclipse.xtext.junit4"
 Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.3.2",
  com.google.collect;bundle-version="1.0.0";visibility:=reexport,
  com.google.inject;bundle-version="2.0.0";visibility:=reexport
