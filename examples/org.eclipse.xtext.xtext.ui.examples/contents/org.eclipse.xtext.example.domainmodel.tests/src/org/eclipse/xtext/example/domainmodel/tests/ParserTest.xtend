@@ -1,16 +1,16 @@
 package org.eclipse.xtext.example.domainmodel.tests
 
-import org.junit.runner.RunWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.InjectWith
 import com.google.inject.Inject
-import org.junit.Test
-import org.eclipse.xtext.junit4.util.ParseHelper
-import org.eclipse.xtext.example.domainmodel.domainmodel.DomainModel
-import org.eclipse.xtext.example.domainmodel.domainmodel.PackageDeclaration
 import junit.framework.Assert
+import org.eclipse.xtext.example.domainmodel.domainmodel.DomainModel
 import org.eclipse.xtext.example.domainmodel.domainmodel.Entity
+import org.eclipse.xtext.example.domainmodel.domainmodel.PackageDeclaration
 import org.eclipse.xtext.example.domainmodel.domainmodel.Property
+import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.junit4.util.ParseHelper
+import org.junit.Test
+import org.junit.runner.RunWith
 
 @org.junit.runner.RunWith(typeof(XtextRunner))
 @InjectWith(typeof(InjectorProviderCustom))

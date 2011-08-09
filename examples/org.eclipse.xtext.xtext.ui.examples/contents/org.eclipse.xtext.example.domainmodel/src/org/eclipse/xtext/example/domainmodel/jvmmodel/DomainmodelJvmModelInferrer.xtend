@@ -7,15 +7,23 @@
  *******************************************************************************/
 package org.eclipse.xtext.example.domainmodel.jvmmodel
 
-import org.eclipse.xtext.example.domainmodel.domainmodel.*
-import org.eclipse.xtext.example.domainmodel.*
-import org.eclipse.xtext.xbase.jvmmodel.*
-import org.eclipse.emf.ecore.*
-import org.eclipse.xtext.common.types.*
-import org.eclipse.xtext.common.types.util.*
-import static org.eclipse.xtext.common.types.*
-import java.util.*
 import com.google.inject.Inject
+import java.util.List
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.common.types.JvmDeclaredType
+import org.eclipse.xtext.common.types.JvmGenericType
+import org.eclipse.xtext.common.types.JvmVisibility
+import org.eclipse.xtext.common.types.TypesFactory
+import org.eclipse.xtext.example.domainmodel.DomainmodelExtensions
+import org.eclipse.xtext.example.domainmodel.domainmodel.DomainModel
+import org.eclipse.xtext.example.domainmodel.domainmodel.Entity
+import org.eclipse.xtext.example.domainmodel.domainmodel.Import
+import org.eclipse.xtext.example.domainmodel.domainmodel.Operation
+import org.eclipse.xtext.example.domainmodel.domainmodel.PackageDeclaration
+import org.eclipse.xtext.example.domainmodel.domainmodel.Property
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer
+
 import static org.eclipse.xtext.EcoreUtil2.*
 
 class DomainmodelJvmModelInferrer implements IJvmModelInferrer {

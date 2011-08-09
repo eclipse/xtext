@@ -9,7 +9,7 @@ package org.eclipse.xtext.example.domainmodel
 
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.common.types.JvmDeclaredType
-import org.eclipse.xtext.example.domainmodel.domainmodel.*
+import org.eclipse.xtext.example.domainmodel.domainmodel.PackageDeclaration
 
 class DomainmodelExtensions {
 	

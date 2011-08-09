@@ -7,12 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.example.domainmodel.generator
 
-import org.eclipse.xtext.example.domainmodel.*
-import org.eclipse.xtext.example.domainmodel.domainmodel.*
-import org.eclipse.emf.ecore.*
-import org.eclipse.xtext.common.types.*
-import java.util.Set
-import org.eclipse.xtext.xbase.compiler.*
+import org.eclipse.xtext.common.types.JvmGenericType
+import org.eclipse.xtext.common.types.JvmTypeReference
+import org.eclipse.xtext.example.domainmodel.DomainmodelExtensions
+import org.eclipse.xtext.example.domainmodel.domainmodel.Entity
+import org.eclipse.xtext.example.domainmodel.domainmodel.Operation
+import org.eclipse.xtext.xbase.compiler.ImportManager
 
 
 class GeneratorExtensions extends DomainmodelExtensions {

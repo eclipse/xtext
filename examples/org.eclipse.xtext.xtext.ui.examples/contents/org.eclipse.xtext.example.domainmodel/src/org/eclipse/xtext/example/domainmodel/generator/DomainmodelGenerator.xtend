@@ -7,15 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.example.domainmodel.generator
 
-import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtext.generator.IGenerator
-import org.eclipse.xtext.generator.IFileSystemAccess
-import org.eclipse.xtext.xbase.compiler.*
-import org.eclipse.xtext.xbase.*
-import org.eclipse.xtext.example.domainmodel.domainmodel.*
-import org.eclipse.xtext.common.types.*
-import java.util.*
 import com.google.inject.Inject
+import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtext.example.domainmodel.domainmodel.Entity
+import org.eclipse.xtext.example.domainmodel.domainmodel.Operation
+import org.eclipse.xtext.example.domainmodel.domainmodel.Property
+import org.eclipse.xtext.generator.IFileSystemAccess
+import org.eclipse.xtext.generator.IGenerator
+import org.eclipse.xtext.xbase.compiler.ImportManager
+
 import static extension org.eclipse.xtext.xtend2.lib.ResourceExtensions.*
 
 class DomainmodelGenerator implements IGenerator {
