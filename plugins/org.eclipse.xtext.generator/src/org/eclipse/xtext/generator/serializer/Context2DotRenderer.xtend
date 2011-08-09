@@ -1,14 +1,14 @@
-package org.eclipse.xtext.generator.serializer 
+package org.eclipse.xtext.generator.serializer
 
-import org.eclipse.xtext.xbase.lib.Pair
-import org.eclipse.xtext.util.GraphvizDotBuilder
+import com.google.inject.Inject
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.generator.Naming
 import org.eclipse.xtext.serializer.analysis.Context2NameFunction
-import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider$SequencerPDAContext
-import com.google.inject.Inject
 import org.eclipse.xtext.serializer.analysis.IContextProvider
+import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider
+import org.eclipse.xtext.util.GraphvizDotBuilder
+import org.eclipse.xtext.xbase.lib.Pair
 
 class Context2DotRenderer { 
 	
