@@ -10,28 +10,31 @@ package org.eclipse.xtext.junit4.parameterized;
 import static org.eclipse.xtext.util.Exceptions.*;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.junit4.IInjectorProvider;
 import org.eclipse.xtext.junit4.IRegistryConfigurator;
 import org.eclipse.xtext.junit4.InjectWith;
+import org.eclipse.xtext.junit4.parameterized.IParameterProvider.IParameterAcceptor;
 import org.eclipse.xtext.junit4.parameterized.ParameterizedXtextRunner.ResourceRunner;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.Exceptions;
-import org.eclipse.xtext.util.IAcceptor;
-import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.ReflectionUtil;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.util.internal.FormattingMigrator;
 import org.junit.Assert;
 import org.junit.ComparisonFailure;
 import org.junit.Test;
 import org.junit.runner.Description;
+import org.junit.runner.manipulation.Filter;
+import org.junit.runner.manipulation.NoTestsRemainException;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.ParentRunner;
@@ -51,23 +54,46 @@ public class ParameterizedXtextRunner extends ParentRunner<ResourceRunner> {
 
 	protected static class ParameterSetRunner {
 		protected Description description;
+		protected String expectation;
+		protected boolean ignore;
 		protected int index = -1;
-		protected FrameworkMethod method;
+		protected String methodName;
 		protected Object[] params;
 		protected ResourceRunner runner;
+		protected String title;
 
 		public Description getDescription() {
 			if (description == null)
-				description = Description.createTestDescription(runner.clazz.getJavaClass(), getTitle());
+				description = Description.createTestDescription(runner.clazz.getJavaClass(), getFullTitle());
 			return description;
+		}
+
+		public String getExpectation() {
+			return expectation;
+		}
+
+		public String getFullTitle() {
+			StringBuilder result = new StringBuilder();
+			result.append(methodName);
+			if (!Strings.isEmpty(title)) {
+				result.append(" ");
+				result.append(title);
+			}
+			if (index > -1) {
+				result.append("#");
+				result.append(index);
+			}
+			result.append(" - ");
+			result.append(runner.resource.getURI().lastSegment());
+			return result.toString();
 		}
 
 		public IInjectorProvider getInjectorProvider() {
 			return runner.injectorProvider;
 		}
 
-		public FrameworkMethod getMethod() {
-			return method;
+		public String getMethdoName() {
+			return methodName;
 		}
 
 		public Object[] getParams() {
@@ -78,23 +104,23 @@ public class ParameterizedXtextRunner extends ParentRunner<ResourceRunner> {
 			return runner.clazz.getJavaClass();
 		}
 
-		public String getTitle() {
-			String name = method == null ? "" : method.getName();
-			if (index > -1)
-				name = name + ":" + index;
-			name = name + ": " + runner.resource.getURI().lastSegment();
-			return name;
+		public void init(ResourceRunner runner, String title, String method, Object[] params, String expectation,
+				boolean ignore) {
+			this.runner = runner;
+			this.title = title;
+			this.methodName = method;
+			this.params = params;
+			this.expectation = expectation;
+			this.ignore = ignore;
 		}
 
-		public void init(ResourceRunner runner, FrameworkMethod method, Object[] params) {
-			this.runner = runner;
-			this.method = method;
-			this.params = params;
+		public boolean isIgnore() {
+			return ignore;
 		}
 
 	}
 
-	protected static class ResourceRunner {
+	protected static class ResourceRunner implements IParameterAcceptor {
 		protected TestClass clazz;
 		protected Description description;
 		protected IInjectorProvider injectorProvider;
@@ -102,41 +128,23 @@ public class ParameterizedXtextRunner extends ParentRunner<ResourceRunner> {
 		protected XtextResource resource;
 		protected ResourceSet resourceSet;
 
-		protected boolean acceptParameterSet(Pair<String, Object[]> t) {
-			ParameterSetRunner runner = injectorProvider.getInjector().getInstance(ParameterSetRunner.class);
-			FrameworkMethod method = findTestMethod(t.getFirst());
-			runner.init(this, method, t.getSecond());
-			return parameterSets.add(runner);
+		public void acceptImportURI(URI uri) {
+			resourceSet.getResource(uri, true);
 		}
 
-		protected void acceptTestClass(Class<?> t) {
+		public void acceptTest(String title, String method, Object[] params, String expectation, boolean ignore) {
+			ParameterSetRunner runner = injectorProvider.getInjector().getInstance(ParameterSetRunner.class);
+			runner.init(this, title, method, params, expectation, ignore);
+			parameterSets.add(runner);
+		}
+
+		public void acceptTestClass(Class<?> t) {
 			Assert.assertEquals(clazz, t);
 		}
 
 		protected void collectParameters() {
 			IParameterProvider parameterProvider = injectorProvider.getInjector().getInstance(IParameterProvider.class);
-			parameterProvider.collectParameters(resource, new IAcceptor<URI>() {
-				public void accept(URI t) {
-					importURI(t);
-				}
-			}, new IAcceptor<Class<?>>() {
-				public void accept(Class<?> t) {
-					acceptTestClass(t);
-				}
-
-			}, new IAcceptor<Pair<String, Object[]>>() {
-				public void accept(Pair<String, Object[]> t) {
-					acceptParameterSet(t);
-				}
-			});
-		}
-
-		protected FrameworkMethod findTestMethod(String name) {
-			for (FrameworkMethod meth : clazz.getAnnotatedMethods(Test.class))
-				if (meth.getName().equals(name) && meth.getMethod().getParameterTypes().length == 0
-						&& !Modifier.isStatic(meth.getMethod().getModifiers()))
-					return meth;
-			return null;
+			parameterProvider.collectParameters(resource, this);
 		}
 
 		public Description getDescription() {
@@ -152,10 +160,6 @@ public class ParameterizedXtextRunner extends ParentRunner<ResourceRunner> {
 			return parameterSets;
 		}
 
-		protected void importURI(URI uri) {
-			resourceSet.getResource(uri, true);
-		}
-
 		public void init(TestClass clazz, IInjectorProvider injector, URI uri) {
 			this.clazz = clazz;
 			this.injectorProvider = injector;
@@ -166,29 +170,33 @@ public class ParameterizedXtextRunner extends ParentRunner<ResourceRunner> {
 		}
 
 		protected void setIndex() {
-			Set<Method> visited = Sets.newHashSet();
-			Set<Method> duplicate = Sets.newHashSet();
+			Set<String> visited = Sets.newHashSet();
+			Set<String> duplicate = Sets.newHashSet();
 			for (ParameterSetRunner r : getParameterSets())
-				if (!visited.add(r.method.getMethod()))
-					duplicate.add(r.method.getMethod());
-			Map<Method, Integer> counter = Maps.newHashMap();
+				if (!visited.add(r.getFullTitle()))
+					duplicate.add(r.getFullTitle());
+			Map<String, Integer> counter = Maps.newHashMap();
 			for (ParameterSetRunner r : getParameterSets())
-				if (duplicate.contains(r.method.getMethod())) {
-					Integer count = counter.get(r.method.getMethod());
+				if (duplicate.contains(r.getFullTitle())) {
+					String title = r.getFullTitle();
+					Integer count = counter.get(title);
 					if (count == null)
 						count = 1;
 					else
 						count++;
-					counter.put(r.method.getMethod(), count);
+					counter.put(title, count);
 					r.index = count;
 				}
 		}
-
 	}
 
 	private static Map<Class<?>, IInjectorProvider> injectorProviderClassCache = Maps.newHashMap();
 
+	protected static final Pattern WS = Pattern.compile("\\s+", Pattern.MULTILINE);
+
 	protected List<ResourceRunner> children;
+
+	protected Filter filter = null;
 
 	public ParameterizedXtextRunner(Class<?> testClass) throws InitializationError {
 		super(testClass);
@@ -212,19 +220,34 @@ public class ParameterizedXtextRunner extends ParentRunner<ResourceRunner> {
 		return child.getDescription();
 	}
 
-	protected Constructor<?> findConstructor(Class<?> clazz, Object[] params) {
-		ROOT: for (Constructor<?> candidate : clazz.getConstructors())
+	@Override
+	public void filter(Filter filter) throws NoTestsRemainException {
+		super.filter(filter);
+		this.filter = filter;
+	}
+
+	protected Constructor<?> findConstructor(Object[] params) {
+		ROOT: for (Constructor<?> candidate : getTestClass().getJavaClass().getConstructors())
 			if (candidate.getParameterTypes().length == params.length) {
 				for (int i = 0; i < params.length; i++)
-					if (!candidate.getParameterTypes()[i].isInstance(params[i]))
+					if (params[i] != null
+							&& !ReflectionUtil.getObjectType(candidate.getParameterTypes()[i]).isInstance(params[i]))
 						continue ROOT;
 				return candidate;
 			}
 		List<String> types = Lists.newArrayList();
 		for (Object p : params)
-			types.add(p.getClass().getName());
-		throw new RuntimeException("No valid constructor found in class " + clazz.getName() + " for types "
-				+ Joiner.on(", ").join(types));
+			types.add(p == null ? "?" : p.getClass().getName());
+		throw new RuntimeException("No valid constructor found in class " + getTestClass().getJavaClass().getName()
+				+ " for types " + Joiner.on(", ").join(types));
+	}
+
+	protected FrameworkMethod findTestMethod(String name) {
+		for (FrameworkMethod meth : getTestClass().getAnnotatedMethods(Test.class))
+			if (meth.getName().equals(name) && meth.getMethod().getParameterTypes().length == 0
+					&& !Modifier.isStatic(meth.getMethod().getModifiers()))
+				return meth;
+		throw new RuntimeException("Method @Test " + name + "() not found in " + getTestClass().getName());
 	}
 
 	@Override
@@ -286,53 +309,37 @@ public class ParameterizedXtextRunner extends ParentRunner<ResourceRunner> {
 
 	}
 
-	protected String migrate(String expected, String actual) {
-		String[] exp = expected.split("\\s|\\?\\?\\?");
-		int start = 0;
-		StringBuilder result = new StringBuilder();
-		for (String s : exp) {
-			int next = actual.indexOf(s, start);
-			if (next < 0) {
-				return expected;
-				//					result.append(expected.substring(start));
-				//					return result.toString();
-			} else {
-				result.append(actual.substring(start, next));
-				result.append(s);
-				start = next + s.length();
-			}
-		}
-		return result.toString();
-	}
-
 	protected void runChild(ParameterSetRunner ps) throws Throwable {
-		Constructor<?> constructor = findConstructor(ps.getTestClass(), ps.getParams());
+		FrameworkMethod method = findTestMethod(ps.getMethdoName());
+		Constructor<?> constructor = findConstructor(ps.getParams());
 		Object test = constructor.newInstance(ps.getParams());
 		if (ps.getInjectorProvider() instanceof IRegistryConfigurator)
 			((IRegistryConfigurator) ps.getInjectorProvider()).setupRegistry();
 		ps.getInjectorProvider().getInjector().injectMembers(test);
-		Object result = ps.getMethod().invokeExplosively(test);
+		Object result = method.invokeExplosively(test);
 		if (ps.getInjectorProvider() instanceof IRegistryConfigurator)
 			((IRegistryConfigurator) ps.getInjectorProvider()).restoreRegistry();
 		if (result != null) {
-			String exp = migrate(ps.getParams()[1].toString(), result.toString());
-			if (!exp.equals(result.toString()))
-				throw new ComparisonFailure("", exp, result.toString());
+			FormattingMigrator migrator = ps.getInjectorProvider().getInjector().getInstance(FormattingMigrator.class);
+			String actual = migrator.migrate(ps.getExpectation(), result.toString(), WS);
+			if (!actual.equals(ps.getExpectation()))
+				throw new ComparisonFailure("", ps.getExpectation(), actual);
 		}
 	}
 
 	@Override
 	protected void runChild(ResourceRunner arg0, RunNotifier notifier) {
 		for (ParameterSetRunner ps : arg0.getParameterSets())
-			if (ps.getMethod() == null)
-				notifier.fireTestIgnored(ps.getDescription());
-			else {
+			if (filter == null || filter.shouldRun(ps.getDescription())) {
 				notifier.fireTestStarted(ps.getDescription());
-				try {
-					runChild(ps);
-				} catch (Throwable e) {
-					notifier.fireTestFailure(new Failure(ps.getDescription(), e));
-				}
+				if (ps.isIgnore())
+					notifier.fireTestIgnored(ps.getDescription());
+				else
+					try {
+						runChild(ps);
+					} catch (Throwable e) {
+						notifier.fireTestFailure(new Failure(ps.getDescription(), e));
+					}
 				notifier.fireTestFinished(ps.getDescription());
 			}
 	}

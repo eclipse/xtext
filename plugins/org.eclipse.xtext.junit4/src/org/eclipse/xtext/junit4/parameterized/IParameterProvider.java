@@ -9,8 +9,6 @@ package org.eclipse.xtext.junit4.parameterized;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.util.IAcceptor;
-import org.eclipse.xtext.util.Pair;
 
 import com.google.inject.ImplementedBy;
 
@@ -20,7 +18,14 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(XpectParameterProvider.class)
 public interface IParameterProvider {
 
-	void collectParameters(XtextResource resource, IAcceptor<URI> importAcceptor, IAcceptor<Class<?>> testAcceptor,
-			IAcceptor<Pair<String, Object[]>> parameterAcceptor);
+	public interface IParameterAcceptor {
+		void acceptImportURI(URI uri);
+
+		void acceptTest(String title, String method, Object[] params, String expectation, boolean ignore);
+
+		void acceptTestClass(Class<?> clazz);
+	}
+
+	void collectParameters(XtextResource resource, IParameterAcceptor acceptor);
 
 }
