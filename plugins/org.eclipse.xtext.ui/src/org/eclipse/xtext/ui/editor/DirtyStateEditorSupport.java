@@ -31,6 +31,7 @@ import org.eclipse.swt.events.VerifyEvent;
 import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
@@ -248,6 +249,9 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	@Inject
 	private IConcurrentEditingCallback concurrentEditingWarningDialog;
 	
+	@Inject
+	private IResourceDescriptions resourceDescriptions;
+	
 	private volatile IDirtyStateEditorSupportClient currentClient;
 	
 	private volatile boolean isDirty;
@@ -336,6 +340,8 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 			throw new IllegalStateException("Was configured with another client or not configured at all."); //$NON-NLS-1$
 		dirtyStateManager.discardDirtyState(delegatingClientAwareResource);
 		isDirty = false;
+		IResourceDescription cleanDescription = resourceDescriptions.getResourceDescription(delegatingClientAwareResource.getURI());
+		dirtyResource.copyState(cleanDescription);
 	}
 	
 	public void descriptionsChanged(final IResourceDescription.Event event) {
