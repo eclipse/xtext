@@ -7,11 +7,11 @@
  *******************************************************************************/
 grammar org.eclipse.xtext.xtend2.Xtend2 with org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations
 
-import "platform:/resource/org.eclipse.xtext.xtend2/model/Xtend2.ecore"
-import "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore" as xbase
-import "platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore" as xtype
-import "platform:/resource/org.eclipse.xtext.xbase/model/XAnnotations.ecore" as annotations
-import "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore" as types
+import "http://www.eclipse.org/xtext/Xtend2"
+import "http://www.eclipse.org/xtext/xbase/Xbase" as xbase
+import "http://www.eclipse.org/xtext/xbase/Xtype" as xtype
+import "http://www.eclipse.org/Xtext/Xbase/XAnnotations" as annotations
+import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
 
 File returns XtendFile : 
     ('package' package=QualifiedName)?
