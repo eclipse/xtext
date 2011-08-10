@@ -474,7 +474,10 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 		for(AbstractMetamodelDeclaration metamodel: grammar.getMetamodelDeclarations()) {
 			EPackage available = metamodel.getEPackage();
 			if (classifierPackage == available) {
-				if (classifier != EcorePackage.Literals.ESTRING && (!Strings.isEmpty(metamodel.getAlias()) || !classifier.getName().equals(overrideMe.getName()))) {
+				EDataType eString = GrammarUtil.findEString(grammar);
+				if (eString == null)
+					eString = EcorePackage.Literals.ESTRING;
+				if (classifier != eString && (!Strings.isEmpty(metamodel.getAlias()) || !classifier.getName().equals(overrideMe.getName()))) {
 					newRuleFragment.append(" returns ");
 					if (!Strings.isEmpty(metamodel.getAlias())) {
 						newRuleFragment.append(metamodel.getAlias()).append("::");
@@ -486,7 +489,10 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 			}
 		}
 		if (!foundPack) {
-			if (classifier == EcorePackage.Literals.ESTRING) {
+			EDataType eString = GrammarUtil.findEString(grammar);
+			if (eString == null)
+				eString = EcorePackage.Literals.ESTRING;
+			if (classifier == eString) {
 				for(AbstractMetamodelDeclaration mm: GrammarUtil.allMetamodelDeclarations(grammar)) {
 					if (mm.getEPackage() == classifierPackage) {
 						foundPack = true;
