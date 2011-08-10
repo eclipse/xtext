@@ -281,7 +281,7 @@ public abstract class EClassifierInfo {
 								"configuration already exists in type '" + getEClass().getName() + "'.",
 						grammarElement);
 			
-			EClassifier compatibleType = EcoreUtil2.getCompatibleType(existingFeature.getEType(), newFeature.getEType());
+			EClassifier compatibleType = EcoreUtil2.getCompatibleType(existingFeature.getEType(), newFeature.getEType(), grammarElement);
 			if (compatibleType == null)
 				throw new TransformationException(TransformationErrorCode.NoCompatibleFeatureTypeAvailable,
 						"Cannot find compatible type for features", grammarElement);

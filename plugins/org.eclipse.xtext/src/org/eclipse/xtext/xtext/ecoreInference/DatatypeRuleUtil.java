@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext.ecoreInference;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractElement;
@@ -71,8 +72,15 @@ abstract class DatatypeRuleUtil extends XtextSwitch<Boolean>{
 				}
 				if (visitedRules.add(object)) {
 					Boolean result = object.getAlternatives() != null && doSwitch(object.getAlternatives());
-					if (result)
-						typeRef.setClassifier(EcorePackage.Literals.ESTRING);
+					if (result) {
+						EDataType dataType = GrammarUtil.findEString(GrammarUtil.getGrammar(object));
+						if (dataType != null)
+							typeRef.setClassifier(dataType);
+						else {
+							// nowhere imported - use the instance from the registry
+							typeRef.setClassifier(EcorePackage.Literals.ESTRING);
+						}
+					}
 					visitedRules.remove(object);
 					return result;
 				} else {

@@ -12,8 +12,8 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
@@ -76,7 +76,8 @@ public class Xtext2EcoreInterpretationContext {
 		EClassifierInfo featureTypeInfo;
 
 		if (GrammarUtil.isBooleanAssignment(assignment)) {
-			featureTypeInfo = getEClassifierInfoOrThrowException(EcorePackage.Literals.EBOOLEAN, assignment);
+			EDataType eBoolean = GrammarUtil.findEBoolean(GrammarUtil.getGrammar(assignment));
+			featureTypeInfo = getEClassifierInfoOrThrowException(eBoolean, assignment);
 			isMultivalue = false;
 		}
 		else {

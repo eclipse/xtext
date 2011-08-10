@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.nodemodel.BidiIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -447,5 +448,56 @@ public class GrammarUtil {
 				return from.getClassifier().getEPackage();
 			}
 		}));
+	}
+	
+	/**
+	 * Find the datatype for EString which is referable from the given grammar.
+	 * @since 2.1
+	 */
+	public static EDataType findEString(Grammar grammar) {
+		EClassifier result = findEClassifierByName(grammar, EcorePackage.eNS_URI, EcorePackage.Literals.ESTRING.getName());
+		if (result instanceof EDataType)
+			return (EDataType) result;
+		return null;
+	}
+	
+	/**
+	 * Find the datatype for EBoolean which is referable from the given grammar.
+	 * @since 2.1
+	 */
+	public static EDataType findEBoolean(Grammar grammar) {
+		EClassifier result = findEClassifierByName(grammar, EcorePackage.eNS_URI, EcorePackage.Literals.EBOOLEAN.getName());
+		if (result instanceof EDataType)
+			return (EDataType) result;
+		return null;
+	}
+	
+	/**
+	 * Find the datatype for EBoolean which is referable from the given grammar.
+	 * @since 2.1
+	 */
+	public static EClass findEObject(Grammar grammar) {
+		EClassifier result = findEClassifierByName(grammar, EcorePackage.eNS_URI, EcorePackage.Literals.EOBJECT.getName());
+		if (result instanceof EClass)
+			return (EClass) result;
+		return null;
+	}
+	
+	private static EClassifier findEClassifierByName(Grammar grammar, String nsURI, String name) {
+		if (grammar != null) {
+			for(AbstractMetamodelDeclaration declaration: allMetamodelDeclarations(grammar)) {
+				if (declaration instanceof ReferencedMetamodel) {
+					EPackage referencedPackage = declaration.getEPackage();
+					if (referencedPackage != null && !referencedPackage.eIsProxy()) {
+						if (nsURI.equals(referencedPackage.getNsURI())) {
+							EClassifier result = referencedPackage.getEClassifier(name);
+							if (result != null)
+								return result;
+						}
+					}
+				}
+			}
+		}
+		return null;
 	}
 }
