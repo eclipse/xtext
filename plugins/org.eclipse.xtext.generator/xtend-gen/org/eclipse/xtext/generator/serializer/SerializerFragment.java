@@ -48,7 +48,7 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
   
   public SerializerFragmentState state() {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList();
-    SerializerFragmentState result;
+    final SerializerFragmentState result;
     synchronized (_createCache_state) {
       if (_createCache_state.containsKey(_cacheKey)) {
         return _createCache_state.get(_cacheKey);
@@ -132,7 +132,7 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
           ctx.writeFile(Generator.SRC_GEN, _fileName_4, _fileContents_4);
           SyntacticSequencerPDA2ExtendedDot _syntacticSequencerPDA2ExtendedDot = new SyntacticSequencerPDA2ExtendedDot();
           Iterable<Pair<String,String>> _render2Dot = this.dotRenderer.render2Dot(_syntacticSequencerPDA2ExtendedDot, "pda");
-          for (Pair<String,String> obj : _render2Dot) {
+          for (final Pair<String,String> obj : _render2Dot) {
             String _key = obj.getKey();
             String _value = obj.getValue();
             ctx.writeFile(Generator.SRC_GEN, _key, _value);

@@ -205,7 +205,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
           };
         List<HashSet<Grammar>> _map = ListExtensions.<IConstraintElement, HashSet<Grammar>>map(_children_1, _function);
         Iterable<Grammar> _flatten = IterableExtensions.<Grammar>flatten(_map);
-        for (Grammar g : _flatten) {
+        for (final Grammar g : _flatten) {
           result.add(g);
         }
       }
@@ -460,7 +460,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     _builder.newLineIfNotEmpty();
     {
       Iterable<EPackage> _accessedPackages = this.getAccessedPackages();
-      for(EPackage pkg : _accessedPackages) {
+      for(final EPackage pkg : _accessedPackages) {
         _builder.append("\t");
         {
           int _operator_plus = IntegerExtensions.operator_plus(((Integer)pkgi), ((Integer)1));
@@ -477,7 +477,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
         _builder.newLineIfNotEmpty();
         {
           Iterable<EClass> _accessedClasses = this.getAccessedClasses(pkg);
-          for(EClass type : _accessedClasses) {
+          for(final EClass type : _accessedClasses) {
             _builder.append("\t");
             _builder.append("\t");
             _builder.append("case ");
@@ -501,7 +501,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
                   }
                 };
               List<Entry<IConstraint,List<EObject>>> _sortBy = IterableExtensions.<Entry<IConstraint,List<EObject>>, String>sortBy(_entrySet, _function);
-              for(Entry<IConstraint,List<EObject>> ctx : _sortBy) {
+              for(final Entry<IConstraint,List<EObject>> ctx : _sortBy) {
                 _builder.append("\t");
                 _builder.append("\t");
                 _builder.append("\t");
@@ -524,7 +524,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
                     };
                   List<EObject> _sortBy_1 = IterableExtensions.<EObject, String>sortBy(_value, _function_1);
                   boolean hasAnyElements = false;
-                  for(EObject c : _sortBy_1) {
+                  for(final EObject c : _sortBy_1) {
                     if (!hasAnyElements) {
                       hasAnyElements = true;
                     } else {
@@ -625,7 +625,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
           }
         };
       Iterable<IFeatureInfo> _filter = IterableExtensions.<IFeatureInfo>filter(((Iterable<IFeatureInfo>)Conversions.doWrapArray(_features)), _function);
-      for(IFeatureInfo f : _filter) {
+      for(final IFeatureInfo f : _filter) {
         _builder.append(" *    ", "");
         String _string_1 = f.toString();
         String _replaceAll_1 = _string_1.replaceAll("\\n", "\n *     ");
@@ -675,7 +675,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
                 }
               };
             Iterable<IFeatureInfo> _filter_1 = IterableExtensions.<IFeatureInfo>filter(((Iterable<IFeatureInfo>)Conversions.doWrapArray(_features_1)), _function_1);
-            for(IFeatureInfo f_1 : _filter_1) {
+            for(final IFeatureInfo f_1 : _filter_1) {
               _builder.append("\t");
               _builder.append("\t");
               _builder.append("if(transientValues.isValueTransient(");
@@ -749,7 +749,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
               Iterable<IFeatureInfo> _map = IterableExtensions.<IConstraintElement, IFeatureInfo>map(_filter_2, _function_3);
               _xifexpression_1 = _map;
             }
-            for(IFeatureInfo f_2 : _xifexpression_1) {
+            for(final IFeatureInfo f_2 : _xifexpression_1) {
               _builder.append("\t");
               IConstraintElement[] _assignments = f_2.getAssignments();
               IConstraintElement _get = ((List<IConstraintElement>)Conversions.doWrapArray(_assignments)).get(0);
