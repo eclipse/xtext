@@ -7,10 +7,10 @@
  *******************************************************************************/
 grammar org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations with org.eclipse.xtext.xbase.Xbase
 
-import "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore" as xbase
-import "platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore" as xtype
-import "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore" as types
-import "platform:/resource/org.eclipse.xtext.xbase/model/XAnnotations.ecore"
+import "http://www.eclipse.org/xtext/xbase/Xbase" as xbase
+import "http://www.eclipse.org/xtext/xbase/Xtype" as xtype
+import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
+import "http://www.eclipse.org/Xtext/Xbase/XAnnotations"
 
 XAnnotation :
 	{XAnnotation}
