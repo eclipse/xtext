@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.GeneratedMetamodel;
@@ -42,7 +43,7 @@ public class ToEcoreTrafoTest extends AbstractXtextTests {
 			for (Diagnostic syntaxError : errors) {
 				logger.debug(syntaxError.getMessage() + " - " + syntaxError.getLine());
 			}
-			fail();
+			fail(errors.toString());
 		}
 		List<TerminalRule> lexerRules = GrammarUtil.allTerminalRules(element);
 		assertEquals(8, lexerRules.size());
@@ -81,6 +82,10 @@ public class ToEcoreTrafoTest extends AbstractXtextTests {
 
 	private XtextResource getResource(String uri) {
 		XtextResourceSet set = get(XtextResourceSet.class);
+		URI nsURI = URI.createURI(EcorePackage.eNS_URI);
+		URI platformURI = URI.createURI("platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore");
+		set.getURIConverter().getURIMap().put(platformURI, nsURI);
+		set.getURIResourceMap().put(platformURI, set.getResource(nsURI, true));
 		set.setClasspathURIContext(getClass().getClassLoader());
 		// if(AllTests.isPluginContext) {
 		// set.setClasspathUriResolver(new BundleClasspathUriResolver());
