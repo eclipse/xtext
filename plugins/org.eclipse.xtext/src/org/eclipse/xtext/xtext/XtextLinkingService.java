@@ -18,8 +18,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.Constants;
@@ -34,14 +36,20 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.linking.impl.DefaultLinkingService;
 import org.eclipse.xtext.linking.impl.IllegalNodeException;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.BidiIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.ClasspathUriResolutionException;
 import org.eclipse.xtext.resource.ClasspathUriUtil;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
+import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
@@ -55,6 +63,12 @@ public class XtextLinkingService extends DefaultLinkingService {
 
 	@Inject
 	private IValueConverterService valueConverterService;
+	
+	@Inject
+	private IGlobalScopeProvider scopeProvider;
+	
+	@Inject
+	private ResourceDescriptionsProvider descriptionsProvider;
 	
 	private String fileExtension = "xtext";
 
@@ -119,10 +133,56 @@ public class XtextLinkingService extends DefaultLinkingService {
 			if (result != null)
 				return result;
 		}
-		EPackage pack = loadEPackage(nsUri, context.eResource().getResourceSet());
+		QualifiedName packageNsURI = QualifiedName.create(nsUri);
+		EPackage pack = findPackageInScope(context, packageNsURI);
+		if (pack == null) {
+			pack = findPackageInAllDescriptions(context, packageNsURI);
+			if (pack == null) {
+				pack = loadEPackage(nsUri, context.eResource().getResourceSet());
+			}
+		}
 		if (pack != null)
 			return Collections.<EObject>singletonList(pack);
 		return Collections.emptyList();
+	}
+	
+	private EPackage findPackageInScope(EObject context, QualifiedName packageNsURI) {
+		IScope scopedPackages = scopeProvider.getScope(context.eResource(), XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE, new Predicate<IEObjectDescription>() {
+			public boolean apply(IEObjectDescription input) {
+				return isNsUriIndexEntry(input);
+			}
+		});
+		IEObjectDescription description = scopedPackages.getSingleElement(packageNsURI);
+		if (description != null) {
+			return getResolvedEPackage(description, context);
+		}
+		return null;
+	}
+	
+	private EPackage getResolvedEPackage(IEObjectDescription description, EObject context) {
+		EObject resolved = EcoreUtil.resolve(description.getEObjectOrProxy(), context);
+		if (resolved != null && !resolved.eIsProxy() && resolved instanceof EPackage)
+			return (EPackage) resolved;
+		return null;
+	}
+	
+	private EPackage findPackageInAllDescriptions(EObject context, QualifiedName packageNsURI) {
+		IResourceDescriptions descriptions = descriptionsProvider.getResourceDescriptions(context.eResource());
+		if (descriptions != null) {
+			Iterable<IEObjectDescription> exported = descriptions.getExportedObjects(EcorePackage.Literals.EPACKAGE, packageNsURI, false);
+			for(IEObjectDescription candidate: exported) {
+				if (isNsUriIndexEntry(candidate)) {
+					EPackage result = getResolvedEPackage(candidate, context);
+					if (result != null)
+						return result;
+				}
+			}
+		}
+		return null;
+	}
+
+	private boolean isNsUriIndexEntry(IEObjectDescription candidate) {
+		return Boolean.TRUE.toString().equalsIgnoreCase(candidate.getUserData("nsURI"));
 	}
 
 	private List<EObject> getPackage(String nsUri, Grammar grammar, Set<Grammar> visitedGrammars) {

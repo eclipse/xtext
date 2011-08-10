@@ -18,7 +18,6 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Grammar;
@@ -146,7 +145,7 @@ public class EClassifierInfos {
 					"Simple Datatypes (lexer rules or keywords) do not have a common supertype (" + infoA + ", "
 							+ infoB + ")");
 
-		EClassifier compatibleType = EcoreUtil2.getCompatibleType(infoA.getEClassifier(), infoB.getEClassifier());
+		EClassifier compatibleType = EcoreUtil2.getCompatibleType(infoA.getEClassifier(), infoB.getEClassifier(), grammar);
 
 		return getInfoOrNull(compatibleType);
 	}
@@ -175,8 +174,7 @@ public class EClassifierInfos {
 		final EClassifierInfo compatibleType = getCompatibleTypeOf(types);
 		if (compatibleType != null)
 			return compatibleType.getEClassifier();
-
-		return EcorePackage.Literals.EOBJECT;
+		return GrammarUtil.findEObject(grammar);
 	}
 
 	public List<EClassInfo> getAllEClassInfos() {

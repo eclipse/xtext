@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
@@ -96,7 +97,7 @@ public class CurrentTypeFinder {
 			if (object == stopElement)
 				return true;
 			if (GrammarUtil.isOptionalCardinality(object))
-				currentType = getCompatibleType(currentType, wasType);
+				currentType = getCompatibleType(currentType, wasType, object);
 			return false;
 		}
 		
@@ -110,7 +111,7 @@ public class CurrentTypeFinder {
 			if (object == stopElement)
 				return true;
 			if (GrammarUtil.isOptionalCardinality(object))
-				currentType = getCompatibleType(currentType, wasType);
+				currentType = getCompatibleType(currentType, wasType, object);
 			return false;
 		}
 		
@@ -134,16 +135,16 @@ public class CurrentTypeFinder {
 			if (object == stopElement)
 				return true;
 			if (GrammarUtil.isOptionalCardinality(object))
-				currentType = getCompatibleType(currentType, wasType);
+				currentType = getCompatibleType(currentType, wasType, object);
 			return false;
 		}
 		
-		protected EClassifier getCompatibleType(EClassifier a, EClassifier b) {
+		protected EClassifier getCompatibleType(EClassifier a, EClassifier b, EObject context) {
 			if (a == null)
 				return b;
 			if (b == null)
 				return a;
-			return EcoreUtil2.getCompatibleType(a, b);
+			return EcoreUtil2.getCompatibleType(a, b, context);
 		}
 		
 		@Override
@@ -167,13 +168,13 @@ public class CurrentTypeFinder {
 				}
 				currentType = null;
 				for(EClassifier classifier: alternativeTypes) {
-					currentType = getCompatibleType(currentType, classifier);
+					currentType = getCompatibleType(currentType, classifier, object);
 				}
 			}
 			if (object == stopElement)
 				return true;
 			if (GrammarUtil.isOptionalCardinality(object))
-				currentType = getCompatibleType(currentType, wasType);
+				currentType = getCompatibleType(currentType, wasType, object);
 			return false;
 		}
 		

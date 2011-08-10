@@ -11,6 +11,7 @@ package org.eclipse.xtext.xtext.ecoreInference;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
@@ -43,6 +44,10 @@ final class ElementTypeCalculator extends XtextSwitch<EClassifier> implements Fu
 
 	@Override
 	public EClassifier caseKeyword(Keyword object) {
+		EDataType eString = GrammarUtil.findEString(GrammarUtil.getGrammar(object));
+		if (eString != null)
+			return eString;
+		// nowhere imported - use the instance from the registry
 		return EcorePackage.Literals.ESTRING;
 	}
 

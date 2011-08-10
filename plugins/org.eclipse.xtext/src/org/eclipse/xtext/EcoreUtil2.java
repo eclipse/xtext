@@ -270,6 +270,24 @@ public class EcoreUtil2 extends EcoreUtil {
 
 		return EcorePackage.Literals.EOBJECT;
 	}
+	
+	/**
+	 * @since 2.1
+	 */
+	public static EClassifier getCompatibleType(EClassifier typeA, EClassifier typeB, EObject grammarContext) {
+		if (typeA.equals(typeB))
+			return typeA;
+		// no common type for simple datatypes available
+		if (!(typeA instanceof EClass && typeB instanceof EClass))
+			return null;
+
+		List<EClass> sortedCandidates = getSortedCommonCompatibleTypeCandidates((EClass) typeA, (EClass) typeB);
+		for (EClass candidate : sortedCandidates)
+			if (isCommonCompatibleType(candidate, sortedCandidates))
+				return candidate;
+		EClass result = GrammarUtil.findEObject(GrammarUtil.getGrammar(grammarContext));
+		return result;
+	}
 
 	private static class EClassTypeHierarchyComparator implements Comparator<EClass> {
 
