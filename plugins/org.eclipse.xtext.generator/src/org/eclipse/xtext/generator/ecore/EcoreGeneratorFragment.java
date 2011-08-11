@@ -331,15 +331,16 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		Map<String, EPackage> result = Maps.newHashMap();
 		for(String nsURI: packageNsURIs) {
 			Resource resource = GenModelAccess.getGenModelResource(null, nsURI, resourceSet);
-			for(EObject content: resource.getContents()) {
-				if (content instanceof GenModel) {
-					GenModel loadedGenModel = (GenModel) content;
-					GenPackage genPackage = findGenPackageByNsURI(loadedGenModel, nsURI);
-					result.put(nsURI, genPackage.getEcorePackage());
-					break;
+			if (resource != null) {
+				for(EObject content: resource.getContents()) {
+					if (content instanceof GenModel) {
+						GenModel loadedGenModel = (GenModel) content;
+						GenPackage genPackage = findGenPackageByNsURI(loadedGenModel, nsURI);
+						result.put(nsURI, genPackage.getEcorePackage());
+						break;
+					}
 				}
 			}
-			
 		}
 		return result;
 	}
