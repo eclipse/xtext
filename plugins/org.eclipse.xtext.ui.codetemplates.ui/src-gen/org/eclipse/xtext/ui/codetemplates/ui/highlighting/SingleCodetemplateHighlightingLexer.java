@@ -11,17 +11,17 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class SingleCodetemplateHighlightingLexer extends Lexer {
-    public static final int RULE_BODY=10;
     public static final int RULE_ID=11;
-    public static final int RULE_WS=13;
-    public static final int KEYWORD_CLOSINGBRACE=7;
-    public static final int EOF=-1;
     public static final int RULE_STRING=12;
-    public static final int KEYWORD_OPENBRACE=6;
-    public static final int KEYWORD_TEMPLATES=4;
-    public static final int KEYWORD_FOR=5;
-    public static final int RULE_ANY_OTHER=9;
+    public static final int RULE_BODY=10;
     public static final int KEYWORD_DOT=8;
+    public static final int RULE_ANY_OTHER=9;
+    public static final int KEYWORD_OPENBRACE=6;
+    public static final int KEYWORD_FOR=5;
+    public static final int RULE_WS=13;
+    public static final int EOF=-1;
+    public static final int KEYWORD_TEMPLATES=4;
+    public static final int KEYWORD_CLOSINGBRACE=7;
 
     // delegates
     // delegators

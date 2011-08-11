@@ -12,25 +12,25 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalCodetemplatesLexer extends Lexer {
-    public static final int KEYWORD_7=17;
     public static final int RULE_ID=18;
-    public static final int KEYWORD_10=9;
+    public static final int RULE_ANY_OTHER=21;
     public static final int KEYWORD_1=11;
-    public static final int RULE_STRING=19;
-    public static final int KEYWORD_9=8;
+    public static final int KEYWORD_5=15;
+    public static final int KEYWORD_4=14;
+    public static final int KEYWORD_13=6;
+    public static final int KEYWORD_3=13;
+    public static final int KEYWORD_14=4;
     public static final int KEYWORD_2=12;
     public static final int KEYWORD_11=10;
-    public static final int KEYWORD_4=14;
-    public static final int RULE_WS=20;
-    public static final int KEYWORD_13=6;
-    public static final int KEYWORD_14=4;
-    public static final int EOF=-1;
-    public static final int KEYWORD_5=15;
-    public static final int KEYWORD_6=16;
-    public static final int RULE_ANY_OTHER=21;
     public static final int KEYWORD_12=5;
+    public static final int EOF=-1;
+    public static final int KEYWORD_10=9;
+    public static final int RULE_STRING=19;
+    public static final int KEYWORD_6=16;
+    public static final int KEYWORD_7=17;
     public static final int KEYWORD_8=7;
-    public static final int KEYWORD_3=13;
+    public static final int KEYWORD_9=8;
+    public static final int RULE_WS=20;
 
     // delegates
     // delegators
@@ -717,7 +717,7 @@ public class InternalCodetemplatesLexer extends Lexer {
         "\1\22\1\uffff\1\17\1\2\1\uffff\1\4\1\5\1\10\1\6\1\7\1\11\1\12\1"+
         "\13\1\14\1\15\1\16\1\20\1\21\3\uffff\1\3\5\uffff\1\1";
     static final String DFA5_specialS =
-        "\1\1\16\uffff\1\0\35\uffff}>";
+        "\1\0\16\uffff\1\1\35\uffff}>";
     static final String[] DFA5_transitionS = {
             "\11\21\2\20\2\21\1\20\22\21\1\20\3\21\1\4\2\21\1\17\1\7\1\10"+
             "\2\21\1\11\1\21\1\12\13\21\1\13\1\21\1\5\1\21\1\6\2\21\32\16"+
@@ -806,16 +806,6 @@ public class InternalCodetemplatesLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA5_15 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA5_15>='\u0000' && LA5_15<='\uFFFF')) ) {s = 33;}
-
-                        else s = 17;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
                         int LA5_0 = input.LA(1);
 
                         s = -1;
@@ -852,6 +842,16 @@ public class InternalCodetemplatesLexer extends Lexer {
                         else if ( ((LA5_0>='\t' && LA5_0<='\n')||LA5_0=='\r'||LA5_0==' ') ) {s = 16;}
 
                         else if ( ((LA5_0>='\u0000' && LA5_0<='\b')||(LA5_0>='\u000B' && LA5_0<='\f')||(LA5_0>='\u000E' && LA5_0<='\u001F')||(LA5_0>='!' && LA5_0<='#')||(LA5_0>='%' && LA5_0<='&')||(LA5_0>='*' && LA5_0<='+')||LA5_0=='-'||(LA5_0>='/' && LA5_0<='9')||LA5_0==';'||LA5_0=='='||(LA5_0>='?' && LA5_0<='@')||LA5_0=='['||LA5_0==']'||LA5_0=='`'||(LA5_0>='{' && LA5_0<='|')||(LA5_0>='~' && LA5_0<='\uFFFF')) ) {s = 17;}
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
+                        int LA5_15 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA5_15>='\u0000' && LA5_15<='\uFFFF')) ) {s = 33;}
+
+                        else s = 17;
 
                         if ( s>=0 ) return s;
                         break;

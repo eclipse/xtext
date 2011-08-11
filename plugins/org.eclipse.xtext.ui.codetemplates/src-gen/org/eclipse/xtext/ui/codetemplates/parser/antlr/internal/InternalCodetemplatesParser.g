@@ -957,7 +957,7 @@ ruleDollar returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getDollarRule());
 	        }
-       		setWithLastConsumed($current, "escaped", true, "$$");
+       		setWithLastConsumed($current, "escaped", true, "\$\$");
 	    }
 
 )
