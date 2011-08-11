@@ -4,6 +4,7 @@ import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
 import org.eclipse.xtext.generator.parser.antlr.*
+import org.eclipse.xtext.resource.XtextResourceSet 
 
 var grammarURI = "classpath:/org/eclipse/xtext/xtend2/Xtend2.xtext"
 var file.extensions = "xtend"
@@ -18,6 +19,15 @@ Workflow {
 	bean = StandaloneSetup {
 		platformUri = "${runtimeProject}/../.."
 		registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
+	}
+	
+	bean = StandaloneSetup {
+		resourceSet = XtextResourceSet : resourceSet {}
+		registerEcoreFile = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore"
+		registerEcoreFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore"
+		registerEcoreFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore"
+		registerEcoreFile = "platform:/resource/org.eclipse.xtext.xbase/model/XAnnotations.ecore"
+		registerEcoreFile = "platform:/resource/${projectName}/model/Xtend2.ecore"
 	}
 	
 	component = DirectoryCleaner {
@@ -52,6 +62,7 @@ Workflow {
 		projectNameRt = projectName
 		projectNameUi = "${projectName}.ui"
 		language = {
+			forcedResourceSet = resourceSet
 			uri = grammarURI
 			fileExtensions = file.extensions
 			fragment = grammarAccess.GrammarAccessFragment {}
