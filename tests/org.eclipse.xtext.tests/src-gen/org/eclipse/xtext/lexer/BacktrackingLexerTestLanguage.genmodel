@@ -6,28 +6,28 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="BacktrackingLexerTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="BacktrackingTestLanguage" basePackage="org.eclipse.xtext.lexer"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.ecore#//EnumName">
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.ecore#//EnumName/abc"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.ecore#//EnumName/efg"/>
+      disposableProviderFactory="true" ecorePackage="BacktrackingLexerTestLanguage.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="BacktrackingLexerTestLanguage.ecore#//EnumName">
+      <genEnumLiterals ecoreEnumLiteral="BacktrackingLexerTestLanguage.ecore#//EnumName/abc"/>
+      <genEnumLiterals ecoreEnumLiteral="BacktrackingLexerTestLanguage.ecore#//EnumName/efg"/>
     </genEnums>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.ecore#//Model">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.ecore#//Model/enums"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.ecore#//Model/ycs"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.ecore#//Model/abs"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.ecore#//Model/xbs"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.ecore#//Model/ys"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.ecore#//Model/as"/>
+    <genClasses ecoreClass="BacktrackingLexerTestLanguage.ecore#//Model">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingLexerTestLanguage.ecore#//Model/enums"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingLexerTestLanguage.ecore#//Model/ycs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingLexerTestLanguage.ecore#//Model/abs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingLexerTestLanguage.ecore#//Model/xbs"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingLexerTestLanguage.ecore#//Model/ys"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingLexerTestLanguage.ecore#//Model/as"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.ecore#//Ab">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.ecore#//Ab/x"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.ecore#//Ab/y"/>
+    <genClasses ecoreClass="BacktrackingLexerTestLanguage.ecore#//Ab">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingLexerTestLanguage.ecore#//Ab/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingLexerTestLanguage.ecore#//Ab/y"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.ecore#//Xb">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.ecore#//Xb/x"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.ecore#//Xb/y"/>
+    <genClasses ecoreClass="BacktrackingLexerTestLanguage.ecore#//Xb">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingLexerTestLanguage.ecore#//Xb/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingLexerTestLanguage.ecore#//Xb/y"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

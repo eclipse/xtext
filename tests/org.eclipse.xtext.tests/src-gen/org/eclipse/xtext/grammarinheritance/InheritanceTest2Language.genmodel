@@ -6,11 +6,11 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="InheritanceTest2Language"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/BaseInheritanceTestLanguage.genmodel#//baseInheritanceTest platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.genmodel#//inheritanceTest">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore BaseInheritanceTestLanguage.genmodel#//baseInheritanceTest InheritanceTestLanguage.genmodel#//inheritanceTest">
   <genPackages prefix="InheritanceTest2" basePackage="org.eclipse.xtext.grammarinheritance"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/InheritanceTest2Language.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/InheritanceTest2Language.ecore#//Model">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/InheritanceTest2Language.ecore#//Model/ids"/>
+      disposableProviderFactory="true" ecorePackage="InheritanceTest2Language.ecore#/">
+    <genClasses ecoreClass="InheritanceTest2Language.ecore#//Model">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute InheritanceTest2Language.ecore#//Model/ids"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -3,12 +3,11 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ignoreCaseImportsTest"
     nsURI="http://eclipse.org/xtext/ignoreCaseImportsTestLanguage" nsPrefix="ignoreCaseImportsTest">
-  <eClassifiers xsi:type="ecore:EClass" name="Model" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/AbstractIgnoreCaseLinkingTestLanguage.ecore#//Model">
+  <eClassifiers xsi:type="ecore:EClass" name="Model" eSuperTypes="AbstractIgnoreCaseLinkingTestLanguage.ecore#//Model">
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/IgnoreCaseImportsTestLanguage.ecore#//Import"
-        containment="true"/>
+        eType="#//Import" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Import">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="importURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="importURI" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

@@ -25,20 +25,20 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "KEYWORD_6", "KEYWORD_1", "KEYWORD_2", "KEYWORD_3", "KEYWORD_4", "KEYWORD_5", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
     };
-    public static final int RULE_ML_COMMENT=13;
     public static final int RULE_ID=10;
-    public static final int KEYWORD_4=8;
-    public static final int RULE_WS=15;
+    public static final int RULE_STRING=12;
+    public static final int RULE_ANY_OTHER=16;
+    public static final int KEYWORD_6=4;
     public static final int KEYWORD_1=5;
     public static final int RULE_INT=11;
-    public static final int EOF=-1;
-    public static final int RULE_STRING=12;
     public static final int KEYWORD_5=9;
-    public static final int KEYWORD_6=4;
-    public static final int RULE_ANY_OTHER=16;
-    public static final int KEYWORD_2=6;
-    public static final int RULE_SL_COMMENT=14;
+    public static final int KEYWORD_4=8;
     public static final int KEYWORD_3=7;
+    public static final int KEYWORD_2=6;
+    public static final int RULE_WS=15;
+    public static final int RULE_SL_COMMENT=14;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=13;
 
     // delegates
     // delegators
@@ -1832,11 +1832,11 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
 
     // Delegated rules
 
-    public final boolean synpred9_InternalExBacktrackingBug325745TestLanguageParser() {
+    public final boolean synpred12_InternalExBacktrackingBug325745TestLanguageParser() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred9_InternalExBacktrackingBug325745TestLanguageParser_fragment(); // can never throw exception
+            synpred12_InternalExBacktrackingBug325745TestLanguageParser_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -1846,53 +1846,11 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
         state.failed=false;
         return success;
     }
-    public final boolean synpred2_InternalExBacktrackingBug325745TestLanguageParser() {
+    public final boolean synpred5_InternalExBacktrackingBug325745TestLanguageParser() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred2_InternalExBacktrackingBug325745TestLanguageParser_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred14_InternalExBacktrackingBug325745TestLanguageParser() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred14_InternalExBacktrackingBug325745TestLanguageParser_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred7_InternalExBacktrackingBug325745TestLanguageParser() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred7_InternalExBacktrackingBug325745TestLanguageParser_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred4_InternalExBacktrackingBug325745TestLanguageParser() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred4_InternalExBacktrackingBug325745TestLanguageParser_fragment(); // can never throw exception
+            synpred5_InternalExBacktrackingBug325745TestLanguageParser_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -1916,11 +1874,11 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
         state.failed=false;
         return success;
     }
-    public final boolean synpred12_InternalExBacktrackingBug325745TestLanguageParser() {
+    public final boolean synpred2_InternalExBacktrackingBug325745TestLanguageParser() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred12_InternalExBacktrackingBug325745TestLanguageParser_fragment(); // can never throw exception
+            synpred2_InternalExBacktrackingBug325745TestLanguageParser_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -1930,11 +1888,53 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
         state.failed=false;
         return success;
     }
-    public final boolean synpred5_InternalExBacktrackingBug325745TestLanguageParser() {
+    public final boolean synpred4_InternalExBacktrackingBug325745TestLanguageParser() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred5_InternalExBacktrackingBug325745TestLanguageParser_fragment(); // can never throw exception
+            synpred4_InternalExBacktrackingBug325745TestLanguageParser_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred14_InternalExBacktrackingBug325745TestLanguageParser() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred14_InternalExBacktrackingBug325745TestLanguageParser_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred9_InternalExBacktrackingBug325745TestLanguageParser() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred9_InternalExBacktrackingBug325745TestLanguageParser_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred7_InternalExBacktrackingBug325745TestLanguageParser() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred7_InternalExBacktrackingBug325745TestLanguageParser_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }

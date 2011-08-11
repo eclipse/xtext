@@ -24,18 +24,18 @@ public class InternalBug289524TestLanguageParser extends AbstractInternalAntlrPa
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'Model'", "'reference'", "'$'", "'containment'"
     };
-    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
-    public static final int T__12=12;
-    public static final int RULE_WS=9;
-    public static final int RULE_INT=5;
-    public static final int EOF=-1;
-    public static final int T__13=13;
     public static final int RULE_STRING=6;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int T__14=14;
+    public static final int T__12=12;
     public static final int T__11=11;
+    public static final int T__14=14;
+    public static final int T__13=13;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_INT=5;
+    public static final int RULE_WS=9;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=7;
 
     // delegates
     // delegators
@@ -760,11 +760,11 @@ public class InternalBug289524TestLanguageParser extends AbstractInternalAntlrPa
 
     // Delegated rules
 
-    public final boolean synpred4_InternalBug289524TestLanguage() {
+    public final boolean synpred2_InternalBug289524TestLanguage() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred4_InternalBug289524TestLanguage_fragment(); // can never throw exception
+            synpred2_InternalBug289524TestLanguage_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -774,11 +774,11 @@ public class InternalBug289524TestLanguageParser extends AbstractInternalAntlrPa
         state.failed=false;
         return success;
     }
-    public final boolean synpred2_InternalBug289524TestLanguage() {
+    public final boolean synpred4_InternalBug289524TestLanguage() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred2_InternalBug289524TestLanguage_fragment(); // can never throw exception
+            synpred4_InternalBug289524TestLanguage_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }

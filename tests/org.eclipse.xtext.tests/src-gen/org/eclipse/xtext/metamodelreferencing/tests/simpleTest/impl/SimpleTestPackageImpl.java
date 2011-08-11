@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -82,6 +83,9 @@ public class SimpleTestPackageImpl extends EPackageImpl implements SimpleTestPac
     SimpleTestPackageImpl theSimpleTestPackage = (SimpleTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SimpleTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SimpleTestPackageImpl());
 
     isInited = true;
+
+    // Initialize simple dependencies
+    EcorePackage.eINSTANCE.eClass();
 
     // Obtain or create and register interdependencies
     OtherTestPackageImpl theOtherTestPackage = (OtherTestPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(OtherTestPackage.eNS_URI) instanceof OtherTestPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(OtherTestPackage.eNS_URI) : OtherTestPackage.eINSTANCE);
@@ -193,6 +197,7 @@ public class SimpleTestPackageImpl extends EPackageImpl implements SimpleTestPac
     setNsURI(eNS_URI);
 
     // Obtain other dependent packages
+    EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
     OtherTestPackage theOtherTestPackage = (OtherTestPackage)EPackage.Registry.INSTANCE.getEPackage(OtherTestPackage.eNS_URI);
 
     // Create type parameters
@@ -203,7 +208,7 @@ public class SimpleTestPackageImpl extends EPackageImpl implements SimpleTestPac
 
     // Initialize classes and features; add operations and parameters
     initEClass(fooEClass, Foo.class, "Foo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getFoo_Name(), ecorePackage.getEString(), "name", null, 0, 1, Foo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getFoo_Name(), theEcorePackage.getEString(), "name", null, 0, 1, Foo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFoo_NameRefs(), theOtherTestPackage.getFooBar(), null, "nameRefs", null, 0, -1, Foo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource

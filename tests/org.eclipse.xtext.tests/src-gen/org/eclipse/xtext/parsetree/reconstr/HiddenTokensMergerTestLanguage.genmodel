@@ -6,57 +6,57 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="HiddenTokensMergerTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="Hiddentokenmergertest" basePackage="org.eclipse.xtext.parsetree.reconstr"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//EnumBugEnum">
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//EnumBugEnum/array"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//EnumBugEnum/object"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//EnumBugEnum/resultSet"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//EnumBugEnum/iterator"/>
+      disposableProviderFactory="true" ecorePackage="HiddenTokensMergerTestLanguage.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="HiddenTokensMergerTestLanguage.ecore#//EnumBugEnum">
+      <genEnumLiterals ecoreEnumLiteral="HiddenTokensMergerTestLanguage.ecore#//EnumBugEnum/array"/>
+      <genEnumLiterals ecoreEnumLiteral="HiddenTokensMergerTestLanguage.ecore#//EnumBugEnum/object"/>
+      <genEnumLiterals ecoreEnumLiteral="HiddenTokensMergerTestLanguage.ecore#//EnumBugEnum/resultSet"/>
+      <genEnumLiterals ecoreEnumLiteral="HiddenTokensMergerTestLanguage.ecore#//EnumBugEnum/iterator"/>
     </genEnums>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//Model"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//DatatypeBug286557">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//DatatypeBug286557/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//DatatypeBug286557/ref"/>
+    <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//Model"/>
+    <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//DatatypeBug286557">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HiddenTokensMergerTestLanguage.ecore#//DatatypeBug286557/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference HiddenTokensMergerTestLanguage.ecore#//DatatypeBug286557/ref"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//EnumBug">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//EnumBug/return"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//EnumBug/name"/>
+    <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//EnumBug">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HiddenTokensMergerTestLanguage.ecore#//EnumBug/return"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HiddenTokensMergerTestLanguage.ecore#//EnumBug/name"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//Commentable">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//Commentable/item"/>
+    <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//Commentable">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference HiddenTokensMergerTestLanguage.ecore#//Commentable/item"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//CommentableItem">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//CommentableItem/id"/>
+    <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//CommentableItem">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HiddenTokensMergerTestLanguage.ecore#//CommentableItem/id"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//ValueList">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//ValueList/ids"/>
+    <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//ValueList">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HiddenTokensMergerTestLanguage.ecore#//ValueList/ids"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//RefList">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//RefList/objs"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//RefList/refs"/>
+    <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//RefList">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference HiddenTokensMergerTestLanguage.ecore#//RefList/objs"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference HiddenTokensMergerTestLanguage.ecore#//RefList/refs"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//RefObj">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//RefObj/name"/>
+    <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//RefObj">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HiddenTokensMergerTestLanguage.ecore#//RefObj/name"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//SingleRef">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//SingleRef/obj"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//SingleRef/ref"/>
+    <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//SingleRef">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference HiddenTokensMergerTestLanguage.ecore#//SingleRef/obj"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference HiddenTokensMergerTestLanguage.ecore#//SingleRef/ref"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//AppendToFileEnd">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//AppendToFileEnd/items"/>
+    <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//AppendToFileEnd">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference HiddenTokensMergerTestLanguage.ecore#//AppendToFileEnd/items"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//AppendToFileEndItem">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//AppendToFileEndItem/name"/>
+    <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//AppendToFileEndItem">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HiddenTokensMergerTestLanguage.ecore#//AppendToFileEndItem/name"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//Action1">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//Action1/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//Action1/actions2"/>
+    <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//Action1">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HiddenTokensMergerTestLanguage.ecore#//Action1/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference HiddenTokensMergerTestLanguage.ecore#//Action1/actions2"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//Action1Sub1"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//Action1Sub2"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//Action1Sub"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//Action1SubClass"/>
+    <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//Action1Sub1"/>
+    <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//Action1Sub2"/>
+    <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//Action1Sub"/>
+    <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//Action1SubClass"/>
   </genPackages>
 </genmodel:GenModel>

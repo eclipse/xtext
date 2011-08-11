@@ -8,6 +8,7 @@ package org.eclipse.xtext.parsetree.transientvalues.transientvaluestest.impl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -101,6 +102,9 @@ public class TransientvaluestestPackageImpl extends EPackageImpl implements Tran
     TransientvaluestestPackageImpl theTransientvaluestestPackage = (TransientvaluestestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TransientvaluestestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new TransientvaluestestPackageImpl());
 
     isInited = true;
+
+    // Initialize simple dependencies
+    EcorePackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theTransientvaluestestPackage.createPackageContents();
@@ -275,6 +279,9 @@ public class TransientvaluestestPackageImpl extends EPackageImpl implements Tran
     setNsPrefix(eNS_PREFIX);
     setNsURI(eNS_URI);
 
+    // Obtain other dependent packages
+    EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
+
     // Create type parameters
 
     // Set bounds for type parameters
@@ -288,15 +295,15 @@ public class TransientvaluestestPackageImpl extends EPackageImpl implements Tran
     initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(testRequiredEClass, TestRequired.class, "TestRequired", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getTestRequired_Required1(), ecorePackage.getEInt(), "required1", null, 0, 1, TestRequired.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getTestRequired_Required2(), ecorePackage.getEInt(), "required2", null, 0, 1, TestRequired.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTestRequired_Required1(), theEcorePackage.getEInt(), "required1", null, 0, 1, TestRequired.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTestRequired_Required2(), theEcorePackage.getEInt(), "required2", null, 0, 1, TestRequired.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(testOptionalEClass, TestOptional.class, "TestOptional", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getTestOptional_Opt1(), ecorePackage.getEInt(), "opt1", null, 0, 1, TestOptional.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getTestOptional_Opt2(), ecorePackage.getEInt(), "opt2", null, 0, 1, TestOptional.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTestOptional_Opt1(), theEcorePackage.getEInt(), "opt1", null, 0, 1, TestOptional.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTestOptional_Opt2(), theEcorePackage.getEInt(), "opt2", null, 0, 1, TestOptional.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(testListEClass, TestList.class, "TestList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getTestList_Item(), ecorePackage.getEInt(), "item", null, 0, -1, TestList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTestList_Item(), theEcorePackage.getEInt(), "item", null, 0, -1, TestList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

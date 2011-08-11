@@ -6,14 +6,14 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="Bug289059TestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="Bug289059Test" basePackage="org.eclipse.xtext.linking" disposableProviderFactory="true"
-      ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/Bug289059TestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/Bug289059TestLanguage.ecore#//Model">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/Bug289059TestLanguage.ecore#//Model/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/Bug289059TestLanguage.ecore#//Model/enabled"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/Bug289059TestLanguage.ecore#//Model/reference"/>
+      ecorePackage="Bug289059TestLanguage.ecore#/">
+    <genClasses ecoreClass="Bug289059TestLanguage.ecore#//Model">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug289059TestLanguage.ecore#//Model/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug289059TestLanguage.ecore#//Model/enabled"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bug289059TestLanguage.ecore#//Model/reference"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/Bug289059TestLanguage.ecore#//UnassignedAction"/>
+    <genClasses ecoreClass="Bug289059TestLanguage.ecore#//UnassignedAction"/>
   </genPackages>
 </genmodel:GenModel>

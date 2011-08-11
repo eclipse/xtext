@@ -6,31 +6,31 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="BacktrackingBug325745TestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="BacktrackingBug325745TestLanguage" basePackage="org.eclipse.xtext.parser.unorderedGroups"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/BacktrackingBug325745TestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/BacktrackingBug325745TestLanguage.ecore#//Model">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/BacktrackingBug325745TestLanguage.ecore#//Model/fields"/>
+      disposableProviderFactory="true" ecorePackage="BacktrackingBug325745TestLanguage.ecore#/">
+    <genClasses ecoreClass="BacktrackingBug325745TestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingBug325745TestLanguage.ecore#//Model/fields"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/BacktrackingBug325745TestLanguage.ecore#//Element">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/BacktrackingBug325745TestLanguage.ecore#//Element/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/BacktrackingBug325745TestLanguage.ecore#//Element/dataType"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/BacktrackingBug325745TestLanguage.ecore#//Element/expression"/>
+    <genClasses ecoreClass="BacktrackingBug325745TestLanguage.ecore#//Element">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingBug325745TestLanguage.ecore#//Element/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingBug325745TestLanguage.ecore#//Element/dataType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingBug325745TestLanguage.ecore#//Element/expression"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/BacktrackingBug325745TestLanguage.ecore#//DataType">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/BacktrackingBug325745TestLanguage.ecore#//DataType/baseType"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/BacktrackingBug325745TestLanguage.ecore#//DataType/defaultValue"/>
+    <genClasses ecoreClass="BacktrackingBug325745TestLanguage.ecore#//DataType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingBug325745TestLanguage.ecore#//DataType/baseType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingBug325745TestLanguage.ecore#//DataType/defaultValue"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/BacktrackingBug325745TestLanguage.ecore#//Expression">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/BacktrackingBug325745TestLanguage.ecore#//Expression/prefix"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/BacktrackingBug325745TestLanguage.ecore#//Expression/terms"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/BacktrackingBug325745TestLanguage.ecore#//Expression/postfix"/>
+    <genClasses ecoreClass="BacktrackingBug325745TestLanguage.ecore#//Expression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingBug325745TestLanguage.ecore#//Expression/prefix"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingBug325745TestLanguage.ecore#//Expression/terms"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingBug325745TestLanguage.ecore#//Expression/postfix"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/BacktrackingBug325745TestLanguage.ecore#//SimpleTerm">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/BacktrackingBug325745TestLanguage.ecore#//SimpleTerm/lineCount"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/BacktrackingBug325745TestLanguage.ecore#//SimpleTerm/charCount"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/BacktrackingBug325745TestLanguage.ecore#//SimpleTerm/charSet"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/BacktrackingBug325745TestLanguage.ecore#//SimpleTerm/refChar"/>
+    <genClasses ecoreClass="BacktrackingBug325745TestLanguage.ecore#//SimpleTerm">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingBug325745TestLanguage.ecore#//SimpleTerm/lineCount"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingBug325745TestLanguage.ecore#//SimpleTerm/charCount"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingBug325745TestLanguage.ecore#//SimpleTerm/charSet"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingBug325745TestLanguage.ecore#//SimpleTerm/refChar"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

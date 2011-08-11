@@ -4,14 +4,12 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="partialserializationtest"
     nsURI="http://www.eclipse.org/2009/tmf/xtext/partialserializationtest" nsPrefix="partialserializationtest">
   <eClassifiers xsi:type="ecore:EClass" name="Model"/>
-  <eClassifiers xsi:type="ecore:EClass" name="NodeRoot" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/PartialSerializationTestLanguage.ecore#//Model">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="node" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/PartialSerializationTestLanguage.ecore#//Node"
-        containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NodeRoot" eSuperTypes="#//Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node" eType="#//Node" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Node">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType ../../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/PartialSerializationTestLanguage.ecore#//Node"
-        containment="true"/>
+        eType="#//Node" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

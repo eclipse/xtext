@@ -8,6 +8,7 @@ package org.eclipse.xtext.metamodelreferencing.tests.otherTest.impl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -81,6 +82,9 @@ public class OtherTestPackageImpl extends EPackageImpl implements OtherTestPacka
     OtherTestPackageImpl theOtherTestPackage = (OtherTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof OtherTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new OtherTestPackageImpl());
 
     isInited = true;
+
+    // Initialize simple dependencies
+    EcorePackage.eINSTANCE.eClass();
 
     // Obtain or create and register interdependencies
     SimpleTestPackageImpl theSimpleTestPackage = (SimpleTestPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(SimpleTestPackage.eNS_URI) instanceof SimpleTestPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(SimpleTestPackage.eNS_URI) : SimpleTestPackage.eINSTANCE);
@@ -180,6 +184,9 @@ public class OtherTestPackageImpl extends EPackageImpl implements OtherTestPacka
     setNsPrefix(eNS_PREFIX);
     setNsURI(eNS_URI);
 
+    // Obtain other dependent packages
+    EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
+
     // Create type parameters
 
     // Set bounds for type parameters
@@ -188,7 +195,7 @@ public class OtherTestPackageImpl extends EPackageImpl implements OtherTestPacka
 
     // Initialize classes and features; add operations and parameters
     initEClass(fooBarEClass, FooBar.class, "FooBar", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getFooBar_Name(), ecorePackage.getEString(), "name", null, 0, 1, FooBar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getFooBar_Name(), theEcorePackage.getEString(), "name", null, 0, 1, FooBar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

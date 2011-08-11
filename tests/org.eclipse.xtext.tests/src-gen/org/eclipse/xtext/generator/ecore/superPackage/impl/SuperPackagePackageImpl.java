@@ -8,6 +8,7 @@ package org.eclipse.xtext.generator.ecore.superPackage.impl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -85,6 +86,9 @@ public class SuperPackagePackageImpl extends EPackageImpl implements SuperPackag
     SuperPackagePackageImpl theSuperPackagePackage = (SuperPackagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SuperPackagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SuperPackagePackageImpl());
 
     isInited = true;
+
+    // Initialize simple dependencies
+    EcorePackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theSuperPackagePackage.createPackageContents();
@@ -202,6 +206,9 @@ public class SuperPackagePackageImpl extends EPackageImpl implements SuperPackag
     setNsPrefix(eNS_PREFIX);
     setNsURI(eNS_URI);
 
+    // Obtain other dependent packages
+    EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
+
     // Create type parameters
 
     // Set bounds for type parameters
@@ -210,10 +217,10 @@ public class SuperPackagePackageImpl extends EPackageImpl implements SuperPackag
 
     // Initialize classes and features; add operations and parameters
     initEClass(superMainEClass, SuperMain.class, "SuperMain", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getSuperMain_Name(), ecorePackage.getEString(), "name", null, 0, 1, SuperMain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getSuperMain_Name(), theEcorePackage.getEString(), "name", null, 0, 1, SuperMain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(anotherSuperMainEClass, AnotherSuperMain.class, "AnotherSuperMain", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getAnotherSuperMain_Name(), ecorePackage.getEString(), "name", null, 0, 1, AnotherSuperMain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAnotherSuperMain_Name(), theEcorePackage.getEString(), "name", null, 0, 1, AnotherSuperMain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

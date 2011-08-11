@@ -8,6 +8,7 @@ package org.eclipse.xtext.valueconverter.qualifiedName.impl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -77,6 +78,9 @@ public class QualifiedNamePackageImpl extends EPackageImpl implements QualifiedN
     QualifiedNamePackageImpl theQualifiedNamePackage = (QualifiedNamePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof QualifiedNamePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new QualifiedNamePackageImpl());
 
     isInited = true;
+
+    // Initialize simple dependencies
+    EcorePackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theQualifiedNamePackage.createPackageContents();
@@ -171,6 +175,9 @@ public class QualifiedNamePackageImpl extends EPackageImpl implements QualifiedN
     setNsPrefix(eNS_PREFIX);
     setNsURI(eNS_URI);
 
+    // Obtain other dependent packages
+    EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
+
     // Create type parameters
 
     // Set bounds for type parameters
@@ -179,7 +186,7 @@ public class QualifiedNamePackageImpl extends EPackageImpl implements QualifiedN
 
     // Initialize classes and features; add operations and parameters
     initEClass(elementEClass, Element.class, "Element", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getElement_QualifiedName(), ecorePackage.getEString(), "qualifiedName", null, 0, 1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getElement_QualifiedName(), theEcorePackage.getEString(), "qualifiedName", null, 0, 1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

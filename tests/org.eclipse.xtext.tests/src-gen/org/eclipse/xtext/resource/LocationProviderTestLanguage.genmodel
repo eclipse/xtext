@@ -6,16 +6,16 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="LocationProviderTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="Locationprovidertest" basePackage="org.eclipse.xtext.resource"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/LocationProviderTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/LocationProviderTestLanguage.ecore#//Model">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/LocationProviderTestLanguage.ecore#//Model/elements"/>
+      disposableProviderFactory="true" ecorePackage="LocationProviderTestLanguage.ecore#/">
+    <genClasses ecoreClass="LocationProviderTestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LocationProviderTestLanguage.ecore#//Model/elements"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/LocationProviderTestLanguage.ecore#//Element">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/LocationProviderTestLanguage.ecore#//Element/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/LocationProviderTestLanguage.ecore#//Element/singleref"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/LocationProviderTestLanguage.ecore#//Element/multirefs"/>
+    <genClasses ecoreClass="LocationProviderTestLanguage.ecore#//Element">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LocationProviderTestLanguage.ecore#//Element/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference LocationProviderTestLanguage.ecore#//Element/singleref"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference LocationProviderTestLanguage.ecore#//Element/multirefs"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -6,11 +6,11 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="IgnoreCaseLexerTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="IgnoreCaseTestLanguage" basePackage="org.eclipse.xtext.lexer"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/IgnoreCaseLexerTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/IgnoreCaseLexerTestLanguage.ecore#//Model">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/IgnoreCaseLexerTestLanguage.ecore#//Model/value"/>
+      disposableProviderFactory="true" ecorePackage="IgnoreCaseLexerTestLanguage.ecore#/">
+    <genClasses ecoreClass="IgnoreCaseLexerTestLanguage.ecore#//Model">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IgnoreCaseLexerTestLanguage.ecore#//Model/value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

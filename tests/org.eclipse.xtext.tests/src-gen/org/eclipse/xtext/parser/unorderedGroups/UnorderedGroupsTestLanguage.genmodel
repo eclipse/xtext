@@ -6,33 +6,33 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="UnorderedGroupsTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="UnorderedGroupsTestLanguage" basePackage="org.eclipse.xtext.parser.unorderedGroups"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/UnorderedGroupsTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/UnorderedGroupsTestLanguage.ecore#//Model">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/UnorderedGroupsTestLanguage.ecore#//Model/first"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/UnorderedGroupsTestLanguage.ecore#//Model/second"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/UnorderedGroupsTestLanguage.ecore#//Model/third"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/UnorderedGroupsTestLanguage.ecore#//Model/forth"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/UnorderedGroupsTestLanguage.ecore#//Model/firstAsList"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/UnorderedGroupsTestLanguage.ecore#//Model/secondAsList"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/UnorderedGroupsTestLanguage.ecore#//Model/thirdAsList"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/UnorderedGroupsTestLanguage.ecore#//Model/forthAsList"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/UnorderedGroupsTestLanguage.ecore#//Model/value"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/UnorderedGroupsTestLanguage.ecore#//Model/serialized"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/UnorderedGroupsTestLanguage.ecore#//Model/nestedModel"/>
+      disposableProviderFactory="true" ecorePackage="UnorderedGroupsTestLanguage.ecore#/">
+    <genClasses ecoreClass="UnorderedGroupsTestLanguage.ecore#//Model">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//Model/first"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//Model/second"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//Model/third"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//Model/forth"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//Model/firstAsList"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//Model/secondAsList"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//Model/thirdAsList"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//Model/forthAsList"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//Model/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UnorderedGroupsTestLanguage.ecore#//Model/serialized"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UnorderedGroupsTestLanguage.ecore#//Model/nestedModel"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/UnorderedGroupsTestLanguage.ecore#//NestedModel">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/UnorderedGroupsTestLanguage.ecore#//NestedModel/first"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/UnorderedGroupsTestLanguage.ecore#//NestedModel/second"/>
+    <genClasses ecoreClass="UnorderedGroupsTestLanguage.ecore#//NestedModel">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//NestedModel/first"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//NestedModel/second"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/UnorderedGroupsTestLanguage.ecore#//UnorderedSerialization">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/UnorderedGroupsTestLanguage.ecore#//UnorderedSerialization/first"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/UnorderedGroupsTestLanguage.ecore#//UnorderedSerialization/second"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/UnorderedGroupsTestLanguage.ecore#//UnorderedSerialization/third"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/UnorderedGroupsTestLanguage.ecore#//UnorderedSerialization/forth"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/UnorderedGroupsTestLanguage.ecore#//UnorderedSerialization/firstAsList"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/UnorderedGroupsTestLanguage.ecore#//UnorderedSerialization/secondAsList"/>
+    <genClasses ecoreClass="UnorderedGroupsTestLanguage.ecore#//UnorderedSerialization">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//UnorderedSerialization/first"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//UnorderedSerialization/second"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//UnorderedSerialization/third"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//UnorderedSerialization/forth"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//UnorderedSerialization/firstAsList"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//UnorderedSerialization/secondAsList"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

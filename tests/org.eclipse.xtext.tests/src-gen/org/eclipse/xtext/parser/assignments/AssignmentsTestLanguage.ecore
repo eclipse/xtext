@@ -4,18 +4,18 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="assignmentsTestLanguage"
     nsURI="http://www.eclipse.org/2008/tmf/xtext/AssignmentsTest" nsPrefix="assignmentsTestLanguage">
   <eClassifiers xsi:type="ecore:EClass" name="Model">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="single" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/AssignmentsTestLanguage.ecore#//SingleValue"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="single" eType="#//SingleValue"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="multi" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/AssignmentsTestLanguage.ecore#//MultiValue"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="multi" eType="#//MultiValue"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="object" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="object" eType="ecore:EClass ../../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SingleValue">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType ../../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MultiValue">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        eType="ecore:EDataType ../../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

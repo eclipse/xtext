@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -102,6 +103,9 @@ public class Bug287988TestPackageImpl extends EPackageImpl implements Bug287988T
     Bug287988TestPackageImpl theBug287988TestPackage = (Bug287988TestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Bug287988TestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Bug287988TestPackageImpl());
 
     isInited = true;
+
+    // Initialize simple dependencies
+    EcorePackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theBug287988TestPackage.createPackageContents();
@@ -265,6 +269,9 @@ public class Bug287988TestPackageImpl extends EPackageImpl implements Bug287988T
     setNsPrefix(eNS_PREFIX);
     setNsURI(eNS_URI);
 
+    // Obtain other dependent packages
+    EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
+
     // Create type parameters
 
     // Set bounds for type parameters
@@ -279,8 +286,8 @@ public class Bug287988TestPackageImpl extends EPackageImpl implements Bug287988T
 
     initEClass(baseAttributeEClass, BaseAttribute.class, "BaseAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getBaseAttribute_TypeRef(), this.getBaseAttribute(), null, "typeRef", null, 0, 1, BaseAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getBaseAttribute_Type(), ecorePackage.getEString(), "type", null, 0, 1, BaseAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getBaseAttribute_Name(), ecorePackage.getEString(), "name", null, 0, 1, BaseAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getBaseAttribute_Type(), theEcorePackage.getEString(), "type", null, 0, 1, BaseAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getBaseAttribute_Name(), theEcorePackage.getEString(), "name", null, 0, 1, BaseAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(attributeEClass, Attribute.class, "Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

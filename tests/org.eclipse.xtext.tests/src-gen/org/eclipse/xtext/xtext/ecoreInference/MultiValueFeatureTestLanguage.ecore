@@ -5,6 +5,6 @@
     nsURI="http://www.eclipse.org/2008/xtext/MultiValueFeatureTestLanguage" nsPrefix="multiValueFeatureTestLanguage">
   <eClassifiers xsi:type="ecore:EClass" name="Start">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="featureA" unique="false"
-        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        upperBound="-1" eType="ecore:EDataType ../../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

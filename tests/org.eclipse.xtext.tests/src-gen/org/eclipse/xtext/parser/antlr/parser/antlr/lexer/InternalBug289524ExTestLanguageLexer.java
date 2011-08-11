@@ -12,18 +12,18 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalBug289524ExTestLanguageLexer extends Lexer {
-    public static final int RULE_ML_COMMENT=11;
     public static final int RULE_ID=8;
-    public static final int KEYWORD_4=4;
-    public static final int RULE_WS=13;
-    public static final int KEYWORD_1=7;
-    public static final int RULE_INT=9;
-    public static final int EOF=-1;
     public static final int RULE_STRING=10;
     public static final int RULE_ANY_OTHER=14;
-    public static final int KEYWORD_2=6;
-    public static final int RULE_SL_COMMENT=12;
+    public static final int KEYWORD_1=7;
+    public static final int RULE_INT=9;
+    public static final int KEYWORD_4=4;
     public static final int KEYWORD_3=5;
+    public static final int KEYWORD_2=6;
+    public static final int RULE_WS=13;
+    public static final int RULE_SL_COMMENT=12;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=11;
 
     // delegates
     // delegators
@@ -743,7 +743,7 @@ public class InternalBug289524ExTestLanguageLexer extends Lexer {
         "\4\uffff\1\4\1\uffff\1\5\1\6\3\uffff\1\12\1\13\1\uffff\1\5\2\uffff"+
         "\1\4\1\6\1\7\1\10\1\11\1\12\13\uffff\1\3\7\uffff\1\2\1\uffff\1\1";
     static final String DFA12_specialS =
-        "\1\2\7\uffff\1\1\1\0\43\uffff}>";
+        "\1\1\7\uffff\1\2\1\0\43\uffff}>";
     static final String[] DFA12_transitionS = {
             "\11\14\2\13\2\14\1\13\22\14\1\13\1\14\1\10\1\14\1\4\2\14\1\11"+
             "\7\14\1\12\12\7\7\14\14\6\1\3\15\6\3\14\1\5\1\6\1\14\2\6\1\1"+
@@ -841,16 +841,6 @@ public class InternalBug289524ExTestLanguageLexer extends Lexer {
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA12_8 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA12_8>='\u0000' && LA12_8<='\uFFFF')) ) {s = 19;}
-
-                        else s = 12;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
                         int LA12_0 = input.LA(1);
 
                         s = -1;
@@ -877,6 +867,16 @@ public class InternalBug289524ExTestLanguageLexer extends Lexer {
                         else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {s = 11;}
 
                         else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||LA12_0=='#'||(LA12_0>='%' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='.')||(LA12_0>=':' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||(LA12_0>='{' && LA12_0<='\uFFFF')) ) {s = 12;}
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
+                        int LA12_8 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA12_8>='\u0000' && LA12_8<='\uFFFF')) ) {s = 19;}
+
+                        else s = 12;
 
                         if ( s>=0 ) return s;
                         break;

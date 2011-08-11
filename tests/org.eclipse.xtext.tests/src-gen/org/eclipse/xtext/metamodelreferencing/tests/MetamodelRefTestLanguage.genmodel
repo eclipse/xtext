@@ -6,12 +6,12 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="MetamodelRefTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="platform:/resource/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.genmodel#//xtext">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore ../../../../../../../org.eclipse.xtext/src/org/eclipse/xtext/Xtext.genmodel#//xtext">
   <genPackages prefix="AnotherSimpleTest" basePackage="org.eclipse.xtext.metamodelreferencing.tests"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTestLanguage.ecore#//Foo">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTestLanguage.ecore#//Foo/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTestLanguage.ecore#//Foo/nameRefs"/>
+      disposableProviderFactory="true" ecorePackage="MetamodelRefTestLanguage.ecore#/">
+    <genClasses ecoreClass="MetamodelRefTestLanguage.ecore#//Foo">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MetamodelRefTestLanguage.ecore#//Foo/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MetamodelRefTestLanguage.ecore#//Foo/nameRefs"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

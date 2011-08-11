@@ -12,22 +12,22 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalSerializationErrorTestLanguageLexer extends Lexer {
-    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
-    public static final int T__12=12;
-    public static final int RULE_WS=9;
-    public static final int T__17=17;
-    public static final int RULE_INT=5;
-    public static final int EOF=-1;
-    public static final int T__13=13;
-    public static final int T__16=16;
     public static final int RULE_STRING=6;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int T__14=14;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int T__11=11;
-    public static final int T__18=18;
+    public static final int T__16=16;
     public static final int T__15=15;
+    public static final int T__18=18;
+    public static final int T__17=17;
+    public static final int T__12=12;
+    public static final int T__11=11;
+    public static final int T__14=14;
+    public static final int T__13=13;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_INT=5;
+    public static final int RULE_WS=9;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=7;
 
     // delegates
     // delegators
@@ -856,7 +856,7 @@ public class InternalSerializationErrorTestLanguageLexer extends Lexer {
         "\1\17\1\1\1\2\1\uffff\1\11\1\uffff\1\7\1\10\1\12\1\13\1\14\1\15"+
         "\1\16\4\uffff\1\6\1\5\15\uffff\1\4\1\3";
     static final String DFA12_specialS =
-        "\1\1\11\uffff\1\0\1\2\44\uffff}>";
+        "\1\1\11\uffff\1\2\1\0\44\uffff}>";
     static final String[] DFA12_transitionS = {
             "\11\16\2\15\2\16\1\15\22\16\1\15\1\16\1\12\4\16\1\13\1\1\1\2"+
             "\5\16\1\14\12\11\7\16\32\10\3\16\1\7\1\10\1\16\16\10\1\4\4\10"+
@@ -948,10 +948,10 @@ public class InternalSerializationErrorTestLanguageLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA12_10 = input.LA(1);
+                        int LA12_11 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA12_10>='\u0000' && LA12_10<='\uFFFF')) ) {s = 23;}
+                        if ( ((LA12_11>='\u0000' && LA12_11<='\uFFFF')) ) {s = 23;}
 
                         else s = 14;
 
@@ -992,10 +992,10 @@ public class InternalSerializationErrorTestLanguageLexer extends Lexer {
                         if ( s>=0 ) return s;
                         break;
                     case 2 : 
-                        int LA12_11 = input.LA(1);
+                        int LA12_10 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA12_11>='\u0000' && LA12_11<='\uFFFF')) ) {s = 23;}
+                        if ( ((LA12_10>='\u0000' && LA12_10<='\uFFFF')) ) {s = 23;}
 
                         else s = 14;
 

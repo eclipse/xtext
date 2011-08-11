@@ -12,14 +12,14 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalMetamodelRefTestLanguageLexer extends Lexer {
-    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=9;
-    public static final int EOF=-1;
-    public static final int RULE_INT=5;
     public static final int RULE_STRING=6;
     public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_INT=5;
+    public static final int RULE_WS=9;
     public static final int RULE_SL_COMMENT=8;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=7;
 
     // delegates
     // delegators
@@ -620,7 +620,7 @@ public class InternalMetamodelRefTestLanguageLexer extends Lexer {
     static final String DFA12_acceptS =
         "\2\uffff\1\1\1\2\3\uffff\1\6\1\7\1\1\1\2\1\3\1\4\1\5\1\6";
     static final String DFA12_specialS =
-        "\1\0\3\uffff\1\2\1\1\11\uffff}>";
+        "\1\1\3\uffff\1\2\1\0\11\uffff}>";
     static final String[] DFA12_transitionS = {
             "\11\10\2\7\2\10\1\7\22\10\1\7\1\10\1\4\4\10\1\5\7\10\1\6\12"+
             "\3\7\10\32\2\3\10\1\1\1\2\1\10\32\2\uff85\10",
@@ -677,6 +677,16 @@ public class InternalMetamodelRefTestLanguageLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
+                        int LA12_5 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA12_5>='\u0000' && LA12_5<='\uFFFF')) ) {s = 11;}
+
+                        else s = 8;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
                         int LA12_0 = input.LA(1);
 
                         s = -1;
@@ -695,16 +705,6 @@ public class InternalMetamodelRefTestLanguageLexer extends Lexer {
                         else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {s = 7;}
 
                         else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='.')||(LA12_0>=':' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||(LA12_0>='{' && LA12_0<='\uFFFF')) ) {s = 8;}
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
-                        int LA12_5 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA12_5>='\u0000' && LA12_5<='\uFFFF')) ) {s = 11;}
-
-                        else s = 8;
 
                         if ( s>=0 ) return s;
                         break;

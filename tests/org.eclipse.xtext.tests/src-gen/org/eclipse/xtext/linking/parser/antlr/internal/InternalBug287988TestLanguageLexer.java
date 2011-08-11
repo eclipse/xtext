@@ -12,26 +12,26 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalBug287988TestLanguageLexer extends Lexer {
-    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
-    public static final int T__12=12;
-    public static final int T__20=20;
-    public static final int T__13=13;
-    public static final int RULE_STRING=6;
-    public static final int T__21=21;
-    public static final int T__19=19;
-    public static final int T__14=14;
-    public static final int T__11=11;
     public static final int T__22=22;
-    public static final int RULE_WS=9;
-    public static final int T__17=17;
-    public static final int EOF=-1;
-    public static final int RULE_INT=5;
-    public static final int T__16=16;
+    public static final int T__21=21;
     public static final int RULE_ANY_OTHER=10;
+    public static final int T__20=20;
+    public static final int EOF=-1;
     public static final int RULE_SL_COMMENT=8;
-    public static final int T__18=18;
+    public static final int RULE_ML_COMMENT=7;
+    public static final int T__19=19;
+    public static final int RULE_STRING=6;
+    public static final int T__16=16;
     public static final int T__15=15;
+    public static final int T__18=18;
+    public static final int T__17=17;
+    public static final int T__12=12;
+    public static final int T__11=11;
+    public static final int T__14=14;
+    public static final int T__13=13;
+    public static final int RULE_INT=5;
+    public static final int RULE_WS=9;
 
     // delegates
     // delegators
@@ -987,7 +987,7 @@ public class InternalBug287988TestLanguageLexer extends Lexer {
         "\1\7\11\uffff\1\13\10\uffff\1\2\2\uffff\1\12\1\1\6\uffff\1\3\1\uffff"+
         "\1\11\1\4\1\5\5\uffff\1\6";
     static final String DFA12_specialS =
-        "\1\0\12\uffff\1\2\1\1\111\uffff}>";
+        "\1\0\12\uffff\1\1\1\2\111\uffff}>";
     static final String[] DFA12_transitionS = {
             "\11\17\2\16\2\17\1\16\22\17\1\16\1\17\1\13\4\17\1\14\7\17\1"+
             "\15\12\12\1\17\1\5\5\17\32\11\3\17\1\10\1\11\1\17\1\1\1\11\1"+
@@ -1153,20 +1153,20 @@ public class InternalBug287988TestLanguageLexer extends Lexer {
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA12_12 = input.LA(1);
+                        int LA12_11 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA12_12>='\u0000' && LA12_12<='\uFFFF')) ) {s = 28;}
+                        if ( ((LA12_11>='\u0000' && LA12_11<='\uFFFF')) ) {s = 28;}
 
                         else s = 15;
 
                         if ( s>=0 ) return s;
                         break;
                     case 2 : 
-                        int LA12_11 = input.LA(1);
+                        int LA12_12 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA12_11>='\u0000' && LA12_11<='\uFFFF')) ) {s = 28;}
+                        if ( ((LA12_12>='\u0000' && LA12_12<='\uFFFF')) ) {s = 28;}
 
                         else s = 15;
 

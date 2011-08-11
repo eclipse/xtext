@@ -6,14 +6,14 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="InheritanceTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/BaseInheritanceTestLanguage.genmodel#//baseInheritanceTest">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore BaseInheritanceTestLanguage.genmodel#//baseInheritanceTest">
   <genPackages prefix="InheritanceTest" basePackage="org.eclipse.xtext.grammarinheritance"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.ecore#//Model">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.ecore#//Model/elements"/>
+      disposableProviderFactory="true" ecorePackage="InheritanceTestLanguage.ecore#/">
+    <genClasses ecoreClass="InheritanceTestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference InheritanceTestLanguage.ecore#//Model/elements"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.ecore#//Element">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.ecore#//Element/name"/>
+    <genClasses ecoreClass="InheritanceTestLanguage.ecore#//Element">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute InheritanceTestLanguage.ecore#//Element/name"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

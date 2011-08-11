@@ -8,6 +8,7 @@ package org.eclipse.xtext.parser.antlr.bug289515Test.impl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -77,6 +78,9 @@ public class Bug289515TestPackageImpl extends EPackageImpl implements Bug289515T
     Bug289515TestPackageImpl theBug289515TestPackage = (Bug289515TestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Bug289515TestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Bug289515TestPackageImpl());
 
     isInited = true;
+
+    // Initialize simple dependencies
+    EcorePackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theBug289515TestPackage.createPackageContents();
@@ -171,6 +175,9 @@ public class Bug289515TestPackageImpl extends EPackageImpl implements Bug289515T
     setNsPrefix(eNS_PREFIX);
     setNsURI(eNS_URI);
 
+    // Obtain other dependent packages
+    EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
+
     // Create type parameters
 
     // Set bounds for type parameters
@@ -179,7 +186,7 @@ public class Bug289515TestPackageImpl extends EPackageImpl implements Bug289515T
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getModel_Value(), ecorePackage.getEString(), "value", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getModel_Value(), theEcorePackage.getEString(), "value", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -86,6 +87,9 @@ public class UnassignedRuleCallTestLanguagePackageImpl extends EPackageImpl impl
     UnassignedRuleCallTestLanguagePackageImpl theUnassignedRuleCallTestLanguagePackage = (UnassignedRuleCallTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof UnassignedRuleCallTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new UnassignedRuleCallTestLanguagePackageImpl());
 
     isInited = true;
+
+    // Initialize simple dependencies
+    EcorePackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theUnassignedRuleCallTestLanguagePackage.createPackageContents();
@@ -203,6 +207,9 @@ public class UnassignedRuleCallTestLanguagePackageImpl extends EPackageImpl impl
     setNsPrefix(eNS_PREFIX);
     setNsURI(eNS_URI);
 
+    // Obtain other dependent packages
+    EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
+
     // Create type parameters
 
     // Set bounds for type parameters
@@ -214,7 +221,7 @@ public class UnassignedRuleCallTestLanguagePackageImpl extends EPackageImpl impl
     initEReference(getModel_ModelFeatures(), this.getModelFeatures(), null, "modelFeatures", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(modelFeaturesEClass, ModelFeatures.class, "ModelFeatures", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getModelFeatures_Name(), ecorePackage.getEString(), "name", null, 0, 1, ModelFeatures.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getModelFeatures_Name(), theEcorePackage.getEString(), "name", null, 0, 1, ModelFeatures.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

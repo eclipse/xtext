@@ -6,27 +6,27 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="LookaheadTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="LookaheadLang" basePackage="org.eclipse.xtext.testlanguages"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#//Entry">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#//Entry/contents"/>
+      disposableProviderFactory="true" ecorePackage="LookaheadTestLanguage.ecore#/">
+    <genClasses ecoreClass="LookaheadTestLanguage.ecore#//Entry">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LookaheadTestLanguage.ecore#//Entry/contents"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#//Alts">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#//Alts/x"/>
+    <genClasses ecoreClass="LookaheadTestLanguage.ecore#//Alts">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LookaheadTestLanguage.ecore#//Alts/x"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#//LookAhead0"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#//LookAhead1">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#//LookAhead1/y"/>
+    <genClasses ecoreClass="LookaheadTestLanguage.ecore#//LookAhead0"/>
+    <genClasses ecoreClass="LookaheadTestLanguage.ecore#//LookAhead1">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LookaheadTestLanguage.ecore#//LookAhead1/y"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#//LookAhead2">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#//LookAhead2/z"/>
+    <genClasses ecoreClass="LookaheadTestLanguage.ecore#//LookAhead2">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LookaheadTestLanguage.ecore#//LookAhead2/z"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#//LookAhead3">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#//LookAhead3/z"/>
+    <genClasses ecoreClass="LookaheadTestLanguage.ecore#//LookAhead3">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LookaheadTestLanguage.ecore#//LookAhead3/z"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#//LookAhead4">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#//LookAhead4/x"/>
+    <genClasses ecoreClass="LookaheadTestLanguage.ecore#//LookAhead4">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LookaheadTestLanguage.ecore#//LookAhead4/x"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

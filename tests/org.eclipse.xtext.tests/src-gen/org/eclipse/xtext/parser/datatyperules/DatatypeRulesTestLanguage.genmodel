@@ -6,18 +6,18 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="DatatypeRulesTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="DatatypeRulesTestLanguage" basePackage="org.eclipse.xtext.parser.datatyperules"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.ecore#//CompositeModel">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.ecore#//CompositeModel/model"/>
+      disposableProviderFactory="true" ecorePackage="DatatypeRulesTestLanguage.ecore#/">
+    <genClasses ecoreClass="DatatypeRulesTestLanguage.ecore#//CompositeModel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DatatypeRulesTestLanguage.ecore#//CompositeModel/model"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.ecore#//Model">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.ecore#//Model/id"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.ecore#//Model/value"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.ecore#//Model/vector"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.ecore#//Model/dots"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.ecore#//Model/double"/>
+    <genClasses ecoreClass="DatatypeRulesTestLanguage.ecore#//Model">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DatatypeRulesTestLanguage.ecore#//Model/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DatatypeRulesTestLanguage.ecore#//Model/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DatatypeRulesTestLanguage.ecore#//Model/vector"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DatatypeRulesTestLanguage.ecore#//Model/dots"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DatatypeRulesTestLanguage.ecore#//Model/double"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

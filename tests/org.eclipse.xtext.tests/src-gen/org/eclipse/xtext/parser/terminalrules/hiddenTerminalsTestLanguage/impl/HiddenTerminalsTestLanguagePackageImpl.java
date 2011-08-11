@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -142,6 +143,9 @@ public class HiddenTerminalsTestLanguagePackageImpl extends EPackageImpl impleme
     HiddenTerminalsTestLanguagePackageImpl theHiddenTerminalsTestLanguagePackage = (HiddenTerminalsTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof HiddenTerminalsTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new HiddenTerminalsTestLanguagePackageImpl());
 
     isInited = true;
+
+    // Initialize simple dependencies
+    EcorePackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theHiddenTerminalsTestLanguagePackage.createPackageContents();
@@ -431,6 +435,9 @@ public class HiddenTerminalsTestLanguagePackageImpl extends EPackageImpl impleme
     setNsPrefix(eNS_PREFIX);
     setNsURI(eNS_URI);
 
+    // Obtain other dependent packages
+    EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
+
     // Create type parameters
 
     // Set bounds for type parameters
@@ -444,10 +451,10 @@ public class HiddenTerminalsTestLanguagePackageImpl extends EPackageImpl impleme
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getModel_Valid(), ecorePackage.getEBoolean(), "valid", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getModel_Valid(), theEcorePackage.getEBoolean(), "valid", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(withoutHiddensEClass, WithoutHiddens.class, "WithoutHiddens", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getWithoutHiddens_Spaces(), ecorePackage.getEString(), "spaces", null, 0, -1, WithoutHiddens.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getWithoutHiddens_Spaces(), theEcorePackage.getEString(), "spaces", null, 0, -1, WithoutHiddens.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(withHiddensEClass, WithHiddens.class, "WithHiddens", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -455,8 +462,8 @@ public class HiddenTerminalsTestLanguagePackageImpl extends EPackageImpl impleme
     initEReference(getOverridingHiddens_Called(), this.getOverridingHiddensCall(), null, "called", null, 0, 1, OverridingHiddens.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(overridingHiddensCallEClass, OverridingHiddensCall.class, "OverridingHiddensCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getOverridingHiddensCall_Spaces(), ecorePackage.getEString(), "spaces", null, 0, -1, OverridingHiddensCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getOverridingHiddensCall_Valid(), ecorePackage.getEBoolean(), "valid", null, 0, 1, OverridingHiddensCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getOverridingHiddensCall_Spaces(), theEcorePackage.getEString(), "spaces", null, 0, -1, OverridingHiddensCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getOverridingHiddensCall_Valid(), theEcorePackage.getEBoolean(), "valid", null, 0, 1, OverridingHiddensCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(inheritingHiddensEClass, InheritingHiddens.class, "InheritingHiddens", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getInheritingHiddens_Called(), this.getInheritingHiddensCall(), null, "called", null, 0, 1, InheritingHiddens.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -465,11 +472,11 @@ public class HiddenTerminalsTestLanguagePackageImpl extends EPackageImpl impleme
     initEClass(datatypeHiddensEClass, DatatypeHiddens.class, "DatatypeHiddens", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(hidingHiddensEClass, HidingHiddens.class, "HidingHiddens", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getHidingHiddens_Space(), ecorePackage.getEString(), "space", null, 0, 1, HidingHiddens.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getHidingHiddens_Space(), theEcorePackage.getEString(), "space", null, 0, 1, HidingHiddens.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getHidingHiddens_Called(), this.getInheritingHiddensCall(), null, "called", null, 0, 1, HidingHiddens.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(inheritingHiddensCallEClass, InheritingHiddensCall.class, "InheritingHiddensCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getInheritingHiddensCall_Valid(), ecorePackage.getEBoolean(), "valid", null, 0, 1, InheritingHiddensCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getInheritingHiddensCall_Valid(), theEcorePackage.getEBoolean(), "valid", null, 0, 1, InheritingHiddensCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

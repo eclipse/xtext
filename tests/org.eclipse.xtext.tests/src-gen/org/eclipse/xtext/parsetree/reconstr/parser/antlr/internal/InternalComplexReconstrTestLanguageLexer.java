@@ -12,23 +12,23 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalComplexReconstrTestLanguageLexer extends Lexer {
-    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
-    public static final int T__12=12;
-    public static final int T__13=13;
-    public static final int RULE_STRING=6;
-    public static final int T__19=19;
-    public static final int T__14=14;
-    public static final int T__11=11;
-    public static final int RULE_WS=9;
-    public static final int T__17=17;
-    public static final int EOF=-1;
-    public static final int RULE_INT=5;
-    public static final int T__16=16;
     public static final int RULE_ANY_OTHER=10;
     public static final int RULE_SL_COMMENT=8;
-    public static final int T__18=18;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=7;
+    public static final int T__19=19;
+    public static final int RULE_STRING=6;
+    public static final int T__16=16;
     public static final int T__15=15;
+    public static final int T__18=18;
+    public static final int T__17=17;
+    public static final int T__12=12;
+    public static final int T__11=11;
+    public static final int T__14=14;
+    public static final int T__13=13;
+    public static final int RULE_INT=5;
+    public static final int RULE_WS=9;
 
     // delegates
     // delegators
@@ -877,7 +877,7 @@ public class InternalComplexReconstrTestLanguageLexer extends Lexer {
         "\1\13\3\uffff\1\17\1\20\1\1\1\2\1\3\1\4\1\5\1\uffff\1\12\1\7\1\10"+
         "\1\11\1\13\1\14\1\15\1\16\1\17\1\6";
     static final String DFA12_specialS =
-        "\1\1\14\uffff\1\0\1\2\23\uffff}>";
+        "\1\1\14\uffff\1\2\1\0\23\uffff}>";
     static final String[] DFA12_transitionS = {
             "\11\21\2\20\2\21\1\20\22\21\1\20\1\5\1\15\4\21\1\16\1\3\1\4"+
             "\1\21\1\1\1\10\1\2\1\21\1\17\12\14\7\21\23\13\1\6\6\13\1\7\1"+
@@ -954,10 +954,10 @@ public class InternalComplexReconstrTestLanguageLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA12_13 = input.LA(1);
+                        int LA12_14 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA12_13>='\u0000' && LA12_13<='\uFFFF')) ) {s = 29;}
+                        if ( ((LA12_14>='\u0000' && LA12_14<='\uFFFF')) ) {s = 29;}
 
                         else s = 17;
 
@@ -1004,10 +1004,10 @@ public class InternalComplexReconstrTestLanguageLexer extends Lexer {
                         if ( s>=0 ) return s;
                         break;
                     case 2 : 
-                        int LA12_14 = input.LA(1);
+                        int LA12_13 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA12_14>='\u0000' && LA12_14<='\uFFFF')) ) {s = 29;}
+                        if ( ((LA12_13>='\u0000' && LA12_13<='\uFFFF')) ) {s = 29;}
 
                         else s = 17;
 

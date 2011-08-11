@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -94,6 +95,9 @@ public class Bug289524ExTestPackageImpl extends EPackageImpl implements Bug28952
     Bug289524ExTestPackageImpl theBug289524ExTestPackage = (Bug289524ExTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Bug289524ExTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Bug289524ExTestPackageImpl());
 
     isInited = true;
+
+    // Initialize simple dependencies
+    EcorePackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theBug289524ExTestPackage.createPackageContents();
@@ -245,6 +249,9 @@ public class Bug289524ExTestPackageImpl extends EPackageImpl implements Bug28952
     setNsPrefix(eNS_PREFIX);
     setNsURI(eNS_URI);
 
+    // Obtain other dependent packages
+    EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
+
     // Create type parameters
 
     // Set bounds for type parameters
@@ -260,7 +267,7 @@ public class Bug289524ExTestPackageImpl extends EPackageImpl implements Bug28952
     initEReference(getModelElement_Refs(), this.getContained(), null, "refs", null, 0, -1, ModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(containedEClass, Contained.class, "Contained", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getContained_Name(), ecorePackage.getEString(), "name", null, 0, 1, Contained.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getContained_Name(), theEcorePackage.getEString(), "name", null, 0, 1, Contained.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

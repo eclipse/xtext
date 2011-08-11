@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -102,6 +103,9 @@ public class UnicodePackageImpl extends EPackageImpl implements UnicodePackage
     UnicodePackageImpl theUnicodePackage = (UnicodePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof UnicodePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new UnicodePackageImpl());
 
     isInited = true;
+
+    // Initialize simple dependencies
+    EcorePackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theUnicodePackage.createPackageContents();
@@ -243,6 +247,9 @@ public class UnicodePackageImpl extends EPackageImpl implements UnicodePackage
     setNsPrefix(eNS_PREFIX);
     setNsURI(eNS_URI);
 
+    // Obtain other dependent packages
+    EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
+
     // Create type parameters
 
     // Set bounds for type parameters
@@ -256,7 +263,7 @@ public class UnicodePackageImpl extends EPackageImpl implements UnicodePackage
     initEReference(getModel_Strings(), this.getAbstractString(), null, "strings", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(abstractStringEClass, AbstractString.class, "AbstractString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getAbstractString_Name(), ecorePackage.getEString(), "name", null, 0, 1, AbstractString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAbstractString_Name(), theEcorePackage.getEString(), "name", null, 0, 1, AbstractString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(gStringEClass, GString.class, "GString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

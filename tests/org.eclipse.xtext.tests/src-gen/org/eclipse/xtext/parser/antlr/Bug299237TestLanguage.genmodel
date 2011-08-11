@@ -6,11 +6,11 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="Bug299237TestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="Bug299237Test" basePackage="org.eclipse.xtext.parser.antlr"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/Bug299237TestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/Bug299237TestLanguage.ecore#//Model">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/Bug299237TestLanguage.ecore#//Model/name"/>
+      disposableProviderFactory="true" ecorePackage="Bug299237TestLanguage.ecore#/">
+    <genClasses ecoreClass="Bug299237TestLanguage.ecore#//Model">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug299237TestLanguage.ecore#//Model/name"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -6,87 +6,87 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="ElementMatcherTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="Elementmatchertestlanguage" basePackage="org.eclipse.xtext.parsetree.formatter"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Model"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Simple">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Simple/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Simple/optional"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Simple/datatype"/>
+      disposableProviderFactory="true" ecorePackage="ElementMatcherTestLanguage.ecore#/">
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//Model"/>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//Simple">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//Simple/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//Simple/optional"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//Simple/datatype"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//RuleCalls"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//RuleCallsSub">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//RuleCallsSub/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//RuleCallsSub/call1"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//RuleCallsSub/call2"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//RuleCallsSub/sub"/>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//RuleCalls"/>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//RuleCallsSub">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//RuleCallsSub/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//RuleCallsSub/call1"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//RuleCallsSub/call2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//RuleCallsSub/sub"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//RuleCallsAss1">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//RuleCallsAss1/name"/>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//RuleCallsAss1">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//RuleCallsAss1/name"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//RuleCallsAss2">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//RuleCallsAss2/name"/>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//RuleCallsAss2">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//RuleCallsAss2/name"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//OptionalCalls">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//OptionalCalls/opt1"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//OptionalCalls/name"/>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//OptionalCalls">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//OptionalCalls/opt1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//OptionalCalls/name"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//OptionalCallsSub1">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//OptionalCallsSub1/opt2"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//OptionalCallsSub1/opt3"/>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//OptionalCallsSub1">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//OptionalCallsSub1/opt2"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//OptionalCallsSub1/opt3"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//OptionalCallsSub2">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//OptionalCallsSub2/name"/>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//OptionalCallsSub2">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//OptionalCallsSub2/name"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//OptionalCallsSub3">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//OptionalCallsSub3/name"/>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//OptionalCallsSub3">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//OptionalCallsSub3/name"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Recursion"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//RecursionSub">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//RecursionSub/sub"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//RecursionSub/vals"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//RecursionSub/semi"/>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//Recursion"/>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//RecursionSub">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//RecursionSub/sub"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//RecursionSub/vals"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//RecursionSub/semi"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Loop">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Loop/names"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Loop/gr"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Loop/ints"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Loop/strings"/>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//Loop">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//Loop/names"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//Loop/gr"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//Loop/ints"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//Loop/strings"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Expression"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//RuleCalls12">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//RuleCalls12/constructor"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//RuleCalls12/fields"/>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//Expression"/>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//RuleCalls12">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//RuleCalls12/constructor"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//RuleCalls12/fields"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Constructor">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Constructor/kw1"/>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//Constructor">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//Constructor/kw1"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Field"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Parameter">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Parameter/kw2"/>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//Field"/>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//Parameter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//Parameter/kw2"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//NestedStart"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//NestedStartSub">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//NestedStartSub/name"/>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//NestedStart"/>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//NestedStartSub">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//NestedStartSub/name"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Add">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Add/left"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Add/right"/>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//Add">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//Add/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//Add/right"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Mult">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Mult/left"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Mult/right"/>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//Mult">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//Mult/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//Mult/right"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Value">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Value/val"/>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//Value">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//Value/val"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Function">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Function/func"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Function/param"/>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//Function">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//Function/func"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//Function/param"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Pointer">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Pointer/target"/>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//Pointer">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//Pointer/target"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

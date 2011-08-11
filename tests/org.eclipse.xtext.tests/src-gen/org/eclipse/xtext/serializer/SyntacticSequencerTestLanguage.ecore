@@ -4,82 +4,75 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="syntacticsequencertest"
     nsURI="http://www.eclipse.org/2009/tmf/xtext/syntacticsequencertestlanguage" nsPrefix="syntacticsequencertest">
   <eClassifiers xsi:type="ecore:EClass" name="Model">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="x1" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//MandatoryKeywords"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x1" eType="#//MandatoryKeywords"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="x2" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//Exp0"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x2" eType="#//Exp0" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x3" eType="#//Exp1" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x4" eType="#//Exp2" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x5" eType="#//SingleCrossReference"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="x3" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//Exp1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x6" eType="#//BooleanAlternative"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="x4" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//Exp2"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x7" eType="#//UnassignedDatatype"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="x5" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//SingleCrossReference"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="x6" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//BooleanAlternative"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="x7" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//UnassignedDatatype"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="x8" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//AmbiguousTransition"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x8" eType="#//AmbiguousTransition"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MandatoryKeywords">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val3" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val1" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val2" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val3" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Exp0"/>
   <eClassifiers xsi:type="ecore:EClass" name="Exp1"/>
   <eClassifiers xsi:type="ecore:EClass" name="Exp2"/>
   <eClassifiers xsi:type="ecore:EClass" name="SingleCrossReference">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ref1" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//SingleCrossReference"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ref2" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//SingleCrossReference"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ref3" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//SingleCrossReference"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ref4" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//SingleCrossReference"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref1" eType="#//SingleCrossReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref2" eType="#//SingleCrossReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref3" eType="#//SingleCrossReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref4" eType="#//SingleCrossReference"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanAlternative">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="bool" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//BooleanAlternativeLiteral"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bool" eType="#//BooleanAlternativeLiteral"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanAlternativeLiteral">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isTrue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isTrue" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UnassignedDatatype">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AmbiguousTransition">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Add0" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//Exp0">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//Exp0"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//Exp0"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Val0" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//Exp0">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Add1" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//Exp1">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//Exp1"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//Exp1"
+  <eClassifiers xsi:type="ecore:EClass" name="Add0" eSuperTypes="#//Exp0">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Exp0" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//Exp0"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Val1" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//Exp1">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Val0" eSuperTypes="#//Exp0">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Add2" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//Exp2">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//Exp2"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//Exp2"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Mult2" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//Exp2">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//Exp2"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//Exp2"
+  <eClassifiers xsi:type="ecore:EClass" name="Add1" eSuperTypes="#//Exp1">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Exp1" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//Exp1"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Val2" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//Exp2">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Val1" eSuperTypes="#//Exp1">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Add2" eSuperTypes="#//Exp2">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Exp2" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//Exp2"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Mult2" eSuperTypes="#//Exp2">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Exp2" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//Exp2"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Val2" eSuperTypes="#//Exp2">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

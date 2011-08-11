@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -395,6 +396,7 @@ public class FooPackageImpl extends EPackageImpl implements FooPackage
     setNsURI(eNS_URI);
 
     // Obtain other dependent packages
+    EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
     AmetamodelPackage theAmetamodelPackage = (AmetamodelPackage)EPackage.Registry.INSTANCE.getEPackage(AmetamodelPackage.eNS_URI);
 
     // Create type parameters
@@ -415,23 +417,23 @@ public class FooPackageImpl extends EPackageImpl implements FooPackage
     initEClass(rootRuleEClass, RootRule.class, "RootRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(concreteParserRuleEClass, ConcreteParserRule.class, "ConcreteParserRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getConcreteParserRule_MagicNumber(), ecorePackage.getEDouble(), "magicNumber", null, 0, 1, ConcreteParserRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getConcreteParserRule_MagicNumber(), theEcorePackage.getEDouble(), "magicNumber", null, 0, 1, ConcreteParserRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getConcreteParserRule_Elements(), theAmetamodelPackage.getAType(), null, "elements", null, 0, -1, ConcreteParserRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(callOverridenParserRuleEClass, CallOverridenParserRule.class, "CallOverridenParserRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getCallOverridenParserRule_Call(), theAmetamodelPackage.getAModel(), null, "call", null, 0, 1, CallOverridenParserRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(aType2EClass, AType2.class, "AType2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getAType2_Age(), ecorePackage.getEInt(), "age", null, 0, 1, AType2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAType2_Age(), theEcorePackage.getEInt(), "age", null, 0, 1, AType2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(subrule1EClass, Subrule1.class, "Subrule1", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getSubrule1_Sub1(), ecorePackage.getEString(), "sub1", null, 0, 1, Subrule1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getSubrule1_Sub1(), theEcorePackage.getEString(), "sub1", null, 0, 1, Subrule1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(subrule2EClass, Subrule2.class, "Subrule2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getSubrule2_Sub2(), ecorePackage.getEString(), "sub2", null, 0, 1, Subrule2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getSubrule2_Sub2(), theEcorePackage.getEString(), "sub2", null, 0, 1, Subrule2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(subrule3EClass, Subrule3.class, "Subrule3", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getSubrule3_Sub1(), ecorePackage.getEInt(), "sub1", null, 0, 1, Subrule3.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getSubrule3_Sub1(), theEcorePackage.getEInt(), "sub1", null, 0, 1, Subrule3.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(callExtendedParserRuleEClass, CallExtendedParserRule.class, "CallExtendedParserRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getCallExtendedParserRule_Call(), theAmetamodelPackage.getAModel(), null, "call", null, 0, 1, CallExtendedParserRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

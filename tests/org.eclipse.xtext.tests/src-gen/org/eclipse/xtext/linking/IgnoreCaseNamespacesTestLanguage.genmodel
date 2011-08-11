@@ -6,14 +6,14 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="IgnoreCaseNamespacesTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/AbstractIgnoreCaseLinkingTestLanguage.genmodel#//ignoreCaseLinkingTest">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore AbstractIgnoreCaseLinkingTestLanguage.genmodel#//ignoreCaseLinkingTest">
   <genPackages prefix="IgnoreCaseNamespacesTest" basePackage="org.eclipse.xtext.linking"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/IgnoreCaseNamespacesTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/IgnoreCaseNamespacesTestLanguage.ecore#//Model">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/IgnoreCaseNamespacesTestLanguage.ecore#//Model/imports"/>
+      disposableProviderFactory="true" ecorePackage="IgnoreCaseNamespacesTestLanguage.ecore#/">
+    <genClasses ecoreClass="IgnoreCaseNamespacesTestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IgnoreCaseNamespacesTestLanguage.ecore#//Model/imports"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/IgnoreCaseNamespacesTestLanguage.ecore#//Import">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/IgnoreCaseNamespacesTestLanguage.ecore#//Import/importedNamespace"/>
+    <genClasses ecoreClass="IgnoreCaseNamespacesTestLanguage.ecore#//Import">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IgnoreCaseNamespacesTestLanguage.ecore#//Import/importedNamespace"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

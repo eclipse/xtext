@@ -1,10 +1,10 @@
-RULE_WS=7
 RULE_EDATE=6
-T__8=8
-T__10=10
 RULE_EDOUBLE=5
-T__9=9
+T__10=10
 RULE_EINT=4
+RULE_WS=7
+T__9=9
+T__8=8
 'date'=10
 'int'=8
 'double'=9

@@ -6,18 +6,18 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="TerminalRulesTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="TerminalRulesTestLanguage" basePackage="org.eclipse.xtext.parser.terminalrules"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.ecore#//Model">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.ecore#//Model/idValue"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.ecore#//Model/intValue"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.ecore#//Model/stringValue"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.ecore#//Model/richStringValue"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.ecore#//Model/mlCommentValue"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.ecore#//Model/slCommentValue"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.ecore#//Model/wsValue"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.ecore#//Model/anyValue"/>
+      disposableProviderFactory="true" ecorePackage="TerminalRulesTestLanguage.ecore#/">
+    <genClasses ecoreClass="TerminalRulesTestLanguage.ecore#//Model">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TerminalRulesTestLanguage.ecore#//Model/idValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TerminalRulesTestLanguage.ecore#//Model/intValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TerminalRulesTestLanguage.ecore#//Model/stringValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TerminalRulesTestLanguage.ecore#//Model/richStringValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TerminalRulesTestLanguage.ecore#//Model/mlCommentValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TerminalRulesTestLanguage.ecore#//Model/slCommentValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TerminalRulesTestLanguage.ecore#//Model/wsValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TerminalRulesTestLanguage.ecore#//Model/anyValue"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

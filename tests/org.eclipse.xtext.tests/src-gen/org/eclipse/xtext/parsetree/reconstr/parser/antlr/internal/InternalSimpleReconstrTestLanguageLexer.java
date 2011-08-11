@@ -12,76 +12,76 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalSimpleReconstrTestLanguageLexer extends Lexer {
-    public static final int T__42=42;
-    public static final int T__28=28;
-    public static final int T__57=57;
-    public static final int T__23=23;
-    public static final int T__51=51;
-    public static final int T__13=13;
-    public static final int T__47=47;
+    public static final int T__68=68;
     public static final int T__69=69;
-    public static final int RULE_STRING=6;
-    public static final int T__50=50;
-    public static final int T__21=21;
-    public static final int T__19=19;
-    public static final int T__65=65;
-    public static final int T__72=72;
-    public static final int T__70=70;
+    public static final int RULE_ID=4;
+    public static final int T__66=66;
     public static final int T__67=67;
+    public static final int T__29=29;
+    public static final int T__64=64;
+    public static final int T__28=28;
+    public static final int T__65=65;
+    public static final int T__27=27;
+    public static final int T__62=62;
+    public static final int T__26=26;
+    public static final int T__63=63;
+    public static final int T__25=25;
+    public static final int T__24=24;
+    public static final int T__23=23;
+    public static final int T__22=22;
+    public static final int RULE_ANY_OTHER=12;
+    public static final int T__21=21;
+    public static final int T__20=20;
+    public static final int T__61=61;
+    public static final int EOF=-1;
+    public static final int T__60=60;
+    public static final int T__55=55;
+    public static final int T__56=56;
+    public static final int T__19=19;
+    public static final int T__57=57;
+    public static final int T__58=58;
+    public static final int T__16=16;
+    public static final int T__51=51;
+    public static final int T__15=15;
+    public static final int T__52=52;
+    public static final int T__53=53;
+    public static final int T__18=18;
+    public static final int T__54=54;
+    public static final int T__17=17;
+    public static final int T__14=14;
+    public static final int T__13=13;
+    public static final int T__59=59;
+    public static final int RULE_INT=5;
+    public static final int T__50=50;
+    public static final int T__42=42;
+    public static final int T__43=43;
+    public static final int T__40=40;
+    public static final int T__41=41;
+    public static final int T__46=46;
+    public static final int T__47=47;
+    public static final int T__44=44;
+    public static final int T__45=45;
+    public static final int T__48=48;
+    public static final int T__49=49;
+    public static final int RULE_SL_COMMENT=10;
+    public static final int RULE_ML_COMMENT=9;
+    public static final int T__30=30;
+    public static final int T__31=31;
+    public static final int T__32=32;
+    public static final int RULE_STRING=6;
+    public static final int T__33=33;
+    public static final int T__71=71;
+    public static final int T__34=34;
+    public static final int T__72=72;
+    public static final int T__35=35;
+    public static final int T__36=36;
+    public static final int T__70=70;
+    public static final int T__37=37;
+    public static final int T__38=38;
     public static final int T__39=39;
     public static final int RULE_ID1=7;
-    public static final int T__30=30;
-    public static final int T__46=46;
-    public static final int T__52=52;
-    public static final int T__68=68;
-    public static final int T__17=17;
-    public static final int T__62=62;
-    public static final int RULE_INT=5;
-    public static final int T__27=27;
-    public static final int T__24=24;
-    public static final int T__49=49;
-    public static final int T__61=61;
-    public static final int T__59=59;
-    public static final int T__54=54;
-    public static final int T__48=48;
-    public static final int T__34=34;
     public static final int RULE_ID2=8;
-    public static final int T__56=56;
-    public static final int T__15=15;
-    public static final int RULE_ML_COMMENT=9;
-    public static final int T__35=35;
-    public static final int RULE_ID=4;
-    public static final int T__36=36;
-    public static final int T__20=20;
-    public static final int T__58=58;
-    public static final int T__64=64;
-    public static final int T__44=44;
-    public static final int T__66=66;
-    public static final int T__33=33;
-    public static final int T__14=14;
-    public static final int T__22=22;
-    public static final int T__45=45;
-    public static final int T__29=29;
-    public static final int T__55=55;
-    public static final int T__63=63;
     public static final int RULE_WS=11;
-    public static final int T__43=43;
-    public static final int T__31=31;
-    public static final int T__40=40;
-    public static final int EOF=-1;
-    public static final int T__53=53;
-    public static final int T__32=32;
-    public static final int T__16=16;
-    public static final int T__38=38;
-    public static final int T__37=37;
-    public static final int T__26=26;
-    public static final int RULE_ANY_OTHER=12;
-    public static final int T__25=25;
-    public static final int RULE_SL_COMMENT=10;
-    public static final int T__60=60;
-    public static final int T__41=41;
-    public static final int T__18=18;
-    public static final int T__71=71;
 
     // delegates
     // delegators
@@ -2452,9 +2452,9 @@ public class InternalSimpleReconstrTestLanguageLexer extends Lexer {
     static final String DFA14_eotS =
         "\4\uffff\1\51\1\uffff\3\55\1\uffff\1\55\2\uffff\10\55\1\34\2\uffff"+
         "\3\34\5\uffff\1\114\12\uffff\2\55\1\uffff\2\55\1\uffff\1\144\1\145"+
-        "\1\146\1\147\1\150\1\151\2\uffff\1\152\1\153\2\55\1\156\5\55\1\165"+
+        "\1\146\1\147\1\150\1\151\2\uffff\1\152\1\153\2\55\1\157\5\55\1\165"+
         "\23\uffff\5\55\1\174\1\175\1\176\1\u0080\1\u0081\1\u0082\1\u0083"+
-        "\1\u0084\10\uffff\2\55\1\uffff\1\156\5\55\1\uffff\1\165\1\u008d"+
+        "\1\u0084\10\uffff\2\55\1\157\1\uffff\5\55\1\uffff\1\165\1\u008d"+
         "\4\55\3\uffff\1\u0092\5\uffff\1\55\1\u0094\3\55\1\u0098\1\u0099"+
         "\1\u009a\1\uffff\4\55\1\uffff\1\55\1\uffff\1\u00a0\1\55\1\u00a2"+
         "\3\uffff\5\55\1\uffff\1\u00a8\1\uffff\1\55\1\u00aa\3\55\1\uffff"+
@@ -2468,7 +2468,7 @@ public class InternalSimpleReconstrTestLanguageLexer extends Lexer {
         "\0\1\52\5\uffff\1\60\7\uffff\1\60\2\uffff\1\160\1\141\1\uffff\1"+
         "\164\1\153\1\uffff\6\60\2\uffff\2\60\1\164\1\145\1\60\2\141\1\156"+
         "\1\146\1\164\1\60\23\uffff\1\145\1\156\2\145\1\160\10\60\10\uffff"+
-        "\1\145\1\155\1\uffff\1\60\1\163\1\164\1\141\1\163\1\61\1\uffff\2"+
+        "\1\145\1\155\1\60\1\uffff\1\163\1\164\1\141\1\163\1\61\1\uffff\2"+
         "\60\1\163\1\156\1\171\1\164\3\uffff\1\60\5\uffff\1\162\1\60\1\163"+
         "\1\151\1\154\3\60\1\uffff\1\151\1\144\1\167\1\151\1\uffff\1\146"+
         "\1\uffff\1\60\1\143\1\60\3\uffff\1\145\1\163\2\157\1\141\1\uffff"+
@@ -2480,7 +2480,7 @@ public class InternalSimpleReconstrTestLanguageLexer extends Lexer {
         "\2\uffff\1\57\5\uffff\1\62\7\uffff\1\71\2\uffff\1\160\1\141\1\uffff"+
         "\1\164\1\157\1\uffff\6\172\2\uffff\2\172\1\164\1\145\1\172\2\141"+
         "\1\156\1\146\1\164\1\172\23\uffff\1\145\1\156\2\145\1\160\10\172"+
-        "\10\uffff\1\145\1\155\1\uffff\1\172\1\163\1\164\1\141\1\163\1\62"+
+        "\10\uffff\1\145\1\155\1\172\1\uffff\1\163\1\164\1\141\1\163\1\62"+
         "\1\uffff\2\172\1\163\1\156\1\171\1\164\3\uffff\1\172\5\uffff\1\162"+
         "\1\172\1\163\1\151\1\154\3\172\1\uffff\1\151\1\144\1\167\1\151\1"+
         "\uffff\1\146\1\uffff\1\172\1\143\1\172\3\uffff\1\145\1\163\2\157"+
@@ -2493,13 +2493,13 @@ public class InternalSimpleReconstrTestLanguageLexer extends Lexer {
         "\1\15\1\20\1\23\1\26\1\30\1\34\1\uffff\1\4\1\5\2\uffff\1\77\2\uffff"+
         "\1\14\6\uffff\1\21\1\22\13\uffff\1\100\1\101\1\102\1\103\1\104\1"+
         "\70\1\71\1\72\1\10\1\41\1\42\1\44\1\47\1\53\1\55\1\56\1\60\1\61"+
-        "\1\64\15\uffff\1\17\1\62\1\63\1\65\1\66\1\67\1\24\1\25\2\uffff\1"+
-        "\75\6\uffff\1\76\6\uffff\1\27\1\31\1\32\1\uffff\1\35\1\36\1\37\1"+
+        "\1\64\15\uffff\1\17\1\62\1\63\1\65\1\66\1\67\1\24\1\25\3\uffff\1"+
+        "\75\5\uffff\1\76\6\uffff\1\27\1\31\1\32\1\uffff\1\35\1\36\1\37\1"+
         "\40\1\43\10\uffff\1\6\4\uffff\1\33\1\uffff\1\54\3\uffff\1\57\1\73"+
         "\1\74\5\uffff\1\46\1\uffff\1\51\5\uffff\1\50\1\uffff\1\7\5\uffff"+
         "\1\16\1\uffff\1\52\2\uffff\1\45\1\11\1\12";
     static final String DFA14_specialS =
-        "\1\2\27\uffff\1\1\1\0\u009e\uffff}>";
+        "\1\1\27\uffff\1\2\1\0\u009e\uffff}>";
     static final String[] DFA14_transitionS = {
             "\11\34\2\33\2\34\1\33\22\34\1\33\1\3\1\30\1\4\3\34\1\31\1\1"+
             "\1\2\1\13\1\34\1\14\1\34\1\11\1\32\12\27\3\34\1\5\3\34\10\26"+
@@ -2567,7 +2567,7 @@ public class InternalSimpleReconstrTestLanguageLexer extends Lexer {
             "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "\1\154",
             "\1\155",
-            "\12\157\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\12\156\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "\1\160",
             "\1\161",
             "\1\162",
@@ -2616,8 +2616,8 @@ public class InternalSimpleReconstrTestLanguageLexer extends Lexer {
             "",
             "\1\u0085",
             "\1\u0086",
+            "\12\156\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "",
-            "\12\157\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "\1\u0087",
             "\1\u0088",
             "\1\u0089",
@@ -2739,16 +2739,6 @@ public class InternalSimpleReconstrTestLanguageLexer extends Lexer {
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA14_24 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA14_24>='\u0000' && LA14_24<='\uFFFF')) ) {s = 69;}
-
-                        else s = 28;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
                         int LA14_0 = input.LA(1);
 
                         s = -1;
@@ -2807,6 +2797,16 @@ public class InternalSimpleReconstrTestLanguageLexer extends Lexer {
                         else if ( ((LA14_0>='\t' && LA14_0<='\n')||LA14_0=='\r'||LA14_0==' ') ) {s = 27;}
 
                         else if ( ((LA14_0>='\u0000' && LA14_0<='\b')||(LA14_0>='\u000B' && LA14_0<='\f')||(LA14_0>='\u000E' && LA14_0<='\u001F')||(LA14_0>='$' && LA14_0<='&')||LA14_0=='+'||LA14_0=='-'||(LA14_0>=':' && LA14_0<='<')||(LA14_0>='>' && LA14_0<='@')||(LA14_0>='[' && LA14_0<=']')||LA14_0=='`'||(LA14_0>='{' && LA14_0<='\uFFFF')) ) {s = 28;}
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
+                        int LA14_24 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA14_24>='\u0000' && LA14_24<='\uFFFF')) ) {s = 69;}
+
+                        else s = 28;
 
                         if ( s>=0 ) return s;
                         break;

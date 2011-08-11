@@ -12,47 +12,47 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalSequencerTestLanguageLexer extends Lexer {
-    public static final int T__42=42;
+    public static final int RULE_ID=4;
+    public static final int T__29=29;
     public static final int T__28=28;
+    public static final int T__27=27;
+    public static final int T__26=26;
+    public static final int T__25=25;
+    public static final int T__24=24;
     public static final int T__23=23;
-    public static final int RULE_STRING=9;
+    public static final int T__22=22;
+    public static final int RULE_ANY_OTHER=13;
     public static final int T__21=21;
+    public static final int T__20=20;
+    public static final int EOF=-1;
     public static final int T__19=19;
-    public static final int RULE_ID3=7;
+    public static final int T__16=16;
+    public static final int T__15=15;
+    public static final int T__18=18;
+    public static final int T__17=17;
+    public static final int T__14=14;
+    public static final int RULE_INT=8;
+    public static final int T__42=42;
+    public static final int T__43=43;
+    public static final int T__40=40;
+    public static final int T__41=41;
+    public static final int RULE_SL_COMMENT=11;
+    public static final int RULE_ML_COMMENT=10;
+    public static final int T__30=30;
+    public static final int T__31=31;
+    public static final int T__32=32;
+    public static final int RULE_STRING=9;
+    public static final int T__33=33;
+    public static final int T__34=34;
+    public static final int T__35=35;
+    public static final int T__36=36;
+    public static final int T__37=37;
+    public static final int T__38=38;
     public static final int T__39=39;
     public static final int RULE_ID1=5;
-    public static final int T__30=30;
-    public static final int T__17=17;
-    public static final int RULE_INT=8;
-    public static final int T__27=27;
-    public static final int T__24=24;
-    public static final int T__34=34;
     public static final int RULE_ID2=6;
-    public static final int T__15=15;
-    public static final int RULE_ML_COMMENT=10;
-    public static final int T__35=35;
-    public static final int RULE_ID=4;
-    public static final int T__36=36;
-    public static final int T__20=20;
-    public static final int T__14=14;
-    public static final int T__33=33;
-    public static final int T__22=22;
-    public static final int T__29=29;
+    public static final int RULE_ID3=7;
     public static final int RULE_WS=12;
-    public static final int T__43=43;
-    public static final int T__31=31;
-    public static final int T__40=40;
-    public static final int EOF=-1;
-    public static final int T__16=16;
-    public static final int T__32=32;
-    public static final int T__38=38;
-    public static final int T__37=37;
-    public static final int T__26=26;
-    public static final int RULE_ANY_OTHER=13;
-    public static final int T__25=25;
-    public static final int RULE_SL_COMMENT=11;
-    public static final int T__41=41;
-    public static final int T__18=18;
 
     // delegates
     // delegators
@@ -1588,7 +1588,7 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         "\1\30\1\31\1\32\1\1\1\33\1\34\1\35\1\2\5\uffff\1\20\1\uffff\1\3"+
         "\1\4\1\6\1\11\1\12\1\36";
     static final String DFA12_specialS =
-        "\1\1\10\uffff\1\2\1\0\64\uffff}>";
+        "\1\1\10\uffff\1\0\1\2\64\uffff}>";
     static final String[] DFA12_transitionS = {
             "\11\15\2\14\2\15\1\14\22\15\1\14\1\15\1\11\1\1\1\5\2\15\1\12"+
             "\4\15\1\3\2\15\1\13\12\10\7\15\1\7\1\4\30\7\3\15\1\6\1\7\1\15"+
@@ -1695,10 +1695,10 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA12_10 = input.LA(1);
+                        int LA12_9 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA12_10>='\u0000' && LA12_10<='\uFFFF')) ) {s = 31;}
+                        if ( ((LA12_9>='\u0000' && LA12_9<='\uFFFF')) ) {s = 31;}
 
                         else s = 13;
 
@@ -1737,10 +1737,10 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
                         if ( s>=0 ) return s;
                         break;
                     case 2 : 
-                        int LA12_9 = input.LA(1);
+                        int LA12_10 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA12_9>='\u0000' && LA12_9<='\uFFFF')) ) {s = 31;}
+                        if ( ((LA12_10>='\u0000' && LA12_10<='\uFFFF')) ) {s = 31;}
 
                         else s = 13;
 

@@ -6,16 +6,16 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="PartialSerializationTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="Partialserializationtest" basePackage="org.eclipse.xtext.parsetree.reconstr"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/PartialSerializationTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/PartialSerializationTestLanguage.ecore#//Model"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/PartialSerializationTestLanguage.ecore#//NodeRoot">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/PartialSerializationTestLanguage.ecore#//NodeRoot/node"/>
+      disposableProviderFactory="true" ecorePackage="PartialSerializationTestLanguage.ecore#/">
+    <genClasses ecoreClass="PartialSerializationTestLanguage.ecore#//Model"/>
+    <genClasses ecoreClass="PartialSerializationTestLanguage.ecore#//NodeRoot">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialSerializationTestLanguage.ecore#//NodeRoot/node"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/PartialSerializationTestLanguage.ecore#//Node">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/PartialSerializationTestLanguage.ecore#//Node/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/PartialSerializationTestLanguage.ecore#//Node/children"/>
+    <genClasses ecoreClass="PartialSerializationTestLanguage.ecore#//Node">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PartialSerializationTestLanguage.ecore#//Node/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialSerializationTestLanguage.ecore#//Node/children"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

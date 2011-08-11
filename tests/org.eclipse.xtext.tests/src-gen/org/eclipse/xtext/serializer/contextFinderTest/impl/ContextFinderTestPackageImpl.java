@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -191,6 +192,9 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
     ContextFinderTestPackageImpl theContextFinderTestPackage = (ContextFinderTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ContextFinderTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ContextFinderTestPackageImpl());
 
     isInited = true;
+
+    // Initialize simple dependencies
+    EcorePackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theContextFinderTestPackage.createPackageContents();
@@ -641,6 +645,9 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
     setNsPrefix(eNS_PREFIX);
     setNsURI(eNS_URI);
 
+    // Obtain other dependent packages
+    EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
+
     // Create type parameters
 
     // Set bounds for type parameters
@@ -657,19 +664,19 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
     initEReference(getModel_AttributeExclusion(), this.getAttributeExclusionTest(), null, "attributeExclusion", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_NestedType(), this.getNestedTypeTest(), null, "nestedType", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_NestedTypeRecursiveTest2(), this.getNestedTypeRecursiveTest(), null, "nestedTypeRecursiveTest2", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getModel_ParentRef(), ecorePackage.getEObject(), null, "parentRef", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_ParentRef(), theEcorePackage.getEObject(), null, "parentRef", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_QuantityExclusion(), this.getQuantityExclusionTest(), null, "quantityExclusion", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_ValueExclusion(), this.getValueExclusionTest(), null, "valueExclusion", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(attributeExclusionTestEClass, AttributeExclusionTest.class, "AttributeExclusionTest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getAttributeExclusionTest_Attr1(), ecorePackage.getEString(), "attr1", null, 0, 1, AttributeExclusionTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getAttributeExclusionTest_Attr2(), ecorePackage.getEString(), "attr2", null, 0, 1, AttributeExclusionTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAttributeExclusionTest_Attr1(), theEcorePackage.getEString(), "attr1", null, 0, 1, AttributeExclusionTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAttributeExclusionTest_Attr2(), theEcorePackage.getEString(), "attr2", null, 0, 1, AttributeExclusionTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(nestedTypeTestEClass, NestedTypeTest.class, "NestedTypeTest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getNestedTypeTest_Nested(), this.getNestedTypeChild(), null, "nested", null, 0, 1, NestedTypeTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(nestedTypeChildEClass, NestedTypeChild.class, "NestedTypeChild", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getNestedTypeChild_Val(), ecorePackage.getEString(), "val", null, 0, 1, NestedTypeChild.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getNestedTypeChild_Val(), theEcorePackage.getEString(), "val", null, 0, 1, NestedTypeChild.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(nestedTypeChild1EClass, NestedTypeChild1.class, "NestedTypeChild1", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -688,8 +695,8 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
     initEReference(getParentRefTestChild_Child(), this.getParentRefTestChild(), null, "child", null, 0, 1, ParentRefTestChild.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(quantityExclusionTestEClass, QuantityExclusionTest.class, "QuantityExclusionTest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getQuantityExclusionTest_Attr1(), ecorePackage.getEString(), "attr1", null, 0, 1, QuantityExclusionTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getQuantityExclusionTest_Attr2(), ecorePackage.getEString(), "attr2", null, 0, 1, QuantityExclusionTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getQuantityExclusionTest_Attr1(), theEcorePackage.getEString(), "attr1", null, 0, 1, QuantityExclusionTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getQuantityExclusionTest_Attr2(), theEcorePackage.getEString(), "attr2", null, 0, 1, QuantityExclusionTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(valueExclusionTestEClass, ValueExclusionTest.class, "ValueExclusionTest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getValueExclusionTest_Val(), this.getValueExclusionTestEn(), "val", null, 0, 1, ValueExclusionTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

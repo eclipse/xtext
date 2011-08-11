@@ -6,19 +6,19 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="ImportUriTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="ImportedURI" basePackage="org.eclipse.xtext.linking" disposableProviderFactory="true"
-      ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/ImportUriTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/ImportUriTestLanguage.ecore#//Main">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/ImportUriTestLanguage.ecore#//Main/imports"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/ImportUriTestLanguage.ecore#//Main/types"/>
+      ecorePackage="ImportUriTestLanguage.ecore#/">
+    <genClasses ecoreClass="ImportUriTestLanguage.ecore#//Main">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImportUriTestLanguage.ecore#//Main/imports"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImportUriTestLanguage.ecore#//Main/types"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/ImportUriTestLanguage.ecore#//Import">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/ImportUriTestLanguage.ecore#//Import/importURI"/>
+    <genClasses ecoreClass="ImportUriTestLanguage.ecore#//Import">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ImportUriTestLanguage.ecore#//Import/importURI"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/ImportUriTestLanguage.ecore#//Type">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/ImportUriTestLanguage.ecore#//Type/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/ImportUriTestLanguage.ecore#//Type/extends"/>
+    <genClasses ecoreClass="ImportUriTestLanguage.ecore#//Type">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ImportUriTestLanguage.ecore#//Type/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ImportUriTestLanguage.ecore#//Type/extends"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

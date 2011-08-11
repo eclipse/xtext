@@ -5,25 +5,24 @@
     nsURI="http://www.eclipse.org/2008/xtext/LookaheadLang" nsPrefix="lookaheadLang">
   <eClassifiers xsi:type="ecore:EClass" name="Entry">
     <eStructuralFeatures xsi:type="ecore:EReference" name="contents" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#//Alts"
-        containment="true"/>
+        eType="#//Alts" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Alts">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="x" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="x" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="LookAhead0" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#//Alts"/>
-  <eClassifiers xsi:type="ecore:EClass" name="LookAhead1" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#//Alts">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="y" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#//LookAhead2"
+  <eClassifiers xsi:type="ecore:EClass" name="LookAhead0" eSuperTypes="#//Alts"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LookAhead1" eSuperTypes="#//Alts">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="y" eType="#//LookAhead2"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LookAhead2">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="z" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="z" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="LookAhead3" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#//Alts">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="z" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#//LookAhead4"
+  <eClassifiers xsi:type="ecore:EClass" name="LookAhead3" eSuperTypes="#//Alts">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="z" eType="#//LookAhead4"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LookAhead4">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="x" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="x" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

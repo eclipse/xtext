@@ -6,31 +6,31 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="ConcreteTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="platform:/resource/org.eclipse.xtext.tests/src/org/eclipse/xtext/grammarinheritance/ametamodel.genmodel#//ametamodel">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore ../../../../../src/org/eclipse/xtext/grammarinheritance/ametamodel.genmodel#//ametamodel">
   <genPackages prefix="Foo" basePackage="org.eclipse.xtext.grammarinheritance" disposableProviderFactory="true"
-      ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.ecore#//RootRule"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.ecore#//ConcreteParserRule">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.ecore#//ConcreteParserRule/magicNumber"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.ecore#//ConcreteParserRule/elements"/>
+      ecorePackage="ConcreteTestLanguage.ecore#/">
+    <genClasses ecoreClass="ConcreteTestLanguage.ecore#//RootRule"/>
+    <genClasses ecoreClass="ConcreteTestLanguage.ecore#//ConcreteParserRule">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteTestLanguage.ecore#//ConcreteParserRule/magicNumber"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteTestLanguage.ecore#//ConcreteParserRule/elements"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.ecore#//CallOverridenParserRule">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.ecore#//CallOverridenParserRule/call"/>
+    <genClasses ecoreClass="ConcreteTestLanguage.ecore#//CallOverridenParserRule">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteTestLanguage.ecore#//CallOverridenParserRule/call"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.ecore#//AType2">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.ecore#//AType2/age"/>
+    <genClasses ecoreClass="ConcreteTestLanguage.ecore#//AType2">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteTestLanguage.ecore#//AType2/age"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.ecore#//Subrule1">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.ecore#//Subrule1/sub1"/>
+    <genClasses ecoreClass="ConcreteTestLanguage.ecore#//Subrule1">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteTestLanguage.ecore#//Subrule1/sub1"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.ecore#//Subrule2">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.ecore#//Subrule2/sub2"/>
+    <genClasses ecoreClass="ConcreteTestLanguage.ecore#//Subrule2">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteTestLanguage.ecore#//Subrule2/sub2"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.ecore#//Subrule3">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.ecore#//Subrule3/sub1"/>
+    <genClasses ecoreClass="ConcreteTestLanguage.ecore#//Subrule3">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteTestLanguage.ecore#//Subrule3/sub1"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.ecore#//CallExtendedParserRule">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.ecore#//CallExtendedParserRule/call"/>
+    <genClasses ecoreClass="ConcreteTestLanguage.ecore#//CallExtendedParserRule">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteTestLanguage.ecore#//CallExtendedParserRule/call"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

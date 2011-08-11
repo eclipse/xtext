@@ -24,34 +24,34 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_TERMINAL1", "RULE_TERMINAL2", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'#00'", "'#01'", "'#02'", "'#03'", "'#04'", "'#05'", "'#06'", "'#07'", "'#08'", "'#09'", "'kw1'", "'kw2'", "'%foo'", "'true'", "'false'", "'lit3'", "'lit1'", "'lit2'"
     };
-    public static final int RULE_ML_COMMENT=9;
     public static final int RULE_ID=6;
-    public static final int T__28=28;
-    public static final int T__23=23;
-    public static final int RULE_TERMINAL1=4;
-    public static final int T__20=20;
-    public static final int T__13=13;
-    public static final int RULE_STRING=8;
-    public static final int T__21=21;
-    public static final int T__19=19;
-    public static final int T__14=14;
-    public static final int T__22=22;
     public static final int T__29=29;
-    public static final int RULE_TERMINAL2=5;
-    public static final int T__30=30;
-    public static final int RULE_WS=11;
-    public static final int T__17=17;
-    public static final int RULE_INT=7;
-    public static final int EOF=-1;
+    public static final int T__28=28;
     public static final int T__27=27;
-    public static final int T__16=16;
-    public static final int T__24=24;
-    public static final int RULE_ANY_OTHER=12;
     public static final int T__26=26;
     public static final int T__25=25;
+    public static final int T__24=24;
+    public static final int T__23=23;
+    public static final int T__22=22;
+    public static final int RULE_ANY_OTHER=12;
+    public static final int T__21=21;
+    public static final int T__20=20;
+    public static final int RULE_TERMINAL1=4;
+    public static final int RULE_TERMINAL2=5;
     public static final int RULE_SL_COMMENT=10;
-    public static final int T__18=18;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=9;
+    public static final int T__30=30;
+    public static final int T__19=19;
+    public static final int RULE_STRING=8;
+    public static final int T__16=16;
     public static final int T__15=15;
+    public static final int T__18=18;
+    public static final int T__17=17;
+    public static final int T__14=14;
+    public static final int T__13=13;
+    public static final int RULE_INT=7;
+    public static final int RULE_WS=11;
 
     // delegates
     // delegators

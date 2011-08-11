@@ -5,33 +5,28 @@
     nsURI="http://eclipse.org/xtext/lazyLinkingTestLanguage" nsPrefix="lazyLinking">
   <eClassifiers xsi:type="ecore:EClass" name="Model">
     <eStructuralFeatures xsi:type="ecore:EReference" name="types" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/LazyLinkingTestLanguage.ecore#//Type"
-        containment="true"/>
+        eType="#//Type" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Type">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="extends" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/LazyLinkingTestLanguage.ecore#//Type"
-        eOpposite="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/LazyLinkingTestLanguage.ecore#//Type/subtypes"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parentId" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/LazyLinkingTestLanguage.ecore#//Property"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType ../../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extends" eType="#//Type"
+        eOpposite="#//Type/subtypes"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentId" eType="#//Property"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/LazyLinkingTestLanguage.ecore#//Property"
-        containment="true"/>
+        eType="#//Property" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="unresolvedProxyProperty"
-        upperBound="-1" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/LazyLinkingTestLanguage.ecore#//UnresolvedProxyProperty"
-        containment="true"/>
+        upperBound="-1" eType="#//UnresolvedProxyProperty" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subtypes" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/LazyLinkingTestLanguage.ecore#//Type"
-        eOpposite="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/LazyLinkingTestLanguage.ecore#//Type/extends"/>
+        eType="#//Type" eOpposite="#//Type/extends"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Property">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" unique="false" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/LazyLinkingTestLanguage.ecore#//Type"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        eType="#//Type"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType ../../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UnresolvedProxyProperty">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" unique="false" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/LazyLinkingTestLanguage.ecore#//Type"
-        resolveProxies="false"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        eType="#//Type" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType ../../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

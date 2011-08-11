@@ -8,6 +8,7 @@ package org.eclipse.xtext.xtext.ecoreInference.multiValueFeatureTestLanguage.imp
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -77,6 +78,9 @@ public class MultiValueFeatureTestLanguagePackageImpl extends EPackageImpl imple
     MultiValueFeatureTestLanguagePackageImpl theMultiValueFeatureTestLanguagePackage = (MultiValueFeatureTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof MultiValueFeatureTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new MultiValueFeatureTestLanguagePackageImpl());
 
     isInited = true;
+
+    // Initialize simple dependencies
+    EcorePackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theMultiValueFeatureTestLanguagePackage.createPackageContents();
@@ -171,6 +175,9 @@ public class MultiValueFeatureTestLanguagePackageImpl extends EPackageImpl imple
     setNsPrefix(eNS_PREFIX);
     setNsURI(eNS_URI);
 
+    // Obtain other dependent packages
+    EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
+
     // Create type parameters
 
     // Set bounds for type parameters
@@ -179,7 +186,7 @@ public class MultiValueFeatureTestLanguagePackageImpl extends EPackageImpl imple
 
     // Initialize classes and features; add operations and parameters
     initEClass(startEClass, Start.class, "Start", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getStart_FeatureA(), ecorePackage.getEString(), "featureA", null, 0, -1, Start.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getStart_FeatureA(), theEcorePackage.getEString(), "featureA", null, 0, -1, Start.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

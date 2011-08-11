@@ -8,6 +8,7 @@ package org.eclipse.xtext.parsetree.reconstr.serializationBug269362TestLanguage.
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -77,6 +78,9 @@ public class SerializationBug269362TestLanguagePackageImpl extends EPackageImpl 
     SerializationBug269362TestLanguagePackageImpl theSerializationBug269362TestLanguagePackage = (SerializationBug269362TestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SerializationBug269362TestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SerializationBug269362TestLanguagePackageImpl());
 
     isInited = true;
+
+    // Initialize simple dependencies
+    EcorePackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theSerializationBug269362TestLanguagePackage.createPackageContents();
@@ -182,6 +186,9 @@ public class SerializationBug269362TestLanguagePackageImpl extends EPackageImpl 
     setNsPrefix(eNS_PREFIX);
     setNsURI(eNS_URI);
 
+    // Obtain other dependent packages
+    EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
+
     // Create type parameters
 
     // Set bounds for type parameters
@@ -190,8 +197,8 @@ public class SerializationBug269362TestLanguagePackageImpl extends EPackageImpl 
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getModel_Foo(), ecorePackage.getEString(), "foo", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getModel_Bar(), ecorePackage.getEString(), "bar", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getModel_Foo(), theEcorePackage.getEString(), "foo", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getModel_Bar(), theEcorePackage.getEString(), "bar", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

@@ -5,16 +5,15 @@
   <ecore:EPackage name="simpleTest" nsURI="http://eclipse.org/xtext/tests/SimpleTest"
       nsPrefix="simpleTest">
     <eClassifiers xsi:type="ecore:EClass" name="Foo">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType ../../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="nameRefs" upperBound="-1"
-          eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/MultiGenMMTestLanguage.ecore#/1/FooBar"
-          containment="true"/>
+          eType="#/1/FooBar" containment="true"/>
     </eClassifiers>
   </ecore:EPackage>
   <ecore:EPackage name="otherTest" nsURI="http://eclipse.org/xtext/tests/OtherTest"
       nsPrefix="otherTest">
     <eClassifiers xsi:type="ecore:EClass" name="FooBar">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType ../../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     </eClassifiers>
   </ecore:EPackage>
 </xmi:XMI>

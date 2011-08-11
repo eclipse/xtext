@@ -4,17 +4,16 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="bug289524Test"
     nsURI="http://eclipse.org/xtext/Bug289524TestLanguage" nsPrefix="bug289524Test">
   <eClassifiers xsi:type="ecore:EClass" name="Model">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="refs" upperBound="-1" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/Bug289524TestLanguage.ecore#//ModelElement"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refs" upperBound="-1" eType="#//ModelElement"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ModelElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="containments" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/Bug289524TestLanguage.ecore#//Contained"
-        containment="true"/>
+        eType="#//Contained" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="refs" unique="false" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/Bug289524TestLanguage.ecore#//Contained"/>
+        eType="#//Contained"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Contained">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType ../../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

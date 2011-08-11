@@ -5,10 +5,9 @@
     nsURI="http://www.eclipse.org/2010/tmf/xtext/parser/EncodingTest" nsPrefix="encodingTest">
   <eClassifiers xsi:type="ecore:EClass" name="Model">
     <eStructuralFeatures xsi:type="ecore:EReference" name="words" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/EncodingTestLanguage.ecore#//Word"
-        containment="true"/>
+        eType="#//Word" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Word">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType ../../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

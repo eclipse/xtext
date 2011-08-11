@@ -6,38 +6,38 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="PartialParserTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="PartialParserTestLanguage" basePackage="org.eclipse.xtext.testlanguages"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//SomeContainer">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//SomeContainer/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//SomeContainer/nested"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//SomeContainer/content"/>
+      disposableProviderFactory="true" ecorePackage="PartialParserTestLanguage.ecore#/">
+    <genClasses ecoreClass="PartialParserTestLanguage.ecore#//SomeContainer">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PartialParserTestLanguage.ecore#//SomeContainer/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialParserTestLanguage.ecore#//SomeContainer/nested"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialParserTestLanguage.ecore#//SomeContainer/content"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//Nested">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//Nested/nested"/>
+    <genClasses ecoreClass="PartialParserTestLanguage.ecore#//Nested">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialParserTestLanguage.ecore#//Nested/nested"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//Content"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//Children">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//Children/children"/>
+    <genClasses ecoreClass="PartialParserTestLanguage.ecore#//Content"/>
+    <genClasses ecoreClass="PartialParserTestLanguage.ecore#//Children">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialParserTestLanguage.ecore#//Children/children"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//Child">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//Child/value"/>
+    <genClasses ecoreClass="PartialParserTestLanguage.ecore#//Child">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialParserTestLanguage.ecore#//Child/value"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//AbstractChildren">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//AbstractChildren/abstractChildren"/>
+    <genClasses ecoreClass="PartialParserTestLanguage.ecore#//AbstractChildren">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialParserTestLanguage.ecore#//AbstractChildren/abstractChildren"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//AbstractChild">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//AbstractChild/value"/>
+    <genClasses ecoreClass="PartialParserTestLanguage.ecore#//AbstractChild">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialParserTestLanguage.ecore#//AbstractChild/value"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//FirstConcrete">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//FirstConcrete/referencedContainer"/>
+    <genClasses ecoreClass="PartialParserTestLanguage.ecore#//FirstConcrete">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference PartialParserTestLanguage.ecore#//FirstConcrete/referencedContainer"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//SecondConcrete">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//SecondConcrete/referencedChildren"/>
+    <genClasses ecoreClass="PartialParserTestLanguage.ecore#//SecondConcrete">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference PartialParserTestLanguage.ecore#//SecondConcrete/referencedChildren"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//Named">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//Named/name"/>
+    <genClasses ecoreClass="PartialParserTestLanguage.ecore#//Named">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PartialParserTestLanguage.ecore#//Named/name"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

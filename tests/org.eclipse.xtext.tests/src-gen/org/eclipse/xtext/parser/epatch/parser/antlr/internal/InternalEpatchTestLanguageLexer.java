@@ -12,44 +12,44 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalEpatchTestLanguageLexer extends Lexer {
-    public static final int RULE_ML_COMMENT=8;
-    public static final int T__35=35;
-    public static final int T__12=12;
-    public static final int RULE_ID=4;
-    public static final int T__28=28;
-    public static final int T__23=23;
-    public static final int T__36=36;
-    public static final int T__20=20;
-    public static final int T__13=13;
-    public static final int RULE_STRING=5;
-    public static final int T__21=21;
-    public static final int T__19=19;
-    public static final int T__33=33;
-    public static final int T__14=14;
-    public static final int T__22=22;
-    public static final int T__29=29;
-    public static final int T__39=39;
-    public static final int T__30=30;
-    public static final int RULE_WS=10;
-    public static final int T__17=17;
-    public static final int T__31=31;
     public static final int T__40=40;
-    public static final int RULE_INT=7;
-    public static final int EOF=-1;
+    public static final int RULE_ID=4;
+    public static final int T__29=29;
+    public static final int T__28=28;
     public static final int T__27=27;
-    public static final int T__16=16;
-    public static final int T__32=32;
-    public static final int T__24=24;
-    public static final int T__38=38;
-    public static final int T__37=37;
     public static final int T__26=26;
-    public static final int RULE_ANY_OTHER=11;
     public static final int T__25=25;
-    public static final int RULE_FRAGMENT=6;
+    public static final int T__24=24;
+    public static final int T__23=23;
+    public static final int T__22=22;
+    public static final int RULE_ANY_OTHER=11;
+    public static final int T__21=21;
+    public static final int T__20=20;
+    public static final int EOF=-1;
     public static final int RULE_SL_COMMENT=9;
+    public static final int RULE_ML_COMMENT=8;
+    public static final int RULE_FRAGMENT=6;
+    public static final int T__19=19;
+    public static final int T__30=30;
+    public static final int T__31=31;
+    public static final int T__32=32;
+    public static final int RULE_STRING=5;
+    public static final int T__16=16;
+    public static final int T__33=33;
+    public static final int T__15=15;
     public static final int T__34=34;
     public static final int T__18=18;
-    public static final int T__15=15;
+    public static final int T__35=35;
+    public static final int T__17=17;
+    public static final int T__36=36;
+    public static final int T__12=12;
+    public static final int T__37=37;
+    public static final int T__38=38;
+    public static final int T__14=14;
+    public static final int T__39=39;
+    public static final int T__13=13;
+    public static final int RULE_INT=7;
+    public static final int RULE_WS=10;
 
     // delegates
     // delegators
@@ -1549,7 +1549,7 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
         "\16\2\uffff\1\1\1\uffff\1\4\1\uffff\1\17\3\uffff\1\31\1\uffff\1"+
         "\13\1\11";
     static final String DFA13_specialS =
-        "\1\1\33\uffff\1\0\1\2\144\uffff}>";
+        "\1\2\33\uffff\1\1\1\0\144\uffff}>";
     static final String[] DFA13_transitionS = {
             "\11\40\2\37\2\40\1\37\22\40\1\37\1\40\1\34\1\30\3\40\1\35\1"+
             "\26\1\27\2\40\1\21\1\40\1\10\1\36\12\33\1\11\1\14\1\40\1\16"+
@@ -1725,6 +1725,16 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
+                        int LA13_29 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA13_29>='\u0000' && LA13_29<='\uFFFF')) ) {s = 65;}
+
+                        else s = 32;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
                         int LA13_28 = input.LA(1);
 
                         s = -1;
@@ -1734,7 +1744,7 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 1 : 
+                    case 2 : 
                         int LA13_0 = input.LA(1);
 
                         s = -1;
@@ -1801,16 +1811,6 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
                         else if ( ((LA13_0>='\t' && LA13_0<='\n')||LA13_0=='\r'||LA13_0==' ') ) {s = 31;}
 
                         else if ( ((LA13_0>='\u0000' && LA13_0<='\b')||(LA13_0>='\u000B' && LA13_0<='\f')||(LA13_0>='\u000E' && LA13_0<='\u001F')||LA13_0=='!'||(LA13_0>='$' && LA13_0<='&')||(LA13_0>='*' && LA13_0<='+')||LA13_0=='-'||LA13_0=='<'||(LA13_0>='>' && LA13_0<='@')||LA13_0=='\\'||LA13_0=='`'||(LA13_0>='~' && LA13_0<='\uFFFF')) ) {s = 32;}
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA13_29 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA13_29>='\u0000' && LA13_29<='\uFFFF')) ) {s = 65;}
-
-                        else s = 32;
 
                         if ( s>=0 ) return s;
                         break;

@@ -4,46 +4,41 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="partialParserTestLanguage"
     nsURI="http://example.xtext.org/PartialParserTestLanguage" nsPrefix="partialParserTestLanguage">
   <eClassifiers xsi:type="ecore:EClass" name="SomeContainer">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="nested" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//Nested"
-        containment="true"/>
+        eType="#//Nested" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="content" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//Content"
-        containment="true"/>
+        eType="#//Content" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Nested">
     <eStructuralFeatures xsi:type="ecore:EReference" name="nested" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//SomeContainer"
-        containment="true"/>
+        eType="#//SomeContainer" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Content"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Children" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//Content">
+  <eClassifiers xsi:type="ecore:EClass" name="Children" eSuperTypes="#//Content">
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//Child"
-        containment="true"/>
+        eType="#//Child" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Child">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//Named"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Named"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractChildren" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//Content">
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractChildren" eSuperTypes="#//Content">
     <eStructuralFeatures xsi:type="ecore:EReference" name="abstractChildren" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//AbstractChild"
-        containment="true"/>
+        eType="#//AbstractChild" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractChild">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//Named"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Named"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FirstConcrete" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//AbstractChild">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="referencedContainer" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//SomeContainer"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FirstConcrete" eSuperTypes="#//AbstractChild">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referencedContainer" eType="#//SomeContainer"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SecondConcrete" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//AbstractChild">
+  <eClassifiers xsi:type="ecore:EClass" name="SecondConcrete" eSuperTypes="#//AbstractChild">
     <eStructuralFeatures xsi:type="ecore:EReference" name="referencedChildren" unique="false"
-        upperBound="-1" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.ecore#//Child"/>
+        upperBound="-1" eType="#//Child"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Named">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

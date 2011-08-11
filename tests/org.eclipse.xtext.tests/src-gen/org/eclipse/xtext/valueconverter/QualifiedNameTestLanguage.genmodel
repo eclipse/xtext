@@ -6,11 +6,11 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="QualifiedNameTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="QualifiedName" basePackage="org.eclipse.xtext.valueconverter"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/valueconverter/QualifiedNameTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/valueconverter/QualifiedNameTestLanguage.ecore#//Element">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/valueconverter/QualifiedNameTestLanguage.ecore#//Element/qualifiedName"/>
+      disposableProviderFactory="true" ecorePackage="QualifiedNameTestLanguage.ecore#/">
+    <genClasses ecoreClass="QualifiedNameTestLanguage.ecore#//Element">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QualifiedNameTestLanguage.ecore#//Element/qualifiedName"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

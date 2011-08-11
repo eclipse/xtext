@@ -6,15 +6,15 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="IndentationAwareTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="IndentLang" basePackage="org.eclipse.xtext.testlanguages.indent"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/indent/IndentationAwareTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/indent/IndentationAwareTestLanguage.ecore#//NodeList">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/indent/IndentationAwareTestLanguage.ecore#//NodeList/children"/>
+      disposableProviderFactory="true" ecorePackage="IndentationAwareTestLanguage.ecore#/">
+    <genClasses ecoreClass="IndentationAwareTestLanguage.ecore#//NodeList">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IndentationAwareTestLanguage.ecore#//NodeList/children"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/indent/IndentationAwareTestLanguage.ecore#//Node">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/indent/IndentationAwareTestLanguage.ecore#//Node/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/indent/IndentationAwareTestLanguage.ecore#//Node/children"/>
+    <genClasses ecoreClass="IndentationAwareTestLanguage.ecore#//Node">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IndentationAwareTestLanguage.ecore#//Node/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IndentationAwareTestLanguage.ecore#//Node/children"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

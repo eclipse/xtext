@@ -6,24 +6,24 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="UnassignedTextTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="Unassignedtext" basePackage="org.eclipse.xtext.parsetree.unassignedtext"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/UnassignedTextTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/UnassignedTextTestLanguage.ecore#//Model"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/UnassignedTextTestLanguage.ecore#//CaseInsensitiveKeywordRule">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/UnassignedTextTestLanguage.ecore#//CaseInsensitiveKeywordRule/val"/>
+      disposableProviderFactory="true" ecorePackage="UnassignedTextTestLanguage.ecore#/">
+    <genClasses ecoreClass="UnassignedTextTestLanguage.ecore#//Model"/>
+    <genClasses ecoreClass="UnassignedTextTestLanguage.ecore#//CaseInsensitiveKeywordRule">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnassignedTextTestLanguage.ecore#//CaseInsensitiveKeywordRule/val"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/UnassignedTextTestLanguage.ecore#//PluralRule">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/UnassignedTextTestLanguage.ecore#//PluralRule/count"/>
+    <genClasses ecoreClass="UnassignedTextTestLanguage.ecore#//PluralRule">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnassignedTextTestLanguage.ecore#//PluralRule/count"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/UnassignedTextTestLanguage.ecore#//MultiRule">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/UnassignedTextTestLanguage.ecore#//MultiRule/val"/>
+    <genClasses ecoreClass="UnassignedTextTestLanguage.ecore#//MultiRule">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnassignedTextTestLanguage.ecore#//MultiRule/val"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/UnassignedTextTestLanguage.ecore#//DatatypeRule">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/UnassignedTextTestLanguage.ecore#//DatatypeRule/val"/>
+    <genClasses ecoreClass="UnassignedTextTestLanguage.ecore#//DatatypeRule">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnassignedTextTestLanguage.ecore#//DatatypeRule/val"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/UnassignedTextTestLanguage.ecore#//CommonTerminalsRule">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/UnassignedTextTestLanguage.ecore#//CommonTerminalsRule/val"/>
+    <genClasses ecoreClass="UnassignedTextTestLanguage.ecore#//CommonTerminalsRule">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnassignedTextTestLanguage.ecore#//CommonTerminalsRule/val"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

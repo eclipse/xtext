@@ -6,16 +6,16 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="TreeTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="TreeTestLanguage" basePackage="org.eclipse.xtext.testlanguages"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/TreeTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/TreeTestLanguage.ecore#//Model">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/TreeTestLanguage.ecore#//Model/children"/>
+      disposableProviderFactory="true" ecorePackage="TreeTestLanguage.ecore#/">
+    <genClasses ecoreClass="TreeTestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TreeTestLanguage.ecore#//Model/children"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/TreeTestLanguage.ecore#//Node">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/TreeTestLanguage.ecore#//Node/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/TreeTestLanguage.ecore#//Node/attrib"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/TreeTestLanguage.ecore#//Node/children"/>
+    <genClasses ecoreClass="TreeTestLanguage.ecore#//Node">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TreeTestLanguage.ecore#//Node/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TreeTestLanguage.ecore#//Node/attrib"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TreeTestLanguage.ecore#//Node/children"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

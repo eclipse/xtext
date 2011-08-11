@@ -12,12 +12,12 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalBug301935TestLanguageLexer extends Lexer {
-    public static final int T__7=7;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=5;
-    public static final int T__8=8;
-    public static final int EOF=-1;
     public static final int RULE_ANY_OTHER=6;
+    public static final int RULE_WS=5;
+    public static final int EOF=-1;
+    public static final int T__8=8;
+    public static final int T__7=7;
 
     // delegates
     // delegators

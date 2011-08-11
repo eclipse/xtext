@@ -6,15 +6,15 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="CommentAssociationTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="CommentAssociation" basePackage="org.eclipse.xtext.parsetree.impl"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/CommentAssociationTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/CommentAssociationTestLanguage.ecore#//Model">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/CommentAssociationTestLanguage.ecore#//Model/elements"/>
+      disposableProviderFactory="true" ecorePackage="CommentAssociationTestLanguage.ecore#/">
+    <genClasses ecoreClass="CommentAssociationTestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CommentAssociationTestLanguage.ecore#//Model/elements"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/CommentAssociationTestLanguage.ecore#//Element">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/CommentAssociationTestLanguage.ecore#//Element/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/CommentAssociationTestLanguage.ecore#//Element/child"/>
+    <genClasses ecoreClass="CommentAssociationTestLanguage.ecore#//Element">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CommentAssociationTestLanguage.ecore#//Element/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CommentAssociationTestLanguage.ecore#//Element/child"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

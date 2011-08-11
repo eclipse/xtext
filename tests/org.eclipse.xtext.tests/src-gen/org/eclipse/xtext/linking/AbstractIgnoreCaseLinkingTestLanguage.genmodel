@@ -6,16 +6,16 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="AbstractIgnoreCaseLinkingTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="IgnoreCaseLinkingTest" basePackage="org.eclipse.xtext.linking"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/AbstractIgnoreCaseLinkingTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/AbstractIgnoreCaseLinkingTestLanguage.ecore#//Model">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/AbstractIgnoreCaseLinkingTestLanguage.ecore#//Model/elements"/>
+      disposableProviderFactory="true" ecorePackage="AbstractIgnoreCaseLinkingTestLanguage.ecore#/">
+    <genClasses ecoreClass="AbstractIgnoreCaseLinkingTestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AbstractIgnoreCaseLinkingTestLanguage.ecore#//Model/elements"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/AbstractIgnoreCaseLinkingTestLanguage.ecore#//Element">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/AbstractIgnoreCaseLinkingTestLanguage.ecore#//Element/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/AbstractIgnoreCaseLinkingTestLanguage.ecore#//Element/reference"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/AbstractIgnoreCaseLinkingTestLanguage.ecore#//Element/elements"/>
+    <genClasses ecoreClass="AbstractIgnoreCaseLinkingTestLanguage.ecore#//Element">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AbstractIgnoreCaseLinkingTestLanguage.ecore#//Element/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AbstractIgnoreCaseLinkingTestLanguage.ecore#//Element/reference"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AbstractIgnoreCaseLinkingTestLanguage.ecore#//Element/elements"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

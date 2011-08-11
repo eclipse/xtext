@@ -12,19 +12,19 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalLangATestLanguageLexer extends Lexer {
-    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=5;
-    public static final int T__12=12;
-    public static final int RULE_WS=9;
-    public static final int RULE_INT=6;
-    public static final int EOF=-1;
-    public static final int T__13=13;
     public static final int RULE_STRING=4;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int T__14=14;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int T__11=11;
     public static final int T__15=15;
+    public static final int T__12=12;
+    public static final int T__11=11;
+    public static final int T__14=14;
+    public static final int T__13=13;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_INT=6;
+    public static final int RULE_WS=9;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=7;
 
     // delegates
     // delegators
@@ -774,7 +774,7 @@ public class InternalLangATestLanguageLexer extends Lexer {
         "\1\5\1\7\1\10\1\11\1\12\1\13\11\uffff\1\2\4\uffff\1\1\3\uffff\1"+
         "\3\2\uffff\1\4";
     static final String DFA12_specialS =
-        "\1\2\7\uffff\1\1\1\0\43\uffff}>";
+        "\1\2\7\uffff\1\0\1\1\43\uffff}>";
     static final String[] DFA12_transitionS = {
             "\11\14\2\13\2\14\1\13\22\14\1\13\1\14\1\10\4\14\1\11\4\14\1"+
             "\4\2\14\1\12\12\7\7\14\32\6\3\14\1\5\1\6\1\14\4\6\1\3\3\6\1"+
@@ -862,20 +862,20 @@ public class InternalLangATestLanguageLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA12_9 = input.LA(1);
+                        int LA12_8 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA12_9>='\u0000' && LA12_9<='\uFFFF')) ) {s = 19;}
+                        if ( ((LA12_8>='\u0000' && LA12_8<='\uFFFF')) ) {s = 19;}
 
                         else s = 12;
 
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA12_8 = input.LA(1);
+                        int LA12_9 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA12_8>='\u0000' && LA12_8<='\uFFFF')) ) {s = 19;}
+                        if ( ((LA12_9>='\u0000' && LA12_9<='\uFFFF')) ) {s = 19;}
 
                         else s = 12;
 

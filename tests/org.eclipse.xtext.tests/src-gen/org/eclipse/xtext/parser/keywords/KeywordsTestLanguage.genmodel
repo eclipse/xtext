@@ -6,18 +6,18 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="KeywordsTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="KeywordsTestLanguage" basePackage="org.eclipse.xtext.parser.keywords"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.ecore#//Model">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.ecore#//Model/first"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.ecore#//Model/second"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.ecore#//Model/third"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.ecore#//Model/forth"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.ecore#//Model/fifth"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.ecore#//Model/sixth"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.ecore#//Model/seventh"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.ecore#//Model/eighth"/>
+      disposableProviderFactory="true" ecorePackage="KeywordsTestLanguage.ecore#/">
+    <genClasses ecoreClass="KeywordsTestLanguage.ecore#//Model">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KeywordsTestLanguage.ecore#//Model/first"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KeywordsTestLanguage.ecore#//Model/second"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KeywordsTestLanguage.ecore#//Model/third"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KeywordsTestLanguage.ecore#//Model/forth"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KeywordsTestLanguage.ecore#//Model/fifth"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KeywordsTestLanguage.ecore#//Model/sixth"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KeywordsTestLanguage.ecore#//Model/seventh"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KeywordsTestLanguage.ecore#//Model/eighth"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

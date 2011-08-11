@@ -6,14 +6,14 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="IgnoreCaseImportsTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/AbstractIgnoreCaseLinkingTestLanguage.genmodel#//ignoreCaseLinkingTest">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore AbstractIgnoreCaseLinkingTestLanguage.genmodel#//ignoreCaseLinkingTest">
   <genPackages prefix="IgnoreCaseImportsTest" basePackage="org.eclipse.xtext.linking"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/IgnoreCaseImportsTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/IgnoreCaseImportsTestLanguage.ecore#//Model">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/IgnoreCaseImportsTestLanguage.ecore#//Model/imports"/>
+      disposableProviderFactory="true" ecorePackage="IgnoreCaseImportsTestLanguage.ecore#/">
+    <genClasses ecoreClass="IgnoreCaseImportsTestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IgnoreCaseImportsTestLanguage.ecore#//Model/imports"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/IgnoreCaseImportsTestLanguage.ecore#//Import">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/IgnoreCaseImportsTestLanguage.ecore#//Import/importURI"/>
+    <genClasses ecoreClass="IgnoreCaseImportsTestLanguage.ecore#//Import">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IgnoreCaseImportsTestLanguage.ecore#//Import/importURI"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

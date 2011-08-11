@@ -8,6 +8,7 @@ package org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.impl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -117,6 +118,9 @@ public class UnassignedtextPackageImpl extends EPackageImpl implements Unassigne
     UnassignedtextPackageImpl theUnassignedtextPackage = (UnassignedtextPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof UnassignedtextPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new UnassignedtextPackageImpl());
 
     isInited = true;
+
+    // Initialize simple dependencies
+    EcorePackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theUnassignedtextPackage.createPackageContents();
@@ -315,6 +319,9 @@ public class UnassignedtextPackageImpl extends EPackageImpl implements Unassigne
     setNsPrefix(eNS_PREFIX);
     setNsURI(eNS_URI);
 
+    // Obtain other dependent packages
+    EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
+
     // Create type parameters
 
     // Set bounds for type parameters
@@ -330,19 +337,19 @@ public class UnassignedtextPackageImpl extends EPackageImpl implements Unassigne
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(caseInsensitiveKeywordRuleEClass, CaseInsensitiveKeywordRule.class, "CaseInsensitiveKeywordRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getCaseInsensitiveKeywordRule_Val(), ecorePackage.getEInt(), "val", null, 0, 1, CaseInsensitiveKeywordRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getCaseInsensitiveKeywordRule_Val(), theEcorePackage.getEInt(), "val", null, 0, 1, CaseInsensitiveKeywordRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(pluralRuleEClass, PluralRule.class, "PluralRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getPluralRule_Count(), ecorePackage.getEInt(), "count", null, 0, 1, PluralRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getPluralRule_Count(), theEcorePackage.getEInt(), "count", null, 0, 1, PluralRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(multiRuleEClass, MultiRule.class, "MultiRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getMultiRule_Val(), ecorePackage.getEInt(), "val", null, 0, 1, MultiRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getMultiRule_Val(), theEcorePackage.getEInt(), "val", null, 0, 1, MultiRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(datatypeRuleEClass, DatatypeRule.class, "DatatypeRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getDatatypeRule_Val(), ecorePackage.getEInt(), "val", null, 0, 1, DatatypeRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getDatatypeRule_Val(), theEcorePackage.getEInt(), "val", null, 0, 1, DatatypeRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(commonTerminalsRuleEClass, CommonTerminalsRule.class, "CommonTerminalsRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getCommonTerminalsRule_Val(), ecorePackage.getEString(), "val", null, 0, 1, CommonTerminalsRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getCommonTerminalsRule_Val(), theEcorePackage.getEString(), "val", null, 0, 1, CommonTerminalsRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

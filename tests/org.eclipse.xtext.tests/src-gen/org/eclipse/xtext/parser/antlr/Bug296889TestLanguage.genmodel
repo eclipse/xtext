@@ -6,24 +6,24 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="Bug296889TestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="Bug296889Test" basePackage="org.eclipse.xtext.parser.antlr"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/Bug296889TestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/Bug296889TestLanguage.ecore#//Model">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/Bug296889TestLanguage.ecore#//Model/expressions"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/Bug296889TestLanguage.ecore#//Model/values"/>
+      disposableProviderFactory="true" ecorePackage="Bug296889TestLanguage.ecore#/">
+    <genClasses ecoreClass="Bug296889TestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug296889TestLanguage.ecore#//Model/expressions"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug296889TestLanguage.ecore#//Model/values"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/Bug296889TestLanguage.ecore#//Expression"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/Bug296889TestLanguage.ecore#//Preop">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/Bug296889TestLanguage.ecore#//Preop/functionName"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/Bug296889TestLanguage.ecore#//Preop/expr"/>
+    <genClasses ecoreClass="Bug296889TestLanguage.ecore#//Expression"/>
+    <genClasses ecoreClass="Bug296889TestLanguage.ecore#//Preop">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug296889TestLanguage.ecore#//Preop/functionName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug296889TestLanguage.ecore#//Preop/expr"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/Bug296889TestLanguage.ecore#//Postop">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/Bug296889TestLanguage.ecore#//Postop/expr"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/Bug296889TestLanguage.ecore#//Postop/functionName"/>
+    <genClasses ecoreClass="Bug296889TestLanguage.ecore#//Postop">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug296889TestLanguage.ecore#//Postop/expr"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug296889TestLanguage.ecore#//Postop/functionName"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/Bug296889TestLanguage.ecore#//Variable">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/Bug296889TestLanguage.ecore#//Variable/name"/>
+    <genClasses ecoreClass="Bug296889TestLanguage.ecore#//Variable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug296889TestLanguage.ecore#//Variable/name"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

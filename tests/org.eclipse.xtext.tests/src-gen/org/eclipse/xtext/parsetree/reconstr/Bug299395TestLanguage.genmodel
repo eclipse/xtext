@@ -6,17 +6,17 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="Bug299395TestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="Bug299395" basePackage="org.eclipse.xtext.parsetree.reconstr"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/Bug299395TestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/Bug299395TestLanguage.ecore#//Model">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/Bug299395TestLanguage.ecore#//Model/strings"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/Bug299395TestLanguage.ecore#//Model/keys"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/Bug299395TestLanguage.ecore#//Model/values"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/Bug299395TestLanguage.ecore#//Model/subModel"/>
+      disposableProviderFactory="true" ecorePackage="Bug299395TestLanguage.ecore#/">
+    <genClasses ecoreClass="Bug299395TestLanguage.ecore#//Model">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug299395TestLanguage.ecore#//Model/strings"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug299395TestLanguage.ecore#//Model/keys"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug299395TestLanguage.ecore#//Model/values"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug299395TestLanguage.ecore#//Model/subModel"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/Bug299395TestLanguage.ecore#//SubModel">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/Bug299395TestLanguage.ecore#//SubModel/strings"/>
+    <genClasses ecoreClass="Bug299395TestLanguage.ecore#//SubModel">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug299395TestLanguage.ecore#//SubModel/strings"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

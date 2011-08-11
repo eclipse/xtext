@@ -6,14 +6,14 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="SuperTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="SuperPackage" basePackage="org.eclipse.xtext.generator.ecore"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/SuperTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/SuperTestLanguage.ecore#//SuperMain">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/SuperTestLanguage.ecore#//SuperMain/name"/>
+      disposableProviderFactory="true" ecorePackage="SuperTestLanguage.ecore#/">
+    <genClasses ecoreClass="SuperTestLanguage.ecore#//SuperMain">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SuperTestLanguage.ecore#//SuperMain/name"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/SuperTestLanguage.ecore#//AnotherSuperMain">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/SuperTestLanguage.ecore#//AnotherSuperMain/name"/>
+    <genClasses ecoreClass="SuperTestLanguage.ecore#//AnotherSuperMain">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SuperTestLanguage.ecore#//AnotherSuperMain/name"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

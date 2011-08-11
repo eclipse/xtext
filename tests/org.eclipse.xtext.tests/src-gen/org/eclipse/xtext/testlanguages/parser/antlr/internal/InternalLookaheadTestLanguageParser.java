@@ -23,20 +23,20 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'bar'", "'a'", "'foo'", "'b'", "'d'", "'c'"
     };
-    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
-    public static final int T__12=12;
-    public static final int RULE_WS=9;
-    public static final int RULE_INT=5;
-    public static final int EOF=-1;
-    public static final int T__13=13;
     public static final int RULE_STRING=6;
     public static final int T__16=16;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int T__14=14;
-    public static final int T__11=11;
     public static final int T__15=15;
+    public static final int T__12=12;
+    public static final int T__11=11;
+    public static final int T__14=14;
+    public static final int T__13=13;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_INT=5;
+    public static final int RULE_WS=9;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=7;
 
     // delegates
     // delegators
@@ -256,24 +256,24 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             else if ( (LA2_0==13) ) {
                 int LA2_2 = input.LA(2);
 
-                if ( (LA2_2==11) ) {
-                    int LA2_3 = input.LA(3);
+                if ( (LA2_2==13) ) {
+                    alt2=2;
+                }
+                else if ( (LA2_2==11) ) {
+                    int LA2_4 = input.LA(3);
 
-                    if ( (LA2_3==16) ) {
+                    if ( (LA2_4==16) ) {
                         alt2=2;
                     }
-                    else if ( (LA2_3==14) ) {
+                    else if ( (LA2_4==14) ) {
                         alt2=3;
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 2, 3, input);
+                            new NoViableAltException("", 2, 4, input);
 
                         throw nvae;
                     }
-                }
-                else if ( (LA2_2==13) ) {
-                    alt2=2;
                 }
                 else {
                     NoViableAltException nvae =

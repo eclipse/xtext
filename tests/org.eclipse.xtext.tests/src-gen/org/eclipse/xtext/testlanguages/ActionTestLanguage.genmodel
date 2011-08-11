@@ -6,16 +6,16 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="ActionTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="ActionLang" basePackage="org.eclipse.xtext.testlanguages" disposableProviderFactory="true"
-      ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/ActionTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/ActionTestLanguage.ecore#//Model"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/ActionTestLanguage.ecore#//Child">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/ActionTestLanguage.ecore#//Child/name"/>
+      ecorePackage="ActionTestLanguage.ecore#/">
+    <genClasses ecoreClass="ActionTestLanguage.ecore#//Model"/>
+    <genClasses ecoreClass="ActionTestLanguage.ecore#//Child">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ActionTestLanguage.ecore#//Child/name"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/ActionTestLanguage.ecore#//Parent">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/ActionTestLanguage.ecore#//Parent/left"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/ActionTestLanguage.ecore#//Parent/right"/>
+    <genClasses ecoreClass="ActionTestLanguage.ecore#//Parent">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ActionTestLanguage.ecore#//Parent/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ActionTestLanguage.ecore#//Parent/right"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

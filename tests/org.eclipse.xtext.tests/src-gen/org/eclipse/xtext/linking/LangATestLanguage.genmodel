@@ -6,20 +6,20 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="LangATestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="LangATestLanguage" basePackage="org.eclipse.xtext.linking"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/LangATestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/LangATestLanguage.ecore#//Main">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/LangATestLanguage.ecore#//Main/imports"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/LangATestLanguage.ecore#//Main/types"/>
+      disposableProviderFactory="true" ecorePackage="LangATestLanguage.ecore#/">
+    <genClasses ecoreClass="LangATestLanguage.ecore#//Main">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LangATestLanguage.ecore#//Main/imports"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LangATestLanguage.ecore#//Main/types"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/LangATestLanguage.ecore#//Import">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/LangATestLanguage.ecore#//Import/uri"/>
+    <genClasses ecoreClass="LangATestLanguage.ecore#//Import">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LangATestLanguage.ecore#//Import/uri"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/LangATestLanguage.ecore#//Type">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/LangATestLanguage.ecore#//Type/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/LangATestLanguage.ecore#//Type/extends"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/LangATestLanguage.ecore#//Type/implements"/>
+    <genClasses ecoreClass="LangATestLanguage.ecore#//Type">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LangATestLanguage.ecore#//Type/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference LangATestLanguage.ecore#//Type/extends"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference LangATestLanguage.ecore#//Type/implements"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

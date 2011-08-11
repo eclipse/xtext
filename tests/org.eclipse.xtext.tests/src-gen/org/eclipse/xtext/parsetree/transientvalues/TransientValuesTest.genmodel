@@ -6,20 +6,20 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="TransientValuesTest"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="Transientvaluestest" basePackage="org.eclipse.xtext.parsetree.transientvalues"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.ecore#//Root"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.ecore#//TestRequired">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.ecore#//TestRequired/required1"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.ecore#//TestRequired/required2"/>
+      disposableProviderFactory="true" ecorePackage="TransientValuesTest.ecore#/">
+    <genClasses ecoreClass="TransientValuesTest.ecore#//Root"/>
+    <genClasses ecoreClass="TransientValuesTest.ecore#//TestRequired">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TransientValuesTest.ecore#//TestRequired/required1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TransientValuesTest.ecore#//TestRequired/required2"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.ecore#//TestOptional">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.ecore#//TestOptional/opt1"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.ecore#//TestOptional/opt2"/>
+    <genClasses ecoreClass="TransientValuesTest.ecore#//TestOptional">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TransientValuesTest.ecore#//TestOptional/opt1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TransientValuesTest.ecore#//TestOptional/opt2"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.ecore#//TestList">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.ecore#//TestList/item"/>
+    <genClasses ecoreClass="TransientValuesTest.ecore#//TestList">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TransientValuesTest.ecore#//TestList/item"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

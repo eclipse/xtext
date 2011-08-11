@@ -6,31 +6,31 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="Bug288432TestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="Bug288432Test" basePackage="org.eclipse.xtext.parser.assignments"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug288432TestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug288432TestLanguage.ecore#//Body">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug288432TestLanguage.ecore#//Body/parameter"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug288432TestLanguage.ecore#//Body/content"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug288432TestLanguage.ecore#//Body/foo"/>
+      disposableProviderFactory="true" ecorePackage="Bug288432TestLanguage.ecore#/">
+    <genClasses ecoreClass="Bug288432TestLanguage.ecore#//Body">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug288432TestLanguage.ecore#//Body/parameter"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug288432TestLanguage.ecore#//Body/content"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug288432TestLanguage.ecore#//Body/foo"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug288432TestLanguage.ecore#//Foo">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug288432TestLanguage.ecore#//Foo/fooValue"/>
+    <genClasses ecoreClass="Bug288432TestLanguage.ecore#//Foo">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug288432TestLanguage.ecore#//Foo/fooValue"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug288432TestLanguage.ecore#//Content"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug288432TestLanguage.ecore#//MyElement">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug288432TestLanguage.ecore#//MyElement/bar"/>
+    <genClasses ecoreClass="Bug288432TestLanguage.ecore#//Content"/>
+    <genClasses ecoreClass="Bug288432TestLanguage.ecore#//MyElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug288432TestLanguage.ecore#//MyElement/bar"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug288432TestLanguage.ecore#//ParameterObject"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug288432TestLanguage.ecore#//Parameter">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug288432TestLanguage.ecore#//Parameter/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug288432TestLanguage.ecore#//Parameter/value"/>
+    <genClasses ecoreClass="Bug288432TestLanguage.ecore#//ParameterObject"/>
+    <genClasses ecoreClass="Bug288432TestLanguage.ecore#//Parameter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug288432TestLanguage.ecore#//Parameter/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bug288432TestLanguage.ecore#//Parameter/value"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug288432TestLanguage.ecore#//ParameterRef">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug288432TestLanguage.ecore#//ParameterRef/parameter"/>
+    <genClasses ecoreClass="Bug288432TestLanguage.ecore#//ParameterRef">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bug288432TestLanguage.ecore#//ParameterRef/parameter"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug288432TestLanguage.ecore#//MyInt">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug288432TestLanguage.ecore#//MyInt/int"/>
+    <genClasses ecoreClass="Bug288432TestLanguage.ecore#//MyInt">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug288432TestLanguage.ecore#//MyInt/int"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

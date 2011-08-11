@@ -12,19 +12,19 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalInheritanceTest2LanguageLexer extends Lexer {
-    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
-    public static final int T__12=12;
-    public static final int RULE_WS=9;
-    public static final int RULE_INT=5;
-    public static final int EOF=-1;
-    public static final int T__13=13;
     public static final int RULE_STRING=6;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int T__14=14;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int T__11=11;
     public static final int T__15=15;
+    public static final int T__12=12;
+    public static final int T__11=11;
+    public static final int T__14=14;
+    public static final int T__13=13;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_INT=5;
+    public static final int RULE_WS=9;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=7;
 
     // delegates
     // delegators
@@ -769,7 +769,7 @@ public class InternalInheritanceTest2LanguageLexer extends Lexer {
         "\uffff\1\6\1\2\1\3\1\uffff\1\5\1\7\1\10\1\11\1\12\1\13\6\uffff\1"+
         "\1\2\uffff\1\4";
     static final String DFA12_specialS =
-        "\1\2\10\uffff\1\1\1\0\30\uffff}>";
+        "\1\1\10\uffff\1\0\1\2\30\uffff}>";
     static final String[] DFA12_transitionS = {
             "\11\15\2\14\2\15\1\14\22\15\1\14\1\15\1\11\4\15\1\12\6\15\1"+
             "\5\1\13\12\10\7\15\32\7\3\15\1\6\1\7\1\15\4\7\1\4\7\7\1\1\15"+
@@ -847,16 +847,6 @@ public class InternalInheritanceTest2LanguageLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA12_10 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA12_10>='\u0000' && LA12_10<='\uFFFF')) ) {s = 21;}
-
-                        else s = 13;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
                         int LA12_9 = input.LA(1);
 
                         s = -1;
@@ -866,7 +856,7 @@ public class InternalInheritanceTest2LanguageLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 2 : 
+                    case 1 : 
                         int LA12_0 = input.LA(1);
 
                         s = -1;
@@ -895,6 +885,16 @@ public class InternalInheritanceTest2LanguageLexer extends Lexer {
                         else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {s = 12;}
 
                         else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='-')||(LA12_0>=':' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||LA12_0=='|'||(LA12_0>='~' && LA12_0<='\uFFFF')) ) {s = 13;}
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
+                        int LA12_10 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA12_10>='\u0000' && LA12_10<='\uFFFF')) ) {s = 21;}
+
+                        else s = 13;
 
                         if ( s>=0 ) return s;
                         break;

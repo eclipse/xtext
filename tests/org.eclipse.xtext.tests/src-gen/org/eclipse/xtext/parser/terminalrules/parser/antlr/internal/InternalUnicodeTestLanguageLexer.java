@@ -12,15 +12,15 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalUnicodeTestLanguageLexer extends Lexer {
-    public static final int RULE_ML_COMMENT=8;
-    public static final int RULE_GERMAN_STRING=4;
     public static final int RULE_ID=6;
-    public static final int RULE_WS=10;
-    public static final int RULE_INT=7;
-    public static final int EOF=-1;
     public static final int RULE_STRING=5;
     public static final int RULE_ANY_OTHER=11;
+    public static final int RULE_INT=7;
+    public static final int RULE_WS=10;
     public static final int RULE_SL_COMMENT=9;
+    public static final int EOF=-1;
+    public static final int RULE_GERMAN_STRING=4;
+    public static final int RULE_ML_COMMENT=8;
 
     // delegates
     // delegators

@@ -6,19 +6,19 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="AssignmentsTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="AssignmentsTestLanguage" basePackage="org.eclipse.xtext.parser.assignments"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/AssignmentsTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/AssignmentsTestLanguage.ecore#//Model">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/AssignmentsTestLanguage.ecore#//Model/single"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/AssignmentsTestLanguage.ecore#//Model/multi"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/AssignmentsTestLanguage.ecore#//Model/object"/>
+      disposableProviderFactory="true" ecorePackage="AssignmentsTestLanguage.ecore#/">
+    <genClasses ecoreClass="AssignmentsTestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AssignmentsTestLanguage.ecore#//Model/single"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AssignmentsTestLanguage.ecore#//Model/multi"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AssignmentsTestLanguage.ecore#//Model/object"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/AssignmentsTestLanguage.ecore#//SingleValue">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/AssignmentsTestLanguage.ecore#//SingleValue/value"/>
+    <genClasses ecoreClass="AssignmentsTestLanguage.ecore#//SingleValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AssignmentsTestLanguage.ecore#//SingleValue/value"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/AssignmentsTestLanguage.ecore#//MultiValue">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/AssignmentsTestLanguage.ecore#//MultiValue/value"/>
+    <genClasses ecoreClass="AssignmentsTestLanguage.ecore#//MultiValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AssignmentsTestLanguage.ecore#//MultiValue/value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

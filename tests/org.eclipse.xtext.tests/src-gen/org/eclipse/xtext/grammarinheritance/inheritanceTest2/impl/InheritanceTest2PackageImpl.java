@@ -8,10 +8,9 @@ package org.eclipse.xtext.grammarinheritance.inheritanceTest2.impl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
-import org.eclipse.xtext.grammarinheritance.baseInheritanceTest.BaseInheritanceTestPackage;
 
 import org.eclipse.xtext.grammarinheritance.inheritanceTest.InheritanceTestPackage;
 
@@ -83,7 +82,6 @@ public class InheritanceTest2PackageImpl extends EPackageImpl implements Inherit
     isInited = true;
 
     // Initialize simple dependencies
-    BaseInheritanceTestPackage.eINSTANCE.eClass();
     InheritanceTestPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
@@ -181,6 +179,7 @@ public class InheritanceTest2PackageImpl extends EPackageImpl implements Inherit
 
     // Obtain other dependent packages
     InheritanceTestPackage theInheritanceTestPackage = (InheritanceTestPackage)EPackage.Registry.INSTANCE.getEPackage(InheritanceTestPackage.eNS_URI);
+    EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
 
     // Create type parameters
 
@@ -191,7 +190,7 @@ public class InheritanceTest2PackageImpl extends EPackageImpl implements Inherit
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getModel_Ids(), ecorePackage.getEString(), "ids", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getModel_Ids(), theEcorePackage.getEString(), "ids", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

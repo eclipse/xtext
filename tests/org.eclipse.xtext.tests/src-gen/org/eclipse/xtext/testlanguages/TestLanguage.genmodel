@@ -6,23 +6,23 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="TestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="TestLang" basePackage="org.eclipse.xtext.testlanguages" disposableProviderFactory="true"
-      ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/TestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/TestLanguage.ecore#//Model">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/TestLanguage.ecore#//Model/multiFeature"/>
+      ecorePackage="TestLanguage.ecore#/">
+    <genClasses ecoreClass="TestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TestLanguage.ecore#//Model/multiFeature"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/TestLanguage.ecore#//AbstractElement"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/TestLanguage.ecore#//ChoiceElement">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/TestLanguage.ecore#//ChoiceElement/optionalKeyword"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/TestLanguage.ecore#//ChoiceElement/name"/>
+    <genClasses ecoreClass="TestLanguage.ecore#//AbstractElement"/>
+    <genClasses ecoreClass="TestLanguage.ecore#//ChoiceElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TestLanguage.ecore#//ChoiceElement/optionalKeyword"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TestLanguage.ecore#//ChoiceElement/name"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/TestLanguage.ecore#//ReducibleElement"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/TestLanguage.ecore#//TerminalElement">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/TestLanguage.ecore#//TerminalElement/stringFeature"/>
+    <genClasses ecoreClass="TestLanguage.ecore#//ReducibleElement"/>
+    <genClasses ecoreClass="TestLanguage.ecore#//TerminalElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TestLanguage.ecore#//TerminalElement/stringFeature"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/TestLanguage.ecore#//ReducibleComposite">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/TestLanguage.ecore#//ReducibleComposite/actionFeature"/>
+    <genClasses ecoreClass="TestLanguage.ecore#//ReducibleComposite">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TestLanguage.ecore#//ReducibleComposite/actionFeature"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

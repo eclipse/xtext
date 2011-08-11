@@ -1,5 +1,5 @@
 '\n'=4
-RULE_ANY_OTHER=8
+'\r'=5
 RULE_ID=6
 RULE_WS=7
-'\r'=5
+RULE_ANY_OTHER=8

@@ -23,36 +23,36 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'1'", "'a'", "'b'", "'2'", "'c'", "'d'", "'3'", "'4'", "'5'", "'6'", "'7'", "'8'", "'9'", "'10'", "'11'", "'12'", "'13'", "'14'", "'datatypes'", "'serialization'", "'bug302585'", "'nested'"
     };
-    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
-    public static final int T__12=12;
-    public static final int T__28=28;
-    public static final int T__23=23;
-    public static final int T__20=20;
-    public static final int T__13=13;
-    public static final int RULE_STRING=6;
-    public static final int T__21=21;
-    public static final int T__19=19;
-    public static final int T__14=14;
-    public static final int T__11=11;
-    public static final int T__22=22;
     public static final int T__29=29;
-    public static final int T__30=30;
-    public static final int RULE_WS=9;
-    public static final int T__17=17;
-    public static final int T__31=31;
-    public static final int RULE_INT=5;
-    public static final int EOF=-1;
+    public static final int T__28=28;
     public static final int T__27=27;
-    public static final int T__32=32;
-    public static final int T__16=16;
-    public static final int T__24=24;
-    public static final int RULE_ANY_OTHER=10;
     public static final int T__26=26;
     public static final int T__25=25;
+    public static final int T__24=24;
+    public static final int T__23=23;
+    public static final int T__22=22;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int T__21=21;
+    public static final int T__20=20;
     public static final int RULE_SL_COMMENT=8;
-    public static final int T__18=18;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=7;
+    public static final int T__30=30;
+    public static final int T__19=19;
+    public static final int T__31=31;
+    public static final int RULE_STRING=6;
+    public static final int T__32=32;
+    public static final int T__16=16;
     public static final int T__15=15;
+    public static final int T__18=18;
+    public static final int T__17=17;
+    public static final int T__12=12;
+    public static final int T__11=11;
+    public static final int T__14=14;
+    public static final int T__13=13;
+    public static final int RULE_INT=5;
+    public static final int RULE_WS=9;
 
     // delegates
     // delegators
@@ -5939,10 +5939,10 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                         int alt42=3;
                         int LA42_0 = input.LA(1);
 
-                        if ( LA42_0 ==12 && ( getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_7_1(), 1) || getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_7_1(), 0) ) ) {
+                        if ( LA42_0 ==12 && ( getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_7_1(), 0) || getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_7_1(), 1) ) ) {
                             int LA42_2 = input.LA(2);
 
-                            if ( LA42_2 ==13 && ( getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_7_1(), 1) || getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_7_1(), 0) ) ) {
+                            if ( LA42_2 ==13 && ( getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_7_1(), 0) || getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_7_1(), 1) ) ) {
                                 int LA42_3 = input.LA(3);
 
                                 if ( LA42_3 ==15 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_7_1(), 0) ) {
