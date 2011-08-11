@@ -3,6 +3,18 @@
 
 <plugin>
 
+<!-- explicitly added below -->
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.eclipse.org/xtext/tests/grammarinheritance" 
+       class = "org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage"
+       genModel = "org/eclipse/xtext/grammarinheritance/ametamodel.genmodel" /> 
+	
+  </extension>
+
+<!-- explicitly added packages above -->
+  
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.eclipse.org/2009/tmf/xtext/SuperTestLanguage" 

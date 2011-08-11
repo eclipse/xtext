@@ -120,11 +120,15 @@ public class SlotEntry implements ISlotEntry {
 		Set<EClass> result = Sets.newHashSet();
 		Set<String> keySet = getNsUris();
 		for (String string : keySet) {
-			EPackage ePackage = resourceSet.getPackageRegistry().getEPackage(string);
-			if (ePackage != null) {
-				EClassifier classifier = ePackage.getEClassifier(typeName2);
-				if (classifier instanceof EClass)
-					result.add((EClass) classifier);
+			try {
+				EPackage ePackage = resourceSet.getPackageRegistry().getEPackage(string);
+				if (ePackage != null) {
+					EClassifier classifier = ePackage.getEClassifier(typeName2);
+					if (classifier instanceof EClass)
+						result.add((EClass) classifier);
+				}
+			} catch(NoClassDefFoundError e) {
+				throw new NoClassDefFoundError("NoClassDefFoundError while loading ePackage: " + string + " - " + e.getMessage());
 			}
 		}
 		if (result.isEmpty()) {
