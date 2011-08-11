@@ -21,7 +21,7 @@ import com.google.inject.Provider;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class XbaseLinkingScopeProvider implements IDelegatingScopeProvider {
+public class XbaseLinkingScopeProvider implements IScopeProvider /* implements IDelegatingScopeProvider */ {
 	
 	@Inject
 	private IScopeProvider delegate;
