@@ -17,11 +17,18 @@ var runtimeProject = "../${projectName}"
 Workflow {
 	bean = StandaloneSetup {
 		platformUri = "${runtimeProject}/../.."
+		scanClassPath = true
+		
 		registerGenModelFile = "platform:/resource/${projectName}/src/org/eclipse/xtext/grammarinheritance/ametamodel.genmodel"
 		registerGenModelFile = "platform:/resource/${projectName}/src/org/eclipse/xtext/generator/ecore/GenModelAccessTest.genmodel" 
 		registerGenModelFile = "platform:/resource/${projectName}/src/org/eclipse/xtext/generator/grammarAccess/ametamodel.genmodel"
 		registerGenModelFile = "platform:/resource/${projectName}/src/org/eclipse/xtext/enumrules/enums.genmodel"
 		registerGenModelFile = "platform:/resource/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.genmodel"
+		registerGenModelFile = "platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel"
+		
+		registerGeneratedEPackage = "org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage"
+		registerGeneratedEPackage = "org.eclipse.xtext.XtextPackage"
+		registerGeneratedEPackage = "org.eclipse.emf.ecore.EcorePackage"
 	}
 	
 	component = DirectoryCleaner {
