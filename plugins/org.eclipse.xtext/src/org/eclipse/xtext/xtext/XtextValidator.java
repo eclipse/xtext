@@ -207,8 +207,12 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	
 	@Check
 	public void checkGeneratedPackage(GeneratedMetamodel metamodel) {
-		Diagnostician diagnostician = (Diagnostician) getContext().get(EValidator.class);
-		checkGeneratedPackage(metamodel, diagnostician, getContext());
+		Map<Object, Object> context = getContext();
+		if (context != null) {
+			Diagnostician diagnostician = (Diagnostician) context.get(EValidator.class);
+			if (diagnostician != null)
+				checkGeneratedPackage(metamodel, diagnostician, context);
+		}
 	}
 
 	public void checkGeneratedPackage(GeneratedMetamodel metamodel, Diagnostician diagnostician, Map<?,?> params) {
