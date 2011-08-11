@@ -4,27 +4,19 @@
 
 package org.eclipse.xtext.generator.parser.antlr.debug.services;
 
-import org.eclipse.xtext.Action;
-import org.eclipse.xtext.Alternatives;
-import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.Group;
-import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.TerminalRule;
-import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
-import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
-import org.eclipse.xtext.service.GrammarProvider;
-
-import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.google.inject.Inject;
+
+import org.eclipse.xtext.*;
+import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
+
+import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
 public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
-
-
+	
+	
 	public class AntlrGrammarElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AntlrGrammar");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -36,7 +28,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cOptionsOptionsParserRuleCall_3_0 = (RuleCall)cOptionsAssignment_3.eContents().get(0);
 		private final Assignment cRulesAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cRulesRuleParserRuleCall_4_0 = (RuleCall)cRulesAssignment_4.eContents().get(0);
-
+		
 		//AntlrGrammar:
 		//	"grammar" name=ID ";" options=Options? rules+=Rule*;
 		public ParserRule getRule() { return rule; }
@@ -78,7 +70,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cOptionValuesAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cOptionValuesOptionValueParserRuleCall_3_0 = (RuleCall)cOptionValuesAssignment_3.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
-
+		
 		//Options:
 		//	{Options} "options" "{" optionValues+=OptionValue+ "}";
 		public ParserRule getRule() { return rule; }
@@ -114,7 +106,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cValueAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cValueIdOrIntParserRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
-
+		
 		//OptionValue:
 		//	key=ID "=" value=IdOrInt ";";
 		public ParserRule getRule() { return rule; }
@@ -146,7 +138,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cINTTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-
+		
 		//IdOrInt:
 		//	ID | INT;
 		public ParserRule getRule() { return rule; }
@@ -172,7 +164,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cBodyAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cBodyAlternativesParserRuleCall_3_0 = (RuleCall)cBodyAssignment_3.eContents().get(0);
 		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
-
+		
 		//Rule:
 		//	^fragment?="fragment"? name=ID ":" body=Alternatives ";";
 		public ParserRule getRule() { return rule; }
@@ -215,7 +207,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cVerticalLineKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
 		private final Assignment cGroupsAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
 		private final RuleCall cGroupsGroupParserRuleCall_1_1_1_0 = (RuleCall)cGroupsAssignment_1_1_1.eContents().get(0);
-
+		
 		//Alternatives returns RuleElement:
 		//	Group ({Alternatives.groups+=current} ("|" groups+=Group)+)?;
 		public ParserRule getRule() { return rule; }
@@ -253,7 +245,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		private final Action cGroupElementsAction_1_0 = (Action)cGroup_1.eContents().get(0);
 		private final Assignment cElementsAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cElementsAtomParserRuleCall_1_1_0 = (RuleCall)cElementsAssignment_1_1.eContents().get(0);
-
+		
 		//Group returns RuleElement:
 		//	Atom ({Group.elements+=current} elements+=Atom+)?;
 		public ParserRule getRule() { return rule; }
@@ -290,7 +282,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cCardinalityAsteriskKeyword_0_1_1_0_1 = (Keyword)cCardinalityAlternatives_0_1_1_0.eContents().get(1);
 		private final Keyword cCardinalityQuestionMarkKeyword_0_1_1_0_2 = (Keyword)cCardinalityAlternatives_0_1_1_0.eContents().get(2);
 		private final RuleCall cRuleOptionsParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-
+		
 		//Atom returns RuleElement:
 		//	OtherElement ({ElementWithCardinality.element=current} cardinality=("+" | "*" | "?"))? | RuleOptions;
 		public ParserRule getRule() { return rule; }
@@ -348,7 +340,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cFullStopFullStopKeyword_3_1_1 = (Keyword)cGroup_3_1.eContents().get(1);
 		private final Assignment cRightAssignment_3_1_2 = (Assignment)cGroup_3_1.eContents().get(2);
 		private final RuleCall cRightLiteralParserRuleCall_3_1_2_0 = (RuleCall)cRightAssignment_3_1_2.eContents().get(0);
-
+		
 		//OtherElement returns RuleElement:
 		//	{NegatedElement} "~" element=(Parenthesized | Literal) | Predicated | Parenthesized | Literal
 		//	({UntilElement.left=current} ".." right=Literal)?;
@@ -412,7 +404,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLeftParenthesisKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
-
+		
 		//EmptyParenthesis:
 		//	"(" ")";
 		public ParserRule getRule() { return rule; }
@@ -435,7 +427,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cAlternativesParserRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final RuleCall cEmptyParenthesisParserRuleCall_4 = (RuleCall)cGroup.eContents().get(4);
-
+		
 		//Parenthesized returns RuleElement:
 		//	"(" EmptyParenthesis* Alternatives ")" EmptyParenthesis*;
 		public ParserRule getRule() { return rule; }
@@ -473,7 +465,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cElementAssignment_7 = (Assignment)cGroup.eContents().get(7);
 		private final RuleCall cElementOtherElementParserRuleCall_7_0 = (RuleCall)cElementAssignment_7.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_8 = (Keyword)cGroup.eContents().get(8);
-
+		
 		//Predicated:
 		//	"(" "(" EmptyParenthesis* predicate=Alternatives ")" EmptyParenthesis* "=>" element=OtherElement ")";
 		public ParserRule getRule() { return rule; }
@@ -527,7 +519,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
 		private final Action cSkipAction_1_0 = (Action)cGroup_1.eContents().get(0);
 		private final Keyword cSkipKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
-
+		
 		//RuleOptions:
 		//	options=Options ":" element=Atom | {Skip} "{skip();}";
 		public ParserRule getRule() { return rule; }
@@ -569,7 +561,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRuleCallParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cKeywordParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cWildcardParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-
+		
 		//Literal returns RuleElement:
 		//	RuleCall | Keyword | Wildcard;
 		public ParserRule getRule() { return rule; }
@@ -593,7 +585,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cRuleAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cRuleIDTerminalRuleCall_0_0 = (RuleCall)cRuleAssignment_0.eContents().get(0);
 		private final RuleCall cEmptyParenthesisParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
-
+		
 		//RuleCall:
 		//	rule=ID EmptyParenthesis*;
 		public ParserRule getRule() { return rule; }
@@ -617,7 +609,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cValueAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cValueSTRINGTerminalRuleCall_0_0 = (RuleCall)cValueAssignment_0.eContents().get(0);
 		private final RuleCall cEmptyParenthesisParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
-
+		
 		//Keyword:
 		//	value=STRING EmptyParenthesis*;
 		public ParserRule getRule() { return rule; }
@@ -641,7 +633,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		private final Action cWildcardAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cFullStopKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final RuleCall cEmptyParenthesisParserRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
-
+		
 		//Wildcard:
 		//	{Wildcard} "." EmptyParenthesis*;
 		public ParserRule getRule() { return rule; }
@@ -658,8 +650,8 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		//EmptyParenthesis*
 		public RuleCall getEmptyParenthesisParserRuleCall_2() { return cEmptyParenthesisParserRuleCall_2; }
 	}
-
-
+	
+	
 	private AntlrGrammarElements pAntlrGrammar;
 	private OptionsElements pOptions;
 	private OptionValueElements pOptionValue;
@@ -677,7 +669,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 	private RuleCallElements pRuleCall;
 	private KeywordElements pKeyword;
 	private WildcardElements pWildcard;
-
+	
 	private final GrammarProvider grammarProvider;
 
 	private TerminalsGrammarAccess gaTerminals;
@@ -688,23 +680,23 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		this.grammarProvider = grammarProvider;
 		this.gaTerminals = gaTerminals;
 	}
-
-	public Grammar getGrammar() {
+	
+	public Grammar getGrammar() {	
 		return grammarProvider.getGrammar(this);
 	}
-
+	
 
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
 
-
+	
 	//AntlrGrammar:
 	//	"grammar" name=ID ";" options=Options? rules+=Rule*;
 	public AntlrGrammarElements getAntlrGrammarAccess() {
 		return (pAntlrGrammar != null) ? pAntlrGrammar : (pAntlrGrammar = new AntlrGrammarElements());
 	}
-
+	
 	public ParserRule getAntlrGrammarRule() {
 		return getAntlrGrammarAccess().getRule();
 	}
@@ -714,7 +706,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 	public OptionsElements getOptionsAccess() {
 		return (pOptions != null) ? pOptions : (pOptions = new OptionsElements());
 	}
-
+	
 	public ParserRule getOptionsRule() {
 		return getOptionsAccess().getRule();
 	}
@@ -724,7 +716,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 	public OptionValueElements getOptionValueAccess() {
 		return (pOptionValue != null) ? pOptionValue : (pOptionValue = new OptionValueElements());
 	}
-
+	
 	public ParserRule getOptionValueRule() {
 		return getOptionValueAccess().getRule();
 	}
@@ -734,7 +726,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 	public IdOrIntElements getIdOrIntAccess() {
 		return (pIdOrInt != null) ? pIdOrInt : (pIdOrInt = new IdOrIntElements());
 	}
-
+	
 	public ParserRule getIdOrIntRule() {
 		return getIdOrIntAccess().getRule();
 	}
@@ -744,7 +736,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 	public RuleElements getRuleAccess() {
 		return (pRule != null) ? pRule : (pRule = new RuleElements());
 	}
-
+	
 	public ParserRule getRuleRule() {
 		return getRuleAccess().getRule();
 	}
@@ -754,7 +746,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 	public AlternativesElements getAlternativesAccess() {
 		return (pAlternatives != null) ? pAlternatives : (pAlternatives = new AlternativesElements());
 	}
-
+	
 	public ParserRule getAlternativesRule() {
 		return getAlternativesAccess().getRule();
 	}
@@ -764,7 +756,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 	public GroupElements getGroupAccess() {
 		return (pGroup != null) ? pGroup : (pGroup = new GroupElements());
 	}
-
+	
 	public ParserRule getGroupRule() {
 		return getGroupAccess().getRule();
 	}
@@ -774,7 +766,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 	public AtomElements getAtomAccess() {
 		return (pAtom != null) ? pAtom : (pAtom = new AtomElements());
 	}
-
+	
 	public ParserRule getAtomRule() {
 		return getAtomAccess().getRule();
 	}
@@ -785,7 +777,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 	public OtherElementElements getOtherElementAccess() {
 		return (pOtherElement != null) ? pOtherElement : (pOtherElement = new OtherElementElements());
 	}
-
+	
 	public ParserRule getOtherElementRule() {
 		return getOtherElementAccess().getRule();
 	}
@@ -795,7 +787,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 	public EmptyParenthesisElements getEmptyParenthesisAccess() {
 		return (pEmptyParenthesis != null) ? pEmptyParenthesis : (pEmptyParenthesis = new EmptyParenthesisElements());
 	}
-
+	
 	public ParserRule getEmptyParenthesisRule() {
 		return getEmptyParenthesisAccess().getRule();
 	}
@@ -805,7 +797,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 	public ParenthesizedElements getParenthesizedAccess() {
 		return (pParenthesized != null) ? pParenthesized : (pParenthesized = new ParenthesizedElements());
 	}
-
+	
 	public ParserRule getParenthesizedRule() {
 		return getParenthesizedAccess().getRule();
 	}
@@ -815,7 +807,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 	public PredicatedElements getPredicatedAccess() {
 		return (pPredicated != null) ? pPredicated : (pPredicated = new PredicatedElements());
 	}
-
+	
 	public ParserRule getPredicatedRule() {
 		return getPredicatedAccess().getRule();
 	}
@@ -825,7 +817,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 	public RuleOptionsElements getRuleOptionsAccess() {
 		return (pRuleOptions != null) ? pRuleOptions : (pRuleOptions = new RuleOptionsElements());
 	}
-
+	
 	public ParserRule getRuleOptionsRule() {
 		return getRuleOptionsAccess().getRule();
 	}
@@ -835,7 +827,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 	public LiteralElements getLiteralAccess() {
 		return (pLiteral != null) ? pLiteral : (pLiteral = new LiteralElements());
 	}
-
+	
 	public ParserRule getLiteralRule() {
 		return getLiteralAccess().getRule();
 	}
@@ -845,7 +837,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 	public RuleCallElements getRuleCallAccess() {
 		return (pRuleCall != null) ? pRuleCall : (pRuleCall = new RuleCallElements());
 	}
-
+	
 	public ParserRule getRuleCallRule() {
 		return getRuleCallAccess().getRule();
 	}
@@ -855,7 +847,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 	public KeywordElements getKeywordAccess() {
 		return (pKeyword != null) ? pKeyword : (pKeyword = new KeywordElements());
 	}
-
+	
 	public ParserRule getKeywordRule() {
 		return getKeywordAccess().getRule();
 	}
@@ -865,7 +857,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 	public WildcardElements getWildcardAccess() {
 		return (pWildcard != null) ? pWildcard : (pWildcard = new WildcardElements());
 	}
-
+	
 	public ParserRule getWildcardRule() {
 		return getWildcardAccess().getRule();
 	}
@@ -874,42 +866,42 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	}
+	} 
 
 	//terminal INT returns ecore::EInt:
 	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	}
+	} 
 
 	//terminal STRING:
 	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" |
 	//	"n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	}
+	} 
 
 	//terminal ML_COMMENT:
 	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	}
+	} 
 
 	//terminal SL_COMMENT:
 	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	}
+	} 
 
 	//terminal WS:
 	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	}
+	} 
 
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	}
+	} 
 }

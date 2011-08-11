@@ -9,7 +9,9 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Alternatives;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.AntlrGrammar;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.ElementWithCardinality;
@@ -178,7 +180,7 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   *
+   * 
    * <p>This method is used to initialize {@link SimpleAntlrPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -206,7 +208,7 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
     // Mark meta-data to indicate it can't be changed
     theSimpleAntlrPackage.freeze();
 
-
+  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(SimpleAntlrPackage.eNS_URI, theSimpleAntlrPackage);
     return theSimpleAntlrPackage;

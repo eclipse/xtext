@@ -9,23 +9,8 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Alternatives;
-import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.AntlrGrammar;
-import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.ElementWithCardinality;
-import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Group;
-import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Keyword;
-import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.NegatedElement;
-import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.OptionValue;
-import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Options;
-import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Predicated;
-import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Rule;
-import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.RuleCall;
-import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.RuleElement;
-import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.RuleOptions;
-import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.SimpleAntlrPackage;
-import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Skip;
-import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.UntilElement;
-import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Wildcard;
+
+import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.*;
 
 /**
  * <!-- begin-user-doc -->

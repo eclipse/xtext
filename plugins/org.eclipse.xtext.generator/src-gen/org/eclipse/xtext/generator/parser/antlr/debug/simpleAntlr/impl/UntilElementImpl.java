@@ -7,9 +7,12 @@ package org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.RuleElement;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.SimpleAntlrPackage;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.UntilElement;

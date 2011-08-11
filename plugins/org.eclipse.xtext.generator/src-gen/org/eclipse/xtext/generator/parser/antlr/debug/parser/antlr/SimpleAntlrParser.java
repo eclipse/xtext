@@ -3,37 +3,37 @@
 */
 package org.eclipse.xtext.generator.parser.antlr.debug.parser.antlr;
 
-import org.eclipse.xtext.generator.parser.antlr.debug.services.SimpleAntlrGrammarAccess;
-import org.eclipse.xtext.parser.antlr.XtextTokenStream;
-
 import com.google.inject.Inject;
 
-public class SimpleAntlrParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.generator.parser.antlr.debug.services.SimpleAntlrGrammarAccess;
 
+public class SimpleAntlrParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
+	
 	@Inject
 	private SimpleAntlrGrammarAccess grammarAccess;
-
+	
 	@Override
 	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 	}
-
+	
 	@Override
 	protected org.eclipse.xtext.generator.parser.antlr.debug.parser.antlr.internal.InternalSimpleAntlrParser createParser(XtextTokenStream stream) {
 		return new org.eclipse.xtext.generator.parser.antlr.debug.parser.antlr.internal.InternalSimpleAntlrParser(stream, getGrammarAccess());
 	}
-
-	@Override
+	
+	@Override 
 	protected String getDefaultRuleName() {
 		return "AntlrGrammar";
 	}
-
+	
 	public SimpleAntlrGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-
+	
 	public void setGrammarAccess(SimpleAntlrGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
-
+	
 }
