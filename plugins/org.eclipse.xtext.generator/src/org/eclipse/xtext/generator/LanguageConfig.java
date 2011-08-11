@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
@@ -33,7 +34,7 @@ import com.google.common.base.Function;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
+ * @noextend This class is not intended to be subclassed by clients.
  */
 public class LanguageConfig extends CompositeGeneratorFragment {
 
@@ -59,6 +60,22 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 	private Grammar grammar;
 
 	private List<String> fileExtensions = new ArrayList<String>();
+	
+	private ResourceSet forcedResourceSet = null;
+	
+	/**
+	 * @since 2.1
+	 */
+	public void setForcedResourceSet(ResourceSet forcedResourceSet) {
+		this.forcedResourceSet = forcedResourceSet;
+	}
+	
+	/**
+	 * @since 2.1
+	 */
+	public ResourceSet getForcedResourceSet() {
+		return forcedResourceSet;
+	}
 
 	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
@@ -121,7 +138,7 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 	}
 
 	public void setUri(String uri) {
-		XtextResourceSet rs = new XtextResourceSet();
+		ResourceSet rs = forcedResourceSet != null ? forcedResourceSet : new XtextResourceSet();
 		XtextResource resource = (XtextResource) rs.getResource(URI.createURI(uri), true);
 		if (resource.getContents().isEmpty()) {
 			throw new IllegalArgumentException("Couldn't load grammar for '" + uri + "'.");
