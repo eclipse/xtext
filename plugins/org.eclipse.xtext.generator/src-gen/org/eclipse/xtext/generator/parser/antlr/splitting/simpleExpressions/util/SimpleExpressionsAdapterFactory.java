@@ -7,17 +7,12 @@ package org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.uti
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
+
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
+
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.AndExpression;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Comparison;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Expression;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.IfCondition;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.MethodCall;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.NotExpression;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.NumberLiteral;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.OrExpression;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.SimpleExpressionsPackage;
+
+import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.*;
 
 /**
  * <!-- begin-user-doc -->

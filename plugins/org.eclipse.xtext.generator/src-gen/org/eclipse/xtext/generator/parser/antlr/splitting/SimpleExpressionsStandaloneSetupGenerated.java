@@ -2,8 +2,8 @@
 package org.eclipse.xtext.generator.parser.antlr.splitting;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.ISetup;
+import org.eclipse.emf.ecore.resource.Resource;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -21,11 +21,11 @@ public class SimpleExpressionsStandaloneSetupGenerated implements ISetup {
 		register(injector);
 		return injector;
 	}
-
+	
 	public Injector createInjector() {
 		return Guice.createInjector(new org.eclipse.xtext.generator.parser.antlr.splitting.SimpleExpressionsRuntimeModule());
 	}
-
+	
 	public void register(Injector injector) {
 	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/xtext/generator/parser/antlr/simpleExpressions")) {
 		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/xtext/generator/parser/antlr/simpleExpressions", org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.SimpleExpressionsPackage.eINSTANCE);
@@ -35,7 +35,7 @@ public class SimpleExpressionsStandaloneSetupGenerated implements ISetup {
 		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("simpleExpressions", resourceFactory);
 		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("simpleExpressions", serviceProvider);
-
+		
 
 
 	}

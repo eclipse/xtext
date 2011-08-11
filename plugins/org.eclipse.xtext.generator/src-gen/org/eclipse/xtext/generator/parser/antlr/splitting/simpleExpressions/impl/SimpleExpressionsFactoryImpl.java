@@ -8,18 +8,12 @@ package org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.imp
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
+
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.AndExpression;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Comparison;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Expression;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.IfCondition;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.MethodCall;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.NotExpression;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.NumberLiteral;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.OrExpression;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.SimpleExpressionsFactory;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.SimpleExpressionsPackage;
+
+import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,7 +33,7 @@ public class SimpleExpressionsFactoryImpl extends EFactoryImpl implements Simple
   {
     try
     {
-      SimpleExpressionsFactory theSimpleExpressionsFactory = (SimpleExpressionsFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/generator/parser/antlr/simpleExpressions");
+      SimpleExpressionsFactory theSimpleExpressionsFactory = (SimpleExpressionsFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/generator/parser/antlr/simpleExpressions"); 
       if (theSimpleExpressionsFactory != null)
       {
         return theSimpleExpressionsFactory;

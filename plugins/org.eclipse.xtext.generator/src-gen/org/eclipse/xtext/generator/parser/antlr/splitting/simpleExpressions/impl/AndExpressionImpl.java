@@ -7,9 +7,12 @@ package org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.imp
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.AndExpression;
 import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Expression;
 import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.SimpleExpressionsPackage;

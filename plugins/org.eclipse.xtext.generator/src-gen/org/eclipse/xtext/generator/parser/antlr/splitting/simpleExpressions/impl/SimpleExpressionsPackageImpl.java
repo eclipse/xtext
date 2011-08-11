@@ -9,7 +9,9 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.AndExpression;
 import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Comparison;
 import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Expression;
@@ -114,7 +116,7 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   *
+   * 
    * <p>This method is used to initialize {@link SimpleExpressionsPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -142,7 +144,7 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
     // Mark meta-data to indicate it can't be changed
     theSimpleExpressionsPackage.freeze();
 
-
+  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(SimpleExpressionsPackage.eNS_URI, theSimpleExpressionsPackage);
     return theSimpleExpressionsPackage;

@@ -24,16 +24,16 @@ public abstract class AbstractSimpleExpressionsRuntimeModule extends DefaultRunt
 		properties = tryBindProperties(binder, "org/eclipse/xtext/generator/parser/antlr/splitting/SimpleExpressions.properties");
 		super.configure(binder);
 	}
-
+	
 	public void configureLanguageName(Binder binder) {
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance("org.eclipse.xtext.generator.parser.antlr.splitting.SimpleExpressions");
 	}
-
+	
 	public void configureFileExtensions(Binder binder) {
 		if (properties == null || properties.getProperty(Constants.FILE_EXTENSIONS) == null)
 			binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("simpleExpressions");
 	}
-
+	
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
 		return org.eclipse.xtext.generator.parser.antlr.splitting.services.SimpleExpressionsGrammarAccess.class;
