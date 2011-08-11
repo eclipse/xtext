@@ -3,16 +3,16 @@
 */
 package org.eclipse.xtext.example.domainmodel;
 
-import org.eclipse.xtext.junit.GlobalRegistries;
-import org.eclipse.xtext.junit.GlobalRegistries.GlobalStateMemento;
+import org.eclipse.xtext.junit4.GlobalRegistries;
+import org.eclipse.xtext.junit4.GlobalRegistries.GlobalStateMemento;
 import org.eclipse.xtext.junit4.IInjectorProvider;
 import org.eclipse.xtext.junit4.IRegistryConfigurator;
 
 import com.google.inject.Injector;
 
 public class DomainmodelInjectorProvider implements IInjectorProvider, IRegistryConfigurator {
-	private GlobalStateMemento globalStateMemento;
-	private Injector injector;
+	protected GlobalStateMemento globalStateMemento;
+	protected Injector injector;
 
 	static {
 		GlobalRegistries.initializeDefaults();
@@ -31,6 +31,8 @@ public class DomainmodelInjectorProvider implements IInjectorProvider, IRegistry
 
 	public void setupRegistry() {
 		globalStateMemento = GlobalRegistries.makeCopyOfGlobalState();
+		if (injector != null)
+			new DomainmodelStandaloneSetup().register(injector);
 	}
 	
 }
