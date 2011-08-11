@@ -341,7 +341,8 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 		dirtyStateManager.discardDirtyState(delegatingClientAwareResource);
 		isDirty = false;
 		IResourceDescription cleanDescription = resourceDescriptions.getResourceDescription(delegatingClientAwareResource.getURI());
-		dirtyResource.copyState(cleanDescription);
+		if (cleanDescription != null)
+			dirtyResource.copyState(cleanDescription);
 	}
 	
 	public void descriptionsChanged(final IResourceDescription.Event event) {
@@ -441,6 +442,9 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 		return dirtyStateManager;
 	}
 
+	/**
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
 	public void setDirtyStateManager(IDirtyStateManager dirtyStateManager) {
 		this.dirtyStateManager = dirtyStateManager;
 	}
@@ -449,10 +453,16 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 		return stateChangeEventBroker;
 	}
 
+	/**
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
 	public void setStateChangeEventBroker(IStateChangeEventBroker stateChangeEventBroker) {
 		this.stateChangeEventBroker = stateChangeEventBroker;
 	}
 
+	/**
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
 	public void setConcurrentEditingWarningDialog(IConcurrentEditingCallback concurrentEditingWarningDialog) {
 		this.concurrentEditingWarningDialog = concurrentEditingWarningDialog;
 	}
@@ -461,6 +471,9 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 		return concurrentEditingWarningDialog;
 	}
 
+	/**
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
 	public void setDirtyResource(DocumentBasedDirtyResource dirtyResource) {
 		this.dirtyResource = dirtyResource;
 	}
@@ -469,4 +482,11 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 		return dirtyResource;
 	}
 
+	/**
+	 * @since 2.1
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
+	public void setResourceDescriptions(IResourceDescriptions resourceDescriptions) {
+		this.resourceDescriptions = resourceDescriptions;
+	}
 }

@@ -81,6 +81,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		resourceSet.getResources().add(resource);
 		dirtyStateSupport = new DirtyStateEditorSupport();
 		dirtyStateSupport.setConcurrentEditingWarningDialog(this);
+		dirtyStateSupport.setResourceDescriptions(this);
 		dirtyStateManager = new DirtyStateManager();
 		stateChangeEventBroker = new StateChangeEventBroker();
 		dirtyStateManager.addListener(stateChangeEventBroker);
