@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
-import org.eclipse.xtext.common.types.impl.JvmTypeReferenceImpl;
+import org.eclipse.xtext.common.types.impl.JvmTypeReferenceImplCustom;
 
 import org.eclipse.xtext.xtype.XSynonymTypeReference;
 import org.eclipse.xtext.xtype.XtypePackage;
@@ -42,7 +42,7 @@ import org.eclipse.xtext.xtype.XtypePackage;
  *
  * @generated
  */
-public class XSynonymTypeReferenceImpl extends JvmTypeReferenceImpl implements XSynonymTypeReference
+public class XSynonymTypeReferenceImpl extends JvmTypeReferenceImplCustom implements XSynonymTypeReference
 {
 	/**
 	 * The cached value of the '{@link #getSynonymes() <em>Synonymes</em>}' containment reference list.

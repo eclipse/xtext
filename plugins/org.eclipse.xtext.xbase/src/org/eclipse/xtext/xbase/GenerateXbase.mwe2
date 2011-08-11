@@ -53,6 +53,7 @@ Workflow {
 	component = org.eclipse.emf.mwe2.ecore.EcoreGenerator {
 		genModel = "platform:/resource/${projectName}/model/Xbase.genmodel"
 		srcPath ="platform:/resource/${projectName}/src"
+		srcPath ="platform:/resource/org.eclipse.xtext.common.types/src"
 	}
 
 	component = DirectoryCleaner {

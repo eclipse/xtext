@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
-import org.eclipse.xtext.common.types.impl.JvmParameterizedTypeReferenceImpl;
+import org.eclipse.xtext.common.types.impl.JvmParameterizedTypeReferenceImplCustom;
 
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XtypePackage;
@@ -41,7 +41,7 @@ import org.eclipse.xtext.xtype.XtypePackage;
  *
  * @generated
  */
-public class XFunctionTypeRefImpl extends JvmParameterizedTypeReferenceImpl implements XFunctionTypeRef
+public class XFunctionTypeRefImpl extends JvmParameterizedTypeReferenceImplCustom implements XFunctionTypeRef
 {
 	/**
 	 * The cached value of the '{@link #getParamTypes() <em>Param Types</em>}' containment reference list.

@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
-import org.eclipse.xtext.common.types.impl.JvmTypeReferenceImpl;
+import org.eclipse.xtext.common.types.impl.JvmTypeReferenceImplCustom;
 
 import org.eclipse.xtext.xtype.XDelegateTypeReference;
 import org.eclipse.xtext.xtype.XtypePackage;
@@ -32,7 +32,7 @@ import org.eclipse.xtext.xtype.XtypePackage;
  *
  * @generated
  */
-public class XDelegateTypeReferenceImpl extends JvmTypeReferenceImpl implements XDelegateTypeReference
+public class XDelegateTypeReferenceImpl extends JvmTypeReferenceImplCustom implements XDelegateTypeReference
 {
 	/**
 	 * The cached value of the '{@link #getDelegate() <em>Delegate</em>}' reference.
