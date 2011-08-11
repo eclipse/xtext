@@ -3,16 +3,16 @@
 */
 package org.eclipse.xtext.purexbase;
 
-import org.eclipse.xtext.junit.GlobalRegistries;
-import org.eclipse.xtext.junit.GlobalRegistries.GlobalStateMemento;
+import org.eclipse.xtext.junit4.GlobalRegistries;
+import org.eclipse.xtext.junit4.GlobalRegistries.GlobalStateMemento;
 import org.eclipse.xtext.junit4.IInjectorProvider;
 import org.eclipse.xtext.junit4.IRegistryConfigurator;
 
 import com.google.inject.Injector;
 
 public class PureXbaseInjectorProvider implements IInjectorProvider, IRegistryConfigurator {
-	private GlobalStateMemento globalStateMemento;
-	private Injector injector;
+	protected GlobalStateMemento globalStateMemento;
+	protected Injector injector;
 
 	static {
 		GlobalRegistries.initializeDefaults();
@@ -31,6 +31,8 @@ public class PureXbaseInjectorProvider implements IInjectorProvider, IRegistryCo
 
 	public void setupRegistry() {
 		globalStateMemento = GlobalRegistries.makeCopyOfGlobalState();
+		if (injector != null)
+			new PureXbaseStandaloneSetup().register(injector);
 	}
 	
 }
