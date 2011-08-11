@@ -11,6 +11,7 @@ import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
 import org.eclipse.xtext.generator.parser.antlr.*
+import org.eclipse.xtext.resource.XtextResourceSet 
 
 var projectName = "org.eclipse.xtext.xbase"
 var runtimeProject = "../${projectName}"
@@ -21,6 +22,28 @@ var memoize = false
 Workflow {
 	bean = StandaloneSetup { 
 		platformUri = "${runtimeProject}/../.."
+		scanClassPath = true
+	}
+	
+	bean = StandaloneSetup {
+		resourceSet = XtextResourceSet : xtypeResourceSet {}
+		registerEcoreFile = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore"
+		registerEcoreFile = "platform:/resource/${projectName}/model/Xtype.ecore"
+	}
+	
+	bean = StandaloneSetup {
+		resourceSet = XtextResourceSet : xbaseResourceSet {}
+		registerEcoreFile = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore"
+		registerEcoreFile = "platform:/resource/${projectName}/model/Xtype.ecore"
+		registerEcoreFile = "platform:/resource/${projectName}/model/Xbase.ecore"
+	}
+	
+	bean = StandaloneSetup {
+		resourceSet = XtextResourceSet : xannotationsResourceSet {}
+		registerEcoreFile = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore"
+		registerEcoreFile = "platform:/resource/${projectName}/model/Xtype.ecore"
+		registerEcoreFile = "platform:/resource/${projectName}/model/Xbase.ecore"
+		registerEcoreFile = "platform:/resource/${projectName}/model/XAnnotations.ecore"
 	}
 
 	component = DirectoryCleaner {
@@ -46,6 +69,7 @@ Workflow {
 		projectNameUi = "${projectName}.ui"
 		
 		language = {
+			forcedResourceSet = xtypeResourceSet
 			uri = "classpath:/org/eclipse/xtext/xbase/Xtype.xtext" 
 			fileExtensions="___xtype"
 			fragment = grammarAccess.GrammarAccessFragment {}
@@ -58,7 +82,8 @@ Workflow {
 				options = auto-inject {}
 			}
 		}
-		language = { 
+		language = {
+			forcedResourceSet = xbaseResourceSet
 			uri = "classpath:/org/eclipse/xtext/xbase/Xbase.xtext" 	
 			fileExtensions = "___xbase"
 			fragment = grammarAccess.GrammarAccessFragment {}
@@ -93,7 +118,8 @@ Workflow {
 				antlrParam = "-Xconversiontimeout" antlrParam = "10000"
 			}
 		}
-		language = { 
+		language = {
+			forcedResourceSet = xannotationsResourceSet
 			uri = "classpath:/org/eclipse/xtext/xbase/annotations/XbaseWithAnnotations.xtext" 	
 			fileExtensions = "___xbasewithannotations"
 			fragment = grammarAccess.GrammarAccessFragment {}
