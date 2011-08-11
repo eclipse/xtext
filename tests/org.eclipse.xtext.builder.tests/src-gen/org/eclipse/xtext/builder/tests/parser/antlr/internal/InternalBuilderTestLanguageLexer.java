@@ -12,23 +12,23 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalBuilderTestLanguageLexer extends Lexer {
-    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
-    public static final int T__12=12;
-    public static final int T__13=13;
-    public static final int RULE_STRING=6;
-    public static final int T__19=19;
-    public static final int T__14=14;
-    public static final int T__11=11;
-    public static final int RULE_WS=9;
-    public static final int T__17=17;
-    public static final int EOF=-1;
-    public static final int RULE_INT=5;
-    public static final int T__16=16;
     public static final int RULE_ANY_OTHER=10;
     public static final int RULE_SL_COMMENT=8;
-    public static final int T__18=18;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=7;
+    public static final int T__19=19;
+    public static final int RULE_STRING=6;
+    public static final int T__16=16;
     public static final int T__15=15;
+    public static final int T__18=18;
+    public static final int T__17=17;
+    public static final int T__12=12;
+    public static final int T__11=11;
+    public static final int T__14=14;
+    public static final int T__13=13;
+    public static final int RULE_INT=5;
+    public static final int RULE_WS=9;
 
     // delegates
     // delegators
@@ -889,7 +889,7 @@ public class InternalBuilderTestLanguageLexer extends Lexer {
         "\1\20\1\uffff\1\12\1\2\1\3\4\uffff\1\10\1\11\1\13\1\14\1\15\1\16"+
         "\1\17\25\uffff\1\4\1\5\10\uffff\1\1\1\7\1\uffff\1\6";
     static final String DFA12_specialS =
-        "\1\1\13\uffff\1\2\1\0\65\uffff}>";
+        "\1\0\13\uffff\1\2\1\1\65\uffff}>";
     static final String[] DFA12_transitionS = {
             "\11\20\2\17\2\20\1\17\22\20\1\17\1\20\1\14\4\20\1\15\4\20\1"+
             "\7\1\20\1\10\1\16\12\13\7\20\32\12\3\20\1\11\1\12\1\20\10\12"+
@@ -978,7 +978,7 @@ public class InternalBuilderTestLanguageLexer extends Lexer {
         }
     }
 
-    class DFA12 extends DFA {
+    static class DFA12 extends DFA {
 
         public DFA12(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
@@ -999,16 +999,6 @@ public class InternalBuilderTestLanguageLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA12_13 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA12_13>='\u0000' && LA12_13<='\uFFFF')) ) {s = 28;}
-
-                        else s = 16;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
                         int LA12_0 = input.LA(1);
 
                         s = -1;
@@ -1043,6 +1033,16 @@ public class InternalBuilderTestLanguageLexer extends Lexer {
                         else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {s = 15;}
 
                         else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='+')||LA12_0=='-'||(LA12_0>=':' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||LA12_0=='|'||(LA12_0>='~' && LA12_0<='\uFFFF')) ) {s = 16;}
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
+                        int LA12_13 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA12_13>='\u0000' && LA12_13<='\uFFFF')) ) {s = 28;}
+
+                        else s = 16;
 
                         if ( s>=0 ) return s;
                         break;

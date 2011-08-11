@@ -8,20 +8,20 @@
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.builder.tests.edit"
     editorPluginID="org.eclipse.xtext.builder.tests.editor">
   <genPackages prefix="BuilderTestLanguage" basePackage="org.eclipse.xtext.builder.tests"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/BuilderTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/BuilderTestLanguage.ecore#//NamedElement">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/BuilderTestLanguage.ecore#//NamedElement/name"/>
+      disposableProviderFactory="true" ecorePackage="BuilderTestLanguage.ecore#/">
+    <genClasses ecoreClass="BuilderTestLanguage.ecore#//NamedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BuilderTestLanguage.ecore#//NamedElement/name"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/BuilderTestLanguage.ecore#//Namespace">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/BuilderTestLanguage.ecore#//Namespace/imports"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/BuilderTestLanguage.ecore#//Namespace/elements"/>
+    <genClasses ecoreClass="BuilderTestLanguage.ecore#//Namespace">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BuilderTestLanguage.ecore#//Namespace/imports"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BuilderTestLanguage.ecore#//Namespace/elements"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/BuilderTestLanguage.ecore#//Import">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/BuilderTestLanguage.ecore#//Import/importedNamespace"/>
+    <genClasses ecoreClass="BuilderTestLanguage.ecore#//Import">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BuilderTestLanguage.ecore#//Import/importedNamespace"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/BuilderTestLanguage.ecore#//Element">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/BuilderTestLanguage.ecore#//Element/references"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/BuilderTestLanguage.ecore#//Element/otherRefs"/>
+    <genClasses ecoreClass="BuilderTestLanguage.ecore#//Element">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BuilderTestLanguage.ecore#//Element/references"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BuilderTestLanguage.ecore#//Element/otherRefs"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
