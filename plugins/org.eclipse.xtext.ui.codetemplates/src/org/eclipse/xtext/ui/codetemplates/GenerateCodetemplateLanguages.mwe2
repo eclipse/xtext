@@ -15,6 +15,9 @@ var uiProject = "${runtimeProject}.ui"
 Workflow { 
     bean = StandaloneSetup {
 		platformUri = "${runtimeProject}/.."
+		scanClassPath = true
+		registerGenModelFile = "platform:/resource/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.genmodel"
+		registerGenModelFile = "platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel"
 	}
 
 	component = DirectoryCleaner {
@@ -38,9 +41,7 @@ Workflow {
 			fragment = grammarAccess.GrammarAccessFragment {}
 
 			// generates Java API for the generated EPackages 
-			fragment = ecore.EcoreGeneratorFragment {
-				referencedGenModels = "classpath:/org/eclipse/xtext/Xtext.genmodel"
-			}
+			fragment = ecore.EcoreGeneratorFragment {}
 
 			// the serialization component
 			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
