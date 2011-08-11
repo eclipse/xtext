@@ -160,7 +160,6 @@ public class DefaultTextEditComposerTest extends AbstractXtextTests {
 		assertMatches(barRule, children[1]);
 	}
 
-	@SuppressWarnings("restriction")
 	private void assertMatches(EObject obj, TextEdit edit) {
 		assertTrue(edit instanceof ReplaceEdit);
 		INode node = NodeModelUtils.getNode(obj);

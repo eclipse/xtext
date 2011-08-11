@@ -38,7 +38,6 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class FindReferenceURINormalizationTest extends TestCase {
 
 	@Inject
