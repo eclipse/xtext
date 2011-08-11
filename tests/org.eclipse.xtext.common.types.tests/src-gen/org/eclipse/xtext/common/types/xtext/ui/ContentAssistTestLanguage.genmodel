@@ -6,20 +6,20 @@
     modelPluginID="org.eclipse.xtext.common.types.tests" forceOverwrite="true" modelName="ContentAssistTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.common.types.tests.edit"
-    editorPluginID="org.eclipse.xtext.common.types.tests.editor" usedGenPackages="platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types">
+    editorPluginID="org.eclipse.xtext.common.types.tests.editor" usedGenPackages="../../../../../../../../../org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types">
   <genPackages prefix="ContentAssistTestLanguage" basePackage="org.eclipse.xtext.common.types.xtext.ui"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/ContentAssistTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/ContentAssistTestLanguage.ecore#//Model">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/ContentAssistTestLanguage.ecore#//Model/imports"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/ContentAssistTestLanguage.ecore#//Model/referenceHolder"/>
+      disposableProviderFactory="true" ecorePackage="ContentAssistTestLanguage.ecore#/">
+    <genClasses ecoreClass="ContentAssistTestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ContentAssistTestLanguage.ecore#//Model/imports"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ContentAssistTestLanguage.ecore#//Model/referenceHolder"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/ContentAssistTestLanguage.ecore#//ReferenceHolder">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/ContentAssistTestLanguage.ecore#//ReferenceHolder/defaultReference"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/ContentAssistTestLanguage.ecore#//ReferenceHolder/customizedReference"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/ContentAssistTestLanguage.ecore#//ReferenceHolder/subtypeReference"/>
+    <genClasses ecoreClass="ContentAssistTestLanguage.ecore#//ReferenceHolder">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ContentAssistTestLanguage.ecore#//ReferenceHolder/defaultReference"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ContentAssistTestLanguage.ecore#//ReferenceHolder/customizedReference"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ContentAssistTestLanguage.ecore#//ReferenceHolder/subtypeReference"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/ContentAssistTestLanguage.ecore#//Import">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/ContentAssistTestLanguage.ecore#//Import/importedNamespace"/>
+    <genClasses ecoreClass="ContentAssistTestLanguage.ecore#//Import">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ContentAssistTestLanguage.ecore#//Import/importedNamespace"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
