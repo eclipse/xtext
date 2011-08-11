@@ -161,7 +161,7 @@ protected class Model_Alternatives extends AlternativesToken {
 		switch(index) {
 			case 0: return new Model_UnitsAssignment_0(lastRuleCallOrigin, this, 0, inst);
 			case 1: return new Model_FunctionsAssignment_1(lastRuleCallOrigin, this, 1, inst);
-			default: return null;
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index - 2, inst);
 		}	
 	}
 

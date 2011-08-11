@@ -12,81 +12,81 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalExBeeLangTestLanguageLexer extends Lexer {
-    public static final int KEYWORD_7=55;
-    public static final int KEYWORD_49=24;
-    public static final int KEYWORD_43=30;
-    public static final int KEYWORD_21=32;
-    public static final int KEYWORD_17=65;
-    public static final int KEYWORD_18=66;
-    public static final int KEYWORD_24=35;
-    public static final int RULE_STRING=73;
-    public static final int KEYWORD_65=5;
-    public static final int KEYWORD_31=42;
-    public static final int KEYWORD_36=47;
-    public static final int KEYWORD_19=67;
-    public static final int KEYWORD_9=57;
-    public static final int KEYWORD_2=50;
-    public static final int RULE_HEX=70;
-    public static final int KEYWORD_23=34;
-    public static final int KEYWORD_30=41;
-    public static final int KEYWORD_44=31;
-    public static final int KEYWORD_16=64;
-    public static final int KEYWORD_58=13;
-    public static final int KEYWORD_22=33;
-    public static final int KEYWORD_57=12;
-    public static final int KEYWORD_28=39;
-    public static final int KEYWORD_61=10;
-    public static final int KEYWORD_50=18;
-    public static final int RULE_INT=72;
-    public static final int KEYWORD_13=61;
-    public static final int KEYWORD_35=46;
-    public static final int KEYWORD_5=53;
-    public static final int KEYWORD_62=6;
-    public static final int KEYWORD_51=19;
-    public static final int KEYWORD_47=22;
-    public static final int KEYWORD_34=45;
-    public static final int KEYWORD_12=60;
-    public static final int KEYWORD_8=56;
-    public static final int KEYWORD_37=48;
-    public static final int KEYWORD_56=11;
-    public static final int KEYWORD_48=23;
-    public static final int KEYWORD_27=38;
-    public static final int KEYWORD_53=15;
-    public static final int KEYWORD_32=43;
-    public static final int KEYWORD_38=25;
-    public static final int RULE_ML_COMMENT=74;
     public static final int RULE_ID=71;
-    public static final int KEYWORD_10=58;
-    public static final int KEYWORD_29=40;
-    public static final int KEYWORD_1=49;
-    public static final int KEYWORD_46=21;
-    public static final int KEYWORD_39=26;
-    public static final int KEYWORD_54=16;
-    public static final int KEYWORD_55=17;
-    public static final int KEYWORD_45=20;
-    public static final int KEYWORD_33=44;
-    public static final int KEYWORD_52=14;
-    public static final int KEYWORD_11=59;
-    public static final int KEYWORD_64=4;
-    public static final int KEYWORD_4=52;
-    public static final int RULE_WS=76;
-    public static final int KEYWORD_20=68;
-    public static final int KEYWORD_14=62;
-    public static final int EOF=-1;
-    public static final int KEYWORD_42=29;
-    public static final int RULE_DOCUMENTATION=69;
-    public static final int KEYWORD_6=54;
     public static final int RULE_ANY_OTHER=77;
-    public static final int KEYWORD_25=36;
-    public static final int KEYWORD_41=28;
+    public static final int KEYWORD_19=67;
+    public static final int KEYWORD_56=11;
+    public static final int KEYWORD_55=17;
+    public static final int KEYWORD_17=65;
+    public static final int KEYWORD_54=16;
+    public static final int KEYWORD_18=66;
+    public static final int KEYWORD_53=15;
     public static final int KEYWORD_15=63;
-    public static final int RULE_SL_COMMENT=75;
-    public static final int KEYWORD_60=9;
+    public static final int KEYWORD_52=14;
+    public static final int KEYWORD_16=64;
+    public static final int KEYWORD_51=19;
+    public static final int KEYWORD_13=61;
+    public static final int KEYWORD_50=18;
+    public static final int KEYWORD_14=62;
+    public static final int KEYWORD_11=59;
+    public static final int KEYWORD_12=60;
+    public static final int EOF=-1;
+    public static final int KEYWORD_10=58;
     public static final int KEYWORD_59=8;
+    public static final int KEYWORD_58=13;
+    public static final int KEYWORD_57=12;
+    public static final int RULE_HEX=70;
+    public static final int KEYWORD_6=54;
+    public static final int KEYWORD_7=55;
+    public static final int KEYWORD_8=56;
+    public static final int KEYWORD_9=57;
+    public static final int KEYWORD_65=5;
+    public static final int KEYWORD_28=39;
+    public static final int KEYWORD_64=4;
+    public static final int KEYWORD_29=40;
+    public static final int RULE_INT=72;
+    public static final int KEYWORD_61=10;
+    public static final int KEYWORD_24=35;
+    public static final int KEYWORD_60=9;
+    public static final int KEYWORD_25=36;
     public static final int KEYWORD_63=7;
     public static final int KEYWORD_26=37;
+    public static final int KEYWORD_62=6;
+    public static final int KEYWORD_27=38;
+    public static final int KEYWORD_20=68;
+    public static final int KEYWORD_21=32;
+    public static final int KEYWORD_22=33;
+    public static final int KEYWORD_23=34;
+    public static final int KEYWORD_1=49;
+    public static final int KEYWORD_30=41;
+    public static final int KEYWORD_5=53;
+    public static final int KEYWORD_34=45;
+    public static final int KEYWORD_4=52;
+    public static final int KEYWORD_33=44;
     public static final int KEYWORD_3=51;
+    public static final int KEYWORD_32=43;
+    public static final int KEYWORD_2=50;
+    public static final int KEYWORD_31=42;
+    public static final int KEYWORD_38=25;
+    public static final int RULE_SL_COMMENT=75;
+    public static final int KEYWORD_37=48;
+    public static final int KEYWORD_36=47;
+    public static final int KEYWORD_35=46;
+    public static final int RULE_ML_COMMENT=74;
+    public static final int KEYWORD_39=26;
+    public static final int RULE_STRING=73;
+    public static final int RULE_DOCUMENTATION=69;
+    public static final int KEYWORD_41=28;
     public static final int KEYWORD_40=27;
+    public static final int KEYWORD_43=30;
+    public static final int KEYWORD_42=29;
+    public static final int KEYWORD_45=20;
+    public static final int KEYWORD_44=31;
+    public static final int RULE_WS=76;
+    public static final int KEYWORD_47=22;
+    public static final int KEYWORD_46=21;
+    public static final int KEYWORD_49=24;
+    public static final int KEYWORD_48=23;
 
     // delegates
     // delegators
@@ -2674,8 +2674,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         "\7\uffff\1\102\7\uffff\1\13\1\uffff\1\14\1\15\1\16\5\uffff\1\10"+
         "\1\11\1\12\1\uffff\1\7\2\uffff\1\6\1\5\3\uffff\1\1\1\2\1\3\1\4";
     static final String DFA14_specialS =
-        "\1\5\52\uffff\1\10\1\2\53\uffff\1\7\63\uffff\1\1\31\uffff\1\4\1"+
-        "\6\1\3\23\uffff\1\0\60\uffff}>";
+        "\1\2\52\uffff\1\5\1\4\53\uffff\1\3\63\uffff\1\7\31\uffff\1\10\1"+
+        "\6\1\1\23\uffff\1\0\60\uffff}>";
     static final String[] DFA14_transitionS = {
             "\11\56\2\55\2\56\1\55\22\56\1\55\1\17\1\53\2\56\1\23\1\24\1"+
             "\54\1\36\1\37\1\25\1\26\1\40\1\27\1\20\1\30\1\47\11\52\1\41"+
@@ -2938,7 +2938,7 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         }
     }
 
-    class DFA14 extends DFA {
+    static class DFA14 extends DFA {
 
         public DFA14(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
@@ -2971,28 +2971,6 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA14_140 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA14_140=='/') ) {s = 166;}
-
-                        else if ( (LA14_140=='*') ) {s = 167;}
-
-                        else if ( ((LA14_140>='\u0000' && LA14_140<=')')||(LA14_140>='+' && LA14_140<='.')||(LA14_140>='0' && LA14_140<='\uFFFF')) ) {s = 168;}
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA14_44 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA14_44>='\u0000' && LA14_44<='\uFFFF')) ) {s = 110;}
-
-                        else s = 46;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 3 : 
                         int LA14_168 = input.LA(1);
 
                         s = -1;
@@ -3002,19 +2980,7 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 4 : 
-                        int LA14_166 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA14_166=='*') ) {s = 167;}
-
-                        else if ( ((LA14_166>='\u0000' && LA14_166<=')')||(LA14_166>='+' && LA14_166<='\uFFFF')) ) {s = 168;}
-
-                        else s = 141;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 5 : 
+                    case 2 : 
                         int LA14_0 = input.LA(1);
 
                         s = -1;
@@ -3112,6 +3078,36 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
+                    case 3 : 
+                        int LA14_88 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA14_88=='*') ) {s = 140;}
+
+                        else if ( ((LA14_88>='\u0000' && LA14_88<=')')||(LA14_88>='+' && LA14_88<='\uFFFF')) ) {s = 141;}
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 4 : 
+                        int LA14_44 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA14_44>='\u0000' && LA14_44<='\uFFFF')) ) {s = 110;}
+
+                        else s = 46;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 5 : 
+                        int LA14_43 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA14_43>='\u0000' && LA14_43<='\uFFFF')) ) {s = 110;}
+
+                        else s = 46;
+
+                        if ( s>=0 ) return s;
+                        break;
                     case 6 : 
                         int LA14_167 = input.LA(1);
 
@@ -3125,22 +3121,26 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
                         if ( s>=0 ) return s;
                         break;
                     case 7 : 
-                        int LA14_88 = input.LA(1);
+                        int LA14_140 = input.LA(1);
 
                         s = -1;
-                        if ( (LA14_88=='*') ) {s = 140;}
+                        if ( (LA14_140=='/') ) {s = 166;}
 
-                        else if ( ((LA14_88>='\u0000' && LA14_88<=')')||(LA14_88>='+' && LA14_88<='\uFFFF')) ) {s = 141;}
+                        else if ( (LA14_140=='*') ) {s = 167;}
+
+                        else if ( ((LA14_140>='\u0000' && LA14_140<=')')||(LA14_140>='+' && LA14_140<='.')||(LA14_140>='0' && LA14_140<='\uFFFF')) ) {s = 168;}
 
                         if ( s>=0 ) return s;
                         break;
                     case 8 : 
-                        int LA14_43 = input.LA(1);
+                        int LA14_166 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA14_43>='\u0000' && LA14_43<='\uFFFF')) ) {s = 110;}
+                        if ( (LA14_166=='*') ) {s = 167;}
 
-                        else s = 46;
+                        else if ( ((LA14_166>='\u0000' && LA14_166<=')')||(LA14_166>='+' && LA14_166<='\uFFFF')) ) {s = 168;}
+
+                        else s = 141;
 
                         if ( s>=0 ) return s;
                         break;
