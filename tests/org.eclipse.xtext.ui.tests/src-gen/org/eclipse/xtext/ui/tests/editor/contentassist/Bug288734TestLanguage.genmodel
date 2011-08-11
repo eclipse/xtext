@@ -8,19 +8,19 @@
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.tests.edit"
     editorPluginID="org.eclipse.xtext.ui.tests.editor">
   <genPackages prefix="Bug288734TestLanguage" basePackage="org.eclipse.xtext.ui.tests.editor.contentassist"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug288734TestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug288734TestLanguage.ecore#//Model">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug288734TestLanguage.ecore#//Model/constants"/>
+      disposableProviderFactory="true" ecorePackage="Bug288734TestLanguage.ecore#/">
+    <genClasses ecoreClass="Bug288734TestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug288734TestLanguage.ecore#//Model/constants"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug288734TestLanguage.ecore#//TConstant">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug288734TestLanguage.ecore#//TConstant/annotations"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug288734TestLanguage.ecore#//TConstant/name"/>
+    <genClasses ecoreClass="Bug288734TestLanguage.ecore#//TConstant">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug288734TestLanguage.ecore#//TConstant/annotations"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug288734TestLanguage.ecore#//TConstant/name"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug288734TestLanguage.ecore#//TStringConstant"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug288734TestLanguage.ecore#//TIntegerConstant"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug288734TestLanguage.ecore#//TBooleanConstant"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug288734TestLanguage.ecore#//TAnnotation">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug288734TestLanguage.ecore#//TAnnotation/description"/>
+    <genClasses ecoreClass="Bug288734TestLanguage.ecore#//TStringConstant"/>
+    <genClasses ecoreClass="Bug288734TestLanguage.ecore#//TIntegerConstant"/>
+    <genClasses ecoreClass="Bug288734TestLanguage.ecore#//TBooleanConstant"/>
+    <genClasses ecoreClass="Bug288734TestLanguage.ecore#//TAnnotation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug288734TestLanguage.ecore#//TAnnotation/description"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

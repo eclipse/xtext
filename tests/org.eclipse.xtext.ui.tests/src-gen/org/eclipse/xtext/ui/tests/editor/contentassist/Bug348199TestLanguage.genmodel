@@ -8,14 +8,14 @@
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.tests.edit"
     editorPluginID="org.eclipse.xtext.ui.tests.editor">
   <genPackages prefix="Bug348199TestLanguage" basePackage="org.eclipse.xtext.ui.tests.editor.contentassist"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug348199TestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug348199TestLanguage.ecore#//Timeperiod">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug348199TestLanguage.ecore#//Timeperiod/time"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug348199TestLanguage.ecore#//Timeperiod/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug348199TestLanguage.ecore#//Timeperiod/alias"/>
+      disposableProviderFactory="true" ecorePackage="Bug348199TestLanguage.ecore#/">
+    <genClasses ecoreClass="Bug348199TestLanguage.ecore#//Timeperiod">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug348199TestLanguage.ecore#//Timeperiod/time"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug348199TestLanguage.ecore#//Timeperiod/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug348199TestLanguage.ecore#//Timeperiod/alias"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug348199TestLanguage.ecore#//TimeDef">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug348199TestLanguage.ecore#//TimeDef/day"/>
+    <genClasses ecoreClass="Bug348199TestLanguage.ecore#//TimeDef">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug348199TestLanguage.ecore#//TimeDef/day"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

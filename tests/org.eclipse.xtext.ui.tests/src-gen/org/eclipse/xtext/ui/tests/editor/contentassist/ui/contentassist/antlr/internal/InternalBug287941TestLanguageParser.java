@@ -24,43 +24,43 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalContent
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_SIGNED_DOUBLE", "RULE_SINGED_LONG", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "'false'", "'<'", "'>'", "'<='", "'>='", "'='", "'!='", "'like'", "'notlike'", "'import'", "'select'", "'from'", "','", "'where'", "'.'", "'as'", "'in'", "'resources'", "'{'", "'}'", "'elements'", "'or'", "'and'", "'('", "')'", "'null'", "'withoutsubtypes'", "'not'", "'true'"
     };
-    public static final int RULE_ML_COMMENT=8;
-    public static final int T__35=35;
     public static final int RULE_ID=5;
-    public static final int T__12=12;
-    public static final int T__28=28;
-    public static final int T__23=23;
-    public static final int T__36=36;
-    public static final int T__20=20;
-    public static final int RULE_SIGNED_DOUBLE=6;
-    public static final int T__13=13;
-    public static final int RULE_STRING=4;
-    public static final int T__21=21;
-    public static final int T__19=19;
-    public static final int T__33=33;
-    public static final int T__14=14;
-    public static final int RULE_SINGED_LONG=7;
-    public static final int T__11=11;
-    public static final int T__22=22;
     public static final int T__29=29;
-    public static final int T__39=39;
-    public static final int T__30=30;
-    public static final int RULE_WS=10;
-    public static final int T__17=17;
-    public static final int T__31=31;
-    public static final int EOF=-1;
+    public static final int T__28=28;
     public static final int T__27=27;
-    public static final int T__32=32;
-    public static final int T__16=16;
-    public static final int T__38=38;
-    public static final int T__24=24;
-    public static final int T__37=37;
     public static final int T__26=26;
     public static final int T__25=25;
+    public static final int T__24=24;
+    public static final int T__23=23;
+    public static final int T__22=22;
+    public static final int T__21=21;
+    public static final int T__20=20;
+    public static final int RULE_SINGED_LONG=7;
     public static final int RULE_SL_COMMENT=9;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=8;
+    public static final int T__30=30;
+    public static final int T__19=19;
+    public static final int T__31=31;
+    public static final int RULE_STRING=4;
+    public static final int T__32=32;
+    public static final int T__33=33;
+    public static final int T__16=16;
     public static final int T__34=34;
-    public static final int T__18=18;
     public static final int T__15=15;
+    public static final int T__35=35;
+    public static final int T__18=18;
+    public static final int T__36=36;
+    public static final int T__17=17;
+    public static final int T__37=37;
+    public static final int T__12=12;
+    public static final int T__38=38;
+    public static final int T__11=11;
+    public static final int T__39=39;
+    public static final int T__14=14;
+    public static final int T__13=13;
+    public static final int RULE_SIGNED_DOUBLE=6;
+    public static final int RULE_WS=10;
 
     // delegates
     // delegators
@@ -14081,15 +14081,13 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalContent
     static final String DFA2_eotS =
         "\15\uffff";
     static final String DFA2_eofS =
-        "\13\uffff\1\14\1\uffff";
+        "\12\uffff\1\14\2\uffff";
     static final String DFA2_minS =
-        "\1\5\1\uffff\1\20\1\5\1\uffff\1\14\1\4\1\uffff\1\4\2\uffff\1\5\1"+
-        "\uffff";
+        "\1\5\1\uffff\1\20\1\5\1\uffff\1\14\2\4\2\uffff\1\5\2\uffff";
     static final String DFA2_maxS =
-        "\1\42\1\uffff\1\31\1\5\1\uffff\1\46\1\47\1\uffff\1\47\2\uffff\1"+
-        "\43\1\uffff";
+        "\1\42\1\uffff\1\31\1\5\1\uffff\1\46\2\47\2\uffff\1\43\2\uffff";
     static final String DFA2_acceptS =
-        "\1\uffff\1\1\2\uffff\1\5\2\uffff\1\2\1\uffff\1\6\1\3\1\uffff\1\4";
+        "\1\uffff\1\1\2\uffff\1\5\3\uffff\1\2\1\6\1\uffff\1\3\1\4";
     static final String DFA2_specialS =
         "\15\uffff}>";
     static final String[] DFA2_transitionS = {
@@ -14098,13 +14096,13 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalContent
             "\1\4\10\uffff\1\3",
             "\1\5",
             "",
-            "\4\7\1\6\1\10\2\7\7\uffff\1\11\12\uffff\1\11",
-            "\1\7\1\13\2\7\3\uffff\1\7\30\uffff\1\12\2\uffff\1\7",
+            "\4\10\1\6\1\7\2\10\7\uffff\1\11\12\uffff\1\11",
+            "\1\10\1\12\2\10\3\uffff\1\10\30\uffff\1\13\2\uffff\1\10",
+            "\4\10\3\uffff\1\10\30\uffff\1\13\2\uffff\1\10",
             "",
-            "\4\7\3\uffff\1\7\30\uffff\1\12\2\uffff\1\7",
             "",
+            "\1\14\23\uffff\1\10\6\uffff\4\14",
             "",
-            "\1\14\23\uffff\1\7\6\uffff\4\14",
             ""
     };
 
@@ -14146,25 +14144,25 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalContent
     static final String DFA3_eofS =
         "\16\uffff";
     static final String DFA3_minS =
-        "\1\5\1\31\1\5\1\14\4\5\2\4\4\uffff";
+        "\1\5\1\31\1\5\1\14\2\4\1\uffff\4\5\3\uffff";
     static final String DFA3_maxS =
-        "\1\5\1\31\1\5\1\23\4\7\2\47\4\uffff";
+        "\1\5\1\31\1\5\1\23\2\47\1\uffff\4\7\3\uffff";
     static final String DFA3_acceptS =
-        "\12\uffff\1\2\1\1\1\4\1\3";
+        "\6\uffff\1\2\4\uffff\1\1\1\4\1\3";
     static final String DFA3_specialS =
         "\16\uffff}>";
     static final String[] DFA3_transitionS = {
             "\1\1",
             "\1\2",
             "\1\3",
-            "\1\4\1\5\1\6\1\7\1\10\1\11\2\12",
-            "\1\14\2\13",
-            "\1\14\2\13",
-            "\1\14\2\13",
-            "\1\14\2\13",
-            "\1\12\1\14\2\13\3\uffff\1\15\33\uffff\1\15",
-            "\1\12\1\14\2\13\3\uffff\1\15\33\uffff\1\15",
+            "\1\7\1\10\1\11\1\12\1\4\1\5\2\6",
+            "\1\6\1\14\2\13\3\uffff\1\15\33\uffff\1\15",
+            "\1\6\1\14\2\13\3\uffff\1\15\33\uffff\1\15",
             "",
+            "\1\14\2\13",
+            "\1\14\2\13",
+            "\1\14\2\13",
+            "\1\14\2\13",
             "",
             "",
             ""
@@ -14212,7 +14210,7 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalContent
     static final String DFA4_maxS =
         "\1\5\1\31\1\5\1\21\6\7\2\uffff";
     static final String DFA4_acceptS =
-        "\12\uffff\1\2\1\1";
+        "\12\uffff\1\1\1\2";
     static final String DFA4_specialS =
         "\14\uffff}>";
     static final String[] DFA4_transitionS = {
@@ -14220,12 +14218,12 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalContent
             "\1\2",
             "\1\3",
             "\1\4\1\5\1\6\1\7\1\10\1\11",
-            "\1\13\1\12",
-            "\1\13\1\12",
-            "\1\13\1\12",
-            "\1\13\1\12",
-            "\1\13\1\12",
-            "\1\13\1\12",
+            "\1\12\1\13",
+            "\1\12\1\13",
+            "\1\12\1\13",
+            "\1\12\1\13",
+            "\1\12\1\13",
+            "\1\12\1\13",
             "",
             ""
     };

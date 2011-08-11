@@ -8,12 +8,12 @@
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.tests.edit"
     editorPluginID="org.eclipse.xtext.ui.tests.editor">
   <genPackages prefix="Referring" basePackage="org.eclipse.xtext.ui.tests.refactoring"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ReferringTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ReferringTestLanguage.ecore#//Main">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ReferringTestLanguage.ecore#//Main/referenced"/>
+      disposableProviderFactory="true" ecorePackage="ReferringTestLanguage.ecore#/">
+    <genClasses ecoreClass="ReferringTestLanguage.ecore#//Main">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ReferringTestLanguage.ecore#//Main/referenced"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ReferringTestLanguage.ecore#//Reference">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ReferringTestLanguage.ecore#//Reference/referenced"/>
+    <genClasses ecoreClass="ReferringTestLanguage.ecore#//Reference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ReferringTestLanguage.ecore#//Reference/referenced"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

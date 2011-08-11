@@ -12,43 +12,43 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalBug287941TestLanguageLexer extends Lexer {
-    public static final int RULE_ML_COMMENT=8;
-    public static final int T__35=35;
-    public static final int T__12=12;
     public static final int RULE_ID=5;
-    public static final int T__28=28;
-    public static final int T__23=23;
-    public static final int T__36=36;
-    public static final int T__20=20;
-    public static final int RULE_SIGNED_DOUBLE=6;
-    public static final int T__13=13;
-    public static final int RULE_STRING=4;
-    public static final int T__21=21;
-    public static final int T__19=19;
-    public static final int T__33=33;
-    public static final int T__14=14;
-    public static final int T__22=22;
-    public static final int T__11=11;
-    public static final int RULE_SINGED_LONG=7;
     public static final int T__29=29;
-    public static final int T__39=39;
-    public static final int T__30=30;
-    public static final int RULE_WS=10;
-    public static final int T__17=17;
-    public static final int T__31=31;
-    public static final int EOF=-1;
+    public static final int T__28=28;
     public static final int T__27=27;
-    public static final int T__16=16;
-    public static final int T__32=32;
-    public static final int T__24=24;
-    public static final int T__38=38;
-    public static final int T__37=37;
     public static final int T__26=26;
     public static final int T__25=25;
+    public static final int T__24=24;
+    public static final int T__23=23;
+    public static final int T__22=22;
+    public static final int T__21=21;
+    public static final int T__20=20;
+    public static final int RULE_SINGED_LONG=7;
+    public static final int EOF=-1;
     public static final int RULE_SL_COMMENT=9;
+    public static final int RULE_ML_COMMENT=8;
+    public static final int T__30=30;
+    public static final int T__19=19;
+    public static final int T__31=31;
+    public static final int T__32=32;
+    public static final int RULE_STRING=4;
+    public static final int T__16=16;
+    public static final int T__33=33;
+    public static final int T__15=15;
     public static final int T__34=34;
     public static final int T__18=18;
-    public static final int T__15=15;
+    public static final int T__35=35;
+    public static final int T__17=17;
+    public static final int T__36=36;
+    public static final int T__12=12;
+    public static final int T__37=37;
+    public static final int T__11=11;
+    public static final int T__38=38;
+    public static final int T__14=14;
+    public static final int T__39=39;
+    public static final int T__13=13;
+    public static final int RULE_SIGNED_DOUBLE=6;
+    public static final int RULE_WS=10;
 
     // delegates
     // delegators
@@ -1556,7 +1556,7 @@ public class InternalBug287941TestLanguageLexer extends Lexer {
     protected DFA17 dfa17 = new DFA17(this);
     static final String DFA17_eotS =
         "\1\uffff\2\30\1\uffff\2\30\1\uffff\3\30\2\uffff\2\30\2\uffff\1\30"+
-        "\1\uffff\1\54\1\56\1\uffff\1\30\1\uffff\1\60\4\uffff\1\30\1\65\5"+
+        "\1\uffff\1\54\1\56\1\uffff\1\30\1\uffff\1\61\4\uffff\1\30\1\65\5"+
         "\30\1\73\5\30\1\101\1\30\4\uffff\1\30\4\uffff\1\30\1\uffff\5\30"+
         "\1\uffff\1\112\1\114\3\30\1\uffff\4\30\1\124\3\30\1\uffff\1\30\1"+
         "\uffff\1\131\2\30\1\134\1\135\2\30\1\uffff\1\140\1\141\2\30\1\uffff"+
@@ -1591,7 +1591,7 @@ public class InternalBug287941TestLanguageLexer extends Lexer {
     static final String DFA17_acceptS =
         "\3\uffff\1\3\2\uffff\1\6\3\uffff\1\14\1\15\2\uffff\1\21\1\22\1\uffff"+
         "\1\26\2\uffff\1\33\3\uffff\1\40\1\41\1\uffff\1\44\17\uffff\1\31"+
-        "\1\27\1\32\1\30\1\uffff\1\36\1\37\1\42\1\43\1\uffff\1\12\5\uffff"+
+        "\1\27\1\32\1\30\1\uffff\1\37\1\36\1\42\1\43\1\uffff\1\12\5\uffff"+
         "\1\10\5\uffff\1\17\10\uffff\1\20\1\uffff\1\11\7\uffff\1\4\4\uffff"+
         "\1\25\2\uffff\1\23\1\34\2\uffff\1\24\1\5\4\uffff\1\1\1\2\5\uffff"+
         "\1\35\4\uffff\1\16\1\uffff\1\13\5\uffff\1\7";
@@ -1625,7 +1625,7 @@ public class InternalBug287941TestLanguageLexer extends Lexer {
             "",
             "\1\57",
             "\12\27",
-            "\1\61\1\uffff\12\27",
+            "\1\60\1\uffff\12\27",
             "",
             "",
             "\1\62\4\uffff\1\63",

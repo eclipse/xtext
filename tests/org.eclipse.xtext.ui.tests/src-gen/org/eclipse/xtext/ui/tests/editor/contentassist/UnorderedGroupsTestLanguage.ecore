@@ -4,17 +4,17 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="unorderedGroupsTest"
     nsURI="http://www.eclipse.org/xtext/ui/tests/2010/UnorderedGroupsTest" nsPrefix="unorderedGroupsTest">
   <eClassifiers xsi:type="ecore:EClass" name="Model">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="first" eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/UnorderedGroupsTestLanguage.ecore#//SimpleModel"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="first" eType="#//SimpleModel"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="second" eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/UnorderedGroupsTestLanguage.ecore#//MandatoryModel"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="second" eType="#//MandatoryModel"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="thrird" eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/UnorderedGroupsTestLanguage.ecore#//LoopedModel"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="thrird" eType="#//LoopedModel"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="forth" eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/UnorderedGroupsTestLanguage.ecore#//GroupLoopedModel"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="forth" eType="#//GroupLoopedModel"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="fifth" eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/UnorderedGroupsTestLanguage.ecore#//LoopedAlternativeModel"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fifth" eType="#//LoopedAlternativeModel"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="model" eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/UnorderedGroupsTestLanguage.ecore#//Bug304681Model"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="model" eType="#//Bug304681Model"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SimpleModel">
@@ -78,12 +78,11 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="uid" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="flag" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="features" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/UnorderedGroupsTestLanguage.ecore#//Bug304681Feature"
-        containment="true"/>
+        eType="#//Bug304681Feature" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Bug304681Feature">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Bug304681Attribute" eSuperTypes="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/UnorderedGroupsTestLanguage.ecore#//Bug304681Feature"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Bug304681Reference" eSuperTypes="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/UnorderedGroupsTestLanguage.ecore#//Bug304681Feature"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Bug304681Attribute" eSuperTypes="#//Bug304681Feature"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Bug304681Reference" eSuperTypes="#//Bug304681Feature"/>
 </ecore:EPackage>

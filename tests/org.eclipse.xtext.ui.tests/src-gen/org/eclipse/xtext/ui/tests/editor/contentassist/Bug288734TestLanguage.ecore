@@ -6,18 +6,16 @@
     nsPrefix="bug288734TestLanguage">
   <eClassifiers xsi:type="ecore:EClass" name="Model">
     <eStructuralFeatures xsi:type="ecore:EReference" name="constants" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug288734TestLanguage.ecore#//TConstant"
-        containment="true"/>
+        eType="#//TConstant" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TConstant">
     <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug288734TestLanguage.ecore#//TAnnotation"
-        containment="true"/>
+        eType="#//TAnnotation" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TStringConstant" eSuperTypes="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug288734TestLanguage.ecore#//TConstant"/>
-  <eClassifiers xsi:type="ecore:EClass" name="TIntegerConstant" eSuperTypes="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug288734TestLanguage.ecore#//TConstant"/>
-  <eClassifiers xsi:type="ecore:EClass" name="TBooleanConstant" eSuperTypes="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug288734TestLanguage.ecore#//TConstant"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TStringConstant" eSuperTypes="#//TConstant"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TIntegerConstant" eSuperTypes="#//TConstant"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TBooleanConstant" eSuperTypes="#//TConstant"/>
   <eClassifiers xsi:type="ecore:EClass" name="TAnnotation">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>

@@ -12,32 +12,32 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalBug348199TestLanguageLexer extends Lexer {
-    public static final int RULE_ML_COMMENT=9;
-    public static final int T__12=12;
     public static final int RULE_ID=5;
     public static final int T__28=28;
+    public static final int T__27=27;
+    public static final int T__26=26;
+    public static final int T__25=25;
+    public static final int T__24=24;
     public static final int T__23=23;
-    public static final int T__20=20;
-    public static final int T__13=13;
-    public static final int RULE_STRING=8;
-    public static final int T__21=21;
-    public static final int T__19=19;
-    public static final int T__14=14;
     public static final int T__22=22;
-    public static final int RULE_WS=7;
-    public static final int T__17=17;
+    public static final int RULE_ANY_OTHER=11;
+    public static final int T__21=21;
+    public static final int T__20=20;
     public static final int RULE_NL=4;
     public static final int EOF=-1;
-    public static final int RULE_INT=6;
-    public static final int T__27=27;
-    public static final int T__16=16;
-    public static final int T__24=24;
-    public static final int T__26=26;
-    public static final int RULE_ANY_OTHER=11;
-    public static final int T__25=25;
     public static final int RULE_SL_COMMENT=10;
-    public static final int T__18=18;
+    public static final int RULE_ML_COMMENT=9;
+    public static final int T__19=19;
+    public static final int RULE_STRING=8;
+    public static final int T__16=16;
     public static final int T__15=15;
+    public static final int T__18=18;
+    public static final int T__17=17;
+    public static final int T__12=12;
+    public static final int T__14=14;
+    public static final int T__13=13;
+    public static final int RULE_INT=6;
+    public static final int RULE_WS=7;
 
     // delegates
     // delegators
@@ -1123,7 +1123,7 @@ public class InternalBug348199TestLanguageLexer extends Lexer {
         "\uffff\1\17\7\uffff\1\1\2\uffff\1\20\11\uffff\1\21\1\uffff\1\2\4"+
         "\uffff\1\6\2\uffff\1\5";
     static final String DFA11_specialS =
-        "\1\1\25\uffff\1\0\1\2\110\uffff}>";
+        "\1\2\25\uffff\1\0\1\1\110\uffff}>";
     static final String[] DFA11_transitionS = {
             "\11\31\1\22\1\21\25\31\1\22\1\31\1\26\4\31\1\27\7\31\1\30\1"+
             "\25\1\3\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\25\7\31\32\24\3"+
@@ -1273,6 +1273,16 @@ public class InternalBug348199TestLanguageLexer extends Lexer {
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
+                        int LA11_23 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA11_23>='\u0000' && LA11_23<='\uFFFF')) ) {s = 46;}
+
+                        else s = 25;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
                         int LA11_0 = input.LA(1);
 
                         s = -1;
@@ -1325,16 +1335,6 @@ public class InternalBug348199TestLanguageLexer extends Lexer {
                         else if ( (LA11_0=='/') ) {s = 24;}
 
                         else if ( ((LA11_0>='\u0000' && LA11_0<='\b')||(LA11_0>='\u000B' && LA11_0<='\u001F')||LA11_0=='!'||(LA11_0>='#' && LA11_0<='&')||(LA11_0>='(' && LA11_0<='.')||(LA11_0>=':' && LA11_0<='@')||(LA11_0>='[' && LA11_0<=']')||LA11_0=='`'||LA11_0=='|'||(LA11_0>='~' && LA11_0<='\uFFFF')) ) {s = 25;}
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA11_23 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA11_23>='\u0000' && LA11_23<='\uFFFF')) ) {s = 46;}
-
-                        else s = 25;
 
                         if ( s>=0 ) return s;
                         break;

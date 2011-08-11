@@ -8,35 +8,35 @@
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.tests.edit"
     editorPluginID="org.eclipse.xtext.ui.tests.editor">
   <genPackages prefix="Bug289187TestLanguage" basePackage="org.eclipse.xtext.ui.tests.editor.contentassist"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug289187TestLanguage.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug289187TestLanguage.ecore#//Visibility">
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug289187TestLanguage.ecore#//Visibility/PRIVATE"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug289187TestLanguage.ecore#//Visibility/PROTECTED"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug289187TestLanguage.ecore#//Visibility/PACKAGE_PRIVATE"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug289187TestLanguage.ecore#//Visibility/PUBLIC"/>
+      disposableProviderFactory="true" ecorePackage="Bug289187TestLanguage.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Bug289187TestLanguage.ecore#//Visibility">
+      <genEnumLiterals ecoreEnumLiteral="Bug289187TestLanguage.ecore#//Visibility/PRIVATE"/>
+      <genEnumLiterals ecoreEnumLiteral="Bug289187TestLanguage.ecore#//Visibility/PROTECTED"/>
+      <genEnumLiterals ecoreEnumLiteral="Bug289187TestLanguage.ecore#//Visibility/PACKAGE_PRIVATE"/>
+      <genEnumLiterals ecoreEnumLiteral="Bug289187TestLanguage.ecore#//Visibility/PUBLIC"/>
     </genEnums>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug289187TestLanguage.ecore#//Model">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug289187TestLanguage.ecore#//Model/classes"/>
+    <genClasses ecoreClass="Bug289187TestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug289187TestLanguage.ecore#//Model/classes"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug289187TestLanguage.ecore#//Class">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug289187TestLanguage.ecore#//Class/abstract"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug289187TestLanguage.ecore#//Class/transient"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug289187TestLanguage.ecore#//Class/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug289187TestLanguage.ecore#//Class/superClass"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug289187TestLanguage.ecore#//Class/implementedInterfaces"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug289187TestLanguage.ecore#//Class/classNumber"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug289187TestLanguage.ecore#//Class/quid"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug289187TestLanguage.ecore#//Class/documentation"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug289187TestLanguage.ecore#//Class/attributes"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug289187TestLanguage.ecore#//Class/operations"/>
+    <genClasses ecoreClass="Bug289187TestLanguage.ecore#//Class">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug289187TestLanguage.ecore#//Class/abstract"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug289187TestLanguage.ecore#//Class/transient"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug289187TestLanguage.ecore#//Class/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bug289187TestLanguage.ecore#//Class/superClass"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bug289187TestLanguage.ecore#//Class/implementedInterfaces"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug289187TestLanguage.ecore#//Class/classNumber"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug289187TestLanguage.ecore#//Class/quid"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug289187TestLanguage.ecore#//Class/documentation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug289187TestLanguage.ecore#//Class/attributes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug289187TestLanguage.ecore#//Class/operations"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug289187TestLanguage.ecore#//Attribute">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug289187TestLanguage.ecore#//Attribute/visibility"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug289187TestLanguage.ecore#//Attribute/name"/>
+    <genClasses ecoreClass="Bug289187TestLanguage.ecore#//Attribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug289187TestLanguage.ecore#//Attribute/visibility"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug289187TestLanguage.ecore#//Attribute/name"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug289187TestLanguage.ecore#//Operation">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug289187TestLanguage.ecore#//Operation/visibility"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug289187TestLanguage.ecore#//Operation/name"/>
+    <genClasses ecoreClass="Bug289187TestLanguage.ecore#//Operation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug289187TestLanguage.ecore#//Operation/visibility"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug289187TestLanguage.ecore#//Operation/name"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

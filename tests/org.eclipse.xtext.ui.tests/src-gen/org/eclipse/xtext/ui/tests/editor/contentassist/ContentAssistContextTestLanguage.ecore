@@ -6,27 +6,21 @@
     nsPrefix="contentAssistContextTest">
   <eClassifiers xsi:type="ecore:EClass" name="FirstLevel">
     <eStructuralFeatures xsi:type="ecore:EReference" name="secondLevelA" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistContextTestLanguage.ecore#//SecondLevelA"
-        containment="true"/>
+        eType="#//SecondLevelA" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="secondLevelB" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistContextTestLanguage.ecore#//SecondLevelB"
-        containment="true"/>
+        eType="#//SecondLevelB" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SecondLevelA">
     <eStructuralFeatures xsi:type="ecore:EReference" name="thirdLevelA1" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistContextTestLanguage.ecore#//ThirdLevelA1"
-        containment="true"/>
+        eType="#//ThirdLevelA1" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="thirdLevelA2" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistContextTestLanguage.ecore#//ThirdLevelA2"
-        containment="true"/>
+        eType="#//ThirdLevelA2" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SecondLevelB">
     <eStructuralFeatures xsi:type="ecore:EReference" name="thirdLevelB1" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistContextTestLanguage.ecore#//ThirdLevelB1"
-        containment="true"/>
+        eType="#//ThirdLevelB1" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="thirdLevelB2" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistContextTestLanguage.ecore#//ThirdLevelB2"
-        containment="true"/>
+        eType="#//ThirdLevelB2" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ThirdLevelA1">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

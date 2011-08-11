@@ -6,9 +6,8 @@
     nsPrefix="bug287941TestLanguage">
   <eClassifiers xsi:type="ecore:EClass" name="Model">
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//Import"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="query" eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//MQLquery"
+        eType="#//Import" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="query" eType="#//MQLquery"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Import">
@@ -16,54 +15,51 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MQLquery">
     <eStructuralFeatures xsi:type="ecore:EReference" name="selectEntries" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//SelectEntry"
-        containment="true"/>
+        eType="#//SelectEntry" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="fromEntries" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//FromEntry"
-        containment="true"/>
+        eType="#//FromEntry" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="whereEntries" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//WhereEntry"
-        containment="true"/>
+        eType="#//WhereEntry" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SelectEntry">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="select" eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//FromEntry"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="select" eType="#//FromEntry"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EAttribute"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FromEntry">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="withoutsubtypes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="alias" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="scopeClause" eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//ScopeClause"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scopeClause" eType="#//ScopeClause"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ScopeClause">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="notIn" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="scope" eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//Scope"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scope" eType="#//Scope"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Scope">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="uris" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ResourceScope" eSuperTypes="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//Scope"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ElementScope" eSuperTypes="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//Scope"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ResourceScope" eSuperTypes="#//Scope"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ElementScope" eSuperTypes="#//Scope"/>
   <eClassifiers xsi:type="ecore:EClass" name="WhereEntry"/>
-  <eClassifiers xsi:type="ecore:EClass" name="AttributeWhereEntry" eSuperTypes="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//WhereEntry">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="alias" eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//FromEntry"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeWhereEntry" eSuperTypes="#//WhereEntry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="alias" eType="#//FromEntry"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EAttribute"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NumericAttributeWhereEntry" eSuperTypes="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//AttributeWhereEntry">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="ecore:EEnum platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//NumericOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NumericAttributeWhereEntry" eSuperTypes="#//AttributeWhereEntry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//NumericOperator"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DoubleWhereEntry" eSuperTypes="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//NumericAttributeWhereEntry">
+  <eClassifiers xsi:type="ecore:EClass" name="DoubleWhereEntry" eSuperTypes="#//NumericAttributeWhereEntry">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="LongWhereEntry" eSuperTypes="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//NumericAttributeWhereEntry">
+  <eClassifiers xsi:type="ecore:EClass" name="LongWhereEntry" eSuperTypes="#//NumericAttributeWhereEntry">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VariableWhereEntry" eSuperTypes="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//AttributeWhereEntry">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="ecore:EEnum platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//NumericOperator"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="rightAlias" eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//FromEntry"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableWhereEntry" eSuperTypes="#//AttributeWhereEntry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//NumericOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightAlias" eType="#//FromEntry"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="rightAttribute" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EAttribute"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="NumericOperator">
@@ -74,8 +70,8 @@
     <eLiterals name="equal" value="4" literal="="/>
     <eLiterals name="notEqual" value="5" literal="!="/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="StringAttributeWhereEntry" eSuperTypes="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//AttributeWhereEntry">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="ecore:EEnum platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//StringOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StringAttributeWhereEntry" eSuperTypes="#//AttributeWhereEntry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//StringOperator"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="pattern" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="StringOperator">
@@ -84,43 +80,41 @@
     <eLiterals name="like" value="2" literal="like"/>
     <eLiterals name="notLike" value="3" literal="notlike"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BooleanAttributeWhereEntry" eSuperTypes="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//AttributeWhereEntry">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="ecore:EEnum platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//BooleanOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanAttributeWhereEntry" eSuperTypes="#//AttributeWhereEntry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//BooleanOperator"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isTrue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="BooleanOperator">
     <eLiterals name="equal" literal="="/>
     <eLiterals name="notEqual" value="1" literal="!="/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NullWhereEntry" eSuperTypes="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//WhereEntry">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="alias" eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//FromEntry"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NullWhereEntry" eSuperTypes="#//WhereEntry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="alias" eType="#//FromEntry"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="feature" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="ecore:EEnum platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//BooleanOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//BooleanOperator"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ReferenceAliasWhereEntry" eSuperTypes="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//WhereEntry">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="alias" eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//FromEntry"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ReferenceAliasWhereEntry" eSuperTypes="#//WhereEntry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="alias" eType="#//FromEntry"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="rightAlias" eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//FromEntry"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightAlias" eType="#//FromEntry"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SubselectWhereEntry" eSuperTypes="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//WhereEntry">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="alias" eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//FromEntry"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SubselectWhereEntry" eSuperTypes="#//WhereEntry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="alias" eType="#//FromEntry"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="notIn" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="subQuery" eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//MQLquery"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subQuery" eType="#//MQLquery"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AliasWhereEntry" eSuperTypes="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//WhereEntry">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="alias" eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//FromEntry"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="rightAlias" eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//FromEntry"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AliasWhereEntry" eSuperTypes="#//WhereEntry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="alias" eType="#//FromEntry"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightAlias" eType="#//FromEntry"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OrWhereEntry" eSuperTypes="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//WhereEntry">
+  <eClassifiers xsi:type="ecore:EClass" name="OrWhereEntry" eSuperTypes="#//WhereEntry">
     <eStructuralFeatures xsi:type="ecore:EReference" name="entries" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//WhereEntry"
-        containment="true"/>
+        eType="#//WhereEntry" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AndWhereEntry" eSuperTypes="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//WhereEntry">
+  <eClassifiers xsi:type="ecore:EClass" name="AndWhereEntry" eSuperTypes="#//WhereEntry">
     <eStructuralFeatures xsi:type="ecore:EReference" name="entries" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.ecore#//WhereEntry"
-        containment="true"/>
+        eType="#//WhereEntry" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

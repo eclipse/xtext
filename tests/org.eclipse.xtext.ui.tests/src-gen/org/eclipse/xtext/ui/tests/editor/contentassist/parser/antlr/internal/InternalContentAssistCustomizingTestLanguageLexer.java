@@ -12,17 +12,17 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalContentAssistCustomizingTestLanguageLexer extends Lexer {
-    public static final int RULE_ML_COMMENT=7;
-    public static final int T__12=12;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=9;
-    public static final int RULE_INT=5;
-    public static final int EOF=-1;
-    public static final int T__13=13;
     public static final int RULE_STRING=6;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int RULE_SL_COMMENT=8;
+    public static final int T__12=12;
     public static final int T__11=11;
+    public static final int T__13=13;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_INT=5;
+    public static final int RULE_WS=9;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=7;
 
     // delegates
     // delegators
@@ -709,7 +709,7 @@ public class InternalContentAssistCustomizingTestLanguageLexer extends Lexer {
         "\2\uffff\1\2\1\3\1\uffff\1\4\1\5\3\uffff\1\11\1\12\1\uffff\1\4\1"+
         "\2\1\3\1\5\1\6\1\7\1\10\1\11\5\uffff\1\1";
     static final String DFA12_specialS =
-        "\1\1\6\uffff\1\2\1\0\22\uffff}>";
+        "\1\1\6\uffff\1\0\1\2\22\uffff}>";
     static final String[] DFA12_transitionS = {
             "\11\13\2\12\2\13\1\12\22\13\1\12\1\13\1\7\4\13\1\10\6\13\1\3"+
             "\1\11\12\6\1\13\1\2\5\13\32\5\3\13\1\4\1\5\1\13\4\5\1\1\25\5"+
@@ -779,10 +779,10 @@ public class InternalContentAssistCustomizingTestLanguageLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA12_8 = input.LA(1);
+                        int LA12_7 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA12_8>='\u0000' && LA12_8<='\uFFFF')) ) {s = 17;}
+                        if ( ((LA12_7>='\u0000' && LA12_7<='\uFFFF')) ) {s = 17;}
 
                         else s = 11;
 
@@ -817,10 +817,10 @@ public class InternalContentAssistCustomizingTestLanguageLexer extends Lexer {
                         if ( s>=0 ) return s;
                         break;
                     case 2 : 
-                        int LA12_7 = input.LA(1);
+                        int LA12_8 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA12_7>='\u0000' && LA12_7<='\uFFFF')) ) {s = 17;}
+                        if ( ((LA12_8>='\u0000' && LA12_8<='\uFFFF')) ) {s = 17;}
 
                         else s = 11;
 

@@ -8,14 +8,14 @@
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.tests.edit"
     editorPluginID="org.eclipse.xtext.ui.tests.editor">
   <genPackages prefix="QuickfixCrossref" basePackage="org.eclipse.xtext.ui.tests.quickfix"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/QuickfixCrossrefTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/QuickfixCrossrefTestLanguage.ecore#//Main">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/QuickfixCrossrefTestLanguage.ecore#//Main/elements"/>
+      disposableProviderFactory="true" ecorePackage="QuickfixCrossrefTestLanguage.ecore#/">
+    <genClasses ecoreClass="QuickfixCrossrefTestLanguage.ecore#//Main">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QuickfixCrossrefTestLanguage.ecore#//Main/elements"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/QuickfixCrossrefTestLanguage.ecore#//Element">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/QuickfixCrossrefTestLanguage.ecore#//Element/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/QuickfixCrossrefTestLanguage.ecore#//Element/contained"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/QuickfixCrossrefTestLanguage.ecore#//Element/referenced"/>
+    <genClasses ecoreClass="QuickfixCrossrefTestLanguage.ecore#//Element">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuickfixCrossrefTestLanguage.ecore#//Element/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QuickfixCrossrefTestLanguage.ecore#//Element/contained"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QuickfixCrossrefTestLanguage.ecore#//Element/referenced"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

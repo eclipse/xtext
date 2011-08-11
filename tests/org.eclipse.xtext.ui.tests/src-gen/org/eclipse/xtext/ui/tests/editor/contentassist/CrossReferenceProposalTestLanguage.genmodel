@@ -8,13 +8,13 @@
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.tests.edit"
     editorPluginID="org.eclipse.xtext.ui.tests.editor">
   <genPackages prefix="CrossReferenceProposalTest" basePackage="org.eclipse.xtext.ui.tests.editor.contentassist"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/CrossReferenceProposalTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/CrossReferenceProposalTestLanguage.ecore#//Model">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/CrossReferenceProposalTestLanguage.ecore#//Model/elements"/>
+      disposableProviderFactory="true" ecorePackage="CrossReferenceProposalTestLanguage.ecore#/">
+    <genClasses ecoreClass="CrossReferenceProposalTestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CrossReferenceProposalTestLanguage.ecore#//Model/elements"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/CrossReferenceProposalTestLanguage.ecore#//Class">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/CrossReferenceProposalTestLanguage.ecore#//Class/superClass"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/CrossReferenceProposalTestLanguage.ecore#//Class/name"/>
+    <genClasses ecoreClass="CrossReferenceProposalTestLanguage.ecore#//Class">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference CrossReferenceProposalTestLanguage.ecore#//Class/superClass"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CrossReferenceProposalTestLanguage.ecore#//Class/name"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

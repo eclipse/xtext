@@ -8,18 +8,18 @@
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.tests.edit"
     editorPluginID="org.eclipse.xtext.ui.tests.editor">
   <genPackages prefix="Refactoring" basePackage="org.eclipse.xtext.ui.tests.refactoring"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/RefactoringTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/RefactoringTestLanguage.ecore#//Main">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/RefactoringTestLanguage.ecore#//Main/elements"/>
+      disposableProviderFactory="true" ecorePackage="RefactoringTestLanguage.ecore#/">
+    <genClasses ecoreClass="RefactoringTestLanguage.ecore#//Main">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RefactoringTestLanguage.ecore#//Main/elements"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/RefactoringTestLanguage.ecore#//AbstractElement"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/RefactoringTestLanguage.ecore#//Import">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/RefactoringTestLanguage.ecore#//Import/importedNamespace"/>
+    <genClasses ecoreClass="RefactoringTestLanguage.ecore#//AbstractElement"/>
+    <genClasses ecoreClass="RefactoringTestLanguage.ecore#//Import">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RefactoringTestLanguage.ecore#//Import/importedNamespace"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/RefactoringTestLanguage.ecore#//Element">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/RefactoringTestLanguage.ecore#//Element/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/RefactoringTestLanguage.ecore#//Element/contained"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/RefactoringTestLanguage.ecore#//Element/referenced"/>
+    <genClasses ecoreClass="RefactoringTestLanguage.ecore#//Element">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RefactoringTestLanguage.ecore#//Element/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RefactoringTestLanguage.ecore#//Element/contained"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RefactoringTestLanguage.ecore#//Element/referenced"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

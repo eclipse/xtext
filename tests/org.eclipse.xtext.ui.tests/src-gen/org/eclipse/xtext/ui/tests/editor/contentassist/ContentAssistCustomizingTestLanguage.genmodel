@@ -8,16 +8,16 @@
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.tests.edit"
     editorPluginID="org.eclipse.xtext.ui.tests.editor">
   <genPackages prefix="ContentAssistCustomizingTest" basePackage="org.eclipse.xtext.ui.tests.editor.contentassist"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistCustomizingTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistCustomizingTestLanguage.ecore#//Model">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistCustomizingTestLanguage.ecore#//Model/types"/>
+      disposableProviderFactory="true" ecorePackage="ContentAssistCustomizingTestLanguage.ecore#/">
+    <genClasses ecoreClass="ContentAssistCustomizingTestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ContentAssistCustomizingTestLanguage.ecore#//Model/types"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistCustomizingTestLanguage.ecore#//Type">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistCustomizingTestLanguage.ecore#//Type/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistCustomizingTestLanguage.ecore#//Type/superType"/>
+    <genClasses ecoreClass="ContentAssistCustomizingTestLanguage.ecore#//Type">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ContentAssistCustomizingTestLanguage.ecore#//Type/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ContentAssistCustomizingTestLanguage.ecore#//Type/superType"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistCustomizingTestLanguage.ecore#//TypeRef">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistCustomizingTestLanguage.ecore#//TypeRef/type"/>
+    <genClasses ecoreClass="ContentAssistCustomizingTestLanguage.ecore#//TypeRef">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ContentAssistCustomizingTestLanguage.ecore#//TypeRef/type"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

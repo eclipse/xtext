@@ -8,16 +8,16 @@
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.tests.edit"
     editorPluginID="org.eclipse.xtext.ui.tests.editor">
   <genPackages prefix="Bug288760TestLanguage" basePackage="org.eclipse.xtext.ui.tests.editor.contentassist"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug288760TestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug288760TestLanguage.ecore#//WorkflowElement">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug288760TestLanguage.ecore#//WorkflowElement/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug288760TestLanguage.ecore#//WorkflowElement/attributes"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug288760TestLanguage.ecore#//WorkflowElement/children"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug288760TestLanguage.ecore#//WorkflowElement/end"/>
+      disposableProviderFactory="true" ecorePackage="Bug288760TestLanguage.ecore#/">
+    <genClasses ecoreClass="Bug288760TestLanguage.ecore#//WorkflowElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug288760TestLanguage.ecore#//WorkflowElement/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug288760TestLanguage.ecore#//WorkflowElement/attributes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug288760TestLanguage.ecore#//WorkflowElement/children"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug288760TestLanguage.ecore#//WorkflowElement/end"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug288760TestLanguage.ecore#//Attribute">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug288760TestLanguage.ecore#//Attribute/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug288760TestLanguage.ecore#//Attribute/value"/>
+    <genClasses ecoreClass="Bug288760TestLanguage.ecore#//Attribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug288760TestLanguage.ecore#//Attribute/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug288760TestLanguage.ecore#//Attribute/value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

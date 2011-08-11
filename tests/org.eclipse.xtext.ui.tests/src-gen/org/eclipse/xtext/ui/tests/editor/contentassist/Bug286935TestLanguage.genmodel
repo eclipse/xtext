@@ -8,19 +8,19 @@
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.tests.edit"
     editorPluginID="org.eclipse.xtext.ui.tests.editor">
   <genPackages prefix="Bug286935TestLanguage" basePackage="org.eclipse.xtext.ui.tests.editor.contentassist"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug286935TestLanguage.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug286935TestLanguage.ecore#//StateType">
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug286935TestLanguage.ecore#//StateType/NORMAL"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug286935TestLanguage.ecore#//StateType/PSEUDO"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug286935TestLanguage.ecore#//StateType/REFERENCE"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug286935TestLanguage.ecore#//StateType/TEXTUAL"/>
+      disposableProviderFactory="true" ecorePackage="Bug286935TestLanguage.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Bug286935TestLanguage.ecore#//StateType">
+      <genEnumLiterals ecoreEnumLiteral="Bug286935TestLanguage.ecore#//StateType/NORMAL"/>
+      <genEnumLiterals ecoreEnumLiteral="Bug286935TestLanguage.ecore#//StateType/PSEUDO"/>
+      <genEnumLiterals ecoreEnumLiteral="Bug286935TestLanguage.ecore#//StateType/REFERENCE"/>
+      <genEnumLiterals ecoreEnumLiteral="Bug286935TestLanguage.ecore#//StateType/TEXTUAL"/>
     </genEnums>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug286935TestLanguage.ecore#//State">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug286935TestLanguage.ecore#//State/isInitial"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug286935TestLanguage.ecore#//State/isFinal"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug286935TestLanguage.ecore#//State/stateKind"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug286935TestLanguage.ecore#//State/stateName"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug286935TestLanguage.ecore#//State/label"/>
+    <genClasses ecoreClass="Bug286935TestLanguage.ecore#//State">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug286935TestLanguage.ecore#//State/isInitial"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug286935TestLanguage.ecore#//State/isFinal"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug286935TestLanguage.ecore#//State/stateKind"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug286935TestLanguage.ecore#//State/stateName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug286935TestLanguage.ecore#//State/label"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

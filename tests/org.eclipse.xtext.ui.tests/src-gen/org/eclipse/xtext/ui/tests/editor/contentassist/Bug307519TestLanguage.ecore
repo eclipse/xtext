@@ -5,9 +5,9 @@
     nsURI="http://www.eclipse.org/xtext/ui/common/tests/2010/bug307519TestLanguage"
     nsPrefix="bug307519TestLanguage">
   <eClassifiers xsi:type="ecore:EClass" name="Model">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="e1" upperBound="-1" eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug307519TestLanguage.ecore#//Elem1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="e1" upperBound="-1" eType="#//Elem1"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="e2" upperBound="-1" eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug307519TestLanguage.ecore#//Elem2"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="e2" upperBound="-1" eType="#//Elem2"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="EnumT">
@@ -15,9 +15,9 @@
     <eLiterals name="T2" value="1" literal="T2"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Elem1">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EEnum platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug307519TestLanguage.ecore#//EnumT"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//EnumT"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Elem2">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EEnum platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug307519TestLanguage.ecore#//EnumT"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//EnumT"/>
   </eClassifiers>
 </ecore:EPackage>

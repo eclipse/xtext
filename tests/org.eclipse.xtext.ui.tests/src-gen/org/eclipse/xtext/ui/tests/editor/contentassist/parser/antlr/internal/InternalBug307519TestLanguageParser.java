@@ -24,19 +24,19 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'foo'", "'%'", "'$'", "'T1'", "'T2'"
     };
-    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
-    public static final int T__12=12;
-    public static final int RULE_WS=9;
-    public static final int RULE_INT=5;
-    public static final int EOF=-1;
-    public static final int T__13=13;
     public static final int RULE_STRING=6;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int T__14=14;
-    public static final int T__11=11;
     public static final int T__15=15;
+    public static final int T__12=12;
+    public static final int T__11=11;
+    public static final int T__14=14;
+    public static final int T__13=13;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_INT=5;
+    public static final int RULE_WS=9;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=7;
 
     // delegates
     // delegators
@@ -150,11 +150,11 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
                 else if ( (LA1_0==15) ) {
                     int LA1_3 = input.LA(2);
 
-                    if ( (LA1_3==11) ) {
-                        alt1=2;
-                    }
-                    else if ( (LA1_3==EOF||(LA1_3>=14 && LA1_3<=15)) ) {
+                    if ( (LA1_3==EOF||(LA1_3>=14 && LA1_3<=15)) ) {
                         alt1=1;
+                    }
+                    else if ( (LA1_3==11) ) {
+                        alt1=2;
                     }
 
 

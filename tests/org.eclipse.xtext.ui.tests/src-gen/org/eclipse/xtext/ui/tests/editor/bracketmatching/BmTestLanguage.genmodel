@@ -8,16 +8,16 @@
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.tests.edit"
     editorPluginID="org.eclipse.xtext.ui.tests.editor">
   <genPackages prefix="Bracketmatching" basePackage="org.eclipse.xtext.ui.tests.editor.bracketmatching"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/BmTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/BmTestLanguage.ecore#//File">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/BmTestLanguage.ecore#//File/expression"/>
+      disposableProviderFactory="true" ecorePackage="BmTestLanguage.ecore#/">
+    <genClasses ecoreClass="BmTestLanguage.ecore#//File">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BmTestLanguage.ecore#//File/expression"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/BmTestLanguage.ecore#//Expression"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/BmTestLanguage.ecore#//SExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/BmTestLanguage.ecore#//SExpression/element"/>
+    <genClasses ecoreClass="BmTestLanguage.ecore#//Expression"/>
+    <genClasses ecoreClass="BmTestLanguage.ecore#//SExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BmTestLanguage.ecore#//SExpression/element"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/BmTestLanguage.ecore#//Atom">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/BmTestLanguage.ecore#//Atom/value"/>
+    <genClasses ecoreClass="BmTestLanguage.ecore#//Atom">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BmTestLanguage.ecore#//Atom/value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

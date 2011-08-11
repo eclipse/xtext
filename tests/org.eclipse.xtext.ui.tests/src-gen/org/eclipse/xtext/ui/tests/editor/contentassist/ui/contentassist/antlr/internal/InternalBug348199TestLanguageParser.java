@@ -24,32 +24,32 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalContent
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_NL", "RULE_ID", "RULE_INT", "RULE_WS", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_ANY_OTHER", "'define'", "'timeperiod'", "'1'", "'{'", "'}'", "'timeperiod_name'", "'otherelement'", "'2'", "'3'", "'4'", "'5'", "'6'", "'7'", "'8'", "'july'", "'august'", "'september'"
     };
-    public static final int RULE_ML_COMMENT=9;
     public static final int RULE_ID=5;
-    public static final int T__12=12;
     public static final int T__28=28;
-    public static final int T__23=23;
-    public static final int T__20=20;
-    public static final int T__13=13;
-    public static final int RULE_STRING=8;
-    public static final int T__21=21;
-    public static final int T__19=19;
-    public static final int T__14=14;
-    public static final int T__22=22;
-    public static final int RULE_WS=7;
-    public static final int T__17=17;
-    public static final int RULE_NL=4;
-    public static final int RULE_INT=6;
-    public static final int EOF=-1;
     public static final int T__27=27;
-    public static final int T__16=16;
-    public static final int T__24=24;
-    public static final int RULE_ANY_OTHER=11;
     public static final int T__26=26;
     public static final int T__25=25;
+    public static final int T__24=24;
+    public static final int T__23=23;
+    public static final int T__22=22;
+    public static final int RULE_ANY_OTHER=11;
+    public static final int T__21=21;
+    public static final int T__20=20;
+    public static final int RULE_NL=4;
     public static final int RULE_SL_COMMENT=10;
-    public static final int T__18=18;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=9;
+    public static final int T__19=19;
+    public static final int RULE_STRING=8;
+    public static final int T__16=16;
     public static final int T__15=15;
+    public static final int T__18=18;
+    public static final int T__17=17;
+    public static final int T__12=12;
+    public static final int T__14=14;
+    public static final int T__13=13;
+    public static final int RULE_INT=6;
+    public static final int RULE_WS=7;
 
     // delegates
     // delegators
@@ -19318,13 +19318,13 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalContent
     static final String DFA3_maxS =
         "\1\4\2\22\2\uffff";
     static final String DFA3_acceptS =
-        "\3\uffff\1\2\1\1";
+        "\3\uffff\1\1\1\2";
     static final String DFA3_specialS =
         "\5\uffff}>";
     static final String[] DFA3_transitionS = {
             "\1\1",
-            "\1\2\13\uffff\1\3\1\4\1\3",
-            "\1\2\13\uffff\1\3\1\4\1\3",
+            "\1\2\13\uffff\1\4\1\3\1\4",
+            "\1\2\13\uffff\1\4\1\3\1\4",
             "",
             ""
     };
@@ -19424,13 +19424,13 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalContent
     static final String DFA4_maxS =
         "\1\4\2\22\2\uffff";
     static final String DFA4_acceptS =
-        "\3\uffff\1\1\1\2";
+        "\3\uffff\1\2\1\1";
     static final String DFA4_specialS =
         "\5\uffff}>";
     static final String[] DFA4_transitionS = {
             "\1\1",
-            "\1\2\14\uffff\1\3\1\4",
-            "\1\2\14\uffff\1\3\1\4",
+            "\1\2\14\uffff\1\4\1\3",
+            "\1\2\14\uffff\1\4\1\3",
             "",
             ""
     };
@@ -19530,13 +19530,13 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalContent
     static final String DFA10_maxS =
         "\1\4\2\32\2\uffff";
     static final String DFA10_acceptS =
-        "\3\uffff\1\1\1\2";
+        "\3\uffff\1\2\1\1";
     static final String DFA10_specialS =
         "\5\uffff}>";
     static final String[] DFA10_transitionS = {
             "\1\1",
-            "\1\2\14\uffff\2\4\7\uffff\1\3",
-            "\1\2\14\uffff\2\4\7\uffff\1\3",
+            "\1\2\14\uffff\2\3\7\uffff\1\4",
+            "\1\2\14\uffff\2\3\7\uffff\1\4",
             "",
             ""
     };
@@ -19636,13 +19636,13 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalContent
     static final String DFA17_maxS =
         "\1\4\2\34\2\uffff";
     static final String DFA17_acceptS =
-        "\3\uffff\1\1\1\2";
+        "\3\uffff\1\2\1\1";
     static final String DFA17_specialS =
         "\5\uffff}>";
     static final String[] DFA17_transitionS = {
             "\1\1",
-            "\1\2\13\uffff\3\4\11\uffff\1\3",
-            "\1\2\13\uffff\3\4\11\uffff\1\3",
+            "\1\2\13\uffff\3\3\11\uffff\1\4",
+            "\1\2\13\uffff\3\3\11\uffff\1\4",
             "",
             ""
     };
@@ -19689,13 +19689,13 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalContent
     static final String DFA19_maxS =
         "\1\4\2\32\2\uffff";
     static final String DFA19_acceptS =
-        "\3\uffff\1\2\1\1";
+        "\3\uffff\1\1\1\2";
     static final String DFA19_specialS =
         "\5\uffff}>";
     static final String[] DFA19_transitionS = {
             "\1\1",
-            "\1\2\13\uffff\3\3\7\uffff\1\4",
-            "\1\2\13\uffff\3\3\7\uffff\1\4",
+            "\1\2\13\uffff\3\4\7\uffff\1\3",
+            "\1\2\13\uffff\3\4\7\uffff\1\3",
             "",
             ""
     };
@@ -19742,13 +19742,13 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalContent
     static final String DFA23_maxS =
         "\1\4\2\33\2\uffff";
     static final String DFA23_acceptS =
-        "\3\uffff\1\1\1\2";
+        "\3\uffff\1\2\1\1";
     static final String DFA23_specialS =
         "\5\uffff}>";
     static final String[] DFA23_transitionS = {
             "\1\1",
-            "\1\2\13\uffff\1\4\12\uffff\1\3",
-            "\1\2\13\uffff\1\4\12\uffff\1\3",
+            "\1\2\13\uffff\1\3\12\uffff\1\4",
+            "\1\2\13\uffff\1\3\12\uffff\1\4",
             "",
             ""
     };
@@ -19954,13 +19954,13 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalContent
     static final String DFA33_maxS =
         "\1\4\2\33\2\uffff";
     static final String DFA33_acceptS =
-        "\3\uffff\1\2\1\1";
+        "\3\uffff\1\1\1\2";
     static final String DFA33_specialS =
         "\5\uffff}>";
     static final String[] DFA33_transitionS = {
             "\1\1",
-            "\1\2\13\uffff\3\3\10\uffff\1\4",
-            "\1\2\13\uffff\3\3\10\uffff\1\4",
+            "\1\2\13\uffff\3\4\10\uffff\1\3",
+            "\1\2\13\uffff\3\4\10\uffff\1\3",
             "",
             ""
     };
@@ -20007,13 +20007,13 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalContent
     static final String DFA36_maxS =
         "\1\4\2\34\2\uffff";
     static final String DFA36_acceptS =
-        "\3\uffff\1\2\1\1";
+        "\3\uffff\1\1\1\2";
     static final String DFA36_specialS =
         "\5\uffff}>";
     static final String[] DFA36_transitionS = {
             "\1\1",
-            "\1\2\13\uffff\3\3\11\uffff\1\4",
-            "\1\2\13\uffff\3\3\11\uffff\1\4",
+            "\1\2\13\uffff\3\4\11\uffff\1\3",
+            "\1\2\13\uffff\3\4\11\uffff\1\3",
             "",
             ""
     };
@@ -20219,13 +20219,13 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalContent
     static final String DFA46_maxS =
         "\1\4\2\34\2\uffff";
     static final String DFA46_acceptS =
-        "\3\uffff\1\1\1\2";
+        "\3\uffff\1\2\1\1";
     static final String DFA46_specialS =
         "\5\uffff}>";
     static final String[] DFA46_transitionS = {
             "\1\1",
-            "\1\2\13\uffff\3\4\11\uffff\1\3",
-            "\1\2\13\uffff\3\4\11\uffff\1\3",
+            "\1\2\13\uffff\3\3\11\uffff\1\4",
+            "\1\2\13\uffff\3\3\11\uffff\1\4",
             "",
             ""
     };
@@ -20274,7 +20274,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalContent
     static final String DFA86_acceptS =
         "\3\uffff\1\2\1\1";
     static final String DFA86_specialS =
-        "\1\2\1\0\1\1\2\uffff}>";
+        "\1\2\1\1\1\0\2\uffff}>";
     static final String[] DFA86_transitionS = {
             "\1\1",
             "\1\2\14\uffff\1\4\1\3",
@@ -20320,13 +20320,30 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalContent
         	int _s = s;
             switch ( s ) {
                     case 0 : 
+                        int LA86_2 = input.LA(1);
+
+                         
+                        int index86_2 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( LA86_2 ==18 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 1) ) {s = 3;}
+
+                        else if ( LA86_2 ==RULE_NL && ( getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 0) || getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 1) ) ) {s = 2;}
+
+                        else if ( LA86_2 ==17 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 0) ) {s = 4;}
+
+                         
+                        input.seek(index86_2);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
                         int LA86_1 = input.LA(1);
 
                          
                         int index86_1 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( LA86_1 ==RULE_NL && ( getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 1) || getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 0) ) ) {s = 2;}
+                        if ( LA86_1 ==RULE_NL && ( getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 0) || getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 1) ) ) {s = 2;}
 
                         else if ( LA86_1 ==18 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 1) ) {s = 3;}
 
@@ -20336,23 +20353,6 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalContent
                         input.seek(index86_1);
                         if ( s>=0 ) return s;
                         break;
-                    case 1 : 
-                        int LA86_2 = input.LA(1);
-
-                         
-                        int index86_2 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( LA86_2 ==17 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 0) ) {s = 4;}
-
-                        else if ( LA86_2 ==RULE_NL && ( getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 1) || getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 0) ) ) {s = 2;}
-
-                        else if ( LA86_2 ==18 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 1) ) {s = 3;}
-
-                         
-                        input.seek(index86_2);
-                        if ( s>=0 ) return s;
-                        break;
                     case 2 : 
                         int LA86_0 = input.LA(1);
 
@@ -20360,7 +20360,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalContent
                         int index86_0 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( LA86_0 ==RULE_NL && ( getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 1) || getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 0) ) ) {s = 1;}
+                        if ( LA86_0 ==RULE_NL && ( getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 0) || getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 1) ) ) {s = 1;}
 
                          
                         input.seek(index86_0);
@@ -20382,13 +20382,13 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalContent
     static final String DFA87_maxS =
         "\1\4\2\22\3\uffff";
     static final String DFA87_acceptS =
-        "\3\uffff\2\1\1\2";
+        "\3\uffff\1\1\1\2\1\1";
     static final String DFA87_specialS =
         "\1\uffff\1\1\1\0\3\uffff}>";
     static final String[] DFA87_transitionS = {
             "\1\1",
-            "\1\2\13\uffff\1\5\1\4\1\3",
-            "\1\2\13\uffff\1\5\1\4\1\3",
+            "\1\2\13\uffff\1\4\1\3\1\5",
+            "\1\2\13\uffff\1\4\1\3\1\5",
             "",
             "",
             ""
@@ -20437,13 +20437,13 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalContent
                         int index87_2 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (LA87_2==16) ) {s = 5;}
+                        if ( (LA87_2==16) ) {s = 4;}
 
                         else if ( (LA87_2==RULE_NL) ) {s = 2;}
 
-                        else if ( LA87_2 ==17 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 0) ) {s = 4;}
+                        else if ( LA87_2 ==17 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 0) ) {s = 3;}
 
-                        else if ( LA87_2 ==18 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 1) ) {s = 3;}
+                        else if ( LA87_2 ==18 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 1) ) {s = 5;}
 
                          
                         input.seek(index87_2);
@@ -20458,11 +20458,11 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalContent
                         s = -1;
                         if ( (LA87_1==RULE_NL) ) {s = 2;}
 
-                        else if ( LA87_1 ==18 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 1) ) {s = 3;}
+                        else if ( LA87_1 ==17 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 0) ) {s = 3;}
 
-                        else if ( LA87_1 ==17 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 0) ) {s = 4;}
+                        else if ( (LA87_1==16) ) {s = 4;}
 
-                        else if ( (LA87_1==16) ) {s = 5;}
+                        else if ( LA87_1 ==18 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 1) ) {s = 5;}
 
                          
                         input.seek(index87_1);

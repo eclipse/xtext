@@ -12,22 +12,22 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalKeywordsUiTestLanguageLexer extends Lexer {
-    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
-    public static final int T__12=12;
-    public static final int RULE_WS=9;
-    public static final int T__17=17;
-    public static final int RULE_INT=5;
-    public static final int EOF=-1;
-    public static final int T__13=13;
-    public static final int T__16=16;
     public static final int RULE_STRING=6;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int T__14=14;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int T__11=11;
-    public static final int T__18=18;
+    public static final int T__16=16;
     public static final int T__15=15;
+    public static final int T__18=18;
+    public static final int T__17=17;
+    public static final int T__12=12;
+    public static final int T__11=11;
+    public static final int T__14=14;
+    public static final int T__13=13;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_INT=5;
+    public static final int RULE_WS=9;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=7;
 
     // delegates
     // delegators
@@ -856,7 +856,7 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
         "\1\13\2\uffff\1\12\1\14\1\15\1\16\1\uffff\1\5\1\10\1\6\1\7\1\uffff"+
         "\1\5\1\10\1\6\1\7\1\1\1\2";
     static final String DFA12_specialS =
-        "\1\5\2\uffff\1\1\1\4\12\uffff\1\0\1\6\1\uffff\1\2\1\3\20\uffff}>";
+        "\1\4\2\uffff\1\2\1\6\12\uffff\1\1\1\5\1\uffff\1\0\1\3\20\uffff}>";
     static final String[] DFA12_transitionS = {
             "\11\12\2\11\2\12\1\11\22\12\1\11\1\12\1\3\4\12\1\4\7\12\1\10"+
             "\12\7\7\12\32\6\1\12\1\2\1\12\1\5\1\6\1\12\5\6\1\1\24\6\uff85"+
@@ -935,6 +935,16 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
+                        int LA12_18 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA12_18=='\'') ) {s = 27;}
+
+                        else if ( ((LA12_18>='\u0000' && LA12_18<='&')||(LA12_18>='(' && LA12_18<='\uFFFF')) ) {s = 17;}
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
                         int LA12_15 = input.LA(1);
 
                         s = -1;
@@ -944,7 +954,7 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 1 : 
+                    case 2 : 
                         int LA12_3 = input.LA(1);
 
                         s = -1;
@@ -955,16 +965,6 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
                         else if ( ((LA12_3>='\u0000' && LA12_3<='`')||(LA12_3>='b' && LA12_3<='c')||(LA12_3>='e' && LA12_3<='\uFFFF')) ) {s = 17;}
 
                         else s = 10;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA12_18 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA12_18=='\'') ) {s = 27;}
-
-                        else if ( ((LA12_18>='\u0000' && LA12_18<='&')||(LA12_18>='(' && LA12_18<='\uFFFF')) ) {s = 17;}
 
                         if ( s>=0 ) return s;
                         break;
@@ -979,20 +979,6 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
                         if ( s>=0 ) return s;
                         break;
                     case 4 : 
-                        int LA12_4 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA12_4=='b') ) {s = 18;}
-
-                        else if ( (LA12_4=='c') ) {s = 19;}
-
-                        else if ( ((LA12_4>='\u0000' && LA12_4<='a')||(LA12_4>='d' && LA12_4<='\uFFFF')) ) {s = 17;}
-
-                        else s = 10;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 5 : 
                         int LA12_0 = input.LA(1);
 
                         s = -1;
@@ -1018,13 +1004,27 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 6 : 
+                    case 5 : 
                         int LA12_16 = input.LA(1);
 
                         s = -1;
                         if ( (LA12_16=='\"') ) {s = 26;}
 
                         else if ( ((LA12_16>='\u0000' && LA12_16<='!')||(LA12_16>='#' && LA12_16<='\uFFFF')) ) {s = 17;}
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 6 : 
+                        int LA12_4 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA12_4=='b') ) {s = 18;}
+
+                        else if ( (LA12_4=='c') ) {s = 19;}
+
+                        else if ( ((LA12_4>='\u0000' && LA12_4<='a')||(LA12_4>='d' && LA12_4<='\uFFFF')) ) {s = 17;}
+
+                        else s = 10;
 
                         if ( s>=0 ) return s;
                         break;

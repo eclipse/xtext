@@ -8,12 +8,12 @@
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.tests.edit"
     editorPluginID="org.eclipse.xtext.ui.tests.editor">
   <genPackages prefix="EncodingTest" basePackage="org.eclipse.xtext.ui.tests.editor.encoding"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/EncodingUiTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/EncodingUiTestLanguage.ecore#//Model">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/EncodingUiTestLanguage.ecore#//Model/words"/>
+      disposableProviderFactory="true" ecorePackage="EncodingUiTestLanguage.ecore#/">
+    <genClasses ecoreClass="EncodingUiTestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EncodingUiTestLanguage.ecore#//Model/words"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/EncodingUiTestLanguage.ecore#//Word">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/EncodingUiTestLanguage.ecore#//Word/value"/>
+    <genClasses ecoreClass="EncodingUiTestLanguage.ecore#//Word">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EncodingUiTestLanguage.ecore#//Word/value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

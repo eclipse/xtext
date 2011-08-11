@@ -8,30 +8,30 @@
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.tests.edit"
     editorPluginID="org.eclipse.xtext.ui.tests.editor">
   <genPackages prefix="ContentAssistContextTest" basePackage="org.eclipse.xtext.ui.tests.editor.contentassist"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistContextTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistContextTestLanguage.ecore#//FirstLevel">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistContextTestLanguage.ecore#//FirstLevel/secondLevelA"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistContextTestLanguage.ecore#//FirstLevel/secondLevelB"/>
+      disposableProviderFactory="true" ecorePackage="ContentAssistContextTestLanguage.ecore#/">
+    <genClasses ecoreClass="ContentAssistContextTestLanguage.ecore#//FirstLevel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ContentAssistContextTestLanguage.ecore#//FirstLevel/secondLevelA"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ContentAssistContextTestLanguage.ecore#//FirstLevel/secondLevelB"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistContextTestLanguage.ecore#//SecondLevelA">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistContextTestLanguage.ecore#//SecondLevelA/thirdLevelA1"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistContextTestLanguage.ecore#//SecondLevelA/thirdLevelA2"/>
+    <genClasses ecoreClass="ContentAssistContextTestLanguage.ecore#//SecondLevelA">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ContentAssistContextTestLanguage.ecore#//SecondLevelA/thirdLevelA1"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ContentAssistContextTestLanguage.ecore#//SecondLevelA/thirdLevelA2"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistContextTestLanguage.ecore#//SecondLevelB">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistContextTestLanguage.ecore#//SecondLevelB/thirdLevelB1"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistContextTestLanguage.ecore#//SecondLevelB/thirdLevelB2"/>
+    <genClasses ecoreClass="ContentAssistContextTestLanguage.ecore#//SecondLevelB">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ContentAssistContextTestLanguage.ecore#//SecondLevelB/thirdLevelB1"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ContentAssistContextTestLanguage.ecore#//SecondLevelB/thirdLevelB2"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistContextTestLanguage.ecore#//ThirdLevelA1">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistContextTestLanguage.ecore#//ThirdLevelA1/name"/>
+    <genClasses ecoreClass="ContentAssistContextTestLanguage.ecore#//ThirdLevelA1">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ContentAssistContextTestLanguage.ecore#//ThirdLevelA1/name"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistContextTestLanguage.ecore#//ThirdLevelA2">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistContextTestLanguage.ecore#//ThirdLevelA2/name"/>
+    <genClasses ecoreClass="ContentAssistContextTestLanguage.ecore#//ThirdLevelA2">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ContentAssistContextTestLanguage.ecore#//ThirdLevelA2/name"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistContextTestLanguage.ecore#//ThirdLevelB1">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistContextTestLanguage.ecore#//ThirdLevelB1/name"/>
+    <genClasses ecoreClass="ContentAssistContextTestLanguage.ecore#//ThirdLevelB1">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ContentAssistContextTestLanguage.ecore#//ThirdLevelB1/name"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistContextTestLanguage.ecore#//ThirdLevelB2">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistContextTestLanguage.ecore#//ThirdLevelB2/name"/>
+    <genClasses ecoreClass="ContentAssistContextTestLanguage.ecore#//ThirdLevelB2">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ContentAssistContextTestLanguage.ecore#//ThirdLevelB2/name"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

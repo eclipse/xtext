@@ -5,8 +5,7 @@
     nsURI="http://www.eclipse.org/xtext/referringTestLanguage" nsPrefix="referring">
   <eClassifiers xsi:type="ecore:EClass" name="Main">
     <eStructuralFeatures xsi:type="ecore:EReference" name="referenced" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ReferringTestLanguage.ecore#//Reference"
-        containment="true"/>
+        eType="#//Reference" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Reference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="referenced" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>

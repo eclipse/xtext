@@ -8,33 +8,33 @@
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.tests.edit"
     editorPluginID="org.eclipse.xtext.ui.tests.editor">
   <genPackages prefix="ReferenceGrammarUi" basePackage="org.eclipse.xtext.ui.tests.testlanguages"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ReferenceGrammarUiTestLanguage.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ReferenceGrammarUiTestLanguage.ecore#//Spielplatz">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ReferenceGrammarUiTestLanguage.ecore#//Spielplatz/groesse"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ReferenceGrammarUiTestLanguage.ecore#//Spielplatz/beschreibung"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ReferenceGrammarUiTestLanguage.ecore#//Spielplatz/kinder"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ReferenceGrammarUiTestLanguage.ecore#//Spielplatz/erzieher"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ReferenceGrammarUiTestLanguage.ecore#//Spielplatz/spielzeuge"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ReferenceGrammarUiTestLanguage.ecore#//Spielplatz/familie"/>
+      disposableProviderFactory="true" ecorePackage="ReferenceGrammarUiTestLanguage.ecore#/">
+    <genClasses ecoreClass="ReferenceGrammarUiTestLanguage.ecore#//Spielplatz">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ReferenceGrammarUiTestLanguage.ecore#//Spielplatz/groesse"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ReferenceGrammarUiTestLanguage.ecore#//Spielplatz/beschreibung"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ReferenceGrammarUiTestLanguage.ecore#//Spielplatz/kinder"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ReferenceGrammarUiTestLanguage.ecore#//Spielplatz/erzieher"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ReferenceGrammarUiTestLanguage.ecore#//Spielplatz/spielzeuge"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ReferenceGrammarUiTestLanguage.ecore#//Spielplatz/familie"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ReferenceGrammarUiTestLanguage.ecore#//Person">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ReferenceGrammarUiTestLanguage.ecore#//Person/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ReferenceGrammarUiTestLanguage.ecore#//Person/age"/>
+    <genClasses ecoreClass="ReferenceGrammarUiTestLanguage.ecore#//Person">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ReferenceGrammarUiTestLanguage.ecore#//Person/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ReferenceGrammarUiTestLanguage.ecore#//Person/age"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ReferenceGrammarUiTestLanguage.ecore#//Kind"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ReferenceGrammarUiTestLanguage.ecore#//Erwachsener"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ReferenceGrammarUiTestLanguage.ecore#//Spielzeug">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ReferenceGrammarUiTestLanguage.ecore#//Spielzeug/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ReferenceGrammarUiTestLanguage.ecore#//Spielzeug/farbe"/>
+    <genClasses ecoreClass="ReferenceGrammarUiTestLanguage.ecore#//Kind"/>
+    <genClasses ecoreClass="ReferenceGrammarUiTestLanguage.ecore#//Erwachsener"/>
+    <genClasses ecoreClass="ReferenceGrammarUiTestLanguage.ecore#//Spielzeug">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ReferenceGrammarUiTestLanguage.ecore#//Spielzeug/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ReferenceGrammarUiTestLanguage.ecore#//Spielzeug/farbe"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ReferenceGrammarUiTestLanguage.ecore#//Farbe">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ReferenceGrammarUiTestLanguage.ecore#//Farbe/wert"/>
+    <genClasses ecoreClass="ReferenceGrammarUiTestLanguage.ecore#//Farbe">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ReferenceGrammarUiTestLanguage.ecore#//Farbe/wert"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ReferenceGrammarUiTestLanguage.ecore#//Familie">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ReferenceGrammarUiTestLanguage.ecore#//Familie/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ReferenceGrammarUiTestLanguage.ecore#//Familie/mutter"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ReferenceGrammarUiTestLanguage.ecore#//Familie/vater"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ReferenceGrammarUiTestLanguage.ecore#//Familie/kinder"/>
+    <genClasses ecoreClass="ReferenceGrammarUiTestLanguage.ecore#//Familie">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ReferenceGrammarUiTestLanguage.ecore#//Familie/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ReferenceGrammarUiTestLanguage.ecore#//Familie/mutter"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ReferenceGrammarUiTestLanguage.ecore#//Familie/vater"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ReferenceGrammarUiTestLanguage.ecore#//Familie/kinder"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -23,20 +23,20 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalAntlrPa
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_START_TAG", "RULE_END_TAG_SHORT", "RULE_GT", "RULE_END_TAG", "RULE_ID", "RULE_EQ", "RULE_STRING", "RULE_ML_COMMENT", "RULE_LT", "RULE_END_TAG_START", "RULE_INT", "RULE_WS", "RULE_ANY_OTHER"
     };
-    public static final int RULE_START_TAG=4;
-    public static final int RULE_ML_COMMENT=11;
     public static final int RULE_ID=8;
-    public static final int RULE_WS=15;
-    public static final int RULE_END_TAG_START=13;
-    public static final int RULE_INT=14;
-    public static final int RULE_EQ=9;
-    public static final int EOF=-1;
     public static final int RULE_STRING=10;
-    public static final int RULE_END_TAG_SHORT=5;
-    public static final int RULE_LT=12;
+    public static final int RULE_END_TAG=7;
     public static final int RULE_ANY_OTHER=16;
     public static final int RULE_GT=6;
-    public static final int RULE_END_TAG=7;
+    public static final int RULE_EQ=9;
+    public static final int RULE_INT=14;
+    public static final int RULE_WS=15;
+    public static final int EOF=-1;
+    public static final int RULE_END_TAG_START=13;
+    public static final int RULE_END_TAG_SHORT=5;
+    public static final int RULE_ML_COMMENT=11;
+    public static final int RULE_START_TAG=4;
+    public static final int RULE_LT=12;
 
     // delegates
     // delegators

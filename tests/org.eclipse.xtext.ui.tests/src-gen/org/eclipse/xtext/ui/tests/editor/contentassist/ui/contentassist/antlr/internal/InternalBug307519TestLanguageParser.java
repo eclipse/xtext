@@ -27,19 +27,19 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalContent
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "KEYWORD_5", "KEYWORD_3", "KEYWORD_4", "KEYWORD_1", "KEYWORD_2", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
     };
-    public static final int RULE_ML_COMMENT=12;
     public static final int RULE_ID=9;
-    public static final int KEYWORD_4=6;
-    public static final int RULE_WS=14;
+    public static final int RULE_STRING=11;
+    public static final int RULE_ANY_OTHER=15;
     public static final int KEYWORD_1=7;
     public static final int RULE_INT=10;
-    public static final int EOF=-1;
-    public static final int RULE_STRING=11;
     public static final int KEYWORD_5=4;
-    public static final int RULE_ANY_OTHER=15;
-    public static final int KEYWORD_2=8;
-    public static final int RULE_SL_COMMENT=13;
+    public static final int KEYWORD_4=6;
     public static final int KEYWORD_3=5;
+    public static final int KEYWORD_2=8;
+    public static final int RULE_WS=14;
+    public static final int RULE_SL_COMMENT=13;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=12;
 
     // delegates
     // delegators

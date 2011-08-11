@@ -5,7 +5,7 @@
     nsURI="http://www.eclipse.org/xtext/ui/common/tests/2011/bug348199TestLanguage"
     nsPrefix="bug348199TestLanguage">
   <eClassifiers xsi:type="ecore:EClass" name="Timeperiod">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="time" upperBound="-1" eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug348199TestLanguage.ecore#//TimeDef"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="time" upperBound="-1" eType="#//TimeDef"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

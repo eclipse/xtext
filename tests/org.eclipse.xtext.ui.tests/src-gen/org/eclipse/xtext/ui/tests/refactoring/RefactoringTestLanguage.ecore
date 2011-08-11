@@ -5,19 +5,17 @@
     nsURI="http://www.eclipse.org/xtext/refactoringTestLanguage" nsPrefix="refactoring">
   <eClassifiers xsi:type="ecore:EClass" name="Main">
     <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/RefactoringTestLanguage.ecore#//AbstractElement"
-        containment="true"/>
+        eType="#//AbstractElement" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Import" eSuperTypes="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/RefactoringTestLanguage.ecore#//AbstractElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Import" eSuperTypes="#//AbstractElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNamespace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Element" eSuperTypes="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/RefactoringTestLanguage.ecore#//AbstractElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Element" eSuperTypes="#//AbstractElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="contained" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/RefactoringTestLanguage.ecore#//Element"
-        containment="true"/>
+        eType="#//Element" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referenced" unique="false"
-        upperBound="-1" eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/RefactoringTestLanguage.ecore#//Element"/>
+        upperBound="-1" eType="#//Element"/>
   </eClassifiers>
 </ecore:EPackage>

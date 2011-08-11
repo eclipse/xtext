@@ -12,20 +12,20 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalBug288760TestLanguageLexer extends Lexer {
-    public static final int RULE_START_TAG=4;
-    public static final int RULE_ML_COMMENT=11;
     public static final int RULE_ID=8;
-    public static final int RULE_WS=15;
-    public static final int RULE_END_TAG_START=13;
-    public static final int RULE_EQ=9;
-    public static final int RULE_INT=14;
-    public static final int EOF=-1;
     public static final int RULE_STRING=10;
-    public static final int RULE_END_TAG_SHORT=5;
-    public static final int RULE_LT=12;
+    public static final int RULE_END_TAG=7;
     public static final int RULE_ANY_OTHER=16;
     public static final int RULE_GT=6;
-    public static final int RULE_END_TAG=7;
+    public static final int RULE_EQ=9;
+    public static final int RULE_INT=14;
+    public static final int RULE_WS=15;
+    public static final int EOF=-1;
+    public static final int RULE_END_TAG_START=13;
+    public static final int RULE_END_TAG_SHORT=5;
+    public static final int RULE_START_TAG=4;
+    public static final int RULE_ML_COMMENT=11;
+    public static final int RULE_LT=12;
 
     // delegates
     // delegators
@@ -734,7 +734,7 @@ public class InternalBug288760TestLanguageLexer extends Lexer {
         "\2\uffff\1\4\1\5\2\uffff\1\11\1\12\2\uffff\1\14\1\15\1\1\1\uffff"+
         "\1\3\1\2\1\4\1\5\1\6\1\11\1\12\1\13\1\14\1\7\1\10";
     static final String DFA9_specialS =
-        "\1\0\7\uffff\1\2\1\1\17\uffff}>";
+        "\1\0\7\uffff\1\1\1\2\17\uffff}>";
     static final String[] DFA9_transitionS = {
             "\11\13\2\12\2\13\1\12\22\13\1\12\1\13\1\10\4\13\1\11\7\13\1"+
             "\4\12\7\2\13\1\1\1\3\1\2\2\13\32\6\3\13\1\5\1\6\1\13\32\6\uff85"+
@@ -831,20 +831,20 @@ public class InternalBug288760TestLanguageLexer extends Lexer {
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA9_9 = input.LA(1);
+                        int LA9_8 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA9_9>='\u0000' && LA9_9<='\uFFFF')) ) {s = 21;}
+                        if ( ((LA9_8>='\u0000' && LA9_8<='\uFFFF')) ) {s = 21;}
 
                         else s = 11;
 
                         if ( s>=0 ) return s;
                         break;
                     case 2 : 
-                        int LA9_8 = input.LA(1);
+                        int LA9_9 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA9_8>='\u0000' && LA9_8<='\uFFFF')) ) {s = 21;}
+                        if ( ((LA9_9>='\u0000' && LA9_9<='\uFFFF')) ) {s = 21;}
 
                         else s = 11;
 

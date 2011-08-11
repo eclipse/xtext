@@ -6,16 +6,16 @@
     modelPluginID="org.eclipse.xtext.ui.tests" forceOverwrite="true" modelName="EnumRulesUiTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.tests.edit"
-    editorPluginID="org.eclipse.xtext.ui.tests.editor" usedGenPackages="platform:/resource/org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/enumrules/enumsUi.genmodel#//enumsUi">
+    editorPluginID="org.eclipse.xtext.ui.tests.editor" usedGenPackages="../../../../../../../src/org/eclipse/xtext/ui/tests/enumrules/enumsUi.genmodel#//enumsUi">
   <genPackages prefix="EnumRulesUiTestLanguage" basePackage="org.eclipse.xtext.ui.tests.enumrules"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/enumrules/EnumRulesUiTestLanguage.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/enumrules/EnumRulesUiTestLanguage.ecore#//GeneratedEnum">
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/enumrules/EnumRulesUiTestLanguage.ecore#//GeneratedEnum/SameName"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/enumrules/EnumRulesUiTestLanguage.ecore#//GeneratedEnum/DifferentName"/>
+      disposableProviderFactory="true" ecorePackage="EnumRulesUiTestLanguage.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="EnumRulesUiTestLanguage.ecore#//GeneratedEnum">
+      <genEnumLiterals ecoreEnumLiteral="EnumRulesUiTestLanguage.ecore#//GeneratedEnum/SameName"/>
+      <genEnumLiterals ecoreEnumLiteral="EnumRulesUiTestLanguage.ecore#//GeneratedEnum/DifferentName"/>
     </genEnums>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/enumrules/EnumRulesUiTestLanguage.ecore#//Model">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/enumrules/EnumRulesUiTestLanguage.ecore#//Model/existing"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/enumrules/EnumRulesUiTestLanguage.ecore#//Model/generated"/>
+    <genClasses ecoreClass="EnumRulesUiTestLanguage.ecore#//Model">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EnumRulesUiTestLanguage.ecore#//Model/existing"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EnumRulesUiTestLanguage.ecore#//Model/generated"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

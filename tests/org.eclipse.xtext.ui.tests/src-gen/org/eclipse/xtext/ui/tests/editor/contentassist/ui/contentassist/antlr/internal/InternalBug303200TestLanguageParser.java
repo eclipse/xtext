@@ -25,20 +25,20 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalContent
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_LT", "RULE_ID", "RULE_WS", "';'", "'function'", "'['", "']'", "'('", "')'", "','", "'{'", "'}'", "'.'"
     };
-    public static final int T__7=7;
     public static final int RULE_ID=5;
-    public static final int T__12=12;
-    public static final int RULE_WS=6;
-    public static final int T__8=8;
-    public static final int EOF=-1;
-    public static final int T__13=13;
     public static final int T__16=16;
-    public static final int RULE_LT=4;
-    public static final int T__10=10;
-    public static final int T__14=14;
-    public static final int T__9=9;
-    public static final int T__11=11;
     public static final int T__15=15;
+    public static final int T__12=12;
+    public static final int T__11=11;
+    public static final int T__14=14;
+    public static final int T__13=13;
+    public static final int T__10=10;
+    public static final int RULE_WS=6;
+    public static final int EOF=-1;
+    public static final int T__9=9;
+    public static final int T__8=8;
+    public static final int T__7=7;
+    public static final int RULE_LT=4;
 
     // delegates
     // delegators
@@ -9478,11 +9478,11 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalContent
 
     // Delegated rules
 
-    public final boolean synpred26_InternalBug303200TestLanguage() {
+    public final boolean synpred1_InternalBug303200TestLanguage() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred26_InternalBug303200TestLanguage_fragment(); // can never throw exception
+            synpred1_InternalBug303200TestLanguage_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -9492,11 +9492,11 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalContent
         state.failed=false;
         return success;
     }
-    public final boolean synpred1_InternalBug303200TestLanguage() {
+    public final boolean synpred26_InternalBug303200TestLanguage() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred1_InternalBug303200TestLanguage_fragment(); // can never throw exception
+            synpred26_InternalBug303200TestLanguage_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }

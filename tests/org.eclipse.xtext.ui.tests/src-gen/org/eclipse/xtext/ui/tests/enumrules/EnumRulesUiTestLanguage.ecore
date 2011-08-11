@@ -4,8 +4,8 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="enumRulesUiTestLanguage"
     nsURI="http://www.eclipse.org/2009/xtext/ui/common/tests/EnumRulesTest" nsPrefix="enumRulesUiTestLanguage">
   <eClassifiers xsi:type="ecore:EClass" name="Model">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="existing" eType="ecore:EEnum classpath:/org/eclipse/xtext/ui/tests/enumrules/enumsUi.ecore#//ExistingEnum"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="generated" eType="ecore:EEnum platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/enumrules/EnumRulesUiTestLanguage.ecore#//GeneratedEnum"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="existing" eType="ecore:EEnum ../../../../../../../src/org/eclipse/xtext/ui/tests/enumrules/enumsUi.ecore#//ExistingEnum"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="generated" eType="#//GeneratedEnum"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="GeneratedEnum">
     <eLiterals name="SameName" literal="SameName"/>

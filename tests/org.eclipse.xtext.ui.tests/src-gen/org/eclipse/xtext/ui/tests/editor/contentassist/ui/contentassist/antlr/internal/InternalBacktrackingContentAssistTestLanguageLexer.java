@@ -12,85 +12,85 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
-    public static final int T__42=42;
-    public static final int T__12=12;
-    public static final int T__28=28;
-    public static final int T__23=23;
-    public static final int T__57=57;
-    public static final int T__51=51;
-    public static final int T__80=80;
-    public static final int T__13=13;
-    public static final int T__47=47;
-    public static final int T__69=69;
-    public static final int RULE_STRING=4;
-    public static final int T__73=73;
-    public static final int T__50=50;
-    public static final int T__21=21;
-    public static final int T__19=19;
-    public static final int T__65=65;
-    public static final int T__72=72;
-    public static final int T__70=70;
-    public static final int T__67=67;
-    public static final int T__74=74;
-    public static final int T__39=39;
-    public static final int T__30=30;
-    public static final int T__52=52;
-    public static final int T__46=46;
     public static final int T__68=68;
-    public static final int T__17=17;
-    public static final int T__62=62;
-    public static final int RULE_INT=6;
-    public static final int T__27=27;
-    public static final int T__24=24;
-    public static final int T__49=49;
-    public static final int T__61=61;
-    public static final int T__59=59;
-    public static final int T__54=54;
-    public static final int T__48=48;
-    public static final int T__34=34;
-    public static final int T__56=56;
-    public static final int T__15=15;
-    public static final int RULE_ML_COMMENT=7;
-    public static final int T__35=35;
+    public static final int T__69=69;
     public static final int RULE_ID=5;
-    public static final int T__78=78;
-    public static final int T__36=36;
-    public static final int T__20=20;
-    public static final int T__58=58;
-    public static final int T__79=79;
-    public static final int T__64=64;
-    public static final int T__44=44;
     public static final int T__66=66;
-    public static final int T__33=33;
-    public static final int T__14=14;
-    public static final int T__11=11;
-    public static final int T__22=22;
-    public static final int T__77=77;
-    public static final int T__45=45;
+    public static final int T__67=67;
     public static final int T__29=29;
-    public static final int T__55=55;
-    public static final int T__63=63;
-    public static final int RULE_WS=9;
-    public static final int T__43=43;
-    public static final int T__75=75;
-    public static final int T__31=31;
-    public static final int T__40=40;
-    public static final int EOF=-1;
-    public static final int T__53=53;
-    public static final int T__32=32;
-    public static final int T__16=16;
-    public static final int T__38=38;
-    public static final int T__37=37;
-    public static final int T__76=76;
+    public static final int T__64=64;
+    public static final int T__28=28;
+    public static final int T__65=65;
+    public static final int T__27=27;
+    public static final int T__62=62;
     public static final int T__26=26;
-    public static final int RULE_ANY_OTHER=10;
+    public static final int T__63=63;
     public static final int T__25=25;
-    public static final int T__81=81;
-    public static final int RULE_SL_COMMENT=8;
+    public static final int T__24=24;
+    public static final int T__23=23;
+    public static final int T__22=22;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int T__21=21;
+    public static final int T__20=20;
+    public static final int T__61=61;
+    public static final int EOF=-1;
     public static final int T__60=60;
-    public static final int T__41=41;
+    public static final int T__55=55;
+    public static final int T__56=56;
+    public static final int T__19=19;
+    public static final int T__57=57;
+    public static final int T__58=58;
+    public static final int T__51=51;
+    public static final int T__16=16;
+    public static final int T__52=52;
+    public static final int T__15=15;
+    public static final int T__53=53;
     public static final int T__18=18;
+    public static final int T__54=54;
+    public static final int T__17=17;
+    public static final int T__12=12;
+    public static final int T__11=11;
+    public static final int T__14=14;
+    public static final int T__13=13;
+    public static final int T__59=59;
+    public static final int RULE_INT=6;
+    public static final int T__50=50;
+    public static final int T__42=42;
+    public static final int T__43=43;
+    public static final int T__40=40;
+    public static final int T__41=41;
+    public static final int T__46=46;
+    public static final int T__80=80;
+    public static final int T__47=47;
+    public static final int T__81=81;
+    public static final int T__44=44;
+    public static final int T__45=45;
+    public static final int T__48=48;
+    public static final int T__49=49;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int RULE_ML_COMMENT=7;
+    public static final int T__30=30;
+    public static final int T__31=31;
+    public static final int T__32=32;
+    public static final int RULE_STRING=4;
+    public static final int T__33=33;
     public static final int T__71=71;
+    public static final int T__34=34;
+    public static final int T__72=72;
+    public static final int T__35=35;
+    public static final int T__36=36;
+    public static final int T__70=70;
+    public static final int T__37=37;
+    public static final int T__38=38;
+    public static final int T__39=39;
+    public static final int T__76=76;
+    public static final int RULE_WS=9;
+    public static final int T__75=75;
+    public static final int T__74=74;
+    public static final int T__73=73;
+    public static final int T__79=79;
+    public static final int T__78=78;
+    public static final int T__77=77;
 
     // delegates
     // delegators
@@ -2646,22 +2646,22 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\1\uffff\1\64\1\66\1\70\1\74\1\75\1\uffff\10\71\1\uffff\1\115\1"+
-        "\117\1\uffff\1\123\2\71\1\130\2\71\3\uffff\2\71\3\uffff\1\71\5\uffff"+
-        "\6\71\2\uffff\2\62\11\uffff\2\71\3\uffff\13\71\12\uffff\3\71\2\uffff"+
-        "\2\71\3\uffff\1\u008e\1\u008f\4\71\3\uffff\1\71\5\uffff\6\71\1\u009b"+
-        "\1\71\3\uffff\3\71\1\u00a1\3\71\1\u00a5\6\71\1\u00ae\3\71\1\u00b2"+
-        "\2\71\1\u00b6\2\uffff\3\71\1\u00ba\5\71\1\u00c0\1\u00c1\1\uffff"+
-        "\1\u00c2\2\71\1\u00c5\1\71\1\uffff\1\71\1\u00c8\1\71\1\uffff\10"+
-        "\71\1\uffff\1\u00d2\1\u00d3\1\71\1\uffff\1\71\1\u00d6\1\71\1\uffff"+
-        "\2\71\1\u00da\1\uffff\1\71\1\u00dc\1\71\1\u00de\1\u00df\3\uffff"+
-        "\1\71\1\u00e1\1\uffff\2\71\1\uffff\10\71\1\u00ec\2\uffff\2\71\1"+
-        "\uffff\3\71\1\uffff\1\u00f2\1\uffff\1\71\2\uffff\1\71\1\uffff\2"+
-        "\71\1\u00f7\2\71\1\u00fa\4\71\1\uffff\1\71\1\u0100\3\71\1\uffff"+
-        "\1\u0104\1\71\1\u0106\1\u0107\1\uffff\2\71\1\uffff\1\71\1\u010b"+
-        "\2\71\1\u010e\1\uffff\1\u010f\1\u0110\1\u0111\1\uffff\1\71\2\uffff"+
-        "\1\u0113\2\71\1\uffff\2\71\4\uffff\1\71\1\uffff\4\71\1\u011d\1\71"+
-        "\1\u011f\1\u0120\1\u0121\1\uffff\1\71\3\uffff\4\71\1\u0127\1\uffff";
+        "\1\uffff\1\64\1\66\1\71\1\74\1\75\1\uffff\10\70\1\uffff\1\115\1"+
+        "\117\1\uffff\1\123\2\70\1\130\2\70\3\uffff\2\70\3\uffff\1\70\5\uffff"+
+        "\6\70\2\uffff\2\62\11\uffff\2\70\3\uffff\13\70\12\uffff\3\70\2\uffff"+
+        "\2\70\3\uffff\1\u008e\1\u008f\4\70\3\uffff\1\70\5\uffff\6\70\1\u009b"+
+        "\1\70\3\uffff\3\70\1\u00a1\3\70\1\u00a5\6\70\1\u00ae\3\70\1\u00b2"+
+        "\2\70\1\u00b6\2\uffff\3\70\1\u00ba\5\70\1\u00c0\1\u00c1\1\uffff"+
+        "\1\u00c2\2\70\1\u00c5\1\70\1\uffff\1\70\1\u00c8\1\70\1\uffff\10"+
+        "\70\1\uffff\1\u00d2\1\u00d3\1\70\1\uffff\1\70\1\u00d6\1\70\1\uffff"+
+        "\2\70\1\u00da\1\uffff\1\70\1\u00dc\1\70\1\u00de\1\u00df\3\uffff"+
+        "\1\70\1\u00e1\1\uffff\2\70\1\uffff\10\70\1\u00ec\2\uffff\2\70\1"+
+        "\uffff\3\70\1\uffff\1\u00f2\1\uffff\1\70\2\uffff\1\70\1\uffff\2"+
+        "\70\1\u00f7\2\70\1\u00fa\4\70\1\uffff\1\70\1\u0100\3\70\1\uffff"+
+        "\1\u0104\1\70\1\u0106\1\u0107\1\uffff\2\70\1\uffff\1\70\1\u010b"+
+        "\2\70\1\u010e\1\uffff\1\u010f\1\u0110\1\u0111\1\uffff\1\70\2\uffff"+
+        "\1\u0113\2\70\1\uffff\2\70\4\uffff\1\70\1\uffff\4\70\1\u011d\1\70"+
+        "\1\u011f\1\u0120\1\u0121\1\uffff\1\70\3\uffff\4\70\1\u0127\1\uffff";
     static final String DFA12_eofS =
         "\u0128\uffff";
     static final String DFA12_minS =
@@ -2714,7 +2714,7 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
     static final String DFA12_acceptS =
         "\6\uffff\1\7\10\uffff\1\27\2\uffff\1\35\6\uffff\1\44\1\45\1\46\2"+
         "\uffff\1\57\1\60\1\61\1\uffff\1\66\1\67\1\70\1\71\1\72\6\uffff\1"+
-        "\110\1\111\2\uffff\1\115\1\116\1\62\1\1\1\2\1\10\1\3\1\4\1\110\2"+
+        "\110\1\111\2\uffff\1\115\1\116\1\62\1\1\1\2\1\10\1\3\1\110\1\4\2"+
         "\uffff\1\5\1\6\1\7\13\uffff\1\27\1\30\1\34\1\32\1\33\1\31\1\35\1"+
         "\113\1\114\1\36\3\uffff\1\56\1\41\2\uffff\1\44\1\45\1\46\6\uffff"+
         "\1\57\1\60\1\61\1\uffff\1\66\1\67\1\70\1\71\1\72\10\uffff\1\111"+
@@ -2727,7 +2727,7 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         "\1\64\1\104\1\52\1\uffff\1\23\11\uffff\1\53\1\uffff\1\17\1\25\1"+
         "\24\5\uffff\1\15";
     static final String DFA12_specialS =
-        "\1\1\56\uffff\1\2\1\0\u00f7\uffff}>";
+        "\1\2\56\uffff\1\0\1\1\u00f7\uffff}>";
     static final String[] DFA12_transitionS = {
             "\11\62\2\61\2\62\1\61\22\62\1\61\1\62\1\57\4\62\1\60\1\31\1"+
             "\32\1\22\1\6\1\33\1\2\1\1\1\23\12\56\1\26\1\44\1\20\1\17\1\21"+
@@ -2737,10 +2737,10 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
             "\35\2\55\1\47\1\50\3\55\1\52\2\55\1\37\1\43\1\40\uff82\62",
             "\1\63",
             "\1\65",
-            "\32\71\3\uffff\1\67\1\71\1\uffff\32\71",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\13\71\1\73\1\71\1"+
-            "\72\14\71",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
+            "\32\70\3\uffff\1\67\1\70\1\uffff\32\70",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\13\70\1\73\1\70\1"+
+            "\72\14\70",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "",
             "\1\100\15\uffff\1\77",
             "\1\101",
@@ -2829,9 +2829,9 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
             "",
             "",
             "",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\10\71\1\u008c\14"+
-            "\71\1\u008d\4\71",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\10\70\1\u008c\14"+
+            "\70\1\u008d\4\70",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "\1\u0090",
             "\1\u0091",
             "\1\u0092",
@@ -2851,7 +2851,7 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
             "\1\u0098",
             "\1\u0099",
             "\1\u009a",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "\1\u009c",
             "",
             "",
@@ -2859,47 +2859,47 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
             "\1\u009e\6\uffff\1\u009d",
             "\1\u009f",
             "\1\u00a0",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "\1\u00a2",
             "\1\u00a3",
             "\1\u00a4",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "\1\u00a6",
             "\1\u00a7",
             "\1\u00a8\7\uffff\1\u00a9\14\uffff\1\u00aa",
             "\1\u00ab",
             "\1\u00ac",
             "\1\u00ad",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "\1\u00af",
             "\1\u00b0",
             "\1\u00b1",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "\1\u00b3",
             "\1\u00b4",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\1\u00b5\31\71",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\1\u00b5\31\70",
             "",
             "",
             "\1\u00b7",
             "\1\u00b8",
             "\1\u00b9",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "\1\u00bb",
             "\1\u00bc",
             "\1\u00bd",
             "\1\u00be",
             "\1\u00bf",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "\1\u00c3",
             "\1\u00c4",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "\1\u00c6",
             "",
             "\1\u00c7",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "\1\u00c9",
             "",
             "\1\u00ca",
@@ -2911,28 +2911,28 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
             "\1\u00d0",
             "\1\u00d1",
             "",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "\1\u00d4",
             "",
             "\1\u00d5",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "\1\u00d7",
             "",
             "\1\u00d8",
             "\1\u00d9",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "",
             "\1\u00db",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "\1\u00dd",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "",
             "",
             "",
             "\1\u00e0",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "",
             "\1\u00e2",
             "\1\u00e3",
@@ -2945,7 +2945,7 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
             "\1\u00e9",
             "\1\u00ea",
             "\1\u00eb",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "",
             "",
             "\1\u00ed",
@@ -2955,7 +2955,7 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
             "\1\u00f0",
             "\1\u00f1",
             "",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "",
             "\1\u00f3",
             "",
@@ -2964,43 +2964,43 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
             "",
             "\1\u00f5",
             "\1\u00f6",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "\1\u00f8",
             "\1\u00f9",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "\1\u00fb",
             "\1\u00fc",
             "\1\u00fd",
             "\1\u00fe",
             "",
             "\1\u00ff",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "\1\u0101",
             "\1\u0102",
             "\1\u0103",
             "",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "\1\u0105",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "",
             "\1\u0108",
             "\1\u0109",
             "",
             "\1\u010a",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "\1\u010c",
             "\1\u010d",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "",
             "\1\u0112",
             "",
             "",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "\1\u0114",
             "\1\u0115",
             "",
@@ -3016,11 +3016,11 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
             "\1\u011a",
             "\1\u011b",
             "\1\u011c",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "\1\u011e",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "",
             "\1\u0122",
             "",
@@ -3030,7 +3030,7 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
             "\1\u0124",
             "\1\u0125",
             "\1\u0126",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\32\71",
+            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             ""
     };
 
@@ -3071,6 +3071,16 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
+                        int LA12_47 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA12_47>='\u0000' && LA12_47<='\uFFFF')) ) {s = 118;}
+
+                        else s = 50;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
                         int LA12_48 = input.LA(1);
 
                         s = -1;
@@ -3080,7 +3090,7 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 1 : 
+                    case 2 : 
                         int LA12_0 = input.LA(1);
 
                         s = -1;
@@ -3183,16 +3193,6 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
                         else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {s = 49;}
 
                         else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='&')||LA12_0=='\\'||LA12_0=='`'||(LA12_0>='~' && LA12_0<='\uFFFF')) ) {s = 50;}
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA12_47 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA12_47>='\u0000' && LA12_47<='\uFFFF')) ) {s = 118;}
-
-                        else s = 50;
 
                         if ( s>=0 ) return s;
                         break;

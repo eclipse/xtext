@@ -8,98 +8,98 @@
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.tests.edit"
     editorPluginID="org.eclipse.xtext.ui.tests.editor">
   <genPackages prefix="Bug332217TestLanguage" basePackage="org.eclipse.xtext.ui.tests.editor.contentassist"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//TableViewStyle">
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//TableViewStyle/Plain"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//TableViewStyle/Grouped"/>
+      disposableProviderFactory="true" ecorePackage="Bug332217TestLanguage.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Bug332217TestLanguage.ecore#//TableViewStyle">
+      <genEnumLiterals ecoreEnumLiteral="Bug332217TestLanguage.ecore#//TableViewStyle/Plain"/>
+      <genEnumLiterals ecoreEnumLiteral="Bug332217TestLanguage.ecore#//TableViewStyle/Grouped"/>
     </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//CellType">
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//CellType/default"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//CellType/value1"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//CellType/value2"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//CellType/subtitle"/>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Bug332217TestLanguage.ecore#//CellType">
+      <genEnumLiterals ecoreEnumLiteral="Bug332217TestLanguage.ecore#//CellType/default"/>
+      <genEnumLiterals ecoreEnumLiteral="Bug332217TestLanguage.ecore#//CellType/value1"/>
+      <genEnumLiterals ecoreEnumLiteral="Bug332217TestLanguage.ecore#//CellType/value2"/>
+      <genEnumLiterals ecoreEnumLiteral="Bug332217TestLanguage.ecore#//CellType/subtitle"/>
     </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//CellAccessory">
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//CellAccessory/None"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//CellAccessory/Link"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//CellAccessory/Detail"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//CellAccessory/Check"/>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Bug332217TestLanguage.ecore#//CellAccessory">
+      <genEnumLiterals ecoreEnumLiteral="Bug332217TestLanguage.ecore#//CellAccessory/None"/>
+      <genEnumLiterals ecoreEnumLiteral="Bug332217TestLanguage.ecore#//CellAccessory/Link"/>
+      <genEnumLiterals ecoreEnumLiteral="Bug332217TestLanguage.ecore#//CellAccessory/Detail"/>
+      <genEnumLiterals ecoreEnumLiteral="Bug332217TestLanguage.ecore#//CellAccessory/Check"/>
     </genEnums>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//Model">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//Model/elements"/>
+    <genClasses ecoreClass="Bug332217TestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug332217TestLanguage.ecore#//Model/elements"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//PropertyPathPart">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//PropertyPathPart/name"/>
+    <genClasses ecoreClass="Bug332217TestLanguage.ecore#//PropertyPathPart">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug332217TestLanguage.ecore#//PropertyPathPart/name"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//TypeDescription">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//TypeDescription/type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//TypeDescription/many"/>
+    <genClasses ecoreClass="Bug332217TestLanguage.ecore#//TypeDescription">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug332217TestLanguage.ecore#//TypeDescription/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug332217TestLanguage.ecore#//TypeDescription/many"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//Parameter">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//Parameter/description"/>
+    <genClasses ecoreClass="Bug332217TestLanguage.ecore#//Parameter">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug332217TestLanguage.ecore#//Parameter/description"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//ObjectReference">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//ObjectReference/object"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//ObjectReference/tail"/>
+    <genClasses ecoreClass="Bug332217TestLanguage.ecore#//ObjectReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bug332217TestLanguage.ecore#//ObjectReference/object"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug332217TestLanguage.ecore#//ObjectReference/tail"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//Expression"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//ScalarExpression"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//CollectionExpression"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//StringLiteral">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//StringLiteral/value"/>
+    <genClasses ecoreClass="Bug332217TestLanguage.ecore#//Expression"/>
+    <genClasses ecoreClass="Bug332217TestLanguage.ecore#//ScalarExpression"/>
+    <genClasses ecoreClass="Bug332217TestLanguage.ecore#//CollectionExpression"/>
+    <genClasses ecoreClass="Bug332217TestLanguage.ecore#//StringLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug332217TestLanguage.ecore#//StringLiteral/value"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//StringFunction"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//CollectionLiteral">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//CollectionLiteral/items"/>
+    <genClasses ecoreClass="Bug332217TestLanguage.ecore#//StringFunction"/>
+    <genClasses ecoreClass="Bug332217TestLanguage.ecore#//CollectionLiteral">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug332217TestLanguage.ecore#//CollectionLiteral/items"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//CollectionFunction"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//TableView">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//TableView/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//TableView/content"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//TableView/title"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//TableView/titleImage"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//TableView/style"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//TableView/sections"/>
+    <genClasses ecoreClass="Bug332217TestLanguage.ecore#//CollectionFunction"/>
+    <genClasses ecoreClass="Bug332217TestLanguage.ecore#//TableView">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug332217TestLanguage.ecore#//TableView/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug332217TestLanguage.ecore#//TableView/content"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug332217TestLanguage.ecore#//TableView/title"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug332217TestLanguage.ecore#//TableView/titleImage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug332217TestLanguage.ecore#//TableView/style"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug332217TestLanguage.ecore#//TableView/sections"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//ViewContentElement">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//ViewContentElement/iterator"/>
+    <genClasses ecoreClass="Bug332217TestLanguage.ecore#//ViewContentElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug332217TestLanguage.ecore#//ViewContentElement/iterator"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//Section">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//Section/title"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//Section/cells"/>
+    <genClasses ecoreClass="Bug332217TestLanguage.ecore#//Section">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug332217TestLanguage.ecore#//Section/title"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug332217TestLanguage.ecore#//Section/cells"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//Cell">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//Cell/type"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//Cell/text"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//Cell/details"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//Cell/image"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//Cell/action"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//Cell/accessory"/>
+    <genClasses ecoreClass="Bug332217TestLanguage.ecore#//Cell">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug332217TestLanguage.ecore#//Cell/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug332217TestLanguage.ecore#//Cell/text"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug332217TestLanguage.ecore#//Cell/details"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug332217TestLanguage.ecore#//Cell/image"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug332217TestLanguage.ecore#//Cell/action"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug332217TestLanguage.ecore#//Cell/accessory"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//CollectionIterator">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//CollectionIterator/collection"/>
+    <genClasses ecoreClass="Bug332217TestLanguage.ecore#//CollectionIterator">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug332217TestLanguage.ecore#//CollectionIterator/collection"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//ViewAction"/>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//Selector">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//Selector/name"/>
+    <genClasses ecoreClass="Bug332217TestLanguage.ecore#//ViewAction"/>
+    <genClasses ecoreClass="Bug332217TestLanguage.ecore#//Selector">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug332217TestLanguage.ecore#//Selector/name"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//ExternalOpen">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//ExternalOpen/url"/>
+    <genClasses ecoreClass="Bug332217TestLanguage.ecore#//ExternalOpen">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug332217TestLanguage.ecore#//ExternalOpen/url"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//StringConcat">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//StringConcat/values"/>
+    <genClasses ecoreClass="Bug332217TestLanguage.ecore#//StringConcat">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug332217TestLanguage.ecore#//StringConcat/values"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//StringReplace">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//StringReplace/value"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//StringReplace/match"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//StringReplace/replacement"/>
+    <genClasses ecoreClass="Bug332217TestLanguage.ecore#//StringReplace">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug332217TestLanguage.ecore#//StringReplace/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug332217TestLanguage.ecore#//StringReplace/match"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug332217TestLanguage.ecore#//StringReplace/replacement"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//StringUrlConform">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//StringUrlConform/value"/>
+    <genClasses ecoreClass="Bug332217TestLanguage.ecore#//StringUrlConform">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug332217TestLanguage.ecore#//StringUrlConform/value"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//StringSplit">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//StringSplit/value"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.ecore#//StringSplit/delimiter"/>
+    <genClasses ecoreClass="Bug332217TestLanguage.ecore#//StringSplit">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug332217TestLanguage.ecore#//StringSplit/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug332217TestLanguage.ecore#//StringSplit/delimiter"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
