@@ -18,6 +18,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -33,6 +34,7 @@ public class ToEcoreTrafoTest extends AbstractXtextTests {
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(new XtextStandaloneSetup());
+		EPackage.Registry.INSTANCE.put(AmetamodelPackage.eNS_URI, AmetamodelPackage.eINSTANCE);
 	}
 
 	public void testAbstractLanguageToMetamodel() throws Exception {
