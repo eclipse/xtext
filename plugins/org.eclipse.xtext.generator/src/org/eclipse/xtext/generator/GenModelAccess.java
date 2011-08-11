@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -82,15 +83,19 @@ public class GenModelAccess {
 		if (pkg.eResource() != null && pkg.eResource().getURI() != null)
 			location = pkg.eResource().getURI().toString();
 		Resource genModelResource = getGenModelResource(location, nsURI, resourceSet);
-		for (EObject model : genModelResource.getContents())
-			if (model instanceof GenModel) {
-				GenPackage genPkg = ((GenModel) model).findGenPackage(pkg);
-				if (genPkg != null) {
-					genPkg.getEcorePackage().getEClassifiers();
-					return genPkg;
+		if (genModelResource != null) {
+			for (EObject model : genModelResource.getContents()) {
+				if (model instanceof GenModel) {
+					GenPackage genPkg = ((GenModel) model).findGenPackage(pkg);
+					if (genPkg != null) {
+						genPkg.getEcorePackage().getEClassifiers();
+						return genPkg;
+					}
 				}
 			}
-		throw new RuntimeException("No GenPackage for NsURI " + nsURI + " found in " + genModelResource.getURI());
+			throw new RuntimeException("No GenPackage for NsURI " + nsURI + " found in " + genModelResource.getURI());
+		}
+		throw new RuntimeException("No GenPackage for NsURI " + nsURI + ".");
 	}
 	
 	/**
@@ -99,6 +104,9 @@ public class GenModelAccess {
 	public static Resource getGenModelResource(String locationInfo, String nsURI, ResourceSet resourceSet) {
 		URI genModelURI = EcorePlugin.getEPackageNsURIToGenModelLocationMap().get(nsURI);
 		if (genModelURI == null) {
+			if (EcorePackage.eNS_URI.equals(nsURI)) // if we really want to use the registered ecore ...
+				return null;
+			
 			StringBuilder buf = new StringBuilder();
 			if (locationInfo != null && locationInfo.length() > 0)
 				locationInfo = " from " + locationInfo; 
