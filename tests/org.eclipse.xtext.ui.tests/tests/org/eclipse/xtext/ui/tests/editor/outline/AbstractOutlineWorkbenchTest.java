@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.concurrent.TimeoutException;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ISelection;
