@@ -9,13 +9,15 @@ package org.eclipse.xtext.junit4.parameterized;
 
 import static org.eclipse.xtext.util.Exceptions.*;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -24,13 +26,13 @@ import org.eclipse.xtext.junit4.IRegistryConfigurator;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.parameterized.IParameterProvider.IParameterAcceptor;
 import org.eclipse.xtext.junit4.parameterized.ParameterizedXtextRunner.ResourceRunner;
+import org.eclipse.xtext.junit4.parameterized.TestExpectationValidator.ITestExpectationValidator;
+import org.eclipse.xtext.junit4.parameterized.TestExpectationValidator.TestResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.Exceptions;
 import org.eclipse.xtext.util.ReflectionUtil;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.util.internal.FormattingMigrator;
 import org.junit.Assert;
-import org.junit.ComparisonFailure;
 import org.junit.Test;
 import org.junit.runner.Description;
 import org.junit.runner.manipulation.Filter;
@@ -51,6 +53,69 @@ import com.google.common.collect.Sets;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class ParameterizedXtextRunner extends ParentRunner<ResourceRunner> {
+
+	protected static class MethodWithExpectation {
+		protected Method method;
+
+		protected ITestExpectationValidator<Object> validator;
+
+		public MethodWithExpectation(Method method) throws Throwable {
+			super();
+			this.method = method;
+			this.validator = findValidator();
+		}
+
+		protected ITestExpectationValidator<? extends Object> createValidator(Test annotation) {
+			if (method.getReturnType() != void.class)
+				throw new RuntimeException("The method is expected to return void. Method: " + method);
+			return new TestExpectationValidator.NullTestResultValidator(annotation);
+		}
+
+		protected ITestExpectationValidator<? extends Object> createValidator(TestExpectationValidator trv,
+				Annotation annotation) throws Throwable {
+			Class<? extends ITestExpectationValidator<?>> validatorClass = trv.validator();
+			Class<?> expectedResultType = getExpectedResultType(validatorClass);
+			if (!expectedResultType.isAssignableFrom(method.getReturnType()))
+				throw new RuntimeException("The return type of " + method + " is expected to be "
+						+ expectedResultType.getName());
+			Constructor<? extends ITestExpectationValidator<?>> c = validatorClass.getConstructor(annotation
+					.annotationType());
+			return c.newInstance(annotation);
+		}
+
+		@SuppressWarnings("unchecked")
+		protected ITestExpectationValidator<Object> findValidator() throws Throwable {
+			for (Annotation an : method.getAnnotations())
+				if (an instanceof Test)
+					return (ITestExpectationValidator<Object>) createValidator((Test) an);
+				else {
+					TestExpectationValidator trv = an.annotationType().getAnnotation(TestExpectationValidator.class);
+					if (trv != null)
+						return (ITestExpectationValidator<Object>) createValidator(trv, an);
+				}
+			throw new RuntimeException("Annotation missing: @Test or @TestString or @TestIterable, etc. in: " + method);
+		}
+
+		protected Class<?> getExpectedResultType(Class<? extends ITestExpectationValidator<?>> clazz) {
+			for (Method meth : clazz.getMethods()) {
+				Annotation[][] annotations = meth.getParameterAnnotations();
+				for (int i = 0; i < annotations.length; i++)
+					for (Annotation an : annotations[i])
+						if (an instanceof TestResult)
+							return meth.getParameterTypes()[i];
+			}
+			throw new RuntimeException("One of the method parameters of " + clazz.getName()
+					+ " must be annotated with @" + TestResult.class.getSimpleName());
+		}
+
+		public Method getMethod() {
+			return method;
+		}
+
+		public ITestExpectationValidator<Object> getValidator() {
+			return validator;
+		}
+	}
 
 	protected static class ParameterSetRunner {
 		protected Description description;
@@ -192,11 +257,11 @@ public class ParameterizedXtextRunner extends ParentRunner<ResourceRunner> {
 
 	private static Map<Class<?>, IInjectorProvider> injectorProviderClassCache = Maps.newHashMap();
 
-	protected static final Pattern WS = Pattern.compile("\\s+", Pattern.MULTILINE);
-
 	protected List<ResourceRunner> children;
 
 	protected Filter filter = null;
+
+	protected Map<String, MethodWithExpectation> methods = Maps.newHashMap();
 
 	public ParameterizedXtextRunner(Class<?> testClass) throws InitializationError {
 		super(testClass);
@@ -242,12 +307,16 @@ public class ParameterizedXtextRunner extends ParentRunner<ResourceRunner> {
 				+ " for types " + Joiner.on(", ").join(types));
 	}
 
-	protected FrameworkMethod findTestMethod(String name) {
-		for (FrameworkMethod meth : getTestClass().getAnnotatedMethods(Test.class))
-			if (meth.getName().equals(name) && meth.getMethod().getParameterTypes().length == 0
-					&& !Modifier.isStatic(meth.getMethod().getModifiers()))
-				return meth;
-		throw new RuntimeException("Method @Test " + name + "() not found in " + getTestClass().getName());
+	protected MethodWithExpectation findTestMethod(String name) throws Throwable {
+		MethodWithExpectation result = methods.get(name);
+		if (result == null) {
+			Method method = getTestClass().getJavaClass().getMethod(name);
+			if (method == null)
+				throw new RuntimeException("Method " + name + "() not found in " + getTestClass().getName());
+			result = new MethodWithExpectation(method);
+			methods.put(name, result);
+		}
+		return result;
 	}
 
 	@Override
@@ -310,20 +379,20 @@ public class ParameterizedXtextRunner extends ParentRunner<ResourceRunner> {
 	}
 
 	protected void runChild(ParameterSetRunner ps) throws Throwable {
-		FrameworkMethod method = findTestMethod(ps.getMethdoName());
+		MethodWithExpectation method = findTestMethod(ps.getMethdoName());
 		Constructor<?> constructor = findConstructor(ps.getParams());
 		Object test = constructor.newInstance(ps.getParams());
 		if (ps.getInjectorProvider() instanceof IRegistryConfigurator)
 			((IRegistryConfigurator) ps.getInjectorProvider()).setupRegistry();
-		ps.getInjectorProvider().getInjector().injectMembers(test);
-		Object result = method.invokeExplosively(test);
-		if (ps.getInjectorProvider() instanceof IRegistryConfigurator)
-			((IRegistryConfigurator) ps.getInjectorProvider()).restoreRegistry();
-		if (result != null) {
-			FormattingMigrator migrator = ps.getInjectorProvider().getInjector().getInstance(FormattingMigrator.class);
-			String actual = migrator.migrate(ps.getExpectation(), result.toString(), WS);
-			if (!actual.equals(ps.getExpectation()))
-				throw new ComparisonFailure("", ps.getExpectation(), actual);
+		try {
+			ps.getInjectorProvider().getInjector().injectMembers(test);
+			Object result = method.getMethod().invoke(test);
+			method.getValidator().validate(ps.getExpectation(), result);
+		} catch (InvocationTargetException e) {
+			throw e.getCause();
+		} finally {
+			if (ps.getInjectorProvider() instanceof IRegistryConfigurator)
+				((IRegistryConfigurator) ps.getInjectorProvider()).restoreRegistry();
 		}
 	}
 
