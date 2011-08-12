@@ -9,7 +9,6 @@ package org.eclipse.xtext.junit4.parameterized;
 
 import static org.junit.Assert.*;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -30,7 +29,6 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
@@ -38,7 +36,6 @@ import org.eclipse.xtext.validation.Issue;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
@@ -123,8 +120,8 @@ public class AbstractParameterizedXtextTest {
 		validationHelper.assertNoErrors(resource.getContents().get(0));
 	}
 
-	@Test
-	public String scopeAllElements() {
+	@TestAsCommaSeparatedValues()
+	public List<String> scopeAllElements() {
 		Pair<EObject, EStructuralFeature> objAndFeature = getEStructuralFeatureAtOffset();
 		assertTrue(objAndFeature.getSecond() instanceof EReference);
 		assertFalse(((EReference) objAndFeature.getSecond()).isContainment());
@@ -132,10 +129,7 @@ public class AbstractParameterizedXtextTest {
 		List<String> result = Lists.newArrayList();
 		for (IEObjectDescription desc : scope.getAllElements())
 			result.add(desc.getName().toString());
-		Collections.sort(result);
-//		System.out.println("Normal : " + Joiner.on(", ").join(result));
-//		System.out.println("Wrapped: " + Strings.wordWrap(Joiner.on(", ").join(result), LINE_WIDTH));
-		return Strings.wordWrap(Joiner.on(", ").join(result), LINE_WIDTH);
+		return result;
 	}
 
 	@Test
@@ -161,21 +155,21 @@ public class AbstractParameterizedXtextTest {
 		return issues;
 	}
 
-	@Test
-	public String validationErrors() {
+	@TestAsLines()
+	public List<String> validationErrors() {
 		List<String> result = Lists.newArrayList();
 		for (Issue issue : validateResource())
 			if (issue.getSeverity() == Severity.ERROR)
 				result.add(formatIssue(issue));
-		return Joiner.on('\n').join(result);
+		return result;
 	}
 
-	@Test
-	public String validationIssues() {
+	@TestAsLines()
+	public List<String> validationIssues() {
 		List<String> result = Lists.newArrayList();
 		for (Issue issue : validateResource())
 			result.add(formatIssue(issue));
-		return Joiner.on('\n').join(result);
+		return result;
 	}
 
 }
