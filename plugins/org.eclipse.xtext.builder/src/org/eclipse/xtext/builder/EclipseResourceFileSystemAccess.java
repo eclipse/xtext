@@ -9,6 +9,8 @@ package org.eclipse.xtext.builder;
 
 import static org.eclipse.xtext.util.Strings.*;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import org.eclipse.core.resources.IContainer;
@@ -53,10 +55,39 @@ public class EclipseResourceFileSystemAccess extends AbstractFileSystemAccess {
 		try {
 			createFolder(file.getParent());
 			final String defaultCharset = file.getCharset();
-			if (file.exists())
-				file.setContents(new StringInputStream(contents.toString(), defaultCharset), true, true, null);
-			else
-				file.create(new StringInputStream(contents.toString(), defaultCharset), true, null);
+			String newContentAsString = contents.toString();
+			if (file.exists()) {
+				boolean contentChanged = false;
+				BufferedInputStream oldContent = null;
+				StringInputStream newContent = new StringInputStream(newContentAsString, defaultCharset);
+				try {
+					oldContent = new BufferedInputStream(file.getContents());
+					int newByte = newContent.read();
+					int oldByte = oldContent.read();
+					while(newByte != -1 && oldByte != -1 && newByte == oldByte) {
+						newByte = newContent.read();
+						oldByte = oldContent.read();
+					}
+					contentChanged = newByte != oldByte;
+				} catch (CoreException e) {
+					contentChanged = true;
+				} catch (IOException e) {
+					contentChanged = true;
+				} finally {
+					if (oldContent != null) {
+						try {
+							oldContent.close();
+						} catch (IOException e) {
+							// ignore
+						}
+					}
+					// reset to offset zero allows to reuse internal byte[]
+					newContent.reset();
+				}
+				if (contentChanged)
+					file.setContents(newContent, true, true, null);
+			} else
+				file.create(new StringInputStream(newContentAsString, defaultCharset), true, null);
 			file.setDerived(true);
 			if(newFileAcceptor != null)
 				newFileAcceptor.accept(file.getFullPath().toString());
