@@ -16,10 +16,10 @@ import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 public class SyntaxErrorMessageProvider implements ISyntaxErrorMessageProvider {
 
 	public SyntaxErrorMessage getSyntaxErrorMessage(IParserErrorContext context) {
-		return new SyntaxErrorMessage(context.getDefaultMessage(), Diagnostic.SYNTAX_DIAGNOSITC);
+		return new SyntaxErrorMessage(context.getDefaultMessage(), Diagnostic.SYNTAX_DIAGNOSTIC);
 	}
 	
 	public SyntaxErrorMessage getSyntaxErrorMessage(IValueConverterErrorContext context) {
-		return new SyntaxErrorMessage(context.getDefaultMessage(), Diagnostic.SYNTAX_DIAGNOSITC);
+		return new SyntaxErrorMessage(context.getDefaultMessage(), Diagnostic.SYNTAX_DIAGNOSTIC);
 	}
 }
