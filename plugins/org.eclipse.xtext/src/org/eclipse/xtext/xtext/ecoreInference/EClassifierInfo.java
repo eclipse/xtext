@@ -21,6 +21,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.util.ReflectionUtil;
 import org.eclipse.xtext.util.Strings;
 
@@ -39,8 +41,8 @@ public abstract class EClassifierInfo {
 		this.eClassifier = metaType;
 	}
 
-	public static EClassifierInfo createEClassInfo(EClass eClass, boolean isGenerated, Set<String> generatedEPackageURIs) {
-		return new EClassInfo(eClass, isGenerated, generatedEPackageURIs);
+	public static EClassifierInfo createEClassInfo(EClass eClass, boolean isGenerated, Set<String> generatedEPackageURIs, Grammar grammar) {
+		return new EClassInfo(eClass, isGenerated, generatedEPackageURIs, grammar);
 	}
 
 	public static EClassifierInfo createEDataTypeInfo(EDataType eDataType, boolean isGenerated) {
@@ -67,16 +69,27 @@ public abstract class EClassifierInfo {
 	public static class EClassInfo extends EClassifierInfo {
 
 		private Set<String> generatedEPackageURIs;
+		private Grammar grammar;
 		
-		public EClassInfo(EClassifier metaType, boolean isGenerated, Set<String> generatedEPackageURIs) {
+		public EClassInfo(EClass metaType, boolean isGenerated, Set<String> generatedEPackageURIs, Grammar grammar) {
 			super(metaType, isGenerated);
 			this.generatedEPackageURIs = generatedEPackageURIs;
+			this.grammar = grammar;
 		}
 
 		@Override
 		public boolean isAssignableFrom(EClassifierInfo subTypeInfo) {
 			return super.isAssignableFrom(subTypeInfo) || (subTypeInfo instanceof EClassInfo)
-					&& EcoreUtil2.isAssignableFrom(getEClass(),(EClass) subTypeInfo.getEClassifier());
+					&& isAssignableFrom(getEClass(),(EClass) subTypeInfo.getEClassifier());
+		}
+		
+		protected boolean isAssignableFrom(EClass target, EClass candidate) {
+			if (candidate != null && target.isSuperTypeOf(candidate))
+				return true;
+			EClass eObjectType = GrammarUtil.findEObject(grammar);
+			if (target == eObjectType)
+				return true;
+			return false;
 		}
 
 		@Override
@@ -147,7 +160,7 @@ public abstract class EClassifierInfo {
 					if (featureType instanceof EClass && existingFeature.getEType() instanceof EClass) {
 						EClass expected = (EClass) featureType;
 						EClass actual = (EClass) existingFeature.getEType();
-						boolean result = EcoreUtil2.isAssignableFrom(actual, expected);
+						boolean result = isAssignableFrom(actual, expected);
 						if (!result) {
 							errorMessage.append("The existing reference '" + name + "' has an incompatible type '" + actual.getName() + "'.");
 							return result;
