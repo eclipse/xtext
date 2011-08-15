@@ -23,7 +23,7 @@ public class EClassInfoTest extends TestCase {
 	public void testContainsCompatibleFeature_01() throws Exception {
 		EcorePackage pack = EcorePackage.eINSTANCE;
 		EClass eClass = pack.getEClass();
-		EClassInfo objectUnderTest = new EClassifierInfo.EClassInfo(eClass, false, Collections.<String>emptySet());
+		EClassInfo objectUnderTest = new EClassifierInfo.EClassInfo(eClass, false, Collections.<String>emptySet(), null);
 		assertEquals(true,objectUnderTest.containsCompatibleFeature("name", false, true, pack.getEString(), new StringBuilder()));
 		assertEquals(false,objectUnderTest.containsCompatibleFeature("name", true, true, pack.getEString(), new StringBuilder()));
 		assertEquals(false,objectUnderTest.containsCompatibleFeature("name", true, true, pack.getEAnnotation(), new StringBuilder()));
@@ -40,7 +40,7 @@ public class EClassInfoTest extends TestCase {
 	public void testContainsCompatibleFeature_02() throws Exception {
 		EcorePackage pack = EcorePackage.eINSTANCE;
 		EClass attribute = pack.getEAttribute();
-		EClassInfo objectUnderTest = new EClassifierInfo.EClassInfo(attribute, false, Collections.<String>emptySet());
+		EClassInfo objectUnderTest = new EClassifierInfo.EClassInfo(attribute, false, Collections.<String>emptySet(), null);
 		assertEquals(true, objectUnderTest.containsCompatibleFeature("lowerBound", false, true, pack.getEInt(), new StringBuilder()));
 		assertEquals(true, objectUnderTest.containsCompatibleFeature("lowerBound", false, true, pack.getEIntegerObject(), new StringBuilder()));
 		assertEquals(false, objectUnderTest.containsCompatibleFeature("lowerBound", false, true, pack.getELong(), new StringBuilder()));
