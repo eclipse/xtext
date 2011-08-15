@@ -111,11 +111,11 @@ public class TypeResourceUnloaderTest extends TestCase implements IResourceDescr
 
 	protected void assertOriginalValues(Collection<String> allNames) {
 		assertTrue(allNames.toString(), allNames.contains(NESTED_TYPES + ".method"));
-		assertTrue(allNames.toString(), allNames.contains(NESTED_TYPES + ".Outer.method"));
-		assertTrue(allNames.toString(), allNames.contains(NESTED_TYPES + ".Outer.Inner.method"));
+		assertTrue(allNames.toString(), allNames.contains(NESTED_TYPES + "$Outer.method"));
+		assertTrue(allNames.toString(), allNames.contains(NESTED_TYPES + "$Outer$Inner.method"));
 		assertTrue(allNames.toString(), allNames.contains(NESTED_TYPES));
-		assertTrue(allNames.toString(), allNames.contains(NESTED_TYPES + ".Outer"));
-		assertTrue(allNames.toString(), allNames.contains(NESTED_TYPES + ".Outer.Inner"));
+		assertTrue(allNames.toString(), allNames.contains(NESTED_TYPES + "$Outer"));
+		assertTrue(allNames.toString(), allNames.contains(NESTED_TYPES + "$Outer$Inner"));
 	}
 	
 	public void testAddParam() throws BadLocationException, JavaModelException, InterruptedException {
@@ -166,7 +166,7 @@ public class TypeResourceUnloaderTest extends TestCase implements IResourceDescr
 		IResourceDescription.Delta delta = event.getDeltas().get(0);
 		Collection<String> allNames = getNames(delta);
 		assertOriginalValues(allNames);
-		assertTrue(allNames.contains(NESTED_TYPES + ".Outer.Inner.method2"));
+		assertTrue(allNames.contains(NESTED_TYPES + "$Outer$Inner.method2"));
 		assertEquals(7, allNames.size());
 	}
 	
@@ -188,11 +188,11 @@ public class TypeResourceUnloaderTest extends TestCase implements IResourceDescr
 		addNames(event.getDeltas().get(1).getOld(), allNames);
 		addNames(event.getDeltas().get(1).getNew(), allNames);
 		assertTrue(allNames.toString(), allNames.contains(foobar + ".method"));
-		assertTrue(allNames.toString(), allNames.contains(foobar + ".Outer.method"));
-		assertTrue(allNames.toString(), allNames.contains(foobar + ".Outer.Inner.method"));
+		assertTrue(allNames.toString(), allNames.contains(foobar + "$Outer.method"));
+		assertTrue(allNames.toString(), allNames.contains(foobar + "$Outer$Inner.method"));
 		assertTrue(allNames.toString(), allNames.contains(foobar));
-		assertTrue(allNames.toString(), allNames.contains(foobar + ".Outer"));
-		assertTrue(allNames.toString(), allNames.contains(foobar + ".Outer.Inner"));
+		assertTrue(allNames.toString(), allNames.contains(foobar + "$Outer"));
+		assertTrue(allNames.toString(), allNames.contains(foobar + "$Outer$Inner"));
 		assertTrue(allNames.contains(NESTED_TYPES));
 		assertEquals(7, allNames.size());
 	}

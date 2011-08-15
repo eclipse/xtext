@@ -28,5 +28,5 @@ Import:
 
 ImportedFQN: FQN '.*'?;
 
-FQN: ID ('.' ID)*;
+FQN: ID ('.' ID)* ('$' ID)*;
 

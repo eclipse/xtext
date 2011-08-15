@@ -315,6 +315,19 @@ ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     { 
     newLeafNode(this_ID_2, grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1()); 
     }
+)*(
+	kw='$' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getFQNAccess().getDollarSignKeyword_2_0()); 
+    }
+    this_ID_4=RULE_ID    {
+		$current.merge(this_ID_4);
+    }
+
+    { 
+    newLeafNode(this_ID_4, grammarAccess.getFQNAccess().getIDTerminalRuleCall_2_1()); 
+    }
 )*)
     ;
 

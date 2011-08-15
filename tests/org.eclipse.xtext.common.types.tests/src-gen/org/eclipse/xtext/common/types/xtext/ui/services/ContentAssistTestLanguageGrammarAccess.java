@@ -170,12 +170,15 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Keyword cFullStopKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cDollarSignKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final RuleCall cIDTerminalRuleCall_2_1 = (RuleCall)cGroup_2.eContents().get(1);
 		
 		//FQN:
-		//	ID ("." ID)*;
+		//	ID ("." ID)* ("$" ID)*;
 		public ParserRule getRule() { return rule; }
 
-		//ID ("." ID)*
+		//ID ("." ID)* ("$" ID)*
 		public Group getGroup() { return cGroup; }
 
 		//ID
@@ -189,6 +192,15 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 
 		//ID
 		public RuleCall getIDTerminalRuleCall_1_1() { return cIDTerminalRuleCall_1_1; }
+
+		//("$" ID)*
+		public Group getGroup_2() { return cGroup_2; }
+
+		//"$"
+		public Keyword getDollarSignKeyword_2_0() { return cDollarSignKeyword_2_0; }
+
+		//ID
+		public RuleCall getIDTerminalRuleCall_2_1() { return cIDTerminalRuleCall_2_1; }
 	}
 	
 	
@@ -261,7 +273,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 
 	//FQN:
-	//	ID ("." ID)*;
+	//	ID ("." ID)* ("$" ID)*;
 	public FQNElements getFQNAccess() {
 		return (pFQN != null) ? pFQN : (pFQN = new FQNElements());
 	}

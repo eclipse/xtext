@@ -126,7 +126,7 @@ public class DeltaConverter {
 			} else {
 				IJavaElement childElement = childDelta.getElement();
 				if (childElement.getElementType() == IJavaElement.TYPE) {
-					NameBasedEObjectDescriptionBuilder childAcceptor = acceptor.nest(childElement.getElementName());
+					NameBasedEObjectDescriptionBuilder childAcceptor = acceptor.nestType(childElement.getElementName());
 					traverseDelta(childDelta, childAcceptor);
 				}
 			}
@@ -157,7 +157,7 @@ public class DeltaConverter {
 					}
 				}
 				for(IType nestedType: type.getTypes()) {
-					traverseType(nestedType, acceptor.nest(nestedType.getElementName()));
+					traverseType(nestedType, acceptor.nestType(nestedType.getElementName()));
 				}
 			}
 		} catch(JavaModelException e) {

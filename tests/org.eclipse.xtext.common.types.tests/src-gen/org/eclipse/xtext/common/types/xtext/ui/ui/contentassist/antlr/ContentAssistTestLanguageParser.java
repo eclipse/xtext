@@ -46,6 +46,7 @@ public class ContentAssistTestLanguageParser extends AbstractContentAssistParser
 					put(grammarAccess.getImportedFQNAccess().getGroup(), "rule__ImportedFQN__Group__0");
 					put(grammarAccess.getFQNAccess().getGroup(), "rule__FQN__Group__0");
 					put(grammarAccess.getFQNAccess().getGroup_1(), "rule__FQN__Group_1__0");
+					put(grammarAccess.getFQNAccess().getGroup_2(), "rule__FQN__Group_2__0");
 					put(grammarAccess.getModelAccess().getImportsAssignment_0(), "rule__Model__ImportsAssignment_0");
 					put(grammarAccess.getModelAccess().getReferenceHolderAssignment_1(), "rule__Model__ReferenceHolderAssignment_1");
 					put(grammarAccess.getReferenceHolderAccess().getDefaultReferenceAssignment_0_1(), "rule__ReferenceHolder__DefaultReferenceAssignment_0_1");
