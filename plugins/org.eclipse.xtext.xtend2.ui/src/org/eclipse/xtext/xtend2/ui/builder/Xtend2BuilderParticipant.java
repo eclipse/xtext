@@ -10,6 +10,8 @@ package org.eclipse.xtext.xtend2.ui.builder;
 import static com.google.common.collect.Iterables.*;
 import static org.eclipse.xtext.util.Strings.*;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 
@@ -147,10 +149,42 @@ public class Xtend2BuilderParticipant implements IXtextBuilderParticipant {
 		progress.worked(50);
 		String encoding = encodingProvider.getEncoding(sourceResource.getURI());
 		folderUtil.createParentFolders(targetFile, progress.newChild(10));
-		if (targetFile.exists())
-			targetFile.setContents(new StringInputStream(appendable.toString(), encoding), true, false, progress.newChild(40));
+		String newContentAsString = appendable.toString();
+		if (targetFile.exists()) {
+			// TODO this is duplicated from EclipseResourceFileSystemAccess which should be used here, too
+			boolean contentChanged = false;
+			encoding = targetFile.getCharset();
+			BufferedInputStream oldContent = null;
+			StringInputStream newContent = new StringInputStream(newContentAsString, encoding);
+			try {
+				oldContent = new BufferedInputStream(targetFile.getContents());
+				int newByte = newContent.read();
+				int oldByte = oldContent.read();
+				while(newByte != -1 && oldByte != -1 && newByte == oldByte) {
+					newByte = newContent.read();
+					oldByte = oldContent.read();
+				}
+				contentChanged = newByte != oldByte;
+			} catch (CoreException e) {
+				contentChanged = true;
+			} catch (IOException e) {
+				contentChanged = true;
+			} finally {
+				if (oldContent != null) {
+					try {
+						oldContent.close();
+					} catch (IOException e) {
+						// ignore
+					}
+				}
+				// reset to offset zero allows to reuse internal byte[]
+				newContent.reset();
+			}
+			if (contentChanged)
+				targetFile.setContents(newContent, true, false, progress.newChild(40));
+		}
 		else
-			targetFile.create(new StringInputStream(appendable.toString(), encoding), true, progress.newChild(40));
+			targetFile.create(new StringInputStream(newContentAsString, encoding), true, progress.newChild(40));
 		targetFile.setDerived(true);
 		if(!equal(targetFile.getCharset(), encoding))
 			targetFile.setCharset(encoding, progress);
