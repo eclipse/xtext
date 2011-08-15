@@ -1392,6 +1392,15 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"}", "bug343088", Integer.valueOf(18), Integer.valueOf(5));
 	}
 	
+	public void testNullSafeOperatorWithExtension() throws Exception {
+		invokeAndExpect2(
+				newArrayList(null,null,"foo"), 
+				"def myExtension(String s) { 'foo' } " +
+				"def nullSafeTest() {\n" + 
+				"    newArrayList((null as String)?.myExtension, (null as String)?.myExtension(), 'test'?.myExtension)\n" + 
+				"}\n","nullSafeTest");
+	}
+	
 	@Inject
 	private EclipseRuntimeDependentJavaCompiler javaCompiler;
 
