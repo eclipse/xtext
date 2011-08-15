@@ -85,7 +85,8 @@ public class LazyLinkingResource extends XtextResource {
 	 * resolves any lazy cross references in this resource, adding Issues for unresolvable elements to this resource.
 	 * This resource might still contain resolvable proxies after this method has been called.
 	 * 
-	 * @param a {@link CancelIndicator} can be used to stop the resolution.
+	 * @param a
+	 *            {@link CancelIndicator} can be used to stop the resolution.
 	 */
 	public void resolveLazyCrossReferences(final CancelIndicator mon) {
 		final CancelIndicator monitor = mon == null ? CancelIndicator.NullImpl : mon;
@@ -116,15 +117,17 @@ public class LazyLinkingResource extends XtextResource {
 				EObject proxy = list.basicGet(i);
 				if (proxy.eIsProxy()) {
 					URI proxyURI = ((InternalEObject) proxy).eProxyURI();
-					final String fragment = proxyURI.fragment();
-					if (getEncoder().isCrossLinkFragment(this, fragment)) {
-						EObject target = getEObject(fragment);
-						if (target != null) {
-							try {
-								source.eSetDeliver(false);
-								list.setUnique(i, target);
-							} finally {
-								source.eSetDeliver(true);
+					if (getURI().equals(proxyURI.trimFragment())) {
+						final String fragment = proxyURI.fragment();
+						if (getEncoder().isCrossLinkFragment(this, fragment)) {
+							EObject target = getEObject(fragment);
+							if (target != null) {
+								try {
+									source.eSetDeliver(false);
+									list.setUnique(i, target);
+								} finally {
+									source.eSetDeliver(true);
+								}
 							}
 						}
 					}
@@ -134,15 +137,17 @@ public class LazyLinkingResource extends XtextResource {
 			EObject proxy = (EObject) source.eGet(crossRef, false);
 			if (proxy != null && proxy.eIsProxy()) {
 				URI proxyURI = ((InternalEObject) proxy).eProxyURI();
-				final String fragment = proxyURI.fragment();
-				if (getEncoder().isCrossLinkFragment(this, fragment)) {
-					EObject target = getEObject(fragment);
-					if (target != null) {
-						try {
-							source.eSetDeliver(false);
-							source.eSet(crossRef, target);
-						} finally {
-							source.eSetDeliver(true);
+				if (getURI().equals(proxyURI.trimFragment())) {
+					final String fragment = proxyURI.fragment();
+					if (getEncoder().isCrossLinkFragment(this, fragment)) {
+						EObject target = getEObject(fragment);
+						if (target != null) {
+							try {
+								source.eSetDeliver(false);
+								source.eSet(crossRef, target);
+							} finally {
+								source.eSetDeliver(true);
+							}
 						}
 					}
 				}
@@ -204,8 +209,7 @@ public class LazyLinkingResource extends XtextResource {
 	}
 
 	protected EObject handleCyclicResolution(Triple<EObject, EReference, INode> triple) throws AssertionError {
-		throw new AssertionError("Cyclic resolution of lazy links : "
-				+ getReferences(triple, resolving));
+		throw new AssertionError("Cyclic resolution of lazy links : " + getReferences(triple, resolving));
 	}
 
 	protected String getReferences(Triple<EObject, EReference, INode> triple,
@@ -278,7 +282,7 @@ public class LazyLinkingResource extends XtextResource {
 	}
 
 	protected List<Diagnostic> getDiagnosticList(DiagnosticMessage message) throws AssertionError {
-		if(message != null) {
+		if (message != null) {
 			switch (message.getSeverity()) {
 				case ERROR:
 					return getErrors();
