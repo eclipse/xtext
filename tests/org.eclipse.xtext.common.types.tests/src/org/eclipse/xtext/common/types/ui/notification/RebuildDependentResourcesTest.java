@@ -94,6 +94,17 @@ public class RebuildDependentResourcesTest extends TestCase {
 		assertEquals(printMarkers(file), 0, countMarkers(file));
 	}
 	
+	public void testFixedJavaReference_04() throws Exception {
+		IFile file = createFile("src/foo"+extension, "default pack.SomeFile$Nested");
+		waitForAutoBuild();
+		assertEquals(printMarkers(file), 2, countMarkers(file));
+		IFile javaFile = createFile("src/pack/SomeFile.java", "package pack; class SomeFile {}");
+		assertEquals(printMarkers(file), 2, countMarkers(file));
+		javaFile.setContents(new StringInputStream("package pack; class SomeFile { class Nested {} }"), true, true,	monitor());
+		waitForAutoBuild();
+		assertEquals(printMarkers(file), 0, countMarkers(file));
+	}
+	
 	public void testBrokenJavaReference_01() throws Exception {
 		IFile file = createFile("src/foo"+extension, "default WillBeDeleted");
 		IFile javaFile = createFile("src/WillBeDeleted.java", "class WillBeDeleted {}");
