@@ -268,25 +268,23 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	}
 
 	protected boolean appendReceiver(XAbstractFeatureCall call, IAppendable b) {
+		if (call instanceof XMemberFeatureCall) {
+			XMemberFeatureCall expr = ((XMemberFeatureCall) call);
+			if (expr.isNullSafe()) {
+				internalToJavaExpression(expr.getMemberCallTarget(), b);
+				b.append("==null?");
+				JvmTypeReference type = getTypeProvider().getType(call);
+				appendNullValue(type,call,b);
+				b.append(":");
+			} else if (expr.isSpreading()) {
+				throw new UnsupportedOperationException();
+			}
+		}
 		if (isStatic(call.getFeature())) {
 			b.append(((JvmFeature) call.getFeature()).getDeclaringType());
 			return true;
 		}
 		XExpression receiver = featureCallToJavaMapping.getActualReceiver(call);
-		if (call instanceof XMemberFeatureCall) {
-			XMemberFeatureCall expr = ((XMemberFeatureCall) call);
-			if (expr.isNullSafe()) {
-				internalToJavaExpression(receiver, b);
-				b.append("==null?");
-				JvmTypeReference type = getTypeProvider().getType(call);
-				appendNullValue(type,call,b);
-				b.append(":");
-				internalToJavaExpression(receiver, b);
-				return true;
-			} else if (expr.isSpreading()) {
-				throw new UnsupportedOperationException();
-			}
-		}
 		if (receiver != null) {
 			internalToJavaExpression(receiver, b);
 			return true;
