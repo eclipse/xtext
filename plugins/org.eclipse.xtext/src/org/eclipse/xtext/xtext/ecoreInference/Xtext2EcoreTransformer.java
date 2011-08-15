@@ -773,7 +773,7 @@ public class Xtext2EcoreTransformer {
 		for (EClassifier eClassifier : referencedEPackage.getEClassifiers()) {
 			if (eClassifier instanceof EClass) {
 				EClass eClass = (EClass) eClassifier;
-				EClassifierInfo info = EClassifierInfo.createEClassInfo(eClass, generated, getGeneratedEPackageURIs());
+				EClassifierInfo info = EClassifierInfo.createEClassInfo(eClass, generated, getGeneratedEPackageURIs(), GrammarUtil.getGrammar(metaModel));
 				target.addInfo(metaModel, eClassifier.getName(), info);
 			}
 			else if (eClassifier instanceof EDataType) {
@@ -878,7 +878,7 @@ public class Xtext2EcoreTransformer {
 
 			EClassifierInfo result;
 			if (classifier instanceof EClass)
-				result = EClassifierInfo.createEClassInfo((EClass) classifier, true, getGeneratedEPackageURIs());
+				result = EClassifierInfo.createEClassInfo((EClass) classifier, true, getGeneratedEPackageURIs(), GrammarUtil.getGrammar(typeRef));
 			else // datatype or enum
 				result = EClassifierInfo.createEDataTypeInfo((EDataType) classifier, true);
 
