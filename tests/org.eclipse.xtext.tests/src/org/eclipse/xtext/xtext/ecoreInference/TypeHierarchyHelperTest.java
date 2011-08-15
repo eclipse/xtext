@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.xtext.ecoreInference.EClassifierInfo.EClassInfo;
 
@@ -70,7 +71,7 @@ public class TypeHierarchyHelperTest extends TestCase {
 	private EClassInfo addClass(String name, boolean isGenerated) {
 		EClass eClass = EcoreFactory.eINSTANCE.createEClass();
 		eClass.setName(name);
-		EClassInfo info = (EClassInfo) EClassifierInfo.createEClassInfo(eClass, isGenerated, Collections.<String>emptySet());
+		EClassInfo info = (EClassInfo) EClassifierInfo.createEClassInfo(eClass, isGenerated, Collections.<String>emptySet(), GrammarUtil.getGrammar(metamodel));
 		infos.addInfo(metamodel, name, info);
 		return info;
 	}
