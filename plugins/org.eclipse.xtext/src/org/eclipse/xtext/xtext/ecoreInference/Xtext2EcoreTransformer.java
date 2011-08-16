@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xtext.ecoreInference;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -34,7 +35,6 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
-import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CompoundElement;
 import org.eclipse.xtext.EcoreUtil2;
@@ -50,7 +50,6 @@ import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
-import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -375,17 +374,28 @@ public class Xtext2EcoreTransformer {
 	private Xtext2EcoreInterpretationContext deriveFeatures(final Xtext2EcoreInterpretationContext context,
 			AbstractElement element) {
 		XtextSwitch<Xtext2EcoreInterpretationContext> visitor = new XtextSwitch<Xtext2EcoreInterpretationContext>() {
+			
+			/*
+			 * Used for Alternatives and UnorderedGroups
+			 */
 			@Override
-			public Xtext2EcoreInterpretationContext caseAlternatives(Alternatives object) {
+			public Xtext2EcoreInterpretationContext caseCompoundElement(CompoundElement object) {
 				List<Xtext2EcoreInterpretationContext> contexts = new ArrayList<Xtext2EcoreInterpretationContext>();
 				for (AbstractElement group : object.getElements()) {
 					contexts.add(deriveFeatures(context, group));
 				}
-				if (!GrammarUtil.isOptionalCardinality(object))
-					return context.mergeSpawnedContexts(contexts);
-				return context;
+				Xtext2EcoreInterpretationContext result = context;
+				if (!contexts.isEmpty()) {
+					if (GrammarUtil.isOptionalCardinality(object)) {
+						contexts.add(0, result);
+					} else {
+						result = contexts.get(0);
+					}
+					result = result.mergeSpawnedContexts(contexts);
+				}
+				return result;
 			}
-
+			
 			@Override
 			public Xtext2EcoreInterpretationContext caseAssignment(Assignment object) {
 				try {
@@ -398,20 +408,13 @@ public class Xtext2EcoreTransformer {
 
 			@Override
 			public Xtext2EcoreInterpretationContext caseGroup(Group object) {
-				return deriveFeatures(context.spawnContextForGroup(), object.getElements());
+				Xtext2EcoreInterpretationContext result = deriveFeatures(context.spawnContextForGroup(), object.getElements());
+				if (GrammarUtil.isOptionalCardinality(object)) {
+					result = result.mergeSpawnedContexts(Arrays.asList(context, result));
+				}
+				return result;
 			}
 			
-			@Override
-			public Xtext2EcoreInterpretationContext caseUnorderedGroup(UnorderedGroup object) {
-				List<Xtext2EcoreInterpretationContext> contexts = new ArrayList<Xtext2EcoreInterpretationContext>();
-				for (AbstractElement element : object.getElements()) {
-					contexts.add(deriveFeatures(context, element));
-				}
-				if (!GrammarUtil.isOptionalCardinality(object))
-					return context.mergeSpawnedContexts(contexts);
-				return context;
-			}
-
 			@Override
 			public Xtext2EcoreInterpretationContext caseRuleCall(RuleCall object) {
 				if (!GrammarUtil.isOptionalCardinality(object)) {
