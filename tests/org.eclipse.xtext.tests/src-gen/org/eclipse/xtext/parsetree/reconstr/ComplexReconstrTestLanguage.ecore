@@ -62,9 +62,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="x" eType="#//TrickyC" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="C2" eSuperTypes="#//TrickyC">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="y" eType="#//C1" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="y" eType="#//TrickyC" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="C3" eSuperTypes="#//TrickyC">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="z" eType="#//C2" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="z" eType="#//TrickyC" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

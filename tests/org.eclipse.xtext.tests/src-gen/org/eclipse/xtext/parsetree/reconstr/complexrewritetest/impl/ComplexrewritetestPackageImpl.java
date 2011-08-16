@@ -760,10 +760,10 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
     initEReference(getC1_X(), this.getTrickyC(), null, "x", null, 0, 1, org.eclipse.xtext.parsetree.reconstr.complexrewritetest.C1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(c2EClass, org.eclipse.xtext.parsetree.reconstr.complexrewritetest.C2.class, "C2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getC2_Y(), this.getC1(), null, "y", null, 0, 1, org.eclipse.xtext.parsetree.reconstr.complexrewritetest.C2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getC2_Y(), this.getTrickyC(), null, "y", null, 0, 1, org.eclipse.xtext.parsetree.reconstr.complexrewritetest.C2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(c3EClass, org.eclipse.xtext.parsetree.reconstr.complexrewritetest.C3.class, "C3", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getC3_Z(), this.getC2(), null, "z", null, 0, 1, org.eclipse.xtext.parsetree.reconstr.complexrewritetest.C3.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getC3_Z(), this.getTrickyC(), null, "z", null, 0, 1, org.eclipse.xtext.parsetree.reconstr.complexrewritetest.C3.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

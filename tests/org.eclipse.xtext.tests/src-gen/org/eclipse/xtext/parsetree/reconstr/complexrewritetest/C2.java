@@ -33,12 +33,12 @@ public interface C2 extends TrickyC
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Y</em>' containment reference.
-   * @see #setY(C1)
+   * @see #setY(TrickyC)
    * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.ComplexrewritetestPackage#getC2_Y()
    * @model containment="true"
    * @generated
    */
-  C1 getY();
+  TrickyC getY();
 
   /**
    * Sets the value of the '{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.C2#getY <em>Y</em>}' containment reference.
@@ -48,6 +48,6 @@ public interface C2 extends TrickyC
    * @see #getY()
    * @generated
    */
-  void setY(C1 value);
+  void setY(TrickyC value);
 
 } // C2
