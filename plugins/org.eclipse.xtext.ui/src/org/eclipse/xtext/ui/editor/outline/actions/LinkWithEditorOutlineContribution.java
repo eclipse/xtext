@@ -53,6 +53,7 @@ public class LinkWithEditorOutlineContribution extends AbstractToggleOutlineCont
 		super.register(outlinePage);
 		OutlineWithEditorLinker outlineWithEditorLinker = outlineWithEditorLinkerProvider.get();
 		outlineWithEditorLinker.activate(outlinePage);
+		outlineWithEditorLinker.setLinkingEnabled(isPropertySet());
 		getPreferenceStoreAccess().getPreferenceStore().addPropertyChangeListener(outlineWithEditorLinker);
 		page2linker.put(outlinePage, outlineWithEditorLinker);
 	}
