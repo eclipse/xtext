@@ -41,7 +41,7 @@ public class PresentationDamager implements IPresentationDamager {
 		XtextDocument document = (XtextDocument) e.getDocument();
 		IRegion lastDamage = document.getLastDamage();
 		// check whether this is just a presentation invalidation not based on a real document change
-		if (!isEventMatchingLastDamage(e, lastDamage)) {
+		if (lastDamage == null || !isEventMatchingLastDamage(e, lastDamage)) {
 			return computeInterSection(partition, e, document);
 		}
 		
