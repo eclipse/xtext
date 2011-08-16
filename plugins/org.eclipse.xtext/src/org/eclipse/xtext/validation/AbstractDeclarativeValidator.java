@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.util.Exceptions;
 import org.eclipse.xtext.util.SimpleCache;
 
 import com.google.common.base.Function;
@@ -121,7 +122,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 					Throwable targetException = e.getTargetException();
 					if (!(targetException instanceof GuardException)
 							&& !(targetException instanceof NullPointerException))
-						throw new RuntimeException(targetException);
+						Exceptions.throwUncheckedException(targetException);
 				}
 			}
 			finally {
