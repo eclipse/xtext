@@ -10,6 +10,7 @@ import org.eclipse.xtext.util.Exceptions;
 
 import com.google.common.base.Function;
 import com.google.common.collect.HashMultiset;
+import com.google.common.collect.LinkedHashMultiset;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multiset;
 
@@ -32,6 +33,11 @@ public abstract class AbstractIterableExpectationValidator implements ITestExpec
 		@Override
 		public int hashCode() {
 			return normalized.hashCode();
+		}
+
+		@Override
+		public String toString() {
+			return normalized;
 		}
 
 	}
@@ -61,7 +67,7 @@ public abstract class AbstractIterableExpectationValidator implements ITestExpec
 	protected List<Item> escape(List<String> items) {
 		List<Item> result = Lists.newArrayList();
 		for (String item : items)
-			result.add(new Item(normalize(item), escape(item)));
+			result.add(createItem(normalize(item), escape(item)));
 		return result;
 	}
 
@@ -97,15 +103,15 @@ public abstract class AbstractIterableExpectationValidator implements ITestExpec
 
 	protected List<Item> sort(List<Item> ordered, List<Item> items) {
 		List<Item> result = Lists.newArrayList();
-		Multiset<Item> unsorted = HashMultiset.create(items);
+		Multiset<Item> unsorted = LinkedHashMultiset.create(items);
 		for (Item i : ordered) {
 			if (unsorted.contains(i)) {
-				result.add(new Item(i.normalized, i.escaped));
+				result.add(createItem(i.normalized, i.escaped));
 				unsorted.remove(i);
 			}
 		}
 		for (Item i : unsorted)
-			result.add(new Item(i.normalized, i.escaped));
+			result.add(createItem(i.normalized, i.escaped));
 		return result;
 	}
 
@@ -136,6 +142,7 @@ public abstract class AbstractIterableExpectationValidator implements ITestExpec
 					if (c == separator) {
 						result.add(item.toString());
 						item = new StringBuilder();
+						ws = new StringBuilder();
 						continue;
 					} else if (Character.isWhitespace(c)) {
 						ws.append(c);
@@ -163,9 +170,11 @@ public abstract class AbstractIterableExpectationValidator implements ITestExpec
 						break;
 				}
 			}
-			if (ws.length() > 0 && item.length() > 0) {
-				item.append(ws);
-				ws = new StringBuilder();
+			if (ws.length() > 0) {
+				if (item.length() > 0)
+					item.append(ws);
+				else
+					ws = new StringBuilder();
 			}
 			item.append(c);
 		}

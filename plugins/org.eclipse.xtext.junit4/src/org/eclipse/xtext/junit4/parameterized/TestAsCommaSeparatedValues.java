@@ -36,19 +36,21 @@ public @interface TestAsCommaSeparatedValues {
 				super(normalized, escaped);
 			}
 
-			protected Item predecessor;
+			protected ItemWithPred predecessor;
 			protected boolean suppressWrapBefore = false;
 			protected boolean wrapBefore = false;
 
 			public int charsInLine() {
 				if (wrapBefore || predecessor == null)
 					return escaped.length();
-				return charsInLine() + 2 + escaped.length();
+				return predecessor.charsInLine() + 2 + escaped.length();
 			}
 
 			@Override
 			public boolean equals(Object obj) {
-				return normalized.equals(obj);
+				if (obj instanceof Item)
+					return normalized.equals(((Item) obj).normalized);
+				return false;
 			}
 
 			@Override
@@ -60,6 +62,17 @@ public @interface TestAsCommaSeparatedValues {
 				if (wrapBefore || predecessor == null)
 					return 1;
 				return itemsInLine() + 1;
+			}
+
+			@Override
+			public String toString() {
+				StringBuilder result = new StringBuilder();
+				if (suppressWrapBefore)
+					result.append("!");
+				if (wrapBefore)
+					result.append("\\n");
+				result.append(normalized);
+				return result.toString();
 			}
 		}
 
@@ -98,6 +111,7 @@ public @interface TestAsCommaSeparatedValues {
 
 		protected void suppressWrap(List<Item> wrapped, List<Item> items) {
 			int next = 0;
+			boolean wrap = false;
 			for (Item w : wrapped) {
 				int found = -1;
 				for (int i = next; i < items.size(); i++)
@@ -105,10 +119,16 @@ public @interface TestAsCommaSeparatedValues {
 						found = i;
 						break;
 					}
-				if (!((ItemWithPred) w).wrapBefore)
-					for (int i = next; i <= found; i++)
-						((ItemWithPred) items.get(i)).suppressWrapBefore = true;
-				next = found + 1;
+				wrap |= ((ItemWithPred) w).wrapBefore;
+				if (found >= 0) {
+					if (!wrap)
+						for (int i = next; i <= found; i++)
+							((ItemWithPred) items.get(i)).suppressWrapBefore = true;
+					else
+						((ItemWithPred) items.get(found)).wrapBefore = true;
+					wrap = false;
+					next = found + 1;
+				}
 			}
 		}
 
@@ -142,7 +162,7 @@ public @interface TestAsCommaSeparatedValues {
 			}
 			for (Item item : items) {
 				ItemWithPred i = (ItemWithPred) item;
-				if (!i.suppressWrapBefore) {
+				if (!i.suppressWrapBefore && !i.wrapBefore) {
 					boolean itemsEx = restrictItems && i.itemsInLine() > cfg.maxItemsPerLine();
 					boolean widthEx = restrictWidth && i.charsInLine() > cfg.maxLineWidth();
 					i.wrapBefore = itemsEx || widthEx;
