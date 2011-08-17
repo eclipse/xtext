@@ -7,20 +7,24 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.featurecalls;
 
-import static com.google.common.collect.Lists.*;
-
-import java.util.List;
+import java.util.Collection;
+import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
+import org.eclipse.xtext.common.types.util.TypeArgumentContext;
+import org.eclipse.xtext.util.IResourceScopeCache;
+import org.eclipse.xtext.util.Tuples;
 
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -29,29 +33,82 @@ import com.google.inject.Inject;
 public abstract class AbstractStaticMethodsFeatureForTypeProvider extends AbstractFeaturesForTypeProvider {
 
 	@Inject
-	private XbaseTypeConformanceComputer conformanceComputer;
+	protected IResourceScopeCache cache;
 	
-	@Inject
-	private TypeReferences typeRefs;
-	
-	private Resource context;
+	protected Resource context;
 
-	public Iterable<? extends JvmFeature> getFeaturesForType(final JvmTypeReference reference) {
-		final Iterable<String> staticTypeNames = getVisibleTypesContainingStaticMethods(reference);
-		List<JvmOperation> result = newArrayList();
-		for (String staticTypeName : staticTypeNames) {
-			JvmTypeReference staticType = typeRefs.getTypeForName(staticTypeName, context);
-			if (staticType != null) {
-				final JvmDeclaredType type = (JvmDeclaredType) staticType.getType();
-				Iterable<JvmOperation> operations = type.getDeclaredOperations();
-				for(JvmOperation operation: operations) {
-					if (isMatchingExtension(reference, operation)) {
-						result.add(operation);
+	public Iterable<JvmFeature> getFeaturesByName(String name, JvmTypeReference declarator,
+			TypeArgumentContext context, Iterable<JvmTypeReference> hierarchy) {
+		Set<JvmFeature> result = Sets.newLinkedHashSet();
+		if (declarator != null) {
+			collectFeatures(name, hierarchy, result);	
+		} else {
+			collectFeatures(name, null, result);
+		}
+		return result;
+	}
+	
+	public final Iterable<JvmFeature> getAllFeatures(JvmTypeReference declarator, TypeArgumentContext context,
+			Iterable<JvmTypeReference> hierarchy) {
+		Set<JvmFeature> result = Sets.newLinkedHashSet();
+		if (declarator != null) {
+			collectFeatures(hierarchy, result);	
+		} else {
+			collectFeatures(null, result);
+		}
+		return result;
+	}
+
+	protected void collectFeatures(Iterable<JvmTypeReference> hierarchy, Collection<JvmFeature> result) {
+		final Map<JvmTypeReference, Collection<String>> staticTypeNames = getVisibleTypesContainingStaticMethods(hierarchy);
+		for (final Map.Entry<JvmTypeReference, Collection<String>> e : staticTypeNames.entrySet()) {
+			for(final String staticTypeName: e.getValue()) {
+				JvmTypeReference staticType = cache.get(Tuples.create(this, staticTypeName), context, new Provider<JvmTypeReference>() {
+					public JvmTypeReference get() {
+						return getTypeReferences().getTypeForName(staticTypeName, context);
+					}
+				}) ;
+				if (staticType != null) {
+					JvmType rawType = getTypeReferences().getRawType(staticType);
+					if (rawType instanceof JvmDeclaredType) {
+						Iterable<JvmFeature> features = ((JvmDeclaredType) rawType).getAllFeatures();
+						for(JvmFeature feature: features) {
+							if (feature instanceof JvmOperation) {
+								if (isMatchingExtension(e.getKey(), (JvmOperation) feature)) {
+									result.add(feature);
+								}
+							}
+						}
 					}
 				}
 			}
 		}
-		return result;
+	}
+	
+	protected void collectFeatures(String name, Iterable<JvmTypeReference> hierarchy, Collection<JvmFeature> result) {
+		final Map<JvmTypeReference, Collection<String>> staticTypeNames = getVisibleTypesContainingStaticMethods(hierarchy);
+		for (final Map.Entry<JvmTypeReference, Collection<String>> e : staticTypeNames.entrySet()) {
+			for(final String staticTypeName: e.getValue()) {
+				JvmTypeReference staticType = cache.get(Tuples.create(this, staticTypeName), context, new Provider<JvmTypeReference>() {
+					public JvmTypeReference get() {
+						return getTypeReferences().getTypeForName(staticTypeName, context);
+					}
+				}) ;
+				if (staticType != null) {
+					JvmType rawType = getTypeReferences().getRawType(staticType);
+					if (rawType instanceof JvmDeclaredType) {
+						Iterable<JvmFeature> features = ((JvmDeclaredType) rawType).findAllFeaturesByName(name);
+						for(JvmFeature feature: features) {
+							if (feature instanceof JvmOperation) {
+								if (isMatchingExtension(e.getKey(), (JvmOperation) feature)) {
+									result.add(feature);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 	
 	protected boolean isMatchingExtension(JvmTypeReference expectedParameterTypeReference, JvmOperation operation) {
@@ -66,7 +123,7 @@ public abstract class AbstractStaticMethodsFeatureForTypeProvider extends Abstra
 		return false;
 	}
 
-	protected abstract Iterable<String> getVisibleTypesContainingStaticMethods(JvmTypeReference reference);
+	protected abstract Map<JvmTypeReference, Collection<String>> getVisibleTypesContainingStaticMethods(Iterable<JvmTypeReference> hierarchy);
 
 	public void setContext(Resource context) {
 		this.context = context;
@@ -74,14 +131,6 @@ public abstract class AbstractStaticMethodsFeatureForTypeProvider extends Abstra
 	
 	protected Resource getContext() {
 		return context;
-	}
-	
-	protected XbaseTypeConformanceComputer getConformanceComputer() {
-		return conformanceComputer;
-	}
-	
-	protected TypeReferences getTypeRefs() {
-		return typeRefs;
 	}
 	
 	private boolean isExtensionProvider = false;

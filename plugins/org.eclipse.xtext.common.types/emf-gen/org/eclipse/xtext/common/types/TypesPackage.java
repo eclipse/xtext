@@ -1825,7 +1825,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.0
 	 */
 	int JVM_OPERATION__DEFAULT_VALUE = JVM_EXECUTABLE_FEATURE_COUNT + 4;
 
@@ -3137,7 +3136,6 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.JvmOperation#getDefaultValue()
 	 * @see #getJvmOperation()
 	 * @generated
-	 * @since 2.0
 	 */
 	EReference getJvmOperation_DefaultValue();
 
@@ -4145,7 +4143,6 @@ public interface TypesPackage extends EPackage
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
-		 * @since 2.0
 		 */
 		EReference JVM_OPERATION__DEFAULT_VALUE = eINSTANCE.getJvmOperation_DefaultValue();
 

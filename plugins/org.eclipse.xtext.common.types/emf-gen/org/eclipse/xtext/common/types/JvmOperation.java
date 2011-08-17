@@ -134,13 +134,12 @@ public interface JvmOperation extends JvmExecutable
 
 	/**
 	 * Returns the value of the '<em><b>Default Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * <p>Returns the default value for the annotation member represented by this JvmOperation instance.</p>
 	 * <p>Returns null if no default is associated with the member, or if the operation does not represent a declared member of an annotation type.</p>
 	 * <!-- end-model-doc -->
-	 * <!-- begin-user-doc -->
-	 * @since 2.0
-	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Default Value</em>' containment reference.
 	 * @see #setDefaultValue(JvmAnnotationValue)
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmOperation_DefaultValue()
@@ -152,7 +151,6 @@ public interface JvmOperation extends JvmExecutable
 	/**
 	 * Sets the value of the '{@link org.eclipse.xtext.common.types.JvmOperation#getDefaultValue <em>Default Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
-	 * @since 2.0
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Default Value</em>' containment reference.
 	 * @see #getDefaultValue()

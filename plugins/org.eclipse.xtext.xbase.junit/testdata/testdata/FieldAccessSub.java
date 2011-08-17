@@ -24,4 +24,7 @@ public class FieldAccessSub extends FieldAccess {
 	public String privateField() {
 		return "privateField()";
 	}
+	
+	@SuppressWarnings("unused")
+	private String shadowedByPrivateField;
 }

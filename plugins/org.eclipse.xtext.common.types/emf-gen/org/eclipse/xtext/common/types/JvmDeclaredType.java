@@ -29,6 +29,7 @@ import org.eclipse.emf.common.util.EList;
  * @see org.eclipse.xtext.common.types.TypesPackage#getJvmDeclaredType()
  * @model abstract="true"
  * @generated
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface JvmDeclaredType extends JvmMember, JvmComponentType
 {
@@ -185,5 +186,31 @@ public interface JvmDeclaredType extends JvmMember, JvmComponentType
 	 * @generated
 	 */
 	Iterable<JvmField> getDeclaredFields();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>Returns all the fields and operations with the given simple name.</p>
+	 * <p>Overridden features will not be returned.</p>
+	 * <!-- end-model-doc -->
+	 * @model dataType="org.eclipse.xtext.common.types.Iterable<org.eclipse.xtext.common.types.JvmFeature>" required="true"
+	 * @generated
+	 * @since 2.1
+	 */
+	Iterable<JvmFeature> findAllFeaturesByName(String simpleName);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>Returns all the fields and operations of this type.</p>
+	 * <p>Overridden features will not be returned.</p>
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" dataType="org.eclipse.xtext.common.types.Iterable<org.eclipse.xtext.common.types.JvmFeature>" required="true"
+	 * @generated
+	 * @since 2.1
+	 */
+	Iterable<JvmFeature> getAllFeatures();
 
 } // JvmDeclaredType

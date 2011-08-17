@@ -1814,6 +1814,19 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
 
+		op = addEOperation(jvmDeclaredTypeEClass, null, "findAllFeaturesByName", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "simpleName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(this.getIterable());
+		g2 = createEGenericType(this.getJvmFeature());
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
+
+		op = addEOperation(jvmDeclaredTypeEClass, null, "getAllFeatures", 1, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(this.getIterable());
+		g2 = createEGenericType(this.getJvmFeature());
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
+
 		initEClass(jvmTypeParameterEClass, JvmTypeParameter.class, "JvmTypeParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getJvmTypeParameter_Name(), ecorePackage.getEString(), "name", null, 0, 1, JvmTypeParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getJvmTypeParameter_Declarator(), this.getJvmTypeParameterDeclarator(), this.getJvmTypeParameterDeclarator_TypeParameters(), "declarator", null, 0, 1, JvmTypeParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2039,6 +2052,20 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		   new String[] 
 		   {
 			 "documentation", "<p>The qualified name of a JvmIdentifiableElement is a textual representation of the element.</p>\n<p>The name does not contain any information about type parameters. Inner classes are delimited by means of \nthe given \'innerClassDelimiter\'</p>\n<p>Examples for qualified names with a \'$\' delimiter are:</p>\n<ul>\n<li>java.lang.String for class java.lang.String</li>\n<li>java.util.Map$Entry for class java.util.Map$Entry</li>\n<li>java.lang.String.charAt for method java.lang.String.charAt(int)</li>\n<li>java.lang.String.offset for field java.lang.String.offset</li>\n<li>java.lang.String for a constructor that is identified by java.lang.String.String(java.lang.String)</li>\n</ul>"
+		   });		
+		addAnnotation
+		  (jvmDeclaredTypeEClass.getEOperations().get(2), 
+		   source, 
+		   new String[] 
+		   {
+			 "documentation", "<p>Returns all the fields and operations with the given simple name.</p>\n<p>Overridden features will not be returned.</p>"
+		   });		
+		addAnnotation
+		  (jvmDeclaredTypeEClass.getEOperations().get(3), 
+		   source, 
+		   new String[] 
+		   {
+			 "documentation", "<p>Returns all the fields and operations of this type.</p>\n<p>Overridden features will not be returned.</p>"
 		   });		
 		addAnnotation
 		  (jvmTypeConstraintEClass.getEOperations().get(0), 

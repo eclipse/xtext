@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.featurecalls;
 
+import java.util.Map;
+
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -14,17 +16,37 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.common.types.util.VisibilityService;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XExpression;
 
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Sebastian Zarnekow
  */
 public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescriptionProvider, IFeaturesForTypeProvider {
 	
+	protected static class ShadowingAwareAcceptor implements IAcceptor<JvmFeatureDescription> {
+		private final Map<String, IEObjectDescription> descriptions;
+
+		protected ShadowingAwareAcceptor(Map<String, IEObjectDescription> descriptions) {
+			this.descriptions = descriptions;
+		}
+
+		public void accept(JvmFeatureDescription t) {
+			String key = t.getKey();
+			IEObjectDescription old = descriptions.put(key, t);
+			// optimistic - conflicts are expected to be rare
+			if (old != null) {
+				descriptions.put(key, old);
+			}
+		}
+	}
+
 	@Inject
 	protected VisibilityService visibilityService;
 	
@@ -38,12 +60,52 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 	@Inject
 	protected JvmFeatureSignatureProvider signatureProvider = new JvmFeatureSignatureProvider();
 	
-	public void setFeaturesForTypeProvider(IFeaturesForTypeProvider featuresForTypeProvider) {
-		this.featuresForTypeProvider = featuresForTypeProvider;
+	public final Iterable<IEObjectDescription> getDescriptionsByName(
+			String name, IFeaturesForTypeProvider featureProvider, 
+			JvmTypeReference typeReference,
+			TypeArgumentContext context, Iterable<JvmTypeReference> hierarchy) {
+		final Map<String, IEObjectDescription> descriptions = Maps.newLinkedHashMap();
+		IAcceptor<JvmFeatureDescription> acceptor = new ShadowingAwareAcceptor(descriptions);
+		doCollectDescriptions(name, featureProvider, typeReference, context, hierarchy, acceptor);
+		return descriptions.values();
 	}
 	
-	public Iterable<? extends JvmFeature> getFeaturesForType(JvmTypeReference declType) {
-		return featuresForTypeProvider.getFeaturesForType(declType);
+	public final Iterable<IEObjectDescription> getAllDescriptions(IFeaturesForTypeProvider featureProvider,
+			JvmTypeReference typeReference, TypeArgumentContext context, Iterable<JvmTypeReference> hierarchy) {
+		final Map<String, IEObjectDescription> descriptions = Maps.newLinkedHashMap();
+		IAcceptor<JvmFeatureDescription> acceptor = new ShadowingAwareAcceptor(descriptions);
+		doCollectDescriptions(featureProvider, typeReference, context, hierarchy, acceptor);
+		return descriptions.values();
+	}
+
+	protected void doCollectDescriptions(String name, IFeaturesForTypeProvider featureProvider, JvmTypeReference typeReference, TypeArgumentContext context,
+			Iterable<JvmTypeReference> hierarchy, IAcceptor<JvmFeatureDescription> acceptor) {
+		Iterable<JvmFeature> features = featureProvider.getFeaturesByName(name, typeReference, context, hierarchy);
+		for (JvmFeature jvmFeature : features) {
+			addFeatureDescriptions(jvmFeature, context, acceptor);
+		}
+	}
+	
+	protected void doCollectDescriptions(IFeaturesForTypeProvider featureProvider, JvmTypeReference typeReference, TypeArgumentContext context,
+			Iterable<JvmTypeReference> hierarchy, IAcceptor<JvmFeatureDescription> acceptor) {
+		Iterable<JvmFeature> features = featureProvider.getAllFeatures(typeReference, context, hierarchy);
+		for (JvmFeature jvmFeature : features) {
+			addFeatureDescriptions(jvmFeature, context, acceptor);
+		}
+	}
+	
+	public final Iterable<JvmFeature> getFeaturesByName(String name, JvmTypeReference declarator,
+			TypeArgumentContext context, Iterable<JvmTypeReference> hierarchy) {
+		return featuresForTypeProvider.getFeaturesByName(name, declarator, context, hierarchy);
+	}
+	
+	public Iterable<JvmFeature> getAllFeatures(JvmTypeReference typeReference, TypeArgumentContext context,
+			Iterable<JvmTypeReference> hierarchy) {
+		return featuresForTypeProvider.getAllFeatures(typeReference, context, hierarchy);
+	}
+	
+	public void setFeaturesForTypeProvider(IFeaturesForTypeProvider featuresForTypeProvider) {
+		this.featuresForTypeProvider = featuresForTypeProvider;
 	}
 	
 	protected JvmDeclaredType contextType;

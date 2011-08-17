@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.scoping.featurecalls;
 
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 
 import com.google.inject.ImplementedBy;
 
@@ -18,10 +19,14 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(DefaultFeaturesForTypeProvider.class)
 public interface IFeaturesForTypeProvider {
 	
-	/**
-	 * provides the features for a given type
-	 */
-	Iterable<? extends JvmFeature> getFeaturesForType(JvmTypeReference type);
-	
 	boolean isExtensionProvider();
+
+	// TODO use synonymes/synonym hierarchy in addition to hierarchy
+	Iterable<JvmFeature> getFeaturesByName(
+			String name, JvmTypeReference declarator,
+			TypeArgumentContext context, Iterable<JvmTypeReference> hierarchy);
+
+	// TODO use synonymes/synonym hierarchy in addition to hierarchy
+	Iterable<JvmFeature> getAllFeatures(JvmTypeReference typeReference, TypeArgumentContext context,
+			Iterable<JvmTypeReference> hierarchy);
 }

@@ -101,7 +101,6 @@ public class JvmMultiTypeReferenceImpl extends JvmTypeReferenceImplCustom implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public JvmType getType()
 	{
 		if (type != null && type.eIsProxy())

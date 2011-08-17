@@ -7,13 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.featurecalls;
 
+import java.lang.reflect.Method;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.jdt.core.Flags;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.Primitives;
-import org.eclipse.xtext.common.types.util.SuperTypeCollector;
+import org.eclipse.xtext.util.ReflectionUtil;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -27,64 +31,130 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicates;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
+import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
+import com.google.inject.internal.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Sebastian Zarnekow
  */
 public class StaticMethodsFeatureForTypeProvider extends AbstractStaticMethodsFeatureForTypeProvider {
 
-	private static final Map<String, String> extensionClasses = Maps.newHashMap();
+	@Singleton
+	public static class ExtensionClassNameProvider {
 	
-	static {
-		extensionClasses.put(Boolean.class.getCanonicalName(), BooleanExtensions.class.getCanonicalName());
-		extensionClasses.put(String.class.getCanonicalName(), StringExtensions.class.getCanonicalName());
-		extensionClasses.put(Integer.class.getCanonicalName(), IntegerExtensions.class.getCanonicalName());
-		extensionClasses.put(Comparable.class.getCanonicalName(), ComparableExtensions.class.getCanonicalName());
-		extensionClasses.put(Object.class.getCanonicalName(), ObjectExtensions.class.getCanonicalName());
-		extensionClasses.put(List.class.getCanonicalName(), ListExtensions.class.getCanonicalName());
-		extensionClasses.put(Collection.class.getCanonicalName(), CollectionExtensions.class.getCanonicalName());
-		extensionClasses.put(Map.class.getCanonicalName(), CollectionExtensions.class.getCanonicalName());
-		extensionClasses.put(Iterable.class.getCanonicalName(), IterableExtensions.class.getCanonicalName());
-		extensionClasses.put(Functions.Function0.class.getName(), FunctionExtensions.class.getCanonicalName());
-		extensionClasses.put(Functions.Function1.class.getName(), FunctionExtensions.class.getCanonicalName());
-		extensionClasses.put(Functions.Function2.class.getName(), FunctionExtensions.class.getCanonicalName());
-		extensionClasses.put(Functions.Function3.class.getName(), FunctionExtensions.class.getCanonicalName());
-		extensionClasses.put(Functions.Function4.class.getName(), FunctionExtensions.class.getCanonicalName());
-		extensionClasses.put(Functions.Function5.class.getName(), FunctionExtensions.class.getCanonicalName());
-		extensionClasses.put(Functions.Function6.class.getName(), FunctionExtensions.class.getCanonicalName());
+		private final Collection<String> literalClassNames;
+		private final Map<String, Collection<String>> extensionClassNames;
+		
+		public ExtensionClassNameProvider() {
+			this.literalClassNames = computeLiteralClassNames();
+			this.extensionClassNames = computeExtensionClassNames();
+		}
+
+		protected Map<String, Collection<String>> computeExtensionClassNames() {
+			return denormalize(simpleComputeExtensionClasses());
+		}
+		
+		protected Map<String, Collection<String>> denormalize(Map<Class<?>, Class<?>> classMapping) {
+			Multimap<String, String> result = LinkedHashMultimap.create();
+			for(Map.Entry<Class<?>, Class<?>> entry: classMapping.entrySet()) {
+				Class<?> key = entry.getKey();
+				Class<?> keyObjectType = ReflectionUtil.getObjectType(key);
+				Class<?> value = entry.getValue();
+				for(Method method: value.getDeclaredMethods()) {
+					if (Flags.isStatic(method.getModifiers()) && method.getParameterTypes().length > 0) {
+						Class<?> paramType = method.getParameterTypes()[0];
+						Class<?> paramObjectType = ReflectionUtil.getObjectType(paramType);		
+						if (keyObjectType.isAssignableFrom(paramObjectType)) {
+							result.put(paramObjectType.getCanonicalName(), value.getCanonicalName());
+						}
+					}
+				}
+			}
+			return ImmutableMultimap.copyOf(result).asMap();
+		}
+
+		protected Collection<String> getLiteralClassNames() {
+			return literalClassNames;
+		}
+		
+		protected Map<String, Collection<String>> getExtensionClassNames() {
+			return extensionClassNames;
+		}
+		
+		protected Collection<String> computeLiteralClassNames() {
+			return Lists.newArrayList(
+					CollectionLiterals.class.getName(),
+					InputOutput.class.getName()
+			);
+		}
+		
+		protected Map<Class<?>, Class<?>> simpleComputeExtensionClasses() {
+			Map<Class<?>, Class<?>> result = Maps.newHashMap();
+			result.put(Boolean.class, BooleanExtensions.class);
+			result.put(String.class, StringExtensions.class);
+			result.put(Integer.class, IntegerExtensions.class);
+			result.put(Comparable.class, ComparableExtensions.class);
+			result.put(Object.class, ObjectExtensions.class);
+			result.put(List.class, ListExtensions.class);
+			result.put(Collection.class, CollectionExtensions.class);
+			result.put(Map.class, CollectionExtensions.class);
+			result.put(Iterable.class, IterableExtensions.class);
+			result.put(Functions.Function0.class, FunctionExtensions.class);
+			result.put(Functions.Function1.class, FunctionExtensions.class);
+			result.put(Functions.Function2.class, FunctionExtensions.class);
+			result.put(Functions.Function3.class, FunctionExtensions.class);
+			result.put(Functions.Function4.class, FunctionExtensions.class);
+			result.put(Functions.Function5.class, FunctionExtensions.class);
+			result.put(Functions.Function6.class, FunctionExtensions.class);
+			return result;
+		}
 	}
 
-	private static final Collection<String> literalClasses = ImmutableList.of(
-			CollectionLiterals.class.getName(),
-			InputOutput.class.getName()
-	);
-	
-	@Inject
-	private SuperTypeCollector superTypeCollector;
-	
 	@Inject
 	private Primitives primitives;
 	
+	@Inject
+	private ExtensionClassNameProvider extensionClassProvider;
+	
 	@Override
-	protected Iterable<String> getVisibleTypesContainingStaticMethods(JvmTypeReference reference) {
-		if (reference == null || reference.getType() == null) {
-			return literalClasses;
+	protected Map<JvmTypeReference, Collection<String>> getVisibleTypesContainingStaticMethods(Iterable<JvmTypeReference> hierarchy) {
+		if (hierarchy == null) {
+			return Collections.singletonMap(null, getLiteralClassNames());
 		}
-		reference = primitives.asWrapperTypeIfPrimitive(reference);
-		List<String> typeNames = Lists.newArrayList(reference.getType().getIdentifier());
-		typeNames.addAll(superTypeCollector.collectSuperTypeNames(reference.getType()));
-		Iterable<String> result = Iterables.filter(Iterables.transform(typeNames, new Function<String, String>() {
-			public String apply(String from) {
-				return extensionClasses.get(from);
+		Iterator<JvmTypeReference> iterator = hierarchy.iterator();
+		if (!iterator.hasNext())
+			return Collections.singletonMap(null, getLiteralClassNames());
+		Map<JvmTypeReference, Collection<String>> result = Maps.newLinkedHashMap();
+		while(iterator.hasNext()) {
+			JvmTypeReference reference = iterator.next();
+			if (reference.getType() != null) {
+				JvmTypeReference wrapped = primitives.asWrapperTypeIfPrimitive(reference);
+				String typeName = wrapped.getType().getQualifiedName('.');
+				Collection<String> extensionTypes = getExtensionClassNames().get(typeName);
+				if (extensionTypes != null) {
+					result.put(reference, extensionTypes);
+				}
+			} else {
+				if (result.isEmpty() && !iterator.hasNext()) {
+					return Collections.singletonMap(null, getLiteralClassNames()); 
+				}
 			}
-		}), Predicates.notNull());
+		}
 		return result;
 	}
+
+	protected Collection<String> getLiteralClassNames() {
+		return extensionClassProvider.getLiteralClassNames();
+	}
+	
+	protected Map<String, Collection<String>> getExtensionClassNames() {
+		return extensionClassProvider.getExtensionClassNames();
+	}
+	
 }

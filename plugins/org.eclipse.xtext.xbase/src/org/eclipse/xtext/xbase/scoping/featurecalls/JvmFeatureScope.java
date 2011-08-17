@@ -7,8 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.featurecalls;
 
+import static com.google.common.collect.Iterables.*;
+
 import java.util.Collections;
 
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
@@ -60,13 +63,24 @@ public class JvmFeatureScope extends SimpleScope {
 	 */
 	@Override
 	protected boolean isShadowed(IEObjectDescription fromParent) {
-		boolean result = super.isShadowed(fromParent);
+		final Iterable<IEObjectDescription> localElements = getLocalElementsByName(fromParent.getName());
+		boolean result = false;
+		String parentKey = getShadowingKey(fromParent);
+		for(IEObjectDescription local: localElements) {
+			String localKey = getShadowingKey(local);
+			if (parentKey.equals(localKey))
+				return true;
+		}
 		if (result == false) {
 			String parentShadowingKey = getShadowingKey(fromParent);
 			int assignmentIndicator = parentShadowingKey.indexOf("=(");
 			if (assignmentIndicator >= 0) { // sugared assignment
 				String shortShadowingKey = parentShadowingKey.substring(0, assignmentIndicator);
-				result = shadowingIndex.contains(shortShadowingKey);
+				for(IEObjectDescription local: localElements) {
+					String localKey = getShadowingKey(local);
+					if (shortShadowingKey.equals(localKey))
+						return true;
+				}
 			}
 		}
 		return result;

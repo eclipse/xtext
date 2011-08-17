@@ -69,7 +69,6 @@ public class JvmGenericArrayTypeReferenceImpl extends JvmTypeReferenceImplCustom
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public JvmArrayType getType()
 	{
 		if (type != null && type.eIsProxy())

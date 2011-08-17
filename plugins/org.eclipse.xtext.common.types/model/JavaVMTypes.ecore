@@ -51,6 +51,23 @@
         <eTypeArguments eClassifier="#//JvmField"/>
       </eGenericType>
     </eOperations>
+    <eOperations name="findAllFeaturesByName" lowerBound="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>Returns all the fields and operations with the given simple name.&lt;/p>&#xA;&lt;p>Overridden features will not be returned.&lt;/p>"/>
+      </eAnnotations>
+      <eGenericType eClassifier="#//Iterable">
+        <eTypeArguments eClassifier="#//JvmFeature"/>
+      </eGenericType>
+      <eParameters name="simpleName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="getAllFeatures" lowerBound="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>Returns all the fields and operations of this type.&lt;/p>&#xA;&lt;p>Overridden features will not be returned.&lt;/p>"/>
+      </eAnnotations>
+      <eGenericType eClassifier="#//Iterable">
+        <eTypeArguments eClassifier="#//JvmFeature"/>
+      </eGenericType>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="superTypes" upperBound="-1"
         eType="#//JvmTypeReference" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
