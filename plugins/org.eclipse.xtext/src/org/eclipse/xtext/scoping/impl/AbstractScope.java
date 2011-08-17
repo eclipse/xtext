@@ -218,8 +218,8 @@ public abstract class AbstractScope implements IScope {
 	public String toString() {
 		String parentString = null;
 		try {
-			final IScope parent2 = getParent();
-			parentString = parent2.toString();
+			final IScope parent = getParent();
+			parentString = parent.toString();
 		} catch (Throwable t) {
 			parentString = t.getClass().getSimpleName() + " : " + t.getMessage();
 		}
