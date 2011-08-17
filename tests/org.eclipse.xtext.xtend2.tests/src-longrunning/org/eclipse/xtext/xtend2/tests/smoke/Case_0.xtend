@@ -2,11 +2,11 @@ package org.eclipse.xtext.xtend2.tests.smoke
 
 class Case_0 {
 
-	String foo(String a, String b) {
+	def String foo(String a, String b) {
 		if (isUpper(a)) {
 			another(a,b+'holla')
 		} else {
-			val x = a;
+			var x = a;
 			for (y : b.toCharArray) {
 				x = x+y
 			}
@@ -14,11 +14,11 @@ class Case_0 {
 		}
 	}
 	
-	private isUpper(String s) {
+	def isUpper(String s) {
 		s.toUpperCase == s
 	}
 		
-	private another(String x, String y) { 
+	def another(String x, String y) { 
 		y+x
 	}
 	

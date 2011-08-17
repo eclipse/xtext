@@ -1,6 +1,6 @@
 package test
 
 class Foo {
-	bar() {
+	def foo() {
 	}
 }

@@ -9,15 +9,15 @@ class Case_3 {
 	  val x = 3
 	  var y = 2
 	  {
-	    var x = y
-	    val y = 1
-	    x+y
+	    var x2 = y
+	    val y2 = 1
+	    x2+y2
 	  }
 	}
 	def testFeatureCall_03() {
 		{ 
-			var java.util.List<Character> this = ('abc'.toCharArray as Iterable<Character>).toList() 
-			this 
+			var java.util.List<Character> x = ('abc'.toCharArray as Iterable<Character>).toList() 
+			x 
 		}
 	}
 }

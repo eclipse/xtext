@@ -12,7 +12,7 @@ class Case_6 {
 	}
 	 
 	def dispatch transform(EPackage packageDecl) {
-		packageDecl.eContents.map(e|transform(e))
+		packageDecl.eContents.map(e | transform(e as EStructuralFeature))
 	}
 	
 	def dispatch transform(EStructuralFeature entity) {
