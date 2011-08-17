@@ -249,9 +249,11 @@ public class Xtend2TypeProvider extends XbaseWithAnnotationsTypeProvider {
 	protected JvmTypeReference getDeclaredOrOverriddenReturnType(XtendFunction func) {
 		if (func.getReturnType() != null)
 			return func.getReturnType();
-		JvmTypeReference overridden = overridesService.getOverriddenReturnType(func);
-		if (overridden != null)
-			return overridden;
+		if (func.isOverride()) {
+			JvmTypeReference overridden = overridesService.getOverriddenReturnType(func);
+			if (overridden != null)
+				return overridden;
+		}
 		if (func.getCreateExtensionInfo()!=null) {
 			return getType(func.getCreateExtensionInfo().getCreateExpression());
 		}
