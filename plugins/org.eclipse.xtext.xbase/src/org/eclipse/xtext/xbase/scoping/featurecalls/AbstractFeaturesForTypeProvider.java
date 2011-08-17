@@ -26,7 +26,7 @@ public abstract class AbstractFeaturesForTypeProvider implements IFeaturesForTyp
 
 	@Inject
 	private TypeReferences typeReferences;
-
+	
 	/**
 	 * Whether both {@link JvmTypeReference}s point to the same rawtyp or the second points to a type parameter where
 	 * the its upperBound is the same or a supertype of the first argument's raw type.
@@ -42,7 +42,7 @@ public abstract class AbstractFeaturesForTypeProvider implements IFeaturesForTyp
 			for (JvmTypeConstraint constraint : ((JvmTypeParameter) second.getType()).getConstraints()) {
 				if (constraint instanceof JvmUpperBound) {
 					upperBoundSeen = true;
-					if (typeConformanceComputer.isConformant(constraint.getTypeReference(), first, true))
+					if (isSameTypeOrAssignableToUpperBound(first, constraint.getTypeReference()))
 						return true;
 				}
 			}
@@ -53,5 +53,13 @@ public abstract class AbstractFeaturesForTypeProvider implements IFeaturesForTyp
 			}
 		}
 		return false;
+	}
+	
+	protected XbaseTypeConformanceComputer getTypeConformanceComputer() {
+		return typeConformanceComputer;
+	}
+	
+	protected TypeReferences getTypeReferences() {
+		return typeReferences;
 	}
 }

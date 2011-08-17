@@ -11,9 +11,11 @@ import java.beans.Introspector;
 
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -38,6 +40,21 @@ public class XFeatureCallSugarDescriptionProvider extends DefaultJvmFeatureDescr
 		this.operatorMapping = operatorMapping;
 	}
 
+	@Override
+	protected void doCollectDescriptions(String name, IFeaturesForTypeProvider featureProvider, JvmTypeReference typeReference, TypeArgumentContext context,
+			Iterable<JvmTypeReference> hierarchy, IAcceptor<JvmFeatureDescription> acceptor) {
+		super.doCollectDescriptions(name, featureProvider, typeReference, context, hierarchy, acceptor);
+		QualifiedName methodName = operatorMapping.getMethodName(QualifiedName.create(name));
+		if (methodName != null) {
+			super.doCollectDescriptions(methodName.toString(), featureProvider, typeReference, context, hierarchy, acceptor);	
+		} else {
+			String getterAlias = "get" + Strings.toFirstUpper(name);
+			super.doCollectDescriptions(getterAlias, featureProvider, typeReference, context, hierarchy, acceptor);
+			String isAlias = "is" + Strings.toFirstUpper(name);
+			super.doCollectDescriptions(isAlias, featureProvider, typeReference, context, hierarchy, acceptor);
+		}
+	}
+	
 	@Override
 	public void addFeatureDescriptions(JvmFeature feature, final TypeArgumentContext context,
 			IAcceptor<JvmFeatureDescription> acceptor) {

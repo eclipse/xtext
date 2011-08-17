@@ -7,9 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.featurecalls;
 
-import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
-import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.resource.IEObjectDescription;
 
 /**
  * The strategy interface passed to instances of {@link IJvmFeatureScopeProvider}.
@@ -18,14 +18,21 @@ import org.eclipse.xtext.util.IAcceptor;
  */
 public interface IJvmFeatureDescriptionProvider {
 	
-	/**
-	 * called for each feature in the current context type's type hierarchy.
-	 */
-	void addFeatureDescriptions(JvmFeature feature, final TypeArgumentContext context, IAcceptor<JvmFeatureDescription> acceptor);
+//	/**
+//	 * called for each feature in the current context type's type hierarchy.
+//	 */
+//	void addFeatureDescriptions(JvmFeature feature, final TypeArgumentContext context, IAcceptor<JvmFeatureDescription> acceptor);
 
 	/**
 	 * Used to name scopes created using this provider
 	 */
 	String getText();
+
+	Iterable<IEObjectDescription> getDescriptionsByName(
+			String name, IFeaturesForTypeProvider featureProvider, JvmTypeReference typeReference,
+			TypeArgumentContext context, Iterable<JvmTypeReference> hierarchy);
+
+	Iterable<IEObjectDescription> getAllDescriptions(IFeaturesForTypeProvider featureProvider,
+			JvmTypeReference typeReference, TypeArgumentContext context, Iterable<JvmTypeReference> hierarchy);
 	
 }

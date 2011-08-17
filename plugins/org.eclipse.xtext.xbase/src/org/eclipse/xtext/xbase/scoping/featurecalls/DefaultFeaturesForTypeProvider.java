@@ -7,39 +7,54 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.featurecalls;
 
-import static com.google.common.collect.Iterables.*;
-import static java.util.Collections.*;
+import java.util.List;
+import java.util.Set;
 
-import java.util.Collections;
-
-import org.eclipse.xtext.common.types.JvmAnyTypeReference;
-import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
-import org.eclipse.xtext.common.types.JvmMultiTypeReference;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.TypeArgumentContext;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 
-import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Sebastian Zarnekow
  */
 public class DefaultFeaturesForTypeProvider implements IFeaturesForTypeProvider {
 
-	public Iterable<? extends JvmFeature> getFeaturesForType(JvmTypeReference declType) {
-		if (declType instanceof JvmAnyTypeReference || declType instanceof JvmMultiTypeReference) {
-			return Collections.emptyList();
-		}
-		if (declType != null && declType.getType() instanceof JvmDeclaredType) {
-			return filter(filter(((JvmDeclaredType)declType.getType()).getMembers(), JvmFeature.class), new Predicate<JvmFeature>() {
-				public boolean apply(JvmFeature input) {
-					return !(input instanceof JvmConstructor);
-				}
-			});
-		}
-		return emptySet();
-	}
+	@Inject
+	private TypeReferences typeReferences;
 
+	public Iterable<JvmFeature> getFeaturesByName(String name, JvmTypeReference declarator,
+			TypeArgumentContext context, Iterable<JvmTypeReference> hierarchy) {
+		List<JvmFeature> result = Lists.newArrayList();
+		for(JvmTypeReference reference: hierarchy) { 
+			JvmType rawType = typeReferences.getRawType(reference);
+			if (rawType instanceof JvmDeclaredType) {
+				Iterables.addAll(result, ((JvmDeclaredType) rawType).findAllFeaturesByName(name));
+			}
+		}
+		return result;
+	}
+	
+	public Iterable<JvmFeature> getAllFeatures(JvmTypeReference typeReference, TypeArgumentContext context,
+			Iterable<JvmTypeReference> hierarchy) {
+		Set<JvmFeature> result = Sets.newLinkedHashSet();
+		for(JvmTypeReference reference: hierarchy) { 
+			JvmType rawType = typeReferences.getRawType(reference);
+			if (rawType instanceof JvmDeclaredType) {
+				Iterables.addAll(result, ((JvmDeclaredType) rawType).getAllFeatures());
+			}
+		}
+		return result;
+	}
+	
 	public boolean isExtensionProvider() {
 		return false;
 	}

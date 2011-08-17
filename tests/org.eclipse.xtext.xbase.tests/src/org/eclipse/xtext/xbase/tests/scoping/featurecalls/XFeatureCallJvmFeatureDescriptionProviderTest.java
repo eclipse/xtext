@@ -37,23 +37,27 @@ public class XFeatureCallJvmFeatureDescriptionProviderTest extends AbstractJvmFe
 		
 		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(IScope.NULLSCOPE, reference, 
 				Lists.<IJvmFeatureDescriptionProvider>newArrayList(defaultProvider, descProvider));
-		assertEquals(8, numberOfScopes(scope));
+		assertEquals(4, numberOfScopes(scope));
 
-		assertSetsEqual(newHashSet("publicField", "publicMethod()", "getPublicProperty()","setPublicProperty(java.lang.String)"),	getSignatures(scope));
+		assertSetsEqual(newHashSet(
+				"publicField", "publicMethod()", "getPublicProperty()","setPublicProperty(java.lang.String)", 
+				"wait(long)","toString()","getClass()","hashCode()","notify()","wait(long,int)","equals(java.lang.Object)","wait()","notifyAll()"),
+				getSignatures(scope));
 		scope = (JvmFeatureScope) scope.getParent();
-		assertSetsEqual(newHashSet("wait(long)","toString()","getClass()","hashCode()","notify()","wait(long,int)","equals(java.lang.Object)","wait()","notifyAll()"),	getSignatures(scope));
+		assertSetsEqual(newHashSet(
+				"publicMethod", "publicProperty","getPublicProperty", 
+				"class", "toString","getClass","hashCode","notify","wait","notifyAll"),
+				getSignatures(scope));
 		scope = (JvmFeatureScope) scope.getParent();
-		assertSetsEqual(newHashSet("publicMethod", "publicProperty","getPublicProperty"), getSignatures(scope));
+		assertSetsEqual(newHashSet(
+				"privateField", "protectedField","privateMethod()","setPrivateProperty(java.lang.String)","protectedMethod()","getPrivateProperty()","getProtectedProperty()","setProtectedProperty(java.lang.String)",
+				"registerNatives()","clone()","finalize()"), 
+				getSignatures(scope));
 		scope = (JvmFeatureScope) scope.getParent();
-		assertSetsEqual(newHashSet("class", "toString","getClass","hashCode","notify","wait","notifyAll"), getSignatures(scope));
-		scope = (JvmFeatureScope) scope.getParent();
-		assertSetsEqual(newHashSet("privateField", "protectedField","privateMethod()","setPrivateProperty(java.lang.String)","protectedMethod()","getPrivateProperty()","getProtectedProperty()","setProtectedProperty(java.lang.String)"), getSignatures(scope));
-		scope = (JvmFeatureScope) scope.getParent();
-		assertSetsEqual(newHashSet("registerNatives()","clone()","finalize()"), getSignatures(scope));
-		scope = (JvmFeatureScope) scope.getParent();
-		assertSetsEqual(newHashSet("privateMethod","protectedMethod","getPrivateProperty","privateProperty","getProtectedProperty","protectedProperty"), getSignatures(scope));
-		scope = (JvmFeatureScope) scope.getParent();
-		assertSetsEqual(newHashSet("registerNatives","clone","finalize"),	getSignatures(scope));
+		assertSetsEqual(newHashSet(
+				"privateMethod","protectedMethod","getPrivateProperty","privateProperty","getProtectedProperty","protectedProperty",
+				"registerNatives","clone","finalize"),	
+				getSignatures(scope));
 		assertSame(IScope.NULLSCOPE, scope.getParent());
 	}
 	
@@ -66,23 +70,25 @@ public class XFeatureCallJvmFeatureDescriptionProviderTest extends AbstractJvmFe
 		descProvider.setContextType((JvmDeclaredType) reference.getType());
 		
 		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(IScope.NULLSCOPE, reference, Lists.<IJvmFeatureDescriptionProvider>newArrayList(defaultProvider, descProvider));
-		assertEquals(8, numberOfScopes(scope));
+		assertEquals(4, numberOfScopes(scope));
 		
-		assertSetsEqual(newHashSet("publicField", "publicMethod()", "getPublicProperty()","protectedField","protectedMethod()","getProtectedProperty()","setPublicProperty(java.lang.String)","setProtectedProperty(java.lang.String)"),	getSignatures(scope));
+		assertSetsEqual(newHashSet(
+				"publicField", "publicMethod()", "getPublicProperty()","protectedField","protectedMethod()","getProtectedProperty()","setPublicProperty(java.lang.String)","setProtectedProperty(java.lang.String)",
+				"wait(long)","toString()","getClass()","hashCode()","notify()","wait(long,int)","equals(java.lang.Object)","wait()","notifyAll()","clone()","finalize()"),	getSignatures(scope));
 		scope = (JvmFeatureScope) scope.getParent();
-		assertSetsEqual(newHashSet("wait(long)","toString()","getClass()","hashCode()","notify()","wait(long,int)","equals(java.lang.Object)","wait()","notifyAll()","clone()","finalize()"),	getSignatures(scope));
+		assertSetsEqual(newHashSet(
+				"publicMethod", "publicProperty","getPublicProperty","protectedMethod","getProtectedProperty","protectedProperty",
+				"class", "toString","getClass","hashCode","notify","wait","notifyAll","clone","finalize"), 
+				getSignatures(scope));
 		scope = (JvmFeatureScope) scope.getParent();
-		assertSetsEqual(newHashSet("publicMethod", "publicProperty","getPublicProperty","protectedMethod","getProtectedProperty","protectedProperty"), getSignatures(scope));
+		assertSetsEqual(newHashSet(
+				"privateField", "privateMethod()","getPrivateProperty()","setPrivateProperty(java.lang.String)",
+				"registerNatives()"), 
+				getSignatures(scope));
 		scope = (JvmFeatureScope) scope.getParent();
-		assertSetsEqual(newHashSet("class", "toString","getClass","hashCode","notify","wait","notifyAll","clone","finalize"), getSignatures(scope));
-		scope = (JvmFeatureScope) scope.getParent();
-		assertSetsEqual(newHashSet("privateField", "privateMethod()","getPrivateProperty()","setPrivateProperty(java.lang.String)"), getSignatures(scope));
-		scope = (JvmFeatureScope) scope.getParent();
-		assertSetsEqual(newHashSet("registerNatives()"), getSignatures(scope));
-		scope = (JvmFeatureScope) scope.getParent();
-		assertSetsEqual(newHashSet("privateMethod","getPrivateProperty","privateProperty"), getSignatures(scope));
-		scope = (JvmFeatureScope) scope.getParent();
-		assertSetsEqual(newHashSet("registerNatives"),	getSignatures(scope));
+		assertSetsEqual(newHashSet(
+				"privateMethod","getPrivateProperty","privateProperty",
+				"registerNatives"),	getSignatures(scope));
 		assertSame(IScope.NULLSCOPE, scope.getParent());
 	}
 	
@@ -97,15 +103,15 @@ public class XFeatureCallJvmFeatureDescriptionProviderTest extends AbstractJvmFe
 		
 		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(IScope.NULLSCOPE, reference, Lists.<IJvmFeatureDescriptionProvider>newArrayList(defaultProvider, descProvider));
 		
-		assertEquals(6, numberOfScopes(scope));
+		assertEquals(4, numberOfScopes(scope));
 		
-		assertSetsEqual(newHashSet("publicField", "publicMethod()", "getPublicProperty()","protectedField","protectedMethod()","getProtectedProperty()","privateField", "privateMethod()","getPrivateProperty()","setPrivateProperty(java.lang.String)","setProtectedProperty(java.lang.String)","setPublicProperty(java.lang.String)"),	getSignatures(scope));
+		assertSetsEqual(newHashSet(
+				"publicField", "publicMethod()", "getPublicProperty()","protectedField","protectedMethod()","getProtectedProperty()","privateField", "privateMethod()","getPrivateProperty()","setPrivateProperty(java.lang.String)","setProtectedProperty(java.lang.String)","setPublicProperty(java.lang.String)",
+				"wait(long)","toString()","getClass()","hashCode()","notify()","wait(long,int)","equals(java.lang.Object)","wait()","notifyAll()","clone()","finalize()"),	getSignatures(scope));
 		scope = (JvmFeatureScope) scope.getParent();
-		assertSetsEqual(newHashSet("wait(long)","toString()","getClass()","hashCode()","notify()","wait(long,int)","equals(java.lang.Object)","wait()","notifyAll()","clone()","finalize()"),	getSignatures(scope));
-		scope = (JvmFeatureScope) scope.getParent();
-		assertSetsEqual(newHashSet("publicMethod", "publicProperty","getPublicProperty","protectedMethod","getProtectedProperty","protectedProperty","privateMethod","getPrivateProperty","privateProperty"), getSignatures(scope));
-		scope = (JvmFeatureScope) scope.getParent();
-		assertSetsEqual(newHashSet("class", "toString","getClass","hashCode","notify","wait","notifyAll","clone","finalize"), getSignatures(scope));
+		assertSetsEqual(newHashSet(
+				"publicMethod", "publicProperty","getPublicProperty","protectedMethod","getProtectedProperty","protectedProperty","privateMethod","getPrivateProperty","privateProperty",
+				"class", "toString","getClass","hashCode","notify","wait","notifyAll","clone","finalize"), getSignatures(scope));
 		scope = (JvmFeatureScope) scope.getParent();
 		assertSetsEqual(newHashSet("registerNatives()"), getSignatures(scope));
 		scope = (JvmFeatureScope) scope.getParent();

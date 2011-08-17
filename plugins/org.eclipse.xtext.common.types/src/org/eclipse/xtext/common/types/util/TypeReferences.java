@@ -21,11 +21,13 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmArrayType;
+import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
@@ -55,6 +57,43 @@ public class TypeReferences {
 	
 	@Inject
 	private SuperTypeCollector superTypeCollector;
+	
+	// TODO we need #getRawType(s) on the JvmTypeReference in order to deal with custom reference implementations
+	// e.g. JvmMultiTypeReference et al
+	public JvmType getRawType(JvmTypeReference reference) {
+		if (reference instanceof JvmParameterizedTypeReference) {
+			JvmType rawType = reference.getType();
+			if (rawType instanceof JvmTypeParameter) {
+				// TODO handle multiple upper bounds
+				// TODO use object if only lower bounds were present (robustness)
+				List<JvmTypeConstraint> constraints = ((JvmTypeParameter) rawType).getConstraints();
+				for (JvmTypeConstraint constraint : constraints) {
+					if (constraint instanceof JvmUpperBound) {
+						JvmTypeReference upperBound = constraint.getTypeReference();
+						return getRawType(upperBound);
+					}
+				}
+			}
+			return rawType;
+		} else if (reference instanceof JvmGenericArrayTypeReference) {
+			JvmArrayType type = ((JvmGenericArrayTypeReference) reference).getType();
+			JvmTypeReference componentType = type.getComponentType();
+			JvmComponentType rawComponentType = (JvmComponentType) getRawType(componentType);
+			return rawComponentType.getArrayType();
+		} else if (reference instanceof JvmWildcardTypeReference) {
+			List<JvmTypeConstraint> constraints = ((JvmWildcardTypeReference) reference).getConstraints();
+			// TODO handle multiple upper bounds
+			// TODO use object if only lower bounds were present (robustness)
+			for (JvmTypeConstraint constraint : constraints) {
+				if (constraint instanceof JvmUpperBound) {
+					JvmTypeReference upperBound = constraint.getTypeReference();
+					return getRawType(upperBound);
+				}
+			}
+			return null;
+		}
+		return null;
+	}
 	
 	public JvmAnyTypeReference createAnyTypeReference(EObject context) {
 		JvmAnyTypeReference result = factory.createJvmAnyTypeReference();
