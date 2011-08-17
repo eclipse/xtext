@@ -39,7 +39,6 @@ import com.google.inject.Singleton;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@Singleton
 public class StaticMethodsFeatureForTypeProvider extends AbstractStaticMethodsFeatureForTypeProvider {
 
 	private static final Map<String, String> extensionClasses = Maps.newHashMap();
