@@ -28,10 +28,14 @@ public abstract class AbstractJvmTypeProvider implements IJvmTypeProvider, Resou
 		if (resourceSet == null)
 			throw new IllegalArgumentException("resourceSet may not be null");
 		this.resourceSet = resourceSet;
-		resourceSet.getResourceFactoryRegistry().getProtocolToFactoryMap().put(URIHelperConstants.PROTOCOL, this);
+		registerProtocol(resourceSet);
 		primitiveTypeFactory = new PrimitiveTypeFactory();
 	}
-	
+
+	protected void registerProtocol(ResourceSet resourceSet) {
+		resourceSet.getResourceFactoryRegistry().getProtocolToFactoryMap().put(URIHelperConstants.PROTOCOL, this);
+	}
+
 	public abstract JvmType findTypeByName(String name);
 
 	public TypeResource createResource(URI uri) {
