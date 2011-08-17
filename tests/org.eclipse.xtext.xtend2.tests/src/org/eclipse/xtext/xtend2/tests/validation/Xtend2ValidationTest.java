@@ -168,7 +168,6 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 
 	public void testReturnTypeCompatibility_04() throws Exception {
 		XtendClass clazz = clazz("class Foo implements test.SomeInterface { def foo() { 1 } }");
-		helper.assertError(clazz.getMembers().get(0), XbasePackage.Literals.XBLOCK_EXPRESSION, INCOMPATIBLE_RETURN_TYPE);
 		helper.assertError(clazz.getMembers().get(0), Xtend2Package.Literals.XTEND_FUNCTION, MISSING_OVERRIDE);
 	}
 

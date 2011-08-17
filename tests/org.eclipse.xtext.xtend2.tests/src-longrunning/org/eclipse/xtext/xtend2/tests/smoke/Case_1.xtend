@@ -6,10 +6,12 @@ class Case_1 {
 		42
 	}
 	
-	def testFunction2() 
+	def testFunction2() {
 		42
+	} 
 		
-	def Integer testFunction3() 
+	def Integer testFunction3() {
 		42
+	} 
 		
 }

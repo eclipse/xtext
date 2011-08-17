@@ -1,13 +1,16 @@
 package org.eclipse.xtext.xtend2.tests.smoke
 
+import com.google.inject.Inject
 import java.util.ArrayList
+
 import static java.util.Arrays.*
+
 import static extension java.util.Collections.*
 
 class Case_5 {
 
 	@Inject
-	ArrayList as myList
+	ArrayList myList
 //	ArrayList as list
 	
 	@Inject extension

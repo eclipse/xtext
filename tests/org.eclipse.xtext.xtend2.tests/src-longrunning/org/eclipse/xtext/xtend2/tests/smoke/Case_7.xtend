@@ -12,7 +12,7 @@ class Case_7 {
 
 	def Object bug345452() {
 		var CharSequence x = null
-		if(x instanceof String typeof(Map$Entry).)
-			
+		if(x instanceof Map$Entry)
+			null
 	}
 }

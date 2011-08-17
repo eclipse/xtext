@@ -105,8 +105,8 @@ public class OverrideValidationTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testIncompatibleReturnType_2() throws Exception {
-		XtendClass xtendClass = clazz("class Foo implements test.SomeInterface { def foo() {} }");
-		helper.assertError(xtendClass.getMembers().get(0), XbasePackage.Literals.XBLOCK_EXPRESSION, INCOMPATIBLE_RETURN_TYPE);
+		XtendClass xtendClass = clazz("class Foo implements test.SomeInterface { override void foo() {} }");
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_RETURN_TYPE);
 	}
 
 	public void testIncompatibleGenericReturnType_0() throws Exception {

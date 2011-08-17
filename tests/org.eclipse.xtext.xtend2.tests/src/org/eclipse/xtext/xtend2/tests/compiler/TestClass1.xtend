@@ -2,19 +2,19 @@ package org.eclipse.xtext.xtend2.tests.compiler
 
 class TestClass1 {
 
-	testFunction1() {
+	def testFunction1() {
 		42
 	}
 	
-	testFunction2() {
+	def testFunction2() {
 		return 42
 	}
 		
-	Integer testFunction3() {
+	def Integer testFunction3() {
 		40 + 2
 	}
 	
-	Integer testFunction4() {
+	def Integer testFunction4() {
 		return 6 * 7
 	}	
 }
