@@ -120,7 +120,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 				if (visited.add(c))
 					result.add("  " + c.toString());
 		}
-//		System.out.println(Joiner.on("\n").join(result));
+		//		System.out.println(Joiner.on("\n").join(result));
 	}
 
 	public void testAssignedActionMandatory1() throws Exception {
@@ -339,6 +339,18 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		expected.append("  Rule_A2 returns A2: left=Rule_A2_1;\n");
 		expected.append("Rule_A2_1: Rule_A2 | Rule_A2_1_A1;\n");
 		expected.append("  Rule_A2_1_A1 returns A1: {A1};");
+		assertEquals(expected.toString(), actual);
+	}
+
+	public void testActionSequence5() throws Exception {
+		StringBuilder grammar = new StringBuilder();
+		grammar.append("Rule: INT? {Bar} 'bar' ({FooBar.bar=current} 'act')?;");
+		String actual = getParserRule(grammar.toString());
+		StringBuilder expected = new StringBuilder();
+		expected.append("Rule: Rule_Bar | Rule_FooBar;\n");
+		expected.append("  Rule_Bar returns Bar: {Bar};\n");
+		expected.append("  Rule_FooBar returns FooBar: bar=Rule_FooBar_3_0;\n");
+		expected.append("Rule_FooBar_3_0: Rule_Bar;");
 		assertEquals(expected.toString(), actual);
 	}
 

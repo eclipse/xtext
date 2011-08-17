@@ -8,12 +8,15 @@
 package org.eclipse.xtext.serializer.analysis;
 
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.CompoundElement;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.impl.AbstractCachingNFABuilder;
 import org.eclipse.xtext.grammaranalysis.impl.AbstractNFAProvider;
 import org.eclipse.xtext.grammaranalysis.impl.AbstractNFAState;
@@ -62,9 +65,16 @@ public class ActionFilterNFAProvider extends AbstractNFAProvider<ActionFilterSta
 			if (!(ele.eContainer() instanceof AbstractElement))
 				return false;
 
-			// filter unassigned keywords
-			if (ele instanceof Keyword && GrammarUtil.containingAssignment(ele) == null)
-				return true;
+			// filter unassigned keywords and token rule calls
+			if (!GrammarUtil.isAssigned(ele)) {
+				if (ele instanceof Keyword)
+					return true;
+				if (ele instanceof RuleCall) {
+					AbstractRule rule = ((RuleCall) ele).getRule();
+					if (!(rule.getType().getClassifier() instanceof EClass))
+						return true;
+				}
+			}
 
 			// filter groups and alternatives, if they contain assigned actions
 			if (ele instanceof CompoundElement) {
