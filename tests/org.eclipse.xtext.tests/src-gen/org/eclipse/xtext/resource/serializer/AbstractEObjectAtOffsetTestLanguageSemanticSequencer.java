@@ -49,7 +49,12 @@ public class AbstractEObjectAtOffsetTestLanguageSemanticSequencer extends Abstra
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == EObjectAtOffsetTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case EObjectAtOffsetTestLanguagePackage.BAR:
-				if(context == grammarAccess.getBarRule()) {
+				if(context == grammarAccess.getAbstractBarAccess().getFooBarBarAction_3_0() ||
+				   context == grammarAccess.getBarRule()) {
+					sequence_Bar(context, (Bar) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getAbstractBarRule()) {
 					sequence_Bar(context, (Bar) semanticObject); 
 					return; 
 				}
@@ -91,7 +96,7 @@ public class AbstractEObjectAtOffsetTestLanguageSemanticSequencer extends Abstra
 	
 	/**
 	 * Constraint:
-	 *     (name=ID foo+=[Foo|ID] foo+=[Foo|ID]*)
+	 *     (name=ID foo+=[Foo|ID] foo+=[Foo|ID]* foo+=[Foo|ID]?)
 	 *
 	 * Features:
 	 *    foo[1, *]
