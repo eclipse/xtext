@@ -7,17 +7,27 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.scoping;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.scoping.featurecalls.AbstractStaticMethodsFeatureForTypeProvider;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendImport;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.inject.Provider;
+import com.google.inject.internal.Maps;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -25,10 +35,13 @@ import com.google.common.collect.Lists;
 public class StaticallyImportedFeaturesProvider extends AbstractStaticMethodsFeatureForTypeProvider {
 
 	@Override
-	protected Iterable<String> getVisibleTypesContainingStaticMethods(JvmTypeReference reference) {
+	protected Map<JvmTypeReference, Collection<String>> getVisibleTypesContainingStaticMethods(Iterable<JvmTypeReference> hierarchy) {
+		boolean extension = true;
+		if (hierarchy == null || Iterables.isEmpty(hierarchy)) {
+			extension = false;
+		}
 		List<XtendImport> imports = getImports();
-		boolean extension = reference != null && reference.getType() != null;
-		List<String> result = Lists.newArrayList();
+		Collection<String> result = Lists.newArrayList();
 		for(XtendImport imported: imports) {
 			if (imported.isStatic() && (!extension || imported.isExtension()) && imported.isWildcard()) {
 				String typeName = imported.getImportedTypeName();
@@ -36,7 +49,96 @@ public class StaticallyImportedFeaturesProvider extends AbstractStaticMethodsFea
 					result.add(typeName);
 			}
 		}
-		return result;
+		if (result.isEmpty())
+			return Collections.emptyMap();
+		if (!extension || hierarchy == null /* to trick jdt 3.6 npe analysis */ ) {
+			return Collections.singletonMap(null, result);
+		}
+		Map<JvmTypeReference, Collection<String>> map = Maps.newHashMap();
+		for(JvmTypeReference reference: hierarchy) {
+			map.put(reference, result);
+		}
+		return map;
+	}
+	
+	@Override
+	protected void collectFeatures(Iterable<JvmTypeReference> hierarchy, Collection<JvmFeature> result) {
+		final Map<JvmTypeReference, Collection<String>> staticTypeNames = getVisibleTypesContainingStaticMethods(hierarchy);
+		for (final Map.Entry<JvmTypeReference, Collection<String>> e : staticTypeNames.entrySet()) {
+			// optimization - we know that the list is the same for all types
+			for(final String staticTypeName: e.getValue()) {
+				JvmTypeReference staticType = cache.get(Tuples.create(this, staticTypeName), context, new Provider<JvmTypeReference>() {
+					public JvmTypeReference get() {
+						return getTypeReferences().getTypeForName(staticTypeName, context);
+					}
+				}) ;
+				if (staticType != null) {
+					JvmType rawType = getTypeReferences().getRawType(staticType);
+					if (rawType instanceof JvmDeclaredType) {
+						Iterable<JvmFeature> features = ((JvmDeclaredType) rawType).getAllFeatures();
+						for(JvmFeature feature: features) {
+							if (feature instanceof JvmOperation) {
+								// optimization is here
+								if (e.getKey() == null) {
+									if (isMatchingExtension(e.getKey(), (JvmOperation) feature)) {
+										result.add(feature);
+									}
+								} else {
+									for(JvmTypeReference key: hierarchy) {
+										// and here
+										if (isMatchingExtension(key, (JvmOperation) feature)) {
+											result.add(feature);
+											break;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			return;
+		}
+	}
+	
+	@Override
+	protected void collectFeatures(String name, Iterable<JvmTypeReference> hierarchy, Collection<JvmFeature> result) {
+		final Map<JvmTypeReference, Collection<String>> staticTypeNames = getVisibleTypesContainingStaticMethods(hierarchy);
+		for (final Map.Entry<JvmTypeReference, Collection<String>> e : staticTypeNames.entrySet()) {
+			// optimization - we know that the list is the same for all types
+			for(final String staticTypeName: e.getValue()) {
+				JvmTypeReference staticType = cache.get(Tuples.create(this, staticTypeName), context, new Provider<JvmTypeReference>() {
+					public JvmTypeReference get() {
+						return getTypeReferences().getTypeForName(staticTypeName, context);
+					}
+				}) ;
+				if (staticType != null) {
+					JvmType rawType = getTypeReferences().getRawType(staticType);
+					if (rawType instanceof JvmDeclaredType) {
+						Iterable<JvmFeature> features = ((JvmDeclaredType) rawType).findAllFeaturesByName(name);
+						for(JvmFeature feature: features) {
+							if (feature instanceof JvmOperation) {
+								// optimization is here
+								if (e.getKey() == null) {
+									if (isMatchingExtension(e.getKey(), (JvmOperation) feature)) {
+										result.add(feature);
+									}
+								} else {
+									for(JvmTypeReference key: hierarchy) {
+										// and here
+										if (isMatchingExtension(key, (JvmOperation) feature)) {
+											result.add(feature);
+											break;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			return;
+		}
 	}
 
 	protected List<XtendImport> getImports() {
