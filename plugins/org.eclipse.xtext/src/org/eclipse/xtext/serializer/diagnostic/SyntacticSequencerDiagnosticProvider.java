@@ -18,7 +18,6 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISyn
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.sequencer.RuleCallStack;
-import org.eclipse.xtext.util.EmfFormatter;
 
 import com.google.common.collect.Lists;
 import com.google.inject.internal.Join;
