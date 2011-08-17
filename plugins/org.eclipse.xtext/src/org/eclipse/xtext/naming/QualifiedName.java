@@ -224,6 +224,10 @@ public class QualifiedName implements Comparable<QualifiedName> {
 	 */
 	@Override
 	public String toString() {
+		if (getSegmentCount() == 0)
+			return "";
+		if (getSegmentCount() == 1)
+			return getFirstSegment();
 		StringBuilder builder = new StringBuilder();
 		boolean isFirst = true;
 		for (String segment : getSegments()) {
