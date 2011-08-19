@@ -16,27 +16,28 @@ import org.eclipse.xtext.common.types.JvmType;
 public interface IJvmTypeProvider {
 
 	/**
-	 * Find a type by its fully qualified name, e.g. java.util.Map$Entry, int[], void or 
-	 * java.lang.String[][][].
+	 * Find a type by its fully qualified name, e.g. java.util.Map$Entry, int[], void or java.lang.String[][][].
+	 * @return the found {@link JvmType} or null if no such type could be found.
 	 */
-	JvmType findTypeByName(String name) throws TypeNotFoundException;
-	
+	JvmType findTypeByName(String name);
+
 	/**
 	 * Returns the resource set that will contain dynamically created resources.
+	 * 
 	 * @return the resource set.
 	 */
 	ResourceSet getResourceSet();
-	
+
 	interface Factory {
-		
+
 		IJvmTypeProvider createTypeProvider(ResourceSet resourceSet);
-		
+
 		IJvmTypeProvider findTypeProvider(ResourceSet resourceSet);
-		
+
 		IJvmTypeProvider findOrCreateTypeProvider(ResourceSet resourceSet);
-		
+
 		IJvmTypeProvider createTypeProvider() throws UnsupportedOperationException;
-		
+
 	}
-	
+
 }

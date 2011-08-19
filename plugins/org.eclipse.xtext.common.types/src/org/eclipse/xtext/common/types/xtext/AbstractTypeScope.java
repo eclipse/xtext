@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
-import org.eclipse.xtext.common.types.access.TypeNotFoundException;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
@@ -59,8 +58,6 @@ public abstract class AbstractTypeScope extends AbstractScope {
 			if (filter != null && !filter.apply(result))
 				return null;
 			return result;
-		} catch (TypeNotFoundException e) {
-			return null;
 		} catch (IllegalArgumentException e) {
 			return null;
 		}

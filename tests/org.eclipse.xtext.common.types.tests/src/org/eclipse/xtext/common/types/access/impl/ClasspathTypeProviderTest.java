@@ -17,7 +17,6 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IMirror;
-import org.eclipse.xtext.common.types.access.TypeNotFoundException;
 import org.eclipse.xtext.common.types.access.TypeResource;
 
 /**
@@ -132,12 +131,7 @@ public class ClasspathTypeProviderTest extends AbstractTypeProviderTest {
 	
 	public void testCreateMirror_05() {
 		URI uri = URI.createURI("java:/Objects/java.lang.does.not.exist");
-		try {
-			getTypeProvider().createMirror(uri);
-			fail("Expected TypeNotFoundException");
-		} catch (TypeNotFoundException ex) {
-			// OK
-		}
+		assertNull(getTypeProvider().createMirror(uri));
 	}
 	
 	public void testBug337307() {

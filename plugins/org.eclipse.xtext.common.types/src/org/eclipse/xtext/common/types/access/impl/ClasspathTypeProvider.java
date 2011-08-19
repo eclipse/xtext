@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IMirror;
-import org.eclipse.xtext.common.types.access.TypeNotFoundException;
 import org.eclipse.xtext.common.types.access.TypeResource;
 
 /**
@@ -66,17 +65,17 @@ public class ClasspathTypeProvider extends AbstractJvmTypeProvider {
 			return findTypeByClass(clazz, result);
 		}
 		catch (ClassNotFoundException e) {
-			throw new TypeNotFoundException("Type: '" + name + "' is not available." , e);
+			return null;
 		}
 	}
 	
 	@Override
-	protected IMirror createMirrorForFQN(String name) throws TypeNotFoundException {
+	protected IMirror createMirrorForFQN(String name) {
 		try {
 			Class<?> clazz = classFinder.forName(name);
 			return createMirror(clazz);
 		} catch (ClassNotFoundException e) {
-			throw new TypeNotFoundException(name, e);
+			return null;
 		}
 	}
 	

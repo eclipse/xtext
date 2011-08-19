@@ -69,7 +69,6 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
-import org.eclipse.xtext.common.types.access.TypeNotFoundException;
 import org.eclipse.xtext.common.types.testSetups.AbstractMethods;
 import org.eclipse.xtext.common.types.testSetups.AnnotatedClassWithStringDefault;
 import org.eclipse.xtext.common.types.testSetups.AnnotatedInterfaceWithStringDefault;
@@ -2264,12 +2263,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 	}
 	
 	public void testArraysArraylist_01() {
-		try {
-			getTypeProvider().findTypeByName("java.util.Arrays.ArrayList");
-			fail("java.util.Arrays.ArrayList");
-		} catch(TypeNotFoundException e) {
-			// expected
-		}
+		assertNull(getTypeProvider().findTypeByName("java.util.Arrays.ArrayList"));
 	}
 	
 	public void testArraysArraylist_02() {
