@@ -72,19 +72,24 @@ public class Xtend2BuilderParticipant implements IXtextBuilderParticipant {
 			if (!isEmpty(xtendDeltas)) {
 				final SubMonitor progress = SubMonitor.convert(monitor, size(xtendDeltas) + 3);
 				IFolder targetFolder = compilationFileProvider.getTargetFolder(context.getBuiltProject(), progress.newChild(1));
-				wipeTargetFolder(targetFolder, context, progress.newChild(1));
-				for (Delta delta : xtendDeltas) {
-					processDelta(delta, context, progress.newChild(1));
+				switch (context.getBuildType()) {
+					case CLEAN:
+						folderUtil.clearFolder(targetFolder, progress);
+						break;
+					case RECOVERY:
+						folderUtil.clearFolder(targetFolder, progress);
+					case INCREMENTAL:
+					case FULL:
+						for (Delta delta : xtendDeltas) {
+							processDelta(delta, context, progress.newChild(1));
+						}
+						folderUtil.removeEmptySubFolders(targetFolder, progress.newChild(1));
+						context.needRebuild();
+						break;
 				}
-				folderUtil.removeEmptySubFolders(targetFolder, progress.newChild(1));
-				context.needRebuild();
 			}
-//		} catch (CoreException ce) {
-//			throw ce;
 		} catch (Exception e) {
 			LOG.error(e.getMessage(), e);
-//			throw new CoreException(new Status(IStatus.ERROR, Xtend2Activator.getInstance().getBundle()
-//					.getSymbolicName(), "Error during compilation of Xtend2 resources", e));
 		}
 	}
 
@@ -126,19 +131,6 @@ public class Xtend2BuilderParticipant implements IXtextBuilderParticipant {
 
 	protected boolean hasErrors(IFile sourceFile) throws CoreException {
 		return sourceFile.findMaxProblemSeverity(null, true, IResource.DEPTH_ZERO) == IMarker.SEVERITY_ERROR;
-	}
-
-	protected void wipeTargetFolder(IFolder targetFolder, IBuildContext context, final SubMonitor progress)
-			throws CoreException {
-		switch (context.getBuildType()) {
-			case CLEAN:
-			case RECOVERY:
-				folderUtil.clearFolder(targetFolder, progress);
-				break;
-			case INCREMENTAL:
-			case FULL:
-				break;
-		}
 	}
 
 	protected void compile(Resource sourceResource, IFile targetFile, final SubMonitor progress) throws CoreException,
