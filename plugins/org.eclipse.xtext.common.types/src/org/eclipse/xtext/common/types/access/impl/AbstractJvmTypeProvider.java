@@ -11,9 +11,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
-import org.eclipse.xtext.common.types.access.TypeNotFoundException;
+import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeResource;
 
 /**
@@ -32,12 +31,15 @@ public abstract class AbstractJvmTypeProvider implements IJvmTypeProvider, Resou
 		resourceSet.getResourceFactoryRegistry().getProtocolToFactoryMap().put(URIHelperConstants.PROTOCOL, this);
 		primitiveTypeFactory = new PrimitiveTypeFactory();
 	}
-
+	
 	public abstract JvmType findTypeByName(String name);
 
 	public TypeResource createResource(URI uri) {
 		TypeResource result = doCreateResource(uri);
-		result.setMirror(createMirror(uri));
+		final IMirror createMirror = createMirror(uri);
+		if (createMirror ==  null)
+			throw new IllegalArgumentException("Couldn'T find type for uri "+uri);
+		result.setMirror(createMirror);
 		return result;
 	}
 
@@ -61,6 +63,6 @@ public abstract class AbstractJvmTypeProvider implements IJvmTypeProvider, Resou
 		return createMirrorForFQN(name);
 	}
 
-	protected abstract IMirror createMirrorForFQN(String name) throws TypeNotFoundException;
+	protected abstract IMirror createMirrorForFQN(String name);
 
 }

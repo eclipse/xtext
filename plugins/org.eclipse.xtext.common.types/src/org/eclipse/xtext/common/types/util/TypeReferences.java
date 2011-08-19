@@ -32,7 +32,6 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
-import org.eclipse.xtext.common.types.access.TypeNotFoundException;
 import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
 
 import com.google.inject.Inject;
@@ -42,6 +41,7 @@ import com.google.inject.Inject;
  */
 public class TypeReferences {
 	
+	@SuppressWarnings("unused")
 	private final static Logger log = Logger.getLogger(TypeReferences.class);
 
 	@Inject
@@ -176,13 +176,8 @@ public class TypeReferences {
 		// make sure a type provider is configured in the resource set. 
 		typeProviderFactory.findOrCreateTypeProvider(resourceSet);
 		URI uri = toCommonTypesUri(clazz);
-		try {
-			JvmType declaredType = (JvmType) resourceSet.getEObject(uri, true);
-			return declaredType;
-		} catch (TypeNotFoundException e) {
-			log.error(e.getMessage(), e);
-			return null;
-		}
+		JvmType declaredType = (JvmType) resourceSet.getEObject(uri, true);
+		return declaredType;
 	}
 	
 	public JvmType findDeclaredType(String typeName, Notifier context) {
@@ -194,13 +189,7 @@ public class TypeReferences {
 //			throw new NullPointerException("context must be contained in a resource");
 		// make sure a type provider is configured in the resource set. 
 		IJvmTypeProvider typeProvider = typeProviderFactory.findOrCreateTypeProvider(resourceSet);
-		try {
-			JvmType result = typeProvider.findTypeByName(typeName);
-			return result;
-		} catch (TypeNotFoundException e) {
-			log.debug(e.getMessage(), e);
-			return null;
-		}
+		return typeProvider.findTypeByName(typeName);
 	}
 	
 	public boolean is(final JvmTypeReference reference, final Class<?> clazz) {

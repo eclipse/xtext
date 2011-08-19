@@ -22,9 +22,8 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
-import org.eclipse.xtext.common.types.access.TypeNotFoundException;
+import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.AbstractTypeProviderTest;
 import org.eclipse.xtext.common.types.access.impl.PrimitiveMirror;
@@ -153,22 +152,12 @@ public class JdtTypeProviderTest extends AbstractTypeProviderTest {
 
 	public void testCreateMirror_05() {
 		URI uri = URI.createURI("java:/Objects/java.lang.does.not.exist");
-		try {
-			typeProvider.createMirror(uri);
-			fail("Expected TypeNotFoundException");
-		} catch (TypeNotFoundException ex) {
-			// OK
-		}
+		assertNull(typeProvider.createMirror(uri));
 	}
 
 	public void testCreateMirror_06() {
 		URI uri = URI.createURI("java:/Objects/java.lang.does.not.exist");
-		try {
-			typeProvider.createMirror(uri);
-			fail("Expected TypeNotFoundException");
-		} catch (TypeNotFoundException ex) {
-			// OK
-		}
+		assertNull(typeProvider.createMirror(uri));
 	}
 
 	public void testBug300216() {
@@ -189,13 +178,7 @@ public class JdtTypeProviderTest extends AbstractTypeProviderTest {
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=319993
 	 */
 	public void testBug319993() {
-		try {
-			getTypeProvider().findTypeByName("interface myAggregation");
-		} catch (IllegalArgumentException e) {
-			fail();
-		} catch (TypeNotFoundException e) {
-			//expected
-		} 
+		assertNull(getTypeProvider().findTypeByName("interface myAggregation"));
 	}
 
 	@Override
