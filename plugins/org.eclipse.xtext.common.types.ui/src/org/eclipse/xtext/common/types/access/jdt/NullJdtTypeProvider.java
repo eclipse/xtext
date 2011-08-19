@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.access.TypeNotFoundException;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 
 /**
@@ -38,8 +37,8 @@ public class NullJdtTypeProvider implements IJdtTypeProvider, Resource.Factory {
 		typeURIHelper = new TypeURIHelper();
 	}
 	
-	public JvmType findTypeByName(String name) throws TypeNotFoundException {
-		throw new TypeNotFoundException("Type: '" + name + "' is not available.");
+	public JvmType findTypeByName(String name) {
+		return null;
 	}
 
 	public ResourceSet getResourceSet() {

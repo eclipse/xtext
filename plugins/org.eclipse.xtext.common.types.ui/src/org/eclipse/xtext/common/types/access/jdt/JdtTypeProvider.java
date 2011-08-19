@@ -15,7 +15,6 @@ import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IMirror;
-import org.eclipse.xtext.common.types.access.TypeNotFoundException;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.AbstractJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
@@ -50,14 +49,14 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	}
 	
 	@Override
-	public JvmType findTypeByName(String name) throws TypeNotFoundException {
+	public JvmType findTypeByName(String name) {
 		if (Strings.isEmpty(name))
 			throw new IllegalArgumentException("null");
 		String signature = null;
 		try {
 			signature = name.startsWith("[") ? name : Signature.createTypeSignature(name, true);
 		} catch (IllegalArgumentException e) {
-			throw new TypeNotFoundException(name);
+			return null;
 		}
 		URI resourceURI = typeUriHelper.createResourceURI(signature);
 		String resourcePath = resourceURI.path();
@@ -85,34 +84,30 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 					JvmType result = findTypeBySignature(signature, resource);
 					return result;
 				} else {
-					throw new TypeNotFoundException(name);
+					return null;
 				}
 			} catch (JavaModelException e) {
-				throw new TypeNotFoundException(name);
+				return null;
 			}
 		}
 	}
 
-	public JvmType findTypeBySignature(String signature, TypeResource resource) throws TypeNotFoundException {
+	public JvmType findTypeBySignature(String signature, TypeResource resource) {
 		// TODO: Maybe iterate the resource without computing a fragment
 		String fragment = typeUriHelper.getFragment(signature);
-		JvmType result = (JvmType) resource.getEObject(fragment);
-		if (result == null) {
-			throw new TypeNotFoundException("Type: '" + signature + "' is not available.");
-		}
-		return result;
+		return (JvmType) resource.getEObject(fragment);
 	}
 
 	@Override
-	protected IMirror createMirrorForFQN(String name) throws TypeNotFoundException {
+	protected IMirror createMirrorForFQN(String name) {
 		try {
 			IType type = javaProject.findType(name);
 			if (type == null || !type.exists())
-				throw new TypeNotFoundException("No such type available '" + name + "'");
+				return null;
 			return new JdtTypeMirror(type, typeFactory);
 		}
 		catch (JavaModelException e) {
-			throw new TypeNotFoundException(name, e);
+			return null;
 		}
 	}
 	
