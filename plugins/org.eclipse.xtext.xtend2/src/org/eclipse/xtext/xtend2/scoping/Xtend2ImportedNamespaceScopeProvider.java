@@ -26,7 +26,9 @@ import org.eclipse.xtext.scoping.impl.ScopeBasedSelectable;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
+import org.eclipse.xtext.xtend2.xtend2.XtendImport;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
@@ -42,7 +44,16 @@ public class Xtend2ImportedNamespaceScopeProvider extends XbaseImportedNamespace
 	protected List<ImportNormalizer> internalGetImportedNamespaceResolvers(EObject context, boolean ignoreCase) {
 		if (!(context instanceof XtendFile))
 			return Collections.emptyList();
-		List<ImportNormalizer> importedNamespaceResolvers = super.internalGetImportedNamespaceResolvers(context, ignoreCase);
+		XtendFile file = (XtendFile) context;
+		List<ImportNormalizer> importedNamespaceResolvers = Lists.newArrayList();
+		for (XtendImport imp : file.getImports()) {
+			if (!imp.isStatic()) {
+				String value = imp.getImportedNamespace();
+				ImportNormalizer resolver = createImportedNamespaceResolver(value, ignoreCase);
+				if (resolver != null)
+					importedNamespaceResolvers.add(resolver);
+			}
+		}
 		if (!Strings.isEmpty(((XtendFile) context).getPackage())) {
 			importedNamespaceResolvers.add(new ImportNormalizer(nameConverter.toQualifiedName(((XtendFile) context)
 					.getPackage()), true, ignoreCase));
