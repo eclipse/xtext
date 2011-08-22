@@ -196,7 +196,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
             allDeltas.addAll(newDeltas);
             // Release memory
             if (!queue.isEmpty())
-            	resourceSet.getResources().clear();
+				clearResourceSet(resourceSet);
         }
         return allDeltas;
     }
@@ -264,11 +264,25 @@ public class ClusteringBuilderState extends AbstractBuilderState {
             subMonitor.worked(1);
             index++;
             if (index % clusterSize == 0) {
-                resourceSet.getResources().clear();
+                clearResourceSet(resourceSet);
             }
         }
-        resourceSet.getResources().clear(); // Empty the resource set so that the next phase starts afresh.
+        clearResourceSet(resourceSet);
     }
+
+    /**
+     * Clears the content of the resource set without sending notifications.
+     * This avoids unnecessary, explicit unloads.
+     */
+	protected void clearResourceSet(ResourceSet resourceSet) {
+		boolean wasDeliver = resourceSet.eDeliver();
+		try {
+			resourceSet.eSetDeliver(false);
+			resourceSet.getResources().clear();
+		} finally {
+			resourceSet.eSetDeliver(wasDeliver);
+		}
+	}
 
     /**
      * Put all resources that depend on some changes onto the queue of resources to be processed. 
