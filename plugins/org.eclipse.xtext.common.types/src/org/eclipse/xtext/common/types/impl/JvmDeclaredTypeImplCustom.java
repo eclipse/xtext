@@ -91,7 +91,7 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 		return Iterables.filter(getMembers(), JvmOperation.class);
 	}
 	
-	// TODO discard me as soon as #members, #superTypes, the superTypes#members or the operations#parameters change
+	// TODO discard me as soon as #members, #members#name, #superTypes, the superTypes#members or the operations#parameters change
 	protected Map<String, Set<JvmFeature>> allFeaturesByName;
 	
 	// TODO HashSet is not threadsafe

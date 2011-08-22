@@ -120,7 +120,7 @@ public class RefactoringIntegrationTest extends AbstractXtend2UITestCase {
 		assertTrue(initialStatus.isOK());
 		processor.setNewName(newName);
 		RefactoringStatus finalStatus = processor.checkFinalConditions(new NullProgressMonitor(), null);
-		assertTrue(finalStatus.isOK());
+		assertTrue(finalStatus.toString(), finalStatus.isOK());
 		final Change change = processor.createChange(new NullProgressMonitor());
 		assertNotNull(change);
 		new WorkspaceModifyOperation() {
