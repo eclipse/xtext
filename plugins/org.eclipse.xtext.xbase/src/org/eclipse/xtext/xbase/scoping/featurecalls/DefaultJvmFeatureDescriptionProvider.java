@@ -60,7 +60,7 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 	@Inject
 	protected JvmFeatureSignatureProvider signatureProvider = new JvmFeatureSignatureProvider();
 	
-	public final Iterable<IEObjectDescription> getDescriptionsByName(
+	public Iterable<IEObjectDescription> getDescriptionsByName(
 			String name, IFeaturesForTypeProvider featureProvider, 
 			JvmTypeReference typeReference,
 			TypeArgumentContext context, Iterable<JvmTypeReference> hierarchy) {
@@ -70,7 +70,7 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 		return descriptions.values();
 	}
 	
-	public final Iterable<IEObjectDescription> getAllDescriptions(IFeaturesForTypeProvider featureProvider,
+	public Iterable<IEObjectDescription> getAllDescriptions(IFeaturesForTypeProvider featureProvider,
 			JvmTypeReference typeReference, TypeArgumentContext context, Iterable<JvmTypeReference> hierarchy) {
 		final Map<String, IEObjectDescription> descriptions = Maps.newLinkedHashMap();
 		IAcceptor<JvmFeatureDescription> acceptor = new ShadowingAwareAcceptor(descriptions);
@@ -80,7 +80,7 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 
 	protected void doCollectDescriptions(String name, IFeaturesForTypeProvider featureProvider, JvmTypeReference typeReference, TypeArgumentContext context,
 			Iterable<JvmTypeReference> hierarchy, IAcceptor<JvmFeatureDescription> acceptor) {
-		Iterable<JvmFeature> features = featureProvider.getFeaturesByName(name, typeReference, context, hierarchy);
+		Iterable<JvmFeature> features = featureProvider.getFeaturesByName(name, typeReference, hierarchy);
 		for (JvmFeature jvmFeature : features) {
 			addFeatureDescriptions(jvmFeature, context, acceptor);
 		}
@@ -88,20 +88,21 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 	
 	protected void doCollectDescriptions(IFeaturesForTypeProvider featureProvider, JvmTypeReference typeReference, TypeArgumentContext context,
 			Iterable<JvmTypeReference> hierarchy, IAcceptor<JvmFeatureDescription> acceptor) {
-		Iterable<JvmFeature> features = featureProvider.getAllFeatures(typeReference, context, hierarchy);
+		Iterable<JvmFeature> features = featureProvider.getAllFeatures(typeReference, hierarchy);
 		for (JvmFeature jvmFeature : features) {
 			addFeatureDescriptions(jvmFeature, context, acceptor);
 		}
 	}
 	
-	public final Iterable<JvmFeature> getFeaturesByName(String name, JvmTypeReference declarator,
-			TypeArgumentContext context, Iterable<JvmTypeReference> hierarchy) {
-		return featuresForTypeProvider.getFeaturesByName(name, declarator, context, hierarchy);
+	public Iterable<JvmFeature> getFeaturesByName(
+			String name, JvmTypeReference declarator,
+			Iterable<JvmTypeReference> hierarchy) {
+		return featuresForTypeProvider.getFeaturesByName(name, declarator, hierarchy);
 	}
 	
-	public Iterable<JvmFeature> getAllFeatures(JvmTypeReference typeReference, TypeArgumentContext context,
+	public Iterable<JvmFeature> getAllFeatures(JvmTypeReference typeReference, 
 			Iterable<JvmTypeReference> hierarchy) {
-		return featuresForTypeProvider.getAllFeatures(typeReference, context, hierarchy);
+		return featuresForTypeProvider.getAllFeatures(typeReference, hierarchy);
 	}
 	
 	public void setFeaturesForTypeProvider(IFeaturesForTypeProvider featuresForTypeProvider) {

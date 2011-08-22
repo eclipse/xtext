@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.scoping.featurecalls;
 
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 
 import com.google.inject.ImplementedBy;
 
@@ -21,12 +20,16 @@ public interface IFeaturesForTypeProvider {
 	
 	boolean isExtensionProvider();
 
-	// TODO use synonymes/synonym hierarchy in addition to hierarchy
+	// TODO use a specialized IJvmTypeHierarchy instance that allows to obtain more information
+	// e.g. constant time lookup of prepared synonym types
 	Iterable<JvmFeature> getFeaturesByName(
-			String name, JvmTypeReference declarator,
-			TypeArgumentContext context, Iterable<JvmTypeReference> hierarchy);
+			String name, 
+			JvmTypeReference declarator, 
+			Iterable<JvmTypeReference> hierarchy);
 
-	// TODO use synonymes/synonym hierarchy in addition to hierarchy
-	Iterable<JvmFeature> getAllFeatures(JvmTypeReference typeReference, TypeArgumentContext context,
+	// TODO use a specialized IJvmTypeHierarchy instance that allows to obtain more information
+	// e.g. constant time lookup of prepared synonym types
+	Iterable<JvmFeature> getAllFeatures(
+			JvmTypeReference typeReference,
 			Iterable<JvmTypeReference> hierarchy);
 }

@@ -73,6 +73,8 @@ public class TypeReferences {
 						return getRawType(upperBound);
 					}
 				}
+				// no upper bound found
+				return findDeclaredType(Object.class, rawType);
 			}
 			return rawType;
 		} else if (reference instanceof JvmGenericArrayTypeReference) {
