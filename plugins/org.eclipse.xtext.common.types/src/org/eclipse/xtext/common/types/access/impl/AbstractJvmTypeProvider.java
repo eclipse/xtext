@@ -41,8 +41,8 @@ public abstract class AbstractJvmTypeProvider implements IJvmTypeProvider, Resou
 	public TypeResource createResource(URI uri) {
 		TypeResource result = doCreateResource(uri);
 		final IMirror createMirror = createMirror(uri);
-		if (createMirror ==  null)
-			throw new IllegalArgumentException("Couldn'T find type for uri "+uri);
+		if (createMirror ==  null) 
+			return null;
 		result.setMirror(createMirror);
 		return result;
 	}
