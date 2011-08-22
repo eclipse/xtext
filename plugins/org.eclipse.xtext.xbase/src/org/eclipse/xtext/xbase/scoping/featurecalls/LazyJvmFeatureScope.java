@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.featurecalls;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import org.eclipse.xtext.scoping.IScope;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.inject.Provider;
 import com.google.inject.internal.Lists;
 import com.google.inject.internal.Maps;
 
@@ -38,7 +40,7 @@ public class LazyJvmFeatureScope extends JvmFeatureScope implements Predicate<IE
 	private Map<QualifiedName, List<IEObjectDescription>> cachedLocalElements = Maps.newHashMap();
 	
 	@Override
-	protected Iterable<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
+	protected List<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
 		List<IEObjectDescription> result = cachedLocalElements.get(name);
 		if (result == null) {
 			Iterable<IEObjectDescription> candidates = strategy.getDescriptionsByName(name);
@@ -46,6 +48,30 @@ public class LazyJvmFeatureScope extends JvmFeatureScope implements Predicate<IE
 			cachedLocalElements.put(name, result);
 		}
 		return result;
+	}
+	
+	@Override
+	public Iterable<IEObjectDescription> getElements(final QualifiedName name) {
+		// avoid using Iterables.concat here
+		List<IEObjectDescription> localElements = getLocalElementsByName(name);
+		if (localElements.isEmpty())
+			return getParent().getElements(name);
+		Iterable<IEObjectDescription> parentElements = getParentElements(new Provider<Iterable<IEObjectDescription>>() {
+			public Iterable<IEObjectDescription> get() {
+				return getParent().getElements(name);
+			}
+		});
+		Iterable<IEObjectDescription> result = Iterables.concat(localElements, parentElements);
+		return result;
+	}
+	
+	@Override
+	protected boolean isShadowedBy(IEObjectDescription fromParent, Iterable<IEObjectDescription> localElements) {
+		if (localElements instanceof Collection<?>) {
+			if (((Collection<?>) localElements).isEmpty())
+				return false;
+		}
+		return super.isShadowedBy(fromParent, localElements);
 	}
 	
 	@Override

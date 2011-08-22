@@ -208,6 +208,12 @@ public abstract class AbstractScope implements IScope {
 		return new ParentIterable(this, provider);
 	}
 	
+	/**
+	 * Returns <code>true</code> if the given description {@code input} from the parent scope is
+	 * shadowed by local elements.
+	 * @return <code>true</code> if the given description {@code input} from the parent scope is
+	 * shadowed by local elements.
+	 */
 	protected boolean isShadowed(IEObjectDescription input) {
 		final Iterable<IEObjectDescription> localElements = getLocalElementsByName(input.getName());
 		final boolean isEmpty = isEmpty(localElements);
