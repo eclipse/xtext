@@ -28,13 +28,23 @@ public abstract class AbstractFeaturesForTypeProvider implements IFeaturesForTyp
 	private TypeReferences typeReferences;
 	
 	/**
-	 * Whether both {@link JvmTypeReference}s point to the same rawtyp or the second points to a type parameter where
-	 * the its upperBound is the same or a supertype of the first argument's raw type.
+	 * Returns <code>true</code> if the the first reference points to the same rawtype as the second
+	 * reference's erasure. In other words, the method returns <code>true</code> for the following cases:
+	 * <pre>
+	 * isSameTypeOrAssignableToUpperBound(String, String)
+	 * isSameTypeOrAssignableToUpperBound(String, T extends String)
+	 * </pre>
+	 * and <code>false</code> for
+	 * <pre>
+	 * isSameTypeOrAssignableToUpperBound(CharSequence, String)
+	 * isSameTypeOrAssignableToUpperBound(Object, String)
+	 * </pre>
+	 * 
 	 */
 	protected boolean isSameTypeOrAssignableToUpperBound(JvmTypeReference first, JvmTypeReference second) {
 		if (second == null)
 			return false;
-		if (second.getType() == first.getType()) {
+		if (second.getType() == first.getType()) { // TODO: use #getRawType, handle multi types
 			return true;
 		}
 		if (second.getType() instanceof JvmTypeParameter) {

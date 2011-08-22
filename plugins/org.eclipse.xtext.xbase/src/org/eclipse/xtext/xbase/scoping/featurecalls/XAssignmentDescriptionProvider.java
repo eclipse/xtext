@@ -13,8 +13,7 @@ import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.util.IAcceptor;
 
 /**
- * 
- * creates assignment feature descriptions for fields.
+ * Creates assignment feature descriptions for fields.
  * 
  * @author Sven Efftinge - Initial contribution and API
  */

@@ -18,11 +18,6 @@ import org.eclipse.xtext.resource.IEObjectDescription;
  */
 public interface IJvmFeatureDescriptionProvider {
 	
-//	/**
-//	 * called for each feature in the current context type's type hierarchy.
-//	 */
-//	void addFeatureDescriptions(JvmFeature feature, final TypeArgumentContext context, IAcceptor<JvmFeatureDescription> acceptor);
-
 	/**
 	 * Used to name scopes created using this provider
 	 */

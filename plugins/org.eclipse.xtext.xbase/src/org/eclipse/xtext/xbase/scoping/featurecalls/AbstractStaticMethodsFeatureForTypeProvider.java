@@ -18,7 +18,6 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.Tuples;
 
@@ -38,7 +37,7 @@ public abstract class AbstractStaticMethodsFeatureForTypeProvider extends Abstra
 	protected Resource context;
 
 	public Iterable<JvmFeature> getFeaturesByName(String name, JvmTypeReference declarator,
-			TypeArgumentContext context, Iterable<JvmTypeReference> hierarchy) {
+			Iterable<JvmTypeReference> hierarchy) {
 		Set<JvmFeature> result = Sets.newLinkedHashSet();
 		if (declarator != null) {
 			collectFeatures(name, hierarchy, result);	
@@ -48,43 +47,17 @@ public abstract class AbstractStaticMethodsFeatureForTypeProvider extends Abstra
 		return result;
 	}
 	
-	public final Iterable<JvmFeature> getAllFeatures(JvmTypeReference declarator, TypeArgumentContext context,
+	public final Iterable<JvmFeature> getAllFeatures(JvmTypeReference declarator,
 			Iterable<JvmTypeReference> hierarchy) {
 		Set<JvmFeature> result = Sets.newLinkedHashSet();
 		if (declarator != null) {
-			collectFeatures(hierarchy, result);	
+			collectFeatures(null, hierarchy, result);	
 		} else {
-			collectFeatures(null, result);
+			collectFeatures(null, null, result);
 		}
 		return result;
 	}
 
-	protected void collectFeatures(Iterable<JvmTypeReference> hierarchy, Collection<JvmFeature> result) {
-		final Map<JvmTypeReference, Collection<String>> staticTypeNames = getVisibleTypesContainingStaticMethods(hierarchy);
-		for (final Map.Entry<JvmTypeReference, Collection<String>> e : staticTypeNames.entrySet()) {
-			for(final String staticTypeName: e.getValue()) {
-				JvmTypeReference staticType = cache.get(Tuples.create(this, staticTypeName), context, new Provider<JvmTypeReference>() {
-					public JvmTypeReference get() {
-						return getTypeReferences().getTypeForName(staticTypeName, context);
-					}
-				}) ;
-				if (staticType != null) {
-					JvmType rawType = getTypeReferences().getRawType(staticType);
-					if (rawType instanceof JvmDeclaredType) {
-						Iterable<JvmFeature> features = ((JvmDeclaredType) rawType).getAllFeatures();
-						for(JvmFeature feature: features) {
-							if (feature instanceof JvmOperation) {
-								if (isMatchingExtension(e.getKey(), (JvmOperation) feature)) {
-									result.add(feature);
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-	
 	protected void collectFeatures(String name, Iterable<JvmTypeReference> hierarchy, Collection<JvmFeature> result) {
 		final Map<JvmTypeReference, Collection<String>> staticTypeNames = getVisibleTypesContainingStaticMethods(hierarchy);
 		for (final Map.Entry<JvmTypeReference, Collection<String>> e : staticTypeNames.entrySet()) {
@@ -97,7 +70,7 @@ public abstract class AbstractStaticMethodsFeatureForTypeProvider extends Abstra
 				if (staticType != null) {
 					JvmType rawType = getTypeReferences().getRawType(staticType);
 					if (rawType instanceof JvmDeclaredType) {
-						Iterable<JvmFeature> features = ((JvmDeclaredType) rawType).findAllFeaturesByName(name);
+						Iterable<JvmFeature> features = name != null ? ((JvmDeclaredType) rawType).findAllFeaturesByName(name) : ((JvmDeclaredType) rawType).getAllFeatures();
 						for(JvmFeature feature: features) {
 							if (feature instanceof JvmOperation) {
 								if (isMatchingExtension(e.getKey(), (JvmOperation) feature)) {
