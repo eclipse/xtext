@@ -30,6 +30,9 @@ import org.eclipse.xtext.util.StringInputStream;
  */
 public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 	
+	/**
+	 * @noimplement This interface is not intended to be implemented by clients.
+	 */
 	public interface IFileCallback {
 		public void afterFileUpdate(IFile file);
 		public void afterFileCreation(IFile file);

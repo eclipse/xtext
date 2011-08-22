@@ -42,7 +42,7 @@ import com.google.inject.name.Named;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
- * @authot Thomas Wolf <thomas.wolf@paranor.ch> - Refactored the build phases and documentation
+ * @author Thomas Wolf <thomas.wolf@paranor.ch> - Refactored the build phases and documentation
  */
 public class ClusteringBuilderState extends AbstractBuilderState {
 
@@ -54,7 +54,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
 
 	@Inject(optional = true)
 	@Named("org.eclipse.xtext.builder.clustering.ClusteringBuilderState.clusterSize")
-	private int clusterSize = 20;
+	private int clusterSize = 150;
 
 	/**
      * Actually do the build.
@@ -195,7 +195,8 @@ public class ClusteringBuilderState extends AbstractBuilderState {
             updateMarkers(resourceSet, ImmutableList.<Delta>copyOf(newDeltas), subProgress.newChild(1));
             allDeltas.addAll(newDeltas);
             // Release memory
-            resourceSet.getResources().clear();
+            if (!queue.isEmpty())
+            	resourceSet.getResources().clear();
         }
         return allDeltas;
     }
