@@ -25,7 +25,6 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Activator: org.eclipse.xtext.xtend2.ui.internal.Xtend2Activator
 Export-Package: org.eclipse.xtext.xtend2.ui;x-friends:="org.eclipse.xtext.xtend2.tests,org.eclipse.xtext.xtend2.ui.tests",
  org.eclipse.xtext.xtend2.ui.autoedit;x-friends:="org.eclipse.xtext.xtend2.tests,org.eclipse.xtext.xtend2.ui.tests",
- org.eclipse.xtext.xtend2.ui.builder;x-friends:="org.eclipse.xtext.xtend2.tests,org.eclipse.xtext.xtend2.ui.tests",
  org.eclipse.xtext.xtend2.ui.contentassist;x-friends:="org.eclipse.xtext.xtend2.tests,org.eclipse.xtext.xtend2.ui.tests",
  org.eclipse.xtext.xtend2.ui.contentassist.antlr;x-friends:="org.eclipse.xtext.xtend2.tests,org.eclipse.xtext.xtend2.ui.tests",
  org.eclipse.xtext.xtend2.ui.contentassist.antlr.internal;x-friends:="org.eclipse.xtext.xtend2.tests,org.eclipse.xtext.xtend2.ui.tests",

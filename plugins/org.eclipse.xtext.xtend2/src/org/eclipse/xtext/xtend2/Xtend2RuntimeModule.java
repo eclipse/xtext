@@ -5,6 +5,8 @@ package org.eclipse.xtext.xtend2;
 
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.generator.IGenerator;
+import org.eclipse.xtext.generator.OutputConfigurationProvider;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
@@ -16,6 +18,8 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.validation.EarlyExitValidator;
+import org.eclipse.xtext.xtend2.compiler.Xtend2Generator;
+import org.eclipse.xtext.xtend2.compiler.Xtend2OutputConfigurationProvider;
 import org.eclipse.xtext.xtend2.conversion.Xtend2ValueConverterService;
 import org.eclipse.xtext.xtend2.featurecalls.Xtend2IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
@@ -91,5 +95,13 @@ public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2
 	
 	public Class<? extends TypeArgumentContextProvider> bindTypeArgumentContextProvider() {
 		return XtendTypeArgumentContextProvider.class;
+	}
+	
+	public Class<? extends IGenerator> bindIGenerator() {
+		return Xtend2Generator.class;
+	}
+	
+	public Class<? extends OutputConfigurationProvider> bindOutputConfigurationProvider() {
+		return Xtend2OutputConfigurationProvider.class;
 	}
 }
