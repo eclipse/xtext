@@ -53,14 +53,23 @@ public class JvmFeatureScope extends SimpleScope {
 		return super.toString();
 	}
 	
-	/*
-	 * Specialized to interpret the shadowing key of sugared assignments to make sure
-	 * that fields with the very same name shadow properties, e.g. field prop1 has to
-	 * shadow all overloaded versions of setProp1(type).
-	 */
+	
 	@Override
 	protected boolean isShadowed(IEObjectDescription fromParent) {
 		final Iterable<IEObjectDescription> localElements = getLocalElementsByName(fromParent.getName());
+		return isShadowedBy(fromParent, localElements);
+	}
+
+	/*
+	 * Specialized to interpret the shadowing key of sugared assignments to make sure
+	 * that fields with the very same name shadow properties, e.g. field prop1 has to
+	 * shadow all overloaded versions of setProp1(type). Furthermore we want to allow
+	 * overwriting the concrete algorithm without the need to fetch the localElements twice.
+	 */
+	/**
+	 * @see JvmFeatureScope#isShadowed(IEObjectDescription)
+	 */
+	protected boolean isShadowedBy(IEObjectDescription fromParent, final Iterable<IEObjectDescription> localElements) {
 		boolean result = false;
 		String parentKey = getShadowingKey(fromParent);
 		for(IEObjectDescription local: localElements) {
