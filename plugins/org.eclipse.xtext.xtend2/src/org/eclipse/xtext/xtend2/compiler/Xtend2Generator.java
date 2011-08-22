@@ -11,6 +11,7 @@ import java.io.StringWriter;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
@@ -32,11 +33,15 @@ public class Xtend2Generator implements IGenerator {
 		Object contents = input.getContents().get(0);
 		if (!(contents instanceof XtendFile)) 
 			return;
+		XtendFile file = (XtendFile) contents;
+		// TODO remove workaround for regression: the generator project cannot be build without resolveAll 
+		EcoreUtil.resolveAll(file);
+		if (!input.getErrors().isEmpty())
+			throw new RuntimeException("cannot compile resource: " + input.getURI());
 		final EObject derived = input.getContents().get(1);
 		if (!(derived instanceof JvmType))
 			return;
 		JvmType derivedType = (JvmType) derived;
-		XtendFile file = (XtendFile) contents;
 		final StringWriter writer = new StringWriter();
 		compiler.compile(file, writer);
 		final String fileName = derivedType.getIdentifier().replace('.', '/')+".java";
