@@ -162,6 +162,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		} else {
 			progress.worked(1);
 		}
+		resourceSet.eSetDeliver(false);
 		resourceSet.getResources().clear();
 		resourceSet.eAdapters().clear();
 	}
