@@ -41,17 +41,24 @@ public class XFeatureCallSugarDescriptionProvider extends DefaultJvmFeatureDescr
 	}
 
 	@Override
-	protected void doCollectDescriptions(String name, IFeaturesForTypeProvider featureProvider, JvmTypeReference typeReference, TypeArgumentContext context,
-			Iterable<JvmTypeReference> hierarchy, IAcceptor<JvmFeatureDescription> acceptor) {
-		super.doCollectDescriptions(name, featureProvider, typeReference, context, hierarchy, acceptor);
+	protected void doCollectDescriptions(final String name, IFeaturesForTypeProvider featureProvider, JvmTypeReference typeReference, TypeArgumentContext context,
+			Iterable<JvmTypeReference> hierarchy, final IAcceptor<JvmFeatureDescription> acceptor) {
+		IAcceptor<JvmFeatureDescription> myAcceptor = new IAcceptor<JvmFeatureDescription>() {
+			public void accept(JvmFeatureDescription t) {
+				if (name.equals(t.getName().toString())) {
+					acceptor.accept(t);
+				}
+			}
+		};
+		super.doCollectDescriptions(name, featureProvider, typeReference, context, hierarchy, myAcceptor);
 		QualifiedName methodName = operatorMapping.getMethodName(QualifiedName.create(name));
 		if (methodName != null) {
-			super.doCollectDescriptions(methodName.toString(), featureProvider, typeReference, context, hierarchy, acceptor);	
+			super.doCollectDescriptions(methodName.toString(), featureProvider, typeReference, context, hierarchy, myAcceptor);	
 		} else {
 			String getterAlias = "get" + Strings.toFirstUpper(name);
-			super.doCollectDescriptions(getterAlias, featureProvider, typeReference, context, hierarchy, acceptor);
+			super.doCollectDescriptions(getterAlias, featureProvider, typeReference, context, hierarchy, myAcceptor);
 			String isAlias = "is" + Strings.toFirstUpper(name);
-			super.doCollectDescriptions(isAlias, featureProvider, typeReference, context, hierarchy, acceptor);
+			super.doCollectDescriptions(isAlias, featureProvider, typeReference, context, hierarchy, myAcceptor);
 		}
 	}
 	
