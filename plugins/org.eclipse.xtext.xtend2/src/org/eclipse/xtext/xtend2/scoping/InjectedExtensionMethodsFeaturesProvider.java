@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtend2.scoping;
 
 import static com.google.common.collect.Lists.*;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -20,7 +21,6 @@ import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
-import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IFeaturesForTypeProvider;
@@ -46,59 +46,52 @@ public class InjectedExtensionMethodsFeaturesProvider implements IFeaturesForTyp
 	}
 	
 	public Iterable<JvmFeature> getFeaturesByName(String name, JvmTypeReference declarator,
-			TypeArgumentContext context, Iterable<JvmTypeReference> hierarchy) {
-		List<JvmFeature> result = newArrayList();
+			Iterable<JvmTypeReference> hierarchy) {
 		JvmTypeReference typeReference = xtendField.getType();
 		JvmType rawType = typeRefs.getRawType(typeReference);
 		if (rawType instanceof JvmDeclaredType) {
+			List<JvmFeature> result = newArrayList();
 			Iterable<JvmFeature> features = ((JvmDeclaredType) rawType).findAllFeaturesByName(name);
-			for(JvmFeature feature: features) {
-				if (feature instanceof JvmOperation) {
-					final JvmOperation jvmOperation = (JvmOperation) feature;
-					List<JvmFormalParameter> parameters = jvmOperation.getParameters();
-					if (!jvmOperation.isStatic() && parameters.size()>0) {
-						JvmFormalParameter parameter = parameters.get(0);
-						JvmTypeReference parameterType = parameter.getParameterType();
-						for(JvmTypeReference superType: hierarchy) {
-							if (parameter.getParameterType() != null && isCompatibleType(superType, parameterType)) {
-								result.add(feature);
-								break;
-							}
+			collectExtensions(hierarchy, features, result);
+			return result;
+		} else {
+			return Collections.emptyList();
+		}
+	}
+
+	protected void collectExtensions(Iterable<JvmTypeReference> hierarchy, Iterable<JvmFeature> candidates,
+			List<JvmFeature> result) {
+		for(JvmFeature feature: candidates) {
+			if (feature instanceof JvmOperation) {
+				final JvmOperation jvmOperation = (JvmOperation) feature;
+				List<JvmFormalParameter> parameters = jvmOperation.getParameters();
+				if (!jvmOperation.isStatic() && parameters.size()>0) {
+					JvmFormalParameter parameter = parameters.get(0);
+					JvmTypeReference parameterType = parameter.getParameterType();
+					for(JvmTypeReference superType: hierarchy) {
+						if (parameter.getParameterType() != null && isCompatibleType(superType, parameterType)) {
+							result.add(feature);
+							break;
 						}
-						
 					}
+					
 				}
 			}
 		}
-		return result;
 	}
 	
-	public Iterable<JvmFeature> getAllFeatures(JvmTypeReference reference, TypeArgumentContext context,
+	public Iterable<JvmFeature> getAllFeatures(JvmTypeReference reference,
 			Iterable<JvmTypeReference> hierarchy) {
-		List<JvmFeature> result = newArrayList();
 		JvmTypeReference typeReference = xtendField.getType();
 		JvmType rawType = typeRefs.getRawType(typeReference);
 		if (rawType instanceof JvmDeclaredType) {
+			List<JvmFeature> result = newArrayList();
 			Iterable<JvmFeature> features = ((JvmDeclaredType) rawType).getAllFeatures();
-			for(JvmFeature feature: features) {
-				if (feature instanceof JvmOperation) {
-					final JvmOperation jvmOperation = (JvmOperation) feature;
-					List<JvmFormalParameter> parameters = jvmOperation.getParameters();
-					if (!jvmOperation.isStatic() && parameters.size()>0) {
-						JvmFormalParameter parameter = parameters.get(0);
-						JvmTypeReference parameterType = parameter.getParameterType();
-						for(JvmTypeReference superType: hierarchy) {
-							if (parameter.getParameterType() != null && isCompatibleType(superType, parameterType)) {
-								result.add(feature);
-								break;
-							}
-						}
-						
-					}
-				}
-			}
+			collectExtensions(hierarchy, features, result);
+			return result;
+		} else {
+			return Collections.emptyList();
 		}
-		return result;
 	}
 	
 	protected boolean isCompatibleType(JvmTypeReference type, JvmTypeReference declaration) {

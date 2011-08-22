@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtend2.scoping;
 import static com.google.common.collect.Lists.*;
 import static java.util.Collections.*;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -18,7 +19,6 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.xbase.scoping.featurecalls.AbstractFeaturesForTypeProvider;
 
 import com.google.common.collect.Lists;
@@ -35,32 +35,41 @@ public class ExtensionMethodsFeaturesProvider extends AbstractFeaturesForTypePro
 	}
 	
 	public Iterable<JvmFeature> getFeaturesByName(String name, JvmTypeReference declarator,
-			TypeArgumentContext context, Iterable<JvmTypeReference> hierarchy) {
+			Iterable<JvmTypeReference> hierarchy) {
 		if(extensionProvidingType == null)
 			return emptyList();
 		List<JvmFeature> result = Lists.newArrayList();
 		JvmType rawType = getTypeReferences().getRawType(extensionProvidingType);
 		if (rawType instanceof JvmDeclaredType) {
 			Iterable<JvmFeature> candidates = ((JvmDeclaredType) rawType).findAllFeaturesByName(name);
-			for(JvmTypeReference reference: hierarchy) {
-				for(JvmFeature candidate: candidates) {
-					if (candidate instanceof JvmOperation) {
-						JvmOperation operation = (JvmOperation) candidate;
-						List<JvmFormalParameter> parameters = operation.getParameters();
-						if (!operation.isStatic() && parameters.size()>0) {
-							JvmTypeReference parameterType = parameters.get(0).getParameterType();
-							if (isSameTypeOrAssignableToUpperBound(reference, parameterType)) {
-								result.add(operation);
-							}
+			collectExtensionMethods(hierarchy, candidates, result);
+		}
+		return result;
+	}
+
+	protected void collectExtensionMethods(Iterable<JvmTypeReference> hierarchy, Iterable<JvmFeature> candidates,
+			Collection<JvmFeature> result) {
+		boolean atLeastOneCandidate = false;
+		for(JvmTypeReference reference: hierarchy) {
+			for(JvmFeature candidate: candidates) {
+				if (candidate instanceof JvmOperation) {
+					JvmOperation operation = (JvmOperation) candidate;
+					List<JvmFormalParameter> parameters = operation.getParameters();
+					if (!operation.isStatic() && parameters.size()>0) {
+						atLeastOneCandidate = true;
+						JvmTypeReference parameterType = parameters.get(0).getParameterType();
+						if (isSameTypeOrAssignableToUpperBound(reference, parameterType)) {
+							result.add(operation);
 						}
 					}
 				}
 			}
+			if (!atLeastOneCandidate)
+				return;
 		}
-		return result;
 	}
 	
-	public Iterable<JvmFeature> getAllFeatures(JvmTypeReference typeReference, TypeArgumentContext context,
+	public Iterable<JvmFeature> getAllFeatures(JvmTypeReference typeReference,
 			Iterable<JvmTypeReference> hierarchy) {
 		if(extensionProvidingType == null)
 			return emptyList();
@@ -68,20 +77,7 @@ public class ExtensionMethodsFeaturesProvider extends AbstractFeaturesForTypePro
 		JvmType rawType = getTypeReferences().getRawType(extensionProvidingType);
 		if (rawType instanceof JvmDeclaredType) {
 			Iterable<JvmFeature> candidates = ((JvmDeclaredType) rawType).getAllFeatures();
-			for(JvmTypeReference reference: hierarchy) {
-				for(JvmFeature candidate: candidates) {
-					if (candidate instanceof JvmOperation) {
-						JvmOperation operation = (JvmOperation) candidate;
-						List<JvmFormalParameter> parameters = operation.getParameters();
-						if (!operation.isStatic() && parameters.size()>0) {
-							JvmTypeReference parameterType = parameters.get(0).getParameterType();
-							if (isSameTypeOrAssignableToUpperBound(reference, parameterType)) {
-								result.add(operation);
-							}
-						}
-					}
-				}
-			}
+			collectExtensionMethods(hierarchy, candidates, result);
 		}
 		return result;
 	}
