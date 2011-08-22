@@ -17,12 +17,8 @@ import java.io.IOException;
  */
 public class JavaIoFileSystemAccess extends AbstractFileSystemAccess {
 
-	public void generateFile(String fileName, String slot, CharSequence contents) {
-		String outlet = getPathes().get(slot);
-		if (outlet == null)
-			throw new IllegalArgumentException("A slot with name '" + slot + "' has not been configured.");
-		String pathName = toSystemFileName(outlet + "/" + fileName);
-		File file = new File(pathName);
+	public void generateFile(String fileName, String outputConfigName, CharSequence contents) {
+		File file = getFile(fileName, outputConfigName);
 		try {
 			createFolder(file.getParentFile());
 			FileWriter writer = new FileWriter(file);
@@ -33,6 +29,18 @@ public class JavaIoFileSystemAccess extends AbstractFileSystemAccess {
 		}
 	}
 
+	/**
+	 * @since 2.1
+	 */
+	protected File getFile(String fileName, String outputConfigName) {
+		String outlet = getPathes().get(outputConfigName);
+		if (outlet == null)
+			throw new IllegalArgumentException("A slot with name '" + outputConfigName + "' has not been configured.");
+		String pathName = toSystemFileName(outlet + "/" + fileName);
+		File file = new File(pathName);
+		return file;
+	}
+
 	protected void createFolder(File parent) {
 		if (parent != null && !parent.exists()) {
 			// TODO check return value
@@ -40,9 +48,11 @@ public class JavaIoFileSystemAccess extends AbstractFileSystemAccess {
 		}
 	}
 
-	public void deleteFile(String fileName) {
-		// TODO check return value
-		new File(toSystemFileName(fileName)).delete();
+	@Override
+	public void deleteFile(String fileName,String outputConfiguration) {
+		File file = getFile(fileName, outputConfiguration);
+		if (file.exists())
+			file.delete();
 	}
 
 	protected String toSystemFileName(String fileName) {

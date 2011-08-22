@@ -29,7 +29,9 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Jan Koehnlein
+ * @deprecated use {@link EclipseResourceFileSystemAccess2} instead
  */
+@Deprecated
 public class EclipseResourceFileSystemAccess extends AbstractFileSystemAccess {
 
 	@Inject
@@ -40,6 +42,7 @@ public class EclipseResourceFileSystemAccess extends AbstractFileSystemAccess {
 		this.root = root;
 	}
 
+	@Override
 	public void deleteFile(String fileName) {
 		try {
 			IFile file = root.getFile(new Path(fileName));

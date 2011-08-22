@@ -46,7 +46,7 @@ public class Xtend2BuilderParticipantTest extends AbstractXtend2UITestCase {
 	
 	public void testBuild() throws Exception {
 		IFile sourceFile = testHelper.createFile("test/Test", "package test\nclass Test {}");
-		sourceFile.setCharset(getNonDefaultEncoding(), null);
+		sourceFile.getProject().setDefaultCharset(getNonDefaultEncoding(), null);
 		assertTrue(sourceFile.exists());
 		waitForAutoBuild();
 
@@ -61,7 +61,7 @@ public class Xtend2BuilderParticipantTest extends AbstractXtend2UITestCase {
 		
 		sourceFile.delete(true, null);
 		waitForAutoBuild();
-
+		cleanBuild();
 		assertFalse(targetFile.exists());
 		assertFalse(targetFile.getParent().exists());
 		assertFalse(classFile.exists());

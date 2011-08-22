@@ -41,7 +41,9 @@ import com.google.inject.Provider;
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Jan Koehnlein
+ * @deprecated use {@link BuilderParticipant} instead
  */
+@Deprecated
 public class JavaProjectBasedBuilderParticipant implements IXtextBuilderParticipant {
 
 	@Inject

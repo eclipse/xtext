@@ -223,6 +223,23 @@ public class IResourcesSetupUtil {
 			}
 		} while (wasInterrupted);
 	}
+	
+	public static void cleanBuild() throws CoreException {
+		ResourcesPlugin.getWorkspace().build(
+				IncrementalProjectBuilder.CLEAN_BUILD, monitor());
+		boolean wasInterrupted = false;
+		do {
+			try {
+				Job.getJobManager().join(ResourcesPlugin.FAMILY_MANUAL_BUILD,
+						null);
+				wasInterrupted = false;
+			} catch (OperationCanceledException e) {
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				wasInterrupted = true;
+			}
+		} while (wasInterrupted);
+	}
 
 	public static void waitForAutoBuild() {
 		boolean wasInterrupted = false;
