@@ -22,12 +22,14 @@ public interface IFileSystemAccess {
 	
 	/**
 	 * @param fileName using '/' as file separator
+	 * @param the name of the output configuration
 	 * @param contents
 	 */
-	public void generateFile(String fileName, String slot, CharSequence contents);
+	public void generateFile(String fileName, String outputConfigurationName, CharSequence contents);
 	
 	/**
 	 * @param fileName using '/' as file separator
 	 */
 	public void deleteFile(String fileName);
+	
 }

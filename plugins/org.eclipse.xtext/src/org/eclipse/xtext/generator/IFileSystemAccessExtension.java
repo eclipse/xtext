@@ -7,29 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator;
 
-import static com.google.common.collect.Maps.*;
-
-import java.util.Map;
-
 /**
  * @author Sven Efftinge - Initial contribution and API
- * @since 2.0
+ * @since 2.1
  */
-public class InMemoryFileSystemAccess extends AbstractFileSystemAccess {
-	
-	private Map<String, CharSequence> files = newHashMap();
+public interface IFileSystemAccessExtension {
 
-	public void generateFile(String fileName, String outputConfigName, CharSequence contents) {
-		files.put(outputConfigName+fileName, contents);
-	}
-
-	@Override
-	public void deleteFile(String fileName, String outputConfigName) {
-		files.remove(outputConfigName+fileName);
-	}
-	
-	public Map<String, CharSequence> getFiles() {
-		return files;
-	}
-	
+	/**
+	 * @param fileName using '/' as file separator
+	 * @param the name of the output configuration
+	 * @since 2.1
+	 */
+	public void deleteFile(String fileName, String outputConfigurationName);
 }
