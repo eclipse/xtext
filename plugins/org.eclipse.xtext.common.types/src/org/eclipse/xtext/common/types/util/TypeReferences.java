@@ -10,6 +10,7 @@ package org.eclipse.xtext.common.types.util;
 import static com.google.common.collect.Lists.*;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -115,8 +116,9 @@ public class TypeReferences {
 	}
 	
 	public JvmParameterizedTypeReference createTypeRef(JvmType type, JvmTypeReference... typeArgs) {
-		List<JvmTypeReference> typeReferences = newArrayList();
-		if (typeArgs!=null) {
+		List<JvmTypeReference> typeReferences = Collections.emptyList();
+		if (typeArgs!=null && typeArgs.length > 0) {
+			typeReferences = newArrayListWithCapacity(typeArgs.length);
 			for (int i = 0; i < typeArgs.length; i++) {
 				JvmTypeReference jvmTypeReference = typeArgs[i];
 				typeReferences.add(EcoreUtil2.clone(jvmTypeReference));
@@ -129,8 +131,9 @@ public class TypeReferences {
 						+ " type arguments, but was " + typeReferences.size()
 						+ ". Either pass zero arguments (raw type) or the correct number.");
 			}
-			// Raw type -> create type refereces to type param
+			// Raw type -> create type references to type param
 			if (typeReferences.isEmpty() && !list.isEmpty()) {
+				typeReferences = newArrayListWithCapacity(list.size());
 				for (JvmTypeParameter typeParameter : list) {
 					typeReferences.add(createTypeRef(typeParameter));
 				}
@@ -214,8 +217,10 @@ public class TypeReferences {
 		if (context.eResource() == null)
 			throw new NullPointerException("context must be contained in a resource");
 		final ResourceSet resourceSet = context.eResource().getResourceSet();
-		if (resourceSet == null)
-			throw new NullPointerException("context must be contained in a resource set");
+		if (resourceSet == null) {
+			// may be null if the editor was closed too early
+			return null;
+		}
 		// make sure a type provider is configured in the resource set. 
 		typeProviderFactory.findOrCreateTypeProvider(resourceSet);
 		URI uri = toCommonTypesUri(clazz);
