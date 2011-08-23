@@ -12,7 +12,6 @@ import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 import static org.eclipse.xtext.xtend2.xtend2.Xtend2Package.Literals.*;
 
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
-import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 
@@ -47,6 +46,29 @@ public class OverrideValidationTest extends AbstractXtend2TestCase {
 		XtendClass xtendClass = clazz("class Foo { def bar(java.util.List<String> x) {true} def bar(java.util.List<Integer> x) {false} }");
 		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, DUPLICATE_METHOD, "erasure", "List)", "List<String");
 		helper.assertError(xtendClass.getMembers().get(1), XTEND_FUNCTION, DUPLICATE_METHOD, "erasure", "List)", "List<Integer");
+	}
+	
+	public void testDuplicateMethod_4() throws Exception {
+		XtendClass xtendClass = clazz("class Foo { def <T> bar(T t) { '' } def <T> bar(T t) { 1 } }");
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, DUPLICATE_METHOD, "duplicate", "bar(T)");
+		helper.assertError(xtendClass.getMembers().get(1), XTEND_FUNCTION, DUPLICATE_METHOD, "duplicate", "bar(T)");
+	}
+	
+	public void testDuplicateMethod_5() throws Exception {
+		XtendClass xtendClass = clazz("class Foo { def <T> bar(T t) { '' } def <V> bar(V v) { 1 } }");
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, DUPLICATE_METHOD, "erasure", "Object)", "T");
+		helper.assertError(xtendClass.getMembers().get(1), XTEND_FUNCTION, DUPLICATE_METHOD, "erasure", "Object)", "V");
+	}
+	
+	public void testDuplicateMethod_6() throws Exception {
+		XtendClass xtendClass = clazz("class Foo { def <T> bar(CharSequence seq) { '' } def <V extends CharSequence> bar(V v) { 1 } }");
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, DUPLICATE_METHOD, "erasure", "CharSequence)");
+		helper.assertError(xtendClass.getMembers().get(1), XTEND_FUNCTION, DUPLICATE_METHOD, "erasure", "CharSequence)", "bar(V)");
+	}
+	
+	public void testDuplicateMethod_7() throws Exception {
+		XtendClass xtendClass = clazz("class Foo { def <T extends CharSequence> bar(T t) { '' } def <V extends String> bar(V v) { 1 } }");
+		helper.assertNoErrors(xtendClass);
 	}
 
 	public void testObsoleteOverride_0() throws Exception {
