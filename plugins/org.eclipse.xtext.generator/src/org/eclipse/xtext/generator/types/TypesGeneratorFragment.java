@@ -58,6 +58,8 @@ public class TypesGeneratorFragment extends DefaultGeneratorFragment {
 					 	"org.eclipse.xtext.ui.editor.contentassist.FQNPrefixMatcher")
 			 .addTypeToType("org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider$ReferenceProposalCreator",
 					 	"org.eclipse.xtext.common.types.xtext.ui.TypeAwareReferenceProposalCreator")
+		 	.addTypeToType("org.eclipse.xtext.ui.editor.IValidationJobScheduler",
+					 	"org.eclipse.xtext.common.types.xtext.ui.JdtValidationJobScheduler")
 			 .getBindings();
 	}
 
