@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -31,6 +32,8 @@ import com.google.common.collect.Maps;
  * @author Jan Koehnlein - introduced QualifiedName
  */
 public class CopiedResourceDescription extends AbstractResourceDescription {
+	
+	private final static Logger log = Logger.getLogger(CopiedResourceDescription.class);
     
 	private URI uri;
     
@@ -65,12 +68,14 @@ public class CopiedResourceDescription extends AbstractResourceDescription {
 
     public Iterable<QualifiedName> getImportedNames() {
     	// TODO see https://bugs.eclipse.org/bugs/show_bug.cgi?id=344373
+		log.error(new IllegalStateException("getImportedNames "+getURI()));
     	return Collections.emptyList();
 //        throw new UnsupportedOperationException("getImportedNames()");
     }
 
     public Iterable<IReferenceDescription> getReferenceDescriptions() {
     	// TODO see https://bugs.eclipse.org/bugs/show_bug.cgi?id=344373
+    	log.error(new IllegalStateException("getReferenceDescriptions "+getURI()));
     	return Collections.emptyList();
 //        throw new UnsupportedOperationException("getReferenceDescriptions()");
     }
