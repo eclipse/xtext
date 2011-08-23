@@ -69,6 +69,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		if (resource != null) {
 			ResourceSet resourceSet = resource.getResourceSet();
 			if (resourceSet != null) {
+				resourceSet.eSetDeliver(false); // don't notify resources - no need to unload them explicitly
 				resourceSet.getResources().clear();
 				resourceSet.eAdapters().clear();
 			}
@@ -234,6 +235,18 @@ public class XtextDocument extends Document implements IXtextDocument {
 			validationJob.cancel();
 			validationJob.schedule();
 		}
+	}
+	
+	/**
+	 * Returns the {@link URI uri} of the associated {@link org.eclipse.emf.ecore.resource.Resource emf resource}.
+	 * May be null if no resource is available or its uri is <code>null</code>.
+	 * @return the resource uri if available.
+	 * @since 2.1
+	 */
+	public URI getResourceURI() {
+		if (resource != null)
+			return resource.getURI();
+		return null;
 	}
 
 	@SuppressWarnings("unchecked")

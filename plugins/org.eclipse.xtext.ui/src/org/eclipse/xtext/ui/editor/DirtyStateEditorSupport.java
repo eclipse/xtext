@@ -30,6 +30,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.events.VerifyEvent;
 import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.xtext.resource.DescriptionUtils;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
@@ -252,6 +253,12 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	@Inject
 	private IResourceDescriptions resourceDescriptions;
 	
+	@Inject(optional=true)
+	private DescriptionUtils descriptionUtils;
+	
+	@Inject(optional=true)
+	private IValidationJobScheduler validationJobScheduler;
+	
 	private volatile IDirtyStateEditorSupportClient currentClient;
 	
 	private volatile boolean isDirty;
@@ -266,8 +273,15 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 		initDirtyResource(document);
 		stateChangeEventBroker.addListener(this);
 		client.addVerifyListener(this);
+		scheduleValidationJobIfNecessary();
 	}
 	
+	private void scheduleValidationJobIfNecessary() {
+		if (validationJobScheduler != null && currentClient != null) {
+			validationJobScheduler.scheduleInitialValidation(currentClient.getDocument());
+		}
+	}
+
 	public void verifyText(VerifyEvent e) {
 		if (isDirty || !e.doit)
 			return;
@@ -396,10 +410,7 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 		URIConverter converter = resourceSet.getURIConverter();
 		Set<URI> normalizedURIs = Sets.newHashSetWithExpectedSize(event.getDeltas().size());
 		for(IResourceDescription.Delta delta: event.getDeltas()) {
-			if (delta.getNew() != null)
-				normalizedURIs.add(converter.normalize(delta.getNew().getURI()));
-			else if (delta.getOld() != null)
-				normalizedURIs.add(converter.normalize(delta.getOld().getURI()));	
+			normalizedURIs.add(converter.normalize(delta.getUri()));
 		}
 		List<Resource> resources = resourceSet.getResources();
 		for(int i = 0; i< resources.size(); i++) {
@@ -424,6 +435,16 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 		for(IResourceDescription.Delta delta: event.getDeltas()) {
 			if (resourceDescriptionManager.isAffected(delta, description)) {
 				return true;
+			}
+		}
+		if (!isDirty() && !dirtyStateManager.hasContent(resource.getURI())) {
+			IResourceDescription originalDescription = resourceDescriptions.getResourceDescription(resource.getURI());
+			if (originalDescription != null && descriptionUtils != null) {
+				Set<URI> outgoingReferences = descriptionUtils.collectOutgoingReferences(originalDescription);
+				for(IResourceDescription.Delta delta: event.getDeltas()) {
+					if (delta.haveEObjectDescriptionsChanged() && outgoingReferences.contains(delta.getUri()))
+						return true;
+				}
 			}
 		}
 		return false;
