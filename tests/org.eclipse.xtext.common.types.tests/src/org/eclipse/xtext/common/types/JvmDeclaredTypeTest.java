@@ -7,6 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types;
 
+import java.util.Iterator;
+
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
+
 import junit.framework.TestCase;
 
 /**
@@ -132,4 +136,129 @@ public abstract class JvmDeclaredTypeTest extends TestCase {
 		assertEquals("java.lang.DoesNotExist.Outer.SimpleName", getObjectUnderTest().getQualifiedName('.'));
 	}
 	
+	public void testFindFeaturesByName_01() {
+		JvmDeclaredType type = getObjectUnderTest();
+		JvmOperation operation = TypesFactory.eINSTANCE.createJvmOperation();
+		operation.setSimpleName("foo");
+		type.getMembers().add(operation);
+		Iterable<JvmFeature> iterable = type.findAllFeaturesByName("foo");
+		Iterator<JvmFeature> iterator = iterable.iterator();
+		assertTrue(iterator.hasNext());
+		assertSame(operation, iterator.next());
+		assertFalse(iterator.hasNext());
+	}
+	
+	public void testFindFeaturesByName_02() {
+		JvmDeclaredType type = getObjectUnderTest();
+		JvmOperation operation = TypesFactory.eINSTANCE.createJvmOperation();
+		operation.setSimpleName("foo");
+		type.getMembers().add(operation);
+		type.findAllFeaturesByName("foo");
+		operation.setSimpleName("bar");
+		Iterable<JvmFeature> iterable = type.findAllFeaturesByName("bar");
+		Iterator<JvmFeature> iterator = iterable.iterator();
+		assertTrue(iterator.hasNext());
+		assertSame(operation, iterator.next());
+		assertFalse(iterator.hasNext());
+	}
+	
+	public void testFindFeaturesByName_03() {
+		JvmDeclaredType type = getObjectUnderTest();
+		JvmGenericType superType = TypesFactory.eINSTANCE.createJvmGenericType();
+		ResourceImpl resource = new ResourceImpl();
+		resource.getContents().add(type);
+		resource.getContents().add(superType);
+		JvmOperation operation = TypesFactory.eINSTANCE.createJvmOperation();
+		operation.setSimpleName("foo");
+		superType.getMembers().add(operation);
+		JvmParameterizedTypeReference reference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
+		reference.setType(superType);
+		type.getSuperTypes().add(reference);
+		Iterable<JvmFeature> iterable = type.findAllFeaturesByName("foo");
+		Iterator<JvmFeature> iterator = iterable.iterator();
+		assertTrue(iterator.hasNext());
+		assertSame(operation, iterator.next());
+		assertFalse(iterator.hasNext());
+	}
+	
+	public void testFindFeaturesByName_04() {
+		JvmDeclaredType type = getObjectUnderTest();
+		JvmGenericType superType = TypesFactory.eINSTANCE.createJvmGenericType();
+		ResourceImpl resource = new ResourceImpl();
+		resource.getContents().add(type);
+		resource.getContents().add(superType);
+		JvmOperation operation = TypesFactory.eINSTANCE.createJvmOperation();
+		operation.setSimpleName("foo");
+		superType.getMembers().add(operation);
+		JvmParameterizedTypeReference reference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
+		reference.setType(superType);
+		type.getSuperTypes().add(reference);
+		type.findAllFeaturesByName("foo");
+		operation.setSimpleName("bar");
+		Iterable<JvmFeature> iterable = type.findAllFeaturesByName("bar");
+		Iterator<JvmFeature> iterator = iterable.iterator();
+		assertTrue(iterator.hasNext());
+		assertSame(operation, iterator.next());
+		assertFalse(iterator.hasNext());
+	}
+	
+	public void testGetAllFeatures_01() {
+		JvmDeclaredType type = getObjectUnderTest();
+		JvmOperation operation = TypesFactory.eINSTANCE.createJvmOperation();
+		type.getMembers().add(operation);
+		Iterable<JvmFeature> iterable = type.getAllFeatures();
+		Iterator<JvmFeature> iterator = iterable.iterator();
+		assertTrue(iterator.hasNext());
+		assertSame(operation, iterator.next());
+		assertFalse(iterator.hasNext());
+	}
+	
+	public void testGetAllFeatures_02() {
+		JvmDeclaredType type = getObjectUnderTest();
+		type.getAllFeatures();
+		JvmOperation operation = TypesFactory.eINSTANCE.createJvmOperation();
+		type.getMembers().add(operation);
+		Iterable<JvmFeature> iterable = type.getAllFeatures();
+		Iterator<JvmFeature> iterator = iterable.iterator();
+		assertTrue(iterator.hasNext());
+		assertSame(operation, iterator.next());
+		assertFalse(iterator.hasNext());
+	}
+	
+	public void testGetAllFeatures_03() {
+		JvmDeclaredType type = getObjectUnderTest();
+		JvmGenericType superType = TypesFactory.eINSTANCE.createJvmGenericType();
+		ResourceImpl resource = new ResourceImpl();
+		resource.getContents().add(type);
+		resource.getContents().add(superType);
+		JvmOperation operation = TypesFactory.eINSTANCE.createJvmOperation();
+		superType.getMembers().add(operation);
+		JvmParameterizedTypeReference reference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
+		reference.setType(superType);
+		type.getSuperTypes().add(reference);
+		Iterable<JvmFeature> iterable = type.getAllFeatures();
+		Iterator<JvmFeature> iterator = iterable.iterator();
+		assertTrue(iterator.hasNext());
+		assertSame(operation, iterator.next());
+		assertFalse(iterator.hasNext());
+	}
+	
+	public void testGetAllFeatures_04() {
+		JvmDeclaredType type = getObjectUnderTest();
+		JvmGenericType superType = TypesFactory.eINSTANCE.createJvmGenericType();
+		ResourceImpl resource = new ResourceImpl();
+		resource.getContents().add(type);
+		resource.getContents().add(superType);
+		type.getAllFeatures();
+		JvmOperation operation = TypesFactory.eINSTANCE.createJvmOperation();
+		superType.getMembers().add(operation);
+		JvmParameterizedTypeReference reference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
+		reference.setType(superType);
+		type.getSuperTypes().add(reference);
+		Iterable<JvmFeature> iterable = type.getAllFeatures();
+		Iterator<JvmFeature> iterator = iterable.iterator();
+		assertTrue(iterator.hasNext());
+		assertSame(operation, iterator.next());
+		assertFalse(iterator.hasNext());
+	}
 }
