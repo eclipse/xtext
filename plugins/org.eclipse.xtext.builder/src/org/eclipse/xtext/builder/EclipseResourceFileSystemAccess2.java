@@ -8,7 +8,6 @@
 package org.eclipse.xtext.builder;
 
 import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
@@ -16,9 +15,9 @@ import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
@@ -81,22 +80,27 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 		IFile file = getFile(fileName, outputName);
 		String contentsAsString = contents.toString(); 
 		if (file.exists()) {
-			if (outputConfig.isOverrideExistingResources()
-				&& hasContentsChanged(file, contentsAsString)){
+			if (outputConfig.isOverrideExistingResources()) {
 				try {
-					file.setContents(getInputStream(contentsAsString), true, true, monitor);
-					if (!file.isDerived() && outputConfig.isSetDerivedProperty()) {
-						file.setDerived(true);
+					StringInputStream newContent = getInputStream(contentsAsString, file.getCharset(true));
+					if (hasContentsChanged(file, newContent)) {
+						// reset to offset zero allows to reuse internal byte[]
+						// no need to convert the string twice
+						newContent.reset();
+						file.setContents(newContent, true, true, monitor);
+						if (!file.isDerived() && outputConfig.isSetDerivedProperty()) {
+							file.setDerived(true);
+						}
 					}
 				} catch (CoreException e) {
 					throw new RuntimeException(e);
-				} 
+				}
+				callBack.afterFileUpdate(file);
 			}
-			callBack.afterFileUpdate(file);
 		} else {
 			try {
 				ensureParentExists(file);
-				file.create(getInputStream(contentsAsString), true, monitor);
+				file.create(getInputStream(contentsAsString, file.getCharset(true)), true, monitor);
 				if (outputConfig.isSetDerivedProperty()) {
 					file.setDerived(true);
 				}
@@ -126,16 +130,14 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 			return;
 		if (container instanceof IFolder) {
 			ensureExists(container.getParent());
-			((IFolder)container).create(true,  true, monitor);
+			((IFolder)container).create(true, true, monitor);
 		}
 	}
 
-	protected ByteArrayInputStream getInputStream(String contentsAsString) {
+	protected StringInputStream getInputStream(String contentsAsString, String encoding) {
 		try {
-			return new ByteArrayInputStream(contentsAsString.getBytes(project.getDefaultCharset()));
+			return new StringInputStream(contentsAsString, encoding);
 		} catch (UnsupportedEncodingException e) {
-			throw new RuntimeException(e);
-		} catch (CoreException e) {
 			throw new RuntimeException(e);
 		}
 	}
@@ -144,17 +146,9 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 		return project.getFolder(new Path(outputConfig.getOutputDirectory()));
 	}
 
-	protected boolean hasContentsChanged(IFile file, String newContents) {
+	protected boolean hasContentsChanged(IFile file, StringInputStream newContent) {
 		boolean contentChanged = false;
 		BufferedInputStream oldContent = null;
-		StringInputStream newContent;
-		try {
-			newContent = new StringInputStream(newContents, file.getCharset());
-		} catch (UnsupportedEncodingException e) {
-			throw new RuntimeException(e);
-		} catch (CoreException e) {
-			throw new RuntimeException(e);
-		}
 		try {
 			oldContent = new BufferedInputStream(file.getContents());
 			int newByte = newContent.read();
@@ -176,8 +170,6 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 					// ignore
 				}
 			}
-			// reset to offset zero allows to reuse internal byte[]
-			newContent.reset();
 		}
 		return contentChanged;
 	}
@@ -187,7 +179,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 		try {
 			IFile file = getFile(fileName, outputName);
 			if (callBack.beforeFileDeletion(file) && file.exists())
-				file.delete(true, new NullProgressMonitor());
+				file.delete(IResource.KEEP_HISTORY,	monitor); 
 		} catch (CoreException e) {
 			throw new RuntimeException(e);
 		}
