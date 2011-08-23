@@ -227,6 +227,44 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 		assertNoExceptions(file);
 	}
 	
+	public void testNoException_13() throws Exception {
+		XtendFile file = file(
+				"package com.acme\n" + 
+				"\n" + 
+				"import static org.junit.Assert.*\n" + 
+				"import org.junit.runner.RunWith\n" + 
+				"import org.eclipse.xtext.junit4.XtextRunner\n" + 
+				"import org.eclipse.xtext.junit4.InjectWith\n" + 
+				"import com.google.inject.Inject\n" + 
+				"import org.eclipse.xtext.junit4.util.ParseHelper\n" + 
+				"import org.eclipse.emf.ecore.EObject\n" + 
+				"import org.eclipse.xtext.naming.IQualifiedNameProvider\n" + 
+				"\n" + 
+				"@RunWith(typeof(XtextRunner))\n" + 
+				"class QualifiedNameProviderTest {\n" + 
+				"    @Inject\n" + 
+				"    extension ParseHelper<EObject> helper\n" + 
+				"    @Inject\n" + 
+				"    extension IQualifiedNameProvider qualifiedNameProvider\n" + 
+				"    def getErrors(EObject obj) {\n" + 
+				"        obj.eResource.errors\n" + 
+				"    }\n" + 
+				"    def resolve(EObject obj) {\n" + 
+				"        EcoreUtil::resolveAll(obj.eResource)\n" + 
+				"    }\n" + 
+				"    def parseAcme(CharSequence seq) {\n" + 
+				"        seq.parse.elements.head\n" + 
+				"    }\n" + 
+				"    @Test\n" + 
+				"    def explicitName() {\n" + 
+				"        val element = '''\n" + 
+				"        '''.parseAcme\n" + 
+				"        assertEquals(\"FooBar\", element.fullyQualifiedName.toString)\n" + 
+				"    }\n" + 
+				"}");
+		assertNoExceptions(file);
+	}
+	
 	public void testBug343585() throws Exception {
 		XtendFile file = file("class Test extends Test {}");
 		assertNoExceptions(file);
