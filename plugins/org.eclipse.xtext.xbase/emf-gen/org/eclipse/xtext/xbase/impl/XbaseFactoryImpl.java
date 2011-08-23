@@ -127,7 +127,7 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	 */
 	public XCasePart createXCasePart()
 	{
-		XCasePartImpl xCasePart = new XCasePartImpl();
+		XCasePartImplCustom xCasePart = new XCasePartImplCustom();
 		return xCasePart;
 	}
 
