@@ -370,6 +370,8 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 	}
 	
 	protected void internalCollectEarlyExits(final EObject expr, EarlyExitAcceptor acceptor) {
+		if (expr == null || expr.eResource() == null)
+			return;
 		EarlyExitAcceptor child = resourceScopeCache.get(Tuples.create("internalCollectEarlyExits", expr),
 				expr.eResource(), new Provider<EarlyExitAcceptor>() {
 					public EarlyExitAcceptor get() {
