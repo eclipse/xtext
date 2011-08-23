@@ -28,6 +28,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.resource.PackageFragmentRootWalker;
 import org.eclipse.xtext.util.Pair;
@@ -127,8 +128,9 @@ public class JavaProjectsStateHelper extends AbstractStorage2UriMapperClient {
 		try {
 			IPackageFragmentRoot[] roots = project.getAllPackageFragmentRoots();
 			for (IPackageFragmentRoot root : roots) {
-				if (root != null && !"org.eclipse.jdt.launching.JRE_CONTAINER".equals(root.getRawClasspathEntry().getPath().toString()))
+				if (root != null && !JavaRuntime.newDefaultJREContainerPath().isPrefixOf(root.getRawClasspathEntry().getPath())) {
 					result.add(root.getHandleIdentifier());
+				}
 			}
 		} catch (JavaModelException e) {
 			if (!e.isDoesNotExist()) {
