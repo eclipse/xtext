@@ -431,7 +431,7 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 		String name = operation.getSimpleName();
 		List<JvmType> parameterTypes = Lists.newArrayListWithExpectedSize(operation.getParameters().size());
 		for(JvmFormalParameter parameter: operation.getParameters()) {
-			parameterTypes.add(parameter.getParameterType().getType());
+			parameterTypes.add(typeReferences.getRawType(parameter.getParameterType()));
 		}
 		return Tuples.create(name, parameterTypes);
 	}
@@ -473,9 +473,10 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 				result.append(", ");
 			}
 			JvmTypeReference parameterType = parameters.get(i).getParameterType();
-			if (parameterType != null && parameterType.getType() != null)
+			JvmType rawType = typeReferences.getRawType(parameterType);
+			if (rawType != null && !rawType.eIsProxy())
 				// todo erasure of type parameters with / without upper bound 
-				result.append(parameterType.getType().getSimpleName());
+				result.append(rawType.getSimpleName());
 			else
 				result.append("null");
 		}
