@@ -126,6 +126,10 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	protected void disposeElementInfo(Object element, ElementInfo info) {
 		if (info.fDocument instanceof XtextDocument) {
 			XtextDocument document = (XtextDocument) info.fDocument;
+			ValidationJob job = (ValidationJob) document.getValidationJob();
+			if (job != null) {
+				job.cancel();
+			}
 			document.disposeInput();
 		}
 		super.disposeElementInfo(element, info);
