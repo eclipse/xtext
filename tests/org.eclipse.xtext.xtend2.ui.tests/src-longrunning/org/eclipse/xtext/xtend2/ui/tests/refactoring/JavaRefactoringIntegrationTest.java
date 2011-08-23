@@ -124,26 +124,25 @@ public class JavaRefactoringIntegrationTest extends AbstractXtend2UITestCase {
 		}
 	}
 
-	// TODO: fix me, this test hangs atm because of an outdated cache on the the JvmDeclaredType
-//	public void testRenameJavaMethod() throws Exception {
-//		try {
-//			testHelper.createFile("JavaClass.java", "public class JavaClass { public void foo() {} }");
-//			String xtendModel = "class XtendClass { def bar() { new JavaClass().foo() }";
-//			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
-//			IResourcesSetupUtil.waitForAutoBuild();
-//			IJavaProject javaProject = JavaCore.create(testHelper.getProject());
-//			IType javaClass = javaProject.findType("JavaClass");
-//			IMethod foo = javaClass.getMethod("foo", new String[0]);
-//			assertNotNull(foo);
-//			RenameSupport renameSupport = RenameSupport.create(foo, "baz",
-//					RenameSupport.UPDATE_REFERENCES);
-//			renameSupport
-//					.perform(workbench.getActiveWorkbenchWindow().getShell(), workbench.getActiveWorkbenchWindow());
-//			assertFileContains(xtendClass, "new JavaClass().baz()");
-//		} finally {
-//			testHelper.getProject().getFile("src/NewJavaClass.java").delete(true, new NullProgressMonitor());
-//		}
-//	}
+	public void testRenameJavaMethod() throws Exception {
+		try {
+			testHelper.createFile("JavaClass.java", "public class JavaClass { public void foo() {} }");
+			String xtendModel = "class XtendClass { def bar() { new JavaClass().foo() }";
+			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+			IResourcesSetupUtil.waitForAutoBuild();
+			IJavaProject javaProject = JavaCore.create(testHelper.getProject());
+			IType javaClass = javaProject.findType("JavaClass");
+			IMethod foo = javaClass.getMethod("foo", new String[0]);
+			assertNotNull(foo);
+			RenameSupport renameSupport = RenameSupport.create(foo, "baz",
+					RenameSupport.UPDATE_REFERENCES);
+			renameSupport
+					.perform(workbench.getActiveWorkbenchWindow().getShell(), workbench.getActiveWorkbenchWindow());
+			assertFileContains(xtendClass, "new JavaClass().baz()");
+		} finally {
+			testHelper.getProject().getFile("src/NewJavaClass.java").delete(true, new NullProgressMonitor());
+		}
+	}
 
 	protected IFile assertFileExists(String fileName) throws Exception {
 		IResource file = testHelper.getProject().findMember(fileName);
