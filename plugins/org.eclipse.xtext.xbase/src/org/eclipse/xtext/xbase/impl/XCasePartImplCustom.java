@@ -14,7 +14,17 @@ public class XCasePartImplCustom extends XCasePartImpl {
 	
 	@Override
 	public String toString() {
-		return "instanceof "+getClass().getCanonicalName();
+		StringBuilder result = new StringBuilder(getClass().getName());
+		result.append('@');
+		result.append(Integer.toHexString(hashCode()));
+
+		if (eIsProxy()) {
+			result.append(" (eProxyURI: ");
+			result.append(eProxyURI());
+			result.append(')');
+		}
+
+		return result.toString();
 	}
 	
 }
