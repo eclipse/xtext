@@ -31,12 +31,14 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XExpression;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -57,6 +59,13 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 	
 	@Inject
 	private TypeArgumentContextProvider typeArgumentContextProvider;
+	
+	/*
+	 * Don't use #typeReferenceAwareCache since it makes assumptions on the
+	 * cache key and expected return type
+	 */
+	@Inject
+	private IResourceScopeCache resourceScopeCache;
 	
 	{
 		checkIsSingelton();
@@ -314,8 +323,8 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 	}
 	
 	public static class EarlyExitAcceptor {
-		protected List<JvmTypeReference> returns = newArrayList();
-		protected List<JvmTypeReference> thrown = newArrayList();
+		protected List<JvmTypeReference> returns = newArrayListWithCapacity(2);
+		protected List<JvmTypeReference> thrown = newArrayListWithCapacity(2);
 		
 		public List<JvmTypeReference> getReturns() {
 			return returns;
@@ -326,9 +335,8 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		}
 
 		public void appendThrown(Iterable<JvmTypeReference> exceptions) {
-			thrown.addAll(newArrayList(exceptions));
+			Iterables.addAll(thrown, exceptions);
 		}
-		
 	}
 	
 	private PolymorphicDispatcher<Void> earlyExits = PolymorphicDispatcher.createForSingleTarget("_earlyExits", 2, 2, this);
@@ -361,8 +369,17 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		return result.values();
 	}
 	
-	protected void internalCollectEarlyExits(EObject expr, EarlyExitAcceptor acceptor) {
-		earlyExits.invoke(expr, acceptor);
+	protected void internalCollectEarlyExits(final EObject expr, EarlyExitAcceptor acceptor) {
+		EarlyExitAcceptor child = resourceScopeCache.get(Tuples.create("internalCollectEarlyExits", expr),
+				expr.eResource(), new Provider<EarlyExitAcceptor>() {
+					public EarlyExitAcceptor get() {
+						EarlyExitAcceptor result = new EarlyExitAcceptor();
+						earlyExits.invoke(expr, result);
+						return result;
+					}
+				});
+		acceptor.returns.addAll(child.returns);
+		acceptor.thrown.addAll(child.thrown);
 	}
 	
 	protected void _earlyExits(Void expr, EarlyExitAcceptor a) {
