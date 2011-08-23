@@ -225,7 +225,7 @@ public abstract class AbstractDomainmodelUiModule extends DefaultUiModule {
 
 	// contributed by org.eclipse.xtext.generator.generator.GeneratorFragment
 	public Class<? extends org.eclipse.xtext.builder.IXtextBuilderParticipant> bindIXtextBuilderParticipant() {
-		return org.eclipse.xtext.builder.JavaProjectBasedBuilderParticipant.class;
+		return org.eclipse.xtext.builder.BuilderParticipant.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.generator.GeneratorFragment

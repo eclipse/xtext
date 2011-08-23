@@ -70,7 +70,7 @@ public class GeneratorFragment extends AbstractGeneratorFragment {
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		return new BindFactory()
-		.addTypeToType("org.eclipse.xtext.builder.IXtextBuilderParticipant", "org.eclipse.xtext.builder.JavaProjectBasedBuilderParticipant")
+		.addTypeToType("org.eclipse.xtext.builder.IXtextBuilderParticipant", "org.eclipse.xtext.builder.BuilderParticipant")
 		.addTypeToInstance("org.eclipse.core.resources.IWorkspaceRoot", "org.eclipse.core.resources.ResourcesPlugin.getWorkspace().getRoot()")
 		.getBindings();
 	}
