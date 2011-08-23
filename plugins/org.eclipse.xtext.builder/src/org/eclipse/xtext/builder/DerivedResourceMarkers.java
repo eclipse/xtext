@@ -23,7 +23,7 @@ import org.eclipse.core.runtime.CoreException;
  */
 public class DerivedResourceMarkers {
 	
-	public final static String MARKER_ID = "org.eclipse.xtext.builder.DerivedResource"; 
+	public final static String MARKER_ID = "org.eclipse.xtext.builder.derivedresource"; 
 	public final static String ATTR_SOURCE = "source"; 
 	public final static String ATTR_GENERATOR = "generator"; 
 

@@ -94,17 +94,22 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 				}
 			}
 			access.setPostProcessor(new EclipseResourceFileSystemAccess2.IFileCallback() {
+				
 				public boolean beforeFileDeletion(IFile file) {
+					derivedResources.remove(file);
 					context.needRebuild();
-					return false; // TODO this looks like a bug to me.
+					return true;
 				}
 				
 				public void afterFileUpdate(IFile file) {
-					derivedResources.remove(file);
-					context.needRebuild();
+					handleFileAccess(file);
+				}
+
+				public void afterFileCreation(IFile file) {
+					handleFileAccess(file);
 				}
 				
-				public void afterFileCreation(IFile file) {
+				protected void handleFileAccess(IFile file) {
 					try {
 						derivedResources.remove(file);
 						derivedResourceMarkers.installMarker(file, getGeneratorIdentifier(), uri);
@@ -113,6 +118,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 						throw new RuntimeException(e);
 					}
 				}
+				
 			});
 			if (delta.getNew() != null) {
 				handleChangedContents(delta, context, access);
