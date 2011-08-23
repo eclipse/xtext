@@ -52,6 +52,8 @@ public class FeatureOverridesService {
     }
     
     public Iterable<JvmFeature> getAllJvmFeatures(JvmTypeReference type) {
+    	if (type == null)
+    		return Collections.emptyList();
         TypeArgumentContext context = contextProvider.getReceiverContext(type);
         JvmType rawType = type.getType();
         if (rawType == null || rawType.eIsProxy() || !(rawType instanceof JvmDeclaredType))

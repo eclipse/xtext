@@ -35,6 +35,9 @@ public class ClasspathBasedChecks extends AbstractDeclarativeValidator {
 	@Check
 	public void checkFileNamingConventions(XtendFile xtendFile) {
 		Resource resource = xtendFile.eResource();
+		// editor already closed
+		if (resource == null || resource.getResourceSet() == null)
+			return;
 		URI resourceURI = resource.getURI();
 		String packageName = xtendFile.getPackage();
 		StringBuilder classpathURIBuilder = new StringBuilder(ClasspathUriUtil.CLASSPATH_SCHEME);

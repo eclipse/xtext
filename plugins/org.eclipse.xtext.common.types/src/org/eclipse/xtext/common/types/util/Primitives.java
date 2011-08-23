@@ -103,7 +103,8 @@ public class Primitives {
 	protected JvmType getType(Class<?> class1, Notifier context) {
 		ResourceSet resourceSet = EcoreUtil2.getResourceSet(context);
 		if (resourceSet==null)
-			throw new NullPointerException("context not contained in ResourceSet");
+			// context may be null if the editor was closed too early
+			return null;
 		IJvmTypeProvider provider = typeProviderFactory.findOrCreateTypeProvider(resourceSet);
 		return provider.findTypeByName(class1.getCanonicalName());
 	}
