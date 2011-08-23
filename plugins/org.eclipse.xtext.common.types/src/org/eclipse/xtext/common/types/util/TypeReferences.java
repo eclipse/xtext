@@ -79,9 +79,11 @@ public class TypeReferences {
 			return rawType;
 		} else if (reference instanceof JvmGenericArrayTypeReference) {
 			JvmArrayType type = ((JvmGenericArrayTypeReference) reference).getType();
-			JvmTypeReference componentType = type.getComponentType();
-			JvmComponentType rawComponentType = (JvmComponentType) getRawType(componentType);
-			return rawComponentType.getArrayType();
+			JvmTypeReference componentTypeReference = type.getComponentType();
+			JvmType rawComponentType = getRawType(componentTypeReference);
+			if (rawComponentType instanceof JvmComponentType && !rawComponentType.eIsProxy())
+				return ((JvmComponentType) rawComponentType).getArrayType();
+			return null;
 		} else if (reference instanceof JvmWildcardTypeReference) {
 			List<JvmTypeConstraint> constraints = ((JvmWildcardTypeReference) reference).getConstraints();
 			// TODO handle multiple upper bounds

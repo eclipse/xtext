@@ -214,6 +214,19 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 		assertNoExceptions(file);
 	}
 	
+	public void testNoException_12() throws Exception {
+		// error scenario is 'Iterable<haracter>' in line 4
+		XtendFile file = file(
+				"package foo\n" + 
+				"class MyClass {\n" +  
+				"	def method() {\n" + 
+				"		var java.util.List<Character> x = ('abc'.toCharArray as Iterable<haracter>).toList() \n" + 
+				"		x \n" + 
+				"	}\n" + 
+				"}");
+		assertNoExceptions(file);
+	}
+	
 	public void testBug343585() throws Exception {
 		XtendFile file = file("class Test extends Test {}");
 		assertNoExceptions(file);
