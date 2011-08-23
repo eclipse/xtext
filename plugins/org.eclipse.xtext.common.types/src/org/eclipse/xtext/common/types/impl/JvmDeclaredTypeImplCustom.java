@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -31,6 +33,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
+import org.eclipse.xtext.common.types.access.JvmTypeChangeDispatcher;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Iterables;
@@ -91,7 +94,6 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 		return Iterables.filter(getMembers(), JvmOperation.class);
 	}
 	
-	// TODO discard me as soon as #members, #members#name, #superTypes, the superTypes#members or the operations#parameters change
 	protected Map<String, Set<JvmFeature>> allFeaturesByName;
 	
 	// TODO HashSet is not threadsafe
@@ -159,9 +161,29 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 						processMembers(result, features);
 				}
 			}
+			Runnable runnable = new Runnable() {
+				public void run() {
+					removedOverridden.clear();
+					allFeaturesByName = null;
+				}
+			};
+			requestNotificationOnChange(runnable);
 			allFeaturesByName = result;
 		}
 		return result;
+	}
+
+	protected void requestNotificationOnChange(Runnable listener) {
+		Resource resource = eResource();
+		Notifier notifier = this;
+		if (resource != null) {
+			if (resource.getResourceSet() != null)
+				notifier = resource.getResourceSet();
+			else
+				notifier = resource;
+		}
+		JvmTypeChangeDispatcher dispatcher = JvmTypeChangeDispatcher.findResourceChangeDispatcher(notifier);
+		dispatcher.requestNotificationOnChange(this, listener);
 	}
 
 	protected void processMembers(Map<String, Set<JvmFeature>> result, Collection<? extends JvmMember> members) {
@@ -186,7 +208,6 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 		}
 	}
 
-	// TODO discard me as soon as #members, #superTypes, the superTypes#members or the operations#parameters change
 	protected Set<JvmFeature> allFeatures;
 	
 	@Override
@@ -205,6 +226,12 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 					Iterables.addAll(result, superTypeFeatures);
 				}
 			}
+			Runnable runnable = new Runnable() {
+				public void run() {
+					allFeatures = null;
+				}
+			};
+			requestNotificationOnChange(runnable);
 			allFeatures = result;
 		}
 		return result;
