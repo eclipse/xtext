@@ -27,6 +27,7 @@ import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.xtext.builder.impl.QueuedBuildData;
 import org.eclipse.xtext.builder.impl.ToBeBuilt;
 import org.eclipse.xtext.builder.impl.ToBeBuiltComputer;
@@ -159,10 +160,13 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 		return toBeBuilt;
 	}
 
+	/**
+	 * Handle all fragment roots that are on the classpath and not a source folder.
+	 */
 	private boolean shouldHandle(IPackageFragmentRoot root) {
 		try {
-			boolean result = (!"org.eclipse.jdt.launching.JRE_CONTAINER".equals(root.getRawClasspathEntry().getPath().toString()) && 
-					(root.isArchive() || root.isExternal()));
+			boolean result = !JavaRuntime.newDefaultJREContainerPath().isPrefixOf(root.getRawClasspathEntry().getPath());
+			result &= (root.isArchive() || root.isExternal()); 
 			return result;
 		} catch (JavaModelException ex) {
 			if (!ex.isDoesNotExist())
