@@ -65,8 +65,11 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 		this.outputConfigurationProvider = outputConfigurationProvider;
 	}
 
-	public void build(IBuildContext context, IProgressMonitor monitor) throws CoreException {
+	public void build(final IBuildContext context, IProgressMonitor monitor) throws CoreException {
 		EclipseResourceFileSystemAccess2 access = fileSystemAccessProvider.get();
+		// TODO improve progress monitor handling
+		// we should use a new child of a submonitor for each invocation on the fileSystmeAccess
+		// since we want to report proper progress here
 		access.setMonitor(monitor);
 		final IProject builtProject = context.getBuiltProject();
 		access.setProject(builtProject);
@@ -75,6 +78,8 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 		if (context.getBuildType() == BuildType.CLEAN || context.getBuildType() == BuildType.RECOVERY) {
 			for (OutputConfiguration config : outputConfigurations.values()) {
 				cleanOutput(context, config, monitor);
+				// TODO I think we should put a 'context.needRebuild();' here, but 
+				// org.eclipse.xtext.builder.impl.BuilderParticipantTest.testClean() fails afterwards
 			}
 			if (context.getBuildType() == BuildType.CLEAN)
 				return;
@@ -90,17 +95,20 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			}
 			access.setPostProcessor(new EclipseResourceFileSystemAccess2.IFileCallback() {
 				public boolean beforeFileDeletion(IFile file) {
-					return false;
+					context.needRebuild();
+					return false; // TODO this looks like a bug to me.
 				}
 				
 				public void afterFileUpdate(IFile file) {
 					derivedResources.remove(file);
+					context.needRebuild();
 				}
 				
 				public void afterFileCreation(IFile file) {
 					try {
 						derivedResources.remove(file);
 						derivedResourceMarkers.installMarker(file, getGeneratorIdentifier(), uri);
+						context.needRebuild();
 					} catch (CoreException e) {
 						throw new RuntimeException(e);
 					}
@@ -110,7 +118,8 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 				handleChangedContents(delta, context, access);
 			}
 			for (IFile iFile : derivedResources) {
-				iFile.delete(true, monitor);
+				iFile.delete(IResource.KEEP_HISTORY, monitor);
+				context.needRebuild();
 			}
 		}
 	}
@@ -127,7 +136,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			if (config.isCleanUpDerivedResources()) {
 				List<IFile> resources = derivedResourceMarkers.findDerivedResources(folder, getGeneratorIdentifier(), null);
 				for (IFile iFile : resources) {
-					iFile.delete(true, true, monitor);
+					iFile.delete(IResource.KEEP_HISTORY, monitor);
 				}
 			}
 		}
@@ -136,6 +145,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 	protected void handleChangedContents(Delta delta, IBuildContext context, EclipseResourceFileSystemAccess2 fileSystemAccess) throws CoreException {
 		if (!resourceServiceProvider.canHandle(delta.getUri()))
 			return;
+		// TODO: we will run out of memory here if the number of deltas is large enough
 		Resource resource = context.getResourceSet().getResource(delta.getUri(), true);
 		if (shouldGenerate(resource, context)) {
 			try {
@@ -146,15 +156,8 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 				}
 				throw e;
 			}
-			if (generallyNeedsRebuild())
-				context.needRebuild();
 		}
 	}
-
-	protected boolean generallyNeedsRebuild() {
-		return true;
-	}
-
 
 	protected boolean shouldGenerate(Resource resource, IBuildContext context) {
 		try {
