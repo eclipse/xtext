@@ -57,6 +57,11 @@ public class JvmTypeChangeDispatcher extends AdapterImpl {
 			}
 		}
 		
+		@Override
+		protected boolean resolve() {
+			return false;
+		}
+		
 	}
 	
 	private List<Runnable> listeners;
