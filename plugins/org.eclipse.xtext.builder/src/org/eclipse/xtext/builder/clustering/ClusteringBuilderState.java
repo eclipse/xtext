@@ -152,7 +152,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                     throw new OperationCanceledException();
                 }
                 if (!toBeDeleted.contains(changedURI)) {
-	                subProgress.subTask("Updating resource description " + index + " of " + (index + queue.size()));
+	                subProgress.subTask("Updating resource description for " + changedURI.lastSegment() + " (" + index + " of " + (index + queue.size()) + ")");
 	                // Load the resource and create a new resource description
 	                Resource resource = null;
 	                Delta newDelta = null;
@@ -230,7 +230,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
             if (subMonitor.isCanceled()) {
                 throw new OperationCanceledException();
             }
-            subMonitor.subTask("Writing new resource description " + index + " of " + n); // TODO: NLS
+            subMonitor.subTask("Writing new resource description for " + uri.lastSegment() + " (" + index + " of " + n + ")"); // TODO: NLS
             Resource resource = null;
             try {
                 resource = resourceSet.getResource(uri, true);
