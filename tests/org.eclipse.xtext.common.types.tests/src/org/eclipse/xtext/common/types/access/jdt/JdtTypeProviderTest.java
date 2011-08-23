@@ -169,9 +169,8 @@ public class JdtTypeProviderTest extends AbstractTypeProviderTest {
 		typeReference.setType(proxy);
 		((InternalEObject) proxy).eSetProxyURI(unresolveableType);
 		type.getSuperTypes().add(typeReference);
-		int resources = type.eResource().getResourceSet().getResources().size();
 		assertTrue(type.getSuperTypes().get(0).getType().eIsProxy());
-		assertEquals(resources, type.eResource().getResourceSet().getResources().size());
+		assertEquals(2, type.eResource().getResourceSet().getResources().size());
 	}
 
 	/**
