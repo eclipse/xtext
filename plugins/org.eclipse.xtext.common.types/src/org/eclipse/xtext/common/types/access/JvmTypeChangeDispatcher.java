@@ -48,6 +48,7 @@ public class JvmTypeChangeDispatcher extends AdapterImpl {
 		
 		@Override
 		public void notifyChanged(Notification notification) {
+			super.notifyChanged(notification);
 			if (notification.isTouch() || listeners.isEmpty())
 				return;
 			Iterator<Runnable> iterator = listeners.iterator();
