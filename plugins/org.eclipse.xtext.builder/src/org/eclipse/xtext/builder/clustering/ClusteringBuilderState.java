@@ -168,15 +168,16 @@ public class ClusteringBuilderState extends AbstractBuilderState {
 	                                    this.getResourceDescription(changedURI), copiedDescription);
 	                    }
 	                } catch (final WrappedException ex) {
-	                    if (resourceSet.getURIConverter().exists(changedURI, Collections.emptyMap())) {
+//	                    if (resourceSet.getURIConverter().exists(changedURI, Collections.emptyMap())) {
 	                        LOGGER.error("Error loading resource from: " + changedURI.toString(), ex); //$NON-NLS-1$
-	                    }
+//	                    }
 	                    if (resource != null) {
 	                        resourceSet.getResources().remove(resource);
 	                    }
 	                    final IResourceDescription oldDescription = this.getResourceDescription(changedURI);
-	                    if (oldDescription != null) {
-	                        newDelta = new DefaultResourceDescriptionDelta(oldDescription, null);
+	                    final IResourceDescription newDesc = newState.getResourceDescription(changedURI);
+	                    if (oldDescription != null || newDesc != null) {
+	                    	newDelta = new DefaultResourceDescriptionDelta(oldDescription, BuilderStateUtil.create(newDesc));
 	                    }
 	                }
 	                if (newDelta != null) {

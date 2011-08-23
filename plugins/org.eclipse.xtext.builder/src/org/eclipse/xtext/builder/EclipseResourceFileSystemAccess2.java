@@ -18,6 +18,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
@@ -35,6 +36,9 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 	public interface IFileCallback {
 		public void afterFileUpdate(IFile file);
 		public void afterFileCreation(IFile file);
+		/**
+		 * @return whether a deletion is vetoed.
+		 */
 		public boolean beforeFileDeletion(IFile file);
 	}
 	
@@ -61,6 +65,8 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 	}
 
 	public void generateFile(String fileName, String outputName, CharSequence contents) {
+		if (monitor.isCanceled())
+			throw new OperationCanceledException();
 		OutputConfiguration outputConfig = getOutputConfig(outputName);
 		
 		// check output folder exists
