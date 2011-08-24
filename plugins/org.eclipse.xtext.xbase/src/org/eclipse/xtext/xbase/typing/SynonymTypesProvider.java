@@ -112,6 +112,8 @@ public class SynonymTypesProvider {
 	}
 
 	protected boolean isAssignable(JvmTypeReference toBeConverted, JvmType toBeCompatible) {
+		if (toBeConverted == null)
+			return false;
 		if (toBeConverted.getType() == toBeCompatible)
 			return true;
 		Set<JvmType> rawTypes = superTypeCollector.collectSuperTypesAsRawTypes(toBeConverted);

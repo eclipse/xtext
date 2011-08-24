@@ -20,6 +20,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -167,6 +168,72 @@ public class SmokeTest extends AbstractXtend2TestCase {
 		}
 	}
 	
+	public void testSkipLastCharactersWithoutResourceSet() throws Exception {
+		for(String string: smokeTestModels) {
+			for (int i = 0; i < string.length(); i++) {
+				logProgress(i);
+				doParseLinkAndValidateWithoutResourceSet(string.substring(0, i));
+			}
+		}
+	}
+
+	public void testSkipFirstCharactersWithoutResourceSet() throws Exception {
+		for(String string: smokeTestModels) {
+			for (int i = 0; i < string.length(); i++) {
+				logProgress(i);
+				doParseLinkAndValidateWithoutResourceSet(string.substring(i));
+			}
+		}
+	}
+
+	public void testSkipCharacterInBetweenWithoutResourceSet() throws Exception {
+		for(String string: smokeTestModels) {
+			for (int i = 0; i < string.length() - 1; i++) {
+				logProgress(i);
+				doParseLinkAndValidateWithoutResourceSet(string.substring(0, i) + string.substring(i+1));
+			}
+		}
+	}
+	
+	public void testSkipTokensInBetweenWithoutResourceSet() throws Exception {
+		for(String string: smokeTestModels) {
+			List<CommonToken> tokenList = Lists.newArrayList();
+			{
+				Lexer lexer = get(Lexer.class);
+				lexer.setCharStream(new ANTLRStringStream(string));
+				Token token = lexer.nextToken();
+				while(token != Token.EOF_TOKEN) {
+					tokenList.add((CommonToken) token);
+					token = lexer.nextToken();
+				}
+			}
+			for(CommonToken token: tokenList) {
+				int start = token.getStartIndex();
+				int length = token.getText().length();
+				logProgress(token);
+				doParseLinkAndValidateWithoutResourceSet(string.substring(0, start) + string.substring(start + length));
+			}
+		}
+	}
+	
+	public void testSkipNodesInBetweenWithoutResourceSet() throws Exception {
+		for(String string: smokeTestModels) {
+			LazyLinkingResource resource = createResource(string);
+			ICompositeNode rootNode = resource.getParseResult().getRootNode();
+			ReplaceRegion replaceRegion = null;
+			for(INode node: rootNode.getAsTreeIterable()) {
+				int offset = node.getTotalOffset();
+				int length = node.getTotalLength();
+				if (replaceRegion == null || replaceRegion.getOffset() != offset || replaceRegion.getLength() != length) {
+					replaceRegion = new ReplaceRegion(offset, length, "");
+					StringBuilder builder = new StringBuilder(string);
+					replaceRegion.applyTo(builder);
+					doParseLinkAndValidateWithoutResourceSet(builder.toString());
+				}
+			}
+		}
+	}
+	
 	public void testResourceUpdateSkipLastCharacters() throws Exception {
 		for(String string: smokeTestModels) {
 			LazyLinkingResource resource = createResource("");
@@ -307,6 +374,23 @@ public class SmokeTest extends AbstractXtend2TestCase {
 	protected void doParseLinkAndValidate(final String model) throws Exception {
 		try {
 			LazyLinkingResource resource = createResource(model);
+			checkResource(model, resource);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			assertEquals(e.getMessage()+" : Model was : \n\n"+model, model, "");
+			// just to make sure we fail for empty model, too
+			fail(e.getMessage()+" : Model was : \n\n"+model);
+		}
+	}
+	
+	protected void doParseLinkAndValidateWithoutResourceSet(final String model) throws Exception {
+		try {
+			LazyLinkingResource resource = createResource(model);
+			// simulate closed editor
+			ResourceSet resourceSet = resource.getResourceSet();
+			resourceSet.eSetDeliver(false);
+			resourceSet.getResources().clear();
+			resourceSet.eAdapters().clear();
 			checkResource(model, resource);
 		} catch (Throwable e) {
 			e.printStackTrace();

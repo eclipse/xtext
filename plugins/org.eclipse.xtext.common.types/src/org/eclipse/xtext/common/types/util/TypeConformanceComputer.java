@@ -685,8 +685,11 @@ public class TypeConformanceComputer {
 			}
 			return result;
 		}
-		// until above's TODOs are not solved, return Object as catch all 
-		return typeReferences.getTypeForName(Object.class, findContext(firstType));
+		// until above's TODOs are not solved, return Object as catch all
+		JvmType context = findContext(firstType);
+		if (context != null)
+			return typeReferences.getTypeForName(Object.class, context);
+		return null;
 	}
 
 	protected JvmType findContext(JvmTypeReference firstType) {
