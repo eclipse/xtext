@@ -72,7 +72,7 @@ public class PerformanceTest extends AbstractXtend2UITestCase {
 				measureCleanBuild(), 
 				measureCleanBuild());
 		System.out.println("min was "+min);
-		assertFasterThen(10000l, min);
+		assertFasterThen(15000l, min);
 	}
 
 	protected void assertFasterThen(long expected, long min) {
