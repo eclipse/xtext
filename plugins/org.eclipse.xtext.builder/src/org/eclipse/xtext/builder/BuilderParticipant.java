@@ -22,6 +22,8 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.generator.IGenerator;
@@ -66,11 +68,14 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 	}
 
 	public void build(final IBuildContext context, IProgressMonitor monitor) throws CoreException {
+		final int numberOfDeltas = context.getDeltas().size();
+		
+		// monitor handling
+		if (monitor.isCanceled())
+			throw new OperationCanceledException();
+		IProgressMonitor subMon1 = SubMonitor.convert(monitor, numberOfDeltas);
+		
 		EclipseResourceFileSystemAccess2 access = fileSystemAccessProvider.get();
-		// TODO improve progress monitor handling
-		// we should use a new child of a submonitor for each invocation on the fileSystmeAccess
-		// since we want to report proper progress here
-		access.setMonitor(monitor);
 		final IProject builtProject = context.getBuiltProject();
 		access.setProject(builtProject);
 		final Map<String, OutputConfiguration> outputConfigurations = getOutputConfigurations(context);
@@ -78,13 +83,19 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 		if (context.getBuildType() == BuildType.CLEAN || context.getBuildType() == BuildType.RECOVERY) {
 			for (OutputConfiguration config : outputConfigurations.values()) {
 				cleanOutput(context, config, monitor);
-				// TODO I think we should put a 'context.needRebuild();' here, but 
-				// org.eclipse.xtext.builder.impl.BuilderParticipantTest.testClean() fails afterwards
 			}
 			if (context.getBuildType() == BuildType.CLEAN)
 				return;
 		}
-		for (final IResourceDescription.Delta delta : context.getDeltas()) {
+		for (int i = 0 ; i < numberOfDeltas ; i++) {
+			final IResourceDescription.Delta delta = context.getDeltas().get(i);
+			
+			// monitor handling
+			if (subMon1.isCanceled())
+				throw new OperationCanceledException();
+			subMon1.subTask("Compiling "+delta.getUri().lastSegment()+" ("+i+" of "+numberOfDeltas+")");
+			
+			access.setMonitor(subMon1);
 			final String uri = delta.getUri().toString();
 			final Set<IFile> derivedResources = newLinkedHashSet();
 			for (OutputConfiguration config : outputConfigurations.values()) {
