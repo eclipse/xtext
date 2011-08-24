@@ -212,7 +212,8 @@ public class WorkbenchTestHelper extends Assert {
 				XtextProjectHelper.NATURE_ID);
 		projectFactory.addRequiredBundles(newArrayList(
 				"org.eclipse.xtext.xbase.lib", 
-				"org.eclipse.xtext.xtend2.lib"));
+				"org.eclipse.xtext.xtend2.lib",
+				"org.junit4"));
 		IProject result = projectFactory.createProject(new NullProgressMonitor(), null);
 		IJavaProject javaProject = JavaCore.create(result);
 		JavaProjectSetupUtil.makeJava5Compliant(javaProject);
