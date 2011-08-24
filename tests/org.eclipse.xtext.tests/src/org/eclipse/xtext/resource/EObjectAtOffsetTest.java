@@ -9,8 +9,11 @@ package org.eclipse.xtext.resource;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.resource.eObjectAtOffsetTestLanguage.Foo;
 import org.eclipse.xtext.resource.eObjectAtOffsetTestLanguage.FooBar;
 import org.eclipse.xtext.resource.eObjectAtOffsetTestLanguage.Model;
+import org.eclipse.xtext.util.TextRegion;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -111,6 +114,52 @@ public class EObjectAtOffsetTest extends AbstractXtextTests {
 		checkCrossReferencedElementAt(resource, modelAsString, "foo0 ", model.getFoos().get(0));
 		checkCrossReferencedElementAt(resource, modelAsString, "foo1 ", model.getFoos().get(1));
 		checkContainedElementAt(resource, modelAsString, "bar bar0 ", ((FooBar) model.getBars().get(0)).getBar());
+	}
+	
+	public void testFindCrossReferencedElementAt() throws Exception {
+		String firstPart = "foo Foo1 foo Foo2 zonk bar Bar1 Foo1";
+		String modelAsString = firstPart+",Foo2";
+		XtextResource resource = getResourceFromString(modelAsString);
+		Foo foo2 = (Foo) eObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, firstPart.length()+1);
+		assertEquals("Foo2", foo2.getName());
+		Foo foo1 = (Foo) eObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, firstPart.length());
+		assertEquals("Foo1", foo1.getName());
+	}
+	
+	public void testFindCrossReferencedElementAt_1() throws Exception {
+		String firstPart = "foo Foo1=X.Y foo Foo2=X.Y zonk bar Bar1 Foo1=X.Y";
+		String modelAsString = firstPart+",Foo2=X.Y";
+		XtextResource resource = getResourceFromString(modelAsString);
+		Foo foo2 = (Foo) eObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, firstPart.length()+1);
+		assertEquals("Foo2=X.Y", foo2.getName());
+		Foo foo1 = (Foo) eObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, firstPart.length());
+		assertEquals("Foo1=X.Y", foo1.getName());
+	}
+	
+	public void testGetCrossReferenceNode() throws Exception {
+		String firstPart = "foo Foo1=X.Y foo Foo2=X.Y zonk bar Bar1 Foo1=X.Y";
+		String modelAsString = firstPart+",Foo2=X.Y";
+		XtextResource resource = getResourceFromString(modelAsString);
+		
+		INode node = eObjectAtOffsetHelper.getCrossReferenceNode(resource, new TextRegion(firstPart.length(), 0));
+		assertEquals(firstPart.length()-8, node.getOffset());
+		assertEquals(8, node.getLength());
+		
+		assertNull(eObjectAtOffsetHelper.getCrossReferenceNode(resource, new TextRegion(firstPart.length(), 1)));
+		
+		node = eObjectAtOffsetHelper.getCrossReferenceNode(resource, new TextRegion(firstPart.length()+1, 0));
+		assertEquals(firstPart.length()+1, node.getOffset());
+		assertEquals(8, node.getLength());
+		
+		node = eObjectAtOffsetHelper.getCrossReferenceNode(resource, new TextRegion(firstPart.length()+1, 5));
+		assertEquals(firstPart.length()+1, node.getOffset());
+		assertEquals(8, node.getLength());
+		
+		node = eObjectAtOffsetHelper.getCrossReferenceNode(resource, new TextRegion(firstPart.length()+1, 8));
+		assertEquals(firstPart.length()+1, node.getOffset());
+		assertEquals(8, node.getLength());
+		
+		assertNull(eObjectAtOffsetHelper.getCrossReferenceNode(resource, new TextRegion(firstPart.length()+1, 9)));
 	}
 
 	private void checkContainedElementAt(XtextResource resource, String model, String substring, EObject expectedElement) {
