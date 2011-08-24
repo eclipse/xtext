@@ -73,7 +73,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 		// monitor handling
 		if (monitor.isCanceled())
 			throw new OperationCanceledException();
-		IProgressMonitor subMon1 = SubMonitor.convert(monitor, numberOfDeltas);
+		SubMonitor subMon1 = SubMonitor.convert(monitor, numberOfDeltas);
 		
 		EclipseResourceFileSystemAccess2 access = fileSystemAccessProvider.get();
 		final IProject builtProject = context.getBuiltProject();
@@ -94,8 +94,8 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			if (subMon1.isCanceled())
 				throw new OperationCanceledException();
 			subMon1.subTask("Compiling "+delta.getUri().lastSegment()+" ("+i+" of "+numberOfDeltas+")");
+			access.setMonitor(subMon1.newChild(1));
 			
-			access.setMonitor(subMon1);
 			final String uri = delta.getUri().toString();
 			final Set<IFile> derivedResources = newLinkedHashSet();
 			for (OutputConfiguration config : outputConfigurations.values()) {
