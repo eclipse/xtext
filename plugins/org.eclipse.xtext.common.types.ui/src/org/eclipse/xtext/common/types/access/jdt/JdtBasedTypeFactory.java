@@ -59,6 +59,7 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Lists;
 
@@ -557,43 +558,59 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 	protected String[] fastGetParameterNames(IMethod javaMethod) {
 		String[] parameterNames = null;
 		if (javaMethod != null) {
-			try {
-				if (javaMethod instanceof org.eclipse.jdt.internal.core.JavaElement) {
-					org.eclipse.jdt.internal.core.JavaElement casted = (org.eclipse.jdt.internal.core.JavaElement) javaMethod;
-					if (casted instanceof org.eclipse.jdt.internal.core.SourceMethod || canProvideFastParameterNames(javaMethod, casted)) {
-						parameterNames = javaMethod.getParameterNames();		
+			parameterNames = Strings.EMPTY_ARRAY;
+			int numberOfParameters = javaMethod.getNumberOfParameters();
+			if (numberOfParameters != 0) {
+				if (javaMethod.exists()) {
+					try {
+						if (javaMethod instanceof org.eclipse.jdt.internal.core.SourceMethod) {
+							parameterNames = javaMethod.getParameterNames();
+							return parameterNames;
+						}
+						if (javaMethod instanceof org.eclipse.jdt.internal.core.JavaElement) {
+							org.eclipse.jdt.internal.core.JavaElement casted = (org.eclipse.jdt.internal.core.JavaElement) javaMethod;
+							org.eclipse.jdt.internal.core.SourceMapper mapper = casted.getSourceMapper();
+							if (mapper != null) {
+								char[][] parameterNamesAsChars = mapper.getMethodParameterNames(javaMethod);
+								if (parameterNamesAsChars != null) {
+									parameterNames = toStringArray(parameterNamesAsChars);
+									return parameterNames;
+								}
+								IType type = (IType) javaMethod.getParent();
+								org.eclipse.jdt.internal.compiler.env.IBinaryType info = (org.eclipse.jdt.internal.compiler.env.IBinaryType) ((org.eclipse.jdt.internal.core.BinaryType) javaMethod
+										.getDeclaringType()).getElementInfo();
+								char[] source = mapper.findSource(type, info);
+								if (source != null) {
+									mapper.mapSource(type, source, info);
+									parameterNamesAsChars = mapper.getMethodParameterNames(javaMethod);
+									if (parameterNamesAsChars != null) {
+										parameterNames = toStringArray(parameterNamesAsChars);
+										return parameterNames;
+									}
+								}
+							}
+						}
+					} catch (JavaModelException ex) {
+						if (!ex.isDoesNotExist())
+							log.warn("IMethod.getParameterNames failed", ex);
 					}
 				}
-				if (parameterNames == null)
-					parameterNames = javaMethod.getRawParameterNames();
-				
-			} catch (JavaModelException ex) {
-				if (!ex.isDoesNotExist())
-					log.warn("IMethod.getParameterNames failed", ex);
+				// same as #getRawParameterNames but without throwing a JavaModelException
+				parameterNames = new String[numberOfParameters];
+				for (int i = 0; i < numberOfParameters; i++) {
+					parameterNames[i] = "arg" + i;
+				}
 			}
 		}
 		return parameterNames;
 	}
-
-	@SuppressWarnings("restriction")
-	private boolean canProvideFastParameterNames(IMethod javaMethod, org.eclipse.jdt.internal.core.JavaElement casted) {
-		org.eclipse.jdt.internal.core.SourceMapper mapper = casted.getSourceMapper();
-		if (mapper == null)
-			return false;
-		if (mapper.getMethodParameterNames(javaMethod) != null)
-			return true;
-		try {
-			IType type = (IType) javaMethod.getParent();
-			org.eclipse.jdt.internal.compiler.env.IBinaryType info = (org.eclipse.jdt.internal.compiler.env.IBinaryType) 
-				((org.eclipse.jdt.internal.core.BinaryType) javaMethod.getDeclaringType()).getElementInfo();
-			char[] source = mapper.findSource(type, info);
-			if (source != null){
-				mapper.mapSource(type, source, info);
-			}
-			return mapper.getMethodParameterNames(javaMethod) != null;
-		} catch(JavaModelException e) {
-			return false;
+	
+	private String[] toStringArray(char[][] chars) {
+		String[] result = new String[chars.length];
+		for (int i = 0; i < chars.length; i++) {
+			result[i] = new String(chars[i]);
 		}
+		return result;
 	}
 
 	public void enhanceGenericDeclaration(JvmExecutable result, ITypeBinding[] parameters) {
