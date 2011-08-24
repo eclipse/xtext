@@ -130,7 +130,7 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 											if (process) {
 												ProjectOrder projectOrder = project.getWorkspace().computeProjectOrder(new IProject[] {project, otherProject});
 												if (!projectOrder.hasCycles) {
-													if (projectOrder.projects[0] == otherProject) {
+													if (otherProject.equals(projectOrder.projects[0])) {
 														previouslyBuilt.add(otherName);
 														return true; 
 													} else {
