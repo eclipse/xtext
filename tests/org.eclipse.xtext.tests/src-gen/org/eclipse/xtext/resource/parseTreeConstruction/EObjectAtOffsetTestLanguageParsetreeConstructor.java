@@ -170,11 +170,13 @@ protected class Model_BarsAssignment_1 extends AssignmentToken  {
 /************ begin Rule AbstractBar ****************
  *
  * AbstractBar:
- * 	"zonk"? INT? Bar ({FooBar.bar=current} "foobar" foo+=[Foo])? foo+=[Foo]?;
+ * 	"zonk"? INT? Bar ({FooBar.bar=current} "foobar" foo+=[Foo|QualifiedNameWithOtherDelim])?
+ * 	foo+=[Foo|QualifiedNameWithOtherDelim]?;
  *
  **/
 
-// "zonk"? INT? Bar ({FooBar.bar=current} "foobar" foo+=[Foo])? foo+=[Foo]?
+// "zonk"? INT? Bar ({FooBar.bar=current} "foobar" foo+=[Foo|QualifiedNameWithOtherDelim])?
+// foo+=[Foo|QualifiedNameWithOtherDelim]?
 protected class AbstractBar_Group extends GroupToken {
 	
 	public AbstractBar_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -242,7 +244,7 @@ protected class AbstractBar_BarParserRuleCall_2 extends RuleCallToken {
 	}	
 }
 
-// ({FooBar.bar=current} "foobar" foo+=[Foo])?
+// ({FooBar.bar=current} "foobar" foo+=[Foo|QualifiedNameWithOtherDelim])?
 protected class AbstractBar_Group_3 extends GroupToken {
 	
 	public AbstractBar_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -322,7 +324,7 @@ protected class AbstractBar_FoobarKeyword_3_1 extends KeywordToken  {
 
 }
 
-// foo+=[Foo]
+// foo+=[Foo|QualifiedNameWithOtherDelim]
 protected class AbstractBar_FooAssignment_3_2 extends AssignmentToken  {
 	
 	public AbstractBar_FooAssignment_3_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -360,7 +362,7 @@ protected class AbstractBar_FooAssignment_3_2 extends AssignmentToken  {
 }
 
 
-// foo+=[Foo]?
+// foo+=[Foo|QualifiedNameWithOtherDelim]?
 protected class AbstractBar_FooAssignment_4 extends AssignmentToken  {
 	
 	public AbstractBar_FooAssignment_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -405,11 +407,11 @@ protected class AbstractBar_FooAssignment_4 extends AssignmentToken  {
 /************ begin Rule Bar ****************
  *
  * Bar:
- * 	"bar" name=ID foo+=[Foo] ("," foo+=[Foo])*;
+ * 	"bar" name=ID foo+=[Foo|QualifiedNameWithOtherDelim] ("," foo+=[Foo|QualifiedNameWithOtherDelim])*;
  *
  **/
 
-// "bar" name=ID foo+=[Foo] ("," foo+=[Foo])*
+// "bar" name=ID foo+=[Foo|QualifiedNameWithOtherDelim] ("," foo+=[Foo|QualifiedNameWithOtherDelim])*
 protected class Bar_Group extends GroupToken {
 	
 	public Bar_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -494,7 +496,7 @@ protected class Bar_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// foo+=[Foo]
+// foo+=[Foo|QualifiedNameWithOtherDelim]
 protected class Bar_FooAssignment_2 extends AssignmentToken  {
 	
 	public Bar_FooAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -531,7 +533,7 @@ protected class Bar_FooAssignment_2 extends AssignmentToken  {
 
 }
 
-// ("," foo+=[Foo])*
+// ("," foo+=[Foo|QualifiedNameWithOtherDelim])*
 protected class Bar_Group_3 extends GroupToken {
 	
 	public Bar_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -576,7 +578,7 @@ protected class Bar_CommaKeyword_3_0 extends KeywordToken  {
 
 }
 
-// foo+=[Foo]
+// foo+=[Foo|QualifiedNameWithOtherDelim]
 protected class Bar_FooAssignment_3_1 extends AssignmentToken  {
 	
 	public Bar_FooAssignment_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -621,11 +623,11 @@ protected class Bar_FooAssignment_3_1 extends AssignmentToken  {
 /************ begin Rule Foo ****************
  *
  * Foo:
- * 	"foo" name=ID;
+ * 	"foo" name=QualifiedNameWithOtherDelim;
  *
  **/
 
-// "foo" name=ID
+// "foo" name=QualifiedNameWithOtherDelim
 protected class Foo_Group extends GroupToken {
 	
 	public Foo_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -675,7 +677,7 @@ protected class Foo_FooKeyword_0 extends KeywordToken  {
 
 }
 
-// name=ID
+// name=QualifiedNameWithOtherDelim
 protected class Foo_NameAssignment_1 extends AssignmentToken  {
 	
 	public Foo_NameAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -699,9 +701,9 @@ protected class Foo_NameAssignment_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getFooAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
-			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getFooAccess().getNameIDTerminalRuleCall_1_0();
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getFooAccess().getNameQualifiedNameWithOtherDelimParserRuleCall_1_0(), value, null)) {
+			type = AssignmentType.DATATYPE_RULE_CALL;
+			element = grammarAccess.getFooAccess().getNameQualifiedNameWithOtherDelimParserRuleCall_1_0();
 			return obj;
 		}
 		return null;
@@ -711,5 +713,7 @@ protected class Foo_NameAssignment_1 extends AssignmentToken  {
 
 
 /************ end Rule Foo ****************/
+
+
 
 }

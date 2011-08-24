@@ -14,11 +14,18 @@ Model:
 	(foos+=Foo | bars+=AbstractBar)*;
 	
 AbstractBar:
-	'zonk'? INT? Bar ({FooBar.bar=current} 'foobar' foo+=[Foo|ID])? foo+=[Foo|ID]?;
+	'zonk'? INT? Bar ({FooBar.bar=current} 'foobar' foo+=[Foo|QualifiedNameWithOtherDelim])? foo+=[Foo|QualifiedNameWithOtherDelim]?;
 
 Bar:
-	'bar' name=ID foo+=[Foo|ID] (',' foo+=[Foo|ID])*;
+	'bar' name=ID foo+=[Foo|QualifiedNameWithOtherDelim] (',' foo+=[Foo|QualifiedNameWithOtherDelim])*;
 	
 Foo:
-	'foo' name=ID;
-	
+	'foo' name=QualifiedNameWithOtherDelim;
+
+QualifiedNameWithOtherDelim :
+	QualifiedName ('=' QualifiedName)*
+;
+
+QualifiedName :
+	ID ('.' ID)*
+;

@@ -17,11 +17,10 @@ import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.TextRegion;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -76,20 +75,20 @@ public class HyperlinkHelper implements IHyperlinkHelper {
 	}
 
 	public void createHyperlinksByOffset(XtextResource resource, int offset, IHyperlinkAcceptor acceptor) {
-		EObject crossLinkedEObject = eObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, offset);
+		INode crossRefNode = eObjectAtOffsetHelper.getCrossReferenceNode(resource, new TextRegion(offset, 0));
+		if (crossRefNode == null)
+			return;
+		EObject crossLinkedEObject = eObjectAtOffsetHelper.getCrossReferencedElement(crossRefNode);
 		if (crossLinkedEObject != null && !crossLinkedEObject.eIsProxy()) {
-			ILeafNode leafNode = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset);
-			if (leafNode.isHidden() && leafNode.getOffset() == offset) {
-				leafNode = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset-1);
-			}
-			INode crossRefNode = getParentNodeWithCrossReference(leafNode);
-			if(crossRefNode!=null) {
-				Region region = new Region(crossRefNode.getOffset(), crossRefNode.getLength());
-				createHyperlinksTo(resource, region, crossLinkedEObject, acceptor);
-			}
+			Region region = new Region(crossRefNode.getOffset(), crossRefNode.getLength());
+			createHyperlinksTo(resource, region, crossLinkedEObject, acceptor);
 		}
 	}
 	
+	/**
+	 * @deprecated use {@link EObjectAtOffsetHelper#getCrossReferenceNode(XtextResource, org.eclipse.xtext.util.ITextRegion)}
+	 */
+	@Deprecated
 	protected INode getParentNodeWithCrossReference(INode startNode) {
 		if(startNode == null)
 			return null;
