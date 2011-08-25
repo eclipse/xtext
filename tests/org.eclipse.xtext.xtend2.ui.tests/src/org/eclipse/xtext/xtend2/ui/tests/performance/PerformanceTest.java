@@ -42,7 +42,9 @@ public class PerformanceTest extends AbstractXtend2UITestCase {
 	private XtendFileGenerator fileGenerator;
 	
 	public void testBuildProject() throws Exception {
-		
+		final long warmUp = measureReferenceTime();
+		assertTrue(warmUp > 0);
+		final long reference1 = measureReferenceTime();
 		new WorkspaceModifyOperation() {
 			@Override
 			protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException,
@@ -67,15 +69,22 @@ public class PerformanceTest extends AbstractXtend2UITestCase {
 		}.run(null);
 		waitForAutoBuild();
 		assertNoErrorsInWorkspace();
+		final long reference2 = measureReferenceTime();
 		final long min = min(
 				measureCleanBuild(), 
 				measureCleanBuild(), 
 				measureCleanBuild());
-		System.out.println("min was "+min);
-		assertFasterThen(15000l, min);
+		
+		final long reference3 = measureReferenceTime();
+		// take the average reference duration times 100 and add 5% buffer
+		final long reference = avg(reference1, reference2, reference3) * 105;
+		assertFasterThen(reference, min);
 	}
 
 	protected void assertFasterThen(long expected, long min) {
+		// TODO remove sysouts as soon as we know that the expected time was calculated from a reasonable metric
+		System.out.println("Expected execution faster then "+expected+"ms.");
+		System.out.println("min was "+min + "ms.");
 		assertTrue("Expected execution faster then "+expected+"ms. but was "+min+"ms",  expected > min );
 	}
 	
@@ -87,10 +96,31 @@ public class PerformanceTest extends AbstractXtend2UITestCase {
 		return min;
 	}
 	
+	protected long avg(long ...ls) {
+		long sum = 0;
+		for (long l : ls) {
+			sum+=l;
+		}
+		return sum / ls.length;
+	}
+	
 	protected long measureCleanBuild() throws CoreException {
 		long before = System.currentTimeMillis();
 		cleanBuild();
 		fullBuild();
+		return System.currentTimeMillis() - before;
+	}
+	
+	protected long measureReferenceTime() {
+		long before = System.currentTimeMillis();
+		int counter = 0;
+		int max = 100000000;
+		for(int i = 0; i < max; i++) {
+			// the compiler will hopefully not eliminite the loop ;-)
+			counter = counter + 1 - i;
+			counter = counter + i;
+		}
+		assertEquals(max, counter);
 		return System.currentTimeMillis() - before;
 	}
 
