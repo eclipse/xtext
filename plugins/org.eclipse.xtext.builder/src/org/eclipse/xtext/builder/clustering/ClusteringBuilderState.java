@@ -27,6 +27,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.builder.builderState.AbstractBuilderState;
 import org.eclipse.xtext.builder.builderState.BuilderStateUtil;
 import org.eclipse.xtext.builder.builderState.ResourceDescriptionsData;
+import org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl;
 import org.eclipse.xtext.builder.impl.BuildData;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
@@ -168,16 +169,15 @@ public class ClusteringBuilderState extends AbstractBuilderState {
 	                                    this.getResourceDescription(changedURI), copiedDescription);
 	                    }
 	                } catch (final WrappedException ex) {
-//	                    if (resourceSet.getURIConverter().exists(changedURI, Collections.emptyMap())) {
-	                        LOGGER.error("Error loading resource from: " + changedURI.toString(), ex); //$NON-NLS-1$
-//	                    }
+	                    LOGGER.error("Error loading resource from: " + changedURI.toString(), ex); //$NON-NLS-1$
 	                    if (resource != null) {
 	                        resourceSet.getResources().remove(resource);
 	                    }
 	                    final IResourceDescription oldDescription = this.getResourceDescription(changedURI);
 	                    final IResourceDescription newDesc = newState.getResourceDescription(changedURI);
-	                    if (oldDescription != null || newDesc != null) {
-	                    	newDelta = new DefaultResourceDescriptionDelta(oldDescription, BuilderStateUtil.create(newDesc));
+	                    ResourceDescriptionImpl indexReadyDescription = newDesc != null ? BuilderStateUtil.create(newDesc) : null;
+	                    if ((oldDescription != null || indexReadyDescription != null) && oldDescription != indexReadyDescription) {
+							newDelta = new DefaultResourceDescriptionDelta(oldDescription, indexReadyDescription);
 	                    }
 	                }
 	                if (newDelta != null) {
