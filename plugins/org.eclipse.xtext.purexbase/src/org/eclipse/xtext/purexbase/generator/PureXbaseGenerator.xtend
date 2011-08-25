@@ -34,6 +34,11 @@ class PureXbaseGenerator implements IGenerator {
 			@SuppressWarnings("all")
 			public class «m.eResource.name» {
 				public static void main(String[] args) {
+					try {
+						xbaseExpression();
+					} catch (Throwable t) {}
+				}
+				public static Object xbaseExpression() throws Throwable {
 					«appendable»
 				}
 			}
