@@ -23,149 +23,156 @@ public class RichStringValidationTest extends AbstractRichStringTest {
 	@Inject
 	private ValidationTestHelper validationTestHelper;
 	
-	public void testRichStringValidation_01() throws Exception {
-		RichString richString = richString("'''\n"
-				+ "\tindentedLine\n"
-				+ "'''");
+	protected void assertValidRichString(String input) throws Exception {
+		RichString richString = richString(input);
 		validationTestHelper.assertNoIssues(richString);
 	}
 	
+	public void testRichStringValidation_01() throws Exception {
+		String input = "'''\n"
+				+ "\tindentedLine\n"
+				+ "'''";
+		assertValidRichString(input);
+	}
+
 	public void testRichStringValidation_02() throws Exception {
-		RichString richString = richString("'''  \n"
+		String input = "'''  \n"
 				+ "\t\tindentedLine\n"
 				+ "\t\tindentedLine\n"
-				+ "  '''");
-		validationTestHelper.assertNoIssues(richString);
+				+ "  '''";
+		assertValidRichString(input);
 	}
 	
 	public void testRichStringValidation_03() throws Exception {
-		RichString richString = richString("'''  \n"
+		String input = "'''  \n"
 				+ "  \tindentedLine\n"
 				+ "  \tindentedLine\n"
-				+ "  '''");
-		validationTestHelper.assertNoIssues(richString);
+				+ "  '''";
+		assertValidRichString(input);
 	}
 	
 	public void testRichStringValidation_04() throws Exception {
-		RichString richString = richString("'''  \n"
+		String input = "'''  \n"
 				+ "\t\tindentedLine\n"
 				+ "  \tindentedLine\n"
-				+ "  '''");
+				+ "  '''";
+		RichString richString = richString(input);
 		validationTestHelper.assertWarning(richString, Xtend2Package.Literals.RICH_STRING_LITERAL, IssueCodes.INCONSISTENT_INDENTATION, "inconsistent", "indentation");
 	}
 	
 	public void testRichStringValidation_05() throws Exception {
-		RichString richString = richString("'''    \n"
+		String input = "'''    \n"
 				+ "\t\tindentedLine\n"
 				+ "\t\tindentedLine\n"
-				+ "  last line'''");
+				+ "  last line'''";
+		RichString richString = richString(input);
 		validationTestHelper.assertWarning(richString, Xtend2Package.Literals.RICH_STRING_LITERAL, IssueCodes.INCONSISTENT_INDENTATION, "inconsistent", "indentation");
 	}
 	
 	public void testRichStringValidation_06() throws Exception {
-		RichString richString = richString("'''        \n"
+		String input = "'''        \n"
 				+ "  \tindentedLine\n"
 				+ "  \tindentedLine\n"
-				+ "  last line '''");
-		validationTestHelper.assertNoIssues(richString);
+				+ "  last line '''";
+		assertValidRichString(input);
 	}
 	
 	public void testRichStringValidation_07() throws Exception {
-		RichString richString = richString("'''  content  '''");
-		validationTestHelper.assertNoIssues(richString);
+		String input = "'''  content  '''";
+		assertValidRichString(input);
 	}
 	
 	public void testRichStringValidation_08() throws Exception {
-		RichString richString = richString("'''  \n"
+		String input = "'''  \n"
 				+ "\t\tindentedLine\n"
 				+ "\t\tindentedLine\n"
-				+ "'''");
-		validationTestHelper.assertNoIssues(richString);
+				+ "'''";
+		assertValidRichString(input);
 	}
 	
 	public void testRichStringValidation_09() throws Exception {
-		RichString richString = richString("'''\n" + 
+		String input = "'''\n" + 
 				"  text\n" + 
 				"\n" + 
 				"  text\n" + 
-				"'''");
-		validationTestHelper.assertNoIssues(richString);
+				"'''";
+		assertValidRichString(input);
 	}
 	
 	public void testNoException_01() throws Exception {
-		RichString richString = richString(
+		String input = 
 				"'''«'start'»\n" + 
-				"		  first line\n'''");
-		validationTestHelper.assertNoIssues(richString);
+				"		  first line\n'''";
+		assertValidRichString(input);
 	}
 	
 	public void testNoException_02() throws Exception {
-		RichString richString = richString(
+		String input = 
 				"'''«'start'»\n" + 
 				"		  first line\n" +
 				"\n" +
-				"'''");
-		validationTestHelper.assertNoIssues(richString);
+				"'''";
+		assertValidRichString(input);
 	}
 	
 	public void testNoException_03() throws Exception {
-		RichString richString = richString(
+		String input = 
 				"'''«'start'»\n" + 
 				"		  first line\n" +
 				"  \n" +
-				"'''");
-		validationTestHelper.assertNoIssues(richString);
+				"'''";
+		assertValidRichString(input);
 	}
 	
 	public void testNoException_04() throws Exception {
-		RichString richString = richString(
+		String input = 
 				"'''«'start'»\n" +
-				"  '''");
-		validationTestHelper.assertNoIssues(richString);
+				"  '''";
+		assertValidRichString(input);
 	}
 	
 	public void testNoException_05() throws Exception {
-		RichString richString = richString(
+		String input = 
 				"'''«'start'»\n" +
-				"'''");
-		validationTestHelper.assertNoIssues(richString);
+				"'''";
+		assertValidRichString(input);
 	}
 	
 	public void testNoException_06() throws Exception {
-		RichString richString = richString(
+		String input = 
 				"'''\n" +
-				"'''");
-		validationTestHelper.assertNoIssues(richString);
+				"'''";
+		assertValidRichString(input);
 	}
 	
 	public void testNoException_07() throws Exception {
-		RichString richString = richString(
-				"''''''");
-		validationTestHelper.assertNoIssues(richString);
+		String input = 
+				"''''''";
+		assertValidRichString(input);
 	}
 	
 	public void testNoException_08() throws Exception {
-		RichString richString = richString(
+		String input = 
 				"'''«'start'»\n" + 
 				"		  first line\n" +
-				"«'end'»'''");
-		validationTestHelper.assertNoIssues(richString);
+				"«'end'»'''";
+		assertValidRichString(input);
 	}
 	
 	public void testNoException_09() throws Exception {
-		RichString richString = richString(
-		"'''«'start'»'''");
-		validationTestHelper.assertNoIssues(richString);
+		String input = 
+		"'''«'start'»'''";
+		assertValidRichString(input);
 	}
 	
 	public void testNoException_10() throws Exception {
-		RichString richString = richString(
-				"'''  «'test'»'''");
-		validationTestHelper.assertNoIssues(richString);
+		String input = 
+				"'''  «'test'»'''";
+		assertValidRichString(input);
 	}
 	
 	public void testBug342438_01() throws Exception {
-		RichString richString = richString(
+		String input = 
 				"'''\n" + 
 				"  «FOR c : 'test'.bytes»«'test123'»\n" + 
 				"  «ENDFOR»\n" + 
@@ -173,22 +180,22 @@ public class RichStringValidationTest extends AbstractRichStringTest {
 				"  «ENDFOR»\n" + 
 				"  «FOR c : 'test'.bytes»«'test123'»\n" + 
 				"  «ENDFOR»\n" + 
-				"'''");
-		validationTestHelper.assertNoIssues(richString);
+				"'''";
+		assertValidRichString(input);
 	}
 	
 	public void testBug342438_02() throws Exception {
-		RichString richString = richString(
+		String input = 
 				"'''\n" + 
 				"  «FOR c : 'test'.bytes»«'test123'»«ENDFOR»\n" + 
 				"  «FOR c : 'test'.bytes»«'test123'»«ENDFOR»\n" + 
 				"  «FOR c : 'test'.bytes»«'test123'»«ENDFOR»\n" + 
-				"'''");
-		validationTestHelper.assertNoIssues(richString);
+				"'''";
+		assertValidRichString(input);
 	}
 	
 	public void testBug342438_03() throws Exception {
-		RichString richString = richString(
+		String input = 
 				"'''\n" + 
 				"  «FOR c : 'test'.bytes»\n" +
 				"    «'test123'»«ENDFOR»\n" + 
@@ -196,12 +203,12 @@ public class RichStringValidationTest extends AbstractRichStringTest {
 				"    «'test123'»«ENDFOR»\n" + 
 				"  «FOR c : 'test'.bytes»\n" +
 				"    «'test123'»«ENDFOR»\n" + 
-				"'''");
-		validationTestHelper.assertNoIssues(richString);
+				"'''";
+		assertValidRichString(input);
 	}
 	
 	public void testBug342438_04() throws Exception {
-		RichString richString = richString(
+		String input = 
 				"'''\n" + 
 				"  «FOR c : 'test'.bytes»«FOR c1 : 'test'.bytes»«'test123'»«ENDFOR»\n" + 
 				"  «ENDFOR»\n" + 
@@ -209,57 +216,57 @@ public class RichStringValidationTest extends AbstractRichStringTest {
 				"  «ENDFOR»«ENDFOR»\n" + 
 				"  «FOR c : 'test'.bytes»«FOR c1 : 'test'.bytes»«FOR c2 : 'test'.bytes»«'test123'»«ENDFOR»\n" + 
 				"  «ENDFOR»«ENDFOR»\n" + 
-				"'''");
-		validationTestHelper.assertNoIssues(richString);
+				"'''";
+		assertValidRichString(input);
 	}
 	
 	public void testBug342438_05() throws Exception {
-		RichString richString = richString(
+		String input = 
 				"'''«FOR a: 'test'.bytes»\n" +
 				"   foo\n" +
-				"«ENDFOR»'''");
-		validationTestHelper.assertNoIssues(richString);
+				"«ENDFOR»'''";
+		assertValidRichString(input);
 	}
 	
 	public void testBug342438_06() throws Exception {
-		RichString richString = richString(
-				"'''«FOR a: ''.bytes»foobar«ENDFOR»'''");
-		validationTestHelper.assertNoIssues(richString);
+		String input = 
+				"'''«FOR a: ''.bytes»foobar«ENDFOR»'''";
+		assertValidRichString(input);
 	}
 	
 	public void testBug342438_07() throws Exception {
-		RichString richString = richString(
-				"'''«FOR a:'1'.bytes»«FOR a1:''.bytes»foobar«ENDFOR»«ENDFOR»'''");
-		validationTestHelper.assertNoIssues(richString);
+		String input = 
+				"'''«FOR a:'1'.bytes»«FOR a1:''.bytes»foobar«ENDFOR»«ENDFOR»'''";
+		assertValidRichString(input);
 	}
 	
 	public void testBug342438_08() throws Exception {
-		RichString richString = richString(
-				"'''  «FOR a:'1'.bytes»«FOR a1:'1'.toCharArray»foobar«ENDFOR»«ENDFOR»'''");
-		validationTestHelper.assertNoIssues(richString);
+		String input = 
+				"'''  «FOR a:'1'.bytes»«FOR a1:'1'.toCharArray»foobar«ENDFOR»«ENDFOR»'''";
+		assertValidRichString(input);
 	}
 	
 	public void testBug342438_09() throws Exception {
-		RichString richString = richString(
+		String input = 
 				"'''  «FOR a: '123'.toCharArray»\n" +
 				"      a,\n" +
-				"  «ENDFOR»'''");
-		validationTestHelper.assertNoIssues(richString);
+				"  «ENDFOR»'''";
+		assertValidRichString(input);
 	}
 
 	public void testBug342724_01() throws Exception {
-		RichString richString = richString(
+		String input = 
 				"'''\n" + 
 				"	«IF true»\n" + 
 				"		test\n" + 
 				"	«ENDIF»\n" + 
 				"	test\n" + 
-				"'''");
-		validationTestHelper.assertNoIssues(richString);
+				"'''";
+		assertValidRichString(input);
 	}
 	
 	public void testBug342724_02() throws Exception {
-		RichString richString = richString(
+		String input = 
 				"'''\n" + 
 				"	«IF true»\n" + 
 				"	test\n" + 
@@ -267,12 +274,12 @@ public class RichStringValidationTest extends AbstractRichStringTest {
 				"	test\n" + 
 				"	«ENDIF»\n" + 
 				"	test\n" + 
-				"'''");
-		validationTestHelper.assertNoIssues(richString);
+				"'''";
+		assertValidRichString(input);
 	}
 	
 	public void testBug342724_03() throws Exception {
-		RichString richString = richString(
+		String input = 
 				"'''\n" + 
 				"	«IF true»\n" + 
 				"			test\n" + 
@@ -280,7 +287,7 @@ public class RichStringValidationTest extends AbstractRichStringTest {
 				"			test\n" + 
 				"	«ENDIF»\n" + 
 				"	test\n" + 
-				"'''");
-		validationTestHelper.assertNoIssues(richString);
+				"'''";
+		assertValidRichString(input);
 	}
 }

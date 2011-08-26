@@ -8,9 +8,12 @@
 package org.eclipse.xtext.xtend2.ui.highlighting;
 
 import java.util.List;
+import java.util.Queue;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.text.IRegion;
+import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.TerminalRule;
@@ -35,6 +38,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendMember;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -103,6 +107,7 @@ public class RichStringAwareHighlightingCalculator extends XbaseHighlightingCalc
 		private int currentOffset = -1;
 		private RichStringLiteral recent = null;
 		private final IHighlightedPositionAcceptor acceptor;
+		private Queue<IRegion> pendingRegions = Lists.newLinkedList();
 
 		public RichStringHighlighter(IHighlightedPositionAcceptor acceptor) {
 			this.acceptor = acceptor;
@@ -121,7 +126,25 @@ public class RichStringAwareHighlightingCalculator extends XbaseHighlightingCalc
 
 		protected void resetCurrentOffset(RichStringLiteral origin) {
 			if (origin != null && origin != recent) {
-				// no actions are involved, we are interested in the real node
+				if (recent != null && currentOffset != -1) {
+					List<INode> featureNodes = NodeModelUtils.findNodesForFeature(recent,
+							XbasePackage.Literals.XSTRING_LITERAL__VALUE);
+					if (featureNodes.size() == 1) {
+						INode node = featureNodes.get(0);
+						int closingQuoteLength = 0;
+						if (node.getText().endsWith("'''")) {
+							closingQuoteLength = 3;
+						} else if (node.getText().endsWith("''")) {
+							closingQuoteLength = 2;
+						} else if (node.getText().endsWith("'") || node.getText().endsWith("\u00AB")) {
+							closingQuoteLength = 1;
+						}
+						int expectedOffset = node.getTotalEndOffset() - closingQuoteLength;
+						if (expectedOffset != currentOffset) {
+							pendingRegions.add(new Region(currentOffset, expectedOffset - currentOffset));
+						}
+					}
+				}
 				recent = origin;
 				List<INode> featureNodes = NodeModelUtils.findNodesForFeature(origin,
 						XbasePackage.Literals.XSTRING_LITERAL__VALUE);
@@ -159,9 +182,17 @@ public class RichStringAwareHighlightingCalculator extends XbaseHighlightingCalc
 		public void acceptTemplateText(CharSequence text, RichStringLiteral origin) {
 			resetCurrentOffset(origin);
 			if (text.length() > 0) {
-				acceptor.addPosition(currentOffset, text.length(),
-						HighlightingConfiguration.INSIGNIFICANT_TEMPLATE_TEXT);
-				currentOffset += text.length();
+				int length = text.length();
+				while(!pendingRegions.isEmpty()) {
+					IRegion pending = pendingRegions.poll();
+					length -= pending.getLength();
+					acceptor.addPosition(pending.getOffset(), pending.getLength(), HighlightingConfiguration.INSIGNIFICANT_TEMPLATE_TEXT);
+				}
+				if (length != 0) {
+					acceptor.addPosition(currentOffset, length,
+							HighlightingConfiguration.INSIGNIFICANT_TEMPLATE_TEXT);
+					currentOffset += length;
+				}
 			}
 		}
 

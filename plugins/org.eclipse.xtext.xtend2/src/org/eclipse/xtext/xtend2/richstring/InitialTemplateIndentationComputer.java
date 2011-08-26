@@ -39,14 +39,33 @@ public class InitialTemplateIndentationComputer extends Xtend2Switch<String> {
 	public String caseRichString(RichString object) {
 		String result = null;
 		List<XExpression> elements = object.getExpressions();
-		for(int i= 0; i< elements.size(); i++) {
+		for(int i= 0; i< elements.size();) {
 			XExpression element = elements.get(i);
-			String elementResult = doSwitch(element);
+			String elementResult = null;
+			int nextIndex = i+1;
+			if (element instanceof RichStringLiteral) {
+				RichStringLiteral literal = (RichStringLiteral) element;
+				if (nextIndex == elements.size()) { // last one
+					elementResult = getLeadingWhitespace(literal.getValue(), literal);
+				} else if (!(elements.get(nextIndex) instanceof RichStringLiteral)) {
+					elementResult = getLeadingWhitespace(literal.getValue(), literal);
+				} else {
+					StringBuilder run = new StringBuilder(literal.getValue());
+					RichStringLiteral next = null;
+					do {
+						next = (RichStringLiteral) elements.get(nextIndex);
+						run.append(next.getValue());
+						nextIndex++;
+					} while(nextIndex < elements.size() && elements.get(nextIndex) instanceof RichStringLiteral);
+					elementResult = getLeadingWhitespace(run.toString(), next);
+				}
+			}
 			if (elementResult == null && i == 0)
 				return initial;
 			result = getBetterString(result, elementResult);
 			if (Strings.isEmpty(result))
 				return result;
+			i = nextIndex;
 		}
 		return result;
 	}
@@ -61,9 +80,7 @@ public class InitialTemplateIndentationComputer extends Xtend2Switch<String> {
 		return current;
 	}
 	
-	@Override
-	public String caseRichStringLiteral(RichStringLiteral object) {
-		String value = object.getValue();
+	private String getLeadingWhitespace(String value, RichStringLiteral lastLiteral) {
 		List<TextLine> lines = TextLines.splitString(value);
 		// no line breaks or immediately closed string literal => no initial indentation
 		if (lines.size() <= 1) {
@@ -87,9 +104,9 @@ public class InitialTemplateIndentationComputer extends Xtend2Switch<String> {
 			} else {
 				// some tools tend to right trim text files by default (e.g. git)
 				// that's why we ignore empty lines
-				RichString completeString = (RichString) object.eContainer();
+				RichString completeString = (RichString) lastLiteral.eContainer();
 				List<XExpression> siblings = completeString.getExpressions();
-				if (siblings.get(siblings.size() - 1) != object) {
+				if (siblings.get(siblings.size() - 1) != lastLiteral) {
 					if (leadingWS.length() == 0) { // empty line
 						emptyLineSeen = true;
 					} else {

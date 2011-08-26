@@ -856,6 +856,43 @@ public class RichStringProcessorTest extends AbstractRichStringTest {
 		doTestStackIsConsistent(
 			"'''  «FOR a:'1'.bytes»«FOR a:'1'.toCharArray»foobar«ENDFOR»«ENDFOR»'''");
 	}
+	
+	public void testStackIsConsistent_93() throws Exception {
+		doTestStackIsConsistent(
+			"'''«»'''");
+	}
+	
+	public void testStackIsConsistent_94() throws Exception {
+		doTestStackIsConsistent(
+			"'''  «\n  »'''");
+	}
+	
+	public void testStackIsConsistent_95() throws Exception {
+		doTestStackIsConsistent(
+			"'''  «\n  »  '''");
+	}
+	
+	public void testStackIsConsistent_96() throws Exception {
+		doTestStackIsConsistent(
+			"''' «null» «/* zonk */» «null»'''");
+	}
+	
+	public void testStackIsConsistent_97() throws Exception {
+		doTestStackIsConsistent(
+				"''' «null» «/* zonk \n */» «null»'''");
+	}
+	
+	public void testStackIsConsistent_98() throws Exception {
+		doTestStackIsConsistent(
+				"''' «null» «  \n/* zonk \n */\n   » «null»'''");
+	}
+	
+	public void testStackIsConsistent_99() throws Exception {
+		doTestStackIsConsistent(
+			"'''" +
+			"    «\n  »" +
+			"'''");
+	}
 
 	public void testBug342556_01() throws Exception {
 		doTestStackIsConsistentWithErroneousModel(

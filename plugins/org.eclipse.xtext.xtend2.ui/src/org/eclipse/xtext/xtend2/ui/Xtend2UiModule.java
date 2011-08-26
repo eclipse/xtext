@@ -9,8 +9,6 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.builder.JDTAwareEclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
-import org.eclipse.xtext.common.types.xtext.ui.JdtValidationJobScheduler;
-import org.eclipse.xtext.ui.editor.IValidationJobScheduler;
 import org.eclipse.xtext.ui.editor.actions.IActionContributor;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategy;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
@@ -149,11 +147,6 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 	
 	public Class<? extends EclipseResourceFileSystemAccess2> bindEclipseResourceFileSystemAccess2() {
 		return JDTAwareEclipseResourceFileSystemAccess2.class;
-	}
-	
-	// TODO regenerate Xtend2 and remove this manually registered binding
-	public Class<? extends IValidationJobScheduler> bindIValidationJobScheduler() {
-		return JdtValidationJobScheduler.class;
 	}
 	
 }

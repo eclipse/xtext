@@ -48,6 +48,7 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 		private Stack<Boolean> printElse;
 		private Stack<Boolean> ignoreStack;
 		private Stack<Integer> forLoopStack;
+		private boolean firstLine = true;
 
 		public StringBuilderBasedAcceptor() {
 			builder = new StringBuilder();
@@ -82,6 +83,7 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 		@Override
 		public void acceptSemanticLineBreak(int length, RichStringLiteral origin, boolean controlStructureSeen) {
 			if (!ignore()) {
+				firstLine = false;
 				String newLine = currentLine.append('\n').toString();
 				if (!controlStructureSeen || newLine.trim().length() != 0) {
 					builder.append(newLine);	
@@ -230,7 +232,7 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 			StringBuilder result = new StringBuilder(builder.toString());
 			if (currentLine.length() != 0) {
 				String newLine = currentLine.toString();
-				if (newLine.trim().length() != 0) {
+				if (firstLine || newLine.trim().length() != 0) {
 					result.append(newLine);	
 				}
 			}
