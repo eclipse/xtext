@@ -84,11 +84,13 @@ RichStringLiteralStart returns xbase::XExpression :
 ; 
 
 RichStringLiteralInbetween returns xbase::XExpression :
-	{RichStringLiteral} value=RICH_TEXT_INBETWEEN
+	{RichStringLiteral} 
+	( value=RICH_TEXT_INBETWEEN | value=COMMENT_RICH_TEXT_INBETWEEN )
 ; 
 
 RichStringLiteralEnd returns xbase::XExpression :
-	{RichStringLiteral} value=RICH_TEXT_END
+	{RichStringLiteral} 
+	( value=RICH_TEXT_END | value=COMMENT_RICH_TEXT_END )
 ; 
 
 InternalRichString returns xbase::XExpression:
@@ -130,7 +132,9 @@ RichStringElseIf returns RichStringElseIf:
 terminal RICH_TEXT : "'''" IN_RICH_STRING* ("'''"| ("'" "'"?)? EOF);
 terminal RICH_TEXT_START : "'''" IN_RICH_STRING* ("'" "'"?)? 'л';
 terminal RICH_TEXT_END : '╗' IN_RICH_STRING* ("'''"| ("'" "'"?)? EOF) ;
-terminal RICH_TEXT_INBETWEEN : '╗' IN_RICH_STRING* ("'" "'"?)? 'л'; 
+terminal RICH_TEXT_INBETWEEN : '╗' IN_RICH_STRING* ("'" "'"?)? 'л';
+terminal COMMENT_RICH_TEXT_INBETWEEN: "лл" !('\n'|'\r')* ('\r'? '\n' IN_RICH_STRING* ("'" "'"?)? 'л')?; 
+terminal COMMENT_RICH_TEXT_END: "лл" !('\n'|'\r')* (('\r'? '\n' IN_RICH_STRING* ("'''"| ("'" "'"?)? EOF)) | EOF); 
 
 terminal fragment IN_RICH_STRING : 
 	  "''" !('л'|"'") 

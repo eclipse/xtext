@@ -2589,6 +2589,50 @@ finally {
 	restoreStackSize(stackSize);
 }
 
+rule__RichStringLiteralInbetween__Alternatives_1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getRichStringLiteralInbetweenAccess().getValueAssignment_1_0()); }
+(rule__RichStringLiteralInbetween__ValueAssignment_1_0)
+{ after(grammarAccess.getRichStringLiteralInbetweenAccess().getValueAssignment_1_0()); }
+)
+
+    |(
+{ before(grammarAccess.getRichStringLiteralInbetweenAccess().getValueAssignment_1_1()); }
+(rule__RichStringLiteralInbetween__ValueAssignment_1_1)
+{ after(grammarAccess.getRichStringLiteralInbetweenAccess().getValueAssignment_1_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__RichStringLiteralEnd__Alternatives_1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getRichStringLiteralEndAccess().getValueAssignment_1_0()); }
+(rule__RichStringLiteralEnd__ValueAssignment_1_0)
+{ after(grammarAccess.getRichStringLiteralEndAccess().getValueAssignment_1_0()); }
+)
+
+    |(
+{ before(grammarAccess.getRichStringLiteralEndAccess().getValueAssignment_1_1()); }
+(rule__RichStringLiteralEnd__ValueAssignment_1_1)
+{ after(grammarAccess.getRichStringLiteralEndAccess().getValueAssignment_1_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
 rule__RichStringPart__Alternatives
     @init {
 		int stackSize = keepStackSize();
@@ -6151,9 +6195,9 @@ rule__RichStringLiteralInbetween__Group__1__Impl
     }
 :
 (
-{ before(grammarAccess.getRichStringLiteralInbetweenAccess().getValueAssignment_1()); }
-(rule__RichStringLiteralInbetween__ValueAssignment_1)
-{ after(grammarAccess.getRichStringLiteralInbetweenAccess().getValueAssignment_1()); }
+{ before(grammarAccess.getRichStringLiteralInbetweenAccess().getAlternatives_1()); }
+(rule__RichStringLiteralInbetween__Alternatives_1)
+{ after(grammarAccess.getRichStringLiteralInbetweenAccess().getAlternatives_1()); }
 )
 
 ;
@@ -6214,9 +6258,9 @@ rule__RichStringLiteralEnd__Group__1__Impl
     }
 :
 (
-{ before(grammarAccess.getRichStringLiteralEndAccess().getValueAssignment_1()); }
-(rule__RichStringLiteralEnd__ValueAssignment_1)
-{ after(grammarAccess.getRichStringLiteralEndAccess().getValueAssignment_1()); }
+{ before(grammarAccess.getRichStringLiteralEndAccess().getAlternatives_1()); }
+(rule__RichStringLiteralEnd__Alternatives_1)
+{ after(grammarAccess.getRichStringLiteralEndAccess().getAlternatives_1()); }
 )
 
 ;
@@ -18294,14 +18338,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__RichStringLiteralInbetween__ValueAssignment_1
+rule__RichStringLiteralInbetween__ValueAssignment_1_0
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getRichStringLiteralInbetweenAccess().getValueRICH_TEXT_INBETWEENTerminalRuleCall_1_0()); }
-	RULE_RICH_TEXT_INBETWEEN{ after(grammarAccess.getRichStringLiteralInbetweenAccess().getValueRICH_TEXT_INBETWEENTerminalRuleCall_1_0()); }
+{ before(grammarAccess.getRichStringLiteralInbetweenAccess().getValueRICH_TEXT_INBETWEENTerminalRuleCall_1_0_0()); }
+	RULE_RICH_TEXT_INBETWEEN{ after(grammarAccess.getRichStringLiteralInbetweenAccess().getValueRICH_TEXT_INBETWEENTerminalRuleCall_1_0_0()); }
 )
 
 ;
@@ -18309,14 +18353,44 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__RichStringLiteralEnd__ValueAssignment_1
+rule__RichStringLiteralInbetween__ValueAssignment_1_1
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getRichStringLiteralEndAccess().getValueRICH_TEXT_ENDTerminalRuleCall_1_0()); }
-	RULE_RICH_TEXT_END{ after(grammarAccess.getRichStringLiteralEndAccess().getValueRICH_TEXT_ENDTerminalRuleCall_1_0()); }
+{ before(grammarAccess.getRichStringLiteralInbetweenAccess().getValueCOMMENT_RICH_TEXT_INBETWEENTerminalRuleCall_1_1_0()); }
+	RULE_COMMENT_RICH_TEXT_INBETWEEN{ after(grammarAccess.getRichStringLiteralInbetweenAccess().getValueCOMMENT_RICH_TEXT_INBETWEENTerminalRuleCall_1_1_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__RichStringLiteralEnd__ValueAssignment_1_0
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getRichStringLiteralEndAccess().getValueRICH_TEXT_ENDTerminalRuleCall_1_0_0()); }
+	RULE_RICH_TEXT_END{ after(grammarAccess.getRichStringLiteralEndAccess().getValueRICH_TEXT_ENDTerminalRuleCall_1_0_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__RichStringLiteralEnd__ValueAssignment_1_1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getRichStringLiteralEndAccess().getValueCOMMENT_RICH_TEXT_ENDTerminalRuleCall_1_1_0()); }
+	RULE_COMMENT_RICH_TEXT_END{ after(grammarAccess.getRichStringLiteralEndAccess().getValueCOMMENT_RICH_TEXT_ENDTerminalRuleCall_1_1_0()); }
 )
 
 ;
@@ -20441,6 +20515,10 @@ RULE_RICH_TEXT_START : '\'\'\'' RULE_IN_RICH_STRING* ('\'' '\''?)? '\u00AB';
 RULE_RICH_TEXT_END : '\u00BB' RULE_IN_RICH_STRING* ('\'\'\''|('\'' '\''?)? EOF);
 
 RULE_RICH_TEXT_INBETWEEN : '\u00BB' RULE_IN_RICH_STRING* ('\'' '\''?)? '\u00AB';
+
+RULE_COMMENT_RICH_TEXT_INBETWEEN : '\u00AB\u00AB' ~(('\n'|'\r'))* ('\r'? '\n' RULE_IN_RICH_STRING* ('\'' '\''?)? '\u00AB')?;
+
+RULE_COMMENT_RICH_TEXT_END : '\u00AB\u00AB' ~(('\n'|'\r'))* ('\r'? '\n' RULE_IN_RICH_STRING* ('\'\'\''|('\'' '\''?)? EOF)|EOF);
 
 fragment RULE_IN_RICH_STRING : ('\'\'' ~(('\u00AB'|'\''))|'\'' ~(('\u00AB'|'\''))|~(('\u00AB'|'\'')));
 

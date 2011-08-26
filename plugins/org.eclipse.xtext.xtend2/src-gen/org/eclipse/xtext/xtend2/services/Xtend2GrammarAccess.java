@@ -762,48 +762,72 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RichStringLiteralInbetween");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cRichStringLiteralAction_0 = (Action)cGroup.eContents().get(0);
-		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cValueRICH_TEXT_INBETWEENTerminalRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Assignment cValueAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
+		private final RuleCall cValueRICH_TEXT_INBETWEENTerminalRuleCall_1_0_0 = (RuleCall)cValueAssignment_1_0.eContents().get(0);
+		private final Assignment cValueAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
+		private final RuleCall cValueCOMMENT_RICH_TEXT_INBETWEENTerminalRuleCall_1_1_0 = (RuleCall)cValueAssignment_1_1.eContents().get(0);
 		
 		//RichStringLiteralInbetween returns xbase::XExpression:
-		//	{RichStringLiteral} value=RICH_TEXT_INBETWEEN;
+		//	{RichStringLiteral} (value=RICH_TEXT_INBETWEEN | value=COMMENT_RICH_TEXT_INBETWEEN);
 		public ParserRule getRule() { return rule; }
 
-		//{RichStringLiteral} value=RICH_TEXT_INBETWEEN
+		//{RichStringLiteral} (value=RICH_TEXT_INBETWEEN | value=COMMENT_RICH_TEXT_INBETWEEN)
 		public Group getGroup() { return cGroup; }
 
 		//{RichStringLiteral}
 		public Action getRichStringLiteralAction_0() { return cRichStringLiteralAction_0; }
 
+		//value=RICH_TEXT_INBETWEEN | value=COMMENT_RICH_TEXT_INBETWEEN
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+
 		//value=RICH_TEXT_INBETWEEN
-		public Assignment getValueAssignment_1() { return cValueAssignment_1; }
+		public Assignment getValueAssignment_1_0() { return cValueAssignment_1_0; }
 
 		//RICH_TEXT_INBETWEEN
-		public RuleCall getValueRICH_TEXT_INBETWEENTerminalRuleCall_1_0() { return cValueRICH_TEXT_INBETWEENTerminalRuleCall_1_0; }
+		public RuleCall getValueRICH_TEXT_INBETWEENTerminalRuleCall_1_0_0() { return cValueRICH_TEXT_INBETWEENTerminalRuleCall_1_0_0; }
+
+		//value=COMMENT_RICH_TEXT_INBETWEEN
+		public Assignment getValueAssignment_1_1() { return cValueAssignment_1_1; }
+
+		//COMMENT_RICH_TEXT_INBETWEEN
+		public RuleCall getValueCOMMENT_RICH_TEXT_INBETWEENTerminalRuleCall_1_1_0() { return cValueCOMMENT_RICH_TEXT_INBETWEENTerminalRuleCall_1_1_0; }
 	}
 
 	public class RichStringLiteralEndElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RichStringLiteralEnd");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cRichStringLiteralAction_0 = (Action)cGroup.eContents().get(0);
-		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cValueRICH_TEXT_ENDTerminalRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Assignment cValueAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
+		private final RuleCall cValueRICH_TEXT_ENDTerminalRuleCall_1_0_0 = (RuleCall)cValueAssignment_1_0.eContents().get(0);
+		private final Assignment cValueAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
+		private final RuleCall cValueCOMMENT_RICH_TEXT_ENDTerminalRuleCall_1_1_0 = (RuleCall)cValueAssignment_1_1.eContents().get(0);
 		
 		//RichStringLiteralEnd returns xbase::XExpression:
-		//	{RichStringLiteral} value=RICH_TEXT_END;
+		//	{RichStringLiteral} (value=RICH_TEXT_END | value=COMMENT_RICH_TEXT_END);
 		public ParserRule getRule() { return rule; }
 
-		//{RichStringLiteral} value=RICH_TEXT_END
+		//{RichStringLiteral} (value=RICH_TEXT_END | value=COMMENT_RICH_TEXT_END)
 		public Group getGroup() { return cGroup; }
 
 		//{RichStringLiteral}
 		public Action getRichStringLiteralAction_0() { return cRichStringLiteralAction_0; }
 
+		//value=RICH_TEXT_END | value=COMMENT_RICH_TEXT_END
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+
 		//value=RICH_TEXT_END
-		public Assignment getValueAssignment_1() { return cValueAssignment_1; }
+		public Assignment getValueAssignment_1_0() { return cValueAssignment_1_0; }
 
 		//RICH_TEXT_END
-		public RuleCall getValueRICH_TEXT_ENDTerminalRuleCall_1_0() { return cValueRICH_TEXT_ENDTerminalRuleCall_1_0; }
+		public RuleCall getValueRICH_TEXT_ENDTerminalRuleCall_1_0_0() { return cValueRICH_TEXT_ENDTerminalRuleCall_1_0_0; }
+
+		//value=COMMENT_RICH_TEXT_END
+		public Assignment getValueAssignment_1_1() { return cValueAssignment_1_1; }
+
+		//COMMENT_RICH_TEXT_END
+		public RuleCall getValueCOMMENT_RICH_TEXT_ENDTerminalRuleCall_1_1_0() { return cValueCOMMENT_RICH_TEXT_ENDTerminalRuleCall_1_1_0; }
 	}
 
 	public class InternalRichStringElements extends AbstractParserRuleElementFinder {
@@ -1106,6 +1130,8 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	private TerminalRule tRICH_TEXT_START;
 	private TerminalRule tRICH_TEXT_END;
 	private TerminalRule tRICH_TEXT_INBETWEEN;
+	private TerminalRule tCOMMENT_RICH_TEXT_INBETWEEN;
+	private TerminalRule tCOMMENT_RICH_TEXT_END;
 	private TerminalRule tIN_RICH_STRING;
 	
 	private final GrammarProvider grammarProvider;
@@ -1267,7 +1293,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//RichStringLiteralInbetween returns xbase::XExpression:
-	//	{RichStringLiteral} value=RICH_TEXT_INBETWEEN;
+	//	{RichStringLiteral} (value=RICH_TEXT_INBETWEEN | value=COMMENT_RICH_TEXT_INBETWEEN);
 	public RichStringLiteralInbetweenElements getRichStringLiteralInbetweenAccess() {
 		return (pRichStringLiteralInbetween != null) ? pRichStringLiteralInbetween : (pRichStringLiteralInbetween = new RichStringLiteralInbetweenElements());
 	}
@@ -1277,7 +1303,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//RichStringLiteralEnd returns xbase::XExpression:
-	//	{RichStringLiteral} value=RICH_TEXT_END;
+	//	{RichStringLiteral} (value=RICH_TEXT_END | value=COMMENT_RICH_TEXT_END);
 	public RichStringLiteralEndElements getRichStringLiteralEndAccess() {
 		return (pRichStringLiteralEnd != null) ? pRichStringLiteralEnd : (pRichStringLiteralEnd = new RichStringLiteralEndElements());
 	}
@@ -1362,6 +1388,18 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	//	"╗" IN_RICH_STRING* ("\'" "\'"?)? "л";
 	public TerminalRule getRICH_TEXT_INBETWEENRule() {
 		return (tRICH_TEXT_INBETWEEN != null) ? tRICH_TEXT_INBETWEEN : (tRICH_TEXT_INBETWEEN = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "RICH_TEXT_INBETWEEN"));
+	} 
+
+	//terminal COMMENT_RICH_TEXT_INBETWEEN:
+	//	"лл" !("\n" | "\r")* ("\r"? "\n" IN_RICH_STRING* ("\'" "\'"?)? "л")?;
+	public TerminalRule getCOMMENT_RICH_TEXT_INBETWEENRule() {
+		return (tCOMMENT_RICH_TEXT_INBETWEEN != null) ? tCOMMENT_RICH_TEXT_INBETWEEN : (tCOMMENT_RICH_TEXT_INBETWEEN = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "COMMENT_RICH_TEXT_INBETWEEN"));
+	} 
+
+	//terminal COMMENT_RICH_TEXT_END:
+	//	"лл" !("\n" | "\r")* ("\r"? "\n" IN_RICH_STRING* ("\'\'\'" | ("\'" "\'"?)? EOF) | EOF);
+	public TerminalRule getCOMMENT_RICH_TEXT_ENDRule() {
+		return (tCOMMENT_RICH_TEXT_END != null) ? tCOMMENT_RICH_TEXT_END : (tCOMMENT_RICH_TEXT_END = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "COMMENT_RICH_TEXT_END"));
 	} 
 
 	//terminal fragment IN_RICH_STRING:

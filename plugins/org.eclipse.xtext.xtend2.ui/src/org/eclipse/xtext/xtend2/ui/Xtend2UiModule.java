@@ -9,6 +9,7 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.builder.JDTAwareEclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
+import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.editor.actions.IActionContributor;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategy;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
@@ -23,10 +24,15 @@ import org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+import org.eclipse.xtext.ui.editor.toggleComments.ISingleLineCommentHelper;
+import org.eclipse.xtext.ui.editor.toggleComments.ToggleSLCommentAction;
 import org.eclipse.xtext.ui.refactoring.ui.RenameElementHandler;
 import org.eclipse.xtext.xtend2.ui.autoedit.AutoEditStrategyProvider;
 import org.eclipse.xtext.xtend2.ui.autoedit.TokenTypeToPartitionMapper;
 import org.eclipse.xtext.xtend2.ui.contentassist.ImportingTypesProposalProvider;
+import org.eclipse.xtext.xtend2.ui.editor.RichStringAwareSourceViewer;
+import org.eclipse.xtext.xtend2.ui.editor.RichStringAwareToggleCommentAction;
+import org.eclipse.xtext.xtend2.ui.editor.SingleLineCommentHelper;
 import org.eclipse.xtext.xtend2.ui.editor.Xtend2DoubleClickStrategyProvider;
 import org.eclipse.xtext.xtend2.ui.editor.Xtend2FoldingRegionProvider;
 import org.eclipse.xtext.xtend2.ui.highlighting.HighlightingConfiguration;
@@ -143,4 +149,16 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 		return JDTAwareEclipseResourceFileSystemAccess2.class;
 	}
 	
+	@Override
+	public Class<? extends ISingleLineCommentHelper> bindISingleLineCommentHelper() {
+		return SingleLineCommentHelper.class;
+	}
+	
+	public Class<? extends XtextSourceViewer.Factory> bindSourceViewerFactory() {
+		return RichStringAwareSourceViewer.Factory.class;
+	}
+	
+	public Class<? extends ToggleSLCommentAction.Factory> bindToggleCommentFactory() {
+		return RichStringAwareToggleCommentAction.Factory.class;
+	}
 }

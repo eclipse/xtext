@@ -363,6 +363,41 @@ public class ParserTest extends AbstractXtend2TestCase {
 		assertSame(richString.getExpressions().get(3), ((XAbstractFeatureCall) rsFor.getSeparator()).getFeature());
 	}
 	
+	public void testRichStringWithComment_00() throws Exception {
+		XtendFunction function = function("def foo() '''first««« comment \nsecond'''");
+		assertTrue(function.getExpression() instanceof RichString);
+		RichString richString = (RichString) function.getExpression();
+		assertEquals(2, richString.getExpressions().size());
+		RichStringLiteral first = (RichStringLiteral) richString.getExpressions().get(0);
+		assertEquals("first", first.getValue());
+		RichStringLiteral second = (RichStringLiteral) richString.getExpressions().get(1);
+		assertEquals("second", second.getValue());
+	}
+	
+	public void testRichStringWithComment_01() throws Exception {
+		XtendFunction function = function("def foo() '''first« /* ml comment\n */ «« sl_comment \nsecond'''");
+		assertTrue(function.getExpression() instanceof RichString);
+		RichString richString = (RichString) function.getExpression();
+		assertEquals(2, richString.getExpressions().size());
+		RichStringLiteral first = (RichStringLiteral) richString.getExpressions().get(0);
+		assertEquals("first", first.getValue());
+		RichStringLiteral second = (RichStringLiteral) richString.getExpressions().get(1);
+		assertEquals("second", second.getValue());
+	}
+	
+	public void testRichStringWithComment_03() throws Exception {
+		XtendFunction function = function("def foo() '''first««« comment \nsecond« /* ml comment */ »third'''");
+		assertTrue(function.getExpression() instanceof RichString);
+		RichString richString = (RichString) function.getExpression();
+		assertEquals(3, richString.getExpressions().size());
+		RichStringLiteral first = (RichStringLiteral) richString.getExpressions().get(0);
+		assertEquals("first", first.getValue());
+		RichStringLiteral second = (RichStringLiteral) richString.getExpressions().get(1);
+		assertEquals("second", second.getValue());
+		RichStringLiteral third = (RichStringLiteral) richString.getExpressions().get(2);
+		assertEquals("third", third.getValue());
+	}
+	
 	public void testImport_01() throws Exception {
 		XtendImport importDeclaration = importDeclaration("");
 		assertNull(importDeclaration);

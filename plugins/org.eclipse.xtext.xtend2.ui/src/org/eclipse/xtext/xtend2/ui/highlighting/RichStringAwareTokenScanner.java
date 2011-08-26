@@ -46,6 +46,14 @@ public class RichStringAwareTokenScanner extends TokenScanner {
 				result.offsets = new int[] { tokenOffset, tokenOffset + 1, tokenOffset + tokenLength - 1 };
 				result.lengths = new int[] { 1, tokenLength - 2, 1 };
 			}
+		} else if ("RULE_COMMENT_RICH_TEXT_END".equals(id)) {
+			result.delimiter = true;
+			result.offsets = new int[] { tokenOffset, tokenOffset + 2 };
+			result.lengths = new int[] { 2, tokenLength - 2 };
+		} else if ("RULE_COMMENT_RICH_TEXT_INBETWEEN".equals(id)) {
+			result.delimiter = true;
+			result.offsets = new int[] { tokenOffset, tokenOffset + 2, tokenOffset + tokenLength - 1 };
+			result.lengths = new int[] { 2, tokenLength - 3, 1 };
 		} else 
 			throw new IllegalArgumentException(id);
 		return result;
@@ -96,7 +104,9 @@ public class RichStringAwareTokenScanner extends TokenScanner {
 			String tokenName = entry.getValue();
 			if ("RULE_RICH_TEXT_START".equals(tokenName) ||
 				"RULE_RICH_TEXT_END".equals(tokenName) ||
-				"RULE_RICH_TEXT_INBETWEEN".equals(tokenName)) {
+				"RULE_RICH_TEXT_INBETWEEN".equals(tokenName) ||
+				"RULE_COMMENT_RICH_TEXT_END".equals(tokenName) ||
+				"RULE_COMMENT_RICH_TEXT_INBETWEEN".equals(tokenName)) {
 				allTokenTypesAsString[entry.getKey()] = tokenName;
 			}
 		}

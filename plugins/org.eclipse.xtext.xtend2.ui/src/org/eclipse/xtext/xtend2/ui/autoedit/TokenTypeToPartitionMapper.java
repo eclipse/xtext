@@ -33,7 +33,9 @@ public class TokenTypeToPartitionMapper extends TerminalsTokenTypeToPartitionMap
 				"RULE_RICH_TEXT".equals(tokenName) || 
 				"RULE_RICH_TEXT_START".equals(tokenName) || 
 				"RULE_RICH_TEXT_END".equals(tokenName) || 
-				"RULE_RICH_TEXT_INBETWEEN".equals(tokenName)) {
+				"RULE_RICH_TEXT_INBETWEEN".equals(tokenName) ||
+				"RULE_COMMENT_RICH_TEXT_END".equals(tokenName) ||
+				"RULE_COMMENT_RICH_TEXT_INBETWEEN".equals(tokenName)) {
 			return RICH_STRING_LITERAL_PARTITION;
 		}
 		return super.calculateId(tokenName, tokenType);

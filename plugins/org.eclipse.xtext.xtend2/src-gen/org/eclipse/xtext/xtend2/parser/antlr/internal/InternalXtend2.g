@@ -1297,11 +1297,11 @@ ruleRichStringLiteralInbetween returns [EObject current=null]
             grammarAccess.getRichStringLiteralInbetweenAccess().getRichStringLiteralAction_0(),
             $current);
     }
-)(
+)((
 (
 		lv_value_1_0=RULE_RICH_TEXT_INBETWEEN
 		{
-			newLeafNode(lv_value_1_0, grammarAccess.getRichStringLiteralInbetweenAccess().getValueRICH_TEXT_INBETWEENTerminalRuleCall_1_0()); 
+			newLeafNode(lv_value_1_0, grammarAccess.getRichStringLiteralInbetweenAccess().getValueRICH_TEXT_INBETWEENTerminalRuleCall_1_0_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -1315,7 +1315,26 @@ ruleRichStringLiteralInbetween returns [EObject current=null]
 	    }
 
 )
-))
+)
+    |(
+(
+		lv_value_2_0=RULE_COMMENT_RICH_TEXT_INBETWEEN
+		{
+			newLeafNode(lv_value_2_0, grammarAccess.getRichStringLiteralInbetweenAccess().getValueCOMMENT_RICH_TEXT_INBETWEENTerminalRuleCall_1_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getRichStringLiteralInbetweenRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"value",
+        		lv_value_2_0, 
+        		"COMMENT_RICH_TEXT_INBETWEEN");
+	    }
+
+)
+)))
 ;
 
 
@@ -1342,11 +1361,11 @@ ruleRichStringLiteralEnd returns [EObject current=null]
             grammarAccess.getRichStringLiteralEndAccess().getRichStringLiteralAction_0(),
             $current);
     }
-)(
+)((
 (
 		lv_value_1_0=RULE_RICH_TEXT_END
 		{
-			newLeafNode(lv_value_1_0, grammarAccess.getRichStringLiteralEndAccess().getValueRICH_TEXT_ENDTerminalRuleCall_1_0()); 
+			newLeafNode(lv_value_1_0, grammarAccess.getRichStringLiteralEndAccess().getValueRICH_TEXT_ENDTerminalRuleCall_1_0_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -1360,7 +1379,26 @@ ruleRichStringLiteralEnd returns [EObject current=null]
 	    }
 
 )
-))
+)
+    |(
+(
+		lv_value_2_0=RULE_COMMENT_RICH_TEXT_END
+		{
+			newLeafNode(lv_value_2_0, grammarAccess.getRichStringLiteralEndAccess().getValueCOMMENT_RICH_TEXT_ENDTerminalRuleCall_1_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getRichStringLiteralEndRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"value",
+        		lv_value_2_0, 
+        		"COMMENT_RICH_TEXT_END");
+	    }
+
+)
+)))
 ;
 
 
@@ -6612,6 +6650,10 @@ RULE_RICH_TEXT_START : '\'\'\'' RULE_IN_RICH_STRING* ('\'' '\''?)? '\u00AB';
 RULE_RICH_TEXT_END : '\u00BB' RULE_IN_RICH_STRING* ('\'\'\''|('\'' '\''?)? EOF);
 
 RULE_RICH_TEXT_INBETWEEN : '\u00BB' RULE_IN_RICH_STRING* ('\'' '\''?)? '\u00AB';
+
+RULE_COMMENT_RICH_TEXT_INBETWEEN : '\u00AB\u00AB' ~(('\n'|'\r'))* ('\r'? '\n' RULE_IN_RICH_STRING* ('\'' '\''?)? '\u00AB')?;
+
+RULE_COMMENT_RICH_TEXT_END : '\u00AB\u00AB' ~(('\n'|'\r'))* ('\r'? '\n' RULE_IN_RICH_STRING* ('\'\'\''|('\'' '\''?)? EOF)|EOF);
 
 fragment RULE_IN_RICH_STRING : ('\'\'' ~(('\u00AB'|'\''))|'\'' ~(('\u00AB'|'\''))|~(('\u00AB'|'\'')));
 

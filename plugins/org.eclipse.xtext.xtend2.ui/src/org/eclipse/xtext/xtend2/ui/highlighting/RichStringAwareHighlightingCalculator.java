@@ -126,26 +126,26 @@ public class RichStringAwareHighlightingCalculator extends XbaseHighlightingCalc
 
 		protected void resetCurrentOffset(RichStringLiteral origin) {
 			if (origin != null && origin != recent) {
+				INode recentNode = null;
 				if (recent != null && currentOffset != -1) {
 					List<INode> featureNodes = NodeModelUtils.findNodesForFeature(recent,
 							XbasePackage.Literals.XSTRING_LITERAL__VALUE);
 					if (featureNodes.size() == 1) {
-						INode node = featureNodes.get(0);
+						recentNode = featureNodes.get(0);
 						int closingQuoteLength = 0;
-						if (node.getText().endsWith("'''")) {
+						if (recentNode.getText().endsWith("'''")) {
 							closingQuoteLength = 3;
-						} else if (node.getText().endsWith("''")) {
+						} else if (recentNode.getText().endsWith("''")) {
 							closingQuoteLength = 2;
-						} else if (node.getText().endsWith("'") || node.getText().endsWith("\u00AB")) {
+						} else if (recentNode.getText().endsWith("'") || recentNode.getText().endsWith("\u00AB")) {
 							closingQuoteLength = 1;
 						}
-						int expectedOffset = node.getTotalEndOffset() - closingQuoteLength;
+						int expectedOffset = recentNode.getTotalEndOffset() - closingQuoteLength;
 						if (expectedOffset != currentOffset) {
 							pendingRegions.add(new Region(currentOffset, expectedOffset - currentOffset));
 						}
 					}
 				}
-				recent = origin;
 				List<INode> featureNodes = NodeModelUtils.findNodesForFeature(origin,
 						XbasePackage.Literals.XSTRING_LITERAL__VALUE);
 				if (featureNodes.size() == 1) {
@@ -155,11 +155,27 @@ public class RichStringAwareHighlightingCalculator extends XbaseHighlightingCalc
 						acceptor.addPosition(currentOffset, 3, HighlightingConfiguration.INSIGNIFICANT_TEMPLATE_TEXT);
 						highlightClosingQuotes(node);
 						currentOffset += 3;
+					} else if (node.getText().startsWith("\u00AB\u00AB")){
+						String nodeText = node.getText();
+						int length = nodeText.indexOf('\n');
+						int start = node.getTotalOffset();
+						if (length == -1) {
+							length = node.getTotalLength();
+						}
+						if (recentNode != null && recentNode.getTotalEndOffset() == start) {
+							acceptor.addPosition(start - 1, 1,
+									DefaultHighlightingConfiguration.COMMENT_ID);
+						}
+						acceptor.addPosition(start, length,
+								DefaultHighlightingConfiguration.COMMENT_ID);
+						highlightClosingQuotes(node);
+						currentOffset = start + length + 1;
 					} else {
 						highlightClosingQuotes(node);
 						currentOffset += 1;
 					}
 				}
+				recent = origin;
 			}
 		}
 
