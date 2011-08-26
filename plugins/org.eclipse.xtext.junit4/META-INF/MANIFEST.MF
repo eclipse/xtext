@@ -15,9 +15,9 @@ Import-Package: com.google.common.base,
  com.google.inject,
  com.google.inject.name,
  org.junit;version="4.5.0";resolution:=optional,
- org.junit.runner,
- org.junit.runner.manipulation,
- org.junit.runner.notification,
+ org.junit.runner;version="4.5.0",
+ org.junit.runner.manipulation;version="4.5.0",
+ org.junit.runner.notification;version="4.5.0",
  org.junit.runners;version="4.5.0";resolution:=optional,
  org.junit.runners.model;version="4.5.0";resolution:=optional
 Require-Bundle: org.eclipse.xtext;bundle-version="2.0.1"
