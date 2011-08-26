@@ -16,6 +16,8 @@ import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
 import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions;
@@ -42,6 +44,9 @@ public class Xtend2ProposalProvider extends AbstractXtend2ProposalProvider {
 
 	@Inject
 	private JdtVariableCompletions completions;
+	
+	@Inject
+	private IGrammarAccess grammarAccess;
 
 	@Override
 	public void completeMember_Name(final EObject model, Assignment assignment, final ContentAssistContext context,
@@ -50,6 +55,7 @@ public class Xtend2ProposalProvider extends AbstractXtend2ProposalProvider {
 			//TODO go up type hierarchy and collect all local fields
 			final List<XtendField> siblings = EcoreUtil2.getSiblingsOfType(model, XtendField.class);
 			Set<String> alreadyTaken = newHashSet(transform(siblings, SimpleAttributeResolver.NAME_RESOLVER));
+			alreadyTaken.addAll(getAllKeywords());
 			completions.getVariableProposals(model, Xtend2Package.Literals.XTEND_FIELD__TYPE,
 					VariableType.INSTANCE_FIELD, alreadyTaken, new JdtVariableCompletions.CompletionDataAcceptor() {
 						public void accept(String replaceText, StyledString label, Image img) {
@@ -61,12 +67,17 @@ public class Xtend2ProposalProvider extends AbstractXtend2ProposalProvider {
 		}
 	}
 
+	protected Set<String> getAllKeywords() {
+		return GrammarUtil.getAllKeywords(grammarAccess.getGrammar());
+	}
+
 	@Override
 	public void completeParameter_Name(final EObject model, Assignment assignment, final ContentAssistContext context,
 			final ICompletionProposalAcceptor acceptor) {
 		if (model instanceof XtendParameter) {
 			final List<XtendParameter> siblings = EcoreUtil2.getSiblingsOfType(model, XtendParameter.class);
 			Set<String> alreadyTaken = newHashSet(transform(siblings, SimpleAttributeResolver.NAME_RESOLVER));
+			alreadyTaken.addAll(getAllKeywords());
 			completions.getVariableProposals(model, Xtend2Package.Literals.XTEND_PARAMETER__PARAMETER_TYPE,
 					VariableType.PARAMETER, alreadyTaken, new JdtVariableCompletions.CompletionDataAcceptor() {
 						public void accept(String replaceText, StyledString label, Image img) {
