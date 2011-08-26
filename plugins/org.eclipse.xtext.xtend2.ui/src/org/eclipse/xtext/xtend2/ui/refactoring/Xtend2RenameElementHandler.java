@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.refactoring;
 
-import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JvmRenameElementHandler;
+import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelRenameElementHandler;
 import org.eclipse.xtext.xtend2.ui.preferences.Xtend2Preferences;
 
 import com.google.inject.Inject;
@@ -16,7 +16,7 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("restriction")
-public class Xtend2RenameElementHandler extends JvmRenameElementHandler {
+public class Xtend2RenameElementHandler extends JvmModelRenameElementHandler {
 
 	@Inject
 	private Xtend2Preferences preferences;

@@ -14,6 +14,8 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.ui.refactoring.DelegateToJavaRefactoringContext;
+import org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
@@ -22,8 +24,6 @@ import org.eclipse.xtext.ui.refactoring.impl.RefactoringStatusException;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.AbstractJvmModelRenameStrategy;
-import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JvmMemberRenameStrategy;
-import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.RenameJvmReferenceContext;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
@@ -40,12 +40,14 @@ public class Xtend2RenameStrategy extends AbstractJvmModelRenameStrategy {
 
 		@Inject
 		private IXtend2JvmAssociations jvmModelAssociations;
-
+		
 		@Override
 		public IRenameStrategy get(EObject targetElement, IRenameElementContext renameElementContext) {
-			if (renameElementContext instanceof RenameJvmReferenceContext) {
+			if (renameElementContext instanceof DelegateToJavaRefactoringContext
+					&& ((DelegateToJavaRefactoringContext) renameElementContext).isRealJvmElement()) {
+				// a Java refactoring triggered from an Xtend editor
 				return new JvmMemberRenameStrategy((JvmMember) targetElement);
-			}
+			} 
 			EAttribute nameAttribute = getNameAttribute(targetElement);
 			return new Xtend2RenameStrategy(targetElement, nameAttribute, getOriginalNameRegion(targetElement,
 					nameAttribute), getNameRuleName(targetElement, nameAttribute), getValueConverterService(),
@@ -66,8 +68,8 @@ public class Xtend2RenameStrategy extends AbstractJvmModelRenameStrategy {
 		super.createDeclarationUpdates(newName, resourceSet, updateAcceptor);
 		IPath path = getPathToRename(getTargetElementOriginalURI(), resourceSet);
 		if (path != null)
-			updateAcceptor.accept(getTargetElementOriginalURI().trimFragment(), new RenameResourceChange(path, newName + "."
-					+ path.getFileExtension()));
+			updateAcceptor.accept(getTargetElementOriginalURI().trimFragment(), new RenameResourceChange(path, newName
+					+ "." + path.getFileExtension()));
 	}
 
 	@Override
