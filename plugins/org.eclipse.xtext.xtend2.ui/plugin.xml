@@ -385,4 +385,16 @@
          </newWizardShortcut>
       </perspectiveExtension>
    </extension>
+   <extension point="org.eclipse.core.runtime.adapters">
+     <factory 
+        class="org.eclipse.xtext.xtend2.ui.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.xtend2.ui.JavaElementAdapter" 
+        adaptableType="org.eclipse.ui.part.FileEditorInput">
+        <adapter type="org.eclipse.jdt.core.IJavaElement"/>
+     </factory>
+     <factory 
+        class="org.eclipse.xtext.xtend2.ui.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.xtend2.ui.JavaElementAdapter" 
+        adaptableType="org.eclipse.core.resources.IFile">
+        <adapter type="org.eclipse.jdt.core.IJavaElement"/>
+     </factory>
+  </extension>
 </plugin>
