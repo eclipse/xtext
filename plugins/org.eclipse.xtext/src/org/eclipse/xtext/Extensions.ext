@@ -7,7 +7,6 @@
 *
 *******************************************************************************/
 
-import ecore;
 import org::eclipse::xtext;
 
 extension org::eclipse::xtext::GrammarUtil reexport;

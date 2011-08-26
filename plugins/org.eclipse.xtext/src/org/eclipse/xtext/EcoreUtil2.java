@@ -13,6 +13,8 @@
  *******************************************************************************/
 package org.eclipse.xtext;
 
+import static java.util.Collections.*;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -63,6 +65,18 @@ public class EcoreUtil2 extends EcoreUtil {
 			return getContainerOfType(ele.eContainer(), type);
 		return null;
 	}
+	
+	/**
+	 * @since 2.1
+	 */
+	public static <T extends EObject> List<T> getSiblingsOfType(EObject ele, Class<T> type) {
+		if (ele.eContainer() != null) {
+			List<T> siblings = typeSelect(ele.eContainer().eContents(), type);
+			siblings.remove(ele);
+			return siblings;
+		}
+		return emptyList();
+	}
 
 	/**
 	 * A generified facade to {@link EcoreUtil#copy(EObject)}.
@@ -70,7 +84,7 @@ public class EcoreUtil2 extends EcoreUtil {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T extends EObject> T clone(T eObject) {
-		return (T) EcoreUtil.copy(eObject);
+		return EcoreUtil.copy(eObject);
 	}
 	
 	/**
