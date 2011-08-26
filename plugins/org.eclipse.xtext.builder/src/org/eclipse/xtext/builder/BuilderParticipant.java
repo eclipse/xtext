@@ -100,7 +100,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			final Set<IFile> derivedResources = newLinkedHashSet();
 			for (OutputConfiguration config : outputConfigurations.values()) {
 				if (config.isCleanUpDerivedResources()) {
-					List<IFile> resources = derivedResourceMarkers.findDerivedResources(builtProject.getFolder(config.getOutputDirectory()), getGeneratorIdentifier(), uri);
+					List<IFile> resources = derivedResourceMarkers.findDerivedResources(builtProject.getFolder(config.getOutputDirectory()), uri);
 					derivedResources.addAll(resources);
 				}
 			}
@@ -123,7 +123,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 				protected void handleFileAccess(IFile file) {
 					try {
 						derivedResources.remove(file);
-						derivedResourceMarkers.installMarker(file, getGeneratorIdentifier(), uri);
+						derivedResourceMarkers.installMarker(file, uri);
 						context.needRebuild();
 					} catch (CoreException e) {
 						throw new RuntimeException(e);
@@ -151,7 +151,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 				resource.delete(IResource.KEEP_HISTORY, monitor);
 		} else {
 			if (config.isCleanUpDerivedResources()) {
-				List<IFile> resources = derivedResourceMarkers.findDerivedResources(folder, getGeneratorIdentifier(), null);
+				List<IFile> resources = derivedResourceMarkers.findDerivedResources(folder, null);
 				for (IFile iFile : resources) {
 					iFile.delete(IResource.KEEP_HISTORY, monitor);
 				}
@@ -201,8 +201,4 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 		});
 	}
 	
-	protected String getGeneratorIdentifier() {
-		return generator.getClass().getCanonicalName();
-	}
-
 }
