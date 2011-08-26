@@ -651,4 +651,37 @@ public abstract class AbstractRichStringEvaluationTest extends TestCase {
 				"'''");
 	}
 	
+	public void testEmptyExpressions_01() throws Exception {
+		assertOutput("",
+				"'''«»'''");
+	}
+	
+	public void testEmptyExpressions_02() throws Exception {
+		assertOutput("  ",
+				"'''  '''");
+		assertOutput("  ",
+				"'''  «\n  »'''");
+	}
+	
+	public void testEmptyExpressions_03() throws Exception {
+		assertOutput("    ",
+				"'''  «\n  »  '''");
+	}
+	
+	public void testEmptyExpressions_04() throws Exception {
+		assertOutput("TestTest",
+				"'''Test«/* zonk */»Test'''");
+	}
+	
+	public void testEmptyExpressions_05() throws Exception {
+		assertOutput("  \n",
+				"'''\n" +
+				"  \n" +
+				"'''");
+		assertOutput("  \n",
+				"'''\n" +
+				"  «»\n" +
+				"'''");
+	}
+	
 }

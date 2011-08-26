@@ -28,6 +28,7 @@ public class ValidatingRichStringAcceptor extends AbstractRichStringPartAcceptor
 
 	private final ValidationMessageAcceptor acceptor;
 	private int currentOffset = -1;
+	private int wasCurrentOffset = -1;
 	private RichStringLiteral recent = null;
 	private RichStringLiteral root = null;
 	private LinkedList<String> indentationStack;
@@ -48,12 +49,16 @@ public class ValidatingRichStringAcceptor extends AbstractRichStringPartAcceptor
 	public void acceptSemanticText(CharSequence text, RichStringLiteral origin) {
 		resetCurrentOffset(origin);
 		currentOffset += text.length();
+		wasCurrentOffset = -1;
 	}
 
 	protected void resetCurrentOffset(RichStringLiteral origin) {
 		if (root == null)
 			root = origin;
 		if (origin != null && origin != recent) {
+			if (wasCurrentOffset == -1)
+				wasCurrentOffset = currentOffset;
+			int diff = lastOffsetOfLiteral - currentOffset;
 			// no actions are involved, we are interested in the real node
 			recent = origin;
 			List<INode> featureNodes = NodeModelUtils.findNodesForFeature(origin,
@@ -75,6 +80,7 @@ public class ValidatingRichStringAcceptor extends AbstractRichStringPartAcceptor
 					currentOffset += 1;
 				}
 			}
+			currentOffset -= diff;
 		}
 	}
 
@@ -82,18 +88,21 @@ public class ValidatingRichStringAcceptor extends AbstractRichStringPartAcceptor
 	public void acceptTemplateText(CharSequence text, RichStringLiteral origin) {
 		resetCurrentOffset(origin);
 		currentOffset += text.length();
+		wasCurrentOffset = -1;
 	}
 
 	@Override
 	public void acceptSemanticLineBreak(int charCount, RichStringLiteral origin, boolean controlStructureSeen) {
 		resetCurrentOffset(origin);
 		currentOffset += charCount;
+		wasCurrentOffset = -1;
 	}
 
 	@Override
 	public void acceptTemplateLineBreak(int charCount, RichStringLiteral origin) {
 		resetCurrentOffset(origin);
 		currentOffset += charCount;
+		wasCurrentOffset = -1;
 	}
 
 	public void pushTemplateIndentation(CharSequence completeIndentation) {
@@ -128,8 +137,15 @@ public class ValidatingRichStringAcceptor extends AbstractRichStringPartAcceptor
 		if (unfulfilledIndentationExpectation != null) {
 			if (currentOffset + indentation.length() != lastOffsetOfLiteral) {
 				if (indentation.length() != 0) {
-					this.acceptor.acceptWarning("Inconsistent indentation", root, currentOffset, indentation.length(), 
-							IssueCodes.INCONSISTENT_INDENTATION, unfulfilledIndentationExpectation);
+					if (wasCurrentOffset == -1) {
+						this.acceptor.acceptWarning("Inconsistent indentation", root, currentOffset, indentation.length(), 
+								IssueCodes.INCONSISTENT_INDENTATION, unfulfilledIndentationExpectation);
+					} else {
+						this.acceptor.acceptWarning("Inconsistent indentation", root, 
+								wasCurrentOffset, 
+								currentOffset + indentation.length() - wasCurrentOffset, 
+								IssueCodes.INCONSISTENT_INDENTATION, unfulfilledIndentationExpectation);
+					}
 				}
 			}
 			unfulfilledIndentationExpectation = null;

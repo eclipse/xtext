@@ -198,4 +198,18 @@ public class InitialIndentationTest extends AbstractRichStringTest {
 			"'''");
 	}
 	
+	public void testEmptyInput_01() throws Exception {
+		assertInitialIndentation("",
+				"'''\n" +
+				"  \n" +
+				"'''");
+	}
+	
+	public void testEmptyInput_02() throws Exception {
+		assertInitialIndentation("",
+				"'''\n" +
+				"  «»\n" +
+				"'''");
+	}
+	
 }

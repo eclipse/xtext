@@ -91,8 +91,8 @@ ruleSimpleStringLiteral :
 // Rule RichString
 ruleRichString :
 	ruleRichStringLiteral |
-	ruleRichStringLiteralStart ruleRichStringPart (
-		ruleRichStringLiteralInbetween ruleRichStringPart
+	ruleRichStringLiteralStart ruleRichStringPart? (
+		ruleRichStringLiteralInbetween ruleRichStringPart?
 	)* ruleRichStringLiteralEnd
 ;
 
@@ -118,15 +118,9 @@ ruleRichStringLiteralEnd :
 
 // Rule InternalRichString
 ruleInternalRichString :
-	ruleInternalRichStringLiteral |
 	ruleRichStringLiteralInbetween (
-		ruleRichStringPart ruleRichStringLiteralInbetween
-	)+
-;
-
-// Rule InternalRichStringLiteral
-ruleInternalRichStringLiteral :
-	RULE_RICH_TEXT_INBETWEEN
+		ruleRichStringPart? ruleRichStringLiteralInbetween
+	)*
 ;
 
 // Rule RichStringPart

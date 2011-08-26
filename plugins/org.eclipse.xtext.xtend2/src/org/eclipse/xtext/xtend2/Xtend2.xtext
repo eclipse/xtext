@@ -69,8 +69,8 @@ SimpleStringLiteral returns xbase::XExpression:
 RichString returns xbase::XExpression:
 	{RichString} ( 
 	  expressions+=RichStringLiteral |
-	  expressions+=RichStringLiteralStart expressions+=RichStringPart 
-	  	(expressions+=RichStringLiteralInbetween expressions+=RichStringPart)* 
+	  expressions+=RichStringLiteralStart expressions+=RichStringPart? 
+	  	(expressions+=RichStringLiteralInbetween expressions+=RichStringPart?)* 
 	  expressions+=RichStringLiteralEnd
 	)
 ;
@@ -93,13 +93,8 @@ RichStringLiteralEnd returns xbase::XExpression :
 
 InternalRichString returns xbase::XExpression:
 	{RichString} (
-		expressions+=InternalRichStringLiteral |
-		expressions+=RichStringLiteralInbetween (expressions+=RichStringPart expressions+=RichStringLiteralInbetween)+
+		expressions+=RichStringLiteralInbetween (expressions+=RichStringPart? expressions+=RichStringLiteralInbetween)*
 	)
-;
-
-InternalRichStringLiteral returns xbase::XExpression :
-	{RichStringLiteral} value=RICH_TEXT_INBETWEEN
 ;
 
 RichStringPart returns xbase::XExpression:

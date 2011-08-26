@@ -180,6 +180,8 @@ public class RichStringProcessor {
 		private LinePart nextPart;
 		
 		private RichStringLiteral announced;
+		
+		private int skipCount = 0;
 
 		public Implementation(IRichStringPartAcceptor acceptor, IRichStringIndentationHandler indentationHandler) {
 			this.acceptor = acceptor;
@@ -358,13 +360,49 @@ public class RichStringProcessor {
 				}
 				announceTemplateText(textLine, object.getLiteral());
 			} else {
-				firstOrLast = false;
-				if (line.getParts().get(0) == object) {
-					pushSemanticIndentation(ws);
-					announceIndentation();
-					announceSemanticText(textLine.subSequence(ws.length(), textLine.length()), object.getLiteral());
+				if (skipCount <= 1) {
+					firstOrLast = false;
+					if (skipCount == 0 && line.getParts().get(0) == object) {
+						if (textLine.length() == ws.length()) {
+							for(int i = 1; i < line.getParts().size(); i++) {
+								if (line.getParts().get(i) instanceof Literal && !(line.getParts().get(i) instanceof LineBreak)) {
+									Literal nextLiteralInSameLine = (Literal) line.getParts().get(i);
+									TextLine nextLiteralLine = new TextLine(nextLiteralInSameLine.getLiteral().getValue(), nextLiteralInSameLine.getOffset(), nextLiteralInSameLine.getLength(), 0);
+									CharSequence nextLeading = nextLiteralLine.getLeadingWhiteSpace();
+									if (nextLeading.length() > 0) {
+										ws = ws.toString() + nextLeading;
+									}
+									skipCount++;
+									if (nextLeading.length() != nextLiteralLine.length()) {
+										break;
+									}
+								} else {
+									break;
+								}
+							}
+							if (skipCount != 0) {
+								pushSemanticIndentation(ws);
+							} else {
+								pushSemanticIndentation(ws);
+								announceIndentation();
+								announceSemanticText(textLine.subSequence(ws.length(), textLine.length()), object.getLiteral());
+							}
+						} else {
+							pushSemanticIndentation(ws);
+							announceIndentation();
+							announceSemanticText(textLine.subSequence(ws.length(), textLine.length()), object.getLiteral());
+						}
+					} else {
+						if (skipCount == 1) {
+							skipCount--;
+							announceIndentation();
+							announceSemanticText(textLine.subSequence(ws.length(), textLine.length()), object.getLiteral());
+						} else {
+							announceSemanticText(textLine, object.getLiteral());
+						}
+					}
 				} else {
-					announceSemanticText(textLine, object.getLiteral());
+					skipCount--;
 				}
 			}
 			if (!firstOrLast && line.getParts().get(line.getParts().size() - 1) == object) {
