@@ -15,9 +15,7 @@ Require-Bundle: org.eclipse.xtext.xbase;bundle-version="2.0.0";visibility:=reexp
  org.eclipse.xtext.ui.shared;bundle-version="2.0.0",
  org.antlr.runtime,
  org.eclipse.jdt.core;bundle-version="3.5.0";resolution:=optional,
- org.eclipse.jdt.ui;bundle-version="3.5.0";resolution:=optional,
- org.eclipse.jdt.core.manipulation;bundle-version="1.3.0";resolution:=optional,
- org.eclipse.ltk.ui.refactoring;bundle-version="3.4.0";resolution:=optional
+ org.eclipse.jdt.ui;bundle-version="3.5.0";resolution:=optional
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Activator: org.eclipse.xtext.xbase.ui.internal.XtypeActivator
 Import-Package: org.apache.log4j

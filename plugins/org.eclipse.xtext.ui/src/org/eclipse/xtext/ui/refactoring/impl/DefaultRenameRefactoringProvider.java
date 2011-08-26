@@ -58,6 +58,7 @@ public class DefaultRenameRefactoringProvider implements IRenameRefactoringProvi
 		
 		@Override
 		protected RefactoringTickProvider doGetRefactoringTickProvider() {
+			// some geeky fun with progress markers
 			return new RefactoringTickProvider(1, 200, 1, 1);
 		}
 	}

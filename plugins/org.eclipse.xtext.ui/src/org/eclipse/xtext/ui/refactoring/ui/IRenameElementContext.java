@@ -42,6 +42,10 @@ public interface IRenameElementContext {
 
 		private final ISelection triggeringEditorSelection;
 
+		public Impl(URI targetElementURI, EClass targetElementEClass) {
+			this(targetElementURI, targetElementEClass, null, null, null);
+		}
+		
 		public Impl(URI targetElementURI, EClass targetElementEClass, IEditorPart triggeringEditor, ISelection triggeringEditorSelection, URI contextResourceURI) {
 			this.targetElementURI = targetElementURI;
 			this.targetElementEClass = targetElementEClass;
@@ -69,5 +73,6 @@ public interface IRenameElementContext {
 		public ISelection getTriggeringEditorSelection() {
 			return triggeringEditorSelection;
 		}
+		
 	}
 }
