@@ -27,6 +27,13 @@ public class RichStringAwareTokenScannerTest extends AbstractXtend2UITestCase {
 		scanner = get(ITokenScanner.class);
 	}
 	
+	@Override
+	protected void tearDown() throws Exception {
+		document = null;
+		scanner = null;
+		super.tearDown();
+	}
+	
 	protected void initializeScanner(String input) {
 		document.set(input);
 		scanner.setRange(document, 0, input.length());

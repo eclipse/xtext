@@ -54,6 +54,14 @@ public class Xtend2HighlightingCalculatorTest extends AbstractXtend2UITestCase i
 		expectedRegions = newHashMap();
 	}
 	
+	@Override
+	protected void tearDown() throws Exception {
+		expectedRegions = null;
+		testHelper = null;
+		calculator = null;
+		super.tearDown();
+	}
+	
 	protected String getPrefix() {
 		return "class Foo { def foo() ";
 	}
