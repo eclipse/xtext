@@ -683,5 +683,43 @@ public abstract class AbstractRichStringEvaluationTest extends TestCase {
 				"  л╗\n" +
 				"'''");
 	}
+
+	public void testTemplateWithComments_01() throws Exception {
+		assertOutput(
+				" foobar\n" +
+				"   foobar\n" +
+				"foobar\n",
+				"'''\n" +
+				"  foobar\n" +
+				"ллл    comment\n" +
+				"    foobar\n" +
+				"ллл    comment\n" +
+				" foobar\n" +
+				"'''");
+	}
 	
+	public void testTemplateWithComments_02() throws Exception {
+		assertOutput(
+				"  foobar\n" +
+				"    foobar\n" +
+				" foobar\n",
+				"'''  foobar\n" +
+				"ллл    comment\n" +
+				"    foobar\n" +
+				"ллл    another comment\n" +
+				" foobar\n" +
+				"'''");
+	}
+	
+	public void testTemplateWithComments_03() throws Exception {
+		assertOutput(
+				"  foobar\n" +
+				"    foobar\n" +
+				" foobar  ",
+				"'''  foobar\n" +
+				"ллл    comment\n" +
+				"    foobar\n" +
+				"ллл    comment\n" +
+				" foobar  '''");
+	}
 }

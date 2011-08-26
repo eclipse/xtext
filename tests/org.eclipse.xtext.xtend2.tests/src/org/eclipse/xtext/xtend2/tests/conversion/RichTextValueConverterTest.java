@@ -8,6 +8,8 @@
 package org.eclipse.xtext.xtend2.tests.conversion;
 
 import org.eclipse.xtext.conversion.ValueConverterWithValueException;
+import org.eclipse.xtext.xtend2.conversion.CommentRichTextEndValueConverter;
+import org.eclipse.xtext.xtend2.conversion.CommentRichTextInBetweenValueConverter;
 import org.eclipse.xtext.xtend2.conversion.RichTextEndValueConverter;
 import org.eclipse.xtext.xtend2.conversion.RichTextInBetweenValueConverter;
 import org.eclipse.xtext.xtend2.conversion.RichTextStartValueConverter;
@@ -143,5 +145,37 @@ public class RichTextValueConverterTest extends AbstractXtend2TestCase {
 			String value = (String) e.getValue();
 			assertEquals(expectation, value);
 		}
+	}
+	
+	public void testCommentRichTextInBetween_01() {
+		String text = "«« comment\ncontent\nmoreContent«";
+		String expectation = "content\nmoreContent";
+		CommentRichTextInBetweenValueConverter converter = get(CommentRichTextInBetweenValueConverter.class);
+		String value = converter.toValue(text, null);
+		assertEquals(expectation, value);
+	}
+	
+	public void testCommentRichTextInBetween_02() {
+		String text = "«« comment\n«";
+		String expectation = "";
+		CommentRichTextInBetweenValueConverter converter = get(CommentRichTextInBetweenValueConverter.class);
+		String value = converter.toValue(text, null);
+		assertEquals(expectation, value);
+	}
+	
+	public void testCommentRichTextEnd_01() {
+		String text = "«« comment\ncontent'''";
+		String expectation = "content";
+		CommentRichTextEndValueConverter converter = get(CommentRichTextEndValueConverter.class);
+		String value = converter.toValue(text, null);
+		assertEquals(expectation, value);
+	}
+	
+	public void testCommentRichTextEnd_02() {
+		String text = "«« comment\n'''";
+		String expectation = "";
+		CommentRichTextEndValueConverter converter = get(CommentRichTextEndValueConverter.class);
+		String value = converter.toValue(text, null);
+		assertEquals(expectation, value);
 	}
 }

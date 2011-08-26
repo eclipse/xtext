@@ -43,6 +43,8 @@ public class Xtend2Parser extends AbstractContentAssistParser {
 					put(grammarAccess.getValidIDAccess().getAlternatives(), "rule__ValidID__Alternatives");
 					put(grammarAccess.getXStringLiteralAccess().getAlternatives(), "rule__XStringLiteral__Alternatives");
 					put(grammarAccess.getRichStringAccess().getAlternatives_1(), "rule__RichString__Alternatives_1");
+					put(grammarAccess.getRichStringLiteralInbetweenAccess().getAlternatives_1(), "rule__RichStringLiteralInbetween__Alternatives_1");
+					put(grammarAccess.getRichStringLiteralEndAccess().getAlternatives_1(), "rule__RichStringLiteralEnd__Alternatives_1");
 					put(grammarAccess.getRichStringPartAccess().getAlternatives(), "rule__RichStringPart__Alternatives");
 					put(grammarAccess.getXAnnotationAccess().getAlternatives_3_1(), "rule__XAnnotation__Alternatives_3_1");
 					put(grammarAccess.getXAnnotationElementValueAccess().getAlternatives(), "rule__XAnnotationElementValue__Alternatives");
@@ -281,8 +283,10 @@ public class Xtend2Parser extends AbstractContentAssistParser {
 					put(grammarAccess.getRichStringAccess().getExpressionsAssignment_1_1_3(), "rule__RichString__ExpressionsAssignment_1_1_3");
 					put(grammarAccess.getRichStringLiteralAccess().getValueAssignment_1(), "rule__RichStringLiteral__ValueAssignment_1");
 					put(grammarAccess.getRichStringLiteralStartAccess().getValueAssignment_1(), "rule__RichStringLiteralStart__ValueAssignment_1");
-					put(grammarAccess.getRichStringLiteralInbetweenAccess().getValueAssignment_1(), "rule__RichStringLiteralInbetween__ValueAssignment_1");
-					put(grammarAccess.getRichStringLiteralEndAccess().getValueAssignment_1(), "rule__RichStringLiteralEnd__ValueAssignment_1");
+					put(grammarAccess.getRichStringLiteralInbetweenAccess().getValueAssignment_1_0(), "rule__RichStringLiteralInbetween__ValueAssignment_1_0");
+					put(grammarAccess.getRichStringLiteralInbetweenAccess().getValueAssignment_1_1(), "rule__RichStringLiteralInbetween__ValueAssignment_1_1");
+					put(grammarAccess.getRichStringLiteralEndAccess().getValueAssignment_1_0(), "rule__RichStringLiteralEnd__ValueAssignment_1_0");
+					put(grammarAccess.getRichStringLiteralEndAccess().getValueAssignment_1_1(), "rule__RichStringLiteralEnd__ValueAssignment_1_1");
 					put(grammarAccess.getInternalRichStringAccess().getExpressionsAssignment_1_0(), "rule__InternalRichString__ExpressionsAssignment_1_0");
 					put(grammarAccess.getInternalRichStringAccess().getExpressionsAssignment_1_1_0(), "rule__InternalRichString__ExpressionsAssignment_1_1_0");
 					put(grammarAccess.getInternalRichStringAccess().getExpressionsAssignment_1_1_1(), "rule__InternalRichString__ExpressionsAssignment_1_1_1");

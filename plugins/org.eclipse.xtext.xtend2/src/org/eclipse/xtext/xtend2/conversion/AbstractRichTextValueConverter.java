@@ -78,7 +78,7 @@ public abstract class AbstractRichTextValueConverter extends AbstractLexerBasedC
 			if (string.length() <= leadingTerminal.length()) {
 				throw new ValueConverterWithValueException("String literal is not closed", node, "", null);
 			}
-			String withoutLeadingTerminal = string.substring(leadingTerminal.length());
+			String withoutLeadingTerminal = getWithoutLeadingTerminal(string);
 			String trailingTerminal = getTrailingTerminal();
 			if (withoutLeadingTerminal.endsWith(trailingTerminal)) {
 				String result = withoutLeadingTerminal.substring(0, withoutLeadingTerminal.length() - trailingTerminal.length());
@@ -102,5 +102,9 @@ public abstract class AbstractRichTextValueConverter extends AbstractLexerBasedC
 		} catch (StringIndexOutOfBoundsException e) {
 			throw new ValueConverterException(e.getMessage(), node, e);
 		}
+	}
+	
+	protected String getWithoutLeadingTerminal(String string) {
+		return string.substring(getLeadingTerminal().length());
 	}
 }

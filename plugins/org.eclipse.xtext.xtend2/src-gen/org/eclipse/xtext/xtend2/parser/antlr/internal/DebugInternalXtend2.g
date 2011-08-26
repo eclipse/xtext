@@ -108,12 +108,14 @@ ruleRichStringLiteralStart :
 
 // Rule RichStringLiteralInbetween
 ruleRichStringLiteralInbetween :
-	RULE_RICH_TEXT_INBETWEEN
+	RULE_RICH_TEXT_INBETWEEN |
+	RULE_COMMENT_RICH_TEXT_INBETWEEN
 ;
 
 // Rule RichStringLiteralEnd
 ruleRichStringLiteralEnd :
-	RULE_RICH_TEXT_END
+	RULE_RICH_TEXT_END |
+	RULE_COMMENT_RICH_TEXT_END
 ;
 
 // Rule InternalRichString
@@ -743,6 +745,32 @@ RULE_RICH_TEXT_INBETWEEN :
 	'\u00BB' RULE_IN_RICH_STRING* (
 		'\'' '\''?
 	)? '\u00AB'
+;
+
+RULE_COMMENT_RICH_TEXT_INBETWEEN :
+	'\u00AB\u00AB' ~ (
+		'\n' |
+		'\r'
+	)* (
+		'\r'? '\n' RULE_IN_RICH_STRING* (
+			'\'' '\''?
+		)? '\u00AB'
+	)?
+;
+
+RULE_COMMENT_RICH_TEXT_END :
+	'\u00AB\u00AB' ~ (
+		'\n' |
+		'\r'
+	)* (
+		'\r'? '\n' RULE_IN_RICH_STRING* (
+			'\'\'\'' |
+			(
+				'\'' '\''?
+			)? EOF
+		) |
+		EOF
+	)
 ;
 
 fragment RULE_IN_RICH_STRING :
