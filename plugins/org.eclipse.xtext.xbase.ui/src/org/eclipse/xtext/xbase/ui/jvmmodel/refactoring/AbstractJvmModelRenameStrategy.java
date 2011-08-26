@@ -11,7 +11,6 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
@@ -28,17 +27,6 @@ public abstract class AbstractJvmModelRenameStrategy extends DefaultRenameStrate
 			String nameRuleName, IValueConverterService valueConverterService, IJvmModelAssociations xtend2jvmAssociations) {
 		super(targetElement, nameAttribute, originalNameRegion, nameRuleName, valueConverterService);
 		this.jvmModelAssociations = xtend2jvmAssociations;
-	}
-
-	/**
-	 * @deprecated exists for backwards compatibility reasons only and will be removed in Xtext 2.1
-	 */
-	@Deprecated
-	protected AbstractJvmModelRenameStrategy(EObject targetElement,
-			ILocationInFileProvider locationInFileProvider,
-			IJvmModelAssociations jvmModelAssociations) {
-		super(targetElement, locationInFileProvider);
-		this.jvmModelAssociations = jvmModelAssociations;
 	}
 
 	@Override

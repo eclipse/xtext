@@ -18,4 +18,18 @@
 	          nature="org.eclipse.jdt.core.javanature">
 	    </queryParticipant>
 	 </extension>
+	 
+	 <extension
+         point="org.eclipse.ltk.core.refactoring.renameParticipants">
+      <renameParticipant
+            class="org.eclipse.xtext.common.types.shared.SharedCommonTypesExecutableExtensionFactory:org.eclipse.xtext.common.types.ui.refactoring.participant.JdtRenamePartcipant"
+            id="org.eclipse.xtext.common.types.ui.refactoring.participant.JdtRenamePartcipant"
+            name="Xtext JDT rename participant">
+         <enablement>
+         	<with variable="element">
+        		<instanceof value="org.eclipse.jdt.core.IMember"/>
+        	</with>
+        </enablement>
+      </renameParticipant>
+   </extension>
 </plugin>

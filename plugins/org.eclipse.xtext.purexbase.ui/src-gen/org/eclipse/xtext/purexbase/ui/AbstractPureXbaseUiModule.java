@@ -203,10 +203,5 @@ public abstract class AbstractPureXbaseUiModule extends DefaultUiModule {
 		return org.eclipse.xtext.purexbase.ui.refactoring.PureXbaseRenameStrategy.Provider.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
-	public Class<? extends org.eclipse.xtext.ui.refactoring.impl.RefactoringResourceSetProvider> bindRefactoringResourceSetProvider() {
-		return org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelRefactoringResourceSetProvider.class;
-	}
-
 
 }

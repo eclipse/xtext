@@ -32,7 +32,7 @@ import org.eclipse.xtext.ui.refactoring.IRenameProcessorAdapter;
 import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JvmRenameElementHandler;
+import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelRenameElementHandler;
 import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
 import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
 
@@ -54,7 +54,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtend2UITestCase {
 	protected IRenameProcessorAdapter.Factory renameProcessorAdapterFactory;
 
 	@Inject
-	protected JvmRenameElementHandler renameElementHandler;
+	protected JvmModelRenameElementHandler renameElementHandler;
 
 	public static Test suite() {
 		return WorkbenchTestHelper.suite(JavaRefactoringIntegrationTest.class);
@@ -73,18 +73,17 @@ public class JavaRefactoringIntegrationTest extends AbstractXtend2UITestCase {
 	}
 
 	public void testRenameReferenceToJava() throws Exception {
-		// TODO make this test work by integrating JDT's RenameSupport into Xbase's RenameLinkedMode correctly
-//		try {
-//			testHelper.createFile("JavaClass.java", "public class JavaClass {}");
-//			String xtendModel = "class XtendClass extends JavaClass {}";
-//			XtextEditor editor = testHelper.openEditor("XtendClass.xtend", xtendModel);
-//			performRenameTest(editor, xtendModel.indexOf("JavaClass"), "NewJavaClass");
-//			assertFileExists("src/NewJavaClass.java");
-//			IResourcesSetupUtil.waitForAutoBuild();
-//			assertTrue(editor.getDocument().get(), editor.getDocument().get().contains("NewJavaClass"));
-//		} finally {
-//			testHelper.getProject().getFile("src/NewJavaClass.java").delete(true, new NullProgressMonitor());
-//		}
+		try {
+			testHelper.createFile("JavaClass.java", "public class JavaClass {}");
+			String xtendModel = "class XtendClass extends JavaClass {}";
+			XtextEditor editor = testHelper.openEditor("XtendClass.xtend", xtendModel);
+			performRenameTest(editor, xtendModel.indexOf("JavaClass"), "NewJavaClass");
+			assertFileExists("src/NewJavaClass.java");
+			IResourcesSetupUtil.waitForAutoBuild();
+			assertTrue(editor.getDocument().get(), editor.getDocument().get().contains("NewJavaClass"));
+		} finally {
+			testHelper.getProject().getFile("src/NewJavaClass.java").delete(true, new NullProgressMonitor());
+		}
 	}
 
 	public void testRenameOverriddenJavaMethod() throws Exception {

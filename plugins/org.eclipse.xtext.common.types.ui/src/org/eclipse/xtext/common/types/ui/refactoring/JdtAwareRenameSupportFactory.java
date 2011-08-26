@@ -5,9 +5,10 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt;
+package org.eclipse.xtext.common.types.ui.refactoring;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.WrappedException;
@@ -34,10 +35,10 @@ public class JdtAwareRenameSupportFactory extends Factory {
 
 	@Override
 	public IRenameSupport create(Object context, String newName) {
-		if (context instanceof RenameJvmReferenceContext) {
+		if (context instanceof DelegateToJavaRefactoringContext) {
 			try {
-				RenameJavaElementDescriptor descriptor = createDescriptor((RenameJvmReferenceContext) context, newName);
-				return new JdtRefactoringSupportWrapper(descriptor);
+				RenameJavaElementDescriptor descriptor = createDescriptor((DelegateToJavaRefactoringContext) context, newName);
+				return new JdtRenameSupportWrapper(descriptor);
 			} catch (Exception exc) {
 				throw new WrappedException(exc);
 			}
@@ -45,17 +46,19 @@ public class JdtAwareRenameSupportFactory extends Factory {
 		return super.create(context, newName);
 	}
 
-	protected RenameJavaElementDescriptor createDescriptor(RenameJvmReferenceContext renameElementContext,
+	protected RenameJavaElementDescriptor createDescriptor(DelegateToJavaRefactoringContext renameElementContext,
 			String newName) throws JavaModelException {
-		IJavaElement referencedJavaElement = renameElementContext.getReferencedJavaElement();
+		List<IJavaElement> javaElements = renameElementContext.getJavaElements();
+		// TODO handle multiple java elements gracefully
+		IJavaElement referencedJavaElement = javaElements.get(0);
 		return jvmRenameRefactorigProvider.createRenameDescriptor(referencedJavaElement, newName);
 	}
 
-	protected static class JdtRefactoringSupportWrapper implements IRenameSupport {
+	protected static class JdtRenameSupportWrapper implements IRenameSupport {
 
 		private RenameSupport renameSupport;
 
-		public JdtRefactoringSupportWrapper(RenameJavaElementDescriptor renameDescriptor) throws CoreException {
+		public JdtRenameSupportWrapper(RenameJavaElementDescriptor renameDescriptor) throws CoreException {
 			renameSupport = RenameSupport.create(renameDescriptor);
 		}
 

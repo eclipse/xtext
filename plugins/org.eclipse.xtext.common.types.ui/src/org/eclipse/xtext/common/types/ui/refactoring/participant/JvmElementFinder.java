@@ -5,16 +5,13 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt;
+package org.eclipse.xtext.common.types.ui.refactoring.participant;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.IJavaElement;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.TypeURIHelper;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
@@ -26,6 +23,8 @@ import org.eclipse.xtext.util.Strings;
 import com.google.inject.Inject;
 
 /**
+ * Helps to resolve {@link JvmIdentifiableElement}s corresponding to {@link IJavaElement}s.
+ *  
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class JvmElementFinder {
@@ -37,36 +36,32 @@ public class JvmElementFinder {
 	private TypeURIHelper typeURIHelper;
 
 	@Inject
-	private IQualifiedNameProvider qualifiedNameProvider;
-
-	@Inject
 	private IResourceDescriptions resourceDescriptions;
 
+	@Inject
+	private IQualifiedNameProvider qualifiedNameProvider;
+	
 	public EObject getCorrespondingJvmElement(IJavaElement javaElement, ResourceSet resourceSet) {
 		typeProviderFactory.findOrCreateTypeProvider(resourceSet);
 		URI jvmElementURI = typeURIHelper.getFullURI(javaElement);
-		return resourceSet.getEObject(jvmElementURI, true);
+		return (jvmElementURI != null) ? resourceSet.getEObject(jvmElementURI, true) : null;
 	}
 	
-	public JvmIdentifiableElement findJvmElementDeclarationInIndex(EObject jvmElement, IProject project) {
+	public EObject findJvmElementDeclarationInIndex(EObject jvmElement, IProject project) {
+		// TODO lookup top level type container in index instead? 
 		QualifiedName qualifiedName = qualifiedNameProvider.getFullyQualifiedName(jvmElement);
 		if (qualifiedName != null) {
-			IEObjectDescription indexedElementDescription = findIndexedElement(project, qualifiedName, jvmElement.eClass());
-			if (indexedElementDescription != null)
-				return (JvmIdentifiableElement) EcoreUtil.resolve(indexedElementDescription.getEObjectOrProxy(),
-						jvmElement);
+			for (IEObjectDescription candidate : resourceDescriptions.getExportedObjects(jvmElement.eClass(), qualifiedName,
+					true)) {
+				if (candidate.getEObjectURI().isPlatformResource()
+						&& Strings.equal(project.getName(), candidate.getEObjectURI().segment(1))) {
+					return jvmElement.eResource().getResourceSet().getEObject(candidate.getEObjectURI(), true);
+				}
+			}
+			return null;
 		}
 		return null;
 	}
+	
 
-	protected IEObjectDescription findIndexedElement(IProject project, QualifiedName qualifiedName,
-			EClass expectedJvmType) {
-		for (IEObjectDescription candidate : resourceDescriptions.getExportedObjects(expectedJvmType, qualifiedName,
-				true)) {
-			if (candidate.getEObjectURI().isPlatformResource()
-					&& Strings.equal(project.getName(), candidate.getEObjectURI().segment(1)))
-				return candidate;
-		}
-		return null;
-	}
 }

@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt;
+package org.eclipse.xtext.common.types.ui.refactoring;
 
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.jdt.core.IField;
@@ -22,13 +22,9 @@ import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.ltk.core.refactoring.RefactoringCore;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
-import org.eclipse.ltk.core.refactoring.participants.RenameProcessor;
 import org.eclipse.ltk.ui.refactoring.RefactoringWizardPage;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameRefactoringProvider;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
-
-import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -36,13 +32,10 @@ import com.google.inject.Provider;
 @SuppressWarnings("restriction")
 public class JvmRenameRefactoringProvider extends DefaultRenameRefactoringProvider {
 
-	@Inject
-	private Provider<JvmReferenceUpdateRenameProcessor> jvmReferenceUpdateRenameProcessorProvider;
-	
 	@Override
 	public ProcessorBasedRefactoring getRenameRefactoring(IRenameElementContext renameElementContext) {
-		if (renameElementContext instanceof RenameJvmDeclarationContext) {
-			for (IJavaElement javaElement : ((RenameJvmDeclarationContext) renameElementContext).getJavaElements()) {
+		if (renameElementContext instanceof DelegateToJavaRefactoringContext) {
+			for (IJavaElement javaElement : ((DelegateToJavaRefactoringContext) renameElementContext).getJavaElements()) {
 				if (isJavaSource(javaElement)) {
 					try {
 						RenameJavaElementDescriptor renameDescriptor = createRenameDescriptor(javaElement,
@@ -53,22 +46,10 @@ public class JvmRenameRefactoringProvider extends DefaultRenameRefactoringProvid
 					}
 				}
 			}
-		}
+		} 
 		return super.getRenameRefactoring(renameElementContext);
 	}
 
-	@Override
-	public RenameProcessor getRenameProcessor(IRenameElementContext renameElementContext) {
-		if(renameElementContext instanceof RenameJvmReferenceContext) {
-			JvmReferenceUpdateRenameProcessor jvmReferenceUpdateRenameProcessor = jvmReferenceUpdateRenameProcessorProvider.get();
-			if(jvmReferenceUpdateRenameProcessor.initialize(renameElementContext)) 
-				return jvmReferenceUpdateRenameProcessor;
-			else
-				return null;
-		}
-		return super.getRenameProcessor(renameElementContext);
-	}
-	
 	protected boolean isJavaSource(IJavaElement javaElement) {
 		return "java".equals(javaElement.getResource().getFileExtension());
 	}

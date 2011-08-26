@@ -5,10 +5,11 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xtend2.ui.refactoring;
+package org.eclipse.xtext.common.types.ui.refactoring;
 
-import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JDTRenamePartcipant;
-import org.eclipse.xtext.xtend2.ui.preferences.Xtend2Preferences;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
+import org.eclipse.xtext.ui.refactoring.impl.RefactoringResourceSetProvider;
 
 import com.google.inject.Inject;
 
@@ -16,14 +17,14 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("restriction")
-public class Xtend2RenameParticipant extends JDTRenamePartcipant {
-
+public class JvmRefactoringResourceSetProvider extends RefactoringResourceSetProvider {
+	
 	@Inject
-	private Xtend2Preferences preferences;
+	private IJvmTypeProvider.Factory typeProviderFactory;
 
 	@Override
-	protected boolean initialize(Object element) {
-		return preferences.isRefactoringEnabled() && super.initialize(element);
-
+	protected void configure(ResourceSet resourceSet) {
+		super.configure(resourceSet);
+		typeProviderFactory.findOrCreateTypeProvider(resourceSet);
 	}
 }
