@@ -303,6 +303,9 @@ public class XtextEditor extends TextEditor {
 
 	@Inject
 	private IActionContributor.CompositeImpl actioncontributor;
+	
+	@Inject
+	private ToggleSLCommentAction.Factory toggleSLCommentActionFactory;
 
 	@Override
 	protected void createActions() {
@@ -316,7 +319,7 @@ public class XtextEditor extends TextEditor {
 			markAsSelectionDependentAction("Format", true); //$NON-NLS-1$
 		}
 
-		ToggleSLCommentAction action = new ToggleSLCommentAction(XtextUIMessages.getResourceBundle(),
+		ToggleSLCommentAction action = toggleSLCommentActionFactory.create(XtextUIMessages.getResourceBundle(),
 				"ToggleComment.", this); //$NON-NLS-1$
 		action.setActionDefinitionId(Activator.PLUGIN_ID + ".ToggleCommentAction");
 		setAction("ToggleComment", action); //$NON-NLS-1$

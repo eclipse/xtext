@@ -36,6 +36,15 @@ import org.eclipse.ui.texteditor.TextEditorAction;
  */
 public class ToggleSLCommentAction extends TextEditorAction {
 
+	/**
+	 * @since 2.1
+	 */
+	public static class Factory {
+		public ToggleSLCommentAction create(ResourceBundle bundle, String prefix, ITextEditor editor) {
+			return new ToggleSLCommentAction(bundle, prefix, editor);
+		}
+	}
+	
 	private static Logger log = Logger.getLogger(ToggleSLCommentAction.class);
 	
 	/** The text operation target */
@@ -105,8 +114,9 @@ public class ToggleSLCommentAction extends TextEditorAction {
 	 *
 	 * @param selection Selection to check
 	 * @return <code>true</code> iff all selected lines are commented
+	 * @since 2.1
 	 */
-	private boolean isSelectionCommented(ISelection selection) {
+	protected boolean isSelectionCommented(ISelection selection) {
 		if (!(selection instanceof ITextSelection))
 			return false;
 
@@ -158,8 +168,9 @@ public class ToggleSLCommentAction extends TextEditorAction {
 	 * @param selection The selection to use
 	 * @param document The document
 	 * @return the region describing the text block comprising the given selection
+	 * @since 2.1
 	 */
-	private IRegion getTextBlockFromSelection(ITextSelection selection, IDocument document) {
+	protected IRegion getTextBlockFromSelection(ITextSelection selection, IDocument document) {
 
 		try {
 			IRegion line= document.getLineInformationOfOffset(selection.getOffset());
@@ -180,8 +191,9 @@ public class ToggleSLCommentAction extends TextEditorAction {
 	 * @param region the text range in characters where to find the line
 	 * @param document The document
 	 * @return the first line whose start index is in the given range, -1 if there is no such line
+	 * @since 2.1
 	 */
-	private int getFirstCompleteLineOfRegion(IRegion region, IDocument document) {
+	protected int getFirstCompleteLineOfRegion(IRegion region, IDocument document) {
 
 		try {
 
@@ -213,8 +225,9 @@ public class ToggleSLCommentAction extends TextEditorAction {
 	 *             to and including <code>endLine</code> is prepended by one
 	 *             of the <code>prefixes</code>, ignoring whitespace at the
 	 *             begin of line
+	 * @since 2.1
 	 */
-	private boolean isBlockCommented(int startLine, int endLine, String[] prefixes, IDocument document) {
+	protected boolean isBlockCommented(int startLine, int endLine, String[] prefixes, IDocument document) {
 
 		try {
 
@@ -311,6 +324,27 @@ public class ToggleSLCommentAction extends TextEditorAction {
 		}
 		fDocumentPartitioning= configuration.getConfiguredDocumentPartitioning(sourceViewer);
 		fPrefixesMap= prefixesMap;
+	}
+	
+	/**
+	 * @since 2.1
+	 */
+	protected Map<String, String[]> getPrefixesMap() {
+		return fPrefixesMap;
+	}
+	
+	/**
+	 * @since 2.1
+	 */
+	protected String getDocumentPartitioning() {
+		return fDocumentPartitioning;
+	}
+	
+	/**
+	 * @since 2.1
+	 */
+	protected ITextOperationTarget getOperationTarget() {
+		return fOperationTarget;
 	}
 }
 
