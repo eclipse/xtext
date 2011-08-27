@@ -29,44 +29,32 @@ public class JvmArrayTypeTest extends TestCase {
 	public void testGetIdentifier_02() {
 		JvmPrimitiveType primitiveType = TypesFactory.eINSTANCE.createJvmPrimitiveType();
 		primitiveType.setSimpleName("int");
-		JvmParameterizedTypeReference componentType = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
-		componentType.setType(primitiveType);
-		arrayType.setComponentType(componentType);
+		arrayType.setComponentType(primitiveType);
 		assertEquals("int[]", arrayType.getIdentifier());
 	}
 	
 	public void testGetIdentifier_03() {
 		JvmPrimitiveType primitiveType = TypesFactory.eINSTANCE.createJvmPrimitiveType();
 		primitiveType.setSimpleName("int");
-		JvmParameterizedTypeReference componentType = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
-		componentType.setType(primitiveType);
 		JvmArrayType arrayType = TypesFactory.eINSTANCE.createJvmArrayType();
-		arrayType.setComponentType(componentType);
-		componentType = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
-		componentType.setType(arrayType);
-		this.arrayType.setComponentType(componentType);
+		arrayType.setComponentType(primitiveType);
+		this.arrayType.setComponentType(arrayType);
 		assertEquals("int[][]", this.arrayType.getIdentifier());
 	}
 	
 	public void testGetDimension_01() {
 		JvmPrimitiveType primitiveType = TypesFactory.eINSTANCE.createJvmPrimitiveType();
 		primitiveType.setSimpleName("int");
-		JvmParameterizedTypeReference componentType = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
-		componentType.setType(primitiveType);
-		arrayType.setComponentType(componentType);
+		arrayType.setComponentType(primitiveType);
 		assertEquals(1, arrayType.getDimensions());
 	}
 	
 	public void testGetDimension_02() {
 		JvmPrimitiveType primitiveType = TypesFactory.eINSTANCE.createJvmPrimitiveType();
 		primitiveType.setSimpleName("int");
-		JvmParameterizedTypeReference componentType = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
-		componentType.setType(primitiveType);
 		JvmArrayType arrayType = TypesFactory.eINSTANCE.createJvmArrayType();
-		arrayType.setComponentType(componentType);
-		componentType = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
-		componentType.setType(arrayType);
-		this.arrayType.setComponentType(componentType);
+		arrayType.setComponentType(primitiveType);
+		this.arrayType.setComponentType(arrayType);
 		assertEquals(2, this.arrayType.getDimensions());
 	}
 	

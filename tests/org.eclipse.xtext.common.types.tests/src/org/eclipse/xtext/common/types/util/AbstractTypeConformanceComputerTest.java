@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
-import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmLowerBound;
@@ -130,12 +129,9 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 	
 	protected JvmGenericArrayTypeReference array(JvmTypeReference typeRef, int i) {
 		JvmGenericArrayTypeReference result = TypesFactory.eINSTANCE.createJvmGenericArrayTypeReference();
-		JvmArrayType arrayType = TypesFactory.eINSTANCE.createJvmArrayType();
-		result.setType(arrayType);
-		if (i == 1) {
-			arrayType.setComponentType(typeRef);
-		} else {
-			arrayType.setComponentType(array(typeRef, i - 1));
+		result.setComponentType(typeRef);
+		if (i != 1) {
+			result = array(result, i - 1);
 		}
 		return result;
 	}
