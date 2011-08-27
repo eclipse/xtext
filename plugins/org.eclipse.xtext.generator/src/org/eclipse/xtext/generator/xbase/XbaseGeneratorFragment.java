@@ -162,7 +162,7 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 				.addTypeToType("org.eclipse.xtext.ui.refactoring.ui.RenameElementHandler",
 						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelRenameElementHandler")
 				.addTypeToType("org.eclipse.xtext.common.types.ui.refactoring.participant.JdtRenamePartcipant.ContextFactory",
-						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelRenameContext.ContextFactory");
+						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelJdtRenameParticipantContext.ContextFactory");
 
 		}
 		return bindFactory.getBindings();
