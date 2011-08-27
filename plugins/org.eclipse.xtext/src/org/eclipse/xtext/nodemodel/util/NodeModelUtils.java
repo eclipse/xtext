@@ -186,7 +186,7 @@ public class NodeModelUtils {
 	public static ICompositeNode findActualNodeFor(EObject semanticObject) {
 		ICompositeNode node = getNode(semanticObject);
 		if (node != null) {
-			while (node.getParent() != null && !node.getParent().hasDirectSemanticElement()) {
+			while (GrammarUtil.containingAssignment(node.getGrammarElement()) == null && node.getParent() != null && !node.getParent().hasDirectSemanticElement()) {
 				node = node.getParent();
 			}
 		}
