@@ -11930,12 +11930,12 @@ protected class XCatchClause_ExpressionAssignment_4 extends AssignmentToken  {
 
 /************ begin Rule JvmTypeReference ****************
  *
- * JvmTypeReference returns JvmParameterizedTypeReference:
- * 	JvmParameterizedTypeReference | XFunctionTypeRef;
+ * JvmTypeReference:
+ * 	JvmParameterizedTypeReference ({JvmGenericArrayTypeReference.componentType=current} "[" "]")* | XFunctionTypeRef;
  *
  **/
 
-// JvmParameterizedTypeReference | XFunctionTypeRef
+// JvmParameterizedTypeReference ({JvmGenericArrayTypeReference.componentType=current} "[" "]")* | XFunctionTypeRef
 protected class JvmTypeReference_Alternatives extends AlternativesToken {
 
 	public JvmTypeReference_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -11950,7 +11950,7 @@ protected class JvmTypeReference_Alternatives extends AlternativesToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new JvmTypeReference_JvmParameterizedTypeReferenceParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new JvmTypeReference_Group_0(lastRuleCallOrigin, this, 0, inst);
 			case 1: return new JvmTypeReference_XFunctionTypeRefParserRuleCall_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
@@ -11958,7 +11958,8 @@ protected class JvmTypeReference_Alternatives extends AlternativesToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getJvmParameterizedTypeReferenceRule().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getJvmTypeReferenceAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getJvmParameterizedTypeReferenceRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXFunctionTypeRefRule().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
@@ -11966,16 +11967,47 @@ protected class JvmTypeReference_Alternatives extends AlternativesToken {
 
 }
 
-// JvmParameterizedTypeReference
-protected class JvmTypeReference_JvmParameterizedTypeReferenceParserRuleCall_0 extends RuleCallToken {
+// JvmParameterizedTypeReference ({JvmGenericArrayTypeReference.componentType=current} "[" "]")*
+protected class JvmTypeReference_Group_0 extends GroupToken {
 	
-	public JvmTypeReference_JvmParameterizedTypeReferenceParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public JvmTypeReference_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getJvmTypeReferenceAccess().getGroup_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new JvmTypeReference_Group_0_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new JvmTypeReference_JvmParameterizedTypeReferenceParserRuleCall_0_0(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getJvmTypeReferenceAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getJvmParameterizedTypeReferenceRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// JvmParameterizedTypeReference
+protected class JvmTypeReference_JvmParameterizedTypeReferenceParserRuleCall_0_0 extends RuleCallToken {
+	
+	public JvmTypeReference_JvmParameterizedTypeReferenceParserRuleCall_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getJvmTypeReferenceAccess().getJvmParameterizedTypeReferenceParserRuleCall_0();
+		return grammarAccess.getJvmTypeReferenceAccess().getJvmParameterizedTypeReferenceParserRuleCall_0_0();
 	}
 
     @Override
@@ -12001,6 +12033,111 @@ protected class JvmTypeReference_JvmParameterizedTypeReferenceParserRuleCall_0 e
 		}	
 	}	
 }
+
+// ({JvmGenericArrayTypeReference.componentType=current} "[" "]")*
+protected class JvmTypeReference_Group_0_1 extends GroupToken {
+	
+	public JvmTypeReference_Group_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getJvmTypeReferenceAccess().getGroup_0_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new JvmTypeReference_RightSquareBracketKeyword_0_1_2(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getJvmTypeReferenceAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// {JvmGenericArrayTypeReference.componentType=current}
+protected class JvmTypeReference_JvmGenericArrayTypeReferenceComponentTypeAction_0_1_0 extends ActionToken  {
+
+	public JvmTypeReference_JvmGenericArrayTypeReferenceComponentTypeAction_0_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Action getGrammarElement() {
+		return grammarAccess.getJvmTypeReferenceAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new JvmTypeReference_Group_0_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new JvmTypeReference_JvmParameterizedTypeReferenceParserRuleCall_0_0(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		Object val = eObjectConsumer.getConsumable("componentType", false);
+		if(val == null) return null;
+		if(!eObjectConsumer.isConsumedWithLastConsumtion("componentType")) return null;
+		return createEObjectConsumer((EObject) val);
+	}
+}
+
+// "["
+protected class JvmTypeReference_LeftSquareBracketKeyword_0_1_1 extends KeywordToken  {
+	
+	public JvmTypeReference_LeftSquareBracketKeyword_0_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getJvmTypeReferenceAccess().getLeftSquareBracketKeyword_0_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new JvmTypeReference_JvmGenericArrayTypeReferenceComponentTypeAction_0_1_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "]"
+protected class JvmTypeReference_RightSquareBracketKeyword_0_1_2 extends KeywordToken  {
+	
+	public JvmTypeReference_RightSquareBracketKeyword_0_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getJvmTypeReferenceAccess().getRightSquareBracketKeyword_0_1_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new JvmTypeReference_LeftSquareBracketKeyword_0_1_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+
 
 // XFunctionTypeRef
 protected class JvmTypeReference_XFunctionTypeRefParserRuleCall_1 extends RuleCallToken {
@@ -12669,7 +12806,8 @@ protected class JvmArgumentTypeReference_Alternatives extends AlternativesToken 
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getJvmParameterizedTypeReferenceRule().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getJvmTypeReferenceAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getJvmParameterizedTypeReferenceRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getJvmWildcardTypeReferenceAccess().getJvmWildcardTypeReferenceAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXFunctionTypeRefRule().getType().getClassifier())
 			return null;
@@ -12700,7 +12838,8 @@ protected class JvmArgumentTypeReference_JvmTypeReferenceParserRuleCall_0 extend
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getJvmParameterizedTypeReferenceRule().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getJvmTypeReferenceAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getJvmParameterizedTypeReferenceRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXFunctionTypeRefRule().getType().getClassifier())
 			return null;
 		if(checkForRecursion(JvmTypeReference_Alternatives.class, eObjectConsumer)) return null;

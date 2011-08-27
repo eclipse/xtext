@@ -3,7 +3,7 @@ package org.eclipse.xtext.example.domainmodel.tests;
 import com.google.inject.Inject;
 import junit.framework.Assert;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.example.domainmodel.domainmodel.AbstractElement;
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainModel;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Entity;
@@ -60,7 +60,7 @@ public class ParserTest {
       final Property property = ((Property) _get_2);
       String _name_2 = property.getName();
       Assert.assertEquals("property", _name_2);
-      JvmParameterizedTypeReference _type = property.getType();
+      JvmTypeReference _type = property.getType();
       String _identifier = _type.getIdentifier();
       Assert.assertEquals("java.lang.String", _identifier);
     }

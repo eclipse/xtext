@@ -94,18 +94,18 @@
         <elements xsi:type="xtext:Group" cardinality="?">
           <elements xsi:type="xtext:Keyword" value="extends"/>
           <elements xsi:type="xtext:Assignment" feature="extends" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.0"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.2"/>
           </elements>
         </elements>
         <elements xsi:type="xtext:Group" cardinality="?">
           <elements xsi:type="xtext:Keyword" value="implements"/>
           <elements xsi:type="xtext:Assignment" feature="implements" operator="+=">
-            <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.0"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.2"/>
           </elements>
           <elements xsi:type="xtext:Group" cardinality="*">
             <elements xsi:type="xtext:Keyword" value=","/>
             <elements xsi:type="xtext:Assignment" feature="implements" operator="+=">
-              <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.0"/>
+              <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.2"/>
             </elements>
           </elements>
         </elements>
@@ -2000,10 +2000,21 @@
     </metamodelDeclarations>
     <rules xsi:type="xtext:ParserRule" name="JvmTypeReference">
       <type metamodel="/3/@metamodelDeclarations.1">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmParameterizedTypeReference"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmTypeReference"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
-        <elements xsi:type="xtext:RuleCall" rule="/3/@rules.2"/>
+        <elements xsi:type="xtext:Group">
+          <elements xsi:type="xtext:RuleCall" rule="/3/@rules.2"/>
+          <elements xsi:type="xtext:Group" cardinality="*">
+            <elements xsi:type="xtext:Action" feature="componentType" operator="=">
+              <type metamodel="/3/@metamodelDeclarations.1">
+                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmGenericArrayTypeReference"/>
+              </type>
+            </elements>
+            <elements xsi:type="xtext:Keyword" value="["/>
+            <elements xsi:type="xtext:Keyword" value="]"/>
+          </elements>
+        </elements>
         <elements xsi:type="xtext:RuleCall" rule="/3/@rules.1"/>
       </alternatives>
     </rules>

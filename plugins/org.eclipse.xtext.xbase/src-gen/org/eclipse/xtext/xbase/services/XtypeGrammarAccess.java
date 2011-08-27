@@ -20,18 +20,38 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	public class JvmTypeReferenceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "JvmTypeReference");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cJvmParameterizedTypeReferenceParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final RuleCall cJvmParameterizedTypeReferenceParserRuleCall_0_0 = (RuleCall)cGroup_0.eContents().get(0);
+		private final Group cGroup_0_1 = (Group)cGroup_0.eContents().get(1);
+		private final Action cJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0 = (Action)cGroup_0_1.eContents().get(0);
+		private final Keyword cLeftSquareBracketKeyword_0_1_1 = (Keyword)cGroup_0_1.eContents().get(1);
+		private final Keyword cRightSquareBracketKeyword_0_1_2 = (Keyword)cGroup_0_1.eContents().get(2);
 		private final RuleCall cXFunctionTypeRefParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//JvmTypeReference returns JvmParameterizedTypeReference:
-		//	JvmParameterizedTypeReference | XFunctionTypeRef;
+		//JvmTypeReference:
+		//	JvmParameterizedTypeReference ({JvmGenericArrayTypeReference.componentType=current} "[" "]")* | XFunctionTypeRef;
 		public ParserRule getRule() { return rule; }
 
-		//JvmParameterizedTypeReference | XFunctionTypeRef
+		//JvmParameterizedTypeReference ({JvmGenericArrayTypeReference.componentType=current} "[" "]")* | XFunctionTypeRef
 		public Alternatives getAlternatives() { return cAlternatives; }
 
+		//JvmParameterizedTypeReference ({JvmGenericArrayTypeReference.componentType=current} "[" "]")*
+		public Group getGroup_0() { return cGroup_0; }
+
 		//JvmParameterizedTypeReference
-		public RuleCall getJvmParameterizedTypeReferenceParserRuleCall_0() { return cJvmParameterizedTypeReferenceParserRuleCall_0; }
+		public RuleCall getJvmParameterizedTypeReferenceParserRuleCall_0_0() { return cJvmParameterizedTypeReferenceParserRuleCall_0_0; }
+
+		//({JvmGenericArrayTypeReference.componentType=current} "[" "]")*
+		public Group getGroup_0_1() { return cGroup_0_1; }
+
+		//{JvmGenericArrayTypeReference.componentType=current}
+		public Action getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0() { return cJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0; }
+
+		//"["
+		public Keyword getLeftSquareBracketKeyword_0_1_1() { return cLeftSquareBracketKeyword_0_1_1; }
+
+		//"]"
+		public Keyword getRightSquareBracketKeyword_0_1_2() { return cRightSquareBracketKeyword_0_1_2; }
 
 		//XFunctionTypeRef
 		public RuleCall getXFunctionTypeRefParserRuleCall_1() { return cXFunctionTypeRefParserRuleCall_1; }
@@ -417,8 +437,8 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	
-	//JvmTypeReference returns JvmParameterizedTypeReference:
-	//	JvmParameterizedTypeReference | XFunctionTypeRef;
+	//JvmTypeReference:
+	//	JvmParameterizedTypeReference ({JvmGenericArrayTypeReference.componentType=current} "[" "]")* | XFunctionTypeRef;
 	public JvmTypeReferenceElements getJvmTypeReferenceAccess() {
 		return (pJvmTypeReference != null) ? pJvmTypeReference : (pJvmTypeReference = new JvmTypeReferenceElements());
 	}

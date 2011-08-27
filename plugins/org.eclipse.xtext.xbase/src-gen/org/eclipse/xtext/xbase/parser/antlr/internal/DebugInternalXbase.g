@@ -459,7 +459,9 @@ ruleQualifiedName :
 
 // Rule JvmTypeReference
 ruleJvmTypeReference :
-	ruleJvmParameterizedTypeReference |
+	ruleJvmParameterizedTypeReference (
+		'[' ']'
+	)* |
 	ruleXFunctionTypeRef
 ;
 

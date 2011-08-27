@@ -11,8 +11,9 @@ grammar org.eclipse.xtext.xbase.Xtype with org.eclipse.xtext.common.Terminals
 import "http://www.eclipse.org/xtext/xbase/Xtype"
 import "http://www.eclipse.org/xtext/common/JavaVMTypes"
 
-JvmTypeReference returns JvmParameterizedTypeReference:
-  JvmParameterizedTypeReference | XFunctionTypeRef;
+JvmTypeReference:
+    JvmParameterizedTypeReference ({JvmGenericArrayTypeReference.componentType=current} '['']')* 
+  | XFunctionTypeRef;
 
 XFunctionTypeRef:
   ('(' paramTypes+=JvmTypeReference (',' paramTypes+=JvmTypeReference)* ')')? '=>' returnType=JvmTypeReference;

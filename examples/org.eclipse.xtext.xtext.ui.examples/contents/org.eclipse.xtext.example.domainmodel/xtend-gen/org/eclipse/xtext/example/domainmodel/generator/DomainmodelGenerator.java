@@ -6,6 +6,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Entity;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Feature;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Operation;
@@ -128,7 +129,7 @@ public class DomainmodelGenerator implements IGenerator {
   protected StringConcatenation _feature(final Property p, final ImportManager importManager) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("private ");
-    JvmParameterizedTypeReference _type = p.getType();
+    JvmTypeReference _type = p.getType();
     String _shortName = this.generatorExtensions.shortName(_type, importManager);
     _builder.append(_shortName, "");
     _builder.append(" ");
@@ -139,7 +140,7 @@ public class DomainmodelGenerator implements IGenerator {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("public ");
-    JvmParameterizedTypeReference _type_1 = p.getType();
+    JvmTypeReference _type_1 = p.getType();
     String _shortName_1 = this.generatorExtensions.shortName(_type_1, importManager);
     _builder.append(_shortName_1, "");
     _builder.append(" get");
@@ -162,7 +163,7 @@ public class DomainmodelGenerator implements IGenerator {
     String _firstUpper_1 = StringExtensions.toFirstUpper(_name_3);
     _builder.append(_firstUpper_1, "");
     _builder.append("(");
-    JvmParameterizedTypeReference _type_2 = p.getType();
+    JvmTypeReference _type_2 = p.getType();
     String _shortName_2 = this.generatorExtensions.shortName(_type_2, importManager);
     _builder.append(_shortName_2, "");
     _builder.append(" ");
@@ -187,7 +188,7 @@ public class DomainmodelGenerator implements IGenerator {
   protected StringConcatenation _feature(final Operation o, final ImportManager importManager) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("public ");
-    JvmParameterizedTypeReference _type = o.getType();
+    JvmTypeReference _type = o.getType();
     String _shortName = this.generatorExtensions.shortName(_type, importManager);
     _builder.append(_shortName, "");
     _builder.append(" ");

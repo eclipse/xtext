@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Feature;
@@ -63,7 +63,7 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
    * @generated
    * @ordered
    */
-  protected JvmParameterizedTypeReference type;
+  protected JvmTypeReference type;
 
   /**
    * <!-- begin-user-doc -->
@@ -114,7 +114,7 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
    * <!-- end-user-doc -->
    * @generated
    */
-  public JvmParameterizedTypeReference getType()
+  public JvmTypeReference getType()
   {
     return type;
   }
@@ -124,9 +124,9 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetType(JvmParameterizedTypeReference newType, NotificationChain msgs)
+  public NotificationChain basicSetType(JvmTypeReference newType, NotificationChain msgs)
   {
-    JvmParameterizedTypeReference oldType = type;
+    JvmTypeReference oldType = type;
     type = newType;
     if (eNotificationRequired())
     {
@@ -141,7 +141,7 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(JvmParameterizedTypeReference newType)
+  public void setType(JvmTypeReference newType)
   {
     if (newType != type)
     {
@@ -205,7 +205,7 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
         setName((String)newValue);
         return;
       case DomainmodelPackage.FEATURE__TYPE:
-        setType((JvmParameterizedTypeReference)newValue);
+        setType((JvmTypeReference)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -225,7 +225,7 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
         setName(NAME_EDEFAULT);
         return;
       case DomainmodelPackage.FEATURE__TYPE:
-        setType((JvmParameterizedTypeReference)null);
+        setType((JvmTypeReference)null);
         return;
     }
     super.eUnset(featureID);

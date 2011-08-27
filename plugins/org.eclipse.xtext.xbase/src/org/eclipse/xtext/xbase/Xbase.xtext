@@ -230,7 +230,7 @@ XStringLiteral returns XExpression:
 XTypeLiteral returns XExpression :
 	{XTypeLiteral} 'typeof' '(' type=[types::JvmType|QualifiedName] ')'
 ;
-	
+
 XThrowExpression returns XExpression :
 	{XThrowExpression} 'throw' expression=XExpression;
 	

@@ -124,8 +124,8 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
       final JvmField jvmField = _createJvmField;
       String _name = property.getName();
       jvmField.setSimpleName(_name);
-      JvmParameterizedTypeReference _type = property.getType();
-      JvmParameterizedTypeReference _cloneWithProxies = EcoreUtil2.<JvmParameterizedTypeReference>cloneWithProxies(_type);
+      JvmTypeReference _type = property.getType();
+      JvmTypeReference _cloneWithProxies = EcoreUtil2.<JvmTypeReference>cloneWithProxies(_type);
       jvmField.setType(_cloneWithProxies);
       jvmField.setVisibility(JvmVisibility.PRIVATE);
       EList<JvmMember> _members = type.getMembers();
@@ -137,8 +137,8 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
       String _firstUpper = StringExtensions.toFirstUpper(_name_1);
       String _operator_plus = StringExtensions.operator_plus("get", _firstUpper);
       jvmGetter.setSimpleName(_operator_plus);
-      JvmParameterizedTypeReference _type_1 = property.getType();
-      JvmParameterizedTypeReference _cloneWithProxies_1 = EcoreUtil2.<JvmParameterizedTypeReference>cloneWithProxies(_type_1);
+      JvmTypeReference _type_1 = property.getType();
+      JvmTypeReference _cloneWithProxies_1 = EcoreUtil2.<JvmTypeReference>cloneWithProxies(_type_1);
       jvmGetter.setReturnType(_cloneWithProxies_1);
       jvmGetter.setVisibility(JvmVisibility.PUBLIC);
       EList<JvmMember> _members_1 = type.getMembers();
@@ -155,8 +155,8 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
       String _name_3 = property.getName();
       String _firstUpper_2 = StringExtensions.toFirstUpper(_name_3);
       parameter.setName(_firstUpper_2);
-      JvmParameterizedTypeReference _type_2 = property.getType();
-      JvmParameterizedTypeReference _cloneWithProxies_2 = EcoreUtil2.<JvmParameterizedTypeReference>cloneWithProxies(_type_2);
+      JvmTypeReference _type_2 = property.getType();
+      JvmTypeReference _cloneWithProxies_2 = EcoreUtil2.<JvmTypeReference>cloneWithProxies(_type_2);
       parameter.setParameterType(_cloneWithProxies_2);
       jvmSetter.setVisibility(JvmVisibility.PUBLIC);
       EList<JvmFormalParameter> _parameters = jvmSetter.getParameters();
@@ -173,8 +173,8 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
       final JvmOperation jvmOperation = _createJvmOperation;
       String _name = operation.getName();
       jvmOperation.setSimpleName(_name);
-      JvmParameterizedTypeReference _type = operation.getType();
-      JvmParameterizedTypeReference _cloneWithProxies = EcoreUtil2.<JvmParameterizedTypeReference>cloneWithProxies(_type);
+      JvmTypeReference _type = operation.getType();
+      JvmTypeReference _cloneWithProxies = EcoreUtil2.<JvmTypeReference>cloneWithProxies(_type);
       jvmOperation.setReturnType(_cloneWithProxies);
       EList<JvmFormalParameter> _parameters = jvmOperation.getParameters();
       EList<JvmFormalParameter> _params = operation.getParams();

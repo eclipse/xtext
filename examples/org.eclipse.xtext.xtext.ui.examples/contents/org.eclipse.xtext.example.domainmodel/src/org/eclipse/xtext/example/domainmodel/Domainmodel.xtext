@@ -24,7 +24,7 @@ PackageDeclaration:
 	'}';
 
 Entity:
-	'entity' name=ValidID ('extends' superType=JvmTypeReference)? '{'
+	'entity' name=ValidID ('extends' superType=JvmParameterizedTypeReference)? '{'
 		features+=Feature*
 	'}';
 

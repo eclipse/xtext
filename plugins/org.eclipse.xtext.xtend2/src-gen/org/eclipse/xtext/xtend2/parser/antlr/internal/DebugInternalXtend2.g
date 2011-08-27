@@ -31,10 +31,10 @@ ruleClass :
 			',' ruleJvmTypeParameter
 		)* '>'
 	)? (
-		'extends' ruleJvmTypeReference
+		'extends' ruleJvmParameterizedTypeReference
 	)? (
-		'implements' ruleJvmTypeReference (
-			',' ruleJvmTypeReference
+		'implements' ruleJvmParameterizedTypeReference (
+			',' ruleJvmParameterizedTypeReference
 		)*
 	)? '{' ruleMember* '}'
 ;
@@ -656,7 +656,9 @@ ruleQualifiedName :
 
 // Rule JvmTypeReference
 ruleJvmTypeReference :
-	ruleJvmParameterizedTypeReference |
+	ruleJvmParameterizedTypeReference (
+		'[' ']'
+	)* |
 	ruleXFunctionTypeRef
 ;
 
