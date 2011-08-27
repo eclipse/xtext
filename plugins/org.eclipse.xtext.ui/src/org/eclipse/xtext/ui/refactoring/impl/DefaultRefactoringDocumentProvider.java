@@ -38,7 +38,7 @@ import com.google.inject.Inject;
  */
 public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.Provider {
 
-	@Inject
+	@Inject(optional=true)
 	private IWorkbench workbench;
 
 	@Inject

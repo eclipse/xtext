@@ -24,6 +24,7 @@ import org.eclipse.xtext.util.IAcceptor;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class EclipseResourceFileSystemAccessTest extends TestCase {
 
 	@Override
