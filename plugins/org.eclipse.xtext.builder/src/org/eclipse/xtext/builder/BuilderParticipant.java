@@ -73,16 +73,18 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 		// monitor handling
 		if (monitor.isCanceled())
 			throw new OperationCanceledException();
-		SubMonitor subMon1 = SubMonitor.convert(monitor, numberOfDeltas);
+		SubMonitor subMonitor = SubMonitor.convert(monitor, numberOfDeltas + 3);
 		
 		EclipseResourceFileSystemAccess2 access = fileSystemAccessProvider.get();
 		final IProject builtProject = context.getBuiltProject();
 		access.setProject(builtProject);
 		final Map<String, OutputConfiguration> outputConfigurations = getOutputConfigurations(context);
+		refreshOutputFolders(context, outputConfigurations, subMonitor.newChild(1));
 		access.setOutputConfigurations(outputConfigurations);
 		if (context.getBuildType() == BuildType.CLEAN || context.getBuildType() == BuildType.RECOVERY) {
+			SubMonitor cleanMonitor = SubMonitor.convert(subMonitor.newChild(1), outputConfigurations.size());
 			for (OutputConfiguration config : outputConfigurations.values()) {
-				cleanOutput(context, config, monitor);
+				cleanOutput(context, config, cleanMonitor.newChild(1));
 			}
 			if (context.getBuildType() == BuildType.CLEAN)
 				return;
@@ -91,10 +93,10 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			final IResourceDescription.Delta delta = context.getDeltas().get(i);
 			
 			// monitor handling
-			if (subMon1.isCanceled())
+			if (subMonitor.isCanceled())
 				throw new OperationCanceledException();
-			subMon1.subTask("Compiling "+delta.getUri().lastSegment()+" ("+i+" of "+numberOfDeltas+")");
-			access.setMonitor(subMon1.newChild(1));
+			subMonitor.subTask("Compiling "+delta.getUri().lastSegment()+" ("+i+" of "+numberOfDeltas+")");
+			access.setMonitor(subMonitor.newChild(1));
 			
 			final String uri = delta.getUri().toString();
 			final Set<IFile> derivedResources = newLinkedHashSet();
@@ -134,13 +136,24 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			if (delta.getNew() != null) {
 				handleChangedContents(delta, context, access);
 			}
+			SubMonitor deleteMonitor = SubMonitor.convert(subMonitor.newChild(1), derivedResources.size());
 			for (IFile iFile : derivedResources) {
-				iFile.delete(IResource.KEEP_HISTORY, monitor);
+				iFile.delete(IResource.KEEP_HISTORY, deleteMonitor.newChild(1));
 				context.needRebuild();
 			}
 		}
 	}
 	
+	protected void refreshOutputFolders(IBuildContext ctx, Map<String, OutputConfiguration> outputConfigurations, IProgressMonitor monitor) throws CoreException {
+		SubMonitor subMonitor = SubMonitor.convert(monitor, outputConfigurations.size());
+		for (OutputConfiguration config : outputConfigurations.values()) {
+			SubMonitor child = subMonitor.newChild(1);
+			final IProject project = ctx.getBuiltProject();
+			IFolder folder = project.getFolder(config.getOutputDirectory());
+			folder.refreshLocal(IResource.DEPTH_INFINITE, child);
+		}
+	}
+
 	protected void cleanOutput(IBuildContext ctx, OutputConfiguration config, IProgressMonitor monitor) throws CoreException {
 		final IProject project = ctx.getBuiltProject();
 		IFolder folder = project.getFolder(config.getOutputDirectory());
