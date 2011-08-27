@@ -27,6 +27,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -331,9 +332,9 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	protected JvmTypeReference getExpectedVarArgType(JvmExecutable feature, TypeArgumentContext typeArgumentContext,
 			boolean rawType) {
 		JvmFormalParameter lastParameter = feature.getParameters().get(feature.getParameters().size() - 1);
-		JvmType parameterType = lastParameter.getParameterType().getType();
-		if (parameterType instanceof JvmArrayType) {
-			JvmTypeReference componentType = ((JvmArrayType) parameterType).getComponentType();
+		JvmTypeReference parameterType = lastParameter.getParameterType();
+		if (parameterType instanceof JvmGenericArrayTypeReference) {
+			JvmTypeReference componentType = ((JvmGenericArrayTypeReference) parameterType).getComponentType();
 			return typeArgumentContext.getLowerBound(componentType);
 		} else {
 			throw new IllegalStateException("Var arg parameter has to be an array type");
@@ -838,9 +839,14 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 				TypeArgumentContext context = getTypeArgumentContextProvider().getReceiverContext(reference);
 				final String iterableName = Iterable.class.getName();
 				// TODO remove the special array treatment and put into some generic facility
-				if (reference.getType() instanceof JvmArrayType) {
-					JvmTypeReference type = ((JvmArrayType) reference.getType()).getComponentType();
+				if (reference instanceof JvmGenericArrayTypeReference) {
+					JvmTypeReference type = ((JvmGenericArrayTypeReference) reference).getComponentType();
 					return type;
+				}
+				if (reference.getType() instanceof JvmArrayType) {
+					JvmArrayType type = (JvmArrayType) reference.getType();
+					JvmTypeReference result = getTypeReferences().createTypeRef(type);
+					return result;
 				}
 				if (!reference.getType().getIdentifier().equals(iterableName)) {
 					try {

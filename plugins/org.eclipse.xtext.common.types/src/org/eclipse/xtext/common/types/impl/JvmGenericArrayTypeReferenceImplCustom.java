@@ -9,7 +9,10 @@ package org.eclipse.xtext.common.types.impl;
 
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.xtext.common.types.JvmArrayType;
+import org.eclipse.xtext.common.types.JvmComponentType;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.TypesFactory;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -17,10 +20,19 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 public class JvmGenericArrayTypeReferenceImplCustom extends JvmGenericArrayTypeReferenceImpl {
 	
 	@Override
-	public JvmTypeReference getComponentType() {
-		JvmArrayType arrayType = getType();
-		if (arrayType != null)
-			return arrayType.getComponentType();
+	public JvmArrayType getType() {
+		JvmTypeReference componentTypeReference = getComponentType();
+		if (componentTypeReference != null) {
+			JvmType componentType = componentTypeReference.getType();
+			if (componentType instanceof JvmComponentType) {
+				JvmArrayType result = ((JvmComponentType) componentType).getArrayType();
+				if (result == null) {
+					result = TypesFactory.eINSTANCE.createJvmArrayType();
+					result.setComponentType((JvmComponentType) componentType);
+				}
+				return result;
+			}
+		}
 		return null;
 	}
 	
@@ -60,11 +72,11 @@ public class JvmGenericArrayTypeReferenceImplCustom extends JvmGenericArrayTypeR
 	public String toString() {
 		StringBuilder result = new StringBuilder(eClass().getName());
 		result.append(": ");
-		if (type == null) {
+		if (componentType == null) {
 			result.append(" type is null");
-		} else if (type.eIsProxy()) {
+		} else if (componentType.eIsProxy()) {
 			result.append(" (type uri: ");
-			result.append(((InternalEObject) type).eProxyURI());
+			result.append(((InternalEObject) componentType).eProxyURI());
 			result.append(')');
 		} else {
 			result.append(getIdentifier());

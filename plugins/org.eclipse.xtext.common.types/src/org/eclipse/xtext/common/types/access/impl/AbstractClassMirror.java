@@ -18,7 +18,6 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -103,10 +102,7 @@ public abstract class AbstractClassMirror implements IClassMirror {
 			return null;
 		if (component.getArrayType() == null) {
 			JvmArrayType arrayType = TypesFactory.eINSTANCE.createJvmArrayType();
-			JvmParameterizedTypeReference componentTypeReference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
-			componentTypeReference.setType(component);
-			arrayType.setComponentType(componentTypeReference);
-			component.setArrayType(arrayType);
+			arrayType.setComponentType(component);
 		}
 		return component.getArrayType();
 	}

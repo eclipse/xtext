@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmArrayType;
+import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -165,6 +166,11 @@ public class TypeConformanceComputer {
 				return true;
 		}
 		return false;
+	}
+	
+	protected Boolean _isConformant(JvmGenericArrayTypeReference left, JvmGenericArrayTypeReference right, boolean ignoreGenerics) {
+		Boolean result = isConformant(left.getComponentType(), right.getComponentType(), ignoreGenerics);
+		return result;
 	}
 	
 	protected Boolean _isConformant(JvmGenericArrayTypeReference left, JvmWildcardTypeReference right, boolean ignoreGenerics) {
@@ -362,9 +368,12 @@ public class TypeConformanceComputer {
 	}
 	
 	protected Boolean _isConformant(JvmArrayType leftType, JvmArrayType rightType, JvmTypeReference left, JvmTypeReference right, boolean ignoreGenerics) {
-		JvmTypeReference leftComponentType = leftType.getComponentType();
-		JvmTypeReference rightComponentType = rightType.getComponentType();
-		return isConformant(leftComponentType, rightComponentType);
+		JvmComponentType leftComponentType = leftType.getComponentType();
+		JvmComponentType rightComponentType = rightType.getComponentType();
+		if (leftComponentType == rightComponentType || superTypeCollector.collectSuperTypes(rightComponentType).contains(leftComponentType)) {
+			return Boolean.TRUE;
+		}
+		return Boolean.FALSE;
 	}
 	
 	protected Boolean _isConformant(JvmArrayType leftType, JvmType rightType, JvmTypeReference left, JvmTypeReference right, boolean ignoreGenerics) {

@@ -8,7 +8,7 @@
 package org.eclipse.xtext.common.types.impl;
 
 import org.eclipse.xtext.common.types.JvmArrayType;
-import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmComponentType;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -18,12 +18,12 @@ public class JvmArrayTypeImplCustom extends JvmArrayTypeImpl {
 	@Override
 	public int getDimensions() {
 		int result = 1;
-		JvmTypeReference componentType = getComponentType();
+		JvmComponentType componentType = getComponentType();
 		if (componentType == null)
 			throw new NullPointerException("component type may not be null");
-		while (componentType.getType() instanceof JvmArrayType) {
+		while (componentType instanceof JvmArrayType) {
 			result++;
-			componentType = ((JvmArrayType) componentType.getType()).getComponentType();
+			componentType = ((JvmArrayType) componentType).getComponentType();
 			if (componentType == null)
 				return result;
 		}
@@ -32,22 +32,25 @@ public class JvmArrayTypeImplCustom extends JvmArrayTypeImpl {
 
 	@Override
 	public String getIdentifier() {
-		if (componentType != null && componentType.getType() != null)
-			return componentType.getType().getIdentifier() + "[]";
+		JvmComponentType componentType = getComponentType();
+		if (componentType != null)
+			return componentType.getIdentifier() + "[]";
 		return null;
 	}
 	
 	@Override
 	public String getSimpleName() {
-		if (componentType != null && componentType.getType() != null)
-			return componentType.getType().getSimpleName() + "[]";
+		JvmComponentType componentType = getComponentType();
+		if (componentType != null)
+			return componentType.getSimpleName() + "[]";
 		return null;
 	}
 	
 	@Override
 	public String getQualifiedName(char innerClassDelimiter) {
-		if (componentType != null && componentType.getType() != null)
-			return componentType.getType().getQualifiedName(innerClassDelimiter) + "[]";
+		JvmComponentType componentType = getComponentType();
+		if (componentType != null)
+			return componentType.getQualifiedName(innerClassDelimiter) + "[]";
 		return null;
 	}
 

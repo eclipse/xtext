@@ -747,7 +747,9 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("java.util.List<? extends java.lang.Object>[]", paramType.getIdentifier());
 		assertTrue(paramType.getType() instanceof JvmArrayType);
 		JvmArrayType arrayType = (JvmArrayType) paramType.getType();
-		assertTrue(arrayType.getComponentType() instanceof JvmParameterizedTypeReference);
+		assertTrue(arrayType.getComponentType() instanceof JvmDeclaredType);
+		assertTrue(paramType instanceof JvmGenericArrayTypeReference);
+		assertTrue(((JvmGenericArrayTypeReference) paramType).getComponentType() instanceof JvmParameterizedTypeReference);
 	}
 
 	public void test_nestedArrayWildcard_01() {
@@ -760,9 +762,17 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		JvmTypeReference paramType = nestedArrayWildcard.getParameters().get(0).getParameterType();
 		assertTrue(paramType.getType() instanceof JvmArrayType);
 		JvmArrayType arrayType = (JvmArrayType) paramType.getType();
-		assertTrue(arrayType.getComponentType().getType() instanceof JvmArrayType);
-		arrayType = (JvmArrayType) arrayType.getComponentType().getType();
-		assertTrue(arrayType.getComponentType() instanceof JvmParameterizedTypeReference);
+		assertTrue(arrayType.getComponentType() instanceof JvmArrayType);
+		arrayType = (JvmArrayType) arrayType.getComponentType();
+		assertTrue(arrayType.getComponentType() instanceof JvmDeclaredType);
+		
+		assertTrue(paramType instanceof JvmGenericArrayTypeReference);
+		JvmGenericArrayTypeReference paramTypeAsArray = (JvmGenericArrayTypeReference) paramType;
+		assertTrue(paramTypeAsArray.getComponentType() instanceof JvmGenericArrayTypeReference);
+		paramTypeAsArray = (JvmGenericArrayTypeReference) paramTypeAsArray.getComponentType();
+		assertTrue(paramTypeAsArray.getComponentType() instanceof JvmParameterizedTypeReference);
+		JvmParameterizedTypeReference listWithWildcard = (JvmParameterizedTypeReference) paramTypeAsArray.getComponentType();
+		assertTrue(listWithWildcard.getArguments().get(0) instanceof JvmWildcardTypeReference);
 	}
 
 	public void test_arrayParameterized_01() {
@@ -776,7 +786,9 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("java.util.List<T>[]", paramType.getIdentifier());
 		assertTrue(paramType.getType() instanceof JvmArrayType);
 		JvmArrayType arrayType = (JvmArrayType) paramType.getType();
-		assertTrue(arrayType.getComponentType() instanceof JvmParameterizedTypeReference);
+		assertTrue(arrayType.getComponentType() instanceof JvmDeclaredType);
+		assertTrue(paramType instanceof JvmGenericArrayTypeReference);
+		assertTrue(((JvmGenericArrayTypeReference) paramType).getComponentType() instanceof JvmParameterizedTypeReference);
 	}
 
 	public void test_nestedArrayParameterized_01() {
@@ -789,9 +801,18 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		JvmTypeReference paramType = nestedArrayParameterized.getParameters().get(0).getParameterType();
 		assertTrue(paramType.getType() instanceof JvmArrayType);
 		JvmArrayType arrayType = (JvmArrayType) paramType.getType();
-		assertTrue(arrayType.getComponentType().getType() instanceof JvmArrayType);
-		arrayType = (JvmArrayType) arrayType.getComponentType().getType();
-		assertTrue(arrayType.getComponentType() instanceof JvmParameterizedTypeReference);
+		assertTrue(arrayType.getComponentType() instanceof JvmArrayType);
+		arrayType = (JvmArrayType) arrayType.getComponentType();
+		assertTrue(arrayType.getComponentType() instanceof JvmDeclaredType);
+		
+		assertTrue(paramType instanceof JvmGenericArrayTypeReference);
+		JvmGenericArrayTypeReference paramTypeAsArray = (JvmGenericArrayTypeReference) paramType;
+		assertTrue(paramTypeAsArray.getComponentType() instanceof JvmGenericArrayTypeReference);
+		paramTypeAsArray = (JvmGenericArrayTypeReference) paramTypeAsArray.getComponentType();
+		assertTrue(paramTypeAsArray.getComponentType() instanceof JvmParameterizedTypeReference);
+		JvmParameterizedTypeReference listWithT = (JvmParameterizedTypeReference) paramTypeAsArray.getComponentType();
+		assertTrue(listWithT.getArguments().get(0) instanceof JvmParameterizedTypeReference);
+		assertEquals("T", listWithT.getArguments().get(0).getType().getSimpleName());
 	}
 
 	public void test_arrayVariable_01() {
@@ -805,7 +826,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("T[]", paramType.getIdentifier());
 		assertTrue(paramType instanceof JvmArrayType);
 		JvmArrayType arrayType = (JvmArrayType) paramType;
-		assertTrue(arrayType.getComponentType().getType() instanceof JvmTypeParameter);
+		assertTrue(arrayType.getComponentType() instanceof JvmTypeParameter);
 	}
 
 	public void test_nestedArrayVariable_01() {
@@ -818,9 +839,9 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		JvmType paramType = nestedArrayVariable.getParameters().get(0).getParameterType().getType();
 		assertTrue(paramType instanceof JvmArrayType);
 		JvmArrayType arrayType = (JvmArrayType) paramType;
-		assertTrue(arrayType.getComponentType().getType() instanceof JvmArrayType);
-		arrayType = (JvmArrayType) arrayType.getComponentType().getType();
-		assertTrue(arrayType.getComponentType().getType() instanceof JvmTypeParameter);
+		assertTrue(arrayType.getComponentType() instanceof JvmArrayType);
+		arrayType = (JvmArrayType) arrayType.getComponentType();
+		assertTrue(arrayType.getComponentType() instanceof JvmTypeParameter);
 	}
 
 	public void test_nestedTypes_Outer() {
@@ -1179,8 +1200,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		JvmOperation methodV = getMethodFromType(type, ParameterizedTypes.Inner.class, "methodVArray_01()");
 		JvmTypeReference listT = methodV.getReturnType();
 		assertEquals("java.util.List<? extends V>[]", listT.getIdentifier());
-		JvmArrayType listArrayType = (JvmArrayType) listT.getType();
-		JvmParameterizedTypeReference listType = (JvmParameterizedTypeReference) listArrayType.getComponentType();
+		JvmParameterizedTypeReference listType = (JvmParameterizedTypeReference) ((JvmGenericArrayTypeReference) listT).getComponentType();
 		assertEquals(1, listType.getArguments().size());
 		JvmTypeReference typeArgument = listType.getArguments().get(0);
 		assertTrue(typeArgument instanceof JvmWildcardTypeReference);
@@ -1208,9 +1228,9 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		JvmUpperBound upperBound = (JvmUpperBound) wildcardTypeArgument.getConstraints().get(0);
 		JvmType upperBoundType = upperBound.getTypeReference().getType();
 		assertTrue(upperBoundType instanceof JvmArrayType);
-		assertTrue(((JvmArrayType) upperBoundType).getComponentType().getType() instanceof JvmTypeParameter);
+		assertTrue(((JvmArrayType) upperBoundType).getComponentType() instanceof JvmTypeParameter);
 		JvmTypeParameter v = type.getTypeParameters().get(3);
-		assertSame(v, ((JvmArrayType) upperBoundType).getComponentType().getType());
+		assertSame(v, ((JvmArrayType) upperBoundType).getComponentType());
 	}
 
 	public void test_ParameterizedTypes_Inner_07() {
@@ -1224,9 +1244,8 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		JvmTypeReference typeArgument = listType.getArguments().get(0);
 		JvmType argumentType = typeArgument.getType();
 		assertTrue(argumentType instanceof JvmArrayType);
-		assertTrue(((JvmArrayType) argumentType).getComponentType().getType() instanceof JvmArrayType);
-		JvmComponentType componentType = (JvmComponentType) ((JvmArrayType) ((JvmArrayType) argumentType).getComponentType()
-				.getType()).getComponentType().getType();
+		assertTrue(((JvmArrayType) argumentType).getComponentType() instanceof JvmArrayType);
+		JvmComponentType componentType = ((JvmArrayType) ((JvmArrayType) argumentType).getComponentType()).getComponentType();
 		JvmTypeParameter z = type.getTypeParameters().get(2);
 		assertSame(z, componentType);
 	}
@@ -1237,13 +1256,12 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		JvmOperation methodV = getMethodFromType(type, ParameterizedTypes.Inner.class, "methodZArray_02()");
 		JvmTypeReference listZ = methodV.getReturnType();
 		assertEquals("java.util.List<Z[]>[]", listZ.getIdentifier());
-		JvmArrayType listArrayType = (JvmArrayType) listZ.getType();
-		JvmParameterizedTypeReference listType = (JvmParameterizedTypeReference) listArrayType.getComponentType();
+		JvmParameterizedTypeReference listType = (JvmParameterizedTypeReference) ((JvmGenericArrayTypeReference) listZ).getComponentType();
 		assertEquals(1, listType.getArguments().size());
 		JvmTypeReference typeArgument = listType.getArguments().get(0);
 		JvmType argumentType = typeArgument.getType();
 		assertTrue(argumentType instanceof JvmArrayType);
-		JvmComponentType componentType = (JvmComponentType) ((JvmArrayType) argumentType).getComponentType().getType();
+		JvmComponentType componentType = ((JvmArrayType) argumentType).getComponentType();
 		JvmTypeParameter z = type.getTypeParameters().get(2);
 		assertSame(z, componentType);
 	}

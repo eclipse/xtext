@@ -99,7 +99,7 @@ public class ImportManager {
 		if (type instanceof JvmPrimitiveType || type instanceof JvmVoid || type instanceof JvmTypeParameter) {
 			builder.append(type.getQualifiedName('.'));
 		} else if (type instanceof JvmArrayType) {
-			appendTypeRef(((JvmArrayType) type).getComponentType(), builder);
+			appendType(((JvmArrayType) type).getComponentType(), builder);
 			builder.append("[]");
 		} else {
 			final String qn = type.getQualifiedName('.');

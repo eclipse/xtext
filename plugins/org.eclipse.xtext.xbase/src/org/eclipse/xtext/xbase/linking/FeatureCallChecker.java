@@ -16,11 +16,11 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
@@ -282,9 +282,9 @@ public class FeatureCallChecker {
 			int lastParamIndex = numberOfParameters - 1;
 			JvmTypeReference lastParameterType = exectuable.getParameters().get(lastParamIndex).getParameterType();
 			// TODO resolve array type's lower bound
-			if (!(lastParameterType.getType() instanceof JvmArrayType))
+			if (!(lastParameterType instanceof JvmGenericArrayTypeReference))
 				throw new IllegalStateException("Unexpected var arg type: " + lastParameterType);
-			JvmTypeReference varArgType = ((JvmArrayType) lastParameterType.getType()).getComponentType();
+			JvmTypeReference varArgType = ((JvmGenericArrayTypeReference) lastParameterType).getComponentType();
 			if (arguments.size() == numberOfParameters) {
 				XExpression lastArgument = arguments.get(lastParamIndex);
 				JvmTypeReference lastArgumentType = getTypeProvider().getType(lastArgument, true);

@@ -105,7 +105,7 @@ public class JavaReflectAccess {
 			throw new IllegalStateException("Cannot resolve proxy: " + EcoreUtil.getURI(type));
 		}
 		if (type instanceof JvmArrayType) {
-			JvmType componentType = ((JvmArrayType) type).getComponentType().getType();
+			JvmType componentType = ((JvmArrayType) type).getComponentType();
 			Class<?> componentClass = getRawType(componentType);
 			try {
 				return getClassFinder().forName(componentClass.getName() + "[]");
