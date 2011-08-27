@@ -13,6 +13,7 @@ import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -283,10 +284,16 @@ public class EObjectDescriptionImpl extends Container implements IEObjectDescrip
 	 * @generated NOT
 	 */
 	public EObject getEObjectOrProxy() {
-		org.eclipse.emf.ecore.InternalEObject proxy = (org.eclipse.emf.ecore.InternalEObject) getEClass().getEPackage().getEFactoryInstance().create(getEClass());
-		proxy.eSetProxyURI(getEObjectURI());
-		return proxy;
-		
+		EClass clazz = getEClass();
+		if (clazz != null && !clazz.eIsProxy()) {
+			EPackage ePackage = clazz.getEPackage();
+			if (ePackage != null && ePackage.getEFactoryInstance() != null) {
+				org.eclipse.emf.ecore.InternalEObject proxy = (org.eclipse.emf.ecore.InternalEObject) ePackage.getEFactoryInstance().create(clazz);
+				proxy.eSetProxyURI(getEObjectURI());
+				return proxy;
+			}
+		}
+		return null;
 	}
 
 	/**
