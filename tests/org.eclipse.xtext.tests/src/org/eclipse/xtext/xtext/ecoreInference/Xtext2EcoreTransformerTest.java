@@ -1479,7 +1479,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		final String grammarAsString = 
 			"grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n" +
 			"import 'http://www.eclipse.org/xtext/common/JavaVMTypes' as types\n" +
-			"Array returns types::JvmArrayType: componentType=Array;"; 
+			"DeclaredType returns types::JvmDeclaredType: superTypes+=DeclaredType;"; 
 		XtextResource resource = getResourceFromStringAndExpect(grammarAsString, 1);
 		assertTrue(resource.getErrors().get(0).getMessage().contains("JvmTypeReference"));
 	}
@@ -1488,7 +1488,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		final String grammarAsString = 
 			"grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n" +
 			"import 'http://www.eclipse.org/xtext/common/JavaVMTypes' as types\n" +
-			"Array returns types::JvmArrayType: componentType=STRING;"; 
+			"Array returns types::JvmGenericArrayTypeReference: componentType=STRING;"; 
 		XtextResource resource = getResourceFromStringAndExpect(grammarAsString, 1);
 		assertTrue(resource.getErrors().get(0).getMessage().contains("JvmTypeReference"));
 	}
@@ -1497,8 +1497,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		final String grammarAsString = 
 			"grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n" +
 			"import 'http://www.eclipse.org/xtext/common/JavaVMTypes' as types\n" +
-			"Array returns types::JvmArrayType: componentType+=TypeRef;\n" +
-			"TypeRef returns types::JvmTypeReference: 'void';"; 
+			"DeclaredType returns types::JvmDeclaredType: superTypes=[types::JvmTypeReference];"; 
 		XtextResource resource = getResourceFromStringAndExpect(grammarAsString, 1);
 		assertTrue(resource.getErrors().get(0).getMessage().contains("cardinality"));
 	}
@@ -1507,7 +1506,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		final String grammarAsString = 
 			"grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n" +
 			"import 'http://www.eclipse.org/xtext/common/JavaVMTypes' as types\n" +
-			"Array returns types::JvmArrayType: componentType=[types::JvmTypeReference];"; 
+			"DeclaredType returns types::JvmDeclaredType: superTypes+=[types::JvmTypeReference];"; 
 		XtextResource resource = getResourceFromStringAndExpect(grammarAsString, 1);
 		assertTrue(resource.getErrors().get(0).getMessage().contains("containment"));
 	}
