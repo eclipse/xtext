@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
-import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -142,11 +141,8 @@ public class TypeArgumentContextTest extends TestCase {
 				return input.getSimpleName().equals("getLast");
 			}
 		});
-		JvmArrayType arrayType = TypesFactory.eINSTANCE.createJvmArrayType();
-		arrayType.setComponentType(typeRefs.typeReference("java.lang.String").create());
-		TypesFactory.eINSTANCE.createJvmGenericArrayTypeReference().setType(arrayType);
 		JvmGenericArrayTypeReference actualArg = TypesFactory.eINSTANCE.createJvmGenericArrayTypeReference();
-		actualArg.setType(arrayType);
+		actualArg.setComponentType(typeRefs.typeReference("java.lang.String").create());
 		JvmTypeReference expectation = typeRefs.typeReference("java.lang.String").create();
 		
 		Map<JvmTypeParameter, ResolveInfo> map = typeArgCtxProvider.resolveInferredMethodTypeArgContext(operation, null, expectation, actualArg);
@@ -245,12 +241,6 @@ public class TypeArgumentContextTest extends TestCase {
 		
 		JvmOperation get = findOperation("java.util.List", "get(int)");
 		assertEquals("java.util.Map<? super java.lang.String,? extends java.lang.Number>",context.getUpperBound(get.getReturnType(),resourceSet).getIdentifier());
-	}
-	
-	public void testResolveArray() throws Exception {
-		JvmArrayType arrayType = TypesFactory.eINSTANCE.createJvmArrayType();
-		arrayType.setComponentType(typeRefs.typeReference("java.lang.String").create());
-		//TODO
 	}
 	
 	protected JvmOperation findOperation(String typeName, String methodSignature) {

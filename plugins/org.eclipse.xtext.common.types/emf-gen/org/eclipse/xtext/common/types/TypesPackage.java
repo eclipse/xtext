@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EReference;
  * @see org.eclipse.xtext.common.types.TypesFactory
  * @model kind="package"
  * @generated
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface TypesPackage extends EPackage
 {
@@ -203,7 +204,7 @@ public interface TypesPackage extends EPackage
 	int JVM_ARRAY_TYPE__ARRAY_TYPE = JVM_COMPONENT_TYPE__ARRAY_TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Component Type</b></em>' containment reference.
+	 * The feature id for the '<em><b>Component Type</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1382,13 +1383,14 @@ public interface TypesPackage extends EPackage
 	int JVM_GENERIC_ARRAY_TYPE_REFERENCE = 19;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' containment reference.
+	 * The feature id for the '<em><b>Component Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
+	 * @since 2.1
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_GENERIC_ARRAY_TYPE_REFERENCE__TYPE = JVM_TYPE_REFERENCE_FEATURE_COUNT + 0;
+	int JVM_GENERIC_ARRAY_TYPE_REFERENCE__COMPONENT_TYPE = JVM_TYPE_REFERENCE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Jvm Generic Array Type Reference</em>' class.
@@ -2514,10 +2516,10 @@ public interface TypesPackage extends EPackage
 	EClass getJvmArrayType();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.common.types.JvmArrayType#getComponentType <em>Component Type</em>}'.
+	 * Returns the meta object for the container reference '{@link org.eclipse.xtext.common.types.JvmArrayType#getComponentType <em>Component Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Component Type</em>'.
+	 * @return the meta object for the container reference '<em>Component Type</em>'.
 	 * @see org.eclipse.xtext.common.types.JvmArrayType#getComponentType()
 	 * @see #getJvmArrayType()
 	 * @generated
@@ -2841,15 +2843,16 @@ public interface TypesPackage extends EPackage
 	EClass getJvmGenericArrayTypeReference();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.common.types.JvmGenericArrayTypeReference#getType <em>Type</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.common.types.JvmGenericArrayTypeReference#getComponentType <em>Component Type</em>}'.
 	 * <!-- begin-user-doc -->
+	 * @since 2.1
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Type</em>'.
-	 * @see org.eclipse.xtext.common.types.JvmGenericArrayTypeReference#getType()
+	 * @return the meta object for the containment reference '<em>Component Type</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmGenericArrayTypeReference#getComponentType()
 	 * @see #getJvmGenericArrayTypeReference()
 	 * @generated
 	 */
-	EReference getJvmGenericArrayTypeReference_Type();
+	EReference getJvmGenericArrayTypeReference_ComponentType();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmWildcardTypeReference <em>Jvm Wildcard Type Reference</em>}'.
@@ -3549,6 +3552,7 @@ public interface TypesPackage extends EPackage
 	 * </ul>
 	 * <!-- end-user-doc -->
 	 * @generated
+	 * @noimplement This interface is not intended to be implemented by clients.
 	 */
 	interface Literals
 	{
@@ -3629,7 +3633,7 @@ public interface TypesPackage extends EPackage
 		EClass JVM_ARRAY_TYPE = eINSTANCE.getJvmArrayType();
 
 		/**
-		 * The meta object literal for the '<em><b>Component Type</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Component Type</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -3905,12 +3909,13 @@ public interface TypesPackage extends EPackage
 		EClass JVM_GENERIC_ARRAY_TYPE_REFERENCE = eINSTANCE.getJvmGenericArrayTypeReference();
 
 		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Component Type</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
+		 * @since 2.1
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference JVM_GENERIC_ARRAY_TYPE_REFERENCE__TYPE = eINSTANCE.getJvmGenericArrayTypeReference_Type();
+		EReference JVM_GENERIC_ARRAY_TYPE_REFERENCE__COMPONENT_TYPE = eINSTANCE.getJvmGenericArrayTypeReference_ComponentType();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmWildcardTypeReferenceImpl <em>Jvm Wildcard Type Reference</em>}' class.

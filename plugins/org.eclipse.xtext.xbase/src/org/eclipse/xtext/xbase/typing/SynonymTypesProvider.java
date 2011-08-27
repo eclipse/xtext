@@ -17,6 +17,7 @@ import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmArrayType;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
@@ -51,10 +52,17 @@ public class SynonymTypesProvider {
 		} else if (primitives.isWrapperType(type)) {
 			return singleton(primitives.asPrimitiveIfWrapperType(type));
 		} else if (typeRefs.isArray(type)) {
-			JvmArrayType array = (JvmArrayType) type.getType();
-			JvmTypeReference typeArg = primitives.asWrapperTypeIfPrimitive(array.getComponentType());
-			JvmTypeReference iterable = typeRefs.getTypeForName(List.class, findContext(array), typeArg);
-			return singleton(iterable);
+			if (type instanceof JvmGenericArrayTypeReference) {
+				JvmTypeReference componentType = ((JvmGenericArrayTypeReference) type).getComponentType();
+				JvmTypeReference typeArg = primitives.asWrapperTypeIfPrimitive(componentType);
+				JvmTypeReference iterable = typeRefs.getTypeForName(List.class, findContext(type.getType()), typeArg);
+				return singleton(iterable);
+			} else {
+				JvmArrayType array = (JvmArrayType) type.getType();
+				JvmTypeReference typeArg = primitives.asWrapperTypeIfPrimitive(typeRefs.createTypeRef(array.getComponentType()));
+				JvmTypeReference iterable = typeRefs.getTypeForName(List.class, findContext(array), typeArg);
+				return singleton(iterable);
+			}
 		} else if (isList(type)) {
 			JvmTypeReference componentType = null;
 			if (type instanceof JvmParameterizedTypeReference) {
@@ -86,9 +94,6 @@ public class SynonymTypesProvider {
 	}
 
 	protected EObject findContext(JvmType type) {
-		if (type instanceof JvmArrayType) {
-			return findContext(((JvmArrayType)type).getComponentType().getType());
-		}
 		return type;
 	}
 

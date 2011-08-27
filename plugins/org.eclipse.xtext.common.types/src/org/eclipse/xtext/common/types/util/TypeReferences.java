@@ -79,8 +79,7 @@ public class TypeReferences {
 			}
 			return rawType;
 		} else if (reference instanceof JvmGenericArrayTypeReference) {
-			JvmArrayType type = ((JvmGenericArrayTypeReference) reference).getType();
-			JvmTypeReference componentTypeReference = type.getComponentType();
+			JvmTypeReference componentTypeReference = ((JvmGenericArrayTypeReference) reference).getComponentType();
 			JvmType rawComponentType = getRawType(componentTypeReference);
 			if (rawComponentType instanceof JvmComponentType && !rawComponentType.eIsProxy())
 				return ((JvmComponentType) rawComponentType).getArrayType();
@@ -205,9 +204,7 @@ public class TypeReferences {
 	
 	public JvmGenericArrayTypeReference createArrayType(JvmTypeReference componentType) {
 		JvmGenericArrayTypeReference result = factory.createJvmGenericArrayTypeReference();
-		JvmArrayType arrayType = factory.createJvmArrayType();
-		result.setType(arrayType);
-		arrayType.setComponentType(EcoreUtil2.cloneIfContained(componentType));
+		result.setComponentType(EcoreUtil2.cloneIfContained(componentType));
 		return result;
 	}
 	
@@ -268,6 +265,6 @@ public class TypeReferences {
 	public boolean isArray(JvmTypeReference type) {
 		if (isNullOrProxy(type))
 			return false;
-		return type.getType() instanceof JvmArrayType;
+		return type instanceof JvmGenericArrayTypeReference || type.getType() instanceof JvmArrayType;
 	}
 }

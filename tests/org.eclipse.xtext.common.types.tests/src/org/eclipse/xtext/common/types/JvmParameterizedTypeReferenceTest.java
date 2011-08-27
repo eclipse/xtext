@@ -56,9 +56,7 @@ public class JvmParameterizedTypeReferenceTest extends TestCase {
 		JvmPrimitiveType primitiveType = TypesFactory.eINSTANCE.createJvmPrimitiveType();
 		primitiveType.setSimpleName("int");
 		JvmArrayType arrayType = TypesFactory.eINSTANCE.createJvmArrayType();
-		JvmParameterizedTypeReference componentTypeRef = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
-		componentTypeRef.setType(primitiveType);
-		arrayType.setComponentType(componentTypeRef);
+		arrayType.setComponentType(primitiveType);
 		primitiveType.setArrayType(arrayType);
 		parameterizedType.setType(arrayType);
 		assertEquals("int[]", parameterizedType.getIdentifier());

@@ -31,7 +31,6 @@ import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
-import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
@@ -389,9 +388,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		JvmTypeReference componentTypeReference = createTypeReference(componentType);
 		if (componentTypeReference != null) {
 			JvmGenericArrayTypeReference result = TypesFactory.eINSTANCE.createJvmGenericArrayTypeReference();
-			JvmArrayType resultArray = TypesFactory.eINSTANCE.createJvmArrayType();
-			result.setType(resultArray);
-			resultArray.setComponentType(componentTypeReference);
+			result.setComponentType(componentTypeReference);
 			return result;
 		} else {
 			return null;

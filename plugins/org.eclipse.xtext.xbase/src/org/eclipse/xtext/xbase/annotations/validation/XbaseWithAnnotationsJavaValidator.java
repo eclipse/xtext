@@ -15,7 +15,9 @@ import java.util.List;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmArrayType;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
@@ -64,9 +66,15 @@ public class XbaseWithAnnotationsJavaValidator extends XbaseJavaValidator {
 			return;
 		}
 		if (typeReferences.isArray(expectedType) && !typeReferences.isArray(actualType)) {
-			JvmTypeReference nonArrayTypeRef = ((JvmArrayType)expectedType.getType()).getComponentType();
-			if (conformanceComputer.isConformant(nonArrayTypeRef, actualType))
-				return;
+			if (expectedType instanceof JvmGenericArrayTypeReference) {
+				JvmTypeReference componentType = ((JvmGenericArrayTypeReference) expectedType).getComponentType();
+				if (conformanceComputer.isConformant(componentType, actualType))
+					return;
+			} else {
+				JvmType componentType = ((JvmArrayType)expectedType.getType()).getComponentType();
+				if (conformanceComputer.isConformant(typeReferences.createTypeRef(componentType), actualType))
+					return;
+			}
 		}
 		error("Incompatible types. Expected " + getNameOfTypes(expectedType) + " but was "
 				+ canonicalName(actualType), expression, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,

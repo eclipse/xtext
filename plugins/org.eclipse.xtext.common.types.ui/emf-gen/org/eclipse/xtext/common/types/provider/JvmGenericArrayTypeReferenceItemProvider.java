@@ -83,7 +83,7 @@ public class JvmGenericArrayTypeReferenceItemProvider
 		if (childrenFeatures == null)
 		{
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(TypesPackage.Literals.JVM_GENERIC_ARRAY_TYPE_REFERENCE__TYPE);
+			childrenFeatures.add(TypesPackage.Literals.JVM_GENERIC_ARRAY_TYPE_REFERENCE__COMPONENT_TYPE);
 		}
 		return childrenFeatures;
 	}
@@ -140,7 +140,7 @@ public class JvmGenericArrayTypeReferenceItemProvider
 
 		switch (notification.getFeatureID(JvmGenericArrayTypeReference.class))
 		{
-			case TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE__TYPE:
+			case TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE__COMPONENT_TYPE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -161,8 +161,28 @@ public class JvmGenericArrayTypeReferenceItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.JVM_GENERIC_ARRAY_TYPE_REFERENCE__TYPE,
-				 TypesFactory.eINSTANCE.createJvmArrayType()));
+				(TypesPackage.Literals.JVM_GENERIC_ARRAY_TYPE_REFERENCE__COMPONENT_TYPE,
+				 TypesFactory.eINSTANCE.createJvmParameterizedTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_GENERIC_ARRAY_TYPE_REFERENCE__COMPONENT_TYPE,
+				 TypesFactory.eINSTANCE.createJvmGenericArrayTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_GENERIC_ARRAY_TYPE_REFERENCE__COMPONENT_TYPE,
+				 TypesFactory.eINSTANCE.createJvmWildcardTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_GENERIC_ARRAY_TYPE_REFERENCE__COMPONENT_TYPE,
+				 TypesFactory.eINSTANCE.createJvmAnyTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_GENERIC_ARRAY_TYPE_REFERENCE__COMPONENT_TYPE,
+				 TypesFactory.eINSTANCE.createJvmMultiTypeReference()));
 	}
 
 }

@@ -200,10 +200,10 @@ public abstract class JvmDeclaredTypeImpl extends JvmMemberImplCustom implements
 			if (arrayType != oldArrayType)
 			{
 				InternalEObject newArrayType = (InternalEObject)arrayType;
-				NotificationChain msgs = oldArrayType.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_DECLARED_TYPE__ARRAY_TYPE, null, null);
+				NotificationChain msgs =  oldArrayType.eInverseRemove(this, TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE, JvmArrayType.class, null);
 				if (newArrayType.eInternalContainer() == null)
 				{
-					msgs = newArrayType.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_DECLARED_TYPE__ARRAY_TYPE, null, msgs);
+					msgs =  newArrayType.eInverseAdd(this, TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE, JvmArrayType.class, msgs);
 				}
 				if (msgs != null) msgs.dispatch();
 				if (eNotificationRequired())
@@ -251,9 +251,9 @@ public abstract class JvmDeclaredTypeImpl extends JvmMemberImplCustom implements
 		{
 			NotificationChain msgs = null;
 			if (arrayType != null)
-				msgs = ((InternalEObject)arrayType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_DECLARED_TYPE__ARRAY_TYPE, null, msgs);
+				msgs = ((InternalEObject)arrayType).eInverseRemove(this, TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE, JvmArrayType.class, msgs);
 			if (newArrayType != null)
-				msgs = ((InternalEObject)newArrayType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_DECLARED_TYPE__ARRAY_TYPE, null, msgs);
+				msgs = ((InternalEObject)newArrayType).eInverseAdd(this, TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE, JvmArrayType.class, msgs);
 			msgs = basicSetArrayType(newArrayType, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -440,6 +440,10 @@ public abstract class JvmDeclaredTypeImpl extends JvmMemberImplCustom implements
 	{
 		switch (featureID)
 		{
+			case TypesPackage.JVM_DECLARED_TYPE__ARRAY_TYPE:
+				if (arrayType != null)
+					msgs = ((InternalEObject)arrayType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_DECLARED_TYPE__ARRAY_TYPE, null, msgs);
+				return basicSetArrayType((JvmArrayType)otherEnd, msgs);
 			case TypesPackage.JVM_DECLARED_TYPE__MEMBERS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getMembers()).basicAdd(otherEnd, msgs);
 		}

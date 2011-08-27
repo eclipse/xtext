@@ -21,7 +21,6 @@ import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
-import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstraintOwner;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -311,10 +310,10 @@ public class TypeArgumentContextProvider {
 				}
 				if (op.isVarArgs()) {
 					JvmTypeReference parameterType = op.getParameters().get(paramCount).getParameterType();
-					if (!(parameterType.getType() instanceof JvmArrayType)) {
+					if (!(parameterType instanceof JvmGenericArrayTypeReference)) {
 						throw new IllegalStateException("VarArg methods expect last paramter to be an array type");
 					}
-					JvmTypeReference componentType = ((JvmArrayType) parameterType.getType()).getComponentType();
+					JvmTypeReference componentType = ((JvmGenericArrayTypeReference) parameterType).getComponentType();
 					List<JvmTypeReference> varArgTypes = emptyList();
 					if (paramCount<= argumentTypes.length) {
 						varArgTypes = Lists.newArrayList(Iterables.filter(

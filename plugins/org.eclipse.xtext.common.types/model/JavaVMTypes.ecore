@@ -30,15 +30,15 @@
   <eClassifiers xsi:type="ecore:EClass" name="JvmVoid" eSuperTypes="#//JvmType"/>
   <eClassifiers xsi:type="ecore:EClass" name="JvmComponentType" abstract="true" eSuperTypes="#//JvmType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="arrayType" eType="#//JvmArrayType"
-        containment="true"/>
+        containment="true" eOpposite="#//JvmArrayType/componentType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmPrimitiveType" eSuperTypes="#//JvmComponentType">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="simpleName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmArrayType" eSuperTypes="#//JvmComponentType">
     <eOperations name="getDimensions" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="componentType" eType="#//JvmTypeReference"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentType" eType="#//JvmComponentType"
+        eOpposite="#//JvmComponentType/arrayType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmDeclaredType" abstract="true" eSuperTypes="#//JvmMember #//JvmComponentType">
     <eOperations name="getDeclaredOperations" lowerBound="1">
@@ -150,9 +150,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//JvmType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmGenericArrayTypeReference" eSuperTypes="#//JvmTypeReference">
-    <eOperations name="getComponentType" eType="#//JvmTypeReference"/>
     <eOperations name="getDimensions" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//JvmArrayType"
+    <eOperations name="getType" eType="#//JvmArrayType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentType" eType="#//JvmTypeReference"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmWildcardTypeReference" eSuperTypes="#//JvmConstraintOwner #//JvmTypeReference"/>

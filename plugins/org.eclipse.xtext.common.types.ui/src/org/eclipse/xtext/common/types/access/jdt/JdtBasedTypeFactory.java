@@ -35,7 +35,6 @@ import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
-import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumAnnotationValue;
@@ -421,10 +420,8 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		if (typeBinding.isArray()) {
 			ITypeBinding componentType = typeBinding.getComponentType();
 			JvmTypeReference componentTypeReference = createTypeReference(componentType);
-			JvmArrayType resultArray = TypesFactory.eINSTANCE.createJvmArrayType();
-			resultArray.setComponentType(componentTypeReference);
 			JvmGenericArrayTypeReference typeReference = TypesFactory.eINSTANCE.createJvmGenericArrayTypeReference();
-			typeReference.setType(resultArray);
+			typeReference.setComponentType(componentTypeReference);
 			return typeReference;
 		}
 		ITypeBinding[] typeArguments = typeBinding.getTypeArguments();

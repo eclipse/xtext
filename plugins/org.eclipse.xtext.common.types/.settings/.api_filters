@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.eclipse.xtext.common.types" version="2">
+    <resource path="emf-gen/org/eclipse/xtext/common/types/JvmArrayType.java" type="org.eclipse.xtext.common.types.JvmArrayType">
+        <filter comment="Refactored array types" id="405901410">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.JvmArrayType"/>
+                <message_argument value="getComponentType()"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Refactored array types" id="405901410">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.JvmArrayType"/>
+                <message_argument value="setComponentType(JvmTypeReference)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/JvmGenericArrayTypeReference.java" type="org.eclipse.xtext.common.types.JvmGenericArrayTypeReference">
+        <filter comment="Refactored array types" id="405901410">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.JvmGenericArrayTypeReference"/>
+                <message_argument value="setType(JvmArrayType)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/TypesPackage.java" type="org.eclipse.xtext.common.types.TypesPackage">
+        <filter comment="Refactored array types" id="405864542">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_GENERIC_ARRAY_TYPE_REFERENCE__TYPE"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Refactored array types" id="405901410">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="getJvmGenericArrayTypeReference_Type()"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/TypesPackage.java" type="org.eclipse.xtext.common.types.TypesPackage$Literals">
+        <filter comment="Refactored array types" id="405864542">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage.Literals"/>
+                <message_argument value="JVM_GENERIC_ARRAY_TYPE_REFERENCE__TYPE"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>

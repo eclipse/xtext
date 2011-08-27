@@ -17,7 +17,6 @@ import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
@@ -256,8 +255,7 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 			}
 			return rawType;
 		} else if (reference instanceof JvmGenericArrayTypeReference) {
-			JvmArrayType type = ((JvmGenericArrayTypeReference)reference).getType();
-			JvmTypeReference componentType = type.getComponentType();
+			JvmTypeReference componentType = ((JvmGenericArrayTypeReference)reference).getComponentType();
 			JvmComponentType rawComponentType = (JvmComponentType) getRawType(componentType);
 			return rawComponentType.getArrayType();
 		} else if (reference instanceof JvmWildcardTypeReference) {

@@ -162,27 +162,57 @@ public class JvmArrayTypeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.JVM_ARRAY_TYPE__COMPONENT_TYPE,
-				 TypesFactory.eINSTANCE.createJvmParameterizedTypeReference()));
+				 TypesFactory.eINSTANCE.createJvmPrimitiveType()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.JVM_ARRAY_TYPE__COMPONENT_TYPE,
-				 TypesFactory.eINSTANCE.createJvmGenericArrayTypeReference()));
+				 TypesFactory.eINSTANCE.createJvmArrayType()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.JVM_ARRAY_TYPE__COMPONENT_TYPE,
-				 TypesFactory.eINSTANCE.createJvmWildcardTypeReference()));
+				 TypesFactory.eINSTANCE.createJvmTypeParameter()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.JVM_ARRAY_TYPE__COMPONENT_TYPE,
-				 TypesFactory.eINSTANCE.createJvmAnyTypeReference()));
+				 TypesFactory.eINSTANCE.createJvmAnnotationType()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.JVM_ARRAY_TYPE__COMPONENT_TYPE,
-				 TypesFactory.eINSTANCE.createJvmMultiTypeReference()));
+				 TypesFactory.eINSTANCE.createJvmEnumerationType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_ARRAY_TYPE__COMPONENT_TYPE,
+				 TypesFactory.eINSTANCE.createJvmGenericType()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection)
+	{
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == TypesPackage.Literals.JVM_COMPONENT_TYPE__ARRAY_TYPE ||
+			childFeature == TypesPackage.Literals.JVM_ARRAY_TYPE__COMPONENT_TYPE;
+
+		if (qualify)
+		{
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }

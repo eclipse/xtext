@@ -13,8 +13,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
+
 import org.eclipse.xtext.common.types.JvmArrayType;
-import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
@@ -32,16 +34,6 @@ import org.eclipse.xtext.common.types.TypesPackage;
  */
 public class JvmArrayTypeImpl extends JvmComponentTypeImpl implements JvmArrayType
 {
-	/**
-	 * The cached value of the '{@link #getComponentType() <em>Component Type</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getComponentType()
-	 * @generated
-	 * @ordered
-	 */
-	protected JvmTypeReference componentType;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -68,26 +60,10 @@ public class JvmArrayTypeImpl extends JvmComponentTypeImpl implements JvmArrayTy
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JvmTypeReference getComponentType()
+	public JvmComponentType getComponentType()
 	{
-		if (componentType != null && componentType.eIsProxy())
-		{
-			InternalEObject oldComponentType = (InternalEObject)componentType;
-			componentType = (JvmTypeReference)eResolveProxy(oldComponentType);
-			if (componentType != oldComponentType)
-			{
-				InternalEObject newComponentType = (InternalEObject)componentType;
-				NotificationChain msgs = oldComponentType.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE, null, null);
-				if (newComponentType.eInternalContainer() == null)
-				{
-					msgs = newComponentType.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE, null, msgs);
-				}
-				if (msgs != null) msgs.dispatch();
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE, oldComponentType, componentType));
-			}
-		}
-		return componentType;
+		if (eContainerFeatureID() != TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE) return null;
+		return (JvmComponentType)eContainer();
 	}
 
 	/**
@@ -95,9 +71,10 @@ public class JvmArrayTypeImpl extends JvmComponentTypeImpl implements JvmArrayTy
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JvmTypeReference basicGetComponentType()
+	public JvmComponentType basicGetComponentType()
 	{
-		return componentType;
+		if (eContainerFeatureID() != TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE) return null;
+		return (JvmComponentType)eInternalContainer();
 	}
 
 	/**
@@ -105,15 +82,9 @@ public class JvmArrayTypeImpl extends JvmComponentTypeImpl implements JvmArrayTy
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetComponentType(JvmTypeReference newComponentType, NotificationChain msgs)
+	public NotificationChain basicSetComponentType(JvmComponentType newComponentType, NotificationChain msgs)
 	{
-		JvmTypeReference oldComponentType = componentType;
-		componentType = newComponentType;
-		if (eNotificationRequired())
-		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE, oldComponentType, newComponentType);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
+		msgs = eBasicSetContainer((InternalEObject)newComponentType, TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE, msgs);
 		return msgs;
 	}
 
@@ -122,15 +93,17 @@ public class JvmArrayTypeImpl extends JvmComponentTypeImpl implements JvmArrayTy
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setComponentType(JvmTypeReference newComponentType)
+	public void setComponentType(JvmComponentType newComponentType)
 	{
-		if (newComponentType != componentType)
+		if (newComponentType != eInternalContainer() || (eContainerFeatureID() != TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE && newComponentType != null))
 		{
+			if (EcoreUtil.isAncestor(this, newComponentType))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
-			if (componentType != null)
-				msgs = ((InternalEObject)componentType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE, null, msgs);
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
 			if (newComponentType != null)
-				msgs = ((InternalEObject)newComponentType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE, null, msgs);
+				msgs = ((InternalEObject)newComponentType).eInverseAdd(this, TypesPackage.JVM_COMPONENT_TYPE__ARRAY_TYPE, JvmComponentType.class, msgs);
 			msgs = basicSetComponentType(newComponentType, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -156,6 +129,24 @@ public class JvmArrayTypeImpl extends JvmComponentTypeImpl implements JvmArrayTy
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+	{
+		switch (featureID)
+		{
+			case TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetComponentType((JvmComponentType)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
 		switch (featureID)
@@ -164,6 +155,22 @@ public class JvmArrayTypeImpl extends JvmComponentTypeImpl implements JvmArrayTy
 				return basicSetComponentType(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs)
+	{
+		switch (eContainerFeatureID())
+		{
+			case TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE:
+				return eInternalContainer().eInverseRemove(this, TypesPackage.JVM_COMPONENT_TYPE__ARRAY_TYPE, JvmComponentType.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -194,7 +201,7 @@ public class JvmArrayTypeImpl extends JvmComponentTypeImpl implements JvmArrayTy
 		switch (featureID)
 		{
 			case TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE:
-				setComponentType((JvmTypeReference)newValue);
+				setComponentType((JvmComponentType)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -211,7 +218,7 @@ public class JvmArrayTypeImpl extends JvmComponentTypeImpl implements JvmArrayTy
 		switch (featureID)
 		{
 			case TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE:
-				setComponentType((JvmTypeReference)null);
+				setComponentType((JvmComponentType)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -228,7 +235,7 @@ public class JvmArrayTypeImpl extends JvmComponentTypeImpl implements JvmArrayTy
 		switch (featureID)
 		{
 			case TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE:
-				return componentType != null;
+				return basicGetComponentType() != null;
 		}
 		return super.eIsSet(featureID);
 	}

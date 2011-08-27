@@ -75,6 +75,7 @@ public class JvmPrimitiveTypeImpl extends JvmComponentTypeImpl implements JvmPri
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getSimpleName()
 	{
 		return simpleName;
