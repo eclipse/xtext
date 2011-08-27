@@ -81,19 +81,23 @@ public class PartitionTest extends AbstractXtend2UITestCase {
 		document.set(input);
 		document.replace(input.indexOf("\t\tYours"), 0, "ллл");
 		ITypedRegion[] partitions = document.getDocumentPartitioner().computePartitioning(0, input.length()  + 3 /*ллл*/);
-		assertEquals(3, partitions.length);
+		assertEquals(4, partitions.length);
 		ITypedRegion first = partitions[0];
 		assertEquals(0, first.getOffset());
 		assertEquals(input.indexOf("'"), first.getLength());
 		assertEquals(IDocument.DEFAULT_CONTENT_TYPE, first.getType());
 		ITypedRegion second = partitions[1];
 		assertEquals(input.indexOf("'"), second.getOffset());
-		assertEquals(input.lastIndexOf("'") + 1 + 3 /*ллл*/, second.getLength() + second.getOffset());
+		assertEquals(input.indexOf("\t\tYours") + 1, second.getLength() + second.getOffset());
 		assertEquals(TokenTypeToPartitionMapper.RICH_STRING_LITERAL_PARTITION, second.getType());
 		ITypedRegion third = partitions[2];
-		assertEquals(input.lastIndexOf("'") + 1 + 3 /*ллл*/, third.getOffset());
-		assertEquals(input.length() + 3 /*ллл*/, third.getLength() + third.getOffset());
-		assertEquals(IDocument.DEFAULT_CONTENT_TYPE, third.getType());
+		assertEquals(input.indexOf("\t\tYours") + 1, third.getOffset());
+		assertEquals(input.lastIndexOf("'") + 1 + 3 /*ллл*/, third.getLength() + third.getOffset());
+		assertEquals(TokenTypeToPartitionMapper.RICH_STRING_LITERAL_PARTITION, third.getType());
+		ITypedRegion forth = partitions[3];
+		assertEquals(input.lastIndexOf("'") + 1 + 3 /*ллл*/, forth.getOffset());
+		assertEquals(input.length() + 3 /*ллл*/, forth.getLength() + forth.getOffset());
+		assertEquals(IDocument.DEFAULT_CONTENT_TYPE, forth.getType());
 	}
 	
 	public void testPartitioningAfterModify_02() throws BadLocationException {
@@ -112,19 +116,23 @@ public class PartitionTest extends AbstractXtend2UITestCase {
 		document.replace(input.indexOf("\t\tYours"), 0, "ллл");
 		document.replace(input.indexOf("Joe") + 3 /*ллл*/, 0, "\t");
 		ITypedRegion[] partitions = document.getDocumentPartitioner().computePartitioning(0, input.length()  + 4 /*ллл + \t*/);
-		assertEquals(3, partitions.length);
+		assertEquals(4, partitions.length);
 		ITypedRegion first = partitions[0];
 		assertEquals(0, first.getOffset());
 		assertEquals(input.indexOf("'"), first.getLength());
 		assertEquals(IDocument.DEFAULT_CONTENT_TYPE, first.getType());
 		ITypedRegion second = partitions[1];
 		assertEquals(input.indexOf("'"), second.getOffset());
-		assertEquals(input.lastIndexOf("'") + 1 + 4 /*ллл + \t*/, second.getLength() + second.getOffset());
+		assertEquals(input.indexOf("\t\tYours") + 1, second.getLength() + second.getOffset());
 		assertEquals(TokenTypeToPartitionMapper.RICH_STRING_LITERAL_PARTITION, second.getType());
 		ITypedRegion third = partitions[2];
-		assertEquals(input.lastIndexOf("'") + 1 + 4 /*ллл + \t*/, third.getOffset());
-		assertEquals(document.getLength(), third.getLength() + third.getOffset());
-		assertEquals(input.length() + 4 /*ллл + \t*/, third.getLength() + third.getOffset());
-		assertEquals(IDocument.DEFAULT_CONTENT_TYPE, third.getType());
+		assertEquals(input.indexOf("\t\tYours") + 1, third.getOffset());
+		assertEquals(input.lastIndexOf("'") + 1 + 4 /*ллл + \t*/, third.getLength() + third.getOffset());
+		assertEquals(TokenTypeToPartitionMapper.RICH_STRING_LITERAL_PARTITION, third.getType());
+		ITypedRegion forth = partitions[3];
+		assertEquals(input.lastIndexOf("'") + 1 + 4 /*ллл + \t*/, forth.getOffset());
+		assertEquals(document.getLength(), forth.getLength() + forth.getOffset());
+		assertEquals(input.length() + 4 /*ллл + \t*/, forth.getLength() + forth.getOffset());
+		assertEquals(IDocument.DEFAULT_CONTENT_TYPE, forth.getType());
 	}
 }
