@@ -97,14 +97,21 @@ public class PartitionTokenScanner implements IPartitionTokenScanner {
 			nextToken = tokens.next();
 			String partitionOfNext = mapper.getPartitionType(nextToken.getLexerTokenType());
 			currentPartitionLength = nextToken.getOffset()-currentPartitionOffset;
-			if (!partitionOfNext.equals(tokenPartition)) {
+			if (!partitionOfNext.equals(tokenPartition) || !shouldMergePartitions(tokenPartition)) {
 				return new Token(tokenPartition);
 			}
 		}
 		if (nextToken != null)
-			currentPartitionLength += nextToken.getLength(); 
+			currentPartitionLength = nextToken.getOffset() + nextToken.getLength() - currentPartitionOffset; 
 		nextToken = null;
 		return new Token(tokenPartition);
+	}
+	
+	/**
+	 * @since 2.1
+	 */
+	protected boolean shouldMergePartitions(String contentType) {
+		return IDocument.DEFAULT_CONTENT_TYPE.equals(contentType);
 	}
 
 	public int getTokenOffset() {

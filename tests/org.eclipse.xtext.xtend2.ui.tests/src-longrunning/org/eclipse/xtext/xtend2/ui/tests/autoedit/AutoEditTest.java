@@ -384,6 +384,8 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 				"", editor);
 	}
 	
+	// The following generic auto edit assumptions don't hold for xtend
+	// because of the rich string delimiter '''
 	@Override
 	public void testSingleQuotedStringLiteral_14() throws Exception {
 		XtextEditor editor = openEditor("|'test'");
@@ -393,5 +395,14 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 //		assertState("''|'test'", editor);
 //		pressKey(editor, '\'');
 //		assertState("'''|test'", editor);
+	}
+	
+	@Override
+	public void testSingleQuotedStringLiteral_15() throws Exception {
+//		XtextEditor editor = openEditor("'|''test'");
+//		pressKey(editor, '\'');
+//		assertState("''|'test'", editor);
+//		pressKey(editor, '\'');
+//		assertState("'''|''test'", editor);
 	}
 }

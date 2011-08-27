@@ -208,6 +208,14 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends AbstractAutoEdi
 		pressKey(editor, '\'');
 		assertState("'''|''test'", editor);
 	}
+	
+	public void testSingleQuotedStringLiteral_15() throws Exception {
+		XtextEditor editor = openEditor("'|''test'");
+		pressKey(editor, '\'');
+		assertState("''|'test'", editor);
+		pressKey(editor, '\'');
+		assertState("'''|''test'", editor);
+	}
 
 	public void testDoubleQuotedStringLiteral_1() throws Exception {
 		XtextEditor editor = openEditor("|");
