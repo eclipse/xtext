@@ -29,7 +29,8 @@ QualifiedNameWithWildCard :
 Class returns XtendClass :
    annotations+=XAnnotation* 
    "class" name=ValidID ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?  
-   ("extends" extends=JvmTypeReference)? ('implements' implements+=JvmTypeReference (',' implements+=JvmTypeReference)*)?'{'
+   ("extends" extends=JvmParameterizedTypeReference)? 
+   ('implements' implements+=JvmParameterizedTypeReference (',' implements+=JvmParameterizedTypeReference)*)?'{'
 	   (members+=Member)*
    '}';
 
@@ -52,7 +53,6 @@ CreateExtensionInfo:
 ValidID:
 	ID | 'create'
 ;
-
 
 Parameter returns XtendParameter:
 	annotations+=XAnnotation* 
