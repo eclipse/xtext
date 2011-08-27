@@ -69,6 +69,13 @@ public class LocationprovidertestFactoryImpl extends EFactoryImpl implements Loc
     {
       case LocationprovidertestPackage.MODEL: return createModel();
       case LocationprovidertestPackage.ELEMENT: return createElement();
+      case LocationprovidertestPackage.COMPONENT: return createComponent();
+      case LocationprovidertestPackage.BUS: return createBus();
+      case LocationprovidertestPackage.PROCESSOR: return createProcessor();
+      case LocationprovidertestPackage.MODE: return createMode();
+      case LocationprovidertestPackage.TRANSITION: return createTransition();
+      case LocationprovidertestPackage.PORT: return createPort();
+      case LocationprovidertestPackage.DATA: return createData();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -94,6 +101,83 @@ public class LocationprovidertestFactoryImpl extends EFactoryImpl implements Loc
   {
     ElementImpl element = new ElementImpl();
     return element;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Component createComponent()
+  {
+    ComponentImpl component = new ComponentImpl();
+    return component;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Bus createBus()
+  {
+    BusImpl bus = new BusImpl();
+    return bus;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Processor createProcessor()
+  {
+    ProcessorImpl processor = new ProcessorImpl();
+    return processor;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Mode createMode()
+  {
+    ModeImpl mode = new ModeImpl();
+    return mode;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Transition createTransition()
+  {
+    TransitionImpl transition = new TransitionImpl();
+    return transition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Port createPort()
+  {
+    PortImpl port = new PortImpl();
+    return port;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Data createData()
+  {
+    DataImpl data = new DataImpl();
+    return data;
   }
 
   /**

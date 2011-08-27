@@ -19,18 +19,30 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
-		private final Assignment cElementsAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cElementsElementParserRuleCall_0 = (RuleCall)cElementsAssignment.eContents().get(0);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cElementsAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cElementsElementParserRuleCall_0_0 = (RuleCall)cElementsAssignment_0.eContents().get(0);
+		private final Assignment cComponentsAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cComponentsComponentParserRuleCall_1_0 = (RuleCall)cComponentsAssignment_1.eContents().get(0);
 		
 		//Model:
-		//	elements+=Element*;
+		//	elements+=Element* components+=Component*;
 		public ParserRule getRule() { return rule; }
 
+		//elements+=Element* components+=Component*
+		public Group getGroup() { return cGroup; }
+
 		//elements+=Element*
-		public Assignment getElementsAssignment() { return cElementsAssignment; }
+		public Assignment getElementsAssignment_0() { return cElementsAssignment_0; }
 
 		//Element
-		public RuleCall getElementsElementParserRuleCall_0() { return cElementsElementParserRuleCall_0; }
+		public RuleCall getElementsElementParserRuleCall_0_0() { return cElementsElementParserRuleCall_0_0; }
+
+		//components+=Component*
+		public Assignment getComponentsAssignment_1() { return cComponentsAssignment_1; }
+
+		//Component
+		public RuleCall getComponentsComponentParserRuleCall_1_0() { return cComponentsComponentParserRuleCall_1_0; }
 	}
 
 	public class ElementElements extends AbstractParserRuleElementFinder {
@@ -96,10 +108,281 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		//ID
 		public RuleCall getMultirefsElementIDTerminalRuleCall_3_1_0_1() { return cMultirefsElementIDTerminalRuleCall_3_1_0_1; }
 	}
+
+	public class ComponentElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Component");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
+		private final RuleCall cBusParserRuleCall_0_0 = (RuleCall)cAlternatives_0.eContents().get(0);
+		private final RuleCall cProcessorParserRuleCall_0_1 = (RuleCall)cAlternatives_0.eContents().get(1);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cModesKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Alternatives cAlternatives_1_1 = (Alternatives)cGroup_1.eContents().get(1);
+		private final Assignment cModeAssignment_1_1_0 = (Assignment)cAlternatives_1_1.eContents().get(0);
+		private final RuleCall cModeModeParserRuleCall_1_1_0_0 = (RuleCall)cModeAssignment_1_1_0.eContents().get(0);
+		private final Assignment cTransitionAssignment_1_1_1 = (Assignment)cAlternatives_1_1.eContents().get(1);
+		private final RuleCall cTransitionTransitionParserRuleCall_1_1_1_0 = (RuleCall)cTransitionAssignment_1_1_1.eContents().get(0);
+		private final Keyword cEndKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		
+		//Component:
+		//	(Bus | Processor) ("modes" (mode+=Mode | transition+=Transition)+)? "end" ";";
+		public ParserRule getRule() { return rule; }
+
+		//(Bus | Processor) ("modes" (mode+=Mode | transition+=Transition)+)? "end" ";"
+		public Group getGroup() { return cGroup; }
+
+		//Bus | Processor
+		public Alternatives getAlternatives_0() { return cAlternatives_0; }
+
+		//Bus
+		public RuleCall getBusParserRuleCall_0_0() { return cBusParserRuleCall_0_0; }
+
+		//Processor
+		public RuleCall getProcessorParserRuleCall_0_1() { return cProcessorParserRuleCall_0_1; }
+
+		//("modes" (mode+=Mode | transition+=Transition)+)?
+		public Group getGroup_1() { return cGroup_1; }
+
+		//"modes"
+		public Keyword getModesKeyword_1_0() { return cModesKeyword_1_0; }
+
+		//(mode+=Mode | transition+=Transition)+
+		public Alternatives getAlternatives_1_1() { return cAlternatives_1_1; }
+
+		//mode+=Mode
+		public Assignment getModeAssignment_1_1_0() { return cModeAssignment_1_1_0; }
+
+		//Mode
+		public RuleCall getModeModeParserRuleCall_1_1_0_0() { return cModeModeParserRuleCall_1_1_0_0; }
+
+		//transition+=Transition
+		public Assignment getTransitionAssignment_1_1_1() { return cTransitionAssignment_1_1_1; }
+
+		//Transition
+		public RuleCall getTransitionTransitionParserRuleCall_1_1_1_0() { return cTransitionTransitionParserRuleCall_1_1_1_0; }
+
+		//"end"
+		public Keyword getEndKeyword_2() { return cEndKeyword_2; }
+
+		//";"
+		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
+	}
+
+	public class BusElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Bus");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cBusKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Assignment cPortAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cPortPortParserRuleCall_2_0 = (RuleCall)cPortAssignment_2.eContents().get(0);
+		
+		//Bus:
+		//	"bus" name=ID port+=Port*;
+		public ParserRule getRule() { return rule; }
+
+		//"bus" name=ID port+=Port*
+		public Group getGroup() { return cGroup; }
+
+		//"bus"
+		public Keyword getBusKeyword_0() { return cBusKeyword_0; }
+
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+
+		//port+=Port*
+		public Assignment getPortAssignment_2() { return cPortAssignment_2; }
+
+		//Port
+		public RuleCall getPortPortParserRuleCall_2_0() { return cPortPortParserRuleCall_2_0; }
+	}
+
+	public class ProcessorElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Processor");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cProcessorKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Assignment cDataAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cDataDataParserRuleCall_2_0 = (RuleCall)cDataAssignment_2.eContents().get(0);
+		
+		//Processor:
+		//	"processor" name=ID data+=Data*;
+		public ParserRule getRule() { return rule; }
+
+		//"processor" name=ID data+=Data*
+		public Group getGroup() { return cGroup; }
+
+		//"processor"
+		public Keyword getProcessorKeyword_0() { return cProcessorKeyword_0; }
+
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+
+		//data+=Data*
+		public Assignment getDataAssignment_2() { return cDataAssignment_2; }
+
+		//Data
+		public RuleCall getDataDataParserRuleCall_2_0() { return cDataDataParserRuleCall_2_0; }
+	}
+
+	public class ModeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Mode");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cModeKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		
+		//Mode:
+		//	"mode" name=ID ";";
+		public ParserRule getRule() { return rule; }
+
+		//"mode" name=ID ";"
+		public Group getGroup() { return cGroup; }
+
+		//"mode"
+		public Keyword getModeKeyword_0() { return cModeKeyword_0; }
+
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+
+		//";"
+		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
+	}
+
+	public class TransitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Transition");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
+		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cSourceAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final CrossReference cSourceModeCrossReference_2_0 = (CrossReference)cSourceAssignment_2.eContents().get(0);
+		private final RuleCall cSourceModeIDTerminalRuleCall_2_0_1 = (RuleCall)cSourceModeCrossReference_2_0.eContents().get(1);
+		private final Keyword cHyphenMinusGreaterThanSignKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cDestinationAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final CrossReference cDestinationModeCrossReference_4_0 = (CrossReference)cDestinationAssignment_4.eContents().get(0);
+		private final RuleCall cDestinationModeIDTerminalRuleCall_4_0_1 = (RuleCall)cDestinationModeCrossReference_4_0.eContents().get(1);
+		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		
+		//Transition:
+		//	name=ID ":" source=[Mode] "->" destination=[Mode] ";";
+		public ParserRule getRule() { return rule; }
+
+		//name=ID ":" source=[Mode] "->" destination=[Mode] ";"
+		public Group getGroup() { return cGroup; }
+
+		//name=ID
+		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
+
+		//":"
+		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
+
+		//source=[Mode]
+		public Assignment getSourceAssignment_2() { return cSourceAssignment_2; }
+
+		//[Mode]
+		public CrossReference getSourceModeCrossReference_2_0() { return cSourceModeCrossReference_2_0; }
+
+		//ID
+		public RuleCall getSourceModeIDTerminalRuleCall_2_0_1() { return cSourceModeIDTerminalRuleCall_2_0_1; }
+
+		//"->"
+		public Keyword getHyphenMinusGreaterThanSignKeyword_3() { return cHyphenMinusGreaterThanSignKeyword_3; }
+
+		//destination=[Mode]
+		public Assignment getDestinationAssignment_4() { return cDestinationAssignment_4; }
+
+		//[Mode]
+		public CrossReference getDestinationModeCrossReference_4_0() { return cDestinationModeCrossReference_4_0; }
+
+		//ID
+		public RuleCall getDestinationModeIDTerminalRuleCall_4_0_1() { return cDestinationModeIDTerminalRuleCall_4_0_1; }
+
+		//";"
+		public Keyword getSemicolonKeyword_5() { return cSemicolonKeyword_5; }
+	}
+
+	public class PortElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Port");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cPortKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		
+		//Port:
+		//	"port" name=ID ";";
+		public ParserRule getRule() { return rule; }
+
+		//"port" name=ID ";"
+		public Group getGroup() { return cGroup; }
+
+		//"port"
+		public Keyword getPortKeyword_0() { return cPortKeyword_0; }
+
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+
+		//";"
+		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
+	}
+
+	public class DataElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Data");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cDataKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		
+		//Data:
+		//	"data" name=ID ";";
+		public ParserRule getRule() { return rule; }
+
+		//"data" name=ID ";"
+		public Group getGroup() { return cGroup; }
+
+		//"data"
+		public Keyword getDataKeyword_0() { return cDataKeyword_0; }
+
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+
+		//";"
+		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
+	}
 	
 	
 	private ModelElements pModel;
 	private ElementElements pElement;
+	private ComponentElements pComponent;
+	private BusElements pBus;
+	private ProcessorElements pProcessor;
+	private ModeElements pMode;
+	private TransitionElements pTransition;
+	private PortElements pPort;
+	private DataElements pData;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -123,7 +406,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 
 	
 	//Model:
-	//	elements+=Element*;
+	//	elements+=Element* components+=Component*;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -140,6 +423,76 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 	
 	public ParserRule getElementRule() {
 		return getElementAccess().getRule();
+	}
+
+	//Component:
+	//	(Bus | Processor) ("modes" (mode+=Mode | transition+=Transition)+)? "end" ";";
+	public ComponentElements getComponentAccess() {
+		return (pComponent != null) ? pComponent : (pComponent = new ComponentElements());
+	}
+	
+	public ParserRule getComponentRule() {
+		return getComponentAccess().getRule();
+	}
+
+	//Bus:
+	//	"bus" name=ID port+=Port*;
+	public BusElements getBusAccess() {
+		return (pBus != null) ? pBus : (pBus = new BusElements());
+	}
+	
+	public ParserRule getBusRule() {
+		return getBusAccess().getRule();
+	}
+
+	//Processor:
+	//	"processor" name=ID data+=Data*;
+	public ProcessorElements getProcessorAccess() {
+		return (pProcessor != null) ? pProcessor : (pProcessor = new ProcessorElements());
+	}
+	
+	public ParserRule getProcessorRule() {
+		return getProcessorAccess().getRule();
+	}
+
+	//Mode:
+	//	"mode" name=ID ";";
+	public ModeElements getModeAccess() {
+		return (pMode != null) ? pMode : (pMode = new ModeElements());
+	}
+	
+	public ParserRule getModeRule() {
+		return getModeAccess().getRule();
+	}
+
+	//Transition:
+	//	name=ID ":" source=[Mode] "->" destination=[Mode] ";";
+	public TransitionElements getTransitionAccess() {
+		return (pTransition != null) ? pTransition : (pTransition = new TransitionElements());
+	}
+	
+	public ParserRule getTransitionRule() {
+		return getTransitionAccess().getRule();
+	}
+
+	//Port:
+	//	"port" name=ID ";";
+	public PortElements getPortAccess() {
+		return (pPort != null) ? pPort : (pPort = new PortElements());
+	}
+	
+	public ParserRule getPortRule() {
+		return getPortAccess().getRule();
+	}
+
+	//Data:
+	//	"data" name=ID ";";
+	public DataElements getDataAccess() {
+		return (pData != null) ? pData : (pData = new DataElements());
+	}
+	
+	public ParserRule getDataRule() {
+		return getDataAccess().getRule();
 	}
 
 	//terminal ID:

@@ -10,8 +10,43 @@ grammar org.eclipse.xtext.resource.LocationProviderTestLanguage with org.eclipse
 generate locationprovidertest "http://www.xtext.org/locationProviderTestLaguage"
 
 Model :
-	(elements+=Element)*;
+	(elements+=Element)*
+	(components+=Component)*;
 	
 Element :
 	"element" name=ID ("singleref" singleref=[Element])? ("multiref" multirefs+=[Element])*;
+	
+Component :
+	(Bus | Processor)
+	('modes' (mode+=Mode |
+		transition+=Transition)+
+	)?
+	'end' ';'
+;
+
+Bus:
+	'bus' name = ID
+	(port+=Port)*
+;
+
+Processor:
+	'processor' name = ID
+	(data+=Data)*
+;
+
+Mode :
+	'mode' name = ID ';'
+;
+
+Transition:
+	name=ID ':' source=[Mode] '->' destination=[Mode] ';'
+;
+
+Port:
+	'port' name = ID ';'
+;
+
+Data:
+	'data' name = ID ';'
+;
 	

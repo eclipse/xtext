@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.xtext.resource.locationprovidertest.Component;
 import org.eclipse.xtext.resource.locationprovidertest.Element;
 import org.eclipse.xtext.resource.locationprovidertest.LocationprovidertestPackage;
 import org.eclipse.xtext.resource.locationprovidertest.Model;
@@ -31,6 +32,7 @@ import org.eclipse.xtext.resource.locationprovidertest.Model;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtext.resource.locationprovidertest.impl.ModelImpl#getElements <em>Elements</em>}</li>
+ *   <li>{@link org.eclipse.xtext.resource.locationprovidertest.impl.ModelImpl#getComponents <em>Components</em>}</li>
  * </ul>
  * </p>
  *
@@ -47,6 +49,16 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @ordered
    */
   protected EList<Element> elements;
+
+  /**
+   * The cached value of the '{@link #getComponents() <em>Components</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getComponents()
+   * @generated
+   * @ordered
+   */
+  protected EList<Component> components;
 
   /**
    * <!-- begin-user-doc -->
@@ -88,6 +100,20 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<Component> getComponents()
+  {
+    if (components == null)
+    {
+      components = new EObjectContainmentEList<Component>(Component.class, this, LocationprovidertestPackage.MODEL__COMPONENTS);
+    }
+    return components;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -95,6 +121,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
     {
       case LocationprovidertestPackage.MODEL__ELEMENTS:
         return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
+      case LocationprovidertestPackage.MODEL__COMPONENTS:
+        return ((InternalEList<?>)getComponents()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -111,6 +139,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
     {
       case LocationprovidertestPackage.MODEL__ELEMENTS:
         return getElements();
+      case LocationprovidertestPackage.MODEL__COMPONENTS:
+        return getComponents();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -130,6 +160,10 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         getElements().clear();
         getElements().addAll((Collection<? extends Element>)newValue);
         return;
+      case LocationprovidertestPackage.MODEL__COMPONENTS:
+        getComponents().clear();
+        getComponents().addAll((Collection<? extends Component>)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -147,6 +181,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
       case LocationprovidertestPackage.MODEL__ELEMENTS:
         getElements().clear();
         return;
+      case LocationprovidertestPackage.MODEL__COMPONENTS:
+        getComponents().clear();
+        return;
     }
     super.eUnset(featureID);
   }
@@ -163,6 +200,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
     {
       case LocationprovidertestPackage.MODEL__ELEMENTS:
         return elements != null && !elements.isEmpty();
+      case LocationprovidertestPackage.MODEL__COMPONENTS:
+        return components != null && !components.isEmpty();
     }
     return super.eIsSet(featureID);
   }
