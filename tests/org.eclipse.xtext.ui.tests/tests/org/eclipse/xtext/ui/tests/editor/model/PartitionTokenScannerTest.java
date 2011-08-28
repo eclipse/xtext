@@ -97,6 +97,10 @@ public class PartitionTokenScannerTest extends TestCase {
 			protected Iterable<ILexerTokenRegion> getTokens(IDocument document) {
 				return tokens;
 			}
+			@Override
+			protected boolean shouldMergePartitions(String contentType) {
+				return "3".equals(contentType);
+			}
 		};
 		tokenScanner.setMapper(new ITokenTypeToPartitionTypeMapper() {
 			
