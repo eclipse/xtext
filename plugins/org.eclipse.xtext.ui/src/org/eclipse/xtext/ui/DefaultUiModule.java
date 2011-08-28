@@ -119,6 +119,8 @@ public class DefaultUiModule extends AbstractGenericModule {
 				org.eclipse.xtext.ui.editor.bracketmatching.GoToMatchingBracketAction.class);
 		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(Names.named("bracketMatcherPrefernceInitializer")) //$NON-NLS-1$
 				.to(org.eclipse.xtext.ui.editor.bracketmatching.BracketMatchingPreferencesInitializer.class);
+		binder.bind(IActionContributor.class).annotatedWith(Names.named("selectionActionGroup")).to( //$NON-NLS-1$
+				org.eclipse.xtext.ui.editor.selection.SelectionActionContributor.class);
 	}
 
 	public Class<? extends IImageHelper> bindIImageHelper() {

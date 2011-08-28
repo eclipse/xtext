@@ -102,6 +102,50 @@
             categoryId="org.eclipse.xtext.ui.category.XtextEditor"
             id="org.eclipse.xtext.ui.GotToMatchingBracketAction">
       </command>
+      <!-- find references -->
+	  <command 
+			id="org.eclipse.xtext.ui.editor.FindReferences"
+			name="%FindReferencesCommand_name"
+			description="%FindReferencesCommand_description">
+	  </command>
+	  <!-- hyperlinking -->
+	  <command
+			id="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration"
+			name="%OpenDeclarationCommand_name"
+			description="%OpenDeclarationCommand_description">
+      </command>
+      <!-- refactoring -->
+      <command
+            id="org.eclipse.xtext.ui.refactoring.RenameElement"
+            name="%RenameElementCommand_name"
+            description="%RenameElementCommand_description">
+      </command>
+      <!-- text selection -->
+      <command
+            name="%SelectEnclosingCommand_name"
+            description="%SelectEnclosingCommand_description"
+            categoryId="org.eclipse.xtext.ui.category.XtextEditor"
+            id="org.eclipse.xtext.ui.editor.select.enclosing">
+      </command>
+      <command
+            name="%SelectPreviousCommand_name"
+            description="%SelectPreviousCommand_description"
+            categoryId="org.eclipse.xtext.ui.category.XtextEditor"
+            id="org.eclipse.xtext.ui.editor.select.previous">
+      </command>
+      <command
+            name="%SelectNextCommand_name"
+            description="%SelectNextCommand_description"
+            categoryId="org.eclipse.xtext.ui.category.XtextEditor"
+            id="org.eclipse.xtext.ui.editor.select.next">
+      </command>
+      <command
+            name="%SelectLastCommand_name"
+            description="%SelectLastCommand_description"
+            categoryId="org.eclipse.xtext.ui.category.XtextEditor"
+            id="org.eclipse.xtext.ui.editor.select.last">
+      </command>
+      <!-- categories -->
       <category
             description="%XtextCommandCategory_description"
             id="org.eclipse.xtext.ui.category.XtextEditor"
@@ -138,6 +182,23 @@
     <key sequence="M1+M2+P"
         contextId="org.eclipse.xtext.ui.XtextEditorScope"
         commandId="org.eclipse.xtext.ui.GotToMatchingBracketAction"
+        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+    <!-- text selection -->
+    <key sequence="M1+M2+ARROW_UP"
+        contextId="org.eclipse.xtext.ui.XtextEditorScope"
+        commandId="org.eclipse.xtext.ui.editor.select.enclosing"
+        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+    <key sequence="M1+M2+ARROW_LEFT"
+        contextId="org.eclipse.xtext.ui.XtextEditorScope"
+        commandId="org.eclipse.xtext.ui.editor.select.previous"
+        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+    <key sequence="M1+M2+ARROW_RIGHT"
+        contextId="org.eclipse.xtext.ui.XtextEditorScope"
+        commandId="org.eclipse.xtext.ui.editor.select.next"
+        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+    <key sequence="M1+M2+ARROW_DOWN"
+        contextId="org.eclipse.xtext.ui.XtextEditorScope"
+        commandId="org.eclipse.xtext.ui.editor.select.last"
         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
   </extension>
   <extension
@@ -204,14 +265,6 @@
       </specification>
    </extension>
    
-   	<!-- find references -->
-	<extension point="org.eclipse.ui.commands">
-		<command 
-			id="org.eclipse.xtext.ui.editor.FindReferences"
-			name="%FindReferencesCommand_name"
-			description="%FindReferencesCommand_description">
-		</command>
-	</extension>
 	<extension point="org.eclipse.ui.bindings">
 		<key
 			contextId="org.eclipse.xtext.ui.XtextEditorScope"
@@ -230,14 +283,6 @@
 			sequence="F3"
 			commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
 		</key>
-	</extension>
-	<extension
-		point="org.eclipse.ui.commands">
-		<command
-			id="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration"
-			name="%OpenDeclarationCommand_name"
-			description="%OpenDeclarationCommand_description">
-		</command>
 	</extension>
 	<extension
 		point="org.eclipse.ui.menus">
@@ -260,16 +305,7 @@
       	schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" 
       	contextId="org.eclipse.xtext.ui.XtextEditorScope"/>
     </extension>
-    <extension
-		point="org.eclipse.ui.commands">
-		<command
-			id="org.eclipse.xtext.ui.refactoring.RenameElement"
-			name="%RenameElementCommand_name"
-			description="%RenameElementCommand_description">
-		</command>
-	</extension>
-	
-	<!-- mark occurences -->
+    <!-- mark occurences -->
 	<extension
          point="org.eclipse.ui.editors.annotationTypes">
       <type
