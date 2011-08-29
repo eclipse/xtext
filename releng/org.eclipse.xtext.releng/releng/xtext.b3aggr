@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<aggregator:Aggregation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:aggregator="http://www.eclipse.org/b3/2011/aggregator/1.1.0" label="Xtext to Maven" mavenResult="true">
-  <validationSets label="Xtext to Maven">
-    <contributions description="Xtext Nightly p2 repository" label="Xtext">
-      <repositories location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/nightly"/>
-    </contributions>
-    <validationRepositories location="http://download.eclipse.org/releases/helios"/>
-  </validationSets>
+<aggregator:Aggregator xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:aggregator="http://www.eclipse.org/b3/2010/aggregator/1.0.0" label="Xtext to Maven" mavenResult="true">
   <configurations operatingSystem="macosx" windowSystem="cocoa" architecture="x86_64"/>
-</aggregator:Aggregation>
+  <contributions label="Xtext">
+    <repositories enabled="false" location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/nightly"/>
+    <repositories location="/Users/huebner/build2/final" nature="maven2"/>
+    <repositories enabled="false" location="/Users/huebner/.m2/repository" nature="maven2"/>
+  </contributions>
+  <validationRepositories location="http://download.eclipse.org/releases/helios"/>
+</aggregator:Aggregator>
