@@ -6,10 +6,11 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: %providerName
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.xtext.tests;bundle-version="1.0.0",
- org.eclipse.xtext.example.fowlerdsl;bundle-version="1.0.0",
  org.eclipse.xtext.ui.tests;bundle-version="1.0.0",
+ org.eclipse.xtext.example.fowlerdsl;bundle-version="1.0.0",
  org.eclipse.xtext.example.domainmodel;bundle-version="1.0.0",
  org.eclipse.xtext.example.ecoredsl;bundle-version="1.0.0",
+ org.eclipse.xtext.example.arithmetics;bundle-version="1.0.0",
  org.eclipse.emf.mwe.core;bundle-version="1.0.0",
  org.eclipse.emf.mwe.utils;bundle-version="1.0.0",
  org.eclipse.xtext.builder.tests;bundle-version="1.0.0",
@@ -17,6 +18,5 @@ Require-Bundle: org.eclipse.xtext.tests;bundle-version="1.0.0",
  org.eclipse.emf.codegen;bundle-version="2.5.0",
  org.eclipse.emf.codegen.ecore;bundle-version="2.5.0",
  com.google.collect;bundle-version="1.0.0",
- org.eclipse.emf.mwe2.launch;bundle-version="1.0.0",
- org.eclipse.xtext.example.arithmetics;bundle-version="1.0.0"
+ org.eclipse.emf.mwe2.launch;bundle-version="1.0.0";resolution:=optional
 Import-Package: org.apache.log4j;version="1.2.15"

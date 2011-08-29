@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<aggregator:Aggregation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:aggregator="http://www.eclipse.org/b3/2011/aggregator/1.1.0" label="Xtext to Maven">
+<aggregator:Aggregation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:aggregator="http://www.eclipse.org/b3/2011/aggregator/1.1.0" label="Xtext to Maven" mavenResult="true">
   <validationSets label="Xtext to Maven">
     <contributions description="Xtext Nightly p2 repository" label="Xtext">
       <repositories location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/nightly"/>
     </contributions>
-    <contributions label="Helios 3.6">
-      <repositories location="http://download.eclipse.org/releases/helios" mirrorArtifacts="false">
-        <bundles name="org.eclipse.emf.ecore" versionRange="2.6.1.v20100914-1218"/>
-      </repositories>
-    </contributions>
+    <validationRepositories location="http://download.eclipse.org/releases/helios"/>
   </validationSets>
   <configurations operatingSystem="macosx" windowSystem="cocoa" architecture="x86_64"/>
 </aggregator:Aggregation>
