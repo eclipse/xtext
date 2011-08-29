@@ -67,7 +67,7 @@ public class RenameElementHandler extends AbstractHandler {
 		return null;
 	}
 
-	protected IRenameElementContext createRenameElementContext(EObject targetElement, final XtextEditor editor,
+	public IRenameElementContext createRenameElementContext(EObject targetElement, final XtextEditor editor,
 			final ITextSelection selection, XtextResource resource) {
 		final URI targetElementURI = EcoreUtil2.getNormalizedURI(targetElement);
 		IRenameElementContext.Impl renameElementContext = new IRenameElementContext.Impl(targetElementURI,

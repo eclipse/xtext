@@ -14,6 +14,8 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.xtext.common.types.TypesPackage;
 
+import org.eclipse.xtext.common.types.impl.TypesPackageImpl;
+
 import org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.ContentAssistTestLanguageFactory;
 import org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.ContentAssistTestLanguagePackage;
 import org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.Import;
@@ -97,14 +99,16 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
 
     isInited = true;
 
-    // Initialize simple dependencies
-    TypesPackage.eINSTANCE.eClass();
+    // Obtain or create and register interdependencies
+    TypesPackageImpl theTypesPackage = (TypesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI) instanceof TypesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI) : TypesPackage.eINSTANCE);
 
     // Create package meta-data objects
     theContentAssistTestLanguagePackage.createPackageContents();
+    theTypesPackage.createPackageContents();
 
     // Initialize created meta-data
     theContentAssistTestLanguagePackage.initializePackageContents();
+    theTypesPackage.initializePackageContents();
 
     // Mark meta-data to indicate it can't be changed
     theContentAssistTestLanguagePackage.freeze();
