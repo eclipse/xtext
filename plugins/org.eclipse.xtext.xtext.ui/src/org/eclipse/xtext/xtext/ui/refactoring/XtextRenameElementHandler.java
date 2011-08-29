@@ -33,7 +33,7 @@ public class XtextRenameElementHandler extends RenameElementHandler {
 	private RuleOverrideUtil ruleOverrideUtil;
 	
 	@Override
-	protected IRenameElementContext createRenameElementContext(EObject targetElement, XtextEditor editor,
+	public IRenameElementContext createRenameElementContext(EObject targetElement, XtextEditor editor,
 			ITextSelection selection, XtextResource resource) {
 		if(targetElement instanceof AbstractRule) {
 			AbstractRule targetRule = (AbstractRule) targetElement;
