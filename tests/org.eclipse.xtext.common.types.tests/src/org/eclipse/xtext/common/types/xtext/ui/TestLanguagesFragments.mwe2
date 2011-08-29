@@ -38,4 +38,7 @@ CompositeGeneratorFragment {
 	fragment = parser.antlr.XtextAntlrUiGeneratorFragment {
 		options = auto-inject {}
 	}
+	fragment = refactoring.RefactorElementNameFragment {
+		useJdtRefactoring = true
+	}
 }
