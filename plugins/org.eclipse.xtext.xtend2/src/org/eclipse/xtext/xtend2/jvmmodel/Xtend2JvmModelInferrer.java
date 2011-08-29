@@ -33,6 +33,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
@@ -65,6 +66,9 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 	@Inject
 	private DispatchingSupport dispatchingSupport;
 	
+	@Inject
+	private IdentifiableSimpleNameProvider simpleNameProvider;
+	
 	public List<? extends JvmDeclaredType> inferJvmModel(EObject xtendFile) {
 		associator.disassociate(xtendFile);
 		final XtendFile xtendFile2 = (XtendFile)xtendFile;
@@ -87,8 +91,7 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 		for (JvmTypeParameter typeParameter : source.getTypeParameters())
 			target.getTypeParameters().add(EcoreUtil2.cloneWithProxies(typeParameter));
 		for (XtendMember member : source.getMembers()) {
-			if (member instanceof XtendField && ((XtendField) member).getName()!=null
-				|| member instanceof XtendFunction && ((XtendFunction) member).getName()!=null) {
+			if (member instanceof XtendField || member instanceof XtendFunction && ((XtendFunction) member).getName()!=null) {
 				transform(member, target);
 			}
 		}
@@ -171,13 +174,17 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			return target;
 		} else if (sourceMember instanceof XtendField) {
 			XtendField dep = (XtendField) sourceMember;
-			JvmField field = typesFactory.createJvmField();
-			container.getMembers().add(field);
-			associator.associatePrimary(dep, field);
-			field.setVisibility(JvmVisibility.PRIVATE);
-			field.setSimpleName(dep.getName());
-			field.setType(EcoreUtil2.cloneWithProxies(dep.getType()));
-			return field;
+			if (dep.isExtension() || dep.getName() != null) {
+				JvmField field = typesFactory.createJvmField();
+				container.getMembers().add(field);
+				associator.associatePrimary(dep, field);
+				field.setVisibility(JvmVisibility.PRIVATE);
+				field.setSimpleName(simpleNameProvider.getSimpleName(dep));
+				field.setType(EcoreUtil2.cloneWithProxies(dep.getType()));
+				return field;
+			} else {
+				return null;
+			}
 		}
 		throw new IllegalArgumentException("Cannot transform " + notNull(sourceMember) + " to a JvmMember");
 	}

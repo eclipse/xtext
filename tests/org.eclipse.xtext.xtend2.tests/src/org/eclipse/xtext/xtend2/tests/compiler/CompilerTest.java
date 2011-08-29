@@ -1074,7 +1074,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"    (arg as CharSequence).generic()" +
 				"  }" +
 		"}");
-		assertEquals(ExtensionMethods.GENERIC_T,apply(class1,"foo","x"));
+		assertEquals(ExtensionMethods.GENERIC_T, apply(class1,"foo","x"));
 	}
 	
 	public void testInjectedExtensionMethod_03() throws Exception {
@@ -1087,7 +1087,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"    arg.generic()" +
 				"  }" +
 		"}");
-		assertEquals(ExtensionMethods.GENERIC_STRING,apply(class1,"foo","x"));
+		assertEquals(ExtensionMethods.GENERIC_STRING, apply(class1,"foo","x"));
 	}
 	
 	public void testInjectedExtensionMethod_04() throws Exception {
@@ -1112,6 +1112,73 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"package x " +
 				"class Y { " +
 				"  @com.google.inject.Inject extension test.ExtensionMethods e" +
+				"  def a(String arg) { " +
+				"    return arg.operator_minus('bar') " +
+				"  } " +
+				"  def b(String arg) { " +
+				"    return (arg as Object).operator_minus('bar') " +
+				"  } " +
+				"  def c(String arg) { " +
+				"    return arg.operator_minus('bar' as Object) " +
+				"  } " +
+				"  def d(String arg) { " +
+				"    return arg.operator_minus('bar' as CharSequence) " +
+				"  } " +
+				"}");
+		assertEquals(ExtensionMethods.OPERATOR_MINUS_STRING_STRING,apply(class1,"a", "foo"));
+		assertEquals(ExtensionMethods.OPERATOR_MINUS_OBJECT_STRING,apply(class1,"b", "foo"));
+		assertEquals(ExtensionMethods.OPERATOR_MINUS_STRING_OBJECT,apply(class1,"c", "foo"));
+		assertEquals(ExtensionMethods.OPERATOR_MINUS_STRING_CHARSEQUENCE,apply(class1,"d", "foo"));
+	}
+	
+	public void testInjectedExtensionMethod_07() throws Exception {
+		Class<?> class1 = compileJavaCode("x.Y",
+				"package x " +
+				"class Y { " +
+				"  @com.google.inject.Inject extension test.ExtensionMethods" +
+				"  " +
+				"  def foo(String arg) { " +
+				"    (arg as CharSequence).generic()" +
+				"  }" +
+		"}");
+		assertEquals(ExtensionMethods.GENERIC_T, apply(class1,"foo","x"));
+	}
+	
+	public void testInjectedExtensionMethod_08() throws Exception {
+		Class<?> class1 = compileJavaCode("x.Y",
+				"package x " +
+				"class Y { " +
+				"  @com.google.inject.Inject extension test.ExtensionMethods" +
+				"  " +
+				"  def foo(String arg) { " +
+				"    arg.generic()" +
+				"  }" +
+		"}");
+		assertEquals(ExtensionMethods.GENERIC_STRING, apply(class1,"foo","x"));
+	}
+	
+	public void testInjectedExtensionMethod_09() throws Exception {
+		Class<?> class1 = compileJavaCode("x.Y",
+				"package x " +
+				"class Y { " +
+				"  @com.google.inject.Inject extension test.ExtensionMethods" +
+				"  def foo(String arg) { " +
+				"    return arg - 'bar' " +
+				"  } " +
+				"}");
+		assertEquals("operator_minus(String,String)",apply(class1,"foo","foobar"));
+	}
+	
+	public void testInjectedExtensionMethod_10() throws Exception {
+		Class<?> class1 = compileJavaCode("x.Y","package x class Y { @com.google.inject.Inject extension test.ExtensionMethods def foo(String arg) { return arg.operator_minus('bar') } }");
+		assertEquals(ExtensionMethods.OPERATOR_MINUS_STRING_STRING,apply(class1,"foo", "foobar"));
+	}
+	
+	public void testInjectedExtensionMethod_11() throws Exception {
+		Class<?> class1 = compileJavaCode("x.Y",
+				"package x " +
+				"class Y { " +
+				"  @com.google.inject.Inject extension test.ExtensionMethods" +
 				"  def a(String arg) { " +
 				"    return arg.operator_minus('bar') " +
 				"  } " +

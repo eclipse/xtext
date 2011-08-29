@@ -45,6 +45,7 @@ import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
+import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xtend2.dispatch.DispatchingSupport;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
@@ -92,6 +93,9 @@ public class Xtend2Compiler extends XbaseCompiler {
 	
 	@Inject
 	private AnnotationCompiler annotationCompiler; 
+	
+	@Inject
+	private IdentifiableSimpleNameProvider simpleNameProvider;
 
 	/**
 	 * Compile the given {@link XtendFile file} to java code and write
@@ -175,7 +179,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 		appendable.append("\nprivate ");
 		serialize(field.getType(), field, appendable);
 		appendable.append(" ");
-		appendable.append(appendable.declareVariable(field, field.getName())).append(";");
+		appendable.append(appendable.declareVariable(field, simpleNameProvider.getSimpleName(field))).append(";");
 	}
 
 	protected void generateAnnotations(XtendAnnotationTarget annotationTarget, IAppendable appendable) {

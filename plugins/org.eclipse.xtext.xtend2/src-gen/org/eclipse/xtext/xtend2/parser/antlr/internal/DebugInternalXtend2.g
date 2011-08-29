@@ -42,7 +42,10 @@ ruleClass :
 // Rule Member
 ruleMember :
 	ruleXAnnotation* (
-		'extension'? ruleJvmTypeReference ruleValidID |
+		(
+			'extension' ruleJvmTypeReference ruleValidID? |
+			ruleJvmTypeReference ruleValidID
+		) |
 		(
 			'def' |
 			'override'

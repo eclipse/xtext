@@ -7,7 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.featurecalls;
 
+import java.util.List;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendField;
@@ -25,7 +35,32 @@ public class Xtend2IdentifiableSimpleNameProvider extends IdentifiableSimpleName
 		} else if (element instanceof XtendFunction) {
 			return ((XtendFunction) element).getName();
 		} else if (element instanceof XtendField) {
-			return ((XtendField) element).getName();
+			XtendField field = (XtendField) element;
+			if (field.getName() != null) {
+				return field.getName();
+			}
+			// TODO override in UI context where a IJavaProject is available
+			// and use JdtVariabpleCompletions
+			JvmTypeReference type = field.getType();
+			if (type != null) {
+				while(type instanceof JvmGenericArrayTypeReference) {
+					type = ((JvmGenericArrayTypeReference) type).getComponentType();
+				}
+				if (type instanceof JvmParameterizedTypeReference) {
+					List<INode> nodes = NodeModelUtils.findNodesForFeature(type, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
+					if (!nodes.isEmpty()) {
+						String typeName = nodes.get(0).getText().trim();
+						int lastDot = typeName.lastIndexOf('.');
+						if (lastDot != -1) {
+							typeName = typeName.substring(lastDot + 1); 
+						}
+						XtendClass clazz = (XtendClass) field.eContainer();
+						String result = "_" + Strings.toFirstLower(typeName) + clazz.getMembers().indexOf(field);
+						return result;
+					}
+				}
+			}
+			return null;
 		}
 		return super.getSimpleName(element);
 	}

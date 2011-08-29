@@ -38,7 +38,9 @@ Member returns XtendMember:
 	{XtendMember} annotations+=XAnnotation* 
 	(
 		{XtendField.annotationInfo = current}	
-		(extension?='extension')? type=JvmTypeReference name=ValidID
+		( extension?='extension' type=JvmTypeReference name=ValidID?
+		| type=JvmTypeReference name=ValidID
+		)
 		
 	|	{XtendFunction.annotationInfo = current}
 		('def' | override?='override') (dispatch?='dispatch'?) ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
