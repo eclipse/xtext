@@ -280,12 +280,19 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
 		private final Group cGroup_2_0 = (Group)cAlternatives_2.eContents().get(0);
 		private final Action cXtendFieldAnnotationInfoAction_2_0_0 = (Action)cGroup_2_0.eContents().get(0);
-		private final Assignment cExtensionAssignment_2_0_1 = (Assignment)cGroup_2_0.eContents().get(1);
-		private final Keyword cExtensionExtensionKeyword_2_0_1_0 = (Keyword)cExtensionAssignment_2_0_1.eContents().get(0);
-		private final Assignment cTypeAssignment_2_0_2 = (Assignment)cGroup_2_0.eContents().get(2);
-		private final RuleCall cTypeJvmTypeReferenceParserRuleCall_2_0_2_0 = (RuleCall)cTypeAssignment_2_0_2.eContents().get(0);
-		private final Assignment cNameAssignment_2_0_3 = (Assignment)cGroup_2_0.eContents().get(3);
-		private final RuleCall cNameValidIDParserRuleCall_2_0_3_0 = (RuleCall)cNameAssignment_2_0_3.eContents().get(0);
+		private final Alternatives cAlternatives_2_0_1 = (Alternatives)cGroup_2_0.eContents().get(1);
+		private final Group cGroup_2_0_1_0 = (Group)cAlternatives_2_0_1.eContents().get(0);
+		private final Assignment cExtensionAssignment_2_0_1_0_0 = (Assignment)cGroup_2_0_1_0.eContents().get(0);
+		private final Keyword cExtensionExtensionKeyword_2_0_1_0_0_0 = (Keyword)cExtensionAssignment_2_0_1_0_0.eContents().get(0);
+		private final Assignment cTypeAssignment_2_0_1_0_1 = (Assignment)cGroup_2_0_1_0.eContents().get(1);
+		private final RuleCall cTypeJvmTypeReferenceParserRuleCall_2_0_1_0_1_0 = (RuleCall)cTypeAssignment_2_0_1_0_1.eContents().get(0);
+		private final Assignment cNameAssignment_2_0_1_0_2 = (Assignment)cGroup_2_0_1_0.eContents().get(2);
+		private final RuleCall cNameValidIDParserRuleCall_2_0_1_0_2_0 = (RuleCall)cNameAssignment_2_0_1_0_2.eContents().get(0);
+		private final Group cGroup_2_0_1_1 = (Group)cAlternatives_2_0_1.eContents().get(1);
+		private final Assignment cTypeAssignment_2_0_1_1_0 = (Assignment)cGroup_2_0_1_1.eContents().get(0);
+		private final RuleCall cTypeJvmTypeReferenceParserRuleCall_2_0_1_1_0_0 = (RuleCall)cTypeAssignment_2_0_1_1_0.eContents().get(0);
+		private final Assignment cNameAssignment_2_0_1_1_1 = (Assignment)cGroup_2_0_1_1.eContents().get(1);
+		private final RuleCall cNameValidIDParserRuleCall_2_0_1_1_1_0 = (RuleCall)cNameAssignment_2_0_1_1_1.eContents().get(0);
 		private final Group cGroup_2_1 = (Group)cAlternatives_2.eContents().get(1);
 		private final Action cXtendFunctionAnnotationInfoAction_2_1_0 = (Action)cGroup_2_1.eContents().get(0);
 		private final Alternatives cAlternatives_2_1_1 = (Alternatives)cGroup_2_1.eContents().get(1);
@@ -325,18 +332,20 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cExpressionRichStringParserRuleCall_2_1_10_1_0 = (RuleCall)cExpressionAssignment_2_1_10_1.eContents().get(0);
 		
 		//Member returns XtendMember:
-		//	{XtendMember} annotations+=XAnnotation* ({XtendField.annotationInfo=current} extension?="extension"?
-		//	type=JvmTypeReference name=ValidID | {XtendFunction.annotationInfo=current} ("def" | override?="override")
-		//	dispatch?="dispatch"? ("<" typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")?
-		//	returnType=JvmTypeReference? createExtensionInfo=CreateExtensionInfo? name=ValidID "(" (parameters+=Parameter (","
-		//	parameters+=Parameter)*)? ")" (expression=XBlockExpression | expression=RichString)?);
+		//	{XtendMember} annotations+=XAnnotation* ({XtendField.annotationInfo=current} (extension?="extension"
+		//	type=JvmTypeReference name=ValidID? | type=JvmTypeReference name=ValidID) | {XtendFunction.annotationInfo=current}
+		//	("def" | override?="override") dispatch?="dispatch"? ("<" typeParameters+=JvmTypeParameter (","
+		//	typeParameters+=JvmTypeParameter)* ">")? returnType=JvmTypeReference? createExtensionInfo=CreateExtensionInfo?
+		//	name=ValidID "(" (parameters+=Parameter ("," parameters+=Parameter)*)? ")" (expression=XBlockExpression |
+		//	expression=RichString)?);
 		public ParserRule getRule() { return rule; }
 
-		//{XtendMember} annotations+=XAnnotation* ({XtendField.annotationInfo=current} extension?="extension"?
-		//type=JvmTypeReference name=ValidID | {XtendFunction.annotationInfo=current} ("def" | override?="override")
-		//dispatch?="dispatch"? ("<" typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")?
-		//returnType=JvmTypeReference? createExtensionInfo=CreateExtensionInfo? name=ValidID "(" (parameters+=Parameter (","
-		//parameters+=Parameter)*)? ")" (expression=XBlockExpression | expression=RichString)?)
+		//{XtendMember} annotations+=XAnnotation* ({XtendField.annotationInfo=current} (extension?="extension"
+		//type=JvmTypeReference name=ValidID? | type=JvmTypeReference name=ValidID) | {XtendFunction.annotationInfo=current}
+		//("def" | override?="override") dispatch?="dispatch"? ("<" typeParameters+=JvmTypeParameter (","
+		//typeParameters+=JvmTypeParameter)* ">")? returnType=JvmTypeReference? createExtensionInfo=CreateExtensionInfo?
+		//name=ValidID "(" (parameters+=Parameter ("," parameters+=Parameter)*)? ")" (expression=XBlockExpression |
+		//expression=RichString)?)
 		public Group getGroup() { return cGroup; }
 
 		//{XtendMember}
@@ -348,36 +357,58 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		//XAnnotation
 		public RuleCall getAnnotationsXAnnotationParserRuleCall_1_0() { return cAnnotationsXAnnotationParserRuleCall_1_0; }
 
-		//{XtendField.annotationInfo=current} extension?="extension"? type=JvmTypeReference name=ValidID |
-		//{XtendFunction.annotationInfo=current} ("def" | override?="override") dispatch?="dispatch"? ("<"
+		//{XtendField.annotationInfo=current} (extension?="extension" type=JvmTypeReference name=ValidID? | type=JvmTypeReference
+		//name=ValidID) | {XtendFunction.annotationInfo=current} ("def" | override?="override") dispatch?="dispatch"? ("<"
 		//typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")? returnType=JvmTypeReference?
 		//createExtensionInfo=CreateExtensionInfo? name=ValidID "(" (parameters+=Parameter ("," parameters+=Parameter)*)? ")"
 		//(expression=XBlockExpression | expression=RichString)?
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
-		//{XtendField.annotationInfo=current} extension?="extension"? type=JvmTypeReference name=ValidID
+		//{XtendField.annotationInfo=current} (extension?="extension" type=JvmTypeReference name=ValidID? | type=JvmTypeReference
+		//name=ValidID)
 		public Group getGroup_2_0() { return cGroup_2_0; }
 
 		//{XtendField.annotationInfo=current}
 		public Action getXtendFieldAnnotationInfoAction_2_0_0() { return cXtendFieldAnnotationInfoAction_2_0_0; }
 
-		//extension?="extension"?
-		public Assignment getExtensionAssignment_2_0_1() { return cExtensionAssignment_2_0_1; }
+		//extension?="extension" type=JvmTypeReference name=ValidID? | type=JvmTypeReference name=ValidID
+		public Alternatives getAlternatives_2_0_1() { return cAlternatives_2_0_1; }
+
+		//extension?="extension" type=JvmTypeReference name=ValidID?
+		public Group getGroup_2_0_1_0() { return cGroup_2_0_1_0; }
+
+		//extension?="extension"
+		public Assignment getExtensionAssignment_2_0_1_0_0() { return cExtensionAssignment_2_0_1_0_0; }
 
 		//"extension"
-		public Keyword getExtensionExtensionKeyword_2_0_1_0() { return cExtensionExtensionKeyword_2_0_1_0; }
+		public Keyword getExtensionExtensionKeyword_2_0_1_0_0_0() { return cExtensionExtensionKeyword_2_0_1_0_0_0; }
 
 		//type=JvmTypeReference
-		public Assignment getTypeAssignment_2_0_2() { return cTypeAssignment_2_0_2; }
+		public Assignment getTypeAssignment_2_0_1_0_1() { return cTypeAssignment_2_0_1_0_1; }
 
 		//JvmTypeReference
-		public RuleCall getTypeJvmTypeReferenceParserRuleCall_2_0_2_0() { return cTypeJvmTypeReferenceParserRuleCall_2_0_2_0; }
+		public RuleCall getTypeJvmTypeReferenceParserRuleCall_2_0_1_0_1_0() { return cTypeJvmTypeReferenceParserRuleCall_2_0_1_0_1_0; }
 
-		//name=ValidID
-		public Assignment getNameAssignment_2_0_3() { return cNameAssignment_2_0_3; }
+		//name=ValidID?
+		public Assignment getNameAssignment_2_0_1_0_2() { return cNameAssignment_2_0_1_0_2; }
 
 		//ValidID
-		public RuleCall getNameValidIDParserRuleCall_2_0_3_0() { return cNameValidIDParserRuleCall_2_0_3_0; }
+		public RuleCall getNameValidIDParserRuleCall_2_0_1_0_2_0() { return cNameValidIDParserRuleCall_2_0_1_0_2_0; }
+
+		//type=JvmTypeReference name=ValidID
+		public Group getGroup_2_0_1_1() { return cGroup_2_0_1_1; }
+
+		//type=JvmTypeReference
+		public Assignment getTypeAssignment_2_0_1_1_0() { return cTypeAssignment_2_0_1_1_0; }
+
+		//JvmTypeReference
+		public RuleCall getTypeJvmTypeReferenceParserRuleCall_2_0_1_1_0_0() { return cTypeJvmTypeReferenceParserRuleCall_2_0_1_1_0_0; }
+
+		//name=ValidID
+		public Assignment getNameAssignment_2_0_1_1_1() { return cNameAssignment_2_0_1_1_1; }
+
+		//ValidID
+		public RuleCall getNameValidIDParserRuleCall_2_0_1_1_1_0() { return cNameValidIDParserRuleCall_2_0_1_1_1_0; }
 
 		//{XtendFunction.annotationInfo=current} ("def" | override?="override") dispatch?="dispatch"? ("<"
 		//typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")? returnType=JvmTypeReference?
@@ -1198,11 +1229,12 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Member returns XtendMember:
-	//	{XtendMember} annotations+=XAnnotation* ({XtendField.annotationInfo=current} extension?="extension"?
-	//	type=JvmTypeReference name=ValidID | {XtendFunction.annotationInfo=current} ("def" | override?="override")
-	//	dispatch?="dispatch"? ("<" typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")?
-	//	returnType=JvmTypeReference? createExtensionInfo=CreateExtensionInfo? name=ValidID "(" (parameters+=Parameter (","
-	//	parameters+=Parameter)*)? ")" (expression=XBlockExpression | expression=RichString)?);
+	//	{XtendMember} annotations+=XAnnotation* ({XtendField.annotationInfo=current} (extension?="extension"
+	//	type=JvmTypeReference name=ValidID? | type=JvmTypeReference name=ValidID) | {XtendFunction.annotationInfo=current}
+	//	("def" | override?="override") dispatch?="dispatch"? ("<" typeParameters+=JvmTypeParameter (","
+	//	typeParameters+=JvmTypeParameter)* ">")? returnType=JvmTypeReference? createExtensionInfo=CreateExtensionInfo?
+	//	name=ValidID "(" (parameters+=Parameter ("," parameters+=Parameter)*)? ")" (expression=XBlockExpression |
+	//	expression=RichString)?);
 	public MemberElements getMemberAccess() {
 		return (pMember != null) ? pMember : (pMember = new MemberElements());
 	}

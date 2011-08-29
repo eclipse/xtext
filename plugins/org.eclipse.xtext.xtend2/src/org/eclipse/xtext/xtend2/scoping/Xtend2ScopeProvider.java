@@ -168,14 +168,14 @@ public class Xtend2ScopeProvider extends XbaseWithAnnotationsScopeProvider {
 			callToThis.setFeature(xtendClass);
 			// injected extensions
 			Iterable<XtendField> iterable = getExtensionDependencies(xtendClass);
-			for (XtendField XtendField : iterable) {
-				JvmIdentifiableElement dependencyImplicitReceiver = findImplicitReceiverFor(XtendField);
+			for (XtendField xtendField : iterable) {
+				JvmIdentifiableElement dependencyImplicitReceiver = findImplicitReceiverFor(xtendField);
 				XMemberFeatureCall callToDependency = XbaseFactory.eINSTANCE.createXMemberFeatureCall();
 				callToDependency.setMemberCallTarget(EcoreUtil2.clone(callToThis));
 				callToDependency.setFeature(dependencyImplicitReceiver);
 				if (dependencyImplicitReceiver != null) {
 					ExtensionMethodsFeaturesProvider extensionFeatureProvider = extensionMethodsFeaturesProvider.get();
-					extensionFeatureProvider.setContext(XtendField.getType());
+					extensionFeatureProvider.setContext(xtendField.getType());
 					insertDescriptionProviders(extensionFeatureProvider, currentContext, callToDependency, result);
 				}
 			}
