@@ -39,7 +39,6 @@ import org.eclipse.xtext.util.CancelIndicator;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -50,12 +49,13 @@ public class ClusteringBuilderState extends AbstractBuilderState {
 	/** Class-wide logger. */
     private static final Logger LOGGER = Logger.getLogger(ClusteringBuilderState.class);
     
-	@Inject
+    private static final int CLUSTER_SIZE = 20;
+
+    @Inject
 	private IResourceServiceProvider.Registry managerRegistry;
 
-	@Inject(optional = true)
-	@Named("org.eclipse.xtext.builder.clustering.ClusteringBuilderState.clusterSize")
-	private int clusterSize = 150;
+	@Inject
+	private IResourceClusteringPolicy clusteringPolicy;
 
 	/**
      * Actually do the build.
@@ -145,12 +145,15 @@ public class ClusteringBuilderState extends AbstractBuilderState {
             subProgress.setWorkRemaining(queue.size() + 2);
             // TODO: How to properly do progress indication with an unknown amount of work? Somehow, the progress bar doesn't
             // advance anymore after this...
-            final List<Delta> newDeltas = new ArrayList<Delta>(clusterSize);
-            final List<Delta> changedDeltas = new ArrayList<Delta>(clusterSize);
-            while (!queue.isEmpty() && newDeltas.size() < clusterSize) {
-                final URI changedURI = queue.poll();
+            final List<Delta> newDeltas = new ArrayList<Delta>(CLUSTER_SIZE);
+            final List<Delta> changedDeltas = new ArrayList<Delta>(CLUSTER_SIZE);
+            while (!queue.isEmpty()) {
                 if (subProgress.isCanceled()) {
                     throw new OperationCanceledException();
+                }
+                final URI changedURI = queue.poll();
+                if (!clusteringPolicy.continueProcessing(resourceSet, changedURI, newDeltas.size())) {
+                	break;
                 }
                 if (!toBeDeleted.contains(changedURI)) {
 	                subProgress.subTask("Updating resource description for " + changedURI.lastSegment() + " (" + index + " of " + (index + queue.size()) + ")");
@@ -264,8 +267,8 @@ public class ClusteringBuilderState extends AbstractBuilderState {
 
             subMonitor.worked(1);
             index++;
-            if (index % clusterSize == 0) {
-                clearResourceSet(resourceSet);
+            if (index % CLUSTER_SIZE == 0) {
+                resourceSet.getResources().clear();
             }
         }
         clearResourceSet(resourceSet);
