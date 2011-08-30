@@ -79,7 +79,8 @@ public class JdtAwareRenameSupportFactory extends Factory {
 		}
 
 		protected Shell getShell() {
-			return Display.getDefault().getActiveShell();
+			Shell activeShell = Display.getDefault().getActiveShell();
+			return activeShell != null ? activeShell : Display.getDefault().getShells()[0];
 		}
 	}
 }
