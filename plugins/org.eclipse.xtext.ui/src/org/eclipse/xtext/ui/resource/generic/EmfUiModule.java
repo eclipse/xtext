@@ -23,9 +23,14 @@ import org.eclipse.xtext.ui.editor.LanguageSpecificURIEditorOpener;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 import org.eclipse.xtext.ui.label.InjectableAdapterFactoryLabelProvider;
 import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
+import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
+import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameRefactoringProvider;
+import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.EmfResourceReferenceUpdater;
 import org.eclipse.xtext.ui.refactoring.impl.EmfResourceRenameStrategy;
+import org.eclipse.xtext.ui.refactoring.ui.DefaultRenameSupport;
+import org.eclipse.xtext.ui.refactoring.ui.IRenameSupport;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.SimpleResourceSetProvider;
 
@@ -99,5 +104,19 @@ public class EmfUiModule extends AbstractGenericModule {
 	
 	public Class<? extends IReferenceUpdater> bindIReferenceUpdater() {
 		return EmfResourceReferenceUpdater.class;
+	}
+	
+	/**
+	 * @since 2.1
+	 */
+	public Class<? extends IRenameSupport.Factory> bindIRenameSupport$Factory() {
+		return DefaultRenameSupport.Factory.class;
+	}
+	
+	/**
+	 * @since 2.1
+	 */
+	public Class<? extends IRenameRefactoringProvider> bindIRenameRefactoringProvider() {
+		return DefaultRenameRefactoringProvider.class;
 	}
 }
