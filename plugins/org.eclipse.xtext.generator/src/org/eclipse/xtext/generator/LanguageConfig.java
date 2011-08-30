@@ -61,6 +61,8 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 
 	private List<String> fileExtensions = new ArrayList<String>();
 	
+	private List<String> loadedResources = new ArrayList<String>();
+	
 	private ResourceSet forcedResourceSet = null;
 	
 	/**
@@ -76,7 +78,21 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 	public ResourceSet getForcedResourceSet() {
 		return forcedResourceSet;
 	}
+	
+	/**
+	 * @since 2.1
+	 */
+	public void addLoadedResource(String uri) {
+		loadedResources.add(uri);
+	}
 
+	/**
+	 * @since 2.1
+	 */
+	public List<String> getLoadedResources() {
+		return loadedResources;
+	}
+	
 	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		if (LOG.isInfoEnabled()) {
@@ -136,9 +152,12 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 			this.fragments.add(0, new ImplicitUiFragment(getFileExtensions(getGrammar())));
 		this.fragments.add(0, new ImplicitRuntimeFragment());
 	}
-
+	
 	public void setUri(String uri) {
 		ResourceSet rs = forcedResourceSet != null ? forcedResourceSet : new XtextResourceSet();
+		for(String loadedResource: loadedResources) {
+			rs.getResource(URI.createURI(loadedResource), true);
+		}
 		XtextResource resource = (XtextResource) rs.getResource(URI.createURI(uri), true);
 		if (resource.getContents().isEmpty()) {
 			throw new IllegalArgumentException("Couldn't load grammar for '" + uri + "'.");
