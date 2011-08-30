@@ -141,7 +141,7 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 	}
 
 	@Override
-	public Class<? extends DefaultRenameElementHandler> bindRenameElementHandler() {
+	public Class<? extends DefaultRenameElementHandler> bindIRenameElementHandler() {
 		return Xtend2RenameElementHandler.class;
 	}
 	
