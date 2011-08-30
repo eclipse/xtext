@@ -201,7 +201,7 @@
    	<!-- Rename Refactoring -->
 	<extension point="org.eclipse.ui.handlers">
 		<handler 
-			class="org.eclipse.xtext.xtend2.ui.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RenameElementHandler"
+			class="org.eclipse.xtext.xtend2.ui.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler"
 			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
 			<activeWhen>
 				<reference
@@ -222,19 +222,6 @@
             </visibleWhen>
          </command>
       </menuContribution>
-   </extension>
-   <extension
-         point="org.eclipse.ltk.core.refactoring.renameParticipants">
-      <renameParticipant
-            class="org.eclipse.xtext.xtend2.ui.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JDTRenamePartcipant"
-            id="org.eclipse.xtext.xtend2.Xtend2.jdtRenameParticipant"
-            name="Xtend2 rename participant">
-         <enablement>
-         	<with variable="element">
-        		<instanceof value="org.eclipse.jdt.core.IMember"/>
-        	</with>
-        </enablement>
-      </renameParticipant>
    </extension>
 
 

@@ -5,16 +5,13 @@
     nsURI="http://www.eclipse.org/xtext/example/fowlerdsl/Statemachine" nsPrefix="statemachine">
   <eClassifiers xsi:type="ecore:EClass" name="Statemachine">
     <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Event"
-        containment="true"/>
+        eType="#//Event" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="resetEvents" unique="false"
-        upperBound="-1" eType="ecore:EClass platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Event"/>
+        upperBound="-1" eType="#//Event"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="commands" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Command"
-        containment="true"/>
+        eType="#//Command" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="states" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//State"
-        containment="true"/>
+        eType="#//State" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Event">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -27,13 +24,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="State">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="actions" unique="false"
-        upperBound="-1" eType="ecore:EClass platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Command"/>
+        upperBound="-1" eType="#//Command"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Transition"
-        containment="true"/>
+        eType="#//Transition" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Transition">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="event" eType="ecore:EClass platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Event"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="ecore:EClass platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="event" eType="#//Event"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//State"/>
   </eClassifiers>
 </ecore:EPackage>

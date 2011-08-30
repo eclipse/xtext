@@ -51,31 +51,31 @@ public class AbstractStatemachineSemanticSequencer extends AbstractSemanticSeque
 		if(semanticObject.eClass().getEPackage() == StatemachinePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case StatemachinePackage.COMMAND:
 				if(context == grammarAccess.getCommandRule()) {
-					sequence_Command_Command(context, (Command) semanticObject); 
+					sequence_Command(context, (Command) semanticObject); 
 					return; 
 				}
 				else break;
 			case StatemachinePackage.EVENT:
 				if(context == grammarAccess.getEventRule()) {
-					sequence_Event_Event(context, (Event) semanticObject); 
+					sequence_Event(context, (Event) semanticObject); 
 					return; 
 				}
 				else break;
 			case StatemachinePackage.STATE:
 				if(context == grammarAccess.getStateRule()) {
-					sequence_State_State(context, (State) semanticObject); 
+					sequence_State(context, (State) semanticObject); 
 					return; 
 				}
 				else break;
 			case StatemachinePackage.STATEMACHINE:
 				if(context == grammarAccess.getStatemachineRule()) {
-					sequence_Statemachine_Statemachine(context, (Statemachine) semanticObject); 
+					sequence_Statemachine(context, (Statemachine) semanticObject); 
 					return; 
 				}
 				else break;
 			case StatemachinePackage.TRANSITION:
 				if(context == grammarAccess.getTransitionRule()) {
-					sequence_Transition_Transition(context, (Transition) semanticObject); 
+					sequence_Transition(context, (Transition) semanticObject); 
 					return; 
 				}
 				else break;
@@ -91,7 +91,7 @@ public class AbstractStatemachineSemanticSequencer extends AbstractSemanticSeque
 	 *    name[1, 1]
 	 *    code[1, 1]
 	 */
-	protected void sequence_Command_Command(EObject context, Command semanticObject) {
+	protected void sequence_Command(EObject context, Command semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, StatemachinePackage.Literals.COMMAND__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, StatemachinePackage.Literals.COMMAND__NAME));
@@ -114,7 +114,7 @@ public class AbstractStatemachineSemanticSequencer extends AbstractSemanticSeque
 	 *    name[1, 1]
 	 *    code[1, 1]
 	 */
-	protected void sequence_Event_Event(EObject context, Event semanticObject) {
+	protected void sequence_Event(EObject context, Event semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, StatemachinePackage.Literals.EVENT__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, StatemachinePackage.Literals.EVENT__NAME));
@@ -138,7 +138,7 @@ public class AbstractStatemachineSemanticSequencer extends AbstractSemanticSeque
 	 *    actions[0, *]
 	 *    transitions[0, *]
 	 */
-	protected void sequence_State_State(EObject context, State semanticObject) {
+	protected void sequence_State(EObject context, State semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -153,7 +153,7 @@ public class AbstractStatemachineSemanticSequencer extends AbstractSemanticSeque
 	 *    commands[0, *]
 	 *    states[0, *]
 	 */
-	protected void sequence_Statemachine_Statemachine(EObject context, Statemachine semanticObject) {
+	protected void sequence_Statemachine(EObject context, Statemachine semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -166,7 +166,7 @@ public class AbstractStatemachineSemanticSequencer extends AbstractSemanticSeque
 	 *    event[1, 1]
 	 *    state[1, 1]
 	 */
-	protected void sequence_Transition_Transition(EObject context, Transition semanticObject) {
+	protected void sequence_Transition(EObject context, Transition semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, StatemachinePackage.Literals.TRANSITION__EVENT) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, StatemachinePackage.Literals.TRANSITION__EVENT));

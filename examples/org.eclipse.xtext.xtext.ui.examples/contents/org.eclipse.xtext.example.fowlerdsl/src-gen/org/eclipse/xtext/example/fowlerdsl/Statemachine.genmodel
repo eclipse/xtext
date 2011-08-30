@@ -8,29 +8,29 @@
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.example.fowlerdsl.edit"
     editorPluginID="org.eclipse.xtext.example.fowlerdsl.editor">
   <genPackages prefix="Statemachine" basePackage="org.eclipse.xtext.example.fowlerdsl"
-      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#/">
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Statemachine">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Statemachine/events"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Statemachine/resetEvents"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Statemachine/commands"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Statemachine/states"/>
+      disposableProviderFactory="true" ecorePackage="Statemachine.ecore#/">
+    <genClasses ecoreClass="Statemachine.ecore#//Statemachine">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Statemachine.ecore#//Statemachine/events"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Statemachine.ecore#//Statemachine/resetEvents"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Statemachine.ecore#//Statemachine/commands"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Statemachine.ecore#//Statemachine/states"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Event">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Event/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Event/code"/>
+    <genClasses ecoreClass="Statemachine.ecore#//Event">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Statemachine.ecore#//Event/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Statemachine.ecore#//Event/code"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Command">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Command/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Command/code"/>
+    <genClasses ecoreClass="Statemachine.ecore#//Command">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Statemachine.ecore#//Command/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Statemachine.ecore#//Command/code"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//State">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//State/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//State/actions"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//State/transitions"/>
+    <genClasses ecoreClass="Statemachine.ecore#//State">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Statemachine.ecore#//State/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Statemachine.ecore#//State/actions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Statemachine.ecore#//State/transitions"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Transition">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Transition/event"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Transition/state"/>
+    <genClasses ecoreClass="Statemachine.ecore#//Transition">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Statemachine.ecore#//Transition/event"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Statemachine.ecore#//Transition/state"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
