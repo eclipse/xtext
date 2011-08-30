@@ -186,6 +186,7 @@ Workflow {
 				fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragmentsBuilder auto-inject {}
 				fragment = scoping.ImportNamespacesScopingFragment {}
 				fragment = exporting.QualifiedNamesFragment {}
+				fragment = refactoring.RefactorElementNameFragment {}
 			}
 		}
 		language = {
@@ -194,6 +195,7 @@ Workflow {
 				fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragmentsBuilder auto-inject {}
 				fragment = scoping.ImportNamespacesScopingFragment {}
 				fragment = exporting.QualifiedNamesFragment {}
+				fragment = refactoring.RefactorElementNameFragment {}
 			}
 		}
 	}
