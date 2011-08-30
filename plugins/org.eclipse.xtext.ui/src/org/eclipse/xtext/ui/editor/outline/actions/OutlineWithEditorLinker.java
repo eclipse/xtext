@@ -93,6 +93,7 @@ public class OutlineWithEditorLinker implements IPropertyChangeListener {
 		treeViewer.removePostSelectionChangedListener(treeListener);
 		treeViewer.removeDoubleClickListener(treeListener);
 		treeListener = null;
+		outlinePage = null;
 	}
 
 	public void setLinkingEnabled(boolean enabled) {
