@@ -130,6 +130,8 @@ public class EObjectAtOffsetHelper {
 			List<INode> nodesForFeature = NodeModelUtils.findNodesForFeature(referenceOwner, crossReference);
 			int currentIndex = 0;
 			for (INode nodeForFeature : nodesForFeature) {
+				if (currentIndex >= listValue.size())
+					return null;
 				if (nodeForFeature.getTotalOffset() <= node.getTotalOffset()
 						&& nodeForFeature.getTotalEndOffset() >= node.getTotalEndOffset())
 					return (EObject) listValue.get(currentIndex);
