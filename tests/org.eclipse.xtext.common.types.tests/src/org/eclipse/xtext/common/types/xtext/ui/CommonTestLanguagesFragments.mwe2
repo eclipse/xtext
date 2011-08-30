@@ -5,12 +5,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-module org.eclipse.xtext.common.types.xtext.ui.TestLanguagesFragments
+module org.eclipse.xtext.common.types.xtext.ui.CommonTestLanguagesFragments
 
 import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
 
-var genModels =""
+var referencedGenModels =""
 var genModel = ""
 var basePackage = ""
 var javaModelDirectory = ""
@@ -37,8 +37,5 @@ CompositeGeneratorFragment {
 	fragment = contentAssist.JavaBasedContentAssistFragment {}
 	fragment = parser.antlr.XtextAntlrUiGeneratorFragment {
 		options = auto-inject {}
-	}
-	fragment = refactoring.RefactorElementNameFragment {
-		useJdtRefactoring = true
 	}
 }
