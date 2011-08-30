@@ -76,8 +76,10 @@ public class XtextResourceSetProvider implements IResourceSetProvider {
 									if (!EcorePlugin.getPlatformResourceMap().containsKey(name)) {
 										String p = "archive:" + file.toURI() + "!/";
 										URI uri = URI.createURI(p);
-										final URI key = URI.createPlatformResourceURI(name + "/", false);
-										hashMap.put(key, uri);
+										final URI platformResourceKey = URI.createPlatformResourceURI(name + "/", false);
+										final URI platformPluginKey = URI.createPlatformPluginURI(name + "/", false);
+										hashMap.put(platformResourceKey, uri);
+										hashMap.put(platformPluginKey, uri);
 									}
 								}
 							}
