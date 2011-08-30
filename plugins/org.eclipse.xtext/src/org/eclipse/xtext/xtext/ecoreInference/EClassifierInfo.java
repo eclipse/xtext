@@ -16,9 +16,13 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Grammar;
@@ -83,12 +87,34 @@ public abstract class EClassifierInfo {
 					&& isAssignableFrom(getEClass(),(EClass) subTypeInfo.getEClassifier());
 		}
 		
-		protected boolean isAssignableFrom(EClass target, EClass candidate) {
-			if (candidate != null && target.isSuperTypeOf(candidate))
+		protected boolean isAssignableFrom(EClass left, EClass right) {
+			if (right != null && left.isSuperTypeOf(right))
 				return true;
 			EClass eObjectType = GrammarUtil.findEObject(grammar);
-			if (target == eObjectType)
+			if (left == eObjectType)
 				return true;
+			if (grammar != null) {
+				Resource grammarResource = grammar.eResource();
+				if (grammarResource != null) {
+					ResourceSet resourceSet = grammarResource.getResourceSet();
+					if (resourceSet != null) {
+						EPackage.Registry registry = resourceSet.getPackageRegistry();
+						if (registry != null) {
+							EPackage ecorePackage = registry.getEPackage(EcorePackage.eNS_URI);
+							if (ecorePackage != null) {
+								EClassifier eObjectFromRegistry = ecorePackage.getEClassifier(EcorePackage.Literals.EOBJECT.getName());
+								if (left == eObjectFromRegistry) {
+									return true;
+								}
+							}
+						}
+					}
+				}
+			}
+			if (right != null && left.getInstanceClass() != null && right.getInstanceClass() != null) {
+				boolean result = left.getInstanceClass().isAssignableFrom(right.getInstanceClass());
+				return result;
+			}
 			return false;
 		}
 
@@ -151,46 +177,53 @@ public abstract class EClassifierInfo {
 				String name, 
 				boolean isMulti, 
 				boolean isContainment,
-				EClassifier featureType,
+				EClassifier expectedType,
 				StringBuilder errorMessage) {
-			EStructuralFeature existingFeature = getEClass().getEStructuralFeature(name);
-			if (existingFeature != null) {
-				boolean many = existingFeature.isMany();
+			EStructuralFeature assignedExistingFeature = getEClass().getEStructuralFeature(name);
+			if (assignedExistingFeature != null) {
+				boolean many = assignedExistingFeature.isMany();
 				if (many == isMulti) {
-					if (featureType instanceof EClass && existingFeature.getEType() instanceof EClass) {
-						EClass expected = (EClass) featureType;
-						EClass actual = (EClass) existingFeature.getEType();
-						boolean result = isAssignableFrom(actual, expected);
+					if (expectedType instanceof EClass && assignedExistingFeature.getEType() instanceof EClass) {
+						EClass castedExpectedType = (EClass) expectedType;
+						EClass castedExistingType = (EClass) assignedExistingFeature.getEType();
+						boolean result = isAssignableFrom(castedExistingType, castedExpectedType);
 						if (!result) {
-							errorMessage.append("The existing reference '" + name + "' has an incompatible type '" + actual.getName() + "'.");
+							// TODO check for same name / nsURI pair but different resource uris
+							errorMessage.append("The existing reference '" + name + "' has an incompatible type " + classifierToString(castedExistingType) + ". " +
+									"The expected type is " + classifierToString(castedExpectedType) + ".");
 							return result;
 						}
-						result &= isContainment == ((EReference) existingFeature).isContainment();
+						result &= isContainment == ((EReference) assignedExistingFeature).isContainment();
 						if (!result) {
-							errorMessage.append("The existing reference '" + name + "' has a different containment status.");
+							if (isContainment)
+								errorMessage.append("The existing reference '" + name + "' is not a containment reference.");
+							else
+								errorMessage.append("The existing reference '" + name + "' is a containment reference.");
 							return result;
 						}
-						result &= !((EReference) existingFeature).isContainer();
+						result &= !((EReference) assignedExistingFeature).isContainer();
 						if (!result) {
 							errorMessage.append("The existing reference '" + name + "' is a container reference.");
 							return result;
 						}
 						return result;
-					} else if (featureType instanceof EDataType && existingFeature.getEType() instanceof EDataType) {
-						EDataType expected = (EDataType) featureType;
-						EDataType actual = (EDataType) existingFeature.getEType();
-						Class<?> expectedInstanceClass = ReflectionUtil.getObjectType(expected.getInstanceClass());
-						Class<?> actualInstanceClass = ReflectionUtil.getObjectType(actual.getInstanceClass());
-						boolean result = actual.equals(expected) || expectedInstanceClass != null && actualInstanceClass != null
-								&& actualInstanceClass.isAssignableFrom(expectedInstanceClass);
+					} else if (expectedType instanceof EDataType && assignedExistingFeature.getEType() instanceof EDataType) {
+						EDataType castedExpectedType = (EDataType) expectedType;
+						EDataType castedExistingType = (EDataType) assignedExistingFeature.getEType();
+						Class<?> expectedInstanceClass = ReflectionUtil.getObjectType(castedExpectedType.getInstanceClass());
+						Class<?> existingInstanceClass = ReflectionUtil.getObjectType(castedExistingType.getInstanceClass());
+						boolean result = castedExistingType.equals(castedExpectedType) || expectedInstanceClass != null && existingInstanceClass != null
+								&& existingInstanceClass.isAssignableFrom(expectedInstanceClass);
 						if (!result) {
-							errorMessage.append("The existing attribute '" + name + "' has an incompatible type '" + actual.getName() + "'.");
+							errorMessage.append("The existing attribute '" + name + "' has an incompatible type " + classifierToString(castedExistingType) + ". " +
+									"The expected type is " + classifierToString(castedExpectedType) + ".");
 						}
 						return result;
 					} else {
 						String msgPart = " has no type.";
-						if (existingFeature.getEType() != null)
-							msgPart = " has an incompatible type '" + existingFeature.getEType().getName()+"'.";
+						if (assignedExistingFeature.getEType() != null)
+							msgPart = " has an incompatible type " + classifierToString(assignedExistingFeature.getEType())+ ". " +
+									"The expected type is " + classifierToString(expectedType) + ".";
 						errorMessage.append("The existing feature '" + name + "'" + msgPart);
 					}
 				} else {
@@ -200,6 +233,13 @@ public abstract class EClassifierInfo {
 				errorMessage.append("The type '" + getEClass().getName() + "' does not have a feature '" + name + "'.");
 			}
 			return false;
+		}
+		
+		private String classifierToString(EClassifier classifier) {
+			String result = "'" + classifier.getName() + "'";
+			if (classifier.getInstanceTypeName() != null)
+				result += " [" + classifier.getInstanceTypeName() + "]";
+			return result;
 		}
 		
 		public boolean isFeatureSemanticallyEqualApartFromType(EStructuralFeature f1, EStructuralFeature f2) {
@@ -257,7 +297,7 @@ public abstract class EClassifierInfo {
 				StringBuilder errorMessage = new StringBuilder();
 				if (!containsCompatibleFeature(featureName, isMultivalue, isContainment, featureClassifier, errorMessage)) {
 					throw new TransformationException(TransformationErrorCode.CannotCreateTypeInSealedMetamodel, 
-							"Cannot find compatible feature "+featureName+" in sealed EClass "+getEClass().getName()+" from imported package "+getEClass().getEPackage().getNsURI()+". " + errorMessage.toString(), 
+							"Cannot find compatible feature "+featureName+" in sealed EClass "+getEClass().getName()+" from imported package "+getEClass().getEPackage().getNsURI()+": " + errorMessage.toString(), 
 							grammarElement);
 				}
 				return true;

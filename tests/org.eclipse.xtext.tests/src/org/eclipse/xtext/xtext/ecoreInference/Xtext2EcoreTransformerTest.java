@@ -42,6 +42,8 @@ import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.xtext.XtextLinker;
 import org.eclipse.xtext.xtext.XtextLinker.PackageRemover;
 
+import com.google.common.base.Joiner;
+
 /**
  * @author Jan Köhnlein - Initial contribution and API
  * @author Heiko Behrens
@@ -1950,5 +1952,16 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertNotNull(typeD.getEStructuralFeature("b"));
 		assertNotNull(typeD.getEStructuralFeature("c"));
 		assertEquals(3, typeD.getEStructuralFeatures().size());
+	}
+	
+	public void testEcoreReference_01() throws Exception {
+		XtextResourceSet resourceSet = new XtextResourceSet();
+		resourceSet.setClasspathURIContext(getClass());
+		assertFalse(resourceSet.getResource(URI.createURI("platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore"), true).getContents().isEmpty());
+		assertFalse(resourceSet.getResource(URI.createURI("platform:/plugin/org.eclipse.xtext.tests/src/org/eclipse/xtext/metamodelreferencing/tests/EcorePerNsURI.ecore"), true).getContents().isEmpty());
+		assertFalse(resourceSet.getResource(URI.createURI("platform:/plugin/org.eclipse.xtext.tests/src/org/eclipse/xtext/metamodelreferencing/tests/EcorePerPlatformResource.ecore"), true).getContents().isEmpty());
+		assertFalse(resourceSet.getResource(URI.createURI("platform:/plugin/org.eclipse.xtext.tests/src/org/eclipse/xtext/metamodelreferencing/tests/EcorePerPlatformPlugin.ecore"), true).getContents().isEmpty());
+		XtextResource resource = (XtextResource) resourceSet.getResource(URI.createURI("classpath:/org/eclipse/xtext/metamodelreferencing/tests/EcoreReferenceTestLanguage.xtext"), true);
+		assertTrue(Joiner.on("\n").join(resource.getErrors()), resource.getErrors().isEmpty());
 	}
 }

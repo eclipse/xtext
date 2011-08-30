@@ -40,7 +40,6 @@ import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.validation.AbstractValidationMessageAcceptingTestCase;
 import org.eclipse.xtext.validation.AbstractValidationMessageAcceptor;
 
@@ -78,29 +77,29 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
-	public void testBug322875_01() throws Exception {
-		String testGrammar = "grammar foo.Bar with org.eclipse.xtext.common.Terminals\n " +
-				" import 'classpath:/org/eclipse/xtext/xtext/XtextValidationTest.ecore'  " +
-				" import 'http://www.eclipse.org/2008/Xtext' as xtext\n" +
-				"Bug322875 returns Bug322875: referencesETypeFromClasspathPackage=[xtext::Grammar];";
-		XtextResource resource = getResourceFromStringAndExpect(testGrammar,1);
-		assertFalse(resource.getErrors().toString(), resource.getErrors().isEmpty());
-		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
-		assertNotNull("diag", diag);
-		assertEquals(diag.toString(), 1, diag.getChildren().size());
-		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
-	}
+//	public void testBug322875_01() throws Exception {
+//		String testGrammar = "grammar foo.Bar with org.eclipse.xtext.common.Terminals\n " +
+//				" import 'classpath:/org/eclipse/xtext/xtext/XtextValidationTest.ecore'  " +
+//				" import 'http://www.eclipse.org/2008/Xtext' as xtext\n" +
+//				"Bug322875 returns Bug322875: referencesETypeFromClasspathPackage=[xtext::Grammar];";
+//		XtextResource resource = getResourceFromStringAndExpect(testGrammar,1);
+//		assertFalse(resource.getErrors().toString(), resource.getErrors().isEmpty());
+//		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+//		assertNotNull("diag", diag);
+//		assertEquals(diag.toString(), 1, diag.getChildren().size());
+//		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
+//	}
 	
-	public void testBug322875_02() throws Exception {
-		String testGrammar = "grammar foo.Bar with org.eclipse.xtext.common.Terminals\n " +
-				" import 'platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore'  " +
-				"Model returns EClass: name=ID;";
-		XtextResource resource = getResourceFromString(testGrammar);
-		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
-		assertNotNull("diag", diag);
-		assertEquals(diag.toString(), 1, diag.getChildren().size());
-		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
-	}
+//	public void testBug322875_02() throws Exception {
+//		String testGrammar = "grammar foo.Bar with org.eclipse.xtext.common.Terminals\n " +
+//				" import 'platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore'  " +
+//				"Model returns EClass: name=ID;";
+//		XtextResource resource = getResourceFromString(testGrammar);
+//		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+//		assertNotNull("diag", diag);
+//		assertEquals(diag.toString(), 1, diag.getChildren().size());
+//		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
+//	}
 	
 	public void testBug322875_03() throws Exception {
 		String testGrammar = "grammar foo.Bar with org.eclipse.xtext.common.Terminals\n " +
@@ -112,24 +111,24 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals(diag.toString(), 0, diag.getChildren().size());
 	}
 	
-	public void testBug322875_04() throws Exception {
-		String testGrammarOk = "grammar foo.Bar with org.eclipse.xtext.common.Terminals\n " +
-				" import 'http://www.eclipse.org/emf/2002/Ecore'  " +
-				"Model returns EClass: name=ID;";
-		String testGrammarWithError = "grammar foo.Bar with org.eclipse.xtext.common.Terminals\n " +
-		" import 'platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore'  " +
-		"Model returns EClass: name=ID;";
-		XtextResource resourceOk = getResourceFromString(testGrammarOk);
-		XtextResource resourceError = (XtextResource) resourceOk.getResourceSet().createResource(URI.createURI("unused.xtext"));
-		resourceError.load(new StringInputStream(testGrammarWithError), null);
-		Diagnostic diagOK = Diagnostician.INSTANCE.validate(resourceOk.getContents().get(0));
-		assertNotNull("diag", diagOK);
-		assertEquals(diagOK.toString(), 0, diagOK.getChildren().size());
-		Diagnostic diagError = Diagnostician.INSTANCE.validate(resourceError.getContents().get(0));
-		assertNotNull("diag", diagError);
-		assertEquals(diagError.toString(), 1, diagError.getChildren().size());
-		assertEquals("diag.isError", diagError.getSeverity(), Diagnostic.ERROR);
-	}
+//	public void testBug322875_04() throws Exception {
+//		String testGrammarOk = "grammar foo.Bar with org.eclipse.xtext.common.Terminals\n " +
+//				" import 'http://www.eclipse.org/emf/2002/Ecore'  " +
+//				"Model returns EClass: name=ID;";
+//		String testGrammarWithError = "grammar foo.Bar with org.eclipse.xtext.common.Terminals\n " +
+//		" import 'platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore'  " +
+//		"Model returns EClass: name=ID;";
+//		XtextResource resourceOk = getResourceFromString(testGrammarOk);
+//		XtextResource resourceError = (XtextResource) resourceOk.getResourceSet().createResource(URI.createURI("unused.xtext"));
+//		resourceError.load(new StringInputStream(testGrammarWithError), null);
+//		Diagnostic diagOK = Diagnostician.INSTANCE.validate(resourceOk.getContents().get(0));
+//		assertNotNull("diag", diagOK);
+//		assertEquals(diagOK.toString(), 0, diagOK.getChildren().size());
+//		Diagnostic diagError = Diagnostician.INSTANCE.validate(resourceError.getContents().get(0));
+//		assertNotNull("diag", diagError);
+//		assertEquals(diagError.toString(), 1, diagError.getChildren().size());
+//		assertEquals("diag.isError", diagError.getSeverity(), Diagnostic.ERROR);
+//	}
 	
 	public void testBug_282852_01() throws Exception {
 		XtextResource resource = getResourceFromString(
