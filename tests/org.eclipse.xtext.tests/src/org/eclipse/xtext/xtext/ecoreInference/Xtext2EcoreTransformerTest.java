@@ -33,6 +33,7 @@ import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
+import org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.linking.impl.Linker;
 import org.eclipse.xtext.linking.impl.LinkingDiagnosticMessageProvider;
@@ -1955,8 +1956,12 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 	}
 	
 	public void testEcoreReference_01() throws Exception {
+		EcoreSupportStandaloneSetup.setup();
 		XtextResourceSet resourceSet = new XtextResourceSet();
 		resourceSet.setClasspathURIContext(getClass());
+		resourceSet.getURIConverter().getURIMap().put(
+				URI.createURI("platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore"), 
+				URI.createURI("platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore"));
 		assertFalse(resourceSet.getResource(URI.createURI("platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore"), true).getContents().isEmpty());
 		assertFalse(resourceSet.getResource(URI.createURI("platform:/plugin/org.eclipse.xtext.tests/src/org/eclipse/xtext/metamodelreferencing/tests/EcorePerNsURI.ecore"), true).getContents().isEmpty());
 		assertFalse(resourceSet.getResource(URI.createURI("platform:/plugin/org.eclipse.xtext.tests/src/org/eclipse/xtext/metamodelreferencing/tests/EcorePerPlatformResource.ecore"), true).getContents().isEmpty());

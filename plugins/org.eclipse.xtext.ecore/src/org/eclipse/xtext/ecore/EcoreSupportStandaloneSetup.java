@@ -15,6 +15,10 @@ package org.eclipse.xtext.ecore;
  */
 public class EcoreSupportStandaloneSetup {
 
+	public static void setup() {
+		new EcoreSupportStandaloneSetup();
+	}
+	
 	public EcoreSupportStandaloneSetup() {
 		new EcoreSupport().registerServices(false);
 	}
