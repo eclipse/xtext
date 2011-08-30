@@ -23,49 +23,49 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'grammar'", "'with'", "','", "'hidden'", "'('", "')'", "'.'", "'generate'", "'as'", "'import'", "'returns'", "':'", "';'", "'::'", "'|'", "'&'", "'?'", "'*'", "'+'", "'{'", "'='", "'+='", "'current'", "'}'", "'=>'", "'?='", "'['", "']'", "'terminal'", "'fragment'", "'!'", "'->'", "'EOF'", "'..'", "'enum'"
     };
-    public static final int T__42=42;
-    public static final int T__12=12;
-    public static final int T__28=28;
-    public static final int T__23=23;
-    public static final int T__13=13;
-    public static final int RULE_STRING=5;
-    public static final int T__21=21;
-    public static final int T__19=19;
-    public static final int T__39=39;
-    public static final int T__30=30;
-    public static final int T__17=17;
-    public static final int RULE_INT=6;
-    public static final int T__27=27;
-    public static final int T__24=24;
-    public static final int T__34=34;
-    public static final int T__15=15;
-    public static final int RULE_ML_COMMENT=7;
-    public static final int T__35=35;
     public static final int RULE_ID=4;
-    public static final int T__36=36;
-    public static final int T__20=20;
-    public static final int T__44=44;
-    public static final int T__14=14;
-    public static final int T__33=33;
-    public static final int T__22=22;
-    public static final int T__11=11;
     public static final int T__29=29;
-    public static final int T__45=45;
-    public static final int RULE_WS=9;
-    public static final int T__43=43;
-    public static final int T__31=31;
-    public static final int T__40=40;
-    public static final int EOF=-1;
-    public static final int T__16=16;
-    public static final int T__32=32;
-    public static final int T__38=38;
-    public static final int T__37=37;
-    public static final int RULE_ANY_OTHER=10;
+    public static final int T__28=28;
+    public static final int T__27=27;
     public static final int T__26=26;
     public static final int T__25=25;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int T__41=41;
+    public static final int T__24=24;
+    public static final int T__23=23;
+    public static final int T__22=22;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int T__21=21;
+    public static final int T__20=20;
+    public static final int EOF=-1;
+    public static final int T__19=19;
+    public static final int T__16=16;
+    public static final int T__15=15;
     public static final int T__18=18;
+    public static final int T__17=17;
+    public static final int T__12=12;
+    public static final int T__11=11;
+    public static final int T__14=14;
+    public static final int T__13=13;
+    public static final int RULE_INT=6;
+    public static final int T__42=42;
+    public static final int T__43=43;
+    public static final int T__40=40;
+    public static final int T__41=41;
+    public static final int T__44=44;
+    public static final int T__45=45;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int RULE_ML_COMMENT=7;
+    public static final int T__30=30;
+    public static final int T__31=31;
+    public static final int T__32=32;
+    public static final int RULE_STRING=5;
+    public static final int T__33=33;
+    public static final int T__34=34;
+    public static final int T__35=35;
+    public static final int T__36=36;
+    public static final int T__37=37;
+    public static final int T__38=38;
+    public static final int T__39=39;
+    public static final int RULE_WS=9;
 
     // delegates
     // delegators
@@ -2484,11 +2484,11 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                 if ( (LA25_1==RULE_ID) ) {
                     int LA25_4 = input.LA(3);
 
-                    if ( ((LA25_4>=31 && LA25_4<=32)||LA25_4==36) ) {
-                        alt25=1;
-                    }
-                    else if ( (LA25_4==EOF||(LA25_4>=RULE_ID && LA25_4<=RULE_STRING)||(LA25_4>=15 && LA25_4<=16)||LA25_4==23||(LA25_4>=25 && LA25_4<=30)||LA25_4==35) ) {
+                    if ( (LA25_4==EOF||(LA25_4>=RULE_ID && LA25_4<=RULE_STRING)||(LA25_4>=15 && LA25_4<=16)||LA25_4==23||(LA25_4>=25 && LA25_4<=30)||LA25_4==35) ) {
                         alt25=2;
+                    }
+                    else if ( ((LA25_4>=31 && LA25_4<=32)||LA25_4==36) ) {
+                        alt25=1;
                     }
                     else {
                         NoViableAltException nvae =
@@ -2512,11 +2512,11 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                 {
                 int LA25_2 = input.LA(2);
 
-                if ( ((LA25_2>=31 && LA25_2<=32)||LA25_2==36) ) {
-                    alt25=1;
-                }
-                else if ( (LA25_2==EOF||(LA25_2>=RULE_ID && LA25_2<=RULE_STRING)||(LA25_2>=15 && LA25_2<=16)||LA25_2==23||(LA25_2>=25 && LA25_2<=30)||LA25_2==35) ) {
+                if ( (LA25_2==EOF||(LA25_2>=RULE_ID && LA25_2<=RULE_STRING)||(LA25_2>=15 && LA25_2<=16)||LA25_2==23||(LA25_2>=25 && LA25_2<=30)||LA25_2==35) ) {
                     alt25=2;
+                }
+                else if ( ((LA25_2>=31 && LA25_2<=32)||LA25_2==36) ) {
+                    alt25=1;
                 }
                 else {
                     NoViableAltException nvae =
@@ -3014,6 +3014,11 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             case 35:
                 {
                 switch ( input.LA(2) ) {
+                case RULE_ID:
+                    {
+                    alt30=5;
+                    }
+                    break;
                 case 15:
                     {
                     alt30=6;
@@ -3022,11 +3027,6 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                 case RULE_STRING:
                     {
                     alt30=4;
-                    }
-                    break;
-                case RULE_ID:
-                    {
-                    alt30=5;
                     }
                     break;
                 default:
