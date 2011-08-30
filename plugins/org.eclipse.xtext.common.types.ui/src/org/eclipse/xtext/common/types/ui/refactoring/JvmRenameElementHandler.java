@@ -18,7 +18,7 @@ import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
-import org.eclipse.xtext.ui.refactoring.ui.RenameElementHandler;
+import org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler;
 
 import com.google.inject.Inject;
 
@@ -28,7 +28,7 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("restriction")
-public class JvmRenameElementHandler extends RenameElementHandler {
+public class JvmRenameElementHandler extends DefaultRenameElementHandler {
 
 	@Inject
 	private IJavaElementFinder javaElementFinder;

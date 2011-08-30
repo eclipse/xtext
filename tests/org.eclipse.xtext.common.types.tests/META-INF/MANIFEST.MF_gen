@@ -13,7 +13,10 @@ Export-Package: org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguag
  org.eclipse.xtext.common.types.xtext.ui.parseTreeConstruction,
  org.eclipse.xtext.common.types.xtext.ui.parser.antlr,
  org.eclipse.xtext.common.types.xtext.ui.parser.antlr.internal,
- org.eclipse.xtext.common.types.xtext.ui.ui.contentassist.antlr
+ org.eclipse.xtext.common.types.xtext.ui.ui.contentassist.antlr,
+ org.eclipse.xtext.common.types.xtext.ui.refactoringTestLanguage,
+ org.eclipse.xtext.common.types.xtext.ui.refactoringTestLanguage.impl,
+ org.eclipse.xtext.common.types.xtext.ui.refactoringTestLanguage.util
 Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.util,
  org.eclipse.emf.ecore,

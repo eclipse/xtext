@@ -29,7 +29,7 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
-import org.eclipse.xtext.ui.refactoring.ui.RenameElementHandler;
+import org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler;
 import org.eclipse.xtext.ui.wizard.IProjectCreator;
 import org.eclipse.xtext.xtext.ecoreInference.IXtext2EcorePostProcessor;
 import org.eclipse.xtext.xtext.ecoreInference.ProjectAwareXtendXtext2EcorePostProcessor;
@@ -155,7 +155,7 @@ public class XtextUiModule extends org.eclipse.xtext.ui.AbstractXtextUiModule {
 		return XtextRenameStrategyProvider.class;
 	}
 
-	public Class<? extends RenameElementHandler> bindRenameElementHandler() {
+	public Class<? extends DefaultRenameElementHandler> bindRenameElementHandler() {
 		return XtextRenameElementHandler.class;
 	}
 	

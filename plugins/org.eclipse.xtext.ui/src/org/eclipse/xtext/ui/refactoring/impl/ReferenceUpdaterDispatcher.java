@@ -99,7 +99,7 @@ public class ReferenceUpdaterDispatcher {
 			URI sourceResourceURI = referenceDescription.getSourceEObjectUri().trimFragment();
 			IReferenceUpdater referenceUpdater = getReferenceUpdater(sourceResourceURI);
 			if (referenceUpdater == null)
-				status.addError("Cannot find a reference updater for " + notNull(sourceResourceURI)
+				status.addWarning("Cannot find a reference updater for " + notNull(sourceResourceURI)
 						+ " which contains references to renamed elements");
 			else
 				updater2refs.put(referenceUpdater, referenceDescription);
@@ -110,7 +110,7 @@ public class ReferenceUpdaterDispatcher {
 					.getResourceServiceProvider(sourceResourceURI);
 			IReferenceUpdater referenceUpdater = provider2updater.get(resourceServiceProvider);
 			if (referenceUpdater == null) {
-				referenceUpdater = resourceServiceProvider.get(IReferenceUpdater.class);
+				referenceUpdater = resourceServiceProvider.get(OptionalReferenceUpdaterProxy.class).get();
 				if (referenceUpdater != null)
 					provider2updater.put(resourceServiceProvider, referenceUpdater);
 			}
@@ -119,6 +119,15 @@ public class ReferenceUpdaterDispatcher {
 
 		public Multimap<IReferenceUpdater, IReferenceDescription> getReferenceUpdater2ReferenceDescriptions() {
 			return updater2refs;
+		}
+	}
+	
+	protected static class OptionalReferenceUpdaterProxy {
+		@Inject(optional=true)
+		private IReferenceUpdater referenceUpdater;
+		
+		public IReferenceUpdater get() {
+			return referenceUpdater;
 		}
 	}
 }

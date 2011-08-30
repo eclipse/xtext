@@ -7,18 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.ui;
 
+import org.eclipse.core.commands.IHandler2;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.text.ITextSelection;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.XtextEditor;
 
 /**
- * @author Jan Koehnlein - Initial contribution and API
+ * @author koehnlein - Initial contribution and API
  */
-public interface IRenameSupport {
-	
-	interface Factory {
-		IRenameSupport create(Object context, String newName);
-	}
-	
-	void startRefactoringWithDialog(final boolean previewOnly) throws InterruptedException;
+public interface IRenameElementHandler extends IHandler2 {
 
-	void startDirectRefactoring() throws InterruptedException;
-	
+	IRenameElementContext createRenameElementContext(EObject targetElement, final XtextEditor editor,
+			final ITextSelection selection, XtextResource resource);
+
 }
