@@ -29,7 +29,7 @@ import com.google.inject.Singleton;
 @Singleton
 public class RenameRefactoringController {
 
-	@Inject
+	@Inject(optional=true)
 	private IWorkbench workbench;
 
 	@Inject
