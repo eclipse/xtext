@@ -29,7 +29,7 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  * @author Holger Schill
  */
-public class RenameElementHandler extends AbstractHandler {
+public class DefaultRenameElementHandler extends AbstractHandler implements IRenameElementHandler {
 
 	@Inject
 	private EObjectAtOffsetHelper eObjectAtOffsetHelper;
@@ -37,7 +37,7 @@ public class RenameElementHandler extends AbstractHandler {
 	@Inject
 	protected RenameRefactoringController renameRefactoringController;
 
-	protected static final Logger LOG = Logger.getLogger(RenameElementHandler.class);
+	protected static final Logger LOG = Logger.getLogger(DefaultRenameElementHandler.class);
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		try {

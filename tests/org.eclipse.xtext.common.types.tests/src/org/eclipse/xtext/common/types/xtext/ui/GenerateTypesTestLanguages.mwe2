@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-module org.eclipse.xtext.common.types.xtext.ui.GenerateContentAssistTestLanguage
+module org.eclipse.xtext.common.types.xtext.ui.GenerateTypesTestLanguages
 
 import org.eclipse.emf.mwe2.runtime.workflow.Workflow
 import org.eclipse.emf.mwe.utils.*
@@ -38,9 +38,35 @@ Workflow {
 		language = { 
 			uri="classpath:/org/eclipse/xtext/common/types/xtext/ui/ContentAssistTestLanguage.xtext"
 			fileExtensions = "typesAssistTest"
-			fragment = @TestLanguagesFragments {
+			fragment = @CommonTestLanguagesFragments {
 				file.extensions = "typesAssistTest"
 			}
+		}
+		language = {
+			uri="classpath:/org/eclipse/xtext/common/types/xtext/ui/RefactoringTestLanguage.xtext"
+			fileExtensions = "typesRefactoring"
+			fragment = @CommonTestLanguagesFragments {
+				file.extensions = "typesRefactoring"	
+			} 
+		}
+		language = {
+			uri="classpath:/org/eclipse/xtext/common/types/xtext/ui/RefactoringTestLanguage1.xtext"
+			fileExtensions = "typesRefactoring1"
+			fragment = @CommonTestLanguagesFragments {
+				file.extensions = "typesRefactoring1"	
+			} 
+			fragment = refactoring.RefactorElementNameFragment {
+			}	
+		}
+		language = {
+			uri="classpath:/org/eclipse/xtext/common/types/xtext/ui/RefactoringTestLanguage2.xtext"
+			fileExtensions = "typesRefactoring2"
+			fragment = @CommonTestLanguagesFragments {
+				file.extensions = "typesRefactoring2"	
+			} 
+			fragment = refactoring.RefactorElementNameFragment {
+				useJdtRefactoring = true
+			}	
 		}
 	}
 }

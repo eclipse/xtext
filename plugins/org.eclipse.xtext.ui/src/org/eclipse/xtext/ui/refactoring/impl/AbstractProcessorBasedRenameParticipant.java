@@ -56,8 +56,9 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 
 	@Inject
 	private IRenameProcessorAdapter.Factory processorAdapterFactory;
-	
-	@Inject@Named(Constants.LANGUAGE_NAME)
+
+	@Inject
+	@Named(Constants.LANGUAGE_NAME)
 	private String languageName;
 
 	private RefactoringStatus status;
@@ -83,8 +84,10 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 			List<IRenameProcessorAdapter> processors = newArrayList();
 			for (IRenameElementContext participantContext : participantContexts) {
 				IRenameRefactoringProvider renameRefactoringProvider = getRenameRefactoringProvider(participantContext);
-				RenameProcessor processor = renameRefactoringProvider.getRenameProcessor(participantContext);
-				processors.add(processorAdapterFactory.create(processor));
+				if (renameRefactoringProvider != null) {
+					RenameProcessor processor = renameRefactoringProvider.getRenameProcessor(participantContext);
+					processors.add(processorAdapterFactory.create(processor));
+				}
 			}
 			return processors;
 		}
@@ -125,8 +128,8 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 		try {
 			for (IRenameProcessorAdapter wrappedProcessor : wrappedProcessors) {
 				Change processorChange = wrappedProcessor.createChange(pm);
-				if(processorChange != null) {
-					if(compositeChange == null)
+				if (processorChange != null) {
+					if (compositeChange == null)
 						compositeChange = new CompositeChange("Changes form participant: " + getName());
 					compositeChange.add(processorChange);
 				}

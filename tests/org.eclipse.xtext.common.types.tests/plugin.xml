@@ -147,4 +147,470 @@
     </extension>
 
 
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.eclipse.org/2011/xtext/ui/common/types/xtext/ui/Refactoring" 
+       class = "org.eclipse.xtext.common.types.xtext.ui.refactoringTestLanguage.RefactoringTestLanguagePackage"
+       genModel = "org/eclipse/xtext/common/types/xtext/ui/RefactoringTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+    <extension
+            point="org.eclipse.ui.editors">
+        <editor
+            class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+            default="true"
+            extensions="typesRefactoring"
+            id="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage"
+            name="RefactoringTestLanguage Editor">
+        </editor>
+    </extension>
+    <extension
+        point="org.eclipse.ui.handlers">
+        <handler
+            class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+        <handler
+            class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+            commandId="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage.validate">
+         <activeWhen>
+            <reference
+                    definitionId="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage.Editor.opened">
+            </reference>
+         </activeWhen>
+      </handler>
+    </extension>
+    <extension point="org.eclipse.core.expressions.definitions">
+        <definition id="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage.Editor.opened">
+            <and>
+                <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+                <with variable="activeEditor">
+                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
+                        value="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage" 
+                        forcePluginActivation="true"/>
+                </with>        
+            </and>
+        </definition>
+    </extension>
+    <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage"
+            name="RefactoringTestLanguage">
+            <keywordReference id="org.eclipse.xtext.common.types.xtext.ui.ui.keyword_RefactoringTestLanguage"/>
+        </page>
+        <page
+            category="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage"
+            class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            id="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage.coloring"
+            name="Syntax Coloring">
+            <keywordReference id="org.eclipse.xtext.common.types.xtext.ui.ui.keyword_RefactoringTestLanguage"/>
+        </page>
+        <page
+            category="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage"
+            class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+            id="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage.templates"
+            name="Templates">
+            <keywordReference id="org.eclipse.xtext.common.types.xtext.ui.ui.keyword_RefactoringTestLanguage"/>
+        </page>
+    </extension>
+    <extension
+        point="org.eclipse.ui.keywords">
+        <keyword
+            id="org.eclipse.xtext.common.types.xtext.ui.ui.keyword_RefactoringTestLanguage"
+            label="RefactoringTestLanguage"/>
+    </extension>
+    <extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Trigger expensive validation"
+            id="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage.validate"
+            name="Validate">
+      </command>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+        <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+             <command
+                 commandId="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage.validate"
+                 style="push"
+                 tooltip="Trigger expensive validation">
+            <visibleWhen checkEnabled="false">
+                <reference
+                    definitionId="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage.Editor.opened">
+                </reference>
+            </visibleWhen>
+         </command>  
+         </menuContribution>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
+			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+	    <handler
+            class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            commandId="org.eclipse.xtext.ui.editor.FindReferences">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+    </extension>   
+
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="typesRefactoring">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            uriExtension="typesRefactoring">
+        </resourceServiceProvider>
+    </extension>
+
+
+
+    <extension
+            point="org.eclipse.ui.editors">
+        <editor
+            class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguage1ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+            default="true"
+            extensions="typesRefactoring1"
+            id="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage1"
+            name="RefactoringTestLanguage1 Editor">
+        </editor>
+    </extension>
+    <extension
+        point="org.eclipse.ui.handlers">
+        <handler
+            class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguage1ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage1.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+        <handler
+            class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguage1ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+            commandId="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage1.validate">
+         <activeWhen>
+            <reference
+                    definitionId="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage1.Editor.opened">
+            </reference>
+         </activeWhen>
+      </handler>
+    </extension>
+    <extension point="org.eclipse.core.expressions.definitions">
+        <definition id="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage1.Editor.opened">
+            <and>
+                <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+                <with variable="activeEditor">
+                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
+                        value="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage1" 
+                        forcePluginActivation="true"/>
+                </with>        
+            </and>
+        </definition>
+    </extension>
+    <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguage1ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage1"
+            name="RefactoringTestLanguage1">
+            <keywordReference id="org.eclipse.xtext.common.types.xtext.ui.ui.keyword_RefactoringTestLanguage1"/>
+        </page>
+        <page
+            category="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage1"
+            class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguage1ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            id="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage1.coloring"
+            name="Syntax Coloring">
+            <keywordReference id="org.eclipse.xtext.common.types.xtext.ui.ui.keyword_RefactoringTestLanguage1"/>
+        </page>
+        <page
+            category="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage1"
+            class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguage1ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+            id="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage1.templates"
+            name="Templates">
+            <keywordReference id="org.eclipse.xtext.common.types.xtext.ui.ui.keyword_RefactoringTestLanguage1"/>
+        </page>
+    </extension>
+    <extension
+        point="org.eclipse.ui.keywords">
+        <keyword
+            id="org.eclipse.xtext.common.types.xtext.ui.ui.keyword_RefactoringTestLanguage1"
+            label="RefactoringTestLanguage1"/>
+    </extension>
+    <extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Trigger expensive validation"
+            id="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage1.validate"
+            name="Validate">
+      </command>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+        <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+             <command
+                 commandId="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage1.validate"
+                 style="push"
+                 tooltip="Trigger expensive validation">
+            <visibleWhen checkEnabled="false">
+                <reference
+                    definitionId="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage1.Editor.opened">
+                </reference>
+            </visibleWhen>
+         </command>  
+         </menuContribution>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
+			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage1.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+	    <handler
+            class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguage1ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            commandId="org.eclipse.xtext.ui.editor.FindReferences">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage1.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+    </extension>   
+
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguage1ExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="typesRefactoring1">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguage1ExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            uriExtension="typesRefactoring1">
+        </resourceServiceProvider>
+    </extension>
+
+   	<!-- Rename Refactoring -->
+	<extension point="org.eclipse.ui.handlers">
+		<handler 
+			class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguage1ExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler"
+			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage1.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+    <extension point="org.eclipse.ui.menus">
+         <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+         <command commandId="org.eclipse.xtext.ui.refactoring.RenameElement"
+               style="push">
+            <visibleWhen checkEnabled="false">
+               <reference
+                     definitionId="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage1.Editor.opened">
+               </reference>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+
+
+    <extension
+            point="org.eclipse.ui.editors">
+        <editor
+            class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguage2ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+            default="true"
+            extensions="typesRefactoring2"
+            id="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage2"
+            name="RefactoringTestLanguage2 Editor">
+        </editor>
+    </extension>
+    <extension
+        point="org.eclipse.ui.handlers">
+        <handler
+            class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguage2ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage2.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+        <handler
+            class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguage2ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+            commandId="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage2.validate">
+         <activeWhen>
+            <reference
+                    definitionId="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage2.Editor.opened">
+            </reference>
+         </activeWhen>
+      </handler>
+    </extension>
+    <extension point="org.eclipse.core.expressions.definitions">
+        <definition id="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage2.Editor.opened">
+            <and>
+                <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+                <with variable="activeEditor">
+                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
+                        value="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage2" 
+                        forcePluginActivation="true"/>
+                </with>        
+            </and>
+        </definition>
+    </extension>
+    <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguage2ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage2"
+            name="RefactoringTestLanguage2">
+            <keywordReference id="org.eclipse.xtext.common.types.xtext.ui.ui.keyword_RefactoringTestLanguage2"/>
+        </page>
+        <page
+            category="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage2"
+            class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguage2ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            id="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage2.coloring"
+            name="Syntax Coloring">
+            <keywordReference id="org.eclipse.xtext.common.types.xtext.ui.ui.keyword_RefactoringTestLanguage2"/>
+        </page>
+        <page
+            category="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage2"
+            class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguage2ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+            id="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage2.templates"
+            name="Templates">
+            <keywordReference id="org.eclipse.xtext.common.types.xtext.ui.ui.keyword_RefactoringTestLanguage2"/>
+        </page>
+    </extension>
+    <extension
+        point="org.eclipse.ui.keywords">
+        <keyword
+            id="org.eclipse.xtext.common.types.xtext.ui.ui.keyword_RefactoringTestLanguage2"
+            label="RefactoringTestLanguage2"/>
+    </extension>
+    <extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Trigger expensive validation"
+            id="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage2.validate"
+            name="Validate">
+      </command>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+        <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+             <command
+                 commandId="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage2.validate"
+                 style="push"
+                 tooltip="Trigger expensive validation">
+            <visibleWhen checkEnabled="false">
+                <reference
+                    definitionId="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage2.Editor.opened">
+                </reference>
+            </visibleWhen>
+         </command>  
+         </menuContribution>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
+			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage2.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+	    <handler
+            class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguage2ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            commandId="org.eclipse.xtext.ui.editor.FindReferences">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage2.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+    </extension>   
+
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguage2ExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="typesRefactoring2">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguage2ExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            uriExtension="typesRefactoring2">
+        </resourceServiceProvider>
+    </extension>
+
+   	<!-- Rename Refactoring -->
+	<extension point="org.eclipse.ui.handlers">
+		<handler 
+			class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguage2ExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler"
+			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage2.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+    <extension point="org.eclipse.ui.menus">
+         <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+         <command commandId="org.eclipse.xtext.ui.refactoring.RenameElement"
+               style="push">
+            <visibleWhen checkEnabled="false">
+               <reference
+                     definitionId="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage2.Editor.opened">
+               </reference>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+
 </plugin>

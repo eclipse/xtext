@@ -224,7 +224,7 @@ public abstract class AbstractXtend2UiModule extends DefaultUiModule {
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
-	public Class<? extends org.eclipse.xtext.ui.refactoring.ui.RenameElementHandler> bindRenameElementHandler() {
+	public Class<? extends org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler> bindRenameElementHandler() {
 		return org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelRenameElementHandler.class;
 	}
 

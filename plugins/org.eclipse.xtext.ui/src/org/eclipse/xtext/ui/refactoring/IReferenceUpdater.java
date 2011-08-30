@@ -9,16 +9,12 @@ package org.eclipse.xtext.ui.refactoring;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.xtext.resource.IReferenceDescription;
-import org.eclipse.xtext.ui.refactoring.impl.DefaultReferenceUpdater;
-
-import com.google.inject.ImplementedBy;
 
 /**
  * A component to update references to elements renamed in a refactoring.
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
-@ImplementedBy(DefaultReferenceUpdater.class)
 public interface IReferenceUpdater {
 
 	void createReferenceUpdates(ElementRenameArguments elementRenameArguments,

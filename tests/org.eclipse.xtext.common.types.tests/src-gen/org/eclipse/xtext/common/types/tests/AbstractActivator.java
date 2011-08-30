@@ -36,6 +36,9 @@ public class AbstractActivator extends AbstractUIPlugin {
 		INSTANCE = this;
 		try {
 			registerInjectorFor("org.eclipse.xtext.common.types.xtext.ui.ContentAssistTestLanguage");
+			registerInjectorFor("org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage");
+			registerInjectorFor("org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage1");
+			registerInjectorFor("org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage2");
 			
 		} catch (Exception e) {
 			Logger.getLogger(getClass()).error(e.getMessage(), e);
@@ -63,6 +66,15 @@ public class AbstractActivator extends AbstractUIPlugin {
 		if ("org.eclipse.xtext.common.types.xtext.ui.ContentAssistTestLanguage".equals(grammar)) {
 		  return new org.eclipse.xtext.common.types.xtext.ui.ContentAssistTestLanguageRuntimeModule();
 		}
+		if ("org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguageRuntimeModule();
+		}
+		if ("org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage1".equals(grammar)) {
+		  return new org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage1RuntimeModule();
+		}
+		if ("org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage2".equals(grammar)) {
+		  return new org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage2RuntimeModule();
+		}
 		
 		throw new IllegalArgumentException(grammar);
 	}
@@ -70,6 +82,15 @@ public class AbstractActivator extends AbstractUIPlugin {
 	protected Module getUiModule(String grammar) {
 		if ("org.eclipse.xtext.common.types.xtext.ui.ContentAssistTestLanguage".equals(grammar)) {
 		  return new org.eclipse.xtext.common.types.xtext.ui.ui.ContentAssistTestLanguageUiModule(this);
+		}
+		if ("org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguageUiModule(this);
+		}
+		if ("org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage1".equals(grammar)) {
+		  return new org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguage1UiModule(this);
+		}
+		if ("org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage2".equals(grammar)) {
+		  return new org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguage2UiModule(this);
 		}
 		
 		throw new IllegalArgumentException(grammar);

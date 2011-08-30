@@ -7,10 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.generator.refactoring;
 
-import static java.util.Collections.*;
-
-import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.xtext.Grammar;
@@ -31,24 +27,29 @@ public class RefactorElementNameFragment extends AbstractGeneratorFragment {
 
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
+		BindFactory bindFactory = new BindFactory();
+		bindFactory
+			.addTypeToType("org.eclipse.xtext.ui.refactoring.IReferenceUpdater", 
+					"org.eclipse.xtext.ui.refactoring.impl.DefaultReferenceUpdater");
 		if (!useJdtRefactoring)
-			return emptySet();
-		return new BindFactory()
-				.addTypeToType("org.eclipse.xtext.ui.refactoring.ui.RenameElementHandler",
-						"org.eclipse.xtext.common.types.ui.refactoring.JvmRenameElementHandler")
-				.addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider",
-						"org.eclipse.xtext.common.types.ui.refactoring.JvmRenameRefactoringProvider")
-				.addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameProcessorAdapter$Factory",
-						"org.eclipse.xtext.common.types.ui.refactoring.JavaRenameProcessorAdapter.Factory")
-				.addTypeToType("org.eclipse.xtext.ui.refactoring.ui.IRenameSupport.Factory",
-						"org.eclipse.xtext.common.types.ui.refactoring.JdtAwareRenameSupportFactory")
-				.addTypeToType("org.eclipse.xtext.ui.refactoring.impl.RefactoringResourceSetProvider",
-						"org.eclipse.xtext.common.types.ui.refactoring.JvmRefactoringResourceSetProvider")
-				.getBindings();
-	}
-
-	@Override
-	protected List<Object> getParameters(Grammar grammar) {
-		return Collections.<Object> singletonList(useJdtRefactoring);
+			return bindFactory
+					.addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider",
+							"org.eclipse.xtext.ui.refactoring.impl.DefaultRenameRefactoringProvider")
+					.addTypeToType("org.eclipse.xtext.ui.refactoring.ui.IRenameSupport.Factory",
+							"org.eclipse.xtext.ui.refactoring.ui.DefaultRenameSupport.Factory")
+					.addTypeToType("org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler",
+							"org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler")
+					.getBindings();
+		else
+			return bindFactory
+					.addTypeToType("org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler",
+							"org.eclipse.xtext.common.types.ui.refactoring.JvmRenameElementHandler")
+					.addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider",
+							"org.eclipse.xtext.common.types.ui.refactoring.JvmRenameRefactoringProvider")
+					.addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameProcessorAdapter.Factory",
+							"org.eclipse.xtext.common.types.ui.refactoring.JavaRenameProcessorAdapter.Factory")
+					.addTypeToType("org.eclipse.xtext.ui.refactoring.ui.IRenameSupport.Factory",
+							"org.eclipse.xtext.common.types.ui.refactoring.JdtAwareRenameSupportFactory")
+					.getBindings();
 	}
 }
