@@ -26,7 +26,7 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.editor.toggleComments.ISingleLineCommentHelper;
 import org.eclipse.xtext.ui.editor.toggleComments.ToggleSLCommentAction;
-import org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler;
+import org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler;
 import org.eclipse.xtext.xtend2.ui.autoedit.AutoEditStrategyProvider;
 import org.eclipse.xtext.xtend2.ui.autoedit.TokenTypeToPartitionMapper;
 import org.eclipse.xtext.xtend2.ui.contentassist.ImportingTypesProposalProvider;
@@ -141,7 +141,7 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 	}
 
 	@Override
-	public Class<? extends DefaultRenameElementHandler> bindIRenameElementHandler() {
+	public Class<? extends IRenameElementHandler> bindIRenameElementHandler() {
 		return Xtend2RenameElementHandler.class;
 	}
 	
