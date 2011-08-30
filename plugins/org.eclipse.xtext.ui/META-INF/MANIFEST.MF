@@ -76,6 +76,7 @@ Export-Package: org.eclipse.xtext.common.ui.contentassist,
  org.eclipse.xtext.ui.resource.generic,
  org.eclipse.xtext.ui.search,
  org.eclipse.xtext.ui.util,
+ org.eclipse.xtext.ui.validation,
  org.eclipse.xtext.ui.wizard
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
