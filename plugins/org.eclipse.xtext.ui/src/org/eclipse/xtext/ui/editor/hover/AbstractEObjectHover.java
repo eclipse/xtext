@@ -46,6 +46,8 @@ public abstract class AbstractEObjectHover extends AbstractHover implements IEOb
 	@Override
 	public IRegion getHoverRegion(final ITextViewer textViewer, final int offset) {
 		IXtextDocument xtextDocument = XtextDocumentUtil.get(textViewer);
+		if(xtextDocument == null) 
+			return null;
 		return xtextDocument.readOnly(new IUnitOfWork<IRegion, XtextResource>() {
 			public IRegion exec(XtextResource state) throws Exception {
 				Pair<EObject, IRegion> element = getXtextElementAt(state, offset);
@@ -62,6 +64,8 @@ public abstract class AbstractEObjectHover extends AbstractHover implements IEOb
 		if (hoverRegion == null)
 			return null;
 		IXtextDocument xtextDocument = XtextDocumentUtil.get(textViewer);
+		if(xtextDocument == null) 
+			return null;
 		return xtextDocument.readOnly(new IUnitOfWork<Object, XtextResource>() {
 			public Object exec(XtextResource state) throws Exception {
 				Pair<EObject, IRegion> element = getXtextElementAt(state, hoverRegion.getOffset());

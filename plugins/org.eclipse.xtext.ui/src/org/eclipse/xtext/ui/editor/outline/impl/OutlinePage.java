@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextInputListener;
 import org.eclipse.jface.text.source.ISourceViewer;
@@ -39,7 +40,7 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class OutlinePage extends ContentOutlinePage implements ISourceViewerAware {
-	
+
 	private static final Logger LOG = Logger.getLogger(OutlinePage.class);
 
 	@Inject
@@ -94,7 +95,7 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 		addChildren(Collections.singletonList(rootNode), result, getDefaultExpansionLevel());
 		return result;
 	}
-	
+
 	protected int getDefaultExpansionLevel() {
 		return 1;
 	}
@@ -140,9 +141,10 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 		this.sourceViewer = sourceViewer;
 		IDocument document = sourceViewer.getDocument();
 		xtextDocument = XtextDocumentUtil.get(document);
+		Assert.isNotNull(xtextDocument);
 		configureTextInputListener();
 	}
-	
+
 	/**
 	 * @since 2.0
 	 */
@@ -150,15 +152,18 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 		textInputListener = new ITextInputListener() {
 			public void inputDocumentChanged(IDocument oldInput, IDocument newInput) {
 				try {
-					xtextDocument.removeModelListener(modelListener);
+					if (xtextDocument != null)
+						xtextDocument.removeModelListener(modelListener);
 					xtextDocument = XtextDocumentUtil.get(newInput);
-					xtextDocument.addModelListener(modelListener);
-					scheduleRefresh();
+					if (xtextDocument != null) {
+						xtextDocument.addModelListener(modelListener);
+						scheduleRefresh();
+					}
 				} catch (Throwable t) {
 					LOG.error("Error refreshing outline", t);
 				}
 			}
-			
+
 			public void inputDocumentAboutToBeChanged(IDocument oldInput, IDocument newInput) {
 			}
 		};
