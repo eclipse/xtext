@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.generic;
 
+import java.util.Map;
+
 import org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent;
 import org.eclipse.emf.mwe2.runtime.workflow.IWorkflowContext;
 import org.eclipse.xtext.resource.FileExtensionProvider;
@@ -39,9 +41,19 @@ public abstract class AbstractGenericResourceSupport implements IWorkflowCompone
 	private IResourceServiceProvider.Registry registry;
 
 	public void preInvoke() {
+		registerServices(true);
+	}
+
+	/**
+	 * Inject members into this instance and register the services afterwards.
+	 * @see #getGuiceModule()
+	 * @see #registerInRegistry(boolean)
+	 * @since 2.1
+	 */
+	public void registerServices(boolean force) {
 		Injector injector = Guice.createInjector(getGuiceModule());
 		injector.injectMembers(this);
-		registerInRegistry();
+		registerInRegistry(force);
 	}
 
 	private Module guiceModule;
@@ -58,9 +70,24 @@ public abstract class AbstractGenericResourceSupport implements IWorkflowCompone
 
 	protected abstract Module createGuiceModule();
 
+	/**
+	 * @deprecated use {@link #registerInRegistry(boolean)} instead.
+	 */
+	@Deprecated
 	protected void registerInRegistry() {
-		for(String fileExtension: fileExtensionProvider.getFileExtensions())
-			registry.getExtensionToFactoryMap().put(fileExtension, resourceServiceProvider);
+		registerInRegistry(true);
+	}
+	
+	/**
+	 * @param force <code>true</code> if you want to override existing service providers.
+	 * @since 2.1
+	 */
+	protected void registerInRegistry(boolean force) {
+		Map<String, Object> map = registry.getExtensionToFactoryMap();
+		for(String fileExtension: fileExtensionProvider.getFileExtensions()) {
+			if (force || !map.containsKey(fileExtension))
+				map.put(fileExtension, resourceServiceProvider);
+		}
 	}
 
 	public void invoke(IWorkflowContext ctx) {
