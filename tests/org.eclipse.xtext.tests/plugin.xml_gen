@@ -223,6 +223,15 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://www.eclipse.org/2011/tmf/xtext/ecoreReference" 
+       class = "org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.EcoreReferencePackage"
+       genModel = "org/eclipse/xtext/metamodelreferencing/tests/EcoreReferenceTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://eclipse.org/xtext/tests/AnotherSimpleTest" 
        class = "org.eclipse.xtext.metamodelreferencing.tests.anotherSimpleTest.AnotherSimpleTestPackage"
        genModel = "org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTestLanguage.genmodel" /> 

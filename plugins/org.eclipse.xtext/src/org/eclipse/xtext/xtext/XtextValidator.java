@@ -28,11 +28,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.Diagnostician;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreValidator;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
@@ -76,7 +74,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -455,98 +452,6 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 					"EPackage with ns-uri '" + declaration.getEPackage().getNsURI() + "' is used twice.",
 					XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE);
 		}
-	}
-
-	@Check
-	public void checkPackageImport(Grammar grammar) {
-		Map<String, ReferencedMetamodel> nsUriToImportedMetamodel = Maps.newHashMap();
-		for(AbstractMetamodelDeclaration metamodel: grammar.getMetamodelDeclarations()) {
-			if (metamodel instanceof ReferencedMetamodel) {
-				if (metamodel.getEPackage() != null && !metamodel.getEPackage().eIsProxy()) {
-					// nested EPackages
-					nsUriToImportedMetamodel.put(metamodel.getEPackage().getNsURI(), (ReferencedMetamodel) metamodel);
-				}
-			}
-		}
-		if (nsUriToImportedMetamodel.isEmpty())
-			return;
-		for(AbstractMetamodelDeclaration declaration: GrammarUtil.allMetamodelDeclarations(grammar)) {
-			if (declaration instanceof GeneratedMetamodel) { // checked by another validation rule
-				if (declaration.eContainer() != grammar) {
-					nsUriToImportedMetamodel.remove(declaration.getEPackage().getNsURI());
-				}
-			} else {
-				if (declaration.getEPackage() != null && !declaration.getEPackage().eIsProxy()) {
-					EPackage pack = declaration.getEPackage();
-					if (declaration.eContainer() != grammar) {
-						if (nsUriToImportedMetamodel.containsKey(pack.getNsURI())) {
-							if (nsUriToImportedMetamodel.get(pack.getNsURI()).getEPackage() != pack) {
-								String location = pack.getNsURI();
-								if (pack.eResource() != null)
-									location = pack.eResource().getURI().toString();
-								error("The package '" + pack.getNsURI() + "' was imported more than once from a different location: '" +
-											location, 
-										nsUriToImportedMetamodel.get(pack.getNsURI()),
-										XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE,
-										ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
-								nsUriToImportedMetamodel.remove(pack.getNsURI());
-							}
-						}
-					}
-					Set<EPackage> referencedEPackages = findReferencedPackages(pack);
-					for(EPackage referencedEPackage: referencedEPackages) {
-						if (referencedEPackage.eResource() != null && nsUriToImportedMetamodel.containsKey(referencedEPackage.getNsURI())) {
-							if (nsUriToImportedMetamodel.get(referencedEPackage.getNsURI()).getEPackage() != referencedEPackage) {
-								error("The referenced package '" + referencedEPackage.getNsURI() + "' was imported from a different location. Here: '" +
-										referencedEPackage.eResource().getURI(), 
-										nsUriToImportedMetamodel.get(pack.getNsURI()),
-										XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE,
-										ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-
-	protected Set<EPackage> findReferencedPackages(EPackage pack) {
-		Collection<Collection<Setting>> externalCrossReferences = EcoreUtil.ExternalCrossReferencer.find(pack).values();
-		Set<EPackage> referencedEPackages = Sets.newLinkedHashSet();
-		for(Setting setting: Iterables.concat(externalCrossReferences)) {
-			if (setting.getEStructuralFeature().isMany()) {
-				List<?> referenced = (List<?>) setting.get(true);
-				for(Object object: referenced) {
-					if (object instanceof EObject) {
-						EPackage referencedPack = EcoreUtil2.getContainerOfType((EObject)object, EPackage.class);
-						if (referencedPack != null) {
-							if (object instanceof EDataType) {
-								if (referencedPack != EcorePackage.eINSTANCE) {
-									referencedEPackages.add(referencedPack);	
-								}
-							} else {
-								referencedEPackages.add(referencedPack);
-							}
-						}
-					}
-				}
-			} else {
-				Object referenced = setting.get(true);
-				if (referenced instanceof EObject) {
-					EPackage referencedPack = EcoreUtil2.getContainerOfType((EObject)referenced, EPackage.class);
-					if (referencedPack != null) {
-						if (referenced instanceof EDataType) {
-							if (referencedPack != EcorePackage.eINSTANCE) {
-								referencedEPackages.add(referencedPack);	
-							}
-						} else {
-							referencedEPackages.add(referencedPack);
-						}
-					}
-				}
-			}
-		}
-		return referencedEPackages;
 	}
 
 	@Check

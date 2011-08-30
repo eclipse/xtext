@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ecorePerPlatformResource"
+    nsURI="http://www.eclipse.org/2011/tmf/xtext/ecorePerPlatformResource" nsPrefix="ecorePerPlatformResource">
+  <eClassifiers xsi:type="ecore:EClass" name="ExtendsResourceEObject" eSuperTypes="platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eObjectReference1" eType="ecore:EClass platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eObjectReference2" eType="ecore:EClass EcorePerNsURI.ecore#//ExtendsNsURIEObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eObjectReference3" eType="ecore:EClass EcorePerPlatformPlugin.ecore#//ExtendsPluginEObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eObjectReference4" eType="#//ExtendsResourceEObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eObjectContainment" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"
+        containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>
