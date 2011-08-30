@@ -93,5 +93,25 @@ public abstract class AbstractRefactoringTestLanguageUiModule extends DefaultUiM
 		return org.eclipse.xtext.ui.refactoring.impl.DefaultDependentElementsCalculator.class;
 	}
 
+	// contributed by org.eclipse.xtext.ui.generator.refactoring.RefactorElementNameFragment
+	public Class<? extends org.eclipse.xtext.ui.refactoring.IReferenceUpdater> bindIReferenceUpdater() {
+		return org.eclipse.xtext.ui.refactoring.impl.DefaultReferenceUpdater.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.refactoring.RefactorElementNameFragment
+	public Class<? extends org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider> bindIRenameRefactoringProvider() {
+		return org.eclipse.xtext.ui.refactoring.impl.DefaultRenameRefactoringProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.refactoring.RefactorElementNameFragment
+	public Class<? extends org.eclipse.xtext.ui.refactoring.ui.IRenameSupport.Factory> bindIRenameSupport$Factory() {
+		return org.eclipse.xtext.ui.refactoring.ui.DefaultRenameSupport.Factory.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.refactoring.RefactorElementNameFragment
+	public Class<? extends org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler> bindIRenameElementHandler() {
+		return org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler.class;
+	}
+
 
 }
