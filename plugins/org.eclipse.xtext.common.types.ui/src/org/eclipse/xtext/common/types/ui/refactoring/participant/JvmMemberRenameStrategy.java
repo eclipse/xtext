@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.ui.refactoring.participant;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -20,6 +23,9 @@ import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
+
+import com.google.inject.BindingAnnotation;
+import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -76,14 +82,19 @@ public class JvmMemberRenameStrategy implements IRenameStrategy {
 	}
 	
 	public static class Provider implements IRenameStrategy.Provider {
-
-		public IRenameStrategy get(EObject targetEObject, IRenameElementContext renameElementContext) {
-			if (targetEObject instanceof JvmMember) {
-				return new JvmMemberRenameStrategy((JvmMember) targetEObject);
-			}
-			return null;
+		@Retention(RetentionPolicy.RUNTIME)
+		@BindingAnnotation
+		public @interface Delegate {
 		}
 		
+		@Inject(optional=true)@Delegate
+		private IRenameStrategy.Provider delegate;
+
+		public IRenameStrategy get(EObject targetEObject, IRenameElementContext renameElementContext) {
+			if(targetEObject instanceof JvmMember) 
+				return new JvmMemberRenameStrategy((JvmMember) targetEObject);
+			return delegate == null ? null : delegate.get(targetEObject, renameElementContext);
+		}
 	}
 
 }

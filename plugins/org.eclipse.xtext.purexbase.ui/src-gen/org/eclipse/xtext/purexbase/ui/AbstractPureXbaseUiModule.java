@@ -219,8 +219,8 @@ public abstract class AbstractPureXbaseUiModule extends DefaultUiModule {
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
-	public Class<? extends org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider> bindIRenameStrategy$Provider() {
-		return org.eclipse.xtext.purexbase.ui.refactoring.PureXbaseRenameStrategy.Provider.class;
+	public void configureJvmMemberRenameStrategy$Provider$Delegate(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider.class).annotatedWith(org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy.Provider.Delegate.class).to(org.eclipse.xtext.purexbase.ui.refactoring.PureXbaseRenameStrategy.Provider.class);
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment

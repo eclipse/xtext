@@ -51,4 +51,5 @@ public abstract class AbstractJvmModelRenameStrategy extends DefaultRenameStrate
 	protected IJvmModelAssociations getJvmModelAssociations() {
 		return jvmModelAssociations;
 	}
+	
 }
