@@ -17,6 +17,7 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
+import org.eclipse.xtext.xbase.XWithExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 
@@ -319,6 +320,16 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	public void testPrimitiveAsTypeGuard() throws Exception {
 		XCasePart expression = ((XSwitchExpression) expression("switch(new Object()) { int: 1 }")).getCases().get(0);
 		helper.assertError(expression, XCASE_PART, INVALID_USE_OF_TYPE, "primitive", "not", "allowed", "type", "guard");
+	}
+	
+	public void testWithExpression_01() throws Exception {
+		XWithExpression expression = (XWithExpression) expression(":{ }");
+		helper.assertError(expression, XWITH_EXPRESSION, TOO_LITTLE_TYPE_INFORMATION);
+	}
+	
+	public void testWithExpression_02() throws Exception {
+		XExpression expression = expression("{ val java.util.List l = :{}}");
+		helper.assertError(expression, XWITH_EXPRESSION, NOT_INSTANTIABLE);
 	}
 
 }

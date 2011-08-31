@@ -552,10 +552,11 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		if (expression.getMainExpression() == null) {
 			JvmTypeReference expectedType = typeProvider.getExpectedType(expression);
 			if (expectedType == null) {
-				error("Insufficient information for object construction. Please provide a construction expression.", expression, null, "insufficient_type_information");
-			}
-			if (!withExpressionSupport.isConstructionInferrable(expression, expectedType)) {
-				error("Instance cannot be created for type "+expectedType+".", expression, null, "no_instance_providing_strategy");
+				error("Insufficient information for object construction. Please provide a construction expression or more context information.", expression, null, TOO_LITTLE_TYPE_INFORMATION);
+			} else {
+				if (!withExpressionSupport.isConstructionInferrable(expression, expectedType)) {
+					error("Instance cannot be created for type "+expectedType.getIdentifier()+".", expression, null, NOT_INSTANTIABLE);
+				}
 			}
 		}
 	}
