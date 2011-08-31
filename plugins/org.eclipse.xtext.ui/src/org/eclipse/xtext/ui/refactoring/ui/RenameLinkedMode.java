@@ -76,7 +76,6 @@ public class RenameLinkedMode {
 			if (linkedPosition.includes(originalSelection.x + originalSelection.y)) {
 				currentPosition = linkedPosition;
 				originalName = getCurrentName();
-				viewer.setSelectedRange(currentPosition.offset, currentPosition.length);
 			}
 		}
 		if (currentPosition == null) {
@@ -89,9 +88,10 @@ public class RenameLinkedMode {
 			linkedModeModel.forceInstall();
 			linkedModeModel.addLinkingListener(new EditorSynchronizer());
 			LinkedModeUI ui = new EditorLinkedModeUI(linkedModeModel, viewer);
-			ui.setExitPosition(viewer, currentPosition.getOffset(), 0, Integer.MAX_VALUE);
+			ui.setExitPosition(viewer, originalSelection.x, 0, Integer.MAX_VALUE);
 			ui.setExitPolicy(new ExitPolicy(document));
 			ui.enter();
+			viewer.setSelectedRange(originalSelection.x, originalSelection.y);
 			if (viewer instanceof IEditingSupportRegistry) {
 				IEditingSupportRegistry registry = (IEditingSupportRegistry) viewer;
 				registry.register(focusEditingSupport);
