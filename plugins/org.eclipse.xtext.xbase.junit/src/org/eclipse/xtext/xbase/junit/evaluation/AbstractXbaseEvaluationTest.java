@@ -23,11 +23,33 @@ import com.google.common.collect.Sets;
 
 import static java.util.Collections.*;
 
+import static com.google.common.collect.Lists.*;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge
  */
 public abstract class AbstractXbaseEvaluationTest extends TestCase {
+	
+	@Test public void testWithExpression() throws Exception {
+		String expr = ":new StringBuilder() { append('foo') append('bar') }.toString";
+		assertEvaluatesTo("foobar", expr);
+	}
+	
+	@Test public void testWithExpression_01() throws Exception {
+		String expr = ":foo: newArrayList('foo') { foo += 'bar' it += 'baz' add('zonk')}";
+		assertEvaluatesTo(newArrayList("foo", "bar", "baz", "zonk"), expr);
+	}
+	
+	@Test public void testWithExpression_02() throws Exception {
+		String expr = "{ val java.util.ArrayList<String> x = :{ it += 'bar' it += 'baz' add('zonk')} x}";
+		assertEvaluatesTo(newArrayList("bar", "baz", "zonk"), expr);
+	}
+	
+	@Test public void testWithExpression_03() throws Exception {
+		String expr = "{ val java.util.ArrayList<String> x = :{ it += 'bar' it += 'baz' addAll(:newArrayList('zip'){ it += 'zonk'})} x}";
+		assertEvaluatesTo(newArrayList("bar", "baz", "zip", "zonk"), expr);
+	}
 
 	@Test public void testNestedClosures() throws Exception {
 		String expr = 
