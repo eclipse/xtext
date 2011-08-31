@@ -28,6 +28,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendField;
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFieldImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFieldImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFieldImpl#isExtension <em>Extension</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFieldImpl#isInstancefactory <em>Instancefactory</em>}</li>
  * </ul>
  * </p>
  *
@@ -84,6 +85,26 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 	 * @ordered
 	 */
 	protected boolean extension = EXTENSION_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isInstancefactory() <em>Instancefactory</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isInstancefactory()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean INSTANCEFACTORY_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isInstancefactory() <em>Instancefactory</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isInstancefactory()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean instancefactory = INSTANCEFACTORY_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -205,6 +226,29 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isInstancefactory()
+	{
+		return instancefactory;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setInstancefactory(boolean newInstancefactory)
+	{
+		boolean oldInstancefactory = instancefactory;
+		instancefactory = newInstancefactory;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FIELD__INSTANCEFACTORY, oldInstancefactory, instancefactory));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getIdentifier()
 	{
 		// TODO: implement this method
@@ -280,6 +324,8 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 				return getType();
 			case Xtend2Package.XTEND_FIELD__EXTENSION:
 				return isExtension();
+			case Xtend2Package.XTEND_FIELD__INSTANCEFACTORY:
+				return isInstancefactory();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -302,6 +348,9 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 				return;
 			case Xtend2Package.XTEND_FIELD__EXTENSION:
 				setExtension((Boolean)newValue);
+				return;
+			case Xtend2Package.XTEND_FIELD__INSTANCEFACTORY:
+				setInstancefactory((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -326,6 +375,9 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 			case Xtend2Package.XTEND_FIELD__EXTENSION:
 				setExtension(EXTENSION_EDEFAULT);
 				return;
+			case Xtend2Package.XTEND_FIELD__INSTANCEFACTORY:
+				setInstancefactory(INSTANCEFACTORY_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -346,6 +398,8 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 				return type != null;
 			case Xtend2Package.XTEND_FIELD__EXTENSION:
 				return extension != EXTENSION_EDEFAULT;
+			case Xtend2Package.XTEND_FIELD__INSTANCEFACTORY:
+				return instancefactory != INSTANCEFACTORY_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -365,6 +419,8 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 		result.append(name);
 		result.append(", extension: ");
 		result.append(extension);
+		result.append(", instancefactory: ");
+		result.append(instancefactory);
 		result.append(')');
 		return result.toString();
 	}

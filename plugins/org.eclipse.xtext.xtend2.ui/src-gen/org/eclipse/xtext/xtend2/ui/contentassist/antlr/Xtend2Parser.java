@@ -39,6 +39,7 @@ public class Xtend2Parser extends AbstractContentAssistParser {
 				{
 					put(grammarAccess.getMemberAccess().getAlternatives_2(), "rule__Member__Alternatives_2");
 					put(grammarAccess.getMemberAccess().getAlternatives_2_0_1(), "rule__Member__Alternatives_2_0_1");
+					put(grammarAccess.getMemberAccess().getAlternatives_2_0_1_0_0(), "rule__Member__Alternatives_2_0_1_0_0");
 					put(grammarAccess.getMemberAccess().getAlternatives_2_1_1(), "rule__Member__Alternatives_2_1_1");
 					put(grammarAccess.getMemberAccess().getAlternatives_2_1_10(), "rule__Member__Alternatives_2_1_10");
 					put(grammarAccess.getValidIDAccess().getAlternatives(), "rule__ValidID__Alternatives");
@@ -266,7 +267,8 @@ public class Xtend2Parser extends AbstractContentAssistParser {
 					put(grammarAccess.getClassAccess().getImplementsAssignment_5_2_1(), "rule__Class__ImplementsAssignment_5_2_1");
 					put(grammarAccess.getClassAccess().getMembersAssignment_7(), "rule__Class__MembersAssignment_7");
 					put(grammarAccess.getMemberAccess().getAnnotationsAssignment_1(), "rule__Member__AnnotationsAssignment_1");
-					put(grammarAccess.getMemberAccess().getExtensionAssignment_2_0_1_0_0(), "rule__Member__ExtensionAssignment_2_0_1_0_0");
+					put(grammarAccess.getMemberAccess().getExtensionAssignment_2_0_1_0_0_0(), "rule__Member__ExtensionAssignment_2_0_1_0_0_0");
+					put(grammarAccess.getMemberAccess().getInstancefactoryAssignment_2_0_1_0_0_1(), "rule__Member__InstancefactoryAssignment_2_0_1_0_0_1");
 					put(grammarAccess.getMemberAccess().getTypeAssignment_2_0_1_0_1(), "rule__Member__TypeAssignment_2_0_1_0_1");
 					put(grammarAccess.getMemberAccess().getNameAssignment_2_0_1_0_2(), "rule__Member__NameAssignment_2_0_1_0_2");
 					put(grammarAccess.getMemberAccess().getTypeAssignment_2_0_1_1_0(), "rule__Member__TypeAssignment_2_0_1_1_0");
