@@ -35,6 +35,7 @@ import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
+import org.eclipse.xtext.xbase.XWithExpression;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
@@ -604,6 +605,26 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertTrue(block.getExpressions().get(0) instanceof XReturnExpression);
 		XReturnExpression returnExpression = (XReturnExpression) block.getExpressions().get(0);
 		assertNull(returnExpression.getExpression());
+	}
+	
+	public void testWithExpression() throws Exception {
+		XWithExpression with = (XWithExpression) expression(":foo:new StringBuilder() { it.append('foo')}");
+		assertEquals("foo",with.getVariable().getName());
+		assertTrue(with.getMainExpression() instanceof XConstructorCall);
+		assertTrue(with.getBlockExpression() instanceof XBlockExpression);
+	}
+	public void testWithExpression_1() throws Exception {
+		XWithExpression with = (XWithExpression) expression(":new StringBuilder() { it.append('foo')}");
+		assertNull(with.getVariable());
+		assertTrue(with.getMainExpression() instanceof XConstructorCall);
+		assertTrue(with.getBlockExpression() instanceof XBlockExpression);
+	}
+	
+	public void testWithExpression_2() throws Exception {
+		XWithExpression with = (XWithExpression) expression(":{ it.append('foo')}");
+		assertNull(with.getVariable());
+		assertNull(with.getMainExpression());
+		assertTrue(with.getBlockExpression() instanceof XBlockExpression);
 	}
 	
 }

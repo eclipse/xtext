@@ -103,6 +103,7 @@ XPrimaryExpression returns XExpression:
 	XConstructorCall |
 	XBlockExpression |
 	XSwitchExpression |
+	XWithExpression |
 	XFeatureCall |
 	XLiteral |
 	XIfExpression |
@@ -140,7 +141,7 @@ XIfExpression returns XExpression:
 
 XSwitchExpression returns XExpression:
 	{XSwitchExpression}
-	'switch' (localVarName=ValidID ':')? switch=XExpression '{'
+	'switch' =>(localVarName=ValidID ':')? switch=XExpression '{'
 	(cases+=XCasePart)+
 	('default' ':' default=XExpression )?
 	'}';
@@ -249,6 +250,25 @@ XTryCatchFinallyExpression returns XExpression:
 	
 XCatchClause :
 	=>'catch' '(' declaredParam=JvmFormalParameter ')' expression=XExpression;
+
+XWithExpression returns XExpression : 
+	{XWithExpression} 
+	(':' variable=JvmFormalParameterWithoutType)? 
+	(':' mainExpression=XExpression blockExpression=XBlockExpression
+	| blockExpression=XMustacheExpression
+	)
+;
+
+
+JvmFormalParameterWithoutType returns types::JvmFormalParameter:
+	name=ValidID;
+
+XMustacheExpression returns XExpression :
+	{XBlockExpression}
+	':{'
+		expressions+=XExpressionInsideBlock*
+	'}'
+;
 
 QualifiedName:
   ValidID (=>'.' ValidID)*;

@@ -29,6 +29,7 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.XWithExpression;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 
 /**
@@ -532,4 +533,28 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 		XBinaryOperation lessThan = (XBinaryOperation) expression("(if (true) new Double('') else new Integer('')) < 0");
 		assertEquals("org.eclipse.xtext.xbase.lib.ComparableExtensions.operator_lessThan(java.lang.Comparable,C)", lessThan.getFeature().getIdentifier());
 	}
+	
+	public void testWithExpression() throws Exception {
+		XWithExpression with = (XWithExpression) expression(":foo:new StringBuilder() { it.append('foo')}");
+		assertEquals("foo",with.getVariable().getName());
+		assertTrue(with.getMainExpression() instanceof XConstructorCall);
+		assertTrue(with.getBlockExpression() instanceof XBlockExpression);
+	}
+	public void testWithExpression_1() throws Exception {
+		XWithExpression with = (XWithExpression) expression(":new StringBuilder() { it.append('foo') append('bar')}");
+		assertNull(with.getVariable());
+		assertTrue(with.getMainExpression() instanceof XConstructorCall);
+		assertTrue(with.getBlockExpression() instanceof XBlockExpression);
+		assertEquals(StringBuilder.class.getCanonicalName(), ((XConstructorCall)with.getMainExpression()).getConstructor().getDeclaringType().getIdentifier());
+		XBlockExpression block = (XBlockExpression) with.getBlockExpression();
+		assertEquals("append", ((XAbstractFeatureCall)block.getExpressions().get(0)).getFeature().getSimpleName());
+		assertEquals("append", ((XFeatureCall)block.getExpressions().get(1)).getFeature().getSimpleName());
+	}
+	
+//	public void testWithExpression_2() throws Exception {
+//		XWithExpression with = (XWithExpression) expression("val StringBuilder sb = :{ append('foo')}");
+//		assertNull(with.getVariable());
+//		assertNull(with.getMainExpression());
+//		assertTrue(with.getBlockExpression() instanceof XBlockExpression);
+//	}
 }

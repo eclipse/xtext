@@ -59,9 +59,11 @@ import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.XWithExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
+import org.eclipse.xtext.xbase.impl.XWithExpressionSupport;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.SynonymTypesProvider;
@@ -99,6 +101,9 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	
 	@Inject
 	private Primitives primitives;
+	
+	@Inject
+	private XWithExpressionSupport withExpressionSupport;
 	
 	private final Set<EReference> typeConformanceCheckedReferences = ImmutableSet.of(
 			XbasePackage.Literals.XVARIABLE_DECLARATION__RIGHT,
@@ -539,6 +544,19 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	public void checkClosureParams(XClosure closure) {
 		if (closure.getFormalParameters().size()>6) {
 			error("The maximum number of parameters for a closure is six.",closure, Literals.XCLOSURE__FORMAL_PARAMETERS, 6, TOO_MANY_PARAMS_IN_CLOSURE);
+		}
+	}
+	
+	@Check
+	public void checkWithExpression(XWithExpression expression) {
+		if (expression.getMainExpression() == null) {
+			JvmTypeReference expectedType = typeProvider.getExpectedType(expression);
+			if (expectedType == null) {
+				error("Insufficient information for object construction. Please provide a construction expression.", expression, null, "insufficient_type_information");
+			}
+			if (!withExpressionSupport.isConstructionInferrable(expression, expectedType)) {
+				error("Instance cannot be created for type "+expectedType+".", expression, null, "no_instance_providing_strategy");
+			}
 		}
 	}
 

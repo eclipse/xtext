@@ -15,7 +15,7 @@
     <genClasses ecoreClass="XAnnotations.ecore#//XAnnotation">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XAnnotations.ecore#//XAnnotation/elementValuePairs"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference XAnnotations.ecore#//XAnnotation/annotationType"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XAnnotations.ecore#//XAnnotation/values"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XAnnotations.ecore#//XAnnotation/value"/>
     </genClasses>
     <genClasses ecoreClass="XAnnotations.ecore#//XAnnotationElementValuePair">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XAnnotations.ecore#//XAnnotationElementValuePair/value"/>
@@ -34,6 +34,14 @@
     <genClasses ecoreClass="Xtype.ecore#//XFunctionTypeRef">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtype.ecore#//XFunctionTypeRef/paramTypes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtype.ecore#//XFunctionTypeRef/returnType"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtype.ecore#//XSynonymTypeReference">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtype.ecore#//XSynonymTypeReference/synonymes"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtype.ecore#//XSynonymTypeReference/type"/>
+      <genOperations ecoreOperation="Xtype.ecore#//XSynonymTypeReference/getPrimaryType"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtype.ecore#//XDelegateTypeReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtype.ecore#//XDelegateTypeReference/delegate"/>
     </genClasses>
   </genPackages>
   <genPackages prefix="Xbase" basePackage="org.eclipse.xtext" ecorePackage="Xbase.ecore#/">
@@ -152,6 +160,11 @@
     </genClasses>
     <genClasses ecoreClass="Xbase.ecore#//XReturnExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XReturnExpression/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="Xbase.ecore#//XWithExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XWithExpression/mainExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XWithExpression/blockExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XWithExpression/variable"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
