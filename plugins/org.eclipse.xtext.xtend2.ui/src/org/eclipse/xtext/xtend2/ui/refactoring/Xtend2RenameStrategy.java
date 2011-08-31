@@ -14,8 +14,6 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
-import org.eclipse.xtext.common.types.ui.refactoring.DelegateToJavaRefactoringContext;
-import org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
@@ -43,12 +41,9 @@ public class Xtend2RenameStrategy extends AbstractJvmModelRenameStrategy {
 		
 		@Override
 		public IRenameStrategy get(EObject targetElement, IRenameElementContext renameElementContext) {
-			if (renameElementContext instanceof DelegateToJavaRefactoringContext
-					&& ((DelegateToJavaRefactoringContext) renameElementContext).isRealJvmElement()) {
-				// a Java refactoring triggered from an Xtend editor
-				return new JvmMemberRenameStrategy((JvmMember) targetElement);
-			} 
 			EAttribute nameAttribute = getNameAttribute(targetElement);
+			if(nameAttribute == null)
+				return null;
 			return new Xtend2RenameStrategy(targetElement, nameAttribute, getOriginalNameRegion(targetElement,
 					nameAttribute), getNameRuleName(targetElement, nameAttribute), getValueConverterService(),
 					jvmModelAssociations);
