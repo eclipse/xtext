@@ -15,7 +15,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.common.types.ui.refactoring.participant.JdtRenamePartcipant;
+import org.eclipse.xtext.common.types.ui.refactoring.participant.JdtRenameParticipant;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 
@@ -23,7 +23,7 @@ import com.google.inject.Inject;
 
 /**
  * The context of the refactoring of an Xtext source element with an inferred JVM element, triggered by the
- * {@link JdtRenamePartcipant}.
+ * {@link JdtRenameParticipant}.
  * 
  * @author koehnlein - Initial contribution and API
  */
@@ -34,7 +34,7 @@ public class JvmModelJdtRenameParticipantContext extends IRenameElementContext.I
 		super(targetElementURI, targetElementEClass);
 	}
 
-	public static class ContextFactory extends JdtRenamePartcipant.ContextFactory {
+	public static class ContextFactory extends JdtRenameParticipant.ContextFactory {
 		@Inject
 		private IJvmModelAssociations associations;
 

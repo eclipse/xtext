@@ -34,7 +34,7 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("restriction")
-public class JdtRenamePartcipant extends AbstractProcessorBasedRenameParticipant {
+public class JdtRenameParticipant extends AbstractProcessorBasedRenameParticipant {
 
 	@Inject
 	private IResourceSetProvider resourceSetProvider;
@@ -42,6 +42,12 @@ public class JdtRenamePartcipant extends AbstractProcessorBasedRenameParticipant
 	@Inject
 	private JvmElementFinder jvmElementFinder;
 
+	
+	@Override
+	public String getName() {
+		return "Xtext JdtRenameParticipant";
+	}
+	
 	@Override
 	protected List<? extends IRenameElementContext> createRenameElementContexts(Object element) {
 		if (element instanceof IJavaElement) {
