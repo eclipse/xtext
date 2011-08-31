@@ -138,8 +138,13 @@
             </elements>
             <elements xsi:type="xtext:Alternatives">
               <elements xsi:type="xtext:Group">
-                <elements xsi:type="xtext:Assignment" feature="extension" operator="?=">
-                  <terminal xsi:type="xtext:Keyword" value="extension"/>
+                <elements xsi:type="xtext:Alternatives">
+                  <elements xsi:type="xtext:Assignment" feature="extension" operator="?=">
+                    <terminal xsi:type="xtext:Keyword" value="extension"/>
+                  </elements>
+                  <elements xsi:type="xtext:Assignment" feature="instancefactory" operator="?=">
+                    <terminal xsi:type="xtext:Keyword" value="instancefactory"/>
+                  </elements>
                 </elements>
                 <elements xsi:type="xtext:Assignment" feature="type" operator="=">
                   <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.0"/>

@@ -43,7 +43,10 @@ ruleClass :
 ruleMember :
 	ruleXAnnotation* (
 		(
-			'extension' ruleJvmTypeReference ruleValidID? |
+			(
+				'extension' |
+				'instancefactory'
+			) ruleJvmTypeReference ruleValidID? |
 			ruleJvmTypeReference ruleValidID
 		) |
 		(

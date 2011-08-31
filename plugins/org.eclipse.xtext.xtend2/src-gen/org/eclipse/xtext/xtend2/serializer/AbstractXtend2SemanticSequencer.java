@@ -1411,16 +1411,23 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (annotationInfo=Member_XtendField_2_0_0 ((extension?='extension' type=JvmTypeReference name=ValidID?) | (type=JvmTypeReference name=ValidID)))
+	 *     (
+	 *         annotationInfo=Member_XtendField_2_0_0 
+	 *         (((extension?='extension' | instancefactory?='instancefactory') type=JvmTypeReference name=ValidID?) | (type=JvmTypeReference name=ValidID))
+	 *     )
 	 *
 	 * Features:
 	 *    annotationInfo[1, 1]
 	 *    name[0, 2]
 	 *    type[0, 2]
 	 *    extension[0, 1]
+	 *         EXCLUDE_IF_SET instancefactory
 	 *         EXCLUDE_IF_UNSET type
-	 *         MANDATORY_IF_SET type
-	 *         MANDATORY_IF_SET name
+	 *         EXCLUDE_IF_SET type
+	 *         EXCLUDE_IF_SET name
+	 *    instancefactory[0, 1]
+	 *         EXCLUDE_IF_SET extension
+	 *         EXCLUDE_IF_UNSET type
 	 *         EXCLUDE_IF_SET type
 	 *         EXCLUDE_IF_SET name
 	 */
