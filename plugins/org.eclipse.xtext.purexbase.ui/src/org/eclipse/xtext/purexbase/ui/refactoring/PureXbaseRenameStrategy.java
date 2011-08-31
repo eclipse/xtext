@@ -29,6 +29,8 @@ public class PureXbaseRenameStrategy extends AbstractJvmModelRenameStrategy {
 		@Override
 		public IRenameStrategy get(EObject targetElement, IRenameElementContext renameElementContext) {
 			EAttribute nameAttribute = getNameAttribute(targetElement);
+			if(nameAttribute == null)
+				return null;
 			return new PureXbaseRenameStrategy(targetElement, nameAttribute, getOriginalNameRegion(targetElement,
 					nameAttribute), getNameRuleName(targetElement, nameAttribute), getValueConverterService(),
 					jvmModelAssociations);
