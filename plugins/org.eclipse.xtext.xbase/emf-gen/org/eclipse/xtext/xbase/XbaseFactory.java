@@ -260,6 +260,15 @@ public interface XbaseFactory extends EFactory
 	XReturnExpression createXReturnExpression();
 
 	/**
+	 * Returns a new object of class '<em>XWith Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>XWith Expression</em>'.
+	 * @generated
+	 */
+	XWithExpression createXWithExpression();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

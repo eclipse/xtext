@@ -336,6 +336,15 @@ public class XbaseSwitch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case XbasePackage.XWITH_EXPRESSION:
+			{
+				XWithExpression xWithExpression = (XWithExpression)theEObject;
+				T result = caseXWithExpression(xWithExpression);
+				if (result == null) result = caseXExpression(xWithExpression);
+				if (result == null) result = caseJvmIdentifiableElement(xWithExpression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -800,6 +809,22 @@ public class XbaseSwitch<T>
 	 * @generated
 	 */
 	public T caseXReturnExpression(XReturnExpression object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>XWith Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>XWith Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXWithExpression(XWithExpression object)
 	{
 		return null;
 	}

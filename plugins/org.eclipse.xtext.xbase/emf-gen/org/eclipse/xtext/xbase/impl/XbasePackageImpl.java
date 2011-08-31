@@ -43,6 +43,7 @@ import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
+import org.eclipse.xtext.xbase.XWithExpression;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.XbasePackage;
 
@@ -264,6 +265,13 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	 * @generated
 	 */
 	private EClass xReturnExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass xWithExpressionEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -1234,6 +1242,46 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getXWithExpression()
+	{
+		return xWithExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXWithExpression_MainExpression()
+	{
+		return (EReference)xWithExpressionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXWithExpression_BlockExpression()
+	{
+		return (EReference)xWithExpressionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXWithExpression_Variable()
+	{
+		return (EReference)xWithExpressionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public XbaseFactory getXbaseFactory()
 	{
 		return (XbaseFactory)getEFactoryInstance();
@@ -1376,6 +1424,11 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 
 		xReturnExpressionEClass = createEClass(XRETURN_EXPRESSION);
 		createEReference(xReturnExpressionEClass, XRETURN_EXPRESSION__EXPRESSION);
+
+		xWithExpressionEClass = createEClass(XWITH_EXPRESSION);
+		createEReference(xWithExpressionEClass, XWITH_EXPRESSION__MAIN_EXPRESSION);
+		createEReference(xWithExpressionEClass, XWITH_EXPRESSION__BLOCK_EXPRESSION);
+		createEReference(xWithExpressionEClass, XWITH_EXPRESSION__VARIABLE);
 	}
 
 	/**
@@ -1439,6 +1492,8 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		xTryCatchFinallyExpressionEClass.getESuperTypes().add(this.getXExpression());
 		xAssignmentEClass.getESuperTypes().add(this.getXAbstractFeatureCall());
 		xReturnExpressionEClass.getESuperTypes().add(this.getXExpression());
+		xWithExpressionEClass.getESuperTypes().add(this.getXExpression());
+		xWithExpressionEClass.getESuperTypes().add(theTypesPackage.getJvmIdentifiableElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(xExpressionEClass, XExpression.class, "XExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1562,6 +1617,11 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 
 		initEClass(xReturnExpressionEClass, XReturnExpression.class, "XReturnExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXReturnExpression_Expression(), this.getXExpression(), null, "expression", null, 0, 1, XReturnExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(xWithExpressionEClass, XWithExpression.class, "XWithExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getXWithExpression_MainExpression(), this.getXExpression(), null, "mainExpression", null, 0, 1, XWithExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXWithExpression_BlockExpression(), this.getXExpression(), null, "blockExpression", null, 0, 1, XWithExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXWithExpression_Variable(), theTypesPackage.getJvmFormalParameter(), null, "variable", null, 0, 1, XWithExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

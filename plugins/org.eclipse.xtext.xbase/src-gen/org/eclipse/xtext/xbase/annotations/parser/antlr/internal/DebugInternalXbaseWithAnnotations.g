@@ -254,6 +254,7 @@ ruleXPrimaryExpression :
 	ruleXConstructorCall |
 	ruleXBlockExpression |
 	ruleXSwitchExpression |
+	ruleXWithExpression |
 	ruleXFeatureCall |
 	ruleXLiteral |
 	ruleXIfExpression |
@@ -318,9 +319,11 @@ ruleXIfExpression :
 
 // Rule XSwitchExpression
 ruleXSwitchExpression :
-	'switch' (
+	'switch' ( (
+	ruleValidID ':'
+	) => (
 		ruleValidID ':'
-	)? ruleXExpression '{' ruleXCasePart+ (
+	) )? ruleXExpression '{' ruleXCasePart+ (
 		'default' ':' ruleXExpression
 	)? '}'
 ;
@@ -496,6 +499,26 @@ ruleXCatchClause :
 	( (
 	'catch'
 	) => 'catch' ) '(' ruleJvmFormalParameter ')' ruleXExpression
+;
+
+// Rule XWithExpression
+ruleXWithExpression :
+	(
+		':' ruleJvmFormalParameterWithoutType
+	)? (
+		':' ruleXExpression ruleXBlockExpression |
+		ruleXMustacheExpression
+	)
+;
+
+// Rule JvmFormalParameterWithoutType
+ruleJvmFormalParameterWithoutType :
+	ruleValidID
+;
+
+// Rule XMustacheExpression
+ruleXMustacheExpression :
+	':{' ruleXExpressionInsideBlock* '}'
 ;
 
 // Rule QualifiedName
