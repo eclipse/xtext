@@ -100,8 +100,8 @@ mustBeParenthesized(Group this) : true;
 mustBeParenthesized(UnorderedGroup this) : true;
 mustBeParenthesized(Alternatives this) : true;
 mustBeParenthesized(EnumLiteralDeclaration this) : true;
-mustBeParenthesized(Keyword this) : predicated || cardinality!=null;
-mustBeParenthesized(RuleCall this) : predicated || cardinality!=null;
+mustBeParenthesized(Keyword this) : predicated() || cardinality!=null;
+mustBeParenthesized(RuleCall this) : predicated() || cardinality!=null;
 
 String grammarElementAccess(EObject object):
 	"Unsupported : grammarElementAccess for: " + object.toString(); 
