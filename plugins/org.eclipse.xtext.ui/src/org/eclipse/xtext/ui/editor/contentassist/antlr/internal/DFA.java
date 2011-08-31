@@ -32,6 +32,9 @@ public class DFA extends org.antlr.runtime.DFA {
 		return (AbstractInternalContentAssistParser) recognizer;
 	}
 	
+	/**
+	 * @since 2.1
+	 */
 	@Override
 	protected void error(NoViableAltException nvae) {
 		if (nvae.token == Token.EOF_TOKEN) {

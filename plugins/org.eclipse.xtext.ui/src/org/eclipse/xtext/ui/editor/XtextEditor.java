@@ -355,6 +355,9 @@ public class XtextEditor extends TextEditor {
 		action.configure(sourceViewer, configuration);
 	}
 	
+	/**
+	 * @since 2.1
+	 */
 	@Override
 	protected IOperationApprover getUndoRedoOperationApprover(IUndoContext undoContext) {
 		final IOperationApprover result = super.getUndoRedoOperationApprover(undoContext);

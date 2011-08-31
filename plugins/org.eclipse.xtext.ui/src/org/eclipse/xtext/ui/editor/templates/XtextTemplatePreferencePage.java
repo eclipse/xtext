@@ -18,6 +18,7 @@ import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @since 2.1
  */
 public class XtextTemplatePreferencePage extends TemplatePreferencePage {
 
@@ -33,6 +34,9 @@ public class XtextTemplatePreferencePage extends TemplatePreferencePage {
 		return false;
 	}
 	
+	/**
+	 * @since 2.1
+	 */
 	@Override
 	protected Control createContents(Composite ancestor) {
 		Control result = super.createContents(ancestor);
@@ -40,6 +44,9 @@ public class XtextTemplatePreferencePage extends TemplatePreferencePage {
 		return result;
 	}
 	
+	/**
+	 * @since 2.1
+	 */
 	@Override
 	public void createControl(Composite parent) {
 		super.createControl(parent);
