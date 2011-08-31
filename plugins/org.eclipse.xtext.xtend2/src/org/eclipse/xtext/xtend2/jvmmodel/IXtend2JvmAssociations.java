@@ -14,11 +14,13 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendField;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
 import com.google.inject.ImplementedBy;
@@ -36,6 +38,8 @@ public interface IXtend2JvmAssociations extends IJvmModelAssociations {
 	JvmOperation getDirectlyInferredOperation(XtendFunction xtendFunction);
 	
 	JvmOperation getDispatchOperation(XtendFunction dispatchFunction);
+	
+	JvmField getJvmField(XtendField field);
 	
 	XtendClass getXtendClass(JvmGenericType jvmType);
 	
@@ -81,6 +85,10 @@ public interface IXtend2JvmAssociations extends IJvmModelAssociations {
 		protected <T> T getFirstOrNull(Iterable<EObject> elements, Class<T> type) {
 			Iterator<T> iterator = filter(elements, type).iterator();
 			return iterator.hasNext() ? iterator.next() : null;
+		}
+
+		public JvmField getJvmField(XtendField field) {
+			return getFirstOrNull(getJvmElements(field), JvmField.class);
 		}
 
 	}
