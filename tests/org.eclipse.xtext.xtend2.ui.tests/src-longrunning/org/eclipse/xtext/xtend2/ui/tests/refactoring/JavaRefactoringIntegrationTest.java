@@ -142,6 +142,23 @@ public class JavaRefactoringIntegrationTest extends AbstractXtend2UITestCase {
 			testHelper.getProject().getFile("src/NewJavaClass.java").delete(true, new NullProgressMonitor());
 		}
 	}
+	
+	public void testDontRenameOperator() throws Exception {
+		String xtendModel = "class XtendClass { def bar() { 1 + 2 }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		final XtextEditor editor = testHelper.openEditor(xtendClass);
+		final int offset = xtendModel.indexOf('+');
+		IResourcesSetupUtil.waitForAutoBuild();
+		IRenameElementContext renameElementContext = editor.getDocument().readOnly(
+				new IUnitOfWork<IRenameElementContext, XtextResource>() {
+					public IRenameElementContext exec(XtextResource state) throws Exception {
+						EObject element = eObjectAtOffsetHelper.resolveElementAt(state, offset);
+						return renameElementHandler.createRenameElementContext(element, editor, new TextSelection(
+								offset, 1), state);
+					}
+				});
+		assertNull(renameElementContext);
+	}
 
 	protected IFile assertFileExists(String fileName) throws Exception {
 		IResource file = testHelper.getProject().findMember(fileName);
