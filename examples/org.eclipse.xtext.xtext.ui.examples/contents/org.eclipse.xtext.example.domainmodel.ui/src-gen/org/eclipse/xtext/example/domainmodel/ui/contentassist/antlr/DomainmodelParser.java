@@ -53,6 +53,8 @@ public class DomainmodelParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXMemberFeatureCallAccess().getAlternatives_1_1_3_1(), "rule__XMemberFeatureCall__Alternatives_1_1_3_1");
 					put(grammarAccess.getXPrimaryExpressionAccess().getAlternatives(), "rule__XPrimaryExpression__Alternatives");
 					put(grammarAccess.getXLiteralAccess().getAlternatives(), "rule__XLiteral__Alternatives");
+					put(grammarAccess.getXSwitchExpressionAccess().getAlternatives_6_1(), "rule__XSwitchExpression__Alternatives_6_1");
+					put(grammarAccess.getXCasePartAccess().getAlternatives_2(), "rule__XCasePart__Alternatives_2");
 					put(grammarAccess.getXExpressionInsideBlockAccess().getAlternatives(), "rule__XExpressionInsideBlock__Alternatives");
 					put(grammarAccess.getXVariableDeclarationAccess().getAlternatives_1(), "rule__XVariableDeclaration__Alternatives_1");
 					put(grammarAccess.getXVariableDeclarationAccess().getAlternatives_2(), "rule__XVariableDeclaration__Alternatives_2");
@@ -145,8 +147,10 @@ public class DomainmodelParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXSwitchExpressionAccess().getGroup_2(), "rule__XSwitchExpression__Group_2__0");
 					put(grammarAccess.getXSwitchExpressionAccess().getGroup_2_0(), "rule__XSwitchExpression__Group_2_0__0");
 					put(grammarAccess.getXSwitchExpressionAccess().getGroup_6(), "rule__XSwitchExpression__Group_6__0");
+					put(grammarAccess.getXSwitchExpressionAccess().getGroup_6_1_0(), "rule__XSwitchExpression__Group_6_1_0__0");
 					put(grammarAccess.getXCasePartAccess().getGroup(), "rule__XCasePart__Group__0");
 					put(grammarAccess.getXCasePartAccess().getGroup_1(), "rule__XCasePart__Group_1__0");
+					put(grammarAccess.getXCasePartAccess().getGroup_2_0(), "rule__XCasePart__Group_2_0__0");
 					put(grammarAccess.getXForLoopExpressionAccess().getGroup(), "rule__XForLoopExpression__Group__0");
 					put(grammarAccess.getXWhileExpressionAccess().getGroup(), "rule__XWhileExpression__Group__0");
 					put(grammarAccess.getXDoWhileExpressionAccess().getGroup(), "rule__XDoWhileExpression__Group__0");
@@ -261,10 +265,12 @@ public class DomainmodelParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXSwitchExpressionAccess().getLocalVarNameAssignment_2_0_0(), "rule__XSwitchExpression__LocalVarNameAssignment_2_0_0");
 					put(grammarAccess.getXSwitchExpressionAccess().getSwitchAssignment_3(), "rule__XSwitchExpression__SwitchAssignment_3");
 					put(grammarAccess.getXSwitchExpressionAccess().getCasesAssignment_5(), "rule__XSwitchExpression__CasesAssignment_5");
-					put(grammarAccess.getXSwitchExpressionAccess().getDefaultAssignment_6_2(), "rule__XSwitchExpression__DefaultAssignment_6_2");
+					put(grammarAccess.getXSwitchExpressionAccess().getDefaultAssignment_6_1_0_1(), "rule__XSwitchExpression__DefaultAssignment_6_1_0_1");
+					put(grammarAccess.getXSwitchExpressionAccess().getDefaultAssignment_6_1_1(), "rule__XSwitchExpression__DefaultAssignment_6_1_1");
 					put(grammarAccess.getXCasePartAccess().getTypeGuardAssignment_0(), "rule__XCasePart__TypeGuardAssignment_0");
 					put(grammarAccess.getXCasePartAccess().getCaseAssignment_1_1(), "rule__XCasePart__CaseAssignment_1_1");
-					put(grammarAccess.getXCasePartAccess().getThenAssignment_3(), "rule__XCasePart__ThenAssignment_3");
+					put(grammarAccess.getXCasePartAccess().getThenAssignment_2_0_1(), "rule__XCasePart__ThenAssignment_2_0_1");
+					put(grammarAccess.getXCasePartAccess().getThenAssignment_2_1(), "rule__XCasePart__ThenAssignment_2_1");
 					put(grammarAccess.getXForLoopExpressionAccess().getDeclaredParamAssignment_3(), "rule__XForLoopExpression__DeclaredParamAssignment_3");
 					put(grammarAccess.getXForLoopExpressionAccess().getForExpressionAssignment_5(), "rule__XForLoopExpression__ForExpressionAssignment_5");
 					put(grammarAccess.getXForLoopExpressionAccess().getEachExpressionAssignment_7(), "rule__XForLoopExpression__EachExpressionAssignment_7");

@@ -274,7 +274,10 @@ ruleXSwitchExpression :
 	) => (
 		ruleValidID ':'
 	) )? ruleXExpression '{' ruleXCasePart+ (
-		'default' ':' ruleXExpression
+		'default' (
+			':' ruleXExpression |
+			ruleXMustacheExpression
+		)
 	)? '}'
 ;
 
@@ -282,7 +285,10 @@ ruleXSwitchExpression :
 ruleXCasePart :
 	ruleJvmTypeReference? (
 		'case' ruleXExpression
-	)? ':' ruleXExpression
+	)? (
+		':' ruleXExpression |
+		ruleXMustacheExpression
+	)
 ;
 
 // Rule XForLoopExpression
