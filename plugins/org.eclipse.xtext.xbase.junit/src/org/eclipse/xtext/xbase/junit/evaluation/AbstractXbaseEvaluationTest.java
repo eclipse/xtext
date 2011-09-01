@@ -50,6 +50,16 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		String expr = "{ val java.util.ArrayList<String> x = :{ it += 'bar' it += 'baz' addAll(:newArrayList('zip'){ it += 'zonk'})} x}";
 		assertEvaluatesTo(newArrayList("bar", "baz", "zip", "zonk"), expr);
 	}
+	
+	@Test public void testWithExpression_04() throws Exception {
+		String expr = "<String>newArrayList(:{})";
+		assertEvaluatesTo(newArrayList(""), expr);
+	}
+	
+	@Test public void testWithExpression_05() throws Exception {
+		String expr = ":{} as String";
+		assertEvaluatesTo("", expr);
+	}
 
 	@Test public void testNestedClosures() throws Exception {
 		String expr = 
