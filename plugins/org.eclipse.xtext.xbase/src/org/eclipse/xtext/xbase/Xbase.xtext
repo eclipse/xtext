@@ -143,12 +143,12 @@ XSwitchExpression returns XExpression:
 	{XSwitchExpression}
 	'switch' =>(localVarName=ValidID ':')? switch=XExpression '{'
 	(cases+=XCasePart)+
-	('default' ':' default=XExpression )?
+	('default' (':' default=XExpression | default=XMustacheExpression) )?
 	'}';
 
 XCasePart:
-	typeGuard=JvmTypeReference? ('case' case=XExpression)? ':' 
-		then=XExpression ;
+	typeGuard=JvmTypeReference? ('case' case=XExpression)? 
+		(':' then=XExpression | then=XMustacheExpression);
 
 XForLoopExpression returns XExpression:
 	{XForLoopExpression}
