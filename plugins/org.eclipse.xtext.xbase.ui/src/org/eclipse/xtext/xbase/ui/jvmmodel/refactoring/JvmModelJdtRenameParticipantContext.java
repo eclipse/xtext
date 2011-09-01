@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.ui.jvmmodel.refactoring;
 
 import static java.util.Collections.*;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
@@ -37,15 +38,20 @@ public class JvmModelJdtRenameParticipantContext extends IRenameElementContext.I
 	public static class ContextFactory extends JdtRenameParticipant.ContextFactory {
 		@Inject
 		private IJvmModelAssociations associations;
+		
+		@Inject
+		private OperatorMappingUtil operatorMappingUtil;
 
 		@Override
-		protected List<? extends IRenameElementContext> createJdtParticipantXtextSourceContext(EObject indexedJvmElement) {
+		protected List<? extends IRenameElementContext> createJdtParticipantXtextSourceContexts(EObject indexedJvmElement) {
+			if(operatorMappingUtil.isMappedOperator(indexedJvmElement))
+				return Collections.emptyList();
 			EObject renameTargetElement = associations.getPrimarySourceElement(indexedJvmElement);
 			if (renameTargetElement != null) {
 				return singletonList(new JvmModelJdtRenameParticipantContext(
 						EcoreUtil2.getNormalizedURI(renameTargetElement), renameTargetElement.eClass()));
 			}
-			return super.createJdtParticipantXtextSourceContext(indexedJvmElement);
+			return super.createJdtParticipantXtextSourceContexts(indexedJvmElement);
 		}
 	}
 }
