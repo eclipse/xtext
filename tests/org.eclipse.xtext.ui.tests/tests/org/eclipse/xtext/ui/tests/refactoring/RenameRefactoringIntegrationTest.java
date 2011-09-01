@@ -40,6 +40,7 @@ import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.RefactoringPackage;
 import org.eclipse.xtext.ui.tests.refactoring.referring.Reference;
 import org.eclipse.xtext.ui.tests.refactoring.referring.ReferringFactory;
+import org.eclipse.xtext.ui.tests.refactoring.resource.RefactoringTestLanguageFragmentProvider;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
@@ -55,6 +56,9 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 	@Inject
 	private Provider<RenameElementProcessor> processorProvider;
 
+	@Inject 
+	private RefactoringTestLanguageFragmentProvider fragmentProvider;
+	
 	private static final String TEST_PROJECT = "refactoring.test";
 	private static final String TEST_FILE0_NAME = TEST_PROJECT + "/" + "File0.refactoringtestlanguage";
 	private static final String TEST_FILE1_NAME = TEST_PROJECT + "/" + "File1.refactoringtestlanguage";
@@ -74,11 +78,18 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 		addNature(javaProject.getProject(), XtextProjectHelper.NATURE_ID);
 		Injector injector = Activator.getInstance().getInjector(getEditorId());
 		injector.injectMembers(this);
+		fragmentProvider.setUseNames(true);
 		initialModel0 = "B A { ref B }";
 		testFile0 = IResourcesSetupUtil.createFile(TEST_FILE0_NAME, initialModel0);
 		initialModel1 = "X { ref B }";
 		testFile1 = IResourcesSetupUtil.createFile(TEST_FILE1_NAME, initialModel1);
 		uriB = URI.createPlatformResourceURI(testFile0.getFullPath().toString(), true).appendFragment("B");
+	}
+	
+	@Override
+	protected void tearDown() throws Exception {
+		fragmentProvider.setUseNames(false);
+		super.tearDown();
 	}
 
 	@Override

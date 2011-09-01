@@ -20,6 +20,9 @@ import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.IRenamedElementTracker;
 import org.eclipse.xtext.ui.refactoring.impl.RenamedElementTracker;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
+import org.eclipse.xtext.ui.tests.refactoring.resource.RefactoringTestLanguageFragmentProvider;
+
+import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -27,10 +30,15 @@ import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
 @SuppressWarnings("restriction")
 public class RenamedElementTrackerTest extends AbstractXtextTests {
 
+	@Inject 
+	private RefactoringTestLanguageFragmentProvider fragmentProvider;
+
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(RefactoringTestLanguageStandaloneSetup.class);
+		getInjector().injectMembers(this);
+		fragmentProvider.setUseNames(true);
 	}
 
 	public void testResolveElements() throws Exception {
