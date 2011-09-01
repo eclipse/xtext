@@ -395,7 +395,10 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	}
 
 	protected JvmTypeReference _expectedType(XCastedExpression expr, EReference reference, int index, boolean rawType) {
-		return null; // no expectations!
+		// SE: This was previously explicitly set to null :
+		// "return null; // no expectations!"
+		// Unfortunately there was no comment explaining why this was the case also no test besides the one which explicitly tested this was failing so I changed it back.
+		return expr.getType(); 
 	}
 
 	protected JvmTypeReference _expectedType(XThrowExpression expr, EReference reference, int index, boolean rawType) {

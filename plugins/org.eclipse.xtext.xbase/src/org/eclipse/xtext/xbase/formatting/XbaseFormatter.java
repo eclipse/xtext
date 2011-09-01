@@ -121,19 +121,25 @@ public class XbaseFormatter extends AbstractDeclarativeFormatter {
 		c.setNoLinewrap().before(ele.getLeftCurlyBracketKeyword_4());
 		c.setLinewrap().after(ele.getLeftCurlyBracketKeyword_4());
 		c.setIndentationIncrement().after(ele.getLeftCurlyBracketKeyword_4());
-		c.setNoSpace().before(ele.getColonKeyword_6_1());
-		c.setIndentationIncrement().before(ele.getDefaultAssignment_6_2());
-		c.setLinewrap().around(ele.getDefaultAssignment_6_2());
-		c.setIndentationDecrement().after(ele.getDefaultAssignment_6_2());
+		c.setNoSpace().before(ele.getColonKeyword_6_1_0_0());
+		c.setIndentationIncrement().before(ele.getDefaultAssignment_6_1_0_1());
+		c.setLinewrap().around(ele.getDefaultAssignment_6_1_0_1());
+		c.setIndentationDecrement().after(ele.getDefaultAssignment_6_1_0_1());
+		c.setIndentationIncrement().before(ele.getDefaultAssignment_6_1_1());
+		c.setLinewrap().around(ele.getDefaultAssignment_6_1_1());
+		c.setIndentationDecrement().after(ele.getDefaultAssignment_6_1_1());
 		c.setLinewrap().before(ele.getRightCurlyBracketKeyword_7());
 		c.setIndentationDecrement().before(ele.getRightCurlyBracketKeyword_7());
 	}
 
 	public void configureXCasePart(FormattingConfig c, XCasePartElements ele) {
-		c.setNoSpace().before(ele.getColonKeyword_2());
-		c.setIndentationIncrement().before(ele.getThenAssignment_3());
-		c.setLinewrap().around(ele.getThenAssignment_3());
-		c.setIndentationDecrement().after(ele.getThenAssignment_3());
+		c.setNoSpace().before(ele.getColonKeyword_2_0_0());
+		c.setIndentationIncrement().before(ele.getThenAssignment_2_0_1());
+		c.setLinewrap().around(ele.getThenAssignment_2_0_1());
+		c.setIndentationDecrement().after(ele.getThenAssignment_2_0_1());
+		c.setIndentationIncrement().before(ele.getThenAssignment_2_1());
+		c.setLinewrap().around(ele.getThenAssignment_2_1());
+		c.setIndentationDecrement().after(ele.getThenAssignment_2_1());
 	}
 
 	public void configureXForLoopExpression(FormattingConfig c, XForLoopExpressionElements ele) {

@@ -236,7 +236,7 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 	
 	public void testCastedExpression() throws Exception {
 		XCastedExpression expression = (XCastedExpression) expression("null as String");
-		assertExpected(null, expression.getTarget());
+		assertExpected("java.lang.String", expression.getTarget());
 	}
 
 	protected void assertExpected(String expectedExpectedType, XExpression obj) {
