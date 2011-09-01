@@ -63,7 +63,7 @@ public class JdtRenameParticipant extends AbstractProcessorBasedRenameParticipan
 							project);
 					if (indexedJvmElement != null)
 						// jvmElement is inferred from some Xtext-based elements
-						return getContextFactory(indexedJvmElement).createJdtParticipantXtextSourceContext(indexedJvmElement);
+						return getContextFactory(indexedJvmElement).createJdtParticipantXtextSourceContexts(indexedJvmElement);
 					else if (directJvmElement instanceof JvmMember)
 						// jvmElement is only referred to by Xtext-based elements
 						return createJdtRenameParticipantContext((JvmMember) directJvmElement, javaElement);
@@ -110,7 +110,7 @@ public class JdtRenameParticipant extends AbstractProcessorBasedRenameParticipan
 	}
 	
 	public static class ContextFactory {
-		protected List<? extends IRenameElementContext> createJdtParticipantXtextSourceContext(
+		protected List<? extends IRenameElementContext> createJdtParticipantXtextSourceContexts(
 				EObject indexedJvmElement) {
 			return Collections.emptyList();
 		}

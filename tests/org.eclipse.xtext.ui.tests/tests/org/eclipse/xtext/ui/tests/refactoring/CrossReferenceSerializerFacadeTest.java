@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.refactoring;
 
+import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.text.IRegion;
@@ -18,12 +20,10 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.serializer.ISerializer;
-import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.refactoring.impl.CrossReferenceSerializerFacade;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.Main;
-import org.eclipse.xtext.ui.tests.refactoring.resource.RefactoringTestLanguageFragmentProvider;
 import org.eclipse.xtext.ui.tests.refactoring.services.RefactoringTestLanguageGrammarAccess;
 import org.eclipse.xtext.util.TextRegion;
 
@@ -55,6 +55,12 @@ public class CrossReferenceSerializerFacadeTest extends AbstractXtextTests {
 	}
 	
 	@Override
+	protected void tearDown() throws Exception {
+		cleanWorkspace();
+		super.tearDown();
+	}
+	
+	@Override
 	public Injector getInjector() {
 		return Activator.getInstance().getInjector("org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage");
 	}
@@ -74,7 +80,7 @@ public class CrossReferenceSerializerFacadeTest extends AbstractXtextTests {
 	public void performTest() throws Exception {
 		String model = "bar { ref foo } foo";
 		String wsRelativePath = "test/test."+getCurrentFileExtension();
-		IFile file = IResourcesSetupUtil.createFile(wsRelativePath, model);
+		IFile file = createFile(wsRelativePath, model);
 		Main main = (Main) getModel(file.getContents());
 		XtextResource resource = (XtextResource) main.eResource();
 		resource.setURI(URI.createPlatformResourceURI(wsRelativePath, true));
