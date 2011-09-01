@@ -24,7 +24,6 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.IReferenceDescription;
@@ -45,10 +44,10 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 	private ILocationInFileProvider locationInFileProvider;
 
 	@Inject
-	private ITokenSerializer.ICrossReferenceSerializer crossReferenceSerializer;
+	private ITransientValueService transientValueService;
 
 	@Inject
-	private ITransientValueService transientValueService;
+	private CrossReferenceSerializerFacade crossReferenceSerializerFacade;
 
 	@Override
 	protected void createReferenceUpdates(ElementRenameArguments elementRenameArguments,
@@ -92,12 +91,14 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 					indexInList);
 			CrossReference crossReference = getCrossReference(referringElement, referenceTextRegion.getOffset());
 			if (crossReference != null) {
-				String newReferenceText = crossReferenceSerializer.serializeCrossRef(referringElement, crossReference,
-						newTargetElement, null);
-				// TODO: add import hook
-				TextEdit referenceEdit = new ReplaceEdit(referenceTextRegion.getOffset(),
-						referenceTextRegion.getLength(), newReferenceText);
-				updateAcceptor.accept(referringResourceURI, referenceEdit);
+				String newReferenceText = crossReferenceSerializerFacade.serializeCrossRef(referringElement,
+						crossReference, newTargetElement, referenceTextRegion, updateAcceptor.getRefactoringStatus());
+				if (newReferenceText != null) {
+					// TODO: add import hook
+					TextEdit referenceEdit = new ReplaceEdit(referenceTextRegion.getOffset(),
+							referenceTextRegion.getLength(), newReferenceText);
+					updateAcceptor.accept(referringResourceURI, referenceEdit);
+				}
 			}
 		}
 	}
