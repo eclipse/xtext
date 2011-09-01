@@ -61,7 +61,7 @@ public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnostic
 
 	public ISerializationDiagnostic createFeatureValueMissing(EObject semanticObject, EStructuralFeature feature) {
 		String msg = "A value for feature '" + feature.getName() + "' is missing but required.";
-		return new SerializationDiagnostic(semanticObject, msg);
+		return new SerializationDiagnostic(FEATURE_VALUE_MISSING, semanticObject, msg);
 	}
 
 	public ISerializationDiagnostic createInvalidContextOrTypeDiagnostic(EObject semanticObject, EObject context) {
@@ -86,7 +86,7 @@ public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnostic
 			msg.append("Other valid contexts for type '" + semanticType + "': "
 					+ Joiner.on(", ").join(Iterables.transform(otherValidCtxs, context2Name)));
 		msg.append("The context '" + contextName + "' is valid for types: " + validTypeNames + "\n");
-		return new SerializationDiagnostic(semanticObject, msg.toString());
+		return new SerializationDiagnostic(INVALID_CONTEXT_OR_TYPE, semanticObject, msg.toString());
 	}
 
 	protected List<EObject> getValidContexts(EClass clazz) {
@@ -121,7 +121,7 @@ public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnostic
 		StringBuilder msg = new StringBuilder();
 		msg.append("Could not serialize EObject via backtracking.\n");
 		msg.append("Constraint: " + grammar);
-		return new SerializationDiagnostic(semanticObject, context, msg.toString());
+		return new SerializationDiagnostic(BACKTRACKING_FAILED, semanticObject, context, msg.toString());
 	}
 
 }

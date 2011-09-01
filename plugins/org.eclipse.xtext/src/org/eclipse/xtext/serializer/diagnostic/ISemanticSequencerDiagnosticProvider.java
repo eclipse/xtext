@@ -20,6 +20,10 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(SequencerDiagnosticProvider.class)
 public interface ISemanticSequencerDiagnosticProvider {
 
+	String 	INVALID_CONTEXT_OR_TYPE = "invalid context or type",
+			FEATURE_VALUE_MISSING = "feature value missing",
+			BACKTRACKING_FAILED ="backtracking failed";
+	
 	ISerializationDiagnostic createInvalidContextOrTypeDiagnostic(EObject semanticObject, EObject context);
 
 	ISerializationDiagnostic createFeatureValueMissing(EObject semanticObject, EStructuralFeature feature);

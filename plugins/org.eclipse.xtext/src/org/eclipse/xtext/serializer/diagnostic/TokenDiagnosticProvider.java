@@ -43,29 +43,29 @@ public class TokenDiagnosticProvider implements ITokenDiagnosticProvider {
 		StringBuilder msg = new StringBuilder();
 		msg.append("The value '" + value + "' is invalid for enum " + rc.getRule().getName() + "\n");
 		msg.append("Valid values are: " + Joiner.on(", ").join(valid));
-		return new SerializationDiagnostic(semanticObject, rc, msg.toString());
+		return new SerializationDiagnostic(INVALID_ENUM_VALUE, semanticObject, rc, msg.toString());
 	}
 
 	public ISerializationDiagnostic getNoEObjectDescriptionFoundDiagnostic(EObject semanticObject,
 			CrossReference element, EObject target, IScope scope) {
 		String msg = "No EObjectDescription could be found in Scope " + getFullReferenceName(semanticObject, element)
 				+ " for " + EmfFormatter.objPath(target);
-		return new SerializationDiagnostic(semanticObject, element, msg);
+		return new SerializationDiagnostic(NO_EOBJECT_DESCRIPTION_FOUND, semanticObject, element, msg);
 	}
 
 	public ISerializationDiagnostic getNoScopeFoundDiagnostic(EObject semanticObject, CrossReference element,
 			EObject target) {
 		String msg = "Could not create Scope for EReference " + getFullReferenceName(semanticObject, element);
-		return new SerializationDiagnostic(semanticObject, element, msg);
+		return new SerializationDiagnostic(NO_SCOPE_FOUND, semanticObject, element, msg);
 	}
 
 	public ISerializationDiagnostic getNullNotAllowedDiagnostic(EObject semanticObject, AbstractElement ele) {
-		return new SerializationDiagnostic(semanticObject, ele, "Must not be null");
+		return new SerializationDiagnostic(NULL_NOT_ALLOWED, semanticObject, ele, "Must not be null");
 	}
 
 	public ISerializationDiagnostic getValueConversionExceptionDiagnostic(EObject semanticObject,
 			AbstractElement element, Object value, Throwable exception) {
-		return new SerializationDiagnostic(semanticObject, element, exception.getMessage());
+		return new SerializationDiagnostic(VALUE_CONVERSION_EXCEPTION, semanticObject, element, exception.getMessage());
 	}
 
 }

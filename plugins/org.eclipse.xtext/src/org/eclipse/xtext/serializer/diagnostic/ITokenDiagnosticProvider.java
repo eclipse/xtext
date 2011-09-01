@@ -21,6 +21,12 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(TokenDiagnosticProvider.class)
 public interface ITokenDiagnosticProvider {
 
+	String 	INVALID_ENUM_VALUE = "invalid enum value", 
+			NO_EOBJECT_DESCRIPTION_FOUND = "no eobject description found", 
+			NO_SCOPE_FOUND = "no scope found", 
+			NULL_NOT_ALLOWED = "null not allowed", 
+			VALUE_CONVERSION_EXCEPTION = "value conversion exception";
+	
 	ISerializationDiagnostic getInvalidEnumValueDiagnostic(EObject semanticObject, RuleCall rc, Object value);
 
 	ISerializationDiagnostic getNoEObjectDescriptionFoundDiagnostic(EObject semanticObject, CrossReference element,
