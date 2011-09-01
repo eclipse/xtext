@@ -16,6 +16,8 @@ import org.eclipse.xtext.util.EmfFormatter;
  */
 public interface ISerializationDiagnostic {
 
+	String EXCEPTION_DIAGNOSTIC = "exception diagnostic";
+	
 	public interface Acceptor {
 		void accept(ISerializationDiagnostic diagnostic);
 	}
@@ -25,7 +27,6 @@ public interface ISerializationDiagnostic {
 		protected Throwable exception;
 
 		public ExceptionDiagnostic(Throwable exception) {
-			super();
 			this.exception = exception;
 		}
 
@@ -49,6 +50,9 @@ public interface ISerializationDiagnostic {
 			return null;
 		}
 
+		public String getId() {
+			return EXCEPTION_DIAGNOSTIC;
+		}
 	}
 
 	public class ExceptionThrowingAcceptor implements Acceptor {
@@ -90,4 +94,6 @@ public interface ISerializationDiagnostic {
 	EObject getSemanticObject();
 
 	EObject getContext();
+	
+	String getId();
 }

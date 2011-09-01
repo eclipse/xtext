@@ -41,7 +41,7 @@ public class SyntacticSequencerDiagnosticProvider implements ISyntacticSequencer
 		msg.append("State '" + toName + "' may not follow '" + fromName + "'.\n");
 		msg.append("Valid followers are: " + Join.join(", ", targets));
 
-		return new SerializationDiagnostic(semanticObject, context, msg.toString());
+		return new SerializationDiagnostic(INVALID_FOLLOWING_ABSORBER, semanticObject, context, msg.toString());
 	}
 
 	public ISerializationDiagnostic createUnexpectedEmitterDiagnostic(ISynNavigable currentState,
@@ -57,6 +57,6 @@ public class SyntacticSequencerDiagnosticProvider implements ISyntacticSequencer
 		buf.append("Found on top of the stack: " + poppedStr + "\n");
 		buf.append("Expected: " + toConsume + "\n");
 		buf.append("Rest of the stack: " + stack + "\n");
-		return new SerializationDiagnostic(semanticObject, toConsume.getContext(), buf.toString());
+		return new SerializationDiagnostic(UNEXPECTED_STACK_TRACE, semanticObject, toConsume.getContext(), buf.toString());
 	}
 }

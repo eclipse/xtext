@@ -40,6 +40,8 @@ import com.google.inject.Inject;
 @SuppressWarnings("restriction")
 public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 	
+	public static final String OPERATOR_NOT_SUPPORTED = "operation not supported";
+	
 	@Inject
 	private IQualifiedNameConverter qualifiedNameConverter;
 
@@ -116,7 +118,7 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 			acceptor.accept(opMultiAssign.getFeatureJvmIdentifiableElementOpMultiAssignParserRuleCall_1_1_0_0_1_0_1(), operation.getFeature(), featureToken, featureNode);
 			acceptor.accept(opMultiAssign.getRightOperandXAssignmentParserRuleCall_1_1_1_0(), operation.getRightOperand());
 		} else if (errorAcceptor != null) {
-			errorAcceptor.accept(new SerializationDiagnostic(operation, context, "Operator "+operatorNames+" is not supported."));
+			errorAcceptor.accept(new SerializationDiagnostic(OPERATOR_NOT_SUPPORTED, operation, context, "Operator "+operatorNames+" is not supported."));
 		} 
 		acceptor.finish();
 	}

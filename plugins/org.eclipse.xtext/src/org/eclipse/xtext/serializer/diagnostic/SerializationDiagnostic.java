@@ -25,27 +25,31 @@ public class SerializationDiagnostic implements ISerializationDiagnostic {
 
 	protected EObject context;
 
-	public SerializationDiagnostic(EObject semanticObject, AbstractElement element, String message) {
-		this(semanticObject, semanticObject != null ? FeatureFinderUtil.getFeature(element, semanticObject.eClass())
+	private String id;
+
+	public SerializationDiagnostic(String id, EObject semanticObject, AbstractElement element, String message) {
+		this(id, semanticObject, semanticObject != null ? FeatureFinderUtil.getFeature(element, semanticObject.eClass())
 				: null, message);
 	}
 
-	public SerializationDiagnostic(EObject semanticObject, EStructuralFeature feature, String message) {
+	public SerializationDiagnostic(String id, EObject semanticObject, EStructuralFeature feature, String message) {
 		super();
+		this.id = id;
 		this.semanticObject = semanticObject;
 		this.message = message;
 		this.feature = feature;
 	}
 
-	public SerializationDiagnostic(EObject semanticObject, EObject context, String message) {
+	public SerializationDiagnostic(String id, EObject semanticObject, EObject context, String message) {
 		super();
+		this.id = id;
 		this.semanticObject = semanticObject;
 		this.message = message;
 		this.context = context;
 	}
 
-	public SerializationDiagnostic(EObject semanticObject, String message) {
-		this(semanticObject, (EStructuralFeature) null, message);
+	public SerializationDiagnostic(String id, EObject semanticObject, String message) {
+		this(id, semanticObject, (EStructuralFeature) null, message);
 	}
 
 	public boolean breaksSyntax() {
@@ -68,4 +72,7 @@ public class SerializationDiagnostic implements ISerializationDiagnostic {
 		return context;
 	}
 
+	public String getId() {
+		return id;
+	}
 }
