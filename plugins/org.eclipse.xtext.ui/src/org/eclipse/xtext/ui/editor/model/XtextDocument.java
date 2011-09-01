@@ -22,7 +22,6 @@ import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.BadPositionCategoryException;
 import org.eclipse.jface.text.Document;
@@ -66,15 +65,18 @@ public class XtextDocument extends Document implements IXtextDocument {
 	}
 
 	public void disposeInput() {
-		if (resource != null) {
-			ResourceSet resourceSet = resource.getResourceSet();
-			if (resourceSet != null) {
-				resourceSet.eSetDeliver(false); // don't notify resources - no need to unload them explicitly
-				resourceSet.getResources().clear();
-				resourceSet.eAdapters().clear();
-			}
-			resource = null;
-		}
+		//TODO Is this really needed? Who else is holding a reference to this resource / resourceset?
+		// the problem with this code is, that when an editor gets a new editorinput this method is called before the document is remobved from the source viewer
+		// in between clients (running jobs, like the reconciler) get a non working document.
+//		if (resource != null) {
+//			ResourceSet resourceSet = resource.getResourceSet();
+//			if (resourceSet != null) {
+//				resourceSet.eSetDeliver(false); // don't notify resources - no need to unload them explicitly
+//				resourceSet.getResources().clear();
+//				resourceSet.eAdapters().clear();
+//			}
+//			resource = null;
+//		}
 	}
 
 	private final XtextDocumentLocker stateAccess = createDocumentLocker();
