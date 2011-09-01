@@ -37,6 +37,9 @@ public class JvmModelRenameElementHandler extends JvmRenameElementHandler {
 	@Inject
 	private IJvmModelAssociations associations;
 
+	@Inject
+	private OperatorMappingUtil operatorMappingUtil;
+	
 	@Override
 	public IRenameElementContext createRenameElementContext(EObject targetElement, XtextEditor editor,
 			ITextSelection selection, XtextResource resource) {
@@ -56,6 +59,8 @@ public class JvmModelRenameElementHandler extends JvmRenameElementHandler {
 				}
 			}
 		}
+		if(operatorMappingUtil.isMappedOperator(targetElement))
+			return null;
 		return super.createRenameElementContext(targetElement, editor, selection, resource);
 	}
 
