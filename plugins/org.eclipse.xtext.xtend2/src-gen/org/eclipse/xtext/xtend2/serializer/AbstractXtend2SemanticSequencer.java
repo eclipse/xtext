@@ -1814,11 +1814,11 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (typeGuard=JvmTypeReference? case=XExpression? then=XExpression)
+	 *     (typeGuard=JvmTypeReference? case=XExpression? (then=XExpression | then=XMustacheExpression))
 	 *
 	 * Features:
 	 *    case[0, 1]
-	 *    then[1, 1]
+	 *    then[0, 2]
 	 *    typeGuard[0, 1]
 	 */
 	protected void sequence_XCasePart(EObject context, XCasePart semanticObject) {
@@ -2056,12 +2056,12 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (localVarName=ValidID? switch=XExpression cases+=XCasePart+ default=XExpression?)
+	 *     (localVarName=ValidID? switch=XExpression cases+=XCasePart+ (default=XExpression | default=XMustacheExpression)?)
 	 *
 	 * Features:
 	 *    switch[1, 1]
 	 *    cases[1, *]
-	 *    default[0, 1]
+	 *    default[0, 2]
 	 *    localVarName[0, 1]
 	 */
 	protected void sequence_XSwitchExpression(EObject context, XSwitchExpression semanticObject) {

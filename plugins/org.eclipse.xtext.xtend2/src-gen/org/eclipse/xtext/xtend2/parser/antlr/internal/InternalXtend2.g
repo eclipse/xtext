@@ -4548,14 +4548,14 @@ ruleValidID
     {
     	newLeafNode(otherlv_7, grammarAccess.getXSwitchExpressionAccess().getDefaultKeyword_6_0());
     }
-	otherlv_8=':' 
+((	otherlv_8=':' 
     {
-    	newLeafNode(otherlv_8, grammarAccess.getXSwitchExpressionAccess().getColonKeyword_6_1());
+    	newLeafNode(otherlv_8, grammarAccess.getXSwitchExpressionAccess().getColonKeyword_6_1_0_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getXSwitchExpressionAccess().getDefaultXExpressionParserRuleCall_6_2_0()); 
+	        newCompositeNode(grammarAccess.getXSwitchExpressionAccess().getDefaultXExpressionParserRuleCall_6_1_0_1_0()); 
 	    }
 		lv_default_9_0=ruleXExpression		{
 	        if ($current==null) {
@@ -4570,9 +4570,28 @@ ruleValidID
 	    }
 
 )
-))?	otherlv_10='}' 
+))
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getXSwitchExpressionAccess().getDefaultXMustacheExpressionParserRuleCall_6_1_1_0()); 
+	    }
+		lv_default_10_0=ruleXMustacheExpression		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getXSwitchExpressionRule());
+	        }
+       		set(
+       			$current, 
+       			"default",
+        		lv_default_10_0, 
+        		"XMustacheExpression");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)))?	otherlv_11='}' 
     {
-    	newLeafNode(otherlv_10, grammarAccess.getXSwitchExpressionAccess().getRightCurlyBracketKeyword_7());
+    	newLeafNode(otherlv_11, grammarAccess.getXSwitchExpressionAccess().getRightCurlyBracketKeyword_7());
     }
 )
 ;
@@ -4635,14 +4654,14 @@ ruleXCasePart returns [EObject current=null]
 	    }
 
 )
-))?	otherlv_3=':' 
+))?((	otherlv_3=':' 
     {
-    	newLeafNode(otherlv_3, grammarAccess.getXCasePartAccess().getColonKeyword_2());
+    	newLeafNode(otherlv_3, grammarAccess.getXCasePartAccess().getColonKeyword_2_0_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getXCasePartAccess().getThenXExpressionParserRuleCall_3_0()); 
+	        newCompositeNode(grammarAccess.getXCasePartAccess().getThenXExpressionParserRuleCall_2_0_1_0()); 
 	    }
 		lv_then_4_0=ruleXExpression		{
 	        if ($current==null) {
@@ -4658,6 +4677,25 @@ ruleXCasePart returns [EObject current=null]
 
 )
 ))
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getXCasePartAccess().getThenXMustacheExpressionParserRuleCall_2_1_0()); 
+	    }
+		lv_then_5_0=ruleXMustacheExpression		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getXCasePartRule());
+	        }
+       		set(
+       			$current, 
+       			"then",
+        		lv_then_5_0, 
+        		"XMustacheExpression");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)))
 ;
 
 
