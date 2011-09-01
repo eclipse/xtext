@@ -137,11 +137,6 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 		return Xtend2RootPreferencePage.class;
 	}
 
-//	@Override
-//	public Class<? extends IRenameElementHandler> bindIRenameElementHandler() {
-//		return Xtend2RenameElementHandler.class;
-//	}
-	
 	public Class<? extends EclipseResourceFileSystemAccess2> bindEclipseResourceFileSystemAccess2() {
 		return JDTAwareEclipseResourceFileSystemAccess2.class;
 	}
