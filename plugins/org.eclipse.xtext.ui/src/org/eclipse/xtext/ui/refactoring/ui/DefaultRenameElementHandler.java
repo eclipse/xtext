@@ -62,7 +62,7 @@ public class DefaultRenameElementHandler extends AbstractHandler implements IRen
 		} catch (Exception exc) {
 			LOG.error("Error initializing refactoring", exc);
 			MessageDialog.openError(Display.getCurrent().getActiveShell(), "Error initializing refactoring",
-					exc.getMessage());
+					exc.getMessage() + "\nSee log for details");
 		}
 		return null;
 	}

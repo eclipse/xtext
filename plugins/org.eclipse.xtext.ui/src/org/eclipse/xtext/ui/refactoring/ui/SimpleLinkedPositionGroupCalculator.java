@@ -124,6 +124,8 @@ public class SimpleLinkedPositionGroupCalculator extends AbstractLinkedPositionG
 
 		private List<ReplaceEdit> textEdits = newArrayList();
 		private final URI localResourceURI;
+		private RefactoringStatus refactoringStatus = new RefactoringStatus();
+		
 
 		public LocalResourceRefactoringUpdateAcceptor(URI localResourceURI) {
 			this.localResourceURI = localResourceURI;
@@ -134,7 +136,7 @@ public class SimpleLinkedPositionGroupCalculator extends AbstractLinkedPositionG
 		}
 
 		public RefactoringStatus getRefactoringStatus() {
-			return null;
+			return refactoringStatus;
 		}
 
 		public IRefactoringDocument getDocument(URI resourceURI) {
