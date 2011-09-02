@@ -88,7 +88,7 @@ public class RenameRefactoringController {
 		}
 	}
 
-	protected void startLinkedEditing() throws InterruptedException {
+	protected void startLinkedEditing() {
 		if (activeLinkedMode != null) {
 			if (activeLinkedMode.isSameRenameElementContext(renameElementContext)) {
 				startRefactoring(RefactoringType.REFACTORING_DIALOG);
@@ -107,6 +107,11 @@ public class RenameRefactoringController {
 				}
 			});
 		} catch (Exception exc) {
+			// unwrap invocation target exceptions
+			if(exc.getCause() instanceof RuntimeException)
+				throw (RuntimeException) exc.getCause();
+			if(exc instanceof RuntimeException)
+				throw (RuntimeException) exc;
 			throw new WrappedException(exc);
 		}
 	}
