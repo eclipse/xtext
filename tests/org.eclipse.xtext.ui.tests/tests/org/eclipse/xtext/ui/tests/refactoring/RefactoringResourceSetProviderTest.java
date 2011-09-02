@@ -8,12 +8,14 @@
 package org.eclipse.xtext.ui.tests.refactoring;
 
 import static com.google.common.collect.Iterables.*;
+import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import junit.framework.TestCase;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -25,8 +27,11 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
+import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.IDirtyResource;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
+import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
+import org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.refactoring.impl.RefactoringResourceSetProvider;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
@@ -51,7 +56,7 @@ public class RefactoringResourceSetProviderTest extends TestCase {
 
 	@Inject
 	private ResourceDescriptionsProvider resourceDescriptionsProvider;
-	
+
 	private ResourceSet resourceSet;
 
 	@Override
@@ -59,7 +64,15 @@ public class RefactoringResourceSetProviderTest extends TestCase {
 		super.setUp();
 		Activator.getInstance().getInjector("org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage")
 				.injectMembers(this);
+		IProject project = createProject("test");
+		addNature(project, XtextProjectHelper.NATURE_ID);
 		resourceSet = resourceSetProvider.get(workspace.getRoot().getProject("test"));
+	}
+
+	@Override
+	protected void tearDown() throws Exception {
+		cleanWorkspace();
+		super.tearDown();
 	}
 
 	public void testDirtyStateAware() throws IOException {
@@ -70,7 +83,7 @@ public class RefactoringResourceSetProviderTest extends TestCase {
 			public String getContents() {
 				return testModel;
 			}
-			
+
 			public String getActualContents() {
 				return testModel;
 			}
@@ -108,10 +121,31 @@ public class RefactoringResourceSetProviderTest extends TestCase {
 		assertExportedObject(resource, "C");
 	}
 
+	public void testLiveScope2() throws Exception {
+		String pathName = "test/test.refactoringtestlanguage";
+		String pathName2 = "test/test2.refactoringtestlanguage";
+		String model = "A { ref B }";
+		createFile(pathName, model);
+		createFile(pathName2, "B {}");
+		waitForAutoBuild();
+
+		assertNotNull(resourceSet.getLoadOptions().get(ResourceDescriptionsProvider.LIVE_SCOPE));
+		final URI resourceURI = URI.createPlatformResourceURI(pathName, true);
+		Resource resource = resourceSet.getResource(resourceURI, true);
+		Element elementA = (Element) resource.getContents().get(0).eContents().get(0);
+		Element elementB = elementA.getReferenced().get(0);
+		assertFalse(elementB.eIsProxy());
+
+		assertExportedObject(resource, "A");
+		elementA.setName("C");
+		assertExportedObject(resource, "C");
+	}
+
 	protected void assertExportedObject(Resource resource, String name) {
 		IResourceDescriptions resourceDescriptions = resourceDescriptionsProvider.getResourceDescriptions(resource);
 		IResourceDescription resourceDescription = resourceDescriptions.getResourceDescription(resource.getURI());
 		assertNotNull(resourceDescription);
-		assertFalse(isEmpty(resourceDescription.getExportedObjects(EcorePackage.Literals.EOBJECT, QualifiedName.create(name), false)));
+		assertFalse(isEmpty(resourceDescription.getExportedObjects(EcorePackage.Literals.EOBJECT,
+				QualifiedName.create(name), false)));
 	}
 }

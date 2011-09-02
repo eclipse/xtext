@@ -32,7 +32,10 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IExternalContentSupport;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
+import org.eclipse.xtext.resource.impl.LiveShadowedResourceDescriptions;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.service.DispatchingProvider;
 import org.eclipse.xtext.ui.containers.ContainerStateProvider;
@@ -315,6 +318,13 @@ public class DefaultUiModule extends AbstractGenericModule {
 	public void configureMarkOccurrencesAction(Binder binder) {
 		binder.bind(IActionContributor.class).annotatedWith(Names.named("markOccurrences"))
 			.to(MarkOccurrenceActionContributor.class);
+	}
+
+	/**
+	 * @since 2.1
+	 */
+	public void configureIResourceDescriptionsLiveScope(Binder binder) {
+		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.LIVE_SCOPE)).to(LiveShadowedResourceDescriptions.class);
 	}
 
 }
