@@ -70,7 +70,9 @@ public abstract class AbstractReferenceUpdater implements IReferenceUpdater {
 				throw new RefactoringStatusException("Cannot find referring element "
 						+ notNull(referenceDescription.getSourceEObjectUri())
 						+ ". Maybe the index is be corrupt. Consider a rebuild.", true);
-			resolveReference(sourceEObject, referenceDescription);
+			EObject resolvedReference = resolveReference(sourceEObject, referenceDescription);
+			if(resolvedReference.eIsProxy())
+				throw new RefactoringStatusException("Cannot resolve existing link", false);
 		}
 	}
 
@@ -105,11 +107,12 @@ public abstract class AbstractReferenceUpdater implements IReferenceUpdater {
 		}
 	}
 
-	protected void resolveReference(EObject referringElement, IReferenceDescription referenceDescription) {
-		Object unresolvedValue = referringElement.eGet(referenceDescription.getEReference());
+	protected EObject resolveReference(EObject referringElement, IReferenceDescription referenceDescription) {
+		Object resolvedValue = referringElement.eGet(referenceDescription.getEReference());
 		if (referenceDescription.getEReference().isMany()) {
-			List<?> list = (List<?>) unresolvedValue;
-			list.get(referenceDescription.getIndexInList());
+			List<?> list = (List<?>) resolvedValue;
+			resolvedValue = list.get(referenceDescription.getIndexInList());
 		}
+		return (EObject) resolvedValue;
 	}
 }
