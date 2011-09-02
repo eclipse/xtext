@@ -26,7 +26,6 @@ import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
 import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameRefactoringProvider;
-import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.EmfResourceReferenceUpdater;
 import org.eclipse.xtext.ui.refactoring.impl.EmfResourceRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.ui.DefaultRenameSupport;
