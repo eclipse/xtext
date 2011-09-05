@@ -7,108 +7,85 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.selection;
 
-import static org.eclipse.xtext.nodemodel.util.NodeModelUtils.*;
-
-import org.eclipse.core.runtime.Assert;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.TextRegion;
+
+import com.google.inject.Inject;
 
 /**
  * @author Michael Clay - Initial contribution and API
  */
 public abstract class AbstractNodeSelectionProvider implements INodeSelectionProvider {
+	@Inject
+	private ILocationInFileProvider locationProvider;
+
+	public ILocationInFileProvider getLocationProvider() {
+		return locationProvider;
+	}
+
+	public ITextRegion select(String selectionType, ICompositeNode rootNode, ITextRegion currentTextRegion) {
+		return ITextRegion.EMPTY_REGION;
+	}
 
 	public void initialize(XtextEditor xtextEditor) {
-		IAction action = createAction(xtextEditor);
-		xtextEditor.setAction(action.getActionDefinitionId(), action);
-	}
-
-	public ITextRegion select(ICompositeNode rootNode, ITextRegion currentTextSelection) {
-		int totalEndOffsetOfCurrentSelection = getTotalEndOffset(currentTextSelection);
-		boolean selectionAtEndOfText = rootNode.getTotalEndOffset() == totalEndOffsetOfCurrentSelection;
-		int offset = selectionAtEndOfText && currentTextSelection.getOffset() > 0 ? currentTextSelection.getOffset() - 1
-				: currentTextSelection.getOffset();
-		ICompositeNode startNode = findCompositeNodeAtOffset(findLeafNodeAtOffset(rootNode, offset));
-		int endOffset = selectionAtEndOfText || currentTextSelection.getLength() > 0 ? totalEndOffsetOfCurrentSelection - 1
-				: totalEndOffsetOfCurrentSelection;
-		ICompositeNode endNode = findCompositeNodeAtTotalEndOffset(findLeafNodeAtOffset(rootNode, endOffset));
-		return currentTextSelection.getLength()==0 ? createTextRegion(startNode, endNode) : doSelect(startNode, endNode, currentTextSelection);
-	}
-
-	protected abstract ITextRegion doSelect(ICompositeNode startNode, ICompositeNode endNode, ITextRegion currentTextSelection);
-
-	protected IAction createAction(XtextEditor xtextEditor) {
-		Assert.isNotNull(xtextEditor);
 		SelectionHistory selectionHistory = (SelectionHistory) xtextEditor.getAdapter(SelectionHistory.class);
-		return createAction(xtextEditor, selectionHistory);
+		initialize(xtextEditor, selectionHistory);
 	}
 
-	protected abstract IAction createAction(XtextEditor xtextEditor, SelectionHistory selectionHistory);
+	protected abstract void initialize(XtextEditor xtextEditor, SelectionHistory selectionHistory);
 
-	// NodeModel util methods for selection
-	protected ICompositeNode findNextCompositeSibling(INode compositeNode) {
-		INode node = compositeNode;
-		while ((node.getTotalEndOffset() <= compositeNode.getTotalEndOffset() || node instanceof ILeafNode)
-				&& node.hasNextSibling()) {
-			node = node.getNextSibling();
-		}
-		return findCompositeNodeAtOffset(node);
+	protected void setAction(XtextEditor xtextEditor, IAction action, String actionDefinitionId) {
+		action.setActionDefinitionId(actionDefinitionId);
+		xtextEditor.setAction(actionDefinitionId, action);
 	}
 
-	protected ICompositeNode findCompositeNodeAtTotalEndOffset(INode rootNode) {
-		return findCompositeNodeAtTotalEndOffset((ICompositeNode) (rootNode instanceof ILeafNode ? rootNode.getParent()
-				: rootNode));
+	protected ITextRegion getTextRegion(EObject eObject) {
+		return locationProvider.getFullTextRegion(eObject);
 	}
 
-	protected ICompositeNode findCompositeNodeAtTotalEndOffset(ICompositeNode compositeNode) {
-		while (hasParent(compositeNode)
-				&& compositeNode.getParent().getTotalEndOffset() <= compositeNode.getTotalEndOffset()) {
-			compositeNode = compositeNode.getParent();
-		}
-		return compositeNode;
+	protected ITextRegion getTextRegion(INode node) {
+		return new TextRegion(node.getOffset(), node.getLength());
 	}
 
-	protected ICompositeNode findPreviousCompositeSibling(INode compositeNode) {
-		INode node = compositeNode;
-		while ((node.getOffset() >= compositeNode.getOffset() || node instanceof ILeafNode)
-				&& node.hasPreviousSibling()) {
-			node = node.getPreviousSibling();
-		}
-		return findCompositeNodeAtOffset(node);
+	/**
+	 * @return true if eObject <i>starts</i> at an offset less than that of the given region
+	 */
+	protected boolean lessThanOffset(EObject eObject, ITextRegion region) {
+		return locationProvider.getFullTextRegion(eObject).getOffset() < region.getOffset();
 	}
 
-	protected ICompositeNode findCompositeNodeAtOffset(INode rootNode) {
-		return findCompositeNodeAtOffset((ICompositeNode) (rootNode instanceof ILeafNode ? rootNode.getParent()
-				: rootNode));
+	/**
+	 * @return true if eObject <i>starts</i> at the same offset as the one of the given region
+	 */
+	protected boolean equalsOffset(EObject eObject, ITextRegion region) {
+		return locationProvider.getFullTextRegion(eObject).getOffset() == region.getOffset();
 	}
 
-	protected ICompositeNode findCompositeNodeAtOffset(ICompositeNode compositeNode) {
-		while (hasParent(compositeNode) && compositeNode.getParent().getOffset() >= compositeNode.getOffset()) {
-			compositeNode = compositeNode.getParent();
-		}
-		return compositeNode;
+	/**
+	 * @return true if eObject <i>ends</i> at an offset less than that of the given region
+	 */
+	protected boolean lessThanEndOffset(EObject eObject, ITextRegion region) {
+		return getEndOffset(locationProvider.getFullTextRegion(eObject)) < getEndOffset(region);
 	}
 
-	protected boolean hasParent(INode node) {
-		return node != null && node.getParent() != null;
+	/**
+	 * @return true if eObject <i>end</i> at the same endOffset as the one of the given region
+	 */
+	protected boolean equalsEndOffset(EObject eObject, ITextRegion region) {
+		return getEndOffset(locationProvider.getFullTextRegion(eObject)) == getEndOffset(region);
 	}
 
-	protected ITextRegion createTextRegion(INode node) {
-		return createTextRegion(node, node);
+	protected boolean isEmptyOrNull(ITextRegion textRegion) {
+		return textRegion == null || ITextRegion.EMPTY_REGION == textRegion;
 	}
 
-	protected ITextRegion createTextRegion(INode startNode, INode endNode) {
-		return new TextRegion(startNode.getOffset(), endNode.getTotalEndOffset() - startNode.getOffset());
+	protected int getEndOffset(ITextRegion region) {
+		return region.getOffset() + region.getLength();
 	}
-
-	protected int getTotalEndOffset(ITextRegion textRegion) {
-		return textRegion.getOffset() + textRegion.getLength();
-	}
-
 }
-

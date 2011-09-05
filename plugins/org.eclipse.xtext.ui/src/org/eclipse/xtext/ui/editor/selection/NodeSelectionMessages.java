@@ -33,9 +33,9 @@ public final class NodeSelectionMessages extends NLS {
 	public static String NodeSelectEnclosing_label;
 	public static String NodeSelectEnclosing_tooltip;
 	public static String NodeSelectEnclosing_description;
-	public static String NodeSelectHistory_label;
-	public static String NodeSelectHistory_tooltip;
-	public static String NodeSelectHistory_description;
+	public static String NodeSelectLast_label;
+	public static String NodeSelectLast_tooltip;
+	public static String NodeSelectLast_description;
 
 	static {
 		NLS.initializeMessages(BUNDLE_NAME, NodeSelectionMessages.class);

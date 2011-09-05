@@ -73,7 +73,7 @@ public class NodeSelectionAction extends Action {
 	}
 
 	protected ITextRegion select(ICompositeNode rootNode, ITextRegion textRegion) {
-		return nodeSelectionProvider.select(rootNode, textRegion);
+		return nodeSelectionProvider.select(getActionDefinitionId(),rootNode, textRegion);
 	}
 
 	private ITextRegion getTextSelection() {
