@@ -52,10 +52,46 @@ import com.google.common.collect.MapMaker;
  * @author Heiko Behrens
  * @author Sebastian Zarnekow
  * @author Sven Efftinge
+ * @author Michael Clay
  */
 public class EcoreUtil2 extends EcoreUtil {
 
 	private static Logger log = Logger.getLogger(EcoreUtil2.class);
+
+	/**
+	 * @return the next sibling of the passed eObject or null
+	 * @since 2.1
+	 */
+	public static EObject getNextSibling(EObject eObject) {
+		EObject next = null;
+		if (eObject.eContainingFeature()!=null && eObject.eContainingFeature().isMany()) {
+			@SuppressWarnings("unchecked")
+			List<EObject> siblings = (List<EObject>) eObject.eContainer().eGet(eObject.eContainingFeature());
+			int indexOf = siblings.indexOf(eObject);
+			if (indexOf < siblings.size() - 1) {
+				next = siblings.get(indexOf + 1);
+			}
+		}
+		return next;
+	}
+
+	/**
+	 * @return the previous sibling of the passed eObject or null
+	 * @since 2.1
+	 */
+	public static EObject getPreviousSibling(EObject eObject) {
+		EObject previous = null;
+		if (eObject.eContainingFeature()!=null && eObject.eContainingFeature().isMany()) {
+			@SuppressWarnings("unchecked")
+			List<EObject> siblings = (List<EObject>) eObject.eContainer().eGet(eObject.eContainingFeature());
+			int indexOf = siblings.indexOf(eObject);
+			if (indexOf > 0) {
+				previous = siblings.get(indexOf - 1);
+			}
+		}
+		return previous;
+	}
+
 
 	@SuppressWarnings("unchecked")
 	public static <T extends EObject> T getContainerOfType(EObject ele, Class<T> type) {

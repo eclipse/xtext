@@ -8,30 +8,32 @@
 package org.eclipse.xtext.ui.editor.selection;
 
 import org.eclipse.jface.action.IAction;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.util.ITextRegion;
 
 /**
  * @author Michael Clay - Initial contribution and API
  */
-public class PreviousHistorySelection extends AbstractNodeSelectionProvider {
-	public static final String ACTION_DEFINITION_ID = "org.eclipse.xtext.ui.editor.select.last"; //$NON-NLS-1$
+public class LastSelectionProvider extends AbstractNodeSelectionProvider {
 
 	@Override
-	protected IAction createAction(XtextEditor xtextEditor, SelectionHistory selectionHistory) {
-		NodeSelectionAction nodeSelectionAction = new PreviousFromHistorySelectionAction(
-				NodeSelectionMessages.NodeSelectHistory_label, xtextEditor, selectionHistory, this);
-		nodeSelectionAction.setActionDefinitionId(ACTION_DEFINITION_ID);
-		nodeSelectionAction.setToolTipText(NodeSelectionMessages.NodeSelectHistory_tooltip);
-		nodeSelectionAction.setDescription(NodeSelectionMessages.NodeSelectHistory_description);
+	protected void initialize(XtextEditor xtextEditor, SelectionHistory selectionHistory) {
+		IAction nodeSelectionAction = createLastSelectionAction(xtextEditor, selectionHistory);
+		nodeSelectionAction.setToolTipText(NodeSelectionMessages.NodeSelectLast_tooltip);
+		nodeSelectionAction.setDescription(NodeSelectionMessages.NodeSelectLast_description);
+		setAction(xtextEditor, nodeSelectionAction, SELECT_LAST);
+	}
+
+	protected NodeSelectionAction createLastSelectionAction(XtextEditor xtextEditor, SelectionHistory selectionHistory) {
+		NodeSelectionAction nodeSelectionAction = new LastSelectionAction(NodeSelectionMessages.NodeSelectLast_label,
+				xtextEditor, selectionHistory, this);
 		return nodeSelectionAction;
 	}
 
-	public static class PreviousFromHistorySelectionAction extends NodeSelectionAction {
+	public static class LastSelectionAction extends NodeSelectionAction {
 
-		public PreviousFromHistorySelectionAction(String text, XtextEditor xtextEditor,
-				SelectionHistory selectionHistory, INodeSelectionProvider nodeSelectionProvider) {
+		public LastSelectionAction(String text, XtextEditor xtextEditor, SelectionHistory selectionHistory,
+				INodeSelectionProvider nodeSelectionProvider) {
 			super(text, xtextEditor, selectionHistory, nodeSelectionProvider);
 		}
 
@@ -47,11 +49,6 @@ public class PreviousHistorySelection extends AbstractNodeSelectionProvider {
 				}
 			}
 		}
-	}
-
-	@Override
-	protected ITextRegion doSelect(ICompositeNode startNode, ICompositeNode endNode, ITextRegion currentTextSelection) {
-		return ITextRegion.EMPTY_REGION;
 	}
 
 }

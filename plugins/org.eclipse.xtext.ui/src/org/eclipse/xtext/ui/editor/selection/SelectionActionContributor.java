@@ -18,19 +18,13 @@ import com.google.inject.Provider;
  */
 public class SelectionActionContributor implements IActionContributor {
 	@Inject
-	private Provider<EnclosingNodeSelection> enclosingNodeSelectionProvider;
+	private Provider<LastSelectionProvider> historySelectionProvider;
 	@Inject
-	private Provider<NextNodeSelection> nextNodeSelectionProvider;
-	@Inject
-	private Provider<PreviousNodeSelection> previousNodeSelectionProvider;
-	@Inject
-	private Provider<PreviousHistorySelection> previousHistorySelectionProvider;
+	private Provider<DefaultEObjectSelectionProvider> eObjectSelectionProvider;
 
 	public void contributeActions(XtextEditor xtextEditor) {
-		createNodeSelectionProvider(enclosingNodeSelectionProvider, xtextEditor);
-		createNodeSelectionProvider(nextNodeSelectionProvider, xtextEditor);
-		createNodeSelectionProvider(previousNodeSelectionProvider, xtextEditor);
-		createNodeSelectionProvider(previousHistorySelectionProvider, xtextEditor);
+		createNodeSelectionProvider(historySelectionProvider, xtextEditor);
+		createNodeSelectionProvider(eObjectSelectionProvider, xtextEditor);
 	}
 
 	private INodeSelectionProvider createNodeSelectionProvider(

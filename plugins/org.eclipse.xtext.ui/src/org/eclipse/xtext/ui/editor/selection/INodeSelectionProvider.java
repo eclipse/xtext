@@ -12,19 +12,30 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.util.ITextRegion;
 
 /**
- * Strategy for structural node selections based on the (parse-tree) node model.
+ * Strategy for structural node selections based on a given root node.
  * 
  * @author Michael - Initial contribution and API
  */
 public interface INodeSelectionProvider {
+	String SELECT_ENCLOSING = "org.eclipse.xtext.ui.editor.select.enclosing"; //$NON-NLS-1$
+	String SELECT_NEXT = "org.eclipse.xtext.ui.editor.select.next"; //$NON-NLS-1$
+	String SELECT_PREVIOUS = "org.eclipse.xtext.ui.editor.select.previous"; //$NON-NLS-1$
+	String SELECT_LAST = "org.eclipse.xtext.ui.editor.select.last"; //$NON-NLS-1$
+
 	/**
+	 * @param the
+	 *            type of the selection to be provided (e.g. next,previous)
 	 * @param currentTextSelection
 	 *            the region of the currently selected text
 	 * @param rootNode
 	 *            the root node of the parse tree
-	 * @return return the new text selection
+	 * @return return the region of the new selection for the given type
 	 */
-	ITextRegion select(ICompositeNode rootNode, ITextRegion currentTextRegion);
+	ITextRegion select(String selectionType, ICompositeNode rootNode, ITextRegion currentTextRegion);
 
+	/**
+	 * Initialize the NodeSelectionProvider with the given XtextEditor
+	 */
 	void initialize(XtextEditor xtextEditor);
+
 }
