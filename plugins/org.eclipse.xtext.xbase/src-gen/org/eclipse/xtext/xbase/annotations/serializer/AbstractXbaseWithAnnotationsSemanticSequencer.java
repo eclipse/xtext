@@ -47,7 +47,6 @@ import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
-import org.eclipse.xtext.xbase.XWithExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.services.XbaseWithAnnotationsGrammarAccess;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
@@ -94,11 +93,7 @@ public class AbstractXbaseWithAnnotationsSemanticSequencer extends AbstractSeman
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == TypesPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case TypesPackage.JVM_FORMAL_PARAMETER:
-				if(context == grammarAccess.getJvmFormalParameterWithoutTypeRule()) {
-					sequence_JvmFormalParameterWithoutType(context, (JvmFormalParameter) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getJvmFormalParameterRule()) {
+				if(context == grammarAccess.getJvmFormalParameterRule()) {
 					sequence_JvmFormalParameter(context, (JvmFormalParameter) semanticObject); 
 					return; 
 				}
@@ -106,7 +101,7 @@ public class AbstractXbaseWithAnnotationsSemanticSequencer extends AbstractSeman
 			case TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE:
 				if(context == grammarAccess.getJvmArgumentTypeReferenceRule() ||
 				   context == grammarAccess.getJvmTypeReferenceRule() ||
-				   context == grammarAccess.getJvmTypeReferenceAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0()) {
+				   context == grammarAccess.getJvmTypeReferenceAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0()) {
 					sequence_JvmTypeReference(context, (JvmGenericArrayTypeReference) semanticObject); 
 					return; 
 				}
@@ -121,7 +116,7 @@ public class AbstractXbaseWithAnnotationsSemanticSequencer extends AbstractSeman
 				if(context == grammarAccess.getJvmArgumentTypeReferenceRule() ||
 				   context == grammarAccess.getJvmParameterizedTypeReferenceRule() ||
 				   context == grammarAccess.getJvmTypeReferenceRule() ||
-				   context == grammarAccess.getJvmTypeReferenceAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0()) {
+				   context == grammarAccess.getJvmTypeReferenceAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0()) {
 					sequence_JvmParameterizedTypeReference(context, (JvmParameterizedTypeReference) semanticObject); 
 					return; 
 				}
@@ -281,8 +276,8 @@ public class AbstractXbaseWithAnnotationsSemanticSequencer extends AbstractSeman
 					sequence_XBlockExpression(context, (XBlockExpression) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getXMustacheExpressionRule()) {
-					sequence_XMustacheExpression(context, (XBlockExpression) semanticObject); 
+				else if(context == grammarAccess.getXExpressionInClosureRule()) {
+					sequence_XExpressionInClosure(context, (XBlockExpression) semanticObject); 
 					return; 
 				}
 				else break;
@@ -990,39 +985,6 @@ public class AbstractXbaseWithAnnotationsSemanticSequencer extends AbstractSeman
 					return; 
 				}
 				else break;
-			case XbasePackage.XWITH_EXPRESSION:
-				if(context == grammarAccess.getXAdditiveExpressionRule() ||
-				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
-				   context == grammarAccess.getXAndExpressionRule() ||
-				   context == grammarAccess.getXAndExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
-				   context == grammarAccess.getXAssignmentRule() ||
-				   context == grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0() ||
-				   context == grammarAccess.getXCastedExpressionRule() ||
-				   context == grammarAccess.getXCastedExpressionAccess().getXCastedExpressionTargetAction_1_0_0_0() ||
-				   context == grammarAccess.getXEqualityExpressionRule() ||
-				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
-				   context == grammarAccess.getXExpressionRule() ||
-				   context == grammarAccess.getXExpressionInsideBlockRule() ||
-				   context == grammarAccess.getXMemberFeatureCallRule() ||
-				   context == grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0() ||
-				   context == grammarAccess.getXMemberFeatureCallAccess().getXMemberFeatureCallMemberCallTargetAction_1_1_0_0_0() ||
-				   context == grammarAccess.getXMultiplicativeExpressionRule() ||
-				   context == grammarAccess.getXMultiplicativeExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
-				   context == grammarAccess.getXOrExpressionRule() ||
-				   context == grammarAccess.getXOrExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
-				   context == grammarAccess.getXOtherOperatorExpressionRule() ||
-				   context == grammarAccess.getXOtherOperatorExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
-				   context == grammarAccess.getXParenthesizedExpressionRule() ||
-				   context == grammarAccess.getXPrimaryExpressionRule() ||
-				   context == grammarAccess.getXRelationalExpressionRule() ||
-				   context == grammarAccess.getXRelationalExpressionAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0() ||
-				   context == grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0_0_0() ||
-				   context == grammarAccess.getXUnaryOperationRule() ||
-				   context == grammarAccess.getXWithExpressionRule()) {
-					sequence_XWithExpression(context, (XWithExpression) semanticObject); 
-					return; 
-				}
-				else break;
 			}
 		else if(semanticObject.eClass().getEPackage() == XtypePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case XtypePackage.XFUNCTION_TYPE_REF:
@@ -1036,18 +998,6 @@ public class AbstractXbaseWithAnnotationsSemanticSequencer extends AbstractSeman
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
-	
-	/**
-	 * Constraint:
-	 *     name=ValidID
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 */
-	protected void sequence_JvmFormalParameterWithoutType(EObject context, JvmFormalParameter semanticObject) {
-		superSequencer.createSequence(context, semanticObject);
-	}
-	
 	
 	/**
 	 * Constraint:
@@ -1102,7 +1052,7 @@ public class AbstractXbaseWithAnnotationsSemanticSequencer extends AbstractSeman
 	
 	/**
 	 * Constraint:
-	 *     componentType=JvmTypeReference_JvmGenericArrayTypeReference_0_1_0
+	 *     componentType=JvmTypeReference_JvmGenericArrayTypeReference_0_1_0_0
 	 *
 	 * Features:
 	 *    componentType[1, 1]
@@ -1319,11 +1269,11 @@ public class AbstractXbaseWithAnnotationsSemanticSequencer extends AbstractSeman
 	
 	/**
 	 * Constraint:
-	 *     (typeGuard=JvmTypeReference? case=XExpression? (then=XExpression | then=XMustacheExpression))
+	 *     (typeGuard=JvmTypeReference? case=XExpression? then=XExpression)
 	 *
 	 * Features:
 	 *    case[0, 1]
-	 *    then[0, 2]
+	 *    then[1, 1]
 	 *    typeGuard[0, 1]
 	 */
 	protected void sequence_XCasePart(EObject context, XCasePart semanticObject) {
@@ -1359,11 +1309,15 @@ public class AbstractXbaseWithAnnotationsSemanticSequencer extends AbstractSeman
 	
 	/**
 	 * Constraint:
-	 *     ((formalParameters+=JvmFormalParameter formalParameters+=JvmFormalParameter*)? expression=XExpression)
+	 *     (((formalParameters+=JvmFormalParameter formalParameters+=JvmFormalParameter*)? explicitSyntax?='|')? expression=XExpressionInClosure)
 	 *
 	 * Features:
 	 *    formalParameters[0, *]
+	 *         EXCLUDE_IF_UNSET explicitSyntax
 	 *    expression[1, 1]
+	 *    explicitSyntax[0, 1]
+	 *         MANDATORY_IF_SET formalParameters
+	 *         MANDATORY_IF_SET formalParameters
 	 */
 	protected void sequence_XClosure(EObject context, XClosure semanticObject) {
 		superSequencer.createSequence(context, semanticObject);
@@ -1375,7 +1329,8 @@ public class AbstractXbaseWithAnnotationsSemanticSequencer extends AbstractSeman
 	 *     (
 	 *         constructor=[JvmConstructor|QualifiedName] 
 	 *         (typeArguments+=JvmArgumentTypeReference typeArguments+=JvmArgumentTypeReference*)? 
-	 *         (arguments+=XShortClosure | (arguments+=XExpression arguments+=XExpression*))?
+	 *         (arguments+=XShortClosure | (arguments+=XExpression arguments+=XExpression*))? 
+	 *         arguments+=XClosure?
 	 *     )
 	 *
 	 * Features:
@@ -1403,6 +1358,18 @@ public class AbstractXbaseWithAnnotationsSemanticSequencer extends AbstractSeman
 	
 	/**
 	 * Constraint:
+	 *     (expressions+=XExpressionInsideBlock*)
+	 *
+	 * Features:
+	 *    expressions[0, *]
+	 */
+	protected void sequence_XExpressionInClosure(EObject context, XBlockExpression semanticObject) {
+		superSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     {XNullLiteral}
 	 *
 	 * Features:
@@ -1418,14 +1385,14 @@ public class AbstractXbaseWithAnnotationsSemanticSequencer extends AbstractSeman
 	 *         declaringType=[JvmDeclaredType|StaticQualifier]? 
 	 *         (typeArguments+=JvmArgumentTypeReference typeArguments+=JvmArgumentTypeReference*)? 
 	 *         feature=[JvmIdentifiableElement|IdOrSuper] 
-	 *         (explicitOperationCall?='(' (featureCallArguments+=XShortClosure | (featureCallArguments+=XExpression featureCallArguments+=XExpression*))?)?
+	 *         (explicitOperationCall?='(' (featureCallArguments+=XShortClosure | (featureCallArguments+=XExpression featureCallArguments+=XExpression*))?)? 
+	 *         featureCallArguments+=XClosure?
 	 *     )
 	 *
 	 * Features:
 	 *    feature[1, 1]
 	 *    typeArguments[0, *]
 	 *    featureCallArguments[0, *]
-	 *         EXCLUDE_IF_UNSET explicitOperationCall
 	 *    explicitOperationCall[0, 1]
 	 *         MANDATORY_IF_SET featureCallArguments
 	 *         MANDATORY_IF_SET featureCallArguments
@@ -1497,7 +1464,8 @@ public class AbstractXbaseWithAnnotationsSemanticSequencer extends AbstractSeman
 	 *         (nullSafe?='?.' | spreading?='*.')? 
 	 *         (typeArguments+=JvmArgumentTypeReference typeArguments+=JvmArgumentTypeReference*)? 
 	 *         feature=[JvmIdentifiableElement|ValidID] 
-	 *         (explicitOperationCall?='(' (memberCallArguments+=XShortClosure | (memberCallArguments+=XExpression memberCallArguments+=XExpression*))?)?
+	 *         (explicitOperationCall?='(' (memberCallArguments+=XShortClosure | (memberCallArguments+=XExpression memberCallArguments+=XExpression*))?)? 
+	 *         memberCallArguments+=XClosure?
 	 *     )
 	 *
 	 * Features:
@@ -1505,7 +1473,6 @@ public class AbstractXbaseWithAnnotationsSemanticSequencer extends AbstractSeman
 	 *    typeArguments[0, *]
 	 *    memberCallTarget[1, 1]
 	 *    memberCallArguments[0, *]
-	 *         EXCLUDE_IF_UNSET explicitOperationCall
 	 *    explicitOperationCall[0, 1]
 	 *         MANDATORY_IF_SET memberCallArguments
 	 *         MANDATORY_IF_SET memberCallArguments
@@ -1516,18 +1483,6 @@ public class AbstractXbaseWithAnnotationsSemanticSequencer extends AbstractSeman
 	 *         EXCLUDE_IF_SET spreading
 	 */
 	protected void sequence_XMemberFeatureCall(EObject context, XMemberFeatureCall semanticObject) {
-		superSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     (expressions+=XExpressionInsideBlock*)
-	 *
-	 * Features:
-	 *    expressions[0, *]
-	 */
-	protected void sequence_XMustacheExpression(EObject context, XBlockExpression semanticObject) {
 		superSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -1559,11 +1514,12 @@ public class AbstractXbaseWithAnnotationsSemanticSequencer extends AbstractSeman
 	
 	/**
 	 * Constraint:
-	 *     ((formalParameters+=JvmFormalParameter formalParameters+=JvmFormalParameter*)? expression=XExpression)
+	 *     ((formalParameters+=JvmFormalParameter formalParameters+=JvmFormalParameter*)? explicitSyntax?='|' expression=XExpression)
 	 *
 	 * Features:
 	 *    formalParameters[0, *]
 	 *    expression[1, 1]
+	 *    explicitSyntax[1, 1]
 	 */
 	protected void sequence_XShortClosure(EObject context, XClosure semanticObject) {
 		superSequencer.createSequence(context, semanticObject);
@@ -1584,12 +1540,12 @@ public class AbstractXbaseWithAnnotationsSemanticSequencer extends AbstractSeman
 	
 	/**
 	 * Constraint:
-	 *     (localVarName=ValidID? switch=XExpression cases+=XCasePart+ (default=XExpression | default=XMustacheExpression)?)
+	 *     (localVarName=ValidID? switch=XExpression cases+=XCasePart+ default=XExpression?)
 	 *
 	 * Features:
 	 *    switch[1, 1]
 	 *    cases[1, *]
-	 *    default[0, 2]
+	 *    default[0, 1]
 	 *    localVarName[0, 1]
 	 */
 	protected void sequence_XSwitchExpression(EObject context, XSwitchExpression semanticObject) {
@@ -1677,23 +1633,6 @@ public class AbstractXbaseWithAnnotationsSemanticSequencer extends AbstractSeman
 	 *    body[1, 1]
 	 */
 	protected void sequence_XWhileExpression(EObject context, XWhileExpression semanticObject) {
-		superSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     (variable=JvmFormalParameterWithoutType? ((mainExpression=XExpression blockExpression=XBlockExpression) | blockExpression=XMustacheExpression))
-	 *
-	 * Features:
-	 *    mainExpression[0, 1]
-	 *         EXCLUDE_IF_UNSET blockExpression
-	 *         MANDATORY_IF_SET blockExpression
-	 *         EXCLUDE_IF_SET blockExpression
-	 *    blockExpression[0, 2]
-	 *    variable[0, 1]
-	 */
-	protected void sequence_XWithExpression(EObject context, XWithExpression semanticObject) {
 		superSequencer.createSequence(context, semanticObject);
 	}
 }

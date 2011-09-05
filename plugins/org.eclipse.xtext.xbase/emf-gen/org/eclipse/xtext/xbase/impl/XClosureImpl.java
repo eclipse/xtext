@@ -35,6 +35,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XClosureImpl#getFormalParameters <em>Formal Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XClosureImpl#getExpression <em>Expression</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XClosureImpl#isExplicitSyntax <em>Explicit Syntax</em>}</li>
  * </ul>
  * </p>
  *
@@ -61,6 +62,26 @@ public class XClosureImpl extends XExpressionImpl implements XClosure
 	 * @ordered
 	 */
 	protected XExpression expression;
+
+	/**
+	 * The default value of the '{@link #isExplicitSyntax() <em>Explicit Syntax</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isExplicitSyntax()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean EXPLICIT_SYNTAX_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isExplicitSyntax() <em>Explicit Syntax</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isExplicitSyntax()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean explicitSyntax = EXPLICIT_SYNTAX_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -150,6 +171,29 @@ public class XClosureImpl extends XExpressionImpl implements XClosure
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isExplicitSyntax()
+	{
+		return explicitSyntax;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExplicitSyntax(boolean newExplicitSyntax)
+	{
+		boolean oldExplicitSyntax = explicitSyntax;
+		explicitSyntax = newExplicitSyntax;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XCLOSURE__EXPLICIT_SYNTAX, oldExplicitSyntax, explicitSyntax));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -177,6 +221,8 @@ public class XClosureImpl extends XExpressionImpl implements XClosure
 				return getFormalParameters();
 			case XbasePackage.XCLOSURE__EXPRESSION:
 				return getExpression();
+			case XbasePackage.XCLOSURE__EXPLICIT_SYNTAX:
+				return isExplicitSyntax();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -199,6 +245,9 @@ public class XClosureImpl extends XExpressionImpl implements XClosure
 			case XbasePackage.XCLOSURE__EXPRESSION:
 				setExpression((XExpression)newValue);
 				return;
+			case XbasePackage.XCLOSURE__EXPLICIT_SYNTAX:
+				setExplicitSyntax((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -219,6 +268,9 @@ public class XClosureImpl extends XExpressionImpl implements XClosure
 			case XbasePackage.XCLOSURE__EXPRESSION:
 				setExpression((XExpression)null);
 				return;
+			case XbasePackage.XCLOSURE__EXPLICIT_SYNTAX:
+				setExplicitSyntax(EXPLICIT_SYNTAX_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -237,8 +289,27 @@ public class XClosureImpl extends XExpressionImpl implements XClosure
 				return formalParameters != null && !formalParameters.isEmpty();
 			case XbasePackage.XCLOSURE__EXPRESSION:
 				return expression != null;
+			case XbasePackage.XCLOSURE__EXPLICIT_SYNTAX:
+				return explicitSyntax != EXPLICIT_SYNTAX_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString()
+	{
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (explicitSyntax: ");
+		result.append(explicitSyntax);
+		result.append(')');
+		return result.toString();
 	}
 
 } //XClosureImpl

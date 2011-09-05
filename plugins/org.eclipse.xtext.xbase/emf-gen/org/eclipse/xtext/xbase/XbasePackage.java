@@ -770,13 +770,22 @@ public interface XbasePackage extends EPackage
 	int XCLOSURE__EXPRESSION = XEXPRESSION_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Explicit Syntax</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCLOSURE__EXPLICIT_SYNTAX = XEXPRESSION_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>XClosure</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XCLOSURE_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 2;
+	int XCLOSURE_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XCastedExpressionImpl <em>XCasted Expression</em>}' class.
@@ -1413,52 +1422,6 @@ public interface XbasePackage extends EPackage
 	 */
 	int XRETURN_EXPRESSION_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 1;
 
-	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XWithExpressionImpl <em>XWith Expression</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.xbase.impl.XWithExpressionImpl
-	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXWithExpression()
-	 * @generated
-	 */
-	int XWITH_EXPRESSION = 29;
-
-	/**
-	 * The feature id for the '<em><b>Main Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XWITH_EXPRESSION__MAIN_EXPRESSION = XEXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Block Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XWITH_EXPRESSION__BLOCK_EXPRESSION = XEXPRESSION_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Variable</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XWITH_EXPRESSION__VARIABLE = XEXPRESSION_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>XWith Expression</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XWITH_EXPRESSION_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 3;
-
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XExpression <em>XExpression</em>}'.
@@ -2029,6 +1992,17 @@ public interface XbasePackage extends EPackage
 	EReference getXClosure_Expression();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XClosure#isExplicitSyntax <em>Explicit Syntax</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Explicit Syntax</em>'.
+	 * @see org.eclipse.xtext.xbase.XClosure#isExplicitSyntax()
+	 * @see #getXClosure()
+	 * @generated
+	 */
+	EAttribute getXClosure_ExplicitSyntax();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XCastedExpression <em>XCasted Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2409,49 +2383,6 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 */
 	EReference getXReturnExpression_Expression();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XWithExpression <em>XWith Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>XWith Expression</em>'.
-	 * @see org.eclipse.xtext.xbase.XWithExpression
-	 * @generated
-	 */
-	EClass getXWithExpression();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XWithExpression#getMainExpression <em>Main Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Main Expression</em>'.
-	 * @see org.eclipse.xtext.xbase.XWithExpression#getMainExpression()
-	 * @see #getXWithExpression()
-	 * @generated
-	 */
-	EReference getXWithExpression_MainExpression();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XWithExpression#getBlockExpression <em>Block Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Block Expression</em>'.
-	 * @see org.eclipse.xtext.xbase.XWithExpression#getBlockExpression()
-	 * @see #getXWithExpression()
-	 * @generated
-	 */
-	EReference getXWithExpression_BlockExpression();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XWithExpression#getVariable <em>Variable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Variable</em>'.
-	 * @see org.eclipse.xtext.xbase.XWithExpression#getVariable()
-	 * @see #getXWithExpression()
-	 * @generated
-	 */
-	EReference getXWithExpression_Variable();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -2931,6 +2862,14 @@ public interface XbasePackage extends EPackage
 		EReference XCLOSURE__EXPRESSION = eINSTANCE.getXClosure_Expression();
 
 		/**
+		 * The meta object literal for the '<em><b>Explicit Syntax</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XCLOSURE__EXPLICIT_SYNTAX = eINSTANCE.getXClosure_ExplicitSyntax();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XCastedExpressionImpl <em>XCasted Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3245,40 +3184,6 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EReference XRETURN_EXPRESSION__EXPRESSION = eINSTANCE.getXReturnExpression_Expression();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XWithExpressionImpl <em>XWith Expression</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.xbase.impl.XWithExpressionImpl
-		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXWithExpression()
-		 * @generated
-		 */
-		EClass XWITH_EXPRESSION = eINSTANCE.getXWithExpression();
-
-		/**
-		 * The meta object literal for the '<em><b>Main Expression</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference XWITH_EXPRESSION__MAIN_EXPRESSION = eINSTANCE.getXWithExpression_MainExpression();
-
-		/**
-		 * The meta object literal for the '<em><b>Block Expression</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference XWITH_EXPRESSION__BLOCK_EXPRESSION = eINSTANCE.getXWithExpression_BlockExpression();
-
-		/**
-		 * The meta object literal for the '<em><b>Variable</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference XWITH_EXPRESSION__VARIABLE = eINSTANCE.getXWithExpression_Variable();
 
 	}
 

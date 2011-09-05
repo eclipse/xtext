@@ -504,22 +504,13 @@ public interface Xtend2Package extends EPackage
 	int XTEND_FIELD__EXTENSION = XTEND_MEMBER_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Instancefactory</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_FIELD__INSTANCEFACTORY = XTEND_MEMBER_FEATURE_COUNT + 3;
-
-	/**
 	 * The number of structural features of the '<em>Xtend Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FIELD_FEATURE_COUNT = XTEND_MEMBER_FEATURE_COUNT + 4;
+	int XTEND_FIELD_FEATURE_COUNT = XTEND_MEMBER_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendParameterImpl <em>Xtend Parameter</em>}' class.
@@ -1182,17 +1173,6 @@ public interface Xtend2Package extends EPackage
 	EAttribute getXtendField_Extension();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtend2.xtend2.XtendField#isInstancefactory <em>Instancefactory</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Instancefactory</em>'.
-	 * @see org.eclipse.xtext.xtend2.xtend2.XtendField#isInstancefactory()
-	 * @see #getXtendField()
-	 * @generated
-	 */
-	EAttribute getXtendField_Instancefactory();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xtend2.xtend2.XtendParameter <em>Xtend Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1707,14 +1687,6 @@ public interface Xtend2Package extends EPackage
 		 * @generated
 		 */
 		EAttribute XTEND_FIELD__EXTENSION = eINSTANCE.getXtendField_Extension();
-
-		/**
-		 * The meta object literal for the '<em><b>Instancefactory</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute XTEND_FIELD__INSTANCEFACTORY = eINSTANCE.getXtendField_Instancefactory();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendParameterImpl <em>Xtend Parameter</em>}' class.

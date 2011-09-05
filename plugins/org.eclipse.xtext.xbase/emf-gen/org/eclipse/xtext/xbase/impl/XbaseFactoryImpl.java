@@ -93,7 +93,6 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 			case XbasePackage.XCATCH_CLAUSE: return createXCatchClause();
 			case XbasePackage.XASSIGNMENT: return createXAssignment();
 			case XbasePackage.XRETURN_EXPRESSION: return createXReturnExpression();
-			case XbasePackage.XWITH_EXPRESSION: return createXWithExpression();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -238,7 +237,7 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	 */
 	public XClosure createXClosure()
 	{
-		XClosureImpl xClosure = new XClosureImpl();
+		XClosureImplCustom xClosure = new XClosureImplCustom();
 		return xClosure;
 	}
 
@@ -383,17 +382,6 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	{
 		XReturnExpressionImpl xReturnExpression = new XReturnExpressionImpl();
 		return xReturnExpression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public XWithExpression createXWithExpression()
-	{
-		XWithExpressionImplCustom xWithExpression = new XWithExpressionImplCustom();
-		return xWithExpression;
 	}
 
 	/**

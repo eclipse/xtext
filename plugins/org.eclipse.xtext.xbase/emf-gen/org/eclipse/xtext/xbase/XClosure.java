@@ -19,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.XClosure#getFormalParameters <em>Formal Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XClosure#getExpression <em>Expression</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XClosure#isExplicitSyntax <em>Explicit Syntax</em>}</li>
  * </ul>
  * </p>
  *
@@ -69,5 +70,31 @@ public interface XClosure extends XExpression
 	 * @generated
 	 */
 	void setExpression(XExpression value);
+
+	/**
+	 * Returns the value of the '<em><b>Explicit Syntax</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Explicit Syntax</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Explicit Syntax</em>' attribute.
+	 * @see #setExplicitSyntax(boolean)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXClosure_ExplicitSyntax()
+	 * @model
+	 * @generated
+	 */
+	boolean isExplicitSyntax();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XClosure#isExplicitSyntax <em>Explicit Syntax</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Explicit Syntax</em>' attribute.
+	 * @see #isExplicitSyntax()
+	 * @generated
+	 */
+	void setExplicitSyntax(boolean value);
 
 } // XClosure

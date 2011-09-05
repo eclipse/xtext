@@ -245,7 +245,9 @@ ruleXMemberFeatureCall :
 					',' ruleXExpression
 				)*
 			)? ')'
-		)?
+		)? ( (
+		ruleXClosure
+		) => ruleXClosure )?
 	)*
 ;
 
@@ -254,7 +256,6 @@ ruleXPrimaryExpression :
 	ruleXConstructorCall |
 	ruleXBlockExpression |
 	ruleXSwitchExpression |
-	ruleXWithExpression |
 	ruleXFeatureCall |
 	ruleXLiteral |
 	ruleXIfExpression |
@@ -279,11 +280,26 @@ ruleXLiteral :
 
 // Rule XClosure
 ruleXClosure :
-	'[' (
+	'[' ( (
+	(
 		ruleJvmFormalParameter (
 			',' ruleJvmFormalParameter
 		)*
-	)? '|' ruleXExpression ']'
+	)? '|'
+	) => (
+		(
+			ruleJvmFormalParameter (
+				',' ruleJvmFormalParameter
+			)*
+		)? '|'
+	) )? ruleXExpressionInClosure ']'
+;
+
+// Rule XExpressionInClosure
+ruleXExpressionInClosure :
+	(
+		ruleXExpressionInsideBlock ';'?
+	)*
 ;
 
 // Rule XShortClosure
@@ -324,10 +340,7 @@ ruleXSwitchExpression :
 	) => (
 		ruleValidID ':'
 	) )? ruleXExpression '{' ruleXCasePart+ (
-		'default' (
-			':' ruleXExpression |
-			ruleXMustacheExpression
-		)
+		'default' ':' ruleXExpression
 	)? '}'
 ;
 
@@ -335,10 +348,7 @@ ruleXSwitchExpression :
 ruleXCasePart :
 	ruleJvmTypeReference? (
 		'case' ruleXExpression
-	)? (
-		':' ruleXExpression |
-		ruleXMustacheExpression
-	)
+	)? ':' ruleXExpression
 ;
 
 // Rule XForLoopExpression
@@ -412,7 +422,9 @@ ruleXFeatureCall :
 				',' ruleXExpression
 			)*
 		)? ')'
-	)?
+	)? ( (
+	ruleXClosure
+	) => ruleXClosure )?
 ;
 
 // Rule IdOrSuper
@@ -445,7 +457,9 @@ ruleXConstructorCall :
 		ruleXExpression (
 			',' ruleXExpression
 		)*
-	)? ')'
+	)? ')' ( (
+	ruleXClosure
+	) => ruleXClosure )?
 ;
 
 // Rule XBooleanLiteral
@@ -507,26 +521,6 @@ ruleXCatchClause :
 	) => 'catch' ) '(' ruleJvmFormalParameter ')' ruleXExpression
 ;
 
-// Rule XWithExpression
-ruleXWithExpression :
-	(
-		':' ruleJvmFormalParameterWithoutType
-	)? (
-		':' ruleXExpression ruleXBlockExpression |
-		ruleXMustacheExpression
-	)
-;
-
-// Rule JvmFormalParameterWithoutType
-ruleJvmFormalParameterWithoutType :
-	ruleValidID
-;
-
-// Rule XMustacheExpression
-ruleXMustacheExpression :
-	':{' ruleXExpressionInsideBlock* '}'
-;
-
 // Rule QualifiedName
 ruleQualifiedName :
 	ruleValidID (
@@ -538,9 +532,11 @@ ruleQualifiedName :
 
 // Rule JvmTypeReference
 ruleJvmTypeReference :
-	ruleJvmParameterizedTypeReference (
+	ruleJvmParameterizedTypeReference ( (
+	'[' ']'
+	) => (
 		'[' ']'
-	)* |
+	) )* |
 	ruleXFunctionTypeRef
 ;
 

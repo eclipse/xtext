@@ -551,16 +551,6 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getXtendField_Instancefactory()
-	{
-		return (EAttribute)xtendFieldEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getXtendParameter()
 	{
 		return xtendParameterEClass;
@@ -826,7 +816,6 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 		createEAttribute(xtendFieldEClass, XTEND_FIELD__NAME);
 		createEReference(xtendFieldEClass, XTEND_FIELD__TYPE);
 		createEAttribute(xtendFieldEClass, XTEND_FIELD__EXTENSION);
-		createEAttribute(xtendFieldEClass, XTEND_FIELD__INSTANCEFACTORY);
 
 		xtendParameterEClass = createEClass(XTEND_PARAMETER);
 		createEAttribute(xtendParameterEClass, XTEND_PARAMETER__NAME);
@@ -957,7 +946,6 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 		initEAttribute(getXtendField_Name(), ecorePackage.getEString(), "name", null, 0, 1, XtendField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXtendField_Type(), theTypesPackage.getJvmTypeReference(), null, "type", null, 0, 1, XtendField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getXtendField_Extension(), ecorePackage.getEBoolean(), "extension", null, 0, 1, XtendField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getXtendField_Instancefactory(), ecorePackage.getEBoolean(), "instancefactory", null, 0, 1, XtendField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xtendParameterEClass, XtendParameter.class, "XtendParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getXtendParameter_Name(), ecorePackage.getEString(), "name", null, 0, 1, XtendParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
