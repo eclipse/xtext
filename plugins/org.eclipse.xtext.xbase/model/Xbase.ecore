@@ -101,6 +101,7 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//XExpression"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="explicitSyntax" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XCastedExpression" eSuperTypes="#//XExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
@@ -169,14 +170,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XReturnExpression" eSuperTypes="#//XExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//XExpression"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="XWithExpression" eSuperTypes="#//XExpression ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmIdentifiableElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="mainExpression" eType="#//XExpression"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="blockExpression" eType="#//XExpression"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmFormalParameter"
         containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

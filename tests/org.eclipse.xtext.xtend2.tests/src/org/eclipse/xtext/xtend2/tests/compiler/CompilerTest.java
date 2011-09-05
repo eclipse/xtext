@@ -1468,22 +1468,6 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"}\n","nullSafeTest");
 	}
 	
-	public void testWithExpressionFactoryInference() throws Exception {
-		compileJavaCode("x.Y",
-				"package x " +
-				"" +
-				"import org.eclipse.emf.ecore.*\n" +
-				"" +
-				"class Y { " +
-				"  @com.google.inject.Inject instancefactory EcoreFactory" +
-				"  def EAttribute newAttribute(String arg) { " +
-				"    :{" +
-				"      name = arg" +
-				"    }" +
-				"  } " +
-				"}");
-	}
-	
 	@Inject
 	private EclipseRuntimeDependentJavaCompiler javaCompiler;
 

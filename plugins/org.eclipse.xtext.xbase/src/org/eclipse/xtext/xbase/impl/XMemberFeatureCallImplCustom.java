@@ -30,4 +30,9 @@ public class XMemberFeatureCallImplCustom extends XMemberFeatureCallImpl {
 		result.addAll(getMemberCallArguments());
 		return result;
 	}
+	
+	@Override
+	public boolean isExplicitOperationCall() {
+		return super.isExplicitOperationCall() || !getMemberCallArguments().isEmpty();
+	}
 }

@@ -29,4 +29,9 @@ public class XFeatureCallImplCustom extends XFeatureCallImpl {
 		return result;
 	}
 	
+	@Override
+	public boolean isExplicitOperationCall() {
+		return super.isExplicitOperationCall() || !getFeatureCallArguments().isEmpty();
+	}
+	
 }

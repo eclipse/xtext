@@ -24,7 +24,6 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
-import org.eclipse.xtext.xbase.XWithExpression;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
@@ -174,9 +173,6 @@ public abstract class AbstractXbaseCompiler {
 	}
 
 	protected String getFavoriteVariableName(EObject ex) {
-		if (ex instanceof XWithExpression) {
-			return "_with";
-		}
 		if (ex instanceof XVariableDeclaration) {
 			return ((XVariableDeclaration) ex).getName();
 		}

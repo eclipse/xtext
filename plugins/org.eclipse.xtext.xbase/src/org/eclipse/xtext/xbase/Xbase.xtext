@@ -97,13 +97,13 @@ XMemberFeatureCall returns XExpression:
 				  |	memberCallArguments+=XExpression (',' memberCallArguments+=XExpression)*
 				)? 
 			')')?
+			=>memberCallArguments+=XClosure?
 		)*;
 
 XPrimaryExpression returns XExpression:
 	XConstructorCall |
 	XBlockExpression |
 	XSwitchExpression |
-	XWithExpression |
 	XFeatureCall |
 	XLiteral |
 	XIfExpression |
@@ -125,10 +125,19 @@ XLiteral returns XExpression:
 ;
 
 XClosure returns XExpression:
-	{XClosure} '[' (formalParameters+=JvmFormalParameter (',' formalParameters+=JvmFormalParameter)*)? '|' expression=XExpression ']';
+	{XClosure} 
+	'[' 
+		=>((formalParameters+=JvmFormalParameter (',' formalParameters+=JvmFormalParameter)*)? explicitSyntax?='|')? 
+		expression=XExpressionInClosure 
+	']';
+	
+XExpressionInClosure returns XExpression: 
+	{XBlockExpression}
+	(expressions+=XExpressionInsideBlock ';'?)*
+;
 
 XShortClosure returns XExpression:
-	=>({XClosure} (formalParameters+=JvmFormalParameter (',' formalParameters+=JvmFormalParameter)*)? '|') expression=XExpression;
+	=>({XClosure} (formalParameters+=JvmFormalParameter (',' formalParameters+=JvmFormalParameter)*)? explicitSyntax?='|') expression=XExpression;
 
 XParenthesizedExpression returns XExpression:
 	'(' XExpression ')';
@@ -143,12 +152,12 @@ XSwitchExpression returns XExpression:
 	{XSwitchExpression}
 	'switch' =>(localVarName=ValidID ':')? switch=XExpression '{'
 	(cases+=XCasePart)+
-	('default' (':' default=XExpression | default=XMustacheExpression) )?
+	('default' ':' default=XExpression )?
 	'}';
 
 XCasePart:
 	typeGuard=JvmTypeReference? ('case' case=XExpression)? 
-		(':' then=XExpression | then=XMustacheExpression);
+		':' then=XExpression ;
 
 XForLoopExpression returns XExpression:
 	{XForLoopExpression}
@@ -192,7 +201,8 @@ XFeatureCall returns XExpression:
 		    featureCallArguments+=XShortClosure
 		  |	featureCallArguments+=XExpression (',' featureCallArguments+=XExpression)*
 		)? 
-	')')?;
+	')')?
+	=>featureCallArguments+=XClosure?;
 	
 IdOrSuper :
 	ValidID | 'super'
@@ -214,7 +224,8 @@ XConstructorCall returns XExpression:
 		    arguments+=XShortClosure
 		  |	arguments+=XExpression (',' arguments+=XExpression)*
 		)? 
-	')';
+	')'
+	=>arguments+=XClosure?;
 
 XBooleanLiteral returns XExpression :
 	{XBooleanLiteral} ('false' | isTrue?='true');
@@ -251,24 +262,6 @@ XTryCatchFinallyExpression returns XExpression:
 XCatchClause :
 	=>'catch' '(' declaredParam=JvmFormalParameter ')' expression=XExpression;
 
-XWithExpression returns XExpression : 
-	{XWithExpression} 
-	(':' variable=JvmFormalParameterWithoutType)? 
-	(':' mainExpression=XExpression blockExpression=XBlockExpression
-	| blockExpression=XMustacheExpression
-	)
-;
-
-
-JvmFormalParameterWithoutType returns types::JvmFormalParameter:
-	name=ValidID;
-
-XMustacheExpression returns XExpression :
-	{XBlockExpression}
-	':{'
-		expressions+=XExpressionInsideBlock*
-	'}'
-;
 
 QualifiedName:
   ValidID (=>'.' ValidID)*;

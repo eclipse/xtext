@@ -71,7 +71,6 @@ import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
-import org.eclipse.xtext.xbase.XWithExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping;
 
@@ -442,14 +441,6 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		}
 		return null;
 	}
-	protected JvmTypeReference _expectedType(XWithExpression expr, EReference reference, int index, boolean rawType) {
-		if (reference == XbasePackage.Literals.XWITH_EXPRESSION__BLOCK_EXPRESSION) {
-			return null;
-		} else if (reference == XbasePackage.Literals.XWITH_EXPRESSION__MAIN_EXPRESSION) {
-			return getExpectedType(expr, rawType);
-		}
-		return null;
-	}
 
 	protected JvmTypeReference _type(XIfExpression object, boolean rawType) {
 		List<JvmTypeReference> returnTypes = newArrayList();
@@ -696,13 +687,6 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		return typeForName;
 	}
 	
-	protected JvmTypeReference _type(XWithExpression object, boolean rawType) {
-		if (object.getMainExpression() != null) {
-			return getType(object.getMainExpression(), rawType);
-		}
-		return getExpectedType(object, rawType);
-	}
-
 	protected JvmTypeReference getPrimitiveVoid(XExpression object) {
 		return getTypeReferences().getTypeForName(Void.TYPE, object);
 	}
@@ -886,8 +870,6 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 						return result;
 					}
 				}
-			} else if (parameter.eContainer() instanceof XWithExpression) {
-				return getTypeForIdentifiable((XWithExpression)parameter.eContainer(), rawType);
 			}
 		}
 		return parameter.getParameterType();
@@ -912,13 +894,6 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			}
 		}
 		return reference;
-	}
-	protected JvmTypeReference _typeForIdentifiable(XWithExpression expression, boolean rawType) {
-		if (expression.getMainExpression() != null) {
-			return getType(expression.getMainExpression(), rawType);
-		} else {
-			return getExpectedType(expression, rawType);
-		}
 	}
 
 	protected JvmTypeReference _typeForIdentifiable(JvmField field, boolean rawType) {

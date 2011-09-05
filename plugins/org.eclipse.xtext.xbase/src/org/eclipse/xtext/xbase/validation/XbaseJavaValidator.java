@@ -59,11 +59,9 @@ import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
-import org.eclipse.xtext.xbase.XWithExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
-import org.eclipse.xtext.xbase.impl.XWithExpressionSupport;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.SynonymTypesProvider;
@@ -101,9 +99,6 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	
 	@Inject
 	private Primitives primitives;
-	
-	@Inject
-	private XWithExpressionSupport withExpressionSupport;
 	
 	private final Set<EReference> typeConformanceCheckedReferences = ImmutableSet.of(
 			XbasePackage.Literals.XVARIABLE_DECLARATION__RIGHT,
@@ -266,7 +261,8 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			return;
 		if (attr.getEContainingClass().isInstance(attributeHolder)) {
 			String name = (String) attributeHolder.eGet(attr);
-			if (name == null)
+			// shadowing 'it' is allowed
+			if (name == null || name.equals(XbaseScopeProvider.IT.toString()))
 				return;
 			int idx = 0;
 			if (nameDeclarator.eContainer() instanceof XBlockExpression) {
@@ -547,20 +543,6 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		}
 	}
 	
-	@Check
-	public void checkWithExpression(XWithExpression expression) {
-		if (expression.getMainExpression() == null) {
-			JvmTypeReference expectedType = typeProvider.getExpectedType(expression);
-			if (expectedType == null) {
-				error("Insufficient information for object construction. Please provide a construction expression or more context information.", expression, null, TOO_LITTLE_TYPE_INFORMATION);
-			} else {
-				if (!withExpressionSupport.isConstructionInferrable(expression, expectedType)) {
-					error("Instance cannot be created for type "+expectedType.getIdentifier()+".", expression, null, NOT_INSTANTIABLE);
-				}
-			}
-		}
-	}
-
 	//TODO switch expression not of type boolean
 	//TODO apply cast rules case's type guards
 	//TODO null guard is not allowed with any other primitives but boolean (null -> false)

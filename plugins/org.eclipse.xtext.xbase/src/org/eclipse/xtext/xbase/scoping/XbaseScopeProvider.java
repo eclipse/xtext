@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.scoping;
 
 import static com.google.common.collect.Iterables.*;
-import static com.google.common.collect.Lists.*;
 
 import java.util.List;
 
@@ -45,7 +44,6 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
-import org.eclipse.xtext.xbase.XWithExpression;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
@@ -412,7 +410,6 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			XBlockExpression block, int indexOfContextExpressionInBlock,
 			boolean referredFromClosure, IScope parentScope) {
 		List<IValidatedEObjectDescription> descriptions = Lists.newArrayList();
-		parentScope = createScopeForContainingWithExpression(block, parentScope);
 		for (int i = 0; i < indexOfContextExpressionInBlock; i++) {
 			XExpression expression = block.getExpressions().get(i);
 			if (expression instanceof XVariableDeclaration) {
@@ -426,20 +423,6 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			}
 		}
 		return new JvmFeatureScope(parentScope, "XBlockExpression", descriptions);
-	}
-
-	protected IScope createScopeForContainingWithExpression(XBlockExpression block, IScope parent) {
-		if (block.eContainingFeature() == XbasePackage.Literals.XWITH_EXPRESSION__BLOCK_EXPRESSION) {
-			XWithExpression with = (XWithExpression) block.eContainer();
-			IValidatedEObjectDescription itReference = new LocalVarDescription(IT , with);
-			if (with.getVariable() != null) {
-				List<IValidatedEObjectDescription> descriptions = newArrayList(itReference);
-				descriptions.add(createLocalVarDescription(with.getVariable()));
-				return new JvmFeatureScope(parent, "XWithExpression", descriptions);
-			} 
-			return new JvmFeatureScope(parent, "XWithExpression", itReference);
-		}
-		return parent;
 	}
 
 	protected IScope createLocalVarScopeForClosure(XClosure closure, IScope parentScope) {

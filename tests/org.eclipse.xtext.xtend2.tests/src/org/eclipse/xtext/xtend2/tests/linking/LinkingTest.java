@@ -202,7 +202,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		XtendClass xClass = file.getXtendClass();
 		XtendFunction func  = (XtendFunction) xClass.getMembers().get(0);
 		XClosure closure = (XClosure) ((XBlockExpression)func.getExpression()).getExpressions().get(0);
-		XAbstractFeatureCall featureCall1 = (XAbstractFeatureCall) closure.getExpression();
+		XAbstractFeatureCall featureCall1 = (XAbstractFeatureCall) (((XBlockExpression)closure.getExpression()).getExpressions().get(0));
 		assertEquals(closure.getFormalParameters().get(0), featureCall1.getFeature());
 	}
 	

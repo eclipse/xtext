@@ -13,7 +13,7 @@ import org.eclipse.xtext.xbase.XIfExpression;
 
 @SuppressWarnings("restriction")
 public class XbaseSyntacticSequencer extends AbstractXbaseSyntacticSequencer {
-
+	
 	/**
 	 * Syntax: '('*
 	 */
@@ -34,4 +34,5 @@ public class XbaseSyntacticSequencer extends AbstractXbaseSyntacticSequencer {
 
 		acceptNodes(transition, nodes);
 	}
+	
 }
