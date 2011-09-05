@@ -31,36 +31,30 @@ import static com.google.common.collect.Lists.*;
  */
 public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	
-	@Test public void testWithExpression() throws Exception {
-		String expr = ":new StringBuilder() { append('foo') append('bar') }.toString";
-		assertEvaluatesTo("foobar", expr);
+	@Test public void testImplicitOneArgClosure() throws Exception {
+		assertEvaluatesTo("foo","[it].apply('foo')");
 	}
 	
-	@Test public void testWithExpression_01() throws Exception {
-		String expr = ":foo: newArrayList('foo') { foo += 'bar' it += 'baz' add('zonk')}";
-		assertEvaluatesTo(newArrayList("foo", "bar", "baz", "zonk"), expr);
+	@Test public void testImplicitOneArgClosure_01() throws Exception {
+		assertEvaluatesTo(3,"[length].apply('foo')");
 	}
 	
-	@Test public void testWithExpression_02() throws Exception {
-		String expr = "{ val java.util.ArrayList<String> x = :{ it += 'bar' it += 'baz' add('zonk')} x}";
-		assertEvaluatesTo(newArrayList("bar", "baz", "zonk"), expr);
+	@Test public void testImplicitOneArgClosure_02() throws Exception {
+		assertEvaluatesTo(newArrayList("a","bb","ccc"), "newArrayList('bb','a','ccc').sortBy([length])");
 	}
 	
-	@Test public void testWithExpression_03() throws Exception {
-		String expr = "{ val java.util.ArrayList<String> x = :{ it += 'bar' it += 'baz' addAll(:newArrayList('zip'){ it += 'zonk'})} x}";
-		assertEvaluatesTo(newArrayList("bar", "baz", "zip", "zonk"), expr);
+	@Test public void testBuilderSyntax_01() throws Exception {
+		assertEvaluatesTo(newArrayList("a","bb","ccc"), "newArrayList('a','bb','ccc').sortBy [length]");
 	}
 	
-	@Test public void testWithExpression_04() throws Exception {
-		String expr = "<String>newArrayList(:{})";
-		assertEvaluatesTo(newArrayList(""), expr);
+	@Test public void testBuilderSyntax_02() throws Exception {
+		assertEvaluatesTo(newArrayList("a","bb","ccc"), "newArrayList('a','bb','ccc').sortBy [it.length]");
 	}
 	
-	@Test public void testWithExpression_05() throws Exception {
-		String expr = ":{} as String";
-		assertEvaluatesTo("", expr);
+	@Test public void testBuilderSyntax_03() throws Exception {
+		assertEvaluatesTo(newArrayList("a","bb","ccc"), "newArrayList('a','bb','ccc').sortBy [x | x.length]");
 	}
-
+	
 	@Test public void testNestedClosures() throws Exception {
 		String expr = 
 				"{ " +
