@@ -69,6 +69,12 @@ public class StringBuilderBasedAppendable implements IAppendable {
 	private Stack<Map<Object, String>> localVars = new Stack<Map<Object, String>>();
 	private Stack<Set<String>> usedNamesInScope = new Stack<Set<String>>();
 	
+	public StringBuilderBasedAppendable(ImportManager typeSerializer, String indentation){
+		this.importManager = typeSerializer;
+		this.indentation = indentation;
+		openScope();
+	}
+	
 	public StringBuilderBasedAppendable(ImportManager typeSerializer){
 		this.importManager = typeSerializer;
 		openScope();
