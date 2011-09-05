@@ -15,7 +15,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.ui.refactoring.impl.RefactoringStatusException;
+import org.eclipse.xtext.ui.refactoring.impl.RefactoringException;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelDependentElementsCalculator;
 import org.eclipse.xtext.xtend2.jvmmodel.DispatchUtil;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
@@ -37,7 +37,7 @@ public class Xtend2DependentElementsCalculator extends JvmModelDependentElements
 			for (JvmOperation inferredOperation : filter(getJvmModelAssociations().getJvmElements(baseElement),
 					JvmOperation.class)) {
 				if (dispatchUtil.isDispatcherFunction(inferredOperation))
-					throw new RefactoringStatusException("Cannot refactor polymorphic dispatch method", true);
+					throw new RefactoringException("Cannot refactor polymorphic dispatch method");
 			}
 		}
 		return super.getDependentElementURIs(baseElement, monitor);

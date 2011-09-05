@@ -18,7 +18,7 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy;
-import org.eclipse.xtext.ui.refactoring.impl.RefactoringStatusException;
+import org.eclipse.xtext.ui.refactoring.impl.RefactoringException;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.AbstractJvmModelRenameStrategy;
@@ -99,7 +99,7 @@ public class Xtend2RenameStrategy extends AbstractJvmModelRenameStrategy {
 		if (targetObject instanceof XtendClass) {
 			URI resourceURI = EcoreUtil2.getNormalizedResourceURI(targetObject);
 			if (!resourceURI.isPlatformResource())
-				throw new RefactoringStatusException("Renamed class does not reside in the workspace", true);
+				throw new RefactoringException("Renamed class does not reside in the workspace");
 			IPath path = new Path("/").append(new Path(resourceURI.path()).removeFirstSegments(1));
 			return path;
 		}
