@@ -42,7 +42,7 @@ class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
 	def dispatch Iterable<JvmDeclaredType> transform(DomainModel model) {
 		model.elements.map(e | transform(e)).flatten
 	}
-	 
+	
 	def dispatch Iterable<JvmDeclaredType> transform(PackageDeclaration packageDecl) {
 		packageDecl.elements.map(e | transform(e)).flatten
 	}
