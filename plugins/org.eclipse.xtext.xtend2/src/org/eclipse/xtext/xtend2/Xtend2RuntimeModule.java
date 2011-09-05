@@ -14,7 +14,6 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
-import org.eclipse.xtext.xbase.impl.XWithExpressionSupport;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
@@ -33,7 +32,6 @@ import org.eclipse.xtext.xtend2.scoping.Xtend2ImportedNamespaceScopeProvider;
 import org.eclipse.xtext.xtend2.typing.Xtend2TypeProvider;
 import org.eclipse.xtext.xtend2.typing.XtendTypeArgumentContextProvider;
 import org.eclipse.xtext.xtend2.validation.XtendEarlyExitValidator;
-import org.eclipse.xtext.xtend2.withexpression.XtendWithExpressionSupport;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -107,7 +105,4 @@ public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2
 		return Xtend2OutputConfigurationProvider.class;
 	}
 	
-	public Class<? extends XWithExpressionSupport> bindXWithExpressionSupport() {
-		return XtendWithExpressionSupport.class;
-	}
 }

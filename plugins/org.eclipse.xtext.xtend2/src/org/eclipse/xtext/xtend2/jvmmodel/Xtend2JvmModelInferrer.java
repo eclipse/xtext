@@ -174,7 +174,7 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			return target;
 		} else if (sourceMember instanceof XtendField) {
 			XtendField dep = (XtendField) sourceMember;
-			if ((dep.isInstancefactory() || dep.isExtension() || dep.getName() != null) && dep.getType() != null) {
+			if ((dep.isExtension() || dep.getName() != null) && dep.getType() != null) {
 				JvmField field = typesFactory.createJvmField();
 				container.getMembers().add(field);
 				associator.associatePrimary(dep, field);

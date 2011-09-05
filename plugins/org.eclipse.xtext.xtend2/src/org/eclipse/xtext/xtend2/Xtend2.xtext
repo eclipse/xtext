@@ -38,7 +38,7 @@ Member returns XtendMember:
 	{XtendMember} annotations+=XAnnotation* 
 	(
 		{XtendField.annotationInfo = current}	
-		( (extension?='extension' | instancefactory?='instancefactory') type=JvmTypeReference name=ValidID?
+		( extension?='extension' type=JvmTypeReference name=ValidID?
 		| type=JvmTypeReference name=ValidID
 		)
 		
