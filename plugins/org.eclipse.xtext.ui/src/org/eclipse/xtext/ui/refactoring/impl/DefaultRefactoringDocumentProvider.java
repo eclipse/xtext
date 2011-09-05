@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
 
+import static org.eclipse.ltk.core.refactoring.RefactoringStatus.*;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -16,7 +17,6 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.DocumentChange;
-import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.TextFileChange;
 import org.eclipse.text.edits.TextEdit;
 import org.eclipse.ui.IEditorPart;
@@ -46,18 +46,18 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 
 	@Inject
 	private IGlobalServiceProvider globalServiceProvider;
-
-	protected IFileEditorInput getEditorInput(URI resourceURI, RefactoringStatus status) {
+	
+	protected IFileEditorInput getEditorInput(URI resourceURI, StatusWrapper status) {
 		try {
 			IFile file = projectUtil.findFileStorage(resourceURI, true);
 			return new FileEditorInput(file);
 		} catch (IllegalArgumentException e) {
-			status.addError("No suitable storage found for resource " + resourceURI.toString());
+			status.add(ERROR, "No suitable storage found for resource {0}.", resourceURI);
 			return null;
 		}
 	}
 
-	public IRefactoringDocument get(URI uri, final RefactoringStatus status) {
+	public IRefactoringDocument get(URI uri, final StatusWrapper status) {
 		URI resourceURI = uri.trimFragment();
 		final IFileEditorInput fileEditorInput = getEditorInput(resourceURI, status);
 		if (fileEditorInput != null) {
@@ -70,7 +70,7 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 					if (editor instanceof ITextEditor) {
 						if (editor instanceof ITextEditorExtension
 								&& ((ITextEditorExtension) editor).isEditorInputReadOnly())
-							status.addError("Editor " + fileEditorInput.getName() + " is read only");
+							status.add(ERROR, "Editor for {0} is read only", fileEditorInput.getName());
 						return ((ITextEditor) editor).getDocumentProvider().getDocument(fileEditorInput);
 					}
 					return null;

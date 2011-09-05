@@ -7,16 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
 
+import static org.eclipse.ltk.core.refactoring.RefactoringStatus.*;
+
 import org.apache.log4j.Logger;
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.text.Region;
-import org.eclipse.ltk.core.refactoring.FileStatusContext;
-import org.eclipse.ltk.core.refactoring.RefactoringStatus;
-import org.eclipse.ltk.core.refactoring.RefactoringStatusContext;
 import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.diagnostic.ITokenDiagnosticProvider;
@@ -43,9 +39,6 @@ public class CrossReferenceSerializerFacade {
 	private org.eclipse.xtext.serializer.tokens.CrossReferenceSerializer newCrossRefSerializer;
 
 	@Inject
-	private ProjectUtil projectUtil;
-
-	@Inject
 	protected void setSerializer(ISerializer serializer) {
 		useNewSerializer = serializer instanceof org.eclipse.xtext.serializer.impl.Serializer;
 		if (useNewSerializer)
@@ -59,7 +52,7 @@ public class CrossReferenceSerializerFacade {
 	}
 	
 	public String serializeCrossRef(EObject owner, CrossReference crossref, EObject target, ITextRegion linkTextRegion,
-			RefactoringStatus status) {
+			StatusWrapper status) {
 		try {
 			if (useNewSerializer)
 				return serializeCrossRefNew(owner, crossref, target, linkTextRegion, status);
@@ -67,21 +60,21 @@ public class CrossReferenceSerializerFacade {
 				return serializeCrossRefOld(owner, crossref, target, linkTextRegion, status);
 		} catch (Exception exc) {
 			LOG.error("Error updating cross-reference", exc);
-			handleException(exc, getRefactoringStatusContext(owner, crossref, target, linkTextRegion), status);
+			handleException(exc, owner, linkTextRegion, status);
 			return null;
 		}
 	}
 
 	protected String serializeCrossRefOld(EObject owner, CrossReference crossref, EObject target,
-			ITextRegion linkTextRegion, RefactoringStatus status) {
+			ITextRegion linkTextRegion, StatusWrapper status) {
 		String linkText = oldCrossRefSerializer.serializeCrossRef(owner, crossref, target, null);
 		if (linkText == null)
-			handleNameCollision(getRefactoringStatusContext(owner, crossref, target, linkTextRegion), status);
+			handleNameCollision(owner, linkTextRegion, status);
 		return linkText;
 	}
 
 	protected String serializeCrossRefNew(EObject owner, CrossReference crossref, EObject target,
-			ITextRegion linkTextRegion, RefactoringStatus status) {
+			ITextRegion linkTextRegion, StatusWrapper status) {
 		final boolean[] hasNameCollision = new boolean[] { false };
 		String linkText = newCrossRefSerializer.serializeCrossRef(owner, crossref, target, null,
 				new ISerializationDiagnostic.ExceptionThrowingAcceptor() {
@@ -95,28 +88,21 @@ public class CrossReferenceSerializerFacade {
 					}
 				});
 		if (hasNameCollision[0])
-			return handleNameCollision(getRefactoringStatusContext(owner, crossref, target, linkTextRegion), status);
+			return handleNameCollision(owner, linkTextRegion, status);
 		return linkText;
 	}
 
-	protected String handleNameCollision(RefactoringStatusContext context, RefactoringStatus status) {
-		return handleError("Renaming element will break existing cross-reference", context, status);
+	protected String handleNameCollision(EObject owner, ITextRegion linkTextRegion, StatusWrapper status) {
+		return handleError("Renaming element will break existing cross-reference", owner, linkTextRegion, status);
 	}
 
-	protected String handleException(Exception exc, RefactoringStatusContext context, RefactoringStatus status) {
-		return handleError(exc.getMessage(), context, status);
+	protected String handleException(Exception exc, EObject owner, ITextRegion linkTextRegion, StatusWrapper status) {
+		return handleError(exc.getMessage(), owner, linkTextRegion, status);
 	}
 
-	protected String handleError(String message, RefactoringStatusContext context, RefactoringStatus status) {
-		status.addFatalError(message, context);
+	protected String handleError(String message, EObject owner, ITextRegion linkTextRegion, StatusWrapper status) {
+		status.add(ERROR, message, owner, linkTextRegion);
 		return null;
 	}
 
-	protected RefactoringStatusContext getRefactoringStatusContext(EObject owner, CrossReference crossref,
-			EObject target, ITextRegion linkTextRegion) {
-		IFile file = projectUtil.findFileStorage(EcoreUtil2.getNormalizedURI(owner), false);
-		if (file == null)
-			return null;
-		return new FileStatusContext(file, new Region(linkTextRegion.getOffset(), linkTextRegion.getLength()));
-	}
 }

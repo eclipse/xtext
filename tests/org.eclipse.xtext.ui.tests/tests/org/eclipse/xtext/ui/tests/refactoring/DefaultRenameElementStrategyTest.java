@@ -25,6 +25,7 @@ import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.IRefactoringDocument;
+import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
 
 import com.google.inject.Inject;
@@ -106,7 +107,7 @@ public class DefaultRenameElementStrategyTest extends AbstractXtextTests impleme
 		changes.add(change);
 	}
 
-	public RefactoringStatus getRefactoringStatus() {
+	public StatusWrapper getRefactoringStatus() {
 		return null;
 	}
 

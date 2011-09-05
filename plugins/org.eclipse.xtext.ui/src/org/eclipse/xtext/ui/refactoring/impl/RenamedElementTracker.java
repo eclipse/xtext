@@ -45,8 +45,7 @@ public class RenamedElementTracker implements IRenamedElementTracker {
 		for (URI renamedElementURI : renamedElementURIs) {
 			EObject renamedElement = resourceSet.getEObject(renamedElementURI, true);
 			if (renamedElement == null)
-				throw new RefactoringStatusException("Cannot resolve dependent element " + notNull(renamedElementURI),
-						true);
+				throw new RefactoringException("Cannot resolve dependent element " + notNull(renamedElementURI));
 			renamedElement2oldURI.put(renamedElement, renamedElementURI);
 		}
 		return renamedElement2oldURI;

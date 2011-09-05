@@ -6,8 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
-
-import static org.eclipse.xtext.util.Strings.*;
+import static org.eclipse.ltk.core.refactoring.RefactoringStatus.*;
 
 import java.util.Iterator;
 
@@ -60,13 +59,14 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 				return;
 			Resource referringResource = resourceSet.getResource(referringResourceURI, false);
 			if (!(referringResource instanceof XtextResource)) {
-				throw new RefactoringStatusException("Resource " + notNull(referringResourceURI)
-						+ " is not an XtextResource", true);
-			}
-			((XtextResource) referringResource).getCache().clear(referringResource);
-			for (IReferenceDescription referenceDescription : resource2references.get(referringResourceURI)) {
-				createReferenceUpdate(referenceDescription, referringResourceURI, elementRenameArguments, resourceSet,
-						updateAcceptor);
+				updateAcceptor.getRefactoringStatus().add(ERROR, "Resource {0} is not an XtextResource.",
+						referringResource.getURI(), resourceSet);
+			} else {
+				((XtextResource) referringResource).getCache().clear(referringResource);
+				for (IReferenceDescription referenceDescription : resource2references.get(referringResourceURI)) {
+					createReferenceUpdate(referenceDescription, referringResourceURI, elementRenameArguments,
+							resourceSet, updateAcceptor);
+				}
 			}
 			progress.worked(1);
 		}

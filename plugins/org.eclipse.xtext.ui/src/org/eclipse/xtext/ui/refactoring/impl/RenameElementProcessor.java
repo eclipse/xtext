@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.refactoring.impl;
 
 import static com.google.common.collect.Iterables.*;
+import static org.eclipse.ltk.core.refactoring.RefactoringStatus.*;
 
 import java.util.Collections;
 import java.util.Map;
@@ -39,7 +40,6 @@ import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.IRenamedElementTracker;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
-import org.eclipse.xtext.ui.util.ResourceUtil;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -78,9 +78,11 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 	@Named(Constants.LANGUAGE_NAME)
 	private String languageName;
 
+	@Inject
+	private StatusWrapper status;
+
 	private IRenameElementContext renameElementContext;
 	private ResourceSet resourceSet;
-	private RefactoringStatus status;
 	private URI targetElementURI;
 	private EObject targetElement;
 	private IRenameStrategy renameStrategy;
@@ -88,51 +90,53 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 
 	@Inject
 	private Provider<IRefactoringUpdateAcceptor> updateAcceptorProvider;
-	
+
 	private ElementRenameArguments renameArguments;
 
 	private IRefactoringUpdateAcceptor currentUpdateAcceptor;
 
 	@Override
 	public boolean initialize(final IRenameElementContext renameElementContext) {
-		status = new RefactoringStatus();
 		try {
 			this.renameElementContext = renameElementContext;
 			this.targetElementURI = renameElementContext.getTargetElementURI();
 			resourceSet = createResourceSet(renameElementContext);
 			targetElement = resourceSet.getEObject(targetElementURI, true);
 			if (targetElement == null) {
-				throw new RefactoringStatusException("Rename target element can not be resolved", true);
+				status.add(FATAL, "Rename target element {0} can not be resolved", targetElementURI);
+			} else {
+				if (isValidTargetFile(targetElement.eResource(), status)) {
+					this.renameStrategy = createRenameElementStrategy(targetElement, renameElementContext);
+					if (this.renameStrategy == null)
+						return false;
+				}
 			}
-			checkTargetFile(targetElement.eResource());
-			this.renameStrategy = createRenameElementStrategy(targetElement, renameElementContext);
-			if (this.renameStrategy == null)
-				return false;
 		} catch (Exception e) {
-			handleException(status, e);
-			if (status.getSeverity() == RefactoringStatus.FATAL)
-				throw (e instanceof RuntimeException) ? (RuntimeException) e : new WrappedException(e);
+			handleException(e, status);
+			throw (e instanceof RuntimeException) ? (RuntimeException) e : new WrappedException(e);
 		}
 		return true;
 	}
-
+	
 	protected ResourceSet createResourceSet(IRenameElementContext renameElementContext) {
 		return resourceSetProvider.get(projectUtil.getProject(targetElementURI));
 	}
 
-	protected void checkTargetFile(Resource resource) {
-		IFile targetFile = ResourceUtil.getFile(resource);
-		if (targetFile == null || !targetFile.isAccessible())
-			throw new RefactoringStatusException("Rename target cannot be accessed", true);
-		if (targetFile.isReadOnly())
-			throw new RefactoringStatusException("Target file is read-only", true);
+	protected boolean isValidTargetFile(Resource resource, StatusWrapper status) {
+		IFile targetFile = projectUtil.findFileStorage(resource.getURI(), true);
+		if (targetFile == null) {
+			status.add(FATAL, "Rename target file cannot be accessed");
+			return false;
+		}
+		return true;
 	}
 
-	protected IRenameStrategy createRenameElementStrategy(EObject targetElement, IRenameElementContext renameElementContext) {
+	protected IRenameStrategy createRenameElementStrategy(EObject targetElement,
+			IRenameElementContext renameElementContext) {
 		IRenameStrategy result = strategyProvider.get(targetElement, renameElementContext);
 		return result;
 	}
-	
+
 	@Override
 	public IRenameStrategy getRenameElementStrategy() {
 		return renameStrategy;
@@ -183,7 +187,7 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 	@Override
 	public RefactoringStatus checkInitialConditions(IProgressMonitor pm) throws CoreException,
 			OperationCanceledException {
-		return status;
+		return status.getRefactoringStatus();
 	}
 
 	@Override
@@ -205,15 +209,15 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 					progress.newChild(98));
 			status.merge(currentUpdateAcceptor.getRefactoringStatus());
 		} catch (Exception exc) {
-			handleException(status, exc);
+			handleException(exc, status);
 		}
-		return status;
+		return status.getRefactoringStatus();
 	}
 
 	@Override
 	public Change createChange(IProgressMonitor monitor) throws CoreException, OperationCanceledException {
-		return currentUpdateAcceptor.createCompositeChange("Rename " + renameStrategy.getOriginalName() + " to " + newName,
-				monitor);
+		return currentUpdateAcceptor.createCompositeChange("Rename " + renameStrategy.getOriginalName() + " to "
+				+ newName, monitor);
 	}
 
 	@Override
@@ -225,16 +229,8 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 		return renameParticipants;
 	}
 
-	public void handleException(RefactoringStatus status, Exception exc) {
-		if (exc instanceof RefactoringStatusException) {
-			if (((RefactoringStatusException) exc).isFatal())
-				status.addFatalError(exc.getMessage());
-			else
-				status.addError(exc.getMessage());
-		} else {
-			status.addFatalError("Error during refactoring: " + exc.getMessage() + ". See log for details");
-			LOG.error("Error during refactoring", exc);
-		}
+	protected void handleException(Exception exc, StatusWrapper status) {
+		status.add(FATAL, "Error during refactoring: {0}", exc, LOG);
 	}
 
 	protected RefactoringResourceSetProvider getResourceSetProvider() {

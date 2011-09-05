@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xtext.ui.refactoring;
 
 import static java.util.Collections.*;
+import static org.eclipse.ltk.core.refactoring.RefactoringStatus.*;
 
 import java.util.List;
 
@@ -71,15 +72,14 @@ public class EcoreRefactoringParticipant extends AbstractProcessorBasedRenamePar
 				URI platformResourceURI = findPlatformResourceURI(classifierQualifiedName, EcorePackage.Literals.ECLASS);
 				if (platformResourceURI == null) {
 					if (returnType.getMetamodel() instanceof ReferencedMetamodel)
-						getStatus().addError("Return type " + returnType.getClassifier().getName() + " is not indexed");
+						getStatus().add(ERROR, "Return type '{0}' is not indexed.", returnType.getClassifier());
 				} else {
 					EObject classifierProxy = EcoreFactory.eINSTANCE.create(returnType.getClassifier().eClass());
 					((InternalEObject) classifierProxy).eSetProxyURI(platformResourceURI);
 					String optionFlag = FrameworkProperties.getProperty(ECORE_REFACTORING_PARTICIPANT_SHOW_WARNING_OPTION, "true");
 					if(optionFlag == null || "true".equalsIgnoreCase(optionFlag))
-						getStatus().addWarning(
-								"Renaming EClass '" + returnType.getClassifier().getName()
-										+ "' in ecore file. Please rerun the Ecore generator.");
+						getStatus().add(WARNING, 
+								"Renaming EClass '{0}' in ecore file. Please rerun the Ecore generator.", returnType.getClassifier());
 					
 					return singletonList(classifierProxy);
 				}

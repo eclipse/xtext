@@ -110,7 +110,7 @@ public class ResourceUtil {
 		} else if (uri.isFile() && !uri.isRelative()) {
 			result = ResourcesPlugin.getWorkspace().getRoot().getFileForLocation(new Path(uri.toFileString()));
 		} else {
-			// normalize, to see whether may we can resolve it this time
+			// normalize, to see whether we can resolve it this time
 			if (converter != null) {
 				URI normalized = converter.normalize(uri);
 

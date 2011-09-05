@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.text.link.LinkedPositionGroup;
 import org.eclipse.ltk.core.refactoring.Change;
-import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtext.resource.IReferenceDescription;
@@ -41,9 +40,11 @@ import org.eclipse.xtext.ui.refactoring.impl.IRefactoringDocument;
 import org.eclipse.xtext.ui.refactoring.impl.ProjectUtil;
 import org.eclipse.xtext.ui.refactoring.impl.RefactoringReferenceQueryDataFactory;
 import org.eclipse.xtext.ui.refactoring.impl.RefactoringResourceSetProvider;
+import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
 import org.eclipse.xtext.util.IAcceptor;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -74,6 +75,9 @@ public class SimpleLinkedPositionGroupCalculator extends AbstractLinkedPositionG
 	@Inject
 	private IReferenceUpdater referenceUpdater;
 	
+	@Inject
+	private Provider<LocalResourceRefactoringUpdateAcceptor> udpateAcceptorProvider;
+	
 	public LinkedPositionGroup getLinkedPositionGroup(IRenameElementContext renameElementContext,
 			IProgressMonitor monitor) {
 		SubMonitor progress = SubMonitor.convert(monitor, 100);
@@ -90,8 +94,8 @@ public class SimpleLinkedPositionGroupCalculator extends AbstractLinkedPositionG
 		String newName = renameStrategy.getOriginalName();
 		Iterable<URI> dependentElementURIs = dependentElementsCalculator.getDependentElementURIs(targetElement,
 				progress.newChild(10));
-		LocalResourceRefactoringUpdateAcceptor updateAcceptor = new LocalResourceRefactoringUpdateAcceptor(
-				renameElementContext.getContextResourceURI());
+		LocalResourceRefactoringUpdateAcceptor updateAcceptor = udpateAcceptorProvider.get();
+		updateAcceptor.setLocalResourceURI(renameElementContext.getContextResourceURI());
 		renameStrategy.createDeclarationUpdates(newName, resourceSet, updateAcceptor);
 		Map<URI, URI> original2newEObjectURI = renamedElementTracker.renameAndTrack(
 				concat(Collections.singleton(renameElementContext.getTargetElementURI()), dependentElementURIs),
@@ -123,11 +127,13 @@ public class SimpleLinkedPositionGroupCalculator extends AbstractLinkedPositionG
 	public static class LocalResourceRefactoringUpdateAcceptor implements IRefactoringUpdateAcceptor {
 
 		private List<ReplaceEdit> textEdits = newArrayList();
-		private final URI localResourceURI;
-		private RefactoringStatus refactoringStatus = new RefactoringStatus();
+		private URI localResourceURI;
+		
+		@Inject
+		private StatusWrapper status;
 		
 
-		public LocalResourceRefactoringUpdateAcceptor(URI localResourceURI) {
+		public void setLocalResourceURI(URI localResourceURI) {
 			this.localResourceURI = localResourceURI;
 		}
 
@@ -135,8 +141,8 @@ public class SimpleLinkedPositionGroupCalculator extends AbstractLinkedPositionG
 			return textEdits;
 		}
 
-		public RefactoringStatus getRefactoringStatus() {
-			return refactoringStatus;
+		public StatusWrapper getRefactoringStatus() {
+			return status;
 		}
 
 		public IRefactoringDocument getDocument(URI resourceURI) {
