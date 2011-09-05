@@ -8,6 +8,7 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.junit4,
  org.eclipse.xtext.junit4.parameterized,
  org.eclipse.xtext.junit4.serializer,
+ org.eclipse.xtext.junit4.smoketest,
  org.eclipse.xtext.junit4.util,
  org.eclipse.xtext.junit4.validation
 Import-Package: com.google.common.base,
