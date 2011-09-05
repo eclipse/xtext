@@ -12,7 +12,7 @@ import "http://www.eclipse.org/xtext/xbase/Xtype"
 import "http://www.eclipse.org/xtext/common/JavaVMTypes"
 
 JvmTypeReference:
-    JvmParameterizedTypeReference ({JvmGenericArrayTypeReference.componentType=current} '['']')* 
+    JvmParameterizedTypeReference =>({JvmGenericArrayTypeReference.componentType=current} '['']')* 
   | XFunctionTypeRef;
 
 XFunctionTypeRef:

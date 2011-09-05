@@ -6,7 +6,7 @@
     modelName="Xbase" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
     editPluginID="org.eclipse.xtext.xbase.edit" editorPluginID="org.eclipse.xtext.xbase.edit"
-    usedGenPackages="../../org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types">
+    runtimeVersion="2.5" usedGenPackages="../../org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types">
   <foreignModel>XAnnotations.ecore</foreignModel>
   <foreignModel>Xtype.ecore</foreignModel>
   <foreignModel>Xbase.ecore</foreignModel>
@@ -166,5 +166,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XWithExpression/blockExpression"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XWithExpression/variable"/>
     </genClasses>
+    <genClasses ecoreClass="Xbase.ecore#//XBuilderClosure"/>
   </genPackages>
 </genmodel:GenModel>

@@ -35,8 +35,6 @@ import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
-import org.eclipse.xtext.xbase.XWithExpression;
-import org.eclipse.xtext.xbase.impl.XWithExpressionSupport;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.typing.FunctionConversion;
 
@@ -46,9 +44,6 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class XbaseCompiler extends FeatureCallCompiler {
-	
-	@Inject
-	private XWithExpressionSupport withExpressionSupport;
 	
 	protected void _toJavaStatement(XBlockExpression expr, IAppendable b, boolean isReferenced) {
 		if (expr.getExpressions().isEmpty())
@@ -515,47 +510,4 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append(getVarName(call, b));
 	}
 	
-	protected void _toJavaStatement(final XWithExpression expr, final IAppendable b, boolean isReferenced) {
-		if (isReferenced) {
-			declareLocalVariable(expr, b);
-		} 
-		b.append("\n{").increaseIndentation();
-		withExpressionSupport.prepareMainExpressionAsJavaStatement(expr, b, this);
-		b.append("\n");
-		JvmTypeReference type = getTypeProvider().getType(expr);
-		String itName = null; 
-		if (!isReferenced) {
-			b.append("final ");
-			serialize(type, expr, b);
-			b.append(" ");
-			itName = b.declareVariable(expr, "it");
-		} else {
-			itName = b.getName(expr);
-		}
-		b.append(itName);
-		b.append(" = ");
-		withExpressionSupport.mainExpressionAsJavaExpression(expr, b, this);
-		b.append(";");
-		if (expr.getVariable() != null) {
-			b.append("\n").append("final ");
-			serialize(type, expr, b);
-			b.append(" ");
-			String otherName = b.declareVariable(expr.getVariable(), expr.getVariable().getName());
-			b.append(otherName);
-			b.append(" = ");
-			b.append(itName);
-			b.append(";");
-		}
-		internalToJavaStatement(expr.getBlockExpression(), b, false);
-		if (isReferenced) {
-			String name = b.getName(expr);
-			b.append("\n").append(name).append(" = ").append(itName).append(";");
-		}
-		b.decreaseIndentation().append("\n}");
-	}
-	
-	protected void _toJavaExpression(final XWithExpression withExpression, final IAppendable b) {
-		b.append(b.getName(withExpression));
-	}
-
 }

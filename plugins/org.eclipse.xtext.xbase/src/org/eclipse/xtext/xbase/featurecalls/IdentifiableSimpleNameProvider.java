@@ -15,7 +15,6 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
-import org.eclipse.xtext.xbase.XWithExpression;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -50,9 +49,6 @@ public class IdentifiableSimpleNameProvider {
 		if (element instanceof XCasePart) {
 			XCasePart casePart = (XCasePart) element;
 			return getSimpleName((XSwitchExpression)casePart.eContainer());
-		}
-		if (element instanceof XWithExpression) {
-			return "it";
 		}
 		return element.getSimpleName();
 	}

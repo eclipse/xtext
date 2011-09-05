@@ -67,11 +67,9 @@ import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
-import org.eclipse.xtext.xbase.XWithExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping;
-import org.eclipse.xtext.xbase.impl.XWithExpressionSupport;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationResult;
 import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
@@ -152,9 +150,6 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	
 	@Inject
 	private XExpressionHelper expressionHelper;
-	
-	@Inject
-	private XWithExpressionSupport withExpressionSupport;
 	
 	private ClassFinder classFinder;
 
@@ -475,16 +470,6 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return null;
 	}
 	
-	protected Object _evaluateWithExpression(XWithExpression expr, IEvaluationContext context, CancelIndicator indicator) {
-		Object result = withExpressionSupport.evaluateMainExpression(expr, context, indicator, this);
-		context.newValue(XbaseScopeProvider.IT, result);
-		if (expr.getVariable() != null) {
-			context.newValue(QualifiedName.create(expr.getVariable().getName()), result);
-		}
-		internalEvaluate(expr.getBlockExpression(), context, indicator);
-		return result;
-	}
-
 	protected Object _evaluateConstructorCall(XConstructorCall constructorCall, IEvaluationContext context, CancelIndicator indicator) {
 		JvmConstructor jvmConstructor = constructorCall.getConstructor();
 		List<Object> arguments = evaluateArgumentExpressions(jvmConstructor, constructorCall.getArguments(), context, indicator);
