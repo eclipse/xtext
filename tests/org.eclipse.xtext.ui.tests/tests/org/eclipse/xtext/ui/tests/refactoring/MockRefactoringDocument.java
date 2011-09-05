@@ -15,13 +15,14 @@ import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtext.ui.refactoring.impl.IRefactoringDocument;
+import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
 
 @SuppressWarnings("restriction")
 public class MockRefactoringDocument implements IRefactoringDocument {
 
 	public static class Provider implements IRefactoringDocument.Provider {
 
-		public IRefactoringDocument get(URI resourceURI, RefactoringStatus status) {
+		public IRefactoringDocument get(URI resourceURI, StatusWrapper status) {
 			return new MockRefactoringDocument(resourceURI, "");
 		}
 		

@@ -8,7 +8,6 @@
 package org.eclipse.xtext.ui.refactoring.impl;
 
 import static com.google.common.collect.Lists.*;
-import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.List;
 
@@ -25,6 +24,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.CompositeChange;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
+
+import static org.eclipse.ltk.core.refactoring.RefactoringStatus.*;
 import org.eclipse.ltk.core.refactoring.participants.CheckConditionsContext;
 import org.eclipse.ltk.core.refactoring.participants.RenameParticipant;
 import org.eclipse.ltk.core.refactoring.participants.RenameProcessor;
@@ -61,19 +62,18 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 	@Named(Constants.LANGUAGE_NAME)
 	private String languageName;
 
-	private RefactoringStatus status;
+	@Inject
+	private StatusWrapper status;
 
 	private List<IRenameProcessorAdapter> wrappedProcessors;
 
 	@Override
 	protected boolean initialize(Object element) {
-		status = new RefactoringStatus();
 		try {
 			wrappedProcessors = getRenameProcessors(element);
 			return wrappedProcessors != null;
 		} catch (Exception exc) {
-			status.addError("Error initializing refactoring participant. See log for details");
-			LOG.error("Error initializing refactoring participant", exc);
+			status.add(ERROR, "Error initializing refactoring participant.", exc, LOG);
 		}
 		return false;
 	}
@@ -115,11 +115,9 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 				status.merge(wrappedProcessor.checkFinalConditions(progress.newChild(80), context));
 			}
 		} catch (Exception ce) {
-			status.addError("Error checking conditions in refactoring participant: " + notNull(ce.getMessage())
-					+ ". See log for details");
-			LOG.error("Error checking conditions in refactoring participant", ce);
+			status.add(ERROR, "Error checking conditions in refactoring participant: {0}. See log for details", ce, LOG);
 		}
-		return status;
+		return status.getRefactoringStatus();
 	}
 
 	@Override
@@ -165,7 +163,7 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 		return getArguments().getNewName();
 	}
 
-	protected RefactoringStatus getStatus() {
+	protected StatusWrapper getStatus() {
 		return status;
 	}
 

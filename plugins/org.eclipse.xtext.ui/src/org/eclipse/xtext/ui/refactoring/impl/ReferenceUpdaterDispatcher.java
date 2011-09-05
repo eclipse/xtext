@@ -8,7 +8,7 @@
 package org.eclipse.xtext.ui.refactoring.impl;
 
 import static com.google.common.collect.Maps.*;
-import static org.eclipse.xtext.util.Strings.*;
+import static org.eclipse.ltk.core.refactoring.RefactoringStatus.*;
 
 import java.util.Map;
 
@@ -16,7 +16,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider.Registry;
@@ -71,7 +70,8 @@ public class ReferenceUpdaterDispatcher {
 	}
 
 	protected ReferenceDescriptionAcceptor createFindReferenceAcceptor(IRefactoringUpdateAcceptor updateAcceptor) {
-		return new ReferenceDescriptionAcceptor(resourceServiceProviderRegistry, updateAcceptor.getRefactoringStatus());
+		return new ReferenceDescriptionAcceptor(resourceServiceProviderRegistry, 
+				updateAcceptor.getRefactoringStatus());
 	}
 
 	public static class ReferenceDescriptionAcceptor implements IAcceptor<IReferenceDescription> {
@@ -79,11 +79,11 @@ public class ReferenceUpdaterDispatcher {
 		private Map<IResourceServiceProvider, IReferenceUpdater> provider2updater = newHashMap();
 		private Multimap<IReferenceUpdater, IReferenceDescription> updater2refs = HashMultimap.create();
 
-		private RefactoringStatus status;
+		private StatusWrapper status;
 		private final Registry resourceServiceProviderRegistry;
 
 		public ReferenceDescriptionAcceptor(IResourceServiceProvider.Registry resourceServiceProviderRegistry,
-				RefactoringStatus status) {
+				StatusWrapper status) {
 			this.resourceServiceProviderRegistry = resourceServiceProviderRegistry;
 			this.status = status;
 		}
@@ -92,17 +92,24 @@ public class ReferenceUpdaterDispatcher {
 			if (referenceDescription.getSourceEObjectUri() == null
 					|| referenceDescription.getTargetEObjectUri() == null
 					|| referenceDescription.getEReference() == null) {
-				throw new RefactoringStatusException(
-						"Xtext index is corrupt. It is suggested to perform a workspace refresh and a clean build.",
-						true);
+				handleCorruptReferenceDescription(referenceDescription, status);
+			} else {
+				URI sourceResourceURI = referenceDescription.getSourceEObjectUri().trimFragment();
+				IReferenceUpdater referenceUpdater = getReferenceUpdater(sourceResourceURI);
+				if (referenceUpdater == null)
+					handleNoReferenceUpdater(sourceResourceURI, status);
+				else
+					updater2refs.put(referenceUpdater, referenceDescription);
 			}
-			URI sourceResourceURI = referenceDescription.getSourceEObjectUri().trimFragment();
-			IReferenceUpdater referenceUpdater = getReferenceUpdater(sourceResourceURI);
-			if (referenceUpdater == null)
-				status.addWarning("Cannot find a reference updater for " + notNull(sourceResourceURI)
-						+ " which contains references to renamed elements");
-			else
-				updater2refs.put(referenceUpdater, referenceDescription);
+		}
+
+		protected void handleNoReferenceUpdater(URI sourceResourceURI, StatusWrapper status) {
+			status.add(WARNING, "References from {0} will not be updated as the language has not registered an IReferenceUpdater",
+					sourceResourceURI);
+		}
+
+		protected void handleCorruptReferenceDescription(IReferenceDescription referenceDescription, StatusWrapper status) {
+			status.add(ERROR, "Xtext index contains invalid entries. It is suggested to perform a workspace refresh and a clean build.");
 		}
 
 		protected IReferenceUpdater getReferenceUpdater(URI sourceResourceURI) {
@@ -121,11 +128,11 @@ public class ReferenceUpdaterDispatcher {
 			return updater2refs;
 		}
 	}
-	
+
 	protected static class OptionalReferenceUpdaterProxy {
-		@Inject(optional=true)
+		@Inject(optional = true)
 		private IReferenceUpdater referenceUpdater;
-		
+
 		public IReferenceUpdater get() {
 			return referenceUpdater;
 		}

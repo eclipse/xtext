@@ -16,7 +16,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.DocumentChange;
-import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.TextFileChange;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
@@ -30,8 +29,10 @@ import org.eclipse.xtext.ui.refactoring.impl.DefaultRefactoringDocumentProvider.
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRefactoringDocumentProvider.FileDocument;
 import org.eclipse.xtext.ui.refactoring.impl.DisplayChangeWrapper;
 import org.eclipse.xtext.ui.refactoring.impl.IRefactoringDocument;
+import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
 import org.eclipse.xtext.ui.tests.Activator;
 
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 /**
@@ -47,9 +48,13 @@ public class RefactoringDocumentProviderTest extends AbstractEditorTest {
 	private static final String TEST_FILE_CONTENT = "A { B }";
 	private static final String CHANGE_NAME = "Change";
 	
+	@Inject
 	private IRefactoringDocument.Provider documentFactory;
+
+	@Inject
+	private StatusWrapper status;
+	
 	private IFile testFile;
-	private RefactoringStatus status;
 	private ReplaceEdit textEdit;
 
 	@Override
@@ -63,8 +68,7 @@ public class RefactoringDocumentProviderTest extends AbstractEditorTest {
 		IJavaProject project = JavaProjectSetupUtil.createJavaProject(TEST_PROJECT);
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		Injector injector = Activator.getInstance().getInjector(getEditorId());
-		documentFactory = injector.getInstance(IRefactoringDocument.Provider.class);
-		status = new RefactoringStatus();
+		injector.injectMembers(this);
 		testFile = IResourcesSetupUtil.createFile(TEST_FILE_PATH, TEST_FILE_CONTENT);
 		textEdit = new ReplaceEdit(0,1,"C");
 	}
@@ -106,7 +110,7 @@ public class RefactoringDocumentProviderTest extends AbstractEditorTest {
 	protected IRefactoringDocument createAndCheckDocument(IFile testFile) {
 		IRefactoringDocument document = documentFactory
 				.get(URI.createPlatformResourceURI(testFile.getFullPath().toString(), true), status);
-		assertTrue(status.isOK());
+		assertTrue(status.getRefactoringStatus().isOK());
 		assertNotNull(document);
 		return document;
 	}

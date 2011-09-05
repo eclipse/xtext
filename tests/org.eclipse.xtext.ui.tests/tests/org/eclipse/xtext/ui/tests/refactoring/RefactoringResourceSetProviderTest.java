@@ -30,8 +30,6 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.IDirtyResource;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
-import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
-import org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.refactoring.impl.RefactoringResourceSetProvider;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;

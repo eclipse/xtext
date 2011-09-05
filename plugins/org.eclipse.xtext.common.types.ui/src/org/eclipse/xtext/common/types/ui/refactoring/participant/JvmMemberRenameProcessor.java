@@ -10,6 +10,7 @@ package org.eclipse.xtext.common.types.ui.refactoring.participant;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.ui.refactoring.impl.RenameElementProcessor;
+import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 
 /**
@@ -35,8 +36,9 @@ public class JvmMemberRenameProcessor extends RenameElementProcessor {
 	}
 
 	@Override
-	protected void checkTargetFile(Resource resource) {
+	protected boolean isValidTargetFile(Resource resource, StatusWrapper status) {
 		// don't check, there is no file
+		return true;
 	}
 
 }

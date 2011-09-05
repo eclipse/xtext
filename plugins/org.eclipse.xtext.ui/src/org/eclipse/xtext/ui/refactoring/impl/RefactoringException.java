@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
 
+
 /**
  * A convenient way to stop calculation of refactoring changes.
  * 
@@ -15,26 +16,15 @@ package org.eclipse.xtext.ui.refactoring.impl;
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class RefactoringStatusException extends RuntimeException {
+public class RefactoringException extends RuntimeException {
 
 	private static final long serialVersionUID = 6796021485044787459L;
-	private final boolean isFatal;
-
-	/**
-	 * @since 2.0
-	 */
-	public RefactoringStatusException(Throwable cause, boolean isFatal) {
-		super(cause);
-		this.isFatal = isFatal;
-	}
-
-	public RefactoringStatusException(String message, boolean isFatal) {
+	
+	public RefactoringException(String message) {
 		super(message);
-		this.isFatal = isFatal;
 	}
 
-	public boolean isFatal() {
-		return isFatal;
+	public RefactoringException(Exception cause) {
+		super(cause);
 	}
-
 }

@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
 
+import static org.eclipse.ltk.core.refactoring.RefactoringStatus.*;
 import java.io.IOException;
 
 import org.eclipse.emf.ecore.ENamedElement;
@@ -29,14 +30,14 @@ import com.google.inject.Inject;
 public class EmfResourceRenameStrategy extends AbstractRenameStrategy {
 
 	public static class Provider implements IRenameStrategy.Provider {
-		
+
 		@Inject
 		private EmfResourceChangeUtil changeUtil;
 
 		public IRenameStrategy get(EObject targetEObject, IRenameElementContext renameElementContext) {
-			if(targetEObject instanceof ENamedElement)
+			if (targetEObject instanceof ENamedElement)
 				return new EmfResourceRenameStrategy((ENamedElement) targetEObject, changeUtil);
-			else 
+			else
 				return null;
 		}
 	}
@@ -48,14 +49,15 @@ public class EmfResourceRenameStrategy extends AbstractRenameStrategy {
 		this.changeUtil = changeUtil;
 	}
 
-	public void createDeclarationUpdates(String newName, ResourceSet resourceSet, IRefactoringUpdateAcceptor updateAcceptor) {
+	public void createDeclarationUpdates(String newName, ResourceSet resourceSet,
+			IRefactoringUpdateAcceptor updateAcceptor) {
 		Resource targetResource = resourceSet.getResource(getTargetElementOriginalURI().trimFragment(), false);
 		EcoreUtil.resolveAll(targetResource);
 		applyDeclarationChange(newName, resourceSet);
 		try {
 			changeUtil.addSaveAsUpdate(targetResource, updateAcceptor);
-		} catch(IOException exc) {
-			throw new RefactoringStatusException(exc, true);
+		} catch (IOException exc) {
+			updateAcceptor.getRefactoringStatus().add(ERROR, exc.getMessage());
 		}
 	}
 }

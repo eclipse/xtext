@@ -16,11 +16,9 @@ import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.CompositeChange;
-import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
-import org.eclipse.xtext.ui.refactoring.impl.IRefactoringDocument.Provider;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
@@ -37,11 +35,12 @@ public class RefactoringUpdateAcceptor implements IRefactoringUpdateAcceptor {
 	private IRefactoringDocument.Provider refactoringDocumentProvider; 
 	
 	@Inject
-	public RefactoringUpdateAcceptor(Provider refactoringDocumentProvider) {
+	public RefactoringUpdateAcceptor(IRefactoringDocument.Provider refactoringDocumentProvider) {
 		this.refactoringDocumentProvider = refactoringDocumentProvider;
 	}
 
-	private RefactoringStatus status = new RefactoringStatus();
+	@Inject
+	private StatusWrapper status;
 	
 	private Map<URI, IRefactoringDocument> uri2document = newHashMap();
 	private Multimap<IRefactoringDocument, TextEdit> document2textEdits = HashMultimap.create();
@@ -66,7 +65,7 @@ public class RefactoringUpdateAcceptor implements IRefactoringUpdateAcceptor {
 		return newDocument;
 	}
 
-	public RefactoringStatus getRefactoringStatus() {
+	public StatusWrapper getRefactoringStatus() {
 		return status;
 	}
 	

@@ -13,7 +13,6 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.ltk.core.refactoring.FileStatusContext;
-import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.RefactoringStatusEntry;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
@@ -21,6 +20,7 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.ui.refactoring.impl.CrossReferenceSerializerFacade;
+import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.Main;
@@ -47,6 +47,9 @@ public class CrossReferenceSerializerFacadeTest extends AbstractXtextTests {
 
 	@Inject
 	private RefactoringTestLanguageGrammarAccess grammarAccess;
+	
+	@Inject
+	private StatusWrapper status;
 	
 	@Override
 	protected void setUp() throws Exception {
@@ -88,24 +91,23 @@ public class CrossReferenceSerializerFacadeTest extends AbstractXtextTests {
 		Element bar = (Element) main.getElements().get(0);
 		Element foo = bar.getReferenced().get(0);
 		CrossReference crossref = GrammarUtil.containedCrossReferences(grammarAccess.getElementRule()).get(0);
-		RefactoringStatus status = new RefactoringStatus();
 		TextRegion linkTextRegion = new TextRegion(model.lastIndexOf("foo"), 3);
 		String linkText = facade.serializeCrossRef(bar, crossref, foo, linkTextRegion, status);
 		assertEquals(linkText, "foo");
-		assertTrue(status.isOK());
+		assertTrue(status.getRefactoringStatus().isOK());
 		
 		foo.setName("fooBar");
 		resource.getCache().clear(resource);
 		String linkText1 = facade.serializeCrossRef(bar, crossref, foo, linkTextRegion, status);
 		assertEquals(linkText1, "fooBar");
-		assertTrue(status.isOK());
+		assertTrue(status.getRefactoringStatus().isOK());
 
 		foo.setName("bar");
 		resource.getCache().clear(resource);
 		String linkText2 = facade.serializeCrossRef(bar, crossref, foo, linkTextRegion, status);
 		assertNull(linkText2);
-		assertTrue(status.hasFatalError());
-		RefactoringStatusEntry fatalError = status.getEntryAt(0);
+		assertTrue(status.getRefactoringStatus().hasError());
+		RefactoringStatusEntry fatalError = status.getRefactoringStatus().getEntryAt(0);
 		assertTrue(fatalError.getMessage().contains("cross-reference"));
 		assertTrue(fatalError.getContext() instanceof FileStatusContext);
 		assertEquals(file, ((FileStatusContext)fatalError.getContext()).getFile());
