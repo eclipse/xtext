@@ -25,6 +25,7 @@ import org.eclipse.jface.text.link.LinkedPositionGroup;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
+import org.eclipse.xtext.resource.IGlobalServiceProvider;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
@@ -58,7 +59,7 @@ public class SimpleLinkedPositionGroupCalculator extends AbstractLinkedPositionG
 	private RefactoringResourceSetProvider resourceSetProvider;
 
 	@Inject
-	private IRenameStrategy.Provider strategyProvider;
+	private IGlobalServiceProvider globalServiceProvider;
 
 	@Inject
 	private IRenamedElementTracker renamedElementTracker;
@@ -74,10 +75,10 @@ public class SimpleLinkedPositionGroupCalculator extends AbstractLinkedPositionG
 
 	@Inject
 	private IReferenceUpdater referenceUpdater;
-	
+
 	@Inject
 	private Provider<LocalResourceRefactoringUpdateAcceptor> udpateAcceptorProvider;
-	
+
 	public LinkedPositionGroup getLinkedPositionGroup(IRenameElementContext renameElementContext,
 			IProgressMonitor monitor) {
 		SubMonitor progress = SubMonitor.convert(monitor, 100);
@@ -87,6 +88,8 @@ public class SimpleLinkedPositionGroupCalculator extends AbstractLinkedPositionG
 		EObject targetElement = resourceSet.getEObject(renameElementContext.getTargetElementURI(), true);
 		if (targetElement == null)
 			throw new IllegalStateException("Target element could not be loaded");
+		IRenameStrategy.Provider strategyProvider = globalServiceProvider.findService(targetElement,
+				IRenameStrategy.Provider.class);
 		IRenameStrategy renameStrategy = strategyProvider.get(targetElement, renameElementContext);
 		if (renameStrategy == null)
 			throw new IllegalArgumentException("Cannot find a rename strategy for "
@@ -128,10 +131,9 @@ public class SimpleLinkedPositionGroupCalculator extends AbstractLinkedPositionG
 
 		private List<ReplaceEdit> textEdits = newArrayList();
 		private URI localResourceURI;
-		
+
 		@Inject
 		private StatusWrapper status;
-		
 
 		public void setLocalResourceURI(URI localResourceURI) {
 			this.localResourceURI = localResourceURI;
