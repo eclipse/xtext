@@ -60,7 +60,6 @@ public class RenameLinkedMode {
 	private LinkedPositionGroup linkedPositionGroup;
 	private LinkedPosition currentPosition;
 
-
 	public void start(IRenameElementContext renameElementContext, IProgressMonitor monitor) {
 		if (renameElementContext == null)
 			throw new IllegalArgumentException("RenameElementContext is null");
@@ -72,26 +71,21 @@ public class RenameLinkedMode {
 		ISourceViewer viewer = editor.getInternalSourceViewer();
 		IDocument document = viewer.getDocument();
 		originalSelection = viewer.getSelectedRange();
-		for (LinkedPosition linkedPosition : linkedPositionGroup.getPositions()) {
-			if (linkedPosition.includes(originalSelection.x + originalSelection.y)) {
-				currentPosition = linkedPosition;
-				originalName = getCurrentName();
-			}
-		}
-		if (currentPosition == null) {
-			throw new IllegalStateException("Current selection is not within any linked editing position");
-		}
-
+		currentPosition = linkedPositionGroup.getPositions()[0];
+		originalName = getCurrentName();
 		try {
 			linkedModeModel = new LinkedModeModel();
 			linkedModeModel.addGroup(linkedPositionGroup);
 			linkedModeModel.forceInstall();
 			linkedModeModel.addLinkingListener(new EditorSynchronizer());
 			LinkedModeUI ui = new EditorLinkedModeUI(linkedModeModel, viewer);
-			ui.setExitPosition(viewer, originalSelection.x, 0, Integer.MAX_VALUE);
 			ui.setExitPolicy(new ExitPolicy(document));
+			if (currentPosition.includes(originalSelection.x))
+				ui.setExitPosition(viewer, originalSelection.x, 0, Integer.MAX_VALUE);
 			ui.enter();
-			viewer.setSelectedRange(originalSelection.x, originalSelection.y);
+			if (currentPosition.includes(originalSelection.x)
+					&& currentPosition.includes(originalSelection.x + originalSelection.y))
+				viewer.setSelectedRange(originalSelection.x, originalSelection.y);
 			if (viewer instanceof IEditingSupportRegistry) {
 				IEditingSupportRegistry registry = (IEditingSupportRegistry) viewer;
 				registry.register(focusEditingSupport);
@@ -111,7 +105,7 @@ public class RenameLinkedMode {
 		String currentName = getCurrentName();
 		return !isEmpty(currentName) && !equal(originalName, currentName);
 	}
-	
+
 	public String getCurrentName() {
 		if (currentPosition != null)
 			try {
