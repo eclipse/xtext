@@ -129,11 +129,15 @@ public class SimpleLinkedPositionGroupCalculator extends AbstractLinkedPositionG
 
 	public static class LocalResourceRefactoringUpdateAcceptor implements IRefactoringUpdateAcceptor {
 
-		private List<ReplaceEdit> textEdits = newArrayList();
-		private URI localResourceURI;
+		@Inject
+		private IRefactoringDocument.Provider refactoringDocumentProvider; 
 
 		@Inject
 		private StatusWrapper status;
+
+		private List<ReplaceEdit> textEdits = newArrayList();
+		private URI localResourceURI;
+
 
 		public void setLocalResourceURI(URI localResourceURI) {
 			this.localResourceURI = localResourceURI;
@@ -148,7 +152,7 @@ public class SimpleLinkedPositionGroupCalculator extends AbstractLinkedPositionG
 		}
 
 		public IRefactoringDocument getDocument(URI resourceURI) {
-			return null;
+			return refactoringDocumentProvider.get(resourceURI, status);
 		}
 
 		public Change createCompositeChange(String name, IProgressMonitor monitor) {
