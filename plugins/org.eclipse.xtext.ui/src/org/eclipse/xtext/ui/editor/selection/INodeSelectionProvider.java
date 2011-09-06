@@ -7,15 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.selection;
 
-import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.util.ITextRegion;
+
+import com.google.inject.ImplementedBy;
 
 /**
  * Strategy for structural node selections based on a given root node.
  * 
  * @author Michael - Initial contribution and API
  */
+@ImplementedBy(DefaultAstSelectionProvider.class)
 public interface INodeSelectionProvider {
 	String SELECT_ENCLOSING = "org.eclipse.xtext.ui.editor.select.enclosing"; //$NON-NLS-1$
 	String SELECT_NEXT = "org.eclipse.xtext.ui.editor.select.next"; //$NON-NLS-1$
@@ -23,19 +26,24 @@ public interface INodeSelectionProvider {
 	String SELECT_LAST = "org.eclipse.xtext.ui.editor.select.last"; //$NON-NLS-1$
 
 	/**
-	 * @param the
+	 * @param selectionType
 	 *            type of the selection to be provided (e.g. next,previous)
-	 * @param currentTextSelection
+	 * @param xtextResource
+	 *            the xtextResource
+	 * @param currentEditorSelection
 	 *            the region of the currently selected text
-	 * @param rootNode
-	 *            the root node of the parse tree
 	 * @return return the region of the new selection for the given type
 	 */
-	ITextRegion select(String selectionType, ICompositeNode rootNode, ITextRegion currentTextRegion);
+	ITextRegion select(String selectionType, XtextResource xtextResource, ITextRegion currentEditorSelection);
 
 	/**
 	 * Initialize the NodeSelectionProvider with the given XtextEditor
 	 */
 	void initialize(XtextEditor xtextEditor);
+
+	/**
+	 * Called just before the XtextEditor passed in from {@link #initialize} gets disposed
+	 */
+	void dispose();
 
 }

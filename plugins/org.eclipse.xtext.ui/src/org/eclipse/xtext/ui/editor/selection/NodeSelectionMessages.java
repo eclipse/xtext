@@ -16,7 +16,7 @@ import org.eclipse.osgi.util.NLS;
  */
 public final class NodeSelectionMessages extends NLS {
 
-	private static final String BUNDLE_NAME= NodeSelectionMessages.class.getName();
+	private static final String BUNDLE_NAME = NodeSelectionMessages.class.getName();
 
 	private NodeSelectionMessages() {
 		// Do not instantiate
