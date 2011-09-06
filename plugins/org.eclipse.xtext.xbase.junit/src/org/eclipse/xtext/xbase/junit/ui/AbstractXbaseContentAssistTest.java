@@ -399,7 +399,7 @@ public abstract class AbstractXbaseContentAssistTest extends TestCase implements
 	}
 	
 	@Test public void testClosure_01() throws Exception {
-		newBuilder().append("[String a, String b|").assertText(expect(new String[]{"a", "b"}, getKeywordsAndStatics()));
+		newBuilder().append("[String a, String b|").assertText(expect(new String[]{"a", "b"}, getKeywordsAndStatics(), new String[] {"val", "var"}));
 	}
 	
 	@Test public void testCatchParameter_01() throws Exception {
