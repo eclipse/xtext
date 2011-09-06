@@ -17,19 +17,20 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.internal.corext.refactoring.rename.JavaRenameProcessor;
 import org.eclipse.jdt.ui.refactoring.RenameSupport;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
-import org.eclipse.ltk.core.refactoring.participants.RenameProcessor;
+import org.eclipse.ltk.core.refactoring.participants.RefactoringProcessor;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
-import org.eclipse.xtext.ui.refactoring.IRenameProcessorAdapter;
 import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
+import org.eclipse.xtext.ui.refactoring.impl.AbstractRenameProcessor;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelRenameElementHandler;
@@ -49,9 +50,6 @@ public class JavaRefactoringIntegrationTest extends AbstractXtend2UITestCase {
 
 	@Inject
 	protected IRenameRefactoringProvider renameRefactoringProvider;
-
-	@Inject
-	protected IRenameProcessorAdapter.Factory renameProcessorAdapterFactory;
 
 	@Inject
 	protected JvmModelRenameElementHandler renameElementHandler;
@@ -133,8 +131,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtend2UITestCase {
 			IType javaClass = javaProject.findType("JavaClass");
 			IMethod foo = javaClass.getMethod("foo", new String[0]);
 			assertNotNull(foo);
-			RenameSupport renameSupport = RenameSupport.create(foo, "baz",
-					RenameSupport.UPDATE_REFERENCES);
+			RenameSupport renameSupport = RenameSupport.create(foo, "baz", RenameSupport.UPDATE_REFERENCES);
 			renameSupport
 					.perform(workbench.getActiveWorkbenchWindow().getShell(), workbench.getActiveWorkbenchWindow());
 			assertFileContains(xtendClass, "new JavaClass().baz()");
@@ -142,7 +139,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtend2UITestCase {
 			testHelper.getProject().getFile("src/NewJavaClass.java").delete(true, new NullProgressMonitor());
 		}
 	}
-	
+
 	public void testDontRenameOperator() throws Exception {
 		String xtendModel = "class XtendClass { def bar() { 1 + 2 }";
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
@@ -184,7 +181,11 @@ public class JavaRefactoringIntegrationTest extends AbstractXtend2UITestCase {
 				});
 		ProcessorBasedRefactoring renameRefactoring = renameRefactoringProvider
 				.getRenameRefactoring(renameElementContext);
-		renameProcessorAdapterFactory.create((RenameProcessor) renameRefactoring.getProcessor()).setNewName(newName);
+		RefactoringProcessor processor = renameRefactoring.getProcessor();
+		if (processor instanceof AbstractRenameProcessor)
+			((AbstractRenameProcessor) processor).setNewName(newName);
+		else if (processor instanceof JavaRenameProcessor)
+			((JavaRenameProcessor) processor).setNewElementName(newName);
 		RefactoringStatus status = renameRefactoring.checkAllConditions(new NullProgressMonitor());
 		assertTrue(status.toString(), status.isOK());
 		Change change = renameRefactoring.createChange(new NullProgressMonitor());

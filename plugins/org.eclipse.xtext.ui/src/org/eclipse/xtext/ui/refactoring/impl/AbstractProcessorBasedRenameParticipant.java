@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.refactoring.impl;
 
 import static com.google.common.collect.Lists.*;
+import static org.eclipse.ltk.core.refactoring.RefactoringStatus.*;
 
 import java.util.List;
 
@@ -24,15 +25,12 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.CompositeChange;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
-
-import static org.eclipse.ltk.core.refactoring.RefactoringStatus.*;
 import org.eclipse.ltk.core.refactoring.participants.CheckConditionsContext;
 import org.eclipse.ltk.core.refactoring.participants.RenameParticipant;
 import org.eclipse.ltk.core.refactoring.participants.RenameProcessor;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.resource.IGlobalServiceProvider;
 import org.eclipse.xtext.ui.internal.Activator;
-import org.eclipse.xtext.ui.refactoring.IRenameProcessorAdapter;
 import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 
@@ -56,16 +54,13 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 	private ProjectUtil projectUtil;
 
 	@Inject
-	private IRenameProcessorAdapter.Factory processorAdapterFactory;
-
-	@Inject
 	@Named(Constants.LANGUAGE_NAME)
 	private String languageName;
 
 	@Inject
 	private StatusWrapper status;
 
-	private List<IRenameProcessorAdapter> wrappedProcessors;
+	private List<RenameProcessor> wrappedProcessors;
 
 	@Override
 	protected boolean initialize(Object element) {
@@ -78,15 +73,15 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 		return false;
 	}
 
-	protected List<IRenameProcessorAdapter> getRenameProcessors(Object element) {
+	protected List<RenameProcessor> getRenameProcessors(Object element) {
 		List<? extends IRenameElementContext> participantContexts = createRenameElementContexts(element);
 		if (participantContexts != null) {
-			List<IRenameProcessorAdapter> processors = newArrayList();
+			List<RenameProcessor> processors = newArrayList();
 			for (IRenameElementContext participantContext : participantContexts) {
 				IRenameRefactoringProvider renameRefactoringProvider = getRenameRefactoringProvider(participantContext);
 				if (renameRefactoringProvider != null) {
 					RenameProcessor processor = renameRefactoringProvider.getRenameProcessor(participantContext);
-					processors.add(processorAdapterFactory.create(processor));
+					processors.add(processor);
 				}
 			}
 			return processors;
@@ -109,9 +104,9 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 			throws OperationCanceledException {
 		SubMonitor progress = SubMonitor.convert(pm).setWorkRemaining(100);
 		try {
-			for (IRenameProcessorAdapter wrappedProcessor : wrappedProcessors) {
+			for (RenameProcessor wrappedProcessor : wrappedProcessors) {
 				status.merge(wrappedProcessor.checkInitialConditions(progress.newChild(20)));
-				wrappedProcessor.setNewName(getNewName());
+				setNewName(wrappedProcessor, getNewName());
 				status.merge(wrappedProcessor.checkFinalConditions(progress.newChild(80), context));
 			}
 		} catch (Exception ce) {
@@ -120,11 +115,15 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 		return status.getRefactoringStatus();
 	}
 
+	protected void setNewName(RenameProcessor processor, String newName) {
+		((AbstractRenameProcessor) processor).setNewName(newName);
+	}
+	
 	@Override
 	public Change createChange(IProgressMonitor pm) throws CoreException, OperationCanceledException {
 		CompositeChange compositeChange = null;
 		try {
-			for (IRenameProcessorAdapter wrappedProcessor : wrappedProcessors) {
+			for (RenameProcessor wrappedProcessor : wrappedProcessors) {
 				Change processorChange = wrappedProcessor.createChange(pm);
 				if (processorChange != null) {
 					if (compositeChange == null)

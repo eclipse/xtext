@@ -147,10 +147,12 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 		return new Object[] { targetElementURI };
 	}
 
+	@Override
 	public String getOriginalName() {
 		return renameStrategy.getOriginalName();
 	}
 
+	@Override
 	public RefactoringStatus validateNewName(String newName) {
 		return renameStrategy.validateNewName(newName);
 	}
