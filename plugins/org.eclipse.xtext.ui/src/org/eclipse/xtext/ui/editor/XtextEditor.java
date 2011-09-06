@@ -92,7 +92,6 @@ import org.eclipse.xtext.ui.editor.model.TerminalsTokenTypeToPartitionMapper;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
-import org.eclipse.xtext.ui.editor.selection.SelectionHistory;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingHelper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.TextAttributeProvider;
 import org.eclipse.xtext.ui.editor.toggleComments.ToggleSLCommentAction;
@@ -151,8 +150,6 @@ public class XtextEditor extends TextEditor {
 
 	private ISelectionChangedListener selectionChangedListener;
 
-	private SelectionHistory selectionHistory;
-	
 	private IPropertyListener dirtyListener = new IPropertyListener() {
 		public void propertyChanged(Object source, int propId) {
 			if (propId == PROP_DIRTY && !isDirty()) {
@@ -263,20 +260,10 @@ public class XtextEditor extends TextEditor {
 	@SuppressWarnings("rawtypes")
 	@Override
 	public Object getAdapter(Class adapter) {
-		if (SelectionHistory.class.isAssignableFrom(adapter)) {
-			return getSelectionHistory();
-		}
 		if (IContentOutlinePage.class.isAssignableFrom(adapter)) {
 			return getContentOutlinePage();
 		}
 		return super.getAdapter(adapter);
-	}
-
-	private SelectionHistory getSelectionHistory() {
-		if (selectionHistory == null) {
-			selectionHistory = new SelectionHistory(this);
-		}
-		return selectionHistory;
 	}
 
 	private IContentOutlinePage getContentOutlinePage() {
@@ -491,10 +478,6 @@ public class XtextEditor extends TextEditor {
 		}
 		if (outlinePage != null) {
 			outlinePage = null;
-		}
-		if (selectionHistory != null) {
-			selectionHistory.dispose();
-			selectionHistory = null;
 		}
 		uninstallFoldingSupport();
 		uninstallHighlightingHelper();

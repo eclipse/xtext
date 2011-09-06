@@ -11,30 +11,24 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.actions.IActionContributor;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 /**
  * @author Michael Clay - Initial contribution and API
  */
 public class SelectionActionContributor implements IActionContributor {
-	@Inject
-	private Provider<LastSelectionProvider> historySelectionProvider;
-	@Inject
-	private Provider<DefaultEObjectSelectionProvider> eObjectSelectionProvider;
+	private INodeSelectionProvider nodeSelectionProvider;
 
-	public void contributeActions(XtextEditor xtextEditor) {
-		createNodeSelectionProvider(historySelectionProvider, xtextEditor);
-		createNodeSelectionProvider(eObjectSelectionProvider, xtextEditor);
+	@Inject
+	public void setNodeSelectionProvider(INodeSelectionProvider nodeSelectionProvider) {
+		this.nodeSelectionProvider = nodeSelectionProvider;
 	}
 
-	private INodeSelectionProvider createNodeSelectionProvider(
-			Provider<? extends INodeSelectionProvider> nodeSelectionFactory, XtextEditor xtextEditor) {
-		INodeSelectionProvider nodeSelectionProvider = nodeSelectionFactory.get();
+	public void contributeActions(XtextEditor xtextEditor) {
 		nodeSelectionProvider.initialize(xtextEditor);
-		return nodeSelectionProvider;
 	}
 
 	public void editorDisposed(XtextEditor editor) {
+		nodeSelectionProvider.dispose();
 	}
 
 }
