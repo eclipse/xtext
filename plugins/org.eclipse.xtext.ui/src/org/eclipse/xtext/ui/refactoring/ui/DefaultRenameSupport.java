@@ -10,11 +10,10 @@ package org.eclipse.xtext.ui.refactoring.ui;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
-import org.eclipse.ltk.core.refactoring.participants.RenameProcessor;
 import org.eclipse.ltk.ui.refactoring.RefactoringWizardOpenOperation;
 import org.eclipse.xtext.resource.IGlobalServiceProvider;
-import org.eclipse.xtext.ui.refactoring.IRenameProcessorAdapter;
 import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
+import org.eclipse.xtext.ui.refactoring.impl.AbstractRenameProcessor;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -74,16 +73,8 @@ public class DefaultRenameSupport implements IRenameSupport {
 			return renameRefactoringProvider != null ? renameRefactoringProvider.getRenameRefactoring(renameElementContext) : null;
 		}
 
-		@Inject(optional = true)
-		private IRenameProcessorAdapter.Factory renameProcessAdapterFactory;
-
-		public IRenameProcessorAdapter createRenameProcessorAdapter(ProcessorBasedRefactoring renameRefactoring) {
-			return renameProcessAdapterFactory.create((RenameProcessor) renameRefactoring.getProcessor());
-		}
-
 		public boolean hasRefactoring() {
-			return renameRefactoringExecuterProvider != null && renameRefactoringProvider != null
-					&& renameProcessAdapterFactory != null;
+			return renameRefactoringExecuterProvider != null && renameRefactoringProvider != null;
 		}
 	}
 
@@ -95,19 +86,16 @@ public class DefaultRenameSupport implements IRenameSupport {
 
 	private IRenameElementContext renameElementContext;
 
-	private IRenameProcessorAdapter renameProcessorAdapter;
-
 	protected DefaultRenameSupport(DeclaringLanguageComponentFactory declaringLanguage,
 			IRenameElementContext renameElementContext, ProcessorBasedRefactoring renameRefactoring, String newName) {
 		this.declaringLanguage = declaringLanguage;
 		this.renameElementContext = renameElementContext;
 		this.renameRefactoring = renameRefactoring;
-		this.renameProcessorAdapter = declaringLanguage.createRenameProcessorAdapter(renameRefactoring);
-		renameProcessorAdapter.setNewName(newName);
+		((AbstractRenameProcessor)renameRefactoring.getProcessor()).setNewName(newName);
 	}
 
 	public void startRefactoringWithDialog(final boolean previewOnly) throws InterruptedException {
-		RenameElementWizard renameElementWizard = new RenameElementWizard(renameRefactoring, renameProcessorAdapter) {
+		RenameElementWizard renameElementWizard = new RenameElementWizard(renameRefactoring) {
 			@Override
 			protected void addUserInputPages() {
 				if (!previewOnly) {

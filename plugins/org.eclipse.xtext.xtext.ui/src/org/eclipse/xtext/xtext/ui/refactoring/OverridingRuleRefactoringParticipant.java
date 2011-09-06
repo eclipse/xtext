@@ -12,9 +12,11 @@ import static com.google.common.collect.Lists.*;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.ltk.core.refactoring.participants.RenameProcessor;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.refactoring.impl.AbstractProcessorBasedRenameParticipant;
+import org.eclipse.xtext.ui.refactoring.impl.AbstractRenameProcessor;
 
 import com.google.inject.Inject;
 
