@@ -193,7 +193,7 @@ public class FeatureCallChecker {
 	
 	protected String _case(JvmIdentifiableElement input, XFeatureCall context, EReference ref,
 			LocalVarDescription description) {
-		if (context.isExplicitOperationCall())
+		if (context.isExplicitOperationCallOrBuilderSyntax())
 			return LOCAL_VAR_ACCESS_WITH_PARENTHESES;
 		return null;
 	}
@@ -207,7 +207,7 @@ public class FeatureCallChecker {
 			if (!input.isStatic())
 				return STATIC_ACCESS_TO_INSTANCE_MEMBER;
 		}
-		if (context.isExplicitOperationCall())
+		if (context.isExplicitOperationCallOrBuilderSyntax())
 			return FIELD_ACCESS_WITH_PARENTHESES;
 			
 		return null;
@@ -219,7 +219,7 @@ public class FeatureCallChecker {
 				&& input.getParameters().size() == context.getMemberCallArguments().size()) {
 			return INSTANCE_ACCESS_TO_STATIC_MEMBER;
 		} else {
-			return checkJvmOperation(input, context, context.isExplicitOperationCall(), jvmFeatureDescription,
+			return checkJvmOperation(input, context, context.isExplicitOperationCallOrBuilderSyntax(), jvmFeatureDescription,
 					context.getMemberCallArguments());
 		}
 	}
@@ -230,7 +230,7 @@ public class FeatureCallChecker {
 			if (!input.isStatic())
 				return STATIC_ACCESS_TO_INSTANCE_MEMBER;
 		}
-		return checkJvmOperation(input, context, context.isExplicitOperationCall(), jvmFeatureDescription,
+		return checkJvmOperation(input, context, context.isExplicitOperationCallOrBuilderSyntax(), jvmFeatureDescription,
 				context.getFeatureCallArguments());
 	}
 

@@ -30,7 +30,7 @@ public class XFeatureCallImplCustom extends XFeatureCallImpl {
 	}
 	
 	@Override
-	public boolean isExplicitOperationCall() {
+	public boolean isExplicitOperationCallOrBuilderSyntax() {
 		return super.isExplicitOperationCall() || !getFeatureCallArguments().isEmpty();
 	}
 	

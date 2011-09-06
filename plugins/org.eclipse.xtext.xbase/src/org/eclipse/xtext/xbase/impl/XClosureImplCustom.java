@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.impl;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.TypesFactory;
@@ -19,13 +20,25 @@ public class XClosureImplCustom extends XClosureImpl {
 
 	@Override
 	public EList<JvmFormalParameter> getFormalParameters() {
-		// is fully initialized / parsed?
-		//TODO tell the serializer to skip this element
-		if (expression != null && super.getFormalParameters().isEmpty() && !isExplicitSyntax()) {
+		EList<JvmFormalParameter> parameters = getDeclaredFormalParameters();
+		if (expression != null && parameters.isEmpty() && !isExplicitSyntax()) {
+			BasicEList<JvmFormalParameter> result = new BasicEList<JvmFormalParameter>(1);
+			result.add(getImplicitParameter());
+			return result;
+		}
+		return parameters;
+	}
+	
+	/**
+	 * The implicit parameter for the short cut syntax [ my-expression-using-it ]
+	 */
+	@Override
+	public JvmFormalParameter getImplicitParameter() {
+		if (super.getImplicitParameter() == null) {
 			JvmFormalParameter parameter = TypesFactory.eINSTANCE.createJvmFormalParameter();
 			parameter.setName(XbaseScopeProvider.IT.toString());
-			super.getFormalParameters().add(parameter);
+			super.setImplicitParameter(parameter);
 		}
-		return super.getFormalParameters();
+		return super.getImplicitParameter();
 	}
 }

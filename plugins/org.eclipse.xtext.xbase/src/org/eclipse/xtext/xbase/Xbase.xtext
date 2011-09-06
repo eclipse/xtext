@@ -127,7 +127,7 @@ XLiteral returns XExpression:
 XClosure returns XExpression:
 	{XClosure} 
 	'[' 
-		=>((formalParameters+=JvmFormalParameter (',' formalParameters+=JvmFormalParameter)*)? explicitSyntax?='|')? 
+		=>((declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)? explicitSyntax?='|')? 
 		expression=XExpressionInClosure 
 	']';
 	
@@ -137,7 +137,7 @@ XExpressionInClosure returns XExpression:
 ;
 
 XShortClosure returns XExpression:
-	=>({XClosure} (formalParameters+=JvmFormalParameter (',' formalParameters+=JvmFormalParameter)*)? explicitSyntax?='|') expression=XExpression;
+	=>({XClosure} (declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)? explicitSyntax?='|') expression=XExpression;
 
 XParenthesizedExpression returns XExpression:
 	'(' XExpression ')';
