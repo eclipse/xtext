@@ -11,6 +11,7 @@ import java.io.IOException;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.serializer.ISerializer;
+import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XIfExpression;
@@ -32,16 +33,18 @@ public class SerializerTest extends AbstractXbaseTestCase {
 		XClosure closure = factory.createXClosure();
 		XStringLiteral stringLiteral = factory.createXStringLiteral();
 		stringLiteral.setValue("value");
-		closure.setExpression(stringLiteral);
+		XBlockExpression blockExpression = factory.createXBlockExpression();
+		blockExpression.getExpressions().add(stringLiteral);
+		closure.setExpression(blockExpression);
+		closure.setExplicitSyntax(true);
 		XInstanceOfExpression instanceOfExpression = factory.createXInstanceOfExpression();
 		instanceOfExpression.setExpression(closure);
 		instanceOfExpression.setType(casted.getType().getType());
 		resource.getContents().clear();
 		resource.getContents().add(instanceOfExpression);
 		ISerializer serializer = get(ISerializer.class);
-		//TODO fixme
-//		String string = serializer.serialize(instanceOfExpression);
-//		assertEquals("[| \"value\"] instanceof String", string);
+		String string = serializer.serialize(instanceOfExpression);
+		assertEquals("[| \"value\"] instanceof String", string);
 	}
 	
 	public void testSerialize_02() throws IOException {

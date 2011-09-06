@@ -32,7 +32,8 @@ public class XMemberFeatureCallImplCustom extends XMemberFeatureCallImpl {
 	}
 	
 	@Override
-	public boolean isExplicitOperationCall() {
+	public boolean isExplicitOperationCallOrBuilderSyntax() {
 		return super.isExplicitOperationCall() || !getMemberCallArguments().isEmpty();
 	}
+	
 }

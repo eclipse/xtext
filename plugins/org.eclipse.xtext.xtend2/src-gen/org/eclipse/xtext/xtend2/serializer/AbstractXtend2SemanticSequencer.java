@@ -1796,15 +1796,18 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (((formalParameters+=JvmFormalParameter formalParameters+=JvmFormalParameter*)? explicitSyntax?='|')? expression=XExpressionInClosure)
+	 *     (
+	 *         ((declaredFormalParameters+=JvmFormalParameter declaredFormalParameters+=JvmFormalParameter*)? explicitSyntax?='|')? 
+	 *         expression=XExpressionInClosure
+	 *     )
 	 *
 	 * Features:
-	 *    formalParameters[0, *]
+	 *    declaredFormalParameters[0, *]
 	 *         EXCLUDE_IF_UNSET explicitSyntax
 	 *    expression[1, 1]
 	 *    explicitSyntax[0, 1]
-	 *         MANDATORY_IF_SET formalParameters
-	 *         MANDATORY_IF_SET formalParameters
+	 *         MANDATORY_IF_SET declaredFormalParameters
+	 *         MANDATORY_IF_SET declaredFormalParameters
 	 */
 	protected void sequence_XClosure(EObject context, XClosure semanticObject) {
 		superSequencer.createSequence(context, semanticObject);
@@ -1990,10 +1993,10 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     ((formalParameters+=JvmFormalParameter formalParameters+=JvmFormalParameter*)? explicitSyntax?='|' expression=XExpression)
+	 *     ((declaredFormalParameters+=JvmFormalParameter declaredFormalParameters+=JvmFormalParameter*)? explicitSyntax?='|' expression=XExpression)
 	 *
 	 * Features:
-	 *    formalParameters[0, *]
+	 *    declaredFormalParameters[0, *]
 	 *    expression[1, 1]
 	 *    explicitSyntax[1, 1]
 	 */

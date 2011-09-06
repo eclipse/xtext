@@ -231,13 +231,13 @@ public class PureXbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXMemberFeatureCallAccess().getMemberCallArgumentsAssignment_1_1_3_1_1_0(), "rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_0");
 					put(grammarAccess.getXMemberFeatureCallAccess().getMemberCallArgumentsAssignment_1_1_3_1_1_1_1(), "rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_1_1");
 					put(grammarAccess.getXMemberFeatureCallAccess().getMemberCallArgumentsAssignment_1_1_4(), "rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_4");
-					put(grammarAccess.getXClosureAccess().getFormalParametersAssignment_2_0_0_0(), "rule__XClosure__FormalParametersAssignment_2_0_0_0");
-					put(grammarAccess.getXClosureAccess().getFormalParametersAssignment_2_0_0_1_1(), "rule__XClosure__FormalParametersAssignment_2_0_0_1_1");
+					put(grammarAccess.getXClosureAccess().getDeclaredFormalParametersAssignment_2_0_0_0(), "rule__XClosure__DeclaredFormalParametersAssignment_2_0_0_0");
+					put(grammarAccess.getXClosureAccess().getDeclaredFormalParametersAssignment_2_0_0_1_1(), "rule__XClosure__DeclaredFormalParametersAssignment_2_0_0_1_1");
 					put(grammarAccess.getXClosureAccess().getExplicitSyntaxAssignment_2_0_1(), "rule__XClosure__ExplicitSyntaxAssignment_2_0_1");
 					put(grammarAccess.getXClosureAccess().getExpressionAssignment_3(), "rule__XClosure__ExpressionAssignment_3");
 					put(grammarAccess.getXExpressionInClosureAccess().getExpressionsAssignment_1_0(), "rule__XExpressionInClosure__ExpressionsAssignment_1_0");
-					put(grammarAccess.getXShortClosureAccess().getFormalParametersAssignment_0_0_1_0(), "rule__XShortClosure__FormalParametersAssignment_0_0_1_0");
-					put(grammarAccess.getXShortClosureAccess().getFormalParametersAssignment_0_0_1_1_1(), "rule__XShortClosure__FormalParametersAssignment_0_0_1_1_1");
+					put(grammarAccess.getXShortClosureAccess().getDeclaredFormalParametersAssignment_0_0_1_0(), "rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_0");
+					put(grammarAccess.getXShortClosureAccess().getDeclaredFormalParametersAssignment_0_0_1_1_1(), "rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_1_1");
 					put(grammarAccess.getXShortClosureAccess().getExplicitSyntaxAssignment_0_0_2(), "rule__XShortClosure__ExplicitSyntaxAssignment_0_0_2");
 					put(grammarAccess.getXShortClosureAccess().getExpressionAssignment_1(), "rule__XShortClosure__ExpressionAssignment_1");
 					put(grammarAccess.getXIfExpressionAccess().getIfAssignment_3(), "rule__XIfExpression__IfAssignment_3");

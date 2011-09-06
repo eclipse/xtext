@@ -157,4 +157,12 @@ public interface XAbstractFeatureCall extends XExpression
 	 */
 	EList<XExpression> getExplicitArguments();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	boolean isExplicitOperationCallOrBuilderSyntax();
+
 } // XAbstractFeatureCall

@@ -637,12 +637,12 @@
         <elements xsi:type="xtext:Group" cardinality="?" predicated="true">
           <elements xsi:type="xtext:Group">
             <elements xsi:type="xtext:Group" cardinality="?">
-              <elements xsi:type="xtext:Assignment" feature="formalParameters" operator="+=">
+              <elements xsi:type="xtext:Assignment" feature="declaredFormalParameters" operator="+=">
                 <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.37"/>
               </elements>
               <elements xsi:type="xtext:Group" cardinality="*">
                 <elements xsi:type="xtext:Keyword" value=","/>
-                <elements xsi:type="xtext:Assignment" feature="formalParameters" operator="+=">
+                <elements xsi:type="xtext:Assignment" feature="declaredFormalParameters" operator="+=">
                   <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.37"/>
                 </elements>
               </elements>
@@ -689,12 +689,12 @@
               </type>
             </elements>
             <elements xsi:type="xtext:Group" cardinality="?">
-              <elements xsi:type="xtext:Assignment" feature="formalParameters" operator="+=">
+              <elements xsi:type="xtext:Assignment" feature="declaredFormalParameters" operator="+=">
                 <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.37"/>
               </elements>
               <elements xsi:type="xtext:Group" cardinality="*">
                 <elements xsi:type="xtext:Keyword" value=","/>
-                <elements xsi:type="xtext:Assignment" feature="formalParameters" operator="+=">
+                <elements xsi:type="xtext:Assignment" feature="declaredFormalParameters" operator="+=">
                   <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.37"/>
                 </elements>
               </elements>

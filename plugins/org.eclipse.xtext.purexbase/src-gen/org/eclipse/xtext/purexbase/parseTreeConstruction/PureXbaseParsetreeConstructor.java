@@ -5757,12 +5757,12 @@ protected class XLiteral_XTypeLiteralParserRuleCall_5 extends RuleCallToken {
 /************ begin Rule XClosure ****************
  *
  * XClosure returns XExpression:
- * 	{XClosure} "[" => ((formalParameters+=JvmFormalParameter ("," formalParameters+=JvmFormalParameter)*)?
+ * 	{XClosure} "[" => ((declaredFormalParameters+=JvmFormalParameter ("," declaredFormalParameters+=JvmFormalParameter)*)?
  * 	explicitSyntax?="|")? expression=XExpressionInClosure "]";
  *
  **/
 
-// {XClosure} "[" => ((formalParameters+=JvmFormalParameter ("," formalParameters+=JvmFormalParameter)*)?
+// {XClosure} "[" => ((declaredFormalParameters+=JvmFormalParameter ("," declaredFormalParameters+=JvmFormalParameter)*)?
 // explicitSyntax?="|")? expression=XExpressionInClosure "]"
 protected class XClosure_Group extends GroupToken {
 	
@@ -5840,7 +5840,8 @@ protected class XClosure_LeftSquareBracketKeyword_1 extends KeywordToken  {
 
 }
 
-// => ((formalParameters+=JvmFormalParameter ("," formalParameters+=JvmFormalParameter)*)? explicitSyntax?="|")?
+// => ((declaredFormalParameters+=JvmFormalParameter ("," declaredFormalParameters+=JvmFormalParameter)*)?
+// explicitSyntax?="|")?
 protected class XClosure_Group_2 extends GroupToken {
 	
 	public XClosure_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5862,7 +5863,7 @@ protected class XClosure_Group_2 extends GroupToken {
 
 }
 
-// (formalParameters+=JvmFormalParameter ("," formalParameters+=JvmFormalParameter)*)? explicitSyntax?="|"
+// (declaredFormalParameters+=JvmFormalParameter ("," declaredFormalParameters+=JvmFormalParameter)*)? explicitSyntax?="|"
 protected class XClosure_Group_2_0 extends GroupToken {
 	
 	public XClosure_Group_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5884,7 +5885,7 @@ protected class XClosure_Group_2_0 extends GroupToken {
 
 }
 
-// (formalParameters+=JvmFormalParameter ("," formalParameters+=JvmFormalParameter)*)?
+// (declaredFormalParameters+=JvmFormalParameter ("," declaredFormalParameters+=JvmFormalParameter)*)?
 protected class XClosure_Group_2_0_0 extends GroupToken {
 	
 	public XClosure_Group_2_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5900,23 +5901,23 @@ protected class XClosure_Group_2_0_0 extends GroupToken {
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new XClosure_Group_2_0_0_1(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new XClosure_FormalParametersAssignment_2_0_0_0(lastRuleCallOrigin, this, 1, inst);
+			case 1: return new XClosure_DeclaredFormalParametersAssignment_2_0_0_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
 }
 
-// formalParameters+=JvmFormalParameter
-protected class XClosure_FormalParametersAssignment_2_0_0_0 extends AssignmentToken  {
+// declaredFormalParameters+=JvmFormalParameter
+protected class XClosure_DeclaredFormalParametersAssignment_2_0_0_0 extends AssignmentToken  {
 	
-	public XClosure_FormalParametersAssignment_2_0_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public XClosure_DeclaredFormalParametersAssignment_2_0_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getXClosureAccess().getFormalParametersAssignment_2_0_0_0();
+		return grammarAccess.getXClosureAccess().getDeclaredFormalParametersAssignment_2_0_0_0();
 	}
 
     @Override
@@ -5929,13 +5930,13 @@ protected class XClosure_FormalParametersAssignment_2_0_0_0 extends AssignmentTo
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("formalParameters",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("formalParameters");
+		if((value = eObjectConsumer.getConsumable("declaredFormalParameters",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("declaredFormalParameters");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getJvmFormalParameterRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getXClosureAccess().getFormalParametersJvmFormalParameterParserRuleCall_2_0_0_0_0(); 
+				element = grammarAccess.getXClosureAccess().getDeclaredFormalParametersJvmFormalParameterParserRuleCall_2_0_0_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -5953,7 +5954,7 @@ protected class XClosure_FormalParametersAssignment_2_0_0_0 extends AssignmentTo
 	}	
 }
 
-// ("," formalParameters+=JvmFormalParameter)*
+// ("," declaredFormalParameters+=JvmFormalParameter)*
 protected class XClosure_Group_2_0_0_1 extends GroupToken {
 	
 	public XClosure_Group_2_0_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5968,7 +5969,7 @@ protected class XClosure_Group_2_0_0_1 extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new XClosure_FormalParametersAssignment_2_0_0_1_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new XClosure_DeclaredFormalParametersAssignment_2_0_0_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -5991,23 +5992,23 @@ protected class XClosure_CommaKeyword_2_0_0_1_0 extends KeywordToken  {
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new XClosure_Group_2_0_0_1(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new XClosure_FormalParametersAssignment_2_0_0_0(lastRuleCallOrigin, this, 1, inst);
+			case 1: return new XClosure_DeclaredFormalParametersAssignment_2_0_0_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
 }
 
-// formalParameters+=JvmFormalParameter
-protected class XClosure_FormalParametersAssignment_2_0_0_1_1 extends AssignmentToken  {
+// declaredFormalParameters+=JvmFormalParameter
+protected class XClosure_DeclaredFormalParametersAssignment_2_0_0_1_1 extends AssignmentToken  {
 	
-	public XClosure_FormalParametersAssignment_2_0_0_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public XClosure_DeclaredFormalParametersAssignment_2_0_0_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getXClosureAccess().getFormalParametersAssignment_2_0_0_1_1();
+		return grammarAccess.getXClosureAccess().getDeclaredFormalParametersAssignment_2_0_0_1_1();
 	}
 
     @Override
@@ -6020,13 +6021,13 @@ protected class XClosure_FormalParametersAssignment_2_0_0_1_1 extends Assignment
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("formalParameters",false)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("formalParameters");
+		if((value = eObjectConsumer.getConsumable("declaredFormalParameters",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("declaredFormalParameters");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getJvmFormalParameterRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getXClosureAccess().getFormalParametersJvmFormalParameterParserRuleCall_2_0_0_1_1_0(); 
+				element = grammarAccess.getXClosureAccess().getDeclaredFormalParametersJvmFormalParameterParserRuleCall_2_0_0_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -6296,13 +6297,13 @@ protected class XExpressionInClosure_ExpressionsAssignment_1_0 extends Assignmen
 /************ begin Rule XShortClosure ****************
  *
  * XShortClosure returns XExpression:
- * 	=> ({XClosure} (formalParameters+=JvmFormalParameter ("," formalParameters+=JvmFormalParameter)*)?
+ * 	=> ({XClosure} (declaredFormalParameters+=JvmFormalParameter ("," declaredFormalParameters+=JvmFormalParameter)*)?
  * 	explicitSyntax?="|") expression=XExpression;
  *
  **/
 
-// => ({XClosure} (formalParameters+=JvmFormalParameter ("," formalParameters+=JvmFormalParameter)*)? explicitSyntax?="|")
-// expression=XExpression
+// => ({XClosure} (declaredFormalParameters+=JvmFormalParameter ("," declaredFormalParameters+=JvmFormalParameter)*)?
+// explicitSyntax?="|") expression=XExpression
 protected class XShortClosure_Group extends GroupToken {
 	
 	public XShortClosure_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6331,7 +6332,8 @@ protected class XShortClosure_Group extends GroupToken {
 
 }
 
-// => ({XClosure} (formalParameters+=JvmFormalParameter ("," formalParameters+=JvmFormalParameter)*)? explicitSyntax?="|")
+// => ({XClosure} (declaredFormalParameters+=JvmFormalParameter ("," declaredFormalParameters+=JvmFormalParameter)*)?
+// explicitSyntax?="|")
 protected class XShortClosure_Group_0 extends GroupToken {
 	
 	public XShortClosure_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6353,7 +6355,8 @@ protected class XShortClosure_Group_0 extends GroupToken {
 
 }
 
-// {XClosure} (formalParameters+=JvmFormalParameter ("," formalParameters+=JvmFormalParameter)*)? explicitSyntax?="|"
+// {XClosure} (declaredFormalParameters+=JvmFormalParameter ("," declaredFormalParameters+=JvmFormalParameter)*)?
+// explicitSyntax?="|"
 protected class XShortClosure_Group_0_0 extends GroupToken {
 	
 	public XShortClosure_Group_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6401,7 +6404,7 @@ protected class XShortClosure_XClosureAction_0_0_0 extends ActionToken  {
 	}
 }
 
-// (formalParameters+=JvmFormalParameter ("," formalParameters+=JvmFormalParameter)*)?
+// (declaredFormalParameters+=JvmFormalParameter ("," declaredFormalParameters+=JvmFormalParameter)*)?
 protected class XShortClosure_Group_0_0_1 extends GroupToken {
 	
 	public XShortClosure_Group_0_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6417,23 +6420,23 @@ protected class XShortClosure_Group_0_0_1 extends GroupToken {
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new XShortClosure_Group_0_0_1_1(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new XShortClosure_FormalParametersAssignment_0_0_1_0(lastRuleCallOrigin, this, 1, inst);
+			case 1: return new XShortClosure_DeclaredFormalParametersAssignment_0_0_1_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
 }
 
-// formalParameters+=JvmFormalParameter
-protected class XShortClosure_FormalParametersAssignment_0_0_1_0 extends AssignmentToken  {
+// declaredFormalParameters+=JvmFormalParameter
+protected class XShortClosure_DeclaredFormalParametersAssignment_0_0_1_0 extends AssignmentToken  {
 	
-	public XShortClosure_FormalParametersAssignment_0_0_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public XShortClosure_DeclaredFormalParametersAssignment_0_0_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getXShortClosureAccess().getFormalParametersAssignment_0_0_1_0();
+		return grammarAccess.getXShortClosureAccess().getDeclaredFormalParametersAssignment_0_0_1_0();
 	}
 
     @Override
@@ -6446,13 +6449,13 @@ protected class XShortClosure_FormalParametersAssignment_0_0_1_0 extends Assignm
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("formalParameters",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("formalParameters");
+		if((value = eObjectConsumer.getConsumable("declaredFormalParameters",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("declaredFormalParameters");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getJvmFormalParameterRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getXShortClosureAccess().getFormalParametersJvmFormalParameterParserRuleCall_0_0_1_0_0(); 
+				element = grammarAccess.getXShortClosureAccess().getDeclaredFormalParametersJvmFormalParameterParserRuleCall_0_0_1_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -6470,7 +6473,7 @@ protected class XShortClosure_FormalParametersAssignment_0_0_1_0 extends Assignm
 	}	
 }
 
-// ("," formalParameters+=JvmFormalParameter)*
+// ("," declaredFormalParameters+=JvmFormalParameter)*
 protected class XShortClosure_Group_0_0_1_1 extends GroupToken {
 	
 	public XShortClosure_Group_0_0_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6485,7 +6488,7 @@ protected class XShortClosure_Group_0_0_1_1 extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new XShortClosure_FormalParametersAssignment_0_0_1_1_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new XShortClosure_DeclaredFormalParametersAssignment_0_0_1_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -6508,23 +6511,23 @@ protected class XShortClosure_CommaKeyword_0_0_1_1_0 extends KeywordToken  {
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new XShortClosure_Group_0_0_1_1(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new XShortClosure_FormalParametersAssignment_0_0_1_0(lastRuleCallOrigin, this, 1, inst);
+			case 1: return new XShortClosure_DeclaredFormalParametersAssignment_0_0_1_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
 }
 
-// formalParameters+=JvmFormalParameter
-protected class XShortClosure_FormalParametersAssignment_0_0_1_1_1 extends AssignmentToken  {
+// declaredFormalParameters+=JvmFormalParameter
+protected class XShortClosure_DeclaredFormalParametersAssignment_0_0_1_1_1 extends AssignmentToken  {
 	
-	public XShortClosure_FormalParametersAssignment_0_0_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public XShortClosure_DeclaredFormalParametersAssignment_0_0_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getXShortClosureAccess().getFormalParametersAssignment_0_0_1_1_1();
+		return grammarAccess.getXShortClosureAccess().getDeclaredFormalParametersAssignment_0_0_1_1_1();
 	}
 
     @Override
@@ -6537,13 +6540,13 @@ protected class XShortClosure_FormalParametersAssignment_0_0_1_1_1 extends Assig
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("formalParameters",false)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("formalParameters");
+		if((value = eObjectConsumer.getConsumable("declaredFormalParameters",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("declaredFormalParameters");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getJvmFormalParameterRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getXShortClosureAccess().getFormalParametersJvmFormalParameterParserRuleCall_0_0_1_1_1_0(); 
+				element = grammarAccess.getXShortClosureAccess().getDeclaredFormalParametersJvmFormalParameterParserRuleCall_0_0_1_1_1_0(); 
 				consumed = obj;
 				return param;
 			}

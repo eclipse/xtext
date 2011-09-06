@@ -539,7 +539,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	@Check
 	public void checkClosureParams(XClosure closure) {
 		if (closure.getFormalParameters().size()>6) {
-			error("The maximum number of parameters for a closure is six.",closure, Literals.XCLOSURE__FORMAL_PARAMETERS, 6, TOO_MANY_PARAMS_IN_CLOSURE);
+			error("The maximum number of parameters for a closure is six.",closure, Literals.XCLOSURE__DECLARED_FORMAL_PARAMETERS, 6, TOO_MANY_PARAMS_IN_CLOSURE);
 		}
 	}
 	

@@ -2029,16 +2029,16 @@ ruleJvmFormalParameter
 )))=>(((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getXClosureAccess().getFormalParametersJvmFormalParameterParserRuleCall_2_0_0_0_0()); 
+	        newCompositeNode(grammarAccess.getXClosureAccess().getDeclaredFormalParametersJvmFormalParameterParserRuleCall_2_0_0_0_0()); 
 	    }
-		lv_formalParameters_2_0=ruleJvmFormalParameter		{
+		lv_declaredFormalParameters_2_0=ruleJvmFormalParameter		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getXClosureRule());
 	        }
        		add(
        			$current, 
-       			"formalParameters",
-        		lv_formalParameters_2_0, 
+       			"declaredFormalParameters",
+        		lv_declaredFormalParameters_2_0, 
         		"JvmFormalParameter");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -2051,16 +2051,16 @@ ruleJvmFormalParameter
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getXClosureAccess().getFormalParametersJvmFormalParameterParserRuleCall_2_0_0_1_1_0()); 
+	        newCompositeNode(grammarAccess.getXClosureAccess().getDeclaredFormalParametersJvmFormalParameterParserRuleCall_2_0_0_1_1_0()); 
 	    }
-		lv_formalParameters_4_0=ruleJvmFormalParameter		{
+		lv_declaredFormalParameters_4_0=ruleJvmFormalParameter		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getXClosureRule());
 	        }
        		add(
        			$current, 
-       			"formalParameters",
-        		lv_formalParameters_4_0, 
+       			"declaredFormalParameters",
+        		lv_declaredFormalParameters_4_0, 
         		"JvmFormalParameter");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -2198,16 +2198,16 @@ ruleJvmFormalParameter
 )((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getXShortClosureAccess().getFormalParametersJvmFormalParameterParserRuleCall_0_0_1_0_0()); 
+	        newCompositeNode(grammarAccess.getXShortClosureAccess().getDeclaredFormalParametersJvmFormalParameterParserRuleCall_0_0_1_0_0()); 
 	    }
-		lv_formalParameters_1_0=ruleJvmFormalParameter		{
+		lv_declaredFormalParameters_1_0=ruleJvmFormalParameter		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getXShortClosureRule());
 	        }
        		add(
        			$current, 
-       			"formalParameters",
-        		lv_formalParameters_1_0, 
+       			"declaredFormalParameters",
+        		lv_declaredFormalParameters_1_0, 
         		"JvmFormalParameter");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -2220,16 +2220,16 @@ ruleJvmFormalParameter
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getXShortClosureAccess().getFormalParametersJvmFormalParameterParserRuleCall_0_0_1_1_1_0()); 
+	        newCompositeNode(grammarAccess.getXShortClosureAccess().getDeclaredFormalParametersJvmFormalParameterParserRuleCall_0_0_1_1_1_0()); 
 	    }
-		lv_formalParameters_3_0=ruleJvmFormalParameter		{
+		lv_declaredFormalParameters_3_0=ruleJvmFormalParameter		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getXShortClosureRule());
 	        }
        		add(
        			$current, 
-       			"formalParameters",
-        		lv_formalParameters_3_0, 
+       			"declaredFormalParameters",
+        		lv_declaredFormalParameters_3_0, 
         		"JvmFormalParameter");
 	        afterParserOrEnumRuleCall();
 	    }

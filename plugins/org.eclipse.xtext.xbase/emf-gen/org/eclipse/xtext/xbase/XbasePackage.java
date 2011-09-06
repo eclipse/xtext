@@ -752,13 +752,13 @@ public interface XbasePackage extends EPackage
 	int XCLOSURE = 14;
 
 	/**
-	 * The feature id for the '<em><b>Formal Parameters</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Declared Formal Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XCLOSURE__FORMAL_PARAMETERS = XEXPRESSION_FEATURE_COUNT + 0;
+	int XCLOSURE__DECLARED_FORMAL_PARAMETERS = XEXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -779,13 +779,22 @@ public interface XbasePackage extends EPackage
 	int XCLOSURE__EXPLICIT_SYNTAX = XEXPRESSION_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Implicit Parameter</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCLOSURE__IMPLICIT_PARAMETER = XEXPRESSION_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>XClosure</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XCLOSURE_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 3;
+	int XCLOSURE_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XCastedExpressionImpl <em>XCasted Expression</em>}' class.
@@ -1970,15 +1979,15 @@ public interface XbasePackage extends EPackage
 	EClass getXClosure();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XClosure#getFormalParameters <em>Formal Parameters</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XClosure#getDeclaredFormalParameters <em>Declared Formal Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Formal Parameters</em>'.
-	 * @see org.eclipse.xtext.xbase.XClosure#getFormalParameters()
+	 * @return the meta object for the containment reference list '<em>Declared Formal Parameters</em>'.
+	 * @see org.eclipse.xtext.xbase.XClosure#getDeclaredFormalParameters()
 	 * @see #getXClosure()
 	 * @generated
 	 */
-	EReference getXClosure_FormalParameters();
+	EReference getXClosure_DeclaredFormalParameters();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XClosure#getExpression <em>Expression</em>}'.
@@ -2001,6 +2010,17 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 */
 	EAttribute getXClosure_ExplicitSyntax();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XClosure#getImplicitParameter <em>Implicit Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Implicit Parameter</em>'.
+	 * @see org.eclipse.xtext.xbase.XClosure#getImplicitParameter()
+	 * @see #getXClosure()
+	 * @generated
+	 */
+	EReference getXClosure_ImplicitParameter();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XCastedExpression <em>XCasted Expression</em>}'.
@@ -2846,12 +2866,12 @@ public interface XbasePackage extends EPackage
 		EClass XCLOSURE = eINSTANCE.getXClosure();
 
 		/**
-		 * The meta object literal for the '<em><b>Formal Parameters</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Declared Formal Parameters</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference XCLOSURE__FORMAL_PARAMETERS = eINSTANCE.getXClosure_FormalParameters();
+		EReference XCLOSURE__DECLARED_FORMAL_PARAMETERS = eINSTANCE.getXClosure_DeclaredFormalParameters();
 
 		/**
 		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
@@ -2868,6 +2888,14 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EAttribute XCLOSURE__EXPLICIT_SYNTAX = eINSTANCE.getXClosure_ExplicitSyntax();
+
+		/**
+		 * The meta object literal for the '<em><b>Implicit Parameter</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XCLOSURE__IMPLICIT_PARAMETER = eINSTANCE.getXClosure_ImplicitParameter();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XCastedExpressionImpl <em>XCasted Expression</em>}' class.

@@ -685,7 +685,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	}
 
 	//XClosure returns XExpression:
-	//	{XClosure} "[" => ((formalParameters+=JvmFormalParameter ("," formalParameters+=JvmFormalParameter)*)?
+	//	{XClosure} "[" => ((declaredFormalParameters+=JvmFormalParameter ("," declaredFormalParameters+=JvmFormalParameter)*)?
 	//	explicitSyntax?="|")? expression=XExpressionInClosure "]";
 	public XbaseGrammarAccess.XClosureElements getXClosureAccess() {
 		return gaXbase.getXClosureAccess();
@@ -706,7 +706,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	}
 
 	//XShortClosure returns XExpression:
-	//	=> ({XClosure} (formalParameters+=JvmFormalParameter ("," formalParameters+=JvmFormalParameter)*)?
+	//	=> ({XClosure} (declaredFormalParameters+=JvmFormalParameter ("," declaredFormalParameters+=JvmFormalParameter)*)?
 	//	explicitSyntax?="|") expression=XExpression;
 	public XbaseGrammarAccess.XShortClosureElements getXShortClosureAccess() {
 		return gaXbase.getXShortClosureAccess();

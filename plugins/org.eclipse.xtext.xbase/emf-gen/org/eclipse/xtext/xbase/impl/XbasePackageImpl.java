@@ -854,7 +854,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getXClosure_FormalParameters()
+	public EReference getXClosure_DeclaredFormalParameters()
 	{
 		return (EReference)xClosureEClass.getEStructuralFeatures().get(0);
 	}
@@ -877,6 +877,16 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	public EAttribute getXClosure_ExplicitSyntax()
 	{
 		return (EAttribute)xClosureEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXClosure_ImplicitParameter()
+	{
+		return (EReference)xClosureEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1334,9 +1344,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		createEAttribute(xStringLiteralEClass, XSTRING_LITERAL__VALUE);
 
 		xClosureEClass = createEClass(XCLOSURE);
-		createEReference(xClosureEClass, XCLOSURE__FORMAL_PARAMETERS);
+		createEReference(xClosureEClass, XCLOSURE__DECLARED_FORMAL_PARAMETERS);
 		createEReference(xClosureEClass, XCLOSURE__EXPRESSION);
 		createEAttribute(xClosureEClass, XCLOSURE__EXPLICIT_SYNTAX);
+		createEReference(xClosureEClass, XCLOSURE__IMPLICIT_PARAMETER);
 
 		xCastedExpressionEClass = createEClass(XCASTED_EXPRESSION);
 		createEReference(xCastedExpressionEClass, XCASTED_EXPRESSION__TYPE);
@@ -1490,6 +1501,8 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 
 		addEOperation(xAbstractFeatureCallEClass, this.getXExpression(), "getExplicitArguments", 0, -1, IS_UNIQUE, IS_ORDERED);
 
+		addEOperation(xAbstractFeatureCallEClass, ecorePackage.getEBoolean(), "isExplicitOperationCallOrBuilderSyntax", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(xMemberFeatureCallEClass, XMemberFeatureCall.class, "XMemberFeatureCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXMemberFeatureCall_MemberCallTarget(), this.getXExpression(), null, "memberCallTarget", null, 0, 1, XMemberFeatureCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXMemberFeatureCall_MemberCallArguments(), this.getXExpression(), null, "memberCallArguments", null, 0, -1, XMemberFeatureCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1521,9 +1534,12 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		initEAttribute(getXStringLiteral_Value(), ecorePackage.getEString(), "value", null, 0, 1, XStringLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xClosureEClass, XClosure.class, "XClosure", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getXClosure_FormalParameters(), theTypesPackage.getJvmFormalParameter(), null, "formalParameters", null, 0, -1, XClosure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXClosure_DeclaredFormalParameters(), theTypesPackage.getJvmFormalParameter(), null, "declaredFormalParameters", null, 0, -1, XClosure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXClosure_Expression(), this.getXExpression(), null, "expression", null, 0, 1, XClosure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getXClosure_ExplicitSyntax(), ecorePackage.getEBoolean(), "explicitSyntax", null, 0, 1, XClosure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXClosure_ImplicitParameter(), theTypesPackage.getJvmFormalParameter(), null, "implicitParameter", null, 0, 1, XClosure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+
+		addEOperation(xClosureEClass, theTypesPackage.getJvmFormalParameter(), "getFormalParameters", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(xCastedExpressionEClass, XCastedExpression.class, "XCastedExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXCastedExpression_Type(), theTypesPackage.getJvmTypeReference(), null, "type", null, 0, 1, XCastedExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

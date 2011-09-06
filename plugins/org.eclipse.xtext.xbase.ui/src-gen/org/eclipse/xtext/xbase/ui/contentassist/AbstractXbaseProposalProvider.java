@@ -101,7 +101,7 @@ public class AbstractXbaseProposalProvider extends XtypeProposalProvider {
 	public void completeXMemberFeatureCall_MemberCallArguments(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeRuleCall(((RuleCall)assignment.getTerminal()), context, acceptor);
 	}
-	public void completeXClosure_FormalParameters(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	public void completeXClosure_DeclaredFormalParameters(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeRuleCall(((RuleCall)assignment.getTerminal()), context, acceptor);
 	}
 	public void completeXClosure_ExplicitSyntax(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -113,7 +113,7 @@ public class AbstractXbaseProposalProvider extends XtypeProposalProvider {
 	public void completeXExpressionInClosure_Expressions(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeRuleCall(((RuleCall)assignment.getTerminal()), context, acceptor);
 	}
-	public void completeXShortClosure_FormalParameters(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	public void completeXShortClosure_DeclaredFormalParameters(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeRuleCall(((RuleCall)assignment.getTerminal()), context, acceptor);
 	}
 	public void completeXShortClosure_ExplicitSyntax(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {

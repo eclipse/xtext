@@ -1169,12 +1169,12 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Group cGroup_2_0 = (Group)cGroup_2.eContents().get(0);
 		private final Group cGroup_2_0_0 = (Group)cGroup_2_0.eContents().get(0);
-		private final Assignment cFormalParametersAssignment_2_0_0_0 = (Assignment)cGroup_2_0_0.eContents().get(0);
-		private final RuleCall cFormalParametersJvmFormalParameterParserRuleCall_2_0_0_0_0 = (RuleCall)cFormalParametersAssignment_2_0_0_0.eContents().get(0);
+		private final Assignment cDeclaredFormalParametersAssignment_2_0_0_0 = (Assignment)cGroup_2_0_0.eContents().get(0);
+		private final RuleCall cDeclaredFormalParametersJvmFormalParameterParserRuleCall_2_0_0_0_0 = (RuleCall)cDeclaredFormalParametersAssignment_2_0_0_0.eContents().get(0);
 		private final Group cGroup_2_0_0_1 = (Group)cGroup_2_0_0.eContents().get(1);
 		private final Keyword cCommaKeyword_2_0_0_1_0 = (Keyword)cGroup_2_0_0_1.eContents().get(0);
-		private final Assignment cFormalParametersAssignment_2_0_0_1_1 = (Assignment)cGroup_2_0_0_1.eContents().get(1);
-		private final RuleCall cFormalParametersJvmFormalParameterParserRuleCall_2_0_0_1_1_0 = (RuleCall)cFormalParametersAssignment_2_0_0_1_1.eContents().get(0);
+		private final Assignment cDeclaredFormalParametersAssignment_2_0_0_1_1 = (Assignment)cGroup_2_0_0_1.eContents().get(1);
+		private final RuleCall cDeclaredFormalParametersJvmFormalParameterParserRuleCall_2_0_0_1_1_0 = (RuleCall)cDeclaredFormalParametersAssignment_2_0_0_1_1.eContents().get(0);
 		private final Assignment cExplicitSyntaxAssignment_2_0_1 = (Assignment)cGroup_2_0.eContents().get(1);
 		private final Keyword cExplicitSyntaxVerticalLineKeyword_2_0_1_0 = (Keyword)cExplicitSyntaxAssignment_2_0_1.eContents().get(0);
 		private final Assignment cExpressionAssignment_3 = (Assignment)cGroup.eContents().get(3);
@@ -1182,11 +1182,11 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightSquareBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//XClosure returns XExpression:
-		//	{XClosure} "[" => ((formalParameters+=JvmFormalParameter ("," formalParameters+=JvmFormalParameter)*)?
+		//	{XClosure} "[" => ((declaredFormalParameters+=JvmFormalParameter ("," declaredFormalParameters+=JvmFormalParameter)*)?
 		//	explicitSyntax?="|")? expression=XExpressionInClosure "]";
 		public ParserRule getRule() { return rule; }
 
-		//{XClosure} "[" => ((formalParameters+=JvmFormalParameter ("," formalParameters+=JvmFormalParameter)*)?
+		//{XClosure} "[" => ((declaredFormalParameters+=JvmFormalParameter ("," declaredFormalParameters+=JvmFormalParameter)*)?
 		//explicitSyntax?="|")? expression=XExpressionInClosure "]"
 		public Group getGroup() { return cGroup; }
 
@@ -1196,32 +1196,33 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//"["
 		public Keyword getLeftSquareBracketKeyword_1() { return cLeftSquareBracketKeyword_1; }
 
-		//=> ((formalParameters+=JvmFormalParameter ("," formalParameters+=JvmFormalParameter)*)? explicitSyntax?="|")?
+		//=> ((declaredFormalParameters+=JvmFormalParameter ("," declaredFormalParameters+=JvmFormalParameter)*)?
+		//explicitSyntax?="|")?
 		public Group getGroup_2() { return cGroup_2; }
 
-		//(formalParameters+=JvmFormalParameter ("," formalParameters+=JvmFormalParameter)*)? explicitSyntax?="|"
+		//(declaredFormalParameters+=JvmFormalParameter ("," declaredFormalParameters+=JvmFormalParameter)*)? explicitSyntax?="|"
 		public Group getGroup_2_0() { return cGroup_2_0; }
 
-		//(formalParameters+=JvmFormalParameter ("," formalParameters+=JvmFormalParameter)*)?
+		//(declaredFormalParameters+=JvmFormalParameter ("," declaredFormalParameters+=JvmFormalParameter)*)?
 		public Group getGroup_2_0_0() { return cGroup_2_0_0; }
 
-		//formalParameters+=JvmFormalParameter
-		public Assignment getFormalParametersAssignment_2_0_0_0() { return cFormalParametersAssignment_2_0_0_0; }
+		//declaredFormalParameters+=JvmFormalParameter
+		public Assignment getDeclaredFormalParametersAssignment_2_0_0_0() { return cDeclaredFormalParametersAssignment_2_0_0_0; }
 
 		//JvmFormalParameter
-		public RuleCall getFormalParametersJvmFormalParameterParserRuleCall_2_0_0_0_0() { return cFormalParametersJvmFormalParameterParserRuleCall_2_0_0_0_0; }
+		public RuleCall getDeclaredFormalParametersJvmFormalParameterParserRuleCall_2_0_0_0_0() { return cDeclaredFormalParametersJvmFormalParameterParserRuleCall_2_0_0_0_0; }
 
-		//("," formalParameters+=JvmFormalParameter)*
+		//("," declaredFormalParameters+=JvmFormalParameter)*
 		public Group getGroup_2_0_0_1() { return cGroup_2_0_0_1; }
 
 		//","
 		public Keyword getCommaKeyword_2_0_0_1_0() { return cCommaKeyword_2_0_0_1_0; }
 
-		//formalParameters+=JvmFormalParameter
-		public Assignment getFormalParametersAssignment_2_0_0_1_1() { return cFormalParametersAssignment_2_0_0_1_1; }
+		//declaredFormalParameters+=JvmFormalParameter
+		public Assignment getDeclaredFormalParametersAssignment_2_0_0_1_1() { return cDeclaredFormalParametersAssignment_2_0_0_1_1; }
 
 		//JvmFormalParameter
-		public RuleCall getFormalParametersJvmFormalParameterParserRuleCall_2_0_0_1_1_0() { return cFormalParametersJvmFormalParameterParserRuleCall_2_0_0_1_1_0; }
+		public RuleCall getDeclaredFormalParametersJvmFormalParameterParserRuleCall_2_0_0_1_1_0() { return cDeclaredFormalParametersJvmFormalParameterParserRuleCall_2_0_0_1_1_0; }
 
 		//explicitSyntax?="|"
 		public Assignment getExplicitSyntaxAssignment_2_0_1() { return cExplicitSyntaxAssignment_2_0_1; }
@@ -1278,55 +1279,57 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup_0_0 = (Group)cGroup_0.eContents().get(0);
 		private final Action cXClosureAction_0_0_0 = (Action)cGroup_0_0.eContents().get(0);
 		private final Group cGroup_0_0_1 = (Group)cGroup_0_0.eContents().get(1);
-		private final Assignment cFormalParametersAssignment_0_0_1_0 = (Assignment)cGroup_0_0_1.eContents().get(0);
-		private final RuleCall cFormalParametersJvmFormalParameterParserRuleCall_0_0_1_0_0 = (RuleCall)cFormalParametersAssignment_0_0_1_0.eContents().get(0);
+		private final Assignment cDeclaredFormalParametersAssignment_0_0_1_0 = (Assignment)cGroup_0_0_1.eContents().get(0);
+		private final RuleCall cDeclaredFormalParametersJvmFormalParameterParserRuleCall_0_0_1_0_0 = (RuleCall)cDeclaredFormalParametersAssignment_0_0_1_0.eContents().get(0);
 		private final Group cGroup_0_0_1_1 = (Group)cGroup_0_0_1.eContents().get(1);
 		private final Keyword cCommaKeyword_0_0_1_1_0 = (Keyword)cGroup_0_0_1_1.eContents().get(0);
-		private final Assignment cFormalParametersAssignment_0_0_1_1_1 = (Assignment)cGroup_0_0_1_1.eContents().get(1);
-		private final RuleCall cFormalParametersJvmFormalParameterParserRuleCall_0_0_1_1_1_0 = (RuleCall)cFormalParametersAssignment_0_0_1_1_1.eContents().get(0);
+		private final Assignment cDeclaredFormalParametersAssignment_0_0_1_1_1 = (Assignment)cGroup_0_0_1_1.eContents().get(1);
+		private final RuleCall cDeclaredFormalParametersJvmFormalParameterParserRuleCall_0_0_1_1_1_0 = (RuleCall)cDeclaredFormalParametersAssignment_0_0_1_1_1.eContents().get(0);
 		private final Assignment cExplicitSyntaxAssignment_0_0_2 = (Assignment)cGroup_0_0.eContents().get(2);
 		private final Keyword cExplicitSyntaxVerticalLineKeyword_0_0_2_0 = (Keyword)cExplicitSyntaxAssignment_0_0_2.eContents().get(0);
 		private final Assignment cExpressionAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cExpressionXExpressionParserRuleCall_1_0 = (RuleCall)cExpressionAssignment_1.eContents().get(0);
 		
 		//XShortClosure returns XExpression:
-		//	=> ({XClosure} (formalParameters+=JvmFormalParameter ("," formalParameters+=JvmFormalParameter)*)?
+		//	=> ({XClosure} (declaredFormalParameters+=JvmFormalParameter ("," declaredFormalParameters+=JvmFormalParameter)*)?
 		//	explicitSyntax?="|") expression=XExpression;
 		public ParserRule getRule() { return rule; }
 
-		//=> ({XClosure} (formalParameters+=JvmFormalParameter ("," formalParameters+=JvmFormalParameter)*)? explicitSyntax?="|")
-		//expression=XExpression
+		//=> ({XClosure} (declaredFormalParameters+=JvmFormalParameter ("," declaredFormalParameters+=JvmFormalParameter)*)?
+		//explicitSyntax?="|") expression=XExpression
 		public Group getGroup() { return cGroup; }
 
-		//=> ({XClosure} (formalParameters+=JvmFormalParameter ("," formalParameters+=JvmFormalParameter)*)? explicitSyntax?="|")
+		//=> ({XClosure} (declaredFormalParameters+=JvmFormalParameter ("," declaredFormalParameters+=JvmFormalParameter)*)?
+		//explicitSyntax?="|")
 		public Group getGroup_0() { return cGroup_0; }
 
-		//{XClosure} (formalParameters+=JvmFormalParameter ("," formalParameters+=JvmFormalParameter)*)? explicitSyntax?="|"
+		//{XClosure} (declaredFormalParameters+=JvmFormalParameter ("," declaredFormalParameters+=JvmFormalParameter)*)?
+		//explicitSyntax?="|"
 		public Group getGroup_0_0() { return cGroup_0_0; }
 
 		//{XClosure}
 		public Action getXClosureAction_0_0_0() { return cXClosureAction_0_0_0; }
 
-		//(formalParameters+=JvmFormalParameter ("," formalParameters+=JvmFormalParameter)*)?
+		//(declaredFormalParameters+=JvmFormalParameter ("," declaredFormalParameters+=JvmFormalParameter)*)?
 		public Group getGroup_0_0_1() { return cGroup_0_0_1; }
 
-		//formalParameters+=JvmFormalParameter
-		public Assignment getFormalParametersAssignment_0_0_1_0() { return cFormalParametersAssignment_0_0_1_0; }
+		//declaredFormalParameters+=JvmFormalParameter
+		public Assignment getDeclaredFormalParametersAssignment_0_0_1_0() { return cDeclaredFormalParametersAssignment_0_0_1_0; }
 
 		//JvmFormalParameter
-		public RuleCall getFormalParametersJvmFormalParameterParserRuleCall_0_0_1_0_0() { return cFormalParametersJvmFormalParameterParserRuleCall_0_0_1_0_0; }
+		public RuleCall getDeclaredFormalParametersJvmFormalParameterParserRuleCall_0_0_1_0_0() { return cDeclaredFormalParametersJvmFormalParameterParserRuleCall_0_0_1_0_0; }
 
-		//("," formalParameters+=JvmFormalParameter)*
+		//("," declaredFormalParameters+=JvmFormalParameter)*
 		public Group getGroup_0_0_1_1() { return cGroup_0_0_1_1; }
 
 		//","
 		public Keyword getCommaKeyword_0_0_1_1_0() { return cCommaKeyword_0_0_1_1_0; }
 
-		//formalParameters+=JvmFormalParameter
-		public Assignment getFormalParametersAssignment_0_0_1_1_1() { return cFormalParametersAssignment_0_0_1_1_1; }
+		//declaredFormalParameters+=JvmFormalParameter
+		public Assignment getDeclaredFormalParametersAssignment_0_0_1_1_1() { return cDeclaredFormalParametersAssignment_0_0_1_1_1; }
 
 		//JvmFormalParameter
-		public RuleCall getFormalParametersJvmFormalParameterParserRuleCall_0_0_1_1_1_0() { return cFormalParametersJvmFormalParameterParserRuleCall_0_0_1_1_1_0; }
+		public RuleCall getDeclaredFormalParametersJvmFormalParameterParserRuleCall_0_0_1_1_1_0() { return cDeclaredFormalParametersJvmFormalParameterParserRuleCall_0_0_1_1_1_0; }
 
 		//explicitSyntax?="|"
 		public Assignment getExplicitSyntaxAssignment_0_0_2() { return cExplicitSyntaxAssignment_0_0_2; }
@@ -2875,7 +2878,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XClosure returns XExpression:
-	//	{XClosure} "[" => ((formalParameters+=JvmFormalParameter ("," formalParameters+=JvmFormalParameter)*)?
+	//	{XClosure} "[" => ((declaredFormalParameters+=JvmFormalParameter ("," declaredFormalParameters+=JvmFormalParameter)*)?
 	//	explicitSyntax?="|")? expression=XExpressionInClosure "]";
 	public XClosureElements getXClosureAccess() {
 		return (pXClosure != null) ? pXClosure : (pXClosure = new XClosureElements());
@@ -2896,7 +2899,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XShortClosure returns XExpression:
-	//	=> ({XClosure} (formalParameters+=JvmFormalParameter ("," formalParameters+=JvmFormalParameter)*)?
+	//	=> ({XClosure} (declaredFormalParameters+=JvmFormalParameter ("," declaredFormalParameters+=JvmFormalParameter)*)?
 	//	explicitSyntax?="|") expression=XExpression;
 	public XShortClosureElements getXShortClosureAccess() {
 		return (pXShortClosure != null) ? pXShortClosure : (pXShortClosure = new XShortClosureElements());
