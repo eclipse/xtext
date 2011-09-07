@@ -38,6 +38,8 @@ import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
 /**
+ * A rename participant that triggers further rename refactorings based on {@link RenameProcessor}s.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  */
 public abstract class AbstractProcessorBasedRenameParticipant extends RenameParticipant {
@@ -63,9 +65,9 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 	private List<RenameProcessor> wrappedProcessors;
 
 	@Override
-	protected boolean initialize(Object element) {
+	protected boolean initialize(Object originalTargetElement) {
 		try {
-			wrappedProcessors = getRenameProcessors(element);
+			wrappedProcessors = getRenameProcessors(originalTargetElement);
 			return wrappedProcessors != null;
 		} catch (Exception exc) {
 			status.add(ERROR, "Error initializing refactoring participant.", exc, LOG);
@@ -73,8 +75,8 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 		return false;
 	}
 
-	protected List<RenameProcessor> getRenameProcessors(Object element) {
-		List<? extends IRenameElementContext> participantContexts = createRenameElementContexts(element);
+	protected List<RenameProcessor> getRenameProcessors(Object originalTargetElement) {
+		List<? extends IRenameElementContext> participantContexts = createRenameElementContexts(originalTargetElement);
 		if (participantContexts != null) {
 			List<RenameProcessor> processors = newArrayList();
 			for (IRenameElementContext participantContext : participantContexts) {
@@ -118,7 +120,7 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 	protected void setNewName(RenameProcessor processor, String newName) {
 		((AbstractRenameProcessor) processor).setNewName(newName);
 	}
-	
+
 	@Override
 	public Change createChange(IProgressMonitor pm) throws CoreException, OperationCanceledException {
 		CompositeChange compositeChange = null;
