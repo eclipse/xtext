@@ -17,8 +17,8 @@ import org.eclipse.xtext.ui.refactoring.impl.RenamedElementTracker;
 import com.google.inject.ImplementedBy;
 
 /**
- * Tracks the URIs of the elements whose names change in a refactoring. This is necessary as URIs could change if the
- * language implements a name dependent {@link org.eclipse.xtext.resource.IFragmentProvider}.
+ * Tracks the URIs of the elements whose names change in a rename refactoring. This is necessary as URIs could change if
+ * the language implements a name dependent {@link org.eclipse.xtext.resource.IFragmentProvider}.
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */

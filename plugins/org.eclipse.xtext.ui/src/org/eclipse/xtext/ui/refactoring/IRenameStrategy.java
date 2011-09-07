@@ -38,7 +38,6 @@ public interface IRenameStrategy {
 	
 	/**
 	 * Creates the document updates and reports them to the updateAcceptor
-	 * @since 2.0
 	 */
 	void createDeclarationUpdates(String newName, ResourceSet resourceSet, IRefactoringUpdateAcceptor updateAcceptor);
 
