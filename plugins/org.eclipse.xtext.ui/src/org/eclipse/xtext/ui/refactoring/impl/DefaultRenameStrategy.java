@@ -28,6 +28,7 @@ import org.eclipse.xtext.util.SimpleAttributeResolver;
 import com.google.inject.Inject;
 
 /**
+ * Default rename strategy for Xtext based elements that have an {@link EAttribute} <code>name</code>.
  * @author Jan Koehnlein - Initial contribution and API
  * @author Holger Schill
  */

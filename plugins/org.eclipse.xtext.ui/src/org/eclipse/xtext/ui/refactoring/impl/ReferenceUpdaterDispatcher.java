@@ -31,6 +31,9 @@ import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
 /**
+ * Finds all references to renamed elements and dispatches to the {@link IReferencesUpdater} of the referring languages
+ * to calculate the updates.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class ReferenceUpdaterDispatcher {
@@ -70,8 +73,7 @@ public class ReferenceUpdaterDispatcher {
 	}
 
 	protected ReferenceDescriptionAcceptor createFindReferenceAcceptor(IRefactoringUpdateAcceptor updateAcceptor) {
-		return new ReferenceDescriptionAcceptor(resourceServiceProviderRegistry, 
-				updateAcceptor.getRefactoringStatus());
+		return new ReferenceDescriptionAcceptor(resourceServiceProviderRegistry, updateAcceptor.getRefactoringStatus());
 	}
 
 	public static class ReferenceDescriptionAcceptor implements IAcceptor<IReferenceDescription> {
@@ -104,12 +106,15 @@ public class ReferenceUpdaterDispatcher {
 		}
 
 		protected void handleNoReferenceUpdater(URI sourceResourceURI, StatusWrapper status) {
-			status.add(WARNING, "References from {0} will not be updated as the language has not registered an IReferenceUpdater",
+			status.add(WARNING,
+					"References from {0} will not be updated as the language has not registered an IReferenceUpdater",
 					sourceResourceURI);
 		}
 
-		protected void handleCorruptReferenceDescription(IReferenceDescription referenceDescription, StatusWrapper status) {
-			status.add(ERROR, "Xtext index contains invalid entries. It is suggested to perform a workspace refresh and a clean build.");
+		protected void handleCorruptReferenceDescription(IReferenceDescription referenceDescription,
+				StatusWrapper status) {
+			status.add(ERROR,
+					"Xtext index contains invalid entries. It is suggested to perform a workspace refresh and a clean build.");
 		}
 
 		protected IReferenceUpdater getReferenceUpdater(URI sourceResourceURI) {

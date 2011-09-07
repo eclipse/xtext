@@ -34,11 +34,13 @@ import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
 import com.google.inject.Inject;
 
 /**
+ * Unifies the creation of {@link Change}s from {@link TextEdit}s on {@link IFile}s and {@link IDocument}s.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.Provider {
 
-	@Inject(optional=true)
+	@Inject(optional = true)
 	private IWorkbench workbench;
 
 	@Inject
@@ -46,7 +48,7 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 
 	@Inject
 	private IGlobalServiceProvider globalServiceProvider;
-	
+
 	protected IFileEditorInput getEditorInput(URI resourceURI, StatusWrapper status) {
 		try {
 			IFile file = projectUtil.findFileStorage(resourceURI, true);
@@ -180,8 +182,8 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 					InputStreamReader input = new InputStreamReader(inputStream, charset);
 					final char[] buffer = new char[4096];
 					StringBuilder output = new StringBuilder(4096);
-					int read; 
-					while((read = input.read(buffer, 0, buffer.length)) != -1) {
+					int read;
+					while ((read = input.read(buffer, 0, buffer.length)) != -1) {
 						output.append(buffer, 0, read);
 					}
 					return output.toString();

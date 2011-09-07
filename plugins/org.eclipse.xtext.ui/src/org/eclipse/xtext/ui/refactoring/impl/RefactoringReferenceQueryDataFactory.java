@@ -17,6 +17,8 @@ import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
 import com.google.common.base.Predicate;
 
 /**
+ * Factory for the query to find cross references to renamed elements.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class RefactoringReferenceQueryDataFactory {

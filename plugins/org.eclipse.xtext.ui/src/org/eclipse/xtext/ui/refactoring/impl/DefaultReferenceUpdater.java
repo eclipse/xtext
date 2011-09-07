@@ -6,6 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
+
 import static org.eclipse.ltk.core.refactoring.RefactoringStatus.*;
 
 import java.util.Iterator;
@@ -35,6 +36,8 @@ import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
 /**
+ * Creates updates for all references from Xtext based resources to a renamed element using Xtext's serialization API.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
