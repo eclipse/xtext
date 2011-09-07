@@ -8,7 +8,6 @@
 package org.eclipse.xtext.ui.refactoring.ui;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
 import org.eclipse.ltk.ui.refactoring.RefactoringWizardOpenOperation;
 import org.eclipse.xtext.resource.IGlobalServiceProvider;
@@ -19,6 +18,8 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 /**
+ * {@link IRenameSupport} for Xtext based rename refactorings.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class DefaultRenameSupport implements IRenameSupport {
@@ -31,67 +32,47 @@ public class DefaultRenameSupport implements IRenameSupport {
 		public IRenameSupport create(Object context, String newName) {
 			if (context instanceof IRenameElementContext) {
 				IRenameElementContext renameElementContext = (IRenameElementContext) context;
-				DeclaringLanguageComponentFactory declaringLanguageComponentFactory = getDeclaringLanguageComponentFactory(renameElementContext);
-				ProcessorBasedRefactoring renameRefactoring = declaringLanguageComponentFactory.createRenameRefactoring(renameElementContext);
-				if(renameRefactoring != null)
-					return new DefaultRenameSupport(declaringLanguageComponentFactory,
-						renameElementContext, renameRefactoring, newName);
+				DefaultRenameSupport renameSupport = getDefaultRenameSupport(renameElementContext);
+				if (renameSupport != null && renameSupport.initialize(renameElementContext, newName))
+					return renameSupport;
 			}
 			return null;
 		}
 
-		protected DeclaringLanguageComponentFactory getDeclaringLanguageComponentFactory(
-				IRenameElementContext renameElementContext) {
+		protected DefaultRenameSupport getDefaultRenameSupport(IRenameElementContext renameElementContext) {
 			try {
-				DeclaringLanguageComponentFactory languageComponentFactory = globalServiceProvider.findService(
-						renameElementContext.getTargetElementURI(), DeclaringLanguageComponentFactory.class);
-				return languageComponentFactory;
+				DefaultRenameSupport renameSupport = globalServiceProvider.findService(
+						renameElementContext.getTargetElementURI(), DefaultRenameSupport.class);
+				return renameSupport;
 			} catch (Exception e) {
 				LOG.error("Error getting refactoring components from declaring language", e);
-				throw new WrappedException(e);
 			}
-		}
-	}
-
-	/**
-	 * Factory for components from the language holding the declaration of the renamed element.
-	 * 
-	 * @since 2.0
-	 */
-	protected static class DeclaringLanguageComponentFactory {
-		@Inject(optional = true)
-		private Provider<RenameRefactoringExecuter> renameRefactoringExecuterProvider;
-
-		public RenameRefactoringExecuter createRenameRefactoringExecuter() {
-			return renameRefactoringExecuterProvider.get();
-		}
-
-		@Inject(optional = true)
-		private IRenameRefactoringProvider renameRefactoringProvider;
-
-		public ProcessorBasedRefactoring createRenameRefactoring(IRenameElementContext renameElementContext) {
-			return renameRefactoringProvider != null ? renameRefactoringProvider.getRenameRefactoring(renameElementContext) : null;
-		}
-
-		public boolean hasRefactoring() {
-			return renameRefactoringExecuterProvider != null && renameRefactoringProvider != null;
+			return null;
 		}
 	}
 
 	private static final Logger LOG = Logger.getLogger(DefaultRenameSupport.class);
 
-	private DeclaringLanguageComponentFactory declaringLanguage;
+	@Inject(optional = true)
+	private Provider<RenameRefactoringExecuter> executerProvider;
+
+	@Inject(optional = true)
+	private IRenameRefactoringProvider renameRefactoringProvider;
 
 	private ProcessorBasedRefactoring renameRefactoring;
 
 	private IRenameElementContext renameElementContext;
 
-	protected DefaultRenameSupport(DeclaringLanguageComponentFactory declaringLanguage,
-			IRenameElementContext renameElementContext, ProcessorBasedRefactoring renameRefactoring, String newName) {
-		this.declaringLanguage = declaringLanguage;
-		this.renameElementContext = renameElementContext;
-		this.renameRefactoring = renameRefactoring;
-		((AbstractRenameProcessor)renameRefactoring.getProcessor()).setNewName(newName);
+	protected boolean initialize(IRenameElementContext renameElementContext, String newName) {
+		if (executerProvider != null && renameRefactoringProvider != null) {
+			this.renameRefactoring = renameRefactoringProvider.getRenameRefactoring(renameElementContext);
+			if (renameRefactoring != null && renameRefactoring.getProcessor() instanceof AbstractRenameProcessor) {
+				((AbstractRenameProcessor) renameRefactoring.getProcessor()).setNewName(newName);
+				this.renameElementContext = renameElementContext;
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void startRefactoringWithDialog(final boolean previewOnly) throws InterruptedException {
@@ -111,7 +92,7 @@ public class DefaultRenameSupport implements IRenameSupport {
 	}
 
 	public void startDirectRefactoring() throws InterruptedException {
-		RenameRefactoringExecuter renameRefactoringExecuter = declaringLanguage.createRenameRefactoringExecuter();
+		RenameRefactoringExecuter renameRefactoringExecuter = executerProvider.get();
 		renameRefactoringExecuter.execute(renameElementContext.getTriggeringEditor(), renameRefactoring);
 	}
 
