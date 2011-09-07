@@ -22,6 +22,8 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
+ * Converts {@link URI}s to {@link IFile}s and {@link IProject}s.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class ProjectUtil {

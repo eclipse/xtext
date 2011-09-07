@@ -27,8 +27,8 @@ import com.google.inject.Inject;
  * A generic reference updater for EMF resources referring to Xtext elements.
  * 
  * Uses the resources default serialization mechanism to update resources. This only works if the resource does not have
- * errors. For Xtext-based languages it is far more error tolerant to use a {@link DefaultReferenceUpdater} that only
- * serializes the sections of the document that contain the cross-references.
+ * errors. For Xtext-based languages it is far more fault tolerant to use a {@link DefaultReferenceUpdater} that only
+ * serializes the sections of the document that actually represent cross-references.
  * 
  * @author Jan Koehnlein - Initial contribution and API
  * @author Holger Schill

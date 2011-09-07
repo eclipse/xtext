@@ -9,6 +9,8 @@ package org.eclipse.xtext.ui.refactoring.ui;
 
 
 /**
+ * Common UI facade of JDT and Xtext rename refactorings.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  */
 public interface IRenameSupport {

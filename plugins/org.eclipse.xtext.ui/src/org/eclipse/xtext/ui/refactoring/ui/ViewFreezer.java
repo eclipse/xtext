@@ -19,6 +19,9 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 
 /**
+ * Renders the current editor to a picture that hides the nifty details going on in the documents when the refactoring
+ * changes are applied. Same mechanism as in JDT.
+ * 
  * @author Holger Schill - Initial contribution and API
  */
 public class ViewFreezer {
@@ -63,8 +66,8 @@ public class ViewFreezer {
 			}
 		}
 	}
-	
-	public void release(){
+
+	public void release() {
 		if (label != null)
 			label.dispose();
 		if (image != null)

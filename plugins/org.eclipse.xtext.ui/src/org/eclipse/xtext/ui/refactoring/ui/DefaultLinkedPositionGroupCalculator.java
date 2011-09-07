@@ -58,12 +58,14 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 /**
+ * Calculates the linked positions for simultaneous editing when a refactoring is triggered in linked mode.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class DefaultLinkedPositionGroupCalculator implements ILinkedPositionGroupCalculator {
 
 	private static final Logger LOG = Logger.getLogger(DefaultLinkedPositionGroupCalculator.class);
-	
+
 	@Inject
 	private ProjectUtil projectUtil;
 
@@ -138,7 +140,7 @@ public class DefaultLinkedPositionGroupCalculator implements ILinkedPositionGrou
 				renameStrategy.getOriginalName(), progress.newChild(10));
 		return linkedGroup;
 	}
-	
+
 	protected LinkedPositionGroup createLinkedGroupFromReplaceEdits(List<ReplaceEdit> edits, XtextEditor xtextEditor,
 			final String originalName, SubMonitor progress) {
 		if (edits == null)
@@ -195,17 +197,17 @@ public class DefaultLinkedPositionGroupCalculator implements ILinkedPositionGrou
 		};
 		return ImmutableSortedSet.copyOf(comparator, linkedPositions);
 	}
+
 	public static class LocalResourceRefactoringUpdateAcceptor implements IRefactoringUpdateAcceptor {
 
 		@Inject
-		private IRefactoringDocument.Provider refactoringDocumentProvider; 
+		private IRefactoringDocument.Provider refactoringDocumentProvider;
 
 		@Inject
 		private StatusWrapper status;
 
 		private List<ReplaceEdit> textEdits = newArrayList();
 		private URI localResourceURI;
-
 
 		public void setLocalResourceURI(URI localResourceURI) {
 			this.localResourceURI = localResourceURI;

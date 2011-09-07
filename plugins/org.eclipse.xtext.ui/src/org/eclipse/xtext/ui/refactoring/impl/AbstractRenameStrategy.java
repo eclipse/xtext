@@ -17,6 +17,8 @@ import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.util.Strings;
 
 /**
+ * Base class for all {@link IRenameStrategy} implementations. Performs the declaration updates on a semantic EMF model.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  */
 public abstract class AbstractRenameStrategy implements IRenameStrategy {
@@ -33,7 +35,7 @@ public abstract class AbstractRenameStrategy implements IRenameStrategy {
 		if (Strings.isEmpty(originalName))
 			throw new RefactoringException("Target element does not have a name");
 	}
-	
+
 	public String getOriginalName() {
 		return originalName;
 	}
@@ -52,20 +54,20 @@ public abstract class AbstractRenameStrategy implements IRenameStrategy {
 	}
 
 	public void revertDeclarationChange(ResourceSet resourceSet) {
-		if(targetElementNewURI == null)
+		if (targetElementNewURI == null)
 			return;
 		setName(targetElementNewURI, originalName, resourceSet);
 	}
-	
+
 	protected EObject setName(URI targetElementURI, String newName, ResourceSet resourceSet) {
 		EObject targetElement = resourceSet.getEObject(targetElementURI, false);
-		if(targetElement == null) {
+		if (targetElement == null) {
 			throw new RefactoringException("Target element not loaded.");
 		}
 		targetElement.eSet(getNameAttribute(), newName);
 		return targetElement;
 	}
-	
+
 	protected URI getTargetElementOriginalURI() {
 		return targetElementOriginalURI;
 	}

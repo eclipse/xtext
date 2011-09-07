@@ -23,9 +23,11 @@ import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import com.google.inject.Inject;
 
 /**
+ * Generic rename strategy for EMF resources. For {@link XtextResources} you should rather use the
+ * {@link DefaultRenameStrategy}.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  * @author Holger Schill
- * @since 2.0
  */
 public class EmfResourceRenameStrategy extends AbstractRenameStrategy {
 

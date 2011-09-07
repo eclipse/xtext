@@ -11,8 +11,9 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.xtext.resource.IReferenceDescription;
 
 /**
- * A component to update cross references to elements that are renamed in a refactoring. Clients should rather inherit
- * from {@link org.eclipse.xtext.ui.refactoring.impl.AbstractReferenceUpdater} than implementing this interface directly.
+ * A component to create updates for cross-references to elements that are renamed in a refactoring. Clients should
+ * rather inherit from {@link org.eclipse.xtext.ui.refactoring.impl.AbstractReferenceUpdater} than implementing this
+ * interface directly.
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */

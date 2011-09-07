@@ -17,6 +17,8 @@ import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
 /**
+ * Sorts reference descriptions by project and by resource to allow efficient processing later on.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class ReferenceDescriptionSorter {
