@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring;
 
-import java.util.Collections;
-
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -27,9 +25,4 @@ public interface IDependentElementsCalculator {
 
 	Iterable<URI> getDependentElementURIs(EObject baseElement, IProgressMonitor monitor);
 
-	static class Null implements IDependentElementsCalculator {
-		public Iterable<URI> getDependentElementURIs(EObject baseElement, IProgressMonitor monitor) {
-			return Collections.emptyList();
-		}
-	}
 }

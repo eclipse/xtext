@@ -13,7 +13,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultDependentElementsCalculator;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
 
@@ -47,12 +46,6 @@ public class DependentElementsCalculatorTest extends AbstractXtextTests {
 		assertEquals(2, size(dependentElementURIs));
 		assertTrue(contains(dependentElementURIs, EcoreUtil.getURI(elementB)));
 		assertTrue(contains(dependentElementURIs, EcoreUtil.getURI(elementC)));
-	}
-
-	public void testNullDependentElements() throws Exception {
-		Iterable<URI> dependentElementRenameInfos = get(IDependentElementsCalculator.Null.class)
-				.getDependentElementURIs(elementA, null);
-		assertTrue(isEmpty(dependentElementRenameInfos));
 	}
 
 }
