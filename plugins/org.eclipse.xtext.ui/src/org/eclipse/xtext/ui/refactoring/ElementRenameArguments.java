@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.refactoring;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 
 /**
  * Stores information on an element to be renamed and elements whose names change as a consequence.
@@ -46,10 +45,10 @@ public class ElementRenameArguments {
 		return (newElementURI != null) ? newElementURI : originalElementURI;
 	}
 
-	public void applyDeclarationChange(ResourceSet resourceSet) {
-		renameStrategy.applyDeclarationChange(getNewName(), resourceSet);
+	public IRenameStrategy getRenameStrategy() {
+		return renameStrategy;
 	}
-
+	
 	public String getNewName() {
 		return newName;
 	}
