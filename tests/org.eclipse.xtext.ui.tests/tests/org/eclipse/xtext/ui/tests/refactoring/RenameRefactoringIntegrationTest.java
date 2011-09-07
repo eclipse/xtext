@@ -7,11 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.refactoring;
 
+import static com.google.common.collect.Lists.*;
 import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
 
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -56,9 +58,9 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 	@Inject
 	private Provider<RenameElementProcessor> processorProvider;
 
-	@Inject 
+	@Inject
 	private RefactoringTestLanguageFragmentProvider fragmentProvider;
-	
+
 	private static final String TEST_PROJECT = "refactoring.test";
 	private static final String TEST_FILE0_NAME = TEST_PROJECT + "/" + "File0.refactoringtestlanguage";
 	private static final String TEST_FILE1_NAME = TEST_PROJECT + "/" + "File1.refactoringtestlanguage";
@@ -85,7 +87,7 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 		testFile1 = IResourcesSetupUtil.createFile(TEST_FILE1_NAME, initialModel1);
 		uriB = URI.createPlatformResourceURI(testFile0.getFullPath().toString(), true).appendFragment("B");
 	}
-	
+
 	@Override
 	protected void tearDown() throws Exception {
 		fragmentProvider.setUseNames(false);
@@ -135,12 +137,12 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 		assertEquals(initialModel0, editor0.getDocument().get());
 		assertEquals(initialModel1, editor1.getDocument().get());
 	}
-	
+
 	public void testDirtyEditorRename() throws Exception {
 		XtextEditor editor0 = openEditor(testFile0);
 		XtextEditor editor1 = openEditor(testFile1);
-		new ReplaceEdit(0,0," ").apply(editor0.getDocument());
-		new ReplaceEdit(0,0," ").apply(editor1.getDocument());
+		new ReplaceEdit(0, 0, " ").apply(editor0.getDocument());
+		new ReplaceEdit(0, 0, " ").apply(editor1.getDocument());
 		assertTrue(editor0.isDirty());
 		assertTrue(editor1.isDirty());
 		waitForReconciler(editor0);
@@ -206,6 +208,26 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 		assertEquals(originalContent.replaceAll("#B", "#C"), readFile(referringXmiFile));
 	}
 
+	public void testClusteringReferenceUpdater() throws Exception {
+		List<IFile> referringFiles = newArrayList();
+		for (int i = 0; i < 41; ++i) {
+			createFile(TEST_PROJECT + "/ref" + i + ".refactoringtestlanguage", "foo" + i + " {ref B}");
+		}
+		waitForAutoBuild();
+		doRename();
+		waitForAutoBuild();
+		int i = 0;
+		for (IFile file : referringFiles) {
+			assertEquals("foo" + i++ + " {ref C}", readFile(file));
+		}
+		undoRename();
+		waitForAutoBuild();
+		i = 0;
+		for (IFile file : referringFiles) {
+			assertEquals("foo" + i++ + " {ref B}", readFile(file));
+		}
+	}
+
 	protected void doRename() throws Exception {
 		IResourcesSetupUtil.waitForAutoBuild();
 		final Change change = createChange(uriB, "C");
@@ -231,7 +253,8 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 
 	protected Change createChange(URI targetElementURI, String newName) throws Exception {
 		RenameElementProcessor processor = processorProvider.get();
-		processor.initialize(new IRenameElementContext.Impl(targetElementURI, RefactoringPackage.Literals.ELEMENT, null, null,null));
+		processor.initialize(new IRenameElementContext.Impl(targetElementURI, RefactoringPackage.Literals.ELEMENT,
+				null, null, null));
 		RefactoringStatus initialStatus = processor.checkInitialConditions(new NullProgressMonitor());
 		assertTrue(initialStatus.isOK());
 		processor.setNewName(newName);
@@ -258,7 +281,7 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 			inputStream.close();
 		}
 	}
-	
+
 	protected void waitForReconciler(XtextEditor editor) {
 		editor.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
 			@Override

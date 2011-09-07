@@ -34,6 +34,11 @@ import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
 /**
+ * Abstract base class to update the references to renamed elements.
+ * 
+ * Sorts all references by project and uses a separate resource set for each project to assert proper initialization.
+ * Updates are performed in clusters of 20 (default) referring resources. 
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  * @author Holger Schill
  */
@@ -67,7 +72,7 @@ public abstract class AbstractReferenceUpdater implements IReferenceUpdater {
 	protected void createClusteredReferenceUpdates(ElementRenameArguments elementRenameArguments,
 			Multimap<URI, IReferenceDescription> resource2references, ResourceSet resourceSet,
 			IRefactoringUpdateAcceptor updateAcceptor, StatusWrapper status, IProgressMonitor monitor) {
-		SubMonitor progress = SubMonitor.convert(monitor, resource2references.size() + 1); 
+		SubMonitor progress = SubMonitor.convert(monitor, resource2references.size() + 1);
 		if (loadTargetResources(resourceSet, elementRenameArguments, status, progress.newChild(1))) {
 			Set<Resource> targetResources = newHashSet(resourceSet.getResources());
 			if (getClusterSize() > 0) {
@@ -81,7 +86,7 @@ public abstract class AbstractReferenceUpdater implements IReferenceUpdater {
 						cluster.clear();
 					}
 				}
-				if(!cluster.isEmpty()) {
+				if (!cluster.isEmpty()) {
 					unloadNonTargetResources(resourceSet, targetResources);
 					createReferenceUpdatesForCluster(elementRenameArguments, cluster, resourceSet, updateAcceptor,
 							status, progress.newChild(cluster.size()));
