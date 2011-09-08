@@ -102,11 +102,12 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 				.addTypeToType("org.eclipse.xtext.common.types.util.TypeConformanceComputer",
 						"org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer")
 				.addTypeToType(XtextResource.class.getName(),
-				"org.eclipse.xtext.xbase.resource.XbaseResource")
-				.addTypeToTypeEagerSingleton("org.eclipse.xtext.xbase.validation.JvmTypeReferencesValidator", "org.eclipse.xtext.xbase.validation.JvmTypeReferencesValidator")
+						"org.eclipse.xtext.xbase.resource.XbaseResource")
+				.addTypeToTypeEagerSingleton("org.eclipse.xtext.xbase.validation.JvmTypeReferencesValidator", 
+						"org.eclipse.xtext.xbase.validation.JvmTypeReferencesValidator")
 				// obsolete convenience bindings
 				.addTypeToType("org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider",
-				"org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider");
+						"org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider");
 		if (useInferredJvmModel) {
 			config = config
 				.addTypeToType(ILocationInFileProvider.class.getName(),
@@ -145,7 +146,6 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 						"org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingCalculator")
 				.addTypeToType("org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider", 
 						"org.eclipse.xtext.xbase.ui.hover.XbaseHoverProvider");
-						
 		if (useInferredJvmModel) {
 			// rename refactoring
 			bindFactory = bindFactory
@@ -157,18 +157,12 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelFindRefsQueryDataFactory")
 				.addTypeToType("org.eclipse.xtext.ui.refactoring.IReferenceUpdater",
 						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelReferenceUpdater")
-				.addConfiguredBinding(
-						"org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy.Provider.Delegate",
-						"binder.bind("
-								+ "org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider.class"
-								+ ").annotatedWith("
-								+ "org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy.Provider.Delegate.class"
-								+ ").to(" 
-								+ getJvmRenameStrategyName(grammar, getNaming())+".Provider.class)")
 				.addTypeToType("org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler",
 						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelRenameElementHandler")
 				.addTypeToType("org.eclipse.xtext.common.types.ui.refactoring.participant.JdtRenameParticipant.ContextFactory",
-						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelJdtRenameParticipantContext.ContextFactory");
+						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelJdtRenameParticipantContext.ContextFactory")
+			    .addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameStrategy", 
+			    		getJvmRenameStrategyName(grammar, getNaming()));
 
 		}
 		return bindFactory.getBindings();
