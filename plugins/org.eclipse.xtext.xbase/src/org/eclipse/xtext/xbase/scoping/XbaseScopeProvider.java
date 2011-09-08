@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.scoping;
 
 import static com.google.common.collect.Iterables.*;
+import static com.google.common.collect.Lists.*;
 
 import java.util.List;
 
@@ -21,6 +22,8 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -47,6 +50,7 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
+import org.eclipse.xtext.xbase.jvmmodel.IExpressionContextProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.DefaultJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IValidatedEObjectDescription;
@@ -105,6 +109,9 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	
 	@Inject
 	private TypeReferences typeReferences;
+	
+	@Inject
+	private IExpressionContextProvider expressionContextProvider;
 	
 	public void setFeatureNameProvider(IdentifiableSimpleNameProvider featureNameProvider) {
 		this.featureNameProvider = featureNameProvider;
@@ -334,6 +341,16 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	protected JvmDeclaredType getContextType(EObject call) {
 		if (call == null)
 			return null;
+		if (call instanceof XExpression) {
+			JvmIdentifiableElement element = expressionContextProvider.getAssociatedJvmElement((XExpression) call);
+			if (element != null) {
+				if (element instanceof JvmDeclaredType) {
+					return (JvmDeclaredType) element;
+				} else if (element instanceof JvmMember) {
+					return ((JvmMember) element).getDeclaringType();
+				}
+			}
+		}
 		return EcoreUtil2.getContainerOfType(call, JvmDeclaredType.class);
 	}
 	
@@ -378,7 +395,37 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 				parentScope = createLocalScopeForParameter(((XCatchClause) context).getDeclaredParam(), parentScope);
 			}
 		}
+		if (adaptsToJvmElement(context)) {
+			final JvmIdentifiableElement identifiable = expressionContextProvider.getAssociatedJvmElement((XExpression) context);
+			return createLocalVarScopeForJvmElement(identifiable, parentScope);
+		}
 		return parentScope;
+	}
+
+	protected IScope createLocalVarScopeForJvmElement(JvmIdentifiableElement element, IScope parentScope) {
+		if (element instanceof JvmOperation) {
+			EList<JvmFormalParameter> parameters = ((JvmOperation) element).getParameters();
+			List<LocalVarDescription> descriptions = newArrayList();
+			for (JvmFormalParameter p : parameters) {
+				descriptions.add(new LocalVarDescription(QualifiedName.create(p.getName()), p));
+			}
+			parentScope = new JvmFeatureScope(parentScope, "operation args", descriptions);
+		}
+		if (element instanceof JvmDeclaredType) {
+			parentScope = new JvmFeatureScope(parentScope, "this scope", new LocalVarDescription(THIS, element));
+		}
+		if (element.eContainer() instanceof JvmIdentifiableElement) {
+			return createLocalVarScopeForJvmElement((JvmIdentifiableElement) element.eContainer(), parentScope);
+		} else {
+			return parentScope;
+		}
+	}
+
+	protected boolean adaptsToJvmElement(EObject context) {
+		if (context instanceof XExpression) {
+			return expressionContextProvider.getAssociatedJvmElement((XExpression)context) != null;
+		}
+		return false;
 	}
 
 	protected IScope createLocalVarScopeForSwitchExpression(XSwitchExpression context, IScope parentScope) {
