@@ -79,7 +79,12 @@ public class BestMatchingJvmFeatureScope implements IScope {
 				if (validated instanceof JvmFeatureDescription) {
 					final XExpression implicitReceiver = ((JvmFeatureDescription) validated).getImplicitReceiver();
 					if (implicitReceiver!=null) {
-						featureCall.setImplicitReceiver(EcoreUtil2.clone(implicitReceiver));
+						featureCall.eSetDeliver(false);
+						try {
+							featureCall.setImplicitReceiver(EcoreUtil2.clone(implicitReceiver));
+						} finally {
+							featureCall.eSetDeliver(true);
+						}
 					}
 				}
 			} else if(this.reference == XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR) {

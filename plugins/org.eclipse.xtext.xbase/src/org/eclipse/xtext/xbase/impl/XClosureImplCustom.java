@@ -35,9 +35,14 @@ public class XClosureImplCustom extends XClosureImpl {
 	@Override
 	public JvmFormalParameter getImplicitParameter() {
 		if (super.getImplicitParameter() == null) {
-			JvmFormalParameter parameter = TypesFactory.eINSTANCE.createJvmFormalParameter();
-			parameter.setName(XbaseScopeProvider.IT.toString());
-			super.setImplicitParameter(parameter);
+			eSetDeliver(false);
+			try {
+				JvmFormalParameter parameter = TypesFactory.eINSTANCE.createJvmFormalParameter();
+				parameter.setName(XbaseScopeProvider.IT.toString());
+				super.setImplicitParameter(parameter);
+			} finally {
+				eSetDeliver(true);
+			}
 		}
 		return super.getImplicitParameter();
 	}
