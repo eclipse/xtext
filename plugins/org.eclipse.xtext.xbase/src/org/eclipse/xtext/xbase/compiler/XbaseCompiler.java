@@ -106,7 +106,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			final String name = declareNameInVariableScope(catchClause.getDeclaredParam(), b);
 			b.append(" catch (final ");
 			serialize(type,expr,b);
-			b.append(" ").append(name).append(") { ");
+			b.append(" ").append(name).append(") {");
 			b.increaseIndentation();
 			final boolean canBeReferenced = isReferenced && ! isPrimitiveVoid(catchClause.getExpression());
 			internalToJavaStatement(catchClause.getExpression(), b, canBeReferenced);
@@ -120,8 +120,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 		final XExpression finallyExp = expr.getFinallyExpression();
 		if (finallyExp != null) {
-			b.append(" finally ");
-			b.append("{").increaseIndentation();
+			b.append(" finally {").increaseIndentation();
 			internalToJavaStatement(finallyExp, b, false);
 			b.decreaseIndentation().append("\n}");
 		}
@@ -220,13 +219,13 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	protected void _toJavaStatement(XDoWhileExpression expr, IAppendable b, boolean isReferenced) {
 		b.append("\nBoolean ").append(declareNameInVariableScope(expr, b)).append(";");
-		b.append("\ndo {");
+		b.append("\ndo {").increaseIndentation();
 		internalToJavaStatement(expr.getBody(), b, false);
 		internalToJavaStatement(expr.getPredicate(), b, true);
 		b.append("\n").append(getVarName(expr, b)).append(" = ");
 		internalToJavaExpression(expr.getPredicate(), b);
 		b.append(";");
-		b.append("\n} while(");
+		b.decreaseIndentation().append("\n} while(");
 		b.append(getVarName(expr, b));
 		b.append(");");
 	}
@@ -411,7 +410,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				if (getTypeReferences().is(convertedType, Boolean.TYPE) || getTypeReferences().is(convertedType, Boolean.class)) {
 					internalToJavaExpression(casePart.getCase(), b);
 				} else {
-					b.append(ObjectExtensions.class.getCanonicalName()).append(".operator_equals(").append(variableName).append(",");
+					JvmTypeReference typeRef = getTypeReferences().getTypeForName(ObjectExtensions.class, expr);
+					b.append(typeRef).append(".operator_equals(").append(variableName).append(",");
 					internalToJavaExpression(casePart.getCase(), b);
 					b.append(")");
 				}
