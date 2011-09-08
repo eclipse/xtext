@@ -6,7 +6,6 @@ package org.eclipse.xtext.xtend2.ui.refactoring;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ltk.core.refactoring.resource.RenameResourceChange;
@@ -14,48 +13,18 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
-import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
-import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
-import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.RefactoringException;
-import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
-import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.AbstractJvmModelRenameStrategy;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
-
-import com.google.inject.Inject;
 
 /**
  * Encapsulates the model changes of a rename refactoring.
  */
 @SuppressWarnings("restriction")
 public class Xtend2RenameStrategy extends AbstractJvmModelRenameStrategy {
-
-	public static class Provider extends DefaultRenameStrategy.Provider {
-
-		@Inject
-		private IXtend2JvmAssociations jvmModelAssociations;
-		
-		@Override
-		public IRenameStrategy get(EObject targetElement, IRenameElementContext renameElementContext) {
-			EAttribute nameAttribute = getNameAttribute(targetElement);
-			if(nameAttribute == null)
-				return null;
-			return new Xtend2RenameStrategy(targetElement, nameAttribute, getOriginalNameRegion(targetElement,
-					nameAttribute), getNameRuleName(targetElement, nameAttribute), getValueConverterService(),
-					jvmModelAssociations);
-		}
-	}
-
-	protected Xtend2RenameStrategy(EObject targetElement, EAttribute nameAttribute, ITextRegion originalNameRegion,
-			String nameRuleName, IValueConverterService valueConverterService,
-			IXtend2JvmAssociations jvmModelAssociations) {
-		super(targetElement, nameAttribute, originalNameRegion, nameRuleName, valueConverterService,
-				jvmModelAssociations);
-	}
 
 	@Override
 	public void createDeclarationUpdates(String newName, ResourceSet resourceSet,
