@@ -163,19 +163,19 @@ public class LazyLinkingResource extends XtextResource {
 				try {
 					if (!resolving.add(triple))
 						return handleCyclicResolution(triple);
-					Set<String> unresolveableProxies = getCache().get("UNRESOLVEABLE_PROXIES", this,
-							new Provider<Set<String>>() {
-								public Set<String> get() {
-									return Sets.newHashSet();
-								}
-							});
-					if (unresolveableProxies.contains(uriFragment))
-						return null;
+//					Set<String> unresolveableProxies = getCache().get("UNRESOLVEABLE_PROXIES", this,
+//							new Provider<Set<String>>() {
+//								public Set<String> get() {
+//									return Sets.newHashSet();
+//								}
+//							});
+//					if (unresolveableProxies.contains(uriFragment))
+//						return null;
 					EReference reference = triple.getSecond();
 					List<EObject> linkedObjects = getLinkingService().getLinkedObjects(triple.getFirst(), reference,
 							triple.getThird());
 					if (linkedObjects.isEmpty()) {
-						unresolveableProxies.add(uriFragment);
+//						unresolveableProxies.add(uriFragment);
 						createAndAddDiagnostic(triple);
 						return null;
 					}
@@ -187,11 +187,12 @@ public class LazyLinkingResource extends XtextResource {
 						log.error("An element of type " + result.getClass().getName()
 								+ " is not assignable to the reference " + reference.getEContainingClass().getName()
 								+ "." + reference.getName());
-						unresolveableProxies.add(uriFragment);
+//						unresolveableProxies.add(uriFragment);
 						createAndAddDiagnostic(triple);
 						return null;
 					}
 					// remove previously added error markers, since everything should be fine now
+//					unresolveableProxies.remove(uriFragment);
 					removeDiagnostic(triple);
 					return result;
 				} finally {
