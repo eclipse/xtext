@@ -16,7 +16,7 @@ Alts: LookAhead0 | LookAhead1 | LookAhead3;
 
 LookAhead0: 'bar' x='a';
 
-LookAhead1: 'foo' y=LookAhead2 x='b' x='d';
+LookAhead1: 'foo' y=LookAhead2 x='b' z='d';
 
 LookAhead2: 
 	(z='foo' | z='bar') 'c';
