@@ -131,7 +131,7 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		}
 
 		private boolean isSemanticStateChange(Notification notification) {
-			return !notification.isTouch() && !(notification.getNewValue() instanceof Diagnostic);
+			return !notification.isTouch() && !(notification.getNewValue() instanceof Diagnostic) && !(notification.getOldValue() instanceof Diagnostic);
 		}
 
 		@Override

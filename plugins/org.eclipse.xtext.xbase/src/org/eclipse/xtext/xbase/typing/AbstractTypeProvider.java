@@ -468,6 +468,9 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 			if (computationData.add(t)) {
 				try {
 					if (computationData.resource == t.eResource() && !computationData.resourceLeftOrCyclic) {
+						//TODO fix caching
+						if (Boolean.TRUE)
+							return doComputation(t, rawType);
 						Triple<CyclicHandlingSupport<T>, ImmutableLinkedItem, Boolean> cacheKey = Tuples.create(this, computationData.queryState, rawType);
 						final boolean[] hit = new boolean[] { true };
 						JvmTypeReference result = typeReferenceAwareCache.get(cacheKey, computationData.resource, new Provider<JvmTypeReference>(){
