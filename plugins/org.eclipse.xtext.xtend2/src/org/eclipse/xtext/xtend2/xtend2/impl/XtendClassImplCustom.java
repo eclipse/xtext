@@ -50,12 +50,18 @@ public class XtendClassImplCustom extends XtendClassImpl {
 		return null;
 	}
 	
+	//TODO get rid of me
 	@Override
 	public EList<JvmTypeReference> getSuperTypes() {
 		EList<JvmTypeReference> result = new EObjectEList<JvmTypeReference>(JvmTypeReference.class, this, Xtend2Package.XTEND_CLASS__SUPER_TYPES);
-		if (getExtends()!=null)
-			result.add(getExtends());
-		result.addAll(getImplements());
+		eSetDeliver(false);
+		try {
+			if (getExtends()!=null)
+				result.add(getExtends());
+			result.addAll(getImplements());
+		} finally {
+			eSetDeliver(true);
+		}
 		return result;
 	}
 	
