@@ -19,7 +19,7 @@ import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  * @since 2.1
  */
 public class LiveShadowedResourceDescriptions extends ResourceSetBasedResourceDescriptions {

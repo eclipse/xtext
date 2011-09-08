@@ -26,7 +26,7 @@ import com.google.inject.Inject;
  * The context of the refactoring of an Xtext source element with an inferred JVM element, triggered by the
  * {@link JdtRenameParticipant}.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("restriction")
 public class JvmModelJdtRenameParticipantContext extends IRenameElementContext.Impl {
