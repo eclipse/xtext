@@ -129,7 +129,9 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 			if (element==null) {
 				element = provider.get();
 				boolean rawType = (Boolean) ((Triple<?, ?, ?>) key).getThird();
-				if (element==null || (element instanceof JvmTypeReference && !isResolved((JvmTypeReference) element, null, rawType))) {
+				//TODO the test for 'Void' is a hack and a result of the lack of a protocol for unresolved references 
+				// I.e. some type computations return Void instead when they couldn't compute a certain type.
+				if (element==null || (element instanceof JvmTypeReference && (((JvmTypeReference)element).getIdentifier().contains("Void") || !isResolved((JvmTypeReference) element, null, rawType)))) {
 					if (logger.isDebugEnabled()) {
 						logger.debug(getDebugIndentation(rawType) + "cache skip: " + element);
 					}
@@ -468,9 +470,6 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 			if (computationData.add(t)) {
 				try {
 					if (computationData.resource == t.eResource() && !computationData.resourceLeftOrCyclic) {
-						//TODO fix caching
-						if (Boolean.TRUE)
-							return doComputation(t, rawType);
 						Triple<CyclicHandlingSupport<T>, ImmutableLinkedItem, Boolean> cacheKey = Tuples.create(this, computationData.queryState, rawType);
 						final boolean[] hit = new boolean[] { true };
 						JvmTypeReference result = typeReferenceAwareCache.get(cacheKey, computationData.resource, new Provider<JvmTypeReference>(){
