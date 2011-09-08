@@ -62,8 +62,7 @@ public class EmitterNodeIterator implements Iterator<INode> {
 	}
 
 	protected boolean isAbsorber(INode node) {
-		return GrammarUtil.isAssigned(node.getGrammarElement())
-		/*|| GrammarUtil.isAssignedAction(node.getGrammarElement())*/;
+		return node.getGrammarElement() != null && GrammarUtil.isAssigned(node.getGrammarElement());
 	}
 
 	public INode next() {
