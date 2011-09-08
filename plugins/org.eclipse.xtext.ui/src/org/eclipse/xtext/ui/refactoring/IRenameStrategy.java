@@ -10,39 +10,40 @@ package org.eclipse.xtext.ui.refactoring;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
-import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy;
+import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategyProvider;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 
 import com.google.inject.ImplementedBy;
 
 /**
- * Customizable strategy for the text based rename refactoring of a given {@link EObject}. 
+ * Customizable strategy for the text based rename refactoring of a given {@link EObject}.
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
 public interface IRenameStrategy {
 
 	String getOriginalName();
-	
+
 	RefactoringStatus validateNewName(String newName);
 
 	/**
 	 * Applies the declaration change to the semantic model in the given resource set.
 	 */
 	void applyDeclarationChange(String newName, ResourceSet resourceSet);
-	
+
 	/**
 	 * Reverts the declaration change to the semantic model in the given resource set.
 	 */
 	void revertDeclarationChange(ResourceSet resourceSet);
-	
+
 	/**
 	 * Creates the document updates and reports them to the updateAcceptor
 	 */
 	void createDeclarationUpdates(String newName, ResourceSet resourceSet, IRefactoringUpdateAcceptor updateAcceptor);
 
-	@ImplementedBy(DefaultRenameStrategy.Provider.class)
+	@ImplementedBy(DefaultRenameStrategyProvider.class)
 	interface Provider {
 		IRenameStrategy get(EObject targetEObject, IRenameElementContext renameElementContext);
 	}
+
 }

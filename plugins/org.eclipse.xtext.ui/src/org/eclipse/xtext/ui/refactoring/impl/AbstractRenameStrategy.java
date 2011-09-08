@@ -13,7 +13,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
-import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
+import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
+import org.eclipse.xtext.util.SimpleAttributeResolver;
 import org.eclipse.xtext.util.Strings;
 
 /**
@@ -21,19 +22,20 @@ import org.eclipse.xtext.util.Strings;
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
-public abstract class AbstractRenameStrategy implements IRenameStrategy {
+public abstract class AbstractRenameStrategy implements DefaultRenameStrategyProvider.IInitializable {
 
 	private String originalName;
 	private URI targetElementOriginalURI;
 	private URI targetElementNewURI;
 	private EAttribute nameAttribute;
 
-	protected AbstractRenameStrategy(EObject targetElement, EAttribute nameAttribute) {
-		this.nameAttribute = nameAttribute;
+	public boolean initialize(EObject targetElement, IRenameElementContext context) {
+		this.nameAttribute = getNameAttribute(targetElement);
+		if(nameAttribute == null)
+			return false;
 		this.targetElementOriginalURI = EcoreUtil.getURI(targetElement);
 		this.originalName = targetElement.eGet(nameAttribute).toString();
-		if (Strings.isEmpty(originalName))
-			throw new RefactoringException("Target element does not have a name");
+		return !Strings.isEmpty(originalName);
 	}
 
 	public String getOriginalName() {
@@ -64,7 +66,7 @@ public abstract class AbstractRenameStrategy implements IRenameStrategy {
 		if (targetElement == null) {
 			throw new RefactoringException("Target element not loaded.");
 		}
-		targetElement.eSet(getNameAttribute(), newName);
+		targetElement.eSet(nameAttribute, newName);
 		return targetElement;
 	}
 
@@ -76,6 +78,10 @@ public abstract class AbstractRenameStrategy implements IRenameStrategy {
 		return targetElementNewURI;
 	}
 
+	protected EAttribute getNameAttribute(EObject targetElement) {
+		return SimpleAttributeResolver.NAME_RESOLVER.getAttribute(targetElement);
+	}
+	
 	protected EAttribute getNameAttribute() {
 		return nameAttribute;
 	}

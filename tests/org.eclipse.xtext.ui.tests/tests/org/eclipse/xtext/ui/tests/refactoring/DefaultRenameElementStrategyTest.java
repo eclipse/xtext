@@ -26,9 +26,11 @@ import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.IRefactoringDocument;
 import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
+import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
 
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -45,8 +47,12 @@ public class DefaultRenameElementStrategyTest extends AbstractXtextTests impleme
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(RefactoringTestLanguageStandaloneSetup.class);
 		getInjector().injectMembers(this);
+	}
+	
+	@Override
+	public Injector getInjector() {
+		return Activator.getInstance().getInjector("org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage");
 	}
 	
 	public void testRenameElementStrategy() throws Exception {
@@ -76,17 +82,17 @@ public class DefaultRenameElementStrategyTest extends AbstractXtextTests impleme
 	}
 
 	public void testValueConversion() throws Exception {
-		DefaultRenameStrategy.Provider strategyProvider = new DefaultRenameStrategy.Provider() {
+		DefaultRenameStrategy strategy = new DefaultRenameStrategy() {
 			@Override
 			protected String getNameRuleName(EObject targetElement, EAttribute nameAttribute) {
 				return "STRING";
 			}
 		};
-		getInjector().injectMembers(strategyProvider);
+		getInjector().injectMembers(strategy);
 		final XtextResource resource = getResourceFromString("foo { }");
 		Element targetElement = (Element) resource.getContents().get(0).eContents().get(0);
 		assertEquals("foo", targetElement.getName());
-		IRenameStrategy strategy = strategyProvider.get(targetElement, null);
+		strategy.initialize(targetElement, null);
 		assertEquals("\"foo\"", strategy.getOriginalName());
 		strategy.createDeclarationUpdates("\"bar\"", resource.getResourceSet(), this);
 		assertEquals(1, textEdits.size());

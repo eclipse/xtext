@@ -7,13 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.jvmmodel.refactoring;
 
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy;
-import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+
+import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -21,13 +20,8 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 @SuppressWarnings("restriction")
 public abstract class AbstractJvmModelRenameStrategy extends DefaultRenameStrategy {
 
+	@Inject
 	private IJvmModelAssociations jvmModelAssociations;
-
-	protected AbstractJvmModelRenameStrategy(EObject targetElement, EAttribute nameAttribute, ITextRegion originalNameRegion,
-			String nameRuleName, IValueConverterService valueConverterService, IJvmModelAssociations xtend2jvmAssociations) {
-		super(targetElement, nameAttribute, originalNameRegion, nameRuleName, valueConverterService);
-		this.jvmModelAssociations = xtend2jvmAssociations;
-	}
 
 	@Override
 	public void applyDeclarationChange(String newName, ResourceSet resourceSet) {

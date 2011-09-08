@@ -8,8 +8,10 @@
 package org.eclipse.xtext.ui.refactoring.impl;
 
 import static org.eclipse.ltk.core.refactoring.RefactoringStatus.*;
+
 import java.io.IOException;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -17,8 +19,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
-import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
-import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 
 import com.google.inject.Inject;
 
@@ -31,26 +31,9 @@ import com.google.inject.Inject;
  */
 public class EmfResourceRenameStrategy extends AbstractRenameStrategy {
 
-	public static class Provider implements IRenameStrategy.Provider {
-
-		@Inject
-		private EmfResourceChangeUtil changeUtil;
-
-		public IRenameStrategy get(EObject targetEObject, IRenameElementContext renameElementContext) {
-			if (targetEObject instanceof ENamedElement)
-				return new EmfResourceRenameStrategy((ENamedElement) targetEObject, changeUtil);
-			else
-				return null;
-		}
-	}
-
+	@Inject
 	private EmfResourceChangeUtil changeUtil;
-
-	protected EmfResourceRenameStrategy(ENamedElement targetEObject, EmfResourceChangeUtil changeUtil) {
-		super(targetEObject, EcorePackage.Literals.ENAMED_ELEMENT__NAME);
-		this.changeUtil = changeUtil;
-	}
-
+	
 	public void createDeclarationUpdates(String newName, ResourceSet resourceSet,
 			IRefactoringUpdateAcceptor updateAcceptor) {
 		Resource targetResource = resourceSet.getResource(getTargetElementOriginalURI().trimFragment(), false);
@@ -61,5 +44,13 @@ public class EmfResourceRenameStrategy extends AbstractRenameStrategy {
 		} catch (IOException exc) {
 			updateAcceptor.getRefactoringStatus().add(ERROR, exc.getMessage());
 		}
+	}
+	
+	@Override
+	protected EAttribute getNameAttribute(EObject targetElement) {
+		if (targetElement instanceof ENamedElement) {
+			return EcorePackage.Literals.ENAMED_ELEMENT__NAME;
+		}
+		return null;
 	}
 }

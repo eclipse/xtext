@@ -19,10 +19,12 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.IRenamedElementTracker;
 import org.eclipse.xtext.ui.refactoring.impl.RenamedElementTracker;
+import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
 import org.eclipse.xtext.ui.tests.refactoring.resource.RefactoringTestLanguageFragmentProvider;
 
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -36,9 +38,13 @@ public class RenamedElementTrackerTest extends AbstractXtextTests {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(RefactoringTestLanguageStandaloneSetup.class);
 		getInjector().injectMembers(this);
 		fragmentProvider.setUseNames(true);
+	}
+	
+	@Override
+	public Injector getInjector() {
+		return Activator.getInstance().getInjector("org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage");
 	}
 
 	public void testResolveElements() throws Exception {
@@ -54,7 +60,7 @@ public class RenamedElementTrackerTest extends AbstractXtextTests {
 		String newName = "newB";
 
 		List<URI> renamedElementURIs = newArrayList(uriB, uriC);
-		IRenameStrategy renameStrategy = get(IRenameStrategy.Provider.class).get(elementB, null);
+		IRenameStrategy renameStrategy = getInjector().getInstance(IRenameStrategy.Provider.class).get(elementB, null);
 
 		IRenamedElementTracker renamedElementTracker = new RenamedElementTracker();
 		Map<URI, URI> original2newElementURIs = renamedElementTracker.renameAndTrack(renamedElementURIs, newName,

@@ -20,10 +20,8 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
-import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.util.ITextRegion;
-import org.eclipse.xtext.util.SimpleAttributeResolver;
 
 import com.google.inject.Inject;
 
@@ -35,60 +33,36 @@ import com.google.inject.Inject;
  */
 public class DefaultRenameStrategy extends AbstractRenameStrategy {
 
-	public static class Provider implements IRenameStrategy.Provider {
+	@Inject
+	private ILocationInFileProvider locationInFileProvider;
 
-		@Inject
-		private ILocationInFileProvider locationInFileProvider;
-
-		@Inject
-		private IValueConverterService valueConverterService;
-
-		public IRenameStrategy get(final EObject targetElement, IRenameElementContext renameElementContext) {
-			EAttribute nameAttribute = getNameAttribute(targetElement);
-			if (nameAttribute == null)
-				return null;
-			return new DefaultRenameStrategy(targetElement, nameAttribute, getOriginalNameRegion(targetElement,
-					nameAttribute), getNameRuleName(targetElement, nameAttribute), getValueConverterService());
-		}
-
-		protected ITextRegion getOriginalNameRegion(final EObject targetElement, EAttribute nameAttribute) {
-			return getLocationInFileProvider().getFullTextRegion(targetElement, nameAttribute, 0);
-		}
-
-		protected ILocationInFileProvider getLocationInFileProvider() {
-			return locationInFileProvider;
-		}
-
-		protected IValueConverterService getValueConverterService() {
-			return valueConverterService;
-		}
-
-		protected EAttribute getNameAttribute(EObject targetElement) {
-			return SimpleAttributeResolver.NAME_RESOLVER.getAttribute(targetElement);
-		}
-
-		protected String getNameRuleName(EObject targetElement, EAttribute nameAttribute) {
-			List<INode> nameNodes = NodeModelUtils.findNodesForFeature(targetElement, nameAttribute);
-			if (nameNodes.size() != 1 || !(nameNodes.get(0).getGrammarElement() instanceof RuleCall)) {
-				return null;
-			}
-			return ((RuleCall) nameNodes.get(0).getGrammarElement()).getRule().getName();
-		}
-
-	}
+	@Inject
+	private IValueConverterService valueConverterService;
 
 	protected ITextRegion originalNameRegion;
 
 	protected String nameRuleName;
 
-	protected IValueConverterService valueConverterService;
-	
-	protected DefaultRenameStrategy(EObject targetElement, EAttribute nameAttribute, ITextRegion originalNameRegion,
-			String nameRuleName, IValueConverterService valueConverterService) {
-		super(targetElement, nameAttribute);
-		this.originalNameRegion = originalNameRegion;
-		this.nameRuleName = nameRuleName;
-		this.valueConverterService = valueConverterService;
+	@Override
+	public boolean initialize(EObject targetElement, IRenameElementContext context) {
+		if (super.initialize(targetElement, context)) {
+			this.originalNameRegion = getOriginalNameRegion(targetElement, getNameAttribute());
+			this.nameRuleName = getNameRuleName(targetElement, getNameAttribute());
+			return true;
+		}
+		return false;
+	}
+
+	protected ITextRegion getOriginalNameRegion(final EObject targetElement, EAttribute nameAttribute) {
+		return locationInFileProvider.getFullTextRegion(targetElement, nameAttribute, 0);
+	}
+
+	protected String getNameRuleName(EObject targetElement, EAttribute nameAttribute) {
+		List<INode> nameNodes = NodeModelUtils.findNodesForFeature(targetElement, nameAttribute);
+		if (nameNodes.size() != 1 || !(nameNodes.get(0).getGrammarElement() instanceof RuleCall)) {
+			return null;
+		}
+		return ((RuleCall) nameNodes.get(0).getGrammarElement()).getRule().getName();
 	}
 
 	public void createDeclarationUpdates(String newName, ResourceSet resourceSet,
@@ -104,11 +78,12 @@ public class DefaultRenameStrategy extends AbstractRenameStrategy {
 	protected String getNameAsText(String nameAsValue) {
 		return (nameRuleName != null) ? valueConverterService.toString(nameAsValue, nameRuleName) : nameAsValue;
 	}
-	
+
 	protected String getNameAsValue(String nameAsText) {
-		return (nameRuleName != null) ? valueConverterService.toValue(nameAsText, nameRuleName, null).toString() : nameAsText;
+		return (nameRuleName != null) ? valueConverterService.toValue(nameAsText, nameRuleName, null).toString()
+				: nameAsText;
 	}
-	
+
 	@Override
 	public String getOriginalName() {
 		return getNameAsText(super.getOriginalName());
@@ -118,4 +93,5 @@ public class DefaultRenameStrategy extends AbstractRenameStrategy {
 	public void applyDeclarationChange(String newName, ResourceSet resourceSet) {
 		super.applyDeclarationChange(getNameAsValue(newName), resourceSet);
 	}
+
 }
