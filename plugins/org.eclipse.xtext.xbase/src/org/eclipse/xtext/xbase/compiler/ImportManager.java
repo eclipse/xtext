@@ -52,6 +52,12 @@ public class ImportManager {
 		this.seedSimpleName = seedSimpleName;
 	}
 	
+	public CharSequence serialize(JvmTypeReference typeRef) {
+		StringBuilder sb = new StringBuilder();
+		appendTypeRef(typeRef, sb);
+		return sb;
+	}
+	
 	public void appendTypeRef(JvmTypeReference typeRef, StringBuilder builder) {
 		if (typeRef instanceof JvmParameterizedTypeReference) {
 			final JvmType type = typeRef.getType();
