@@ -73,29 +73,6 @@ import com.google.inject.Inject;
 @SuppressWarnings("restriction")
 public class «getJvmRenameStrategyName().toSimpleName()» extends AbstractJvmModelRenameStrategy {
 
-	public static class Provider extends DefaultRenameStrategy.Provider {
-
-		@Inject
-		private IJvmModelAssociations jvmModelAssociations;
-
-		@Override
-		public IRenameStrategy get(EObject targetElement, IRenameElementContext renameElementContext) {
-			EAttribute nameAttribute = getNameAttribute(targetElement);
-			if(nameAttribute == null)
-				return null;
-			return new «getJvmRenameStrategyName().toSimpleName()»(targetElement, nameAttribute, getOriginalNameRegion(targetElement,
-					nameAttribute), getNameRuleName(targetElement, nameAttribute), getValueConverterService(),
-					jvmModelAssociations);
-		}
-	}
-	
-	protected «getJvmRenameStrategyName().toSimpleName()»(EObject targetElement, EAttribute nameAttribute, ITextRegion originalNameRegion,
-			String nameRuleName, IValueConverterService valueConverterService,
-			IJvmModelAssociations jvmModelAssociations) {
-		super(targetElement, nameAttribute, originalNameRegion, nameRuleName, valueConverterService,
-				jvmModelAssociations);
-	}
-
 	@Override
 	protected void setInferredJvmElementName(String name, EObject renamedSourceElement) {
 		/*

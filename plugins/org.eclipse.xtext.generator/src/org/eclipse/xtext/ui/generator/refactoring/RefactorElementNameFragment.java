@@ -29,6 +29,8 @@ public class RefactorElementNameFragment extends AbstractGeneratorFragment {
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		BindFactory bindFactory = new BindFactory();
 		bindFactory
+			.addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameStrategy", 
+					"org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy")
 			.addTypeToType("org.eclipse.xtext.ui.refactoring.IReferenceUpdater", 
 					"org.eclipse.xtext.ui.refactoring.impl.DefaultReferenceUpdater");
 		if (!useJdtRefactoring)
@@ -50,6 +52,14 @@ public class RefactorElementNameFragment extends AbstractGeneratorFragment {
 							"org.eclipse.xtext.common.types.ui.refactoring.JdtAwareRenameSupportFactory")
 					.addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider",
 							"org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy.Provider")
+					.addConfiguredBinding(
+							"org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy.Provider.Delegate",
+							"binder.bind("
+								+ "org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider.class"
+								+ ").annotatedWith("
+								+ "org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy.Provider.Delegate.class"
+								+ ").to(" 
+								+ "org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategyProvider.class)")
 					.getBindings();
 	}
 }
