@@ -25,6 +25,7 @@ import org.eclipse.xtext.testlanguages.lookaheadLang.LookaheadLangPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookAhead1Impl#getY <em>Y</em>}</li>
+ *   <li>{@link org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookAhead1Impl#getZ <em>Z</em>}</li>
  * </ul>
  * </p>
  *
@@ -41,6 +42,26 @@ public class LookAhead1Impl extends AltsImpl implements LookAhead1
    * @ordered
    */
   protected LookAhead2 y;
+
+  /**
+   * The default value of the '{@link #getZ() <em>Z</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getZ()
+   * @generated
+   * @ordered
+   */
+  protected static final String Z_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getZ() <em>Z</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getZ()
+   * @generated
+   * @ordered
+   */
+  protected String z = Z_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -116,6 +137,29 @@ public class LookAhead1Impl extends AltsImpl implements LookAhead1
    * <!-- end-user-doc -->
    * @generated
    */
+  public String getZ()
+  {
+    return z;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setZ(String newZ)
+  {
+    String oldZ = z;
+    z = newZ;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, LookaheadLangPackage.LOOK_AHEAD1__Z, oldZ, z));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -139,6 +183,8 @@ public class LookAhead1Impl extends AltsImpl implements LookAhead1
     {
       case LookaheadLangPackage.LOOK_AHEAD1__Y:
         return getY();
+      case LookaheadLangPackage.LOOK_AHEAD1__Z:
+        return getZ();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -155,6 +201,9 @@ public class LookAhead1Impl extends AltsImpl implements LookAhead1
     {
       case LookaheadLangPackage.LOOK_AHEAD1__Y:
         setY((LookAhead2)newValue);
+        return;
+      case LookaheadLangPackage.LOOK_AHEAD1__Z:
+        setZ((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -173,6 +222,9 @@ public class LookAhead1Impl extends AltsImpl implements LookAhead1
       case LookaheadLangPackage.LOOK_AHEAD1__Y:
         setY((LookAhead2)null);
         return;
+      case LookaheadLangPackage.LOOK_AHEAD1__Z:
+        setZ(Z_EDEFAULT);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -189,8 +241,27 @@ public class LookAhead1Impl extends AltsImpl implements LookAhead1
     {
       case LookaheadLangPackage.LOOK_AHEAD1__Y:
         return y != null;
+      case LookaheadLangPackage.LOOK_AHEAD1__Z:
+        return Z_EDEFAULT == null ? z != null : !Z_EDEFAULT.equals(z);
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (z: ");
+    result.append(z);
+    result.append(')');
+    return result.toString();
   }
 
 } //LookAhead1Impl

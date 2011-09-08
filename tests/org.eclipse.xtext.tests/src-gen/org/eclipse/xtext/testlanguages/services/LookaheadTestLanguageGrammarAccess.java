@@ -89,14 +89,14 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cYLookAhead2ParserRuleCall_1_0 = (RuleCall)cYAssignment_1.eContents().get(0);
 		private final Assignment cXAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final Keyword cXBKeyword_2_0 = (Keyword)cXAssignment_2.eContents().get(0);
-		private final Assignment cXAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final Keyword cXDKeyword_3_0 = (Keyword)cXAssignment_3.eContents().get(0);
+		private final Assignment cZAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final Keyword cZDKeyword_3_0 = (Keyword)cZAssignment_3.eContents().get(0);
 		
 		//LookAhead1:
-		//	"foo" y=LookAhead2 x="b" x="d";
+		//	"foo" y=LookAhead2 x="b" z="d";
 		public ParserRule getRule() { return rule; }
 
-		//"foo" y=LookAhead2 x="b" x="d"
+		//"foo" y=LookAhead2 x="b" z="d"
 		public Group getGroup() { return cGroup; }
 
 		//"foo"
@@ -114,11 +114,11 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"b"
 		public Keyword getXBKeyword_2_0() { return cXBKeyword_2_0; }
 
-		//x="d"
-		public Assignment getXAssignment_3() { return cXAssignment_3; }
+		//z="d"
+		public Assignment getZAssignment_3() { return cZAssignment_3; }
 
 		//"d"
-		public Keyword getXDKeyword_3_0() { return cXDKeyword_3_0; }
+		public Keyword getZDKeyword_3_0() { return cZDKeyword_3_0; }
 	}
 
 	public class LookAhead2Elements extends AbstractParserRuleElementFinder {
@@ -282,7 +282,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//LookAhead1:
-	//	"foo" y=LookAhead2 x="b" x="d";
+	//	"foo" y=LookAhead2 x="b" z="d";
 	public LookAhead1Elements getLookAhead1Access() {
 		return (pLookAhead1 != null) ? pLookAhead1 : (pLookAhead1 = new LookAhead1Elements());
 	}

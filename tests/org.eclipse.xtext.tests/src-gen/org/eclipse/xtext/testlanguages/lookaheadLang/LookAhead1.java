@@ -15,6 +15,7 @@ package org.eclipse.xtext.testlanguages.lookaheadLang;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.lookaheadLang.LookAhead1#getY <em>Y</em>}</li>
+ *   <li>{@link org.eclipse.xtext.testlanguages.lookaheadLang.LookAhead1#getZ <em>Z</em>}</li>
  * </ul>
  * </p>
  *
@@ -49,5 +50,31 @@ public interface LookAhead1 extends Alts
    * @generated
    */
   void setY(LookAhead2 value);
+
+  /**
+   * Returns the value of the '<em><b>Z</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Z</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Z</em>' attribute.
+   * @see #setZ(String)
+   * @see org.eclipse.xtext.testlanguages.lookaheadLang.LookaheadLangPackage#getLookAhead1_Z()
+   * @model
+   * @generated
+   */
+  String getZ();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.testlanguages.lookaheadLang.LookAhead1#getZ <em>Z</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Z</em>' attribute.
+   * @see #getZ()
+   * @generated
+   */
+  void setZ(String value);
 
 } // LookAhead1

@@ -18,6 +18,7 @@
     <genClasses ecoreClass="LookaheadTestLanguage.ecore#//LookAhead0"/>
     <genClasses ecoreClass="LookaheadTestLanguage.ecore#//LookAhead1">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LookaheadTestLanguage.ecore#//LookAhead1/y"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LookaheadTestLanguage.ecore#//LookAhead1/z"/>
     </genClasses>
     <genClasses ecoreClass="LookaheadTestLanguage.ecore#//LookAhead2">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LookaheadTestLanguage.ecore#//LookAhead2/z"/>

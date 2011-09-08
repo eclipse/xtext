@@ -45,7 +45,7 @@
         <elements xsi:type="xtext:Assignment" feature="x" operator="=">
           <terminal xsi:type="xtext:Keyword" value="b"/>
         </elements>
-        <elements xsi:type="xtext:Assignment" feature="x" operator="=">
+        <elements xsi:type="xtext:Assignment" feature="z" operator="=">
           <terminal xsi:type="xtext:Keyword" value="d"/>
         </elements>
       </alternatives>

@@ -14,6 +14,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="LookAhead1" eSuperTypes="#//Alts">
     <eStructuralFeatures xsi:type="ecore:EReference" name="y" eType="#//LookAhead2"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="z" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LookAhead2">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="z" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>

@@ -126,14 +126,28 @@ public class AbstractLookaheadTestLanguageSemanticSequencer extends AbstractSema
 	
 	/**
 	 * Constraint:
-	 *     (y=LookAhead2 x='b' x='d')
+	 *     (y=LookAhead2 x='b' z='d')
 	 *
 	 * Features:
-	 *    x[2, 2]
+	 *    x[1, 1]
 	 *    y[1, 1]
+	 *    z[1, 1]
 	 */
 	protected void sequence_LookAhead1(EObject context, LookAhead1 semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, LookaheadLangPackage.Literals.ALTS__X) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LookaheadLangPackage.Literals.ALTS__X));
+			if(transientValues.isValueTransient(semanticObject, LookaheadLangPackage.Literals.LOOK_AHEAD1__Y) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LookaheadLangPackage.Literals.LOOK_AHEAD1__Y));
+			if(transientValues.isValueTransient(semanticObject, LookaheadLangPackage.Literals.LOOK_AHEAD1__Z) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LookaheadLangPackage.Literals.LOOK_AHEAD1__Z));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getLookAhead1Access().getYLookAhead2ParserRuleCall_1_0(), semanticObject.getY());
+		feeder.accept(grammarAccess.getLookAhead1Access().getXBKeyword_2_0(), semanticObject.getX());
+		feeder.accept(grammarAccess.getLookAhead1Access().getZDKeyword_3_0(), semanticObject.getZ());
+		feeder.finish();
 	}
 	
 	

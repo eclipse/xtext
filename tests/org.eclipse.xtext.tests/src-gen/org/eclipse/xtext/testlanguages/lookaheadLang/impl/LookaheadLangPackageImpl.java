@@ -221,6 +221,16 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getLookAhead1_Z()
+  {
+    return (EAttribute)lookAhead1EClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getLookAhead2()
   {
     return lookAhead2EClass;
@@ -316,6 +326,7 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
 
     lookAhead1EClass = createEClass(LOOK_AHEAD1);
     createEReference(lookAhead1EClass, LOOK_AHEAD1__Y);
+    createEAttribute(lookAhead1EClass, LOOK_AHEAD1__Z);
 
     lookAhead2EClass = createEClass(LOOK_AHEAD2);
     createEAttribute(lookAhead2EClass, LOOK_AHEAD2__Z);
@@ -374,6 +385,7 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
 
     initEClass(lookAhead1EClass, LookAhead1.class, "LookAhead1", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getLookAhead1_Y(), this.getLookAhead2(), null, "y", null, 0, 1, LookAhead1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLookAhead1_Z(), theEcorePackage.getEString(), "z", null, 0, 1, LookAhead1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(lookAhead2EClass, LookAhead2.class, "LookAhead2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getLookAhead2_Z(), theEcorePackage.getEString(), "z", null, 0, 1, LookAhead2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

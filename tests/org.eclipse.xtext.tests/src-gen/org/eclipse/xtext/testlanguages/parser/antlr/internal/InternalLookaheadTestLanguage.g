@@ -245,16 +245,16 @@ ruleLookAhead1 returns [EObject current=null]
 )
 )(
 (
-		lv_x_3_0=	'd' 
+		lv_z_3_0=	'd' 
     {
-        newLeafNode(lv_x_3_0, grammarAccess.getLookAhead1Access().getXDKeyword_3_0());
+        newLeafNode(lv_z_3_0, grammarAccess.getLookAhead1Access().getZDKeyword_3_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getLookAhead1Rule());
 	        }
-       		setWithLastConsumed($current, "x", lv_x_3_0, "d");
+       		setWithLastConsumed($current, "z", lv_z_3_0, "d");
 	    }
 
 )
