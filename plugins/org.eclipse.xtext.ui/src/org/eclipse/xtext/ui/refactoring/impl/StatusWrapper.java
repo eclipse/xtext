@@ -34,7 +34,7 @@ import com.ibm.icu.text.MessageFormat;
 /**
  * Convenience class to create refactoring issues with an {@link RefactoringStatusContext}. 
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class StatusWrapper {
 

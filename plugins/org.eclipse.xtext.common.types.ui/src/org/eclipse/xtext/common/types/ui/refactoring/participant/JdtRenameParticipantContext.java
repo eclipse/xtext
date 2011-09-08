@@ -15,7 +15,7 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("restriction")
 public class JdtRenameParticipantContext extends IRenameElementContext.Impl {
