@@ -73,6 +73,8 @@ public class GrammarElementTitleSwitch extends XtextSwitch<String> implements Fu
 
 	protected boolean showQualified = false;
 
+	protected String valueForNull = "(null)";
+
 	protected String addAssignemnt(String result, AbstractElement ele) {
 		if (!showAssignment)
 			return result;
@@ -216,12 +218,17 @@ public class GrammarElementTitleSwitch extends XtextSwitch<String> implements Fu
 	@Override
 	public String doSwitch(EObject theEObject) {
 		if (theEObject == null)
-			return "(null)";
+			return valueForNull;
 		return super.doSwitch(theEObject);
 	}
 
 	public GrammarElementTitleSwitch hideCardinality() {
 		showCardinality = false;
+		return this;
+	}
+
+	public GrammarElementTitleSwitch setValueForNull(String value) {
+		valueForNull = value;
 		return this;
 	}
 

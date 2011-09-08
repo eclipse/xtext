@@ -23,6 +23,7 @@ import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintContext;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.ISemState;
+import org.eclipse.xtext.serializer.sequencer.BacktrackingSemanticSequencer.SerializableObject;
 import org.eclipse.xtext.serializer.sequencer.IContextFinder;
 import org.eclipse.xtext.util.formallang.GrammarStringFactory;
 import org.eclipse.xtext.util.formallang.Nfa;
@@ -39,6 +40,15 @@ import com.google.inject.Inject;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnosticProvider {
+
+	/**
+	 * @author meysholdt - Initial contribution and API
+	 */
+	private final class GetGrammarEle implements Function<ISemState, AbstractElement> {
+		public AbstractElement apply(ISemState from) {
+			return from.getAssignedGrammarElement();
+		}
+	}
 
 	public static class NamedElement2Name implements Function<ENamedElement, String> {
 
@@ -111,17 +121,16 @@ public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnostic
 		return Collections.emptyList();
 	}
 
-	public ISerializationDiagnostic createBacktrackingFailedDiagnostic(EObject semanticObject, EObject context,
-			Nfa<ISemState> nfa) {
-		String grammar = new NfaToGrammar().nfaToGrammar(nfa, new Function<ISemState, AbstractElement>() {
-			public AbstractElement apply(ISemState from) {
-				return from.getAssignedGrammarElement();
-			}
-		}, new GrammarStringFactory<AbstractElement>(new GrammarElementTitleSwitch().showAssignments()));
+	public ISerializationDiagnostic createBacktrackingFailedDiagnostic(SerializableObject semanticObject,
+			EObject context, Nfa<ISemState> nfa) {
+		GrammarElementTitleSwitch ele2str = new GrammarElementTitleSwitch().showAssignments().setValueForNull(null);
+		GrammarStringFactory<AbstractElement> grammarFactory = new GrammarStringFactory<AbstractElement>(ele2str);
+		String grammar = new NfaToGrammar().nfaToGrammar(nfa, new GetGrammarEle(), grammarFactory);
 		StringBuilder msg = new StringBuilder();
 		msg.append("Could not serialize EObject via backtracking.\n");
-		msg.append("Constraint: " + grammar);
-		return new SerializationDiagnostic(BACKTRACKING_FAILED, semanticObject, context, msg.toString());
+		msg.append("Constraint: " + grammar + "\n");
+		msg.append(semanticObject.getValuesString());
+		return new SerializationDiagnostic(BACKTRACKING_FAILED, semanticObject.getEObject(), context, msg.toString());
 	}
 
 }

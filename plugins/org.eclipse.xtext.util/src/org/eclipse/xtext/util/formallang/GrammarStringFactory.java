@@ -11,6 +11,9 @@ import java.util.Collections;
 import java.util.List;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 import com.google.inject.internal.Join;
 import com.google.inject.internal.Lists;
 
@@ -34,12 +37,13 @@ public class GrammarStringFactory<TOKEN> implements IGrammarFactory<String, TOKE
 	}
 
 	public String createForAlternativeChildren(boolean many, boolean optional, Iterable<String> children) {
-		List<String> childrenSorted = Lists.newArrayList(children);
+		List<String> childrenSorted = Lists.newArrayList(Iterables.filter(children, Predicates.notNull()));
 		Collections.sort(childrenSorted);
 		return "(" + Join.join(" | ", childrenSorted) + ")" + card(many, optional);
 	}
 
 	public String createForSequentialChildren(boolean many, boolean optional, Iterable<String> children) {
+		children = Iterables.filter(children, Predicates.notNull());
 		if (many || optional)
 			return "(" + Join.join(" ", children) + ")" + card(many, optional);
 		return Join.join(" ", children) + card(many, optional);
@@ -54,7 +58,7 @@ public class GrammarStringFactory<TOKEN> implements IGrammarFactory<String, TOKE
 	}
 
 	public String createForUnordertedChildren(boolean many, boolean optional, Iterable<String> children) {
-		List<String> childrenSorted = Lists.newArrayList(children);
+		List<String> childrenSorted = Lists.newArrayList(Iterables.filter(children, Predicates.notNull()));
 		Collections.sort(childrenSorted);
 		return "(" + Join.join(" & ", childrenSorted) + ")" + card(many, optional);
 	}
