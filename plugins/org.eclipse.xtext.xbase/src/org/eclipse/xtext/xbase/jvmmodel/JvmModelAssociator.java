@@ -17,6 +17,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.IResourceScopeCache;
 
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.LinkedListMultimap;
+import com.google.common.collect.ListMultimap;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -29,21 +31,21 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 	@Inject
 	private IResourceScopeCache cache;
 	
-	protected ArrayListMultimap<EObject, EObject> sourceToTargetMap(EObject ctx) {
-		return cache.get("jvm-associations", ctx.eResource(), new Provider<ArrayListMultimap<EObject,EObject>>() {
-			public ArrayListMultimap<EObject, EObject> get() {
-				return ArrayListMultimap.create();
+	protected ListMultimap<EObject, EObject> sourceToTargetMap(EObject ctx) {
+		return cache.get("jvm-associations", ctx.eResource(), new Provider<ListMultimap<EObject,EObject>>() {
+			public ListMultimap<EObject, EObject> get() {
+				return LinkedListMultimap.create();
 			}
 		});
 	}
 	
 	public void associate(EObject sourceElement, EObject jvmElement) {
-		ArrayListMultimap<EObject, EObject> map = sourceToTargetMap(sourceElement);
+		ListMultimap<EObject, EObject> map = sourceToTargetMap(sourceElement);
 		map.put(sourceElement, jvmElement);
 	}
 
 	public void associatePrimary(EObject sourceElement, EObject jvmElement) {
-		ArrayListMultimap<EObject, EObject> map = sourceToTargetMap(sourceElement);
+		ListMultimap<EObject, EObject> map = sourceToTargetMap(sourceElement);
 		if (map.containsKey(sourceElement)) {
 			map.get(sourceElement).add(0, jvmElement);
 		} else {
@@ -52,14 +54,14 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 	}
 
 	public Set<EObject> getJvmElements(EObject sourceElement) {
-		final ArrayListMultimap<EObject, EObject> sourceToTargetMap = sourceToTargetMap(sourceElement);
+		final ListMultimap<EObject, EObject> sourceToTargetMap = sourceToTargetMap(sourceElement);
 		final List<EObject> elements = sourceToTargetMap.get(sourceElement);
 		return newLinkedHashSet(elements);
 	}
 
 	public Set<EObject> getSourceElements(EObject jvmElement) {
 		//If this turns out to be too slow we should improve the internal data structure :-)
-		ArrayListMultimap<EObject,EObject> map = sourceToTargetMap(jvmElement);
+		ListMultimap<EObject,EObject> map = sourceToTargetMap(jvmElement);
 		Set<EObject> sourceElements = newLinkedHashSet();
 		for (Map.Entry<EObject, EObject> entry : map.entries()) {
 			if (entry.getValue() == jvmElement)
@@ -69,7 +71,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 	}
 
 	public EObject getPrimarySourceElement(EObject jvmElement) {
-		ArrayListMultimap<EObject,EObject> map = sourceToTargetMap(jvmElement);
+		ListMultimap<EObject,EObject> map = sourceToTargetMap(jvmElement);
 		for (Map.Entry<EObject, EObject> entry : map.entries()) {
 			if (entry.getValue() == jvmElement)
 				return entry.getKey();
@@ -79,7 +81,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 
 	//TODO get rid of this method
 	public Set<EObject> getAssociatedElements(EObject jvmOrSourceElement) {
-		ArrayListMultimap<EObject,EObject> map = sourceToTargetMap(jvmOrSourceElement);
+		ListMultimap<EObject,EObject> map = sourceToTargetMap(jvmOrSourceElement);
 		Set<EObject> sourceElements = newLinkedHashSet();
 		for (Map.Entry<EObject, EObject> entry : map.entries()) {
 			if (entry.getValue() == jvmOrSourceElement) {
