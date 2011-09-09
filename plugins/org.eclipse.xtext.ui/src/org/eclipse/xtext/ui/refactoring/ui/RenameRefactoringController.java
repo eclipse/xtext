@@ -11,13 +11,18 @@ import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbench;
+import org.eclipse.xtext.resource.IGlobalServiceProvider;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -29,7 +34,7 @@ import com.google.inject.Singleton;
 @Singleton
 public class RenameRefactoringController {
 
-	@Inject(optional=true)
+	@Inject(optional = true)
 	private IWorkbench workbench;
 
 	@Inject
@@ -37,27 +42,30 @@ public class RenameRefactoringController {
 
 	@Inject
 	private IRenameSupport.Factory renameSupportFactory;
-	
+
+	@Inject
+	private IGlobalServiceProvider globalServiceProvider;
+
 	private RenameLinkedMode activeLinkedMode;
 
 	private IRenameElementContext renameElementContext;
-	
+
 	private LinkedEditingUndoSupport undoSupport;
-	
+
 	private String newName;
 
 	public void initialize(IRenameElementContext renameElementContext) {
 		this.renameElementContext = renameElementContext;
 	}
-	
+
 	public void startRefactoring(RefactoringType refactoringType) {
 		ViewFreezer freezer = null;
 		try {
 			if (refactoringType == RefactoringType.LINKED_EDITING) {
 				startLinkedEditing();
 				return;
-			} 
-			if(activeLinkedMode != null) 
+			}
+			if (activeLinkedMode != null)
 				this.newName = activeLinkedMode.getCurrentName();
 			freezer = new ViewFreezer(getXtextEditor().getInternalSourceViewer());
 			freezer.freeze();
@@ -83,7 +91,7 @@ public class RenameRefactoringController {
 			// canceling by the user is ok
 			restoreOriginalSelection();
 		} finally {
-			if(freezer != null)
+			if (freezer != null)
 				freezer.release();
 		}
 	}
@@ -99,21 +107,48 @@ public class RenameRefactoringController {
 		}
 
 		try {
-			workbench.getProgressService().run(false, true, new IRunnableWithProgress() {
-				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
-					activeLinkedMode = renameLinkedModeProvider.get();
-					activeLinkedMode.start(renameElementContext, monitor);
-					undoSupport = new LinkedEditingUndoSupport(getXtextEditor());
+			final XtextEditor xtextEditor = getXtextEditor();
+			if (xtextEditor != null) {
+				workbench.getProgressService().run(false, true, new IRunnableWithProgress() {
+					public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
+						RenameLinkedMode newLinkedMode = renameLinkedModeProvider.get();
+						if (newLinkedMode.start(renameElementContext, monitor)) {
+							activeLinkedMode = newLinkedMode;
+							undoSupport = new LinkedEditingUndoSupport(xtextEditor);
+						}
+					}
+				});
+				if (activeLinkedMode == null) {
+					newName = getOriginalName(xtextEditor);
+					if (newName != null)
+						startRefactoringWithDialog(false);
 				}
-			});
+			}
 		} catch (Exception exc) {
 			// unwrap invocation target exceptions
-			if(exc.getCause() instanceof RuntimeException)
+			if (exc.getCause() instanceof RuntimeException)
 				throw (RuntimeException) exc.getCause();
-			if(exc instanceof RuntimeException)
+			if (exc instanceof RuntimeException)
 				throw (RuntimeException) exc;
 			throw new WrappedException(exc);
 		}
+	}
+
+	protected String getOriginalName(final XtextEditor xtextEditor) {
+		return xtextEditor.getDocument().readOnly(new IUnitOfWork<String, XtextResource>() {
+			public String exec(XtextResource state) throws Exception {
+				EObject targetElement = state.getResourceSet().getEObject(
+						renameElementContext.getTargetElementURI(), false);
+				IRenameStrategy.Provider strategyProvider = globalServiceProvider.findService(
+						targetElement, IRenameStrategy.Provider.class);
+				if (strategyProvider != null) {
+					IRenameStrategy strategy = strategyProvider.get(targetElement, renameElementContext);
+					if (strategy != null)
+						return strategy.getOriginalName();
+				}
+				return null;
+			}
+		});
 	}
 
 	public RenameLinkedMode getActiveLinkedMode() {
@@ -145,7 +180,7 @@ public class RenameRefactoringController {
 	protected IRenameSupport createRenameSupport(IRenameElementContext context, String name) {
 		return renameSupportFactory.create(context, newName);
 	}
-	
+
 	protected void restoreOriginalSelection() {
 		ISelection originalSelection = renameElementContext.getTriggeringEditorSelection();
 		if (originalSelection instanceof ITextSelection) {
@@ -153,7 +188,7 @@ public class RenameRefactoringController {
 					((ITextSelection) originalSelection).getOffset(), ((ITextSelection) originalSelection).getLength());
 		}
 	}
-	
+
 	protected XtextEditor getXtextEditor() {
 		IEditorPart part = renameElementContext.getTriggeringEditor();
 		if (part instanceof XtextEditor) {
