@@ -28,7 +28,12 @@ public class JvmGenericArrayTypeReferenceImplCustom extends JvmGenericArrayTypeR
 				JvmArrayType result = ((JvmComponentType) componentType).getArrayType();
 				if (result == null) {
 					result = TypesFactory.eINSTANCE.createJvmArrayType();
-					result.setComponentType((JvmComponentType) componentType);
+					componentType.eSetDeliver(false);
+					try {
+						result.setComponentType((JvmComponentType) componentType);
+					} finally {
+						componentType.eSetDeliver(true);
+					}
 				}
 				return result;
 			}
