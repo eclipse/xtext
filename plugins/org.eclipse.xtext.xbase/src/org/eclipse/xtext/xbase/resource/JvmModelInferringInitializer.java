@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.resource;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.resource.ILateInitialization;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
@@ -24,6 +25,9 @@ public class JvmModelInferringInitializer implements ILateInitialization {
 	@Inject
 	private IJvmModelInferrer inferrer;
 	
+	@Inject 
+	private IReferableElementsUnloader.GenericUnloader unloader;
+	
 	public void doLateInitialization(final EList<EObject> resourcesContents) {
 		if (resourcesContents == null || resourcesContents.isEmpty())
 			return;
@@ -33,5 +37,12 @@ public class JvmModelInferringInitializer implements ILateInitialization {
 				resourcesContents.add(t);
 			}
 		});
+	}
+
+	public void discardLateInitialization(EList<EObject> resourcesContentsList) {
+		for (int i = 1; i< resourcesContentsList.size(); i++) {
+			EObject eObject = resourcesContentsList.get(i);
+			unloader.unloadRoot(eObject);
+		}
 	}
 }
