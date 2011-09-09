@@ -120,7 +120,7 @@ public abstract class AbstractXtend2UiModule extends DefaultUiModule {
 
 	// contributed by org.eclipse.xtext.ui.generator.refactoring.RefactorElementNameFragment
 	public Class<? extends org.eclipse.xtext.ui.refactoring.ui.IRenameSupport.Factory> bindIRenameSupport$Factory() {
-		return org.eclipse.xtext.common.types.ui.refactoring.JdtAwareRenameSupportFactory.class;
+		return org.eclipse.xtext.common.types.ui.refactoring.JdtRenameSupport.Factory.class;
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.refactoring.RefactorElementNameFragment
