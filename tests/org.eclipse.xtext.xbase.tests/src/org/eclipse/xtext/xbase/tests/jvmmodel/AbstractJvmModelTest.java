@@ -17,7 +17,7 @@ import com.google.inject.Injector;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class AbstractJvmModelTest extends AbstractXbaseTestCase {
+public abstract class AbstractJvmModelTest extends AbstractXbaseTestCase {
 
 	static Injector injector = new XbaseStandaloneSetup() {
 		@Override
