@@ -21,9 +21,9 @@ import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.Naming;
-import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
@@ -83,6 +83,8 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 						"org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter")
 				.addTypeToType(IQualifiedNameConverter.class.getName(),
 						"org.eclipse.xtext.xbase.XbaseQualifiedNameConverter")
+				.addTypeToType(IQualifiedNameProvider.class.getName(),
+								"org.eclipse.xtext.xbase.scoping.XbaseQualifiedNameProvider")
 				.addTypeToType("org.eclipse.xtext.xbase.typing.ITypeProvider",
 						"org.eclipse.xtext.xbase.typing.XbaseTypeProvider")
 				.addTypeToType(IValueConverterService.class.getName(),
@@ -107,19 +109,14 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 						"org.eclipse.xtext.xbase.validation.JvmTypeReferencesValidator")
 				// obsolete convenience bindings
 				.addTypeToType("org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider",
-						"org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider");
+						"org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider")
+				.addTypeToType("org.eclipse.xtext.resource.ILateInitialization", "org.eclipse.xtext.xbase.resource.JvmModelInferringInitializer");
 		if (useInferredJvmModel) {
 			config = config
 				.addTypeToType(ILocationInFileProvider.class.getName(),
 						"org.eclipse.xtext.xbase.jvmmodel.JvmLocationInFileProvider")
 				.addTypeToType(EObjectAtOffsetHelper.class.getName(),
 						"org.eclipse.xtext.xbase.jvmmodel.JvmEObjectAtOffsetHelper")
-				.addTypeToType(ILinker.class.getName(), 
-						"org.eclipse.xtext.xbase.jvmmodel.JvmModelXbaseLazyLinker")
-				.addTypeToType("org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations",
-						"org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator")
-				.addTypeToType("org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator",
-						"org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator")
 				.addTypeToType(IGlobalScopeProvider.class.getName(),
 						"org.eclipse.xtext.xbase.jvmmodel.JvmGlobalScopeProvider");
 			if(generateXtendInferrer) {

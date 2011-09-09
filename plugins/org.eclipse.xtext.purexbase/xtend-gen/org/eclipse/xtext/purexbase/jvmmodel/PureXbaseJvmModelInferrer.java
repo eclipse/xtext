@@ -1,22 +1,18 @@
 package org.eclipse.xtext.purexbase.jvmmodel;
 
 import com.google.inject.Inject;
-import java.util.ArrayList;
-import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 
 @SuppressWarnings("all")
 public class PureXbaseJvmModelInferrer implements IJvmModelInferrer {
   
   @Inject
-  private IJvmModelAssociator jvmModelAssociator;
+  private JvmTypesBuilder _jvmTypesBuilder0;
   
-  public List<? extends JvmDeclaredType> inferJvmModel(final EObject sourceObject) {
-    ArrayList<JvmDeclaredType> _newArrayList = CollectionLiterals.<JvmDeclaredType>newArrayList();
-    return _newArrayList;
+  public void infer(final EObject e, final IAcceptor<JvmDeclaredType> acceptor) {
   }
 }

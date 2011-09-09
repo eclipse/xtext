@@ -8,17 +8,22 @@
 package org.eclipse.xtext.xbase.jvmmodel;
 
 import org.eclipse.emf.ecore.EObject;
-
-import com.google.inject.ImplementedBy;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.util.IAcceptor;
 
 /**
- * @author Jan Koehnlein - Initial contribution and API
+ * 
+ * A base dispatch class to be subclassed by Xtend
+ * 
+ * @author Sven Efftinge - Initial contribution and API
  */
-@ImplementedBy(JvmModelAssociator.class)
-public interface IJvmModelAssociator {
-
-	void associate(EObject sourceElement, EObject jvmElement);
-
-	void associatePrimary(EObject sourceElement, EObject jvmElement);
-	
+public abstract class AbstractModelInferrer implements IJvmModelInferrer {
+	public void infer(EObject e, IAcceptor<JvmDeclaredType> acceptor) {
+		_infer(e, acceptor);
+	}
+	public void _infer(EObject e, IAcceptor<JvmDeclaredType> acceptor) {
+		for (EObject child : e.eContents()) {
+			infer(child, acceptor);
+		}
+	}
 }

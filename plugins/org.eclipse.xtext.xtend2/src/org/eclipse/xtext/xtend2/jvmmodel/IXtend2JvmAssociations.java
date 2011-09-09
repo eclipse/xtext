@@ -48,15 +48,18 @@ public interface IXtend2JvmAssociations extends IJvmModelAssociations {
 	static class Impl extends JvmModelAssociator implements IXtend2JvmAssociations {
 
 		public JvmGenericType getInferredType(XtendClass xtendClass) {
-			return getFirstOrNull(getJvmElements(xtendClass), JvmGenericType.class);
+			final JvmGenericType firstOrNull = getFirstOrNull(getJvmElements(xtendClass), JvmGenericType.class);
+			return firstOrNull;
 		}
 
 		public JvmConstructor getInferredConstructor(XtendClass xtendClass) {
-			return getFirstOrNull(getJvmElements(xtendClass), JvmConstructor.class);
+			final JvmConstructor firstOrNull = getFirstOrNull(getJvmElements(xtendClass), JvmConstructor.class);
+			return firstOrNull;
 		}
 
 		public JvmOperation getDirectlyInferredOperation(XtendFunction xtendFunction) {
-			return getFirstOrNull(getJvmElements(xtendFunction), JvmOperation.class);
+			final JvmOperation firstOrNull = getFirstOrNull(getJvmElements(xtendFunction), JvmOperation.class);
+			return firstOrNull;
 		}
 		
 		public JvmOperation getDispatchOperation(XtendFunction dispatchFunction) {

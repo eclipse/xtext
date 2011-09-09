@@ -8,12 +8,10 @@
 package org.eclipse.xtext.xtend2.jvmmodel;
 
 import static com.google.common.collect.Iterables.*;
-import static java.util.Collections.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -33,6 +31,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
@@ -40,8 +39,8 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xtend2.dispatch.DispatchingSupport;
 import org.eclipse.xtext.xtend2.resource.Xtend2Resource;
-import org.eclipse.xtext.xtend2.xtend2.XtendField;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendField;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendMember;
@@ -70,13 +69,12 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 	@Inject
 	private IdentifiableSimpleNameProvider simpleNameProvider;
 	
-	public List<? extends JvmDeclaredType> inferJvmModel(EObject xtendFile) {
-		associator.disassociate(xtendFile);
+	public void infer(EObject xtendFile, IAcceptor<JvmDeclaredType> acceptor) {
 		final XtendFile xtendFile2 = (XtendFile)xtendFile;
 		if (xtendFile2.getXtendClass()==null || xtendFile2.getXtendClass().getName()==null)
-			return emptyList();
+			return;
 		JvmGenericType inferredJvmType = transform(xtendFile2.getXtendClass());
-		return singletonList(inferredJvmType);
+		acceptor.accept(inferredJvmType);
 	}
 
 	protected JvmGenericType transform(XtendClass source) {
