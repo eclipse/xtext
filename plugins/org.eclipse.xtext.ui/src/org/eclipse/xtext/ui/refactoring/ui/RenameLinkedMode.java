@@ -98,7 +98,7 @@ public class RenameLinkedMode {
 	}
 
 	protected void openPopup() {
-		popup = new RenameRefactoringPopup(editor, controller);
+		popup = new RenameRefactoringPopup(editor, controller, this);
 		popup.open();
 	}
 

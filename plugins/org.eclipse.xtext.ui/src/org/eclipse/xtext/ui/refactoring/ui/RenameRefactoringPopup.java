@@ -111,15 +111,18 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 	private MenuManager menuManager;
 	private boolean iSMenuUp = false;
 
-	public RenameRefactoringPopup(XtextEditor editor, RenameRefactoringController controller) {
+	private RenameLinkedMode renameLinkedMode;
+
+	public RenameRefactoringPopup(XtextEditor editor, RenameRefactoringController controller, RenameLinkedMode renameLinkedMode) {
 		this.editor = editor;
 		this.controller = controller;
+		this.renameLinkedMode = renameLinkedMode;
 	}
 	
 	protected void updateVisibility() {
 		if (popup != null && !popup.isDisposed() && delayJobFinished) {
 			boolean visible = false;
-			if (controller.getActiveLinkedMode().isCaretInLinkedPosition()) {
+			if (renameLinkedMode.isCaretInLinkedPosition()) {
 				StyledText textWidget = editor.getInternalSourceViewer().getTextWidget();
 				Rectangle eArea = Geometry.toDisplay(textWidget, textWidget.getClientArea());
 				Rectangle pBounds = popup.getBounds();
@@ -153,6 +156,7 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 	}
 
 	public void open() {
+		
 		// Must cache here, since editor context is not available in menu from popup shell:
 		openDialogBinding = getOpenDialogBinding();
 		Shell workbenchShell = editor.getSite().getShell();
@@ -280,7 +284,7 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 			}
 
 			public void menuAboutToShow(IMenuManager manager) {
-				boolean canRefactor = controller.getActiveLinkedMode().isCurrentNameValid();
+				boolean canRefactor = renameLinkedMode.isCurrentNameValid();
 				IAction refactorAction = new Action("Rename...") {
 					@Override
 					public void run() {
@@ -324,7 +328,7 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 		if (popup == null || popup.isDisposed())
 			return null;
 
-		LinkedPosition position = controller.getActiveLinkedMode().getCurrentLinkedPosition();
+		LinkedPosition position = renameLinkedMode.getCurrentLinkedPosition();
 		if (position == null)
 			return null;
 		ISourceViewer viewer = editor.getInternalSourceViewer();
