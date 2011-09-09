@@ -42,14 +42,16 @@ public class RenameStrategyTest extends AbstractXtend2UITestCase {
 
 	public void testInferredClassRenamed() throws Exception {
 		XtendClass fooClass = testHelper.xtendFile("Foo", "class Foo { }").getXtendClass();
-		JvmGenericType inferredType = associations.getInferredType(fooClass);
-		JvmConstructor inferredConstructor = associations.getInferredConstructor(fooClass);
 		IRenameStrategy renameStrategy = renameStrategyProvider.get(fooClass, null);
 		renameStrategy.applyDeclarationChange("Bar", fooClass.eResource().getResourceSet());
+		JvmGenericType inferredType = associations.getInferredType(fooClass);
+		JvmConstructor inferredConstructor = associations.getInferredConstructor(fooClass);
 		assertEquals("Bar", fooClass.getName());
 		assertEquals("Bar", inferredType.getSimpleName());
 		assertEquals("Bar", inferredConstructor.getSimpleName());
 		renameStrategy.revertDeclarationChange(fooClass.eResource().getResourceSet());
+		inferredType = associations.getInferredType(fooClass);
+		inferredConstructor = associations.getInferredConstructor(fooClass);
 		assertEquals("Foo", fooClass.getName());
 		assertEquals("Foo", inferredType.getSimpleName());
 		assertEquals("Foo", inferredConstructor.getSimpleName());
@@ -58,12 +60,13 @@ public class RenameStrategyTest extends AbstractXtend2UITestCase {
 	public void testInferredMethodRenamed() throws Exception {
 		XtendFunction fooMethod = (XtendFunction) testHelper.xtendFile("Foo", "class Foo { def Foo foo() {this} }")
 				.getXtendClass().getMembers().get(0);
-		JvmOperation inferredOperation = associations.getDirectlyInferredOperation(fooMethod);
 		IRenameStrategy renameStrategy = renameStrategyProvider.get(fooMethod, null);
 		renameStrategy.applyDeclarationChange("bar", fooMethod.eResource().getResourceSet());
+		JvmOperation inferredOperation = associations.getDirectlyInferredOperation(fooMethod);
 		assertEquals("bar", fooMethod.getName());
 		assertEquals("bar", inferredOperation.getSimpleName());
 		renameStrategy.revertDeclarationChange(fooMethod.eResource().getResourceSet());
+		inferredOperation = associations.getDirectlyInferredOperation(fooMethod);
 		assertEquals("foo", fooMethod.getName());
 		assertEquals("foo", inferredOperation.getSimpleName());
 	}
