@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX20 <em>X20</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX21 <em>X21</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX22 <em>X22</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX23 <em>X23</em>}</li>
  * </ul>
  * </p>
  *
@@ -536,5 +537,31 @@ public interface Model extends EObject
    * @generated
    */
   void setX22(org.eclipse.xtext.serializer.sequencertest.Float value);
+
+  /**
+   * Returns the value of the '<em><b>X23</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X23</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X23</em>' containment reference.
+   * @see #setX23(UnorderedAlternative)
+   * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getModel_X23()
+   * @model containment="true"
+   * @generated
+   */
+  UnorderedAlternative getX23();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX23 <em>X23</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X23</em>' containment reference.
+   * @see #getX23()
+   * @generated
+   */
+  void setX23(UnorderedAlternative value);
 
 } // Model

@@ -38,6 +38,10 @@ import org.eclipse.xtext.serializer.sequencertest.SingleEnum;
 import org.eclipse.xtext.serializer.sequencertest.SingleKeywords;
 import org.eclipse.xtext.serializer.sequencertest.SingleKeywordsOrID;
 import org.eclipse.xtext.serializer.sequencertest.SingleTerminals;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternative;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal2;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeValDelegate;
 
 /**
  * <!-- begin-user-doc -->
@@ -231,6 +235,26 @@ public class SequencertestAdapterFactory extends AdapterFactoryImpl
       public Adapter caseFloat(org.eclipse.xtext.serializer.sequencertest.Float object)
       {
         return createFloatAdapter();
+      }
+      @Override
+      public Adapter caseUnorderedAlternative(UnorderedAlternative object)
+      {
+        return createUnorderedAlternativeAdapter();
+      }
+      @Override
+      public Adapter caseUnorderedAlternativeVal(UnorderedAlternativeVal object)
+      {
+        return createUnorderedAlternativeValAdapter();
+      }
+      @Override
+      public Adapter caseUnorderedAlternativeValDelegate(UnorderedAlternativeValDelegate object)
+      {
+        return createUnorderedAlternativeValDelegateAdapter();
+      }
+      @Override
+      public Adapter caseUnorderedAlternativeVal2(UnorderedAlternativeVal2 object)
+      {
+        return createUnorderedAlternativeVal2Adapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -640,6 +664,66 @@ public class SequencertestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createFloatAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedAlternative <em>Unordered Alternative</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedAlternative
+   * @generated
+   */
+  public Adapter createUnorderedAlternativeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal <em>Unordered Alternative Val</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal
+   * @generated
+   */
+  public Adapter createUnorderedAlternativeValAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeValDelegate <em>Unordered Alternative Val Delegate</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeValDelegate
+   * @generated
+   */
+  public Adapter createUnorderedAlternativeValDelegateAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal2 <em>Unordered Alternative Val2</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal2
+   * @generated
+   */
+  public Adapter createUnorderedAlternativeVal2Adapter()
   {
     return null;
   }

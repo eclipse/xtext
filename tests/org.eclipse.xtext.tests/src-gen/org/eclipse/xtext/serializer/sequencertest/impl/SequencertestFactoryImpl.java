@@ -42,6 +42,10 @@ import org.eclipse.xtext.serializer.sequencertest.SingleEnum;
 import org.eclipse.xtext.serializer.sequencertest.SingleKeywords;
 import org.eclipse.xtext.serializer.sequencertest.SingleKeywordsOrID;
 import org.eclipse.xtext.serializer.sequencertest.SingleTerminals;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternative;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal2;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeValDelegate;
 
 /**
  * <!-- begin-user-doc -->
@@ -121,6 +125,10 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
       case SequencertestPackage.DEPENDENT_ALTERNATIVE2: return createDependentAlternative2();
       case SequencertestPackage.OPTIONAL: return createOptional();
       case SequencertestPackage.FLOAT: return createFloat();
+      case SequencertestPackage.UNORDERED_ALTERNATIVE: return createUnorderedAlternative();
+      case SequencertestPackage.UNORDERED_ALTERNATIVE_VAL: return createUnorderedAlternativeVal();
+      case SequencertestPackage.UNORDERED_ALTERNATIVE_VAL_DELEGATE: return createUnorderedAlternativeValDelegate();
+      case SequencertestPackage.UNORDERED_ALTERNATIVE_VAL2: return createUnorderedAlternativeVal2();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -444,6 +452,50 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
   {
     FloatImpl float_ = new FloatImpl();
     return float_;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public UnorderedAlternative createUnorderedAlternative()
+  {
+    UnorderedAlternativeImpl unorderedAlternative = new UnorderedAlternativeImpl();
+    return unorderedAlternative;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public UnorderedAlternativeVal createUnorderedAlternativeVal()
+  {
+    UnorderedAlternativeValImpl unorderedAlternativeVal = new UnorderedAlternativeValImpl();
+    return unorderedAlternativeVal;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public UnorderedAlternativeValDelegate createUnorderedAlternativeValDelegate()
+  {
+    UnorderedAlternativeValDelegateImpl unorderedAlternativeValDelegate = new UnorderedAlternativeValDelegateImpl();
+    return unorderedAlternativeValDelegate;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public UnorderedAlternativeVal2 createUnorderedAlternativeVal2()
+  {
+    UnorderedAlternativeVal2Impl unorderedAlternativeVal2 = new UnorderedAlternativeVal2Impl();
+    return unorderedAlternativeVal2;
   }
 
   /**

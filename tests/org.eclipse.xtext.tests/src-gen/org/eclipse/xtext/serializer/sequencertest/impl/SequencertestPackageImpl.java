@@ -42,6 +42,10 @@ import org.eclipse.xtext.serializer.sequencertest.SingleEnum;
 import org.eclipse.xtext.serializer.sequencertest.SingleKeywords;
 import org.eclipse.xtext.serializer.sequencertest.SingleKeywordsOrID;
 import org.eclipse.xtext.serializer.sequencertest.SingleTerminals;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternative;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal2;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeValDelegate;
 
 /**
  * <!-- begin-user-doc -->
@@ -232,6 +236,34 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * @generated
    */
   private EClass floatEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass unorderedAlternativeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass unorderedAlternativeValEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass unorderedAlternativeValDelegateEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass unorderedAlternativeVal2EClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -504,6 +536,16 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
   public EReference getModel_X22()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(18);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_X23()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(19);
   }
 
   /**
@@ -1261,6 +1303,106 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getUnorderedAlternative()
+  {
+    return unorderedAlternativeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getUnorderedAlternative_Val1()
+  {
+    return (EAttribute)unorderedAlternativeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getUnorderedAlternative_Val2()
+  {
+    return (EAttribute)unorderedAlternativeEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getUnorderedAlternative_Val3()
+  {
+    return (EReference)unorderedAlternativeEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getUnorderedAlternative_Val4()
+  {
+    return (EReference)unorderedAlternativeEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getUnorderedAlternativeVal()
+  {
+    return unorderedAlternativeValEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getUnorderedAlternativeVal_Val()
+  {
+    return (EAttribute)unorderedAlternativeValEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getUnorderedAlternativeValDelegate()
+  {
+    return unorderedAlternativeValDelegateEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getUnorderedAlternativeVal2()
+  {
+    return unorderedAlternativeVal2EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getUnorderedAlternativeVal2_Val()
+  {
+    return (EAttribute)unorderedAlternativeVal2EClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EEnum getDefEnum()
   {
     return defEnumEEnum;
@@ -1316,6 +1458,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
     createEReference(modelEClass, MODEL__X20);
     createEReference(modelEClass, MODEL__X21);
     createEReference(modelEClass, MODEL__X22);
+    createEReference(modelEClass, MODEL__X23);
 
     simpleGroupEClass = createEClass(SIMPLE_GROUP);
     createEAttribute(simpleGroupEClass, SIMPLE_GROUP__VAL1);
@@ -1417,6 +1560,20 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
 
     floatEClass = createEClass(FLOAT);
 
+    unorderedAlternativeEClass = createEClass(UNORDERED_ALTERNATIVE);
+    createEAttribute(unorderedAlternativeEClass, UNORDERED_ALTERNATIVE__VAL1);
+    createEAttribute(unorderedAlternativeEClass, UNORDERED_ALTERNATIVE__VAL2);
+    createEReference(unorderedAlternativeEClass, UNORDERED_ALTERNATIVE__VAL3);
+    createEReference(unorderedAlternativeEClass, UNORDERED_ALTERNATIVE__VAL4);
+
+    unorderedAlternativeValEClass = createEClass(UNORDERED_ALTERNATIVE_VAL);
+    createEAttribute(unorderedAlternativeValEClass, UNORDERED_ALTERNATIVE_VAL__VAL);
+
+    unorderedAlternativeValDelegateEClass = createEClass(UNORDERED_ALTERNATIVE_VAL_DELEGATE);
+
+    unorderedAlternativeVal2EClass = createEClass(UNORDERED_ALTERNATIVE_VAL2);
+    createEAttribute(unorderedAlternativeVal2EClass, UNORDERED_ALTERNATIVE_VAL2__VAL);
+
     // Create enums
     defEnumEEnum = createEEnum(DEF_ENUM);
   }
@@ -1453,6 +1610,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    unorderedAlternativeVal2EClass.getESuperTypes().add(this.getUnorderedAlternativeValDelegate());
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1475,6 +1633,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
     initEReference(getModel_X20(), this.getDependentAlternative2(), null, "x20", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X21(), this.getOptional(), null, "x21", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X22(), this.getFloat(), null, "x22", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_X23(), this.getUnorderedAlternative(), null, "x23", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(simpleGroupEClass, SimpleGroup.class, "SimpleGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSimpleGroup_Val1(), theEcorePackage.getEString(), "val1", null, 0, 1, SimpleGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1575,6 +1734,20 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
     initEAttribute(getOptional_Int2(), theEcorePackage.getEInt(), "int2", null, 0, 1, Optional.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(floatEClass, org.eclipse.xtext.serializer.sequencertest.Float.class, "Float", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(unorderedAlternativeEClass, UnorderedAlternative.class, "UnorderedAlternative", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getUnorderedAlternative_Val1(), theEcorePackage.getEString(), "val1", null, 0, -1, UnorderedAlternative.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getUnorderedAlternative_Val2(), theEcorePackage.getEInt(), "val2", null, 0, -1, UnorderedAlternative.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getUnorderedAlternative_Val3(), this.getUnorderedAlternativeVal(), null, "val3", null, 0, -1, UnorderedAlternative.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getUnorderedAlternative_Val4(), this.getUnorderedAlternativeValDelegate(), null, "val4", null, 0, -1, UnorderedAlternative.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(unorderedAlternativeValEClass, UnorderedAlternativeVal.class, "UnorderedAlternativeVal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getUnorderedAlternativeVal_Val(), theEcorePackage.getEString(), "val", null, 0, 1, UnorderedAlternativeVal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(unorderedAlternativeValDelegateEClass, UnorderedAlternativeValDelegate.class, "UnorderedAlternativeValDelegate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(unorderedAlternativeVal2EClass, UnorderedAlternativeVal2.class, "UnorderedAlternativeVal2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getUnorderedAlternativeVal2_Val(), theEcorePackage.getEString(), "val", null, 0, 1, UnorderedAlternativeVal2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
     initEEnum(defEnumEEnum, DefEnum.class, "DefEnum");

@@ -39,6 +39,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="x21" eType="#//Optional"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="x22" eType="#//Float" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x23" eType="#//UnorderedAlternative"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SimpleGroup">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="val1" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
@@ -162,4 +164,21 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="int2" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Float"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UnorderedAlternative">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val1" unique="false" upperBound="-1"
+        eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val2" unique="false" upperBound="-1"
+        eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="val3" upperBound="-1" eType="#//UnorderedAlternativeVal"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="val4" upperBound="-1" eType="#//UnorderedAlternativeValDelegate"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnorderedAlternativeVal">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnorderedAlternativeValDelegate"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UnorderedAlternativeVal2" eSuperTypes="#//UnorderedAlternativeValDelegate">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
 </ecore:EPackage>

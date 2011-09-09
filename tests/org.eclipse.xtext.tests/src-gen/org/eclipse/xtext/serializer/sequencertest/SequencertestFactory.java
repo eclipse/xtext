@@ -260,6 +260,42 @@ public interface SequencertestFactory extends EFactory
   Float createFloat();
 
   /**
+   * Returns a new object of class '<em>Unordered Alternative</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Unordered Alternative</em>'.
+   * @generated
+   */
+  UnorderedAlternative createUnorderedAlternative();
+
+  /**
+   * Returns a new object of class '<em>Unordered Alternative Val</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Unordered Alternative Val</em>'.
+   * @generated
+   */
+  UnorderedAlternativeVal createUnorderedAlternativeVal();
+
+  /**
+   * Returns a new object of class '<em>Unordered Alternative Val Delegate</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Unordered Alternative Val Delegate</em>'.
+   * @generated
+   */
+  UnorderedAlternativeValDelegate createUnorderedAlternativeValDelegate();
+
+  /**
+   * Returns a new object of class '<em>Unordered Alternative Val2</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Unordered Alternative Val2</em>'.
+   * @generated
+   */
+  UnorderedAlternativeVal2 createUnorderedAlternativeVal2();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

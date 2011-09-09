@@ -242,13 +242,22 @@ public interface SequencertestPackage extends EPackage
   int MODEL__X22 = 18;
 
   /**
+   * The feature id for the '<em><b>X23</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X23 = 19;
+
+  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 19;
+  int MODEL_FEATURE_COUNT = 20;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.SimpleGroupImpl <em>Simple Group</em>}' class.
@@ -1176,6 +1185,136 @@ public interface SequencertestPackage extends EPackage
   int FLOAT_FEATURE_COUNT = 0;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.UnorderedAlternativeImpl <em>Unordered Alternative</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.UnorderedAlternativeImpl
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getUnorderedAlternative()
+   * @generated
+   */
+  int UNORDERED_ALTERNATIVE = 26;
+
+  /**
+   * The feature id for the '<em><b>Val1</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNORDERED_ALTERNATIVE__VAL1 = 0;
+
+  /**
+   * The feature id for the '<em><b>Val2</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNORDERED_ALTERNATIVE__VAL2 = 1;
+
+  /**
+   * The feature id for the '<em><b>Val3</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNORDERED_ALTERNATIVE__VAL3 = 2;
+
+  /**
+   * The feature id for the '<em><b>Val4</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNORDERED_ALTERNATIVE__VAL4 = 3;
+
+  /**
+   * The number of structural features of the '<em>Unordered Alternative</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNORDERED_ALTERNATIVE_FEATURE_COUNT = 4;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.UnorderedAlternativeValImpl <em>Unordered Alternative Val</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.UnorderedAlternativeValImpl
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getUnorderedAlternativeVal()
+   * @generated
+   */
+  int UNORDERED_ALTERNATIVE_VAL = 27;
+
+  /**
+   * The feature id for the '<em><b>Val</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNORDERED_ALTERNATIVE_VAL__VAL = 0;
+
+  /**
+   * The number of structural features of the '<em>Unordered Alternative Val</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNORDERED_ALTERNATIVE_VAL_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.UnorderedAlternativeValDelegateImpl <em>Unordered Alternative Val Delegate</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.UnorderedAlternativeValDelegateImpl
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getUnorderedAlternativeValDelegate()
+   * @generated
+   */
+  int UNORDERED_ALTERNATIVE_VAL_DELEGATE = 28;
+
+  /**
+   * The number of structural features of the '<em>Unordered Alternative Val Delegate</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNORDERED_ALTERNATIVE_VAL_DELEGATE_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.UnorderedAlternativeVal2Impl <em>Unordered Alternative Val2</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.UnorderedAlternativeVal2Impl
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getUnorderedAlternativeVal2()
+   * @generated
+   */
+  int UNORDERED_ALTERNATIVE_VAL2 = 29;
+
+  /**
+   * The feature id for the '<em><b>Val</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNORDERED_ALTERNATIVE_VAL2__VAL = UNORDERED_ALTERNATIVE_VAL_DELEGATE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Unordered Alternative Val2</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNORDERED_ALTERNATIVE_VAL2_FEATURE_COUNT = UNORDERED_ALTERNATIVE_VAL_DELEGATE_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.DefEnum <em>Def Enum</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1183,7 +1322,7 @@ public interface SequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getDefEnum()
    * @generated
    */
-  int DEF_ENUM = 26;
+  int DEF_ENUM = 30;
 
 
   /**
@@ -1404,6 +1543,17 @@ public interface SequencertestPackage extends EPackage
    * @generated
    */
   EReference getModel_X22();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX23 <em>X23</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X23</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.Model#getX23()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X23();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.sequencertest.SimpleGroup <em>Simple Group</em>}'.
@@ -2206,6 +2356,112 @@ public interface SequencertestPackage extends EPackage
   EClass getFloat();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedAlternative <em>Unordered Alternative</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Unordered Alternative</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedAlternative
+   * @generated
+   */
+  EClass getUnorderedAlternative();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedAlternative#getVal1 <em>Val1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Val1</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedAlternative#getVal1()
+   * @see #getUnorderedAlternative()
+   * @generated
+   */
+  EAttribute getUnorderedAlternative_Val1();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedAlternative#getVal2 <em>Val2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Val2</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedAlternative#getVal2()
+   * @see #getUnorderedAlternative()
+   * @generated
+   */
+  EAttribute getUnorderedAlternative_Val2();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedAlternative#getVal3 <em>Val3</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Val3</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedAlternative#getVal3()
+   * @see #getUnorderedAlternative()
+   * @generated
+   */
+  EReference getUnorderedAlternative_Val3();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedAlternative#getVal4 <em>Val4</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Val4</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedAlternative#getVal4()
+   * @see #getUnorderedAlternative()
+   * @generated
+   */
+  EReference getUnorderedAlternative_Val4();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal <em>Unordered Alternative Val</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Unordered Alternative Val</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal
+   * @generated
+   */
+  EClass getUnorderedAlternativeVal();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal#getVal <em>Val</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal#getVal()
+   * @see #getUnorderedAlternativeVal()
+   * @generated
+   */
+  EAttribute getUnorderedAlternativeVal_Val();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeValDelegate <em>Unordered Alternative Val Delegate</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Unordered Alternative Val Delegate</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeValDelegate
+   * @generated
+   */
+  EClass getUnorderedAlternativeValDelegate();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal2 <em>Unordered Alternative Val2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Unordered Alternative Val2</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal2
+   * @generated
+   */
+  EClass getUnorderedAlternativeVal2();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal2#getVal <em>Val</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal2#getVal()
+   * @see #getUnorderedAlternativeVal2()
+   * @generated
+   */
+  EAttribute getUnorderedAlternativeVal2_Val();
+
+  /**
    * Returns the meta object for enum '{@link org.eclipse.xtext.serializer.sequencertest.DefEnum <em>Def Enum</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2399,6 +2655,14 @@ public interface SequencertestPackage extends EPackage
      * @generated
      */
     EReference MODEL__X22 = eINSTANCE.getModel_X22();
+
+    /**
+     * The meta object literal for the '<em><b>X23</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X23 = eINSTANCE.getModel_X23();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.SimpleGroupImpl <em>Simple Group</em>}' class.
@@ -3049,6 +3313,94 @@ public interface SequencertestPackage extends EPackage
      * @generated
      */
     EClass FLOAT = eINSTANCE.getFloat();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.UnorderedAlternativeImpl <em>Unordered Alternative</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.UnorderedAlternativeImpl
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getUnorderedAlternative()
+     * @generated
+     */
+    EClass UNORDERED_ALTERNATIVE = eINSTANCE.getUnorderedAlternative();
+
+    /**
+     * The meta object literal for the '<em><b>Val1</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute UNORDERED_ALTERNATIVE__VAL1 = eINSTANCE.getUnorderedAlternative_Val1();
+
+    /**
+     * The meta object literal for the '<em><b>Val2</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute UNORDERED_ALTERNATIVE__VAL2 = eINSTANCE.getUnorderedAlternative_Val2();
+
+    /**
+     * The meta object literal for the '<em><b>Val3</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference UNORDERED_ALTERNATIVE__VAL3 = eINSTANCE.getUnorderedAlternative_Val3();
+
+    /**
+     * The meta object literal for the '<em><b>Val4</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference UNORDERED_ALTERNATIVE__VAL4 = eINSTANCE.getUnorderedAlternative_Val4();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.UnorderedAlternativeValImpl <em>Unordered Alternative Val</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.UnorderedAlternativeValImpl
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getUnorderedAlternativeVal()
+     * @generated
+     */
+    EClass UNORDERED_ALTERNATIVE_VAL = eINSTANCE.getUnorderedAlternativeVal();
+
+    /**
+     * The meta object literal for the '<em><b>Val</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute UNORDERED_ALTERNATIVE_VAL__VAL = eINSTANCE.getUnorderedAlternativeVal_Val();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.UnorderedAlternativeValDelegateImpl <em>Unordered Alternative Val Delegate</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.UnorderedAlternativeValDelegateImpl
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getUnorderedAlternativeValDelegate()
+     * @generated
+     */
+    EClass UNORDERED_ALTERNATIVE_VAL_DELEGATE = eINSTANCE.getUnorderedAlternativeValDelegate();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.UnorderedAlternativeVal2Impl <em>Unordered Alternative Val2</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.UnorderedAlternativeVal2Impl
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getUnorderedAlternativeVal2()
+     * @generated
+     */
+    EClass UNORDERED_ALTERNATIVE_VAL2 = eINSTANCE.getUnorderedAlternativeVal2();
+
+    /**
+     * The meta object literal for the '<em><b>Val</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute UNORDERED_ALTERNATIVE_VAL2__VAL = eINSTANCE.getUnorderedAlternativeVal2_Val();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.DefEnum <em>Def Enum</em>}' enum.

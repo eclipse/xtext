@@ -36,6 +36,10 @@ import org.eclipse.xtext.serializer.sequencertest.SingleEnum;
 import org.eclipse.xtext.serializer.sequencertest.SingleKeywords;
 import org.eclipse.xtext.serializer.sequencertest.SingleKeywordsOrID;
 import org.eclipse.xtext.serializer.sequencertest.SingleTerminals;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternative;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal2;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeValDelegate;
 
 /**
  * <!-- begin-user-doc -->
@@ -299,6 +303,35 @@ public class SequencertestSwitch<T>
       {
         org.eclipse.xtext.serializer.sequencertest.Float float_ = (org.eclipse.xtext.serializer.sequencertest.Float)theEObject;
         T result = caseFloat(float_);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SequencertestPackage.UNORDERED_ALTERNATIVE:
+      {
+        UnorderedAlternative unorderedAlternative = (UnorderedAlternative)theEObject;
+        T result = caseUnorderedAlternative(unorderedAlternative);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SequencertestPackage.UNORDERED_ALTERNATIVE_VAL:
+      {
+        UnorderedAlternativeVal unorderedAlternativeVal = (UnorderedAlternativeVal)theEObject;
+        T result = caseUnorderedAlternativeVal(unorderedAlternativeVal);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SequencertestPackage.UNORDERED_ALTERNATIVE_VAL_DELEGATE:
+      {
+        UnorderedAlternativeValDelegate unorderedAlternativeValDelegate = (UnorderedAlternativeValDelegate)theEObject;
+        T result = caseUnorderedAlternativeValDelegate(unorderedAlternativeValDelegate);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SequencertestPackage.UNORDERED_ALTERNATIVE_VAL2:
+      {
+        UnorderedAlternativeVal2 unorderedAlternativeVal2 = (UnorderedAlternativeVal2)theEObject;
+        T result = caseUnorderedAlternativeVal2(unorderedAlternativeVal2);
+        if (result == null) result = caseUnorderedAlternativeValDelegate(unorderedAlternativeVal2);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -718,6 +751,70 @@ public class SequencertestSwitch<T>
    * @generated
    */
   public T caseFloat(org.eclipse.xtext.serializer.sequencertest.Float object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Unordered Alternative</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Unordered Alternative</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseUnorderedAlternative(UnorderedAlternative object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Unordered Alternative Val</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Unordered Alternative Val</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseUnorderedAlternativeVal(UnorderedAlternativeVal object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Unordered Alternative Val Delegate</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Unordered Alternative Val Delegate</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseUnorderedAlternativeValDelegate(UnorderedAlternativeValDelegate object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Unordered Alternative Val2</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Unordered Alternative Val2</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseUnorderedAlternativeVal2(UnorderedAlternativeVal2 object)
   {
     return null;
   }

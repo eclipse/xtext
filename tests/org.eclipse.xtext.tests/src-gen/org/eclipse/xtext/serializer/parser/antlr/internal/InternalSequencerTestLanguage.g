@@ -495,6 +495,25 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getX23UnorderedAlternativeParserRuleCall_22_0()); 
+	    }
+		lv_x23_22_0=ruleUnorderedAlternative		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"x23",
+        		lv_x23_22_0, 
+        		"UnorderedAlternative");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
 ))
 ;
 
@@ -2541,6 +2560,228 @@ ruleFloat returns [EObject current=null]
     	newLeafNode(otherlv_2, grammarAccess.getFloatAccess().getByeKeyword_2());
     }
 )
+;
+
+
+
+
+
+// Entry rule entryRuleUnorderedAlternative
+entryRuleUnorderedAlternative returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getUnorderedAlternativeRule()); }
+	 iv_ruleUnorderedAlternative=ruleUnorderedAlternative 
+	 { $current=$iv_ruleUnorderedAlternative.current; } 
+	 EOF 
+;
+
+// Rule UnorderedAlternative
+ruleUnorderedAlternative returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='#23' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getUnorderedAlternativeAccess().getNumberSignDigitTwoDigitThreeKeyword_0());
+    }
+(
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getUnorderedAlternativeAccess().getUnorderedAlternativeAction_1(),
+            $current);
+    }
+)((
+(
+		lv_val1_2_0=RULE_ID
+		{
+			newLeafNode(lv_val1_2_0, grammarAccess.getUnorderedAlternativeAccess().getVal1IDTerminalRuleCall_2_0_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getUnorderedAlternativeRule());
+	        }
+       		addWithLastConsumed(
+       			$current, 
+       			"val1",
+        		lv_val1_2_0, 
+        		"ID");
+	    }
+
+)
+)
+    |(
+(
+		lv_val2_3_0=RULE_INT
+		{
+			newLeafNode(lv_val2_3_0, grammarAccess.getUnorderedAlternativeAccess().getVal2INTTerminalRuleCall_2_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getUnorderedAlternativeRule());
+	        }
+       		addWithLastConsumed(
+       			$current, 
+       			"val2",
+        		lv_val2_3_0, 
+        		"INT");
+	    }
+
+)
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getUnorderedAlternativeAccess().getVal3UnorderedAlternativeValParserRuleCall_2_2_0()); 
+	    }
+		lv_val3_4_0=ruleUnorderedAlternativeVal		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getUnorderedAlternativeRule());
+	        }
+       		add(
+       			$current, 
+       			"val3",
+        		lv_val3_4_0, 
+        		"UnorderedAlternativeVal");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getUnorderedAlternativeAccess().getVal4UnorderedAlternativeValDelegateParserRuleCall_2_3_0()); 
+	    }
+		lv_val4_5_0=ruleUnorderedAlternativeValDelegate		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getUnorderedAlternativeRule());
+	        }
+       		add(
+       			$current, 
+       			"val4",
+        		lv_val4_5_0, 
+        		"UnorderedAlternativeValDelegate");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))*)
+;
+
+
+
+
+
+// Entry rule entryRuleUnorderedAlternativeVal
+entryRuleUnorderedAlternativeVal returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getUnorderedAlternativeValRule()); }
+	 iv_ruleUnorderedAlternativeVal=ruleUnorderedAlternativeVal 
+	 { $current=$iv_ruleUnorderedAlternativeVal.current; } 
+	 EOF 
+;
+
+// Rule UnorderedAlternativeVal
+ruleUnorderedAlternativeVal returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='kw1' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getUnorderedAlternativeValAccess().getKw1Keyword_0());
+    }
+(
+(
+		lv_val_1_0=RULE_ID
+		{
+			newLeafNode(lv_val_1_0, grammarAccess.getUnorderedAlternativeValAccess().getValIDTerminalRuleCall_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getUnorderedAlternativeValRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"val",
+        		lv_val_1_0, 
+        		"ID");
+	    }
+
+)
+))
+;
+
+
+
+
+
+// Entry rule entryRuleUnorderedAlternativeValDelegate
+entryRuleUnorderedAlternativeValDelegate returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getUnorderedAlternativeValDelegateRule()); }
+	 iv_ruleUnorderedAlternativeValDelegate=ruleUnorderedAlternativeValDelegate 
+	 { $current=$iv_ruleUnorderedAlternativeValDelegate.current; } 
+	 EOF 
+;
+
+// Rule UnorderedAlternativeValDelegate
+ruleUnorderedAlternativeValDelegate returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+
+    { 
+        newCompositeNode(grammarAccess.getUnorderedAlternativeValDelegateAccess().getUnorderedAlternativeVal2ParserRuleCall()); 
+    }
+    this_UnorderedAlternativeVal2_0=ruleUnorderedAlternativeVal2
+    { 
+        $current = $this_UnorderedAlternativeVal2_0.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+;
+
+
+
+
+
+// Entry rule entryRuleUnorderedAlternativeVal2
+entryRuleUnorderedAlternativeVal2 returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getUnorderedAlternativeVal2Rule()); }
+	 iv_ruleUnorderedAlternativeVal2=ruleUnorderedAlternativeVal2 
+	 { $current=$iv_ruleUnorderedAlternativeVal2.current; } 
+	 EOF 
+;
+
+// Rule UnorderedAlternativeVal2
+ruleUnorderedAlternativeVal2 returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='kw2' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getUnorderedAlternativeVal2Access().getKw2Keyword_0());
+    }
+(
+(
+		lv_val_1_0=RULE_ID
+		{
+			newLeafNode(lv_val_1_0, grammarAccess.getUnorderedAlternativeVal2Access().getValIDTerminalRuleCall_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getUnorderedAlternativeVal2Rule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"val",
+        		lv_val_1_0, 
+        		"ID");
+	    }
+
+)
+))
 ;
 
 

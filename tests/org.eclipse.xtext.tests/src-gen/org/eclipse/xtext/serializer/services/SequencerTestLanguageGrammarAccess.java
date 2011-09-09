@@ -64,19 +64,22 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cX21OptionalParserRuleCall_20_0 = (RuleCall)cX21Assignment_20.eContents().get(0);
 		private final Assignment cX22Assignment_21 = (Assignment)cAlternatives.eContents().get(21);
 		private final RuleCall cX22FloatParserRuleCall_21_0 = (RuleCall)cX22Assignment_21.eContents().get(0);
+		private final Assignment cX23Assignment_22 = (Assignment)cAlternatives.eContents().get(22);
+		private final RuleCall cX23UnorderedAlternativeParserRuleCall_22_0 = (RuleCall)cX23Assignment_22.eContents().get(0);
 		
 		//Model:
 		//	x1=SimpleGroup | x2=SimpleAlternative | x3=SimpleMultiplicities | x4=GroupMultiplicities |
 		//	x5=AlternativeMultiplicities | x6=List1 | x7=List2 | x8=AltList1 | x9=AltList2 | x10=SingleKeywords |
 		//	x11=SingleKeywordsOrID | x12=SingleTerminals | x10=MultiKeywords | x11=MultiKeywordsOrID | x12=MultiTerminals |
 		//	x13=SingleEnum | x14=SingleCrossReference | x15=SingleContainmentReference | x19=DependentAlternative1 |
-		//	x20=DependentAlternative2 | x21=Optional | x22=Float;
+		//	x20=DependentAlternative2 | x21=Optional | x22=Float | x23=UnorderedAlternative;
 		public ParserRule getRule() { return rule; }
 
 		//x1=SimpleGroup | x2=SimpleAlternative | x3=SimpleMultiplicities | x4=GroupMultiplicities | x5=AlternativeMultiplicities
 		//| x6=List1 | x7=List2 | x8=AltList1 | x9=AltList2 | x10=SingleKeywords | x11=SingleKeywordsOrID | x12=SingleTerminals |
 		//x10=MultiKeywords | x11=MultiKeywordsOrID | x12=MultiTerminals | x13=SingleEnum | x14=SingleCrossReference |
-		//x15=SingleContainmentReference | x19=DependentAlternative1 | x20=DependentAlternative2 | x21=Optional | x22=Float
+		//x15=SingleContainmentReference | x19=DependentAlternative1 | x20=DependentAlternative2 | x21=Optional | x22=Float |
+		//x23=UnorderedAlternative
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//x1=SimpleGroup
@@ -210,6 +213,12 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 		//Float
 		public RuleCall getX22FloatParserRuleCall_21_0() { return cX22FloatParserRuleCall_21_0; }
+
+		//x23=UnorderedAlternative
+		public Assignment getX23Assignment_22() { return cX23Assignment_22; }
+
+		//UnorderedAlternative
+		public RuleCall getX23UnorderedAlternativeParserRuleCall_22_0() { return cX23UnorderedAlternativeParserRuleCall_22_0; }
 	}
 
 	public class SimpleGroupElements extends AbstractParserRuleElementFinder {
@@ -1405,6 +1414,124 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"Bye"
 		public Keyword getByeKeyword_2() { return cByeKeyword_2; }
 	}
+
+	public class UnorderedAlternativeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnorderedAlternative");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitTwoDigitThreeKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Action cUnorderedAlternativeAction_1 = (Action)cGroup.eContents().get(1);
+		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
+		private final Assignment cVal1Assignment_2_0 = (Assignment)cAlternatives_2.eContents().get(0);
+		private final RuleCall cVal1IDTerminalRuleCall_2_0_0 = (RuleCall)cVal1Assignment_2_0.eContents().get(0);
+		private final Assignment cVal2Assignment_2_1 = (Assignment)cAlternatives_2.eContents().get(1);
+		private final RuleCall cVal2INTTerminalRuleCall_2_1_0 = (RuleCall)cVal2Assignment_2_1.eContents().get(0);
+		private final Assignment cVal3Assignment_2_2 = (Assignment)cAlternatives_2.eContents().get(2);
+		private final RuleCall cVal3UnorderedAlternativeValParserRuleCall_2_2_0 = (RuleCall)cVal3Assignment_2_2.eContents().get(0);
+		private final Assignment cVal4Assignment_2_3 = (Assignment)cAlternatives_2.eContents().get(3);
+		private final RuleCall cVal4UnorderedAlternativeValDelegateParserRuleCall_2_3_0 = (RuleCall)cVal4Assignment_2_3.eContents().get(0);
+		
+		//UnorderedAlternative:
+		//	"#23" {UnorderedAlternative} (val1+=ID | val2+=INT | val3+=UnorderedAlternativeVal |
+		//	val4+=UnorderedAlternativeValDelegate)*;
+		public ParserRule getRule() { return rule; }
+
+		//"#23" {UnorderedAlternative} (val1+=ID | val2+=INT | val3+=UnorderedAlternativeVal |
+		//val4+=UnorderedAlternativeValDelegate)*
+		public Group getGroup() { return cGroup; }
+
+		//"#23"
+		public Keyword getNumberSignDigitTwoDigitThreeKeyword_0() { return cNumberSignDigitTwoDigitThreeKeyword_0; }
+
+		//{UnorderedAlternative}
+		public Action getUnorderedAlternativeAction_1() { return cUnorderedAlternativeAction_1; }
+
+		//(val1+=ID | val2+=INT | val3+=UnorderedAlternativeVal | val4+=UnorderedAlternativeValDelegate)*
+		public Alternatives getAlternatives_2() { return cAlternatives_2; }
+
+		//val1+=ID
+		public Assignment getVal1Assignment_2_0() { return cVal1Assignment_2_0; }
+
+		//ID
+		public RuleCall getVal1IDTerminalRuleCall_2_0_0() { return cVal1IDTerminalRuleCall_2_0_0; }
+
+		//val2+=INT
+		public Assignment getVal2Assignment_2_1() { return cVal2Assignment_2_1; }
+
+		//INT
+		public RuleCall getVal2INTTerminalRuleCall_2_1_0() { return cVal2INTTerminalRuleCall_2_1_0; }
+
+		//val3+=UnorderedAlternativeVal
+		public Assignment getVal3Assignment_2_2() { return cVal3Assignment_2_2; }
+
+		//UnorderedAlternativeVal
+		public RuleCall getVal3UnorderedAlternativeValParserRuleCall_2_2_0() { return cVal3UnorderedAlternativeValParserRuleCall_2_2_0; }
+
+		//val4+=UnorderedAlternativeValDelegate
+		public Assignment getVal4Assignment_2_3() { return cVal4Assignment_2_3; }
+
+		//UnorderedAlternativeValDelegate
+		public RuleCall getVal4UnorderedAlternativeValDelegateParserRuleCall_2_3_0() { return cVal4UnorderedAlternativeValDelegateParserRuleCall_2_3_0; }
+	}
+
+	public class UnorderedAlternativeValElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnorderedAlternativeVal");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cKw1Keyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cValIDTerminalRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
+		
+		//UnorderedAlternativeVal:
+		//	"kw1" val=ID;
+		public ParserRule getRule() { return rule; }
+
+		//"kw1" val=ID
+		public Group getGroup() { return cGroup; }
+
+		//"kw1"
+		public Keyword getKw1Keyword_0() { return cKw1Keyword_0; }
+
+		//val=ID
+		public Assignment getValAssignment_1() { return cValAssignment_1; }
+
+		//ID
+		public RuleCall getValIDTerminalRuleCall_1_0() { return cValIDTerminalRuleCall_1_0; }
+	}
+
+	public class UnorderedAlternativeValDelegateElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnorderedAlternativeValDelegate");
+		private final RuleCall cUnorderedAlternativeVal2ParserRuleCall = (RuleCall)rule.eContents().get(1);
+		
+		//UnorderedAlternativeValDelegate:
+		//	UnorderedAlternativeVal2;
+		public ParserRule getRule() { return rule; }
+
+		//UnorderedAlternativeVal2
+		public RuleCall getUnorderedAlternativeVal2ParserRuleCall() { return cUnorderedAlternativeVal2ParserRuleCall; }
+	}
+
+	public class UnorderedAlternativeVal2Elements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnorderedAlternativeVal2");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cKw2Keyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cValIDTerminalRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
+		
+		//UnorderedAlternativeVal2:
+		//	"kw2" val=ID;
+		public ParserRule getRule() { return rule; }
+
+		//"kw2" val=ID
+		public Group getGroup() { return cGroup; }
+
+		//"kw2"
+		public Keyword getKw2Keyword_0() { return cKw2Keyword_0; }
+
+		//val=ID
+		public Assignment getValAssignment_1() { return cValAssignment_1; }
+
+		//ID
+		public RuleCall getValIDTerminalRuleCall_1_0() { return cValIDTerminalRuleCall_1_0; }
+	}
 	
 	
 	public class DefEnum1Elements extends AbstractEnumRuleElementFinder {
@@ -1487,6 +1614,10 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	private DependentAlternative2Elements pDependentAlternative2;
 	private OptionalElements pOptional;
 	private FloatElements pFloat;
+	private UnorderedAlternativeElements pUnorderedAlternative;
+	private UnorderedAlternativeValElements pUnorderedAlternativeVal;
+	private UnorderedAlternativeValDelegateElements pUnorderedAlternativeValDelegate;
+	private UnorderedAlternativeVal2Elements pUnorderedAlternativeVal2;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -1514,7 +1645,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	x5=AlternativeMultiplicities | x6=List1 | x7=List2 | x8=AltList1 | x9=AltList2 | x10=SingleKeywords |
 	//	x11=SingleKeywordsOrID | x12=SingleTerminals | x10=MultiKeywords | x11=MultiKeywordsOrID | x12=MultiTerminals |
 	//	x13=SingleEnum | x14=SingleCrossReference | x15=SingleContainmentReference | x19=DependentAlternative1 |
-	//	x20=DependentAlternative2 | x21=Optional | x22=Float;
+	//	x20=DependentAlternative2 | x21=Optional | x22=Float | x23=UnorderedAlternative;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -1820,6 +1951,47 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	public ParserRule getFloatRule() {
 		return getFloatAccess().getRule();
+	}
+
+	//UnorderedAlternative:
+	//	"#23" {UnorderedAlternative} (val1+=ID | val2+=INT | val3+=UnorderedAlternativeVal |
+	//	val4+=UnorderedAlternativeValDelegate)*;
+	public UnorderedAlternativeElements getUnorderedAlternativeAccess() {
+		return (pUnorderedAlternative != null) ? pUnorderedAlternative : (pUnorderedAlternative = new UnorderedAlternativeElements());
+	}
+	
+	public ParserRule getUnorderedAlternativeRule() {
+		return getUnorderedAlternativeAccess().getRule();
+	}
+
+	//UnorderedAlternativeVal:
+	//	"kw1" val=ID;
+	public UnorderedAlternativeValElements getUnorderedAlternativeValAccess() {
+		return (pUnorderedAlternativeVal != null) ? pUnorderedAlternativeVal : (pUnorderedAlternativeVal = new UnorderedAlternativeValElements());
+	}
+	
+	public ParserRule getUnorderedAlternativeValRule() {
+		return getUnorderedAlternativeValAccess().getRule();
+	}
+
+	//UnorderedAlternativeValDelegate:
+	//	UnorderedAlternativeVal2;
+	public UnorderedAlternativeValDelegateElements getUnorderedAlternativeValDelegateAccess() {
+		return (pUnorderedAlternativeValDelegate != null) ? pUnorderedAlternativeValDelegate : (pUnorderedAlternativeValDelegate = new UnorderedAlternativeValDelegateElements());
+	}
+	
+	public ParserRule getUnorderedAlternativeValDelegateRule() {
+		return getUnorderedAlternativeValDelegateAccess().getRule();
+	}
+
+	//UnorderedAlternativeVal2:
+	//	"kw2" val=ID;
+	public UnorderedAlternativeVal2Elements getUnorderedAlternativeVal2Access() {
+		return (pUnorderedAlternativeVal2 != null) ? pUnorderedAlternativeVal2 : (pUnorderedAlternativeVal2 = new UnorderedAlternativeVal2Elements());
+	}
+	
+	public ParserRule getUnorderedAlternativeVal2Rule() {
+		return getUnorderedAlternativeVal2Access().getRule();
 	}
 
 	//terminal ID:

@@ -34,6 +34,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SequencerTestLanguage.ecore#//Model/x20"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SequencerTestLanguage.ecore#//Model/x21"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SequencerTestLanguage.ecore#//Model/x22"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SequencerTestLanguage.ecore#//Model/x23"/>
     </genClasses>
     <genClasses ecoreClass="SequencerTestLanguage.ecore#//SimpleGroup">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//SimpleGroup/val1"/>
@@ -134,5 +135,18 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//Optional/int2"/>
     </genClasses>
     <genClasses ecoreClass="SequencerTestLanguage.ecore#//Float"/>
+    <genClasses ecoreClass="SequencerTestLanguage.ecore#//UnorderedAlternative">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//UnorderedAlternative/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//UnorderedAlternative/val2"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SequencerTestLanguage.ecore#//UnorderedAlternative/val3"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SequencerTestLanguage.ecore#//UnorderedAlternative/val4"/>
+    </genClasses>
+    <genClasses ecoreClass="SequencerTestLanguage.ecore#//UnorderedAlternativeVal">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//UnorderedAlternativeVal/val"/>
+    </genClasses>
+    <genClasses ecoreClass="SequencerTestLanguage.ecore#//UnorderedAlternativeValDelegate"/>
+    <genClasses ecoreClass="SequencerTestLanguage.ecore#//UnorderedAlternativeVal2">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//UnorderedAlternativeVal2/val"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>
