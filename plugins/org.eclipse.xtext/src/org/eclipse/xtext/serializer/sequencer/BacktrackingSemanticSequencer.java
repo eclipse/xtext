@@ -9,6 +9,7 @@ package org.eclipse.xtext.serializer.sequencer;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -18,13 +19,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
-import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.ISemState;
@@ -32,6 +31,7 @@ import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvi
 import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.formallang.Nfa;
 import org.eclipse.xtext.util.formallang.NfaUtil;
@@ -53,7 +53,7 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 
 		protected SerializableObject obj;
 
-		public FollowerSorter(SerializableObject obj, EObject nodeModelEle) {
+		public FollowerSorter(SerializableObject obj, AbstractElement nodeModelEle) {
 			super();
 			this.obj = obj;
 			this.nodeModelEle = nodeModelEle;
@@ -287,20 +287,16 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 			return index;
 		}
 
-		public INode getNextNode() {
-			if (node == null)
+		public AbstractElement getNextGrammarElement() {
+			Iterator<Triple<INode, AbstractElement, EObject>> it;
+			if (parent == null || parent.parent == null)
+				it = new SemanticNodeIterator(obj.getEObject());
+			else if (node == null)
 				return null;
-			NodeIterator ni = new NodeIterator(node);
-			while (ni.hasNext()) {
-				INode n = ni.next();
-				if (n.getGrammarElement() instanceof AbstractElement) {
-					AbstractElement e = (AbstractElement) n.getGrammarElement();
-					if ((e instanceof Keyword || e instanceof RuleCall) && GrammarUtil.isAssigned(e))
-						return n;
-					if (GrammarUtil.isAssignedAction(e))
-						return n;
-				}
-			}
+			else
+				it = new SemanticNodeIterator(node);
+			if (it.hasNext())
+				return it.next().getSecond();
 			return null;
 		}
 
@@ -414,9 +410,9 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 			}
 
 			public Iterable<ISemState> sortFollowers(TraceItem result, Iterable<ISemState> followers) {
-				INode next = result.getNextNode();
+				AbstractElement next = result.getNextGrammarElement();
 				List<ISemState> r = Lists.newArrayList(followers);
-				Collections.sort(r, new FollowerSorter(object, next == null ? null : next.getGrammarElement()));
+				Collections.sort(r, new FollowerSorter(object, next));
 				return r;
 			}
 		});
