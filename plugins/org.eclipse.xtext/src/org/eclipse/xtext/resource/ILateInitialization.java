@@ -22,4 +22,9 @@ public interface ILateInitialization {
 	 * such that modifications on the list don't fire any {@link org.eclipse.emf.common.notify.Notification}s.
 	 */
 	void doLateInitialization(EList<EObject> resourcesContentsList);
+	
+	/**
+	 * is called when the resource is updated. Clients should revert all the changes they did during {@link #doLateInitialization(EList)}
+	 */
+	void discardLateInitialization(EList<EObject> resourcesContentsList);
 }

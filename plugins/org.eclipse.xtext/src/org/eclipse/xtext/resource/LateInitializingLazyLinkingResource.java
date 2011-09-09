@@ -11,7 +11,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 
 import com.google.inject.Inject;
 
@@ -33,9 +32,6 @@ public class LateInitializingLazyLinkingResource extends LazyLinkingResource {
 	
 	protected boolean fullyInitialized = false;
 
-	@Inject
-	private IReferableElementsUnloader.GenericUnloader unloader;
-
 	@Override
 	public EList<EObject> getContents() {
 		if (isLoaded && !isLoading && !isUpdating && !fullyInitialized) {
@@ -55,15 +51,17 @@ public class LateInitializingLazyLinkingResource extends LazyLinkingResource {
 	@Override
 	protected void updateInternalState(IParseResult parseResult) {
 		if (fullyInitialized) {
-			for (EObject element : getContents()) {
-				if (element != parseResult.getRootASTElement())
-					unloader.unloadRoot(element);
-			}
+			discardLateInitializedState();
 		}
 		if (contents != null)
 			contents.clear();
 		fullyInitialized = false;
 		super.updateInternalState(parseResult);
+	}
+
+	protected void discardLateInitializedState() {
+		if (lateInitialization != null)
+			lateInitialization.discardLateInitialization(super.getContents());
 	}
 
 	protected void lateInitialize() {
