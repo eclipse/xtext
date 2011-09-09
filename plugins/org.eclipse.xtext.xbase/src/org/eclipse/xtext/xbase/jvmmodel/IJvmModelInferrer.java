@@ -7,12 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.jvmmodel;
 
-import static java.util.Collections.*;
-
-import java.util.List;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.util.IAcceptor;
 
 import com.google.inject.ImplementedBy;
 
@@ -30,19 +27,17 @@ import com.google.inject.ImplementedBy;
 public interface IJvmModelInferrer {
 
 	/**
-	 * Returns the list of inferred declared types for a given source object.
-	 * @return the list of inferred types. May not be <code>null</code>. 
+	 * is called for the root element of a resource just once.
 	 */
-	List<? extends JvmDeclaredType> inferJvmModel(EObject sourceObject);
+	void infer(EObject e, IAcceptor<JvmDeclaredType> acceptor);
 	
 	/**
-	 * A null-implementation. Returns an empty list. 
+	 * A null-implementation. 
 	 */
 	public static class NullImpl implements IJvmModelInferrer {
 
-		public List<? extends JvmDeclaredType> inferJvmModel(EObject sourceObject) {
-			return emptyList();
-		}
+		public void infer(EObject e, IAcceptor<JvmDeclaredType> acceptor) {}
 		
 	}
+	
 }

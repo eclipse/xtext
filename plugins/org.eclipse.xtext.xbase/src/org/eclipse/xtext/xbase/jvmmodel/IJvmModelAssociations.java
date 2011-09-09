@@ -11,9 +11,12 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 
+import com.google.inject.ImplementedBy;
+
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@ImplementedBy(JvmModelAssociator.class)
 public interface IJvmModelAssociations {
 	
 	Set<EObject> getSourceElements(EObject jvmElement);
