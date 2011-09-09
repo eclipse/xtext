@@ -24,12 +24,12 @@ import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
  * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("restriction")
-public class DelegateToJavaRefactoringContext extends IRenameElementContext.Impl {
+public class JdtRefactoringContext extends IRenameElementContext.Impl {
 
 	private List<IJavaElement> javaElements;
 	private final boolean isRealJvmElement;
 
-	public DelegateToJavaRefactoringContext(EObject targetJvmElement, List<IJavaElement> javaElements,
+	public JdtRefactoringContext(EObject targetJvmElement, List<IJavaElement> javaElements,
 			IEditorPart editor, ISelection selection, XtextResource contextResource, boolean isRealJvmMember) {
 		super(getNormalizedURI(targetJvmElement), targetJvmElement.eClass(), editor, selection,
 				getNormalizedURI(contextResource));

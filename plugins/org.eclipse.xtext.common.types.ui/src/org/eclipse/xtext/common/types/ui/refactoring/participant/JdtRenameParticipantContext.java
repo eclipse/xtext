@@ -15,15 +15,17 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 
 /**
+ * Context used to for renaming JVM elements that are not inside an indexed resource, thus only cross-referenced and not
+ * generated/inferred from a model element.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("restriction")
 public class JdtRenameParticipantContext extends IRenameElementContext.Impl {
 
 	private IJavaElement renamedJavaElement;
-	
-	public JdtRenameParticipantContext(JvmMember renamedJvmMember,
-			IJavaElement referencedJavaElement) {
+
+	public JdtRenameParticipantContext(JvmMember renamedJvmMember, IJavaElement referencedJavaElement) {
 		super(getURI(renamedJvmMember), renamedJvmMember.eClass());
 		this.renamedJavaElement = referencedJavaElement;
 	}

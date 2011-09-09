@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.ui.refactoring.DelegateToJavaRefactoringContext;
+import org.eclipse.xtext.common.types.ui.refactoring.JdtRefactoringContext;
 import org.eclipse.xtext.common.types.ui.refactoring.JvmRenameElementHandler;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -54,7 +54,7 @@ public class JvmModelRenameElementHandler extends JvmRenameElementHandler {
 									}
 								}), Predicates.notNull()));
 				if (!javaElements.isEmpty()) {
-					return new DelegateToJavaRefactoringContext(targetElement, javaElements, editor, selection,
+					return new JdtRefactoringContext(targetElement, javaElements, editor, selection,
 							resource, false);
 				}
 			}
