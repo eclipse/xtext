@@ -12,6 +12,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
@@ -66,7 +67,8 @@ public class Xtend2OutlineTreeProvider extends DefaultOutlineTreeProvider {
 							.getJvmElements(member), JvmOperation.class)) {
 						if (dispatchUtil.isDispatcherFunction(inferredOperation)) {
 							createEObjectNode(parentNode, inferredOperation);
-							dispatchFunctions.addAll(newArrayList(filter(associations.getSourceElements(inferredOperation),
+							final Set<EObject> xtendFunctions = associations.getSourceElements(inferredOperation);
+							dispatchFunctions.addAll(newArrayList(filter(xtendFunctions,
 									XtendFunction.class)));
 						}
 					}

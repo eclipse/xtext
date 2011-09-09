@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
@@ -45,6 +46,7 @@ import com.google.inject.Inject;
 public class Xtend2Resource extends XbaseResource {
 
 	public static final String FRAGMENT_PREFIX = "§lazyType$";
+	public static final Logger LOG = Logger.getLogger(Xtend2Resource.class);
 	
 	@Inject
 	private ITypeProvider typeProvider;
@@ -105,6 +107,9 @@ public class Xtend2Resource extends XbaseResource {
 			} else {
 				throw new IllegalStateException("couldn't resolve type proxy in "+eObject);
 			}
+		} catch (RuntimeException e) {
+			LOG.error(e.getMessage(), e);
+			throw e;
 		} finally {
 			computingFragments.remove(uriFragment);
 		}

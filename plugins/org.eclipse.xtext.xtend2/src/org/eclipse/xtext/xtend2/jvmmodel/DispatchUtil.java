@@ -7,9 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.jvmmodel;
 
-import org.eclipse.emf.ecore.EObject;
+import static com.google.common.collect.Iterables.*;
+
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
 import com.google.inject.Inject;
 
@@ -22,8 +24,8 @@ public class DispatchUtil {
 	private IJvmModelAssociations associations;
 
 	public boolean isDispatcherFunction(JvmOperation inferredOperation) {
-		EObject xtendFunction = associations.getPrimarySourceElement(inferredOperation);
-		return xtendFunction == null;
+		XtendFunction xtendFunction = filter(associations.getSourceElements(inferredOperation), XtendFunction.class).iterator().next();
+		return !inferredOperation.getSimpleName().startsWith("_") && xtendFunction.isDispatch();
 	}
 
 }

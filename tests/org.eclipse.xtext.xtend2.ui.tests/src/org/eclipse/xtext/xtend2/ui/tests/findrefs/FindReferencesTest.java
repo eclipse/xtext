@@ -94,8 +94,8 @@ public class FindReferencesTest extends AbstractXtend2UITestCase {
 		assertEquals(3, queryData.getTargetURIs().size());
 		Iterator<URI> targetURIs = queryData.getTargetURIs().iterator();
 		assertEquals(targetURIs.next(), EcoreUtil.getURI(classFoo));
-		assertEquals(targetURIs.next(), EcoreUtil.getURI(inferredTypeFoo));
 		assertEquals(targetURIs.next(), EcoreUtil.getURI(inferredConstructor));
+		assertEquals(targetURIs.next(), EcoreUtil.getURI(inferredTypeFoo));
 		assertTrue(queryData.getResultFilter() instanceof JvmModelReferenceFilter);
 		assertEquals(((JvmModelReferenceFilter) queryData.getResultFilter()).getExcludedSourceURI(),
 				EcoreUtil.getURI(classFoo));
