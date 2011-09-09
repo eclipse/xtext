@@ -7,9 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.EList;
@@ -38,6 +35,10 @@ public class LateInitializationLazyLinkingResourceTest extends AbstractXtextTest
 			public void doLateInitialization(EList<EObject> resourcesContentsList) {
 				fail("shouldn't be called after initialization");
 			}
+
+			public void discardLateInitialization(EList<EObject> resourcesContentsList) {
+				fail("shouldn't be called after initialization");
+			}
 		});
 		resource.getContents();
 		resource.setIsLoaded();
@@ -51,6 +52,10 @@ public class LateInitializationLazyLinkingResourceTest extends AbstractXtextTest
 		resource.setLateInitialization(new ILateInitialization() {
 			public void doLateInitialization(EList<EObject> resourcesContentsList) {
 				resourcesContentsList.add(EcoreFactory.eINSTANCE.createEObject());
+			}
+
+			public void discardLateInitialization(EList<EObject> resourcesContentsList) {
+				resourcesContentsList.clear();
 			}
 		});
 		assertEquals(1, resource.getContents().size());
