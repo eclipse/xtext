@@ -49,7 +49,7 @@ public class RefactorElementNameFragment extends AbstractGeneratorFragment {
 					.addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider",
 							"org.eclipse.xtext.common.types.ui.refactoring.JvmRenameRefactoringProvider")
 					.addTypeToType("org.eclipse.xtext.ui.refactoring.ui.IRenameSupport.Factory",
-							"org.eclipse.xtext.common.types.ui.refactoring.JdtAwareRenameSupportFactory")
+							"org.eclipse.xtext.common.types.ui.refactoring.JdtRenameSupport.Factory")
 					.addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider",
 							"org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy.Provider")
 					.addConfiguredBinding(
