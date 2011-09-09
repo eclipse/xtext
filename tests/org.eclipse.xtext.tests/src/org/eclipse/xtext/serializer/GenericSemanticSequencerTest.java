@@ -20,4 +20,39 @@ public class GenericSemanticSequencerTest extends AbstractSemanticSequencerTest 
 		return get(GenericSemanticSequencer.class);
 	}
 
+	@Override
+	public void testUnorderedAlternative1() throws Exception {
+		// unsupported
+	}
+
+	@Override
+	public void testUnorderedAlternative2() throws Exception {
+		// unsupported
+	}
+
+	@Override
+	public void testUnorderedAlternative3() throws Exception {
+		// unsupported
+	}
+
+	@Override
+	public void testUnorderedAlternative4() throws Exception {
+		// unsupported
+	}
+
+	@Override
+	public void testUnorderedAlternative5() throws Exception {
+		// unsupported
+	}
+
+	@Override
+	public void testUnorderedAlternative6() throws Exception {
+		// unsupported
+	}
+
+	@Override
+	public void testUnorderedAlternative7() throws Exception {
+		// unsupported
+	}
+
 }
