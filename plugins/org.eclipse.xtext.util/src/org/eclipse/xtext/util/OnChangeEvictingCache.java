@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
+import static com.google.common.collect.Sets.*;
+
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
@@ -20,16 +22,31 @@ import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
-import com.google.common.collect.Sets;
 import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class OnChangeEvictingCache implements IResourceScopeCache {
+public class OnChangeEvictingCache implements IResourceScopeCache, INotificationDispatcher {
 	
 	public static interface Listener {
 		void onEvict(CacheAdapter cache);
+	}
+	
+	/**
+	 * @since 2.1
+	 */
+	public void addListener(Resource resource, INotificationListener listener) {
+		CacheAdapter adapter = getOrCreate(resource);
+		adapter.addNotificationListener(listener);
+	}
+
+	/**
+	 * @since 2.1
+	 */
+	public void removeListener(Resource resource, INotificationListener listener) {
+		CacheAdapter adapter = getOrCreate(resource);
+		adapter.removeNotificationListener(listener);
 	}
 	
 	public void clear(Resource resource) {
@@ -77,7 +94,9 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		
 		private Map<Object, Object> values = new ConcurrentHashMap<Object, Object>(500);
 
-		private Collection<Listener> listeners = Sets.newHashSet();
+		private Collection<Listener> listeners = newLinkedHashSet();
+		
+		private Collection<INotificationListener> notificationListeners = newLinkedHashSet();
 		
 		private volatile boolean ignoreNotifications = false;
 		
@@ -109,6 +128,20 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 			this.listeners.remove(listener);
 		}
 		
+		/**
+		 * @since 2.1
+		 */
+		public void addNotificationListener(INotificationListener listener) {
+			this.notificationListeners.add(listener);
+		}
+		
+		/**
+		 * @since 2.1
+		 */
+		public void removeNotificationListener(INotificationListener listener) {
+			this.notificationListeners.remove(listener);
+		}
+		
 		@Override
 		public void notifyChanged(Notification notification) {
 			super.notifyChanged(notification);
@@ -120,6 +153,9 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 					iter.remove();
 					next.onEvict(this);
 				}
+			}
+			for (INotificationListener notificationListener : notificationListeners) {
+				notificationListener.notifyChanged(notification);
 			}
 		}
 
@@ -153,4 +189,5 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		}
 
 	}
+
 }

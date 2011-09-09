@@ -9,11 +9,13 @@ package org.eclipse.xtext.util;
 
 import junit.framework.TestCase;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
+import org.eclipse.xtext.util.INotificationDispatcher.INotificationListener;
 import org.eclipse.xtext.util.OnChangeEvictingCache.CacheAdapter;
 
 /**
@@ -38,6 +40,22 @@ public class OnChangeEvictingCacheAdapterTest extends TestCase {
 		attribute.setName("Foo");
 		assertIsNull(ca);
 		setValue(ca);
+	}
+	
+	public void testNotificationIsDispatched() throws Exception {
+		EcoreFactory factory = EcoreFactory.eINSTANCE;
+		EClass eClass = factory.createEClass();
+		Resource resource = new ResourceImpl();
+		resource.getContents().add(eClass);
+		CacheAdapter ca = new OnChangeEvictingCache().getOrCreate(resource);
+		final int[] notifications = new int[]{0};
+		ca.addNotificationListener(new INotificationListener() {
+			public void notifyChanged(Notification notification) {
+				notifications[0]++;
+			}
+		});
+		eClass.setName("Foo");
+		assertEquals(1, notifications[0]);
 	}
 
 	private void assertIsSet(CacheAdapter ca) {
