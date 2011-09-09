@@ -145,6 +145,11 @@ public abstract class AbstractXbaseWithAnnotationsRuntimeModule extends DefaultR
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.naming.IQualifiedNameProvider> bindIQualifiedNameProvider() {
+		return org.eclipse.xtext.xbase.scoping.XbaseQualifiedNameProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.xbase.typing.ITypeProvider> bindITypeProvider() {
 		return org.eclipse.xtext.xbase.typing.XbaseTypeProvider.class;
 	}
@@ -182,6 +187,11 @@ public abstract class AbstractXbaseWithAnnotationsRuntimeModule extends DefaultR
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider> bindIdentifiableSimpleNameProvider() {
 		return org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.resource.ILateInitialization> bindILateInitialization() {
+		return org.eclipse.xtext.xbase.resource.JvmModelInferringInitializer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment

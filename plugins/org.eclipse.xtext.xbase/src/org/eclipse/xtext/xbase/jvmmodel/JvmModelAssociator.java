@@ -8,262 +8,88 @@
 package org.eclipse.xtext.xbase.jvmmodel;
 
 import static com.google.common.collect.Sets.*;
-import static org.eclipse.xtext.util.Strings.*;
 
-import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.common.notify.impl.AdapterImpl;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.Constants;
-import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.util.IResourceScopeCache;
 
+import com.google.common.collect.ArrayListMultimap;
 import com.google.inject.Inject;
-import com.google.inject.name.Named;
+import com.google.inject.Provider;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Sven Efftinge
  */
 public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssociator {
 
-	@Inject@Named(Constants.LANGUAGE_NAME)
-	private String languageID;
+	@Inject
+	private IResourceScopeCache cache;
+	
+	protected ArrayListMultimap<EObject, EObject> sourceToTargetMap(EObject ctx) {
+		return cache.get("jvm-associations", ctx.eResource(), new Provider<ArrayListMultimap<EObject,EObject>>() {
+			public ArrayListMultimap<EObject, EObject> get() {
+				return ArrayListMultimap.create();
+			}
+		});
+	}
 	
 	public void associate(EObject sourceElement, EObject jvmElement) {
-		associate(sourceElement, jvmElement, false);
+		ArrayListMultimap<EObject, EObject> map = sourceToTargetMap(sourceElement);
+		map.put(sourceElement, jvmElement);
 	}
 
 	public void associatePrimary(EObject sourceElement, EObject jvmElement) {
-		associate(sourceElement, jvmElement, true);
-	}
-
-	public void disassociate(EObject rootElement) {
-		for (TreeIterator<EObject> content = EcoreUtil2.eAll(rootElement); content.hasNext();) {
-			EObject element = content.next();
-			AbstractAssociationAdapter associationAdapter = getAssociationAdapter(element);
-			if (associationAdapter != null)
-				element.eAdapters().remove(associationAdapter);
+		ArrayListMultimap<EObject, EObject> map = sourceToTargetMap(sourceElement);
+		if (map.containsKey(sourceElement)) {
+			map.get(sourceElement).add(0, jvmElement);
+		} else {
+			map.put(sourceElement, jvmElement);
 		}
-	}
-
-	protected void associate(EObject sourceElement, EObject jvmElement, boolean isPrimary) {
-		setSourceAdapter(sourceElement, jvmElement);
-		setJvmAdapter(jvmElement, sourceElement, isPrimary);
-	}
-
-	protected void setSourceAdapter(EObject targetElement, EObject associatedElement) {
-		AbstractAssociationAdapter adapter = getAssociationAdapter(targetElement);
-		if (adapter == null) {
-			adapter = new SourceAssociationAdapter(languageID);
-			targetElement.eAdapters().add(adapter);
-		} else
-			checkAdapter(adapter, false);
-		adapter.addAssociation(associatedElement);
-	}
-
-	protected void setJvmAdapter(EObject targetElement, EObject associatedElement, boolean isPrimary) {
-		AbstractAssociationAdapter adapter = getAssociationAdapter(targetElement);
-		if (adapter == null) {
-			adapter = new JvmAssociationAdapter(languageID);
-			targetElement.eAdapters().add(adapter);
-		} else
-			checkAdapter(adapter, true);
-		if (isPrimary)
-			((JvmAssociationAdapter) adapter).setPrimaryAssociatedElement(associatedElement);
-		else
-			adapter.addAssociation(associatedElement);
 	}
 
 	public Set<EObject> getJvmElements(EObject sourceElement) {
-		return getAssociatedElements(getSourceAdapter(sourceElement));
+		final ArrayListMultimap<EObject, EObject> sourceToTargetMap = sourceToTargetMap(sourceElement);
+		final List<EObject> elements = sourceToTargetMap.get(sourceElement);
+		return newLinkedHashSet(elements);
 	}
 
 	public Set<EObject> getSourceElements(EObject jvmElement) {
-		return getAssociatedElements(getJvmAdapter(jvmElement));
+		//If this turns out to be too slow we should improve the internal data structure :-)
+		ArrayListMultimap<EObject,EObject> map = sourceToTargetMap(jvmElement);
+		Set<EObject> sourceElements = newLinkedHashSet();
+		for (Map.Entry<EObject, EObject> entry : map.entries()) {
+			if (entry.getValue() == jvmElement)
+				sourceElements.add(entry.getKey());
+		}
+		return sourceElements;
 	}
 
 	public EObject getPrimarySourceElement(EObject jvmElement) {
-		JvmAssociationAdapter jvmAdapter = getJvmAdapter(jvmElement);
-		return (jvmAdapter) != null ? jvmAdapter.getPrimaryAssociatedElement() : null;
+		ArrayListMultimap<EObject,EObject> map = sourceToTargetMap(jvmElement);
+		for (Map.Entry<EObject, EObject> entry : map.entries()) {
+			if (entry.getValue() == jvmElement)
+				return entry.getKey();
+		}
+		return null;
 	}
 
+	//TODO get rid of this method
 	public Set<EObject> getAssociatedElements(EObject jvmOrSourceElement) {
-		return getAssociatedElements(getAssociationAdapter(jvmOrSourceElement));
+		ArrayListMultimap<EObject,EObject> map = sourceToTargetMap(jvmOrSourceElement);
+		Set<EObject> sourceElements = newLinkedHashSet();
+		for (Map.Entry<EObject, EObject> entry : map.entries()) {
+			if (entry.getValue() == jvmOrSourceElement) {
+				sourceElements.add(entry.getKey());
+			} else if (entry.getKey() == jvmOrSourceElement) {
+				sourceElements.add(entry.getValue());
+			}
+		}
+		return sourceElements;
 	}
 
-	protected Set<EObject> getAssociatedElements(AbstractAssociationAdapter adapter) {
-		return (adapter == null) ? Collections.<EObject> emptySet() : adapter.getAssociatedElements();
-	}
-
-	protected SourceAssociationAdapter getSourceAdapter(EObject sourceElement) {
-		AbstractAssociationAdapter adapter = getAssociationAdapter(sourceElement);
-		return (adapter instanceof SourceAssociationAdapter) ? (SourceAssociationAdapter) adapter : null;
-	}
-
-	protected JvmAssociationAdapter getJvmAdapter(EObject jvmElement) {
-		AbstractAssociationAdapter adapter = getAssociationAdapter(jvmElement);
-		return (adapter instanceof JvmAssociationAdapter) ? (JvmAssociationAdapter) adapter : null;
-	}
-
-	protected void checkAdapter(AbstractAssociationAdapter adapter, boolean isJvm) {
-		if (adapter != null && (adapter instanceof JvmAssociationAdapter ^ isJvm))
-			throw new IllegalArgumentException(
-					"Wrong association adapter type. It's likely you confused source and jvm element");
-	}
-
-	protected AbstractAssociationAdapter getAssociationAdapter(EObject jvmOrSourceElement) {
-		AbstractAssociationAdapter adapter = (AbstractAssociationAdapter) EcoreUtil.getAdapter(jvmOrSourceElement.eAdapters(),
-				AbstractAssociationAdapter.class);
-		return (adapter != null && equal(adapter.getLanguageID(), languageID)) ? adapter : null;
-	}
-
-	protected static abstract class AbstractAssociationAdapter extends AdapterImpl {
-		private Set<EObject> associatedElements;
-		
-		private String languageID;
-
-		public AbstractAssociationAdapter(String languageID) {
-			super();
-			this.languageID = languageID;
-		}
-
-		public String getLanguageID() {
-			return languageID;
-		}
-		
-		protected boolean addAssociation(EObject associatedElement) {
-			if (associatedElements == null)
-				associatedElements = newLinkedHashSet();
-			return associatedElements.add(associatedElement);
-		}
-
-		public Set<EObject> getAssociatedElements() {
-			return (associatedElements == null) ? Collections.<EObject> emptySet() : associatedElements;
-		}
-
-		@Override
-		public boolean isAdapterForType(Object type) {
-			return AbstractAssociationAdapter.class.equals(type);
-		}
-	}
-
-	protected static class SourceAssociationAdapter extends AbstractAssociationAdapter {
-		public SourceAssociationAdapter(String languageID) {
-			super(languageID);
-		}
-	}
-
-	protected static class JvmAssociationAdapter extends AbstractAssociationAdapter {
-		private EObject primaryAssociatedElement;
-
-		public JvmAssociationAdapter(String languageID) {
-			super(languageID);
-		}
-
-		public EObject getPrimaryAssociatedElement() {
-			return primaryAssociatedElement;
-		}
-
-		public void setPrimaryAssociatedElement(EObject primaryAssociatedElement) {
-			this.primaryAssociatedElement = primaryAssociatedElement;
-			addAssociation(primaryAssociatedElement);
-		}
-	}
 }
-
-///*******************************************************************************
-// * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
-// * All rights reserved. This program and the accompanying materials
-// * are made available under the terms of the Eclipse Public License v1.0
-// * which accompanies this distribution, and is available at
-// * http://www.eclipse.org/legal/epl-v10.html
-// *******************************************************************************/
-//package org.eclipse.xtext.xbase.jvmmodel;
-//
-//import static com.google.common.collect.Sets.*;
-//
-//import java.util.List;
-//import java.util.Map;
-//import java.util.Set;
-//
-//import org.eclipse.emf.ecore.EObject;
-//import org.eclipse.xtext.util.OnChangeEvictingCache;
-//
-//import com.google.common.collect.ArrayListMultimap;
-//import com.google.inject.Inject;
-//import com.google.inject.Provider;
-//
-///**
-// * @author Jan Koehnlein - Initial contribution and API
-// */
-//public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssociator {
-//
-//	@Inject
-//	private OnChangeEvictingCache cache;
-//	
-//	protected ArrayListMultimap<EObject, EObject> sourceToTargetMap(EObject ctx) {
-//		return cache.get("jvm-associations", ctx.eResource(), new Provider<ArrayListMultimap<EObject,EObject>>() {
-//			public ArrayListMultimap<EObject, EObject> get() {
-//				return ArrayListMultimap.create();
-//			}
-//		});
-//	}
-//	
-//	public void associate(EObject sourceElement, EObject jvmElement) {
-//		ArrayListMultimap<EObject, EObject> map = sourceToTargetMap(sourceElement);
-//		map.put(sourceElement, jvmElement);
-//	}
-//
-//	public void associatePrimary(EObject sourceElement, EObject jvmElement) {
-//		ArrayListMultimap<EObject, EObject> map = sourceToTargetMap(sourceElement);
-//		if (map.containsKey(sourceElement)) {
-//			map.get(sourceElement).add(0, jvmElement);
-//		} else {
-//			map.put(sourceElement, jvmElement);
-//		}
-//	}
-//
-//	public Set<EObject> getJvmElements(EObject sourceElement) {
-//		final ArrayListMultimap<EObject, EObject> sourceToTargetMap = sourceToTargetMap(sourceElement);
-//		final List<EObject> elements = sourceToTargetMap.get(sourceElement);
-//		return newLinkedHashSet(elements);
-//	}
-//
-//	public Set<EObject> getSourceElements(EObject jvmElement) {
-//		//If this turns out to be too slow we should improve the internal data structure :-)
-//		ArrayListMultimap<EObject,EObject> map = sourceToTargetMap(jvmElement);
-//		Set<EObject> sourceElements = newLinkedHashSet();
-//		for (Map.Entry<EObject, EObject> entry : map.entries()) {
-//			if (entry.getValue() == jvmElement)
-//				sourceElements.add(entry.getKey());
-//		}
-//		return sourceElements;
-//	}
-//
-//	public EObject getPrimarySourceElement(EObject jvmElement) {
-//		ArrayListMultimap<EObject,EObject> map = sourceToTargetMap(jvmElement);
-//		for (Map.Entry<EObject, EObject> entry : map.entries()) {
-//			if (entry.getValue() == jvmElement)
-//				return entry.getKey();
-//		}
-//		return null;
-//	}
-//
-//	//TODO get rid of this method
-//	public Set<EObject> getAssociatedElements(EObject jvmOrSourceElement) {
-//		ArrayListMultimap<EObject,EObject> map = sourceToTargetMap(jvmOrSourceElement);
-//		Set<EObject> sourceElements = newLinkedHashSet();
-//		for (Map.Entry<EObject, EObject> entry : map.entries()) {
-//			if (entry.getValue() == jvmOrSourceElement) {
-//				sourceElements.add(entry.getKey());
-//			} else if (entry.getKey() == jvmOrSourceElement) {
-//				sourceElements.add(entry.getValue());
-//			}
-//		}
-//		return sourceElements;
-//	}
-//
-//}
 
