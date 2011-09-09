@@ -11,23 +11,24 @@ import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.util.ParseHelper
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 
 @org.junit.runner.RunWith(typeof(XtextRunner))
 @InjectWith(typeof(InjectorProviderCustom))
 class ParserTest {
 	
-	@Inject
-	ParseHelper<DomainModel> parser
+	@Inject extension ParseHelper<DomainModel>
+	@Inject extension ValidationTestHelper
 
 	@Test
 	def void testParsing() {
-		val model = parser.parse('''
+		val model = '''
 			package example {
 			  entity MyEntity {
 			    property : String
 			  }
 			}
-		''')
+		'''.parse
 		
 		val pack = model.getElements().get(0) as PackageDeclaration
 		Assert::assertEquals("example", pack.getName())
@@ -38,5 +39,20 @@ class ParserTest {
 		val property = entity.getFeatures().get(0) as Property
 		Assert::assertEquals("property", property.getName());
 		Assert::assertEquals("java.lang.String", property.getType().getIdentifier());
+	}
+	
+	@Test
+	def void testParsingAndLinking() {
+		'''
+			package example {
+			  entity MyEntity {
+			    property : String
+			    op foo(String s) : String {
+			    	this.property = s
+			    	return s.toUpperCase
+			    }
+			  }
+			}
+		'''.parse.assertNoErrors
 	}
 }
