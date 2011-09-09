@@ -215,11 +215,6 @@ public abstract class AbstractXtend2RuntimeModule extends DefaultRuntimeModule {
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
-	public Class<? extends org.eclipse.xtext.linking.ILinker> bindILinker() {
-		return org.eclipse.xtext.xbase.jvmmodel.JvmModelXbaseLazyLinker.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations> bindIJvmModelAssociations() {
 		return org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator.class;
 	}

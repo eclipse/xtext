@@ -73,6 +73,7 @@ import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping;
+import org.eclipse.xtext.xbase.jvmmodel.IExpressionContextProvider;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
@@ -96,6 +97,28 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 
 	@Inject
 	private SuperTypeCollector collector;
+	
+	@Inject
+	private IExpressionContextProvider expressionContextProvider;
+	
+	
+	@Override
+	protected JvmTypeReference _expectedType(EObject obj, EReference reference, int index, boolean rawType) {
+		Object ele = obj.eGet(reference);
+		if (ele instanceof List) {
+			ele = ((List<?>)ele).get(index);
+		}
+		if (ele instanceof XExpression) {
+			JvmIdentifiableElement element = expressionContextProvider.getAssociatedJvmElement((XExpression) ele);
+			if (element instanceof JvmOperation) {
+				return ((JvmOperation) element).getReturnType();
+			}
+			if (element instanceof JvmField) {
+				return ((JvmField) element).getType();
+			}
+		}
+		return null;
+	}
 	
 	protected JvmTypeReference _expectedType(XAssignment assignment, EReference reference, int index, boolean rawType) {
 		if (reference == XbasePackage.Literals.XASSIGNMENT__VALUE) {
