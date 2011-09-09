@@ -8,7 +8,7 @@
 package org.eclipse.xtext.util;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 
 /**
  * @author Sven Efftinge - Initial contribution and API

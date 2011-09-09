@@ -154,8 +154,10 @@ public class OnChangeEvictingCache implements IResourceScopeCache, INotification
 					next.onEvict(this);
 				}
 			}
-			for (INotificationListener notificationListener : notificationListeners) {
-				notificationListener.notifyChanged(notification);
+			if (!ignoreNotifications) {
+				for (INotificationListener notificationListener : notificationListeners) {
+					notificationListener.notifyChanged(notification);
+				}
 			}
 		}
 
