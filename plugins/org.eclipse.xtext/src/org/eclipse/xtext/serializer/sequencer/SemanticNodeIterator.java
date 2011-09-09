@@ -31,14 +31,17 @@ public class SemanticNodeIterator implements Iterator<Triple<INode, AbstractElem
 	protected Triple<INode, AbstractElement, EObject> next;
 
 	public SemanticNodeIterator(EObject obj) {
-		INode start = NodeModelUtils.findActualNodeFor(obj).getFirstChild();
-		if (isEObjectNode(start))
-			start = ((ICompositeNode) start).getFirstChild();
-		this.next = findNext(start, false);
+		INode start = NodeModelUtils.findActualNodeFor(obj);
+		if (start != null) {
+			if (isEObjectNode(start))
+				start = ((ICompositeNode) start).getFirstChild();
+			this.next = findNext(start, false);
+		} else
+			this.next = null;
 	}
 
 	public SemanticNodeIterator(INode start) {
-		this.next = findNext(start, true);
+		this.next = start != null ? findNext(start, true) : null;
 	}
 
 	protected Triple<INode, AbstractElement, EObject> findNext(INode node, boolean prune) {

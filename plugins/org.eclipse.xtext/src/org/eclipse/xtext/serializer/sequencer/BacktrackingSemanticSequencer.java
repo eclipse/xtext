@@ -289,7 +289,7 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 
 		public AbstractElement getNextGrammarElement() {
 			Iterator<Triple<INode, AbstractElement, EObject>> it;
-			if (parent == null || parent.parent == null)
+			if (obj != null && (parent == null || parent.parent == null))
 				it = new SemanticNodeIterator(obj.getEObject());
 			else if (node == null)
 				return null;
