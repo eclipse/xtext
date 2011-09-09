@@ -14,7 +14,6 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -42,7 +41,6 @@ import org.eclipse.xtext.util.Triple;
 
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
