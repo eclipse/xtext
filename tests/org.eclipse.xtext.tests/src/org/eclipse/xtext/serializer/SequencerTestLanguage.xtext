@@ -16,7 +16,8 @@ Model:
 	x10=SingleKeywords | x11=SingleKeywordsOrID | x12=SingleTerminals |
 	x10=MultiKeywords | x11=MultiKeywordsOrID | x12=MultiTerminals |
 	x13=SingleEnum | x14=SingleCrossReference | x15=SingleContainmentReference |
-	x19=DependentAlternative1 | x20=DependentAlternative2 | x21=Optional | x22=Float;
+	x19=DependentAlternative1 | x20=DependentAlternative2 | x21=Optional | x22=Float |
+	x23=UnorderedAlternative;
 
 SimpleGroup:
 	"#1" val1=ID val2=ID;
@@ -112,3 +113,14 @@ Optional:
 Float:
     "#22" {Float} 'Bye';
 	
+UnorderedAlternative:
+	"#23" {UnorderedAlternative} (val1+=ID | val2+=INT | val3+=UnorderedAlternativeVal | val4+=UnorderedAlternativeValDelegate)*;
+	
+UnorderedAlternativeVal: 
+	"kw1" val=ID;
+	
+UnorderedAlternativeValDelegate:
+	UnorderedAlternativeVal2;
+	
+UnorderedAlternativeVal2: 
+	"kw2" val=ID;

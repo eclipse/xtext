@@ -70,10 +70,12 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 
 	@Inject
 	private Provider<ISyntacticSequencer> syntacticSequencerProvider;
+	
+	@Inject 
+	private NodeModelSemanticSequencer nmSequencer;
 
 	private void testSequence(String stringModel) throws Exception {
 		EObject model = getModel(stringModel);
-		NodeModelSemanticSequencer nmSequencer = new NodeModelSemanticSequencer();
 		EObject context = nmSequencer.findContexts(model, true, null).iterator().next();
 		DebugSequenceAcceptor actual = new NoEnterNodesDebugSequenceAcceptor(false);
 		ISemanticSequencer semanticSequencer = semanticSequencerProvider.get();

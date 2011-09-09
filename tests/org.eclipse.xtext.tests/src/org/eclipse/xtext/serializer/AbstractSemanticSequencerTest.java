@@ -33,6 +33,9 @@ public abstract class AbstractSemanticSequencerTest extends AbstractXtextTests {
 	@Inject
 	private Provider<ISemanticSequencer> generatedSequencerProvider;
 
+	@Inject
+	private NodeModelSemanticSequencer nmSequencer;
+
 	protected abstract ISemanticSequencer getGenericSemanticSequencer();
 
 	private void testSequence(String stringModel) throws Exception {
@@ -42,7 +45,6 @@ public abstract class AbstractSemanticSequencerTest extends AbstractXtextTests {
 
 		ISemanticSequencer generatedSequencer = generatedSequencerProvider.get();
 		ISemanticSequencer genericSequencer = getGenericSemanticSequencer();
-		NodeModelSemanticSequencer nmSequencer = new NodeModelSemanticSequencer();
 
 		assertTrue(generatedSequencer instanceof AbstractSequencerTestLanguageSemanticSequencer);
 
@@ -303,6 +305,34 @@ public abstract class AbstractSemanticSequencerTest extends AbstractXtextTests {
 
 	public void testOptional1_e() throws Exception {
 		testSequence("#21 1");
+	}
+
+	public void testUnorderedAlternative1() throws Exception {
+		testSequence("#23 1 a");
+	}
+
+	public void testUnorderedAlternative2() throws Exception {
+		testSequence("#23 a 1");
+	}
+
+	public void testUnorderedAlternative3() throws Exception {
+		testSequence("#23 kw1 a kw2 b");
+	}
+
+	public void testUnorderedAlternative4() throws Exception {
+		testSequence("#23 kw2 b kw1 a");
+	}
+
+	public void testUnorderedAlternative5() throws Exception {
+		testSequence("#23 1 a kw1 a kw2 b");
+	}
+
+	public void testUnorderedAlternative6() throws Exception {
+		testSequence("#23 kw2 b kw1 a a 1");
+	}
+
+	public void testUnorderedAlternative7() throws Exception {
+		testSequence("#23 kw2 b kw1 a a 1 c d 2 i 7 kw2 x kw1 x 8 g");
 	}
 
 }
