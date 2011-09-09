@@ -75,21 +75,26 @@ public class BestMatchingJvmFeatureScope implements IScope {
 			if (this.reference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE) {
 				final XAbstractFeatureCall featureCall = (XAbstractFeatureCall) this.context;
 				IValidatedEObjectDescription validated = (IValidatedEObjectDescription) bestMatch;
-				featureCall.setInvalidFeatureIssueCode(validated.getIssueCode());
-				if (validated instanceof JvmFeatureDescription) {
-					final XExpression implicitReceiver = ((JvmFeatureDescription) validated).getImplicitReceiver();
-					if (implicitReceiver!=null) {
-						featureCall.eSetDeliver(false);
-						try {
-							featureCall.setImplicitReceiver(EcoreUtil2.clone(implicitReceiver));
-						} finally {
-							featureCall.eSetDeliver(true);
+				featureCall.eSetDeliver(false);
+				try {
+					featureCall.setInvalidFeatureIssueCode(validated.getIssueCode());
+					if (validated instanceof JvmFeatureDescription) {
+						final XExpression implicitReceiver = ((JvmFeatureDescription) validated).getImplicitReceiver();
+						if (implicitReceiver!=null) {
+								featureCall.setImplicitReceiver(EcoreUtil2.clone(implicitReceiver));
 						}
 					}
+				} finally {
+					featureCall.eSetDeliver(true);
 				}
 			} else if(this.reference == XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR) {
 				final XConstructorCall constructorCall = (XConstructorCall) this.context;
-				constructorCall.setInvalidFeatureIssueCode(((IValidatedEObjectDescription) bestMatch).getIssueCode());
+				constructorCall.eSetDeliver(false);
+				try {
+					constructorCall.setInvalidFeatureIssueCode(((IValidatedEObjectDescription) bestMatch).getIssueCode());
+				} finally {
+					constructorCall.eSetDeliver(true);
+				}
 			}
 		}
 		return bestMatch;
