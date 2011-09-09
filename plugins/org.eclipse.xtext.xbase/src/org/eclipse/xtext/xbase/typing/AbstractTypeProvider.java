@@ -131,7 +131,7 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 				boolean rawType = (Boolean) ((Triple<?, ?, ?>) key).getThird();
 				//TODO the test for 'Void' is a hack and a result of the lack of a protocol for unresolved references 
 				// I.e. some type computations return Void instead when they couldn't compute a certain type.
-				if (element==null || (element instanceof JvmTypeReference && (((JvmTypeReference)element).getIdentifier().contains("Void") || !isResolved((JvmTypeReference) element, null, rawType)))) {
+				if (element==null || (element instanceof JvmTypeReference && (isOrContainsVoid((JvmTypeReference)element) || !isResolved((JvmTypeReference) element, null, rawType)))) {
 					if (logger.isDebugEnabled()) {
 						logger.debug(getDebugIndentation(rawType) + "cache skip: " + element);
 					}
@@ -144,6 +144,11 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 			}
 			return element;
 		}
+		
+		protected boolean isOrContainsVoid(JvmTypeReference ref) {
+			return (ref != null && ref.getIdentifier() != null && ref.getIdentifier().contains("Void"));
+		}
+		
 	};
 	
 	// TODO improve / extract to a utility method if other clients are doing similar things
