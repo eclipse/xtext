@@ -85,6 +85,11 @@ public abstract class AbstractDomainmodelRuntimeModule extends DefaultRuntimeMod
 	}
 
 	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
+	public Class<? extends org.eclipse.xtext.scoping.IScopeProvider> bindIScopeProvider() {
+		return org.eclipse.xtext.example.domainmodel.scoping.DomainmodelScopeProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
 	public void configureIgnoreCaseLinking(com.google.inject.Binder binder) {
 		binder.bindConstant().annotatedWith(org.eclipse.xtext.scoping.IgnoreCaseLinking.class).to(false);
 	}
@@ -192,6 +197,11 @@ public abstract class AbstractDomainmodelRuntimeModule extends DefaultRuntimeMod
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider> bindIdentifiableSimpleNameProvider() {
 		return org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.resource.ILateInitialization> bindILateInitialization() {
+		return org.eclipse.xtext.xbase.resource.JvmModelInferringInitializer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
