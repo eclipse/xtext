@@ -96,7 +96,6 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 	private static final int GAP = 2;
 
 	private XtextEditor editor;
-	private RenameLinkedMode renameLinkedMode;
 	private RenameRefactoringController controller;
 
 	private Region region;
@@ -112,18 +111,15 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 	private MenuManager menuManager;
 	private boolean iSMenuUp = false;
 
-
-
 	public RenameRefactoringPopup(XtextEditor editor, RenameRefactoringController controller) {
 		this.editor = editor;
 		this.controller = controller;
-		this.renameLinkedMode = controller.getActiveLinkedMode();
 	}
-
-	private void updateVisibility() {
+	
+	protected void updateVisibility() {
 		if (popup != null && !popup.isDisposed() && delayJobFinished) {
 			boolean visible = false;
-			if (renameLinkedMode.isCaretInLinkedPosition()) {
+			if (controller.getActiveLinkedMode().isCaretInLinkedPosition()) {
 				StyledText textWidget = editor.getInternalSourceViewer().getTextWidget();
 				Rectangle eArea = Geometry.toDisplay(textWidget, textWidget.getClientArea());
 				Rectangle pBounds = popup.getBounds();
@@ -148,7 +144,7 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 		}
 	}
 
-	private void releaseWidgetToken() {
+	protected void releaseWidgetToken() {
 		ISourceViewer viewer = editor.getInternalSourceViewer();
 		if (viewer instanceof IWidgetTokenOwner) {
 			IWidgetTokenOwner widgetTokenOwner = (IWidgetTokenOwner) viewer;
@@ -216,7 +212,7 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 		delayJob.schedule(POPUP_VISIBILITY_DELAY);
 	}
 
-	private void createContent(Composite parent) {
+	protected void createContent(Composite parent) {
 		Display display = parent.getDisplay();
 		Color foreground = display.getSystemColor(SWT.COLOR_INFO_FOREGROUND);
 		Color background = display.getSystemColor(SWT.COLOR_INFO_BACKGROUND);
@@ -231,7 +227,7 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 		recursiveSetBackgroundColor(parent, background);
 	}
 
-	private static void recursiveSetBackgroundColor(Control control, Color color) {
+	protected static void recursiveSetBackgroundColor(Control control, Color color) {
 		control.setBackground(color);
 		if (control instanceof Composite) {
 			Control[] children = ((Composite) control).getChildren();
@@ -241,7 +237,7 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 		}
 	}
 
-	private ToolBar addViewMenu(final Composite parent) {
+	protected ToolBar addViewMenu(final Composite parent) {
 		toolBar = new ToolBar(parent, SWT.FLAT);
 		final ToolItem menuButton = new ToolItem(toolBar, SWT.PUSH, 0);
 		menuImage = Activator.getImageDescriptor("icons/elcl16/view_menu.gif").createImage();
@@ -263,14 +259,14 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 		return toolBar;
 	}
 
-	private void showMenu(ToolBar toolBar) {
+	protected void showMenu(ToolBar toolBar) {
 		Menu menu = getMenuManager().createContextMenu(toolBar);
 		menu.setLocation(toolBar.toDisplay(0, toolBar.getSize().y));
 		iSMenuUp = true;
 		menu.setVisible(true);
 	}
 
-	private MenuManager getMenuManager() {
+	protected MenuManager getMenuManager() {
 		if (menuManager != null) {
 			return menuManager;
 		}
@@ -284,7 +280,7 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 			}
 
 			public void menuAboutToShow(IMenuManager manager) {
-				boolean canRefactor = renameLinkedMode.isCurrentNameValid();
+				boolean canRefactor = controller.getActiveLinkedMode().isCurrentNameValid();
 				IAction refactorAction = new Action("Rename...") {
 					@Override
 					public void run() {
@@ -320,15 +316,15 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 		return menuManager;
 	}
 
-	private static String getEnterBinding() {
+	protected static String getEnterBinding() {
 		return KeyStroke.getInstance(KeyLookupFactory.getDefault().formalKeyLookup(IKeyLookup.CR_NAME)).format();
 	}
 
-	private Point computePopupLocation() {
+	protected Point computePopupLocation() {
 		if (popup == null || popup.isDisposed())
 			return null;
 
-		LinkedPosition position = renameLinkedMode.getCurrentLinkedPosition();
+		LinkedPosition position = controller.getActiveLinkedMode().getCurrentLinkedPosition();
 		if (position == null)
 			return null;
 		ISourceViewer viewer = editor.getInternalSourceViewer();
@@ -348,13 +344,13 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 		return new Point(dPopupRect.x, dPopupRect.y);
 	}
 
-	private Point getExtent() {
+	protected Point getExtent() {
 		Point e = popup.getSize();
 		e.y -= HAH;
 		return e;
 	}
 
-	private void updatePopupLocation() {
+	protected void updatePopupLocation() {
 		packPopup();
 		Point loc = computePopupLocation();
 
@@ -363,7 +359,7 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 		}
 	}
 
-	private void packPopup() {
+	protected void packPopup() {
 		popupLayout.marginTop = HAH;
 		popupLayout.marginBottom = 0;
 		popup.pack();
@@ -378,7 +374,7 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 		}
 	}
 
-	private int[] getPolygon(boolean border) {
+	protected int[] getPolygon(boolean border) {
 		Point e = getExtent();
 		int b = border ? 1 : 0;
 		boolean isRTL = (popup.getStyle() & SWT.RIGHT_TO_LEFT) != 0;
@@ -396,7 +392,7 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 	 * 
 	 * @return the keybinding for Refactor &gt; Rename
 	 */
-	private static String getOpenDialogBinding() {
+	protected static String getOpenDialogBinding() {
 		IBindingService bindingService = (IBindingService) PlatformUI.getWorkbench().getAdapter(IBindingService.class);
 		if (bindingService == null)
 			return ""; //$NON-NLS-1$
@@ -430,7 +426,7 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 		return false;
 	}
 
-	private void activateEditor() {
+	protected void activateEditor() {
 		editor.getSite().getShell().setActive();
 	}
 
@@ -451,7 +447,7 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 
 	protected class PopupVisibilityManager implements IPartListener2, ControlListener, MouseListener, KeyListener, IViewportListener {
 
-		private void start() {
+		protected void start() {
 			editor.getSite().getWorkbenchWindow().getPartService().addPartListener(this);
 			final ISourceViewer viewer = editor.getInternalSourceViewer();
 			final StyledText textWidget = viewer.getTextWidget();
