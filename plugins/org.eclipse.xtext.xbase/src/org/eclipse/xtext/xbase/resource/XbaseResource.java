@@ -9,14 +9,15 @@ package org.eclipse.xtext.xbase.resource;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.resource.LateInitializingLazyLinkingResource;
 import org.eclipse.xtext.util.Triple;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class XbaseResource extends LazyLinkingResource {
+public class XbaseResource extends LateInitializingLazyLinkingResource {
+	
 	@Override
 	protected EObject handleCyclicResolution(Triple<EObject, EReference, INode> triple) throws AssertionError {
 		return null;
