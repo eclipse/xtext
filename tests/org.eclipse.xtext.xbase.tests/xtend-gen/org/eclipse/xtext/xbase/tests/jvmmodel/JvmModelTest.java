@@ -1,24 +1,23 @@
 package org.eclipse.xtext.xbase.tests.jvmmodel;
 
 import com.google.inject.Inject;
+import java.io.IOException;
+import junit.framework.Assert;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmMember;
-import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
+import org.eclipse.xtext.resource.LateInitializingLazyLinkingResource;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
-import org.eclipse.xtext.xbase.lib.CollectionExtensions;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.eclipse.xtext.xbase.resource.JvmModelInferringInitializer;
+import org.eclipse.xtext.xbase.tests.jvmmodel.AbstractJvmModelTest;
+import org.eclipse.xtext.xbase.tests.jvmmodel.SimpleJvmModelInferrer;
 
 @SuppressWarnings("all")
-public class JvmModelTest extends AbstractXbaseTestCase {
+public class JvmModelTest extends AbstractJvmModelTest {
   
   @Inject
   private JvmTypesBuilder builder;
@@ -35,38 +34,37 @@ public class JvmModelTest extends AbstractXbaseTestCase {
       final XExpression expression = _expression;
       Resource _eResource = expression.eResource();
       final Resource resource = _eResource;
-      resource.eSetDeliver(false);
-      final Function1<JvmGenericType,Void> _function = new Function1<JvmGenericType,Void>() {
-          public Void apply(final JvmGenericType it) {
-            Void _xblockexpression = null;
-            {
-              EList<JvmMember> _members = it.getMembers();
-              JvmTypeReference _typeForName = JvmModelTest.this.references.getTypeForName(java.lang.String.class, expression);
-              final Function1<JvmOperation,Void> _function_1 = new Function1<JvmOperation,Void>() {
-                  public Void apply(final JvmOperation it_1) {
-                    {
-                      EList<JvmFormalParameter> _parameters = it_1.getParameters();
-                      JvmTypeReference _typeForName_1 = JvmModelTest.this.references.getTypeForName(java.lang.String.class, expression);
-                      JvmFormalParameter _parameter = JvmModelTest.this.builder.toParameter(expression, "s", _typeForName_1);
-                      CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter);
-                      JvmModelTest.this.builder.associate(expression, it_1);
-                    }
-                    return null;
-                  }
-                };
-              JvmOperation _method = JvmModelTest.this.builder.toMethod(expression, "doStuff", _typeForName, _function_1);
-              CollectionExtensions.<JvmMember>operator_add(_members, _method);
-              _xblockexpression = (null);
-            }
-            return _xblockexpression;
-          }
-        };
-      JvmGenericType _clazz = this.builder.toClazz(expression, "Foo", _function);
-      final JvmGenericType clazz = _clazz;
-      EList<EObject> _contents = resource.getContents();
-      CollectionExtensions.<EObject>operator_add(_contents, clazz);
-      resource.eSetDeliver(true);
       this.helper.assertNoErrors(expression);
+    }
+  }
+  
+  public void testStateIsUpdatedOnChange() throws IOException, Exception {
+    {
+      Resource _newResource = this.newResource("return s.toUpperCase");
+      final Resource resource = _newResource;
+      XExpression _expression = this.expression("return \'foo\'", false);
+      final XReturnExpression expression2 = ((XReturnExpression) _expression);
+      JvmModelInferringInitializer _get = this.<JvmModelInferringInitializer>get(org.eclipse.xtext.xbase.resource.JvmModelInferringInitializer.class);
+      final JvmModelInferringInitializer initializer = _get;
+      SimpleJvmModelInferrer _get_1 = this.<SimpleJvmModelInferrer>get(org.eclipse.xtext.xbase.tests.jvmmodel.SimpleJvmModelInferrer.class);
+      initializer.setInferrer(_get_1);
+      ((LateInitializingLazyLinkingResource) resource).setLateInitialization(initializer);
+      EList<EObject> _contents = resource.getContents();
+      int _size = _contents.size();
+      Assert.assertEquals(2, _size);
+      EList<EObject> _contents_1 = resource.getContents();
+      EObject _get_2 = _contents_1.get(1);
+      final EObject type = _get_2;
+      EList<EObject> _contents_2 = resource.getContents();
+      EObject _get_3 = _contents_2.get(0);
+      XExpression _expression_1 = expression2.getExpression();
+      ((XReturnExpression) _get_3).setExpression(_expression_1);
+      EList<EObject> _contents_3 = resource.getContents();
+      int _size_1 = _contents_3.size();
+      Assert.assertEquals(2, _size_1);
+      EList<EObject> _contents_4 = resource.getContents();
+      EObject _get_4 = _contents_4.get(1);
+      Assert.assertNotSame(type, _get_4);
     }
   }
 }
