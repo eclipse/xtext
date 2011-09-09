@@ -36,10 +36,10 @@ public class JdtRenameSupport implements IRenameSupport {
 
 		@Override
 		public IRenameSupport create(Object context, String newName) {
-			if (context instanceof DelegateToJavaRefactoringContext) {
+			if (context instanceof JdtRefactoringContext) {
 				try {
 					RenameJavaElementDescriptor descriptor = createDescriptor(
-							(DelegateToJavaRefactoringContext) context, newName);
+							(JdtRefactoringContext) context, newName);
 					return new JdtRenameSupport(descriptor);
 				} catch (Exception exc) {
 					throw new WrappedException(exc);
@@ -48,7 +48,7 @@ public class JdtRenameSupport implements IRenameSupport {
 			return super.create(context, newName);
 		}
 
-		protected RenameJavaElementDescriptor createDescriptor(DelegateToJavaRefactoringContext renameElementContext,
+		protected RenameJavaElementDescriptor createDescriptor(JdtRefactoringContext renameElementContext,
 				String newName) throws JavaModelException {
 			List<IJavaElement> javaElements = renameElementContext.getJavaElements();
 			// TODO handle multiple java elements gracefully

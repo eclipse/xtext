@@ -23,7 +23,7 @@ import org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler;
 import com.google.inject.Inject;
 
 /**
- * Creates a {@link DelegateToJavaRefactoringContext} if a reference to a JVM element is being refactored.
+ * Creates a {@link JdtRefactoringContext} if a reference to a JVM element is being refactored.
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
@@ -39,7 +39,7 @@ public class JvmRenameElementHandler extends DefaultRenameElementHandler {
 		if (isRealJvmMember(targetElement)) {
 			IJavaElement javaElement = getJavaElementFinder().findElementFor((JvmMember) targetElement);
 			if (javaElement != null)
-				return new DelegateToJavaRefactoringContext(targetElement, singletonList(javaElement), editor,
+				return new JdtRefactoringContext(targetElement, singletonList(javaElement), editor,
 						selection, resource, true);
 		}
 		return super.createRenameElementContext(targetElement, editor, selection, resource);

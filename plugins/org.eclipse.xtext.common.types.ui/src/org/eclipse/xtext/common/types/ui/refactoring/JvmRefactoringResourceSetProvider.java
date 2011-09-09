@@ -14,11 +14,13 @@ import org.eclipse.xtext.ui.refactoring.impl.RefactoringResourceSetProvider;
 import com.google.inject.Inject;
 
 /**
+ * Configures the resource set used during refactoring for JVM type awareness.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("restriction")
 public class JvmRefactoringResourceSetProvider extends RefactoringResourceSetProvider {
-	
+
 	@Inject
 	private IJvmTypeProvider.Factory typeProviderFactory;
 

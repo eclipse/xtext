@@ -34,8 +34,8 @@ public class JvmRenameRefactoringProvider extends DefaultRenameRefactoringProvid
 
 	@Override
 	public ProcessorBasedRefactoring getRenameRefactoring(IRenameElementContext renameElementContext) {
-		if (renameElementContext instanceof DelegateToJavaRefactoringContext) {
-			for (IJavaElement javaElement : ((DelegateToJavaRefactoringContext) renameElementContext).getJavaElements()) {
+		if (renameElementContext instanceof JdtRefactoringContext) {
+			for (IJavaElement javaElement : ((JdtRefactoringContext) renameElementContext).getJavaElements()) {
 				if (isJavaSource(javaElement)) {
 					try {
 						RenameJavaElementDescriptor renameDescriptor = createRenameDescriptor(javaElement,
