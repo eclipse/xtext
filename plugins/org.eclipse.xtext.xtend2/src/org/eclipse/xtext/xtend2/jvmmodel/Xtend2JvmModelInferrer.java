@@ -70,6 +70,8 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 	private IdentifiableSimpleNameProvider simpleNameProvider;
 	
 	public void infer(EObject xtendFile, IAcceptor<JvmDeclaredType> acceptor) {
+		if (!(xtendFile instanceof XtendFile))
+			throw new IllegalArgumentException("expected XtendFile but was "+xtendFile);
 		final XtendFile xtendFile2 = (XtendFile)xtendFile;
 		if (xtendFile2.getXtendClass()==null || xtendFile2.getXtendClass().getName()==null)
 			return;
