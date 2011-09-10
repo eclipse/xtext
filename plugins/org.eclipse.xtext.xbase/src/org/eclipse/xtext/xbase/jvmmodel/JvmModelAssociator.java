@@ -20,14 +20,19 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.resource.ILateInitialization;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.INotificationDispatcher;
 import org.eclipse.xtext.util.Notifications;
+import org.eclipse.xtext.xbase.resource.XbaseResource;
 
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.google.inject.name.Named;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -46,6 +51,10 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 	
 	@Inject
 	private INotificationDispatcher dispatcher;
+	
+	@Inject
+	@Named(Constants.LANGUAGE_NAME) 
+	private String languageName;
 	
 	static class Adapter extends AdapterImpl {
 		public ListMultimap<EObject, EObject> sourceToTargetMap = LinkedListMultimap.create();
@@ -68,7 +77,11 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 	protected ListMultimap<EObject, EObject> sourceToTargetMap(Resource res) {
 		if (res == null)
 			throw new NullPointerException("resource");
-		return getOrInstall(res).sourceToTargetMap;
+		if (res instanceof XtextResource) {
+			if (languageName.equals(((XtextResource) res).getLanguageName()))
+				return getOrInstall(res).sourceToTargetMap;
+		}
+		return LinkedListMultimap.create();
 	}
 
 	protected Resource getResource(Notifier ctx) {
