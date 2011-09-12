@@ -32,7 +32,16 @@ public class RefactorElementNameFragment extends AbstractGeneratorFragment {
 			.addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameStrategy", 
 					"org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy")
 			.addTypeToType("org.eclipse.xtext.ui.refactoring.IReferenceUpdater", 
-					"org.eclipse.xtext.ui.refactoring.impl.DefaultReferenceUpdater");
+					"org.eclipse.xtext.ui.refactoring.impl.DefaultReferenceUpdater")
+		    .addTypeToType("org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage", 
+		    		"org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage")
+		    .addConfiguredBinding("org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer",
+					"binder.bind("
+							+ "org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer.class"
+							+ ").annotatedWith("
+							+ "com.google.inject.name.Names.named(\"RefactoringPreferences\")"
+							+ ").to(" 
+							+ "org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences.Initializer.class)");
 		if (!useJdtRefactoring)
 			return bindFactory
 					.addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider",
