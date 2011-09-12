@@ -18,6 +18,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
@@ -205,7 +206,7 @@ public abstract class AbstractAllContainersState extends AbstractStorage2UriMapp
 					public boolean visit(IResourceDelta delta) throws CoreException {
 						if (clear.get().booleanValue())
 							return false;
-						if (delta.getResource() != null && delta.getResource().isDerived())
+						if (delta.getResource() != null && isIgnoredResource(delta.getResource()))
 							return false;
 						if (delta.getKind() == IResourceDelta.ADDED || delta.getKind() == IResourceDelta.REMOVED) {
 							if (delta.getResource() instanceof IStorage) {
@@ -231,6 +232,13 @@ public abstract class AbstractAllContainersState extends AbstractStorage2UriMapp
 				initialize();
 			}
 		}
+	}
+	
+	/**
+	 * @since 2.1
+	 */
+	protected boolean isIgnoredResource(IResource resource) {
+		return false;
 	}
 	
 	protected IWorkspaceRoot getWorkspaceRoot() {

@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.ecore2xtext;
 
+import org.eclipse.xtext.ui.util.IJdtHelper;
 import org.eclipse.xtext.ui.wizard.IProjectInfo;
 import org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectWizard;
 import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectInfo;
@@ -24,19 +25,21 @@ import com.google.inject.Inject;
 public class NewXtextProjectFromEcoreWizard extends NewXtextProjectWizard {
 
 	private WizardSelectImportedEPackagePage ePackageSelectionPage;
+	private final IJdtHelper jdtHelper;
 
 	/**
 	 * Constructs a new wizard
 	 */
 	@Inject
-	public NewXtextProjectFromEcoreWizard(Ecore2XtextProjectCreator creator) {
+	public NewXtextProjectFromEcoreWizard(Ecore2XtextProjectCreator creator, IJdtHelper jdtHelper) {
 		super(creator);
+		this.jdtHelper = jdtHelper;
 		setWindowTitle(Messages.NewXtextProjectFromEcoreWizard_WindowTitle);
 	}
 
 	@Override
 	public void addPages() {
-		ePackageSelectionPage = new WizardSelectImportedEPackagePage("ePackageSelectionPage", selection);
+		ePackageSelectionPage = new WizardSelectImportedEPackagePage("ePackageSelectionPage", selection, jdtHelper);
 		addPage(ePackageSelectionPage); //$NON-NLS-1$
 		super.addPages();
 	}

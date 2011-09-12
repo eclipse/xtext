@@ -18,6 +18,7 @@ import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
+import org.eclipse.xtext.ui.util.IJdtHelper;
 
 import com.google.inject.Provider;
 
@@ -79,4 +80,9 @@ public class Access {
 	public static Provider<IAllContainersState> getStrictJavaProjectsState() {
 		return Access.<IAllContainersState>provider(StrictJavaProjectsState.class);
 	}
+
+	public static Provider<IJdtHelper> getJdtHelper() {
+		return Access.<IJdtHelper>provider(IJdtHelper.class);
+	}
+
 }

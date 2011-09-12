@@ -18,6 +18,7 @@ import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
+import org.eclipse.xtext.ui.util.IJdtHelper;
 
 import com.google.inject.Binder;
 import com.google.inject.Provider;
@@ -47,6 +48,13 @@ public class SharedStateModule extends AbstractGenericModule {
 	public Provider<IURIEditorOpener> provideIURIEditorOpener() {
 		return Access.getIURIEditorOpener();
 	}
+	
+	/**
+	 * @since 2.1
+	 */
+	public Provider<IJdtHelper> provideJdtHelper() {
+		return Access.getJdtHelper();
+	}
 
 	public Provider<IWorkspace> provideIWorkspace() {
 		return new Provider<IWorkspace>() {
@@ -55,7 +63,7 @@ public class SharedStateModule extends AbstractGenericModule {
 			}
 		};
 	}
-
+	
 	public void configureIWorkbench(Binder binder) {
 		if (PlatformUI.isWorkbenchRunning()) {
 			binder.bind(IWorkbench.class).toProvider(new Provider<IWorkbench>() {

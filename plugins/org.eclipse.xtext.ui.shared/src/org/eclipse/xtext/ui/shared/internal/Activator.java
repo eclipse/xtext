@@ -79,7 +79,7 @@ public class Activator extends Plugin {
 		injector.injectMembers(this);
 	}
 
-	protected boolean isJavaEnabled() {
+	public static boolean isJavaEnabled() {
 		try {
 			JavaCore.class.getName();
 			return true;
