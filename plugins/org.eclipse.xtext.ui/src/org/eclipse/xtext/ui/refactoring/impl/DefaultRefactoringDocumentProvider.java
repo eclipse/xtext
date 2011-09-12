@@ -8,13 +8,11 @@
 package org.eclipse.xtext.ui.refactoring.impl;
 
 import static org.eclipse.ltk.core.refactoring.RefactoringStatus.*;
+
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.jface.text.IDocument;
@@ -70,13 +68,13 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 		URI resourceURI = uri.trimFragment();
 		final IFileEditorInput fileEditorInput = getEditorInput(resourceURI, status);
 		if (fileEditorInput != null) {
-			ITextEditor dirtyEditor = new DisplayRunnableWithResult<ITextEditor>() {
+			ITextEditor editor = new DisplayRunnableWithResult<ITextEditor>() {
 				@Override
 				protected ITextEditor run() throws Exception {
 					IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
 					IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
 					IEditorPart editor = activePage.findEditor(fileEditorInput);
-					if (editor instanceof ITextEditor && editor.isDirty()) {
+					if (editor instanceof ITextEditor) {
 						if (editor instanceof ITextEditorExtension
 								&& ((ITextEditorExtension) editor).isEditorInputReadOnly())
 							status.add(ERROR, "Editor for {0} is read only", fileEditorInput.getName());
@@ -85,11 +83,11 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 					return null;
 				}
 			}.syncExec();
-			if (dirtyEditor != null) {
-				IDocument document = dirtyEditor.getDocumentProvider().getDocument(fileEditorInput);
+			if (editor != null) {
+				IDocument document = editor.getDocumentProvider().getDocument(fileEditorInput);
 				if(document != null) {
-					if (preferences.isSaveAllBeforeRefactoring()) {
-						return new SaveEditorDocument(resourceURI, dirtyEditor, document, fileEditorInput.getFile());
+					if (preferences.isSaveAllBeforeRefactoring() || !editor.isDirty()) {
+						return new SaveEditorDocument(resourceURI, editor, document);
 					} else {
 						return new EditorDocument(resourceURI, document);
 					}
@@ -164,29 +162,19 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 
 	public static class SaveEditorDocument extends EditorDocument {
 
-		private final IFile file;
 		private final ITextEditor editor;
 
-		public SaveEditorDocument(URI uri, ITextEditor editor, IDocument document, IFile file) {
+		public SaveEditorDocument(URI uri, ITextEditor editor, IDocument document) {
 			super(uri, document);
 			this.editor = editor;
-			this.file = file;
 		}
 
 		@Override
 		public Change createChange(String name, TextEdit textEdit) {
-			TextFileChange textFileChange = new TextFileChange(name, file) {
-				@Override
-				public Change perform(IProgressMonitor pm) throws CoreException {
-					SubMonitor progress = SubMonitor.convert(pm, 2);
-					editor.doSave(progress.newChild(1));
-					return super.perform(progress.newChild(1));
-				}
-			};
-			textFileChange.setSaveMode(TextFileChange.FORCE_SAVE);
-			textFileChange.setEdit(textEdit);
-			textFileChange.setTextType(getURI().fileExtension());
-			return textFileChange;
+			DocumentChange documentChange = new DocumentChange(getName(), getDocument());
+			documentChange.setEdit(textEdit);
+			documentChange.setTextType(getURI().fileExtension());
+			return new DisplayChangeWrapper(documentChange, editor);
 		}
 	}
 

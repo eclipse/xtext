@@ -82,7 +82,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 	@Inject
 	private RichStringProcessor richStringProcessor;
 
-	@Inject
+	@Inject	
 	private Provider<DefaultIndentationHandler> indentationHandler;
 
 	@Inject
