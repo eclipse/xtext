@@ -192,7 +192,8 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 	protected void computeInferredReturnTypes(JvmGenericType inferredJvmType) {
 		Iterable<JvmOperation> operations = inferredJvmType.getDeclaredOperations();
 		for (JvmOperation jvmOperation : operations) {
-			jvmOperation.setReturnType(getTypeProxy(jvmOperation));
+			if(jvmOperation.getReturnType() == null) 
+				jvmOperation.setReturnType(getTypeProxy(jvmOperation));
 		}
 	}
 

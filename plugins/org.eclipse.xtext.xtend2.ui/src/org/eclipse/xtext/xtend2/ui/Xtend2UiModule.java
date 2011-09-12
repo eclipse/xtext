@@ -19,8 +19,6 @@ import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapper;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter.IComparator;
-import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
-import org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
@@ -43,8 +41,6 @@ import org.eclipse.xtext.xtend2.ui.hover.XtendHoverProvider;
 import org.eclipse.xtext.xtend2.ui.hyperlinking.XtendHyperlinkHelper;
 import org.eclipse.xtext.xtend2.ui.outline.Xtend2OutlineNodeComparator;
 import org.eclipse.xtext.xtend2.ui.outline.Xtend2OutlinePage;
-import org.eclipse.xtext.xtend2.ui.preferences.Xtend2Preferences;
-import org.eclipse.xtext.xtend2.ui.preferences.Xtend2RootPreferencePage;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -129,14 +125,6 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 		return XtendHoverProvider.class;
 	}
 	
-	public void configurePreferenceInitializer(Binder binder) {
-		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(Names.named("Xtend2RootPreferences")).to(Xtend2Preferences.Initializer.class);
-	}
-	
-	public Class<? extends LanguageRootPreferencePage> bindLanguageRootPreferencePage() {
-		return Xtend2RootPreferencePage.class;
-	}
-
 	public Class<? extends EclipseResourceFileSystemAccess2> bindEclipseResourceFileSystemAccess2() {
 		return JDTAwareEclipseResourceFileSystemAccess2.class;
 	}
