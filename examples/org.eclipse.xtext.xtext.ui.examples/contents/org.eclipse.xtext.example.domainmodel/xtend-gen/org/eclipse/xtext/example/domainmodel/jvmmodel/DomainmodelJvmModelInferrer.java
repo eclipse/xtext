@@ -16,6 +16,7 @@ import org.eclipse.xtext.example.domainmodel.domainmodel.Feature;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Operation;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Property;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
@@ -77,13 +78,17 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
                   JvmTypeReference _type_3 = f_3.getType();
                   final Function1<JvmOperation,Void> _function_1 = new Function1<JvmOperation,Void>() {
                       public Void apply(final JvmOperation it_1) {
-                        EList<JvmFormalParameter> _params = f_3.getParams();
-                        for (final JvmFormalParameter p : _params) {
-                          EList<JvmFormalParameter> _parameters = it_1.getParameters();
-                          String _name_5 = p.getName();
-                          JvmTypeReference _parameterType = p.getParameterType();
-                          JvmFormalParameter _parameter = DomainmodelJvmModelInferrer.this._jvmTypesBuilder0.toParameter(p, _name_5, _parameterType);
-                          _parameters.add(_parameter);
+                        {
+                          EList<JvmFormalParameter> _params = f_3.getParams();
+                          for (final JvmFormalParameter p : _params) {
+                            EList<JvmFormalParameter> _parameters = it_1.getParameters();
+                            String _name_5 = p.getName();
+                            JvmTypeReference _parameterType = p.getParameterType();
+                            JvmFormalParameter _parameter = DomainmodelJvmModelInferrer.this._jvmTypesBuilder0.toParameter(p, _name_5, _parameterType);
+                            _parameters.add(_parameter);
+                          }
+                          XExpression _body = f_3.getBody();
+                          DomainmodelJvmModelInferrer.this._jvmTypesBuilder0.associate(_body, it_1);
                         }
                         return null;
                       }

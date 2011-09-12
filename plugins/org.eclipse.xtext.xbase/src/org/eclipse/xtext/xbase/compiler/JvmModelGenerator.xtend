@@ -1,4 +1,4 @@
-package org.eclipse.xtext.xbase.generator
+package org.eclipse.xtext.xbase.compiler
 
 import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.emf.ecore.resource.Resource
@@ -18,7 +18,7 @@ import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.common.types.JvmFormalParameter
 
-class XbaseGenerator implements IGenerator {
+class JvmModelGenerator implements IGenerator {
 	
 	@Inject extension IExpressionContextProvider
 	@Inject XbaseCompiler compiler
@@ -34,7 +34,7 @@ class XbaseGenerator implements IGenerator {
 	def dispatch void internalDoGenerate(JvmGenericType type, IFileSystemAccess fsa) {
 		val importManager = new ImportManager(true, type.qualifiedName)
 		val typeBody = generateBody(type, importManager)
-		fsa.generateFile(type.qualifiedName.replace('.','/'), 
+		fsa.generateFile(type.qualifiedName.replace('.','/')+".java", 
 			'''
 			«IF type.packageName != null»package «type.packageName»;
 			
@@ -79,15 +79,20 @@ class XbaseGenerator implements IGenerator {
 		if (superTypes.empty)
 			return null
 		if (it.interface) {
-			" extends "+superTypes.map( t | importManager.serialize(t)).join(", ")
+			"extends "+superTypes.map( t | importManager.serialize(t)).join(", ")+" "
 		} else {
-			val superClazz = superTypes.filter(typeRef | typeRef.type instanceof JvmGenericType && (typeRef.type as JvmGenericType).interface).head
-			val superInterfaces = superTypes.filter(typeRef| typeRef != superClazz)
+			val withoutObject = superTypes.filter( typeRef | typeRef.identifier != "java.lang.Object")
+			val superClazz = withoutObject.filter(typeRef | typeRef.type instanceof JvmGenericType && !(typeRef.type as JvmGenericType).interface).head
+			val superInterfaces = withoutObject.filter(typeRef | typeRef != superClazz)
+			var result = ""
+			println(superTypes.toString + " / " + superClazz)
 			if (superClazz != null) {
-				" extends "+importManager.serialize(superClazz)
-			} + if (!superInterfaces.empty) {
-				" implements "+superInterfaces.map( t | importManager.serialize(t)).join(", ")
+				result = "extends " + importManager.serialize(superClazz)+" "
+			} 
+			if (!superInterfaces.empty) {
+				result = result + "implements " + superInterfaces.map( t | importManager.serialize(t)).join(", ") + " "
 			}
+			return result
 		}
 	}
 	
@@ -109,13 +114,18 @@ class XbaseGenerator implements IGenerator {
 	}
 		
 	def CharSequence generateBody(JvmOperation op, ImportManager importManager) {
-		val expression = op.associatedExpression
-		if (expression != null) {
-			val appendable = new StringBuilderBasedAppendable(importManager)
-			compiler.compile(expression, appendable, op.returnType)
-			return appendable.toString
+		val adapter = op.eAdapters.filter(typeof(CompilationStrategyAdapter)).head
+		if (adapter != null) {
+			return adapter.compilationStrategy.apply(importManager)			
 		} else {
-			return '''throw new UnsupportedOperationException("«op.simpleName» is not implemented");'''
+			val expression = op.associatedExpression
+			if (expression != null) {
+				val appendable = new StringBuilderBasedAppendable(importManager)
+				compiler.compile(expression, appendable, op.returnType)
+				return appendable.toString
+			} else {
+				return '''throw new UnsupportedOperationException("«op.simpleName» is not implemented");'''
+			}
 		}
 	}
 }

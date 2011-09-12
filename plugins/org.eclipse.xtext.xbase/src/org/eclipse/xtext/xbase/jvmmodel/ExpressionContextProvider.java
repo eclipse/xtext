@@ -36,6 +36,8 @@ public class ExpressionContextProvider implements IExpressionContextProvider, IE
 	}
 	
 	public XExpression getAssociatedExpression(JvmIdentifiableElement element) {
+		if (element == null)
+			return null;
 		Map<XExpression, JvmIdentifiableElement> mapping = getMapping(element.eResource());
 		for (Map.Entry<XExpression, JvmIdentifiableElement> entry : mapping.entrySet()) {
 			if (entry.getValue() == element) {
@@ -46,6 +48,8 @@ public class ExpressionContextProvider implements IExpressionContextProvider, IE
 	}
 
 	public JvmIdentifiableElement getAssociatedJvmElement(XExpression expr) {
+		if (expr == null)
+			return null;
 		final Map<XExpression, JvmIdentifiableElement> mapping = getMapping(expr.eResource());
 		if (mapping.containsKey(expr)) {
 			return mapping.get(expr);
@@ -54,6 +58,8 @@ public class ExpressionContextProvider implements IExpressionContextProvider, IE
 	}
 	
 	public void associate(XExpression expression, JvmIdentifiableElement element) {
+		if (expression == null)
+			return;
 		final Map<XExpression, JvmIdentifiableElement> mapping = getMapping(expression.eResource());
 		if (mapping.containsKey(expression)) {
 			throw new IllegalStateException("There is already a binding to the given expression "+expression);

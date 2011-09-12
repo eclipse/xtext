@@ -21,12 +21,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.Constants;
-import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.resource.ILateInitialization;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.INotificationDispatcher;
 import org.eclipse.xtext.util.Notifications;
-import org.eclipse.xtext.xbase.resource.XbaseResource;
 
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.ListMultimap;

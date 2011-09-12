@@ -7,6 +7,7 @@ import java.util.Properties;
 
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.service.DefaultRuntimeModule;
+import org.eclipse.xtext.xbase.generator.XbaseGenerator;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -175,6 +176,11 @@ public abstract class AbstractDomainmodelRuntimeModule extends DefaultRuntimeMod
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.scoping.IScopeProvider> bindIScopeProvider() {
+		return org.eclipse.xtext.xbase.scoping.XbaseScopeProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.common.types.util.TypeConformanceComputer> bindTypeConformanceComputer() {
 		return org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer.class;
 	}
@@ -221,7 +227,7 @@ public abstract class AbstractDomainmodelRuntimeModule extends DefaultRuntimeMod
 
 	// contributed by org.eclipse.xtext.generator.generator.GeneratorFragment
 	public Class<? extends org.eclipse.xtext.generator.IGenerator> bindIGenerator() {
-		return org.eclipse.xtext.example.domainmodel.generator.DomainmodelGenerator.class;
+		return XbaseGenerator.class;
 	}
 
 }

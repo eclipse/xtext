@@ -1,7 +1,8 @@
-package org.eclipse.xtext.xbase.generator;
+package org.eclipse.xtext.xbase.compiler;
 
 import com.google.inject.Inject;
 import java.util.List;
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -16,12 +17,14 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.compiler.CompilationStrategyAdapter;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.jvmmodel.IExpressionContextProvider;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -29,7 +32,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
-public class XbaseGenerator implements IGenerator {
+public class JvmModelGenerator implements IGenerator {
   
   @Inject
   private IExpressionContextProvider _iExpressionContextProvider0;
@@ -56,6 +59,7 @@ public class XbaseGenerator implements IGenerator {
       final StringConcatenation typeBody = _generateBody;
       String _qualifiedName_1 = type.getQualifiedName();
       String _replace = _qualifiedName_1.replace(".", "/");
+      String _operator_plus = StringExtensions.operator_plus(_replace, ".java");
       StringConcatenation _builder = new StringConcatenation();
       {
         String _packageName = type.getPackageName();
@@ -72,9 +76,9 @@ public class XbaseGenerator implements IGenerator {
       List<String> _imports = importManager.getImports();
       final Function1<String,String> _function = new Function1<String,String>() {
           public String apply(final String i) {
-            String _operator_plus = StringExtensions.operator_plus("import ", i);
-            String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, ";");
-            return _operator_plus_1;
+            String _operator_plus_1 = StringExtensions.operator_plus("import ", i);
+            String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, ";");
+            return _operator_plus_2;
           }
         };
       List<String> _map = ListExtensions.<String, String>map(_imports, _function);
@@ -84,7 +88,7 @@ public class XbaseGenerator implements IGenerator {
       _builder.newLine();
       _builder.append(typeBody, "");
       _builder.newLineIfNotEmpty();
-      fsa.generateFile(_replace, _builder);
+      fsa.generateFile(_operator_plus, _builder);
     }
   }
   
@@ -249,64 +253,78 @@ public class XbaseGenerator implements IGenerator {
           };
         List<CharSequence> _map = ListExtensions.<JvmTypeReference, CharSequence>map(_superTypes_1, _function);
         String _join = IterableExtensions.join(_map, ", ");
-        String _operator_plus = StringExtensions.operator_plus(" extends ", _join);
-        _xifexpression = _operator_plus;
+        String _operator_plus = StringExtensions.operator_plus("extends ", _join);
+        String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, " ");
+        _xifexpression = _operator_plus_1;
       } else {
-        String _xblockexpression_1 = null;
         {
           EList<JvmTypeReference> _superTypes_2 = it.getSuperTypes();
           final Function1<JvmTypeReference,Boolean> _function_1 = new Function1<JvmTypeReference,Boolean>() {
               public Boolean apply(final JvmTypeReference typeRef) {
+                String _identifier = typeRef.getIdentifier();
+                boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_identifier, "java.lang.Object");
+                return ((Boolean)_operator_notEquals);
+              }
+            };
+          Iterable<JvmTypeReference> _filter = IterableExtensions.<JvmTypeReference>filter(_superTypes_2, _function_1);
+          final Iterable<JvmTypeReference> withoutObject = _filter;
+          final Function1<JvmTypeReference,Boolean> _function_2 = new Function1<JvmTypeReference,Boolean>() {
+              public Boolean apply(final JvmTypeReference typeRef_1) {
                 boolean _operator_and = false;
-                JvmType _type = typeRef.getType();
+                JvmType _type = typeRef_1.getType();
                 if (!(_type instanceof org.eclipse.xtext.common.types.JvmGenericType)) {
                   _operator_and = false;
                 } else {
-                  JvmType _type_1 = typeRef.getType();
+                  JvmType _type_1 = typeRef_1.getType();
                   boolean _isInterface_1 = ((JvmGenericType) _type_1).isInterface();
-                  _operator_and = BooleanExtensions.operator_and((_type instanceof org.eclipse.xtext.common.types.JvmGenericType), _isInterface_1);
+                  boolean _operator_not = BooleanExtensions.operator_not(_isInterface_1);
+                  _operator_and = BooleanExtensions.operator_and((_type instanceof org.eclipse.xtext.common.types.JvmGenericType), _operator_not);
                 }
                 return ((Boolean)_operator_and);
               }
             };
-          Iterable<JvmTypeReference> _filter = IterableExtensions.<JvmTypeReference>filter(_superTypes_2, _function_1);
-          JvmTypeReference _head = IterableExtensions.<JvmTypeReference>head(_filter);
+          Iterable<JvmTypeReference> _filter_1 = IterableExtensions.<JvmTypeReference>filter(withoutObject, _function_2);
+          JvmTypeReference _head = IterableExtensions.<JvmTypeReference>head(_filter_1);
           final JvmTypeReference superClazz = _head;
-          EList<JvmTypeReference> _superTypes_3 = it.getSuperTypes();
-          final Function1<JvmTypeReference,Boolean> _function_2 = new Function1<JvmTypeReference,Boolean>() {
-              public Boolean apply(final JvmTypeReference typeRef_1) {
-                boolean _operator_notEquals = ObjectExtensions.operator_notEquals(typeRef_1, superClazz);
-                return ((Boolean)_operator_notEquals);
+          final Function1<JvmTypeReference,Boolean> _function_3 = new Function1<JvmTypeReference,Boolean>() {
+              public Boolean apply(final JvmTypeReference typeRef_2) {
+                boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(typeRef_2, superClazz);
+                return ((Boolean)_operator_notEquals_1);
               }
             };
-          Iterable<JvmTypeReference> _filter_1 = IterableExtensions.<JvmTypeReference>filter(_superTypes_3, _function_2);
-          final Iterable<JvmTypeReference> superInterfaces = _filter_1;
-          String _xifexpression_1 = null;
-          boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(superClazz, null);
-          if (_operator_notEquals_1) {
+          Iterable<JvmTypeReference> _filter_2 = IterableExtensions.<JvmTypeReference>filter(withoutObject, _function_3);
+          final Iterable<JvmTypeReference> superInterfaces = _filter_2;
+          String result = "";
+          EList<JvmTypeReference> _superTypes_3 = it.getSuperTypes();
+          String _string = _superTypes_3.toString();
+          String _operator_plus_2 = StringExtensions.operator_plus(_string, " / ");
+          String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, superClazz);
+          InputOutput.<String>println(_operator_plus_3);
+          boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(superClazz, null);
+          if (_operator_notEquals_2) {
             CharSequence _serialize_1 = importManager.serialize(superClazz);
-            String _operator_plus_1 = StringExtensions.operator_plus(" extends ", _serialize_1);
-            String _xifexpression_2 = null;
-            boolean _isEmpty_1 = IterableExtensions.isEmpty(superInterfaces);
-            boolean _operator_not = BooleanExtensions.operator_not(_isEmpty_1);
-            if (_operator_not) {
-              final Function1<JvmTypeReference,CharSequence> _function_3 = new Function1<JvmTypeReference,CharSequence>() {
-                  public CharSequence apply(final JvmTypeReference t_1) {
-                    CharSequence _serialize_2 = importManager.serialize(t_1);
-                    return _serialize_2;
-                  }
-                };
-              Iterable<CharSequence> _map_1 = IterableExtensions.<JvmTypeReference, CharSequence>map(superInterfaces, _function_3);
-              String _join_1 = IterableExtensions.join(_map_1, ", ");
-              String _operator_plus_2 = StringExtensions.operator_plus(" implements ", _join_1);
-              _xifexpression_2 = _operator_plus_2;
-            }
-            String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_1, _xifexpression_2);
-            _xifexpression_1 = _operator_plus_3;
+            String _operator_plus_4 = StringExtensions.operator_plus("extends ", _serialize_1);
+            String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, " ");
+            result = _operator_plus_5;
           }
-          _xblockexpression_1 = (_xifexpression_1);
+          boolean _isEmpty_1 = IterableExtensions.isEmpty(superInterfaces);
+          boolean _operator_not_1 = BooleanExtensions.operator_not(_isEmpty_1);
+          if (_operator_not_1) {
+            String _operator_plus_6 = StringExtensions.operator_plus(result, "implements ");
+            final Function1<JvmTypeReference,CharSequence> _function_4 = new Function1<JvmTypeReference,CharSequence>() {
+                public CharSequence apply(final JvmTypeReference t_1) {
+                  CharSequence _serialize_2 = importManager.serialize(t_1);
+                  return _serialize_2;
+                }
+              };
+            Iterable<CharSequence> _map_1 = IterableExtensions.<JvmTypeReference, CharSequence>map(superInterfaces, _function_4);
+            String _join_1 = IterableExtensions.join(_map_1, ", ");
+            String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, _join_1);
+            String _operator_plus_8 = StringExtensions.operator_plus(_operator_plus_7, " ");
+            result = _operator_plus_8;
+          }
+          return result;
         }
-        _xifexpression = _xblockexpression_1;
       }
       _xblockexpression = (_xifexpression);
     }
@@ -356,7 +374,7 @@ public class XbaseGenerator implements IGenerator {
     EList<JvmFormalParameter> _parameters = it.getParameters();
     final Function1<JvmFormalParameter,String> _function = new Function1<JvmFormalParameter,String>() {
         public String apply(final JvmFormalParameter p) {
-          String _generateParameter = XbaseGenerator.this.generateParameter(p, importManager);
+          String _generateParameter = JvmModelGenerator.this.generateParameter(p, importManager);
           return _generateParameter;
         }
       };
@@ -395,25 +413,38 @@ public class XbaseGenerator implements IGenerator {
   
   public CharSequence generateBody(final JvmOperation op, final ImportManager importManager) {
     {
-      XExpression _associatedExpression = this._iExpressionContextProvider0.getAssociatedExpression(op);
-      final XExpression expression = _associatedExpression;
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(expression, null);
+      EList<Adapter> _eAdapters = op.eAdapters();
+      Iterable<CompilationStrategyAdapter> _filter = IterableExtensions.<CompilationStrategyAdapter>filter(_eAdapters, org.eclipse.xtext.xbase.compiler.CompilationStrategyAdapter.class);
+      CompilationStrategyAdapter _head = IterableExtensions.<CompilationStrategyAdapter>head(_filter);
+      final CompilationStrategyAdapter adapter = _head;
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(adapter, null);
       if (_operator_notEquals) {
-        {
-          StringBuilderBasedAppendable _stringBuilderBasedAppendable = new StringBuilderBasedAppendable(importManager);
-          final StringBuilderBasedAppendable appendable = _stringBuilderBasedAppendable;
-          JvmTypeReference _returnType = op.getReturnType();
-          this.compiler.compile(expression, appendable, _returnType);
-          String _string = appendable.toString();
-          return _string;
-        }
+        Function1<ImportManager,CharSequence> _compilationStrategy = adapter.getCompilationStrategy();
+        CharSequence _apply = _compilationStrategy.apply(importManager);
+        return _apply;
       } else {
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("throw new UnsupportedOperationException(\"");
-        String _simpleName = op.getSimpleName();
-        _builder.append(_simpleName, "");
-        _builder.append(" is not implemented\");");
-        return _builder;
+        {
+          XExpression _associatedExpression = this._iExpressionContextProvider0.getAssociatedExpression(op);
+          final XExpression expression = _associatedExpression;
+          boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(expression, null);
+          if (_operator_notEquals_1) {
+            {
+              StringBuilderBasedAppendable _stringBuilderBasedAppendable = new StringBuilderBasedAppendable(importManager);
+              final StringBuilderBasedAppendable appendable = _stringBuilderBasedAppendable;
+              JvmTypeReference _returnType = op.getReturnType();
+              this.compiler.compile(expression, appendable, _returnType);
+              String _string = appendable.toString();
+              return _string;
+            }
+          } else {
+            StringConcatenation _builder = new StringConcatenation();
+            _builder.append("throw new UnsupportedOperationException(\"");
+            String _simpleName = op.getSimpleName();
+            _builder.append(_simpleName, "");
+            _builder.append(" is not implemented\");");
+            return _builder;
+          }
+        }
       }
     }
   }

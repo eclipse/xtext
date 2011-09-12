@@ -21,8 +21,12 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.compiler.CompilationStrategyAdapter;
+import org.eclipse.xtext.xbase.compiler.ImportManager;
+import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 
 import com.google.inject.Inject;
@@ -37,6 +41,9 @@ public class JvmTypesBuilder {
 	
 	@Inject
 	private IExpressionContextAssociator expressionContextAssociator;
+	
+	@Inject
+	private TypeReferences references;
 	
 	public void associate(XExpression expr, JvmIdentifiableElement element) {
 		expressionContextAssociator.associate(expr, element);
@@ -61,19 +68,29 @@ public class JvmTypesBuilder {
 		return associate(ctx,result);
 	}
 
-	public JvmOperation toGetter(EObject ctx, String name, JvmTypeReference typeRef) {
+	public JvmOperation toGetter(EObject ctx, final String name, JvmTypeReference typeRef) {
 		JvmOperation result = create(JvmOperation.class, null);
 		result.setVisibility(JvmVisibility.PUBLIC);
 		result.setSimpleName("get" + Strings.toFirstUpper(name));
 		result.setReturnType(cloneWithProxies(typeRef));
+		body(result, new Functions.Function1<ImportManager, CharSequence>() {
+			public CharSequence apply(ImportManager p) {
+				return "return this."+name+";";
+			}
+		});
 		return result;
 	}
 
-	public JvmOperation toSetter(EObject ctx, String name, JvmTypeReference typeRef) {
+	public JvmOperation toSetter(EObject ctx, final String name, JvmTypeReference typeRef) {
 		JvmOperation result = create(name, JvmOperation.class, null);
 		result.setVisibility(JvmVisibility.PUBLIC);
-		result.setSimpleName("get" + Strings.toFirstUpper(name));
+		result.setSimpleName("set" + Strings.toFirstUpper(name));
 		result.getParameters().add(toParameter(ctx, name, cloneWithProxies(typeRef)));
+		body(result, new Functions.Function1<ImportManager, CharSequence>() {
+			public CharSequence apply(ImportManager p) {
+				return "this."+name+" = "+name+";";
+			}
+		});
 		return result;
 	}
 
@@ -96,6 +113,10 @@ public class JvmTypesBuilder {
 		if (packageName!=null)
 			create.setPackageName(packageName);
 		create.setVisibility(JvmVisibility.PUBLIC);
+		if (create.getSuperTypes().isEmpty()) {
+			JvmTypeReference objectType = references.getTypeForName(Object.class, ctx);
+			create.getSuperTypes().add(objectType);
+		}
 		return associate(ctx,create);
 	}
 	
@@ -121,5 +142,11 @@ public class JvmTypesBuilder {
 			}
 		}
 		throw new IllegalArgumentException();
+	}
+	
+	public void body(final JvmOperation op, Functions.Function1<ImportManager, CharSequence> strategy) {
+		CompilationStrategyAdapter adapter = new CompilationStrategyAdapter();
+		adapter.setCompilationStrategy(strategy);
+		op.eAdapters().add(adapter);
 	}
 }
