@@ -12,6 +12,8 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.Flags;
 import org.eclipse.jdt.core.search.IJavaSearchConstants;
+import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.Assignment;
@@ -144,6 +146,17 @@ public class Xtend2ProposalProvider extends AbstractXtend2ProposalProvider {
 				|| currentNodeText.startsWith("'''") && offset + 3 <= context.getOffset()) {
 			if (context.getOffset() > offset && context.getOffset() < offset + length)
 				addGuillemotsProposal(context, acceptor);
+		} else if (currentNodeText.startsWith("\u00AB\u00AB")) {
+			try {
+				IDocument document = context.getViewer().getDocument();
+				int nodeLine = document.getLineOfOffset(offset);
+				int completionLine = document.getLineOfOffset(context.getOffset());
+				if (completionLine > nodeLine) {
+					addGuillemotsProposal(context, acceptor);	
+				}
+			} catch(BadLocationException e) {
+				// ignore
+			}
 		}
 	}
 
@@ -167,6 +180,18 @@ public class Xtend2ProposalProvider extends AbstractXtend2ProposalProvider {
 
 	@Override
 	public void complete_RICH_TEXT_INBETWEEN(EObject model, RuleCall ruleCall, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		completeInRichString(model, ruleCall, context, acceptor);
+	}
+	
+	@Override
+	public void complete_COMMENT_RICH_TEXT_END(EObject model, RuleCall ruleCall, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		completeInRichString(model, ruleCall, context, acceptor);
+	}
+	
+	@Override
+	public void complete_COMMENT_RICH_TEXT_INBETWEEN(EObject model, RuleCall ruleCall, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		completeInRichString(model, ruleCall, context, acceptor);
 	}
