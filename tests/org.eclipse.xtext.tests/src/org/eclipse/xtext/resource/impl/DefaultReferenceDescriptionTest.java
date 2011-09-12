@@ -152,7 +152,7 @@ public class DefaultReferenceDescriptionTest extends AbstractXtextTests {
 		object.eSet(eReference4, EcorePackage.Literals.EPACKAGE);
 		object.eSet(eReference5, EcorePackage.Literals.EPACKAGE);
 
-		Resource testResource = new XMIResourceImpl(URI.createFileURI("test.ecore"));
+		Resource testResource = new XMIResourceImpl(URI.createPlatformResourceURI("test.ecore", true));
 		testResource.getContents().add(object);
 		IResourceDescription resourceDescription = createResourceDescription(testResource);
 		assertEquals("Only one external reference expected", 1, size(resourceDescription.getReferenceDescriptions()));
@@ -164,9 +164,73 @@ public class DefaultReferenceDescriptionTest extends AbstractXtextTests {
 		assertEquals(EcoreUtil.getURI(object), referenceDescription.getContainerEObjectURI());
 	}
 	
+	public void testCrossResourceContainment() {
+		EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
+		ePackage.setName("test");
+		ePackage.setNsPrefix("test");
+		ePackage.setNsURI("test");
+
+		EClass eClass = EcoreFactory.eINSTANCE.createEClass();
+		eClass.setName("Test");
+		ePackage.getEClassifiers().add(eClass);
+		
+		EAttribute nameAttribute = EcoreFactory.eINSTANCE.createEAttribute();
+		nameAttribute.setName("name");
+		nameAttribute.setID(true);
+		nameAttribute.setEType(EcorePackage.Literals.ESTRING);
+		eClass.getEStructuralFeatures().add(nameAttribute);
+
+		EReference containmentRef = EcoreFactory.eINSTANCE.createEReference();
+		containmentRef.setContainment(true);
+		containmentRef.setName("crossResourceContainment");
+		containmentRef.setEType(eClass);
+		containmentRef.setResolveProxies(true);
+		eClass.getEStructuralFeatures().add(containmentRef);
+		
+		EReference containerRef = EcoreFactory.eINSTANCE.createEReference();
+		containerRef.setName("containerRef");
+		containerRef.setEType(eClass);
+		containerRef.setResolveProxies(true);
+		containerRef.setEOpposite(containmentRef);
+		containmentRef.setEOpposite(containerRef);
+		eClass.getEStructuralFeatures().add(containerRef);
+
+		EObject container = ePackage.getEFactoryInstance().create(eClass);
+		EObject child = ePackage.getEFactoryInstance().create(eClass);
+		
+		Resource containerResource = new XMIResourceImpl(URI.createPlatformResourceURI("container.ecore", true));
+		Resource childResource = new XMIResourceImpl(URI.createPlatformResourceURI("child.ecore", true));
+		ResourceSet resourceSet = new ResourceSetImpl();
+		resourceSet.getResources().add(containerResource);
+		resourceSet.getResources().add(childResource);
+		
+		containerResource.getContents().add(container);
+		childResource.getContents().add(child);
+		
+		container.eSet(containmentRef, child);
+		assertTrue(container.eResource() != child.eResource());
+		
+		{ 
+			IResourceDescription containerDescription = createResourceDescription(containerResource);
+			IReferenceDescription onlyContainerElement = Iterables.getOnlyElement(containerDescription.getReferenceDescriptions());
+			assertEquals(-1, onlyContainerElement.getIndexInList());
+			assertEquals(EcoreUtil.getURI(container), onlyContainerElement.getSourceEObjectUri());
+			assertEquals(containmentRef, onlyContainerElement.getEReference());
+			assertEquals(EcoreUtil.getURI(child), onlyContainerElement.getTargetEObjectUri());
+		}
+		{
+			IResourceDescription childDescription = createResourceDescription(childResource);
+			IReferenceDescription onlyChildElement = Iterables.getOnlyElement(childDescription.getReferenceDescriptions());
+			assertEquals(-1, onlyChildElement.getIndexInList());
+			assertEquals(EcoreUtil.getURI(child), onlyChildElement.getSourceEObjectUri());
+			assertEquals(containerRef, onlyChildElement.getEReference());
+			assertEquals(EcoreUtil.getURI(container), onlyChildElement.getTargetEObjectUri());
+		}
+	}
+	
 	/** @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=330812 */
 	public void testLazyLinkingProxyReferences() {
-		URI resourceUri = URI.createFileURI("test.ecore");
+		URI resourceUri = URI.createPlatformResourceURI("test.ecore", true);
 		LazyURIEncoder lazyURIEncoder = new LazyURIEncoder();
 
 		ResourceSet resourceSet = new ResourceSetImpl();
