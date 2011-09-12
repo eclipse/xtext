@@ -108,8 +108,11 @@ public class DefaultResourceDescriptionStrategy implements IDefaultResourceDescr
 	}
 
 	protected boolean isIndexable(EReference eReference) {
-		return !eReference.isContainment() && !eReference.isDerived() && !eReference.isVolatile()
-				&& !eReference.isTransient();
+		return (!eReference.isContainment() || eReference.isResolveProxies()) 
+				&& !eReference.isDerived() 
+				&& !eReference.isVolatile()
+				&& !eReference.isTransient() 
+				&& (!eReference.isContainer() || eReference.isResolveProxies());
 	}
 
 	protected boolean isResolvedAndExternal(EObject from, EObject to) {
