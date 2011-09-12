@@ -34,8 +34,8 @@ public class PackratParserFragment extends AbstractGeneratorFragment {
 	@Override
 	public String[] getExportedPackagesRt(Grammar grammar) {
 		return new String[]{
-				GrammarUtil.getNamespace(grammar) + ".parser.packrat",
-				GrammarUtil.getNamespace(grammar) + ".parser.packrat.consumers",
+				getNaming().basePackageRuntime(grammar) + ".parser.packrat",
+				getNaming().basePackageRuntime(grammar) + ".parser.packrat.consumers",
 		};
 	}
 
