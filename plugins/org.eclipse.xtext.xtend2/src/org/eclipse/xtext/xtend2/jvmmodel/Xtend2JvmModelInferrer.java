@@ -32,6 +32,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
@@ -192,7 +193,7 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 	protected void computeInferredReturnTypes(JvmGenericType inferredJvmType) {
 		Iterable<JvmOperation> operations = inferredJvmType.getDeclaredOperations();
 		for (JvmOperation jvmOperation : operations) {
-			if(jvmOperation.getReturnType() == null) 
+			if(!jvmOperation.eIsSet(TypesPackage.Literals.JVM_OPERATION__RETURN_TYPE))
 				jvmOperation.setReturnType(getTypeProxy(jvmOperation));
 		}
 	}
