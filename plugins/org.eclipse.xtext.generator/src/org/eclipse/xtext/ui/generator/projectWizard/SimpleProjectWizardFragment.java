@@ -73,7 +73,7 @@ public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		return new BindFactory()
 			.addTypeToType("org.eclipse.xtext.ui.wizard.IProjectCreator",
-						GrammarUtil.getNamespace(grammar)+".ui.wizard." + GrammarUtil.getName(grammar) + "ProjectCreator")
+						getNaming().basePackageUi(grammar)+".wizard." + GrammarUtil.getName(grammar) + "ProjectCreator")
 			.getBindings();
 	}
 
