@@ -77,7 +77,8 @@ code[Java][@Override
 public com.google.inject.Provider
     <org.eclipse.xtext.resource.containers.IAllContainersState>
     provideIAllContainersState() {
-    return org.eclipse.xtext.ui.shared.Access.getWorkspaceProjectsState();
+    return 
+      org.eclipse.xtext.ui.shared.Access.getWorkspaceProjectsState();
 }
 ]
 
