@@ -12,6 +12,7 @@ import java.util.List;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.ChangeDescriptor;
@@ -19,6 +20,10 @@ import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.TextEditBasedChange;
 import org.eclipse.ltk.core.refactoring.TextEditBasedChangeGroup;
 import org.eclipse.text.edits.TextEditGroup;
+import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.texteditor.IDocumentProvider;
+import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
 
 /**
@@ -32,13 +37,20 @@ import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
 public class DisplayChangeWrapper extends TextEditBasedChange {
 
 	private Change delegate;
+	
+	private ITextEditor editorToSave;
 
-	public DisplayChangeWrapper(TextEditBasedChange delegate) {
-		this((Change) delegate);
+	public DisplayChangeWrapper(TextEditBasedChange delegate, ITextEditor editorToSave) {
+		this((Change) delegate, editorToSave);
 	}
 
-	protected DisplayChangeWrapper(Change delegate) {
+	public DisplayChangeWrapper(TextEditBasedChange delegate) {
+		this((Change) delegate, null);
+	}
+
+	protected DisplayChangeWrapper(Change delegate, ITextEditor editorToSave) {
 		super(delegate.getName());
+		this.editorToSave = editorToSave;
 		this.delegate = delegate;
 	}
 
@@ -114,13 +126,20 @@ public class DisplayChangeWrapper extends TextEditBasedChange {
 
 	@Override
 	public Change perform(final IProgressMonitor pm) throws CoreException {
+		final SubMonitor monitor = SubMonitor.convert(pm, 2);
 		Change undoChange = new DisplayRunnableWithResult<Change>() {
 			@Override
 			protected Change run() throws Exception {
-				return delegate.perform(pm);
+				return delegate.perform(monitor.newChild(1));
 			}
 		}.syncExec();
-		return new DisplayChangeWrapper(undoChange);
+		DisplayChangeWrapper undoWrap = new DisplayChangeWrapper(undoChange, editorToSave);
+		if(editorToSave != null) {
+			IEditorInput editorInput = editorToSave.getEditorInput();
+			IDocumentProvider documentProvider = editorToSave.getDocumentProvider();
+			documentProvider.saveDocument(monitor.newChild(1), editorInput, documentProvider.getDocument(editorInput), true);
+		}
+		return undoWrap;
 	}
 
 	@Override
