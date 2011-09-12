@@ -56,6 +56,7 @@ public class RenameRefactoringController {
 
 	public void initialize(IRenameElementContext renameElementContext) {
 		this.renameElementContext = renameElementContext;
+		this.newName = null;
 	}
 
 	public void startRefactoring(RefactoringType refactoringType) {
