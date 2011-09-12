@@ -71,8 +71,10 @@ public class RenameRefactoringController {
 			freezer.freeze();
 			// Cancel undoable right now because the freezer would show the old
 			// state and not the new one
-			undoSupport.undoDocumentChanges();
-			undoSupport = null;
+			if (undoSupport != null) {
+				undoSupport.undoDocumentChanges();
+				undoSupport = null;
+			}
 			cancelLinkedMode();
 			switch (refactoringType) {
 				case REFACTORING_DIRECT:
@@ -119,9 +121,7 @@ public class RenameRefactoringController {
 					}
 				});
 				if (activeLinkedMode == null) {
-					newName = getOriginalName(xtextEditor);
-					if (newName != null)
-						startRefactoringWithDialog(false);
+					startRefactoringWithDialog(false);
 				}
 			}
 		} catch (Exception exc) {
@@ -132,23 +132,6 @@ public class RenameRefactoringController {
 				throw (RuntimeException) exc;
 			throw new WrappedException(exc);
 		}
-	}
-
-	protected String getOriginalName(final XtextEditor xtextEditor) {
-		return xtextEditor.getDocument().readOnly(new IUnitOfWork<String, XtextResource>() {
-			public String exec(XtextResource state) throws Exception {
-				EObject targetElement = state.getResourceSet().getEObject(
-						renameElementContext.getTargetElementURI(), false);
-				IRenameStrategy.Provider strategyProvider = globalServiceProvider.findService(
-						targetElement, IRenameStrategy.Provider.class);
-				if (strategyProvider != null) {
-					IRenameStrategy strategy = strategyProvider.get(targetElement, renameElementContext);
-					if (strategy != null)
-						return strategy.getOriginalName();
-				}
-				return null;
-			}
-		});
 	}
 
 	public RenameLinkedMode getActiveLinkedMode() {
@@ -166,15 +149,36 @@ public class RenameRefactoringController {
 	}
 
 	protected void startDirectRefactoring() throws InterruptedException {
-		if (Strings.isEmpty(newName)) {
+		if (Strings.isEmpty(newName))
 			restoreOriginalSelection();
-		} else {
+		else
 			createRenameSupport(renameElementContext, newName).startDirectRefactoring();
-		}
 	}
 
 	protected void startRefactoringWithDialog(final boolean previewOnly) throws InterruptedException {
-		createRenameSupport(renameElementContext, newName).startRefactoringWithDialog(previewOnly);
+		if (Strings.isEmpty(newName))
+			newName = getOriginalName(getXtextEditor());
+		if (Strings.isEmpty(newName))
+			restoreOriginalSelection();
+		else
+			createRenameSupport(renameElementContext, newName).startRefactoringWithDialog(previewOnly);
+	}
+
+	protected String getOriginalName(final XtextEditor xtextEditor) {
+		return xtextEditor.getDocument().readOnly(new IUnitOfWork<String, XtextResource>() {
+			public String exec(XtextResource state) throws Exception {
+				EObject targetElement = state.getResourceSet().getEObject(renameElementContext.getTargetElementURI(),
+						false);
+				IRenameStrategy.Provider strategyProvider = globalServiceProvider.findService(targetElement,
+						IRenameStrategy.Provider.class);
+				if (strategyProvider != null) {
+					IRenameStrategy strategy = strategyProvider.get(targetElement, renameElementContext);
+					if (strategy != null)
+						return strategy.getOriginalName();
+				}
+				return null;
+			}
+		});
 	}
 
 	protected IRenameSupport createRenameSupport(IRenameElementContext context, String name) {

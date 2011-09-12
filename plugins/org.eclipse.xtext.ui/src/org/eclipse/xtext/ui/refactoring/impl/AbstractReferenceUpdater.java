@@ -137,14 +137,14 @@ public abstract class AbstractReferenceUpdater implements IReferenceUpdater {
 		List<IReferenceDescription> unresolvedDescriptions = null;
 		for (IReferenceDescription referenceDescription : values) {
 			EObject sourceEObject = resourceSet.getEObject(referenceDescription.getSourceEObjectUri(), false);
-			if (sourceEObject != null) {
-				EObject resolvedReference = resolveReference(sourceEObject, referenceDescription);
-				if (!resolvedReference.eIsProxy())
-					continue;
-				else
-					handleCannotResolveExistingReference(sourceEObject, referenceDescription, status);
-			} else {
+			if (sourceEObject == null) {
 				handleCannotLoadReferringElement(referenceDescription, status);
+			} else {
+				EObject resolvedReference = resolveReference(sourceEObject, referenceDescription);
+				if (resolvedReference == null || resolvedReference.eIsProxy())
+					handleCannotResolveExistingReference(sourceEObject, referenceDescription, status);
+				else
+					continue;
 			}
 			if (unresolvedDescriptions == null)
 				unresolvedDescriptions = newArrayList();

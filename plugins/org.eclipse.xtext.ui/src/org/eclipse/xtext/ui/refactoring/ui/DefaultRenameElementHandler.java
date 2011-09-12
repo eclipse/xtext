@@ -50,6 +50,9 @@ public class DefaultRenameElementHandler extends AbstractHandler implements IRen
 	@Inject
 	protected IGlobalServiceProvider globalServiceProvider;
 	
+	@Inject
+	protected RefactoringPreferences preferences;
+	
 	protected static final Logger LOG = Logger.getLogger(DefaultRenameElementHandler.class);
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -114,7 +117,10 @@ public class DefaultRenameElementHandler extends AbstractHandler implements IRen
 
 	protected void startRenameElement(IRenameElementContext renameElementContext) throws InterruptedException {
 		renameRefactoringController.initialize(renameElementContext);
-		renameRefactoringController.startRefactoring(RefactoringType.LINKED_EDITING);
+		if(preferences.useInlineRefactoring())
+			renameRefactoringController.startRefactoring(RefactoringType.LINKED_EDITING);
+		else 
+			renameRefactoringController.startRefactoring(RefactoringType.REFACTORING_DIALOG);
 	}
 
 }

@@ -44,10 +44,10 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein
  */
 public class RenameRefactoringExecuter {
-	
+
 	@Inject
 	private IWorkspace workspace;
-	
+
 	private static final Logger LOG = Logger.getLogger(RenameRefactoringExecuter.class);
 
 	protected boolean isApplicable(Shell parent, ProcessorBasedRefactoring refactoring) {
@@ -84,7 +84,8 @@ public class RenameRefactoringExecuter {
 				// Do nothing
 				return;
 			}
-			CheckConditionsAndCreateChangeRunnable checkConditionsRunnable = new CheckConditionsAndCreateChangeRunnable(shell, refactoring);
+			CheckConditionsAndCreateChangeRunnable checkConditionsRunnable = new CheckConditionsAndCreateChangeRunnable(
+					shell, refactoring);
 			refactoring.setValidationContext(shell);
 			window.run(false, true, new WorkbenchRunnableAdapter(checkConditionsRunnable, rule, true));
 			PerformChangeOperation performChangeOperation = checkConditionsRunnable.getPerformChangeOperation();

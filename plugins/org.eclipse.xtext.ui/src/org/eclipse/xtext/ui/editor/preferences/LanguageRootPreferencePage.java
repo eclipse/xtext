@@ -8,7 +8,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.preferences;
 
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.xtext.ui.editor.preferences.fields.LabelFieldEditor;
+
+import com.google.inject.Inject;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -16,9 +19,16 @@ import org.eclipse.xtext.ui.editor.preferences.fields.LabelFieldEditor;
  */
 public class LanguageRootPreferencePage extends AbstractPreferencePage {
 
+	@Inject
+	private IPreferenceStoreAccess preferenceStoreAccess;
+	
 	@Override
 	protected void createFieldEditors() {
 		addField(new LabelFieldEditor(Messages.LanguageRootPreferencePage_generalSettings, getFieldEditorParent()));
 	}
 
+	@Override
+	protected IPreferenceStore doGetPreferenceStore() {
+		return preferenceStoreAccess.getWritablePreferenceStore();
+	}
 }
