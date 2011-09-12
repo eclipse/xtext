@@ -77,7 +77,7 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 	@Inject
 	@Named(Constants.LANGUAGE_NAME)
 	private String languageName;
-
+	
 	@Inject
 	private StatusWrapper status;
 

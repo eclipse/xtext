@@ -11,6 +11,7 @@ import junit.framework.Test;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.IJavaProject;
@@ -25,6 +26,7 @@ import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
 import org.eclipse.ltk.core.refactoring.participants.RefactoringProcessor;
 import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.texteditor.IDocumentProviderExtension;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -78,6 +80,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtend2UITestCase {
 			performRenameTest(editor, xtendModel.indexOf("JavaClass"), "NewJavaClass");
 			assertFileExists("src/NewJavaClass.java");
 			IResourcesSetupUtil.waitForAutoBuild();
+			synchronize(editor);
 			assertTrue(editor.getDocument().get(), editor.getDocument().get().contains("NewJavaClass"));
 		} finally {
 			testHelper.getProject().getFile("src/NewJavaClass.java").delete(true, new NullProgressMonitor());
@@ -98,6 +101,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtend2UITestCase {
 		assertFileContains(javaInterface, "void foobar()");
 		assertFileContains(javaClass, "void foobar()");
 		assertFileContains(referringJavaClass, "new XtendClass().foobar()");
+		synchronize(editor);
 		assertTrue(editor.getDocument().get().contains("foobar()"));
 	}
 
@@ -191,6 +195,10 @@ public class JavaRefactoringIntegrationTest extends AbstractXtend2UITestCase {
 		Change change = renameRefactoring.createChange(new NullProgressMonitor());
 		Change undoChange = change.perform(new NullProgressMonitor());
 		return undoChange;
+	}
+	
+	protected void synchronize(XtextEditor editor) throws CoreException {
+		((IDocumentProviderExtension) editor.getDocumentProvider()).synchronize(editor.getEditorInput());
 	}
 
 }

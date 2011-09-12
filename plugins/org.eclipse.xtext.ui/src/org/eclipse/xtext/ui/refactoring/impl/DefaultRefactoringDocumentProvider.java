@@ -12,6 +12,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.jface.text.IDocument;
@@ -29,6 +32,7 @@ import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.texteditor.ITextEditorExtension;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IGlobalServiceProvider;
+import org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences;
 import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
 
 import com.google.inject.Inject;
@@ -49,6 +53,9 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 	@Inject
 	private IGlobalServiceProvider globalServiceProvider;
 
+	@Inject
+	private RefactoringPreferences preferences;
+
 	protected IFileEditorInput getEditorInput(URI resourceURI, StatusWrapper status) {
 		try {
 			IFile file = projectUtil.findFileStorage(resourceURI, true);
@@ -63,27 +70,33 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 		URI resourceURI = uri.trimFragment();
 		final IFileEditorInput fileEditorInput = getEditorInput(resourceURI, status);
 		if (fileEditorInput != null) {
-			IDocument openDocument = new DisplayRunnableWithResult<IDocument>() {
+			ITextEditor dirtyEditor = new DisplayRunnableWithResult<ITextEditor>() {
 				@Override
-				protected IDocument run() throws Exception {
+				protected ITextEditor run() throws Exception {
 					IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
 					IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
 					IEditorPart editor = activePage.findEditor(fileEditorInput);
-					if (editor instanceof ITextEditor) {
+					if (editor instanceof ITextEditor && editor.isDirty()) {
 						if (editor instanceof ITextEditorExtension
 								&& ((ITextEditorExtension) editor).isEditorInputReadOnly())
 							status.add(ERROR, "Editor for {0} is read only", fileEditorInput.getName());
-						return ((ITextEditor) editor).getDocumentProvider().getDocument(fileEditorInput);
+						return ((ITextEditor) editor);
 					}
 					return null;
 				}
 			}.syncExec();
-			if (openDocument != null) {
-				return new EditorDocument(resourceURI, openDocument);
-			} else {
-				return new FileDocument(resourceURI, fileEditorInput.getFile(), globalServiceProvider.findService(
-						resourceURI, IEncodingProvider.class));
+			if (dirtyEditor != null) {
+				IDocument document = dirtyEditor.getDocumentProvider().getDocument(fileEditorInput);
+				if(document != null) {
+					if (preferences.isSaveAllBeforeRefactoring()) {
+						return new SaveEditorDocument(resourceURI, dirtyEditor, document, fileEditorInput.getFile());
+					} else {
+						return new EditorDocument(resourceURI, document);
+					}
+				}
 			}
+			return new FileDocument(resourceURI, fileEditorInput.getFile(), globalServiceProvider.findService(
+					resourceURI, IEncodingProvider.class));
 		}
 		return null;
 	}
@@ -146,6 +159,34 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 
 		public String getOriginalContents() {
 			return document.get();
+		}
+	}
+
+	public static class SaveEditorDocument extends EditorDocument {
+
+		private final IFile file;
+		private final ITextEditor editor;
+
+		public SaveEditorDocument(URI uri, ITextEditor editor, IDocument document, IFile file) {
+			super(uri, document);
+			this.editor = editor;
+			this.file = file;
+		}
+
+		@Override
+		public Change createChange(String name, TextEdit textEdit) {
+			TextFileChange textFileChange = new TextFileChange(name, file) {
+				@Override
+				public Change perform(IProgressMonitor pm) throws CoreException {
+					SubMonitor progress = SubMonitor.convert(pm, 2);
+					editor.doSave(progress.newChild(1));
+					return super.perform(progress.newChild(1));
+				}
+			};
+			textFileChange.setSaveMode(TextFileChange.FORCE_SAVE);
+			textFileChange.setEdit(textEdit);
+			textFileChange.setTextType(getURI().fileExtension());
+			return textFileChange;
 		}
 	}
 
