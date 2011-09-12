@@ -76,7 +76,10 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 			return hasUnfilteredChild(treeViewer, element);
 		}
 
-		private boolean hasUnfilteredChild(TreeViewer viewer, Object element) {
+		/**
+		 * @since 2.1 protected
+		 */
+		protected boolean hasUnfilteredChild(TreeViewer viewer, Object element) {
 			Object[] children = ((ITreeContentProvider) viewer.getContentProvider()).getChildren(element);
 			for (int i = 0; i < children.length; i++)
 				if (select(viewer, element, children[i]))
@@ -207,7 +210,10 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 		return filterText;
 	}
 
-	private void installFilter() {
+	/**
+	 * @since 2.1 protected
+	 */
+	protected void installFilter() {
 		filterText.setText(""); //$NON-NLS-1$
 
 		filterText.addModifyListener(new ModifyListener() {
@@ -286,7 +292,10 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 		return ((IStructuredSelection) treeViewer.getSelection()).getFirstElement();
 	}
 
-	private void gotoSelectedElement() {
+	/**
+	 * @since 2.1 protected
+	 */
+	protected void gotoSelectedElement() {
 		Object selectedElement = getSelectedElement();
 		if (selectedElement != null) {
 			dispose();

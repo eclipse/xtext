@@ -23,13 +23,25 @@ public class StringMatcher {
 		this.ignoreCase = ignoreCase;
 	}
 	
-	private String translatePattern(String pattern) {
-		String expression = pattern.replaceAll("\\*", ".*");
+	/**
+	 * @since 2.1
+	 */
+	protected String translatePattern(String pattern) {
+		String expression = pattern.replaceAll("\\(", "\\\\(");
+		expression = expression.replaceAll("\\)", "\\\\)");
+		expression = expression.replaceAll("\\[", "\\\\[");
+		expression = expression.replaceAll("\\]", "\\\\]");
+		expression = expression.replaceAll("\\{", "\\\\{");
+		expression = expression.replaceAll("\\}", "\\\\}");
+		expression = expression.replaceAll("\\*", ".*");
 		expression = expression.replaceAll("\\?", ".");
 		return expression;
 	}
 	
-	private Pattern getPattern() {
+	/**
+	 * @since 2.1 protected
+	 */
+	protected Pattern getPattern() {
 		if (pattern == null) {
 			if (ignoreCase) {
 				pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
