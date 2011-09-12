@@ -8,13 +8,12 @@
 package org.eclipse.xtext.util.formallang;
 
 /**
- * Nondeterministic State Machine 
+ * Context-Free Grammar 
  * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface Nfa<STATE> extends DirectedGraph<STATE> {
+public interface Cfg<ELEMENT, TOKEN> extends Production<ELEMENT, TOKEN> {
+	Iterable<ELEMENT> getAllRoots();
 
-	STATE getStop();
-
-	STATE getStart();
+	ELEMENT getCall(ELEMENT ele);
 }

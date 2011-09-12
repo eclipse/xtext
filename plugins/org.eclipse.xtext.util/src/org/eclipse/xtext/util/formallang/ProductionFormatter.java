@@ -16,7 +16,7 @@ import com.google.common.collect.Lists;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class GrammarFormatter<ELEMENT, TOKEN> {
+public class ProductionFormatter<ELEMENT, TOKEN> implements Function<Production<ELEMENT, TOKEN>, String> {
 
 	protected static class ObjToStrFunction<TOKEN> implements Function<TOKEN, String> {
 		public String apply(TOKEN from) {
@@ -24,65 +24,50 @@ public class GrammarFormatter<ELEMENT, TOKEN> {
 		}
 	}
 
-	protected final static int AUTO_WRAP_CHARS = 140;
+	protected int autoWrapChars = 140;
 
-	protected final static String INDENT = "    ";
+	protected String indent = "    ";
 
-	public static <ELEMENT, TOKEN> GrammarFormatter<ELEMENT, TOKEN> newFormatter(IGrammarAdapter<ELEMENT, TOKEN> adapter) {
-		return new GrammarFormatter<ELEMENT, TOKEN>(adapter);
+	protected Function<TOKEN, String> tokenToString = new ObjToStrFunction<TOKEN>();
+
+	public String apply(Production<ELEMENT, TOKEN> from) {
+		return format(from);
 	}
 
-	public static <ELEMENT, TOKEN> GrammarFormatter<ELEMENT, TOKEN> newFormatter(
-			IGrammarAdapter<ELEMENT, TOKEN> adapter, Function<TOKEN, String> tokenToString) {
-		return new GrammarFormatter<ELEMENT, TOKEN>(adapter, tokenToString);
+	public String format(Production<ELEMENT, TOKEN> adapter) {
+		return format(adapter, adapter.getRoot());
 	}
 
-	protected IGrammarAdapter<ELEMENT, TOKEN> adapter;
-
-	protected Function<TOKEN, String> tokenToString;
-
-	public GrammarFormatter(IGrammarAdapter<ELEMENT, TOKEN> adapter) {
-		super();
-		this.adapter = adapter;
-		this.tokenToString = new ObjToStrFunction<TOKEN>();
+	public String format(Production<ELEMENT, TOKEN> adapter, ELEMENT grammarElement) {
+		return format(adapter, grammarElement, false);
 	}
 
-	public GrammarFormatter(IGrammarAdapter<ELEMENT, TOKEN> adapter, Function<TOKEN, String> tokenToString) {
-		super();
-		this.adapter = adapter;
-		this.tokenToString = tokenToString;
-	}
-
-	public String format(ELEMENT grammarElement) {
-		return format(grammarElement, false);
-	}
-
-	public String format(ELEMENT grammarElement, boolean needParenthesis) {
+	public String format(Production<ELEMENT, TOKEN> adapter, ELEMENT grammarElement, boolean needParenthesis) {
 		TOKEN token = adapter.getToken(grammarElement);
 		if (token != null) {
-			String cardinality = getCardinality(grammarElement);
+			String cardinality = getCardinality(adapter, grammarElement);
 			if (cardinality == null)
 				return tokenToString.apply(token);
 			return tokenToString.apply(token) + cardinality;
 		}
 		Iterable<ELEMENT> alternative = adapter.getAlternativeChildren(grammarElement);
 		if (alternative != null)
-			return format(grammarElement, alternative, " | ", false, needParenthesis, 5);
+			return format(adapter, grammarElement, alternative, " | ", false, needParenthesis, 5);
 		Iterable<ELEMENT> group = adapter.getSequentialChildren(grammarElement);
 		if (group != null)
-			return format(grammarElement, group, " ", false, needParenthesis, 5);
+			return format(adapter, grammarElement, group, " ", false, needParenthesis, 5);
 		Iterable<ELEMENT> ungroup = adapter.getUnorderedChildren(grammarElement);
 		if (ungroup != null)
-			return format(grammarElement, ungroup, " & ", false, needParenthesis, 5);
+			return format(adapter, grammarElement, ungroup, " & ", false, needParenthesis, 5);
 		return "<unknown>";
 	}
 
-	protected String format(ELEMENT element, Iterable<ELEMENT> children, String separator, boolean needWrap,
-			boolean needParenthesis, int maxChildren) {
+	protected String format(Production<ELEMENT, TOKEN> adapter, ELEMENT element, Iterable<ELEMENT> children,
+			String separator, boolean needWrap, boolean needParenthesis, int maxChildren) {
 		List<String> childStrs2 = Lists.newArrayList();
 		int width2 = 0;
 		for (ELEMENT child : children) {
-			String childStr = format(child, true);
+			String childStr = format(adapter, child, true);
 			childStrs2.add(childStr);
 			width2 += childStr.length();
 			if (childStr.contains("\n"))
@@ -90,14 +75,14 @@ public class GrammarFormatter<ELEMENT, TOKEN> {
 		}
 		if (childStrs2.size() > maxChildren)
 			needWrap = true;
-		if (width2 > AUTO_WRAP_CHARS)
+		if (width2 > autoWrapChars)
 			needWrap = true;
-		String cardinality = getCardinality(element);
+		String cardinality = getCardinality(adapter, element);
 		if (needWrap) {
 			for (int i = 0; i < childStrs2.size(); i++)
-				childStrs2.set(i, childStrs2.get(i).replaceAll("\\n", "\n" + INDENT));
-			String body = Joiner.on(separator + "\n" + INDENT).join(childStrs2);
-			return "(\n" + INDENT + body + "\n)" + (cardinality == null ? "" : cardinality);
+				childStrs2.set(i, childStrs2.get(i).replaceAll("\\n", "\n" + indent));
+			String body = Joiner.on(separator + "\n" + indent).join(childStrs2);
+			return "(\n" + indent + body + "\n)" + (cardinality == null ? "" : cardinality);
 		} else {
 			if (cardinality != null && childStrs2.size() > 1)
 				needParenthesis = true;
@@ -108,8 +93,23 @@ public class GrammarFormatter<ELEMENT, TOKEN> {
 		}
 	}
 
-	protected String getCardinality(ELEMENT ele) {
+	protected String getCardinality(Production<ELEMENT, TOKEN> adapter, ELEMENT ele) {
 		return adapter.isMany(ele) ? adapter.isOptional(ele) ? "*" : "+" : adapter.isOptional(ele) ? "?" : null;
+	}
+
+	public ProductionFormatter<ELEMENT, TOKEN> setAutoWrapChars(int autoWrapChars) {
+		this.autoWrapChars = autoWrapChars;
+		return this;
+	}
+
+	public ProductionFormatter<ELEMENT, TOKEN> setIndent(String indent) {
+		this.indent = indent;
+		return this;
+	}
+
+	public ProductionFormatter<ELEMENT, TOKEN> setTokenToString(Function<TOKEN, String> tokenToString) {
+		this.tokenToString = tokenToString;
+		return this;
 	}
 
 }

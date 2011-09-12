@@ -27,7 +27,7 @@ import com.google.common.collect.Sets;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class NfaToGrammar {
+public class NfaToProduction {
 
 	protected static abstract class AbstractElementAlias<T> {
 		protected boolean many = false;
@@ -67,12 +67,19 @@ public class NfaToGrammar {
 
 		@Override
 		public String toString() {
-			return GrammarFormatter.newFormatter(new AliasGrammarProvider<T>()).format(this);
+			Function<Production<AbstractElementAlias<T>, T>, String> formatter = new ProductionFormatter<AbstractElementAlias<T>, T>();
+			return formatter.apply(new AliasGrammarProvider<T>(this));
 		}
 
 	}
 
-	protected static class AliasGrammarProvider<TOKEN> implements IGrammarAdapter<AbstractElementAlias<TOKEN>, TOKEN> {
+	protected static class AliasGrammarProvider<TOKEN> implements Production<AbstractElementAlias<TOKEN>, TOKEN> {
+
+		protected AbstractElementAlias<TOKEN> root;
+
+		public AliasGrammarProvider(AbstractElementAlias<TOKEN> root) {
+			this.root = root;
+		}
 
 		public Iterable<AbstractElementAlias<TOKEN>> getAlternativeChildren(AbstractElementAlias<TOKEN> ele) {
 			return ele instanceof AlternativeAlias ? ((AlternativeAlias<TOKEN>) ele).getChildren() : null;
@@ -100,6 +107,10 @@ public class NfaToGrammar {
 
 		public boolean isOptional(AbstractElementAlias<TOKEN> ele) {
 			return ele.isOptional();
+		}
+
+		public AbstractElementAlias<TOKEN> getRoot() {
+			return root;
 		}
 	}
 
@@ -445,7 +456,7 @@ public class NfaToGrammar {
 	}
 
 	public <ELEMENT, STATE, TOKEN> ELEMENT nfaToGrammar(Nfa<STATE> nfa, Function<STATE, TOKEN> state2token,
-			IGrammarFactory<ELEMENT, TOKEN> grammarFactory) {
+			ProductionFactory<ELEMENT, TOKEN> grammarFactory) {
 		//		StateAlias<TOKEN> start = new StateAlias<TOKEN>(
 		//				new ElementAlias<TOKEN>(state2token.apply(nfa.getStartStates())));
 		//		Set<STATE> stops = Sets.newHashSet(nfa.getFinalStates());
@@ -492,8 +503,10 @@ public class NfaToGrammar {
 		//				e.printStackTrace();
 		//			}
 		//		}
-		GrammarUtil2<AbstractElementAlias<TOKEN>, TOKEN> util = GrammarUtil2.newUtil(new AliasGrammarProvider<TOKEN>());
-		return util.clone(start.getElement(), grammarFactory);
+		AliasGrammarProvider<TOKEN> production = new AliasGrammarProvider<TOKEN>(start.getElement());
+		return new ProductionUtil().clone(production, grammarFactory);
+		//		GrammarUtil2<AbstractElementAlias<TOKEN>, TOKEN> util = GrammarUtil2.newUtil(new AliasGrammarProvider<TOKEN>());
+		//		return util.clone(start.getElement(), grammarFactory);
 		//		if (start.getElement() instanceof GroupAlias<?>) {
 		//			GroupAlias<TOKEN> result = (GroupAlias<TOKEN>) start.getElement();
 		//			result.getChildren().remove(0);

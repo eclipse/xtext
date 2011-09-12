@@ -8,6 +8,8 @@
 package org.eclipse.xtext.util.formallang;
 
 /**
+ * Push-Down Automation
+ * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public interface Pda<STATE, STACKITEM> extends Nfa<STATE> {
