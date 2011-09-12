@@ -20,8 +20,16 @@ import org.eclipse.xtext.ui.util.IJdtHelper;
 
 import com.google.inject.Singleton;
 
+/*
+ * Important note:
+ * ===============
+ * Neither the interface nor the implementation class(es) may
+ * expose any types from jdt.core in its signatures.
+ */
 /**
+ * Default implementation of the {@link IJdtHelper}.
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @since 2.1
  */
 @Singleton
 public class JdtHelper implements IJdtHelper {

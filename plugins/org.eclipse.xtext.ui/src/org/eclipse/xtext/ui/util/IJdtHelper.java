@@ -9,14 +9,31 @@ package org.eclipse.xtext.ui.util;
 
 import org.eclipse.core.resources.IResource;
 
+/*
+ * Important note:
+ * ===============
+ * Neither the interface nor the implementation class(es) may
+ * expose any types from jdt.core in its signatures.
+ */
 /**
+ * Encapsulates common functionality when dealing with JavaCore.
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.1
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface IJdtHelper {
 
+	/**
+	 * Return <code>true</code> if the plugin {@code jdt.core} is available.
+	 * @return <code>true</code> if the plugin {@code jdt.core} is available.
+	 */
 	boolean isJavaCoreAvailable();
 	
+	/**
+	 * Return <code>true</code> if the given resource is member of a java target folder.
+	 * May only be invoked if {@link #isJavaCoreAvailable() jdt.core is available}.
+	 * @return <code>true</code> if the given resource is member of a java target folder.
+	 */
 	boolean isFromOutputPath(IResource resource);
 	
 }
