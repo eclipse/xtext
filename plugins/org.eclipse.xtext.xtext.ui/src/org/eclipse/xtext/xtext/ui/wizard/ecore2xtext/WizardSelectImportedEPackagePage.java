@@ -36,6 +36,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.xtext.ui.util.IJdtHelper;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -54,8 +55,11 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 
 	private TableViewer importedEPackagesViewer;
 
-	public WizardSelectImportedEPackagePage(String pageName, IStructuredSelection selection) {
+	private final IJdtHelper jdtHelper;
+
+	public WizardSelectImportedEPackagePage(String pageName, IStructuredSelection selection, IJdtHelper jdtHelper) {
 		super(pageName);
+		this.jdtHelper = jdtHelper;
 		setTitle(Messages.WizardSelectImportedEPackagePage_WindowTitle);
 		setDescription(Messages.WizardSelectImportedEPackagePage_Description);
 	}
@@ -99,7 +103,7 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 		addButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				addEPackageInfos(new EPackageChooser(getShell()).open());
+				addEPackageInfos(new EPackageChooser(getShell(), jdtHelper).open());
 			}
 		});
 		Button defaultButton = new Button(composite, SWT.PUSH);

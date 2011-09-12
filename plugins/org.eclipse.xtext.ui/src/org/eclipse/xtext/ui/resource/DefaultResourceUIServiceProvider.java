@@ -7,15 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.resource;
 
+import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.parser.IEncodingProvider;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.IContainer.Manager;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.LanguageSpecific;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
+import org.eclipse.xtext.ui.util.IJdtHelper;
 import org.eclipse.xtext.validation.IResourceValidator;
 
 import com.google.inject.Inject;
@@ -27,6 +30,9 @@ import com.google.inject.Injector;
 public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvider {
 
 	private IResourceServiceProvider delegate;
+	
+	@Inject
+	private IJdtHelper jdtHelper;
 
 	@Inject
 	public DefaultResourceUIServiceProvider(IResourceServiceProvider delegate) {
@@ -58,11 +64,41 @@ public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvi
 	}
 
 	public boolean canHandle(URI uri) {
-		return delegate.canHandle(uri);
+		boolean result = delegate.canHandle(uri);
+		return result;
 	}
 
+	/**
+	 * Compute whether the given storage is interesting in the context of Xtext.
+	 * By default, it will delegate to {@link #canHandle(URI)} and perform a subsequent
+	 * check to filter storages from Java target folders.
+	 * @return <code>true</code> if the <code>uri / storage</code> pair should be processed.
+	 */
 	public boolean canHandle(URI uri, IStorage storage) {
-		return delegate.canHandle(uri);
+		if (delegate.canHandle(uri)) {
+			if (isJavaCoreAvailable()) {
+				return !isJavaTargetFolder(storage);
+			}
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * @since 2.1
+	 */
+	protected boolean isJavaCoreAvailable() {
+		return jdtHelper.isJavaCoreAvailable();
+	}
+
+	/**
+	 * @since 2.1
+	 */
+	protected boolean isJavaTargetFolder(IStorage storage) {
+		if (storage instanceof IResource) {
+			return jdtHelper.isFromOutputPath((IResource) storage);
+		}
+		return false;
 	}
 
 	@Inject 

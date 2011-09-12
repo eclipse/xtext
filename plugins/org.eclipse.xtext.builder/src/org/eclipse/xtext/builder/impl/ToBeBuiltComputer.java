@@ -10,6 +10,7 @@ package org.eclipse.xtext.builder.impl;
 import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceVisitor;
@@ -30,6 +31,9 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
+ * Encapsulates the decision about the resources that
+ * should be built.
+ * 
  * @author Sven Efftinge - Initial contribution and API
  * @author Jan Koehnlein
  */
@@ -102,6 +106,9 @@ public class ToBeBuiltComputer {
 				if (resource instanceof IStorage) {
 					return updateStorage(null, toBeBuilt, (IStorage) resource);
 				}
+				if (resource instanceof IFolder) {
+					return isHandled((IFolder)resource);
+				}
 				return true;
 			}
 		});
@@ -129,7 +136,18 @@ public class ToBeBuiltComputer {
 	}
 
 	protected boolean isHandled(IStorage resource) {
-		return (resource instanceof IFile) && !((IFile) resource).isDerived();
+		return resource instanceof IFile;
+	}
+	
+	/**
+	 * Return <code>true</code> if the folder should be traversed. <code>False</code> otherwise.
+	 * Defaults to <code>true</code> for all folders.
+	 * @see org.eclipse.xtext.builder.impl.javasupport.JdtToBeBuiltComputer#isHandled(IFolder)
+	 * @return <code>true</code> if the folder should be traversed. <code>False</code> otherwise.
+	 * @since 2.1
+	 */
+	protected boolean isHandled(IFolder folder) {
+		return true;
 	}
 
 	protected URI getUri(IStorage file) {

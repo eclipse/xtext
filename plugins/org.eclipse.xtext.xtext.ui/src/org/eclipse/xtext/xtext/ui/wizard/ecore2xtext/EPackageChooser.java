@@ -35,6 +35,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.dialogs.ListSelectionDialog;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
+import org.eclipse.xtext.ui.util.IJdtHelper;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -49,6 +50,13 @@ public class EPackageChooser {
 	
 	private final Shell shell;
 
+	private final IJdtHelper jdtHelper;
+
+	public EPackageChooser(Shell shell, IJdtHelper jdtHelper) {
+		this.shell = shell;
+		this.jdtHelper = jdtHelper;
+	}
+	
 	protected List<EPackageInfo> createEPackageInfosFromGenModel(URI genModelURI) {
 		ResourceSet resourceSet = createResourceSet();
 		Resource resource = resourceSet.getResource(genModelURI, true);
@@ -82,10 +90,6 @@ public class EPackageChooser {
 		uriResourceMap.put(URI.createPlatformPluginURI(PATH_TO_ECORE_ECORE, true), ecorePackageResource);
 		resourceSet.setURIResourceMap(uriResourceMap);
 		return resourceSet;
-	}
-
-	public EPackageChooser(Shell shell) {
-		this.shell = shell;
 	}
 
 	private static class LabelProvider extends org.eclipse.jface.viewers.LabelProvider {
@@ -161,7 +165,10 @@ public class EPackageChooser {
 							filteredResources.add(resource);
 						}
 					}
-					return !resource.isDerived();
+					if (jdtHelper.isJavaCoreAvailable()) {
+						return !jdtHelper.isFromOutputPath(resource);
+					}
+					return true;
 				}
 			});
 		} catch (CoreException e) {

@@ -18,9 +18,11 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.jdt.core.IClasspathEntry;
@@ -30,6 +32,7 @@ import org.eclipse.xtext.builder.tests.builderTestLanguage.BuilderTestLanguagePa
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.TextFile;
+import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
 import org.eclipse.xtext.util.StringInputStream;
 
 /**
@@ -485,4 +488,58 @@ public class IntegrationTest extends AbstractBuilderTest {
 //		});
 		someProject.delete(true, monitor());
 	}
+	
+	public void testIgnoreFilesInOutputFolder() throws Exception {
+		IJavaProject javaProject = createJavaProjectWithRootSrc("foo");
+		createFile("foo/src/foo"+F_EXT, "object Foo ");
+		createFile("foo/bar"+F_EXT, "object Bar references Foo");
+		waitForAutoBuild();
+		IProject project = javaProject.getProject();
+		IResource resourceFromBin = project.findMember(new Path("/bin/foo" + F_EXT));
+		assertNotNull(resourceFromBin);
+		assertTrue(resourceFromBin instanceof IStorage);
+		assertTrue(resourceFromBin.exists());
+		IResourceUIServiceProvider serviceProvider = getInstance(IResourceUIServiceProvider.class);
+		URI fakeBinURI = URI.createPlatformResourceURI("/" + project.getName() + "/bin/foo" + F_EXT, true);
+		assertFalse(serviceProvider.canHandle(fakeBinURI, (IStorage) resourceFromBin));
+		assertTrue(serviceProvider.canHandle(fakeBinURI));
+		IResource resourceFromRoot = project.findMember(new Path("/bar" + F_EXT));
+		assertNotNull(resourceFromRoot);
+		assertTrue(resourceFromRoot instanceof IStorage);
+		URI fromRootURI = URI.createPlatformResourceURI("/" + project.getName() + "/bar" + F_EXT, true);
+		assertFalse(serviceProvider.canHandle(fromRootURI, (IStorage) resourceFromBin));
+		assertTrue(serviceProvider.canHandle(fromRootURI));
+	}
+	
+	public void testModelWithSyntaxErrorInDerivedSrcFolder() throws Exception {
+		IJavaProject javaProject = createJavaProjectWithRootSrc("foo");
+		IProject project = javaProject.getProject();
+		IFolder sourceFolder = project.getFolder("src");
+		sourceFolder.setDerived(true);
+		IFile file = createFile("foo/src/foo"+F_EXT, "objekt Foo ");
+		file.setDerived(true);
+		waitForAutoBuild();
+		assertEquals(1, countMarkers(file));
+		file.setContents(new StringInputStream("object Foo"), true, true, monitor());
+		assertTrue(file.isDerived());
+		waitForAutoBuild();
+		assertEquals(0, countMarkers(file));
+	}
+	
+	public void testModelWithSyntaxErrorInDerivedFolder() throws Exception {
+		IJavaProject javaProject = createJavaProjectWithRootSrc("foo");
+		IProject project = javaProject.getProject();
+		IFolder folder = project.getFolder("non-src");
+		folder.create(true,  true, monitor());
+		folder.setDerived(true);
+		IFile file = createFile("foo/non-src/foo"+F_EXT, "objekt Foo ");
+		file.setDerived(true);
+		waitForAutoBuild();
+		assertEquals(1, countMarkers(file));
+		file.setContents(new StringInputStream("object Foo"), true, true, monitor());
+		assertTrue(file.isDerived());
+		waitForAutoBuild();
+		assertEquals(0, countMarkers(file));
+	}
+	
 }

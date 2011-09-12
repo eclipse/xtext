@@ -13,6 +13,7 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IWorkspace.ProjectOrder;
@@ -39,6 +40,7 @@ import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.resource.JarEntryLocator;
 import org.eclipse.xtext.ui.resource.PackageFragmentRootWalker;
+import org.eclipse.xtext.ui.util.IJdtHelper;
 import org.eclipse.xtext.util.Pair;
 
 import com.google.common.collect.Maps;
@@ -58,6 +60,9 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 	
 	@Inject
 	private ModificationStampCache modificationStampCache;
+	
+	@Inject
+	private IJdtHelper jdtHelper;
 	
 	@Singleton
 	public static class ModificationStampCache {
@@ -208,5 +213,15 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 	@Override
 	protected boolean isHandled(IStorage resource) {
 		return (resource instanceof IJarEntryResource) || super.isHandled(resource);
+	}
+	
+	/**
+	 * Ignores Java output folders when traversing a project.
+	 * @return <code>false</code> if the folder is a java output folder. Otherwise <code>true</code>.
+	 */
+	@Override
+	protected boolean isHandled(IFolder folder) {
+		boolean result = super.isHandled(folder) && !jdtHelper.isFromOutputPath(folder);
+		return result;
 	}
 }

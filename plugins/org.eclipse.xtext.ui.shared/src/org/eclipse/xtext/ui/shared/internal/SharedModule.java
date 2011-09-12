@@ -31,6 +31,8 @@ import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperImpl;
 import org.eclipse.xtext.ui.resource.SimpleResourceSetProvider;
+import org.eclipse.xtext.ui.shared.JdtHelper;
+import org.eclipse.xtext.ui.util.IJdtHelper;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Provider;
@@ -71,6 +73,8 @@ public class SharedModule extends AbstractModule {
 				return ResourcesPlugin.getWorkspace();
 			}
 		});
+		
+		bind(IJdtHelper.class).to(JdtHelper.class).asEagerSingleton();
 	}
 	
 }

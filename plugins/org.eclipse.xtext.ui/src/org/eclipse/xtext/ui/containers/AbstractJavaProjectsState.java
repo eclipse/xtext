@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.containers;
 
+import org.eclipse.core.resources.IResource;
 import org.eclipse.jdt.core.ElementChangedEvent;
 import org.eclipse.jdt.core.IElementChangedListener;
 import org.eclipse.jdt.core.IJavaElement;
@@ -15,12 +16,18 @@ import org.eclipse.jdt.core.IJavaModel;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.xtext.ui.util.IJdtHelper;
+
+import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public abstract class AbstractJavaProjectsState extends AbstractAllContainersState implements IElementChangedListener {
 
+	@Inject
+	private IJdtHelper jdtHelper;
+	
 	@Override
 	protected void registerAsListener() {
 		super.registerAsListener();
@@ -72,5 +79,13 @@ public abstract class AbstractJavaProjectsState extends AbstractAllContainersSta
 				return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * @since 2.1
+	 */
+	@Override
+	protected boolean isIgnoredResource(IResource resource) {
+		return jdtHelper.isFromOutputPath(resource);
 	}
 }
