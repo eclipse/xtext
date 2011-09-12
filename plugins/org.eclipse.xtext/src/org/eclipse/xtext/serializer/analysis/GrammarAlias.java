@@ -13,10 +13,11 @@ import java.util.Set;
 
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
-import org.eclipse.xtext.util.formallang.GrammarFormatter;
-import org.eclipse.xtext.util.formallang.IGrammarAdapter;
-import org.eclipse.xtext.util.formallang.IGrammarFactory;
+import org.eclipse.xtext.util.formallang.ProductionFormatter;
+import org.eclipse.xtext.util.formallang.Production;
+import org.eclipse.xtext.util.formallang.ProductionFactory;
 
+import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -50,9 +51,10 @@ public class GrammarAlias {
 
 		@Override
 		public String toString() {
-			GrammarFormatter<AbstractElementAlias, AbstractElement> formatter = GrammarFormatter.newFormatter(
-					new GrammarAliasAdapter(), new GrammarElementTitleSwitch().showAssignments().hideCardinality());
-			return formatter.format(this);
+			GrammarElementTitleSwitch t2s = new GrammarElementTitleSwitch().showAssignments().hideCardinality();
+			Function<Production<AbstractElementAlias, AbstractElement>, String> formatter2 = new ProductionFormatter<AbstractElementAlias, AbstractElement>()
+					.setTokenToString(t2s);
+			return formatter2.apply(new GrammarAliasAdapter(this));
 		}
 	}
 
@@ -119,7 +121,14 @@ public class GrammarAlias {
 
 	}
 
-	public static class GrammarAliasAdapter implements IGrammarAdapter<AbstractElementAlias, AbstractElement> {
+	public static class GrammarAliasAdapter implements Production<AbstractElementAlias, AbstractElement> {
+
+		protected AbstractElementAlias root;
+
+		public GrammarAliasAdapter(AbstractElementAlias root) {
+			super();
+			this.root = root;
+		}
 
 		public Iterable<AbstractElementAlias> getAlternativeChildren(AbstractElementAlias ele) {
 			return ele instanceof AlternativeAlias ? ((AlternativeAlias) ele).getChildren() : null;
@@ -148,9 +157,13 @@ public class GrammarAlias {
 		public boolean isOptional(AbstractElementAlias ele) {
 			return ele.isOptional();
 		}
+
+		public AbstractElementAlias getRoot() {
+			return root;
+		}
 	}
 
-	public static class GrammarAliasFactory implements IGrammarFactory<AbstractElementAlias, AbstractElement> {
+	public static class GrammarAliasFactory implements ProductionFactory<AbstractElementAlias, AbstractElement> {
 
 		public AbstractElementAlias createForAlternativeChildren(boolean many, boolean optional,
 				Iterable<AbstractElementAlias> children) {

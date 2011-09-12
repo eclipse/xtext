@@ -39,7 +39,7 @@ import org.eclipse.xtext.serializer.analysis.ActionFilterNFAProvider.ActionFilte
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
-import org.eclipse.xtext.util.formallang.GrammarFormatter;
+import org.eclipse.xtext.util.formallang.ProductionFormatter;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -724,10 +724,11 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 				return "TYPEMATCH";
 			if (type == null)
 				return "error(type is null)";
-			GrammarFormatter<IConstraintElement, AbstractElement> formatter = GrammarFormatter.newFormatter(
-					IConstraintElement.ADAPTER, new GrammarElementTitleSwitch().hideCardinality()
-							.showActionsAsRuleCalls().showAssignments());
-			return formatter.format(this, true);
+			GrammarElementTitleSwitch t2s = new GrammarElementTitleSwitch().hideCardinality().showActionsAsRuleCalls()
+					.showAssignments();
+			ProductionFormatter<IConstraintElement, AbstractElement> formatter = new ProductionFormatter<IConstraintElement, AbstractElement>();
+			formatter.setTokenToString(t2s);
+			return formatter.format(new ConstraintElementProduction(getContainingConstraint()), this, true);
 		}
 
 		protected void typeMatch() {

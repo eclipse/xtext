@@ -25,9 +25,9 @@ import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstra
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.ISemState;
 import org.eclipse.xtext.serializer.sequencer.BacktrackingSemanticSequencer.SerializableObject;
 import org.eclipse.xtext.serializer.sequencer.IContextFinder;
-import org.eclipse.xtext.util.formallang.GrammarStringFactory;
+import org.eclipse.xtext.util.formallang.ProductionStringFactory;
 import org.eclipse.xtext.util.formallang.Nfa;
-import org.eclipse.xtext.util.formallang.NfaToGrammar;
+import org.eclipse.xtext.util.formallang.NfaToProduction;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -124,8 +124,8 @@ public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnostic
 	public ISerializationDiagnostic createBacktrackingFailedDiagnostic(SerializableObject semanticObject,
 			EObject context, Nfa<ISemState> nfa) {
 		GrammarElementTitleSwitch ele2str = new GrammarElementTitleSwitch().showAssignments().setValueForNull(null);
-		GrammarStringFactory<AbstractElement> grammarFactory = new GrammarStringFactory<AbstractElement>(ele2str);
-		String grammar = new NfaToGrammar().nfaToGrammar(nfa, new GetGrammarEle(), grammarFactory);
+		ProductionStringFactory<AbstractElement> grammarFactory = new ProductionStringFactory<AbstractElement>(ele2str);
+		String grammar = new NfaToProduction().nfaToGrammar(nfa, new GetGrammarEle(), grammarFactory);
 		StringBuilder msg = new StringBuilder();
 		msg.append("Could not serialize EObject via backtracking.\n");
 		msg.append("Constraint: " + grammar + "\n");

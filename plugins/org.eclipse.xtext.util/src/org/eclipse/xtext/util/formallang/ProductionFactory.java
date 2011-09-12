@@ -10,19 +10,13 @@ package org.eclipse.xtext.util.formallang;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface IGrammarAdapter<ELEMENT, TOKEN> {
+public interface ProductionFactory<ELEMENT, TOKEN> {
 
-	Iterable<ELEMENT> getAlternativeChildren(ELEMENT ele);
+	ELEMENT createForAlternativeChildren(boolean many, boolean optional, Iterable<ELEMENT> children);
 
-	ELEMENT getParent(ELEMENT ele);
+	ELEMENT createForSequentialChildren(boolean many, boolean optional, Iterable<ELEMENT> children);
 
-	Iterable<ELEMENT> getSequentialChildren(ELEMENT ele);
+	ELEMENT createForToken(boolean many, boolean optional, TOKEN token);
 
-	TOKEN getToken(ELEMENT owner);
-
-	Iterable<ELEMENT> getUnorderedChildren(ELEMENT ele);
-
-	boolean isMany(ELEMENT ele);
-
-	boolean isOptional(ELEMENT ele);
+	ELEMENT createForUnordertedChildren(boolean many, boolean optional, Iterable<ELEMENT> children);
 }

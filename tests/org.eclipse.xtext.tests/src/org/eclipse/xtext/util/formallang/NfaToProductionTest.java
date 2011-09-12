@@ -14,11 +14,11 @@ import com.google.common.base.Functions;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class NfaToGrammarTest extends AbstractXtextTests {
+public class NfaToProductionTest extends AbstractXtextTests {
 
 	private String nfa2g(Nfa<String> nfa) {
-		NfaToGrammar nfa2g = new NfaToGrammar();
-		return nfa2g.nfaToGrammar(nfa, Functions.<String> identity(), new GrammarStringFactory<String>());
+		NfaToProduction nfa2g = new NfaToProduction();
+		return nfa2g.nfaToGrammar(nfa, Functions.<String> identity(), new ProductionStringFactory<String>());
 	}
 
 	public void testSimple() {

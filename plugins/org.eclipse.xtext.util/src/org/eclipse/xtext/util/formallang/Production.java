@@ -8,15 +8,25 @@
 package org.eclipse.xtext.util.formallang;
 
 /**
+ * Production Rule
+ * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface IGrammarFactory<ELEMENT, TOKEN> {
+public interface Production<ELEMENT, TOKEN> {
 
-	ELEMENT createForAlternativeChildren(boolean many, boolean optional, Iterable<ELEMENT> children);
+	Iterable<ELEMENT> getAlternativeChildren(ELEMENT ele);
 
-	ELEMENT createForSequentialChildren(boolean many, boolean optional, Iterable<ELEMENT> children);
+	ELEMENT getParent(ELEMENT ele);
 
-	ELEMENT createForToken(boolean many, boolean optional, TOKEN token);
+	Iterable<ELEMENT> getSequentialChildren(ELEMENT ele);
 
-	ELEMENT createForUnordertedChildren(boolean many, boolean optional, Iterable<ELEMENT> children);
+	TOKEN getToken(ELEMENT owner);
+
+	Iterable<ELEMENT> getUnorderedChildren(ELEMENT ele);
+
+	boolean isMany(ELEMENT ele);
+
+	boolean isOptional(ELEMENT ele);
+
+	ELEMENT getRoot();
 }

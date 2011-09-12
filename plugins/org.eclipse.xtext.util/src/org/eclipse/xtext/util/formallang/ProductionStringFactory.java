@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.List;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.inject.internal.Join;
@@ -20,14 +19,14 @@ import com.google.inject.internal.Lists;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class GrammarStringFactory<TOKEN> implements IGrammarFactory<String, TOKEN> {
+public class ProductionStringFactory<TOKEN> implements ProductionFactory<String, TOKEN> {
 
 	protected Function<TOKEN, String> token2String;
 
-	public GrammarStringFactory() {
+	public ProductionStringFactory() {
 	}
 
-	public GrammarStringFactory(Function<TOKEN, String> token2String) {
+	public ProductionStringFactory(Function<TOKEN, String> token2String) {
 		super();
 		this.token2String = token2String;
 	}

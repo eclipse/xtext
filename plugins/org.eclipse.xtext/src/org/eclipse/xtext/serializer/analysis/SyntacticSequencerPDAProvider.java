@@ -45,7 +45,7 @@ import org.eclipse.xtext.serializer.analysis.GrammarAlias.GroupAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
 import org.eclipse.xtext.serializer.sequencer.RuleCallStack;
 import org.eclipse.xtext.util.formallang.Nfa;
-import org.eclipse.xtext.util.formallang.NfaToGrammar;
+import org.eclipse.xtext.util.formallang.NfaToProduction;
 import org.eclipse.xtext.util.formallang.NfaUtil;
 import org.eclipse.xtext.util.formallang.Pda;
 import org.eclipse.xtext.util.formallang.PdaUtil;
@@ -701,7 +701,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			ambiguousSyntaxes = Lists.newArrayList();
 			Nfa<ISynState> nfa = new PdaUtil().filterUnambiguousPaths(getPathToTarget());
 			nfa = new NfaUtil().filter(nfa, new Filter());
-			AbstractElementAlias syntax = new NfaToGrammar().nfaToGrammar(nfa, new GetGrammarElement(),
+			AbstractElementAlias syntax = new NfaToProduction().nfaToGrammar(nfa, new GetGrammarElement(),
 					new GrammarAliasFactory());
 			if (syntax instanceof GroupAlias) {
 				GroupAlias group = (GroupAlias) syntax;
@@ -715,7 +715,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 
 		public AbstractElementAlias getShortSyntax() {
 			Nfa<ISynState> path = new NfaUtil().filter(getPathToTarget(), new Filter());
-			return new NfaToGrammar().nfaToGrammar(path, new GetGrammarElement(), new GrammarAliasFactory());
+			return new NfaToProduction().nfaToGrammar(path, new GetGrammarElement(), new GrammarAliasFactory());
 		}
 
 		public ISynAbsorberState getSource() {
@@ -724,7 +724,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 
 		public AbstractElementAlias getSyntax() {
 			Pda<ISynState, RuleCall> pathToTarget = getPathToTarget();
-			return new NfaToGrammar().nfaToGrammar(pathToTarget, new GetGrammarElement(), new GrammarAliasFactory());
+			return new NfaToProduction().nfaToGrammar(pathToTarget, new GetGrammarElement(), new GrammarAliasFactory());
 		}
 
 		@Override
