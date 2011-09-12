@@ -17,7 +17,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -338,11 +337,14 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		return featureScopeForThis;
 	}
 	
-	protected JvmDeclaredType getContextType(EObject call) {
-		if (call == null)
+	protected JvmDeclaredType getContextType(EObject obj) {
+		if (obj == null)
 			return null;
-		if (call instanceof XExpression) {
-			JvmIdentifiableElement element = expressionContextProvider.getAssociatedJvmElement((XExpression) call);
+		if (obj instanceof JvmDeclaredType) {
+			return (JvmDeclaredType) obj;
+		}
+		if (obj instanceof XExpression) {
+			JvmIdentifiableElement element = expressionContextProvider.getAssociatedJvmElement((XExpression) obj);
 			if (element != null) {
 				if (element instanceof JvmDeclaredType) {
 					return (JvmDeclaredType) element;
@@ -351,7 +353,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 				}
 			}
 		}
-		return EcoreUtil2.getContainerOfType(call, JvmDeclaredType.class);
+		return getContextType(obj.eContainer());
 	}
 	
 	protected IScope createLocalVarScope(IScope parentScope, LocalVariableScopeContext scopeContext) {
@@ -403,22 +405,21 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	}
 
 	protected IScope createLocalVarScopeForJvmElement(JvmIdentifiableElement element, IScope parentScope) {
+		if (element.eContainer() instanceof JvmIdentifiableElement) {
+			parentScope = createLocalVarScopeForJvmElement((JvmIdentifiableElement) element.eContainer(), parentScope);
+		} 
 		if (element instanceof JvmOperation) {
 			EList<JvmFormalParameter> parameters = ((JvmOperation) element).getParameters();
 			List<LocalVarDescription> descriptions = newArrayList();
 			for (JvmFormalParameter p : parameters) {
 				descriptions.add(new LocalVarDescription(QualifiedName.create(p.getName()), p));
 			}
-			parentScope = new JvmFeatureScope(parentScope, "operation args", descriptions);
+			return new JvmFeatureScope(parentScope, "operation args", descriptions);
 		}
 		if (element instanceof JvmDeclaredType) {
-			parentScope = new JvmFeatureScope(parentScope, "this scope", new LocalVarDescription(THIS, element));
+			return new JvmFeatureScope(parentScope, "this scope", new LocalVarDescription(THIS, element));
 		}
-		if (element.eContainer() instanceof JvmIdentifiableElement) {
-			return createLocalVarScopeForJvmElement((JvmIdentifiableElement) element.eContainer(), parentScope);
-		} else {
-			return parentScope;
-		}
+		return parentScope;
 	}
 
 	protected boolean adaptsToJvmElement(EObject context) {
