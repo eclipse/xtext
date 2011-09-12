@@ -79,6 +79,56 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest imp
 		newBuilder().appendNl("var x = ''").appendNl("var y = ").assertText(expect(new String[] {"x"}, getKeywordsAndStatics()));
 	}
 	
+	public void testRichString_01() throws Exception {
+		newBuilder().append("'''foobar'''").assertTextAtCursorPosition("foobar", "«»");
+		newBuilder().append("'''foobar''").assertTextAtCursorPosition("foobar", "«»");
+		newBuilder().append("'''foobar'").assertTextAtCursorPosition("foobar", "«»");
+		newBuilder().append("'''foobar").assertTextAtCursorPosition("foobar", "«»");
+	}
+	
+	public void testRichString_02() throws Exception {
+		newBuilder().append("'''foobar«null»'''").assertTextAtCursorPosition("foobar", "«»");
+		newBuilder().append("'''foobar«null»''").assertTextAtCursorPosition("foobar", "«»");
+		newBuilder().append("'''foobar«null»'").assertTextAtCursorPosition("foobar", "«»");
+		newBuilder().append("'''foobar«null»").assertTextAtCursorPosition("foobar", "«»");
+	}
+	
+	public void testRichString_03() throws Exception {
+		newBuilder().append("'''«null»zonkfoobar'''").assertTextAtCursorPosition("foobar", "«»");
+		newBuilder().append("'''«null»zonkfoobar''").assertTextAtCursorPosition("foobar", "«»");
+		newBuilder().append("'''«null»zonkfoobar'").assertTextAtCursorPosition("foobar", "«»");
+		newBuilder().append("'''«null»zonkfoobar").assertTextAtCursorPosition("foobar", "«»");
+	}
+	
+	public void testRichString_04() throws Exception {
+		newBuilder().append("'''«null»zonkfoobar«null»'''").assertTextAtCursorPosition("foobar", "«»");
+		newBuilder().append("'''«null»zonkfoobar«null»''").assertTextAtCursorPosition("foobar", "«»");
+		newBuilder().append("'''«null»zonkfoobar«null»'").assertTextAtCursorPosition("foobar", "«»");
+		newBuilder().append("'''«null»zonkfoobar«null»").assertTextAtCursorPosition("foobar", "«»");
+	}
+	
+	public void testRichString_05() throws Exception {
+		newBuilder().append("'''\n««« comment \nfoobar'''").assertTextAtCursorPosition("foobar", "«»");
+		newBuilder().append("'''\n««« comment \nfoobar''").assertTextAtCursorPosition("foobar", "«»");
+		newBuilder().append("'''\n««« comment \nfoobar'").assertTextAtCursorPosition("foobar", "«»");
+		newBuilder().append("'''\n««« comment \nfoobar").assertTextAtCursorPosition("foobar", "«»");
+	}
+	
+	public void testRichString_06() throws Exception {
+		newBuilder().append("'''\n««« comment \nfoobar«null»'''").assertTextAtCursorPosition("foobar", "«»");
+		newBuilder().append("'''\n««« comment \nfoobar«null»''").assertTextAtCursorPosition("foobar", "«»");
+		newBuilder().append("'''\n««« comment \nfoobar«null»'").assertTextAtCursorPosition("foobar", "«»");
+		newBuilder().append("'''\n««« comment \nfoobar«null»").assertTextAtCursorPosition("foobar", "«»");
+	}
+	
+	public void testRichString_07() throws Exception {
+		newBuilder().append("'''\n««« comment foobar'''").assertTextAtCursorPosition("foobar");
+	}
+	
+	public void testRichString_08() throws Exception {
+		newBuilder().append("'''\n««« comment foobar«null»'''").assertTextAtCursorPosition("foobar");
+	}
+	
 	@Override
 	protected String[] getKeywordsAndStatics() {
 		List<String> result = Lists.newArrayList(super.getKeywordsAndStatics());
