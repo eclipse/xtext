@@ -49,6 +49,8 @@ public interface IXtend2JvmAssociations extends IJvmModelAssociations {
 
 		public JvmGenericType getInferredType(XtendClass xtendClass) {
 			final JvmGenericType firstOrNull = getFirstOrNull(getJvmElements(xtendClass), JvmGenericType.class);
+			if (firstOrNull == null)
+				throw new IllegalStateException("No inferred type found for XtendClass "+xtendClass);
 			return firstOrNull;
 		}
 
