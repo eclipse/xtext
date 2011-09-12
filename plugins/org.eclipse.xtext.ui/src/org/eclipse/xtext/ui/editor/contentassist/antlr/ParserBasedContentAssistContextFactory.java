@@ -47,6 +47,7 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
+import org.eclipse.xtext.resource.LateInitializingLazyLinkingResource;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.LexerUIBindings;
 import org.eclipse.xtext.ui.editor.contentassist.AbstractContentAssistContextFactory;
@@ -137,6 +138,10 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 				throws BadLocationException {
 			this.viewer = viewer;
 			this.resource = resource;
+			//This is called to make sure late initialization is done.
+			if (resource instanceof LateInitializingLazyLinkingResource) {
+				resource.getContents();
+			}
 			this.parseResult = resource.getParseResult();
 			if (parseResult == null)
 				throw new NullPointerException("parseResult is null");
