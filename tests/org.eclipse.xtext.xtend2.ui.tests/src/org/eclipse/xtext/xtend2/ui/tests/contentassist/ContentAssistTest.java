@@ -199,12 +199,6 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest imp
 		return false;
 	}
 	
-	protected void initializeTypeProvider(XtextResource result) {
-		XtextResourceSet resourceSet = (XtextResourceSet) result.getResourceSet();
-		IJvmTypeProvider.Factory typeProviderFactory = new JdtTypeProviderFactory(this);
-		typeProviderFactory.findOrCreateTypeProvider(resourceSet);
-	}
-	
 	public IJavaProject getJavaProject(ResourceSet resourceSet) {
 		IJavaProject javaProject = findJavaProject(PROJECT_NAME);
 		if (javaProject == null || !javaProject.exists()) {
@@ -217,11 +211,18 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest imp
 		}
 		return javaProject;
 	}
+
+	@Override
+	protected XtextResourceSet getResourceSet() {
+		XtextResourceSet resourceSet = super.getResourceSet();
+		IJvmTypeProvider.Factory typeProviderFactory = new JdtTypeProviderFactory(this);
+		typeProviderFactory.findOrCreateTypeProvider(resourceSet);
+		return resourceSet;
+	}
 	
 	@Override
 	public XtextResource getResourceFor(InputStream stream) {
 		XtextResource result = super.getResourceFor(stream);
-		initializeTypeProvider(result);
 		return result;
 	}
 	
