@@ -65,10 +65,13 @@ public abstract class AbstractXbaseContentAssistTest extends TestCase implements
 		return result;
 	}
 	
+	protected XtextResourceSet getResourceSet() {
+		return get(XtextResourceSet.class);
+	}
+	
 	public XtextResource getResourceFor(InputStream stream) {
 		try {
-			XtextResourceSet set = get(XtextResourceSet.class);
-			XtextResource result = (XtextResource) set.createResource(URI.createURI("Test." + fileExtension));
+			XtextResource result = (XtextResource) getResourceSet().createResource(URI.createURI("Test." + fileExtension));
 			result.load(stream, null);
 			return result;
 		} catch(Exception e) {
