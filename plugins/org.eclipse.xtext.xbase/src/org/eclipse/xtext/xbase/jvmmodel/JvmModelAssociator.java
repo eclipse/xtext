@@ -79,6 +79,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 			if (languageName.equals(((XtextResource) res).getLanguageName()))
 				return getOrInstall(res).sourceToTargetMap;
 		}
+		// TODO we should throw an IllegalArgumentException here? If the resource is not from my language, clients should really make sure they use the language's services.
 		return LinkedListMultimap.create();
 	}
 
