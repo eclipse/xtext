@@ -21,24 +21,24 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.1
  */
-public class LateInitializingLazyLinkingResource extends LazyLinkingResource {
+public class DerivedStateAwareResource extends LazyLinkingResource {
 
 	@Inject(optional=true)
-	private ILateInitialization lateInitialization;
+	private IDerivedStateComputer derivedStateComputer;
 	
-	public void setLateInitialization(ILateInitialization lateInitialization) {
-		this.lateInitialization = lateInitialization;
+	public void setDerivedStateComputer(IDerivedStateComputer lateInitialization) {
+		this.derivedStateComputer = lateInitialization;
 	}
 	
-	protected boolean fullyInitialized = false;
+	protected volatile boolean fullyInitialized = false;
 
 	@Override
-	public EList<EObject> getContents() {
+	public synchronized EList<EObject> getContents() {
 		if (isLoaded && !isLoading && !isUpdating && !fullyInitialized) {
 			try {
 				eSetDeliver(false);
 				isLoading = true;
-				installLateInitializedState();
+				installDerivedState();
 				fullyInitialized = true;
 			} finally {
 				isLoading = false;
@@ -51,22 +51,20 @@ public class LateInitializingLazyLinkingResource extends LazyLinkingResource {
 	@Override
 	protected void updateInternalState(IParseResult parseResult) {
 		if (fullyInitialized) {
-			discardLateInitializedState();
+			discardDerivedState();
 		}
-		if (contents != null)
-			contents.clear();
 		fullyInitialized = false;
 		super.updateInternalState(parseResult);
 	}
 
-	protected void discardLateInitializedState() {
-		if (lateInitialization != null)
-			lateInitialization.discardLateInitialization(super.getContents());
+	public void discardDerivedState() {
+		if (derivedStateComputer != null)
+			derivedStateComputer.discardDerivedState(this);
 	}
 
-	protected void installLateInitializedState() {
-		if (lateInitialization != null)
-			lateInitialization.installLateInitialization(super.getContents());
+	public void installDerivedState() {
+		if (derivedStateComputer != null)
+			derivedStateComputer.installDerivedState(this);
 	}
 
 }

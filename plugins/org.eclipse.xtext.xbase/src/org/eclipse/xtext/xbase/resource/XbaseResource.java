@@ -10,7 +10,7 @@ package org.eclipse.xtext.xbase.resource;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.resource.LateInitializingLazyLinkingResource;
+import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -20,7 +20,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class XbaseResource extends LateInitializingLazyLinkingResource {
+public class XbaseResource extends DerivedStateAwareResource {
 	
 	@Inject
 	private OnChangeEvictingCache onChangeEvictingCache;

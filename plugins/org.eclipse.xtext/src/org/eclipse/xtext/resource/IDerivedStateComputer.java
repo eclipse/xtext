@@ -7,24 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.1
  */
-public interface ILateInitialization {
+public interface IDerivedStateComputer {
 	
 	/**
 	 * callback to do modifications when and before getContents is called the first time on a resource.
-	 * {@link org.eclipse.emf.ecore.resource.Resource#eDeliver()} will be set to <code>false</code> during initialization,
-	 * such that modifications on the list don't fire any {@link org.eclipse.emf.common.notify.Notification}s.
 	 */
-	void installLateInitialization(EList<EObject> resourcesContentsList);
+	void installDerivedState(DerivedStateAwareResource resource);
 	
 	/**
-	 * is called when the resource is updated. Clients should revert all the changes they did during {@link #doLateInitialization(EList)}
+	 * is called when the resource is updated. Clients should revert all the changes they did during {@link #installDerivedState(DerivedStateSupportingResource)}
 	 */
-	void discardLateInitialization(EList<EObject> resourcesContentsList);
+	void discardDerivedState(DerivedStateAwareResource resource);
 }

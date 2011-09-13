@@ -113,7 +113,7 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 				// obsolete convenience bindings
 				.addTypeToType("org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider",
 						"org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider")
-				.addTypeToType("org.eclipse.xtext.resource.ILateInitialization", "org.eclipse.xtext.xbase.resource.JvmModelInferringInitializer")
+				.addTypeToType("org.eclipse.xtext.resource.ILateInitialization", "org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator")
 				.addTypeToType(IGenerator.class.getCanonicalName(), "org.eclipse.xtext.xbase.compiler.JvmModelGenerator");
 			
 		if (useInferredJvmModel) {

@@ -200,8 +200,8 @@ public abstract class AbstractPureXbaseRuntimeModule extends DefaultRuntimeModul
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
-	public Class<? extends org.eclipse.xtext.resource.ILateInitialization> bindILateInitialization() {
-		return org.eclipse.xtext.xbase.resource.JvmModelInferringInitializer.class;
+	public Class<? extends org.eclipse.xtext.resource.IDerivedStateComputer> bindILateInitialization() {
+		return org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
