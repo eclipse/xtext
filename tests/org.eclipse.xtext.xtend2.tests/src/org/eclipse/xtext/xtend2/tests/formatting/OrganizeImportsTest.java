@@ -136,7 +136,8 @@ public class OrganizeImportsTest extends AbstractXtend2TestCase {
 		
 		assertEquals(
 				"\n" +
-				"\nimport org.eclipse.emf.ecore.resource.Resource", section);
+				"\nimport org.eclipse.emf.ecore.resource.Resource$Factory" + 
+				"\nimport org.eclipse.emf.ecore.resource.Resource$Factory$Registry", section);
 	}
 	
 	public void testGetOrganizedImportSectionWithNameClash_01() throws Exception {
@@ -261,5 +262,22 @@ public class OrganizeImportsTest extends AbstractXtend2TestCase {
 		TextRegion region = organizeImports.computeRegion((XtextResource) file.eResource());
 		assertEquals(15, region.getOffset());
 		assertEquals(19, region.getLength());
+	}
+	
+	public void testInnerClassImport() throws Exception {
+		String model = 
+				"package foo.bar\n" +
+						"import java.util.Map$Entry\n" +
+						"class Foo {\n" +
+						"  def Entry test() {" +
+						"    return null\n" +
+						"  }\n" +
+						"}\n";
+		XtendFile file = file(model, true);
+		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
+		
+		assertEquals(
+				"\n" +
+				"\nimport java.util.Map$Entry", section);
 	}
 }

@@ -54,7 +54,7 @@ import com.google.inject.Provider;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class OrganizeImports {
-	
+
 	@Inject
 	private Provider<ReferenceAcceptor> referenceAcceptorProvider;
 
@@ -94,7 +94,8 @@ public class OrganizeImports {
 		final XtendFile xtendFile = getXtendFile(resource);
 		if (xtendFile == null)
 			return null;
-		List<INode> packDecl = NodeModelUtils.findNodesForFeature(xtendFile, Xtend2Package.Literals.XTEND_FILE__PACKAGE);
+		List<INode> packDecl = NodeModelUtils
+				.findNodesForFeature(xtendFile, Xtend2Package.Literals.XTEND_FILE__PACKAGE);
 		int offset = 0;
 		if (packDecl.size() >= 1)
 			offset = packDecl.get(0).getOffset() + packDecl.get(0).getLength();
@@ -109,13 +110,12 @@ public class OrganizeImports {
 		if (resource.getContents().isEmpty())
 			return null;
 		final EObject eObject = resource.getContents().get(0);
-		if (! (eObject instanceof XtendFile))
+		if (!(eObject instanceof XtendFile))
 			return null;
 		final XtendFile xtendFile = (XtendFile) eObject;
 		return xtendFile;
 	}
 
-	
 	/*
 	 * TODO traverse generically and use qualified name provider. 
 	 */
@@ -201,13 +201,14 @@ public class OrganizeImports {
 		}
 
 		protected boolean isMemberNeedsImport(JvmType type) {
-			return type instanceof JvmGenericType && !"org.eclipse.xtext.xbase.lib".equals(((JvmGenericType)type).getPackageName());
+			return type instanceof JvmGenericType
+					&& !"org.eclipse.xtext.xbase.lib".equals(((JvmGenericType) type).getPackageName());
 		}
 
 		public List<String> getListofStaticImports() {
 			List<String> result = newArrayList();
 			for (JvmType type : staticMembers) {
-				if (isMemberNeedsImport(type)) 
+				if (isMemberNeedsImport(type))
 					result.add(type.getIdentifier());
 			}
 			// extension imports are static imports, so no need to have them twice.
@@ -237,19 +238,14 @@ public class OrganizeImports {
 		}
 
 		protected void addType(Map<String, String> names, JvmDeclaredType type) {
-			JvmDeclaredType declaringType = type.getDeclaringType();
-			if (declaringType != null) {
-				addType(names, declaringType);
-			} else {
-				final String simpleName = type.getSimpleName();
-				if (simpleName == null)
+			final String simpleName = type.getSimpleName();
+			if (simpleName == null)
+				return;
+			if (!names.containsKey(simpleName)) {
+				final String identifier = type.getIdentifier();
+				if (identifier == null)
 					return;
-				if (!names.containsKey(simpleName)) {
-					final String identifier = type.getIdentifier();
-					if (identifier == null)
-						return;
-					names.put(simpleName, identifier);
-				}
+				names.put(simpleName, identifier);
 			}
 		}
 
