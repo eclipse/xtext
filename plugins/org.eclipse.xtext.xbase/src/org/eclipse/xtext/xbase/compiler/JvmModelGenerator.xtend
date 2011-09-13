@@ -121,6 +121,7 @@ class JvmModelGenerator implements IGenerator {
 			val expression = op.associatedExpression
 			if (expression != null) {
 				val appendable = new StringBuilderBasedAppendable(importManager)
+				appendable.declareVariable(op.declaringType, "this");
 				compiler.compile(expression, appendable, op.returnType)
 				return appendable.toString
 			} else {
