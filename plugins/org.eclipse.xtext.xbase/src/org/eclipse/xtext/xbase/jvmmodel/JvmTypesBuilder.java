@@ -18,6 +18,7 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
@@ -125,7 +126,7 @@ public class JvmTypesBuilder {
 	}
 	
 	public JvmTypeReference cloneWithProxies(JvmTypeReference typeRef) {
-		if (!typeRef.eIsSet(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE))
+		if (typeRef instanceof JvmParameterizedTypeReference && !typeRef.eIsSet(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE))
 			throw new IllegalArgumentException("typeref#type was null");
 		return EcoreUtil2.cloneWithProxies(typeRef);
 	}
@@ -150,7 +151,7 @@ public class JvmTypesBuilder {
 		throw new IllegalArgumentException();
 	}
 	
-	public void body(final JvmOperation op, Functions.Function1<ImportManager, CharSequence> strategy) {
+	public void body(final JvmOperation op, Functions.Function1<ImportManager, ? extends CharSequence> strategy) {
 		CompilationStrategyAdapter adapter = new CompilationStrategyAdapter();
 		adapter.setCompilationStrategy(strategy);
 		op.eAdapters().add(adapter);

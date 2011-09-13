@@ -1,22 +1,17 @@
 package org.eclipse.xtext.xbase.compiler
 
-import org.eclipse.xtext.generator.IGenerator
-import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtext.generator.IFileSystemAccess
-import org.eclipse.xtext.common.types.JvmDeclaredType
-import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtext.common.types.JvmGenericType
-import org.eclipse.xtext.xbase.compiler.ImportManager
-import org.eclipse.xtext.common.types.JvmOperation
-import org.eclipse.xtext.common.types.JvmField
-import org.eclipse.xtext.common.types.JvmMember
-import org.eclipse.xtext.xtend2.lib.StringConcatenation
 import com.google.inject.Inject
-import org.eclipse.xtext.xbase.jvmmodel.IExpressionContextProvider
-import org.eclipse.xtext.xbase.compiler.XbaseCompiler
-import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable
-import org.eclipse.xtext.common.types.JvmVisibility
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmFormalParameter
+import org.eclipse.xtext.common.types.JvmGenericType
+import org.eclipse.xtext.common.types.JvmMember
+import org.eclipse.xtext.common.types.JvmOperation
+import org.eclipse.xtext.common.types.JvmVisibility
+import org.eclipse.xtext.generator.IFileSystemAccess
+import org.eclipse.xtext.generator.IGenerator
+import org.eclipse.xtext.xbase.jvmmodel.IExpressionContextProvider
 
 class JvmModelGenerator implements IGenerator {
 	
@@ -85,7 +80,6 @@ class JvmModelGenerator implements IGenerator {
 			val superClazz = withoutObject.filter(typeRef | typeRef.type instanceof JvmGenericType && !(typeRef.type as JvmGenericType).interface).head
 			val superInterfaces = withoutObject.filter(typeRef | typeRef != superClazz)
 			var result = ""
-			println(superTypes.toString + " / " + superClazz)
 			if (superClazz != null) {
 				result = "extends " + importManager.serialize(superClazz)+" "
 			} 

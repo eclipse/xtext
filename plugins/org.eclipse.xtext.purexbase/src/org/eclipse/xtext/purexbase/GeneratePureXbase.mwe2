@@ -69,14 +69,14 @@ Workflow {
 
 			// scoping and exporting API 
 			fragment = scoping.ImportNamespacesScopingFragment {}
-			fragment = exporting.QualifiedNamesFragment {}
+//			fragment = exporting.QualifiedNamesFragment {}
 			fragment = builder.BuilderIntegrationFragment {}
 
-			// generator API
-			fragment = generator.GeneratorFragment {
-				generateMwe = true
-				generateJavaMain = true
-			}
+//			// generator API
+//			fragment = generator.GeneratorFragment {
+//				generateMwe = true
+//				generateJavaMain = true
+//			}
 			
 			// formatter API 
 			fragment = formatting.FormatterFragment {}

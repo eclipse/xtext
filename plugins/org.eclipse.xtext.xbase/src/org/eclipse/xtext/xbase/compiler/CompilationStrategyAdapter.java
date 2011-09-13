@@ -21,14 +21,14 @@ public class CompilationStrategyAdapter extends AdapterImpl {
 		return type == CompilationStrategyAdapter.class;
 	}
 	
-	private Functions.Function1<ImportManager, CharSequence> compilationStrategy;
+	private Functions.Function1<ImportManager, ? extends CharSequence> compilationStrategy;
 	
-	public Functions.Function1<ImportManager, CharSequence> getCompilationStrategy() {
+	public Functions.Function1<ImportManager, ? extends CharSequence> getCompilationStrategy() {
 		return compilationStrategy;
 	}
 	
 	public void setCompilationStrategy(
-			Functions.Function1<ImportManager, CharSequence> compilationStrategy) {
+			Functions.Function1<ImportManager, ? extends CharSequence> compilationStrategy) {
 		this.compilationStrategy = compilationStrategy;
 	}
 }
