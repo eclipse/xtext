@@ -154,7 +154,7 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 			processMembers(result, getMembers());
 			for(JvmTypeReference superTypeReference: getSuperTypes()) {
 				JvmType superType = getRawType(superTypeReference);
-				if (superType instanceof JvmDeclaredTypeImplCustom && !superType.eIsProxy()) {
+				if (superType instanceof JvmDeclaredTypeImplCustom && !superType.eIsProxy() && superType != this) {
 					Map<String, Set<JvmFeature>> superTypeFeatureMap = ((JvmDeclaredTypeImplCustom) superType).getAllFeaturesMap();
 					for(Set<JvmFeature> features: superTypeFeatureMap.values())
 						processMembers(result, features);
