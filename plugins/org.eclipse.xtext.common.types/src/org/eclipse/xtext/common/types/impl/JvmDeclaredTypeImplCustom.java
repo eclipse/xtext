@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
+import static com.google.common.collect.Lists.*;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -148,14 +150,20 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 	}
 	
 	protected Map<String, Set<JvmFeature>> getAllFeaturesMap() {
+		List<JvmDeclaredType> processedSuperTypes = newArrayList();
+		return internalGetAllFeaturesMap(processedSuperTypes);
+	}
+	
+	protected Map<String, Set<JvmFeature>> internalGetAllFeaturesMap(List<JvmDeclaredType> processedSuperTypes) {
 		Map<String, Set<JvmFeature>> result = allFeaturesByName;
 		if (result == null) {
 			result = Maps.newLinkedHashMap();
 			processMembers(result, getMembers());
 			for(JvmTypeReference superTypeReference: getSuperTypes()) {
 				JvmType superType = getRawType(superTypeReference);
-				if (superType instanceof JvmDeclaredTypeImplCustom && !superType.eIsProxy() && superType != this) {
-					Map<String, Set<JvmFeature>> superTypeFeatureMap = ((JvmDeclaredTypeImplCustom) superType).getAllFeaturesMap();
+				if (superType instanceof JvmDeclaredTypeImplCustom && !superType.eIsProxy() && !processedSuperTypes.contains(superType)) {
+					processedSuperTypes.add((JvmDeclaredType) superType);
+					Map<String, Set<JvmFeature>> superTypeFeatureMap = ((JvmDeclaredTypeImplCustom) superType).internalGetAllFeaturesMap(processedSuperTypes);
 					for(Set<JvmFeature> features: superTypeFeatureMap.values())
 						processMembers(result, features);
 				}

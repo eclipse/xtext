@@ -275,8 +275,14 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 			if (!(superClass.getType() instanceof JvmGenericType)
 					|| ((JvmGenericType) superClass.getType()).isInterface()) {
 				error("Superclass must be a class", XTEND_CLASS__EXTENDS, CLASS_EXPECTED);
-			} else if(((JvmGenericType)superClass.getType()).isFinal()) {
-				error("Attempt to override final class", XTEND_CLASS__EXTENDS, OVERRIDDEN_FINAL);
+			} else {
+				if(((JvmGenericType)superClass.getType()).isFinal()) {
+					error("Attempt to override final class", XTEND_CLASS__EXTENDS, OVERRIDDEN_FINAL);
+				}
+				JvmGenericType inferredType = associations.getInferredType(xtendClass);
+				if(inferredType!= null && hasCycleInHierarchy(inferredType, Lists.<JvmGenericType>newArrayList())) {
+					error("The inheritance hierarchy of " + notNull(xtendClass.getName()) + " contains cycles", XTEND_CLASS__NAME, CYCLIC_INHERITANCE);
+				}
 			}
 		}
 		for (int i = 0; i < xtendClass.getImplements().size(); ++i) {
@@ -286,6 +292,21 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 				error("Implemented interface must be an interface", XTEND_CLASS__IMPLEMENTS, i, INTERFACE_EXPECTED);
 			}
 		}
+	}
+	
+	protected boolean hasCycleInHierarchy(JvmGenericType type, List<JvmGenericType> processedSuperTypes) {
+		if(type.isInterface())
+			return false;
+		if(processedSuperTypes.contains(type))
+			return true;
+		processedSuperTypes.add(type);
+		for(JvmTypeReference superTypeRef: type.getSuperTypes()) {
+			if (superTypeRef.getType() instanceof JvmGenericType) {
+				if(hasCycleInHierarchy((JvmGenericType) superTypeRef.getType(), processedSuperTypes))
+					return true;
+			}
+		}
+		return false;
 	}
 
 	@Check

@@ -40,4 +40,5 @@ public final class IssueCodes {
 	public static final String DUPLICATE_PARAMETER_NAME = ISSUE_CODE_PREFIX + "duplicate_parameter_name";
 
 	public static final String OVERRIDDEN_FINAL = ISSUE_CODE_PREFIX + "overridden_final";
+	public static final String CYCLIC_INHERITANCE = ISSUE_CODE_PREFIX + "cyclic_inheritance";
 }
