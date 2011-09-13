@@ -78,7 +78,7 @@ public class XtextResource extends ResourceImpl {
 	/**
 	 * @since 2.1
 	 */
-	protected boolean isUpdating = false;
+	protected volatile boolean isUpdating = false;
 
 	private IParser parser;
 
