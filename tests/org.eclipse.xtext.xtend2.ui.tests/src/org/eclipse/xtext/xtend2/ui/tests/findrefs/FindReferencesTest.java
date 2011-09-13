@@ -97,8 +97,6 @@ public class FindReferencesTest extends AbstractXtend2UITestCase {
 		assertEquals(targetURIs.next(), EcoreUtil.getURI(inferredConstructor));
 		assertEquals(targetURIs.next(), EcoreUtil.getURI(inferredTypeFoo));
 		assertTrue(queryData.getResultFilter() instanceof JvmModelReferenceFilter);
-		assertEquals(((JvmModelReferenceFilter) queryData.getResultFilter()).getExcludedSourceURI(),
-				EcoreUtil.getURI(classFoo));
 	}
 
 	public void testFunctionQueryData() throws Exception {
@@ -113,8 +111,6 @@ public class FindReferencesTest extends AbstractXtend2UITestCase {
 		assertEquals(targetURIs.next(), EcoreUtil.getURI(functionFoo));
 		assertEquals(targetURIs.next(), EcoreUtil.getURI(inferredOperation));
 		assertTrue(queryData.getResultFilter() instanceof JvmModelReferenceFilter);
-		assertEquals(((JvmModelReferenceFilter) queryData.getResultFilter()).getExcludedSourceURI(),
-				EcoreUtil.getURI(functionFoo));
 	}
 
 	public void testFindReferencesToClass() throws Exception {
