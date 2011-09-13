@@ -88,4 +88,11 @@ public abstract class AbstractJavaProjectsState extends AbstractAllContainersSta
 	protected boolean isIgnoredResource(IResource resource) {
 		return jdtHelper.isFromOutputPath(resource);
 	}
+	
+	/**
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
+	public void setJdtHelper(IJdtHelper jdtHelper) {
+		this.jdtHelper = jdtHelper;
+	}
 }
