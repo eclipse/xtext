@@ -134,7 +134,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		XtendFunction function = function("def dispatch String foo(String s) {_foo(s)}");
 		final XBlockExpression block = (XBlockExpression) function.getExpression();
 		final JvmOperation feature = (JvmOperation) ((XAbstractFeatureCall)block.getExpressions().get(0)).getFeature();
-		XtendFunction xtendFunction = (XtendFunction) associator.getAssociatedElements(feature).iterator().next();
+		XtendFunction xtendFunction = (XtendFunction) associator.getSourceElements(feature).iterator().next();
 		assertSame(function,xtendFunction);
 	}
 	
