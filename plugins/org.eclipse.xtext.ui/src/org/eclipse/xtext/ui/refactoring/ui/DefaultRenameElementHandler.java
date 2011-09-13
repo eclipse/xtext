@@ -13,12 +13,12 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.IGlobalServiceProvider;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
@@ -86,17 +86,20 @@ public class DefaultRenameElementHandler extends AbstractHandler implements IRen
 		return null;
 	}
 
-	protected boolean isRefactoringEnabled(IRenameElementContext renameElementContext, Resource resource) {
+	protected boolean isRefactoringEnabled(IRenameElementContext renameElementContext, XtextResource resource) {
 		ResourceSet resourceSet = resource.getResourceSet();
 		if (renameElementContext != null && resourceSet != null) {
 			EObject targetElement = resourceSet.getEObject(renameElementContext.getTargetElementURI(), true);
 			if (targetElement != null && !targetElement.eIsProxy()) {
 				if(targetElement.eResource() == resource && renameElementContext.getTriggeringEditorSelection() instanceof ITextSelection) {
-					ITextRegion significantRegion = locationInFileProvider.getSignificantTextRegion(targetElement);
 					ITextSelection textSelection = (ITextSelection) renameElementContext.getTriggeringEditorSelection();
 					ITextRegion selectedRegion = new TextRegion(textSelection.getOffset(), textSelection.getLength());
-					if(!significantRegion.contains(selectedRegion)) {
-						return false;
+					INode crossReferenceNode = eObjectAtOffsetHelper.getCrossReferenceNode(resource, selectedRegion);
+					if(crossReferenceNode == null) {
+						// selection is on the declaration. make sure it's the name
+						ITextRegion significantRegion = locationInFileProvider.getSignificantTextRegion(targetElement);
+						if(!significantRegion.contains(selectedRegion)) 
+							return false;
 					}
 				}
 				IRenameStrategy.Provider renameStrategyProvider = globalServiceProvider.findService(targetElement,
