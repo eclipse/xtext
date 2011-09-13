@@ -275,7 +275,7 @@ public class Xtend2TypeProvider extends XbaseWithAnnotationsTypeProvider {
 	@Override
 	public Iterable<JvmTypeReference> getThrownExceptionForIdentifiable(JvmIdentifiableElement identifiable) {
 		if (identifiable instanceof JvmOperation) {
-			final Set<EObject> associatedElements = xtend2jvmAssociations.getAssociatedElements(identifiable);
+			final Set<EObject> associatedElements = xtend2jvmAssociations.getSourceElements(identifiable);
 			if (associatedElements == null || associatedElements.isEmpty()) {
 				return super.getThrownExceptionForIdentifiable(identifiable);
 			}
