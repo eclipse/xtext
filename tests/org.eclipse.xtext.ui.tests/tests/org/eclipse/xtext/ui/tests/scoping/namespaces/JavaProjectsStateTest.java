@@ -20,6 +20,7 @@ import org.eclipse.xtext.ui.containers.JavaProjectsStateHelper;
 import org.eclipse.xtext.ui.containers.WorkspaceProjectsStateHelper;
 import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
+import org.eclipse.xtext.ui.shared.JdtHelper;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -42,6 +43,7 @@ public class JavaProjectsStateTest extends AbstractJavaProjectsStateTest {
 	protected JavaProjectsState createProjectsState(IStorage2UriMapper mapper) {
 		JavaProjectsState result = new JavaProjectsState();
 		result.setMapper(mapper);
+		result.setJdtHelper(new JdtHelper());
 		JavaProjectsStateHelper javaProjectsStateHelper = new JavaProjectsStateHelper();
 		javaProjectsStateHelper.setMapper(mapper);
 		javaProjectsStateHelper.setWorkspace(ResourcesPlugin.getWorkspace());
