@@ -21,12 +21,12 @@ public class Xbase10_Switch {
 			  final String __valOfSwitchOver = _head;
 			  boolean matched = false;
 			  if (!matched) {
-			    if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,"foo")) {
+			    if (ObjectExtensions.operator_equals(__valOfSwitchOver,"foo")) {
 			      matched=true;/*"it\'s foo"*/;
 			    }
 			  }
 			  if (!matched) {
-			    if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,"bar")) {
+			    if (ObjectExtensions.operator_equals(__valOfSwitchOver,"bar")) {
 			      matched=true;/*"a bar"*/;
 			    }
 			  }
