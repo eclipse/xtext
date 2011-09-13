@@ -205,25 +205,25 @@ public class JvmModelGenerator implements IGenerator {
       final JvmVisibility visibility_1 = visibility;
       boolean matched = false;
       if (!matched) {
-        if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(visibility_1,JvmVisibility.PRIVATE)) {
+        if (ObjectExtensions.operator_equals(visibility_1,JvmVisibility.PRIVATE)) {
           matched=true;
           _switchResult = "private ";
         }
       }
       if (!matched) {
-        if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(visibility_1,JvmVisibility.PUBLIC)) {
+        if (ObjectExtensions.operator_equals(visibility_1,JvmVisibility.PUBLIC)) {
           matched=true;
           _switchResult = "public ";
         }
       }
       if (!matched) {
-        if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(visibility_1,JvmVisibility.PROTECTED)) {
+        if (ObjectExtensions.operator_equals(visibility_1,JvmVisibility.PROTECTED)) {
           matched=true;
           _switchResult = "protected ";
         }
       }
       if (!matched) {
-        if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(visibility_1,JvmVisibility.DEFAULT)) {
+        if (ObjectExtensions.operator_equals(visibility_1,JvmVisibility.DEFAULT)) {
           matched=true;
           _switchResult = "";
         }

@@ -84,13 +84,13 @@ public class Xtend04_ControlStructures {
     final String value_1 = value;
     boolean matched = false;
     if (!matched) {
-      if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(value_1,"foo")) {
+      if (ObjectExtensions.operator_equals(value_1,"foo")) {
         matched=true;
         _switchResult = "it\'s foo";
       }
     }
     if (!matched) {
-      if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(value_1,"bar")) {
+      if (ObjectExtensions.operator_equals(value_1,"bar")) {
         matched=true;
         _switchResult = "a bar";
       }

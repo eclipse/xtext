@@ -38,7 +38,7 @@ public class LateInitializingLazyLinkingResource extends LazyLinkingResource {
 			try {
 				eSetDeliver(false);
 				isLoading = true;
-				lateInitialize();
+				installLateInitializedState();
 				fullyInitialized = true;
 			} finally {
 				isLoading = false;
@@ -64,9 +64,9 @@ public class LateInitializingLazyLinkingResource extends LazyLinkingResource {
 			lateInitialization.discardLateInitialization(super.getContents());
 	}
 
-	protected void lateInitialize() {
+	protected void installLateInitializedState() {
 		if (lateInitialization != null)
-			lateInitialization.doLateInitialization(super.getContents());
+			lateInitialization.installLateInitialization(super.getContents());
 	}
 
 }
