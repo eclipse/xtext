@@ -114,10 +114,10 @@ Workflow {
 			fragment = xbase.XbaseGeneratorFragment {}
 			
 			// Code generator
-			fragment = generator.GeneratorFragment {
-				generateJavaMain = false
-				generateMwe = false
-			}
+//			fragment = generator.GeneratorFragment {
+//				generateJavaMain = false
+//				generateMwe = false
+//			}
 			
 			fragment = templates.CodetemplatesGeneratorFragment {}
 		}

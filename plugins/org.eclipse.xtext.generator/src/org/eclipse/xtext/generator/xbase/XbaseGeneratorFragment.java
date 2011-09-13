@@ -20,6 +20,7 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
+import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
@@ -112,7 +113,9 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 				// obsolete convenience bindings
 				.addTypeToType("org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider",
 						"org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider")
-				.addTypeToType("org.eclipse.xtext.resource.ILateInitialization", "org.eclipse.xtext.xbase.resource.JvmModelInferringInitializer");
+				.addTypeToType("org.eclipse.xtext.resource.ILateInitialization", "org.eclipse.xtext.xbase.resource.JvmModelInferringInitializer")
+				.addTypeToType(IGenerator.class.getCanonicalName(), "org.eclipse.xtext.xbase.compiler.JvmModelGenerator");
+			
 		if (useInferredJvmModel) {
 			config = config
 				.addTypeToType(ILocationInFileProvider.class.getName(),

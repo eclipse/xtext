@@ -9,10 +9,6 @@ package org.eclipse.xtext.example.domainmodel;
 
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.example.domainmodel.valueconverter.DomainmodelValueConverterService;
-import org.eclipse.xtext.generator.IGenerator;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
-import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
-import org.eclipse.xtext.xbase.scoping.XbaseQualifiedNameProvider;
 
 /**
  * used to register components to be used within the IDE.
@@ -24,13 +20,4 @@ public class DomainmodelRuntimeModule extends AbstractDomainmodelRuntimeModule {
 		return DomainmodelValueConverterService.class;
 	}
 	
-	@Override
-	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
-		return XbaseQualifiedNameProvider.class;
-	}
-	
-	@Override
-	public Class<? extends IGenerator> bindIGenerator() {
-		return JvmModelGenerator.class;
-	}
 }
