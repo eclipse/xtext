@@ -13,6 +13,7 @@ import org.eclipse.xtext.xbase.resource.JvmModelInferringInitializer
 
 import static junit.framework.Assert.*
 import org.eclipse.xtext.xbase.XReturnExpression
+import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator
 
 class JvmModelTest extends AbstractJvmModelTest {
 	
@@ -24,21 +25,6 @@ class JvmModelTest extends AbstractJvmModelTest {
 		val expression = expression("return s.toUpperCase", false);
 		val resource = expression.eResource();
 		helper.assertNoErrors(expression)
-	}
-	
-	def void testStateIsUpdatedOnChange() {
-		val resource = newResource("return s.toUpperCase");
-		val expression2 = expression("return 'foo'", false) as XReturnExpression;
-		val initializer = get(typeof(JvmModelInferringInitializer))
-		initializer.setInferrer(get(typeof(SimpleJvmModelInferrer)))		
-		(resource as LateInitializingLazyLinkingResource).setLateInitialization(initializer)
-		assertEquals(2, resource.contents.size)
-		val type = resource.contents.get(1)
-		// modify the model
-		(resource.contents.get(0) as XReturnExpression).setExpression( expression2.expression)
-		// expect an updated inferred model
-		assertEquals(2, resource.contents.size)
-		assertNotSame(type, resource.contents.get(1))
 	}
 	
 }

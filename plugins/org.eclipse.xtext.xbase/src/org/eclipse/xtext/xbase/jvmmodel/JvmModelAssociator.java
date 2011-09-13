@@ -24,7 +24,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
-import org.eclipse.xtext.resource.ILateInitialization;
+import org.eclipse.xtext.resource.DerivedStateAwareResource;
+import org.eclipse.xtext.resource.IDerivedStateComputer;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.IAcceptor;
 
@@ -39,7 +40,7 @@ import com.google.inject.name.Named;
  * @author Sven Efftinge
  */
 @Singleton
-public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssociator, ILateInitialization {
+public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssociator, IDerivedStateComputer {
 	
 	@SuppressWarnings("unused")
 	private final static Logger LOG = Logger.getLogger(JvmModelAssociator.class);
@@ -134,25 +135,27 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		return null;
 	}
 
-	public void installLateInitialization(final EList<EObject> resourcesContents) {
-		if (resourcesContents == null || resourcesContents.isEmpty())
+	public void installDerivedState(final DerivedStateAwareResource resource) {
+		if (resource.getContents().isEmpty())
 			return;
-		EObject eObject = resourcesContents.get(0);
+		EObject eObject = resource.getContents().get(0);
 		inferrer.infer(eObject, new IAcceptor<JvmDeclaredType>() {
 			public void accept(JvmDeclaredType t) {
-				resourcesContents.add(t);
+				resource.getContents().add(t);
 			}
 		});
 	}
 
-	public void discardLateInitialization(EList<EObject> resourcesContentsList) {
+	public void discardDerivedState(DerivedStateAwareResource resource) {
 		List<EObject> derived = newArrayList();
+		EList<EObject> resourcesContentsList = resource.getContents();
 		for (int i = 1; i< resourcesContentsList.size(); i++) {
 			EObject eObject = resourcesContentsList.get(i);
 			unloader.unloadRoot(eObject);
 			derived.add(eObject);
 		}
 		resourcesContentsList.removeAll(derived);
+		sourceToTargetMap(resource).clear();
 	}
 }
 
