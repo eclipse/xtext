@@ -28,7 +28,6 @@ import org.eclipse.xtext.purexbase.pureXbase.Model
 class PureXbaseJvmModelInferrer implements IJvmModelInferrer {
 
 	@Inject extension JvmTypesBuilder
-	@Inject TypeReferences references
 	@Inject IEarlyExitComputer computer
 	@Inject XbaseCompiler compiler
 
@@ -37,9 +36,9 @@ class PureXbaseJvmModelInferrer implements IJvmModelInferrer {
    	def dispatch void infer(Model m, IAcceptor<JvmDeclaredType> acceptor) {
    		val e  = m.block
    		acceptor.accept(e.toClazz(e.eResource.name) [
-   			members += e.toMethod("main", references.getTypeForName(Void::TYPE, e)) [
+   			members += e.toMethod("main", e.newTypeRef(Void::TYPE)) [
    				^static = true
-   				parameters += e.toParameter("args", references.createArrayType( references.getTypeForName( typeof(String), e ) ))
+   				parameters += e.toParameter("args", e.newTypeRef(typeof(String)).addArrayTypeDimension)
    				if (!e.containsReturn) {
    					it.body ['''
 						try {
@@ -56,7 +55,7 @@ class PureXbaseJvmModelInferrer implements IJvmModelInferrer {
    				null
    			]
    			if ( e.containsReturn ) {
-   				members += e.toMethod("xbaseExpression", references.getTypeForName(typeof(Object), e)) [
+   				members += e.toMethod("xbaseExpression", e.newTypeRef(typeof(Object))) [
    				^static = true
 				it.body ['''
 					if (Boolean.TRUE) {

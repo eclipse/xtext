@@ -8,12 +8,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.purexbase.pureXbase.Model;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -38,9 +36,6 @@ public class PureXbaseJvmModelInferrer implements IJvmModelInferrer {
   private JvmTypesBuilder _jvmTypesBuilder0;
   
   @Inject
-  private TypeReferences references;
-  
-  @Inject
   private IEarlyExitComputer computer;
   
   @Inject
@@ -60,16 +55,16 @@ public class PureXbaseJvmModelInferrer implements IJvmModelInferrer {
             Void _xblockexpression = null;
             {
               EList<JvmMember> _members = it.getMembers();
-              JvmTypeReference _typeForName = PureXbaseJvmModelInferrer.this.references.getTypeForName(Void.TYPE, e);
+              JvmTypeReference _newTypeRef = PureXbaseJvmModelInferrer.this._jvmTypesBuilder0.newTypeRef(e, Void.TYPE);
               final Function1<JvmOperation,Void> _function_1 = new Function1<JvmOperation,Void>() {
                   public Void apply(final JvmOperation it_1) {
                     Void _xblockexpression_1 = null;
                     {
                       it_1.setStatic(true);
                       EList<JvmFormalParameter> _parameters = it_1.getParameters();
-                      JvmTypeReference _typeForName_1 = PureXbaseJvmModelInferrer.this.references.getTypeForName(java.lang.String.class, e);
-                      JvmGenericArrayTypeReference _createArrayType = PureXbaseJvmModelInferrer.this.references.createArrayType(_typeForName_1);
-                      JvmFormalParameter _parameter = PureXbaseJvmModelInferrer.this._jvmTypesBuilder0.toParameter(e, "args", _createArrayType);
+                      JvmTypeReference _newTypeRef_1 = PureXbaseJvmModelInferrer.this._jvmTypesBuilder0.newTypeRef(e, java.lang.String.class);
+                      JvmTypeReference _addArrayTypeDimension = PureXbaseJvmModelInferrer.this._jvmTypesBuilder0.addArrayTypeDimension(_newTypeRef_1);
+                      JvmFormalParameter _parameter = PureXbaseJvmModelInferrer.this._jvmTypesBuilder0.toParameter(e, "args", _addArrayTypeDimension);
                       CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter);
                       boolean _containsReturn = PureXbaseJvmModelInferrer.this.containsReturn(e);
                       boolean _operator_not = BooleanExtensions.operator_not(_containsReturn);
@@ -110,12 +105,12 @@ public class PureXbaseJvmModelInferrer implements IJvmModelInferrer {
                     return _xblockexpression_1;
                   }
                 };
-              JvmOperation _method = PureXbaseJvmModelInferrer.this._jvmTypesBuilder0.toMethod(e, "main", _typeForName, _function_1);
+              JvmOperation _method = PureXbaseJvmModelInferrer.this._jvmTypesBuilder0.toMethod(e, "main", _newTypeRef, _function_1);
               CollectionExtensions.<JvmMember>operator_add(_members, _method);
               boolean _containsReturn_1 = PureXbaseJvmModelInferrer.this.containsReturn(e);
               if (_containsReturn_1) {
                 EList<JvmMember> _members_1 = it.getMembers();
-                JvmTypeReference _typeForName_2 = PureXbaseJvmModelInferrer.this.references.getTypeForName(java.lang.Object.class, e);
+                JvmTypeReference _newTypeRef_2 = PureXbaseJvmModelInferrer.this._jvmTypesBuilder0.newTypeRef(e, java.lang.Object.class);
                 final Function1<JvmOperation,Void> _function_4 = new Function1<JvmOperation,Void>() {
                     public Void apply(final JvmOperation it_4) {
                       Void _xblockexpression_2 = null;
@@ -143,7 +138,7 @@ public class PureXbaseJvmModelInferrer implements IJvmModelInferrer {
                       return _xblockexpression_2;
                     }
                   };
-                JvmOperation _method_1 = PureXbaseJvmModelInferrer.this._jvmTypesBuilder0.toMethod(e, "xbaseExpression", _typeForName_2, _function_4);
+                JvmOperation _method_1 = PureXbaseJvmModelInferrer.this._jvmTypesBuilder0.toMethod(e, "xbaseExpression", _newTypeRef_2, _function_4);
                 CollectionExtensions.<JvmMember>operator_add(_members_1, _method_1);
               }
               _xblockexpression = (null);
