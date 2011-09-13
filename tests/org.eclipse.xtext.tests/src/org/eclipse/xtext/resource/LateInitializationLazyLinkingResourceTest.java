@@ -32,7 +32,7 @@ public class LateInitializationLazyLinkingResourceTest extends AbstractXtextTest
 		TestedResource resource = new TestedResource();
 		assertTrue(resource.getContents().isEmpty());
 		resource.setLateInitialization(new ILateInitialization() {
-			public void doLateInitialization(EList<EObject> resourcesContentsList) {
+			public void installLateInitialization(EList<EObject> resourcesContentsList) {
 				fail("shouldn't be called after initialization");
 			}
 
@@ -50,7 +50,7 @@ public class LateInitializationLazyLinkingResourceTest extends AbstractXtextTest
 			}
 		});
 		resource.setLateInitialization(new ILateInitialization() {
-			public void doLateInitialization(EList<EObject> resourcesContentsList) {
+			public void installLateInitialization(EList<EObject> resourcesContentsList) {
 				resourcesContentsList.add(EcoreFactory.eINSTANCE.createEObject());
 			}
 

@@ -36,7 +36,7 @@ public class JvmModelInferringInitializer implements ILateInitialization {
 	@Inject 
 	private IReferableElementsUnloader.GenericUnloader unloader;
 	
-	public void doLateInitialization(final EList<EObject> resourcesContents) {
+	public void installLateInitialization(final EList<EObject> resourcesContents) {
 		if (resourcesContents == null || resourcesContents.isEmpty())
 			return;
 		EObject eObject = resourcesContents.get(0);
