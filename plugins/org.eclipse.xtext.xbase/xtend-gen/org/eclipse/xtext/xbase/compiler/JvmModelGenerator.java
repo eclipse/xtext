@@ -25,7 +25,6 @@ import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.jvmmodel.IExpressionContextProvider;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -296,22 +295,17 @@ public class JvmModelGenerator implements IGenerator {
           Iterable<JvmTypeReference> _filter_2 = IterableExtensions.<JvmTypeReference>filter(withoutObject, _function_3);
           final Iterable<JvmTypeReference> superInterfaces = _filter_2;
           String result = "";
-          EList<JvmTypeReference> _superTypes_3 = it.getSuperTypes();
-          String _string = _superTypes_3.toString();
-          String _operator_plus_2 = StringExtensions.operator_plus(_string, " / ");
-          String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, superClazz);
-          InputOutput.<String>println(_operator_plus_3);
           boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(superClazz, null);
           if (_operator_notEquals_2) {
             CharSequence _serialize_1 = importManager.serialize(superClazz);
-            String _operator_plus_4 = StringExtensions.operator_plus("extends ", _serialize_1);
-            String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, " ");
-            result = _operator_plus_5;
+            String _operator_plus_2 = StringExtensions.operator_plus("extends ", _serialize_1);
+            String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, " ");
+            result = _operator_plus_3;
           }
           boolean _isEmpty_1 = IterableExtensions.isEmpty(superInterfaces);
           boolean _operator_not_1 = BooleanExtensions.operator_not(_isEmpty_1);
           if (_operator_not_1) {
-            String _operator_plus_6 = StringExtensions.operator_plus(result, "implements ");
+            String _operator_plus_4 = StringExtensions.operator_plus(result, "implements ");
             final Function1<JvmTypeReference,CharSequence> _function_4 = new Function1<JvmTypeReference,CharSequence>() {
                 public CharSequence apply(final JvmTypeReference t_1) {
                   CharSequence _serialize_2 = importManager.serialize(t_1);
@@ -320,9 +314,9 @@ public class JvmModelGenerator implements IGenerator {
               };
             Iterable<CharSequence> _map_1 = IterableExtensions.<JvmTypeReference, CharSequence>map(superInterfaces, _function_4);
             String _join_1 = IterableExtensions.join(_map_1, ", ");
-            String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, _join_1);
-            String _operator_plus_8 = StringExtensions.operator_plus(_operator_plus_7, " ");
-            result = _operator_plus_8;
+            String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, _join_1);
+            String _operator_plus_6 = StringExtensions.operator_plus(_operator_plus_5, " ");
+            result = _operator_plus_6;
           }
           return result;
         }
@@ -420,7 +414,7 @@ public class JvmModelGenerator implements IGenerator {
       final CompilationStrategyAdapter adapter = _head;
       boolean _operator_notEquals = ObjectExtensions.operator_notEquals(adapter, null);
       if (_operator_notEquals) {
-        Function1<ImportManager,CharSequence> _compilationStrategy = adapter.getCompilationStrategy();
+        Function1<ImportManager,? extends CharSequence> _compilationStrategy = adapter.getCompilationStrategy();
         CharSequence _apply = _compilationStrategy.apply(importManager);
         return _apply;
       } else {

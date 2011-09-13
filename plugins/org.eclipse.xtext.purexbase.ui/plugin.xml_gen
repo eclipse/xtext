@@ -139,13 +139,6 @@
 
 
 
-   <extension
-         point="org.eclipse.xtext.builder.participant">
-      <participant
-            class="org.eclipse.xtext.purexbase.ui.PureXbaseExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
-      </participant>
-   </extension>
-
 	<!-- Quick Outline -->
 	<extension
 		point="org.eclipse.ui.handlers">

@@ -16,9 +16,11 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.generator.IGenerator;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -32,10 +34,11 @@ public class DerivedResourceMarkers {
 	
 	public static class GeneratorIdProvider {
 		@Inject
-		private IGenerator gen;
+		@Named(Constants.LANGUAGE_NAME)
+		private String languageName;
 		
 		public String getGeneratorIdentifier() {
-			return gen.getClass().getCanonicalName();
+			return languageName;
 		}
 	}
 	
