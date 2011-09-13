@@ -9,8 +9,6 @@ package org.eclipse.xtext.resource;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 
@@ -20,9 +18,9 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 public class LateInitializationLazyLinkingResourceTest extends AbstractXtextTests {
 
 	/**
-	 * @author efftinge - Initial contribution and API
+	 * @author Sven Efftinge - Initial contribution and API
 	 */
-	public static final class TestedResource extends LateInitializingLazyLinkingResource {
+	public static final class TestedResource extends DerivedStateAwareResource {
 		public void setIsLoaded() {
 			this.isLoaded = true;
 		}
@@ -31,12 +29,12 @@ public class LateInitializationLazyLinkingResourceTest extends AbstractXtextTest
 	public void testInitialization() throws Exception {
 		TestedResource resource = new TestedResource();
 		assertTrue(resource.getContents().isEmpty());
-		resource.setLateInitialization(new ILateInitialization() {
-			public void installLateInitialization(EList<EObject> resourcesContentsList) {
+		resource.setDerivedStateComputer(new IDerivedStateComputer() {
+			public void installDerivedState(DerivedStateAwareResource resource) {
 				fail("shouldn't be called after initialization");
 			}
 
-			public void discardLateInitialization(EList<EObject> resourcesContentsList) {
+			public void discardDerivedState(DerivedStateAwareResource resource) {
 				fail("shouldn't be called after initialization");
 			}
 		});
@@ -49,13 +47,14 @@ public class LateInitializationLazyLinkingResourceTest extends AbstractXtextTest
 				super.notifyChanged(msg);
 			}
 		});
-		resource.setLateInitialization(new ILateInitialization() {
-			public void installLateInitialization(EList<EObject> resourcesContentsList) {
-				resourcesContentsList.add(EcoreFactory.eINSTANCE.createEObject());
+		resource.setDerivedStateComputer(new IDerivedStateComputer() {
+			
+			public void installDerivedState(DerivedStateAwareResource resource) {
+				resource.getContents().add(EcoreFactory.eINSTANCE.createEObject());
 			}
 
-			public void discardLateInitialization(EList<EObject> resourcesContentsList) {
-				resourcesContentsList.clear();
+			public void discardDerivedState(DerivedStateAwareResource resource) {
+				resource.getContents().clear();
 			}
 		});
 		assertEquals(1, resource.getContents().size());
