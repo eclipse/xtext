@@ -19,6 +19,6 @@ public class JvmModelFindRefsQueryDataFactory extends RefactoringReferenceQueryD
 	
 	@Override
 	protected Predicate<IReferenceDescription> createFilter(ElementRenameArguments args) {
-		return new JvmModelReferenceFilter(args.getTargetElementURI());
+		return new JvmModelReferenceFilter();
 	}
 }
