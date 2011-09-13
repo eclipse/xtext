@@ -41,6 +41,7 @@ import com.google.inject.name.Named;
 @Singleton
 public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssociator, ILateInitialization {
 	
+	@SuppressWarnings("unused")
 	private final static Logger LOG = Logger.getLogger(JvmModelAssociator.class);
 	
 	@Inject
@@ -133,21 +134,6 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		return null;
 	}
 
-	//TODO get rid of this method
-	public Set<EObject> getAssociatedElements(EObject jvmOrSourceElement) {
-		ListMultimap<EObject,EObject> map = sourceToTargetMap(jvmOrSourceElement.eResource());
-		Set<EObject> sourceElements = newLinkedHashSet();
-		for (Map.Entry<EObject, EObject> entry : map.entries()) {
-			if (entry.getValue() == jvmOrSourceElement) {
-				sourceElements.add(entry.getKey());
-			} else if (entry.getKey() == jvmOrSourceElement) {
-				sourceElements.add(entry.getValue());
-			}
-		}
-		return sourceElements;
-	}
-
-	
 	public void installLateInitialization(final EList<EObject> resourcesContents) {
 		if (resourcesContents == null || resourcesContents.isEmpty())
 			return;

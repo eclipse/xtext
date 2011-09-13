@@ -25,6 +25,4 @@ public interface IJvmModelAssociations {
 
 	EObject getPrimarySourceElement(EObject jvmElement);
 
-	Set<EObject> getAssociatedElements(EObject jvmOrSourceElement);
-
 }
