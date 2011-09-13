@@ -11,7 +11,7 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.example.domainmodel.valueconverter.DomainmodelValueConverterService;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
-import org.eclipse.xtext.xbase.generator.XbaseGenerator;
+import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.scoping.XbaseQualifiedNameProvider;
 
 /**

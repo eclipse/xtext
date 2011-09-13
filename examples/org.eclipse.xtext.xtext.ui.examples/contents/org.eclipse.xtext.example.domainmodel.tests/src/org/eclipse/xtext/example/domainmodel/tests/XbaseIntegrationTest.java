@@ -3,16 +3,15 @@ package org.eclipse.xtext.example.domainmodel.tests;
 import java.lang.reflect.Method;
 
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainModel;
-import org.eclipse.xtext.example.domainmodel.domainmodel.Entity;
-import org.eclipse.xtext.example.domainmodel.generator.DomainmodelGenerator;
+import org.eclipse.xtext.generator.InMemoryFileSystemAccess;
 import org.eclipse.xtext.junit.util.ParseHelper;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.eclipse.xtext.xbase.lib.Functions;
-import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 
@@ -51,7 +50,7 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 	private ValidationTestHelper validationHelper;
 	
 	@Inject
-	private DomainmodelGenerator generator;
+	private JvmModelGenerator generator;
 	
 	@Before
 	public void initializeClassPath() throws Exception {
@@ -65,7 +64,9 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 	protected Object invokeXbaseExpression(String expression) throws Exception {
 		DomainModel parse = parseHelper.parse("entity Foo { op doStuff() : Object { "+expression+" } } ");
 		validationHelper.assertNoErrors(parse);
-		StringConcatenation concatenation = generator.compile((Entity) parse.getElements().get(0));
+		InMemoryFileSystemAccess fsa = new InMemoryFileSystemAccess();
+		generator.doGenerate(parse.eResource(), fsa);
+		CharSequence concatenation = fsa.getFiles().values().iterator().next();
 		Class<?> class1 = javaCompiler.compileToClass("Foo", concatenation.toString());
 		Object foo = class1.newInstance();
 		Method method = class1.getDeclaredMethod("doStuff");
