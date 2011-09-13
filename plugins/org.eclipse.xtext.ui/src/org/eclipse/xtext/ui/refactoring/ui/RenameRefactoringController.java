@@ -122,7 +122,7 @@ public class RenameRefactoringController {
 					}
 				});
 				if (activeLinkedMode == null) {
-					startRefactoringWithDialog(false);
+					startRefactoring(RefactoringType.REFACTORING_DIALOG);
 				}
 			}
 		} catch (Exception exc) {
