@@ -140,7 +140,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	public void checkGrammarName(Grammar g) {
 		String[] split = g.getName().split("\\.");
 		if (split.length == 1)
-			warning("You should use a namespace.", XtextPackage.Literals.GRAMMAR__NAME);
+			error("You must use a namespace.", XtextPackage.Literals.GRAMMAR__NAME);
 		for (int i = 0; i < split.length - 1; i++) {
 			String nsEle = split[i];
 			if (Character.isUpperCase(nsEle.charAt(0)))
