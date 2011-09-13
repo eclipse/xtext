@@ -196,6 +196,11 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 		XtendClass clazz = clazz("class Foo implements Object {}");
 		helper.assertError(clazz, Xtend2Package.Literals.XTEND_CLASS, INTERFACE_EXPECTED, "Implemented", "interface");
 	}
+	
+	public void testClassExtendsItself() throws Exception {
+		XtendClass clazz = clazz("class Foo extends Foo {}");
+		helper.assertError(clazz, Xtend2Package.Literals.XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
+	}
 
 	public void testCaseFunctionNoParameters() throws Exception {
 		XtendFunction function = function("def dispatch foo() { null }");
