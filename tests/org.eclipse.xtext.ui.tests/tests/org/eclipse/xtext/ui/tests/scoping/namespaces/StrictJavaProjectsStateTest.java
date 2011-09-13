@@ -17,6 +17,7 @@ import org.eclipse.xtext.ui.containers.JavaProjectsStateHelper;
 import org.eclipse.xtext.ui.containers.StrictJavaProjectsState;
 import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
+import org.eclipse.xtext.ui.shared.JdtHelper;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -27,6 +28,7 @@ public class StrictJavaProjectsStateTest extends AbstractJavaProjectsStateTest {
 	protected StrictJavaProjectsState createProjectsState(IStorage2UriMapper mapper) {
 		StrictJavaProjectsState result = new StrictJavaProjectsState();
 		result.setMapper(mapper);
+		result.setJdtHelper(new JdtHelper());
 		JavaProjectsStateHelper javaProjectsStateHelper = new JavaProjectsStateHelper();
 		javaProjectsStateHelper.setMapper(mapper);
 		javaProjectsStateHelper.setWorkspace(ResourcesPlugin.getWorkspace());
