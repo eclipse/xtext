@@ -32,7 +32,7 @@ public class JvmModelFindReferenceQueryDataFactory extends FindReferenceQueryDat
 
 	@Override
 	protected Predicate<IReferenceDescription> createResultFilter(EObject target) {
-		return new JvmModelReferenceFilter(getURI(target));
+		return new JvmModelReferenceFilter();
 	}
 
 	@Override
