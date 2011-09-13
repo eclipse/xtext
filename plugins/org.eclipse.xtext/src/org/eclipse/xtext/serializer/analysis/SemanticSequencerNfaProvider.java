@@ -119,23 +119,17 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 
 	protected static class SemStateFactory implements NfaFactory<ISemState, ISynAbsorberState> {
 
-		public ISemState createEndState(ISynAbsorberState token) {
+		public Nfa<ISemState> createNfa(ISynAbsorberState start, ISynAbsorberState stop) {
+			SemState starts = new SemState(stop.getEClass(), stop.getGrammarElement());
+			SemState stops = new SemState(start.getEClass(), start.getGrammarElement());
+			return new SemNfa(starts, stops);
+		}
+
+		public ISemState createState(Nfa<ISemState> nfa, ISynAbsorberState token) {
 			return new SemState(token.getEClass(), token.getGrammarElement());
 		}
 
-		public Nfa<ISemState> createNfa(ISemState startStates, ISemState stopStates) {
-			return new SemNfa(startStates, stopStates);
-		}
-
-		public ISemState createStartState(ISynAbsorberState token) {
-			return new SemState(token.getEClass(), token.getGrammarElement());
-		}
-
-		public ISemState createState(ISynAbsorberState token) {
-			return new SemState(token.getEClass(), token.getGrammarElement());
-		}
-
-		public void setFollowers(ISemState owner, Iterable<ISemState> followers) {
+		public void setFollowers(Nfa<ISemState> nfa, ISemState owner, Iterable<ISemState> followers) {
 			((SemState) owner).followers = Lists.newArrayList(followers);
 		}
 
