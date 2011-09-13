@@ -20,7 +20,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import com.google.inject.Inject;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class CrossFileValidationTest extends AbstractXtend2UITestCase {
 
