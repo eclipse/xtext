@@ -21,6 +21,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XExpression;
@@ -51,7 +52,8 @@ public class JvmTypesBuilder {
 
 	public JvmField toField(EObject ctx, String name, JvmTypeReference typeRef) {
 		JvmField result = create(name, JvmField.class, null);
-		result.setVisibility(JvmVisibility.PRIVATE);
+		if (!result.eIsSet(TypesPackage.Literals.JVM_MEMBER__VISIBILITY))
+			result.setVisibility(JvmVisibility.PRIVATE);
 		result.setType(cloneWithProxies(typeRef));
 		return associate(ctx,result);
 	}
@@ -63,7 +65,8 @@ public class JvmTypesBuilder {
 
 	public JvmOperation toMethod(EObject ctx, String name, JvmTypeReference typeRef, Function1<JvmOperation, Void> init) {
 		JvmOperation result = create(name, JvmOperation.class, init);
-		result.setVisibility(JvmVisibility.PUBLIC);
+		if (!result.eIsSet(TypesPackage.Literals.JVM_MEMBER__VISIBILITY))
+			result.setVisibility(JvmVisibility.PUBLIC);
 		result.setReturnType(cloneWithProxies(typeRef));
 		return associate(ctx,result);
 	}
@@ -78,7 +81,7 @@ public class JvmTypesBuilder {
 				return "return this."+name+";";
 			}
 		});
-		return result;
+		return associate(ctx,result);
 	}
 
 	public JvmOperation toSetter(EObject ctx, final String name, JvmTypeReference typeRef) {
@@ -91,7 +94,7 @@ public class JvmTypesBuilder {
 				return "this."+name+" = "+name+";";
 			}
 		});
-		return result;
+		return associate(ctx,result);
 	}
 
 	public JvmFormalParameter toParameter(EObject ctx, String name, JvmTypeReference typeRef) {
@@ -115,12 +118,15 @@ public class JvmTypesBuilder {
 		create.setVisibility(JvmVisibility.PUBLIC);
 		if (create.getSuperTypes().isEmpty()) {
 			JvmTypeReference objectType = references.getTypeForName(Object.class, ctx);
-			create.getSuperTypes().add(objectType);
+			if (objectType != null)
+				create.getSuperTypes().add(objectType);
 		}
 		return associate(ctx,create);
 	}
 	
 	public JvmTypeReference cloneWithProxies(JvmTypeReference typeRef) {
+		if (!typeRef.eIsSet(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE))
+			throw new IllegalArgumentException("typeref#type was null");
 		return EcoreUtil2.cloneWithProxies(typeRef);
 	}
 

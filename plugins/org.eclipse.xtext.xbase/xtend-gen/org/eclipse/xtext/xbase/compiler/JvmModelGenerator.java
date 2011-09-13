@@ -6,6 +6,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -431,6 +432,8 @@ public class JvmModelGenerator implements IGenerator {
             {
               StringBuilderBasedAppendable _stringBuilderBasedAppendable = new StringBuilderBasedAppendable(importManager);
               final StringBuilderBasedAppendable appendable = _stringBuilderBasedAppendable;
+              JvmDeclaredType _declaringType = op.getDeclaringType();
+              appendable.declareVariable(_declaringType, "this");
               JvmTypeReference _returnType = op.getReturnType();
               this.compiler.compile(expression, appendable, _returnType);
               String _string = appendable.toString();

@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.resource;
 
+import java.io.IOException;
+
+import org.eclipse.emf.common.notify.impl.NotificationImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.nodemodel.INode;
@@ -32,6 +35,28 @@ public class XbaseResource extends LateInitializingLazyLinkingResource {
 				return XbaseResource.super.getEObject(uriFragment);
 			}
 		});
+	}
+	
+	@Override
+	public void reparse(final String newContent) throws IOException {
+		onChangeEvictingCache.execWithoutCacheClear(this, new IUnitOfWork<Object, XbaseResource>(){
+			public Object exec(XbaseResource state) throws Exception {
+				XbaseResource.super.reparse(newContent);
+				return null;
+			}
+		});
+		eNotify(new NotificationImpl(RESOURCE__CONTENTS, getContents(), getContents()));
+	}
+	
+	@Override
+	public void update(final int offset, final int replacedTextLength, final String newText) {
+		onChangeEvictingCache.execWithoutCacheClear(this, new IUnitOfWork<Object, XbaseResource>(){
+			public Object exec(XbaseResource state) throws Exception {
+				XbaseResource.super.update(offset, replacedTextLength, newText);
+				return null;
+			}
+		});
+		eNotify(new NotificationImpl(RESOURCE__CONTENTS, getContents(), getContents()));
 	}
 	
 	@Override

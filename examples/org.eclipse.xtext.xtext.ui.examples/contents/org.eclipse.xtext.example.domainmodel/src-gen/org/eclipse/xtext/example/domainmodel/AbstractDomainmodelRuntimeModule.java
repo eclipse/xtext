@@ -6,8 +6,9 @@ package org.eclipse.xtext.example.domainmodel;
 import java.util.Properties;
 
 import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment;
 import org.eclipse.xtext.service.DefaultRuntimeModule;
-import org.eclipse.xtext.xbase.generator.XbaseGenerator;
+import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -227,7 +228,7 @@ public abstract class AbstractDomainmodelRuntimeModule extends DefaultRuntimeMod
 
 	// contributed by org.eclipse.xtext.generator.generator.GeneratorFragment
 	public Class<? extends org.eclipse.xtext.generator.IGenerator> bindIGenerator() {
-		return XbaseGenerator.class;
+		return JvmModelGenerator.class;
 	}
 
 }

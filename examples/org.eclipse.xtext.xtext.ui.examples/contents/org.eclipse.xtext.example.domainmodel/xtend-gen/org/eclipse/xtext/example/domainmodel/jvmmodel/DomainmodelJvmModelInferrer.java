@@ -11,10 +11,13 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Entity;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Feature;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Operation;
+import org.eclipse.xtext.example.domainmodel.domainmodel.PackageDeclaration;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Property;
+import org.eclipse.xtext.example.domainmodel.domainmodel.Visibility;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer;
@@ -22,6 +25,7 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
@@ -30,7 +34,7 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
   private JvmTypesBuilder _jvmTypesBuilder0;
   
   protected void _infer(final Entity e, final IAcceptor<JvmDeclaredType> acceptor) {
-    String _name = e.getName();
+    String _fullName = this.fullName(e);
     final Function1<JvmGenericType,Void> _function = new Function1<JvmGenericType,Void>() {
         public Void apply(final JvmGenericType it) {
           {
@@ -52,19 +56,19 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
                   matched=true;
                   {
                     EList<JvmMember> _members = it.getMembers();
-                    String _name_1 = f_2.getName();
+                    String _name = f_2.getName();
                     JvmTypeReference _type = f_2.getType();
-                    JvmField _field = DomainmodelJvmModelInferrer.this._jvmTypesBuilder0.toField(f_2, _name_1, _type);
+                    JvmField _field = DomainmodelJvmModelInferrer.this._jvmTypesBuilder0.toField(f_2, _name, _type);
                     CollectionExtensions.<JvmMember>operator_add(_members, _field);
                     EList<JvmMember> _members_1 = it.getMembers();
-                    String _name_2 = f_2.getName();
+                    String _name_1 = f_2.getName();
                     JvmTypeReference _type_1 = f_2.getType();
-                    JvmOperation _getter = DomainmodelJvmModelInferrer.this._jvmTypesBuilder0.toGetter(f_2, _name_2, _type_1);
+                    JvmOperation _getter = DomainmodelJvmModelInferrer.this._jvmTypesBuilder0.toGetter(f_2, _name_1, _type_1);
                     CollectionExtensions.<JvmMember>operator_add(_members_1, _getter);
                     EList<JvmMember> _members_2 = it.getMembers();
-                    String _name_3 = f_2.getName();
+                    String _name_2 = f_2.getName();
                     JvmTypeReference _type_2 = f_2.getType();
-                    JvmOperation _setter = DomainmodelJvmModelInferrer.this._jvmTypesBuilder0.toSetter(f_2, _name_3, _type_2);
+                    JvmOperation _setter = DomainmodelJvmModelInferrer.this._jvmTypesBuilder0.toSetter(f_2, _name_2, _type_2);
                     CollectionExtensions.<JvmMember>operator_add(_members_2, _setter);
                   }
                 }
@@ -74,17 +78,20 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
                   final Operation f_3 = (Operation) f_1;
                   matched=true;
                   EList<JvmMember> _members_3 = it.getMembers();
-                  String _name_4 = f_3.getName();
+                  String _name_3 = f_3.getName();
                   JvmTypeReference _type_3 = f_3.getType();
                   final Function1<JvmOperation,Void> _function_1 = new Function1<JvmOperation,Void>() {
                       public Void apply(final JvmOperation it_1) {
                         {
+                          Visibility _visibility = f_3.getVisibility();
+                          JvmVisibility _jvm = DomainmodelJvmModelInferrer.this.toJvm(_visibility);
+                          it_1.setVisibility(_jvm);
                           EList<JvmFormalParameter> _params = f_3.getParams();
                           for (final JvmFormalParameter p : _params) {
                             EList<JvmFormalParameter> _parameters = it_1.getParameters();
-                            String _name_5 = p.getName();
+                            String _name_4 = p.getName();
                             JvmTypeReference _parameterType = p.getParameterType();
-                            JvmFormalParameter _parameter = DomainmodelJvmModelInferrer.this._jvmTypesBuilder0.toParameter(p, _name_5, _parameterType);
+                            JvmFormalParameter _parameter = DomainmodelJvmModelInferrer.this._jvmTypesBuilder0.toParameter(p, _name_4, _parameterType);
                             _parameters.add(_parameter);
                           }
                           XExpression _body = f_3.getBody();
@@ -93,7 +100,7 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
                         return null;
                       }
                     };
-                  JvmOperation _method = DomainmodelJvmModelInferrer.this._jvmTypesBuilder0.toMethod(f_3, _name_4, _type_3, _function_1);
+                  JvmOperation _method = DomainmodelJvmModelInferrer.this._jvmTypesBuilder0.toMethod(f_3, _name_3, _type_3, _function_1);
                   CollectionExtensions.<JvmMember>operator_add(_members_3, _method);
                 }
               }
@@ -102,8 +109,63 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
           return null;
         }
       };
-    JvmGenericType _clazz = this._jvmTypesBuilder0.toClazz(e, _name, _function);
+    JvmGenericType _clazz = this._jvmTypesBuilder0.toClazz(e, _fullName, _function);
     acceptor.accept(_clazz);
+  }
+  
+  public String fullName(final EObject x) {
+    String _switchResult = null;
+    final EObject x_1 = x;
+    boolean matched = false;
+    if (!matched) {
+      if (x_1 instanceof Entity) {
+        final Entity x_2 = (Entity) x_1;
+        matched=true;
+        EObject _eContainer = x_2.eContainer();
+        String _fullName = this.fullName(_eContainer);
+        String _name = x_2.getName();
+        String _operator_plus = StringExtensions.operator_plus(_fullName, _name);
+        _switchResult = _operator_plus;
+      }
+    }
+    if (!matched) {
+      if (x_1 instanceof PackageDeclaration) {
+        final PackageDeclaration x_3 = (PackageDeclaration) x_1;
+        matched=true;
+        EObject _eContainer_1 = x_3.eContainer();
+        String _fullName_1 = this.fullName(_eContainer_1);
+        String _name_1 = x_3.getName();
+        String _operator_plus_1 = StringExtensions.operator_plus(_fullName_1, _name_1);
+        String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, ".");
+        _switchResult = _operator_plus_2;
+      }
+    }
+    if (!matched) {
+      _switchResult = "";
+    }
+    return _switchResult;
+  }
+  
+  public JvmVisibility toJvm(final Visibility visibility) {
+    JvmVisibility _switchResult = null;
+    final Visibility visibility_1 = visibility;
+    boolean matched = false;
+    if (!matched) {
+      if (ObjectExtensions.operator_equals(visibility_1,Visibility.PRIVATE)) {
+        matched=true;
+        _switchResult = JvmVisibility.PRIVATE;
+      }
+    }
+    if (!matched) {
+      if (ObjectExtensions.operator_equals(visibility_1,Visibility.PROTECTED)) {
+        matched=true;
+        _switchResult = JvmVisibility.PROTECTED;
+      }
+    }
+    if (!matched) {
+      _switchResult = JvmVisibility.PUBLIC;
+    }
+    return _switchResult;
   }
   
   public void infer(final EObject e, final IAcceptor<JvmDeclaredType> acceptor) {
