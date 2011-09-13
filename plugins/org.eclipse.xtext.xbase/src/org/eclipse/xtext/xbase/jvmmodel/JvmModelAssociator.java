@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.jvmmodel;
 
+import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Sets.*;
 
 import java.util.List;
@@ -14,17 +15,18 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.resource.ILateInitialization;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.util.INotificationDispatcher;
-import org.eclipse.xtext.util.Notifications;
+import org.eclipse.xtext.util.IAcceptor;
 
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.ListMultimap;
@@ -37,22 +39,19 @@ import com.google.inject.name.Named;
  * @author Sven Efftinge
  */
 @Singleton
-public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssociator, INotificationDispatcher.INotificationListener {
+public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssociator, ILateInitialization {
 	
 	private final static Logger LOG = Logger.getLogger(JvmModelAssociator.class);
 	
 	@Inject
-	private Notifications notifications;
-	
-	@Inject
-	private ILateInitialization initialization;
-	
-	@Inject
-	private INotificationDispatcher dispatcher;
-	
-	@Inject
 	@Named(Constants.LANGUAGE_NAME) 
 	private String languageName;
+	
+	@Inject 
+	private IReferableElementsUnloader.GenericUnloader unloader;
+	
+	@Inject
+	private IJvmModelInferrer inferrer;
 	
 	static class Adapter extends AdapterImpl {
 		public ListMultimap<EObject, EObject> sourceToTargetMap = LinkedListMultimap.create();
@@ -67,7 +66,6 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		if (adapter == null) {
 			adapter = new Adapter();
 			resource.eAdapters().add(adapter);
-			dispatcher.addListener(resource, this);
 		}
 		return adapter;
 	}
@@ -149,29 +147,26 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		return sourceElements;
 	}
 
-	private ThreadLocal<Boolean> isHandlingNotification = new ThreadLocal<Boolean>();
 	
-	public void notifyChanged(Notification notification) {
-		if (notification.isTouch() || notifications.isDiagnosticChange(notification))
+	public void doLateInitialization(final EList<EObject> resourcesContents) {
+		if (resourcesContents == null || resourcesContents.isEmpty())
 			return;
-		if (isHandlingNotification.get() != null && isHandlingNotification.get().booleanValue())
-			return;
-		isHandlingNotification.set(Boolean.TRUE);
-		try {
-			if (LOG.isInfoEnabled()) {
-				LOG.info("dicarding and updating inferred JvmModel");
+		EObject eObject = resourcesContents.get(0);
+		inferrer.infer(eObject, new IAcceptor<JvmDeclaredType>() {
+			public void accept(JvmDeclaredType t) {
+				resourcesContents.add(t);
 			}
-			Object notifier = notification.getNotifier();
-			if (notifier instanceof Notifier) {
-				Resource resource = getResource((Notifier) notifier);
-				sourceToTargetMap(resource).clear();
-				initialization.discardLateInitialization(resource.getContents());
-				initialization.doLateInitialization(resource.getContents());
-			}
-		} finally {
-			isHandlingNotification.set(Boolean.FALSE);
-		}
+		});
 	}
 
+	public void discardLateInitialization(EList<EObject> resourcesContentsList) {
+		List<EObject> derived = newArrayList();
+		for (int i = 1; i< resourcesContentsList.size(); i++) {
+			EObject eObject = resourcesContentsList.get(i);
+			unloader.unloadRoot(eObject);
+			derived.add(eObject);
+		}
+		resourcesContentsList.removeAll(derived);
+	}
 }
 
