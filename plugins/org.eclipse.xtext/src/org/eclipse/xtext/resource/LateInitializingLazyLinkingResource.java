@@ -16,7 +16,7 @@ import com.google.inject.Inject;
 
 /**
  * 
- * Adds a hook for late initialization on first access of {@link #getContents()}
+ * Adds a hook for late initialization to be used to create derived state
  * 
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.1

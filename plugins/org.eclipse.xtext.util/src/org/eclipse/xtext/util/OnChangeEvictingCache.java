@@ -27,26 +27,10 @@ import com.google.inject.Provider;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class OnChangeEvictingCache implements IResourceScopeCache, INotificationDispatcher {
+public class OnChangeEvictingCache implements IResourceScopeCache {
 	
 	public static interface Listener {
 		void onEvict(CacheAdapter cache);
-	}
-	
-	/**
-	 * @since 2.1
-	 */
-	public void addListener(Resource resource, INotificationListener listener) {
-		CacheAdapter adapter = getOrCreate(resource);
-		adapter.addNotificationListener(listener);
-	}
-
-	/**
-	 * @since 2.1
-	 */
-	public void removeListener(Resource resource, INotificationListener listener) {
-		CacheAdapter adapter = getOrCreate(resource);
-		adapter.removeNotificationListener(listener);
 	}
 	
 	public void clear(Resource resource) {
@@ -96,8 +80,6 @@ public class OnChangeEvictingCache implements IResourceScopeCache, INotification
 
 		private Collection<Listener> listeners = newLinkedHashSet();
 		
-		private Collection<INotificationListener> notificationListeners = newLinkedHashSet();
-		
 		private volatile boolean ignoreNotifications = false;
 		
 		private volatile boolean empty = true;
@@ -128,20 +110,6 @@ public class OnChangeEvictingCache implements IResourceScopeCache, INotification
 			this.listeners.remove(listener);
 		}
 		
-		/**
-		 * @since 2.1
-		 */
-		public void addNotificationListener(INotificationListener listener) {
-			this.notificationListeners.add(listener);
-		}
-		
-		/**
-		 * @since 2.1
-		 */
-		public void removeNotificationListener(INotificationListener listener) {
-			this.notificationListeners.remove(listener);
-		}
-		
 		@Override
 		public void notifyChanged(Notification notification) {
 			super.notifyChanged(notification);
@@ -152,11 +120,6 @@ public class OnChangeEvictingCache implements IResourceScopeCache, INotification
 					Listener next = iter.next();
 					iter.remove();
 					next.onEvict(this);
-				}
-			}
-			if (!ignoreNotifications) {
-				for (INotificationListener notificationListener : notificationListeners) {
-					notificationListener.notifyChanged(notification);
 				}
 			}
 		}
