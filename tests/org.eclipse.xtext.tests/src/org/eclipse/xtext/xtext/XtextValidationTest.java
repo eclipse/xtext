@@ -61,6 +61,23 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		with(XtextStandaloneSetup.class);
 		EValidator.Registry.INSTANCE.put(EcorePackage.eINSTANCE, EcoreValidator.INSTANCE);
 	}
+	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=348052
+	 */
+	public void testGrammarHasNoNamespace() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'myURI'\n" +
+				"Model: name=ID;\n");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.getChildren().toString(), 1, diag.getChildren().size());
+		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
+	}
 
 	public void testRulenamesAreNotEqualIgnoreCase() throws Exception {
 		XtextResource resource = getResourceFromString(
