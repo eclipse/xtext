@@ -11,6 +11,7 @@ import static org.eclipse.xtext.builder.impl.BuilderUtil.*;
 import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
@@ -21,6 +22,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
@@ -28,6 +30,7 @@ import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.xtext.builder.tests.builderTestLanguage.BuilderTestLanguagePackage;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.ui.XtextProjectHelper;
@@ -541,5 +544,46 @@ public class IntegrationTest extends AbstractBuilderTest {
 		waitForAutoBuild();
 		assertEquals(0, countMarkers(file));
 	}
+
+	public void testOpenAndCloseReferencedProjectsTogether_01() throws Exception {
+		createTwoFilesInTwoReferencedProjects();
+		waitForAutoBuild();
+		assertEquals(printMarkers(bar_file), 0, countMarkers(bar_file));
+		assertEquals(printMarkers(foo_file), 0, countMarkers(foo_file));
+		new WorkspaceModifyOperation() {
+			@Override
+			protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException,
+					InterruptedException {
+				foo_project.getProject().close(monitor);
+				bar_project.getProject().close(monitor);
+			}
+		}.run(monitor());
+		waitForAutoBuild();
+		new WorkspaceModifyOperation() {
+			@Override
+			protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException,
+					InterruptedException {
+				foo_project.getProject().open(monitor);
+				bar_project.getProject().open(monitor);
+			}
+		}.run(monitor());
+		waitForAutoBuild();
+		assertEquals(printMarkers(bar_file), 0, countMarkers(bar_file));
+		assertEquals(printMarkers(foo_file), 0, countMarkers(foo_file));
+	}
 	
+	public void testOpenAndCloseReferencedProjectsTogether_02() throws Exception {
+		createTwoFilesInTwoReferencedProjects();
+		waitForAutoBuild();
+		assertEquals(printMarkers(bar_file), 0, countMarkers(bar_file));
+		assertEquals(printMarkers(foo_file), 0, countMarkers(foo_file));
+		foo_project.getProject().close(monitor());
+		bar_project.getProject().close(monitor());
+		waitForAutoBuild();
+		foo_project.getProject().open(monitor());
+		bar_project.getProject().open(monitor());
+		waitForAutoBuild();
+		assertEquals(printMarkers(bar_file), 0, countMarkers(bar_file));
+		assertEquals(printMarkers(foo_file), 0, countMarkers(foo_file));
+	}
 }
