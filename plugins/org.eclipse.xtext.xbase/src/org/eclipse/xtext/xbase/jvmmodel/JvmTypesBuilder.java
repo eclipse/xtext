@@ -156,4 +156,15 @@ public class JvmTypesBuilder {
 		adapter.setCompilationStrategy(strategy);
 		op.eAdapters().add(adapter);
 	}
+	
+	public JvmTypeReference newTypeRef(EObject ctx, Class<?> clazz, JvmTypeReference ...typeArgs) {
+		return references.getTypeForName(clazz, ctx, typeArgs);
+	}
+	
+	public JvmTypeReference newTypeRef(EObject ctx, String name, JvmTypeReference ...typeArgs) {
+		return references.getTypeForName(name, ctx, typeArgs);
+	}
+	public JvmTypeReference addArrayTypeDimension(JvmTypeReference componentType) {
+		return references.createArrayType(componentType);
+	}
 }
