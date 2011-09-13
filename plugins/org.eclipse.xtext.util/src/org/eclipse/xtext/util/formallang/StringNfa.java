@@ -10,12 +10,50 @@ package org.eclipse.xtext.util.formallang;
 import java.util.Arrays;
 
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class StringNfa implements Nfa<String> {
+
+	public static class StringNfaFactory implements NfaFactory<String, Object> {
+
+		protected String nullStart;
+		protected String nullState;
+		protected String nullStop;
+
+		public StringNfaFactory() {
+			this("(start:null)", "(stop:null)");
+		}
+
+		public StringNfaFactory(String nullStart, String nullStop) {
+			this(nullStart, nullStop, "(null)");
+		}
+
+		public StringNfaFactory(String nullStart, String nullStop, String nullState) {
+			super();
+			this.nullStart = nullStart;
+			this.nullStop = nullStop;
+			this.nullState = nullState;
+		}
+
+		public Nfa<String> createNfa(Object start, Object stop) {
+			String starts = start != null ? start.toString() : nullStart;
+			String stops = stop != null ? stop.toString() : nullStop;
+			return new StringNfa(starts, stops);
+		}
+
+		public String createState(Nfa<String> nfa, Object token) {
+			return token != null ? token.toString() : nullState;
+		}
+
+		public void setFollowers(Nfa<String> nfa, String owner, Iterable<String> followers) {
+			((StringNfa) nfa).state(owner).followedBy(Iterables.toArray(followers, String.class));
+		}
+
+	}
 
 	protected class StringNfaState {
 		protected String name;

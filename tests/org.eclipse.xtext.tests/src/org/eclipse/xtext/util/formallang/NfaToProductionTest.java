@@ -7,14 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.util.formallang;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import junit.framework.TestCase;
 
 import com.google.common.base.Functions;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class NfaToProductionTest extends AbstractXtextTests {
+public class NfaToProductionTest extends TestCase {
 
 	private String nfa2g(Nfa<String> nfa) {
 		NfaToProduction nfa2g = new NfaToProduction();

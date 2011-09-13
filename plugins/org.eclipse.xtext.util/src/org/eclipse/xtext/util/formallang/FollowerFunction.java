@@ -10,11 +10,10 @@ package org.eclipse.xtext.util.formallang;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface NfaFactory<STATE, TOKEN> {
+public interface FollowerFunction<ELEMENT> {
 
-	Nfa<STATE> createNfa(TOKEN start, TOKEN stop);
+	Iterable<ELEMENT> getStarts(ELEMENT root);
 
-	STATE createState(Nfa<STATE> nfa, TOKEN token);
+	Iterable<ELEMENT> getFollowers(ELEMENT element);
 
-	void setFollowers(Nfa<STATE> nfa, STATE owner, Iterable<STATE> followers);
 }
