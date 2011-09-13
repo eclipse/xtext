@@ -177,15 +177,21 @@ public class JavaProjectsStateHelper extends AbstractStorage2UriMapperClient {
 
 	protected IPackageFragmentRoot getJarWithEntry(URI uri) {
 		Iterable<Pair<IStorage, IProject>> storages = getStorages(uri);
+		IPackageFragmentRoot result = null;
 		for (Pair<IStorage, IProject> storage2Project : storages) {
 			IStorage storage = storage2Project.getFirst();
 			if (storage instanceof IJarEntryResource) {
 				IPackageFragmentRoot fragmentRoot = ((IJarEntryResource) storage).getPackageFragmentRoot();
-				if (fragmentRoot != null)
-					return fragmentRoot;
+				if (fragmentRoot != null) {
+					IJavaProject javaProject = fragmentRoot.getJavaProject();
+					if (isAccessibleXtextProject(javaProject.getProject()))
+						return fragmentRoot;
+					if (result != null)
+						result = fragmentRoot;
+				}
 			}
 		}
-		return null;
+		return result;
 	}
 	
 	protected boolean isAccessibleXtextProject(IProject p) {
