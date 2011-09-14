@@ -181,10 +181,12 @@ public class Xtend2ScopeProvider extends XbaseWithAnnotationsScopeProvider {
 			}
 			// extensions for this
 			JvmGenericType type2 = xtend2jvmAssociations.getInferredType(xtendClass);
-			JvmParameterizedTypeReference typeRef = typeReferences.createTypeRef(type2);
-			ExtensionMethodsFeaturesProvider featureProvider = extensionMethodsFeaturesProvider.get();
-			featureProvider.setContext(typeRef);
-			insertDescriptionProviders(featureProvider, currentContext, callToThis, result);
+			if (type2 != null) {
+				JvmParameterizedTypeReference typeRef = typeReferences.createTypeRef(type2);
+				ExtensionMethodsFeaturesProvider featureProvider = extensionMethodsFeaturesProvider.get();
+				featureProvider.setContext(typeRef);
+				insertDescriptionProviders(featureProvider, currentContext, callToThis, result);
+			}
 		}
 		return result;
 	}
