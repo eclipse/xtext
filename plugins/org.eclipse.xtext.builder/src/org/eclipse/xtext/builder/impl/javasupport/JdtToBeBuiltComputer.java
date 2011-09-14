@@ -194,7 +194,7 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 				String typeName = fileName.substring(0, fileName.lastIndexOf('.'));
 				if (element instanceof IPackageFragmentRoot) {
 					queueJavaChange(typeName);
-				} else {
+				} else if (element instanceof IPackageFragment) {
 					IPackageFragment packageFragment = (IPackageFragment) element;
 					queueJavaChange(packageFragment.getElementName() + "." + typeName);
 				}
