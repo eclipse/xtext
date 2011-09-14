@@ -10,6 +10,7 @@ package org.eclipse.xtext.resource.impl;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 
 import com.google.inject.Inject;
@@ -38,7 +39,14 @@ public class ResourceDescriptionsProvider {
 	private Provider<IResourceDescriptions> resourceDescriptions;
 	
 	public IResourceDescriptions getResourceDescriptions(Resource resource) {
-		Map<Object, Object> loadOptions = resource.getResourceSet().getLoadOptions();
+		return getResourceDescriptions(resource.getResourceSet());
+	}
+	
+	/**
+	 * @since 2.1
+	 */
+	public IResourceDescriptions getResourceDescriptions(ResourceSet resourceSet) {
+		Map<Object, Object> loadOptions = resourceSet.getLoadOptions();
 		IResourceDescriptions result = createResourceDescriptions();
 		if (loadOptions.containsKey(NAMED_BUILDER_SCOPE)) {
 			result = createBuilderScopeResourceDescriptions();
@@ -47,7 +55,7 @@ public class ResourceDescriptionsProvider {
 			result = createLiveScopeResourceDescriptions();
 		}
 		if (result instanceof IResourceDescriptions.IContextAware) {
-			((IResourceDescriptions.IContextAware) result).setContext(resource);
+			((IResourceDescriptions.IContextAware) result).setContext(resourceSet);
 		}
 		return result;
 	}

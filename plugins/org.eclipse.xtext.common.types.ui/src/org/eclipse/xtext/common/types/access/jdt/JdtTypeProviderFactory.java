@@ -37,7 +37,7 @@ public class JdtTypeProviderFactory extends AbstractTypeProviderFactory {
 		if (javaProject == null)
 			//TODO throw a serious exception instead of returning a non working implementation
 			return new NullJdtTypeProvider(resourceSet);
-		return new JdtTypeProvider(javaProject, resourceSet);
+		return new JdtTypeProvider(javaProject, resourceSet, getIndexedJvmTypeAccess());
 	}
 
 	@Override

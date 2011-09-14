@@ -8,6 +8,7 @@
 package org.eclipse.xtext.common.types.access.impl;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.JvmType;
@@ -25,11 +26,15 @@ public class ClasspathTypeProvider extends AbstractJvmTypeProvider {
 	
 	private final ClassURIHelper uriHelper;
 	
-	public ClasspathTypeProvider(ClassLoader classLoader, ResourceSet resourceSet) {
-		super(resourceSet);
+	public ClasspathTypeProvider(ClassLoader classLoader, ResourceSet resourceSet, IndexedJvmTypeAccess indexedJvmTypeAccess) {
+		super(resourceSet, indexedJvmTypeAccess);
 		classFinder = createClassFinder(classLoader);
 		uriHelper = createClassURIHelper();
 		declaredTypeFactory = createDeclaredTypeFactory();
+	}
+	
+	public ClasspathTypeProvider(ClassLoader classLoader, ResourceSet resourceSet) {
+		this(classLoader, resourceSet, null);
 	}
 
 	protected ClassFinder createClassFinder(ClassLoader classLoader) {
@@ -61,6 +66,13 @@ public class ClasspathTypeProvider extends AbstractJvmTypeProvider {
 		try {
 			Class<?> clazz = classFinder.forName(name);
 			URI resourceURI = uriHelper.createResourceURI(clazz);
+			IndexedJvmTypeAccess indexedJvmTypeAccess = getIndexedJvmTypeAccess();
+			if (indexedJvmTypeAccess != null) {
+				URI proxyURI = resourceURI.appendFragment(uriHelper.getFragment(clazz));
+				EObject candidate = indexedJvmTypeAccess.getIndexedJvmType(proxyURI, getResourceSet());
+				if (candidate instanceof JvmType)
+					return (JvmType) candidate;
+			}
 			TypeResource result = (TypeResource) getResourceSet().getResource(resourceURI, true);
 			return findTypeByClass(clazz, result);
 		}
