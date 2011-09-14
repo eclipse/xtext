@@ -124,6 +124,10 @@ public class WorkbenchTestHelper extends Assert {
 
 	public IFile createFile(String fileName, String content) throws Exception {
 		String fullFileName = getFullFileName(fileName);
+		return createFileImpl(fullFileName, content);
+	}
+	
+	public IFile createFileImpl(String fullFileName, String content) throws Exception {
 		IFile file = IResourcesSetupUtil.createFile(fullFileName,
 				content);
 		getFiles().add(file);
