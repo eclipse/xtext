@@ -143,7 +143,10 @@ public class BuildScheduler {
 				if (buildUs.length != 0) {
 					SubMonitor childProgress = SubMonitor.convert(progress.newChild(1), buildUs.length);
 					ProjectOrder projectOrder = workspace.computeProjectOrder(buildUs);
-					updateTaskName(Arrays.asList(projectOrder.projects));
+					// #computeProjectOrder may filter closed projects and
+					// thereby return an empty array
+					if (projectOrder.projects.length != 0)
+						updateTaskName(Arrays.asList(projectOrder.projects));
 					MultiStatus result = null;
 					for(IProject project: projectOrder.projects) {
 						try {
