@@ -108,7 +108,8 @@ public class Xtend2Resource extends XbaseResource {
 				throw new IllegalStateException("couldn't resolve type proxy in "+eObject);
 			}
 		} catch (RuntimeException e) {
-			LOG.error(e.getMessage(), e);
+			if (LOG.isInfoEnabled())
+				LOG.info(e.getMessage(), e);
 			throw e;
 		} finally {
 			computingFragments.remove(uriFragment);
@@ -137,8 +138,10 @@ public class Xtend2Resource extends XbaseResource {
 						return EcoreUtil2.cloneWithProxies(result);
 					}
 					JvmOperation dispatchOperation = associations.getDispatchOperation(func);
-					JvmTypeReference result = dispatchOperation.getReturnType();
-					return EcoreUtil2.cloneWithProxies(result);
+					if (dispatchOperation != null) {
+						JvmTypeReference result = dispatchOperation.getReturnType();
+						return EcoreUtil2.cloneWithProxies(result);
+					}
 				}
 			} else {
 				JvmOperation overriddenOperation = overridesService.findOverriddenOperation(jvmOperation);

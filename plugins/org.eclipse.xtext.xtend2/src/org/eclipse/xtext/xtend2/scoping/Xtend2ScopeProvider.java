@@ -87,7 +87,7 @@ public class Xtend2ScopeProvider extends XbaseWithAnnotationsScopeProvider {
 				}
 			}
 			XtendClass clazz = EcoreUtil2.getContainerOfType(context, XtendClass.class);
-			if (clazz != null) {
+			if (clazz != null && clazz.getName() != null) {
 				if (descriptions == null)
 					descriptions = Lists.newArrayList();
 				JvmGenericType inferredType = xtend2jvmAssociations.getInferredType(clazz);
@@ -236,7 +236,7 @@ public class Xtend2ScopeProvider extends XbaseWithAnnotationsScopeProvider {
 		if (call == null)
 			return null;
 		XtendClass containerClass = EcoreUtil2.getContainerOfType(call, XtendClass.class);
-		if (containerClass != null)
+		if (containerClass != null && containerClass.getName() != null)
 			return xtend2jvmAssociations.getInferredType(containerClass);
 		else
 			return super.getContextType(call);

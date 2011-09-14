@@ -73,7 +73,7 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 		if (!(xtendFile instanceof XtendFile))
 			throw new IllegalArgumentException("expected XtendFile but was "+xtendFile);
 		final XtendFile xtendFile2 = (XtendFile)xtendFile;
-		if (xtendFile2.getXtendClass()==null || xtendFile2.getXtendClass().getName()==null)
+		if (xtendFile2.getXtendClass()==null)
 			return;
 		JvmGenericType inferredJvmType = transform(xtendFile2.getXtendClass());
 		acceptor.accept(inferredJvmType);
