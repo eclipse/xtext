@@ -68,14 +68,16 @@ public class CopiedResourceDescription extends AbstractResourceDescription {
 
     public Iterable<QualifiedName> getImportedNames() {
     	// TODO see https://bugs.eclipse.org/bugs/show_bug.cgi?id=344373
-		log.error(new IllegalStateException("getImportedNames "+getURI()));
+    	IllegalStateException exception = new IllegalStateException("getImportedNames "+getURI());
+		log.error(exception, exception);
     	return Collections.emptyList();
 //        throw new UnsupportedOperationException("getImportedNames()");
     }
 
     public Iterable<IReferenceDescription> getReferenceDescriptions() {
     	// TODO see https://bugs.eclipse.org/bugs/show_bug.cgi?id=344373
-    	log.error(new IllegalStateException("getReferenceDescriptions "+getURI()));
+    	IllegalStateException exception = new IllegalStateException("getReferenceDescriptions "+getURI());
+    	log.error(exception, exception);
     	return Collections.emptyList();
 //        throw new UnsupportedOperationException("getReferenceDescriptions()");
     }
