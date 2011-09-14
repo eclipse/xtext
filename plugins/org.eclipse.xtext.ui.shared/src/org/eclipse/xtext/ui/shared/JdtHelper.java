@@ -10,11 +10,11 @@ package org.eclipse.xtext.ui.shared;
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.xtext.ui.shared.internal.Activator;
 import org.eclipse.xtext.ui.util.IJdtHelper;
 
@@ -24,7 +24,8 @@ import com.google.inject.Singleton;
  * Important note:
  * ===============
  * Neither the interface nor the implementation class(es) may
- * expose any types from jdt.core in its signatures.
+ * expose any types from jdt.core in its signatures or use
+ * any exceptions from jdt.core in catch clauses.
  */
 /**
  * Default implementation of the {@link IJdtHelper}.
@@ -74,7 +75,7 @@ public class JdtHelper implements IJdtHelper {
 						}
 					}
 				}
-			} catch(JavaModelException e) {
+			} catch(CoreException e) {
 				if (log.isDebugEnabled())
 					log.debug("Error in isJavaTargetFolder():" + e.getMessage(), e);
 			}
