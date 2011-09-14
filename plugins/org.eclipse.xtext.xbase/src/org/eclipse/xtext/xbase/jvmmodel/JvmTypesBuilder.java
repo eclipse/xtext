@@ -7,25 +7,48 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.jvmmodel;
 
+import static com.google.common.collect.Maps.*;
+
+import java.util.Map;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
+import org.eclipse.xtext.common.types.JvmAnnotationTarget;
+import org.eclipse.xtext.common.types.JvmAnnotationType;
+import org.eclipse.xtext.common.types.JvmAnnotationValue;
+import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmIntAnnotationValue;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmStringAnnotationValue;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XIntLiteral;
+import org.eclipse.xtext.xbase.XStringLiteral;
+import org.eclipse.xtext.xbase.XTypeLiteral;
+import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.compiler.CompilationStrategyAdapter;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.lib.Functions;
@@ -166,5 +189,120 @@ public class JvmTypesBuilder {
 	}
 	public JvmTypeReference addArrayTypeDimension(JvmTypeReference componentType) {
 		return references.createArrayType(componentType);
+	}
+	
+	public void translateAnnotationsTo(Iterable<? extends XAnnotation> annotations, JvmAnnotationTarget target) {
+		for (XAnnotation anno : annotations) {
+			JvmAnnotationReference annotationReference = getJvmAnnotationReference(anno);
+			target.getAnnotations().add(annotationReference);
+		}
+	}
+
+	protected JvmAnnotationReference getJvmAnnotationReference(XAnnotation anno) {
+		JvmAnnotationReference reference = TypesFactory.eINSTANCE.createJvmAnnotationReference();
+		final JvmAnnotationType annotation = (JvmAnnotationType) anno.eGet(XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, false);
+		reference.setAnnotation(annotation);
+		for (XAnnotationElementValuePair val : anno.getElementValuePairs()) {
+			JvmAnnotationValue annotationValue = getJvmAnnotationValue(val.getValue());
+			JvmOperation op = (JvmOperation) val.eGet(XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_PAIR__ELEMENT, false);
+			annotationValue.setOperation(op);
+			reference.getValues().add(annotationValue);
+		}
+		if (anno.getValue() != null) {
+			JvmAnnotationValue value = getJvmAnnotationValue(anno.getValue());
+			reference.getValues().add(value);
+		}
+		return reference;
+	}
+	
+	protected JvmAnnotationValue getJvmAnnotationValue(XExpression value) {
+		if (value instanceof XAnnotationValueArray) {
+			EList<XExpression> values = ((XAnnotationValueArray) value).getValues();
+			JvmAnnotationValue result = null;
+			for (XExpression expr : values) {
+				AnnotationValueTranslator translator = translator(expr);
+				if (translator == null)
+					throw new IllegalArgumentException("expression "+value+" is not supported in annotation literals");
+				if (result == null) {
+					result = translator.createValue(expr);
+				}
+				translator.appendValue(result, expr);
+			}
+			return result;
+		} else {
+			AnnotationValueTranslator translator = translator(value);
+			if (translator == null)
+				throw new IllegalArgumentException("expression "+value+" is not supported in annotation literals");
+			JvmAnnotationValue result = translator.createValue(value);
+			translator.appendValue(result, value);
+			return result;
+		}
+	}
+	
+	private Map<EClass, AnnotationValueTranslator> translators = newLinkedHashMap();
+	
+	protected AnnotationValueTranslator translator(XExpression obj) {
+		synchronized (translators) {
+			if (translators.isEmpty()) {
+				translators.put(XAnnotationsPackage.Literals.XANNOTATION, new AnnotationValueTranslator() {
+					public JvmAnnotationValue createValue(XExpression expr) {
+						return TypesFactory.eINSTANCE.createJvmAnnotationAnnotationValue();
+					}
+					public void appendValue(JvmAnnotationValue value, XExpression expr) {
+						JvmAnnotationAnnotationValue annotationValue = (JvmAnnotationAnnotationValue) value;
+						JvmAnnotationReference annotationReference = getJvmAnnotationReference((XAnnotation) expr);
+						annotationValue.getValues().add(annotationReference);
+					}
+				});
+				translators.put(XbasePackage.Literals.XSTRING_LITERAL, new AnnotationValueTranslator() {
+					public JvmAnnotationValue createValue(XExpression expr) {
+						return TypesFactory.eINSTANCE.createJvmStringAnnotationValue();
+					}
+					public void appendValue(JvmAnnotationValue value, XExpression expr) {
+						JvmStringAnnotationValue annotationValue = (JvmStringAnnotationValue) value;
+						String string = ((XStringLiteral) expr).getValue();
+						annotationValue.getValues().add(string);
+					}
+				});
+				translators.put(XbasePackage.Literals.XBOOLEAN_LITERAL, new AnnotationValueTranslator() {
+					public JvmAnnotationValue createValue(XExpression expr) {
+						return TypesFactory.eINSTANCE.createJvmBooleanAnnotationValue();
+					}
+					public void appendValue(JvmAnnotationValue value, XExpression expr) {
+						JvmBooleanAnnotationValue annotationValue = (JvmBooleanAnnotationValue) value;
+						boolean isTrue = ((XBooleanLiteral) expr).isIsTrue();
+						annotationValue.getValues().add(isTrue);
+					}
+				});
+				translators.put(XbasePackage.Literals.XTYPE_LITERAL, new AnnotationValueTranslator() {
+					public JvmAnnotationValue createValue(XExpression expr) {
+						return TypesFactory.eINSTANCE.createJvmTypeAnnotationValue();
+					}
+					public void appendValue(JvmAnnotationValue value, XExpression expr) {
+						JvmTypeAnnotationValue annotationValue = (JvmTypeAnnotationValue) value;
+						final XTypeLiteral literal = (XTypeLiteral) expr;
+						JvmType proxy = (JvmType) literal.eGet(XbasePackage.Literals.XTYPE_LITERAL__TYPE, false);
+						JvmParameterizedTypeReference reference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
+						reference.setType(proxy);
+						annotationValue.getValues().add(reference);
+					}
+				});
+				translators.put(XbasePackage.Literals.XINT_LITERAL, new AnnotationValueTranslator() {
+					public JvmAnnotationValue createValue(XExpression expr) {
+						return TypesFactory.eINSTANCE.createJvmIntAnnotationValue();
+					}
+					public void appendValue(JvmAnnotationValue value, XExpression expr) {
+						JvmIntAnnotationValue annotationValue = (JvmIntAnnotationValue) value;
+						annotationValue.getValues().add(((XIntLiteral) expr).getValue());
+					}
+				});
+			}
+		}
+		return translators.get(obj.eClass());
+	}
+	
+	static interface AnnotationValueTranslator {
+		JvmAnnotationValue createValue(XExpression expr);
+		void appendValue(JvmAnnotationValue value, XExpression expr);
 	}
 }
