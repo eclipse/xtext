@@ -35,10 +35,12 @@ import org.eclipse.xtext.util.Pair;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Singleton
 public class JavaProjectsStateHelper extends AbstractStorage2UriMapperClient {
 
 	private final static Logger log = Logger.getLogger(JavaProjectsStateHelper.class);
