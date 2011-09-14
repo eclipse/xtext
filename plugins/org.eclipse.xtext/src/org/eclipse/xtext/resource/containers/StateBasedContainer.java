@@ -9,7 +9,9 @@ package org.eclipse.xtext.resource.containers;
 
 import static java.util.Collections.*;
 
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
@@ -21,6 +23,8 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsBasedContainer;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 
 /**
@@ -37,6 +41,21 @@ public class StateBasedContainer extends ResourceDescriptionsBasedContainer {
 	public StateBasedContainer(IResourceDescriptions descriptions, IContainerState state) {
 		super(descriptions);
 		this.state = state;
+	}
+	
+	@Override
+	protected Iterable<IEObjectDescription> filterByURI(Iterable<IEObjectDescription> unfiltered) {
+		return Iterables.filter(unfiltered, new Predicate<IEObjectDescription>() {
+			private Collection<URI> contents = null;
+
+			public boolean apply(IEObjectDescription input) {
+				if(contents == null) {
+					contents = state.getContents();
+				}
+				URI resourceURI = input.getEObjectURI().trimFragment();
+				return contents.contains(resourceURI);
+			}
+		});
 	}
 
 	@Override

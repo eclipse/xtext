@@ -70,12 +70,7 @@ public class ResourceDescriptionsBasedContainer extends AbstractContainer implem
 	}
 
 	protected Iterable<IEObjectDescription> filterByURI(Iterable<IEObjectDescription> unfiltered) {
-		return Iterables.filter(unfiltered, new Predicate<IEObjectDescription>() {
-			public boolean apply(IEObjectDescription input) {
-				URI resourceURI = input.getEObjectURI().trimFragment();
-				return hasResourceDescription(resourceURI);
-			}
-		});
+		return unfiltered;
 	}
 	
 	@Override
