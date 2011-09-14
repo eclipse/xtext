@@ -66,18 +66,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 	}
 
 	public void disposeInput() {
-		//TODO Is this really needed? Who else is holding a reference to this resource / resourceset?
-		// the problem with this code is, that when an editor gets a new editorinput this method is called before the document is remobved from the source viewer
-		// in between clients (running jobs, like the reconciler) get a non working document.
-//		if (resource != null) {
-//			ResourceSet resourceSet = resource.getResourceSet();
-//			if (resourceSet != null) {
-//				resourceSet.eSetDeliver(false); // don't notify resources - no need to unload them explicitly
-//				resourceSet.getResources().clear();
-//				resourceSet.eAdapters().clear();
-//			}
-//			resource = null;
-//		}
+		// clients may override
 	}
 
 	private final XtextDocumentLocker stateAccess = createDocumentLocker();
