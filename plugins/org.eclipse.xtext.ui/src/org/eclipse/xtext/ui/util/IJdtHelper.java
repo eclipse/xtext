@@ -13,7 +13,8 @@ import org.eclipse.core.resources.IResource;
  * Important note:
  * ===============
  * Neither the interface nor the implementation class(es) may
- * expose any types from jdt.core in its signatures.
+ * expose any types from jdt.core in its signatures or use
+ * any exceptions from jdt.core in catch clauses.
  */
 /**
  * Encapsulates common functionality when dealing with JavaCore.
