@@ -18,7 +18,7 @@ import com.google.common.collect.Multimap;
  */
 public class StringNfa implements Nfa<String> {
 
-	public static class StringNfaFactory implements NfaFactory<String, Object> {
+	public static class StringNfaFactory implements NfaFactory<StringNfa, String, Object> {
 
 		protected String nullStart;
 		protected String nullState;
@@ -39,18 +39,18 @@ public class StringNfa implements Nfa<String> {
 			this.nullState = nullState;
 		}
 
-		public Nfa<String> createNfa(Object start, Object stop) {
+		public StringNfa create(Object start, Object stop) {
 			String starts = start != null ? start.toString() : nullStart;
 			String stops = stop != null ? stop.toString() : nullStop;
 			return new StringNfa(starts, stops);
 		}
 
-		public String createState(Nfa<String> nfa, Object token) {
+		public String createState(StringNfa nfa, Object token) {
 			return token != null ? token.toString() : nullState;
 		}
 
-		public void setFollowers(Nfa<String> nfa, String owner, Iterable<String> followers) {
-			((StringNfa) nfa).state(owner).followedBy(Iterables.toArray(followers, String.class));
+		public void setFollowers(StringNfa nfa, String owner, Iterable<String> followers) {
+			nfa.state(owner).followedBy(Iterables.toArray(followers, String.class));
 		}
 
 	}

@@ -11,7 +11,7 @@ import com.google.common.collect.Maps;
  */
 public class StringPda extends StringNfa implements Pda<String, String> {
 
-	public static class StringPdaFactory implements PdaFactory<String, String, Object> {
+	public static class StringPdaFactory implements PdaFactory<StringPda, String, String, Object> {
 
 		protected String nullStart;
 		protected String nullState;
@@ -32,32 +32,32 @@ public class StringPda extends StringNfa implements Pda<String, String> {
 			this.nullState = nullState;
 		}
 
-		public Pda<String, String> createPda(Object start, Object stop) {
+		public StringPda create(Object start, Object stop) {
 			String starts = start != null ? start.toString() : nullStart;
 			String stops = stop != null ? stop.toString() : nullStop;
 			return new StringPda(starts, stops);
 		}
 
-		public String createPop(Pda<String, String> pda, Object token) {
+		public String createPop(StringPda pda, Object token) {
 			String pop = token != null ? token.toString() : nullState;
 			String s = "<<" + pop;
-			((StringPda) pda).state(s).pop(pop);
+			pda.state(s).pop(pop);
 			return s;
 		}
 
-		public String createPush(Pda<String, String> pda, Object token) {
+		public String createPush(StringPda pda, Object token) {
 			String push = token != null ? token.toString() : nullState;
 			String s = ">>" + push;
-			((StringPda) pda).state(s).push(push);
+			pda.state(s).push(push);
 			return s;
 		}
 
-		public String createState(Pda<String, String> pda, Object token) {
+		public String createState(StringPda pda, Object token) {
 			return token != null ? token.toString() : nullState;
 		}
 
-		public void setFollowers(Pda<String, String> pda, String owner, Iterable<String> followers) {
-			((StringPda) pda).state(owner).followedBy(Iterables.toArray(followers, String.class));
+		public void setFollowers(StringPda pda, String owner, Iterable<String> followers) {
+			pda.state(owner).followedBy(Iterables.toArray(followers, String.class));
 		}
 
 	}
