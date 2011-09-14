@@ -1,6 +1,7 @@
 package org.eclipse.xtext.common.types.shared;
 
 import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.builder.clustering.CurrentDescriptions;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
 import org.eclipse.xtext.common.types.ui.refactoring.JvmRefactoringResourceSetProvider;
@@ -9,7 +10,10 @@ import org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRename
 import org.eclipse.xtext.common.types.xtext.JvmIdentifiableQualifiedNameProvider;
 import org.eclipse.xtext.common.types.xtext.ui.JdtHoverProvider;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.impl.LiveShadowedResourceDescriptions;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
@@ -39,6 +43,9 @@ public class SharedCommonTypesModule implements Module {
 		binder.bind(IRenameStrategy.Provider.class).to(JvmMemberRenameStrategy.Provider.class);
 		binder.bind(RefactoringResourceSetProvider.class).to(JvmRefactoringResourceSetProvider.class);
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance("Java");
+		
+		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.LIVE_SCOPE)).to(LiveShadowedResourceDescriptions.class);
+		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE)).to(CurrentDescriptions.ResourceSetAware.class);
 	}
 
 }

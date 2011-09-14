@@ -8,6 +8,7 @@
 package org.eclipse.xtext.common.types.access.jdt;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IType;
@@ -17,6 +18,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.AbstractJvmTypeProvider;
+import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.util.Strings;
 
@@ -32,14 +34,21 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	private final JdtBasedTypeFactory typeFactory;
 	
 	public JdtTypeProvider(IJavaProject javaProject, ResourceSet resourceSet) {
-		super(resourceSet);
+		this(javaProject, resourceSet, null);
+	}
+	
+	/**
+	 * @since 2.1
+	 */
+	public JdtTypeProvider(IJavaProject javaProject, ResourceSet resourceSet, IndexedJvmTypeAccess indexedJvmTypeAccess) {
+		super(resourceSet, indexedJvmTypeAccess);
 		if (javaProject == null)
 			throw new IllegalArgumentException("javaProject may not be null");
 		this.javaProject = javaProject;
 		this.typeUriHelper = createTypeURIHelper();
 		this.typeFactory = createTypeFactory();
 	}
-
+	
 	protected JdtBasedTypeFactory createTypeFactory() {
 		return new JdtBasedTypeFactory(typeUriHelper);
 	}
@@ -70,6 +79,14 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 				JvmType result = findTypeBySignature(signature, resource);
 				return result;
 			}
+			IndexedJvmTypeAccess indexedJvmTypeAccess = getIndexedJvmTypeAccess();
+			if (indexedJvmTypeAccess != null) {
+				URI proxyURI = resourceURI.appendFragment(typeUriHelper.getFragment(signature));
+				EObject candidate = indexedJvmTypeAccess.getIndexedJvmType(proxyURI, getResourceSet());
+				if (candidate instanceof JvmType) {
+					return (JvmType) candidate;
+				}
+			}
 			String topLevelType = resourceURI.segment(resourceURI.segmentCount() - 1);
 			try {
 				int lastDot = topLevelType.lastIndexOf('.');
@@ -78,7 +95,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 				if (lastDot != -1) {
 					typeName = typeName.substring(lastDot + 1);
 					packageName = topLevelType.substring(0, lastDot);
-				} 
+				}
 				if (javaProject.findType(packageName, typeName) != null) {
 					resource = (TypeResource) getResourceSet().getResource(resourceURI, true);
 					JvmType result = findTypeBySignature(signature, resource);
@@ -91,7 +108,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 			}
 		}
 	}
-
+	
 	public JvmType findTypeBySignature(String signature, TypeResource resource) {
 		// TODO: Maybe iterate the resource without computing a fragment
 		String fragment = typeUriHelper.getFragment(signature);
