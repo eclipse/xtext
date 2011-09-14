@@ -7,13 +7,34 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.access.TypeResource;
+import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class JvmTypeReferenceImplCustom extends JvmTypeReferenceImpl {
 
+	@Override
+	public EObject eResolveProxy(InternalEObject proxy) {
+		URI proxyURI = proxy.eProxyURI();
+		if (proxyURI != null && URIHelperConstants.PROTOCOL.equals(proxyURI.scheme())) {
+			if ("Objects".equals(proxyURI.segment(0))) {
+				Resource resource = eResource();
+				if (resource instanceof TypeResource) {
+					EObject result = ((TypeResource) resource).resolveJavaObjectURIProxy(proxy, this);
+					return result;
+				}
+			}
+		}
+		return super.eResolveProxy(proxy);
+	}
+	
 	@Override
 	public String getIdentifier() {
 		JvmType type = getType();

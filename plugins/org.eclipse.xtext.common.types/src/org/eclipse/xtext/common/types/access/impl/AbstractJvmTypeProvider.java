@@ -23,10 +23,13 @@ public abstract class AbstractJvmTypeProvider implements IJvmTypeProvider, Resou
 	private final ResourceSet resourceSet;
 	
 	private final PrimitiveTypeFactory primitiveTypeFactory;
+
+	private final IndexedJvmTypeAccess indexedJvmTypeAccess;
 	
-	protected AbstractJvmTypeProvider(ResourceSet resourceSet) {
+	protected AbstractJvmTypeProvider(ResourceSet resourceSet, IndexedJvmTypeAccess indexedJvmTypeAccess) {
 		if (resourceSet == null)
 			throw new IllegalArgumentException("resourceSet may not be null");
+		this.indexedJvmTypeAccess = indexedJvmTypeAccess;
 		this.resourceSet = resourceSet;
 		registerProtocol(resourceSet);
 		primitiveTypeFactory = new PrimitiveTypeFactory();
@@ -47,13 +50,15 @@ public abstract class AbstractJvmTypeProvider implements IJvmTypeProvider, Resou
 	}
 
 	protected TypeResource doCreateResource(URI uri) {
-		return new TypeResource(uri);
+		TypeResource result = new TypeResource(uri);
+		result.setIndexedJvmTypeAccess(indexedJvmTypeAccess);
+		return result;
 	}
 
 	public ResourceSet getResourceSet() {
 		return resourceSet;
 	}
-
+	
 	public IMirror createMirror(URI resourceURI) {
 		if (resourceURI.hasFragment())
 			throw new IllegalArgumentException("Cannot create mirror for uri '" + resourceURI.toString() + "'");
@@ -68,4 +73,7 @@ public abstract class AbstractJvmTypeProvider implements IJvmTypeProvider, Resou
 
 	protected abstract IMirror createMirrorForFQN(String name);
 
+	protected IndexedJvmTypeAccess getIndexedJvmTypeAccess() {
+		return indexedJvmTypeAccess;
+	}
 }

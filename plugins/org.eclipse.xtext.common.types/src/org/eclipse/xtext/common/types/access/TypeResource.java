@@ -13,7 +13,11 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.resource.IFragmentProvider;
 
 /**
@@ -22,6 +26,8 @@ import org.eclipse.xtext.resource.IFragmentProvider;
 public class TypeResource extends ResourceImpl {
 
 	private IMirror mirror;
+	
+	private IndexedJvmTypeAccess indexedJvmTypeAccess;
 	
 	private IFragmentProvider.Fallback fragmentProviderFallback = new IFragmentProvider.Fallback() {
 		
@@ -85,6 +91,24 @@ public class TypeResource extends ResourceImpl {
 		if (getURI() != null && mirror != null) {
 			mirror.initialize(this);
 		}
+	}
+	
+	public EObject resolveJavaObjectURIProxy(InternalEObject proxy, JvmTypeReference sender) {
+		if (indexedJvmTypeAccess != null) {
+			EObject result = indexedJvmTypeAccess.getIndexedJvmType(proxy.eProxyURI(), getResourceSet());
+			if (result != null) {
+				return result;
+			}
+		}
+		return EcoreUtil.resolve(proxy, sender);
+	}
+
+	public IndexedJvmTypeAccess getIndexedJvmTypeAccess() {
+		return indexedJvmTypeAccess;
+	}
+
+	public void setIndexedJvmTypeAccess(IndexedJvmTypeAccess indexedJvmTypeAccess) {
+		this.indexedJvmTypeAccess = indexedJvmTypeAccess;
 	}
 	
 }
