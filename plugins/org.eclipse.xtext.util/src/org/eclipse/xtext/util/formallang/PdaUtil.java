@@ -146,13 +146,14 @@ public class PdaUtil {
 		return distanceTo(pda, Collections.singleton(state), stack, matches, canPass) != UNREACHABLE;
 	}
 
-	public <S, P, E, T> Pda<S, P> create(Cfg<E, T> cfg, FollowerFunction<E> ff, PdaFactory<S, P, ? super E> fact) {
+	public <S, P, E, T, D extends Pda<S, P>> D create(Cfg<E, T> cfg, FollowerFunction<E> ff,
+			PdaFactory<D, S, P, ? super E> fact) {
 		return create(cfg, ff, Functions.<E> identity(), fact);
 	}
 
-	public <S, P, E, T1, T2> Pda<S, P> create(Cfg<E, T1> cfg, FollowerFunction<E> ff, Function<E, T2> element2token,
-			PdaFactory<S, P, ? super T2> fact) {
-		Pda<S, P> pda = fact.createPda(null, null);
+	public <S, P, E, T1, T2, D extends Pda<S, P>> D create(Cfg<E, T1> cfg, FollowerFunction<E> ff,
+			Function<E, T2> element2token, PdaFactory<D, S, P, ? super T2> fact) {
+		D pda = fact.create(null, null);
 		Map<E, S> states = Maps.newHashMap();
 		Map<E, S> stops = Maps.newHashMap();
 		Multimap<E, E> callers = new CfgUtil().getCallers(cfg);
@@ -161,9 +162,9 @@ public class PdaUtil {
 		return pda;
 	}
 
-	protected <S, P, E, T1, T2> void create(Cfg<E, T1> cfg, Pda<S, P> pda, S state, E ele,
+	protected <S, P, E, T1, T2, D extends Pda<S, P>> void create(Cfg<E, T1> cfg, D pda, S state, E ele,
 			Iterable<E> followerElements, boolean canEnter, FollowerFunction<E> ff, Function<E, T2> tokens,
-			PdaFactory<S, P, ? super T2> fact, Map<E, S> states, Map<E, S> stops, Multimap<E, E> callers) {
+			PdaFactory<D, S, P, ? super T2> fact, Map<E, S> states, Map<E, S> stops, Multimap<E, E> callers) {
 		List<S> followerStates = Lists.newArrayList();
 		for (E fol : followerElements) {
 			E e;

@@ -182,8 +182,8 @@ public class NfaUtil {
 			collectFollowers(nfa, follower, result, visited, filter);
 	}
 
-	protected <SRCSTATE, DSTSTATE> DSTSTATE create(Nfa<SRCSTATE> source, Nfa<DSTSTATE> result, SRCSTATE src,
-			NfaFactory<DSTSTATE, SRCSTATE> factory, Map<SRCSTATE, DSTSTATE> src2dst) {
+	protected <SRCSTATE, DSTSTATE, NFA extends Nfa<DSTSTATE>> DSTSTATE create(Nfa<SRCSTATE> source, NFA result,
+			SRCSTATE src, NfaFactory<NFA, DSTSTATE, SRCSTATE> factory, Map<SRCSTATE, DSTSTATE> src2dst) {
 		DSTSTATE dst = src2dst.get(src);
 		if (dst != null)
 			return dst;
@@ -196,9 +196,10 @@ public class NfaUtil {
 		return dst;
 	}
 
-	public <SRCSTATE, DSTSTATE> Nfa<DSTSTATE> create(Nfa<SRCSTATE> source, NfaFactory<DSTSTATE, SRCSTATE> factory) {
+	public <SRCSTATE, DSTSTATE, NFA extends Nfa<DSTSTATE>> NFA create(Nfa<SRCSTATE> source,
+			NfaFactory<NFA, DSTSTATE, SRCSTATE> factory) {
 		Map<SRCSTATE, DSTSTATE> src2dst = Maps.newHashMap();
-		Nfa<DSTSTATE> result = factory.createNfa(source.getStart(), source.getStop());
+		NFA result = factory.create(source.getStart(), source.getStop());
 		src2dst.put(source.getStop(), result.getStop());
 		src2dst.put(source.getStart(), result.getStart());
 		List<DSTSTATE> dstFollower = Lists.newArrayList();
@@ -208,16 +209,18 @@ public class NfaUtil {
 		return result;
 	}
 
-	public <S, E, T> Nfa<S> create(Production<E, T> production, FollowerFunction<E> ff, NfaFactory<S, ? super T> factory) {
+	public <S, E, T, NFA extends Nfa<S>> NFA create(Production<E, T> production, FollowerFunction<E> ff,
+			NfaFactory<NFA, S, ? super T> factory) {
 		Map<E, S> states = Maps.newHashMap();
-		Nfa<S> nfa = factory.createNfa(null, null);
+		NFA nfa = factory.create(null, null);
 		states.put(null, nfa.getStop());
 		create(production, nfa, nfa.getStart(), ff.getStarts(production.getRoot()), ff, factory, states);
 		return nfa;
 	}
 
-	protected <S, E, T> void create(Production<E, T> production, Nfa<S> nfa, S state, Iterable<E> followerElements,
-			FollowerFunction<E> followerFunc, NfaFactory<S, ? super T> factory, Map<E, S> ele2state) {
+	protected <S, E, T, NFA extends Nfa<S>> void create(Production<E, T> production, NFA nfa, S state,
+			Iterable<E> followerElements, FollowerFunction<E> followerFunc, NfaFactory<NFA, S, ? super T> factory,
+			Map<E, S> ele2state) {
 		List<S> sfollower = Lists.newArrayList();
 		for (E follower : followerElements) {
 			S fs = ele2state.get(follower);
