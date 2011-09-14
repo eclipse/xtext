@@ -8,6 +8,7 @@
 package org.eclipse.xtext.util.formallang;
 
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Stack;
 import java.util.regex.Matcher;
@@ -15,54 +16,48 @@ import java.util.regex.Pattern;
 
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
-import org.eclipse.xtext.util.formallang.StringProduction.Element;
+import org.eclipse.xtext.util.formallang.StringProduction.ProdElement;
 
 import com.google.inject.internal.Lists;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class StringProduction implements Production<Element, String> {
+public class StringProduction implements Production<ProdElement, String> {
 
-	public class Element {
-		protected List<Element> children;
+	public static enum ElementType {
+		ALTERNATIVE, SEQUENCE, TOKEN, UNOREDERED
+	}
+
+	public class ProdElement {
+		protected List<ProdElement> children;
 		protected boolean many;
+		protected String name;
 		protected boolean optional;
-		protected Element parent;
+		protected ProdElement parent;
 		protected ElementType type;
 		protected String value;
 
-		protected Element(ElementType type) {
+		protected ProdElement(ElementType type) {
 			super();
 			this.type = type;
 			if (type != ElementType.TOKEN)
 				this.children = Lists.newArrayList();
 		}
 
-		protected Element(String value) {
-			this(ElementType.TOKEN);
-			this.value = value;
-		}
-
-		protected void addChild(Element ele) {
+		protected void addChild(ProdElement ele) {
 			children.add(ele);
 			ele.parent = this;
 		}
 
 		@Override
 		public String toString() {
-			//			switch (type) {
-			//				case TOKEN:
-			//					return "'" + value + "'";
-			//				default:
-			ProductionFormatter<Element, String> pf = new ProductionFormatter<StringProduction.Element, String>();
-			return pf.format(StringProduction.this, this);
-			//			}
+			if (value != null)
+				return "'" + value + "'";
+			if (name != null)
+				return name;
+			return new ProductionFormatter<ProdElement, String>().format(StringProduction.this, this);
 		}
-	}
-
-	public static enum ElementType {
-		ALTERNATIVE, SEQUENCE, TOKEN, UNOREDERED
 	}
 
 	protected enum Token {
@@ -86,7 +81,7 @@ public class StringProduction implements Production<Element, String> {
 
 	protected static final Pattern WS = Pattern.compile("^[\\s]+");
 
-	protected Element root;
+	protected ProdElement root;
 
 	public StringProduction() {
 		super();
@@ -96,35 +91,39 @@ public class StringProduction implements Production<Element, String> {
 		root = parseAlt(lex(production));
 	}
 
-	public Iterable<Element> getAlternativeChildren(Element ele) {
+	protected ProdElement createElement(ElementType type) {
+		return new ProdElement(type);
+	}
+
+	public Iterable<ProdElement> getAlternativeChildren(ProdElement ele) {
 		return ele.type == ElementType.ALTERNATIVE ? ele.children : null;
 	}
 
-	public Element getParent(Element ele) {
+	public ProdElement getParent(ProdElement ele) {
 		return ele.parent;
 	}
 
-	public Element getRoot() {
+	public ProdElement getRoot() {
 		return root;
 	}
 
-	public Iterable<Element> getSequentialChildren(Element ele) {
+	public Iterable<ProdElement> getSequentialChildren(ProdElement ele) {
 		return ele.type == ElementType.SEQUENCE ? ele.children : null;
 	}
 
-	public String getToken(Element ele) {
+	public String getToken(ProdElement ele) {
 		return ele.type == ElementType.TOKEN ? ele.value : null;
 	}
 
-	public Iterable<Element> getUnorderedChildren(Element ele) {
+	public Iterable<ProdElement> getUnorderedChildren(ProdElement ele) {
 		return ele.type == ElementType.UNOREDERED ? ele.children : null;
 	}
 
-	public boolean isMany(Element ele) {
+	public boolean isMany(ProdElement ele) {
 		return ele.many;
 	}
 
-	public boolean isOptional(Element ele) {
+	public boolean isOptional(ProdElement ele) {
 		return ele.optional;
 	}
 
@@ -155,14 +154,14 @@ public class StringProduction implements Production<Element, String> {
 		return result;
 	}
 
-	protected Element parseAlt(Stack<Pair<Token, String>> tokens) {
-		Element first = parseUnordered(tokens);
+	protected ProdElement parseAlt(Stack<Pair<Token, String>> tokens) {
+		ProdElement first = parseUnordered(tokens);
 		if (!tokens.isEmpty() && tokens.peek().getFirst() == Token.PIPE) {
-			Element uno = new Element(ElementType.ALTERNATIVE);
+			ProdElement uno = createElement(ElementType.ALTERNATIVE);
 			uno.addChild(first);
 			do {
 				tokens.pop();
-				Element next = parseUnordered(tokens);
+				ProdElement next = parseUnordered(tokens);
 				uno.addChild(next);
 			} while (!tokens.isEmpty() && tokens.peek().getFirst() == Token.PIPE);
 			return uno;
@@ -170,7 +169,7 @@ public class StringProduction implements Production<Element, String> {
 		return first;
 	}
 
-	protected void parseCardinality(Stack<Pair<Token, String>> tokens, Element ele) {
+	protected void parseCardinality(Stack<Pair<Token, String>> tokens, ProdElement ele) {
 		if (!tokens.isEmpty())
 			switch (tokens.peek().getFirst()) {
 				case QM:
@@ -190,11 +189,11 @@ public class StringProduction implements Production<Element, String> {
 			}
 	}
 
-	protected Element parsePrim(Stack<Pair<Token, String>> tokens) {
+	protected ProdElement parsePrim(Stack<Pair<Token, String>> tokens) {
 		Pair<Token, String> current = tokens.pop();
 		switch (current.getFirst()) {
 			case PL:
-				Element result1 = parseAlt(tokens);
+				ProdElement result1 = parseAlt(tokens);
 				if (tokens.peek().getFirst().equals(Token.PR))
 					tokens.pop();
 				else
@@ -202,37 +201,43 @@ public class StringProduction implements Production<Element, String> {
 				parseCardinality(tokens, result1);
 				return result1;
 			case STRING:
-				Element result2 = new Element(current.getSecond());
+				ProdElement result2 = createElement(ElementType.TOKEN);
+				result2.value = current.getSecond();
 				parseCardinality(tokens, result2);
 				return result2;
+			case ID:
+				ProdElement result3 = createElement(ElementType.TOKEN);
+				result3.name = current.getSecond();
+				parseCardinality(tokens, result3);
+				return result3;
 			default:
 				throw new RuntimeException("Unexpected token " + current.getFirst());
 		}
 	}
 
-	protected Element parseSeq(Stack<Pair<Token, String>> tokens) {
-		Element first = parsePrim(tokens);
-		if (!tokens.isEmpty() && (tokens.peek().getFirst() == Token.STRING || tokens.peek().getFirst() == Token.PL)) {
-			Element seq = new Element(ElementType.SEQUENCE);
+	protected ProdElement parseSeq(Stack<Pair<Token, String>> tokens) {
+		ProdElement first = parsePrim(tokens);
+		EnumSet<Token> followers = EnumSet.of(Token.STRING, Token.PL, Token.ID);
+		if (!tokens.isEmpty() && followers.contains(tokens.peek().getFirst())) {
+			ProdElement seq = createElement(ElementType.SEQUENCE);
 			seq.addChild(first);
 			do {
-				Element next = parsePrim(tokens);
+				ProdElement next = parsePrim(tokens);
 				seq.addChild(next);
-			} while (!tokens.isEmpty()
-					&& (tokens.peek().getFirst() == Token.STRING || tokens.peek().getFirst() == Token.PL));
+			} while (!tokens.isEmpty() && followers.contains(tokens.peek().getFirst()));
 			return seq;
 		}
 		return first;
 	}
 
-	protected Element parseUnordered(Stack<Pair<Token, String>> tokens) {
-		Element first = parseSeq(tokens);
+	protected ProdElement parseUnordered(Stack<Pair<Token, String>> tokens) {
+		ProdElement first = parseSeq(tokens);
 		if (!tokens.isEmpty() && tokens.peek().getFirst() == Token.AND) {
-			Element uno = new Element(ElementType.UNOREDERED);
+			ProdElement uno = createElement(ElementType.UNOREDERED);
 			uno.addChild(first);
 			do {
 				tokens.pop();
-				Element next = parseSeq(tokens);
+				ProdElement next = parseSeq(tokens);
 				uno.addChild(next);
 			} while (!tokens.isEmpty() && tokens.peek().getFirst() == Token.AND);
 			return uno;
@@ -242,7 +247,9 @@ public class StringProduction implements Production<Element, String> {
 
 	@Override
 	public String toString() {
-		return root == null ? "null" : root.toString();
+		if (root == null)
+			return "null";
+		return new ProductionFormatter<ProdElement, String>().format(this);
 	}
 
 }

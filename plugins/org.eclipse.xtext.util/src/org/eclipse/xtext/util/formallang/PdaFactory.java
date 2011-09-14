@@ -8,12 +8,16 @@
 package org.eclipse.xtext.util.formallang;
 
 /**
- * Context-Free Grammar
- * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface Cfg<ELEMENT, TOKEN> extends Production<ELEMENT, TOKEN> {
-	//	Iterable<ELEMENT> getAllRoots();
+public interface PdaFactory<STATE, STACKITEM, TOKEN> {
+	Pda<STATE, STACKITEM> createPda(TOKEN start, TOKEN stop);
 
-	ELEMENT getCall(ELEMENT ele);
+	STATE createPop(Pda<STATE, STACKITEM> pda, TOKEN token);
+
+	STATE createPush(Pda<STATE, STACKITEM> pda, TOKEN token);
+
+	STATE createState(Pda<STATE, STACKITEM> pda, TOKEN token);
+
+	void setFollowers(Pda<STATE, STACKITEM> pda, STATE owner, Iterable<STATE> followers);
 }

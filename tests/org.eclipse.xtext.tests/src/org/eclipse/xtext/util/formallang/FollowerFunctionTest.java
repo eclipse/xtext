@@ -11,7 +11,7 @@ import static org.eclipse.xtext.util.formallang.FollowerFunctionImpl.UnorderedSt
 import junit.framework.TestCase;
 
 import org.eclipse.xtext.util.formallang.FollowerFunctionImpl.Direction;
-import org.eclipse.xtext.util.formallang.StringProduction.Element;
+import org.eclipse.xtext.util.formallang.StringProduction.ProdElement;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -22,8 +22,8 @@ import com.google.common.collect.Iterables;
  */
 public class FollowerFunctionTest extends TestCase {
 
-	private class ElementFormatter implements Function<Element, String> {
-		public String apply(Element from) {
+	private class ElementFormatter implements Function<ProdElement, String> {
+		public String apply(ProdElement from) {
 			if (from == null)
 				return "null";
 			if (from.value != null)
@@ -32,20 +32,20 @@ public class FollowerFunctionTest extends TestCase {
 		}
 	}
 
-	private class FF extends FollowerFunctionImpl<Element, String> {
+	private class FF extends FollowerFunctionImpl<ProdElement, String> {
 
-		public FF(Production<Element, String> production) {
+		public FF(Production<ProdElement, String> production) {
 			super(production);
 		}
 
 		public String starts() {
-			Iterable<Element> followers = getStarts(production.getRoot());
+			Iterable<ProdElement> followers = getStarts(production.getRoot());
 			return Joiner.on(", ").join(Iterables.transform(followers, new ElementFormatter()));
 		}
 
 		public String followers(String token) {
-			Element ele = new ProductionUtil().findByToken(production, token);
-			Iterable<Element> followers = getFollowers(ele);
+			ProdElement ele = new ProductionUtil().findByToken(production, token);
+			Iterable<ProdElement> followers = getFollowers(ele);
 			return Joiner.on(", ").join(Iterables.transform(followers, new ElementFormatter()));
 		}
 
@@ -58,12 +58,12 @@ public class FollowerFunctionTest extends TestCase {
 	private StringProduction sp(String value) {
 		NfaUtil util = new NfaUtil();
 		StringProduction result = new StringProduction(value);
-		FollowerFunction<Element> l2r = new FollowerFunctionImpl<Element, String>(result).setDirection(Direction.L2R);
-		FollowerFunction<Element> r2l = new FollowerFunctionImpl<Element, String>(result).setDirection(Direction.R2L);
+		FollowerFunction<ProdElement> l2r = new FollowerFunctionImpl<ProdElement, String>(result).setDirection(Direction.L2R);
+		FollowerFunction<ProdElement> r2l = new FollowerFunctionImpl<ProdElement, String>(result).setDirection(Direction.R2L);
 		Nfa<String> nfa1 = util.create(result, l2r, new StringNfa.StringNfaFactory("(begin)", "(end)"));
 		Nfa<String> nfa2 = util.inverse(util.create(result, r2l, new StringNfa.StringNfaFactory("(end)", "(begin)")));
 		if (!util.equalsIgnoreOrder(nfa1, nfa2)) {
-			NfaFormatter fmt = new NfaFormatter();
+			NfaGraphFormatter fmt = new NfaGraphFormatter();
 			assertEquals(fmt.format(nfa1), fmt.format(nfa2));
 		}
 		return result;
