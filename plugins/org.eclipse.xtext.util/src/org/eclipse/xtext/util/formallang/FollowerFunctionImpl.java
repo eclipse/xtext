@@ -146,7 +146,8 @@ public class FollowerFunctionImpl<E, T> implements FollowerFunction<E> {
 	protected boolean filter(E ele) {
 		if (filter != null)
 			return filter.apply(ele);
-		return production.getToken(ele) != null;
+		return production.getSequentialChildren(ele) == null && production.getAlternativeChildren(ele) == null
+				&& production.getUnorderedChildren(ele) == null;
 	}
 
 	public Direction getDirection() {

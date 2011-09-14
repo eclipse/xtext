@@ -13,8 +13,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.common.base.Function;
+import com.google.common.base.Functions;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.internal.Join;
@@ -141,6 +144,62 @@ public class PdaUtil {
 
 	public <S, P> boolean canReach(Pda<S, P> pda, S state, Iterator<P> stack, Predicate<S> matches, Predicate<S> canPass) {
 		return distanceTo(pda, Collections.singleton(state), stack, matches, canPass) != UNREACHABLE;
+	}
+
+	public <S, P, E, T> Pda<S, P> create(Cfg<E, T> cfg, FollowerFunction<E> ff, PdaFactory<S, P, ? super E> fact) {
+		return create(cfg, ff, Functions.<E> identity(), fact);
+	}
+
+	public <S, P, E, T1, T2> Pda<S, P> create(Cfg<E, T1> cfg, FollowerFunction<E> ff, Function<E, T2> element2token,
+			PdaFactory<S, P, ? super T2> fact) {
+		Pda<S, P> pda = fact.createPda(null, null);
+		Map<E, S> states = Maps.newHashMap();
+		Map<E, S> stops = Maps.newHashMap();
+		Multimap<E, E> callers = new CfgUtil().getCallers(cfg);
+		create(cfg, pda, pda.getStart(), cfg.getRoot(), ff.getStarts(cfg.getRoot()), true, ff, element2token, fact,
+				states, stops, callers);
+		return pda;
+	}
+
+	protected <S, P, E, T1, T2> void create(Cfg<E, T1> cfg, Pda<S, P> pda, S state, E ele,
+			Iterable<E> followerElements, boolean canEnter, FollowerFunction<E> ff, Function<E, T2> tokens,
+			PdaFactory<S, P, ? super T2> fact, Map<E, S> states, Map<E, S> stops, Multimap<E, E> callers) {
+		List<S> followerStates = Lists.newArrayList();
+		for (E fol : followerElements) {
+			E e;
+			if (fol == null) {
+				E root = new ProductionUtil().getRoot(cfg, ele);
+				if (root == cfg.getRoot())
+					followerStates.add(pda.getStop());
+				for (E c : callers.get(root)) {
+					S s = stops.get(c);
+					if (s == null) {
+						s = fact.createPop(pda, tokens.apply(c));
+						stops.put(c, s);
+						create(cfg, pda, s, c, ff.getFollowers(c), false, ff, tokens, fact, states, stops, callers);
+					}
+					followerStates.add(s);
+				}
+			} else if (canEnter && (e = cfg.getCall(fol)) != null) {
+				S s = states.get(fol);
+				if (s == null) {
+					s = fact.createPush(pda, tokens.apply(fol));
+					states.put(fol, s);
+					create(cfg, pda, s, e, ff.getStarts(e), true, ff, tokens, fact, states, stops, callers);
+				}
+				followerStates.add(s);
+			} else {
+				S s = states.get(fol);
+				if (s == null) {
+					s = fact.createState(pda, tokens.apply(fol));
+					states.put(fol, s);
+					create(cfg, pda, s, fol, ff.getFollowers(fol), true, ff, tokens, fact, states, stops, callers);
+				}
+				followerStates.add(s);
+			}
+
+		}
+		fact.setFollowers(pda, state, followerStates);
 	}
 
 	protected <T> StackItem<T> createStack(Iterator<T> stack) {

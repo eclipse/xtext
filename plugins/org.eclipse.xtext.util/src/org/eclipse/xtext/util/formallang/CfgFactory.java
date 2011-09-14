@@ -8,12 +8,11 @@
 package org.eclipse.xtext.util.formallang;
 
 /**
- * Context-Free Grammar
- * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface Cfg<ELEMENT, TOKEN> extends Production<ELEMENT, TOKEN> {
-	//	Iterable<ELEMENT> getAllRoots();
+public interface CfgFactory<ELEMENT, TOKEN> extends ProductionFactory<ELEMENT, TOKEN> {
 
-	ELEMENT getCall(ELEMENT ele);
+	ELEMENT createForCall(boolean many, boolean optional);
+
+	void setCallTarget(ELEMENT call, ELEMENT target);
 }

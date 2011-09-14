@@ -55,7 +55,7 @@ start -> val1=ID -> val2=ID -> val3+=ID -> val4+=ID -> stop
               '----------------^ '-^ |      '-^         ^
                                      '------------------'  
  */
-public class NfaFormatter {
+public class NfaGraphFormatter {
 
 	protected static class Canvas {
 		protected List<StringBuffer> document = Lists.newArrayList();

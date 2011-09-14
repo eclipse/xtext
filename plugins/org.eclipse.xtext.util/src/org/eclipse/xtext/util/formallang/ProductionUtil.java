@@ -60,6 +60,21 @@ public class ProductionUtil {
 		return null;
 	}
 
+	public <E, T> List<E> findAll(Production<E, T> production, E element, Predicate<E> matches) {
+		List<E> result = Lists.newArrayList();
+		findAll(production, element, matches, result);
+		return result;
+	}
+
+	protected <E, T> void findAll(Production<E, T> production, E element, Predicate<E> matches, List<E> result) {
+		if (matches.apply(element))
+			result.add(element);
+		Iterable<E> children = getChildren(production, element);
+		if (children != null)
+			for (E child : children)
+				findAll(production, child, matches, result);
+	}
+
 	public <E, T> E find(Production<E, T> production, Predicate<E> matches) {
 		return find(production, production.getRoot(), matches);
 	}
@@ -79,6 +94,30 @@ public class ProductionUtil {
 
 	public <E, T> E findByToken(final Production<E, T> production, final T matches) {
 		return findByToken(production, Predicates.equalTo(matches));
+	}
+
+	protected <E, T> void getAllChildren(Production<E, T> production, E element, List<E> result) {
+		result.add(element);
+		Iterable<E> children = getChildren(production, element);
+		if (children != null)
+			for (E child : children)
+				getAllChildren(production, child, result);
+	}
+
+	public <E, T> List<E> getAllChildren(Production<E, T> production, E element) {
+		List<E> result = Lists.newArrayList();
+		getAllChildren(production, element, result);
+		return result;
+	}
+
+	public <E, T> E getRoot(Production<E, T> prod, E element) {
+		E current = element;
+		E parent = prod.getParent(current);
+		while (parent != null) {
+			current = parent;
+			parent = prod.getParent(current);
+		}
+		return current;
 	}
 
 	public <E, T> Iterable<E> getChildren(Production<E, T> production, E element) {
