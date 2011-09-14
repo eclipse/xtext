@@ -24,6 +24,7 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -165,9 +166,13 @@ public class Xtend2TypeProvider extends XbaseWithAnnotationsTypeProvider {
 	}
 	
 	protected JvmTypeReference _typeForIdentifiable(XtendClass clazz, boolean rawType) {
-		JvmParameterizedTypeReference typeReference = getTypesFactory().createJvmParameterizedTypeReference();
-		typeReference.setType(xtend2jvmAssociations.getInferredType(clazz));
-		return typeReference;
+		JvmType type = xtend2jvmAssociations.getInferredType(clazz);
+		if (type != null) {
+			JvmParameterizedTypeReference typeReference = getTypesFactory().createJvmParameterizedTypeReference();
+			typeReference.setType(type);
+			return typeReference;
+		}
+		return null;
 	}
 	
 	protected JvmTypeReference _typeForIdentifiable(XtendClassSuperCallReferable referable, boolean rawType) {

@@ -191,10 +191,12 @@ public class Xtend2Compiler extends XbaseCompiler {
 
 	protected void generateDispatchMethods(XtendClass obj, IAppendable appendable) {
 		JvmGenericType type = associations.getInferredType(obj);
-		Multimap<Pair<String, Integer>, JvmOperation> dispatchMethods = dispatchingSupport.getDispatchMethods(type);
-		for (final Pair<String, Integer> dispatchMethod : dispatchMethods.keySet()) {
-			JvmOperation jvmOperation = dispatchingSupport.findSyntheticDispatchMethod(obj, dispatchMethod);
-			generateDispatchMethod(jvmOperation, dispatchMethods.get(dispatchMethod), appendable);
+		if (type != null) {
+			Multimap<Pair<String, Integer>, JvmOperation> dispatchMethods = dispatchingSupport.getDispatchMethods(type);
+			for (final Pair<String, Integer> dispatchMethod : dispatchMethods.keySet()) {
+				JvmOperation jvmOperation = dispatchingSupport.findSyntheticDispatchMethod(obj, dispatchMethod);
+				generateDispatchMethod(jvmOperation, dispatchMethods.get(dispatchMethod), appendable);
+			}
 		}
 	}
 
