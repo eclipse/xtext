@@ -154,7 +154,7 @@ public class XtextResource extends ResourceImpl {
 	protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
 		setEncodingFromOptions(options);
 		IParseResult result = parser.parse(new InputStreamReader(inputStream, getEncoding()));
-		updateInternalState(result);
+		updateInternalState(this.parseResult, result);
 	}
 
 	protected void setEncodingFromOptions(Map<?, ?> options) {
@@ -211,21 +211,33 @@ public class XtextResource extends ResourceImpl {
 			isUpdating = true;
 			IParseResult oldParseResult = parseResult;
 			ReplaceRegion replaceRegion = new ReplaceRegion(new TextRegion(offset, replacedTextLength), newText);
-			parseResult = parser.reparse(oldParseResult, replaceRegion);
-			if (oldParseResult.getRootASTElement() != null && oldParseResult.getRootASTElement() != parseResult.getRootASTElement()) {
-				unload(oldParseResult.getRootASTElement());
-				getContents().remove(oldParseResult.getRootASTElement());
-			}
-			updateInternalState(parseResult);
+			IParseResult newParseResult = parser.reparse(oldParseResult, replaceRegion);
+			updateInternalState(oldParseResult, newParseResult);
 		} finally {
 			isUpdating = false;
 		}
 	}
 
-	protected void updateInternalState(IParseResult parseResult) {
-		this.parseResult = parseResult;
+	/**
+	 * @param oldParseResult the previous parse result that should be detached if necessary.
+	 * @param newParseResult the current parse result that should be attached to the content of this resource
+	 * @since 2.1
+	 */
+	protected void updateInternalState(IParseResult oldParseResult, IParseResult newParseResult) {
+		if (oldParseResult != null && oldParseResult.getRootASTElement() != null && oldParseResult.getRootASTElement() != newParseResult.getRootASTElement()) {
+			EObject oldRootAstElement = oldParseResult.getRootASTElement();
+			if (oldRootAstElement != newParseResult.getRootASTElement()) {
+				unload(oldRootAstElement);
+				getContents().remove(oldRootAstElement);
+			}
+		}
+		updateInternalState(newParseResult);
+	}
+	
+	protected void updateInternalState(IParseResult newParseResult) {
+		this.parseResult = newParseResult;
 		if (parseResult.getRootASTElement() != null && !getContents().contains(parseResult.getRootASTElement()))
-			getContents().add(parseResult.getRootASTElement());
+			getContents().add(0, parseResult.getRootASTElement());
 		reattachModificationTracker(parseResult.getRootASTElement());
 		clearErrorsAndWarnings();
 		addSyntaxErrors();
