@@ -6,6 +6,7 @@ package org.eclipse.xtext.ui.codetemplates.ui;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
+import org.eclipse.xtext.resource.containers.IAllContainersState;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.ui.LexerUIBindings;
@@ -25,11 +26,16 @@ import org.eclipse.xtext.ui.codetemplates.validation.CodetemplatesJavaValidator;
 import org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider;
 import org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper;
 import org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor;
+import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
+import org.eclipse.xtext.ui.editor.model.ResourceForIEditorInputFactory;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.PreferenceStoreAccessor;
+import org.eclipse.xtext.ui.resource.IResourceSetProvider;
+import org.eclipse.xtext.ui.resource.SimpleResourceSetProvider;
+import org.eclipse.xtext.ui.shared.Access;
 
 import com.google.inject.Binder;
 import com.google.inject.Injector;
@@ -86,6 +92,21 @@ public class SingleCodetemplateUiModule extends org.eclipse.xtext.ui.codetemplat
 	
 	public Class<? extends IContentProposalProvider> bindIContentProposalProvider() {
 		return SingleCodetemplateProposalProvider.class;
+	}
+	
+	@Override
+	public Class<? extends IResourceForEditorInputFactory> bindIResourceForEditorInputFactory() {
+		return ResourceForIEditorInputFactory.class;
+	}
+
+	@Override
+	public Class<? extends IResourceSetProvider> bindIResourceSetProvider() {
+		return SimpleResourceSetProvider.class;
+	}
+
+	@Override
+	public Provider<IAllContainersState> provideIAllContainersState() {
+		return Access.getWorkspaceProjectsState();
 	}
 	
 	public Provider<PreferenceStoreAccessor> providePreferenceStoreAccessor() {
