@@ -49,12 +49,12 @@ public class DerivedStateAwareResource extends LazyLinkingResource {
 	}
 
 	@Override
-	protected void updateInternalState(IParseResult parseResult) {
+	protected void updateInternalState(IParseResult oldParseResult, IParseResult newParseResult) {
 		if (fullyInitialized) {
 			discardDerivedState();
 		}
 		fullyInitialized = false;
-		super.updateInternalState(parseResult);
+		super.updateInternalState(oldParseResult, newParseResult);
 	}
 
 	public void discardDerivedState() {
