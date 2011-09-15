@@ -2413,6 +2413,53 @@ public interface TypesPackage extends EPackage
 	int JVM_ENUM_ANNOTATION_VALUE_FEATURE_COUNT = JVM_ANNOTATION_VALUE_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmDelegateTypeReferenceImpl <em>Jvm Delegate Type Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmDelegateTypeReferenceImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmDelegateTypeReference()
+	 * @generated
+	 */
+	int JVM_DELEGATE_TYPE_REFERENCE = 45;
+
+	/**
+	 * The feature id for the '<em><b>Delegate</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_DELEGATE_TYPE_REFERENCE__DELEGATE = JVM_TYPE_REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Jvm Delegate Type Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_DELEGATE_TYPE_REFERENCE_FEATURE_COUNT = JVM_TYPE_REFERENCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmSpecializedTypeReferenceImpl <em>Jvm Specialized Type Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmSpecializedTypeReferenceImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmSpecializedTypeReference()
+	 * @generated
+	 */
+	int JVM_SPECIALIZED_TYPE_REFERENCE = 46;
+
+	/**
+	 * The number of structural features of the '<em>Jvm Specialized Type Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_SPECIALIZED_TYPE_REFERENCE_FEATURE_COUNT = JVM_TYPE_REFERENCE_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.JvmVisibility <em>Jvm Visibility</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2420,7 +2467,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmVisibility()
 	 * @generated
 	 */
-	int JVM_VISIBILITY = 45;
+	int JVM_VISIBILITY = 47;
 
 	/**
 	 * The meta object id for the '<em>Iterable</em>' data type.
@@ -2430,7 +2477,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getIterable()
 	 * @generated
 	 */
-	int ITERABLE = 46;
+	int ITERABLE = 48;
 
 
 	/**
@@ -3512,6 +3559,37 @@ public interface TypesPackage extends EPackage
 	EReference getJvmEnumAnnotationValue_Values();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmDelegateTypeReference <em>Jvm Delegate Type Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Jvm Delegate Type Reference</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmDelegateTypeReference
+	 * @generated
+	 */
+	EClass getJvmDelegateTypeReference();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.xtext.common.types.JvmDelegateTypeReference#getDelegate <em>Delegate</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Delegate</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmDelegateTypeReference#getDelegate()
+	 * @see #getJvmDelegateTypeReference()
+	 * @generated
+	 */
+	EReference getJvmDelegateTypeReference_Delegate();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmSpecializedTypeReference <em>Jvm Specialized Type Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Jvm Specialized Type Reference</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmSpecializedTypeReference
+	 * @generated
+	 */
+	EClass getJvmSpecializedTypeReference();
+
+	/**
 	 * Returns the meta object for enum '{@link org.eclipse.xtext.common.types.JvmVisibility <em>Jvm Visibility</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4462,6 +4540,34 @@ public interface TypesPackage extends EPackage
 		 * @generated
 		 */
 		EReference JVM_ENUM_ANNOTATION_VALUE__VALUES = eINSTANCE.getJvmEnumAnnotationValue_Values();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmDelegateTypeReferenceImpl <em>Jvm Delegate Type Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.common.types.impl.JvmDelegateTypeReferenceImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmDelegateTypeReference()
+		 * @generated
+		 */
+		EClass JVM_DELEGATE_TYPE_REFERENCE = eINSTANCE.getJvmDelegateTypeReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Delegate</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JVM_DELEGATE_TYPE_REFERENCE__DELEGATE = eINSTANCE.getJvmDelegateTypeReference_Delegate();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmSpecializedTypeReferenceImpl <em>Jvm Specialized Type Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.common.types.impl.JvmSpecializedTypeReferenceImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmSpecializedTypeReference()
+		 * @generated
+		 */
+		EClass JVM_SPECIALIZED_TYPE_REFERENCE = eINSTANCE.getJvmSpecializedTypeReference();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.JvmVisibility <em>Jvm Visibility</em>}' enum.

@@ -217,6 +217,11 @@ public class JvmExecutableItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.JVM_EXECUTABLE__EXCEPTIONS,
 				 TypesFactory.eINSTANCE.createJvmMultiTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_EXECUTABLE__EXCEPTIONS,
+				 TypesFactory.eINSTANCE.createJvmDelegateTypeReference()));
 	}
 
 }

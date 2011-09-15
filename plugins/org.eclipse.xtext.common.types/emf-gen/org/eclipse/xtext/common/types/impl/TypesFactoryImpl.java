@@ -102,6 +102,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 			case TypesPackage.JVM_TYPE_ANNOTATION_VALUE: return createJvmTypeAnnotationValue();
 			case TypesPackage.JVM_ANNOTATION_ANNOTATION_VALUE: return createJvmAnnotationAnnotationValue();
 			case TypesPackage.JVM_ENUM_ANNOTATION_VALUE: return createJvmEnumAnnotationValue();
+			case TypesPackage.JVM_DELEGATE_TYPE_REFERENCE: return createJvmDelegateTypeReference();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -495,6 +496,17 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	{
 		JvmEnumAnnotationValueImpl jvmEnumAnnotationValue = new JvmEnumAnnotationValueImpl();
 		return jvmEnumAnnotationValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JvmDelegateTypeReference createJvmDelegateTypeReference()
+	{
+		JvmDelegateTypeReferenceImpl jvmDelegateTypeReference = new JvmDelegateTypeReferenceImpl();
+		return jvmDelegateTypeReference;
 	}
 
 	/**

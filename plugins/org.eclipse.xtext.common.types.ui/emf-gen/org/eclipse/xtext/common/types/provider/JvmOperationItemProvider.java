@@ -270,6 +270,11 @@ public class JvmOperationItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(TypesPackage.Literals.JVM_OPERATION__RETURN_TYPE,
+				 TypesFactory.eINSTANCE.createJvmDelegateTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(TypesPackage.Literals.JVM_OPERATION__DEFAULT_VALUE,
 				 TypesFactory.eINSTANCE.createJvmIntAnnotationValue()));
 

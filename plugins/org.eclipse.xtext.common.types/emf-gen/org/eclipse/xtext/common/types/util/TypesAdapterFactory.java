@@ -303,6 +303,16 @@ public class TypesAdapterFactory extends AdapterFactoryImpl
 				return createJvmEnumAnnotationValueAdapter();
 			}
 			@Override
+			public Adapter caseJvmDelegateTypeReference(JvmDelegateTypeReference object)
+			{
+				return createJvmDelegateTypeReferenceAdapter();
+			}
+			@Override
+			public Adapter caseJvmSpecializedTypeReference(JvmSpecializedTypeReference object)
+			{
+				return createJvmSpecializedTypeReferenceAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object)
 			{
 				return createEObjectAdapter();
@@ -995,6 +1005,36 @@ public class TypesAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createJvmEnumAnnotationValueAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmDelegateTypeReference <em>Jvm Delegate Type Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.JvmDelegateTypeReference
+	 * @generated
+	 */
+	public Adapter createJvmDelegateTypeReferenceAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmSpecializedTypeReference <em>Jvm Specialized Type Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.JvmSpecializedTypeReference
+	 * @generated
+	 */
+	public Adapter createJvmSpecializedTypeReferenceAdapter()
 	{
 		return null;
 	}

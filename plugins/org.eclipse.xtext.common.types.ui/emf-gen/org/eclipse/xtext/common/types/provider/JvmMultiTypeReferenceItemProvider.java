@@ -208,6 +208,11 @@ public class JvmMultiTypeReferenceItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.JVM_MULTI_TYPE_REFERENCE__REFERENCES,
 				 TypesFactory.eINSTANCE.createJvmMultiTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_MULTI_TYPE_REFERENCE__REFERENCES,
+				 TypesFactory.eINSTANCE.createJvmDelegateTypeReference()));
 	}
 
 }

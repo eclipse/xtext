@@ -877,6 +877,33 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmDelegateTypeReference} instances.
+	 * <!-- begin-user-doc -->
+	 * @since 2.1
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected JvmDelegateTypeReferenceItemProvider jvmDelegateTypeReferenceItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmDelegateTypeReference}.
+	 * <!-- begin-user-doc -->
+	 * @since 2.1
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createJvmDelegateTypeReferenceAdapter()
+	{
+		if (jvmDelegateTypeReferenceItemProvider == null)
+		{
+			jvmDelegateTypeReferenceItemProvider = new JvmDelegateTypeReferenceItemProvider(this);
+		}
+
+		return jvmDelegateTypeReferenceItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1019,6 +1046,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 		if (jvmTypeAnnotationValueItemProvider != null) jvmTypeAnnotationValueItemProvider.dispose();
 		if (jvmAnnotationAnnotationValueItemProvider != null) jvmAnnotationAnnotationValueItemProvider.dispose();
 		if (jvmEnumAnnotationValueItemProvider != null) jvmEnumAnnotationValueItemProvider.dispose();
+		if (jvmDelegateTypeReferenceItemProvider != null) jvmDelegateTypeReferenceItemProvider.dispose();
 	}
 
 }

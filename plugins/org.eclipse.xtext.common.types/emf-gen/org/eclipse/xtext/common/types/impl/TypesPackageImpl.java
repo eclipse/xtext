@@ -32,6 +32,7 @@ import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmConstraintOwner;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmDoubleAnnotationValue;
 import org.eclipse.xtext.common.types.JvmEnumAnnotationValue;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
@@ -53,6 +54,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmShortAnnotationValue;
+import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.common.types.JvmStringAnnotationValue;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
@@ -389,6 +391,20 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * @generated
 	 */
 	private EClass jvmEnumAnnotationValueEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass jvmDelegateTypeReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass jvmSpecializedTypeReferenceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1492,6 +1508,36 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getJvmDelegateTypeReference()
+	{
+		return jvmDelegateTypeReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getJvmDelegateTypeReference_Delegate()
+	{
+		return (EReference)jvmDelegateTypeReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getJvmSpecializedTypeReference()
+	{
+		return jvmSpecializedTypeReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getJvmVisibility()
 	{
 		return jvmVisibilityEEnum;
@@ -1684,6 +1730,11 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		jvmEnumAnnotationValueEClass = createEClass(JVM_ENUM_ANNOTATION_VALUE);
 		createEReference(jvmEnumAnnotationValueEClass, JVM_ENUM_ANNOTATION_VALUE__VALUES);
 
+		jvmDelegateTypeReferenceEClass = createEClass(JVM_DELEGATE_TYPE_REFERENCE);
+		createEReference(jvmDelegateTypeReferenceEClass, JVM_DELEGATE_TYPE_REFERENCE__DELEGATE);
+
+		jvmSpecializedTypeReferenceEClass = createEClass(JVM_SPECIALIZED_TYPE_REFERENCE);
+
 		// Create enums
 		jvmVisibilityEEnum = createEEnum(JVM_VISIBILITY);
 
@@ -1766,6 +1817,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		jvmAnnotationAnnotationValueEClass.getESuperTypes().add(this.getJvmAnnotationValue());
 		jvmAnnotationAnnotationValueEClass.getESuperTypes().add(this.getJvmAnnotationTarget());
 		jvmEnumAnnotationValueEClass.getESuperTypes().add(this.getJvmAnnotationValue());
+		jvmDelegateTypeReferenceEClass.getESuperTypes().add(this.getJvmTypeReference());
+		jvmSpecializedTypeReferenceEClass.getESuperTypes().add(this.getJvmTypeReference());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(jvmIdentifiableElementEClass, JvmIdentifiableElement.class, "JvmIdentifiableElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1997,6 +2050,13 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 
 		initEClass(jvmEnumAnnotationValueEClass, JvmEnumAnnotationValue.class, "JvmEnumAnnotationValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getJvmEnumAnnotationValue_Values(), this.getJvmEnumerationLiteral(), null, "values", null, 0, -1, JvmEnumAnnotationValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(jvmDelegateTypeReferenceEClass, JvmDelegateTypeReference.class, "JvmDelegateTypeReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getJvmDelegateTypeReference_Delegate(), this.getJvmTypeReference(), null, "delegate", null, 0, 1, JvmDelegateTypeReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(jvmSpecializedTypeReferenceEClass, JvmSpecializedTypeReference.class, "JvmSpecializedTypeReference", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		addEOperation(jvmSpecializedTypeReferenceEClass, this.getJvmTypeReference(), "getEquivalentJvmTypeReferences", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(jvmVisibilityEEnum, JvmVisibility.class, "JvmVisibility");

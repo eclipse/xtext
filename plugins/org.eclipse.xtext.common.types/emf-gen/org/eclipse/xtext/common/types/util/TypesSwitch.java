@@ -503,6 +503,22 @@ public class TypesSwitch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case TypesPackage.JVM_DELEGATE_TYPE_REFERENCE:
+			{
+				JvmDelegateTypeReference jvmDelegateTypeReference = (JvmDelegateTypeReference)theEObject;
+				T result = caseJvmDelegateTypeReference(jvmDelegateTypeReference);
+				if (result == null) result = caseJvmTypeReference(jvmDelegateTypeReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypesPackage.JVM_SPECIALIZED_TYPE_REFERENCE:
+			{
+				JvmSpecializedTypeReference jvmSpecializedTypeReference = (JvmSpecializedTypeReference)theEObject;
+				T result = caseJvmSpecializedTypeReference(jvmSpecializedTypeReference);
+				if (result == null) result = caseJvmTypeReference(jvmSpecializedTypeReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -1223,6 +1239,38 @@ public class TypesSwitch<T>
 	 * @generated
 	 */
 	public T caseJvmEnumAnnotationValue(JvmEnumAnnotationValue object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Delegate Type Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Delegate Type Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseJvmDelegateTypeReference(JvmDelegateTypeReference object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Specialized Type Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Specialized Type Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseJvmSpecializedTypeReference(JvmSpecializedTypeReference object)
 	{
 		return null;
 	}

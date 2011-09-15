@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.common.types" version="2">
+    <resource path="META-INF/MANIFEST.MF">
+        <filter comment="The affected interface is not intended to be implemented by clients" id="923795461">
+            <message_arguments>
+                <message_argument value="2.1.0"/>
+                <message_argument value="2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="emf-gen/org/eclipse/xtext/common/types/JvmArrayType.java" type="org.eclipse.xtext.common.types.JvmArrayType">
         <filter comment="Refactored array types" id="405901410">
             <message_arguments>

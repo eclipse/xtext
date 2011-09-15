@@ -183,6 +183,11 @@ public class JvmGenericArrayTypeReferenceItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.JVM_GENERIC_ARRAY_TYPE_REFERENCE__COMPONENT_TYPE,
 				 TypesFactory.eINSTANCE.createJvmMultiTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_GENERIC_ARRAY_TYPE_REFERENCE__COMPONENT_TYPE,
+				 TypesFactory.eINSTANCE.createJvmDelegateTypeReference()));
 	}
 
 }
