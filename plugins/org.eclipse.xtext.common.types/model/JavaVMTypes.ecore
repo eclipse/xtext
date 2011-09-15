@@ -283,4 +283,11 @@
   <eClassifiers xsi:type="ecore:EDataType" name="Iterable" instanceClassName="java.lang.Iterable">
     <eTypeParameters name="E"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JvmDelegateTypeReference" eSuperTypes="#//JvmTypeReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="delegate" eType="#//JvmTypeReference"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JvmSpecializedTypeReference" abstract="true"
+      eSuperTypes="#//JvmTypeReference">
+    <eOperations name="getEquivalentJvmTypeReferences" upperBound="-1" eType="#//JvmTypeReference"/>
+  </eClassifiers>
 </ecore:EPackage>
