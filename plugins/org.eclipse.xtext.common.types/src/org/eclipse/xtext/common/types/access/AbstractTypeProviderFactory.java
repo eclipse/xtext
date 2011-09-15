@@ -19,7 +19,7 @@ import com.google.inject.Inject;
  */
 public abstract class AbstractTypeProviderFactory implements IJvmTypeProvider.Factory {
 
-	@Inject
+	@Inject(optional = true)
 	private IndexedJvmTypeAccess indexedJvmTypeAccess;
 	
 	public IJvmTypeProvider findTypeProvider(ResourceSet resourceSet) {
