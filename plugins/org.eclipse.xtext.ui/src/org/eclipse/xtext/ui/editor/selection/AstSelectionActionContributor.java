@@ -15,20 +15,24 @@ import com.google.inject.Inject;
 /**
  * @author Michael Clay - Initial contribution and API
  */
-public class SelectionActionContributor implements IActionContributor {
-	private INodeSelectionProvider nodeSelectionProvider;
+public class AstSelectionActionContributor implements IActionContributor {
+	private AstSelectionProvider astSelectionProvider;
+
+	public AstSelectionProvider getAstSelectionProvider() {
+		return astSelectionProvider;
+	}
 
 	@Inject
-	public void setNodeSelectionProvider(INodeSelectionProvider nodeSelectionProvider) {
-		this.nodeSelectionProvider = nodeSelectionProvider;
+	public void setAstSelectionProvider(AstSelectionProvider astSelectionProvider) {
+		this.astSelectionProvider = astSelectionProvider;
 	}
 
 	public void contributeActions(XtextEditor xtextEditor) {
-		nodeSelectionProvider.initialize(xtextEditor);
+		astSelectionProvider.initialize(xtextEditor);
 	}
 
 	public void editorDisposed(XtextEditor editor) {
-		nodeSelectionProvider.dispose();
+		astSelectionProvider.dispose();
 	}
 
 }

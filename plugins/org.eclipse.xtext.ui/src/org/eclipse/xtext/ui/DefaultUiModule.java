@@ -123,7 +123,7 @@ public class DefaultUiModule extends AbstractGenericModule {
 		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(Names.named("bracketMatcherPrefernceInitializer")) //$NON-NLS-1$
 				.to(org.eclipse.xtext.ui.editor.bracketmatching.BracketMatchingPreferencesInitializer.class);
 		binder.bind(IActionContributor.class).annotatedWith(Names.named("selectionActionGroup")).to( //$NON-NLS-1$
-				org.eclipse.xtext.ui.editor.selection.SelectionActionContributor.class);
+				org.eclipse.xtext.ui.editor.selection.AstSelectionActionContributor.class);
 	}
 
 	public Class<? extends IImageHelper> bindIImageHelper() {

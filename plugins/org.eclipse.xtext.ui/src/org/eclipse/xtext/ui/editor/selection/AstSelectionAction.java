@@ -19,29 +19,23 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 /**
  * @author Michael Clay - Initial contribution and API
  */
-public class NodeSelectionAction extends Action {
+public abstract class AstSelectionAction extends Action {
 	private XtextEditor xtextEditor;
-	private INodeSelectionProvider nodeSelectionProvider;
 
 	public XtextEditor getXtextEditor() {
 		return xtextEditor;
 	}
 
-	public INodeSelectionProvider getNodeSelectionProvider() {
-		return nodeSelectionProvider;
-	}
-
-	public NodeSelectionAction(String text, XtextEditor xtextEditor, INodeSelectionProvider nodeSelectionProvider) {
+	public AstSelectionAction(String text, XtextEditor xtextEditor) {
 		super(text);
 		Assert.isNotNull(xtextEditor);
-		Assert.isNotNull(nodeSelectionProvider);
 		this.xtextEditor = xtextEditor;
-		this.nodeSelectionProvider = nodeSelectionProvider;
 	}
 
 	@Override
 	public void run() {
-		ITextRegion currentEditorSelection = getEditorSelection();
+		ITextSelection selection = (ITextSelection) xtextEditor.getSelectionProvider().getSelection();
+		ITextRegion currentEditorSelection = new TextRegion(selection.getOffset(), selection.getLength());
 		ITextRegion nextSelection = xtextEditor.getDocument().readOnly(createTextSelectionWork(currentEditorSelection));
 		if (nextSelection == null || nextSelection == ITextRegion.EMPTY_REGION
 				|| nextSelection.equals(currentEditorSelection)) {
@@ -53,21 +47,15 @@ public class NodeSelectionAction extends Action {
 	protected IUnitOfWork<ITextRegion, XtextResource> createTextSelectionWork(final ITextRegion selection) {
 		return new IUnitOfWork<ITextRegion, XtextResource>() {
 			public ITextRegion exec(XtextResource xtextResource) throws Exception {
-				return select(xtextResource, selection);
+				ITextRegion result = selection;
+				if (xtextResource.getParseResult() != null && xtextResource.getParseResult().getRootNode() != null) {
+					result = internalSelect(xtextResource, selection);
+				}
+				return result;
 			}
 		};
 	}
+	
+	protected abstract ITextRegion internalSelect(XtextResource xtextResource, ITextRegion textRegion);
 
-	protected ITextRegion select(XtextResource xtextResource, ITextRegion textRegion) {
-		ITextRegion result = textRegion;
-		if (xtextResource.getParseResult() != null && xtextResource.getParseResult().getRootNode() != null) {
-			result = nodeSelectionProvider.select(getActionDefinitionId(), xtextResource, textRegion);
-		}
-		return result;
-	}
-
-	private ITextRegion getEditorSelection() {
-		ITextSelection selection = (ITextSelection) xtextEditor.getSelectionProvider().getSelection();
-		return new TextRegion(selection.getOffset(), selection.getLength());
-	}
 }
