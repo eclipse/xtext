@@ -23,7 +23,7 @@ public abstract class AbstractParticipatingBuilderTest extends AbstractBuilderTe
 	private DelegatingBuilderParticipant participant;
 	
 	private boolean logging = false;
-	private int invocationCount = 0;
+	protected int invocationCount = 0;
 	private IBuildContext context;
 	private OperationCanceledException cancelWith;
 	
