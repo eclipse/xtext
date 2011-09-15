@@ -23,6 +23,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.Job;
@@ -42,6 +43,7 @@ import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Holger Schill
  */
 public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 
@@ -92,10 +94,10 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 									toUpdate.add(project);
 								}
 								if ((delta.getKind() & IResourceDelta.CHANGED) != 0 && project.isOpen()) {
-									if ((delta.getFlags() & IResourceDelta.DESCRIPTION) != 0) {
-										if (XtextProjectHelper.hasNature(project))
+									if ((delta.getFlags() & IResourceDelta.DESCRIPTION) != 0) {	
+										if ((delta.findMember(new Path(".project")) != null)  && XtextProjectHelper.hasNature(project))
 											toUpdate.add(project);
-										else {
+										else if(!XtextProjectHelper.hasNature(project)){
 											scheduleRemoveProjectJob(project);
 										}
 									}
