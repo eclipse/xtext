@@ -7,7 +7,8 @@ package org.eclipse.xtext.xtype;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
 /**
@@ -20,6 +21,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtype.XFunctionTypeRef#getParamTypes <em>Param Types</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtype.XFunctionTypeRef#getReturnType <em>Return Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtype.XFunctionTypeRef#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -27,7 +29,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  * @model
  * @generated
  */
-public interface XFunctionTypeRef extends JvmParameterizedTypeReference
+public interface XFunctionTypeRef extends JvmSpecializedTypeReference
 {
 	/**
 	 * Returns the value of the '<em><b>Param Types</b></em>' containment reference list.
@@ -70,5 +72,31 @@ public interface XFunctionTypeRef extends JvmParameterizedTypeReference
 	 * @generated
 	 */
 	void setReturnType(JvmTypeReference value);
+
+	/**
+	 * Returns the value of the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Type</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Type</em>' reference.
+	 * @see #setType(JvmType)
+	 * @see org.eclipse.xtext.xtype.XtypePackage#getXFunctionTypeRef_Type()
+	 * @model
+	 * @generated
+	 */
+	JvmType getType();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xtype.XFunctionTypeRef#getType <em>Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Type</em>' reference.
+	 * @see #getType()
+	 * @generated
+	 */
+	void setType(JvmType value);
 
 } // XFunctionTypeRef

@@ -12,7 +12,7 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
 import org.eclipse.xtext.xtype.*;
@@ -86,14 +86,9 @@ public class XtypeAdapterFactory extends AdapterFactoryImpl
 				return createXFunctionTypeRefAdapter();
 			}
 			@Override
-			public Adapter caseXSynonymTypeReference(XSynonymTypeReference object)
+			public Adapter caseXComputedTypeReference(XComputedTypeReference object)
 			{
-				return createXSynonymTypeReferenceAdapter();
-			}
-			@Override
-			public Adapter caseXDelegateTypeReference(XDelegateTypeReference object)
-			{
-				return createXDelegateTypeReferenceAdapter();
+				return createXComputedTypeReferenceAdapter();
 			}
 			@Override
 			public Adapter caseJvmTypeReference(JvmTypeReference object)
@@ -101,9 +96,9 @@ public class XtypeAdapterFactory extends AdapterFactoryImpl
 				return createJvmTypeReferenceAdapter();
 			}
 			@Override
-			public Adapter caseJvmParameterizedTypeReference(JvmParameterizedTypeReference object)
+			public Adapter caseJvmSpecializedTypeReference(JvmSpecializedTypeReference object)
 			{
-				return createJvmParameterizedTypeReferenceAdapter();
+				return createJvmSpecializedTypeReferenceAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object)
@@ -143,31 +138,16 @@ public class XtypeAdapterFactory extends AdapterFactoryImpl
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtype.XSynonymTypeReference <em>XSynonym Type Reference</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtype.XComputedTypeReference <em>XComputed Type Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xtype.XSynonymTypeReference
+	 * @see org.eclipse.xtext.xtype.XComputedTypeReference
 	 * @generated
 	 */
-	public Adapter createXSynonymTypeReferenceAdapter()
-	{
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtype.XDelegateTypeReference <em>XDelegate Type Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xtype.XDelegateTypeReference
-	 * @generated
-	 */
-	public Adapter createXDelegateTypeReferenceAdapter()
+	public Adapter createXComputedTypeReferenceAdapter()
 	{
 		return null;
 	}
@@ -188,16 +168,16 @@ public class XtypeAdapterFactory extends AdapterFactoryImpl
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmParameterizedTypeReference <em>Jvm Parameterized Type Reference</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmSpecializedTypeReference <em>Jvm Specialized Type Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.common.types.JvmParameterizedTypeReference
+	 * @see org.eclipse.xtext.common.types.JvmSpecializedTypeReference
 	 * @generated
 	 */
-	public Adapter createJvmParameterizedTypeReferenceAdapter()
+	public Adapter createJvmSpecializedTypeReferenceAdapter()
 	{
 		return null;
 	}

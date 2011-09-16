@@ -3,21 +3,18 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="xtype"
     nsURI="http://www.eclipse.org/xtext/xbase/Xtype" nsPrefix="xtype">
-  <eClassifiers xsi:type="ecore:EClass" name="XFunctionTypeRef" eSuperTypes="../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmParameterizedTypeReference">
+  <eClassifiers xsi:type="ecore:EClass" name="XFunctionTypeRef" eSuperTypes="../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmSpecializedTypeReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="paramTypes" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
         containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="XSynonymTypeReference" eSuperTypes="../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference">
-    <eOperations name="getPrimaryType" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="synonymes" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
-        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmType"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="XDelegateTypeReference" eSuperTypes="../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="delegate" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="XComputedTypeReference" eSuperTypes="../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmSpecializedTypeReference">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeProvider" eType="#//IJvmTypeReferenceProvider"
+        transient="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="IJvmTypeReferenceProvider" instanceClassName="org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider"
+      serializable="false"/>
 </ecore:EPackage>

@@ -35,22 +35,13 @@ public interface XtypeFactory extends EFactory
 	XFunctionTypeRef createXFunctionTypeRef();
 
 	/**
-	 * Returns a new object of class '<em>XSynonym Type Reference</em>'.
+	 * Returns a new object of class '<em>XComputed Type Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>XSynonym Type Reference</em>'.
+	 * @return a new object of class '<em>XComputed Type Reference</em>'.
 	 * @generated
 	 */
-	XSynonymTypeReference createXSynonymTypeReference();
-
-	/**
-	 * Returns a new object of class '<em>XDelegate Type Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>XDelegate Type Reference</em>'.
-	 * @generated
-	 */
-	XDelegateTypeReference createXDelegateTypeReference();
+	XComputedTypeReference createXComputedTypeReference();
 
 	/**
 	 * Returns the package supported by this factory.

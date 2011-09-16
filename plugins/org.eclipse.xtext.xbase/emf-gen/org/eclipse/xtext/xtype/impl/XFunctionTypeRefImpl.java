@@ -20,9 +20,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
-import org.eclipse.xtext.common.types.impl.JvmParameterizedTypeReferenceImplCustom;
+import org.eclipse.xtext.common.types.impl.JvmSpecializedTypeReferenceImplCustom;
 
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XtypePackage;
@@ -36,12 +37,13 @@ import org.eclipse.xtext.xtype.XtypePackage;
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtype.impl.XFunctionTypeRefImpl#getParamTypes <em>Param Types</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtype.impl.XFunctionTypeRefImpl#getReturnType <em>Return Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtype.impl.XFunctionTypeRefImpl#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class XFunctionTypeRefImpl extends JvmParameterizedTypeReferenceImplCustom implements XFunctionTypeRef
+public class XFunctionTypeRefImpl extends JvmSpecializedTypeReferenceImplCustom implements XFunctionTypeRef
 {
 	/**
 	 * The cached value of the '{@link #getParamTypes() <em>Param Types</em>}' containment reference list.
@@ -62,6 +64,16 @@ public class XFunctionTypeRefImpl extends JvmParameterizedTypeReferenceImplCusto
 	 * @ordered
 	 */
 	protected JvmTypeReference returnType;
+
+	/**
+	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected JvmType type;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -151,6 +163,49 @@ public class XFunctionTypeRefImpl extends JvmParameterizedTypeReferenceImplCusto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public JvmType getType()
+	{
+		if (type != null && type.eIsProxy())
+		{
+			InternalEObject oldType = (InternalEObject)type;
+			type = (JvmType)eResolveProxy(oldType);
+			if (type != oldType)
+			{
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, XtypePackage.XFUNCTION_TYPE_REF__TYPE, oldType, type));
+			}
+		}
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JvmType basicGetType()
+	{
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setType(JvmType newType)
+	{
+		JvmType oldType = type;
+		type = newType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtypePackage.XFUNCTION_TYPE_REF__TYPE, oldType, type));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -178,6 +233,9 @@ public class XFunctionTypeRefImpl extends JvmParameterizedTypeReferenceImplCusto
 				return getParamTypes();
 			case XtypePackage.XFUNCTION_TYPE_REF__RETURN_TYPE:
 				return getReturnType();
+			case XtypePackage.XFUNCTION_TYPE_REF__TYPE:
+				if (resolve) return getType();
+				return basicGetType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -200,6 +258,9 @@ public class XFunctionTypeRefImpl extends JvmParameterizedTypeReferenceImplCusto
 			case XtypePackage.XFUNCTION_TYPE_REF__RETURN_TYPE:
 				setReturnType((JvmTypeReference)newValue);
 				return;
+			case XtypePackage.XFUNCTION_TYPE_REF__TYPE:
+				setType((JvmType)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -220,6 +281,9 @@ public class XFunctionTypeRefImpl extends JvmParameterizedTypeReferenceImplCusto
 			case XtypePackage.XFUNCTION_TYPE_REF__RETURN_TYPE:
 				setReturnType((JvmTypeReference)null);
 				return;
+			case XtypePackage.XFUNCTION_TYPE_REF__TYPE:
+				setType((JvmType)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -238,6 +302,8 @@ public class XFunctionTypeRefImpl extends JvmParameterizedTypeReferenceImplCusto
 				return paramTypes != null && !paramTypes.isEmpty();
 			case XtypePackage.XFUNCTION_TYPE_REF__RETURN_TYPE:
 				return returnType != null;
+			case XtypePackage.XFUNCTION_TYPE_REF__TYPE:
+				return type != null;
 		}
 		return super.eIsSet(featureID);
 	}

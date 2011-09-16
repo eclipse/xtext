@@ -10,7 +10,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
 import org.eclipse.xtext.xtype.*;
@@ -102,24 +102,17 @@ public class XtypeSwitch<T>
 			{
 				XFunctionTypeRef xFunctionTypeRef = (XFunctionTypeRef)theEObject;
 				T result = caseXFunctionTypeRef(xFunctionTypeRef);
-				if (result == null) result = caseJvmParameterizedTypeReference(xFunctionTypeRef);
+				if (result == null) result = caseJvmSpecializedTypeReference(xFunctionTypeRef);
 				if (result == null) result = caseJvmTypeReference(xFunctionTypeRef);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XtypePackage.XSYNONYM_TYPE_REFERENCE:
+			case XtypePackage.XCOMPUTED_TYPE_REFERENCE:
 			{
-				XSynonymTypeReference xSynonymTypeReference = (XSynonymTypeReference)theEObject;
-				T result = caseXSynonymTypeReference(xSynonymTypeReference);
-				if (result == null) result = caseJvmTypeReference(xSynonymTypeReference);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case XtypePackage.XDELEGATE_TYPE_REFERENCE:
-			{
-				XDelegateTypeReference xDelegateTypeReference = (XDelegateTypeReference)theEObject;
-				T result = caseXDelegateTypeReference(xDelegateTypeReference);
-				if (result == null) result = caseJvmTypeReference(xDelegateTypeReference);
+				XComputedTypeReference xComputedTypeReference = (XComputedTypeReference)theEObject;
+				T result = caseXComputedTypeReference(xComputedTypeReference);
+				if (result == null) result = caseJvmSpecializedTypeReference(xComputedTypeReference);
+				if (result == null) result = caseJvmTypeReference(xComputedTypeReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -144,33 +137,17 @@ public class XtypeSwitch<T>
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>XSynonym Type Reference</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XComputed Type Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>XSynonym Type Reference</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XComputed Type Reference</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseXSynonymTypeReference(XSynonymTypeReference object)
-	{
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>XDelegate Type Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>XDelegate Type Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseXDelegateTypeReference(XDelegateTypeReference object)
+	public T caseXComputedTypeReference(XComputedTypeReference object)
 	{
 		return null;
 	}
@@ -192,17 +169,17 @@ public class XtypeSwitch<T>
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Jvm Parameterized Type Reference</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Specialized Type Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Jvm Parameterized Type Reference</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Specialized Type Reference</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseJvmParameterizedTypeReference(JvmParameterizedTypeReference object)
+	public T caseJvmSpecializedTypeReference(JvmSpecializedTypeReference object)
 	{
 		return null;
 	}

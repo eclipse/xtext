@@ -6,6 +6,7 @@
 package org.eclipse.xtext.xtype.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -68,10 +69,39 @@ public class XtypeFactoryImpl extends EFactoryImpl implements XtypeFactory
 		switch (eClass.getClassifierID())
 		{
 			case XtypePackage.XFUNCTION_TYPE_REF: return createXFunctionTypeRef();
-			case XtypePackage.XSYNONYM_TYPE_REFERENCE: return createXSynonymTypeReference();
-			case XtypePackage.XDELEGATE_TYPE_REFERENCE: return createXDelegateTypeReference();
+			case XtypePackage.XCOMPUTED_TYPE_REFERENCE: return createXComputedTypeReference();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object createFromString(EDataType eDataType, String initialValue)
+	{
+		switch (eDataType.getClassifierID())
+		{
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String convertToString(EDataType eDataType, Object instanceValue)
+	{
+		switch (eDataType.getClassifierID())
+		{
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -91,21 +121,10 @@ public class XtypeFactoryImpl extends EFactoryImpl implements XtypeFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public XSynonymTypeReference createXSynonymTypeReference()
+	public XComputedTypeReference createXComputedTypeReference()
 	{
-		XSynonymTypeReferenceImplCustom xSynonymTypeReference = new XSynonymTypeReferenceImplCustom();
-		return xSynonymTypeReference;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public XDelegateTypeReference createXDelegateTypeReference()
-	{
-		XDelegateTypeReferenceImplCustom xDelegateTypeReference = new XDelegateTypeReferenceImplCustom();
-		return xDelegateTypeReference;
+		XComputedTypeReferenceImpl xComputedTypeReference = new XComputedTypeReferenceImpl();
+		return xComputedTypeReference;
 	}
 
 	/**

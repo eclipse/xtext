@@ -5,7 +5,9 @@
  */
 package org.eclipse.xtext.xtype;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -71,22 +73,13 @@ public interface XtypePackage extends EPackage
 	int XFUNCTION_TYPE_REF = 0;
 
 	/**
-	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Equivalent</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XFUNCTION_TYPE_REF__ARGUMENTS = TypesPackage.JVM_PARAMETERIZED_TYPE_REFERENCE__ARGUMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XFUNCTION_TYPE_REF__TYPE = TypesPackage.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE;
+	int XFUNCTION_TYPE_REF__EQUIVALENT = TypesPackage.JVM_SPECIALIZED_TYPE_REFERENCE__EQUIVALENT;
 
 	/**
 	 * The feature id for the '<em><b>Param Types</b></em>' containment reference list.
@@ -95,7 +88,7 @@ public interface XtypePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XFUNCTION_TYPE_REF__PARAM_TYPES = TypesPackage.JVM_PARAMETERIZED_TYPE_REFERENCE_FEATURE_COUNT + 0;
+	int XFUNCTION_TYPE_REF__PARAM_TYPES = TypesPackage.JVM_SPECIALIZED_TYPE_REFERENCE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
@@ -104,35 +97,7 @@ public interface XtypePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XFUNCTION_TYPE_REF__RETURN_TYPE = TypesPackage.JVM_PARAMETERIZED_TYPE_REFERENCE_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>XFunction Type Ref</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XFUNCTION_TYPE_REF_FEATURE_COUNT = TypesPackage.JVM_PARAMETERIZED_TYPE_REFERENCE_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.xtype.impl.XSynonymTypeReferenceImpl <em>XSynonym Type Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.xtype.impl.XSynonymTypeReferenceImpl
-	 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getXSynonymTypeReference()
-	 * @generated
-	 */
-	int XSYNONYM_TYPE_REFERENCE = 1;
-
-	/**
-	 * The feature id for the '<em><b>Synonymes</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XSYNONYM_TYPE_REFERENCE__SYNONYMES = TypesPackage.JVM_TYPE_REFERENCE_FEATURE_COUNT + 0;
+	int XFUNCTION_TYPE_REF__RETURN_TYPE = TypesPackage.JVM_SPECIALIZED_TYPE_REFERENCE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -141,44 +106,63 @@ public interface XtypePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XSYNONYM_TYPE_REFERENCE__TYPE = TypesPackage.JVM_TYPE_REFERENCE_FEATURE_COUNT + 1;
+	int XFUNCTION_TYPE_REF__TYPE = TypesPackage.JVM_SPECIALIZED_TYPE_REFERENCE_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the '<em>XSynonym Type Reference</em>' class.
+	 * The number of structural features of the '<em>XFunction Type Ref</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XSYNONYM_TYPE_REFERENCE_FEATURE_COUNT = TypesPackage.JVM_TYPE_REFERENCE_FEATURE_COUNT + 2;
+	int XFUNCTION_TYPE_REF_FEATURE_COUNT = TypesPackage.JVM_SPECIALIZED_TYPE_REFERENCE_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.xtype.impl.XDelegateTypeReferenceImpl <em>XDelegate Type Reference</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImpl <em>XComputed Type Reference</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.xtype.impl.XDelegateTypeReferenceImpl
-	 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getXDelegateTypeReference()
+	 * @see org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImpl
+	 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getXComputedTypeReference()
 	 * @generated
 	 */
-	int XDELEGATE_TYPE_REFERENCE = 2;
+	int XCOMPUTED_TYPE_REFERENCE = 1;
 
 	/**
-	 * The feature id for the '<em><b>Delegate</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XDELEGATE_TYPE_REFERENCE__DELEGATE = TypesPackage.JVM_TYPE_REFERENCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>XDelegate Type Reference</em>' class.
+	 * The feature id for the '<em><b>Equivalent</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XDELEGATE_TYPE_REFERENCE_FEATURE_COUNT = TypesPackage.JVM_TYPE_REFERENCE_FEATURE_COUNT + 1;
+	int XCOMPUTED_TYPE_REFERENCE__EQUIVALENT = TypesPackage.JVM_SPECIALIZED_TYPE_REFERENCE__EQUIVALENT;
+
+	/**
+	 * The feature id for the '<em><b>Type Provider</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCOMPUTED_TYPE_REFERENCE__TYPE_PROVIDER = TypesPackage.JVM_SPECIALIZED_TYPE_REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>XComputed Type Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCOMPUTED_TYPE_REFERENCE_FEATURE_COUNT = TypesPackage.JVM_SPECIALIZED_TYPE_REFERENCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '<em>IJvm Type Reference Provider</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider
+	 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getIJvmTypeReferenceProvider()
+	 * @generated
+	 */
+	int IJVM_TYPE_REFERENCE_PROVIDER = 2;
 
 
 	/**
@@ -214,57 +198,47 @@ public interface XtypePackage extends EPackage
 	EReference getXFunctionTypeRef_ReturnType();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.xtype.XSynonymTypeReference <em>XSynonym Type Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>XSynonym Type Reference</em>'.
-	 * @see org.eclipse.xtext.xtype.XSynonymTypeReference
-	 * @generated
-	 */
-	EClass getXSynonymTypeReference();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xtype.XSynonymTypeReference#getSynonymes <em>Synonymes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Synonymes</em>'.
-	 * @see org.eclipse.xtext.xtype.XSynonymTypeReference#getSynonymes()
-	 * @see #getXSynonymTypeReference()
-	 * @generated
-	 */
-	EReference getXSynonymTypeReference_Synonymes();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.xtext.xtype.XSynonymTypeReference#getType <em>Type</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.xtext.xtype.XFunctionTypeRef#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Type</em>'.
-	 * @see org.eclipse.xtext.xtype.XSynonymTypeReference#getType()
-	 * @see #getXSynonymTypeReference()
+	 * @see org.eclipse.xtext.xtype.XFunctionTypeRef#getType()
+	 * @see #getXFunctionTypeRef()
 	 * @generated
 	 */
-	EReference getXSynonymTypeReference_Type();
+	EReference getXFunctionTypeRef_Type();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.xtype.XDelegateTypeReference <em>XDelegate Type Reference</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xtype.XComputedTypeReference <em>XComputed Type Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>XDelegate Type Reference</em>'.
-	 * @see org.eclipse.xtext.xtype.XDelegateTypeReference
+	 * @return the meta object for class '<em>XComputed Type Reference</em>'.
+	 * @see org.eclipse.xtext.xtype.XComputedTypeReference
 	 * @generated
 	 */
-	EClass getXDelegateTypeReference();
+	EClass getXComputedTypeReference();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.xtext.xtype.XDelegateTypeReference#getDelegate <em>Delegate</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtype.XComputedTypeReference#getTypeProvider <em>Type Provider</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Delegate</em>'.
-	 * @see org.eclipse.xtext.xtype.XDelegateTypeReference#getDelegate()
-	 * @see #getXDelegateTypeReference()
+	 * @return the meta object for the attribute '<em>Type Provider</em>'.
+	 * @see org.eclipse.xtext.xtype.XComputedTypeReference#getTypeProvider()
+	 * @see #getXComputedTypeReference()
 	 * @generated
 	 */
-	EReference getXDelegateTypeReference_Delegate();
+	EAttribute getXComputedTypeReference_TypeProvider();
+
+	/**
+	 * Returns the meta object for data type '{@link org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider <em>IJvm Type Reference Provider</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>IJvm Type Reference Provider</em>'.
+	 * @see org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider
+	 * @model instanceClass="org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider" serializeable="false"
+	 * @generated
+	 */
+	EDataType getIJvmTypeReferenceProvider();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -316,48 +290,40 @@ public interface XtypePackage extends EPackage
 		EReference XFUNCTION_TYPE_REF__RETURN_TYPE = eINSTANCE.getXFunctionTypeRef_ReturnType();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.xtype.impl.XSynonymTypeReferenceImpl <em>XSynonym Type Reference</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.xtype.impl.XSynonymTypeReferenceImpl
-		 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getXSynonymTypeReference()
-		 * @generated
-		 */
-		EClass XSYNONYM_TYPE_REFERENCE = eINSTANCE.getXSynonymTypeReference();
-
-		/**
-		 * The meta object literal for the '<em><b>Synonymes</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference XSYNONYM_TYPE_REFERENCE__SYNONYMES = eINSTANCE.getXSynonymTypeReference_Synonymes();
-
-		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference XSYNONYM_TYPE_REFERENCE__TYPE = eINSTANCE.getXSynonymTypeReference_Type();
+		EReference XFUNCTION_TYPE_REF__TYPE = eINSTANCE.getXFunctionTypeRef_Type();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.xtype.impl.XDelegateTypeReferenceImpl <em>XDelegate Type Reference</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImpl <em>XComputed Type Reference</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.xtype.impl.XDelegateTypeReferenceImpl
-		 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getXDelegateTypeReference()
+		 * @see org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImpl
+		 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getXComputedTypeReference()
 		 * @generated
 		 */
-		EClass XDELEGATE_TYPE_REFERENCE = eINSTANCE.getXDelegateTypeReference();
+		EClass XCOMPUTED_TYPE_REFERENCE = eINSTANCE.getXComputedTypeReference();
 
 		/**
-		 * The meta object literal for the '<em><b>Delegate</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Type Provider</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference XDELEGATE_TYPE_REFERENCE__DELEGATE = eINSTANCE.getXDelegateTypeReference_Delegate();
+		EAttribute XCOMPUTED_TYPE_REFERENCE__TYPE_PROVIDER = eINSTANCE.getXComputedTypeReference_TypeProvider();
+
+		/**
+		 * The meta object literal for the '<em>IJvm Type Reference Provider</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider
+		 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getIJvmTypeReferenceProvider()
+		 * @generated
+		 */
+		EDataType IJVM_TYPE_REFERENCE_PROVIDER = eINSTANCE.getIJvmTypeReferenceProvider();
 
 	}
 
