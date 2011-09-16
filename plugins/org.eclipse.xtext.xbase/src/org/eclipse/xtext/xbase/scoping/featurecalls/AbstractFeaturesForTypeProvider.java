@@ -11,8 +11,9 @@ import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.common.types.util.IRawTypeHelper;
+import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 
 import com.google.inject.Inject;
 
@@ -22,10 +23,13 @@ import com.google.inject.Inject;
 public abstract class AbstractFeaturesForTypeProvider implements IFeaturesForTypeProvider {
 
 	@Inject
-	private XbaseTypeConformanceComputer typeConformanceComputer;
+	private TypeConformanceComputer typeConformanceComputer;
 
 	@Inject
 	private TypeReferences typeReferences;
+	
+	@Inject
+	private IRawTypeHelper rawTypeHelper;
 	
 	/**
 	 * Returns <code>true</code> if the the first reference points to the same rawtype as the second
@@ -65,11 +69,15 @@ public abstract class AbstractFeaturesForTypeProvider implements IFeaturesForTyp
 		return false;
 	}
 	
-	protected XbaseTypeConformanceComputer getTypeConformanceComputer() {
+	protected TypeConformanceComputer getTypeConformanceComputer() {
 		return typeConformanceComputer;
 	}
 	
 	protected TypeReferences getTypeReferences() {
 		return typeReferences;
+	}
+	
+	protected IRawTypeHelper getRawTypeHelper() {
+		return rawTypeHelper;
 	}
 }

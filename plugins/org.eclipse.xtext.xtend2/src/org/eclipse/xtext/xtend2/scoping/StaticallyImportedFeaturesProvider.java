@@ -73,22 +73,24 @@ public class StaticallyImportedFeaturesProvider extends AbstractStaticMethodsFea
 					}
 				}) ;
 				if (staticType != null) {
-					JvmType rawType = getTypeReferences().getRawType(staticType);
-					if (rawType instanceof JvmDeclaredType) {
-						Iterable<JvmFeature> features = name != null ? ((JvmDeclaredType) rawType).findAllFeaturesByName(name) : ((JvmDeclaredType) rawType).getAllFeatures();
-						for(JvmFeature feature: features) {
-							if (feature instanceof JvmOperation) {
-								// optimization is here
-								if (e.getKey() == null) {
-									if (isMatchingExtension(e.getKey(), (JvmOperation) feature)) {
-										result.add(feature);
-									}
-								} else {
-									for(JvmTypeReference key: hierarchy) {
-										// and here
-										if (isMatchingExtension(key, (JvmOperation) feature)) {
+					List<JvmType> rawTypes = getRawTypeHelper().getAllRawTypes(staticType, context);
+					for(JvmType rawType: rawTypes) {
+						if (rawType instanceof JvmDeclaredType) {
+							Iterable<JvmFeature> features = name != null ? ((JvmDeclaredType) rawType).findAllFeaturesByName(name) : ((JvmDeclaredType) rawType).getAllFeatures();
+							for(JvmFeature feature: features) {
+								if (feature instanceof JvmOperation) {
+									// optimization is here
+									if (e.getKey() == null) {
+										if (isMatchingExtension(e.getKey(), (JvmOperation) feature)) {
 											result.add(feature);
-											break;
+										}
+									} else {
+										for(JvmTypeReference key: hierarchy) {
+											// and here
+											if (isMatchingExtension(key, (JvmOperation) feature)) {
+												result.add(feature);
+												break;
+											}
 										}
 									}
 								}

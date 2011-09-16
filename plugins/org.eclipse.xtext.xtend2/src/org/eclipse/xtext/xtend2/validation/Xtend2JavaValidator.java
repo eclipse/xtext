@@ -18,6 +18,7 @@ import static org.eclipse.xtext.xtend2.xtend2.Xtend2Package.Literals.*;
 
 import java.lang.annotation.ElementType;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -38,6 +39,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.FeatureOverridesService;
+import org.eclipse.xtext.common.types.util.IRawTypeHelper;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
@@ -113,6 +115,9 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 	
 	@Inject
 	private TypeReferences typeReferences;
+	
+	@Inject
+	private IRawTypeHelper rawTypeHelper;
 	
 	@Inject
 	private XAnnotationUtil annotationUtil;
@@ -310,7 +315,41 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 		}
 		return false;
 	}
-
+	
+	protected class Signature {
+		
+		private final JvmOperation operation;
+		
+		private List<JvmType> erasureParameterTypes;
+		
+		protected Signature(JvmOperation operation) {
+			this.operation = operation;
+			if (operation != null) {
+				for(JvmFormalParameter parameter: operation.getParameters()) {
+					List<JvmType> rawTypes = rawTypeHelper.getAllRawTypes(parameter.getParameterType(), operation.eResource());
+					if (rawTypes.isEmpty()) {
+						erasureParameterTypes.add(null);
+					} else {
+						erasureParameterTypes.add(rawTypes.get(0));
+					}
+				}
+			} else {
+				erasureParameterTypes = Collections.emptyList();
+			}
+		}
+		
+		protected String getName() {
+			if (operation == null)
+				return "null";
+			return operation.getSimpleName();
+		}
+		
+		protected Object getErasureKey() {
+			return Tuples.create(getName(), erasureParameterTypes);
+		}
+		
+	}
+	
 	@Check
 	public void checkDuplicateAndOverriddenFunctions(XtendClass xtendClass) {
 		JvmParameterizedTypeReference typeReference = getTypesFactory().createJvmParameterizedTypeReference();
@@ -318,12 +357,12 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 		if (inferredType != null) {
 			typeReference.setType(inferredType);
 			final TypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getReceiverContext(typeReference);
-			Multimap<Pair<String, List<JvmType>>, JvmOperation> operationsPerSignature = HashMultimap.create();
+			Multimap<Object, JvmOperation> operationsPerErasure = HashMultimap.create();
 			for(JvmOperation operation: inferredType.getDeclaredOperations()) {
-				Pair<String,List<JvmType>> signature = getSignature(operation);
-				operationsPerSignature.put(signature, operation);
+				Signature signature = getSignature(operation);
+				operationsPerErasure.put(signature.getErasureKey(), operation);
 			}
-			for(Collection<JvmOperation> operationsWithSameSignature: operationsPerSignature.asMap().values()) {
+			for(Collection<JvmOperation> operationsWithSameSignature: operationsPerErasure.asMap().values()) {
 				if (operationsWithSameSignature.size() > 1) {
 					Multimap<String, JvmOperation> operationsPerReadableSignature = HashMultimap.create();
 					for(JvmOperation operation: operationsWithSameSignature) {
@@ -353,9 +392,10 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 			for (JvmOperation operation : filter(
 					featureOverridesService.getAllJvmFeatures(inferredType, typeArgumentContext), JvmOperation.class)) {
 				if (operation.getDeclaringType() != inferredType) {
-					Pair<String,List<JvmType>> signature = getSignature(operation);
-					if (operationsPerSignature.containsKey(signature)) {
-						Collection<JvmOperation> myOperations = operationsPerSignature.get(signature);
+					Signature signature = getSignature(operation);
+					
+					if (operationsPerErasure.containsKey(signature.getErasureKey())) {
+						Collection<JvmOperation> myOperations = operationsPerErasure.get(signature.getErasureKey());
 						if (myOperations.size() == 1) {
 							JvmOperation myOperation = Iterables.getOnlyElement(myOperations);
 							if (!featureOverridesService.isOverridden(myOperation, operation, typeArgumentContext, false)) {
@@ -372,8 +412,8 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 					}
 					if (operation.isAbstract() && !inferredType.isAbstract()) {
 						boolean overridden = false;
-						if (operationsPerSignature.containsKey(signature)) {
-							for(JvmOperation myOperation: operationsPerSignature.get(signature)) {
+						if (operationsPerErasure.containsKey(signature.getErasureKey())) {
+							for(JvmOperation myOperation: operationsPerErasure.get(signature.getErasureKey())) {
 								if (featureOverridesService.isOverridden(myOperation, operation, typeArgumentContext, false)) {
 									overridden = true;
 									break;
@@ -451,13 +491,8 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 		return (element != null) ? notNull(element.getIdentifier()) : null;
 	}
 	
-	protected Pair<String, List<JvmType>> getSignature(JvmOperation operation) {
-		String name = operation.getSimpleName();
-		List<JvmType> parameterTypes = Lists.newArrayListWithExpectedSize(operation.getParameters().size());
-		for(JvmFormalParameter parameter: operation.getParameters()) {
-			parameterTypes.add(typeReferences.getRawType(parameter.getParameterType()));
-		}
-		return Tuples.create(name, parameterTypes);
+	protected Signature getSignature(JvmOperation operation) {
+		return new Signature(operation);
 	}
 	
 	protected String getReadableSignature(JvmIdentifiableElement element, List<JvmFormalParameter> parameters) {
@@ -496,13 +531,13 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 			if (i != 0) {
 				result.append(", ");
 			}
-			JvmTypeReference parameterType = parameters.get(i).getParameterType();
-			JvmType rawType = typeReferences.getRawType(parameterType);
-			if (rawType != null && !rawType.eIsProxy())
-				// todo erasure of type parameters with / without upper bound 
-				result.append(rawType.getSimpleName());
-			else
+			List<JvmType> rawTypes = rawTypeHelper.getAllRawTypes(parameters.get(i).getParameterType(), element.eResource());
+			if (!rawTypes.isEmpty()) {
+				// see comments in https://bugs.eclipse.org/bugs/show_bug.cgi?id=357958
+				result.append(rawTypes.get(0).getSimpleName());
+			} else {
 				result.append("null");
+			}
 		}
 		result.append(')');
 		return result.toString();
