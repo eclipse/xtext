@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.annotations;
 
+import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.xbase.annotations.scoping.XbaseWithAnnotationsScopeProvider;
 import org.eclipse.xtext.xbase.annotations.typing.XbaseWithAnnotationsTypeProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
@@ -18,5 +20,10 @@ public class XbaseWithAnnotationsRuntimeModule extends org.eclipse.xtext.xbase.a
 	@Override
 	public Class<? extends ITypeProvider> bindITypeProvider() {
 		return XbaseWithAnnotationsTypeProvider.class;
+	}
+	
+	@Override
+	public Class<? extends IScopeProvider> bindIScopeProvider() {
+		return XbaseWithAnnotationsScopeProvider.class;
 	}
 }
