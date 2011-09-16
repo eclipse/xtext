@@ -11,7 +11,9 @@ import java.util.Iterator;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.util.Pair;
@@ -26,7 +28,7 @@ public class DefaultDescriptionLabelProvider extends DeclarativeLabelProvider {
 	@Inject
 	private IStorage2UriMapper storage2UriMapper;
 
-	@Inject 
+	@Inject
 	private DefaultEditorImageUtil imageUtil;
 
 	public Object image(IEObjectDescription element) {
@@ -34,7 +36,26 @@ public class DefaultDescriptionLabelProvider extends DeclarativeLabelProvider {
 	}
 
 	public Object image(IResourceDescription element) {
-		String fileName = element.getURI().lastSegment();
+		return getImageForURI(element.getURI());
+	}
+
+	/**
+	 * This method is only invoked if the containerEObjectURI of the {@link IReferenceDescription} is null, i.e. the
+	 * reference is owned by an element without any indexed container.
+	 * 
+	 * @since 2.1
+	 */
+	public Object image(IReferenceDescription referenceDescription) {
+		if (referenceDescription.getSourceEObjectUri() != null)
+			return getImageForURI(referenceDescription.getSourceEObjectUri());
+		return null;
+	}
+
+	/**
+	 * @since 2.1
+	 */
+	protected Object getImageForURI(URI uri) {
+		String fileName = uri.lastSegment();
 		return imageUtil.getDefaultEditorImageDescriptor(fileName);
 	}
 
@@ -50,4 +71,15 @@ public class DefaultDescriptionLabelProvider extends DeclarativeLabelProvider {
 		}
 		return null;
 	}
+
+	/**
+	 * This method is only invoked if the containerEObjectURI of the {@link IReferenceDescription} is null, i.e. the
+	 * reference is owned by an element without any indexed container.
+	 * 
+	 * @since 2.1
+	 */
+	public Object text(IReferenceDescription referenceDescription) {
+		return "<unnamed>";
+	}
+
 }

@@ -64,7 +64,10 @@ public class GlobalDescriptionLabelProvider extends BaseLabelProvider implements
 		}
 	}
 
-	private ILabelProvider lookupDescriptionLabelProvider(Object description) {
+	/**
+	 * @since 2.1 protected
+	 */
+	protected ILabelProvider lookupDescriptionLabelProvider(Object description) {
 		URI uri = uri(description);
 		if (uri != null) {
 			IResourceServiceProvider resourceServiceProvider = IResourceServiceProvider.Registry.INSTANCE
@@ -75,13 +78,17 @@ public class GlobalDescriptionLabelProvider extends BaseLabelProvider implements
 		return null;
 	}
 
-	private URI uri(Object description) {
+	/**
+	 * @since 2.1 protected
+	 */
+	protected URI uri(Object description) {
 		if (description instanceof IEObjectDescription) {
 			return ((IEObjectDescription) description).getEObjectURI();
 		} else if (description instanceof IResourceDescription) {
 			return ((IResourceDescription) description).getURI();
 		} else if(description instanceof IReferenceDescription) {
-			return ((IReferenceDescription) description).getContainerEObjectURI();
+			URI containerEObjectURI = ((IReferenceDescription) description).getContainerEObjectURI();
+			return containerEObjectURI == null ? ((IReferenceDescription) description).getSourceEObjectUri() : null;
 		}
 		return null;
 	}
