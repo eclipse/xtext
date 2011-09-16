@@ -342,6 +342,11 @@ public class JvmOperationItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.JVM_OPERATION__DEFAULT_VALUE,
 				 TypesFactory.eINSTANCE.createJvmEnumAnnotationValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_OPERATION__DEFAULT_VALUE,
+				 TypesFactory.eINSTANCE.createJvmCustomAnnotationValue()));
 	}
 
 	/**

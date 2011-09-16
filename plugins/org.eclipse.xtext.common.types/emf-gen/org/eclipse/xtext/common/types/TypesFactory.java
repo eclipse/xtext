@@ -345,6 +345,16 @@ public interface TypesFactory extends EFactory
 	JvmUnknownTypeReference createJvmUnknownTypeReference();
 
 	/**
+	 * Returns a new object of class '<em>Jvm Custom Annotation Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Jvm Custom Annotation Value</em>'.
+	 * @generated
+	 * @since 2.1
+	 */
+	JvmCustomAnnotationValue createJvmCustomAnnotationValue();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

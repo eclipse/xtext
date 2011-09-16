@@ -246,6 +246,11 @@ public class JvmAnnotationReferenceItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.JVM_ANNOTATION_REFERENCE__VALUES,
 				 TypesFactory.eINSTANCE.createJvmEnumAnnotationValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_ANNOTATION_REFERENCE__VALUES,
+				 TypesFactory.eINSTANCE.createJvmCustomAnnotationValue()));
 	}
 
 	/**

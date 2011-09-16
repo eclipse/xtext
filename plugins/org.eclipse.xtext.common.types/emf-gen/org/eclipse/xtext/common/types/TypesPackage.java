@@ -2610,6 +2610,51 @@ public interface TypesPackage extends EPackage
 	int JVM_UNKNOWN_TYPE_REFERENCE_FEATURE_COUNT = JVM_TYPE_REFERENCE_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmCustomAnnotationValueImpl <em>Jvm Custom Annotation Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmCustomAnnotationValueImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmCustomAnnotationValue()
+	 * @generated
+	 * @since 2.1
+	 * @noreference This field is not intended to be referenced by clients.
+	 */
+	int JVM_CUSTOM_ANNOTATION_VALUE = 50;
+
+	/**
+	 * The feature id for the '<em><b>Operation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.1
+	 * @noreference This field is not intended to be referenced by clients.
+	 */
+	int JVM_CUSTOM_ANNOTATION_VALUE__OPERATION = JVM_ANNOTATION_VALUE__OPERATION;
+
+	/**
+	 * The feature id for the '<em><b>Values</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.1
+	 * @noreference This field is not intended to be referenced by clients.
+	 */
+	int JVM_CUSTOM_ANNOTATION_VALUE__VALUES = JVM_ANNOTATION_VALUE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Jvm Custom Annotation Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.1
+	 * @noreference This field is not intended to be referenced by clients.
+	 */
+	int JVM_CUSTOM_ANNOTATION_VALUE_FEATURE_COUNT = JVM_ANNOTATION_VALUE_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.JvmVisibility <em>Jvm Visibility</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2619,7 +2664,7 @@ public interface TypesPackage extends EPackage
 	 * @since 2.1
 	 * @noreference This field is not intended to be referenced by clients.
 	 */
-	int JVM_VISIBILITY = 50;
+	int JVM_VISIBILITY = 51;
 
 	/**
 	 * The meta object id for the '<em>Iterable</em>' data type.
@@ -2631,7 +2676,7 @@ public interface TypesPackage extends EPackage
 	 * @since 2.1
 	 * @noreference This field is not intended to be referenced by clients.
 	 */
-	int ITERABLE = 51;
+	int ITERABLE = 52;
 
 	/**
 	 * The meta object id for the '<em>IType Reference Visitor</em>' data type.
@@ -2655,7 +2700,7 @@ public interface TypesPackage extends EPackage
 	 * @since 2.1
 	 * @noreference This field is not intended to be referenced by clients.
 	 */
-	int ITYPE_REFERENCE_VISITOR_WITH_PARAMETER = 53;
+	int ITYPE_REFERENCE_VISITOR_WITH_PARAMETER = 54;
 
 	/**
 	 * The meta object id for the '<em>Exception</em>' data type.
@@ -2667,7 +2712,7 @@ public interface TypesPackage extends EPackage
 	 * @since 2.1
 	 * @noreference This field is not intended to be referenced by clients.
 	 */
-	int EXCEPTION = 54;
+	int EXCEPTION = 55;
 
 
 	/**
@@ -3842,6 +3887,29 @@ public interface TypesPackage extends EPackage
 	EReference getJvmCompoundTypeReference_References();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmCustomAnnotationValue <em>Jvm Custom Annotation Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Jvm Custom Annotation Value</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmCustomAnnotationValue
+	 * @generated
+	 * @since 2.1
+	 */
+	EClass getJvmCustomAnnotationValue();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.eclipse.xtext.common.types.JvmCustomAnnotationValue#getValues <em>Values</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Values</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmCustomAnnotationValue#getValues()
+	 * @see #getJvmCustomAnnotationValue()
+	 * @generated
+	 * @since 2.1
+	 */
+	EAttribute getJvmCustomAnnotationValue_Values();
+
+	/**
 	 * Returns the meta object for enum '{@link org.eclipse.xtext.common.types.JvmVisibility <em>Jvm Visibility</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4912,6 +4980,26 @@ public interface TypesPackage extends EPackage
 		 * @since 2.1
 		 */
 		EReference JVM_COMPOUND_TYPE_REFERENCE__REFERENCES = eINSTANCE.getJvmCompoundTypeReference_References();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmCustomAnnotationValueImpl <em>Jvm Custom Annotation Value</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.common.types.impl.JvmCustomAnnotationValueImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmCustomAnnotationValue()
+		 * @generated
+		 * @since 2.1
+		 */
+		EClass JVM_CUSTOM_ANNOTATION_VALUE = eINSTANCE.getJvmCustomAnnotationValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Values</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 * @since 2.1
+		 */
+		EAttribute JVM_CUSTOM_ANNOTATION_VALUE__VALUES = eINSTANCE.getJvmCustomAnnotationValue_Values();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.JvmVisibility <em>Jvm Visibility</em>}' enum.
