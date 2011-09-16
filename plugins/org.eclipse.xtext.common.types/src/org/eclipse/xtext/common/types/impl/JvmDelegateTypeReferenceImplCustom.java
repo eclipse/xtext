@@ -9,6 +9,8 @@ package org.eclipse.xtext.common.types.impl;
 
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.ITypeReferenceVisitor;
+import org.eclipse.xtext.common.types.util.ITypeReferenceVisitorWithParameter;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -23,4 +25,15 @@ public class JvmDelegateTypeReferenceImplCustom extends JvmDelegateTypeReference
 		return resolvedDelegate.getType();
 	}
 	
+	@Override
+	public <Result> Result accept(ITypeReferenceVisitor<Result> visitor) {
+		Result result = visitor.doVisitDelegateTypeReference(this);
+		return result;
+	}
+	
+	@Override
+	public <Parameter, Result> Result accept(ITypeReferenceVisitorWithParameter<Parameter,Result> visitor, Parameter parameter) {
+		Result result = visitor.doVisitDelegateTypeReference(this, parameter);
+		return result;
+	}
 }
