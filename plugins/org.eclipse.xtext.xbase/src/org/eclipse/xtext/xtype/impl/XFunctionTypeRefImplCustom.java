@@ -7,30 +7,36 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtype.impl;
 
-import static com.google.common.collect.Lists.*;
-
-import java.util.ArrayList;
-
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.util.BasicInternalEList;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+//import org.eclipse.xtext.common.types.JvmLowerBound;
+import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+//import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.xbase.lib.Functions;
+import org.eclipse.xtext.xtype.XtypeFactory;
+
+import com.google.common.collect.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class XFunctionTypeRefImplCustom extends XFunctionTypeRefImpl {
 	
+	// TODO should we update the type as soon as the number of argument types changes?  
 	@Override
 	public JvmType getType() {
 		if (this.type == null) {
-			// make sure scoping has taken place and installed an IJvmTypeProvider
-			if (returnType != null)
-				returnType.getType();
+//			// make sure scoping has taken place and installed an IJvmTypeProvider
+//			if (returnType != null)
+//				returnType.getType();
 			type = TypesFactory.eINSTANCE.createJvmVoid();
 			((InternalEObject)type).eSetProxyURI(computeTypeUri());
 		}
@@ -38,13 +44,49 @@ public class XFunctionTypeRefImplCustom extends XFunctionTypeRefImpl {
 	}
 	
 	@Override
-	public EList<JvmTypeReference> getArguments() {
-		ArrayList<JvmTypeReference> list = newArrayList(getParamTypes());
-		list.add(getReturnType());
-		BasicInternalEList<JvmTypeReference> ref = new BasicInternalEList<JvmTypeReference>(JvmTypeReference.class, list);
-		return ref;
+	public JvmTypeReference getEquivalent() {
+		if (equivalent == null) {
+			TypesFactory typesFactory = TypesFactory.eINSTANCE;
+			JvmType rawType = getType();
+			if (rawType != null && rawType instanceof JvmDeclaredType) {
+				EList<JvmTypeReference> superTypesWithObject = ((JvmDeclaredType) rawType).getSuperTypes();
+				JvmTypeReference objectReference = superTypesWithObject.get(0);
+				JvmParameterizedTypeReference result = typesFactory.createJvmParameterizedTypeReference();
+				result.setType(rawType);
+				for(JvmTypeReference paramType: Lists.newArrayList(getParamTypes())) {
+//					JvmWildcardTypeReference targetWildcard = typesFactory.createJvmWildcardTypeReference();
+//					JvmLowerBound lowerBound = typesFactory.createJvmLowerBound();
+					JvmDelegateTypeReference delegate = typesFactory.createJvmDelegateTypeReference();
+					delegate.setDelegate(paramType);
+//					lowerBound.setTypeReference(delegate);
+//					JvmUpperBound upperBound = typesFactory.createJvmUpperBound();
+//					XDelegateTypeReference objectDelegate = xtypeFactory.createXDelegateTypeReference();
+//					objectDelegate.setDelegate(objectReference);
+//					upperBound.setTypeReference(objectDelegate);
+					
+//					targetWildcard.getConstraints().add(upperBound);
+//					targetWildcard.getConstraints().add(lowerBound);
+//					result.getArguments().add(targetWildcard);
+					result.getArguments().add(delegate);
+				}
+				{
+//					JvmWildcardTypeReference returnType = typesFactory.createJvmWildcardTypeReference();
+//					JvmUpperBound returnTypeBound = typesFactory.createJvmUpperBound();
+					JvmDelegateTypeReference delegate = typesFactory.createJvmDelegateTypeReference();
+					delegate.setDelegate(getReturnType());
+//					returnTypeBound.setTypeReference(delegate);
+//					returnType.getConstraints().add(returnTypeBound);
+//					result.getArguments().add(returnType);
+					result.getArguments().add(delegate);
+				}
+				equivalent = result;
+			} else {
+				equivalent = null;
+			}
+		}
+		return equivalent;
 	}
-
+	
 	protected URI computeTypeUri() {
 		return URI.createURI("java:/Objects/"+Functions.class.getCanonicalName()+"#"+Functions.class.getCanonicalName()+"$Function"+getParamTypes().size());
 	}
@@ -91,6 +133,14 @@ public class XFunctionTypeRefImplCustom extends XFunctionTypeRefImpl {
 		result.append(") => ");
 		if (getReturnType()!=null)
 			result.append(getReturnType().getSimpleName());
+		return result.toString();
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder result = new StringBuilder(eClass().getName());
+		result.append(": ");
+		result.append(getIdentifier());
 		return result.toString();
 	}
 }
