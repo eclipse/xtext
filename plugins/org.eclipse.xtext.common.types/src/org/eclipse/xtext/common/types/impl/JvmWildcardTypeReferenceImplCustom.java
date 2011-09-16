@@ -20,11 +20,6 @@ public class JvmWildcardTypeReferenceImplCustom extends JvmWildcardTypeReference
 	}
 	
 	@Override
-	public String getQualifiedName() {
-		return getQualifiedName('$');
-	}
-	
-	@Override
 	public String getQualifiedName(char innerClassDelimiter) {
 		return NameConcatHelper.computeFor(this, innerClassDelimiter, NameConcatHelper.NameType.QUALIFIED);
 	}

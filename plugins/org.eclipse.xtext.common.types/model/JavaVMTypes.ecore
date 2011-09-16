@@ -143,6 +143,29 @@
     <eOperations name="getQualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eParameters name="innerClassDelimiter" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EChar"/>
     </eOperations>
+    <eOperations name="accept">
+      <eGenericType eTypeParameter="#//JvmTypeReference/accept/Result"/>
+      <eTypeParameters name="Result"/>
+      <eParameters name="visitor">
+        <eGenericType eClassifier="#//ITypeReferenceVisitor">
+          <eTypeArguments eTypeParameter="#//JvmTypeReference/accept/Result"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="accept">
+      <eGenericType eTypeParameter="#//JvmTypeReference/accept.1/Result"/>
+      <eTypeParameters name="Parameter"/>
+      <eTypeParameters name="Result"/>
+      <eParameters name="visitor">
+        <eGenericType eClassifier="#//ITypeReferenceVisitorWithParameter">
+          <eTypeArguments eTypeParameter="#//JvmTypeReference/accept.1/Parameter"/>
+          <eTypeArguments eTypeParameter="#//JvmTypeReference/accept.1/Result"/>
+        </eGenericType>
+      </eParameters>
+      <eParameters name="parameter">
+        <eGenericType eTypeParameter="#//JvmTypeReference/accept.1/Parameter"/>
+      </eParameters>
+    </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmParameterizedTypeReference" eSuperTypes="#//JvmTypeReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
@@ -155,15 +178,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="componentType" eType="#//JvmTypeReference"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="JvmWildcardTypeReference" eSuperTypes="#//JvmConstraintOwner #//JvmTypeReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JvmWildcardTypeReference" eSuperTypes="#//JvmTypeReference #//JvmConstraintOwner"/>
   <eClassifiers xsi:type="ecore:EClass" name="JvmAnyTypeReference" eSuperTypes="#//JvmTypeReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//JvmType"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="JvmMultiTypeReference" eSuperTypes="#//JvmTypeReference">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
-        eType="#//JvmTypeReference" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//JvmType"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JvmMultiTypeReference" eSuperTypes="#//JvmCompoundTypeReference"/>
   <eClassifiers xsi:type="ecore:EClass" name="JvmMember" abstract="true" eSuperTypes="#//JvmAnnotationTarget #//JvmIdentifiableElement">
     <eOperations name="internalSetIdentifier">
       <eParameters name="identifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -288,6 +307,30 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmSpecializedTypeReference" abstract="true"
       eSuperTypes="#//JvmTypeReference">
-    <eOperations name="getEquivalentJvmTypeReferences" upperBound="-1" eType="#//JvmTypeReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="equivalent" eType="#//JvmTypeReference"
+        transient="true" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JvmSynonymTypeReference" eSuperTypes="#//JvmCompoundTypeReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JvmUnknownTypeReference" eSuperTypes="#//JvmTypeReference">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="exception" eType="#//Exception"
+        transient="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="ITypeReferenceVisitor" instanceClassName="org.eclipse.xtext.common.types.util.ITypeReferenceVisitor"
+      serializable="false">
+    <eTypeParameters name="Result"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="ITypeReferenceVisitorWithParameter"
+      instanceClassName="org.eclipse.xtext.common.types.util.ITypeReferenceVisitorWithParameter"
+      serializable="false">
+    <eTypeParameters name="Parameter"/>
+    <eTypeParameters name="Result"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Exception" instanceClassName="java.lang.Exception"
+      serializable="false"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JvmCompoundTypeReference" abstract="true"
+      eSuperTypes="#//JvmTypeReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//JvmType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
+        eType="#//JvmTypeReference" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>
