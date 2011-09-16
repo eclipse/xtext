@@ -75,6 +75,9 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 	private ReferenceSearchResultLabelProvider labelProvider;
 
 	@Inject
+	private ReferenceSearchViewSorter sorter;
+	
+	@Inject
 	private IURIEditorOpener uriEditorOpener;
 
 	private boolean isBusyShowing;
@@ -147,6 +150,7 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 		viewer = new TreeViewer(control, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
 		viewer.setContentProvider(contentProvider);
 		viewer.setLabelProvider(labelProvider);
+		viewer.setSorter(sorter);
 		createOpenAndLinkWithEditorHandler();
 		IToolBarManager tbm = getSite().getActionBars().getToolBarManager();
 		fillToolbar(tbm);
