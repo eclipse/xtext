@@ -9,7 +9,6 @@ package org.eclipse.xtext.xtend2.scoping;
 
 import static com.google.common.collect.Lists.*;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -17,27 +16,14 @@ import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeConstraint;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.JvmUpperBound;
-import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
-import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.xbase.scoping.featurecalls.IFeaturesForTypeProvider;
+import org.eclipse.xtext.xbase.scoping.featurecalls.AbstractFeaturesForTypeProvider;
 import org.eclipse.xtext.xtend2.xtend2.XtendField;
-
-import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class InjectedExtensionMethodsFeaturesProvider implements IFeaturesForTypeProvider {
-	
-	@Inject
-	private TypeReferences typeRefs;
-	
-	@Inject
-	private TypeConformanceComputer typeConformanceComputer;
+public class InjectedExtensionMethodsFeaturesProvider extends AbstractFeaturesForTypeProvider {
 	
 	private XtendField xtendField;
 	
@@ -48,15 +34,15 @@ public class InjectedExtensionMethodsFeaturesProvider implements IFeaturesForTyp
 	public Iterable<JvmFeature> getFeaturesByName(String name, JvmTypeReference declarator,
 			Iterable<JvmTypeReference> hierarchy) {
 		JvmTypeReference typeReference = xtendField.getType();
-		JvmType rawType = typeRefs.getRawType(typeReference);
-		if (rawType instanceof JvmDeclaredType) {
-			List<JvmFeature> result = newArrayList();
-			Iterable<JvmFeature> features = ((JvmDeclaredType) rawType).findAllFeaturesByName(name);
-			collectExtensions(hierarchy, features, result);
-			return result;
-		} else {
-			return Collections.emptyList();
+		List<JvmType> rawTypes = getRawTypeHelper().getAllRawTypes(typeReference, xtendField.eResource());
+		List<JvmFeature> result = newArrayList();
+		for(JvmType rawType: rawTypes) {
+			if (rawType instanceof JvmDeclaredType) {
+				Iterable<JvmFeature> features = ((JvmDeclaredType) rawType).findAllFeaturesByName(name);
+				collectExtensions(hierarchy, features, result);
+			}
 		}
+		return result;
 	}
 
 	protected void collectExtensions(Iterable<JvmTypeReference> hierarchy, Iterable<JvmFeature> candidates,
@@ -69,7 +55,7 @@ public class InjectedExtensionMethodsFeaturesProvider implements IFeaturesForTyp
 					JvmFormalParameter parameter = parameters.get(0);
 					JvmTypeReference parameterType = parameter.getParameterType();
 					for(JvmTypeReference superType: hierarchy) {
-						if (parameter.getParameterType() != null && isCompatibleType(superType, parameterType)) {
+						if (parameter.getParameterType() != null && isSameTypeOrAssignableToUpperBound(superType, parameterType)) {
 							result.add(feature);
 							break;
 						}
@@ -83,39 +69,39 @@ public class InjectedExtensionMethodsFeaturesProvider implements IFeaturesForTyp
 	public Iterable<JvmFeature> getAllFeatures(JvmTypeReference reference,
 			Iterable<JvmTypeReference> hierarchy) {
 		JvmTypeReference typeReference = xtendField.getType();
-		JvmType rawType = typeRefs.getRawType(typeReference);
-		if (rawType instanceof JvmDeclaredType) {
-			List<JvmFeature> result = newArrayList();
-			Iterable<JvmFeature> features = ((JvmDeclaredType) rawType).getAllFeatures();
-			collectExtensions(hierarchy, features, result);
-			return result;
-		} else {
-			return Collections.emptyList();
+		List<JvmType> rawTypes = getRawTypeHelper().getAllRawTypes(typeReference, xtendField.eResource());
+		List<JvmFeature> result = newArrayList();
+		for(JvmType rawType: rawTypes) {
+			if (rawType instanceof JvmDeclaredType) {
+				Iterable<JvmFeature> features = ((JvmDeclaredType) rawType).getAllFeatures();
+				collectExtensions(hierarchy, features, result);
+			}
 		}
+		return result;
 	}
 	
-	protected boolean isCompatibleType(JvmTypeReference type, JvmTypeReference declaration) {
-		if (declaration.getType()==type.getType()) {
-			return true;
-		}
-		if (declaration.getType() instanceof JvmTypeParameter) {
-			boolean upperBoundSeen = false;
-			for(JvmTypeConstraint constraint: ((JvmTypeParameter) declaration.getType()).getConstraints()) {
-				if (constraint instanceof JvmUpperBound) {
-					upperBoundSeen = true;
-					if (typeConformanceComputer.isConformant(constraint.getTypeReference(), type, true))
-						return true;
-				}
-			}
-			if (!upperBoundSeen) {
-				if (typeRefs.is(type, Object.class)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
+//	protected boolean isCompatibleType(JvmTypeReference type, JvmTypeReference declaration) {
+//		if (declaration.getType()==type.getType()) {
+//			return true;
+//		}
+//		if (declaration.getType() instanceof JvmTypeParameter) {
+//			boolean upperBoundSeen = false;
+//			for(JvmTypeConstraint constraint: ((JvmTypeParameter) declaration.getType()).getConstraints()) {
+//				if (constraint instanceof JvmUpperBound) {
+//					upperBoundSeen = true;
+//					if (getTypeConformanceComputer().isConformant(constraint.getTypeReference(), type, true))
+//						return true;
+//				}
+//			}
+//			if (!upperBoundSeen) {
+//				if (getTypeReferences().is(type, Object.class)) {
+//					return true;
+//				}
+//			}
+//		}
+//		return false;
+//	}
+	
 	public boolean isExtensionProvider() {
 		return true;
 	}

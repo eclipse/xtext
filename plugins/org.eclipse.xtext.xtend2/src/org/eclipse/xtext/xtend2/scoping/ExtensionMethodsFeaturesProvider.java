@@ -39,10 +39,12 @@ public class ExtensionMethodsFeaturesProvider extends AbstractFeaturesForTypePro
 		if(extensionProvidingType == null)
 			return emptyList();
 		List<JvmFeature> result = Lists.newArrayList();
-		JvmType rawType = getTypeReferences().getRawType(extensionProvidingType);
-		if (rawType instanceof JvmDeclaredType) {
-			Iterable<JvmFeature> candidates = ((JvmDeclaredType) rawType).findAllFeaturesByName(name);
-			collectExtensionMethods(hierarchy, candidates, result);
+		List<JvmType> rawTypes = getRawTypeHelper().getAllRawTypes(extensionProvidingType, null);
+		for(JvmType rawType: rawTypes) {
+			if (rawType instanceof JvmDeclaredType) {
+				Iterable<JvmFeature> candidates = ((JvmDeclaredType) rawType).findAllFeaturesByName(name);
+				collectExtensionMethods(hierarchy, candidates, result);
+			}
 		}
 		return result;
 	}
@@ -78,10 +80,12 @@ public class ExtensionMethodsFeaturesProvider extends AbstractFeaturesForTypePro
 		if(extensionProvidingType == null)
 			return emptyList();
 		List<JvmFeature> result = newArrayList();
-		JvmType rawType = getTypeReferences().getRawType(extensionProvidingType);
-		if (rawType instanceof JvmDeclaredType) {
-			Iterable<JvmFeature> candidates = ((JvmDeclaredType) rawType).getAllFeatures();
-			collectExtensionMethods(hierarchy, candidates, result);
+		List<JvmType> rawTypes = getRawTypeHelper().getAllRawTypes(extensionProvidingType, null);
+		for(JvmType rawType: rawTypes) {
+			if (rawType instanceof JvmDeclaredType) {
+				Iterable<JvmFeature> candidates = ((JvmDeclaredType) rawType).getAllFeatures();
+				collectExtensionMethods(hierarchy, candidates, result);
+			}
 		}
 		return result;
 	}
