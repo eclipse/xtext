@@ -287,8 +287,8 @@ public class TypesSwitch<T>
 			{
 				JvmWildcardTypeReference jvmWildcardTypeReference = (JvmWildcardTypeReference)theEObject;
 				T result = caseJvmWildcardTypeReference(jvmWildcardTypeReference);
-				if (result == null) result = caseJvmConstraintOwner(jvmWildcardTypeReference);
 				if (result == null) result = caseJvmTypeReference(jvmWildcardTypeReference);
+				if (result == null) result = caseJvmConstraintOwner(jvmWildcardTypeReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -304,6 +304,7 @@ public class TypesSwitch<T>
 			{
 				JvmMultiTypeReference jvmMultiTypeReference = (JvmMultiTypeReference)theEObject;
 				T result = caseJvmMultiTypeReference(jvmMultiTypeReference);
+				if (result == null) result = caseJvmCompoundTypeReference(jvmMultiTypeReference);
 				if (result == null) result = caseJvmTypeReference(jvmMultiTypeReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -516,6 +517,31 @@ public class TypesSwitch<T>
 				JvmSpecializedTypeReference jvmSpecializedTypeReference = (JvmSpecializedTypeReference)theEObject;
 				T result = caseJvmSpecializedTypeReference(jvmSpecializedTypeReference);
 				if (result == null) result = caseJvmTypeReference(jvmSpecializedTypeReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypesPackage.JVM_SYNONYM_TYPE_REFERENCE:
+			{
+				JvmSynonymTypeReference jvmSynonymTypeReference = (JvmSynonymTypeReference)theEObject;
+				T result = caseJvmSynonymTypeReference(jvmSynonymTypeReference);
+				if (result == null) result = caseJvmCompoundTypeReference(jvmSynonymTypeReference);
+				if (result == null) result = caseJvmTypeReference(jvmSynonymTypeReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypesPackage.JVM_UNKNOWN_TYPE_REFERENCE:
+			{
+				JvmUnknownTypeReference jvmUnknownTypeReference = (JvmUnknownTypeReference)theEObject;
+				T result = caseJvmUnknownTypeReference(jvmUnknownTypeReference);
+				if (result == null) result = caseJvmTypeReference(jvmUnknownTypeReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypesPackage.JVM_COMPOUND_TYPE_REFERENCE:
+			{
+				JvmCompoundTypeReference jvmCompoundTypeReference = (JvmCompoundTypeReference)theEObject;
+				T result = caseJvmCompoundTypeReference(jvmCompoundTypeReference);
+				if (result == null) result = caseJvmTypeReference(jvmCompoundTypeReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1271,6 +1297,54 @@ public class TypesSwitch<T>
 	 * @generated
 	 */
 	public T caseJvmSpecializedTypeReference(JvmSpecializedTypeReference object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Synonym Type Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Synonym Type Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseJvmSynonymTypeReference(JvmSynonymTypeReference object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Unknown Type Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Unknown Type Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseJvmUnknownTypeReference(JvmUnknownTypeReference object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Compound Type Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Compound Type Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseJvmCompoundTypeReference(JvmCompoundTypeReference object)
 	{
 		return null;
 	}

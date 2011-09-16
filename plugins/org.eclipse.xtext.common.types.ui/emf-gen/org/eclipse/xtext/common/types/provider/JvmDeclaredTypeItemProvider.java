@@ -295,6 +295,16 @@ public class JvmDeclaredTypeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(TypesPackage.Literals.JVM_DECLARED_TYPE__SUPER_TYPES,
+				 TypesFactory.eINSTANCE.createJvmSynonymTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_DECLARED_TYPE__SUPER_TYPES,
+				 TypesFactory.eINSTANCE.createJvmUnknownTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(TypesPackage.Literals.JVM_DECLARED_TYPE__MEMBERS,
 				 TypesFactory.eINSTANCE.createJvmAnnotationType()));
 

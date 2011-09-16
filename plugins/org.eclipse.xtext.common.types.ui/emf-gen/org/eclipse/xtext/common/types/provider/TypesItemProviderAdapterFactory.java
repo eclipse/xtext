@@ -34,6 +34,7 @@ import org.eclipse.xtext.common.types.util.TypesAdapterFactory;
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
+ * @noextend This class is not intended to be subclassed by clients.
  */
 public class TypesItemProviderAdapterFactory extends TypesAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable
 {
@@ -879,18 +880,18 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	/**
 	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmDelegateTypeReference} instances.
 	 * <!-- begin-user-doc -->
-	 * @since 2.1
 	 * <!-- end-user-doc -->
 	 * @generated
+	 * @since 2.1
 	 */
 	protected JvmDelegateTypeReferenceItemProvider jvmDelegateTypeReferenceItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmDelegateTypeReference}.
 	 * <!-- begin-user-doc -->
-	 * @since 2.1
 	 * <!-- end-user-doc -->
 	 * @generated
+	 * @since 2.1
 	 */
 	@Override
 	public Adapter createJvmDelegateTypeReferenceAdapter()
@@ -901,6 +902,60 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 		}
 
 		return jvmDelegateTypeReferenceItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmSynonymTypeReference} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @since 2.1
+	 */
+	protected JvmSynonymTypeReferenceItemProvider jvmSynonymTypeReferenceItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmSynonymTypeReference}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @since 2.1
+	 */
+	@Override
+	public Adapter createJvmSynonymTypeReferenceAdapter()
+	{
+		if (jvmSynonymTypeReferenceItemProvider == null)
+		{
+			jvmSynonymTypeReferenceItemProvider = new JvmSynonymTypeReferenceItemProvider(this);
+		}
+
+		return jvmSynonymTypeReferenceItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmUnknownTypeReference} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @since 2.1
+	 */
+	protected JvmUnknownTypeReferenceItemProvider jvmUnknownTypeReferenceItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmUnknownTypeReference}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @since 2.1
+	 */
+	@Override
+	public Adapter createJvmUnknownTypeReferenceAdapter()
+	{
+		if (jvmUnknownTypeReferenceItemProvider == null)
+		{
+			jvmUnknownTypeReferenceItemProvider = new JvmUnknownTypeReferenceItemProvider(this);
+		}
+
+		return jvmUnknownTypeReferenceItemProvider;
 	}
 
 	/**
@@ -1047,6 +1102,8 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 		if (jvmAnnotationAnnotationValueItemProvider != null) jvmAnnotationAnnotationValueItemProvider.dispose();
 		if (jvmEnumAnnotationValueItemProvider != null) jvmEnumAnnotationValueItemProvider.dispose();
 		if (jvmDelegateTypeReferenceItemProvider != null) jvmDelegateTypeReferenceItemProvider.dispose();
+		if (jvmSynonymTypeReferenceItemProvider != null) jvmSynonymTypeReferenceItemProvider.dispose();
+		if (jvmUnknownTypeReferenceItemProvider != null) jvmUnknownTypeReferenceItemProvider.dispose();
 	}
 
 }

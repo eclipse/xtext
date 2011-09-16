@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.ETypeParameter;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -29,6 +30,7 @@ import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue;
 import org.eclipse.xtext.common.types.JvmByteAnnotationValue;
 import org.eclipse.xtext.common.types.JvmCharAnnotationValue;
 import org.eclipse.xtext.common.types.JvmComponentType;
+import org.eclipse.xtext.common.types.JvmCompoundTypeReference;
 import org.eclipse.xtext.common.types.JvmConstraintOwner;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -56,18 +58,23 @@ import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmShortAnnotationValue;
 import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.common.types.JvmStringAnnotationValue;
+import org.eclipse.xtext.common.types.JvmSynonymTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
+
+import org.eclipse.xtext.common.types.util.ITypeReferenceVisitor;
+import org.eclipse.xtext.common.types.util.ITypeReferenceVisitorWithParameter;
 
 /**
  * <!-- begin-user-doc -->
@@ -411,6 +418,27 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass jvmSynonymTypeReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass jvmUnknownTypeReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass jvmCompoundTypeReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum jvmVisibilityEEnum = null;
 
 	/**
@@ -419,6 +447,27 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * @generated
 	 */
 	private EDataType iterableEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType iTypeReferenceVisitorEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType iTypeReferenceVisitorWithParameterEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType exceptionEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -921,26 +970,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	public EClass getJvmMultiTypeReference()
 	{
 		return jvmMultiTypeReferenceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getJvmMultiTypeReference_References()
-	{
-		return (EReference)jvmMultiTypeReferenceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getJvmMultiTypeReference_Type()
-	{
-		return (EReference)jvmMultiTypeReferenceEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1538,6 +1567,76 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getJvmSpecializedTypeReference_Equivalent()
+	{
+		return (EReference)jvmSpecializedTypeReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getJvmSynonymTypeReference()
+	{
+		return jvmSynonymTypeReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getJvmUnknownTypeReference()
+	{
+		return jvmUnknownTypeReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getJvmUnknownTypeReference_Exception()
+	{
+		return (EAttribute)jvmUnknownTypeReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getJvmCompoundTypeReference()
+	{
+		return jvmCompoundTypeReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getJvmCompoundTypeReference_Type()
+	{
+		return (EReference)jvmCompoundTypeReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getJvmCompoundTypeReference_References()
+	{
+		return (EReference)jvmCompoundTypeReferenceEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getJvmVisibility()
 	{
 		return jvmVisibilityEEnum;
@@ -1551,6 +1650,36 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	public EDataType getIterable()
 	{
 		return iterableEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getITypeReferenceVisitor()
+	{
+		return iTypeReferenceVisitorEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getITypeReferenceVisitorWithParameter()
+	{
+		return iTypeReferenceVisitorWithParameterEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getException()
+	{
+		return exceptionEDataType;
 	}
 
 	/**
@@ -1649,8 +1778,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		createEReference(jvmAnyTypeReferenceEClass, JVM_ANY_TYPE_REFERENCE__TYPE);
 
 		jvmMultiTypeReferenceEClass = createEClass(JVM_MULTI_TYPE_REFERENCE);
-		createEReference(jvmMultiTypeReferenceEClass, JVM_MULTI_TYPE_REFERENCE__REFERENCES);
-		createEReference(jvmMultiTypeReferenceEClass, JVM_MULTI_TYPE_REFERENCE__TYPE);
 
 		jvmMemberEClass = createEClass(JVM_MEMBER);
 		createEReference(jvmMemberEClass, JVM_MEMBER__DECLARING_TYPE);
@@ -1734,12 +1861,25 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		createEReference(jvmDelegateTypeReferenceEClass, JVM_DELEGATE_TYPE_REFERENCE__DELEGATE);
 
 		jvmSpecializedTypeReferenceEClass = createEClass(JVM_SPECIALIZED_TYPE_REFERENCE);
+		createEReference(jvmSpecializedTypeReferenceEClass, JVM_SPECIALIZED_TYPE_REFERENCE__EQUIVALENT);
+
+		jvmSynonymTypeReferenceEClass = createEClass(JVM_SYNONYM_TYPE_REFERENCE);
+
+		jvmUnknownTypeReferenceEClass = createEClass(JVM_UNKNOWN_TYPE_REFERENCE);
+		createEAttribute(jvmUnknownTypeReferenceEClass, JVM_UNKNOWN_TYPE_REFERENCE__EXCEPTION);
+
+		jvmCompoundTypeReferenceEClass = createEClass(JVM_COMPOUND_TYPE_REFERENCE);
+		createEReference(jvmCompoundTypeReferenceEClass, JVM_COMPOUND_TYPE_REFERENCE__TYPE);
+		createEReference(jvmCompoundTypeReferenceEClass, JVM_COMPOUND_TYPE_REFERENCE__REFERENCES);
 
 		// Create enums
 		jvmVisibilityEEnum = createEEnum(JVM_VISIBILITY);
 
 		// Create data types
 		iterableEDataType = createEDataType(ITERABLE);
+		iTypeReferenceVisitorEDataType = createEDataType(ITYPE_REFERENCE_VISITOR);
+		iTypeReferenceVisitorWithParameterEDataType = createEDataType(ITYPE_REFERENCE_VISITOR_WITH_PARAMETER);
+		exceptionEDataType = createEDataType(EXCEPTION);
 	}
 
 	/**
@@ -1768,6 +1908,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 
 		// Create type parameters
 		addETypeParameter(iterableEDataType, "E");
+		addETypeParameter(iTypeReferenceVisitorEDataType, "Result");
+		addETypeParameter(iTypeReferenceVisitorWithParameterEDataType, "Parameter");
+		addETypeParameter(iTypeReferenceVisitorWithParameterEDataType, "Result");
 
 		// Set bounds for type parameters
 
@@ -1790,10 +1933,10 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		jvmGenericTypeEClass.getESuperTypes().add(this.getJvmTypeParameterDeclarator());
 		jvmParameterizedTypeReferenceEClass.getESuperTypes().add(this.getJvmTypeReference());
 		jvmGenericArrayTypeReferenceEClass.getESuperTypes().add(this.getJvmTypeReference());
-		jvmWildcardTypeReferenceEClass.getESuperTypes().add(this.getJvmConstraintOwner());
 		jvmWildcardTypeReferenceEClass.getESuperTypes().add(this.getJvmTypeReference());
+		jvmWildcardTypeReferenceEClass.getESuperTypes().add(this.getJvmConstraintOwner());
 		jvmAnyTypeReferenceEClass.getESuperTypes().add(this.getJvmTypeReference());
-		jvmMultiTypeReferenceEClass.getESuperTypes().add(this.getJvmTypeReference());
+		jvmMultiTypeReferenceEClass.getESuperTypes().add(this.getJvmCompoundTypeReference());
 		jvmMemberEClass.getESuperTypes().add(this.getJvmAnnotationTarget());
 		jvmMemberEClass.getESuperTypes().add(this.getJvmIdentifiableElement());
 		jvmFeatureEClass.getESuperTypes().add(this.getJvmMember());
@@ -1819,6 +1962,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		jvmEnumAnnotationValueEClass.getESuperTypes().add(this.getJvmAnnotationValue());
 		jvmDelegateTypeReferenceEClass.getESuperTypes().add(this.getJvmTypeReference());
 		jvmSpecializedTypeReferenceEClass.getESuperTypes().add(this.getJvmTypeReference());
+		jvmSynonymTypeReferenceEClass.getESuperTypes().add(this.getJvmCompoundTypeReference());
+		jvmUnknownTypeReferenceEClass.getESuperTypes().add(this.getJvmTypeReference());
+		jvmCompoundTypeReferenceEClass.getESuperTypes().add(this.getJvmTypeReference());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(jvmIdentifiableElementEClass, JvmIdentifiableElement.class, "JvmIdentifiableElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1948,6 +2094,29 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		op = addEOperation(jvmTypeReferenceEClass, ecorePackage.getEString(), "getQualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEChar(), "innerClassDelimiter", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(jvmTypeReferenceEClass, null, "accept", 0, 1, IS_UNIQUE, IS_ORDERED);
+		ETypeParameter t1 = addETypeParameter(op, "Result");
+		g1 = createEGenericType(this.getITypeReferenceVisitor());
+		g2 = createEGenericType(t1);
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "visitor", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(t1);
+		initEOperation(op, g1);
+
+		op = addEOperation(jvmTypeReferenceEClass, null, "accept", 0, 1, IS_UNIQUE, IS_ORDERED);
+		t1 = addETypeParameter(op, "Parameter");
+		ETypeParameter t2 = addETypeParameter(op, "Result");
+		g1 = createEGenericType(this.getITypeReferenceVisitorWithParameter());
+		g2 = createEGenericType(t1);
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(t2);
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "visitor", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(t1);
+		addEParameter(op, g1, "parameter", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(t2);
+		initEOperation(op, g1);
+
 		initEClass(jvmParameterizedTypeReferenceEClass, JvmParameterizedTypeReference.class, "JvmParameterizedTypeReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getJvmParameterizedTypeReference_Arguments(), this.getJvmTypeReference(), null, "arguments", null, 0, -1, JvmParameterizedTypeReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getJvmParameterizedTypeReference_Type(), this.getJvmType(), null, "type", null, 0, 1, JvmParameterizedTypeReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1965,8 +2134,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		initEReference(getJvmAnyTypeReference_Type(), this.getJvmType(), null, "type", null, 0, 1, JvmAnyTypeReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(jvmMultiTypeReferenceEClass, JvmMultiTypeReference.class, "JvmMultiTypeReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getJvmMultiTypeReference_References(), this.getJvmTypeReference(), null, "references", null, 0, -1, JvmMultiTypeReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getJvmMultiTypeReference_Type(), this.getJvmType(), null, "type", null, 0, 1, JvmMultiTypeReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(jvmMemberEClass, JvmMember.class, "JvmMember", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getJvmMember_DeclaringType(), this.getJvmDeclaredType(), this.getJvmDeclaredType_Members(), "declaringType", null, 0, 1, JvmMember.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2055,8 +2222,16 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		initEReference(getJvmDelegateTypeReference_Delegate(), this.getJvmTypeReference(), null, "delegate", null, 0, 1, JvmDelegateTypeReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(jvmSpecializedTypeReferenceEClass, JvmSpecializedTypeReference.class, "JvmSpecializedTypeReference", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getJvmSpecializedTypeReference_Equivalent(), this.getJvmTypeReference(), null, "equivalent", null, 0, 1, JvmSpecializedTypeReference.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(jvmSpecializedTypeReferenceEClass, this.getJvmTypeReference(), "getEquivalentJvmTypeReferences", 0, -1, IS_UNIQUE, IS_ORDERED);
+		initEClass(jvmSynonymTypeReferenceEClass, JvmSynonymTypeReference.class, "JvmSynonymTypeReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(jvmUnknownTypeReferenceEClass, JvmUnknownTypeReference.class, "JvmUnknownTypeReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getJvmUnknownTypeReference_Exception(), this.getException(), "exception", null, 0, 1, JvmUnknownTypeReference.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(jvmCompoundTypeReferenceEClass, JvmCompoundTypeReference.class, "JvmCompoundTypeReference", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getJvmCompoundTypeReference_Type(), this.getJvmType(), null, "type", null, 0, 1, JvmCompoundTypeReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getJvmCompoundTypeReference_References(), this.getJvmTypeReference(), null, "references", null, 0, -1, JvmCompoundTypeReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(jvmVisibilityEEnum, JvmVisibility.class, "JvmVisibility");
@@ -2067,6 +2242,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 
 		// Initialize data types
 		initEDataType(iterableEDataType, Iterable.class, "Iterable", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(iTypeReferenceVisitorEDataType, ITypeReferenceVisitor.class, "ITypeReferenceVisitor", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(iTypeReferenceVisitorWithParameterEDataType, ITypeReferenceVisitorWithParameter.class, "ITypeReferenceVisitorWithParameter", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(exceptionEDataType, Exception.class, "Exception", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

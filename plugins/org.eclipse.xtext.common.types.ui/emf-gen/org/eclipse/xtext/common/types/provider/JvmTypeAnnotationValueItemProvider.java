@@ -188,6 +188,16 @@ public class JvmTypeAnnotationValueItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.JVM_TYPE_ANNOTATION_VALUE__VALUES,
 				 TypesFactory.eINSTANCE.createJvmDelegateTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_TYPE_ANNOTATION_VALUE__VALUES,
+				 TypesFactory.eINSTANCE.createJvmSynonymTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_TYPE_ANNOTATION_VALUE__VALUES,
+				 TypesFactory.eINSTANCE.createJvmUnknownTypeReference()));
 	}
 
 }

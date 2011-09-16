@@ -13,6 +13,9 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 
+import org.eclipse.xtext.common.types.util.ITypeReferenceVisitor;
+import org.eclipse.xtext.common.types.util.ITypeReferenceVisitorWithParameter;
+
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Jvm Type Reference</b></em>'.
@@ -99,6 +102,30 @@ public abstract class JvmTypeReferenceImpl extends MinimalEObjectImpl.Container 
 	 * @generated
 	 */
 	public String getQualifiedName(char innerClassDelimiter)
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public <Result> Result accept(ITypeReferenceVisitor<Result> visitor)
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public <Parameter, Result> Result accept(ITypeReferenceVisitorWithParameter<Parameter, Result> visitor, Parameter parameter)
 	{
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT

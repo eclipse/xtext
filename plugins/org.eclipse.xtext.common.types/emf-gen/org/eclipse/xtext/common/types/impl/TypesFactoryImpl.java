@@ -103,6 +103,8 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 			case TypesPackage.JVM_ANNOTATION_ANNOTATION_VALUE: return createJvmAnnotationAnnotationValue();
 			case TypesPackage.JVM_ENUM_ANNOTATION_VALUE: return createJvmEnumAnnotationValue();
 			case TypesPackage.JVM_DELEGATE_TYPE_REFERENCE: return createJvmDelegateTypeReference();
+			case TypesPackage.JVM_SYNONYM_TYPE_REFERENCE: return createJvmSynonymTypeReference();
+			case TypesPackage.JVM_UNKNOWN_TYPE_REFERENCE: return createJvmUnknownTypeReference();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -505,8 +507,30 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 */
 	public JvmDelegateTypeReference createJvmDelegateTypeReference()
 	{
-		JvmDelegateTypeReferenceImpl jvmDelegateTypeReference = new JvmDelegateTypeReferenceImpl();
+		JvmDelegateTypeReferenceImplCustom jvmDelegateTypeReference = new JvmDelegateTypeReferenceImplCustom();
 		return jvmDelegateTypeReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JvmSynonymTypeReference createJvmSynonymTypeReference()
+	{
+		JvmSynonymTypeReferenceImplCustom jvmSynonymTypeReference = new JvmSynonymTypeReferenceImplCustom();
+		return jvmSynonymTypeReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JvmUnknownTypeReference createJvmUnknownTypeReference()
+	{
+		JvmUnknownTypeReferenceImplCustom jvmUnknownTypeReference = new JvmUnknownTypeReferenceImplCustom();
+		return jvmUnknownTypeReference;
 	}
 
 	/**

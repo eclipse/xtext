@@ -313,6 +313,21 @@ public class TypesAdapterFactory extends AdapterFactoryImpl
 				return createJvmSpecializedTypeReferenceAdapter();
 			}
 			@Override
+			public Adapter caseJvmSynonymTypeReference(JvmSynonymTypeReference object)
+			{
+				return createJvmSynonymTypeReferenceAdapter();
+			}
+			@Override
+			public Adapter caseJvmUnknownTypeReference(JvmUnknownTypeReference object)
+			{
+				return createJvmUnknownTypeReferenceAdapter();
+			}
+			@Override
+			public Adapter caseJvmCompoundTypeReference(JvmCompoundTypeReference object)
+			{
+				return createJvmCompoundTypeReferenceAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object)
 			{
 				return createEObjectAdapter();
@@ -1035,6 +1050,51 @@ public class TypesAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createJvmSpecializedTypeReferenceAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmSynonymTypeReference <em>Jvm Synonym Type Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.JvmSynonymTypeReference
+	 * @generated
+	 */
+	public Adapter createJvmSynonymTypeReferenceAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmUnknownTypeReference <em>Jvm Unknown Type Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.JvmUnknownTypeReference
+	 * @generated
+	 */
+	public Adapter createJvmUnknownTypeReferenceAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmCompoundTypeReference <em>Jvm Compound Type Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.JvmCompoundTypeReference
+	 * @generated
+	 */
+	public Adapter createJvmCompoundTypeReferenceAdapter()
 	{
 		return null;
 	}

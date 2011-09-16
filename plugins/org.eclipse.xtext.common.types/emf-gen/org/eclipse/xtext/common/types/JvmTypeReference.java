@@ -7,6 +7,9 @@ package org.eclipse.xtext.common.types;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.xtext.common.types.util.ITypeReferenceVisitor;
+import org.eclipse.xtext.common.types.util.ITypeReferenceVisitorWithParameter;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Jvm Type Reference</b></em>'.
@@ -16,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  * @see org.eclipse.xtext.common.types.TypesPackage#getJvmTypeReference()
  * @model abstract="true"
  * @generated
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface JvmTypeReference extends EObject
 {
@@ -69,5 +73,23 @@ public interface JvmTypeReference extends EObject
 	 * @generated
 	 */
 	String getQualifiedName(char innerClassDelimiter);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model visitorDataType="org.eclipse.xtext.common.types.ITypeReferenceVisitor<Result>"
+	 * @generated
+	 * @since 2.1
+	 */
+	<Result> Result accept(ITypeReferenceVisitor<Result> visitor);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model visitorDataType="org.eclipse.xtext.common.types.ITypeReferenceVisitorWithParameter<Parameter, Result>"
+	 * @generated
+	 * @since 2.1
+	 */
+	<Parameter, Result> Result accept(ITypeReferenceVisitorWithParameter<Parameter, Result> visitor, Parameter parameter);
 
 } // JvmTypeReference

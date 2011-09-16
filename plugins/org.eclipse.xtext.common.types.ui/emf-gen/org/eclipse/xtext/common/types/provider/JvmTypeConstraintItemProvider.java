@@ -179,6 +179,16 @@ public class JvmTypeConstraintItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE,
 				 TypesFactory.eINSTANCE.createJvmDelegateTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE,
+				 TypesFactory.eINSTANCE.createJvmSynonymTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE,
+				 TypesFactory.eINSTANCE.createJvmUnknownTypeReference()));
 	}
 
 	/**

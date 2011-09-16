@@ -22,6 +22,7 @@ package org.eclipse.xtext.common.types;
  * @model
  * @since 2.1
  * @generated
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface JvmDelegateTypeReference extends JvmTypeReference
 {

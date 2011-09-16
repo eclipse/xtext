@@ -325,6 +325,26 @@ public interface TypesFactory extends EFactory
 	JvmDelegateTypeReference createJvmDelegateTypeReference();
 
 	/**
+	 * Returns a new object of class '<em>Jvm Synonym Type Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Jvm Synonym Type Reference</em>'.
+	 * @generated
+	 * @since 2.1
+	 */
+	JvmSynonymTypeReference createJvmSynonymTypeReference();
+
+	/**
+	 * Returns a new object of class '<em>Jvm Unknown Type Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Jvm Unknown Type Reference</em>'.
+	 * @generated
+	 * @since 2.1
+	 */
+	JvmUnknownTypeReference createJvmUnknownTypeReference();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

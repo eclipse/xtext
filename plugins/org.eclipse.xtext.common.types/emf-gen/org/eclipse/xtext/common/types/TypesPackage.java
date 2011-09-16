@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EReference;
  * @model kind="package"
  * @generated
  * @noimplement This interface is not intended to be implemented by clients.
+ * @noextend This interface is not intended to be extended by clients.
  */
 public interface TypesPackage extends EPackage
 {
@@ -1418,7 +1419,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_WILDCARD_TYPE_REFERENCE__CONSTRAINTS = JVM_CONSTRAINT_OWNER__CONSTRAINTS;
+	int JVM_WILDCARD_TYPE_REFERENCE__CONSTRAINTS = JVM_TYPE_REFERENCE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Jvm Wildcard Type Reference</em>' class.
@@ -1427,7 +1428,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_WILDCARD_TYPE_REFERENCE_FEATURE_COUNT = JVM_CONSTRAINT_OWNER_FEATURE_COUNT + 0;
+	int JVM_WILDCARD_TYPE_REFERENCE_FEATURE_COUNT = JVM_TYPE_REFERENCE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmAnyTypeReferenceImpl <em>Jvm Any Type Reference</em>}' class.
@@ -1458,6 +1459,51 @@ public interface TypesPackage extends EPackage
 	int JVM_ANY_TYPE_REFERENCE_FEATURE_COUNT = JVM_TYPE_REFERENCE_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmCompoundTypeReferenceImpl <em>Jvm Compound Type Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmCompoundTypeReferenceImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmCompoundTypeReference()
+	 * @generated
+	 * @since 2.1
+	 * @noreference This field is not intended to be referenced by clients.
+	 */
+	int JVM_COMPOUND_TYPE_REFERENCE = 49;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.1
+	 * @noreference This field is not intended to be referenced by clients.
+	 */
+	int JVM_COMPOUND_TYPE_REFERENCE__TYPE = JVM_TYPE_REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>References</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.1
+	 * @noreference This field is not intended to be referenced by clients.
+	 */
+	int JVM_COMPOUND_TYPE_REFERENCE__REFERENCES = JVM_TYPE_REFERENCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Jvm Compound Type Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.1
+	 * @noreference This field is not intended to be referenced by clients.
+	 */
+	int JVM_COMPOUND_TYPE_REFERENCE_FEATURE_COUNT = JVM_TYPE_REFERENCE_FEATURE_COUNT + 2;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmMultiTypeReferenceImpl <em>Jvm Multi Type Reference</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1468,22 +1514,26 @@ public interface TypesPackage extends EPackage
 	int JVM_MULTI_TYPE_REFERENCE = 22;
 
 	/**
-	 * The feature id for the '<em><b>References</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_MULTI_TYPE_REFERENCE__REFERENCES = JVM_TYPE_REFERENCE_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @since 2.1
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
-	int JVM_MULTI_TYPE_REFERENCE__TYPE = JVM_TYPE_REFERENCE_FEATURE_COUNT + 1;
+	int JVM_MULTI_TYPE_REFERENCE__TYPE = JVM_COMPOUND_TYPE_REFERENCE__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>References</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.1
+	 * @noreference This field is not intended to be referenced by clients.
+	 */
+	int JVM_MULTI_TYPE_REFERENCE__REFERENCES = JVM_COMPOUND_TYPE_REFERENCE__REFERENCES;
 
 	/**
 	 * The number of structural features of the '<em>Jvm Multi Type Reference</em>' class.
@@ -1492,7 +1542,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_MULTI_TYPE_REFERENCE_FEATURE_COUNT = JVM_TYPE_REFERENCE_FEATURE_COUNT + 2;
+	int JVM_MULTI_TYPE_REFERENCE_FEATURE_COUNT = JVM_COMPOUND_TYPE_REFERENCE_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmExecutableImpl <em>Jvm Executable</em>}' class.
@@ -2419,6 +2469,8 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.JvmDelegateTypeReferenceImpl
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmDelegateTypeReference()
 	 * @generated
+	 * @since 2.1
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int JVM_DELEGATE_TYPE_REFERENCE = 45;
 
@@ -2428,6 +2480,8 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @since 2.1
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int JVM_DELEGATE_TYPE_REFERENCE__DELEGATE = JVM_TYPE_REFERENCE_FEATURE_COUNT + 0;
 
@@ -2437,6 +2491,8 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @since 2.1
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int JVM_DELEGATE_TYPE_REFERENCE_FEATURE_COUNT = JVM_TYPE_REFERENCE_FEATURE_COUNT + 1;
 
@@ -2447,8 +2503,21 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.JvmSpecializedTypeReferenceImpl
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmSpecializedTypeReference()
 	 * @generated
+	 * @since 2.1
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int JVM_SPECIALIZED_TYPE_REFERENCE = 46;
+
+	/**
+	 * The feature id for the '<em><b>Equivalent</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.1
+	 * @noreference This field is not intended to be referenced by clients.
+	 */
+	int JVM_SPECIALIZED_TYPE_REFERENCE__EQUIVALENT = JVM_TYPE_REFERENCE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Jvm Specialized Type Reference</em>' class.
@@ -2456,8 +2525,89 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @since 2.1
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
-	int JVM_SPECIALIZED_TYPE_REFERENCE_FEATURE_COUNT = JVM_TYPE_REFERENCE_FEATURE_COUNT + 0;
+	int JVM_SPECIALIZED_TYPE_REFERENCE_FEATURE_COUNT = JVM_TYPE_REFERENCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmSynonymTypeReferenceImpl <em>Jvm Synonym Type Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmSynonymTypeReferenceImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmSynonymTypeReference()
+	 * @generated
+	 * @since 2.1
+	 * @noreference This field is not intended to be referenced by clients.
+	 */
+	int JVM_SYNONYM_TYPE_REFERENCE = 47;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.1
+	 * @noreference This field is not intended to be referenced by clients.
+	 */
+	int JVM_SYNONYM_TYPE_REFERENCE__TYPE = JVM_COMPOUND_TYPE_REFERENCE__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>References</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.1
+	 * @noreference This field is not intended to be referenced by clients.
+	 */
+	int JVM_SYNONYM_TYPE_REFERENCE__REFERENCES = JVM_COMPOUND_TYPE_REFERENCE__REFERENCES;
+
+	/**
+	 * The number of structural features of the '<em>Jvm Synonym Type Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.1
+	 * @noreference This field is not intended to be referenced by clients.
+	 */
+	int JVM_SYNONYM_TYPE_REFERENCE_FEATURE_COUNT = JVM_COMPOUND_TYPE_REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmUnknownTypeReferenceImpl <em>Jvm Unknown Type Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmUnknownTypeReferenceImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmUnknownTypeReference()
+	 * @generated
+	 * @since 2.1
+	 * @noreference This field is not intended to be referenced by clients.
+	 */
+	int JVM_UNKNOWN_TYPE_REFERENCE = 48;
+
+	/**
+	 * The feature id for the '<em><b>Exception</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.1
+	 * @noreference This field is not intended to be referenced by clients.
+	 */
+	int JVM_UNKNOWN_TYPE_REFERENCE__EXCEPTION = JVM_TYPE_REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Jvm Unknown Type Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.1
+	 * @noreference This field is not intended to be referenced by clients.
+	 */
+	int JVM_UNKNOWN_TYPE_REFERENCE_FEATURE_COUNT = JVM_TYPE_REFERENCE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.JvmVisibility <em>Jvm Visibility</em>}' enum.
@@ -2466,8 +2616,10 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.JvmVisibility
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmVisibility()
 	 * @generated
+	 * @since 2.1
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
-	int JVM_VISIBILITY = 47;
+	int JVM_VISIBILITY = 50;
 
 	/**
 	 * The meta object id for the '<em>Iterable</em>' data type.
@@ -2476,8 +2628,46 @@ public interface TypesPackage extends EPackage
 	 * @see java.lang.Iterable
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getIterable()
 	 * @generated
+	 * @since 2.1
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
-	int ITERABLE = 48;
+	int ITERABLE = 51;
+
+	/**
+	 * The meta object id for the '<em>IType Reference Visitor</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.util.ITypeReferenceVisitor
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getITypeReferenceVisitor()
+	 * @generated
+	 * @since 2.1
+	 * @noreference This field is not intended to be referenced by clients.
+	 */
+	int ITYPE_REFERENCE_VISITOR = 52;
+
+	/**
+	 * The meta object id for the '<em>IType Reference Visitor With Parameter</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.util.ITypeReferenceVisitorWithParameter
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getITypeReferenceVisitorWithParameter()
+	 * @generated
+	 * @since 2.1
+	 * @noreference This field is not intended to be referenced by clients.
+	 */
+	int ITYPE_REFERENCE_VISITOR_WITH_PARAMETER = 53;
+
+	/**
+	 * The meta object id for the '<em>Exception</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.lang.Exception
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getException()
+	 * @generated
+	 * @since 2.1
+	 * @noreference This field is not intended to be referenced by clients.
+	 */
+	int EXCEPTION = 54;
 
 
 	/**
@@ -2941,28 +3131,6 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 */
 	EClass getJvmMultiTypeReference();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.JvmMultiTypeReference#getReferences <em>References</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>References</em>'.
-	 * @see org.eclipse.xtext.common.types.JvmMultiTypeReference#getReferences()
-	 * @see #getJvmMultiTypeReference()
-	 * @generated
-	 */
-	EReference getJvmMultiTypeReference_References();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.xtext.common.types.JvmMultiTypeReference#getType <em>Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Type</em>'.
-	 * @see org.eclipse.xtext.common.types.JvmMultiTypeReference#getType()
-	 * @see #getJvmMultiTypeReference()
-	 * @generated
-	 */
-	EReference getJvmMultiTypeReference_Type();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmMember <em>Jvm Member</em>}'.
@@ -3565,6 +3733,7 @@ public interface TypesPackage extends EPackage
 	 * @return the meta object for class '<em>Jvm Delegate Type Reference</em>'.
 	 * @see org.eclipse.xtext.common.types.JvmDelegateTypeReference
 	 * @generated
+	 * @since 2.1
 	 */
 	EClass getJvmDelegateTypeReference();
 
@@ -3576,6 +3745,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.JvmDelegateTypeReference#getDelegate()
 	 * @see #getJvmDelegateTypeReference()
 	 * @generated
+	 * @since 2.1
 	 */
 	EReference getJvmDelegateTypeReference_Delegate();
 
@@ -3586,8 +3756,90 @@ public interface TypesPackage extends EPackage
 	 * @return the meta object for class '<em>Jvm Specialized Type Reference</em>'.
 	 * @see org.eclipse.xtext.common.types.JvmSpecializedTypeReference
 	 * @generated
+	 * @since 2.1
 	 */
 	EClass getJvmSpecializedTypeReference();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.common.types.JvmSpecializedTypeReference#getEquivalent <em>Equivalent</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Equivalent</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmSpecializedTypeReference#getEquivalent()
+	 * @see #getJvmSpecializedTypeReference()
+	 * @generated
+	 * @since 2.1
+	 */
+	EReference getJvmSpecializedTypeReference_Equivalent();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmSynonymTypeReference <em>Jvm Synonym Type Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Jvm Synonym Type Reference</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmSynonymTypeReference
+	 * @generated
+	 * @since 2.1
+	 */
+	EClass getJvmSynonymTypeReference();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmUnknownTypeReference <em>Jvm Unknown Type Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Jvm Unknown Type Reference</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmUnknownTypeReference
+	 * @generated
+	 * @since 2.1
+	 */
+	EClass getJvmUnknownTypeReference();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmUnknownTypeReference#getException <em>Exception</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Exception</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmUnknownTypeReference#getException()
+	 * @see #getJvmUnknownTypeReference()
+	 * @generated
+	 * @since 2.1
+	 */
+	EAttribute getJvmUnknownTypeReference_Exception();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmCompoundTypeReference <em>Jvm Compound Type Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Jvm Compound Type Reference</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmCompoundTypeReference
+	 * @generated
+	 * @since 2.1
+	 */
+	EClass getJvmCompoundTypeReference();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.xtext.common.types.JvmCompoundTypeReference#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Type</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmCompoundTypeReference#getType()
+	 * @see #getJvmCompoundTypeReference()
+	 * @generated
+	 * @since 2.1
+	 */
+	EReference getJvmCompoundTypeReference_Type();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.JvmCompoundTypeReference#getReferences <em>References</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>References</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmCompoundTypeReference#getReferences()
+	 * @see #getJvmCompoundTypeReference()
+	 * @generated
+	 * @since 2.1
+	 */
+	EReference getJvmCompoundTypeReference_References();
 
 	/**
 	 * Returns the meta object for enum '{@link org.eclipse.xtext.common.types.JvmVisibility <em>Jvm Visibility</em>}'.
@@ -3609,6 +3861,42 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 */
 	EDataType getIterable();
+
+	/**
+	 * Returns the meta object for data type '{@link org.eclipse.xtext.common.types.util.ITypeReferenceVisitor <em>IType Reference Visitor</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>IType Reference Visitor</em>'.
+	 * @see org.eclipse.xtext.common.types.util.ITypeReferenceVisitor
+	 * @model instanceClass="org.eclipse.xtext.common.types.util.ITypeReferenceVisitor" serializeable="false" typeParameters="Result"
+	 * @generated
+	 * @since 2.1
+	 */
+	EDataType getITypeReferenceVisitor();
+
+	/**
+	 * Returns the meta object for data type '{@link org.eclipse.xtext.common.types.util.ITypeReferenceVisitorWithParameter <em>IType Reference Visitor With Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>IType Reference Visitor With Parameter</em>'.
+	 * @see org.eclipse.xtext.common.types.util.ITypeReferenceVisitorWithParameter
+	 * @model instanceClass="org.eclipse.xtext.common.types.util.ITypeReferenceVisitorWithParameter" serializeable="false" typeParameters="Parameter Result"
+	 * @generated
+	 * @since 2.1
+	 */
+	EDataType getITypeReferenceVisitorWithParameter();
+
+	/**
+	 * Returns the meta object for data type '{@link java.lang.Exception <em>Exception</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Exception</em>'.
+	 * @see java.lang.Exception
+	 * @model instanceClass="java.lang.Exception" serializeable="false"
+	 * @generated
+	 * @since 2.1
+	 */
+	EDataType getException();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -4032,22 +4320,6 @@ public interface TypesPackage extends EPackage
 		 * @generated
 		 */
 		EClass JVM_MULTI_TYPE_REFERENCE = eINSTANCE.getJvmMultiTypeReference();
-
-		/**
-		 * The meta object literal for the '<em><b>References</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference JVM_MULTI_TYPE_REFERENCE__REFERENCES = eINSTANCE.getJvmMultiTypeReference_References();
-
-		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference JVM_MULTI_TYPE_REFERENCE__TYPE = eINSTANCE.getJvmMultiTypeReference_Type();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmMemberImpl <em>Jvm Member</em>}' class.
@@ -4548,6 +4820,7 @@ public interface TypesPackage extends EPackage
 		 * @see org.eclipse.xtext.common.types.impl.JvmDelegateTypeReferenceImpl
 		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmDelegateTypeReference()
 		 * @generated
+		 * @since 2.1
 		 */
 		EClass JVM_DELEGATE_TYPE_REFERENCE = eINSTANCE.getJvmDelegateTypeReference();
 
@@ -4556,6 +4829,7 @@ public interface TypesPackage extends EPackage
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
+		 * @since 2.1
 		 */
 		EReference JVM_DELEGATE_TYPE_REFERENCE__DELEGATE = eINSTANCE.getJvmDelegateTypeReference_Delegate();
 
@@ -4566,8 +4840,78 @@ public interface TypesPackage extends EPackage
 		 * @see org.eclipse.xtext.common.types.impl.JvmSpecializedTypeReferenceImpl
 		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmSpecializedTypeReference()
 		 * @generated
+		 * @since 2.1
 		 */
 		EClass JVM_SPECIALIZED_TYPE_REFERENCE = eINSTANCE.getJvmSpecializedTypeReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Equivalent</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 * @since 2.1
+		 */
+		EReference JVM_SPECIALIZED_TYPE_REFERENCE__EQUIVALENT = eINSTANCE.getJvmSpecializedTypeReference_Equivalent();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmSynonymTypeReferenceImpl <em>Jvm Synonym Type Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.common.types.impl.JvmSynonymTypeReferenceImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmSynonymTypeReference()
+		 * @generated
+		 * @since 2.1
+		 */
+		EClass JVM_SYNONYM_TYPE_REFERENCE = eINSTANCE.getJvmSynonymTypeReference();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmUnknownTypeReferenceImpl <em>Jvm Unknown Type Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.common.types.impl.JvmUnknownTypeReferenceImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmUnknownTypeReference()
+		 * @generated
+		 * @since 2.1
+		 */
+		EClass JVM_UNKNOWN_TYPE_REFERENCE = eINSTANCE.getJvmUnknownTypeReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Exception</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 * @since 2.1
+		 */
+		EAttribute JVM_UNKNOWN_TYPE_REFERENCE__EXCEPTION = eINSTANCE.getJvmUnknownTypeReference_Exception();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmCompoundTypeReferenceImpl <em>Jvm Compound Type Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.common.types.impl.JvmCompoundTypeReferenceImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmCompoundTypeReference()
+		 * @generated
+		 * @since 2.1
+		 */
+		EClass JVM_COMPOUND_TYPE_REFERENCE = eINSTANCE.getJvmCompoundTypeReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 * @since 2.1
+		 */
+		EReference JVM_COMPOUND_TYPE_REFERENCE__TYPE = eINSTANCE.getJvmCompoundTypeReference_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>References</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 * @since 2.1
+		 */
+		EReference JVM_COMPOUND_TYPE_REFERENCE__REFERENCES = eINSTANCE.getJvmCompoundTypeReference_References();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.JvmVisibility <em>Jvm Visibility</em>}' enum.
@@ -4588,6 +4932,39 @@ public interface TypesPackage extends EPackage
 		 * @generated
 		 */
 		EDataType ITERABLE = eINSTANCE.getIterable();
+
+		/**
+		 * The meta object literal for the '<em>IType Reference Visitor</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.common.types.util.ITypeReferenceVisitor
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getITypeReferenceVisitor()
+		 * @generated
+		 * @since 2.1
+		 */
+		EDataType ITYPE_REFERENCE_VISITOR = eINSTANCE.getITypeReferenceVisitor();
+
+		/**
+		 * The meta object literal for the '<em>IType Reference Visitor With Parameter</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.common.types.util.ITypeReferenceVisitorWithParameter
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getITypeReferenceVisitorWithParameter()
+		 * @generated
+		 * @since 2.1
+		 */
+		EDataType ITYPE_REFERENCE_VISITOR_WITH_PARAMETER = eINSTANCE.getITypeReferenceVisitorWithParameter();
+
+		/**
+		 * The meta object literal for the '<em>Exception</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.lang.Exception
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getException()
+		 * @generated
+		 * @since 2.1
+		 */
+		EDataType EXCEPTION = eINSTANCE.getException();
 
 	}
 
