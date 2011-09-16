@@ -8,13 +8,13 @@
 package org.eclipse.xtext.xbase.scoping.featurecalls;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.typing.SynonymTypesProvider;
 
 import com.google.common.collect.Iterables;
@@ -25,14 +25,11 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
-public class DefaultFeaturesForTypeProvider implements IFeaturesForTypeProvider {
+public class DefaultFeaturesForTypeProvider extends AbstractFeaturesForTypeProvider {
 
 	@Inject
-	private TypeReferences typeReferences;
+	private SynonymTypesProvider synonymTypesProvider;
 	
-	@Inject
-	private SynonymTypesProvider synonymesProvider;
-
 	public Iterable<JvmFeature> getFeaturesByName(String name, JvmTypeReference declarator,
 			Iterable<JvmTypeReference> hierarchy) {
 		return doGetFeaturesByName(name, declarator, hierarchy);
@@ -43,19 +40,22 @@ public class DefaultFeaturesForTypeProvider implements IFeaturesForTypeProvider 
 		if (declarator == null)
 			return Collections.emptyList();
 		List<JvmFeature> result = Lists.newArrayList();
-		JvmType rawType = typeReferences.getRawType(declarator);
-		if (rawType instanceof JvmDeclaredType) {
-			collectFeatures(name, rawType, result);
-		} else if (rawType == null) { // TODO remove special treatment of multi types and other specialized type reference implementations
-			for(JvmTypeReference reference: hierarchy) {
-				JvmType referenceRawType = typeReferences.getRawType(reference);
-				collectFeatures(name, referenceRawType, result);
+		List<JvmType> rawTypes = getRawTypeHelper().getAllRawTypes(declarator, null);
+		for(JvmType rawType: rawTypes) {
+			if (rawType instanceof JvmDeclaredType) {
+				collectFeatures(name, rawType, result);
 			}
-			return result;
 		}
-		for(JvmTypeReference synonym: synonymesProvider.getSynonymTypes(declarator)) {
-			JvmType synonymRawType = typeReferences.getRawType(synonym);
-			collectFeatures(name, synonymRawType, result);
+		// TODO : move synonym support to creation time of type references
+		Iterator<JvmTypeReference> synonymesIterator = synonymTypesProvider.getSynonymTypes(declarator).iterator();
+		while(synonymesIterator.hasNext()) {
+			JvmTypeReference synonym = synonymesIterator.next();
+			List<JvmType> synonymRawTypes = getRawTypeHelper().getAllRawTypes(synonym, declarator.eResource());
+			for(JvmType synonymRawType: synonymRawTypes) {
+				if (synonymRawType instanceof JvmDeclaredType && !rawTypes.contains(synonymRawType)) {
+					collectFeatures(name, synonymRawType, result);
+				}
+			}
 		}
 		return result;
 	}

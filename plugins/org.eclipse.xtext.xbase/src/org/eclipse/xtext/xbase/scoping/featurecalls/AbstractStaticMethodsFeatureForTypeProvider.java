@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.scoping.featurecalls;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -68,13 +69,15 @@ public abstract class AbstractStaticMethodsFeatureForTypeProvider extends Abstra
 					}
 				}) ;
 				if (staticType != null) {
-					JvmType rawType = getTypeReferences().getRawType(staticType);
-					if (rawType instanceof JvmDeclaredType) {
-						Iterable<JvmFeature> features = name != null ? ((JvmDeclaredType) rawType).findAllFeaturesByName(name) : ((JvmDeclaredType) rawType).getAllFeatures();
-						for(JvmFeature feature: features) {
-							if (feature instanceof JvmOperation) {
-								if (isMatchingExtension(e.getKey(), (JvmOperation) feature)) {
-									result.add(feature);
+					List<JvmType> rawTypes = getRawTypeHelper().getAllRawTypes(staticType, context);
+					for(JvmType rawType: rawTypes) {
+						if (rawType instanceof JvmDeclaredType) {
+							Iterable<JvmFeature> features = name != null ? ((JvmDeclaredType) rawType).findAllFeaturesByName(name) : ((JvmDeclaredType) rawType).getAllFeatures();
+							for(JvmFeature feature: features) {
+								if (feature instanceof JvmOperation) {
+									if (isMatchingExtension(e.getKey(), (JvmOperation) feature)) {
+										result.add(feature);
+									}
 								}
 							}
 						}
