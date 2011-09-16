@@ -163,7 +163,6 @@ public class Xtend2Resource extends XbaseResource {
 		for (T element : iterable) {
 			JvmTypeReference apply = mapping.apply(element);
 			if (!typeReferences.isNullOrProxy(apply)) {
-				apply = primitives.asWrapperTypeIfPrimitive(apply); 
 				references.add(apply);
 			}
 		}

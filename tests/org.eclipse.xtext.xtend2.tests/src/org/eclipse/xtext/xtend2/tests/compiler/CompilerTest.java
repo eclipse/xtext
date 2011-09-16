@@ -53,6 +53,18 @@ import com.google.inject.Injector;
  */
 public class CompilerTest extends AbstractXtend2TestCase {
 	
+	public void testDispatchSignatureWithPrimitives() throws Exception {
+		String code = 
+				"package x class Z {" +
+				"  def dispatch foo(Object x, boolean b) {}\n" +
+				"  def dispatch foo(String x, boolean b) {}\n" +
+				"}\n";
+		String javaCode = compileToJavaCode(code);
+		Class<?> class1 = javaCompiler.compileToClass("x.Z", javaCode);
+		Method method = class1.getMethod("foo", new Class<?>[]{Object.class, Boolean.TYPE});
+		assertNotNull(method);
+	}
+	
 	/**
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=345458
 	 */
