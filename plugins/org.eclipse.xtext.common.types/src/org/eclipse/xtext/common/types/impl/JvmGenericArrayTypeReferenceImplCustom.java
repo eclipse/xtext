@@ -13,6 +13,8 @@ import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.util.ITypeReferenceVisitor;
+import org.eclipse.xtext.common.types.util.ITypeReferenceVisitorWithParameter;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -87,6 +89,18 @@ public class JvmGenericArrayTypeReferenceImplCustom extends JvmGenericArrayTypeR
 			result.append(getIdentifier());
 		}
 		return result.toString();
+	}
+	
+	@Override
+	public <Result> Result accept(ITypeReferenceVisitor<Result> visitor) {
+		Result result = visitor.doVisitGenericArrayTypeReference(this);
+		return result;
+	}
+	
+	@Override
+	public <Parameter, Result> Result accept(ITypeReferenceVisitorWithParameter<Parameter,Result> visitor, Parameter parameter) {
+		Result result = visitor.doVisitGenericArrayTypeReference(this, parameter);
+		return result;
 	}
 	
 }

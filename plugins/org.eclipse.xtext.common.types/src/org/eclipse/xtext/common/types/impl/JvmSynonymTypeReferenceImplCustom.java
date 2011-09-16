@@ -7,9 +7,28 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
+import org.eclipse.xtext.common.types.util.ITypeReferenceVisitor;
+import org.eclipse.xtext.common.types.util.ITypeReferenceVisitorWithParameter;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class JvmSynonymTypeReferenceImplCustom extends JvmSynonymTypeReferenceImpl {
 	
+	@Override
+	protected String getDelimiter() {
+		return " | ";
+	}
+	
+	@Override
+	public <Result> Result accept(ITypeReferenceVisitor<Result> visitor) {
+		Result result = visitor.doVisitSynonymTypeReference(this);
+		return result;
+	}
+	
+	@Override
+	public <Parameter, Result> Result accept(ITypeReferenceVisitorWithParameter<Parameter,Result> visitor, Parameter parameter) {
+		Result result = visitor.doVisitSynonymTypeReference(this, parameter);
+		return result;
+	}
 }
