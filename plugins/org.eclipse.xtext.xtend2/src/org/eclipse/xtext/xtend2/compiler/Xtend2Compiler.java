@@ -43,6 +43,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.compiler.DelegatingAppendable;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
+import org.eclipse.xtext.xbase.compiler.Later;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
@@ -96,7 +97,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 	
 	@Inject
 	private IdentifiableSimpleNameProvider simpleNameProvider;
-
+	
 	/**
 	 * Compile the given {@link XtendFile file} to java code and write
 	 * the result into the writer. It is assumed that a single file will
@@ -200,8 +201,8 @@ public class Xtend2Compiler extends XbaseCompiler {
 		}
 	}
 
-	protected void generateDispatchMethod(JvmOperation dispatchOperation, Collection<JvmOperation> collection,
-			IAppendable a) {
+	protected void generateDispatchMethod(final JvmOperation dispatchOperation, final Collection<JvmOperation> collection,
+			final IAppendable a) {
 		a.openScope();
 		a.append("\n\n").append(getJavaVisibility(dispatchOperation.getVisibility())).append(" ");
 		serialize(dispatchOperation.getReturnType(), dispatchOperation, a);
@@ -213,27 +214,53 @@ public class Xtend2Compiler extends XbaseCompiler {
 		a.append("{");
 		a.increaseIndentation();
 		a.append("\n");
-		for (JvmOperation operation : dispatchingSupport.sort(collection)) {
-			a.append("if (");
-			a.increaseIndentation().increaseIndentation();
+		boolean needsElse = true;
+		final List<JvmOperation> sortedDispatchOperations = dispatchingSupport.sort(collection);
+		for (JvmOperation operation : sortedDispatchOperations) {
 			Iterator<JvmFormalParameter> iter1 = dispatchOperation.getParameters().iterator();
+			List<Later> laters = newArrayList();
 			for (Iterator<JvmFormalParameter> iter2 = operation.getParameters().iterator(); iter2.hasNext();) {
 				JvmFormalParameter p1 = iter1.next();
 				JvmFormalParameter p2 = iter2.next();
 				final JvmTypeReference type = p2.getParameterType();
 				final String name = getVarName(p1, a);
-				if (getTypeReferences().is(type, Void.class)) {
-					a.append("(").append(name).append(" == null)");
-				} else {
-					a.append("(").append(name).append(" instanceof ");
-					a.append(getPrimitives().asWrapperTypeIfPrimitive(type).getType()).append(")");
-				}
-				if (iter2.hasNext()) {
-					a.append("\n && ");
+				if (!getTypeConformanceComputer().isConformant(p2.getParameterType(), p1.getParameterType(), true)) {
+					if (getTypeReferences().is(type, Void.class)) {
+						laters.add(new Later() {
+							@Override
+							public void exec() {
+								a.append("(").append(name).append(" == null)");
+							}});
+					} else {
+						laters.add(new Later() {
+							@Override
+							public void exec() {
+								a.append("(").append(name).append(" instanceof ");
+								a.append(getPrimitives().asWrapperTypeIfPrimitive(type).getType()).append(")");
+							}});
+					}
 				}
 			}
-			a.decreaseIndentation().decreaseIndentation();
-			a.append(") {").increaseIndentation();
+			// if it's not the first if append an 'else'
+			if (sortedDispatchOperations.get(0) != operation) {
+				a.append(" else ");
+			}
+			if (laters.isEmpty()) {
+				needsElse = false;
+				a.append("{").increaseIndentation();
+			} else {
+				a.append("if (");
+				a.increaseIndentation().increaseIndentation();
+				Iterator<Later> iterator = laters.iterator();
+				while (iterator.hasNext()) {
+					iterator.next().exec();
+					if (iterator.hasNext()) {
+						a.append("\n && ");
+					}
+				}
+				a.decreaseIndentation().decreaseIndentation();
+				a.append(") {").increaseIndentation();
+			}
 			a.append("\n");
 			final boolean isCurrentVoid = getTypeReferences().is(operation.getReturnType(), Void.TYPE);
 			final boolean isDispatchVoid = getTypeReferences().is(dispatchOperation.getReturnType(), Void.TYPE);
@@ -250,25 +277,28 @@ public class Xtend2Compiler extends XbaseCompiler {
 				}
 				a.append(";");
 			}
-			a.decreaseIndentation().append("\n} else ");
+			a.decreaseIndentation().append("\n}");
 		}
-		a.append("{").increaseIndentation();
-		// TODO use import for java.util.Arrays
-		a.append("\n");
-		a.increaseIndentation();
-		a.append("throw new IllegalArgumentException(\"Unhandled parameter types: \" +\njava.util.Arrays.<Object>asList(");
-		Iterator<JvmFormalParameter> iterator = dispatchOperation.getParameters().iterator();
-		while(iterator.hasNext()) {
-			JvmFormalParameter parameter = iterator.next();
-			final String name = getVarName(parameter, a);
-			a.append(name);
-			if (iterator.hasNext()) {
-				a.append(", ");
+		if (needsElse) {
+			a.append(" else {").increaseIndentation();
+			a.append("\n");
+			a.increaseIndentation();
+			a.append("throw new IllegalArgumentException(\"Unhandled parameter types: \" +\n");
+			JvmType jvmType = getTypeReferences().findDeclaredType("java.util.Arrays", dispatchOperation);
+			a.append(jvmType).append(".<Object>asList(");
+			Iterator<JvmFormalParameter> iterator = dispatchOperation.getParameters().iterator();
+			while(iterator.hasNext()) {
+				JvmFormalParameter parameter = iterator.next();
+				final String name = getVarName(parameter, a);
+				a.append(name);
+				if (iterator.hasNext()) {
+					a.append(", ");
+				}
 			}
+			a.append(").toString());");
+			a.decreaseIndentation();
+			a.decreaseIndentation().append("\n}");
 		}
-		a.append(").toString());");
-		a.decreaseIndentation();
-		a.decreaseIndentation().append("\n}");
 		a.decreaseIndentation().append("\n}");
 		a.closeScope();
 	}

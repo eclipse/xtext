@@ -126,11 +126,8 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 			"  public void foo(final Object s) {\n" + 
 			"    if ((s instanceof String)) {\n" + 
 			"      _foo((String)s);\n" + 
-			"    } else if ((s instanceof Object)) {\n" + 
-			"      _foo((Object)s);\n" + 
 			"    } else {\n" + 
-			"      throw new IllegalArgumentException(\"Unhandled parameter types: \" +\n" +
-			"        java.util.Arrays.<Object>asList(s).toString());\n" + 
+			"      _foo((Object)s);\n" + 
 			"    }\n" + 
 			"  }\n" +
 			"}";
