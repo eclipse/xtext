@@ -29,6 +29,7 @@ import org.eclipse.xtext.xtend2.resource.Xtend2Resource;
 import org.eclipse.xtext.xtend2.resource.Xtend2ResourceDescriptionStrategy;
 import org.eclipse.xtext.xtend2.resource.XtendEObjectAtOffsetHelper;
 import org.eclipse.xtext.xtend2.scoping.Xtend2ImportedNamespaceScopeProvider;
+import org.eclipse.xtext.xtend2.scoping.Xtend2ScopeProvider;
 import org.eclipse.xtext.xtend2.typing.Xtend2TypeProvider;
 import org.eclipse.xtext.xtend2.typing.XtendTypeArgumentContextProvider;
 import org.eclipse.xtext.xtend2.validation.XtendEarlyExitValidator;
@@ -97,12 +98,23 @@ public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2
 		return XtendTypeArgumentContextProvider.class;
 	}
 	
+	@Override
 	public Class<? extends IGenerator> bindIGenerator() {
 		return Xtend2Generator.class;
 	}
 	
 	public Class<? extends OutputConfigurationProvider> bindOutputConfigurationProvider() {
 		return Xtend2OutputConfigurationProvider.class;
+	}
+	
+//	@Override
+//	public Class<? extends Manager> bindIResourceDescription$Manager() {
+//		return DefaultResourceDescriptionManager.class;
+//	}
+	
+	@Override
+	public java.lang.Class<? extends IScopeProvider> bindIScopeProvider() {
+		return Xtend2ScopeProvider.class;
 	}
 	
 }

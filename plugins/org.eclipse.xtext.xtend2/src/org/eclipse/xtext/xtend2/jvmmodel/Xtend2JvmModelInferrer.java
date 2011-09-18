@@ -51,6 +51,7 @@ import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Sven Efftinge
  */
 public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 
@@ -69,35 +70,39 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 	@Inject
 	private IdentifiableSimpleNameProvider simpleNameProvider;
 	
-	public void infer(EObject xtendFile, IAcceptor<JvmDeclaredType> acceptor) {
+	public void infer(EObject xtendFile, IAcceptor<JvmDeclaredType> acceptor, boolean prelinkingPhase) {
 		if (!(xtendFile instanceof XtendFile))
 			throw new IllegalArgumentException("expected XtendFile but was "+xtendFile);
 		final XtendFile xtendFile2 = (XtendFile)xtendFile;
 		if (xtendFile2.getXtendClass()==null)
 			return;
-		JvmGenericType inferredJvmType = transform(xtendFile2.getXtendClass());
+		JvmGenericType inferredJvmType = transform(xtendFile2.getXtendClass(), prelinkingPhase);
 		acceptor.accept(inferredJvmType);
 	}
 
-	protected JvmGenericType transform(XtendClass source) {
+	protected JvmGenericType transform(XtendClass source, boolean prelinkingPhase) {
 		JvmGenericType target = typesFactory.createJvmGenericType();
 		source.eResource().getContents().add(target);
 		associator.associatePrimary(source, target);
 		target.setPackageName(source.getPackageName());
 		target.setSimpleName(source.getName());
 		target.setVisibility(JvmVisibility.PUBLIC);
-		addConstructor(source, target);
-		for (JvmTypeReference superType : source.getSuperTypes())
-			target.getSuperTypes().add(EcoreUtil2.cloneWithProxies(superType));
-		for (JvmTypeParameter typeParameter : source.getTypeParameters())
-			target.getTypeParameters().add(EcoreUtil2.cloneWithProxies(typeParameter));
-		for (XtendMember member : source.getMembers()) {
-			if (member instanceof XtendField || member instanceof XtendFunction && ((XtendFunction) member).getName()!=null) {
-				transform(member, target);
+		if (! prelinkingPhase) {
+			addConstructor(source, target);
+			for (JvmTypeReference superType : source.getSuperTypes())
+				target.getSuperTypes().add(EcoreUtil2.cloneWithProxies(superType));
+			for (JvmTypeParameter typeParameter : source.getTypeParameters())
+				target.getTypeParameters().add(EcoreUtil2.cloneWithProxies(typeParameter));
+			for (XtendMember member : source.getMembers()) {
+				if (member instanceof XtendField 
+						|| member instanceof XtendFunction
+						&& ((XtendFunction) member).getName() != null) {
+					transform(member, target);
+				}
 			}
+			appendSyntheticDispatchMethods(source, target);
+			computeInferredReturnTypes(target);
 		}
-		appendSyntheticDispatchMethods(source, target);
-		computeInferredReturnTypes(target);
 		return target;
 	}
 
