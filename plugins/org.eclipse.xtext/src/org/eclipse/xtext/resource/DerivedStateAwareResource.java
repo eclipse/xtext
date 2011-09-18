@@ -31,17 +31,15 @@ public class DerivedStateAwareResource extends LazyLinkingResource {
 	}
 	
 	protected volatile boolean fullyInitialized = false;
+	protected volatile boolean isInitializing = false;
 
 	@Override
 	public synchronized EList<EObject> getContents() {
-		if (isLoaded && !isLoading && !isUpdating && !fullyInitialized) {
+		if (isLoaded && !isLoading && !isInitializing && !isUpdating && !fullyInitialized) {
 			try {
 				eSetDeliver(false);
-				isLoading = true;
-				installDerivedState();
-				fullyInitialized = true;
+				installDerivedState(false);
 			} finally {
-				isLoading = false;
 				eSetDeliver(true);
 			}
 		}
@@ -53,18 +51,33 @@ public class DerivedStateAwareResource extends LazyLinkingResource {
 		if (fullyInitialized) {
 			discardDerivedState();
 		}
-		fullyInitialized = false;
 		super.updateInternalState(oldParseResult, newParseResult);
 	}
 
 	public void discardDerivedState() {
-		if (derivedStateComputer != null)
-			derivedStateComputer.discardDerivedState(this);
+		if (fullyInitialized && !isInitializing) {
+			try {
+				isInitializing = true;
+				if (derivedStateComputer != null)
+					derivedStateComputer.discardDerivedState(this);
+				fullyInitialized = false;
+			} finally {
+				isInitializing = false;
+			}
+		}
 	}
 
-	public void installDerivedState() {
-		if (derivedStateComputer != null)
-			derivedStateComputer.installDerivedState(this);
+	public void installDerivedState(boolean isPrelinkingPhase) {
+		if (!fullyInitialized && !isInitializing) {
+			try {
+				isInitializing = true;
+				if (derivedStateComputer != null)
+					derivedStateComputer.installDerivedState(this, isPrelinkingPhase);
+				fullyInitialized = true;
+			} finally {
+				isInitializing = false;
+			}
+		}
 	}
 
 }
