@@ -18,7 +18,7 @@ class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
 	
 	@Inject extension JvmTypesBuilder
 
-	def dispatch infer(Entity e, IAcceptor<JvmDeclaredType> acceptor) {
+	def dispatch infer(Entity e, IAcceptor<JvmDeclaredType> acceptor, boolean prelinkingPhase) {
 		acceptor.accept(
 			e.toClazz( e.fullName ) [
 				

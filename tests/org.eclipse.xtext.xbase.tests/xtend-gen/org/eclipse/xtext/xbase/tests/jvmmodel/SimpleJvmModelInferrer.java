@@ -26,7 +26,7 @@ public class SimpleJvmModelInferrer extends AbstractModelInferrer {
   @Inject
   private TypeReferences references;
   
-  protected void _infer(final XExpression e, final IAcceptor<JvmDeclaredType> acceptor) {
+  protected void _infer(final XExpression e, final IAcceptor<JvmDeclaredType> acceptor, final boolean prelinkingPhase) {
     final Function1<JvmGenericType,Void> _function = new Function1<JvmGenericType,Void>() {
         public Void apply(final JvmGenericType it) {
           Void _xblockexpression = null;
@@ -47,7 +47,7 @@ public class SimpleJvmModelInferrer extends AbstractModelInferrer {
               };
             JvmOperation _method = SimpleJvmModelInferrer.this._jvmTypesBuilder0.toMethod(e, "doStuff", _typeForName, _function_1);
             CollectionExtensions.<JvmMember>operator_add(_members, _method);
-            _xblockexpression = (null);
+            _xblockexpression = (((Void) null));
           }
           return _xblockexpression;
         }
@@ -56,16 +56,11 @@ public class SimpleJvmModelInferrer extends AbstractModelInferrer {
     acceptor.accept(_clazz);
   }
   
-  public void infer(final EObject e, final IAcceptor<JvmDeclaredType> acceptor) {
-    if ((e instanceof XExpression)
-         && (acceptor instanceof IAcceptor)) {
-      _infer((XExpression)e, (IAcceptor<JvmDeclaredType>)acceptor);
-    } else if ((e instanceof EObject)
-         && (acceptor instanceof IAcceptor)) {
-      _infer((EObject)e, (IAcceptor<JvmDeclaredType>)acceptor);
+  public void infer(final EObject e, final IAcceptor<JvmDeclaredType> acceptor, final boolean prelinkingPhase) {
+    if ((e instanceof XExpression)) {
+      _infer((XExpression)e, (IAcceptor<JvmDeclaredType>)acceptor, (Boolean)prelinkingPhase);
     } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        java.util.Arrays.<Object>asList(e, acceptor).toString());
+      _infer((EObject)e, (IAcceptor<JvmDeclaredType>)acceptor, (Boolean)prelinkingPhase);
     }
   }
 }

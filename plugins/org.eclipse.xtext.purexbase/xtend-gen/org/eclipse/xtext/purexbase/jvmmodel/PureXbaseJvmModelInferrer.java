@@ -16,12 +16,13 @@ import org.eclipse.xtext.purexbase.pureXbase.Model;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer.ExitPoint;
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
+import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
@@ -30,7 +31,7 @@ import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
-public class PureXbaseJvmModelInferrer implements IJvmModelInferrer {
+public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
   
   @Inject
   private JvmTypesBuilder _jvmTypesBuilder0;
@@ -41,10 +42,7 @@ public class PureXbaseJvmModelInferrer implements IJvmModelInferrer {
   @Inject
   private XbaseCompiler compiler;
   
-  protected void _infer(final EObject e, final IAcceptor<JvmDeclaredType> acceptor) {
-  }
-  
-  protected void _infer(final Model m, final IAcceptor<JvmDeclaredType> acceptor) {
+  protected void _infer(final Model m, final IAcceptor<JvmDeclaredType> acceptor, final boolean prelinkingPhase) {
     {
       XBlockExpression _block = m.getBlock();
       final XBlockExpression e = _block;
@@ -100,7 +98,7 @@ public class PureXbaseJvmModelInferrer implements IJvmModelInferrer {
                           };
                         PureXbaseJvmModelInferrer.this._jvmTypesBuilder0.body(it_1, _function_3);
                       }
-                      _xblockexpression_1 = (null);
+                      _xblockexpression_1 = (((Void) null));
                     }
                     return _xblockexpression_1;
                   }
@@ -133,7 +131,7 @@ public class PureXbaseJvmModelInferrer implements IJvmModelInferrer {
                             }
                           };
                         PureXbaseJvmModelInferrer.this._jvmTypesBuilder0.body(it_4, _function_5);
-                        _xblockexpression_2 = (null);
+                        _xblockexpression_2 = (((Void) null));
                       }
                       return _xblockexpression_2;
                     }
@@ -141,7 +139,7 @@ public class PureXbaseJvmModelInferrer implements IJvmModelInferrer {
                 JvmOperation _method_1 = PureXbaseJvmModelInferrer.this._jvmTypesBuilder0.toMethod(e, "xbaseExpression", _newTypeRef_2, _function_4);
                 CollectionExtensions.<JvmMember>operator_add(_members_1, _method_1);
               }
-              _xblockexpression = (null);
+              _xblockexpression = (((Void) null));
             }
             return _xblockexpression;
           }
@@ -170,7 +168,7 @@ public class PureXbaseJvmModelInferrer implements IJvmModelInferrer {
       final Collection<ExitPoint> exitPoints = _exitPoints;
       for (final ExitPoint point : exitPoints) {
         XExpression _expression = point.getExpression();
-        if ((_expression instanceof org.eclipse.xtext.xbase.XReturnExpression)) {
+        if ((_expression instanceof XReturnExpression)) {
           return true;
         }
       }
@@ -188,16 +186,11 @@ public class PureXbaseJvmModelInferrer implements IJvmModelInferrer {
     }
   }
   
-  public void infer(final EObject m, final IAcceptor<JvmDeclaredType> acceptor) {
-    if ((m instanceof Model)
-         && (acceptor instanceof IAcceptor)) {
-      _infer((Model)m, (IAcceptor<JvmDeclaredType>)acceptor);
-    } else if ((m instanceof EObject)
-         && (acceptor instanceof IAcceptor)) {
-      _infer((EObject)m, (IAcceptor<JvmDeclaredType>)acceptor);
+  public void infer(final EObject m, final IAcceptor<JvmDeclaredType> acceptor, final boolean prelinkingPhase) {
+    if ((m instanceof Model)) {
+      _infer((Model)m, (IAcceptor<JvmDeclaredType>)acceptor, (Boolean)prelinkingPhase);
     } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        java.util.Arrays.<Object>asList(m, acceptor).toString());
+      _infer((EObject)m, (IAcceptor<JvmDeclaredType>)acceptor, (Boolean)prelinkingPhase);
     }
   }
 }

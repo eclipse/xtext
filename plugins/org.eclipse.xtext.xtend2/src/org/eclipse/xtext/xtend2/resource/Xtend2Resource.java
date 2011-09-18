@@ -24,7 +24,6 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
@@ -59,9 +58,6 @@ public class Xtend2Resource extends XbaseResource {
 	
 	@Inject
 	private TypeReferences typeReferences;
-	
-	@Inject
-	private Primitives primitives;
 	
 	@Inject
 	private DispatchingSupport dispatchingSupport;

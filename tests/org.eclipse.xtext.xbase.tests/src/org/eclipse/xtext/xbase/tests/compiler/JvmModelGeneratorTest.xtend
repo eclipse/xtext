@@ -50,7 +50,7 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 				parameters += expression.toParameter("s", references.getTypeForName(typeof(String), expression))
 				expression.associate(it)
 			]
-			null
+			null as Void
 		]
 		
 		val compiledClass = compile(expression.eResource, clazz)
@@ -63,7 +63,7 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 		val clazz = expression.toClazz("my.test.Foo") [
 			abstract = true
 			superTypes += expression.typeRef(typeof(Iterable), typeof(String))
-			null
+			null as Void
 		]
 		val compiled = compile(expression.eResource, clazz)
 		assertTrue(typeof(Iterable).isAssignableFrom(compiled))
@@ -74,7 +74,7 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 		val clazz = expression.toClazz("my.test.Foo") [
 			abstract = true
 			superTypes += expression.typeRef(typeof(AbstractList), typeof(String))
-			null
+			null as Void
 		]
 		val compiled = compile(expression.eResource, clazz)
 		assertTrue(typeof(Iterable).isAssignableFrom(compiled))
@@ -87,7 +87,7 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 			members += expression.toField("x", expression.typeRef(typeof(String)))
 			members += expression.toGetter("x", expression.typeRef(typeof(String)))
 			members += expression.toSetter("x", expression.typeRef(typeof(String)))
-			null
+			null as Void
 		]
 		val compiled = compile(expression.eResource, clazz)
 		

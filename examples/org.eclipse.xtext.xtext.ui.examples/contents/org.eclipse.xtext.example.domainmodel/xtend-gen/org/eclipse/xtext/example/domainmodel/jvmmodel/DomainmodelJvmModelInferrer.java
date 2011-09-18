@@ -33,7 +33,7 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
   @Inject
   private JvmTypesBuilder _jvmTypesBuilder0;
   
-  protected void _infer(final Entity e, final IAcceptor<JvmDeclaredType> acceptor) {
+  protected void _infer(final Entity e, final IAcceptor<JvmDeclaredType> acceptor, final boolean prelinkingPhase) {
     String _fullName = this.fullName(e);
     final Function1<JvmGenericType,Void> _function = new Function1<JvmGenericType,Void>() {
         public Void apply(final JvmGenericType it) {
@@ -168,16 +168,11 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
     return _switchResult;
   }
   
-  public void infer(final EObject e, final IAcceptor<JvmDeclaredType> acceptor) {
-    if ((e instanceof Entity)
-         && (acceptor instanceof IAcceptor)) {
-      _infer((Entity)e, (IAcceptor<JvmDeclaredType>)acceptor);
-    } else if ((e instanceof EObject)
-         && (acceptor instanceof IAcceptor)) {
-      _infer((EObject)e, (IAcceptor<JvmDeclaredType>)acceptor);
+  public void infer(final EObject e, final IAcceptor<JvmDeclaredType> acceptor, final boolean prelinkingPhase) {
+    if ((e instanceof Entity)) {
+      _infer((Entity)e, (IAcceptor<JvmDeclaredType>)acceptor, (Boolean)prelinkingPhase);
     } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        java.util.Arrays.<Object>asList(e, acceptor).toString());
+      _infer((EObject)e, (IAcceptor<JvmDeclaredType>)acceptor, (Boolean)prelinkingPhase);
     }
   }
 }
