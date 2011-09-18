@@ -15,7 +15,7 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class LateInitializationLazyLinkingResourceTest extends AbstractXtextTests {
+public class DerivedStateAwareResourceTest extends AbstractXtextTests {
 
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
@@ -30,7 +30,7 @@ public class LateInitializationLazyLinkingResourceTest extends AbstractXtextTest
 		TestedResource resource = new TestedResource();
 		assertTrue(resource.getContents().isEmpty());
 		resource.setDerivedStateComputer(new IDerivedStateComputer() {
-			public void installDerivedState(DerivedStateAwareResource resource) {
+			public void installDerivedState(DerivedStateAwareResource resource, boolean resolve) {
 				fail("shouldn't be called after initialization");
 			}
 
@@ -49,7 +49,7 @@ public class LateInitializationLazyLinkingResourceTest extends AbstractXtextTest
 		});
 		resource.setDerivedStateComputer(new IDerivedStateComputer() {
 			
-			public void installDerivedState(DerivedStateAwareResource resource) {
+			public void installDerivedState(DerivedStateAwareResource resource, boolean resolve) {
 				resource.getContents().add(EcoreFactory.eINSTANCE.createEObject());
 			}
 

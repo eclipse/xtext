@@ -136,7 +136,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		return null;
 	}
 
-	public void installDerivedState(final DerivedStateAwareResource resource) {
+	public void installDerivedState(final DerivedStateAwareResource resource, boolean isPreLinkingPhase) {
 		if (resource.getContents().isEmpty())
 			return;
 		EObject eObject = resource.getContents().get(0);
@@ -144,10 +144,14 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 			public void accept(JvmDeclaredType t) {
 				resource.getContents().add(t);
 			}
-		});
+		}, isPreLinkingPhase);
 	}
 
 	public void discardDerivedState(DerivedStateAwareResource resource) {
+		cleanAssociationState(resource);
+	}
+
+	public void cleanAssociationState(Resource resource) {
 		List<EObject> derived = newArrayList();
 		EList<EObject> resourcesContentsList = resource.getContents();
 		for (int i = 1; i< resourcesContentsList.size(); i++) {

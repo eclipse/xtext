@@ -26,9 +26,9 @@ class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
 			members += expr.toMethod("doStuff", expr.stringType) [
 				parameters += expr.toParameter("x", expr.stringType)
 				expr.associate(it)
-				null
+				null as Void
 			]
-			null
+			null as Void
 		]
 		
 		expr.assertNoErrors
@@ -43,9 +43,9 @@ class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
 			members += expr.toMethod("doStuff", expr.stringType) [
 				parameters += expr.toParameter("x", expr.stringType)
 				expr.associate(it)
-				null
+				null as Void
 			]
-			null
+			null as Void
 		]
 		expr.assertNoErrors
 		assertTrue( expr.feature instanceof JvmFormalParameter)
@@ -60,9 +60,9 @@ class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
 			members += expr.toMethod("doStuff", expr.stringType) [
 				parameters += expr.toParameter("y", expr.stringType)
 				expr.associate(it)
-				null
+				null as Void
 			]
-			null
+			null as Void
 		]
 		expr.assertNoErrors
 		assertTrue( expr.feature instanceof JvmField)
@@ -76,9 +76,9 @@ class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
 			members += expr.toField("x", expr.stringType)
 			members += expr.toMethod("getX", expr.stringType) [
 				expr.associate(it)
-				null
+				null as Void
 			]
-			null
+			null as Void
 		]
 		expr.assertNoErrors
 		assertTrue( expr.feature instanceof JvmField)

@@ -22,7 +22,6 @@ package «getJvmModelInferrerName().toJavaPackage()»
  
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.util.IAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
@@ -53,17 +52,8 @@ class «getJvmModelInferrerName().toSimpleName()» implements IJvmModelInferrer {
 */
 package «getJvmRenameStrategyName().toJavaPackage()»;
 
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
-import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy;
-import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
-import org.eclipse.xtext.util.ITextRegion;
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.AbstractJvmModelRenameStrategy;
-
-import com.google.inject.Inject;
 
 /**
  * Encapsulates the model changes of a rename refactoring.  

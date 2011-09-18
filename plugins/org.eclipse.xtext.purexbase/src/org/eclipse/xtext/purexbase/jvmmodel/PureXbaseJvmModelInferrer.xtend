@@ -15,6 +15,7 @@ import org.eclipse.xtext.xbase.compiler.XbaseCompiler
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable
 import org.eclipse.xtext.xbase.compiler.ImportManager
 import org.eclipse.xtext.purexbase.pureXbase.Model
+import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -25,15 +26,13 @@ import org.eclipse.xtext.purexbase.pureXbase.Model
  * model elements should be associated with their source element by means of the
  * {@link IJvmModelAssociator}.</p>     
  */
-class PureXbaseJvmModelInferrer implements IJvmModelInferrer {
+class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
 
 	@Inject extension JvmTypesBuilder
 	@Inject IEarlyExitComputer computer
 	@Inject XbaseCompiler compiler
 
-   	def dispatch void infer(EObject e, IAcceptor<JvmDeclaredType> acceptor) {
-   	}
-   	def dispatch void infer(Model m, IAcceptor<JvmDeclaredType> acceptor) {
+   	def dispatch void infer(Model m, IAcceptor<JvmDeclaredType> acceptor, boolean prelinkingPhase) {
    		val e  = m.block
    		acceptor.accept(e.toClazz(e.eResource.name) [
    			members += e.toMethod("main", e.newTypeRef(Void::TYPE)) [
@@ -52,7 +51,7 @@ class PureXbaseJvmModelInferrer implements IJvmModelInferrer {
 						} catch (Throwable t) {}
    					''']
    				}
-   				null
+   				null as Void
    			]
    			if ( e.containsReturn ) {
    				members += e.toMethod("xbaseExpression", e.newTypeRef(typeof(Object))) [
@@ -63,10 +62,10 @@ class PureXbaseJvmModelInferrer implements IJvmModelInferrer {
 					}
 					return null;
 				''']
-   				null
+   				null as Void
    			]
    			}
-   			null
+   			null as Void
    		])
    	}
    	
