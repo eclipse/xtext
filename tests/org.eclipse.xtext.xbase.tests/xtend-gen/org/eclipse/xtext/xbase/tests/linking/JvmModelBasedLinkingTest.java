@@ -56,14 +56,14 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
                       JvmFormalParameter _parameter = JvmModelBasedLinkingTest.this._jvmTypesBuilder0.toParameter(expr, "x", _stringType_1);
                       CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter);
                       JvmModelBasedLinkingTest.this._jvmTypesBuilder0.associate(expr, it_1);
-                      _xblockexpression_1 = (null);
+                      _xblockexpression_1 = (((Void) null));
                     }
                     return _xblockexpression_1;
                   }
                 };
               JvmOperation _method = JvmModelBasedLinkingTest.this._jvmTypesBuilder0.toMethod(expr, "doStuff", _stringType, _function_1);
               CollectionExtensions.<JvmMember>operator_add(_members, _method);
-              _xblockexpression = (null);
+              _xblockexpression = (((Void) null));
             }
             return _xblockexpression;
           }
@@ -101,14 +101,14 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
                       JvmFormalParameter _parameter = JvmModelBasedLinkingTest.this._jvmTypesBuilder0.toParameter(expr, "x", _stringType_2);
                       CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter);
                       JvmModelBasedLinkingTest.this._jvmTypesBuilder0.associate(expr, it_1);
-                      _xblockexpression_1 = (null);
+                      _xblockexpression_1 = (((Void) null));
                     }
                     return _xblockexpression_1;
                   }
                 };
               JvmOperation _method = JvmModelBasedLinkingTest.this._jvmTypesBuilder0.toMethod(expr, "doStuff", _stringType_1, _function_1);
               CollectionExtensions.<JvmMember>operator_add(_members_1, _method);
-              _xblockexpression = (null);
+              _xblockexpression = (((Void) null));
             }
             return _xblockexpression;
           }
@@ -117,7 +117,7 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
       CollectionExtensions.<EObject>operator_add(_contents, _clazz);
       this._validationTestHelper2.assertNoErrors(expr);
       JvmIdentifiableElement _feature = expr.getFeature();
-      Assert.assertTrue((_feature instanceof org.eclipse.xtext.common.types.JvmFormalParameter));
+      Assert.assertTrue((_feature instanceof JvmFormalParameter));
     }
   }
   
@@ -148,14 +148,14 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
                       JvmFormalParameter _parameter = JvmModelBasedLinkingTest.this._jvmTypesBuilder0.toParameter(expr, "y", _stringType_2);
                       CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter);
                       JvmModelBasedLinkingTest.this._jvmTypesBuilder0.associate(expr, it_1);
-                      _xblockexpression_1 = (null);
+                      _xblockexpression_1 = (((Void) null));
                     }
                     return _xblockexpression_1;
                   }
                 };
               JvmOperation _method = JvmModelBasedLinkingTest.this._jvmTypesBuilder0.toMethod(expr, "doStuff", _stringType_1, _function_1);
               CollectionExtensions.<JvmMember>operator_add(_members_1, _method);
-              _xblockexpression = (null);
+              _xblockexpression = (((Void) null));
             }
             return _xblockexpression;
           }
@@ -164,7 +164,7 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
       CollectionExtensions.<EObject>operator_add(_contents, _clazz);
       this._validationTestHelper2.assertNoErrors(expr);
       JvmIdentifiableElement _feature = expr.getFeature();
-      Assert.assertTrue((_feature instanceof org.eclipse.xtext.common.types.JvmField));
+      Assert.assertTrue((_feature instanceof JvmField));
     }
   }
   
@@ -191,14 +191,14 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
                     Void _xblockexpression_1 = null;
                     {
                       JvmModelBasedLinkingTest.this._jvmTypesBuilder0.associate(expr, it_1);
-                      _xblockexpression_1 = (null);
+                      _xblockexpression_1 = (((Void) null));
                     }
                     return _xblockexpression_1;
                   }
                 };
               JvmOperation _method = JvmModelBasedLinkingTest.this._jvmTypesBuilder0.toMethod(expr, "getX", _stringType_1, _function_1);
               CollectionExtensions.<JvmMember>operator_add(_members_1, _method);
-              _xblockexpression = (null);
+              _xblockexpression = (((Void) null));
             }
             return _xblockexpression;
           }
@@ -207,7 +207,7 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
       CollectionExtensions.<EObject>operator_add(_contents, _clazz);
       this._validationTestHelper2.assertNoErrors(expr);
       JvmIdentifiableElement _feature = expr.getFeature();
-      Assert.assertTrue((_feature instanceof org.eclipse.xtext.common.types.JvmField));
+      Assert.assertTrue((_feature instanceof JvmField));
     }
   }
   

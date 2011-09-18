@@ -1,5 +1,6 @@
 package org.eclipse.xtext.xbase.annotations.compiler;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -158,36 +159,27 @@ public class AnnotationCompiler {
   }
   
   public void generate(final EObject featureCall, final IAppendable a) {
-    if ((featureCall instanceof XFeatureCall)
-         && (a instanceof IAppendable)) {
+    if ((featureCall instanceof XFeatureCall)) {
       _generate((XFeatureCall)featureCall, (IAppendable)a);
-    } else if ((featureCall instanceof XBooleanLiteral)
-         && (a instanceof IAppendable)) {
+    } else if ((featureCall instanceof XBooleanLiteral)) {
       _generate((XBooleanLiteral)featureCall, (IAppendable)a);
-    } else if ((featureCall instanceof XIntLiteral)
-         && (a instanceof IAppendable)) {
+    } else if ((featureCall instanceof XIntLiteral)) {
       _generate((XIntLiteral)featureCall, (IAppendable)a);
-    } else if ((featureCall instanceof XStringLiteral)
-         && (a instanceof IAppendable)) {
+    } else if ((featureCall instanceof XStringLiteral)) {
       _generate((XStringLiteral)featureCall, (IAppendable)a);
-    } else if ((featureCall instanceof XTypeLiteral)
-         && (a instanceof IAppendable)) {
+    } else if ((featureCall instanceof XTypeLiteral)) {
       _generate((XTypeLiteral)featureCall, (IAppendable)a);
-    } else if ((featureCall instanceof XAnnotation)
-         && (a instanceof IAppendable)) {
+    } else if ((featureCall instanceof XAnnotation)) {
       _generate((XAnnotation)featureCall, (IAppendable)a);
-    } else if ((featureCall instanceof XAnnotationElementValueBinaryOperation)
-         && (a instanceof IAppendable)) {
+    } else if ((featureCall instanceof XAnnotationElementValueBinaryOperation)) {
       _generate((XAnnotationElementValueBinaryOperation)featureCall, (IAppendable)a);
-    } else if ((featureCall instanceof XAnnotationValueArray)
-         && (a instanceof IAppendable)) {
+    } else if ((featureCall instanceof XAnnotationValueArray)) {
       _generate((XAnnotationValueArray)featureCall, (IAppendable)a);
-    } else if ((featureCall instanceof XAnnotationElementValuePair)
-         && (a instanceof IAppendable)) {
+    } else if ((featureCall instanceof XAnnotationElementValuePair)) {
       _generate((XAnnotationElementValuePair)featureCall, (IAppendable)a);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        java.util.Arrays.<Object>asList(featureCall, a).toString());
+        Arrays.<Object>asList(featureCall, a).toString());
     }
   }
 }

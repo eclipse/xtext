@@ -1,6 +1,7 @@
 package org.eclipse.xtext.xtend2.tests.smoke;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -59,7 +60,7 @@ public class Case_6 {
       return _transform((EPackage)model);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        java.util.Arrays.<Object>asList(model).toString());
+        Arrays.<Object>asList(model).toString());
     }
   }
 }

@@ -1,6 +1,7 @@
 package xtend.tutorial.basics;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import junit.framework.TestCase;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.InputOutput;
@@ -63,7 +64,7 @@ public class Xtend09_DispatchMethods extends TestCase {
       return _toLabel((Rectangle)circle);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        java.util.Arrays.<Object>asList(circle).toString());
+        Arrays.<Object>asList(circle).toString());
     }
   }
 }

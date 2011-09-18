@@ -91,7 +91,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
                 };
               JvmOperation _method = JvmModelGeneratorTest.this.builder.toMethod(expression, "doStuff", _typeForName, _function_1);
               CollectionExtensions.<JvmMember>operator_add(_members, _method);
-              _xblockexpression = (null);
+              _xblockexpression = (((Void) null));
             }
             return _xblockexpression;
           }
@@ -121,7 +121,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
               EList<JvmTypeReference> _superTypes = it.getSuperTypes();
               JvmTypeReference _typeRef = JvmModelGeneratorTest.this.typeRef(expression, java.lang.Iterable.class, java.lang.String.class);
               CollectionExtensions.<JvmTypeReference>operator_add(_superTypes, _typeRef);
-              _xblockexpression = (null);
+              _xblockexpression = (((Void) null));
             }
             return _xblockexpression;
           }
@@ -148,7 +148,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
               EList<JvmTypeReference> _superTypes = it.getSuperTypes();
               JvmTypeReference _typeRef = JvmModelGeneratorTest.this.typeRef(expression, java.util.AbstractList.class, java.lang.String.class);
               CollectionExtensions.<JvmTypeReference>operator_add(_superTypes, _typeRef);
-              _xblockexpression = (null);
+              _xblockexpression = (((Void) null));
             }
             return _xblockexpression;
           }
@@ -185,7 +185,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
               JvmTypeReference _typeRef_2 = JvmModelGeneratorTest.this.typeRef(expression, java.lang.String.class);
               JvmOperation _setter = JvmModelGeneratorTest.this.builder.toSetter(expression, "x", _typeRef_2);
               CollectionExtensions.<JvmMember>operator_add(_members_2, _setter);
-              _xblockexpression = (null);
+              _xblockexpression = (((Void) null));
             }
             return _xblockexpression;
           }

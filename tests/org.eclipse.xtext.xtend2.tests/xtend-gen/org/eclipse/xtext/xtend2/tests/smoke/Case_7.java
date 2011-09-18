@@ -25,7 +25,7 @@ public class Case_7 {
     {
       CharSequence x = null;
       Object _xifexpression = null;
-      if ((x instanceof java.util.Map.Entry)) {
+      if ((x instanceof Entry)) {
         _xifexpression = null;
       }
       _xblockexpression = (_xifexpression);

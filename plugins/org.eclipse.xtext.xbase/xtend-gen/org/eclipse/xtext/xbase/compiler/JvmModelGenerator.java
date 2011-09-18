@@ -1,6 +1,7 @@
 package org.eclipse.xtext.xbase.compiler;
 
 import com.google.inject.Inject;
+import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
@@ -272,13 +273,13 @@ public class JvmModelGenerator implements IGenerator {
               public Boolean apply(final JvmTypeReference typeRef_1) {
                 boolean _operator_and = false;
                 JvmType _type = typeRef_1.getType();
-                if (!(_type instanceof org.eclipse.xtext.common.types.JvmGenericType)) {
+                if (!(_type instanceof JvmGenericType)) {
                   _operator_and = false;
                 } else {
                   JvmType _type_1 = typeRef_1.getType();
                   boolean _isInterface_1 = ((JvmGenericType) _type_1).isInterface();
                   boolean _operator_not = BooleanExtensions.operator_not(_isInterface_1);
-                  _operator_and = BooleanExtensions.operator_and((_type instanceof org.eclipse.xtext.common.types.JvmGenericType), _operator_not);
+                  _operator_and = BooleanExtensions.operator_and((_type instanceof JvmGenericType), _operator_not);
                 }
                 return ((Boolean)_operator_and);
               }
@@ -447,15 +448,10 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   public void internalDoGenerate(final EObject type, final IFileSystemAccess fsa) throws UnsupportedOperationException {
-    if ((type instanceof JvmGenericType)
-         && (fsa instanceof IFileSystemAccess)) {
+    if ((type instanceof JvmGenericType)) {
       _internalDoGenerate((JvmGenericType)type, (IFileSystemAccess)fsa);
-    } else if ((type instanceof EObject)
-         && (fsa instanceof IFileSystemAccess)) {
-      _internalDoGenerate((EObject)type, (IFileSystemAccess)fsa);
     } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        java.util.Arrays.<Object>asList(type, fsa).toString());
+      _internalDoGenerate((EObject)type, (IFileSystemAccess)fsa);
     }
   }
   
@@ -468,23 +464,17 @@ public class JvmModelGenerator implements IGenerator {
       return _generateModifier((JvmField)it);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        java.util.Arrays.<Object>asList(it).toString());
+        Arrays.<Object>asList(it).toString());
     }
   }
   
   public CharSequence generateMember(final JvmMember it, final ImportManager importManager) throws UnsupportedOperationException {
-    if ((it instanceof JvmOperation)
-         && (importManager instanceof ImportManager)) {
+    if ((it instanceof JvmOperation)) {
       return _generateMember((JvmOperation)it, (ImportManager)importManager);
-    } else if ((it instanceof JvmField)
-         && (importManager instanceof ImportManager)) {
+    } else if ((it instanceof JvmField)) {
       return _generateMember((JvmField)it, (ImportManager)importManager);
-    } else if ((it instanceof JvmMember)
-         && (importManager instanceof ImportManager)) {
-      return _generateMember((JvmMember)it, (ImportManager)importManager);
     } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        java.util.Arrays.<Object>asList(it, importManager).toString());
+      return _generateMember((JvmMember)it, (ImportManager)importManager);
     }
   }
 }
