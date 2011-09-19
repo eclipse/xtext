@@ -23,7 +23,7 @@ public class EntitiesJavaValidator extends AbstractEntitiesJavaValidator {
 	@Check
 	public void checkPropertyNameStartsWithCapital(Property property) {
 		if (!Character.isLowerCase(property.getName().charAt(0))) {
-			warning("Name should start with a lower case letter", EntitiesPackage.Literals.TYPE__NAME);
+			warning("Name should start with a lower case letter", EntitiesPackage.Literals.PROPERTY__NAME);
 		}
 	}
 
