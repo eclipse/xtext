@@ -246,7 +246,12 @@ public class TypeArgumentContext {
 		};
 		JvmTypeReference copy = (JvmTypeReference) copier.copy(element);
 		copier.copyReferences();
-		
+		if (copy instanceof JvmParameterizedTypeReference) {
+			JvmParameterizedTypeReference parameterized = (JvmParameterizedTypeReference) copy;
+			if (context.isEmpty()) {
+				parameterized.getArguments().clear();
+			}
+		}
 		if (logger.isDebugEnabled())
 			logger.debug("doGetResolvedCopy: " + element + " resolved to: " + copy);
 		return copy;

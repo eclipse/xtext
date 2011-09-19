@@ -85,6 +85,7 @@ import org.eclipse.xtext.common.types.testSetups.InitializerWithoutConstructor;
 import org.eclipse.xtext.common.types.testSetups.NestedTypes;
 import org.eclipse.xtext.common.types.testSetups.ParameterizedMethods;
 import org.eclipse.xtext.common.types.testSetups.ParameterizedTypes;
+import org.eclipse.xtext.common.types.testSetups.RawIterable;
 import org.eclipse.xtext.common.types.testSetups.StaticNestedTypes;
 import org.eclipse.xtext.common.types.testSetups.TestAnnotation;
 import org.eclipse.xtext.common.types.testSetups.TestAnnotationWithDefaults;
@@ -598,6 +599,14 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		int innerTypesCount = TestAnnotationWithDefaults.class.getDeclaredClasses().length;
 		assertEquals(1, innerTypesCount);
 		assertEquals(methodCount + innerTypesCount, type.getMembers().size());
+	}
+	
+	public void testMemberCount_18() {
+		String typeName = RawIterable.class.getName();
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		int constructorCount = RawIterable.class.getDeclaredConstructors().length;
+		assertEquals(1, constructorCount);
+		assertEquals(constructorCount, type.getMembers().size());
 	}
 
 	public void test_twoListParamsNoResult_01() {
@@ -2357,5 +2366,14 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		getAndResolveAllFragments(resource);
 		recomputeAndCheckIdentifiers(resource);
 		diagnose(type);
+	}
+	
+	public void testRawIterable_01() {
+		String typeName = RawIterable.class.getName();
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		List<JvmTypeReference> superTypes = type.getSuperTypes();
+		JvmParameterizedTypeReference iterableSuperType = (JvmParameterizedTypeReference) superTypes.get(1);
+		assertEquals("java.lang.Iterable", iterableSuperType.getIdentifier());
+		assertTrue(iterableSuperType.getArguments().isEmpty());
 	}
 }

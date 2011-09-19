@@ -20,11 +20,13 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
+import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
@@ -40,6 +42,7 @@ import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider.ResolveInfo;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.lib.Functions;
+import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
@@ -145,16 +148,24 @@ public class FunctionConversion {
 
 	protected FuncDesc toFuncDesc(JvmTypeReference typeReference) {
 		if (isFunction(typeReference)) {
-			FunctionRefFuncDef result = new FunctionRefFuncDef();
-			JvmParameterizedTypeReference parameterizedTypeRef = (JvmParameterizedTypeReference) typeReference;
-			if (parameterizedTypeRef.getArguments().isEmpty()) {
-				// TODO: find a better way to decide whether the return type is a parameter
-				// see trailing -1
-				result.argumentSize = ((JvmTypeParameterDeclarator) parameterizedTypeRef.getType()).getTypeParameters().size() - 1;
-			} else {
-				result.arguments = ((JvmParameterizedTypeReference) typeReference).getArguments();
+			if (typeReference instanceof JvmDelegateTypeReference) {
+				return toFuncDesc(((JvmDelegateTypeReference) typeReference).getDelegate());
 			}
-			return result;
+			if (typeReference instanceof JvmSpecializedTypeReference) {
+				return toFuncDesc(((JvmSpecializedTypeReference) typeReference).getEquivalent());
+			}
+			FunctionRefFuncDef result = new FunctionRefFuncDef();
+			if (typeReference instanceof JvmParameterizedTypeReference) {
+				JvmParameterizedTypeReference parameterized = (JvmParameterizedTypeReference) typeReference;
+				if (parameterized.getArguments().isEmpty()) {
+					// TODO: find a better way to decide whether the return type is a parameter
+					// see trailing -1
+					result.argumentSize = ((JvmTypeParameterDeclarator) parameterized.getType()).getTypeParameters().size() - 1;
+				} else {
+					result.arguments = ((JvmParameterizedTypeReference) typeReference).getArguments();
+				}
+				return result;
+			}
 		}
 		JvmOperation operation = findSingleMethod(typeReference);
 		if (operation == null)
@@ -232,6 +243,12 @@ public class FunctionConversion {
 					return false;
 			}
 			return true;
+		}
+		if (type instanceof XFunctionTypeRef) {
+			return true;
+		}
+		if (type instanceof JvmDelegateTypeReference) {
+			return isFunction(((JvmDelegateTypeReference) type).getDelegate());
 		}
 		return type != null && type.getType()!=null && !type.getType().eIsProxy() && type.getType().getIdentifier().startsWith(Functions.class.getCanonicalName());
 	}

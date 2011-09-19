@@ -20,8 +20,11 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -177,6 +180,12 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 				if (!isResolved(constraint.getTypeReference(), declarator, rawType))
 					return false;
 			}
+		}
+		if (reference instanceof JvmDelegateTypeReference) {
+			return isResolved(((JvmDelegateTypeReference) reference).getDelegate(), declarator, rawType);
+		}
+		if (reference instanceof JvmSpecializedTypeReference) {
+			return isResolved(((JvmSpecializedTypeReference) reference).getEquivalent(), declarator, rawType);
 		}
 		return true;
 	}

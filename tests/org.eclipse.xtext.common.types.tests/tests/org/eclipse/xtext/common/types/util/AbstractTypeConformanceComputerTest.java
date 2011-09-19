@@ -36,7 +36,9 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.DeclaredTypeFactory;
+import org.eclipse.xtext.common.types.testSetups.RawIterable;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -70,6 +72,29 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 		typeProviderFactory.findOrCreateTypeProvider(resourceSet);
 		syntheticResource = new XMLResourceImpl(URI.createURI("http://synthetic.resource"));
 		resourceSet.getResources().add(syntheticResource);
+		final TypeConformanceComputer delegate = computer;
+		computer = new TypeConformanceComputer() {
+			@Override
+			public boolean isConformant(JvmTypeReference left, JvmTypeReference right, boolean ignoreGenerics) {
+				assertTrue(delegate.isConformant(left, left, true));
+				assertTrue(delegate.isConformant(left, left, false));
+				assertTrue(delegate.isConformant(right, right, true));
+				assertTrue(delegate.isConformant(right, right, false));
+				assertTrue(delegate.isConformant(left, (JvmTypeReference) EcoreUtil.copy(left), true));
+				assertTrue(delegate.isConformant(left, (JvmTypeReference) EcoreUtil.copy(left), false));
+				assertTrue(delegate.isConformant(right, (JvmTypeReference) EcoreUtil.copy(right), true));
+				assertTrue(delegate.isConformant(right, (JvmTypeReference) EcoreUtil.copy(right), false));
+//				for(int i = 0; i < 10000; i++) {
+//					delegate.isConformant(left, right, ignoreGenerics);
+//				}
+				return delegate.isConformant(left, right, ignoreGenerics);
+			}
+			
+			@Override
+			public JvmTypeReference getCommonSuperType(List<JvmTypeReference> types) {
+				return delegate.getCommonSuperType(types);
+			}
+		};
 	}
 	
 	protected abstract Module getModule();
@@ -209,6 +234,9 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 	}
 	
 	public void testWildCardWithDefaultUpper() throws Exception {
+//		Iterable<? extends Object> iterableOfObject = null;
+//		List<?> list = null;
+//		iterableOfObject = list;
 		JvmTypeReference left = ref(Iterable.class, wc_extends(ref(Object.class)));
 		JvmTypeReference right = ref(List.class, wc());
 		assertTrue(getComputer().isConformant(left, right, true));
@@ -324,9 +352,13 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 	}
 
 	/**
-	 * List<? super List> <= List<? extends ArrayList> (but not vice versa) 
+	 * List<? super List> =/= List<? extends ArrayList> 
 	 */
 	public void testGenerics_super_4() throws Exception {
+//		List<? super List> superList = null;
+//		List<? extends ArrayList> extendsArrayList = null;
+//		superList = extendsArrayList;
+//		extendsArrayList = superList;
 		JvmTypeReference list_super_list = ref(List.class, wc_super(ref(List.class)));
 		JvmTypeReference list_extends_arraylist = ref(List.class, wc_extends(ref(ArrayList.class)));
 		assertFalse(getComputer().isConformant(list_super_list, list_extends_arraylist));
@@ -489,14 +521,10 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 	}
 	
 	public void testVoidReference_07() {
-		assertFalse(getComputer().isConformant(ref(void.class), any()));
-	}
-	
-	public void testVoidReference_08() {
 		assertFalse(getComputer().isConformant(ref(void.class), ref(Void.class)));
 	}
 	
-	public void testVoidReference_09() {
+	public void testVoidReference_08() {
 		assertFalse(getComputer().isConformant(any(), ref(Void.class)));
 	}
 	
@@ -507,6 +535,10 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 
 	public void testAutoBoxingInteger_00() throws Exception {
 		assertTrue(getComputer().isConformant(ref(Integer.TYPE), ref(Integer.class)));
+		assertTrue(getComputer().isConformant(ref(Integer.TYPE), param(upper(ref(Integer.class)))));
+		assertTrue(getComputer().isConformant(ref(Integer.TYPE), ref(Byte.class)));
+		assertTrue(getComputer().isConformant(ref(Integer.TYPE), ref(Character.class)));
+		assertFalse(getComputer().isConformant(ref(Integer.TYPE), ref(Long.class)));
 	}
 	public void testAutoBoxingInteger_01() throws Exception {
 		assertTrue(getComputer().isConformant(ref(Integer.class), ref(Integer.TYPE)));
@@ -563,10 +595,35 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 		assertFalse(getComputer().isConformant(array(ref(String.class), 1), array(ref(String.class), 2)));
 	}
 	
+	public void testPrimitiveArrayType() throws Exception {
+		assertFalse(getComputer().isConformant(array(ref(double.class), 1), array(ref(int.class), 1)));
+		assertFalse(getComputer().isConformant(array(ref(int.class), 1), array(ref(double.class), 1)));
+	}
+	
+	public void testPrimitiveArrayToObjectArray() throws Exception {
+		assertTrue(getComputer().isConformant(array(ref(Object.class), 1), array(ref(int.class), 2)));
+		assertTrue(getComputer().isConformant(array(ref(Serializable.class), 1), array(ref(double.class), 2)));
+	}
+	
 	public void testArrayTypeToObject() throws Exception {
 		assertTrue(getComputer().isConformant(ref(Object.class), array(ref(String.class), 1)));
 		assertTrue(getComputer().isConformant(ref(Object.class), array(ref(String.class), 3)));
 		assertFalse(getComputer().isConformant(array(ref(String.class), 1), ref(Object.class)));
+	}
+	
+	public void testArrayTypeToSerializable() throws Exception {
+		assertTrue(getComputer().isConformant(ref(Serializable.class), array(ref(String.class), 1)));
+		assertTrue(getComputer().isConformant(ref(Serializable.class), array(ref(int.class), 1)));
+	}
+	
+	public void testArrayTypeToClonable() throws Exception {
+		assertTrue(getComputer().isConformant(ref(Cloneable.class), array(ref(String.class), 1)));
+		assertTrue(getComputer().isConformant(ref(Cloneable.class), array(ref(int.class), 1)));
+	}
+	
+	public void testAnyToArray() throws Exception {
+		assertTrue(getComputer().isConformant(array(ref(String.class), 1), any()));
+		assertTrue(getComputer().isConformant(array(ref(int.class), 1), any()));
 	}
 
 	protected void assertCommonSuperType(Class<?> expected, Class<?> ...types) {
@@ -655,11 +712,9 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 				ref(List.class, ref(String.class)));
 	}
 	
-	// TODO improve raw type handling
 	public void testCommonSuperType_9() throws Exception {
 		assertCommonSuperType(
-//				"java.util.Collection", // one raw type - super type should be raw type
-				"java.util.Collection<? extends E>",
+				"java.util.Collection",
 				ref(Set.class, ref(String.class)),
 				ref(List.class));
 	}
@@ -785,6 +840,67 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 				ref(Set.class, ref(StringBuilder.class)));
 	}
 	
+	public void testCommonSuperType_27() throws Exception {
+		assertCommonSuperType(
+				"java.lang.Iterable", // one raw type - super type should be raw type
+				ref(Collection.class, ref(String.class)),
+				ref(RawIterable.class));
+	}
+	
+	public void testCommonSuperType_28() throws Exception {
+//		Integer[] i = null;
+//		Double[] d = null;
+//		List<Comparable<? extends Number>[]> list = ImmutableList.<Comparable<? extends Number>[]>of(i, d);
+//		List<Comparable<? extends Comparable<? extends Object>>[]> list2 = ImmutableList.<Comparable<? extends Comparable<? extends Object>>[]>of(i, d);
+		assertCommonSuperType(
+				"java.lang.Number[] & java.lang.Comparable<? extends java.lang.Object>[]",
+				array(ref(Double.class),1),
+				array(ref(Integer.class),1));
+	}
+	
+	public void testCommonSuperType_29() throws Exception {
+		assertCommonSuperType(
+				"java.io.Serializable & java.lang.Cloneable",
+				array(ref(double.class),1),
+				array(ref(int.class),1));
+	}
+	
+	public void testCommonSuperType_30() throws Exception {
+		assertCommonSuperType(
+				"java.io.Serializable & java.lang.Cloneable",
+				array(ref(int.class),2),
+				array(ref(int.class),1));
+	}
+	
+	public void testCommonSuperType_31() throws Exception {
+		assertCommonSuperType(
+				"java.lang.Object[]",
+				array(ref(CharSequence.class),2),
+				array(ref(CharSequence.class),1));
+	}
+	
+	public void testCommonSuperType_32() throws Exception {
+		assertCommonSuperType(
+				"java.lang.Number[]",
+				array(ref(Number.class),1),
+				array(ref(Integer.class),1),
+				array(ref(Double.class),1));
+	}
+	
+	public void testCommonSuperType_33() throws Exception {
+		assertCommonSuperType(
+				"java.lang.Number[][][] & java.lang.Comparable<? extends java.lang.Object>[][][]",
+				array(ref(Double.class),3),
+				array(ref(Integer.class),3));
+	}
+	
+	public void testCommonSuperType_34() throws Exception {
+		assertCommonSuperType(
+				"java.io.Serializable[]",
+				array(ref(Number.class),2),
+				array(ref(Number.class),1));
+	}
+	
 	public void testBug343100_01() throws Exception {
 		assertCommonSuperType(
 				"java.lang.Class<? extends java.lang.Object>",
@@ -808,10 +924,7 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 		JvmTypeReference number = ref(Number.class);
 		JvmTypeReference param = param(upper(ref(Number.class)));
 		assertTrue(getComputer().isConformant(number, param));
-		// TODO we have to fix this expectation - it's just wrong to assume that T extends Number <= Number is allowed
-		// however, changing this in the type conformance breaks extension functions in Xtend ..
-		assertTrue(getComputer().isConformant(param, number));
-//		assertFalse(getComputer().isConformant(param, number));
+		assertFalse(getComputer().isConformant(param, number));
 	}
 	
 	public void testBug343089_02() throws Exception {
@@ -820,24 +933,34 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 		assertTrue(getComputer().isConformant(serializable, param));
 	}
 	
-//TODO Fix ME!	
-//	public void testCommonSuperType_13() throws Exception {
-//		assertCommonSuperType(
-//				"java.lang.Number[]",
-//				array(ref(Double.class),1),
-//				array(ref(Integer.class),1));
-//	}
+	public void testBug343089_03() throws Exception {
+		JvmTypeReference number = ref(Number.class);
+		JvmTypeReference param = param(lower(ref(Number.class)));
+		assertFalse(getComputer().isConformant(number, param));
+		assertFalse(getComputer().isConformant(param, number));
+	}
 	
 	public void testConformanceWithTypeParameter() throws Exception {
-		JvmTypeParameter typeParam = ((JvmGenericType)ref(List.class).getType()).getTypeParameters().get(0);
+		JvmTypeParameter typeParamE = ((JvmGenericType)ref(List.class).getType()).getTypeParameters().get(0);
 		JvmParameterizedTypeReference reference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
-		reference.setType(typeParam);
-		// TODO improve raw type handling
-		assertTrue(getComputer().isConformant(reference, ref(Object.class)));
-		assertTrue(getComputer().isConformant(reference, ref(String.class)));
-		assertTrue(getComputer().isConformant(reference, ref(CharSequence.class)));
-		assertTrue(getComputer().isConformant(reference, ref(Serializable.class)));
+		reference.setType(typeParamE);
+		assertFalse(getComputer().isConformant(reference, ref(Object.class)));
+		assertFalse(getComputer().isConformant(reference, ref(String.class)));
+		assertFalse(getComputer().isConformant(reference, ref(CharSequence.class)));
+		assertFalse(getComputer().isConformant(reference, ref(Serializable.class)));
 	}
+	
+	public void testConformanceWithTypeParameter_02() throws Exception {
+		JvmTypeParameter typeParamE = ((JvmGenericType)ref(List.class).getType()).getTypeParameters().get(0);
+		JvmParameterizedTypeReference reference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
+		reference.setType(typeParamE);
+		JvmTypeReference typeParamExtends = param(upper(reference));
+		assertTrue(getComputer().isConformant(reference, typeParamExtends, true));
+		assertTrue(getComputer().isConformant(reference, typeParamExtends, false));
+		assertFalse(getComputer().isConformant(typeParamExtends, reference, true));
+		assertFalse(getComputer().isConformant(typeParamExtends, reference, false));
+	}
+	
 	
 	public TypeConformanceComputer getComputer() {
 		return computer;

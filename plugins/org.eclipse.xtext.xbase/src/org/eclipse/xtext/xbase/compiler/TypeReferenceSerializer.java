@@ -9,11 +9,13 @@ package org.eclipse.xtext.xbase.compiler;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
+import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -124,6 +126,10 @@ public class TypeReferenceSerializer {
 			appendable.append(type.getType());
 		} else if (type instanceof JvmMultiTypeReference) {
 			serialize(resolveMultiType(type), context, appendable, withoutConstraints, paramsToWildcard, paramsToObject, allowPrimitives);
+		} else if (type instanceof JvmDelegateTypeReference) {
+			serialize(((JvmDelegateTypeReference) type).getDelegate(), context, appendable, withoutConstraints, paramsToWildcard, paramsToObject, allowPrimitives);
+		} else if (type instanceof JvmSpecializedTypeReference) {
+			serialize(((JvmSpecializedTypeReference) type).getEquivalent(), context, appendable, withoutConstraints, paramsToWildcard, paramsToObject, allowPrimitives);
 		} else {
 			throw new IllegalArgumentException(type==null ? null : type.toString());
 		}
