@@ -109,7 +109,7 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 		return uri;
 	}
 
-	private String REFERENCE_DESCRIPTIONS_CACHE_KEY = DefaultReferenceDescription.class.getName()
+	private static final String REFERENCE_DESCRIPTIONS_CACHE_KEY = DefaultReferenceDescription.class.getName()
 			+ "#getReferenceDescriptions";
 
 	public Iterable<IReferenceDescription> getReferenceDescriptions() {
@@ -160,7 +160,7 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 		return null;
 	}
 
-	private String EOBJECT_LOOKUP_CACHE_KEY = DefaultReferenceDescription.class.getName() + "#getLookUp";
+	private static final String EOBJECT_LOOKUP_CACHE_KEY = DefaultReferenceDescription.class.getName() + "#getLookUp";
 
 	@Override
 	protected EObjectDescriptionLookUp getLookUp() {
