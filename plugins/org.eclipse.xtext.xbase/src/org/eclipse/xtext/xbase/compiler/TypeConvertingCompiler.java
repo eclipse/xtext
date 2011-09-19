@@ -50,6 +50,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		internalToConvertedExpression(obj, appendable, expectedType);
 	}
 	
+	@Override
 	protected void internalToConvertedExpression(final XExpression obj, final IAppendable appendable,
 			JvmTypeReference toBeConvertedTo) {
 		if (toBeConvertedTo != null) {

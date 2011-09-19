@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -21,6 +22,7 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
@@ -95,6 +97,34 @@ public abstract class AbstractXbaseCompiler {
 		}
 		return appendable;
 	}
+	
+	/**
+	 * this one trims the outer block
+	 */
+	public IAppendable compile(XBlockExpression expr, IAppendable b, JvmTypeReference expectedReturnType) {
+		final boolean isPrimitiveVoidExpected = typeReferences.is(expectedReturnType, Void.TYPE); 
+		final boolean isPrimitiveVoid = isPrimitiveVoid(expr);
+		final boolean earlyExit = exitComputer.isEarlyExit(expr);
+		final boolean isImplicitReturn = !isPrimitiveVoidExpected && !isPrimitiveVoid && !earlyExit;
+		final EList<XExpression> expressions = expr.getExpressions();
+		for (int i = 0; i < expressions.size(); i++) {
+			XExpression ex = expressions.get(i);
+			if (i < expressions.size() - 1) {
+				internalToJavaStatement(ex, b, false);
+			} else {
+				internalToJavaStatement(ex, b, isImplicitReturn);
+				if (isImplicitReturn) {
+					b.append("\nreturn (");
+					internalToConvertedExpression(ex, b, null);
+					b.append(");");
+				}
+			}
+		}
+		return b;
+	}
+	
+	protected abstract void internalToConvertedExpression(final XExpression obj, final IAppendable appendable,
+			JvmTypeReference toBeConvertedTo);
 	
 	protected boolean isPrimitiveVoid(XExpression xExpression) {
 		JvmTypeReference type = getTypeProvider().getType(xExpression);

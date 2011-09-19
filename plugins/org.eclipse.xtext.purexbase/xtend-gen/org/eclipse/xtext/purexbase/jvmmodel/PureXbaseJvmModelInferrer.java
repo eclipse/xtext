@@ -6,6 +6,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -52,6 +53,9 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
           public Void apply(final JvmGenericType it) {
             Void _xblockexpression = null;
             {
+              EList<JvmAnnotationReference> _annotations = it.getAnnotations();
+              JvmAnnotationReference _annotation = PureXbaseJvmModelInferrer.this._jvmTypesBuilder0.toAnnotation(e, java.lang.SuppressWarnings.class, "all");
+              CollectionExtensions.<JvmAnnotationReference>operator_add(_annotations, _annotation);
               EList<JvmMember> _members = it.getMembers();
               JvmTypeReference _newTypeRef = PureXbaseJvmModelInferrer.this._jvmTypesBuilder0.newTypeRef(e, Void.TYPE);
               final Function1<JvmOperation,Void> _function_1 = new Function1<JvmOperation,Void>() {
@@ -71,10 +75,8 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
                             public StringConcatenation apply(final ImportManager it_2) {
                               StringConcatenation _builder = new StringConcatenation();
                               _builder.append("try {");
-                              _builder.newLine();
-                              _builder.append("\t");
                               String _compile = PureXbaseJvmModelInferrer.this.compile(e, it_2);
-                              _builder.append(_compile, "	");
+                              _builder.append(_compile, "");
                               _builder.newLineIfNotEmpty();
                               _builder.append("} catch (Throwable t) {}");
                               _builder.newLine();
@@ -118,10 +120,8 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
                             public StringConcatenation apply(final ImportManager it_5) {
                               StringConcatenation _builder_2 = new StringConcatenation();
                               _builder_2.append("if (Boolean.TRUE) {");
-                              _builder_2.newLine();
-                              _builder_2.append("\t");
                               String _compile_1 = PureXbaseJvmModelInferrer.this.compile(e, it_5);
-                              _builder_2.append(_compile_1, "	");
+                              _builder_2.append(_compile_1, "");
                               _builder_2.newLineIfNotEmpty();
                               _builder_2.append("}");
                               _builder_2.newLine();
@@ -176,11 +176,13 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
     }
   }
   
-  public String compile(final XExpression obj, final ImportManager mnr) {
+  public String compile(final XBlockExpression obj, final ImportManager mnr) {
     {
-      StringBuilderBasedAppendable _stringBuilderBasedAppendable = new StringBuilderBasedAppendable(mnr);
+      StringBuilderBasedAppendable _stringBuilderBasedAppendable = new StringBuilderBasedAppendable(mnr, "\t");
       final StringBuilderBasedAppendable appendable = _stringBuilderBasedAppendable;
-      this.compiler.toJavaStatement(((XExpression) obj), appendable, false);
+      appendable.increaseIndentation();
+      JvmTypeReference _newTypeRef = this._jvmTypesBuilder0.newTypeRef(obj, Void.TYPE);
+      this.compiler.compile(obj, appendable, _newTypeRef);
       String _string = appendable.toString();
       return _string;
     }
