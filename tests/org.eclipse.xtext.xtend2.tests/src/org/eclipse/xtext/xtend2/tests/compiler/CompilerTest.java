@@ -53,6 +53,25 @@ import com.google.inject.Injector;
  */
 public class CompilerTest extends AbstractXtend2TestCase {
 	
+	public void testFunctionNameStartingWithUnderscore() throws Exception {
+		String code = 
+				"package x class Z {" +
+						"  def _foo(Object x, boolean b) {}\n" +
+						"  def _foo(String x, boolean b) {}\n" +
+						"}\n";
+		String javaCode = compileToJavaCode(code);
+		Class<?> class1 = javaCompiler.compileToClass("x.Z", javaCode);
+		assertEquals(2, class1.getDeclaredMethods().length);
+		assertNotNull(class1.getMethod("_foo", new Class<?>[] { Object.class, Boolean.TYPE }));
+		assertNotNull(class1.getMethod("_foo", new Class<?>[] { String.class, Boolean.TYPE }));
+		try {
+			class1.getMethod("foo", new Class<?>[]{Object.class, Boolean.TYPE});
+			fail("shouldn't contain a dispatch method");
+		} catch (NoSuchMethodException e) {
+			// expected
+		}
+	}
+	
 	public void testDispatchSignatureWithPrimitives() throws Exception {
 		String code = 
 				"package x class Z {" +
