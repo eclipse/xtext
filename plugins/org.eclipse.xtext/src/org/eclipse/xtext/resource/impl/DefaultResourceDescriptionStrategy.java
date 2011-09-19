@@ -13,6 +13,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
@@ -118,11 +119,15 @@ public class DefaultResourceDescriptionStrategy implements IDefaultResourceDescr
 	protected boolean isResolvedAndExternal(EObject from, EObject to) {
 		if (to == null)
 			return false;
-		if (!to.eIsProxy())
+		if (!to.eIsProxy()) {
+			if (to.eResource() == null) {
+				LOG.error("Reference from " + EcoreUtil.getURI(from) + " to " + to
+						+ " cannot be exported as the target is not contained in a resource.");
+				return false;
+			}
 			return from.eResource() != to.eResource();
-
+		}
 		return !getLazyURIEncoder()
 				.isCrossLinkFragment(from.eResource(), ((InternalEObject) to).eProxyURI().fragment());
 	}
-
 }
