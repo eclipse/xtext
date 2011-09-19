@@ -101,7 +101,6 @@ public class ProblemHoverTest extends AbstractEditorTest {
 	public void testBug357516() throws Exception {
 		IResource resource = editor.getResource();
 		createCustomMarkerOnResource(resource);
-		waitForAutoBuild();
 		String hoverInfo = hover.getHoverInfo(editor.getInternalSourceViewer(), 0);
 		assertNotNull(hoverInfo);
 		assertTrue(hoverInfo.contains(CUSTOM_MARKER_TEST_MESSAGE));
