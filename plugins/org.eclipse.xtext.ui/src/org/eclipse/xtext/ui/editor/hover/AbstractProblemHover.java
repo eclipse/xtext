@@ -100,14 +100,8 @@ public abstract class AbstractProblemHover extends AbstractHover {
 		return annotation instanceof ILineDiffInfo;
 	}
 
-	/**
-	 * todo: should be protected instead of private
-	 */
-	private boolean isHandled(Annotation annotation) {
-		return null != annotation
-				&& !annotation.isMarkedDeleted()
-				&& (XtextEditor.ERROR_ANNOTATION_TYPE.equals(annotation.getType()) || XtextEditor.WARNING_ANNOTATION_TYPE
-						.equals(annotation.getType()));
+	protected boolean isHandled(Annotation annotation) {
+		return null != annotation && !annotation.isMarkedDeleted();
 	}
 
 }
