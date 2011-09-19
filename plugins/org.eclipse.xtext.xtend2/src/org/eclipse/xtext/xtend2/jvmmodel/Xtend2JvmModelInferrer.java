@@ -31,6 +31,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
@@ -70,6 +71,9 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 	@Inject
 	private IdentifiableSimpleNameProvider simpleNameProvider;
 	
+	@Inject
+	private TypeReferences typeReferences;
+	
 	public void infer(EObject xtendFile, IAcceptor<JvmDeclaredType> acceptor, boolean prelinkingPhase) {
 		if (!(xtendFile instanceof XtendFile))
 			throw new IllegalArgumentException("expected XtendFile but was "+xtendFile);
@@ -89,8 +93,15 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 		target.setVisibility(JvmVisibility.PUBLIC);
 		if (! prelinkingPhase) {
 			addConstructor(source, target);
-			for (JvmTypeReference superType : source.getSuperTypes())
-				target.getSuperTypes().add(EcoreUtil2.cloneWithProxies(superType));
+			if (source.getSuperTypes().isEmpty()) {
+				JvmTypeReference typeRefToObject = typeReferences.getTypeForName(Object.class, source);
+				target.getSuperTypes().add(typeRefToObject);
+			} else {
+				for (JvmTypeReference superType : source.getSuperTypes()) {
+					target.getSuperTypes().add(EcoreUtil2.cloneWithProxies(superType));
+				}
+			}
+			
 			for (JvmTypeParameter typeParameter : source.getTypeParameters())
 				target.getTypeParameters().add(EcoreUtil2.cloneWithProxies(typeParameter));
 			for (XtendMember member : source.getMembers()) {
