@@ -20,7 +20,7 @@ import com.google.inject.ImplementedBy;
  */
 @ImplementedBy(RawTypeHelper.class)
 public interface IRawTypeHelper {
-
+	
 	List<JvmType> getAllRawTypes(JvmTypeReference reference, Resource resource);
 	
 }
