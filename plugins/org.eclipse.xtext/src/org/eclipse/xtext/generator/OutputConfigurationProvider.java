@@ -15,7 +15,7 @@ import java.util.Set;
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.1
  */
-public class OutputConfigurationProvider {
+public class OutputConfigurationProvider implements IOutputConfigurationProvider {
 
 	/**
 	 * @return a set of {@link OutputConfiguration} available for the generator
