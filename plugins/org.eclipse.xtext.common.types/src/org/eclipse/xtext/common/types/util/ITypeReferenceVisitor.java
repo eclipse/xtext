@@ -16,8 +16,8 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.common.types.JvmSynonymTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
-import org.eclipse.xtext.common.types.impl.JvmUnknownTypeReferenceImpl;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -35,7 +35,7 @@ public interface ITypeReferenceVisitor<Result> {
 	Result doVisitMultiTypeReference(JvmMultiTypeReference reference);
 	Result doVisitSynonymTypeReference(JvmSynonymTypeReference reference);
 	Result doVisitDelegateTypeReference(JvmDelegateTypeReference reference);
-	Result doVisitUnknownTypeReference(JvmUnknownTypeReferenceImpl reference);
+	Result doVisitUnknownTypeReference(JvmUnknownTypeReference reference);
 	Result doVisitSpecializedTypeReference(JvmSpecializedTypeReference reference);
 	
 }

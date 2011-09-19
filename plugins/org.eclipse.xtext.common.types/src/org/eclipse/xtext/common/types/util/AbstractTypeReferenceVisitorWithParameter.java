@@ -16,8 +16,8 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.common.types.JvmSynonymTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
-import org.eclipse.xtext.common.types.impl.JvmUnknownTypeReferenceImpl;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -81,7 +81,7 @@ public abstract class AbstractTypeReferenceVisitorWithParameter<Parameter, Resul
 			return doVisitCompoundTypeReference(reference, param);
 		}
 
-		public Result doVisitUnknownTypeReference(JvmUnknownTypeReferenceImpl reference, Parameter param) {
+		public Result doVisitUnknownTypeReference(JvmUnknownTypeReference reference, Parameter param) {
 			return doVisitTypeReference(reference, param);
 		}
 		
