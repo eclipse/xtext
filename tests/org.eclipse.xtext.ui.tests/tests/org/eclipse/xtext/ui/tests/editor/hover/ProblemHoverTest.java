@@ -10,11 +10,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.hover;
 
+import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
+
+import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.text.Region;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -32,6 +39,10 @@ import org.eclipse.xtext.validation.Issue;
  * @author Christoph Kulla - Initial contribution and API
  */
 public class ProblemHoverTest extends AbstractEditorTest {
+
+	private static final String CUSTOM_MARKER_ID = "org.eclipse.xtext.ui.tests.customMarker";
+
+	private static final String CUSTOM_MARKER_TEST_MESSAGE = "CustomMarkerTest";
 
 	protected XtextEditor editor;
 	
@@ -85,6 +96,25 @@ public class ProblemHoverTest extends AbstractEditorTest {
 		assertTrue(hoverInfo.startsWith(expected1));
 		assertTrue(hoverInfo.contains(expected2));
 		assertTrue(hoverInfo.contains(expected3));
+	}
+	
+	public void testBug357516() throws Exception {
+		IResource resource = editor.getResource();
+		createCustomMarkerOnResource(resource);
+		waitForAutoBuild();
+		String hoverInfo = hover.getHoverInfo(editor.getInternalSourceViewer(), 0);
+		assertNotNull(hoverInfo);
+		assertTrue(hoverInfo.contains(CUSTOM_MARKER_TEST_MESSAGE));
+	}
+	
+	private void createCustomMarkerOnResource(IResource resource) throws CoreException{
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put(IMarker.MESSAGE, CUSTOM_MARKER_TEST_MESSAGE);
+		attributes.put(IMarker.LINE_NUMBER, 1);
+		attributes.put(IMarker.LOCATION, resource.getFullPath().toPortableString());
+		attributes.put(IMarker.SEVERITY, IMarker.SEVERITY_WARNING); 
+		
+		MarkerUtilities.createMarker(resource, attributes, CUSTOM_MARKER_ID);
 	}
 
 	protected void activate(IWorkbenchPart part) {
