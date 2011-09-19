@@ -520,27 +520,25 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 	}
 
 	@Check
-	public void caseFuncWithoutParams(XtendFunction func) {
+	public void dispatchFuncWithTypeParams(XtendFunction func) {
 		if (func.isDispatch()) {
 			if (func.getParameters().isEmpty()) {
 				error("A dispatch function mus at least have one parameter declared.", func, XTEND_FUNCTION__DISPATCH,
-						IssueCodes.CASE_FUNC_WITHOUT_PARAMS);
+						IssueCodes.DISPATCH_FUNC_WITHOUT_PARAMS);
 			}
-		}
-	}
-
-	@Check
-	public void caseFuncWithTypeParams(XtendFunction func) {
-		if (func.isDispatch()) {
 			if (!func.getTypeParameters().isEmpty()) {
 				error("A dispatch function must not declare any type parameters.", func, XTEND_FUNCTION__DISPATCH,
-						IssueCodes.CASE_FUNC_WITH_TYPE_PARAMS);
+						IssueCodes.DISPATCH_FUNC_WITH_TYPE_PARAMS);
+			}
+			if (func.getSimpleName().startsWith("_")) {
+				error("A dispatch method's name must not start with an underscore.", func, XTEND_FUNCTION__NAME,
+						IssueCodes.DISPATCH_FUNC_NAME_STARTS_WITH_UNDERSCORE);
 			}
 		}
 	}
 
 	@Check
-	public void checkCaseFunctions(XtendClass clazz) {
+	public void checkDispatchFunctions(XtendClass clazz) {
 		JvmGenericType type = associations.getInferredType(clazz);
 		if (type != null) {
 			Multimap<Pair<String, Integer>, JvmOperation> dispatchMethods = dispatchingSupport.getDispatchMethods(type);
@@ -550,7 +548,7 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 					JvmOperation singleOp = collection.iterator().next();
 					XtendFunction function = associations.getXtendFunction(singleOp);
 					warning("Single dispatch function.", function, XTEND_FUNCTION__DISPATCH,
-							IssueCodes.SINGLE_CASE_FUNCTION);
+							IssueCodes.SINGLE_DISPATCH_FUNCTION);
 				} else {
 					Multimap<List<JvmType>, JvmOperation> signatures = HashMultimap.create();
 					for (JvmOperation jvmOperation : collection) {

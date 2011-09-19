@@ -32,6 +32,15 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	@Inject
 	private ValidationTestHelper helper;
 	
+	public void testBug_357230() throws Exception {
+		XtendClass clazz = clazz(
+				"package x class Z {" +
+						"  def dispatch _foo(Object x, boolean b) {}\n" +
+						"  def dispatch _foo(String x, boolean b) {}\n" +
+						"}\n");
+		helper.assertError(clazz, Xtend2Package.Literals.XTEND_FUNCTION, IssueCodes.DISPATCH_FUNC_NAME_STARTS_WITH_UNDERSCORE);
+	}
+	
 	public void testAnnotationTarget_00() throws Exception {
 		XtendClass clazz = clazz("@testdata.Annotation2('foo') class X { }");
 		helper.assertError(clazz, XAnnotationsPackage.Literals.XANNOTATION, IssueCodes.ANNOTATION_WRONG_TARGET);
@@ -204,17 +213,17 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 
 	public void testCaseFunctionNoParameters() throws Exception {
 		XtendFunction function = function("def dispatch foo() { null }");
-		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, IssueCodes.CASE_FUNC_WITHOUT_PARAMS);
+		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, IssueCodes.DISPATCH_FUNC_WITHOUT_PARAMS);
 	}
 
 	public void testCaseFunctionWithTypeParams() throws Exception {
 		XtendFunction function = function("def dispatch <T> foo(T s) { null }");
-		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, IssueCodes.CASE_FUNC_WITH_TYPE_PARAMS);
+		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, IssueCodes.DISPATCH_FUNC_WITH_TYPE_PARAMS);
 	}
 
 	public void testSingleCaseFunction() throws Exception {
 		XtendFunction function = function("def dispatch foo(String s) { null }");
-		helper.assertWarning(function, Xtend2Package.Literals.XTEND_FUNCTION, IssueCodes.SINGLE_CASE_FUNCTION);
+		helper.assertWarning(function, Xtend2Package.Literals.XTEND_FUNCTION, IssueCodes.SINGLE_DISPATCH_FUNCTION);
 	}
 
 	public void testDuplicateCaseFunction() throws Exception {
