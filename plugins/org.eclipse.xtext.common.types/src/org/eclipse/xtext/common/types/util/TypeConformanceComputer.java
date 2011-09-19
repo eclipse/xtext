@@ -7,27 +7,24 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.util;
 
-import java.io.Serializable;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmComponentType;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
+import org.eclipse.xtext.common.types.JvmSynonymTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -35,16 +32,16 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.common.types.util.Primitives.Primitive;
-import org.eclipse.xtext.common.types.util.SuperTypeCollector.SuperTypeAcceptor;
-import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 import com.google.common.base.Function;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.ForwardingMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.LinkedHashMultiset;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Multiset.Entry;
 import com.google.common.collect.Sets;
@@ -56,8 +53,7 @@ import com.google.inject.Inject;
  */
 public class TypeConformanceComputer {
 
-	private PolymorphicDispatcher<Boolean> isConformantDispatcher = 
-		PolymorphicDispatcher.createForSingleTarget("_isConformant", 3, 5, this);
+	protected AbstractConformanceVisitor<JvmTypeReference> leftDispatcher = createStrategySelector();
 	
 	@Inject
 	protected SuperTypeCollector superTypeCollector;
@@ -77,7 +73,11 @@ public class TypeConformanceComputer {
 	public void setSuperTypeCollector(SuperTypeCollector superTypeCollector) {
 		this.superTypeCollector = superTypeCollector;
 	}
-	
+
+	protected TypeConformanceStrategySelector createStrategySelector() {
+		return new TypeConformanceStrategySelector(this);
+	}
+
 	public void setPrimitives(Primitives primitives) {
 		this.primitives = primitives;
 	}
@@ -99,465 +99,18 @@ public class TypeConformanceComputer {
 	}
 	
 	public boolean isConformant(JvmTypeReference left, JvmTypeReference right, boolean ignoreGenerics) {
-		if (left == null || right == null)
-			return false;
-		if (left == right)
+		if (left == right && left != null)
 			return true;
-		if(isUnresolvedType(left) || isUnresolvedType(right)) 
-			return false;
-		if (isAnyTypeReference(left)) {
-			boolean result = isAnyTypeReference(right);
-			return result;
-		}
-		if (isPrimitiveVoid(left)) { 
-			boolean result = isPrimitiveVoid(right);
-			return result;
-		}
-		if (isAnyTypeReference(right)) {
-			boolean result = !isPrimitiveType(left);
-			return result;
-		}
-		if (isObject(left)) {
-			boolean result = !isPrimitiveVoid(right);
-			return result;
-		}
-		Boolean result = isConformantDispatcher.invoke(left, right, ignoreGenerics);
-		return result.booleanValue();
+		TypeConformanceResult result = isConformant(left, right, new TypeConformanceComputationArgument(ignoreGenerics, false, true));
+		return result.isConformant();
 	}
 	
-	protected boolean isPrimitiveType(JvmTypeReference reference) {
-		return reference.getType() instanceof JvmPrimitiveType;
+	public TypeConformanceResult isConformant(JvmTypeReference left, JvmTypeReference right, TypeConformanceComputationArgument flags) {
+		if (left == right && left != null)
+			return TypeConformanceResult.SUCCESS;
+		return leftDispatcher.visit(left, TypeConformanceComputationArgument.Internal.create(right, flags.rawType, flags.asTypeArgument, flags.allowPrimitiveConversion));
 	}
 	
-	protected boolean isAnyTypeReference(JvmTypeReference reference) {
-		return reference instanceof JvmAnyTypeReference;
-	}
-
-	protected boolean isUnresolvedType(JvmTypeReference reference) {
-		if (reference instanceof JvmMultiTypeReference || reference instanceof JvmAnyTypeReference || reference instanceof JvmWildcardTypeReference)
-			return false;
-		return reference.getType() == null || reference.getType().eIsProxy();
-	}
-
-	protected boolean isPrimitiveVoid(JvmTypeReference reference) {
-		return reference.getType() instanceof JvmVoid;
-	}
-
-	protected boolean isObject(JvmTypeReference reference) {
-		return Object.class.getCanonicalName().equals(reference.getIdentifier());
-	}
-	
-	protected Boolean _isConformant(JvmTypeReference left, JvmTypeReference right, boolean ignoreGenerics) {
-		Boolean result = isConformantDispatcher.invoke(left.getType(), right.getType(), left, right, ignoreGenerics);
-		return result;
-	}
-	
-	protected Boolean _isConformant(JvmMultiTypeReference left, JvmTypeReference right, boolean ignoreGenerics) {
-		for(JvmTypeReference reference: left.getReferences()) {
-			if (!isConformant(reference, right, ignoreGenerics))
-				return false;
-		}
-		return !left.getReferences().isEmpty();
-	}
-	
-	protected Boolean _isConformant(JvmTypeReference left, JvmMultiTypeReference right, boolean ignoreGenerics) {
-		for(JvmTypeReference reference: right.getReferences()) {
-			if (isConformant(left, reference, ignoreGenerics))
-				return true;
-		}
-		return false;
-	}
-	
-	protected Boolean _isConformant(JvmGenericArrayTypeReference left, JvmGenericArrayTypeReference right, boolean ignoreGenerics) {
-		Boolean result = isConformant(left.getComponentType(), right.getComponentType(), ignoreGenerics);
-		return result;
-	}
-	
-	protected Boolean _isConformant(JvmGenericArrayTypeReference left, JvmWildcardTypeReference right, boolean ignoreGenerics) {
-		List<JvmTypeConstraint> constraints = right.getConstraints();
-		for(JvmTypeConstraint constraint: constraints) {
-			if (constraint instanceof JvmUpperBound) {
-				if (!isConformant(left, constraint.getTypeReference(), ignoreGenerics))
-					return false;
-			}
-			if (constraint instanceof JvmLowerBound) {
-				if (!isConformant(constraint.getTypeReference(), left, ignoreGenerics))
-					return false;
-			}
-		}
-		return Boolean.TRUE;
-	}
-	
-	protected Boolean _isConformant(JvmWildcardTypeReference left, JvmGenericArrayTypeReference right, boolean ignoreGenerics) {
-		List<JvmTypeConstraint> constraints = left.getConstraints();
-		for(JvmTypeConstraint constraint: constraints) {
-			if (constraint instanceof JvmUpperBound) {
-				if (!isConformant(constraint.getTypeReference(), right, ignoreGenerics))
-					return false;
-			}
-			if (constraint instanceof JvmLowerBound) {
-				if (!isConformant(right, constraint.getTypeReference(), ignoreGenerics))
-					return false;
-			}
-		}
-		return Boolean.TRUE;
-	}
-	
-	protected Boolean _isConformant(JvmWildcardTypeReference left, JvmParameterizedTypeReference right, boolean ignoreGenerics) {
-		for (JvmTypeConstraint constraint: left.getConstraints()) {
-			if (constraint instanceof JvmUpperBound) {
-				JvmTypeReference upperBound = constraint.getTypeReference();
-				if (upperBound != null) { // not a wildcard
-					Boolean result = isConformant(upperBound, right);
-					if (!result)
-						return Boolean.FALSE;
-				}
-			} else if (constraint instanceof JvmLowerBound) {
-				JvmTypeReference lowerBound = constraint.getTypeReference();
-				Boolean result = isConformant(right, lowerBound);
-				if (!result)
-					return Boolean.FALSE;
-			}
-		}
-		return Boolean.TRUE;
-	}
-	
-	protected Boolean _isConformant(JvmParameterizedTypeReference left, JvmWildcardTypeReference right, boolean ignoreGenerics) {
-		return Boolean.FALSE;
-	}
-	
-	protected Boolean _isConformant(JvmWildcardTypeReference left, JvmWildcardTypeReference right, boolean ignoreGenerics) {
-		List<JvmTypeConstraint> leftConstraints = left.getConstraints();
-		List<JvmTypeConstraint> rightConstraints = right.getConstraints();
-		return areConstraintsConformant(leftConstraints, rightConstraints);
-	}
-
-	protected Boolean areConstraintsConformant(List<JvmTypeConstraint> leftConstraints,	List<JvmTypeConstraint> rightConstraints) {
-		if (leftConstraints.size() != rightConstraints.size())
-			return Boolean.FALSE;
-		int constraintCount = leftConstraints.size();
-		for(int i = 0; i < constraintCount; i++) {
-			JvmTypeConstraint leftConstraint = leftConstraints.get(i);
-			JvmTypeConstraint rightConstraint = rightConstraints.get(i);
-			if (leftConstraint.eClass() != rightConstraint.eClass())
-				return Boolean.FALSE;
-			if (leftConstraint instanceof JvmUpperBound) {
-				if (leftConstraint.getTypeReference() != null) { // not a wildcard
-					if (!isConformant(leftConstraint.getTypeReference(), rightConstraint.getTypeReference()))
-						return Boolean.FALSE;
-				}
-			} else {
-				if (!isConformant(rightConstraint.getTypeReference(), leftConstraint.getTypeReference()))
-					return Boolean.FALSE;
-			}
-		}
-		return Boolean.TRUE;
-	}
-	
-	protected Boolean _isConformant(JvmPrimitiveType leftType, JvmPrimitiveType rightType, JvmParameterizedTypeReference left, JvmParameterizedTypeReference right, boolean ignoreGenerics) {
-		if (leftType == rightType)
-			return true;
-		return isWideningConversion(leftType, rightType);
-	}
-	
-	/**
-	 * See Java Language Specification <a href="http://java.sun.com/docs/books/jls/third_edition/html/conversions.html#5.1.2">§{5.1.2} Widening Primitive Conversion</a>
-	 */
-	protected Boolean isWideningConversion(JvmPrimitiveType leftType, JvmPrimitiveType rightType) {
-		final Primitive left = primitiveKind(leftType);
-		final Primitive right = primitiveKind(rightType);
-		switch (right) {
-			case Byte :
-				return left == Primitive.Short 
-					|| left == Primitive.Char // listed in section 5.1.4
-					|| left == Primitive.Int
-					|| left == Primitive.Long
-					|| left == Primitive.Float
-					|| left == Primitive.Double;
-			case Short :
-				return left == Primitive.Int
-				|| left == Primitive.Long
-				|| left == Primitive.Float
-				|| left == Primitive.Double;
-			case Char :
-				return left == Primitive.Int
-				|| left == Primitive.Long
-				|| left == Primitive.Float
-				|| left == Primitive.Double;
-			case Int :
-				return left == Primitive.Long
-				|| left == Primitive.Float
-				|| left == Primitive.Double;
-			case Long :
-				return left == Primitive.Float
-				|| left == Primitive.Double;
-			case Float :
-				return left == Primitive.Double;
-			default :
-				return false;
-		}
-	}
-	
-	protected Primitive primitiveKind(JvmPrimitiveType primitiveType) {
-		return primitives.primitiveKind(primitiveType);
-	}
-
-	protected Boolean _isConformant(JvmPrimitiveType leftType, JvmType rightType, JvmParameterizedTypeReference left, JvmParameterizedTypeReference right, boolean ignoreGenerics) {
-		return isUnBoxing(leftType, rightType);
-	}
-	
-	protected Boolean _isConformant(JvmDeclaredType leftType, JvmPrimitiveType rightType, JvmParameterizedTypeReference left, JvmParameterizedTypeReference right, boolean ignoreGenerics) {
-		return isBoxing(leftType, rightType);
-	}
-	
-	protected Boolean _isConformant(JvmDeclaredType leftType, JvmDeclaredType rightType, JvmParameterizedTypeReference left, JvmParameterizedTypeReference right, boolean ignoreGenerics) {
-		if (leftType == rightType || superTypeCollector.collectSuperTypesAsRawTypes(right).contains(leftType)) {
-			return ignoreGenerics || areArgumentsAssignableFrom(left, right);
-		}
-		return Boolean.FALSE;
-	}
-	
-	protected Boolean _isConformant(JvmDeclaredType leftType, JvmType rightType, JvmTypeReference left, JvmTypeReference right, boolean ignoreGenerics) {
-		return Boolean.FALSE;
-	}
-	
-	protected Boolean _isConformant(JvmDeclaredType leftType, JvmTypeParameter rightType, JvmTypeReference left, JvmTypeReference right, boolean ignoreGenerics) {
-		List<JvmTypeConstraint> constraints = rightType.getConstraints();
-		for (JvmTypeConstraint constraint : constraints) {
-			if (constraint instanceof JvmUpperBound) {
-				JvmTypeReference upperBound = constraint.getTypeReference();
-				if (!isConformant(left, upperBound, ignoreGenerics))
-					return false;
-			} else if (constraint instanceof JvmLowerBound) {
-				JvmTypeReference lowerBound = constraint.getTypeReference();
-				if (!isConformant(lowerBound, left, ignoreGenerics))
-					return false;
-			}
-		}
-		if (constraints.isEmpty()) {
-			return typeReferences.is(left, Object.class);
-		}
-		return true;
-	}
-	
-	protected Boolean _isConformant(JvmTypeParameter leftType, JvmTypeParameter rightType, JvmParameterizedTypeReference left, JvmParameterizedTypeReference right, boolean ignoreGenerics) {
-		if (leftType == rightType)
-			return Boolean.TRUE;
-		boolean result = areConstraintsConformant(leftType.getConstraints(), rightType.getConstraints());
-		if (result)
-			return true;
-		for(JvmTypeConstraint constraint: rightType.getConstraints()) {
-			if (constraint instanceof JvmUpperBound) {
-				if (isConformant(left, constraint.getTypeReference(), ignoreGenerics))
-					return true;
-			}
-		}
-		return false;
-	}
-	
-	protected Boolean _isConformant(JvmTypeParameter leftType, JvmType rightType, JvmParameterizedTypeReference left, JvmParameterizedTypeReference right, boolean ignoreGenerics) {
-		List<JvmTypeConstraint> list = leftType.getConstraints();
-		for (JvmTypeConstraint jvmTypeConstraint : list) {
-			if (jvmTypeConstraint instanceof JvmUpperBound) {
-				JvmTypeReference typeReference = jvmTypeConstraint.getTypeReference();
-				if (isConformant(typeReference, right, ignoreGenerics))
-					return true;
-			}
-		}
-		return list.isEmpty();
-	}
-	
-	protected Boolean _isConformant(JvmArrayType leftType, JvmArrayType rightType, JvmTypeReference left, JvmTypeReference right, boolean ignoreGenerics) {
-		JvmComponentType leftComponentType = leftType.getComponentType();
-		JvmComponentType rightComponentType = rightType.getComponentType();
-		if (leftComponentType == rightComponentType || superTypeCollector.collectSuperTypes(rightComponentType).contains(leftComponentType)) {
-			return Boolean.TRUE;
-		}
-		return Boolean.FALSE;
-	}
-	
-	protected Boolean _isConformant(JvmArrayType leftType, JvmType rightType, JvmTypeReference left, JvmTypeReference right, boolean ignoreGenerics) {
-		return Boolean.FALSE;
-	}
-	
-	protected Boolean _isConformant(JvmType leftType, JvmArrayType rightType, JvmTypeReference left, JvmTypeReference right, boolean ignoreGenerics) {
-		return Boolean.FALSE;
-	}
-	
-	protected Boolean _isConformant(JvmDeclaredType leftType, JvmArrayType rightType, JvmTypeReference left, JvmTypeReference right, boolean ignoreGenerics) {
-		return Object.class.getCanonicalName().equals(leftType.getIdentifier());
-	}
-
-	protected boolean areArgumentsAssignableFrom(JvmParameterizedTypeReference left, JvmParameterizedTypeReference right) {
-		// raw type
-		if (left.getArguments().size() == 0 || right.getArguments().size() == 0) {
-			return true;
-		}
-		if (left.getArguments().size() != right.getArguments().size()) {
-			return false;
-		}
-
-		for (int i = 0; i < left.getArguments().size(); i++) {
-			JvmTypeReference argumentA = left.getArguments().get(i);
-			JvmTypeReference argumentB = right.getArguments().get(i);
-			if (!isArgumentAssignable(argumentA, argumentB))
-				return false;
-		}
-		return true;
-	}
-
-	protected boolean isArgumentAssignable(JvmTypeReference refA, JvmTypeReference refB) {
-		if (isUnconstrainedWildcard(refA)) {
-			return true;
-		}
-		// TODO remove as soon as the TODO below is fixed
-		if (refA instanceof JvmAnyTypeReference)
-			return true;
-		JvmTypeReference upperA = getUpper(refA);
-		JvmTypeReference upperB = getUpper(refB);
-		JvmTypeReference lowerA = getLower(refA);
-		JvmTypeReference lowerB = getLower(refB);
-		if (upperA != null) {
-			if (upperB != null) {
-				return isConformant(upperA, upperB);
-			} else if (!(refB instanceof JvmWildcardTypeReference)) {
-				return isConformant(upperA, refB);
-			}
-		} else if (!(refA instanceof JvmWildcardTypeReference)) {
-			if (!(refB instanceof JvmWildcardTypeReference)) {
-				JvmType typeA = refA.getType();
-				JvmType typeB = refB.getType();
-				if (typeA == typeB) {
-					// same raw type - use isConformant
-					return isConformant(refA, refB);
-				}
-				if (typeA.eClass() == typeB.eClass() && typeA instanceof JvmTypeParameter) {
-					if (_isConformant((JvmTypeParameter) typeA, (JvmTypeParameter) typeB, (JvmParameterizedTypeReference)refA, (JvmParameterizedTypeReference)refB, false)) {
-						return areArgumentsAssignableFrom((JvmParameterizedTypeReference)refA, (JvmParameterizedTypeReference)refB);
-					}
-				} else if (typeA instanceof JvmTypeParameter) {
-					if (_isConformant((JvmTypeParameter)typeA, typeB, (JvmParameterizedTypeReference)refA, (JvmParameterizedTypeReference)refB, false)) {
-						return areArgumentsAssignableFrom((JvmParameterizedTypeReference)refA, (JvmParameterizedTypeReference)refB);
-					}
-				}
-			}
-		} else if (lowerA != null) {
-			if (isUnconstrainedWildcard(refB))
-				return false;
-			if (upperB != null) {
-				if (!isConformant(upperB, lowerA))
-					return false;
-			}
-			if (lowerB == null || isConformant(lowerB, lowerA)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	protected boolean isUnconstrainedWildcard(JvmTypeReference argumentA) {
-		if (argumentA instanceof JvmWildcardTypeReference) {
-			JvmWildcardTypeReference wc = (JvmWildcardTypeReference) argumentA;
-			if (wc.getConstraints().isEmpty()) {
-				return true;
-			}
-			if (wc.getConstraints().size()==1 && wc.getConstraints().get(0) instanceof JvmUpperBound) {
-				JvmUpperBound upper = (JvmUpperBound) wc.getConstraints().get(0);
-				if (typeReferences.is(upper.getTypeReference(), Object.class))
-					return true;
-			}
-		}
-		return false;
-	}
-
-	protected JvmTypeReference getLower(JvmTypeReference argumentA) {
-		if (argumentA instanceof JvmWildcardTypeReference) {
-			EList<JvmTypeConstraint> list = ((JvmWildcardTypeReference) argumentA).getConstraints();
-			for (JvmTypeConstraint constraint : list) {
-				if (constraint instanceof JvmLowerBound) {
-					return constraint.getTypeReference();
-				}
-			}
-		}
-		return null;
-	}
-
-	protected JvmTypeReference getUpper(JvmTypeReference argument) {
-		if (argument instanceof JvmWildcardTypeReference) {
-			EList<JvmTypeConstraint> list = ((JvmWildcardTypeReference) argument).getConstraints();
-			for (JvmTypeConstraint constraint : list) {
-				if (constraint instanceof JvmUpperBound) {
-					final JvmTypeReference typeReference = constraint.getTypeReference();
-					return typeReference;
-				}
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * see <a href="http://java.sun.com/docs/books/jls/third_edition/html/conversions.html#5.1.7">§ 5.1.7</a>
-	 */
-	protected boolean isBoxing(JvmType typeA, JvmPrimitiveType typeB) {
-		Primitive primitive = primitiveKind(typeB);
-		switch (primitive) {
-			case Byte :
-				return is(typeA, Byte.class, Serializable.class, Comparable.class, Number.class, Object.class);
-			case Short :
-				return is(typeA, Short.class, Serializable.class, Comparable.class, Number.class, Object.class);
-			case Char :
-				return is(typeA, Character.class, Serializable.class, Comparable.class, Object.class);
-			case Int :
-				return is(typeA, Integer.class, Serializable.class, Comparable.class, Number.class, Object.class);
-			case Long :
-				return is(typeA, Long.class, Serializable.class, Comparable.class, Number.class, Object.class);
-			case Float :
-				return is(typeA, Float.class, Serializable.class, Comparable.class, Number.class, Object.class);
-			case Double :
-				return is(typeA, Double.class, Serializable.class, Comparable.class, Number.class, Object.class);
-			case Boolean :
-				return is(typeA, Boolean.class, Serializable.class, Comparable.class, Object.class);
-			default :
-				return false;
-		}
-	}
-
-	/**
-	 * see <a href="http://java.sun.com/docs/books/jls/third_edition/html/conversions.html#5.1.8">§ 5.1.8</a>
-	 */
-	protected boolean isUnBoxing(JvmPrimitiveType typeA, JvmType typeB) {
-		Primitive primitive = primitiveKind(typeA);
-		switch (primitive) {
-			case Byte :
-				return is(typeB, Byte.class);
-			case Short :
-				return is(typeB, Short.class);
-			case Char :
-				return is(typeB, Character.class);
-			case Int :
-				return is(typeB, Integer.class);
-			case Long :
-				return is(typeB, Long.class);
-			case Float :
-				return is(typeB, Float.class);
-			case Double :
-				return is(typeB, Double.class);
-			case Boolean :
-				return is(typeB, Boolean.class);
-			default :
-				return false;
-		}
-	}
-
-	protected boolean is(JvmType typeA, Class<?> ...classes) {
-		for (Class<?> clazz : classes) {
-			boolean result = typeA.getIdentifier().equals(clazz.getCanonicalName());
-			if (result)
-				return true;
-		}
-		return false;
-	}
-
 	/**
 	 * Populates a {@link Multiset} with the maximum number of necessary steps
 	 * from a given type to its super types. Sorting the set by the steps creates 
@@ -569,7 +122,7 @@ public class TypeConformanceComputer {
 	 * Thus the number of steps to {@link java.io.Serializable} is <code>1</code> while 
 	 * {@link CharSequence} requires <code>2</code> hops. 
 	 */
-	protected static class MaxDistanceRawTypeAcceptor implements SuperTypeAcceptor {
+	protected static class MaxDistanceRawTypeAcceptor implements SuperTypeCollector.SuperTypeAcceptor {
 
 		/**
 		 * The set with with the distance information.
@@ -623,6 +176,10 @@ public class TypeConformanceComputer {
 		
 	}
 	
+	protected boolean isPrimitiveVoid(JvmTypeReference reference) {
+		return reference.getType() instanceof JvmVoid;
+	}
+	
 	/**
 	 * Compute the common super type for the given types.
 	 * 
@@ -645,6 +202,15 @@ public class TypeConformanceComputer {
 				return null;
 			}
 		}
+//		if (allTypesAreArrays(types)) {
+//			List<JvmTypeReference> componentTypes = getComponentTypes(types);
+//			JvmTypeReference resultComponent = doGetCommonSuperType(componentTypes, new TypeConformanceComputationArgument(false, false, false));
+//			if (resultComponent != null) {
+//				JvmGenericArrayTypeReference result = factory.createJvmGenericArrayTypeReference();
+//				result.setComponentType(resultComponent);
+//				return result;
+//			}
+//		}
 		// TODO handle all primitives
 		// TODO handle arrays
 		if (containsPrimitive(types)) {
@@ -694,10 +260,6 @@ public class TypeConformanceComputer {
 			}
 			return result;
 		}
-		// until above's TODOs are not solved, return Object as catch all
-		JvmType context = findContext(firstType);
-		if (context != null)
-			return typeReferences.getTypeForName(Object.class, context);
 		return null;
 	}
 
@@ -724,7 +286,122 @@ public class TypeConformanceComputer {
 		return false;
 	}
 	
-	protected JvmTypeReference getTypeParametersForSupertype(Multimap<JvmType, JvmTypeReference> all, JvmType rawType, List<JvmTypeReference> initiallyRequested) {
+	protected List<JvmTypeReference> getComponentTypes(List<JvmTypeReference> types) {
+		ITypeReferenceVisitor<JvmTypeReference> componentTypeComputer = new AbstractTypeReferenceVisitor.InheritanceAware<JvmTypeReference>() {
+			@Override
+			public JvmTypeReference doVisitTypeReference(JvmTypeReference reference) {
+				return null;
+			}
+			@Override
+			protected JvmTypeReference handleNullReference() {
+				return null;
+			}
+			@Override
+			public JvmTypeReference doVisitMultiTypeReference(JvmMultiTypeReference multi) {
+				JvmMultiTypeReference result = factory.createJvmMultiTypeReference();
+				for(JvmTypeReference reference: multi.getReferences()) {
+					JvmTypeReference component = reference.accept(this);
+					if (component != null) {
+						if (component.eContainer() == null) {
+							result.getReferences().add(component);
+						} else {
+							JvmDelegateTypeReference delegate = factory.createJvmDelegateTypeReference();
+							delegate.setDelegate(component);
+							result.getReferences().add(delegate);
+						}
+					}
+				}
+				return result;
+			}
+			@Override
+			public JvmTypeReference doVisitGenericArrayTypeReference(JvmGenericArrayTypeReference reference) {
+				return reference.getComponentType();
+			}
+			@Override
+			public JvmTypeReference doVisitSynonymTypeReference(JvmSynonymTypeReference synonym) {
+				JvmTypeReference result = null;
+				for(JvmTypeReference reference: synonym.getReferences()) {
+					JvmTypeReference component = reference.accept(this);
+					if (component != null) {
+						if (result == null) {
+							result = component;
+						} else {
+							if (!(result instanceof JvmSynonymTypeReference)) {
+								JvmSynonymTypeReference newResult = factory.createJvmSynonymTypeReference();
+								if (result.eContainer() == null) {
+									newResult.getReferences().add(result);
+								} else {
+									JvmDelegateTypeReference delegate = factory.createJvmDelegateTypeReference();
+									delegate.setDelegate(component);
+									newResult.getReferences().add(delegate);
+								}
+								result = newResult;
+							}
+							if (component.eContainer() == null) {
+								((JvmSynonymTypeReference) result).getReferences().add(result);
+							} else {
+								JvmDelegateTypeReference delegate = factory.createJvmDelegateTypeReference();
+								delegate.setDelegate(component);
+								((JvmSynonymTypeReference) result).getReferences().add(delegate);
+							}
+						}
+					}
+				}
+				return result;
+			}
+		};
+		List<JvmTypeReference> result = Lists.newArrayList();
+		for(JvmTypeReference reference: types) {
+			JvmTypeReference componentType = reference.accept(componentTypeComputer);
+			result.add(componentType);
+		}
+		return result;
+	}
+	
+	protected boolean allTypesAreArrays(List<JvmTypeReference> types) {
+		ITypeReferenceVisitor<Boolean> isArrayVisitor = new AbstractTypeReferenceVisitor.InheritanceAware<Boolean>() {
+			@Override
+			protected Boolean handleNullReference() {
+				return Boolean.FALSE;
+			}
+			@Override
+			public Boolean doVisitTypeReference(JvmTypeReference reference) {
+				return Boolean.FALSE;
+			}
+			@Override
+			public Boolean doVisitMultiTypeReference(JvmMultiTypeReference multi) {
+				for(JvmTypeReference reference: multi.getReferences()) {
+					if (!reference.accept(this))
+						return Boolean.FALSE;
+				}
+				return !multi.getReferences().isEmpty();
+			}
+			@Override
+			public Boolean doVisitGenericArrayTypeReference(JvmGenericArrayTypeReference reference) {
+				return reference.getComponentType() != null;
+			}
+			@Override
+			public Boolean doVisitSynonymTypeReference(JvmSynonymTypeReference synonym) {
+				for(JvmTypeReference reference: synonym.getReferences()) {
+					if (reference.accept(this))
+						return Boolean.TRUE;
+				}
+				return Boolean.FALSE;
+			}
+		};
+		for(JvmTypeReference reference: types) {
+			if (!reference.accept(isArrayVisitor)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	protected boolean isPrimitiveType(JvmTypeReference reference) {
+		return reference.getType() instanceof JvmPrimitiveType;
+	}
+	
+	protected JvmTypeReference getTypeParametersForSupertype(final Multimap<JvmType, JvmTypeReference> all, final JvmType rawType, List<JvmTypeReference> initiallyRequested) {
 		if (rawType instanceof JvmTypeParameterDeclarator) {
 			List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator) rawType).getTypeParameters();
 			// if we do not declare any parameters it is safe to return the first candidate
@@ -761,6 +438,38 @@ public class TypeConformanceComputer {
 				result.getArguments().add((JvmTypeReference) EcoreUtil.copy(parameterSuperType));
 			}
 			return result;
+		} else if (rawType instanceof JvmArrayType) {
+			final JvmComponentType componentType = ((JvmArrayType) rawType).getComponentType();
+			final Function<JvmTypeReference, JvmTypeReference> getComponentType = new Function<JvmTypeReference, JvmTypeReference>() {
+				public JvmTypeReference apply(JvmTypeReference from) {
+					if (from instanceof JvmGenericArrayTypeReference)
+						return ((JvmGenericArrayTypeReference) from).getComponentType();
+					return from;
+				}
+			};
+			Multimap<JvmType, JvmTypeReference> decorated = new ForwardingMultimap<JvmType, JvmTypeReference>() {
+				@Override
+				protected Multimap<JvmType, JvmTypeReference> delegate() {
+					return all;
+				}
+				@Override
+				public Collection<JvmTypeReference> get(JvmType key) {
+					if (key == componentType) {
+						Collection<JvmTypeReference> result = all.get(rawType);
+						return Collections2.transform(result, getComponentType);
+					}
+					return super.get(key);
+				}
+			};
+			JvmTypeReference componentTypeReference = getTypeParametersForSupertype(
+					decorated, 
+					componentType, 
+					Lists.transform(initiallyRequested, getComponentType));
+			if (componentTypeReference != null) {
+				JvmGenericArrayTypeReference result = factory.createJvmGenericArrayTypeReference();
+				result.setComponentType(componentTypeReference);
+				return result;
+			}
 		}
 		return null;
 	}
@@ -801,22 +510,31 @@ public class TypeConformanceComputer {
 		Collections.sort(candidates,new Comparator<Entry<JvmType>>() {
 			public int compare(Entry<JvmType> o1, Entry<JvmType> o2) {
 				if (o1.getCount() == o2.getCount()) {
-					if (o1.getElement() instanceof JvmGenericType && o2.getElement() instanceof JvmGenericType) {
-						if (((JvmGenericType) o1.getElement()).isInterface()) {
-							if (!((JvmGenericType) o2.getElement()).isInterface()) {
-								return 1;
-							}
-						} else {
-							if (((JvmGenericType) o2.getElement()).isInterface()) {
-								return -1;
-							}
-						}
-					}
-					return o1.getElement().getIdentifier().compareTo(o2.getElement().getIdentifier());
+					JvmType element1 = o1.getElement();
+					JvmType element2 = o2.getElement();
+					return compare(element1, element2);
 				}
 				if (o1.getCount() < o2.getCount())
 					return -1;
 				return 1;
+			}
+
+			protected int compare(JvmType element1, JvmType element2) {
+				if (element1 instanceof JvmArrayType && element2 instanceof JvmArrayType) {
+					return compare(((JvmArrayType) element1).getComponentType(), ((JvmArrayType) element2).getComponentType());
+				}
+				if (element1 instanceof JvmGenericType && element2 instanceof JvmGenericType) {
+					if (((JvmGenericType) element1).isInterface()) {
+						if (!((JvmGenericType) element2).isInterface()) {
+							return 1;
+						}
+					} else {
+						if (((JvmGenericType) element2).isInterface()) {
+							return -1;
+						}
+					}
+				}
+				return element1.getIdentifier().compareTo(element2.getIdentifier());
 			}
 		});
 	}
@@ -824,6 +542,7 @@ public class TypeConformanceComputer {
 	public JvmTypeReference getCommonParameterSuperType(final List<JvmTypeReference> types, List<JvmTypeReference> initiallyRequested) {
 		Function<JvmTypeReference, String> getCanonicalName = new Function<JvmTypeReference, String>() {
 			public String apply(JvmTypeReference from) {
+				
 				return from.getIdentifier();
 			}
 		};
@@ -854,6 +573,22 @@ public class TypeConformanceComputer {
 			conform = isConformant(type, types.get(i));
 		}
 		return conform;
+	}
+	
+	protected TypeReferences getTypeReferences() {
+		return typeReferences;
+	}
+	
+	protected SuperTypeCollector getSuperTypeCollector() {
+		return superTypeCollector;
+	}
+	
+	protected Primitives getPrimitives() {
+		return primitives;
+	}
+	
+	protected TypeArgumentContextProvider getTypeArgumentContextProvider() {
+		return typeArgumentContextProvider;
 	}
 
 }

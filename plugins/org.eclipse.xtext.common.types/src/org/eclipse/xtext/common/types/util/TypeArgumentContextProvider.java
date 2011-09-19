@@ -426,7 +426,7 @@ public class TypeArgumentContextProvider {
 	
 	//TODO improve
 	protected boolean isResolved(JvmTypeReference type) {
-		if (type.getType() instanceof JvmTypeParameter || type.getType() instanceof JvmVoid) {
+		if (type == null || type.getType() instanceof JvmTypeParameter || type.getType() instanceof JvmVoid) {
 			return false;
 		}
 		if (type instanceof JvmWildcardTypeReference) {
@@ -439,15 +439,32 @@ public class TypeArgumentContextProvider {
 			}
 			return true;
 		}
+		if (type instanceof JvmDelegateTypeReference) {
+			return isResolved(((JvmDelegateTypeReference) type).getDelegate());
+		}
+		if (type instanceof JvmSpecializedTypeReference) {
+			return isResolved(((JvmSpecializedTypeReference) type).getEquivalent());
+		}
 		return true;
 	}
 
 	protected void internalComputeContext(JvmTypeReference contextRef, Multimap<JvmTypeParameter, ResolveInfo> context, Set<JvmType> computing) {
+		if (contextRef == null)
+			return;
 		if (contextRef instanceof JvmMultiTypeReference) {
 			JvmMultiTypeReference multiType = (JvmMultiTypeReference) contextRef;
 			for(JvmTypeReference typeReference: multiType.getReferences()) {
 				internalComputeContext(typeReference, context, computing);
 			}
+			return;
+		}
+		if (contextRef instanceof JvmDelegateTypeReference) {
+			JvmTypeReference delegate = ((JvmDelegateTypeReference) contextRef).getDelegate();
+			internalComputeContext(delegate, context, computing);
+			return;
+		}
+		if (contextRef instanceof JvmSpecializedTypeReference) {
+			internalComputeContext(((JvmSpecializedTypeReference) contextRef).getEquivalent(), context, computing);
 			return;
 		}
 		if (contextRef instanceof JvmParameterizedTypeReference) {
@@ -472,6 +489,10 @@ public class TypeArgumentContextProvider {
 								context.put(param, info);
 							}
 						}
+					}
+				} else {
+					if (!typeParameters.isEmpty()) { // rawType
+						return;
 					}
 				}
 			}
@@ -579,6 +600,12 @@ public class TypeArgumentContextProvider {
 					info.preferSubtypes = true;
 					resolve(declArgs.get(0), info, existing, returnTypeContext);
 				}
+			} else if (information.reference instanceof JvmDelegateTypeReference) {
+				ResolveInfo newInfo = information.copyIfDifferent(((JvmDelegateTypeReference) information.reference).getDelegate());
+				resolve(declaration, newInfo, existing, returnTypeContext);
+			} else if (information.reference instanceof JvmSpecializedTypeReference) {
+				ResolveInfo newInfo = information.copyIfDifferent(((JvmSpecializedTypeReference) information.reference).getEquivalent());
+				resolve(declaration, newInfo, existing, returnTypeContext);	
 			}
 		} else if (declaration instanceof JvmWildcardTypeReference) {
 			JvmWildcardTypeReference wildcardDeclaration = (JvmWildcardTypeReference) declaration;
@@ -591,13 +618,30 @@ public class TypeArgumentContextProvider {
 				ResolveInfo info = new ResolveInfo(informationUpperBound);
 				info.preferSubtypes = true;
 				resolve(wildcardUpperBound, info, existing, returnTypeContext);
+			} else if (information.reference instanceof JvmDelegateTypeReference) {
+				ResolveInfo newInfo = information.copyIfDifferent(((JvmDelegateTypeReference) information.reference).getDelegate());
+				resolve(declaration, newInfo, existing, returnTypeContext);
+			} else if (information.reference instanceof JvmSpecializedTypeReference) {
+				ResolveInfo newInfo = information.copyIfDifferent(((JvmSpecializedTypeReference) information.reference).getEquivalent());
+				resolve(declaration, newInfo, existing, returnTypeContext);	
 			}
 		} else if (declaration instanceof JvmGenericArrayTypeReference) {
 			JvmTypeReference componentType = ((JvmGenericArrayTypeReference) declaration).getComponentType();
 			if (information.reference instanceof JvmGenericArrayTypeReference) {
 				ResolveInfo componentInfo = information.copyIfDifferent(((JvmGenericArrayTypeReference) information.reference).getComponentType());
 				resolve(componentType, componentInfo, existing, returnTypeContext);
+			} else if (information.reference instanceof JvmDelegateTypeReference) {
+				ResolveInfo newInfo = information.copyIfDifferent(((JvmDelegateTypeReference) information.reference).getDelegate());
+				resolve(declaration, newInfo, existing, returnTypeContext);
+			} else if (information.reference instanceof JvmSpecializedTypeReference) {
+				ResolveInfo newInfo = information.copyIfDifferent(((JvmSpecializedTypeReference) information.reference).getEquivalent());
+				resolve(declaration, newInfo, existing, returnTypeContext);	
 			}
+		} else if (declaration instanceof JvmDelegateTypeReference) {
+			JvmTypeReference delegate = ((JvmDelegateTypeReference) declaration).getDelegate();
+			resolve(delegate, information, existing, returnTypeContext);
+		} else if (declaration instanceof JvmSpecializedTypeReference) {
+			resolve(((JvmSpecializedTypeReference) declaration).getEquivalent(), information, existing, returnTypeContext);
 		}
 	}
 	
@@ -638,6 +682,10 @@ public class TypeArgumentContextProvider {
 			}
 		} else if (information instanceof JvmGenericArrayTypeReference) {
 			return isValidParameter(typeParameter, ((JvmGenericArrayTypeReference) information).getComponentType(), ignoreOperationArguments);
+		} else if (information instanceof JvmDelegateTypeReference) {
+			return isValidParameter(typeParameter, ((JvmDelegateTypeReference) information).getDelegate(), ignoreOperationArguments);
+		} else if (information instanceof JvmSpecializedTypeReference) {
+			return isValidParameter(typeParameter, ((JvmSpecializedTypeReference) information).getEquivalent(), ignoreOperationArguments);
 		}
 		return true;
 	}
@@ -683,12 +731,15 @@ public class TypeArgumentContextProvider {
 					return (JvmTypeParameter) constraint.getTypeReference().getType();
 			}
 		}
+		if (ref instanceof JvmDelegateTypeReference) {
+			return getReferenceTypeParameter(((JvmDelegateTypeReference) ref).getDelegate());
+		}
 		return null;
 	}
 	
 	protected void resolve(JvmTypeParameter key, ResolveInfo info, Multimap<JvmTypeParameter, ResolveInfo> existing, boolean ignoreOperationArguments) {
-		for (JvmTypeConstraint constrain : key.getConstraints()) {
-			JvmTypeReference reference = constrain.getTypeReference();
+		for (JvmTypeConstraint constraint : key.getConstraints()) {
+			JvmTypeReference reference = constraint.getTypeReference();
 			resolve(reference, info, existing, ignoreOperationArguments);
 		}
 	}
