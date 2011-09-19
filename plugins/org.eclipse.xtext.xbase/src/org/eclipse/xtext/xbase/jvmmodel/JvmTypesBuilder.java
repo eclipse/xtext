@@ -148,6 +148,35 @@ public class JvmTypesBuilder {
 		return associate(ctx,create);
 	}
 	
+	public JvmAnnotationReference toAnnotation(EObject ctx, Class<?> annotationType) {
+		return toAnnotation(ctx, annotationType, null);
+	}
+	
+	public JvmAnnotationReference toAnnotation(EObject ctx, String annotationTypeName) {
+		return toAnnotation(ctx, annotationTypeName, null);
+	}
+	
+	public JvmAnnotationReference toAnnotation(EObject ctx, Class<?> annotationType, Object value) {
+		return toAnnotation(ctx, annotationType.getCanonicalName(), value);
+	}
+	
+	public JvmAnnotationReference toAnnotation(EObject ctx, String annotationTypeName, Object value) {
+		JvmAnnotationReference result = TypesFactory.eINSTANCE.createJvmAnnotationReference();
+		JvmType jvmType = references.findDeclaredType(annotationTypeName, ctx);
+		if (!(jvmType instanceof JvmAnnotationType)) {
+			throw new IllegalArgumentException("The given class "+ annotationTypeName + " is not an annotation type.");
+		}
+		result.setAnnotation((JvmAnnotationType) jvmType);
+		if (value != null) {
+			if (value instanceof String) {
+				JvmStringAnnotationValue annotationValue = TypesFactory.eINSTANCE.createJvmStringAnnotationValue();
+				annotationValue.getValues().add((String) value);
+				result.getValues().add(annotationValue);
+			}
+		}
+		return result;
+	}
+	
 	public JvmTypeReference cloneWithProxies(JvmTypeReference typeRef) {
 		if (typeRef instanceof JvmParameterizedTypeReference && !typeRef.eIsSet(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE))
 			throw new IllegalArgumentException("typeref#type was null");

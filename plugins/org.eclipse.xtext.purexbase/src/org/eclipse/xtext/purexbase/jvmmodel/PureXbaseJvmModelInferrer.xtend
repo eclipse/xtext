@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable
 import org.eclipse.xtext.xbase.compiler.ImportManager
 import org.eclipse.xtext.purexbase.pureXbase.Model
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
+import org.eclipse.xtext.xbase.XBlockExpression
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -35,13 +36,13 @@ class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
    	def dispatch void infer(Model m, IAcceptor<JvmDeclaredType> acceptor, boolean prelinkingPhase) {
    		val e  = m.block
    		acceptor.accept(e.toClazz(e.eResource.name) [
+   			annotations += e.toAnnotation(typeof(SuppressWarnings), "all")
    			members += e.toMethod("main", e.newTypeRef(Void::TYPE)) [
    				^static = true
    				parameters += e.toParameter("args", e.newTypeRef(typeof(String)).addArrayTypeDimension)
    				if (!e.containsReturn) {
    					it.body ['''
-						try {
-							«e.compile(it)»
+						try {«e.compile(it)»
 						} catch (Throwable t) {}
    					''']
    				} else {
@@ -57,8 +58,7 @@ class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
    				members += e.toMethod("xbaseExpression", e.newTypeRef(typeof(Object))) [
    				^static = true
 				it.body ['''
-					if (Boolean.TRUE) {
-						«e.compile(it)»
+					if (Boolean.TRUE) {«e.compile(it)»
 					}
 					return null;
 				''']
@@ -83,9 +83,10 @@ class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
 		return false
 	}
 	
-	def compile(XExpression obj, ImportManager mnr) {
-		val appendable = new StringBuilderBasedAppendable(mnr)
-		compiler.toJavaStatement(obj as XExpression, appendable, false)
+	def compile(XBlockExpression obj, ImportManager mnr) {
+		val appendable = new StringBuilderBasedAppendable(mnr,"\t")
+		appendable.increaseIndentation
+		compiler.compile(obj, appendable, obj.newTypeRef(Void::TYPE))
 		return appendable.toString
 	}
 }

@@ -12,6 +12,15 @@ import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.xtext.xbase.jvmmodel.IExpressionContextProvider
+import org.eclipse.xtext.common.types.JvmAnnotationTarget
+import org.eclipse.xtext.common.types.JvmAnnotationValue
+import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue
+import org.eclipse.xtext.common.types.JvmShortAnnotationValue
+import org.eclipse.xtext.common.types.JvmStringAnnotationValue
+import org.eclipse.xtext.common.types.JvmTypeAnnotationValue
+import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue
+import org.eclipse.xtext.common.types.JvmAnnotationReference
+import java.util.List
 
 class JvmModelGenerator implements IGenerator {
 	
@@ -34,7 +43,7 @@ class JvmModelGenerator implements IGenerator {
 			«IF type.packageName != null»package «type.packageName»;
 			
 			«ENDIF»
-			«importManager.imports.map(i | "import "+i+";").join»
+			«importManager.imports.map(i | "import "+i+";").join("\n")»
 			
 			«typeBody»
 			'''
@@ -42,6 +51,7 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def generateBody(JvmGenericType type, ImportManager importManager) '''
+		«type.annotations.generateAnnotations(importManager)»
 		«type.generateModifier»«IF type.interface»interface«ELSE»class«ENDIF» «type.simpleName» «type.generateExtendsClause(importManager)» {
 			«FOR m : type.members»
 				«m.generateMember(importManager)»
@@ -117,10 +127,44 @@ class JvmModelGenerator implements IGenerator {
 				val appendable = new StringBuilderBasedAppendable(importManager)
 				appendable.declareVariable(op.declaringType, "this");
 				compiler.compile(expression, appendable, op.returnType)
-				return appendable.toString
+				return removeSurroundingCurlies(appendable.toString)
 			} else {
 				return '''throw new UnsupportedOperationException("«op.simpleName» is not implemented");'''
 			}
 		}
 	}
+	
+	def String removeSurroundingCurlies(String code) {
+		val result = code.trim
+		if (result.startsWith("{") && result.endsWith("}"))
+			return result.substring(1, result.length -1)
+		return result
+	}
+	
+	def generateAnnotations(List<JvmAnnotationReference> annotations, ImportManager importManager) {
+		if (annotations.empty)
+			return null
+		'''«FOR a : annotations»
+			@«importManager.serialize(a.annotation)»(«FOR value : a.values SEPARATOR ','»«value.toJava(importManager)»«ENDFOR»)
+		«ENDFOR»'''
+	}
+	
+	def toJava(JvmAnnotationValue it, ImportManager importManager) 
+		'''«IF operation != null»«operation.simpleName» = «ENDIF»«it.toJavaLiteral(importManager)»'''
+		
+	def dispatch toJavaLiteral(JvmAnnotationAnnotationValue it, ImportManager importManager) 
+		'''«it.annotations.generateAnnotations(importManager)»'''
+		
+	def dispatch toJavaLiteral(JvmShortAnnotationValue it, ImportManager importManager) 
+		'''«IF values.size==1»«values.head»«ELSE»{«values.join(',')»}«ENDIF»'''
+		
+	def dispatch toJavaLiteral(JvmStringAnnotationValue it, ImportManager importManager) 
+		'''«IF values.size==1»"«values.head»"«ELSE»{«values.map(s | '"'+s+'"').join(',')»}«ENDIF»'''
+		
+	def dispatch toJavaLiteral(JvmTypeAnnotationValue it, ImportManager importManager) 
+		'''«IF values.size==1»«importManager.serialize(values.head)»«ELSE»{«values.map(t | importManager.serialize(t)).join(',')»}«ENDIF»'''
+		
+	def dispatch toJavaLiteral(JvmBooleanAnnotationValue it, ImportManager importManager) 
+		'''«IF values.size==1»«values.head»«ELSE»{«values.join(',')»}«ENDIF»'''
+		
 }

@@ -58,6 +58,12 @@ public class ImportManager {
 		return sb;
 	}
 	
+	public CharSequence serialize(JvmType type) {
+		StringBuilder sb = new StringBuilder();
+		appendType(type, sb);
+		return sb;
+	}
+	
 	public void appendTypeRef(JvmTypeReference typeRef, StringBuilder builder) {
 		if (typeRef instanceof JvmParameterizedTypeReference) {
 			final JvmType type = typeRef.getType();
