@@ -11,8 +11,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 
 import com.google.inject.Inject;
@@ -20,11 +20,12 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class XbaseQualifiedNameProvider extends IQualifiedNameProvider.AbstractImpl {
+public class XbaseQualifiedNameProvider extends DefaultDeclarativeQualifiedNameProvider {
 
 	@Inject
 	private IQualifiedNameConverter qualifiedNameConverter;
 
+	@Override
 	public QualifiedName getFullyQualifiedName(EObject obj) {
 		if (obj instanceof JvmType 
 				|| obj instanceof JvmMember) {
@@ -33,7 +34,7 @@ public class XbaseQualifiedNameProvider extends IQualifiedNameProvider.AbstractI
 				return null;
 			return qualifiedNameConverter.toQualifiedName(qualifiedName);
 		}
-		return null;
+		return super.getFullyQualifiedName(obj);
 	}
 
 }
