@@ -89,9 +89,7 @@ public class TypeArgumentContextTest extends TestCase {
 		
 		Map<JvmTypeParameter, ResolveInfo> map = typeArgCtxProvider.resolveInferredMethodTypeArgContext(operation, operation.getReturnType(), expected);
 		assertEquals(1,map.size());
-		// TODO discuss changed behavior due to recent modifications in typeArgumentContextProvider
-//		assertEquals("? extends java.lang.String",map.values().iterator().next().getIdentifier());
-		assertEquals("java.lang.String",map.values().iterator().next().reference.getIdentifier());
+		assertEquals("? extends java.lang.String",map.values().iterator().next().reference.getIdentifier());
 	}
 	
 	/**

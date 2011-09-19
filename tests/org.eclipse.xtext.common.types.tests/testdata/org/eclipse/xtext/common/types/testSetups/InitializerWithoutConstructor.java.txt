@@ -13,11 +13,13 @@ package org.eclipse.xtext.common.types.testSetups;
 public class InitializerWithoutConstructor extends TestScenario {
 
 	static {
+		@SuppressWarnings("unused")
 		int i = 0;
 		i++;
 	}
 	
 	{
+		@SuppressWarnings("unused")
 		int i = 0;
 		i++;
 	}
