@@ -62,6 +62,9 @@ public class BuilderIntegrationFragment extends DefaultGeneratorFragment {
 							+ "org.eclipse.xtext.builder.impl.PersistentDataAwareDirtyResource.PERSISTED_DESCRIPTIONS)).to("
 							+ "org.eclipse.xtext.builder.builderState.IBuilderState.class)")
 			.addTypeToType("org.eclipse.xtext.ui.editor.DocumentBasedDirtyResource", "org.eclipse.xtext.builder.impl.PersistentDataAwareDirtyResource")
+			.addConfiguredBinding(
+						"BuilderPreferenceStoreInitializer",
+						"binder.bind(org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer.class).to(org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.Initializer.class)")
 			.getBindings();
 	}
 
