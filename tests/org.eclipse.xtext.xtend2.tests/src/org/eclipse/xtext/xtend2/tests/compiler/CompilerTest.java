@@ -53,6 +53,22 @@ import com.google.inject.Injector;
  */
 public class CompilerTest extends AbstractXtend2TestCase {
 	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=356073
+	 */
+	public void testExtendsJavaLangObject() throws Exception {
+		String code = 
+				"package x class Z {" +
+				"  def test() {\n" +
+				"    this.equals(this.toString())\n" +
+				"  }\n" +
+				"}\n";
+		String javaCode = compileToJavaCode(code);
+		Class<?> class1 = javaCompiler.compileToClass("x.Z", javaCode);
+		Object object = class1.newInstance();
+		assertFalse((Boolean) class1.getDeclaredMethod("test").invoke(object));
+	}
+	
 	public void testFunctionNameStartingWithUnderscore() throws Exception {
 		String code = 
 				"package x class Z {" +
