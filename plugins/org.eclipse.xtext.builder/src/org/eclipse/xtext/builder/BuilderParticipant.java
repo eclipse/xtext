@@ -26,9 +26,9 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.OutputConfiguration;
-import org.eclipse.xtext.generator.OutputConfigurationProvider;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -41,10 +41,10 @@ import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Michael Clay
  * @since 2.1
  */
 public class BuilderParticipant implements IXtextBuilderParticipant {
-	
 	@Inject
 	private Provider<EclipseResourceFileSystemAccess2> fileSystemAccessProvider;
 	
@@ -60,14 +60,31 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 	@Inject
 	private DerivedResourceMarkers derivedResourceMarkers;
 	
+	private EclipseOutputConfigurationProvider outputConfigurationProvider;
+	private BuilderPreferenceAccess builderPreferenceAccess;
+
+	public BuilderPreferenceAccess getBuilderPreferenceAccess() {
+		return builderPreferenceAccess;
+	}
+
 	@Inject
-	private OutputConfigurationProvider outputConfigurationProvider;
+	public void setBuilderPreferenceAccess(BuilderPreferenceAccess builderPreferenceAccess) {
+		this.builderPreferenceAccess = builderPreferenceAccess;
+	}
 	
-	public void setOutputConfigurationProvider(OutputConfigurationProvider outputConfigurationProvider) {
+	public EclipseOutputConfigurationProvider getOutputConfigurationProvider() {
+		return outputConfigurationProvider;
+	}
+
+	@Inject
+	public void setOutputConfigurationProvider(EclipseOutputConfigurationProvider outputConfigurationProvider) {
 		this.outputConfigurationProvider = outputConfigurationProvider;
 	}
 
 	public void build(final IBuildContext context, IProgressMonitor monitor) throws CoreException {
+		if (!isEnabled(context)) {
+			return;
+		}
 		final int numberOfDeltas = context.getDeltas().size();
 		
 		// monitor handling
@@ -143,6 +160,10 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			}
 		}
 	}
+
+	protected boolean isEnabled(final IBuildContext context) {
+		return builderPreferenceAccess.isAutoBuildEnabled(context.getBuiltProject());
+	}
 	
 	protected void refreshOutputFolders(IBuildContext ctx, Map<String, OutputConfiguration> outputConfigurations, IProgressMonitor monitor) throws CoreException {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, outputConfigurations.size());
@@ -204,9 +225,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 	}
 
 	protected Map<String,OutputConfiguration> getOutputConfigurations(IBuildContext context) {
-		Set<OutputConfiguration> configurations = outputConfigurationProvider.getOutputConfigurations();
-		//TODO check preferences and update accordingly
-		
+		Set<OutputConfiguration> configurations = outputConfigurationProvider.getOutputConfigurations(context.getBuiltProject());
 		return uniqueIndex(configurations, new Function<OutputConfiguration, String>() {
 			public String apply(OutputConfiguration from) {
 				return from.getName();
