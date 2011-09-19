@@ -22,6 +22,7 @@ import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Sets;
 
 /**
@@ -154,6 +155,19 @@ public class DefaultResourceDescriptionDeltaTest extends TestCase {
 		resourceDesc2.exported.add(
 				EObjectDescription.create(BAR, EcorePackage.Literals.EANNOTATION, Collections.singletonMap("foo", new String("bar"))));
 		
+		assertFalse(new DefaultResourceDescriptionDelta(resourceDesc, resourceDesc2).haveEObjectDescriptionsChanged());
+	}
+	
+	/** see https://bugs.eclipse.org/bugs/show_bug.cgi?id=356063 */
+	public void testHasChanges_9() throws Exception {
+		TestResDesc resourceDesc = new TestResDesc();
+		resourceDesc.exported.add(
+				EObjectDescription.create(BAR, EcorePackage.Literals.EANNOTATION, ImmutableMap.of("foo", "bar", "qux", "quux")));
+		
+		TestResDesc resourceDesc2 = new TestResDesc();
+		resourceDesc2.exported.add(
+				EObjectDescription.create(BAR, EcorePackage.Literals.EANNOTATION, ImmutableMap.of("qux", "quux", "foo", "bar")));
+	
 		assertFalse(new DefaultResourceDescriptionDelta(resourceDesc, resourceDesc2).haveEObjectDescriptionsChanged());
 	}
 	
