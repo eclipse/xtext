@@ -20,9 +20,10 @@ public final class IssueCodes {
 	protected static final String ISSUE_CODE_PREFIX = "org.eclipse.xtext.xtend2.validation.IssueCodes.";
 
 	public static final String ANNOTATION_WRONG_TARGET = ISSUE_CODE_PREFIX+ "wrong_annotation_target";
-	public static final String CASE_FUNC_WITHOUT_PARAMS = ISSUE_CODE_PREFIX + "case_function_without_params";
-	public static final String CASE_FUNC_WITH_TYPE_PARAMS = ISSUE_CODE_PREFIX + "case_function_with_type_params";
-	public static final String SINGLE_CASE_FUNCTION = ISSUE_CODE_PREFIX + "single_case_function";
+	public static final String DISPATCH_FUNC_WITHOUT_PARAMS = ISSUE_CODE_PREFIX + "case_function_without_params";
+	public static final String DISPATCH_FUNC_WITH_TYPE_PARAMS = ISSUE_CODE_PREFIX + "case_function_with_type_params";
+	public static final String DISPATCH_FUNC_NAME_STARTS_WITH_UNDERSCORE = ISSUE_CODE_PREFIX + "case_func_name_starts_with_underscore";
+	public static final String SINGLE_DISPATCH_FUNCTION = ISSUE_CODE_PREFIX + "single_case_function";
 	public static final String WRONG_PACKAGE = ISSUE_CODE_PREFIX + "wrong_package";
 	public static final String WRONG_FILE = ISSUE_CODE_PREFIX + "wrong_file";
 	public static final String CLASS_EXPECTED = ISSUE_CODE_PREFIX + "class_expected";
@@ -41,4 +42,5 @@ public final class IssueCodes {
 
 	public static final String OVERRIDDEN_FINAL = ISSUE_CODE_PREFIX + "overridden_final";
 	public static final String CYCLIC_INHERITANCE = ISSUE_CODE_PREFIX + "cyclic_inheritance";
+
 }
