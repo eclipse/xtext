@@ -23,4 +23,8 @@ public class BuilderTestLanguageUiModule extends org.eclipse.xtext.builder.tests
 	public Class<? extends IXtextBuilderParticipant> bindBuilderParticipant() {
 		return DelegatingBuilderParticipant.class;
 	}
+
+	public void configureBuilderPreferenceStoreInitializer(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer.class).to(org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.Initializer.class);
+	}
 }

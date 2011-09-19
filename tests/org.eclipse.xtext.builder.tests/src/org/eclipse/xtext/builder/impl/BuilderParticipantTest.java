@@ -24,11 +24,13 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.builder.BuilderParticipant;
 import org.eclipse.xtext.builder.DerivedResourceMarkers;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
+import org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess;
 import org.eclipse.xtext.builder.tests.Activator;
 import org.eclipse.xtext.builder.tests.DelegatingBuilderParticipant;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.OutputConfigurationProvider;
 import org.eclipse.xtext.ui.XtextProjectHelper;
+import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.inject.Injector;
@@ -46,11 +48,13 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 		IXtextBuilderParticipant instance = injector
 				.getInstance(IXtextBuilderParticipant.class);
 		participant = injector.getInstance(BuilderParticipant.class);
+		preferenceStoreAccess = injector.getInstance(IPreferenceStoreAccess.class);
 		DelegatingBuilderParticipant delegatingParticipant = (DelegatingBuilderParticipant) instance;
 		delegatingParticipant.setDelegate(participant);
 	}
 	
 	private BuilderParticipant participant;
+	private IPreferenceStoreAccess preferenceStoreAccess;
 	
 	@Override
 	protected void tearDown() throws Exception {
@@ -103,7 +107,7 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 	}
 	
 	public void testNoCleanUpNoDerived() throws Exception {
-		participant.setOutputConfigurationProvider(new OutputConfigurationProvider(){
+		OutputConfigurationProvider outputConfigurationProvider = new OutputConfigurationProvider() {
 			@Override
 			public Set<OutputConfiguration> getOutputConfigurations() {
 				final Set<OutputConfiguration> result = super.getOutputConfigurations();
@@ -113,7 +117,11 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 				configuration.setSetDerivedProperty(false);
 				return result;
 			}
-		});
+		};
+		BuilderPreferenceAccess.Initializer initializer = new BuilderPreferenceAccess.Initializer();
+		initializer.setOutputConfigurationProvider(outputConfigurationProvider);
+		initializer.initialize(preferenceStoreAccess);
+		
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IFolder folder = project.getProject().getFolder("src");
@@ -142,8 +150,24 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 		assertTrue(generatedFile.exists());
 	}
 	
+	public void testDisabled() throws Exception {
+		IJavaProject project = createJavaProject("foo");
+		participant.getBuilderPreferenceAccess().setAutoBuildEnabled(project, false);
+		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
+		IFolder folder = project.getProject().getFolder("src");
+		IFile file = folder.getFile("Foo" + F_EXT);
+		file.create(new StringInputStream("object Foo"), true, monitor());
+		waitForAutoBuild();
+		IFile generatedFile = project.getProject().getFile("./src-gen/Foo.txt");
+		assertFalse(generatedFile.exists());
+		participant.getBuilderPreferenceAccess().setAutoBuildEnabled(project, true);
+		file.touch(monitor());
+		waitForAutoBuild();
+		assertTrue(generatedFile.exists());
+	}
+
 	public void testNoOutputFolderCreation() throws Exception {
-		participant.setOutputConfigurationProvider(new OutputConfigurationProvider(){
+		OutputConfigurationProvider outputConfigurationProvider = new OutputConfigurationProvider() {
 			@Override
 			public Set<OutputConfiguration> getOutputConfigurations() {
 				final Set<OutputConfiguration> result = super.getOutputConfigurations();
@@ -151,7 +175,11 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 				configuration.setCreateOutputDirectory(false);
 				return result;
 			}
-		});
+		};
+		BuilderPreferenceAccess.Initializer initializer = new BuilderPreferenceAccess.Initializer();
+		initializer.setOutputConfigurationProvider(outputConfigurationProvider);
+		initializer.initialize(preferenceStoreAccess);
+		
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IFolder folder = project.getProject().getFolder("src");
