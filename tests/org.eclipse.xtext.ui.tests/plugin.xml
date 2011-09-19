@@ -4989,5 +4989,18 @@
             uriExtension="referring_xmi">
         </resourceServiceProvider>
     </extension>
+    
+    <!-- Custom Marker -->
+      <extension
+         id="customMarker"
+         name="CustomMarkerTest"
+         point="org.eclipse.core.resources.markers">
+      <super
+            type="org.eclipse.core.resources.problemmarker">
+      </super>
+      <super
+            type="org.eclipse.core.resources.textmarker">
+      </super>
+   </extension>
 
 </plugin>
