@@ -7,8 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.tests.validation;
 
+import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 import static org.eclipse.xtext.xtend2.validation.IssueCodes.*;
+
+import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -20,6 +23,7 @@ import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.validation.IssueCodes;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
 import com.google.inject.Inject;
@@ -209,6 +213,33 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	public void testClassExtendsItself() throws Exception {
 		XtendClass clazz = clazz("class Foo extends Foo {}");
 		helper.assertError(clazz, Xtend2Package.Literals.XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
+	}
+	
+	public void testInheritanceCycle() throws Exception {
+		Iterator<XtendFile> iter = files(false, 
+				 "package test class Foo extends Bar {}"
+				,"package test class Bar extends Baz {}"
+				,"package test class Baz extends Foo {}").iterator();
+		waitForAutoBuild();
+		helper.assertError(iter.next(), Xtend2Package.Literals.XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
+		helper.assertError(iter.next(), Xtend2Package.Literals.XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
+		helper.assertError(iter.next(), Xtend2Package.Literals.XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
+	}
+	
+	public void testInheritanceCycle_1() throws Exception {
+		Iterator<XtendFile> iter = files(false, 
+				 "package test class Foo extends Bar {}"
+				,"package test class Bar extends Foo {}").iterator();
+		waitForAutoBuild();
+		helper.assertError(iter.next(), Xtend2Package.Literals.XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
+		helper.assertError(iter.next(), Xtend2Package.Literals.XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
+	}
+	
+	public void testIgnoreInterfacesInCycleDetection() throws Exception {
+		files(true, 
+				 "package test class Foo extends Bar {}"
+				,"package test class Bar extends Baz implements java.io.Serializable {}"
+				,"package test class Baz implements java.io.Serializable {}");
 	}
 
 	public void testCaseFunctionNoParameters() throws Exception {
