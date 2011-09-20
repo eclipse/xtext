@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.selection;
 
+import java.util.Stack;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
@@ -130,6 +132,46 @@ public class AstSelectionProviderTest extends AbstractXtextTests {
 		selection = provider.selectPrevious(res, selection);
 		assertEquals(region(all,all), selection);
 		assertEquals(ITextRegion.EMPTY_REGION, provider.selectPrevious(res, selection));
+	}
+	
+	public void testSelectLast() throws Exception {
+		String zonk = "/* my coment \n*/\nzonk{}";
+		String zink = "zink{}";
+		String baz = "baz{\n"+zonk+zink+"}";
+		String bar = "bar{}";
+		String all = "foo(baz){"+bar+baz+"}";
+		EObject model = super.getModel(all);
+		AstSelectionProvider provider = get(AstSelectionProvider.class);
+		final XtextResource res = (XtextResource) model.eResource();
+		
+		int indexOfZonk = all.indexOf("zonk");
+		Stack<ITextRegion> selections = new Stack<ITextRegion>();
+		final TextRegion currentEditorSelection = new TextRegion(indexOfZonk,1);
+		ITextRegion selection = provider.selectPrevious(res, currentEditorSelection);
+		selections.push(selection);
+		assertEquals(region(all, "zonk"), selection);
+		selection = provider.selectEnclosing(res, selection);
+		selections.push(selection);
+		assertEquals(region(all, zonk), selection);
+		
+		selection = provider.selectPrevious(res, selection);
+		selections.push(selection);
+		assertEquals(region(all,baz), selection);
+		
+		selection = provider.selectPrevious(res, selection);
+		selections.push(selection);
+		assertEquals(region(all,bar+baz), selection);
+		
+		selection = provider.selectPrevious(res, selection);
+		assertEquals(region(all,all), selection);
+		assertEquals(ITextRegion.EMPTY_REGION, provider.selectPrevious(res, selection));
+		
+		while (!selections.isEmpty()) {
+			ITextRegion previous = selections.pop();
+			assertEquals(previous, provider.selectLast(res, selection));
+			selection = previous;
+		}
+		assertEquals(ITextRegion.EMPTY_REGION, provider.selectLast(res, currentEditorSelection));
 	}
 
 	protected TextRegion region(String all, String part) {
