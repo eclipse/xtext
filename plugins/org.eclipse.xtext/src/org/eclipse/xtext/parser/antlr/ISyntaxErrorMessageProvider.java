@@ -56,7 +56,7 @@ public interface ISyntaxErrorMessageProvider {
 		
 		/**
 		 * Provides the default error message as it is produced by the parser.
-		 * @returns the default message.
+		 * @return the default message.
 		 */
 		String getDefaultMessage();
 
@@ -80,7 +80,7 @@ public interface ISyntaxErrorMessageProvider {
 	interface IParserErrorContext extends IErrorContext {
 		/**
 		 * Returns the recognition exception or <code>null</code> in case of lexer errors.
-		 * @returns the recognition exception in the parser. May be <code>null</code> in 
+		 * @return the recognition exception in the parser. May be <code>null</code> in 
 		 * case of lexer errors.
 		 */
 		RecognitionException getRecognitionException();
@@ -101,13 +101,13 @@ public interface ISyntaxErrorMessageProvider {
 		
 		/**
 		 * Returns the list of mandatory elements that have not been recognized.
-		 * @returns the list of missing mandatory elements.
+		 * @return the list of missing mandatory elements.
 		 */
 		List<AbstractElement> getMissingMandatoryElements();
 		
 		/**
 		 * Returns the failed predicate exception caused by a specific unordered group.
-		 * @returns the failed predicate exception caused by a specific unordered group. Never <code>null</code>.
+		 * @return the failed predicate exception caused by a specific unordered group. Never <code>null</code>.
 		 */
 		FailedPredicateException getRecognitionException();
 	}
@@ -120,7 +120,7 @@ public interface ISyntaxErrorMessageProvider {
 
 		/**
 		 * Returns the thrown {@link ValueConverterException}.
-		 * @returns the {@link ValueConverterException}.
+		 * @return the {@link ValueConverterException}.
 		 */
 		ValueConverterException getValueConverterException();
 	}

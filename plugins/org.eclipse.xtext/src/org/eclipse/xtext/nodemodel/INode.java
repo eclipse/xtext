@@ -37,14 +37,14 @@ public interface INode {
 	
 	/**
 	 * Returns <code>true</code> if this node is not the first child of its parent.
-	 * @returns <code>true</code> if this node has a previous sibling thus {@link #getPreviousSibling()} will
+	 * @return <code>true</code> if this node has a previous sibling thus {@link #getPreviousSibling()} will
 	 *   not return <code>null</code>.
 	 */
 	boolean hasPreviousSibling();
 	
 	/**
 	 * Returns <code>true</code> if this node is not the last child of its parent.
-	 * @returns <code>true</code> if this node has a next sibling thus {@link #getNextSibling()} will
+	 * @return <code>true</code> if this node has a next sibling thus {@link #getNextSibling()} will
 	 *   not return <code>null</code>.
 	 */
 	boolean hasNextSibling();
