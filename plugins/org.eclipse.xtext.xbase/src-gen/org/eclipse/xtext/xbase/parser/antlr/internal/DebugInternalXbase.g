@@ -351,6 +351,11 @@ ruleJvmFormalParameter :
 	ruleJvmTypeReference? ruleValidID
 ;
 
+// Rule FullJvmFormalParameter
+ruleFullJvmFormalParameter :
+	ruleJvmTypeReference ruleValidID
+;
+
 // Rule XFeatureCall
 ruleXFeatureCall :
 	ruleStaticQualifier? (
@@ -468,7 +473,7 @@ ruleXTryCatchFinallyExpression :
 ruleXCatchClause :
 	( (
 	'catch'
-	) => 'catch' ) '(' ruleJvmFormalParameter ')' ruleXExpression
+	) => 'catch' ) '(' ruleFullJvmFormalParameter ')' ruleXExpression
 ;
 
 // Rule QualifiedName

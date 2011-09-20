@@ -93,7 +93,11 @@ public class AbstractXbaseWithAnnotationsSemanticSequencer extends AbstractSeman
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == TypesPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case TypesPackage.JVM_FORMAL_PARAMETER:
-				if(context == grammarAccess.getJvmFormalParameterRule()) {
+				if(context == grammarAccess.getFullJvmFormalParameterRule()) {
+					sequence_FullJvmFormalParameter(context, (JvmFormalParameter) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getJvmFormalParameterRule()) {
 					sequence_JvmFormalParameter(context, (JvmFormalParameter) semanticObject); 
 					return; 
 				}
@@ -1001,6 +1005,19 @@ public class AbstractXbaseWithAnnotationsSemanticSequencer extends AbstractSeman
 	
 	/**
 	 * Constraint:
+	 *     (parameterType=JvmTypeReference name=ValidID)
+	 *
+	 * Features:
+	 *    name[1, 1]
+	 *    parameterType[1, 1]
+	 */
+	protected void sequence_FullJvmFormalParameter(EObject context, JvmFormalParameter semanticObject) {
+		superSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     (parameterType=JvmTypeReference? name=ValidID)
 	 *
 	 * Features:
@@ -1296,7 +1313,7 @@ public class AbstractXbaseWithAnnotationsSemanticSequencer extends AbstractSeman
 	
 	/**
 	 * Constraint:
-	 *     (declaredParam=JvmFormalParameter expression=XExpression)
+	 *     (declaredParam=FullJvmFormalParameter expression=XExpression)
 	 *
 	 * Features:
 	 *    expression[1, 1]
