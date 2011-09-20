@@ -17,15 +17,15 @@ import junit.framework.Test;
 public class Bug348446Test extends AbstractXtendContentAssistBugTest {
 
 	public void testGetPackage() throws Exception {
-		newBuilder().append("typeof(String).pack").assertText("^package");
-		newBuilder().append("typeof(String).^pack").assertText("^package");
-		newBuilder().append("typeof(String).getpack").assertText("^package");
+		newBuilder().append("typeof(String).pack").assertText();
+		newBuilder().append("typeof(String).^pack").assertText();
+		newBuilder().append("typeof(String).getpack").assertText("getPackage()");
 	}
 	
 	public void testGetClass() throws Exception {
-		newBuilder().append("typeof(String).clas").assertText("^class", "classLoader", "classes");
-		newBuilder().append("typeof(String).^clas").assertText("^class");
-		newBuilder().append("typeof(String).getclas").assertText("^class", "classLoader", "classes");
+		newBuilder().append("typeof(String).clas").assertText("classLoader", "classes");
+		newBuilder().append("typeof(String).^clas").assertText();
+		newBuilder().append("typeof(String).getclas").assertText("classLoader", "classes");
 	}
 	
 	@Override

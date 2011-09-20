@@ -52,7 +52,7 @@ public class ExtensionMethodsFeaturesProvider extends AbstractFeaturesForTypePro
 		boolean atLeastOneCandidate = false;
 		for(JvmTypeReference reference: hierarchy) {
 			for(JvmFeature candidate: candidates) {
-				if (candidate instanceof JvmOperation) {
+				if (candidate instanceof JvmOperation && !isFiltered((JvmOperation)candidate)) {
 					JvmOperation operation = (JvmOperation) candidate;
 					List<JvmFormalParameter> parameters = operation.getParameters();
 					if (!operation.isStatic() && parameters.size()>0) {
@@ -69,6 +69,10 @@ public class ExtensionMethodsFeaturesProvider extends AbstractFeaturesForTypePro
 		}
 	}
 	
+	protected boolean isFiltered(JvmOperation candidate) {
+		return Object.class.getCanonicalName().equals(candidate.getDeclaringType().getIdentifier());
+	}
+
 	public Iterable<JvmFeature> getAllFeatures(JvmTypeReference typeReference,
 			Iterable<JvmTypeReference> hierarchy) {
 		if(extensionProvidingType == null)
