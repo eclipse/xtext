@@ -23,4 +23,6 @@ public interface IRawTypeHelper {
 	
 	List<JvmType> getAllRawTypes(JvmTypeReference reference, Resource resource);
 	
+	JvmTypeReference getRawTypeReference(JvmTypeReference reference, Resource resource);
+	
 }
