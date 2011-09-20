@@ -151,10 +151,10 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                 if (subProgress.isCanceled()) {
                     throw new OperationCanceledException();
                 }
-                final URI changedURI = queue.poll();
-                if (!clusteringPolicy.continueProcessing(resourceSet, changedURI, newDeltas.size())) {
+                if (!clusteringPolicy.continueProcessing(resourceSet, queue.peek(), newDeltas.size())) {
                 	break;
                 }
+                final URI changedURI = queue.poll();
                 if (!toBeDeleted.contains(changedURI)) {
 	                subProgress.subTask("Updating resource description for " + changedURI.lastSegment() + " (" + index + " of " + (index + queue.size()) + ")");
 	                // Load the resource and create a new resource description
