@@ -35,9 +35,12 @@ public class DynamicResourceClusteringPolicy implements IResourceClusteringPolic
 	/** Minimum percentage of memory that must be free before trying to load another resource. */
 	@Inject(optional = true)
 	@Named(MINIMUM_PERCENT_FREE_MEMORY)
-	private final long minimumPercentFreeMemory = 10;
+	private final long minimumPercentFreeMemory = 15;
 
 	public boolean continueProcessing(ResourceSet resourceSet, URI next, int alreadyProcessed) {
+		if (alreadyProcessed == 0)
+			return true;
+
 		final long freeMemory = Runtime.getRuntime().freeMemory();
 		final long totalMemory = Runtime.getRuntime().totalMemory();
 
