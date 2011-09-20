@@ -63,6 +63,7 @@ public class DerivedStateAwareResource extends LazyLinkingResource {
 				fullyInitialized = false;
 			} finally {
 				isInitializing = false;
+				getCache().clear(this);
 			}
 		}
 	}
@@ -76,6 +77,7 @@ public class DerivedStateAwareResource extends LazyLinkingResource {
 				fullyInitialized = true;
 			} finally {
 				isInitializing = false;
+				getCache().clear(this);
 			}
 		}
 	}
