@@ -190,6 +190,9 @@ XVariableDeclaration returns XExpression:
 
 JvmFormalParameter returns types::JvmFormalParameter:
 	(parameterType=JvmTypeReference)? name=ValidID;
+	
+FullJvmFormalParameter returns types::JvmFormalParameter:
+	parameterType=JvmTypeReference name=ValidID;
 
 XFeatureCall returns XExpression:
 	{XFeatureCall}
@@ -260,7 +263,7 @@ XTryCatchFinallyExpression returns XExpression:
 	);
 	
 XCatchClause :
-	=>'catch' '(' declaredParam=JvmFormalParameter ')' expression=XExpression;
+	=>'catch' '(' declaredParam=FullJvmFormalParameter ')' expression=XExpression;
 
 
 QualifiedName:

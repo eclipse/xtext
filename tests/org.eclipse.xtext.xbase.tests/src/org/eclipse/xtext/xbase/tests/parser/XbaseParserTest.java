@@ -7,7 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.parser;
 
+import java.util.Iterator;
+
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
@@ -577,6 +581,18 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertFeatureCall("bar", clause.getExpression());
 		assertEquals("java.lang.Exception", clause.getDeclaredParam().getParameterType().getIdentifier());
 		assertEquals("e", clause.getDeclaredParam().getName());
+	}
+	
+	/**
+	 * see bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=356722
+	 */
+	public void testTryCatchExpression_3() throws Exception {
+		XTryCatchFinallyExpression tryEx = (XTryCatchFinallyExpression) expression(
+				"try foo catch (java.lang.Exception) {}");
+		Iterator<INode> iterator = ((XtextResource)tryEx.eResource()).getParseResult().getSyntaxErrors().iterator();
+		final INode errorNode = iterator.next();
+		assertEquals(")",errorNode.getText());
+		assertEquals("missing RULE_ID at ')'",errorNode.getSyntaxErrorMessage().getMessage());
 	}
 	
 	public void testReturnExpressionInBlock_1() throws Exception {
