@@ -9,11 +9,13 @@ package org.eclipse.xtext.xbase.compiler;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
@@ -40,6 +42,8 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class FeatureCallCompiler extends LiteralsCompiler {
+	
+	private final static Logger log = Logger.getLogger(FeatureCallCompiler.class);
 
 	@Inject
 	private FeatureCallToJavaMapping featureCallToJavaMapping;
@@ -125,7 +129,8 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			return true;
 		if (expr instanceof XAbstractFeatureCall) {
 			JvmIdentifiableElement feature = ((XAbstractFeatureCall)expr).getFeature();
-			if (feature instanceof JvmField)
+			if (feature instanceof JvmField 
+				|| feature instanceof JvmFormalParameter)
 				return false;
 			return b.getName(feature)==null;
 		}
@@ -196,7 +201,14 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 					}
 					b.append(call.getFeature().getSimpleName());
 				} else {
-					b.append(getVarName(call.getFeature(), b));
+					if (b.getName(call.getFeature()) == null) {
+						String variableName = getFavoriteVariableName(call.getFeature());
+						if (log.isInfoEnabled())
+							log.info("The variable '"+variableName+"' has not been declared.");
+						b.declareVariable(call.getFeature(), variableName);
+					}
+					final String varName = getVarName(call.getFeature(), b);
+					b.append(varName);
 				}
 			} else {
 				b.append(getVarName(call, b));

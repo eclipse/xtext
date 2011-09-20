@@ -9,6 +9,6 @@ import com.google.inject.ImplementedBy;
  * @author Sven Efftinge - Initial contribution and API
  */
 @ImplementedBy(ExpressionContextProvider.class)
-interface IExpressionContextAssociator {
+public interface IExpressionContextAssociator {
 	void associate(XExpression expression, JvmIdentifiableElement element);
 }
