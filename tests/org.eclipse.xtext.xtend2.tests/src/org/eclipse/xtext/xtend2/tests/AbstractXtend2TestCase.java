@@ -1,5 +1,7 @@
 package org.eclipse.xtext.xtend2.tests;
 
+import static com.google.common.collect.Lists.*;
+
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -92,6 +94,27 @@ public abstract class AbstractXtend2TestCase extends TestCase {
 		}
 		XtendFile file = (XtendFile) resource.getContents().get(0);
 		return file;
+	}
+	
+	protected Iterable<XtendFile> files(boolean validate, String ... contents) throws Exception {
+		XtextResourceSet set = get(XtextResourceSet.class);
+		List<XtendFile> result = newArrayList();
+		for (String string : contents) {
+			String fileName = getFileName(string);
+			Resource resource = set.createResource(URI.createURI(fileName + ".xtend"));
+			resource.load(new StringInputStream(string), null);
+			assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
+			XtendFile file = (XtendFile) resource.getContents().get(0);
+			result.add(file);
+		}
+		if (validate) {
+			for (XtendFile file : result) {
+				List<Issue> issues = ((XtextResource) file.eResource()).getResourceServiceProvider().getResourceValidator()
+						.validate(file.eResource(), CheckMode.ALL, CancelIndicator.NullImpl);
+				assertTrue("Resource contained errors : " + issues.toString(), issues.isEmpty());
+			}
+		}
+		return result;
 	}
 
 	protected String getFileName(String string) {
