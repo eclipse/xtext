@@ -22,7 +22,7 @@ public class TypeConformanceResult {
 	public static final TypeConformanceResult SUCCESS = new TypeConformanceResult(Kind.SUCCESS);
 	public static final TypeConformanceResult FAILED = new TypeConformanceResult(Kind.FAILED);
 	
-	enum Kind {
+	public enum Kind {
 		SUCCESS, BOXING, UNBOXING, SYNONYM, DEMAND_CONVERSION, FAILED, EXCEPTION
 	}
 	
@@ -89,4 +89,10 @@ public class TypeConformanceResult {
 	public Exception getTrace() {
 		return trace;
 	}
+
+	@Override
+	public String toString() {
+		return "TypeConformanceResult [kinds=" + kinds + "]";
+	}
+	
 }
