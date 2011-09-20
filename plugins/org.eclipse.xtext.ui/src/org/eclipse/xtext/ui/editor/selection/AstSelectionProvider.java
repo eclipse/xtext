@@ -50,7 +50,14 @@ public class AstSelectionProvider {
 	private Stack<ITextRegion> selectionHistory = new Stack<ITextRegion>();
 
 	public ITextRegion selectLast(XtextResource resource, ITextRegion currentEditorSelection) {
-		return selectionHistory.isEmpty() ? ITextRegion.EMPTY_REGION : selectionHistory.pop();
+		if (selectionHistory.isEmpty()) {
+			return ITextRegion.EMPTY_REGION;
+		}
+		if (!currentEditorSelection.equals(selectionHistory.pop())) {
+			selectionHistory.clear();
+			return ITextRegion.EMPTY_REGION;
+		}
+		return selectionHistory.isEmpty() ? ITextRegion.EMPTY_REGION : selectionHistory.peek();
 	}
 	
 	public ITextRegion selectEnclosing(XtextResource resource, ITextRegion currentEditorSelection) {
@@ -62,6 +69,7 @@ public class AstSelectionProvider {
 			ITextRegion fineGrainedRegion = computeInitialFineGrainedSelection(node, currentEditorSelection);
 			if (fineGrainedRegion != null) {
 				selectionHistory.clear();
+				register(currentEditorSelection);
 				return register(fineGrainedRegion);
 			}
 			EObject eObject = findSemanticObjectFor(node);
@@ -78,7 +86,7 @@ public class AstSelectionProvider {
 	public ITextRegion selectNext(XtextResource resource, ITextRegion currentEditorSelection) {
 		Pair<EObject, EObject> currentlySelected = getSelectedAstElements(resource, currentEditorSelection);
 		if (currentlySelected == null) {
-			return register(selectEnclosing(resource, currentEditorSelection));
+			return selectEnclosing(resource, currentEditorSelection);
 		}
 		EObject second = currentlySelected.getSecond();
 		EObject nextSibling = EcoreUtil2.getNextSibling(second);
@@ -94,7 +102,7 @@ public class AstSelectionProvider {
 	public ITextRegion selectPrevious(XtextResource resource, ITextRegion currentEditorSelection) {
 		Pair<EObject, EObject> currentlySelected = getSelectedAstElements(resource, currentEditorSelection);
 		if (currentlySelected == null) {
-			return register(selectEnclosing(resource, currentEditorSelection));
+			return selectEnclosing(resource, currentEditorSelection);
 		}
 		EObject first = currentlySelected.getFirst();
 		EObject previousSibling = EcoreUtil2.getPreviousSibling(first);
