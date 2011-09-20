@@ -10,6 +10,7 @@ package org.eclipse.xtext.resource.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import junit.framework.TestCase;
@@ -24,6 +25,7 @@ import org.eclipse.xtext.resource.IReferenceDescription;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Sets;
+import com.google.inject.internal.Maps;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -169,6 +171,42 @@ public class DefaultResourceDescriptionDeltaTest extends TestCase {
 				EObjectDescription.create(BAR, EcorePackage.Literals.EANNOTATION, ImmutableMap.of("qux", "quux", "foo", "bar")));
 	
 		assertFalse(new DefaultResourceDescriptionDelta(resourceDesc, resourceDesc2).haveEObjectDescriptionsChanged());
+
+		resourceDesc = new TestResDesc();
+		resourceDesc.exported.add(
+				EObjectDescription.create(BAR, EcorePackage.Literals.EANNOTATION, ImmutableMap.of("foo", "bar", "qux", "quux")));
+		
+		resourceDesc2 = new TestResDesc();
+		resourceDesc2.exported.add(
+				EObjectDescription.create(BAR, EcorePackage.Literals.EANNOTATION, ImmutableMap.of("qux", "quux", "FOO", "bar")));
+	
+		assertTrue(new DefaultResourceDescriptionDelta(resourceDesc, resourceDesc2).haveEObjectDescriptionsChanged());
+
+		resourceDesc = new TestResDesc();
+		resourceDesc.exported.add(
+				EObjectDescription.create(BAR, EcorePackage.Literals.EANNOTATION, ImmutableMap.of("foo", "bar", "qux", "quux")));
+		
+		resourceDesc2 = new TestResDesc();
+		Map<String, String> userData2 = Maps.newLinkedHashMap();
+		userData2.put("foo", "bar");
+		userData2.put("qux", null);
+		resourceDesc2.exported.add(
+				EObjectDescription.create(BAR, EcorePackage.Literals.EANNOTATION, userData2));
+	
+		assertTrue(new DefaultResourceDescriptionDelta(resourceDesc, resourceDesc2).haveEObjectDescriptionsChanged());
+
+		resourceDesc = new TestResDesc();
+		Map<String, String> userData1 = Maps.newLinkedHashMap();
+		userData1.put("foo", "bar");
+		userData1.put("qux", null);
+		resourceDesc.exported.add(
+				EObjectDescription.create(BAR, EcorePackage.Literals.EANNOTATION, userData1));
+		
+		resourceDesc2 = new TestResDesc();
+		resourceDesc2.exported.add(
+				EObjectDescription.create(BAR, EcorePackage.Literals.EANNOTATION, ImmutableMap.of("foo", "bar", "qux", "quux")));
+	
+		assertTrue(new DefaultResourceDescriptionDelta(resourceDesc, resourceDesc2).haveEObjectDescriptionsChanged());
 	}
 	
 	public void testHasChanges_DifferentTypes() throws Exception {
