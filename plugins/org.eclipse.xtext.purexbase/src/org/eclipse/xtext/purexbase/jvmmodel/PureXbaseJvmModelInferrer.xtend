@@ -1,22 +1,19 @@
 package org.eclipse.xtext.purexbase.jvmmodel
- 
+
 import com.google.inject.Inject
-import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtext.common.types.JvmDeclaredType
-import org.eclipse.xtext.util.IAcceptor
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer
-import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtext.common.types.util.TypeReferences
-import org.eclipse.xtext.xbase.XExpression
-import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer
-import org.eclipse.xtext.xbase.XReturnExpression
-import org.eclipse.xtext.xbase.compiler.XbaseCompiler
-import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable
-import org.eclipse.xtext.xbase.compiler.ImportManager
+import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.purexbase.pureXbase.Model
-import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
+import org.eclipse.xtext.util.IAcceptor
 import org.eclipse.xtext.xbase.XBlockExpression
+import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.xtext.xbase.XReturnExpression
+import org.eclipse.xtext.xbase.compiler.ImportManager
+import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable
+import org.eclipse.xtext.xbase.compiler.XbaseCompiler
+import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer
+import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
+import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -89,4 +86,5 @@ class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
 		compiler.compile(obj, appendable, obj.newTypeRef(Void::TYPE))
 		return appendable.toString
 	}
+	
 }
