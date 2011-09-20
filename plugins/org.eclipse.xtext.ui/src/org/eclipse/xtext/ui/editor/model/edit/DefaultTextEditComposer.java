@@ -171,7 +171,7 @@ public class DefaultTextEditComposer extends EContentAdapter implements ITextEdi
 	}
 
 	/**
-	 * @Deprecated use {@link #setSerializer(ISerializer)} instead.
+	 * @deprecated use {@link #setSerializer(ISerializer)} instead.
 	 */
 	@Deprecated
 	public void setSerializerUtil(ISerializer serializer) {

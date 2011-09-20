@@ -116,7 +116,7 @@ public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvi
 	}
 	
 	/**
-	 * @deprecation use <code>get(IReferenceUpdater.class)</code> instead
+	 * @deprecated use <code>get(IReferenceUpdater.class)</code> instead
 	 */
 	@Deprecated
 	public IReferenceUpdater getReferenceUpdater() {

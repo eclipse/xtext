@@ -22,7 +22,7 @@ import com.google.inject.name.Named;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
- * @deprecated JDT refactoring participation is now handled centrally by the {@link GlobalJdtRenanmeParticipant}
+ * @deprecated JDT refactoring participation is now handled centrally by the {@link org.eclipse.xtext.common.types.ui.refactoring.participant.JdtRenameParticipant}
  */
 @Deprecated
 public class JDTRenamePartcipant extends RenameParticipant {
