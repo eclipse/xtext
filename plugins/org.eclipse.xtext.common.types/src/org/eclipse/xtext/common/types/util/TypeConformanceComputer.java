@@ -41,7 +41,6 @@ import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.LinkedHashMultiset;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Multiset.Entry;
 import com.google.common.collect.Sets;
@@ -117,7 +116,7 @@ public class TypeConformanceComputer {
 	 * a stable order on from the direct super class, the most specialized implemented 
 	 * interfaces up to object.
 	 * E.g. although {@link StringBuilder} implements {@link java.io.Serializable} and 
-	 * {@link CharSequence}, serializable is treated as more special by this algorithm
+	 * {@link CharSequence}, serializable is treated as more specific by this algorithm
 	 * since the super class AbstractStringBuilder implements {@link CharSequence}, too.
 	 * Thus the number of steps to {@link java.io.Serializable} is <code>1</code> while 
 	 * {@link CharSequence} requires <code>2</code> hops. 
