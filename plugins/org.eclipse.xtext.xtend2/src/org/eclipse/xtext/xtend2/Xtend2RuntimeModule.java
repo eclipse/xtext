@@ -31,6 +31,7 @@ import org.eclipse.xtext.xtend2.scoping.Xtend2ImportedNamespaceScopeProvider;
 import org.eclipse.xtext.xtend2.scoping.Xtend2ScopeProvider;
 import org.eclipse.xtext.xtend2.typing.Xtend2TypeProvider;
 import org.eclipse.xtext.xtend2.validation.XtendEarlyExitValidator;
+import org.eclipse.xtext.xtype.XtypeFactory;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -109,6 +110,10 @@ public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2
 	@Override
 	public java.lang.Class<? extends IScopeProvider> bindIScopeProvider() {
 		return Xtend2ScopeProvider.class;
+	}
+
+	public XtypeFactory bindXtypeFactoryToInstance() {
+		return XtypeFactory.eINSTANCE;
 	}
 	
 }
