@@ -29,6 +29,7 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.typing.JvmOnlyTypeConformanceComputer;
 
 import com.google.inject.Inject;
 
@@ -66,7 +67,7 @@ public abstract class AbstractXbaseCompiler {
 	private IEarlyExitComputer exitComputer;
 	
 	@Inject
-	private TypeConformanceComputer typeConformanceComputer;
+	private JvmOnlyTypeConformanceComputer typeConformanceComputer;
 	
 	@Inject
 	private Primitives primitives;

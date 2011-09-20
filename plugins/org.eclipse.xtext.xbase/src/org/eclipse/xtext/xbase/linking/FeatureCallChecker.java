@@ -27,7 +27,9 @@ import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.IRawTypeHelper;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
+import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.Strings;
@@ -44,7 +46,6 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.IValidatedEObjectDescription
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.LocalVarDescription;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
-import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 
 import com.google.inject.Inject;
 
@@ -74,13 +75,19 @@ public class FeatureCallChecker {
 			Collections.singletonList(this));
 
 	@Inject
-	private XbaseTypeConformanceComputer conformance;
+	private TypeConformanceComputer conformance;
 
 	@Inject
 	private ITypeProvider typeProvider;
 
 	@Inject
 	private FeatureCallToJavaMapping featureCall2JavaMapping;
+	
+	@Inject
+	private IRawTypeHelper rawTypeHelper;
+	
+//	@Inject
+//	private TypesFactory typesFactory;
 
 	public void setTypeProvider(ITypeProvider typeProvider) {
 		this.typeProvider = typeProvider;
@@ -151,8 +158,12 @@ public class FeatureCallChecker {
 			if (rightOperandType == null)
 				return INVALID_ARGUMENT_TYPES;
 			final JvmFormalParameter rightParam = input.getParameters().get(0 + irrelevantArguments);
-			if (!conformance.isConformant(rightParam.getParameterType(), rightOperandType, true))
+			JvmTypeReference parameterType = rightParam.getParameterType();
+			JvmTypeReference lowerBound = jvmFeatureDescription.getContext().getLowerBound(parameterType);
+			JvmTypeReference rawTypeReference = rawTypeHelper.getRawTypeReference(lowerBound, context.eResource());
+			if (!conformance.isConformant(rawTypeReference, rightOperandType, true)) {
 				return INVALID_ARGUMENT_TYPES;
+			}
 		}
 		return null;
 	}
@@ -270,33 +281,36 @@ public class FeatureCallChecker {
 			JvmTypeReference parameterType = exectuable.getParameters().get(i).getParameterType();
 			if (parameterType == null)
 				return true;
-			if (typeArgumentContext != null) {
-				parameterType = typeArgumentContext.getLowerBound(parameterType);
-			}
+			JvmTypeReference lowerBound = typeArgumentContext.getLowerBound(parameterType);
+			JvmTypeReference rawType = rawTypeHelper.getRawTypeReference(lowerBound, exectuable.eResource());
+//			if (typeArgumentContext != null) {
+//				parameterType = typeArgumentContext.getLowerBound(parameterType);
+//			}
 			XExpression argument = arguments.get(i);
 			JvmTypeReference argumentType = getTypeProvider().getType(argument, true);
-			if (!isCompatibleArgument(parameterType, argumentType))
+			if (!isCompatibleArgument(rawType, argumentType))
 				return false;
 		}
 		if (exectuable.isVarArgs()) {
 			int lastParamIndex = numberOfParameters - 1;
 			JvmTypeReference lastParameterType = exectuable.getParameters().get(lastParamIndex).getParameterType();
-			// TODO resolve array type's lower bound
-			if (!(lastParameterType instanceof JvmGenericArrayTypeReference))
-				throw new IllegalStateException("Unexpected var arg type: " + lastParameterType);
-			JvmTypeReference varArgType = ((JvmGenericArrayTypeReference) lastParameterType).getComponentType();
+			JvmTypeReference lastParameterLowerBound = typeArgumentContext.getLowerBound(lastParameterType);
+			JvmTypeReference lastParameterRawType = rawTypeHelper.getRawTypeReference(lastParameterLowerBound, exectuable.eResource());
+			if (!(lastParameterRawType instanceof JvmGenericArrayTypeReference))
+				throw new IllegalStateException("Unexpected var arg type: " + lastParameterRawType);
+			JvmTypeReference varArgRawType = ((JvmGenericArrayTypeReference) lastParameterRawType).getComponentType();
 			if (arguments.size() == numberOfParameters) {
 				XExpression lastArgument = arguments.get(lastParamIndex);
 				JvmTypeReference lastArgumentType = getTypeProvider().getType(lastArgument, true);
-				if (isCompatibleArgument(lastParameterType, lastArgumentType))
+				if (isCompatibleArgument(lastParameterRawType, lastArgumentType))
 					return true;
-				if (!isCompatibleArgument(varArgType, lastArgumentType))
+				if (!isCompatibleArgument(varArgRawType, lastArgumentType))
 					return false;
 			} else {
 				for (int i = lastParamIndex; i < arguments.size(); i++) {
 					XExpression argumentExpression = arguments.get(i);
 					JvmTypeReference argumentType = getTypeProvider().getType(argumentExpression, true);
-					if (!isCompatibleArgument(varArgType, argumentType))
+					if (!isCompatibleArgument(varArgRawType, argumentType))
 						return false;
 				}
 			}

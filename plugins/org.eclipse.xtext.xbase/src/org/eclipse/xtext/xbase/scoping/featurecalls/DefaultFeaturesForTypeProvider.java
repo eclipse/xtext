@@ -47,7 +47,7 @@ public class DefaultFeaturesForTypeProvider extends AbstractFeaturesForTypeProvi
 			}
 		}
 		// TODO : move synonym support to creation time of type references
-		Iterator<JvmTypeReference> synonymesIterator = synonymTypesProvider.getSynonymTypes(declarator).iterator();
+		Iterator<JvmTypeReference> synonymesIterator = synonymTypesProvider.getSynonymTypes(declarator, false).iterator();
 		while(synonymesIterator.hasNext()) {
 			JvmTypeReference synonym = synonymesIterator.next();
 			List<JvmType> synonymRawTypes = getRawTypeHelper().getAllRawTypes(synonym, declarator.eResource());

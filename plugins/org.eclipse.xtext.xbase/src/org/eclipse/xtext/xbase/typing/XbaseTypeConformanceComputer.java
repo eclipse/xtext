@@ -7,8 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typing;
 
+import java.util.Set;
+
+import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
+import org.eclipse.xtext.common.types.JvmSynonymTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.TypeConformanceComputationArgument;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
+import org.eclipse.xtext.common.types.util.TypeConformanceResult;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -21,26 +27,39 @@ import com.google.inject.Singleton;
 public class XbaseTypeConformanceComputer extends TypeConformanceComputer {
 	
 	@Inject 
-	private FunctionConversion functionConversion;
+	private Closures closures;
 	
 	@Inject
 	private SynonymTypesProvider synonymTypeProvider;
 
 	@Override
-	public boolean isConformant(JvmTypeReference left, JvmTypeReference right, boolean ignoreGenerics) {
-		if (super.isConformant(left, right, ignoreGenerics)) 
-			return true;
-		if (functionConversion.isFunction(left) || functionConversion.isFunction(right)) {
-			if (functionConversion.isConformant(left, right, ignoreGenerics)) {
-				return true;
+	public TypeConformanceResult isConformant(JvmTypeReference left, JvmTypeReference right,
+			TypeConformanceComputationArgument flags) {
+		TypeConformanceResult result = super.isConformant(left, right, flags);
+		if (result.isConformant()) {
+			return result;
+		}
+		// entry call
+		if (!flags.isAsTypeArgument() && flags.isAllowPrimitiveConversion()) {
+			JvmTypeReference leftFunction = closures.getCompatibleFunctionType(left, flags.isRawType());
+			JvmTypeReference rightFunction = closures.getCompatibleFunctionType(right, flags.isRawType());
+			if (leftFunction != null && rightFunction != null && (left != leftFunction || right != rightFunction)) {
+				result = isConformant(leftFunction, rightFunction, flags);
+				if (result.isConformant()) {
+					result = TypeConformanceResult.merge(result, new TypeConformanceResult(TypeConformanceResult.Kind.DEMAND_CONVERSION));
+					return result;
+				}
 			}
 		}
-		Iterable<JvmTypeReference> synonymTypes = synonymTypeProvider.getSynonymTypes(right);
+		// TODO remove this code here since the type references should be wrapped as soon
+		// as they are created
+		Iterable<JvmTypeReference> synonymTypes = synonymTypeProvider.getSynonymTypes(right, true);
 		for (JvmTypeReference synonymType : synonymTypes) {
-			if (super.isConformant(left, synonymType, ignoreGenerics))
-				return true;
+			result = super.isConformant(left, synonymType, flags);
+			if (result.isConformant())
+				return result;
 		}
-		return false;
+		return result;
 	}
-
+	
 }

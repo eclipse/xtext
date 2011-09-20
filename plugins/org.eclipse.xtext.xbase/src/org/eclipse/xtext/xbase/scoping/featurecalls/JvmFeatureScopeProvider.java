@@ -247,7 +247,7 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 			
 		};
 		superTypeCollector.collectSuperTypes(typeRef, acceptor);
-		for(JvmTypeReference synonym: synonymTypeProvider.getSynonymTypes(typeRef)) {
+		for(JvmTypeReference synonym: synonymTypeProvider.getSynonymTypes(typeRef, false)) {
 			if (!visited.containsKey(synonym.getType())) {
 				result.put(synonym, result.size());
 				visited.put(synonym.getType(), synonym);

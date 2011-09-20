@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -24,7 +25,7 @@ import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions;
-import org.eclipse.xtext.xbase.typing.FunctionConversion;
+import org.eclipse.xtext.xbase.typing.Closures;
 
 import com.google.inject.Inject;
 
@@ -34,7 +35,7 @@ import com.google.inject.Inject;
 public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 
 	@Inject
-	private FunctionConversion funcConversion;
+	private Closures closures;
 
 	@Inject
 	private TypeArgumentContextProvider contextProvider;
@@ -78,12 +79,14 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 			convertPrimitiveToWrapper(getPrimitives().asWrapperTypeIfPrimitive(right), appendable, expression);
 		} else if (right instanceof JvmMultiTypeReference) {
 			convertMultiType(left, (JvmMultiTypeReference) right, context, appendable, expression);
+		} else if (right instanceof JvmDelegateTypeReference) {
+			doConversion(left, ((JvmDelegateTypeReference) right).getDelegate(), appendable, context, expression);
 		} else if (getTypeReferences().isArray(right) && isList(left)) {
 			convertArrayToList(left, appendable, context, expression);
 		} else if (isList(right) && getTypeReferences().isArray(left)) {
 			convertListToArray(left, appendable, context, expression);
 		} else if (right.getType().getIdentifier().startsWith(Functions.class.getCanonicalName())) {
-			convertFunctionType(left, right, appendable, expression);
+			convertFunctionType(left, right, appendable, expression, context);
 		} else {
 			expression.exec();
 		}
@@ -110,20 +113,20 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	}
 
 	protected void convertFunctionType(final JvmTypeReference expectedType, final JvmTypeReference functionType,
-			final IAppendable appendable, final Later expression) {
-		JvmTypeReference resolvedLeft = funcConversion.getResolvedExpectedType(expectedType, functionType);
-		if (resolvedLeft == null || resolvedLeft.getIdentifier().equals(Object.class.getName())
-				|| EcoreUtil.equals(resolvedLeft.getType(), functionType.getType())) {
+			final IAppendable appendable, final Later expression, XExpression context) {
+//		JvmTypeReference resolvedLeft = closures.getResolvedExpectedType(expectedType, functionType);
+		if (expectedType == null || expectedType.getIdentifier().equals(Object.class.getName())
+				|| EcoreUtil.equals(expectedType.getType(), functionType.getType())) {
 			expression.exec();
 			return;
 		}
-		JvmOperation operation = funcConversion.findSingleMethod(expectedType);
+		JvmOperation operation = closures.findImplementingOperation(expectedType, context.eResource());
 		if (operation == null) {
-			throw new IllegalStateException("expected type " + resolvedLeft + " not mappable from " + functionType);
+			throw new IllegalStateException("expected type " + expectedType + " not mappable from " + functionType);
 		}
-		TypeArgumentContext typeArgumentContext = contextProvider.getReceiverContext(resolvedLeft);
+		TypeArgumentContext typeArgumentContext = contextProvider.getReceiverContext(expectedType);
 		appendable.append("new ");
-		serialize(resolvedLeft, null, appendable, true, false);
+		serialize(expectedType, null, appendable, true, false);
 		appendable.append("() {");
 		appendable.increaseIndentation().increaseIndentation();
 		appendable.append("\npublic ");

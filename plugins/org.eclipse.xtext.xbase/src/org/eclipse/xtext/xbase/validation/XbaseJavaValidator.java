@@ -364,7 +364,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	protected String getNameOfTypes(JvmTypeReference expectedType) {
 		StringBuilder result = new StringBuilder(canonicalName(expectedType));
-		Iterable<JvmTypeReference> types = synonymTypeProvider.getSynonymTypes(expectedType);
+		Iterable<JvmTypeReference> types = synonymTypeProvider.getSynonymTypes(expectedType, false);
 		for (JvmTypeReference jvmTypeReference : types) {
 			result.append(" or ").append(canonicalName(jvmTypeReference));
 		}

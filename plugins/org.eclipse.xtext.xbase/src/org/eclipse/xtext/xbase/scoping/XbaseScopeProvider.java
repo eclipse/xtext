@@ -27,6 +27,7 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
@@ -44,6 +45,7 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
+import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
@@ -227,7 +229,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		return TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(reference.getEReferenceType());
 	}
 
-	protected IScope createConstructorCallScope(EObject context, EReference reference) {
+	protected IScope createConstructorCallScope(final EObject context, EReference reference) {
 		final IScope scope = super.getScope(context, reference);
 		return new IScope() {
 
@@ -242,6 +244,27 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 							public IEObjectDescription apply(IEObjectDescription from) {
 								TypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getReceiverContext(null);
 								final JvmConstructor constructor = (JvmConstructor) from.getEObjectOrProxy();
+								if (context instanceof XConstructorCall) {
+									XConstructorCall constructorCall = (XConstructorCall) context;
+									List<JvmTypeReference> argumentTypes = Lists.newArrayListWithCapacity(constructorCall.getArguments().size());
+									if (constructorCall.getTypeArguments().isEmpty()) {
+										for(XExpression argument: constructorCall.getArguments()) {
+											JvmTypeReference argumentType = typeProvider.getType(argument, true);
+											argumentTypes.add(argumentType);
+										}
+										typeArgumentContext = typeArgumentContextProvider.injectArgumentTypeContext(
+												typeArgumentContext, 
+												constructor, 
+												null,
+												true,
+												argumentTypes.toArray(new JvmTypeReference[argumentTypes.size()])
+										);
+									} else {
+										typeArgumentContext = typeArgumentContextProvider.getExplicitMethodInvocationContext(
+												(JvmTypeParameterDeclarator) constructor.getDeclaringType(), null, constructorCall.getTypeArguments());
+									}
+								}
+								
 								return new JvmFeatureDescription(from.getQualifiedName(), constructor, typeArgumentContext,
 										constructor.getIdentifier(), true, null, 0);
 							}

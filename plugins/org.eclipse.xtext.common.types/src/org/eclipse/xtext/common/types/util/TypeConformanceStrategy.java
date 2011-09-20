@@ -59,7 +59,8 @@ public abstract class TypeConformanceStrategy<T extends JvmTypeReference> extend
 		return doVisitDelegateTypeReference(getLeft(parameter), right, parameter);
 	}
 	public TypeConformanceResult doVisitDelegateTypeReference(T left, JvmDelegateTypeReference right, TypeConformanceComputationArgument.Internal<T> parameter) {
-		return doVisitTypeReference(left, right, parameter);
+		TypeConformanceResult result = visit(right.getDelegate(), parameter);
+		return result;
 	}
 	
 	@Override
@@ -87,7 +88,8 @@ public abstract class TypeConformanceStrategy<T extends JvmTypeReference> extend
 	}
 	public TypeConformanceResult doVisitSpecializedTypeReference(T left, JvmSpecializedTypeReference right,
 			TypeConformanceComputationArgument.Internal<T> parameter) {
-		return doVisitTypeReference(left, right, parameter);
+		TypeConformanceResult result = visit(right.getEquivalent(), parameter);
+		return result;
 	}
 	
 	@Override

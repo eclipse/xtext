@@ -14,7 +14,6 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbaseFactory;
-import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
@@ -29,8 +28,8 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 		XExpression expression = expression("newArrayList('foo','bar').forEach [] ", true);
 		XExpression closure = ((XMemberFeatureCall)expression).getMemberCallArguments().get(0);
 		JvmTypeReference type = typeProvider.getType(closure);
-		//TODO wrong expectation!
-		assertEquals("Function1<String,Object>", type.getSimpleName());
+		//TODO wrong expectation! we should expect (String)=>void
+		assertEquals("(String)=>Object", type.getSimpleName());
 		//TODO this due to the hack in the type provider's caching strategy and should be fixed
 //		assertEquals("Function1<String,Void>", type.getSimpleName());
 	}
@@ -48,10 +47,12 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testClosure_01() throws Exception {
-		assertResolvedType("java.lang.String", "{" +
+		assertResolvedType(
+				"java.lang.String", 
+				"{" +
 				"  var closure = [|'literal']" +
 				"  new testdata.ClosureClient().invoke0(closure)" +
-		"}");
+				"}");
 	}
 	
 	public void testTypeArgs() throws Exception {
@@ -128,7 +129,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 
 	public void testClosure() throws Exception {
-		assertResolvedType(Functions.class.getCanonicalName()+"$Function1<java.lang.String,java.lang.Boolean>", "[java.lang.String x| true]");
+		assertResolvedType("(java.lang.String)=>boolean", "[java.lang.String x| true]");
 	}
 
 	public void testFeatureCall_01() throws Exception {

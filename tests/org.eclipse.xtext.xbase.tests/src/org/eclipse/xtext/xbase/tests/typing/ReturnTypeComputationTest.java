@@ -51,11 +51,11 @@ public class ReturnTypeComputationTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testReturnType_05() throws Exception {
-		assertReturnType("org.eclipse.xtext.xbase.lib.Functions$Function0<java.lang.String>", "return [| '']");
+		assertReturnType("()=>java.lang.String", "return [| '']");
 	}
 	
 	public void testReturnType_06() throws Exception {
-		assertReturnType("org.eclipse.xtext.xbase.lib.Functions$Function0<java.lang.String>", "return [| return '']");
+		assertReturnType("()=>java.lang.String", "return [| return '']");
 	}
 	
 	public void testReturnType_07() throws Exception {
