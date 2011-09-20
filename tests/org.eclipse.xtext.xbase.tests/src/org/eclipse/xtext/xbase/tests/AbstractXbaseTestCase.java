@@ -13,8 +13,11 @@ import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.junit.util.ParseHelper;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
+import org.eclipse.xtext.parser.IEncodingProvider;
+import org.eclipse.xtext.resource.SynchronizedXtextResourceSet;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.XExpression;
@@ -23,6 +26,7 @@ import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge
@@ -30,6 +34,23 @@ import com.google.inject.Injector;
  */
 public abstract class AbstractXbaseTestCase extends TestCase {
 
+	public static class SynchronizedXtextResourceSetProvider implements Provider<SynchronizedXtextResourceSet> {
+
+		@Inject
+		private ClassLoader classLoader;
+		
+		@Inject
+		private IJvmTypeProvider.Factory typeProviderFactory;
+		
+		public SynchronizedXtextResourceSet get() {
+			SynchronizedXtextResourceSet result = new SynchronizedXtextResourceSet();
+			result.setClasspathURIContext(classLoader);
+			typeProviderFactory.findOrCreateTypeProvider(result);
+			return result;
+		}
+		
+	}
+	
 	static Injector injector = new XbaseStandaloneSetup() {
 		@Override
 		public Injector createInjector() {
@@ -37,6 +58,10 @@ public abstract class AbstractXbaseTestCase extends TestCase {
 				@Override
 				public ClassLoader bindClassLoaderToInstance() {
 					return AbstractXbaseTestCase.class.getClassLoader();
+				}
+				@SuppressWarnings("unused")
+				public Class<? extends Provider<SynchronizedXtextResourceSet>> provideSynchronizedResourceSet() {
+					return SynchronizedXtextResourceSetProvider.class;
 				}
 			});
 		}

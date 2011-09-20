@@ -18,6 +18,9 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
+import org.eclipse.xtext.common.types.JvmConstraintOwner;
+import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -25,9 +28,14 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.xbase.XClosure;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.annotations.typing.XbaseWithAnnotationsTypeProvider;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueBinaryOperation;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
@@ -67,6 +75,54 @@ public class Xtend2TypeProvider extends XbaseWithAnnotationsTypeProvider {
 	
 	@Inject
 	private Primitives primitives;
+	
+	@Override
+	protected JvmTypeReference typeForIdentifiableDispatcherInvoke(JvmIdentifiableElement identifiable, boolean rawType) {
+		if (identifiable instanceof JvmGenericType) {
+			return _typeForIdentifiable((JvmGenericType)identifiable, rawType);
+		} else if (identifiable instanceof XtendClass) {
+			return _typeForIdentifiable((XtendClass)identifiable, rawType);
+		} else if (identifiable instanceof XtendClassSuperCallReferable) {
+			return _typeForIdentifiable((XtendClassSuperCallReferable)identifiable, rawType);
+		} else if (identifiable instanceof XtendParameter) {
+			return _typeForIdentifiable((XtendParameter)identifiable, rawType);
+		} else {
+			return super.typeForIdentifiableDispatcherInvoke(identifiable, rawType);
+		}
+	}
+	
+	@Override
+	protected JvmTypeReference typeDispatcherInvoke(XExpression expression, boolean rawType) {
+		if (expression instanceof RichString) {
+			return _type((RichString)expression, rawType);
+		} else if (expression instanceof RichStringForLoop) {
+			return _type((RichStringForLoop)expression, rawType);
+		} else if (expression instanceof RichStringIf) {
+			return _type((RichStringIf)expression, rawType);
+		} else if (expression instanceof RichStringLiteral) {
+			return _type((RichStringLiteral)expression, rawType);
+		} else {
+			return super.typeDispatcherInvoke(expression, rawType);
+		}
+	}
+	
+	@Override
+	protected JvmTypeReference expectedTypeDispatcherInvoke(EObject container, EReference reference, int index,
+			boolean rawType) {
+		if (container instanceof CreateExtensionInfo) {
+			return _expectedType((CreateExtensionInfo)container, reference, index, rawType);
+		} else if (container instanceof RichStringElseIf) {
+			return _expectedType((RichStringElseIf)container, reference, index, rawType);
+		} else if (container instanceof RichStringForLoop) {
+			return _expectedType((RichStringForLoop)container, reference, index, rawType);
+		} else if (container instanceof RichStringIf) {
+			return _expectedType((RichStringIf)container, reference, index, rawType);
+		} else if (container instanceof XtendFunction) {
+			return _expectedType((XtendFunction)container, reference, index, rawType);
+		} else {
+			return super.expectedTypeDispatcherInvoke(container, reference, index, rawType);
+		}
+	}
 	
 	protected JvmTypeReference _expectedType(XtendFunction function, EReference reference, int index, boolean rawType) {
 		if (reference == Xtend2Package.Literals.XTEND_FUNCTION__EXPRESSION) {

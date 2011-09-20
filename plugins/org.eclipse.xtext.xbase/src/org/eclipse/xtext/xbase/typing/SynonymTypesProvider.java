@@ -25,7 +25,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.util.Primitives;
-import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 
 import com.google.inject.Inject;
@@ -41,15 +40,12 @@ public class SynonymTypesProvider {
 	@Inject
 	private TypeReferences typeRefs;
 	
-	@Inject
-	private SuperTypeCollector superTypeCollector;
-
-	public Iterable<JvmTypeReference> getSynonymTypes(JvmTypeReference type) {
+	public Set<JvmTypeReference> getSynonymTypes(JvmTypeReference type, boolean ignoreBoxing) {
 		if (type == null || typeRefs.is(type, Void.class) || typeRefs.is(type,Void.TYPE)) {
 			return emptySet();
-		} else if (primitives.isPrimitive(type)) {
+		} else if (!ignoreBoxing && primitives.isPrimitive(type)) {
 			return singleton(primitives.asWrapperTypeIfPrimitive(type));
-		} else if (primitives.isWrapperType(type)) {
+		} else if (!ignoreBoxing && primitives.isWrapperType(type)) {
 			return singleton(primitives.asPrimitiveIfWrapperType(type));
 		} else if (typeRefs.isArray(type)) {
 			if (type instanceof JvmGenericArrayTypeReference) {
@@ -98,35 +94,35 @@ public class SynonymTypesProvider {
 	}
 
 	public boolean hasSynonymTypes(JvmTypeReference toBeConverted) {
-		final Iterable<JvmTypeReference> synonymTypes = getSynonymTypes(toBeConverted);
+		final Iterable<JvmTypeReference> synonymTypes = getSynonymTypes(toBeConverted, false);
 		if (synonymTypes instanceof Collection)
 			return !((Collection<?>) synonymTypes).isEmpty();
 		return !isEmpty(synonymTypes);
 	}
 
-	public JvmTypeReference findCompatibleSynonymType(JvmTypeReference toBeConverted, JvmType toBeCompatible) {
-		if (isAssignable(toBeConverted, toBeCompatible)) 
-			return toBeConverted;
-		
-		Iterable<JvmTypeReference> types = getSynonymTypes(toBeConverted);
-		for (JvmTypeReference synonym : types) {
-			if (isAssignable(synonym, toBeCompatible))
-				return synonym;
-		}
-		return null;
-	}
+//	public JvmTypeReference findCompatibleSynonymType(JvmTypeReference toBeConverted, JvmType toBeCompatible) {
+//		if (isAssignable(toBeConverted, toBeCompatible)) 
+//			return toBeConverted;
+//		
+//		Iterable<JvmTypeReference> types = getSynonymTypes(toBeConverted);
+//		for (JvmTypeReference synonym : types) {
+//			if (isAssignable(synonym, toBeCompatible))
+//				return synonym;
+//		}
+//		return null;
+//	}
 
-	protected boolean isAssignable(JvmTypeReference toBeConverted, JvmType toBeCompatible) {
-		if (toBeConverted == null)
-			return false;
-		if (toBeConverted.getType() == toBeCompatible)
-			return true;
-		Set<JvmType> rawTypes = superTypeCollector.collectSuperTypesAsRawTypes(toBeConverted);
-		for (JvmType jvmType : rawTypes) {
-			if (jvmType == toBeCompatible)
-				return true;
-		}
-		return false;
-	}
+//	protected boolean isAssignable(JvmTypeReference toBeConverted, JvmType toBeCompatible) {
+//		if (toBeConverted == null)
+//			return false;
+//		if (toBeConverted.getType() == toBeCompatible)
+//			return true;
+//		Set<JvmType> rawTypes = superTypeCollector.collectSuperTypesAsRawTypes(toBeConverted);
+//		for (JvmType jvmType : rawTypes) {
+//			if (jvmType == toBeCompatible)
+//				return true;
+//		}
+//		return false;
+//	}
 	
 }

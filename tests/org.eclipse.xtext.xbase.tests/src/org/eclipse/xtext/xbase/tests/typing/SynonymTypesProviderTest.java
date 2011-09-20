@@ -9,10 +9,7 @@ package org.eclipse.xtext.xbase.tests.typing;
 
 import java.util.Iterator;
 
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.SynonymTypesProvider;
@@ -29,9 +26,6 @@ public class SynonymTypesProviderTest extends AbstractXbaseTestCase {
 	
 	@Inject
 	private ITypeProvider typeProvider;
-	
-	@Inject
-	private TypeReferences typeRefs;
 	
 	public void testInt() throws Exception {
 		assertSynonymTypes("null as int", Integer.class.getName());
@@ -63,28 +57,10 @@ public class SynonymTypesProviderTest extends AbstractXbaseTestCase {
 		assertSynonymTypes("null as Iterable<? extends Integer>", "java.lang.Integer[]");
 	}
 	
-	public void testFindCompatibleSynonymType_00() throws Exception {
-		assertCompatibleSynonym("null as int", Integer.class, "java.lang.Integer");
-	}
-	public void testFindCompatibleSynonymType_01() throws Exception {
-		assertCompatibleSynonym("null as Integer", Integer.TYPE, "int");
-	}
-	public void testFindCompatibleSynonymType_02() throws Exception {
-		assertCompatibleSynonym("''.toCharArray", Iterable.class, "java.util.List<java.lang.Character>");
-	}
-
-	protected void assertCompatibleSynonym(String expression, Class<?> class1, String expected) throws Exception {
-		final XExpression expr = expression(expression);
-		JvmTypeReference original = typeProvider.getType(expr);
-		JvmType toConvertTo = typeRefs.findDeclaredType(class1, expr);
-		JvmTypeReference result = synonymTypeProvider.findCompatibleSynonymType(original, toConvertTo);
-		assertEquals(expected, result.getIdentifier());
-	}
-	
 	protected void assertSynonymTypes(final String expression, String ...expectedSynonymTypes)
 			throws Exception {
 		JvmTypeReference type = typeProvider.getType(expression(expression));
-		Iterable<JvmTypeReference> synonymTypes = synonymTypeProvider.getSynonymTypes(type);
+		Iterable<JvmTypeReference> synonymTypes = synonymTypeProvider.getSynonymTypes(type, false);
 		Iterator<JvmTypeReference> iterator = synonymTypes.iterator();
 		for (String clazz: expectedSynonymTypes) {
 			assertEquals(clazz,iterator.next().getIdentifier());

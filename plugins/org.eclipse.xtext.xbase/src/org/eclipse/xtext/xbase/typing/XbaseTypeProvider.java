@@ -24,16 +24,17 @@ import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmSynonymTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -82,6 +83,7 @@ import com.google.inject.Singleton;
 
 /**
  * @author Sven Efftinge
+ * @author Sebastian Zarnekow
  */
 @Singleton
 public class XbaseTypeProvider extends AbstractTypeProvider {
@@ -93,7 +95,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	private FeatureCallToJavaMapping featureCall2javaMapping;
 
 	@Inject
-	private FunctionConversion functionConversion;
+	private Closures closures;
 
 	@Inject
 	private SuperTypeCollector collector;
@@ -117,6 +119,116 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			}
 		}
 		return null;
+	}
+	
+	@Override
+	protected JvmTypeReference typeForIdentifiableDispatcherInvoke(JvmIdentifiableElement identifiable, boolean rawType) {
+		if (identifiable instanceof JvmConstructor) {
+			return _typeForIdentifiable((JvmConstructor)identifiable, rawType);
+		} else if (identifiable instanceof JvmField) {
+			return _typeForIdentifiable((JvmField)identifiable, rawType);
+		} else if (identifiable instanceof JvmFormalParameter) {
+			return _typeForIdentifiable((JvmFormalParameter)identifiable, rawType);
+		} else if (identifiable instanceof JvmOperation) {
+			return _typeForIdentifiable((JvmOperation)identifiable, rawType);
+		} else if (identifiable instanceof JvmType) {
+			return _typeForIdentifiable((JvmType)identifiable, rawType);
+		} else if (identifiable instanceof XCasePart) {
+			return _typeForIdentifiable((XCasePart)identifiable, rawType);
+		} else if (identifiable instanceof XSwitchExpression) {
+			return _typeForIdentifiable((XSwitchExpression)identifiable, rawType);
+		} else if (identifiable instanceof XVariableDeclaration) {
+			return _typeForIdentifiable((XVariableDeclaration)identifiable, rawType);
+		} else {
+			return super.typeForIdentifiableDispatcherInvoke(identifiable, rawType);
+		}
+	}
+	
+	@Override
+	protected JvmTypeReference typeDispatcherInvoke(XExpression expression, boolean rawType) {
+		if (expression instanceof XAbstractFeatureCall) {
+			return _type((XAbstractFeatureCall)expression, rawType);
+		} else if (expression instanceof XAbstractWhileExpression) {
+			return _type((XAbstractWhileExpression)expression, rawType);
+		} else if (expression instanceof XBlockExpression) {
+			return _type((XBlockExpression)expression, rawType);
+		} else if (expression instanceof XBooleanLiteral) {
+			return _type((XBooleanLiteral)expression, rawType);
+		} else if (expression instanceof XCastedExpression) {
+			return _type((XCastedExpression)expression, rawType);
+		} else if (expression instanceof XClosure) {
+			return _type((XClosure)expression, rawType);
+		} else if (expression instanceof XConstructorCall) {
+			return _type((XConstructorCall)expression, rawType);
+		} else if (expression instanceof XForLoopExpression) {
+			return _type((XForLoopExpression)expression, rawType);
+		} else if (expression instanceof XIfExpression) {
+			return _type((XIfExpression)expression, rawType);
+		} else if (expression instanceof XInstanceOfExpression) {
+			return _type((XInstanceOfExpression)expression, rawType);
+		} else if (expression instanceof XIntLiteral) {
+			return _type((XIntLiteral)expression, rawType);
+		} else if (expression instanceof XNullLiteral) {
+			return _type((XNullLiteral)expression, rawType);
+		} else if (expression instanceof XReturnExpression) {
+			return _type((XReturnExpression)expression, rawType);
+		} else if (expression instanceof XStringLiteral) {
+			return _type((XStringLiteral)expression, rawType);
+		} else if (expression instanceof XSwitchExpression) {
+			return _type((XSwitchExpression)expression, rawType);
+		} else if (expression instanceof XThrowExpression) {
+			return _type((XThrowExpression)expression, rawType);
+		} else if (expression instanceof XTryCatchFinallyExpression) {
+			return _type((XTryCatchFinallyExpression)expression, rawType);
+		} else if (expression instanceof XTypeLiteral) {
+			return _type((XTypeLiteral)expression, rawType);
+		} else if (expression instanceof XVariableDeclaration) {
+			return _type((XVariableDeclaration)expression, rawType);
+		} else { 
+			return super.typeDispatcherInvoke(expression, rawType);
+		}
+	}
+	
+	@Override
+	protected JvmTypeReference expectedTypeDispatcherInvoke(EObject container, EReference reference, int index,
+			boolean rawType) {
+		if (container instanceof XAssignment) {
+			return _expectedType((XAssignment)container, reference, index, rawType);
+		} else if (container instanceof XBinaryOperation) {
+			return _expectedType((XBinaryOperation)container, reference, index, rawType);
+		} else if (container instanceof XAbstractFeatureCall) {
+			return _expectedType((XAbstractFeatureCall)container, reference, index, rawType);
+		} else if (container instanceof XAbstractWhileExpression) {
+			return _expectedType((XAbstractWhileExpression)container, reference, index, rawType);
+		} else if (container instanceof XBlockExpression) {
+			return _expectedType((XBlockExpression)container, reference, index, rawType);
+		} else if (container instanceof XCasePart) {
+			return _expectedType((XCasePart)container, reference, index, rawType);
+		} else if (container instanceof XCastedExpression) {
+			return _expectedType((XCastedExpression)container, reference, index, rawType);
+		} else if (container instanceof XCatchClause) {
+			return _expectedType((XCatchClause)container, reference, index, rawType);
+		} else if (container instanceof XClosure) {
+			return _expectedType((XClosure)container, reference, index, rawType);
+		} else if (container instanceof XConstructorCall) {
+			return _expectedType((XConstructorCall)container, reference, index, rawType);
+		} else if (container instanceof XForLoopExpression) {
+			return _expectedType((XForLoopExpression)container, reference, index, rawType);
+		} else if (container instanceof XIfExpression) {
+			return _expectedType((XIfExpression)container, reference, index, rawType);
+		} else if (container instanceof XReturnExpression) {
+			return _expectedType((XReturnExpression)container, reference, index, rawType);
+		} else if (container instanceof XSwitchExpression) {
+			return _expectedType((XSwitchExpression)container, reference, index, rawType);
+		} else if (container instanceof XThrowExpression) {
+			return _expectedType((XThrowExpression)container, reference, index, rawType);
+		} else if (container instanceof XTryCatchFinallyExpression) {
+			return _expectedType((XTryCatchFinallyExpression)container, reference, index, rawType);
+		} else if (container instanceof XVariableDeclaration) {
+			return _expectedType((XVariableDeclaration)container, reference, index, rawType);
+		} else {
+			return super.expectedTypeDispatcherInvoke(container, reference, index, rawType);
+		}
 	}
 	
 	protected JvmTypeReference _expectedType(XAssignment assignment, EReference reference, int index, boolean rawType) {
@@ -209,9 +321,12 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		if (reference == XbasePackage.Literals.XCLOSURE__EXPRESSION) {
 			JvmTypeReference functionType = getExpectedType(closure, rawType);
 			if (functionType != null) {
-				JvmTypeReference result = functionConversion.getReturnType(functionType);
-				if (result==null || result.getType() instanceof JvmTypeParameter)
-					return null;
+				JvmOperation operation = closures.findImplementingOperation(functionType, closure.eResource());
+				JvmTypeReference declaredReturnType = operation.getReturnType();
+//				if (result==null || result.getType() instanceof JvmTypeParameter)
+//					return null;
+				TypeArgumentContext receiverContext = getTypeArgumentContextProvider().getReceiverContext(functionType);
+				JvmTypeReference result = receiverContext.getUpperBound(declaredReturnType, closure);
 				return result;
 			}
 		}
@@ -229,13 +344,16 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		return super.handleCycleGetExpectedType(expression, rawType);
 	}
 
-	protected TypeArgumentContext getFeatureCallTypeArgContext(XAbstractFeatureCall expr, EReference reference,
-			int index, boolean rawType) {
+	protected TypeArgumentContext getFeatureCallTypeArgContext(
+			XAbstractFeatureCall expr, 
+			EReference reference,
+			int index, 
+			boolean rawType) {
 		JvmTypeReference receiverType = getReceiverType(expr, rawType);
 		if (expr.getFeature() instanceof JvmOperation) {
 			JvmOperation operation = (JvmOperation) expr.getFeature();
 			if (expr.getTypeArguments().isEmpty()) {
-				receiverType = convertIfNeccessary(expr, receiverType, operation, rawType);
+//				receiverType = convertIfNeccessary(expr, receiverType, operation, rawType);
 				JvmTypeReference expectedType = getExpectedType(expr, rawType);
 				JvmTypeReference[] argTypes = getArgumentTypes(expr, rawType);
 				TypeArgumentContext context = getTypeArgumentContextProvider().getInferredMethodInvocationContext(operation,
@@ -268,13 +386,16 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			if (parameter != null) {
 				final JvmTypeReference type = getType(arg, rawType);
 				if (type != null) {
-					JvmTypeReference parameterType = parameter.getParameterType();
-					if (parameterType != null) {
-						JvmTypeReference synonymType = this.synonymTypesProvider.findCompatibleSynonymType(type, parameterType.getType());
-						argTypes[i] = synonymType != null ? synonymType : type;
-					} else {
+//					JvmTypeReference parameterType = getTypeForIdentifiable(parameter, rawType);
+//					if (parameterType != null) {
+////						JvmTypeReference synonymType = this.synonymTypesProvider.findCompatibleSynonymType(type, parameterType.getType());
+//						argTypes[i] = parameterType; //synonymType != null ? synonymType : type;
+//					} else {
 						argTypes[i] = type;
-					}
+//					}
+				} else {
+					JvmTypeReference parameterType = getTypeForIdentifiable(parameter, rawType);
+					argTypes[i] = parameterType;
 				}
 			}
 		}
@@ -295,6 +416,29 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		JvmTypeReference receiverType = null;
 		if (receiver != null)
 			receiverType = getType(receiver, rawType);
+		if (receiverType != null) {
+			Set<JvmTypeReference> synonymTypes = synonymTypesProvider.getSynonymTypes(receiverType, false);
+			if (!synonymTypes.isEmpty()) {
+				JvmSynonymTypeReference result = factory.createJvmSynonymTypeReference();
+				if (receiverType.eResource() != null) {
+					JvmDelegateTypeReference delegate = factory.createJvmDelegateTypeReference();
+					delegate.setDelegate(receiverType);
+					result.getReferences().add(delegate);
+				} else {
+					result.getReferences().add(receiverType);
+				}
+				for(JvmTypeReference synonym: synonymTypes) {
+					if (synonym.eResource() != null) {
+						JvmDelegateTypeReference delegate = factory.createJvmDelegateTypeReference();
+						delegate.setDelegate(synonym);
+						result.getReferences().add(delegate);
+					} else {
+						result.getReferences().add(synonym);
+					}
+				}
+				return result;
+			}
+		}
 		return receiverType;
 	}
 
@@ -317,6 +461,23 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 				final JvmTypeReference parameterType = parameter.getParameterType();
 				JvmTypeReference resolved = context.resolve(parameterType);
 				return resolved;
+			} else if (!operation.isStatic()) {
+				// expectation for member call target for operations on objects 
+				XExpression argumentExpression = getExpression(expr, reference, index);
+				TypeArgumentContext context = getFeatureCallTypeArgContext(expr, reference, index, rawType);
+				final JvmTypeReference declaringType = getTypeReferences().createTypeRef(operation.getDeclaringType());
+				if (rawType)
+					return declaringType;
+				if (!rawType && argumentExpression != null) {
+					JvmTypeReference receiverType = getType(argumentExpression, rawType);
+					if (receiverType != null) {
+						JvmTypeReference result = context.getLowerBound(receiverType);
+						if (result != null && result.getType() instanceof JvmTypeParameter)
+							return result;
+					}
+				}
+				JvmTypeReference result = context.getLowerBound(declaringType);
+				return result;
 			}
 		}
 		return null;
@@ -334,6 +495,25 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		if (reference == XbasePackage.Literals.XCONSTRUCTOR_CALL__ARGUMENTS) {
 			JvmExecutable feature = expr.getConstructor();
 			TypeArgumentContext typeArgumentContext = getTypeArgumentContextProvider().getReceiverContext(null);
+			if (feature instanceof JvmConstructor && !feature.eIsProxy()) {
+				List<JvmTypeReference> argumentTypes = Lists.newArrayListWithCapacity(expr.getArguments().size());
+				if (expr.getTypeArguments().isEmpty()) {
+					for(XExpression argument: expr.getArguments()) {
+						JvmTypeReference argumentType = getType(argument, true);
+						argumentTypes.add(argumentType);
+					}
+					typeArgumentContext = getTypeArgumentContextProvider().injectArgumentTypeContext(
+							typeArgumentContext, 
+							(JvmConstructor)feature, 
+							null,
+							true,
+							argumentTypes.toArray(new JvmTypeReference[argumentTypes.size()])
+					);
+				} else {
+					typeArgumentContext = getTypeArgumentContextProvider().getExplicitMethodInvocationContext(
+							(JvmTypeParameterDeclarator) feature.getDeclaringType(), null, expr.getTypeArguments());
+				}
+			}
 			if (index >= feature.getParameters().size()) {
 				if (feature.isVarArgs()) {
 					return getExpectedVarArgType(feature, typeArgumentContext, rawType);
@@ -641,15 +821,25 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 
 	protected JvmTypeReference _type(XClosure object, boolean rawType) {
 		if (rawType) {
-			JvmParameterizedTypeReference result = functionConversion.createRawFunctionTypeRef(object, object
-					.getFormalParameters().size());
+			JvmParameterizedTypeReference result = closures.createRawFunctionTypeRef(
+					object, object.getFormalParameters().size());
 			return result;
 		}
-		JvmTypeReference returnType = getCommonReturnType(object.getExpression(), true);
+		JvmTypeReference expectedType = getExpectedType(object, rawType);
+		JvmOperation singleMethod = null;
+		JvmTypeReference returnType = null;
+		if (expectedType != null) {
+			singleMethod = closures.findImplementingOperation(expectedType, object.eResource());
+		}
+		returnType = getCommonReturnType(object.getExpression(), true);
 		if (!rawType && returnType instanceof JvmAnyTypeReference) {
 			JvmTypeReference type = getExpectedType(object.getExpression());
-			if (type!=null)
+			if (singleMethod != null) {
+				if (isResolved(type, singleMethod, rawType))
+					returnType = type;
+			} else {
 				returnType = type;
+			}
 		}
 		List<JvmTypeReference> parameterTypes = Lists.newArrayList();
 		List<JvmFormalParameter> params = object.getFormalParameters();
@@ -657,24 +847,18 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			parameterTypes.add(param.getParameterType());
 		}
 		// inferred argument types?
-		if (!params.isEmpty()) {
-			JvmTypeReference expectedType = getExpectedType(object, rawType);
-			if (expectedType != null) {
-				JvmOperation singleMethod = functionConversion.findSingleMethod(expectedType);
-				if (singleMethod != null) {
-					TypeArgumentContext context = getTypeArgumentContextProvider().getReceiverContext(expectedType);
-					for (int i = 0; i < params.size(); i++) {
-						JvmTypeReference resultParam = parameterTypes.get(i);
-						if (resultParam == null) {
-							JvmFormalParameter p = getParam(singleMethod, i);
-							final JvmTypeReference resolved = context.getLowerBound(p.getParameterType());
-							parameterTypes.set(i, resolved);
-						}
-					}
+		if (!params.isEmpty() && singleMethod != null) {
+			TypeArgumentContext context = getTypeArgumentContextProvider().getReceiverContext(expectedType);
+			for (int i = 0; i < params.size(); i++) {
+				JvmTypeReference resultParam = parameterTypes.get(i);
+				if (resultParam == null) {
+					JvmFormalParameter p = getParam(singleMethod, i);
+					final JvmTypeReference resolved = context.getLowerBound(p.getParameterType());
+					parameterTypes.set(i, resolved);
 				}
 			}
 		}
-		return functionConversion.createFunctionTypeRef(object, parameterTypes, returnType);
+		return closures.createFunctionTypeRef(object, parameterTypes, returnType);
 	}
 
 	protected JvmTypeReference _type(XCastedExpression object, boolean rawType) {
@@ -737,8 +921,8 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			// method was either already called with rawType==false or the featureType points directly to a JvmTypeParameter
 			rawType = false;
 		}
-		final JvmTypeReference receiverType2 = getReceiverType(featureCall, rawType);
-		JvmTypeReference receiverType = convertIfNeccessary(featureCall, receiverType2, feature, rawType);
+		JvmTypeReference receiverType = getReceiverType(featureCall, rawType);
+//		JvmTypeReference receiverType = convertIfNeccessary(featureCall, receiverType2, feature, rawType);
 		if (feature instanceof JvmOperation) {
 			JvmOperation operation = (JvmOperation) feature;
 			if (featureCall.getTypeArguments().isEmpty()) {
@@ -776,6 +960,20 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 					}
 				}
 				result = context.getUpperBound(featureType, operation);
+//				if (!isResolved(result, nearestTypeParameterDeclarator, rawType)) {
+//					// TODO temporary HACK
+//					if (result instanceof JvmParameterizedTypeReference) {
+//						JvmParameterizedTypeReference parameterized = (JvmParameterizedTypeReference) result;
+//						if (parameterized.getArguments().isEmpty()) {
+//							if (parameterized.getType() instanceof JvmTypeParameterDeclarator) {
+//								JvmTypeParameterDeclarator declarator = (JvmTypeParameterDeclarator) parameterized.getType();
+//								if (!declarator.getTypeParameters().isEmpty()) {
+//									result = featureType;
+//								}
+//							}
+//						}
+//					}
+//				}
 				return result;
 			} else {
 				TypeArgumentContext context = getTypeArgumentContextProvider().getExplicitMethodInvocationContext(operation,
@@ -795,18 +993,21 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	@Inject
 	private SynonymTypesProvider synonymTypesProvider;
 
-	protected JvmTypeReference convertIfNeccessary(XAbstractFeatureCall context, JvmTypeReference toBeConverted,
-			JvmIdentifiableElement feature, boolean rawType) {
-		if (toBeConverted != null && feature instanceof JvmMember) {
-			JvmDeclaredType declaringType = ((JvmMember) feature).getDeclaringType();
-			if (synonymTypesProvider.hasSynonymTypes(toBeConverted)) {
-				final JvmTypeReference findCompatibleSynonymType = synonymTypesProvider.findCompatibleSynonymType(
-						toBeConverted, declaringType);
-				return findCompatibleSynonymType != null ? findCompatibleSynonymType : toBeConverted;
-			}
-		}
-		return toBeConverted;
-	}
+//	protected JvmTypeReference convertIfNeccessary(
+//			XAbstractFeatureCall context, 
+//			JvmTypeReference toBeConverted,
+//			JvmIdentifiableElement feature, 
+//			boolean rawType) {
+//		if (toBeConverted != null && feature instanceof JvmMember) {
+//			JvmDeclaredType declaringType = ((JvmMember) feature).getDeclaringType();
+//			if (synonymTypesProvider.hasSynonymTypes(toBeConverted)) {
+//				final JvmTypeReference findCompatibleSynonymType = synonymTypesProvider.findCompatibleSynonymType(
+//						toBeConverted, declaringType);
+//				return findCompatibleSynonymType != null ? findCompatibleSynonymType : toBeConverted;
+//			}
+//		}
+//		return toBeConverted;
+//	}
 
 	protected JvmTypeReference _typeForIdentifiable(XSwitchExpression object, boolean rawType) {
 		if (object.getLocalVarName() != null) {
@@ -838,7 +1039,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 					return getTypeReferences().getTypeForName(Object.class, parameter);
 				}
 				int indexOf = closure.getFormalParameters().indexOf(parameter);
-				JvmOperation operation = functionConversion.findSingleMethod(type);
+				JvmOperation operation = closures.findImplementingOperation(type, parameter.eResource());
 				if (operation != null && indexOf < operation.getParameters().size()) {
 					JvmFormalParameter declaredParam = getParam(operation, indexOf);
 					if (rawType) {

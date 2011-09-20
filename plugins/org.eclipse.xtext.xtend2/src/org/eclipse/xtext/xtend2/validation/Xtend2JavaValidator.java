@@ -325,6 +325,7 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 		protected Signature(JvmOperation operation) {
 			this.operation = operation;
 			if (operation != null) {
+				erasureParameterTypes = Lists.newArrayListWithCapacity(operation.getParameters().size());
 				for(JvmFormalParameter parameter: operation.getParameters()) {
 					List<JvmType> rawTypes = rawTypeHelper.getAllRawTypes(parameter.getParameterType(), operation.eResource());
 					if (rawTypes.isEmpty()) {

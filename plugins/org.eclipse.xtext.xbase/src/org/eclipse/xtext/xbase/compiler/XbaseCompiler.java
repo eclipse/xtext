@@ -37,7 +37,7 @@ import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.typing.FunctionConversion;
+import org.eclipse.xtext.xbase.typing.Closures;
 
 import com.google.inject.Inject;
 
@@ -461,7 +461,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	@Inject
-	private FunctionConversion functionConversion;
+	private Closures closures;
 	
 	@Inject
 	private TypeArgumentContextProvider ctxProvider;
@@ -482,7 +482,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.increaseIndentation().increaseIndentation();
 		try {
 			b.openScope();
-			JvmOperation operation = functionConversion.findSingleMethod(type);
+			JvmOperation operation = closures.findImplementingOperation(type, closure.eResource());
 			final JvmTypeReference returnType = context.resolve(operation.getReturnType());
 			b.append("\npublic ");
 			serialize(returnType, closure, b);

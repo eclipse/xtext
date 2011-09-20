@@ -11,6 +11,7 @@ import static com.google.common.collect.Lists.*;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -33,6 +34,22 @@ public class XbaseWithAnnotationsTypeProvider extends XbaseTypeProvider {
 	
 	@Inject
 	private XAnnotationUtil annotationUtil;
+	
+	@Override
+	protected JvmTypeReference expectedTypeDispatcherInvoke(EObject container, EReference reference, int index,
+			boolean rawType) {
+		if (container instanceof XAnnotation) {
+			return _expectedType((XAnnotation)container, reference, index, rawType);
+		} else if (container instanceof XAnnotationElementValueBinaryOperation) {
+			return _expectedType((XAnnotationElementValueBinaryOperation)container, reference, index, rawType);
+		} else if (container instanceof XAnnotationElementValuePair) {
+			return _expectedType((XAnnotationElementValuePair)container, reference, index, rawType);
+		} else if (container instanceof XAnnotationValueArray) {
+			return _expectedType((XAnnotationValueArray)container, reference, index, rawType);
+		} else {
+			return super.expectedTypeDispatcherInvoke(container, reference, index, rawType);
+		}
+	}
 	
 	protected JvmTypeReference _expectedType(XAnnotation annotation, EReference reference, int index,
 			boolean rawType) {
@@ -66,6 +83,19 @@ public class XbaseWithAnnotationsTypeProvider extends XbaseTypeProvider {
 	protected JvmTypeReference _expectedType(XAnnotationValueArray array, EReference reference, int index,
 			boolean rawType) {
 		return getExpectedType(array, rawType);
+	}
+	
+	@Override
+	protected JvmTypeReference typeDispatcherInvoke(XExpression expression, boolean rawType) {
+		if (expression instanceof XAnnotation) {
+			return _type((XAnnotation)expression, rawType);
+		} else if (expression instanceof XAnnotationElementValueBinaryOperation) {
+			return _type((XAnnotationElementValueBinaryOperation)expression, rawType);
+		} else if (expression instanceof XAnnotationValueArray) {
+			return _type((XAnnotationValueArray)expression, rawType);
+		} else {
+			return super.typeDispatcherInvoke(expression, rawType);
+		}
 	}
 
 	protected JvmTypeReference _type(XAnnotation annotation, boolean rawType) {

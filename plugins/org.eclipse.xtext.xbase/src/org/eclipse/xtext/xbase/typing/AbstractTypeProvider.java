@@ -152,6 +152,9 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		}
 		
 		protected boolean isOrContainsVoid(JvmTypeReference ref) {
+			if (ref instanceof JvmSpecializedTypeReference) {
+				return isOrContainsVoid(((JvmSpecializedTypeReference) ref).getEquivalent());
+			}
 			return (ref != null && ref.getIdentifier() != null && ref.getIdentifier().contains("Void"));
 		}
 		
@@ -170,6 +173,12 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 			if (rawType)
 				return true;
 			JvmParameterizedTypeReference parameterized = (JvmParameterizedTypeReference) reference;
+			JvmType type = parameterized.getType();
+			if (type instanceof JvmTypeParameterDeclarator) {
+				if (parameterized.getArguments().size() != ((JvmTypeParameterDeclarator) type).getTypeParameters().size()) {
+					return false;
+				}
+			}
 			for(JvmTypeReference argument: parameterized.getArguments()) {
 				if (!isResolved(argument, declarator, rawType))
 					return false;
@@ -221,8 +230,8 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		return param.getDeclarator() == declarator;
 	}
 	
-	private final PolymorphicDispatcher<JvmTypeReference> typeDispatcher = PolymorphicDispatcher.createForSingleTarget(
-			"_type", 2, 2, this);
+//	private final PolymorphicDispatcher<JvmTypeReference> typeDispatcher = PolymorphicDispatcher.createForSingleTarget(
+//			"_type", 2, 2, this);
 
 	protected JvmTypeReference _type(XExpression expression, boolean rawType) {
 		throw new IllegalArgumentException("Type computation is not implemented for " + expression);
@@ -232,7 +241,7 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 
 		@Override
 		protected JvmTypeReference doComputation(XExpression t, boolean rawType) {
-			return typeDispatcher.invoke(t, rawType);
+			return typeDispatcherInvoke(t, rawType);
 		}
 
 		@Override
@@ -240,6 +249,10 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 			return handleCyclicGetType(t, rawType);
 		}
 	};
+	
+	protected JvmTypeReference typeDispatcherInvoke(XExpression expression, boolean rawType) {
+		return _type(expression, rawType);
+	}
 
 	protected String getDebugIndentation(boolean rawType) {
 		int size = getType.getOngoingComputationsSize(rawType) + getExpectedType.getOngoingComputationsSize(rawType) + getTypeForIdentifiable.getOngoingComputationsSize(rawType);
@@ -282,8 +295,8 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		return null;
 	}
 
-	private final PolymorphicDispatcher<JvmTypeReference> expectedTypeDispatcher = PolymorphicDispatcher
-			.createForSingleTarget("_expectedType", 4, 4, this);
+//	private final PolymorphicDispatcher<JvmTypeReference> expectedTypeDispatcher = PolymorphicDispatcher
+//			.createForSingleTarget("_expectedType", 4, 4, this);
 
 	protected JvmTypeReference _expectedType(EObject container, EReference reference, int index, boolean rawType) {
 		return null;
@@ -296,7 +309,7 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 			Triple<EObject, EReference, Integer> triple = getContainingInfo(t);
 			if (triple == null)
 				return null;
-			return expectedTypeDispatcher.invoke(triple.getFirst(), triple.getSecond(), triple.getThird(), rawType);
+			return expectedTypeDispatcherInvoke(triple.getFirst(), triple.getSecond(), triple.getThird(), rawType);
 		}
 
 		@Override
@@ -304,6 +317,10 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 			return handleCycleGetExpectedType(t, rawType);
 		}
 	};
+	
+	protected JvmTypeReference expectedTypeDispatcherInvoke(EObject container, EReference reference, int index, boolean rawType) {
+		return _expectedType(container, reference, index, rawType);
+	}
 	
 	public JvmTypeReference getExpectedType(final XExpression expression) {
 		return getExpectedType(expression, false);
@@ -331,9 +348,9 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		Triple<EObject, EReference, Integer> triple = Tuples.create(container, containmentReference, index);
 		return triple;
 	}
-	
-	private final PolymorphicDispatcher<JvmTypeReference> typeForIdentifiableDispatcher = PolymorphicDispatcher
-			.createForSingleTarget("_typeForIdentifiable", 2, 2, this);
+
+//	private final PolymorphicDispatcher<JvmTypeReference> typeForIdentifiableDispatcher = PolymorphicDispatcher
+//			.createForSingleTarget("_typeForIdentifiable", 2, 2, this);
 
 	protected JvmTypeReference _typeForIdentifiable(JvmIdentifiableElement identifiable, boolean rawType) {
 		throw new IllegalArgumentException("Type computation is not implemented for " + identifiable);
@@ -343,7 +360,7 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 
 		@Override
 		protected JvmTypeReference doComputation(JvmIdentifiableElement t, boolean rawType) {
-			return typeForIdentifiableDispatcher.invoke(t, rawType);
+			return typeForIdentifiableDispatcherInvoke(t, rawType);
 		}
 
 		@Override
@@ -352,6 +369,10 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		}
 	};
 
+	protected JvmTypeReference typeForIdentifiableDispatcherInvoke(JvmIdentifiableElement identifiable, boolean rawType) {
+		return _typeForIdentifiable(identifiable, rawType);
+	}
+	
 	public JvmTypeReference getTypeForIdentifiable(JvmIdentifiableElement identifiableElement) {
 		return getTypeForIdentifiable(identifiableElement, false);
 	}

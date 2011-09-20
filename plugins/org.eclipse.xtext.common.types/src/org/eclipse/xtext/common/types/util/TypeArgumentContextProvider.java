@@ -21,16 +21,18 @@ import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
+import org.eclipse.xtext.common.types.JvmCompoundTypeReference;
 import org.eclipse.xtext.common.types.JvmConstraintOwner;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
-import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
+import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -259,7 +261,7 @@ public class TypeArgumentContextProvider {
 			map.putAll(Multimaps.forMap(resolveReceiver(receiverType)));
 		}
 		if (!op.getTypeParameters().isEmpty() || map.isEmpty())
-			map.putAll(Multimaps.forMap(resolveInferredMethodTypeArgContext(op, op.getReturnType(), expectedReturnType, actualArgumentTypes)));
+			map.putAll(Multimaps.forMap(resolveInferredMethodTypeArgContext(op, op.getReturnType(), expectedReturnType, true, actualArgumentTypes)));
 		
 		Map<JvmTypeParameter, ResolveInfo> result = internalFindBestMatches(map);
 		return get(result);
@@ -329,6 +331,7 @@ public class TypeArgumentContextProvider {
 						JvmTypeReference commonVarArgType = conformanceComputer.getCommonSuperType(varArgTypes);
 						ResolveInfo info = new ResolveInfo(commonVarArgType);
 						info.superTypeAllowed = true;
+						info.preferSubtypes = true;
 						resolve(componentType, info, map, false);
 					} else if (!ignoreEmptyVarArgs) {
 						JvmTypeReference information = computeVarArgTypeInformation(feature, componentType.getType());
@@ -416,7 +419,7 @@ public class TypeArgumentContextProvider {
 				return isBetter;
 			if (isBetter.preferSubtypes && this.conformanceComputer.isConformant(isBetter.reference, current.reference) && !(current.reference instanceof JvmWildcardTypeReference))
 				return current;
-			if (current.superTypeAllowed && isBetter.superTypeAllowed)
+			if (current.superTypeAllowed && isBetter.superTypeAllowed && !(current.preferSubtypes))
 				return current.copyIfDifferent(conformanceComputer.getCommonSuperType(Lists.newArrayList(current.reference, isBetter.reference)));
 			if (current.superTypeAllowed && this.conformanceComputer.isConformant(isBetter.reference, current.reference))
 				return isBetter;
@@ -451,9 +454,9 @@ public class TypeArgumentContextProvider {
 	protected void internalComputeContext(JvmTypeReference contextRef, Multimap<JvmTypeParameter, ResolveInfo> context, Set<JvmType> computing) {
 		if (contextRef == null)
 			return;
-		if (contextRef instanceof JvmMultiTypeReference) {
-			JvmMultiTypeReference multiType = (JvmMultiTypeReference) contextRef;
-			for(JvmTypeReference typeReference: multiType.getReferences()) {
+		if (contextRef instanceof JvmCompoundTypeReference) {
+			JvmCompoundTypeReference compoundType = (JvmCompoundTypeReference) contextRef;
+			for(JvmTypeReference typeReference: compoundType.getReferences()) {
 				internalComputeContext(typeReference, context, computing);
 			}
 			return;
@@ -525,6 +528,8 @@ public class TypeArgumentContextProvider {
 			information = information.copyIfDifferent(primitives.asWrapperTypeIfPrimitive(information.reference));
 		else
 			information = new ResolveInfo(null);
+		if (declaration == information.reference)
+			return;
 		if (typeParameter != null && information.reference != null) {
 			if (isValidParameter(typeParameter, information.reference, returnTypeContext)) {
 				if (!containsEntry(existing, typeParameter, information)) {
