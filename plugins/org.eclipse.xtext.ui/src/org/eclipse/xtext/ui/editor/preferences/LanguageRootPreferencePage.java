@@ -27,6 +27,9 @@ public class LanguageRootPreferencePage extends AbstractPreferencePage {
 		addField(new LabelFieldEditor(Messages.LanguageRootPreferencePage_generalSettings, getFieldEditorParent()));
 	}
 
+	/**
+	 * @since 2.1
+	 */
 	@Override
 	protected IPreferenceStore doGetPreferenceStore() {
 		return preferenceStoreAccess.getWritablePreferenceStore();

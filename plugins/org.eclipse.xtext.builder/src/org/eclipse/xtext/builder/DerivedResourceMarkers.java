@@ -17,7 +17,6 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.xtext.Constants;
-import org.eclipse.xtext.generator.IGenerator;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
