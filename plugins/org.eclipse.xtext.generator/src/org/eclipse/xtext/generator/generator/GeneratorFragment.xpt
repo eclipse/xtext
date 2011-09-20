@@ -25,6 +25,16 @@
             class="«executableExtensionFactory()»:org.eclipse.xtext.builder.IXtextBuilderParticipant">
       </participant>
    </extension>
+   <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            category="«name»"
+            class="«executableExtensionFactory()»:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+            id="«name».builder"
+            name="Builder">
+            <keywordReference id="«name.toJavaPackage() + ".ui.keyword_"+name.toSimpleName()»"/>
+        </page>
+    </extension>
 «ENDDEFINE»
 
 «DEFINE addToStandaloneSetup(Boolean generatorStub, Boolean mwe, Boolean javaMain) FOR Grammar»«ENDDEFINE»

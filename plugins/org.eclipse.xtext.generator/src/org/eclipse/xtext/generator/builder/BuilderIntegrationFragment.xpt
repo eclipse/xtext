@@ -21,16 +21,6 @@
 «ENDDEFINE»
 
 «DEFINE addToPluginXmlUi FOR Grammar-»
-	<extension
-            point="org.eclipse.ui.preferencePages">
-        <page
-            category="«name»"
-            class="«executableExtensionFactory()»:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
-            id="«name».builder"
-            name="Builder">
-            <keywordReference id="«name.toJavaPackage() + ".ui.keyword_"+name.toSimpleName()»"/>
-        </page>
-    </extension>
 «ENDDEFINE»
 
 «DEFINE addToStandaloneSetup FOR Grammar-»
