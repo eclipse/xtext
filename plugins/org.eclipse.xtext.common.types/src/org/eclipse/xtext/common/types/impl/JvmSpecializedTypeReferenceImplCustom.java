@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.ITypeReferenceVisitor;
@@ -37,4 +38,19 @@ public class JvmSpecializedTypeReferenceImplCustom extends JvmSpecializedTypeRef
 		return result;
 	}
 	
+	@Override
+	public String toString() {
+		StringBuilder result = new StringBuilder(eClass().getName());
+		result.append(": ");
+		if (equivalent == null) {
+			result.append(" equivalent is not yet computed");
+		} else if (equivalent.eIsProxy()) {
+			result.append(" (equivalent uri: ");
+			result.append(((InternalEObject) equivalent).eProxyURI());
+			result.append(')');
+		} else {
+			result.append(equivalent.toString());
+		}
+		return result.toString();
+	}
 }
