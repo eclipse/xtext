@@ -21,10 +21,8 @@ import org.eclipse.jface.text.TextUtilities;
  * <p>The implementation was heavily adapted from <code>org.eclipse.jdt.internal.ui.text.java.PartitionDoubleClickSelector</code></p>.
  * 
  * @see FixedCharCountPartitionDoubleClickSelector
+ * @see "org.eclipse.jdt.internal.ui.text.java.PartitionDoubleClickSelector"
  * @author Sebastian Zarnekow - Initial contribution and API
- */
-/*
- * see also org.eclipse.jdt.internal.ui.text.java.PartitionDoubleClickSelector
  */
 public abstract class AbstractPartitionDoubleClickSelector extends AbstractWordAwareDoubleClickStrategy {
 

@@ -33,9 +33,14 @@
 				<exclude name="**/packrat/**" />
 			</fileset>
 
-			<tag name="generated" description="Generated" />
-			<tag name="model" description="Model" />
-			<tag name="ordered" description="Ordered" />
+			<tag name="generated" description="EMF generated code" />
+			<tag name="model" description="EMF model element" />
+			<tag name="ordered" description="EMF ordered" />
+			<tag name="noimplement" description="This interface is not intended to be implemented by clients." />
+			<tag name="noextend" description="This class is not intended to be subclassed by clients." />
+			<tag name="noinstantiate" description="This class is not intended to be instantiated by clients." />
+			<tag name="noreference" description="This method is not intended to be referenced by clients." />
+			<tag name="nooverride" description="This method is not intended to be extended (re-implement with a call to the overridden parent) or re-implemented (with no call to the overridden parent) by clients." />
 		</javadoc>
 		<!-- Compress the output javadoc in a zip file -->
 		<zip destfile="${output}/javadoc.zip" basedir="${output}">
