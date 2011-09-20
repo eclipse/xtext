@@ -32,7 +32,7 @@ import com.google.inject.Inject;
 import com.ibm.icu.text.MessageFormat;
 
 /**
- * Convenience class to create refactoring issues with an {@link RefactoringStatusContext}. 
+ * Convenience class to create refactoring issues with an {@link RefactoringStatusContext}.
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
@@ -46,7 +46,7 @@ public class StatusWrapper {
 
 	@Inject
 	private ILocationInFileProvider locationInFileProvider;
-	
+
 	private PolymorphicDispatcher<String> toString = PolymorphicDispatcher.createForSingleTarget("_toString", this);
 
 	protected RefactoringStatusContext createContext(EObject eObject) {
@@ -59,7 +59,7 @@ public class StatusWrapper {
 
 	protected RefactoringStatusContext createContext(EObject eObject, ITextRegion textRegion) {
 		IRegion region = null;
-		if(textRegion != null)
+		if (textRegion != null)
 			region = new Region(textRegion.getOffset(), textRegion.getLength());
 		IFile file = projectUtil.findFileStorage(EcoreUtil2.getNormalizedURI(eObject), false);
 		return new FileStatusContext(file, region);
@@ -103,15 +103,15 @@ public class StatusWrapper {
 		return status;
 	}
 
-	protected String format(String message, Object...elements) {
+	protected String format(String message, Object... elements) {
 		String[] strings = toArray(transform(newArrayList(elements), new Function<Object, String>() {
 			public String apply(Object from) {
 				return toString.invoke(from);
 			}
 		}), String.class);
-		return MessageFormat.format(message, strings);
+		return MessageFormat.format(message, (Object[]) strings);
 	}
-	
+
 	public void add(int severity, String message, URI uri, ResourceSet resourceSet) {
 		status.addError(format(message, uri), createContext(uri, resourceSet));
 	}
@@ -133,7 +133,7 @@ public class StatusWrapper {
 		status.addError(formatted + ".\nSee log for details.");
 		log.error(formatted, exc);
 	}
-	
+
 	public void add(int severity, String message, Object... params) {
 		status.addError(format(message, params));
 	}
@@ -141,9 +141,9 @@ public class StatusWrapper {
 	public void merge(RefactoringStatus status) {
 		this.status.merge(status);
 	}
-	
+
 	public void merge(StatusWrapper status) {
 		this.status.merge(status.getRefactoringStatus());
 	}
-	
+
 }

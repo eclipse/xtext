@@ -18,12 +18,13 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 
 import com.google.inject.Inject;
 
 /**
- * Generic rename strategy for EMF resources. For {@link XtextResources} you should rather use the
+ * Generic rename strategy for EMF resources. For {@link XtextResource}s you should rather use the
  * {@link DefaultRenameStrategy}.
  * 
  * @author Jan Koehnlein - Initial contribution and API

@@ -73,7 +73,7 @@ import com.google.inject.Inject;
 /**
  * Hover which shows annotation and quick fixes. 
  * 
- * Clone from JDTs {@link org.eclipse.jdt.internal.ui.text.java.hover.AbstractAnnotationHover}. 
+ * Clone from JDTs  org.eclipse.jdt.internal.ui.text.java.hover.AbstractAnnotationHover. 
  *
  * @author Christoph Kulla
  */

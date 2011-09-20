@@ -13,6 +13,8 @@ import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.RGB;
 
 /**
+ * Simple bean which is used to share text style information between components.
+ * 
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
@@ -44,8 +46,8 @@ public class TextStyle {
 	 * @param color
 	 *            the color to set
 	 */
-	public void setColor(RGB rgb) {
-		this.color = rgb;
+	public void setColor(RGB color) {
+		this.color = color;
 	}
 
 	/**
@@ -79,18 +81,22 @@ public class TextStyle {
 	}
 
 	/**
-	 * @return
+	 * @return SWT style constant (default is SWT.NORMAL)
 	 */
 	public int getStyle() {
 		return style;
 	}
 
+	/**
+	 * creates a new {@link TextStyle} instance and copies all the source fields
+	 */
 	public TextStyle copy() {
 		return new TextStyle(this);
 	}
 
 	/**
-	 * @param style
+	 * @param style SWT style constant 
+	 * @see SWT
 	 */
 	public void setStyle(int style) {
 		this.style = style;

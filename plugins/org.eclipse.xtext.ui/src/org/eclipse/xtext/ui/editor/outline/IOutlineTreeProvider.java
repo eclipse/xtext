@@ -14,7 +14,7 @@ import com.google.inject.ImplementedBy;
 
 /**
  * Creates outline nodes. Only called from within {@link org.eclipse.xtext.util.concurrent.IUnitOfWork}s where the
- * {@link Resource} can be read safely.
+ * {@link IXtextDocument} can be read safely.
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */

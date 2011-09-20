@@ -12,7 +12,7 @@ import org.eclipse.core.runtime.jobs.ISchedulingRule;
 
 /**
  * Scheduling rule factory for asynchronous operations. Mostly copied from
- * {@link org.eclipse.debug.internal.ui.viewers.AsynchronousSchedulingRuleFactory}.
+ * org.eclipse.debug.internal.ui.viewers.AsynchronousSchedulingRuleFactory.
  * 
  * @author Michael Clay - Initial contribution and API
  */

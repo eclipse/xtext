@@ -143,7 +143,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 		// configure ws settings link
 		link = new Link(projectSettingsParent, SWT.NONE);
 		link.setFont(projectSettingsParent.getFont());
-		link.setText("<A>" + Messages.AbstractPreferencePage_configureWorkspaceSettings + "</A>"); //$NON-NLS-1$//$NON-NLS-3$
+		link.setText("<A>" + Messages.AbstractPreferencePage_configureWorkspaceSettings + "</A>"); //$NON-NLS-1$
 		link.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {

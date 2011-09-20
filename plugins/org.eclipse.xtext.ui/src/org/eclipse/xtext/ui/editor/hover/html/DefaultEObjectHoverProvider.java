@@ -462,7 +462,7 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 	 * @return the style sheet, or <code>null</code> if unable to load
 	 */
 	protected String loadStyleSheet() {
-		URL styleSheetURL = Activator.getDefault().getBundle().getEntry(styleSheetFileName); //$NON-NLS-1$
+		URL styleSheetURL = Activator.getDefault().getBundle().getEntry(styleSheetFileName); 
 		if (styleSheetURL != null) {
 			BufferedReader reader = null;
 			try {

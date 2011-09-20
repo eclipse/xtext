@@ -18,7 +18,7 @@ import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
 import com.google.inject.ImplementedBy;
 
 /**
- * Aggregates document updates as {@link Change Changes} or {@link TextEdits}. Clients can report issues to the
+ * Aggregates document updates as {@link Change Changes} or {@link TextEdit}s. Clients can report issues to the
  * refactoring status.
  * 
  * @author Jan Koehnlein - Initial contribution and API

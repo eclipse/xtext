@@ -44,21 +44,21 @@ public class XtextElementLinks {
 		/**
 		 * Handle normal kind of link to given target.
 		 *
-		 * @param target the target to show
+		 * @param uri the target to show
 		 */
 		void handleInlineXtextdocLink(org.eclipse.emf.common.util.URI  uri);
 
 		/**
 		 * Handle link to given target to open in Xtextdoc view.
 		 *
-		 * @param target the target to show
+		 * @param uri the target to show
 		 */
 		void handleXtextdocViewLink(org.eclipse.emf.common.util.URI  uri);
 
 		/**
 		 * Handle link to given target to open its declaration
 		 *
-		 * @param target the target to show
+		 * @param uri the target to show
 		 */
 		void handleDeclarationLink(org.eclipse.emf.common.util.URI  uri);
 

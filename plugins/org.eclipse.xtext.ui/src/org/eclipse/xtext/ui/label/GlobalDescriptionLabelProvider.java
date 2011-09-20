@@ -21,7 +21,7 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
 
 /**
- * Delegates to the {@link IDescriptionLabelProvider} looked up in the {@link IResourceServiceProvider.Registry}
+ * Delegates to the {@link DefaultDescriptionLabelProvider} looked up in the {@link org.eclipse.xtext.resource.IResourceServiceProvider.Registry}
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */

@@ -431,8 +431,8 @@ public class XtextEditor extends TextEditor {
 	protected ProjectionSupport installProjectionSupport(ProjectionViewer projectionViewer) {
 		ProjectionSupport projectionSupport = new ProjectionSupport(projectionViewer, getAnnotationAccess(),
 				getSharedColors());
-		projectionSupport.addSummarizableAnnotationType(WARNING_ANNOTATION_TYPE); //$NON-NLS-1$
-		projectionSupport.addSummarizableAnnotationType(ERROR_ANNOTATION_TYPE); //$NON-NLS-1$
+		projectionSupport.addSummarizableAnnotationType(WARNING_ANNOTATION_TYPE); 
+		projectionSupport.addSummarizableAnnotationType(ERROR_ANNOTATION_TYPE); 
 		projectionSupport.setAnnotationPainterDrawingStrategy(projectionAnnotationDrawingStrategy);
 		projectionSupport.install();
 		return projectionSupport;

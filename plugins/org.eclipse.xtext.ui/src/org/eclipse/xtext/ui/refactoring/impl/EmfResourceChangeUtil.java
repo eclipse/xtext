@@ -12,6 +12,7 @@ import java.io.IOException;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.text.edits.ReplaceEdit;
+import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 

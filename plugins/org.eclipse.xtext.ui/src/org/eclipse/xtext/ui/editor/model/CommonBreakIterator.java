@@ -14,6 +14,8 @@ import com.ibm.icu.text.BreakIterator;
 
 /**
  * This class was copied from <code>org.eclipse.jdt.internal.ui.text.JavaBreakIterator</code>.
+ */
+/*
  * @see org.eclipse.jdt.internal.ui.text.JavaBreakIterator
  */
 public class CommonBreakIterator extends BreakIterator {
@@ -30,11 +32,11 @@ public class CommonBreakIterator extends BreakIterator {
 		}
 
 		/**
-		 * Returns <code>true</code> if this run consumes <code>ch</code>,
-		 * <code>false</code> otherwise. If <code>true</code> is returned,
-		 * the length of the receiver is adjusted accordingly.
-		 *
-		 * @param ch the character to test
+		 * Returns <code>true</code> if this run consumes <code>ch</code>, <code>false</code> otherwise. If
+		 * <code>true</code> is returned, the length of the receiver is adjusted accordingly.
+		 * 
+		 * @param ch
+		 *            the character to test
 		 * @return <code>true</code> if <code>ch</code> was consumed
 		 */
 		protected boolean consume(char ch) {
@@ -46,10 +48,11 @@ public class CommonBreakIterator extends BreakIterator {
 		}
 
 		/**
-		 * Whether this run accepts that character; does not update state. Called
-		 * from the default implementation of <code>consume</code>.
-		 *
-		 * @param ch the character to test
+		 * Whether this run accepts that character; does not update state. Called from the default implementation of
+		 * <code>consume</code>.
+		 * 
+		 * @param ch
+		 *            the character to test
 		 * @return <code>true</code> if <code>ch</code> is accepted
 		 */
 		protected abstract boolean isValid(char ch);
@@ -58,7 +61,7 @@ public class CommonBreakIterator extends BreakIterator {
 		 * Resets this run to the initial state.
 		 */
 		protected void init() {
-			length= 0;
+			length = 0;
 		}
 	}
 
@@ -72,8 +75,8 @@ public class CommonBreakIterator extends BreakIterator {
 	protected static class LineDelimiter extends Run {
 		/** State: INIT -> delimiter -> EXIT. */
 		private char fState;
-		private static final char INIT= '\0';
-		private static final char EXIT= '\1';
+		private static final char INIT = '\0';
+		private static final char EXIT = '\1';
 
 		/*
 		 * @see org.eclipse.xtext.ui.editor.model.CommonBreakIterator.Run#init()
@@ -81,7 +84,7 @@ public class CommonBreakIterator extends BreakIterator {
 		@Override
 		protected void init() {
 			super.init();
-			fState= INIT;
+			fState = INIT;
 		}
 
 		/*
@@ -93,11 +96,11 @@ public class CommonBreakIterator extends BreakIterator {
 				return false;
 
 			if (fState == INIT) {
-				fState= ch;
+				fState = ch;
 				length++;
 				return true;
 			} else if (fState != ch) {
-				fState= EXIT;
+				fState = EXIT;
 				length++;
 				return true;
 			} else {
@@ -123,27 +126,27 @@ public class CommonBreakIterator extends BreakIterator {
 
 	protected static class CamelCaseIdentifier extends Run {
 		/* states */
-		private static final int S_INIT= 0;
-		private static final int S_LOWER= 1;
-		private static final int S_ONE_CAP= 2;
-		private static final int S_ALL_CAPS= 3;
-		private static final int S_EXIT= 4;
-		private static final int S_EXIT_MINUS_ONE= 5;
+		private static final int S_INIT = 0;
+		private static final int S_LOWER = 1;
+		private static final int S_ONE_CAP = 2;
+		private static final int S_ALL_CAPS = 3;
+		private static final int S_EXIT = 4;
+		private static final int S_EXIT_MINUS_ONE = 5;
 
 		/* character types */
-		private static final int K_INVALID= 0;
-		private static final int K_LOWER= 1;
-		private static final int K_UPPER= 2;
-		private static final int K_OTHER= 3;
+		private static final int K_INVALID = 0;
+		private static final int K_LOWER = 1;
+		private static final int K_UPPER = 2;
+		private static final int K_OTHER = 3;
 
 		private int fState;
 
-		private final static int[][] MATRIX= new int[][] {
+		private final static int[][] MATRIX = new int[][] {
 				// K_INVALID, K_LOWER,           K_UPPER,    K_OTHER
-				{  S_EXIT,    S_LOWER,           S_ONE_CAP,  S_LOWER }, // S_INIT
-				{  S_EXIT,    S_LOWER,           S_EXIT,     S_LOWER }, // S_LOWER
-				{  S_EXIT,    S_LOWER,           S_ALL_CAPS, S_LOWER }, // S_ONE_CAP
-				{  S_EXIT,    S_EXIT_MINUS_ONE,  S_ALL_CAPS, S_LOWER }, // S_ALL_CAPS
+				{ S_EXIT, S_LOWER, S_ONE_CAP, S_LOWER }, // S_INIT
+				{ S_EXIT, S_LOWER, S_EXIT, S_LOWER }, // S_LOWER
+				{ S_EXIT, S_LOWER, S_ALL_CAPS, S_LOWER }, // S_ONE_CAP
+				{ S_EXIT, S_EXIT_MINUS_ONE, S_ALL_CAPS, S_LOWER }, // S_ALL_CAPS
 		};
 
 		/*
@@ -152,7 +155,7 @@ public class CommonBreakIterator extends BreakIterator {
 		@Override
 		protected void init() {
 			super.init();
-			fState= S_INIT;
+			fState = S_INIT;
 		}
 
 		/*
@@ -160,8 +163,8 @@ public class CommonBreakIterator extends BreakIterator {
 		 */
 		@Override
 		protected boolean consume(char ch) {
-			int kind= getKind(ch);
-			fState= MATRIX[fState][kind];
+			int kind = getKind(ch);
+			fState = MATRIX[fState][kind];
 			switch (fState) {
 				case S_LOWER:
 				case S_ONE_CAP:
@@ -181,8 +184,9 @@ public class CommonBreakIterator extends BreakIterator {
 
 		/**
 		 * Determines the kind of a character.
-		 *
-		 * @param ch the character to test
+		 * 
+		 * @param ch
+		 *            the character to test
 		 */
 		protected int getKind(char ch) {
 			if (Character.isUpperCase(ch))
@@ -212,16 +216,19 @@ public class CommonBreakIterator extends BreakIterator {
 			return !Character.isWhitespace(ch) && !Character.isJavaIdentifierPart(ch);
 		}
 	}
-	
+
 	/**
 	 * A <code>CharSequence</code> based implementation of <code>CharacterIterator</code>.
 	 * 
 	 * Copied from org.eclipse.jdt.internal.ui.text.SequenceCharacterIterator.
+	 * 
+	 */
+	/*
 	 * @see org.eclipse.jdt.internal.ui.text.SequenceCharacterIterator
 	 */
 	protected class SequenceCharacterIterator implements CharacterIterator {
 
-		private int fIndex= -1;
+		private int fIndex = -1;
 		private final CharSequence fSequence;
 		private final int fFirst;
 		private final int fLast;
@@ -233,8 +240,9 @@ public class CommonBreakIterator extends BreakIterator {
 
 		/**
 		 * Creates an iterator for the entire sequence.
-		 *
-		 * @param sequence the sequence backing this iterator
+		 * 
+		 * @param sequence
+		 *            the sequence backing this iterator
 		 */
 		public SequenceCharacterIterator(CharSequence sequence) {
 			this(sequence, 0);
@@ -242,10 +250,13 @@ public class CommonBreakIterator extends BreakIterator {
 
 		/**
 		 * Creates an iterator.
-		 *
-		 * @param sequence the sequence backing this iterator
-		 * @param first the first character to consider
-		 * @throws IllegalArgumentException if the indices are out of bounds
+		 * 
+		 * @param sequence
+		 *            the sequence backing this iterator
+		 * @param first
+		 *            the first character to consider
+		 * @throws IllegalArgumentException
+		 *             if the indices are out of bounds
 		 */
 		public SequenceCharacterIterator(CharSequence sequence, int first) throws IllegalArgumentException {
 			this(sequence, first, sequence.length());
@@ -253,11 +264,15 @@ public class CommonBreakIterator extends BreakIterator {
 
 		/**
 		 * Creates an iterator.
-		 *
-		 * @param sequence the sequence backing this iterator
-		 * @param first the first character to consider
-		 * @param last the last character index to consider
-		 * @throws IllegalArgumentException if the indices are out of bounds
+		 * 
+		 * @param sequence
+		 *            the sequence backing this iterator
+		 * @param first
+		 *            the first character to consider
+		 * @param last
+		 *            the last character index to consider
+		 * @throws IllegalArgumentException
+		 *             if the indices are out of bounds
 		 */
 		public SequenceCharacterIterator(CharSequence sequence, int first, int last) throws IllegalArgumentException {
 			if (sequence == null)
@@ -266,10 +281,10 @@ public class CommonBreakIterator extends BreakIterator {
 				throw new IllegalArgumentException();
 			if (last > sequence.length())
 				throw new IllegalArgumentException();
-			fSequence= sequence;
-			fFirst= first;
-			fLast= last;
-			fIndex= first;
+			fSequence = sequence;
+			fFirst = first;
+			fLast = last;
+			fIndex = first;
 			invariant();
 		}
 
@@ -323,7 +338,7 @@ public class CommonBreakIterator extends BreakIterator {
 		 */
 		public char setIndex(int position) {
 			if (position >= getBeginIndex() && position <= getEndIndex())
-				fIndex= position;
+				fIndex = position;
 			else
 				throw new IllegalArgumentException();
 
@@ -365,7 +380,6 @@ public class CommonBreakIterator extends BreakIterator {
 		}
 	}
 
-
 	protected Run whitespace;
 	protected Run delimiter;
 	protected Run identifier;
@@ -382,15 +396,15 @@ public class CommonBreakIterator extends BreakIterator {
 	 * Creates a new break iterator.
 	 */
 	public CommonBreakIterator(boolean camelCase) {
-		fIterator= BreakIterator.getWordInstance();
-		fIndex= fIterator.current();
-		whitespace= new Whitespace();
-		delimiter= new LineDelimiter();
+		fIterator = BreakIterator.getWordInstance();
+		fIndex = fIterator.current();
+		whitespace = new Whitespace();
+		delimiter = new LineDelimiter();
 		if (camelCase)
-			identifier= new CamelCaseIdentifier();
+			identifier = new CamelCaseIdentifier();
 		else
 			identifier = new Identifier();
-		other= new Other();
+		other = new Other();
 	}
 
 	/*
@@ -406,7 +420,7 @@ public class CommonBreakIterator extends BreakIterator {
 	 */
 	@Override
 	public int first() {
-		fIndex= fIterator.first();
+		fIndex = fIterator.first();
 		return fIndex;
 	}
 
@@ -419,7 +433,7 @@ public class CommonBreakIterator extends BreakIterator {
 		if (offset == getText().getEndIndex())
 			return DONE;
 
-		int next= fIterator.following(offset);
+		int next = fIterator.following(offset);
 		if (next == DONE)
 			return DONE;
 
@@ -427,25 +441,27 @@ public class CommonBreakIterator extends BreakIterator {
 		// Math.min(offset + run.length, next) does not work
 		// since BreakIterator.getWordInstance considers _ as boundaries
 		// seems to work fine, however
-		Run run= consumeRun(offset);
+		Run run = consumeRun(offset);
 		return offset + run.length;
 
 	}
 
 	/**
 	 * Consumes a run of characters at the limits of which we introduce a break.
-	 * @param offset the offset to start at
+	 * 
+	 * @param offset
+	 *            the offset to start at
 	 * @return the run that was consumed
 	 */
 	protected Run consumeRun(int offset) {
 		// assert offset < length
 
-		char ch= fText.charAt(offset);
-		int length= fText.length();
-		Run run= getRun(ch);
+		char ch = fText.charAt(offset);
+		int length = fText.length();
+		Run run = getRun(ch);
 		while (run.consume(ch) && offset < length - 1) {
 			offset++;
-			ch= fText.charAt(offset);
+			ch = fText.charAt(offset);
 		}
 
 		return run;
@@ -453,20 +469,21 @@ public class CommonBreakIterator extends BreakIterator {
 
 	/**
 	 * Returns a run based on a character.
-	 *
-	 * @param ch the character to test
+	 * 
+	 * @param ch
+	 *            the character to test
 	 * @return the correct character given <code>ch</code>
 	 */
 	protected Run getRun(char ch) {
 		Run run;
 		if (whitespace.isValid(ch))
-			run= whitespace;
+			run = whitespace;
 		else if (delimiter.isValid(ch))
-			run= delimiter;
+			run = delimiter;
 		else if (identifier.isValid(ch))
-			run= identifier;
+			run = identifier;
 		else if (other.isValid(ch))
-			run= other;
+			run = other;
 		else {
 			Assert.isTrue(false);
 			return null;
@@ -489,10 +506,10 @@ public class CommonBreakIterator extends BreakIterator {
 	 */
 	@Override
 	public boolean isBoundary(int offset) {
-        if (offset == getText().getBeginIndex())
-            return true;
-        else
-            return following(offset - 1) == offset;
+		if (offset == getText().getBeginIndex())
+			return true;
+		else
+			return following(offset - 1) == offset;
 	}
 
 	/*
@@ -500,7 +517,7 @@ public class CommonBreakIterator extends BreakIterator {
 	 */
 	@Override
 	public int last() {
-		fIndex= fIterator.last();
+		fIndex = fIterator.last();
 		return fIndex;
 	}
 
@@ -509,7 +526,7 @@ public class CommonBreakIterator extends BreakIterator {
 	 */
 	@Override
 	public int next() {
-		fIndex= following(fIndex);
+		fIndex = following(fIndex);
 		return fIndex;
 	}
 
@@ -532,15 +549,15 @@ public class CommonBreakIterator extends BreakIterator {
 		if (isBoundary(offset - 1))
 			return offset - 1;
 
-		int previous= offset - 1;
+		int previous = offset - 1;
 		do {
-			previous= fIterator.preceding(previous);
+			previous = fIterator.preceding(previous);
 		} while (!isBoundary(previous));
 
-		int last= DONE;
+		int last = DONE;
 		while (previous < offset) {
-			last= previous;
-			previous= following(previous);
+			last = previous;
+			previous = following(previous);
 		}
 
 		return last;
@@ -551,7 +568,7 @@ public class CommonBreakIterator extends BreakIterator {
 	 */
 	@Override
 	public int previous() {
-		fIndex= preceding(fIndex);
+		fIndex = preceding(fIndex);
 		return fIndex;
 	}
 
@@ -565,10 +582,12 @@ public class CommonBreakIterator extends BreakIterator {
 
 	/**
 	 * Creates a break iterator given a char sequence.
-	 * @param newText the new text
+	 * 
+	 * @param newText
+	 *            the new text
 	 */
 	public void setText(CharSequence newText) {
-		fText= newText;
+		fText = newText;
 		fIterator.setText(new SequenceCharacterIterator(newText));
 		first();
 	}
@@ -579,7 +598,7 @@ public class CommonBreakIterator extends BreakIterator {
 	@Override
 	public void setText(CharacterIterator newText) {
 		if (newText instanceof CharSequence) {
-			fText= (CharSequence) newText;
+			fText = (CharSequence) newText;
 			fIterator.setText(newText);
 			first();
 		} else {
@@ -587,4 +606,3 @@ public class CommonBreakIterator extends BreakIterator {
 		}
 	}
 }
-

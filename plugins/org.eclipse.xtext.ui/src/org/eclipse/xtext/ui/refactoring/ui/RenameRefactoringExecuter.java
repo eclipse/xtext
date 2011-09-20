@@ -97,7 +97,7 @@ public class RenameRefactoringExecuter {
 							shell,
 							refactoring.getName(),
 							Messages.format("Cannot execute refactoring",
-									validationStatus.getMessageMatchingSeverity(RefactoringStatus.FATAL))); //$NON-NLS-1$
+									validationStatus.getMessageMatchingSeverity(RefactoringStatus.FATAL))); 
 					return;
 				}
 			}
