@@ -7,114 +7,184 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.selection;
 
+import static java.util.Collections.*;
 import static org.eclipse.xtext.nodemodel.util.NodeModelUtils.*;
 
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Stack;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.text.TextSelection;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.ISelectionChangedListener;
-import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.parsetree.reconstr.ICommentAssociater;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.TextRegion;
+import org.eclipse.xtext.util.Tuples;
 
 import com.google.inject.Inject;
 
 /**
  * @author Michael Clay - Initial contribution and API
+ * @author Sven Efftinge
  */
-public class AstSelectionProvider implements ISelectionChangedListener {
+public class AstSelectionProvider {
 	public final String SELECT_ENCLOSING = "org.eclipse.xtext.ui.editor.select.enclosing"; //$NON-NLS-1$
 	public final String SELECT_NEXT = "org.eclipse.xtext.ui.editor.select.next"; //$NON-NLS-1$
 	public final String SELECT_PREVIOUS = "org.eclipse.xtext.ui.editor.select.previous"; //$NON-NLS-1$
 	public final String SELECT_LAST = "org.eclipse.xtext.ui.editor.select.last"; //$NON-NLS-1$
+	
 	@Inject
 	private ILocationInFileProvider locationProvider;
+	
+	@Inject
+	private ICommentAssociater commentAssociater;
+	
 	private Stack<ITextRegion> selectionHistory = new Stack<ITextRegion>();
-	private ITextRegion lastSelection = ITextRegion.EMPTY_REGION;
-	private XtextEditor xtextEditor;
 
 	public ITextRegion selectLast(XtextResource resource, ITextRegion currentEditorSelection) {
-		return lastSelection = selectionHistory.isEmpty() ? ITextRegion.EMPTY_REGION : selectionHistory.pop();
+		return selectionHistory.isEmpty() ? ITextRegion.EMPTY_REGION : selectionHistory.pop();
 	}
-
+	
 	public ITextRegion selectEnclosing(XtextResource resource, ITextRegion currentEditorSelection) {
-		ICompositeNode rootNode = resource.getParseResult().getRootNode();
-		int offset = getSelectionOffset(rootNode, currentEditorSelection);
-		INode node = findLeafNodeAtOffset(rootNode, offset);
-		EObject eObject = findActualSemanticObjectFor(node);
-		EObject enclosingObject = getEnclosingObject(eObject, currentEditorSelection);
-		return lastSelection = calcEnclosingSelectionRegion(eObject, currentEditorSelection, enclosingObject);
-	}
-
-	public ITextRegion selectNext(XtextResource resource, ITextRegion currentEditorSelection) {
-		ITextRegion result = ITextRegion.EMPTY_REGION;
-		EObject eObjectAtOffset = getEObjectAtOffset(resource, currentEditorSelection);
-		EObject eObjectAtEndOffset = getEObjectAtEndOffset(resource, currentEditorSelection);
-		while (isEmptyOrNull(result)) {
-			EObject nextObject = getNextObject(eObjectAtEndOffset, currentEditorSelection);
-			if (nextObject != null) {
-				result = calcNextSelectionRegion(eObjectAtOffset, eObjectAtEndOffset, currentEditorSelection,
-						nextObject);
-			} else if (eObjectAtEndOffset.eContainer() != null
-					&& equalsEndOffset(eObjectAtEndOffset.eContainer(), currentEditorSelection)
-					&& !lessThanOffset(eObjectAtEndOffset.eContainer(), currentEditorSelection)) {
-				eObjectAtEndOffset = eObjectAtEndOffset.eContainer();
-			} else {
-				result = selectEnclosing(resource, currentEditorSelection);
+		Pair<EObject, EObject> currentlySelected = getSelectedAstElements(resource, currentEditorSelection);
+		if (currentlySelected == null) {
+			ICompositeNode rootNode = resource.getParseResult().getRootNode();
+			int offset = getSelectionOffset(rootNode, currentEditorSelection);
+			INode node = findLeafNodeAtOffset(rootNode, offset);
+			ITextRegion fineGrainedRegion = computeInitialFineGrainedSelection(node, currentEditorSelection);
+			if (fineGrainedRegion != null) {
+				selectionHistory.clear();
+				return register(fineGrainedRegion);
+			}
+			EObject eObject = findSemanticObjectFor(node);
+			return register(getTextRegion(eObject));
+		} else {
+			EObject first = currentlySelected.getFirst();
+			if (first.eContainer() != null) {
+				return register(getTextRegion(first.eContainer()));
 			}
 		}
-		return lastSelection = result;
+		return ITextRegion.EMPTY_REGION;
 	}
-
-	protected EObject getEObjectAtEndOffset(XtextResource resource, ITextRegion currentEditorSelection) {
-		ICompositeNode rootNode = resource.getParseResult().getRootNode();
-		int endOffset = getSelectionEndOffset(rootNode, currentEditorSelection);
-		INode nodeAtEndOffset = findLeafNodeAtOffset(rootNode, endOffset);
-		return findActualSemanticObjectFor(nodeAtEndOffset);
+	
+	public ITextRegion selectNext(XtextResource resource, ITextRegion currentEditorSelection) {
+		Pair<EObject, EObject> currentlySelected = getSelectedAstElements(resource, currentEditorSelection);
+		if (currentlySelected == null) {
+			return register(selectEnclosing(resource, currentEditorSelection));
+		}
+		EObject second = currentlySelected.getSecond();
+		EObject nextSibling = EcoreUtil2.getNextSibling(second);
+		if (nextSibling != null) {
+			return register(getRegion(Tuples.create(currentlySelected.getFirst(), nextSibling)));
+		} else {
+			if (second.eContainer() == null)
+				return ITextRegion.EMPTY_REGION;
+			return register(getRegion(Tuples.create(second.eContainer(), second.eContainer())));
+		}
 	}
 
 	public ITextRegion selectPrevious(XtextResource resource, ITextRegion currentEditorSelection) {
-		ITextRegion result = ITextRegion.EMPTY_REGION;
-		EObject eObjectAtOffset = getEObjectAtOffset(resource, currentEditorSelection);
-		EObject eObjectAtEndOffset = getEObjectAtEndOffset(resource, currentEditorSelection);
-		while (isEmptyOrNull(result)) {
-			EObject previousObject = getPreviousObject(eObjectAtOffset, currentEditorSelection);
-			if (previousObject != null) {
-				result = calcPreviousSelectionRegion(eObjectAtOffset, eObjectAtEndOffset, currentEditorSelection,
-						previousObject);
-			} else if (eObjectAtOffset.eContainer() != null
-					&& equalsOffset(eObjectAtOffset.eContainer(), currentEditorSelection)) {
-				eObjectAtOffset = eObjectAtOffset.eContainer();
-			} else {
-				result = selectEnclosing(resource, currentEditorSelection);
-			}
+		Pair<EObject, EObject> currentlySelected = getSelectedAstElements(resource, currentEditorSelection);
+		if (currentlySelected == null) {
+			return register(selectEnclosing(resource, currentEditorSelection));
 		}
-		return lastSelection = result;
+		EObject first = currentlySelected.getFirst();
+		EObject previousSibling = EcoreUtil2.getPreviousSibling(first);
+		if (previousSibling != null) {
+			return register(getRegion(Tuples.create(previousSibling,currentlySelected.getSecond())));
+		} else {
+			if (first.eContainer() == null)
+				return ITextRegion.EMPTY_REGION;
+			return register(getRegion(Tuples.create(first.eContainer(), first.eContainer())));
+		}
+	}
+	
+	/**
+	 * @return the starting EObject and the ending EObject of the current selection or null if the selection doesn't match the exact boundaries of two EObjects with the same container.
+	 */
+	protected Pair<EObject, EObject> getSelectedAstElements(XtextResource resource, ITextRegion currentSelection) {
+		EObject eObject = getEObjectAtOffset(resource, currentSelection);
+		while (eObject != null) {
+			Pair<EObject, EObject> result = internalGetSelectedAstElements(eObject, currentSelection);
+			if (result != null) 
+				return result;
+			eObject = eObject.eContainer();
+		}
+		return null;
+	}
+
+	protected Pair<EObject, EObject> internalGetSelectedAstElements(EObject eObject, ITextRegion currentSelection) {
+		ITextRegion textRegion = getTextRegion(eObject);
+		while (textRegion.getOffset() == currentSelection.getOffset()) {
+			EObject container = eObject.eContainer();
+			if (container != null) {
+				for (EObject obj : container.eContents()) {
+					ITextRegion region = getTextRegion(obj);
+					if (getEndOffset(region) == getEndOffset(currentSelection)) {
+						Pair<EObject, EObject> parentMatch = internalGetSelectedAstElements(eObject.eContainer(), currentSelection);
+						if (parentMatch != null)
+							return parentMatch;
+						return Tuples.create(eObject, obj);
+					}
+				}
+			} else {
+				if (textRegion.equals(currentSelection))
+					return Tuples.create(eObject, eObject);
+				return null;
+			}
+			eObject = container;
+			textRegion = getTextRegion(eObject);
+		}
+		return null;
+	}
+	
+	protected ITextRegion getRegion(Pair<EObject, EObject> selection) {
+		final ITextRegion firstRegion = getTextRegion(selection.getFirst());
+		if (selection.getFirst() == selection.getSecond()) {
+			return firstRegion;
+		}
+		ITextRegion secondRegion = getTextRegion(selection.getSecond());
+		return new TextRegion(firstRegion.getOffset(), getEndOffset(secondRegion) - firstRegion.getOffset());
+	}
+
+	
+	protected ITextRegion computeInitialFineGrainedSelection(INode node, ITextRegion currentEditorSelection) {
+		if (node.getText().trim().length() > 0 && currentEditorSelection.getOffset() >= node.getOffset() 
+				&& getEndOffset(currentEditorSelection) < node.getOffset() + node.getLength()) {
+			//TODO enhance to just select a single word in a comment or string literal.
+			return new TextRegion(node.getOffset(), node.getLength());
+		}
+		return null;
+	}
+	
+	protected EObject findSemanticObjectFor(INode node) {
+		if (node instanceof ILeafNode && ((ILeafNode) node).isHidden()) {
+			Map<ILeafNode, EObject> semanticEObjects = commentAssociater.associateCommentsWithSemanticEObjects(null, singleton(node.getRootNode()));
+			if (semanticEObjects.containsKey(node))
+				return semanticEObjects.get(node);
+		} 
+		return findActualSemanticObjectFor(node);
 	}
 
 	protected EObject getEObjectAtOffset(XtextResource resource, ITextRegion currentEditorSelection) {
 		ICompositeNode rootNode = resource.getParseResult().getRootNode();
 		INode nodeAtOffset = findLeafNodeAtOffset(rootNode, currentEditorSelection.getOffset());
-		return findActualSemanticObjectFor(nodeAtOffset);
+		return findSemanticObjectFor(nodeAtOffset);
 	}
 
 	public void initialize(XtextEditor xtextEditor) {
-		this.xtextEditor = xtextEditor;
-		this.xtextEditor.getSelectionProvider().addSelectionChangedListener(this);
 		AstSelectionAction enclosingSelectionAction = new AstSelectionAction(
 				AstSelectionMessages.AstSelectEnclosing_label, xtextEditor) {
 			@Override
 			protected ITextRegion internalSelect(XtextResource xtextResource, ITextRegion textRegion) {
-				rememberSelection(textRegion);
 				return selectEnclosing(xtextResource, textRegion);
 			}
 		};
@@ -126,7 +196,6 @@ public class AstSelectionProvider implements ISelectionChangedListener {
 				AstSelectionMessages.AstSelectPrevious_label, xtextEditor) {
 			@Override
 			protected ITextRegion internalSelect(XtextResource xtextResource, ITextRegion textRegion) {
-				rememberSelection(textRegion);
 				return selectPrevious(xtextResource, textRegion);
 			}
 		};
@@ -138,7 +207,6 @@ public class AstSelectionProvider implements ISelectionChangedListener {
 				xtextEditor) {
 			@Override
 			protected ITextRegion internalSelect(XtextResource xtextResource, ITextRegion textRegion) {
-				rememberSelection(textRegion);
 				return selectNext(xtextResource, textRegion);
 			}
 		};
@@ -165,122 +233,33 @@ public class AstSelectionProvider implements ISelectionChangedListener {
 		xtextEditor.setAction(actionDefinitionId, action);
 	}
 
-	public void selectionChanged(SelectionChangedEvent event) {
-		if (selectionHistory.isEmpty()) {
-			return;
-		}
-		ISelection selection = event.getSelection();
-		ITextRegion textRegion = ITextRegion.EMPTY_REGION;
-		if (selection instanceof TextSelection) {
-			TextSelection textSelection = (TextSelection) selection;
-			textRegion = new TextRegion(textSelection.getOffset(), textSelection.getLength());
-		}
-		if (!lastSelection.equals(textRegion)) {
-			lastSelection = ITextRegion.EMPTY_REGION;
-			selectionHistory.clear();
-		}
-	}
-
-	public void dispose() {
-		if (xtextEditor != null) {
-			xtextEditor.getSelectionProvider().removeSelectionChangedListener(this);
-		}
-		xtextEditor = null;
-	}
-
-	protected ITextRegion rememberSelection(ITextRegion textRegion) {
+	protected ITextRegion register(ITextRegion textRegion) {
 		if (selectionHistory.isEmpty() || !selectionHistory.peek().equals(textRegion)) {
 			selectionHistory.push(textRegion);
 		}
 		return textRegion;
 	}
 
-	protected EObject getEnclosingObject(EObject eObject, ITextRegion currentEditorSelection) {
-		while (eObject.eContainer() != null && getTextRegion(eObject).getOffset() == currentEditorSelection.getOffset()) {
-			eObject = eObject.eContainer();
-		}
-		return eObject;
-	}
-
-	protected ITextRegion calcEnclosingSelectionRegion(EObject eObject, ITextRegion currentEditorSelection,
-			EObject enclosingEObject) {
-		return getTextRegion(enclosingEObject);
-	}
-
-	protected EObject getNextObject(EObject eObject, ITextRegion currentEditorSelection) {
-		return EcoreUtil2.getNextSibling(eObject);
-	}
-
-	protected ITextRegion calcNextSelectionRegion(EObject eObjectOffset, EObject eObjectAtEndOffset,
-			ITextRegion currentEditorSelection, EObject nextEObject) {
-		ITextRegion textRegion = getTextRegion(eObjectOffset);
-		if (currentEditorSelection.getLength() == 0) {
-			return textRegion;
-		}
-		ITextRegion nextRegion = getTextRegion(nextEObject);
-		int offset = textRegion.getOffset() < currentEditorSelection.getOffset() ? textRegion.getOffset()
-				: currentEditorSelection.getOffset();
-		return new TextRegion(offset, getEndOffset(nextRegion) - offset);
-	}
-
-	protected EObject getPreviousObject(EObject eObject, ITextRegion currentEditorSelection) {
-		return EcoreUtil2.getPreviousSibling(eObject);
-	}
-
-	protected ITextRegion calcPreviousSelectionRegion(EObject eObjectAtOffset, EObject eObjectAtEndOffset,
-			ITextRegion currentEditorSelection, EObject previousEObject) {
-		ITextRegion textRegion = getTextRegion(eObjectAtEndOffset);
-		if (currentEditorSelection.getLength() == 0) {
-			return textRegion;
-		}
-		ITextRegion previousRegion = getTextRegion(previousEObject);
-		int endOffset = getEndOffset(textRegion) > getEndOffset(currentEditorSelection) ? getEndOffset(textRegion)
-				: getEndOffset(currentEditorSelection);
-		return new TextRegion(previousRegion.getOffset(), endOffset - previousRegion.getOffset());
-	}
-
-	public ILocationInFileProvider getLocationProvider() {
-		return locationProvider;
-	}
-
 	protected ITextRegion getTextRegion(EObject eObject) {
-		return locationProvider.getFullTextRegion(eObject);
-	}
-
-	protected ITextRegion getTextRegion(INode node) {
-		return new TextRegion(node.getOffset(), node.getLength());
-	}
-
-	/**
-	 * @return true if eObjects first node <i>starts</i> at an offset less than that of the given region
-	 */
-	protected boolean lessThanOffset(EObject eObject, ITextRegion region) {
-		return locationProvider.getFullTextRegion(eObject).getOffset() < region.getOffset();
-	}
-
-	/**
-	 * @return true if eObjects first node <i>starts</i> at the same offset as the one from the given region
-	 */
-	protected boolean equalsOffset(EObject eObject, ITextRegion region) {
-		return locationProvider.getFullTextRegion(eObject).getOffset() == region.getOffset();
-	}
-
-	/**
-	 * @return true if eObjects last node <i>ends</i> at an offset less than that from the given region
-	 */
-	protected boolean lessThanEndOffset(EObject eObject, ITextRegion region) {
-		return getEndOffset(locationProvider.getFullTextRegion(eObject)) < getEndOffset(region);
-	}
-
-	/**
-	 * @return true if eObjects last node <i>ends</i> at the same endOffset as the from the given region
-	 */
-	protected boolean equalsEndOffset(EObject eObject, ITextRegion region) {
-		return getEndOffset(locationProvider.getFullTextRegion(eObject)) == getEndOffset(region);
-	}
-
-	protected boolean isEmptyOrNull(ITextRegion textRegion) {
-		return textRegion == null || ITextRegion.EMPTY_REGION == textRegion;
+		if (eObject == null)
+			return null;
+		ICompositeNode rootNode = ((XtextResource)eObject.eResource()).getParseResult().getRootNode();
+		Map<ILeafNode, EObject> comments = commentAssociater.associateCommentsWithSemanticEObjects(eObject, singleton(rootNode));
+		final ITextRegion result = locationProvider.getFullTextRegion(eObject);
+		int start = result.getOffset();
+		int end = result.getOffset() + result.getLength();
+		for (Entry<ILeafNode, EObject> entry : comments.entrySet()) {
+			if (entry.getValue() == eObject) {
+				ILeafNode node = entry.getKey();
+				if (node.getTotalOffset() < start) {
+					start = node.getTotalOffset();
+				}
+				if (node.getTotalEndOffset() > end) {
+					end = node.getTotalEndOffset();
+				}
+			}
+		}
+		return new TextRegion(start, end-start);
 	}
 
 	protected int getEndOffset(ITextRegion region) {
@@ -290,11 +269,6 @@ public class AstSelectionProvider implements ISelectionChangedListener {
 	protected int getSelectionOffset(ICompositeNode rootNode, ITextRegion region) {
 		boolean selectionAtEndOfText = rootNode.getTotalEndOffset() == getEndOffset(region);
 		return selectionAtEndOfText && region.getOffset() > 0 ? region.getOffset() - 1 : region.getOffset();
-	}
-
-	protected int getSelectionEndOffset(ICompositeNode rootNode, ITextRegion region) {
-		boolean selectionAtEndOfText = rootNode.getTotalEndOffset() == getEndOffset(region);
-		return selectionAtEndOfText || region.getLength() > 0 ? getEndOffset(region) - 1 : getEndOffset(region);
 	}
 
 }
