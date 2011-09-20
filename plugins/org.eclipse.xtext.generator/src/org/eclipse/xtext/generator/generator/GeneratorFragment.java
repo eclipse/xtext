@@ -72,6 +72,9 @@ public class GeneratorFragment extends AbstractGeneratorFragment {
 		return new BindFactory()
 		.addTypeToType("org.eclipse.xtext.builder.IXtextBuilderParticipant", "org.eclipse.xtext.builder.BuilderParticipant")
 		.addTypeToInstance("org.eclipse.core.resources.IWorkspaceRoot", "org.eclipse.core.resources.ResourcesPlugin.getWorkspace().getRoot()")
+		.addConfiguredBinding(
+						"BuilderPreferenceStoreInitializer",
+						"binder.bind(org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer.class).to(org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.Initializer.class)")
 		.getBindings();
 	}
 }
