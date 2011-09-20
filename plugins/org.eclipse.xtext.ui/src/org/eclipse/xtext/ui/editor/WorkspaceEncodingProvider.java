@@ -25,8 +25,8 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
- * Resolves the encoding for {@link IFile}s and falls back to the {@link IEncodingProvider} configured for in the
- * runtime module otherwise.
+ * Resolves the encoding for {@link IEncodedStorage} behind the given {@link URI}s and falls back to the
+ * {@link IEncodingProvider} configured for in the runtime module otherwise.
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
@@ -49,7 +49,7 @@ public class WorkspaceEncodingProvider implements IEncodingProvider {
 		if (workspace != null) {
 			Iterator<Pair<IStorage, IProject>> storages = storage2UriMapper.getStorages(uri).iterator();
 			while (storages.hasNext()) {
-				Pair<IStorage,IProject> storage = storages.next();
+				Pair<IStorage, IProject> storage = storages.next();
 				if (storage.getFirst() instanceof IEncodedStorage) {
 					try {
 						return ((IEncodedStorage) storage.getFirst()).getCharset();

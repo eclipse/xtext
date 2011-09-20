@@ -26,7 +26,6 @@ public class ReplaceRegion implements ITypedRegion {
 	/**
 	 * @param offset
 	 * @param originalLength
-	 * @param type
 	 * @param text
 	 */
 	public ReplaceRegion(int offset, int originalLength, String text) {

@@ -20,7 +20,7 @@ import com.google.inject.Inject;
 
 /**
  * Represents an implementation of interface {@link IHyperlinkDetector} to find
- * and convert {@link CrossReference elements}, at a given location, to
+ * and convert {@link org.eclipse.xtext.CrossReference elements}, at a given location, to
  * <code>IHyperlink</code>.
  *
  * @author Michael Clay - Initial contribution and API

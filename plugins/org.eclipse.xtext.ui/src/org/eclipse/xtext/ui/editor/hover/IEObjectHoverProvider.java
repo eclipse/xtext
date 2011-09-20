@@ -22,21 +22,25 @@ import com.google.inject.ImplementedBy;
 public interface IEObjectHoverProvider {
 	/**
 	 * 
-	 * @param the {@link EObject} for which to show an information hover. 
-	 * @param the viewer - might not contain the given {@link EObject}.
-	 * @param the region - might be a cross reference pointing to the given object.
+	 * @param object
+	 *            {@link EObject} for which to show an information hover.
+	 * @param viewer
+	 *            - might not contain the given {@link EObject}.
+	 * @param region
+	 *            - might be a cross reference pointing to the given object.
 	 * 
-	 * @return an to be shown in a hover pop up, returns <code>null</code> if no hover information exists
-	 *         for the given element.
+	 * @return an to be shown in a hover pop up, returns <code>null</code> if no hover information exists for the given
+	 *         element.
 	 */
 	IInformationControlCreatorProvider getHoverInfo(EObject object, ITextViewer viewer, IRegion region);
-	
+
 	public interface IInformationControlCreatorProvider {
 		/**
-		 * an {@link IInformationControlCreator} capable of creating an {@link org.eclipse.jface.text.IInformationControl} for the
-		 * information provided by {@link #getInfo()}.
+		 * an {@link IInformationControlCreator} capable of creating an
+		 * {@link org.eclipse.jface.text.IInformationControl} for the information provided by {@link #getInfo()}.
 		 */
 		IInformationControlCreator getHoverControlCreator();
+
 		/**
 		 * The information to be used by the {@link IInformationControlCreator}.
 		 */

@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.resource;
 
-import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;

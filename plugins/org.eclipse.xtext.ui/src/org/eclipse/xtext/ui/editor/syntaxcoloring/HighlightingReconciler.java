@@ -75,10 +75,10 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 	}
 
 	/**
-	 * Reconcile positions based on the AST subtrees
+	 * Reconcile positions using {@link MergingHighlightedPositionAcceptor}
 	 * 
-	 * @param subtrees
-	 *            the AST subtrees
+	 * @param resource
+	 *            XtextResource
 	 */
 	private void reconcilePositions(XtextResource resource) {
 		//		for (int i= 0, n= subtrees.length; i < n; i++)
@@ -100,7 +100,7 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 	 * Add a position with the given range and highlighting if it does not exist already.
 	 * @param offset The range offset
 	 * @param length The range length
-	 * @param highlighting The highlighting
+	 * @param ids The highlighting attribute ids
 	 */
 	public void addPosition(int offset, int length, String... ids) {
 		TextAttribute highlighting = ids.length == 1 ? 

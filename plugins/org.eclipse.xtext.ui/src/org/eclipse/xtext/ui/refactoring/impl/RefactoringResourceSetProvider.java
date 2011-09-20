@@ -16,7 +16,7 @@ import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import com.google.inject.Inject;
 
 /**
- * Provides the correctly configured {@link ResouceSet} that is used during refactoring.
+ * Provides the correctly configured {@link ResourceSet} that is used during refactoring.
  * 
  * It's based on the dirty state, i.e. the content of unsaved editors can be accessed. Furthermore changed resources
  * inside the resource set shadow existing ones. 

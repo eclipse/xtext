@@ -38,7 +38,7 @@ public interface IResourceUIValidatorExtension {
 	 * 
 	 * @param file
 	 *            the file to create validation markers for
-	 * @param mode
+	 * @param checkMode
 	 *            the mode (normal,fast,expensive) of the validation
 	 */
 	void deleteValidationMarkers(IFile file, CheckMode checkMode, IProgressMonitor monitor);

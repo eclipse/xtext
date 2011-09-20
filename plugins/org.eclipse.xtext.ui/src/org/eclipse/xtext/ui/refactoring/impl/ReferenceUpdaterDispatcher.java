@@ -31,7 +31,7 @@ import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
 /**
- * Finds all references to renamed elements and dispatches to the {@link IReferencesUpdater} of the referring languages
+ * Finds all references to renamed elements and dispatches to the {@link IReferenceUpdater} of the referring languages
  * to calculate the updates.
  * 
  * @author Jan Koehnlein - Initial contribution and API

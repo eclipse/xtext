@@ -390,7 +390,6 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 	 * <code>getCursorPosition() + 1</code>.
 	 *
 	 * @param document the document
-	 * @param closingCharacter the exit character
 	 */
 	protected void setUpLinkedMode(IDocument document) {
 		try {

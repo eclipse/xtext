@@ -21,8 +21,6 @@ import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.text.source.ILineDiffInfo;
 import org.eclipse.ui.texteditor.DefaultMarkerAnnotationAccess;
-import org.eclipse.xtext.ui.editor.XtextEditor;
-
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 

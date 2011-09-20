@@ -141,7 +141,7 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 
 	/**
 	 * @see #isValidProposal(String, String, ContentAssistContext)
-	 * @see #doCreateProposal(String, String, Image, int, ContentAssistContext)
+	 * @see #doCreateProposal(String, StyledString, Image, int, ContentAssistContext)
 	 */
 	protected ICompletionProposal createCompletionProposal(String proposal, StyledString displayString, Image image,
 			int priority, String prefix, ContentAssistContext context) {
@@ -220,7 +220,7 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 	/**
 	 * Returns the image for the label of the given element.
 	 * 
-	 * @param element
+	 * @param eObject
 	 *            the element for which to provide the label image
 	 * @return the image used to label the element, or <code>null</code> if there is no image for the given object
 	 */

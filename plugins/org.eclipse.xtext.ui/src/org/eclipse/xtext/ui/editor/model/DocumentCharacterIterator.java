@@ -7,14 +7,15 @@ import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 
-
 /**
  * Copied from <code>org.eclipse.jdt.internal.ui.text.DocumentCharacterIterator</code>.
+ */
+/*
  * @see org.eclipse.jdt.internal.ui.text.DocumentCharacterIterator
  */
 public class DocumentCharacterIterator implements CharacterIterator, CharSequence {
 
-	private int fIndex= -1;
+	private int fIndex = -1;
 	private final IDocument fDocument;
 	private final int fFirst;
 	private final int fLast;
@@ -27,8 +28,10 @@ public class DocumentCharacterIterator implements CharacterIterator, CharSequenc
 	/**
 	 * Creates an iterator for the entire document.
 	 * 
-	 * @param document the document backing this iterator
-	 * @throws BadLocationException if the indices are out of bounds
+	 * @param document
+	 *            the document backing this iterator
+	 * @throws BadLocationException
+	 *             if the indices are out of bounds
 	 */
 	public DocumentCharacterIterator(IDocument document) throws BadLocationException {
 		this(document, 0);
@@ -37,22 +40,29 @@ public class DocumentCharacterIterator implements CharacterIterator, CharSequenc
 	/**
 	 * Creates an iterator, starting at offset <code>first</code>.
 	 * 
-	 * @param document the document backing this iterator
-	 * @param first the first character to consider
-	 * @throws BadLocationException if the indices are out of bounds
+	 * @param document
+	 *            the document backing this iterator
+	 * @param first
+	 *            the first character to consider
+	 * @throws BadLocationException
+	 *             if the indices are out of bounds
 	 */
 	public DocumentCharacterIterator(IDocument document, int first) throws BadLocationException {
 		this(document, first, document.getLength());
 	}
 
 	/**
-	 * Creates an iterator for the document contents from <code>first</code> (inclusive) to
-	 * <code>last</code> (exclusive).
+	 * Creates an iterator for the document contents from <code>first</code> (inclusive) to <code>last</code>
+	 * (exclusive).
 	 * 
-	 * @param document the document backing this iterator
-	 * @param first the first character to consider
-	 * @param last the last character index to consider
-	 * @throws BadLocationException if the indices are out of bounds
+	 * @param document
+	 *            the document backing this iterator
+	 * @param first
+	 *            the first character to consider
+	 * @param last
+	 *            the last character index to consider
+	 * @throws BadLocationException
+	 *             if the indices are out of bounds
 	 */
 	public DocumentCharacterIterator(IDocument document, int first, int last) throws BadLocationException {
 		if (document == null)
@@ -62,10 +72,10 @@ public class DocumentCharacterIterator implements CharacterIterator, CharSequenc
 		if (last > document.getLength()) {
 			throw new BadLocationException();
 		}
-		fDocument= document;
-		fFirst= first;
-		fLast= last;
-		fIndex= first;
+		fDocument = document;
+		fFirst = first;
+		fLast = last;
+		fIndex = first;
 		invariant();
 	}
 
@@ -122,7 +132,7 @@ public class DocumentCharacterIterator implements CharacterIterator, CharSequenc
 	 */
 	public char setIndex(int position) {
 		if (position >= getBeginIndex() && position <= getEndIndex())
-			fIndex= position;
+			fIndex = position;
 		else
 			throw new IllegalArgumentException();
 
@@ -173,12 +183,12 @@ public class DocumentCharacterIterator implements CharacterIterator, CharSequenc
 	/**
 	 * {@inheritDoc}
 	 * <p>
-	 * Note that, if the document is modified concurrently, this method may
-	 * return {@link CharacterIterator#DONE} if a {@link BadLocationException}
-	 * was thrown when accessing the backing document.
+	 * Note that, if the document is modified concurrently, this method may return {@link CharacterIterator#DONE} if a
+	 * {@link BadLocationException} was thrown when accessing the backing document.
 	 * </p>
-	 *
-	 * @param index {@inheritDoc}
+	 * 
+	 * @param index
+	 *            {@inheritDoc}
 	 * @return {@inheritDoc}
 	 */
 	public char charAt(int index) {

@@ -14,12 +14,20 @@ import org.eclipse.jface.text.ITypedRegion;
 import org.eclipse.jface.text.Region;
 
 /**
- * <p>Custom {@link AbstractPartitionDoubleClickSelector partition selector} that allows to strip
- * a fixed set of characters from the beginning and the end of a partition.</p>
- * <p>The implementation was heavily adapted from <code>org.eclipse.jdt.internal.ui.text.java.PartitionDoubleClickSelector</code></p>.
+ * <p>
+ * Custom {@link AbstractPartitionDoubleClickSelector partition selector} that allows to strip a fixed set of characters
+ * from the beginning and the end of a partition.
+ * </p>
+ * <p>
+ * The implementation was heavily adapted from
+ * <code>org.eclipse.jdt.internal.ui.text.java.PartitionDoubleClickSelector</code>
+ * </p>
+ * .
  * 
- * @see org.eclipse.jdt.internal.ui.text.java.PartitionDoubleClickSelector
  * @author Sebastian Zarnekow - Initial contribution and API
+ */
+/* 
+ * @see org.eclipse.jdt.internal.ui.text.java.PartitionDoubleClickSelector
  */
 public class FixedCharCountPartitionDoubleClickSelector extends AbstractPartitionDoubleClickSelector {
 
@@ -29,14 +37,17 @@ public class FixedCharCountPartitionDoubleClickSelector extends AbstractPartitio
 	/**
 	 * Creates a new partition double click selector for the given document partitioning.
 	 * 
-	 * @param partitioning the document partitioning
-	 * @param leftBorder number of characters to ignore from the left border of the partition
-	 * @param rightBorder number of characters to ignore from the right border of the partition
+	 * @param partitioning
+	 *            the document partitioning
+	 * @param leftBorder
+	 *            number of characters to ignore from the left border of the partition
+	 * @param rightBorder
+	 *            number of characters to ignore from the right border of the partition
 	 */
 	public FixedCharCountPartitionDoubleClickSelector(String partitioning, int leftBorder, int rightBorder) {
 		super(partitioning);
-		fLeftBorder= leftBorder;
-		fRightBorder= rightBorder;
+		fLeftBorder = leftBorder;
+		fRightBorder = rightBorder;
 	}
 
 	@Override
@@ -44,12 +55,14 @@ public class FixedCharCountPartitionDoubleClickSelector extends AbstractPartitio
 		if (fLeftBorder == 0 && fRightBorder == 0)
 			return completePartition;
 		if (fRightBorder == -1) {
-			String delimiter= document.getLineDelimiter(document.getLineOfOffset(completePartition.getOffset() + completePartition.getLength() - 1));
+			String delimiter = document.getLineDelimiter(document.getLineOfOffset(completePartition.getOffset()
+					+ completePartition.getLength() - 1));
 			if (delimiter == null)
-				fRightBorder= 0;
+				fRightBorder = 0;
 			else
-				fRightBorder= delimiter.length();
+				fRightBorder = delimiter.length();
 		}
-		return new Region(completePartition.getOffset() + fLeftBorder, completePartition.getLength() - fLeftBorder - fRightBorder);
+		return new Region(completePartition.getOffset() + fLeftBorder, completePartition.getLength() - fLeftBorder
+				- fRightBorder);
 	}
 }
