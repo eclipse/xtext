@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.editor.outline.actions;
 import java.util.Map;
 
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.xtext.ui.XtextUIMessages;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlinePage;
 import org.eclipse.xtext.ui.internal.XtextPluginImages;
@@ -29,6 +30,8 @@ public class LinkWithEditorOutlineContribution extends AbstractToggleOutlineCont
 	private Provider<OutlineWithEditorLinker> outlineWithEditorLinkerProvider;
 
 	private Map<OutlinePage, OutlineWithEditorLinker> page2linker = Maps.newHashMap();
+
+	private IPreferenceStore preferenceStore;
 
 	@Override
 	public String getPreferenceKey() {
@@ -54,7 +57,8 @@ public class LinkWithEditorOutlineContribution extends AbstractToggleOutlineCont
 		OutlineWithEditorLinker outlineWithEditorLinker = outlineWithEditorLinkerProvider.get();
 		outlineWithEditorLinker.activate(outlinePage);
 		outlineWithEditorLinker.setLinkingEnabled(isPropertySet());
-		getPreferenceStoreAccess().getPreferenceStore().addPropertyChangeListener(outlineWithEditorLinker);
+		preferenceStore = getPreferenceStoreAccess().getPreferenceStore();
+		preferenceStore.addPropertyChangeListener(outlineWithEditorLinker);
 		page2linker.put(outlinePage, outlineWithEditorLinker);
 	}
 
@@ -64,7 +68,7 @@ public class LinkWithEditorOutlineContribution extends AbstractToggleOutlineCont
 		OutlineWithEditorLinker outlineWithEditorLinker = page2linker.remove(outlinePage);
 		if (outlineWithEditorLinker != null) {
 			outlineWithEditorLinker.deactivate();
-			getPreferenceStoreAccess().getPreferenceStore().removePropertyChangeListener(outlineWithEditorLinker);
+			preferenceStore.removePropertyChangeListener(outlineWithEditorLinker);
 		}
 	}
 
