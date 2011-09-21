@@ -13,6 +13,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.impl.RefactoringException;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.AbstractJvmModelRenameStrategy;
@@ -43,23 +44,10 @@ public class Xtend2RenameStrategy extends AbstractJvmModelRenameStrategy {
 
 	@Override
 	protected void setInferredJvmElementName(String name, EObject renamedElement) {
-		if (renamedElement instanceof XtendClass) {
-			JvmGenericType inferredJvmType = getJvmModelAssociations().getInferredType((XtendClass) renamedElement);
-			if (inferredJvmType != null) {
-				inferredJvmType.setSimpleName(((XtendClass) renamedElement).getName());
-				inferredJvmType.setPackageName(((XtendClass) renamedElement).getPackageName());
-			}
-			JvmConstructor inferredConstructor = getJvmModelAssociations().getInferredConstructor(
-					(XtendClass) renamedElement);
-			if (inferredConstructor != null) {
-				inferredConstructor.setSimpleName(((XtendClass) renamedElement).getName());
-			}
-		} else if (renamedElement instanceof XtendFunction) {
-			JvmMember inferredJvmMember = getJvmModelAssociations().getDirectlyInferredOperation(
-					((XtendFunction) renamedElement));
-			if (inferredJvmMember != null) {
-				inferredJvmMember.setSimpleName(((XtendFunction) renamedElement).getName());
-			}
+		if (renamedElement.eResource() instanceof DerivedStateAwareResource) {
+			DerivedStateAwareResource resource = (DerivedStateAwareResource) renamedElement.eResource();
+			resource.discardDerivedState();
+			resource.installDerivedState(false);
 		}
 	}
 

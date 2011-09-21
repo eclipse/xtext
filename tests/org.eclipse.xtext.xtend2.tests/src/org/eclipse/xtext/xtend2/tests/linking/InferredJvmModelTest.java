@@ -65,7 +65,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		}
 	}
 	
-	public void testCaseFunction_00() throws Exception {
+	public void testDispatchFunction_00() throws Exception {
 		XtendFile xtendFile = file("class Foo { def dispatch foo(Object x) {null} def dispatch foo(String x) {null}}");
 		JvmGenericType inferredType = getInferredType(xtendFile);
 
@@ -107,7 +107,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		}
 	}
 	
-	public void testCaseFunction_01() throws Exception {
+	public void testDispatchFunction_01() throws Exception {
 		XtendFile xtendFile = file("class Foo { def dispatch foo(Object x, String y) {null} def dispatch foo(String x) {null}}");
 		JvmGenericType inferredType = getInferredType(xtendFile);
 		
@@ -153,7 +153,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		});
 	}
 	
-	public void testCaseFunction_02() throws Exception {
+	public void testDispatchFunction_02() throws Exception {
 		XtendFile xtendFile = file("class Foo { def dispatch foo(Object x) {'foo'} def dispatch foo(String x) {'bar'}}");
 		JvmGenericType inferredType = getInferredType(xtendFile);
 		
@@ -185,7 +185,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		});
 	}
 	
-	public void testCaseFunction_03() throws Exception {
+	public void testDispatchFunction_03() throws Exception {
 		XtendFile xtendFile = file(
 				"class Dispatcher {\n" + 
 				"	def dispatch doStuff(org.eclipse.emf.ecore.EClass model) {\n" + 
@@ -242,7 +242,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		assertEquals("java.util.List<? extends java.lang.Object>", eStructuralFeatureParam.getReturnType().getIdentifier());
 	}
 	
-	public void testCaseFunction_04() throws Exception {
+	public void testDispatchFunction_04() throws Exception {
 		XtendFile xtendFile = file("class Foo { def dispatch foo(Integer x) {x} def dispatch foo(Double x) {x}}");
 		JvmGenericType inferredType = getInferredType(xtendFile);
 		
@@ -513,12 +513,17 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		JvmGenericType inferredType = getInferredType(xtendFile);
 		XtendClass xtendClass = xtendFile.getXtendClass();
 		EList<JvmMember> jvmMembers = inferredType.getMembers();
-		assertEquals(2, jvmMembers.size());
+		assertEquals(3, jvmMembers.size());
 		JvmMember jvmMember = jvmMembers.get(1);
 		assertTrue(jvmMember instanceof JvmOperation);
 		XtendFunction xtendFunction = (XtendFunction) xtendClass.getMembers().get(0);
 		assertEquals(xtendFunction.getIdentifier(), jvmMember.getIdentifier());
 		assertEquals("java.util.ArrayList<java.lang.String>", ((JvmOperation) jvmMember).getReturnType().getIdentifier());
+		
+		JvmOperation privateInitializer = (JvmOperation) jvmMembers.get(2);
+		assertEquals("_init_"+xtendFunction.getSimpleName(), privateInitializer.getSimpleName());
+		assertEquals("java.util.ArrayList<java.lang.String>", privateInitializer.getParameters().get(0).getParameterType().getIdentifier());
+		assertEquals("java.lang.String", privateInitializer.getParameters().get(1).getParameterType().getIdentifier());
 	}
 
 	public void testInferredFunctionWithReturnType_01() throws Exception {

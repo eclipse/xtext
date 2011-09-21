@@ -58,8 +58,17 @@ public interface IXtend2JvmAssociations extends IJvmModelAssociations {
 		}
 
 		public JvmOperation getDirectlyInferredOperation(XtendFunction xtendFunction) {
-			final JvmOperation firstOrNull = getFirstOrNull(getJvmElements(xtendFunction), JvmOperation.class);
-			return firstOrNull;
+			final Iterable<JvmOperation> jvmElements = filter(getJvmElements(xtendFunction), JvmOperation.class);
+			String expectedName = xtendFunction.getSimpleName();
+			if (xtendFunction.isDispatch()) {
+				expectedName = "_"+expectedName;
+			}
+			for (JvmOperation jvmOperation : jvmElements) {
+				if (jvmOperation.getSimpleName().equals(expectedName)) {
+					return jvmOperation;
+				}
+			}
+			return null;
 		}
 		
 		public JvmOperation getDispatchOperation(XtendFunction dispatchFunction) {

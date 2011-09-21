@@ -35,6 +35,7 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
+import org.eclipse.xtext.xbase.jvmmodel.IExpressionContextAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
@@ -73,6 +74,9 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 	
 	@Inject
 	private TypeReferences typeReferences;
+	
+	@Inject
+	private IExpressionContextAssociator contextAssociator;
 	
 	public void infer(EObject xtendFile, IAcceptor<JvmDeclaredType> acceptor, boolean prelinkingPhase) {
 		if (!(xtendFile instanceof XtendFile))
@@ -167,6 +171,36 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			JvmOperation target = typesFactory.createJvmOperation();
 			container.getMembers().add(target);
 			associator.associatePrimary(source, target);
+			if (source.getCreateExtensionInfo() != null) {
+				JvmOperation initializer = typesFactory.createJvmOperation();
+				container.getMembers().add(initializer);
+				initializer.setSimpleName("_init_"+source.getSimpleName());
+				initializer.setVisibility(JvmVisibility.PRIVATE);
+				initializer.setReturnType(typeReferences.getTypeForName(Void.TYPE, sourceMember));
+				
+				// the first parameter is the created object
+				JvmFormalParameter jvmParam = typesFactory.createJvmFormalParameter();
+				jvmParam.setName(source.getCreateExtensionInfo().getName());
+				if (source.getReturnType()!=null) {
+					jvmParam.setParameterType(EcoreUtil2.cloneWithProxies(source.getReturnType()));
+				} else {
+					jvmParam.setParameterType(getTypeProxy(target));
+				}
+				initializer.getParameters().add(jvmParam);
+				
+				// add all others
+				for (XtendParameter parameter : source.getParameters()) {
+					jvmParam = typesFactory.createJvmFormalParameter();
+					jvmParam.setName(parameter.getName());
+					jvmParam.setParameterType(EcoreUtil2.cloneWithProxies(parameter.getParameterType()));
+					initializer.getParameters().add(jvmParam);
+				}
+				associator.associate(source, initializer);
+				contextAssociator.associate(((XtendFunction) sourceMember).getCreateExtensionInfo().getCreateExpression(), target);
+				contextAssociator.associate(((XtendFunction) sourceMember).getExpression(), initializer);
+			} else {
+				contextAssociator.associate(((XtendFunction) sourceMember).getExpression(), target);
+			}
 			String sourceName = source.getName();
 			JvmVisibility visibility = JvmVisibility.PUBLIC;
 			if (source.isDispatch()) {
