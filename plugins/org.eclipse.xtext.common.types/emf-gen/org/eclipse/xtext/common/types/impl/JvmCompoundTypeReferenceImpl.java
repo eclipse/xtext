@@ -87,6 +87,7 @@ public abstract class JvmCompoundTypeReferenceImpl extends JvmTypeReferenceImplC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmType getType()
 	{
 		if (type != null && type.eIsProxy())
