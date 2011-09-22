@@ -8,20 +8,23 @@
 package org.eclipse.xtext.xtend2.ui.highlighting;
 
 import org.eclipse.swt.graphics.RGB;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfigurationAcceptor;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
+import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingConfiguration;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Holger Schill
  */
-public class HighlightingConfiguration extends DefaultHighlightingConfiguration {
+public class XtendHighlightingConfiguration extends XbaseHighlightingConfiguration {
 
 	public static final String RICH_TEXT_ID = "xtend2.richText";
 	public static final String RICH_TEXT_DELIMITER_ID = "xtend2.richText.delimiter";
 	public static final String INSIGNIFICANT_TEMPLATE_TEXT = "xtend2.insignificant.template.text";
 	public static final String POTENTIAL_LINE_BREAK = "xtend2.potential.line.break";
 	public static final String TEMPLATE_LINE_BREAK = "xtend2.template.line.break";
+	public static final String EXTENSION_METHOD_INVOCATION = "xtend2.extension.method.invacation";
+	public static final String FIELD = "xtend2.field";
 	
 	@Override
 	public void configure(IHighlightingConfigurationAcceptor acceptor) {
@@ -31,6 +34,9 @@ public class HighlightingConfiguration extends DefaultHighlightingConfiguration 
 		acceptor.acceptDefaultHighlighting(INSIGNIFICANT_TEMPLATE_TEXT, "Insignificant Template Text", insignificantTemplateTextStyle());
 		acceptor.acceptDefaultHighlighting(POTENTIAL_LINE_BREAK, "Potential Line Break (if line is not empty)", insignificantTemplateTextStyle());
 		acceptor.acceptDefaultHighlighting(TEMPLATE_LINE_BREAK, "Template Line Break", richTextStyle());
+		acceptor.acceptDefaultHighlighting(EXTENSION_METHOD_INVOCATION, "Extension method invocation", extensionMethodInvocation());
+		acceptor.acceptDefaultHighlighting(FIELD, "Field", field());
+		
 	}
 	
 	public TextStyle richTextStyle() {
@@ -46,6 +52,18 @@ public class HighlightingConfiguration extends DefaultHighlightingConfiguration 
 	
 	public TextStyle insignificantTemplateTextStyle() {
 		TextStyle textStyle = stringTextStyle().copy();
+		return textStyle;
+	}
+	
+	public TextStyle extensionMethodInvocation(){
+		TextStyle textStyle = defaultTextStyle().copy();
+		textStyle.setColor(new RGB(171, 48, 0));
+		return textStyle;
+	}
+	
+	public TextStyle field(){
+		TextStyle textStyle = defaultTextStyle().copy();
+		textStyle.setColor(new RGB(0, 26, 171));
 		return textStyle;
 	}
 }

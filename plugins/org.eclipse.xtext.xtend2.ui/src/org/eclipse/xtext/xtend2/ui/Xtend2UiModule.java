@@ -32,11 +32,11 @@ import org.eclipse.xtext.xtend2.ui.editor.RichStringAwareToggleCommentAction;
 import org.eclipse.xtext.xtend2.ui.editor.SingleLineCommentHelper;
 import org.eclipse.xtext.xtend2.ui.editor.Xtend2DoubleClickStrategyProvider;
 import org.eclipse.xtext.xtend2.ui.editor.Xtend2FoldingRegionProvider;
-import org.eclipse.xtext.xtend2.ui.highlighting.HighlightingConfiguration;
-import org.eclipse.xtext.xtend2.ui.highlighting.RichStringAwareHighlightingCalculator;
 import org.eclipse.xtext.xtend2.ui.highlighting.RichStringAwareTokenScanner;
 import org.eclipse.xtext.xtend2.ui.highlighting.ShowWhitespaceCharactersActionContributor;
 import org.eclipse.xtext.xtend2.ui.highlighting.TokenToAttributeIdMapper;
+import org.eclipse.xtext.xtend2.ui.highlighting.XtendHighlightingCalculator;
+import org.eclipse.xtext.xtend2.ui.highlighting.XtendHighlightingConfiguration;
 import org.eclipse.xtext.xtend2.ui.hover.XtendHoverProvider;
 import org.eclipse.xtext.xtend2.ui.hyperlinking.XtendHyperlinkHelper;
 import org.eclipse.xtext.xtend2.ui.outline.Xtend2OutlineNodeComparator;
@@ -60,7 +60,7 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 	}
 
 	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
-		return HighlightingConfiguration.class;
+		return XtendHighlightingConfiguration.class;
 	}
 
 	@Override
@@ -75,7 +75,7 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 
 	@Override
 	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
-		return RichStringAwareHighlightingCalculator.class;
+		return XtendHighlightingCalculator.class;
 	}
 
 	public Class<? extends ITokenTypeToPartitionTypeMapper> bindITokenTypeToPartitionTypeMapper() {

@@ -86,7 +86,7 @@ public class RichStringAwareTokenScanner extends TokenScanner {
 		}
 		
 		protected IToken createToken() {
-			String attributeId = delimiter ? HighlightingConfiguration.RICH_TEXT_DELIMITER_ID : HighlightingConfiguration.RICH_TEXT_ID;
+			String attributeId = delimiter ? XtendHighlightingConfiguration.RICH_TEXT_DELIMITER_ID : XtendHighlightingConfiguration.RICH_TEXT_ID;
 			Token token = new Token(getAttribute(attributeId));
 			return token;
 		}

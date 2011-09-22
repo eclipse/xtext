@@ -7,9 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.tests.highlighting;
 
-import static com.google.common.collect.Maps.*;
-
-import java.util.Map;
+import java.util.Collection;
+import java.util.Set;
 
 import junit.framework.Test;
 
@@ -21,18 +20,22 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfigurati
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.TextRegion;
-import org.eclipse.xtext.xtend2.ui.highlighting.HighlightingConfiguration;
-import org.eclipse.xtext.xtend2.ui.highlighting.RichStringAwareHighlightingCalculator;
+import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingConfiguration;
+import org.eclipse.xtext.xtend2.ui.highlighting.XtendHighlightingCalculator;
+import org.eclipse.xtext.xtend2.ui.highlighting.XtendHighlightingConfiguration;
 import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
 import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
-import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Holger Schill
  */
 public class Xtend2HighlightingCalculatorTest extends AbstractXtend2UITestCase implements IHighlightedPositionAcceptor {
 
@@ -41,39 +44,56 @@ public class Xtend2HighlightingCalculatorTest extends AbstractXtend2UITestCase i
 	}
 	
 	@Inject
-	private RichStringAwareHighlightingCalculator calculator;
+	private XtendHighlightingCalculator calculator;
 	
 	@Inject
 	private WorkbenchTestHelper testHelper;
 	
-	private Map<TextRegion, String> expectedRegions;
+	private Multimap<TextRegion, String> expectedRegions;
+	
+	private Multimap<TextRegion, String> explicitNotExpectedRegions;
+	
+	private Set<String> imports;
+	
+	private Set<String> injects;
 	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		expectedRegions = newHashMap();
+		expectedRegions = HashMultimap.create();
+		explicitNotExpectedRegions = HashMultimap.create();
+		imports = Sets.newHashSet();
+		injects = Sets.newHashSet();
 	}
 	
 	@Override
 	protected void tearDown() throws Exception {
 		expectedRegions = null;
+		explicitNotExpectedRegions = null;
+		imports = null;
+		injects = null;
 		testHelper = null;
 		calculator = null;
 		super.tearDown();
 	}
 	
 	protected String getPrefix() {
-		return "class Foo { def foo() ";
+		String classString = "";
+		for(String importDef : imports)
+			classString += importDef + " ";
+		classString += "class Foo { "; 
+		for(String injectDef : injects)
+			classString += injectDef + " ";	
+		classString += "def foo() ";
+		return classString;
 	}
 	
 	protected int getPrefixLength() {
 		return getPrefix().length();
 	}
 	
-	protected XtendFunction function(String string) throws Exception {
-		XtendClass clazz = clazz(getPrefix()+string+"}");
-		XtendFunction function = (XtendFunction) clazz.getMembers().get(0);
-		return function;
+	protected XtendClass member(String string) throws Exception {
+		return clazz(getPrefix()+string+"}");
 	}
 	
 	protected XtendClass clazz(String string) throws Exception {
@@ -113,7 +133,7 @@ public class Xtend2HighlightingCalculatorTest extends AbstractXtend2UITestCase i
 		expect(3, 2);
 		expect(6, 1);
 		expect(15,3);
-		expect(14,1,HighlightingConfiguration.TEMPLATE_LINE_BREAK);
+		expect(14,1,XtendHighlightingConfiguration.TEMPLATE_LINE_BREAK);
 		highlight(
 				"'''  \n" +
 				" foobar \n" +
@@ -124,12 +144,12 @@ public class Xtend2HighlightingCalculatorTest extends AbstractXtend2UITestCase i
 		expect(0, 3);
 		expect(3, 2);
 		expect(6, 2);
-		expect(18, 1, HighlightingConfiguration.TEMPLATE_LINE_BREAK);
+		expect(18, 1, XtendHighlightingConfiguration.TEMPLATE_LINE_BREAK);
 		expect(19, 1);
 		expect(37, 1);
-		expect(50, 1, HighlightingConfiguration.TEMPLATE_LINE_BREAK);
+		expect(50, 1, XtendHighlightingConfiguration.TEMPLATE_LINE_BREAK);
 		expect(51, 2);
-		expect(86, 1, HighlightingConfiguration.TEMPLATE_LINE_BREAK);
+		expect(86, 1, XtendHighlightingConfiguration.TEMPLATE_LINE_BREAK);
 		expect(87, 3);
 		highlight(
 				"'''  \n" +
@@ -150,7 +170,7 @@ public class Xtend2HighlightingCalculatorTest extends AbstractXtend2UITestCase i
 		expect(model.indexOf('\t'), 2);
 		expect(model.indexOf("  "), 2);
 		expect(model.lastIndexOf("'''"), 3);
-		expect(17,1,HighlightingConfiguration.POTENTIAL_LINE_BREAK);
+		expect(17,1,XtendHighlightingConfiguration.POTENTIAL_LINE_BREAK);
 		highlight(model);
 	}
 	
@@ -191,32 +211,100 @@ public class Xtend2HighlightingCalculatorTest extends AbstractXtend2UITestCase i
 		highlight(model);
 	}
 	
-	@SuppressWarnings("restriction")
+	public void testStaticFieldAccess() throws Exception {
+		String model = "{ Integer::MAX_VALUE }";
+		expect(model.lastIndexOf("MAX_VALUE"), 9, XbaseHighlightingConfiguration.STATIC_FIELD);
+		highlight(model);
+	}
+	
+	public void testStaticOperationInvocation() throws Exception {
+		addImport("java.util.Collections");
+		String model = "{ Collections::emptySet  }";
+		expect(model.lastIndexOf("emptySet"), 8, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
+		notExpect(model.lastIndexOf("emptySet"), 8, XtendHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+		highlight(model);
+	}
+	public void testStaticExtensionOperationInvocation() throws Exception {
+		String model = "{ 'FOO'.toFirstLower   }";
+		expect(model.lastIndexOf("toFirstLower"), 12, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
+		expect(model.lastIndexOf("toFirstLower"), 12, XtendHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+		highlight(model);
+	}
+	
+	public void testNonStaticExtensionOperationInvocation() throws Exception {
+		addImport("com.google.inject.Inject");
+		addInject("extension StringBuilder");
+		String model = "{ 'Foo'.append   }";
+		expect(model.lastIndexOf("append"), 6, XtendHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+		notExpect(model.lastIndexOf("append"), 6, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
+		highlight(model);
+	}
+	
+	public void testStaticImportedExtensionOperationInvocation() throws Exception {
+		addImport("static extension java.util.Collections.*");
+		String model = "{ newArrayList.shuffle   }";
+		expect(model.lastIndexOf("newArrayList"), 12, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
+		notExpect(model.lastIndexOf("newArrayList"), 12, XtendHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+		expect(model.lastIndexOf("shuffle"), 7, XtendHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+		expect(model.lastIndexOf("shuffle"), 7, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
+		highlight(model);
+	}
+	
+	public void testAnnotaton() throws Exception {
+		addImport("com.google.inject.Inject");
+		String model = "{} @Inject StringBuilder bar";
+		expect(model.lastIndexOf("@Inject"), 7, XbaseHighlightingConfiguration.ANNOTATION);
+		highlight(model);
+	}
+	
+	public void testReferencedJvmAnnotatonType() throws Exception {
+		addImport("com.google.inject.Inject");
+		String model = "{ val bar = typeof(Inject) } ";
+		expect(model.lastIndexOf("Inject"), 6, XbaseHighlightingConfiguration.ANNOTATION);
+		highlight(model);
+	}
+	
 	protected void highlight(String functionBody) {
 		try {
-			XtendFunction model = function(functionBody);
+			XtendClass model = member(functionBody);
 			calculator.provideHighlightingFor((XtextResource) model.eResource(), this);
 			assertTrue(expectedRegions.toString(), expectedRegions.isEmpty());
 		} catch(Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	protected void addImport(String importString){
+		imports.add("import " + importString);
+	}
+	
+	protected void addInject(String injectString) {
+		injects.add("@Inject " + injectString);
+	}
 
 	protected void expect(int offset, int length) {
-		expect(offset, length, HighlightingConfiguration.INSIGNIFICANT_TEMPLATE_TEXT);
+		expect(offset, length, XtendHighlightingConfiguration.INSIGNIFICANT_TEMPLATE_TEXT);
 	}
 
 	protected void expect(int offset, int length, String highlightID) {
 		expectedRegions.put(new TextRegion(offset, length), highlightID);
+	}
+	
+	protected void notExpect(int offset, int length, String highlighID){
+		explicitNotExpectedRegions.put(new TextRegion(offset, length), highlighID);
 	}
 
 	public void addPosition(int offset, int length, String... id) {
 		TextRegion region = new TextRegion(offset - getPrefixLength(), length);
 		assertEquals(1, id.length);
 		assertFalse(region.toString(), expectedRegions.isEmpty());
-		String expectedID = expectedRegions.remove(region);
-		assertNotNull("expected: " + expectedRegions.toString() + " but was: " + region + " (" + id[0] + ")", expectedID);
-		assertEquals(expectedID, id[0]);
+		Collection<String> exprectedIds = expectedRegions.get(region);
+		if(exprectedIds.size() > 0)
+			assertTrue("expected: " + expectedRegions.toString() + " but was: " + region + " (" + id[0] + ")", exprectedIds.contains(id[0]));
+		if(exprectedIds.contains(id[0]))
+			expectedRegions.remove(region, id[0]);
+		Collection<String> notExprectedIds = explicitNotExpectedRegions.get(region);
+		assertFalse("not exptected highlighting as position: " + region + " (" + id[0] + ")", notExprectedIds.contains(id[0]));
 	}
 	
 }

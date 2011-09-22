@@ -26,7 +26,7 @@ public class TokenToAttributeIdMapper extends DefaultAntlrTokenToAttributeIdMapp
 			"RULE_RICH_TEXT_INBETWEEN".equals(tokenName) ||
 			"RULE_COMMENT_RICH_TEXT_END".equals(tokenName) ||
 			"RULE_COMMENT_RICH_TEXT_INBETWEEN".equals(tokenName)) {
-			return HighlightingConfiguration.RICH_TEXT_ID;
+			return XtendHighlightingConfiguration.RICH_TEXT_ID;
 		}
 		return super.calculateId(tokenName, tokenType);
 	}

@@ -8,41 +8,63 @@
 package org.eclipse.xtext.xbase.ui.highlighting;
 
 import java.util.BitSet;
+import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.common.types.JvmAnnotationType;
+import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XBinaryOperation;
+import org.eclipse.xtext.xbase.XUnaryOperation;
+import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
 /**
- * <p>A base implementation of the semantic highlighting calculation.</p>
+ * <p>
+ * A base implementation of the semantic highlighting calculation.
+ * </p>
  * 
- * <p>Highlights references to {@link Primitives}, e.g. <code>void, int, boolean</code>
- * and the identifier <code>this</code>.</p>
+ * <p>
+ * Highlights references to {@link Primitives}, e.g. <code>void, int, boolean</code> and the identifier
+ * <code>this</code>.
+ * </p>
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Holger Schill
  */
 public class XbaseHighlightingCalculator implements ISemanticHighlightingCalculator {
 
 	@Inject
 	private XbaseGrammarAccess grammarAccess;
-	
+
 	private Map<String, String> highlightedIdentifiers;
 	private BitSet idLengthsToHighlight;
-	
+
 	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
 		if (resource == null || resource.getParseResult() == null
 				|| resource.getParseResult().getRootASTElement() == null)
@@ -50,7 +72,7 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 		if (highlightedIdentifiers == null) {
 			highlightedIdentifiers = initializeHighlightedIdentifiers();
 			idLengthsToHighlight = new BitSet();
-			for(String s: highlightedIdentifiers.keySet()) {
+			for (String s : highlightedIdentifiers.keySet()) {
 				idLengthsToHighlight.set(s.length());
 			}
 		}
@@ -58,21 +80,98 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 	}
 
 	/**
-	 * <p>Actual implementation of the semantic highlighting calculation. It is ensured, that the given
-	 * resource is not <code>null</code> and refers to an initialized parse result.</p>
-	 * <p>Clients should override this method in order to perform custom highlighting.</p>
+	 * <p>
+	 * Actual implementation of the semantic highlighting calculation. It is ensured, that the given resource is not
+	 * <code>null</code> and refers to an initialized parse result.
+	 * </p>
+	 * <p>
+	 * Clients should override this method in order to perform custom highlighting.
+	 * </p>
 	 * 
-	 * @param resource a valid to-be-processed resource. Is never <code>null</code>.
-	 * @param acceptor the acceptor. Is never <code>null</code>.
+	 * @param resource
+	 *            a valid to-be-processed resource. Is never <code>null</code>.
+	 * @param acceptor
+	 *            the acceptor. Is never <code>null</code>.
 	 */
 	protected void doProvideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
 		ICompositeNode node = resource.getParseResult().getRootNode();
 		highlightSpecialIdentifiers(acceptor, node);
+		searchAndHighlightElements(resource, acceptor);
+	}
+
+	protected void searchAndHighlightElements(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
+		TreeIterator<EObject> iterator = resource.getAllContents();
+		while (iterator.hasNext()) {
+			EObject object = iterator.next();
+			if (object instanceof XAbstractFeatureCall) {
+				highlightFeatureCall((XAbstractFeatureCall) object, acceptor);
+			}
+			// Handle XAnnotation in a special way because we want the @ highlighted too
+			if (object instanceof XAnnotation) {
+				highlightAnnotation((XAnnotation) object, acceptor);
+			} else {
+				highlightReferencedJvmTypes(acceptor, object);
+			}
+		}
+	}
+
+	protected void highlightReferencedJvmTypes(IHighlightedPositionAcceptor acceptor, EObject object) {
+		for (EReference reference : object.eClass().getEAllReferences()) {
+			EClass referencedType = reference.getEReferenceType();
+			if (EcoreUtil2.isAssignableFrom(TypesPackage.Literals.JVM_TYPE, referencedType)) {
+				List<EObject> referenceObjects = EcoreUtil2.getAllReferencedObjects(object, reference);
+				for (EObject referencedObject : referenceObjects) {
+					if(referencedObject != null && !referencedObject.eIsProxy())
+						higlightJvmAnnotationType(acceptor, object, reference, referencedObject);
+				}
+			}
+		}
+	}
+
+	protected void higlightJvmAnnotationType(IHighlightedPositionAcceptor acceptor, EObject object, EReference reference,
+			EObject entry) {
+		if (entry instanceof JvmAnnotationType) {
+			List<INode> childs = NodeModelUtils.findNodesForFeature(object, reference);
+			if (childs.size() > 0)
+				highlightNode(childs.get(0), XbaseHighlightingConfiguration.ANNOTATION, acceptor);
+		}
+	}
+
+	protected void highlightAnnotation(XAnnotation annotation, IHighlightedPositionAcceptor acceptor) {
+		JvmAnnotationType annotationType = annotation.getAnnotationType();
+		if (annotationType != null && !annotationType.eIsProxy()) {
+			ICompositeNode node = NodeModelUtils.findActualNodeFor(annotation);
+			acceptor.addPosition(node.getOffset(), node.getLength(), XbaseHighlightingConfiguration.ANNOTATION);
+		}
+	}
+
+	protected void highlightFeatureCall(XAbstractFeatureCall featureCall, IHighlightedPositionAcceptor acceptor) {
+		JvmIdentifiableElement feature = featureCall.getFeature();
+		if (feature != null && !feature.eIsProxy()) {
+			if (feature instanceof JvmField) {
+				if (((JvmField) feature).isStatic()) {
+					highlightFeatureCall(featureCall, acceptor, XbaseHighlightingConfiguration.STATIC_FIELD);
+				}
+			} else if (feature instanceof JvmOperation
+					&& !(featureCall instanceof XUnaryOperation || featureCall instanceof XBinaryOperation)) {
+				JvmOperation jvmOperation = (JvmOperation) feature;
+				if (jvmOperation.isStatic())
+					highlightFeatureCall(featureCall, acceptor, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
+			}
+		}
+	}
+
+	protected void highlightFeatureCall(XAbstractFeatureCall featureCall, IHighlightedPositionAcceptor acceptor,
+			String id) {
+		List<INode> childs = NodeModelUtils.findNodesForFeature(featureCall,
+				XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
+		if (childs.size() > 0)
+			highlightNode(childs.get(0), id, acceptor);
 	}
 
 	protected void highlightSpecialIdentifiers(IHighlightedPositionAcceptor acceptor, ICompositeNode root) {
 		TerminalRule idRule = grammarAccess.getIDRule();
-		for(ILeafNode leaf: root.getLeafNodes()) {
+		for (ILeafNode leaf : root.getLeafNodes()) {
 			if (!leaf.isHidden()) {
 				highlightSpecialIdentifiers(leaf, acceptor, idRule);
 			}
@@ -89,27 +188,27 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 				if (highlightingID != null) {
 					acceptor.addPosition(leafNode.getOffset(), leafNode.getLength(), highlightingID);
 				}
-			}	
+			}
 		}
 	}
 
 	/**
-	 * Returns a mapping from identifier (e.g. 'void', 'int', 'this') to highlighting ID.
-	 * May not return <code>null</code>.
+	 * Returns a mapping from identifier (e.g. 'void', 'int', 'this') to highlighting ID. May not return
+	 * <code>null</code>.
+	 * 
 	 * @return a mapping from identifier (e.g. 'void', 'int', 'this') to highlighting ID.
 	 */
 	protected Map<String, String> initializeHighlightedIdentifiers() {
 		Map<String, String> result = Maps.newHashMap();
-		for(Primitive p: Primitives.Primitive.values()) {
+		for (Primitive p : Primitives.Primitive.values()) {
 			result.put(p.name().toLowerCase(), DefaultHighlightingConfiguration.KEYWORD_ID);
 		}
 		result.put("this", DefaultHighlightingConfiguration.KEYWORD_ID);
 		return result;
 	}
-	
+
 	/**
-	 * Highlights the non-hidden parts of {@code node} with the style that is associated
-	 * with {@code id}.
+	 * Highlights the non-hidden parts of {@code node} with the style that is associated with {@code id}.
 	 */
 	protected void highlightNode(INode node, String id, IHighlightedPositionAcceptor acceptor) {
 		if (node == null)

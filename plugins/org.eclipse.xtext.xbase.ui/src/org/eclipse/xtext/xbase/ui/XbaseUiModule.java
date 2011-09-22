@@ -4,6 +4,8 @@
 package org.eclipse.xtext.xbase.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
+import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingConfiguration;
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -12,6 +14,10 @@ public class XbaseUiModule extends org.eclipse.xtext.xbase.ui.AbstractXbaseUiMod
 
 	public XbaseUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
+	}
+	
+	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return XbaseHighlightingConfiguration.class;
 	}
 
 }
