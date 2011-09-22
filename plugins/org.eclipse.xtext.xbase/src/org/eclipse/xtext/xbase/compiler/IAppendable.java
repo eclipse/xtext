@@ -28,6 +28,8 @@ public interface IAppendable {
 	String declareVariable(Object key, String proposedName);
 
 	String getName(Object key);
+	
+	Object getObject(String name);
 
 	void closeScope();
 
