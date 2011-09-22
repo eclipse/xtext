@@ -428,7 +428,6 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		XtendClass xtendClass = xtendFile.getXtendClass();
 		assertEquals(associations.getInferredType(xtendClass), inferredType);
 		assertEquals(xtendClass, associations.getXtendClass(inferredType));
-		assertEquals(xtendClass.getIdentifier(), inferredType.getIdentifier());
 		assertEquals(JvmVisibility.PUBLIC, inferredType.getVisibility());
 	}
 
@@ -440,7 +439,6 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		JvmMember inferredFirstMember = inferredType.getMembers().get(0);
 		assertTrue(inferredFirstMember instanceof JvmConstructor);
 		assertEquals(associations.getInferredConstructor(xtendClass), inferredFirstMember);
-		assertEquals(xtendClass.getIdentifier() + "." + xtendClass.getName() + "()", inferredFirstMember.getIdentifier());
 	}
 
 	public void testInferredSuperType() throws Exception {
@@ -503,7 +501,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		JvmMember jvmMember = jvmMembers.get(1);
 		assertTrue(jvmMember instanceof JvmOperation);
 		XtendFunction xtendFunction = (XtendFunction) xtendClass.getMembers().get(0);
-		assertEquals(xtendFunction.getIdentifier(), jvmMember.getIdentifier());
+		assertEquals(xtendFunction.getName(), jvmMember.getSimpleName());
 		assertEquals(jvmMember, associations.getDirectlyInferredOperation(xtendFunction));
 		assertEquals(xtendFunction, associations.getXtendFunction((JvmOperation) inferredType.getMembers().get(1)));
 	}
@@ -517,11 +515,11 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		JvmMember jvmMember = jvmMembers.get(1);
 		assertTrue(jvmMember instanceof JvmOperation);
 		XtendFunction xtendFunction = (XtendFunction) xtendClass.getMembers().get(0);
-		assertEquals(xtendFunction.getIdentifier(), jvmMember.getIdentifier());
+		assertEquals(xtendFunction.getName(), jvmMember.getSimpleName());
 		assertEquals("java.util.ArrayList<java.lang.String>", ((JvmOperation) jvmMember).getReturnType().getIdentifier());
 		
 		JvmOperation privateInitializer = (JvmOperation) jvmMembers.get(2);
-		assertEquals("_init_"+xtendFunction.getSimpleName(), privateInitializer.getSimpleName());
+		assertEquals("_init_"+xtendFunction.getName(), privateInitializer.getSimpleName());
 		assertEquals("java.util.ArrayList<java.lang.String>", privateInitializer.getParameters().get(0).getParameterType().getIdentifier());
 		assertEquals("java.lang.String", privateInitializer.getParameters().get(1).getParameterType().getIdentifier());
 	}
@@ -554,7 +552,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		assertEquals(1, jvmOperation.getParameters().size());
 		JvmFormalParameter jvmParameter = jvmOperation.getParameters().get(0);
 		XtendParameter xtendParameter = xtendFunction.getParameters().get(0);
-		assertEquals(xtendParameter.getIdentifier(), jvmParameter.getIdentifier());
+		assertEquals(xtendParameter.getName(), jvmParameter.getSimpleName());
 		assertEquals(xtendParameter.getParameterType().getType(), jvmParameter.getParameterType().getType());
 	}
 

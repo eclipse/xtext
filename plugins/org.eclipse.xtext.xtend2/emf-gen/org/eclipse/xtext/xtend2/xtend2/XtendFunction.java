@@ -7,8 +7,7 @@ package org.eclipse.xtext.xtend2.xtend2;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
 import org.eclipse.xtext.xbase.XExpression;
@@ -28,6 +27,7 @@ import org.eclipse.xtext.xbase.XExpression;
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction#isOverride <em>Override</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction#isDispatch <em>Dispatch</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction#getCreateExtensionInfo <em>Create Extension Info</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction#getTypeParameters <em>Type Parameters</em>}</li>
  * </ul>
  * </p>
  *
@@ -35,7 +35,7 @@ import org.eclipse.xtext.xbase.XExpression;
  * @model
  * @generated
  */
-public interface XtendFunction extends XtendMember, JvmTypeParameterDeclarator, JvmIdentifiableElement
+public interface XtendFunction extends XtendMember
 {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -208,5 +208,21 @@ public interface XtendFunction extends XtendMember, JvmTypeParameterDeclarator, 
 	 * @generated
 	 */
 	void setCreateExtensionInfo(CreateExtensionInfo value);
+
+	/**
+	 * Returns the value of the '<em><b>Type Parameters</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.xtext.common.types.JvmTypeParameter}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Type Parameters</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Type Parameters</em>' containment reference list.
+	 * @see org.eclipse.xtext.xtend2.xtend2.Xtend2Package#getXtendFunction_TypeParameters()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<JvmTypeParameter> getTypeParameters();
 
 } // XtendFunction

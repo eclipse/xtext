@@ -5,7 +5,6 @@
  */
 package org.eclipse.xtext.xtend2.xtend2;
 
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
 /**
@@ -25,7 +24,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  * @model
  * @generated
  */
-public interface XtendParameter extends JvmIdentifiableElement, XtendAnnotationTarget
+public interface XtendParameter extends XtendAnnotationTarget
 {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.

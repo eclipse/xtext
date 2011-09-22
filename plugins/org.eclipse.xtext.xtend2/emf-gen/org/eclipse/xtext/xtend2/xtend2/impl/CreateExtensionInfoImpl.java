@@ -12,8 +12,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.xtext.common.types.impl.JvmIdentifiableElementImplCustom;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.xbase.XExpression;
 
@@ -34,7 +33,7 @@ import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
  *
  * @generated
  */
-public class CreateExtensionInfoImpl extends JvmIdentifiableElementImplCustom implements CreateExtensionInfo
+public class CreateExtensionInfoImpl extends MinimalEObjectImpl.Container implements CreateExtensionInfo
 {
 	/**
 	 * The cached value of the '{@link #getCreateExpression() <em>Create Expression</em>}' containment reference.

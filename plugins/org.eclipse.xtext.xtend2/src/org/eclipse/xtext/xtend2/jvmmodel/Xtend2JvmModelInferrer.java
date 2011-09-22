@@ -12,6 +12,8 @@ import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -22,6 +24,7 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -32,9 +35,12 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
+import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer.ExitPoint;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
@@ -47,6 +53,8 @@ import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendMember;
 import org.eclipse.xtext.xtend2.xtend2.XtendParameter;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
@@ -58,7 +66,7 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 
 	@Inject
 	protected TypesFactory typesFactory;
-	
+
 	@Inject
 	private IJvmModelAssociator associator;
 
@@ -67,18 +75,15 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 
 	@Inject
 	private DispatchingSupport dispatchingSupport;
-	
-	@Inject
-	private IdentifiableSimpleNameProvider simpleNameProvider;
-	
+
 	@Inject
 	private TypeReferences typeReferences;
-	
+
 	public void infer(EObject xtendFile, IAcceptor<JvmDeclaredType> acceptor, boolean prelinkingPhase) {
 		if (!(xtendFile instanceof XtendFile))
-			throw new IllegalArgumentException("expected XtendFile but was "+xtendFile);
-		final XtendFile xtendFile2 = (XtendFile)xtendFile;
-		if (xtendFile2.getXtendClass()==null)
+			throw new IllegalArgumentException("expected XtendFile but was " + xtendFile);
+		final XtendFile xtendFile2 = (XtendFile) xtendFile;
+		if (xtendFile2.getXtendClass() == null)
 			return;
 		JvmGenericType inferredJvmType = transform(xtendFile2.getXtendClass(), prelinkingPhase);
 		acceptor.accept(inferredJvmType);
@@ -91,7 +96,7 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 		target.setPackageName(source.getPackageName());
 		target.setSimpleName(source.getName());
 		target.setVisibility(JvmVisibility.PUBLIC);
-		if (! prelinkingPhase) {
+		if (!prelinkingPhase) {
 			addConstructor(source, target);
 			if (source.getSuperTypes().isEmpty()) {
 				JvmTypeReference typeRefToObject = typeReferences.getTypeForName(Object.class, source);
@@ -101,15 +106,14 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 					target.getSuperTypes().add(EcoreUtil2.cloneWithProxies(superType));
 				}
 			}
-			
+
 			for (JvmTypeParameter typeParameter : source.getTypeParameters()) {
 				final JvmTypeParameter clonedTypeParameter = EcoreUtil2.cloneWithProxies(typeParameter);
 				associator.associate(typeParameter, clonedTypeParameter);
 				target.getTypeParameters().add(clonedTypeParameter);
 			}
 			for (XtendMember member : source.getMembers()) {
-				if (member instanceof XtendField 
-						|| member instanceof XtendFunction
+				if (member instanceof XtendField || member instanceof XtendFunction
 						&& ((XtendFunction) member).getName() != null) {
 					transform(member, target);
 				}
@@ -124,7 +128,8 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 		Multimap<Pair<String, Integer>, JvmOperation> methods = dispatchingSupport.getDispatchMethods(target);
 		for (Pair<String, Integer> key : methods.keySet()) {
 			Collection<JvmOperation> operations = methods.get(key);
-			JvmOperation operation = deriveGenericDispatchOperationSignature(dispatchingSupport.sort(operations), target);
+			JvmOperation operation = deriveGenericDispatchOperationSignature(dispatchingSupport.sort(operations),
+					target);
 			operation.setSimpleName(key.getFirst());
 			operation.setVisibility(JvmVisibility.PUBLIC);
 		}
@@ -133,7 +138,8 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 	/**
 	 * @return a {@link JvmOperation} with common denominator argument types of all given operations
 	 */
-	protected JvmOperation deriveGenericDispatchOperationSignature(Collection<JvmOperation> operations, JvmGenericType target) {
+	protected JvmOperation deriveGenericDispatchOperationSignature(Collection<JvmOperation> operations,
+			JvmGenericType target) {
 		if (operations.isEmpty())
 			return null;
 		final Iterator<JvmOperation> iterator = operations.iterator();
@@ -148,7 +154,8 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			parameter.setName(parameter2.getName());
 		}
 		for (JvmOperation jvmOperation : operations) {
-			Iterable<XtendFunction> xtendFunctions = filter(associations.getSourceElements(jvmOperation), XtendFunction.class);
+			Iterable<XtendFunction> xtendFunctions = filter(associations.getSourceElements(jvmOperation),
+					XtendFunction.class);
 			for (XtendFunction func : xtendFunctions) {
 				associator.associate(func, result);
 			}
@@ -173,17 +180,17 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			if (source.getCreateExtensionInfo() != null) {
 				JvmOperation initializer = typesFactory.createJvmOperation();
 				container.getMembers().add(initializer);
-				initializer.setSimpleName("_init_"+source.getSimpleName());
+				initializer.setSimpleName("_init_" + source.getName());
 				initializer.setVisibility(JvmVisibility.PRIVATE);
 				initializer.setReturnType(typeReferences.getTypeForName(Void.TYPE, sourceMember));
-				
+
 				// the first parameter is the created object
 				JvmFormalParameter jvmParam = typesFactory.createJvmFormalParameter();
 				jvmParam.setName(source.getCreateExtensionInfo().getName());
 				jvmParam.setParameterType(getTypeProxy(source.getCreateExtensionInfo().getCreateExpression()));
 				initializer.getParameters().add(jvmParam);
 				associator.associate(source.getCreateExtensionInfo(), jvmParam);
-				
+
 				// add all others
 				for (XtendParameter parameter : source.getParameters()) {
 					jvmParam = typesFactory.createJvmFormalParameter();
@@ -193,7 +200,8 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 					associator.associate(parameter, jvmParam);
 				}
 				associator.associate(source, initializer);
-				associator.associateLogicalContainer(((XtendFunction) sourceMember).getCreateExtensionInfo().getCreateExpression(), target);
+				associator.associateLogicalContainer(((XtendFunction) sourceMember).getCreateExtensionInfo()
+						.getCreateExpression(), target);
 				associator.associateLogicalContainer(((XtendFunction) sourceMember).getExpression(), initializer);
 			} else {
 				associator.associateLogicalContainer(((XtendFunction) sourceMember).getExpression(), target);
@@ -213,7 +221,7 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 				target.getParameters().add(jvmParam);
 				associator.associate(parameter, jvmParam);
 			}
-			if (source.getReturnType()!=null) {
+			if (source.getReturnType() != null) {
 				target.setReturnType(EcoreUtil2.cloneWithProxies(source.getReturnType()));
 			} else {
 				target.setReturnType(getTypeProxy(target));
@@ -228,10 +236,11 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			XtendField dep = (XtendField) sourceMember;
 			if ((dep.isExtension() || dep.getName() != null) && dep.getType() != null) {
 				JvmField field = typesFactory.createJvmField();
+				final String fieldName = computeFieldName(dep, container);
+				field.setSimpleName(fieldName);
 				container.getMembers().add(field);
 				associator.associatePrimary(dep, field);
 				field.setVisibility(JvmVisibility.PRIVATE);
-				field.setSimpleName(simpleNameProvider.getSimpleName(dep));
 				field.setType(EcoreUtil2.cloneWithProxies(dep.getType()));
 				return field;
 			} else {
@@ -241,10 +250,52 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 		throw new IllegalArgumentException("Cannot transform " + notNull(sourceMember) + " to a JvmMember");
 	}
 
+	protected String computeFieldName(XtendField field, JvmGenericType declaringType) {
+		if (field.getName() != null)
+			return field.getName();
+		
+		JvmTypeReference type = field.getType();
+		String name = null;
+		if (type != null) {
+			while(type instanceof JvmGenericArrayTypeReference) {
+				type = ((JvmGenericArrayTypeReference) type).getComponentType();
+			}
+			if (type instanceof JvmParameterizedTypeReference) {
+				List<INode> nodes = NodeModelUtils.findNodesForFeature(type, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
+				if (!nodes.isEmpty()) {
+					String typeName = nodes.get(0).getText().trim();
+					int lastDot = typeName.lastIndexOf('.');
+					if (lastDot != -1) {
+						typeName = typeName.substring(lastDot + 1); 
+					}
+					name = "_" + Strings.toFirstLower(typeName);
+				}
+			}
+		}
+		if (isFieldNameUnUsed(declaringType, name)) {
+			return name;
+		}
+		for (int i = 1; i < Integer.MAX_VALUE; i++) {
+			final String candidate = name + "_" + i;
+			if (isFieldNameUnUsed(declaringType, candidate)) {
+				return candidate;
+			}
+		}
+		throw new IllegalStateException("couldn't find a free field name for " + field);
+	}
+
+	protected boolean isFieldNameUnUsed(JvmGenericType declaringType, final String name) {
+		return !Iterables.any(declaringType.getDeclaredFields(), new Predicate<JvmField>() {
+			public boolean apply(JvmField input) {
+				return input.getSimpleName().equals(name);
+			}
+		});
+	}
+
 	protected void computeInferredReturnTypes(JvmGenericType inferredJvmType) {
 		Iterable<JvmOperation> operations = inferredJvmType.getDeclaredOperations();
 		for (JvmOperation jvmOperation : operations) {
-			if(!jvmOperation.eIsSet(TypesPackage.Literals.JVM_OPERATION__RETURN_TYPE))
+			if (!jvmOperation.eIsSet(TypesPackage.Literals.JVM_OPERATION__RETURN_TYPE))
 				jvmOperation.setReturnType(getTypeProxy(jvmOperation));
 		}
 	}
@@ -254,8 +305,8 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 		final Resource eResource = pointer.eResource();
 		String fragment = eResource.getURIFragment(pointer);
 		URI uri = eResource.getURI();
-		uri = uri.appendFragment(Xtend2Resource.FRAGMENT_PREFIX+fragment);
-		((InternalEObject)typeReference).eSetProxyURI(uri);
+		uri = uri.appendFragment(Xtend2Resource.FRAGMENT_PREFIX + fragment);
+		((InternalEObject) typeReference).eSetProxyURI(uri);
 		return typeReference;
 	}
 

@@ -106,7 +106,7 @@ public class DispatchingSupport {
 		List<XtendFunction> sourceElements = newArrayList(filter(associations.getSourceElements(operation), XtendFunction.class));
 		if (sourceElements.size() == 1) {
 			final XtendFunction xtendFunction = sourceElements.get(0);
-			return xtendFunction.isDispatch() && operation.getSimpleName().equals("_"+xtendFunction.getSimpleName());
+			return xtendFunction.isDispatch() && operation.getSimpleName().equals("_"+xtendFunction.getName());
 		}
 		return !operation.getParameters().isEmpty() && !operation.isStatic()
 				&& operation.getSimpleName().startsWith("_");

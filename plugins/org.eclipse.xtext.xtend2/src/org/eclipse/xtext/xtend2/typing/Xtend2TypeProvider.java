@@ -10,7 +10,6 @@ package org.eclipse.xtext.xtend2.typing;
 import static com.google.common.collect.Iterables.*;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -19,17 +18,11 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
-import org.eclipse.xtext.common.types.JvmConstraintOwner;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeConstraint;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.JvmUpperBound;
-import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XForLoopExpression;
@@ -38,6 +31,7 @@ import org.eclipse.xtext.xbase.annotations.typing.XbaseWithAnnotationsTypeProvid
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xtend2.resource.Xtend2Resource;
 import org.eclipse.xtext.xtend2.xtend2.CreateExtensionInfo;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
 import org.eclipse.xtext.xtend2.xtend2.RichStringElseIf;
@@ -51,7 +45,6 @@ import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendParameter;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -66,9 +59,9 @@ public class Xtend2TypeProvider extends XbaseWithAnnotationsTypeProvider {
 	@Inject
 	private IXtend2JvmAssociations xtend2jvmAssociations;
 
-	@Inject
-	private XtendOverridesService overridesService;
-	
+//	@Inject
+//	private XtendOverridesService overridesService;
+//	
 	@Inject
 	private IEarlyExitComputer earlyExitComputer;
 	
@@ -79,7 +72,7 @@ public class Xtend2TypeProvider extends XbaseWithAnnotationsTypeProvider {
 		if (reference == Xtend2Package.Literals.XTEND_FUNCTION__EXPRESSION) {
 			if (function.getCreateExtensionInfo()!=null)
 				return getTypeReferences().getTypeForName(Void.TYPE, function);
-			JvmTypeReference declaredOrInferredReturnType = getDeclaredOrOverriddenReturnType(function);
+			JvmTypeReference declaredOrInferredReturnType = ((Xtend2Resource)function.eResource()).getDeclaredOrOverriddenReturnType(function);
 			if (declaredOrInferredReturnType == null) {
 				declaredOrInferredReturnType = getCommonReturnType(function.getExpression(), false);
 				if (declaredOrInferredReturnType != null && !earlyExitComputer.isEarlyExit(function.getExpression())) {
@@ -97,10 +90,13 @@ public class Xtend2TypeProvider extends XbaseWithAnnotationsTypeProvider {
 		return null;
 	}
 	
+	
+	
+	
 	protected JvmTypeReference _expectedType(CreateExtensionInfo info, EReference reference, int index, boolean rawType) {
 		if (reference == Xtend2Package.Literals.CREATE_EXTENSION_INFO__CREATE_EXPRESSION) {
 			XtendFunction function = EcoreUtil2.getContainerOfType(info, XtendFunction.class);
-			JvmTypeReference declaredOrInferredReturnType = getDeclaredOrOverriddenReturnType(function);
+			JvmTypeReference declaredOrInferredReturnType = ((Xtend2Resource)info.eResource()).getDeclaredOrOverriddenReturnType(function);
 			if (declaredOrInferredReturnType == null || getTypeReferences().is(declaredOrInferredReturnType, Void.TYPE))
 				return null;
 			return declaredOrInferredReturnType;
@@ -117,7 +113,7 @@ public class Xtend2TypeProvider extends XbaseWithAnnotationsTypeProvider {
 			return null;
 		if (function.getCreateExtensionInfo()!=null) {
 			if (EcoreUtil.isAncestor(function.getCreateExtensionInfo().getCreateExpression(), expr))
-				return getDeclaredOrOverriddenReturnType(function);
+				return ((Xtend2Resource)expr.eResource()).getDeclaredOrOverriddenReturnType(function);
 		}
 		return getExpectedType(function.getExpression(), rawType);
 	}
@@ -183,79 +179,6 @@ public class Xtend2TypeProvider extends XbaseWithAnnotationsTypeProvider {
 		return getTypeReferences().getTypeForName(Object.class, xtendClass);
 	}
 	
-	protected JvmTypeReference _typeForIdentifiable(XtendFunction function, boolean rawType) {
-		JvmTypeReference declaredOrInferredReturnType = getDeclaredOrOverriddenReturnType(function);
-		if (declaredOrInferredReturnType != null)
-			return declaredOrInferredReturnType;
-		JvmTypeReference returnType = getCommonReturnType(function.getExpression(), true);
-		if (returnType!=null) {
-			JvmOperation operation = xtend2jvmAssociations.getDirectlyInferredOperation(function);
-			if (operation == null)
-				return null;
-			JvmDeclaredType declaringType = operation.getDeclaringType();
-			for(JvmTypeReference reference: Iterables.filter(EcoreUtil2.eAllContents(returnType), JvmTypeReference.class)) {
-				if (reference.getType() instanceof JvmTypeParameter) {
-					JvmTypeParameter parameter = (JvmTypeParameter) reference.getType();
-					if (parameter.getDeclarator() != declaringType && parameter.getDeclarator() != operation) {
-						returnType = EcoreUtil2.cloneIfContained(returnType);
-						Set<JvmTypeReference> replaceUs = Sets.newHashSet();
-						for(JvmTypeReference containerOfReplaced: Iterables.filter(EcoreUtil2.eAllContents(returnType), JvmTypeReference.class)) {
-							if (containerOfReplaced.getType() instanceof JvmTypeParameter)
-								replaceUs.add(containerOfReplaced);
-						}
-						for(JvmTypeReference replaceMe: replaceUs) {
-							if (replaceMe.eContainer() instanceof JvmTypeConstraint) {
-								JvmTypeConstraint containerConstraint = (JvmTypeConstraint) replaceMe.eContainer();
-								JvmConstraintOwner constraintOwner = (JvmConstraintOwner) replaceMe.getType();
-								for(JvmTypeConstraint constraint: constraintOwner.getConstraints()) {
-									if (constraint.eClass() == containerConstraint.eClass()) {
-										containerConstraint.setTypeReference(EcoreUtil2.clone(constraint.getTypeReference()));
-										break;
-									}
-								}
-							} else if (replaceMe.eContainer() != null) {
-								JvmConstraintOwner constraintOwner = (JvmConstraintOwner) replaceMe.getType();
-								JvmWildcardTypeReference wildCard = getTypeReferences().wildCard();
-								for(JvmTypeConstraint constraint: constraintOwner.getConstraints()) {
-									wildCard.getConstraints().add(EcoreUtil2.clone(constraint));
-								}
-								EcoreUtil.replace(replaceMe, wildCard);
-							} else {
-								JvmConstraintOwner constraintOwner = (JvmConstraintOwner) replaceMe.getType();
-								List<JvmTypeReference> superTypes = Lists.newArrayListWithExpectedSize(constraintOwner.getConstraints().size());
-								for(JvmTypeConstraint constraint: constraintOwner.getConstraints()) {
-									if (constraint instanceof JvmUpperBound) {
-										superTypes.add(constraint.getTypeReference());
-									}
-								}
-								if (superTypes.isEmpty())
-									return getTypeReferences().getTypeForName(Object.class, function);
-								return getTypeConformanceComputer().getCommonSuperType(superTypes);
-							}
-						}
-						return returnType;
-					}
-				}
-			}
-			return returnType;
-		}
-		return getTypeReferences().getTypeForName(Object.class, function);
-	}
-	
-	protected JvmTypeReference getDeclaredOrOverriddenReturnType(XtendFunction func) {
-		if (func.getReturnType() != null)
-			return func.getReturnType();
-		if (func.isOverride()) {
-			JvmTypeReference overridden = overridesService.getOverriddenReturnType(func);
-			if (overridden != null)
-				return overridden;
-		}
-		if (func.getCreateExtensionInfo()!=null) {
-			return getType(func.getCreateExtensionInfo().getCreateExpression());
-		}
-		return null;
-	}
-
 	private final ThreadLocal<Map<JvmIdentifiableElement, Collection<JvmTypeReference>>> ongoingExceptionComputations = new ThreadLocal<Map<JvmIdentifiableElement, Collection<JvmTypeReference>>>() {
 		@Override
 		protected Map<JvmIdentifiableElement, Collection<JvmTypeReference>> initialValue() {

@@ -18,14 +18,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.TypesPackage;
 
 import org.eclipse.xtext.xbase.XExpression;
 
@@ -41,7 +37,6 @@ import org.eclipse.xtext.xtend2.xtend2.XtendParameter;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#getTypeParameters <em>Type Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#getReturnType <em>Return Type</em>}</li>
@@ -49,6 +44,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendParameter;
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#isOverride <em>Override</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#isDispatch <em>Dispatch</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#getCreateExtensionInfo <em>Create Extension Info</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#getTypeParameters <em>Type Parameters</em>}</li>
  * </ul>
  * </p>
  *
@@ -56,16 +52,6 @@ import org.eclipse.xtext.xtend2.xtend2.XtendParameter;
  */
 public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFunction
 {
-	/**
-	 * The cached value of the '{@link #getTypeParameters() <em>Type Parameters</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTypeParameters()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<JvmTypeParameter> typeParameters;
-
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -167,6 +153,16 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 	protected CreateExtensionInfo createExtensionInfo;
 
 	/**
+	 * The cached value of the '{@link #getTypeParameters() <em>Type Parameters</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypeParameters()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<JvmTypeParameter> typeParameters;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -185,20 +181,6 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 	protected EClass eStaticClass()
 	{
 		return Xtend2Package.Literals.XTEND_FUNCTION;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<JvmTypeParameter> getTypeParameters()
-	{
-		if (typeParameters == null)
-		{
-			typeParameters = new EObjectContainmentWithInverseEList.Resolving<JvmTypeParameter>(JvmTypeParameter.class, this, Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS, TypesPackage.JVM_TYPE_PARAMETER__DECLARATOR);
-		}
-		return typeParameters;
 	}
 
 	/**
@@ -433,64 +415,13 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getIdentifier()
+	public EList<JvmTypeParameter> getTypeParameters()
 	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getSimpleName()
-	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getQualifiedName()
-	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getQualifiedName(char innerClassDelimiter)
-	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-	{
-		switch (featureID)
+		if (typeParameters == null)
 		{
-			case Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTypeParameters()).basicAdd(otherEnd, msgs);
+			typeParameters = new EObjectContainmentEList<JvmTypeParameter>(JvmTypeParameter.class, this, Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS);
 		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
+		return typeParameters;
 	}
 
 	/**
@@ -503,8 +434,6 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS:
-				return ((InternalEList<?>)getTypeParameters()).basicRemove(otherEnd, msgs);
 			case Xtend2Package.XTEND_FUNCTION__EXPRESSION:
 				return basicSetExpression(null, msgs);
 			case Xtend2Package.XTEND_FUNCTION__RETURN_TYPE:
@@ -513,6 +442,8 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
 			case Xtend2Package.XTEND_FUNCTION__CREATE_EXTENSION_INFO:
 				return basicSetCreateExtensionInfo(null, msgs);
+			case Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS:
+				return ((InternalEList<?>)getTypeParameters()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -527,8 +458,6 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS:
-				return getTypeParameters();
 			case Xtend2Package.XTEND_FUNCTION__NAME:
 				return getName();
 			case Xtend2Package.XTEND_FUNCTION__EXPRESSION:
@@ -543,6 +472,8 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 				return isDispatch();
 			case Xtend2Package.XTEND_FUNCTION__CREATE_EXTENSION_INFO:
 				return getCreateExtensionInfo();
+			case Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS:
+				return getTypeParameters();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -558,10 +489,6 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS:
-				getTypeParameters().clear();
-				getTypeParameters().addAll((Collection<? extends JvmTypeParameter>)newValue);
-				return;
 			case Xtend2Package.XTEND_FUNCTION__NAME:
 				setName((String)newValue);
 				return;
@@ -584,6 +511,10 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 			case Xtend2Package.XTEND_FUNCTION__CREATE_EXTENSION_INFO:
 				setCreateExtensionInfo((CreateExtensionInfo)newValue);
 				return;
+			case Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS:
+				getTypeParameters().clear();
+				getTypeParameters().addAll((Collection<? extends JvmTypeParameter>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -598,9 +529,6 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS:
-				getTypeParameters().clear();
-				return;
 			case Xtend2Package.XTEND_FUNCTION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -622,6 +550,9 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 			case Xtend2Package.XTEND_FUNCTION__CREATE_EXTENSION_INFO:
 				setCreateExtensionInfo((CreateExtensionInfo)null);
 				return;
+			case Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS:
+				getTypeParameters().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -636,8 +567,6 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS:
-				return typeParameters != null && !typeParameters.isEmpty();
 			case Xtend2Package.XTEND_FUNCTION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case Xtend2Package.XTEND_FUNCTION__EXPRESSION:
@@ -652,60 +581,10 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 				return dispatch != DISPATCH_EDEFAULT;
 			case Xtend2Package.XTEND_FUNCTION__CREATE_EXTENSION_INFO:
 				return createExtensionInfo != null;
+			case Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS:
+				return typeParameters != null && !typeParameters.isEmpty();
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
-	{
-		if (baseClass == JvmTypeParameterDeclarator.class)
-		{
-			switch (derivedFeatureID)
-			{
-				case Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS: return TypesPackage.JVM_TYPE_PARAMETER_DECLARATOR__TYPE_PARAMETERS;
-				default: return -1;
-			}
-		}
-		if (baseClass == JvmIdentifiableElement.class)
-		{
-			switch (derivedFeatureID)
-			{
-				default: return -1;
-			}
-		}
-		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
-	{
-		if (baseClass == JvmTypeParameterDeclarator.class)
-		{
-			switch (baseFeatureID)
-			{
-				case TypesPackage.JVM_TYPE_PARAMETER_DECLARATOR__TYPE_PARAMETERS: return Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS;
-				default: return -1;
-			}
-		}
-		if (baseClass == JvmIdentifiableElement.class)
-		{
-			switch (baseFeatureID)
-			{
-				default: return -1;
-			}
-		}
-		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**

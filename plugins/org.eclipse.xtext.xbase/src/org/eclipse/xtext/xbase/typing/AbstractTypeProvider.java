@@ -156,7 +156,7 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 	
 	// TODO improve / extract to a utility method if other clients are doing similar things
 	protected boolean isResolved(JvmTypeReference reference, JvmTypeParameterDeclarator declarator, boolean rawType) {
-		if (reference == null)
+		if (reference == null || reference instanceof JvmParameterizedTypeReference && reference.getType() == null)
 			return false;
 		if (reference.getType() instanceof JvmTypeParameter) {
 			if (isDeclaratorOf(declarator, (JvmTypeParameter) reference.getType()))
@@ -187,12 +187,25 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		if (obj instanceof JvmTypeParameterDeclarator) {
 			return (JvmTypeParameterDeclarator) obj;
 		}
+		return getNearestTypeParameterDeclarator(getLogicalOrRealContainer(obj));
+	}
+	
+	protected EObject getLogicalOrRealContainer(EObject obj) {
 		if (obj.eResource() != null) {
 			JvmIdentifiableElement container = logicalContainerProvider.getLogicalContainer(obj);
 			if (container != null)
-				return getNearestTypeParameterDeclarator(container);
+				return container;
 		}
-		return getNearestTypeParameterDeclarator(obj.eContainer());
+		return obj.eContainer();
+	}
+	
+	@SuppressWarnings("unchecked")
+	protected <T> T getLogicalOrRealContainer(EObject obj, Class<T> type) {
+		EObject container = getLogicalOrRealContainer(obj);
+		while (container != null && !type.isInstance(container)) {
+			container = getLogicalOrRealContainer(container);
+		}
+		return (T) container;
 	}
 	
 	protected boolean isDeclaratorOf(JvmTypeParameterDeclarator declarator, JvmTypeParameter param) {
@@ -309,7 +322,7 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		Triple<EObject, EReference, Integer> triple = Tuples.create(container, containmentReference, index);
 		return triple;
 	}
-
+	
 	private final PolymorphicDispatcher<JvmTypeReference> typeForIdentifiableDispatcher = PolymorphicDispatcher
 			.createForSingleTarget("_typeForIdentifiable", 2, 2, this);
 

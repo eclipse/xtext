@@ -12,9 +12,6 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
-
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XForLoopExpression;
@@ -159,16 +156,6 @@ public class Xtend2AdapterFactory extends AdapterFactoryImpl
 			public Adapter caseCreateExtensionInfo(CreateExtensionInfo object)
 			{
 				return createCreateExtensionInfoAdapter();
-			}
-			@Override
-			public Adapter caseJvmIdentifiableElement(JvmIdentifiableElement object)
-			{
-				return createJvmIdentifiableElementAdapter();
-			}
-			@Override
-			public Adapter caseJvmTypeParameterDeclarator(JvmTypeParameterDeclarator object)
-			{
-				return createJvmTypeParameterDeclaratorAdapter();
 			}
 			@Override
 			public Adapter caseXExpression(XExpression object)
@@ -433,36 +420,6 @@ public class Xtend2AdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createCreateExtensionInfoAdapter()
-	{
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmIdentifiableElement <em>Jvm Identifiable Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.xtext.common.types.JvmIdentifiableElement
-	 * @generated
-	 */
-	public Adapter createJvmIdentifiableElementAdapter()
-	{
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmTypeParameterDeclarator <em>Jvm Type Parameter Declarator</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.xtext.common.types.JvmTypeParameterDeclarator
-	 * @generated
-	 */
-	public Adapter createJvmTypeParameterDeclaratorAdapter()
 	{
 		return null;
 	}

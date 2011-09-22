@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -55,6 +56,13 @@ public class UIStrings {
 		return "(" + expressionTypes(constructorCall.getArguments()) + ")";
 	}
 
+	public String typeParameters(Iterable<? extends JvmTypeParameter> typeParams) {
+		if (!isEmpty(typeParams)) {
+			return "<" + toString(typeParams) + ">";
+		}
+		return "";
+	}
+	
 	public String typeParameters(JvmIdentifiableElement element) {
 		if (element instanceof JvmTypeParameterDeclarator) {
 			return "<" + toString(((JvmTypeParameterDeclarator) element).getTypeParameters()) + ">";

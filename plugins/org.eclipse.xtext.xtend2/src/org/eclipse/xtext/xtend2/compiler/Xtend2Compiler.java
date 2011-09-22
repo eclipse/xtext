@@ -25,6 +25,7 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -93,9 +94,6 @@ public class Xtend2Compiler extends XbaseCompiler {
 	
 	@Inject
 	private AnnotationCompiler annotationCompiler; 
-	
-	@Inject
-	private IdentifiableSimpleNameProvider simpleNameProvider;
 	
 	@Inject
 	private ILogicalContainerProvider logicalContainerProvider;
@@ -178,12 +176,13 @@ public class Xtend2Compiler extends XbaseCompiler {
 
 
 	protected void compile(XtendField field, IAppendable appendable) {
+		JvmField jvmField = associations.getJvmField(field);
 		appendable.append("\n");
 		generateAnnotations(field, appendable);
 		appendable.append("\nprivate ");
 		serialize(field.getType(), field, appendable);
 		appendable.append(" ");
-		appendable.append(appendable.declareVariable(field, simpleNameProvider.getSimpleName(field))).append(";");
+		appendable.append(jvmField.getSimpleName()).append(";");
 	}
 
 	protected void generateAnnotations(XtendAnnotationTarget annotationTarget, IAppendable appendable) {
