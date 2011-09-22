@@ -14,15 +14,9 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.xtext.common.types.TypesPackage;
 
-import org.eclipse.xtext.common.types.impl.TypesPackageImpl;
-
 import org.eclipse.xtext.xbase.XbasePackage;
 
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
-
-import org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationsPackageImpl;
-
-import org.eclipse.xtext.xbase.impl.XbasePackageImpl;
 
 import org.eclipse.xtext.xtend2.xtend2.CreateExtensionInfo;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
@@ -203,22 +197,15 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 
 		isInited = true;
 
-		// Obtain or create and register interdependencies
-		TypesPackageImpl theTypesPackage = (TypesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI) instanceof TypesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI) : TypesPackage.eINSTANCE);
-		XAnnotationsPackageImpl theXAnnotationsPackage = (XAnnotationsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(XAnnotationsPackage.eNS_URI) instanceof XAnnotationsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(XAnnotationsPackage.eNS_URI) : XAnnotationsPackage.eINSTANCE);
-		XbasePackageImpl theXbasePackage = (XbasePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(XbasePackage.eNS_URI) instanceof XbasePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(XbasePackage.eNS_URI) : XbasePackage.eINSTANCE);
+		// Initialize simple dependencies
+		XbasePackage.eINSTANCE.eClass();
+		XAnnotationsPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theXtend2Package.createPackageContents();
-		theTypesPackage.createPackageContents();
-		theXAnnotationsPackage.createPackageContents();
-		theXbasePackage.createPackageContents();
 
 		// Initialize created meta-data
 		theXtend2Package.initializePackageContents();
-		theTypesPackage.initializePackageContents();
-		theXAnnotationsPackage.initializePackageContents();
-		theXbasePackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theXtend2Package.freeze();
