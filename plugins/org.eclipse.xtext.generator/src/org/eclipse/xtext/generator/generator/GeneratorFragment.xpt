@@ -31,7 +31,7 @@
             category="«name»"
             class="«executableExtensionFactory()»:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
             id="«name».builder"
-            name="Builder">
+            name="Building">
             <keywordReference id="«name.toJavaPackage() + ".ui.keyword_"+name.toSimpleName()»"/>
         </page>
     </extension>
