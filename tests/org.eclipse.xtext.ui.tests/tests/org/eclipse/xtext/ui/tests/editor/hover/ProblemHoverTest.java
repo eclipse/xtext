@@ -10,17 +10,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.hover;
 
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
-
 import java.util.HashMap;
 import java.util.List;
 
+import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.commands.operations.IOperationHistory;
+import org.eclipse.core.commands.operations.IUndoableOperation;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.text.Region;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.ide.undo.CreateMarkersOperation;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.MarkerTypes;
@@ -37,6 +40,7 @@ import org.eclipse.xtext.validation.Issue;
 
 /**
  * @author Christoph Kulla - Initial contribution and API
+ * @author Holger Schill
  */
 public class ProblemHoverTest extends AbstractEditorTest {
 
@@ -98,23 +102,57 @@ public class ProblemHoverTest extends AbstractEditorTest {
 		assertTrue(hoverInfo.contains(expected3));
 	}
 	
-	public void testBug357516() throws Exception {
+	public void testBug357516_warning() throws Exception {
 		IResource resource = editor.getResource();
-		createCustomMarkerOnResource(resource);
+		createCustomMarkerOnResource(resource, IMarker.SEVERITY_WARNING);
 		String hoverInfo = hover.getHoverInfo(editor.getInternalSourceViewer(), 0);
 		assertNotNull(hoverInfo);
 		assertTrue(hoverInfo.contains(CUSTOM_MARKER_TEST_MESSAGE));
 	}
 	
-	private void createCustomMarkerOnResource(IResource resource) throws CoreException{
+	public void testBug357516_error() throws Exception {
+		IResource resource = editor.getResource();
+		createCustomMarkerOnResource(resource, IMarker.SEVERITY_ERROR);
+		String hoverInfo = hover.getHoverInfo(editor.getInternalSourceViewer(), 0);
+		assertNotNull(hoverInfo);
+		assertTrue(hoverInfo.contains(CUSTOM_MARKER_TEST_MESSAGE));
+	}
+	
+	public void testBug357516_info() throws Exception {
+		IResource resource = editor.getResource();
+		createCustomMarkerOnResource(resource, IMarker.SEVERITY_INFO);
+		String hoverInfo = hover.getHoverInfo(editor.getInternalSourceViewer(), 0);
+		assertNull(hoverInfo);
+	}
+	
+	public void testBug357516_bookmark() throws Exception {
+		IResource resource = editor.getResource();
 		HashMap<String, Object> attributes = new HashMap<String, Object>();
 		attributes.put(IMarker.MESSAGE, CUSTOM_MARKER_TEST_MESSAGE);
 		attributes.put(IMarker.LINE_NUMBER, 1);
 		attributes.put(IMarker.LOCATION, resource.getFullPath().toPortableString());
-		attributes.put(IMarker.SEVERITY, IMarker.SEVERITY_WARNING); 
-		
+		IUndoableOperation operation= new CreateMarkersOperation(IMarker.BOOKMARK, attributes, resource, CUSTOM_MARKER_TEST_MESSAGE);
+		IOperationHistory operationHistory= PlatformUI.getWorkbench().getOperationSupport().getOperationHistory();
+		try {
+			operationHistory.execute(operation, null, null);
+		} catch (ExecutionException x) {
+			fail(x.getMessage());
+		}
+		String hoverInfo = hover.getHoverInfo(editor.getInternalSourceViewer(), 0);
+		assertNotNull(hoverInfo);
+		assertTrue(hoverInfo.contains(CUSTOM_MARKER_TEST_MESSAGE));
+	}
+	
+	private void createCustomMarkerOnResource(IResource resource, int severenity) throws CoreException{
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put(IMarker.MESSAGE, CUSTOM_MARKER_TEST_MESSAGE);
+		attributes.put(IMarker.LINE_NUMBER, 1);
+		attributes.put(IMarker.LOCATION, resource.getFullPath().toPortableString());
+		attributes.put(IMarker.SEVERITY, severenity); 
 		MarkerUtilities.createMarker(resource, attributes, CUSTOM_MARKER_ID);
 	}
+	
+	
 
 	protected void activate(IWorkbenchPart part) {
 		editor.getSite().getPage().activate(part);
