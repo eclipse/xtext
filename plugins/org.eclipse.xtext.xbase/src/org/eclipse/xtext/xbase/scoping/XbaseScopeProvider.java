@@ -18,8 +18,10 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -30,7 +32,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.common.types.util.TypeArgumentContext;
+import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -242,29 +244,38 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 				Iterable<IEObjectDescription> result = transform(original,
 						new Function<IEObjectDescription, IEObjectDescription>() {
 							public IEObjectDescription apply(IEObjectDescription from) {
-								TypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getReceiverContext(null);
 								final JvmConstructor constructor = (JvmConstructor) from.getEObjectOrProxy();
-								if (context instanceof XConstructorCall) {
-									XConstructorCall constructorCall = (XConstructorCall) context;
-									List<JvmTypeReference> argumentTypes = Lists.newArrayListWithCapacity(constructorCall.getArguments().size());
-									if (constructorCall.getTypeArguments().isEmpty()) {
-										for(XExpression argument: constructorCall.getArguments()) {
-											JvmTypeReference argumentType = typeProvider.getType(argument, true);
-											argumentTypes.add(argumentType);
-										}
-										typeArgumentContext = typeArgumentContextProvider.injectArgumentTypeContext(
-												typeArgumentContext, 
-												constructor, 
-												null,
-												true,
-												argumentTypes.toArray(new JvmTypeReference[argumentTypes.size()])
-										);
-									} else {
-										typeArgumentContext = typeArgumentContextProvider.getExplicitMethodInvocationContext(
-												(JvmTypeParameterDeclarator) constructor.getDeclaringType(), null, constructorCall.getTypeArguments());
-									}
-								}
-								
+								ITypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getTypeArgumentContext(
+										new TypeArgumentContextProvider.AbstractRequest() {
+											// TODO provide the nearest type parameter declarator of the constructor call, too
+											@Override
+											public JvmFeature getFeature() {
+												return constructor;
+											}
+											@Override
+											public JvmTypeParameterDeclarator getNearestDeclarator() {
+												return EcoreUtil2.getContainerOfType(context, JvmTypeParameterDeclarator.class);
+											}
+											@Override
+											public List<JvmTypeReference> getExplicitTypeArgument() {
+												if (context instanceof XConstructorCall)
+													return ((XConstructorCall) context).getTypeArguments();
+												return null;
+											}
+											@Override
+											public List<JvmTypeReference> getArgumentTypes() {
+												if (context instanceof XConstructorCall) {
+													XConstructorCall constructorCall = (XConstructorCall) context;
+													List<JvmTypeReference> argumentTypes = Lists.newArrayListWithCapacity(constructorCall.getArguments().size());
+													for(XExpression argument: constructorCall.getArguments()) {
+														JvmTypeReference argumentType = typeProvider.getType(argument, true);
+														argumentTypes.add(argumentType);
+													}
+													return argumentTypes;
+												}
+												return null;
+											}
+										});
 								return new JvmFeatureDescription(from.getQualifiedName(), constructor, typeArgumentContext,
 										constructor.getIdentifier(), true, null, 0);
 							}

@@ -15,9 +15,9 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.Primitives.Primitive;
-import org.eclipse.xtext.common.types.util.TypeArgumentContext;
+import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
+import org.eclipse.xtext.common.types.util.Primitives.Primitive;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
@@ -468,16 +468,17 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	
 	protected void _toJavaStatement(final XClosure closure, final IAppendable b, boolean isReferenced) {
 		if (!isReferenced)
-			throw new IllegalArgumentException("a closure definition does not cause any sideffeccts");
+			throw new IllegalArgumentException("a closure definition does not cause any side-effects");
 		JvmTypeReference type = getTypeProvider().getType(closure);
-		TypeArgumentContext context = ctxProvider.getReceiverContext(type);
+		ITypeArgumentContext context = ctxProvider.getTypeArgumentContext(new TypeArgumentContextProvider.ReceiverRequest(type));
 		b.append("\n").append("final ");
 		serialize(type, closure, b);
 		b.append(" ");
 		String variableName = b.declareVariable(closure, "_function");
 		b.append(variableName).append(" = ");
 		b.append("new ");
-		serialize(type, closure, b);
+		// TODO parameters in type arguments are safe to be a wildcard
+		serialize(type, closure, b, false, false, true, false);
 		b.append("() {");
 		b.increaseIndentation().increaseIndentation();
 		try {
@@ -485,7 +486,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			JvmOperation operation = closures.findImplementingOperation(type, closure.eResource());
 			final JvmTypeReference returnType = context.resolve(operation.getReturnType());
 			b.append("\npublic ");
-			serialize(returnType, closure, b);
+			serialize(returnType, closure, b, false, false, true, true);
 			b.append(" ").append(operation.getSimpleName());
 			b.append("(");
 			EList<JvmFormalParameter> closureParams = closure.getFormalParameters();
@@ -494,7 +495,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				final JvmTypeReference parameterType2 = getTypeProvider().getTypeForIdentifiable(param);
 				final JvmTypeReference parameterType = context.resolve(parameterType2);
 				b.append("final ");
-				serialize(parameterType, closure, b);
+				serialize(parameterType, closure, b, false, false, true, true);
 				b.append(" ");
 				String name = declareNameInVariableScope(param, b);
 				b.append(name);

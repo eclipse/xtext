@@ -13,12 +13,14 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.TypeArgumentContext;
+import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Tuples;
@@ -41,8 +43,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	private TypeArgumentContextProvider contextProvider;
 	
 	/*
-	 * TODO
-	 * Do the conversion as post processing of toJavaStatement
+	 * TODO Do the conversion as post processing of toJavaStatement
 	 */
 
 	@Override
@@ -124,9 +125,22 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		if (operation == null) {
 			throw new IllegalStateException("expected type " + expectedType + " not mappable from " + functionType);
 		}
-		TypeArgumentContext typeArgumentContext = contextProvider.getReceiverContext(expectedType);
+		JvmDeclaredType declaringType = operation.getDeclaringType();
+		final JvmParameterizedTypeReference typeReferenceWithPlaceHolder = getTypeReferences().createTypeRef(declaringType);
+		ITypeArgumentContext typeArgumentContext = contextProvider.getTypeArgumentContext(
+				new TypeArgumentContextProvider.AbstractRequest() {
+					@Override
+					public JvmTypeReference getExpectedType() {
+						return functionType;
+					}
+					@Override
+					public JvmTypeReference getDeclaredType() {
+						return typeReferenceWithPlaceHolder;
+					}
+				});
+		JvmTypeReference resolvedExpectedType = typeArgumentContext.resolve(typeReferenceWithPlaceHolder); 
 		appendable.append("new ");
-		serialize(expectedType, null, appendable, true, false);
+		serialize(resolvedExpectedType, null, appendable, true, false);
 		appendable.append("() {");
 		appendable.increaseIndentation().increaseIndentation();
 		appendable.append("\npublic ");

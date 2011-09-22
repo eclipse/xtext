@@ -14,7 +14,9 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.TypeArgumentContext;
+import org.eclipse.xtext.common.types.util.IRawTypeHelper;
+import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
+import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -24,7 +26,6 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IValidatedEObjectDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
-import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 
 /**
  * A scope which goes through all returned EObjectDescriptions in order to find the best fit, if it is asked for the
@@ -36,17 +37,19 @@ public class BestMatchingJvmFeatureScope implements IScope {
 
 	protected final EObject context;
 	protected final EReference reference;
-	private XbaseTypeConformanceComputer computer;
+	private TypeConformanceComputer conformanceComputer;
 	private IScope delegate;
 	private FeatureCallChecker featureCallChecker;
+	private IRawTypeHelper rawTypeHelper;
 
-	public BestMatchingJvmFeatureScope(XbaseTypeConformanceComputer computer, EObject context, EReference ref,
-			IScope delegate, FeatureCallChecker featureCallChecker) {
-		this.computer = computer;
+	public BestMatchingJvmFeatureScope(TypeConformanceComputer conformanceComputer, EObject context, EReference ref,
+			IScope delegate, FeatureCallChecker featureCallChecker, IRawTypeHelper rawTypeHelper) {
+		this.conformanceComputer = conformanceComputer;
 		this.context = context;
 		this.reference = ref;
 		this.delegate = delegate;
 		this.featureCallChecker = featureCallChecker;
+		this.rawTypeHelper = rawTypeHelper;
 	}
 
 	public Iterable<IEObjectDescription> getAllElements() {
@@ -145,14 +148,18 @@ public class BestMatchingJvmFeatureScope implements IScope {
 								return a;
 							}
 						}
-						TypeArgumentContext contextA = ((JvmFeatureDescription) descA).getContext();
-						TypeArgumentContext contextB = ((JvmFeatureDescription) descB).getContext();
+						ITypeArgumentContext contextA = ((JvmFeatureDescription) descA).getContext();
+						ITypeArgumentContext contextB = ((JvmFeatureDescription) descB).getContext();
 						int numParamsA = opA.getParameters().size();
 						int numParamsB = opB.getParameters().size();
 						for (int i = 0; i < Math.min(numParamsA, numParamsB); i++) {
 							JvmTypeReference pA = opA.getParameters().get(numParamsA-i-1).getParameterType();
+							pA = contextA.getLowerBound(pA);
+							pA = rawTypeHelper.getRawTypeReference(pA, context.eResource());
 							JvmTypeReference pB = opB.getParameters().get(numParamsB-i-1).getParameterType();
-							if (!computer.isConformant(contextB.getLowerBound(pB), contextA.getLowerBound(pA), true))
+							pB = rawTypeHelper.getRawTypeReference(pB, context.eResource());
+							pB = contextB.getLowerBound(pB);
+							if (!conformanceComputer.isConformant(pB, pA, true))
 								return b;
 						}
 						return a;

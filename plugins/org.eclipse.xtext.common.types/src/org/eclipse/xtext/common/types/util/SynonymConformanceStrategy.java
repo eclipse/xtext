@@ -9,6 +9,7 @@ package org.eclipse.xtext.common.types.util;
 
 import java.util.List;
 
+import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmSynonymTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
@@ -32,4 +33,19 @@ public class SynonymConformanceStrategy extends TypeConformanceStrategy<JvmSynon
 		}
 		return TypeConformanceResult.FAILED;
 	}
+	
+	@Override
+	public TypeConformanceResult doVisitMultiTypeReference(JvmSynonymTypeReference left, JvmMultiTypeReference right,
+			TypeConformanceComputationArgument.Internal<JvmSynonymTypeReference> param) {
+		return doVisitTypeReference(left, right, param);
+	}
+	
+	@Override
+	public TypeConformanceResult doVisitSynonymTypeReference(JvmSynonymTypeReference left,
+			JvmSynonymTypeReference right, 
+			TypeConformanceComputationArgument.Internal<JvmSynonymTypeReference> param) {
+		return doVisitTypeReference(left, right, param);
+	}
+	
+	
 }

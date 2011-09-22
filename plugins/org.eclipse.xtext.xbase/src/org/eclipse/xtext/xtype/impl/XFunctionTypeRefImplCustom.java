@@ -52,47 +52,97 @@ public class XFunctionTypeRefImplCustom extends XFunctionTypeRefImpl {
 			TypesFactory typesFactory = TypesFactory.eINSTANCE;
 			JvmType rawType = getType();
 			if (rawType != null && rawType instanceof JvmDeclaredType) {
-//				EList<JvmTypeReference> superTypesWithObject = ((JvmDeclaredType) rawType).getSuperTypes();
-//				JvmTypeReference objectReference = superTypesWithObject.get(0);
-				JvmParameterizedTypeReference result = typesFactory.createJvmParameterizedTypeReference();
-				result.setType(rawType);
-				for(JvmTypeReference paramType: Lists.newArrayList(getParamTypes())) {
-//					JvmWildcardTypeReference paramWildcard = typesFactory.createJvmWildcardTypeReference();
-//					JvmLowerBound lowerBound = typesFactory.createJvmLowerBound();
-					JvmTypeReference wrapped = wrapIfNecessary(paramType);
-					if (wrapped == null || wrapped.eContainer() != null) {
-						JvmDelegateTypeReference delegate = typesFactory.createJvmDelegateTypeReference();
-						delegate.setDelegate(wrapped);
-//					lowerBound.setTypeReference(delegate);
-//					JvmUpperBound upperBound = typesFactory.createJvmUpperBound();
-//					JvmDelegateTypeReference objectDelegate = typesFactory.createJvmDelegateTypeReference();
-//					objectDelegate.setDelegate(objectReference);
-//					upperBound.setTypeReference(objectDelegate);
-					
-//					paramWildcard.getConstraints().add(upperBound);
-//					paramWildcard.getConstraints().add(lowerBound);
-//					result.getArguments().add(paramWildcard);
-					
-						result.getArguments().add(delegate);
-					} else {
-						result.getArguments().add(wrapped);
+				if (!isInstanceContext()) {
+					JvmParameterizedTypeReference result = typesFactory.createJvmParameterizedTypeReference();
+					result.setType(rawType);
+					EList<JvmTypeReference> superTypesWithObject = ((JvmDeclaredType) rawType).getSuperTypes();
+					JvmTypeReference objectReference = superTypesWithObject.get(0);
+					for(JvmTypeReference paramType: Lists.newArrayList(getParamTypes())) {
+						if (!(paramType instanceof JvmWildcardTypeReference)) {
+							JvmWildcardTypeReference paramWildcard = typesFactory.createJvmWildcardTypeReference();
+							JvmLowerBound lowerBound = typesFactory.createJvmLowerBound();
+							JvmTypeReference wrapped = wrapIfNecessary(paramType);
+							if (wrapped == null || wrapped.eContainer() != null) {
+								JvmDelegateTypeReference delegate = typesFactory.createJvmDelegateTypeReference();
+								delegate.setDelegate(wrapped);
+								lowerBound.setTypeReference(delegate);
+		//						result.getArguments().add(delegate);
+							} else {
+								lowerBound.setTypeReference(wrapped);
+							}
+							JvmUpperBound upperBound = typesFactory.createJvmUpperBound();
+							JvmDelegateTypeReference objectDelegate = typesFactory.createJvmDelegateTypeReference();
+							objectDelegate.setDelegate(objectReference);
+							upperBound.setTypeReference(objectDelegate);
+						
+							paramWildcard.getConstraints().add(upperBound);
+							paramWildcard.getConstraints().add(lowerBound);
+							result.getArguments().add(paramWildcard);
+						} else {
+							JvmDelegateTypeReference delegate = typesFactory.createJvmDelegateTypeReference();
+							delegate.setDelegate(paramType);
+							result.getArguments().add(delegate);
+						}
+					}
+					{
+						if (!(returnType instanceof JvmWildcardTypeReference)) {
+							JvmWildcardTypeReference returnType = typesFactory.createJvmWildcardTypeReference();
+							JvmUpperBound returnTypeBound = typesFactory.createJvmUpperBound();
+							JvmTypeReference wrapped = wrapIfNecessary(getReturnType());
+							if (wrapped == null || wrapped.eContainer() != null) {
+								JvmDelegateTypeReference delegate = typesFactory.createJvmDelegateTypeReference();
+								delegate.setDelegate(wrapped);
+								returnTypeBound.setTypeReference(delegate);
+							} else {
+								returnTypeBound.setTypeReference(wrapped);
+							}
+							returnType.getConstraints().add(returnTypeBound);
+							result.getArguments().add(returnType);
+						} else {
+							JvmDelegateTypeReference delegate = typesFactory.createJvmDelegateTypeReference();
+							delegate.setDelegate(returnType);
+							result.getArguments().add(delegate);
+						}
+					}
+					boolean wasDeliver = eDeliver();
+					try {
+						eSetDeliver(false);
+						setEquivalent(result);
+					} finally {
+						eSetDeliver(wasDeliver);
+					}
+				} else {
+					JvmParameterizedTypeReference result = typesFactory.createJvmParameterizedTypeReference();
+					result.setType(rawType);
+					for(JvmTypeReference paramType: Lists.newArrayList(getParamTypes())) {
+						JvmTypeReference wrapped = wrapIfNecessary(paramType);
+						if (wrapped == null || wrapped.eContainer() != null) {
+							JvmDelegateTypeReference delegate = typesFactory.createJvmDelegateTypeReference();
+							delegate.setDelegate(wrapped);
+							result.getArguments().add(delegate);
+	//						result.getArguments().add(delegate);
+						} else {
+							result.getArguments().add(wrapped);
+						}
+					}
+					{
+						JvmTypeReference wrapped = wrapIfNecessary(getReturnType());
+						if (wrapped == null || wrapped.eContainer() != null) {
+							JvmDelegateTypeReference delegate = typesFactory.createJvmDelegateTypeReference();
+							delegate.setDelegate(wrapped);
+							result.getArguments().add(delegate);
+						} else {
+							result.getArguments().add(wrapped);
+						}
+					}
+					boolean wasDeliver = eDeliver();
+					try {
+						eSetDeliver(false);
+						setEquivalent(result);
+					} finally {
+						eSetDeliver(wasDeliver);
 					}
 				}
-				{
-//					JvmWildcardTypeReference returnType = typesFactory.createJvmWildcardTypeReference();
-//					JvmUpperBound returnTypeBound = typesFactory.createJvmUpperBound();
-					JvmTypeReference wrapped = wrapIfNecessary(getReturnType());
-					if (wrapped == null || wrapped.eContainer() != null) {
-						JvmDelegateTypeReference delegate = typesFactory.createJvmDelegateTypeReference();
-						delegate.setDelegate(wrapped);
-//					returnTypeBound.setTypeReference(delegate);
-//					returnType.getConstraints().add(returnTypeBound);
-						result.getArguments().add(delegate);
-					} else {
-						result.getArguments().add(wrapped);
-					}
-				}
-				equivalent = result;
 			} else {
 				equivalent = null;
 			}
