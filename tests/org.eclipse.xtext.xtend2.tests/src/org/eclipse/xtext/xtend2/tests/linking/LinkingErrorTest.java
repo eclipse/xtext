@@ -28,7 +28,7 @@ import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IDiagnosticConverter;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.validation.ResourceValidatorImpl;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
@@ -42,7 +42,7 @@ import com.google.inject.Inject;
 public class LinkingErrorTest extends AbstractXtend2TestCase {
 
 	@Inject
-	private ITypeProvider typeProvider;
+	private IXtend2JvmAssociations associations;
 	
 	public void testNoException_01() throws Exception {
 		XtendFunction function = function("def noException() {\n" + 
@@ -50,7 +50,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 				"	    val closure = [Integeri| return i]\n" + 
 				"	    for (x : 1..100) closure.apply(x)\n" + 
 				"	}");
-		JvmTypeReference type = typeProvider.getTypeForIdentifiable(function);
+		JvmTypeReference type = associations.getDirectlyInferredOperation(function).getReturnType();
 		assertTrue(type.getType() instanceof JvmVoid);
 		assertFalse(type.getType().eIsProxy());
 		assertNoExceptions(function);
@@ -62,7 +62,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 				"	    val closure = [ i| return i]\n" + 
 				"	    for (x : 1..100) closure.apply(x)\n" + 
 				"	}");
-		JvmTypeReference type = typeProvider.getTypeForIdentifiable(function);
+		JvmTypeReference type = associations.getDirectlyInferredOperation(function).getReturnType();
 		assertTrue(type.getType() instanceof JvmVoid);
 		assertFalse(type.getType().eIsProxy());
 		assertNoExceptions(function);

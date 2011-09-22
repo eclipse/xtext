@@ -5,7 +5,7 @@
  */
 package org.eclipse.xtext.xtend2.xtend2;
 
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,7 +23,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
  * @model
  * @generated
  */
-public interface XtendClassSuperCallReferable extends JvmIdentifiableElement
+public interface XtendClassSuperCallReferable extends EObject
 {
 	/**
 	 * Returns the value of the '<em><b>Xtend Class</b></em>' container reference.

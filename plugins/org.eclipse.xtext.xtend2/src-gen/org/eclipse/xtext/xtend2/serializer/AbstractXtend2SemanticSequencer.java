@@ -1186,12 +1186,12 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	 *     )
 	 *
 	 * Features:
-	 *    typeParameters[0, *]
 	 *    annotations[0, *]
 	 *    name[1, 1]
 	 *    extends[0, 1]
 	 *    implements[0, *]
 	 *    members[0, *]
+	 *    typeParameters[0, *]
 	 */
 	protected void sequence_Class(EObject context, XtendClass semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1423,7 +1423,6 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	 *
 	 * Features:
 	 *    annotationInfo[1, 1]
-	 *    typeParameters[0, *]
 	 *    name[1, 1]
 	 *    expression[0, 2]
 	 *    returnType[0, 1]
@@ -1431,6 +1430,7 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	 *    override[0, 1]
 	 *    dispatch[0, 1]
 	 *    createExtensionInfo[0, 1]
+	 *    typeParameters[0, *]
 	 */
 	protected void sequence_Member(EObject context, XtendFunction semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

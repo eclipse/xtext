@@ -29,19 +29,6 @@ public class XtendClassImplCustom extends XtendClassImpl {
 	}
 	
 	@Override
-	public String getIdentifier() {
-		return getQualifiedName();
-	}
-	
-	@Override
-	public String getQualifiedName(char innerClassDelimiter) {
-		String packageName = getPackageName();
-		if (packageName!=null)
-			return packageName+"."+getSimpleName();
-		return getSimpleName();
-	}
-	
-	@Override
 	public String getPackageName() {
 		if (eContainer() instanceof XtendFile) {
 			XtendFile file = (XtendFile) eContainer();

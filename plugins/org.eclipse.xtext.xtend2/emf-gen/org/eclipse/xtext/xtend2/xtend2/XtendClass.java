@@ -7,8 +7,7 @@ package org.eclipse.xtext.xtend2.xtend2;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
 /**
@@ -25,6 +24,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getSuperTypes <em>Super Types</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getMembers <em>Members</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getSuperCallReferable <em>Super Call Referable</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getTypeParameters <em>Type Parameters</em>}</li>
  * </ul>
  * </p>
  *
@@ -32,7 +32,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  * @model
  * @generated
  */
-public interface XtendClass extends JvmIdentifiableElement, JvmTypeParameterDeclarator, XtendAnnotationTarget
+public interface XtendClass extends XtendAnnotationTarget
 {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -161,6 +161,22 @@ public interface XtendClass extends JvmIdentifiableElement, JvmTypeParameterDecl
 	 * @generated
 	 */
 	void setSuperCallReferable(XtendClassSuperCallReferable value);
+
+	/**
+	 * Returns the value of the '<em><b>Type Parameters</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.xtext.common.types.JvmTypeParameter}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Type Parameters</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Type Parameters</em>' containment reference list.
+	 * @see org.eclipse.xtext.xtend2.xtend2.Xtend2Package#getXtendClass_TypeParameters()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<JvmTypeParameter> getTypeParameters();
 
 	/**
 	 * <!-- begin-user-doc -->

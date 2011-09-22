@@ -10,8 +10,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
-import org.eclipse.xtext.common.types.TypesPackage;
-
 import org.eclipse.xtext.xbase.XbasePackage;
 
 /**
@@ -156,97 +154,6 @@ public interface Xtend2Package extends EPackage
 	int XTEND_IMPORT_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendClassImpl <em>Xtend Class</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.xtend2.xtend2.impl.XtendClassImpl
-	 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getXtendClass()
-	 * @generated
-	 */
-	int XTEND_CLASS = 2;
-
-	/**
-	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CLASS__TYPE_PARAMETERS = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CLASS__ANNOTATIONS = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CLASS__NAME = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Extends</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CLASS__EXTENDS = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Implements</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CLASS__IMPLEMENTS = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Super Types</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CLASS__SUPER_TYPES = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CLASS__MEMBERS = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 6;
-
-	/**
-	 * The feature id for the '<em><b>Super Call Referable</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CLASS__SUPER_CALL_REFERABLE = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 7;
-
-	/**
-	 * The number of structural features of the '<em>Xtend Class</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CLASS_FEATURE_COUNT = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 8;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendAnnotationTargetImpl <em>Xtend Annotation Target</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -275,6 +182,97 @@ public interface Xtend2Package extends EPackage
 	int XTEND_ANNOTATION_TARGET_FEATURE_COUNT = 1;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendClassImpl <em>Xtend Class</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xtend2.xtend2.impl.XtendClassImpl
+	 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getXtendClass()
+	 * @generated
+	 */
+	int XTEND_CLASS = 2;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_CLASS__ANNOTATIONS = XTEND_ANNOTATION_TARGET__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_CLASS__NAME = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Extends</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_CLASS__EXTENDS = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Implements</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_CLASS__IMPLEMENTS = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Super Types</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_CLASS__SUPER_TYPES = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_CLASS__MEMBERS = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Super Call Referable</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_CLASS__SUPER_CALL_REFERABLE = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_CLASS__TYPE_PARAMETERS = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 6;
+
+	/**
+	 * The number of structural features of the '<em>Xtend Class</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_CLASS_FEATURE_COUNT = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 7;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendClassSuperCallReferableImpl <em>Xtend Class Super Call Referable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -291,7 +289,7 @@ public interface Xtend2Package extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CLASS_SUPER_CALL_REFERABLE__XTEND_CLASS = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 0;
+	int XTEND_CLASS_SUPER_CALL_REFERABLE__XTEND_CLASS = 0;
 
 	/**
 	 * The number of structural features of the '<em>Xtend Class Super Call Referable</em>' class.
@@ -300,7 +298,7 @@ public interface Xtend2Package extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CLASS_SUPER_CALL_REFERABLE_FEATURE_COUNT = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 1;
+	int XTEND_CLASS_SUPER_CALL_REFERABLE_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendMemberImpl <em>Xtend Member</em>}' class.
@@ -368,22 +366,13 @@ public interface Xtend2Package extends EPackage
 	int XTEND_FUNCTION__ANNOTATION_INFO = XTEND_MEMBER__ANNOTATION_INFO;
 
 	/**
-	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_FUNCTION__TYPE_PARAMETERS = XTEND_MEMBER_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FUNCTION__NAME = XTEND_MEMBER_FEATURE_COUNT + 1;
+	int XTEND_FUNCTION__NAME = XTEND_MEMBER_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -392,7 +381,7 @@ public interface Xtend2Package extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FUNCTION__EXPRESSION = XTEND_MEMBER_FEATURE_COUNT + 2;
+	int XTEND_FUNCTION__EXPRESSION = XTEND_MEMBER_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
@@ -401,7 +390,7 @@ public interface Xtend2Package extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FUNCTION__RETURN_TYPE = XTEND_MEMBER_FEATURE_COUNT + 3;
+	int XTEND_FUNCTION__RETURN_TYPE = XTEND_MEMBER_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -410,7 +399,7 @@ public interface Xtend2Package extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FUNCTION__PARAMETERS = XTEND_MEMBER_FEATURE_COUNT + 4;
+	int XTEND_FUNCTION__PARAMETERS = XTEND_MEMBER_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Override</b></em>' attribute.
@@ -419,7 +408,7 @@ public interface Xtend2Package extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FUNCTION__OVERRIDE = XTEND_MEMBER_FEATURE_COUNT + 5;
+	int XTEND_FUNCTION__OVERRIDE = XTEND_MEMBER_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Dispatch</b></em>' attribute.
@@ -428,7 +417,7 @@ public interface Xtend2Package extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FUNCTION__DISPATCH = XTEND_MEMBER_FEATURE_COUNT + 6;
+	int XTEND_FUNCTION__DISPATCH = XTEND_MEMBER_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Create Extension Info</b></em>' containment reference.
@@ -437,7 +426,16 @@ public interface Xtend2Package extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FUNCTION__CREATE_EXTENSION_INFO = XTEND_MEMBER_FEATURE_COUNT + 7;
+	int XTEND_FUNCTION__CREATE_EXTENSION_INFO = XTEND_MEMBER_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_FUNCTION__TYPE_PARAMETERS = XTEND_MEMBER_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of structural features of the '<em>Xtend Function</em>' class.
@@ -529,7 +527,7 @@ public interface Xtend2Package extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_PARAMETER__ANNOTATIONS = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 0;
+	int XTEND_PARAMETER__ANNOTATIONS = XTEND_ANNOTATION_TARGET__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -538,7 +536,7 @@ public interface Xtend2Package extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_PARAMETER__NAME = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 1;
+	int XTEND_PARAMETER__NAME = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parameter Type</b></em>' containment reference.
@@ -547,7 +545,7 @@ public interface Xtend2Package extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_PARAMETER__PARAMETER_TYPE = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 2;
+	int XTEND_PARAMETER__PARAMETER_TYPE = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Xtend Parameter</em>' class.
@@ -556,7 +554,7 @@ public interface Xtend2Package extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_PARAMETER_FEATURE_COUNT = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 3;
+	int XTEND_PARAMETER_FEATURE_COUNT = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.RichStringImpl <em>Rich String</em>}' class.
@@ -796,7 +794,7 @@ public interface Xtend2Package extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int CREATE_EXTENSION_INFO__CREATE_EXPRESSION = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 0;
+	int CREATE_EXTENSION_INFO__CREATE_EXPRESSION = 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -805,7 +803,7 @@ public interface Xtend2Package extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int CREATE_EXTENSION_INFO__NAME = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 1;
+	int CREATE_EXTENSION_INFO__NAME = 1;
 
 	/**
 	 * The number of structural features of the '<em>Create Extension Info</em>' class.
@@ -814,7 +812,7 @@ public interface Xtend2Package extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int CREATE_EXTENSION_INFO_FEATURE_COUNT = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 2;
+	int CREATE_EXTENSION_INFO_FEATURE_COUNT = 2;
 
 
 	/**
@@ -980,6 +978,17 @@ public interface Xtend2Package extends EPackage
 	EReference getXtendClass_SuperCallReferable();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getTypeParameters <em>Type Parameters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Type Parameters</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.XtendClass#getTypeParameters()
+	 * @see #getXtendClass()
+	 * @generated
+	 */
+	EReference getXtendClass_TypeParameters();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xtend2.xtend2.XtendAnnotationTarget <em>Xtend Annotation Target</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1128,6 +1137,17 @@ public interface Xtend2Package extends EPackage
 	 * @generated
 	 */
 	EReference getXtendFunction_CreateExtensionInfo();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction#getTypeParameters <em>Type Parameters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Type Parameters</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.XtendFunction#getTypeParameters()
+	 * @see #getXtendFunction()
+	 * @generated
+	 */
+	EReference getXtendFunction_TypeParameters();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xtend2.xtend2.XtendField <em>Xtend Field</em>}'.
@@ -1535,6 +1555,14 @@ public interface Xtend2Package extends EPackage
 		EReference XTEND_CLASS__SUPER_CALL_REFERABLE = eINSTANCE.getXtendClass_SuperCallReferable();
 
 		/**
+		 * The meta object literal for the '<em><b>Type Parameters</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XTEND_CLASS__TYPE_PARAMETERS = eINSTANCE.getXtendClass_TypeParameters();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendAnnotationTargetImpl <em>Xtend Annotation Target</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1653,6 +1681,14 @@ public interface Xtend2Package extends EPackage
 		 * @generated
 		 */
 		EReference XTEND_FUNCTION__CREATE_EXTENSION_INFO = eINSTANCE.getXtendFunction_CreateExtensionInfo();
+
+		/**
+		 * The meta object literal for the '<em><b>Type Parameters</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XTEND_FUNCTION__TYPE_PARAMETERS = eINSTANCE.getXtendFunction_TypeParameters();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFieldImpl <em>Xtend Field</em>}' class.

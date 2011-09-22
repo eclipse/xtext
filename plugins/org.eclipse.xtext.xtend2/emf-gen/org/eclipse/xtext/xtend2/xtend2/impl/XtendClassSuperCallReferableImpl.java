@@ -12,10 +12,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-
-import org.eclipse.xtext.common.types.impl.JvmIdentifiableElementImplCustom;
 
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
@@ -34,7 +33,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendClassSuperCallReferable;
  *
  * @generated
  */
-public class XtendClassSuperCallReferableImpl extends JvmIdentifiableElementImplCustom implements XtendClassSuperCallReferable
+public class XtendClassSuperCallReferableImpl extends MinimalEObjectImpl.Container implements XtendClassSuperCallReferable
 {
 	/**
 	 * <!-- begin-user-doc -->

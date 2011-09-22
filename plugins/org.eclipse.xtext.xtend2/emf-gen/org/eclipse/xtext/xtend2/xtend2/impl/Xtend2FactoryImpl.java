@@ -126,7 +126,7 @@ public class Xtend2FactoryImpl extends EFactoryImpl implements Xtend2Factory
 	 */
 	public XtendClassSuperCallReferable createXtendClassSuperCallReferable()
 	{
-		XtendClassSuperCallReferableImplCustom xtendClassSuperCallReferable = new XtendClassSuperCallReferableImplCustom();
+		XtendClassSuperCallReferableImpl xtendClassSuperCallReferable = new XtendClassSuperCallReferableImpl();
 		return xtendClassSuperCallReferable;
 	}
 
@@ -148,7 +148,7 @@ public class Xtend2FactoryImpl extends EFactoryImpl implements Xtend2Factory
 	 */
 	public XtendFunction createXtendFunction()
 	{
-		XtendFunctionImplCustom xtendFunction = new XtendFunctionImplCustom();
+		XtendFunctionImpl xtendFunction = new XtendFunctionImpl();
 		return xtendFunction;
 	}
 
@@ -159,7 +159,7 @@ public class Xtend2FactoryImpl extends EFactoryImpl implements Xtend2Factory
 	 */
 	public XtendField createXtendField()
 	{
-		XtendFieldImplCustom xtendField = new XtendFieldImplCustom();
+		XtendFieldImpl xtendField = new XtendFieldImpl();
 		return xtendField;
 	}
 
@@ -170,7 +170,7 @@ public class Xtend2FactoryImpl extends EFactoryImpl implements Xtend2Factory
 	 */
 	public XtendParameter createXtendParameter()
 	{
-		XtendParameterImplCustom xtendParameter = new XtendParameterImplCustom();
+		XtendParameterImpl xtendParameter = new XtendParameterImpl();
 		return xtendParameter;
 	}
 
@@ -236,7 +236,7 @@ public class Xtend2FactoryImpl extends EFactoryImpl implements Xtend2Factory
 	 */
 	public CreateExtensionInfo createCreateExtensionInfo()
 	{
-		CreateExtensionInfoImplCustom createExtensionInfo = new CreateExtensionInfoImplCustom();
+		CreateExtensionInfoImpl createExtensionInfo = new CreateExtensionInfoImpl();
 		return createExtensionInfo;
 	}
 

@@ -327,23 +327,22 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 				if (operationsWithSameSignature.size() > 1) {
 					Multimap<String, JvmOperation> operationsPerReadableSignature = HashMultimap.create();
 					for(JvmOperation operation: operationsWithSameSignature) {
-						XtendFunction source = associations.getXtendFunction(operation);
-						String readableSignature = getReadableSignature(source, operation.getParameters());
+						String readableSignature = getReadableSignature(operation, operation.getParameters());
 						operationsPerReadableSignature.put(readableSignature, operation);
 					}
 					for(Collection<JvmOperation> operationsWithSameReadableSignature: operationsPerReadableSignature.asMap().values()) {
 						if (operationsWithSameReadableSignature.size() > 1) {
 							for(JvmOperation operation: operationsWithSameReadableSignature) {
 								XtendFunction otherSource = associations.getXtendFunction(operation);
-								error("Duplicate method " + getReadableSignature(otherSource, operation.getParameters()) + 
+								error("Duplicate method " + getReadableSignature(operation, operation.getParameters()) + 
 										" in type " + inferredType.getSimpleName(), 
 										otherSource, XTEND_FUNCTION__NAME, DUPLICATE_METHOD);
 							}
 						} else {
 							for(JvmOperation operation: operationsWithSameReadableSignature) {
 								XtendFunction otherSource = associations.getXtendFunction(operation);
-								error("Method  " + getReadableSignature(otherSource, operation.getParameters()) +
-										" has the same erasure " + getReadableErasure(otherSource, operation.getParameters()) +
+								error("Method  " + getReadableSignature(operation, operation.getParameters()) +
+										" has the same erasure " + getReadableErasure(operation, operation.getParameters()) +
 										" as another method in type " + inferredType.getSimpleName(), 
 										otherSource, XTEND_FUNCTION__NAME, DUPLICATE_METHOD);
 							}
@@ -361,11 +360,11 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 							JvmOperation myOperation = Iterables.getOnlyElement(myOperations);
 							if (!featureOverridesService.isOverridden(myOperation, operation, typeArgumentContext, false)) {
 								XtendFunction source = associations.getXtendFunction(myOperation);
-								error("Name clash: The method " + getReadableSignature(source, myOperation.getParameters()) + " of type " +
+								error("Name clash: The method " + getReadableSignature(myOperation, myOperation.getParameters()) + " of type " +
 										inferredType.getSimpleName() + " has the same erasure as " +
 										// use source with other operations parameters to avoid confusion
 										// due to name transformations in JVM model inference
-										getReadableSignature(source, operation.getParameters()) + " of type " + 
+										getReadableSignature(operation, operation.getParameters()) + " of type " + 
 										operation.getDeclaringType().getSimpleName() +
 										" but does not override it.", source, XTEND_FUNCTION__NAME, DUPLICATE_METHOD);
 							}
@@ -532,7 +531,7 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 				error("A dispatch function must not declare any type parameters.", func, XTEND_FUNCTION__DISPATCH,
 						IssueCodes.DISPATCH_FUNC_WITH_TYPE_PARAMS);
 			}
-			if (func.getSimpleName().startsWith("_")) {
+			if (func.getName().startsWith("_")) {
 				error("A dispatch method's name must not start with an underscore.", func, XTEND_FUNCTION__NAME,
 						IssueCodes.DISPATCH_FUNC_NAME_STARTS_WITH_UNDERSCORE);
 			}
@@ -557,7 +556,9 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 						signatures.put(getParamTypes(jvmOperation, true), jvmOperation);
 						XtendFunction function = associations.getXtendFunction(jvmOperation);
 						if (function != null) {
-							JvmTypeReference functionReturnType = getTypeProvider().getTypeForIdentifiable(function);
+							JvmTypeReference functionReturnType = function.getReturnType();
+							if (functionReturnType == null) 
+								functionReturnType = getTypeProvider().getCommonReturnType(function.getExpression(), true);
 							if (functionReturnType != null) {
 								if (!isConformant(jvmOperation.getReturnType(), functionReturnType)) {
 									error("Incompatible return type of dispatch method. Expected " + 

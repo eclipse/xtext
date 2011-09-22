@@ -18,21 +18,13 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.TypesPackage;
-
-import org.eclipse.xtext.common.types.impl.JvmIdentifiableElementImplCustom;
-
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
-import org.eclipse.xtext.xtend2.xtend2.XtendAnnotationTarget;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendClassSuperCallReferable;
 import org.eclipse.xtext.xtend2.xtend2.XtendMember;
@@ -44,41 +36,20 @@ import org.eclipse.xtext.xtend2.xtend2.XtendMember;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendClassImpl#getTypeParameters <em>Type Parameters</em>}</li>
- *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendClassImpl#getAnnotations <em>Annotations</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendClassImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendClassImpl#getExtends <em>Extends</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendClassImpl#getImplements <em>Implements</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendClassImpl#getSuperTypes <em>Super Types</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendClassImpl#getMembers <em>Members</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendClassImpl#getSuperCallReferable <em>Super Call Referable</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendClassImpl#getTypeParameters <em>Type Parameters</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class XtendClassImpl extends JvmIdentifiableElementImplCustom implements XtendClass
+public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendClass
 {
-	/**
-	 * The cached value of the '{@link #getTypeParameters() <em>Type Parameters</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTypeParameters()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<JvmTypeParameter> typeParameters;
-
-	/**
-	 * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAnnotations()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<XAnnotation> annotations;
-
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -150,6 +121,16 @@ public class XtendClassImpl extends JvmIdentifiableElementImplCustom implements 
 	protected XtendClassSuperCallReferable superCallReferable;
 
 	/**
+	 * The cached value of the '{@link #getTypeParameters() <em>Type Parameters</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypeParameters()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<JvmTypeParameter> typeParameters;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -168,34 +149,6 @@ public class XtendClassImpl extends JvmIdentifiableElementImplCustom implements 
 	protected EClass eStaticClass()
 	{
 		return Xtend2Package.Literals.XTEND_CLASS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<JvmTypeParameter> getTypeParameters()
-	{
-		if (typeParameters == null)
-		{
-			typeParameters = new EObjectContainmentWithInverseEList.Resolving<JvmTypeParameter>(JvmTypeParameter.class, this, Xtend2Package.XTEND_CLASS__TYPE_PARAMETERS, TypesPackage.JVM_TYPE_PARAMETER__DECLARATOR);
-		}
-		return typeParameters;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<XAnnotation> getAnnotations()
-	{
-		if (annotations == null)
-		{
-			annotations = new EObjectContainmentEList<XAnnotation>(XAnnotation.class, this, Xtend2Package.XTEND_CLASS__ANNOTATIONS);
-		}
-		return annotations;
 	}
 
 	/**
@@ -364,6 +317,20 @@ public class XtendClassImpl extends JvmIdentifiableElementImplCustom implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<JvmTypeParameter> getTypeParameters()
+	{
+		if (typeParameters == null)
+		{
+			typeParameters = new EObjectContainmentEList<JvmTypeParameter>(JvmTypeParameter.class, this, Xtend2Package.XTEND_CLASS__TYPE_PARAMETERS);
+		}
+		return typeParameters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getPackageName()
 	{
 		// TODO: implement this method
@@ -376,14 +343,23 @@ public class XtendClassImpl extends JvmIdentifiableElementImplCustom implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
+	public String getSimpleName()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_CLASS__TYPE_PARAMETERS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTypeParameters()).basicAdd(otherEnd, msgs);
 			case Xtend2Package.XTEND_CLASS__SUPER_CALL_REFERABLE:
 				if (superCallReferable != null)
 					msgs = ((InternalEObject)superCallReferable).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_CLASS__SUPER_CALL_REFERABLE, null, msgs);
@@ -402,10 +378,6 @@ public class XtendClassImpl extends JvmIdentifiableElementImplCustom implements 
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_CLASS__TYPE_PARAMETERS:
-				return ((InternalEList<?>)getTypeParameters()).basicRemove(otherEnd, msgs);
-			case Xtend2Package.XTEND_CLASS__ANNOTATIONS:
-				return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
 			case Xtend2Package.XTEND_CLASS__EXTENDS:
 				return basicSetExtends(null, msgs);
 			case Xtend2Package.XTEND_CLASS__IMPLEMENTS:
@@ -414,6 +386,8 @@ public class XtendClassImpl extends JvmIdentifiableElementImplCustom implements 
 				return ((InternalEList<?>)getMembers()).basicRemove(otherEnd, msgs);
 			case Xtend2Package.XTEND_CLASS__SUPER_CALL_REFERABLE:
 				return basicSetSuperCallReferable(null, msgs);
+			case Xtend2Package.XTEND_CLASS__TYPE_PARAMETERS:
+				return ((InternalEList<?>)getTypeParameters()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -428,10 +402,6 @@ public class XtendClassImpl extends JvmIdentifiableElementImplCustom implements 
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_CLASS__TYPE_PARAMETERS:
-				return getTypeParameters();
-			case Xtend2Package.XTEND_CLASS__ANNOTATIONS:
-				return getAnnotations();
 			case Xtend2Package.XTEND_CLASS__NAME:
 				return getName();
 			case Xtend2Package.XTEND_CLASS__EXTENDS:
@@ -444,6 +414,8 @@ public class XtendClassImpl extends JvmIdentifiableElementImplCustom implements 
 				return getMembers();
 			case Xtend2Package.XTEND_CLASS__SUPER_CALL_REFERABLE:
 				return getSuperCallReferable();
+			case Xtend2Package.XTEND_CLASS__TYPE_PARAMETERS:
+				return getTypeParameters();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -459,14 +431,6 @@ public class XtendClassImpl extends JvmIdentifiableElementImplCustom implements 
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_CLASS__TYPE_PARAMETERS:
-				getTypeParameters().clear();
-				getTypeParameters().addAll((Collection<? extends JvmTypeParameter>)newValue);
-				return;
-			case Xtend2Package.XTEND_CLASS__ANNOTATIONS:
-				getAnnotations().clear();
-				getAnnotations().addAll((Collection<? extends XAnnotation>)newValue);
-				return;
 			case Xtend2Package.XTEND_CLASS__NAME:
 				setName((String)newValue);
 				return;
@@ -488,6 +452,10 @@ public class XtendClassImpl extends JvmIdentifiableElementImplCustom implements 
 			case Xtend2Package.XTEND_CLASS__SUPER_CALL_REFERABLE:
 				setSuperCallReferable((XtendClassSuperCallReferable)newValue);
 				return;
+			case Xtend2Package.XTEND_CLASS__TYPE_PARAMETERS:
+				getTypeParameters().clear();
+				getTypeParameters().addAll((Collection<? extends JvmTypeParameter>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -502,12 +470,6 @@ public class XtendClassImpl extends JvmIdentifiableElementImplCustom implements 
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_CLASS__TYPE_PARAMETERS:
-				getTypeParameters().clear();
-				return;
-			case Xtend2Package.XTEND_CLASS__ANNOTATIONS:
-				getAnnotations().clear();
-				return;
 			case Xtend2Package.XTEND_CLASS__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -526,6 +488,9 @@ public class XtendClassImpl extends JvmIdentifiableElementImplCustom implements 
 			case Xtend2Package.XTEND_CLASS__SUPER_CALL_REFERABLE:
 				setSuperCallReferable((XtendClassSuperCallReferable)null);
 				return;
+			case Xtend2Package.XTEND_CLASS__TYPE_PARAMETERS:
+				getTypeParameters().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -540,10 +505,6 @@ public class XtendClassImpl extends JvmIdentifiableElementImplCustom implements 
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_CLASS__TYPE_PARAMETERS:
-				return typeParameters != null && !typeParameters.isEmpty();
-			case Xtend2Package.XTEND_CLASS__ANNOTATIONS:
-				return annotations != null && !annotations.isEmpty();
 			case Xtend2Package.XTEND_CLASS__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case Xtend2Package.XTEND_CLASS__EXTENDS:
@@ -556,62 +517,10 @@ public class XtendClassImpl extends JvmIdentifiableElementImplCustom implements 
 				return members != null && !members.isEmpty();
 			case Xtend2Package.XTEND_CLASS__SUPER_CALL_REFERABLE:
 				return superCallReferable != null;
+			case Xtend2Package.XTEND_CLASS__TYPE_PARAMETERS:
+				return typeParameters != null && !typeParameters.isEmpty();
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
-	{
-		if (baseClass == JvmTypeParameterDeclarator.class)
-		{
-			switch (derivedFeatureID)
-			{
-				case Xtend2Package.XTEND_CLASS__TYPE_PARAMETERS: return TypesPackage.JVM_TYPE_PARAMETER_DECLARATOR__TYPE_PARAMETERS;
-				default: return -1;
-			}
-		}
-		if (baseClass == XtendAnnotationTarget.class)
-		{
-			switch (derivedFeatureID)
-			{
-				case Xtend2Package.XTEND_CLASS__ANNOTATIONS: return Xtend2Package.XTEND_ANNOTATION_TARGET__ANNOTATIONS;
-				default: return -1;
-			}
-		}
-		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
-	{
-		if (baseClass == JvmTypeParameterDeclarator.class)
-		{
-			switch (baseFeatureID)
-			{
-				case TypesPackage.JVM_TYPE_PARAMETER_DECLARATOR__TYPE_PARAMETERS: return Xtend2Package.XTEND_CLASS__TYPE_PARAMETERS;
-				default: return -1;
-			}
-		}
-		if (baseClass == XtendAnnotationTarget.class)
-		{
-			switch (baseFeatureID)
-			{
-				case Xtend2Package.XTEND_ANNOTATION_TARGET__ANNOTATIONS: return Xtend2Package.XTEND_CLASS__ANNOTATIONS;
-				default: return -1;
-			}
-		}
-		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**

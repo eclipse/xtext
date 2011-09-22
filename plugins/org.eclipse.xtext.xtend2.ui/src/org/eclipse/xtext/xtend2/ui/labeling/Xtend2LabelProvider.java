@@ -78,7 +78,7 @@ public class Xtend2LabelProvider extends DefaultEObjectLabelProvider {
 	}
 
 	public String text(XtendClass element) {
-		return element.getName() + ((element.getTypeParameters().isEmpty()) ? "" : uiStrings.typeParameters(element));
+		return element.getName() + ((element.getTypeParameters().isEmpty()) ? "" : uiStrings.typeParameters(element.getTypeParameters()));
 	}
 
 	public String text(XtendFunction element) {

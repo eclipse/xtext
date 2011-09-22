@@ -5,7 +5,7 @@
  */
 package org.eclipse.xtext.xtend2.xtend2;
 
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.xbase.XExpression;
 
@@ -26,7 +26,7 @@ import org.eclipse.xtext.xbase.XExpression;
  * @model
  * @generated
  */
-public interface CreateExtensionInfo extends JvmIdentifiableElement
+public interface CreateExtensionInfo extends EObject
 {
 	/**
 	 * Returns the value of the '<em><b>Create Expression</b></em>' containment reference.

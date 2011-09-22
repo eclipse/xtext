@@ -14,6 +14,8 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.xtext.xbase.XbasePackage;
 
+import org.eclipse.xtext.xbase.impl.XbasePackageImpl;
+
 import org.eclipse.xtext.xtend2.richstring.ElseIfCondition;
 import org.eclipse.xtext.xtend2.richstring.ElseStart;
 import org.eclipse.xtext.xtend2.richstring.EndIf;
@@ -30,6 +32,8 @@ import org.eclipse.xtext.xtend2.richstring.ProcessedRichStringFactory;
 import org.eclipse.xtext.xtend2.richstring.ProcessedRichStringPackage;
 
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
+
+import org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -171,14 +175,19 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 
 		isInited = true;
 
-		// Initialize simple dependencies
-		Xtend2Package.eINSTANCE.eClass();
+		// Obtain or create and register interdependencies
+		Xtend2PackageImpl theXtend2Package = (Xtend2PackageImpl)(EPackage.Registry.INSTANCE.getEPackage(Xtend2Package.eNS_URI) instanceof Xtend2PackageImpl ? EPackage.Registry.INSTANCE.getEPackage(Xtend2Package.eNS_URI) : Xtend2Package.eINSTANCE);
+		XbasePackageImpl theXbasePackage = (XbasePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(XbasePackage.eNS_URI) instanceof XbasePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(XbasePackage.eNS_URI) : XbasePackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theProcessedRichStringPackage.createPackageContents();
+		theXtend2Package.createPackageContents();
+		theXbasePackage.createPackageContents();
 
 		// Initialize created meta-data
 		theProcessedRichStringPackage.initializePackageContents();
+		theXtend2Package.initializePackageContents();
+		theXbasePackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theProcessedRichStringPackage.freeze();

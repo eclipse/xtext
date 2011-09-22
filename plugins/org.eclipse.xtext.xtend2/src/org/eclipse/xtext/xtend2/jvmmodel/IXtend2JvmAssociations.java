@@ -59,7 +59,7 @@ public interface IXtend2JvmAssociations extends IJvmModelAssociations {
 
 		public JvmOperation getDirectlyInferredOperation(XtendFunction xtendFunction) {
 			final Iterable<JvmOperation> jvmElements = filter(getJvmElements(xtendFunction), JvmOperation.class);
-			String expectedName = xtendFunction.getSimpleName();
+			String expectedName = xtendFunction.getName();
 			if (xtendFunction.isDispatch()) {
 				expectedName = "_"+expectedName;
 			}
