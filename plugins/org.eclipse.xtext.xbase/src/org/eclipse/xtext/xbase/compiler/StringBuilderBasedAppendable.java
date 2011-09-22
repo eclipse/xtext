@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.Stack;
 
@@ -121,6 +122,22 @@ public class StringBuilderBasedAppendable implements IAppendable {
 			final String string = currentScope.get(key);
 			if (string !=null)
 				return string;
+		}
+		return null;
+	}
+	public Object getObject(String name) {
+		if (name == null)
+			throw new NullPointerException("name");
+		if (localVars.isEmpty())
+			throw new IllegalStateException("No local scope has been opened.");
+		int size = localVars.size();
+		int i = size-1;
+		while (i>=0) {
+			Map<Object, String> currentScope = localVars.get(i--);
+			for (Entry<Object,String> entry : currentScope.entrySet()) {
+				if (name.equals(entry.getValue()))
+					return entry.getKey();
+			}
 		}
 		return null;
 	}

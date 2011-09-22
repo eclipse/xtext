@@ -54,5 +54,9 @@ public class DelegatingAppendable implements IAppendable {
 	public void closeScope() {
 		appendable.closeScope();
 	}
+
+	public Object getObject(String name) {
+		return appendable.getObject(name);
+	}
 	
 }
