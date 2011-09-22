@@ -20,7 +20,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
@@ -37,6 +36,7 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
@@ -59,6 +59,9 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 	
 	@Inject
 	private TypeArgumentContextProvider typeArgumentContextProvider;
+	
+	@Inject
+	private ILogicalContainerProvider logicalContainerProvider;
 	
 	/*
 	 * Don't use #typeReferenceAwareCache since it makes assumptions on the
@@ -179,7 +182,17 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 	}
 	
 	protected JvmTypeParameterDeclarator getNearestTypeParameterDeclarator(EObject obj) {
-		return EcoreUtil2.getContainerOfType(obj, JvmTypeParameterDeclarator.class);
+		if (obj == null)
+			return null;
+		if (obj instanceof JvmTypeParameterDeclarator) {
+			return (JvmTypeParameterDeclarator) obj;
+		}
+		if (obj.eResource() != null) {
+			JvmIdentifiableElement container = logicalContainerProvider.getLogicalContainer(obj);
+			if (container != null)
+				return getNearestTypeParameterDeclarator(container);
+		}
+		return getNearestTypeParameterDeclarator(obj.eContainer());
 	}
 	
 	protected boolean isDeclaratorOf(JvmTypeParameterDeclarator declarator, JvmTypeParameter param) {

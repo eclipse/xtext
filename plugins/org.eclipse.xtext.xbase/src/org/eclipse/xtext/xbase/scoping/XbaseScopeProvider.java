@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.scoping;
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -20,18 +21,22 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.impl.MapBasedScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
@@ -49,7 +54,7 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
-import org.eclipse.xtext.xbase.jvmmodel.IExpressionContextProvider;
+import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.DefaultJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IValidatedEObjectDescription;
@@ -65,6 +70,7 @@ import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -110,7 +116,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	private TypeReferences typeReferences;
 	
 	@Inject
-	private IExpressionContextProvider expressionContextProvider;
+	private ILogicalContainerProvider expressionContext;
 	
 	public void setFeatureNameProvider(IdentifiableSimpleNameProvider featureNameProvider) {
 		this.featureNameProvider = featureNameProvider;
@@ -147,6 +153,9 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			if (isConstructorCallScope(reference)) {
 				return createConstructorCallScope(context, reference);
 			}
+			if (isTypeScope(reference)) {
+				return createTypeScope(context, reference);
+			}
 			return super.getScope(context, reference);
 		} catch (RuntimeException e) {
 			log.error("error during scoping", e);
@@ -156,6 +165,66 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 				log.debug("leave getScope(" + context + ", " + reference.getEContainingClass().getName() + "#" + reference.getName() + ")");
 			}
 		}
+	}
+
+	protected IScope createTypeScope(EObject context, EReference reference) {
+		final IScope parentScope = super.getScope(context, reference);
+		JvmIdentifiableElement logicalContainer = getLogicalContainer(context);
+		if (logicalContainer != null) {
+			 return createTypeScope(logicalContainer, reference, parentScope);
+		}
+		return parentScope;
+	}
+	
+	protected IScope createTypeScope(JvmIdentifiableElement context, EReference reference, IScope parentScope) {
+		if (context == null)
+			return parentScope;
+		if (context.eContainer() instanceof JvmIdentifiableElement) {
+			parentScope = createTypeScope((JvmIdentifiableElement) context.eContainer(), reference, parentScope);
+		}
+		if (context instanceof JvmGenericType) {
+			JvmGenericType genericType = (JvmGenericType) context;
+			List<IEObjectDescription> descriptions = Lists.newArrayList();
+			if (genericType.getSimpleName() != null) {
+				QualifiedName inferredDeclaringTypeName = QualifiedName.create(genericType.getSimpleName());
+				descriptions.add(EObjectDescription.create(inferredDeclaringTypeName, genericType));
+			}
+			for (JvmTypeParameter param : genericType.getTypeParameters()) {
+				if (param.getSimpleName() != null) {
+					QualifiedName paramName = QualifiedName.create(param.getSimpleName());
+					descriptions.add(EObjectDescription.create(paramName, param));
+				}
+			}
+			if (!descriptions.isEmpty())
+				return MapBasedScope.createScope(parentScope, descriptions);
+		} else if ( context instanceof JvmOperation) {
+			JvmOperation operation = (JvmOperation) context;
+			List<IEObjectDescription> descriptions = null;
+			for (JvmTypeParameter param : operation.getTypeParameters()) {
+				if (param.getSimpleName() != null) {
+					if (descriptions == null)
+						descriptions = Lists.newArrayList();
+					QualifiedName paramName = QualifiedName.create(param.getSimpleName());
+					descriptions.add(EObjectDescription.create(paramName, param));
+				}
+			}
+			if (descriptions != null && !descriptions.isEmpty())
+				return MapBasedScope.createScope(parentScope, descriptions);
+		}
+		return parentScope;
+	}
+
+	protected JvmIdentifiableElement getLogicalContainer(EObject context) {
+		if (context == null)
+			return null;
+		JvmIdentifiableElement associatedContainer = expressionContext.getLogicalContainer(context);
+		if (associatedContainer != null)
+			return associatedContainer;
+		return getLogicalContainer(context.eContainer());
+	}
+	
+	protected boolean isTypeScope(EReference reference) {
+		return TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(reference.getEReferenceType());
 	}
 
 	protected IScope createConstructorCallScope(EObject context, EReference reference) {
@@ -255,7 +324,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 
 	protected LocalVariableScopeContext createLocalVariableScopeContext(final EObject context, EReference reference,
 			boolean includeCurrentBlock, int idx) {
-		return new LocalVariableScopeContext(context, reference, includeCurrentBlock, idx, false);
+		return new LocalVariableScopeContext(context, reference, includeCurrentBlock, idx, false, expressionContext);
 	}
 
 	protected IScope createStaticScope(EObject context, Resource resource, IScope parent) {
@@ -344,7 +413,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			return (JvmDeclaredType) obj;
 		}
 		if (obj instanceof XExpression) {
-			JvmIdentifiableElement element = expressionContextProvider.getAssociatedJvmElement((XExpression) obj);
+			JvmIdentifiableElement element = expressionContext.getLogicalContainer(obj);
 			if (element != null) {
 				if (element instanceof JvmDeclaredType) {
 					return (JvmDeclaredType) element;
@@ -357,14 +426,14 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	}
 	
 	protected IScope createLocalVarScope(IScope parentScope, LocalVariableScopeContext scopeContext) {
-		if (scopeContext == null || scopeContext.context == null)
+		if (scopeContext == null || scopeContext.getContext() == null)
 			return parentScope;
 		if (scopeContext.canSpawnForContainer())
 			parentScope = createLocalVarScope(parentScope, scopeContext.spawnForContainer());
-		EObject context = scopeContext.context;
+		EObject context = scopeContext.getContext();
 		if (context.eContainer() instanceof XBlockExpression) {
 			XBlockExpression block = (XBlockExpression) context.eContainer();
-			parentScope = createLocalVarScopeForBlock(block, block.getExpressions().indexOf(context), scopeContext.referredFromClosure, parentScope);
+			parentScope = createLocalVarScopeForBlock(block, block.getExpressions().indexOf(context), scopeContext.isReferredFromClosure(), parentScope);
 		}
 		if (context.eContainer() instanceof XForLoopExpression && context.eContainingFeature() == XbasePackage.Literals.XFOR_LOOP_EXPRESSION__EACH_EXPRESSION) {
 			XForLoopExpression loop = (XForLoopExpression) context.eContainer();
@@ -383,11 +452,20 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		if (context instanceof XSwitchExpression) {
 			parentScope = createLocalVarScopeForSwitchExpression((XSwitchExpression) context, parentScope);
 		}
-		if (scopeContext.includeCurrentBlock) {
+		if (context instanceof JvmOperation) {
+			parentScope = createLocalVarScopeForJvmOperation((JvmOperation)context, parentScope);
+		}
+		if (context instanceof JvmConstructor) {
+			parentScope = createLocalVarScopeForJvmConstructor((JvmConstructor)context, parentScope);
+		}
+		if (context instanceof JvmDeclaredType) {
+			parentScope = createLocalVarScopeForJvmDeclaredType((JvmDeclaredType)context, parentScope);
+		}
+		if (scopeContext.isIncludeCurrentBlock()) {
 			if (context instanceof XBlockExpression) {
 				XBlockExpression block = (XBlockExpression) context;
 				if (!block.getExpressions().isEmpty()) {
-					parentScope = createLocalVarScopeForBlock(block, scopeContext.idx, scopeContext.referredFromClosure, parentScope);
+					parentScope = createLocalVarScopeForBlock(block, scopeContext.getIndex(), scopeContext.isReferredFromClosure(), parentScope);
 				}
 			}
 			if (context instanceof XForLoopExpression) {
@@ -397,34 +475,54 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 				parentScope = createLocalScopeForParameter(((XCatchClause) context).getDeclaredParam(), parentScope);
 			}
 		}
-		if (adaptsToJvmElement(context)) {
-			final JvmIdentifiableElement identifiable = expressionContextProvider.getAssociatedJvmElement((XExpression) context);
-			return createLocalVarScopeForJvmElement(identifiable, parentScope);
-		}
 		return parentScope;
 	}
 
-	protected IScope createLocalVarScopeForJvmElement(JvmIdentifiableElement element, IScope parentScope) {
-		if (element.eContainer() instanceof JvmIdentifiableElement) {
-			parentScope = createLocalVarScopeForJvmElement((JvmIdentifiableElement) element.eContainer(), parentScope);
-		} 
-		if (element instanceof JvmOperation) {
-			EList<JvmFormalParameter> parameters = ((JvmOperation) element).getParameters();
-			List<LocalVarDescription> descriptions = newArrayList();
-			for (JvmFormalParameter p : parameters) {
+	protected IScope createLocalVarScopeForJvmOperation(JvmOperation context, IScope parentScope) {
+		EList<JvmFormalParameter> parameters = context.getParameters();
+		List<LocalVarDescription> descriptions = newArrayList();
+		for (JvmFormalParameter p : parameters) {
+			if (p.getName() != null)
 				descriptions.add(new LocalVarDescription(QualifiedName.create(p.getName()), p));
+		}
+		return new JvmFeatureScope(parentScope, "operation "+context.getSimpleName(), descriptions);
+	}
+	
+	protected IScope createLocalVarScopeForJvmConstructor(JvmConstructor context, IScope parentScope) {
+		EList<JvmFormalParameter> parameters = context.getParameters();
+		List<LocalVarDescription> descriptions = newArrayList();
+		for (JvmFormalParameter p : parameters) {
+			if (p.getName() != null)
+				descriptions.add(new LocalVarDescription(QualifiedName.create(p.getName()), p));
+		}
+		return new JvmFeatureScope(parentScope, "constructor "+context.getSimpleName(), descriptions);
+	}
+
+	protected IScope createLocalVarScopeForJvmDeclaredType(JvmDeclaredType type, IScope parentScope) {
+		Iterator<JvmTypeReference> classes = filter(type.getSuperTypes(), new Predicate<JvmTypeReference>() {
+			public boolean apply(JvmTypeReference input) {
+				if (input.getType() instanceof JvmGenericType) {
+					return !((JvmGenericType)input.getType()).isInterface();
+				}
+				return false;
 			}
-			return new JvmFeatureScope(parentScope, "operation args", descriptions);
+		}).iterator();
+		JvmGenericType superType = null;
+		if (classes.hasNext()) {
+			superType = (JvmGenericType) classes.next().getType();
 		}
-		if (element instanceof JvmDeclaredType) {
-			return new JvmFeatureScope(parentScope, "this scope", new LocalVarDescription(THIS, element));
+		if (superType == null) {
+			return new JvmFeatureScope(parentScope, "this", new LocalVarDescription(THIS, type));
+		} else {
+			return new JvmFeatureScope(parentScope, "this & super", newArrayList(
+					new LocalVarDescription(THIS, type), 
+					new LocalVarDescription(QualifiedName.create("super"), superType)));
 		}
-		return parentScope;
 	}
 
 	protected boolean adaptsToJvmElement(EObject context) {
 		if (context instanceof XExpression) {
-			return expressionContextProvider.getAssociatedJvmElement((XExpression)context) != null;
+			return expressionContext.getLogicalContainer(context) != null;
 		}
 		return false;
 	}

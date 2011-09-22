@@ -8,9 +8,9 @@
 package org.eclipse.xtext.xbase.compiler;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -22,6 +22,8 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 
 import com.google.inject.Inject;
 
@@ -36,8 +38,18 @@ public class TypeReferenceSerializer {
 	@Inject
 	private TypeConformanceComputer typeConformanceComputer;
 	
+	@Inject ILogicalContainerProvider contextProvider;
+	
 	protected boolean isLocalTypeParameter(EObject context, JvmTypeParameter parameter) {
-		return EcoreUtil.isAncestor(parameter.getDeclarator(), context);
+		if (context == null)
+			return false;
+		if (context == parameter.getDeclarator()) 
+			return true;
+		JvmIdentifiableElement jvmElement = contextProvider.getLogicalContainer(context);
+		if (jvmElement != null) {
+			return isLocalTypeParameter(jvmElement, parameter);
+		}
+		return isLocalTypeParameter(context.eContainer(), parameter);
 	}
 	
 	public void serialize(final JvmTypeReference type, EObject context, IAppendable appendable) {

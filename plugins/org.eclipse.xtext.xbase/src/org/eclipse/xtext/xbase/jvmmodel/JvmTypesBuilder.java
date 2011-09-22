@@ -65,13 +65,10 @@ public class JvmTypesBuilder {
 	private IJvmModelAssociator associator;
 	
 	@Inject
-	private IExpressionContextAssociator expressionContextAssociator;
-	
-	@Inject
 	private TypeReferences references;
 	
 	public void associate(XExpression expr, JvmIdentifiableElement element) {
-		expressionContextAssociator.associate(expr, element);
+		associator.associateLogicalContainer(expr, element);
 	}
 
 	public JvmField toField(EObject ctx, String name, JvmTypeReference typeRef) {
