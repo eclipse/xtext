@@ -18,13 +18,17 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingCalculator;
 import org.eclipse.xtext.xtend2.richstring.AbstractRichStringPartAcceptor;
@@ -44,8 +48,9 @@ import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Holger Schill
  */
-public class RichStringAwareHighlightingCalculator extends XbaseHighlightingCalculator {
+public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 
 	@Inject
 	private RichStringProcessor processor;
@@ -59,7 +64,7 @@ public class RichStringAwareHighlightingCalculator extends XbaseHighlightingCalc
 	protected void setXtendGrammarAccess(Xtend2GrammarAccess grammarAccess) {
 		this.createKeyword = grammarAccess.getValidIDAccess().getCreateKeyword_1();
 	}
-	
+
 	@Override
 	protected void doProvideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
 		XtendFile file = (XtendFile) resource.getContents().get(0);
@@ -73,6 +78,20 @@ public class RichStringAwareHighlightingCalculator extends XbaseHighlightingCalc
 			}
 		}
 		super.doProvideHighlightingFor(resource, acceptor);
+	}
+	
+	@Override
+	protected void highlightFeatureCall(XAbstractFeatureCall featureCall, IHighlightedPositionAcceptor acceptor) {
+		if (featureCall instanceof XMemberFeatureCall){
+			JvmIdentifiableElement feature = featureCall.getFeature();
+			if(feature != null && !feature.eIsProxy() && feature instanceof JvmOperation){
+				if(featureCall.getImplicitReceiver() != null || ((JvmOperation) feature).isStatic()){
+					highlightFeatureCall(featureCall, acceptor, 
+							XtendHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+				}
+			}
+		}
+		super.highlightFeatureCall(featureCall, acceptor);
 	}
 
 	protected void highlightRichStrings(XExpression expression, IHighlightedPositionAcceptor acceptor) {
@@ -92,13 +111,14 @@ public class RichStringAwareHighlightingCalculator extends XbaseHighlightingCalc
 	protected RichStringHighlighter createRichStringHighlighter(IHighlightedPositionAcceptor acceptor) {
 		return new RichStringHighlighter(acceptor);
 	}
-	
+
 	@Override
 	protected void highlightSpecialIdentifiers(ILeafNode leafNode, IHighlightedPositionAcceptor acceptor,
 			TerminalRule idRule) {
 		super.highlightSpecialIdentifiers(leafNode, acceptor, idRule);
 		if (leafNode.getGrammarElement() == createKeyword) {
-			acceptor.addPosition(leafNode.getOffset(), leafNode.getLength(), DefaultHighlightingConfiguration.DEFAULT_ID);
+			acceptor.addPosition(leafNode.getOffset(), leafNode.getLength(),
+					DefaultHighlightingConfiguration.DEFAULT_ID);
 		}
 	}
 
@@ -152,10 +172,10 @@ public class RichStringAwareHighlightingCalculator extends XbaseHighlightingCalc
 					INode node = featureNodes.get(0);
 					currentOffset = node.getOffset();
 					if (node.getText().charAt(0) == '\'') {
-						acceptor.addPosition(currentOffset, 3, HighlightingConfiguration.INSIGNIFICANT_TEMPLATE_TEXT);
+						acceptor.addPosition(currentOffset, 3, XtendHighlightingConfiguration.INSIGNIFICANT_TEMPLATE_TEXT);
 						highlightClosingQuotes(node);
 						currentOffset += 3;
-					} else if (node.getText().startsWith("\u00AB\u00AB")){
+					} else if (node.getText().startsWith("\u00AB\u00AB")) {
 						String nodeText = node.getText();
 						int length = nodeText.indexOf('\n');
 						int start = node.getTotalOffset();
@@ -163,11 +183,9 @@ public class RichStringAwareHighlightingCalculator extends XbaseHighlightingCalc
 							length = node.getTotalLength();
 						}
 						if (recentNode != null && recentNode.getTotalEndOffset() == start) {
-							acceptor.addPosition(start - 1, 1,
-									DefaultHighlightingConfiguration.COMMENT_ID);
+							acceptor.addPosition(start - 1, 1, DefaultHighlightingConfiguration.COMMENT_ID);
 						}
-						acceptor.addPosition(start, length,
-								DefaultHighlightingConfiguration.COMMENT_ID);
+						acceptor.addPosition(start, length, DefaultHighlightingConfiguration.COMMENT_ID);
 						highlightClosingQuotes(node);
 						currentOffset = start + length + 1;
 					} else {
@@ -190,7 +208,7 @@ public class RichStringAwareHighlightingCalculator extends XbaseHighlightingCalc
 			}
 			if (length != 0) {
 				acceptor.addPosition(currentOffset + node.getLength() - length, length,
-							HighlightingConfiguration.INSIGNIFICANT_TEMPLATE_TEXT);
+						XtendHighlightingConfiguration.INSIGNIFICANT_TEMPLATE_TEXT);
 			}
 		}
 
@@ -199,14 +217,14 @@ public class RichStringAwareHighlightingCalculator extends XbaseHighlightingCalc
 			resetCurrentOffset(origin);
 			if (text.length() > 0) {
 				int length = text.length();
-				while(!pendingRegions.isEmpty()) {
+				while (!pendingRegions.isEmpty()) {
 					IRegion pending = pendingRegions.poll();
 					length -= pending.getLength();
-					acceptor.addPosition(pending.getOffset(), pending.getLength(), HighlightingConfiguration.INSIGNIFICANT_TEMPLATE_TEXT);
+					acceptor.addPosition(pending.getOffset(), pending.getLength(),
+							XtendHighlightingConfiguration.INSIGNIFICANT_TEMPLATE_TEXT);
 				}
 				if (length != 0) {
-					acceptor.addPosition(currentOffset, length,
-							HighlightingConfiguration.INSIGNIFICANT_TEMPLATE_TEXT);
+					acceptor.addPosition(currentOffset, length, XtendHighlightingConfiguration.INSIGNIFICANT_TEMPLATE_TEXT);
 					currentOffset += length;
 				}
 			}
@@ -216,9 +234,9 @@ public class RichStringAwareHighlightingCalculator extends XbaseHighlightingCalc
 		public void acceptSemanticLineBreak(int charCount, RichStringLiteral origin, boolean controlStructureSeen) {
 			resetCurrentOffset(origin);
 			if (controlStructureSeen)
-				acceptor.addPosition(currentOffset, charCount, HighlightingConfiguration.POTENTIAL_LINE_BREAK);
+				acceptor.addPosition(currentOffset, charCount, XtendHighlightingConfiguration.POTENTIAL_LINE_BREAK);
 			else
-				acceptor.addPosition(currentOffset, charCount, HighlightingConfiguration.TEMPLATE_LINE_BREAK);
+				acceptor.addPosition(currentOffset, charCount, XtendHighlightingConfiguration.TEMPLATE_LINE_BREAK);
 			currentOffset += charCount;
 		}
 
