@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.jvmmodel;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XExpression;
 
@@ -15,13 +16,13 @@ import com.google.inject.ImplementedBy;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@ImplementedBy(ExpressionContextProvider.class)
-public interface IExpressionContextProvider {
+@ImplementedBy(JvmModelAssociator.class)
+public interface ILogicalContainerProvider {
 
 	/**
 	 * @return the JvmIdentifiableElement that contains the given expression and therefore defines its scope. <code>null</code> if this expression doesn't live in such a context.
 	 */
-	public JvmIdentifiableElement getAssociatedJvmElement(XExpression expr);
+	public JvmIdentifiableElement getLogicalContainer(EObject expr);
 	
 	/**
 	 * @return the XExpression associated with the given {@link JvmIdentifiableElement}
