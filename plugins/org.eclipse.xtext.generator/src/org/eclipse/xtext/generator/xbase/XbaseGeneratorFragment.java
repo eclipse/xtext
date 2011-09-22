@@ -42,6 +42,7 @@ import com.google.common.collect.Lists;
  *
  * @author Jan Koehnlein - Initial contribution and API
  * @author Sven Efftinge
+ * @author Holger Schill
  */
 public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 	
@@ -151,6 +152,8 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 						"org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor")
 				.addTypeToType("org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator", 
 						"org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingCalculator")
+				.addTypeToType("org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration", 
+						"org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingConfiguration")
 				.addTypeToType("org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider", 
 						"org.eclipse.xtext.xbase.ui.hover.XbaseHoverProvider");
 		if (useInferredJvmModel) {
