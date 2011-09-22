@@ -10,16 +10,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ltk.core.refactoring.resource.RenameResourceChange;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.common.types.JvmConstructor;
-import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmMember;
-import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.impl.RefactoringException;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.AbstractJvmModelRenameStrategy;
-import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
-import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
 /**
  * Encapsulates the model changes of a rename refactoring.
@@ -35,20 +29,6 @@ public class Xtend2RenameStrategy extends AbstractJvmModelRenameStrategy {
 		if (path != null)
 			updateAcceptor.accept(getTargetElementOriginalURI().trimFragment(), new RenameResourceChange(path, newName
 					+ "." + path.getFileExtension()));
-	}
-
-	@Override
-	protected IXtend2JvmAssociations getJvmModelAssociations() {
-		return (IXtend2JvmAssociations) super.getJvmModelAssociations();
-	}
-
-	@Override
-	protected void setInferredJvmElementName(String name, EObject renamedElement) {
-		if (renamedElement.eResource() instanceof DerivedStateAwareResource) {
-			DerivedStateAwareResource resource = (DerivedStateAwareResource) renamedElement.eResource();
-			resource.discardDerivedState();
-			resource.installDerivedState(false);
-		}
 	}
 
 	protected IPath getPathToRename(URI elementURI, ResourceSet resourceSet) {

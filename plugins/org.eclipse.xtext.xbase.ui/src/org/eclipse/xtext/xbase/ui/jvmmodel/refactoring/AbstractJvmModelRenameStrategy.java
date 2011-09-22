@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.ui.jvmmodel.refactoring;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 
@@ -40,7 +41,13 @@ public abstract class AbstractJvmModelRenameStrategy extends DefaultRenameStrate
 		setInferredJvmElementName(newName, renamedElement);
 	}
 
-	protected abstract void setInferredJvmElementName(String name, EObject renamedSourceElement);
+	protected void setInferredJvmElementName(String name, EObject renamedElement) {
+		if (renamedElement.eResource() instanceof DerivedStateAwareResource) {
+			DerivedStateAwareResource resource = (DerivedStateAwareResource) renamedElement.eResource();
+			resource.discardDerivedState();
+			resource.installDerivedState(false);
+		}
+	}
 	
 	protected IJvmModelAssociations getJvmModelAssociations() {
 		return jvmModelAssociations;
