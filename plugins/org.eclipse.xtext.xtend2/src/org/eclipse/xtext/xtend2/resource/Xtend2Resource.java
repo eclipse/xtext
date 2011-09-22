@@ -31,13 +31,14 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
+import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.resource.XbaseResource;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
-import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
+import org.eclipse.xtext.xbase.typing.JvmOnlyTypeConformanceComputer;
 import org.eclipse.xtext.xtend2.dispatch.DispatchingSupport;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.typing.XtendOverridesService;
@@ -65,7 +66,10 @@ public class Xtend2Resource extends XbaseResource {
 	private IXtend2JvmAssociations associations;
 	
 	@Inject
-	private XbaseTypeConformanceComputer typeConformanceComputer;
+	private TypeConformanceComputer typeConformanceComputer;
+	
+	@Inject
+	private JvmOnlyTypeConformanceComputer jvmTypeConformanceComputer;
 	
 	@Inject
 	private TypeReferences typeReferences;
@@ -175,9 +179,9 @@ public class Xtend2Resource extends XbaseResource {
 				references.add(apply);
 			}
 		}
-		JvmTypeReference result = typeConformanceComputer.getCommonSuperType(references);
+		JvmTypeReference result = jvmTypeConformanceComputer.getCommonSuperType(references);
 		while(result instanceof JvmMultiTypeReference) {
-			result = typeConformanceComputer.getCommonSuperType(((JvmMultiTypeReference) result).getReferences());
+			result = jvmTypeConformanceComputer.getCommonSuperType(((JvmMultiTypeReference) result).getReferences());
 		}
 		return result;
 	}

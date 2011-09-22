@@ -36,12 +36,13 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.FeatureOverridesService;
 import org.eclipse.xtext.common.types.util.IRawTypeHelper;
 import org.eclipse.xtext.common.types.util.Primitives;
-import org.eclipse.xtext.common.types.util.TypeArgumentContext;
+import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Pair;
@@ -353,11 +354,22 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 	
 	@Check
 	public void checkDuplicateAndOverriddenFunctions(XtendClass xtendClass) {
-		JvmParameterizedTypeReference typeReference = getTypesFactory().createJvmParameterizedTypeReference();
 		final JvmGenericType inferredType = associations.getInferredType(xtendClass);
 		if (inferredType != null) {
-			typeReference.setType(inferredType);
-			final TypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getReceiverContext(typeReference);
+			final JvmParameterizedTypeReference typeReference = typeReferences.createTypeRef(inferredType);
+			if (xtendClass.getTypeParameters().isEmpty())
+				typeReference.getArguments().clear();
+			final ITypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getTypeArgumentContext(
+					new TypeArgumentContextProvider.AbstractRequest() {
+						@Override
+						public JvmTypeReference getReceiverType() {
+							return typeReference;
+						}
+						@Override
+						public JvmTypeParameterDeclarator getNearestDeclarator() {
+							return inferredType;
+						}
+					});
 			Multimap<Object, JvmOperation> operationsPerErasure = HashMultimap.create();
 			for(JvmOperation operation: inferredType.getDeclaredOperations()) {
 				Signature signature = getSignature(operation);
@@ -461,8 +473,9 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 					XTEND_FUNCTION__NAME, OVERRIDDEN_FINAL);
 		if (function.getReturnType()==null)
 			return;
-		TypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getReceiverContext(getTypeRefs()
-				.createTypeRef(associations.getDirectlyInferredOperation(function).getDeclaringType()));
+		ITypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getTypeArgumentContext(
+				new TypeArgumentContextProvider.ReceiverRequest(
+						getTypeRefs().createTypeRef(associations.getDirectlyInferredOperation(function).getDeclaringType())));
 		JvmTypeReference returnTypeUpperBound = typeArgumentContext.getUpperBound(overriddenOperation.getReturnType(), function);
 		if (!isConformant(returnTypeUpperBound, function.getReturnType())) {
 			error("The return type is incompatible with "
