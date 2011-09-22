@@ -38,9 +38,6 @@ public class OutputConfigurationPage extends AbstractDetailsPart {
 
 	@Override
 	protected void createFieldEditors() {
-		addField(new StringFieldEditor(OUTPUT_NAME, Messages.OutputConfigurationPage_Name, getFieldEditorParent()));
-		addField(new StringFieldEditor(OUTPUT_DESCRIPTION, Messages.OutputConfigurationPage_Description,
-				getFieldEditorParent()));
 		if (getAdaptable() != null && getAdaptable().getAdapter(IResource.class) != null) {
 			addField(new ProjectDirectoryFieldEditor(OUTPUT_DIRECTORY, Messages.OutputConfigurationPage_Directory,
 					getFieldEditorParent(), ((IResource) getAdaptable()).getProject()));

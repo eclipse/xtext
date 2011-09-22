@@ -10,6 +10,9 @@ package org.eclipse.xtext.builder.preferences;
 import static org.eclipse.xtext.builder.EclipseOutputConfigurationProvider.*;
 
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.util.IPropertyChangeListener;
+import org.eclipse.jface.util.PropertyChangeEvent;
+import org.eclipse.xtext.builder.DerivedResourceCleanerJob;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.OutputConfigurationProvider;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
@@ -29,6 +32,7 @@ public class BuilderPreferenceAccess {
 	public static final String PREF_AUTO_BUILDING = "autobuilding"; //$NON-NLS-1$
 
 	public static class Initializer implements IPreferenceStoreInitializer {
+		private ChangeListener changeListener;
 		private OutputConfigurationProvider outputConfigurationProvider;
 
 		public OutputConfigurationProvider getOutputConfigurationProvider() {
@@ -40,10 +44,20 @@ public class BuilderPreferenceAccess {
 			this.outputConfigurationProvider = outputConfigurationProvider;
 		}
 
+		public ChangeListener getChangeListener() {
+			return changeListener;
+		}
+
+		@Inject
+		public void setChangeListener(ChangeListener changeListener) {
+			this.changeListener = changeListener;
+		}
+
 		public void initialize(IPreferenceStoreAccess preferenceStoreAccess) {
 			IPreferenceStore store = preferenceStoreAccess.getWritablePreferenceStore();
 			intializeBuilderPreferences(store);
 			initializeOutputPreferences(store);
+			store.addPropertyChangeListener(getChangeListener());
 		}
 
 		private void intializeBuilderPreferences(IPreferenceStore store) {
@@ -69,6 +83,29 @@ public class BuilderPreferenceAccess {
 		private String getKey(OutputConfiguration outputConfiguration, String preferenceName) {
 			return OUTPUT_PREFERENCE_TAG + PreferenceConstants.SEPARATOR + outputConfiguration.getName()
 					+ PreferenceConstants.SEPARATOR + preferenceName;
+		}
+	}
+
+	public static class ChangeListener implements IPropertyChangeListener {
+		private DerivedResourceCleanerJob derivedResourceCleanerJob;
+
+		public DerivedResourceCleanerJob getDerivedResourceCleanerJob() {
+			return derivedResourceCleanerJob;
+		}
+
+		@Inject
+		public void setDerivedResourceCleanerJob(DerivedResourceCleanerJob derivedResourceCleanerJob) {
+			this.derivedResourceCleanerJob = derivedResourceCleanerJob;
+			this.derivedResourceCleanerJob.setUser(true);
+		}
+
+		public void propertyChange(PropertyChangeEvent event) {
+			if (event.getProperty().matches("^"+OUTPUT_PREFERENCE_TAG+"\\.\\w+\\."+OUTPUT_DIRECTORY+"$")) {
+				derivedResourceCleanerJob.cancel();
+				String oldValue = (String) event.getOldValue();
+				derivedResourceCleanerJob.initialize(null, oldValue);
+				derivedResourceCleanerJob.schedule();
+			}
 		}
 	}
 
