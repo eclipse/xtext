@@ -127,11 +127,12 @@ public class FindReferencesTest extends AbstractXtend2UITestCase {
 	public void testFindReferencesThis() throws Exception {
 		XtendClass classFoo = testHelper.xtendFile("Foo", "class Foo { def foo() {this} }").getXtendClass();
 		waitForAutoBuild();
+		JvmGenericType inferredType = associations.getInferredType(classFoo);
 		XtendFunction functionFoo = (XtendFunction) classFoo.getMembers().get(0);
 
 		final MockAcceptor mockAcceptor = new MockAcceptor();
-		mockAcceptor.expect(((XBlockExpression)functionFoo.getExpression()).getExpressions().get(0), classFoo, XABSTRACT_FEATURE_CALL__FEATURE);
-		checkFindReferences(classFoo, mockAcceptor);
+		mockAcceptor.expect(((XBlockExpression)functionFoo.getExpression()).getExpressions().get(0), inferredType, XABSTRACT_FEATURE_CALL__FEATURE);
+		checkFindReferences(inferredType, mockAcceptor);
 	}
 
 	public void testFindReferencesToConstructor() throws Exception {

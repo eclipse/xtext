@@ -1,6 +1,7 @@
 package org.eclipse.xtext.xtend2.tests.parsing;
 
 import org.eclipse.xtext.common.types.JvmLowerBound;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmUpperBound;
@@ -12,6 +13,8 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.XtendField;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
@@ -25,7 +28,11 @@ import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendImport;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
+import com.google.inject.Inject;
+
 public class ParserTest extends AbstractXtend2TestCase {
+	
+	@Inject private IXtend2JvmAssociations associations; 
 	
 	public void testCreateExtension_00() throws Exception {
 		XtendClass clazz = clazz(
@@ -349,7 +356,8 @@ public class ParserTest extends AbstractXtend2TestCase {
 		final RichString richString = (RichString) function.getExpression();
 		assertTrue(richString.getExpressions().get(0) instanceof RichStringLiteral);
 		assertTrue(richString.getExpressions().get(1) instanceof XFeatureCall);
-		assertSame(function.getParameters().get(0), ((XAbstractFeatureCall) richString.getExpressions().get(1)).getFeature());
+		JvmOperation operation = associations.getDirectlyInferredOperation(function);
+		assertSame(operation.getParameters().get(0), ((XAbstractFeatureCall) richString.getExpressions().get(1)).getFeature());
 		assertTrue(richString.getExpressions().get(2) instanceof RichStringLiteral);
 		assertTrue(richString.getExpressions().get(3) instanceof XVariableDeclaration);
 		assertTrue(richString.getExpressions().get(4) instanceof RichStringLiteral);

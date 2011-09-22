@@ -20,6 +20,7 @@ import junit.framework.Assert;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -63,7 +64,9 @@ import com.google.inject.name.Named;
 @SuppressWarnings("restriction")
 @Singleton
 public class WorkbenchTestHelper extends Assert {
-
+	
+	public static final Logger log = Logger.getLogger(WorkbenchTestHelper.class);  
+	
 	public static final String TESTPROJECT_NAME = "test.project";
 
 	private Set<IFile> files = newHashSet();
@@ -84,6 +87,8 @@ public class WorkbenchTestHelper extends Assert {
 	@Inject
 	private IResourceSetProvider resourceSetProvider;
 
+	private boolean isLazyCreatedProject = false;
+
 	public void tearDown() throws Exception {
 		workbench.getActiveWorkbenchWindow().getActivePage().closeAllEditors(false);
 		for (IFile file : getFiles()) {
@@ -93,6 +98,7 @@ public class WorkbenchTestHelper extends Assert {
 				exc.printStackTrace();
 			}
 		}
+		getFiles().clear();
 		IFolder binFolder = getProject().getFolder("bin");
 		if (binFolder.exists()) {
 			for (IResource binMember : binFolder.members()) {
@@ -103,6 +109,10 @@ public class WorkbenchTestHelper extends Assert {
 				}
 			}
 		}
+		if (isLazyCreatedProject) {
+			getProject().delete(true, null);
+			isLazyCreatedProject = false;
+		} 
 	}
 
 	public Set<IFile> getFiles() {
@@ -110,7 +120,16 @@ public class WorkbenchTestHelper extends Assert {
 	}
 
 	public IProject getProject() {
-		return workspace.getRoot().getProject(TESTPROJECT_NAME);
+		IProject project = workspace.getRoot().getProject(TESTPROJECT_NAME);
+		if (!project.exists()) {
+			try {
+				isLazyCreatedProject = true;
+				project = createPluginProject(TESTPROJECT_NAME);
+			} catch (CoreException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		return project;
 	}
 
 	public XtextEditor openEditor(String fileName, String content) throws Exception {
@@ -252,6 +271,10 @@ public class WorkbenchTestHelper extends Assert {
 
 	protected IEditorPart openEditor(IFile file, String editorId) throws PartInitException {
 		return workbench.getActiveWorkbenchWindow().getActivePage().openEditor(new FileEditorInput(file), editorId);
+	}
+
+	public void setUp() {
+		getProject();
 	}
 
 }

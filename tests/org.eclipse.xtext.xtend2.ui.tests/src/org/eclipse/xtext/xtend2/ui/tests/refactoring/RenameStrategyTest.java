@@ -62,8 +62,8 @@ public class RenameStrategyTest extends AbstractXtend2UITestCase {
 				.getXtendClass().getMembers().get(0);
 		IRenameStrategy renameStrategy = renameStrategyProvider.get(fooMethod, null);
 		renameStrategy.applyDeclarationChange("bar", fooMethod.eResource().getResourceSet());
-		JvmOperation inferredOperation = associations.getDirectlyInferredOperation(fooMethod);
 		assertEquals("bar", fooMethod.getName());
+		JvmOperation inferredOperation = associations.getDirectlyInferredOperation(fooMethod);
 		assertEquals("bar", inferredOperation.getSimpleName());
 		renameStrategy.revertDeclarationChange(fooMethod.eResource().getResourceSet());
 		inferredOperation = associations.getDirectlyInferredOperation(fooMethod);

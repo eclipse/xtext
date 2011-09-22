@@ -27,6 +27,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.resource.XbaseResource;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
@@ -76,7 +77,9 @@ public class Xtend2Resource extends XbaseResource {
 		try {
 			final String fragmentToJvmOperation = uriFragment.substring(FRAGMENT_PREFIX.length());
 			final EObject eObject = super.getEObject(fragmentToJvmOperation);
-			if (eObject instanceof JvmOperation) {
+			if (eObject instanceof XExpression) {
+				return EcoreUtil2.cloneIfContained(typeProvider.getType((XExpression)eObject));
+			} else if (eObject instanceof JvmOperation) {
 				JvmOperation op  = (JvmOperation) eObject;
 				JvmTypeReference typeReference = inferReturnType(op);
 				if (typeReference==null || typeReference.getType() == null)

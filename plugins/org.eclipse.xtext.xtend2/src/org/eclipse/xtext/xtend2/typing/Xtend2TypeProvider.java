@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmConstraintOwner;
-import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -47,7 +47,6 @@ import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendClassSuperCallReferable;
-import org.eclipse.xtext.xtend2.xtend2.XtendField;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendParameter;
 
@@ -184,24 +183,20 @@ public class Xtend2TypeProvider extends XbaseWithAnnotationsTypeProvider {
 		return getTypeReferences().getTypeForName(Object.class, xtendClass);
 	}
 	
-	protected JvmTypeReference _typeForIdentifiable(CreateExtensionInfo info, boolean rawType) {
-		return getType(info.getCreateExpression(),rawType);
-	}
-
-	protected JvmTypeReference _typeForIdentifiable(XtendFunction func, boolean rawType) {
-		JvmTypeReference declaredOrInferredReturnType = getDeclaredOrOverriddenReturnType(func);
+	protected JvmTypeReference _typeForIdentifiable(XtendFunction function, boolean rawType) {
+		JvmTypeReference declaredOrInferredReturnType = getDeclaredOrOverriddenReturnType(function);
 		if (declaredOrInferredReturnType != null)
 			return declaredOrInferredReturnType;
-		JvmTypeReference returnType = getCommonReturnType(func.getExpression(), true);
+		JvmTypeReference returnType = getCommonReturnType(function.getExpression(), true);
 		if (returnType!=null) {
-			JvmOperation operation = xtend2jvmAssociations.getDirectlyInferredOperation(func);
+			JvmOperation operation = xtend2jvmAssociations.getDirectlyInferredOperation(function);
 			if (operation == null)
 				return null;
-			XtendClass type = (XtendClass) func.eContainer();
+			JvmDeclaredType declaringType = operation.getDeclaringType();
 			for(JvmTypeReference reference: Iterables.filter(EcoreUtil2.eAllContents(returnType), JvmTypeReference.class)) {
 				if (reference.getType() instanceof JvmTypeParameter) {
 					JvmTypeParameter parameter = (JvmTypeParameter) reference.getType();
-					if (parameter.getDeclarator() != func && parameter.getDeclarator() != type) {
+					if (parameter.getDeclarator() != declaringType && parameter.getDeclarator() != operation) {
 						returnType = EcoreUtil2.cloneIfContained(returnType);
 						Set<JvmTypeReference> replaceUs = Sets.newHashSet();
 						for(JvmTypeReference containerOfReplaced: Iterables.filter(EcoreUtil2.eAllContents(returnType), JvmTypeReference.class)) {
@@ -234,7 +229,7 @@ public class Xtend2TypeProvider extends XbaseWithAnnotationsTypeProvider {
 									}
 								}
 								if (superTypes.isEmpty())
-									return getTypeReferences().getTypeForName(Object.class, func);
+									return getTypeReferences().getTypeForName(Object.class, function);
 								return getTypeConformanceComputer().getCommonSuperType(superTypes);
 							}
 						}
@@ -244,13 +239,9 @@ public class Xtend2TypeProvider extends XbaseWithAnnotationsTypeProvider {
 			}
 			return returnType;
 		}
-		return getTypeReferences().getTypeForName(Object.class, func);
+		return getTypeReferences().getTypeForName(Object.class, function);
 	}
 	
-	protected JvmTypeReference _typeForIdentifiable(XtendField dependency, boolean rawType) {
-		return dependency.getType();
-	}
-
 	protected JvmTypeReference getDeclaredOrOverriddenReturnType(XtendFunction func) {
 		if (func.getReturnType() != null)
 			return func.getReturnType();
@@ -265,11 +256,6 @@ public class Xtend2TypeProvider extends XbaseWithAnnotationsTypeProvider {
 		return null;
 	}
 
-	protected JvmTypeReference _typeForIdentifiable(JvmGenericType type, boolean rawType) {
-		XtendClass xtendClass = xtend2jvmAssociations.getXtendClass(type);
-		return (xtendClass != null) ? _typeForIdentifiable(xtendClass, rawType) : null;
-	}
-	
 	private final ThreadLocal<Map<JvmIdentifiableElement, Collection<JvmTypeReference>>> ongoingExceptionComputations = new ThreadLocal<Map<JvmIdentifiableElement, Collection<JvmTypeReference>>>() {
 		@Override
 		protected Map<JvmIdentifiableElement, Collection<JvmTypeReference>> initialValue() {

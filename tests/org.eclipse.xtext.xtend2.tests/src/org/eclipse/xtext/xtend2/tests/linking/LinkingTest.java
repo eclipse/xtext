@@ -7,8 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.tests.linking;
 
-import java.util.List;
+import static com.google.common.collect.Iterables.*;
 
+import java.util.List;
+import java.util.Set;
+
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmField;
@@ -40,6 +44,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendParameter;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
+import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 
 /**
@@ -61,7 +66,14 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		
 		XtendFunction func= (XtendFunction) clazz.getMembers().get(0);
 		XFeatureCall featureCall = (XFeatureCall) ((XBlockExpression)func.getExpression()).getExpressions().get(0);
-		assertEquals(func.getCreateExtensionInfo(), featureCall.getFeature());
+		Set<EObject> elements = associator.getJvmElements(func);
+		Iterable<JvmOperation> filter = filter(elements, JvmOperation.class);
+		JvmOperation initializer = filter(filter, new Predicate<JvmOperation>() {
+			public boolean apply(JvmOperation input) {
+				return input.getSimpleName().startsWith("_init_");
+			}
+		}).iterator().next();
+		assertEquals(initializer.getParameters().get(0), featureCall.getFeature());
 	}
 	
 	public void testXtendField_00() throws Exception {
@@ -194,7 +206,8 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		XtendFunction func  = (XtendFunction) xClass.getMembers().get(1);
 		final XBlockExpression expression = (XBlockExpression) func.getExpression();
 		XAbstractFeatureCall featureCall1 = (XAbstractFeatureCall) expression.getExpressions().get(0);
-		assertEquals(func.getParameters().get(0), featureCall1.getFeature());
+		JvmOperation operation = associator.getDirectlyInferredOperation(func);
+		assertEquals(operation.getParameters().get(0), featureCall1.getFeature());
 	}
 	
 	public void testFeatureScope_3() throws Exception {
@@ -422,7 +435,8 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		XFeatureCall featureCall = (XFeatureCall) block.getExpressions().get(0);
 		// TODO actually we should prefer the function in case 'explicitOperationCall' is true
 		// for a featureCall
-		assertSame(function.getParameters().get(0), featureCall.getFeature());
+		JvmOperation operation = associator.getDirectlyInferredOperation(function);
+		assertSame(operation.getParameters().get(0), featureCall.getFeature());
 	}
 	
 	public void testBug345827_06() throws Exception {
