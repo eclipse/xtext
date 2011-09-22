@@ -7,59 +7,62 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.util;
 
-import static com.google.common.collect.Maps.*;
-import static java.util.Collections.*;
-
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.common.types.JvmAnyTypeReference;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmCompoundTypeReference;
-import org.eclipse.xtext.common.types.JvmConstraintOwner;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
-import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmLowerBound;
+import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
-import org.eclipse.xtext.common.types.JvmPrimitiveType;
-import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
-import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
-import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
+import org.eclipse.xtext.common.types.TypesFactory;
 
+import com.google.common.base.Joiner;
 import com.google.common.base.Predicates;
+import com.google.common.collect.ForwardingMap;
+import com.google.common.collect.ForwardingMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
 public class TypeArgumentContextProvider {
-	
+
 	@Inject
-	private IJvmTypeProvider.Factory typeProviderFactory;
+	private Provider<LazyTypeArgumentContext> lazyTypeArgumentContextProvider;
 	
 	@Inject
 	private TypeReferences typeReferences;
+	
+	@Inject
+	private TypesFactory typesFactory;
+	
+	@Inject
+	private IRawTypeHelper rawTypeHelper;
 	
 	@Inject
 	private TypeConformanceComputer conformanceComputer;
@@ -67,37 +70,431 @@ public class TypeArgumentContextProvider {
 	@Inject
 	private Primitives primitives;
 	
-	@Inject
-	private SuperTypeCollector superTypeCollector;
-	
-	public static class ResolveInfo {
-		public JvmTypeReference reference;
-		protected boolean exactMatch;
-		protected boolean preferSubtypes;
-		protected boolean superTypeAllowed;
+	protected class PrimitiveAwareMap extends ForwardingMap<JvmTypeParameter, JvmTypeReference> {
+		private final Map<JvmTypeParameter, JvmTypeReference> delegate = Maps.newLinkedHashMap();
+		private final Joiner.MapJoiner toStringHelper = Joiner.on("\n\t").withKeyValueSeparator("=");
+
+		@Override
+		protected Map<JvmTypeParameter, JvmTypeReference> delegate() {
+			return delegate;
+		}
 		
-		public ResolveInfo(JvmTypeReference reference) {
+		@Override
+		public JvmTypeReference put(JvmTypeParameter key, JvmTypeReference value) {
+			return super.put(key, primitives.asWrapperTypeIfPrimitive(value));
+		}
+
+		@Override
+		public String toString() {
+			if (isEmpty())
+				return super.toString();
+			return "(" + size() + " elements: {\n\t" + toStringHelper.join(delegate) + "\n}";
+		}
+	}
+
+	public static interface Request {
+		
+		/**
+		 * @return the receiver type or null.
+		 */
+		JvmTypeReference getReceiverType();
+		
+		/**
+		 * @return the feature or null.
+		 */
+		JvmFeature getFeature();
+		
+		/**
+		 * @return the nearest type parameter declarator
+		 */
+		JvmTypeParameterDeclarator getNearestDeclarator();
+		
+		/**
+		 * @return the arguments for the executable or null iff no executable context. May be empty.
+		 */
+		List<JvmTypeReference> getArgumentTypes();
+		
+		/**
+		 * @return the explicit type arguments or null iff no declarator is available.
+		 */
+		List<JvmTypeReference> getExplicitTypeArgument();
+		
+		/**
+		 * @return the expected type or null.
+		 */
+		JvmTypeReference getExpectedType();
+
+		/**
+		 * @return the expected type or null.
+		 */
+		JvmTypeReference getDeclaredType();
+		
+	}
+	
+	public static abstract class AbstractRequest implements Request {
+
+		public JvmTypeReference getReceiverType() {
+			return null;
+		}
+
+		public JvmFeature getFeature() {
+			return null;
+		}
+
+		public JvmTypeParameterDeclarator getNearestDeclarator() {
+			return null;
+		}
+		
+		public List<JvmTypeReference> getArgumentTypes() {
+			return null;
+		}
+
+		public List<JvmTypeReference> getExplicitTypeArgument() {
+			return null;
+		}
+
+		public JvmTypeReference getExpectedType() {
+			return null;
+		}
+		
+		public JvmTypeReference getDeclaredType() {
+			return null;
+		}
+		
+	}
+	
+	public static class ReceiverRequest extends AbstractRequest {
+		
+		private final JvmTypeReference receiver;
+
+		public ReceiverRequest(JvmTypeReference receiver) {
+			this.receiver = receiver;
+		}
+		@Override
+		public JvmTypeReference getReceiverType() {
+			return receiver;
+		}
+	}
+	
+	public ITypeArgumentContext getTypeArgumentContext(Request request) {
+		LazyTypeArgumentContext result = lazyTypeArgumentContextProvider.get();
+		result.initialize(request, this);
+		return result;
+	}
+	
+	protected TypeArgumentContext getReceiverContext(JvmTypeReference receiver) {
+		final Map<JvmTypeParameter, JvmTypeReference> result = createTemporaryMap();
+		final Set<JvmType> visited = Sets.newHashSet();
+		boolean rawType = new AbstractTypeReferenceVisitor.InheritanceAware<Boolean>() {
+			@Override
+			protected Boolean handleNullReference() {
+				return Boolean.TRUE;
+			}
+			@Override
+			public Boolean doVisitTypeReference(JvmTypeReference reference) {
+				return Boolean.FALSE;
+			}
+			@Override
+			public Boolean doVisitCompoundTypeReference(JvmCompoundTypeReference reference) {
+				for(JvmTypeReference component: reference.getReferences()) {
+					if (visit(component))
+						return Boolean.TRUE;
+				}
+				return Boolean.FALSE;
+			}
+			@Override
+			public Boolean doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference) {
+				JvmType type = reference.getType();
+				if (visited.add(type)) {
+					if (type instanceof JvmTypeParameterDeclarator) {
+						List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator) type).getTypeParameters();
+						List<JvmTypeReference> typeArguments = reference.getArguments();
+						if (!typeArguments.isEmpty()) {
+							for (int i = 0; i < typeArguments.size() && i < typeParameters.size(); i++) {
+								JvmTypeReference argument = typeArguments.get(i);
+								if (argument != null) {
+									JvmTypeParameter param = typeParameters.get(i);
+									boolean self = false;
+									if (argument instanceof JvmParameterizedTypeReference) {
+										self = param == argument.getType();
+									}
+									if (!self) {
+										if (result.put(param, argument) != null)
+											throw new IllegalStateException();
+									}
+								}
+							}
+						} else {
+							if (!typeParameters.isEmpty()) { // rawType
+								return Boolean.TRUE;
+							}
+						}
+					}
+					if (type instanceof JvmTypeParameter) {
+						List<JvmTypeConstraint> constraints = ((JvmTypeParameter) type).getConstraints();
+						boolean upperBoundSeen = false;
+						for(JvmTypeConstraint constraint: constraints) {
+							if (constraint instanceof JvmUpperBound) {
+								upperBoundSeen = true;
+								if (visit(constraint.getTypeReference())) {
+									return Boolean.TRUE;
+								}
+							}
+						}
+						if (!upperBoundSeen) {
+							if (visit(typeReferences.getTypeForName(Object.class, type))) {
+								return Boolean.TRUE;
+							}
+						}
+					} else if (type instanceof JvmDeclaredType) {
+						List<JvmTypeReference> superTypes = ((JvmDeclaredType) type).getSuperTypes();
+						for(JvmTypeReference superType: superTypes) {
+							if (visit(superType)) {
+								return Boolean.TRUE;
+							}
+						}
+					}
+				}
+				return Boolean.FALSE;
+			}
+		}.visit(primitives.asWrapperTypeIfPrimitive(receiver));
+		if (rawType)
+			return new TypeArgumentContext(null, typeReferences, typesFactory, rawTypeHelper);
+		Map<JvmTypeParameter, JvmTypeReference> normalized = normalizedCopy(result);
+		if (normalized.isEmpty())
+			return null;
+		return new TypeArgumentContext(normalized, typeReferences, typesFactory, rawTypeHelper);
+	}
+	
+	protected Map<JvmTypeParameter, JvmTypeReference> normalizedCopy(Multimap<JvmTypeParameter, ResolveInfo> map) {
+		if (map.isEmpty())
+			return Collections.emptyMap();
+		if (map.size() == 1) {
+			Map.Entry<JvmTypeParameter, ResolveInfo> singleElement = Iterables.getOnlyElement(map.entries());
+			ResolveInfo singleResolveInfo = singleElement.getValue();
+			JvmTypeReference reference = wildcardAwareGetReference(singleResolveInfo);
+			return Collections.singletonMap(singleElement.getKey(), reference);
+		}
+		Map<JvmTypeParameter, JvmTypeReference> result = createMapWithTweakedToString();
+		for(JvmTypeParameter boundParameter: map.keySet()) {
+			Collection<ResolveInfo> boundTo = map.get(boundParameter);
+			if (boundTo.size() == 1) {
+				ResolveInfo singleResolveInfo = Iterables.getOnlyElement(boundTo);
+				JvmTypeReference reference = wildcardAwareGetReference(singleResolveInfo);
+				result.put(boundParameter, reference);
+			} else {
+				List<ResolveInfo> boundToList = Lists.newArrayList(boundTo);
+				List<JvmTypeReference> uppers = Lists.newArrayListWithCapacity(boundToList.size());
+				List<ResolveInfo> lowers = Lists.newArrayListWithCapacity(boundToList.size());
+				boolean done = false;
+				int lowerIndex = Integer.MAX_VALUE;
+				int upperIndex = Integer.MAX_VALUE;
+				for(int i = 0; i < boundToList.size(); i++) {
+					ResolveInfo info = boundToList.get(i);
+					if (info.kind == ResolveInfoKind.EXACT) {
+						result.put(boundParameter, info.reference);
+						done = true;
+						break;
+					} else if (info.kind == ResolveInfoKind.UPPER || info.kind == ResolveInfoKind.WC_UPPER) {
+						if (upperIndex == Integer.MAX_VALUE)
+							upperIndex = i;
+						if (!lowers.isEmpty() && upperIndex < lowerIndex) {
+							boolean conformant = true;
+							for(ResolveInfo lower: lowers) {
+								if (!conformanceComputer.isConformant(info.reference, lower.reference)) {
+									conformant = false;
+									break;
+								}
+							}
+							if (conformant) {
+								uppers.add(info.reference);
+							}
+						} else {
+							uppers.add(info.reference);
+						}
+					} else if (info.kind == ResolveInfoKind.LOWER || info.kind == ResolveInfoKind.WC_LOWER) {
+						if (lowerIndex == Integer.MAX_VALUE)
+							lowerIndex = i;
+						lowers.add(info);
+					}
+				}
+				if (!done) {
+					JvmTypeReference reference = null;
+					if (!uppers.isEmpty() && upperIndex < lowerIndex) {
+						reference = conformanceComputer.getCommonSuperType(uppers);
+					} else if (!lowers.isEmpty()) {
+						ResolveInfo bestResolvedLower = null;
+						for(ResolveInfo resolvedLower: lowers) {
+							if (bestResolvedLower == null) {
+								bestResolvedLower = resolvedLower;
+							} else if (resolvedLower != null) {
+								if (conformanceComputer.isConformant(bestResolvedLower.reference, resolvedLower.reference)) {
+									bestResolvedLower = resolvedLower;
+								}
+							}
+						}
+						if (bestResolvedLower != null) {
+							if (lowers.size() == 1) {
+								if (bestResolvedLower.kind != ResolveInfoKind.WC_LOWER) {
+									if (!uppers.isEmpty()) {
+										JvmTypeReference upper = conformanceComputer.getCommonSuperType(uppers);
+										if (conformanceComputer.isConformant(bestResolvedLower.reference, upper))
+											reference = upper;
+										else
+											reference = wildcardAwareGetReference(bestResolvedLower);
+									} else {
+										reference = wildcardAwareGetReference(bestResolvedLower);
+									}
+								} else {
+									reference = wildcardAwareGetReference(bestResolvedLower);
+								}
+							} else {
+								reference = bestResolvedLower.reference;
+								if (!uppers.isEmpty()) {
+									JvmTypeReference upper = conformanceComputer.getCommonSuperType(uppers);
+									if (conformanceComputer.isConformant(reference, upper))
+										reference = upper;
+								}
+							}
+						}
+					}
+					if (reference != null)
+						result.put(boundParameter, reference);
+				}
+			}
+		}
+		Map<JvmTypeParameter, JvmTypeReference> normalizedCopy = normalizedCopy(result);
+		return normalizedCopy;
+	}
+
+	protected Map<JvmTypeParameter, JvmTypeReference> createMapWithTweakedToString() {
+		return new PrimitiveAwareMap();
+	}
+
+	protected JvmTypeReference wildcardAwareGetReference(ResolveInfo resolveInfo) {
+		JvmTypeReference reference = resolveInfo.reference;
+		ResolveInfoKind kind = resolveInfo.kind;
+		if (kind == ResolveInfoKind.WC_UPPER) {
+			if (reference.eContainer() instanceof JvmUpperBound && reference.eContainer().eContainer() instanceof JvmWildcardTypeReference) {
+				reference = (JvmTypeReference) reference.eContainer().eContainer();
+			} else {
+				if (reference.eContainer() != null) {
+					JvmDelegateTypeReference delegate = typesFactory.createJvmDelegateTypeReference();
+					delegate.setDelegate(reference);
+					reference = delegate;
+				}
+				JvmWildcardTypeReference wildCard = typeReferences.wildCard();
+				JvmUpperBound upperBound = typesFactory.createJvmUpperBound();
+				wildCard.getConstraints().add(upperBound);
+				upperBound.setTypeReference(reference);
+				reference = wildCard;
+			}
+		} else if (kind == ResolveInfoKind.WC_LOWER) {
+			if (reference.eContainer() instanceof JvmLowerBound && reference.eContainer().eContainer() instanceof JvmWildcardTypeReference) {
+				reference = (JvmTypeReference) reference.eContainer().eContainer();
+			} else {
+				if (reference.eContainer() != null) {
+					JvmDelegateTypeReference delegate = typesFactory.createJvmDelegateTypeReference();
+					delegate.setDelegate(reference);
+					reference = delegate;
+				}
+				JvmWildcardTypeReference wildCard = typeReferences.wildCard();
+				JvmLowerBound lowerBound = typesFactory.createJvmLowerBound();
+				wildCard.getConstraints().add(lowerBound);
+				lowerBound.setTypeReference(reference);
+				reference = wildCard;
+			}
+		}
+		return reference;
+	}
+
+	protected Map<JvmTypeParameter, JvmTypeReference> normalizedCopy(final Map<JvmTypeParameter, JvmTypeReference> map) {
+		if (map.isEmpty())
+			return Collections.emptyMap();
+		if (map.size() == 1) {
+			Map.Entry<JvmTypeParameter, JvmTypeReference> singleElement = Iterables.getOnlyElement(map.entrySet());
+			return Collections.singletonMap(singleElement.getKey(), singleElement.getValue());
+		}
+		Map<JvmTypeParameter, JvmTypeReference> result = createMapWithTweakedToString();
+		for(Map.Entry<JvmTypeParameter, JvmTypeReference> entry: map.entrySet()) {
+			final JvmTypeParameter parameter = entry.getKey();
+			JvmTypeReference boundReference = entry.getValue();
+			final Set<JvmTypeReference> seen = Sets.newHashSet();
+			JvmTypeReference normalized = new AbstractTypeReferenceVisitor.InheritanceAware<JvmTypeReference>() {
+				@Override
+				public JvmTypeReference doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference) {
+					JvmType type = reference.getType();
+					if (type instanceof JvmTypeParameter) {
+						if (type != parameter) {
+							JvmTypeReference transitive = map.get(type);
+							if (transitive != null) {
+								if (seen.add(transitive)) {
+									try {
+										return visit(transitive);
+									} finally {
+										seen.remove(transitive);
+									}
+								} else {
+									// TODO find the reason for this recursion
+//									System.out.println("Recursion");
+								}
+							}
+						}
+					}
+					return reference;
+				}
+				@Override
+				public JvmTypeReference doVisitTypeReference(JvmTypeReference reference) {
+					return reference;
+				}
+			}.visit(boundReference);
+			if (normalized != null)
+				result.put(parameter, normalized);
+		}
+		return result;
+	}
+
+	protected ITypeArgumentContext getExplicitArgumentContext(
+			JvmExecutable executable,
+			List<JvmTypeReference> explicitTypeArgument) {
+		Map<JvmTypeParameter, JvmTypeReference> result = createTemporaryMap();
+		List<JvmTypeParameter> typeParameters = executable.getTypeParameters();
+		if (typeParameters.isEmpty() && executable instanceof JvmConstructor) {
+			JvmDeclaredType declaringType = executable.getDeclaringType();
+			if (declaringType instanceof JvmTypeParameterDeclarator) {
+				typeParameters = ((JvmTypeParameterDeclarator) declaringType).getTypeParameters();
+			}
+		}
+		for(int i = 0; i < typeParameters.size() && i < explicitTypeArgument.size(); i++) {
+			JvmTypeParameter typeParameter = typeParameters.get(i);
+			JvmTypeReference typeArgument = explicitTypeArgument.get(i);
+			if (typeParameter != null && typeArgument != null)
+				result.put(typeParameters.get(i), explicitTypeArgument.get(i));
+		}
+		if (result.isEmpty())
+			return null;
+		return new TypeArgumentContext(result, typeReferences, typesFactory, rawTypeHelper);
+	}
+
+	protected enum ResolveInfoKind {
+		EXACT, UPPER, WC_UPPER, LOWER, WC_LOWER
+	}
+	
+	protected static class ResolveInfo {
+		protected ResolveInfoKind kind;
+		protected JvmTypeReference reference;
+		
+		protected ResolveInfo(JvmTypeReference reference, ResolveInfoKind kind) {
 			this.reference = reference;
+			this.kind = kind;
 		}
-
-		protected ResolveInfo copyIfDifferent(JvmTypeReference reference) {
-			if (reference == this.reference)
-				return this;
-			ResolveInfo result = new ResolveInfo(reference);
-			result.exactMatch = exactMatch;
-			result.preferSubtypes = preferSubtypes;
-			result.superTypeAllowed = superTypeAllowed;
-			return result;
-		}
-
+		
 		@Override
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + (exactMatch ? 1231 : 1237);
-			result = prime * result + (preferSubtypes ? 1231 : 1237);
+			result = prime * result + ((kind == null) ? 0 : kind.hashCode());
 			result = prime * result + ((reference == null) ? 0 : reference.hashCode());
-			result = prime * result + (superTypeAllowed ? 1231 : 1237);
 			return result;
 		}
 
@@ -110,643 +507,371 @@ public class TypeArgumentContextProvider {
 			if (getClass() != obj.getClass())
 				return false;
 			ResolveInfo other = (ResolveInfo) obj;
-			if (exactMatch != other.exactMatch)
-				return false;
-			if (preferSubtypes != other.preferSubtypes)
+			if (kind != other.kind)
 				return false;
 			if (reference == null) {
 				if (other.reference != null)
 					return false;
 			} else if (!reference.equals(other.reference))
 				return false;
-			if (superTypeAllowed != other.superTypeAllowed)
-				return false;
 			return true;
 		}
-		
+
 		@Override
 		public String toString() {
-			return reference.toString();
+			return "ResolveInfo [kind=" + kind + ", reference=" + reference + "]";
 		}
-		
 	}
 	
-	public void setTypeProviderFactory(IJvmTypeProvider.Factory typeProviderFactory) {
-		this.typeProviderFactory = typeProviderFactory;
-	}
-	
-	public void setTypeReferences(TypeReferences typeReferences) {
-		this.typeReferences = typeReferences;
-	}
-	
-	public void setConformanceComputer(TypeConformanceComputer conformanceComputer) {
-		this.conformanceComputer = conformanceComputer;
-	}
-	 
-	public final TypeArgumentContext getNullContext() {
-		return get(Collections.<JvmTypeParameter,ResolveInfo>emptyMap());
-	}
-	
-	public TypeArgumentContext get(Map<JvmTypeParameter, ResolveInfo> context) {
-		final Map<JvmTypeParameter, ResolveInfo> resolved = resolveTypeParametersReferencedInTypeParameters(context, false);
-		return new TypeArgumentContext(resolved, typeProviderFactory, typeReferences);
-	}
-	
-	public TypeArgumentContext getReceiverContext(JvmTypeReference receiver) {
-		Map<JvmTypeParameter, ResolveInfo> map = resolveReceiver(receiver);
-		return get(map);
-	}
-	
-	public TypeArgumentContext getReceiverContext(JvmTypeReference receiverType, JvmTypeReference featureType, JvmTypeReference expectedType) {
-		Multimap<JvmTypeParameter, ResolveInfo> map = LinkedHashMultimap.create();
-		if (receiverType!=null) {
-			map.putAll(Multimaps.forMap(resolveReceiver(receiverType)));
-		}
-		map.putAll(Multimaps.forMap(resolveInferredTypeArgContext(featureType, expectedType, false)));
-		Map<JvmTypeParameter, ResolveInfo> result = internalFindBestMatches(map);
-		return get(result);
-	}
-	
-	protected Map<JvmTypeParameter,ResolveInfo> resolveInferredTypeArgContext(JvmTypeReference featureType, JvmTypeReference expectation, 
-			boolean ignoreOperationTypeParameters) {
-		Multimap<JvmTypeParameter, ResolveInfo> map = LinkedHashMultimap.create();
-		if (expectation != null) {
-			ResolveInfo info = new ResolveInfo(expectation);
-			info.preferSubtypes = true;
-			resolve(featureType, info, map, ignoreOperationTypeParameters);
-		}
-		return internalFindBestMatches(map);
-	}
-	
-	/**
-	 * <p>Creates a type argument context explicitly declared type arguments.</p>
-	 * 
-	 * @param parameterDeclarator the declarator whose parameters should be matched with the arguments
-	 * @param receiverType the resolved type of the message receiver
-	 * @param typeArguments the explicit type arguments of the sent message
-	 * @return the type argument context. Is never <code>null</code>.
-	 */
-	public TypeArgumentContext getExplicitMethodInvocationContext(JvmTypeParameterDeclarator parameterDeclarator, JvmTypeReference receiverType,
-			List<JvmTypeReference> typeArguments) {
-		Multimap<JvmTypeParameter, ResolveInfo> map = LinkedHashMultimap.create();
-		if (receiverType!=null) {
-			map.putAll(Multimaps.forMap(resolveReceiver(receiverType)));
-		}
-		Map<JvmTypeParameter, ResolveInfo> explicitArguments = Maps.newHashMap();
-		List<JvmTypeParameter> typeParameters = parameterDeclarator.getTypeParameters();
-		int max = Math.min(typeParameters.size(), typeArguments.size());
-		for(int i = 0; i < max; i++) {
-			ResolveInfo info = new ResolveInfo(typeArguments.get(i));
-			info.exactMatch = true;
-			explicitArguments.put(typeParameters.get(i), info);
-		}
-		map.putAll(Multimaps.forMap(resolveTypeParametersReferencedInTypeParameters(explicitArguments, false)));
-		Map<JvmTypeParameter, ResolveInfo> result = internalFindBestMatches(map);
-		return get(result);
-	}
-	
-	public TypeArgumentContext injectReceiverContext(TypeArgumentContext context, JvmTypeReference receiverType) {
-		if (receiverType == null)
-			return context;
-		Multimap<JvmTypeParameter, ResolveInfo> map = LinkedHashMultimap.create();
-		map.putAll(Multimaps.forMap(context.getContextMap()));
-		map.putAll(Multimaps.forMap(resolveReceiver(receiverType)));
-		Map<JvmTypeParameter, ResolveInfo> result = internalFindBestMatches(map);
-		return get(result);
-	}
-	
-	public TypeArgumentContext injectArgumentTypeContext(TypeArgumentContext context, JvmOperation operation, boolean ignoreEmptyVarArgs, JvmTypeReference ... actualArgumentTypes) {
-		if (actualArgumentTypes.length == 0 && (!operation.isVarArgs() || ignoreEmptyVarArgs))
-			return context;
-		Multimap<JvmTypeParameter, ResolveInfo> map = LinkedHashMultimap.create();
-		map.putAll(Multimaps.forMap(context.getContextMap()));
-		map.putAll(Multimaps.forMap(resolveInferredMethodTypeArgContext(operation, operation.getReturnType(), null, ignoreEmptyVarArgs, actualArgumentTypes)));
-		Map<JvmTypeParameter, ResolveInfo> result = internalFindBestMatches(map);
-		return get(result);
-	}
-	
-	public TypeArgumentContext injectArgumentTypeContext(TypeArgumentContext context, JvmConstructor operation, JvmTypeReference createdResult, boolean ignoreEmptyVarArgs, JvmTypeReference ... actualArgumentTypes) {
-		if (actualArgumentTypes.length == 0 && (!operation.isVarArgs() || ignoreEmptyVarArgs))
-			return context;
-		Multimap<JvmTypeParameter, ResolveInfo> map = LinkedHashMultimap.create();
-		map.putAll(Multimaps.forMap(context.getContextMap()));
-		map.putAll(Multimaps.forMap(resolveInferredMethodTypeArgContext(operation, createdResult, null, ignoreEmptyVarArgs, actualArgumentTypes)));
-		Map<JvmTypeParameter, ResolveInfo> result = internalFindBestMatches(map);
-		return get(result);
-	}
-	
-	public TypeArgumentContext injectExpectedTypeContext(TypeArgumentContext context, JvmOperation operation, JvmTypeReference expectedType) {
-		if (expectedType == null)
-			return context;
-		Multimap<JvmTypeParameter, ResolveInfo> map = LinkedHashMultimap.create();
-		map.putAll(Multimaps.forMap(context.getContextMap()));
-		map.putAll(Multimaps.forMap(resolveInferredMethodTypeArgContext(operation, operation.getReturnType(), expectedType, (JvmTypeReference[]) null)));
-		Map<JvmTypeParameter, ResolveInfo> result = internalFindBestMatches(map);
-		return get(result);
-	}
-	
-	public TypeArgumentContext injectExpectedTypeContext(TypeArgumentContext context, JvmConstructor constructor, JvmTypeReference createdResult, JvmTypeReference expectedType) {
-		if (expectedType == null)
-			return context;
-		Multimap<JvmTypeParameter, ResolveInfo> map = LinkedHashMultimap.create();
-		map.putAll(Multimaps.forMap(context.getContextMap()));
-		map.putAll(Multimaps.forMap(resolveInferredMethodTypeArgContext(constructor, createdResult, expectedType, (JvmTypeReference[]) null)));
-		Map<JvmTypeParameter, ResolveInfo> result = internalFindBestMatches(map);
-		return get(result);
-	}
-	
-	public TypeArgumentContext getInferredMethodInvocationContext(JvmOperation op, JvmTypeReference receiverType, JvmTypeReference expectedReturnType, JvmTypeReference ... actualArgumentTypes) {
-		Multimap<JvmTypeParameter, ResolveInfo> map = LinkedHashMultimap.create();
-		if (receiverType!=null) {
-			map.putAll(Multimaps.forMap(resolveReceiver(receiverType)));
-		}
-		if (!op.getTypeParameters().isEmpty() || map.isEmpty())
-			map.putAll(Multimaps.forMap(resolveInferredMethodTypeArgContext(op, op.getReturnType(), expectedReturnType, true, actualArgumentTypes)));
-		
-		Map<JvmTypeParameter, ResolveInfo> result = internalFindBestMatches(map);
-		return get(result);
-	}
-	
-	protected Map<JvmTypeParameter, ResolveInfo> resolveTypeParametersReferencedInTypeParameters(Map<JvmTypeParameter, ResolveInfo> context, boolean ignoreOperationArguments) {
-		Multimap<JvmTypeParameter, ResolveInfo> result = LinkedHashMultimap.create(Multimaps.forMap(context));
-		for (Entry<JvmTypeParameter, ResolveInfo> entry : context.entrySet()) {
-			List<JvmTypeConstraint> constraints = entry.getKey().getConstraints();
-			if (!constraints.isEmpty()) {
-				resolve(entry.getKey(), entry.getValue(), result, ignoreOperationArguments);
-			}
-		}
-		return internalFindBestMatches(result);
-	}
-	
-	protected Map<JvmTypeParameter, ResolveInfo> resolveReceiver(JvmTypeReference contextRef) {
-		if (contextRef==null || contextRef.getType() instanceof JvmPrimitiveType) {
-			return emptyMap();
-		}
-		Multimap<JvmTypeParameter, ResolveInfo> context = LinkedHashMultimap.create();
-		internalComputeContext(contextRef, context, Sets.<JvmType>newHashSet(contextRef.getType()));
-		return internalFindBestMatches(context);
-	}
-	
-	public Map<JvmTypeParameter, ResolveInfo> resolveInferredMethodTypeArgContext(JvmFeature feature, JvmTypeReference returnType, JvmTypeReference expectation, JvmTypeReference... argumentTypes) {
-		return resolveInferredMethodTypeArgContext(feature, returnType, expectation, false, argumentTypes);
-	}
-	
-	public Map<JvmTypeParameter, ResolveInfo> resolveInferredMethodTypeArgContext(JvmFeature feature, JvmTypeReference returnType, JvmTypeReference expectation, boolean ignoreEmptyVarArgs, JvmTypeReference... argumentTypes) {
-		Multimap<JvmTypeParameter, ResolveInfo> map = LinkedHashMultimap.create();
-		if (feature instanceof JvmExecutable) {
-			JvmExecutable op = (JvmExecutable) feature;
-			if (argumentTypes != null) {
-				// check arguments
-				int paramCount = op.getParameters().size();
-				if (op.isVarArgs()) {
-					paramCount--;
-				}
-				for (int i = 0; i < paramCount && i < argumentTypes.length; i++) {
-					JvmTypeReference actualArgumentType = argumentTypes[i];
-					if (actualArgumentType != null) {
-						final JvmTypeReference declaredParameterType = op.getParameters().get(i).getParameterType();
-						ResolveInfo info = new ResolveInfo(actualArgumentType);
-						info.superTypeAllowed = true;
-						resolve(declaredParameterType, info, map, false);
-					}
-				}
-				if (op.isVarArgs()) {
-					JvmTypeReference parameterType = op.getParameters().get(paramCount).getParameterType();
-					if (!(parameterType instanceof JvmGenericArrayTypeReference)) {
-						throw new IllegalStateException("VarArg methods expect last paramter to be an array type");
-					}
-					JvmTypeReference componentType = ((JvmGenericArrayTypeReference) parameterType).getComponentType();
-					List<JvmTypeReference> varArgTypes = emptyList();
-					if (paramCount<= argumentTypes.length) {
-						varArgTypes = Lists.newArrayList(Iterables.filter(
-							Arrays.asList(argumentTypes).subList(paramCount, argumentTypes.length), Predicates.notNull()));
-					}
-					if (!varArgTypes.isEmpty()) {
-						// TODO remove workaround when https://bugs.eclipse.org/bugs/show_bug.cgi?id=342021 is fixed
-						if (!primitives.isPrimitive(componentType)) {
-							for(int i = 0; i < varArgTypes.size(); i++) {
-								varArgTypes.set(i, primitives.asWrapperTypeIfPrimitive(varArgTypes.get(i)));
-							}
-						}
-						JvmTypeReference commonVarArgType = conformanceComputer.getCommonSuperType(varArgTypes);
-						ResolveInfo info = new ResolveInfo(commonVarArgType);
-						info.superTypeAllowed = true;
-						info.preferSubtypes = true;
-						resolve(componentType, info, map, false);
-					} else if (!ignoreEmptyVarArgs) {
-						JvmTypeReference information = computeVarArgTypeInformation(feature, componentType.getType());
-						ResolveInfo info = new ResolveInfo(information);
-						info.superTypeAllowed = true;
-						info.preferSubtypes = true;
-						resolve(componentType, info, map, false);
-					}
-				}
-			}
-			//try infer from the context type
-			if (expectation != null && returnType != null) {
-				ResolveInfo info = new ResolveInfo(expectation);
-				info.preferSubtypes = true;
-				resolve(returnType, info, map, true);
-			}
-		}
-		return internalFindBestMatches(map);
+	protected ITypeArgumentContext getExpectedTypeContext(JvmTypeReference declaredType, JvmTypeReference expectedType) {
+		final Multimap<JvmTypeParameter, ResolveInfo> result = createTemporaryMultimap();
+		resolveAgainstActualType(declaredType, expectedType, result, false);
+		Map<JvmTypeParameter, JvmTypeReference> normalized = normalizedCopy(result);
+		if (normalized.isEmpty())
+			return null;
+		return new TypeArgumentContext(normalized, typeReferences, typesFactory, rawTypeHelper);
 	}
 
-	protected JvmTypeReference computeVarArgTypeInformation(JvmFeature feature, JvmType type) {
-		if (type instanceof JvmConstraintOwner) {
-			List<JvmTypeReference> allUpperBounds = Lists.newArrayList();
-			for(JvmTypeConstraint constraint: ((JvmConstraintOwner) type).getConstraints()) {
-				if (constraint instanceof JvmUpperBound) {
-					allUpperBounds.add(constraint.getTypeReference());
+	protected Multimap<JvmTypeParameter, ResolveInfo> createTemporaryMultimap() {
+		return new ForwardingMultimap<JvmTypeParameter, ResolveInfo>() {
+			final Multimap<JvmTypeParameter, ResolveInfo> delegate = LinkedHashMultimap.create(2, 1);
+			@Override
+			protected Multimap<JvmTypeParameter, ResolveInfo> delegate() {
+				return delegate;
+			}
+			@Override
+			public boolean put(JvmTypeParameter key, ResolveInfo value) {
+				if (value != null) {
+					if (isRecursive(key, value.reference)) {
+						return false;
+					}
+					// 	TODO improve
+					if (value.reference instanceof JvmParameterizedTypeReference) {
+						value.reference = primitives.asWrapperTypeIfPrimitive(value.reference);
+					}
 				}
+				return super.put(key, value);
 			}
-			if (allUpperBounds.isEmpty()) {
-				JvmTypeReference objectType = typeReferences.getTypeForName(Object.class, feature);
-				return objectType;
-			} else {
-				JvmTypeReference upperBound = conformanceComputer.getCommonSuperType(allUpperBounds);
-				return upperBound;
-			}
-		} else if (type instanceof JvmTypeParameterDeclarator && !((JvmTypeParameterDeclarator) type).getTypeParameters().isEmpty()) {
-			List<JvmTypeReference> arguments = Lists.newArrayList();
-			List<JvmTypeParameter> parameters = ((JvmTypeParameterDeclarator) type).getTypeParameters();
-			for(JvmTypeParameter parameter: parameters) {
-				arguments.add(computeVarArgTypeInformation(feature, parameter));
-			}
-			return typeReferences.createTypeRef(type, arguments.toArray(new JvmTypeReference[arguments.size()]));
-		} else {
-			JvmTypeReference objectType = typeReferences.getTypeForName(Object.class, feature);
-			return objectType;
-		}
+			// TODO provide a better toString, too
+		};
 	}
-
-	protected Map<JvmTypeParameter, ResolveInfo> internalFindBestMatches(Multimap<JvmTypeParameter, ResolveInfo> map) {
-		Map<JvmTypeParameter, ResolveInfo> result = newHashMap();
-		for (JvmTypeParameter param : map.keySet()) {
-			Collection<ResolveInfo> infos = map.get(param);
-			for (ResolveInfo info : infos) {
-				if (result.containsKey(param)) {
-					ResolveInfo currentBestMatch = result.get(param);
-					ResolveInfo better = getBetterMatch(currentBestMatch, info);
-					result.put(param, better);
-				} else {
-					result.put(param, info);
-				}
+	
+	protected boolean isRecursive(final JvmTypeParameter param, JvmTypeReference reference) {
+		boolean result = new AbstractTypeReferenceVisitor.InheritanceAware<Boolean>() {
+			@Override
+			protected Boolean handleNullReference() {
+				return true;
 			}
-		}
+			@Override
+			public Boolean doVisitTypeReference(JvmTypeReference reference) {
+				return false;
+			}
+			@Override
+			public Boolean doVisitWildcardTypeReference(JvmWildcardTypeReference reference) {
+				for(JvmTypeConstraint constraint: reference.getConstraints()) {
+					if (visit(constraint.getTypeReference()))
+						return true;
+				}
+				return false;
+			}
+			@Override
+			public Boolean doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference) {
+				return param == reference.getType();
+			}
+		}.visit(reference);
 		return result;
 	}
-
-	protected ResolveInfo getBetterMatch(ResolveInfo current, ResolveInfo isBetter) {
-		if (!isResolved(current.reference)) {
-			if (isResolved(isBetter.reference))
-				return isBetter;
-			return current;
-		}
-		if (current.reference instanceof JvmAnyTypeReference) {
-			if (isBetter.reference instanceof JvmAnyTypeReference)
-				return current;
-			return isBetter;
-		}
-		if (isBetter.reference instanceof JvmAnyTypeReference)
-			return current;
-		if (isResolved(isBetter.reference) && !EcoreUtil.equals(current.reference, isBetter.reference)) {
-			if (current.exactMatch && !(current.reference instanceof JvmWildcardTypeReference))
-				return current;
-			if (isBetter.exactMatch && !(isBetter.reference instanceof JvmWildcardTypeReference))
-				return isBetter;
-			if (current.preferSubtypes && this.conformanceComputer.isConformant(current.reference, isBetter.reference))
-				return isBetter;
-			if (isBetter.preferSubtypes && this.conformanceComputer.isConformant(isBetter.reference, current.reference) && !(current.reference instanceof JvmWildcardTypeReference))
-				return current;
-			if (current.superTypeAllowed && isBetter.superTypeAllowed && !(current.preferSubtypes))
-				return current.copyIfDifferent(conformanceComputer.getCommonSuperType(Lists.newArrayList(current.reference, isBetter.reference)));
-			if (current.superTypeAllowed && this.conformanceComputer.isConformant(isBetter.reference, current.reference))
-				return isBetter;
-		}
-		return current;
+	
+	protected Map<JvmTypeParameter, JvmTypeReference> createTemporaryMap() {
+		return new PrimitiveAwareMap() {
+			@Override
+			public JvmTypeReference put(JvmTypeParameter key, JvmTypeReference value) {
+				if (isRecursive(key, value)) {
+					// this return value is actually incorrect but there is no other channel
+					// to refuse a certain key-value-pair
+					return null;
+				}
+				return super.put(key, value);
+			}
+		};
 	}
 	
-	//TODO improve
-	protected boolean isResolved(JvmTypeReference type) {
-		if (type == null || type.getType() instanceof JvmTypeParameter || type.getType() instanceof JvmVoid) {
-			return false;
-		}
-		if (type instanceof JvmWildcardTypeReference) {
-			JvmWildcardTypeReference wildcard = (JvmWildcardTypeReference) type;
-			if (wildcard.getConstraints().isEmpty())
-				return false;
-			for(JvmTypeConstraint constraint: wildcard.getConstraints()) {
-				if (!isResolved(constraint.getTypeReference()))
-					return false;
+	protected ITypeArgumentContext getDeclaredBoundsContext(JvmTypeParameterDeclarator declarator) {
+		Map<JvmTypeParameter, JvmTypeReference> result = createTemporaryMap();
+		while(declarator != null) {
+			List<JvmTypeParameter> typeParameters = declarator.getTypeParameters();
+			for(JvmTypeParameter typeParameter: typeParameters) {
+				List<JvmTypeReference> allUppers = Lists.newArrayList();
+				for(JvmTypeConstraint constraint: typeParameter.getConstraints()) {
+					if (constraint instanceof JvmUpperBound) {
+						allUppers.add(constraint.getTypeReference());
+					}
+				}
+				if (allUppers.isEmpty()) {
+					result.put(typeParameter, typeReferences.getTypeForName(Object.class, declarator));
+				} else if (allUppers.size() == 1) {
+					result.put(typeParameter, allUppers.get(0));
+				} else {
+					JvmMultiTypeReference bound = typesFactory.createJvmMultiTypeReference();
+					for(JvmTypeReference upper: allUppers) {
+						if (upper.eContainer() == null) {
+							bound.getReferences().add(upper);
+						} else {
+							JvmDelegateTypeReference delegate = typesFactory.createJvmDelegateTypeReference();
+							delegate.setDelegate(upper);
+							bound.getReferences().add(delegate);
+						}
+					}
+					result.put(typeParameter, bound);
+				}
 			}
-			return true;
+			if (declarator.eContainer() != null)
+				declarator = EcoreUtil2.getContainerOfType(declarator.eContainer(), JvmTypeParameterDeclarator.class);
+			else
+				break;
 		}
-		if (type instanceof JvmDelegateTypeReference) {
-			return isResolved(((JvmDelegateTypeReference) type).getDelegate());
-		}
-		if (type instanceof JvmSpecializedTypeReference) {
-			return isResolved(((JvmSpecializedTypeReference) type).getEquivalent());
-		}
-		return true;
+		if (result.isEmpty())
+			return null;
+		return new TypeArgumentContext(result, typeReferences, typesFactory, rawTypeHelper);
 	}
 
-	protected void internalComputeContext(JvmTypeReference contextRef, Multimap<JvmTypeParameter, ResolveInfo> context, Set<JvmType> computing) {
-		if (contextRef == null)
-			return;
-		if (contextRef instanceof JvmCompoundTypeReference) {
-			JvmCompoundTypeReference compoundType = (JvmCompoundTypeReference) contextRef;
-			for(JvmTypeReference typeReference: compoundType.getReferences()) {
-				internalComputeContext(typeReference, context, computing);
+	protected ITypeArgumentContext getParameterContext(
+			JvmExecutable executable,
+			List<JvmTypeReference> argumentTypes) {
+		final Multimap<JvmTypeParameter, ResolveInfo> result = createTemporaryMultimap();
+		List<JvmFormalParameter> parameters = executable.getParameters();
+		int paramCount = parameters.size();
+		if (executable.isVarArgs()) {
+			paramCount--;
+		}
+		for (int i = 0; i < paramCount && i < argumentTypes.size(); i++) {
+			JvmTypeReference parameterType = parameters.get(i).getParameterType();
+			JvmTypeReference argumentType = argumentTypes.get(i);
+			if (argumentType != null && parameterType != null) {
+				resolveAgainstActualType(parameterType, argumentType, result, true);
 			}
-			return;
 		}
-		if (contextRef instanceof JvmDelegateTypeReference) {
-			JvmTypeReference delegate = ((JvmDelegateTypeReference) contextRef).getDelegate();
-			internalComputeContext(delegate, context, computing);
-			return;
+		for (int i = argumentTypes.size(); i < paramCount; i++) {
+			JvmTypeReference parameterType = parameters.get(i).getParameterType();
+			if (parameterType != null) {
+				resolveAgainstActualType(parameterType, null, result, true);
+			}
 		}
-		if (contextRef instanceof JvmSpecializedTypeReference) {
-			internalComputeContext(((JvmSpecializedTypeReference) contextRef).getEquivalent(), context, computing);
-			return;
+		if (executable.isVarArgs() && argumentTypes.size() > paramCount) {
+			JvmTypeReference varArgParameterType = parameters.get(paramCount).getParameterType();
+			if (!(varArgParameterType instanceof JvmGenericArrayTypeReference)) {
+				throw new IllegalStateException("VarArg methods expect last paramter to be an array type");
+			}
+			JvmTypeReference varArgComponentType = ((JvmGenericArrayTypeReference) varArgParameterType).getComponentType();
+			// TODO use visitor to determine exact array dimension etc - extract ArrayReferences utility
+			// probably an array
+			if (argumentTypes.size() == paramCount + 1) {
+				JvmTypeReference lastArgumentType = argumentTypes.get(paramCount);
+				if (lastArgumentType != null) {
+					if (lastArgumentType instanceof JvmGenericArrayTypeReference) {
+						if (((JvmGenericArrayTypeReference) lastArgumentType).getDimensions() == ((JvmGenericArrayTypeReference) varArgParameterType).getDimensions()) {
+							resolveAgainstActualType(varArgParameterType, lastArgumentType, result, true);		
+							Map<JvmTypeParameter, JvmTypeReference> normalized = normalizedCopy(result);
+							return new TypeArgumentContext(normalized, typeReferences, typesFactory, rawTypeHelper);
+						}
+					} 
+					resolveAgainstActualType(varArgComponentType, lastArgumentType, result, true);
+				}
+			} else {
+				List<JvmTypeReference> actualVarArgTypes = Lists.newArrayList(Iterables.filter(
+					argumentTypes.subList(paramCount, argumentTypes.size()), Predicates.notNull()));
+				if (!actualVarArgTypes.isEmpty()) {
+					if (!primitives.isPrimitive(varArgComponentType)) {
+						List<JvmTypeReference> wrappedVarArgTypes = Lists.newArrayListWithCapacity(actualVarArgTypes.size());
+						for(JvmTypeReference varArgType: actualVarArgTypes) {
+							wrappedVarArgTypes.add(primitives.asWrapperTypeIfPrimitive(varArgType));
+						}
+						actualVarArgTypes = wrappedVarArgTypes;
+					}
+					JvmTypeReference commonVarArgType = conformanceComputer.getCommonSuperType(actualVarArgTypes);
+					resolveAgainstActualType(varArgComponentType, commonVarArgType, result, true);
+				}
+			}
 		}
-		if (contextRef instanceof JvmParameterizedTypeReference) {
-			JvmParameterizedTypeReference typeRef = (JvmParameterizedTypeReference) contextRef;
-			if (typeRef.getType() instanceof JvmTypeParameterDeclarator) {
-				List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator) typeRef.getType()).getTypeParameters();
-				List<JvmTypeReference> typeArguments = typeRef.getArguments();
-				if (!typeArguments.isEmpty()) {
-					// parameterized type reference
-					for (int i = 0; i < typeArguments.size() && i < typeParameters.size(); i++) {
-						JvmTypeReference argument = typeArguments.get(i);
-						if (argument != null) {
-							JvmTypeParameter param = typeParameters.get(i);
-							if (context.containsKey(argument.getType())) {
-								context.putAll(param, context.get((JvmTypeParameter) argument.getType()));
-							} else {
-								ResolveInfo info = new ResolveInfo(argument);
-								info.exactMatch = !(argument instanceof JvmWildcardTypeReference);
-								if (!info.exactMatch) {
-									info.preferSubtypes = true;
+		Map<JvmTypeParameter, JvmTypeReference> normalized = normalizedCopy(result);
+		if (normalized.isEmpty())
+			return null;
+		return new TypeArgumentContext(normalized, typeReferences, typesFactory, rawTypeHelper);
+	}
+
+	protected void resolveAgainstActualType(JvmTypeReference declaredType, JvmTypeReference actualType,
+			final Multimap<JvmTypeParameter, ResolveInfo> result, final boolean allowWildcardResolutions) {
+		ITypeReferenceVisitorWithParameter<ResolveInfo, Void> implementation = new AbstractTypeReferenceVisitorWithParameter.InheritanceAware<ResolveInfo, Void>() {
+			@Override
+			public Void doVisitCompoundTypeReference(JvmCompoundTypeReference reference, ResolveInfo param) {
+				for(JvmTypeReference component: reference.getReferences())
+					visit(component, param);
+				return null;
+			}
+			@Override
+			protected Void handleNullReference(ResolveInfo parameter) {
+				return null;
+			}
+			@Override
+			public Void doVisitTypeReference(JvmTypeReference reference, ResolveInfo param) {
+				return null;
+			}
+			@Override
+			public Void doVisitParameterizedTypeReference(final JvmParameterizedTypeReference declaredReference, final ResolveInfo param) {
+				return new AbstractTypeReferenceVisitor.InheritanceAware<Void>() {
+					@Override
+					public Void doVisitCompoundTypeReference(JvmCompoundTypeReference reference) {
+						for(JvmTypeReference component: reference.getReferences())
+							visit(component);
+								return null;
+					}
+					@Override
+					protected Void handleNullReference() {
+						final JvmType type = declaredReference.getType();
+						if (type instanceof JvmTypeParameter) {
+							for(JvmTypeConstraint constraint: ((JvmTypeParameter) type).getConstraints()) {
+								if (constraint instanceof JvmUpperBound && constraint.getTypeReference() != null) {
+									result.put((JvmTypeParameter) type, new ResolveInfo(constraint.getTypeReference(), param.kind));
 								}
-								context.put(param, info);
 							}
 						}
+						return null;
 					}
-				} else {
-					if (!typeParameters.isEmpty()) { // rawType
-						return;
-					}
-				}
-			}
-		}
-		JvmType type = contextRef.getType();
-		if (type instanceof JvmDeclaredType) {
-			JvmDeclaredType declaredType = (JvmDeclaredType) type;
-			List<JvmTypeReference> superTypes = declaredType.getSuperTypes();
-			if (superTypes.isEmpty())
-				return;
-			for (JvmTypeReference superType : superTypes) {
-				if (computing.add(superType.getType()))
-					internalComputeContext(superType, context, computing);
-			}
-		} else if (type instanceof JvmTypeParameter) {
-			for(JvmTypeConstraint constraint: ((JvmTypeParameter) type).getConstraints()) {
-				if (constraint instanceof JvmUpperBound) {
-					JvmTypeReference upperBound = constraint.getTypeReference();
-					if (computing.add(upperBound.getType())) {
-						internalComputeContext(upperBound, context, computing);
-					}
-				}
-			}
-		}
-	}
-	
-	protected void resolve(JvmTypeReference declaration, ResolveInfo information, Multimap<JvmTypeParameter, ResolveInfo> existing, boolean returnTypeContext) {
-		JvmTypeParameter typeParameter = getReferenceTypeParameter(declaration);
-		if (information != null)
-			information = information.copyIfDifferent(primitives.asWrapperTypeIfPrimitive(information.reference));
-		else
-			information = new ResolveInfo(null);
-		if (declaration == information.reference)
-			return;
-		if (typeParameter != null && information.reference != null) {
-			if (isValidParameter(typeParameter, information.reference, returnTypeContext)) {
-				if (!containsEntry(existing, typeParameter, information)) {
-					existing.put(typeParameter, information);
-					Collection<ResolveInfo> resolveData = existing.get(typeParameter);
-					List<JvmTypeParameter> transitiveParameters = Lists.newArrayListWithExpectedSize(2);
-					for(ResolveInfo resolveDataItem: resolveData) {
-						if (resolveDataItem.reference.getType() instanceof JvmTypeParameter) {
-							if (resolveDataItem.reference != information.reference)
-								transitiveParameters.add((JvmTypeParameter) resolveDataItem.reference.getType());
+					@Override
+					public Void doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference) {
+						final JvmType type = declaredReference.getType();
+						if (type instanceof JvmTypeParameter) {
+							result.put((JvmTypeParameter) type, param);
+						} else if (type instanceof JvmTypeParameterDeclarator && !((JvmTypeParameterDeclarator) type).getTypeParameters().isEmpty()) {
+							TypeArgumentContext actualContext = getReceiverContext(reference);
+							if (actualContext != null) {
+								TypeArgumentContext declaredContext = getReceiverContext(declaredReference);
+								if (declaredContext == null) {
+									declaredContext = new TypeArgumentContext(Collections.<JvmTypeParameter, JvmTypeReference>emptyMap(), 
+											typeReferences, typesFactory, rawTypeHelper);
+								}
+								Collection<JvmTypeParameter> receiverBoundParameters = actualContext.getBoundParameters();
+								for(JvmTypeParameter receiverBound: receiverBoundParameters) {
+									JvmTypeReference declared = declaredContext.getBoundArgument(receiverBound);
+									JvmTypeReference actual = actualContext.getBoundArgument(receiverBound);
+									outerVisit(declared, new ResolveInfo(actual, ResolveInfoKind.EXACT));
+								}
+								for(JvmTypeParameter declaredBoundParameter: declaredContext.getBoundParameters()) {
+									if (!result.containsKey(declaredBoundParameter)) {
+										result.put(declaredBoundParameter, new ResolveInfo(declaredContext.internalGetBoundArgument(declaredBoundParameter), param.kind));
+									}
+								}
+							}
 						}
+						return null;
 					}
-					for(JvmTypeParameter transitiveParameter: transitiveParameters) {
-						if (!containsEntry(existing, transitiveParameter, information)) {
-							existing.put(transitiveParameter, information);
+					@Override
+					public Void doVisitWildcardTypeReference(JvmWildcardTypeReference reference) {
+						boolean lowerBoundFound = false;
+						for(JvmTypeConstraint constraint: reference.getConstraints()) {
+							if (constraint instanceof JvmLowerBound) {
+								lowerBoundFound = true;
+								outerVisit(declaredReference, new ResolveInfo(constraint.getTypeReference(), 
+										allowWildcardResolutions ? ResolveInfoKind.WC_LOWER : ResolveInfoKind.LOWER));
+							}
 						}
+						if (!lowerBoundFound) {
+							for(JvmTypeConstraint constraint: reference.getConstraints()) {
+								if (constraint instanceof JvmUpperBound) {
+									outerVisit(declaredReference, new ResolveInfo(constraint.getTypeReference(), 
+											allowWildcardResolutions ? ResolveInfoKind.WC_UPPER : ResolveInfoKind.UPPER));
+								}
+							}
+						}
+						return null;
 					}
-					resolve(typeParameter, information, existing, returnTypeContext);
-				}
-			}
-		}
-		if (declaration instanceof JvmParameterizedTypeReference) {
-			JvmParameterizedTypeReference parameterizedDeclaration = (JvmParameterizedTypeReference) declaration;
-			EList<JvmTypeReference> declArgs = parameterizedDeclaration.getArguments();
-			if (information.reference instanceof JvmParameterizedTypeReference) {
-				/*
-				 * We need to walk the inheritance hierarchy up to resolve all type parameters,
-				 * e.g. the declared type may be Comparable<? super C> and the information
-				 * may be java.lang.String. String itself does not define type arguments
-				 * but it implements java.lang.Comparable<String> thus the type argument
-				 * C can be resolved to java.lang.String
-				 */
-				Iterable<JvmTypeReference> allTypes = Iterables.concat(
-						Collections.singleton(information.reference), 
-						superTypeCollector.collectSuperTypes(information.reference));
-				Set<JvmType> rawSuperTypes = superTypeCollector.collectSuperTypesAsRawTypes(information.reference);
-				rawSuperTypes.add(information.reference.getType());
-				for(JvmTypeReference localInformation: allTypes) {
-					JvmParameterizedTypeReference parameterizedInformation = (JvmParameterizedTypeReference) localInformation;
-					EList<JvmTypeReference> infoArgs = parameterizedInformation.getArguments();
-					for (int i = 0; i < declArgs.size() && i < infoArgs.size(); i++) {
-						JvmTypeReference infoArg = infoArgs.get(i);
-						JvmTypeReference declArg = declArgs.get(i);
-						boolean recurse = true;
-						if (infoArg.getType() instanceof JvmTypeParameter && declArg.getType() instanceof JvmTypeParameter) {
-							JvmTypeParameter infoParam = (JvmTypeParameter) infoArg.getType();
-							if (rawSuperTypes.contains(infoParam.getDeclarator()))
-								recurse = false;
-						}
-						if (recurse) {
-							ResolveInfo info = new ResolveInfo(infoArgs.get(i));
-							info.superTypeAllowed = infoArg instanceof JvmWildcardTypeReference;
-							info.preferSubtypes = information.preferSubtypes || 
-									(declArg instanceof JvmWildcardTypeReference 
-											&& getSingleUpperBoundOrNull((JvmWildcardTypeReference) declArg) == null);
-							resolve(declArg, info, existing, returnTypeContext);
-						}
+					@Override
+					public Void doVisitTypeReference(JvmTypeReference reference) {
+						return null;
 					}
-				}
-			} else if (information.reference instanceof JvmWildcardTypeReference) {
-				JvmWildcardTypeReference wildcardInformation = (JvmWildcardTypeReference) information.reference;
-				JvmTypeReference informationUpperBound = getSingleUpperBoundOrNull(wildcardInformation);
-				ResolveInfo info = new ResolveInfo(informationUpperBound);
-				info.exactMatch = !information.preferSubtypes;
-				info.preferSubtypes = information.preferSubtypes;
-				resolve(parameterizedDeclaration, info, existing, returnTypeContext);
-			} else if (information.reference instanceof JvmGenericArrayTypeReference) {
-				// TODO only for declaration == Iterable?
-				// or should we use synonym types for the information instead?
-				if (declArgs.size() >= 1) {
-					JvmGenericArrayTypeReference arrayInformation = (JvmGenericArrayTypeReference)information.reference;
-					ResolveInfo info = new ResolveInfo(arrayInformation.getComponentType());
-					info.preferSubtypes = true;
-					resolve(declArgs.get(0), info, existing, returnTypeContext);
-				}
-			} else if (information.reference instanceof JvmDelegateTypeReference) {
-				ResolveInfo newInfo = information.copyIfDifferent(((JvmDelegateTypeReference) information.reference).getDelegate());
-				resolve(declaration, newInfo, existing, returnTypeContext);
-			} else if (information.reference instanceof JvmSpecializedTypeReference) {
-				ResolveInfo newInfo = information.copyIfDifferent(((JvmSpecializedTypeReference) information.reference).getEquivalent());
-				resolve(declaration, newInfo, existing, returnTypeContext);	
+				}.visit(param.reference);
 			}
-		} else if (declaration instanceof JvmWildcardTypeReference) {
-			JvmWildcardTypeReference wildcardDeclaration = (JvmWildcardTypeReference) declaration;
-			JvmTypeReference wildcardUpperBound = getSingleUpperBoundOrNull(wildcardDeclaration);
-			if (information.reference instanceof JvmParameterizedTypeReference) {
-				resolve(wildcardUpperBound, information, existing, returnTypeContext);
-			} else if (information.reference instanceof JvmWildcardTypeReference) {
-				JvmWildcardTypeReference wildcardInformation = (JvmWildcardTypeReference) information.reference;
-				JvmTypeReference informationUpperBound = getSingleUpperBoundOrNull(wildcardInformation);
-				ResolveInfo info = new ResolveInfo(informationUpperBound);
-				info.preferSubtypes = true;
-				resolve(wildcardUpperBound, info, existing, returnTypeContext);
-			} else if (information.reference instanceof JvmDelegateTypeReference) {
-				ResolveInfo newInfo = information.copyIfDifferent(((JvmDelegateTypeReference) information.reference).getDelegate());
-				resolve(declaration, newInfo, existing, returnTypeContext);
-			} else if (information.reference instanceof JvmSpecializedTypeReference) {
-				ResolveInfo newInfo = information.copyIfDifferent(((JvmSpecializedTypeReference) information.reference).getEquivalent());
-				resolve(declaration, newInfo, existing, returnTypeContext);	
+			@Override
+			public Void doVisitWildcardTypeReference(final JvmWildcardTypeReference declaredReference, ResolveInfo param) {
+				return new AbstractTypeReferenceVisitor.InheritanceAware<Void>() {
+					@Override
+					protected Void handleNullReference() {
+						return null;
+					}
+					@Override
+					public Void doVisitCompoundTypeReference(JvmCompoundTypeReference reference) {
+						return doVisitTypeReference(reference);
+					}
+					@Override
+					public Void doVisitWildcardTypeReference(JvmWildcardTypeReference reference) {
+						for(JvmTypeConstraint declaredConstraint: declaredReference.getConstraints()) {
+							if (declaredConstraint instanceof JvmUpperBound) {
+								for(JvmTypeConstraint actualConstraint: reference.getConstraints()) {
+									if (actualConstraint instanceof JvmUpperBound) {
+										outerVisit(declaredConstraint.getTypeReference(), new ResolveInfo(actualConstraint.getTypeReference(), ResolveInfoKind.UPPER));
+									}
+								}
+							} else {
+								for(JvmTypeConstraint actualConstraint: reference.getConstraints()) {
+									if (actualConstraint instanceof JvmLowerBound) {
+										outerVisit(declaredConstraint.getTypeReference(), new ResolveInfo(actualConstraint.getTypeReference(), ResolveInfoKind.LOWER));
+									}
+								}
+							}
+						}
+						return null;
+					}
+					@Override
+					public Void doVisitTypeReference(JvmTypeReference reference) {
+						boolean lowerBoundFound = false;
+						for(JvmTypeConstraint declaredConstraint: declaredReference.getConstraints()) {
+							if (declaredConstraint instanceof JvmLowerBound) {
+								lowerBoundFound = true;
+								outerVisit(declaredConstraint.getTypeReference(), 
+										new ResolveInfo(reference, ResolveInfoKind.LOWER));
+							}
+						}
+						if (!lowerBoundFound) {
+							for(JvmTypeConstraint declaredConstraint: declaredReference.getConstraints()) {
+								if (declaredConstraint instanceof JvmUpperBound) {
+									outerVisit(declaredConstraint.getTypeReference(), 
+											new ResolveInfo(reference, ResolveInfoKind.UPPER));
+								}
+							}
+						}
+						return null;
+					}
+				}.visit(param.reference);
 			}
-		} else if (declaration instanceof JvmGenericArrayTypeReference) {
-			JvmTypeReference componentType = ((JvmGenericArrayTypeReference) declaration).getComponentType();
-			if (information.reference instanceof JvmGenericArrayTypeReference) {
-				ResolveInfo componentInfo = information.copyIfDifferent(((JvmGenericArrayTypeReference) information.reference).getComponentType());
-				resolve(componentType, componentInfo, existing, returnTypeContext);
-			} else if (information.reference instanceof JvmDelegateTypeReference) {
-				ResolveInfo newInfo = information.copyIfDifferent(((JvmDelegateTypeReference) information.reference).getDelegate());
-				resolve(declaration, newInfo, existing, returnTypeContext);
-			} else if (information.reference instanceof JvmSpecializedTypeReference) {
-				ResolveInfo newInfo = information.copyIfDifferent(((JvmSpecializedTypeReference) information.reference).getEquivalent());
-				resolve(declaration, newInfo, existing, returnTypeContext);	
+			@Override
+			public Void doVisitGenericArrayTypeReference(final JvmGenericArrayTypeReference declaredReference, final ResolveInfo param) {
+				return new AbstractTypeReferenceVisitor.InheritanceAware<Void>() {
+					@Override
+					public Void doVisitCompoundTypeReference(JvmCompoundTypeReference reference) {
+						for(JvmTypeReference component: reference.getReferences())
+							visit(component);
+						return null;
+					}
+					@Override
+					public Void doVisitGenericArrayTypeReference(JvmGenericArrayTypeReference reference) {
+						return outerVisit(declaredReference.getComponentType(), new ResolveInfo(reference.getComponentType(), param.kind));
+					}
+					@Override
+					public Void doVisitTypeReference(JvmTypeReference reference) {
+						return null;
+					}
+					@Override
+					protected Void handleNullReference() {
+						return null;
+					}
+				}.visit(param.reference);
 			}
-		} else if (declaration instanceof JvmDelegateTypeReference) {
-			JvmTypeReference delegate = ((JvmDelegateTypeReference) declaration).getDelegate();
-			resolve(delegate, information, existing, returnTypeContext);
-		} else if (declaration instanceof JvmSpecializedTypeReference) {
-			resolve(((JvmSpecializedTypeReference) declaration).getEquivalent(), information, existing, returnTypeContext);
-		}
-	}
-	
-	private JvmTypeReference getSingleUpperBoundOrNull(JvmConstraintOwner constraintOwner) {
-		JvmUpperBound result = null;
-		for(JvmTypeConstraint constraint: constraintOwner.getConstraints()) {
-			if (constraint instanceof JvmUpperBound) {
-				if (result == null)
-					result = (JvmUpperBound) constraint;
-				else
-					return null;
+			
+			public Void outerVisit(JvmTypeReference reference, ResolveInfo parameter) {
+				return visit(reference, parameter);
 			}
-		}
-		if (result != null)
-			return result.getTypeReference();
-		return null;
-	}
-
-	private boolean isValidParameter(JvmTypeParameter typeParameter, JvmTypeReference information, boolean ignoreOperationArguments) {
-		if (!ignoreOperationArguments || !(typeParameter.getDeclarator() instanceof JvmOperation))
-			return true;
-		if (information instanceof JvmParameterizedTypeReference) {
-			JvmParameterizedTypeReference reference = (JvmParameterizedTypeReference) information;
-			if (reference.getType() instanceof JvmTypeParameter) {
-				if (typeParameter.getDeclarator() == ((JvmTypeParameter) reference.getType()).getDeclarator()) {
-					return false;
-				}
-			}
-			for(JvmTypeReference argument: reference.getArguments()) {
-				if (!isValidParameter(typeParameter, argument, ignoreOperationArguments))
-					return false;
-			}
-		} else if (information instanceof JvmWildcardTypeReference) {
-			List<JvmTypeConstraint> constraints = ((JvmWildcardTypeReference) information).getConstraints();
-			for(JvmTypeConstraint constraint: constraints) {
-				if (!isValidParameter(typeParameter, constraint.getTypeReference(), ignoreOperationArguments))
-					return false;
-			}
-		} else if (information instanceof JvmGenericArrayTypeReference) {
-			return isValidParameter(typeParameter, ((JvmGenericArrayTypeReference) information).getComponentType(), ignoreOperationArguments);
-		} else if (information instanceof JvmDelegateTypeReference) {
-			return isValidParameter(typeParameter, ((JvmDelegateTypeReference) information).getDelegate(), ignoreOperationArguments);
-		} else if (information instanceof JvmSpecializedTypeReference) {
-			return isValidParameter(typeParameter, ((JvmSpecializedTypeReference) information).getEquivalent(), ignoreOperationArguments);
-		}
-		return true;
-	}
-
-	protected boolean containsEntry(Multimap<JvmTypeParameter, ResolveInfo> existing,
-			JvmTypeParameter typeParameter, ResolveInfo information) {
-		if (information.reference instanceof JvmWildcardTypeReference) {
-			JvmWildcardTypeReference wildcard = (JvmWildcardTypeReference) information.reference;
-			boolean otherConstraintSeen = false;
-			boolean constraintIsTypeParam = false;
-			for(JvmTypeConstraint constraint: wildcard.getConstraints()) {
-				if (constraint instanceof JvmUpperBound && typeParameter == constraint.getTypeReference().getType()) {
-					constraintIsTypeParam = true;
-				} else {
-					otherConstraintSeen = true;
-				}
-			}
-			if (constraintIsTypeParam && !otherConstraintSeen)
-				return true;
-		}
-		if (existing.containsKey(typeParameter)) {
-			Collection<ResolveInfo> collection = existing.get(typeParameter);
-			for (ResolveInfo info : collection) {
-				if (EcoreUtil.equals(info.reference, information.reference)) {
-					return true;
-				}
-			}
-			return false;
-		}
-		return false;
-	}
-
-	protected JvmTypeParameter getReferenceTypeParameter(JvmTypeReference ref) {
-		if (ref == null)
-			return null;
-		if (ref.getType() instanceof JvmTypeParameter) {
-			return (JvmTypeParameter) ref.getType();
-		}
-		if (ref instanceof JvmWildcardTypeReference) {
-			EList<JvmTypeConstraint> constraints = ((JvmWildcardTypeReference) ref).getConstraints();
-			for (JvmTypeConstraint constraint : constraints) {
-				if(constraint.getTypeReference() != null && constraint.getTypeReference().getType() instanceof JvmTypeParameter)
-					return (JvmTypeParameter) constraint.getTypeReference().getType();
-			}
-		}
-		if (ref instanceof JvmDelegateTypeReference) {
-			return getReferenceTypeParameter(((JvmDelegateTypeReference) ref).getDelegate());
-		}
-		return null;
-	}
-	
-	protected void resolve(JvmTypeParameter key, ResolveInfo info, Multimap<JvmTypeParameter, ResolveInfo> existing, boolean ignoreOperationArguments) {
-		for (JvmTypeConstraint constraint : key.getConstraints()) {
-			JvmTypeReference reference = constraint.getTypeReference();
-			resolve(reference, info, existing, ignoreOperationArguments);
-		}
+		};
+		implementation.visit(declaredType, new ResolveInfo(actualType, ResolveInfoKind.UPPER));
 	}
 
 }

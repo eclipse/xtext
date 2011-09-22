@@ -39,9 +39,10 @@ public class TypeReferenceSerializer {
 	@Inject
 	private TypeConformanceComputer typeConformanceComputer;
 	
-	@Inject ILogicalContainerProvider contextProvider;
+	@Inject 
+	private ILogicalContainerProvider contextProvider;
 	
-	protected boolean isLocalTypeParameter(EObject context, JvmTypeParameter parameter) {
+	public boolean isLocalTypeParameter(EObject context, JvmTypeParameter parameter) {
 		if (context == null)
 			return false;
 		if (context == parameter.getDeclarator()) 
@@ -123,7 +124,7 @@ public class TypeReferenceSerializer {
 				appendable.append(">");
 			}
 		} else if (type instanceof JvmAnyTypeReference) {
-			appendable.append(type.getType());
+			appendable.append("Object");
 		} else if (type instanceof JvmMultiTypeReference) {
 			serialize(resolveMultiType(type), context, appendable, withoutConstraints, paramsToWildcard, paramsToObject, allowPrimitives);
 		} else if (type instanceof JvmDelegateTypeReference) {

@@ -13,6 +13,7 @@ import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.Primitives;
@@ -175,6 +176,14 @@ public abstract class AbstractXbaseCompiler {
 	
 	protected void serialize(final JvmTypeReference type, EObject context, IAppendable appendable, boolean withoutConstraints, boolean paramsToWildcard, boolean paramsToObject, boolean allowPrimitives) {
 		referenceSerializer.serialize(type, context, appendable, withoutConstraints, paramsToWildcard, paramsToObject, allowPrimitives);
+	}
+	
+	protected boolean isReferenceToForeignTypeParameter(final JvmTypeReference reference, EObject context) {
+		JvmType type = reference.getType();
+		if (type instanceof JvmTypeParameter) {
+			return !referenceSerializer.isLocalTypeParameter(context, (JvmTypeParameter) type);
+		}
+		return false;
 	}
 
 	protected JvmTypeReference resolveMultiType(JvmTypeReference typeRef) {

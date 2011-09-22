@@ -13,11 +13,11 @@ import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmArrayType;
-import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmConstraintOwner;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
+import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
@@ -25,7 +25,6 @@ import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.TypesFactory;
 
 import com.google.common.collect.Sets;
@@ -254,7 +253,7 @@ public class SuperTypeCollector {
 		}
 		
 		@Override
-		public Boolean caseJvmUpperBound(JvmUpperBound object) {
+		public Boolean caseJvmTypeConstraint(JvmTypeConstraint object) {
 			if (object.getTypeReference() != null)
 				return doSwitch(object.getTypeReference());
 			return Boolean.TRUE;
@@ -264,14 +263,22 @@ public class SuperTypeCollector {
 		public Boolean caseJvmConstraintOwner(JvmConstraintOwner object) {
 			if (!object.eIsProxy()) {
 				List<JvmTypeConstraint> constraints = object.getConstraints();
-				boolean upperBoundSeen = false; 
+				boolean boundProcessed = false;
 				if (!constraints.isEmpty()) {
 					for(JvmTypeConstraint constraint: constraints) {
-						doSwitch(constraint);
-						upperBoundSeen |= constraint instanceof JvmUpperBound;
+						if (constraint instanceof JvmLowerBound) {
+							doSwitch(constraint);
+							boundProcessed = true;
+						}
+					}
+					if (!boundProcessed) { 
+						for(JvmTypeConstraint constraint: constraints) {
+							doSwitch(constraint);
+							boundProcessed = true;
+						}
 					}
 				}
-				if (!upperBoundSeen) {
+				if (!boundProcessed) {
 					JvmType objectType = references.findDeclaredType(Object.class, object);
 					doSwitch(references.createTypeRef(objectType));
 				}

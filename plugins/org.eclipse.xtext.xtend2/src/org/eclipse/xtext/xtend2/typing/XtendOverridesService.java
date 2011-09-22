@@ -19,7 +19,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.util.FeatureOverridesService;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
-import org.eclipse.xtext.common.types.util.TypeArgumentContext;
+import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
@@ -57,7 +57,8 @@ public class XtendOverridesService {
 
 	public JvmOperation findOverriddenOperation(JvmOperation operation) {
 		final JvmParameterizedTypeReference typeRef = typeReferences.createTypeRef(operation.getDeclaringType());
-		TypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getReceiverContext(typeRef);
+		ITypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getTypeArgumentContext(
+				new TypeArgumentContextProvider.ReceiverRequest(typeRef));
 		for (JvmOperation superOperation : allSuperOperations(operation.getDeclaringType())) {
 			if (superOperation.getVisibility() != JvmVisibility.PRIVATE) {
 				if (featureOverridesService.isOverridden(operation, superOperation, typeArgumentContext,

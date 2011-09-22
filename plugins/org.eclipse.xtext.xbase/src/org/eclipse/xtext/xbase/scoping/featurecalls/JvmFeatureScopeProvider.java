@@ -17,9 +17,10 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
-import org.eclipse.xtext.common.types.util.TypeArgumentContext;
+import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.Wrapper;
@@ -83,7 +84,7 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 			IScope parent, 
 			JvmTypeReference typeReference, 
 			List<IJvmFeatureDescriptionProvider> jvmFeatureDescriptionProviders) {
-		TypeArgumentContext context = typeArgumentContextProvider.getReceiverContext(typeReference);
+		ITypeArgumentContext context = typeArgumentContextProvider.getTypeArgumentContext(new TypeArgumentContextProvider.ReceiverRequest(typeReference));
 		Iterable<JvmTypeReference> hierarchy = linearizeTypeHierarchy(typeReference);
 		IScope result = parent;
 		for(int i = jvmFeatureDescriptionProviders.size() - 1; i >= 0; i--) {
@@ -106,108 +107,7 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 		if (result == null || parent == result)
 			return new JvmFeatureScope(parent, "No features for type "+typeReference, Collections.<IValidatedEObjectDescription>emptyList());
 		return (JvmFeatureScope) result;
-		
-//		// standard features
-//		final List<JvmFeatureDescriptionList> descriptions = newArrayList();
-//		for (IJvmFeatureDescriptionProvider provider : jvmFeatureDescriptionProviders) {
-//			final List<JvmFeatureDescriptionList> descriptionList = createFeatureScopes(hierarchy, context, provider);
-//			descriptions.addAll(descriptionList);
-//		}
-//
-//		// create a view for the visible elements
-//		Iterable<JvmFeatureDescriptionList> visibleElements = transform(descriptions,
-//				new Function<JvmFeatureDescriptionList, JvmFeatureDescriptionList>() {
-//					public JvmFeatureDescriptionList apply(JvmFeatureDescriptionList from) {
-//						return new JvmFeatureDescriptionList(from.getText(), filter(from.getDescriptions(),new Predicate<JvmFeatureDescription>() {
-//							public boolean apply(JvmFeatureDescription input) {
-//								return input.isValid();
-//							}
-//						}));
-//					}
-//				});
-//		// create a view for the invisible elements
-//		Iterable<JvmFeatureDescriptionList> invisibleElements = transform(descriptions,
-//				new Function<JvmFeatureDescriptionList, JvmFeatureDescriptionList>() {
-//					public JvmFeatureDescriptionList apply(JvmFeatureDescriptionList from) {
-//						return new JvmFeatureDescriptionList("[invalid] "+from.getText(), filter(from.getDescriptions(),new Predicate<JvmFeatureDescription>() {
-//							public boolean apply(JvmFeatureDescription input) {
-//								return !input.isValid();
-//							}
-//						}));
-//					}
-//				});
-//
-//		// concat valid and invalid scopes
-//		final ArrayList<JvmFeatureDescriptionList> newArrayList = newArrayList(concat(visibleElements, invisibleElements));
-//
-//		// transform iterables to scope hierarchy in reverse order
-//		IScope current = parent;
-//		for (JvmFeatureDescriptionList featureDescs : reverse(newArrayList)) {
-//			if (featureDescs != null && !isEmpty(featureDescs.getDescriptions())) {
-//				if (current == null) 
-//					current = IScope.NULLSCOPE;
-//				current = createJvmFeatureScope(current, featureDescs);
-//			}
-//		}
-//		if (current == null || parent == current)
-//			return new JvmFeatureScope(parent, "No features for type "+typeReference, Collections.<IValidatedEObjectDescription>emptyList());
-//		return (JvmFeatureScope) current;
 	}
-
-//	protected JvmFeatureScope createJvmFeatureScope(IScope current, JvmFeatureDescriptionList featureDescs) {
-//		return new JvmFeatureScope(current, featureDescs.getText(), featureDescs.getDescriptions());
-//	}
-
-//	protected List<JvmFeatureDescriptionList> createFeatureScopes(Iterable<JvmTypeReference> hierarchy, TypeArgumentContext context, IJvmFeatureDescriptionProvider jvmFeatureDescriptionProvider) {
-//		List<JvmFeatureDescriptionList> result = newArrayList();
-//		boolean wasEmpty = true;
-//		for (JvmTypeReference type : hierarchy) {
-//			wasEmpty = false;
-//			final JvmFeatureDescriptionList featureDescriptions = createFeatureScope(type, context, jvmFeatureDescriptionProvider);
-//			if (featureDescriptions!=null)
-//				result.add(featureDescriptions);
-//		}
-//		// try again without a typeReference <- TODO why is that?
-//		if (wasEmpty) {
-//			final JvmFeatureDescriptionList featureDescriptions = createFeatureScope(null, context, jvmFeatureDescriptionProvider);
-//			if (featureDescriptions!=null)
-//				result.add(featureDescriptions);
-//		}
-//		return result;
-//	}
-
-//	protected JvmFeatureDescriptionList createFeatureScope(
-//			final JvmTypeReference type, 
-//			final TypeArgumentContext context, 
-//			final IJvmFeatureDescriptionProvider jvmFeatureDescriptionProvider) {
-//		
-//		Iterable<? extends JvmFeature> features = getFeaturesForType(type, jvmFeatureDescriptionProvider);
-//		if (!features.iterator().hasNext())
-//			return null;
-//		final List<JvmFeatureDescription> descriptions = Lists.newArrayList();
-//		IAcceptor<JvmFeatureDescription> acceptor = new IAcceptor<JvmFeatureDescription>() {
-//			public void accept(JvmFeatureDescription t) {
-//				descriptions.add(t);
-//			}
-//		};
-//		for (JvmFeature jvmFeature : features) {
-//			jvmFeatureDescriptionProvider.addFeatureDescriptions(jvmFeature, context, acceptor);
-//		}
-//		String identifier = type != null ? type.getIdentifier() : "[static features]";
-//		return new JvmFeatureDescriptionList(jvmFeatureDescriptionProvider.getText()+" " + identifier, descriptions);
-//	}
-
-//	protected Iterable<? extends JvmFeature> getFeaturesForType(JvmTypeReference type, IJvmFeatureDescriptionProvider descriptionProvider) {
-//		final Predicate<JvmFeature> predicate = new Predicate<JvmFeature>() {
-//			public boolean apply(JvmFeature input) {
-//				return isValidFeature(input);
-//			}
-//		};
-//		if (descriptionProvider instanceof IFeaturesForTypeProvider) {
-//			return filter(((IFeaturesForTypeProvider)descriptionProvider).getFeaturesForType(type), predicate);
-//		}
-//		return featuresProvider.getFeaturesForType(type);
-//	}
 	
 	protected boolean isValidFeature(JvmFeature input) {
 		return input!=null && input.getSimpleName()!=null && input.getDeclaringType()!=null && !(input instanceof JvmConstructor);
@@ -221,10 +121,12 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 		if (typeRef == null)
 			return Collections.emptyList();
 		final Map<JvmTypeReference, Integer> result = Maps.newLinkedHashMap();
-		result.put(typeRef, -1);
 		final Wrapper<Integer> addOn = Wrapper.wrap(Integer.valueOf(0));
 		final Map<JvmType, JvmTypeReference> visited = Maps.newHashMap();
-		visited.put(typeRef.getType(), typeRef);
+		if (!(typeRef.getType() instanceof JvmTypeParameter)) {
+			result.put(typeRef, -1);
+			visited.put(typeRef.getType(), typeRef);
+		}
 		SuperTypeCollector.SuperTypeAcceptor acceptor = new SuperTypeCollector.SuperTypeAcceptor() {
 			
 			public boolean accept(JvmTypeReference superType, int distance) {
@@ -284,29 +186,4 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 			}
 		}));
 	}
-	
-//	protected static class JvmFeatureDescriptionList {
-//		private String text;
-//		private Iterable<JvmFeatureDescription> descriptions;
-//
-//		public JvmFeatureDescriptionList(String text, Iterable<JvmFeatureDescription> descriptions) {
-//			super();
-//			this.text = text;
-//			this.descriptions = descriptions;
-//		}
-//
-//		public Iterable<JvmFeatureDescription> getDescriptions() {
-//			return descriptions;
-//		}
-//
-//		public String getText() {
-//			return text;
-//		}
-//		
-//		@Override
-//		public String toString() {
-//			return getText()+(isEmpty(getDescriptions())?"[EMPTY]":"");
-//		}
-//	}
-
 }

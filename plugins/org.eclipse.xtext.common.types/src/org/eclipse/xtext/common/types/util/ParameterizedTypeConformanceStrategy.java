@@ -8,8 +8,8 @@
 package org.eclipse.xtext.common.types.util;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
@@ -25,7 +25,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
-import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider.ResolveInfo;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 
@@ -84,7 +83,9 @@ public class ParameterizedTypeConformanceStrategy extends
 		if (leftType == rightType) {
 			if (param.rawType)
 				return TypeConformanceResult.SUCCESS;
-			return areArgumentsConformant(leftReference, rightReference);
+			if (!leftReference.getArguments().isEmpty() || !rightReference.getArguments().isEmpty())
+				return areArgumentsConformant(leftReference, rightReference);
+			return TypeConformanceResult.SUCCESS;
 		}
 		if (param.allowPrimitiveConversion) {
 			if (leftType instanceof JvmPrimitiveType) {
@@ -173,6 +174,10 @@ public class ParameterizedTypeConformanceStrategy extends
 				if (conformanceComputer.getSuperTypeCollector().isSuperType((JvmDeclaredType)rightType, (JvmDeclaredType)leftType)) {
 					if (param.rawType)
 						return TypeConformanceResult.SUCCESS;
+					// check for raw type references - since we are a subtype, type argument can 
+					// considered to be compatible if the reference itself does not define own arguments
+					if (leftReference.getArguments().isEmpty() || rightReference.getArguments().isEmpty())
+						return TypeConformanceResult.SUCCESS;
 					return areArgumentsConformant(leftReference, rightReference);
 				}
 			}
@@ -225,18 +230,22 @@ public class ParameterizedTypeConformanceStrategy extends
 	protected TypeConformanceResult areArgumentsConformant(JvmParameterizedTypeReference leftReference,
 			JvmParameterizedTypeReference rightReference) {
 		TypeArgumentContext leftArgumentContext = getBoundTypeParameters(leftReference);
-		Map<JvmTypeParameter, ResolveInfo> leftContextMap = leftArgumentContext.getContextMap();
-		Set<Pair<JvmTypeReference, JvmTypeReference>> tested = Sets.newHashSet();
-		if (!leftContextMap.isEmpty()) {
-			TypeArgumentContext rightArgumentContext = getBoundTypeParameters(rightReference);
-			for(JvmTypeParameter leftTypeParameter: leftContextMap.keySet()) {
-				JvmTypeReference leftBound = leftArgumentContext.getBoundArgument(leftTypeParameter);
-				JvmTypeReference rightBound = rightArgumentContext.getBoundArgument(leftTypeParameter);
-				if (leftBound != rightBound && rightBound != null) {
-					if (tested.add(Tuples.create(leftBound, rightBound))) {
-						TypeConformanceResult result = conformanceComputer.isConformant(leftBound, rightBound, new TypeConformanceComputationArgument(false, true, false));
-						if (!result.isConformant()) {
-							return result;
+		if (leftArgumentContext != null && !leftArgumentContext.isRawTypeContext()) {
+			Collection<JvmTypeParameter> boundParameters = leftArgumentContext.getBoundParameters();
+			Set<Pair<JvmTypeReference, JvmTypeReference>> tested = Sets.newHashSet();
+			if (!boundParameters.isEmpty()) {
+				TypeArgumentContext rightArgumentContext = getBoundTypeParameters(rightReference);
+				if (!rightArgumentContext.isRawTypeContext()) {
+					for(JvmTypeParameter leftTypeParameter: boundParameters) {
+						JvmTypeReference leftBound = leftArgumentContext.getBoundArgument(leftTypeParameter);
+						JvmTypeReference rightBound = rightArgumentContext.getBoundArgument(leftTypeParameter);
+						if (leftBound != rightBound && rightBound != null) {
+							if (tested.add(Tuples.create(leftBound, rightBound))) {
+								TypeConformanceResult result = conformanceComputer.isConformant(leftBound, rightBound, new TypeConformanceComputationArgument(false, true, false));
+								if (!result.isConformant()) {
+									return result;
+								}
+							}
 						}
 					}
 				}

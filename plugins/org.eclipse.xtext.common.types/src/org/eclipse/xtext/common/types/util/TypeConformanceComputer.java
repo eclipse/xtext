@@ -162,9 +162,9 @@ public class TypeConformanceComputer {
 	
 	protected static class ArgumentResolver implements Function<JvmTypeReference, JvmTypeReference> {
 
-		private final TypeArgumentContext context;
+		private final ITypeArgumentContext context;
 
-		protected ArgumentResolver(TypeArgumentContext context) {
+		protected ArgumentResolver(ITypeArgumentContext context) {
 			this.context = context;
 		}
 		
@@ -299,7 +299,7 @@ public class TypeConformanceComputer {
 			public JvmTypeReference doVisitMultiTypeReference(JvmMultiTypeReference multi) {
 				JvmMultiTypeReference result = factory.createJvmMultiTypeReference();
 				for(JvmTypeReference reference: multi.getReferences()) {
-					JvmTypeReference component = reference.accept(this);
+					JvmTypeReference component = visit(reference);
 					if (component != null) {
 						if (component.eContainer() == null) {
 							result.getReferences().add(component);
@@ -320,7 +320,7 @@ public class TypeConformanceComputer {
 			public JvmTypeReference doVisitSynonymTypeReference(JvmSynonymTypeReference synonym) {
 				JvmTypeReference result = null;
 				for(JvmTypeReference reference: synonym.getReferences()) {
-					JvmTypeReference component = reference.accept(this);
+					JvmTypeReference component = visit(reference);
 					if (component != null) {
 						if (result == null) {
 							result = component;
@@ -351,7 +351,7 @@ public class TypeConformanceComputer {
 		};
 		List<JvmTypeReference> result = Lists.newArrayList();
 		for(JvmTypeReference reference: types) {
-			JvmTypeReference componentType = reference.accept(componentTypeComputer);
+			JvmTypeReference componentType = componentTypeComputer.visit(reference);
 			result.add(componentType);
 		}
 		return result;
@@ -370,7 +370,7 @@ public class TypeConformanceComputer {
 			@Override
 			public Boolean doVisitMultiTypeReference(JvmMultiTypeReference multi) {
 				for(JvmTypeReference reference: multi.getReferences()) {
-					if (!reference.accept(this))
+					if (!visit(reference))
 						return Boolean.FALSE;
 				}
 				return !multi.getReferences().isEmpty();
@@ -382,14 +382,14 @@ public class TypeConformanceComputer {
 			@Override
 			public Boolean doVisitSynonymTypeReference(JvmSynonymTypeReference synonym) {
 				for(JvmTypeReference reference: synonym.getReferences()) {
-					if (reference.accept(this))
+					if (visit(reference))
 						return Boolean.TRUE;
 				}
 				return Boolean.FALSE;
 			}
 		};
 		for(JvmTypeReference reference: types) {
-			if (!reference.accept(isArrayVisitor)) {
+			if (!isArrayVisitor.visit(reference)) {
 				return false;
 			}
 		}
@@ -478,9 +478,10 @@ public class TypeConformanceComputer {
 		return result;
 	}
 
-	protected void initializeDistance(JvmTypeReference firstType, Multimap<JvmType, JvmTypeReference> all,
+	protected void initializeDistance(final JvmTypeReference firstType, Multimap<JvmType, JvmTypeReference> all,
 			Multiset<JvmType> cumulatedDistance) {
-		TypeArgumentContext firstContext = typeArgumentContextProvider.getReceiverContext(firstType);
+		ITypeArgumentContext firstContext = typeArgumentContextProvider.getTypeArgumentContext(
+				new TypeArgumentContextProvider.ReceiverRequest(firstType));
 		MaxDistanceRawTypeAcceptor acceptor = new MaxDistanceRawTypeAcceptor(
 				cumulatedDistance, all, new ArgumentResolver(firstContext));
 		acceptor.accept(firstType, 0);

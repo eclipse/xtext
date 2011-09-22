@@ -20,9 +20,9 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
@@ -162,11 +162,23 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 	
 	// TODO improve / extract to a utility method if other clients are doing similar things
 	protected boolean isResolved(JvmTypeReference reference, JvmTypeParameterDeclarator declarator, boolean rawType) {
-		if (reference == null || reference instanceof JvmParameterizedTypeReference && reference.getType() == null)
+		return isResolved(reference, declarator, rawType, Sets.<JvmTypeReference>newHashSet());
+	}
+	
+	protected boolean isResolved(JvmTypeReference reference, JvmTypeParameterDeclarator declarator, boolean rawType, Set<JvmTypeReference> visited) {
+		if (reference == null || reference instanceof JvmParameterizedTypeReference && reference.getType() == null || !visited.add(reference))
 			return false;
 		if (reference.getType() instanceof JvmTypeParameter) {
 			if (isDeclaratorOf(declarator, (JvmTypeParameter) reference.getType()))
 				return true;
+			for(JvmTypeConstraint constraint: ((JvmTypeParameter) reference.getType()).getConstraints()) {
+				if (!isResolved(constraint.getTypeReference(), declarator, rawType, visited))
+					return false;
+				if (constraint instanceof JvmLowerBound) {
+					if (typeReferences.is(constraint.getTypeReference(), Object.class))
+						return false;
+				}
+			}
 			return false;
 		}
 		if (reference instanceof JvmParameterizedTypeReference) {
@@ -180,21 +192,25 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 				}
 			}
 			for(JvmTypeReference argument: parameterized.getArguments()) {
-				if (!isResolved(argument, declarator, rawType))
+				if (!isResolved(argument, declarator, rawType, visited))
 					return false;
 			}
 		}
 		if (reference instanceof JvmWildcardTypeReference) {
 			for(JvmTypeConstraint constraint: ((JvmWildcardTypeReference) reference).getConstraints()) {
-				if (!isResolved(constraint.getTypeReference(), declarator, rawType))
+				if (!isResolved(constraint.getTypeReference(), declarator, rawType, visited))
 					return false;
+				if (constraint instanceof JvmLowerBound) {
+					if (typeReferences.is(constraint.getTypeReference(), Object.class))
+						return false;
+				}
 			}
 		}
 		if (reference instanceof JvmDelegateTypeReference) {
-			return isResolved(((JvmDelegateTypeReference) reference).getDelegate(), declarator, rawType);
+			return isResolved(((JvmDelegateTypeReference) reference).getDelegate(), declarator, rawType, visited);
 		}
 		if (reference instanceof JvmSpecializedTypeReference) {
-			return isResolved(((JvmSpecializedTypeReference) reference).getEquivalent(), declarator, rawType);
+			return isResolved(((JvmSpecializedTypeReference) reference).getEquivalent(), declarator, rawType, visited);
 		}
 		return true;
 	}
@@ -405,6 +421,7 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 	private PolymorphicDispatcher<Void> earlyExits = PolymorphicDispatcher.createForSingleTarget("_earlyExits", 2, 2, this);
 	
 	public JvmTypeReference getCommonReturnType(XExpression expression, boolean assumeImplicitReturnExpression) {
+		// TODO use JvmUnknownTypeReference instead of adding plain Void.TYPE
 		EarlyExitAcceptor acceptor = new EarlyExitAcceptor();
 		internalCollectEarlyExits(expression, acceptor);
 		final List<JvmTypeReference> returns = acceptor.returns;

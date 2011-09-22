@@ -23,12 +23,13 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.AbstractTypeReferenceVisitor;
 import org.eclipse.xtext.common.types.util.IRawTypeHelper;
-import org.eclipse.xtext.common.types.util.TypeArgumentContext;
+import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.lib.Functions;
@@ -63,10 +64,10 @@ public class Closures {
 	/**
 	 * @return a compatible function type reference or <code>null</code>.
 	 */
-	public JvmTypeReference getCompatibleFunctionType(JvmTypeReference original, final boolean rawType) {
+	public JvmTypeReference getCompatibleFunctionType(JvmTypeReference original, final boolean instanceContext, final boolean rawType) {
 		if (original == null)
 			return null;
-		JvmTypeReference result = original.accept(new AbstractTypeReferenceVisitor.InheritanceAware<JvmTypeReference>() {
+		JvmTypeReference result = new AbstractTypeReferenceVisitor.InheritanceAware<JvmTypeReference>() {
 			@Override
 			public JvmTypeReference doVisitTypeReference(JvmTypeReference reference) {
 				return null;
@@ -78,11 +79,6 @@ public class Closures {
 			@Override
 			public JvmTypeReference doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference) {
 				JvmType type = reference.getType();
-				if (type != null && !type.eIsProxy()) {
-					if (type.getIdentifier().startsWith(Functions.class.getCanonicalName() + "$")) {
-						return reference;
-					}
-				}
 				if (type instanceof JvmDeclaredType && !type.eIsProxy()) {
 					JvmOperation operation = findImplementingOperation(reference, type.eResource());
 					if (operation != null) {
@@ -90,7 +86,12 @@ public class Closures {
 						if (rawType) {
 							result = createRawFunctionTypeRef(operation, operation.getParameters().size());
 						} else {
-							final TypeArgumentContext argumentContext = typeArgumentContextProvider.getReceiverContext(reference);
+							if (type instanceof JvmTypeParameterDeclarator) {
+								if (!((JvmTypeParameterDeclarator) type).getTypeParameters().isEmpty() && reference.getArguments().isEmpty())
+									return createRawFunctionTypeRef(operation, operation.getParameters().size()); 
+							}
+							final ITypeArgumentContext argumentContext = typeArgumentContextProvider.getTypeArgumentContext(
+									new TypeArgumentContextProvider.ReceiverRequest(reference));
 							List<JvmTypeReference> parameterTypes = Lists.transform(operation.getParameters(), new Function<JvmFormalParameter, JvmTypeReference>() {
 								public JvmTypeReference apply(JvmFormalParameter from) {
 									if (from != null) {
@@ -101,7 +102,7 @@ public class Closures {
 								}
 							});
 							JvmTypeReference returnType = argumentContext.getUpperBound(operation.getReturnType(), operation);
-							result = createFunctionTypeRef(type, parameterTypes, returnType);
+							result = createFunctionTypeRef(type, parameterTypes, returnType, instanceContext);
 						}
 						return result;
 					}
@@ -126,7 +127,7 @@ public class Closures {
 				boolean wasEquivalent = false;
 				for(int i = 0; i < components.size(); i++) {
 					JvmTypeReference component = components.get(i);
-					JvmTypeReference equivalent = getCompatibleFunctionType(component, rawType);
+					JvmTypeReference equivalent = getCompatibleFunctionType(component, instanceContext, rawType);
 					wasEquivalent |= equivalent != null;
 					if (equivalent != null && component != equivalent) {
 						if (result == null) {
@@ -151,13 +152,16 @@ public class Closures {
 			
 			@Override
 			public JvmTypeReference doVisitSpecializedTypeReference(JvmSpecializedTypeReference reference) {
+				if (reference instanceof XFunctionTypeRef) {
+					return reference;
+				}
 				JvmTypeReference result = super.doVisitSpecializedTypeReference(reference);
 				if (result != reference.getEquivalent()) {
 					return result;
 				}
 				return reference;
 			}
-		});
+		}.visit(original);
 		return result;
 	}
 	
@@ -211,10 +215,12 @@ public class Closures {
 	public JvmTypeReference createFunctionTypeRef(
 			EObject context, 
 			List<JvmTypeReference> parameterTypes,
-			JvmTypeReference returnType) {
+			JvmTypeReference returnType,
+			boolean instanceContext) {
 		XFunctionTypeRef result = xtypeFactory.createXFunctionTypeRef();
+		result.setInstanceContext(instanceContext);
 		for(JvmTypeReference parameterType: parameterTypes) {
-			if (parameterType.eContainer() == null) {
+			if (parameterType != null && parameterType.eContainer() == null) {
 				result.getParamTypes().add(parameterType);
 			} else {
 				JvmDelegateTypeReference delegate = typesFactory.createJvmDelegateTypeReference();
@@ -222,7 +228,7 @@ public class Closures {
 				result.getParamTypes().add(delegate);
 			}
 		}
-		if (returnType.eContainer() == null) {
+		if (returnType != null && returnType.eContainer() == null) {
 			result.setReturnType(returnType);
 		} else {
 			JvmDelegateTypeReference delegate = typesFactory.createJvmDelegateTypeReference();

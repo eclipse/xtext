@@ -9,10 +9,11 @@ package org.eclipse.xtext.xbase.linking;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.common.types.util.IRawTypeHelper;
+import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -29,7 +30,10 @@ public class XbaseLinkingScopeProvider implements IScopeProvider /* implements I
 	private Provider<FeatureCallChecker> featureCallCheckerProvider;
 	
 	@Inject
-	private XbaseTypeConformanceComputer conformanceChecker;
+	private TypeConformanceComputer conformanceComputer;
+	
+	@Inject
+	private IRawTypeHelper rawTypeHelper;
 
 	public IScope getScope(EObject context, EReference reference) {
 		if (context == null || context.eResource() == null || context.eResource().getResourceSet() == null) {
@@ -44,7 +48,7 @@ public class XbaseLinkingScopeProvider implements IScopeProvider /* implements I
 
 	protected IScope wrapFeatureCallScope(IScope scope, EObject context, EReference reference) {
 		final FeatureCallChecker featureCallChecker = getFeatureCallChecker(context, reference);
-		return new BestMatchingJvmFeatureScope(conformanceChecker, context, reference, scope, featureCallChecker);
+		return new BestMatchingJvmFeatureScope(conformanceComputer, context, reference, scope, featureCallChecker, rawTypeHelper);
 	}
 
 	protected boolean isFeatureCallScope(EReference reference) {

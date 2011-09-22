@@ -7,10 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typing;
 
-import java.util.Set;
-
-import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
-import org.eclipse.xtext.common.types.JvmSynonymTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputationArgument;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
@@ -39,12 +35,12 @@ public class XbaseTypeConformanceComputer extends TypeConformanceComputer {
 		if (result.isConformant()) {
 			return result;
 		}
-		// entry call
 		if (!flags.isAsTypeArgument() && flags.isAllowPrimitiveConversion()) {
-			JvmTypeReference leftFunction = closures.getCompatibleFunctionType(left, flags.isRawType());
-			JvmTypeReference rightFunction = closures.getCompatibleFunctionType(right, flags.isRawType());
+			// entry call - try to convert function types
+			JvmTypeReference leftFunction = closures.getCompatibleFunctionType(left, false, flags.isRawType());
+			JvmTypeReference rightFunction = closures.getCompatibleFunctionType(right, false, flags.isRawType());
 			if (leftFunction != null && rightFunction != null && (left != leftFunction || right != rightFunction)) {
-				result = isConformant(leftFunction, rightFunction, flags);
+				result = super.isConformant(leftFunction, rightFunction, flags);
 				if (result.isConformant()) {
 					result = TypeConformanceResult.merge(result, new TypeConformanceResult(TypeConformanceResult.Kind.DEMAND_CONVERSION));
 					return result;

@@ -10,10 +10,12 @@ package org.eclipse.xtext.common.types.util;
 import java.util.List;
 
 import org.eclipse.xtext.common.types.JvmLowerBound;
+import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
+import org.eclipse.xtext.common.types.util.TypeConformanceComputationArgument.Internal;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -48,6 +50,12 @@ public class WildcardConformanceStrategy extends TypeConformanceStrategy<JvmWild
 			}
 		}
 		return TypeConformanceResult.FAILED;
+	}
+	
+	@Override
+	public TypeConformanceResult doVisitMultiTypeReference(JvmWildcardTypeReference left, JvmMultiTypeReference right,
+			Internal<JvmWildcardTypeReference> param) {
+		return doVisitTypeReference(left, right, param);
 	}
 
 	@Override
