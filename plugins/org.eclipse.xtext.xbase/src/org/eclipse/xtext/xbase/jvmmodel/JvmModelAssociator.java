@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.jvmmodel;
 
 import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Maps.*;
 import static com.google.common.collect.Sets.*;
 
 import java.util.List;
@@ -23,11 +24,13 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IDerivedStateComputer;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.xbase.XExpression;
 
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.ListMultimap;
@@ -40,7 +43,7 @@ import com.google.inject.name.Named;
  * @author Sven Efftinge
  */
 @Singleton
-public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssociator, IDerivedStateComputer {
+public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssociator, ILogicalContainerProvider, IDerivedStateComputer {
 	
 	@SuppressWarnings("unused")
 	private final static Logger LOG = Logger.getLogger(JvmModelAssociator.class);
@@ -57,6 +60,8 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 	
 	static class Adapter extends AdapterImpl {
 		public ListMultimap<EObject, EObject> sourceToTargetMap = LinkedListMultimap.create();
+		public Map<EObject, JvmIdentifiableElement> logicalContainerMap = newHashMap();
+		
 		@Override
 		public boolean isAdapterForType(Object type) {
 			return Adapter.class == type;
@@ -70,6 +75,50 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 			resource.eAdapters().add(adapter);
 		}
 		return adapter;
+	}
+	
+	protected Map<EObject, JvmIdentifiableElement> getLogicalContainerMapping(Resource resource) {
+		return getOrInstall(resource).logicalContainerMap;
+	}
+	
+	public XExpression getAssociatedExpression(JvmIdentifiableElement element) {
+		if (element == null)
+			return null;
+		Map<EObject, JvmIdentifiableElement> mapping = getLogicalContainerMapping(element.eResource());
+		for (Map.Entry<EObject, JvmIdentifiableElement> entry : mapping.entrySet()) {
+			if (entry.getValue() == element && entry.getKey() instanceof XExpression) {
+				return (XExpression) entry.getKey();
+			}
+		}
+		return null;
+	}
+
+	public JvmIdentifiableElement getLogicalContainer(EObject object) {
+		if (object == null)
+			return null;
+		final Map<EObject, JvmIdentifiableElement> mapping = getLogicalContainerMapping(object.eResource());
+		if (mapping.containsKey(object)) {
+			return mapping.get(object);
+		}
+		if (object.eContainer() != null) {
+			Set<EObject> elements = getJvmElements(object.eContainer());
+			for (EObject eObject : elements) {
+				if (eObject instanceof JvmIdentifiableElement) {
+					return (JvmIdentifiableElement) eObject;
+				}
+			}
+		}
+		return null;
+	}
+	
+	public void associateLogicalContainer(EObject logicalChild, JvmIdentifiableElement element) {
+		if (logicalChild == null)
+			return;
+		final Map<EObject, JvmIdentifiableElement> mapping = getLogicalContainerMapping(logicalChild.eResource());
+		if (mapping.containsKey(logicalChild)) {
+			throw new IllegalStateException("There is already a logical container for "+logicalChild);
+		}
+		mapping.put(logicalChild, element);
 	}
 
 	protected ListMultimap<EObject, EObject> sourceToTargetMap(Resource res) {
@@ -161,6 +210,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		}
 		resourcesContentsList.removeAll(derived);
 		sourceToTargetMap(resource).clear();
+		getLogicalContainerMapping(resource).clear();
 	}
 }
 
