@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.jvmmodel;
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Maps.*;
 import static com.google.common.collect.Sets.*;
+import static java.util.Collections.*;
 
 import java.util.List;
 import java.util.Map;
@@ -69,6 +70,10 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 	}
 	
 	protected Adapter getOrInstall(Resource resource) {
+		if (!(resource instanceof XtextResource))
+			return new Adapter();
+		if (!languageName.equals(((XtextResource) resource).getLanguageName()))
+			return new Adapter();
 		Adapter adapter = (Adapter) EcoreUtil.getAdapter(resource.eAdapters(), Adapter.class);
 		if (adapter == null) {
 			adapter = new Adapter();
@@ -122,14 +127,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 	}
 
 	protected ListMultimap<EObject, EObject> sourceToTargetMap(Resource res) {
-		if (res == null)
-			throw new NullPointerException("resource");
-		if (res instanceof XtextResource) {
-			if (languageName.equals(((XtextResource) res).getLanguageName()))
-				return getOrInstall(res).sourceToTargetMap;
-		}
-		// TODO we should throw an IllegalArgumentException here? If the resource is not from my language, clients should really make sure they use the language's services.
-		return LinkedListMultimap.create();
+		return getOrInstall(res).sourceToTargetMap;
 	}
 
 	protected Resource getResource(Notifier ctx) {
