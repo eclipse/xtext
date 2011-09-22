@@ -36,6 +36,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.FeatureOverridesService;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
@@ -195,8 +196,9 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 	
 	@Check
 	public void checkVariableNameShadowing(XtendFunction func) {
-		for (XtendParameter p : func.getParameters()) {
-			super.checkDeclaredVariableName(func, p, Xtend2Package.Literals.XTEND_PARAMETER__NAME);
+		JvmOperation operation = associations.getDirectlyInferredOperation(func);
+		for (JvmFormalParameter p : operation.getParameters()) {
+			super.checkDeclaredVariableName(operation, p, TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME);
 		}
 	}
 	
@@ -623,18 +625,14 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 	public void checkCreateFunctionIsNotTypeVoid(XtendFunction func) {
 		if (func.getCreateExtensionInfo() == null)
 			return;
-		JvmTypeReference declaredType = func.getReturnType();
-		if (declaredType == null) {
-			declaredType = overridesService.getOverriddenReturnType(func);
-		}
-		if (declaredType == null) {
-			JvmTypeReference inferredType = getTypeProvider().getTypeForIdentifiable(func.getCreateExtensionInfo());
-			if (getTypeRefs().is(inferredType, Void.TYPE)) {
+		JvmOperation operation = associations.getDirectlyInferredOperation(func);
+		if (func.getReturnType() == null) {
+			if (getTypeRefs().is(operation.getReturnType(), Void.TYPE)) {
 				error("void is an invalid type for the create function " + func.getName(), 
 						func, 
 						Xtend2Package.Literals.XTEND_FUNCTION__NAME, INVALID_USE_OF_TYPE);
 			}
-		} else if (getTypeRefs().is(declaredType, Void.TYPE)) {
+		} else if (getTypeRefs().is(func.getReturnType(), Void.TYPE)) {
 			if (func.getReturnType() != null)
 				error("Create function " + func.getName() + " may not declare return type void.",
 						func.getReturnType(), null, INVALID_USE_OF_TYPE);

@@ -73,7 +73,7 @@ import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping;
-import org.eclipse.xtext.xbase.jvmmodel.IExpressionContextProvider;
+import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
@@ -99,8 +99,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	private SuperTypeCollector collector;
 	
 	@Inject
-	private IExpressionContextProvider expressionContextProvider;
-	
+	private ILogicalContainerProvider expressionContext;
 	
 	@Override
 	protected JvmTypeReference _expectedType(EObject obj, EReference reference, int index, boolean rawType) {
@@ -109,7 +108,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			ele = ((List<?>)ele).get(index);
 		}
 		if (ele instanceof XExpression) {
-			JvmIdentifiableElement element = expressionContextProvider.getAssociatedJvmElement((XExpression) ele);
+			JvmIdentifiableElement element = expressionContext.getLogicalContainer((XExpression) ele);
 			if (element instanceof JvmOperation) {
 				return ((JvmOperation) element).getReturnType();
 			}
@@ -907,6 +906,17 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		return super.handleCycleGetTypeForIdentifiable(identifiableElement, rawType);
 	}
 
+	protected JvmTypeReference _typeForIdentifiable(JvmGenericType thisOrSuper, boolean rawType) {
+		JvmParameterizedTypeReference reference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
+		reference.setType(thisOrSuper);
+		for (JvmTypeParameter param : thisOrSuper.getTypeParameters()) {
+			JvmParameterizedTypeReference paramReference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
+			paramReference.setType(param);
+			reference.getArguments().add(paramReference);
+		}
+		return reference;
+	}
+	
 	protected JvmTypeReference _typeForIdentifiable(JvmConstructor constructor, boolean rawType) {
 		JvmParameterizedTypeReference reference = factory.createJvmParameterizedTypeReference();
 		JvmDeclaredType declaringType = constructor.getDeclaringType();

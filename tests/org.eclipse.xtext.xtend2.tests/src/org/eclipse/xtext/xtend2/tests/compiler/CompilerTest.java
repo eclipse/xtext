@@ -53,6 +53,33 @@ import com.google.inject.Injector;
  */
 public class CompilerTest extends AbstractXtend2TestCase {
 	
+	
+	public void testSimpleExtensionMethodCall() throws Exception {
+		String code = 
+				"package x class Z {" +
+				"" +
+				"	def create result : <String>newArrayList() copyNet(String append) {\n" +
+				"       result.map( x | x.toUpperCase)\n" +	
+				"		result += append\n" + 
+				"	}" +
+				"  def ifExpression(String param) {\n" + 
+				"	if (param!=null) {\n" + 
+				"	  param.length\n" + 
+				"	} else {\n" + 
+				"	  0\n" + 
+				"	} \n" + 
+				"  }\n" + 
+				"\n" + 
+				"	def ifExpression_01(String param) {\n" + 
+				"		ifExpression(if (param=='foo') 'bar' else 'baz') \n" + 
+				"	}\n" +
+				"}\n";
+		String javaCode = compileToJavaCode(code);
+		Class<?> class1 = javaCompiler.compileToClass("x.Z", javaCode);
+		Object object = class1.newInstance();
+		assertEquals(3, class1.getDeclaredMethod("ifExpression_01", String.class).invoke(object, "foo"));
+	}
+	
 	/**
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=356073
 	 */

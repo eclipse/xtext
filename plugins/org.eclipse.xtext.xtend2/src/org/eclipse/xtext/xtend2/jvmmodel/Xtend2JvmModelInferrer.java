@@ -35,7 +35,6 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
-import org.eclipse.xtext.xbase.jvmmodel.IExpressionContextAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
@@ -75,9 +74,6 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 	@Inject
 	private TypeReferences typeReferences;
 	
-	@Inject
-	private IExpressionContextAssociator contextAssociator;
-	
 	public void infer(EObject xtendFile, IAcceptor<JvmDeclaredType> acceptor, boolean prelinkingPhase) {
 		if (!(xtendFile instanceof XtendFile))
 			throw new IllegalArgumentException("expected XtendFile but was "+xtendFile);
@@ -106,8 +102,11 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 				}
 			}
 			
-			for (JvmTypeParameter typeParameter : source.getTypeParameters())
-				target.getTypeParameters().add(EcoreUtil2.cloneWithProxies(typeParameter));
+			for (JvmTypeParameter typeParameter : source.getTypeParameters()) {
+				final JvmTypeParameter clonedTypeParameter = EcoreUtil2.cloneWithProxies(typeParameter);
+				associator.associate(typeParameter, clonedTypeParameter);
+				target.getTypeParameters().add(clonedTypeParameter);
+			}
 			for (XtendMember member : source.getMembers()) {
 				if (member instanceof XtendField 
 						|| member instanceof XtendFunction
@@ -181,12 +180,9 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 				// the first parameter is the created object
 				JvmFormalParameter jvmParam = typesFactory.createJvmFormalParameter();
 				jvmParam.setName(source.getCreateExtensionInfo().getName());
-				if (source.getReturnType()!=null) {
-					jvmParam.setParameterType(EcoreUtil2.cloneWithProxies(source.getReturnType()));
-				} else {
-					jvmParam.setParameterType(getTypeProxy(target));
-				}
+				jvmParam.setParameterType(getTypeProxy(source.getCreateExtensionInfo().getCreateExpression()));
 				initializer.getParameters().add(jvmParam);
+				associator.associate(source.getCreateExtensionInfo(), jvmParam);
 				
 				// add all others
 				for (XtendParameter parameter : source.getParameters()) {
@@ -194,12 +190,13 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 					jvmParam.setName(parameter.getName());
 					jvmParam.setParameterType(EcoreUtil2.cloneWithProxies(parameter.getParameterType()));
 					initializer.getParameters().add(jvmParam);
+					associator.associate(parameter, jvmParam);
 				}
 				associator.associate(source, initializer);
-				contextAssociator.associate(((XtendFunction) sourceMember).getCreateExtensionInfo().getCreateExpression(), target);
-				contextAssociator.associate(((XtendFunction) sourceMember).getExpression(), initializer);
+				associator.associateLogicalContainer(((XtendFunction) sourceMember).getCreateExtensionInfo().getCreateExpression(), target);
+				associator.associateLogicalContainer(((XtendFunction) sourceMember).getExpression(), initializer);
 			} else {
-				contextAssociator.associate(((XtendFunction) sourceMember).getExpression(), target);
+				associator.associateLogicalContainer(((XtendFunction) sourceMember).getExpression(), target);
 			}
 			String sourceName = source.getName();
 			JvmVisibility visibility = JvmVisibility.PUBLIC;
@@ -214,14 +211,18 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 				jvmParam.setName(parameter.getName());
 				jvmParam.setParameterType(EcoreUtil2.cloneWithProxies(parameter.getParameterType()));
 				target.getParameters().add(jvmParam);
+				associator.associate(parameter, jvmParam);
 			}
 			if (source.getReturnType()!=null) {
 				target.setReturnType(EcoreUtil2.cloneWithProxies(source.getReturnType()));
 			} else {
 				target.setReturnType(getTypeProxy(target));
 			}
-			for (JvmTypeParameter typeParameter : source.getTypeParameters())
-				target.getTypeParameters().add(EcoreUtil2.cloneWithProxies(typeParameter));
+			for (JvmTypeParameter typeParameter : source.getTypeParameters()) {
+				final JvmTypeParameter clonedTypeParameter = EcoreUtil2.cloneWithProxies(typeParameter);
+				target.getTypeParameters().add(clonedTypeParameter);
+				associator.associate(typeParameter, clonedTypeParameter);
+			}
 			return target;
 		} else if (sourceMember instanceof XtendField) {
 			XtendField dep = (XtendField) sourceMember;

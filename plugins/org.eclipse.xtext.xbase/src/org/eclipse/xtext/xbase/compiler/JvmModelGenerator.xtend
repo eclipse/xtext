@@ -1,30 +1,29 @@
 package org.eclipse.xtext.xbase.compiler
 
 import com.google.inject.Inject
+import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue
+import org.eclipse.xtext.common.types.JvmAnnotationReference
+import org.eclipse.xtext.common.types.JvmAnnotationValue
+import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue
 import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.JvmMember
 import org.eclipse.xtext.common.types.JvmOperation
+import org.eclipse.xtext.common.types.JvmShortAnnotationValue
+import org.eclipse.xtext.common.types.JvmStringAnnotationValue
+import org.eclipse.xtext.common.types.JvmTypeAnnotationValue
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.xtext.xbase.jvmmodel.IExpressionContextProvider
-import org.eclipse.xtext.common.types.JvmAnnotationTarget
-import org.eclipse.xtext.common.types.JvmAnnotationValue
-import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue
-import org.eclipse.xtext.common.types.JvmShortAnnotationValue
-import org.eclipse.xtext.common.types.JvmStringAnnotationValue
-import org.eclipse.xtext.common.types.JvmTypeAnnotationValue
-import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue
-import org.eclipse.xtext.common.types.JvmAnnotationReference
-import java.util.List
 
 class JvmModelGenerator implements IGenerator {
 	
-	@Inject extension IExpressionContextProvider
+	@Inject extension org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 	@Inject XbaseCompiler compiler
 	
 	override void doGenerate(Resource input, IFileSystemAccess fsa) {
@@ -122,7 +121,7 @@ class JvmModelGenerator implements IGenerator {
 		if (adapter != null) {
 			return adapter.compilationStrategy.apply(importManager)			
 		} else {
-			val expression = op.associatedExpression
+			val expression = op.getAssociatedExpression
 			if (expression != null) {
 				val appendable = new StringBuilderBasedAppendable(importManager)
 				appendable.declareVariable(op.declaringType, "this");

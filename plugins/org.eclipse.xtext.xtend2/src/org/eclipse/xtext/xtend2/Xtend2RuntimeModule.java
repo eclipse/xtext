@@ -3,7 +3,6 @@
  */
 package org.eclipse.xtext.xtend2;
 
-import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.OutputConfigurationProvider;
@@ -31,7 +30,6 @@ import org.eclipse.xtext.xtend2.resource.XtendEObjectAtOffsetHelper;
 import org.eclipse.xtext.xtend2.scoping.Xtend2ImportedNamespaceScopeProvider;
 import org.eclipse.xtext.xtend2.scoping.Xtend2ScopeProvider;
 import org.eclipse.xtext.xtend2.typing.Xtend2TypeProvider;
-import org.eclipse.xtext.xtend2.typing.XtendTypeArgumentContextProvider;
 import org.eclipse.xtext.xtend2.validation.XtendEarlyExitValidator;
 
 import com.google.inject.Binder;
@@ -92,10 +90,6 @@ public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2
 	@Override
 	public Class<? extends EObjectAtOffsetHelper> bindEObjectAtOffsetHelper() {
 		return XtendEObjectAtOffsetHelper.class;
-	}
-	
-	public Class<? extends TypeArgumentContextProvider> bindTypeArgumentContextProvider() {
-		return XtendTypeArgumentContextProvider.class;
 	}
 	
 	@Override

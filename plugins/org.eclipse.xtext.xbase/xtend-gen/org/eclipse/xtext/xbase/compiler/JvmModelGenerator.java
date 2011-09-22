@@ -31,7 +31,7 @@ import org.eclipse.xtext.xbase.compiler.CompilationStrategyAdapter;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
-import org.eclipse.xtext.xbase.jvmmodel.IExpressionContextProvider;
+import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
@@ -45,7 +45,7 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 public class JvmModelGenerator implements IGenerator {
   
   @Inject
-  private IExpressionContextProvider _iExpressionContextProvider0;
+  private ILogicalContainerProvider _iLogicalContainerProvider0;
   
   @Inject
   private XbaseCompiler compiler;
@@ -433,7 +433,7 @@ public class JvmModelGenerator implements IGenerator {
         return _apply;
       } else {
         {
-          XExpression _associatedExpression = this._iExpressionContextProvider0.getAssociatedExpression(op);
+          XExpression _associatedExpression = this._iLogicalContainerProvider0.getAssociatedExpression(op);
           final XExpression expression = _associatedExpression;
           boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(expression, null);
           if (_operator_notEquals_1) {

@@ -3,54 +3,38 @@
  */
 package org.eclipse.xtext.xtend2.scoping;
 
-import static com.google.common.collect.Lists.*;
-
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.resource.EObjectDescription;
-import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.impl.MapBasedScope;
-import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.annotations.scoping.XbaseWithAnnotationsScopeProvider;
-import org.eclipse.xtext.xbase.scoping.LocalVariableScopeContext;
 import org.eclipse.xtext.xbase.scoping.featurecalls.DefaultJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IFeaturesForTypeProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IValidatedEObjectDescription;
-import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScope;
 import org.eclipse.xtext.xbase.scoping.featurecalls.LocalVarDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XFeatureCallSugarDescriptionProvider;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
-import org.eclipse.xtext.xtend2.xtend2.CreateExtensionInfo;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendField;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
-import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendParameter;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -71,73 +55,6 @@ public class Xtend2ScopeProvider extends XbaseWithAnnotationsScopeProvider {
 	@Inject
 	private TypeReferences typeReferences;
 
-	@Override
-	public IScope getScope(EObject context, EReference reference) {
-		IScope parent = super.getScope(context, reference);
-		if (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(reference.getEReferenceType())) {
-			List<IEObjectDescription> descriptions = null;
-			XtendFunction function = EcoreUtil2.getContainerOfType(context, XtendFunction.class);
-			if (function != null) {
-				if (!function.getTypeParameters().isEmpty()) {
-					descriptions = Lists.newArrayList();
-					for (JvmTypeParameter param : function.getTypeParameters()) {
-						QualifiedName qn = QualifiedName.create(param.getName());
-						descriptions.add(EObjectDescription.create(qn, param));
-					}
-				}
-			}
-			XtendClass clazz = EcoreUtil2.getContainerOfType(context, XtendClass.class);
-			if (clazz != null && clazz.getName() != null) {
-				if (descriptions == null)
-					descriptions = Lists.newArrayList();
-				JvmGenericType inferredType = xtend2jvmAssociations.getInferredType(clazz);
-				if (inferredType != null) {
-					QualifiedName inferredDeclaringTypeName = QualifiedName.create(inferredType.getSimpleName());
-					descriptions.add(EObjectDescription.create(inferredDeclaringTypeName, inferredType));
-				}
-			}
-			if (descriptions != null && !descriptions.isEmpty())
-				return MapBasedScope.createScope(parent, descriptions);
-		}
-		return parent;
-	}
-
-	@Override
-	protected IScope createLocalVarScope(IScope parent,
-			LocalVariableScopeContext scopeContext) {
-		EObject context = scopeContext.getContext();
-		if (context instanceof XtendClass) {
-			return getScopeForXtendClass((XtendClass) context, parent);
-		} else if (context instanceof XtendFunction) {
-			XtendFunction func = (XtendFunction) context;
-			EList<XtendParameter> parameters = func.getParameters();
-			List<IValidatedEObjectDescription> descriptions = Lists.newArrayList();
-			if (func.getCreateExtensionInfo()!=null) {
-				CreateExtensionInfo info = func.getCreateExtensionInfo();
-				IValidatedEObjectDescription description = new LocalVarDescription(QualifiedName.create(info.getName()), info);
-				descriptions.add(description);
-			}
-			for (XtendParameter parameter : parameters) {
-				if (!Strings.isEmpty(parameter.getName())) {
-					IValidatedEObjectDescription desc = createLocalVarDescription(parameter);
-					descriptions.add(desc);
-				}
-			}
-			return new JvmFeatureScope(
-					super.createLocalVarScope(parent, scopeContext), 
-					"XtendFunction", descriptions);
-		}
-		return super.createLocalVarScope(parent, scopeContext);
-	}
-
-	protected JvmFeatureScope getScopeForXtendClass(XtendClass context, IScope parent) {
-		XFeatureCall receiver = XbaseFactory.eINSTANCE.createXFeatureCall();
-		receiver.setFeature(context);
-		return new JvmFeatureScope(parent, "XtendClass", newArrayList(
-				new LocalVarDescription(THIS, context), 
-				new LocalVarDescription(QualifiedName.create("super"), context.getSuperCallReferable())));
-	}
-	
 	@Override
 	protected List<IJvmFeatureDescriptionProvider> getStaticFeatureDescriptionProviders(Resource context,
 			JvmDeclaredType contextType) {
@@ -164,8 +81,10 @@ public class Xtend2ScopeProvider extends XbaseWithAnnotationsScopeProvider {
 
 		if (implicitReceiver == null) {
 			final XtendClass xtendClass = ((XtendFile) expression.eResource().getContents().get(0)).getXtendClass();
+			// extensions for this
+			JvmGenericType type2 = xtend2jvmAssociations.getInferredType(xtendClass);
 			XFeatureCall callToThis = XbaseFactory.eINSTANCE.createXFeatureCall();
-			callToThis.setFeature(xtendClass);
+			callToThis.setFeature(type2);
 			// injected extensions
 			Iterable<XtendField> iterable = getExtensionDependencies(xtendClass);
 			for (XtendField xtendField : iterable) {
@@ -179,8 +98,6 @@ public class Xtend2ScopeProvider extends XbaseWithAnnotationsScopeProvider {
 					insertDescriptionProviders(extensionFeatureProvider, currentContext, callToDependency, result);
 				}
 			}
-			// extensions for this
-			JvmGenericType type2 = xtend2jvmAssociations.getInferredType(xtendClass);
 			if (type2 != null) {
 				JvmParameterizedTypeReference typeRef = typeReferences.createTypeRef(type2);
 				ExtensionMethodsFeaturesProvider featureProvider = extensionMethodsFeaturesProvider.get();

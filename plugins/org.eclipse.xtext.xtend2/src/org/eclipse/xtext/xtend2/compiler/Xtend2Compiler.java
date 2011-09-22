@@ -36,17 +36,16 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Tuples;
-import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.annotations.compiler.AnnotationCompiler;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
-import org.eclipse.xtext.xbase.compiler.DelegatingAppendable;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.Later;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
+import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xtend2.dispatch.DispatchingSupport;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
@@ -60,13 +59,13 @@ import org.eclipse.xtext.xtend2.xtend2.RichStringIf;
 import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
 import org.eclipse.xtext.xtend2.xtend2.XtendAnnotationTarget;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
-import org.eclipse.xtext.xtend2.xtend2.XtendClassSuperCallReferable;
 import org.eclipse.xtext.xtend2.xtend2.XtendField;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendMember;
 import org.eclipse.xtext.xtend2.xtend2.XtendParameter;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
@@ -97,6 +96,9 @@ public class Xtend2Compiler extends XbaseCompiler {
 	
 	@Inject
 	private IdentifiableSimpleNameProvider simpleNameProvider;
+	
+	@Inject
+	private ILogicalContainerProvider logicalContainerProvider;
 	
 	/**
 	 * Compile the given {@link XtendFile file} to java code and write
@@ -142,6 +144,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 
 	protected void compile(XtendClass obj, IAppendable appendable) {
 		//TODO abstract, final
+		JvmGenericType inferredType = associations.getInferredType(obj);
 		appendable.append("\n@SuppressWarnings(\"all\")");
 		generateAnnotations(obj, appendable);
 		appendable.append("\npublic class ").append(obj.getName());
@@ -160,7 +163,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 		}
 		appendable.append(" {");
 		appendable.increaseIndentation();
-		declareThis(obj, appendable);
+		declareThis(inferredType, appendable);
 		for (XtendMember member : obj.getMembers()) {
 			if (member instanceof XtendFunction) {
 				compile((XtendFunction) member, appendable);
@@ -340,11 +343,10 @@ public class Xtend2Compiler extends XbaseCompiler {
 		appendable.append("\n");
 		generateAnnotations(obj, appendable);
 		appendable.append("\n").append(getJavaVisibility(directlyInferredOperation.getVisibility())).append(" ");
-		appendTypeParameterDeclaration(obj.getTypeParameters(), appendable);
-		serialize(resolveMultiType(returnType), obj, appendable);
+		appendTypeParameterDeclaration(directlyInferredOperation.getTypeParameters(), appendable);
+		serialize(resolveMultiType(returnType), directlyInferredOperation, appendable);
 		appendable.append(" ").append(name).append("(");
-		final EList<XtendParameter> parameters = obj.getParameters();
-		declareParameters(parameters, appendable);
+		declareJvmParameters(directlyInferredOperation.getParameters(), appendable);
 		appendable.append(") ");
 		JvmOperation operation = directlyInferredOperation;
 		declareExceptions(operation, appendable);
@@ -397,9 +399,10 @@ public class Xtend2Compiler extends XbaseCompiler {
 		appendable.append(cacheKeyVarName).append(" = ");
 		serialize(collectonLiterals, info.getCreateExpression(), appendable);
 		appendable.append(".newArrayList(");
-		EList<XtendParameter> list = obj.getParameters();
-		for (Iterator<XtendParameter> iterator = list.iterator(); iterator.hasNext();) {
-			XtendParameter jvmFormalParameter = iterator.next();
+		JvmOperation mainOperation = (JvmOperation) logicalContainerProvider.getLogicalContainer(obj.getCreateExtensionInfo().getCreateExpression());
+		EList<JvmFormalParameter> list = mainOperation.getParameters();
+		for (Iterator<JvmFormalParameter> iterator = list.iterator(); iterator.hasNext();) {
+			JvmFormalParameter jvmFormalParameter = iterator.next();
 			appendable.append(appendable.getName(jvmFormalParameter));
 			if (iterator.hasNext()) {
 				appendable.append(", ");
@@ -410,7 +413,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 		JvmTypeReference returnType = getTypeProvider().getType(info.getCreateExpression());
 		appendable.append("\nfinal ");
 		serialize(returnType,info.getCreateExpression(),appendable);
-		String varName = declareNameInVariableScope(info, appendable);
+		String varName = "_result";
 		appendable.append(" ").append(varName).append(";");
 		// open synchronize block
 		appendable.append("\nsynchronized (").append(cacheVarName).append(") {");
@@ -433,14 +436,26 @@ public class Xtend2Compiler extends XbaseCompiler {
 		// close synchronize block
 		appendable.decreaseIndentation();
 		appendable.append("\n}");
-		
-		// execute the initialization
-		JvmTypeReference primitiveVoid = getTypeReferences().getTypeForName(Void.TYPE, obj);
-		compile(obj.getExpression(), appendable, primitiveVoid);
-		
+		JvmOperation initializer = (JvmOperation) logicalContainerProvider.getLogicalContainer(obj.getExpression());
+		appendable.append("\n").append(initializer.getSimpleName()).append("(").append(varName);
+		for (XtendParameter xtendParameter : obj.getParameters()) {
+			appendable.append(", ").append(xtendParameter.getName());
+		}
+		appendable.append(");");
 		// return the result
 		appendable.append("\nreturn ");
 		appendable.append(varName).append(";");
+		appendable.decreaseIndentation();
+		appendable.append("\n}").closeScope();
+		// declare the initializer method
+		appendable.openScope();
+		appendable.append("\nprivate void ").append(initializer.getSimpleName()).append("(");
+		declareJvmParameters(initializer.getParameters(), appendable);
+		appendable.append(")");
+		declareExceptions(initializer, appendable);
+		appendable.append(" {").increaseIndentation();
+		// execute the initialization
+		compile(obj.getExpression(), appendable, initializer.getReturnType());
 	}
 
 	protected void declareCreateExtensionCache(XtendFunction obj, IAppendable appendable) {
@@ -505,18 +520,6 @@ public class Xtend2Compiler extends XbaseCompiler {
 		return result;
 	}
 
-	protected void declareParameters(final EList<XtendParameter> parameters, IAppendable appendable) {
-		final int numParams = parameters.size();
-		for (int i = 0; i < numParams; i++) {
-			XtendParameter p = parameters.get(i);
-			String varName = declareNameInVariableScope(p, appendable);
-			appendable.append("final ");
-			serialize(p.getParameterType(),p,appendable);
-			appendable.append(" ").append(varName);
-			if (i != numParams - 1)
-				appendable.append(", ");
-		}
-	}
 	protected void declareJvmParameters(final EList<JvmFormalParameter> parameters, IAppendable appendable) {
 		final int numParams = parameters.size();
 		for (int i = 0; i < numParams; i++) {
@@ -531,29 +534,21 @@ public class Xtend2Compiler extends XbaseCompiler {
 	}
 	
 
-	protected void declareThis(XtendClass clazz, IAppendable appendable) {
-		appendable.declareVariable(clazz, "this");
-		appendable.declareVariable(clazz.getSuperCallReferable(), "super");
-	}
-	
-	@Override
-	protected void _toJavaStatement(XClosure closure, IAppendable b, boolean isReferenced) {
-		super._toJavaStatement(closure, getClosureContextAppendable(b), isReferenced);
-	}
-	
-	protected IAppendable getClosureContextAppendable(final IAppendable appendable) {
-		return new DelegatingAppendable(appendable) {
-			@Override
-			public String getName(Object key) {
-				if (key instanceof XtendClass) {
-					return ((XtendClass) key).getSimpleName()+".this";
-				}
-				if (key instanceof XtendClassSuperCallReferable) {
-					return ((XtendClassSuperCallReferable) key).getXtendClass().getSimpleName()+".super";
-				}
-				return super.getName(key);
+	protected void declareThis(JvmGenericType type, IAppendable appendable) {
+		appendable.declareVariable(type, "this");
+		Iterator<JvmTypeReference> iterator = filter(type.getSuperTypes(), new Predicate<JvmTypeReference>() {
+			public boolean apply(JvmTypeReference input) {
+				final JvmType t = input.getType();
+				return t instanceof JvmGenericType && !((JvmGenericType)t).isInterface();
 			}
-		};
+		}).iterator();
+		JvmType superType = null;
+		if (iterator.hasNext()) {
+			superType = iterator.next().getType();
+		}
+		if (superType != null) {
+			appendable.declareVariable(superType, "super");
+		}
 	}
 	
 	@Override

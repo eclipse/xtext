@@ -9,7 +9,9 @@ package org.eclipse.xtext.xbase.scoping;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XClosure;
+import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 
 /**
  * A wrapped parameter object that holds the necessary information for computing local variable scopes.
@@ -19,18 +21,20 @@ import org.eclipse.xtext.xbase.XClosure;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class LocalVariableScopeContext {
-	protected final EObject context;
-	protected final EReference reference;
-	protected final boolean includeCurrentBlock;
-	protected final int idx;
-	protected final  boolean referredFromClosure;
+	private final EObject context;
+	private final EReference reference;
+	private final boolean includeCurrentBlock;
+	private final int idx;
+	private final boolean referredFromClosure;
+	private final ILogicalContainerProvider expressionContext;
 	
-	protected LocalVariableScopeContext(EObject context, EReference reference, boolean includeCurrentBlock, int idx, boolean referredFromClosure) {
+	protected LocalVariableScopeContext(EObject context, EReference reference, boolean includeCurrentBlock, int idx, boolean referredFromClosure, ILogicalContainerProvider expressionContext) {
 		this.context = context;
 		this.reference = reference;
 		this.includeCurrentBlock = includeCurrentBlock;
 		this.idx = idx;
 		this.referredFromClosure = referredFromClosure;
+		this.expressionContext = expressionContext;
 	}
 	
 	/**
@@ -41,16 +45,23 @@ public class LocalVariableScopeContext {
 	 */
 	public LocalVariableScopeContext spawnForContainer() {
 		if (context instanceof XClosure) {
-			return new LocalVariableScopeContext(context.eContainer(), reference, false, -1, true);
+			return new LocalVariableScopeContext(getContainer(), reference, false, -1, true, expressionContext);
 		}
-		return new LocalVariableScopeContext(context.eContainer(), reference, false, -1, referredFromClosure);
+		return new LocalVariableScopeContext(getContainer(), reference, false, -1, referredFromClosure, expressionContext);
+	}
+
+	public EObject getContainer() {
+		JvmIdentifiableElement associatedContainer = expressionContext.getLogicalContainer(context);
+		if (associatedContainer != null)
+			return associatedContainer;
+		return context.eContainer();
 	}
 	
 	/**
 	 * Used to decide whether the container hierarchy for the referenced {@link #context} should be walked up or not.
 	 */
 	public boolean canSpawnForContainer() {
-		return context.eContainer() != null;
+		return getContainer() != null;
 	}
 	
 	public EObject getContext() {

@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.XExpression;
@@ -40,7 +41,7 @@ public class TypeProviderErrorTest extends AbstractXtend2TestCase {
 		Iterator<Object> contents = EcoreUtil.getAllContents(function.eResource(), true);
 		while(contents.hasNext()) {
 			EObject object = (EObject) contents.next();
-			if (object instanceof JvmIdentifiableElement) {
+			if (object instanceof JvmOperation) {
 				// no exception
 				typeProvider.getTypeForIdentifiable((JvmIdentifiableElement) object);
 			}

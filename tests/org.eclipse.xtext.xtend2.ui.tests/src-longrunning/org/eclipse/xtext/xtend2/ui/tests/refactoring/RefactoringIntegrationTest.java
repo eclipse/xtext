@@ -57,6 +57,11 @@ public class RefactoringIntegrationTest extends AbstractXtend2UITestCase {
 	private IResourceSetProvider resourceSetProvider;
 
 	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		testHelper.setUp();
+	}
+	@Override
 	protected void tearDown() throws Exception {
 		testHelper.tearDown();
 	}

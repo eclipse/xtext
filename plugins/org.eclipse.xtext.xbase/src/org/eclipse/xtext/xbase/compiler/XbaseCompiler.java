@@ -13,6 +13,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
@@ -479,28 +480,41 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		serialize(type, closure, b);
 		b.append("() {");
 		b.increaseIndentation().increaseIndentation();
-		JvmOperation operation = functionConversion.findSingleMethod(type);
-		final JvmTypeReference returnType = context.resolve(operation.getReturnType());
-		b.append("\npublic ");
-		serialize(returnType, closure, b);
-		b.append(" ").append(operation.getSimpleName());
-		b.append("(");
-		EList<JvmFormalParameter> closureParams = closure.getFormalParameters();
-		for (Iterator<JvmFormalParameter> iter = closureParams.iterator(); iter.hasNext();) {
-			JvmFormalParameter param = iter.next();
-			final JvmTypeReference parameterType2 = getTypeProvider().getTypeForIdentifiable(param);
-			final JvmTypeReference parameterType = context.resolve(parameterType2);
-			b.append("final ");
-			serialize(parameterType, closure, b);
-			b.append(" ");
-			String name = declareNameInVariableScope(param, b);
-			b.append(name);
-			if (iter.hasNext())
-				b.append(" , ");
+		try {
+			b.openScope();
+			JvmOperation operation = functionConversion.findSingleMethod(type);
+			final JvmTypeReference returnType = context.resolve(operation.getReturnType());
+			b.append("\npublic ");
+			serialize(returnType, closure, b);
+			b.append(" ").append(operation.getSimpleName());
+			b.append("(");
+			EList<JvmFormalParameter> closureParams = closure.getFormalParameters();
+			for (Iterator<JvmFormalParameter> iter = closureParams.iterator(); iter.hasNext();) {
+				JvmFormalParameter param = iter.next();
+				final JvmTypeReference parameterType2 = getTypeProvider().getTypeForIdentifiable(param);
+				final JvmTypeReference parameterType = context.resolve(parameterType2);
+				b.append("final ");
+				serialize(parameterType, closure, b);
+				b.append(" ");
+				String name = declareNameInVariableScope(param, b);
+				b.append(name);
+				if (iter.hasNext())
+					b.append(" , ");
+			}
+			b.append(") {");
+			b.increaseIndentation();
+			Object element = b.getObject("this");
+			if (element instanceof JvmType) {
+				b.declareVariable(element, ((JvmType) element).getSimpleName()+".this");
+			}
+			Object superElement = b.getObject("super");
+			if (superElement instanceof JvmType) {
+				b.declareVariable(superElement, ((JvmType) superElement).getSimpleName()+".super");
+			}
+			compile(closure.getExpression(), b, operation.getReturnType());
+		} finally {
+			b.closeScope();
 		}
-		b.append(") {");
-		b.increaseIndentation();
-		compile(closure.getExpression(), b, operation.getReturnType());
 		b.decreaseIndentation();
 		b.append("\n}");
 		b.decreaseIndentation().append("\n};").decreaseIndentation();
