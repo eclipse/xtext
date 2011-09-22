@@ -332,7 +332,7 @@ public class IterableExtensions {
 	 *            the transformation. May not be <code>null</code>.
 	 * @return an iterable that provides the result of the transformation. Never <code>null</code>.
 	 */
-	public static final <T, R> Iterable<R> map(Iterable<T> original, Function1<? super T, R> transformation) {
+	public static final <T, R> Iterable<R> map(Iterable<T> original, Function1<? super T, ? extends R> transformation) {
 		return Iterables.transform(original, new FunctionDelegate<T, R>(transformation));
 	}
 	
@@ -563,8 +563,9 @@ public class IterableExtensions {
 	 * @return a list with the same entries as the given iterable. May be the same as the given iterable iff it
 	 *         implements {@link List}, otherwise a copy is returned. Never <code>null</code>.
 	 */
-	public static <T> List<T> toList(Iterable<T> iterable) {
+	public static <T> List<T> toList(Iterable<? extends T> iterable) {
 		if (iterable instanceof List<?>) {
+			@SuppressWarnings("unchecked")
 			List<T> result = (List<T>) iterable;
 			return result;
 		}
@@ -582,8 +583,9 @@ public class IterableExtensions {
 	 * @return a set with the unique entries of the given iterable. May be the same as the given iterable iff it
 	 *         implements {@link Set}, otherwise a copy is returned. Never <code>null</code>.
 	 */
-	public static <T> Set<T> toSet(Iterable<T> iterable) {
+	public static <T> Set<T> toSet(Iterable<? extends T> iterable) {
 		if (iterable instanceof Set<?>) {
+			@SuppressWarnings("unchecked")
 			Set<T> result = (Set<T>) iterable;
 			return result;
 		}
@@ -603,7 +605,7 @@ public class IterableExtensions {
 	 * @return a map mapping each entry in the given iterable to the corresponding result when evaluating the 
 	 *         function {@code computeValues}.
 	 */
-	public static <K, V> Map<K, V> toInvertedMap(Iterable<K> keys, Function1<? super K, V> computeValues) {
+	public static <K, V> Map<K, V> toInvertedMap(Iterable<? extends K> keys, Function1<? super K, V> computeValues) {
 		Map<K, V> result = Maps.newLinkedHashMap();
 		for(K k: keys) {
 			result.put(k, computeValues.apply(k));
@@ -623,7 +625,7 @@ public class IterableExtensions {
 	 * @return a map mapping the result of evaluating the function {@code keyFunction} on each value in the input
 	 *         collection to that value
 	 */
-	public static <K, V> Map<K, V> toMap(Iterable<V> values, Function1<? super V, K> computeKeys) {
+	public static <K, V> Map<K, V> toMap(Iterable<? extends V> values, Function1<? super V, K> computeKeys) {
 		if (computeKeys == null)
 			throw new NullPointerException("computeKeys");
 		Map<K, V> result = Maps.newLinkedHashMap();
@@ -712,9 +714,9 @@ public class IterableExtensions {
 	 */
 	protected static class FunctionDelegate<P, R> implements Function<P, R> {
 
-		private final Function1<? super P, R> delegate;
+		private final Function1<? super P, ? extends R> delegate;
 
-		protected FunctionDelegate(Function1<? super P, R> delegate) {
+		protected FunctionDelegate(Function1<? super P, ? extends R> delegate) {
 			if (delegate == null)
 				throw new NullPointerException("delegate");
 			this.delegate = delegate;
