@@ -22,7 +22,6 @@ import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
@@ -36,6 +35,7 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBinaryOperation;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
@@ -151,12 +151,22 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 			if (feature instanceof JvmField) {
 				if (((JvmField) feature).isStatic()) {
 					highlightFeatureCall(featureCall, acceptor, XbaseHighlightingConfiguration.STATIC_FIELD);
+				} else {
+					highlightFeatureCall(featureCall, acceptor, XbaseHighlightingConfiguration.FIELD);
 				}
 			} else if (feature instanceof JvmOperation
 					&& !(featureCall instanceof XUnaryOperation || featureCall instanceof XBinaryOperation)) {
 				JvmOperation jvmOperation = (JvmOperation) feature;
 				if (jvmOperation.isStatic())
 					highlightFeatureCall(featureCall, acceptor, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
+			}
+			if (featureCall instanceof XMemberFeatureCall){
+				if(!feature.eIsProxy() && feature instanceof JvmOperation){
+					if(featureCall.getImplicitReceiver() != null || ((JvmOperation) feature).isStatic()){
+						highlightFeatureCall(featureCall, acceptor, 
+								XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+					}
+				}
 			}
 		}
 	}
