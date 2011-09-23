@@ -214,6 +214,7 @@ public class Xtend2HighlightingCalculatorTest extends AbstractXtend2UITestCase i
 	public void testStaticFieldAccess() throws Exception {
 		String model = "{ Integer::MAX_VALUE }";
 		expect(model.lastIndexOf("MAX_VALUE"), 9, XbaseHighlightingConfiguration.STATIC_FIELD);
+		notExpect(model.lastIndexOf("MAX_VALUE"), 9, XbaseHighlightingConfiguration.FIELD);
 		highlight(model);
 	}
 	
@@ -221,13 +222,13 @@ public class Xtend2HighlightingCalculatorTest extends AbstractXtend2UITestCase i
 		addImport("java.util.Collections");
 		String model = "{ Collections::emptySet  }";
 		expect(model.lastIndexOf("emptySet"), 8, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
-		notExpect(model.lastIndexOf("emptySet"), 8, XtendHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+		notExpect(model.lastIndexOf("emptySet"), 8, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
 		highlight(model);
 	}
 	public void testStaticExtensionOperationInvocation() throws Exception {
 		String model = "{ 'FOO'.toFirstLower   }";
 		expect(model.lastIndexOf("toFirstLower"), 12, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
-		expect(model.lastIndexOf("toFirstLower"), 12, XtendHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+		expect(model.lastIndexOf("toFirstLower"), 12, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
 		highlight(model);
 	}
 	
@@ -235,7 +236,7 @@ public class Xtend2HighlightingCalculatorTest extends AbstractXtend2UITestCase i
 		addImport("com.google.inject.Inject");
 		addInject("extension StringBuilder");
 		String model = "{ 'Foo'.append   }";
-		expect(model.lastIndexOf("append"), 6, XtendHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+		expect(model.lastIndexOf("append"), 6, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
 		notExpect(model.lastIndexOf("append"), 6, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
 		highlight(model);
 	}
@@ -244,15 +245,15 @@ public class Xtend2HighlightingCalculatorTest extends AbstractXtend2UITestCase i
 		addImport("static extension java.util.Collections.*");
 		String model = "{ newArrayList.shuffle   }";
 		expect(model.lastIndexOf("newArrayList"), 12, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
-		notExpect(model.lastIndexOf("newArrayList"), 12, XtendHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
-		expect(model.lastIndexOf("shuffle"), 7, XtendHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+		notExpect(model.lastIndexOf("newArrayList"), 12, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+		expect(model.lastIndexOf("shuffle"), 7, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
 		expect(model.lastIndexOf("shuffle"), 7, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
 		highlight(model);
 	}
 	
 	public void testAnnotaton() throws Exception {
 		addImport("com.google.inject.Inject");
-		String model = "{} @Inject StringBuilder bar";
+		String model = "{} @Inject extension StringBuilder";
 		expect(model.lastIndexOf("@Inject"), 7, XbaseHighlightingConfiguration.ANNOTATION);
 		highlight(model);
 	}
@@ -261,6 +262,26 @@ public class Xtend2HighlightingCalculatorTest extends AbstractXtend2UITestCase i
 		addImport("com.google.inject.Inject");
 		String model = "{ val bar = typeof(Inject) } ";
 		expect(model.lastIndexOf("Inject"), 6, XbaseHighlightingConfiguration.ANNOTATION);
+		highlight(model);
+	}
+	
+	public void testXtendFieldDeclaration() throws Exception {
+		addImport("com.google.inject.Inject");
+		String model = "{} @Inject StringBuilder bar";
+		expect(model.lastIndexOf("@Inject"), 7, XbaseHighlightingConfiguration.ANNOTATION);
+		expect(model.lastIndexOf("bar"), 3, XbaseHighlightingConfiguration.FIELD);
+		notExpect(model.lastIndexOf("bar"), 3, XbaseHighlightingConfiguration.STATIC_FIELD);
+		highlight(model);
+	}
+	
+	public void testNonStaticFieldAccess() throws Exception {
+		addImport("com.google.inject.Inject");
+		String model = "{} @Inject StringBuilder bar def testFunction() { bar.append('foo') }";
+		expect(model.lastIndexOf("@Inject"), 7, XbaseHighlightingConfiguration.ANNOTATION);
+		expect(model.indexOf("bar"), 3, XbaseHighlightingConfiguration.FIELD);
+		notExpect(model.indexOf("bar"), 3, XbaseHighlightingConfiguration.STATIC_FIELD);
+		expect(model.lastIndexOf("bar"), 3, XbaseHighlightingConfiguration.FIELD);
+		notExpect(model.lastIndexOf("bar"), 3, XbaseHighlightingConfiguration.STATIC_FIELD);
 		highlight(model);
 	}
 	
@@ -304,7 +325,7 @@ public class Xtend2HighlightingCalculatorTest extends AbstractXtend2UITestCase i
 		if(exprectedIds.contains(id[0]))
 			expectedRegions.remove(region, id[0]);
 		Collection<String> notExprectedIds = explicitNotExpectedRegions.get(region);
-		assertFalse("not exptected highlighting as position: " + region + " (" + id[0] + ")", notExprectedIds.contains(id[0]));
+		assertFalse("not exspected highlighting as position: " + region + " (" + id[0] + ")", notExprectedIds.contains(id[0]));
 	}
 	
 }

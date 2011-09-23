@@ -31,6 +31,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingCalculator;
+import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingConfiguration;
 import org.eclipse.xtext.xtend2.richstring.AbstractRichStringPartAcceptor;
 import org.eclipse.xtext.xtend2.richstring.DefaultIndentationHandler;
 import org.eclipse.xtext.xtend2.richstring.RichStringProcessor;
@@ -38,6 +39,7 @@ import org.eclipse.xtext.xtend2.services.Xtend2GrammarAccess;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
 import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
+import org.eclipse.xtext.xtend2.xtend2.XtendField;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendMember;
@@ -75,23 +77,13 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 					XExpression rootExpression = function.getExpression();
 					highlightRichStrings(rootExpression, acceptor);
 				}
-			}
-		}
-		super.doProvideHighlightingFor(resource, acceptor);
-	}
-	
-	@Override
-	protected void highlightFeatureCall(XAbstractFeatureCall featureCall, IHighlightedPositionAcceptor acceptor) {
-		if (featureCall instanceof XMemberFeatureCall){
-			JvmIdentifiableElement feature = featureCall.getFeature();
-			if(feature != null && !feature.eIsProxy() && feature instanceof JvmOperation){
-				if(featureCall.getImplicitReceiver() != null || ((JvmOperation) feature).isStatic()){
-					highlightFeatureCall(featureCall, acceptor, 
-							XtendHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+				if(member.eClass() == Xtend2Package.Literals.XTEND_FIELD){
+					XtendField field = (XtendField) member;
+					highlightXtendField(field,acceptor);
 				}
 			}
 		}
-		super.highlightFeatureCall(featureCall, acceptor);
+		super.doProvideHighlightingFor(resource, acceptor);
 	}
 
 	protected void highlightRichStrings(XExpression expression, IHighlightedPositionAcceptor acceptor) {
@@ -119,6 +111,15 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 		if (leafNode.getGrammarElement() == createKeyword) {
 			acceptor.addPosition(leafNode.getOffset(), leafNode.getLength(),
 					DefaultHighlightingConfiguration.DEFAULT_ID);
+		}
+	}
+	
+
+	protected void highlightXtendField(XtendField field, IHighlightedPositionAcceptor acceptor) {
+		if(field.getName() != null && field.getName().length() > 0){
+			List<INode> nodes = NodeModelUtils.findNodesForFeature(field, field.eClass().getEStructuralFeature(Xtend2Package.Literals.XTEND_FIELD__NAME.getName()));
+			if(nodes.size() > 0)
+				highlightNode(nodes.get(0), XbaseHighlightingConfiguration.FIELD, acceptor);
 		}
 	}
 

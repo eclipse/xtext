@@ -23,8 +23,6 @@ public class XtendHighlightingConfiguration extends XbaseHighlightingConfigurati
 	public static final String INSIGNIFICANT_TEMPLATE_TEXT = "xtend2.insignificant.template.text";
 	public static final String POTENTIAL_LINE_BREAK = "xtend2.potential.line.break";
 	public static final String TEMPLATE_LINE_BREAK = "xtend2.template.line.break";
-	public static final String EXTENSION_METHOD_INVOCATION = "xtend2.extension.method.invacation";
-	public static final String FIELD = "xtend2.field";
 	
 	@Override
 	public void configure(IHighlightingConfigurationAcceptor acceptor) {
@@ -34,8 +32,7 @@ public class XtendHighlightingConfiguration extends XbaseHighlightingConfigurati
 		acceptor.acceptDefaultHighlighting(INSIGNIFICANT_TEMPLATE_TEXT, "Insignificant Template Text", insignificantTemplateTextStyle());
 		acceptor.acceptDefaultHighlighting(POTENTIAL_LINE_BREAK, "Potential Line Break (if line is not empty)", insignificantTemplateTextStyle());
 		acceptor.acceptDefaultHighlighting(TEMPLATE_LINE_BREAK, "Template Line Break", richTextStyle());
-		acceptor.acceptDefaultHighlighting(EXTENSION_METHOD_INVOCATION, "Extension method invocation", extensionMethodInvocation());
-		acceptor.acceptDefaultHighlighting(FIELD, "Field", field());
+
 		
 	}
 	
@@ -54,16 +51,5 @@ public class XtendHighlightingConfiguration extends XbaseHighlightingConfigurati
 		TextStyle textStyle = stringTextStyle().copy();
 		return textStyle;
 	}
-	
-	public TextStyle extensionMethodInvocation(){
-		TextStyle textStyle = defaultTextStyle().copy();
-		textStyle.setColor(new RGB(171, 48, 0));
-		return textStyle;
-	}
-	
-	public TextStyle field(){
-		TextStyle textStyle = defaultTextStyle().copy();
-		textStyle.setColor(new RGB(0, 26, 171));
-		return textStyle;
-	}
+
 }
