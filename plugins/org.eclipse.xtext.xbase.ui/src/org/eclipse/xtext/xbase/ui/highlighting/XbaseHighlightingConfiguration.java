@@ -21,17 +21,22 @@ public class XbaseHighlightingConfiguration extends DefaultHighlightingConfigura
 	
 	public static final String STATIC_METHOD_INVOCATION = "xbase.static.method.invocation";
 	public static final String STATIC_FIELD = "xbase.static.field";
+	public static final String FIELD = "xbase.field";
 	public static final String ANNOTATION = "xbase.annotation";
-	
-	
+	public static final String EXTENSION_METHOD_INVOCATION = "xbase.extension.method.invacation";
+
 	@Override
 	public void configure(IHighlightingConfigurationAcceptor acceptor) {
 		acceptor.acceptDefaultHighlighting(STATIC_METHOD_INVOCATION, "Static method invocation", staticMethodInvocation());
 		acceptor.acceptDefaultHighlighting(STATIC_FIELD, "Static Field", staticField());
+		acceptor.acceptDefaultHighlighting(FIELD, "Field", field());
 		acceptor.acceptDefaultHighlighting(ANNOTATION, "Annotation", annotation());
+		acceptor.acceptDefaultHighlighting(EXTENSION_METHOD_INVOCATION, "Extension method invocation", extensionMethodInvocation());
+	
 		super.configure(acceptor);
 	}
 	
+
 	public TextStyle staticMethodInvocation(){
 		TextStyle textStyle = defaultTextStyle().copy();
 		textStyle.setStyle(SWT.ITALIC);
@@ -46,9 +51,23 @@ public class XbaseHighlightingConfiguration extends DefaultHighlightingConfigura
 		return textStyle;
 	}
 	
+	public TextStyle field(){
+		TextStyle textStyle = defaultTextStyle().copy();
+		textStyle.setColor(new RGB(0, 26, 171));
+		return textStyle;
+	}
+	
 	public TextStyle annotation(){
 		TextStyle textStyle = defaultTextStyle().copy();
 		textStyle.setColor(new RGB(100,100,100));
 		return textStyle;
 	}
+	
+	public TextStyle extensionMethodInvocation(){
+		TextStyle textStyle = defaultTextStyle().copy();
+		textStyle.setColor(new RGB(171, 48, 0));
+		return textStyle;
+	}
+	
+
 }
