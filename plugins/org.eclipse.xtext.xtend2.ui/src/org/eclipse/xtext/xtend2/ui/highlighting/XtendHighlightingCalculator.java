@@ -117,7 +117,7 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 
 	protected void highlightXtendField(XtendField field, IHighlightedPositionAcceptor acceptor) {
 		if(field.getName() != null && field.getName().length() > 0){
-			List<INode> nodes = NodeModelUtils.findNodesForFeature(field, field.eClass().getEStructuralFeature(Xtend2Package.Literals.XTEND_FIELD__NAME.getName()));
+			List<INode> nodes = NodeModelUtils.findNodesForFeature(field, Xtend2Package.Literals.XTEND_FIELD__NAME);
 			if(nodes.size() > 0)
 				highlightNode(nodes.get(0), XbaseHighlightingConfiguration.FIELD, acceptor);
 		}
