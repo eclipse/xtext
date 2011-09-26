@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.jvmmodel;
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Maps.*;
 import static com.google.common.collect.Sets.*;
-import static java.util.Collections.*;
 
 import java.util.List;
 import java.util.Map;
