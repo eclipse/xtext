@@ -71,6 +71,9 @@ public class OccurrenceMarker {
 		if (selection instanceof ITextSelection) {
 			markOccurrenceJob.cancel();
 			markOccurrenceJob.initialize(editor, (ITextSelection) selection, isMarkOccurrences);
+			if (!markOccurrenceJob.isSystem())
+				markOccurrenceJob.setSystem(true);
+			markOccurrenceJob.setPriority(Job.DECORATE);
 			markOccurrenceJob.schedule();
 		}
 	}
