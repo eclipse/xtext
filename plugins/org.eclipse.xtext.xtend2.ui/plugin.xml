@@ -240,7 +240,7 @@
             category="org.eclipse.xtext.xtend2.Xtend2"
             class="org.eclipse.xtext.xtend2.ui.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
             id="Xtend.builder"
-            name="Builder">
+            name="Building">
             <keywordReference id="org.eclipse.xtext.xtend2.ui.keyword_Xtend2"/>
         </page>
     </extension>
