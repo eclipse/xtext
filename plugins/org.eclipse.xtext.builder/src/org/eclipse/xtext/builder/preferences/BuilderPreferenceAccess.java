@@ -9,6 +9,7 @@ package org.eclipse.xtext.builder.preferences;
 
 import static org.eclipse.xtext.builder.EclipseOutputConfigurationProvider.*;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
@@ -20,6 +21,7 @@ import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
 import org.eclipse.xtext.ui.editor.preferences.PreferenceConstants;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Michael Clay - Initial contribution and API
@@ -87,24 +89,17 @@ public class BuilderPreferenceAccess {
 	}
 
 	public static class ChangeListener implements IPropertyChangeListener {
-		private DerivedResourceCleanerJob derivedResourceCleanerJob;
-
-		public DerivedResourceCleanerJob getDerivedResourceCleanerJob() {
-			return derivedResourceCleanerJob;
-		}
-
+		
 		@Inject
-		public void setDerivedResourceCleanerJob(DerivedResourceCleanerJob derivedResourceCleanerJob) {
-			this.derivedResourceCleanerJob = derivedResourceCleanerJob;
-			this.derivedResourceCleanerJob.setUser(true);
-		}
+		private Provider<DerivedResourceCleanerJob> cleanerProvider;
 
 		public void propertyChange(PropertyChangeEvent event) {
 			if (event.getProperty().matches("^"+OUTPUT_PREFERENCE_TAG+"\\.\\w+\\."+OUTPUT_DIRECTORY+"$")) {
-				derivedResourceCleanerJob.cancel();
 				String oldValue = (String) event.getOldValue();
-				derivedResourceCleanerJob.initialize(null, oldValue);
-				derivedResourceCleanerJob.schedule();
+				DerivedResourceCleanerJob cleaner = cleanerProvider.get();
+				cleaner.setUser(true);
+				cleaner.initialize(null, oldValue);
+				cleaner.schedule();
 			}
 		}
 	}

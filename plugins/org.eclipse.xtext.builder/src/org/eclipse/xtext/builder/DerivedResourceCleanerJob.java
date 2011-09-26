@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -16,6 +18,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.xtext.builder.internal.Activator;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 
@@ -24,6 +27,7 @@ import com.google.inject.Inject;
 /**
  * @author Michael Clay - Initial contribution and API
  * @since 2.1
+ * @noextend This class is not intended to be subclassed by clients.
  */
 public class DerivedResourceCleanerJob extends Job {
 	public static final Object DERIVED_RESOURCE_CLEANER_JOB_FAMILY = new Object();
@@ -60,23 +64,38 @@ public class DerivedResourceCleanerJob extends Job {
 			return Status.CANCEL_STATUS;
 		}
 		try {
-			if (projectToClean == null) {
-				for (IProject project : ResourcesPlugin.getWorkspace().getRoot().getProjects()) {
-					IStatus status = cleanUpDerivedResources(monitor, project);
-					if (status != Status.OK_STATUS) {
-						return status;
+			new WorkspaceModifyOperation() {
+				@Override
+				protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException,
+						InterruptedException {
+					if (projectToClean == null) {
+						for (IProject project : ResourcesPlugin.getWorkspace().getRoot().getProjects()) {
+							IStatus status = cleanUpDerivedResources(monitor, project);
+							if (status != Status.OK_STATUS) {
+								throw new CoreException(status);
+							}
+						}
+					} else {
+						final IStatus status = cleanUpDerivedResources(monitor, projectToClean);
+						if (status != Status.OK_STATUS) {
+							throw new CoreException(status);
+						}
 					}
 				}
+			}.run(monitor);
+		} catch (InvocationTargetException e) {
+			if (e.getTargetException() instanceof CoreException) {
+				return ((CoreException)e.getTargetException()).getStatus();
 			} else {
-				return cleanUpDerivedResources(monitor, projectToClean);
+				Activator.log(e);
 			}
-		} catch (CoreException coreException) {
-			Activator.log(coreException);
+		} catch (InterruptedException e) {
+			Activator.log(e);
 		}
 		return Status.OK_STATUS;
 	}
 
-	private IStatus cleanUpDerivedResources(IProgressMonitor monitor, IProject project) throws CoreException {
+	protected IStatus cleanUpDerivedResources(IProgressMonitor monitor, IProject project) throws CoreException {
 		if (monitor.isCanceled()) {
 			return Status.CANCEL_STATUS;
 		}
@@ -84,7 +103,7 @@ public class DerivedResourceCleanerJob extends Job {
 			for (IFile derivedFile : derivedResourceMarkers.findDerivedResources(project.getFolder(folderNameToClean),
 					null)) {
 				derivedFile.delete(true, monitor);
-				deleteEmptyParent(monitor, derivedFile.getParent());
+//				deleteEmptyParent(monitor, derivedFile.getParent());
 				if (monitor.isCanceled()) {
 					return Status.CANCEL_STATUS;
 				}
@@ -94,10 +113,11 @@ public class DerivedResourceCleanerJob extends Job {
 	}
 
 	protected void deleteEmptyParent(IProgressMonitor monitor, IContainer container) throws CoreException {
-		if (container.members().length == 0 && !(container.getParent() instanceof IProject)) {
-			deleteEmptyParent(monitor, container.getParent());
+		final IContainer parent = container.getParent();
+		if (container.members().length == 0) {
+			container.delete(true, monitor);
+			deleteEmptyParent(monitor, parent);
 		}
-		container.delete(true, monitor);
 	}
 
 	protected boolean shouldBeProcessed(IProject project) {
