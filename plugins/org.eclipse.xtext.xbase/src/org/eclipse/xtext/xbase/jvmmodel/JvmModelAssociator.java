@@ -58,7 +58,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 	@Inject
 	private IJvmModelInferrer inferrer;
 	
-	static class Adapter extends AdapterImpl {
+	protected static class Adapter extends AdapterImpl {
 		public ListMultimap<EObject, EObject> sourceToTargetMap = LinkedListMultimap.create();
 		public Map<EObject, JvmIdentifiableElement> logicalContainerMap = newHashMap();
 		

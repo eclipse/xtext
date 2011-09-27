@@ -14,6 +14,9 @@ import org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelReferenceFilter;
 
 import com.google.common.base.Predicate;
 
+/**
+ * @author Jan Koehnlein - Initial contribution and API
+ */
 @SuppressWarnings("restriction")
 public class JvmModelFindRefsQueryDataFactory extends RefactoringReferenceQueryDataFactory {
 	
