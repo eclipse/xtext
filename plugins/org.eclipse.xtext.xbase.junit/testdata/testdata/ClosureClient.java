@@ -34,6 +34,18 @@ public class ClosureClient {
 		return fun.apply(p1);
 	}
 	
+	public <P,T> T invoke1WithExtends(Functions.Function1<P, ? extends T> fun, P p1) {
+		return fun.apply(p1);
+	}
+	
+	public <P,T> T invoke1WithSuper(Functions.Function1<? super P,T> fun, P p1) {
+		return fun.apply(p1);
+	}
+	
+	public <P,T> T invoke1WithSuperAndExtends(Functions.Function1<? super P,? extends T> fun, P p1) {
+		return fun.apply(p1);
+	}
+	
 	public <P1,P2,T> T invoke2(Functions.Function2<P1, P2, T> fun, P1 p1, P2 p2) {
 		return fun.apply(p1, p2);
 	}

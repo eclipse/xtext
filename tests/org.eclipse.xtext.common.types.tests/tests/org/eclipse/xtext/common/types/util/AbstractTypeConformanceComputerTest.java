@@ -38,7 +38,6 @@ import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.DeclaredTypeFactory;
 import org.eclipse.xtext.common.types.testSetups.RawIterable;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -84,9 +83,6 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 				assertTrue(delegate.isConformant(left, (JvmTypeReference) EcoreUtil.copy(left), false));
 				assertTrue(delegate.isConformant(right, (JvmTypeReference) EcoreUtil.copy(right), true));
 				assertTrue(delegate.isConformant(right, (JvmTypeReference) EcoreUtil.copy(right), false));
-//				for(int i = 0; i < 10000; i++) {
-//					delegate.isConformant(left, right, ignoreGenerics);
-//				}
 				return delegate.isConformant(left, right, ignoreGenerics);
 			}
 			
@@ -714,7 +710,7 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 	
 	public void testCommonSuperType_9() throws Exception {
 		assertCommonSuperType(
-				"java.util.Collection",
+				"java.util.Collection", // one rawtype given - expect raw type
 				ref(Set.class, ref(String.class)),
 				ref(List.class));
 	}
@@ -899,6 +895,13 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 				"java.io.Serializable[]",
 				array(ref(Number.class),2),
 				array(ref(Number.class),1));
+	}
+	
+	public void testCommonSuperType_35() throws Exception {
+		assertCommonSuperType(
+				"java.lang.Comparable<? extends java.lang.Object>",
+				ref(String.class),
+				ref(int.class));
 	}
 	
 	public void testBug343100_01() throws Exception {
