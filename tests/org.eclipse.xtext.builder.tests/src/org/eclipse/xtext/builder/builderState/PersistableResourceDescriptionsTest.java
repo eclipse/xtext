@@ -30,7 +30,7 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.containers.DelegatingIAllContainerAdapter;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
-import org.eclipse.xtext.ui.shared.SharedStateModule;
+import org.eclipse.xtext.ui.shared.internal.SharedModule;
 import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.common.base.Function;
@@ -44,6 +44,7 @@ import com.google.inject.Injector;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 	private static final String FILE_EXT = ".buildertestlanguage";
 	private Injector builderInjector;
@@ -56,7 +57,7 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 	public void setUp() throws Exception {
 		super.setUp();
 		with(new BuilderTestLanguageStandaloneSetup());
-		SharedStateModule module = new SharedStateModule();
+		SharedModule module = new SharedModule();
 		builderInjector = Guice.createInjector(module);
 		builderState = builderInjector.getInstance(ClusteringBuilderState.class);
 		uriConverter = new ExtensibleURIConverterImpl() {

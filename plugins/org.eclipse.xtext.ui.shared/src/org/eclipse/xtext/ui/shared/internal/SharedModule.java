@@ -20,6 +20,8 @@ import org.eclipse.xtext.builder.clustering.ClusteringBuilderState;
 import org.eclipse.xtext.builder.impl.DirtyStateAwareResourceDescriptions;
 import org.eclipse.xtext.builder.impl.ProjectOpenedOrClosedListener;
 import org.eclipse.xtext.builder.impl.XtextBuilder;
+import org.eclipse.xtext.builder.resourceloader.IResourceLoader;
+import org.eclipse.xtext.builder.resourceloader.ResourceLoaderProviders;
 import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -29,8 +31,8 @@ import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
 import org.eclipse.xtext.ui.notification.StateChangeEventBroker;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
-import org.eclipse.xtext.ui.resource.Storage2UriMapperImpl;
 import org.eclipse.xtext.ui.resource.SimpleResourceSetProvider;
+import org.eclipse.xtext.ui.resource.Storage2UriMapperImpl;
 import org.eclipse.xtext.ui.shared.JdtHelper;
 import org.eclipse.xtext.ui.util.IJdtHelper;
 
@@ -43,7 +45,7 @@ import com.google.inject.name.Names;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class SharedModule extends AbstractModule {
-	
+
 	@Override
 	protected void configure() {
 		bind(IBuilderState.class).to(ClusteringBuilderState.class).in(Scopes.SINGLETON);
@@ -52,14 +54,14 @@ public class SharedModule extends AbstractModule {
 		bind(IResourceSetProvider.class).to(SimpleResourceSetProvider.class);
 		bind(IExtensionRegistry.class).toInstance(Platform.getExtensionRegistry());
 		bind(IResourceChangeListener.class).annotatedWith(Names.named(ProjectOpenedOrClosedListener.class.getName())).to(ProjectOpenedOrClosedListener.class);
-		
+
 		bind(IExternalContentSupport.IExternalContentProvider.class).to(IDirtyStateManager.class).in(Scopes.SINGLETON);
 		bind(IDirtyStateManager.class).to(DirtyStateManager.class).in(Scopes.SINGLETON);
 		bind(IStateChangeEventBroker.class).to(StateChangeEventBroker.class).in(Scopes.SINGLETON);
 
 		bind(IncrementalProjectBuilder.class).to(XtextBuilder.class);
 		bind(IStorage2UriMapper.class).to(Storage2UriMapperImpl.class).in(Scopes.SINGLETON);
-		
+
 		bind(IWorkbench.class).toProvider(new Provider<IWorkbench>() {
 			public IWorkbench get() {
 				if (PlatformUI.isWorkbenchRunning())
@@ -67,14 +69,35 @@ public class SharedModule extends AbstractModule {
 				return null;
 			}
 		});
-		
+
 		bind(IWorkspace.class).toProvider(new Provider<IWorkspace>() {
 			public IWorkspace get() {
 				return ResourcesPlugin.getWorkspace();
 			}
 		});
-		
+
 		bind(IJdtHelper.class).to(JdtHelper.class).asEagerSingleton();
+
+		boolean parallel = true;
+		if (parallel) {
+			bind(IResourceLoader.class).toProvider(ResourceLoaderProviders.getParallelLoader());
+
+			bind(IResourceLoader.class).annotatedWith(
+					Names.named(ClusteringBuilderState.RESOURCELOADER_GLOBAL_INDEX)).toProvider(
+					ResourceLoaderProviders.getParallelLoader());
+
+			bind(IResourceLoader.class).annotatedWith(Names.named(ClusteringBuilderState.RESOURCELOADER_CROSS_LINKING))
+					.toProvider(ResourceLoaderProviders.getParallelLoader());
+		} else {
+			bind(IResourceLoader.class).toProvider(ResourceLoaderProviders.getSerialLoader());
+
+			bind(IResourceLoader.class).annotatedWith(
+					Names.named(ClusteringBuilderState.RESOURCELOADER_GLOBAL_INDEX)).toProvider(
+					ResourceLoaderProviders.getSerialLoader());
+
+			bind(IResourceLoader.class).annotatedWith(Names.named(ClusteringBuilderState.RESOURCELOADER_CROSS_LINKING))
+					.toProvider(ResourceLoaderProviders.getSerialLoader());
+		}
 	}
-	
+
 }
