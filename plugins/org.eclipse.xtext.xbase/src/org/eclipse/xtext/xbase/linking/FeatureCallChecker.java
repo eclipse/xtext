@@ -28,7 +28,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.IRawTypeHelper;
-import org.eclipse.xtext.common.types.util.TypeArgumentContext;
+import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
@@ -274,7 +274,7 @@ public class FeatureCallChecker {
 		return null;
 	}
 
-	protected boolean areArgumentTypesValid(JvmExecutable exectuable, List<XExpression> arguments, TypeArgumentContext typeArgumentContext) {
+	protected boolean areArgumentTypesValid(JvmExecutable exectuable, List<XExpression> arguments, ITypeArgumentContext typeArgumentContext) {
 		int numberOfParameters = exectuable.getParameters().size();
 		int parametersToCheck = exectuable.isVarArgs() ? numberOfParameters - 1 : numberOfParameters;
 		for (int i = 0; i < parametersToCheck; i++) {

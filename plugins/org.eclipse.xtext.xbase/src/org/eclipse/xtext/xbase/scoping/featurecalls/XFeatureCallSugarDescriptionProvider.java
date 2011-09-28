@@ -12,7 +12,7 @@ import java.beans.Introspector;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.TypeArgumentContext;
+import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.Strings;
@@ -41,7 +41,7 @@ public class XFeatureCallSugarDescriptionProvider extends DefaultJvmFeatureDescr
 	}
 
 	@Override
-	protected void doCollectDescriptions(final String name, IFeaturesForTypeProvider featureProvider, JvmTypeReference typeReference, TypeArgumentContext context,
+	protected void doCollectDescriptions(final String name, IFeaturesForTypeProvider featureProvider, JvmTypeReference typeReference, ITypeArgumentContext context,
 			Iterable<JvmTypeReference> hierarchy, final IAcceptor<JvmFeatureDescription> acceptor) {
 		IAcceptor<JvmFeatureDescription> myAcceptor = new IAcceptor<JvmFeatureDescription>() {
 			public void accept(JvmFeatureDescription t) {
@@ -63,7 +63,7 @@ public class XFeatureCallSugarDescriptionProvider extends DefaultJvmFeatureDescr
 	}
 	
 	@Override
-	public void addFeatureDescriptions(JvmFeature feature, final TypeArgumentContext context,
+	public void addFeatureDescriptions(JvmFeature feature, final ITypeArgumentContext context,
 			IAcceptor<JvmFeatureDescription> acceptor) {
 		if (feature instanceof JvmOperation) {
 			final JvmOperation op = (JvmOperation) feature;
