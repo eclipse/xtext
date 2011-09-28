@@ -338,6 +338,16 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 				"}");
 		helper.assertNoErrors(function);
 	}
+	
+//	public void testBug343096() throws Exception {
+//		XtendFunction function = function(
+//				"def <T> test() {\n" + 
+//				"  [T t|switch t {\n" + 
+//				"    case t:test\n" + 
+//				"  }]\n" + 
+//				"}");
+//		helper.assertNoErrors(function);
+//	}
 
 	protected void assertConformanceError(String body, EClass objectType, String... messageParts)
 			throws Exception {

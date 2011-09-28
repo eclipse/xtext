@@ -1730,6 +1730,25 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"}", "castNull");
 	}
 	
+//	public void testBug343096_01() throws Exception {
+//		invokeAndExpect2(
+//				null, // a plain compile should be sufficient
+//				"def <T> bug343096() {\n" + 
+//				"  [T t|switch t {\n" + 
+//				"    case t : bug343096\n" + 
+//				"  }]" + 
+//				"}", "bug343096");
+//	}
+	
+//	public void testBug343096_02() throws Exception {
+//		invokeAndExpect2(
+//				Functions.Function1.class.getCanonicalName(),
+//				"def <T> bug343096() {\n" + 
+//				"  [T t|switch t {\n" + 
+//				"    case t : bug343096\n" + 
+//				"  }].getClass.canonicalName" + 
+//				"}", "bug343096");
+//	}
 	
 	public void testBug345373_01() throws Exception {
 		invokeAndExpect3(
