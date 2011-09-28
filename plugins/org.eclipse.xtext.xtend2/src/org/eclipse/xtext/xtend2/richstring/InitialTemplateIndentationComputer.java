@@ -50,7 +50,7 @@ public class InitialTemplateIndentationComputer extends Xtend2Switch<String> {
 				} else if (!(elements.get(nextIndex) instanceof RichStringLiteral)) {
 					elementResult = getLeadingWhitespace(literal.getValue(), literal);
 				} else {
-					StringBuilder run = new StringBuilder(literal.getValue());
+					StringBuilder run = new StringBuilder(Strings.emptyIfNull(literal.getValue()));
 					RichStringLiteral next = null;
 					do {
 						next = (RichStringLiteral) elements.get(nextIndex);
