@@ -7,16 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase;
 
-import org.eclipse.xtext.xtype.XtypeFactory;
 
 
 /**
  * Use this class to register components to be used within the IDE.
  */
 public class XbaseRuntimeModule extends AbstractXbaseRuntimeModule {
-	
-	public XtypeFactory bindXtypeFactoryToInstance() {
-		return XtypeFactory.eINSTANCE;
-	}
 	
 }

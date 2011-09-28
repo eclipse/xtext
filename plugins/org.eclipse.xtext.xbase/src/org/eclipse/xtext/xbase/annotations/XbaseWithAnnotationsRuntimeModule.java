@@ -11,7 +11,6 @@ import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xbase.annotations.scoping.XbaseWithAnnotationsScopeProvider;
 import org.eclipse.xtext.xbase.annotations.typing.XbaseWithAnnotationsTypeProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
-import org.eclipse.xtext.xtype.XtypeFactory;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
@@ -28,7 +27,4 @@ public class XbaseWithAnnotationsRuntimeModule extends org.eclipse.xtext.xbase.a
 		return XbaseWithAnnotationsScopeProvider.class;
 	}
 	
-	public XtypeFactory bindXtypeFactoryToInstance() {
-		return XtypeFactory.eINSTANCE;
-	}
 }

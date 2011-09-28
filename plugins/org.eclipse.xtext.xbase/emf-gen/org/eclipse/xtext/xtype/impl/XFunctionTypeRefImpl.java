@@ -38,6 +38,7 @@ import org.eclipse.xtext.xtype.XtypePackage;
  *   <li>{@link org.eclipse.xtext.xtype.impl.XFunctionTypeRefImpl#getParamTypes <em>Param Types</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtype.impl.XFunctionTypeRefImpl#getReturnType <em>Return Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtype.impl.XFunctionTypeRefImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtype.impl.XFunctionTypeRefImpl#isInstanceContext <em>Instance Context</em>}</li>
  * </ul>
  * </p>
  *
@@ -74,6 +75,26 @@ public class XFunctionTypeRefImpl extends JvmSpecializedTypeReferenceImplCustom 
 	 * @ordered
 	 */
 	protected JvmType type;
+
+	/**
+	 * The default value of the '{@link #isInstanceContext() <em>Instance Context</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isInstanceContext()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean INSTANCE_CONTEXT_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isInstanceContext() <em>Instance Context</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isInstanceContext()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean instanceContext = INSTANCE_CONTEXT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -206,6 +227,29 @@ public class XFunctionTypeRefImpl extends JvmSpecializedTypeReferenceImplCustom 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isInstanceContext()
+	{
+		return instanceContext;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setInstanceContext(boolean newInstanceContext)
+	{
+		boolean oldInstanceContext = instanceContext;
+		instanceContext = newInstanceContext;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtypePackage.XFUNCTION_TYPE_REF__INSTANCE_CONTEXT, oldInstanceContext, instanceContext));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -236,6 +280,8 @@ public class XFunctionTypeRefImpl extends JvmSpecializedTypeReferenceImplCustom 
 			case XtypePackage.XFUNCTION_TYPE_REF__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
+			case XtypePackage.XFUNCTION_TYPE_REF__INSTANCE_CONTEXT:
+				return isInstanceContext();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -261,6 +307,9 @@ public class XFunctionTypeRefImpl extends JvmSpecializedTypeReferenceImplCustom 
 			case XtypePackage.XFUNCTION_TYPE_REF__TYPE:
 				setType((JvmType)newValue);
 				return;
+			case XtypePackage.XFUNCTION_TYPE_REF__INSTANCE_CONTEXT:
+				setInstanceContext((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -284,6 +333,9 @@ public class XFunctionTypeRefImpl extends JvmSpecializedTypeReferenceImplCustom 
 			case XtypePackage.XFUNCTION_TYPE_REF__TYPE:
 				setType((JvmType)null);
 				return;
+			case XtypePackage.XFUNCTION_TYPE_REF__INSTANCE_CONTEXT:
+				setInstanceContext(INSTANCE_CONTEXT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -304,8 +356,27 @@ public class XFunctionTypeRefImpl extends JvmSpecializedTypeReferenceImplCustom 
 				return returnType != null;
 			case XtypePackage.XFUNCTION_TYPE_REF__TYPE:
 				return type != null;
+			case XtypePackage.XFUNCTION_TYPE_REF__INSTANCE_CONTEXT:
+				return instanceContext != INSTANCE_CONTEXT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString()
+	{
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (instanceContext: ");
+		result.append(instanceContext);
+		result.append(')');
+		return result.toString();
 	}
 
 } //XFunctionTypeRefImpl

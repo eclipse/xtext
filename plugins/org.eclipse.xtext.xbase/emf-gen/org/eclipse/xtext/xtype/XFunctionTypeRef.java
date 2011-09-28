@@ -22,6 +22,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  *   <li>{@link org.eclipse.xtext.xtype.XFunctionTypeRef#getParamTypes <em>Param Types</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtype.XFunctionTypeRef#getReturnType <em>Return Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtype.XFunctionTypeRef#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtype.XFunctionTypeRef#isInstanceContext <em>Instance Context</em>}</li>
  * </ul>
  * </p>
  *
@@ -98,5 +99,31 @@ public interface XFunctionTypeRef extends JvmSpecializedTypeReference
 	 * @generated
 	 */
 	void setType(JvmType value);
+
+	/**
+	 * Returns the value of the '<em><b>Instance Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Instance Context</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Instance Context</em>' attribute.
+	 * @see #setInstanceContext(boolean)
+	 * @see org.eclipse.xtext.xtype.XtypePackage#getXFunctionTypeRef_InstanceContext()
+	 * @model
+	 * @generated
+	 */
+	boolean isInstanceContext();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xtype.XFunctionTypeRef#isInstanceContext <em>Instance Context</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Instance Context</em>' attribute.
+	 * @see #isInstanceContext()
+	 * @generated
+	 */
+	void setInstanceContext(boolean value);
 
 } // XFunctionTypeRef

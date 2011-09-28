@@ -109,13 +109,22 @@ public interface XtypePackage extends EPackage
 	int XFUNCTION_TYPE_REF__TYPE = TypesPackage.JVM_SPECIALIZED_TYPE_REFERENCE_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Instance Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XFUNCTION_TYPE_REF__INSTANCE_CONTEXT = TypesPackage.JVM_SPECIALIZED_TYPE_REFERENCE_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>XFunction Type Ref</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XFUNCTION_TYPE_REF_FEATURE_COUNT = TypesPackage.JVM_SPECIALIZED_TYPE_REFERENCE_FEATURE_COUNT + 3;
+	int XFUNCTION_TYPE_REF_FEATURE_COUNT = TypesPackage.JVM_SPECIALIZED_TYPE_REFERENCE_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImpl <em>XComputed Type Reference</em>}' class.
@@ -209,6 +218,17 @@ public interface XtypePackage extends EPackage
 	EReference getXFunctionTypeRef_Type();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtype.XFunctionTypeRef#isInstanceContext <em>Instance Context</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Instance Context</em>'.
+	 * @see org.eclipse.xtext.xtype.XFunctionTypeRef#isInstanceContext()
+	 * @see #getXFunctionTypeRef()
+	 * @generated
+	 */
+	EAttribute getXFunctionTypeRef_InstanceContext();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xtype.XComputedTypeReference <em>XComputed Type Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -296,6 +316,14 @@ public interface XtypePackage extends EPackage
 		 * @generated
 		 */
 		EReference XFUNCTION_TYPE_REF__TYPE = eINSTANCE.getXFunctionTypeRef_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Instance Context</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XFUNCTION_TYPE_REF__INSTANCE_CONTEXT = eINSTANCE.getXFunctionTypeRef_InstanceContext();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImpl <em>XComputed Type Reference</em>}' class.
