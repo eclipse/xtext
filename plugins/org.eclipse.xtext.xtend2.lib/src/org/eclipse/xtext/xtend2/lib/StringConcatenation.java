@@ -227,7 +227,6 @@ public class StringConcatenation implements CharSequence {
 	 * something besides whitespace.
 	 */
 	public void newLineIfNotEmpty() {
-		int trimmedLength = 0;
 		for (int i = segments.size() - 1; i >= 0; i--) {
 			String segment = segments.get(i);
 			if (lineDelimiter.equals(segment)) {
@@ -241,7 +240,6 @@ public class StringConcatenation implements CharSequence {
 					return;
 				}
 			}
-			trimmedLength += segment.length();
 		}
 		segments.clear();
 		cachedToString = null;
