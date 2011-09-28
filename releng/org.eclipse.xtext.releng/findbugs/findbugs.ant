@@ -1,0 +1,16 @@
+<project>
+	<taskdef name="findbugs" classname="edu.umd.cs.findbugs.anttask.FindBugsTask" />
+
+	<!--	<property name="findbugs.home" value="/home/data/users/dhubner/shared/findbugs-1.3.9/lib" />-->
+	<property name="findbugs.home" value="/Users/huebner/Downloads/findbugs-1.3.9/lib" />
+	<property name="sourcePath" value="${basedir}/../../plugins/**" />
+	<property name="classLocation" value="/Users/huebner/Downloads/final2/org/eclipse/xtext" />
+	<property name="effort" value="min" />
+
+	<target name="findbugs">
+		<findbugs home="${findbugs.home}" output="xml" outputFile="findbugs.xml" jvmargs="-Xmx1024m" effort="${effort}" timeout="1800000">
+			<sourcePath path="${sourcePath}" />
+			<class location="${classLocation}" />
+		</findbugs>
+	</target>
+</project>
