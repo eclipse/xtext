@@ -322,17 +322,17 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 		assertNoExceptions(fun);
 	}
 	
-//	public void testBug343096() throws Exception {
-//		XtendFile file = file(
-//				"class Bug343096 {\n" +
-//				"    <T> test() {\n" + 
-//				"        [T t|switch t {\n" + 
-//				"            case t:test\n" + 
-//				"        }]\n" + 
-//				"    }" +
-//				"}");
-//		assertNoExceptions(file);
-//	}
+	public void testBug343096() throws Exception {
+		XtendFile file = file(
+				"class Bug343096 {\n" +
+				"    <T> test() {\n" + 
+				"        [T t|switch t {\n" + 
+				"            case t:test\n" + 
+				"        }]\n" + 
+				"    }" +
+				"}");
+		assertNoExceptions(file);
+	}
 	
 	protected void assertNoExceptions(EObject object) {
 		Resource resource = object.eResource();
