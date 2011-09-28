@@ -1730,6 +1730,31 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"}", "castNull");
 	}
 	
+	
+	public void testBug345373_01() throws Exception {
+		invokeAndExpect3(
+				"string", 
+				"def String rawListGet(java.util.List elements) {\n" + 
+				"  if (elements.get(0) instanceof String) {\n" + 
+				"    'string'\n" + 
+				"  } else {" +
+				"    'no string'" +
+				"  }" +
+				"}", "rawListGet", new Class[] { List.class }, Collections.singletonList("String"));
+	}
+	
+	public void testBug345373_02() throws Exception {
+		invokeAndExpect3(
+				"no string", 
+				"def String rawListGet(java.util.List elements) {\n" + 
+				"  if (elements.get(0) instanceof String) {\n" + 
+				"    'string'\n" + 
+				"  } else {" +
+				"    'no string'" +
+				"  }" +
+				"}", "rawListGet", new Class[] { List.class }, Collections.singletonList(Integer.valueOf(1)));
+	}
+	
 	@Inject
 	private EclipseRuntimeDependentJavaCompiler javaCompiler;
 
