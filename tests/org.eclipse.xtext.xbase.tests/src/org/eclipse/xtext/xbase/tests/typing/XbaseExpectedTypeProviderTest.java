@@ -57,10 +57,28 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 		assertExpected("java.lang.Iterable<? extends java.lang.CharSequence>", fc.getRightOperand());
 	}
 	
-	public void testTypeParamInference_01() throws Exception {
+	public void testTypeParamInference_01_a() throws Exception {
 		XMemberFeatureCall fc = (XMemberFeatureCall) expression("new testdata.ClosureClient().invoke1([e|e],'foo')");
 		final XExpression closure = fc.getMemberCallArguments().get(0);
 		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String,java.lang.String>", closure);
+	}
+	
+	public void testTypeParamInference_01_b() throws Exception {
+		XMemberFeatureCall fc = (XMemberFeatureCall) expression("new testdata.ClosureClient().invoke1WithExtends([e|e],'foo')");
+		final XExpression closure = fc.getMemberCallArguments().get(0);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String,? extends java.lang.String>", closure);
+	}
+	
+	public void testTypeParamInference_01_c() throws Exception {
+		XMemberFeatureCall fc = (XMemberFeatureCall) expression("new testdata.ClosureClient().invoke1WithSuper([e|e],'foo')");
+		final XExpression closure = fc.getMemberCallArguments().get(0);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<? extends java.lang.Object & super java.lang.String,java.lang.String>", closure);
+	}
+	
+	public void testTypeParamInference_01_d() throws Exception {
+		XMemberFeatureCall fc = (XMemberFeatureCall) expression("new testdata.ClosureClient().invoke1WithSuperAndExtends([e|e],'foo')");
+		final XExpression closure = fc.getMemberCallArguments().get(0);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<? extends java.lang.Object & super java.lang.String,? extends java.lang.String>", closure);
 	}
 	
 	public void testTypeParamInference_02() throws Exception {
@@ -72,7 +90,8 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 	public void testTypeParamInference_03() throws Exception {
 		XMemberFeatureCall fc = (XMemberFeatureCall) expression("new testdata.ClosureClient().invoke1([e|null],'foo')");
 		final XExpression closure = fc.getMemberCallArguments().get(0);
-		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String,null>", closure);
+//		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String,null>", closure);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String,T>", closure);
 	}
 	
 	public void testTypeParamInference_04() throws Exception {
@@ -107,7 +126,8 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 		XBlockExpression block = (XBlockExpression) expression("{ var this = new testdata.ClosureClient() invoke1([e|null],'foo') }");
 		XFeatureCall fc = (XFeatureCall) block.getExpressions().get(1);
 		final XExpression closure = fc.getFeatureCallArguments().get(0);
-		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String,null>", closure);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String,T>", closure);
+//		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String,null>", closure);
 	}
 	
 	public void testTypeParamInference_09() throws Exception {
@@ -236,7 +256,7 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 	
 	public void testCastedExpression() throws Exception {
 		XCastedExpression expression = (XCastedExpression) expression("null as String");
-		assertExpected("java.lang.String", expression.getTarget());
+		assertExpected(null, expression.getTarget());
 	}
 
 	protected void assertExpected(String expectedExpectedType, XExpression obj) {

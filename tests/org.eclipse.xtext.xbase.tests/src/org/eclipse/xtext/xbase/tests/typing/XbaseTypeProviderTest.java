@@ -28,7 +28,9 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 		XExpression expression = expression("newArrayList('foo','bar').forEach [] ", true);
 		XExpression closure = ((XMemberFeatureCall)expression).getMemberCallArguments().get(0);
 		JvmTypeReference type = typeProvider.getType(closure);
-		//TODO wrong expectation! we should expect (String)=>void
+		//TODO wrong type? Should we have the type (String)=>Void?
+		// however, we should have something like Procedures.Procedure0 .. Procedure6 and
+		// #forEach should take Procedure1 as a parameter instead of Function1
 		assertEquals("(String)=>Object", type.getSimpleName());
 		//TODO this due to the hack in the type provider's caching strategy and should be fixed
 //		assertEquals("Function1<String,Void>", type.getSimpleName());
@@ -153,6 +155,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testFeatureCall_05() throws Exception {
+//		Lists.newArrayList(1l, 1);
 		assertResolvedType("java.util.List<java.lang.Number>", "new testdata.ClassWithVarArgs().toNumberList()");
 		assertResolvedType("java.util.List<java.lang.Integer>", "new testdata.ClassWithVarArgs().toNumberList(0)");
 		assertResolvedType("java.util.List<java.lang.Integer>", "new testdata.ClassWithVarArgs().toNumberList(0, 1)");
@@ -160,6 +163,9 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testFeatureCall_06() throws Exception {
+//		List<String> list = null;
+//		Functions.Function1<String, String> fun = null;
+//		ListExtensions.map(list, fun);
 		assertResolvedType("java.util.List<java.lang.String>", "newArrayList('').map(s|s)");
 	}
 	

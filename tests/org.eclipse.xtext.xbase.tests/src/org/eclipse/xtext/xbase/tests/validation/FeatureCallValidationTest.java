@@ -173,7 +173,32 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testOperationFeatureCall_10() throws Exception {
-		XExpression expression = expression("{ var Iterable<String> x = newArrayList('a,b'.split(',')).flatten }");
+//		Iterable<String> x = IterableExtensions.flatten(CollectionLiterals.newArrayList(CollectionLiterals.newArrayList("a,b".split(","))));
+		XExpression expression = expression("{ var Iterable<String> x = newArrayList(newArrayList('a,b'.split(','))).flatten }");
+		helper.assertNoErrors(expression);
+	}
+	
+	public void testOperationFeatureCall_11() throws Exception {
+//		Iterable<String> x = IterableExtensions.flatten(CollectionLiterals.newArrayList(CollectionLiterals.newArrayList("a", "b")));
+		XExpression expression = expression("{ var Iterable<String> x = newArrayList(newArrayList('a', 'b')).flatten }");
+		helper.assertNoErrors(expression);
+	}
+	
+	public void testOperationFeatureCall_12() throws Exception {
+//		Iterable<String> x = IterableExtensions.flatten(CollectionLiterals.newArrayList(CollectionLiterals.newArrayList("a")));
+		XExpression expression = expression("{ var Iterable<String> x = newArrayList(newArrayList('a')).flatten }");
+		helper.assertNoErrors(expression);
+	}
+	
+	public void testOperationFeatureCall_13() throws Exception {
+//		Iterable<String[]> arrays = CollectionLiterals.<String[]>newArrayList("a,b".split(","));
+		XExpression expression = expression("{ var Iterable<String> x = <String[]>newArrayList('a,b'.split(',')).flatten }");
+		helper.assertNoErrors(expression);
+	}
+	
+	public void testOperationFeatureCall_14() throws Exception {
+//		Iterable<String[]> arrays = CollectionLiterals.newArrayList("a,b".split(","), "a,b".split(","));
+		XExpression expression = expression("{ var Iterable<String> x = newArrayList('a,b'.split(','), 'a,b'.split(',')).flatten }");
 		helper.assertNoErrors(expression);
 	}
 	

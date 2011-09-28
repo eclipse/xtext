@@ -87,7 +87,6 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertSame(field, ((XFeatureCall)((XBlockExpression)func.getExpression()).getExpressions().get(0)).getFeature());
 	}
 	
-	
 	public void testInjectedExtensionMethodCall() throws Exception {
 		XtendClass clazz = clazz("" +
 				"class Foo {" +

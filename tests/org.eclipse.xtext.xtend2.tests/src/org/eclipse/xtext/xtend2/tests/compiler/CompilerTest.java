@@ -242,16 +242,24 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=345828
 	 */
 	public void testBug_345828_06() throws Exception {
+//		class Z {
+//			<MyParam extends Functions.Function0<? extends Integer>> int baz(List<MyParam> t) {
+//				int i = IterableExtensions.<MyParam>head(t).apply();
+//				if (i == 0)
+//					return IterableExtensions.<MyParam>head(t).apply() + 1;
+//				return IterableExtensions.head(t).apply() + 1;
+//			}
+//		}
 		String code = 
 				"package x\n" +
-						"class Z {" +
-						"  def <MyParam extends =>Integer> baz(java.util.List<MyParam> t) {\n" +
-						"    val int i = t.<MyParam>head.apply + 1\n" +
-						"    if (i == 0)\n" +
-						"      t.<MyParam>head.apply + 1\n" + 
-						"    t.<MyParam>head.apply + 1\n" + 
-						"  }\n" +
-						"}\n";
+				"class Z {" +
+				"  def <MyParam extends =>Integer> baz(java.util.List<MyParam> t) {\n" +
+				"    val int i = t.<MyParam>head.apply + 1\n" +
+				"    if (i == 0)\n" +
+				"      t.<MyParam>head.apply + 1\n" + 
+				"    t.head.apply + 1\n" + 
+				"  }\n" +
+				"}\n";
 		String javaCode = compileToJavaCode(code);
 		javaCompiler.compileToClass("x.Z", javaCode);
 	}
@@ -299,6 +307,17 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=351330
 	 */
 	public void testBug_351330_03() throws Exception {
+//		class C<T> {
+//			void toSeparatedString(Iterable<T> i, Functions.Function1<? extends T, String> toStringFunc) {
+//				IterableExtensions.map(i, toStringFunc); // error marker on this line
+//				IterableExtensions.<T, String>map(i, toStringFunc); // error marker on this line
+//				/*
+//				 * The method map(Iterable<T>, Functions.Function1<? super T,? extends R>) in the 
+//				 * type IterableExtensions is not applicable for the arguments 
+//				 * (Iterable<T>, Functions.Function1<capture#25-of ? extends T,String>)
+//				 */
+//			}
+//		}
 		String code = 
 			"package x class Z <T> {" +
 			"  def toSeparatedString(Iterable<T> i, org.eclipse.xtext.xbase.lib.Functions$Function1<? extends T, String> toStringFunc, String separator){\n" + 
@@ -313,6 +332,12 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=351330
 	 */
 	public void testBug_351330_04() throws Exception {
+//		class C<T> {
+//			void toSeparatedString(Iterable<T> i, Functions.Function1<? super T, String> toStringFunc) {
+//				IterableExtensions.map(i, toStringFunc); // OK
+//				IterableExtensions.<T, String>map(i, toStringFunc); // OK
+//			}
+//		}
 		String code = 
 			"package x class Z <T> {" +
 			"  def toSeparatedString(Iterable<T> i, org.eclipse.xtext.xbase.lib.Functions$Function1<? super T, String> toStringFunc, String separator){\n" + 
@@ -327,6 +352,17 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=351330
 	 */
 	public void testBug_351330_05() throws Exception {
+//		class C {
+//			<T> void toSeparatedString(Iterable<T> i, Functions.Function1<? extends T, String> toStringFunc) {
+//				IterableExtensions.map(i, toStringFunc); // error marker on this line
+//				IterableExtensions.<T, String>map(i, toStringFunc); // error marker on this line
+//				/*
+//				 * The method map(Iterable<T>, Functions.Function1<? super T,? extends R>) in the 
+//				 * type IterableExtensions is not applicable for the arguments 
+//				 * (Iterable<T>, Functions.Function1<capture#25-of ? extends T,String>)
+//				 */
+//			}
+//		}
 		String code = 
 			"package x class Z {" +
 			"  def <T> toSeparatedString(Iterable<T> i, org.eclipse.xtext.xbase.lib.Functions$Function1<? extends T, String> toStringFunc, String separator){\n" + 
@@ -341,6 +377,12 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=351330
 	 */
 	public void testBug_351330_06() throws Exception {
+//		class C {
+//			<T> void toSeparatedString(Iterable<T> i, Functions.Function1<? super T, String> toStringFunc) {
+//				IterableExtensions.map(i, toStringFunc); // OK
+//				IterableExtensions.<T, String>map(i, toStringFunc); // OK
+//			}
+//		}
 		String code = 
 			"package x class Z {" +
 			"  def <T> toSeparatedString(Iterable<T> i, org.eclipse.xtext.xbase.lib.Functions$Function1<? super T, String> toStringFunc, String separator){\n" + 
@@ -644,6 +686,23 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		invokeAndExpect2(expectation, code, "callMe");
 	}
 	
+//	static class Z {
+//		void generate() {
+//			List<CharSequence> seq = null;
+//			List<String> strings = null;
+//			Collection<String> result = addAll2(seq, strings);
+//			result = addAll2(strings, seq);
+//		}
+//		public <K extends Object> Collection<K> addAll2(final Collection<? super K> collection,
+//				final Iterable<K> elements) {
+//			CollectionExtensions.addAll(collection, elements);
+//			return null;
+//		}
+//		public <K extends Object> Collection<K> addAll2(final Iterable<K> elements, final Collection<? super K> collection) {
+//			CollectionExtensions.addAll(collection, elements);
+//			return null;
+//		}
+//	}
 	public void testBug_352849_01() throws Exception {
 		String code =
 				"package x\n" +
@@ -653,19 +712,35 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"  	def generate() {\n" + 
 				"		val List<CharSequence> seq = null\n" + 
 				"		val List<String> strings = null\n" + 
-				"		val result = seq.addAll2(strings)\n" + 
-				"		val Collection<String> test = result\n" + 
+				"		val result1 = seq.addAll2(strings)\n" + 
+//				"		val Collection<String> test1 = result1\n" + 
+//				"		val result2 = strings.addAll2(seq)\n" + 
+//				"		val Collection<String> test2 = result2\n" + 
 				"	}\n" + 
 				"	def <K> Collection<K> addAll2(Collection<? super K> collection, Iterable<K> elements){\n" +
-				// TODO this invocation is valid
-//				"	    collection.addAll(elements)\n" + 
+				"	    collection.addAll(elements)\n" + 
 				"	    null\n" + 
 				"	}\n" +
+//				"	def <K> Collection<K> addAll2(Iterable<K> elements, Collection<? super K> collection){\n" +
+//				"	    collection.addAll(elements)\n" + 
+//				"	    null\n" + 
+//				"	}\n" +
 				"}";
 		String javaCode = compileToJavaCode(code);
 		javaCompiler.compileToClass("x.Z", javaCode);
 	}
 	
+//	static class Z {
+//		void generate() {
+//			List<CharSequence> seq = null;
+//			List<String> strings = null;
+//			java.util.Collection<String> result = this.addAll2(seq, strings);
+//		}
+//		<T> java.util.Collection<T> addAll2(java.util.Collection<? super T> collection, Iterable<? extends T> elements) {
+//			CollectionExtensions.addAll(collection, elements);
+//			return null;
+//		}
+//	}
 	public void testBug_352849_02() throws Exception {
 		String code =
 				"package x\n" +
@@ -675,14 +750,19 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"  	def generate() {\n" + 
 				"		val List<CharSequence> seq = null\n" + 
 				"		val List<String> strings = null\n" + 
-				"		val result = seq.addAll2(strings)\n" +
-				"		val Collection<String> test = result\n" + 
+				"		val result1 = seq.addAll2(strings)\n" +
+				"		val Collection<String> test1 = result1\n" + 
+//				"		val result2 = strings.addAll2(seq)\n" +
+//				"		val Collection<String> test2 = result2\n" + 
 				"	}\n" + 
 				"	def <T> Collection<T> addAll2(Collection<? super T> collection, Iterable<? extends T> elements){\n" +
-				// TODO this invocation is valid
-//				"	    collection.addAll(elements)\n" + 
+				"	    collection.addAll(elements)\n" + 
 				"	    null\n" + 
 				"	}\n" +
+//				"	def <T> Collection<T> addAll2(Iterable<? extends T> elements, Collection<? super T> collection){\n" +
+//				"	    collection.addAll(elements)\n" + 
+//				"	    null\n" + 
+//				"	}\n" +
 				"}";
 		String javaCode = compileToJavaCode(code);
 		javaCompiler.compileToClass("x.Z", javaCode);
@@ -697,13 +777,19 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"  	def generate() {\n" + 
 				"		val List<CharSequence> seq = null\n" + 
 				"		val List<String> strings = null\n" + 
-				"		val result = seq.addAll2(strings)\n" + 
-				"		val Collection<CharSequence> test = result\n" + 
+				"		val result1 = seq.addAll2(strings)\n" + 
+				"		val Collection<CharSequence> test1 = result1\n" + 
+//				"		val result2 = strings.addAll2(seq)\n" + 
+//				"		val Collection<CharSequence> test2 = result2\n" + 
 				"	}\n" + 
 				"	def <T> Collection<T> addAll2(Collection<T> collection, Iterable<? extends T> elements){\n" + 
 				"	    collection.addAll(elements)\n" + 
 				"	    null\n" + 
 				"	}\n" +
+//				"	def <T> Collection<T> addAll2(Iterable<? extends T> elements, Collection<T> collection){\n" + 
+//				"	    collection.addAll(elements)\n" + 
+//				"	    null\n" + 
+//				"	}\n" +
 				"}";
 		String javaCode = compileToJavaCode(code);
 		javaCompiler.compileToClass("x.Z", javaCode);
@@ -742,8 +828,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"		val Collection<String> test = seq.addAll2(strings)\n" +
 				"	}\n" + 
 				"	def <T> Collection<T> addAll2(Collection<? super T> collection, Iterable<? extends T> elements){\n" +
-				// TODO this invocation is valid
-//				"	    collection.addAll(elements)\n" + 
+				"	    collection.addAll(elements)\n" + 
 				"	    null\n" + 
 				"	}\n" +
 				"}";
@@ -751,12 +836,41 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		javaCompiler.compileToClass("x.Z", javaCode);
 	}
 	
-	// TODO: This one should be valid, too
-	// however, the current implementation does not provide enough information
-	// to compute whether a type reference is resolved or whether the expected
-	// type would yield something better
-	// Note: there are other todos in this file that are related to the use case
-//	public void testBug_352849_06() throws Exception {
+//	static class Z {
+//		void generate() {
+//			List<CharSequence> seq = null;
+//			List<String> strings = null;
+//			java.util.Collection<CharSequence> CharSequence = this.<CharSequence>addAll2(seq, strings);
+//		}
+//
+//		<T> java.util.Collection<T> addAll2(java.util.Collection<? super T> collection, Iterable<? extends T> elements) {
+//			CollectionExtensions.addAll(collection, elements);
+//			return null;
+//		}
+//	}
+	public void testBug_352849_06() throws Exception {
+		String code =
+				"package x\n" +
+				"import java.util.Collection\n" + 
+				"import java.util.List\n" +
+				"class Z {" +
+				"  	def generate() {\n" + 
+				"		val List<CharSequence> seq = null\n" + 
+				"		val List<String> strings = null\n" + 
+				"		val Collection<CharSequence> test = seq.<CharSequence>addAll2(strings)\n" +
+				"	}\n" + 
+				"	def <T> Collection<T> addAll2(Collection<? super T> collection, Iterable<? extends T> elements){\n" + 
+				"	    collection.addAll(elements)\n" + 
+				"	    null\n" + 
+				"	}\n" +
+				"}";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
+	// TODO this one should be valid, too since we could infer the CharSequence from the
+	// expected type
+//	public void testBug_352849_06_b() throws Exception {
 //		String code =
 //				"package x\n" +
 //				"import java.util.Collection\n" + 
@@ -768,7 +882,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 //				"		val Collection<CharSequence> test = seq.addAll2(strings)\n" +
 //				"	}\n" + 
 //				"	def <T> Collection<T> addAll2(Collection<? super T> collection, Iterable<? extends T> elements){\n" + 
-////				"	    collection.addAll(elements)\n" + 
+//				"	    collection.addAll(elements)\n" + 
 //				"	    null\n" + 
 //				"	}\n" +
 //				"}";
@@ -777,27 +891,41 @@ public class CompilerTest extends AbstractXtend2TestCase {
 //		javaCompiler.compileToClass("x.Z", javaCode);
 //	}
 	
-//	public void testBug_352849_07() throws Exception {
-//		String code =
-//				"package x\n" +
-//				"import java.util.Collection\n" + 
-//				"import java.util.List\n" +
-//				"class Z {" +
-//				"  	def generate() {\n" + 
-//				"		val List<CharSequence> seq = null\n" + 
-//				"		val List<String> strings = null\n" + 
-//				"		val result = seq.addAll2(strings)\n" + 
-//				"		val Collection<String> test = result\n" + 
-//				"	}\n" + 
-//				"	def <K, N super K> Collection<K> addAll2(Collection<N> collection, Iterable<K> elements){\n" +
-//				"	    collection.addAll(elements)\n" + 
-//				"	    null\n" + 
-//				"	}\n" +
-//				"}";
-//		String javaCode = compileToJavaCode(code);
-//		javaCompiler.compileToClass("x.Z", javaCode);
-//	}
 	
+//	static class Z {
+//		void generate() {
+//			List<CharSequence> seq = null;
+//			List<String> strings = null;
+//			java.util.Collection<String> CharSequence = this.addAll2(seq, strings);
+//		}
+//	
+//		<N, K extends N> Collection<K> addAll2(Collection<N> collection, Iterable<K> elements) {
+//			CollectionExtensions.addAll(collection, elements);
+//			return null;
+//		}
+//	}
+	public void testBug_352849_07() throws Exception {
+		String code =
+				"package x\n" +
+				"import java.util.Collection\n" + 
+				"import java.util.List\n" +
+				"class Z {" +
+				"  	def generate() {\n" + 
+				"		val List<CharSequence> seq = null\n" + 
+				"		val List<String> strings = null\n" + 
+				"		val result = seq.addAll2(strings)\n" + 
+				"		val Collection<String> test = result\n" + 
+				"	}\n" + 
+				"	def <N, K extends N> Collection<K> addAll2(Collection<N> collection, Iterable<K> elements){\n" +
+				"	    collection.addAll(elements)\n" + 
+				"	    null\n" + 
+				"	}\n" +
+				"}";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
+	// The type parameter constraints <T, C super T, I extends T> seem to be invalid
 //	public void testBug_352849_08() throws Exception {
 //		String code =
 //				"package x\n" +
@@ -832,8 +960,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"		val Collection<CharSequence> test = result\n" + 
 				"	}\n" + 
 				"	def <T, U extends T> Collection<T> addAll2(Collection<T> collection, Iterable<U> elements){\n" +
-				// TODO this invocation is valid
-//				"	    collection.addAll(elements)\n" + 
+				"	    collection.addAll(elements)\n" + 
 				"	    collection.<T>addAll(elements)\n" + 
 				"	    null\n" + 
 				"	}\n" +
@@ -842,6 +969,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		javaCompiler.compileToClass("x.Z", javaCode);
 	}
 	
+	// The type parameter constraints <T, C super T, I extends T> seem to be invalid
 //	public void testBug_352849_10() throws Exception {
 //		String code =
 //				"package x\n" +
@@ -1437,8 +1565,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		invokeAndExpect2("foofoo", definition, "test", "foo");
 	}
 	
-//TODO this should be fixed, by an improvement in XbaseTypeProvider
-//
+	// TODO Fix Me
 //	public void testGenericFunction_02() throws Exception {
 //		String def = 
 //			    "def test(String x) {" +
@@ -1510,6 +1637,28 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"}\n" +
 				"def <T extends Integer> addFunction() {\n" + 
 				"    [T a,T b|a+b] as (T,T)=>T\n" + 
+				"}", "bug343090", Integer.valueOf(18), Integer.valueOf(5));
+	}
+	
+	public void testBug343090_4() throws Exception {
+		invokeAndExpect2(
+				23, 
+				"def bug343090(Integer a, Integer b) {\n" + 
+				"    <Integer>addFunction.apply(a, b)\n" + 
+				"}\n" +
+				"def <T extends Integer> addFunction() {\n" + 
+				"    [T a,T b|(a+b) as Integer] as (T,T)=>T\n" + 
+				"}", "bug343090", Integer.valueOf(18), Integer.valueOf(5));
+	}
+	
+	public void testBug343090_5() throws Exception {
+		invokeAndExpect2(
+				23, 
+				"def bug343090(Integer a, Integer b) {\n" + 
+				"    <Integer>addFunction.apply(a, b)\n" + 
+				"}\n" +
+				"def <T extends Integer> addFunction() {\n" + 
+				"    [T a,T b|(a+b) as T] as (T,T)=>T\n" + 
 				"}", "bug343090", Integer.valueOf(18), Integer.valueOf(5));
 	}
 	

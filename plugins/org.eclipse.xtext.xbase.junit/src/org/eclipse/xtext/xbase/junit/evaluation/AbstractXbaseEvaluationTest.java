@@ -137,6 +137,10 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo("123456", "[String p1, String p2, String p3, String p4, String p5, String p6| p1+p2+p3+p4+p5+p6].curry('1').curry('2').curry('3').curry('4').curry('5').curry('6').apply()");
 	}
 	
+	@Test public void testCurrying_02() throws Exception {
+		assertEvaluatesTo("1", "[String p1| p1].curry('1').apply()");
+	}
+	
 	/*
 	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=341550
 	 */
@@ -983,7 +987,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	
 	@Test public void testClosure_07_01() throws Exception {
 		assertEvaluatesTo("literal", 
-		"new testdata.ClosureClient().useProvider(|'literal')");
+				"new testdata.ClosureClient().useProvider(|'literal')");
 	}
 	
 	@Test public void testClosure_08() throws Exception {
@@ -1218,6 +1222,10 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	
 	@Test public void testIterableExtension_10() throws Exception {
 		assertEvaluatesTo("seed 12345", "newArrayList(1, 2, 3, 4, 5).fold('seed ', [s, i|s+i.toString])");
+	}
+	
+	@Test public void testIterableExtension_11() throws Exception {
+		assertEvaluatesTo("seed", "<Integer>newArrayList().fold('seed', [s, i|s+i.toString])");
 	}
 	
 	@Test public void testMapConstruction_00() throws Exception {
@@ -1455,6 +1463,23 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo(Boolean.FALSE, "{\n" +
 			"  val l = new java.util.ArrayList<String>()\n" + 
 			"  new java.util.ArrayList<CharSequence>() += l\n" +
+			"}");
+	}
+	
+	@Test public void testFilterArrays_01() throws Exception {
+		assertEvaluatesTo(Lists.newArrayList("a"), 
+			"{\n" +
+			"  val filtered = new testdata.ArrayClient().toStringArray('a', 'c').filter(e|e < 'c')" +
+			"  filtered.toList\n" +
+			"}");
+	}
+	
+	@Test public void testFilterArrays_02() throws Exception {
+		assertEvaluatesTo("result", 
+			"{\n" +
+			"  for(s: new testdata.ArrayClient().toStringArray('a', 'b').filter(e|e!=null))" +
+			"    s\n" +
+			"  'result'" +
 			"}");
 	}
 	
