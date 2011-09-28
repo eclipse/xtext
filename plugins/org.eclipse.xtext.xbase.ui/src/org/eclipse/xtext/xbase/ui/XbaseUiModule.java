@@ -16,6 +16,7 @@ public class XbaseUiModule extends org.eclipse.xtext.xbase.ui.AbstractXbaseUiMod
 		super(plugin);
 	}
 	
+	@Override
 	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
 		return XbaseHighlightingConfiguration.class;
 	}
