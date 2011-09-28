@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typing;
 
-import static com.google.common.collect.Iterables.*;
 import static java.util.Collections.*;
 
 import java.util.Collection;
@@ -94,10 +93,8 @@ public class SynonymTypesProvider {
 	}
 
 	public boolean hasSynonymTypes(JvmTypeReference toBeConverted) {
-		final Iterable<JvmTypeReference> synonymTypes = getSynonymTypes(toBeConverted, false);
-		if (synonymTypes instanceof Collection)
-			return !((Collection<?>) synonymTypes).isEmpty();
-		return !isEmpty(synonymTypes);
+		final Set<JvmTypeReference> synonymTypes = getSynonymTypes(toBeConverted, false);
+		return !synonymTypes.isEmpty();
 	}
 	
 }
