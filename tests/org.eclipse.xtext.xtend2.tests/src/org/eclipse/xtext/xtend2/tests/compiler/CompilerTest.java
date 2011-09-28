@@ -50,9 +50,9 @@ import com.google.inject.Injector;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Sebastian Zarnekow
  */
 public class CompilerTest extends AbstractXtend2TestCase {
-	
 	
 	public void testSimpleExtensionMethodCall() throws Exception {
 		String code = 
@@ -1693,6 +1693,28 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"}\n","nullSafeTest");
 	}
 	
+	public void testBug358418_01() throws Exception {
+		invokeAndExpect3(
+				Lists.<Object>newArrayList(), 
+				"def <T> Iterable<T> nullSafe(Iterable<T> elements) {\n" + 
+				"  if (elements == null)\n" + 
+				"    newArrayList\n" + 
+				"  else\n" + 
+				"    elements\n" + 
+				"}","nullSafe", new Class[] { Iterable.class },  new Object[] { null });
+	}
+	
+	public void testBug358418_02() throws Exception {
+		invokeAndExpect3(
+				Lists.newArrayList("a", "b"), 
+				"def <T> Iterable<T> nullSafe(Iterable<T> elements) {\n" + 
+				"  if (elements == null)\n" + 
+				"    newArrayList\n" + 
+				"  else\n" + 
+				"    elements\n" + 
+				"}", "nullSafe", new Class[] { Iterable.class }, Lists.newArrayList("a", "b"));
+	}
+	
 	@Inject
 	private EclipseRuntimeDependentJavaCompiler javaCompiler;
 
@@ -1720,9 +1742,16 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		javaCompiler.addClassPathOfClass(StringConcatenation.class);
 	}
 	
-	protected void invokeAndExpect2(Object expectation, String xtendclassBody, String methodToInvoke, Object...args) throws Exception {
-		Class<?> class1 = compileJavaCode( "x.Y", "package x class Y {"+xtendclassBody+"}");
-		assertEquals(expectation,apply(class1,methodToInvoke,args));
+	protected void invokeAndExpect2(Object expectation, String xtendclassBody, String methodToInvoke, Object... args)
+			throws Exception {
+		Class<?> class1 = compileJavaCode("x.Y", "package x class Y {" + xtendclassBody + "}");
+		assertEquals(expectation, apply(class1, methodToInvoke, args));
+	}
+
+	protected void invokeAndExpect3(Object expectation, String xtendclassBody, String methodToInvoke,
+			Class<?>[] parameterTypes, Object... args) throws Exception {
+		Class<?> class1 = compileJavaCode("x.Y", "package x class Y {" + xtendclassBody + "}");
+		assertEquals(expectation, applyImpl(class1, methodToInvoke, parameterTypes, args));
 	}
 	protected void invokeAndExpect(Object expectation, String functionDef, Object...args) throws Exception {
 		String fullClass = "package x class Y { def Object testEntry(";
@@ -1742,11 +1771,6 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	}
 	
 	protected Object apply(Class<?> type,String methodName,Object...args) throws Exception {
-		final Injector inj = Guice.createInjector();
-		Object instance = inj.getInstance(type);
-		if (args==null) {
-			return type.getDeclaredMethod(methodName).invoke(instance);
-		}
 		Class<?>[] argTypes = new Class[args.length];
 		for (int i = 0; i < argTypes.length; i++) {
 			if (args[i] == null) {
@@ -1755,7 +1779,15 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				argTypes[i] = args[i].getClass();
 			}
 		}
-		Method method = type.getDeclaredMethod(methodName, argTypes);
+		return applyImpl(type, methodName, argTypes, args);
+	}
+	protected Object applyImpl(Class<?> type,String methodName,Class<?>[] parameterTypes,Object...args) throws Exception {
+		final Injector inj = Guice.createInjector();
+		Object instance = inj.getInstance(type);
+		if (args==null) {
+			return type.getDeclaredMethod(methodName).invoke(instance);
+		}
+		Method method = type.getDeclaredMethod(methodName, parameterTypes);
 		return method.invoke(instance,args);
 	}
 
