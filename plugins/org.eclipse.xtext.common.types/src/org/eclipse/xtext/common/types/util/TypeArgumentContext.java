@@ -202,6 +202,7 @@ public class TypeArgumentContext implements ITypeArgumentContext {
 					return typesFactory.createJvmAnyTypeReference();
 				} else {
 					JvmWildcardTypeReference result = typesFactory.createJvmWildcardTypeReference();
+					List<JvmTypeConstraint> newConstraints = Lists.newArrayListWithCapacity(reference.getConstraints().size());
 					for(JvmTypeConstraint constraint: reference.getConstraints()) {
 						if (constraint.getTypeReference() != null) {
 							JvmTypeReference bound = visit(constraint.getTypeReference(), replaceWildcards);
@@ -209,23 +210,25 @@ public class TypeArgumentContext implements ITypeArgumentContext {
 								if (constraint instanceof JvmUpperBound) {
 									for(JvmTypeConstraint newConstraint: ((JvmWildcardTypeReference) bound).getConstraints()) {
 										if (newConstraint instanceof JvmUpperBound) {
-											result.getConstraints().add(newConstraint);
+											newConstraints.add(newConstraint);
 										} else {
 											JvmUpperBound upperBound = typesFactory.createJvmUpperBound();
 											upperBound.setTypeReference(newConstraint.getTypeReference());
-											result.getConstraints().add(upperBound);
+											newConstraints.add(upperBound);
 										}
 									}
 								} else {
-									result.getConstraints().addAll(((JvmWildcardTypeReference) bound).getConstraints());
+									newConstraints.addAll(((JvmWildcardTypeReference) bound).getConstraints());
 								}
 							} else {
 								JvmTypeConstraint copiedConstraint = (JvmTypeConstraint) EcoreUtil.create(constraint.eClass());
 								copiedConstraint.setTypeReference(bound);
-								result.getConstraints().add(copiedConstraint);
+								newConstraints.add(copiedConstraint);
 							}
 						}
 					}
+					if (!newConstraints.isEmpty())
+						result.getConstraints().addAll(newConstraints);
 					return result;
 				}
 			}
