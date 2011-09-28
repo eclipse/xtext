@@ -1715,6 +1715,21 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"}", "nullSafe", new Class[] { Iterable.class }, Lists.newArrayList("a", "b"));
 	}
 	
+	public void testBug342274() throws Exception {
+		invokeAndExpect2(
+				null, 
+				"def void castNull() {\n" + 
+				"  var raw = null as Iterable\n" + 
+				"  var strings = null as Iterable<String>\n" +
+				"  var Iterable assignStringsToRaw = null as Iterable<String>\n" +
+				"  var Iterable<String> assignRawToStrings = null as Iterable\n" +
+				"  var Iterable assignRawToRaw = null as Iterable\n" +
+				"  var Iterable<String> assignStringsToStrings = null as Iterable<String>\n" +
+				"  if (raw != strings)\n" +
+				"    throw new IllegalStateException()\n" + 
+				"}", "castNull");
+	}
+	
 	@Inject
 	private EclipseRuntimeDependentJavaCompiler javaCompiler;
 
