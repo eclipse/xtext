@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.clustering;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -29,6 +28,9 @@ import org.eclipse.xtext.builder.builderState.BuilderStateUtil;
 import org.eclipse.xtext.builder.builderState.ResourceDescriptionsData;
 import org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl;
 import org.eclipse.xtext.builder.impl.BuildData;
+import org.eclipse.xtext.builder.resourceloader.IResourceLoader;
+import org.eclipse.xtext.builder.resourceloader.IResourceLoader.LoadOperation;
+import org.eclipse.xtext.builder.resourceloader.IResourceLoader.LoadOperationException;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -37,29 +39,42 @@ import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.util.CancelIndicator;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Thomas Wolf <thomas.wolf@paranor.ch> - Refactored the build phases and documentation
+ * @author Lieven Lemiengre <lieven.lemiengre@sigasi.com> - Parallel resource loading
  */
 public class ClusteringBuilderState extends AbstractBuilderState {
 
-	/** Class-wide logger. */
+    public static final String RESOURCELOADER_CROSS_LINKING = "org.eclipse.xtext.builder.resourceloader.crossLinking";
+
+    public static final String RESOURCELOADER_GLOBAL_INDEX = "org.eclipse.xtext.builder.resourceloader.globalIndex";
+
+    /** Class-wide logger. */
     private static final Logger LOGGER = Logger.getLogger(ClusteringBuilderState.class);
-    
-    private static final int CLUSTER_SIZE = 20;
 
     @Inject
-	private IResourceServiceProvider.Registry managerRegistry;
+    private IResourceServiceProvider.Registry managerRegistry;
 
-	@Inject
-	private IResourceClusteringPolicy clusteringPolicy;
+    @Inject
+    private IResourceClusteringPolicy clusteringPolicy;
 
-	/**
+    @Inject
+    @Named(RESOURCELOADER_GLOBAL_INDEX)
+    private IResourceLoader globalIndexResourceLoader;
+
+    @Inject
+    @Named(RESOURCELOADER_CROSS_LINKING)
+    private IResourceLoader crossLinkingResourceLoader;
+
+    /**
      * Actually do the build.
-     * 
+     *
      * @param resourceSet
      *            The resource set
      * @param toBeUpdated
@@ -77,11 +92,11 @@ public class ClusteringBuilderState extends AbstractBuilderState {
     protected Collection<Delta> doUpdate(BuildData buildData, ResourceDescriptionsData newData, IProgressMonitor monitor) {
         final SubMonitor progress = SubMonitor.convert(monitor, 100);
 
-        
+
         // Step 1: Clean the set of deleted URIs. If any of them are also added, they're not deleted.
         final Set<URI> toBeDeleted = buildData.getAndRemoveToBeDeleted();
 
-        // Step 2: Create a new state (old state minus the deleted resources). This, by virtue of the flag 
+        // Step 2: Create a new state (old state minus the deleted resources). This, by virtue of the flag
         // NAMED_BUILDER_SCOPE in the resource set's load options
         // and a Guice binding, is the index that is used during the build; i.e., linking during the build will
         // use this. Once the build is completed, the persistable index is reset to the contents of newState by
@@ -101,12 +116,12 @@ public class ClusteringBuilderState extends AbstractBuilderState {
         // queued for processing, its URI is removed from this set. queueAffectedResources will consider only resources
         // in this set as potential candidates.
         for (final URI uri : toBeDeleted) {
-        	newData.removeDescription(uri);
+            newData.removeDescription(uri);
         }
         final Set<URI> allRemainingURIs = Sets.newLinkedHashSet(newData.getAllURIs());
         allRemainingURIs.removeAll(buildData.getToBeUpdated());
         for(URI remainingURI: buildData.getAllRemainingURIs()) {
-        	allRemainingURIs.remove(remainingURI);
+            allRemainingURIs.remove(remainingURI);
         }
         // TODO: consider to remove any entry from upstream projects and independent projects
         // from the set of remaining uris (template method or service?)
@@ -115,7 +130,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
 
         // Our return value. It contains all the deltas resulting from this build.
         final Set<Delta> allDeltas = Sets.newHashSet();
-        
+
         // Step 5: Put all resources depending on a deleted resource into the queue. Also register the deltas in allDeltas.
         if (!toBeDeleted.isEmpty()) {
             for (final URI uri : toBeDeleted) {
@@ -129,85 +144,119 @@ public class ClusteringBuilderState extends AbstractBuilderState {
         Collection<Delta> pendingDeltas = buildData.getAndRemovePendingDeltas();
         allDeltas.addAll(pendingDeltas);
         queueAffectedResources(allRemainingURIs, this, newState, allDeltas, buildData, progress.newChild(1));
-        
-        // Step 6: Iteratively got through the queue. For each resource, create a new resource description and queue all depending
-        // resources that are not yet in the delta. Validate resources. Do this in chunks.
-        final SubMonitor subProgress = progress.newChild(80);
-        CancelIndicator cancelMonitor = new CancelIndicator() {
-            public boolean isCanceled() {
-                return progress.isCanceled();
-            }
-        };
 
-        int index = 1;
-        Queue<URI> queue = buildData.getURIQueue();
-        while (!queue.isEmpty()) {
-            subProgress.setWorkRemaining(queue.size() + 2);
-            // TODO: How to properly do progress indication with an unknown amount of work? Somehow, the progress bar doesn't
-            // advance anymore after this...
-            final List<Delta> newDeltas = new ArrayList<Delta>(CLUSTER_SIZE);
-            final List<Delta> changedDeltas = new ArrayList<Delta>(CLUSTER_SIZE);
+        LoadOperation loadOperation = null;
+        try {
+            Queue<URI> queue = buildData.getURIQueue();
+            loadOperation = crossLinkingResourceLoader.create(resourceSet);
+            loadOperation.load(queue);
+
+            // Step 6: Iteratively got through the queue. For each resource, create a new resource description and queue all depending
+            // resources that are not yet in the delta. Validate resources. Do this in chunks.
+            final SubMonitor subProgress = progress.newChild(80);
+            CancelIndicator cancelMonitor = new CancelIndicator() {
+                public boolean isCanceled() {
+                    return progress.isCanceled();
+                }
+            };
+
+            int index = 1;
             while (!queue.isEmpty()) {
-                if (subProgress.isCanceled()) {
-                    throw new OperationCanceledException();
+                subProgress.setWorkRemaining(queue.size() + 2);
+                // TODO: How to properly do progress indication with an unknown amount of work? Somehow, the progress bar doesn't
+                // advance anymore after this...
+                final List<Delta> newDeltas = Lists.newArrayList();
+                final List<Delta> changedDeltas = Lists.newArrayList();
+                while (!queue.isEmpty()) {
+                    if (subProgress.isCanceled()) {
+                        loadOperation.cancel();
+                        throw new OperationCanceledException();
+                    }
+                    if (!clusteringPolicy.continueProcessing(resourceSet, null, newDeltas.size())) {
+                        break;
+                    }
+
+                    URI changedURI = null;
+                    Resource resource = null;
+                    Delta newDelta = null;
+
+                    try {
+                        // Load the resource and create a new resource description
+                        Resource loadResult = loadOperation.next();
+                        changedURI = loadResult.getURI();
+                        resource = addResource(loadResult, resourceSet);
+
+                        subProgress.subTask("Updating resource description for " + changedURI.lastSegment() + " (" + index + " of " + (index + queue.size()) + ")");
+                        queue.remove(changedURI);
+                        if(toBeDeleted.contains(changedURI)) {
+                            break;
+                        }
+
+                        final IResourceDescription.Manager manager = getResourceDescriptionManager(changedURI);
+                        if (manager != null) {
+                            // Resolve links here!
+                            EcoreUtil2.resolveLazyCrossReferences(resource, cancelMonitor);
+                            final IResourceDescription description = manager.getResourceDescription(resource);
+                            final IResourceDescription copiedDescription = BuilderStateUtil.create(description);
+                            newDelta = manager.createDelta(this.getResourceDescription(changedURI), copiedDescription);
+                        }
+                    } catch (final WrappedException ex) {
+                        if(ex instanceof LoadOperationException) {
+                            changedURI = ((LoadOperationException) ex).getUri();
+                        }
+                        if(changedURI == null) {
+                            LOGGER.error("Error loading resource", ex); //$NON-NLS-1$
+                        } else {
+                            queue.remove(changedURI);
+                            if(toBeDeleted.contains(changedURI)) break;
+                            LOGGER.error("Error loading resource from: " + changedURI.toString(), ex); //$NON-NLS-1$
+                            if (resource != null) {
+                                resourceSet.getResources().remove(resource);
+                            }
+                            final IResourceDescription oldDescription = this.getResourceDescription(changedURI);
+                            final IResourceDescription newDesc = newState.getResourceDescription(changedURI);
+                            ResourceDescriptionImpl indexReadyDescription = newDesc != null ? BuilderStateUtil.create(newDesc) : null;
+                            if ((oldDescription != null || indexReadyDescription != null) && oldDescription != indexReadyDescription) {
+                                newDelta = new DefaultResourceDescriptionDelta(oldDescription, indexReadyDescription);
+                            }
+                        }
+                    }
+                    if (newDelta != null) {
+                        newDeltas.add(newDelta);
+                        if (newDelta.haveEObjectDescriptionsChanged())
+                            changedDeltas.add(newDelta);
+                        // Make the new resource description known and update the map.
+                        newState.register(newDelta);
+                    }
+                    subProgress.worked(1);
+                    index++;
                 }
-                if (!clusteringPolicy.continueProcessing(resourceSet, queue.peek(), newDeltas.size())) {
-                	break;
+
+                loadOperation.cancel();
+
+                queueAffectedResources(allRemainingURIs, this, newState, changedDeltas, buildData, subProgress.newChild(1));
+
+                if(queue.size() > 0) {
+                    loadOperation = crossLinkingResourceLoader.create(resourceSet);
+                    loadOperation.load(queue);
                 }
-                final URI changedURI = queue.poll();
-                if (!toBeDeleted.contains(changedURI)) {
-	                subProgress.subTask("Updating resource description for " + changedURI.lastSegment() + " (" + index + " of " + (index + queue.size()) + ")");
-	                // Load the resource and create a new resource description
-	                Resource resource = null;
-	                Delta newDelta = null;
-	                try {
-	                    final IResourceDescription.Manager manager = getResourceDescriptionManager(changedURI);
-	                    if (manager != null) {
-	                        resource = resourceSet.getResource(changedURI, true);
-	                        // Resolve links here!
-							EcoreUtil2.resolveLazyCrossReferences(resource, cancelMonitor);
-	                        final IResourceDescription description = manager.getResourceDescription(resource);
-	                        final IResourceDescription copiedDescription = BuilderStateUtil.create(description);
-	                        newDelta = manager.createDelta(
-	                                    this.getResourceDescription(changedURI), copiedDescription);
-	                    }
-	                } catch (final WrappedException ex) {
-	                    LOGGER.error("Error loading resource from: " + changedURI.toString(), ex); //$NON-NLS-1$
-	                    if (resource != null) {
-	                        resourceSet.getResources().remove(resource);
-	                    }
-	                    final IResourceDescription oldDescription = this.getResourceDescription(changedURI);
-	                    final IResourceDescription newDesc = newState.getResourceDescription(changedURI);
-	                    ResourceDescriptionImpl indexReadyDescription = newDesc != null ? BuilderStateUtil.create(newDesc) : null;
-	                    if ((oldDescription != null || indexReadyDescription != null) && oldDescription != indexReadyDescription) {
-							newDelta = new DefaultResourceDescriptionDelta(oldDescription, indexReadyDescription);
-	                    }
-	                }
-	                if (newDelta != null) {
-	                    newDeltas.add(newDelta);
-	                    if (newDelta.haveEObjectDescriptionsChanged())
-	                    	changedDeltas.add(newDelta);
-	                    // Make the new resource description known and update the map.
-	                    newState.register(newDelta);
-	                }
-	                subProgress.worked(1);
-	                index++;
-                }
+
+                // Validate now.
+                updateMarkers(resourceSet, ImmutableList.<Delta>copyOf(newDeltas), subProgress.newChild(1));
+                allDeltas.addAll(newDeltas);
+                // Release memory
+                if (!queue.isEmpty())
+                    clearResourceSet(resourceSet);
             }
-            queueAffectedResources(allRemainingURIs, this, newState, changedDeltas, buildData, subProgress.newChild(1));
-            // Validate now.
-            updateMarkers(resourceSet, ImmutableList.<Delta>copyOf(newDeltas), subProgress.newChild(1));
-            allDeltas.addAll(newDeltas);
-            // Release memory
-            if (!queue.isEmpty())
-				clearResourceSet(resourceSet);
+        } finally {
+            if(loadOperation != null) loadOperation.cancel();
         }
         return allDeltas;
     }
-    
+
     /**
      * Create new resource descriptions for a set of resources given by their URIs.
-     * 
+     *
      * @param resourceSet
      *            The resource set
      * @param oldState
@@ -225,73 +274,112 @@ public class ClusteringBuilderState extends AbstractBuilderState {
             IResourceDescriptions oldState,
             CurrentDescriptions newState,
             final IProgressMonitor monitor) {
-        int index = 1;
+        int index = 0;
         Collection<URI> toBeUpdated = buildData.getToBeUpdated();
         ResourceSet resourceSet = buildData.getResourceSet();
         final int n = toBeUpdated.size();
         final SubMonitor subMonitor = SubMonitor.convert(monitor, "Write new resource descriptions", n); // TODO: NLS
-        for (final URI uri : toBeUpdated) {
-            if (subMonitor.isCanceled()) {
-                throw new OperationCanceledException();
-            }
-            subMonitor.subTask("Writing new resource description for " + uri.lastSegment() + " (" + index + " of " + n + ")"); // TODO: NLS
-            Resource resource = null;
-            try {
-                resource = resourceSet.getResource(uri, true);
 
-                final IResourceDescription.Manager manager = getResourceDescriptionManager(uri);
-                if (manager != null) {
-                    // We don't care here about links, we really just want the exported objects so that we can link in the
-                    // next phase.
-                    final IResourceDescription description = manager.getResourceDescription(resource);
-                    final IResourceDescription copiedDescription = new CopiedResourceDescription(description);
-                    // We also don't care what kind of Delta we get here; it's just a temporary transport vehicle. That interface
-                    // could do with some clean-up, too, because all we actually want to do is register the new resource
-                    // description, not the delta.
-                    newState.register(new DefaultResourceDescriptionDelta(oldState.getResourceDescription(uri), copiedDescription));
-                    buildData.queueURI(uri);
-                }
-            } catch (final WrappedException ex) {
-                if (resourceSet.getURIConverter().exists(uri, Collections.emptyMap())) {
-                    LOGGER.error("Error loading resource from: " + uri.toString(), ex); //$NON-NLS-1$
-                }
-                if (resource != null) {
-                    resourceSet.getResources().remove(resource);
-                }
-                final IResourceDescription oldDescription = oldState.getResourceDescription(uri);
-                if (oldDescription != null) {
-                    newState.register(new DefaultResourceDescriptionDelta(oldDescription, null));
-                }
-                // If we couldn't load it, there's no use trying again: do not add it to the queue
-            }
+        LoadOperation loadOperation = null;
+        try {
+            loadOperation = globalIndexResourceLoader.create(resourceSet);
+            loadOperation.load(toBeUpdated);
 
-            subMonitor.worked(1);
-            index++;
-            if (index % CLUSTER_SIZE == 0) {
-                resourceSet.getResources().clear();
+            while (loadOperation.hasNext()) {
+                if (subMonitor.isCanceled()) {
+                    loadOperation.cancel();
+                    throw new OperationCanceledException();
+                }
+
+                if (!clusteringPolicy.continueProcessing(resourceSet, null, index)) {
+                    clearResourceSet(resourceSet);
+                }
+
+                URI uri = null;
+                Resource resource = null;
+                try {
+                    Resource loadResult = loadOperation.next();
+                    uri = loadResult.getURI();
+                    resource = addResource(loadResult, resourceSet);
+
+                    subMonitor.subTask("Writing new resource description for " + uri.lastSegment() + " (" + index++ + " of " + n + ")"); // TODO: NLS
+
+                    final IResourceDescription.Manager manager = getResourceDescriptionManager(uri);
+                    if (manager != null) {
+                        // We don't care here about links, we really just want the exported objects so that we can link in the
+                        // next phase.
+                        final IResourceDescription description = manager.getResourceDescription(resource);
+                        final IResourceDescription copiedDescription = new CopiedResourceDescription(description);
+                        // We also don't care what kind of Delta we get here; it's just a temporary transport vehicle. That interface
+                        // could do with some clean-up, too, because all we actually want to do is register the new resource
+                        // description, not the delta.
+                        newState.register(new DefaultResourceDescriptionDelta(oldState.getResourceDescription(uri), copiedDescription));
+                        buildData.queueURI(uri);
+                    }
+                } catch (final WrappedException ex) {
+                    if(ex instanceof LoadOperationException) {
+                        uri = ((LoadOperationException) ex).getUri();
+                    }
+                    if (uri == null) {
+                        LOGGER.error("Error loading resource", ex); //$NON-NLS-1$
+                    } else {
+                        if (resourceSet.getURIConverter().exists(uri, Collections.emptyMap())) {
+                            LOGGER.error("Error loading resource from: " + uri.toString(), ex); //$NON-NLS-1$
+                        }
+                        if (resource != null) {
+                            resourceSet.getResources().remove(resource);
+                        }
+                        final IResourceDescription oldDescription = oldState.getResourceDescription(uri);
+                        if (oldDescription != null) {
+                            newState.register(new DefaultResourceDescriptionDelta(oldDescription, null));
+                        }
+                    }
+                    // If we couldn't load it, there's no use trying again: do not add it to the queue
+                }
+
+                subMonitor.worked(1);
             }
+        } finally {
+            if(loadOperation != null) loadOperation.cancel();
         }
-        clearResourceSet(resourceSet);
     }
 
     /**
      * Clears the content of the resource set without sending notifications.
      * This avoids unnecessary, explicit unloads.
      */
-	protected void clearResourceSet(ResourceSet resourceSet) {
-		boolean wasDeliver = resourceSet.eDeliver();
-		try {
-			resourceSet.eSetDeliver(false);
-			resourceSet.getResources().clear();
-		} finally {
-			resourceSet.eSetDeliver(wasDeliver);
-		}
-	}
+    protected void clearResourceSet(ResourceSet resourceSet) {
+        boolean wasDeliver = resourceSet.eDeliver();
+        try {
+            resourceSet.eSetDeliver(false);
+            resourceSet.getResources().clear();
+        } finally {
+            resourceSet.eSetDeliver(wasDeliver);
+        }
+    }
 
     /**
-     * Put all resources that depend on some changes onto the queue of resources to be processed. 
+     * Adds a resource to the ResourceSet if the ResourceSet doesn't contain it yet.
+     *
+     * @param resource the resource
+     * @param resourceSet the resource set
+     * @return the resource
+     */
+    protected Resource addResource(Resource resource, ResourceSet resourceSet) {
+        URI uri = resource.getURI();
+        Resource r = resourceSet.getResource(uri, false);
+        if (r == null) {
+            resourceSet.getResources().add(resource);
+            return resource;
+        } else {
+            return r;
+        }
+    }
+
+    /**
+     * Put all resources that depend on some changes onto the queue of resources to be processed.
      * Updates notInDelta by removing all URIs put into the queue.
-     * 
+     *
      * @param notInDelta
      *            URIs of unchanged and unaffected resources
      * @param oldState
@@ -306,13 +394,13 @@ public class ClusteringBuilderState extends AbstractBuilderState {
      *            The progress monitor used for user feedback
      */
     protected void queueAffectedResources(
-    		Set<URI> allRemainingURIs, 
-    		IResourceDescriptions oldState, 
-    		CurrentDescriptions newState,
-            Collection<Delta> deltas, 
-            BuildData buildData, 
+            Set<URI> allRemainingURIs,
+            IResourceDescriptions oldState,
+            CurrentDescriptions newState,
+            Collection<Delta> deltas,
+            BuildData buildData,
             final IProgressMonitor monitor) {
-    	if (deltas.isEmpty()) {
+        if (deltas.isEmpty()) {
             return;
         }
         final SubMonitor progress = SubMonitor.convert(monitor, allRemainingURIs.size());
@@ -337,12 +425,12 @@ public class ClusteringBuilderState extends AbstractBuilderState {
         }
     }
 
-	protected IResourceDescription.Manager getResourceDescriptionManager(URI uri) {
-		IResourceServiceProvider resourceServiceProvider = managerRegistry.getResourceServiceProvider(uri);
-		if (resourceServiceProvider == null) {
-			return null;
-		}
-		return resourceServiceProvider.getResourceDescriptionManager();
-	}
+    protected IResourceDescription.Manager getResourceDescriptionManager(URI uri) {
+        IResourceServiceProvider resourceServiceProvider = managerRegistry.getResourceServiceProvider(uri);
+        if (resourceServiceProvider == null) {
+            return null;
+        }
+        return resourceServiceProvider.getResourceDescriptionManager();
+    }
 
 }

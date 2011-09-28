@@ -10,6 +10,8 @@ package org.eclipse.xtext.builder.builderState;
 import java.util.Collections;
 import java.util.Map;
 
+import junit.framework.TestCase;
+
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -20,19 +22,20 @@ import org.eclipse.xtext.builder.impl.QueuedBuildData;
 import org.eclipse.xtext.builder.impl.ToBeBuilt;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.ui.shared.internal.SharedModule;
+import org.eclipse.xtext.util.Modules2;
 
 import com.google.common.collect.ImmutableList;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-import junit.framework.TestCase;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class Bug349445Test extends TestCase implements PersistedStateProvider, IMarkerUpdater, IResourceServiceProvider.Registry {
 
 	private IBuilderState testMe;
@@ -40,14 +43,14 @@ public class Bug349445Test extends TestCase implements PersistedStateProvider, I
 
 	@Override
 	protected void setUp() throws Exception {
-		Injector injector = Guice.createInjector(new AbstractModule() {
+		Injector injector = Guice.createInjector(Modules2.mixin(new SharedModule(), new AbstractModule() {
 			@Override
 			protected void configure() {
 				bind(PersistedStateProvider.class).toInstance(Bug349445Test.this);
 				bind(IMarkerUpdater.class).toInstance(Bug349445Test.this);
 				bind(IResourceServiceProvider.Registry.class).toInstance(Bug349445Test.this);
 			}
-		});
+		}));
 		loadCalled = 0;
 		testMe = injector.getInstance(ClusteringBuilderState.class);
 	}
