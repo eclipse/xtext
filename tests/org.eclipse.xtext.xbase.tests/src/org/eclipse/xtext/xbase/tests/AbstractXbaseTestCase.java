@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.junit.util.ParseHelper;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
-import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.SynchronizedXtextResourceSet;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;

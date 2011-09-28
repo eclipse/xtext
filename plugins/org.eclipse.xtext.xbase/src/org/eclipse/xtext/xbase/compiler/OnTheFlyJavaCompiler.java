@@ -260,7 +260,7 @@ public class OnTheFlyJavaCompiler {
 			sb.append(srcFile.getCanonicalPath());
 			boolean compile = compile(sb.toString());
 			if (!compile)
-				throw new IllegalArgumentException("Couldn't compile : " + errorStream.toString());
+				throw new IllegalArgumentException("Couldn't compile : " + errorStream.toString() + "\n" + code);
 			final URL url = new File(tempDir).toURI().toURL();
 			URLClassLoader loader = new URLClassLoader(new URL[] { url }, parentClassLoader);
 			Class<?> class1 = loader.loadClass(classname);
