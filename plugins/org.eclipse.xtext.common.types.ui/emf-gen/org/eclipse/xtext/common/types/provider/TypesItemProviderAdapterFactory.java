@@ -959,6 +959,33 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmCustomAnnotationValue} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @since 2.1
+	 */
+	protected JvmCustomAnnotationValueItemProvider jvmCustomAnnotationValueItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmCustomAnnotationValue}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @since 2.1
+	 */
+	@Override
+	public Adapter createJvmCustomAnnotationValueAdapter()
+	{
+		if (jvmCustomAnnotationValueItemProvider == null)
+		{
+			jvmCustomAnnotationValueItemProvider = new JvmCustomAnnotationValueItemProvider(this);
+		}
+
+		return jvmCustomAnnotationValueItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1104,6 +1131,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 		if (jvmDelegateTypeReferenceItemProvider != null) jvmDelegateTypeReferenceItemProvider.dispose();
 		if (jvmSynonymTypeReferenceItemProvider != null) jvmSynonymTypeReferenceItemProvider.dispose();
 		if (jvmUnknownTypeReferenceItemProvider != null) jvmUnknownTypeReferenceItemProvider.dispose();
+		if (jvmCustomAnnotationValueItemProvider != null) jvmCustomAnnotationValueItemProvider.dispose();
 	}
 
 }

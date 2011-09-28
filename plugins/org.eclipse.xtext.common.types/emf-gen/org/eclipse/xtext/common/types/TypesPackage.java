@@ -2688,7 +2688,7 @@ public interface TypesPackage extends EPackage
 	 * @since 2.1
 	 * @noreference This field is not intended to be referenced by clients.
 	 */
-	int ITYPE_REFERENCE_VISITOR = 52;
+	int ITYPE_REFERENCE_VISITOR = 53;
 
 	/**
 	 * The meta object id for the '<em>IType Reference Visitor With Parameter</em>' data type.
