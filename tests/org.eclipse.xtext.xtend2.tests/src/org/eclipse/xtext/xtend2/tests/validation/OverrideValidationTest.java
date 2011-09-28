@@ -170,10 +170,22 @@ public class OverrideValidationTest extends AbstractXtend2TestCase {
 		XtendClass xtendClass = clazz("class Foo<S> extends test.GenericClass<S> { override java.util.List<S> foo() {null} }");
 		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_RETURN_TYPE);
 	}
-
-	public void testClassMustBeAbstract() throws Exception {
+	
+	public void testClassMustBeAbstract_01() throws Exception {
 		XtendClass xtendClass = clazz("class Foo<S> implements Comparable<S> { }");
 		helper.assertError(xtendClass, XTEND_CLASS, CLASS_MUST_BE_ABSTRACT, "abstract", "not", "implement", "compareTo(S)");
+	}
+	public void testClassMustBeAbstract_02() throws Exception {
+		XtendClass xtendClass = clazz("class Foo<S> implements Comparable { }");
+		helper.assertError(xtendClass, XTEND_CLASS, CLASS_MUST_BE_ABSTRACT, "abstract", "not", "implement", "compareTo(Object)");
+	}
+	public void testClassMustBeAbstract_03() throws Exception {
+		XtendClass xtendClass = clazz("class Foo implements Comparable<String> { }");
+		helper.assertError(xtendClass, XTEND_CLASS, CLASS_MUST_BE_ABSTRACT, "abstract", "not", "implement", "compareTo(String)");
+	}
+	public void testClassMustBeAbstract_04() throws Exception {
+		XtendClass xtendClass = clazz("class Foo implements Comparable { }");
+		helper.assertError(xtendClass, XTEND_CLASS, CLASS_MUST_BE_ABSTRACT, "abstract", "not", "implement", "compareTo(Object)");
 	}
 	
 	public void testOverrideFinalClass() throws Exception {

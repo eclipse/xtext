@@ -265,6 +265,26 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 		assertNoExceptions(file);
 	}
 	
+	public void testNoException_14() throws Exception {
+		XtendFile file = file(
+				"package org.eclipse.xtext.xtend2.tests.smoke\n" + 
+				"import org.eclipse.emf.ecore.EClass\n" + 
+				"import org.eclipse.emf.ecore.EPackage\n" + 
+				"import org.eclipse.emf.ecore.EStructuralFeature\n" + 
+				"import org.eclipse.emf.ecore.EObject\n" + 
+				"class Case_6 {\n" + 
+				"	def dispatch transform(EClass model) {\n" + 
+				"		model.ETypeParameters.map(e|transform(e))\n" + 
+				"	}\n" + 
+				"	def dispatch transform(EPackage packageDecl) {\n" + 
+				"		packageDecl.eContents.map(e | transform(e as EStructuralFeature))\n" + 
+				"	}\n" + 
+				"	def dispatch transform(EStructuralFeature entity) {\n" + 
+				"		val inferredType = null\n" + 
+				"		newArrayList(inferredType as E");
+		assertNoExceptions(file);
+	}
+	
 	public void testBug343585() throws Exception {
 		XtendFile file = file("class Test extends Test {}");
 		assertNoExceptions(file);
