@@ -62,7 +62,7 @@ public class FeatureOverridesService {
         return getAllJvmFeatures((JvmDeclaredType) rawType, context);
     }
     
-    public Iterable<JvmFeature> getAllJvmFeatures(JvmDeclaredType type, TypeArgumentContext ctx) {
+    public Iterable<JvmFeature> getAllJvmFeatures(JvmDeclaredType type, ITypeArgumentContext ctx) {
     	Multimap<Triple<EClass,String,Integer>, JvmFeature> featureIndex = LinkedHashMultimap.create();
     	indexFeatures(type, featureIndex);
         Set<JvmTypeReference> types = superTypeCollector.collectSuperTypes(type);
@@ -87,7 +87,7 @@ public class FeatureOverridesService {
     	}
 	}
 
-    protected Iterable<JvmFeature> removeOverridden(Multimap<Triple<EClass,String,Integer>,JvmFeature> featureIndex, TypeArgumentContext ctx) {
+    protected Iterable<JvmFeature> removeOverridden(Multimap<Triple<EClass,String,Integer>,JvmFeature> featureIndex, ITypeArgumentContext ctx) {
     	Set<JvmFeature> result = Sets.newLinkedHashSet(featureIndex.values()); 
     	for(Collection<JvmFeature> featuresWithSameName: featureIndex.asMap().values()) {
 			if (featuresWithSameName.size() > 1) {
@@ -102,7 +102,7 @@ public class FeatureOverridesService {
         return result;
     }
     
-    protected boolean internalIsOverridden(JvmFeature overriding, JvmFeature overridden, TypeArgumentContext context, boolean isCheckInheritance) {
+    protected boolean internalIsOverridden(JvmFeature overriding, JvmFeature overridden, ITypeArgumentContext context, boolean isCheckInheritance) {
     	if (overriding == overridden)
     		return false;
         if (!isNameEqual(overriding, overridden))
@@ -124,7 +124,7 @@ public class FeatureOverridesService {
         return true;
     }
 
-    public boolean isOverridden(JvmFeature overriding, JvmFeature overridden, TypeArgumentContext context, boolean isCheckInheritance) {
+    public boolean isOverridden(JvmFeature overriding, JvmFeature overridden, ITypeArgumentContext context, boolean isCheckInheritance) {
     	if (overriding == overridden)
     		return false;
         if (overridden.getClass() != overriding.getClass())
@@ -144,7 +144,7 @@ public class FeatureOverridesService {
         return overriding.getParameters().size() == overridden.getParameters().size();
     }
     
-    protected boolean isSameArgumentTypes(JvmOperation overriding, JvmOperation overridden, TypeArgumentContext context) {
+    protected boolean isSameArgumentTypes(JvmOperation overriding, JvmOperation overridden, ITypeArgumentContext context) {
         for (int i = 0; i < overriding.getParameters().size(); i++) {
             JvmFormalParameter overridingParam = overriding.getParameters().get(i);
             JvmFormalParameter overriddenParam = overridden.getParameters().get(i);

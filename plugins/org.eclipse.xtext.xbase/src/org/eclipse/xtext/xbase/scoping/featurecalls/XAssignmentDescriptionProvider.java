@@ -9,7 +9,7 @@ package org.eclipse.xtext.xbase.scoping.featurecalls;
 
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
-import org.eclipse.xtext.common.types.util.TypeArgumentContext;
+import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.util.IAcceptor;
 
 /**
@@ -20,7 +20,7 @@ import org.eclipse.xtext.util.IAcceptor;
 public class XAssignmentDescriptionProvider extends DefaultJvmFeatureDescriptionProvider {
 	
 	@Override
-	public void addFeatureDescriptions(JvmFeature feature, TypeArgumentContext context,
+	public void addFeatureDescriptions(JvmFeature feature, ITypeArgumentContext context,
 			IAcceptor<JvmFeatureDescription> acceptor) {
 		if (feature instanceof JvmField) {
 			super.addFeatureDescriptions(feature, context, acceptor);

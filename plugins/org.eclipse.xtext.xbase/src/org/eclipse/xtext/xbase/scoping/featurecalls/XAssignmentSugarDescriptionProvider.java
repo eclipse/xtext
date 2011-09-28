@@ -12,7 +12,7 @@ import java.beans.Introspector;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.TypeArgumentContext;
+import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.Strings;
@@ -27,7 +27,7 @@ import com.google.inject.Provider;
 public class XAssignmentSugarDescriptionProvider extends DefaultJvmFeatureDescriptionProvider {
 	
 	@Override
-	public void addFeatureDescriptions(JvmFeature feature, TypeArgumentContext context,
+	public void addFeatureDescriptions(JvmFeature feature, ITypeArgumentContext context,
 			IAcceptor<JvmFeatureDescription> acceptor) {
 		if (feature instanceof JvmOperation) {
 			final JvmOperation jvmOperation = (JvmOperation) feature;
@@ -49,7 +49,7 @@ public class XAssignmentSugarDescriptionProvider extends DefaultJvmFeatureDescri
 	}
 	
 	@Override
-	protected void doCollectDescriptions(String name, IFeaturesForTypeProvider featureProvider, JvmTypeReference typeReference, TypeArgumentContext context,
+	protected void doCollectDescriptions(String name, IFeaturesForTypeProvider featureProvider, JvmTypeReference typeReference, ITypeArgumentContext context,
 			Iterable<JvmTypeReference> hierarchy, IAcceptor<JvmFeatureDescription> acceptor) {
 		String alias = "set" + Strings.toFirstUpper(name);
 		super.doCollectDescriptions(alias, featureProvider, typeReference, context, hierarchy, acceptor);

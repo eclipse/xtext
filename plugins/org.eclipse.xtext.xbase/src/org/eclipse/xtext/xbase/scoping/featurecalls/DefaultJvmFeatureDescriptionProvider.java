@@ -13,7 +13,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.TypeArgumentContext;
+import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.VisibilityService;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -63,7 +63,7 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 	public Iterable<IEObjectDescription> getDescriptionsByName(
 			String name, IFeaturesForTypeProvider featureProvider, 
 			JvmTypeReference typeReference,
-			TypeArgumentContext context, Iterable<JvmTypeReference> hierarchy) {
+			ITypeArgumentContext context, Iterable<JvmTypeReference> hierarchy) {
 		final Map<String, IEObjectDescription> descriptions = Maps.newLinkedHashMap();
 		IAcceptor<JvmFeatureDescription> acceptor = new ShadowingAwareAcceptor(descriptions);
 		doCollectDescriptions(name, featureProvider, typeReference, context, hierarchy, acceptor);
@@ -71,14 +71,14 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 	}
 	
 	public Iterable<IEObjectDescription> getAllDescriptions(IFeaturesForTypeProvider featureProvider,
-			JvmTypeReference typeReference, TypeArgumentContext context, Iterable<JvmTypeReference> hierarchy) {
+			JvmTypeReference typeReference, ITypeArgumentContext context, Iterable<JvmTypeReference> hierarchy) {
 		final Map<String, IEObjectDescription> descriptions = Maps.newLinkedHashMap();
 		IAcceptor<JvmFeatureDescription> acceptor = new ShadowingAwareAcceptor(descriptions);
 		doCollectDescriptions(featureProvider, typeReference, context, hierarchy, acceptor);
 		return descriptions.values();
 	}
 
-	protected void doCollectDescriptions(String name, IFeaturesForTypeProvider featureProvider, JvmTypeReference typeReference, TypeArgumentContext context,
+	protected void doCollectDescriptions(String name, IFeaturesForTypeProvider featureProvider, JvmTypeReference typeReference, ITypeArgumentContext context,
 			Iterable<JvmTypeReference> hierarchy, IAcceptor<JvmFeatureDescription> acceptor) {
 		Iterable<JvmFeature> features = featureProvider.getFeaturesByName(name, typeReference, hierarchy);
 		for (JvmFeature jvmFeature : features) {
@@ -86,7 +86,7 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 		}
 	}
 	
-	protected void doCollectDescriptions(IFeaturesForTypeProvider featureProvider, JvmTypeReference typeReference, TypeArgumentContext context,
+	protected void doCollectDescriptions(IFeaturesForTypeProvider featureProvider, JvmTypeReference typeReference, ITypeArgumentContext context,
 			Iterable<JvmTypeReference> hierarchy, IAcceptor<JvmFeatureDescription> acceptor) {
 		Iterable<JvmFeature> features = featureProvider.getAllFeatures(typeReference, hierarchy);
 		for (JvmFeature jvmFeature : features) {
@@ -121,12 +121,12 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 	}
 	
 	protected JvmFeatureDescription createJvmFeatureDescription(QualifiedName name, JvmFeature jvmFeature,
-			TypeArgumentContext ctx, String shadowingString, boolean isValid) {
+			ITypeArgumentContext ctx, String shadowingString, boolean isValid) {
 		return new JvmFeatureDescription(name, jvmFeature, ctx, shadowingString, isValid, implicitReceiver, getNumberOfIrrelevantArguments());
 	}
 	
 	protected JvmFeatureDescription createJvmFeatureDescription(QualifiedName name, JvmFeature jvmFeature,
-			TypeArgumentContext ctx, Provider<String> shadowingStringProvider, boolean isValid) {
+			ITypeArgumentContext ctx, Provider<String> shadowingStringProvider, boolean isValid) {
 		return new JvmFeatureDescription(name, jvmFeature, ctx, shadowingStringProvider, isValid, implicitReceiver, getNumberOfIrrelevantArguments());
 	}
 	
@@ -140,19 +140,19 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 		return featuresForTypeProvider!=null?featuresForTypeProvider.isExtensionProvider():false;
 	}
 
-	protected JvmFeatureDescription createJvmFeatureDescription(JvmFeature jvmFeature, TypeArgumentContext ctx,
+	protected JvmFeatureDescription createJvmFeatureDescription(JvmFeature jvmFeature, ITypeArgumentContext ctx,
 			Provider<String> shadowingStringProvider, boolean isValid) {
 		return createJvmFeatureDescription(
 				QualifiedName.create(jvmFeature.getSimpleName()), 
 				jvmFeature, ctx, shadowingStringProvider, isValid);
 	}
 
-	public void addFeatureDescriptions(JvmFeature feature, TypeArgumentContext context, IAcceptor<JvmFeatureDescription> acceptor) {
+	public void addFeatureDescriptions(JvmFeature feature, ITypeArgumentContext context, IAcceptor<JvmFeatureDescription> acceptor) {
 		Provider<String> signatureProvider = getSignature(feature, context);
 		acceptor.accept(createJvmFeatureDescription(feature, context, signatureProvider, isValid(feature)));
 	}
 
-	protected Provider<String> getSignature(final JvmFeature feature, final TypeArgumentContext context) {
+	protected Provider<String> getSignature(final JvmFeature feature, final ITypeArgumentContext context) {
 		return new Provider<String>() {
 			public String get() {
 				return signatureProvider.getSignature(feature, context, getNumberOfIrrelevantArguments());

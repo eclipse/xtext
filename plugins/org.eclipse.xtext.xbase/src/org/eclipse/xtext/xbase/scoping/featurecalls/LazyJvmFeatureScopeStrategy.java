@@ -8,7 +8,7 @@
 package org.eclipse.xtext.xbase.scoping.featurecalls;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.TypeArgumentContext;
+import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 
@@ -19,13 +19,13 @@ public class LazyJvmFeatureScopeStrategy {
 
 	private final IJvmFeatureDescriptionProvider jvmFeatureDescriptionProvider;
 	private final JvmTypeReference typeReference;
-	private final TypeArgumentContext context;
+	private final ITypeArgumentContext context;
 	private final Iterable<JvmTypeReference> hierarchy;
 	private final IFeaturesForTypeProvider featureProvider;
 
 	public LazyJvmFeatureScopeStrategy(IJvmFeatureDescriptionProvider jvmFeatureDescriptionProvider,
 			IFeaturesForTypeProvider featureProvider, JvmTypeReference typeReference, 
-			TypeArgumentContext context, Iterable<JvmTypeReference> hierarchy) {
+			ITypeArgumentContext context, Iterable<JvmTypeReference> hierarchy) {
 		if (typeReference != null && typeReference.getType() == null)
 			throw new NullPointerException("typeReference#type");
 		this.jvmFeatureDescriptionProvider = jvmFeatureDescriptionProvider;

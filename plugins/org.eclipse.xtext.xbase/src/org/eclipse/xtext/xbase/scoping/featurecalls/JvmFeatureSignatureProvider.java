@@ -14,7 +14,7 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.TypeArgumentContext;
+import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypesSwitch;
 
 /**
@@ -25,9 +25,9 @@ public class JvmFeatureSignatureProvider {
 	protected static class Switch extends TypesSwitch<String> {
 		
 		private int numberOfIrrelevantArguments;
-		private TypeArgumentContext ctx;
+		private ITypeArgumentContext ctx;
 		
-		public Switch(TypeArgumentContext ctx, int numberOfIrrelevantArguments) {
+		public Switch(ITypeArgumentContext ctx, int numberOfIrrelevantArguments) {
 			this.numberOfIrrelevantArguments = numberOfIrrelevantArguments;
 			this.ctx = ctx; 
 		}
@@ -57,11 +57,11 @@ public class JvmFeatureSignatureProvider {
 		}
 	}
 	
-	public String getSignature(JvmFeature from, TypeArgumentContext ctx, int numberOfIrrelevantArguments) {
+	public String getSignature(JvmFeature from, ITypeArgumentContext ctx, int numberOfIrrelevantArguments) {
 		return createSwitch(ctx, numberOfIrrelevantArguments).doSwitch(from);
 	}
 	
-	protected Switch createSwitch(TypeArgumentContext context, int numberOfIrrelevantArguments) {
+	protected Switch createSwitch(ITypeArgumentContext context, int numberOfIrrelevantArguments) {
 		return new Switch(context, numberOfIrrelevantArguments);
 	}
 

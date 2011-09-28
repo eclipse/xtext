@@ -8,7 +8,7 @@
 package org.eclipse.xtext.xbase.scoping.featurecalls;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.TypeArgumentContext;
+import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.resource.IEObjectDescription;
 
 /**
@@ -25,9 +25,9 @@ public interface IJvmFeatureDescriptionProvider {
 
 	Iterable<IEObjectDescription> getDescriptionsByName(
 			String name, IFeaturesForTypeProvider featureProvider, JvmTypeReference typeReference,
-			TypeArgumentContext context, Iterable<JvmTypeReference> hierarchy);
+			ITypeArgumentContext context, Iterable<JvmTypeReference> hierarchy);
 
 	Iterable<IEObjectDescription> getAllDescriptions(IFeaturesForTypeProvider featureProvider,
-			JvmTypeReference typeReference, TypeArgumentContext context, Iterable<JvmTypeReference> hierarchy);
+			JvmTypeReference typeReference, ITypeArgumentContext context, Iterable<JvmTypeReference> hierarchy);
 	
 }

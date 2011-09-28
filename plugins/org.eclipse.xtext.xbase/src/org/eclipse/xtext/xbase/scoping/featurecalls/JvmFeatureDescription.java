@@ -13,7 +13,7 @@ import java.util.Collections;
 
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.util.TypeArgumentContext;
+import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.xbase.XExpression;
@@ -25,7 +25,7 @@ import com.google.inject.Provider;
  */
 public class JvmFeatureDescription extends EObjectDescription implements IValidatedEObjectDescription {
 
-	private final TypeArgumentContext context;
+	private final ITypeArgumentContext context;
 	private String shadowingString;
 	private Provider<String> shadowingStringProvider;
 	private final boolean isValid;
@@ -33,7 +33,7 @@ public class JvmFeatureDescription extends EObjectDescription implements IValida
 	private int numberOfIrrelevantArguments = 0;
 	private String issueCode;
 
-	public JvmFeatureDescription(QualifiedName qualifiedName, JvmFeature element, TypeArgumentContext context,
+	public JvmFeatureDescription(QualifiedName qualifiedName, JvmFeature element, ITypeArgumentContext context,
 			String shadowingString, boolean isValid, XExpression implicitReceiver,
 			int numberOfIrrelevantArguments) {
 		super(qualifiedName, element, Collections.<String, String> emptyMap());
@@ -45,7 +45,7 @@ public class JvmFeatureDescription extends EObjectDescription implements IValida
 		this.numberOfIrrelevantArguments = numberOfIrrelevantArguments;
 	}
 	
-	public JvmFeatureDescription(QualifiedName qualifiedName, JvmFeature element, TypeArgumentContext context,
+	public JvmFeatureDescription(QualifiedName qualifiedName, JvmFeature element, ITypeArgumentContext context,
 			Provider<String> shadowingStringProvider, boolean isValid, XExpression implicitReceiver,
 			int numberOfIrrelevantArguments) {
 		super(qualifiedName, element, Collections.<String, String> emptyMap());
@@ -65,7 +65,7 @@ public class JvmFeatureDescription extends EObjectDescription implements IValida
 		return (JvmFeature) getEObjectOrProxy();
 	}
 
-	public TypeArgumentContext getContext() {
+	public ITypeArgumentContext getContext() {
 		return context;
 	}
 
