@@ -28,13 +28,13 @@ public class Xtend06_Closures {
     return _personsToString;
   }
   
-  public ArrayList<Object> personsToString(final List<Person> persons, final Function1<Person,String> toString) {
+  public ArrayList<Object> personsToString(final List<Person> persons, final Function1<? super Person,? extends String> toString) {
     {
       ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
       final ArrayList<Object> result = _newArrayList;
       for (final Person p : persons) {
         String _apply = toString.apply(p);
-        CollectionExtensions.<Object>operator_add(result, _apply);
+        CollectionExtensions.<String>operator_add(result, _apply);
       }
       return result;
     }
@@ -50,8 +50,8 @@ public class Xtend06_Closures {
         }
       };
     Collections.<Person>sort(persons, new Comparator<Person>() {
-        public int compare(Person o1,Person o2) {
-          return _function.apply(o1,o2);
+        public int compare(Person arg0,Person arg1) {
+          return _function.apply(arg0,arg1);
         }
     });
   }

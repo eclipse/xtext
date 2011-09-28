@@ -25,10 +25,10 @@ import org.junit.runner.RunWith;
 public class ParserTest {
   
   @Inject
-  private ParseHelper<DomainModel> _parseHelper0;
+  private ParseHelper<DomainModel> _parseHelper;
   
   @Inject
-  private ValidationTestHelper _validationTestHelper1;
+  private ValidationTestHelper _validationTestHelper;
   
   @Test
   public void testParsing() throws Exception {
@@ -47,7 +47,7 @@ public class ParserTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      DomainModel _parse = this._parseHelper0.parse(_builder);
+      DomainModel _parse = this._parseHelper.parse(_builder);
       final DomainModel model = _parse;
       EList<AbstractElement> _elements = model.getElements();
       AbstractElement _get = _elements.get(0);
@@ -98,7 +98,7 @@ public class ParserTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    DomainModel _parse = this._parseHelper0.parse(_builder);
-    this._validationTestHelper1.assertNoErrors(_parse);
+    DomainModel _parse = this._parseHelper.parse(_builder);
+    this._validationTestHelper.assertNoErrors(_parse);
   }
 }

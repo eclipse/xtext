@@ -45,7 +45,7 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 public class JvmModelGenerator implements IGenerator {
   
   @Inject
-  private ILogicalContainerProvider _iLogicalContainerProvider0;
+  private ILogicalContainerProvider _iLogicalContainerProvider;
   
   @Inject
   private XbaseCompiler compiler;
@@ -86,9 +86,9 @@ public class JvmModelGenerator implements IGenerator {
       List<String> _imports = importManager.getImports();
       final Function1<String,String> _function = new Function1<String,String>() {
           public String apply(final String i) {
-            String _operator_plus_1 = StringExtensions.operator_plus("import ", i);
-            String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, ";");
-            return _operator_plus_2;
+            String _operator_plus = StringExtensions.operator_plus("import ", i);
+            String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, ";");
+            return _operator_plus_1;
           }
         };
       List<String> _map = ListExtensions.<String, String>map(_imports, _function);
@@ -283,15 +283,15 @@ public class JvmModelGenerator implements IGenerator {
           Iterable<JvmTypeReference> _filter = IterableExtensions.<JvmTypeReference>filter(_superTypes_2, _function_1);
           final Iterable<JvmTypeReference> withoutObject = _filter;
           final Function1<JvmTypeReference,Boolean> _function_2 = new Function1<JvmTypeReference,Boolean>() {
-              public Boolean apply(final JvmTypeReference typeRef_1) {
+              public Boolean apply(final JvmTypeReference typeRef) {
                 boolean _operator_and = false;
-                JvmType _type = typeRef_1.getType();
+                JvmType _type = typeRef.getType();
                 if (!(_type instanceof JvmGenericType)) {
                   _operator_and = false;
                 } else {
-                  JvmType _type_1 = typeRef_1.getType();
-                  boolean _isInterface_1 = ((JvmGenericType) _type_1).isInterface();
-                  boolean _operator_not = BooleanExtensions.operator_not(_isInterface_1);
+                  JvmType _type_1 = typeRef.getType();
+                  boolean _isInterface = ((JvmGenericType) _type_1).isInterface();
+                  boolean _operator_not = BooleanExtensions.operator_not(_isInterface);
                   _operator_and = BooleanExtensions.operator_and((_type instanceof JvmGenericType), _operator_not);
                 }
                 return ((Boolean)_operator_and);
@@ -301,29 +301,29 @@ public class JvmModelGenerator implements IGenerator {
           JvmTypeReference _head = IterableExtensions.<JvmTypeReference>head(_filter_1);
           final JvmTypeReference superClazz = _head;
           final Function1<JvmTypeReference,Boolean> _function_3 = new Function1<JvmTypeReference,Boolean>() {
-              public Boolean apply(final JvmTypeReference typeRef_2) {
-                boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(typeRef_2, superClazz);
-                return ((Boolean)_operator_notEquals_1);
+              public Boolean apply(final JvmTypeReference typeRef) {
+                boolean _operator_notEquals = ObjectExtensions.operator_notEquals(typeRef, superClazz);
+                return ((Boolean)_operator_notEquals);
               }
             };
           Iterable<JvmTypeReference> _filter_2 = IterableExtensions.<JvmTypeReference>filter(withoutObject, _function_3);
           final Iterable<JvmTypeReference> superInterfaces = _filter_2;
           String result = "";
-          boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(superClazz, null);
-          if (_operator_notEquals_2) {
-            CharSequence _serialize_1 = importManager.serialize(superClazz);
-            String _operator_plus_2 = StringExtensions.operator_plus("extends ", _serialize_1);
+          boolean _operator_notEquals = ObjectExtensions.operator_notEquals(superClazz, null);
+          if (_operator_notEquals) {
+            CharSequence _serialize = importManager.serialize(superClazz);
+            String _operator_plus_2 = StringExtensions.operator_plus("extends ", _serialize);
             String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, " ");
             result = _operator_plus_3;
           }
           boolean _isEmpty_1 = IterableExtensions.isEmpty(superInterfaces);
-          boolean _operator_not_1 = BooleanExtensions.operator_not(_isEmpty_1);
-          if (_operator_not_1) {
+          boolean _operator_not = BooleanExtensions.operator_not(_isEmpty_1);
+          if (_operator_not) {
             String _operator_plus_4 = StringExtensions.operator_plus(result, "implements ");
             final Function1<JvmTypeReference,CharSequence> _function_4 = new Function1<JvmTypeReference,CharSequence>() {
-                public CharSequence apply(final JvmTypeReference t_1) {
-                  CharSequence _serialize_2 = importManager.serialize(t_1);
-                  return _serialize_2;
+                public CharSequence apply(final JvmTypeReference t) {
+                  CharSequence _serialize = importManager.serialize(t);
+                  return _serialize;
                 }
               };
             Iterable<CharSequence> _map_1 = IterableExtensions.<JvmTypeReference, CharSequence>map(superInterfaces, _function_4);
@@ -433,7 +433,7 @@ public class JvmModelGenerator implements IGenerator {
         return _apply;
       } else {
         {
-          XExpression _associatedExpression = this._iLogicalContainerProvider0.getAssociatedExpression(op);
+          XExpression _associatedExpression = this._iLogicalContainerProvider.getAssociatedExpression(op);
           final XExpression expression = _associatedExpression;
           boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(expression, null);
           if (_operator_notEquals_1) {
@@ -612,8 +612,8 @@ public class JvmModelGenerator implements IGenerator {
         EList<JvmTypeReference> _values_2 = it.getValues();
         final Function1<JvmTypeReference,CharSequence> _function = new Function1<JvmTypeReference,CharSequence>() {
             public CharSequence apply(final JvmTypeReference t) {
-              CharSequence _serialize_1 = importManager.serialize(t);
-              return _serialize_1;
+              CharSequence _serialize = importManager.serialize(t);
+              return _serialize;
             }
           };
         List<CharSequence> _map = ListExtensions.<JvmTypeReference, CharSequence>map(_values_2, _function);

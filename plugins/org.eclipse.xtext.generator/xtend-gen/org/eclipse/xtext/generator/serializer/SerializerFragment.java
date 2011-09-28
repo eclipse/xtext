@@ -48,16 +48,19 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
   
   public SerializerFragmentState state() {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList();
-    final SerializerFragmentState result;
+    final SerializerFragmentState _result;
     synchronized (_createCache_state) {
       if (_createCache_state.containsKey(_cacheKey)) {
         return _createCache_state.get(_cacheKey);
       }
       SerializerFragmentState _serializerFragmentState = new SerializerFragmentState();
-      result = _serializerFragmentState;
-      _createCache_state.put(_cacheKey, result);
+      _result = _serializerFragmentState;
+      _createCache_state.put(_cacheKey, _result);
     }
-    return result;
+    _init_state(_result);
+    return _result;
+  }
+  private void _init_state(final SerializerFragmentState result) {
   }
   
   public boolean setGenerateDebugData(final boolean doGenerate) {

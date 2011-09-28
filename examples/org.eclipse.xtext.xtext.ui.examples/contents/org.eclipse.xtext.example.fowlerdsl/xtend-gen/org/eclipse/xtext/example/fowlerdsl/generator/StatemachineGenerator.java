@@ -248,8 +248,8 @@ public class StatemachineGenerator implements IGenerator {
     final Function1<Transition,String> _function = new Function1<Transition,String>() {
         public String apply(final Transition t) {
           Event _event = t.getEvent();
-          String _name_3 = _event.getName();
-          return _name_3;
+          String _name = _event.getName();
+          return _name;
         }
       };
     List<String> _map = ListExtensions.<Transition, String>map(_transitions, _function);
@@ -262,20 +262,20 @@ public class StatemachineGenerator implements IGenerator {
     _builder.newLine();
     {
       EList<Transition> _transitions_1 = state.getTransitions();
-      for(final Transition t_1 : _transitions_1) {
+      for(final Transition t : _transitions_1) {
         _builder.append("\t");
         _builder.append("if (\"");
-        Event _event_1 = t_1.getEvent();
-        String _name_4 = _event_1.getName();
-        _builder.append(_name_4, "	");
+        Event _event = t.getEvent();
+        String _name_3 = _event.getName();
+        _builder.append(_name_3, "	");
         _builder.append("\".equals(lastEvent)) {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("\t");
         _builder.append("currentState = \"");
-        State _state = t_1.getState();
-        String _name_5 = _state.getName();
-        _builder.append(_name_5, "		");
+        State _state = t.getState();
+        String _name_4 = _state.getName();
+        _builder.append(_name_4, "		");
         _builder.append("\";");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");

@@ -31,7 +31,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
   
   @Inject
-  private JvmTypesBuilder _jvmTypesBuilder0;
+  private JvmTypesBuilder _jvmTypesBuilder;
   
   protected void _infer(final Entity e, final IAcceptor<JvmDeclaredType> acceptor, final boolean prelinkingPhase) {
     String _fullName = this.fullName(e);
@@ -43,7 +43,7 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
             if (_operator_notEquals) {
               EList<JvmTypeReference> _superTypes = it.getSuperTypes();
               JvmParameterizedTypeReference _superType_1 = e.getSuperType();
-              JvmTypeReference _cloneWithProxies = DomainmodelJvmModelInferrer.this._jvmTypesBuilder0.cloneWithProxies(_superType_1);
+              JvmTypeReference _cloneWithProxies = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.cloneWithProxies(_superType_1);
               CollectionExtensions.<JvmTypeReference>operator_add(_superTypes, _cloneWithProxies);
             }
             EList<Feature> _features = e.getFeatures();
@@ -58,18 +58,18 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
                     EList<JvmMember> _members = it.getMembers();
                     String _name = f_2.getName();
                     JvmTypeReference _type = f_2.getType();
-                    JvmField _field = DomainmodelJvmModelInferrer.this._jvmTypesBuilder0.toField(f_2, _name, _type);
-                    CollectionExtensions.<JvmMember>operator_add(_members, _field);
+                    JvmField _field = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toField(f_2, _name, _type);
+                    CollectionExtensions.<JvmField>operator_add(_members, _field);
                     EList<JvmMember> _members_1 = it.getMembers();
                     String _name_1 = f_2.getName();
                     JvmTypeReference _type_1 = f_2.getType();
-                    JvmOperation _getter = DomainmodelJvmModelInferrer.this._jvmTypesBuilder0.toGetter(f_2, _name_1, _type_1);
-                    CollectionExtensions.<JvmMember>operator_add(_members_1, _getter);
+                    JvmOperation _getter = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toGetter(f_2, _name_1, _type_1);
+                    CollectionExtensions.<JvmOperation>operator_add(_members_1, _getter);
                     EList<JvmMember> _members_2 = it.getMembers();
                     String _name_2 = f_2.getName();
                     JvmTypeReference _type_2 = f_2.getType();
-                    JvmOperation _setter = DomainmodelJvmModelInferrer.this._jvmTypesBuilder0.toSetter(f_2, _name_2, _type_2);
-                    CollectionExtensions.<JvmMember>operator_add(_members_2, _setter);
+                    JvmOperation _setter = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toSetter(f_2, _name_2, _type_2);
+                    CollectionExtensions.<JvmOperation>operator_add(_members_2, _setter);
                   }
                 }
               }
@@ -80,28 +80,28 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
                   EList<JvmMember> _members_3 = it.getMembers();
                   String _name_3 = f_3.getName();
                   JvmTypeReference _type_3 = f_3.getType();
-                  final Function1<JvmOperation,Void> _function_1 = new Function1<JvmOperation,Void>() {
-                      public Void apply(final JvmOperation it_1) {
+                  final Function1<JvmOperation,Void> _function = new Function1<JvmOperation,Void>() {
+                      public Void apply(final JvmOperation it) {
                         {
                           Visibility _visibility = f_3.getVisibility();
                           JvmVisibility _jvm = DomainmodelJvmModelInferrer.this.toJvm(_visibility);
-                          it_1.setVisibility(_jvm);
+                          it.setVisibility(_jvm);
                           EList<JvmFormalParameter> _params = f_3.getParams();
                           for (final JvmFormalParameter p : _params) {
-                            EList<JvmFormalParameter> _parameters = it_1.getParameters();
-                            String _name_4 = p.getName();
+                            EList<JvmFormalParameter> _parameters = it.getParameters();
+                            String _name = p.getName();
                             JvmTypeReference _parameterType = p.getParameterType();
-                            JvmFormalParameter _parameter = DomainmodelJvmModelInferrer.this._jvmTypesBuilder0.toParameter(p, _name_4, _parameterType);
+                            JvmFormalParameter _parameter = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toParameter(p, _name, _parameterType);
                             _parameters.add(_parameter);
                           }
                           XExpression _body = f_3.getBody();
-                          DomainmodelJvmModelInferrer.this._jvmTypesBuilder0.associate(_body, it_1);
+                          DomainmodelJvmModelInferrer.this._jvmTypesBuilder.associate(_body, it);
                         }
                         return null;
                       }
                     };
-                  JvmOperation _method = DomainmodelJvmModelInferrer.this._jvmTypesBuilder0.toMethod(f_3, _name_3, _type_3, _function_1);
-                  CollectionExtensions.<JvmMember>operator_add(_members_3, _method);
+                  JvmOperation _method = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toMethod(f_3, _name_3, _type_3, _function);
+                  CollectionExtensions.<JvmOperation>operator_add(_members_3, _method);
                 }
               }
             }
@@ -109,7 +109,7 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
           return null;
         }
       };
-    JvmGenericType _clazz = this._jvmTypesBuilder0.toClazz(e, _fullName, _function);
+    JvmGenericType _clazz = this._jvmTypesBuilder.toClazz(e, _fullName, _function);
     acceptor.accept(_clazz);
   }
   

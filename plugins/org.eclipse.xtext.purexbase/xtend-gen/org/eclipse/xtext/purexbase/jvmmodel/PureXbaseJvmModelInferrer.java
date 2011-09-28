@@ -35,7 +35,7 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
   
   @Inject
-  private JvmTypesBuilder _jvmTypesBuilder0;
+  private JvmTypesBuilder _jvmTypesBuilder;
   
   @Inject
   private IEarlyExitComputer computer;
@@ -54,28 +54,28 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
             Void _xblockexpression = null;
             {
               EList<JvmAnnotationReference> _annotations = it.getAnnotations();
-              JvmAnnotationReference _annotation = PureXbaseJvmModelInferrer.this._jvmTypesBuilder0.toAnnotation(e, java.lang.SuppressWarnings.class, "all");
+              JvmAnnotationReference _annotation = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.toAnnotation(e, java.lang.SuppressWarnings.class, "all");
               CollectionExtensions.<JvmAnnotationReference>operator_add(_annotations, _annotation);
               EList<JvmMember> _members = it.getMembers();
-              JvmTypeReference _newTypeRef = PureXbaseJvmModelInferrer.this._jvmTypesBuilder0.newTypeRef(e, Void.TYPE);
-              final Function1<JvmOperation,Void> _function_1 = new Function1<JvmOperation,Void>() {
-                  public Void apply(final JvmOperation it_1) {
-                    Void _xblockexpression_1 = null;
+              JvmTypeReference _newTypeRef = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(e, Void.TYPE);
+              final Function1<JvmOperation,Void> _function = new Function1<JvmOperation,Void>() {
+                  public Void apply(final JvmOperation it) {
+                    Void _xblockexpression = null;
                     {
-                      it_1.setStatic(true);
-                      EList<JvmFormalParameter> _parameters = it_1.getParameters();
-                      JvmTypeReference _newTypeRef_1 = PureXbaseJvmModelInferrer.this._jvmTypesBuilder0.newTypeRef(e, java.lang.String.class);
-                      JvmTypeReference _addArrayTypeDimension = PureXbaseJvmModelInferrer.this._jvmTypesBuilder0.addArrayTypeDimension(_newTypeRef_1);
-                      JvmFormalParameter _parameter = PureXbaseJvmModelInferrer.this._jvmTypesBuilder0.toParameter(e, "args", _addArrayTypeDimension);
+                      it.setStatic(true);
+                      EList<JvmFormalParameter> _parameters = it.getParameters();
+                      JvmTypeReference _newTypeRef = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(e, java.lang.String.class);
+                      JvmTypeReference _addArrayTypeDimension = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.addArrayTypeDimension(_newTypeRef);
+                      JvmFormalParameter _parameter = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.toParameter(e, "args", _addArrayTypeDimension);
                       CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter);
                       boolean _containsReturn = PureXbaseJvmModelInferrer.this.containsReturn(e);
                       boolean _operator_not = BooleanExtensions.operator_not(_containsReturn);
                       if (_operator_not) {
-                        final Function1<ImportManager,StringConcatenation> _function_2 = new Function1<ImportManager,StringConcatenation>() {
-                            public StringConcatenation apply(final ImportManager it_2) {
+                        final Function1<ImportManager,StringConcatenation> _function = new Function1<ImportManager,StringConcatenation>() {
+                            public StringConcatenation apply(final ImportManager it) {
                               StringConcatenation _builder = new StringConcatenation();
                               _builder.append("try {");
-                              String _compile = PureXbaseJvmModelInferrer.this.compile(e, it_2);
+                              String _compile = PureXbaseJvmModelInferrer.this.compile(e, it);
                               _builder.append(_compile, "");
                               _builder.newLineIfNotEmpty();
                               _builder.append("} catch (Throwable t) {}");
@@ -83,68 +83,68 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
                               return _builder;
                             }
                           };
-                        PureXbaseJvmModelInferrer.this._jvmTypesBuilder0.body(it_1, _function_2);
+                        PureXbaseJvmModelInferrer.this._jvmTypesBuilder.body(it, _function);
                       } else {
-                        final Function1<ImportManager,StringConcatenation> _function_3 = new Function1<ImportManager,StringConcatenation>() {
-                            public StringConcatenation apply(final ImportManager it_3) {
-                              StringConcatenation _builder_1 = new StringConcatenation();
-                              _builder_1.append("try {");
-                              _builder_1.newLine();
-                              _builder_1.append("\t");
-                              _builder_1.append("xbaseExpression();");
-                              _builder_1.newLine();
-                              _builder_1.append("} catch (Throwable t) {}");
-                              _builder_1.newLine();
-                              return _builder_1;
+                        final Function1<ImportManager,StringConcatenation> _function_1 = new Function1<ImportManager,StringConcatenation>() {
+                            public StringConcatenation apply(final ImportManager it) {
+                              StringConcatenation _builder = new StringConcatenation();
+                              _builder.append("try {");
+                              _builder.newLine();
+                              _builder.append("\t");
+                              _builder.append("xbaseExpression();");
+                              _builder.newLine();
+                              _builder.append("} catch (Throwable t) {}");
+                              _builder.newLine();
+                              return _builder;
                             }
                           };
-                        PureXbaseJvmModelInferrer.this._jvmTypesBuilder0.body(it_1, _function_3);
+                        PureXbaseJvmModelInferrer.this._jvmTypesBuilder.body(it, _function_1);
                       }
-                      _xblockexpression_1 = (((Void) null));
+                      _xblockexpression = (((Void) null));
                     }
-                    return _xblockexpression_1;
+                    return _xblockexpression;
                   }
                 };
-              JvmOperation _method = PureXbaseJvmModelInferrer.this._jvmTypesBuilder0.toMethod(e, "main", _newTypeRef, _function_1);
-              CollectionExtensions.<JvmMember>operator_add(_members, _method);
-              boolean _containsReturn_1 = PureXbaseJvmModelInferrer.this.containsReturn(e);
-              if (_containsReturn_1) {
+              JvmOperation _method = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.toMethod(e, "main", _newTypeRef, _function);
+              CollectionExtensions.<JvmOperation>operator_add(_members, _method);
+              boolean _containsReturn = PureXbaseJvmModelInferrer.this.containsReturn(e);
+              if (_containsReturn) {
                 EList<JvmMember> _members_1 = it.getMembers();
-                JvmTypeReference _newTypeRef_2 = PureXbaseJvmModelInferrer.this._jvmTypesBuilder0.newTypeRef(e, java.lang.Object.class);
-                final Function1<JvmOperation,Void> _function_4 = new Function1<JvmOperation,Void>() {
-                    public Void apply(final JvmOperation it_4) {
-                      Void _xblockexpression_2 = null;
+                JvmTypeReference _newTypeRef_1 = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(e, java.lang.Object.class);
+                final Function1<JvmOperation,Void> _function_1 = new Function1<JvmOperation,Void>() {
+                    public Void apply(final JvmOperation it) {
+                      Void _xblockexpression = null;
                       {
-                        it_4.setStatic(true);
-                        final Function1<ImportManager,StringConcatenation> _function_5 = new Function1<ImportManager,StringConcatenation>() {
-                            public StringConcatenation apply(final ImportManager it_5) {
-                              StringConcatenation _builder_2 = new StringConcatenation();
-                              _builder_2.append("if (Boolean.TRUE) {");
-                              String _compile_1 = PureXbaseJvmModelInferrer.this.compile(e, it_5);
-                              _builder_2.append(_compile_1, "");
-                              _builder_2.newLineIfNotEmpty();
-                              _builder_2.append("}");
-                              _builder_2.newLine();
-                              _builder_2.append("return null;");
-                              _builder_2.newLine();
-                              return _builder_2;
+                        it.setStatic(true);
+                        final Function1<ImportManager,StringConcatenation> _function = new Function1<ImportManager,StringConcatenation>() {
+                            public StringConcatenation apply(final ImportManager it) {
+                              StringConcatenation _builder = new StringConcatenation();
+                              _builder.append("if (Boolean.TRUE) {");
+                              String _compile = PureXbaseJvmModelInferrer.this.compile(e, it);
+                              _builder.append(_compile, "");
+                              _builder.newLineIfNotEmpty();
+                              _builder.append("}");
+                              _builder.newLine();
+                              _builder.append("return null;");
+                              _builder.newLine();
+                              return _builder;
                             }
                           };
-                        PureXbaseJvmModelInferrer.this._jvmTypesBuilder0.body(it_4, _function_5);
-                        _xblockexpression_2 = (((Void) null));
+                        PureXbaseJvmModelInferrer.this._jvmTypesBuilder.body(it, _function);
+                        _xblockexpression = (((Void) null));
                       }
-                      return _xblockexpression_2;
+                      return _xblockexpression;
                     }
                   };
-                JvmOperation _method_1 = PureXbaseJvmModelInferrer.this._jvmTypesBuilder0.toMethod(e, "xbaseExpression", _newTypeRef_2, _function_4);
-                CollectionExtensions.<JvmMember>operator_add(_members_1, _method_1);
+                JvmOperation _method_1 = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.toMethod(e, "xbaseExpression", _newTypeRef_1, _function_1);
+                CollectionExtensions.<JvmOperation>operator_add(_members_1, _method_1);
               }
               _xblockexpression = (((Void) null));
             }
             return _xblockexpression;
           }
         };
-      JvmGenericType _clazz = this._jvmTypesBuilder0.toClazz(e, _name, _function);
+      JvmGenericType _clazz = this._jvmTypesBuilder.toClazz(e, _name, _function);
       acceptor.accept(_clazz);
     }
   }
@@ -181,7 +181,7 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
       StringBuilderBasedAppendable _stringBuilderBasedAppendable = new StringBuilderBasedAppendable(mnr, "\t");
       final StringBuilderBasedAppendable appendable = _stringBuilderBasedAppendable;
       appendable.increaseIndentation();
-      JvmTypeReference _newTypeRef = this._jvmTypesBuilder0.newTypeRef(obj, Void.TYPE);
+      JvmTypeReference _newTypeRef = this._jvmTypesBuilder.newTypeRef(obj, Void.TYPE);
       this.compiler.compile(obj, appendable, _newTypeRef);
       String _string = appendable.toString();
       return _string;
