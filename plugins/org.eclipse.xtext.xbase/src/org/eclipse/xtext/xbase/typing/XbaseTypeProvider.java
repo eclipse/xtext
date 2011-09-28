@@ -326,11 +326,13 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			JvmTypeReference functionType = getExpectedType(closure, rawType);
 			if (functionType != null) {
 				JvmOperation operation = closures.findImplementingOperation(functionType, closure.eResource());
-				JvmTypeReference declaredReturnType = operation.getReturnType();
-				ITypeArgumentContext receiverContext = getTypeArgumentContextProvider().getTypeArgumentContext(
-						new TypeArgumentContextProvider.ReceiverRequest(functionType));
-				JvmTypeReference result = receiverContext.getUpperBound(declaredReturnType, closure);
-				return result;
+				if (operation != null) {
+					JvmTypeReference declaredReturnType = operation.getReturnType();
+					ITypeArgumentContext receiverContext = getTypeArgumentContextProvider().getTypeArgumentContext(
+							new TypeArgumentContextProvider.ReceiverRequest(functionType));
+					JvmTypeReference result = receiverContext.getUpperBound(declaredReturnType, closure);
+					return result;
+				}
 			}
 		}
 		return null;
