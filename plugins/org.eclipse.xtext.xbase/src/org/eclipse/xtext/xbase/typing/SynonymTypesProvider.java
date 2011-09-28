@@ -99,30 +99,5 @@ public class SynonymTypesProvider {
 			return !((Collection<?>) synonymTypes).isEmpty();
 		return !isEmpty(synonymTypes);
 	}
-
-//	public JvmTypeReference findCompatibleSynonymType(JvmTypeReference toBeConverted, JvmType toBeCompatible) {
-//		if (isAssignable(toBeConverted, toBeCompatible)) 
-//			return toBeConverted;
-//		
-//		Iterable<JvmTypeReference> types = getSynonymTypes(toBeConverted);
-//		for (JvmTypeReference synonym : types) {
-//			if (isAssignable(synonym, toBeCompatible))
-//				return synonym;
-//		}
-//		return null;
-//	}
-
-//	protected boolean isAssignable(JvmTypeReference toBeConverted, JvmType toBeCompatible) {
-//		if (toBeConverted == null)
-//			return false;
-//		if (toBeConverted.getType() == toBeCompatible)
-//			return true;
-//		Set<JvmType> rawTypes = superTypeCollector.collectSuperTypesAsRawTypes(toBeConverted);
-//		for (JvmType jvmType : rawTypes) {
-//			if (jvmType == toBeCompatible)
-//				return true;
-//		}
-//		return false;
-//	}
 	
 }
