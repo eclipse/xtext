@@ -58,8 +58,8 @@ public class JvmCompoundTypeReferenceImplCustom extends JvmCompoundTypeReference
 	
 	/**
 	 * The identifier of a {@link org.eclipse.xtext.common.types.JvmCompoundTypeReference JvmCompoundTypeReference} 
-	 * is the concatenated identifier of its {@link #getReferences() components}. The {@link #getCompoundDelimiter() delimiter} is specified in concrete
-	 * sub-types.
+	 * is the concatenated identifier of its {@link #getReferences() components}. The {@link #getDelimiter() delimiter} 
+	 * is specified in concrete sub-types.
 	 * 
 	 * {@inheritDoc}
 	 */
