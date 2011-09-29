@@ -253,6 +253,10 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 												return constructor;
 											}
 											@Override
+											public String toString() {
+												return "XbaseScopeProvider.createConstructorCallScope [context=" + context + "]";
+											}
+											@Override
 											public JvmTypeParameterDeclarator getNearestDeclarator() {
 												return EcoreUtil2.getContainerOfType(context, JvmTypeParameterDeclarator.class);
 											}

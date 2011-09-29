@@ -70,7 +70,7 @@ public class IssueCodes {
 
 	
 	public static int compareIssueCodes(String left, String right) {
-		if (left == right || left.equals(right))
+		if (left.equals(right))
 			return 0;
 		for(int i = 0; i < sortedIssueCodes.size(); i++) {
 			String candidate = sortedIssueCodes.get(i);

@@ -92,7 +92,7 @@ public class TypeArgumentContextProvider {
 		}
 	}
 
-	public static interface Request {
+	public interface Request {
 		
 		/**
 		 * @return the receiver type or null.
@@ -128,6 +128,19 @@ public class TypeArgumentContextProvider {
 		 * @return the expected type or null.
 		 */
 		JvmTypeReference getDeclaredType();
+		
+		/**
+		 * Implementors are encouraged to override {@link #toString()} and provide a meaningful
+		 * description for the request.
+		 */
+		@Override
+		String toString();
+		
+	}
+	
+	public interface IInitializableTypeArgumentContext extends ITypeArgumentContext{
+
+		void initialize(TypeArgumentContextProvider.Request request, TypeArgumentContextProvider contextProvider);
 		
 	}
 	
@@ -174,15 +187,23 @@ public class TypeArgumentContextProvider {
 		public JvmTypeReference getReceiverType() {
 			return receiver;
 		}
+		@Override
+		public String toString() {
+			return "ReceiverRequest [receiver=" + receiver + "]";
+		}
+		
 	}
 	
 	public ITypeArgumentContext getTypeArgumentContext(Request request) {
-		LazyTypeArgumentContext result = lazyTypeArgumentContextProvider.get();
+		IInitializableTypeArgumentContext result = lazyTypeArgumentContextProvider.get();
+		if (LoggingTypeArgumentDecorator.isDebugEnabled()) {
+			result = new LoggingTypeArgumentDecorator(result);
+		}
 		result.initialize(request, this);
 		return result;
 	}
 	
-	protected TypeArgumentContext getReceiverContext(JvmTypeReference receiver) {
+	protected TypeArgumentContext getReceiverContext(JvmTypeReference receiverType) {
 		final Map<JvmTypeParameter, JvmTypeReference> result = createTemporaryMap();
 		final Set<JvmType> visited = Sets.newHashSet();
 		boolean rawType = new AbstractTypeReferenceVisitor.InheritanceAware<Boolean>() {
@@ -257,7 +278,7 @@ public class TypeArgumentContextProvider {
 				}
 				return Boolean.FALSE;
 			}
-		}.visit(primitives.asWrapperTypeIfPrimitive(receiver));
+		}.visit(primitives.asWrapperTypeIfPrimitive(receiverType));
 		if (rawType)
 			return new TypeArgumentContext(null, typeReferences, typesFactory, rawTypeHelper);
 		Map<JvmTypeParameter, JvmTypeReference> normalized = normalizedCopy(result);
@@ -322,6 +343,27 @@ public class TypeArgumentContextProvider {
 					JvmTypeReference reference = null;
 					if (!uppers.isEmpty() && upperIndex < lowerIndex) {
 						reference = conformanceComputer.getCommonSuperType(uppers);
+						if (uppers.size() == 1 && boundToList.get(upperIndex).kind == ResolveInfoKind.WC_UPPER) {
+							boolean useWildcard = true;
+							for(ResolveInfo lowerResolve: lowers) {
+								if (!conformanceComputer.isConformant(lowerResolve.reference, reference)) {
+									useWildcard = false;
+									break;
+								}
+							}
+							if (useWildcard) {
+								if (reference.eContainer() != null) {
+									JvmDelegateTypeReference delegate = typesFactory.createJvmDelegateTypeReference();
+									delegate.setDelegate(reference);
+									reference = delegate;
+								}
+								JvmWildcardTypeReference wildCard = typeReferences.wildCard();
+								JvmUpperBound upperBound = typesFactory.createJvmUpperBound();
+								wildCard.getConstraints().add(upperBound);
+								upperBound.setTypeReference(reference);
+								reference = wildCard;
+							}
+						}
 					} else if (!lowers.isEmpty()) {
 						ResolveInfo bestResolvedLower = null;
 						for(ResolveInfo resolvedLower: lowers) {
@@ -456,7 +498,7 @@ public class TypeArgumentContextProvider {
 
 	protected ITypeArgumentContext getExplicitArgumentContext(
 			JvmExecutable executable,
-			List<JvmTypeReference> explicitTypeArgument) {
+			List<JvmTypeReference> explicitTypeArguments) {
 		Map<JvmTypeParameter, JvmTypeReference> result = createTemporaryMap();
 		List<JvmTypeParameter> typeParameters = executable.getTypeParameters();
 		if (typeParameters.isEmpty() && executable instanceof JvmConstructor) {
@@ -465,11 +507,11 @@ public class TypeArgumentContextProvider {
 				typeParameters = ((JvmTypeParameterDeclarator) declaringType).getTypeParameters();
 			}
 		}
-		for(int i = 0; i < typeParameters.size() && i < explicitTypeArgument.size(); i++) {
+		for(int i = 0; i < typeParameters.size() && i < explicitTypeArguments.size(); i++) {
 			JvmTypeParameter typeParameter = typeParameters.get(i);
-			JvmTypeReference typeArgument = explicitTypeArgument.get(i);
+			JvmTypeReference typeArgument = explicitTypeArguments.get(i);
 			if (typeParameter != null && typeArgument != null)
-				result.put(typeParameters.get(i), explicitTypeArgument.get(i));
+				result.put(typeParameters.get(i), explicitTypeArguments.get(i));
 		}
 		if (result.isEmpty())
 			return null;
@@ -596,7 +638,8 @@ public class TypeArgumentContextProvider {
 		};
 	}
 	
-	protected ITypeArgumentContext getDeclaredBoundsContext(JvmTypeParameterDeclarator declarator) {
+	protected ITypeArgumentContext getDeclaredBoundsContext(JvmExecutable executable) {
+		JvmTypeParameterDeclarator declarator = executable;
 		Map<JvmTypeParameter, JvmTypeReference> result = createTemporaryMap();
 		while(declarator != null) {
 			List<JvmTypeParameter> typeParameters = declarator.getTypeParameters();

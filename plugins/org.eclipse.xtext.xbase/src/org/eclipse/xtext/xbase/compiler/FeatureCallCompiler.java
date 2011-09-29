@@ -294,6 +294,10 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 								public List<JvmTypeReference> getArgumentTypes() {
 									return argumentTypes;
 								}
+								@Override
+								public String toString() {
+									return "FeatureCallCompiler.featureCalltoJavaExpression [call=" + call + "]";
+								}
 							}
 					);
 					List<JvmTypeReference> resolvedTypeArguments = Lists.newArrayList();

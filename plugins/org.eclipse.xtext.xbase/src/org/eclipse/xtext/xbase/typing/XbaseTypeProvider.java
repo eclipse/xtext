@@ -341,9 +341,9 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	@Override
 	protected JvmTypeReference handleCycleGetExpectedType(XExpression expression, boolean rawType) {
 		Triple<EObject, EReference, Integer> info = getContainingInfo(expression);
-		if (info.getFirst() instanceof XAbstractFeatureCall) {
-			JvmTypeReference result = _expectedType((XAbstractFeatureCall) info.getFirst(), info.getSecond(),
-					info.getThird(), rawType);
+		EObject container = info.getFirst();
+		if (container instanceof XAbstractFeatureCall) {
+			JvmTypeReference result = expectedTypeDispatcherInvoke(container, info.getSecond(), info.getThird(), rawType);
 			return result;
 		}
 		return super.handleCycleGetExpectedType(expression, rawType);
@@ -359,6 +359,10 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			public JvmTypeReference getReceiverType() {
 				JvmTypeReference result = XbaseTypeProvider.this.getReceiverType(expr, rawType);
 				return result;
+			}
+			@Override
+			public String toString() {
+				return "XbaseTypeProvider.getFeatureCallTypeArgContext [expr=" + expr + "]";
 			}
 			@Override
 			public JvmTypeReference getExpectedType() {
@@ -522,6 +526,10 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 					@Override
 					public List<JvmTypeReference> getExplicitTypeArgument() {
 						return expr.getTypeArguments();
+					}
+					@Override
+					public String toString() {
+						return "XbaseTypeProvider.expectedType(XConstructorCall,..) [expr=" + expr + "]";
 					}
 					@Override
 					public List<JvmTypeReference> getArgumentTypes() {
@@ -800,6 +808,10 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 				return constructor;
 			}
 			@Override
+			public String toString() {
+				return "XbaseTypeProvider.type(XConstructorCall,..) [constructorCall=" + constructorCall + "]";
+			}
+			@Override
 			public JvmTypeParameterDeclarator getNearestDeclarator() {
 				return nearestTypeParameterDeclarator;
 			}
@@ -959,6 +971,10 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 				if (feature instanceof JvmFeature)
 					return (JvmFeature)feature;
 				return null;
+			}
+			@Override
+			public String toString() {
+				return "XbaseTypeProvider.type(XAbstractFeatureCall,..) [featureCall=" + featureCall + "]";
 			}
 			@Override
 			public JvmTypeParameterDeclarator getNearestDeclarator() {

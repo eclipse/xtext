@@ -26,8 +26,6 @@ public class LazyJvmFeatureScopeStrategy {
 	public LazyJvmFeatureScopeStrategy(IJvmFeatureDescriptionProvider jvmFeatureDescriptionProvider,
 			IFeaturesForTypeProvider featureProvider, JvmTypeReference typeReference, 
 			ITypeArgumentContext context, Iterable<JvmTypeReference> hierarchy) {
-		if (typeReference != null && typeReference.getType() == null)
-			throw new NullPointerException("typeReference#type");
 		this.jvmFeatureDescriptionProvider = jvmFeatureDescriptionProvider;
 		this.featureProvider = featureProvider;
 		this.typeReference = typeReference;
