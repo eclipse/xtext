@@ -41,6 +41,7 @@ import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.tests.ClasspathBasedModule;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -181,7 +182,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 		JvmTypeReference actual = createTypeRef(Iterable.class, wildCardSuper(createTypeRef(CharSequence.class)));
 		ITypeArgumentContext context = contextProvider.getParameterContext(operation, Lists.newArrayList(actual));
 		JvmTypeReference boundArgument = context.getBoundArgument(typeParameter);
-		assertEquals("? super java.lang.CharSequence", boundArgument.getIdentifier());
+		assertEquals("? extends java.lang.Object & super java.lang.CharSequence", boundArgument.getIdentifier());
 	}
 
 //	<T> void foo(Iterable<Iterable<T>> it) {
@@ -199,7 +200,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 		JvmTypeReference actual = createTypeRef(Iterable.class,	createTypeRef(Iterable.class, wildCardSuper(createTypeRef(CharSequence.class))));
 		ITypeArgumentContext context = contextProvider.getParameterContext(operation, Lists.newArrayList(actual));
 		JvmTypeReference boundArgument = context.getBoundArgument(typeParameter);
-		assertEquals("? super java.lang.CharSequence", boundArgument.getIdentifier());
+		assertEquals("? extends java.lang.Object & super java.lang.CharSequence", boundArgument.getIdentifier());
 	}
 
 	/*
@@ -213,7 +214,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 				createTypeRef(Iterable.class, wildCardSuper(createTypeRef(CharSequence.class))));
 		ITypeArgumentContext context = contextProvider.getParameterContext(operation, Lists.newArrayList(actual));
 		JvmTypeReference boundArgument = context.getBoundArgument(typeParameter);
-		assertEquals("java.lang.Iterable<? super java.lang.CharSequence>", boundArgument.getIdentifier());
+		assertEquals("java.lang.Iterable<? extends java.lang.Object & super java.lang.CharSequence>", boundArgument.getIdentifier());
 	}
 	
 	/*
@@ -494,7 +495,113 @@ public class TypeArgumentContextProviderTest extends TestCase {
 		assertEquals("java.lang.String", boundArgument.getIdentifier());
 	}
 	
+	/*
+	 * <T> foo(Iterable<T> iterable, Iterable<? super T> function)
+	 */
+	public void testParameterContext_forEach_01() {
+//		List<? extends String> strings = null;
+//		Functions.Function1<String, Void> fun = null;
+//		IterableExtensions.forEach(strings, null);
+		final JvmOperation operation = operation();
+		JvmTypeParameter typeParameter = typeParameterFor(operation);
+		parameterFor(operation, createTypeRef(Iterable.class, createTypeRef(typeParameter)));
+		JvmTypeReference functionReference = createTypeRef(Function.class, 
+				wildCardSuper(createTypeRef(typeParameter)), 
+				wildCardExtends(createTypeRef(Object.class)));
+		parameterFor(operation, functionReference);
+		final JvmTypeReference firstActual = createTypeRef(List.class, wildCardExtends(createTypeRef(String.class)));
+		final JvmTypeReference secondActual = createTypeRef(Function.class);
+		((JvmParameterizedTypeReference)secondActual).getArguments().clear();
+		ITypeArgumentContext context = contextProvider. getTypeArgumentContext(new TypeArgumentContextProvider.AbstractRequest() {
+			@Override
+			public JvmFeature getFeature() {
+				return operation;
+			}
+			@Override
+			public List<JvmTypeReference> getArgumentTypes() {
+				return Lists.newArrayList(firstActual, secondActual);
+			}
+		}); 
+		JvmTypeReference boundArgument = context.getBoundArgument(typeParameter);
+		assertEquals("? extends java.lang.String", boundArgument.getIdentifier());
+		JvmTypeReference lowerBound = context.getLowerBound(functionReference);
+		assertEquals("com.google.common.base.Function<? extends java.lang.Object & super java.lang.String,? extends java.lang.Object>", lowerBound.getIdentifier());
+	}
+	
+	/*
+	 * <T> foo(Iterable<T> iterable, Iterable<? super T> function)
+	 */
+	public void testParameterContext_forEach_02() {
+//		List<? extends String> strings = null;
+//		Functions.Function1<String, Void> fun = null;
+//		IterableExtensions.forEach(strings, null);
+		final JvmOperation operation = operation();
+		JvmTypeParameter typeParameter = typeParameterFor(operation);
+		parameterFor(operation, createTypeRef(Iterable.class, createTypeRef(typeParameter)));
+		JvmTypeReference functionReference = createTypeRef(Function.class, 
+				wildCardSuper(createTypeRef(typeParameter)), 
+				wildCardExtends(createTypeRef(Object.class)));
+		parameterFor(operation, functionReference);
+		final JvmTypeReference firstActual = createTypeRef(List.class, wildCardExtends(createTypeRef(String.class)));
+		final JvmTypeReference secondActual = createTypeRef(Function.class);
+		ITypeArgumentContext context = contextProvider. getTypeArgumentContext(new TypeArgumentContextProvider.AbstractRequest() {
+			@Override
+			public JvmFeature getFeature() {
+				return operation;
+			}
+			@Override
+			public List<JvmTypeReference> getArgumentTypes() {
+				return Lists.newArrayList(firstActual, secondActual);
+			}
+		}); 
+		JvmTypeReference boundArgument = context.getBoundArgument(typeParameter);
+		assertEquals("? extends java.lang.String", boundArgument.getIdentifier());
+		JvmTypeReference lowerBound = context.getLowerBound(functionReference);
+		assertEquals("com.google.common.base.Function<? extends java.lang.Object & super java.lang.String,? extends java.lang.Object>", lowerBound.getIdentifier());
+	}
+	
+	/*
+	 * <T> foo(Iterable<T> iterable, Iterable<? super T> function)
+	 */
+	public void testParameterContext_forEach_03() {
+//		List<? extends String> strings = null;
+//		Functions.Function1<String, Void> fun = null;
+//		IterableExtensions.forEach(strings, null);
+		final JvmOperation operation = operation();
+		JvmTypeParameter typeParameter = typeParameterFor(operation);
+		parameterFor(operation, createTypeRef(Iterable.class, createTypeRef(typeParameter)));
+		JvmTypeReference functionReference = createTypeRef(Function.class, 
+				wildCardSuper(createTypeRef(typeParameter)), 
+				wildCardExtends(createTypeRef(Object.class)));
+		parameterFor(operation, functionReference);
+		final JvmTypeReference firstActual = createTypeRef(List.class, wildCardExtends(createTypeRef(String.class)));
+		final JvmTypeReference secondActual = createTypeRef(Function.class, 
+				createTypeRef(String.class), 
+				createTypeRef(String.class));
+		ITypeArgumentContext context = contextProvider. getTypeArgumentContext(new TypeArgumentContextProvider.AbstractRequest() {
+			@Override
+			public JvmFeature getFeature() {
+				return operation;
+			}
+			@Override
+			public List<JvmTypeReference> getArgumentTypes() {
+				return Lists.newArrayList(firstActual, secondActual);
+			}
+		}); 
+		JvmTypeReference boundArgument = context.getBoundArgument(typeParameter);
+		assertEquals("? extends java.lang.String", boundArgument.getIdentifier());
+		JvmTypeReference lowerBound = context.getLowerBound(functionReference);
+		assertEquals("com.google.common.base.Function<? extends java.lang.Object & super java.lang.String,? extends java.lang.Object>", lowerBound.getIdentifier());
+	}
+	
 	protected JvmTypeReference createTypeRef(JvmType type, JvmTypeReference... argumentTypes) {
+		if (type instanceof JvmTypeParameter) {
+			if (((JvmTypeParameter) type).getConstraints().isEmpty()) {
+				JvmUpperBound upperBound = factory.createJvmUpperBound();
+				upperBound.setTypeReference(typeReferences.getTypeForName(Object.class, type));
+				((JvmTypeParameter) type).getConstraints().add(upperBound);
+			}
+		}
 		return typeReferences.createTypeRef(type, argumentTypes);
 	}
 	
@@ -506,6 +613,9 @@ public class TypeArgumentContextProviderTest extends TestCase {
 		JvmWildcardTypeReference result = factory.createJvmWildcardTypeReference();
 		JvmLowerBound lowerBound = factory.createJvmLowerBound();
 		lowerBound.setTypeReference(reference);
+		JvmUpperBound upperBound = factory.createJvmUpperBound();
+		upperBound.setTypeReference(typeReferences.getTypeForName(Object.class, resource.getContents().get(0)));
+		result.getConstraints().add(upperBound);
 		result.getConstraints().add(lowerBound);
 		return result;
 	}

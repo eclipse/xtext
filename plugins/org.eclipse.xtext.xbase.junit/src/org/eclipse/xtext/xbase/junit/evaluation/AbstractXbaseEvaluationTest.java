@@ -141,6 +141,10 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo("1", "[String p1| p1].curry('1').apply()");
 	}
 	
+	@Test public void testCurrying_03() throws Exception {
+		assertEvaluatesTo("12", "[String p1, String p2| p1 + p2].curry('1').curry('2').apply()");
+	}
+	
 	/*
 	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=341550
 	 */
