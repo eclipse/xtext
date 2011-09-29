@@ -39,7 +39,7 @@ public class SuperTypeCollector {
 	public interface SuperTypeAcceptor {
 		/**
 		 * @param superType a found super type
-		 * @param the distance to the starting type. StringBuilder has a distance 1 to 
+		 * @param distance the distance to the starting type. StringBuilder has a distance 1 to 
 		 * AbstractStringBuilder, distance 1 and 2 to CharSequence and distance 2 to Appendable.
 		 */
 		boolean accept(JvmTypeReference superType, int distance);
