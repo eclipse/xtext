@@ -1860,6 +1860,15 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"}", "method1");
 	}
 	
+	public void testBug355848() throws Exception {
+		invokeAndExpect2(
+				Integer.valueOf(1), 
+				"def closureWithPrimitives() {\n" + 
+				"    val (int)=>int sum = [a|a]\n" +
+				"    sum.apply(1)" + 
+				"}", "closureWithPrimitives");
+	}
+	
 	@Inject
 	private EclipseRuntimeDependentJavaCompiler javaCompiler;
 
