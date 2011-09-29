@@ -26,220 +26,201 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import com.google.common.collect.Lists;
 
 /**
+ * Implementation of the {@link ITypeArgumentContext} that encapsulates how the available
+ * information of an {@link TypeArgumentContextProvider.Request} will be used to resolve
+ * type parameters. It maintains a chain of delegate contexts and knows which delegate has to 
+ * was already produced and which will be created next on demand.
+ * 
+ * Prior to using the class, clients have to 
+ * {@link #initialize(TypeArgumentContextProvider.Request, TypeArgumentContextProvider) initialize}
+ * it.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class LazyTypeArgumentContext implements ITypeArgumentContext {
-
-	private ITypeArgumentContext delegate;
+public class LazyTypeArgumentContext implements TypeArgumentContextProvider.IInitializableTypeArgumentContext {
 
 	private TypeArgumentContextProvider.Request request;
 
 	private TypeArgumentContextProvider contextProvider;
 	
+	private int nextLevel = 0;
+	
+	private final List<ITypeArgumentContext> delegates;
+	
+	public LazyTypeArgumentContext() {
+		this.delegates = Lists.newArrayListWithCapacity(3);		
+	}
+	
 	public void initialize(TypeArgumentContextProvider.Request request, TypeArgumentContextProvider contextProvider) {
 		this.request = request;
 		this.contextProvider = contextProvider;
-		this.delegate = new CompoundTypeArgumentContext();
 	}
 
-	public JvmTypeReference getBoundArgument(JvmTypeParameter parameter) {
-		return getDelegate().getBoundArgument(parameter);
-	}
-
-	public JvmTypeReference getLowerBound(JvmTypeReference reference) {
-		return getDelegate().getLowerBound(reference);
-	}
-
-	public JvmTypeReference getUpperBound(JvmTypeReference element, Notifier context) {
-		return getDelegate().getUpperBound(element, context);
-	}
-
-	public JvmTypeReference resolve(JvmTypeReference reference) {
-		return getDelegate().resolve(reference);
-	}
-	
 	public boolean isRawTypeContext() {
-		return getDelegate().isRawTypeContext();
-	}
-	
-	protected ITypeArgumentContext getDelegate() {
-		return delegate;
-	}
-	
-	protected class CompoundTypeArgumentContext implements ITypeArgumentContext {
-		protected int nextLevel = 0;
-		
-		private List<ITypeArgumentContext> delegates;
-		
-		protected CompoundTypeArgumentContext() {
-			delegates = Lists.newArrayListWithCapacity(3);
+		for(ITypeArgumentContext delegate: delegates) {
+			if (delegate.isRawTypeContext())
+				return true;
 		}
-
-		public boolean isRawTypeContext() {
-			for(ITypeArgumentContext delegate: delegates) {
+		while(hasNextLevel()) {
+			ITypeArgumentContext delegate = computeNext();
+			if (delegate != null) {
 				if (delegate.isRawTypeContext())
 					return true;
 			}
-			while(hasNextLevel()) {
-				ITypeArgumentContext delegate = computeNext();
-				if (delegate != null) {
-					if (delegate.isRawTypeContext())
-						return true;
-				}
-			}
-			return delegates.isEmpty();
 		}
-		
-		public JvmTypeReference getBoundArgument(JvmTypeParameter parameter) {
-			if (parameter == null)
-				return null;
-			JvmTypeReference firstCandidate = null;
-			for(ITypeArgumentContext delegate: delegates) {
+		return delegates.isEmpty();
+	}
+	
+	public JvmTypeReference getBoundArgument(JvmTypeParameter parameter) {
+		if (parameter == null)
+			return null;
+		JvmTypeReference firstCandidate = null;
+		for(ITypeArgumentContext delegate: delegates) {
+			JvmTypeReference candidate = delegate.getBoundArgument(parameter);
+			if (isResolved(candidate, delegate.isRawTypeContext(), false))
+				return candidate;
+			else if (firstCandidate == null && candidate != null) {
+				firstCandidate = candidate;
+			}
+		}
+		while(hasNextLevel()) {
+			ITypeArgumentContext delegate = computeNext();
+			if (delegate != null) {
 				JvmTypeReference candidate = delegate.getBoundArgument(parameter);
-				if (isResolved(candidate, delegate.isRawTypeContext(), false))
+				if (isResolved(candidate, delegate.isRawTypeContext(), false) || !hasNextLevel())
 					return candidate;
 				else if (firstCandidate == null && candidate != null) {
-					firstCandidate = candidate;
+					if (!(candidate instanceof JvmParameterizedTypeReference) || candidate.getType() != parameter)
+						firstCandidate = candidate;
 				}
 			}
-			while(hasNextLevel()) {
-				ITypeArgumentContext delegate = computeNext();
-				if (delegate != null) {
-					JvmTypeReference candidate = delegate.getBoundArgument(parameter);
-					if (isResolved(candidate, delegate.isRawTypeContext(), false) || !hasNextLevel())
-						return candidate;
-					else if (firstCandidate == null && candidate != null) {
-						if (!(candidate instanceof JvmParameterizedTypeReference) || candidate.getType() != parameter)
-							firstCandidate = candidate;
-					}
-				}
-			}
-			return firstCandidate;
 		}
+		return firstCandidate;
+	}
 
-		public JvmTypeReference getLowerBound(JvmTypeReference reference) {
-			JvmTypeReference result = reference;
-			if (isResolved(result, false))
+	public JvmTypeReference getLowerBound(JvmTypeReference reference) {
+		JvmTypeReference result = reference;
+		if (isResolved(result, false))
+			return result;
+		for(ITypeArgumentContext delegate: delegates) {
+			result = delegate.getLowerBound(result);
+			if (isResolved(result, delegate.isRawTypeContext()))
 				return result;
-			for(ITypeArgumentContext delegate: delegates) {
+		}
+		while(hasNextLevel()) {
+			ITypeArgumentContext delegate = computeNext();
+			if (delegate != null) {
 				result = delegate.getLowerBound(result);
 				if (isResolved(result, delegate.isRawTypeContext()))
 					return result;
 			}
-			while(hasNextLevel()) {
-				ITypeArgumentContext delegate = computeNext();
-				if (delegate != null) {
-					result = delegate.getLowerBound(result);
-					if (isResolved(result, delegate.isRawTypeContext()))
-						return result;
-				}
-			}
-			return result;
 		}
+		return result;
+	}
 
-		public JvmTypeReference getUpperBound(JvmTypeReference reference, Notifier context) {
-			JvmTypeReference result = reference;
-			if (isResolved(result, false))
+	public JvmTypeReference getUpperBound(JvmTypeReference reference, Notifier context) {
+		JvmTypeReference result = reference;
+		if (isResolved(result, false))
+			return result;
+		for(ITypeArgumentContext delegate: delegates) {
+			result = delegate.getUpperBound(result, context);
+			if (isResolved(result, delegate.isRawTypeContext()))
 				return result;
-			for(ITypeArgumentContext delegate: delegates) {
+		}
+		while(hasNextLevel()) {
+			ITypeArgumentContext delegate = computeNext();
+			if (delegate != null) {
 				result = delegate.getUpperBound(result, context);
 				if (isResolved(result, delegate.isRawTypeContext()))
 					return result;
 			}
-			while(hasNextLevel()) {
-				ITypeArgumentContext delegate = computeNext();
-				if (delegate != null) {
-					result = delegate.getUpperBound(result, context);
-					if (isResolved(result, delegate.isRawTypeContext()))
-						return result;
-				}
-			}
-			return result;
 		}
+		return result;
+	}
 
-		public JvmTypeReference resolve(JvmTypeReference reference) {
-			JvmTypeReference result = reference;
-			if (isResolved(result, false))
+	public JvmTypeReference resolve(JvmTypeReference reference) {
+		JvmTypeReference result = reference;
+		if (isResolved(result, false))
+			return result;
+		for(ITypeArgumentContext delegate: delegates) {
+			result = delegate.resolve(result);
+			if (isResolved(result, delegate.isRawTypeContext()))
 				return result;
-			for(ITypeArgumentContext delegate: delegates) {
+		}
+		while(hasNextLevel()) {
+			ITypeArgumentContext delegate = computeNext();
+			if (delegate != null) {
 				result = delegate.resolve(result);
 				if (isResolved(result, delegate.isRawTypeContext()))
 					return result;
 			}
-			while(hasNextLevel()) {
-				ITypeArgumentContext delegate = computeNext();
-				if (delegate != null) {
-					result = delegate.resolve(result);
-					if (isResolved(result, delegate.isRawTypeContext()))
-						return result;
-				}
-			}
-			return result;
 		}
-		
-		protected boolean hasNextLevel() {
-			return nextLevel >= 0;
-		}
-		
-		protected ITypeArgumentContext computeNext() {
-			ITypeArgumentContext result = doComputeNext();
-			if (result != null) {
-				delegates.add(result);
-			}
-			return result;
-		}
-		
-		protected ITypeArgumentContext doComputeNext() {
-			JvmFeature feature = null;
-			switch(nextLevel) {
-				case 0: 
-					JvmTypeReference receiverType = request.getReceiverType();
-					if (receiverType != null) {
-						nextLevel = 1;
-						return contextProvider.getReceiverContext(receiverType);
-					}
-				case 1:
-					feature = request.getFeature();
-					if (feature instanceof JvmExecutable) {
-						List<JvmTypeReference> explicitTypeArguments = request.getExplicitTypeArgument();
-						if (explicitTypeArguments != null && !explicitTypeArguments.isEmpty()) {
-							nextLevel = 2;
-							return contextProvider.getExplicitArgumentContext((JvmExecutable) feature, explicitTypeArguments);
-						}
-					}
-				case 2:
-					if (feature == null)
-						feature = request.getFeature();
-					if (feature instanceof JvmExecutable) {
-						List<JvmTypeReference> argumentTypes = request.getArgumentTypes();
-						if (argumentTypes != null && !argumentTypes.isEmpty()) {
-							nextLevel = 3;
-							return contextProvider.getParameterContext((JvmExecutable) feature, argumentTypes);
-						}
-					}
-				case 3:
-					JvmTypeReference declaredType = request.getDeclaredType();
-					if (declaredType != null) {
-						JvmTypeReference expectedType = request.getExpectedType();
-						if (expectedType != null) {
-							nextLevel = 4;
-							return contextProvider.getExpectedTypeContext(declaredType, expectedType);
-						}
-					}
-				case 4:
-					if (feature == null)
-						feature = request.getFeature();
-					if (feature instanceof JvmExecutable && ((JvmExecutable) feature).isVarArgs()) {
-						nextLevel = -1;
-						return contextProvider.getDeclaredBoundsContext((JvmExecutable) feature);
-					}
-			}
-			nextLevel = -1;
-			return null;
-		}
-		
+		return result;
 	}
-
+	
+	protected boolean hasNextLevel() {
+		return nextLevel >= 0;
+	}
+	
+	protected ITypeArgumentContext computeNext() {
+		ITypeArgumentContext result = doComputeNext();
+		if (result != null) {
+			delegates.add(result);
+		}
+		return result;
+	}
+	
+	protected ITypeArgumentContext doComputeNext() {
+		JvmFeature feature = null;
+		switch(nextLevel) {
+			case 0: 
+				JvmTypeReference receiverType = request.getReceiverType();
+				if (receiverType != null) {
+					nextLevel = 1;
+					return contextProvider.getReceiverContext(receiverType);
+				}
+			case 1:
+				feature = request.getFeature();
+				if (feature instanceof JvmExecutable) {
+					List<JvmTypeReference> explicitTypeArguments = request.getExplicitTypeArgument();
+					if (explicitTypeArguments != null && !explicitTypeArguments.isEmpty()) {
+						
+						nextLevel = 2;
+						return contextProvider.getExplicitArgumentContext((JvmExecutable) feature, explicitTypeArguments);
+					}
+				}
+			case 2:
+				if (feature == null)
+					feature = request.getFeature();
+				if (feature instanceof JvmExecutable) {
+					List<JvmTypeReference> argumentTypes = request.getArgumentTypes();
+					if (argumentTypes != null && !argumentTypes.isEmpty()) {
+						
+						nextLevel = 3;
+						return contextProvider.getParameterContext((JvmExecutable) feature, argumentTypes);
+					}
+				}
+			case 3:
+				JvmTypeReference declaredType = request.getDeclaredType();
+				if (declaredType != null) {
+					JvmTypeReference expectedType = request.getExpectedType();
+					if (expectedType != null) {
+						nextLevel = 4;
+						return contextProvider.getExpectedTypeContext(declaredType, expectedType);
+					}
+				}
+			case 4:
+				if (feature == null)
+					feature = request.getFeature();
+				if (feature instanceof JvmExecutable && ((JvmExecutable) feature).isVarArgs()) {
+					nextLevel = -1;
+					return contextProvider.getDeclaredBoundsContext((JvmExecutable) feature);
+				}
+		}
+		nextLevel = -1;
+		return null;
+	}
+		
 	protected boolean isResolved(JvmTypeReference reference, final boolean rawType) {
 		return isResolved(reference, rawType, true);
 	}

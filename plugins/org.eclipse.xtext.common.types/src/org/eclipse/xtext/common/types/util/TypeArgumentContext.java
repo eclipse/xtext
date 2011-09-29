@@ -203,27 +203,81 @@ public class TypeArgumentContext implements ITypeArgumentContext {
 				} else {
 					JvmWildcardTypeReference result = typesFactory.createJvmWildcardTypeReference();
 					List<JvmTypeConstraint> newConstraints = Lists.newArrayListWithCapacity(reference.getConstraints().size());
+					boolean lowerFound = false;
 					for(JvmTypeConstraint constraint: reference.getConstraints()) {
-						if (constraint.getTypeReference() != null) {
+						if (constraint instanceof JvmLowerBound) {
+							lowerFound = true;
 							JvmTypeReference bound = visit(constraint.getTypeReference(), replaceWildcards);
 							if (bound instanceof JvmWildcardTypeReference) {
-								if (constraint instanceof JvmUpperBound) {
-									for(JvmTypeConstraint newConstraint: ((JvmWildcardTypeReference) bound).getConstraints()) {
-										if (newConstraint instanceof JvmUpperBound) {
-											newConstraints.add(newConstraint);
-										} else {
-											JvmUpperBound upperBound = typesFactory.createJvmUpperBound();
-											upperBound.setTypeReference(newConstraint.getTypeReference());
-											newConstraints.add(upperBound);
+								JvmWildcardTypeReference boundWildcard = (JvmWildcardTypeReference) bound;
+								boolean boundLowerFound = false;
+								for(JvmTypeConstraint boundConstraint: boundWildcard.getConstraints()) {
+									if (boundConstraint instanceof JvmLowerBound) {
+										boundLowerFound = true;
+										newConstraints.add(boundConstraint);
+									}
+								}
+								if (!boundLowerFound) {
+									List<JvmUpperBound> boundUpperBounds = Lists.newArrayListWithCapacity(2);
+									for(JvmTypeConstraint boundConstraint: boundWildcard.getConstraints()) {
+										if (boundConstraint instanceof JvmUpperBound) {
+											boundUpperBounds.add((JvmUpperBound) boundConstraint);
 										}
 									}
-								} else {
-									newConstraints.addAll(((JvmWildcardTypeReference) bound).getConstraints());
+									if (boundUpperBounds.size() == 1) {
+										JvmLowerBound newConstraint = typesFactory.createJvmLowerBound();
+										newConstraint.setTypeReference(boundUpperBounds.get(0).getTypeReference());
+										newConstraints.add(newConstraint);
+									} else if (boundUpperBounds.size() > 1) {
+										JvmLowerBound newConstraint = typesFactory.createJvmLowerBound();
+										JvmMultiTypeReference multiType = typesFactory.createJvmMultiTypeReference();
+										for(JvmUpperBound boundUpperBound: boundUpperBounds) {
+											multiType.getReferences().add(boundUpperBound.getTypeReference());
+										}
+										newConstraint.setTypeReference(multiType);
+										newConstraints.add(newConstraint);
+									}
 								}
 							} else {
-								JvmTypeConstraint copiedConstraint = (JvmTypeConstraint) EcoreUtil.create(constraint.eClass());
-								copiedConstraint.setTypeReference(bound);
-								newConstraints.add(copiedConstraint);
+								JvmLowerBound copiedLowerBound = typesFactory.createJvmLowerBound();
+								copiedLowerBound.setTypeReference(bound);
+								newConstraints.add(copiedLowerBound);
+							}
+						}
+					}
+					if (!lowerFound) {
+						for(JvmTypeConstraint constraint: reference.getConstraints()) {
+							if (constraint.getTypeReference() != null) {
+								JvmTypeReference bound = visit(constraint.getTypeReference(), replaceWildcards);
+								if (bound instanceof JvmWildcardTypeReference) {
+									if (constraint instanceof JvmUpperBound) {
+										for(JvmTypeConstraint newConstraint: ((JvmWildcardTypeReference) bound).getConstraints()) {
+											if (newConstraint instanceof JvmUpperBound) {
+												newConstraints.add(newConstraint);
+											} else {
+												JvmUpperBound upperBound = typesFactory.createJvmUpperBound();
+												upperBound.setTypeReference(newConstraint.getTypeReference());
+												newConstraints.add(upperBound);
+											}
+										}
+									} else {
+										newConstraints.addAll(((JvmWildcardTypeReference) bound).getConstraints());
+									}
+								} else {
+									JvmTypeConstraint copiedConstraint = (JvmTypeConstraint) EcoreUtil.create(constraint.eClass());
+									copiedConstraint.setTypeReference(bound);
+									newConstraints.add(copiedConstraint);
+								}
+							}
+						}
+					} else {
+						for(JvmTypeConstraint constraint: reference.getConstraints()) {
+							if (constraint instanceof JvmUpperBound) {
+								JvmTypeReference copiedUpperBound = visit(constraint.getTypeReference(), replaceWildcards);
+								JvmUpperBound newUpperBound = typesFactory.createJvmUpperBound();
+								newUpperBound.setTypeReference(copiedUpperBound);
+								newConstraints.add(0, newUpperBound);
+								break;
 							}
 						}
 					}

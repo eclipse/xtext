@@ -137,6 +137,11 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 					public JvmTypeReference getDeclaredType() {
 						return typeReferenceWithPlaceHolder;
 					}
+					@Override
+					public String toString() {
+						return "TypeConvertingCompiler.convertFunctionType [expected=" + functionType + ",declared="
+								+ typeReferenceWithPlaceHolder + "]";
+					}
 				});
 		JvmTypeReference resolvedExpectedType = typeArgumentContext.resolve(typeReferenceWithPlaceHolder); 
 		appendable.append("new ");
