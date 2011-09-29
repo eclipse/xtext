@@ -366,6 +366,10 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 							return typeReference;
 						}
 						@Override
+						public String toString() {
+							return "Xtend2JavaValidator.checkDuplicateAndOverriddenFunctions [inferredType=" + inferredType.getIdentifier() + "]";
+						}
+						@Override
 						public JvmTypeParameterDeclarator getNearestDeclarator() {
 							return inferredType;
 						}

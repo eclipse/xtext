@@ -1774,6 +1774,72 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"}", "rawListGet", new Class[] { List.class }, Collections.singletonList(Integer.valueOf(1)));
 	}
 	
+	public void testBug346763_01() throws Exception {
+//		List<? extends String> strings = null;
+//		IterableExtensions.forEach(strings, (Functions.Function1<String, Void>) null);
+		invokeAndExpect2(
+				null, 
+				"def void wildcardExtends() {\n" + 
+				"  var java.util.List<? extends String> v = null\n" + 
+				"  v = newArrayList('')\n" + 
+				"  if (v != null) v.forEach(e|e.toUpperCase)\n" +
+				"}", "wildcardExtends");
+	}
+	
+	public void testBug346763_02() throws Exception {
+		invokeAndExpect2(
+				null, 
+				"def void inferStringParam() {\n" + 
+				"  var java.util.List<? extends String> v = null\n" + 
+				"  v = newArrayList\n" + 
+				"  v = new java.util.ArrayList()\n" + 
+				"}", "inferStringParam");
+	}
+	
+	public void testBug346763_03() throws Exception {
+		invokeAndExpect2(
+				Collections.singletonList("A"), 
+				"def java.util.List<String> wildcardExtends() {\n" + 
+				"  var java.util.List<String> v = new java.util.ArrayList<String>();\n" + 
+				"  v.add('a');\n" + 
+				"  var java.util.List<? extends String> v2 = v;\n" + 
+				"  v2.map(e|e.toUpperCase)\n" +
+				"}", "wildcardExtends");
+	}
+	
+	public void testBug346763_04() throws Exception {
+//		List<? extends String> strings = null;
+//		IterableExtensions.forEach(strings, (Functions.Function1<CharSequence, Void>) null);
+		invokeAndExpect2(
+				null, 
+				"def void wildcardExtends() {\n" + 
+				"  var java.util.List<? extends String> v = null\n" + 
+				"  if (v != null) v.forEach(CharSequence e|e.length)\n" +
+				"}", "wildcardExtends");
+	}
+	
+	public void testBug346763_05() throws Exception {
+//		List<? extends String> strings = null;
+//		IterableExtensions.forEach(strings, (Functions.Function1<CharSequence, Void>) null);
+		invokeAndExpect2(
+				null, 
+				"def void forEachString() {\n" + 
+				"  var java.util.List<String> v = null\n" + 
+				"  if (v != null) v.forEach(CharSequence e|e.length)\n" +
+				"}", "forEachString");
+	}
+	
+	public void testBug346763_06() throws Exception {
+//		List<? extends String> strings = null;
+//		IterableExtensions.forEach(strings, (Functions.Function1<CharSequence, Void>) null);
+		invokeAndExpect2(
+				null, 
+				"def void forEachString() {\n" + 
+				"  var java.util.List<String> v = null\n" + 
+				"  if (v != null) v.forEach(e|e.toUpperCase)\n" +
+				"}", "forEachString");
+	}
+	
 	@Inject
 	private EclipseRuntimeDependentJavaCompiler javaCompiler;
 
