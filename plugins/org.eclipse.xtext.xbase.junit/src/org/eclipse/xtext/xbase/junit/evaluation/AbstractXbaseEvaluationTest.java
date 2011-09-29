@@ -91,9 +91,9 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	
 	@Test public void testShortCircuitBooleanExpression_04() throws Exception {
 		String expr = "{ val i = newArrayList(true,false).iterator" +
-		"  if (i.next || i.next)" +
-		"     i.next" +
-		"}";
+				"  if (i.next || i.next)" +
+				"     i.next" +
+				"}";
 		assertEvaluatesTo(false, expr);
 	}
 	
@@ -867,14 +867,14 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesWithException(NullPointerException.class, 
 				"try throw new NullPointerException()" +
 				"  catch(ClassCastException e) throw new NullPointerException()" +
-		"  catch(NullPointerException e) throw new NullPointerException()");
+				"  catch(NullPointerException e) throw new NullPointerException()");
 	}
 	
 	@Test public void testTryCatch_WithThrows_01() throws Exception {
 		assertEvaluatesTo("x", 
 				"try throw new NullPointerException()" +
 				"  catch(ClassCastException e) throw new NullPointerException()" +
-		"  catch(NullPointerException e) 'x'");
+				"  catch(NullPointerException e) 'x'");
 	}
 	
 	@Test public void testTryCatch_WithThrows_02() throws Exception {
@@ -906,6 +906,14 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	
 	@Test public void testConstructor_04() throws Exception {
 		assertEvaluatesTo(new Stack<Object>(), "new java.util.Stack()");
+	}
+	
+	@Test public void testConstructor_05() throws Exception {
+		assertEvaluatesTo(Collections.emptyList(), "new java.util.ArrayList(newArrayList)");
+	}
+	
+	@Test public void testConstructor_06() throws Exception {
+		assertEvaluatesTo(Collections.singletonList("a"), "new java.util.ArrayList(newArrayList('a'))");
 	}
 	
 	@Test public void testThrowExpression_01() throws Exception {
@@ -978,7 +986,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	@Test public void testClosure_06_1() throws Exception {
 		assertEvaluatesTo("LITERAL", 
 				"new testdata.ClosureClient().invoke2(" +
-		"[p1, s|s.toUpperCase], null, 'literal')");
+				"[p1, s|s.toUpperCase], null, 'literal')");
 	}
 	
 	@Test public void testClosure_07() throws Exception {
@@ -1264,11 +1272,10 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo(Boolean.TRUE, "newArrayList().unmodifiableView() instanceof java.util.List");
 		assertEvaluatesTo(Boolean.TRUE, "newHashSet().unmodifiableView() instanceof java.util.Set");
 		assertEvaluatesTo(Boolean.TRUE, "newLinkedHashSet().unmodifiableView() instanceof java.util.Set");
-		// TODO these guys fail if all tests are executed but succeed if only this class or this method is chosen *grmpf*
-//		assertEvaluatesTo(Boolean.TRUE, "newTreeSet(String a, String b|a.compareTo(b)).unmodifiableView() instanceof java.util.SortedSet");
+		assertEvaluatesTo(Boolean.TRUE, "newTreeSet(String a, String b|a.compareTo(b)).unmodifiableView() instanceof java.util.SortedSet");
 		assertEvaluatesTo(Boolean.TRUE, "newHashMap().unmodifiableView() instanceof java.util.Map");
 		assertEvaluatesTo(Boolean.TRUE, "newLinkedHashMap().unmodifiableView() instanceof java.util.Map");
-//		assertEvaluatesTo(Boolean.TRUE, "newTreeMap(String a, String b|a.compareTo(b)).unmodifiableView() instanceof java.util.SortedMap");
+		assertEvaluatesTo(Boolean.TRUE, "newTreeMap(String a, String b|a.compareTo(b)).unmodifiableView() instanceof java.util.SortedMap");
 	}
 	
 	@Test public void testCollectionExtensions_04() throws Exception {
@@ -1464,27 +1471,28 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	}
 	
 	@Test public void test351809() throws Exception {
-		assertEvaluatesTo(Boolean.FALSE, "{\n" +
-			"  val l = new java.util.ArrayList<String>()\n" + 
-			"  new java.util.ArrayList<CharSequence>() += l\n" +
-			"}");
+		assertEvaluatesTo(Boolean.FALSE, 
+				"{\n" +
+				"  val l = new java.util.ArrayList<String>()\n" + 
+				"  new java.util.ArrayList<CharSequence>() += l\n" +
+				"}");
 	}
 	
 	@Test public void testFilterArrays_01() throws Exception {
 		assertEvaluatesTo(Lists.newArrayList("a"), 
-			"{\n" +
-			"  val filtered = new testdata.ArrayClient().toStringArray('a', 'c').filter(e|e < 'c')" +
-			"  filtered.toList\n" +
-			"}");
+				"{\n" +
+				"  val filtered = new testdata.ArrayClient().toStringArray('a', 'c').filter(e|e < 'c')" +
+				"  filtered.toList\n" +
+				"}");
 	}
 	
 	@Test public void testFilterArrays_02() throws Exception {
 		assertEvaluatesTo("result", 
-			"{\n" +
-			"  for(s: new testdata.ArrayClient().toStringArray('a', 'b').filter(e|e!=null))" +
-			"    s\n" +
-			"  'result'" +
-			"}");
+				"{\n" +
+				"  for(s: new testdata.ArrayClient().toStringArray('a', 'b').filter(e|e!=null))" +
+				"    s\n" +
+				"  'result'" +
+				"}");
 	}
 	
 	protected void assertEvaluatesTo(Object object, String string) throws Exception {
