@@ -518,7 +518,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		return null; // no expectations
 	}
 
-	protected JvmTypeReference _expectedType(final XConstructorCall expr, EReference reference, int index, boolean rawType) {
+	protected JvmTypeReference _expectedType(final XConstructorCall expr, EReference reference, int index, final boolean rawType) {
 		if (reference == XbasePackage.Literals.XCONSTRUCTOR_CALL__ARGUMENTS) {
 			final JvmConstructor constructor = expr.getConstructor();
 			if (!constructor.eIsProxy()) {
@@ -533,12 +533,8 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 					}
 					@Override
 					public List<JvmTypeReference> getArgumentTypes() {
-						List<JvmTypeReference> argumentTypes = Lists.newArrayListWithCapacity(expr.getArguments().size());
-						for(XExpression argument: expr.getArguments()) {
-							JvmTypeReference argumentType = getType(argument, true);
-							argumentTypes.add(argumentType);
-						}
-						return argumentTypes;
+						List<JvmTypeReference> result = Arrays.asList(XbaseTypeProvider.this.getArgumentTypes(constructor, expr.getArguments(), rawType));
+						return result;
 					}
 					@Override
 					public JvmFeature getFeature() {
@@ -563,7 +559,8 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 				}
 				JvmFormalParameter parameter = constructor.getParameters().get(index);
 				JvmTypeReference parameterType = parameter.getParameterType();
-				return typeArgumentContext.getLowerBound(parameterType);
+				JvmTypeReference result = typeArgumentContext.getLowerBound(parameterType);
+				return result;
 			}
 		}
 		return null;
