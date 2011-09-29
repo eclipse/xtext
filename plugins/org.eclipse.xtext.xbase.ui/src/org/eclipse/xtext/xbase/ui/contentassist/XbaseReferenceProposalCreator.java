@@ -87,7 +87,7 @@ public class XbaseReferenceProposalCreator extends TypeAwareReferenceProposalCre
 		return isShowAllProposals();
 	}
 	
-	protected boolean isShowTypeProposals() {
+	public boolean isShowTypeProposals() {
 		return (mode & 4) != 0;
 	}
 	
@@ -103,7 +103,7 @@ public class XbaseReferenceProposalCreator extends TypeAwareReferenceProposalCre
 		return mode == 7;
 	}
 	
-	protected boolean isShowSmartProposals() {
+	public boolean isShowSmartProposals() {
 		return mode == 8;
 	}
 	

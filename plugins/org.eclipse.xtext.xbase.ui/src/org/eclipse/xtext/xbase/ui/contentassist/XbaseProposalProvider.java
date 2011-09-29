@@ -176,6 +176,11 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	@Override
 	public void completeXFeatureCall_DeclaringType(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
+		proposeDeclaringTypeForStaticInvocation(model, assignment, context, acceptor);
+	}
+	
+	public void proposeDeclaringTypeForStaticInvocation(EObject model, Assignment assignment, ContentAssistContext context, 
+			ICompletionProposalAcceptor acceptor){
 		if (getXbaseCrossReferenceProposalCreator().isShowTypeProposals() || getXbaseCrossReferenceProposalCreator().isShowSmartProposals()) {
 			ContentAssistContext modifiedContext = context.copy().setMatcher(staticQualifierPrefixMatcher).toContext();
 			completeJavaTypes(modifiedContext, XbasePackage.Literals.XFEATURE_CALL__DECLARING_TYPE, staticQualifierValueConverter, TypeMatchFilters.all(), acceptor);
