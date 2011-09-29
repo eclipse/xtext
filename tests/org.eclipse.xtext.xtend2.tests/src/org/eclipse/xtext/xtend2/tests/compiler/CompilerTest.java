@@ -1840,6 +1840,26 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"}", "forEachString");
 	}
 	
+	public void testBug358118_NoNPE() throws Exception {
+		invokeAndExpect2(
+				null, 
+				"def dispatch void recursiveMethod(CharSequence r, java.util.Set<Object> shapes) {}\n" + 
+				"def dispatch void recursiveMethod(Appendable c, java.util.Set<Object> shapes) {\n" + 
+				"	// If method2 is called directly, no NPE is thrown\n" + 
+				"	val Object o = method1()\n" + 
+				"}\n" + 
+				"def Object method1() {\n" + 
+				"	return method2()\n" + 
+				"}\n" + 
+				"// Inferred return type that causes the NPE\n" + 
+				"def method2() {\n" + 
+				"	val java.util.Set<Object> objects = newHashSet()\n" + 
+				"	// If the recursive method is not called, no NPE is thrown\n" + 
+				"	recursiveMethod(new String(), objects)\n" + 
+				"	return objects.findFirst([ Object o | o instanceof CharSequence])\n" + 
+				"}", "method1");
+	}
+	
 	@Inject
 	private EclipseRuntimeDependentJavaCompiler javaCompiler;
 
