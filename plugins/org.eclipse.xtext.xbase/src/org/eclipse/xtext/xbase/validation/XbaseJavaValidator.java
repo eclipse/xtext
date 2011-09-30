@@ -142,6 +142,9 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		if (expr instanceof XFeatureCall) {
 			return !(((XFeatureCall) expr).getFeature() instanceof JvmOperation);
 		}
+		if (expr instanceof XCastedExpression) {
+			return isSideEffectFree(((XCastedExpression) expr).getTarget());
+		}
 		return expr instanceof XStringLiteral 
 			|| expr instanceof XTypeLiteral
 			|| expr instanceof XIntLiteral

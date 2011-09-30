@@ -61,6 +61,11 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertError(expr, XINT_LITERAL, SIDE_EFFECT_FREE_EXPRESSION_IN_BLOCK);
 	}
 	
+	public void testSideEffectFreeExpressionInBlock_04() throws Exception {
+		XExpression expr = expression("{ val x = 'foo' x as String 42 }");
+		helper.assertError(expr, XCASTED_EXPRESSION, SIDE_EFFECT_FREE_EXPRESSION_IN_BLOCK);
+	}
+	
 	public void testLocalVarWithArguments() throws Exception {
 		XExpression expr = expression("{ val x = 'foo' x(42) }");
 		helper.assertError(expr, XFEATURE_CALL, LOCAL_VAR_ACCESS_WITH_PARENTHESES, "local", "variable");
