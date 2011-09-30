@@ -12,24 +12,26 @@ import java.util.Queue;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.common.types.JvmAnnotationTarget;
+import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.util.DeprecationUtil;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
-import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingCalculator;
 import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingConfiguration;
 import org.eclipse.xtext.xtend2.richstring.AbstractRichStringPartAcceptor;
@@ -39,6 +41,8 @@ import org.eclipse.xtext.xtend2.services.Xtend2GrammarAccess;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
 import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
+import org.eclipse.xtext.xtend2.xtend2.XtendAnnotationTarget;
+import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendField;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
@@ -70,8 +74,10 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 	@Override
 	protected void doProvideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
 		XtendFile file = (XtendFile) resource.getContents().get(0);
-		if (file.getXtendClass() != null) {
-			for (XtendMember member : file.getXtendClass().getMembers()) {
+		XtendClass xtendClass = file.getXtendClass();
+		highlightDeprectedXtendAnnotationTarget(acceptor, xtendClass);
+		if (xtendClass != null) {
+			for (XtendMember member : xtendClass.getMembers()) {
 				if (member.eClass() == Xtend2Package.Literals.XTEND_FUNCTION) {
 					XtendFunction function = (XtendFunction) member;
 					XExpression rootExpression = function.getExpression();
@@ -81,9 +87,34 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 					XtendField field = (XtendField) member;
 					highlightXtendField(field,acceptor);
 				}
+				highlightDeprectedXtendAnnotationTarget(acceptor, member);
 			}
 		}
 		super.doProvideHighlightingFor(resource, acceptor);
+	}
+
+	@Override
+	protected void highlightReferenceJvmType(IHighlightedPositionAcceptor acceptor, EObject referencer,
+			EReference reference, EObject resolvedReferencedObject) {
+		super.highlightReferenceJvmType(acceptor, referencer, reference, resolvedReferencedObject);
+		// Highlight referenced JvmTypes only as deprecated when the eContainer of the referencer is a XtendClass
+		// only reference to JvmTypes in extends or implements should be marked as it is in Java.
+		if(referencer.eContainer().eClass() == Xtend2Package.Literals.XTEND_CLASS)
+			if(resolvedReferencedObject instanceof JvmAnnotationTarget){
+				if(DeprecationUtil.isDeprecated((JvmAnnotationTarget) resolvedReferencedObject))
+					highlightObjectAtFeature(acceptor, referencer, reference, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
+			}
+	}
+	
+	protected void highlightDeprectedXtendAnnotationTarget(IHighlightedPositionAcceptor acceptor, EObject object){
+		if(object != null && object instanceof XtendAnnotationTarget)
+			for(XAnnotation annotation : ((XtendAnnotationTarget)object).getAnnotations()){
+				JvmAnnotationType annotationType = annotation.getAnnotationType();
+				if(annotationType != null && !annotationType.eIsProxy() && DeprecationUtil.isDeprecated(annotationType)){
+					EStructuralFeature nameFeature = object.eClass().getEStructuralFeature("name");
+					highlightObjectAtFeature(acceptor, object, nameFeature, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
+				}
+			}
 	}
 
 	protected void highlightRichStrings(XExpression expression, IHighlightedPositionAcceptor acceptor) {
