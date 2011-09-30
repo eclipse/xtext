@@ -21,6 +21,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.SimpleCache;
 import org.eclipse.xtext.util.Tuples;
@@ -141,8 +142,7 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 			try {
 				IPackageFragmentRoot[] fragmentRoots = project.getPackageFragmentRoots();
 				for (IPackageFragmentRoot fragRoot : fragmentRoots) {
-					if (!"org.eclipse.jdt.launching.JRE_CONTAINER".equals(fragRoot.getRawClasspathEntry().getPath()
-							.toString())) {
+					if (!JavaRuntime.newDefaultJREContainerPath().isPrefixOf(fragRoot.getRawClasspathEntry().getPath())) {
 						if (JarEntryURIHelper.getUriForPackageFragmentRoot(fragRoot).equals(toArchive)) {
 							IStorage storage = locator.getJarEntry(uri, fragRoot);
 							if (storage != null) {
