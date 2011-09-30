@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.highlighting;
 
+import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
@@ -24,6 +25,7 @@ public class XbaseHighlightingConfiguration extends DefaultHighlightingConfigura
 	public static final String FIELD = "xbase.field";
 	public static final String ANNOTATION = "xbase.annotation";
 	public static final String EXTENSION_METHOD_INVOCATION = "xbase.extension.method.invacation";
+	public static final String DEPRECATED_MEMBERS = "xbase.deprecated.members";
 
 	@Override
 	public void configure(IHighlightingConfigurationAcceptor acceptor) {
@@ -32,6 +34,7 @@ public class XbaseHighlightingConfiguration extends DefaultHighlightingConfigura
 		acceptor.acceptDefaultHighlighting(FIELD, "Field", field());
 		acceptor.acceptDefaultHighlighting(ANNOTATION, "Annotation", annotation());
 		acceptor.acceptDefaultHighlighting(EXTENSION_METHOD_INVOCATION, "Extension method invocation", extensionMethodInvocation());
+		acceptor.acceptDefaultHighlighting(DEPRECATED_MEMBERS, "Deprecated members", deprecatedMembers());
 	
 		super.configure(acceptor);
 	}
@@ -66,6 +69,13 @@ public class XbaseHighlightingConfiguration extends DefaultHighlightingConfigura
 	public TextStyle extensionMethodInvocation(){
 		TextStyle textStyle = defaultTextStyle().copy();
 		textStyle.setColor(new RGB(171, 48, 0));
+		return textStyle;
+	}
+	
+	public TextStyle deprecatedMembers(){
+		TextStyle textStyle = defaultTextStyle().copy();
+		textStyle.setStyle(TextAttribute.STRIKETHROUGH);
+		textStyle.setColor(new RGB(0, 0, 0));
 		return textStyle;
 	}
 	

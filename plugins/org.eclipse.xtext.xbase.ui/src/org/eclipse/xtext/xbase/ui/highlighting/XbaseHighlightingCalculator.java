@@ -15,14 +15,18 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.util.DeprecationUtil;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -63,6 +67,7 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 	private XbaseGrammarAccess grammarAccess;
 
 	private Map<String, String> highlightedIdentifiers;
+	
 	private BitSet idLengthsToHighlight;
 
 	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
@@ -104,48 +109,39 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 		while (iterator.hasNext()) {
 			EObject object = iterator.next();
 			if (object instanceof XAbstractFeatureCall) {
-				highlightFeatureCall((XAbstractFeatureCall) object, acceptor);
+				computeFeatureCallHighlighting((XAbstractFeatureCall) object, acceptor);
 			}
 			// Handle XAnnotation in a special way because we want the @ highlighted too
 			if (object instanceof XAnnotation) {
 				highlightAnnotation((XAnnotation) object, acceptor);
 			} else {
-				highlightReferencedJvmTypes(acceptor, object);
+				computeReferencedJvmTypeHighlighting(acceptor, object);
 			}
 		}
 	}
 
-	protected void highlightReferencedJvmTypes(IHighlightedPositionAcceptor acceptor, EObject object) {
-		for (EReference reference : object.eClass().getEAllReferences()) {
+	protected void computeReferencedJvmTypeHighlighting(IHighlightedPositionAcceptor acceptor, EObject referencer) {
+		for (EReference reference : referencer.eClass().getEAllReferences()) {
 			EClass referencedType = reference.getEReferenceType();
 			if (EcoreUtil2.isAssignableFrom(TypesPackage.Literals.JVM_TYPE, referencedType)) {
-				List<EObject> referenceObjects = EcoreUtil2.getAllReferencedObjects(object, reference);
-				for (EObject referencedObject : referenceObjects) {
-					if(referencedObject != null && !referencedObject.eIsProxy())
-						higlightJvmAnnotationType(acceptor, object, reference, referencedObject);
+				List<EObject> referencedObjects = EcoreUtil2.getAllReferencedObjects(referencer, reference);
+				for (EObject referencedObject : referencedObjects) {
+					EObject resolvedReferencedObject = EcoreUtil.resolve(referencedObject, referencer);
+					if(resolvedReferencedObject != null && !resolvedReferencedObject.eIsProxy()){
+						highlightReferenceJvmType(acceptor, referencer, reference, resolvedReferencedObject);
+					}
 				}
 			}
 		}
 	}
 
-	protected void higlightJvmAnnotationType(IHighlightedPositionAcceptor acceptor, EObject object, EReference reference,
-			EObject entry) {
-		if (entry instanceof JvmAnnotationType) {
-			List<INode> childs = NodeModelUtils.findNodesForFeature(object, reference);
-			if (childs.size() > 0)
-				highlightNode(childs.get(0), XbaseHighlightingConfiguration.ANNOTATION, acceptor);
-		}
+	protected void highlightReferenceJvmType(IHighlightedPositionAcceptor acceptor, EObject referencer,
+			EReference reference, EObject resolvedReferencedObject) {
+		if(resolvedReferencedObject instanceof JvmAnnotationType)
+			highlightObjectAtFeature(acceptor, referencer, reference, XbaseHighlightingConfiguration.ANNOTATION);
 	}
 
-	protected void highlightAnnotation(XAnnotation annotation, IHighlightedPositionAcceptor acceptor) {
-		JvmAnnotationType annotationType = annotation.getAnnotationType();
-		if (annotationType != null && !annotationType.eIsProxy()) {
-			ICompositeNode node = NodeModelUtils.findActualNodeFor(annotation);
-			acceptor.addPosition(node.getOffset(), node.getLength(), XbaseHighlightingConfiguration.ANNOTATION);
-		}
-	}
-
-	protected void highlightFeatureCall(XAbstractFeatureCall featureCall, IHighlightedPositionAcceptor acceptor) {
+	protected void computeFeatureCallHighlighting(XAbstractFeatureCall featureCall, IHighlightedPositionAcceptor acceptor) {
 		JvmIdentifiableElement feature = featureCall.getFeature();
 		if (feature != null && !feature.eIsProxy()) {
 			if (feature instanceof JvmField) {
@@ -168,15 +164,22 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 					}
 				}
 			}
+			if(feature instanceof JvmAnnotationTarget && DeprecationUtil.isDeprecated((JvmAnnotationTarget)feature)){
+				highlightFeatureCall(featureCall, acceptor, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
+			}
 		}
 	}
 
-	protected void highlightFeatureCall(XAbstractFeatureCall featureCall, IHighlightedPositionAcceptor acceptor,
-			String id) {
-		List<INode> childs = NodeModelUtils.findNodesForFeature(featureCall,
-				XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
-		if (childs.size() > 0)
-			highlightNode(childs.get(0), id, acceptor);
+	protected void highlightFeatureCall(XAbstractFeatureCall featureCall, IHighlightedPositionAcceptor acceptor,String id) {
+		highlightObjectAtFeature(acceptor, featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, id);
+	}
+	
+	protected void highlightAnnotation(XAnnotation annotation, IHighlightedPositionAcceptor acceptor) {
+		JvmAnnotationType annotationType = annotation.getAnnotationType();
+		if (annotationType != null && !annotationType.eIsProxy()) {
+			ICompositeNode node = NodeModelUtils.findActualNodeFor(annotation);
+			acceptor.addPosition(node.getOffset(), node.getLength(), XbaseHighlightingConfiguration.ANNOTATION);
+		}
 	}
 
 	protected void highlightSpecialIdentifiers(IHighlightedPositionAcceptor acceptor, ICompositeNode root) {
@@ -217,6 +220,15 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 		return result;
 	}
 
+	/**
+	 * Highlights an object at the position of the given {@link EStructuralFeature}
+	 */
+	protected void highlightObjectAtFeature(IHighlightedPositionAcceptor acceptor, EObject object, EStructuralFeature feature, String id) {
+		List<INode> childs = NodeModelUtils.findNodesForFeature(object, feature);
+		if (childs.size() > 0)
+			highlightNode(childs.get(0), id, acceptor);
+	}
+	
 	/**
 	 * Highlights the non-hidden parts of {@code node} with the style that is associated with {@code id}.
 	 */
