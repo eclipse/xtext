@@ -109,7 +109,7 @@ public class StatusWrapper {
 				return toString.invoke(from);
 			}
 		}), String.class);
-		return MessageFormat.format(message, (Object[]) strings);
+		return MessageFormat.format(message, strings);
 	}
 
 	public void add(int severity, String message, URI uri, ResourceSet resourceSet) {
