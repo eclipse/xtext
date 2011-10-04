@@ -5,6 +5,12 @@ class Case_3 {
 	    val closure = [Integer i| return i]
 	    for (x : 1..100) closure.apply(x)
 	}
+	def testReturnExpression_07() {
+		if (typeof(Case_3) != null) {
+		    val (int)=>int closure = [Integer i| return i]
+		    for (x : 1..100) closure.apply(x)
+		}
+	}
 	def testOverriddenLocalVariable() {
 	  val x = 3
 	  var y = 2

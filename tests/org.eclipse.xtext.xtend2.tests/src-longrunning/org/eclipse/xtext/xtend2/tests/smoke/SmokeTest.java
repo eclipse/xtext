@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -442,6 +443,9 @@ public class SmokeTest extends AbstractXtend2TestCase {
 						// the framework catches runtime exception
 						// and AssertionError does not take a throwable as argument
 						throw new Error(new RuntimeException("Input was: " + model, t));
+					}
+					if (EObjectValidator.DIAGNOSTIC_SOURCE.equals(diagnostic.getSource()) && diagnostic.getCode() == EObjectValidator.EOBJECT__EVERY_REFERENCE_IS_CONTAINED) {
+						throw new Error(new RuntimeException("Dangling reference found. Input was: " + model));
 					}
 				}
 			}
