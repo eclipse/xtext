@@ -13,6 +13,7 @@ import java.util.Stack;
 
 import junit.framework.TestCase;
 
+import org.apache.log4j.Logger;
 import org.junit.Test;
 
 import testdata.ExceptionSubclass;
@@ -30,6 +31,14 @@ import static com.google.common.collect.Lists.*;
  * @author Sven Efftinge
  */
 public abstract class AbstractXbaseEvaluationTest extends TestCase {
+
+	private static final Logger log = Logger.getLogger(AbstractXbaseEvaluationTest.class);
+	
+	@Override
+	protected void setUp() throws Exception {
+		log.debug(getClass().getSimpleName() + "." + getName());
+		super.setUp();
+	}
 	
 	@Test public void testImplicitOneArgClosure() throws Exception {
 		assertEvaluatesTo("foo","[it].apply('foo')");

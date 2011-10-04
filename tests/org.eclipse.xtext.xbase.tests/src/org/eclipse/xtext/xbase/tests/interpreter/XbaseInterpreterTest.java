@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.tests.interpreter;
 
 import org.eclipse.xtext.junit.util.ParseHelper;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
+import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationResult;
@@ -43,6 +44,8 @@ public class XbaseInterpreterTest extends AbstractXbaseEvaluationTest {
 	private ValidationTestHelper validationHelper;
 	@Inject
 	private IExpressionInterpreter interpreter;
+	@Inject
+	private IResourceScopeCache cache;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -59,8 +62,9 @@ public class XbaseInterpreterTest extends AbstractXbaseEvaluationTest {
 
 	@Override
 	public void assertEvaluatesTo(Object expectation, String model) {
+		XExpression expression = null;
 		try {
-			XExpression expression = expression(model, true);
+			expression = expression(model, true);
 			IEvaluationResult result = interpreter.evaluate(expression);
 			assertNull("Expected no exception. Model was: " + model + ", Exception was: " + result.getException(),
 					result.getException());
@@ -69,13 +73,18 @@ public class XbaseInterpreterTest extends AbstractXbaseEvaluationTest {
 			if (e instanceof RuntimeException)
 				throw (RuntimeException) e;
 			throw new RuntimeException(e);
+		} finally {
+			if (expression != null) {
+				cache.clear(expression.eResource());
+			}
 		}
 	}
 
 	@Override
 	public void assertEvaluatesWithException(Class<? extends Throwable> expectatedException, String model) {
+		XExpression expression = null;
 		try {
-			XExpression expression = expression(model,true);
+			expression = expression(model,true);
 			IEvaluationResult result = interpreter.evaluate(expression);
 			assertTrue("Expected " + expectatedException.getSimpleName() + " but got: " + result.getException(),
 					expectatedException.isInstance(result.getException()));
@@ -83,6 +92,10 @@ public class XbaseInterpreterTest extends AbstractXbaseEvaluationTest {
 			if (e instanceof RuntimeException)
 				throw (RuntimeException) e;
 			throw new RuntimeException(e);
+		} finally {
+			if (expression != null) {
+				cache.clear(expression.eResource());
+			}
 		}
 	}
 	

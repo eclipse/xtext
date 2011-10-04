@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -28,6 +29,8 @@ import com.google.inject.Provider;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class OnChangeEvictingCache implements IResourceScopeCache {
+	
+	private static final Logger log = Logger.getLogger(OnChangeEvictingCache.class);
 	
 	public static interface Listener {
 		void onEvict(CacheAdapter cache);
@@ -45,9 +48,26 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		T element = adapter.<T>get(key);
 		if (element==null) {
 			element = provider.get();
+			cacheMiss(adapter);
 			adapter.set(key, element);
+		} else {
+			cacheHit(adapter);
 		}
 		return element;
+	}
+	
+	/**
+	 * @since 2.1
+	 */
+	protected void cacheMiss(CacheAdapter adapter) {
+		adapter.cacheMiss();
+	}
+	
+	/**
+	 * @since 2.1
+	 */
+	protected void cacheHit(CacheAdapter adapter) {
+		adapter.cacheHit();
 	}
 	
 	public CacheAdapter getOrCreate(Resource resource) {
@@ -55,6 +75,7 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		if (adapter == null) {
 			adapter = new CacheAdapter();
 			resource.eAdapters().add(adapter);
+			adapter.setResource(resource);
 		}
 		return adapter;
 	}
@@ -83,6 +104,11 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		private volatile boolean ignoreNotifications = false;
 		
 		private volatile boolean empty = true;
+		
+		private Resource resource;
+		
+		private int misses = 0;
+		private int hits = 0;
 
 		public void set(Object name, Object value) {
 			empty = false;
@@ -92,6 +118,20 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 				this.values.put(name, NULL);
 		}
 
+		/**
+		 * @since 2.1
+		 */
+		protected void cacheMiss() {
+			misses++;
+		}
+		
+		/**
+		 * @since 2.1
+		 */
+		protected void cacheHit() {
+			hits++;
+		}
+		
 		@SuppressWarnings("unchecked")
 		public <T> T get(Object name) {
 			if (empty)
@@ -126,8 +166,14 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 
 		public void clearValues() {
 			if (!empty) {
+				if (log.isDebugEnabled()) {
+					log.debug(String.format("Clear %d cache entries for resource %s after %d hits and %d misses (quota: %d%%)", 
+							values.size(), resource.getURI().lastSegment(), hits, misses, hits + misses != 0 ? hits * 100 / (hits + misses) : 0));
+				}
 				values.clear();
 				empty = true;
+				misses = 0;
+				hits = 0;
 			}
 		}
 
@@ -151,6 +197,20 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		@Override
 		protected boolean resolve() {
 			return false;
+		}
+
+		/**
+		 * @since 2.1
+		 */
+		protected Resource getResource() {
+			return resource;
+		}
+
+		/**
+		 * @since 2.1
+		 */
+		protected void setResource(Resource resource) {
+			this.resource = resource;
 		}
 
 	}

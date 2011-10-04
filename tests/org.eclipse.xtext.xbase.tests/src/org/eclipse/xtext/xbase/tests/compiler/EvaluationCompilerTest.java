@@ -11,6 +11,7 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.junit.util.ParseHelper;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
+import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
@@ -61,6 +62,9 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 	
 	@Inject
 	private TypeReferences typeReferences;
+	
+	@Inject
+	private IResourceScopeCache cache;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -73,7 +77,6 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 		javaCompiler.addClassPathOfClass(Provider.class);
 		javaCompiler.addClassPathOfClass(Supplier.class);
 	}
-
 
 	@Override
 	protected void assertEvaluatesTo(Object object, String string) {
@@ -116,7 +119,7 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 	}
 	
 	protected String compileToJavaCode(String xtendCode) {
-		XExpression model;
+		XExpression model = null;
 		IAppendable appandable = new StringBuilderBasedAppendable();
 		try {
 			model = expression(xtendCode, true);
@@ -124,6 +127,9 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 			compiler.compile(model, appandable, typeReferences.getTypeForName(Object.class, model));
 		} catch (Exception e) {
 			throw new RuntimeException("Xtend compilation failed", e);
+		} finally {
+			if (model != null)
+				cache.clear(model.eResource());
 		}
 		return appandable.toString();
 	}

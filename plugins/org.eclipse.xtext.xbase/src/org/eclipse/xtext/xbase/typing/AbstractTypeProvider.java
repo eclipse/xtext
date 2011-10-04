@@ -133,6 +133,7 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 			CacheAdapter adapter = getOrCreate(resource);
 			T element = adapter.<T>get(key);
 			if (element==null) {
+				cacheMiss(adapter);
 				element = provider.get();
 				boolean rawType = (Boolean) ((Triple<?, ?, ?>) key).getThird();
 				//TODO the test for 'Void' is a hack and a result of the lack of a protocol for unresolved references 
@@ -147,6 +148,8 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 					logger.debug(getDebugIndentation(rawType) + "cache: " + element);
 				}
 				adapter.set(key, element);
+			} else {
+				cacheHit(adapter);
 			}
 			return element;
 		}
