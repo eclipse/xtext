@@ -19,4 +19,5 @@ Export-Package: org.eclipse.xtext.xbase.junit.evaluation,
 Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
 Import-Package: junit.framework;version="[3.0.0,4.0.0)",
+ org.apache.log4j;version="1.2.15",
  org.junit;version="[4.0.0,5.0.0)"
