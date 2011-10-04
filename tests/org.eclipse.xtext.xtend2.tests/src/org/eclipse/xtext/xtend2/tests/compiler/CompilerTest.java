@@ -99,9 +99,9 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	public void testFunctionNameStartingWithUnderscore() throws Exception {
 		String code = 
 				"package x class Z {" +
-						"  def _foo(Object x, boolean b) {}\n" +
-						"  def _foo(String x, boolean b) {}\n" +
-						"}\n";
+				"  def _foo(Object x, boolean b) {}\n" +
+				"  def _foo(String x, boolean b) {}\n" +
+				"}\n";
 		String javaCode = compileToJavaCode(code);
 		Class<?> class1 = javaCompiler.compileToClass("x.Z", javaCode);
 		assertEquals(2, class1.getDeclaredMethods().length);
@@ -132,16 +132,16 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	 */
 	public void testBug_345458() throws Exception {
 		String code = 
-			"package x class Z {" +
-			"  def create(Object x) { \n" + 
-			"    if(true) {\n" + 
-			"      if(true)\n" + 
-			"        'foo'+'bar'\n" + 
-			"      for(c : 'foo'.toCharArray)\n" + 
-			"        'do'+'sideeffect'\n" + 
-			"    }\n" + 
-			"  }\n" +
-			"}\n";
+				"package x class Z {" +
+				"  def create(Object x) { \n" + 
+				"    if(true) {\n" + 
+				"      if(true)\n" + 
+				"        'foo'+'bar'\n" + 
+				"      for(c : 'foo'.toCharArray)\n" + 
+				"        'do'+'sideeffect'\n" + 
+				"    }\n" + 
+				"  }\n" +
+				"}\n";
 		String javaCode = compileToJavaCode(code);
 		javaCompiler.compileToClass("x.Z", javaCode);
 	}
@@ -151,15 +151,15 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	 */
 	public void testBug_345828_01() throws Exception {
 		String code = 
-			"package x\n" +
-			"class Z {" +
-			"  def <T extends =>Integer> baz(T t) {\n" +
-			"    val int i = t.apply\n" +
-			"    if (i == 0)\n" +
-			"      t.apply\n" + 
-			"    t.apply\n" + 
-			"  }\n" +
-			"}\n";
+				"package x\n" +
+				"class Z {" +
+				"  def <T extends =>Integer> baz(T t) {\n" +
+				"    val int i = t.apply\n" +
+				"    if (i == 0)\n" +
+				"      t.apply\n" + 
+				"    t.apply\n" + 
+				"  }\n" +
+				"}\n";
 		String javaCode = compileToJavaCode(code);
 		javaCompiler.compileToClass("x.Z", javaCode);
 	}
@@ -189,14 +189,14 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	public void testBug_345828_03() throws Exception {
 		String code = 
 				"package x\n" +
-						"class Z {" +
-						"  def <MyParam extends =>Integer> baz(java.util.List<MyParam> t) {\n" +
-						"    val int i = t.head.apply\n" +
-						"    if (i == 0)\n" +
-						"      t.head.apply\n" + 
-						"    t.head.apply\n" + 
-						"  }\n" +
-						"}\n";
+				"class Z {" +
+				"  def <MyParam extends =>Integer> baz(java.util.List<MyParam> t) {\n" +
+				"    val int i = t.head.apply\n" +
+				"    if (i == 0)\n" +
+				"      t.head.apply\n" + 
+				"    t.head.apply\n" + 
+				"  }\n" +
+				"}\n";
 		String javaCode = compileToJavaCode(code);
 		javaCompiler.compileToClass("x.Z", javaCode);
 	}
@@ -207,15 +207,15 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	public void testBug_345828_04() throws Exception {
 		String code = 
 				"package x\n" +
-						"import org.eclipse.xtext.xbase.lib.Functions\n" +
-						"class Z {" +
-						"  def <MyParam extends Functions$Function0<Integer>> bar(java.util.List<MyParam> t) {\n" +
-						"    val int i = t.head.apply\n" +
-						"    if (i == 0)\n" +
-						"      t.head.apply\n" + 
-						"    t.head.apply\n" + 
-						"  }\n" +
-						"}\n";
+				"import org.eclipse.xtext.xbase.lib.Functions\n" +
+				"class Z {" +
+				"  def <MyParam extends Functions$Function0<Integer>> bar(java.util.List<MyParam> t) {\n" +
+				"    val int i = t.head.apply\n" +
+				"    if (i == 0)\n" +
+				"      t.head.apply\n" + 
+				"    t.head.apply\n" + 
+				"  }\n" +
+				"}\n";
 		String javaCode = compileToJavaCode(code);
 		javaCompiler.compileToClass("x.Z", javaCode);
 	}
@@ -226,14 +226,14 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	public void testBug_345828_05() throws Exception {
 		String code = 
 				"package x\n" +
-						"class Z {" +
-						"  def <MyParam extends =>Integer> baz(java.util.List<MyParam> t) {\n" +
-						"    val int i = t.get(0).apply\n" +
-						"    if (i == 0)\n" +
-						"      t.iterator.next.apply\n" + 
-						"    t.get(0).apply\n" + 
-						"  }\n" +
-						"}\n";
+				"class Z {" +
+				"  def <MyParam extends =>Integer> baz(java.util.List<MyParam> t) {\n" +
+				"    val int i = t.get(0).apply\n" +
+				"    if (i == 0)\n" +
+				"      t.iterator.next.apply\n" + 
+				"    t.get(0).apply\n" + 
+				"  }\n" +
+				"}\n";
 		String javaCode = compileToJavaCode(code);
 		javaCompiler.compileToClass("x.Z", javaCode);
 	}
@@ -1559,18 +1559,17 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		invokeAndExpect2("foofoo", definition, "test", "foo");
 	}
 	
-	// TODO Fix Me
-//	public void testGenericFunction_02() throws Exception {
-//		String def = 
-//			    "def test(String x) {" +
-//			    "  x.init(e|{})" +
-//			    "}" +
-//			    "def <T> T init(T obj, (T)=>Void function) {\n" + 
-//				"  function.apply(obj)\n" + 
-//				"  return obj\n" + 
-//				"}";
-//		invokeAndExpect2("foo", def, "test", "foo");
-//	}
+	public void testGenericFunction_02() throws Exception {
+		String def = 
+			    "def test(String x) {" +
+			    "  x.init(e|{})" +
+			    "}" +
+			    "def <T> T init(T obj, (T)=>Void function) {\n" + 
+				"  function.apply(obj)\n" + 
+				"  return obj\n" + 
+				"}";
+		invokeAndExpect2("foo", def, "test", "foo");
+	}
 	
 	public void testFunctionCall_00() throws Exception {
 		invokeAndExpect("foobar", "bar(p1)} def bar(String x) {'foo'+x","bar");
