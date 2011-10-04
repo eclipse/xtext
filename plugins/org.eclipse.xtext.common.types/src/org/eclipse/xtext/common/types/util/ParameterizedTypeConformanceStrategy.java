@@ -43,11 +43,11 @@ public class ParameterizedTypeConformanceStrategy extends
 	public TypeConformanceResult doVisitGenericArrayTypeReference(JvmParameterizedTypeReference left, JvmGenericArrayTypeReference right,
 			TypeConformanceComputationArgument.Internal<JvmParameterizedTypeReference> param) {
 		if (conformanceComputer.getTypeReferences().is(left, Object.class))
-			return TypeConformanceResult.SUCCESS;
+			return TypeConformanceResult.SUBTYPE;
 		if (conformanceComputer.getTypeReferences().is(left, Serializable.class))
-			return TypeConformanceResult.SUCCESS;
+			return TypeConformanceResult.SUBTYPE;
 		if (conformanceComputer.getTypeReferences().is(left, Cloneable.class))
-			return TypeConformanceResult.SUCCESS;
+			return TypeConformanceResult.SUBTYPE;
 		return TypeConformanceResult.FAILED;
 	}
 
@@ -91,7 +91,7 @@ public class ParameterizedTypeConformanceStrategy extends
 			if (leftType instanceof JvmPrimitiveType) {
 				if (rightType instanceof JvmPrimitiveType) {
 					if (isWideningConversion((JvmPrimitiveType)leftType, (JvmPrimitiveType) rightType)) {
-						return TypeConformanceResult.SUCCESS;
+						return new TypeConformanceResult(TypeConformanceResult.Kind.PRIMITIVE_WIDENING);
 					}
 				} else if (rightType instanceof JvmGenericType) {
 					JvmTypeReference potentialPrimitive = conformanceComputer.getPrimitives().asPrimitiveIfWrapperType(rightReference);
@@ -150,7 +150,7 @@ public class ParameterizedTypeConformanceStrategy extends
 			// early exit - remaining cases are all compatible to java.lang.Object
 			if (leftType instanceof JvmDeclaredType) {
 				if (conformanceComputer.getTypeReferences().is(leftReference, Object.class))
-					return TypeConformanceResult.SUCCESS;
+					return TypeConformanceResult.SUBTYPE;
 			}
 			if (rightType instanceof JvmTypeParameter) {
 				List<JvmTypeConstraint> rightConstraints = ((JvmTypeParameter) rightType).getConstraints();
@@ -173,11 +173,11 @@ public class ParameterizedTypeConformanceStrategy extends
 			if (leftType instanceof JvmDeclaredType && rightType instanceof JvmDeclaredType) {
 				if (conformanceComputer.getSuperTypeCollector().isSuperType((JvmDeclaredType)rightType, (JvmDeclaredType)leftType)) {
 					if (param.rawType)
-						return TypeConformanceResult.SUCCESS;
+						return TypeConformanceResult.SUBTYPE;
 					// check for raw type references - since we are a subtype, type argument can 
 					// considered to be compatible if the reference itself does not define own arguments
 					if (leftReference.getArguments().isEmpty() || rightReference.getArguments().isEmpty())
-						return TypeConformanceResult.SUCCESS;
+						return TypeConformanceResult.SUBTYPE;
 					return areArgumentsConformant(leftReference, rightReference);
 				}
 			}

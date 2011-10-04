@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.linking;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
@@ -23,13 +24,14 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmTypeConstraint;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.IRawTypeHelper;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
+import org.eclipse.xtext.common.types.util.TypeConformanceComputationArgument;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
+import org.eclipse.xtext.common.types.util.TypeConformanceResult;
+import org.eclipse.xtext.common.types.util.TypeConformanceResult.Kind;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.Strings;
@@ -47,6 +49,7 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.LocalVarDescription;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
@@ -86,9 +89,6 @@ public class FeatureCallChecker {
 	@Inject
 	private IRawTypeHelper rawTypeHelper;
 	
-//	@Inject
-//	private TypesFactory typesFactory;
-
 	public void setTypeProvider(ITypeProvider typeProvider) {
 		this.typeProvider = typeProvider;
 	}
@@ -105,6 +105,46 @@ public class FeatureCallChecker {
 		this.reference = reference;
 	}
 
+	public boolean checkWithGenerics(IEObjectDescription input) {
+		boolean result = false;
+		if (input instanceof JvmFeatureDescription) {
+			JvmFeatureDescription featureDescription = (JvmFeatureDescription) input;
+			if (!featureDescription.isIntenseChecked()) {
+				ITypeArgumentContext typeContext = featureDescription.getGenericTypeContext();
+				if (typeContext != null) {
+					if (context instanceof XAbstractFeatureCall && input.getEObjectOrProxy() instanceof JvmExecutable) {
+						JvmExecutable executable = (JvmExecutable) input.getEObjectOrProxy();
+						List<XExpression> actualArguments = featureCall2JavaMapping.getActualArguments(
+								(XAbstractFeatureCall) context, 
+								executable,
+								featureDescription.getImplicitReceiver());
+						result = checkWithGenerics(featureDescription, executable, actualArguments, typeContext);
+					} else if (context instanceof XConstructorCall && featureDescription.getEObjectOrProxy() instanceof JvmConstructor) {
+						List<XExpression> arguments = ((XConstructorCall) context).getArguments();
+						result = checkWithGenerics(featureDescription, (JvmExecutable) featureDescription.getEObjectOrProxy(), arguments, typeContext);
+					}
+				}
+				featureDescription.setIntenseChecked(true);
+			}
+		}
+		return result;
+	}
+
+	protected boolean checkWithGenerics(JvmFeatureDescription featureDescription, JvmExecutable executable,
+			List<XExpression> actualArguments, ITypeArgumentContext typeContext) {
+		boolean result;
+		List<EnumSet<Kind>> allConformanceKinds = areGenericArgumentTypesValid(executable, actualArguments, typeContext);
+		for(EnumSet<Kind> conformanceKinds: allConformanceKinds) {
+			if (conformanceKinds.contains(Kind.FAILED) || conformanceKinds.contains(Kind.EXCEPTION)) {
+				featureDescription.setIssueCode(INVALID_GENERIC_ARGUMENT_TYPES);
+				break;
+			}
+		}
+		featureDescription.setArgumentConversionHints(allConformanceKinds);
+		result = true;
+		return result;
+	}
+	
 	public String check(IEObjectDescription input) {
 		if (input instanceof IValidatedEObjectDescription) {
 			final IValidatedEObjectDescription validatedDescription = (IValidatedEObjectDescription) input;
@@ -143,7 +183,7 @@ public class FeatureCallChecker {
 				&& expectedTypeArguments != context.getTypeArguments().size())
 			return INVALID_NUMBER_OF_TYPE_ARGUMENTS;
 		// TODO check type parameter bounds against type arguments 
-		if (!areArgumentTypesValid(input, arguments, jvmFeatureDescription.getContext()))
+		if (!areArgumentTypesValid(input, arguments, jvmFeatureDescription.getRawTypeContext()))
 			return INVALID_ARGUMENT_TYPES;
 		return null;
 	}
@@ -159,10 +199,18 @@ public class FeatureCallChecker {
 				return INVALID_ARGUMENT_TYPES;
 			final JvmFormalParameter rightParam = input.getParameters().get(0 + irrelevantArguments);
 			JvmTypeReference parameterType = rightParam.getParameterType();
-			JvmTypeReference lowerBound = jvmFeatureDescription.getContext().getLowerBound(parameterType);
-			JvmTypeReference rawTypeReference = rawTypeHelper.getRawTypeReference(lowerBound, context.eResource());
+			JvmTypeReference rawLowerBound = jvmFeatureDescription.getRawTypeContext().getLowerBound(parameterType);
+			JvmTypeReference rawTypeReference = rawTypeHelper.getRawTypeReference(rawLowerBound, context.eResource());
 			if (!conformance.isConformant(rawTypeReference, rightOperandType, true)) {
 				return INVALID_ARGUMENT_TYPES;
+			}
+			if (jvmFeatureDescription.getGenericTypeContext() != null) {
+				rightOperandType = getTypeProvider().getType(context.getRightOperand(), false);
+				JvmTypeReference lowerBound = jvmFeatureDescription.getGenericTypeContext().getLowerBound(parameterType);
+				JvmTypeReference typeReference = rawTypeHelper.getRawTypeReference(lowerBound, context.eResource());
+				if (!conformance.isConformant(typeReference, rightOperandType, false)) {
+					return INVALID_ARGUMENT_TYPES;
+				}
 			}
 		}
 		return null;
@@ -174,10 +222,12 @@ public class FeatureCallChecker {
 		if (input.getParameters().size() != (1 + irrelevantArguments))
 			return INVALID_NUMBER_OF_ARGUMENTS;
 		if (context.getValue() != null) {
-			JvmTypeReference type = getTypeProvider().getType(context.getValue(), true);
+			JvmTypeReference type = getTypeProvider().getType(context.getValue(), false);
 			final JvmFormalParameter valueParam = input.getParameters().get(0 + irrelevantArguments);
-			if (!isCompatibleArgument(valueParam.getParameterType(), type))
+			if (!conformance.isConformant(valueParam.getParameterType(), type, true))
 				return INVALID_ARGUMENT_TYPES;
+			if (!conformance.isConformant(valueParam.getParameterType(), type, false))
+				return INVALID_GENERIC_ARGUMENT_TYPES;
 		}
 		return null;
 	}
@@ -254,22 +304,26 @@ public class FeatureCallChecker {
 			final JvmFormalParameter param = input.getParameters().get(0);
 			if (!conformance.isConformant(param.getParameterType(), operandType, true))
 				return INVALID_ARGUMENT_TYPES;
+			if (!conformance.isConformant(param.getParameterType(), operandType))
+				return INVALID_GENERIC_ARGUMENT_TYPES;
 		}
 		return null;
 	}
 
-	protected String checkJvmOperation(JvmOperation input, XAbstractFeatureCall context,
+	protected String checkJvmOperation(JvmOperation operation, XAbstractFeatureCall featureCall,
 			boolean isExplicitOperationCall, JvmFeatureDescription jvmFeatureDescription, EList<XExpression> arguments) {
-		List<XExpression> actualArguments = featureCall2JavaMapping.getActualArguments(context, input,
+		List<XExpression> actualArguments = featureCall2JavaMapping.getActualArguments(
+				featureCall, 
+				operation,
 				jvmFeatureDescription.getImplicitReceiver());
-		if (!isValidNumberOfArguments(input, actualArguments))
+		if (!isValidNumberOfArguments(operation, actualArguments))
 			return INVALID_NUMBER_OF_ARGUMENTS;
 		if (!isExplicitOperationCall && !isSugaredMethodInvocationWithoutParanthesis(jvmFeatureDescription))
 			return METHOD_ACCESS_WITHOUT_PARENTHESES;
-		if (!context.getTypeArguments().isEmpty() // raw type or type inference
-				&& input.getTypeParameters().size() != context.getTypeArguments().size())
+		if (!featureCall.getTypeArguments().isEmpty() // raw type or type inference
+				&& operation.getTypeParameters().size() != featureCall.getTypeArguments().size())
 			return INVALID_NUMBER_OF_TYPE_ARGUMENTS;
-		if (!areArgumentTypesValid(input, actualArguments, jvmFeatureDescription.getContext()))
+		if (!areArgumentTypesValid(operation, actualArguments, jvmFeatureDescription.getRawTypeContext()))
 			return INVALID_ARGUMENT_TYPES;
 		return null;
 	}
@@ -283,12 +337,9 @@ public class FeatureCallChecker {
 				return true;
 			JvmTypeReference lowerBound = typeArgumentContext.getLowerBound(parameterType);
 			JvmTypeReference rawType = rawTypeHelper.getRawTypeReference(lowerBound, exectuable.eResource());
-//			if (typeArgumentContext != null) {
-//				parameterType = typeArgumentContext.getLowerBound(parameterType);
-//			}
 			XExpression argument = arguments.get(i);
 			JvmTypeReference argumentType = getTypeProvider().getType(argument, true);
-			if (!isCompatibleArgument(rawType, argumentType))
+			if (!conformance.isConformant(rawType, argumentType, true))
 				return false;
 		}
 		if (exectuable.isVarArgs()) {
@@ -302,20 +353,64 @@ public class FeatureCallChecker {
 			if (arguments.size() == numberOfParameters) {
 				XExpression lastArgument = arguments.get(lastParamIndex);
 				JvmTypeReference lastArgumentType = getTypeProvider().getType(lastArgument, true);
-				if (isCompatibleArgument(lastParameterRawType, lastArgumentType))
+				if (conformance.isConformant(lastParameterRawType, lastArgumentType, true))
 					return true;
-				if (!isCompatibleArgument(varArgRawType, lastArgumentType))
+				if (!conformance.isConformant(varArgRawType, lastArgumentType, true))
 					return false;
 			} else {
 				for (int i = lastParamIndex; i < arguments.size(); i++) {
 					XExpression argumentExpression = arguments.get(i);
 					JvmTypeReference argumentType = getTypeProvider().getType(argumentExpression, true);
-					if (!isCompatibleArgument(varArgRawType, argumentType))
+					if (!conformance.isConformant(varArgRawType, argumentType, true))
 						return false;
 				}
 			}
 		}
 		return true;
+	}
+	
+	protected List<EnumSet<TypeConformanceResult.Kind>> areGenericArgumentTypesValid(JvmExecutable exectuable, List<XExpression> arguments, ITypeArgumentContext typeArgumentContext) {
+		List<EnumSet<TypeConformanceResult.Kind>> result = Lists.newArrayList();
+		int numberOfParameters = exectuable.getParameters().size();
+		int parametersToCheck = exectuable.isVarArgs() ? numberOfParameters - 1 : numberOfParameters;
+		for (int i = 0; i < parametersToCheck && i<arguments.size(); i++) {
+			JvmTypeReference parameterType = exectuable.getParameters().get(i).getParameterType();
+			if (parameterType != null) {
+				JvmTypeReference lowerBound = typeArgumentContext.getLowerBound(parameterType);
+	//			JvmTypeReference rawType = rawTypeHelper.getRawTypeReference(lowerBound, exectuable.eResource());
+				XExpression argument = arguments.get(i);
+				JvmTypeReference argumentType = getTypeProvider().getType(argument);
+				TypeConformanceResult conformanceResult = conformance.isConformant(lowerBound, argumentType, new TypeConformanceComputationArgument(false, false, true));
+				result.add(conformanceResult.getKinds());
+			}
+		}
+		if (exectuable.isVarArgs()) {
+			int lastParamIndex = numberOfParameters - 1;
+			JvmTypeReference lastParameterType = exectuable.getParameters().get(lastParamIndex).getParameterType();
+			JvmTypeReference lastParameterLowerBound = typeArgumentContext.getLowerBound(lastParameterType);
+			if (!(lastParameterLowerBound instanceof JvmGenericArrayTypeReference))
+				throw new IllegalStateException("Unexpected var arg type: " + lastParameterLowerBound);
+			JvmTypeReference varArgRawType = ((JvmGenericArrayTypeReference) lastParameterLowerBound).getComponentType();
+			if (arguments.size() == numberOfParameters) {
+				XExpression lastArgument = arguments.get(lastParamIndex);
+				JvmTypeReference lastArgumentType = getTypeProvider().getType(lastArgument, false);
+				TypeConformanceResult conformanceResult = conformance.isConformant(lastParameterLowerBound, lastArgumentType, new TypeConformanceComputationArgument(false, false, true));
+				if (conformanceResult.isConformant()) {
+					result.add(conformanceResult.getKinds());
+				} else {
+					conformanceResult = conformance.isConformant(varArgRawType, lastArgumentType, new TypeConformanceComputationArgument(false, false, true));
+					result.add(conformanceResult.getKinds());
+				}
+			} else {
+				for (int i = lastParamIndex; i < arguments.size(); i++) {
+					XExpression argumentExpression = arguments.get(i);
+					JvmTypeReference argumentType = getTypeProvider().getType(argumentExpression, false);
+					TypeConformanceResult conformanceResult = conformance.isConformant(varArgRawType, argumentType, new TypeConformanceComputationArgument(false, false, true));
+					result.add(conformanceResult.getKinds());
+				}
+			}
+		}
+		return result;
 	}
 
 	protected boolean isValidNumberOfArguments(JvmExecutable executable, List<XExpression> arguments) {
@@ -331,22 +426,6 @@ public class FeatureCallChecker {
 
 	protected boolean isSugaredMethodInvocationWithoutParanthesis(JvmFeatureDescription jvmFeatureDescription) {
 		return jvmFeatureDescription.getKey().indexOf('(') == -1;
-	}
-
-	protected boolean isCompatibleArgument(JvmTypeReference declaredType, JvmTypeReference actualType) {
-		if (actualType == null)
-			return true;
-		if (actualType.getType() instanceof JvmTypeParameter) {
-			JvmTypeParameter type = (JvmTypeParameter) actualType.getType();
-			if (type.getConstraints().isEmpty())
-				return true;
-			for (JvmTypeConstraint constraint : type.getConstraints()) {
-				if (isCompatibleArgument(declaredType, constraint.getTypeReference()))
-					return true;
-			}
-			return false;
-		}
-		return conformance.isConformant(declaredType, actualType, true);
 	}
 
 }

@@ -80,6 +80,7 @@ import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 /**
@@ -87,7 +88,7 @@ import com.google.inject.Singleton;
  * @author Sebastian Zarnekow
  */
 @Singleton
-public class XbaseTypeProvider extends AbstractTypeProvider {
+public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgumentContextHelper {
 
 	@Inject
 	private TypesFactory factory;
@@ -244,7 +245,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 				JvmFormalParameter parameter = getParam(operation, actualIndex);
 				if (parameter != null) {
 					JvmTypeReference declaredType = parameter.getParameterType();
-					ITypeArgumentContext context = getFeatureCallTypeArgContext(assignment, reference, index, rawType);
+					ITypeArgumentContext context = getFeatureCallTypeArgContext(assignment, rawType);
 					return context.getLowerBound(declaredType);
 				}
 				return null;
@@ -280,7 +281,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 				JvmOperation operation = (JvmOperation) featureCall.getFeature();
 				XExpression argumentExpression = getExpression(featureCall, reference, index);
 				List<XExpression> actualArguments = featureCall2javaMapping.getActualArguments(featureCall);
-				ITypeArgumentContext context = getFeatureCallTypeArgContext(featureCall, reference, index, rawType);
+				ITypeArgumentContext context = getFeatureCallTypeArgContext(featureCall, rawType);
 				int argumentIndex = actualArguments.indexOf(argumentExpression);
 				if (argumentIndex >= 0) {
 					if (operation.isVarArgs()) {
@@ -351,8 +352,6 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 
 	protected ITypeArgumentContext getFeatureCallTypeArgContext(
 			final XAbstractFeatureCall expr, 
-			EReference reference,
-			int index, 
 			final boolean rawType) {
 		return getTypeArgumentContextProvider().getTypeArgumentContext(new TypeArgumentContextProvider.AbstractRequest() {
 			@Override
@@ -474,7 +473,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 				&& expr.getFeature() instanceof JvmOperation) {
 			JvmOperation feature = (JvmOperation) expr.getFeature();
 			JvmFormalParameter parameter = getLast(feature.getParameters());
-			ITypeArgumentContext context = getFeatureCallTypeArgContext(expr, reference, index, rawType);
+			ITypeArgumentContext context = getFeatureCallTypeArgContext(expr, rawType);
 			final JvmTypeReference parameterType = parameter.getParameterType();
 			JvmTypeReference result = context.getLowerBound(parameterType);
 			return result;
@@ -484,14 +483,14 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			JvmOperation operation = (JvmOperation) expr.getFeature();
 			if (operation.getParameters().size() > 1) {
 				JvmFormalParameter parameter = operation.getParameters().get(0);
-				ITypeArgumentContext context = getFeatureCallTypeArgContext(expr, reference, index, rawType);
+				ITypeArgumentContext context = getFeatureCallTypeArgContext(expr, rawType);
 				final JvmTypeReference parameterType = parameter.getParameterType();
 				JvmTypeReference resolved = context.resolve(parameterType);
 				return resolved;
 			} else if (!operation.isStatic()) {
 				// expectation for member call target for operations on objects 
 				XExpression argumentExpression = getExpression(expr, reference, index);
-				ITypeArgumentContext context = getFeatureCallTypeArgContext(expr, reference, index, rawType);
+				ITypeArgumentContext context = getFeatureCallTypeArgContext(expr, rawType);
 				final JvmTypeReference declaringType = getTypeReferences().createTypeRef(operation.getDeclaringType());
 				if (rawType)
 					return declaringType;
@@ -799,6 +798,14 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			return constructorResultType;
 		}
 		rawType = false; // inlined below
+		ITypeArgumentContext context = getTypeArgumentContext(constructorCall, constructor);
+		JvmTypeReference result = context.getUpperBound(constructorResultType, constructorCall);
+		return result;
+	}
+
+	public ITypeArgumentContext getTypeArgumentContext(
+			final XConstructorCall constructorCall,
+			final JvmConstructor constructor) {
 		ITypeArgumentContext context = getTypeArgumentContextProvider().getTypeArgumentContext(new TypeArgumentContextProvider.AbstractRequest() {
 			@Override
 			public JvmFeature getFeature() {
@@ -810,7 +817,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			}
 			@Override
 			public JvmTypeParameterDeclarator getNearestDeclarator() {
-				return nearestTypeParameterDeclarator;
+				return getNearestTypeParameterDeclarator(constructorCall);
 			}
 			@Override
 			public List<JvmTypeReference> getExplicitTypeArgument() {
@@ -826,11 +833,10 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			}
 			@Override
 			public JvmTypeReference getDeclaredType() {
-				return constructorResultType;
+				return getTypeForIdentifiable(constructor, false);
 			}
 		});
-		JvmTypeReference result = context.getUpperBound(constructorResultType, constructorCall);
-		return result;
+		return context;
 	}
 	
 	protected JvmTypeReference _type(XBooleanLiteral object, boolean rawType) {
@@ -962,6 +968,25 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		// method was either already called with rawType==false or the featureType points directly to a JvmTypeParameter
 		rawType = false; // inlined below
 		// TODO #isResolved has to check against the nearest parameter declarator
+		ITypeArgumentContext context = getTypeArgumentContext(
+				featureCall, 
+				featureCall2javaMapping.getActualArguments(featureCall),
+				new Provider<JvmTypeReference>() {
+					public JvmTypeReference get() {
+						JvmTypeReference result = XbaseTypeProvider.this.getReceiverType(featureCall, false);
+						return result;
+					}
+				},
+				feature);
+		JvmTypeReference result = context.getUpperBound(featureType, featureCall);
+		return result;
+	}
+
+	public ITypeArgumentContext getTypeArgumentContext(
+			final XAbstractFeatureCall featureCall,
+			final List<XExpression> actualArguments,
+			final Provider<JvmTypeReference> receiverTypeProvider,
+			final JvmIdentifiableElement feature) {
 		ITypeArgumentContext context = getTypeArgumentContextProvider().getTypeArgumentContext(new TypeArgumentContextProvider.AbstractRequest() {
 			@Override
 			public JvmFeature getFeature() {
@@ -975,7 +1000,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			}
 			@Override
 			public JvmTypeParameterDeclarator getNearestDeclarator() {
-				return nearestTypeParameterDeclarator;
+				return getNearestTypeParameterDeclarator(featureCall);
 			}
 			@Override
 			public List<JvmTypeReference> getExplicitTypeArgument() {
@@ -983,8 +1008,11 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			}
 			@Override
 			public List<JvmTypeReference> getArgumentTypes() {
-				List<JvmTypeReference> result = Arrays.asList(XbaseTypeProvider.this.getArgumentTypes(featureCall, false));
-				return result;
+				if (feature instanceof JvmExecutable) {
+					List<JvmTypeReference> result = Arrays.asList(XbaseTypeProvider.this.getArgumentTypes((JvmExecutable) feature, actualArguments, false));
+					return result;	
+				}
+				return null;
 			}
 			@Override
 			public JvmTypeReference getExpectedType() {
@@ -993,16 +1021,16 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			}
 			@Override
 			public JvmTypeReference getReceiverType() {
-				JvmTypeReference result = XbaseTypeProvider.this.getReceiverType(featureCall, false);
-				return result;
+				if (receiverTypeProvider != null)
+					return receiverTypeProvider.get();
+				return null;
 			}
 			@Override
 			public JvmTypeReference getDeclaredType() {
-				return featureType;
+				return getTypeForIdentifiable(feature, false);
 			}
 		});
-		JvmTypeReference result = context.getUpperBound(featureType, featureCall);
-		return result;
+		return context;
 	}
 
 	@Inject

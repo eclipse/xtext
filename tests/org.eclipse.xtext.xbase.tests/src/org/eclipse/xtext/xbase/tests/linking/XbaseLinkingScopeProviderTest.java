@@ -7,7 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.linking;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -30,6 +33,8 @@ import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+
+import testdata.OverloadedMethods;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -531,6 +536,331 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 	public void testMemberCallOnMultiType_10() throws Exception {
 		XBinaryOperation lessThan = (XBinaryOperation) expression("(if (true) new Double('') else new Integer('')) < 0");
 		assertEquals("org.eclipse.xtext.xbase.lib.ComparableExtensions.operator_lessThan(java.lang.Comparable,C)", lessThan.getFeature().getIdentifier());
+	}
+	
+	public void testOverloadedMethods_01() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{\n" +
+				"    var java.util.List<CharSequence> chars = null\n" +
+				"    var java.util.List<String> strings = null\n" +
+				"    var testdata.OverloadedMethods<Object> receiver = null\n" +
+				"    receiver.overloaded(chars, strings)\n" +
+				"}");
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) block.getExpressions().get(3);
+		JvmIdentifiableElement overloaded = featureCall.getFeature();
+		assertNotNull(overloaded);
+		assertFalse(overloaded.eIsProxy());
+		assertEquals("testdata.OverloadedMethods.overloaded(java.util.Collection,java.lang.Iterable)", overloaded.getIdentifier());
+	}
+	
+	public void testOverloadedMethods_02() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{\n" +
+				"    var java.util.List<CharSequence> chars = null\n" +
+				"    var java.util.List<String> strings = null\n" +
+				"    var testdata.OverloadedMethods<Object> receiver = null\n" +
+				"    receiver.overloaded(strings, chars)\n" +
+				"}");
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) block.getExpressions().get(3);
+		JvmIdentifiableElement overloaded = featureCall.getFeature();
+		assertNotNull(overloaded);
+		assertFalse(overloaded.eIsProxy());
+		assertEquals("testdata.OverloadedMethods.overloaded(java.lang.Iterable,java.util.Collection)", overloaded.getIdentifier());
+	}
+	
+	public void testOverloadedMethods_03() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{\n" +
+				"    var java.util.List<String> strings = null\n" +
+				"    var testdata.OverloadedMethods<Object> receiver = null\n" +
+				"    receiver.overloaded(strings, strings)\n" +
+				"}");
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) block.getExpressions().get(2);
+		JvmIdentifiableElement overloaded = featureCall.getFeature();
+		assertNotNull(overloaded);
+		assertFalse(overloaded.eIsProxy());
+		assertEquals("testdata.OverloadedMethods.overloaded(java.util.List,java.util.List)", overloaded.getIdentifier());
+	}
+	
+	public void testOverloadedMethods_04() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{\n" +
+				"    var java.util.List<? extends Object> objects = null\n" +
+				"    var testdata.OverloadedMethods<Object> receiver = null\n" +
+				"    receiver.overloaded(objects, objects)\n" +
+				"}");
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) block.getExpressions().get(2);
+		JvmIdentifiableElement overloaded = featureCall.getFeature();
+		assertNotNull(overloaded);
+		assertFalse(overloaded.eIsProxy());
+		assertEquals("testdata.OverloadedMethods.overloaded(java.lang.Iterable,java.lang.Iterable)", overloaded.getIdentifier());
+	}
+	
+	public void testOverloadedMethodsJava_01() throws Exception {
+		List<CharSequence> chars = null;
+		List<String> strings = null;
+		List<? extends Object> objects = null;
+		assertEquals("overloaded(Collection,Iterable)", new OverloadedMethods<Object>().overloaded(chars, strings));
+		assertEquals("overloaded(Iterable,Collection)", new OverloadedMethods<Object>().overloaded(strings, chars));
+		assertEquals("overloaded(List,List)", new OverloadedMethods<Object>().overloaded(strings, strings));
+		assertEquals("overloaded(List,List)", new OverloadedMethods<Object>().overloaded(chars, chars));
+		assertEquals("overloaded(Iterable,Iterable)", new OverloadedMethods<Object>().overloaded(objects, objects));
+	}
+	
+	public void testOverloadedMethods_05() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{\n" +
+				"    var java.util.List<CharSequence> chars = null\n" +
+				"    var java.util.List<String> strings = null\n" +
+				"    var testdata.OverloadedMethods<CharSequence> receiver = null\n" +
+				"    receiver.overloaded2(chars, strings)\n" +
+				"}");
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) block.getExpressions().get(3);
+		JvmIdentifiableElement overloaded = featureCall.getFeature();
+		assertNotNull(overloaded);
+		assertFalse(overloaded.eIsProxy());
+		assertEquals("testdata.OverloadedMethods.overloaded2(java.util.Collection,java.lang.Iterable)", overloaded.getIdentifier());
+	}
+	
+	public void testOverloadedMethods_06() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{\n" +
+				"    var java.util.List<CharSequence> chars = null\n" +
+				"    var java.util.List<String> strings = null\n" +
+				"    var testdata.OverloadedMethods<CharSequence> receiver = null\n" +
+				"    receiver.overloaded2(strings, chars)\n" +
+				"}");
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) block.getExpressions().get(3);
+		JvmIdentifiableElement overloaded = featureCall.getFeature();
+		assertNotNull(overloaded);
+		assertFalse(overloaded.eIsProxy());
+		assertEquals("testdata.OverloadedMethods.overloaded2(java.lang.Iterable,java.util.Collection)", overloaded.getIdentifier());
+	}
+	
+	public void testOverloadedMethods_07() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{\n" +
+				"    var java.util.List<String> strings = null\n" +
+				"    var testdata.OverloadedMethods<String> receiver = null\n" +
+				"    receiver.overloaded2(strings, strings)\n" +
+				"}");
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) block.getExpressions().get(2);
+		JvmIdentifiableElement overloaded = featureCall.getFeature();
+		assertNotNull(overloaded);
+		assertFalse(overloaded.eIsProxy());
+		assertEquals("testdata.OverloadedMethods.overloaded2(java.util.List,java.util.List)", overloaded.getIdentifier());
+	}
+	
+	public void testOverloadedMethods_08() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{\n" +
+				"    var java.util.List<? extends Object> objects = null\n" +
+				"    var testdata.OverloadedMethods<Object> receiver = null\n" +
+				"    receiver.overloaded2(objects, objects)\n" +
+				"}");
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) block.getExpressions().get(2);
+		JvmIdentifiableElement overloaded = featureCall.getFeature();
+		assertNotNull(overloaded);
+		assertFalse(overloaded.eIsProxy());
+		assertEquals("testdata.OverloadedMethods.overloaded2(java.lang.Iterable,java.lang.Iterable)", overloaded.getIdentifier());
+	}
+	
+	public void testOverloadedMethods_09() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{\n" +
+				"    var java.util.List<? extends CharSequence> chars = null\n" +
+				"    var testdata.OverloadedMethods<Object> receiver = null\n" +
+				"    receiver.overloaded2(chars, chars)\n" +
+				"}");
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) block.getExpressions().get(2);
+		JvmIdentifiableElement overloaded = featureCall.getFeature();
+		assertNotNull(overloaded);
+		assertFalse(overloaded.eIsProxy());
+		assertEquals("testdata.OverloadedMethods.overloaded2(java.lang.Iterable,java.lang.Iterable)", overloaded.getIdentifier());
+	}
+	
+	public void testOverloadedMethodsJava_02() throws Exception {
+		List<CharSequence> chars = null;
+		List<String> strings = null;
+		List<? extends Object> objects = null;
+		List<? extends CharSequence> chars2 = null;
+		assertEquals("overloaded2(Collection,Iterable)", new OverloadedMethods<CharSequence>().overloaded2(chars, strings));
+		assertEquals("overloaded2(Iterable,Collection)", new OverloadedMethods<CharSequence>().overloaded2(strings, chars));
+		assertEquals("overloaded2(List,List)", new OverloadedMethods<String>().overloaded2(strings, strings));
+		assertEquals("overloaded2(List,List)", new OverloadedMethods<CharSequence>().overloaded2(chars, chars));
+		assertEquals("overloaded2(Iterable,Iterable)", new OverloadedMethods<Object>().overloaded2(objects, objects));
+		assertEquals("overloaded2(Iterable,Iterable)", new OverloadedMethods<Object>().overloaded2(chars2, chars2));
+	}
+	
+	public void testBoxingUnboxing_01() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{\n" +
+				"    var int i = 0\n" +
+				"    var testdata.OverloadedMethods<Object> receiver = null\n" +
+				"    receiver.overloadedInt(i)\n" +
+				"}");
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) block.getExpressions().get(2);
+		JvmIdentifiableElement overloaded = featureCall.getFeature();
+		assertNotNull(overloaded);
+		assertFalse(overloaded.eIsProxy());
+		assertEquals("testdata.OverloadedMethods.overloadedInt(int)", overloaded.getIdentifier());
+	}
+	
+	public void testBoxingUnboxing_02() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{\n" +
+				"    var Integer i = 0\n" +
+				"    var testdata.OverloadedMethods<Object> receiver = null\n" +
+				"    receiver.overloadedInt(i)\n" +
+				"}");
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) block.getExpressions().get(2);
+		JvmIdentifiableElement overloaded = featureCall.getFeature();
+		assertNotNull(overloaded);
+		assertFalse(overloaded.eIsProxy());
+		assertEquals("testdata.OverloadedMethods.overloadedInt(java.lang.Integer)", overloaded.getIdentifier());
+	}
+	
+	public void testBoxingUnboxingJava_03() throws Exception {
+		int i = 0;
+		Integer integer = null;
+		assertEquals("overloadedInt(int)", new OverloadedMethods<Object>().overloadedInt(i));
+		assertEquals("overloadedInt(Integer)", new OverloadedMethods<Object>().overloadedInt(integer));
+	}
+	
+	public void testOverloadedConstructors_01() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{\n" +
+				"    new testdata.OverloadedMethods<Object>()\n" +
+				"}");
+		XConstructorCall constructorCall = (XConstructorCall) block.getExpressions().get(0);
+		JvmConstructor constructor = constructorCall.getConstructor();
+		assertNotNull(constructor);
+		assertFalse(constructor.eIsProxy());
+		assertEquals("testdata.OverloadedMethods.OverloadedMethods()", constructor.getIdentifier());
+	}
+	
+	public void testOverloadedConstructors_02() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{\n" +
+				"    var java.util.List<CharSequence> chars = null\n" +
+				"    var java.util.List<String> strings = null\n" +
+				"    new testdata.OverloadedMethods<CharSequence>(chars, strings)\n" +
+				"}");
+		XConstructorCall constructorCall = (XConstructorCall) block.getExpressions().get(2);
+		JvmConstructor constructor = constructorCall.getConstructor();
+		assertNotNull(constructor);
+		assertFalse(constructor.eIsProxy());
+		assertEquals("testdata.OverloadedMethods.OverloadedMethods(java.util.Collection,java.lang.Iterable)", constructor.getIdentifier());
+	}
+	
+	public void testOverloadedConstructors_03() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{\n" +
+				"    var java.util.List<CharSequence> chars = null\n" +
+				"    var java.util.List<String> strings = null\n" +
+				"    new testdata.OverloadedMethods<CharSequence>(strings, chars)\n" +
+				"}");
+		XConstructorCall constructorCall = (XConstructorCall) block.getExpressions().get(2);
+		JvmConstructor constructor = constructorCall.getConstructor();
+		assertNotNull(constructor);
+		assertFalse(constructor.eIsProxy());
+		assertEquals("testdata.OverloadedMethods.OverloadedMethods(java.lang.Iterable,java.util.Collection)", constructor.getIdentifier());
+	}
+	
+	public void testOverloadedConstructors_04() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{\n" +
+				"    var java.util.List<CharSequence> chars = null\n" +
+				"    new testdata.OverloadedMethods<CharSequence>(chars, chars)\n" +
+				"}");
+		XConstructorCall constructorCall = (XConstructorCall) block.getExpressions().get(1);
+		JvmConstructor constructor = constructorCall.getConstructor();
+		assertNotNull(constructor);
+		assertFalse(constructor.eIsProxy());
+		assertEquals("testdata.OverloadedMethods.OverloadedMethods(java.util.List,java.util.List)", constructor.getIdentifier());
+	}
+	
+	public void testOverloadedConstructors_05() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{\n" +
+				"    var java.util.List<String> strings = null\n" +
+				"    new testdata.OverloadedMethods<String>(strings, strings)\n" +
+				"}");
+		XConstructorCall constructorCall = (XConstructorCall) block.getExpressions().get(1);
+		JvmConstructor constructor = constructorCall.getConstructor();
+		assertNotNull(constructor);
+		assertFalse(constructor.eIsProxy());
+		assertEquals("testdata.OverloadedMethods.OverloadedMethods(java.util.List,java.util.List)", constructor.getIdentifier());
+	}
+	
+	public void testOverloadedConstructors_06() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{\n" +
+				"    var java.util.List<CharSequence> chars = null\n" +
+				"    new testdata.OverloadedMethods<Object>(chars, chars)\n" +
+				"}");
+		XConstructorCall constructorCall = (XConstructorCall) block.getExpressions().get(1);
+		JvmConstructor constructor = constructorCall.getConstructor();
+		assertNotNull(constructor);
+		assertFalse(constructor.eIsProxy());
+		assertEquals("testdata.OverloadedMethods.OverloadedMethods(java.lang.Iterable,java.lang.Iterable)", constructor.getIdentifier());
+	}
+	
+	public void testOverloadedConstructors_07() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{\n" +
+				"    var java.util.List<? extends Object> objects = null\n" +
+				"    new testdata.OverloadedMethods<Object>(objects, objects)\n" +
+				"}");
+		XConstructorCall constructorCall = (XConstructorCall) block.getExpressions().get(1);
+		JvmConstructor constructor = constructorCall.getConstructor();
+		assertNotNull(constructor);
+		assertFalse(constructor.eIsProxy());
+		assertEquals("testdata.OverloadedMethods.OverloadedMethods(java.lang.Iterable,java.lang.Iterable)", constructor.getIdentifier());
+	}
+	
+	public void testOverloadedConstructors_08() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{\n" +
+				"    var java.util.List<CharSequence> chars = null\n" +
+				"    var java.util.List<String> strings = null\n" +
+				"    new testdata.OverloadedMethods<Object>(chars, strings)\n" +
+				"}");
+		XConstructorCall constructorCall = (XConstructorCall) block.getExpressions().get(2);
+		JvmConstructor constructor = constructorCall.getConstructor();
+		assertNotNull(constructor);
+		assertFalse(constructor.eIsProxy());
+		assertEquals("testdata.OverloadedMethods.OverloadedMethods(java.lang.Iterable,java.lang.Iterable)", constructor.getIdentifier());
+	}
+	
+	public void testOverloadedConstructors_09() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{\n" +
+				"    var java.util.List<CharSequence> chars = null\n" +
+				"    var java.util.List<String> strings = null\n" +
+				"    new testdata.OverloadedMethods<Object>(strings, chars)\n" +
+				"}");
+		XConstructorCall constructorCall = (XConstructorCall) block.getExpressions().get(2);
+		JvmConstructor constructor = constructorCall.getConstructor();
+		assertNotNull(constructor);
+		assertFalse(constructor.eIsProxy());
+		assertEquals("testdata.OverloadedMethods.OverloadedMethods(java.lang.Iterable,java.lang.Iterable)", constructor.getIdentifier());
+	}
+	
+	public void testOverloadedConstructorsJava_01() throws Exception {
+		List<CharSequence> chars = null;
+		List<String> strings = null;
+		List<? extends Object> objects = null;
+		assertEquals(0, new OverloadedMethods<CharSequence>().usedConstructor);
+		assertEquals(1, new OverloadedMethods<CharSequence>(chars, strings).usedConstructor);
+		assertEquals(2, new OverloadedMethods<CharSequence>(strings, chars).usedConstructor);
+		assertEquals(3, new OverloadedMethods<CharSequence>(chars, chars).usedConstructor);
+		assertEquals(3, new OverloadedMethods<String>(strings, strings).usedConstructor);
+		assertEquals(4, new OverloadedMethods<Object>(chars, chars).usedConstructor);
+		assertEquals(4, new OverloadedMethods<Object>(strings, strings).usedConstructor);
+		assertEquals(4, new OverloadedMethods<Object>(objects, objects).usedConstructor);
+		assertEquals(4, new OverloadedMethods<Object>(chars, strings).usedConstructor);
+		assertEquals(4, new OverloadedMethods<Object>(strings, chars).usedConstructor);
 	}
 	
 }

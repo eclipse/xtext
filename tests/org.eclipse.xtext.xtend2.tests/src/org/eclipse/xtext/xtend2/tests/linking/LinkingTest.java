@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtend2.tests.linking;
 
 import static com.google.common.collect.Iterables.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -17,6 +18,7 @@ import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -43,6 +45,8 @@ import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendParameter;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
+
+import testdata.OverloadedMethods;
 
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
@@ -141,6 +145,19 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("testdata.Properties1.setProp1(java.lang.String)", call.getFeature().getIdentifier());
 	}
 	
+	public void testExtensionMethodCall_01() throws Exception {
+		XtendClass clazz = clazz("" +
+				"class Foo {" +
+				"  def foo() {\n" + 
+				"    var java.util.List<? extends String> list = null;\n" + 
+				"    list.map(e|e.toUpperCase)\n" +
+				"  }\n" +
+				"}");
+		XtendFunction func = (XtendFunction) clazz.getMembers().get(0);
+		final XMemberFeatureCall call = (XMemberFeatureCall)((XBlockExpression)func.getExpression()).getExpressions().get(1);
+		assertEquals("org.eclipse.xtext.xbase.lib.ListExtensions.map(java.util.List,org.eclipse.xtext.xbase.lib.Functions$Function1)", call.getFeature().getIdentifier());
+	}
+	
 	public void testCaseFunction_00() throws Exception {
 		XtendFunction function = function("def dispatch String foo(String s) {_foo(s)}");
 		final XBlockExpression block = (XBlockExpression) function.getExpression();
@@ -216,6 +233,250 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		XClosure closure = (XClosure) ((XBlockExpression)func.getExpression()).getExpressions().get(0);
 		XAbstractFeatureCall featureCall1 = (XAbstractFeatureCall) (((XBlockExpression)closure.getExpression()).getExpressions().get(0));
 		assertEquals(closure.getFormalParameters().get(0), featureCall1.getFeature());
+	}
+	
+	public void testOverloadedMethods_01() throws Exception {
+		XtendFile file = file(
+				"import java.util.List\n" +
+				"class X {\n" +
+				"  def foo() {\n" +
+				"    var List<CharSequence> chars = null\n" +
+				"    var List<String> strings = null\n" +
+				"    var testdata.OverloadedMethods<Object> receiver = null\n" +
+				"    receiver.overloaded(chars, strings)\n" +
+				"  }\n" +
+				"}");
+		XtendClass clazz = file.getXtendClass();
+		XtendFunction func  = (XtendFunction) clazz.getMembers().get(0);
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) ((XBlockExpression) func.getExpression()).getExpressions().get(3);
+		JvmIdentifiableElement overloaded = featureCall.getFeature();
+		assertNotNull(overloaded);
+		assertFalse(overloaded.eIsProxy());
+		assertEquals("testdata.OverloadedMethods.overloaded(java.util.Collection,java.lang.Iterable)", overloaded.getIdentifier());
+	}
+	
+	public void testOverloadedMethods_02() throws Exception {
+		XtendFile file = file(
+				"import java.util.List\n" +
+				"class X {\n" +
+				"  def foo() {\n" +
+				"    var List<CharSequence> chars = null\n" +
+				"    var List<String> strings = null\n" +
+				"    var testdata.OverloadedMethods<Object> receiver = null\n" +
+				"    receiver.overloaded(strings, chars)\n" +
+				"  }\n" +
+				"}");
+		XtendClass clazz = file.getXtendClass();
+		XtendFunction func  = (XtendFunction) clazz.getMembers().get(0);
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) ((XBlockExpression) func.getExpression()).getExpressions().get(3);
+		JvmIdentifiableElement overloaded = featureCall.getFeature();
+		assertNotNull(overloaded);
+		assertFalse(overloaded.eIsProxy());
+		assertEquals("testdata.OverloadedMethods.overloaded(java.lang.Iterable,java.util.Collection)", overloaded.getIdentifier());
+	}
+	
+	public void testOverloadedMethods_03() throws Exception {
+		XtendFile file = file(
+				"import java.util.List\n" +
+				"class X {\n" +
+				"  def foo() {\n" +
+				"    var List<String> strings = null\n" +
+				"    var testdata.OverloadedMethods<Object> receiver = null\n" +
+				"    receiver.overloaded(strings, strings)\n" +
+				"  }\n" +
+				"}");
+		XtendClass clazz = file.getXtendClass();
+		XtendFunction func  = (XtendFunction) clazz.getMembers().get(0);
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) ((XBlockExpression) func.getExpression()).getExpressions().get(2);
+		JvmIdentifiableElement overloaded = featureCall.getFeature();
+		assertNotNull(overloaded);
+		assertFalse(overloaded.eIsProxy());
+		assertEquals("testdata.OverloadedMethods.overloaded(java.util.List,java.util.List)", overloaded.getIdentifier());
+	}
+	
+	public void testOverloadedMethods_04() throws Exception {
+		XtendFile file = file(
+				"import java.util.List\n" +
+				"class X {\n" +
+				"  def foo() {\n" +
+				"    var List<? extends Object> objects = null\n" +
+				"    var testdata.OverloadedMethods<Object> receiver = null\n" +
+				"    receiver.overloaded(objects, objects)\n" +
+				"  }\n" +
+				"}");
+		XtendClass clazz = file.getXtendClass();
+		XtendFunction func  = (XtendFunction) clazz.getMembers().get(0);
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) ((XBlockExpression) func.getExpression()).getExpressions().get(2);
+		JvmIdentifiableElement overloaded = featureCall.getFeature();
+		assertNotNull(overloaded);
+		assertFalse(overloaded.eIsProxy());
+		assertEquals("testdata.OverloadedMethods.overloaded(java.lang.Iterable,java.lang.Iterable)", overloaded.getIdentifier());
+	}
+	
+	public void testOverloadedMethodsJava_01() throws Exception {
+		List<CharSequence> chars = null;
+		List<String> strings = null;
+		List<? extends Object> objects = null;
+		assertEquals("overloaded(Collection,Iterable)", new OverloadedMethods<Object>().overloaded(chars, strings));
+		assertEquals("overloaded(Iterable,Collection)", new OverloadedMethods<Object>().overloaded(strings, chars));
+		assertEquals("overloaded(List,List)", new OverloadedMethods<Object>().overloaded(strings, strings));
+		assertEquals("overloaded(List,List)", new OverloadedMethods<Object>().overloaded(chars, chars));
+		assertEquals("overloaded(Iterable,Iterable)", new OverloadedMethods<Object>().overloaded(objects, objects));
+	}
+	
+	public void testOverloadedMethods_05() throws Exception {
+		XtendFile file = file(
+				"import java.util.List\n" +
+				"class X {\n" +
+				"  def foo() {\n" +
+				"    var List<CharSequence> chars = null\n" +
+				"    var List<String> strings = null\n" +
+				"    var testdata.OverloadedMethods<CharSequence> receiver = null\n" +
+				"    receiver.overloaded2(chars, strings)\n" +
+				"  }\n" +
+				"}");
+		XtendClass clazz = file.getXtendClass();
+		XtendFunction func  = (XtendFunction) clazz.getMembers().get(0);
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) ((XBlockExpression) func.getExpression()).getExpressions().get(3);
+		JvmIdentifiableElement overloaded = featureCall.getFeature();
+		assertNotNull(overloaded);
+		assertFalse(overloaded.eIsProxy());
+		assertEquals("testdata.OverloadedMethods.overloaded2(java.util.Collection,java.lang.Iterable)", overloaded.getIdentifier());
+	}
+	
+	public void testOverloadedMethods_06() throws Exception {
+		XtendFile file = file(
+				"import java.util.List\n" +
+				"class X {\n" +
+				"  def foo() {\n" +
+				"    var List<CharSequence> chars = null\n" +
+				"    var List<String> strings = null\n" +
+				"    var testdata.OverloadedMethods<CharSequence> receiver = null\n" +
+				"    receiver.overloaded2(strings, chars)\n" +
+				"  }\n" +
+				"}");
+		XtendClass clazz = file.getXtendClass();
+		XtendFunction func  = (XtendFunction) clazz.getMembers().get(0);
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) ((XBlockExpression) func.getExpression()).getExpressions().get(3);
+		JvmIdentifiableElement overloaded = featureCall.getFeature();
+		assertNotNull(overloaded);
+		assertFalse(overloaded.eIsProxy());
+		assertEquals("testdata.OverloadedMethods.overloaded2(java.lang.Iterable,java.util.Collection)", overloaded.getIdentifier());
+	}
+	
+	public void testOverloadedMethods_07() throws Exception {
+		XtendFile file = file(
+				"import java.util.List\n" +
+				"class X {\n" +
+				"  def foo() {\n" +
+				"    var List<String> strings = null\n" +
+				"    var testdata.OverloadedMethods<String> receiver = null\n" +
+				"    receiver.overloaded2(strings, strings)\n" +
+				"  }\n" +
+				"}");
+		XtendClass clazz = file.getXtendClass();
+		XtendFunction func  = (XtendFunction) clazz.getMembers().get(0);
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) ((XBlockExpression) func.getExpression()).getExpressions().get(2);
+		JvmIdentifiableElement overloaded = featureCall.getFeature();
+		assertNotNull(overloaded);
+		assertFalse(overloaded.eIsProxy());
+		assertEquals("testdata.OverloadedMethods.overloaded2(java.util.List,java.util.List)", overloaded.getIdentifier());
+	}
+	
+	public void testOverloadedMethods_08() throws Exception {
+		XtendFile file = file(
+				"import java.util.List\n" +
+				"class X {\n" +
+				"  def foo() {\n" +
+				"    var List<? extends Object> objects = null\n" +
+				"    var testdata.OverloadedMethods<Object> receiver = null\n" +
+				"    receiver.overloaded2(objects, objects)\n" +
+				"  }\n" +
+				"}");
+		XtendClass clazz = file.getXtendClass();
+		XtendFunction func  = (XtendFunction) clazz.getMembers().get(0);
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) ((XBlockExpression) func.getExpression()).getExpressions().get(2);
+		JvmIdentifiableElement overloaded = featureCall.getFeature();
+		assertNotNull(overloaded);
+		assertFalse(overloaded.eIsProxy());
+		assertEquals("testdata.OverloadedMethods.overloaded2(java.lang.Iterable,java.lang.Iterable)", overloaded.getIdentifier());
+	}
+	
+	public void testOverloadedMethods_09() throws Exception {
+		XtendFile file = file(
+				"import java.util.List\n" +
+				"class X {\n" +
+				"  def foo() {\n" +
+				"    var List<? extends CharSequence> chars = null\n" +
+				"    var testdata.OverloadedMethods<Object> receiver = null\n" +
+				"    receiver.overloaded2(chars, chars)\n" +
+				"  }\n" +
+				"}");
+		XtendClass clazz = file.getXtendClass();
+		XtendFunction func  = (XtendFunction) clazz.getMembers().get(0);
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) ((XBlockExpression) func.getExpression()).getExpressions().get(2);
+		JvmIdentifiableElement overloaded = featureCall.getFeature();
+		assertNotNull(overloaded);
+		assertFalse(overloaded.eIsProxy());
+		assertEquals("testdata.OverloadedMethods.overloaded2(java.lang.Iterable,java.lang.Iterable)", overloaded.getIdentifier());
+	}
+	
+	public void testOverloadedMethodsJava_02() throws Exception {
+		List<CharSequence> chars = null;
+		List<String> strings = null;
+		List<? extends Object> objects = null;
+		List<? extends CharSequence> chars2 = null;
+		assertEquals("overloaded2(Collection,Iterable)", new OverloadedMethods<CharSequence>().overloaded2(chars, strings));
+		assertEquals("overloaded2(Iterable,Collection)", new OverloadedMethods<CharSequence>().overloaded2(strings, chars));
+		assertEquals("overloaded2(List,List)", new OverloadedMethods<String>().overloaded2(strings, strings));
+		assertEquals("overloaded2(List,List)", new OverloadedMethods<CharSequence>().overloaded2(chars, chars));
+		assertEquals("overloaded2(Iterable,Iterable)", new OverloadedMethods<Object>().overloaded2(objects, objects));
+		assertEquals("overloaded2(Iterable,Iterable)", new OverloadedMethods<Object>().overloaded2(chars2, chars2));
+	}
+	
+	public void testOverloadedMethods_10() throws Exception {
+		XtendFile file = file(
+				"import java.util.List\n" +
+				"class X {\n" +
+				"  def foo() {\n" +
+				"    var int i = 0\n" +
+				"    var testdata.OverloadedMethods<Object> receiver = null\n" +
+				"    receiver.overloadedInt(i)\n" +
+				"  }\n" +
+				"}");
+		XtendClass clazz = file.getXtendClass();
+		XtendFunction func  = (XtendFunction) clazz.getMembers().get(0);
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) ((XBlockExpression) func.getExpression()).getExpressions().get(2);
+		JvmIdentifiableElement overloaded = featureCall.getFeature();
+		assertNotNull(overloaded);
+		assertFalse(overloaded.eIsProxy());
+		assertEquals("testdata.OverloadedMethods.overloadedInt(int)", overloaded.getIdentifier());
+	}
+	
+	public void testOverloadedMethods_11() throws Exception {
+		XtendFile file = file(
+				"import java.util.List\n" +
+						"class X {\n" +
+						"  def foo() {\n" +
+						"    var Integer i = 0\n" +
+						"    var testdata.OverloadedMethods<Object> receiver = null\n" +
+						"    receiver.overloadedInt(i)\n" +
+						"  }\n" +
+				"}");
+		XtendClass clazz = file.getXtendClass();
+		XtendFunction func  = (XtendFunction) clazz.getMembers().get(0);
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) ((XBlockExpression) func.getExpression()).getExpressions().get(2);
+		JvmIdentifiableElement overloaded = featureCall.getFeature();
+		assertNotNull(overloaded);
+		assertFalse(overloaded.eIsProxy());
+		assertEquals("testdata.OverloadedMethods.overloadedInt(java.lang.Integer)", overloaded.getIdentifier());
+	}
+	
+	public void testOverloadedMethodsJava_03() throws Exception {
+		int i = 0;
+		Integer integer = null;
+		assertEquals("overloadedInt(int)", new OverloadedMethods<Object>().overloadedInt(i));
+		assertEquals("overloadedInt(Integer)", new OverloadedMethods<Object>().overloadedInt(integer));
 	}
 	
 	public void testMemberFeatureScope_0() throws Exception {

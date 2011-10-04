@@ -9,6 +9,10 @@ package org.eclipse.xtext.xbase.linking;
 
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.EcoreUtil2;
@@ -17,6 +21,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.IRawTypeHelper;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
+import org.eclipse.xtext.common.types.util.TypeConformanceResult.Kind;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -120,21 +125,35 @@ public class BestMatchingJvmFeatureScope implements IScope {
 		if (a instanceof IValidatedEObjectDescription && b instanceof IValidatedEObjectDescription) {
 			IValidatedEObjectDescription descA = (IValidatedEObjectDescription) a;
 			IValidatedEObjectDescription descB = (IValidatedEObjectDescription) b;
-			if(descA.isValid()) { 
-				if(!descB.isValid())
-					return a;
-			} else if(descB.isValid()) {
-				return b;
-			} else if (!descA.isValid() && !descB.isValid()) {
-				if (descA.getIssueCode() != null && descB.getIssueCode() != null) {
-					int issueCodeComparison = compareIssueCodes(descA.getIssueCode(), descB.getIssueCode());
-					if (issueCodeComparison < 0)
-						return descA;
-					if (issueCodeComparison > 0)
-						return descB;
+			while(true) {
+				if(descA.isValid()) { 
+					if(!descB.isValid())
+						return a;
+				} else if(descB.isValid()) {
+					return b;
+				} else if (!descA.isValid() && !descB.isValid()) {
+					if (descA.getIssueCode() != null && descB.getIssueCode() != null) {
+						int issueCodeComparison = compareIssueCodes(descA.getIssueCode(), descB.getIssueCode());
+						if (issueCodeComparison < 0)
+							return descA;
+						if (issueCodeComparison > 0)
+							return descB;
+					}
+				}
+				boolean again = featureCallChecker.checkWithGenerics(a);
+				again = featureCallChecker.checkWithGenerics(b) || again;
+				if (!again) {
+					break;
 				}
 			}
 			if (a instanceof JvmFeatureDescription && b instanceof JvmFeatureDescription) {
+				JvmFeatureDescription featureDescriptionA = (JvmFeatureDescription) descA;
+				JvmFeatureDescription featureDescriptionB = (JvmFeatureDescription) descB;
+				if (featureDescriptionA.isValid() && featureDescriptionB.isValid()) {
+					JvmFeatureDescription potentialResult = getBestConformanceMatch(featureDescriptionA, featureDescriptionB);
+					if (potentialResult != null)
+						return potentialResult;
+				}
 				if (descA.getEObjectOrProxy() instanceof JvmExecutable) {
 					if (descB.getEObjectOrProxy() instanceof JvmExecutable) {
 						JvmExecutable opA = (JvmExecutable) descA.getEObjectOrProxy();
@@ -148,8 +167,8 @@ public class BestMatchingJvmFeatureScope implements IScope {
 								return a;
 							}
 						}
-						ITypeArgumentContext contextA = ((JvmFeatureDescription) descA).getContext();
-						ITypeArgumentContext contextB = ((JvmFeatureDescription) descB).getContext();
+						ITypeArgumentContext contextA = featureDescriptionA.getRawTypeContext();
+						ITypeArgumentContext contextB = featureDescriptionB.getRawTypeContext();
 						int numParamsA = opA.getParameters().size();
 						int numParamsB = opB.getParameters().size();
 						for (int i = 0; i < Math.min(numParamsA, numParamsB); i++) {
@@ -157,8 +176,8 @@ public class BestMatchingJvmFeatureScope implements IScope {
 							pA = contextA.getLowerBound(pA);
 							pA = rawTypeHelper.getRawTypeReference(pA, context.eResource());
 							JvmTypeReference pB = opB.getParameters().get(numParamsB-i-1).getParameterType();
-							pB = rawTypeHelper.getRawTypeReference(pB, context.eResource());
 							pB = contextB.getLowerBound(pB);
+							pB = rawTypeHelper.getRawTypeReference(pB, context.eResource());
 							if (!conformanceComputer.isConformant(pB, pA, true))
 								return b;
 						}
@@ -168,6 +187,40 @@ public class BestMatchingJvmFeatureScope implements IScope {
 			}
 		}
 		return a;
+	}
+
+	protected JvmFeatureDescription getBestConformanceMatch(JvmFeatureDescription featureDescriptionA,
+			JvmFeatureDescription featureDescriptionB) {
+		List<EnumSet<Kind>> allHintsA = featureDescriptionA.getArgumentConversionHints();
+		if (allHintsA == null)
+			allHintsA = Collections.emptyList();
+		List<EnumSet<Kind>> allHintsB = featureDescriptionB.getArgumentConversionHints();
+		if (allHintsB == null)
+			allHintsB = Collections.emptyList();
+		int aIsBetter = 0;
+		int bIsBetter = 0;
+		for(int i = 0; i < allHintsA.size() && i < allHintsB.size(); i++) {
+			EnumSet<Kind> hintsA = allHintsA.get(i);
+			EnumSet<Kind> hintsB = allHintsB.get(i);
+			for(Kind kind: Kind.values()) {
+				if (hintsA.contains(kind)) {
+					if (!hintsB.contains(kind)) {
+						aIsBetter++;
+						break;
+					}
+				} else {
+					if (hintsB.contains(kind)) {
+						bIsBetter++;
+						break;
+					}
+				}
+			}
+		}
+		if (aIsBetter == bIsBetter)
+			return null;
+		if (aIsBetter > bIsBetter)
+			return featureDescriptionA;
+		return featureDescriptionB;
 	}
 
 	@Override

@@ -30,6 +30,7 @@ public class IssueCodes {
 	public static final String INVALID_ARGUMENT_TYPES = ISSUE_CODE_PREFIX + "invalid_argument_types";
 	public static final String INVALID_CAST = ISSUE_CODE_PREFIX + "invalid_cast";
 	public static final String INVALID_EARLY_EXIT = ISSUE_CODE_PREFIX + "invalid_early_exit";
+	public static final String INVALID_GENERIC_ARGUMENT_TYPES = ISSUE_CODE_PREFIX + "invalid_generic_argument_types";
 	public static final String INVALID_INNER_EXPRESSION = ISSUE_CODE_PREFIX + "invalid_inner_expression";
 	public static final String INVALID_INSTANCEOF = ISSUE_CODE_PREFIX + "invalid_instanceof";
 	public static final String INVALID_MUTABLE_VARIABLE_ACCESS = ISSUE_CODE_PREFIX + "invalid_mutable_variable_access";
@@ -63,6 +64,7 @@ public class IssueCodes {
 			INVALID_MUTABLE_VARIABLE_ACCESS,
 			ASSIGNMENT_TARGET_IS_NOT_WRITEABLE,
 			INSTANCE_ACCESS_TO_STATIC_MEMBER,
+			INVALID_GENERIC_ARGUMENT_TYPES,
 			INVALID_NUMBER_OF_TYPE_ARGUMENTS,
 			INVALID_ARGUMENT_TYPES,
 			INVALID_NUMBER_OF_ARGUMENTS

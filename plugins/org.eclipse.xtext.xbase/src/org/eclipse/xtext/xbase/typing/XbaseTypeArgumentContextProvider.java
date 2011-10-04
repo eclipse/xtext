@@ -29,17 +29,17 @@ public class XbaseTypeArgumentContextProvider extends TypeArgumentContextProvide
 	
 	@Override
 	protected void resolveAgainstActualType(JvmTypeReference declaredType, JvmTypeReference actualType,
-			Multimap<JvmTypeParameter, ResolveInfo> result, boolean allowWildcardResolutions) {
+			Multimap<JvmTypeParameter, ResolveInfo> result, boolean allowWildcardResolutions, int hint) {
 		JvmTypeReference declaredClosureType = closures.getCompatibleFunctionType(declaredType, false, false);
 		JvmTypeReference actualClosureType = closures.getCompatibleFunctionType(actualType, true, false);
 		if (declaredClosureType == null || actualClosureType == null) {
-			super.resolveAgainstActualType(declaredType, actualType, result, allowWildcardResolutions);
+			super.resolveAgainstActualType(declaredType, actualType, result, allowWildcardResolutions, hint);
 			Set<JvmTypeReference> actualSynonyms = synonymTypeProvider.getSynonymTypes(actualType, true);
 			for(JvmTypeReference synonym: actualSynonyms) {
-				super.resolveAgainstActualType(declaredType, synonym, result, allowWildcardResolutions);
+				super.resolveAgainstActualType(declaredType, synonym, result, allowWildcardResolutions, hint);
 			}
 		} else {
-			super.resolveAgainstActualType(declaredClosureType, actualClosureType, result, allowWildcardResolutions);
+			super.resolveAgainstActualType(declaredClosureType, actualClosureType, result, allowWildcardResolutions, hint);
 		}
 	}
 	

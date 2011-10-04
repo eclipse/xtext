@@ -355,10 +355,10 @@ public class TypeArgumentContextProviderTest extends TestCase {
 	}
 	
 //	<T> void foo(Iterable<T> it, Iterable<T> it2) {
-//	Iterable<? extends CharSequence> iter = null;
-//	this.foo(iter, iter);
-//}
-
+//		Iterable<? extends CharSequence> iter = null;
+//		this.foo(iter, iter);
+//	}
+	
 	/*
 	 * <T> foo(Iterable<T> t, Iterable<T> t) { foo(Iterable<? extends CharSequence>, Iterable<? extends CharSequence>) }
 	 */
@@ -373,7 +373,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 		JvmTypeReference boundArgument = context.getBoundArgument(typeParameter);
 		assertEquals("java.lang.CharSequence", boundArgument.getIdentifier());
 	}
-
+	
 //	<T> void foo(T t, Iterable<T> it) {
 //		String s = null;
 //		Iterable<? extends CharSequence> iter = null;
