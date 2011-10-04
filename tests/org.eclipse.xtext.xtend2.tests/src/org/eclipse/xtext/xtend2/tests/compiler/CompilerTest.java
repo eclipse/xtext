@@ -718,10 +718,10 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"		val Collection<String> test1 = result1\n" + 
 				"		val result2 = strings.addAll3(seq)\n" + 
 				"		val Collection<String> test2 = result2\n" + 
-//				"		val result3 = seq.addAllOverloaded(strings)\n" + 
-//				"		val Collection<String> test3 = result3\n" + 
-//				"		val result4 = strings.addAllOverloaded(seq)\n" + 
-//				"		val Collection<String> test4 = result4\n" + 
+				"		val result3 = seq.addAllOverloaded(strings)\n" + 
+				"		val Collection<String> test3 = result3\n" + 
+				"		val result4 = strings.addAllOverloaded(seq)\n" + 
+				"		val Collection<String> test4 = result4\n" + 
 				"	}\n" + 
 				"	def <K> Collection<K> addAll2(Collection<? super K> collection, Iterable<K> elements){\n" +
 				"	    collection.addAll(elements)\n" + 
@@ -731,14 +731,14 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"	    collection.addAll(elements)\n" + 
 				"	    null\n" + 
 				"	}\n" +
-//				"	def <K> Collection<K> addAllOverloaded(Collection<? super K> collection, Iterable<K> elements){\n" +
-//				"	    collection.addAll(elements)\n" + 
-//				"	    null\n" + 
-//				"	}\n" +
-//				"	def <K> Collection<K> addAllOverloaded(Iterable<K> elements, Collection<? super K> collection){\n" +
-//				"	    collection.addAll(elements)\n" + 
-//				"	    null\n" + 
-//				"	}\n" +
+				"	def <K> Collection<K> addAllOverloaded(Collection<? super K> collection, Iterable<K> elements){\n" +
+				"	    collection.addAll(elements)\n" + 
+				"	    null\n" + 
+				"	}\n" +
+				"	def <K> Collection<K> addAllOverloaded(Iterable<K> elements, Collection<? super K> collection){\n" +
+				"	    collection.addAll(elements)\n" + 
+				"	    null\n" + 
+				"	}\n" +
 				"}";
 		String javaCode = compileToJavaCode(code);
 		javaCompiler.compileToClass("x.Z", javaCode);
@@ -1790,6 +1790,14 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testBug346763_03() throws Exception {
+//		class X {
+//			java.util.List<String> wildcardExtends() {
+//				java.util.List<String> v = new java.util.ArrayList<String>();
+//				v.add("a");
+//				java.util.List<? extends String> v2 = v;
+//				return ListExtensions.map(v2, null);
+//			}
+//		}
 		invokeAndExpect2(
 				Collections.singletonList("A"), 
 				"def java.util.List<String> wildcardExtends() {\n" + 
@@ -1832,6 +1840,27 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"  if (v != null) v.forEach(e|e.toUpperCase)\n" +
 				"}", "forEachString");
 	}
+	
+	// TODO Fix this case - see also deactivated tests in XbaseIdentifiableTypeProviderTest and XbaseTypeProviderTest
+//	public void testBug346763_07() throws Exception {
+////		class X {
+////			java.util.List<String> wildcardSuper() {
+////				java.util.List<String> v = new java.util.ArrayList<String>();
+////				v.add("a");
+////				java.util.List<? super String> v2 = v;
+////				Function1<Object,String> fun = null;
+////				return ListExtensions.map(v2, fun);
+////			}
+////		}
+//		invokeAndExpect2(
+//				Collections.singletonList("A"), 
+//				"def java.util.List<String> wildcardSuper() {\n" + 
+//				"  var java.util.List<String> v = new java.util.ArrayList();\n" + 
+//				"  v.add('a');\n" + 
+//				"  var java.util.List<? super String> v2 = v;\n" + 
+//				"  v2.map(e|e.toString.toUpperCase)\n" +
+//				"}", "wildcardSuper");
+//	}
 	
 	public void testBug358118_NoNPE() throws Exception {
 		invokeAndExpect2(
