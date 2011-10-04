@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmLowerBound;
@@ -165,17 +166,17 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 	
 	// TODO improve / extract to a utility method if other clients are doing similar things
 	protected boolean isResolved(JvmTypeReference reference, JvmTypeParameterDeclarator declarator, boolean rawType) {
-		return isResolved(reference, declarator, rawType, Sets.<JvmTypeReference>newHashSet());
+		return isResolved(reference, declarator, rawType, true, Sets.<JvmTypeReference>newHashSet());
 	}
 	
-	protected boolean isResolved(JvmTypeReference reference, JvmTypeParameterDeclarator declarator, boolean rawType, Set<JvmTypeReference> visited) {
+	protected boolean isResolved(JvmTypeReference reference, JvmTypeParameterDeclarator declarator, boolean rawType, boolean allowAnyType, Set<JvmTypeReference> visited) {
 		if (reference == null || reference instanceof JvmParameterizedTypeReference && reference.getType() == null || !visited.add(reference))
 			return false;
 		if (reference.getType() instanceof JvmTypeParameter) {
 			if (isDeclaratorOf(declarator, (JvmTypeParameter) reference.getType()))
 				return true;
 			for(JvmTypeConstraint constraint: ((JvmTypeParameter) reference.getType()).getConstraints()) {
-				if (!isResolved(constraint.getTypeReference(), declarator, rawType, visited))
+				if (!isResolved(constraint.getTypeReference(), declarator, rawType, false, visited))
 					return false;
 				if (constraint instanceof JvmLowerBound) {
 					if (typeReferences.is(constraint.getTypeReference(), Object.class))
@@ -195,13 +196,13 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 				}
 			}
 			for(JvmTypeReference argument: parameterized.getArguments()) {
-				if (!isResolved(argument, declarator, rawType, visited))
+				if (!isResolved(argument, declarator, rawType, false, visited))
 					return false;
 			}
 		}
 		if (reference instanceof JvmWildcardTypeReference) {
 			for(JvmTypeConstraint constraint: ((JvmWildcardTypeReference) reference).getConstraints()) {
-				if (!isResolved(constraint.getTypeReference(), declarator, rawType, visited))
+				if (!isResolved(constraint.getTypeReference(), declarator, rawType, false, visited))
 					return false;
 				if (constraint instanceof JvmLowerBound) {
 					if (typeReferences.is(constraint.getTypeReference(), Object.class))
@@ -210,10 +211,13 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 			}
 		}
 		if (reference instanceof JvmDelegateTypeReference) {
-			return isResolved(((JvmDelegateTypeReference) reference).getDelegate(), declarator, rawType, visited);
+			return isResolved(((JvmDelegateTypeReference) reference).getDelegate(), declarator, rawType, allowAnyType, visited);
 		}
 		if (reference instanceof JvmSpecializedTypeReference) {
-			return isResolved(((JvmSpecializedTypeReference) reference).getEquivalent(), declarator, rawType, visited);
+			return isResolved(((JvmSpecializedTypeReference) reference).getEquivalent(), declarator, rawType, allowAnyType, visited);
+		}
+		if (reference instanceof JvmAnyTypeReference) {
+			return allowAnyType;
 		}
 		return true;
 	}
