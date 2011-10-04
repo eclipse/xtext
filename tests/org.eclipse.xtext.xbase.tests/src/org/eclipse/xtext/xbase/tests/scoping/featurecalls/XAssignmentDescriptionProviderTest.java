@@ -11,6 +11,7 @@ import static com.google.common.collect.Sets.*;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScope;
@@ -20,6 +21,7 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentSugarDescriptionP
 import testdata.FieldAccessSub;
 import testdata.VisibilitySubClass;
 
+import com.google.common.base.Functions;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -32,6 +34,7 @@ public class XAssignmentDescriptionProviderTest extends AbstractJvmFeatureScopeP
 	public void testFinalFields() throws Exception {
 		JvmTypeReference reference = getTypeRef(FieldAccessSub.class.getCanonicalName());
 		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(IScope.NULLSCOPE, reference,
+				Functions.<ITypeArgumentContext>constant(null),
 				Lists.<IJvmFeatureDescriptionProvider>newArrayList(
 						newXAssignmentDescriptionProvider(),
 						newXAssignmentSugarDescriptionProvider()));
@@ -50,6 +53,7 @@ public class XAssignmentDescriptionProviderTest extends AbstractJvmFeatureScopeP
 	public void testAssignments() throws Exception {
 		JvmTypeReference reference = getTypeRef(VisibilitySubClass.class.getCanonicalName());
 		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(IScope.NULLSCOPE, reference,
+				Functions.<ITypeArgumentContext>constant(null),
 				Lists.<IJvmFeatureDescriptionProvider>newArrayList(
 						newXAssignmentDescriptionProvider(),
 						newXAssignmentSugarDescriptionProvider()));
@@ -75,6 +79,7 @@ public class XAssignmentDescriptionProviderTest extends AbstractJvmFeatureScopeP
 		newXAssignmentSugarDescriptionProvider.setContextType((JvmDeclaredType) reference.getType());
 		
 		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(IScope.NULLSCOPE, reference,
+				Functions.<ITypeArgumentContext>constant(null),
 				Lists.<IJvmFeatureDescriptionProvider>newArrayList(
 						newXAssignmentDescriptionProvider,
 						newXAssignmentSugarDescriptionProvider));

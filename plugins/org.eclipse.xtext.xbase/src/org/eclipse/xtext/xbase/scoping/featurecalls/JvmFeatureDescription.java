@@ -10,10 +10,13 @@ package org.eclipse.xtext.xbase.scoping.featurecalls;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.Collections;
+import java.util.EnumSet;
+import java.util.List;
 
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
+import org.eclipse.xtext.common.types.util.TypeConformanceResult;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.xbase.XExpression;
@@ -25,32 +28,51 @@ import com.google.inject.Provider;
  */
 public class JvmFeatureDescription extends EObjectDescription implements IValidatedEObjectDescription {
 
-	private final ITypeArgumentContext context;
+	private final ITypeArgumentContext rawTypeContext;
+	private ITypeArgumentContext genericTypeContext;
 	private String shadowingString;
 	private Provider<String> shadowingStringProvider;
 	private final boolean isValid;
 	private XExpression implicitReceiver;
 	private int numberOfIrrelevantArguments = 0;
 	private String issueCode;
+	private boolean intenseChecked;
+	private List<EnumSet<TypeConformanceResult.Kind>> argumentConversionHints;
 
-	public JvmFeatureDescription(QualifiedName qualifiedName, JvmFeature element, ITypeArgumentContext context,
-			String shadowingString, boolean isValid, XExpression implicitReceiver,
+	public JvmFeatureDescription(
+			QualifiedName qualifiedName, 
+			JvmFeature feature, 
+			ITypeArgumentContext rawTypeContext,
+			String shadowingString, 
+			boolean isValid, 
+			XExpression implicitReceiver,
 			int numberOfIrrelevantArguments) {
-		super(qualifiedName, element, Collections.<String, String> emptyMap());
-		this.context = context;
+		this(qualifiedName, feature, rawTypeContext, isValid, implicitReceiver, numberOfIrrelevantArguments);
 		this.shadowingString = shadowingString;
 		this.shadowingStringProvider = null;
-		this.isValid = isValid;
-		this.implicitReceiver = implicitReceiver;
-		this.numberOfIrrelevantArguments = numberOfIrrelevantArguments;
 	}
 	
-	public JvmFeatureDescription(QualifiedName qualifiedName, JvmFeature element, ITypeArgumentContext context,
-			Provider<String> shadowingStringProvider, boolean isValid, XExpression implicitReceiver,
+	public JvmFeatureDescription(
+			QualifiedName qualifiedName, 
+			JvmFeature feature, 
+			ITypeArgumentContext rawTypeContext,
+			Provider<String> shadowingStringProvider, 
+			boolean isValid, 
+			XExpression implicitReceiver,
 			int numberOfIrrelevantArguments) {
-		super(qualifiedName, element, Collections.<String, String> emptyMap());
-		this.context = context;
+		this(qualifiedName, feature, rawTypeContext, isValid, implicitReceiver, numberOfIrrelevantArguments);
 		this.shadowingStringProvider = shadowingStringProvider;
+	}
+	
+	private JvmFeatureDescription(
+			QualifiedName qualifiedName, 
+			JvmFeature feature, 
+			ITypeArgumentContext rawTypeContext,
+			boolean isValid, 
+			XExpression implicitReceiver,
+			int numberOfIrrelevantArguments) {
+		super(qualifiedName, feature, Collections.<String, String> emptyMap());
+		this.rawTypeContext = rawTypeContext;
 		this.isValid = isValid;
 		this.implicitReceiver = implicitReceiver;
 		this.numberOfIrrelevantArguments = numberOfIrrelevantArguments;
@@ -65,8 +87,18 @@ public class JvmFeatureDescription extends EObjectDescription implements IValida
 		return (JvmFeature) getEObjectOrProxy();
 	}
 
-	public ITypeArgumentContext getContext() {
-		return context;
+	public ITypeArgumentContext getRawTypeContext() {
+		return rawTypeContext;
+	}
+	
+	public ITypeArgumentContext getGenericTypeContext() {
+		if (genericTypeContext != null)
+			return genericTypeContext;
+		return rawTypeContext;
+	}
+
+	public void setGenericTypeContext(ITypeArgumentContext genericTypeContext) {
+		this.genericTypeContext = genericTypeContext;
 	}
 
 	public String getKey() {
@@ -101,4 +133,21 @@ public class JvmFeatureDescription extends EObjectDescription implements IValida
 	public String getIssueCode() {
 		return issueCode;
 	}
+
+	public boolean isIntenseChecked() {
+		return intenseChecked;
+	}
+
+	public void setIntenseChecked(boolean intenseChecked) {
+		this.intenseChecked = intenseChecked;
+	}
+
+	public List<EnumSet<TypeConformanceResult.Kind>> getArgumentConversionHints() {
+		return argumentConversionHints;
+	}
+
+	public void setArgumentConversionHints(List<EnumSet<TypeConformanceResult.Kind>> argumentConversionHints) {
+		this.argumentConversionHints = argumentConversionHints;
+	}
+
 }

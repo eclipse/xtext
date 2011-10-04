@@ -20,10 +20,11 @@ public class TypeConformanceResult {
 	private static final Logger log = Logger.getLogger(TypeConformanceResult.class);
 
 	public static final TypeConformanceResult SUCCESS = new TypeConformanceResult(Kind.SUCCESS);
+	public static final TypeConformanceResult SUBTYPE = new TypeConformanceResult(Kind.SUBTYPE);
 	public static final TypeConformanceResult FAILED = new TypeConformanceResult(Kind.FAILED);
 	
 	public enum Kind {
-		SUCCESS, BOXING, UNBOXING, SYNONYM, DEMAND_CONVERSION, FAILED, EXCEPTION
+		SUCCESS, SUBTYPE, PRIMITIVE_WIDENING, BOXING, UNBOXING, SYNONYM, DEMAND_CONVERSION, FAILED, EXCEPTION
 	}
 	
 	private final EnumSet<Kind> kinds;

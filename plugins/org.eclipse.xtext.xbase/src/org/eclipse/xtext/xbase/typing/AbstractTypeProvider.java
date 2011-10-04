@@ -33,13 +33,17 @@ import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
+import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
+import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 
 import com.google.common.collect.Iterables;
@@ -56,7 +60,7 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 	private static final Logger logger = Logger.getLogger(AbstractTypeProvider.class);
 	
 	@Inject 
-	private XbaseTypeConformanceComputer typeConformanceComputer;
+	private TypeConformanceComputer typeConformanceComputer;
 	
 	@Inject 
 	private TypeReferences typeReferences;
@@ -90,12 +94,14 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 	protected static final class ImmutableLinkedItem {
 		
 		protected final EObject object;
+		protected final EObject additional;
 		protected final ImmutableLinkedItem prev;
 		protected final int hashCode;
 		protected final int size;
 		
-		public ImmutableLinkedItem(EObject object, ImmutableLinkedItem immutableStack) {
+		public ImmutableLinkedItem(EObject object, EObject additional, ImmutableLinkedItem immutableStack) {
 			this.object = object;
+			this.additional = additional;
 			prev = immutableStack;
 			size = immutableStack == null ? 1 : immutableStack.size + 1;
 			if (prev != null) {
@@ -114,7 +120,7 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 			if (obj.hashCode() != hashCode() || obj.getClass() != ImmutableLinkedItem.class)
 				return false;
 			ImmutableLinkedItem other = (ImmutableLinkedItem) obj;
-			return other.object == object && other.size == size && (other.prev == prev || prev != null && prev.equals(other.prev));
+			return other.object == object && other.additional == additional && other.size == size && (other.prev == prev || prev != null && prev.equals(other.prev));
 		}
 		
 		@Override
@@ -266,6 +272,19 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		protected JvmTypeReference doComputation(XExpression t, boolean rawType) {
 			return typeDispatcherInvoke(t, rawType);
 		}
+		
+		@Override
+		protected AbstractTypeProvider.ComputationData<XExpression> createComputationData() {
+			return new ComputationData<XExpression>() {
+				@Override
+				protected EObject getAdditional(XExpression expression) {
+					if (expression instanceof XAbstractFeatureCall) {
+						return (EObject) expression.eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
+					}
+					return super.getAdditional(expression);
+				}
+			};
+		}
 
 		@Override
 		protected JvmTypeReference doHandleCyclicCall(XExpression t, boolean rawType) {
@@ -381,6 +400,10 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 
 	protected CyclicHandlingSupport<JvmIdentifiableElement> getTypeForIdentifiable = new CyclicHandlingSupport<JvmIdentifiableElement>() {
 
+		{
+			doCache = false;
+		}
+		
 		@Override
 		protected JvmTypeReference doComputation(JvmIdentifiableElement t, boolean rawType) {
 			return typeForIdentifiableDispatcherInvoke(t, rawType);
@@ -484,7 +507,7 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		}
 	}
 	
-	protected XbaseTypeConformanceComputer getTypeConformanceComputer() {
+	protected TypeConformanceComputer getTypeConformanceComputer() {
 		return typeConformanceComputer;
 	}
 	
@@ -497,24 +520,29 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 	}
 
 	protected static class ComputationData<T extends EObject> {
-		protected final Set<T> computations = Sets.newHashSet();
+		protected final Set<Pair<T, EObject>> computations = Sets.newHashSet();
 		protected ImmutableLinkedItem queryState = null;
 		protected Resource resource;
 		protected boolean resourceLeftOrCyclic;
 		
 		protected boolean add(T t) {
-			boolean result = computations.add(t);
+			EObject additionalKey = getAdditional(t);
+			boolean result = computations.add(Tuples.create(t, additionalKey));
 			if (result) {
 				if (queryState == null) {
 					resource = t.eResource();
 				}
-				queryState = new ImmutableLinkedItem(t, queryState);
+				queryState = new ImmutableLinkedItem(t, additionalKey, queryState);
 			}
 			return result;
 		}
 		
+		protected EObject getAdditional(T t) {
+			return null;
+		}
+
 		protected void remove(T t) {
-			computations.remove(t);
+			computations.remove(Tuples.create(t, queryState.additional));
 			queryState = queryState.prev;
 			if (queryState == null)
 				resource = null;
@@ -530,15 +558,17 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		private final ThreadLocal<ComputationData<T>> ongoingComputations = new ThreadLocal<ComputationData<T>>() {
 			@Override
 			protected ComputationData<T> initialValue() {
-				return new ComputationData<T>();
+				return createComputationData();
 			}
 		};
 		private final ThreadLocal<ComputationData<T>> ongoingRawTypeComputations = new ThreadLocal<ComputationData<T>>() {
 			@Override
 			protected ComputationData<T> initialValue() {
-				return new ComputationData<T>();
+				return createComputationData();
 			}
 		};
+		
+		protected boolean doCache = true;
 
 		protected ComputationData<T> getTypeComputations(boolean rawType) {
 			ThreadLocal<ComputationData<T>> computations = rawType ? ongoingRawTypeComputations : ongoingComputations;
@@ -554,7 +584,7 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 			ComputationData<T> computationData = getTypeComputations(rawType);
 			if (computationData.add(t)) {
 				try {
-					if (computationData.resource == t.eResource() && !computationData.resourceLeftOrCyclic) {
+					if (doCache && computationData.resource == t.eResource() && !computationData.resourceLeftOrCyclic) {
 						Triple<CyclicHandlingSupport<T>, ImmutableLinkedItem, Boolean> cacheKey = Tuples.create(this, computationData.queryState, rawType);
 						final boolean[] hit = new boolean[] { true };
 						JvmTypeReference result = typeReferenceAwareCache.get(cacheKey, computationData.resource, new Provider<JvmTypeReference>(){
@@ -601,6 +631,10 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		protected abstract JvmTypeReference doComputation(T t, boolean rawType);
 
 		protected abstract JvmTypeReference doHandleCyclicCall(T t, boolean rawType);
+
+		protected ComputationData<T> createComputationData() {
+			return new ComputationData<T>();
+		}
 	}
 
 }

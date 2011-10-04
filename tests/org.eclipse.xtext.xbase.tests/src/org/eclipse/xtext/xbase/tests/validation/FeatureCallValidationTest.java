@@ -245,4 +245,46 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 		XExpression expression = expression("true>=0"); 
 		helper.assertError(expression, XINT_LITERAL, INCOMPATIBLE_TYPES);
 	}
+	
+	public void testListExtensionsMap_01() throws Exception {
+		XExpression expression = expression("" +
+				"{\n" + 
+				"    var java.util.List<String> list = null;\n" + 
+				"    list.map(e|e.toUpperCase)\n" +
+				"}");
+		helper.assertNoErrors(expression);
+	}
+	
+	public void testListExtensionsMap_02() throws Exception {
+//		java.util.List<? extends String> list = null;
+//		org.eclipse.xtext.xbase.lib.Functions.Function1<String, String> fun = new org.eclipse.xtext.xbase.lib.Functions.Function1<String, String>() {
+//			public String apply(String p) {
+//				return null;
+//			}
+//		};
+//		org.eclipse.xtext.xbase.lib.ListExtensions.map(list, fun);
+		XExpression expression = expression("" +
+				"{\n" + 
+				"    var java.util.List<? extends String> list = null;\n" + 
+				"    list.map(e|e.toUpperCase)\n" +
+				"}");
+		helper.assertNoErrors(expression);
+	}
+	
+	public void testListExtensionsMap_03() throws Exception {
+//		java.util.List<? super String> list = null;
+//		org.eclipse.xtext.xbase.lib.Functions.Function1<Object, Boolean> fun = new org.eclipse.xtext.xbase.lib.Functions.Function1<Object, Boolean>() {
+//			public Boolean apply(Object p) {
+//				return true;
+//			}
+//		};
+//		org.eclipse.xtext.xbase.lib.ListExtensions.map(list, fun);
+		XExpression expression = expression("" +
+				"{\n" + 
+				"    var java.util.List<? super CharSequence> list = null;\n" + 
+				"    list.map(e|e == null)\n" +
+				"}");
+		helper.assertNoErrors(expression);
+	}
+	
 }

@@ -184,7 +184,6 @@ public class LazyTypeArgumentContext implements TypeArgumentContextProvider.IIni
 				if (feature instanceof JvmExecutable) {
 					List<JvmTypeReference> explicitTypeArguments = request.getExplicitTypeArgument();
 					if (explicitTypeArguments != null && !explicitTypeArguments.isEmpty()) {
-						
 						nextLevel = 2;
 						return contextProvider.getExplicitArgumentContext((JvmExecutable) feature, explicitTypeArguments);
 					}
@@ -195,7 +194,6 @@ public class LazyTypeArgumentContext implements TypeArgumentContextProvider.IIni
 				if (feature instanceof JvmExecutable) {
 					List<JvmTypeReference> argumentTypes = request.getArgumentTypes();
 					if (argumentTypes != null && !argumentTypes.isEmpty()) {
-						
 						nextLevel = 3;
 						return contextProvider.getParameterContext((JvmExecutable) feature, argumentTypes);
 					}

@@ -28,7 +28,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 		XExpression expression = expression("newArrayList('foo','bar').forEach [] ", true);
 		XExpression closure = ((XMemberFeatureCall)expression).getMemberCallArguments().get(0);
 		JvmTypeReference type = typeProvider.getType(closure);
-		//TODO wrong type? Should we have the type (String)=>Void?
+		//TODO wrong type? Should we derive the type (String)=>Void?
 		// however, we should have something like Procedures.Procedure0 .. Procedure6 and
 		// #forEach should take Procedure1 as a parameter instead of Function1
 		assertEquals("(String)=>Object", type.getSimpleName());
@@ -56,6 +56,35 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 				"  new testdata.ClosureClient().invoke0(closure)" +
 				"}");
 	}
+	
+	public void testClosure_02() throws Exception {
+		assertResolvedType("(java.lang.String)=>boolean", "[java.lang.String x| true]");
+	}
+	
+//	TODO Fix these cases
+//	public void testClosure_03() throws Exception {
+//		XBlockExpression block = (XBlockExpression) expression(
+//				"{\n" + 
+//				"  var java.util.List<? super String> list = null;\n" + 
+//				"  list.map(e|e)\n" +
+//				"}");
+//		XMemberFeatureCall featureCall = (XMemberFeatureCall) block.getExpressions().get(1);
+//		XClosure closure = (XClosure) featureCall.getMemberCallArguments().get(0);
+//		JvmTypeReference typeRef = typeProvider.getType(closure);
+//		assertEquals("(java.lang.Object)=>java.lang.Object", toString(typeRef));
+//	}
+//	
+//	public void testClosure_04() throws Exception {
+//		XBlockExpression block = (XBlockExpression) expression(
+//				"{\n" + 
+//				"  var java.util.List<? super String> list = null;\n" + 
+//				"  list.map(e|e == null)\n" +
+//				"}");
+//		XMemberFeatureCall featureCall = (XMemberFeatureCall) block.getExpressions().get(1);
+//		XClosure closure = (XClosure) featureCall.getMemberCallArguments().get(0);
+//		JvmTypeReference typeRef = typeProvider.getType(closure);
+//		assertEquals("(java.lang.Object)=>boolean", toString(typeRef));
+//	}
 	
 	public void testTypeArgs() throws Exception {
 		assertResolvedType("boolean", "new java.util.ArrayList<String>() += 'foo'");
@@ -128,10 +157,6 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	
 	public void testConstructorTypeInference_02() throws Exception {
 		assertResolvedType("boolean", "<java.util.List<String>>newArrayList().add(new java.util.ArrayList())");
-	}
-
-	public void testClosure() throws Exception {
-		assertResolvedType("(java.lang.String)=>boolean", "[java.lang.String x| true]");
 	}
 
 	public void testFeatureCall_01() throws Exception {

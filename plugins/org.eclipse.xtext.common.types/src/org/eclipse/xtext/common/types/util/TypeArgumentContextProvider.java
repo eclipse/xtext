@@ -365,18 +365,20 @@ public class TypeArgumentContextProvider {
 							}
 						}
 					} else if (!lowers.isEmpty()) {
+						boolean lowerWithWildcard = false; 
 						ResolveInfo bestResolvedLower = null;
 						for(ResolveInfo resolvedLower: lowers) {
+							lowerWithWildcard |= resolvedLower.kind == ResolveInfoKind.WC_LOWER;
 							if (bestResolvedLower == null) {
 								bestResolvedLower = resolvedLower;
-							} else if (resolvedLower != null) {
-								if (conformanceComputer.isConformant(bestResolvedLower.reference, resolvedLower.reference)) {
+							} else {
+								TypeConformanceResult conformanceResult = conformanceComputer.isConformant(bestResolvedLower.reference, resolvedLower.reference, new TypeConformanceComputationArgument(false, false, true));
+								if (conformanceResult.isConformant() && conformanceResult.getKinds().contains(TypeConformanceResult.Kind.SUBTYPE))
 									bestResolvedLower = resolvedLower;
-								}
 							}
 						}
 						if (bestResolvedLower != null) {
-							if (lowers.size() == 1) {
+							if (lowers.size() == 1 || lowerWithWildcard) {
 								if (bestResolvedLower.kind != ResolveInfoKind.WC_LOWER) {
 									if (!uppers.isEmpty()) {
 										JvmTypeReference upper = conformanceComputer.getCommonSuperType(uppers);
@@ -523,18 +525,21 @@ public class TypeArgumentContextProvider {
 	}
 	
 	protected static class ResolveInfo {
-		protected ResolveInfoKind kind;
-		protected JvmTypeReference reference;
+		protected final ResolveInfoKind kind;
+		protected final JvmTypeReference reference;
+		protected final int hint;
 		
-		protected ResolveInfo(JvmTypeReference reference, ResolveInfoKind kind) {
+		protected ResolveInfo(JvmTypeReference reference, ResolveInfoKind kind, int hint) {
 			this.reference = reference;
 			this.kind = kind;
+			this.hint = hint;
 		}
 		
 		@Override
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
+			result = prime * result + hint;
 			result = prime * result + ((kind == null) ? 0 : kind.hashCode());
 			result = prime * result + ((reference == null) ? 0 : reference.hashCode());
 			return result;
@@ -549,6 +554,8 @@ public class TypeArgumentContextProvider {
 			if (getClass() != obj.getClass())
 				return false;
 			ResolveInfo other = (ResolveInfo) obj;
+			if (hint != other.hint)
+				return false;
 			if (kind != other.kind)
 				return false;
 			if (reference == null) {
@@ -561,13 +568,13 @@ public class TypeArgumentContextProvider {
 
 		@Override
 		public String toString() {
-			return "ResolveInfo [kind=" + kind + ", reference=" + reference + "]";
+			return "ResolveInfo [kind=" + kind + ", reference=" + reference + ", hint=" + hint + "]";
 		}
 	}
 	
 	protected ITypeArgumentContext getExpectedTypeContext(JvmTypeReference declaredType, JvmTypeReference expectedType) {
 		final Multimap<JvmTypeParameter, ResolveInfo> result = createTemporaryMultimap();
-		resolveAgainstActualType(declaredType, expectedType, result, false);
+		resolveAgainstActualType(declaredType, expectedType, result, false, -1);
 		Map<JvmTypeParameter, JvmTypeReference> normalized = normalizedCopy(result);
 		if (normalized.isEmpty())
 			return null;
@@ -589,7 +596,7 @@ public class TypeArgumentContextProvider {
 					}
 					// 	TODO improve
 					if (value.reference instanceof JvmParameterizedTypeReference) {
-						value.reference = primitives.asWrapperTypeIfPrimitive(value.reference);
+						value = new ResolveInfo(primitives.asWrapperTypeIfPrimitive(value.reference), value.kind, value.hint);
 					}
 				}
 				return super.put(key, value);
@@ -633,9 +640,30 @@ public class TypeArgumentContextProvider {
 					// to refuse a certain key-value-pair
 					return null;
 				}
-				return super.put(key, value);
+				return super.put(key, getWithObjectUpperBoundIfNecessary(value));
 			}
 		};
+	}
+	
+	protected JvmTypeReference getWithObjectUpperBoundIfNecessary(JvmTypeReference reference) {
+//		if (reference instanceof JvmWildcardTypeReference && reference.eResource() != null) {
+//			List<JvmLowerBound> lowerBounds = Lists.newArrayList();
+//			for(JvmTypeConstraint constraint: ((JvmWildcardTypeReference) reference).getConstraints()) {
+//				if (constraint instanceof JvmUpperBound)
+//					return reference;
+//				else {
+//					JvmLowerBound lowerBound = typesFactory.createJvmLowerBound();
+//					JvmDelegateTypeReference delegate = typesFactory.createJvmDelegateTypeReference();
+//					delegate.setDelegate(constraint.getTypeReference());
+//					lowerBound.setTypeReference(delegate);
+//					lowerBounds.add(lowerBound);
+//				}
+//			}
+//			JvmWildcardTypeReference result = typeReferences.wildCardExtends(typeReferences.getTypeForName(Object.class, reference));
+//			result.getConstraints().addAll(lowerBounds);
+//			return result;
+//		}
+		return reference;
 	}
 	
 	protected ITypeArgumentContext getDeclaredBoundsContext(JvmExecutable executable) {
@@ -691,13 +719,13 @@ public class TypeArgumentContextProvider {
 			JvmTypeReference parameterType = parameters.get(i).getParameterType();
 			JvmTypeReference argumentType = argumentTypes.get(i);
 			if (argumentType != null && parameterType != null) {
-				resolveAgainstActualType(parameterType, argumentType, result, true);
+				resolveAgainstActualType(parameterType, argumentType, result, true, i);
 			}
 		}
 		for (int i = argumentTypes.size(); i < paramCount; i++) {
 			JvmTypeReference parameterType = parameters.get(i).getParameterType();
 			if (parameterType != null) {
-				resolveAgainstActualType(parameterType, null, result, true);
+				resolveAgainstActualType(parameterType, null, result, true, i);
 			}
 		}
 		if (executable.isVarArgs() && argumentTypes.size() > paramCount) {
@@ -713,12 +741,12 @@ public class TypeArgumentContextProvider {
 				if (lastArgumentType != null) {
 					if (lastArgumentType instanceof JvmGenericArrayTypeReference) {
 						if (((JvmGenericArrayTypeReference) lastArgumentType).getDimensions() == ((JvmGenericArrayTypeReference) varArgParameterType).getDimensions()) {
-							resolveAgainstActualType(varArgParameterType, lastArgumentType, result, true);		
+							resolveAgainstActualType(varArgParameterType, lastArgumentType, result, true, paramCount);		
 							Map<JvmTypeParameter, JvmTypeReference> normalized = normalizedCopy(result);
 							return new TypeArgumentContext(normalized, typeReferences, typesFactory, rawTypeHelper);
 						}
 					} 
-					resolveAgainstActualType(varArgComponentType, lastArgumentType, result, true);
+					resolveAgainstActualType(varArgComponentType, lastArgumentType, result, true, paramCount);
 				}
 			} else {
 				List<JvmTypeReference> actualVarArgTypes = Lists.newArrayList(Iterables.filter(
@@ -732,7 +760,7 @@ public class TypeArgumentContextProvider {
 						actualVarArgTypes = wrappedVarArgTypes;
 					}
 					JvmTypeReference commonVarArgType = conformanceComputer.getCommonSuperType(actualVarArgTypes);
-					resolveAgainstActualType(varArgComponentType, commonVarArgType, result, true);
+					resolveAgainstActualType(varArgComponentType, commonVarArgType, result, true, paramCount);
 				}
 			}
 		}
@@ -743,7 +771,7 @@ public class TypeArgumentContextProvider {
 	}
 
 	protected void resolveAgainstActualType(JvmTypeReference declaredType, JvmTypeReference actualType,
-			final Multimap<JvmTypeParameter, ResolveInfo> result, final boolean allowWildcardResolutions) {
+			final Multimap<JvmTypeParameter, ResolveInfo> result, final boolean allowWildcardResolutions, final int hint) {
 		ITypeReferenceVisitorWithParameter<ResolveInfo, Void> implementation = new AbstractTypeReferenceVisitorWithParameter.InheritanceAware<ResolveInfo, Void>() {
 			@Override
 			public Void doVisitCompoundTypeReference(JvmCompoundTypeReference reference, ResolveInfo param) {
@@ -774,7 +802,7 @@ public class TypeArgumentContextProvider {
 						if (type instanceof JvmTypeParameter) {
 							for(JvmTypeConstraint constraint: ((JvmTypeParameter) type).getConstraints()) {
 								if (constraint instanceof JvmUpperBound && constraint.getTypeReference() != null) {
-									result.put((JvmTypeParameter) type, new ResolveInfo(constraint.getTypeReference(), param.kind));
+									result.put((JvmTypeParameter) type, new ResolveInfo(constraint.getTypeReference(), param.kind, param.hint));
 								}
 							}
 						}
@@ -797,11 +825,11 @@ public class TypeArgumentContextProvider {
 								for(JvmTypeParameter receiverBound: receiverBoundParameters) {
 									JvmTypeReference declared = declaredContext.getBoundArgument(receiverBound);
 									JvmTypeReference actual = actualContext.getBoundArgument(receiverBound);
-									outerVisit(declared, new ResolveInfo(actual, ResolveInfoKind.EXACT));
+									outerVisit(declared, new ResolveInfo(actual, ResolveInfoKind.EXACT, param.hint));
 								}
 								for(JvmTypeParameter declaredBoundParameter: declaredContext.getBoundParameters()) {
 									if (!result.containsKey(declaredBoundParameter)) {
-										result.put(declaredBoundParameter, new ResolveInfo(declaredContext.internalGetBoundArgument(declaredBoundParameter), param.kind));
+										result.put(declaredBoundParameter, new ResolveInfo(declaredContext.internalGetBoundArgument(declaredBoundParameter), param.kind, param.hint));
 									}
 								}
 							}
@@ -811,18 +839,25 @@ public class TypeArgumentContextProvider {
 					@Override
 					public Void doVisitWildcardTypeReference(JvmWildcardTypeReference reference) {
 						boolean lowerBoundFound = false;
-						for(JvmTypeConstraint constraint: reference.getConstraints()) {
+						for (JvmTypeConstraint constraint : reference.getConstraints()) {
 							if (constraint instanceof JvmLowerBound) {
 								lowerBoundFound = true;
-								outerVisit(declaredReference, new ResolveInfo(constraint.getTypeReference(), 
-										allowWildcardResolutions ? ResolveInfoKind.WC_LOWER : ResolveInfoKind.LOWER));
+//								if (param.kind != ResolveInfoKind.EXACT) {
+									outerVisit(declaredReference, new ResolveInfo(constraint.getTypeReference(),
+											allowWildcardResolutions ? ResolveInfoKind.WC_LOWER	: ResolveInfoKind.LOWER, param.hint));
+//								}
 							}
 						}
-						if (!lowerBoundFound) {
+						if (!lowerBoundFound /* || param.kind == ResolveInfoKind.EXACT */) {
 							for(JvmTypeConstraint constraint: reference.getConstraints()) {
 								if (constraint instanceof JvmUpperBound) {
-									outerVisit(declaredReference, new ResolveInfo(constraint.getTypeReference(), 
-											allowWildcardResolutions ? ResolveInfoKind.WC_UPPER : ResolveInfoKind.UPPER));
+//									if (param.kind != ResolveInfoKind.EXACT) {
+										outerVisit(declaredReference, new ResolveInfo(constraint.getTypeReference(), 
+												allowWildcardResolutions ? ResolveInfoKind.WC_UPPER : ResolveInfoKind.UPPER, param.hint));
+//									} else {
+//										outerVisit(declaredReference, new ResolveInfo(constraint.getTypeReference(), 
+//												lowerBoundFound ? ResolveInfoKind.EXACT : ResolveInfoKind.UPPER, param.hint));
+//									}
 								}
 							}
 						}
@@ -835,7 +870,7 @@ public class TypeArgumentContextProvider {
 				}.visit(param.reference);
 			}
 			@Override
-			public Void doVisitWildcardTypeReference(final JvmWildcardTypeReference declaredReference, ResolveInfo param) {
+			public Void doVisitWildcardTypeReference(final JvmWildcardTypeReference declaredReference, final ResolveInfo param) {
 				return new AbstractTypeReferenceVisitor.InheritanceAware<Void>() {
 					@Override
 					protected Void handleNullReference() {
@@ -851,13 +886,13 @@ public class TypeArgumentContextProvider {
 							if (declaredConstraint instanceof JvmUpperBound) {
 								for(JvmTypeConstraint actualConstraint: reference.getConstraints()) {
 									if (actualConstraint instanceof JvmUpperBound) {
-										outerVisit(declaredConstraint.getTypeReference(), new ResolveInfo(actualConstraint.getTypeReference(), ResolveInfoKind.UPPER));
+										outerVisit(declaredConstraint.getTypeReference(), new ResolveInfo(actualConstraint.getTypeReference(), ResolveInfoKind.UPPER, param.hint));
 									}
 								}
 							} else {
 								for(JvmTypeConstraint actualConstraint: reference.getConstraints()) {
 									if (actualConstraint instanceof JvmLowerBound) {
-										outerVisit(declaredConstraint.getTypeReference(), new ResolveInfo(actualConstraint.getTypeReference(), ResolveInfoKind.LOWER));
+										outerVisit(declaredConstraint.getTypeReference(), new ResolveInfo(actualConstraint.getTypeReference(), ResolveInfoKind.LOWER, param.hint));
 									}
 								}
 							}
@@ -871,14 +906,14 @@ public class TypeArgumentContextProvider {
 							if (declaredConstraint instanceof JvmLowerBound) {
 								lowerBoundFound = true;
 								outerVisit(declaredConstraint.getTypeReference(), 
-										new ResolveInfo(reference, ResolveInfoKind.LOWER));
+										new ResolveInfo(reference, ResolveInfoKind.LOWER, param.hint));
 							}
 						}
 						if (!lowerBoundFound) {
 							for(JvmTypeConstraint declaredConstraint: declaredReference.getConstraints()) {
 								if (declaredConstraint instanceof JvmUpperBound) {
 									outerVisit(declaredConstraint.getTypeReference(), 
-											new ResolveInfo(reference, ResolveInfoKind.UPPER));
+											new ResolveInfo(reference, ResolveInfoKind.UPPER, param.hint));
 								}
 							}
 						}
@@ -897,7 +932,7 @@ public class TypeArgumentContextProvider {
 					}
 					@Override
 					public Void doVisitGenericArrayTypeReference(JvmGenericArrayTypeReference reference) {
-						return outerVisit(declaredReference.getComponentType(), new ResolveInfo(reference.getComponentType(), param.kind));
+						return outerVisit(declaredReference.getComponentType(), new ResolveInfo(reference.getComponentType(), param.kind, param.hint));
 					}
 					@Override
 					public Void doVisitTypeReference(JvmTypeReference reference) {
@@ -914,7 +949,7 @@ public class TypeArgumentContextProvider {
 				return visit(reference, parameter);
 			}
 		};
-		implementation.visit(declaredType, new ResolveInfo(actualType, ResolveInfoKind.UPPER));
+		implementation.visit(declaredType, new ResolveInfo(actualType, ResolveInfoKind.UPPER, hint));
 	}
 
 }

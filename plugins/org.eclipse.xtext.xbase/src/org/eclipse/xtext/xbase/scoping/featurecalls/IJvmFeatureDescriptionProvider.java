@@ -11,10 +11,13 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.resource.IEObjectDescription;
 
+import com.google.common.base.Function;
+
 /**
  * The strategy interface passed to instances of {@link IJvmFeatureScopeProvider}.
  * 
  * @author Sven Efftinge - Initial contribution and API
+ * @author Sebastian Zarnekow
  */
 public interface IJvmFeatureDescriptionProvider {
 	
@@ -24,10 +27,18 @@ public interface IJvmFeatureDescriptionProvider {
 	String getText();
 
 	Iterable<IEObjectDescription> getDescriptionsByName(
-			String name, IFeaturesForTypeProvider featureProvider, JvmTypeReference typeReference,
-			ITypeArgumentContext context, Iterable<JvmTypeReference> hierarchy);
+			String name, 
+			IFeaturesForTypeProvider featureProvider, 
+			JvmTypeReference typeReference,
+			Function<? super JvmFeatureDescription, ? extends ITypeArgumentContext> genericContextFactory,
+			ITypeArgumentContext rawTypeContext, 
+			Iterable<JvmTypeReference> hierarchy);
 
-	Iterable<IEObjectDescription> getAllDescriptions(IFeaturesForTypeProvider featureProvider,
-			JvmTypeReference typeReference, ITypeArgumentContext context, Iterable<JvmTypeReference> hierarchy);
+	Iterable<IEObjectDescription> getAllDescriptions(
+			IFeaturesForTypeProvider featureProvider,
+			JvmTypeReference typeReference, 
+			Function<? super JvmFeatureDescription, ? extends ITypeArgumentContext> genericContextFactory,
+			ITypeArgumentContext rawTypeContext, 
+			Iterable<JvmTypeReference> hierarchy);
 	
 }

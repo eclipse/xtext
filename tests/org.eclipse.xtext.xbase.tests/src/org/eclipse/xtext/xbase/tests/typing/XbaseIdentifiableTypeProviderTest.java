@@ -37,4 +37,18 @@ public class XbaseIdentifiableTypeProviderTest extends AbstractXbaseTestCase {
 		JvmTypeReference typeRef = typeProvider.getTypeForIdentifiable(expression.getDeclaredParam());
 		assertEquals("java.util.List<java.lang.Integer>", typeRef.getIdentifier());
 	}
+	
+//	TODO Fix this case
+//	public void testClosureParameter() throws Exception {
+//		XBlockExpression block = (XBlockExpression) expression(
+//				"{\n" + 
+//				"  var java.util.List<? super String> list = null;\n" + 
+//				"  list.map(e|e)\n" +
+//				"}");
+//		XMemberFeatureCall featureCall = (XMemberFeatureCall) block.getExpressions().get(1);
+//		XClosure closure = (XClosure) featureCall.getMemberCallArguments().get(0);
+//		JvmFormalParameter e = closure.getDeclaredFormalParameters().get(0);
+//		JvmTypeReference typeRef = typeProvider.getTypeForIdentifiable(e);
+//		assertEquals("java.lang.Object", typeRef.getIdentifier());
+//	}
 }

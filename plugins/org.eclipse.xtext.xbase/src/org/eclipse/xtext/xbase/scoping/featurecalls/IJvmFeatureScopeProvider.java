@@ -10,7 +10,10 @@ package org.eclipse.xtext.xbase.scoping.featurecalls;
 import java.util.List;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.scoping.IScope;
+
+import com.google.common.base.Function;
 
 /**
  * Provides a feature scope for a type, based on the type hierarchy.
@@ -38,5 +41,6 @@ public interface IJvmFeatureScopeProvider {
 	 * </p>
 	 * @param typeReference the type whose features should be provided.
 	 */
-	public JvmFeatureScope createFeatureScopeForTypeRef(IScope parent, JvmTypeReference typeReference, List<IJvmFeatureDescriptionProvider> descriptionProvider);
+	public JvmFeatureScope createFeatureScopeForTypeRef(IScope parent, JvmTypeReference typeReference, 
+			Function<? super JvmFeatureDescription, ? extends ITypeArgumentContext> genericContextFactory, List<IJvmFeatureDescriptionProvider> descriptionProvider);
 }

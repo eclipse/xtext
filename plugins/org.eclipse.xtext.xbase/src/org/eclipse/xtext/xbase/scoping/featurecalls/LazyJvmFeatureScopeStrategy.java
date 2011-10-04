@@ -12,6 +12,8 @@ import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 
+import com.google.common.base.Function;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -22,23 +24,26 @@ public class LazyJvmFeatureScopeStrategy {
 	private final ITypeArgumentContext context;
 	private final Iterable<JvmTypeReference> hierarchy;
 	private final IFeaturesForTypeProvider featureProvider;
+	private final Function<? super JvmFeatureDescription, ? extends ITypeArgumentContext> genericContextFactory;
 
 	public LazyJvmFeatureScopeStrategy(IJvmFeatureDescriptionProvider jvmFeatureDescriptionProvider,
 			IFeaturesForTypeProvider featureProvider, JvmTypeReference typeReference, 
+			Function<? super JvmFeatureDescription, ? extends ITypeArgumentContext> genericContextFactory,
 			ITypeArgumentContext context, Iterable<JvmTypeReference> hierarchy) {
 		this.jvmFeatureDescriptionProvider = jvmFeatureDescriptionProvider;
 		this.featureProvider = featureProvider;
 		this.typeReference = typeReference;
+		this.genericContextFactory = genericContextFactory;
 		this.context = context;
 		this.hierarchy = hierarchy;
 	}
 
 	public Iterable<IEObjectDescription> getDescriptionsByName(QualifiedName name) {
-		return jvmFeatureDescriptionProvider.getDescriptionsByName(name.toString(), featureProvider, typeReference, context, hierarchy);
+		return jvmFeatureDescriptionProvider.getDescriptionsByName(name.toString(), featureProvider, typeReference, genericContextFactory, context, hierarchy);
 	}
 
 	public Iterable<IEObjectDescription> getAllDescriptions() {
-		return jvmFeatureDescriptionProvider.getAllDescriptions(featureProvider, typeReference, context, hierarchy);
+		return jvmFeatureDescriptionProvider.getAllDescriptions(featureProvider, typeReference, genericContextFactory, context, hierarchy);
 	}
 
 }

@@ -83,6 +83,7 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 	public JvmFeatureScope createFeatureScopeForTypeRef(
 			IScope parent, 
 			JvmTypeReference typeReference, 
+			Function<? super JvmFeatureDescription, ? extends ITypeArgumentContext> genericContextFactory,
 			List<IJvmFeatureDescriptionProvider> jvmFeatureDescriptionProviders) {
 		ITypeArgumentContext context = typeArgumentContextProvider.getTypeArgumentContext(new TypeArgumentContextProvider.ReceiverRequest(typeReference));
 		Iterable<JvmTypeReference> hierarchy = linearizeTypeHierarchy(typeReference);
@@ -92,7 +93,7 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 			IFeaturesForTypeProvider featureProvider = featuresProvider;
 			if (descriptionProvider instanceof IFeaturesForTypeProvider)
 				featureProvider = (IFeaturesForTypeProvider) descriptionProvider;
-			LazyJvmFeatureScopeStrategy configuration = new LazyJvmFeatureScopeStrategy(descriptionProvider, featureProvider, typeReference, context, hierarchy);
+			LazyJvmFeatureScopeStrategy configuration = new LazyJvmFeatureScopeStrategy(descriptionProvider, featureProvider, typeReference, genericContextFactory, context, hierarchy);
 			result = new LazyJvmFeatureScope(result, descriptionProvider.getText(), configuration, false);
 		}
 
@@ -101,7 +102,7 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 			IFeaturesForTypeProvider featureProvider = featuresProvider;
 			if (descriptionProvider instanceof IFeaturesForTypeProvider)
 				featureProvider = (IFeaturesForTypeProvider) descriptionProvider;
-			LazyJvmFeatureScopeStrategy configuration = new LazyJvmFeatureScopeStrategy(descriptionProvider, featureProvider, typeReference, context, hierarchy);
+			LazyJvmFeatureScopeStrategy configuration = new LazyJvmFeatureScopeStrategy(descriptionProvider, featureProvider, typeReference, genericContextFactory, context, hierarchy);
 			result = new LazyJvmFeatureScope(result, descriptionProvider.getText(), configuration, true);
 		}
 		if (result == null || parent == result)
