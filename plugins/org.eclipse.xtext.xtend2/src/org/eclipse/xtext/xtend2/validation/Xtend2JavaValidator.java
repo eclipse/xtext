@@ -203,8 +203,10 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 	@Check
 	public void checkVariableNameShadowing(XtendFunction func) {
 		JvmOperation operation = associations.getDirectlyInferredOperation(func);
-		for (JvmFormalParameter p : operation.getParameters()) {
-			super.checkDeclaredVariableName(operation, p, TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME);
+		if (operation != null) {
+			for (JvmFormalParameter p : operation.getParameters()) {
+				super.checkDeclaredVariableName(operation, p, TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME);
+			}
 		}
 	}
 	
