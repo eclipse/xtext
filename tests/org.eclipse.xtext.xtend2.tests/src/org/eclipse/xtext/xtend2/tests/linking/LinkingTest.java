@@ -9,7 +9,6 @@ package org.eclipse.xtext.xtend2.tests.linking;
 
 import static com.google.common.collect.Iterables.*;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 

@@ -9,16 +9,28 @@ package org.eclipse.xtext.xtend2.tests.parsing;
 
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.List;
 
+import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.InvariantChecker;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.EmfFormatter;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.validation.CheckMode;
+import org.eclipse.xtext.validation.IDiagnosticConverter;
+import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.validation.ResourceValidatorImpl;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 
 import com.google.inject.Inject;
@@ -313,6 +325,43 @@ public class PartialParserTest extends AbstractXtend2TestCase {
 		doTestUpdateAtOffset(model, 286, 1, "e", "Case_6.xtend");
 	}
 	
+	public void testEqualModels_04() throws Exception {
+		String model =
+				"package org.eclipse.xtext.xtend2.tests.smoke\n" + 
+				"\n" + 
+				"class Case_3 {\n" + 
+				"	def testReturnExpression_06() {\n" + 
+				"	    val closure = [Integer i| return i]\n" + 
+				"	    for (x : 1..100) closure.apply(x)\n" + 
+				"	}\n" + 
+				"	def testReturnExpression_07() {\n" + 
+				"		if (typeof(Case_3) != null) {\n" + 
+				"		    val (int)=>int closure = [Integer i| return i]\n" + 
+				"		    for (x : 1..100) closure.apply(x)\n" + 
+				"		}\n" + 
+				"	}\n" + 
+				"	def testOverriddenLocalVariable() {\n" + 
+				"	  val x = 3\n" + 
+				"	  var y = 2\n" + 
+				"	  {\n" + 
+				"	    var x2 = y\n" + 
+				"	    val y2 = 1\n" + 
+				"	    x2+y2\n" + 
+				"	  }\n" + 
+				"	}\n" + 
+				"	def testFeatureCall_03() {\n" + 
+				"		{ \n" + 
+				"			var java.util.List<Character> x = ('abc'.toCharArray as Iterable<Character>).toList() \n" + 
+				"			x \n" + 
+				"		}\n" + 
+				"	}\n" + 
+				"}";
+		assertEquals(229, model.indexOf("typeof(Case_3") + "typeof(Case_3".length());
+		XtextResource resource = doTestUpdateAtOffset(model, 229, 1, " ", "Case_3.xtend");
+		compareWithNewResource(resource, model, 229, 1, ")", "Case_3.xtend");
+		validateWithoutException(resource);
+	}
+	
 	public void testInferredModelRemoved() throws Exception {
 		String model =
 				"package org.eclipse.xtext.xtend2.tests.smoke\n" + 
@@ -331,6 +380,38 @@ public class PartialParserTest extends AbstractXtend2TestCase {
 				"		\n" + 
 				"}";
 		doTestUpdateAtOffset(model, 51, 6, " ", "InferredModelRemoved.xtend");
+	}
+	
+	protected void validateWithoutException(XtextResource resource) {
+		ResourceValidatorImpl validator = new ResourceValidatorImpl();
+		assertNotSame(validator, resource.getResourceServiceProvider().getResourceValidator());
+		getInjector().injectMembers(validator);
+		validator.setDiagnosticConverter(new IDiagnosticConverter() {
+			public void convertValidatorDiagnostic(org.eclipse.emf.common.util.Diagnostic diagnostic, IAcceptor<Issue> acceptor) {
+				if (diagnostic instanceof BasicDiagnostic) {
+					List<?> data = diagnostic.getData();
+					if (!data.isEmpty() && data.get(0) instanceof Throwable) {
+						Throwable t = (Throwable) data.get(0);
+						// the framework catches runtime exception
+						// and AssertionError does not take a throwable as argument
+						throw new Error(t);
+					}
+					if (EObjectValidator.DIAGNOSTIC_SOURCE.equals(diagnostic.getSource()) && diagnostic.getCode() == EObjectValidator.EOBJECT__EVERY_REFERENCE_IS_CONTAINED) {
+						throw new Error(new RuntimeException("Dangling reference found."));
+					}
+				}
+			}
+			
+			public void convertResourceDiagnostic(Diagnostic diagnostic, Severity severity, IAcceptor<Issue> acceptor) {
+				if (diagnostic instanceof ExceptionDiagnostic) {
+					Exception e = ((ExceptionDiagnostic) diagnostic).getException();
+					// the framework catches runtime exception
+					// and AssertionError does not take a throwable as argument
+					throw new Error(new RuntimeException(e));
+				}
+			}
+		});
+		validator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
 	}
 	
 	protected XtextResource doTestUpdateAtEnd(String model, char character, String fileName) throws IOException {
