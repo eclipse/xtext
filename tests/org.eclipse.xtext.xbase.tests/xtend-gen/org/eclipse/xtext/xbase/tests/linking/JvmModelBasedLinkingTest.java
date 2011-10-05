@@ -100,7 +100,7 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
                       JvmTypeReference _stringType = JvmModelBasedLinkingTest.this.stringType(expr);
                       JvmFormalParameter _parameter = JvmModelBasedLinkingTest.this._jvmTypesBuilder.toParameter(expr, "x", _stringType);
                       CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter);
-                      JvmModelBasedLinkingTest.this._jvmTypesBuilder.associate(expr, it);
+                      JvmModelBasedLinkingTest.this._jvmTypesBuilder.<JvmOperation>associate(expr, it);
                       _xblockexpression = (((Void) null));
                     }
                     return _xblockexpression;
@@ -147,7 +147,7 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
                       JvmTypeReference _stringType = JvmModelBasedLinkingTest.this.stringType(expr);
                       JvmFormalParameter _parameter = JvmModelBasedLinkingTest.this._jvmTypesBuilder.toParameter(expr, "y", _stringType);
                       CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter);
-                      JvmModelBasedLinkingTest.this._jvmTypesBuilder.associate(expr, it);
+                      JvmModelBasedLinkingTest.this._jvmTypesBuilder.<JvmOperation>associate(expr, it);
                       _xblockexpression = (((Void) null));
                     }
                     return _xblockexpression;
@@ -190,7 +190,7 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
                   public Void apply(final JvmOperation it) {
                     Void _xblockexpression = null;
                     {
-                      JvmModelBasedLinkingTest.this._jvmTypesBuilder.associate(expr, it);
+                      JvmModelBasedLinkingTest.this._jvmTypesBuilder.<JvmOperation>associate(expr, it);
                       _xblockexpression = (((Void) null));
                     }
                     return _xblockexpression;

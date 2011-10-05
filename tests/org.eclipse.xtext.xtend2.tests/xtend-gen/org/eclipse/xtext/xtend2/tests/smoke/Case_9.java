@@ -42,11 +42,8 @@ public class Case_9 {
   public StringConcatenation generateTypeRef(final EObject c) {
     if ((c instanceof ENamedElement)) {
       return _generateTypeRef((ENamedElement)c);
-    } else if ((c instanceof EObject)) {
-      return _generateTypeRef((EObject)c);
     } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        java.util.Arrays.<Object>asList(c).toString());
+      return _generateTypeRef((EObject)c);
     }
   }
 }
