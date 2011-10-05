@@ -5,6 +5,7 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class Case_3 {
@@ -22,6 +23,26 @@ public class Case_3 {
         closure.apply(x);
       }
     }
+  }
+  
+  public Object testReturnExpression_07() {
+    Object _xifexpression = null;
+    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(org.eclipse.xtext.xtend2.tests.smoke.Case_3.class, null);
+    if (_operator_notEquals) {
+      {
+        final Function1<Integer,Integer> _function = new Function1<Integer,Integer>() {
+            public Integer apply(final Integer i) {
+              return i;
+            }
+          };
+        final Function1<? super Integer,? extends Integer> closure = _function;
+        Iterable<Integer> _operator_upTo = IntegerExtensions.operator_upTo(((Integer)1), ((Integer)100));
+        for (final Integer x : _operator_upTo) {
+          closure.apply(x);
+        }
+      }
+    }
+    return _xifexpression;
   }
   
   public int testOverriddenLocalVariable() {
