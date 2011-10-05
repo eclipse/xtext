@@ -23,6 +23,7 @@ import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.Naming;
+import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
@@ -109,6 +110,8 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 								+ ".NAMED_DELEGATE)).to(org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider.class)")
 				.addTypeToType(IScopeProvider.class.getCanonicalName(),
 						"org.eclipse.xtext.xbase.scoping.XbaseScopeProvider")
+				.addTypeToType(ILinker.class.getCanonicalName(),
+						"org.eclipse.xtext.xbase.linking.XbaseLazyLinker")
 				.addTypeToType("org.eclipse.xtext.common.types.util.TypeConformanceComputer",
 								"org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer")
 				.addTypeToType(XtextResource.class.getName(),

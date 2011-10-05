@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.linking;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.linking.lazy.LazyLinker;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 
@@ -24,6 +25,8 @@ public class XbaseLazyLinker extends LazyLinker {
 			XAbstractFeatureCall featureCall = (XAbstractFeatureCall) obj;
 			featureCall.setImplicitReceiver(null);
 			featureCall.setInvalidFeatureIssueCode(null);
+		} else if (obj instanceof JvmSpecializedTypeReference) {
+			((JvmSpecializedTypeReference) obj).setEquivalent(null);
 		}
 	}
 
