@@ -7,10 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
-import static com.google.common.collect.Sets.*;
-
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -23,9 +22,16 @@ import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.google.inject.Provider;
 
 /**
+ * A cache implementation that stores its values in the scope of a resource.
+ * The values will be discarded as soon as the contents of the resource changes semantically.
+ * Clients may override this behavior for certain transactions by means of {@link #execWithoutCacheClear(Resource, IUnitOfWork)}
+ * or {@link #execWithTemporaryCaching(Resource, IUnitOfWork)}.
+ * 
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
@@ -33,14 +39,29 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 	
 	private static final Logger log = Logger.getLogger(OnChangeEvictingCache.class);
 	
+	/**
+	 * A simple cache listener. It will be notified if the cache is cleared. 
+	 * The notification will only occur once. Listeners that are interested in subsequent notifications 
+	 * have to re-add themselves.  
+	 */
 	public static interface Listener {
 		void onEvict(CacheAdapter cache);
 	}
 	
+	/**
+	 * Clears the cache of the given resource. 
+	 */
 	public void clear(Resource resource) {
 		getOrCreate(resource).clearValues();
 	}
 	
+	/**
+	 * Try to obtain the value that is cached for the given key in the given resource.
+	 * If no value is cached, the provider is used to compute it and store it afterwards.
+	 * @param resource the resource. If it is <code>null</code>, the provider will be used to compute the value.
+	 * @param key the cache key. May not be <code>null</code>.
+	 * @param provider the strategy to compute the value if necessary. May not be <code>null</code>.
+	 */
 	public <T> T get(Object key, Resource resource, Provider<T> provider) {
 		if(resource == null) {
 			return provider.get();
@@ -58,6 +79,7 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 	}
 	
 	/**
+	 * Announce a cache miss for the internal statistics of the adapter.
 	 * @since 2.1
 	 */
 	protected void cacheMiss(CacheAdapter adapter) {
@@ -65,12 +87,19 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 	}
 	
 	/**
+	 * Announce a cache hit for the internal statistics of the adapter.
 	 * @since 2.1
 	 */
 	protected void cacheHit(CacheAdapter adapter) {
 		adapter.cacheHit();
 	}
 	
+	/**
+	 * Returns the cache adapter that is associated with the resource. The lifecycle of the cache
+	 * is strongly connected to the resource and its change notifications. Will not return <code>null</code>.
+	 * @param resource the resource. May not be <code>null</code>.
+	 * @return the cache adapter for the given resource. Never <code>null</code>.
+	 */
 	public CacheAdapter getOrCreate(Resource resource) {
 		CacheAdapter adapter = (CacheAdapter) EcoreUtil.getAdapter(resource.eAdapters(), CacheAdapter.class);
 		if (adapter == null) {
@@ -81,32 +110,60 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		return adapter;
 	}
 	
+	/**
+	 * The transaction will be executed. While it is running, any semantic state change
+	 * in the given resource will be ignored and the cache will not be cleared.
+	 */
 	public <Result, Param extends Resource> Result execWithoutCacheClear(Param resource, IUnitOfWork<Result, Param> transaction) throws WrappedException {
 		CacheAdapter cacheAdapter = getOrCreate(resource);
-		boolean wasIgnoreNotifications = cacheAdapter.isIgnoreNotifications();
 		try {
-			cacheAdapter.setIgnoreNotifications(true);
+			cacheAdapter.ignoreNotifications();
 			return transaction.exec(resource);
 		} catch (Exception e) {
 			throw new WrappedException(e);
 		} finally {
-			cacheAdapter.setIgnoreNotifications(wasIgnoreNotifications);
+			cacheAdapter.listenToNotifications();
 		}
 	}
 	
 	/**
+	 * The transaction will be executed with caching enabled. However, all newly cached values will be discarded as soon
+	 * as the transaction is over.
 	 * @since 2.1
 	 */
-	public <Result, Param extends Resource> Result execWithoutCaching(Param resource, IUnitOfWork<Result, Param> transaction) throws WrappedException {
+	public <Result, Param extends Resource> Result execWithTemporaryCaching(Param resource, IUnitOfWork<Result, Param> transaction) throws WrappedException {
 		CacheAdapter cacheAdapter = getOrCreate(resource);
-		boolean wasIgnoreNewValues = cacheAdapter.isIgnoreNewValues();
+		IgnoreValuesMemento memento = cacheAdapter.ignoreNewValues();
 		try {
-			cacheAdapter.setIgnoreNewValues(true);
 			return transaction.exec(resource);
 		} catch (Exception e) {
 			throw new WrappedException(e);
 		} finally {
-			cacheAdapter.setIgnoreNewValues(wasIgnoreNewValues);
+			memento.done();
+		}
+	}
+	
+	private static class IgnoreValuesMemento {
+		private final List<Object> keys = Lists.newArrayList();
+		private final IgnoreValuesMemento previous;
+		private final CacheAdapter adapter;
+		
+		private IgnoreValuesMemento(IgnoreValuesMemento previous, CacheAdapter adapter) {
+			this.previous = previous;
+			this.adapter = adapter;
+			this.adapter.ignoreValuesMemento = this;
+		}
+		
+		private void done() {
+			if (log.isDebugEnabled()) {
+				log.debug(String.format("Discarding %d temporary cache entries", keys.size()));
+			}
+			adapter.values.keySet().removeAll(keys);
+			adapter.ignoreValuesMemento = previous;
+		}
+
+		private void storeKey(Object name) {
+			this.keys.add(name);
 		}
 	}
 
@@ -116,13 +173,16 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		
 		private Map<Object, Object> values = new ConcurrentHashMap<Object, Object>(500);
 
-		private Collection<Listener> listeners = newLinkedHashSet();
+		private Collection<Listener> listeners = Sets.newLinkedHashSet();
 		
+		@Deprecated
 		private volatile boolean ignoreNotifications = false;
 		
-		private volatile boolean ignoreNewValues = false;
+		private volatile int ignoreNotificationCounter = 0;
 		
 		private volatile boolean empty = true;
+		
+		private volatile IgnoreValuesMemento ignoreValuesMemento = null;
 		
 		private Resource resource;
 		
@@ -130,13 +190,26 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		private int hits = 0;
 
 		public void set(Object name, Object value) {
-			if (ignoreNewValues)
-				return;
 			empty = false;
 			if (value != null)
 				this.values.put(name, value);
 			else
 				this.values.put(name, NULL);
+			IgnoreValuesMemento ignoreValuesMemento = this.ignoreValuesMemento;
+			if (ignoreValuesMemento != null) {
+				ignoreValuesMemento.storeKey(name);
+			}
+		}
+
+		private void listenToNotifications() {
+			ignoreNotificationCounter--;
+			if (ignoreNotificationCounter < 0) {
+				throw new IllegalStateException("ignoreNotificationCounter may not be less than zero");
+			}
+		}
+
+		private void ignoreNotifications() {
+			ignoreNotificationCounter++;
 		}
 
 		/**
@@ -174,7 +247,7 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		@Override
 		public void notifyChanged(Notification notification) {
 			super.notifyChanged(notification);
-			if (!ignoreNotifications && isSemanticStateChange(notification)) {
+			if (ignoreNotificationCounter == 0 && !ignoreNotifications && isSemanticStateChange(notification)) {
 				clearValues();
 				Iterator<Listener> iter = listeners.iterator();
 				while(iter.hasNext()) {
@@ -207,26 +280,20 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 			return type == getClass();
 		}
 		
+		/**
+		 * @deprecated use {@link #ignoreNotifications()} and {@link #listenToNotifications()} instead.
+		 */
+		@Deprecated
 		public void setIgnoreNotifications(boolean ignoreNotifications) {
 			this.ignoreNotifications = ignoreNotifications;
 		}
 
 		public boolean isIgnoreNotifications() {
-			return ignoreNotifications;
+			return ignoreNotificationCounter > 0 || ignoreNotifications;
 		}
 		
-		/**
-		 * @since 2.1
-		 */
-		public boolean isIgnoreNewValues() {
-			return ignoreNewValues;
-		}
-		
-		/**
-		 * @since 2.1
-		 */
-		public void setIgnoreNewValues(boolean ignoreNewValues) {
-			this.ignoreNewValues = ignoreNewValues;
+		private IgnoreValuesMemento ignoreNewValues() {
+			return new IgnoreValuesMemento(ignoreValuesMemento, this);
 		}
 		
 		@Override
@@ -247,7 +314,6 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		protected void setResource(Resource resource) {
 			this.resource = resource;
 		}
-
 	}
 
 }
