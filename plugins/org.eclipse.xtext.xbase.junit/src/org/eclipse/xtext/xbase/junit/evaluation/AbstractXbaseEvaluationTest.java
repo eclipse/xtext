@@ -1404,6 +1404,66 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 			"{ val i = 0 newArrayList('ab', 'abc').fold(i, [max, s | Math::max(s.length, max)]) }");
 	}
 	
+	@Test public void testBug343144_long_01() throws Exception {
+		assertEvaluatesTo(Long.valueOf(3), 
+			"newArrayList('ab', 'abc').fold(0.longValue, [max, s | Math::max(s.length, max)])");
+	}
+	
+	@Test public void testBug343144_long_02() throws Exception {
+		assertEvaluatesTo(Long.valueOf(3), 
+			"newArrayList('ab', 'abc').fold(0.longValue, [Long max, s | Math::max(s.length, max)])");
+	}
+	
+	@Test public void testBug343144_long_03() throws Exception {
+		assertEvaluatesTo(Long.valueOf(3), 
+			"newArrayList('ab', 'abc').fold(0.longValue, [max, s | Math::max(s.length, max as Long)])");
+	}
+	
+	@Test public void testBug343144_long_04() throws Exception {
+		assertEvaluatesTo(Long.valueOf(3), 
+			"{ val Long i = 0.longValue newArrayList('ab', 'abc').fold(i, [max, s | Math::max(s.length, max)]) }");
+	}
+	
+	@Test public void testBug343144_long_05() throws Exception {
+		assertEvaluatesTo(Long.valueOf(3), 
+			"{ val long i = 0.longValue newArrayList('ab', 'abc').fold(i, [max, s | Math::max(s.length, max)]) }");
+	}
+	
+	@Test public void testBug343144_long_06() throws Exception {
+		assertEvaluatesTo(Long.valueOf(3), 
+			"{ val i = 0.longValue as Long newArrayList('ab', 'abc').fold(i, [max, s | Math::max(s.length, max)]) }");
+	}
+	
+	@Test public void testBug343144_float_01() throws Exception {
+		assertEvaluatesTo(Float.valueOf(3), 
+			"newArrayList('ab', 'abc').fold(0.floatValue, [max, s | Math::max(s.length, max)])");
+	}
+	
+	@Test public void testBug343144_float_02() throws Exception {
+		assertEvaluatesTo(Float.valueOf(3), 
+			"newArrayList('ab', 'abc').fold(0.floatValue, [Float max, s | Math::max(s.length, max)])");
+	}
+	
+	@Test public void testBug343144_float_03() throws Exception {
+		assertEvaluatesTo(Float.valueOf(3), 
+			"newArrayList('ab', 'abc').fold(0.floatValue, [max, s | Math::max(s.length, max as Float)])");
+	}
+	
+	@Test public void testBug343144_float_04() throws Exception {
+		assertEvaluatesTo(Float.valueOf(3), 
+			"{ val Float i = 0.floatValue newArrayList('ab', 'abc').fold(i, [max, s | Math::max(s.length, max)]) }");
+	}
+	
+	@Test public void testBug343144_float_05() throws Exception {
+		assertEvaluatesTo(Float.valueOf(3), 
+			"{ val float i = 0.floatValue newArrayList('ab', 'abc').fold(i, [max, s | Math::max(s.length, max)]) }");
+	}
+	
+	@Test public void testBug343144_float_06() throws Exception {
+		assertEvaluatesTo(Float.valueOf(3), 
+			"{ val i = 0.floatValue as Float newArrayList('ab', 'abc').fold(i, [max, s | Math::max(s.length, max)]) }");
+	}
+	
 	@Test public void testBug342434_01() throws Exception {
 		assertEvaluatesTo("baz", 
 			"{\n" + 
