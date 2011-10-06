@@ -235,7 +235,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 	
 	protected JvmTypeReference _expectedType(XAssignment assignment, EReference reference, int index, boolean rawType) {
 		if (reference == XbasePackage.Literals.XASSIGNMENT__VALUE) {
-			JvmIdentifiableElement feature = assignment.getFeature();
+			JvmIdentifiableElement feature = getFeature(assignment);
 			JvmTypeReference receiverType = getReceiverType(assignment, rawType);
 			if (feature instanceof JvmOperation) {
 				JvmOperation operation = (JvmOperation) feature;
@@ -273,12 +273,12 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 
 	protected JvmTypeReference _expectedType(XAbstractFeatureCall featureCall, EReference reference, int index,
 			boolean rawType) {
-		if (featureCall.getFeature() == null || featureCall.getFeature().eIsProxy())
+		if (getFeature(featureCall) == null || getFeature(featureCall).eIsProxy())
 			return null;
 		if ((featureCall instanceof XMemberFeatureCall && (reference == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS || reference == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET))
 				|| (featureCall instanceof XFeatureCall && (reference == XbasePackage.Literals.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS || reference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER))) {
-			if (featureCall.getFeature() instanceof JvmOperation) {
-				JvmOperation operation = (JvmOperation) featureCall.getFeature();
+			if (getFeature(featureCall) instanceof JvmOperation) {
+				JvmOperation operation = (JvmOperation) getFeature(featureCall);
 				XExpression argumentExpression = getExpression(featureCall, reference, index);
 				List<XExpression> actualArguments = featureCall2javaMapping.getActualArguments(featureCall);
 				ITypeArgumentContext context = getFeatureCallTypeArgContext(featureCall, rawType);
@@ -313,8 +313,8 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 					JvmTypeReference result = context.getLowerBound(declaringType);
 					return result;
 				}
-			} else if (featureCall.getFeature() instanceof JvmField) {
-				JvmField field = (JvmField) featureCall.getFeature();
+			} else if (getFeature(featureCall) instanceof JvmField) {
+				JvmField field = (JvmField) getFeature(featureCall);
 				// TODO: lower bound for fields? resolve type parameters?
 				return getTypeReferences().createTypeRef(field.getDeclaringType());
 			}
@@ -379,7 +379,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 			}
 			@Override
 			public JvmFeature getFeature() {
-				JvmIdentifiableElement feature = expr.getFeature();
+				JvmIdentifiableElement feature = XbaseTypeProvider.this.getFeature(expr);
 				if (feature instanceof JvmFeature)
 					return (JvmFeature) feature;
 				return null;
@@ -391,7 +391,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 			}
 			@Override
 			public JvmTypeReference getDeclaredType() {
-				JvmIdentifiableElement feature = expr.getFeature();
+				JvmIdentifiableElement feature = XbaseTypeProvider.this.getFeature(expr);
 				if (feature instanceof JvmOperation)
 					return ((JvmOperation) feature).getReturnType();
 				if (feature instanceof JvmField)
@@ -403,7 +403,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 
 	protected JvmTypeReference[] getArgumentTypes(XAbstractFeatureCall expr, boolean rawType) {
 		List<XExpression> arguments = featureCall2javaMapping.getActualArguments(expr);
-		JvmExecutable executable = (JvmExecutable) expr.getFeature();
+		JvmExecutable executable = (JvmExecutable) getFeature(expr);
 		return getArgumentTypes(executable, arguments, rawType);
 	}
 
@@ -470,8 +470,8 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 
 	protected JvmTypeReference _expectedType(XBinaryOperation expr, EReference reference, int index, boolean rawType) {
 		if (reference == XbasePackage.Literals.XBINARY_OPERATION__RIGHT_OPERAND
-				&& expr.getFeature() instanceof JvmOperation) {
-			JvmOperation feature = (JvmOperation) expr.getFeature();
+				&& getFeature(expr) instanceof JvmOperation) {
+			JvmOperation feature = (JvmOperation) getFeature(expr);
 			JvmFormalParameter parameter = getLast(feature.getParameters());
 			ITypeArgumentContext context = getFeatureCallTypeArgContext(expr, rawType);
 			final JvmTypeReference parameterType = parameter.getParameterType();
@@ -479,8 +479,8 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 			return result;
 		}
 		if (reference == XbasePackage.Literals.XBINARY_OPERATION__LEFT_OPERAND
-				&& expr.getFeature() instanceof JvmOperation) {
-			JvmOperation operation = (JvmOperation) expr.getFeature();
+				&& getFeature(expr) instanceof JvmOperation) {
+			JvmOperation operation = (JvmOperation) getFeature(expr);
 			if (operation.getParameters().size() > 1) {
 				JvmFormalParameter parameter = operation.getParameters().get(0);
 				ITypeArgumentContext context = getFeatureCallTypeArgContext(expr, rawType);
@@ -519,7 +519,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 
 	protected JvmTypeReference _expectedType(final XConstructorCall expr, EReference reference, int index, final boolean rawType) {
 		if (reference == XbasePackage.Literals.XCONSTRUCTOR_CALL__ARGUMENTS) {
-			final JvmConstructor constructor = expr.getConstructor();
+			final JvmConstructor constructor = getConstructor(expr);
 			if (!constructor.eIsProxy()) {
 				ITypeArgumentContext typeArgumentContext = getTypeArgumentContextProvider().getTypeArgumentContext(new TypeArgumentContextProvider.AbstractRequest() {
 					@Override
@@ -789,7 +789,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 	}
 
 	protected JvmTypeReference _type(final XConstructorCall constructorCall, boolean rawType) {
-		final JvmConstructor constructor = constructorCall.getConstructor();
+		final JvmConstructor constructor = getConstructor(constructorCall);
 		if (constructor == null || constructor.eIsProxy())
 			return null;
 		final JvmTypeReference constructorResultType = getTypeForIdentifiable(constructor, rawType);
@@ -957,7 +957,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 	}
 
 	protected JvmTypeReference _type(final XAbstractFeatureCall featureCall, boolean rawType) {
-		final JvmIdentifiableElement feature = featureCall.getFeature();
+		final JvmIdentifiableElement feature = getFeature(featureCall);
 		if (feature == null || feature.eIsProxy())
 			return null;
 		final JvmTypeReference featureType = getTypeForIdentifiable(feature, rawType);
@@ -1192,7 +1192,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 	}
 	
 	protected void _earlyExits(XConstructorCall expr, EarlyExitAcceptor acceptor) {
-		Iterable<JvmTypeReference> thrownExceptions = getThrownExceptionForIdentifiable(expr.getConstructor());
+		Iterable<JvmTypeReference> thrownExceptions = getThrownExceptionForIdentifiable(getConstructor(expr));
 		if (thrownExceptions!=null) {
 			acceptor.appendThrown(thrownExceptions);
 		}
@@ -1200,13 +1200,13 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 	}
 	
 	protected void _earlyExits(XAbstractFeatureCall expr, EarlyExitAcceptor acceptor) {
-		Iterable<JvmTypeReference> thrownExceptions = getThrownExceptionForIdentifiable(expr.getFeature());
+		Iterable<JvmTypeReference> thrownExceptions = getThrownExceptionForIdentifiable(getFeature(expr));
 		if (thrownExceptions!=null) {
 			acceptor.appendThrown(thrownExceptions);
 		}
 		_earlyExits((EObject)expr, acceptor);
 	}
-	
+
 	protected void _earlyExits(XTryCatchFinallyExpression expr, EarlyExitAcceptor acceptor) {
 		EarlyExitAcceptor innerAcceptor = new EarlyExitAcceptor();
 		internalCollectEarlyExits(expr.getExpression(), innerAcceptor);

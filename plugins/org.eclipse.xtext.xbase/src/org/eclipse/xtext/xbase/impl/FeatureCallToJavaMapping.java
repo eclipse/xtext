@@ -16,11 +16,18 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.resource.LinkingAssumptions;
+
+import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Sebastian Zarnekow - Support for linking assumptions
  */
 public class FeatureCallToJavaMapping {
+	
+	@Inject
+	private LinkingAssumptions linkingAssumptions;
 	
 	protected boolean isStaticJavaFeature(JvmIdentifiableElement feature) {
 		if (feature instanceof JvmOperation) {
@@ -30,7 +37,7 @@ public class FeatureCallToJavaMapping {
 	}
 	
 	public XExpression getActualReceiver(XAbstractFeatureCall call) {
-		return getActualReceiver(call, call.getFeature(), call.getImplicitReceiver());
+		return getActualReceiver(call, getFeature(call), getImplicitReceiver(call));
 	}
 
 	public XExpression getActualReceiver(XAbstractFeatureCall featureCall, JvmIdentifiableElement feature, XExpression implicitReceiver) {
@@ -45,8 +52,16 @@ public class FeatureCallToJavaMapping {
 		return allArguments.get(0);
 	}
 	
+	protected JvmIdentifiableElement getFeature(XAbstractFeatureCall expr) {
+		return linkingAssumptions.getFeature(expr, true);
+	}
+	
+	protected XExpression getImplicitReceiver(XAbstractFeatureCall expr) {
+		return linkingAssumptions.getImplicitReceiver(expr);
+	}
+	
 	public List<XExpression> getActualArguments(XAbstractFeatureCall featureCall) {
-		return getActualArguments(featureCall, featureCall.getFeature(), featureCall.getImplicitReceiver());
+		return getActualArguments(featureCall, getFeature(featureCall), getImplicitReceiver(featureCall));
 	}
 	
 	public List<XExpression> getActualArguments(XAbstractFeatureCall featureCall, JvmIdentifiableElement feature, XExpression implicitReceiver) {
@@ -63,10 +78,6 @@ public class FeatureCallToJavaMapping {
 		if (explicitArguments.size()<=1)
 			return emptyList();
 		return newArrayList(explicitArguments.subList(1, explicitArguments.size()));
-	}
-	
-	public boolean isTargetsMemberSyntaxCall(XAbstractFeatureCall featureCall) {
-		return isTargetsMemberSyntaxCall(featureCall, featureCall.getFeature(), featureCall.getImplicitReceiver());
 	}
 	
 	public boolean isTargetsMemberSyntaxCall(XAbstractFeatureCall featureCall, JvmIdentifiableElement feature, XExpression implicitReceiver) {

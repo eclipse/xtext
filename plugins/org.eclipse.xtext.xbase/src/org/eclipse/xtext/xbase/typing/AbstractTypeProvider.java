@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmLowerBound;
@@ -42,9 +43,10 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
+import org.eclipse.xtext.xbase.resource.LinkingAssumptions;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
@@ -70,6 +72,9 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 	
 	@Inject
 	private ILogicalContainerProvider logicalContainerProvider;
+	
+	@Inject
+	private LinkingAssumptions linkingAssumptions;
 	
 	/*
 	 * Don't use #typeReferenceAwareCache since it makes assumptions on the
@@ -279,7 +284,10 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 				@Override
 				protected EObject getAdditional(XExpression expression) {
 					if (expression instanceof XAbstractFeatureCall) {
-						return (EObject) expression.eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
+						return getFeature((XAbstractFeatureCall) expression, false);
+					}
+					if (expression instanceof XConstructorCall) {
+						return getConstructor((XConstructorCall) expression, false);
 					}
 					return super.getAdditional(expression);
 				}
@@ -291,6 +299,22 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 			return handleCyclicGetType(t, rawType);
 		}
 	};
+	
+	protected JvmIdentifiableElement getFeature(XAbstractFeatureCall expr, boolean resolve) {
+		return linkingAssumptions.getFeature(expr, resolve);
+	}
+	
+	protected JvmIdentifiableElement getFeature(XAbstractFeatureCall expr) {
+		return getFeature(expr, true);
+	}
+	
+	protected JvmConstructor getConstructor(XConstructorCall expr, boolean resolve) {
+		return linkingAssumptions.getConstructor(expr, resolve);
+	}
+	
+	protected JvmConstructor getConstructor(XConstructorCall expr) {
+		return getConstructor(expr, true);
+	}
 	
 	protected JvmTypeReference typeDispatcherInvoke(XExpression expression, boolean rawType) {
 		return _type(expression, rawType);
