@@ -561,9 +561,11 @@ public class TypeConformanceComputer {
 		if (superType instanceof JvmWildcardTypeReference)
 			return superType;
 		JvmWildcardTypeReference wildcardTypeReference = factory.createJvmWildcardTypeReference();
-		JvmUpperBound upperBound = factory.createJvmUpperBound();
-		upperBound.setTypeReference((JvmTypeReference) EcoreUtil.copy(superType));
-		wildcardTypeReference.getConstraints().add(upperBound);
+		if (superType != null) {
+			JvmUpperBound upperBound = factory.createJvmUpperBound();
+			upperBound.setTypeReference((JvmTypeReference) EcoreUtil.copy(superType));
+			wildcardTypeReference.getConstraints().add(upperBound);
+		}
 		return wildcardTypeReference;
 	}
 

@@ -446,7 +446,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 			Set<JvmTypeReference> synonymTypes = synonymTypesProvider.getSynonymTypes(receiverType, false);
 			if (!synonymTypes.isEmpty()) {
 				JvmSynonymTypeReference result = factory.createJvmSynonymTypeReference();
-				if (receiverType.eResource() != null) {
+				if (receiverType.eContainer() != null) {
 					JvmDelegateTypeReference delegate = factory.createJvmDelegateTypeReference();
 					delegate.setDelegate(receiverType);
 					result.getReferences().add(delegate);
@@ -576,7 +576,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 				return componentTypeLowerBound;
 			}
 			JvmTypeReference arrayType = null;
-			if (componentTypeLowerBound.eResource() != null) {
+			if (componentTypeLowerBound.eContainer() != null) {
 				JvmDelegateTypeReference delegate = getTypesFactory().createJvmDelegateTypeReference();
 				delegate.setDelegate(componentTypeLowerBound);
 				arrayType = getTypeReferences().createArrayType(delegate);
@@ -870,9 +870,9 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 					object, object.getFormalParameters().size());
 			return result;
 		}
-		JvmTypeReference expectedRawType = getExpectedType(object, true);
 		JvmOperation singleMethod = null;
 		JvmTypeReference returnType = null;
+		JvmTypeReference expectedRawType = getExpectedType(object, true);
 		if (expectedRawType != null) {
 			singleMethod = closures.findImplementingOperation(expectedRawType, object.eResource());
 		}
@@ -972,7 +972,6 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 		}
 		// method was either already called with rawType==false or the featureType points directly to a JvmTypeParameter
 		rawType = false; // inlined below
-		// TODO #isResolved has to check against the nearest parameter declarator
 		ITypeArgumentContext context = getTypeArgumentContext(
 				featureCall, 
 				featureCall2javaMapping.getActualArguments(featureCall),
