@@ -16,6 +16,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmExecutable;
@@ -44,6 +45,8 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping;
+import org.eclipse.xtext.xbase.resource.LinkingAssumptions;
+import org.eclipse.xtext.xbase.resource.XbaseResource;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IValidatedEObjectDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.LocalVarDescription;
@@ -51,6 +54,7 @@ import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * <p>
@@ -89,6 +93,9 @@ public class FeatureCallChecker {
 	@Inject
 	private IRawTypeHelper rawTypeHelper;
 	
+	@Inject
+	private LinkingAssumptions linkingAssumptions;
+	
 	public void setTypeProvider(ITypeProvider typeProvider) {
 		this.typeProvider = typeProvider;
 	}
@@ -108,23 +115,32 @@ public class FeatureCallChecker {
 	public boolean checkWithGenerics(IEObjectDescription input) {
 		boolean result = false;
 		if (input instanceof JvmFeatureDescription) {
-			JvmFeatureDescription featureDescription = (JvmFeatureDescription) input;
+			final JvmFeatureDescription featureDescription = (JvmFeatureDescription) input;
 			if (!featureDescription.isIntenseChecked()) {
-				ITypeArgumentContext typeContext = featureDescription.getGenericTypeContext();
-				if (typeContext != null) {
-					if (context instanceof XAbstractFeatureCall && input.getEObjectOrProxy() instanceof JvmExecutable) {
-						JvmExecutable executable = (JvmExecutable) input.getEObjectOrProxy();
-						List<XExpression> actualArguments = featureCall2JavaMapping.getActualArguments(
-								(XAbstractFeatureCall) context, 
-								executable,
-								featureDescription.getImplicitReceiver());
-						result = checkWithGenerics(featureDescription, executable, actualArguments, typeContext);
-					} else if (context instanceof XConstructorCall && featureDescription.getEObjectOrProxy() instanceof JvmConstructor) {
-						List<XExpression> arguments = ((XConstructorCall) context).getArguments();
-						result = checkWithGenerics(featureDescription, (JvmExecutable) featureDescription.getEObjectOrProxy(), arguments, typeContext);
+				Provider<Boolean> validator = new Provider<Boolean>() {
+					public Boolean get() {
+						Boolean result = Boolean.FALSE;
+						ITypeArgumentContext typeContext = featureDescription.getGenericTypeContext();
+						if (typeContext != null) {
+							if (context instanceof XAbstractFeatureCall
+									&& featureDescription.getEObjectOrProxy() instanceof JvmExecutable) {
+								JvmExecutable executable = (JvmExecutable) featureDescription.getEObjectOrProxy();
+								List<XExpression> actualArguments = featureCall2JavaMapping.getActualArguments(
+										(XAbstractFeatureCall) context, executable,
+										featureDescription.getImplicitReceiver());
+								result = checkWithGenerics(featureDescription, executable, actualArguments, typeContext);
+							} else if (context instanceof XConstructorCall
+									&& featureDescription.getEObjectOrProxy() instanceof JvmConstructor) {
+								List<XExpression> arguments = ((XConstructorCall) context).getArguments();
+								result = checkWithGenerics(featureDescription,
+										(JvmExecutable) featureDescription.getEObjectOrProxy(), arguments, typeContext);
+							}
+						}
+						featureDescription.setIntenseChecked(true);
+						return result;
 					}
-				}
-				featureDescription.setIntenseChecked(true);
+				};
+				result = doCheck(featureDescription, validator);
 			}
 		}
 		return result;
@@ -145,26 +161,53 @@ public class FeatureCallChecker {
 		return result;
 	}
 	
-	public String check(IEObjectDescription input) {
+	public String check(final IEObjectDescription input) {
 		if (input instanceof IValidatedEObjectDescription) {
-			final IValidatedEObjectDescription validatedDescription = (IValidatedEObjectDescription) input;
-			JvmIdentifiableElement identifiable = validatedDescription.getEObjectOrProxy();
-			if (identifiable.eIsProxy())
-				identifiable = (JvmIdentifiableElement) EcoreUtil.resolve(identifiable, context);
-			String issueCode;
-			if (identifiable.eIsProxy())
-				issueCode = UNRESOLVABLE_PROXY;
-			else if (!validatedDescription.isValid()) {
-				if (Strings.isEmpty(validatedDescription.getIssueCode()))
-					issueCode = FEATURE_NOT_VISIBLE;
-				else
-					return validatedDescription.getIssueCode();
-			} else
-				issueCode = dispatcher.invoke(identifiable, context, reference, validatedDescription);
-			validatedDescription.setIssueCode(issueCode);
-			return issueCode;
+			Provider<String> validator = new Provider<String>() {
+				public String get() {
+					final IValidatedEObjectDescription validatedDescription = (IValidatedEObjectDescription) input;
+					JvmIdentifiableElement identifiable = validatedDescription.getEObjectOrProxy();
+					if (identifiable.eIsProxy())
+						identifiable = (JvmIdentifiableElement) EcoreUtil.resolve(identifiable, context);
+					String issueCode;
+					if (identifiable.eIsProxy())
+						issueCode = UNRESOLVABLE_PROXY;
+					else if (!validatedDescription.isValid()) {
+						if (Strings.isEmpty(validatedDescription.getIssueCode()))
+							issueCode = FEATURE_NOT_VISIBLE;
+						else
+							return validatedDescription.getIssueCode();
+					} else
+						issueCode = dispatcher.invoke(identifiable, context, reference, validatedDescription);
+					validatedDescription.setIssueCode(issueCode);
+					return issueCode;
+				}
+			};
+			return doCheck((IValidatedEObjectDescription)input, validator);
 		}
 		return null;
+	}
+
+	protected <T> T doCheck(final IValidatedEObjectDescription input, Provider<T> validator) {
+		Resource resource = context.eResource();
+		if (resource instanceof XbaseResource) {
+			JvmIdentifiableElement proxy = (JvmIdentifiableElement) context.eGet(reference, false);
+			XAbstractFeatureCall featureCall = null;
+			XExpression implicitReceiver = null;
+			if (context instanceof XAbstractFeatureCall) {
+				featureCall = (XAbstractFeatureCall) context;
+			}
+			if (input instanceof JvmFeatureDescription) {
+				implicitReceiver = ((JvmFeatureDescription) input).getImplicitReceiver();
+			}
+			T result = linkingAssumptions.assumeLinkedAndRun(
+					resource, 
+					linkingAssumptions.createAssumption(proxy, input.getEObjectOrProxy(), featureCall, implicitReceiver), 
+					validator);
+			return result;
+		} else {
+			return validator.get();
+		}
 	}
 
 	protected String _case(Object input, Object context, EReference ref, IValidatedEObjectDescription description) {
