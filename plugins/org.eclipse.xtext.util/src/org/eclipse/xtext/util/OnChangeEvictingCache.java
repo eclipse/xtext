@@ -27,6 +27,7 @@ import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Sebastian Zarnekow
  */
 public class OnChangeEvictingCache implements IResourceScopeCache {
 	
@@ -92,6 +93,22 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 			cacheAdapter.setIgnoreNotifications(wasIgnoreNotifications);
 		}
 	}
+	
+	/**
+	 * @since 2.1
+	 */
+	public <Result, Param extends Resource> Result execWithoutCaching(Param resource, IUnitOfWork<Result, Param> transaction) throws WrappedException {
+		CacheAdapter cacheAdapter = getOrCreate(resource);
+		boolean wasIgnoreNewValues = cacheAdapter.isIgnoreNewValues();
+		try {
+			cacheAdapter.setIgnoreNewValues(true);
+			return transaction.exec(resource);
+		} catch (Exception e) {
+			throw new WrappedException(e);
+		} finally {
+			cacheAdapter.setIgnoreNewValues(wasIgnoreNewValues);
+		}
+	}
 
 	public static class CacheAdapter extends EContentAdapter {
 		
@@ -103,6 +120,8 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		
 		private volatile boolean ignoreNotifications = false;
 		
+		private volatile boolean ignoreNewValues = false;
+		
 		private volatile boolean empty = true;
 		
 		private Resource resource;
@@ -111,6 +130,8 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		private int hits = 0;
 
 		public void set(Object name, Object value) {
+			if (ignoreNewValues)
+				return;
 			empty = false;
 			if (value != null)
 				this.values.put(name, value);
@@ -192,6 +213,20 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 
 		public boolean isIgnoreNotifications() {
 			return ignoreNotifications;
+		}
+		
+		/**
+		 * @since 2.1
+		 */
+		public boolean isIgnoreNewValues() {
+			return ignoreNewValues;
+		}
+		
+		/**
+		 * @since 2.1
+		 */
+		public void setIgnoreNewValues(boolean ignoreNewValues) {
+			this.ignoreNewValues = ignoreNewValues;
 		}
 		
 		@Override
