@@ -423,11 +423,6 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 	}
 
 	protected CyclicHandlingSupport<JvmIdentifiableElement> getTypeForIdentifiable = new CyclicHandlingSupport<JvmIdentifiableElement>() {
-
-		{
-			doCache = false;
-		}
-		
 		@Override
 		protected JvmTypeReference doComputation(JvmIdentifiableElement t, boolean rawType) {
 			return typeForIdentifiableDispatcherInvoke(t, rawType);
@@ -592,8 +587,6 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 			}
 		};
 		
-		protected boolean doCache = true;
-
 		protected ComputationData<T> getTypeComputations(boolean rawType) {
 			ThreadLocal<ComputationData<T>> computations = rawType ? ongoingRawTypeComputations : ongoingComputations;
 			ComputationData<T> result = computations.get();
@@ -608,7 +601,7 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 			ComputationData<T> computationData = getTypeComputations(rawType);
 			if (computationData.add(t)) {
 				try {
-					if (doCache && computationData.resource == t.eResource() && !computationData.resourceLeftOrCyclic) {
+					if (computationData.resource == t.eResource() && !computationData.resourceLeftOrCyclic) {
 						Triple<CyclicHandlingSupport<T>, ImmutableLinkedItem, Boolean> cacheKey = Tuples.create(this, computationData.queryState, rawType);
 						final boolean[] hit = new boolean[] { true };
 						JvmTypeReference result = typeReferenceAwareCache.get(cacheKey, computationData.resource, new Provider<JvmTypeReference>(){
