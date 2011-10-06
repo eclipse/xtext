@@ -864,17 +864,17 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 //		return result;
 	}
 
-	protected JvmTypeReference _type(XClosure object, boolean rawType) {
+	protected JvmTypeReference _type(final XClosure object, final boolean rawType) {
 		if (rawType) {
 			JvmParameterizedTypeReference result = closures.createRawFunctionTypeRef(
 					object, object.getFormalParameters().size());
 			return result;
 		}
-		JvmTypeReference expectedType = getExpectedType(object, rawType);
+		JvmTypeReference expectedRawType = getExpectedType(object, true);
 		JvmOperation singleMethod = null;
 		JvmTypeReference returnType = null;
-		if (expectedType != null) {
-			singleMethod = closures.findImplementingOperation(expectedType, object.eResource());
+		if (expectedRawType != null) {
+			singleMethod = closures.findImplementingOperation(expectedRawType, object.eResource());
 		}
 		returnType = getCommonReturnType(object.getExpression(), true);
 		if (returnType instanceof JvmAnyTypeReference) {
@@ -894,7 +894,12 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 		// inferred argument types?
 		if (!params.isEmpty() && singleMethod != null) {
 			ITypeArgumentContext context = getTypeArgumentContextProvider().getTypeArgumentContext(
-					new TypeArgumentContextProvider.ReceiverRequest(expectedType));
+					new TypeArgumentContextProvider.AbstractRequest() {
+						@Override
+						public JvmTypeReference getReceiverType() {
+							return XbaseTypeProvider.this.getExpectedType(object, rawType);
+						}
+					});
 			for (int i = 0; i < params.size(); i++) {
 				JvmTypeReference resultParam = parameterTypes.get(i);
 				if (resultParam == null) {
