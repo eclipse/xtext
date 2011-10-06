@@ -45,7 +45,7 @@ public class XbaseResource extends DerivedStateAwareResource {
 			final XAbstractFeatureCall featureCall, 
 			final XExpression implicitReceiver,
 			final Provider<T> algorithm) {
-		return onChangeEvictingCache.execWithoutCaching(this, new IUnitOfWork<T, XbaseResource>() {
+		return onChangeEvictingCache.execWithTemporaryCaching(this, new IUnitOfWork<T, XbaseResource>() {
 			public T exec(XbaseResource state) throws Exception {
 				try {
 					if (proxyToAssumption.put(proxy, candidate) != null)
