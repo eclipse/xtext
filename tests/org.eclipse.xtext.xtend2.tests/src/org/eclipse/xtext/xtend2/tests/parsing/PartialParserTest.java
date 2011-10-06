@@ -362,6 +362,33 @@ public class PartialParserTest extends AbstractXtend2TestCase {
 		validateWithoutException(resource);
 	}
 	
+	public void testEqualModels_05() throws Exception {
+		String model =
+				"package org.eclipse.xtext.xtend2.tests.smoke\n" + 
+				"\n" + 
+				"import org.eclipse.emf.ecore.EClass\n" + 
+				"import org.eclipse.emf.ecore.EPackage\n" + 
+				"import org.eclipse.emf.ecore.EStructuralFeature\n" + 
+				"import org.eclipse.emf.ecore.EObject\n" + 
+				"\n" + 
+				"class Case_6 {\n" + 
+				"\n" + 
+				"	def dispatch transform(EClass model) {\n" + 
+				"		model.ETypeParameters.map(e|transform(e))\n" + 
+				"	}\n" + 
+				"	 \n" + 
+				"	def dispatch transform(EPackage packageDecl) {\n" + 
+				"		packageDecl.eContents.map(e | transform(e as EStructuralFeature))\n" + 
+				"	}\n" + 
+				"	\n" + 
+				"	def dispatch transform(EStructuralFeature entity) {\n" + 
+				"		val inferredType = null\n" + 
+				"		newArrayList";
+		XtextResource resource = doTestUpdateAtOffset(model, 526, 0, "(i", "Case_6.xtend");
+		compareWithNewResource(resource, model + "(", 527, 1, "i", "Case_6.xtend");
+		validateWithoutException(resource);
+	}
+	
 	public void testInferredModelRemoved() throws Exception {
 		String model =
 				"package org.eclipse.xtext.xtend2.tests.smoke\n" + 
@@ -445,7 +472,7 @@ public class PartialParserTest extends AbstractXtend2TestCase {
 				for(int j = 0; j < resource.getContents().size(); j++) {
 					assertEquals(EmfFormatter.objToStr(newResource.getContents().get(j)), EmfFormatter.objToStr(resource.getContents().get(j)));
 				}
-				fail();
+				fail("EmfFormatter printed same string but EcoreUtil#equals returned false ...");
 			}
 		}
 		assertEqualNodes(newResource, resource);
