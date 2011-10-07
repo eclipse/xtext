@@ -11,11 +11,13 @@ import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.validation.EarlyExitValidator;
+import org.eclipse.xtext.xtend2.compiler.Xtend2Compiler;
 import org.eclipse.xtext.xtend2.compiler.Xtend2OutputConfigurationProvider;
 import org.eclipse.xtext.xtend2.conversion.Xtend2ValueConverterService;
 import org.eclipse.xtext.xtend2.featurecalls.Xtend2IdentifiableSimpleNameProvider;
@@ -88,6 +90,10 @@ public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2
 	@Override
 	public Class<? extends EObjectAtOffsetHelper> bindEObjectAtOffsetHelper() {
 		return XtendEObjectAtOffsetHelper.class;
+	}
+	
+	public Class<? extends XbaseCompiler> bindXbaseCompiler() {
+		return Xtend2Compiler.class; 
 	}
 	
 	public Class<? extends OutputConfigurationProvider> bindOutputConfigurationProvider() {

@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.tests.compiler;
 
-import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -16,14 +15,16 @@ import junit.framework.Assert;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.junit.util.ParseHelper;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.eclipse.xtext.xbase.lib.Functions;
-import org.eclipse.xtext.xtend2.compiler.Xtend2Compiler;
+import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
@@ -47,7 +48,10 @@ public class CompilerTestHelper {
 	private ValidationTestHelper validationHelper;
 	
 	@Inject
-	private Xtend2Compiler xtend2Compiler;
+	private JvmModelGenerator generator;
+
+	@Inject
+	private IXtend2JvmAssociations associations;
 	
 	public void setUp() {
 		javaCompiler.addClassPathOfClass(getClass());
@@ -115,15 +119,15 @@ public class CompilerTestHelper {
 	}
 
 	protected String compileToJavaCode(String xtendCode) {
-		StringWriter appandable = new StringWriter();
 		try {
 			final String text = "package foo class Test { def Object foo() {" + xtendCode + "} }";
 			final XtendFile file = parseHelper.parse(text);
 			validationHelper.assertNoErrors(file);
-			xtend2Compiler.compile(file, appandable);
+			JvmGenericType inferredType = associations.getInferredType(file.getXtendClass());
+			StringConcatenation javaCode = generator.generateType(inferredType);
+			return javaCode.toString();
 		} catch (Exception e) {
 			throw new RuntimeException("Xtend compilation failed for: " + xtendCode, e);
 		}
-		return appandable.toString();
 	}
 }

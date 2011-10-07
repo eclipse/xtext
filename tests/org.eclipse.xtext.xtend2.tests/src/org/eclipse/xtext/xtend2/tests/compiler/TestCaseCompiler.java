@@ -7,8 +7,11 @@ import java.io.IOException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xtend2.Xtend2StandaloneSetup;
-import org.eclipse.xtext.xtend2.compiler.Xtend2Compiler;
+import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
+import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 
 import com.google.inject.Injector;
@@ -46,8 +49,12 @@ public class TestCaseCompiler {
 		final File file = new File(to);
 		createFolders(file);
 		FileWriter writer = new FileWriter(file);
-		Xtend2Compiler compiler = injector.getInstance(Xtend2Compiler.class);
-		compiler.compile((XtendFile)res.getContents().get(0), writer);
+		IXtend2JvmAssociations associations = injector.getInstance(IXtend2JvmAssociations.class);
+		JvmModelGenerator generator = injector.getInstance(JvmModelGenerator.class);
+		XtendFile xtendFile = (XtendFile)res.getContents().get(0);
+		JvmGenericType inferredType = associations.getInferredType(xtendFile.getXtendClass());
+		StringConcatenation javaCode = generator.generateType(inferredType);
+		writer.append(javaCode);
 		writer.close();
 		System.out.println("compiled " + from + " to " + to);
 	}
