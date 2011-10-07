@@ -9,13 +9,17 @@ package org.eclipse.xtext.xbase.compiler;
 
 import java.util.List;
 
+import org.eclipse.xtext.common.types.JvmType;
+
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public interface IAppendable {
 
-	IAppendable append(Object obj);
+	IAppendable append(String string);
+
+	IAppendable append(JvmType type);
 
 	IAppendable increaseIndentation();
 

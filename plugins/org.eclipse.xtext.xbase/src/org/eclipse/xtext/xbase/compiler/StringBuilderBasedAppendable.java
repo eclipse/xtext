@@ -1,4 +1,5 @@
 /*******************************************************************************
+
  * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -16,7 +17,6 @@ import java.util.Set;
 import java.util.Stack;
 
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 
 public class StringBuilderBasedAppendable implements IAppendable {
 
@@ -24,20 +24,15 @@ public class StringBuilderBasedAppendable implements IAppendable {
 	private int indentationlevel = 0;
 	private String indentation = "  ";
 	private ImportManager importManager;
-	
-	public IAppendable append(Object obj) {
-		if (obj instanceof Later) {
-			throw new IllegalArgumentException("Later cannot be appended. Call exec on it.");
-		}
-		if (obj instanceof JvmTypeReference) {
-			appendTypeRef((JvmTypeReference)obj);
-		} else if (obj instanceof JvmType) {
-			appendType((JvmType)obj);
-		} else {
-			String string = String.valueOf(obj);
-			String replaced = string.replace("\n", getIndentationString());
-			builder.append(replaced);
-		}
+
+	public IAppendable append(JvmType type) {
+		appendType(type);
+		return this;
+	}
+
+	public IAppendable append(String string) {
+		String replaced = string.replace("\n", getIndentationString());
+		builder.append(replaced);
 		return this;
 	}
 
@@ -69,19 +64,19 @@ public class StringBuilderBasedAppendable implements IAppendable {
 
 	private Stack<Map<Object, String>> localVars = new Stack<Map<Object, String>>();
 	private Stack<Set<String>> usedNamesInScope = new Stack<Set<String>>();
-	
-	public StringBuilderBasedAppendable(ImportManager typeSerializer, String indentation){
+
+	public StringBuilderBasedAppendable(ImportManager typeSerializer, String indentation) {
 		this.importManager = typeSerializer;
 		this.indentation = indentation;
 		openScope();
 	}
-	
-	public StringBuilderBasedAppendable(ImportManager typeSerializer){
+
+	public StringBuilderBasedAppendable(ImportManager typeSerializer) {
 		this.importManager = typeSerializer;
 		openScope();
 	}
-	
-	public StringBuilderBasedAppendable(){
+
+	public StringBuilderBasedAppendable() {
 		this(new ImportManager(false));
 	}
 
@@ -100,7 +95,7 @@ public class StringBuilderBasedAppendable implements IAppendable {
 		names.add(newName);
 		return newName;
 	}
-	
+
 	protected String findNewName(Set<String> names, String proposedName) {
 		if (names.contains(proposedName)) {
 			for (int i = 1; i < Integer.MAX_VALUE; i++) {
@@ -116,25 +111,26 @@ public class StringBuilderBasedAppendable implements IAppendable {
 		if (localVars.isEmpty())
 			throw new IllegalStateException("No local scope has been opened.");
 		int size = localVars.size();
-		int i = size-1;
-		while (i>=0) {
+		int i = size - 1;
+		while (i >= 0) {
 			Map<Object, String> currentScope = localVars.get(i--);
 			final String string = currentScope.get(key);
-			if (string !=null)
+			if (string != null)
 				return string;
 		}
 		return null;
 	}
+
 	public Object getObject(String name) {
 		if (name == null)
 			throw new NullPointerException("name");
 		if (localVars.isEmpty())
 			throw new IllegalStateException("No local scope has been opened.");
 		int size = localVars.size();
-		int i = size-1;
-		while (i>=0) {
+		int i = size - 1;
+		while (i >= 0) {
 			Map<Object, String> currentScope = localVars.get(i--);
-			for (Entry<Object,String> entry : currentScope.entrySet()) {
+			for (Entry<Object, String> entry : currentScope.entrySet()) {
 				if (name.equals(entry.getValue()))
 					return entry.getKey();
 			}
@@ -147,10 +143,6 @@ public class StringBuilderBasedAppendable implements IAppendable {
 			throw new IllegalStateException("No local scope has been opened.");
 		localVars.pop();
 		usedNamesInScope.pop();
-	}
-	
-	protected void appendTypeRef(JvmTypeReference typeRef) {
-		importManager.appendTypeRef(typeRef, builder);
 	}
 
 	protected void appendType(final JvmType type) {

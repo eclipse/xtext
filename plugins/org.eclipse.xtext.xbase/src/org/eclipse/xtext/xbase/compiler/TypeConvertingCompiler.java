@@ -185,7 +185,8 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		serialize(listType, context, appendable);
 		appendable.append(")");
 		JvmTypeReference conversions = getTypeReferences().getTypeForName(Conversions.class, context);
-		appendable.append(conversions).append(".unwrapArray(");
+		serialize(conversions, context, appendable);
+		appendable.append(".unwrapArray(");
 		expression.exec();
 		appendable.append("))");
 	}

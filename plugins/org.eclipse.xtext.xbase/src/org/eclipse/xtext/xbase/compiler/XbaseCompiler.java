@@ -412,7 +412,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 					internalToJavaExpression(casePart.getCase(), b);
 				} else {
 					JvmTypeReference typeRef = getTypeReferences().getTypeForName(ObjectExtensions.class, expr);
-					b.append(typeRef).append(".operator_equals(").append(variableName).append(",");
+					serialize(typeRef, casePart, b);
+					b.append(".operator_equals(").append(variableName).append(",");
 					internalToJavaExpression(casePart.getCase(), b);
 					b.append(")");
 				}

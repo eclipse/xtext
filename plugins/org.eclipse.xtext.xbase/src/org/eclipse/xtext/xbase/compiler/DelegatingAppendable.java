@@ -9,6 +9,8 @@ package org.eclipse.xtext.xbase.compiler;
 
 import java.util.List;
 
+import org.eclipse.xtext.common.types.JvmType;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
@@ -20,8 +22,13 @@ public class DelegatingAppendable implements IAppendable {
 		this.appendable = appendable;
 	}
 
-	public IAppendable append(Object obj) {
-		appendable = appendable.append(obj);
+	public IAppendable append(String string) {
+		appendable = appendable.append(string);
+		return this;
+	}
+
+	public IAppendable append(JvmType type) {
+		appendable = appendable.append(type);
 		return this;
 	}
 

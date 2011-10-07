@@ -23,7 +23,7 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 
 	public void _toJavaExpression(XStringLiteral expr, IAppendable b) {
 		String javaString = Strings.convertToJavaString(expr.getValue());
-		b.append('"').append(javaString).append('"');
+		b.append("\"").append(javaString).append("\"");
 	}
 	
 	public void _toJavaStatement(XStringLiteral expr, IAppendable b, boolean isReferenced) {
@@ -39,7 +39,7 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 	}
 
 	public void _toJavaExpression(XIntLiteral expr, IAppendable b) {
-		b.append(expr.getValue());
+		b.append(Integer.toString(expr.getValue()));
 	}
 	
 	public void _toJavaStatement(XIntLiteral expr, IAppendable b, boolean isReferenced) {
@@ -55,7 +55,7 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 	}
 
 	public void _toJavaExpression(XBooleanLiteral expr, IAppendable b) {
-		b.append(expr.isIsTrue());
+		b.append(Boolean.toString(expr.isIsTrue()));
 	}
 	
 	public void _toJavaStatement(XBooleanLiteral expr, IAppendable b, boolean isReferenced) {
