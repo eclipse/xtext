@@ -845,13 +845,15 @@ public class JvmModelGenerator implements IGenerator {
         EList<JvmTypeReference> _values_1 = it.getValues();
         JvmTypeReference _head = IterableExtensions.<JvmTypeReference>head(_values_1);
         String _serialize = this.serialize(_head, importManager);
-        _builder.append(_serialize, "");} else {
+        _builder.append(_serialize, "");
+        _builder.append(".class");} else {
         _builder.append("{");
         EList<JvmTypeReference> _values_2 = it.getValues();
         final Function1<JvmTypeReference,String> _function = new Function1<JvmTypeReference,String>() {
             public String apply(final JvmTypeReference t) {
               String _serialize = JvmModelGenerator.this.serialize(t, importManager);
-              return _serialize;
+              String _operator_plus = StringExtensions.operator_plus(_serialize, ".class");
+              return _operator_plus;
             }
           };
         List<String> _map = ListExtensions.<JvmTypeReference, String>map(_values_2, _function);
@@ -903,7 +905,7 @@ public class JvmModelGenerator implements IGenerator {
           matched=true;
           EList<Object> _values_1 = it.getValues();
           Object _head = IterableExtensions.<Object>head(_values_1);
-          this.compiler.toJavaStatement(((XExpression) _head), appendable, false);
+          this.compiler.toJavaExpression(((XExpression) _head), appendable);
         }
       }
       if (!matched) {
@@ -911,7 +913,7 @@ public class JvmModelGenerator implements IGenerator {
           appendable.append("{");
           EList<Object> _values_2 = it.getValues();
           Object _head_1 = IterableExtensions.<Object>head(_values_2);
-          this.compiler.toJavaStatement(((XExpression) _head_1), appendable, false);
+          this.compiler.toJavaExpression(((XExpression) _head_1), appendable);
           EList<Object> _values_3 = it.getValues();
           Iterable<Object> _tail = IterableExtensions.<Object>tail(_values_3);
           Iterable<XExpression> _filter = IterableExtensions.<XExpression>filter(_tail, org.eclipse.xtext.xbase.XExpression.class);
@@ -919,7 +921,7 @@ public class JvmModelGenerator implements IGenerator {
               public Void apply(final XExpression value) {
                 {
                   appendable.append(",");
-                  JvmModelGenerator.this.compiler.toJavaStatement(value, appendable, false);
+                  JvmModelGenerator.this.compiler.toJavaExpression(value, appendable);
                 }
                 return null;
               }
