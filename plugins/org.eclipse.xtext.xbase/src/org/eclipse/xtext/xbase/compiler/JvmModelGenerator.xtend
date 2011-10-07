@@ -222,7 +222,7 @@ class JvmModelGenerator implements IGenerator {
 		'''«IF values.size==1»"«values.head»"«ELSE»{«values.map(s | '"'+s+'"').join(',')»}«ENDIF»'''
 		
 	def dispatch toJavaLiteral(JvmTypeAnnotationValue it, ImportManager importManager) 
-		'''«IF values.size==1»«values.head.serialize(importManager)»«ELSE»{«values.map(t | t.serialize(importManager)).join(',')»}«ENDIF»'''
+		'''«IF values.size==1»«values.head.serialize(importManager)».class«ELSE»{«values.map(t | t.serialize(importManager) + ".class").join(',')»}«ENDIF»'''
 		
 	def dispatch toJavaLiteral(JvmBooleanAnnotationValue it, ImportManager importManager) 
 		'''«IF values.size==1»«values.head»«ELSE»{«values.join(',')»}«ENDIF»'''
@@ -231,11 +231,11 @@ class JvmModelGenerator implements IGenerator {
 		val appendable = createAppendable(it, importManager)
 		switch (values.size) {
 			case 0: appendable.append("{}")
-			case 1: compiler.toJavaStatement(values.head as XExpression, appendable, false)
+			case 1: compiler.toJavaExpression(values.head as XExpression, appendable)
 			default: {
 				appendable.append('{')
-				compiler.toJavaStatement(values.head as XExpression, appendable, false)
-				values.tail.filter(typeof(XExpression)).map(value | { appendable.append(",") compiler.toJavaStatement(value, appendable, false) })
+				compiler.toJavaExpression(values.head as XExpression, appendable)
+				values.tail.filter(typeof(XExpression)).map(value | { appendable.append(",") compiler.toJavaExpression(value, appendable) })
 				appendable.append('}')
 			}
 		}			
