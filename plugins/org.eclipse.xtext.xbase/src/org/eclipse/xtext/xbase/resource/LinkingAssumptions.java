@@ -22,6 +22,26 @@ import com.google.inject.Provider;
  */
 public class LinkingAssumptions {
 
+	public static interface Tracker {
+		
+		boolean isIndependentOfAssumptions();
+		
+		void stopTracking();
+		
+	}
+	
+	private static class NullTracker implements Tracker {
+
+		public boolean isIndependentOfAssumptions() {
+			return true;
+		}
+
+		public void stopTracking() {
+			// ignore
+		}
+		
+	}
+	
 	public static class Assumption {
 		private final JvmIdentifiableElement proxy;
 		private final JvmIdentifiableElement candidate;
@@ -39,6 +59,13 @@ public class LinkingAssumptions {
 			this.featureCall = featureCall;
 			this.implicitReceiver = implicitReceiver;
 		}
+	}
+	
+	public Tracker trackAssumptions(Resource resource) {
+		if (resource instanceof XbaseResource) {
+			return ((XbaseResource) resource).trackAssumptions();
+		}
+		return new NullTracker();
 	}
 	
 	public Assumption createAssumption(JvmIdentifiableElement proxy, JvmIdentifiableElement candidate,

@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
+import org.eclipse.xtext.common.types.JvmCompoundTypeReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -33,6 +34,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
+import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
@@ -47,6 +49,7 @@ import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.resource.LinkingAssumptions;
+import org.eclipse.xtext.xbase.resource.LinkingAssumptions.Tracker;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
@@ -139,18 +142,20 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		
 		@Override
 		public <T> T get(Object key, Resource resource, Provider<T> provider) {
-			if(resource == null) {
+			if(resource == null || resource instanceof TypeResource) {
 				return provider.get();
 			}
 			CacheAdapter adapter = getOrCreate(resource);
 			T element = adapter.<T>get(key);
 			if (element==null) {
 				cacheMiss(adapter);
+				Tracker tracker = linkingAssumptions.trackAssumptions(resource);
 				element = provider.get();
+				tracker.stopTracking();
 				boolean rawType = (Boolean) ((Triple<?, ?, ?>) key).getThird();
 				//TODO the test for 'Void' is a hack and a result of the lack of a protocol for unresolved references 
 				// I.e. some type computations return Void instead when they couldn't compute a certain type.
-				if (element==null || (element instanceof JvmTypeReference && (isOrContainsVoid((JvmTypeReference)element) || !isResolved((JvmTypeReference) element, null, rawType)))) {
+				if (!tracker.isIndependentOfAssumptions() || element==null || (element instanceof JvmTypeReference && (isOrContainsVoid((JvmTypeReference)element) || !isResolved((JvmTypeReference) element, null, rawType)))) {
 					if (logger.isDebugEnabled()) {
 						logger.debug(getDebugIndentation(rawType) + "cache skip: " + element);
 					}
@@ -183,6 +188,13 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 	protected boolean isResolved(JvmTypeReference reference, JvmTypeParameterDeclarator declarator, boolean rawType, boolean allowAnyType, Set<JvmTypeReference> visited) {
 		if (reference == null || reference instanceof JvmParameterizedTypeReference && reference.getType() == null || !visited.add(reference))
 			return false;
+		if (reference instanceof JvmCompoundTypeReference) {
+			for(JvmTypeReference component: ((JvmCompoundTypeReference) reference).getReferences()) {
+				if (!isResolved(component, declarator, rawType, allowAnyType, visited))
+					return false;
+			}
+			return true;
+		}
 		if (reference.getType() instanceof JvmTypeParameter) {
 			if (isDeclaratorOf(declarator, (JvmTypeParameter) reference.getType()))
 				return true;

@@ -233,10 +233,9 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 		}
 	}
 	
-	protected JvmTypeReference _expectedType(XAssignment assignment, EReference reference, int index, boolean rawType) {
+	protected JvmTypeReference _expectedType(final XAssignment assignment, EReference reference, int index, final boolean rawType) {
 		if (reference == XbasePackage.Literals.XASSIGNMENT__VALUE) {
 			JvmIdentifiableElement feature = getFeature(assignment);
-			JvmTypeReference receiverType = getReceiverType(assignment, rawType);
 			if (feature instanceof JvmOperation) {
 				JvmOperation operation = (JvmOperation) feature;
 				XExpression expression = getExpression(assignment, reference, index);
@@ -254,7 +253,12 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 				if (rawType)
 					return type;
 				ITypeArgumentContext context = getTypeArgumentContextProvider().getTypeArgumentContext(
-						new TypeArgumentContextProvider.ReceiverRequest(receiverType));
+						new TypeArgumentContextProvider.AbstractRequest() {
+							@Override
+							public JvmTypeReference getReceiverType() {
+								return XbaseTypeProvider.this.getReceiverType(assignment, rawType);
+							}
+						});
 				return context.getLowerBound(type);
 			}
 		}
@@ -342,10 +346,12 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 	@Override
 	protected JvmTypeReference handleCycleGetExpectedType(XExpression expression, boolean rawType) {
 		Triple<EObject, EReference, Integer> info = getContainingInfo(expression);
-		EObject container = info.getFirst();
-		if (container instanceof XAbstractFeatureCall) {
-			JvmTypeReference result = expectedTypeDispatcherInvoke(container, info.getSecond(), info.getThird(), rawType);
-			return result;
+		if (info != null) {
+			EObject container = info.getFirst();
+			if (container instanceof XAbstractFeatureCall) {
+				JvmTypeReference result = expectedTypeDispatcherInvoke(container, info.getSecond(), info.getThird(), rawType);
+				return result;
+			}
 		}
 		return super.handleCycleGetExpectedType(expression, rawType);
 	}
@@ -675,14 +681,14 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 					return expectedReturnType;
 				}
 			}
-			return getTypeReferences().getTypeForName(Object.class, expr);
+			return getTypeReferences().getTypeForName(Object.class, expr); // TODO ???
 		}
 		return null; // no expectations!
 	}
 
 	protected JvmTypeReference _expectedType(XSwitchExpression expr, EReference reference, int index, boolean rawType) {
 		if (reference == XbasePackage.Literals.XSWITCH_EXPRESSION__SWITCH) {
-			return null; // no expectations
+			return null; // no expectations // TODO should we expect Object?
 		}
 		return getExpectedType(expr, rawType);
 	}

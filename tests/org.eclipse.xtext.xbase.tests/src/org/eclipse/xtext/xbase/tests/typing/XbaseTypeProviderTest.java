@@ -270,6 +270,21 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 		assertResolvedType("java.util.List<java.lang.Boolean>", "newArrayList('').map(s|s.length + 1 == 5).map(b| { !b } )");
 	}
 	
+	public void testFeatureCall_23() throws Exception {
+		assertResolvedType("java.util.List<java.lang.Boolean>", "newArrayList('').map(s|s.length + 1 == 5).map(b| { b.operator_not } )");
+	}
+	
+	public void testFeatureCall_24() throws Exception {
+		assertResolvedType("java.util.List<java.lang.Boolean>", "newArrayList('').map(s|" +
+				"org::eclipse::xtext::xbase::lib::ObjectExtensions::operator_equals(" +
+				"	org::eclipse::xtext::xbase::lib::IntegerExtensions::operator_plus(s.length,1), 5)" +
+				").map(b| org::eclipse::xtext::xbase::lib::BooleanExtensions::operator_not(b) )");
+	}
+	
+	public void testFeatureCall_25() throws Exception {
+		assertResolvedType("java.util.List<java.lang.Integer>", "newArrayList('').map(s|s.length + 1 * 5).map(b| b / 5 )");
+	}
+	
 	public void testFeatureCall_Bug342134_01() throws Exception {
 		assertResolvedType("java.lang.Iterable<java.lang.String>", "newArrayList('').map(e|newArrayList(e)).flatten");
 	}
