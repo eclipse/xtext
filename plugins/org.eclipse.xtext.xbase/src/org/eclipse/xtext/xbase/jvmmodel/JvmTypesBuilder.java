@@ -22,6 +22,7 @@ import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue;
+import org.eclipse.xtext.common.types.JvmCustomAnnotationValue;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -200,10 +201,18 @@ public class JvmTypesBuilder {
 		throw new IllegalArgumentException();
 	}
 	
-	public void body(final JvmOperation op, Functions.Function1<ImportManager, ? extends CharSequence> strategy) {
+	public void body(JvmOperation op, Functions.Function1<ImportManager, ? extends CharSequence> strategy) {
+		addCompilationStrategy(op, strategy);
+	}
+	
+	public void initialization(JvmField field, Functions.Function1<ImportManager, ? extends CharSequence> strategy) {
+		addCompilationStrategy(field, strategy);
+	}
+	
+	protected void addCompilationStrategy( JvmMember member, Functions.Function1<ImportManager, ? extends CharSequence> strategy) {
 		CompilationStrategyAdapter adapter = new CompilationStrategyAdapter();
 		adapter.setCompilationStrategy(strategy);
-		op.eAdapters().add(adapter);
+		member.eAdapters().add(adapter);		
 	}
 	
 	public JvmTypeReference newTypeRef(EObject ctx, Class<?> clazz, JvmTypeReference ...typeArgs) {
@@ -277,7 +286,7 @@ public class JvmTypesBuilder {
 					public void appendValue(JvmAnnotationValue value, XExpression expr) {
 						JvmAnnotationAnnotationValue annotationValue = (JvmAnnotationAnnotationValue) value;
 						JvmAnnotationReference annotationReference = getJvmAnnotationReference((XAnnotation) expr);
-						annotationValue.getValues().add(annotationReference);
+						annotationValue.getAnnotations().add(annotationReference);
 					}
 				});
 				translators.put(XbasePackage.Literals.XSTRING_LITERAL, new AnnotationValueTranslator() {
@@ -320,6 +329,15 @@ public class JvmTypesBuilder {
 					public void appendValue(JvmAnnotationValue value, XExpression expr) {
 						JvmIntAnnotationValue annotationValue = (JvmIntAnnotationValue) value;
 						annotationValue.getValues().add(((XIntLiteral) expr).getValue());
+					}
+				});
+				translators.put(XbasePackage.Literals.XFEATURE_CALL, new AnnotationValueTranslator() {
+					public JvmAnnotationValue createValue(XExpression expr) {
+						return TypesFactory.eINSTANCE.createJvmCustomAnnotationValue();
+					}
+					public void appendValue(JvmAnnotationValue value, XExpression expr) {
+						JvmCustomAnnotationValue annotationValue = (JvmCustomAnnotationValue) value;
+						annotationValue.getValues().add(expr);
 					}
 				});
 			}

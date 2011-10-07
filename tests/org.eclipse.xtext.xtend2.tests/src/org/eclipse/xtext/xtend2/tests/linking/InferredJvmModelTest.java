@@ -511,14 +511,19 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		JvmGenericType inferredType = getInferredType(xtendFile);
 		XtendClass xtendClass = xtendFile.getXtendClass();
 		EList<JvmMember> jvmMembers = inferredType.getMembers();
-		assertEquals(3, jvmMembers.size());
+		assertEquals(4, jvmMembers.size());
 		JvmMember jvmMember = jvmMembers.get(1);
 		assertTrue(jvmMember instanceof JvmOperation);
 		XtendFunction xtendFunction = (XtendFunction) xtendClass.getMembers().get(0);
 		assertEquals(xtendFunction.getName(), jvmMember.getSimpleName());
 		assertEquals("java.util.ArrayList<java.lang.String>", ((JvmOperation) jvmMember).getReturnType().getIdentifier());
 		
-		JvmOperation privateInitializer = (JvmOperation) jvmMembers.get(2);
+		JvmField cacheVar = (JvmField) jvmMembers.get(2);
+		assertEquals("_createCache_" + xtendFunction.getName(), cacheVar.getSimpleName());
+		assertEquals(JvmVisibility.PRIVATE, cacheVar.getVisibility());
+		assertEquals("java.util.HashMap<java.util.ArrayList<?>,java.util.ArrayList<java.lang.String>>", cacheVar.getType().getIdentifier());
+		
+		JvmOperation privateInitializer = (JvmOperation) jvmMembers.get(3);
 		assertEquals("_init_"+xtendFunction.getName(), privateInitializer.getSimpleName());
 		assertEquals("java.util.ArrayList<java.lang.String>", privateInitializer.getParameters().get(0).getParameterType().getIdentifier());
 		assertEquals("java.lang.String", privateInitializer.getParameters().get(1).getParameterType().getIdentifier());
