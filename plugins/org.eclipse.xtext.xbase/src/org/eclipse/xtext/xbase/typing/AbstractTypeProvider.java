@@ -40,7 +40,6 @@ import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
-import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
@@ -102,14 +101,12 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 	protected static final class ImmutableLinkedItem {
 		
 		protected final EObject object;
-		protected final EObject additional;
 		protected final ImmutableLinkedItem prev;
 		protected final int hashCode;
 		protected final int size;
 		
-		public ImmutableLinkedItem(EObject object, EObject additional, ImmutableLinkedItem immutableStack) {
+		public ImmutableLinkedItem(EObject object, ImmutableLinkedItem immutableStack) {
 			this.object = object;
-			this.additional = additional;
 			prev = immutableStack;
 			size = immutableStack == null ? 1 : immutableStack.size + 1;
 			if (prev != null) {
@@ -128,7 +125,7 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 			if (obj.hashCode() != hashCode() || obj.getClass() != ImmutableLinkedItem.class)
 				return false;
 			ImmutableLinkedItem other = (ImmutableLinkedItem) obj;
-			return other.object == object && other.additional == additional && other.size == size && (other.prev == prev || prev != null && prev.equals(other.prev));
+			return other.object == object && other.size == size && (other.prev == prev || prev != null && prev.equals(other.prev));
 		}
 		
 		@Override
@@ -292,18 +289,7 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		
 		@Override
 		protected AbstractTypeProvider.ComputationData<XExpression> createComputationData() {
-			return new ComputationData<XExpression>() {
-				@Override
-				protected EObject getAdditional(XExpression expression) {
-					if (expression instanceof XAbstractFeatureCall) {
-						return getFeature((XAbstractFeatureCall) expression, false);
-					}
-					if (expression instanceof XConstructorCall) {
-						return getConstructor((XConstructorCall) expression, false);
-					}
-					return super.getAdditional(expression);
-				}
-			};
+			return new ComputationData<XExpression>();
 		}
 
 		@Override
@@ -551,29 +537,24 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 	}
 
 	protected static class ComputationData<T extends EObject> {
-		protected final Set<Pair<T, EObject>> computations = Sets.newHashSet();
+		protected final Set<T> computations = Sets.newHashSet();
 		protected ImmutableLinkedItem queryState = null;
 		protected Resource resource;
 		protected boolean resourceLeftOrCyclic;
 		
 		protected boolean add(T t) {
-			EObject additionalKey = getAdditional(t);
-			boolean result = computations.add(Tuples.create(t, additionalKey));
+			boolean result = computations.add(t);
 			if (result) {
 				if (queryState == null) {
 					resource = t.eResource();
 				}
-				queryState = new ImmutableLinkedItem(t, additionalKey, queryState);
+				queryState = new ImmutableLinkedItem(t, queryState);
 			}
 			return result;
 		}
 		
-		protected EObject getAdditional(T t) {
-			return null;
-		}
-
 		protected void remove(T t) {
-			computations.remove(Tuples.create(t, queryState.additional));
+			computations.remove(t);
 			queryState = queryState.prev;
 			if (queryState == null)
 				resource = null;
