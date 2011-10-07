@@ -11,7 +11,6 @@ import static com.google.common.collect.Lists.*;
 import static java.util.Collections.*;
 
 import java.io.IOException;
-import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -25,14 +24,17 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.junit.util.ParseHelper;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.compiler.Xtend2Compiler;
+import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
@@ -1903,6 +1905,12 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	@Inject
 	protected Xtend2Compiler compiler;
 
+	@Inject
+	protected JvmModelGenerator generator;
+	
+	@Inject
+	private IXtend2JvmAssociations associations;
+	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -1979,16 +1987,15 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	}
 
 	protected String compileToJavaCode(String xtendCode) {
-		StringWriter appandable = new StringWriter();
 		try {
-			final XtendFile file = parseHelper.parse(xtendCode);
-			assertNotNull(file);
+			XtendFile file = parseHelper.parse(xtendCode);
 			validationHelper.assertNoErrors(file);
-			compiler.compile(file, appandable);
-		} catch (Exception e) {
-			throw new RuntimeException("Xtend compilation failed", e);
+			JvmGenericType inferredType = associations.getInferredType(file.getXtendClass());
+			StringConcatenation javaCode = generator.generateType(inferredType);
+			return javaCode.toString();
+		} catch (Exception exc) {
+			throw new RuntimeException("Xtend compilation failed:\n" + xtendCode, exc);
 		}
-		return appandable.toString();
 	}
 
 }

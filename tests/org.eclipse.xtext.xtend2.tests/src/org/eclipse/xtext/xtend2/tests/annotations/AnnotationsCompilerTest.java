@@ -7,21 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.tests.annotations;
 
-import java.io.StringWriter;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.junit.util.ParseHelper;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.eclipse.xtext.xtend2.compiler.Xtend2Compiler;
+import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
@@ -123,9 +124,9 @@ public class AnnotationsCompilerTest extends AbstractXtend2TestCase {
 	protected Class<?> compileToClass(final String text) throws Exception {
 		XtendFile file = parseHelper.parse(text);
 		validationHelper.assertNoErrors(file);
-		StringWriter w = new StringWriter();
-		compiler.compile(file, w);
-		Class<?> class1 = javaCompiler.compileToClass("Foo", w.toString());
+		JvmGenericType inferredType = associations.getInferredType(file.getXtendClass());
+		StringConcatenation javaCode = generator.generateType(inferredType);
+		Class<?> class1 = javaCompiler.compileToClass("Foo", javaCode.toString());
 		return class1;
 	}
 	
@@ -139,8 +140,11 @@ public class AnnotationsCompilerTest extends AbstractXtend2TestCase {
 	private ValidationTestHelper validationHelper;
 	
 	@Inject
-	private Xtend2Compiler compiler;
-
+	private IXtend2JvmAssociations associations;
+	
+	@Inject
+	private JvmModelGenerator generator;
+	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
