@@ -1895,13 +1895,13 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	private EclipseRuntimeDependentJavaCompiler javaCompiler;
 
 	@Inject
-	private ParseHelper<XtendFile> parseHelper;
+	protected ParseHelper<XtendFile> parseHelper;
 
 	@Inject
-	private ValidationTestHelper validationHelper;
+	protected ValidationTestHelper validationHelper;
 	
 	@Inject
-	private Xtend2Compiler compiler;
+	protected Xtend2Compiler compiler;
 
 	@Override
 	protected void setUp() throws Exception {

@@ -8,9 +8,12 @@
 package org.eclipse.xtext.xtend2.jvmmodel;
 
 import static com.google.common.collect.Iterables.*;
+import static org.eclipse.xtext.EcoreUtil2.*;
 import static org.eclipse.xtext.util.Strings.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -18,7 +21,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
+import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
@@ -28,6 +32,7 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmStringAnnotationValue;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
@@ -45,6 +50,7 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
+import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xtend2.dispatch.DispatchingSupport;
 import org.eclipse.xtext.xtend2.resource.Xtend2Resource;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
@@ -79,7 +85,13 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 
 	@Inject
 	private TypeReferences typeReferences;
+	
+	@Inject 
+	private Xtend2CompileStrategies compileStrategies;
 
+	@Inject
+	private JvmTypesBuilder jvmTypesBuilder;
+	
 	public void infer(EObject xtendFile, IAcceptor<JvmDeclaredType> acceptor, boolean prelinkingPhase) {
 		if (!(xtendFile instanceof XtendFile))
 			throw new IllegalArgumentException("expected XtendFile but was " + xtendFile);
@@ -98,13 +110,20 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 		target.setSimpleName(source.getName());
 		target.setVisibility(JvmVisibility.PUBLIC);
 		if (!prelinkingPhase) {
+			JvmAnnotationReference suppressWarnings = typesFactory.createJvmAnnotationReference();
+			JvmAnnotationType annotation = (JvmAnnotationType) typeReferences.findDeclaredType(SuppressWarnings.class, source);
+			suppressWarnings.setAnnotation(annotation);
+			JvmStringAnnotationValue annotationValue = typesFactory.createJvmStringAnnotationValue();
+			annotationValue.getValues().add("all");
+			suppressWarnings.getValues().add(annotationValue);
+			target.getAnnotations().add(suppressWarnings);
 			addConstructor(source, target);
 			if (source.getSuperTypes().isEmpty()) {
 				JvmTypeReference typeRefToObject = typeReferences.getTypeForName(Object.class, source);
 				target.getSuperTypes().add(typeRefToObject);
 			} else {
 				for (JvmTypeReference superType : source.getSuperTypes()) {
-					target.getSuperTypes().add(EcoreUtil2.cloneWithProxies(superType));
+					target.getSuperTypes().add(cloneWithProxies(superType));
 				}
 			}
 			copyAndFixTypeParameters(source.getTypeParameters(), target);
@@ -116,13 +135,14 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			}
 			appendSyntheticDispatchMethods(source, target);
 			computeInferredReturnTypes(target);
+			jvmTypesBuilder.translateAnnotationsTo(source.getAnnotations(), target);
 		}
 		return target;
 	}
 
 	protected void copyAndFixTypeParameters(List<JvmTypeParameter> typeParameters, JvmTypeParameterDeclarator target) {
 		for (JvmTypeParameter typeParameter : typeParameters) {
-			final JvmTypeParameter clonedTypeParameter = EcoreUtil2.cloneWithProxies(typeParameter);
+			final JvmTypeParameter clonedTypeParameter = cloneWithProxies(typeParameter);
 			target.getTypeParameters().add(clonedTypeParameter);
 			boolean upperBoundSeen = false;
 			for(JvmTypeConstraint constraint: clonedTypeParameter.getConstraints()) {
@@ -154,11 +174,11 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 	/**
 	 * @return a {@link JvmOperation} with common denominator argument types of all given operations
 	 */
-	protected JvmOperation deriveGenericDispatchOperationSignature(Collection<JvmOperation> operations,
+	protected JvmOperation deriveGenericDispatchOperationSignature(List<JvmOperation> sortedOperations,
 			JvmGenericType target) {
-		if (operations.isEmpty())
+		if (sortedOperations.isEmpty())
 			return null;
-		final Iterator<JvmOperation> iterator = operations.iterator();
+		final Iterator<JvmOperation> iterator = sortedOperations.iterator();
 		JvmOperation first = iterator.next();
 		JvmOperation result = typesFactory.createJvmOperation();
 		target.getMembers().add(result);
@@ -169,7 +189,8 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			JvmFormalParameter parameter2 = first.getParameters().get(i);
 			parameter.setName(parameter2.getName());
 		}
-		for (JvmOperation jvmOperation : operations) {
+		jvmTypesBuilder.body(result, compileStrategies.forDispatcher(result, sortedOperations));
+		for (JvmOperation jvmOperation : sortedOperations) {
 			Iterable<XtendFunction> xtendFunctions = filter(associations.getSourceElements(jvmOperation),
 					XtendFunction.class);
 			for (XtendFunction func : xtendFunctions) {
@@ -189,77 +210,96 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 
 	protected JvmMember transform(XtendMember sourceMember, JvmGenericType container) {
 		if (sourceMember instanceof XtendFunction) {
-			XtendFunction source = (XtendFunction) sourceMember;
-			JvmOperation target = typesFactory.createJvmOperation();
-			container.getMembers().add(target);
-			associator.associatePrimary(source, target);
-			if (source.getCreateExtensionInfo() != null) {
-				JvmOperation initializer = typesFactory.createJvmOperation();
-				container.getMembers().add(initializer);
-				initializer.setSimpleName("_init_" + source.getName());
-				initializer.setVisibility(JvmVisibility.PRIVATE);
-				initializer.setReturnType(typeReferences.getTypeForName(Void.TYPE, sourceMember));
-
-				// the first parameter is the created object
-				JvmFormalParameter jvmParam = typesFactory.createJvmFormalParameter();
-				jvmParam.setName(source.getCreateExtensionInfo().getName());
-				jvmParam.setParameterType(getTypeProxy(source.getCreateExtensionInfo().getCreateExpression()));
-				initializer.getParameters().add(jvmParam);
-				associator.associate(source.getCreateExtensionInfo(), jvmParam);
-
-				// add all others
-				for (XtendParameter parameter : source.getParameters()) {
-					jvmParam = typesFactory.createJvmFormalParameter();
-					jvmParam.setName(parameter.getName());
-					jvmParam.setParameterType(EcoreUtil2.cloneWithProxies(parameter.getParameterType()));
-					initializer.getParameters().add(jvmParam);
-					associator.associate(parameter, jvmParam);
-				}
-				associator.associate(source, initializer);
-				associator.associateLogicalContainer(((XtendFunction) sourceMember).getCreateExtensionInfo()
-						.getCreateExpression(), target);
-				associator.associateLogicalContainer(((XtendFunction) sourceMember).getExpression(), initializer);
-			} else {
-				associator.associateLogicalContainer(((XtendFunction) sourceMember).getExpression(), target);
-			}
-			String sourceName = source.getName();
-			JvmVisibility visibility = JvmVisibility.PUBLIC;
-			if (source.isDispatch()) {
-				sourceName = "_" + sourceName;
-				visibility = JvmVisibility.PROTECTED;
-			}
-			target.setSimpleName(sourceName);
-			target.setVisibility(visibility);
-			for (XtendParameter parameter : source.getParameters()) {
-				JvmFormalParameter jvmParam = typesFactory.createJvmFormalParameter();
-				jvmParam.setName(parameter.getName());
-				jvmParam.setParameterType(EcoreUtil2.cloneWithProxies(parameter.getParameterType()));
-				target.getParameters().add(jvmParam);
-				associator.associate(parameter, jvmParam);
-			}
-			if (source.getReturnType() != null) {
-				target.setReturnType(EcoreUtil2.cloneWithProxies(source.getReturnType()));
-			} else {
-				target.setReturnType(getTypeProxy(target));
-			}
-			copyAndFixTypeParameters(source.getTypeParameters(), target);
-			return target;
+			return transform((XtendFunction) sourceMember, container);
 		} else if (sourceMember instanceof XtendField) {
-			XtendField dep = (XtendField) sourceMember;
-			if ((dep.isExtension() || dep.getName() != null) && dep.getType() != null) {
-				JvmField field = typesFactory.createJvmField();
-				final String fieldName = computeFieldName(dep, container);
-				field.setSimpleName(fieldName);
-				container.getMembers().add(field);
-				associator.associatePrimary(dep, field);
-				field.setVisibility(JvmVisibility.PRIVATE);
-				field.setType(EcoreUtil2.cloneWithProxies(dep.getType()));
-				return field;
-			} else {
-				return null;
-			}
+			return transform((XtendField) sourceMember, container);
 		}
 		throw new IllegalArgumentException("Cannot transform " + notNull(sourceMember) + " to a JvmMember");
+	}
+
+	protected JvmMember transform(XtendFunction source, JvmGenericType container) {
+		JvmOperation target = typesFactory.createJvmOperation();
+		container.getMembers().add(target);
+		associator.associatePrimary(source, target);
+		String sourceName = source.getName();
+		JvmVisibility visibility = JvmVisibility.PUBLIC;
+		if (source.isDispatch()) {
+			sourceName = "_" + sourceName;
+			visibility = JvmVisibility.PROTECTED;
+		}
+		target.setSimpleName(sourceName);
+		target.setVisibility(visibility);
+		for (XtendParameter parameter : source.getParameters()) {
+			JvmFormalParameter jvmParam = typesFactory.createJvmFormalParameter();
+			jvmParam.setName(parameter.getName());
+			jvmParam.setParameterType(cloneWithProxies(parameter.getParameterType()));
+			target.getParameters().add(jvmParam);
+			associator.associate(parameter, jvmParam);
+		}
+		JvmTypeReference returnType = null;
+		if (source.getReturnType() != null) {
+			returnType = cloneWithProxies(source.getReturnType());
+		} else {
+			returnType = getTypeProxy(target);
+		}
+		target.setReturnType(returnType);
+		copyAndFixTypeParameters(source.getTypeParameters(), target);
+		jvmTypesBuilder.translateAnnotationsTo(source.getAnnotationInfo().getAnnotations(), target);
+		if (source.getCreateExtensionInfo() != null) {
+			jvmTypesBuilder.body(target, compileStrategies.forCacheMethod(source));
+			
+			JvmTypeReference arrayList = typeReferences.getTypeForName(ArrayList.class, container, typeReferences.wildCard());
+			JvmTypeReference hashMap = typeReferences.getTypeForName(HashMap.class, container, arrayList, cloneWithProxies(returnType));
+			JvmField cacheVar = jvmTypesBuilder.toField(source, "_createCache_" + source.getName(), hashMap);
+			cacheVar.setFinal(true);
+			jvmTypesBuilder.initialization(cacheVar, compileStrategies.forCacheVariable(container));
+			container.getMembers().add(cacheVar);
+			
+			JvmOperation initializer = typesFactory.createJvmOperation();
+			container.getMembers().add(initializer);
+			initializer.setSimpleName("_init_" + source.getName());
+			initializer.setVisibility(JvmVisibility.PRIVATE);
+			initializer.setReturnType(typeReferences.getTypeForName(Void.TYPE, source));
+
+			// the first parameter is the created object
+			JvmFormalParameter jvmParam = typesFactory.createJvmFormalParameter();
+			jvmParam.setName(source.getCreateExtensionInfo().getName());
+			jvmParam.setParameterType(getTypeProxy(source.getCreateExtensionInfo().getCreateExpression()));
+			initializer.getParameters().add(jvmParam);
+			associator.associate(source.getCreateExtensionInfo(), jvmParam);
+
+			// add all others
+			for (XtendParameter parameter : source.getParameters()) {
+				jvmParam = typesFactory.createJvmFormalParameter();
+				jvmParam.setName(parameter.getName());
+				jvmParam.setParameterType(cloneWithProxies(parameter.getParameterType()));
+				initializer.getParameters().add(jvmParam);
+				associator.associate(parameter, jvmParam);
+			}
+			associator.associate(source, initializer);
+			associator.associateLogicalContainer(source.getCreateExtensionInfo()
+					.getCreateExpression(), target);
+			associator.associateLogicalContainer(source.getExpression(), initializer);
+		} else {
+			associator.associateLogicalContainer(source.getExpression(), target);
+		}
+		return target;
+	}
+
+	protected JvmMember transform(XtendField source, JvmGenericType container) {
+		if ((source.isExtension() || source.getName() != null) && source.getType() != null) {
+			JvmField field = typesFactory.createJvmField();
+			final String fieldName = computeFieldName(source, container);
+			field.setSimpleName(fieldName);
+			container.getMembers().add(field);
+			associator.associatePrimary(source, field);
+			field.setVisibility(JvmVisibility.PRIVATE);
+			field.setType(cloneWithProxies(source.getType()));
+			jvmTypesBuilder.translateAnnotationsTo(source.getAnnotationInfo().getAnnotations(), field);
+			return field;
+		} else {
+			return null;
+		}
 	}
 
 	protected String computeFieldName(XtendField field, JvmGenericType declaringType) {
