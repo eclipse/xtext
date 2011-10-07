@@ -1374,6 +1374,12 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo(Boolean.FALSE, "(if (false) new Double('-20') else new Integer('10')) < 0");
 	}
 	
+	@Test public void testMemberCallOnMultiType_09() throws Exception {
+		assertEvaluatesTo(
+				Integer.valueOf(20), 
+				"{ val Object o = newArrayList(if (false) new Double('-20') else new Integer('20')).map(v|v.intValue).head o }");
+	}
+	
 	@Test public void testBug343144_01() throws Exception {
 		assertEvaluatesTo(Integer.valueOf(3), 
 			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)])");
