@@ -144,12 +144,14 @@ public class AnnotationCompiler {
   
   protected void _generate(final XBooleanLiteral booleanLiteral, final IAppendable a) {
     boolean _isIsTrue = booleanLiteral.isIsTrue();
-    a.append(((Boolean)_isIsTrue));
+    String _string = ((Boolean)_isIsTrue).toString();
+    a.append(_string);
   }
   
   protected void _generate(final XIntLiteral intLiteral, final IAppendable a) {
     int _value = intLiteral.getValue();
-    a.append(((Integer)_value));
+    String _string = ((Integer)_value).toString();
+    a.append(_string);
   }
   
   protected void _generate(final XTypeLiteral typeLiteral, final IAppendable a) {

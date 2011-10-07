@@ -80,11 +80,11 @@ class AnnotationCompiler {
 	}
 	
 	def dispatch void generate(XBooleanLiteral booleanLiteral, IAppendable a) {
-		a.append(booleanLiteral.isTrue)
+		a.append(booleanLiteral.isTrue.toString)
 	}
 	
 	def dispatch void generate(XIntLiteral intLiteral, IAppendable a) {
-		a.append(intLiteral.value)
+		a.append(intLiteral.value.toString)
 	}
 	
 	def dispatch void generate(XTypeLiteral typeLiteral, IAppendable a) {

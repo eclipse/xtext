@@ -13,24 +13,15 @@ import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmArrayType;
-import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVoid;
-import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -52,57 +43,10 @@ public class ImportManager {
 		this.seedSimpleName = seedSimpleName;
 	}
 	
-	public CharSequence serialize(JvmTypeReference typeRef) {
-		StringBuilder sb = new StringBuilder();
-		appendTypeRef(typeRef, sb);
-		return sb;
-	}
-	
 	public CharSequence serialize(JvmType type) {
 		StringBuilder sb = new StringBuilder();
 		appendType(type, sb);
 		return sb;
-	}
-	
-	public void appendTypeRef(JvmTypeReference typeRef, StringBuilder builder) {
-		if (typeRef instanceof JvmParameterizedTypeReference) {
-			final JvmType type = typeRef.getType();
-			appendType(type, builder);
-			EList<JvmTypeReference> arguments = ((JvmParameterizedTypeReference) typeRef).getArguments();
-			if (!arguments.isEmpty()) {
-				builder.append("<");
-				Iterator<JvmTypeReference> iterator = arguments.iterator();
-				while (iterator.hasNext()) {
-					JvmTypeReference jvmTypeReference = iterator.next();
-					appendTypeRef(jvmTypeReference, builder);
-					if (iterator.hasNext())
-						builder.append(",");
-				}
-				builder.append(">");
-			}
-		} else if (typeRef instanceof JvmWildcardTypeReference) {
-			builder.append("?");
-			Iterator<JvmTypeConstraint> iterator = ((JvmWildcardTypeReference) typeRef).getConstraints().iterator();
-			while (iterator.hasNext()) {
-				JvmTypeConstraint constraint = iterator.next();
-				if (constraint instanceof JvmUpperBound) {
-					builder.append(" extends ");
-				} else {
-					builder.append(" super ");
-				}
-				appendTypeRef(constraint.getTypeReference(), builder);
-				if (iterator.hasNext())
-					builder.append(" & ");
-			}
-		} else if (typeRef instanceof JvmGenericArrayTypeReference) {
-			JvmGenericArrayTypeReference reference = (JvmGenericArrayTypeReference) typeRef;
-			appendTypeRef(reference.getComponentType(), builder);
-			builder.append("[]");
-		} else if (typeRef instanceof JvmAnyTypeReference) {
-			appendType(typeRef.getType(), builder);
-		} else {
-			throw new IllegalArgumentException(typeRef==null ? null : typeRef.toString());
-		}
 	}
 	
 	private Pattern JAVA_LANG_PACK = Pattern.compile("java\\.lang\\.[\\w]+");

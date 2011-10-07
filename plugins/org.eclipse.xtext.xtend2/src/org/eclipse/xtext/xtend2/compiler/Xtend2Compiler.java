@@ -359,7 +359,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 		appendable.append("\n}").closeScope();
 	}
 
-	protected Object getJavaVisibility(JvmVisibility visibility) {
+	protected String getJavaVisibility(JvmVisibility visibility) {
 		switch (visibility) {
 			case PUBLIC : return "public";
 			case PROTECTED : return "protected";

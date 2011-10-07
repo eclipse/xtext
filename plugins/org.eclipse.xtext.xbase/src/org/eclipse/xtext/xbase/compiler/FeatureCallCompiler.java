@@ -112,7 +112,8 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 		toJavaExpression(leftOperand, b);
 		b.append(") {").increaseIndentation();
-		b.append("\n").append(b.getName(binaryOperation)).append(" = ").append(binaryOperation.getConcreteSyntaxFeatureName().equals(expressionHelper.getOrOperator())).append(";");
+		boolean rightOperand = binaryOperation.getConcreteSyntaxFeatureName().equals(expressionHelper.getOrOperator());
+		b.append("\n").append(b.getName(binaryOperation)).append(" = ").append(Boolean.toString(rightOperand)).append(";");
 		
 		b.decreaseIndentation().append("\n} else {").increaseIndentation();
 		
