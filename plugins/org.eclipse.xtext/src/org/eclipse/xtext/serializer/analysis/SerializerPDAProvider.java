@@ -92,7 +92,11 @@ public class SerializerPDAProvider implements ISerializerPDAProvider {
 						result.add(null);
 				} else if (actionCtx == ele)
 					result.add(null);
-				else if (!GrammarUtil.isAssignedAction(ele))
+				else if (ele instanceof Action) {
+					Action a = (Action) ele;
+					if (a.getFeature() == null && a.getType().getClassifier() == type)
+						result.add(ele);
+				} else
 					result.add(ele);
 			return result;
 		}
