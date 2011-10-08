@@ -45,12 +45,12 @@ public class ContextProvider implements IContextProvider {
 				types.add((EClass) ((Action) state.getGrammarElement()).getType().getClassifier());
 				return;
 			}
-			if (state.isEndState() && !GrammarUtil.isUnassignedEObjectRuleCall(state.getGrammarElement())) {
-				if (hasAssignment)
-					types.add((EClass) GrammarUtil.containingRule(state.getGrammarElement()).getType().getClassifier());
-				else
-					types.add(null);
-			}
+		}
+		if (state.isEndState() && !GrammarUtil.isUnassignedEObjectRuleCall(state.getGrammarElement())) {
+			if (hasAssignment)
+				types.add((EClass) GrammarUtil.containingRule(state.getGrammarElement()).getType().getClassifier());
+			else
+				types.add(null);
 		}
 		if (!visited.add(state))
 			return;

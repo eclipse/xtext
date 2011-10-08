@@ -249,6 +249,16 @@ public class NfaUtil {
 		});
 	}
 
+	public <S> void removeOrphans(Nfa<S> nfa) {
+		Map<S, Integer> distances = distanceToFinalStateMap(nfa);
+		for (S s : collect(nfa)) {
+			Iterator<S> i = nfa.getFollowers(s).iterator();
+			while (i.hasNext())
+				if (!distances.containsKey(i.next()))
+					i.remove();
+		}
+	}
+
 	public <S> Map<S, Integer> distanceToStateMap(Nfa<S> nfa, Predicate<S> matches) {
 		return distanceFromStateMap(inverse(nfa), matches);
 	}

@@ -24,9 +24,15 @@ import com.google.inject.ImplementedBy;
 public interface ISerializerPDAProvider {
 
 	public interface ISerState {
+		List<? extends ISerState> getFollowers();
+		
 		AbstractElement getGrammarElement();
 
-		List<? extends ISerState> getFollowers();
+		SerStateType getType();
+	}
+
+	public enum SerStateType {
+		ELEMENT, POP, PUSH, START, STOP;
 	}
 
 	Pda<? extends ISerState, RuleCall> getPDA(EObject context, EClass type);

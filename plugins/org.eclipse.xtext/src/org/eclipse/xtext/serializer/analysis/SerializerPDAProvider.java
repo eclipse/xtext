@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer.analysis;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -16,9 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
-import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.impl.CfgAdapter;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
@@ -35,7 +34,6 @@ import org.eclipse.xtext.util.formallang.Production;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
@@ -45,15 +43,27 @@ import com.google.inject.Singleton;
 public class SerializerPDAProvider implements ISerializerPDAProvider {
 
 	protected static class SerializerCfg extends CfgAdapter {
-		public SerializerCfg(Grammar grammar) {
-			super(grammar);
+		protected EObject context;
+
+		public SerializerCfg(EObject context) {
+			super(GrammarUtil.getGrammar(context));
+			this.context = context;
+		}
+
+		@Override
+		public AbstractElement getRoot() {
+			if (context instanceof AbstractRule)
+				return ((AbstractRule) context).getAlternatives();
+			if (context instanceof Action)
+				return GrammarUtil.containingRule(context).getAlternatives();
+			return super.getRoot();
 		}
 
 		@Override
 		public AbstractElement getCall(AbstractElement ele) {
-			if (ele instanceof RuleCall && GrammarUtil.isAssigned(ele)
+			if (ele instanceof RuleCall && !GrammarUtil.isAssigned(ele)
 					&& ((RuleCall) ele).getRule().getType().getClassifier() instanceof EClass)
-				return ele;
+				return ((RuleCall) ele).getRule().getAlternatives();
 			return null;
 		}
 	}
@@ -77,7 +87,8 @@ public class SerializerPDAProvider implements ISerializerPDAProvider {
 			Set<AbstractElement> result = Sets.newLinkedHashSet();
 			for (AbstractElement ele : super.getFollowers(element))
 				if (ele == null) {
-					if (actionCtx == null)
+					if (actionCtx == null
+							|| (GrammarUtil.containingRule(actionCtx) != GrammarUtil.containingRule(element)))
 						result.add(null);
 				} else if (actionCtx == ele)
 					result.add(null);
@@ -94,27 +105,35 @@ public class SerializerPDAProvider implements ISerializerPDAProvider {
 					result.add(act);
 			for (AbstractElement ele : super.getStarts(root))
 				if (ele == null) {
-					if (actionCtx == null)
+					if (actionCtx == null
+							|| (GrammarUtil.containingRule(actionCtx) != GrammarUtil.containingRule(root)))
 						result.add(null);
 				} else if (actionCtx == ele) {
 					result.add(null);
 				} else if (!GrammarUtil.isAssignedAction(ele)
-						&& getType(ele, Sets.<AbstractElement> newHashSet()) != false)
+						&& typeMatches(ele, Sets.<AbstractElement> newHashSet()) != Boolean.FALSE)
 					result.add(ele);
 			return result;
 		}
 
-		protected Boolean getType(AbstractElement ele, Set<AbstractElement> visited) {
+		protected Boolean typeMatches(AbstractElement ele, Set<AbstractElement> visited) {
 			if (!visited.add(ele))
 				return null;
 			if (ele instanceof Action)
 				return ((Action) ele).getType().getClassifier() == type;
 			if (GrammarUtil.isAssigned(ele))
 				return GrammarUtil.containingRule(ele).getType().getClassifier() == type;
+			boolean allFalse = true;
 			for (AbstractElement f : super.getFollowers(ele))
-				if (f != null && getType(ele, visited) == true)
-					return true;
-			return null;
+				if (f != null) {
+					Boolean r = typeMatches(f, visited);
+					if (r == Boolean.TRUE)
+						return true;
+					if (r == null)
+						allFalse = false;
+				} else
+					allFalse = false;
+			return allFalse ? false : null;
 		}
 	}
 
@@ -141,11 +160,11 @@ public class SerializerPDAProvider implements ISerializerPDAProvider {
 		}
 
 		public RuleCall getPop(SerializerPDAState state) {
-			return state.pop;
+			return state.type == SerStateType.POP ? (RuleCall) state.grammarElement : null;
 		}
 
 		public RuleCall getPush(SerializerPDAState state) {
-			return state.push;
+			return state.type == SerStateType.PUSH ? (RuleCall) state.grammarElement : null;
 		}
 
 		public SerializerPDAState getStart() {
@@ -177,19 +196,21 @@ public class SerializerPDAProvider implements ISerializerPDAProvider {
 			PdaFactory<SerializerPDA, SerializerPDAState, RuleCall, AbstractElement> {
 
 		public SerializerPDA create(AbstractElement start, AbstractElement stop) {
-			return new SerializerPDA(new SerializerPDAState(start), new SerializerPDAState(stop));
+			SerializerPDAState s1 = new SerializerPDAState(start, SerStateType.START);
+			SerializerPDAState s2 = new SerializerPDAState(stop, SerStateType.STOP);
+			return new SerializerPDA(s1, s2);
 		}
 
 		public SerializerPDAState createPop(SerializerPDA pda, AbstractElement token) {
-			return new SerializerPDAState(token, (RuleCall) token, null);
+			return new SerializerPDAState(token, SerStateType.POP);
 		}
 
 		public SerializerPDAState createPush(SerializerPDA pda, AbstractElement token) {
-			return new SerializerPDAState(token, null, (RuleCall) token);
+			return new SerializerPDAState(token, SerStateType.PUSH);
 		}
 
 		public SerializerPDAState createState(SerializerPDA nfa, AbstractElement token) {
-			return new SerializerPDAState(token);
+			return new SerializerPDAState(token, SerStateType.ELEMENT);
 		}
 
 		public void setFollowers(SerializerPDA nfa, SerializerPDAState owner, Iterable<SerializerPDAState> followers) {
@@ -198,20 +219,14 @@ public class SerializerPDAProvider implements ISerializerPDAProvider {
 	}
 
 	protected static class SerializerPDAState implements ISerState {
-		protected List<SerializerPDAState> followers;
+		protected List<SerializerPDAState> followers = Collections.emptyList();
 		protected AbstractElement grammarElement;
-		protected RuleCall pop;
-		protected RuleCall push;
+		protected SerStateType type;
 
-		public SerializerPDAState(AbstractElement grammarElement) {
-			this(grammarElement, null, null);
-		}
-
-		public SerializerPDAState(AbstractElement grammarElement, RuleCall pop, RuleCall push) {
+		public SerializerPDAState(AbstractElement grammarElement, SerStateType type) {
 			super();
+			this.type = type;
 			this.grammarElement = grammarElement;
-			this.push = push;
-			this.pop = pop;
 		}
 
 		@Override
@@ -219,7 +234,7 @@ public class SerializerPDAProvider implements ISerializerPDAProvider {
 			if (obj == null || obj.getClass() != getClass())
 				return false;
 			SerializerPDAState s = (SerializerPDAState) obj;
-			return grammarElement == s.grammarElement && pop == s.pop && push == s.push;
+			return grammarElement == s.grammarElement && type == s.type;
 		}
 
 		public List<SerializerPDAState> getFollowers() {
@@ -230,30 +245,42 @@ public class SerializerPDAProvider implements ISerializerPDAProvider {
 			return grammarElement;
 		}
 
+		public SerStateType getType() {
+			return type;
+		}
+
 		@Override
 		public int hashCode() {
-			int r = grammarElement != null ? grammarElement.hashCode() : 0;
-			if (pop != null)
-				r *= 7;
-			if (push != null)
-				r *= 13;
-			return r;
+			return (grammarElement != null ? grammarElement.hashCode() : 1) * type.hashCode();
 		}
 
 		@Override
 		public String toString() {
-			String p = pop != null && push != null ? "<>" : (pop != null ? "<<" : (push != null ? ">>" : ""));
-			return p + new GrammarElementTitleSwitch().hideCardinality().showQualified().apply(grammarElement);
+			GrammarElementTitleSwitch fmt = new GrammarElementTitleSwitch().hideCardinality().showQualified();
+			switch (type) {
+				case ELEMENT:
+					return fmt.apply(grammarElement);
+				case POP:
+					return "<<" + fmt.apply(grammarElement);
+				case PUSH:
+					return ">>" + fmt.apply(grammarElement);
+				case START:
+					return "start";
+				case STOP:
+					return "stop";
+			}
+			return "";
 		}
 	}
 
 	protected Map<Pair<EObject, EClass>, Pda<? extends ISerState, RuleCall>> cache = Maps.newHashMap();
 
-	protected SerializerCfg cfg;
-
 	protected Pda<? extends ISerState, RuleCall> createPDA(EObject context, EClass type) {
+		SerializerCfg cfg = new SerializerCfg(context);
 		SerializerFollowerFunction ff = new SerializerFollowerFunction(cfg, context, type);
-		return new PdaUtil().create(cfg, ff, new SerializerPDAFactory());
+		Pda<? extends ISerState, RuleCall> pda = new PdaUtil().create(cfg, ff, new SerializerPDAFactory());
+		new NfaUtil().removeOrphans(pda);
+		return pda;
 	}
 
 	public Pda<? extends ISerState, RuleCall> getPDA(EObject context, EClass type) {
@@ -262,11 +289,6 @@ public class SerializerPDAProvider implements ISerializerPDAProvider {
 		if (result == null)
 			cache.put(key, result = createPDA(context, type));
 		return result;
-	}
-
-	@Inject
-	protected void setGrammarAccess(IGrammarAccess ga) {
-		this.cfg = new SerializerCfg(ga.getGrammar());
 	}
 
 }

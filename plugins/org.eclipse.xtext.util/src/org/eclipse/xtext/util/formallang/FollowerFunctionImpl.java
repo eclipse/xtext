@@ -77,8 +77,11 @@ public class FollowerFunctionImpl<E, T> implements FollowerFunction<E> {
 			else
 				break;
 		}
-		if (i >= sequentialChildren.size())
+		if (i >= sequentialChildren.size()) {
+			if (production.isMany(container))
+				collectElement(container, result);
 			collectByParent(container, result);
+		}
 	}
 
 	protected void collectChildren(E element, Set<E> result) {
@@ -97,7 +100,7 @@ public class FollowerFunctionImpl<E, T> implements FollowerFunction<E> {
 					break;
 			}
 		else {
-			if (production.isMany(element) && filter(element))
+			if (production.isMany(element) /* && filter(element) */)
 				collectElement(element, result);
 			collectByParent(element, result);
 		}

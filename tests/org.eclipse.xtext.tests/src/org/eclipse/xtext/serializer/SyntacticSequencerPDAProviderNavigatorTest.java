@@ -16,6 +16,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynEmitterState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynFollowerOwner;
@@ -37,10 +38,6 @@ public class SyntacticSequencerPDAProviderNavigatorTest extends AbstractXtextTes
 		with(XtextStandaloneSetup.class);
 	}
 
-	protected SyntacticSequencerPDAProvider createSequenceParserPDAProvider() {
-		return new SyntacticSequencerPDAProvider();
-	}
-
 	final static String HEADER = "grammar org.eclipse.xtext.serializer.SequenceParserPDAProviderTestLanguage"
 			+ " with org.eclipse.xtext.common.Terminals "
 			+ "generate sequenceParserPDAProviderTest \"http://www.eclipse.org/2010/tmf/xtext/SequenceParserPDAProvider\"  ";
@@ -57,7 +54,7 @@ public class SyntacticSequencerPDAProviderNavigatorTest extends AbstractXtextTes
 		AbstractRule rule = name == null ? grammar.getRules().get(0) : GrammarUtil.findRuleForName(grammar, name);
 		EClass type = (EClass) (typeName == null ? rule.getType().getClassifier() : grammar.getMetamodelDeclarations()
 				.get(0).getEPackage().getEClassifier(typeName));
-		return createSequenceParserPDAProvider().getPDA(rule, type);
+		return get(ISyntacticSequencerPDAProvider.class).getPDA(rule, type);
 	}
 
 	protected ISynTransition findTransition(ISynAbsorberState start, String fromAbsorber, String toAbsorber) {
