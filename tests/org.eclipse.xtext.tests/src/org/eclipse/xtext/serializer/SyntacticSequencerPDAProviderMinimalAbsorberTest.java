@@ -17,12 +17,14 @@ public class SyntacticSequencerPDAProviderMinimalAbsorberTest extends AbstractSy
 
 	@Override
 	protected SyntacticSequencerPDAProvider createSequenceParserPDAProvider() {
-		return new SyntacticSequencerPDAProvider() {
+		SyntacticSequencerPDAProvider result = new SyntacticSequencerPDAProvider() {
 			@Override
 			protected boolean isOptionalAbsorber(AbstractElement ele) {
 				return false;
 			}
 		};
+		getInjector().injectMembers(result);
+		return result;
 	}
 
 	//	public void testXtext() {
@@ -305,6 +307,7 @@ public class SyntacticSequencerPDAProviderMinimalAbsorberTest extends AbstractSy
 		String actual = getParserRule(grammar.toString());
 		StringBuilder expected = new StringBuilder();
 		expected.append("Optional_Optional:\n");
+		expected.append("  start stop\n");
 		expected.append("  start val1=ID\n");
 		expected.append("  start val2=ID\n");
 		expected.append("  start val3=ID\n");
@@ -314,7 +317,8 @@ public class SyntacticSequencerPDAProviderMinimalAbsorberTest extends AbstractSy
 		expected.append("  val2=ID stop\n");
 		expected.append("  val2=ID val3=ID\n");
 		expected.append("  val3=ID stop\n");
-		expected.append("null_Optional:");
+		expected.append("null_Optional:\n");
+		expected.append("  start stop");
 		assertEquals(expected.toString(), actual);
 	}
 
@@ -324,15 +328,17 @@ public class SyntacticSequencerPDAProviderMinimalAbsorberTest extends AbstractSy
 		String actual = getParserRule(grammar.toString());
 		StringBuilder expected = new StringBuilder();
 		expected.append("Foo_Model:\n");
-		expected.append("  start {Foo.left=}\n");
-		expected.append("  start {Foo.left=}\n");
+		expected.append("  ( {Foo.left=}) stop\n");
+		expected.append("  ({Foo.left=} ) stop\n");
+		expected.append("  ({Foo.left=} ) val=ID\n");
+		expected.append("  start ( {Foo.left=})\n");
+		expected.append("  start ({Foo.left=} )\n");
 		expected.append("  val=ID stop\n");
-		expected.append("  {Foo.left=} stop\n");
-		expected.append("  {Foo.left=} stop\n");
-		expected.append("  {Foo.left=} val=ID\n");
 		expected.append("Foo_Model_Foo_1_1:\n");
-		expected.append("  start {Foo.left=}\n");
-		expected.append("  {Foo.left=} stop");
+		expected.append("  ({Foo.left=} ) stop\n");
+		expected.append("  start ({Foo.left=} )\n");
+		expected.append("null_Model_Foo_0:\n");
+		expected.append("  start stop");
 		assertEquals(expected.toString(), actual);
 	}
 

@@ -14,19 +14,16 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.GrammarToDot;
 import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.generator.serializer.SyntacticSequencerPDA2ExtendedDot;
+import org.eclipse.xtext.generator.serializer.SyntacticSequencerPDA2SimpleDot;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
 import org.eclipse.xtext.serializer.analysis.IContextProvider;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynState;
 import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider;
-import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider.SequencerNFAProvider;
-import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider.SequencerNFAState;
-import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider.SequencerNFATransition;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 
@@ -39,39 +36,39 @@ import com.google.inject.internal.Join;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public abstract class AbstractSyntacticSequencerPDAProviderTest extends AbstractXtextTests {
-	protected class SequenceParserNDA2Dot extends GrammarToDot {
-		protected SequencerNFAProvider nfaProvider = new SequencerNFAProvider();
-
-		@Override
-		protected Node drawAbstractElementTree(AbstractElement ele, Digraph d) {
-			Node n = super.drawAbstractElementTree(ele, d);
-			SequencerNFAState nfas = nfaProvider.getNFA(ele);
-
-			for (SequencerNFATransition t : nfas.getOutgoing())
-				d.add(drawFollowerEdge(ele, t, false));
-			for (SequencerNFATransition t : nfas.getOutgoingAfterReturn())
-				d.add(drawFollowerEdge(ele, t, true));
-
-			if (nfas.getOutgoing().size() == 0 && nfas.getOutgoingAfterReturn().size() == 0 && !nfas.isEndState())
-				n.setStyle("dotted");
-			if (nfas.isEndState())
-				n.put("peripheries", "2");
-			return n;
-		}
-
-		protected Edge drawFollowerEdge(AbstractElement ele, SequencerNFATransition t, boolean isParent) {
-			Edge e = new Edge(ele, t.getTarget().getGrammarElement());
-			e.setLabel(String.valueOf(t.getPrecedence()));
-			e.setStyle("dotted");
-			if (isParent)
-				e.put("arrowtail", "odot");
-			if (t.isRuleCall())
-				e.put("arrowhead", "onormalonormal");
-			else
-				e.put("arrowhead", "onormal");
-			return e;
-		}
-	}
+	//	protected class SequenceParserNDA2Dot extends GrammarToDot {
+	//		protected SequencerNFAProvider nfaProvider = new SequencerNFAProvider();
+	//
+	//		@Override
+	//		protected Node drawAbstractElementTree(AbstractElement ele, Digraph d) {
+	//			Node n = super.drawAbstractElementTree(ele, d);
+	//			SequencerNFAState nfas = nfaProvider.getNFA(ele);
+	//
+	//			for (SequencerNFATransition t : nfas.getOutgoing())
+	//				d.add(drawFollowerEdge(ele, t, false));
+	//			for (SequencerNFATransition t : nfas.getOutgoingAfterReturn())
+	//				d.add(drawFollowerEdge(ele, t, true));
+	//
+	//			if (nfas.getOutgoing().size() == 0 && nfas.getOutgoingAfterReturn().size() == 0 && !nfas.isEndState())
+	//				n.setStyle("dotted");
+	//			if (nfas.isEndState())
+	//				n.put("peripheries", "2");
+	//			return n;
+	//		}
+	//
+	//		protected Edge drawFollowerEdge(AbstractElement ele, SequencerNFATransition t, boolean isParent) {
+	//			Edge e = new Edge(ele, t.getTarget().getGrammarElement());
+	//			e.setLabel(String.valueOf(t.getPrecedence()));
+	//			e.setStyle("dotted");
+	//			if (isParent)
+	//				e.put("arrowtail", "odot");
+	//			if (t.isRuleCall())
+	//				e.put("arrowhead", "onormalonormal");
+	//			else
+	//				e.put("arrowhead", "onormal");
+	//			return e;
+	//		}
+	//	}
 
 	@Override
 	protected void setUp() throws Exception {
@@ -86,9 +83,9 @@ public abstract class AbstractSyntacticSequencerPDAProviderTest extends Abstract
 	protected String getParserRule(String body) throws Exception {
 		Grammar grammar = (Grammar) getModel(HEADER + body);
 		//		new SequenceParserNDA2Dot().draw(grammar, "pdf/" + getName() + "-NFA.pdf", "-T pdf");
-		//		SyntacticSequencerPDA2SimpleDot.drawGrammar(get(IContextProvider.class), "pdf/" + getName(), grammar);
-		//		SyntacticSequencerPDA2ExtendedDot.drawGrammar(get(IContextProvider.class), createSequenceParserPDAProvider(),
-		//				"pdf/" + getName(), grammar);
+		//				SyntacticSequencerPDA2SimpleDot.drawGrammar(get(IContextProvider.class), "pdf/" + getName(), grammar);
+		SyntacticSequencerPDA2ExtendedDot.drawGrammar(get(IContextProvider.class), createSequenceParserPDAProvider(),
+				"pdf/" + getName(), grammar);
 		List<String> result = Lists.newArrayList();
 		for (Triple<EClass, EObject, String> ctx : getContexts(grammar)) {
 			String t = ctx.getFirst() == null ? "null" : ctx.getFirst().getName();
