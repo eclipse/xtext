@@ -18,6 +18,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.util.formallang.Cfg;
 
@@ -80,7 +81,7 @@ public class CfgAdapter implements Cfg<AbstractElement, AbstractElement> {
 	public Iterable<AbstractElement> getUnorderedChildren(AbstractElement ele) {
 		switch (ele.eClass().getClassifierID()) {
 			case XtextPackage.UNORDERED_GROUP:
-				return ((Alternatives) ele).getElements();
+				return ((UnorderedGroup) ele).getElements();
 			default:
 				return null;
 		}

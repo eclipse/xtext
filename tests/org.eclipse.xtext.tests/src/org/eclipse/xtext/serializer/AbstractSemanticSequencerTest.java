@@ -335,4 +335,64 @@ public abstract class AbstractSemanticSequencerTest extends AbstractXtextTests {
 		testSequence("#23 kw2 b kw1 a a 1 c d 2 i 7 kw2 x kw1 x 8 g");
 	}
 
+	public void testUnorderedGroup1() throws Exception {
+		testSequence("#24 1 a kw1 a kw2 b");
+	}
+
+	public void testUnorderedGroup2() throws Exception {
+		testSequence("#24 1 a kw2 b kw1 a");
+	}
+
+	public void testUnorderedGroup3() throws Exception {
+		testSequence("#24 a 1 kw1 a kw2 b");
+	}
+
+	public void testUnorderedGroup4() throws Exception {
+		testSequence("#24 a 1 kw2 b kw1 a");
+	}
+
+	public void testUnorderedGroup5() throws Exception {
+		testSequence("#24 kw1 a kw2 b 1 a ");
+	}
+
+	public void testUnorderedGroup6() throws Exception {
+		testSequence("#24 kw2 b kw1 a 1 a");
+	}
+
+	public void testUnorderedGroup7() throws Exception {
+		testSequence("#24 kw1 a kw2 b a 1");
+	}
+
+	public void testUnorderedGroup8() throws Exception {
+		testSequence("#24 kw2 b kw1 a a 1");
+	}
+
+	public void testUnorderedGroupOptional1() throws Exception {
+		testSequence("#25 kw1 a kw2 b kw3 c");
+	}
+
+	public void testUnorderedGroupOptional2() throws Exception {
+		testSequence("#25 kw1 a kw2 b");
+	}
+
+	public void testUnorderedGroupOptional3() throws Exception {
+		testSequence("#25 kw1 a kw3 c");
+	}
+
+	public void testUnorderedGroupOptional4() throws Exception {
+		testSequence("#25 kw2 b kw3 c");
+	}
+
+	public void testUnorderedGroupOptional5() throws Exception {
+		testSequence("#25 kw2 b kw1 a");
+	}
+
+	public void testUnorderedGroupOptional6() throws Exception {
+		testSequence("#25 kw3 c kw1 a");
+	}
+
+	public void testUnorderedGroupOptional7() throws Exception {
+		testSequence("#25 kw3 c kw2 b");
+	}
+
 }
