@@ -17,12 +17,14 @@ public class SyntacticSequencerPDAProviderAllAbsorberTest extends AbstractSyntac
 
 	@Override
 	protected SyntacticSequencerPDAProvider createSequenceParserPDAProvider() {
-		return new SyntacticSequencerPDAProvider() {
+		SyntacticSequencerPDAProvider result = new SyntacticSequencerPDAProvider() {
 			@Override
 			protected boolean isOptionalAbsorber(AbstractElement ele) {
 				return true;
 			}
 		};
+		getInjector().injectMembers(result);
+		return result;
 	}
 
 	public void testKeyword() throws Exception {
@@ -107,16 +109,16 @@ public class SyntacticSequencerPDAProviderAllAbsorberTest extends AbstractSyntac
 		String actual = getParserRule("Rule: a1=ID ('kw1' a2=ID | 'kw2' a2=ID 'kw3');");
 		StringBuilder expected = new StringBuilder();
 		expected.append("Rule_Rule:\n");
-		expected.append("  'kw1' a2=ID\n");
-		expected.append("  'kw2' a2=ID\n");
+		expected.append("  'kw1' (a2=ID|)\n");
+		expected.append("  'kw2' (|a2=ID)\n");
 		expected.append("  'kw3' stop\n");
+		expected.append("  (a2=ID|) stop\n");
+		expected.append("  (|a2=ID) 'kw3'\n");
+		expected.append("  (|a2=ID) 'kw3' stop\n");
 		expected.append("  a1=ID 'kw1'\n");
-		expected.append("  a1=ID 'kw1' a2=ID\n");
+		expected.append("  a1=ID 'kw1' (a2=ID|)\n");
 		expected.append("  a1=ID 'kw2'\n");
-		expected.append("  a1=ID 'kw2' a2=ID\n");
-		expected.append("  a2=ID 'kw3'\n");
-		expected.append("  a2=ID 'kw3' stop\n");
-		expected.append("  a2=ID stop\n");
+		expected.append("  a1=ID 'kw2' (|a2=ID)\n");
 		expected.append("  start a1=ID");
 		assertEquals(expected.toString(), actual);
 	}

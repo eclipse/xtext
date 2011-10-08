@@ -206,6 +206,15 @@ public class ContextProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
+	public void testAssignedAction6() throws Exception {
+		String actual = getContexts("Model: {Foo.left=current} (val=ID? | {Foo.left=current});");
+		StringBuilder expected = new StringBuilder();
+		expected.append("Model returns Foo\n");
+		expected.append("Model_Foo_0 returns null\n");
+		expected.append("Model_Foo_1_1 returns Foo");
+		assertEquals(expected.toString(), actual);
+	}
+
 	public void testAssignedRuleCall1() throws Exception {
 		String actual = getContexts("Rule: foo=Foo; Foo: val=ID;");
 		StringBuilder expected = new StringBuilder();
