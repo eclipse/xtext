@@ -35,6 +35,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SequencerTestLanguage.ecore#//Model/x21"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SequencerTestLanguage.ecore#//Model/x22"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SequencerTestLanguage.ecore#//Model/x23"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SequencerTestLanguage.ecore#//Model/x24"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SequencerTestLanguage.ecore#//Model/x25"/>
     </genClasses>
     <genClasses ecoreClass="SequencerTestLanguage.ecore#//SimpleGroup">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//SimpleGroup/val1"/>
@@ -147,6 +149,24 @@
     <genClasses ecoreClass="SequencerTestLanguage.ecore#//UnorderedAlternativeValDelegate"/>
     <genClasses ecoreClass="SequencerTestLanguage.ecore#//UnorderedAlternativeVal2">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//UnorderedAlternativeVal2/val"/>
+    </genClasses>
+    <genClasses ecoreClass="SequencerTestLanguage.ecore#//UnorderedGroup">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//UnorderedGroup/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//UnorderedGroup/val2"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SequencerTestLanguage.ecore#//UnorderedGroup/val3"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SequencerTestLanguage.ecore#//UnorderedGroup/val4"/>
+    </genClasses>
+    <genClasses ecoreClass="SequencerTestLanguage.ecore#//UnorderedGroupVal">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//UnorderedGroupVal/val"/>
+    </genClasses>
+    <genClasses ecoreClass="SequencerTestLanguage.ecore#//UnorderedGroupValDelegate"/>
+    <genClasses ecoreClass="SequencerTestLanguage.ecore#//UnorderedGroupVal2">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//UnorderedGroupVal2/val"/>
+    </genClasses>
+    <genClasses ecoreClass="SequencerTestLanguage.ecore#//UnorderedGroupOptional">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//UnorderedGroupOptional/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//UnorderedGroupOptional/va2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//UnorderedGroupOptional/val3"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

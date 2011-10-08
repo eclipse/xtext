@@ -251,13 +251,31 @@ public interface SequencertestPackage extends EPackage
   int MODEL__X23 = 19;
 
   /**
+   * The feature id for the '<em><b>X24</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X24 = 20;
+
+  /**
+   * The feature id for the '<em><b>X25</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X25 = 21;
+
+  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 20;
+  int MODEL_FEATURE_COUNT = 22;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.SimpleGroupImpl <em>Simple Group</em>}' class.
@@ -1315,6 +1333,182 @@ public interface SequencertestPackage extends EPackage
   int UNORDERED_ALTERNATIVE_VAL2_FEATURE_COUNT = UNORDERED_ALTERNATIVE_VAL_DELEGATE_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.UnorderedGroupImpl <em>Unordered Group</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.UnorderedGroupImpl
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getUnorderedGroup()
+   * @generated
+   */
+  int UNORDERED_GROUP = 30;
+
+  /**
+   * The feature id for the '<em><b>Val1</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNORDERED_GROUP__VAL1 = 0;
+
+  /**
+   * The feature id for the '<em><b>Val2</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNORDERED_GROUP__VAL2 = 1;
+
+  /**
+   * The feature id for the '<em><b>Val3</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNORDERED_GROUP__VAL3 = 2;
+
+  /**
+   * The feature id for the '<em><b>Val4</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNORDERED_GROUP__VAL4 = 3;
+
+  /**
+   * The number of structural features of the '<em>Unordered Group</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNORDERED_GROUP_FEATURE_COUNT = 4;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.UnorderedGroupValImpl <em>Unordered Group Val</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.UnorderedGroupValImpl
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getUnorderedGroupVal()
+   * @generated
+   */
+  int UNORDERED_GROUP_VAL = 31;
+
+  /**
+   * The feature id for the '<em><b>Val</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNORDERED_GROUP_VAL__VAL = 0;
+
+  /**
+   * The number of structural features of the '<em>Unordered Group Val</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNORDERED_GROUP_VAL_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.UnorderedGroupValDelegateImpl <em>Unordered Group Val Delegate</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.UnorderedGroupValDelegateImpl
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getUnorderedGroupValDelegate()
+   * @generated
+   */
+  int UNORDERED_GROUP_VAL_DELEGATE = 32;
+
+  /**
+   * The number of structural features of the '<em>Unordered Group Val Delegate</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNORDERED_GROUP_VAL_DELEGATE_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.UnorderedGroupVal2Impl <em>Unordered Group Val2</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.UnorderedGroupVal2Impl
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getUnorderedGroupVal2()
+   * @generated
+   */
+  int UNORDERED_GROUP_VAL2 = 33;
+
+  /**
+   * The feature id for the '<em><b>Val</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNORDERED_GROUP_VAL2__VAL = UNORDERED_GROUP_VAL_DELEGATE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Unordered Group Val2</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNORDERED_GROUP_VAL2_FEATURE_COUNT = UNORDERED_GROUP_VAL_DELEGATE_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.UnorderedGroupOptionalImpl <em>Unordered Group Optional</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.UnorderedGroupOptionalImpl
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getUnorderedGroupOptional()
+   * @generated
+   */
+  int UNORDERED_GROUP_OPTIONAL = 34;
+
+  /**
+   * The feature id for the '<em><b>Val1</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNORDERED_GROUP_OPTIONAL__VAL1 = 0;
+
+  /**
+   * The feature id for the '<em><b>Va2</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNORDERED_GROUP_OPTIONAL__VA2 = 1;
+
+  /**
+   * The feature id for the '<em><b>Val3</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNORDERED_GROUP_OPTIONAL__VAL3 = 2;
+
+  /**
+   * The number of structural features of the '<em>Unordered Group Optional</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNORDERED_GROUP_OPTIONAL_FEATURE_COUNT = 3;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.DefEnum <em>Def Enum</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1322,7 +1516,7 @@ public interface SequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getDefEnum()
    * @generated
    */
-  int DEF_ENUM = 30;
+  int DEF_ENUM = 35;
 
 
   /**
@@ -1554,6 +1748,28 @@ public interface SequencertestPackage extends EPackage
    * @generated
    */
   EReference getModel_X23();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX24 <em>X24</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X24</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.Model#getX24()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X24();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX25 <em>X25</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X25</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.Model#getX25()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X25();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.sequencertest.SimpleGroup <em>Simple Group</em>}'.
@@ -2462,6 +2678,155 @@ public interface SequencertestPackage extends EPackage
   EAttribute getUnorderedAlternativeVal2_Val();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedGroup <em>Unordered Group</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Unordered Group</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedGroup
+   * @generated
+   */
+  EClass getUnorderedGroup();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedGroup#getVal1 <em>Val1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val1</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedGroup#getVal1()
+   * @see #getUnorderedGroup()
+   * @generated
+   */
+  EAttribute getUnorderedGroup_Val1();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedGroup#getVal2 <em>Val2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val2</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedGroup#getVal2()
+   * @see #getUnorderedGroup()
+   * @generated
+   */
+  EAttribute getUnorderedGroup_Val2();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedGroup#getVal3 <em>Val3</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Val3</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedGroup#getVal3()
+   * @see #getUnorderedGroup()
+   * @generated
+   */
+  EReference getUnorderedGroup_Val3();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedGroup#getVal4 <em>Val4</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Val4</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedGroup#getVal4()
+   * @see #getUnorderedGroup()
+   * @generated
+   */
+  EReference getUnorderedGroup_Val4();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal <em>Unordered Group Val</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Unordered Group Val</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal
+   * @generated
+   */
+  EClass getUnorderedGroupVal();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal#getVal <em>Val</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal#getVal()
+   * @see #getUnorderedGroupVal()
+   * @generated
+   */
+  EAttribute getUnorderedGroupVal_Val();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedGroupValDelegate <em>Unordered Group Val Delegate</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Unordered Group Val Delegate</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedGroupValDelegate
+   * @generated
+   */
+  EClass getUnorderedGroupValDelegate();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal2 <em>Unordered Group Val2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Unordered Group Val2</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal2
+   * @generated
+   */
+  EClass getUnorderedGroupVal2();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal2#getVal <em>Val</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal2#getVal()
+   * @see #getUnorderedGroupVal2()
+   * @generated
+   */
+  EAttribute getUnorderedGroupVal2_Val();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedGroupOptional <em>Unordered Group Optional</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Unordered Group Optional</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedGroupOptional
+   * @generated
+   */
+  EClass getUnorderedGroupOptional();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedGroupOptional#getVal1 <em>Val1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val1</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedGroupOptional#getVal1()
+   * @see #getUnorderedGroupOptional()
+   * @generated
+   */
+  EAttribute getUnorderedGroupOptional_Val1();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedGroupOptional#getVa2 <em>Va2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Va2</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedGroupOptional#getVa2()
+   * @see #getUnorderedGroupOptional()
+   * @generated
+   */
+  EAttribute getUnorderedGroupOptional_Va2();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedGroupOptional#getVal3 <em>Val3</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val3</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedGroupOptional#getVal3()
+   * @see #getUnorderedGroupOptional()
+   * @generated
+   */
+  EAttribute getUnorderedGroupOptional_Val3();
+
+  /**
    * Returns the meta object for enum '{@link org.eclipse.xtext.serializer.sequencertest.DefEnum <em>Def Enum</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2663,6 +3028,22 @@ public interface SequencertestPackage extends EPackage
      * @generated
      */
     EReference MODEL__X23 = eINSTANCE.getModel_X23();
+
+    /**
+     * The meta object literal for the '<em><b>X24</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X24 = eINSTANCE.getModel_X24();
+
+    /**
+     * The meta object literal for the '<em><b>X25</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X25 = eINSTANCE.getModel_X25();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.SimpleGroupImpl <em>Simple Group</em>}' class.
@@ -3401,6 +3782,128 @@ public interface SequencertestPackage extends EPackage
      * @generated
      */
     EAttribute UNORDERED_ALTERNATIVE_VAL2__VAL = eINSTANCE.getUnorderedAlternativeVal2_Val();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.UnorderedGroupImpl <em>Unordered Group</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.UnorderedGroupImpl
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getUnorderedGroup()
+     * @generated
+     */
+    EClass UNORDERED_GROUP = eINSTANCE.getUnorderedGroup();
+
+    /**
+     * The meta object literal for the '<em><b>Val1</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute UNORDERED_GROUP__VAL1 = eINSTANCE.getUnorderedGroup_Val1();
+
+    /**
+     * The meta object literal for the '<em><b>Val2</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute UNORDERED_GROUP__VAL2 = eINSTANCE.getUnorderedGroup_Val2();
+
+    /**
+     * The meta object literal for the '<em><b>Val3</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference UNORDERED_GROUP__VAL3 = eINSTANCE.getUnorderedGroup_Val3();
+
+    /**
+     * The meta object literal for the '<em><b>Val4</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference UNORDERED_GROUP__VAL4 = eINSTANCE.getUnorderedGroup_Val4();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.UnorderedGroupValImpl <em>Unordered Group Val</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.UnorderedGroupValImpl
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getUnorderedGroupVal()
+     * @generated
+     */
+    EClass UNORDERED_GROUP_VAL = eINSTANCE.getUnorderedGroupVal();
+
+    /**
+     * The meta object literal for the '<em><b>Val</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute UNORDERED_GROUP_VAL__VAL = eINSTANCE.getUnorderedGroupVal_Val();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.UnorderedGroupValDelegateImpl <em>Unordered Group Val Delegate</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.UnorderedGroupValDelegateImpl
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getUnorderedGroupValDelegate()
+     * @generated
+     */
+    EClass UNORDERED_GROUP_VAL_DELEGATE = eINSTANCE.getUnorderedGroupValDelegate();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.UnorderedGroupVal2Impl <em>Unordered Group Val2</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.UnorderedGroupVal2Impl
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getUnorderedGroupVal2()
+     * @generated
+     */
+    EClass UNORDERED_GROUP_VAL2 = eINSTANCE.getUnorderedGroupVal2();
+
+    /**
+     * The meta object literal for the '<em><b>Val</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute UNORDERED_GROUP_VAL2__VAL = eINSTANCE.getUnorderedGroupVal2_Val();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.UnorderedGroupOptionalImpl <em>Unordered Group Optional</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.UnorderedGroupOptionalImpl
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getUnorderedGroupOptional()
+     * @generated
+     */
+    EClass UNORDERED_GROUP_OPTIONAL = eINSTANCE.getUnorderedGroupOptional();
+
+    /**
+     * The meta object literal for the '<em><b>Val1</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute UNORDERED_GROUP_OPTIONAL__VAL1 = eINSTANCE.getUnorderedGroupOptional_Val1();
+
+    /**
+     * The meta object literal for the '<em><b>Va2</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute UNORDERED_GROUP_OPTIONAL__VA2 = eINSTANCE.getUnorderedGroupOptional_Va2();
+
+    /**
+     * The meta object literal for the '<em><b>Val3</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute UNORDERED_GROUP_OPTIONAL__VAL3 = eINSTANCE.getUnorderedGroupOptional_Val3();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.DefEnum <em>Def Enum</em>}' enum.

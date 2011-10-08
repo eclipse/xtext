@@ -514,6 +514,44 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getX24UnorderedGroupParserRuleCall_23_0()); 
+	    }
+		lv_x24_23_0=ruleUnorderedGroup		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"x24",
+        		lv_x24_23_0, 
+        		"UnorderedGroup");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getX25UnorderedGroupOptionalParserRuleCall_24_0()); 
+	    }
+		lv_x25_24_0=ruleUnorderedGroupOptional		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"x25",
+        		lv_x25_24_0, 
+        		"UnorderedGroupOptional");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
 ))
 ;
 
@@ -2781,6 +2819,433 @@ ruleUnorderedAlternativeVal2 returns [EObject current=null]
 	    }
 
 )
+))
+;
+
+
+
+
+
+// Entry rule entryRuleUnorderedGroup
+entryRuleUnorderedGroup returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getUnorderedGroupRule()); }
+	 iv_ruleUnorderedGroup=ruleUnorderedGroup 
+	 { $current=$iv_ruleUnorderedGroup.current; } 
+	 EOF 
+;
+
+// Rule UnorderedGroup
+ruleUnorderedGroup returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='#24' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getUnorderedGroupAccess().getNumberSignDigitTwoDigitFourKeyword_0());
+    }
+(
+
+(
+	{ 
+	  getUnorderedGroupHelper().enter(grammarAccess.getUnorderedGroupAccess().getUnorderedGroup_1());
+	}
+	(
+		(
+
+			( 
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedGroupAccess().getUnorderedGroup_1(), 0)}?=>(
+					{ 
+	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedGroupAccess().getUnorderedGroup_1(), 0);
+	 				}
+					({true}?=>(
+(
+		lv_val1_2_0=RULE_ID
+		{
+			newLeafNode(lv_val1_2_0, grammarAccess.getUnorderedGroupAccess().getVal1IDTerminalRuleCall_1_0_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getUnorderedGroupRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"val1",
+        		lv_val1_2_0, 
+        		"ID");
+	    }
+
+)
+))
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getUnorderedGroupAccess().getUnorderedGroup_1());
+	 				}
+ 				)
+			)  |
+
+			( 
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedGroupAccess().getUnorderedGroup_1(), 1)}?=>(
+					{ 
+	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedGroupAccess().getUnorderedGroup_1(), 1);
+	 				}
+					({true}?=>(
+(
+		lv_val2_3_0=RULE_INT
+		{
+			newLeafNode(lv_val2_3_0, grammarAccess.getUnorderedGroupAccess().getVal2INTTerminalRuleCall_1_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getUnorderedGroupRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"val2",
+        		lv_val2_3_0, 
+        		"INT");
+	    }
+
+)
+))
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getUnorderedGroupAccess().getUnorderedGroup_1());
+	 				}
+ 				)
+			)  |
+
+			( 
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedGroupAccess().getUnorderedGroup_1(), 2)}?=>(
+					{ 
+	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedGroupAccess().getUnorderedGroup_1(), 2);
+	 				}
+					({true}?=>(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getUnorderedGroupAccess().getVal3UnorderedGroupValParserRuleCall_1_2_0()); 
+	    }
+		lv_val3_4_0=ruleUnorderedGroupVal		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getUnorderedGroupRule());
+	        }
+       		set(
+       			$current, 
+       			"val3",
+        		lv_val3_4_0, 
+        		"UnorderedGroupVal");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getUnorderedGroupAccess().getUnorderedGroup_1());
+	 				}
+ 				)
+			)  |
+
+			( 
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedGroupAccess().getUnorderedGroup_1(), 3)}?=>(
+					{ 
+	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedGroupAccess().getUnorderedGroup_1(), 3);
+	 				}
+					({true}?=>(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getUnorderedGroupAccess().getVal4UnorderedGroupValDelegateParserRuleCall_1_3_0()); 
+	    }
+		lv_val4_5_0=ruleUnorderedGroupValDelegate		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getUnorderedGroupRule());
+	        }
+       		set(
+       			$current, 
+       			"val4",
+        		lv_val4_5_0, 
+        		"UnorderedGroupValDelegate");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getUnorderedGroupAccess().getUnorderedGroup_1());
+	 				}
+ 				)
+			)  
+
+		)+
+	  	{getUnorderedGroupHelper().canLeave(grammarAccess.getUnorderedGroupAccess().getUnorderedGroup_1())}?	
+	)
+)
+	{ 
+	  getUnorderedGroupHelper().leave(grammarAccess.getUnorderedGroupAccess().getUnorderedGroup_1());
+	}
+
+))
+;
+
+
+
+
+
+// Entry rule entryRuleUnorderedGroupVal
+entryRuleUnorderedGroupVal returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getUnorderedGroupValRule()); }
+	 iv_ruleUnorderedGroupVal=ruleUnorderedGroupVal 
+	 { $current=$iv_ruleUnorderedGroupVal.current; } 
+	 EOF 
+;
+
+// Rule UnorderedGroupVal
+ruleUnorderedGroupVal returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='kw1' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getUnorderedGroupValAccess().getKw1Keyword_0());
+    }
+(
+(
+		lv_val_1_0=RULE_ID
+		{
+			newLeafNode(lv_val_1_0, grammarAccess.getUnorderedGroupValAccess().getValIDTerminalRuleCall_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getUnorderedGroupValRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"val",
+        		lv_val_1_0, 
+        		"ID");
+	    }
+
+)
+))
+;
+
+
+
+
+
+// Entry rule entryRuleUnorderedGroupValDelegate
+entryRuleUnorderedGroupValDelegate returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getUnorderedGroupValDelegateRule()); }
+	 iv_ruleUnorderedGroupValDelegate=ruleUnorderedGroupValDelegate 
+	 { $current=$iv_ruleUnorderedGroupValDelegate.current; } 
+	 EOF 
+;
+
+// Rule UnorderedGroupValDelegate
+ruleUnorderedGroupValDelegate returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+
+    { 
+        newCompositeNode(grammarAccess.getUnorderedGroupValDelegateAccess().getUnorderedGroupVal2ParserRuleCall()); 
+    }
+    this_UnorderedGroupVal2_0=ruleUnorderedGroupVal2
+    { 
+        $current = $this_UnorderedGroupVal2_0.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+;
+
+
+
+
+
+// Entry rule entryRuleUnorderedGroupVal2
+entryRuleUnorderedGroupVal2 returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getUnorderedGroupVal2Rule()); }
+	 iv_ruleUnorderedGroupVal2=ruleUnorderedGroupVal2 
+	 { $current=$iv_ruleUnorderedGroupVal2.current; } 
+	 EOF 
+;
+
+// Rule UnorderedGroupVal2
+ruleUnorderedGroupVal2 returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='kw2' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getUnorderedGroupVal2Access().getKw2Keyword_0());
+    }
+(
+(
+		lv_val_1_0=RULE_ID
+		{
+			newLeafNode(lv_val_1_0, grammarAccess.getUnorderedGroupVal2Access().getValIDTerminalRuleCall_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getUnorderedGroupVal2Rule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"val",
+        		lv_val_1_0, 
+        		"ID");
+	    }
+
+)
+))
+;
+
+
+
+
+
+// Entry rule entryRuleUnorderedGroupOptional
+entryRuleUnorderedGroupOptional returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getUnorderedGroupOptionalRule()); }
+	 iv_ruleUnorderedGroupOptional=ruleUnorderedGroupOptional 
+	 { $current=$iv_ruleUnorderedGroupOptional.current; } 
+	 EOF 
+;
+
+// Rule UnorderedGroupOptional
+ruleUnorderedGroupOptional returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='#25' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getUnorderedGroupOptionalAccess().getNumberSignDigitTwoDigitFiveKeyword_0());
+    }
+(
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getUnorderedGroupOptionalAccess().getUnorderedGroupOptionalAction_1(),
+            $current);
+    }
+)(
+
+(
+	{ 
+	  getUnorderedGroupHelper().enter(grammarAccess.getUnorderedGroupOptionalAccess().getUnorderedGroup_2());
+	}
+	(
+		(
+
+			( 
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedGroupOptionalAccess().getUnorderedGroup_2(), 0)}?=>(
+					{ 
+	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedGroupOptionalAccess().getUnorderedGroup_2(), 0);
+	 				}
+					({true}?=>(	otherlv_3='kw1' 
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getUnorderedGroupOptionalAccess().getKw1Keyword_2_0_0());
+    }
+(
+(
+		lv_val1_4_0=RULE_ID
+		{
+			newLeafNode(lv_val1_4_0, grammarAccess.getUnorderedGroupOptionalAccess().getVal1IDTerminalRuleCall_2_0_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getUnorderedGroupOptionalRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"val1",
+        		lv_val1_4_0, 
+        		"ID");
+	    }
+
+)
+)))
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getUnorderedGroupOptionalAccess().getUnorderedGroup_2());
+	 				}
+ 				)
+			)  |
+
+			( 
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedGroupOptionalAccess().getUnorderedGroup_2(), 1)}?=>(
+					{ 
+	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedGroupOptionalAccess().getUnorderedGroup_2(), 1);
+	 				}
+					({true}?=>(	otherlv_5='kw2' 
+    {
+    	newLeafNode(otherlv_5, grammarAccess.getUnorderedGroupOptionalAccess().getKw2Keyword_2_1_0());
+    }
+(
+(
+		lv_va2_6_0=RULE_ID
+		{
+			newLeafNode(lv_va2_6_0, grammarAccess.getUnorderedGroupOptionalAccess().getVa2IDTerminalRuleCall_2_1_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getUnorderedGroupOptionalRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"va2",
+        		lv_va2_6_0, 
+        		"ID");
+	    }
+
+)
+)))
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getUnorderedGroupOptionalAccess().getUnorderedGroup_2());
+	 				}
+ 				)
+			)  |
+
+			( 
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedGroupOptionalAccess().getUnorderedGroup_2(), 2)}?=>(
+					{ 
+	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedGroupOptionalAccess().getUnorderedGroup_2(), 2);
+	 				}
+					({true}?=>(	otherlv_7='kw3' 
+    {
+    	newLeafNode(otherlv_7, grammarAccess.getUnorderedGroupOptionalAccess().getKw3Keyword_2_2_0());
+    }
+(
+(
+		lv_val3_8_0=RULE_ID
+		{
+			newLeafNode(lv_val3_8_0, grammarAccess.getUnorderedGroupOptionalAccess().getVal3IDTerminalRuleCall_2_2_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getUnorderedGroupOptionalRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"val3",
+        		lv_val3_8_0, 
+        		"ID");
+	    }
+
+)
+)))
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getUnorderedGroupOptionalAccess().getUnorderedGroup_2());
+	 				}
+ 				)
+			)  
+
+		)*	
+	)
+)
+	{ 
+	  getUnorderedGroupHelper().leave(grammarAccess.getUnorderedGroupOptionalAccess().getUnorderedGroup_2());
+	}
+
 ))
 ;
 

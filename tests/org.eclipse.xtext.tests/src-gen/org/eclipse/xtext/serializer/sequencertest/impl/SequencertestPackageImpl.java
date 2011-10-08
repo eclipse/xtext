@@ -46,6 +46,11 @@ import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternative;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal2;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeValDelegate;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroup;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupOptional;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal2;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupValDelegate;
 
 /**
  * <!-- begin-user-doc -->
@@ -264,6 +269,41 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * @generated
    */
   private EClass unorderedAlternativeVal2EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass unorderedGroupEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass unorderedGroupValEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass unorderedGroupValDelegateEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass unorderedGroupVal2EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass unorderedGroupOptionalEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -546,6 +586,26 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
   public EReference getModel_X23()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(19);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_X24()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(20);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_X25()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(21);
   }
 
   /**
@@ -1403,6 +1463,146 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getUnorderedGroup()
+  {
+    return unorderedGroupEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getUnorderedGroup_Val1()
+  {
+    return (EAttribute)unorderedGroupEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getUnorderedGroup_Val2()
+  {
+    return (EAttribute)unorderedGroupEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getUnorderedGroup_Val3()
+  {
+    return (EReference)unorderedGroupEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getUnorderedGroup_Val4()
+  {
+    return (EReference)unorderedGroupEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getUnorderedGroupVal()
+  {
+    return unorderedGroupValEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getUnorderedGroupVal_Val()
+  {
+    return (EAttribute)unorderedGroupValEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getUnorderedGroupValDelegate()
+  {
+    return unorderedGroupValDelegateEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getUnorderedGroupVal2()
+  {
+    return unorderedGroupVal2EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getUnorderedGroupVal2_Val()
+  {
+    return (EAttribute)unorderedGroupVal2EClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getUnorderedGroupOptional()
+  {
+    return unorderedGroupOptionalEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getUnorderedGroupOptional_Val1()
+  {
+    return (EAttribute)unorderedGroupOptionalEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getUnorderedGroupOptional_Va2()
+  {
+    return (EAttribute)unorderedGroupOptionalEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getUnorderedGroupOptional_Val3()
+  {
+    return (EAttribute)unorderedGroupOptionalEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EEnum getDefEnum()
   {
     return defEnumEEnum;
@@ -1459,6 +1659,8 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
     createEReference(modelEClass, MODEL__X21);
     createEReference(modelEClass, MODEL__X22);
     createEReference(modelEClass, MODEL__X23);
+    createEReference(modelEClass, MODEL__X24);
+    createEReference(modelEClass, MODEL__X25);
 
     simpleGroupEClass = createEClass(SIMPLE_GROUP);
     createEAttribute(simpleGroupEClass, SIMPLE_GROUP__VAL1);
@@ -1574,6 +1776,25 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
     unorderedAlternativeVal2EClass = createEClass(UNORDERED_ALTERNATIVE_VAL2);
     createEAttribute(unorderedAlternativeVal2EClass, UNORDERED_ALTERNATIVE_VAL2__VAL);
 
+    unorderedGroupEClass = createEClass(UNORDERED_GROUP);
+    createEAttribute(unorderedGroupEClass, UNORDERED_GROUP__VAL1);
+    createEAttribute(unorderedGroupEClass, UNORDERED_GROUP__VAL2);
+    createEReference(unorderedGroupEClass, UNORDERED_GROUP__VAL3);
+    createEReference(unorderedGroupEClass, UNORDERED_GROUP__VAL4);
+
+    unorderedGroupValEClass = createEClass(UNORDERED_GROUP_VAL);
+    createEAttribute(unorderedGroupValEClass, UNORDERED_GROUP_VAL__VAL);
+
+    unorderedGroupValDelegateEClass = createEClass(UNORDERED_GROUP_VAL_DELEGATE);
+
+    unorderedGroupVal2EClass = createEClass(UNORDERED_GROUP_VAL2);
+    createEAttribute(unorderedGroupVal2EClass, UNORDERED_GROUP_VAL2__VAL);
+
+    unorderedGroupOptionalEClass = createEClass(UNORDERED_GROUP_OPTIONAL);
+    createEAttribute(unorderedGroupOptionalEClass, UNORDERED_GROUP_OPTIONAL__VAL1);
+    createEAttribute(unorderedGroupOptionalEClass, UNORDERED_GROUP_OPTIONAL__VA2);
+    createEAttribute(unorderedGroupOptionalEClass, UNORDERED_GROUP_OPTIONAL__VAL3);
+
     // Create enums
     defEnumEEnum = createEEnum(DEF_ENUM);
   }
@@ -1611,6 +1832,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
 
     // Add supertypes to classes
     unorderedAlternativeVal2EClass.getESuperTypes().add(this.getUnorderedAlternativeValDelegate());
+    unorderedGroupVal2EClass.getESuperTypes().add(this.getUnorderedGroupValDelegate());
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1634,6 +1856,8 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
     initEReference(getModel_X21(), this.getOptional(), null, "x21", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X22(), this.getFloat(), null, "x22", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X23(), this.getUnorderedAlternative(), null, "x23", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_X24(), this.getUnorderedGroup(), null, "x24", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_X25(), this.getUnorderedGroupOptional(), null, "x25", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(simpleGroupEClass, SimpleGroup.class, "SimpleGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSimpleGroup_Val1(), theEcorePackage.getEString(), "val1", null, 0, 1, SimpleGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1748,6 +1972,25 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
 
     initEClass(unorderedAlternativeVal2EClass, UnorderedAlternativeVal2.class, "UnorderedAlternativeVal2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getUnorderedAlternativeVal2_Val(), theEcorePackage.getEString(), "val", null, 0, 1, UnorderedAlternativeVal2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(unorderedGroupEClass, UnorderedGroup.class, "UnorderedGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getUnorderedGroup_Val1(), theEcorePackage.getEString(), "val1", null, 0, 1, UnorderedGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getUnorderedGroup_Val2(), theEcorePackage.getEInt(), "val2", null, 0, 1, UnorderedGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getUnorderedGroup_Val3(), this.getUnorderedGroupVal(), null, "val3", null, 0, 1, UnorderedGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getUnorderedGroup_Val4(), this.getUnorderedGroupValDelegate(), null, "val4", null, 0, 1, UnorderedGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(unorderedGroupValEClass, UnorderedGroupVal.class, "UnorderedGroupVal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getUnorderedGroupVal_Val(), theEcorePackage.getEString(), "val", null, 0, 1, UnorderedGroupVal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(unorderedGroupValDelegateEClass, UnorderedGroupValDelegate.class, "UnorderedGroupValDelegate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(unorderedGroupVal2EClass, UnorderedGroupVal2.class, "UnorderedGroupVal2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getUnorderedGroupVal2_Val(), theEcorePackage.getEString(), "val", null, 0, 1, UnorderedGroupVal2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(unorderedGroupOptionalEClass, UnorderedGroupOptional.class, "UnorderedGroupOptional", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getUnorderedGroupOptional_Val1(), theEcorePackage.getEString(), "val1", null, 0, 1, UnorderedGroupOptional.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getUnorderedGroupOptional_Va2(), theEcorePackage.getEString(), "va2", null, 0, 1, UnorderedGroupOptional.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getUnorderedGroupOptional_Val3(), theEcorePackage.getEString(), "val3", null, 0, 1, UnorderedGroupOptional.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
     initEEnum(defEnumEEnum, DefEnum.class, "DefEnum");

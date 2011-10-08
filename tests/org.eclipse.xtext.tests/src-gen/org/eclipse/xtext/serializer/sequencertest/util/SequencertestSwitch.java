@@ -40,6 +40,11 @@ import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternative;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal2;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeValDelegate;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroup;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupOptional;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal2;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupValDelegate;
 
 /**
  * <!-- begin-user-doc -->
@@ -332,6 +337,42 @@ public class SequencertestSwitch<T>
         UnorderedAlternativeVal2 unorderedAlternativeVal2 = (UnorderedAlternativeVal2)theEObject;
         T result = caseUnorderedAlternativeVal2(unorderedAlternativeVal2);
         if (result == null) result = caseUnorderedAlternativeValDelegate(unorderedAlternativeVal2);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SequencertestPackage.UNORDERED_GROUP:
+      {
+        UnorderedGroup unorderedGroup = (UnorderedGroup)theEObject;
+        T result = caseUnorderedGroup(unorderedGroup);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SequencertestPackage.UNORDERED_GROUP_VAL:
+      {
+        UnorderedGroupVal unorderedGroupVal = (UnorderedGroupVal)theEObject;
+        T result = caseUnorderedGroupVal(unorderedGroupVal);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SequencertestPackage.UNORDERED_GROUP_VAL_DELEGATE:
+      {
+        UnorderedGroupValDelegate unorderedGroupValDelegate = (UnorderedGroupValDelegate)theEObject;
+        T result = caseUnorderedGroupValDelegate(unorderedGroupValDelegate);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SequencertestPackage.UNORDERED_GROUP_VAL2:
+      {
+        UnorderedGroupVal2 unorderedGroupVal2 = (UnorderedGroupVal2)theEObject;
+        T result = caseUnorderedGroupVal2(unorderedGroupVal2);
+        if (result == null) result = caseUnorderedGroupValDelegate(unorderedGroupVal2);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SequencertestPackage.UNORDERED_GROUP_OPTIONAL:
+      {
+        UnorderedGroupOptional unorderedGroupOptional = (UnorderedGroupOptional)theEObject;
+        T result = caseUnorderedGroupOptional(unorderedGroupOptional);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -815,6 +856,86 @@ public class SequencertestSwitch<T>
    * @generated
    */
   public T caseUnorderedAlternativeVal2(UnorderedAlternativeVal2 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Unordered Group</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Unordered Group</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseUnorderedGroup(UnorderedGroup object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Unordered Group Val</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Unordered Group Val</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseUnorderedGroupVal(UnorderedGroupVal object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Unordered Group Val Delegate</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Unordered Group Val Delegate</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseUnorderedGroupValDelegate(UnorderedGroupValDelegate object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Unordered Group Val2</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Unordered Group Val2</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseUnorderedGroupVal2(UnorderedGroupVal2 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Unordered Group Optional</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Unordered Group Optional</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseUnorderedGroupOptional(UnorderedGroupOptional object)
   {
     return null;
   }

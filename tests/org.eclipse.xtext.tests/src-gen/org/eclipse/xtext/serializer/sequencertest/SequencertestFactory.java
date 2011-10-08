@@ -296,6 +296,51 @@ public interface SequencertestFactory extends EFactory
   UnorderedAlternativeVal2 createUnorderedAlternativeVal2();
 
   /**
+   * Returns a new object of class '<em>Unordered Group</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Unordered Group</em>'.
+   * @generated
+   */
+  UnorderedGroup createUnorderedGroup();
+
+  /**
+   * Returns a new object of class '<em>Unordered Group Val</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Unordered Group Val</em>'.
+   * @generated
+   */
+  UnorderedGroupVal createUnorderedGroupVal();
+
+  /**
+   * Returns a new object of class '<em>Unordered Group Val Delegate</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Unordered Group Val Delegate</em>'.
+   * @generated
+   */
+  UnorderedGroupValDelegate createUnorderedGroupValDelegate();
+
+  /**
+   * Returns a new object of class '<em>Unordered Group Val2</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Unordered Group Val2</em>'.
+   * @generated
+   */
+  UnorderedGroupVal2 createUnorderedGroupVal2();
+
+  /**
+   * Returns a new object of class '<em>Unordered Group Optional</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Unordered Group Optional</em>'.
+   * @generated
+   */
+  UnorderedGroupOptional createUnorderedGroupOptional();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

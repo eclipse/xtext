@@ -46,6 +46,11 @@ import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternative;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal2;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeValDelegate;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroup;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupOptional;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal2;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupValDelegate;
 
 /**
  * <!-- begin-user-doc -->
@@ -129,6 +134,11 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
       case SequencertestPackage.UNORDERED_ALTERNATIVE_VAL: return createUnorderedAlternativeVal();
       case SequencertestPackage.UNORDERED_ALTERNATIVE_VAL_DELEGATE: return createUnorderedAlternativeValDelegate();
       case SequencertestPackage.UNORDERED_ALTERNATIVE_VAL2: return createUnorderedAlternativeVal2();
+      case SequencertestPackage.UNORDERED_GROUP: return createUnorderedGroup();
+      case SequencertestPackage.UNORDERED_GROUP_VAL: return createUnorderedGroupVal();
+      case SequencertestPackage.UNORDERED_GROUP_VAL_DELEGATE: return createUnorderedGroupValDelegate();
+      case SequencertestPackage.UNORDERED_GROUP_VAL2: return createUnorderedGroupVal2();
+      case SequencertestPackage.UNORDERED_GROUP_OPTIONAL: return createUnorderedGroupOptional();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -496,6 +506,61 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
   {
     UnorderedAlternativeVal2Impl unorderedAlternativeVal2 = new UnorderedAlternativeVal2Impl();
     return unorderedAlternativeVal2;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public UnorderedGroup createUnorderedGroup()
+  {
+    UnorderedGroupImpl unorderedGroup = new UnorderedGroupImpl();
+    return unorderedGroup;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public UnorderedGroupVal createUnorderedGroupVal()
+  {
+    UnorderedGroupValImpl unorderedGroupVal = new UnorderedGroupValImpl();
+    return unorderedGroupVal;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public UnorderedGroupValDelegate createUnorderedGroupValDelegate()
+  {
+    UnorderedGroupValDelegateImpl unorderedGroupValDelegate = new UnorderedGroupValDelegateImpl();
+    return unorderedGroupValDelegate;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public UnorderedGroupVal2 createUnorderedGroupVal2()
+  {
+    UnorderedGroupVal2Impl unorderedGroupVal2 = new UnorderedGroupVal2Impl();
+    return unorderedGroupVal2;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public UnorderedGroupOptional createUnorderedGroupOptional()
+  {
+    UnorderedGroupOptionalImpl unorderedGroupOptional = new UnorderedGroupOptionalImpl();
+    return unorderedGroupOptional;
   }
 
   /**

@@ -35,6 +35,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX21 <em>X21</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX22 <em>X22</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX23 <em>X23</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX24 <em>X24</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX25 <em>X25</em>}</li>
  * </ul>
  * </p>
  *
@@ -563,5 +565,57 @@ public interface Model extends EObject
    * @generated
    */
   void setX23(UnorderedAlternative value);
+
+  /**
+   * Returns the value of the '<em><b>X24</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X24</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X24</em>' containment reference.
+   * @see #setX24(UnorderedGroup)
+   * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getModel_X24()
+   * @model containment="true"
+   * @generated
+   */
+  UnorderedGroup getX24();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX24 <em>X24</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X24</em>' containment reference.
+   * @see #getX24()
+   * @generated
+   */
+  void setX24(UnorderedGroup value);
+
+  /**
+   * Returns the value of the '<em><b>X25</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X25</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X25</em>' containment reference.
+   * @see #setX25(UnorderedGroupOptional)
+   * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getModel_X25()
+   * @model containment="true"
+   * @generated
+   */
+  UnorderedGroupOptional getX25();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX25 <em>X25</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X25</em>' containment reference.
+   * @see #getX25()
+   * @generated
+   */
+  void setX25(UnorderedGroupOptional value);
 
 } // Model

@@ -42,6 +42,10 @@ import org.eclipse.xtext.serializer.sequencertest.SingleTerminals;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternative;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal2;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroup;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupOptional;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal2;
 import org.eclipse.xtext.serializer.services.SequencerTestLanguageGrammarAccess;
 
 @SuppressWarnings("restriction")
@@ -247,6 +251,31 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 					return; 
 				}
 				else break;
+			case SequencertestPackage.UNORDERED_GROUP:
+				if(context == grammarAccess.getUnorderedGroupRule()) {
+					sequence_UnorderedGroup(context, (UnorderedGroup) semanticObject); 
+					return; 
+				}
+				else break;
+			case SequencertestPackage.UNORDERED_GROUP_OPTIONAL:
+				if(context == grammarAccess.getUnorderedGroupOptionalRule()) {
+					sequence_UnorderedGroupOptional(context, (UnorderedGroupOptional) semanticObject); 
+					return; 
+				}
+				else break;
+			case SequencertestPackage.UNORDERED_GROUP_VAL:
+				if(context == grammarAccess.getUnorderedGroupValRule()) {
+					sequence_UnorderedGroupVal(context, (UnorderedGroupVal) semanticObject); 
+					return; 
+				}
+				else break;
+			case SequencertestPackage.UNORDERED_GROUP_VAL2:
+				if(context == grammarAccess.getUnorderedGroupVal2Rule() ||
+				   context == grammarAccess.getUnorderedGroupValDelegateRule()) {
+					sequence_UnorderedGroupVal2(context, (UnorderedGroupVal2) semanticObject); 
+					return; 
+				}
+				else break;
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
@@ -445,7 +474,9 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         x20=DependentAlternative2 | 
 	 *         x21=Optional | 
 	 *         x22=Float | 
-	 *         x23=UnorderedAlternative
+	 *         x23=UnorderedAlternative | 
+	 *         x24=UnorderedGroup | 
+	 *         x25=UnorderedGroupOptional
 	 *     )
 	 *
 	 * Features:
@@ -472,6 +503,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x21
 	 *         EXCLUDE_IF_SET x22
 	 *         EXCLUDE_IF_SET x23
+	 *         EXCLUDE_IF_SET x24
+	 *         EXCLUDE_IF_SET x25
 	 *    x2[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x3
@@ -495,6 +528,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x21
 	 *         EXCLUDE_IF_SET x22
 	 *         EXCLUDE_IF_SET x23
+	 *         EXCLUDE_IF_SET x24
+	 *         EXCLUDE_IF_SET x25
 	 *    x3[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -518,6 +553,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x21
 	 *         EXCLUDE_IF_SET x22
 	 *         EXCLUDE_IF_SET x23
+	 *         EXCLUDE_IF_SET x24
+	 *         EXCLUDE_IF_SET x25
 	 *    x4[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -541,6 +578,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x21
 	 *         EXCLUDE_IF_SET x22
 	 *         EXCLUDE_IF_SET x23
+	 *         EXCLUDE_IF_SET x24
+	 *         EXCLUDE_IF_SET x25
 	 *    x5[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -564,6 +603,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x21
 	 *         EXCLUDE_IF_SET x22
 	 *         EXCLUDE_IF_SET x23
+	 *         EXCLUDE_IF_SET x24
+	 *         EXCLUDE_IF_SET x25
 	 *    x6[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -587,6 +628,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x21
 	 *         EXCLUDE_IF_SET x22
 	 *         EXCLUDE_IF_SET x23
+	 *         EXCLUDE_IF_SET x24
+	 *         EXCLUDE_IF_SET x25
 	 *    x7[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -610,6 +653,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x21
 	 *         EXCLUDE_IF_SET x22
 	 *         EXCLUDE_IF_SET x23
+	 *         EXCLUDE_IF_SET x24
+	 *         EXCLUDE_IF_SET x25
 	 *    x8[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -633,6 +678,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x21
 	 *         EXCLUDE_IF_SET x22
 	 *         EXCLUDE_IF_SET x23
+	 *         EXCLUDE_IF_SET x24
+	 *         EXCLUDE_IF_SET x25
 	 *    x9[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -656,6 +703,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x21
 	 *         EXCLUDE_IF_SET x22
 	 *         EXCLUDE_IF_SET x23
+	 *         EXCLUDE_IF_SET x24
+	 *         EXCLUDE_IF_SET x25
 	 *    x10[0, 2]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -678,6 +727,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x21
 	 *         EXCLUDE_IF_SET x22
 	 *         EXCLUDE_IF_SET x23
+	 *         EXCLUDE_IF_SET x24
+	 *         EXCLUDE_IF_SET x25
 	 *    x11[0, 2]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -700,6 +751,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x21
 	 *         EXCLUDE_IF_SET x22
 	 *         EXCLUDE_IF_SET x23
+	 *         EXCLUDE_IF_SET x24
+	 *         EXCLUDE_IF_SET x25
 	 *    x12[0, 2]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -722,6 +775,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x21
 	 *         EXCLUDE_IF_SET x22
 	 *         EXCLUDE_IF_SET x23
+	 *         EXCLUDE_IF_SET x24
+	 *         EXCLUDE_IF_SET x25
 	 *    x13[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -745,6 +800,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x21
 	 *         EXCLUDE_IF_SET x22
 	 *         EXCLUDE_IF_SET x23
+	 *         EXCLUDE_IF_SET x24
+	 *         EXCLUDE_IF_SET x25
 	 *    x14[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -768,6 +825,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x21
 	 *         EXCLUDE_IF_SET x22
 	 *         EXCLUDE_IF_SET x23
+	 *         EXCLUDE_IF_SET x24
+	 *         EXCLUDE_IF_SET x25
 	 *    x15[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -791,6 +850,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x21
 	 *         EXCLUDE_IF_SET x22
 	 *         EXCLUDE_IF_SET x23
+	 *         EXCLUDE_IF_SET x24
+	 *         EXCLUDE_IF_SET x25
 	 *    x19[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -814,6 +875,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x21
 	 *         EXCLUDE_IF_SET x22
 	 *         EXCLUDE_IF_SET x23
+	 *         EXCLUDE_IF_SET x24
+	 *         EXCLUDE_IF_SET x25
 	 *    x20[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -837,6 +900,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x21
 	 *         EXCLUDE_IF_SET x22
 	 *         EXCLUDE_IF_SET x23
+	 *         EXCLUDE_IF_SET x24
+	 *         EXCLUDE_IF_SET x25
 	 *    x21[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -860,6 +925,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x20
 	 *         EXCLUDE_IF_SET x22
 	 *         EXCLUDE_IF_SET x23
+	 *         EXCLUDE_IF_SET x24
+	 *         EXCLUDE_IF_SET x25
 	 *    x22[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -883,6 +950,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x20
 	 *         EXCLUDE_IF_SET x21
 	 *         EXCLUDE_IF_SET x23
+	 *         EXCLUDE_IF_SET x24
+	 *         EXCLUDE_IF_SET x25
 	 *    x23[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -906,6 +975,58 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x20
 	 *         EXCLUDE_IF_SET x21
 	 *         EXCLUDE_IF_SET x22
+	 *         EXCLUDE_IF_SET x24
+	 *         EXCLUDE_IF_SET x25
+	 *    x24[0, 1]
+	 *         EXCLUDE_IF_SET x1
+	 *         EXCLUDE_IF_SET x2
+	 *         EXCLUDE_IF_SET x3
+	 *         EXCLUDE_IF_SET x4
+	 *         EXCLUDE_IF_SET x5
+	 *         EXCLUDE_IF_SET x6
+	 *         EXCLUDE_IF_SET x7
+	 *         EXCLUDE_IF_SET x8
+	 *         EXCLUDE_IF_SET x9
+	 *         EXCLUDE_IF_SET x10
+	 *         EXCLUDE_IF_SET x11
+	 *         EXCLUDE_IF_SET x12
+	 *         EXCLUDE_IF_SET x10
+	 *         EXCLUDE_IF_SET x11
+	 *         EXCLUDE_IF_SET x12
+	 *         EXCLUDE_IF_SET x13
+	 *         EXCLUDE_IF_SET x14
+	 *         EXCLUDE_IF_SET x15
+	 *         EXCLUDE_IF_SET x19
+	 *         EXCLUDE_IF_SET x20
+	 *         EXCLUDE_IF_SET x21
+	 *         EXCLUDE_IF_SET x22
+	 *         EXCLUDE_IF_SET x23
+	 *         EXCLUDE_IF_SET x25
+	 *    x25[0, 1]
+	 *         EXCLUDE_IF_SET x1
+	 *         EXCLUDE_IF_SET x2
+	 *         EXCLUDE_IF_SET x3
+	 *         EXCLUDE_IF_SET x4
+	 *         EXCLUDE_IF_SET x5
+	 *         EXCLUDE_IF_SET x6
+	 *         EXCLUDE_IF_SET x7
+	 *         EXCLUDE_IF_SET x8
+	 *         EXCLUDE_IF_SET x9
+	 *         EXCLUDE_IF_SET x10
+	 *         EXCLUDE_IF_SET x11
+	 *         EXCLUDE_IF_SET x12
+	 *         EXCLUDE_IF_SET x10
+	 *         EXCLUDE_IF_SET x11
+	 *         EXCLUDE_IF_SET x12
+	 *         EXCLUDE_IF_SET x13
+	 *         EXCLUDE_IF_SET x14
+	 *         EXCLUDE_IF_SET x15
+	 *         EXCLUDE_IF_SET x19
+	 *         EXCLUDE_IF_SET x20
+	 *         EXCLUDE_IF_SET x21
+	 *         EXCLUDE_IF_SET x22
+	 *         EXCLUDE_IF_SET x23
+	 *         EXCLUDE_IF_SET x24
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1198,6 +1319,73 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *    val4[0, *]
 	 */
 	protected void sequence_UnorderedAlternative(EObject context, UnorderedAlternative semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (val1=ID? va2=ID? val3=ID?)
+	 *
+	 * Features:
+	 *    val1[0, 1]
+	 *    va2[0, 1]
+	 *    val3[0, 1]
+	 */
+	protected void sequence_UnorderedGroupOptional(EObject context, UnorderedGroupOptional semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     val=ID
+	 *
+	 * Features:
+	 *    val[1, 1]
+	 */
+	protected void sequence_UnorderedGroupVal2(EObject context, UnorderedGroupVal2 semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, SequencertestPackage.Literals.UNORDERED_GROUP_VAL2__VAL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SequencertestPackage.Literals.UNORDERED_GROUP_VAL2__VAL));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getUnorderedGroupVal2Access().getValIDTerminalRuleCall_1_0(), semanticObject.getVal());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     val=ID
+	 *
+	 * Features:
+	 *    val[1, 1]
+	 */
+	protected void sequence_UnorderedGroupVal(EObject context, UnorderedGroupVal semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, SequencertestPackage.Literals.UNORDERED_GROUP_VAL__VAL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SequencertestPackage.Literals.UNORDERED_GROUP_VAL__VAL));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getUnorderedGroupValAccess().getValIDTerminalRuleCall_1_0(), semanticObject.getVal());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (val1=ID val2=INT val3=UnorderedGroupVal val4=UnorderedGroupValDelegate)
+	 *
+	 * Features:
+	 *    val1[1, 1]
+	 *    val2[1, 1]
+	 *    val3[1, 1]
+	 *    val4[1, 1]
+	 */
+	protected void sequence_UnorderedGroup(EObject context, UnorderedGroup semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 }
