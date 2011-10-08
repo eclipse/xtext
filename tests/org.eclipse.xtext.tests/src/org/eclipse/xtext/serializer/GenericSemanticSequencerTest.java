@@ -55,4 +55,79 @@ public class GenericSemanticSequencerTest extends AbstractSemanticSequencerTest 
 		// unsupported
 	}
 
+	@Override
+	public void testUnorderedGroup1() throws Exception {
+		// unsupported
+	}
+
+	@Override
+	public void testUnorderedGroup2() throws Exception {
+		// unsupported
+	}
+
+	@Override
+	public void testUnorderedGroup3() throws Exception {
+		// unsupported
+	}
+
+	@Override
+	public void testUnorderedGroup4() throws Exception {
+		// unsupported
+	}
+
+	@Override
+	public void testUnorderedGroup5() throws Exception {
+		// unsupported
+	}
+
+	@Override
+	public void testUnorderedGroup6() throws Exception {
+		// unsupported
+	}
+
+	@Override
+	public void testUnorderedGroup7() throws Exception {
+		// unsupported
+	}
+
+	@Override
+	public void testUnorderedGroup8() throws Exception {
+		// unsupported
+	}
+
+	@Override
+	public void testUnorderedGroupOptional1() throws Exception {
+		// unsupported
+	}
+
+	@Override
+	public void testUnorderedGroupOptional2() throws Exception {
+		// unsupported
+	}
+
+	@Override
+	public void testUnorderedGroupOptional3() throws Exception {
+		// unsupported
+	}
+
+	@Override
+	public void testUnorderedGroupOptional4() throws Exception {
+		// unsupported
+	}
+
+	@Override
+	public void testUnorderedGroupOptional5() throws Exception {
+		// unsupported
+	}
+
+	@Override
+	public void testUnorderedGroupOptional6() throws Exception {
+		// unsupported
+	}
+
+	@Override
+	public void testUnorderedGroupOptional7() throws Exception {
+		// unsupported
+	}
+
 }

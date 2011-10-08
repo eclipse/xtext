@@ -15,6 +15,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
@@ -86,6 +87,8 @@ public class SemanticSequencerUtil {
 				&& !body.getFeatureInfo().getFeature().isMany())
 			return true;
 		if (body.getType() == ConstraintElementType.GROUP) {
+			if (body.getGrammarElement() instanceof UnorderedGroup)
+				return false;
 			for (IConstraintElement child : body.getChildren())
 				if (child.getFeatureInfo() == null || child.isOptional() || child.isMany()
 						|| child.getFeatureInfo().getFeature().isMany())
