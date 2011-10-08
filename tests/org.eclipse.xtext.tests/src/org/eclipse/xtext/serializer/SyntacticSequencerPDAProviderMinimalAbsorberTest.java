@@ -342,4 +342,18 @@ public class SyntacticSequencerPDAProviderMinimalAbsorberTest extends AbstractSy
 		assertEquals(expected.toString(), actual);
 	}
 
+	public void testActions2() throws Exception {
+		StringBuilder grammar = new StringBuilder();
+		grammar.append("Model: 'x' ('kw1' {Foo} | 'kw2' {Bar}) val1=ID;");
+		String actual = getParserRule(grammar.toString());
+		StringBuilder expected = new StringBuilder();
+		expected.append("Bar_Model:\n");
+		expected.append("  start 'x' 'kw2' {Bar} val1=ID\n");
+		expected.append("  val1=ID stop\n");
+		expected.append("Foo_Model:\n");
+		expected.append("  start 'x' 'kw1' {Foo} val1=ID\n");
+		expected.append("  val1=ID stop");
+		assertEquals(expected.toString(), actual);
+	}
+
 }
