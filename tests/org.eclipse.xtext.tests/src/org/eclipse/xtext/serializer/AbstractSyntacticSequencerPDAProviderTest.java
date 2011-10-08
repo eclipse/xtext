@@ -16,8 +16,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.generator.serializer.SyntacticSequencerPDA2ExtendedDot;
-import org.eclipse.xtext.generator.serializer.SyntacticSequencerPDA2SimpleDot;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
 import org.eclipse.xtext.serializer.analysis.IContextProvider;
@@ -84,8 +82,8 @@ public abstract class AbstractSyntacticSequencerPDAProviderTest extends Abstract
 		Grammar grammar = (Grammar) getModel(HEADER + body);
 		//		new SequenceParserNDA2Dot().draw(grammar, "pdf/" + getName() + "-NFA.pdf", "-T pdf");
 		//				SyntacticSequencerPDA2SimpleDot.drawGrammar(get(IContextProvider.class), "pdf/" + getName(), grammar);
-		SyntacticSequencerPDA2ExtendedDot.drawGrammar(get(IContextProvider.class), createSequenceParserPDAProvider(),
-				"pdf/" + getName(), grammar);
+		//		SyntacticSequencerPDA2ExtendedDot.drawGrammar(get(IContextProvider.class), createSequenceParserPDAProvider(),
+		//				"pdf/" + getName(), grammar);
 		List<String> result = Lists.newArrayList();
 		for (Triple<EClass, EObject, String> ctx : getContexts(grammar)) {
 			String t = ctx.getFirst() == null ? "null" : ctx.getFirst().getName();
