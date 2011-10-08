@@ -84,12 +84,12 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		Grammar grammar = (Grammar) getModel(HEADER + body);
 		IGrammarConstraintProvider gcp = get(IGrammarConstraintProvider.class);
 
-		try {
-			new ActionFilter2Dot().draw(grammar, getName() + ".pdf", "-T pdf");
-		} catch (IOException e) {
-			if (log.isDebugEnabled())
-				log.debug(e.getMessage(), e);
-		}
+		//		try {
+		//			new ActionFilter2Dot().draw(grammar, getName() + ".pdf", "-T pdf");
+		//		} catch (IOException e) {
+		//			if (log.isDebugEnabled())
+		//				log.debug(e.getMessage(), e);
+		//		}
 
 		List<IConstraintContext> ctxts = gcp.getConstraints(grammar);
 		List<String> result = Lists.newArrayList();
@@ -106,12 +106,12 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 	public void testXtext() {
 		IGrammarConstraintProvider gcp = get(IGrammarConstraintProvider.class);
 		List<IConstraintContext> ctxts = gcp.getConstraints(getGrammarAccess().getGrammar());
-		try {
-			new ActionFilter2Dot().draw(getGrammarAccess().getGrammar(), getName() + ".pdf", "-T pdf");
-		} catch (IOException e) {
-			if (log.isDebugEnabled())
-				log.debug(e.getMessage(), e);
-		}
+		//		try {
+		//			new ActionFilter2Dot().draw(getGrammarAccess().getGrammar(), getName() + ".pdf", "-T pdf");
+		//		} catch (IOException e) {
+		//			if (log.isDebugEnabled())
+		//				log.debug(e.getMessage(), e);
+		//		}
 		List<String> result = Lists.newArrayList();
 		Set<IConstraint> visited = Sets.newHashSet();
 		for (IConstraintContext ctx : ctxts) {
