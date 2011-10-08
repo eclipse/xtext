@@ -9,6 +9,7 @@ import org.eclipse.xtext.serializer.analysis.IContextProvider
 import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider
 import org.eclipse.xtext.util.GraphvizDotBuilder
 import org.eclipse.xtext.xbase.lib.Pair
+import org.eclipse.emf.ecore.EClass
 
 class Context2DotRenderer { 
 	
@@ -20,8 +21,8 @@ class Context2DotRenderer {
 	
 	@Inject extension Context2NameFunction nameFunction
 	
-	def types(EObject ctx) {
-		ctx.typesForContext.map( t | new SyntacticSequencerPDAProvider$SequencerPDAContext(ctx, t))
+	def Iterable<Pair<EObject, EClass>> types(EObject ctx) {
+		ctx.typesForContext.map( t | ctx -> t)
 	}
 	
 	def contexts() {
@@ -32,9 +33,8 @@ class Context2DotRenderer {
 		contexts.map(c | c.getFileName(name) -> builder.draw(c))
 	}	
 	
-	def String getFileName(SyntacticSequencerPDAProvider$SequencerPDAContext ctx, String name) {
-		val fn = grammar.name.toSimpleName + "_" + ctx.type.name + "_" + ctx.context.contextName + "_" + name;
+	def String getFileName(Pair<EObject, EClass> ctx, String name) {
+		val fn = grammar.name.toSimpleName + "_" + ctx.value.name + "_" + ctx.key.contextName + "_" + name;
 		grammar.basePackageRuntime.asPath + "/serializer/" + fn + ".dot" 
 	}
-	
 }

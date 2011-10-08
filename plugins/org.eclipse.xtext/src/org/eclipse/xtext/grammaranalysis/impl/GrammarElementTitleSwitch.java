@@ -73,6 +73,8 @@ public class GrammarElementTitleSwitch extends XtextSwitch<String> implements Fu
 
 	protected boolean showQualified = false;
 
+	protected boolean showRule = false;
+
 	protected String valueForNull = "(null)";
 
 	protected String addAssignemnt(String result, AbstractElement ele) {
@@ -95,17 +97,23 @@ public class GrammarElementTitleSwitch extends XtextSwitch<String> implements Fu
 	}
 
 	protected String addQualified(String result, AbstractElement ele) {
-		if (!showQualified)
+		if (!showQualified && !showRule)
 			return result;
 		AbstractRule rule = GrammarUtil.containingRule(ele);
+		if (!showQualified)
+			return result + ":" + rule.getName();
 		GrammarElementTitleSwitch others = copy();
 		others.showQualified = false;
+		others.showRule = false;
 		List<AbstractElement> elementsWithSameName = Lists.newArrayList();
 		for (AbstractElement candidate : EcoreUtil2.getAllContentsOfType(rule, ele.getClass()))
 			if (candidate == ele || result.equals(others.doSwitch(candidate)))
 				elementsWithSameName.add(candidate);
-		if (elementsWithSameName.size() < 2)
-			return rule.getName() + ":" + result;
+		if (elementsWithSameName.size() < 2) {
+			if (showRule)
+				return rule.getName() + ":" + result;
+			return result;
+		}
 		Map<CompoundElement, Node> nodes = Maps.newHashMap();
 		for (AbstractElement collision : elementsWithSameName) {
 			EObject current = EcoreUtil2.getContainerOfType(collision, CompoundElement.class);
@@ -121,7 +129,9 @@ public class GrammarElementTitleSwitch extends XtextSwitch<String> implements Fu
 				current = current.eContainer();
 			}
 		}
-		return rule.getName() + ":" + nodes.get(rule.getAlternatives());
+		if (showRule)
+			return rule.getName() + ":" + nodes.get(rule.getAlternatives());
+		return nodes.get(rule.getAlternatives()).toString();
 	}
 
 	public String apply(AbstractElement from) {
@@ -207,6 +217,7 @@ public class GrammarElementTitleSwitch extends XtextSwitch<String> implements Fu
 		result.showAssignment = showAssignment;
 		result.showCardinality = showCardinality;
 		result.showQualified = showQualified;
+		result.showRule = showRule;
 		return result;
 	}
 
@@ -244,6 +255,11 @@ public class GrammarElementTitleSwitch extends XtextSwitch<String> implements Fu
 
 	public GrammarElementTitleSwitch showQualified() {
 		showQualified = true;
+		return this;
+	}
+
+	public GrammarElementTitleSwitch showRule() {
+		showRule = true;
 		return this;
 	}
 

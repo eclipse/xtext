@@ -19,31 +19,23 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.CompoundElement;
-import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
-import org.eclipse.xtext.grammaranalysis.IGrammarNFAProvider.NFABuilder;
-import org.eclipse.xtext.grammaranalysis.INFAState;
-import org.eclipse.xtext.grammaranalysis.INFATransition;
-import org.eclipse.xtext.grammaranalysis.IPDAState;
-import org.eclipse.xtext.grammaranalysis.IPDAState.PDAStateType;
-import org.eclipse.xtext.grammaranalysis.impl.AbstractCachingNFABuilder;
-import org.eclipse.xtext.grammaranalysis.impl.AbstractNFAProvider;
-import org.eclipse.xtext.grammaranalysis.impl.AbstractNFAState;
-import org.eclipse.xtext.grammaranalysis.impl.AbstractNFATransition;
-import org.eclipse.xtext.grammaranalysis.impl.AbstractPDAProvider;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AlternativeAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.GrammarAliasFactory;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.GroupAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
+import org.eclipse.xtext.serializer.analysis.ISerializerPDAProvider.ISerState;
+import org.eclipse.xtext.serializer.analysis.ISerializerPDAProvider.SerStateType;
 import org.eclipse.xtext.serializer.sequencer.RuleCallStack;
+import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.formallang.Nfa;
 import org.eclipse.xtext.util.formallang.NfaToProduction;
 import org.eclipse.xtext.util.formallang.NfaUtil;
@@ -56,6 +48,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
@@ -87,13 +80,13 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 		}
 
 		public RuleCall getPop(ISynState state) {
-			return state.getType().getSimpleType() == PDAStateType.RULECALL_EXIT ? (RuleCall) state.getGrammarElement()
+			return state.getType() == SynStateType.UNASSIGNED_PARSER_RULE_EXIT ? (RuleCall) state.getGrammarElement()
 					: null;
 		}
 
 		public RuleCall getPush(ISynState state) {
-			return state.getType().getSimpleType() == PDAStateType.RULECALL_ENTER ? (RuleCall) state
-					.getGrammarElement() : null;
+			return state.getType() == SynStateType.UNASSIGNED_PARSER_RULE_ENTER ? (RuleCall) state.getGrammarElement()
+					: null;
 		}
 
 		public ISynState getStart() {
@@ -102,232 +95,6 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			return (ISynState) navigable;
 		}
 
-	}
-
-	public static class SequencerNFAProvider extends AbstractNFAProvider<SequencerNFAState, SequencerNFATransition> {
-		public static class SequencerNFABuilder extends AbstractCachingNFABuilder<SequencerNFAState, SequencerNFATransition> {
-
-			@Override
-			public SequencerNFAState createState(AbstractElement ele) {
-				return new SequencerNFAState(ele, this);
-			}
-
-			@Override
-			protected SequencerNFATransition createTransition(SequencerNFAState source, SequencerNFAState target,
-					boolean isRuleCall, AbstractElement loopCenter) {
-				return new SequencerNFATransition(source, target, isRuleCall, loopCenter);
-			}
-
-			@Override
-			public boolean filter(AbstractElement ele) {
-				if (ele instanceof CompoundElement)
-					return true;
-				if (ele instanceof Assignment)
-					return true;
-				if (ele instanceof CrossReference)
-					return true;
-				return false;
-			}
-
-			public NFADirection getDirection() {
-				return NFADirection.FORWARD;
-			}
-		}
-
-		@Override
-		protected NFABuilder<SequencerNFAState, SequencerNFATransition> createBuilder() {
-			return new SequencerNFABuilder();
-		}
-
-		public NFABuilder<SequencerNFAState, SequencerNFATransition> getBuilder() {
-			return builder;
-		}
-
-	}
-
-	public static class SequencerNFAState extends AbstractNFAState<SequencerNFAState, SequencerNFATransition> {
-
-		public SequencerNFAState(AbstractElement element, NFABuilder<SequencerNFAState, SequencerNFATransition> builder) {
-			super(element, builder);
-		}
-
-		public List<SequencerNFATransition> collectOutgoingTransitions() {
-			outgoing = Lists.newArrayList();
-			outgoingRuleCalls = Lists.newArrayList();
-			collectOutgoing(element, Sets.<AbstractElement> newHashSet(), false, null);
-			removeDuplicates(outgoing);
-			removeDuplicates(outgoingRuleCalls);
-			return outgoingRuleCalls.isEmpty() ? outgoing : outgoingRuleCalls;
-		}
-
-	}
-
-	public static class SequencerNFATransition extends AbstractNFATransition<SequencerNFAState, SequencerNFATransition> {
-
-		public SequencerNFATransition(SequencerNFAState source, SequencerNFAState target, boolean ruleCall,
-				AbstractElement loopCenter) {
-			super(source, target, ruleCall, loopCenter);
-		}
-	}
-
-	public static class SequencerPDAContext {
-		protected EObject context;
-		protected EClass type;
-
-		public SequencerPDAContext(EObject context, EClass type) {
-			super();
-			this.context = context;
-			this.type = type;
-		}
-
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj)
-				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			SequencerPDAContext other = (SequencerPDAContext) obj;
-			return context == other.context && type == other.type;
-		}
-
-		public EObject getContext() {
-			return context;
-		}
-
-		public EClass getType() {
-			return type;
-		}
-
-		@Override
-		public int hashCode() {
-			return context.hashCode() + (type == null ? 0 : type.hashCode());
-		}
-	}
-
-	public static class SequencerPDAProvider extends AbstractPDAProvider<SequencerPDAContext> {
-
-		protected SequencerNFAProvider nfaProvider;
-
-		public SequencerPDAProvider(SequencerNFAProvider nfaProvider) {
-			super();
-			this.nfaProvider = nfaProvider;
-		}
-
-		@Override
-		protected boolean canEnterRuleCall(INFAState<?, ?> state) {
-			if (!(state.getGrammarElement() instanceof RuleCall))
-				return false;
-			RuleCall rc = (RuleCall) state.getGrammarElement();
-			if (!(rc.getRule() instanceof ParserRule && rc.getRule().getType().getClassifier() instanceof EClass))
-				return false;
-			return GrammarUtil.containingAssignment(rc) == null;
-		}
-
-		@Override
-		protected boolean canPass(SequencerPDAContext context, INFAState<?, ?> state, EClass constructedType) {
-			AbstractElement ele = state.getGrammarElement();
-			if (ele instanceof Action)
-				return ((Action) ele).getType().getClassifier() == context.getType();
-			if (constructedType != null)
-				return true;
-			if (GrammarUtil.containingAssignment(ele) != null)
-				return GrammarUtil.containingRule(ele).getType().getClassifier() == context.getType();
-			return true;
-		}
-
-		protected boolean canReachElement(INFAState<?, ?> from, AbstractElement to, Set<Object> visited) {
-			if (!visited.add(from))
-				return false;
-			if (from.getGrammarElement() == to)
-				return true;
-			for (INFATransition<?, ?> trans : from.getAllOutgoing())
-				if (!trans.isRuleCall() && canReachElement(trans.getTarget(), to, visited))
-					return true;
-			return false;
-		}
-
-		protected boolean canReachEndState(INFAState<?, ?> from, Set<Object> visited) {
-			if (!visited.add(from))
-				return false;
-			if (from.isEndState())
-				return true;
-			for (INFATransition<?, ?> trans : from.getAllOutgoing())
-				if (!trans.isRuleCall() && canReachEndState(trans.getTarget(), visited))
-					return true;
-			return false;
-		}
-
-		protected List<INFAState<?, ?>> getActionStartFollowers(Action action) {
-			ParserRule rule = GrammarUtil.containingParserRule(action);
-			List<INFAState<?, ?>> result = Lists.newArrayList();
-			for (INFAState<?, ?> state : getAllRuleStartFollowers(rule))
-				if (canReachElement(state, action, Sets.newHashSet()))
-					result.add(state);
-			return result;
-		}
-
-		protected List<INFAState<?, ?>> getAllRuleStartFollowers(ParserRule pr) {
-			SequencerNFAState startNfa = nfaProvider.getNFA(pr.getAlternatives());
-			List<INFAState<?, ?>> result = Lists.newArrayList();
-			if (nfaProvider.getBuilder().filter(pr.getAlternatives())) {
-				for (SequencerNFATransition transition : startNfa.collectOutgoingTransitions())
-					result.add(transition.getTarget());
-			} else
-				result.add(startNfa);
-			for (Action a : GrammarUtil.containedActions(pr))
-				if (GrammarUtil.isAssignedAction(a))
-					result.add(nfaProvider.getNFA(a));
-			return result;
-		}
-
-		@Override
-		protected List<INFAState<?, ?>> getFollowers(SequencerPDAContext context, INFAState<?, ?> state,
-				boolean returning, boolean canReturn) {
-			List<INFAState<?, ?>> result = Lists.newArrayList();
-			for (INFATransition<?, ?> transition : returning ? state.getOutgoingAfterReturn() : state.getOutgoing()) {
-				if (!GrammarUtil.isAssignedAction(transition.getTarget().getGrammarElement()))
-					result.add(transition.getTarget());
-				if (transition.isRuleCall())
-					for (Action action : GrammarUtil.containedActions(GrammarUtil.containingRule(transition.getTarget()
-							.getGrammarElement())))
-						if (GrammarUtil.isAssignedAction(action))
-							result.add(nfaProvider.getNFA(action));
-			}
-			return result;
-		}
-
-		protected List<INFAState<?, ?>> getParserRuleStartFollowers(ParserRule rule) {
-			List<INFAState<?, ?>> result = Lists.newArrayList();
-			for (INFAState<?, ?> state : getAllRuleStartFollowers(rule))
-				if (canReachEndState(state, Sets.newHashSet()))
-					result.add(state);
-			return result;
-		}
-
-		@Override
-		protected List<INFAState<?, ?>> getStartFollowers(SequencerPDAContext context) {
-			if (context.getContext() instanceof ParserRule)
-				return getParserRuleStartFollowers((ParserRule) context.getContext());
-			else if (context.getContext() instanceof Action)
-				return getActionStartFollowers((Action) context.getContext());
-			return Collections.emptyList();
-		}
-
-		@Override
-		protected boolean isFinalState(SequencerPDAContext context, INFAState<?, ?> state, boolean returning,
-				boolean canReturn) {
-			if (context.getContext() instanceof Action) {
-				for (INFATransition<?, ?> transition : returning ? state.getOutgoingAfterReturn() : state.getOutgoing())
-					if (transition.getTarget().getGrammarElement() == context.getContext())
-						return true;
-			} else if (canReturn && context.getContext() instanceof ParserRule && state.isEndState()
-					&& GrammarUtil.containingParserRule(state.getGrammarElement()) == context.getContext())
-				return true;
-			return false;
-
-		}
 	}
 
 	protected static class SynAbsorberState extends SynState implements ISynAbsorberState {
@@ -622,7 +389,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 
 		@Override
 		public String toString() {
-			return toString(new GrammarElementTitleSwitch().showAssignments());
+			return toString(new GrammarElementTitleSwitch().showAssignments().showQualified());
 		}
 
 		public String toString(Function<AbstractElement, String> elementFormatter) {
@@ -734,14 +501,16 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 
 	}
 
-	protected Map<SequencerPDAContext, ISynAbsorberState> cache = Maps.newHashMap();
+	protected Map<Pair<EObject, EClass>, ISynAbsorberState> cache = Maps.newHashMap();
 
-	protected SequencerPDAProvider pdaProvider = createSequencerPDAProvider();
+	//	protected SequencerPDAProvider pdaProvider = createSequencerPDAProvider();
+	@Inject
+	protected SerializerPDAProvider pdaProvider;
 
-	protected boolean canReachAbsorber(IPDAState from, IPDAState to, Set<IPDAState> visited) {
+	protected boolean canReachAbsorber(ISerState from, ISerState to, Set<ISerState> visited) {
 		if (isMandatoryAbsorber(from.getGrammarElement()) || !visited.add(from))
 			return false;
-		for (IPDAState follower : from.getFollowers())
+		for (ISerState follower : from.getFollowers())
 			if (follower == to)
 				return true;
 			else if (canReachAbsorber(follower, to, visited))
@@ -749,37 +518,37 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 		return false;
 	}
 
-	protected void collectFollowingAbsorberStates(IPDAState state, boolean collect, Set<IPDAState> visited,
-			Set<IPDAState> absorber) {
+	protected void collectFollowingAbsorberStates(ISerState state, boolean collect, Set<ISerState> visited,
+			Set<ISerState> absorber) {
 		if (collect) {
 			if (!visited.add(state))
 				return;
-			if (isMandatoryAbsorber(state.getGrammarElement()) || state.getType() == PDAStateType.STOP) {
+			if (isMandatoryAbsorber(state.getGrammarElement()) || state.getType() == SerStateType.STOP) {
 				absorber.add(state);
 				return;
 			} else if (isOptionalAbsorber(state.getGrammarElement()))
 				absorber.add(state);
 		}
-		for (IPDAState follower : state.getFollowers())
+		for (ISerState follower : state.getFollowers())
 			collectFollowingAbsorberStates(follower, true, visited, absorber);
 	}
 
-	protected SynAbsorberState createAbsorberState(IPDAState state, Map<IPDAState, SynAbsorberState> absorbers,
-			Map<SynAbsorberState, Map<IPDAState, SynState>> emitters, EObject context, EClass eClass) {
+	protected SynAbsorberState createAbsorberState(ISerState state, Map<ISerState, SynAbsorberState> absorbers,
+			Map<SynAbsorberState, Map<ISerState, SynState>> emitters, EObject context, EClass eClass) {
 		SynAbsorberState result = absorbers.get(state);
 		if (result != null)
 			return result;
-		if (state.getType() == PDAStateType.STOP) {
+		if (state.getType() == SerStateType.STOP) {
 			absorbers.put(state, result = createAbsorberState(SynStateType.STOP, null, context, eClass));
 			return result;
 		}
 		absorbers.put(state, result = createAbsorberState(getType(state), state.getGrammarElement(), context, eClass));
-		Set<IPDAState> followers = Sets.newHashSet();
-		collectFollowingAbsorberStates(state, false, Sets.<IPDAState> newHashSet(), followers);
-		for (IPDAState follower : followers) {
+		Set<ISerState> followers = Sets.newHashSet();
+		collectFollowingAbsorberStates(state, false, Sets.<ISerState> newHashSet(), followers);
+		for (ISerState follower : followers) {
 			SynAbsorberState target = createAbsorberState(follower, absorbers, emitters, context, eClass);
 			SynTransition transition = createTransition(result, target);
-			Map<IPDAState, SynState> emitter = emitters.get(target);
+			Map<ISerState, SynState> emitter = emitters.get(target);
 			if (emitter == null)
 				emitters.put(target, emitter = Maps.newHashMap());
 			transition.setFollowers(createEmitterStates(state, follower, target, emitter));
@@ -797,13 +566,13 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 		return new SynEmitterState(type, element, target);
 	}
 
-	protected List<ISynState> createEmitterStates(IPDAState from, IPDAState to, SynAbsorberState target,
-			Map<IPDAState, SynState> emitters) {
+	protected List<ISynState> createEmitterStates(ISerState from, ISerState to, SynAbsorberState target,
+			Map<ISerState, SynState> emitters) {
 		List<ISynState> result = Lists.newArrayList();
-		for (IPDAState next : from.getFollowers())
+		for (ISerState next : from.getFollowers())
 			if (next == to)
 				result.add(target);
-			else if (canReachAbsorber(next, to, Sets.<IPDAState> newHashSet())) {
+			else if (canReachAbsorber(next, to, Sets.<ISerState> newHashSet())) {
 				SynState emitter = emitters.get(next);
 				if (emitter == null) {
 					emitters.put(next, emitter = createEmitterState(getType(next), next.getGrammarElement(), target));
@@ -814,31 +583,33 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 		return result;
 	}
 
-	protected SequencerNFAProvider createSequenceParserNFAProvider() {
-		return new SequencerNFAProvider();
-	}
-
-	protected SequencerPDAProvider createSequencerPDAProvider() {
-		return new SequencerPDAProvider(createSequenceParserNFAProvider());
-	}
+	//	protected SequencerNFAProvider createSequenceParserNFAProvider() {
+	//		return new SequencerNFAProvider();
+	//	}
+	//
+	//	protected SequencerPDAProvider createSequencerPDAProvider() {
+	//		return new SequencerPDAProvider(createSequenceParserNFAProvider());
+	//	}
 
 	protected SynTransition createTransition(SynAbsorberState source, SynAbsorberState target) {
 		return new SynTransition(source, target);
 	}
 
 	public ISynAbsorberState getPDA(EObject context, EClass type) {
-		SequencerPDAContext ctx = new SequencerPDAContext(context, type);
-		ISynAbsorberState result = cache.get(ctx);
+		//		SequencerPDAContext ctx = new SequencerPDAContext(context, type);
+		Pair<EObject, EClass> key = Tuples.create(context, type);
+		ISynAbsorberState result = cache.get(key);
 		if (result == null) {
-			Map<IPDAState, SynAbsorberState> absorbers = Maps.newHashMap();
-			Map<SynAbsorberState, Map<IPDAState, SynState>> emitters = Maps.newHashMap();
-			result = createAbsorberState(pdaProvider.getPDA(ctx), absorbers, emitters, context, type);
-			cache.put(ctx, result);
+			Map<ISerState, SynAbsorberState> absorbers = Maps.newHashMap();
+			Map<SynAbsorberState, Map<ISerState, SynState>> emitters = Maps.newHashMap();
+			Pda<? extends ISerState, RuleCall> pda = pdaProvider.getPDA(context, type);
+			result = createAbsorberState(pda.getStart(), absorbers, emitters, context, type);
+			cache.put(key, result);
 		}
 		return result;
 	}
 
-	protected SynStateType getType(IPDAState state) {
+	protected SynStateType getType(ISerState state) {
 		switch (state.getType()) {
 			case ELEMENT:
 				AbstractElement ele = state.getGrammarElement();
@@ -889,9 +660,9 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 						return SynStateType.UNASSIGEND_KEYWORD;
 				}
 				break;
-			case RULECALL_ENTER:
+			case PUSH:
 				return SynStateType.UNASSIGNED_PARSER_RULE_ENTER;
-			case RULECALL_EXIT:
+			case POP:
 				return SynStateType.UNASSIGNED_PARSER_RULE_EXIT;
 			case START:
 				return SynStateType.START;

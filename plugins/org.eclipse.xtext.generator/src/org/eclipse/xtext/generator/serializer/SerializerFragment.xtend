@@ -27,6 +27,8 @@ class SerializerFragment extends Xtend2GeneratorFragment {
 	
 	@Inject Context2DotRenderer dotRenderer
 	
+	@Inject SyntacticSequencerPDA2ExtendedDot seq2dot
+	
 	def create result: new SerializerFragmentState() state() {}
 	
 	def setGenerateDebugData(boolean doGenerate) {
@@ -61,7 +63,7 @@ class SerializerFragment extends Xtend2GeneratorFragment {
 			ctx.writeFile(Generator::SRC_GEN, grammarConstraints.fileName, grammarConstraints.fileContents);
 //			for(obj:context2DotRenderer.render2Dot(new SyntacticSequencerPDA2SimpleDot(), "pda"))
 //				ctx.writeFile(Generator::SRC_GEN, obj.key, obj.value);
-			for(obj:dotRenderer.render2Dot(new SyntacticSequencerPDA2ExtendedDot(), "pda"))
+			for(obj:dotRenderer.render2Dot(seq2dot, "pda"))
 				ctx.writeFile(Generator::SRC_GEN, obj.key, obj.value);
 		}
 	}

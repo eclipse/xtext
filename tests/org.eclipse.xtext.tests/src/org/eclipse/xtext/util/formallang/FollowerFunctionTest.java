@@ -58,8 +58,10 @@ public class FollowerFunctionTest extends TestCase {
 	private StringProduction sp(String value) {
 		NfaUtil util = new NfaUtil();
 		StringProduction result = new StringProduction(value);
-		FollowerFunction<ProdElement> l2r = new FollowerFunctionImpl<ProdElement, String>(result).setDirection(Direction.L2R);
-		FollowerFunction<ProdElement> r2l = new FollowerFunctionImpl<ProdElement, String>(result).setDirection(Direction.R2L);
+		FollowerFunction<ProdElement> l2r = new FollowerFunctionImpl<ProdElement, String>(result)
+				.setDirection(Direction.L2R);
+		FollowerFunction<ProdElement> r2l = new FollowerFunctionImpl<ProdElement, String>(result)
+				.setDirection(Direction.R2L);
 		Nfa<String> nfa1 = util.create(result, l2r, new StringNfa.StringNfaFactory("(begin)", "(end)"));
 		Nfa<String> nfa2 = util.inverse(util.create(result, r2l, new StringNfa.StringNfaFactory("(end)", "(begin)")));
 		if (!util.equalsIgnoreOrder(nfa1, nfa2)) {
@@ -127,6 +129,11 @@ public class FollowerFunctionTest extends TestCase {
 	public void testSequence11() {
 		StringProduction p = sp("'a' ('b'? 'c'?)");
 		assertEquals("'b', 'c', null", new FF(p).followers("a"));
+	}
+
+	public void testSequence12() {
+		StringProduction p = sp("'a' ('b' 'c')*");
+		assertEquals("'b', null", new FF(p).followers("c"));
 	}
 
 	public void testAlternative1() {

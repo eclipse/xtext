@@ -44,6 +44,9 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
   @Inject
   private Context2DotRenderer dotRenderer;
   
+  @Inject
+  private SyntacticSequencerPDA2ExtendedDot seq2dot;
+  
   private final HashMap<ArrayList<?>,SerializerFragmentState> _createCache_state = new HashMap<ArrayList<?>,SerializerFragmentState>();
   
   public SerializerFragmentState state() {
@@ -133,8 +136,7 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
           String _fileName_4 = this.grammarConstraints.getFileName();
           CharSequence _fileContents_4 = this.grammarConstraints.getFileContents();
           ctx.writeFile(Generator.SRC_GEN, _fileName_4, _fileContents_4);
-          SyntacticSequencerPDA2ExtendedDot _syntacticSequencerPDA2ExtendedDot = new SyntacticSequencerPDA2ExtendedDot();
-          Iterable<Pair<String,String>> _render2Dot = this.dotRenderer.render2Dot(_syntacticSequencerPDA2ExtendedDot, "pda");
+          Iterable<Pair<String,String>> _render2Dot = this.dotRenderer.render2Dot(this.seq2dot, "pda");
           for (final Pair<String,String> obj : _render2Dot) {
             String _key = obj.getKey();
             String _value = obj.getValue();
