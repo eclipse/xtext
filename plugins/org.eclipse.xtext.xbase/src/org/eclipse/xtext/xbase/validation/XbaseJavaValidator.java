@@ -347,9 +347,11 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		if (!isImplicitReturn(expr))
 			return;
 		JvmTypeReference expectedType = typeProvider.getExpectedType(expr);
+		// TODO what's this special case here?
 		if (expectedType == null || typeRefs.is(expectedType, Void.TYPE))
 			return;
 		JvmTypeReference type = typeProvider.getType(expr);
+		// TODO what's this special case here?
 		if (typeRefs.is(expectedType, Void.class) && EcoreUtil2.getContainerOfType(expr, XClosure.class) != null) {
 			if (typeRefs.is(type, Void.TYPE))
 				return;

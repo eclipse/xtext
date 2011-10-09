@@ -89,6 +89,10 @@ public class XbaseResource extends DerivedStateAwareResource {
 		@Override
 		protected void markDependent() {
 		}
+		@Override
+		public String toString() {
+			return "RootAssumptionTracker";
+		}
 	}
 	
 	@Inject
