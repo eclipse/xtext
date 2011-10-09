@@ -149,10 +149,14 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 				Tracker tracker = linkingAssumptions.trackAssumptions(resource);
 				element = provider.get();
 				tracker.stopTracking();
-				boolean rawType = (Boolean) ((Triple<?, ?, ?>) key).getThird();
+				@SuppressWarnings("unchecked")
+				Triple<?, ImmutableLinkedItem, Boolean> castedKey = (Triple<?, ImmutableLinkedItem, Boolean>) key;
+				boolean rawType = castedKey.getThird();
 				//TODO the test for 'Void' is a hack and a result of the lack of a protocol for unresolved references 
 				// I.e. some type computations return Void instead when they couldn't compute a certain type.
-				if (!tracker.isIndependentOfAssumptions() || element==null || (element instanceof JvmTypeReference && (isOrContainsVoid((JvmTypeReference)element) || !isResolved((JvmTypeReference) element, null, rawType)))) {
+				if (!tracker.isIndependentOfAssumptions() || 
+						!isResolved((JvmTypeReference) element, getNearestTypeParameterDeclarator(castedKey.getSecond().object), rawType) ||
+						isOrContainsVoid((JvmTypeReference) element)) {
 					if (logger.isDebugEnabled()) {
 						logger.debug(getDebugIndentation(rawType) + "cache skip: " + element);
 					}
