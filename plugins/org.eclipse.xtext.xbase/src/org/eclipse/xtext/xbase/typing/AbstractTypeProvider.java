@@ -155,11 +155,8 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 				CyclicHandlingSupport<T> cyclicHandlingSupport = castedKey.getFirst();
 				ImmutableLinkedItem<T> linkedItem = castedKey.getSecond();
 				boolean rawType = castedKey.getThird();
-				//TODO the test for 'Void' is a hack and a result of the lack of a protocol for unresolved references 
-				// I.e. some type computations return Void instead when they couldn't compute a certain type.
 				if (!tracker.isIndependentOfAssumptions() || !(linkedItem.object instanceof EObject) ||
-						!isResolved((JvmTypeReference) element, getNearestTypeParameterDeclarator(cyclicHandlingSupport.getPrimaryEObject(linkedItem.object)), rawType) ||
-						isOrContainsVoid((JvmTypeReference) element)) {
+						!isResolved((JvmTypeReference) element, getNearestTypeParameterDeclarator(cyclicHandlingSupport.getPrimaryEObject(linkedItem.object)), rawType)) {
 					if (logger.isDebugEnabled()) {
 						logger.debug(getDebugIndentation(rawType) + "cache skip: " + element);
 					}
@@ -173,13 +170,6 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 				cacheHit(adapter);
 			}
 			return element;
-		}
-		
-		protected boolean isOrContainsVoid(JvmTypeReference ref) {
-			if (ref instanceof JvmSpecializedTypeReference) {
-				return isOrContainsVoid(((JvmSpecializedTypeReference) ref).getEquivalent());
-			}
-			return (ref != null && ref.getIdentifier() != null && ref.getIdentifier().contains("Void"));
 		}
 		
 	};
@@ -205,10 +195,6 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 			for(JvmTypeConstraint constraint: ((JvmTypeParameter) reference.getType()).getConstraints()) {
 				if (!isResolved(constraint.getTypeReference(), declarator, rawType, false, visited))
 					return false;
-				if (constraint instanceof JvmLowerBound) {
-					if (typeReferences.is(constraint.getTypeReference(), Object.class))
-						return false;
-				}
 			}
 			return false;
 		}

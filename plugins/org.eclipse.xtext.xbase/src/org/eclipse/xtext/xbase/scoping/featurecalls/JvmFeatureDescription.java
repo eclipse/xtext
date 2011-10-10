@@ -28,6 +28,10 @@ import com.google.inject.Provider;
  */
 public class JvmFeatureDescription extends EObjectDescription implements IValidatedEObjectDescription {
 
+	private static enum CheckState {
+		UNCHECKED, FAST_CHECKED, TYPES_CHECKED, GENERICS_CHECKED
+	}
+	
 	private final ITypeArgumentContext rawTypeContext;
 	private ITypeArgumentContext genericTypeContext;
 	private String shadowingString;
@@ -36,7 +40,7 @@ public class JvmFeatureDescription extends EObjectDescription implements IValida
 	private XExpression implicitReceiver;
 	private int numberOfIrrelevantArguments = 0;
 	private String issueCode;
-	private boolean intenseChecked;
+	private CheckState checkState;
 	private List<EnumSet<TypeConformanceResult.Kind>> argumentConversionHints;
 
 	public JvmFeatureDescription(
@@ -76,6 +80,7 @@ public class JvmFeatureDescription extends EObjectDescription implements IValida
 		this.isValid = isValid;
 		this.implicitReceiver = implicitReceiver;
 		this.numberOfIrrelevantArguments = numberOfIrrelevantArguments;
+		this.checkState = CheckState.UNCHECKED;
 	}
 	
 	@Override
@@ -134,20 +139,43 @@ public class JvmFeatureDescription extends EObjectDescription implements IValida
 		return issueCode;
 	}
 
-	public boolean isIntenseChecked() {
-		return intenseChecked;
+	public boolean isGenericsChecked() {
+		return this.checkState == CheckState.GENERICS_CHECKED;
 	}
 
-	public void setIntenseChecked(boolean intenseChecked) {
-		this.intenseChecked = intenseChecked;
+	public void setGenericsChecked() {
+		this.checkState = CheckState.GENERICS_CHECKED;
 	}
 
+	public boolean isTypesChecked() {
+		return this.checkState == CheckState.GENERICS_CHECKED || this.checkState == CheckState.TYPES_CHECKED;
+	}
+
+	public void setTypesChecked() {
+		this.checkState = CheckState.TYPES_CHECKED;
+	}
+	
+	public boolean isFastChecked() {
+		return this.checkState != CheckState.UNCHECKED;
+	}
+
+	public void setFastChecked() {
+		this.checkState = CheckState.FAST_CHECKED;
+	}
+	
 	public List<EnumSet<TypeConformanceResult.Kind>> getArgumentConversionHints() {
 		return argumentConversionHints;
 	}
 
 	public void setArgumentConversionHints(List<EnumSet<TypeConformanceResult.Kind>> argumentConversionHints) {
 		this.argumentConversionHints = argumentConversionHints;
+	}
+	
+	public boolean isSameValidationState(IValidatedEObjectDescription other) {
+		if (other instanceof JvmFeatureDescription) {
+			return checkState.equals(((JvmFeatureDescription) other).checkState);
+		}
+		return isGenericsChecked();
 	}
 
 }

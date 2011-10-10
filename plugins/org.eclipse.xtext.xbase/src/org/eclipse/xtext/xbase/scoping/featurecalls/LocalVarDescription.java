@@ -47,4 +47,7 @@ public class LocalVarDescription extends EObjectDescription implements IValidate
 		return issueCode;
 	}
 
+	public boolean isSameValidationState(IValidatedEObjectDescription other) {
+		return other.getClass().equals(LocalVarDescription.class) || other.isSameValidationState(this);
+	}
 }

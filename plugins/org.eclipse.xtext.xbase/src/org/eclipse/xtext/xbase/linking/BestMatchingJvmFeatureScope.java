@@ -111,7 +111,7 @@ public class BestMatchingJvmFeatureScope implements IScope {
 	protected IEObjectDescription getBestMatch(Iterable<IEObjectDescription> iterable) {
 		IEObjectDescription bestMatch = null;
 		for (IEObjectDescription description : iterable) {
-			featureCallChecker.check(description);
+			featureCallChecker.checkWithoutTypes(description);
 			if (bestMatch == null) {
 				bestMatch = description;
 			} else {
@@ -125,23 +125,19 @@ public class BestMatchingJvmFeatureScope implements IScope {
 		if (a instanceof IValidatedEObjectDescription && b instanceof IValidatedEObjectDescription) {
 			IValidatedEObjectDescription descA = (IValidatedEObjectDescription) a;
 			IValidatedEObjectDescription descB = (IValidatedEObjectDescription) b;
+			{
+				IValidatedEObjectDescription result = selectByIssueCode(descA, descB);
+				if (result != null)
+					return result;
+			}
+			featureCallChecker.checkTypesWithoutGenerics(a);
+			featureCallChecker.checkTypesWithoutGenerics(b);
 			while(true) {
-				if(descA.isValid()) { 
-					if(!descB.isValid())
-						return a;
-				} else if(descB.isValid()) {
-					return b;
-				} else if (!descA.isValid() && !descB.isValid()) {
-					if (descA.getIssueCode() != null && descB.getIssueCode() != null) {
-						int issueCodeComparison = compareIssueCodes(descA.getIssueCode(), descB.getIssueCode());
-						if (issueCodeComparison < 0)
-							return descA;
-						if (issueCodeComparison > 0)
-							return descB;
-					}
-				}
-				boolean again = featureCallChecker.checkWithGenerics(a);
-				again = featureCallChecker.checkWithGenerics(b) || again;
+				IValidatedEObjectDescription result = selectByIssueCode(descA, descB);
+				if (result != null)
+					return result;
+				boolean again = featureCallChecker.checkTypesWithGenerics(a);
+				again = featureCallChecker.checkTypesWithGenerics(b) || again;
 				if (!again) {
 					break;
 				}
@@ -187,6 +183,26 @@ public class BestMatchingJvmFeatureScope implements IScope {
 			}
 		}
 		return a;
+	}
+
+	protected IValidatedEObjectDescription selectByIssueCode(IValidatedEObjectDescription descA, IValidatedEObjectDescription descB) {
+		if (!descA.isSameValidationState(descB))
+			return null;
+		if(descA.isValid()) { 
+			if(!descB.isValid())
+				return descA;
+		} else if(descB.isValid()) {
+			return descB;
+		} else if (!descA.isValid() && !descB.isValid()) {
+			if (descA.getIssueCode() != null && descB.getIssueCode() != null) {
+				int issueCodeComparison = compareIssueCodes(descA.getIssueCode(), descB.getIssueCode());
+				if (issueCodeComparison < 0)
+					return descA;
+				if (issueCodeComparison > 0)
+					return descB;
+			}
+		}
+		return null;
 	}
 
 	protected JvmFeatureDescription getBestConformanceMatch(JvmFeatureDescription featureDescriptionA,

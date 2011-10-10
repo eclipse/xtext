@@ -112,11 +112,11 @@ public class FeatureCallChecker {
 		this.reference = reference;
 	}
 
-	public boolean checkWithGenerics(IEObjectDescription input) {
+	public boolean checkTypesWithGenerics(IEObjectDescription input) {
 		boolean result = false;
 		if (input instanceof JvmFeatureDescription) {
 			final JvmFeatureDescription featureDescription = (JvmFeatureDescription) input;
-			if (!featureDescription.isIntenseChecked()) {
+			if (!featureDescription.isGenericsChecked()) {
 				Provider<Boolean> validator = new Provider<Boolean>() {
 					public Boolean get() {
 						Boolean result = Boolean.FALSE;
@@ -128,15 +128,15 @@ public class FeatureCallChecker {
 								List<XExpression> actualArguments = featureCall2JavaMapping.getActualArguments(
 										(XAbstractFeatureCall) context, executable,
 										featureDescription.getImplicitReceiver());
-								result = checkWithGenerics(featureDescription, executable, actualArguments, typeContext);
+								result = checkTypesWithGenerics(featureDescription, executable, actualArguments, typeContext);
 							} else if (context instanceof XConstructorCall
 									&& featureDescription.getEObjectOrProxy() instanceof JvmConstructor) {
 								List<XExpression> arguments = ((XConstructorCall) context).getArguments();
-								result = checkWithGenerics(featureDescription,
+								result = checkTypesWithGenerics(featureDescription,
 										(JvmExecutable) featureDescription.getEObjectOrProxy(), arguments, typeContext);
 							}
 						}
-						featureDescription.setIntenseChecked(true);
+						featureDescription.setGenericsChecked();
 						return result;
 					}
 				};
@@ -146,7 +146,7 @@ public class FeatureCallChecker {
 		return result;
 	}
 
-	protected boolean checkWithGenerics(JvmFeatureDescription featureDescription, JvmExecutable executable,
+	protected boolean checkTypesWithGenerics(JvmFeatureDescription featureDescription, JvmExecutable executable,
 			List<XExpression> actualArguments, ITypeArgumentContext typeContext) {
 		boolean result;
 		List<EnumSet<Kind>> allConformanceKinds = areGenericArgumentTypesValid(executable, actualArguments, typeContext);
@@ -161,31 +161,64 @@ public class FeatureCallChecker {
 		return result;
 	}
 	
-	public String check(final IEObjectDescription input) {
+	public String checkWithoutTypes(final IEObjectDescription input) {
 		if (input instanceof IValidatedEObjectDescription) {
-			Provider<String> validator = new Provider<String>() {
-				public String get() {
-					final IValidatedEObjectDescription validatedDescription = (IValidatedEObjectDescription) input;
-					JvmIdentifiableElement identifiable = validatedDescription.getEObjectOrProxy();
-					if (identifiable.eIsProxy())
-						identifiable = (JvmIdentifiableElement) EcoreUtil.resolve(identifiable, context);
-					String issueCode;
-					if (identifiable.eIsProxy())
-						issueCode = UNRESOLVABLE_PROXY;
-					else if (!validatedDescription.isValid()) {
-						if (Strings.isEmpty(validatedDescription.getIssueCode()))
-							issueCode = FEATURE_NOT_VISIBLE;
-						else
-							return validatedDescription.getIssueCode();
-					} else
-						issueCode = dispatcher.invoke(identifiable, context, reference, validatedDescription);
-					validatedDescription.setIssueCode(issueCode);
-					return issueCode;
-				}
-			};
-			return doCheck((IValidatedEObjectDescription)input, validator);
+			final IValidatedEObjectDescription validatedDescription = (IValidatedEObjectDescription) input;
+			JvmIdentifiableElement identifiable = validatedDescription.getEObjectOrProxy();
+			if (identifiable.eIsProxy())
+				identifiable = (JvmIdentifiableElement) EcoreUtil.resolve(identifiable, context);
+			String issueCode;
+			if (identifiable.eIsProxy())
+				issueCode = UNRESOLVABLE_PROXY;
+			else if (!validatedDescription.isValid()) {
+				if (Strings.isEmpty(validatedDescription.getIssueCode()))
+					issueCode = FEATURE_NOT_VISIBLE;
+				else
+					return validatedDescription.getIssueCode();
+			} else
+				issueCode = dispatcher.invoke(identifiable, context, reference, validatedDescription);
+			validatedDescription.setIssueCode(issueCode);
+			return issueCode;
 		}
 		return null;
+	}
+	
+	public boolean checkTypesWithoutGenerics(IEObjectDescription input) {
+		boolean result = false;
+		if (input instanceof JvmFeatureDescription) {
+			final JvmFeatureDescription featureDescription = (JvmFeatureDescription) input;
+			if (!featureDescription.isTypesChecked()) {
+				Provider<Boolean> validator = new Provider<Boolean>() {
+					public Boolean get() {
+						Boolean result = Boolean.FALSE;
+						if (context instanceof XAbstractFeatureCall
+								&& featureDescription.getEObjectOrProxy() instanceof JvmExecutable) {
+							JvmExecutable executable = (JvmExecutable) featureDescription.getEObjectOrProxy();
+							List<XExpression> actualArguments = featureCall2JavaMapping.getActualArguments(
+									(XAbstractFeatureCall) context, executable,
+									featureDescription.getImplicitReceiver());
+							result = checkTypesWithoutGenerics(featureDescription, executable, actualArguments);
+						} else if (context instanceof XConstructorCall
+								&& featureDescription.getEObjectOrProxy() instanceof JvmConstructor) {
+							List<XExpression> arguments = ((XConstructorCall) context).getArguments();
+							result = checkTypesWithoutGenerics(featureDescription,
+									(JvmExecutable) featureDescription.getEObjectOrProxy(), arguments);
+						}
+						featureDescription.setTypesChecked();
+						return result;
+					}
+				};
+				result = doCheck(featureDescription, validator);
+			}
+		}
+		return result;
+	}
+
+	protected boolean checkTypesWithoutGenerics(JvmFeatureDescription featureDescription, JvmExecutable executable,
+			List<XExpression> actualArguments) {
+		if (!areArgumentTypesValid(executable, actualArguments, featureDescription.getRawTypeContext()))
+			featureDescription.setIssueCode(INVALID_ARGUMENT_TYPES);
+		return true;
 	}
 
 	protected <T> T doCheck(final IValidatedEObjectDescription input, Provider<T> validator) {
@@ -225,9 +258,6 @@ public class FeatureCallChecker {
 		if ((!context.getTypeArguments().isEmpty()) // raw type or inferred arguments
 				&& expectedTypeArguments != context.getTypeArguments().size())
 			return INVALID_NUMBER_OF_TYPE_ARGUMENTS;
-		// TODO check type parameter bounds against type arguments 
-		if (!areArgumentTypesValid(input, arguments, jvmFeatureDescription.getRawTypeContext()))
-			return INVALID_ARGUMENT_TYPES;
 		return null;
 	}
 
@@ -363,18 +393,19 @@ public class FeatureCallChecker {
 			return INVALID_NUMBER_OF_ARGUMENTS;
 		if (!isExplicitOperationCall && !isSugaredMethodInvocationWithoutParanthesis(jvmFeatureDescription))
 			return METHOD_ACCESS_WITHOUT_PARENTHESES;
+		if (isExplicitOperationCall && isSugaredMethodInvocationWithoutParanthesis(jvmFeatureDescription)) {
+			return METHOD_ACCESS_WITHOUT_PARENTHESES;
+		}
 		if (!featureCall.getTypeArguments().isEmpty() // raw type or type inference
 				&& operation.getTypeParameters().size() != featureCall.getTypeArguments().size())
 			return INVALID_NUMBER_OF_TYPE_ARGUMENTS;
-		if (!areArgumentTypesValid(operation, actualArguments, jvmFeatureDescription.getRawTypeContext()))
-			return INVALID_ARGUMENT_TYPES;
 		return null;
 	}
 
 	protected boolean areArgumentTypesValid(JvmExecutable exectuable, List<XExpression> arguments, ITypeArgumentContext typeArgumentContext) {
 		int numberOfParameters = exectuable.getParameters().size();
 		int parametersToCheck = exectuable.isVarArgs() ? numberOfParameters - 1 : numberOfParameters;
-		for (int i = 0; i < parametersToCheck; i++) {
+		for (int i = 0; i < parametersToCheck && i<arguments.size(); i++) {
 			JvmTypeReference parameterType = exectuable.getParameters().get(i).getParameterType();
 			if (parameterType == null)
 				return true;
