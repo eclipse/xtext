@@ -566,10 +566,20 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 	@Check
 	public void checkParameterNames(XtendFunction function) {
 		for (int i = 0; i < function.getParameters().size(); ++i) {
+			String leftParameterName = function.getParameters().get(i).getName();
 			for (int j = i + 1; j < function.getParameters().size(); ++j) {
-				if (equal(function.getParameters().get(i).getName(), function.getParameters().get(j).getName())) {
+				if (equal(leftParameterName, function.getParameters().get(j).getName())) {
 					error("Duplicate parameter name", XTEND_FUNCTION__PARAMETERS, i, DUPLICATE_PARAMETER_NAME);
 					error("Duplicate parameter name", XTEND_FUNCTION__PARAMETERS, j, DUPLICATE_PARAMETER_NAME);
+				}
+			}
+			if (function.getCreateExtensionInfo() != null) {
+				if (equal(leftParameterName, function.getCreateExtensionInfo().getName())) {
+					error("Duplicate parameter name", XTEND_FUNCTION__PARAMETERS, i, DUPLICATE_PARAMETER_NAME);
+					if (function.getCreateExtensionInfo().eIsSet(CREATE_EXTENSION_INFO__NAME))
+						error("Duplicate parameter name", function.getCreateExtensionInfo(), CREATE_EXTENSION_INFO__NAME, DUPLICATE_PARAMETER_NAME);
+					else
+						error("Duplicate implicit parameter name 'it'", function.getCreateExtensionInfo(), CREATE_EXTENSION_INFO__NAME, DUPLICATE_PARAMETER_NAME);
 				}
 			}
 		}

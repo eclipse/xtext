@@ -56,7 +56,7 @@ public interface CreateExtensionInfo extends EObject
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * The default value is <code>"this"</code>.
+	 * The default value is <code>"it"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
@@ -66,7 +66,7 @@ public interface CreateExtensionInfo extends EObject
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see org.eclipse.xtext.xtend2.xtend2.Xtend2Package#getCreateExtensionInfo_Name()
-	 * @model default="this"
+	 * @model default="it"
 	 * @generated
 	 */
 	String getName();

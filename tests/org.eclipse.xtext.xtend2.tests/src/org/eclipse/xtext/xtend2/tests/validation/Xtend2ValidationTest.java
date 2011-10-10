@@ -282,6 +282,18 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, DUPLICATE_PARAMETER_NAME, "duplicate", "name");
 	}
 	
+	public void testDuplicateParameter_CreateExtension_01() throws Exception {
+		XtendFunction function = function("def create newArrayList foo(int it) {}");
+		helper.assertError(function, Xtend2Package.Literals.CREATE_EXTENSION_INFO, DUPLICATE_PARAMETER_NAME, "duplicate", "implicit", "name");
+		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, DUPLICATE_PARAMETER_NAME, "duplicate", "name");
+	}
+	
+	public void testDuplicateParameter_CreateExtension_02() throws Exception {
+		XtendFunction function = function("def create result: newArrayList foo(int result) {}");
+		helper.assertError(function, Xtend2Package.Literals.CREATE_EXTENSION_INFO, DUPLICATE_PARAMETER_NAME, "duplicate", "name");
+		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, DUPLICATE_PARAMETER_NAME, "duplicate", "name");
+	}
+	
 	public void testRichStringIfPredicate() throws Exception {
 		assertNoConformanceError("'''«IF Boolean::FALSE»«ENDIF»'''");
 		assertNoConformanceError("'''«IF true»«ENDIF»'''");

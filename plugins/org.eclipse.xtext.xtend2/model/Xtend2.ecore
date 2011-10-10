@@ -108,6 +108,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="createExpression" eType="ecore:EClass ../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        defaultValueLiteral="this"/>
+        defaultValueLiteral="it"/>
   </eClassifiers>
 </ecore:EPackage>
