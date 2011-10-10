@@ -53,6 +53,14 @@ public interface ITypeProvider {
 	 *         <code>null</code> indicates a problem during resolution.
 	 */
 	public JvmTypeReference getType(XExpression expression, boolean rawType);
+	
+	/**
+	 * @param expression the expression. May not be <code>null</code>.
+	 * @param rawType <code>true</code> if the raw type is sufficient.
+	 * @return the fully-resolved type of the {@link XExpression}, if a correct, fully-linkable model is given.
+	 *         <code>null</code> indicates a problem during resolution.
+	 */
+	public JvmTypeReference getType(XExpression expression, JvmTypeReference rawExpectation, boolean rawType);
 
 	/**
 	 * Return the resolved type of the element. Same as 

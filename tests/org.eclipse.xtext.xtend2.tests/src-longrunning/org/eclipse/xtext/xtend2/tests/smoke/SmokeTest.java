@@ -347,6 +347,8 @@ public class SmokeTest extends AbstractXtend2TestCase {
 				assertTrue(newIterator.hasNext());
 				assertEqualNodes(text, iterator.next(), newIterator.next());
 			}
+			assertFalse(iterator.hasNext());
+			assertFalse(newIterator.hasNext());
 			if (logger.isDebugEnabled()) {
 				logger.debug("... took " + (System.currentTimeMillis() - time));
 				logger.debug("... done - total time: " + (System.currentTimeMillis() - start));

@@ -40,6 +40,7 @@ import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
+import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
@@ -98,14 +99,14 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 	
 	// this class is final because of the assumptions that are made in
 	// equals and hashcode
-	protected static final class ImmutableLinkedItem {
+	protected static final class ImmutableLinkedItem<T> {
 		
-		protected final EObject object;
-		protected final ImmutableLinkedItem prev;
+		protected final T object;
+		protected final ImmutableLinkedItem<T> prev;
 		protected final int hashCode;
 		protected final int size;
 		
-		public ImmutableLinkedItem(EObject object, ImmutableLinkedItem immutableStack) {
+		public ImmutableLinkedItem(T object, ImmutableLinkedItem<T> immutableStack) {
 			this.object = object;
 			prev = immutableStack;
 			size = immutableStack == null ? 1 : immutableStack.size + 1;
@@ -124,8 +125,8 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 				return true;
 			if (obj.hashCode() != hashCode() || obj.getClass() != ImmutableLinkedItem.class)
 				return false;
-			ImmutableLinkedItem other = (ImmutableLinkedItem) obj;
-			return other.object == object && other.size == size && (other.prev == prev || prev != null && prev.equals(other.prev));
+			ImmutableLinkedItem<?> other = (ImmutableLinkedItem<?>) obj;
+			return other.object.equals(object) && other.size == size && (other.prev == prev || prev != null && prev.equals(other.prev));
 		}
 		
 		@Override
@@ -150,12 +151,14 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 				element = provider.get();
 				tracker.stopTracking();
 				@SuppressWarnings("unchecked")
-				Triple<?, ImmutableLinkedItem, Boolean> castedKey = (Triple<?, ImmutableLinkedItem, Boolean>) key;
+				Triple<CyclicHandlingSupport<T>, ImmutableLinkedItem<T>, Boolean> castedKey = (Triple<CyclicHandlingSupport<T>, ImmutableLinkedItem<T>, Boolean>) key;
+				CyclicHandlingSupport<T> cyclicHandlingSupport = castedKey.getFirst();
+				ImmutableLinkedItem<T> linkedItem = castedKey.getSecond();
 				boolean rawType = castedKey.getThird();
 				//TODO the test for 'Void' is a hack and a result of the lack of a protocol for unresolved references 
 				// I.e. some type computations return Void instead when they couldn't compute a certain type.
-				if (!tracker.isIndependentOfAssumptions() || 
-						!isResolved((JvmTypeReference) element, getNearestTypeParameterDeclarator(castedKey.getSecond().object), rawType) ||
+				if (!tracker.isIndependentOfAssumptions() || !(linkedItem.object instanceof EObject) ||
+						!isResolved((JvmTypeReference) element, getNearestTypeParameterDeclarator(cyclicHandlingSupport.getPrimaryEObject(linkedItem.object)), rawType) ||
 						isOrContainsVoid((JvmTypeReference) element)) {
 					if (logger.isDebugEnabled()) {
 						logger.debug(getDebugIndentation(rawType) + "cache skip: " + element);
@@ -280,25 +283,25 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 //	private final PolymorphicDispatcher<JvmTypeReference> typeDispatcher = PolymorphicDispatcher.createForSingleTarget(
 //			"_type", 2, 2, this);
 
-	protected JvmTypeReference _type(XExpression expression, boolean rawType) {
+	protected JvmTypeReference _type(XExpression expression, JvmTypeReference rawExpectation, boolean rawType) {
 		throw new IllegalArgumentException("Type computation is not implemented for " + expression);
 	}
 
-	protected CyclicHandlingSupport<XExpression> getType = new CyclicHandlingSupport<XExpression>() {
+	protected CyclicHandlingSupport<Pair<XExpression, JvmTypeReference>> getType = new CyclicHandlingSupport<Pair<XExpression, JvmTypeReference>>() {
 
 		@Override
-		protected JvmTypeReference doComputation(XExpression t, boolean rawType) {
-			return typeDispatcherInvoke(t, rawType);
+		protected JvmTypeReference doComputation(Pair<XExpression, JvmTypeReference> t, boolean rawType) {
+			return typeDispatcherInvoke(t.getFirst(), t.getSecond(), rawType);
 		}
 		
 		@Override
-		protected AbstractTypeProvider.ComputationData<XExpression> createComputationData() {
-			return new ComputationData<XExpression>();
+		protected EObject getPrimaryEObject(Pair<XExpression, JvmTypeReference> pair) {
+			return pair.getFirst();
 		}
-
+		
 		@Override
-		protected JvmTypeReference doHandleCyclicCall(XExpression t, boolean rawType) {
-			return handleCyclicGetType(t, rawType);
+		protected JvmTypeReference doHandleCyclicCall(Pair<XExpression, JvmTypeReference> t, boolean rawType) {
+			return handleCyclicGetType(t.getFirst(), t.getSecond(), rawType);
 		}
 	};
 	
@@ -318,8 +321,8 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		return getConstructor(expr, true);
 	}
 	
-	protected JvmTypeReference typeDispatcherInvoke(XExpression expression, boolean rawType) {
-		return _type(expression, rawType);
+	protected JvmTypeReference typeDispatcherInvoke(XExpression expression, JvmTypeReference rawExpectation, boolean rawType) {
+		return _type(expression, rawExpectation, rawType);
 	}
 
 	protected String getDebugIndentation(boolean rawType) {
@@ -329,7 +332,7 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		return String.valueOf(chars);
 	}
 	
-	protected <T extends EObject> JvmTypeReference doGetType(String key, T object, boolean rawType, CyclicHandlingSupport<T> typeComputer) {
+	protected <T> JvmTypeReference doGetType(String key, T object, boolean rawType, CyclicHandlingSupport<T> typeComputer) {
 		String debugIndentation = null;
 		if (logger.isDebugEnabled()) {
 			debugIndentation = getDebugIndentation(rawType);
@@ -352,14 +355,18 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 	}
 	
 	public JvmTypeReference getType(final XExpression expression) {
-		return getType(expression, false);
+		return getType(expression, null, false);
 	}
 	
 	public JvmTypeReference getType(final XExpression expression, boolean rawType) {
-		return doGetType("getType", expression, rawType, getType);
+		return getType(expression, null, rawType);
+	}
+	
+	public JvmTypeReference getType(final XExpression expression, JvmTypeReference rawExpectation, boolean rawType) {
+		return doGetType("getType", Tuples.create(expression, rawExpectation), rawType, getType);
 	}
 
-	protected JvmTypeReference handleCyclicGetType(final XExpression expression, boolean rawType) {
+	protected JvmTypeReference handleCyclicGetType(final XExpression expression, JvmTypeReference rawExpectation, boolean rawType) {
 		return null;
 	}
 
@@ -383,6 +390,11 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		@Override
 		protected JvmTypeReference doHandleCyclicCall(XExpression t, boolean rawType) {
 			return handleCycleGetExpectedType(t, rawType);
+		}
+
+		@Override
+		protected EObject getPrimaryEObject(XExpression expression) {
+			return expression;
 		}
 	};
 	
@@ -433,6 +445,11 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		@Override
 		protected JvmTypeReference doHandleCyclicCall(JvmIdentifiableElement t, boolean rawType) {
 			return handleCycleGetTypeForIdentifiable(t, rawType);
+		}
+
+		@Override
+		protected EObject getPrimaryEObject(JvmIdentifiableElement identifiable) {
+			return identifiable;
 		}
 	};
 
@@ -540,66 +557,69 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		return typeArgumentContextProvider;
 	}
 
-	protected static class ComputationData<T extends EObject> {
-		protected final Set<T> computations = Sets.newHashSet();
-		protected ImmutableLinkedItem queryState = null;
-		protected Resource resource;
-		protected boolean resourceLeftOrCyclic;
-		
-		protected boolean add(T t) {
-			boolean result = computations.add(t);
-			if (result) {
-				if (queryState == null) {
-					resource = t.eResource();
+	abstract class CyclicHandlingSupport<T> {
+
+		protected class ComputationData {
+			protected final Set<T> computations = Sets.newHashSet();
+			protected ImmutableLinkedItem<T> queryState = null;
+			protected Resource resource;
+			protected boolean resourceLeftOrCyclic;
+			
+			protected boolean add(T t) {
+				boolean result = computations.add(t);
+				if (result) {
+					if (queryState == null) {
+						resource = getPrimaryEObject(t).eResource();
+					}
+					queryState = new ImmutableLinkedItem<T>(t, queryState);
 				}
-				queryState = new ImmutableLinkedItem(t, queryState);
+				return result;
 			}
-			return result;
+			
+			protected void remove(T t) {
+				computations.remove(t);
+				queryState = queryState.prev;
+				if (queryState == null)
+					resource = null;
+			}
+
+			protected int size() {
+				return computations.size();
+			}
 		}
 		
-		protected void remove(T t) {
-			computations.remove(t);
-			queryState = queryState.prev;
-			if (queryState == null)
-				resource = null;
-		}
-
-		protected int size() {
-			return computations.size();
-		}
-	}
-	
-	abstract class CyclicHandlingSupport<T extends EObject> {
-
-		private final ThreadLocal<ComputationData<T>> ongoingComputations = new ThreadLocal<ComputationData<T>>() {
+		protected abstract EObject getPrimaryEObject(T t);
+		
+		private final ThreadLocal<ComputationData> ongoingComputations = new ThreadLocal<ComputationData>() {
 			@Override
-			protected ComputationData<T> initialValue() {
+			protected ComputationData initialValue() {
 				return createComputationData();
 			}
 		};
-		private final ThreadLocal<ComputationData<T>> ongoingRawTypeComputations = new ThreadLocal<ComputationData<T>>() {
+		private final ThreadLocal<ComputationData> ongoingRawTypeComputations = new ThreadLocal<ComputationData>() {
 			@Override
-			protected ComputationData<T> initialValue() {
+			protected ComputationData initialValue() {
 				return createComputationData();
 			}
 		};
 		
-		protected ComputationData<T> getTypeComputations(boolean rawType) {
-			ThreadLocal<ComputationData<T>> computations = rawType ? ongoingRawTypeComputations : ongoingComputations;
-			ComputationData<T> result = computations.get();
+		protected ComputationData getTypeComputations(boolean rawType) {
+			ThreadLocal<ComputationData> computations = rawType ? ongoingRawTypeComputations : ongoingComputations;
+			ComputationData result = computations.get();
 			return result;
 		}
 
 		public JvmTypeReference getType(final T t, final boolean rawType) {
 			if (t == null)
 				return null;
-			if (t.eIsProxy())
+			EObject eObject = getPrimaryEObject(t);
+			if (eObject == null || eObject.eIsProxy())
 				return null;
-			ComputationData<T> computationData = getTypeComputations(rawType);
+			ComputationData computationData = getTypeComputations(rawType);
 			if (computationData.add(t)) {
 				try {
-					if (computationData.resource == t.eResource() && !computationData.resourceLeftOrCyclic) {
-						Triple<CyclicHandlingSupport<T>, ImmutableLinkedItem, Boolean> cacheKey = Tuples.create(this, computationData.queryState, rawType);
+					if (computationData.resource == eObject.eResource() && !computationData.resourceLeftOrCyclic) {
+						Triple<CyclicHandlingSupport<T>, ImmutableLinkedItem<T>, Boolean> cacheKey = Tuples.create(this, computationData.queryState, rawType);
 						final boolean[] hit = new boolean[] { true };
 						JvmTypeReference result = typeReferenceAwareCache.get(cacheKey, computationData.resource, new Provider<JvmTypeReference>(){
 							public JvmTypeReference get() {
@@ -646,8 +666,8 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 
 		protected abstract JvmTypeReference doHandleCyclicCall(T t, boolean rawType);
 
-		protected ComputationData<T> createComputationData() {
-			return new ComputationData<T>();
+		protected ComputationData createComputationData() {
+			return new ComputationData();
 		}
 	}
 

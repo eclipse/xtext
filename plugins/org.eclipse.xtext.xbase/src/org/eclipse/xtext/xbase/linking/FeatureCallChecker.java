@@ -381,7 +381,7 @@ public class FeatureCallChecker {
 			JvmTypeReference lowerBound = typeArgumentContext.getLowerBound(parameterType);
 			JvmTypeReference rawType = rawTypeHelper.getRawTypeReference(lowerBound, exectuable.eResource());
 			XExpression argument = arguments.get(i);
-			JvmTypeReference argumentType = getTypeProvider().getType(argument, true);
+			JvmTypeReference argumentType = getTypeProvider().getType(argument, rawType, true);
 			if (!conformance.isConformant(rawType, argumentType, true))
 				return false;
 		}
@@ -395,15 +395,16 @@ public class FeatureCallChecker {
 			JvmTypeReference varArgRawType = ((JvmGenericArrayTypeReference) lastParameterRawType).getComponentType();
 			if (arguments.size() == numberOfParameters) {
 				XExpression lastArgument = arguments.get(lastParamIndex);
-				JvmTypeReference lastArgumentType = getTypeProvider().getType(lastArgument, true);
+				JvmTypeReference lastArgumentType = getTypeProvider().getType(lastArgument, lastParameterRawType, true);
 				if (conformance.isConformant(lastParameterRawType, lastArgumentType, true))
 					return true;
+				lastArgumentType = getTypeProvider().getType(lastArgument, varArgRawType, true);
 				if (!conformance.isConformant(varArgRawType, lastArgumentType, true))
 					return false;
 			} else {
 				for (int i = lastParamIndex; i < arguments.size(); i++) {
 					XExpression argumentExpression = arguments.get(i);
-					JvmTypeReference argumentType = getTypeProvider().getType(argumentExpression, true);
+					JvmTypeReference argumentType = getTypeProvider().getType(argumentExpression, varArgRawType, true);
 					if (!conformance.isConformant(varArgRawType, argumentType, true))
 						return false;
 				}

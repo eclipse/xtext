@@ -33,6 +33,7 @@ import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.lib.Functions;
+import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XtypeFactory;
 
@@ -83,12 +84,13 @@ public class Closures {
 					JvmOperation operation = findImplementingOperation(reference, type.eResource());
 					if (operation != null) {
 						JvmTypeReference result = null;
+						boolean procedure = typeRefs.is(operation.getReturnType(), Void.TYPE);
 						if (rawType) {
-							result = createRawFunctionTypeRef(operation, operation.getParameters().size());
+							result = createRawFunctionTypeRef(operation, operation.getParameters().size(), procedure);
 						} else {
 							if (type instanceof JvmTypeParameterDeclarator) {
 								if (!((JvmTypeParameterDeclarator) type).getTypeParameters().isEmpty() && reference.getArguments().isEmpty())
-									return createRawFunctionTypeRef(operation, operation.getParameters().size()); 
+									return createRawFunctionTypeRef(operation, operation.getParameters().size(), procedure); 
 							}
 							final ITypeArgumentContext argumentContext = typeArgumentContextProvider.getTypeArgumentContext(
 									new TypeArgumentContextProvider.ReceiverRequest(reference));
@@ -204,9 +206,10 @@ public class Closures {
 		return false;
 	}
 
-	public JvmParameterizedTypeReference createRawFunctionTypeRef(EObject context, int parameterCount) {
+	public JvmParameterizedTypeReference createRawFunctionTypeRef(EObject context, int parameterCount, boolean procedure) {
 		JvmParameterizedTypeReference result = typesFactory.createJvmParameterizedTypeReference();
-		final Class<?> loadFunctionClass = loadFunctionClass("Function" + (parameterCount>6?6:parameterCount));
+		String simpleClassName = (procedure ? "Procedure" : "Function") + Math.min(6, parameterCount);
+		final Class<?> loadFunctionClass = loadFunctionClass(simpleClassName, procedure);
 		JvmType declaredType = typeRefs.findDeclaredType(loadFunctionClass, context);
 		result.setType(declaredType);
 		return result;
@@ -243,10 +246,15 @@ public class Closures {
 		return result;
 	}
 	
-	private Class<?> loadFunctionClass(String simpleFunctionName) {
+	private Class<?> loadFunctionClass(String simpleFunctionName, boolean procedure) {
 		try {
-			return Functions.class.getClassLoader().loadClass(
-					Functions.class.getCanonicalName() + "$" + simpleFunctionName);
+			if (!procedure) {
+				return Functions.class.getClassLoader().loadClass(
+						Functions.class.getCanonicalName() + "$" + simpleFunctionName);
+			} else {
+				return Procedures.class.getClassLoader().loadClass(
+						Procedures.class.getCanonicalName() + "$" + simpleFunctionName);
+			}
 		} catch (ClassNotFoundException e) {
 			throw new WrappedException(e);
 		}

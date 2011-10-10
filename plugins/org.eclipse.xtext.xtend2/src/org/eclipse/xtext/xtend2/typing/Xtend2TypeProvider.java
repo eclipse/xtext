@@ -86,17 +86,17 @@ public class Xtend2TypeProvider extends XbaseWithAnnotationsTypeProvider {
 	}
 	
 	@Override
-	protected JvmTypeReference typeDispatcherInvoke(XExpression expression, boolean rawType) {
+	protected JvmTypeReference typeDispatcherInvoke(XExpression expression, JvmTypeReference rawExpectation, boolean rawType) {
 		if (expression instanceof RichString) {
-			return _type((RichString)expression, rawType);
+			return _type((RichString)expression, rawExpectation, rawType);
 		} else if (expression instanceof RichStringForLoop) {
-			return _type((RichStringForLoop)expression, rawType);
+			return _type((RichStringForLoop)expression, rawExpectation, rawType);
 		} else if (expression instanceof RichStringIf) {
-			return _type((RichStringIf)expression, rawType);
+			return _type((RichStringIf)expression, rawExpectation, rawType);
 		} else if (expression instanceof RichStringLiteral) {
-			return _type((RichStringLiteral)expression, rawType);
+			return _type((RichStringLiteral)expression, rawExpectation, rawType);
 		} else {
-			return super.typeDispatcherInvoke(expression, rawType);
+			return super.typeDispatcherInvoke(expression, rawExpectation, rawType);
 		}
 	}
 	
@@ -168,19 +168,19 @@ public class Xtend2TypeProvider extends XbaseWithAnnotationsTypeProvider {
 		return getExpectedType(function.getExpression(), rawType);
 	}
 	
-	protected JvmTypeReference _type(RichString richString, boolean rawType) {
+	protected JvmTypeReference _type(RichString richString, JvmTypeReference rawExpectation, boolean rawType) {
 		return getTypeReferences().getTypeForName(StringConcatenation.class, richString);
 	}
 
-	protected JvmTypeReference _type(RichStringLiteral stringLiteral, boolean rawType) {
+	protected JvmTypeReference _type(RichStringLiteral stringLiteral, JvmTypeReference rawExpectation, boolean rawType) {
 		return getTypeReferences().getTypeForName(String.class, stringLiteral);
 	}
 	
-	protected JvmTypeReference _type(RichStringIf richStringIf, boolean rawType) {
+	protected JvmTypeReference _type(RichStringIf richStringIf, JvmTypeReference rawExpectation, boolean rawType) {
 		return getTypeReferences().getTypeForName(StringConcatenation.class, richStringIf);
 	}
 	
-	protected JvmTypeReference _type(RichStringForLoop richStringFor, boolean rawType) {
+	protected JvmTypeReference _type(RichStringForLoop richStringFor, JvmTypeReference rawExpectation, boolean rawType) {
 		return getTypeReferences().getTypeForName(StringConcatenation.class, richStringFor);
 	}
 	

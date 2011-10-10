@@ -602,7 +602,6 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"    {\n" + 
 				"      h.properties.forEach(p|{\n" + 
 				"        p.prop1=p.prop1.toFirstLower()\n" + 
-				"        true\n" + 
 				"      })\n" + 
 				"      h\n" + 
 				"    }\n" + 
@@ -618,7 +617,6 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"  def void forEachError(testdata.PropertiesHolder h) {\n" + 
 				"    h.properties.forEach(p|{\n" + 
 				"      p.prop1=p.prop1.toFirstLower()\n" + 
-				"      true\n" + 
 				"    })\n" + 
 				"    h\n" + 
 				"  }\n" +
@@ -650,8 +648,8 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"	\n" + 
 				"	def void generate(String e, String fsa) {}\n" + 
 				"	\n" + 
-				"	def <T,R> iter(java.util.List<T> list, (T)=>R predicate) {\n" + 
-				"		for(element : list) { predicate.apply(element); }\n" + 
+				"	def <T,R> iter(java.util.List<T> list, (T)=>void proc) {\n" + 
+				"		for(element : list) { proc.apply(element); }\n" + 
 				"	}\n" +
 				"}";
 		String javaCode = compileToJavaCode(code);
@@ -669,6 +667,23 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"	\n" + 
 				"	def <T,R> iter(java.util.List<T> list, (T)=>R predicate) {\n" + 
 				"		for(element : list) { predicate.apply(element); }\n" + 
+				"	}\n" +
+				"}";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
+	public void testBug_352844_03() throws Exception {
+		String code =
+				"package x class Z {" +
+				"  	def generate(java.util.List<String> d, String fsa) {\n" + 
+				"		d.iter(e | e.generate(fsa))\n" + 
+				"	}\n" + 
+				"	\n" + 
+				"	def Void generate(String e, String fsa) {}\n" + 
+				"	\n" + 
+				"	def <T,R> iter(java.util.List<T> list, (T)=>Void function) {\n" + 
+				"		for(element : list) { function.apply(element); }\n" + 
 				"	}\n" +
 				"}";
 		String javaCode = compileToJavaCode(code);
