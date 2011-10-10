@@ -67,6 +67,7 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def generateBody(JvmGenericType it, ImportManager importManager) '''
+		«it.generateJavaDoc»
 		«it.annotations.generateAnnotations(importManager)»
 		«it.generateModifier»«IF it.interface»interface«ELSE»class«ENDIF» «it.simpleName»«generateTypeParameterDeclaration(it.typeParameters(), importManager)» «it.generateExtendsClause(importManager)»{
 		  «FOR memberCode : it.members.map(m|m.generateMember(importManager)).filter(c|c!=null) SEPARATOR '\n'»
@@ -124,11 +125,13 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def dispatch generateMember(JvmField it, ImportManager importManager) '''
+		«it.generateJavaDoc»
 		«IF !annotations.empty»«it.annotations.generateAnnotations(importManager)»
 		«ENDIF»«it.generateModifier»«type.serialize(importManager)» «simpleName»«it.generateInitialization(importManager)»;
 	'''
 	
 	def dispatch generateMember(JvmOperation it, ImportManager importManager) '''
+		«it.generateJavaDoc»
 		«IF !annotations.empty»«it.annotations.generateAnnotations(importManager)»
 		«ENDIF»«it.generateModifier»«generateTypeParameterDeclaration(it.typeParameters, importManager)»«if (returnType == null) 'void' else returnType.serialize(importManager)» «simpleName»(«it.parameters.map( p | p.generateParameter(importManager)).join(", ")»)«generateThrowsClause(it, importManager)»«IF abstract»;«ELSE» {
 		  «it.generateBody(importManager).toString.trim»
@@ -138,6 +141,7 @@ class JvmModelGenerator implements IGenerator {
 	
 	def dispatch generateMember(JvmConstructor it, ImportManager importManager) {
 		if(!it.parameters.empty || it.associatedExpression != null) '''
+			«it.generateJavaDoc»
 			«it.generateModifier» «simpleName»(«it.parameters.map( p | p.generateParameter(importManager)).join(", ")»)«generateThrowsClause(it, importManager)» {
 			  «it.generateBody(importManager).toString.trim»
 			}
@@ -203,6 +207,21 @@ class JvmModelGenerator implements IGenerator {
 			return result.substring(1, result.length -1)
 		return result
 	}
+	
+	def generateJavaDoc(EObject it) {
+		val adapter = it.eAdapters.filter(typeof(DocumentationAdapter)).head
+		if(adapter != null) {
+			val doc = '''/**''';
+			doc.newLine
+			doc.append(" * ")
+			doc.append(adapter.documentation, " * ")
+			doc.newLine
+			doc.append(" */")
+			doc.newLine
+			return doc
+		}
+		else null
+	} 
 	
 	def generateAnnotations(List<JvmAnnotationReference> annotations, ImportManager importManager) {
 		if (annotations.empty)

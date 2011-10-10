@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.jvmmodel;
 
 import static com.google.common.collect.Maps.*;
+import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.Map;
 
@@ -39,6 +40,7 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XExpression;
@@ -51,6 +53,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueP
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.compiler.CompilationStrategyAdapter;
+import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -67,6 +70,9 @@ public class JvmTypesBuilder {
 	
 	@Inject
 	private TypeReferences references;
+	
+	@Inject
+	private IEObjectDocumentationProvider documentationProvider;
 	
 	public void associate(XExpression expr, JvmIdentifiableElement element) {
 		associator.associateLogicalContainer(expr, element);
@@ -233,6 +239,15 @@ public class JvmTypesBuilder {
 		}
 	}
 
+	public void translateDocumentationTo(EObject source, EObject jvmElement) {
+		String documentation = documentationProvider.getDocumentation(source).trim();
+		if(!isEmpty(documentation)) {
+			DocumentationAdapter documentationAdapter = new DocumentationAdapter();
+			documentationAdapter.setDocumentation(documentation);
+			jvmElement.eAdapters().add(documentationAdapter);
+		}
+	}
+	
 	protected JvmAnnotationReference getJvmAnnotationReference(XAnnotation anno) {
 		JvmAnnotationReference reference = TypesFactory.eINSTANCE.createJvmAnnotationReference();
 		final JvmAnnotationType annotation = (JvmAnnotationType) anno.eGet(XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, false);
