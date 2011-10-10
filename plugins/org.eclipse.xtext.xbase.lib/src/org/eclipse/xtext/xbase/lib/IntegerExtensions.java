@@ -152,7 +152,17 @@ public class IntegerExtensions {
 		private int upTo;
 		private boolean increases;
 
-		public IntIterator(int start, int upTo) {
+		/**
+		 * Creates a new {@link IntIterator} from {@code start} to {@code upTo}. The iterator will iterator backwards if
+		 * upTo is smaller than the start index.
+		 * 
+		 * @param start
+		 *            the start value (inclusive).
+		 * @param upTo
+		 *            the end value (exclusive).
+		 * 
+		 */
+		protected IntIterator(int start, int upTo) {
 			super();
 			this.current = start;
 			this.upTo = upTo;
@@ -173,6 +183,13 @@ public class IntegerExtensions {
 				return current--;
 		}
 
+		/**
+		 * {@inheritDoc}
+		 * 
+		 * @throws UnsupportedOperationException
+		 *             Always throws an {@link UnsupportedOperationException} since this iterator does not support
+		 *             removal.
+		 */
 		public void remove() {
 			throw new UnsupportedOperationException();
 		}

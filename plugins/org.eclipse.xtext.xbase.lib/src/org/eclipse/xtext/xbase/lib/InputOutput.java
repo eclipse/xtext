@@ -31,7 +31,7 @@ public class InputOutput {
 	 * Prints the given {@code object} to {@link System#out System.out}. Useful to log partial expressions to trap
 	 * errors, e.g. the following is possible: <code>1 + print(2) + 3</code>
 	 * 
-	 * @param object
+	 * @param o
 	 *            the to-be-printed object
 	 * @return the printed object.
 	 */

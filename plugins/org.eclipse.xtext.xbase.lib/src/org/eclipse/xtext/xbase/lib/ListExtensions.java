@@ -64,8 +64,8 @@ public class ListExtensions {
 	}
 
 	/**
-	 * Sorts the specified list itself according to the order induced by applying a key function to each element which yields a
-	 * comparable criteria.
+	 * Sorts the specified list itself according to the order induced by applying a key function to each element which
+	 * yields a comparable criteria.
 	 * 
 	 * @param list
 	 *            the list to be sorted. May not be <code>null</code>.
@@ -74,7 +74,8 @@ public class ListExtensions {
 	 * @return the sorted list itself.
 	 * @see Collections#sort(List)
 	 */
-	public static <T, C extends Comparable<? super C>> List<T> sortInplaceBy(List<T> list, final Functions.Function1<? super T, C> key) {
+	public static <T, C extends Comparable<? super C>> List<T> sortInplaceBy(List<T> list,
+			final Functions.Function1<? super T, C> key) {
 		if (key == null)
 			throw new NullPointerException("key");
 		Comparator<T> comparator = new Comparator<T>() {

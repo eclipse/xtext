@@ -8,8 +8,13 @@
 package org.eclipse.xtext.xbase.lib;
 
 /**
- * An immutable pair of {@link #getKey() key} and {@link #getValue() value}.
+ * An immutable pair of {@link #getKey() key} and {@link #getValue() value}. A pair is considered to be
+ * {@link #equals(Object) equal} to another pair if both the key and the value are equal.
  * 
+ * @param <K>
+ *            the key-type of the pair.
+ * @param <V>
+ *            the value-type of the pair.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public final class Pair<K, V> {
@@ -17,15 +22,34 @@ public final class Pair<K, V> {
 	private final K k;
 	private final V v;
 
+	/**
+	 * Creates a new instance with the given key and value.
+	 * 
+	 * @param k
+	 *            the key. May be <code>null</code>.
+	 * @param v
+	 *            the value. May be <code>null</code>.
+	 * 
+	 */
 	public Pair(K k, V v) {
 		this.k = k;
 		this.v = v;
 	}
 
+	/**
+	 * Returns the key.
+	 * 
+	 * @return the key.
+	 */
 	public K getKey() {
 		return k;
 	}
 
+	/**
+	 * Returns the value.
+	 * 
+	 * @return the value.
+	 */
 	public V getValue() {
 		return v;
 	}
