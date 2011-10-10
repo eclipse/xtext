@@ -69,7 +69,7 @@ class JvmModelGenerator implements IGenerator {
 	def generateBody(JvmGenericType it, ImportManager importManager) '''
 		«it.generateJavaDoc»
 		«it.annotations.generateAnnotations(importManager)»
-		«it.generateModifier»«IF it.interface»interface«ELSE»class«ENDIF» «it.simpleName»«generateTypeParameterDeclaration(it.typeParameters(), importManager)» «it.generateExtendsClause(importManager)»{
+		«it.generateModifier»«IF it.interface»interface«ELSE»class«ENDIF» «it.simpleName»«generateTypeParameterDeclaration(it.typeParameters, importManager)» «it.generateExtendsClause(importManager)»{
 		  «FOR memberCode : it.members.map(m|m.generateMember(importManager)).filter(c|c!=null) SEPARATOR '\n'»
 		    «memberCode»
 		  «ENDFOR»
@@ -126,15 +126,15 @@ class JvmModelGenerator implements IGenerator {
 	
 	def dispatch generateMember(JvmField it, ImportManager importManager) '''
 		«it.generateJavaDoc»
-		«IF !annotations.empty»«it.annotations.generateAnnotations(importManager)»
-		«ENDIF»«it.generateModifier»«type.serialize(importManager)» «simpleName»«it.generateInitialization(importManager)»;
+		«IF !annotations.empty»«it.annotations.generateAnnotations(importManager)»«ENDIF»
+		«it.generateModifier»«type.serialize(importManager)» «simpleName»«it.generateInitialization(importManager)»;
 	'''
 	
 	def dispatch generateMember(JvmOperation it, ImportManager importManager) '''
 		«it.generateJavaDoc»
-		«IF !annotations.empty»«it.annotations.generateAnnotations(importManager)»
-		«ENDIF»«it.generateModifier»«generateTypeParameterDeclaration(it.typeParameters, importManager)»«if (returnType == null) 'void' else returnType.serialize(importManager)» «simpleName»(«it.parameters.map( p | p.generateParameter(importManager)).join(", ")»)«generateThrowsClause(it, importManager)»«IF abstract»;«ELSE» {
-		  «it.generateBody(importManager).toString.trim»
+		«IF !annotations.empty»«it.annotations.generateAnnotations(importManager)»«ENDIF»
+		«it.generateModifier»«generateTypeParameterDeclaration(it.typeParameters, importManager)»«if (returnType == null) 'void' else returnType.serialize(importManager)» «simpleName»(«it.parameters.map( p | p.generateParameter(importManager)).join(", ")»)«generateThrowsClause(it, importManager)»«IF abstract»;«ELSE» {
+		  «it.generateBody(importManager)»
 		}
 		«ENDIF»
 	'''
@@ -142,8 +142,9 @@ class JvmModelGenerator implements IGenerator {
 	def dispatch generateMember(JvmConstructor it, ImportManager importManager) {
 		if(!it.parameters.empty || it.associatedExpression != null) '''
 			«it.generateJavaDoc»
+			«IF !annotations.empty»«it.annotations.generateAnnotations(importManager)»«ENDIF»
 			«it.generateModifier» «simpleName»(«it.parameters.map( p | p.generateParameter(importManager)).join(", ")»)«generateThrowsClause(it, importManager)» {
-			  «it.generateBody(importManager).toString.trim»
+			  «it.generateBody(importManager)»
 			}
 		''' else null
 	}
@@ -156,23 +157,25 @@ class JvmModelGenerator implements IGenerator {
 			""
 	}
 	
-	def generateTypeParameterDeclaration(List<JvmTypeParameter> typeParameters, ImportManager importManager) '''
-		«FOR typeParameter: typeParameters  BEFORE '<' SEPARATOR ',' AFTER '>'»
-			«importManager.serialize(typeParameter)»«FOR constraint: typeParameter.constraints.filter(typeof(JvmUpperBound)) BEFORE " extends " SEPARATOR ", "»
-				«constraint.typeReference.serialize(importManager)»
-			«ENDFOR»
-		«ENDFOR»
-	'''
+	def generateTypeParameterDeclaration(List<JvmTypeParameter> typeParameters, ImportManager importManager) {
+		'''«FOR it: typeParameters BEFORE '<' SEPARATOR ', ' AFTER '> '»«it.generateTypeParameterDeclaration(importManager)»«ENDFOR»'''
+	}
 	
-	def generateThrowsClause(JvmExecutable it, ImportManager importManager) '''
-		«FOR exc: it.checkedExceptions BEFORE ' throws ' SEPARATOR ', '»
-			«exc.serialize(importManager)»
-		«ENDFOR»
-	'''
+	def generateTypeParameterDeclaration(JvmTypeParameter it, ImportManager importManager) {
+		'''«importManager.serialize(it)»«it.generateTypeParameterConstraints(importManager)»'''
+	}
+	
+	def generateTypeParameterConstraints(JvmTypeParameter it, ImportManager importManager) {
+		'''«FOR it: constraints.filter(typeof(JvmUpperBound)) BEFORE " extends " SEPARATOR " & "»«typeReference.serialize(importManager)»«ENDFOR»'''
+	}
+	
+	def generateThrowsClause(JvmExecutable it, ImportManager importManager) '''«
+		FOR exc: it.checkedExceptions BEFORE ' throws ' SEPARATOR ', '»«exc.serialize(importManager)»«ENDFOR
+	»'''
 
 	def checkedExceptions(JvmExecutable it) {
-		it.thrownExceptionForIdentifiable.filter(e|e.isInstanceOf(typeof(Exception)))
-			.toSet.sort([o0, o1 | o0.identifier.compareTo(o1.identifier)])
+		it.thrownExceptionForIdentifiable.filter [it.isInstanceOf(typeof(Exception)) && !it.isInstanceOf(typeof(RuntimeException))]
+			.toSet.sortBy [ identifier ]
 	}
 
 	def generateParameter(JvmFormalParameter it, ImportManager importManager) {
@@ -203,6 +206,8 @@ class JvmModelGenerator implements IGenerator {
 	
 	def String removeSurroundingCurlies(String code) {
 		val result = code.trim
+		if (result.startsWith("{\n") && result.endsWith("}"))
+			return result.substring(2, result.length -1)
 		if (result.startsWith("{") && result.endsWith("}"))
 			return result.substring(1, result.length -1)
 		return result
@@ -226,9 +231,11 @@ class JvmModelGenerator implements IGenerator {
 	def generateAnnotations(List<JvmAnnotationReference> annotations, ImportManager importManager) {
 		if (annotations.empty)
 			return null
-		'''«FOR a : annotations»
-			@«importManager.serialize(a.annotation)»«FOR value : a.values BEFORE '(' SEPARATOR ',' AFTER ')'»«value.toJava(importManager)»«ENDFOR»
-		«ENDFOR»'''
+		'''
+		«FOR a : annotations»
+			@«importManager.serialize(a.annotation)»«FOR value : a.values BEFORE '(' SEPARATOR ', ' AFTER ')'»«value.toJava(importManager)»«ENDFOR»
+		«ENDFOR»
+		'''
 	}
 	 
 	def toJava(JvmAnnotationValue it, ImportManager importManager) 
@@ -257,7 +264,7 @@ class JvmModelGenerator implements IGenerator {
 			default: {
 				appendable.append('{')
 				compiler.toJavaExpression(values.head as XExpression, appendable)
-				values.tail.filter(typeof(XExpression)).map(value | { appendable.append(",") compiler.toJavaExpression(value, appendable) })
+				values.tail.filter(typeof(XExpression)).forEach [ appendable.append(",") compiler.toJavaExpression(it, appendable) ]
 				appendable.append('}')
 			}
 		}			
@@ -275,10 +282,9 @@ class JvmModelGenerator implements IGenerator {
 		val type = context.containerType
 		if(type != null) {
 			appendable.declareVariable(context.containerType, "this")
-			val superType = context.containerType.superTypes.map(t|t.type)
-				.filter(typeof(JvmGenericType)).filter(t|!t.interface).head
+			val superType = context.containerType.extendedClass
 			if (superType != null)
-				appendable.declareVariable(superType, "super")
+				appendable.declareVariable(superType.type, "super")
 		}
 		appendable
 	}
