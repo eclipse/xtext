@@ -13,7 +13,7 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.lib.Functions;
-import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
+import org.eclipse.xtext.xtend2.xtend2.CreateExtensionInfo;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -32,19 +32,20 @@ public class Xtend2CompileStrategies {
 		strategy.initialize(dispatchOperation, sortedDispatchOperations);
 		return strategy;
 	}
-	
+
 	@Inject
 	private Provider<CacheMethodCompileStrategy> cacheMathodProvider;
-	
-	public Functions.Function1<ImportManager, CharSequence> forCacheMethod(XtendFunction createExtension) {
+
+	public Functions.Function1<ImportManager, CharSequence> forCacheMethod(CreateExtensionInfo createExtensionInfo,
+			JvmOperation initializerMethod) {
 		CacheMethodCompileStrategy strategy = cacheMathodProvider.get();
-		strategy.init(createExtension);
+		strategy.init(createExtensionInfo, initializerMethod);
 		return strategy;
 	}
 
 	@Inject
 	private Provider<CacheVariableCompileStrategy> cacheVarProvider;
-	
+
 	public Functions.Function1<ImportManager, CharSequence> forCacheVariable(JvmGenericType container) {
 		CacheVariableCompileStrategy strategy = cacheVarProvider.get();
 		strategy.init(container);

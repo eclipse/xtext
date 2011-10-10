@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -28,12 +28,10 @@ import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xtend2.compiler.Xtend2Compiler;
 import org.eclipse.xtext.xtend2.xtend2.CreateExtensionInfo;
-import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
-import org.eclipse.xtext.xtend2.xtend2.XtendParameter;
 
 import com.google.inject.Inject;
 
-class CacheMethodCompileStrategy implements Functions.Function1<ImportManager, CharSequence> {
+public class CacheMethodCompileStrategy implements Functions.Function1<ImportManager, CharSequence> {
 	@Inject
 	private TypeReferences typeReferences;
 
@@ -51,31 +49,30 @@ class CacheMethodCompileStrategy implements Functions.Function1<ImportManager, C
 
 	private CreateExtensionInfo createExtensionInfo;
 
-	private XtendFunction createExtension;
+	private JvmOperation initializerMethod;
 
-	protected void init(XtendFunction createExtension) {
-		this.createExtension = createExtension;
-		this.createExtensionInfo = createExtension.getCreateExtensionInfo();
+	protected void init(CreateExtensionInfo createExtensionInfo, JvmOperation initializerMethod) {
+		this.createExtensionInfo = createExtensionInfo;
+		this.initializerMethod = initializerMethod;
 	}
 
 	public CharSequence apply(ImportManager importManager) {
+		JvmOperation cacheMethod = (JvmOperation) logicalContainerProvider
+				.getLogicalContainer(createExtensionInfo.getCreateExpression());
 		StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable(importManager);
-		JvmTypeReference listType = typeReferences.getTypeForName(ArrayList.class, createExtension);
+		JvmDeclaredType containerType = cacheMethod.getDeclaringType();
+		JvmTypeReference listType = typeReferences.getTypeForName(ArrayList.class, containerType);
 		JvmTypeReference collectonLiterals = typeReferences.getTypeForName(CollectionLiterals.class,
-				createExtension);
+				containerType);
 		String cacheVarName = appendable.declareVariable(cacheVarKey(createExtensionInfo), "_createCache_"
-				+ createExtension.getName());
+				+ cacheMethod.getSimpleName());
 		String cacheKeyVarName = appendable.declareVariable("CacheKey", "_cacheKey");
 		appendable.append("\nfinal ");
-		// TODO: is this the correct context?
-		EObject typeReferenceSerializerContext = createExtensionInfo.getCreateExpression();
-		typeReferenceSerializer.serialize(listType, typeReferenceSerializerContext, appendable);
+		typeReferenceSerializer.serialize(listType, containerType, appendable);
 		appendable.append(cacheKeyVarName).append(" = ");
-		typeReferenceSerializer.serialize(collectonLiterals, typeReferenceSerializerContext, appendable);
+		typeReferenceSerializer.serialize(collectonLiterals, containerType, appendable);
 		appendable.append(".newArrayList(");
-		JvmOperation mainOperation = (JvmOperation) logicalContainerProvider
-				.getLogicalContainer(createExtensionInfo.getCreateExpression());
-		EList<JvmFormalParameter> list = mainOperation.getParameters();
+		EList<JvmFormalParameter> list = cacheMethod.getParameters();
 		for (Iterator<JvmFormalParameter> iterator = list.iterator(); iterator.hasNext();) {
 			JvmFormalParameter jvmFormalParameter = iterator.next();
 			appendable.append(getVarName(jvmFormalParameter, appendable));
@@ -87,9 +84,9 @@ class CacheMethodCompileStrategy implements Functions.Function1<ImportManager, C
 		// declare result variable
 		JvmTypeReference returnType = typeProvider.getType(createExtensionInfo.getCreateExpression());
 		appendable.append("\nfinal ");
-		typeReferenceSerializer.serialize(returnType, typeReferenceSerializerContext, appendable);
-		String varName = "_result";
-		appendable.append(" ").append(varName).append(";");
+		typeReferenceSerializer.serialize(returnType, containerType, appendable);
+		String resultVarName = "_result";
+		appendable.append(" ").append(resultVarName).append(";");
 		// open synchronize block
 		appendable.append("\nsynchronized (").append(cacheVarName).append(") {");
 		appendable.increaseIndentation();
@@ -102,29 +99,25 @@ class CacheMethodCompileStrategy implements Functions.Function1<ImportManager, C
 		// execute the creation
 		compiler.toJavaStatement(createExtensionInfo.getCreateExpression(), appendable, true);
 		appendable.append("\n");
-		appendable.append(varName).append(" = ");
+		appendable.append(resultVarName).append(" = ");
 		compiler.toJavaExpression(createExtensionInfo.getCreateExpression(), appendable);
 		appendable.append(";");
 
 		// store the newly created object in the cache
 		appendable.append("\n").append(cacheVarName).append(".put(").append(cacheKeyVarName).append(", ")
-				.append(varName).append(");");
+				.append(resultVarName).append(");");
 
 		// close synchronize block
 		appendable.decreaseIndentation();
 		appendable.append("\n}");
-		JvmOperation initializer = (JvmOperation) logicalContainerProvider.getLogicalContainer(createExtension
-				.getExpression());
-		appendable.append("\n").append(initializer.getSimpleName()).append("(").append(varName);
-		for (XtendParameter xtendParameter : createExtension.getParameters()) {
-			appendable.append(", ").append(xtendParameter.getName());
+		appendable.append("\n").append(initializerMethod.getSimpleName()).append("(").append(resultVarName);
+		for (JvmFormalParameter parameter : cacheMethod.getParameters()) {
+			appendable.append(", ").append(parameter.getName());
 		}
 		appendable.append(");");
 		// return the result
 		appendable.append("\nreturn ");
-		appendable.append(varName).append(";");
-		//		appendable.decreaseIndentation();
-		//		appendable.append("\n}").closeScope();
+		appendable.append(resultVarName).append(";");
 		return appendable.toString();
 	}
 
