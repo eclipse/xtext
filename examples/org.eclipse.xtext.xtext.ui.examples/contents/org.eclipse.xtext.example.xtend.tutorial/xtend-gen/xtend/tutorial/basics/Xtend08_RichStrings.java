@@ -7,13 +7,17 @@ import xtend.tutorial.util.Person;
 
 @SuppressWarnings("all")
 public class Xtend08_RichStrings extends TestCase {
-  
   public void testRichStrings() {
     Person _person = new Person("Joe", "Developer");
     StringConcatenation _writeLetterTo = this.writeLetterTo(_person);
     InputOutput.<StringConcatenation>println(_writeLetterTo);
   }
   
+  /**
+   * Rich strings are a special feature for readable code concatenation.
+   * It supports a unique automatic indentation handling, which is also refelected tooling-wise
+   * Note the indentation before the call to signature.
+   */
   public StringConcatenation writeLetterTo(final Person p) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Dear ");

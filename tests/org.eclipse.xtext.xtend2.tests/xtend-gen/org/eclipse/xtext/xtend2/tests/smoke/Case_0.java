@@ -5,7 +5,6 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class Case_0 {
-  
   public String foo(final String a, final String b) {
     String _xifexpression = null;
     boolean _isUpper = this.isUpper(a);

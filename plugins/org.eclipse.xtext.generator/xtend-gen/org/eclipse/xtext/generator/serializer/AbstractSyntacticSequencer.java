@@ -34,7 +34,6 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 public class AbstractSyntacticSequencer extends GeneratedFile {
-  
   @Inject
   private Grammar grammar;
   

@@ -24,7 +24,6 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 
 @SuppressWarnings("all")
 public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
-  
   @Inject
   private TypeReferences references;
   
@@ -32,7 +31,6 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
   private JvmTypesBuilder _jvmTypesBuilder;
   
   public void testEmptyAnnotation() throws Exception {
-    {
       final XAnnotationsFactory f = XAnnotationsFactory.eINSTANCE;
       final TypesFactory typesFactory = TypesFactory.eINSTANCE;
       XExpression _expression = this.expression("\'Foo\'");
@@ -50,11 +48,9 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       JvmAnnotationReference _head = IterableExtensions.<JvmAnnotationReference>head(_annotations);
       JvmAnnotationType _annotation = _head.getAnnotation();
       Assert.assertEquals(_annotationType, _annotation);
-    }
   }
   
   public void testStringAnnotation() throws Exception {
-    {
       final XAnnotationsFactory f = XAnnotationsFactory.eINSTANCE;
       final TypesFactory typesFactory = TypesFactory.eINSTANCE;
       XExpression _expression = this.expression("\'Foo\'");
@@ -80,11 +76,9 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       EList<String> _values_1 = ((JvmStringAnnotationValue) _head_2).getValues();
       String _head_3 = IterableExtensions.<String>head(_values_1);
       Assert.assertEquals("Foo", _head_3);
-    }
   }
   
   public void testStringArrayAnnotation() throws Exception {
-    {
       final XAnnotationsFactory f = XAnnotationsFactory.eINSTANCE;
       final TypesFactory typesFactory = TypesFactory.eINSTANCE;
       XExpression _expression = this.expression("\'Foo\'");
@@ -125,6 +119,5 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       EList<String> _values_5 = ((JvmStringAnnotationValue) _head_5).getValues();
       String _get = _values_5.get(1);
       Assert.assertEquals("Bar", _get);
-    }
   }
 }

@@ -23,20 +23,19 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
-  
   @Inject
   private JvmTypesBuilder _jvmTypesBuilder;
   
   protected void _infer(final Entity e, final IAcceptor<JvmDeclaredType> acceptor, final boolean prelinkingPhase) {
     String _fullName = this.fullName(e);
-    final Function1<JvmGenericType,Void> _function = new Function1<JvmGenericType,Void>() {
-        public Void apply(final JvmGenericType it) {
+    final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+        public void apply(final JvmGenericType it) {
           {
             JvmParameterizedTypeReference _superType = e.getSuperType();
             boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_superType, null);
@@ -80,8 +79,8 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
                   EList<JvmMember> _members_3 = it.getMembers();
                   String _name_3 = f_3.getName();
                   JvmTypeReference _type_3 = f_3.getType();
-                  final Function1<JvmOperation,Void> _function = new Function1<JvmOperation,Void>() {
-                      public Void apply(final JvmOperation it) {
+                  final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+                      public void apply(final JvmOperation it) {
                         {
                           Visibility _visibility = f_3.getVisibility();
                           JvmVisibility _jvm = DomainmodelJvmModelInferrer.this.toJvm(_visibility);
@@ -97,7 +96,6 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
                           XExpression _body = f_3.getBody();
                           DomainmodelJvmModelInferrer.this._jvmTypesBuilder.associate(_body, it);
                         }
-                        return null;
                       }
                     };
                   JvmOperation _method = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toMethod(f_3, _name_3, _type_3, _function);
@@ -106,7 +104,6 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
               }
             }
           }
-          return null;
         }
       };
     JvmGenericType _clazz = this._jvmTypesBuilder.toClazz(e, _fullName, _function);

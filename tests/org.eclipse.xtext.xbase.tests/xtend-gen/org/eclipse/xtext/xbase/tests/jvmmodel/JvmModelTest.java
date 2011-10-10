@@ -20,7 +20,6 @@ import org.eclipse.xtext.xbase.tests.jvmmodel.AbstractJvmModelTest;
 
 @SuppressWarnings("all")
 public class JvmModelTest extends AbstractJvmModelTest {
-  
   @Inject
   private JvmTypesBuilder builder;
   
@@ -34,7 +33,6 @@ public class JvmModelTest extends AbstractJvmModelTest {
   private Manager manager;
   
   public void testSimple() throws Exception {
-    {
       XExpression _expression = this.expression("return s.toUpperCase", false);
       final XExpression expression = _expression;
       Resource _eResource = expression.eResource();
@@ -44,11 +42,9 @@ public class JvmModelTest extends AbstractJvmModelTest {
       Resource _eResource_1 = expression.eResource();
       final Resource resource = _eResource_1;
       this.helper.assertNoErrors(expression);
-    }
   }
   
-  public void testResourceDescriptionsAreCorrect() throws IOException, IllegalAccessException, IllegalArgumentException, NoSuchFieldException, SecurityException {
-    {
+  public void testResourceDescriptionsAreCorrect() throws IOException, IllegalAccessException, NoSuchFieldException {
       Resource _newResource = this.newResource("return s.toUpperCase");
       final Resource resource = _newResource;
       Field _declaredField = org.eclipse.xtext.resource.DerivedStateAwareResource.class.getDeclaredField("fullyInitialized");
@@ -65,6 +61,5 @@ public class JvmModelTest extends AbstractJvmModelTest {
       Assert.assertEquals(1, _size);
       Object _get_1 = field.get(resource);
       Assert.assertFalse(((Boolean) _get_1));
-    }
   }
 }

@@ -29,11 +29,20 @@ import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
+/**
+ * <p>Infers a JVM model from the source model.</p>
+ * 
+ * <p>The JVM model should contain all elements that would appear in the Java code
+ * which is generated from the source model.
+ * Other Xtend models link against the JVM model rather than the source model. The JVM
+ * model elements should be associated with their source element by means of the
+ * {@link IJvmModelAssociator}.</p>
+ */
 @SuppressWarnings("all")
 public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
-  
   @Inject
   private JvmTypesBuilder _jvmTypesBuilder;
   
@@ -44,23 +53,20 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
   private XbaseCompiler compiler;
   
   protected void _infer(final Model m, final IAcceptor<JvmDeclaredType> acceptor, final boolean prelinkingPhase) {
-    {
       XBlockExpression _block = m.getBlock();
       final XBlockExpression e = _block;
       Resource _eResource = e.eResource();
       String _name = this.name(_eResource);
-      final Function1<JvmGenericType,Void> _function = new Function1<JvmGenericType,Void>() {
-          public Void apply(final JvmGenericType it) {
-            Void _xblockexpression = null;
+      final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+          public void apply(final JvmGenericType it) {
             {
               EList<JvmAnnotationReference> _annotations = it.getAnnotations();
               JvmAnnotationReference _annotation = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.toAnnotation(e, java.lang.SuppressWarnings.class, "all");
               CollectionExtensions.<JvmAnnotationReference>operator_add(_annotations, _annotation);
               EList<JvmMember> _members = it.getMembers();
               JvmTypeReference _newTypeRef = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(e, Void.TYPE);
-              final Function1<JvmOperation,Void> _function = new Function1<JvmOperation,Void>() {
-                  public Void apply(final JvmOperation it) {
-                    Void _xblockexpression = null;
+              final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+                  public void apply(final JvmOperation it) {
                     {
                       it.setStatic(true);
                       EList<JvmFormalParameter> _parameters = it.getParameters();
@@ -99,10 +105,8 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
                             }
                           };
                         PureXbaseJvmModelInferrer.this._jvmTypesBuilder.body(it, _function_1);
-                      }
-                      _xblockexpression = (((Void) null));
+                      }/*null*/;
                     }
-                    return _xblockexpression;
                   }
                 };
               JvmOperation _method = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.toMethod(e, "main", _newTypeRef, _function);
@@ -111,9 +115,8 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
               if (_containsReturn) {
                 EList<JvmMember> _members_1 = it.getMembers();
                 JvmTypeReference _newTypeRef_1 = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(e, java.lang.Object.class);
-                final Function1<JvmOperation,Void> _function_1 = new Function1<JvmOperation,Void>() {
-                    public Void apply(final JvmOperation it) {
-                      Void _xblockexpression = null;
+                final Procedure1<JvmOperation> _function_1 = new Procedure1<JvmOperation>() {
+                    public void apply(final JvmOperation it) {
                       {
                         it.setStatic(true);
                         final Function1<ImportManager,StringConcatenation> _function = new Function1<ImportManager,StringConcatenation>() {
@@ -130,27 +133,21 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
                               return _builder;
                             }
                           };
-                        PureXbaseJvmModelInferrer.this._jvmTypesBuilder.body(it, _function);
-                        _xblockexpression = (((Void) null));
+                        PureXbaseJvmModelInferrer.this._jvmTypesBuilder.body(it, _function);/*null*/;
                       }
-                      return _xblockexpression;
                     }
                   };
                 JvmOperation _method_1 = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.toMethod(e, "xbaseExpression", _newTypeRef_1, _function_1);
                 CollectionExtensions.<JvmOperation>operator_add(_members_1, _method_1);
-              }
-              _xblockexpression = (((Void) null));
+              }/*null*/;
             }
-            return _xblockexpression;
           }
         };
       JvmGenericType _clazz = this._jvmTypesBuilder.toClazz(e, _name, _function);
       acceptor.accept(_clazz);
-    }
   }
   
   public String name(final Resource res) {
-    {
       URI _uRI = res.getURI();
       String _lastSegment = _uRI.lastSegment();
       final String s = _lastSegment;
@@ -159,11 +156,9 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
       int _operator_minus = IntegerExtensions.operator_minus(((Integer)_length), ((Integer)_length_1));
       String _substring = s.substring(0, _operator_minus);
       return _substring;
-    }
   }
   
   public boolean containsReturn(final XExpression expr) {
-    {
       Collection<ExitPoint> _exitPoints = this.computer.getExitPoints(((XExpression) expr));
       final Collection<ExitPoint> exitPoints = _exitPoints;
       for (final ExitPoint point : exitPoints) {
@@ -173,11 +168,9 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
         }
       }
       return false;
-    }
   }
   
   public String compile(final XBlockExpression obj, final ImportManager mnr) {
-    {
       StringBuilderBasedAppendable _stringBuilderBasedAppendable = new StringBuilderBasedAppendable(mnr, "\t");
       final StringBuilderBasedAppendable appendable = _stringBuilderBasedAppendable;
       appendable.increaseIndentation();
@@ -185,7 +178,6 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
       this.compiler.compile(obj, appendable, _newTypeRef);
       String _string = appendable.toString();
       return _string;
-    }
   }
   
   public void infer(final EObject m, final IAcceptor<JvmDeclaredType> acceptor, final boolean prelinkingPhase) {

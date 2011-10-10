@@ -15,11 +15,12 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
+/**
+ * Xbase and Xtend come with libraies which are implicitly on the scope.
+ */
 @SuppressWarnings("all")
 public class Xtend07_Libraries extends TestCase {
-  
   public void testCollectionLiterals() {
-    {
       ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("foo", "bar", "baz");
       InputOutput.<ArrayList<String>>println(_newArrayList);
       Pair<Integer,String> _operator_mappedTo = ObjectExtensions.<Integer, String>operator_mappedTo(((Integer)2), "two");
@@ -28,7 +29,6 @@ public class Xtend07_Libraries extends TestCase {
       InputOutput.<HashMap<Integer,String>>println(_newHashMap);
       HashSet<Integer> _newHashSet = CollectionLiterals.<Integer>newHashSet(((Integer)1), ((Integer)2), ((Integer)3), ((Integer)3), ((Integer)3));
       InputOutput.<HashSet<Integer>>println(_newHashSet);
-    }
   }
   
   public void testStringUtilities() {
@@ -70,6 +70,9 @@ public class Xtend07_Libraries extends TestCase {
     return _xblockexpression;
   }
   
+  /**
+   * all operator are built via library
+   */
   public Boolean operators() {
     Boolean _xblockexpression = null;
     {

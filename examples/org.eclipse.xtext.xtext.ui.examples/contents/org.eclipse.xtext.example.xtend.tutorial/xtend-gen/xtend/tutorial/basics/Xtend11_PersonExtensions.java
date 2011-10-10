@@ -5,7 +5,6 @@ import xtend.tutorial.util.Person;
 
 @SuppressWarnings("all")
 public class Xtend11_PersonExtensions {
-  
   public String fullName(final Person p) {
     String _forename = p.getForename();
     String _operator_plus = StringExtensions.operator_plus(_forename, " ");

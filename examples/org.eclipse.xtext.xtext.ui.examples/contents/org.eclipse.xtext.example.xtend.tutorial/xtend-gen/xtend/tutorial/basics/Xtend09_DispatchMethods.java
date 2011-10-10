@@ -13,7 +13,12 @@ import xtend.tutorial.util.Shape;
 
 @SuppressWarnings("all")
 public class Xtend09_DispatchMethods extends TestCase {
-  
+  /**
+   * in addition to the switch expression the dispatch keyword for overloaded functions can be used
+   * to enable dynamic polymorphic dispatching.
+   * 
+   * Have a look at the generated Java code to understand how it is mapped to Java.
+   */
   protected StringConcatenation _toLabel(final Rectangle rectangle) {
     StringConcatenation _xifexpression = null;
     boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)rectangle.height), ((Integer)rectangle.width));
@@ -44,7 +49,6 @@ public class Xtend09_DispatchMethods extends TestCase {
   }
   
   public void testDispatchMethods() {
-    {
       Rectangle _rectangle = new Rectangle(3, 4);
       Circle _circle = new Circle(3);
       Rectangle _rectangle_1 = new Rectangle(5, 5);
@@ -54,7 +58,6 @@ public class Xtend09_DispatchMethods extends TestCase {
         StringConcatenation _label = this.toLabel(shape);
         InputOutput.<StringConcatenation>println(_label);
       }
-    }
   }
   
   public StringConcatenation toLabel(final Shape circle) {

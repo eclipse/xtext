@@ -5,7 +5,6 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class Case_2 {
-  
   public String aOrB(final String a, final String b) {
     String _xifexpression = null;
     boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(a);

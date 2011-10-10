@@ -16,7 +16,6 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 public class GrammarConstraints extends GeneratedFile {
-  
   @Inject
   private Grammar grammar;
   

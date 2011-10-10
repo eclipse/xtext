@@ -8,7 +8,6 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class Case_5 {
-  
   @Inject
   private ArrayList myList;
   

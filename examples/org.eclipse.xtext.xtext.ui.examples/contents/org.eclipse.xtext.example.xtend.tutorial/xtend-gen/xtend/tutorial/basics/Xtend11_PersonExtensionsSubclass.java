@@ -6,7 +6,6 @@ import xtend.tutorial.util.Person;
 
 @SuppressWarnings("all")
 public class Xtend11_PersonExtensionsSubclass extends Xtend11_PersonExtensions {
-  
   public String fullName(final Person p) {
     String _name = p.getName();
     String _operator_plus = StringExtensions.operator_plus(_name, ", ");

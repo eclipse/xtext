@@ -23,7 +23,6 @@ import org.junit.runner.RunWith;
 @RunWith(XtextRunner.class)
 @InjectWith(InjectorProviderCustom.class)
 public class ParserTest {
-  
   @Inject
   private ParseHelper<DomainModel> _parseHelper;
   
@@ -32,7 +31,6 @@ public class ParserTest {
   
   @Test
   public void testParsing() throws Exception {
-    {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package example {");
       _builder.newLine();
@@ -67,7 +65,6 @@ public class ParserTest {
       JvmTypeReference _type = property.getType();
       String _identifier = _type.getIdentifier();
       Assert.assertEquals("java.lang.String", _identifier);
-    }
   }
   
   @Test

@@ -4,7 +4,6 @@ import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 
 @SuppressWarnings("all")
 public class TestClass1 {
-  
   public int testFunction1() {
     return 42;
   }

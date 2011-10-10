@@ -4,7 +4,6 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 public class Case_4 {
-  
   public StringConcatenation richStrings_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("foobar");

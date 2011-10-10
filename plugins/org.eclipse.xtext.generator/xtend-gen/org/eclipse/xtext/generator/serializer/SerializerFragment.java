@@ -25,7 +25,6 @@ import org.eclipse.xtext.xbase.lib.Pair;
 
 @SuppressWarnings("all")
 public class SerializerFragment extends Xtend2GeneratorFragment {
-  
   @Inject
   private AbstractSemanticSequencer abstractSemanticSequencer;
   
@@ -47,9 +46,8 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
   @Inject
   private SyntacticSequencerPDA2ExtendedDot seq2dot;
   
-  private final HashMap<ArrayList<?>,SerializerFragmentState> _createCache_state = new HashMap<ArrayList<?>,SerializerFragmentState>();
-  
   public SerializerFragmentState state() {
+    
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList();
     final SerializerFragmentState _result;
     synchronized (_createCache_state) {
@@ -63,6 +61,9 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
     _init_state(_result);
     return _result;
   }
+  
+  private final HashMap<ArrayList<?>,SerializerFragmentState> _createCache_state = CollectionLiterals.newHashMap();
+  
   private void _init_state(final SerializerFragmentState result) {
   }
   
@@ -79,7 +80,6 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
   }
   
   public Set<Binding> getGuiceBindingsRt(final Grammar grammar) {
-    {
       BindFactory _bindFactory = new BindFactory();
       final BindFactory bf = _bindFactory;
       SerializerFragmentState _state = this.state();
@@ -107,11 +107,9 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
       bf.addTypeToType(_name_4, _name_5);
       Set<Binding> _bindings = bf.getBindings();
       return _bindings;
-    }
   }
   
   public void generate(final Xtend2ExecutionContext ctx) {
-    {
       SerializerFragmentState _state = this.state();
       boolean _operator_not = BooleanExtensions.operator_not(_state.srcGenOnly);
       if (_operator_not) {
@@ -144,7 +142,6 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
           }
         }
       }
-    }
   }
   
   public List<String> getExportedPackagesRtList(final Grammar grammar) {

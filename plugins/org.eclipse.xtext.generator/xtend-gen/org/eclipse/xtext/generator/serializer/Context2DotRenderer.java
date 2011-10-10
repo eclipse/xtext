@@ -19,7 +19,6 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class Context2DotRenderer {
-  
   @Inject
   private IContextProvider contextProvider;
   

@@ -8,7 +8,6 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 public class GeneratedFile {
-  
   @Inject
   private Grammar grammar;
   

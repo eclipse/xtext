@@ -8,7 +8,9 @@ import xtend.tutorial.util.Shape;
 
 @SuppressWarnings("all")
 public class Xtend04_ControlStructures {
-  
+  /**
+   * if expressions look exactly like Java's if statements.
+   */
   public int ifExpression(final String param) {
     int _xifexpression = (int) 0;
     boolean _operator_notEquals = ObjectExtensions.operator_notEquals(param, null);
@@ -21,6 +23,10 @@ public class Xtend04_ControlStructures {
     return _xifexpression;
   }
   
+  /**
+   * ... but note that they are expression so they are more like Java's
+   * ternary operator.
+   */
   public int ifExpression_01(final String param) {
     String _xifexpression = null;
     boolean _operator_equals = ObjectExtensions.operator_equals(param, "foo");
@@ -33,6 +39,9 @@ public class Xtend04_ControlStructures {
     return _ifExpression;
   }
   
+  /**
+   * ... but the else branch is optional and if not specified defaults to 'else null'
+   */
   public int ifExpression_02(final String param) {
     String _xifexpression = null;
     boolean _operator_equals = ObjectExtensions.operator_equals(param, "bar");
@@ -43,6 +52,10 @@ public class Xtend04_ControlStructures {
     return _ifExpression_01;
   }
   
+  /**
+   * The switch expression is very different to the one from Java
+   * It supports dispatching over types, it has no fall through, and it uses a first match wins strategy.
+   */
   public String switchExpression_01(final Shape shape) {
     String _switchResult = null;
     final Shape shape_1 = shape;
@@ -79,6 +92,9 @@ public class Xtend04_ControlStructures {
     return _switchResult;
   }
   
+  /**
+   * switch can also be used more traditionally (without any type guards)
+   */
   public String switchExpression_02(final String value) {
     String _switchResult = null;
     final String value_1 = value;

@@ -9,11 +9,15 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import xtend.tutorial.util.NetNode;
 
+/**
+ * create functions are used to transform object graphs to nw object graphs in jsut one pass
+ * instead of the usual two pass was, where you first create a tree and then establish cross links.
+ * 
+ * It solves the m2m transformation problem.
+ */
 @SuppressWarnings("all")
 public class Xtend10_CreateFunctions extends TestCase {
-  
   public void testCreateFunctions() {
-    {
       NetNode _netNode = new NetNode();
       final NetNode nodeA = _netNode;
       nodeA.setName("A");
@@ -46,12 +50,14 @@ public class Xtend10_CreateFunctions extends TestCase {
       Iterable<NetNode> _tail = IterableExtensions.<NetNode>tail(_references_1);
       NetNode _head_1 = IterableExtensions.<NetNode>head(_tail);
       Assert.assertSame(_head_1, copyOfNodeB);
-    }
   }
   
-  private final HashMap<ArrayList<?>,NetNode> _createCache_copyNet = new HashMap<ArrayList<?>,NetNode>();
-  
+  /**
+   * create a copy of the given NetNode
+   * initializes the fields lazily
+   */
   public NetNode copyNet(final NetNode toCopy) {
+    
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(toCopy);
     final NetNode _result;
     synchronized (_createCache_copyNet) {
@@ -65,8 +71,10 @@ public class Xtend10_CreateFunctions extends TestCase {
     _init_copyNet(_result, toCopy);
     return _result;
   }
+  
+  private final HashMap<ArrayList<?>,NetNode> _createCache_copyNet = CollectionLiterals.newHashMap();
+  
   private void _init_copyNet(final NetNode result, final NetNode toCopy) {
-    {
       String _name = toCopy.getName();
       result.setName(_name);
       Iterable<NetNode> _references = toCopy.getReferences();
@@ -78,6 +86,5 @@ public class Xtend10_CreateFunctions extends TestCase {
         };
       Iterable<NetNode> _map = IterableExtensions.<NetNode, NetNode>map(_references, _function);
       result.setReferences(_map);
-    }
   }
 }

@@ -15,11 +15,10 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class SimpleJvmModelInferrer extends AbstractModelInferrer {
-  
   @Inject
   private JvmTypesBuilder _jvmTypesBuilder;
   
@@ -27,14 +26,13 @@ public class SimpleJvmModelInferrer extends AbstractModelInferrer {
   private TypeReferences references;
   
   protected void _infer(final XExpression e, final IAcceptor<JvmDeclaredType> acceptor, final boolean prelinkingPhase) {
-    final Function1<JvmGenericType,Void> _function = new Function1<JvmGenericType,Void>() {
-        public Void apply(final JvmGenericType it) {
-          Void _xblockexpression = null;
+    final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+        public void apply(final JvmGenericType it) {
           {
             EList<JvmMember> _members = it.getMembers();
             JvmTypeReference _typeForName = SimpleJvmModelInferrer.this.references.getTypeForName(java.lang.String.class, e);
-            final Function1<JvmOperation,Void> _function = new Function1<JvmOperation,Void>() {
-                public Void apply(final JvmOperation it) {
+            final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+                public void apply(final JvmOperation it) {
                   {
                     EList<JvmFormalParameter> _parameters = it.getParameters();
                     JvmTypeReference _typeForName = SimpleJvmModelInferrer.this.references.getTypeForName(java.lang.String.class, e);
@@ -42,14 +40,11 @@ public class SimpleJvmModelInferrer extends AbstractModelInferrer {
                     CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter);
                     SimpleJvmModelInferrer.this._jvmTypesBuilder.associate(e, it);
                   }
-                  return null;
                 }
               };
             JvmOperation _method = SimpleJvmModelInferrer.this._jvmTypesBuilder.toMethod(e, "doStuff", _typeForName, _function);
-            CollectionExtensions.<JvmOperation>operator_add(_members, _method);
-            _xblockexpression = (((Void) null));
+            CollectionExtensions.<JvmOperation>operator_add(_members, _method);/*null*/;
           }
-          return _xblockexpression;
         }
       };
     JvmGenericType _clazz = this._jvmTypesBuilder.toClazz(e, "Test", _function);

@@ -7,9 +7,11 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class Xtend05_Loops {
-  
+  /**
+   * for expressions are just like in Java.
+   * The only difference is that they are expressions (of type void) and that type inference is supported
+   */
   public void forLoop(final List<String> strings) {
-    {
       for (final String s : strings) {
         String _operator_plus = StringExtensions.operator_plus("Hi ", s);
         InputOutput.<String>println(_operator_plus);
@@ -18,11 +20,12 @@ public class Xtend05_Loops {
         String _operator_plus_1 = StringExtensions.operator_plus("Hi ", s_1);
         InputOutput.<String>println(_operator_plus_1);
       }
-    }
   }
   
+  /**
+   * there is nothing special about the while loop expect that again it is an expression of type void.
+   */
   public void whileLoop(final List<String> strings) {
-    {
       Iterator<String> _iterator = strings.iterator();
       final Iterator<String> iter = _iterator;
       boolean _hasNext = iter.hasNext();
@@ -34,6 +37,5 @@ public class Xtend05_Loops {
         boolean _hasNext_1 = iter.hasNext();
         _xwhileexpression = _hasNext_1;
       }
-    }
   }
 }

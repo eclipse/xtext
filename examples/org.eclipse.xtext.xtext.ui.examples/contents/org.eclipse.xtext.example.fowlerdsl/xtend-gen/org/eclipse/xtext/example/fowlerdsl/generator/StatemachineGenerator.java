@@ -20,7 +20,6 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 public class StatemachineGenerator implements IGenerator {
-  
   public void doGenerate(final Resource resource, final IFileSystemAccess fsa) {
     String _className = this.className(resource);
     String _operator_plus = StringExtensions.operator_plus(_className, ".java");
@@ -31,14 +30,12 @@ public class StatemachineGenerator implements IGenerator {
   }
   
   public String className(final Resource res) {
-    {
       URI _uRI = res.getURI();
       String _lastSegment = _uRI.lastSegment();
       String name = _lastSegment;
       int _indexOf = name.indexOf(".");
       String _substring = name.substring(0, _indexOf);
       return _substring;
-    }
   }
   
   public StringConcatenation toJavaCode(final Statemachine sm) {

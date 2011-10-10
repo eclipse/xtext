@@ -8,7 +8,6 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 public class SyntacticSequencer extends GeneratedFile {
-  
   @Inject
   private AbstractSyntacticSequencer sequencer;
   
