@@ -19,7 +19,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
   @Inject
   private IXtend2JvmAssociations _iXtend2JvmAssociations;
   
-  public void testJavaLangReflectImport() throws Exception, UnsupportedOperationException {
+  public void testJavaLangReflectImport() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
     _builder.newLine();
@@ -52,7 +52,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
-  public void testSimple() throws Exception, UnsupportedOperationException {
+  public void testSimple() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
     _builder.newLine();
@@ -88,7 +88,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
-  public void testConstructor() throws Exception, UnsupportedOperationException {
+  public void testConstructor() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
     _builder.newLine();
@@ -124,7 +124,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
-  public void testExtends() throws Exception, UnsupportedOperationException {
+  public void testExtends() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
     _builder.newLine();
@@ -145,7 +145,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
-  public void testExtendsException() throws Exception, UnsupportedOperationException {
+  public void testExtendsException() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
     _builder.newLine();
@@ -170,7 +170,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
-  public void testVisibilityOfDispatchMethods() throws Exception, UnsupportedOperationException {
+  public void testVisibilityOfDispatchMethods() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
     _builder.newLine();
@@ -234,7 +234,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
-  public void testImplements() throws Exception, UnsupportedOperationException {
+  public void testImplements() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
     _builder.newLine();
@@ -258,7 +258,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
-  public void testConstructor_2() throws Exception, UnsupportedOperationException {
+  public void testConstructor_2() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
     _builder.newLine();
@@ -299,7 +299,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
-  public void testAnnotation() throws Exception, UnsupportedOperationException {
+  public void testAnnotation() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
     _builder.newLine();
@@ -332,7 +332,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
-  public void testSuperCall() throws Exception, UnsupportedOperationException {
+  public void testSuperCall() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package x class Y extends Object {");
     _builder.newLine();
@@ -405,7 +405,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
-  public void testCreateExtension() throws Exception, UnsupportedOperationException {
+  public void testCreateExtension() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
     _builder.newLine();
@@ -500,7 +500,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
-  public void assertCompilesTo(final CharSequence input, final CharSequence expected) throws Exception, UnsupportedOperationException {
+  public void assertCompilesTo(final CharSequence input, final CharSequence expected) throws Exception {
     {
       String _string = input.toString();
       XtendFile _file = this.file(_string, true);

@@ -12,12 +12,12 @@ import java.util.Iterator;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
@@ -51,9 +51,12 @@ public class CacheMethodCompileStrategy implements Functions.Function1<ImportMan
 
 	private JvmOperation initializerMethod;
 
-	protected void init(CreateExtensionInfo createExtensionInfo, JvmOperation initializerMethod) {
+	private JvmField cacheField;
+
+	protected void init(CreateExtensionInfo createExtensionInfo, JvmField cacheField, JvmOperation initializerMethod) {
 		this.createExtensionInfo = createExtensionInfo;
 		this.initializerMethod = initializerMethod;
+		this.cacheField = cacheField; 
 	}
 
 	public CharSequence apply(ImportManager importManager) {
@@ -64,8 +67,7 @@ public class CacheMethodCompileStrategy implements Functions.Function1<ImportMan
 		JvmTypeReference listType = typeReferences.getTypeForName(ArrayList.class, containerType);
 		JvmTypeReference collectonLiterals = typeReferences.getTypeForName(CollectionLiterals.class,
 				containerType);
-		String cacheVarName = appendable.declareVariable(cacheVarKey(createExtensionInfo), "_createCache_"
-				+ cacheMethod.getSimpleName());
+		String cacheVarName = cacheField.getSimpleName();
 		String cacheKeyVarName = appendable.declareVariable("CacheKey", "_cacheKey");
 		appendable.append("\nfinal ");
 		typeReferenceSerializer.serialize(listType, containerType, appendable);
@@ -119,10 +121,6 @@ public class CacheMethodCompileStrategy implements Functions.Function1<ImportMan
 		appendable.append("\nreturn ");
 		appendable.append(resultVarName).append(";");
 		return appendable.toString();
-	}
-
-	protected Object cacheVarKey(CreateExtensionInfo createExtensionInfo) {
-		return Tuples.pair("cache", createExtensionInfo);
 	}
 
 	/**

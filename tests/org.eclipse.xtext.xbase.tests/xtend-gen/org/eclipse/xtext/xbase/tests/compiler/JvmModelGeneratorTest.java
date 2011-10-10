@@ -67,7 +67,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
     }
   }
   
-  public void testSimple() throws Exception, IllegalAccessException, IllegalArgumentException, InstantiationException, NoSuchMethodException, SecurityException, UnsupportedOperationException, InvocationTargetException {
+  public void testSimple() throws Exception, IllegalAccessException, IllegalArgumentException, InstantiationException, NoSuchMethodException, SecurityException, InvocationTargetException {
     {
       XExpression _expression = this.expression("return s.toUpperCase", false);
       final XExpression expression = _expression;
@@ -109,7 +109,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
     }
   }
   
-  public void testImplements() throws Exception, UnsupportedOperationException {
+  public void testImplements() throws Exception {
     {
       XExpression _expression = this.expression("null", false);
       final XExpression expression = _expression;
@@ -136,7 +136,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
     }
   }
   
-  public void testExtends() throws Exception, UnsupportedOperationException {
+  public void testExtends() throws Exception {
     {
       XExpression _expression = this.expression("null", false);
       final XExpression expression = _expression;
@@ -165,7 +165,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
     }
   }
   
-  public void testCompilationStrategy() throws Exception, IllegalAccessException, IllegalArgumentException, InstantiationException, NoSuchMethodException, SecurityException, UnsupportedOperationException, InvocationTargetException {
+  public void testCompilationStrategy() throws Exception, IllegalAccessException, IllegalArgumentException, InstantiationException, NoSuchMethodException, SecurityException, InvocationTargetException {
     {
       XExpression _expression = this.expression("null", false);
       final XExpression expression = _expression;
@@ -218,7 +218,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
     return _typeForName;
   }
   
-  public Class<?> compile(final Resource res, final JvmDeclaredType type) throws UnsupportedOperationException {
+  public Class<?> compile(final Resource res, final JvmDeclaredType type) {
     {
       res.eSetDeliver(false);
       EList<EObject> _contents = res.getContents();
