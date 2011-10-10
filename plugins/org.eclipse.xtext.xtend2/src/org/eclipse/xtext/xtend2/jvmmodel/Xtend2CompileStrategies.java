@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtend2.jvmmodel;
 
 import java.util.List;
 
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
@@ -37,9 +38,9 @@ public class Xtend2CompileStrategies {
 	private Provider<CacheMethodCompileStrategy> cacheMathodProvider;
 
 	public Functions.Function1<ImportManager, CharSequence> forCacheMethod(CreateExtensionInfo createExtensionInfo,
-			JvmOperation initializerMethod) {
+			JvmField cacheField, JvmOperation initializerMethod) {
 		CacheMethodCompileStrategy strategy = cacheMathodProvider.get();
-		strategy.init(createExtensionInfo, initializerMethod);
+		strategy.init(createExtensionInfo, cacheField, initializerMethod);
 		return strategy;
 	}
 

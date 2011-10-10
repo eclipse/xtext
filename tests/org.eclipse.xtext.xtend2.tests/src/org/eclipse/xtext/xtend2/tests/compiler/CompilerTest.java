@@ -1129,7 +1129,24 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		assertTrue(iterable instanceof ArrayList);
 		assertEquals("Foo", iterable.iterator().next());
 	}
-	
+
+	public void testCreateExtension_02() throws Exception {
+		Class<?> clazz = compileJavaCode("foo.Bar", 
+				"package foo " +
+				"class Bar { " +
+				"  def create result: '' transform(String x) {} " +
+				"  def create result: new Object() transform(Object x) {} " +
+				"}"
+				);
+		Object instance = clazz.newInstance();
+		Method stringMethod = clazz.getDeclaredMethod("transform", String.class);
+		Object stringResult = stringMethod.invoke(instance, "");
+		assertTrue(stringResult instanceof String);
+		Method objectMethod = clazz.getDeclaredMethod("transform", Object.class);
+		Object objectResult = objectMethod.invoke(instance, new Object());
+		assertFalse(objectResult instanceof String);
+	}
+
 	public void testCreateExtension_threadSafety() throws Exception {
 		String xtendCode = 
 			"package x " +
@@ -1892,6 +1909,8 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"    sum.apply(1)" + 
 				"}", "closureWithPrimitives");
 	}
+	
+	
 	
 	@Inject
 	private EclipseRuntimeDependentJavaCompiler javaCompiler;
