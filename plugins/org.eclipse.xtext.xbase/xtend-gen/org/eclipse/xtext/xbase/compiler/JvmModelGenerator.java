@@ -36,6 +36,7 @@ import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.CompilationStrategyAdapter;
+import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
@@ -134,6 +135,9 @@ public class JvmModelGenerator implements IGenerator {
   
   public StringConcatenation generateBody(final JvmGenericType it, final ImportManager importManager) {
     StringConcatenation _builder = new StringConcatenation();
+    StringConcatenation _generateJavaDoc = this.generateJavaDoc(it);
+    _builder.append(_generateJavaDoc, "");
+    _builder.newLineIfNotEmpty();
     EList<JvmAnnotationReference> _annotations = it.getAnnotations();
     StringConcatenation _generateAnnotations = this.generateAnnotations(_annotations, importManager);
     _builder.append(_generateAnnotations, "");
@@ -408,6 +412,9 @@ public class JvmModelGenerator implements IGenerator {
   
   protected CharSequence _generateMember(final JvmField it, final ImportManager importManager) {
     StringConcatenation _builder = new StringConcatenation();
+    StringConcatenation _generateJavaDoc = this.generateJavaDoc(it);
+    _builder.append(_generateJavaDoc, "");
+    _builder.newLineIfNotEmpty();
     {
       EList<JvmAnnotationReference> _annotations = it.getAnnotations();
       boolean _isEmpty = _annotations.isEmpty();
@@ -436,6 +443,9 @@ public class JvmModelGenerator implements IGenerator {
   
   protected CharSequence _generateMember(final JvmOperation it, final ImportManager importManager) {
     StringConcatenation _builder = new StringConcatenation();
+    StringConcatenation _generateJavaDoc = this.generateJavaDoc(it);
+    _builder.append(_generateJavaDoc, "");
+    _builder.newLineIfNotEmpty();
     {
       EList<JvmAnnotationReference> _annotations = it.getAnnotations();
       boolean _isEmpty = _annotations.isEmpty();
@@ -514,6 +524,9 @@ public class JvmModelGenerator implements IGenerator {
     }
     if (_operator_or) {
       StringConcatenation _builder = new StringConcatenation();
+      StringConcatenation _generateJavaDoc = this.generateJavaDoc(it);
+      _builder.append(_generateJavaDoc, "");
+      _builder.newLineIfNotEmpty();
       StringConcatenation _generateModifier = this.generateModifier(it);
       _builder.append(_generateModifier, "");
       _builder.append(" ");
@@ -745,6 +758,37 @@ public class JvmModelGenerator implements IGenerator {
       }
       return result;
     }
+  }
+  
+  public StringConcatenation generateJavaDoc(final EObject it) {
+    StringConcatenation _xblockexpression = null;
+    {
+      EList<Adapter> _eAdapters = it.eAdapters();
+      Iterable<DocumentationAdapter> _filter = IterableExtensions.<DocumentationAdapter>filter(_eAdapters, org.eclipse.xtext.xbase.compiler.DocumentationAdapter.class);
+      DocumentationAdapter _head = IterableExtensions.<DocumentationAdapter>head(_filter);
+      final DocumentationAdapter adapter = _head;
+      StringConcatenation _xifexpression = null;
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(adapter, null);
+      if (_operator_notEquals) {
+        {
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("/**");
+          final StringConcatenation doc = _builder;
+          doc.newLine();
+          doc.append(" * ");
+          String _documentation = adapter.getDocumentation();
+          doc.append(_documentation, " * ");
+          doc.newLine();
+          doc.append(" */");
+          doc.newLine();
+          return doc;
+        }
+      } else {
+        _xifexpression = null;
+      }
+      _xblockexpression = (_xifexpression);
+    }
+    return _xblockexpression;
   }
   
   public StringConcatenation generateAnnotations(final List<JvmAnnotationReference> annotations, final ImportManager importManager) {
