@@ -1925,7 +1925,19 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"}", "closureWithPrimitives");
 	}
 	
-	
+	public void testOperationParameterOnScope() throws Exception {
+		String code =
+				"package foo " + 
+				"class Bar {" +
+				"  def foo(int bar) {" +
+				"    switch(bar) {" +
+				"      case 1: 'bar'" + 
+				"    }"+
+				"  }"+
+				"}";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("foo.Bar", javaCode);
+	}
 	
 	@Inject
 	private EclipseRuntimeDependentJavaCompiler javaCompiler;
