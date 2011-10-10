@@ -59,8 +59,9 @@ class JvmModelGenerator implements IGenerator {
 			«IF type.packageName != null»package «type.packageName»;
 			
 			«ENDIF»
-			«importManager.imports.map(i | "import "+i+";").join("\n")»
-			
+			«FOR i: importManager.imports AFTER "\n"»
+				import «i»;
+			«ENDFOR»
 			«typeBody»
 		'''
 	}
@@ -68,9 +69,9 @@ class JvmModelGenerator implements IGenerator {
 	def generateBody(JvmGenericType it, ImportManager importManager) '''
 		«it.annotations.generateAnnotations(importManager)»
 		«it.generateModifier»«IF it.interface»interface«ELSE»class«ENDIF» «it.simpleName»«generateTypeParameterDeclaration(it.typeParameters(), importManager)» «it.generateExtendsClause(importManager)»{
-			«FOR m : it.members»
-				«m.generateMember(importManager)»
-			«ENDFOR»
+		  «FOR memberCode : it.members.map(m|m.generateMember(importManager)).filter(c|c!=null) SEPARATOR '\n'»
+		    «memberCode»
+		  «ENDFOR»
 		}
 	'''
 	
@@ -130,7 +131,7 @@ class JvmModelGenerator implements IGenerator {
 	def dispatch generateMember(JvmOperation it, ImportManager importManager) '''
 		«IF !annotations.empty»«it.annotations.generateAnnotations(importManager)»
 		«ENDIF»«it.generateModifier»«generateTypeParameterDeclaration(it.typeParameters, importManager)»«if (returnType == null) 'void' else returnType.serialize(importManager)» «simpleName»(«it.parameters.map( p | p.generateParameter(importManager)).join(", ")»)«generateThrowsClause(it, importManager)»«IF abstract»;«ELSE» {
-			«it.generateBody(importManager).toString.trim»
+		  «it.generateBody(importManager).toString.trim»
 		}
 		«ENDIF»
 	'''
@@ -138,9 +139,9 @@ class JvmModelGenerator implements IGenerator {
 	def dispatch generateMember(JvmConstructor it, ImportManager importManager) {
 		if(!it.parameters.empty || it.associatedExpression != null) '''
 			«it.generateModifier» «simpleName»(«it.parameters.map( p | p.generateParameter(importManager)).join(", ")»)«generateThrowsClause(it, importManager)» {
-			«it.generateBody(importManager).toString.trim»
+			  «it.generateBody(importManager).toString.trim»
 			}
-		''' else ''
+		''' else null
 	}
 	
 	def CharSequence generateInitialization(JvmField it, ImportManager importManager) {
