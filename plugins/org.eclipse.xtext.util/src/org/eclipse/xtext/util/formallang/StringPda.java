@@ -2,6 +2,7 @@ package org.eclipse.xtext.util.formallang;
 
 import java.util.Map;
 
+import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 
@@ -11,8 +12,9 @@ import com.google.common.collect.Maps;
  */
 public class StringPda extends StringNfa implements Pda<String, String> {
 
-	public static class StringPdaFactory implements PdaFactory<StringPda, String, String, Object> {
+	public static class StringPdaFactory<T> implements PdaFactory<StringPda, String, String, T> {
 
+		protected Function<T, String> formatter;
 		protected String nullStart;
 		protected String nullState;
 		protected String nullStop;
@@ -32,32 +34,43 @@ public class StringPda extends StringNfa implements Pda<String, String> {
 			this.nullState = nullState;
 		}
 
-		public StringPda create(Object start, Object stop) {
-			String starts = start != null ? start.toString() : nullStart;
-			String stops = stop != null ? stop.toString() : nullStop;
-			return new StringPda(starts, stops);
+		public StringPda create(T start, T stop) {
+			return new StringPda(tokenToStr(start, nullStart), tokenToStr(stop, nullStop));
 		}
 
-		public String createPop(StringPda pda, Object token) {
-			String pop = token != null ? token.toString() : nullState;
-			String s = "<<" + pop;
+		public String createPop(StringPda pda, T token) {
+			String pop = tokenToStr(token, nullState);
+			String s = pop.startsWith("<<") ? pop : "<<" + pop;
 			pda.state(s).pop(pop);
 			return s;
 		}
 
-		public String createPush(StringPda pda, Object token) {
-			String push = token != null ? token.toString() : nullState;
-			String s = ">>" + push;
+		public String createPush(StringPda pda, T token) {
+			String push = tokenToStr(token, nullState);
+			String s = push.startsWith(">>") ? push : ">>" + push;
 			pda.state(s).push(push);
 			return s;
 		}
 
-		public String createState(StringPda pda, Object token) {
-			return token != null ? token.toString() : nullState;
+		public String createState(StringPda pda, T token) {
+			return tokenToStr(token, nullState);
 		}
 
 		public void setFollowers(StringPda pda, String owner, Iterable<String> followers) {
 			pda.state(owner).followedBy(Iterables.toArray(followers, String.class));
+		}
+
+		public StringPdaFactory<T> setTokenFormatter(Function<T, String> formatter) {
+			this.formatter = formatter;
+			return this;
+		}
+
+		protected String tokenToStr(T token, String nullValue) {
+			if (token == null)
+				return nullValue;
+			if (formatter != null)
+				return formatter.apply(token);
+			return token.toString();
 		}
 
 	}
