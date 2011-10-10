@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.resource;
 
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -33,8 +32,6 @@ import com.google.inject.Provider;
  * @author Sebastian Zarnekow - Linking assumptions
  */
 public class XbaseResource extends DerivedStateAwareResource {
-	
-	private static final Logger log = Logger.getLogger(XbaseResource.class);
 	
 	protected static class AssumptionTracker implements LinkingAssumptions.Tracker {
 		private boolean independent = true;
