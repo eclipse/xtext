@@ -53,7 +53,24 @@ ruleMember :
 			'<' ruleJvmTypeParameter (
 				',' ruleJvmTypeParameter
 			)* '>'
-		)? ruleJvmTypeReference? ruleCreateExtensionInfo? ruleValidID '(' (
+		)? (
+			( (
+			ruleJvmTypeReference ruleCreateExtensionInfo ruleValidID '('
+			) => (
+				ruleJvmTypeReference ruleCreateExtensionInfo ruleValidID '('
+			) ) |
+			( (
+			ruleJvmTypeReference ruleValidID '('
+			) => (
+				ruleJvmTypeReference ruleValidID '('
+			) ) |
+			( (
+			ruleCreateExtensionInfo ruleValidID '('
+			) => (
+				ruleCreateExtensionInfo ruleValidID '('
+			) ) |
+			ruleValidID '('
+		) (
 			ruleParameter (
 				',' ruleParameter
 			)*
@@ -66,7 +83,9 @@ ruleMember :
 
 // Rule CreateExtensionInfo
 ruleCreateExtensionInfo :
-	'create' ruleValidID ':' ruleXExpression
+	'create' (
+		ruleValidID ':'
+	)? ruleXExpression
 ;
 
 // Rule ValidID

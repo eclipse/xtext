@@ -1161,6 +1161,25 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		Object objectResult = objectMethod.invoke(instance, new Object());
 		assertFalse(objectResult instanceof String);
 	}
+	
+	public void testCreateExtension_03() throws Exception {
+		Class<?> clazz = compileJavaCode("x.Y", 
+				"package x " +
+				"import java.util.List " +
+				"class Y {" +
+				"  def Iterable<String> create newArrayList listWith(String s) {" +
+				"   it.add(s)\n" +
+				"   add(s)\n" +
+				"  }" +
+				"}");
+		Object instance = clazz.newInstance();
+		Method method = clazz.getDeclaredMethod("listWith", String.class);
+		@SuppressWarnings("unchecked")
+		Iterable<String> iterable = (Iterable<String>) method.invoke(instance, "Foo");
+		assertSame(iterable, method.invoke(instance, "Foo"));
+		assertTrue(iterable instanceof ArrayList);
+		assertEquals(newArrayList("Foo", "Foo"), newArrayList(iterable));
+	}
 
 	public void testCreateExtension_threadSafety() throws Exception {
 		String xtendCode = 

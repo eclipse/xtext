@@ -53,7 +53,7 @@ public class CreateExtensionInfoImpl extends MinimalEObjectImpl.Container implem
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NAME_EDEFAULT = "this";
+	protected static final String NAME_EDEFAULT = "it";
 
 	/**
 	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.

@@ -1200,24 +1200,14 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (name=ValidID createExpression=XExpression)
+	 *     (name=ValidID? createExpression=XExpression)
 	 *
 	 * Features:
 	 *    createExpression[1, 1]
-	 *    name[1, 1]
+	 *    name[0, 1]
 	 */
 	protected void sequence_CreateExtensionInfo(EObject context, CreateExtensionInfo semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, Xtend2Package.Literals.CREATE_EXTENSION_INFO__CREATE_EXPRESSION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Xtend2Package.Literals.CREATE_EXTENSION_INFO__CREATE_EXPRESSION));
-			if(transientValues.isValueTransient(semanticObject, Xtend2Package.Literals.CREATE_EXTENSION_INFO__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Xtend2Package.Literals.CREATE_EXTENSION_INFO__NAME));
-		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getCreateExtensionInfoAccess().getNameValidIDParserRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getCreateExtensionInfoAccess().getCreateExpressionXExpressionParserRuleCall_3_0(), semanticObject.getCreateExpression());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -1414,22 +1404,31 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	 *         override?='override'? 
 	 *         dispatch?='dispatch'? 
 	 *         (typeParameters+=JvmTypeParameter typeParameters+=JvmTypeParameter*)? 
-	 *         returnType=JvmTypeReference? 
-	 *         createExtensionInfo=CreateExtensionInfo? 
-	 *         name=ValidID 
+	 *         (
+	 *             (returnType=JvmTypeReference createExtensionInfo=CreateExtensionInfo name=ValidID) | 
+	 *             (returnType=JvmTypeReference name=ValidID) | 
+	 *             (createExtensionInfo=CreateExtensionInfo name=ValidID) | 
+	 *             name=ValidID
+	 *         ) 
 	 *         (parameters+=Parameter parameters+=Parameter*)? 
 	 *         (expression=XBlockExpression | expression=RichString)?
 	 *     )
 	 *
 	 * Features:
 	 *    annotationInfo[1, 1]
-	 *    name[1, 1]
+	 *    name[0, 4]
 	 *    expression[0, 2]
-	 *    returnType[0, 1]
+	 *    returnType[0, 2]
+	 *         EXCLUDE_IF_SET createExtensionInfo
+	 *         EXCLUDE_IF_SET name
+	 *         EXCLUDE_IF_SET name
 	 *    parameters[0, *]
 	 *    override[0, 1]
 	 *    dispatch[0, 1]
-	 *    createExtensionInfo[0, 1]
+	 *    createExtensionInfo[0, 2]
+	 *         EXCLUDE_IF_SET returnType
+	 *         EXCLUDE_IF_SET name
+	 *         EXCLUDE_IF_SET name
 	 *    typeParameters[0, *]
 	 */
 	protected void sequence_Member(EObject context, XtendFunction semanticObject) {
