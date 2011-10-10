@@ -50,8 +50,8 @@ public class Xtend06_Closures {
         }
       };
     Collections.<Person>sort(persons, new Comparator<Person>() {
-        public int compare(Person arg0,Person arg1) {
-          return _function.apply(arg0,arg1);
+        public int compare(Person o1,Person o2) {
+          return _function.apply(o1,o2);
         }
     });
   }
