@@ -20,7 +20,7 @@ public class CfgToPdaTest extends TestCase {
 
 	private String createPda(StringCfg cfg) {
 		FollowerFunction<ProdElement> ff = new FollowerFunctionImpl<ProdElement, String>(cfg);
-		Pda<String, String> pda = new PdaUtil().create(cfg, ff, new StringPdaFactory("start", "stop"));
+		Pda<String, String> pda = new PdaUtil().create(cfg, ff, new StringPdaFactory<ProdElement>("start", "stop"));
 		PdaListFormatter<String, String> fmt = new PdaListFormatter<String, String>();
 		String actual = fmt.format(pda);
 		return actual;
