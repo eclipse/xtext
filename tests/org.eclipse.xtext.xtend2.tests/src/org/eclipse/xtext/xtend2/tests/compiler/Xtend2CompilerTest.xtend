@@ -24,8 +24,8 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 			
 			@SuppressWarnings("all")
 			public class Bar {
-				public void doStuff(final Method m) {
-				}
+			  public void doStuff(final Method m) {
+			  }
 			}
 		''')
 	}
@@ -39,13 +39,12 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''', '''
 			package foo;
 			
-			
 			@SuppressWarnings("all")
 			public class Bar {
-				public Integer doStuff(final String x) {
-					int _length = x.length();
-					return ((Integer)_length);
-				}
+			  public Integer doStuff(final String x) {
+			    int _length = x.length();
+			    return ((Integer)_length);
+			  }
 			}
 		''')
 	}
@@ -59,13 +58,12 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''', '''
 			package foo;
 
-
 			@SuppressWarnings("all")
 			public class Bar {
-				public String foo() {
-					String _string = new String();
-					return _string;
-				}
+			  public String foo() {
+			    String _string = new String();
+			    return _string;
+			  }
 			}
 		''')
 	}
@@ -77,7 +75,6 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 			}
 		''', '''
 			package foo;
-
 
 			@SuppressWarnings("all")
 			public class Bar extends Thread {
@@ -112,20 +109,21 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''', '''
 			package foo;
 
-
 			@SuppressWarnings("all")
 			public class NoSuchElementException {
-				protected void _foo(final String s) {
-				}
-				protected void _foo(final Object s) {
-				}
-				public void foo(final Object s) {
-					if ((s instanceof String)) {
-					  _foo((String)s);
-					} else {
-					  _foo((Object)s);
-					}
-				}
+			  protected void _foo(final String s) {
+			  }
+			  
+			  protected void _foo(final Object s) {
+			  }
+			  
+			  public void foo(final Object s) {
+			    if ((s instanceof String)) {
+			      _foo((String)s);
+			    } else {
+			      _foo((Object)s);
+			    }
+			  }
 			}
 		''')
 	}
@@ -191,10 +189,10 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 
 			@SuppressWarnings("all")
 			public class Bar {
-				public HashMap<String,Serializable> foo() {
-					HashMap<String,Serializable> _hashMap = new HashMap<String,Serializable>();
-					return _hashMap;
-				}
+			  public HashMap<String,Serializable> foo() {
+			    HashMap<String,Serializable> _hashMap = new HashMap<String,Serializable>();
+			    return _hashMap;
+			  }
 			}
 		''')
 	}
@@ -212,8 +210,8 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 
 			@SuppressWarnings("all")
 			public class Bar {
-				@Inject
-				private String string;
+			  @Inject
+			  private String string;
 			}
 		''')
 	}
@@ -235,17 +233,17 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 
 			@SuppressWarnings("all")
 			public class Y {
-				public boolean equals(final Object p) {
-					boolean _xifexpression = false;
-					boolean _operator_equals = ObjectExtensions.operator_equals("foo", p);
-					if (_operator_equals) {
-					  return true;
-					} else {
-					  boolean _equals = super.equals(p);
-					  _xifexpression = _equals;
-					}
-					return _xifexpression;
-				}
+			  public boolean equals(final Object p) {
+			    boolean _xifexpression = false;
+			    boolean _operator_equals = ObjectExtensions.operator_equals("foo", p);
+			    if (_operator_equals) {
+			      return true;
+			    } else {
+			      boolean _equals = super.equals(p);
+			      _xifexpression = _equals;
+			    }
+			    return _xifexpression;
+			  }
 			}
 		''')
 	}
@@ -267,24 +265,26 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 			
 			@SuppressWarnings("all")
 			public class Bar {
-				public StringBuilder aBuilder(final String x) {
-					final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(x);
-					final StringBuilder _result;
-					synchronized (_createCache_aBuilder) {
-					  if (_createCache_aBuilder.containsKey(_cacheKey)) {
-					    return _createCache_aBuilder.get(_cacheKey);
-					  }
-					  StringBuilder _stringBuilder = new StringBuilder();
-					  _result = _stringBuilder;
-					  _createCache_aBuilder.put(_cacheKey, _result);
-					}
-					_init_aBuilder(_result, x);
-					return _result;
-				}
-				private final HashMap<ArrayList<?>,StringBuilder> _createCache_aBuilder = CollectionLiterals.newHashMap();
-				private void _init_aBuilder(final StringBuilder result, final String x) {
-					result.append(x);
-				}
+			  public StringBuilder aBuilder(final String x) {
+			    final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(x);
+			    final StringBuilder _result;
+			    synchronized (_createCache_aBuilder) {
+			      if (_createCache_aBuilder.containsKey(_cacheKey)) {
+			        return _createCache_aBuilder.get(_cacheKey);
+			      }
+			      StringBuilder _stringBuilder = new StringBuilder();
+			      _result = _stringBuilder;
+			      _createCache_aBuilder.put(_cacheKey, _result);
+			    }
+			    _init_aBuilder(_result, x);
+			    return _result;
+			  }
+			  
+			  private final HashMap<ArrayList<?>,StringBuilder> _createCache_aBuilder = CollectionLiterals.newHashMap();
+			  
+			  private void _init_aBuilder(final StringBuilder result, final String x) {
+			    result.append(x);
+			  }
 			}
 		''');
 	}

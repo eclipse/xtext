@@ -70,7 +70,7 @@ public class JvmModelGenerator implements IGenerator {
   @Inject
   private TypeReferenceSerializer typeRefSerializer;
   
-  public void doGenerate(final Resource input, final IFileSystemAccess fsa) throws UnsupportedOperationException {
+  public void doGenerate(final Resource input, final IFileSystemAccess fsa) {
     EList<EObject> _contents = input.getContents();
     for (final EObject obj : _contents) {
       this.internalDoGenerate(obj, fsa);
@@ -80,7 +80,7 @@ public class JvmModelGenerator implements IGenerator {
   protected void _internalDoGenerate(final EObject obj, final IFileSystemAccess fsa) {
   }
   
-  protected void _internalDoGenerate(final JvmGenericType type, final IFileSystemAccess fsa) throws UnsupportedOperationException {
+  protected void _internalDoGenerate(final JvmGenericType type, final IFileSystemAccess fsa) {
     String _qualifiedName = type.getQualifiedName();
     String _replace = _qualifiedName.replace(".", "/");
     String _operator_plus = StringExtensions.operator_plus(_replace, ".java");
@@ -88,7 +88,7 @@ public class JvmModelGenerator implements IGenerator {
     fsa.generateFile(_operator_plus, _generateType);
   }
   
-  public StringConcatenation generateType(final JvmGenericType type) throws UnsupportedOperationException {
+  public StringConcatenation generateType(final JvmGenericType type) {
     StringConcatenation _xblockexpression = null;
     {
       String _qualifiedName = type.getQualifiedName();
@@ -109,19 +109,22 @@ public class JvmModelGenerator implements IGenerator {
           _builder.newLine();
         }
       }
-      List<String> _imports = importManager.getImports();
-      final Function1<String,String> _function = new Function1<String,String>() {
-          public String apply(final String i) {
-            String _operator_plus = StringExtensions.operator_plus("import ", i);
-            String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, ";");
-            return _operator_plus_1;
+      {
+        List<String> _imports = importManager.getImports();
+        boolean hasAnyElements = false;
+        for(final String i : _imports) {
+          if (!hasAnyElements) {
+            hasAnyElements = true;
           }
-        };
-      List<String> _map = ListExtensions.<String, String>map(_imports, _function);
-      String _join = IterableExtensions.join(_map, "\n");
-      _builder.append(_join, "");
-      _builder.newLineIfNotEmpty();
-      _builder.newLine();
+          _builder.append("import ");
+          _builder.append(i, "");
+          _builder.append(";");
+          _builder.newLineIfNotEmpty();
+        }
+        if (hasAnyElements) {
+          _builder.append("\n", "");
+        }
+      }
       _builder.append(typeBody, "");
       _builder.newLineIfNotEmpty();
       _xblockexpression = (_builder);
@@ -129,7 +132,7 @@ public class JvmModelGenerator implements IGenerator {
     return _xblockexpression;
   }
   
-  public StringConcatenation generateBody(final JvmGenericType it, final ImportManager importManager) throws UnsupportedOperationException {
+  public StringConcatenation generateBody(final JvmGenericType it, final ImportManager importManager) {
     StringConcatenation _builder = new StringConcatenation();
     EList<JvmAnnotationReference> _annotations = it.getAnnotations();
     StringConcatenation _generateAnnotations = this.generateAnnotations(_annotations, importManager);
@@ -157,10 +160,29 @@ public class JvmModelGenerator implements IGenerator {
     _builder.newLineIfNotEmpty();
     {
       EList<JvmMember> _members = it.getMembers();
-      for(final JvmMember m : _members) {
-        _builder.append("\t");
-        CharSequence _generateMember = this.generateMember(m, importManager);
-        _builder.append(_generateMember, "	");
+      final Function1<JvmMember,CharSequence> _function = new Function1<JvmMember,CharSequence>() {
+          public CharSequence apply(final JvmMember m) {
+            CharSequence _generateMember = JvmModelGenerator.this.generateMember(m, importManager);
+            return _generateMember;
+          }
+        };
+      List<CharSequence> _map = ListExtensions.<JvmMember, CharSequence>map(_members, _function);
+      final Function1<CharSequence,Boolean> _function_1 = new Function1<CharSequence,Boolean>() {
+          public Boolean apply(final CharSequence c) {
+            boolean _operator_notEquals = ObjectExtensions.operator_notEquals(c, null);
+            return ((Boolean)_operator_notEquals);
+          }
+        };
+      Iterable<CharSequence> _filter = IterableExtensions.<CharSequence>filter(_map, _function_1);
+      boolean hasAnyElements = false;
+      for(final CharSequence memberCode : _filter) {
+        if (!hasAnyElements) {
+          hasAnyElements = true;
+        } else {
+          _builder.appendImmediate("\n", "  ");
+        }
+        _builder.append("  ");
+        _builder.append(memberCode, "  ");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -464,11 +486,11 @@ public class JvmModelGenerator implements IGenerator {
         _builder.append(";");} else {
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
-        _builder.append("\t");
+        _builder.append("  ");
         CharSequence _generateBody = this.generateBody(it, importManager);
         String _string = _generateBody.toString();
         String _trim = _string.trim();
-        _builder.append(_trim, "	");
+        _builder.append(_trim, "  ");
         _builder.newLineIfNotEmpty();
         _builder.append("}");
         _builder.newLine();
@@ -478,7 +500,7 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   protected CharSequence _generateMember(final JvmConstructor it, final ImportManager importManager) {
-    CharSequence _xifexpression = null;
+    StringConcatenation _xifexpression = null;
     boolean _operator_or = false;
     EList<JvmFormalParameter> _parameters = it.getParameters();
     boolean _isEmpty = _parameters.isEmpty();
@@ -513,16 +535,17 @@ public class JvmModelGenerator implements IGenerator {
       _builder.append(_generateThrowsClause, "");
       _builder.append(" {");
       _builder.newLineIfNotEmpty();
+      _builder.append("  ");
       CharSequence _generateBody = this.generateBody(it, importManager);
       String _string = _generateBody.toString();
       String _trim = _string.trim();
-      _builder.append(_trim, "");
+      _builder.append(_trim, "  ");
       _builder.newLineIfNotEmpty();
       _builder.append("}");
       _builder.newLine();
       _xifexpression = _builder;
     } else {
-      _xifexpression = "";
+      _xifexpression = null;
     }
     return _xifexpression;
   }
@@ -1011,7 +1034,7 @@ public class JvmModelGenerator implements IGenerator {
     return _xifexpression;
   }
   
-  public void internalDoGenerate(final EObject type, final IFileSystemAccess fsa) throws UnsupportedOperationException {
+  public void internalDoGenerate(final EObject type, final IFileSystemAccess fsa) {
     if ((type instanceof JvmGenericType)) {
       _internalDoGenerate((JvmGenericType)type, (IFileSystemAccess)fsa);
     } else {
