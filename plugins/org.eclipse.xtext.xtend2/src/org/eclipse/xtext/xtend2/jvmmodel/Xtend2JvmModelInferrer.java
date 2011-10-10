@@ -141,6 +141,7 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			appendSyntheticDispatchMethods(source, inferredJvmType);
 			computeInferredReturnTypes(inferredJvmType);
 			jvmTypesBuilder.translateAnnotationsTo(source.getAnnotations(), inferredJvmType);
+			jvmTypesBuilder.translateDocumentationTo(source, inferredJvmType);
 		}
 		return inferredJvmType;
 	}
@@ -223,33 +224,33 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 	}
 
 	protected JvmMember transform(XtendFunction source, MemberNames names, JvmGenericType container) {
-		JvmOperation target = typesFactory.createJvmOperation();
-		container.getMembers().add(target);
-		associator.associatePrimary(source, target);
+		JvmOperation operation = typesFactory.createJvmOperation();
+		container.getMembers().add(operation);
+		associator.associatePrimary(source, operation);
 		String sourceName = source.getName();
 		JvmVisibility visibility = JvmVisibility.PUBLIC;
 		if (source.isDispatch()) {
 			sourceName = "_" + sourceName;
 			visibility = JvmVisibility.PROTECTED;
 		}
-		target.setSimpleName(sourceName);
-		target.setVisibility(visibility);
+		operation.setSimpleName(sourceName);
+		operation.setVisibility(visibility);
 		for (XtendParameter parameter : source.getParameters()) {
 			JvmFormalParameter jvmParam = typesFactory.createJvmFormalParameter();
 			jvmParam.setName(parameter.getName());
 			jvmParam.setParameterType(cloneWithProxies(parameter.getParameterType()));
-			target.getParameters().add(jvmParam);
+			operation.getParameters().add(jvmParam);
 			associator.associate(parameter, jvmParam);
 		}
 		JvmTypeReference returnType = null;
 		if (source.getReturnType() != null) {
 			returnType = cloneWithProxies(source.getReturnType());
 		} else {
-			returnType = getTypeProxy(target);
+			returnType = getTypeProxy(operation);
 		}
-		target.setReturnType(returnType);
-		copyAndFixTypeParameters(source.getTypeParameters(), target);
-		jvmTypesBuilder.translateAnnotationsTo(source.getAnnotationInfo().getAnnotations(), target);
+		operation.setReturnType(returnType);
+		copyAndFixTypeParameters(source.getTypeParameters(), operation);
+		jvmTypesBuilder.translateAnnotationsTo(source.getAnnotationInfo().getAnnotations(), operation);
 		CreateExtensionInfo createExtensionInfo = source.getCreateExtensionInfo();
 		if (createExtensionInfo != null) {
 			JvmTypeReference arrayList = typeReferences.getTypeForName(ArrayList.class, container, typeReferences.wildCard());
@@ -268,7 +269,7 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			initializer.setVisibility(JvmVisibility.PRIVATE);
 			initializer.setReturnType(typeReferences.getTypeForName(Void.TYPE, source));
 
-			jvmTypesBuilder.body(target, compileStrategies.forCacheMethod(createExtensionInfo, cacheVar, initializer));
+			jvmTypesBuilder.body(operation, compileStrategies.forCacheMethod(createExtensionInfo, cacheVar, initializer));
 
 			// the first parameter is the created object
 			JvmFormalParameter jvmParam = typesFactory.createJvmFormalParameter();
@@ -287,12 +288,13 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			}
 			associator.associate(source, initializer);
 			associator.associateLogicalContainer(createExtensionInfo
-					.getCreateExpression(), target);
+					.getCreateExpression(), operation);
 			associator.associateLogicalContainer(source.getExpression(), initializer);
 		} else {
-			associator.associateLogicalContainer(source.getExpression(), target);
+			associator.associateLogicalContainer(source.getExpression(), operation);
 		}
-		return target;
+		jvmTypesBuilder.translateDocumentationTo(source, operation);
+		return operation;
 	}
 
 	protected JvmMember transform(XtendField source, MemberNames names, JvmGenericType container) {
@@ -305,6 +307,7 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			field.setVisibility(JvmVisibility.PRIVATE);
 			field.setType(cloneWithProxies(source.getType()));
 			jvmTypesBuilder.translateAnnotationsTo(source.getAnnotationInfo().getAnnotations(), field);
+			jvmTypesBuilder.translateDocumentationTo(source, field);
 			return field;
 		} else {
 			return null;

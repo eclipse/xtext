@@ -289,6 +289,44 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''');
 	}
 
+	def testJavaDocs() {
+		assertCompilesTo('''
+			package foo
+			/**
+			 * I am Bar
+			 */
+			class Bar {
+				/**
+				 */
+				def foo() {}
+				
+				/**
+				 * I am bar,
+				 * really!
+				 */
+				int bar
+			}
+		''', '''
+			package foo;
+
+			/**
+			 * I am Bar
+			 */
+			@SuppressWarnings("all")
+			public class Bar {
+			  public Object foo() {
+			    return null;
+			  }
+			  
+			  /**
+			   * I am bar,
+			   * really!
+			   */
+			  private int bar;
+			}
+			''');
+	}
+
 	def assertCompilesTo(CharSequence input, CharSequence expected) {
 		val file = file(input.toString(), true)
 		val inferredType = file.xtendClass.inferredType
