@@ -86,27 +86,27 @@ public class XbaseWithAnnotationsTypeProvider extends XbaseTypeProvider {
 	}
 	
 	@Override
-	protected JvmTypeReference typeDispatcherInvoke(XExpression expression, boolean rawType) {
+	protected JvmTypeReference typeDispatcherInvoke(XExpression expression, JvmTypeReference rawExpectation, boolean rawType) {
 		if (expression instanceof XAnnotation) {
-			return _type((XAnnotation)expression, rawType);
+			return _type((XAnnotation)expression, rawExpectation, rawType);
 		} else if (expression instanceof XAnnotationElementValueBinaryOperation) {
-			return _type((XAnnotationElementValueBinaryOperation)expression, rawType);
+			return _type((XAnnotationElementValueBinaryOperation)expression, rawExpectation, rawType);
 		} else if (expression instanceof XAnnotationValueArray) {
-			return _type((XAnnotationValueArray)expression, rawType);
+			return _type((XAnnotationValueArray)expression, rawExpectation, rawType);
 		} else {
-			return super.typeDispatcherInvoke(expression, rawType);
+			return super.typeDispatcherInvoke(expression, rawExpectation, rawType);
 		}
 	}
 
-	protected JvmTypeReference _type(XAnnotation annotation, boolean rawType) {
+	protected JvmTypeReference _type(XAnnotation annotation, JvmTypeReference rawExpectation, boolean rawType) {
 		return getTypeReferences().createTypeRef(annotation.getAnnotationType());
 	}
 	
-	protected JvmTypeReference _type(XAnnotationElementValueBinaryOperation annotation, boolean rawType) {
-		return getType(annotation.getLeftOperand(), rawType);
+	protected JvmTypeReference _type(XAnnotationElementValueBinaryOperation annotation, JvmTypeReference rawExpectation, boolean rawType) {
+		return getType(annotation.getLeftOperand(), rawExpectation, rawType);
 	}
 	
-	protected JvmTypeReference _type(XAnnotationValueArray annotation, boolean rawType) {
+	protected JvmTypeReference _type(XAnnotationValueArray annotation, JvmTypeReference rawExpectation, boolean rawType) {
 		List<JvmTypeReference> references = newArrayList();
 		for (XExpression expression : annotation.getValues()) {
 			references.add(getType(expression,rawType));

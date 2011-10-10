@@ -10,9 +10,11 @@ package org.eclipse.xtext.xbase.tests.typing;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
@@ -28,12 +30,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 		XExpression expression = expression("newArrayList('foo','bar').forEach [] ", true);
 		XExpression closure = ((XMemberFeatureCall)expression).getMemberCallArguments().get(0);
 		JvmTypeReference type = typeProvider.getType(closure);
-		//TODO wrong type? Should we derive the type (String)=>Void?
-		// however, we should have something like Procedures.Procedure0 .. Procedure6 and
-		// #forEach should take Procedure1 as a parameter instead of Function1
-		assertEquals("(String)=>Object", type.getSimpleName());
-		//TODO this due to the hack in the type provider's caching strategy and should be fixed
-//		assertEquals("Function1<String,Void>", type.getSimpleName());
+		assertEquals("(String)=>void", type.getSimpleName());
 	}
 	
 	public void testFeatureCallWithArrayToIterableConversion() throws Exception {
@@ -239,7 +236,67 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testFeatureCall_15() throws Exception {
-		assertResolvedType("java.util.List<java.lang.Integer>", "newArrayList(newArrayList('').map(s|1)).map(iterable|iterable.size())");
+		assertResolvedType("java.util.List<java.lang.Integer>", 
+				"newArrayList(newArrayList('').map(s|1)).map(iterable|iterable.size())");
+	}
+	
+	public void testFeatureCall_15_a() throws Exception {
+		assertResolvedType("java.util.List<java.lang.Integer>", 
+				"newArrayList(newArrayList('').map(s|1)).map(iterable|iterable.size()).map(e|e)");
+	}
+	public void testFeatureCall_15_b() throws Exception {
+		assertResolvedType("java.util.List<java.lang.Integer>", 
+				"newArrayList(newArrayList('').map(s|1)).map(iterable|iterable.size()).map(e|e).map(e|e)");
+	}
+//	public void testFeatureCall_15_c() throws Exception {
+//		assertResolvedType("java.util.List<java.lang.Integer>", 
+//				"newArrayList(newArrayList('').map(s|1)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e)");
+//	}
+//	public void testFeatureCall_15_d() throws Exception {
+//		assertResolvedType("java.util.List<java.lang.Integer>", 
+//				"newArrayList(newArrayList('').map(s|1)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).map(e|e)");
+//	}
+	
+	public void testFeatureCall_15_e() throws Exception {
+		assertResolvedType("java.util.List<java.lang.Integer>", 
+				"newArrayList(newArrayList('').map(s|1).map(e|e)).map(iterable|iterable.size())");
+	}
+	public void testFeatureCall_15_f() throws Exception {
+		assertResolvedType("java.util.List<java.lang.Integer>", 
+				"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e)).map(iterable|iterable.size())");
+	}
+//	public void testFeatureCall_15_g() throws Exception {
+//		assertResolvedType("java.util.List<java.lang.Integer>", 
+//				"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size())");
+//	}
+//	public void testFeatureCall_15_h() throws Exception {
+//		assertResolvedType("java.util.List<java.lang.Integer>", 
+//				"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size())");
+//	}
+	public void testFeatureCall_15_i() throws Exception {
+		assertResolvedType("java.util.List<java.lang.Integer>", 
+				"newArrayList(newArrayList('').map(s|1).map(e|e)).map(iterable|iterable.size()).map(e|e)");
+	}
+//	public void testFeatureCall_15_j() throws Exception {
+//		assertResolvedType("java.util.List<java.lang.Integer>", 
+//				"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e)");
+//	}
+//	public void testFeatureCall_15_k() throws Exception {
+//		assertResolvedType("java.util.List<java.lang.Integer>", 
+//				"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e)");
+//	}
+//	public void testFeatureCall_15_l() throws Exception {
+//		assertResolvedType("java.util.List<java.lang.Integer>", 
+//				"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).map(e|e)");
+//	}
+	public void testFeatureCall_15_m() throws Exception {
+		assertResolvedType("java.util.List<java.lang.Integer>", 
+				"newArrayList(newArrayList('').map(String s|1).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)" +
+				".map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)" +
+				".map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)" +
+				").map(iterable|iterable.size()).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)" +
+				".map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)" +
+				"");
 	}
 	
 	public void testFeatureCall_16() throws Exception {
@@ -283,6 +340,16 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	
 	public void testFeatureCall_25() throws Exception {
 		assertResolvedType("java.util.List<java.lang.Integer>", "newArrayList('').map(s|s.length + 1 * 5).map(b| b / 5 )");
+	}
+	
+	public void testFeatureCall_26() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{ val Object o = newArrayList(if (false) new Double('-20') else new Integer('20')).map(v|v.intValue).head }", true);
+		XVariableDeclaration variableDeclaration = (XVariableDeclaration) block.getExpressions().get(0);
+		XExpression memberCallTarget = ((XMemberFeatureCall) variableDeclaration.getRight()).getMemberCallTarget();
+		JvmTypeReference typeRef = typeProvider.getType(memberCallTarget);
+		assertNotNull("type ref was null for " + memberCallTarget, typeRef);
+		assertEquals("java.util.List<java.lang.Integer>", toString(typeRef));
 	}
 	
 	public void testFeatureCall_Bug342134_01() throws Exception {

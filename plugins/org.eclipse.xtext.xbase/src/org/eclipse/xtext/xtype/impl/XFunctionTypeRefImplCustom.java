@@ -24,11 +24,14 @@ import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.xbase.lib.Functions;
+import org.eclipse.xtext.xbase.lib.Procedures;
 
 import com.google.common.collect.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Sebastian Zarnekow - Refactored type references, introduced 
+ * 	{@link org.eclipse.xtext.common.types.JvmSpecializedTypeReference}
  */
 public class XFunctionTypeRefImplCustom extends XFunctionTypeRefImpl {
 	
@@ -40,114 +43,132 @@ public class XFunctionTypeRefImplCustom extends XFunctionTypeRefImpl {
 //			if (returnType != null)
 //				returnType.getType();
 			JvmType newType = TypesFactory.eINSTANCE.createJvmVoid();
-			((InternalEObject)newType).eSetProxyURI(computeTypeUri());
+			((InternalEObject)newType).eSetProxyURI(computeTypeUri(isProcedure()));
 			type = (JvmType) eResolveProxy((InternalEObject) newType);
 		}
 		return super.getType();
 	}
 	
+	private boolean isProcedure() {
+		JvmTypeReference returnType = getReturnType();
+		if (returnType == null)
+			return true;
+		JvmType type = returnType.getType();
+		if (type == null)
+			return false;
+		if (type.eIsProxy())
+			return false;
+		if (type instanceof JvmVoid)
+			return true;
+		return false;
+	}
+
 	@Override
 	public JvmTypeReference getEquivalent() {
 		if (equivalent == null) {
-			TypesFactory typesFactory = TypesFactory.eINSTANCE;
 			JvmType rawType = getType();
 			if (rawType != null && rawType instanceof JvmDeclaredType) {
-				if (!isInstanceContext()) {
-					JvmParameterizedTypeReference result = typesFactory.createJvmParameterizedTypeReference();
-					result.setType(rawType);
-					EList<JvmTypeReference> superTypesWithObject = ((JvmDeclaredType) rawType).getSuperTypes();
-					JvmTypeReference objectReference = superTypesWithObject.get(0);
-					for(JvmTypeReference paramType: Lists.newArrayList(getParamTypes())) {
-						if (!(paramType instanceof JvmWildcardTypeReference)) {
-							JvmWildcardTypeReference paramWildcard = typesFactory.createJvmWildcardTypeReference();
-							JvmLowerBound lowerBound = typesFactory.createJvmLowerBound();
-							JvmTypeReference wrapped = wrapIfNecessary(paramType);
-							if (wrapped == null || wrapped.eContainer() != null) {
-								JvmDelegateTypeReference delegate = typesFactory.createJvmDelegateTypeReference();
-								delegate.setDelegate(wrapped);
-								lowerBound.setTypeReference(delegate);
-		//						result.getArguments().add(delegate);
-							} else {
-								lowerBound.setTypeReference(wrapped);
-							}
-							JvmUpperBound upperBound = typesFactory.createJvmUpperBound();
-							JvmDelegateTypeReference objectDelegate = typesFactory.createJvmDelegateTypeReference();
-							objectDelegate.setDelegate(objectReference);
-							upperBound.setTypeReference(objectDelegate);
-						
-							paramWildcard.getConstraints().add(upperBound);
-							paramWildcard.getConstraints().add(lowerBound);
-							result.getArguments().add(paramWildcard);
-						} else {
-							JvmDelegateTypeReference delegate = typesFactory.createJvmDelegateTypeReference();
-							delegate.setDelegate(paramType);
-							result.getArguments().add(delegate);
-						}
-					}
-					{
-						if (!(returnType instanceof JvmWildcardTypeReference)) {
-							JvmWildcardTypeReference returnType = typesFactory.createJvmWildcardTypeReference();
-							JvmUpperBound returnTypeBound = typesFactory.createJvmUpperBound();
-							JvmTypeReference wrapped = wrapIfNecessary(getReturnType());
-							if (wrapped == null || wrapped.eContainer() != null) {
-								JvmDelegateTypeReference delegate = typesFactory.createJvmDelegateTypeReference();
-								delegate.setDelegate(wrapped);
-								returnTypeBound.setTypeReference(delegate);
-							} else {
-								returnTypeBound.setTypeReference(wrapped);
-							}
-							returnType.getConstraints().add(returnTypeBound);
-							result.getArguments().add(returnType);
-						} else {
-							JvmDelegateTypeReference delegate = typesFactory.createJvmDelegateTypeReference();
-							delegate.setDelegate(returnType);
-							result.getArguments().add(delegate);
-						}
-					}
-					boolean wasDeliver = eDeliver();
-					try {
-						eSetDeliver(false);
-						setEquivalent(result);
-					} finally {
-						eSetDeliver(wasDeliver);
-					}
-				} else {
-					JvmParameterizedTypeReference result = typesFactory.createJvmParameterizedTypeReference();
-					result.setType(rawType);
-					for(JvmTypeReference paramType: Lists.newArrayList(getParamTypes())) {
-						JvmTypeReference wrapped = wrapIfNecessary(paramType);
-						if (wrapped == null || wrapped.eContainer() != null) {
-							JvmDelegateTypeReference delegate = typesFactory.createJvmDelegateTypeReference();
-							delegate.setDelegate(wrapped);
-							result.getArguments().add(delegate);
-	//						result.getArguments().add(delegate);
-						} else {
-							result.getArguments().add(wrapped);
-						}
-					}
-					{
-						JvmTypeReference wrapped = wrapIfNecessary(getReturnType());
-						if (wrapped == null || wrapped.eContainer() != null) {
-							JvmDelegateTypeReference delegate = typesFactory.createJvmDelegateTypeReference();
-							delegate.setDelegate(wrapped);
-							result.getArguments().add(delegate);
-						} else {
-							result.getArguments().add(wrapped);
-						}
-					}
-					boolean wasDeliver = eDeliver();
-					try {
-						eSetDeliver(false);
-						setEquivalent(result);
-					} finally {
-						eSetDeliver(wasDeliver);
-					}
+				JvmParameterizedTypeReference result = !isInstanceContext() ? 
+					createEquivalentWithWildcards(rawType, isProcedure()) :
+					createEquivalentWithoutWildcards(rawType, isProcedure());
+				boolean wasDeliver = eDeliver();
+				try {
+					eSetDeliver(false);
+					setEquivalent(result);
+				} finally {
+					eSetDeliver(wasDeliver);
 				}
 			} else {
 				equivalent = null;
 			}
 		}
 		return equivalent;
+	}
+
+	protected JvmParameterizedTypeReference createEquivalentWithoutWildcards(JvmType rawType, boolean procedure) {
+		TypesFactory typesFactory = TypesFactory.eINSTANCE;
+		JvmParameterizedTypeReference result = typesFactory.createJvmParameterizedTypeReference();
+		result.setType(rawType);
+		for(JvmTypeReference paramType: Lists.newArrayList(getParamTypes())) {
+			JvmTypeReference wrapped = wrapIfNecessary(paramType);
+			if (wrapped == null || wrapped.eContainer() != null) {
+				JvmDelegateTypeReference delegate = typesFactory.createJvmDelegateTypeReference();
+				delegate.setDelegate(wrapped);
+				result.getArguments().add(delegate);
+			} else {
+				result.getArguments().add(wrapped);
+			}
+		}
+		{
+			if (!procedure) {
+				JvmTypeReference wrapped = procedure ? getReturnType() : wrapIfNecessary(getReturnType());
+				if (wrapped == null || wrapped.eContainer() != null) {
+					JvmDelegateTypeReference delegate = typesFactory.createJvmDelegateTypeReference();
+					delegate.setDelegate(wrapped);
+					result.getArguments().add(delegate);
+				} else {
+					result.getArguments().add(wrapped);
+				}
+			}
+		}
+		return result;
+	}
+
+	protected JvmParameterizedTypeReference createEquivalentWithWildcards(JvmType rawType, boolean procedure) {
+		TypesFactory typesFactory = TypesFactory.eINSTANCE;
+		JvmParameterizedTypeReference result = typesFactory.createJvmParameterizedTypeReference();
+		result.setType(rawType);
+		EList<JvmTypeReference> superTypesWithObject = ((JvmDeclaredType) rawType).getSuperTypes();
+		JvmTypeReference objectReference = superTypesWithObject.get(0);
+		for(JvmTypeReference paramType: Lists.newArrayList(getParamTypes())) {
+			if (!(paramType instanceof JvmWildcardTypeReference)) {
+				JvmWildcardTypeReference paramWildcard = typesFactory.createJvmWildcardTypeReference();
+				JvmLowerBound lowerBound = typesFactory.createJvmLowerBound();
+				JvmTypeReference wrapped = wrapIfNecessary(paramType);
+				if (wrapped == null || wrapped.eContainer() != null) {
+					JvmDelegateTypeReference delegate = typesFactory.createJvmDelegateTypeReference();
+					delegate.setDelegate(wrapped);
+					lowerBound.setTypeReference(delegate);
+				} else {
+					lowerBound.setTypeReference(wrapped);
+				}
+				JvmUpperBound upperBound = typesFactory.createJvmUpperBound();
+				JvmDelegateTypeReference objectDelegate = typesFactory.createJvmDelegateTypeReference();
+				objectDelegate.setDelegate(objectReference);
+				upperBound.setTypeReference(objectDelegate);
+			
+				paramWildcard.getConstraints().add(upperBound);
+				paramWildcard.getConstraints().add(lowerBound);
+				result.getArguments().add(paramWildcard);
+			} else {
+				JvmDelegateTypeReference delegate = typesFactory.createJvmDelegateTypeReference();
+				delegate.setDelegate(paramType);
+				result.getArguments().add(delegate);
+			}
+		}
+		{
+			if (!procedure) {
+				if (!(returnType instanceof JvmWildcardTypeReference)) {
+					JvmWildcardTypeReference returnType = typesFactory.createJvmWildcardTypeReference();
+					JvmUpperBound returnTypeBound = typesFactory.createJvmUpperBound();
+					JvmTypeReference wrapped = procedure ? getReturnType() : wrapIfNecessary(getReturnType());
+					if (wrapped == null || wrapped.eContainer() != null) {
+						JvmDelegateTypeReference delegate = typesFactory.createJvmDelegateTypeReference();
+						delegate.setDelegate(wrapped);
+						returnTypeBound.setTypeReference(delegate);
+					} else {
+						returnTypeBound.setTypeReference(wrapped);
+					}
+					returnType.getConstraints().add(returnTypeBound);
+					result.getArguments().add(returnType);
+				} else {
+					JvmDelegateTypeReference delegate = typesFactory.createJvmDelegateTypeReference();
+					delegate.setDelegate(returnType);
+					result.getArguments().add(delegate);
+				}
+			}
+		}
+		return result;
 	}
 	
 	public JvmTypeReference wrapIfNecessary(JvmTypeReference reference) {
@@ -195,8 +216,12 @@ public class XFunctionTypeRefImplCustom extends XFunctionTypeRefImpl {
 		return (JvmType) EcoreUtil.resolve(proxy, context);
 	}
 	
-	protected URI computeTypeUri() {
-		return URI.createURI("java:/Objects/"+Functions.class.getCanonicalName()+"#"+Functions.class.getCanonicalName()+"$Function"+getParamTypes().size());
+	protected URI computeTypeUri(boolean procedure) {
+		int paramCount = Math.min(6, getParamTypes().size());
+		if (procedure) {
+			return URI.createURI("java:/Objects/"+Procedures.class.getCanonicalName()+"#"+Procedures.class.getCanonicalName()+"$Procedure"+paramCount);
+		}
+		return URI.createURI("java:/Objects/"+Functions.class.getCanonicalName()+"#"+Functions.class.getCanonicalName()+"$Function"+paramCount);
 	}
 	
 	protected URI computeTypeUri(Class<?> topLevelClass) {
