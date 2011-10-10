@@ -8,59 +8,52 @@
 package org.eclipse.xtext.xbase.lib;
 
 /**
- * This class serves as a container for the various function types that are used to implement the type of closures in
- * Xbase.
+ * This class serves as a container for the various procedure types that are used to implement the type of closures in
+ * Xbase that do not return any results but a meant to cause side-effects.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * @see FunctionExtensions
- * @see Procedures
+ * @see ProcedureExtensions
+ * @see Functions
  */
-public interface Functions {
+public interface Procedures {
 
 	/**
-	 * A function without any parameters.
-	 * 
-	 * @param <Result>
-	 *            the result of the single closure {@link #apply() method}.
+	 * A procedure without any parameters, e.g. a {@link Runnable}.
 	 */
-	interface Function0<Result> {
+	interface Procedure0 {
 
-		Result apply();
+		void apply();
 
 	}
 
 	/**
-	 * A function that takes one argument.
+	 * A procedure that takes one argument.
 	 * 
 	 * @param <Param>
 	 *            the only argument that is passed to the {@link #apply(Object) closure}
-	 * @param <Result>
-	 *            the result of the single closure {@link #apply(Object) method}.
 	 */
-	interface Function1<Param, Result> {
+	interface Procedure1<Param> {
 
-		Result apply(Param p);
+		void apply(Param p);
 
 	}
 
 	/**
-	 * A function that takes two arguments.
+	 * A procedure that takes two arguments.
 	 * 
 	 * @param <P1>
 	 *            the first argument that is passed to the {@link #apply(Object, Object) closure}
 	 * @param <P2>
 	 *            the second argument that is passed to the {@link #apply(Object, Object) closure}
-	 * @param <Result>
-	 *            the result of the single closure {@link #apply(Object, Object) method}.
 	 */
-	interface Function2<P1, P2, Result> {
+	interface Procedure2<P1, P2> {
 
-		Result apply(P1 p1, P2 p2);
+		void apply(P1 p1, P2 p2);
 
 	}
 
 	/**
-	 * A function that takes three arguments.
+	 * A procedure that takes three arguments.
 	 * 
 	 * @param <P1>
 	 *            the first argument that is passed to the {@link #apply(Object, Object, Object) closure}
@@ -68,17 +61,15 @@ public interface Functions {
 	 *            the second argument that is passed to the {@link #apply(Object, Object, Object) closure}
 	 * @param <P3>
 	 *            the third argument that is passed to the {@link #apply(Object, Object, Object) closure}
-	 * @param <Result>
-	 *            the result of the single closure {@link #apply(Object, Object, Object) method}.
 	 */
-	interface Function3<P1, P2, P3, Result> {
+	interface Procedure3<P1, P2, P3> {
 
-		Result apply(P1 p1, P2 p2, P3 p3);
+		void apply(P1 p1, P2 p2, P3 p3);
 
 	}
 
 	/**
-	 * A function that takes four arguments.
+	 * A procedure that takes four arguments.
 	 * 
 	 * @param <P1>
 	 *            the first argument that is passed to the {@link #apply(Object, Object, Object, Object) closure}
@@ -88,17 +79,15 @@ public interface Functions {
 	 *            the third argument that is passed to the {@link #apply(Object, Object, Object, Object) closure}
 	 * @param <P4>
 	 *            the fourth argument that is passed to the {@link #apply(Object, Object, Object, Object) closure}
-	 * @param <Result>
-	 *            the result of the single closure {@link #apply(Object, Object, Object, Object) method}.
 	 */
-	interface Function4<P1, P2, P3, P4, Result> {
+	interface Procedure4<P1, P2, P3, P4> {
 
-		Result apply(P1 p1, P2 p2, P3 p3, P4 p4);
+		void apply(P1 p1, P2 p2, P3 p3, P4 p4);
 
 	}
 
 	/**
-	 * A function that takes five arguments.
+	 * A procedure that takes five arguments.
 	 * 
 	 * @param <P1>
 	 *            the first argument that is passed to the {@link #apply(Object, Object, Object, Object, Object)
@@ -115,17 +104,15 @@ public interface Functions {
 	 * @param <P5>
 	 *            the fifth argument that is passed to the {@link #apply(Object, Object, Object, Object, Object)
 	 *            closure}
-	 * @param <Result>
-	 *            the result of the single closure {@link #apply(Object, Object, Object, Object, Object) method}.
 	 */
-	interface Function5<P1, P2, P3, P4, P5, Result> {
+	interface Procedure5<P1, P2, P3, P4, P5> {
 
-		Result apply(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5);
+		void apply(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5);
 
 	}
 
 	/**
-	 * A function that takes six arguments.
+	 * A procedure that takes six arguments.
 	 * 
 	 * @param <P1>
 	 *            the first argument that is passed to the
@@ -145,13 +132,10 @@ public interface Functions {
 	 * @param <P6>
 	 *            the sixth argument that is passed to the
 	 *            {@link #apply(Object, Object, Object, Object, Object, Object) closure}
-	 * @param <Result>
-	 *            the result of the single closure {@link #apply(Object, Object, Object, Object, Object, Object) method}
-	 *            .
 	 */
-	interface Function6<P1, P2, P3, P4, P5, P6, Result> {
+	interface Procedure6<P1, P2, P3, P4, P5, P6> {
 
-		Result apply(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6);
+		void apply(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6);
 
 	}
 

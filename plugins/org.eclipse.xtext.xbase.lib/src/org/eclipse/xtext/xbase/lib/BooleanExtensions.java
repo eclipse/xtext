@@ -13,7 +13,7 @@ package org.eclipse.xtext.xbase.lib;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class BooleanExtensions {
-	
+
 	/**
 	 * The logical <code>and</code> (conjunction). This is the equivalent to the java <code>&&</code> operator.
 	 * 

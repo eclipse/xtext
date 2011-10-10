@@ -47,7 +47,7 @@ public class CollectionExtensions {
 	}
 
 	/**
-	 * The operator mapping from {@code +=} to {@link #addAll(Collection)}. Returns <code>true</code> if the
+	 * The operator mapping from {@code +=} to {@link #addAll(Collection, Iterable)}. Returns <code>true</code> if the
 	 * collection changed due to this operation.
 	 * 
 	 * @param collection

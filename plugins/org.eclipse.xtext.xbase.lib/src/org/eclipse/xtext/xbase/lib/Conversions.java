@@ -26,6 +26,11 @@ public class Conversions {
 	/**
 	 * Wraps {@code object} in a list if and only if {@code object} is an array. Works for primitive and
 	 * object-component types.
+	 * 
+	 * @param object
+	 *            the object to be wrapped. May be <code>null</code>.
+	 * @return a list if the given object was an array. Otherwise the unmodified given object. May return
+	 *         <code>null</code> if the object was <code>null</code>.
 	 */
 	public static Object doWrapArray(Object object) {
 		if (object == null)
@@ -45,6 +50,11 @@ public class Conversions {
 	/**
 	 * Unwraps {@code object} to extract the original array if and only if {@code object} was previously created by
 	 * {@link #doWrapArray(Object)}.
+	 * 
+	 * @param value
+	 *            the object to be unwrapped. May be <code>null</code>.
+	 * @return the previously wrapped array if the given value represents such. Otherwise returns the value unmodified.
+	 *         May return <code>null</code> if the value was <code>null</code>.
 	 */
 	public static Object unwrapArray(Object value) {
 		//TODO if value is instanceof List return list. needs type information.
@@ -57,24 +67,66 @@ public class Conversions {
 
 	/**
 	 * A list that is completely backed by an array and that provides access to that array. Only for internal use.
+	 * 
+	 * @param <T>
+	 *            the type if the list elements.
 	 */
 	public static class WrappedArray<T> extends AbstractList<T> implements RandomAccess {
 
+		/**
+		 * Creates a new {@link WrappedArray} that is backed by the given {@code array}.
+		 * 
+		 * @param array
+		 *            the to-be-wrapped array. May be <code>null</code> which will cause any method on the result object
+		 *            to fail with a {@link NullPointerException}.
+		 * @param <T>
+		 *            the element type of the created list.
+		 * @return the wrapped array. Never <code>null</code>.
+		 */
 		public static <T> WrappedArray<T> create(T[] array) {
 			return new WrappedArray<T>(array);
 		}
 
 		private T[] array;
 
+		/**
+		 * Internal constructor for {@link WrappedArray}.
+		 * 
+		 * @param array
+		 *            the to-be-wrapped array. May be <code>null</code> which will cause any method on the created
+		 *            object to fail with a {@link NullPointerException}.
+		 */
 		protected WrappedArray(T[] array) {
 			this.array = array;
 		}
 
+		/**
+		 * {@inheritDoc}
+		 * 
+		 * @throws NullPointerException
+		 *             if the wrapped array was <code>null</code>.
+		 * @throws IndexOutOfBoundsException
+		 *             {@inheritDoc}
+		 */
 		@Override
 		public T get(int index) {
 			return array[index];
 		}
 
+		/**
+		 * {@inheritDoc}
+		 * 
+		 * @throws NullPointerException
+		 *             if the wrapped array was <code>null</code>.
+		 * @throws ClassCastException
+		 *             {@inheritDoc}
+		 * @throws NullPointerException
+		 *             {@inheritDoc}
+		 * @throws IllegalArgumentException
+		 *             {@inheritDoc}
+		 * @throws IndexOutOfBoundsException
+		 *             {@inheritDoc}
+		 */
 		@Override
 		public T set(int index, T element) {
 			T old = array[index];
@@ -83,6 +135,12 @@ public class Conversions {
 			return old;
 		}
 
+		/**
+		 * {@inheritDoc}
+		 * 
+		 * @throws NullPointerException
+		 *             if the wrapped array was <code>null</code>.
+		 */
 		@Override
 		public int size() {
 			return array.length;
@@ -93,6 +151,13 @@ public class Conversions {
 			return array.clone();
 		}
 
+		/**
+		 * Returns the underlying array in an unsafe manner. That is, modification of the array will be reflected by
+		 * this list and vice versa.
+		 * 
+		 * @return the underlying array. May be <code>null</code> if the list was {@link #create(Object[]) created} with
+		 *         a null argument.
+		 */
 		public T[] internalToArray() {
 			modCount++;
 			return array;
@@ -106,6 +171,14 @@ public class Conversions {
 	 */
 	public static class WrappedPrimitiveArray extends AbstractList<Object> implements RandomAccess {
 
+		/**
+		 * Creates a new {@link WrappedPrimitiveArray} that is backed by the given primitive {@code array}.
+		 * 
+		 * @param array
+		 *            the to-be-wrapped array. May be <code>null</code> which will cause any method on the resulting
+		 *            object to fail.
+		 * @return the wrapped array. Never <code>null</code>.
+		 */
 		public static WrappedPrimitiveArray create(Object array) {
 			return new WrappedPrimitiveArray(array);
 		}
@@ -113,29 +186,78 @@ public class Conversions {
 		private Object array;
 		private int size;
 
+		/**
+		 * Internal constructor for {@link WrappedPrimitiveArray}.
+		 * 
+		 * @param array
+		 *            the to-be-wrapped array. May be <code>null</code> which will cause any method on the created
+		 *            object to fail with a {@link NullPointerException}.
+		 */
 		protected WrappedPrimitiveArray(Object array) {
 			this.array = array;
-			this.size = Array.getLength(array);
+			if (array != null)
+				this.size = Array.getLength(array);
 		}
 
+		/**
+		 * {@inheritDoc}
+		 * 
+		 * @throws NullPointerException
+		 *             if the wrapped array was <code>null</code>.
+		 * @throws IndexOutOfBoundsException
+		 *             {@inheritDoc}
+		 */
 		@Override
 		public Object get(int index) {
+			if (array == null)
+				throw new NullPointerException();
 			return Array.get(array, index);
 		}
 
+		/**
+		 * {@inheritDoc}
+		 * 
+		 * @throws NullPointerException
+		 *             if the wrapped array was <code>null</code>.
+		 * @throws ClassCastException
+		 *             {@inheritDoc}
+		 * @throws NullPointerException
+		 *             {@inheritDoc}
+		 * @throws IllegalArgumentException
+		 *             {@inheritDoc}
+		 * @throws IndexOutOfBoundsException
+		 *             {@inheritDoc}
+		 */
 		@Override
 		public Object set(int index, Object element) {
+			if (array == null)
+				throw new NullPointerException();
 			Object old = get(index);
 			Array.set(array, index, element);
 			modCount++;
 			return old;
 		}
 
+		/**
+		 * {@inheritDoc}
+		 * 
+		 * @throws NullPointerException
+		 *             if the wrapped array was <code>null</code>.
+		 */
 		@Override
 		public int size() {
+			if (array == null)
+				throw new NullPointerException();
 			return size;
 		}
 
+		/**
+		 * Returns the underlying array in an unsafe manner. That is, modification of the array will be reflected by
+		 * this list and vice versa.
+		 * 
+		 * @return the underlying array. May be <code>null</code> if the list was {@link #create(Object) created} with a
+		 *         null argument.
+		 */
 		public Object internalToArray() {
 			modCount++;
 			return array;

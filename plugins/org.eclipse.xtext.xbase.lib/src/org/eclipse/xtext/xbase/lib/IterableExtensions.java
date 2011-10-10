@@ -19,6 +19,7 @@ import java.util.SortedSet;
 
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -57,7 +58,7 @@ public class IterableExtensions {
 	public static <T> Iterable<T> operator_plus(Iterable<? extends T> a, Iterable<? extends T> b) {
 		return Iterables.concat(a, b);
 	}
-	
+
 	/**
 	 * Finds the first element in the given iterable that fulfills the predicate. If none is found or the iterable is
 	 * empty, <code>null</code> is returned.
@@ -78,7 +79,7 @@ public class IterableExtensions {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Finds the last element in the given iterable that fulfills the predicate. If none is found or the iterable is
 	 * empty, <code>null</code> is returned.
@@ -96,7 +97,7 @@ public class IterableExtensions {
 		if (iterable instanceof List<?>) {
 			List<T> list = (List<T>) iterable;
 			ListIterator<T> iterator = list.listIterator(list.size());
-			while(iterator.hasPrevious()) {
+			while (iterator.hasPrevious()) {
 				T t = iterator.previous();
 				if (predicate.apply(t))
 					return t;
@@ -111,7 +112,7 @@ public class IterableExtensions {
 			return result;
 		}
 	}
-	
+
 	/**
 	 * Returns the first element in the given iterable or <code>null</code> if empty.
 	 * 
@@ -125,7 +126,7 @@ public class IterableExtensions {
 			return iterator.next();
 		return null;
 	}
-	
+
 	/**
 	 * Returns a view on this iterable that contains all the elements except the first.
 	 * 
@@ -137,7 +138,7 @@ public class IterableExtensions {
 	public static <T> Iterable<T> tail(final Iterable<T> iterable) {
 		return drop(iterable, 1);
 	}
-	
+
 	/**
 	 * Returns the last element in the given iterable or <code>null</code> if empty.
 	 * 
@@ -164,7 +165,7 @@ public class IterableExtensions {
 			return result;
 		}
 	}
-	
+
 	/**
 	 * Returns a view on this iterable that provides at most the first <code>count</code> entries.
 	 * 
@@ -180,7 +181,8 @@ public class IterableExtensions {
 		if (iterable == null)
 			throw new NullPointerException("iterable");
 		if (count < 0)
-			throw new IllegalArgumentException("Cannot take a negative number of elements. Argument 'count' was: " + count);
+			throw new IllegalArgumentException("Cannot take a negative number of elements. Argument 'count' was: "
+					+ count);
 		if (count == 0)
 			return Collections.emptyList();
 		return new Iterable<T>() {
@@ -188,9 +190,9 @@ public class IterableExtensions {
 				return new AbstractIterator<T>() {
 
 					private int remaining = count;
-					
+
 					private Iterator<T> delegate = iterable.iterator();
-					
+
 					@Override
 					protected T computeNext() {
 						if (remaining <= 0)
@@ -204,7 +206,7 @@ public class IterableExtensions {
 			}
 		};
 	}
-	
+
 	/**
 	 * Returns a view on this iterable that provides all elements except the first <code>count</code> entries.
 	 * 
@@ -222,21 +224,22 @@ public class IterableExtensions {
 		if (count == 0)
 			return iterable;
 		if (count < 0)
-			throw new IllegalArgumentException("Cannot drop a negative number of elements. Argument 'count' was: " + count);
+			throw new IllegalArgumentException("Cannot drop a negative number of elements. Argument 'count' was: "
+					+ count);
 		return new Iterable<T>() {
 			public Iterator<T> iterator() {
 				return new AbstractIterator<T>() {
 
 					private Iterator<T> delegate = iterable.iterator();
-					
+
 					{
 						int i = count;
-						while(i > 0 && delegate.hasNext()) {
+						while (i > 0 && delegate.hasNext()) {
 							delegate.next();
 							i--;
 						}
 					}
-					
+
 					@Override
 					protected T computeNext() {
 						if (!delegate.hasNext())
@@ -247,7 +250,7 @@ public class IterableExtensions {
 			}
 		};
 	}
-	
+
 	/**
 	 * Returns {@code true} if one or more elements in {@code iterable} satisfy the predicate.
 	 * 
@@ -266,17 +269,17 @@ public class IterableExtensions {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Returns {@code true} if every element in {@code iterable} satisfies the predicate. If {@code iterable} is empty,
-	 * {@code true} is returned. In other words, <code>false</code> is returned if at least one element fails
-	 * to fulfill the predicate.
+	 * {@code true} is returned. In other words, <code>false</code> is returned if at least one element fails to fulfill
+	 * the predicate.
 	 * 
 	 * @param iterable
 	 *            the iterable. May not be <code>null</code>.
 	 * @param predicate
 	 *            the predicate. May not be <code>null</code>.
-	 * @return <code>true</code> if one or more elements in {@code iterable} satisfy the predicate. 
+	 * @return <code>true</code> if one or more elements in {@code iterable} satisfy the predicate.
 	 */
 	public static <T> boolean forall(Iterable<T> iterable, Function1<? super T, Boolean> predicate) {
 		for (T t : iterable) {
@@ -288,7 +291,7 @@ public class IterableExtensions {
 
 	/**
 	 * Returns the elements of {@code unfiltered} that satisfy a predicate. The resulting iterable's iterator does not
-	 * support {@code remove()}. The returned iterable is a view on the original elements. Changes in the unfiltered 
+	 * support {@code remove()}. The returned iterable is a view on the original elements. Changes in the unfiltered
 	 * original are reflected in the view.
 	 * 
 	 * @param unfiltered
@@ -303,8 +306,8 @@ public class IterableExtensions {
 
 	/**
 	 * Returns all instances of class {@code type} in {@code unfiltered}. The returned iterable has elements whose class
-	 * is {@code type} or a subclass of {@code type}. The returned iterable's iterator does not support {@code remove()}.
-	 * The returned iterable is a view on the original elements. Changes in the unfiltered original are reflected in
+	 * is {@code type} or a subclass of {@code type}. The returned iterable's iterator does not support {@code remove()}
+	 * . The returned iterable is a view on the original elements. Changes in the unfiltered original are reflected in
 	 * the view.
 	 * 
 	 * @param unfiltered
@@ -335,7 +338,7 @@ public class IterableExtensions {
 	public static final <T, R> Iterable<R> map(Iterable<T> original, Function1<? super T, ? extends R> transformation) {
 		return Iterables.transform(original, new FunctionDelegate<T, R>(transformation));
 	}
-	
+
 	/**
 	 * Combines multiple iterables into a single iterable. The returned iterable has an iterator that traverses the
 	 * elements of each iterable in {@code inputs}. The input iterators are not polled until necessary.
@@ -351,66 +354,67 @@ public class IterableExtensions {
 	public static final <T> Iterable<T> flatten(Iterable<? extends Iterable<? extends T>> inputs) {
 		return Iterables.concat(inputs);
 	}
-	
+
 	/**
-	 * Applies {@code function} with each element of the given iterable. The return value is ignored.
+	 * Applies {@code procedure} for each element of the given iterable.
 	 * 
 	 * @param iterable
 	 *            the iterable. May not be <code>null</code>.
-	 * @param function
-	 *            the function. May not be <code>null</code>.
+	 * @param procedure
+	 *            the procedure. May not be <code>null</code>.
 	 */
-	public static final <T> void forEach(Iterable<T> iterable, Function1<? super T, ?> function) {
-		if (function == null)
-			throw new NullPointerException("function");
-		for(T t: iterable) {
-			function.apply(t);
+	public static final <T> void forEach(Iterable<T> iterable, Procedure1<? super T> procedure) {
+		if (procedure == null)
+			throw new NullPointerException("procedure");
+		for (T t : iterable) {
+			procedure.apply(t);
 		}
 	}
-	
+
 	/**
 	 * Returns the concatenated string representation of the elements in the given iterable. No delimiter is used.
 	 * 
 	 * @param iterable
 	 *            the iterable. May not be <code>null</code>.
-	 * @param the string representation of the iterable's elements. Never <code>null</code>.
+	 * @return the string representation of the iterable's elements. Never <code>null</code>.
 	 * @see #join(Iterable, CharSequence, Function1)
 	 */
 	public static final String join(Iterable<?> iterable) {
 		return join(iterable, "");
 	}
-	
+
 	/**
-	 * Returns the concatenated string representation of the elements in the given iterable. 
-	 * The {@code separator} is used to between each pair of entries in the input.
-	 * The string <code>null</code> is used for <code>null</code> entries in the input.
-	 * @param iterable
-	 *            the iterable. May not be <code>null</code>.
-	 * @param separator
-	 *            the separator. May not be <code>null</code>.
-	 * @param the string representation of the iterable's elements. Never <code>null</code>.
-	 * @see #join(Iterable, CharSequence, Function1)
-	 */
-	public static final String join(Iterable<?> iterable, CharSequence separator) {
-		return Joiner.on(separator.toString()).useForNull("null").join(iterable);
-	}
-	
-	/**
-	 * Returns the concatenated string representation of the elements in the given iterable.
-	 * The {@code function} is used to compute the string for each element.
-	 * The {@code separator} is used to between each pair of entries in the input.
-	 * The string <code>null</code> is used if the function yields <code>null</code> as the 
-	 * string representation for an entry.
+	 * Returns the concatenated string representation of the elements in the given iterable. The {@code separator} is
+	 * used to between each pair of entries in the input. The string <code>null</code> is used for <code>null</code>
+	 * entries in the input.
 	 * 
 	 * @param iterable
 	 *            the iterable. May not be <code>null</code>.
 	 * @param separator
 	 *            the separator. May not be <code>null</code>.
+	 * @return the string representation of the iterable's elements. Never <code>null</code>.
+	 * @see #join(Iterable, CharSequence, Function1)
+	 */
+	public static final String join(Iterable<?> iterable, CharSequence separator) {
+		return Joiner.on(separator.toString()).useForNull("null").join(iterable);
+	}
+
+	/**
+	 * Returns the concatenated string representation of the elements in the given iterable. The {@code function} is
+	 * used to compute the string for each element. The {@code separator} is used to between each pair of entries in the
+	 * input. The string <code>null</code> is used if the function yields <code>null</code> as the string representation
+	 * for an entry.
+	 * 
+	 * @param iterable
+	 *            the iterable. May not be <code>null</code>.
 	 * @param separator
 	 *            the separator. May not be <code>null</code>.
-	 * @param the string representation of the iterable's elements. Never <code>null</code>.
+	 * @param function
+	 *            the function that is used to compute the string representation of a single element. May not be
+	 *            <code>null</code>.
+	 * @return the string representation of the iterable's elements. Never <code>null</code>.
 	 */
-	public static final <T> String join(Iterable<T> iterable, CharSequence separator, 
+	public static final <T> String join(Iterable<T> iterable, CharSequence separator,
 			Functions.Function1<? super T, ? extends CharSequence> function) {
 		if (separator == null)
 			throw new NullPointerException("separator");
@@ -427,34 +431,38 @@ public class IterableExtensions {
 		}
 		return result.toString();
 	}
-	
 
 	/**
 	 * Determines whether two iterables contain equal elements in the same order. More specifically, this method returns
 	 * {@code true} if {@code iterable1} and {@code iterable2} contain the same number of elements and every element of
 	 * {@code iterable1} is equal to the corresponding element of {@code iterable2}.
-	 * @param iterable an iterable. May not be <code>null</code>.
-	 * @param other an iterable. May not be <code>null</code>.
+	 * 
+	 * @param iterable
+	 *            an iterable. May not be <code>null</code>.
+	 * @param other
+	 *            an iterable. May not be <code>null</code>.
 	 * @return <code>true</code> if the two iterables contain equal elements in the same order.
 	 */
 	public static final boolean elementsEqual(Iterable<?> iterable, Iterable<?> other) {
 		return Iterables.elementsEqual(iterable, other);
 	}
-	
+
 	/**
 	 * Determines if the given iterable is <code>null</code> or contains no elements.
 	 * 
-	 * @param iterable the to-be-queried iterable. May be <code>null</code>.
+	 * @param iterable
+	 *            the to-be-queried iterable. May be <code>null</code>.
 	 * @return {@code true} if the iterable is <code>null</code> or contains no elements
 	 */
 	public static final boolean isNullOrEmpty(Iterable<?> iterable) {
 		return iterable == null || isEmpty(iterable);
 	}
-	
+
 	/**
 	 * Determines if the given iterable contains no elements.
 	 * 
-	 * @param iterable the to-be-queried iterable. May not be <code>null</code>.
+	 * @param iterable
+	 *            the to-be-queried iterable. May not be <code>null</code>.
 	 * @return {@code true} if the iterable contains no elements
 	 * @see #isNullOrEmpty(Iterable)
 	 */
@@ -463,10 +471,12 @@ public class IterableExtensions {
 			return ((Collection<?>) iterable).isEmpty();
 		return !iterable.iterator().hasNext();
 	}
-	
+
 	/**
 	 * Returns the number of elements in {@code iterable}.
-	 * @param iterable the iterable. May not be <code>null</code>.
+	 * 
+	 * @param iterable
+	 *            the iterable. May not be <code>null</code>.
 	 * @return the number of elements in {@code iterable}.
 	 */
 	public static final int size(Iterable<?> iterable) {
@@ -504,7 +514,7 @@ public class IterableExtensions {
 		Iterator<T> iterator = iterable.iterator();
 		if (iterator.hasNext()) {
 			T result = iterator.next();
-			while(iterator.hasNext()) {
+			while (iterator.hasNext()) {
 				result = function.apply(result, iterator.next());
 			}
 			return result;
@@ -512,7 +522,7 @@ public class IterableExtensions {
 			return null;
 		}
 	}
-	
+
 	/**
 	 * <p>
 	 * Applies the combinator {@code function} to all elements of the iterable in turn and uses {@code seed} as the
@@ -548,12 +558,12 @@ public class IterableExtensions {
 	public static <T, R> R fold(Iterable<T> iterable, R seed, Function2<? super R, ? super T, ? extends R> function) {
 		R result = seed;
 		Iterator<T> iterator = iterable.iterator();
-		while(iterator.hasNext()) {
+		while (iterator.hasNext()) {
 			result = function.apply(result, iterator.next());
 		}
 		return result;
 	}
-	
+
 	/**
 	 * Returns a list that contains all the entries of the given iterable in the same order. If the iterable is of type
 	 * {@link List}, itself is returned. In all other cases, the result list is a copy of the iterable.
@@ -571,11 +581,11 @@ public class IterableExtensions {
 		}
 		return Lists.newArrayList(iterable);
 	}
-	
+
 	/**
-	 * Returns a set that contains all the unique entries of the given iterable in the order of their
-	 * appearance. If the iterable is of type
-	 * {@link Set}, itself is returned. In all other cases, the result set is a copy of the iterable with stable order.
+	 * Returns a set that contains all the unique entries of the given iterable in the order of their appearance. If the
+	 * iterable is of type {@link Set}, itself is returned. In all other cases, the result set is a copy of the iterable
+	 * with stable order.
 	 * 
 	 * 
 	 * @param iterable
@@ -591,32 +601,31 @@ public class IterableExtensions {
 		}
 		return Sets.newLinkedHashSet(iterable);
 	}
-	
+
 	/**
-	 * Returns a map for which the {@link Map#values} are computed by the given function, and each key
-	 * is an element in the given {@code keys}.
-	 * If the iterable contains equal keys more than once, the last one will be contained in the map.
-	 * The map is computed eagerly. That is, subsequent changes in the keys are not reflected by the map.
+	 * Returns a map for which the {@link Map#values} are computed by the given function, and each key is an element in
+	 * the given {@code keys}. If the iterable contains equal keys more than once, the last one will be contained in the
+	 * map. The map is computed eagerly. That is, subsequent changes in the keys are not reflected by the map.
 	 * 
 	 * @param keys
 	 *            the keys to use when constructing the {@code Map}. May not be <code>null</code>.
 	 * @param computeValues
 	 *            the function used to produce the values for each key. May not be <code>null</code>.
-	 * @return a map mapping each entry in the given iterable to the corresponding result when evaluating the 
-	 *         function {@code computeValues}.
+	 * @return a map mapping each entry in the given iterable to the corresponding result when evaluating the function
+	 *         {@code computeValues}.
 	 */
 	public static <K, V> Map<K, V> toInvertedMap(Iterable<? extends K> keys, Function1<? super K, V> computeValues) {
 		Map<K, V> result = Maps.newLinkedHashMap();
-		for(K k: keys) {
+		for (K k : keys) {
 			result.put(k, computeValues.apply(k));
 		}
 		return result;
 	}
-	
+
 	/**
-	 * Returns a map for which the {@link Map#values} are the given elements in the given order, and each key
-	 * is the product of invoking a supplied function {@code computeKeys} on its corresponding value.
-	 * If the function produces the same key for different values, the last one will be contained in the map.
+	 * Returns a map for which the {@link Map#values} are the given elements in the given order, and each key is the
+	 * product of invoking a supplied function {@code computeKeys} on its corresponding value. If the function produces
+	 * the same key for different values, the last one will be contained in the map.
 	 * 
 	 * @param values
 	 *            the values to use when constructing the {@code Map}. May not be <code>null</code>.
@@ -629,16 +638,15 @@ public class IterableExtensions {
 		if (computeKeys == null)
 			throw new NullPointerException("computeKeys");
 		Map<K, V> result = Maps.newLinkedHashMap();
-		for(V v: values) {
+		for (V v : values) {
 			result.put(computeKeys.apply(v), v);
 		}
 		return result;
 	}
-	
+
 	/**
-	 * Creates a sorted list that contains the items of the given iterable. 
-	 * The resulting list is in ascending order, according to the natural ordering of the 
-	 * elements in the iterable.
+	 * Creates a sorted list that contains the items of the given iterable. The resulting list is in ascending order,
+	 * according to the natural ordering of the elements in the iterable.
 	 * 
 	 * @param iterable
 	 *            the items to be sorted. May not be <code>null</code>.
@@ -653,8 +661,8 @@ public class IterableExtensions {
 	}
 
 	/**
-	 * Creates a sorted list that contains the items of the given iterable. 
-	 * The resulting list is sorted according to the order induced by the specified comparator.
+	 * Creates a sorted list that contains the items of the given iterable. The resulting list is sorted according to
+	 * the order induced by the specified comparator.
 	 * 
 	 * @param iterable
 	 *            the items to be sorted. May not be <code>null</code>.
@@ -672,9 +680,8 @@ public class IterableExtensions {
 	}
 
 	/**
-	 * Creates a sorted list that contains the items of the given iterable.
-	 * The resulting list is sorted according to the order induced by applying a key function to each element which yields a
-	 * comparable criteria.
+	 * Creates a sorted list that contains the items of the given iterable. The resulting list is sorted according to
+	 * the order induced by applying a key function to each element which yields a comparable criteria.
 	 * 
 	 * @param iterable
 	 *            the elements to be sorted. May not be <code>null</code>.
@@ -685,48 +692,71 @@ public class IterableExtensions {
 	 * @see #sort(Iterable, Comparator)
 	 * @see ListExtensions#sortInplaceBy(List, Function1)
 	 */
-	public static <T, C extends Comparable<? super C>> List<T> sortBy(Iterable<T> iterable, final Functions.Function1<? super T, C> key) {
+	public static <T, C extends Comparable<? super C>> List<T> sortBy(Iterable<T> iterable,
+			final Functions.Function1<? super T, C> key) {
 		return ListExtensions.sortInplaceBy(Lists.newArrayList(iterable), key);
 	}
 
-	/*
+	/**
 	 * Internal wrapper to look like a google.collect predicate
+	 * 
+	 * @param <T>
+	 *            the type of the objects that can be used by this predicate.
 	 */
 	protected static class BooleanFunctionDelegate<T> implements Predicate<T> {
 
 		private final Function1<? super T, Boolean> delegate;
 
+		/**
+		 * Creates a new {@link BooleanFunctionDelegate} that wraps the given delegate function. This implementation
+		 * will throw a {@link NullPointerException} if the delegate's {@link Function1#apply(Object) implementation}
+		 * returns <code>null</code> for a given object.
+		 * 
+		 * @param delegate
+		 *            the delegate function. May not be <code>null</code>.
+		 */
 		protected BooleanFunctionDelegate(Function1<? super T, Boolean> delegate) {
 			if (delegate == null)
 				throw new NullPointerException("delegate");
 			this.delegate = delegate;
 		}
-		
+
 		public boolean apply(T input) {
 			Boolean result = delegate.apply(input);
 			return result.booleanValue();
 		}
-		
+
 	}
-	
-	/*
+
+	/**
 	 * Internal wrapper to look like a google.collect function
+	 * 
+	 * @param <P>
+	 *            the type of the arguments that can be passed to this function.
+	 * @param <R>
+	 *            the type of the result instances of this function.
 	 */
 	protected static class FunctionDelegate<P, R> implements Function<P, R> {
 
 		private final Function1<? super P, ? extends R> delegate;
 
+		/**
+		 * Creates a new {@link FunctionDelegate} that wraps the given delegate function.
+		 * 
+		 * @param delegate
+		 *            the delegate function. May not be <code>null</code>.
+		 */
 		protected FunctionDelegate(Function1<? super P, ? extends R> delegate) {
 			if (delegate == null)
 				throw new NullPointerException("delegate");
 			this.delegate = delegate;
 		}
-		
+
 		public R apply(P input) {
 			R result = delegate.apply(input);
 			return result;
 		}
-		
+
 	}
-	
+
 }
