@@ -687,6 +687,11 @@ public class JvmModelGenerator implements IGenerator {
             {
               StringBuilderBasedAppendable _createAppendable = this.createAppendable(op, importManager);
               final StringBuilderBasedAppendable appendable = _createAppendable;
+              EList<JvmFormalParameter> _parameters = op.getParameters();
+              for (final JvmFormalParameter p : _parameters) {
+                String _simpleName = p.getSimpleName();
+                appendable.declareVariable(p, _simpleName);
+              }
               JvmTypeReference _switchResult = null;
               final JvmExecutable op_1 = op;
               boolean matched = false;
@@ -710,8 +715,8 @@ public class JvmModelGenerator implements IGenerator {
           } else {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("throw new UnsupportedOperationException(\"");
-            String _simpleName = op.getSimpleName();
-            _builder.append(_simpleName, "");
+            String _simpleName_1 = op.getSimpleName();
+            _builder.append(_simpleName_1, "");
             _builder.append(" is not implemented\");");
             return _builder;
           }

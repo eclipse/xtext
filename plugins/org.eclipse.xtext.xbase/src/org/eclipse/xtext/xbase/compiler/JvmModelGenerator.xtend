@@ -183,6 +183,8 @@ class JvmModelGenerator implements IGenerator {
 			val expression = op.getAssociatedExpression
 			if (expression != null) {
 				val appendable = createAppendable(op, importManager)
+				for(p: op.parameters) 
+					appendable.declareVariable(p, p.simpleName)
 				val returnType = switch(op) { 
 					JvmOperation: op.returnType 
 					default: null
