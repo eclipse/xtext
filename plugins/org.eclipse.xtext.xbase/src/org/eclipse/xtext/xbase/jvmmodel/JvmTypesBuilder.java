@@ -56,7 +56,7 @@ import org.eclipse.xtext.xbase.compiler.CompilationStrategyAdapter;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.lib.Functions;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 import com.google.inject.Inject;
 
@@ -91,7 +91,7 @@ public class JvmTypesBuilder {
 		return target;
 	}
 
-	public JvmOperation toMethod(EObject ctx, String name, JvmTypeReference typeRef, Function1<JvmOperation, Void> init) {
+	public JvmOperation toMethod(EObject ctx, String name, JvmTypeReference typeRef, Procedure1<JvmOperation> init) {
 		JvmOperation result = create(name, JvmOperation.class, init);
 		if (!result.eIsSet(TypesPackage.Literals.JVM_MEMBER__VISIBILITY))
 			result.setVisibility(JvmVisibility.PUBLIC);
@@ -132,7 +132,7 @@ public class JvmTypesBuilder {
 		return associate(ctx,result);
 	}
 
-	public JvmGenericType toClazz(EObject ctx, String name, Function1<JvmGenericType, Void> init) {
+	public JvmGenericType toClazz(EObject ctx, String name, Procedure1<JvmGenericType> init) {
 		String simpleName = name;
 		String packageName = null;
 		final int dotIdx = name.lastIndexOf('.');
@@ -187,14 +187,14 @@ public class JvmTypesBuilder {
 		return EcoreUtil2.cloneWithProxies(typeRef);
 	}
 
-	public <T extends JvmMember> T create(String name, Class<T> clazz, Function1<T, Void> init) {
+	public <T extends JvmMember> T create(String name, Class<T> clazz, Procedure1<T> init) {
 		T result = create(clazz, init);
 		result.setSimpleName(name);
 		return result;
 	}
 
 	@SuppressWarnings("unchecked")
-	protected <T> T create(Class<T> clazz, Function1<T, Void> init) {
+	protected <T> T create(Class<T> clazz, Procedure1<T> init) {
 		EList<EClassifier> classifiers = TypesFactory.eINSTANCE.getEPackage().getEClassifiers();
 		for (EClassifier eClassifier : classifiers) {
 			if (eClassifier instanceof EClass && eClassifier.getInstanceClass() == clazz) {
