@@ -35,7 +35,9 @@ public class StringProduction implements Production<ProdElement, String> {
 		protected String name;
 		protected boolean optional;
 		protected ProdElement parent;
+
 		protected ElementType type;
+
 		protected String value;
 
 		protected ProdElement(ElementType type) {
@@ -48,6 +50,33 @@ public class StringProduction implements Production<ProdElement, String> {
 		protected void addChild(ProdElement ele) {
 			children.add(ele);
 			ele.parent = this;
+		}
+
+		public List<ProdElement> getChildren() {
+			return children;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public ProdElement getParent() {
+			return parent;
+		}
+
+		public ElementType getType() {
+			return type;
+		}
+		public String getValue() {
+			return value;
+		}
+
+		public boolean isMany() {
+			return many;
+		}
+
+		public boolean isOptional() {
+			return optional;
 		}
 
 		@Override

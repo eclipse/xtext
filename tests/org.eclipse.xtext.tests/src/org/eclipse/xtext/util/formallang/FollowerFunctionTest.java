@@ -26,8 +26,8 @@ public class FollowerFunctionTest extends TestCase {
 		public String apply(ProdElement from) {
 			if (from == null)
 				return "null";
-			if (from.value != null)
-				return "'" + from.value + "'";
+			if (from.getValue() != null)
+				return "'" + from.getValue() + "'";
 			return from.toString();
 		}
 	}
