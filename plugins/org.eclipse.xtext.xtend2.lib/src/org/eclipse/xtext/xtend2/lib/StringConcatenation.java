@@ -41,6 +41,10 @@ import java.util.List;
  */
 public class StringConcatenation implements CharSequence {
 
+	/**
+	 * The default line delimiter that is used by instances of {@link StringConcatenation}. It uses
+	 * <code>System.getProperty("line.separator")</code>.
+	 */
 	public static final String DEFAULT_LINE_DELIMITER = System.getProperty("line.separator");
 
 	/**
@@ -126,8 +130,8 @@ public class StringConcatenation implements CharSequence {
 	 * Add the string representation of the given object to this sequence. The given indentation will be prepended to
 	 * each line except the first one if the object has a multi-line string representation.
 	 * 
-	 * @param lineDelimiter
-	 *            the used delimiter.
+	 * @param object
+	 *            the appended object.
 	 * @param indentation
 	 *            the indentation string that should be prepended. May not be <code>null</code>.
 	 */
@@ -260,7 +264,10 @@ public class StringConcatenation implements CharSequence {
 
 	/**
 	 * Compute the significant content of this sequence. That is, trailing whitespace after the last line-break will be
-	 * ignored if the last line contains only whitespace.
+	 * ignored if the last line contains only whitespace. The return value is unsafe, that is modification to this
+	 * {@link StringConcatenation} will cause changes in a previously obtained result and vice versa.
+	 * 
+	 * @return the significant content of this instance. Never <code>null</code>.
 	 */
 	protected List<String> getSignificantContent() {
 		for (int i = segments.size() - 1; i >= 0; i--) {
