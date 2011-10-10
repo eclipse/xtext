@@ -12,7 +12,6 @@ import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 
 @SuppressWarnings("all")
 public class Xtend2CompilerTest extends AbstractXtend2TestCase {
-  
   @Inject
   private JvmModelGenerator generator;
   
@@ -590,7 +589,6 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
   }
   
   public void assertCompilesTo(final CharSequence input, final CharSequence expected) throws Exception {
-    {
       String _string = input.toString();
       XtendFile _file = this.file(_string, true);
       final XtendFile file = _file;
@@ -602,6 +600,5 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
       String _string_1 = expected.toString();
       String _string_2 = javaCode.toString();
       Assert.assertEquals(_string_1, _string_2);
-    }
   }
 }

@@ -8,7 +8,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public class Case_7 {
-  
   public Entry<String,List<String>> bug345449() {
     Entry<String,List<String>> _xblockexpression = null;
     {

@@ -7,7 +7,6 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 public class Case_9 {
-  
   protected StringConcatenation _generateTypeRef(final ENamedElement c) {
     StringConcatenation _xifexpression = null;
     EObject _eContainer = c.eContainer();

@@ -12,7 +12,6 @@ import org.eclipse.xtext.xtend2.ui.tests.performance.GeneratorConfig;
 
 @SuppressWarnings("all")
 public class XtendFileGenerator {
-  
   public StringConcatenation getContents(final GeneratorConfig conf) {
     StringConcatenation _builder = new StringConcatenation();
     {
