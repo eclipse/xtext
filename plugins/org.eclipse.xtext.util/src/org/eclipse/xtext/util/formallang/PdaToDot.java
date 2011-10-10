@@ -23,7 +23,7 @@ public class PdaToDot<STATE, STACKITEM> extends GraphvizDotBuilder {
 	protected Node create(Digraph result, Pda<STATE, STACKITEM> pda, STATE state) {
 		Node n = new Node(state, stateToString(pda, state));
 		if (state == pda.getStart() || state == pda.getStop())
-			n.setShape("point");
+			n.setShape("diamond");
 		return n;
 	}
 
@@ -71,10 +71,13 @@ public class PdaToDot<STATE, STACKITEM> extends GraphvizDotBuilder {
 		if (popFormatter != null && pop != null)
 			return popFormatter.apply(pop);
 		String prefix = push != null && pop != null ? "<>" : push != null ? ">>" : pop != null ? "<<" : "";
-		if (stateFormatter != null)
-			return prefix + stateFormatter.apply(state);
+		if (stateFormatter != null) {
+			String fmt = stateFormatter.apply(state);
+			return fmt.startsWith(prefix) ? fmt : prefix + fmt;
+		}
 		if (state == null)
 			return prefix + "null";
-		return prefix + state.toString();
+		String fmt = state.toString();
+		return fmt.startsWith(prefix) ? fmt : prefix + fmt;
 	}
 }

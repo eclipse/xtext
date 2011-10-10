@@ -89,7 +89,11 @@ public class GrammarElementTitleSwitch extends XtextSwitch<String> implements Fu
 		if (!showAssignment)
 			return result;
 		CrossReference cr = GrammarUtil.containingCrossReference(ele);
-		return cr != null ? "[" + cr.getType().getClassifier().getName() + "|" + result + "]" : result;
+		if (cr == null)
+			return result;
+		String name = cr.getType() != null && cr.getType().getClassifier() != null ? cr.getType().getClassifier()
+				.getName() : "null";
+		return "[" + name + "|" + result + "]";
 	}
 
 	protected String addCrossRefOrAssignemnt(String result, AbstractElement ele) {
@@ -166,7 +170,8 @@ public class GrammarElementTitleSwitch extends XtextSwitch<String> implements Fu
 		if (showActionAsRuleCall && f != null) {
 			result = f + o + new Context2NameFunction().apply(object) + card(object);
 		} else {
-			String t = object.getType().getClassifier().getName();
+			String t = object.getType() != null && object.getType().getClassifier() != null ? object.getType()
+					.getClassifier().getName() : "null";
 			t = (t == null) ? "" : t;
 			f = (f == null) ? "" : "." + f;
 			result = "{" + t + f + o + "}" + card(object);
