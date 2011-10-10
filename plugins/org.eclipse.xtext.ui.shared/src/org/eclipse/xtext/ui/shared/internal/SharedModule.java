@@ -78,7 +78,7 @@ public class SharedModule extends AbstractModule {
 
 		bind(IJdtHelper.class).to(JdtHelper.class).asEagerSingleton();
 
-		boolean parallel = true;
+		boolean parallel = false;
 		if (parallel) {
 			bind(IResourceLoader.class).toProvider(ResourceLoaderProviders.getParallelLoader());
 
