@@ -374,6 +374,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtend2UITestCase im
 		expectAbsolut(model.indexOf("clazz"), 5, XbaseHighlightingConfiguration.FIELD);
 		expectAbsolut(model.indexOf("clazz"), 5, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
 		expectAbsolut(model.lastIndexOf("clazz"), 5, XbaseHighlightingConfiguration.FIELD);
+		expectAbsolut(model.lastIndexOf("clazz"), 5,XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
 		notExpectAbsolut(model.indexOf("testMethodNotDeprecated"), 23, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
 		highlight(model);
 	}
@@ -382,8 +383,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtend2UITestCase im
 		String model = "{} @Deprecated def baz(){} def bar(){ baz()}";
 		expectAbsolut(model.indexOf("@Deprecated"), 11,XbaseHighlightingConfiguration.ANNOTATION);
 		expectAbsolut(model.indexOf("baz"), 3, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
-		// Only valid if Bug 359409 is resolved
-//		expectAbsolut(model.lastIndexOf("baz"), 3, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
+		expectAbsolut(model.lastIndexOf("baz"), 3, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
 		highlight(model);
 	}
 	
