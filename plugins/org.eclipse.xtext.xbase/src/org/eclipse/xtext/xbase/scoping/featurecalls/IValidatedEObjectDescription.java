@@ -25,4 +25,6 @@ public interface IValidatedEObjectDescription extends IEObjectDescription {
 
 	String getKey();
 	
+	boolean isSameValidationState(IValidatedEObjectDescription other);
+	
 }
