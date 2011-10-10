@@ -36,9 +36,9 @@ public class XbaseResource extends DerivedStateAwareResource {
 	protected static class AssumptionTracker implements LinkingAssumptions.Tracker {
 		private boolean independent = true;
 		private final AssumptionTracker delegate;
-		private final XbaseResource host;
+		private final AssumptionState host;
 		
-		protected AssumptionTracker(XbaseResource host) {
+		protected AssumptionTracker(AssumptionState host) {
 			this.host = host;
 			if (host != null) {
 				this.delegate = host.assumptionTracker;
@@ -95,58 +95,70 @@ public class XbaseResource extends DerivedStateAwareResource {
 		}
 	}
 	
+	protected static class AssumptionState {
+		protected Map<JvmIdentifiableElement, JvmIdentifiableElement> proxyToAssumption = Maps.newHashMap();
+		protected Map<XAbstractFeatureCall, XExpression> featureCallToReceiverAssumption = Maps.newHashMap();
+		protected AssumptionTracker assumptionTracker = new RootAssumptionTracker();
+	}
+	
 	@Inject
 	private OnChangeEvictingCache onChangeEvictingCache;
 	
-	private Map<JvmIdentifiableElement, JvmIdentifiableElement> proxyToAssumption = Maps.newHashMap();
-	private Map<XAbstractFeatureCall, XExpression> featureCallToReceiverAssumption = Maps.newHashMap();
-	private AssumptionTracker assumptionTracker = new RootAssumptionTracker();
+	private ThreadLocal<AssumptionState> assumptionState = new ThreadLocal<AssumptionState>() {
+		@Override
+		protected AssumptionState initialValue() {
+			return new AssumptionState();
+		}
+	};
 	
 	protected LinkingAssumptions.Tracker trackAssumptions() {
-		return new AssumptionTracker(this);
+		return new AssumptionTracker(assumptionState.get());
 	}
 	
-	protected synchronized <T> T assumeLinked(
+	protected <T> T assumeLinked(
 			final JvmIdentifiableElement proxy, 
 			final JvmIdentifiableElement candidate, 
 			final XAbstractFeatureCall featureCall, 
 			final XExpression implicitReceiver,
 			final Provider<T> algorithm) {
+		AssumptionState state = assumptionState.get();
 		try {
-			if (proxyToAssumption.put(proxy, candidate) != null)
+			if (state.proxyToAssumption.put(proxy, candidate) != null)
 				throw new AssertionError("there is already another assumption about the given proxy. " +
 						"Please make sure that you don't use AbstractFeatureCall#getFeature in the type inference or" +
 						"in your scoping implementation but AbstractTypeProvider#getFeature instead.");
 			if (featureCall != null) {
-				featureCallToReceiverAssumption.put(featureCall, implicitReceiver);
+				state.featureCallToReceiverAssumption.put(featureCall, implicitReceiver);
 			}
 			return algorithm.get();
 		} finally {
-			proxyToAssumption.remove(proxy);
-			featureCallToReceiverAssumption.remove(featureCall);
+			state.proxyToAssumption.remove(proxy);
+			state.featureCallToReceiverAssumption.remove(featureCall);
 		}
 	}
 	
-	protected synchronized XExpression getImplicitReceiver(XAbstractFeatureCall featureCall) {
-		XExpression result = featureCallToReceiverAssumption.get(featureCall);
+	protected XExpression getImplicitReceiver(XAbstractFeatureCall featureCall) {
+		AssumptionState state = assumptionState.get();
+		XExpression result = state.featureCallToReceiverAssumption.get(featureCall);
 		if (result == null) {
-			if (featureCallToReceiverAssumption.containsKey(featureCall)) {
-				assumptionTracker.markDependent();
+			if (state.featureCallToReceiverAssumption.containsKey(featureCall)) {
+				state.assumptionTracker.markDependent();
 				return null;
 			}
 			return featureCall.getImplicitReceiver();
 		}
-		assumptionTracker.markDependent();
+		state.assumptionTracker.markDependent();
 		return result;
 	}
 	
-	protected synchronized JvmIdentifiableElement getFeature(XAbstractFeatureCall featureCall, boolean resolve) {
+	protected JvmIdentifiableElement getFeature(XAbstractFeatureCall featureCall, boolean resolve) {
 		JvmIdentifiableElement potentialProxy = (JvmIdentifiableElement) featureCall.eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
 		if (potentialProxy == null || !potentialProxy.eIsProxy())
 			return potentialProxy;
-		JvmIdentifiableElement assumption = proxyToAssumption.get(potentialProxy);
+		AssumptionState state = assumptionState.get();
+		JvmIdentifiableElement assumption = state.proxyToAssumption.get(potentialProxy);
 		if (assumption != null) {
-			assumptionTracker.markDependent();
+			state.assumptionTracker.markDependent();
 			return assumption;
 		}
 		if (!resolve)
@@ -174,13 +186,14 @@ public class XbaseResource extends DerivedStateAwareResource {
 //		return proxy;
 	}
 	
-	protected synchronized JvmConstructor getConstructor(XConstructorCall featureCall, boolean resolve) {
+	protected JvmConstructor getConstructor(XConstructorCall featureCall, boolean resolve) {
 		JvmConstructor potentialProxy = (JvmConstructor) featureCall.eGet(XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, false);
 		if (potentialProxy == null || !potentialProxy.eIsProxy())
 			return potentialProxy;
-		JvmConstructor assumption = (JvmConstructor) proxyToAssumption.get(potentialProxy);
+		AssumptionState state = assumptionState.get();
+		JvmConstructor assumption = (JvmConstructor) state.proxyToAssumption.get(potentialProxy);
 		if (assumption != null) {
-			assumptionTracker.markDependent();
+			state.assumptionTracker.markDependent();
 			return assumption;
 		}
 		if (!resolve)
@@ -190,25 +203,13 @@ public class XbaseResource extends DerivedStateAwareResource {
 	
 	@Override
 	public synchronized EObject getEObject(final String uriFragment) {
-//		if (!proxyToAssumption.isEmpty() && getEncoder().isCrossLinkFragment(this, uriFragment)) {
-//			Triple<EObject, EReference, INode> triple = getEncoder().decode(this, uriFragment);
-//			EReference reference = triple.getSecond();
-//			if (XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE == reference || XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR == reference) {
-//				log.error("Tried to use #getFeature directly during scoping / type resolution", new Exception());
-//			}
-//			
-//		}
-		return uncheckedGetEObject(uriFragment);
-	}
-
-	protected EObject uncheckedGetEObject(final String uriFragment) {
 		return onChangeEvictingCache.execWithoutCacheClear(this, new IUnitOfWork<EObject, XbaseResource>(){
 			public EObject exec(XbaseResource state) throws Exception {
 				return XbaseResource.super.getEObject(uriFragment);
 			}
 		});
 	}
-	
+
 	@Override
 	protected EObject handleCyclicResolution(Triple<EObject, EReference, INode> triple) throws AssertionError {
 		return null;
