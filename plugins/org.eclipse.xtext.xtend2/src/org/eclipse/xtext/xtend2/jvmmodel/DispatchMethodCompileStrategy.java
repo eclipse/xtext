@@ -29,7 +29,7 @@ import org.eclipse.xtext.xbase.lib.Functions;
 
 import com.google.inject.Inject;
 
-class DispatchMethodCompileStrategy implements Functions.Function1<ImportManager, CharSequence> {
+public class DispatchMethodCompileStrategy implements Functions.Function1<ImportManager, CharSequence> {
 	
 	@Inject
 	private TypeReferences typeReferences;

@@ -17,7 +17,7 @@ import org.eclipse.xtext.xbase.lib.Functions;
 
 import com.google.inject.Inject;
 
-class CacheVariableCompileStrategy implements Functions.Function1<ImportManager, CharSequence> {
+public class CacheVariableCompileStrategy implements Functions.Function1<ImportManager, CharSequence> {
 
 	@Inject
 	private TypeReferences typeReferences;

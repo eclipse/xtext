@@ -53,6 +53,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xtend2.dispatch.DispatchingSupport;
 import org.eclipse.xtext.xtend2.resource.Xtend2Resource;
+import org.eclipse.xtext.xtend2.xtend2.CreateExtensionInfo;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendField;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
@@ -245,9 +246,8 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 		target.setReturnType(returnType);
 		copyAndFixTypeParameters(source.getTypeParameters(), target);
 		jvmTypesBuilder.translateAnnotationsTo(source.getAnnotationInfo().getAnnotations(), target);
-		if (source.getCreateExtensionInfo() != null) {
-			jvmTypesBuilder.body(target, compileStrategies.forCacheMethod(source));
-			
+		CreateExtensionInfo createExtensionInfo = source.getCreateExtensionInfo();
+		if (createExtensionInfo != null) {
 			JvmTypeReference arrayList = typeReferences.getTypeForName(ArrayList.class, container, typeReferences.wildCard());
 			JvmTypeReference hashMap = typeReferences.getTypeForName(HashMap.class, container, arrayList, cloneWithProxies(returnType));
 			JvmField cacheVar = jvmTypesBuilder.toField(source, "_createCache_" + source.getName(), hashMap);
@@ -261,12 +261,14 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			initializer.setVisibility(JvmVisibility.PRIVATE);
 			initializer.setReturnType(typeReferences.getTypeForName(Void.TYPE, source));
 
+			jvmTypesBuilder.body(target, compileStrategies.forCacheMethod(createExtensionInfo, initializer));
+
 			// the first parameter is the created object
 			JvmFormalParameter jvmParam = typesFactory.createJvmFormalParameter();
-			jvmParam.setName(source.getCreateExtensionInfo().getName());
-			jvmParam.setParameterType(getTypeProxy(source.getCreateExtensionInfo().getCreateExpression()));
+			jvmParam.setName(createExtensionInfo.getName());
+			jvmParam.setParameterType(getTypeProxy(createExtensionInfo.getCreateExpression()));
 			initializer.getParameters().add(jvmParam);
-			associator.associate(source.getCreateExtensionInfo(), jvmParam);
+			associator.associate(createExtensionInfo, jvmParam);
 
 			// add all others
 			for (XtendParameter parameter : source.getParameters()) {
@@ -277,7 +279,7 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 				associator.associate(parameter, jvmParam);
 			}
 			associator.associate(source, initializer);
-			associator.associateLogicalContainer(source.getCreateExtensionInfo()
+			associator.associateLogicalContainer(createExtensionInfo
 					.getCreateExpression(), target);
 			associator.associateLogicalContainer(source.getExpression(), initializer);
 		} else {
