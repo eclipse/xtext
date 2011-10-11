@@ -6,6 +6,7 @@ package org.eclipse.xtext.xtend2.ui.labeling;
 import static org.eclipse.xtext.xtend2.xtend2.Xtend2Package.Literals.*;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider;
@@ -34,14 +35,14 @@ public class Xtend2DescriptionLabelProvider extends DefaultDescriptionLabelProvi
 		else if (eClass == XTEND_IMPORT)
 			return images.forImport();
 		else if (eClass == XTEND_CLASS || eClass == TypesPackage.Literals.JVM_GENERIC_TYPE)
-			return images.forClass(0);
+			return images.forClass(JvmVisibility.PUBLIC);
 		else if (eClass == XTEND_FUNCTION)
-			return images.forFunction(0);
+			return images.forFunction(JvmVisibility.PUBLIC);
 		else if (eClass == XTEND_FIELD)
-			return images.forField(false);
+			return images.forField(JvmVisibility.PUBLIC, false);
 		else if (eClass == TypesPackage.Literals.JVM_OPERATION)
-			return (descriptionFlags.isDispatcherOperation(element)) ? images.forDispatcherFunction(0) : images
-					.forFunction(0);
+			return (descriptionFlags.isDispatcherOperation(element)) ? images.forDispatcherFunction(JvmVisibility.PUBLIC) : images
+					.forFunction(JvmVisibility.PUBLIC);
 		else
 			return super.image(element);
 	}
