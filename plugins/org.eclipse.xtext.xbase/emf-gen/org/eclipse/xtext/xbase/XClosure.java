@@ -109,7 +109,7 @@ public interface XClosure extends XExpression
 	 * @return the value of the '<em>Implicit Parameter</em>' containment reference.
 	 * @see #setImplicitParameter(JvmFormalParameter)
 	 * @see org.eclipse.xtext.xbase.XbasePackage#getXClosure_ImplicitParameter()
-	 * @model containment="true" derived="true"
+	 * @model containment="true" transient="true" derived="true"
 	 * @generated
 	 */
 	JvmFormalParameter getImplicitParameter();
