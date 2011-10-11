@@ -202,7 +202,7 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 				consumedSomething[0] = false;
 				announcedEofWithLA[0] = false;
 				wasRecovering[0] = false;
-				Method method = parser.getClass().getDeclaredMethod(ruleNames[i]);
+				Method method = parser.getClass().getMethod(ruleNames[i]);
 				method.setAccessible(true);
 				method.invoke(parser);
 				result = parser.getFollowElements();

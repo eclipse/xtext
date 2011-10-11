@@ -25,6 +25,7 @@ import org.eclipse.xtext.generator.parser.antlr.postProcessing.SuppressWarningsP
 import org.eclipse.xtext.generator.parser.antlr.splitting.AntlrLexerSplitter;
 import org.eclipse.xtext.generator.parser.antlr.splitting.AntlrParserSplitter;
 import org.eclipse.xtext.generator.parser.antlr.splitting.BacktrackingGuardForUnorderedGroupsRemover;
+import org.eclipse.xtext.generator.parser.antlr.splitting.PartialClassExtractor;
 import org.eclipse.xtext.generator.parser.antlr.splitting.UnorderedGroupsSplitter;
 import org.eclipse.xtext.generator.parser.packrat.PackratParserFragment;
 
@@ -99,7 +100,8 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 	protected void splitParserClassFile(String filename) throws IOException {
 		String content = readFileIntoString(filename);
 		AntlrParserSplitter splitter = new AntlrParserSplitter(content, getOptions().getFieldsPerClass());
-		writeStringIntoFile(filename, splitter.transform());
+		PartialClassExtractor extractor = new PartialClassExtractor(splitter.transform(), getOptions().getMethodsPerClass());
+		writeStringIntoFile(filename, extractor.transform());
 	}
 
 	protected void simplifyUnorderedGroupPredicatesIfRequired(Grammar grammar, String absoluteParserFileName) {

@@ -9,6 +9,7 @@
 package org.eclipse.xtext.generator.parser.antlr;
 
 import org.eclipse.xtext.generator.parser.antlr.splitting.AntlrParserSplitter;
+import org.eclipse.xtext.generator.parser.antlr.splitting.PartialClassExtractor;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -21,6 +22,7 @@ public class AntlrOptions {
 	private boolean ignoreCase = false;
 	private boolean classSplitting = false;
 	private int fieldsPerClass = AntlrParserSplitter.FIELDS_PER_CLASS;
+	private int methodsPerClass = PartialClassExtractor.METHODS_PER_CLASS;
 
 	public boolean isBacktrack() {
 		return backtrack;
@@ -59,18 +61,28 @@ public class AntlrOptions {
 		this.classSplitting = value;
 	}
 	/**
-	 * This method will become public API with 2.1
-	 * @noreference This method is not intended to be referenced by clients.
+	 * @since 2.1
 	 */
 	public int getFieldsPerClass() {
 		return fieldsPerClass;
 	}
 	/**
-	 * This method will become public API with 2.1
-	 * @noreference This method is not intended to be referenced by clients.
+	 * @since 2.1
 	 */
 	public void setFieldsPerClass(String fieldsPerClass) {
 		this.fieldsPerClass = Integer.parseInt(fieldsPerClass);
+	}
+	/**
+	 * @since 2.1
+	 */
+	public int getMethodsPerClass() {
+		return methodsPerClass;
+	}
+	/**
+	 * @since 2.1
+	 */
+	public void setMethodsPerClass(String methodsPerClass) {
+		this.methodsPerClass = Integer.parseInt(methodsPerClass);
 	}
 
 }

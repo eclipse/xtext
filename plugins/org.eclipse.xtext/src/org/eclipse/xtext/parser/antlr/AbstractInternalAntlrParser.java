@@ -524,6 +524,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		String antlrEntryRuleName = normalizeEntryRuleName(entryRuleName);
 		try {
 			Method method = this.getClass().getMethod(antlrEntryRuleName);
+			method.setAccessible(true);
 			Object parseResult = method.invoke(this);
 			if (parseResult instanceof EObject)
 				current = (EObject) parseResult;
