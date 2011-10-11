@@ -1288,10 +1288,12 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	}
 	
 	@Test public void testMapExtension_01() throws Exception {
-		assertEvaluatesTo(newArrayList("a->b","c->d"), 
+		assertEvaluatesTo(newArrayList("a->b","c->d","a->b","c->d","a->b","c->d"), 
 				"{\n" +
 				"  val result = <String>newArrayList\n" +
 				"  newLinkedHashMap('a'->'b', 'c'->'d').forEach(k, v| result.add(k + '->' + v))\n" +
+				"  newLinkedHashMap('a'->'b', 'c'->'d').forEach[k, v| result.add(k + '->' + v)]\n" +
+				"  newLinkedHashMap('a'->'b', 'c'->'d').forEach() [k, v| result.add(k + '->' + v)]\n" +
 				"  result\n" +
 				"}");
 	}
@@ -1304,6 +1306,38 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	@Test public void testMapExtension_03() throws Exception {
 		assertEvaluatesTo("B", 
 				"newLinkedHashMap('a'->'b', 'c'->'d').mapValues[ toUpperCase ].get('a')");
+	}
+	
+	@Test public void testMapExtension_04() throws Exception {
+		assertEvaluatesTo("B", 
+				"newLinkedHashMap('a'->'b', 'c'->'d').mapValues() [ toUpperCase ].get('a')");
+	}
+	
+	@Test public void testMapExtension_05() throws Exception {
+		assertEvaluatesTo(newArrayList("a->b","c->d","a->b","c->d","a->b","c->d"), 
+				"{\n" +
+				"  val result = <String>newArrayList\n" +
+				"  val it = newLinkedHashMap('a'->'b', 'c'->'d')" +
+				"  forEach(k, v| result.add(k + '->' + v))\n" +
+				"  forEach() [k, v| result.add(k + '->' + v)]\n" +
+				"  forEach [k, v| result.add(k + '->' + v)]\n" +
+				"  result\n" +
+				"}");
+	}
+	
+	@Test public void testMapExtension_06() throws Exception {
+		assertEvaluatesTo(Boolean.FALSE, 
+				"{ val it = newLinkedHashMap('a'->'b', 'c'->'d') filter(k, v| k != 'a').containsKey('a') }");
+	}
+	
+	@Test public void testMapExtension_07() throws Exception {
+		assertEvaluatesTo("B", 
+				"{ val it = newLinkedHashMap('a'->'b', 'c'->'d') mapValues[ toUpperCase ].get('a') }");
+	}
+	
+	@Test public void testMapExtension_08() throws Exception {
+		assertEvaluatesTo("B", 
+				"{ val it = newLinkedHashMap('a'->'b', 'c'->'d') mapValues() [ toUpperCase ].get('a') }");
 	}
 	
 	@Test public void testMapConstruction_00() throws Exception {
