@@ -30,7 +30,7 @@ public class ArithmeticsScopeProvider extends AbstractDeclarativeScopeProvider {
 		return new FilteringScope(scope,
 				new Predicate<IEObjectDescription>() {
 					public boolean apply(IEObjectDescription input) {
-						return input!=null && input.getName()!=null && input.getName().getSegmentCount()>1;
+						return input!=null && input.getName()!=null && input.getName().getSegmentCount()==1;
 					};
 				});
 	}

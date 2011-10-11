@@ -47,7 +47,7 @@ public class InterpreterAutoEdit implements IAutoEditStrategy {
 							command.text = lineDelimiter + "// = " + computedResult + lineDelimiter;
 					}
 				} catch (BadLocationException e) {
-					e.printStackTrace();
+					// ignore
 				}
 			}
 		}
