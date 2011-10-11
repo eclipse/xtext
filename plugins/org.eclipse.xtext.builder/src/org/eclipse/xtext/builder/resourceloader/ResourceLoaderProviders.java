@@ -11,13 +11,14 @@
 package org.eclipse.xtext.builder.resourceloader;
 
 import org.eclipse.xtext.builder.resourceloader.IResourceLoader.Sorter;
-import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 /**
  * @author Lieven Lemiengre - Initial contribution and API
+ * @author Sebastian Zarnekow - Use IProject aware XtextResourceSetProvider instead of Provider<XtextResourceSet>
  * @since 2.1
  */
 public final class ResourceLoaderProviders {
@@ -25,12 +26,12 @@ public final class ResourceLoaderProviders {
 	public static abstract class AbstractResourceLoaderProvider implements Provider<IResourceLoader> {
 
 		@Inject
-		private Provider<XtextResourceSet> resourceSetProvider;
+		private XtextResourceSetProvider resourceSetProvider;
 
 		@Inject
 		private Sorter resourceSorter;
 
-		public Provider<XtextResourceSet> getResourceSetProvider() {
+		public XtextResourceSetProvider getResourceSetProvider() {
 			return resourceSetProvider;
 		}
 

@@ -69,4 +69,8 @@ public class BuildData {
 		return queuedBuildData.getAllRemainingURIs();
 	}
 	
+	public String getProjectName() {
+		return projectName;
+	}
+	
 }

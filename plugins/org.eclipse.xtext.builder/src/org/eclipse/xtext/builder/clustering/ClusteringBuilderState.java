@@ -15,6 +15,10 @@ import java.util.Queue;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResourceStatus;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
@@ -37,6 +41,7 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
@@ -71,6 +76,9 @@ public class ClusteringBuilderState extends AbstractBuilderState {
     @Inject
     @Named(RESOURCELOADER_CROSS_LINKING)
     private IResourceLoader crossLinkingResourceLoader;
+    
+    @Inject
+    private IWorkspace workspace;
 
     /**
      * Actually do the build.
@@ -145,10 +153,12 @@ public class ClusteringBuilderState extends AbstractBuilderState {
         allDeltas.addAll(pendingDeltas);
         queueAffectedResources(allRemainingURIs, this, newState, allDeltas, buildData, progress.newChild(1));
 
+        IProject currentProject = getBuiltProject(buildData);
         LoadOperation loadOperation = null;
         try {
             Queue<URI> queue = buildData.getURIQueue();
-            loadOperation = crossLinkingResourceLoader.create(resourceSet);
+            
+			loadOperation = crossLinkingResourceLoader.create(resourceSet, currentProject);
             loadOperation.load(queue);
 
             // Step 6: Iteratively got through the queue. For each resource, create a new resource description and queue all depending
@@ -203,13 +213,21 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                     } catch (final WrappedException ex) {
                         if(ex instanceof LoadOperationException) {
                             changedURI = ((LoadOperationException) ex).getUri();
-                        }
+                        } 
+                        Throwable cause = ex.getCause();
+                        boolean wasResourceNotFound = false;
+                    	if (cause instanceof CoreException) {
+                    		if (IResourceStatus.RESOURCE_NOT_FOUND == ((CoreException) cause).getStatus().getCode()) {
+                    			wasResourceNotFound = true;
+                    		}
+                    	}
                         if(changedURI == null) {
                             LOGGER.error("Error loading resource", ex); //$NON-NLS-1$
                         } else {
                             queue.remove(changedURI);
                             if(toBeDeleted.contains(changedURI)) break;
-                            LOGGER.error("Error loading resource from: " + changedURI.toString(), ex); //$NON-NLS-1$
+                            if (!wasResourceNotFound)
+                            	LOGGER.error("Error loading resource from: " + changedURI.toString(), ex); //$NON-NLS-1$
                             if (resource != null) {
                                 resourceSet.getResources().remove(resource);
                             }
@@ -237,7 +255,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                 queueAffectedResources(allRemainingURIs, this, newState, changedDeltas, buildData, subProgress.newChild(1));
 
                 if(queue.size() > 0) {
-                    loadOperation = crossLinkingResourceLoader.create(resourceSet);
+                    loadOperation = crossLinkingResourceLoader.create(resourceSet, currentProject);
                     loadOperation.load(queue);
                 }
 
@@ -279,10 +297,10 @@ public class ClusteringBuilderState extends AbstractBuilderState {
         ResourceSet resourceSet = buildData.getResourceSet();
         final int n = toBeUpdated.size();
         final SubMonitor subMonitor = SubMonitor.convert(monitor, "Write new resource descriptions", n); // TODO: NLS
-
+        IProject currentProject = getBuiltProject(buildData);
         LoadOperation loadOperation = null;
         try {
-            loadOperation = globalIndexResourceLoader.create(resourceSet);
+            loadOperation = globalIndexResourceLoader.create(resourceSet, currentProject);
             loadOperation.load(toBeUpdated);
 
             while (loadOperation.hasNext()) {
@@ -343,6 +361,12 @@ public class ClusteringBuilderState extends AbstractBuilderState {
             if(loadOperation != null) loadOperation.cancel();
         }
     }
+
+	protected IProject getBuiltProject(BuildData buildData) {
+		if (Strings.isEmpty(buildData.getProjectName()))
+			return null;
+		return workspace.getRoot().getProject(buildData.getProjectName());
+	}
 
     /**
      * Clears the content of the resource set without sending notifications.

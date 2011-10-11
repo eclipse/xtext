@@ -13,35 +13,40 @@ package org.eclipse.xtext.builder.resourceloader;
 import java.util.Collection;
 import java.util.Queue;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
 
 import com.google.common.collect.Lists;
-import com.google.inject.Provider;
 
 /**
  * Loads resources in sequentially in the same thread as it was invoked.
  *
  * @author Lieven Lemiengre - Initial contribution and API
+ * @author Sebastian Zarnekow - Use IProject aware XtextResourceSetProvider instead of Provider<XtextResourceSet>
  * @since 2.1
  */
 public class SerialResourceLoader extends AbstractResourceLoader {
 
-	public SerialResourceLoader(Provider<XtextResourceSet> resourceSetProvider, Sorter sorter) {
+	public SerialResourceLoader(XtextResourceSetProvider resourceSetProvider, Sorter sorter) {
 		super(resourceSetProvider, sorter);
 	}
 
-	public LoadOperation create(final ResourceSet parent) {
+	public LoadOperation create(final ResourceSet parent, IProject project) {
 		final Queue<URI> queue = Lists.newLinkedList();
-
 		return new CheckedLoadOperation(new LoadOperation() {
 
 			public Resource next() {
 				URI uri = queue.poll();
-				Resource resource = parent.getResource(uri, true);
-				return resource;
+				try {
+					Resource resource = parent.getResource(uri, true);
+					return resource;
+				} catch(WrappedException e) {
+					throw new LoadOperationException(uri, e);
+				}
 			}
 
 			public boolean hasNext() {
