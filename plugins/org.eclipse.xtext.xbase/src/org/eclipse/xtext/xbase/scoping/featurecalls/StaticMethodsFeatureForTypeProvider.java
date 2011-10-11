@@ -28,9 +28,13 @@ import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.MapExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.ProcedureExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Maps;
@@ -60,9 +64,9 @@ public class StaticMethodsFeatureForTypeProvider extends AbstractStaticMethodsFe
 			return denormalize(simpleComputeExtensionClasses());
 		}
 		
-		protected Map<String, Collection<String>> denormalize(Map<Class<?>, Class<?>> classMapping) {
+		protected Map<String, Collection<String>> denormalize(Multimap<Class<?>, Class<?>> classMapping) {
 			Multimap<String, String> result = LinkedHashMultimap.create();
-			for(Map.Entry<Class<?>, Class<?>> entry: classMapping.entrySet()) {
+			for(Map.Entry<Class<?>, Class<?>> entry: classMapping.entries()) {
 				Class<?> key = entry.getKey();
 				Class<?> keyObjectType = ReflectionUtil.getObjectType(key);
 				Class<?> value = entry.getValue();
@@ -94,8 +98,8 @@ public class StaticMethodsFeatureForTypeProvider extends AbstractStaticMethodsFe
 			);
 		}
 		
-		protected Map<Class<?>, Class<?>> simpleComputeExtensionClasses() {
-			Map<Class<?>, Class<?>> result = Maps.newHashMap();
+		protected Multimap<Class<?>, Class<?>> simpleComputeExtensionClasses() {
+			Multimap<Class<?>, Class<?>> result = ArrayListMultimap.create();
 			result.put(Boolean.class, BooleanExtensions.class);
 			result.put(String.class, StringExtensions.class);
 			result.put(Integer.class, IntegerExtensions.class);
@@ -104,6 +108,7 @@ public class StaticMethodsFeatureForTypeProvider extends AbstractStaticMethodsFe
 			result.put(List.class, ListExtensions.class);
 			result.put(Collection.class, CollectionExtensions.class);
 			result.put(Map.class, CollectionExtensions.class);
+			result.put(Map.class, MapExtensions.class);
 			result.put(Iterable.class, IterableExtensions.class);
 			result.put(Functions.Function0.class, FunctionExtensions.class);
 			result.put(Functions.Function1.class, FunctionExtensions.class);
@@ -112,6 +117,13 @@ public class StaticMethodsFeatureForTypeProvider extends AbstractStaticMethodsFe
 			result.put(Functions.Function4.class, FunctionExtensions.class);
 			result.put(Functions.Function5.class, FunctionExtensions.class);
 			result.put(Functions.Function6.class, FunctionExtensions.class);
+			result.put(Procedures.Procedure0.class, ProcedureExtensions.class);
+			result.put(Procedures.Procedure1.class, ProcedureExtensions.class);
+			result.put(Procedures.Procedure2.class, ProcedureExtensions.class);
+			result.put(Procedures.Procedure3.class, ProcedureExtensions.class);
+			result.put(Procedures.Procedure4.class, ProcedureExtensions.class);
+			result.put(Procedures.Procedure5.class, ProcedureExtensions.class);
+			result.put(Procedures.Procedure6.class, ProcedureExtensions.class);
 			return result;
 		}
 	}

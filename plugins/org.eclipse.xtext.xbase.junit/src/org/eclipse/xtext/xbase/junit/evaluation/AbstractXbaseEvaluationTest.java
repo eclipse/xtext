@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.junit.evaluation;
 
+import static com.google.common.collect.Lists.newArrayList;
+import static java.util.Collections.emptyList;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 import java.util.Stack;
@@ -21,10 +24,6 @@ import testdata.OuterClass;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-
-import static java.util.Collections.*;
-
-import static com.google.common.collect.Lists.*;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -152,6 +151,36 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	
 	@Test public void testCurrying_03() throws Exception {
 		assertEvaluatesTo("12", "[String p1, String p2| p1 + p2].curry('1').curry('2').apply()");
+	}
+	
+	@Test public void testCurrying_04() throws Exception {
+		assertEvaluatesTo(newArrayList("1","2","3","4","5","6"), 
+				"{\n" +
+				"  val result = <String>newArrayList\n" +
+				"  var (String,String,String,String,String,String)=>void proc = [ p1, p2, p3, p4, p5, p6 |\n" +
+				"      result.add(p1)\n" +
+				"      result.add(p2)\n" +
+				"      result.add(p3)\n" +
+				"      result.add(p4)\n" +
+				"      result.add(p5)\n" +
+				"      result.add(p6)\n" +
+				"  ]" +
+				"  proc.curry('1').curry('2').curry('3').curry('4').curry('5').curry('6').apply()\n" +
+				"  result\n" +
+				"}");
+	}
+	
+	@Test public void testCurrying_05() throws Exception {
+		assertEvaluatesTo(newArrayList("1","2"), 
+				"{\n" +
+						"  val result = <String>newArrayList\n" +
+						"  var (String,String)=>void proc = [ p1, p2 |\n" +
+						"      result.add(p1)\n" +
+						"      result.add(p2)\n" +
+						"  ]" +
+						"  proc.curry('1').curry('2').apply()\n" +
+						"  result\n" +
+				"}");
 	}
 	
 	/*
@@ -1249,6 +1278,34 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo("seed", "<Integer>newArrayList().fold('seed', [s, i|s+i.toString])");
 	}
 	
+	@Test public void testIterableExtension_12() throws Exception {
+		assertEvaluatesTo(newArrayList("a","b"), 
+				"{\n" +
+				"  val result = <String>newArrayList\n" +
+				"  newArrayList('a','b').forEach [ result += it ]\n" +
+				"  result\n" +
+				"}");
+	}
+	
+	@Test public void testMapExtension_01() throws Exception {
+		assertEvaluatesTo(newArrayList("a->b","c->d"), 
+				"{\n" +
+				"  val result = <String>newArrayList\n" +
+				"  newLinkedHashMap('a'->'b', 'c'->'d').forEach(k, v| result.add(k + '->' + v))\n" +
+				"  result\n" +
+				"}");
+	}
+	
+	@Test public void testMapExtension_02() throws Exception {
+		assertEvaluatesTo(Boolean.FALSE, 
+				"newLinkedHashMap('a'->'b', 'c'->'d').filter(k, v| k != 'a').containsKey('a')");
+	}
+	
+	@Test public void testMapExtension_03() throws Exception {
+		assertEvaluatesTo("B", 
+				"newLinkedHashMap('a'->'b', 'c'->'d').mapValues[ toUpperCase ].get('a')");
+	}
+	
 	@Test public void testMapConstruction_00() throws Exception {
 		assertEvaluatesTo("vier", "newHashMap(3->'drei',4->'vier').get(4)");
 	}
@@ -1381,8 +1438,32 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	}
 	
 	@Test public void testBug343144_01() throws Exception {
+		for (int i = 0; i < 1; i++) {
 		assertEvaluatesTo(Integer.valueOf(3), 
-			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)])");
+			"{" +
+			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+			"}"
+		);
+		}
 	}
 	
 	@Test public void testBug343144_02() throws Exception {
