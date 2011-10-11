@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.util.IAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
+import org.eclipse.xtext.common.types.JvmDeclaredType
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -39,7 +40,7 @@ class «getJvmModelInferrerName().toSimpleName()» implements IJvmModelInferrer {
 
 	@Inject extension JvmTypesBuilder
 
-   	override void infer(EObject e, IAcceptor<JvmDeclaredType> acceptor) {
+   	override void infer(EObject e, IAcceptor<JvmDeclaredType> acceptor, boolean isPrelinkingPhase) {
    	}
 }
 «ENDFILE»
