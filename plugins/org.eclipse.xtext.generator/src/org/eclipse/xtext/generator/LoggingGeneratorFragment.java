@@ -25,7 +25,7 @@ public class LoggingGeneratorFragment extends DefaultGeneratorFragment {
 
 	private String message;
 
-	private Level level;
+	private Level level = Level.INFO;
 
 	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
@@ -47,6 +47,13 @@ public class LoggingGeneratorFragment extends DefaultGeneratorFragment {
 
 	public void setLevel(Level level) {
 		this.level = level;
+	}
+	
+	/**
+	 * @since 2.1
+	 */
+	public void setLevelName(String level) {
+		this.level = Level.toLevel(level);
 	}
 
 	@Override
