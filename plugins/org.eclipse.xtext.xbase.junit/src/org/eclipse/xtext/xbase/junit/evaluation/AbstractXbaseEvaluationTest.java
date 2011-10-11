@@ -183,6 +183,29 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
+	@Test public void testCurrying_06() throws Exception {
+		assertEvaluatesTo(newArrayList("1","2","3","4","5","6"), 
+				"{\n" +
+				"  val result = <String>newArrayList\n" +
+				"  val (String,String,String,String,String,String)=>void proc6 = [ p1, p2, p3, p4, p5, p6 |\n" +
+				"      result.add(p1)\n" +
+				"      result.add(p2)\n" +
+				"      result.add(p3)\n" +
+				"      result.add(p4)\n" +
+				"      result.add(p5)\n" +
+				"      result.add(p6)\n" +
+				"  ]\n" +
+				"  val (String,String,String,String,String)=>void proc5 = proc6.curry('1')\n" +
+				"  val (String,String,String,String)=>void proc4 = proc5.curry('2')\n" +
+				"  val (String,String,String)=>void proc3 = proc4.curry('3')\n" +
+				"  val (String,String)=>void proc2 = proc3.curry('4')\n" +
+				"  val (String)=>void proc1 = proc2.curry('5')\n" +
+				"  val =>void proc0 = proc1.curry('6')\n" +
+				"  proc0.apply()\n" +
+				"  result\n" +
+				"}");
+	}
+	
 	/*
 	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=341550
 	 */
