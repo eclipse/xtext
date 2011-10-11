@@ -12,6 +12,7 @@ package org.eclipse.xtext.builder.resourceloader;
 
 import java.util.Collection;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -36,7 +37,7 @@ public interface IResourceLoader {
 	 * @param parent the parent ResourceSet
 	 * @return a LoadOperation
 	 */
-	LoadOperation create(ResourceSet parent);
+	LoadOperation create(ResourceSet parent, IProject project);
 
 	/**
 	 * The Interface LoadOperation.
