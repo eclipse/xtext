@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmVisibility;
 
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendField;
@@ -28,6 +29,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendField;
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFieldImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFieldImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFieldImpl#isExtension <em>Extension</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFieldImpl#getVisibility <em>Visibility</em>}</li>
  * </ul>
  * </p>
  *
@@ -84,6 +86,35 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 	 * @ordered
 	 */
 	protected boolean extension = EXTENSION_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisibility()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final JvmVisibility VISIBILITY_EDEFAULT = JvmVisibility.PRIVATE;
+
+	/**
+	 * The cached value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisibility()
+	 * @generated
+	 * @ordered
+	 */
+	protected JvmVisibility visibility = VISIBILITY_EDEFAULT;
+
+	/**
+	 * This is true if the Visibility attribute has been set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean visibilityESet;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -205,6 +236,56 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public JvmVisibility getVisibility()
+	{
+		return visibility;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVisibility(JvmVisibility newVisibility)
+	{
+		JvmVisibility oldVisibility = visibility;
+		visibility = newVisibility == null ? VISIBILITY_EDEFAULT : newVisibility;
+		boolean oldVisibilityESet = visibilityESet;
+		visibilityESet = true;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FIELD__VISIBILITY, oldVisibility, visibility, !oldVisibilityESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void unsetVisibility()
+	{
+		JvmVisibility oldVisibility = visibility;
+		boolean oldVisibilityESet = visibilityESet;
+		visibility = VISIBILITY_EDEFAULT;
+		visibilityESet = false;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.UNSET, Xtend2Package.XTEND_FIELD__VISIBILITY, oldVisibility, VISIBILITY_EDEFAULT, oldVisibilityESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isSetVisibility()
+	{
+		return visibilityESet;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -232,6 +313,8 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 				return getType();
 			case Xtend2Package.XTEND_FIELD__EXTENSION:
 				return isExtension();
+			case Xtend2Package.XTEND_FIELD__VISIBILITY:
+				return getVisibility();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -254,6 +337,9 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 				return;
 			case Xtend2Package.XTEND_FIELD__EXTENSION:
 				setExtension((Boolean)newValue);
+				return;
+			case Xtend2Package.XTEND_FIELD__VISIBILITY:
+				setVisibility((JvmVisibility)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -278,6 +364,9 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 			case Xtend2Package.XTEND_FIELD__EXTENSION:
 				setExtension(EXTENSION_EDEFAULT);
 				return;
+			case Xtend2Package.XTEND_FIELD__VISIBILITY:
+				unsetVisibility();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -298,6 +387,8 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 				return type != null;
 			case Xtend2Package.XTEND_FIELD__EXTENSION:
 				return extension != EXTENSION_EDEFAULT;
+			case Xtend2Package.XTEND_FIELD__VISIBILITY:
+				return isSetVisibility();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -317,6 +408,8 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 		result.append(name);
 		result.append(", extension: ");
 		result.append(extension);
+		result.append(", visibility: ");
+		if (visibilityESet) result.append(visibility); else result.append("<unset>");
 		result.append(')');
 		return result.toString();
 	}

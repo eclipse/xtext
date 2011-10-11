@@ -38,12 +38,13 @@ Member returns XtendMember:
 	{XtendMember} annotations+=XAnnotation* 
 	(
 		{XtendField.annotationInfo = current}	
-		( extension?='extension' type=JvmTypeReference name=ValidID?
-		| type=JvmTypeReference name=ValidID
-		)
+			visibility=Visibility?   
+		 	(extension?='extension' type=JvmTypeReference name=ValidID?
+			| type=JvmTypeReference name=ValidID)
 		
 	|	{XtendFunction.annotationInfo = current}
-		('def' | override?='override') (dispatch?='dispatch'?) ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
+			('def' | override?='override') visibility=Visibility? (dispatch?='dispatch'?) 
+			('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
 			( =>(returnType=JvmTypeReference createExtensionInfo=CreateExtensionInfo name=ValidID '(')
 			| =>(returnType=JvmTypeReference name=ValidID '(')
 			| =>(createExtensionInfo=CreateExtensionInfo name=ValidID '(')
@@ -64,6 +65,9 @@ ValidID:
 Parameter returns XtendParameter:
 	annotations+=XAnnotation* 
 	parameterType=JvmTypeReference name=ValidID;
+
+enum Visibility returns types::JvmVisibility:
+	PUBLIC = 'public' | PROTECTED = 'protected' | PRIVATE = 'private';
 		
 XStringLiteral returns xbase::XExpression:
 	SimpleStringLiteral | RichString
