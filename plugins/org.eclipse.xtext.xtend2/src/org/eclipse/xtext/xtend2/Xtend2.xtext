@@ -28,7 +28,7 @@ QualifiedNameWithWildCard :
 	
 Class returns XtendClass :
    annotations+=XAnnotation* 
-   "class" name=ValidID ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?  
+   'public'? 'class' name=ValidID ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?  
    ("extends" extends=JvmParameterizedTypeReference)? 
    ('implements' implements+=JvmParameterizedTypeReference (',' implements+=JvmParameterizedTypeReference)*)?'{'
 	   (members+=Member)*

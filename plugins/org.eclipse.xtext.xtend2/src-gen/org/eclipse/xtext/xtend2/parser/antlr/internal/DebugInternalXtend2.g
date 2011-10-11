@@ -26,7 +26,7 @@ ruleQualifiedNameWithWildCard :
 
 // Rule Class
 ruleClass :
-	ruleXAnnotation* 'class' ruleValidID (
+	ruleXAnnotation* 'public'? 'class' ruleValidID (
 		'<' ruleJvmTypeParameter (
 			',' ruleJvmTypeParameter
 		)* '>'
