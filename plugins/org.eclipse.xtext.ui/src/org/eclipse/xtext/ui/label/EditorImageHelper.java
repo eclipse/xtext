@@ -9,7 +9,9 @@ package org.eclipse.xtext.ui.label;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @deprecated unused leftover class
  */
+@Deprecated
 public class EditorImageHelper {
 
 }
