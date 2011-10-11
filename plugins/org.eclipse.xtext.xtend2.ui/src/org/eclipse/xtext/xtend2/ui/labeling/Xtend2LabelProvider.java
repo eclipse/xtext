@@ -6,6 +6,8 @@ package org.eclipse.xtext.xtend2.ui.labeling;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
+import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -13,8 +15,8 @@ import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.validation.UIStrings;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
-import org.eclipse.xtext.xtend2.xtend2.XtendField;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendField;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendImport;
@@ -38,7 +40,7 @@ public class Xtend2LabelProvider extends DefaultEObjectLabelProvider {
 	private ITypeProvider typeProvider;
 
 	@Inject
-	private IXtend2JvmAssociations xtend2jvmAssociations;
+	private IXtend2JvmAssociations associations;
 
 	@Inject
 	public Xtend2LabelProvider(AdapterFactoryLabelProvider delegate) {
@@ -54,19 +56,22 @@ public class Xtend2LabelProvider extends DefaultEObjectLabelProvider {
 	}
 
 	public Image image(XtendClass element) {
-		return images.forClass(0);
+		JvmGenericType inferredType = associations.getInferredType(element);
+		return images.forClass(inferredType.getVisibility());
 	}
 
 	public Image image(XtendFunction element) {
-		return images.forFunction(0);
+		JvmOperation inferredOperation = associations.getDirectlyInferredOperation(element);
+		return images.forFunction(inferredOperation.getVisibility());
 	}
 
 	public Image image(JvmOperation element) {
-		return images.forDispatcherFunction(0);
+		return images.forDispatcherFunction(element.getVisibility());
 	}
 	
 	public Image image(XtendField element) {
-		return images.forField(element.isExtension());
+		JvmField inferredField = associations.getJvmField(element);
+		return images.forField(inferredField.getVisibility(), element.isExtension());
 	}
 
 	public String text(XtendFile element) {
@@ -82,7 +87,7 @@ public class Xtend2LabelProvider extends DefaultEObjectLabelProvider {
 	}
 
 	public String text(XtendFunction element) {
-		return signature(element.getName(), xtend2jvmAssociations.getDirectlyInferredOperation(element));
+		return signature(element.getName(), associations.getDirectlyInferredOperation(element));
 	}
 	
 	public String text(XtendField element) {

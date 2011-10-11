@@ -13,6 +13,7 @@ import org.eclipse.jdt.internal.ui.JavaPluginImages;
 import org.eclipse.jdt.internal.ui.viewsupport.JavaElementImageProvider;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.ui.IImageHelper;
 
 import com.google.inject.Inject;
@@ -38,20 +39,20 @@ public class Xtend2Images {
 		return getJdtImage(JavaPluginImages.DESC_OBJS_IMPDECL);
 	}
 
-	public Image forClass(int flags) {
-		return getJdtImage(JavaElementImageProvider.getTypeImageDescriptor(false, false, Flags.AccPublic, false));
+	public Image forClass(JvmVisibility visibility) {
+		return getJdtImage(JavaElementImageProvider.getTypeImageDescriptor(false, false, toFlags(visibility), false));
 	}
 
-	public Image forFunction(int flags) {
-		return getJdtImage(JavaElementImageProvider.getMethodImageDescriptor(false, Flags.AccPublic));
+	public Image forFunction(JvmVisibility visibility) {
+		return getJdtImage(JavaElementImageProvider.getMethodImageDescriptor(false, toFlags(visibility)));
 	}
 	
-	public Image forField(boolean isExtension) {
-		return getJdtImage(JavaPluginImages.DESC_FIELD_PRIVATE);
+	public Image forField(JvmVisibility visibility, boolean isExtension) {
+		return getJdtImage(JavaElementImageProvider.getFieldImageDescriptor(false, toFlags(visibility)));
 	}
 	
-	public Image forDispatcherFunction(int flags) {
-		return getJdtImage(JavaElementImageProvider.getFieldImageDescriptor(false, Flags.AccPublic));
+	public Image forDispatcherFunction(JvmVisibility visibility) {
+		return getJdtImage(JavaElementImageProvider.getMethodImageDescriptor(false, toFlags(visibility)));
 	}
 
 	public Image forFile() {
@@ -62,4 +63,16 @@ public class Xtend2Images {
 		return JavaPlugin.getImageDescriptorRegistry().get(descriptor);
 	}
 	
+	protected int toFlags(JvmVisibility visibility) {
+		switch(visibility) {
+			case PRIVATE:
+				return Flags.AccPrivate;
+			case PROTECTED:
+				return Flags.AccProtected;
+			case PUBLIC:
+				return Flags.AccPublic;
+			default:
+				return Flags.AccDefault;
+		}
+	}
 }
