@@ -85,7 +85,7 @@ public interface XFunctionTypeRef extends JvmSpecializedTypeReference
 	 * @return the value of the '<em>Type</em>' reference.
 	 * @see #setType(JvmType)
 	 * @see org.eclipse.xtext.xtype.XtypePackage#getXFunctionTypeRef_Type()
-	 * @model
+	 * @model transient="true" derived="true"
 	 * @generated
 	 */
 	JvmType getType();
