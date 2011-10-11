@@ -1367,16 +1367,62 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (annotationInfo=Member_XtendField_2_0_0 ((extension?='extension' type=JvmTypeReference name=ValidID?) | (type=JvmTypeReference name=ValidID)))
+	 *     (
+	 *         (
+	 *             annotationInfo=Member_XtendField_2_0_0 
+	 *             visibility=Visibility? 
+	 *             ((extension?='extension' type=JvmTypeReference name=ValidID?) | (type=JvmTypeReference name=ValidID))
+	 *         ) | 
+	 *         (annotationInfo=Member_XtendField_2_0_0 ((extension?='extension' type=JvmTypeReference name=ValidID?) | (type=JvmTypeReference name=ValidID)))
+	 *     )
 	 *
 	 * Features:
-	 *    annotationInfo[1, 1]
-	 *    name[0, 2]
-	 *    type[0, 2]
-	 *    extension[0, 1]
+	 *    annotationInfo[0, 2]
+	 *         MANDATORY_IF_SET extension
+	 *         MANDATORY_IF_SET type
+	 *         MANDATORY_IF_SET name
+	 *         MANDATORY_IF_SET type
+	 *         MANDATORY_IF_SET name
+	 *         EXCLUDE_IF_SET extension
+	 *         EXCLUDE_IF_SET type
+	 *         EXCLUDE_IF_SET name
+	 *         EXCLUDE_IF_SET type
+	 *         EXCLUDE_IF_SET name
+	 *    name[0, 4]
+	 *         EXCLUDE_IF_SET type
+	 *         EXCLUDE_IF_UNSET annotationInfo
+	 *         EXCLUDE_IF_SET annotationInfo
+	 *         EXCLUDE_IF_SET visibility
+	 *         EXCLUDE_IF_SET extension
+	 *         EXCLUDE_IF_SET type
+	 *         EXCLUDE_IF_SET type
+	 *    type[0, 4]
+	 *         EXCLUDE_IF_SET name
+	 *         EXCLUDE_IF_UNSET annotationInfo
+	 *         EXCLUDE_IF_SET annotationInfo
+	 *         EXCLUDE_IF_SET visibility
+	 *         EXCLUDE_IF_SET extension
+	 *         EXCLUDE_IF_SET name
+	 *         EXCLUDE_IF_SET name
+	 *    extension[0, 2]
 	 *         EXCLUDE_IF_UNSET type
 	 *         MANDATORY_IF_SET type
 	 *         MANDATORY_IF_SET name
+	 *         EXCLUDE_IF_SET type
+	 *         EXCLUDE_IF_SET name
+	 *         EXCLUDE_IF_UNSET annotationInfo
+	 *         EXCLUDE_IF_SET annotationInfo
+	 *         EXCLUDE_IF_SET visibility
+	 *         EXCLUDE_IF_SET type
+	 *         EXCLUDE_IF_SET name
+	 *         EXCLUDE_IF_SET type
+	 *         EXCLUDE_IF_SET name
+	 *    visibility[0, 1]
+	 *         EXCLUDE_IF_UNSET annotationInfo
+	 *         EXCLUDE_IF_SET annotationInfo
+	 *         EXCLUDE_IF_SET extension
+	 *         EXCLUDE_IF_SET type
+	 *         EXCLUDE_IF_SET name
 	 *         EXCLUDE_IF_SET type
 	 *         EXCLUDE_IF_SET name
 	 */
@@ -1402,6 +1448,7 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	 *     (
 	 *         annotationInfo=Member_XtendFunction_2_1_0 
 	 *         override?='override'? 
+	 *         visibility=Visibility? 
 	 *         dispatch?='dispatch'? 
 	 *         (typeParameters+=JvmTypeParameter typeParameters+=JvmTypeParameter*)? 
 	 *         (
@@ -1430,6 +1477,7 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	 *         EXCLUDE_IF_SET name
 	 *         EXCLUDE_IF_SET name
 	 *    typeParameters[0, *]
+	 *    visibility[0, 1]
 	 */
 	protected void sequence_Member(EObject context, XtendFunction semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

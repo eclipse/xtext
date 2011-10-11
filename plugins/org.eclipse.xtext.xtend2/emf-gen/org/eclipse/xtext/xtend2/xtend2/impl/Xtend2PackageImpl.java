@@ -531,6 +531,16 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getXtendFunction_Visibility()
+	{
+		return (EAttribute)xtendFunctionEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getXtendField()
 	{
 		return xtendFieldEClass;
@@ -564,6 +574,16 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 	public EAttribute getXtendField_Extension()
 	{
 		return (EAttribute)xtendFieldEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getXtendField_Visibility()
+	{
+		return (EAttribute)xtendFieldEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -833,11 +853,13 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 		createEAttribute(xtendFunctionEClass, XTEND_FUNCTION__DISPATCH);
 		createEReference(xtendFunctionEClass, XTEND_FUNCTION__CREATE_EXTENSION_INFO);
 		createEReference(xtendFunctionEClass, XTEND_FUNCTION__TYPE_PARAMETERS);
+		createEAttribute(xtendFunctionEClass, XTEND_FUNCTION__VISIBILITY);
 
 		xtendFieldEClass = createEClass(XTEND_FIELD);
 		createEAttribute(xtendFieldEClass, XTEND_FIELD__NAME);
 		createEReference(xtendFieldEClass, XTEND_FIELD__TYPE);
 		createEAttribute(xtendFieldEClass, XTEND_FIELD__EXTENSION);
+		createEAttribute(xtendFieldEClass, XTEND_FIELD__VISIBILITY);
 
 		xtendParameterEClass = createEClass(XTEND_PARAMETER);
 		createEAttribute(xtendParameterEClass, XTEND_PARAMETER__NAME);
@@ -957,11 +979,13 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 		initEAttribute(getXtendFunction_Dispatch(), ecorePackage.getEBoolean(), "dispatch", null, 0, 1, XtendFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXtendFunction_CreateExtensionInfo(), this.getCreateExtensionInfo(), null, "createExtensionInfo", null, 0, 1, XtendFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXtendFunction_TypeParameters(), theTypesPackage.getJvmTypeParameter(), null, "typeParameters", null, 0, -1, XtendFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getXtendFunction_Visibility(), theTypesPackage.getJvmVisibility(), "visibility", "PUBLIC", 0, 1, XtendFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xtendFieldEClass, XtendField.class, "XtendField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getXtendField_Name(), ecorePackage.getEString(), "name", null, 0, 1, XtendField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXtendField_Type(), theTypesPackage.getJvmTypeReference(), null, "type", null, 0, 1, XtendField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getXtendField_Extension(), ecorePackage.getEBoolean(), "extension", null, 0, 1, XtendField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getXtendField_Visibility(), theTypesPackage.getJvmVisibility(), "visibility", "PRIVATE", 0, 1, XtendField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xtendParameterEClass, XtendParameter.class, "XtendParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getXtendParameter_Name(), ecorePackage.getEString(), "name", null, 0, 1, XtendParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

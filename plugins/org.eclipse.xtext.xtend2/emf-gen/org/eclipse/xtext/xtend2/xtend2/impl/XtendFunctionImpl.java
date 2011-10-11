@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmVisibility;
 
 import org.eclipse.xtext.xbase.XExpression;
 
@@ -45,6 +46,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendParameter;
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#isDispatch <em>Dispatch</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#getCreateExtensionInfo <em>Create Extension Info</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#getTypeParameters <em>Type Parameters</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#getVisibility <em>Visibility</em>}</li>
  * </ul>
  * </p>
  *
@@ -161,6 +163,35 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 	 * @ordered
 	 */
 	protected EList<JvmTypeParameter> typeParameters;
+
+	/**
+	 * The default value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisibility()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final JvmVisibility VISIBILITY_EDEFAULT = JvmVisibility.PUBLIC;
+
+	/**
+	 * The cached value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisibility()
+	 * @generated
+	 * @ordered
+	 */
+	protected JvmVisibility visibility = VISIBILITY_EDEFAULT;
+
+	/**
+	 * This is true if the Visibility attribute has been set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean visibilityESet;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -429,6 +460,56 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public JvmVisibility getVisibility()
+	{
+		return visibility;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVisibility(JvmVisibility newVisibility)
+	{
+		JvmVisibility oldVisibility = visibility;
+		visibility = newVisibility == null ? VISIBILITY_EDEFAULT : newVisibility;
+		boolean oldVisibilityESet = visibilityESet;
+		visibilityESet = true;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FUNCTION__VISIBILITY, oldVisibility, visibility, !oldVisibilityESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void unsetVisibility()
+	{
+		JvmVisibility oldVisibility = visibility;
+		boolean oldVisibilityESet = visibilityESet;
+		visibility = VISIBILITY_EDEFAULT;
+		visibilityESet = false;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.UNSET, Xtend2Package.XTEND_FUNCTION__VISIBILITY, oldVisibility, VISIBILITY_EDEFAULT, oldVisibilityESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isSetVisibility()
+	{
+		return visibilityESet;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -474,6 +555,8 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 				return getCreateExtensionInfo();
 			case Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS:
 				return getTypeParameters();
+			case Xtend2Package.XTEND_FUNCTION__VISIBILITY:
+				return getVisibility();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -515,6 +598,9 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 				getTypeParameters().clear();
 				getTypeParameters().addAll((Collection<? extends JvmTypeParameter>)newValue);
 				return;
+			case Xtend2Package.XTEND_FUNCTION__VISIBILITY:
+				setVisibility((JvmVisibility)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -553,6 +639,9 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 			case Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS:
 				getTypeParameters().clear();
 				return;
+			case Xtend2Package.XTEND_FUNCTION__VISIBILITY:
+				unsetVisibility();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -583,6 +672,8 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 				return createExtensionInfo != null;
 			case Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS:
 				return typeParameters != null && !typeParameters.isEmpty();
+			case Xtend2Package.XTEND_FUNCTION__VISIBILITY:
+				return isSetVisibility();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -604,6 +695,8 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 		result.append(override);
 		result.append(", dispatch: ");
 		result.append(dispatch);
+		result.append(", visibility: ");
+		if (visibilityESet) result.append(visibility); else result.append("<unset>");
 		result.append(')');
 		return result.toString();
 	}

@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xtend2.tests.linking;
 
 import static com.google.common.collect.Iterables.*;
+import static org.eclipse.xtext.util.Strings.*;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -58,6 +59,14 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 			} else {
 				assertEquals(JvmVisibility.PRIVATE, member.getVisibility());
 			}
+		}
+	}
+	
+	public void testXtendField_01() throws Exception {
+		XtendFile xtendFile = file("class Foo { public String publicField protected String protectedField private String privateField }");
+		JvmGenericType type = getInferredType(xtendFile);
+		for(JvmField field: type.getDeclaredFields()) {
+			assertEquals(JvmVisibility.get(field.getSimpleName().replace("Field","").toUpperCase()), field.getVisibility());
 		}
 	}
 	
@@ -279,6 +288,44 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		assertEquals(dispatch.getReturnType().getIdentifier(), internal.getReturnType().getIdentifier());
 	}
 	
+	
+	public void testDispatchFunction_05() throws Exception {
+		XtendFile xtendFile = file("class Foo {" + 
+				"  def private dispatch private_private  (Integer x) {} def private   dispatch private_private  (Double x) {}" +
+				"  def private dispatch private_protected(Integer x) {} def protected dispatch private_protected(Double x) {}" +
+				"  def private dispatch private_public   (Integer x) {} def public    dispatch private_public   (Double x) {}" +
+				"  def private dispatch private_default  (Integer x) {} def           dispatch private_default  (Double x) {}" +
+				"  def protected dispatch protected_private  (Integer x) {} def private   dispatch protected_private  (Double x) {}" +
+				"  def protected dispatch protected_protected(Integer x) {} def protected dispatch protected_protected(Double x) {}" +
+				"  def protected dispatch protected_public   (Integer x) {} def public    dispatch protected_public   (Double x) {}" +
+				"  def protected dispatch protected_default  (Integer x) {} def           dispatch protected_default  (Double x) {}" +
+				"  def public dispatch public_private  (Integer x) {} def private   dispatch public_private  (Double x) {}" +
+				"  def public dispatch public_protected(Integer x) {} def protected dispatch public_protected(Double x) {}" +
+				"  def public dispatch public_public   (Integer x) {} def public    dispatch public_public   (Double x) {}" +
+				"  def public dispatch public_default  (Integer x) {} def           dispatch public_default  (Double x) {}" +
+				"  def dispatch default_private  (Integer x) {} def private   dispatch default_private  (Double x) {}" +
+				"  def dispatch default_protected(Integer x) {} def protected dispatch default_protected(Double x) {}" +
+				"  def dispatch default_public   (Integer x) {} def public    dispatch default_public   (Double x) {}" +
+				"  def dispatch default_default  (Integer x) {} def           dispatch default_default  (Double x) {}" +
+				"}");
+		JvmGenericType inferredType = getInferredType(xtendFile);
+		for(JvmOperation op: inferredType.getDeclaredOperations()) {
+			String[] split = op.getSimpleName().toUpperCase().split("_");
+			JvmVisibility expectedVisibility = null;
+			if(!op.getSimpleName().startsWith("_")) {
+				if(equal(split[0], split[1]))
+					expectedVisibility = "DEFAULT".equals(split[0]) ? JvmVisibility.PUBLIC : JvmVisibility.get(split[0]);
+				else 	
+					expectedVisibility = JvmVisibility.PUBLIC;
+			}
+			else if(equal(op.getParameters().get(0).getParameterType().getIdentifier(), "java.lang.Integer"))
+				expectedVisibility = "DEFAULT".equals(split[1]) ? JvmVisibility.PROTECTED : JvmVisibility.get(split[1]);
+			else
+				expectedVisibility = "DEFAULT".equals(split[2]) ? JvmVisibility.PROTECTED : JvmVisibility.get(split[2]);
+			assertEquals(op.getIdentifier(), expectedVisibility, op.getVisibility());
+		}
+	}		
+
 	public void testBug_340611() throws Exception {
 		XtendFile xtendFile = file(
 				"class Bug340611 {\n" + 
@@ -438,6 +485,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		assertEquals(1, inferredType.getMembers().size());
 		JvmMember inferredFirstMember = inferredType.getMembers().get(0);
 		assertTrue(inferredFirstMember instanceof JvmConstructor);
+		assertEquals(JvmVisibility.PUBLIC, inferredFirstMember.getVisibility());
 		assertEquals(associations.getInferredConstructor(xtendClass), inferredFirstMember);
 	}
 
@@ -516,6 +564,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		assertTrue(jvmMember instanceof JvmOperation);
 		XtendFunction xtendFunction = (XtendFunction) xtendClass.getMembers().get(0);
 		assertEquals(xtendFunction.getName(), jvmMember.getSimpleName());
+		assertEquals(JvmVisibility.PUBLIC, jvmMember.getVisibility());
 		assertEquals("java.util.ArrayList<java.lang.String>", ((JvmOperation) jvmMember).getReturnType().getIdentifier());
 		
 		JvmField cacheVar = (JvmField) jvmMembers.get(2);
@@ -525,8 +574,17 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		
 		JvmOperation privateInitializer = (JvmOperation) jvmMembers.get(3);
 		assertEquals("_init_"+xtendFunction.getName(), privateInitializer.getSimpleName());
+		assertEquals(JvmVisibility.PRIVATE, privateInitializer.getVisibility());
 		assertEquals("java.util.ArrayList<java.lang.String>", privateInitializer.getParameters().get(0).getParameterType().getIdentifier());
 		assertEquals("java.lang.String", privateInitializer.getParameters().get(1).getParameterType().getIdentifier());
+	}
+	
+	public void testInferredFunction_03() throws Exception {
+		XtendFile xtendFile = file("class Foo {def publicMethod(Object dummy) {} def public publicMethod() {} def protected protectedMethod() {} def private privateMethod() {} }");
+		JvmGenericType inferredType = getInferredType(xtendFile);
+		for(JvmOperation op: inferredType.getDeclaredOperations()) {
+			assertEquals(JvmVisibility.get(op.getSimpleName().replace("Method", "").toUpperCase()), op.getVisibility());
+		}
 	}
 
 	public void testInferredFunctionWithReturnType_01() throws Exception {

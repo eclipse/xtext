@@ -6,6 +6,7 @@
 package org.eclipse.xtext.xtend2.xtend2;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmVisibility;
 
 /**
  * <!-- begin-user-doc -->
@@ -18,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendField#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendField#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendField#isExtension <em>Extension</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendField#getVisibility <em>Visibility</em>}</li>
  * </ul>
  * </p>
  *
@@ -104,5 +106,62 @@ public interface XtendField extends XtendMember
 	 * @generated
 	 */
 	void setExtension(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Visibility</b></em>' attribute.
+	 * The default value is <code>"PRIVATE"</code>.
+	 * The literals are from the enumeration {@link org.eclipse.xtext.common.types.JvmVisibility}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Visibility</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Visibility</em>' attribute.
+	 * @see org.eclipse.xtext.common.types.JvmVisibility
+	 * @see #isSetVisibility()
+	 * @see #unsetVisibility()
+	 * @see #setVisibility(JvmVisibility)
+	 * @see org.eclipse.xtext.xtend2.xtend2.Xtend2Package#getXtendField_Visibility()
+	 * @model default="PRIVATE" unsettable="true"
+	 * @generated
+	 */
+	JvmVisibility getVisibility();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xtend2.xtend2.XtendField#getVisibility <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Visibility</em>' attribute.
+	 * @see org.eclipse.xtext.common.types.JvmVisibility
+	 * @see #isSetVisibility()
+	 * @see #unsetVisibility()
+	 * @see #getVisibility()
+	 * @generated
+	 */
+	void setVisibility(JvmVisibility value);
+
+	/**
+	 * Unsets the value of the '{@link org.eclipse.xtext.xtend2.xtend2.XtendField#getVisibility <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSetVisibility()
+	 * @see #getVisibility()
+	 * @see #setVisibility(JvmVisibility)
+	 * @generated
+	 */
+	void unsetVisibility();
+
+	/**
+	 * Returns whether the value of the '{@link org.eclipse.xtext.xtend2.xtend2.XtendField#getVisibility <em>Visibility</em>}' attribute is set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return whether the value of the '<em>Visibility</em>' attribute is set.
+	 * @see #unsetVisibility()
+	 * @see #getVisibility()
+	 * @see #setVisibility(JvmVisibility)
+	 * @generated
+	 */
+	boolean isSetVisibility();
 
 } // XtendField

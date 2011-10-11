@@ -42,14 +42,14 @@ ruleClass :
 // Rule Member
 ruleMember :
 	ruleXAnnotation* (
-		(
+		ruleVisibility? (
 			'extension' ruleJvmTypeReference ruleValidID? |
 			ruleJvmTypeReference ruleValidID
 		) |
 		(
 			'def' |
 			'override'
-		) 'dispatch'? (
+		) ruleVisibility? 'dispatch'? (
 			'<' ruleJvmTypeParameter (
 				',' ruleJvmTypeParameter
 			)* '>'
@@ -769,6 +769,13 @@ ruleJvmTypeParameter :
 		ruleJvmUpperBound ruleJvmUpperBoundAnded* |
 		ruleJvmLowerBound
 	)?
+;
+
+// Rule Visibility
+ruleVisibility :
+	'public' |
+	'protected' |
+	'private'
 ;
 
 RULE_RICH_TEXT :

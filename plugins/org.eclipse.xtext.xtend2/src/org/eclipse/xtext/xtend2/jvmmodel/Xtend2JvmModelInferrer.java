@@ -54,6 +54,7 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xtend2.dispatch.DispatchingSupport;
 import org.eclipse.xtext.xtend2.resource.Xtend2Resource;
 import org.eclipse.xtext.xtend2.xtend2.CreateExtensionInfo;
+import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendField;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
@@ -173,7 +174,6 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			JvmOperation operation = deriveGenericDispatchOperationSignature(dispatchingSupport.sort(operations),
 					target);
 			operation.setSimpleName(key.getFirst());
-			operation.setVisibility(JvmVisibility.PUBLIC);
 		}
 	}
 
@@ -196,13 +196,27 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			parameter.setName(parameter2.getName());
 		}
 		jvmTypesBuilder.body(result, compileStrategies.forDispatcher(result, sortedOperations));
+		JvmVisibility commonVisibility = null;
+		boolean isFirst = true;
 		for (JvmOperation jvmOperation : sortedOperations) {
 			Iterable<XtendFunction> xtendFunctions = filter(associations.getSourceElements(jvmOperation),
 					XtendFunction.class);
 			for (XtendFunction func : xtendFunctions) {
+				JvmVisibility xtendVisibility = func.eIsSet(Xtend2Package.Literals.XTEND_FUNCTION__VISIBILITY) ? func
+						.getVisibility() : null;
+				if (isFirst) {
+					commonVisibility = xtendVisibility;
+					isFirst = false;
+				} else if (commonVisibility != xtendVisibility) {
+					commonVisibility = null;
+				}
 				associator.associate(func, result);
 			}
 		}
+		if (commonVisibility == null)
+			result.setVisibility(JvmVisibility.PUBLIC);
+		else
+			result.setVisibility(commonVisibility);
 		return result;
 	}
 
@@ -228,10 +242,11 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 		container.getMembers().add(operation);
 		associator.associatePrimary(source, operation);
 		String sourceName = source.getName();
-		JvmVisibility visibility = JvmVisibility.PUBLIC;
+		JvmVisibility visibility = source.getVisibility();
 		if (source.isDispatch()) {
+			if (!source.eIsSet(Xtend2Package.Literals.XTEND_FUNCTION__VISIBILITY))
+				visibility = JvmVisibility.PROTECTED;
 			sourceName = "_" + sourceName;
-			visibility = JvmVisibility.PROTECTED;
 		}
 		operation.setSimpleName(sourceName);
 		operation.setVisibility(visibility);
@@ -304,7 +319,7 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			field.setSimpleName(fieldName);
 			container.getMembers().add(field);
 			associator.associatePrimary(source, field);
-			field.setVisibility(JvmVisibility.PRIVATE);
+			field.setVisibility(source.getVisibility());
 			field.setType(cloneWithProxies(source.getType()));
 			jvmTypesBuilder.translateAnnotationsTo(source.getAnnotationInfo().getAnnotations(), field);
 			jvmTypesBuilder.translateDocumentationTo(source, field);
