@@ -10,10 +10,14 @@ package org.eclipse.xtext.example.arithmetics.ui.contentassist;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.example.arithmetics.arithmetics.DeclaredParameter;
 import org.eclipse.xtext.example.arithmetics.ui.contentassist.AbstractArithmeticsProposalProvider;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+
+import com.google.common.base.Function;
 
 /**
  * @author Sven Efftinge - initial contribution and API
@@ -46,5 +50,20 @@ public class ArithmeticsProposalProvider extends AbstractArithmeticsProposalProv
 			}
 
 		});
+	}
+	
+	@Override
+	protected String getDisplayString(EObject element,
+			String qualifiedNameAsString, String shortName) {
+		if (element instanceof DeclaredParameter)
+			return shortName;
+		return super.getDisplayString(element, qualifiedNameAsString, shortName);
+	}
+	
+	@Override
+	protected Function<IEObjectDescription, ICompletionProposal> getProposalFactory(
+			String ruleName, ContentAssistContext contentAssistContext) {
+		// hackish: ignore concrete syntax constraints since we export functions with parenths
+		return super.getProposalFactory(null, contentAssistContext);
 	}
 }
