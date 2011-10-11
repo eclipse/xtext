@@ -198,4 +198,18 @@ public class OverrideValidationTest extends AbstractXtend2TestCase {
 		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, OVERRIDDEN_FINAL, "override", "final");		
 	}
 	
+	public void testOverrideSameVisibility() throws Exception {
+		XtendClass xtendClass = clazz("class Foo extends test.Visibilities { override publicMethod() {} }");
+		helper.assertNoError(xtendClass.getMembers().get(0), OVERRIDE_REDUCES_VISIBILITY);		
+	}
+
+	public void testOverrideReveals() throws Exception {
+		XtendClass xtendClass = clazz("class Foo extends test.Visibilities { override public protectedMethod() {} }");
+		helper.assertNoError(xtendClass.getMembers().get(0), OVERRIDE_REDUCES_VISIBILITY);		
+	}
+
+	public void testOverrideHides() throws Exception {
+		XtendClass xtendClass = clazz("class Foo extends test.Visibilities { override protected publicMethod() {} }");
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, OVERRIDE_REDUCES_VISIBILITY, "reduce", "visibility");		
+	}
 }

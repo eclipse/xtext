@@ -351,6 +351,12 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 		helper.assertNoErrors(function);
 	}
 	
+	public void testDisptchFunctionVisibility() throws Exception {
+		XtendClass xtendClass = clazz("class Foo { def dispatch foo(String bar) {} def public dispatch foo(Object bar) {}}");
+		helper.assertWarning(xtendClass.getMembers().get(0), Xtend2Package.Literals.XTEND_FUNCTION, DISPATCH_FUNCTIONS_WITH_DIFFERENT_VISIBILITY, 
+				"should", "same", "visibility");
+	}
+	
 //	public void testBug343096() throws Exception {
 //		XtendFunction function = function(
 //				"def <T> test() {\n" + 
