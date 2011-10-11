@@ -45,7 +45,7 @@ public class SerialResourceLoader extends AbstractResourceLoader {
 					Resource resource = parent.getResource(uri, true);
 					return resource;
 				} catch(WrappedException e) {
-					throw new LoadOperationException(uri, e);
+					throw new LoadOperationException(uri, e.getCause());
 				}
 			}
 
