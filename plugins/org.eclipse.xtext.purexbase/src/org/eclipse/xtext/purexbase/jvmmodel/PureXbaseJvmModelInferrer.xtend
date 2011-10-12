@@ -49,7 +49,6 @@ class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
 						} catch (Throwable t) {}
    					''']
    				}
-   				null as Void
    			]
    			if ( e.containsReturn ) {
    				members += e.toMethod("xbaseExpression", e.newTypeRef(typeof(Object))) [
@@ -59,10 +58,8 @@ class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
 					}
 					return null;
 				''']
-   				null as Void
    			]
    			}
-   			null as Void
    		])
    	}
    	

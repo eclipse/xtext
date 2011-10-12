@@ -9,6 +9,8 @@ package org.eclipse.xtext.xbase.tests.lib;
 
 import static com.google.common.collect.Lists.*;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -56,5 +58,39 @@ public class IterableExtensionsTest extends TestCase {
 		});
 		assertNotSame(list, sorted);
 		assertEquals(sorted, newArrayList("bar","baz","foo"));
+	}
+	
+	public void testFilterNull() throws Exception {
+		Iterator<String> iter = IterableExtensions.filterNull(newArrayList("foo", null, "bar")).iterator();
+		assertEquals("foo", iter.next());
+		assertEquals("bar", iter.next());
+		assertFalse(iter.hasNext());
+	}
+	
+	public void testJoinWithBeforeAndAfter() throws Exception {
+		ArrayList<String> list = newArrayList("foo", "bar");
+		ArrayList<String> singletonList = newArrayList("foo");
+		ArrayList<String> emptylist = new ArrayList<String>();
+		
+		final Functions.Function1<String, String> function = new Functions.Function1<String, String>() {
+			public String apply(String p) {
+				return p;
+			}
+		};
+		assertEquals("<foo,bar>", IterableExtensions.join(list, "<", ",", ">", function));
+		assertEquals("<foo>", IterableExtensions.join(singletonList, "<", ",", ">", function));
+		assertEquals("", IterableExtensions.join(emptylist, "<", ",", ">", function));
+		
+		assertEquals("foo,bar>", IterableExtensions.join(list, null, ",", ">", function));
+		assertEquals("foo>", IterableExtensions.join(singletonList, null, ",", ">", function));
+		assertEquals("", IterableExtensions.join(emptylist, null, ",", ">", function));
+		
+		assertEquals("<foobar>", IterableExtensions.join(list, "<", null, ">", function));
+		assertEquals("<foo>", IterableExtensions.join(singletonList, "<", null, ">", function));
+		assertEquals("", IterableExtensions.join(emptylist, "<", null, ">", function));
+		
+		assertEquals("<foo,bar", IterableExtensions.join(list, "<", ",", null, function));
+		assertEquals("<foo", IterableExtensions.join(singletonList, "<", ",", null, function));
+		assertEquals("", IterableExtensions.join(emptylist, "<", ",", null, function));
 	}
 }
