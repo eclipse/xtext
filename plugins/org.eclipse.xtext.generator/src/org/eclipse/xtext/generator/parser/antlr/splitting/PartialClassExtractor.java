@@ -32,6 +32,9 @@ public class PartialClassExtractor {
 	
 	private final String content;
 	private static final Pattern SIGNATURE = Pattern.compile("^\\s*public final (void|EObject|AntlrDatatypeRuleToken) \\S*\\(\\) throws RecognitionException \\{\\s*$");
+	private static final String ANTLR_END_MARKER = "    // $ANTLR end ";
+	private static final String ANTLR_START_MARKER = "    // $ANTLR start ";
+
 	private final int methodsPerClass;
 
 	public PartialClassExtractor(String content, int methodsPerClass) {
@@ -136,7 +139,7 @@ public class PartialClassExtractor {
 	
 	protected String getCustomMethods() {
 		int start = content.indexOf("    public String[] getTokenNames() {");
-		int end = content.indexOf("    // $ANTLR start ", start);
+		int end = content.indexOf(ANTLR_START_MARKER, start);
 		return content.substring(start, end).replaceFirst("\tprivate ", "\tprotected ");
 	}
 	
@@ -165,20 +168,20 @@ public class PartialClassExtractor {
 
 	protected List<String> getExtractedClasses() {
 		List<String> result = Lists.newArrayList();
-		int workingStart = content.indexOf("    // $ANTLR start \"");
+		int workingStart = content.indexOf(ANTLR_START_MARKER);
 		int startOffset = workingStart;
 		int counter = 0;
 		while(workingStart != -1) {
-			int endOffset = content.indexOf("    // $ANTLR end \"", workingStart);
+			int endOffset = content.indexOf(ANTLR_END_MARKER, workingStart);
 			endOffset = content.indexOf('\n', endOffset);
 			counter++;
 			if (counter == methodsPerClass) {
 				counter = 0;
 				result.add(content.substring(startOffset, endOffset + 1));
-				workingStart = content.indexOf("    // $ANTLR start \"", endOffset);
+				workingStart = content.indexOf(ANTLR_START_MARKER, endOffset);
 				startOffset = workingStart;
 			} else {
-				workingStart = content.indexOf("    // $ANTLR start \"", endOffset);
+				workingStart = content.indexOf(ANTLR_START_MARKER, endOffset);
 				if (workingStart == -1) {
 					result.add(content.substring(startOffset, endOffset + 1));
 				}
