@@ -19,14 +19,16 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
+import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.Wrapper;
 import org.eclipse.xtext.xbase.typing.SynonymTypesProvider;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
@@ -158,7 +160,12 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 				superTypeCollector.collectSuperTypes(synonym, acceptor);
 			}
 		}
-		List<Entry<JvmTypeReference,Integer>> sortable = Lists.newArrayList(result.entrySet());
+		List<Entry<JvmTypeReference,Integer>> sortable = Lists.newArrayList(Iterables.filter(result.entrySet(), new Predicate<Entry<JvmTypeReference,Integer>>(){
+			public boolean apply(Entry<JvmTypeReference, Integer> entry) {
+				JvmType type = entry.getKey().getType();
+				return  type != null && !type.eIsProxy();
+			}
+		}));
 		Collections.sort(sortable, new Comparator<Entry<JvmTypeReference,Integer>>() {
 
 			public int compare(Entry<JvmTypeReference, Integer> o1, Entry<JvmTypeReference, Integer> o2) {
