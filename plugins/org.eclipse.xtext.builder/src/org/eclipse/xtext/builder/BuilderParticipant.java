@@ -155,8 +155,13 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			}
 			SubMonitor deleteMonitor = SubMonitor.convert(subMonitor.newChild(1), derivedResources.size());
 			for (IFile iFile : derivedResources) {
-				iFile.delete(IResource.KEEP_HISTORY, deleteMonitor.newChild(1));
-				context.needRebuild();
+				IMarker marker = derivedResourceMarkers.findDerivedResourceMarker(iFile, uri);
+				if (marker != null)
+					marker.delete();
+				if (derivedResourceMarkers.findDerivedResourceMarkers(iFile).length == 0) {
+					iFile.delete(IResource.KEEP_HISTORY, deleteMonitor.newChild(1));
+					context.needRebuild();
+				}
 			}
 		}
 	}
