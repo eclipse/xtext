@@ -63,6 +63,23 @@ public class DerivedResourceMarkers {
 		return result;
 	}
 	
+	public IMarker[] findDerivedResourceMarkers(IFile file) throws CoreException {
+		return file.findMarkers(MARKER_ID, true, 0);
+	}
+	
+	public IMarker findDerivedResourceMarker(IFile file, String source) throws CoreException {
+		return findDerivedResourceMarker(file, generatorIdProvider.getGeneratorIdentifier(), source);
+	}
+	
+	public IMarker findDerivedResourceMarker(IFile file, String generator, String source) throws CoreException {
+		IMarker[] markers = findDerivedResourceMarkers(file);
+		for (IMarker iMarker : markers) {
+			if (generator.equals(iMarker.getAttribute(ATTR_GENERATOR)) && source.equals(iMarker.getAttribute(ATTR_SOURCE)))
+				return iMarker;
+		}
+		return null;
+	}
+	
 	public boolean installMarker(IFile file, String source) throws CoreException {
 		return installMarker(file, generatorIdProvider.getGeneratorIdentifier(), source);
 	}
