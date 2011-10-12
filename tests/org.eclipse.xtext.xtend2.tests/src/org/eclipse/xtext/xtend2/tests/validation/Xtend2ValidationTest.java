@@ -36,6 +36,16 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	@Inject
 	private ValidationTestHelper helper;
 	
+	public void testReturnStatement() throws Exception {
+		XtendClass clazz = clazz("class Z { def void foo() { return 'holla' }}");
+		helper.assertError(clazz, XbasePackage.Literals.XRETURN_EXPRESSION, org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_RETURN);
+	}
+	
+	public void testReturnStatement1() throws Exception {
+		XtendClass clazz = clazz("class Z { def Object foo() { return }}");
+		helper.assertError(clazz, XbasePackage.Literals.XRETURN_EXPRESSION, org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_RETURN);
+	}
+	
 	public void testBug_357230() throws Exception {
 		XtendClass clazz = clazz(
 				"package x class Z {" +

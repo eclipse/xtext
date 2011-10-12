@@ -155,12 +155,16 @@ public class Xtend2TypeProvider extends XbaseWithAnnotationsTypeProvider {
 	}
 	
 	@Override
-	protected JvmTypeReference _expectedType(XReturnExpression expr, EReference reference, int index, boolean rawType) {
-		if (EcoreUtil2.getContainerOfType(expr, XClosure.class)!=null)
-			return super._expectedType(expr, reference, index, rawType);
+	public JvmTypeReference getExpectedReturnType(XExpression expr, boolean rawType) {
+		JvmTypeReference returnType = super.getExpectedReturnType(expr, rawType);
+		if (returnType != null) {
+			return returnType;
+		}
 		XtendFunction function = EcoreUtil2.getContainerOfType(expr, XtendFunction.class);
 		if (function==null)
 			return null;
+		if (function.getReturnType() != null)
+			return function.getReturnType();
 		if (function.getCreateExtensionInfo()!=null) {
 			if (EcoreUtil.isAncestor(function.getCreateExtensionInfo().getCreateExpression(), expr))
 				return ((Xtend2Resource)expr.eResource()).getDeclaredOrOverriddenReturnType(function);
