@@ -15,6 +15,8 @@ import java.io.StringWriter;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import org.eclipse.xtext.util.Strings;
+
 import com.google.common.collect.Lists;
 
 /**
@@ -31,6 +33,7 @@ public class PartialClassExtractor {
 	public static final int METHODS_PER_CLASS = 5000;
 	
 	private final String content;
+	private final String originalContent;
 	private static final Pattern SIGNATURE = Pattern.compile("^\\s*public final (void|EObject|AntlrDatatypeRuleToken) \\S*\\(\\) throws RecognitionException \\{\\s*$");
 	private static final String ANTLR_END_MARKER = "    // $ANTLR end ";
 	private static final String ANTLR_START_MARKER = "    // $ANTLR start ";
@@ -38,15 +41,20 @@ public class PartialClassExtractor {
 	private final int methodsPerClass;
 
 	public PartialClassExtractor(String content, int methodsPerClass) {
-		this.content = content;
+		this.originalContent = content;
+		if ("\n".equals(Strings.newLine())) {
+			this.content = content;
+		} else {
+			this.content = originalContent.replace(Strings.newLine(), "\n");
+		}
 		this.methodsPerClass = methodsPerClass;
 	}
 
 	public String transform() {
 		String content = this.content;
-		List<String> potentialExtractedClasses = getExtractedClasses();
-		if (potentialExtractedClasses.size() <= 1)
-			return content;
+		List<String> potentiallyExtractedClasses = getExtractedClasses();
+		if (potentiallyExtractedClasses.size() <= 1)
+			return originalContent;
 		String className = getClassName();
 		String superClassName = getSuperClassName();
 		StringWriter result = new StringWriter(content.length());
@@ -75,17 +83,17 @@ public class PartialClassExtractor {
 		printer.print(getBitSetsAndDfas());
 		printer.println();
 		printer.println();
-		for(int i = 0; i < potentialExtractedClasses.size(); i++) {
+		for(int i = 0; i < potentiallyExtractedClasses.size(); i++) {
 			printer.println("@SuppressWarnings(\"all\")");
 			printer.printf("abstract class %s%d extends %s%d {", className, i + 2, className, i + 1).println();
 			printer.println();
 			printConstructor(className, printer, i + 2);
-			printer.print(potentialExtractedClasses.get(i));
+			printer.print(potentiallyExtractedClasses.get(i));
 			printer.println();
 			printer.println("}");
 			printer.println();
 		}
-		printer.printf("public class %s extends %s%d {", className, className, potentialExtractedClasses.size() + 1).println();
+		printer.printf("public class %s extends %s%d {", className, className, potentiallyExtractedClasses.size() + 1).println();
 		printer.println();
 		printer.print(getConstructors());
 		printer.println();
@@ -95,7 +103,10 @@ public class PartialClassExtractor {
 		}
 		printer.println("}");
 		printer.flush();
-		return result.toString();
+		if (originalContent == content)
+			return result.toString();
+		// reinstate consistent line endings
+		return result.toString().replace(Strings.newLine(), "\n").replace("\n", Strings.newLine());
 	}
 
 	private String getCustomConstructor(String customMethods, String className) {
