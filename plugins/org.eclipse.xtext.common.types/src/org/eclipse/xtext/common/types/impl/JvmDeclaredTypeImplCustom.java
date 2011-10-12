@@ -19,22 +19,17 @@ import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeConstraint;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.JvmUpperBound;
-import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
+import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.JvmTypeChangeDispatcher;
+import org.eclipse.xtext.common.types.util.RawTypeHelper.RawTypeReferenceImplementation;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Iterables;
@@ -244,41 +239,10 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 		return result;
 	}
 
-	// TODO we need #getRawType(s) on the JvmTypeReference in order to deal with custom reference implementations
-	// e.g. JvmMultiTypeReference et al
-	// see TypeReferences
 	protected JvmType getRawType(JvmTypeReference reference) {
-		if (reference instanceof JvmParameterizedTypeReference) {
-			JvmType rawType = reference.getType();
-			if (rawType instanceof JvmTypeParameter) {
-				// TODO handle multiple upper bounds
-				// TODO use object if only lower bounds were present (robustness)
-				List<JvmTypeConstraint> constraints = ((JvmTypeParameter) rawType).getConstraints();
-				for(JvmTypeConstraint constraint: constraints) {
-					if (constraint instanceof JvmUpperBound) {
-						JvmTypeReference upperBound = constraint.getTypeReference();
-						return getRawType(upperBound);
-					}
-				}
-			}
-			return rawType;
-		} else if (reference instanceof JvmGenericArrayTypeReference) {
-			JvmTypeReference componentType = ((JvmGenericArrayTypeReference)reference).getComponentType();
-			JvmComponentType rawComponentType = (JvmComponentType) getRawType(componentType);
-			return rawComponentType.getArrayType();
-		} else if (reference instanceof JvmWildcardTypeReference) {
-			List<JvmTypeConstraint> constraints = ((JvmWildcardTypeReference) reference).getConstraints();
-			// TODO handle multiple upper bounds
-			// TODO use object if only lower bounds were present (robustness)
-			for(JvmTypeConstraint constraint: constraints) {
-				if (constraint instanceof JvmUpperBound) {
-					JvmTypeReference upperBound = constraint.getTypeReference();
-					return getRawType(upperBound);
-				}
-			}
-			return null;
-		}
-		return null;
+		RawTypeReferenceImplementation strategy = new RawTypeReferenceImplementation(TypesFactory.eINSTANCE);
+		JvmTypeReference result = strategy.getRawTypeReference(reference, eResource());
+		return result.getType();
 	}
 	
 }
