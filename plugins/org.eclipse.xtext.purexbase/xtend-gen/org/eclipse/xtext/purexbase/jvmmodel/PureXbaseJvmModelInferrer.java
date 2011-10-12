@@ -105,7 +105,7 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
                             }
                           };
                         PureXbaseJvmModelInferrer.this._jvmTypesBuilder.body(it, _function_1);
-                      }/*null*/;
+                      }
                     }
                   }
                 };
@@ -133,13 +133,13 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
                               return _builder;
                             }
                           };
-                        PureXbaseJvmModelInferrer.this._jvmTypesBuilder.body(it, _function);/*null*/;
+                        PureXbaseJvmModelInferrer.this._jvmTypesBuilder.body(it, _function);
                       }
                     }
                   };
                 JvmOperation _method_1 = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.toMethod(e, "xbaseExpression", _newTypeRef_1, _function_1);
                 CollectionExtensions.<JvmOperation>operator_add(_members_1, _method_1);
-              }/*null*/;
+              }
             }
           }
         };

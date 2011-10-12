@@ -24,6 +24,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -320,6 +321,17 @@ public class IterableExtensions {
 	public static final <T> Iterable<T> filter(Iterable<?> unfiltered, Class<T> type) {
 		return Iterables.filter(unfiltered, type);
 	}
+	
+	/**
+	 * Returns a new iterable filtering any null references.
+	 * 
+	 * @param unfiltered
+	 *            the unfiltered iterable. May not be <code>null</code>.
+	 * @return an unmodifiable iterable containing all elements of the original iterable without any <code>null</code> references. Never <code>null</code>.
+	 */
+	public static final <T> Iterable<T> filterNull(Iterable<T> unfiltered) {
+		return Iterables.filter(unfiltered, Predicates.notNull());
+	}
 
 	/**
 	 * Returns an iterable that performs the given {@code transformation} for each element of {@code original} when
@@ -429,6 +441,46 @@ public class IterableExtensions {
 			if (iterator.hasNext())
 				result.append(separator);
 		}
+		return result.toString();
+	}
+	
+	/**
+	 * Returns the concatenated string representation of the elements in the given iterable. The {@code function} is
+	 * used to compute the string for each element. The {@code separator} is used to between each pair of entries in the
+	 * input. The string <code>null</code> is used if the function yields <code>null</code> as the string representation
+	 * for an entry.
+	 * 
+	 * @param iterable
+	 *            the iterable. May not be <code>null</code>.
+	 * @param before
+	 *            prepends the resulting string if the iterable contains at least one element. May be <code>null</code> which is equivalent to passing an empty string.
+	 * @param separator
+	 *            the separator. May be <code>null</code> which is equivalent to passing an empty string.
+	 * @param after
+	 *            appended to the resulting string if the iterable contain at least one element. May be <code>null</code> which is equivalent to passing an empty string.
+	 * @param function
+	 *            the function that is used to compute the string representation of a single element. May not be
+	 *            <code>null</code>.
+	 * @return the string representation of the iterable's elements. Never <code>null</code>.
+	 */
+	public static final <T> String join(Iterable<T> iterable, CharSequence before, CharSequence separator, CharSequence after,
+			Functions.Function1<? super T, ? extends CharSequence> function) {
+		if (function == null)
+			throw new NullPointerException("function");
+		StringBuilder result = new StringBuilder();
+		Iterator<T> iterator = iterable.iterator();
+		boolean notEmpty = iterator.hasNext(); 
+		if (notEmpty && before != null)
+			result.append(before);
+		while (iterator.hasNext()) {
+			T next = iterator.next();
+			CharSequence elementToString = function.apply(next);
+			result.append(elementToString);
+			if (iterator.hasNext() && separator != null)
+				result.append(separator);
+		}
+		if (notEmpty && after != null)
+			result.append(after);
 		return result.toString();
 	}
 
