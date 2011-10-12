@@ -1592,11 +1592,11 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	
 	public void testDispatchFunction_08() throws Exception {
 		final String definition = "foo(p1)} " +
-		"def dispatch String foo(String string) {\n" + 
-		"    string + string\n" + 
-		"}\n" + 
-		"def String foo(Object x) {\n" + 
-		"    'literal'\n";
+			"def dispatch String foo(String string) {\n" + 
+			"    string + string\n" + 
+			"}\n" + 
+			"def String foo(Object x) {\n" + 
+			"    'literal'\n";
 		invokeAndExpect("zonkzonk", definition, "zonk");
 	}
 	
@@ -1736,7 +1736,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"def myExtension(String s) { 'foo' } " +
 				"def nullSafeTest() {\n" + 
 				"    newArrayList((null as String)?.myExtension, (null as String)?.myExtension(), 'test'?.myExtension)\n" + 
-				"}\n","nullSafeTest");
+				"}\n", "nullSafeTest");
 	}
 	
 	public void testBug358418_01() throws Exception {
@@ -1776,6 +1776,9 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"}", "castNull");
 	}
 	
+	// TODO these used to cause a stackoverflow
+	// currently they fail with dangling references which is a lot better but
+	// there's still room for improvements
 //	public void testBug343096_01() throws Exception {
 //		invokeAndExpect2(
 //				null, // a plain compile should be sufficient
@@ -1785,7 +1788,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 //				"  }]" + 
 //				"}", "bug343096");
 //	}
-	
+//	
 //	public void testBug343096_02() throws Exception {
 //		invokeAndExpect2(
 //				Functions.Function1.class.getCanonicalName(),
@@ -1942,6 +1945,46 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"    val (int)=>int sum = [a|a]\n" +
 				"    sum.apply(1)" + 
 				"}", "closureWithPrimitives");
+	}
+	
+	public void testBug356742_01() throws Exception {
+		invokeAndExpect2(
+				"logInfo(a)", 
+				"@com.google.inject.Inject extension testdata.ClassWithVarArgs classWithVarArgs\n" + 
+				"\n" +
+				"def doLog() {" + 
+				"    classWithVarArgs.logInfo('a')\n" +
+				"}", "doLog");
+	}
+	
+	public void testBug356742_02() throws Exception {
+		invokeAndExpect2(
+				"logInfo(a, args...)", 
+				"@com.google.inject.Inject extension testdata.ClassWithVarArgs classWithVarArgs\n" + 
+				"\n" +
+				"def doLog() {" + 
+				"    classWithVarArgs.logInfo('a', 'b')\n" +
+				"}", "doLog");
+	}
+	
+	public void testBug356742_03() throws Exception {
+		invokeAndExpect2(
+				"logInfo(a, args...)", 
+				"@com.google.inject.Inject extension testdata.ClassWithVarArgs\n" + 
+				"\n" +
+				"def doLog() {" + 
+				"    'a'.logInfo('b')\n" +
+				"}", "doLog");
+	}
+	
+	public void testBug356742_04() throws Exception {
+		invokeAndExpect2(
+				"logInfo(a)", 
+				"@com.google.inject.Inject extension testdata.ClassWithVarArgs\n" + 
+				"\n" +
+				"def doLog() {" + 
+				"    'a'.logInfo()\n" +
+				"}", "doLog");
 	}
 	
 	public void testOperationParameterOnScope() throws Exception {
