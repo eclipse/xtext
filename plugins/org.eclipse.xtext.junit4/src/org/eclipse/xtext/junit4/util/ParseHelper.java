@@ -54,8 +54,12 @@ public class ParseHelper<T extends EObject> {
 	}
 	
 	public T parse(CharSequence text, ResourceSet resourceSetToUse) throws Exception {
-		return parse(getAsStream(text), computeUnusedUri(resourceSetToUse),null, resourceSetToUse);
+		return parse(getAsStream(text), computeUnusedUri(resourceSetToUse), null, resourceSetToUse);
 	}
+	
+	public T parse(CharSequence text, URI uriToUse, ResourceSet resourceSetToUse) throws Exception {
+        return parse(getAsStream(text), uriToUse, null, resourceSetToUse);
+    }
 	
 	protected URI computeUnusedUri(ResourceSet resourceSet) {
 		String name = "__synthetic";
