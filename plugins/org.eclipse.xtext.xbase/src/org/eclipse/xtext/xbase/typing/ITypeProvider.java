@@ -20,6 +20,15 @@ import com.google.inject.ImplementedBy;
 public interface ITypeProvider {
 
 	/**
+	 * Return the expected return type of the given expression. 
+	 * @param expression the expression. May not be <code>null</code>.
+	 * @param rawType <code>true</code> if the raw type is sufficient.
+	 * @return the expected return type of the given expression, if a correct, fully-linkable model is given.
+	 *         Returns <code>null</code> if no special return type is expected
+	 */
+	public JvmTypeReference getExpectedReturnType(XExpression expression, boolean rawType);
+	
+	/**
 	 * Return the resolved expected type of the given expression. 
 	 * Same as {@link #getExpectedType(XExpression, boolean) getExpectedType(expression, false}.
 	 * @param expression the expression. May not be <code>null</code>.

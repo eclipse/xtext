@@ -36,6 +36,7 @@ public class IssueCodes {
 	public static final String INVALID_MUTABLE_VARIABLE_ACCESS = ISSUE_CODE_PREFIX + "invalid_mutable_variable_access";
 	public static final String INVALID_NUMBER_OF_ARGUMENTS = ISSUE_CODE_PREFIX + "invalid_number_of_arguments";
 	public static final String INVALID_NUMBER_OF_TYPE_ARGUMENTS = ISSUE_CODE_PREFIX + "invalid_number_of_type_arguments";
+	public static final String INVALID_RETURN = ISSUE_CODE_PREFIX + "invalid_return";
 	public static final String INVALID_USE_OF_TYPE = ISSUE_CODE_PREFIX + "invalid_use_of_void";
 	public static final String INVALID_USE_OF_WILDCARD = ISSUE_CODE_PREFIX + "invalid_use_of_wild_card";
 	public static final String LOCAL_VAR_ACCESS_WITH_PARENTHESES = ISSUE_CODE_PREFIX + "local_var_access_with_parentheses";
@@ -69,6 +70,7 @@ public class IssueCodes {
 			INVALID_ARGUMENT_TYPES,
 			INVALID_NUMBER_OF_ARGUMENTS
 	);
+
 
 	
 	public static int compareIssueCodes(String left, String right) {

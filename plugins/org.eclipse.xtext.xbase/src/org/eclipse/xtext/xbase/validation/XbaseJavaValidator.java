@@ -54,6 +54,7 @@ import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XIntLiteral;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XNullLiteral;
+import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
@@ -360,6 +361,20 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			error("Incompatible implicit return type. Expected " + getNameOfTypes(expectedType) + " but was "
 					+ canonicalName(type), expr, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
 					INCOMPATIBLE_RETURN_TYPE);
+		}
+	}
+	
+	@Check
+	public void checkReturn(XReturnExpression expr) {
+		JvmTypeReference returnType = typeProvider.getExpectedReturnType(expr, true);
+		if (returnType == null)
+			return;
+		if (typeRefs.is(returnType, Void.TYPE)) {
+			if  (expr.getExpression() != null)
+				error("Void functions cannot return a value.", expr, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_RETURN);
+		} else {
+			if  (expr.getExpression() == null)
+				error("The function must return a esult of type "+returnType.getSimpleName()+".", expr, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_RETURN);
 		}
 	}
 	
