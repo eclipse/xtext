@@ -85,7 +85,7 @@ public class SmokeTest extends AbstractXtend2TestCase {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		int i = 0;
+		int i = 9; // TODO sz: investigate how to speed things up here (parallelism)?
 		smokeTestModels = Lists.newArrayList();
 		while(true) {
 			String location = "/" + SmokeTest.class.getPackage().getName().replace('.', '/') + "/Case_" + i + ".xtend";
