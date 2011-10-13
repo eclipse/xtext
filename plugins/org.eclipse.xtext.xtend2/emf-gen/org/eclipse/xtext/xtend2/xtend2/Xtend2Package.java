@@ -145,13 +145,22 @@ public interface Xtend2Package extends EPackage
 	int XTEND_IMPORT__EXTENSION = 2;
 
 	/**
+	 * The feature id for the '<em><b>Imported Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_IMPORT__IMPORTED_TYPE = 3;
+
+	/**
 	 * The number of structural features of the '<em>Xtend Import</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_IMPORT_FEATURE_COUNT = 3;
+	int XTEND_IMPORT_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendAnnotationTargetImpl <em>Xtend Annotation Target</em>}' class.
@@ -920,6 +929,17 @@ public interface Xtend2Package extends EPackage
 	EAttribute getXtendImport_Extension();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.xtext.xtend2.xtend2.XtendImport#getImportedType <em>Imported Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Imported Type</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.XtendImport#getImportedType()
+	 * @see #getXtendImport()
+	 * @generated
+	 */
+	EReference getXtendImport_ImportedType();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xtend2.xtend2.XtendClass <em>Xtend Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1535,6 +1555,14 @@ public interface Xtend2Package extends EPackage
 		 * @generated
 		 */
 		EAttribute XTEND_IMPORT__EXTENSION = eINSTANCE.getXtendImport_Extension();
+
+		/**
+		 * The meta object literal for the '<em><b>Imported Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XTEND_IMPORT__IMPORTED_TYPE = eINSTANCE.getXtendImport_ImportedType();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendClassImpl <em>Xtend Class</em>}' class.
