@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.util;
 
+import static org.eclipse.xtext.util.Strings.*;
+
 import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -20,28 +22,31 @@ import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Jan Koehnlein
  */
 public class VisibilityService {
-	
+
 	@Inject
 	private SuperTypeCollector superTypeCollector;
-	
+
 	@Inject
 	private TypesFactory typesFactory;
-	
+
 	public void setSuperTypeCollector(SuperTypeCollector superTypeCollector) {
 		this.superTypeCollector = superTypeCollector;
 	}
-	
+
 	public void setTypesFactory(TypesFactory typesFactory) {
 		this.typesFactory = typesFactory;
 	}
-	
+
 	public boolean isVisible(final JvmMember jvmMember, JvmDeclaredType contextType) {
-		if (jvmMember.getVisibility()==JvmVisibility.PUBLIC)
+		if (jvmMember.getVisibility() == JvmVisibility.PUBLIC)
 			return true;
-		if (contextType==null) {
+		if (contextType == null) {
 			return false;
+		} else if (jvmMember.getVisibility() == JvmVisibility.DEFAULT) {
+			return equal(jvmMember.getDeclaringType().getPackageName(), contextType.getPackageName());
 		} else if (contextType.equals(jvmMember.getDeclaringType())) {
 			return true;
 		} else {
@@ -49,7 +54,7 @@ public class VisibilityService {
 			typeReference.setType(contextType);
 			Set<JvmType> rawTypes = superTypeCollector.collectSuperTypesAsRawTypes(typeReference);
 			if (rawTypes.contains(jvmMember.getDeclaringType())) {
-				return jvmMember.getVisibility()==JvmVisibility.PROTECTED;
+				return jvmMember.getVisibility() == JvmVisibility.PROTECTED;
 			}
 			return false;
 		}

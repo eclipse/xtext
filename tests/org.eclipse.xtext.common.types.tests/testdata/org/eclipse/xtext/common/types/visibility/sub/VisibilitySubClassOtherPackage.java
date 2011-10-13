@@ -5,16 +5,14 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.common.types.visibility;
+package org.eclipse.xtext.common.types.visibility.sub;
+
+import org.eclipse.xtext.common.types.visibility.VisibilitySuperClass;
+
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class VisibilitySuperClass {
-	@SuppressWarnings("unused")
-	private String privateField;
-	protected String protectedField;
-	public String publicField;
-	String packagePrivateField;
-	
+public class VisibilitySubClassOtherPackage extends VisibilitySuperClass {
+
 }
