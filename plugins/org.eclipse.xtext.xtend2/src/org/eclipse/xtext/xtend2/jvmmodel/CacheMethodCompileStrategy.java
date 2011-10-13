@@ -18,7 +18,6 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
@@ -77,7 +76,7 @@ public class CacheMethodCompileStrategy implements Functions.Function1<ImportMan
 		EList<JvmFormalParameter> list = cacheMethod.getParameters();
 		for (Iterator<JvmFormalParameter> iterator = list.iterator(); iterator.hasNext();) {
 			JvmFormalParameter jvmFormalParameter = iterator.next();
-			appendable.append(getVarName(jvmFormalParameter, appendable));
+			appendable.append(getVarName(jvmFormalParameter));
 			if (iterator.hasNext()) {
 				appendable.append(", ");
 			}
@@ -123,11 +122,7 @@ public class CacheMethodCompileStrategy implements Functions.Function1<ImportMan
 		return appendable.toString();
 	}
 
-	/**
-	 * TODO: we assume that names from the inferred JVM model are the same in the Java code. Does that assumption
-	 * hold?
-	 */
-	protected String getVarName(JvmIdentifiableElement ex, IAppendable appendable) {
+	protected String getVarName(JvmIdentifiableElement ex) {
 		return ex.getSimpleName();
 	}
 }
