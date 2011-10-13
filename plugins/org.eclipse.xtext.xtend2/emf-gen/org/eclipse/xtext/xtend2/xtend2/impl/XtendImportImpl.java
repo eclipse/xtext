@@ -8,9 +8,12 @@ package org.eclipse.xtext.xtend2.xtend2.impl;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
+import org.eclipse.xtext.common.types.JvmType;
 
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendImport;
@@ -25,6 +28,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendImport;
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendImportImpl#getImportedNamespace <em>Imported Namespace</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendImportImpl#isStatic <em>Static</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendImportImpl#isExtension <em>Extension</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendImportImpl#getImportedType <em>Imported Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -91,6 +95,16 @@ public class XtendImportImpl extends MinimalEObjectImpl.Container implements Xte
 	 * @ordered
 	 */
 	protected boolean extension = EXTENSION_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getImportedType() <em>Imported Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImportedType()
+	 * @generated
+	 * @ordered
+	 */
+	protected JvmType importedType;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -187,6 +201,49 @@ public class XtendImportImpl extends MinimalEObjectImpl.Container implements Xte
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public JvmType getImportedType()
+	{
+		if (importedType != null && importedType.eIsProxy())
+		{
+			InternalEObject oldImportedType = (InternalEObject)importedType;
+			importedType = (JvmType)eResolveProxy(oldImportedType);
+			if (importedType != oldImportedType)
+			{
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Xtend2Package.XTEND_IMPORT__IMPORTED_TYPE, oldImportedType, importedType));
+			}
+		}
+		return importedType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JvmType basicGetImportedType()
+	{
+		return importedType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setImportedType(JvmType newImportedType)
+	{
+		JvmType oldImportedType = importedType;
+		importedType = newImportedType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_IMPORT__IMPORTED_TYPE, oldImportedType, importedType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean isWildcard()
 	{
 		// TODO: implement this method
@@ -222,6 +279,9 @@ public class XtendImportImpl extends MinimalEObjectImpl.Container implements Xte
 				return isStatic();
 			case Xtend2Package.XTEND_IMPORT__EXTENSION:
 				return isExtension();
+			case Xtend2Package.XTEND_IMPORT__IMPORTED_TYPE:
+				if (resolve) return getImportedType();
+				return basicGetImportedType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -244,6 +304,9 @@ public class XtendImportImpl extends MinimalEObjectImpl.Container implements Xte
 				return;
 			case Xtend2Package.XTEND_IMPORT__EXTENSION:
 				setExtension((Boolean)newValue);
+				return;
+			case Xtend2Package.XTEND_IMPORT__IMPORTED_TYPE:
+				setImportedType((JvmType)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -268,6 +331,9 @@ public class XtendImportImpl extends MinimalEObjectImpl.Container implements Xte
 			case Xtend2Package.XTEND_IMPORT__EXTENSION:
 				setExtension(EXTENSION_EDEFAULT);
 				return;
+			case Xtend2Package.XTEND_IMPORT__IMPORTED_TYPE:
+				setImportedType((JvmType)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -288,6 +354,8 @@ public class XtendImportImpl extends MinimalEObjectImpl.Container implements Xte
 				return static_ != STATIC_EDEFAULT;
 			case Xtend2Package.XTEND_IMPORT__EXTENSION:
 				return extension != EXTENSION_EDEFAULT;
+			case Xtend2Package.XTEND_IMPORT__IMPORTED_TYPE:
+				return importedType != null;
 		}
 		return super.eIsSet(featureID);
 	}

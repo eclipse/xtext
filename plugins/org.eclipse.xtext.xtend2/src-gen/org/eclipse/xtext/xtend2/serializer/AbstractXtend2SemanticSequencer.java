@@ -1240,14 +1240,31 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     ((static?='static' extension?='extension'?)? importedNamespace=QualifiedNameWithWildCard)
+	 *     (
+	 *         (static?='static' extension?='extension'? importedType=[JvmType|QualifiedName]) | 
+	 *         importedType=[JvmType|QualifiedName] | 
+	 *         importedNamespace=QualifiedNameWithWildCard
+	 *     )
 	 *
 	 * Features:
-	 *    importedNamespace[1, 1]
+	 *    importedNamespace[0, 1]
+	 *         EXCLUDE_IF_SET static
+	 *         EXCLUDE_IF_SET extension
+	 *         EXCLUDE_IF_SET importedType
+	 *         EXCLUDE_IF_SET importedType
 	 *    static[0, 1]
 	 *         MANDATORY_IF_SET extension
+	 *         EXCLUDE_IF_UNSET importedType
+	 *         MANDATORY_IF_SET importedType
+	 *         EXCLUDE_IF_SET importedType
+	 *         EXCLUDE_IF_SET importedNamespace
 	 *    extension[0, 1]
 	 *         EXCLUDE_IF_UNSET static
+	 *         EXCLUDE_IF_UNSET importedType
+	 *         EXCLUDE_IF_SET importedType
+	 *         EXCLUDE_IF_SET importedNamespace
+	 *    importedType[0, 2]
+	 *         EXCLUDE_IF_SET importedNamespace
 	 */
 	protected void sequence_Import(EObject context, XtendImport semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

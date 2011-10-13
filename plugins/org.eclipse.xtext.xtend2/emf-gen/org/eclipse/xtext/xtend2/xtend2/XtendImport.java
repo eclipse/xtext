@@ -7,6 +7,8 @@ package org.eclipse.xtext.xtend2.xtend2;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.xtext.common.types.JvmType;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Xtend Import</b></em>'.
@@ -18,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendImport#getImportedNamespace <em>Imported Namespace</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendImport#isStatic <em>Static</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendImport#isExtension <em>Extension</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendImport#getImportedType <em>Imported Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -104,6 +107,32 @@ public interface XtendImport extends EObject
 	 * @generated
 	 */
 	void setExtension(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Imported Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Imported Type</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Imported Type</em>' reference.
+	 * @see #setImportedType(JvmType)
+	 * @see org.eclipse.xtext.xtend2.xtend2.Xtend2Package#getXtendImport_ImportedType()
+	 * @model
+	 * @generated
+	 */
+	JvmType getImportedType();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xtend2.xtend2.XtendImport#getImportedType <em>Imported Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Imported Type</em>' reference.
+	 * @see #getImportedType()
+	 * @generated
+	 */
+	void setImportedType(JvmType value);
 
 	/**
 	 * <!-- begin-user-doc -->

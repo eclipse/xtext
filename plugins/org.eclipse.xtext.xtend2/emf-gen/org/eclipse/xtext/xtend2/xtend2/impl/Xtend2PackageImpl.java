@@ -301,6 +301,16 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getXtendImport_ImportedType()
+	{
+		return (EReference)xtendImportEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getXtendClass()
 	{
 		return xtendClassEClass;
@@ -825,6 +835,7 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 		createEAttribute(xtendImportEClass, XTEND_IMPORT__IMPORTED_NAMESPACE);
 		createEAttribute(xtendImportEClass, XTEND_IMPORT__STATIC);
 		createEAttribute(xtendImportEClass, XTEND_IMPORT__EXTENSION);
+		createEReference(xtendImportEClass, XTEND_IMPORT__IMPORTED_TYPE);
 
 		xtendClassEClass = createEClass(XTEND_CLASS);
 		createEAttribute(xtendClassEClass, XTEND_CLASS__NAME);
@@ -943,6 +954,7 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 		initEAttribute(getXtendImport_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 0, 1, XtendImport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getXtendImport_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, XtendImport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getXtendImport_Extension(), ecorePackage.getEBoolean(), "extension", null, 0, 1, XtendImport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXtendImport_ImportedType(), theTypesPackage.getJvmType(), null, "importedType", null, 0, 1, XtendImport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(xtendImportEClass, ecorePackage.getEBoolean(), "isWildcard", 0, 1, IS_UNIQUE, IS_ORDERED);
 
