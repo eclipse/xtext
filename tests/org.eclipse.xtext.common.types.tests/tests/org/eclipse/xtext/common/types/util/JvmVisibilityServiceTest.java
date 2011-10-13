@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 import org.eclipse.xtext.common.types.visibility.VisibilitySubClass;
 import org.eclipse.xtext.common.types.visibility.VisibilitySuperClass;
+import org.eclipse.xtext.common.types.visibility.sub.VisibilitySubClassOtherPackage;
 
 import com.google.common.base.Predicate;
 
@@ -32,9 +33,11 @@ public class JvmVisibilityServiceTest extends TestCase {
 	private TypesFactory typesFactory = TypesFactory.eINSTANCE;
 	private JvmDeclaredType superRef;
 	private JvmDeclaredType subRef;
+	private JvmDeclaredType subRefOtherPackage;
 	private JvmField privateField;
 	private JvmField protectedField;
 	private JvmField publicField;
+	private JvmField packagePrivateField;
 	private VisibilityService provider;
 
 	@Override
@@ -42,6 +45,7 @@ public class JvmVisibilityServiceTest extends TestCase {
 		super.setUp();
 		superRef = (JvmDeclaredType) getTypeRef(VisibilitySuperClass.class.getCanonicalName()).getType();
 		subRef = (JvmDeclaredType) getTypeRef(VisibilitySubClass.class.getCanonicalName()).getType();
+		subRefOtherPackage = (JvmDeclaredType) getTypeRef(VisibilitySubClassOtherPackage.class.getCanonicalName()).getType();
 
 		Iterable<JvmField> fields = superRef.getDeclaredFields();
 		privateField = find(fields, new Predicate<JvmField>() {
@@ -60,6 +64,12 @@ public class JvmVisibilityServiceTest extends TestCase {
 			}
 		});
 
+		packagePrivateField = find(fields, new Predicate<JvmField>() {
+			public boolean apply(JvmField input) {
+				return input.getSimpleName().equals("packagePrivateField");
+			}
+		});
+
 		provider = new VisibilityService();
 		provider.setSuperTypeCollector(new SuperTypeCollector(TypesFactory.eINSTANCE));
 		provider.setTypesFactory(TypesFactory.eINSTANCE);
@@ -69,18 +79,28 @@ public class JvmVisibilityServiceTest extends TestCase {
 		assertFalse(provider.isVisible(privateField, null));
 		assertFalse(provider.isVisible(protectedField, null));
 		assertTrue(provider.isVisible(publicField, null));
+		assertFalse(provider.isVisible(packagePrivateField, null));
 	}
 
 	public void testSubClassContext() throws Exception {
 		assertFalse(provider.isVisible(privateField, subRef));
 		assertTrue(provider.isVisible(protectedField, subRef));
 		assertTrue(provider.isVisible(publicField, subRef));
+		assertTrue(provider.isVisible(packagePrivateField, subRef));
+	}
+
+	public void testSubClassContextOtherPackage() throws Exception {
+		assertFalse(provider.isVisible(privateField, subRefOtherPackage));
+		assertTrue(provider.isVisible(protectedField, subRefOtherPackage));
+		assertTrue(provider.isVisible(publicField, subRefOtherPackage));
+		assertFalse(provider.isVisible(packagePrivateField, subRefOtherPackage));
 	}
 
 	public void testDirectContext() throws Exception {
 		assertTrue(provider.isVisible(privateField, superRef));
 		assertTrue(provider.isVisible(protectedField, superRef));
 		assertTrue(provider.isVisible(publicField, superRef));
+		assertTrue(provider.isVisible(packagePrivateField, superRef));
 	}
 
 	protected JvmTypeReference getTypeRef(String name) {
