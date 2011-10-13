@@ -23,6 +23,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -201,7 +202,7 @@ public class OrganizeImports {
 		}
 
 		protected boolean isMemberNeedsImport(JvmType type) {
-			return type instanceof JvmGenericType
+			return type instanceof JvmEnumerationType || type instanceof JvmGenericType
 					&& !"org.eclipse.xtext.xbase.lib".equals(((JvmGenericType) type).getPackageName());
 		}
 
