@@ -27,6 +27,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal.
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
+import org.eclipse.xtext.xtend2.xtend2.XtendImport;
 
 import com.google.inject.Inject;
 
@@ -41,6 +42,8 @@ public class ImportingTypesProposalProvider extends JdtTypesProposalProvider {
 	@Override
 	protected IReplacementTextApplier createTextApplier(ContentAssistContext context, IScope typeScope, 
 			IQualifiedNameConverter qualifiedNameConverter, IValueConverter<String> valueConverter) {
+		if (context.getCurrentModel() instanceof XtendImport)
+			return super.createTextApplier(context, typeScope, qualifiedNameConverter, valueConverter);
 		return new FQNImporter(context.getResource(), context.getViewer(), typeScope, qualifiedNameConverter, valueConverter, qualifiedNameValueConverter);
 	}
 	

@@ -413,7 +413,6 @@ public class ParserTest extends AbstractXtend2TestCase {
 	public void testImport_02() throws Exception {
 		XtendImport importDeclaration = importDeclaration("import java . util . /*comment*/ List");
 		assertNotNull(importDeclaration);
-		assertEquals("java.util.List", importDeclaration.getImportedNamespace());
 		assertEquals("java.util.List", importDeclaration.getImportedTypeName());
 		assertFalse(importDeclaration.isWildcard());
 		assertFalse(importDeclaration.isStatic());
@@ -423,7 +422,6 @@ public class ParserTest extends AbstractXtend2TestCase {
 	public void testImport_03() throws Exception {
 		XtendImport importDeclaration = importDeclaration("import static java.util.Collections. * // foobar");
 		assertNotNull(importDeclaration);
-		assertEquals("java.util.Collections.*", importDeclaration.getImportedNamespace());
 		assertEquals("java.util.Collections", importDeclaration.getImportedTypeName());
 		assertTrue(importDeclaration.isWildcard());
 		assertTrue(importDeclaration.isStatic());
@@ -431,11 +429,10 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testImport_04() throws Exception {
-		XtendImport importDeclaration = importDeclaration("import static extension java.lang.reflect.\nArrays");
+		XtendImport importDeclaration = importDeclaration("import static extension java.lang.reflect.\nArrays.*");
 		assertNotNull(importDeclaration);
-		assertEquals("java.lang.reflect.Arrays", importDeclaration.getImportedNamespace());
 		assertEquals("java.lang.reflect.Arrays", importDeclaration.getImportedTypeName());
-		assertFalse(importDeclaration.isWildcard());
+		assertTrue(importDeclaration.isWildcard());
 		assertTrue(importDeclaration.isStatic());
 		assertTrue(importDeclaration.isExtension());
 	}

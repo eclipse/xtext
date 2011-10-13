@@ -41,6 +41,14 @@ public class Xtend2ImportedNamespaceScopeProvider extends XbaseImportedNamespace
 	private IQualifiedNameConverter nameConverter;
 	
 	@Override
+	public IScope getScope(EObject context, EReference reference) {
+		if (context instanceof XtendImport) {
+			return getResourceScope(context.eResource(), reference);
+		}
+		return super.getScope(context, reference);
+	}
+	
+	@Override
 	protected List<ImportNormalizer> internalGetImportedNamespaceResolvers(EObject context, boolean ignoreCase) {
 		if (!(context instanceof XtendFile))
 			return Collections.emptyList();
@@ -49,6 +57,8 @@ public class Xtend2ImportedNamespaceScopeProvider extends XbaseImportedNamespace
 		for (XtendImport imp : file.getImports()) {
 			if (!imp.isStatic()) {
 				String value = imp.getImportedNamespace();
+				if (value == null)
+					value = imp.getImportedTypeName();
 				ImportNormalizer resolver = createImportedNamespaceResolver(value, ignoreCase);
 				if (resolver != null)
 					importedNamespaceResolvers.add(resolver);

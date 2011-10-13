@@ -49,7 +49,22 @@ public class Xtend2ProposalProvider extends AbstractXtend2ProposalProvider {
 	
 	@Inject
 	private IGrammarAccess grammarAccess;
-
+	
+	@SuppressWarnings("restriction")
+	@Override
+	public void completeImport_ImportedType(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		completeJavaTypes(context, Xtend2Package.Literals.XTEND_IMPORT__IMPORTED_TYPE, true, getQualifiedNameValueConverter(),
+				new ITypesProposalProvider.Filter() {
+					public int getSearchFor() {
+						return IJavaSearchConstants.TYPE;
+					}
+					public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
+							char[][] enclosingTypeNames, String path) {
+						return true;
+					}
+				}, acceptor);
+	}
 	@Override
 	public void completeMember_Name(final EObject model, Assignment assignment, final ContentAssistContext context,
 			final ICompletionProposalAcceptor acceptor) {

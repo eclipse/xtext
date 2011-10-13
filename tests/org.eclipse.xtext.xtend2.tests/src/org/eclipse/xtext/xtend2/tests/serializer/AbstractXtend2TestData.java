@@ -24,7 +24,6 @@ public abstract class AbstractXtend2TestData extends AbstractXtend2TestCase {
 		str.append(" * The classical hello world example\n\n");
 		str.append(" */\n\n");
 		str.append("import junit.framework.TestCase\n\n");
-		str.append("import org.junit.Test$None\n");
 		str.append("import junit.framework.Assert\n");
 		str.append("\n\n");
 		str.append("class Xtend01_HelloWorld extends TestCase {\n");
