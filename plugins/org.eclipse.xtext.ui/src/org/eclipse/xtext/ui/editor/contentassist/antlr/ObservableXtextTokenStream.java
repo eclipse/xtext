@@ -26,6 +26,8 @@ public class ObservableXtextTokenStream extends XtextTokenStream {
 	
 	private StreamListener listener;
 	
+	private boolean attemptedToConsumePastEof = false;
+	
 	public ObservableXtextTokenStream() {
 		super();
 	}
@@ -57,6 +59,7 @@ public class ObservableXtextTokenStream extends XtextTokenStream {
 	
 	@Override
 	public void rewind(int marker) {
+		attemptedToConsumePastEof = false;
 		if (getListener() != null)
 			getListener().announceRewind(marker);
 		super.rewind(marker);
@@ -64,8 +67,16 @@ public class ObservableXtextTokenStream extends XtextTokenStream {
 	
 	@Override
 	public void consume() {
-		if (getListener() != null)
-			getListener().announceConsume();
+		if (getListener() != null) {
+			if (getFirstMarker() == -1 && getCurrentLookAhead() <= 1 && p >= tokens.size()) {
+				if (!attemptedToConsumePastEof) {
+					attemptedToConsumePastEof = true;
+					getListener().announceConsume();
+				}
+			} else {
+				getListener().announceConsume();
+			}
+		}
 		super.consume();
 	}
 

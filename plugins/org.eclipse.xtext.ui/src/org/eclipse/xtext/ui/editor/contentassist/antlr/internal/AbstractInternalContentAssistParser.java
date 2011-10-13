@@ -145,6 +145,13 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	}
 
 	public void before(EObject grammarElement) {
+		if (input.size() == input.index()) {
+			int idx = localTrace.indexOf(grammarElement);
+			// due to error recovery inconveniences we have to add some grammarElements
+			// twice immediatly after each other
+			if (idx >= 0 && idx != localTrace.size() - 1)
+				throw new InfiniteRecursion();
+		}
 		grammarElements.add(grammarElement);
 		localTrace.add(grammarElement);
 	}
