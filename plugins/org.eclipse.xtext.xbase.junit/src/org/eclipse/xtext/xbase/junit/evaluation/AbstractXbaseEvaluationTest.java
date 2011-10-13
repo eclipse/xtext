@@ -287,6 +287,16 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				" return null" +
 				"}");
 	}
+	
+	@Test public void testReturnExpression_07() throws Exception {
+		assertEvaluatesTo(null, "return if (true) while(false) 'foo'+'bar'");
+		assertEvaluatesTo(null, "return if (false) while(false) 'foo'+'bar'");
+	}
+	
+	@Test public void testReturnExpression_08() throws Exception {
+		assertEvaluatesTo(null, "return if (true) while(false) 'foo'+'bar' else 'zonk'");
+		assertEvaluatesTo("zonk", "return if (false) while(false) 'foo'+'bar' else 'zonk'");
+	}
 
 	@Test public void testUnaryOperator_00() throws Exception {
 		assertEvaluatesTo(new Integer(-19),"-19");

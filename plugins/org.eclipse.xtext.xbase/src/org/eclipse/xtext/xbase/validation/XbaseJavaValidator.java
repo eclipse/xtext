@@ -367,14 +367,32 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	@Check
 	public void checkReturn(XReturnExpression expr) {
 		JvmTypeReference returnType = typeProvider.getExpectedReturnType(expr, true);
-		if (returnType == null)
+		if (returnType == null) {
+			if (expr.getExpression() != null) {
+				JvmTypeReference expressionType = typeProvider.getType(expr.getExpression());
+				if (typeRefs.is(expressionType, Void.TYPE)) {
+					error("Incompatible types. Expected java.lang.Object but was "
+							+ canonicalName(expressionType) , expr.getExpression(), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+							INCOMPATIBLE_TYPES);
+				}
+			}
 			return;
+		}
 		if (typeRefs.is(returnType, Void.TYPE)) {
 			if  (expr.getExpression() != null)
 				error("Void functions cannot return a value.", expr, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_RETURN);
 		} else {
 			if  (expr.getExpression() == null)
-				error("The function must return a esult of type "+returnType.getSimpleName()+".", expr, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_RETURN);
+				error("The function must return a result of type "+returnType.getSimpleName()+".", expr, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_RETURN);
+			else {
+				JvmTypeReference expressionType = typeProvider.getType(expr.getExpression());
+				if (typeRefs.is(expressionType, Void.TYPE)) {
+					error("Incompatible types. Expected " + getNameOfTypes(returnType) + " but was "
+							+ canonicalName(expressionType), expr.getExpression(), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+							INCOMPATIBLE_TYPES);
+				}
+			}
+				
 		}
 	}
 	

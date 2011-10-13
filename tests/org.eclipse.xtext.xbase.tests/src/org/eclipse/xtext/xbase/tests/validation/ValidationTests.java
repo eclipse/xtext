@@ -160,9 +160,24 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertNoError(expression, TOO_MANY_PARAMS_IN_CLOSURE);
 	}
 	
-	public void testVoidInReturnExpression() throws Exception {
+	public void testVoidInReturnExpression_01() throws Exception {
 		XExpression expression = expression("return while(false) 'foo'+'bar'");
 		helper.assertError(expression, XWHILE_EXPRESSION, INCOMPATIBLE_TYPES);
+	}
+	
+	public void testVoidInReturnExpression_02() throws Exception {
+		XExpression expression = expression("return if (true) while(false) 'foo'+'bar'");
+		helper.assertNoErrors(expression);
+	}
+	
+	public void testVoidInReturnExpression_03() throws Exception {
+		XExpression expression = expression("return if (true) while(false) 'foo'+'bar' else 'zonk'");
+		helper.assertNoErrors(expression);
+	}
+	
+	public void testVoidInReturnExpression_04() throws Exception {
+		XExpression expression = expression("return if (true) while(false) 'foo'+'bar' else while(false) 'foo'+'bar'");
+		helper.assertError(expression, XIF_EXPRESSION, INCOMPATIBLE_TYPES);
 	}
 	
 	public void testReturnExpressionInClosure() throws Exception {
