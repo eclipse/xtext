@@ -363,8 +363,8 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testDisptchFunctionVisibility() throws Exception {
 		XtendClass xtendClass = clazz("class Foo { def dispatch foo(String bar) {} def public dispatch foo(Object bar) {}}");
-		helper.assertWarning(xtendClass.getMembers().get(0), Xtend2Package.Literals.XTEND_FUNCTION, DISPATCH_FUNCTIONS_WITH_DIFFERENT_VISIBILITY, 
-				"should", "same", "visibility");
+		helper.assertError(xtendClass.getMembers().get(0), Xtend2Package.Literals.XTEND_FUNCTION, DISPATCH_FUNCTIONS_WITH_DIFFERENT_VISIBILITY, 
+				"local", "must", "same", "visibility");
 	}
 	
 //	public void testBug343096() throws Exception {

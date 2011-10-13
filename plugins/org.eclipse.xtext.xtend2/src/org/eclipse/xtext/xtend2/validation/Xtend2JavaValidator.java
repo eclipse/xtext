@@ -502,8 +502,8 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 			error("Attempt to override final method " + canonicalName(overriddenOperation), function,
 					XTEND_FUNCTION__NAME, OVERRIDDEN_FINAL);
 		JvmOperation inferredOperation = associations.getDirectlyInferredOperation(function);
-		if(isMorePrivateThan(inferredOperation.getVisibility(), overriddenOperation.getVisibility())) {
-			error("Cannot reduce the visibility of the overridden method "+ overriddenOperation.getIdentifier(), 
+		if (isMorePrivateThan(inferredOperation.getVisibility(), overriddenOperation.getVisibility())) {
+			error("Cannot reduce the visibility of the overridden method " + overriddenOperation.getIdentifier(),
 					function, XTEND_FUNCTION__NAME, OVERRIDE_REDUCES_VISIBILITY);
 		}
 		if (function.getReturnType() == null)
@@ -518,12 +518,12 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 					XTEND_FUNCTION__RETURN_TYPE, INCOMPATIBLE_RETURN_TYPE);
 		}
 	}
-	
+
 	protected boolean isMorePrivateThan(JvmVisibility o1, JvmVisibility o2) {
-		if(o1 == o2) {
+		if (o1 == o2) {
 			return false;
 		} else {
-			switch(o1) {
+			switch (o1) {
 				case DEFAULT:
 					return o2 != JvmVisibility.PRIVATE;
 				case PRIVATE:
@@ -532,7 +532,7 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 					return o2 == JvmVisibility.PUBLIC;
 				case PUBLIC:
 					return false;
-				default: 
+				default:
 					throw new IllegalArgumentException("Unknown JvmVisibility " + o1);
 			}
 		}
@@ -661,27 +661,34 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 		if (type != null) {
 			Multimap<Pair<String, Integer>, JvmOperation> dispatchMethods = dispatchingSupport.getDispatchMethods(type);
 			for (Pair<String, Integer> key : dispatchMethods.keySet()) {
-				Collection<JvmOperation> collection = dispatchMethods.get(key);
-				if (collection.size() == 1) {
-					JvmOperation singleOp = collection.iterator().next();
+				Collection<JvmOperation> dispatchOperations = dispatchMethods.get(key);
+				JvmOperation syntheticDispatchMethod = dispatchingSupport.findSyntheticDispatchMethod(clazz, key);
+				JvmOperation overriddenOperation = overridesService.findOverriddenOperation(syntheticDispatchMethod);
+				if(overriddenOperation != null && isMorePrivateThan(syntheticDispatchMethod.getVisibility(), overriddenOperation.getVisibility())) 
+					addVisibilityError(dispatchOperations, "Synthetic dispatch method reduces visibility of overridden function " + overriddenOperation.getIdentifier(), 
+							OVERRIDE_REDUCES_VISIBILITY);
+				if (dispatchOperations.size() == 1) {
+					JvmOperation singleOp = dispatchOperations.iterator().next();
 					XtendFunction function = associations.getXtendFunction(singleOp);
 					warning("Single dispatch function.", function, XTEND_FUNCTION__DISPATCH,
 							IssueCodes.SINGLE_DISPATCH_FUNCTION);
 				} else {
 					Multimap<List<JvmType>, JvmOperation> signatures = HashMultimap.create();
-					boolean isFirst = true;
+					boolean isFirstLocalOperation = true;
 					JvmVisibility commonVisibility = null;
-					for (JvmOperation jvmOperation : collection) {
+					for (JvmOperation jvmOperation : dispatchOperations) {
 						signatures.put(getParamTypes(jvmOperation, true), jvmOperation);
-						XtendFunction function = associations.getXtendFunction(jvmOperation);
-						if (isFirst) {
-							commonVisibility = jvmOperation.getVisibility();
-							isFirst = false;
-						} else {
-							if (jvmOperation.getVisibility() != commonVisibility) {
-								commonVisibility = null;
+						if(jvmOperation.getDeclaringType() == type) {
+							if (isFirstLocalOperation) {
+								commonVisibility = jvmOperation.getVisibility();
+								isFirstLocalOperation = false;
+							} else {
+								if (jvmOperation.getVisibility() != commonVisibility) {
+									commonVisibility = null;
+								}
 							}
 						}
+						XtendFunction function = associations.getXtendFunction(jvmOperation);
 						if (function != null) {
 							JvmTypeReference functionReturnType = function.getReturnType();
 							if (functionReturnType == null)
@@ -699,16 +706,8 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 						}
 					}
 					if (commonVisibility == null) {
-						for (JvmOperation jvmOperation : collection) {
-							XtendFunction function = associations.getXtendFunction(jvmOperation);
-							if (function != null) {
-								EStructuralFeature feature = (function.eIsSet(XTEND_FUNCTION__VISIBILITY)) ? XTEND_FUNCTION__VISIBILITY
-										: XTEND_FUNCTION__DISPATCH;
-								warning("Dispatch functions should have the same visibility.", function, feature,
-										ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
-										DISPATCH_FUNCTIONS_WITH_DIFFERENT_VISIBILITY);
-							}
-						}
+						addVisibilityError(dispatchOperations, "All local dispatch functions must have the same visibility.", 
+									DISPATCH_FUNCTIONS_WITH_DIFFERENT_VISIBILITY);
 					}
 					for (final List<JvmType> paramTypes : signatures.keySet()) {
 						Collection<JvmOperation> ops = signatures.get(paramTypes);
@@ -727,6 +726,17 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 						}
 					}
 				}
+			}
+		}
+	}
+
+	protected void addVisibilityError(Iterable<JvmOperation> operations, String message, String ISSUE_ID) {
+		for (JvmOperation jvmOperation : operations) {
+			XtendFunction function = associations.getXtendFunction(jvmOperation);
+			if (function != null) {
+				EStructuralFeature feature = (function.eIsSet(XTEND_FUNCTION__VISIBILITY)) ? XTEND_FUNCTION__VISIBILITY
+						: XTEND_FUNCTION__DISPATCH;
+				error(message, function, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, ISSUE_ID);
 			}
 		}
 	}
@@ -798,7 +808,7 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 			collectReturnExpressions(child, found);
 		}
 	}
-	
+
 	@Check
 	public void checkImports(XtendFile file) {
 		final Map<JvmType, XtendImport> imports = newHashMap();
@@ -808,33 +818,36 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 				warning("The use of wildcard imports is deprecated.", imp, null, IssueCodes.IMPORT_WILDCARD_DEPRECATED);
 			} else {
 				JvmType importedType = imp.getImportedType();
-				if (importedType !=null && ! importedType.eIsProxy()) {
+				if (importedType != null && !importedType.eIsProxy()) {
 					Map<JvmType, XtendImport> map = imports;
 					if (imp.isStatic())
 						map = staticImports;
 					if (map.containsKey(importedType)) {
-						warning("Duplicate import of '"+importedType.getSimpleName()+"'.", imp, null, IssueCodes.IMPORT_DUPLICATE);
+						warning("Duplicate import of '" + importedType.getSimpleName() + "'.", imp, null,
+								IssueCodes.IMPORT_DUPLICATE);
 					} else {
 						map.put(importedType, imp);
 					}
 				}
 			}
 		}
-		final Map<String, JvmType> simpleNames = newHashMap(Maps.uniqueIndex(imports.keySet(), new Function<JvmType,String>() {
-			public String apply(JvmType from) {
-				return from.getSimpleName();
-			}}));
+		final Map<String, JvmType> simpleNames = newHashMap(Maps.uniqueIndex(imports.keySet(),
+				new Function<JvmType, String>() {
+					public String apply(JvmType from) {
+						return from.getSimpleName();
+					}
+				}));
 		ICompositeNode node = NodeModelUtils.findActualNodeFor(file.getXtendClass());
 		for (INode n : node.getAsTreeIterable()) {
 			if (n.getGrammarElement() instanceof CrossReference) {
-				EClassifier classifier = ((CrossReference)n.getGrammarElement()).getType().getClassifier();
-				if (classifier instanceof EClass && (
-						TypesPackage.Literals.JVM_TYPE.isSuperTypeOf((EClass)classifier)
-						|| TypesPackage.Literals.JVM_CONSTRUCTOR.isSuperTypeOf((EClass)classifier)) ) {
+				EClassifier classifier = ((CrossReference) n.getGrammarElement()).getType().getClassifier();
+				if (classifier instanceof EClass
+						&& (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf((EClass) classifier) || TypesPackage.Literals.JVM_CONSTRUCTOR
+								.isSuperTypeOf((EClass) classifier))) {
 					String simpleName = n.getText().trim();
 					// handle StaticQualifier Workaround (see Xbase grammar)
 					if (simpleName.endsWith("::"))
-						simpleName = simpleName.substring(0, simpleName.length()-2);
+						simpleName = simpleName.substring(0, simpleName.length() - 2);
 					if (simpleNames.containsKey(simpleName)) {
 						imports.remove(simpleNames.remove(simpleName));
 					} else {
@@ -850,7 +863,8 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 			}
 		}
 		for (XtendImport imp : imports.values()) {
-			warning("The import '"+imp.getImportedTypeName()+"' is never used.", imp, null, IssueCodes.IMPORT_UNUSED);
+			warning("The import '" + imp.getImportedTypeName() + "' is never used.", imp, null,
+					IssueCodes.IMPORT_UNUSED);
 		}
 	}
 }
