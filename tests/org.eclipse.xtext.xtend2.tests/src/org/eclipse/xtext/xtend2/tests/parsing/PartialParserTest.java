@@ -470,9 +470,9 @@ public class PartialParserTest extends AbstractXtend2TestCase {
 		for(int i = 0; i < resource.getContents().size(); i++) {
 			if (!EcoreUtil.equals(resource.getContents().get(i), newResource.getContents().get(i))) {
 				for(int j = 0; j < resource.getContents().size(); j++) {
-					assertEquals(EmfFormatter.objToStr(newResource.getContents().get(j)), EmfFormatter.objToStr(resource.getContents().get(j)));
+					String actualContent = EmfFormatter.objToStr(resource.getContents().get(j));
+					assertEquals(actualContent, EmfFormatter.objToStr(newResource.getContents().get(j)), actualContent);
 				}
-				fail("EmfFormatter printed same string but EcoreUtil#equals returned false ...");
 			}
 		}
 		assertEqualNodes(newResource, resource);
