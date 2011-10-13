@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
+import junit.framework.Test;
+
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
@@ -22,7 +24,8 @@ import com.google.inject.Injector;
  */
 public class Bug282031Test extends AbstractContentAssistProcessorTest {
 
-	public ISetup getLookAheadContentAssistTestLanguageSetup() {
+	@Override
+	public ISetup doGetSetup() {
 		return new LookAheadContentAssistTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
@@ -33,100 +36,104 @@ public class Bug282031Test extends AbstractContentAssistProcessorTest {
 	}
 	
 	public void testBug282031_01() throws Exception {
-    	newBuilder(getLookAheadContentAssistTestLanguageSetup())
+    	newBuilder()
     		.append("( values1 ")
     		.assertText("=", ")", "Value", "Name");
     }
     
     public void testBug282031_02() throws Exception {
-    	newBuilder(getLookAheadContentAssistTestLanguageSetup())
+    	newBuilder()
     		.append("(")
     		.assertText("(", ")", "Value", "Name");
     }
     
     public void testBug282031_03() throws Exception {
-    	newBuilder(getLookAheadContentAssistTestLanguageSetup())
+    	newBuilder()
     		.append("( ")
     		.assertText(")", "Value", "Name");
     }
     
     public void testBug282031_04() throws Exception {
-    	newBuilder(getLookAheadContentAssistTestLanguageSetup())
+    	newBuilder()
     		.append("( values1")
     		.assertText("=", ")");
     }
     
     public void testBug282031_05() throws Exception {
-    	newBuilder(getLookAheadContentAssistTestLanguageSetup())
+    	newBuilder()
     		.append("[ values1 ")
     		.assertText("]", "Value", "Name");
     }
     
     public void testBug282031_06() throws Exception {
-    	newBuilder(getLookAheadContentAssistTestLanguageSetup())
+    	newBuilder()
     		.append("[")
     		.assertText("[", "Value");
     }
     
     public void testBug282031_07() throws Exception {
-    	newBuilder(getLookAheadContentAssistTestLanguageSetup())
+    	newBuilder()
     		.append("[ ")
     		.assertText("Value");
     }
     
     public void testBug282031_08() throws Exception {
-    	newBuilder(getLookAheadContentAssistTestLanguageSetup())
+    	newBuilder()
     		.append("[ values1")
     		.assertText("]");
     }
     
     public void testBug282031_09() throws Exception {
-    	newBuilder(getLookAheadContentAssistTestLanguageSetup())
+    	newBuilder()
     		.append("< values1 ")
     		.assertText("=", "Value", "Name");
     }
     
     public void testBug282031_10() throws Exception {
-    	newBuilder(getLookAheadContentAssistTestLanguageSetup())
+    	newBuilder()
     		.append("<")
     		.assertText("<", "Value", "Name");
     }
     
     public void testBug282031_11() throws Exception {
-    	newBuilder(getLookAheadContentAssistTestLanguageSetup())
+    	newBuilder()
     		.append("< ")
     		.assertText("Value", "Name");
     }
     
     public void testBug282031_12() throws Exception {
-    	newBuilder(getLookAheadContentAssistTestLanguageSetup())
+    	newBuilder()
     		.append("< values1")
     		.assertText("=");
     }
     
     public void testBug282031_13() throws Exception {
-    	newBuilder(getLookAheadContentAssistTestLanguageSetup())
+    	newBuilder()
     		.append("{ values1 ")
     		.assertText("Value", "Name");
     }
     
     public void testBug282031_14() throws Exception {
-    	newBuilder(getLookAheadContentAssistTestLanguageSetup())
+    	newBuilder()
     		.append("{")
     		.assertText("{", "Value");
     }
     
     public void testBug282031_15() throws Exception {
-    	newBuilder(getLookAheadContentAssistTestLanguageSetup())
+    	newBuilder()
     		.append("{ ")
     		.assertText("Value");
     }
     
     public void testBug282031_16() throws Exception {
-    	newBuilder(getLookAheadContentAssistTestLanguageSetup())
+    	newBuilder()
     		.append("{ values1")
     		.assertText();
     }
+
+    public static Test suite() {
+		return AbstractContentAssistProcessorTest.suite(Bug282031Test.class);
+	}
     
 	
 }

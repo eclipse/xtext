@@ -9,6 +9,8 @@ package org.eclipse.xtext.ui.tests.editor.contentassist;
 
 import java.util.Set;
 
+import junit.framework.Test;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.ITextViewer;
@@ -34,7 +36,8 @@ import com.google.inject.Injector;
  */
 public class CrossReferenceProposalTest extends AbstractContentAssistProcessorTest {
 
-	public ISetup getCrossReferenceProposalTestLanguageSetup() {
+	@Override
+	public ISetup doGetSetup() {
 		return new CrossReferenceProposalTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
@@ -48,12 +51,12 @@ public class CrossReferenceProposalTest extends AbstractContentAssistProcessorTe
 	}
 	
 	public void testBug276742_08() throws Exception {
-		newBuilder(getCrossReferenceProposalTestLanguageSetup()).append("Foo {}").assertText("Foo", "Name", "}");
+		newBuilder().append("Foo {}").assertText("Foo", "Name", "}");
 	}
 
 	public void testBug276742_08b() throws Exception {
 		String modelAsString = "Foo {}";
-		ContentAssistProcessorTestBuilder builder = newBuilder(getCrossReferenceProposalTestLanguageSetup());
+		ContentAssistProcessorTestBuilder builder = newBuilder();
 		XtextContentAssistProcessor processor = get(XtextContentAssistProcessor.class);
 		XtextResource resource = getResourceFromString(modelAsString);
 
@@ -78,13 +81,13 @@ public class CrossReferenceProposalTest extends AbstractContentAssistProcessorTe
 	}
 
 	public void testBug276742_09() throws Exception {
-		newBuilder(getCrossReferenceProposalTestLanguageSetup()).append("Foo {}").assertTextAtCursorPosition(0,
+		newBuilder().append("Foo {}").assertTextAtCursorPosition(0,
 				"Foo", "Name");
 	}
 
 	public void testBug276742_09b() throws Exception {
 		String modelAsString = "Foo {}";
-		ContentAssistProcessorTestBuilder builder = newBuilder(getCrossReferenceProposalTestLanguageSetup());
+		ContentAssistProcessorTestBuilder builder = newBuilder();
 		XtextContentAssistProcessor processor = get(XtextContentAssistProcessor.class);
 		XtextResource resource = getResourceFromString(modelAsString);
 
@@ -97,6 +100,10 @@ public class CrossReferenceProposalTest extends AbstractContentAssistProcessorTe
 	}
 
 	public void testBug276742_10() throws Exception {
-		newBuilder(getCrossReferenceProposalTestLanguageSetup()).assertText("Name");
+		newBuilder().assertText("Name");
+	}
+
+	public static Test suite() {
+		return AbstractContentAssistProcessorTest.suite(CrossReferenceProposalTest.class);
 	}
 }

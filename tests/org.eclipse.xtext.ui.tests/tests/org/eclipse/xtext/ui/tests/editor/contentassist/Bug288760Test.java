@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
+import junit.framework.Test;
+
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
@@ -22,7 +24,8 @@ import com.google.inject.Injector;
  */
 public class Bug288760Test extends AbstractContentAssistProcessorTest {
 
-	public ISetup getBug288760TestLanguageSetup() {
+	@Override
+	public ISetup doGetSetup() {
 		return new Bug288760TestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
@@ -33,7 +36,7 @@ public class Bug288760Test extends AbstractContentAssistProcessorTest {
 	}
 
 	public void testBug288760_01() throws Exception {
-//		newBuilder(getBug288760TestLanguageSetup()).append(
+//		newBuilder().append(
 //				"<workflow>\n" + 
 //				"    <first class=\"java.lang.StringBuffer\" />\n" + 
 //				"    <second class=\"java.lang.StringBuffer\" />\n" + 
@@ -42,7 +45,7 @@ public class Bug288760Test extends AbstractContentAssistProcessorTest {
 //	}
 //	
 //	public void testBug288760_02() throws Exception {
-//		newBuilder(getBug288760TestLanguageSetup()).append(
+//		newBuilder().append(
 //				"<workflow>\n" + 
 //				"    <first class=\"java.lang.StringBuffer\" />\n" + 
 //				"    <second class=\"java.lang.StringBuffer\" />\n" + 
@@ -51,11 +54,15 @@ public class Bug288760Test extends AbstractContentAssistProcessorTest {
 //	}
 //	
 //	public void testBug288760_03() throws Exception {
-//		newBuilder(getBug288760TestLanguageSetup()).append(
+//		newBuilder().append(
 //				"<workflow>\n" + 
 //				"    <first class=\"java.lang.StringBuffer\" />\n" + 
 //				"    <second class=\"java.lang.StringBuffer\" />\n" + 
 //				"    <third class=\"org.eclipse.xtend.typesystem.emf.XmiReader\" />\n" + 
 //				"</workflow>").assertTextAtCursorPosition("<third", "<workflow");
+	}
+
+	public static Test suite() {
+		return AbstractContentAssistProcessorTest.suite(Bug288760Test.class);
 	}
 }

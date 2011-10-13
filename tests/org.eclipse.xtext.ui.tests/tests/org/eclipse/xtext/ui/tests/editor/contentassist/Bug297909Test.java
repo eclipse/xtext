@@ -10,6 +10,8 @@ package org.eclipse.xtext.ui.tests.editor.contentassist;
 import java.nio.charset.Charset;
 import java.util.Collections;
 
+import junit.framework.Test;
+
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -42,7 +44,8 @@ import com.google.inject.Injector;
  */
 public class Bug297909Test extends AbstractContentAssistProcessorTest {
 	
-	public ISetup getSetup() {
+	@Override
+	public ISetup doGetSetup() {
 		return new ContentAssistTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
@@ -61,7 +64,7 @@ public class Bug297909Test extends AbstractContentAssistProcessorTest {
 	}
 	
 	public void testGrammarAccessCannotResolveEClasses() {
-		Injector injector = getSetup().createInjectorAndDoEMFRegistration();
+		Injector injector = doGetSetup().createInjectorAndDoEMFRegistration();
 		ContentAssistTestLanguageGrammarAccess grammarAccess = injector.getInstance(ContentAssistTestLanguageGrammarAccess.class);
 		AbstractRule firstRule = grammarAccess.getGrammar().getRules().get(0);
 		EClassifier classifier = firstRule.getType().getClassifier();
@@ -70,7 +73,7 @@ public class Bug297909Test extends AbstractContentAssistProcessorTest {
 
 	public void testExceptionOnContentAssist() throws Exception {
 		try {
-			newBuilder(getSetup()).append("abstract rules firstRule ").assertCount(0);
+			newBuilder().append("abstract rules firstRule ").assertCount(0);
 			fail("Expected ParseException");
 		} catch(ParseException expected) {
 			assertTrue(expected.getMessage().contains("Make sure the EPackage has been registered"));
@@ -78,7 +81,7 @@ public class Bug297909Test extends AbstractContentAssistProcessorTest {
 	}
 	
 	public void testReconcileDocument() throws Exception {
-		Injector injector = getSetup().createInjectorAndDoEMFRegistration();
+		Injector injector = doGetSetup().createInjectorAndDoEMFRegistration();
 		XtextDocument document = injector.getInstance(XtextDocument.class);
 		document.setValidationJob(new Job("Job") {
 			@Override
@@ -98,5 +101,9 @@ public class Bug297909Test extends AbstractContentAssistProcessorTest {
 		} catch(ParseException expected) {
 			assertTrue(expected.getMessage().contains("Make sure the EPackage has been registered"));
 		}
+	}
+
+	public static Test suite() {
+		return AbstractContentAssistProcessorTest.suite(Bug297909Test.class);
 	}
 }

@@ -7,9 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
-import junit.extensions.TestSetup;
 import junit.framework.Test;
-import junit.framework.TestSuite;
 
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
@@ -27,43 +25,19 @@ import com.google.inject.Injector;
  */
 public class Bug360834Test extends AbstractContentAssistProcessorTest {
 
-	private static Injector injector = null;
-	
-	public static Test suite() {
-		return new TestSetup(new TestSuite(Bug360834Test.class)) {
+	@Override
+	public ISetup doGetSetup() {
+		return new Bug360834TestLanguageStandaloneSetup() {
 			@Override
-			protected void setUp() throws Exception {
-				super.setUp();
-				injector = getSetup().createInjectorAndDoEMFRegistration();
-			}
-			@Override
-			protected void tearDown() throws Exception {
-				injector = null;
-				super.tearDown();
+			public Injector createInjector() {
+				return Guice.createInjector(Modules2.mixin(new Bug360834TestLanguageRuntimeModule(), 
+						new Bug360834TestLanguageUiModule(Activator.getInstance()), new SharedStateModule()));
 			}
 		};
 	}
 	
-	public static ISetup getSetup() {
-		if (injector == null) {
-			return new Bug360834TestLanguageStandaloneSetup() {
-				@Override
-				public Injector createInjector() {
-					return Guice.createInjector(Modules2.mixin(new Bug360834TestLanguageRuntimeModule(), 
-							new Bug360834TestLanguageUiModule(Activator.getInstance()), new SharedStateModule()));
-				}
-			};
-		} else {
-			return new ISetup() {
-				public Injector createInjectorAndDoEMFRegistration() {
-					return injector;
-				}
-			};
-		}
-	}
-	
 	public void testEmptyDocument() throws Exception {
-		newBuilder(getSetup()).assertText(
+		newBuilder().assertText(
 				"alternative", "unordered");
 	}
 	
@@ -127,7 +101,11 @@ public class Bug360834Test extends AbstractContentAssistProcessorTest {
 	}
 	
 	public ContentAssistProcessorTestBuilder newBuilder(String initial) throws Exception {
-		return newBuilder(getSetup()).appendNl(initial);
+		return newBuilder().appendNl(initial);
+	}
+
+	public static Test suite() {
+		return AbstractContentAssistProcessorTest.suite(Bug360834Test.class);
 	}
 	
 }

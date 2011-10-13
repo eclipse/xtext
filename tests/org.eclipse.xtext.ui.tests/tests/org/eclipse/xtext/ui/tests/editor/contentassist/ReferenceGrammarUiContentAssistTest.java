@@ -7,7 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
-import org.apache.log4j.Logger;
+import junit.framework.Test;
+
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.junit.editor.contentassist.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
@@ -25,9 +26,8 @@ import com.google.inject.Injector;
  */
 public class ReferenceGrammarUiContentAssistTest extends AbstractContentAssistProcessorTest {
 
-	private static final Logger logger = Logger.getLogger(AbstractContentAssistProcessorTest.class);
-	
-	public ReferenceGrammarUiTestLanguageStandaloneSetup getRefGrammarSetup() {
+	@Override
+	public ReferenceGrammarUiTestLanguageStandaloneSetup doGetSetup() {
 		return new ReferenceGrammarUiTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
@@ -40,15 +40,8 @@ public class ReferenceGrammarUiContentAssistTest extends AbstractContentAssistPr
 	}
 	
 	public void testComputePrefix() throws Exception {
-		try {
-			// .... nasty evil hack
-			newBuilder(getRefGrammarSetup());
-		} catch(Throwable t) {
-			logger.error(t.getMessage(), t);
-		}
-		
 		String model = "spielplatz 1 \"SpielplatzBeschreibung\" { kind(k1 0) kind(k2 0) erwachsener(e1 0) erwachsener(e2 0) ";
-		newBuilder(getRefGrammarSetup())
+		newBuilder()
 		.append(model+" familie( dfv(").assertMatchString("(").reset()
 		.append(model+" familie( dfv").assertMatchString("dfv").reset()
 		.append(model+" familie( dfv_").assertMatchString("dfv_").reset()
@@ -57,7 +50,7 @@ public class ReferenceGrammarUiContentAssistTest extends AbstractContentAssistPr
 	}
 
 	public void testComputeCompletionProposalsCount() throws Exception {
-		newBuilder(getRefGrammarSetup()).assertCount(1)
+		newBuilder().assertCount(1)
 			.append("spielplatz ").assertCount(1)
 			.append("1 ").assertCount(2)
 			.append("\"JUNIT\" ").assertCount(1)
@@ -69,7 +62,7 @@ public class ReferenceGrammarUiContentAssistTest extends AbstractContentAssistPr
 	}
 
 	public void testComputeCompletionProposalsText() throws Exception {
-		newBuilder(getRefGrammarSetup()).assertText("spielplatz")
+		newBuilder().assertText("spielplatz")
 			.applyText().assertText("1")
 			.applyText().assertText("\"Beschreibung\"", "{")
 			.applyText().assertText("{")
@@ -94,7 +87,7 @@ public class ReferenceGrammarUiContentAssistTest extends AbstractContentAssistPr
 	}
 	
 	public void testComputeCompletionProposalsText_02() throws Exception {
-		newBuilder(getRefGrammarSetup()).
+		newBuilder().
 			append("spielplatz 1 \"Beschreibung\" { " +
 					"erwachsener ( e1 1 ) " +
 					"erwachsener (e2 0) " +
@@ -105,7 +98,7 @@ public class ReferenceGrammarUiContentAssistTest extends AbstractContentAssistPr
 	}
 	
 	public void testComputeCompletionProposalsText_03() throws Exception {
-		newBuilder(getRefGrammarSetup()).
+		newBuilder().
 			append("spielplatz 1 \"Beschreibung\" { " +
 					"erwachsener ( e1 1 ) " +
 					"erwachsener (e2 0) " +
@@ -116,13 +109,13 @@ public class ReferenceGrammarUiContentAssistTest extends AbstractContentAssistPr
 	}
 	
 	public void testBetweenContext() throws Exception {
-		newBuilder(getRefGrammarSetup())
+		newBuilder()
 		.append("spielplatz 1 \"1\" {kind")
 		.assertTextAtCursorPosition(18,"kind","erwachsener","spielzeug","familie","{", "}");
 	}
 
 	public void testComputeCompletionProposalsIgnoreCase() throws Exception {
-		ContentAssistProcessorTestBuilder builder = newBuilder(getRefGrammarSetup());
+		ContentAssistProcessorTestBuilder builder = newBuilder();
 		builder = builder.append("spielplatz 1 \"SpielplatzBeschreibung\" { kind(k1 0) kind(k2 0) erwachsener(e1 0) erwachsener(e2 0) ");
 		builder.append(" KI").assertText("kind");
 		builder.append(" ER").assertText("erwachsener");
@@ -138,10 +131,14 @@ public class ReferenceGrammarUiContentAssistTest extends AbstractContentAssistPr
 	}
 	
 	public void testDefaultRule() throws Exception {
-		ContentAssistProcessorTestBuilder builder = newBuilder(getRefGrammarSetup());
+		ContentAssistProcessorTestBuilder builder = newBuilder();
 		builder.assertText("spielplatz");
 		builder.append(" spielplatz 1 \"SpielplatzBeschreibung\" { } ")
 			.assertTextAtCursorPosition(1, "spielplatz");
+	}
+
+	public static Test suite() {
+		return AbstractContentAssistProcessorTest.suite(ReferenceGrammarUiContentAssistTest.class);
 	}
 	
 }

@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
+import junit.framework.Test;
+
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
@@ -24,7 +26,8 @@ import com.google.inject.Injector;
  */
 public class KeywordContentAssistTest extends AbstractContentAssistProcessorTest {
 
-	public ISetup getKeywordsLangSetup() {
+	@Override
+	public ISetup doGetSetup() {
 		return new KeywordsUiTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
@@ -37,8 +40,12 @@ public class KeywordContentAssistTest extends AbstractContentAssistProcessorTest
 	}
 	
 	public void testKeywordWithBackslashes() throws Exception {
-		newBuilder(getKeywordsLangSetup()).assertText(
+		newBuilder().assertText(
 				"foo\\bar", "foo\\", "\\bar", "\\",
 				"\"a\"", "'b'", "'c'", "\"d\"");
+	}
+
+	public static Test suite() {
+		return AbstractContentAssistProcessorTest.suite(KeywordContentAssistTest.class);
 	}
 }

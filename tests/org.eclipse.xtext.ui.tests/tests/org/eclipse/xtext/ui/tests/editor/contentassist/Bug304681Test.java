@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
+import junit.framework.Test;
+
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.junit.editor.contentassist.ContentAssistProcessorTestBuilder;
@@ -23,7 +25,8 @@ import com.google.inject.Injector;
  */
 public class Bug304681Test extends AbstractContentAssistProcessorTest {
 	
-	public ISetup getSetup() {
+	@Override
+	public ISetup doGetSetup() {
 		return new Bug304681TestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
@@ -37,15 +40,15 @@ public class Bug304681Test extends AbstractContentAssistProcessorTest {
 	}
 	
 	public void testEmptyModel() throws Exception {
-		newBuilder(getSetup()).assertText("1", "2");
+		super.newBuilder().assertText("1", "2");
 	}
 	
 	public void testAfterPackageDecl() throws Exception {
-		newBuilder().assertText("object", "abstract", "enabled");
+		newBuilder1().assertText("object", "abstract", "enabled");
 	}
 	
 	public void testInObject() throws Exception {
-		newBuilder().appendNl("object MyObject {").assertText(
+		newBuilder1().appendNl("object MyObject {").assertText(
 				"shortDescription", 
 				"longDescription", 
 				"serialUID",
@@ -59,7 +62,7 @@ public class Bug304681Test extends AbstractContentAssistProcessorTest {
 	}
 	
 	public void testAfterAttribute_01() throws Exception {
-		newBuilder()
+		newBuilder1()
 			.appendNl("object MyObject {")
 			.appendNl("Attribute type name;")
 			.assertText(
@@ -76,7 +79,7 @@ public class Bug304681Test extends AbstractContentAssistProcessorTest {
 	}
 	
 	public void testAfterAttribute_02() throws Exception {
-		newBuilder()
+		newBuilder1()
 			.appendNl("object MyObject {")
 			.appendNl("before Attribute type name;")
 			.assertText(
@@ -86,7 +89,7 @@ public class Bug304681Test extends AbstractContentAssistProcessorTest {
 	}
 	
 	public void testAfterAttribute_03() throws Exception {
-		newBuilder()
+		newBuilder1()
 			.appendNl("object MyObject {")
 			.appendNl("optionalLoop Attribute type name;")
 			.assertText(
@@ -102,7 +105,7 @@ public class Bug304681Test extends AbstractContentAssistProcessorTest {
 	}
 	
 	public void testAfterAttribute_04() throws Exception {
-		newBuilder()
+		newBuilder1()
 			.appendNl("object MyObject {")
 			.appendNl("cloneable;")
 			.appendNl("optionalLoop Attribute type name;")
@@ -118,7 +121,7 @@ public class Bug304681Test extends AbstractContentAssistProcessorTest {
 	}
 	
 	public void testAfterAttribute_05() throws Exception {
-		newBuilder()
+		newBuilder1()
 			.appendNl("object MyObject {")
 			.appendNl("cloneable;")
 			.appendNl("optionalLoop")
@@ -135,7 +138,7 @@ public class Bug304681Test extends AbstractContentAssistProcessorTest {
 	}
 	
 	public void testAfterAttribute_06() throws Exception {
-		newBuilder()
+		newBuilder1()
 			.appendNl("object MyObject {")
 			.appendNl("cloneable;")
 			.appendNl("mandatoryLoop")
@@ -145,7 +148,7 @@ public class Bug304681Test extends AbstractContentAssistProcessorTest {
 	}
 	
 	public void testAfterAttribute_07() throws Exception {
-		newBuilder()
+		newBuilder1()
 			.appendNl("object MyObject {")
 			.appendNl("cloneable;")
 			.appendNl("mandatoryLoop Attribute type name;")
@@ -162,7 +165,7 @@ public class Bug304681Test extends AbstractContentAssistProcessorTest {
 	}
 	
 	public void testAfterAttribute_08() throws Exception {
-		newBuilder()
+		newBuilder1()
 			.appendNl("object MyObject {")
 			.appendNl("Attribute type name;")
 			.appendNl("Attribute type name;")
@@ -180,7 +183,7 @@ public class Bug304681Test extends AbstractContentAssistProcessorTest {
 	}
 	
 	public void testAfterAttribute_09() throws Exception {
-		newBuilder()
+		newBuilder1()
 		.appendNl("object MyObject {")
 		.appendNl("before Attribute type name;")
 		.appendNl("Attribute type name;")
@@ -191,7 +194,7 @@ public class Bug304681Test extends AbstractContentAssistProcessorTest {
 	}
 	
 	public void testAfterAttribute_10() throws Exception {
-		newBuilder()
+		newBuilder1()
 		.appendNl("object MyObject {")
 		.appendNl("optionalLoop Attribute type name;")
 		.appendNl("Attribute type name;")
@@ -208,7 +211,7 @@ public class Bug304681Test extends AbstractContentAssistProcessorTest {
 	}
 	
 	public void testAfterAttribute_11() throws Exception {
-		newBuilder()
+		newBuilder1()
 		.appendNl("object MyObject {")
 		.appendNl("cloneable;")
 		.appendNl("optionalLoop Attribute type name;")
@@ -225,7 +228,7 @@ public class Bug304681Test extends AbstractContentAssistProcessorTest {
 	}
 	
 	public void testAfterAttribute_12() throws Exception {
-		newBuilder()
+		newBuilder1()
 		.appendNl("object MyObject {")
 		.appendNl("cloneable;")
 		.appendNl("mandatoryLoop Attribute type name;")
@@ -313,15 +316,18 @@ public class Bug304681Test extends AbstractContentAssistProcessorTest {
 				"}");
 	}
 	
-	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
-		ContentAssistProcessorTestBuilder result = newBuilder(getSetup());
+	protected ContentAssistProcessorTestBuilder newBuilder1() throws Exception {
+		ContentAssistProcessorTestBuilder result = newBuilder();
 		return result.appendNl("1 package myPack;");
 	}
 	
 	protected ContentAssistProcessorTestBuilder newBuilder2() throws Exception {
-		ContentAssistProcessorTestBuilder result = newBuilder(getSetup());
+		ContentAssistProcessorTestBuilder result = newBuilder();
 		return result.appendNl("2 package myPack;");
 	}
-	
+
+	public static Test suite() {
+		return AbstractContentAssistProcessorTest.suite(Bug304681Test.class);
+	}
 	
 }

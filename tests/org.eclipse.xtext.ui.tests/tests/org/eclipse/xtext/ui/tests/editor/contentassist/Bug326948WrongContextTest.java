@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
+import junit.framework.Test;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Keyword;
@@ -14,6 +16,7 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.ChainedE
 import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.ValueLiteral;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -44,20 +47,24 @@ public class Bug326948WrongContextTest extends AbstractBug326948Test {
 	}
 	
 	public void testCurrentModel_01() throws Exception {
-		newBuilder(getSetup())
+		newBuilder()
 			.append("function foo() { \"\".")
 			.computeCompletionProposals();
 	}
 	
 	public void testCurrentModel_02() throws Exception {
-		newBuilder(getSetup())
+		newBuilder()
 			.append("function foo() { \"\". ;")
 			.computeCompletionProposals(" ;");
 	}
 	
 	public void testCurrentModel_03() throws Exception {
-		newBuilder(getSetup())
+		newBuilder()
 			.append("function foo() { \"\". ; }")
 			.computeCompletionProposals(" ;");
+	}
+
+	public static Test suite() {
+		return AbstractContentAssistProcessorTest.suite(Bug326948WrongContextTest.class);
 	}
 }

@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.editor.contentassist;
 
+import junit.framework.Test;
+
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.ISetup;
@@ -29,7 +31,8 @@ import com.google.inject.Injector;
  */
 public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	
-	public ISetup getXtextSetup() {
+	@Override
+	public ISetup doGetSetup() {
 		return new XtextStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
@@ -47,7 +50,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
      * https://bugs.eclipse.org/bugs/show_bug.cgi?id=269680
      */
     public void testCompletionOnDatatypeReference_01() throws Exception {
-        newBuilder(getXtextSetup())
+        newBuilder()
 	        .appendNl("grammar foo with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate meta \"url\"")
 	        .appendNl("Rule: name=ID;")
@@ -58,7 +61,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
      * https://bugs.eclipse.org/bugs/show_bug.cgi?id=269680
      */
     public void testCompletionOnDatatypeReference_02() throws Exception {
-        newBuilder(getXtextSetup())
+        newBuilder()
 	        .appendNl("grammar foo with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate meta \"url\"")
 	        .appendNl("Rule: name=ID;")
@@ -66,7 +69,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
     
     public void testCompletionOnDatatypeReference_03() throws Exception {
-        newBuilder(getXtextSetup())
+        newBuilder()
 	        .appendNl("grammar foo with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate meta \"url\"")
 	        .appendNl("Rule: name=ID;")
@@ -74,7 +77,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
     
     public void testCompletionOnSyntaxError_01() throws Exception {
-        newBuilder(getXtextSetup())
+        newBuilder()
 	        .appendNl("grammar foo with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate foo 'bar'")
 	        .appendNl("grammarA: child=Rule;")
@@ -83,7 +86,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
     
     public void testCompletionOnSyntaxError_02() throws Exception {
-        newBuilder(getXtextSetup())
+        newBuilder()
 	        .appendNl("grammar foo with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate foo 'bar'")
 	        .appendNl("grammarA: child=Rule;")
@@ -92,7 +95,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
     
     public void testCompletionOnSyntaxError_03() throws Exception {
-        newBuilder(getXtextSetup())
+        newBuilder()
 	        .appendNl("grammar foo with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate foo 'bar'")
 	        .appendNl("grammarA: child=Rule;")
@@ -101,39 +104,39 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
 
     public void testCompleteGrammarName_01() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
         .append("grammar ")
         .assertCount(0);
     }
     
     public void testCompleteAfterGrammarName_01() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
         .append("grammar org.foo.bar")
         .assertCount(0);
     }
     
     public void testCompleteAfterGrammarName_02() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
         .append("grammar org.foo.bar ")
         .assertText("with", "Name", "enum", "terminal", "hidden", "generate", "import");
     }
     
     public void testCompleteAfterGenerateName_01() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
         .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
         .append("generate name ")
         .assertCount(EPackage.Registry.INSTANCE.size());
     }
     
     public void testCompleteAfterGenerateName_02() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
         .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
         .append("generate name \"")
         .assertCount(EPackage.Registry.INSTANCE.size());
     }
     
     public void testCompleteCrossReference_01() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
         .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
         .appendNl("generate metamodelA 'http://foo.bar/A' as alias")
         .appendNl("generate metamodelB 'http://foo.bar/B'")
@@ -143,7 +146,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
     
     public void testCompleteCrossReference_02() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
         .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
         .appendNl("generate metamodelA 'http://foo.bar/A' as alias")
         .appendNl("generate metamodelB 'http://foo.bar/B'")
@@ -158,7 +161,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
     
     public void testCompleteCrossReference_03() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
         .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
         .appendNl("generate metamodelA 'http://foo.bar/A' as alias")
         .appendNl("generate metamodelB 'http://foo.bar/B'")
@@ -168,7 +171,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
     
     public void testCompleteCrossReference_04() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
         .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
         .appendNl("generate metamodelA 'http://foo.bar/A' as alias")
         .appendNl("generate metamodelB 'http://foo.bar/B'")
@@ -194,7 +197,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
     
     public void testCompleteCrossReference_05() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
         .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
         .appendNl("generate metamodelA 'http://foo.bar/A' as alias")
         .appendNl("generate metamodelB 'http://foo.bar/B'")
@@ -217,7 +220,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
     
     public void testEnumCompletion_01() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
     		.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate myDsl1 \"http://www.xtext.org/example/MyDsl1\"")
 	        .appendNl("import 'classpath:/org/eclipse/xtext/xtext/ui/editor/contentassist/enumsUi.ecore'")
@@ -304,7 +307,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
     
     public void testCompleteFeatureName_01() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
 	        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate metamodelA 'http://foo.bar/A'")
 	        .appendNl("RuleA: name=ID;")
@@ -328,7 +331,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
     
     public void testCompleteFeatureName_02() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
 	        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate metamodelA 'http://foo.bar/A'")
 	        .appendNl("RuleA: name=ID ")
@@ -356,7 +359,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
     
     public void testCompleteFeatureName_03() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
 	        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate metamodelA 'http://foo.bar/A'")
 	        .appendNl("RuleA: name=ID somethingElse=ID;")
@@ -381,7 +384,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
     
     public void testCompleteFeatureName_04() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
 	        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate metamodelA 'http://foo.bar/A'")
 	        .appendNl("RuleA: name=ID;")
@@ -404,7 +407,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
     
     public void testCompleteFeatureName_05() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
 	        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate metamodelA 'http://foo.bar/A'")
 	        .appendNl("RuleA: name=ID;")
@@ -426,7 +429,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
     
     public void testCompleteFeatureName_06() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
 	        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate metamodelA 'http://foo.bar/A'")
 	        .append("RuleA: name=ID =>")
@@ -447,7 +450,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
     
     public void testCompleteFeatureName_07() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
 	        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate metamodelA 'http://foo.bar/A'")
 	        .appendNl("RuleA: name=ID => ")
@@ -467,7 +470,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
     
     public void testCompleteFeatureName_08() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
 	        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate metamodelA 'http://foo.bar/A'")
 	        .appendNl("RuleA: name=ID somethingElse=ID;")
@@ -491,7 +494,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
     
     public void testCompleteFeatureName_09() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
 	        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate metamodelA 'http://foo.bar/A'")
 	        .appendNl("RuleA: name=ID somethingElse=ID;")
@@ -514,7 +517,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
     
     public void testCompleteFeatureName_10() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
 	        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate metamodelA 'http://foo.bar/A'")
 	        .appendNl("RuleA: name=ID somethingElse=ID;")
@@ -524,7 +527,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
     
     public void testCompleteFeatureName_11() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
 	        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate metamodelA 'http://foo.bar/A'")
 	        .appendNl("RuleA: name=ID;")
@@ -547,7 +550,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
     
     public void testCompleteFeatureName_12() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
 	        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate metamodelA 'http://foo.bar/A'")
 	        .appendNl("RuleA: name=ID;")
@@ -570,7 +573,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
     
     public void testAliasCompletion_01() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
 	        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate metamodelA 'http://foo.bar/A' as ")
 	        .assertText(
@@ -579,7 +582,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
     
     public void testAliasCompletion_02() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
     		.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate myDsl1 \"http://www.xtext.org/example/MyDsl1\"")
 	        .appendNl("import 'classpath:/org/eclipse/xtext/xtext/ui/editor/contentassist/enumsUi.ecore' as")
@@ -671,7 +674,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
     
     private ContentAssistProcessorTestBuilder doTestCompleteTypeRefSetup() throws Exception {
-		return newBuilder(getXtextSetup())
+		return newBuilder()
 			.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate myDsl1 \"http://www.xtext.org/example/MyDsl1\"")
 	        .appendNl("Model :")
@@ -684,7 +687,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	}
     
     private ContentAssistProcessorTestBuilder doTestCompleteTypeRefWithAliasSetup() throws Exception {
-		return newBuilder(getXtextSetup())
+		return newBuilder()
 	        .appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate myDsl1 \"http://www.xtext.org/example/MyDsl1\" as myAlias")
 	        .appendNl("Model returns myAlias::Model:")
@@ -697,12 +700,12 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	}
     
     public void testCompleteRuleForReferencedType() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
 			.appendNl("grammar Foo with org.eclipse.xtext.common.Terminals")
 			.appendNl("import \"http://www.eclipse.org/emf/2002/Ecore\"") 
 			.append("EPac")
 			.assertText("EPackage: \n;\n", ":");
-    	newBuilder(getXtextSetup())
+    	newBuilder()
     		.appendNl("grammar Foo with org.eclipse.xtext.common.Terminals")
     		.appendNl("import \"http://www.eclipse.org/emf/2002/Ecore\"") 
     		.appendNl("FooBar returns EPackage: 'bar';") 
@@ -711,12 +714,12 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
 
     public void testCompleteRuleForReferencedTypeWithAlias() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
     		.appendNl("grammar Foo with org.eclipse.xtext.common.Terminals")
     		.appendNl("import \"http://www.eclipse.org/emf/2002/Ecore\" as ecore") 
     		.append("EPac")
     		.assertText("EPackage returns ecore::EPackage: \n;\n", ":");
-    	newBuilder(getXtextSetup())
+    	newBuilder()
     		.appendNl("grammar Foo with org.eclipse.xtext.common.Terminals")
     		.appendNl("import \"http://www.eclipse.org/emf/2002/Ecore\" as ecore") 
     		.appendNl("FooBar returns ecore::EPackage : 'bar';") 
@@ -725,7 +728,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
     
     public void testBug317280_01() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
     		.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
 	        .appendNl("import 'classpath:/org/eclipse/xtext/Xtext.ecore'")
 	        .append("En")
@@ -735,7 +738,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
     
     public void testBug317280_02() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
     		.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
 	        .appendNl("import 'classpath:/org/eclipse/xtext/Xtext.ecore' as xtext")
 	        .append("En")
@@ -746,21 +749,21 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
 
     public void testOverrideRule_01() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
     		.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
 	        .append("ST")
 	        .assertText("terminal STRING:\n\t\n;\n", ":");
     }
     
     public void testOverrideRule_02() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
     		.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
 	        .append("IN")
 	        .assertText("terminal INT returns ecore::EInt:\n\t\n;\n", ":");
     }
     
     public void testOverrideRule_03() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
     		.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
     		.appendNl("import \"http://www.eclipse.org/emf/2002/Ecore\" as ec")
 	        .append("IN")
@@ -768,7 +771,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
     
     public void testOverrideRule_04() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
     		.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
     		.appendNl("import \"http://www.eclipse.org/emf/2002/Ecore\"")
 	        .append("IN")
@@ -776,14 +779,14 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
     
     public void testOverrideRule_05() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
 	    	.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.xtext.ui.editor.contentassist.GrammarWithTerminalFragment")
 	    	.append("ESC")
 	    	.assertText("terminal fragment ESCAPED_CHAR:\n\t\n;\n", ":");
     }
     
     public void testCompleteHiddenTokens_01() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
 	    	.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals hidden()")
 	    	.appendNl("Model: name=ID;")
 	    	.appendNl("DataType: ID;")
@@ -803,7 +806,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
     
     public void testCompleteHiddenTokens_02() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
 	    	.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
 	    	.appendNl("Model hidden(): name=ID;")
 	    	.appendNl("DataType: ID;")
@@ -823,7 +826,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
     
     public void testCompleteRuleCall_01() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
 	    	.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
 	    	.appendNl("generate test 'http://test'")
 	    	.appendNl("Model: name=ID;")
@@ -851,7 +854,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     }
     
     public void testCompleteRuleCall_02() throws Exception {
-    	newBuilder(getXtextSetup())
+    	newBuilder()
 	    	.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
 	    	.appendNl("generate test 'http://test'")
 	    	.appendNl("Model: name=STRING;")
@@ -876,5 +879,9 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     				"Fragment",
     				"EOF");
     }
+
+    public static Test suite() {
+		return AbstractContentAssistProcessorTest.suite(XtextContentAssistTest.class);
+	}
     
 }

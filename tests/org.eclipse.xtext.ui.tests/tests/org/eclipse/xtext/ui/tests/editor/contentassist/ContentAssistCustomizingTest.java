@@ -10,6 +10,8 @@ package org.eclipse.xtext.ui.tests.editor.contentassist;
 import java.util.Collection;
 import java.util.Set;
 
+import junit.framework.Test;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.templates.ContextTypeRegistry;
 import org.eclipse.jface.text.templates.TemplateContextType;
@@ -141,7 +143,8 @@ public class ContentAssistCustomizingTest extends AbstractContentAssistProcessor
 	private Set<ParserRule> parserRules;
 	private Set<String> keywords;
 	
-	public ISetup getSetup() {
+	@Override
+	public ISetup doGetSetup() {
 		return new ContentAssistCustomizingTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
@@ -387,9 +390,5 @@ public class ContentAssistCustomizingTest extends AbstractContentAssistProcessor
 		assertTrue(parserRules.contains(getGrammarAccess().getTypeRule()));
 		assertTrue(parserRules.contains(getGrammarAccess().getFQNRule()));
 	}
-	
-	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
-		return super.newBuilder(getSetup());
-	}
-	
+
 }

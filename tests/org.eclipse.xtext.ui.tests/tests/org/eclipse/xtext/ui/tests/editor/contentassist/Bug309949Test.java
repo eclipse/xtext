@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
+import junit.framework.Test;
+
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.junit.editor.contentassist.ContentAssistProcessorTestBuilder;
@@ -23,7 +25,8 @@ import com.google.inject.Injector;
  */
 public class Bug309949Test extends AbstractContentAssistProcessorTest {
 
-	public ISetup getSetup() {
+	@Override
+	public ISetup doGetSetup() {
 		return new Bug309949TestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
@@ -807,9 +810,9 @@ public class Bug309949Test extends AbstractContentAssistProcessorTest {
 	protected ContentAssistProcessorTestBuilder newBuilder_5_Mandatory() throws Exception {
 		return newBuilder().appendNl("#5+ {");
 	}
-	
-	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
-		return newBuilder(getSetup());
+
+	public static Test suite() {
+		return AbstractContentAssistProcessorTest.suite(Bug309949Test.class);
 	}
 	
 }

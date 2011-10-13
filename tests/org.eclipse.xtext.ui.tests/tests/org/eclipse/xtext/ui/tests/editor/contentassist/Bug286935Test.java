@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
+import junit.framework.Test;
+
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
@@ -22,7 +24,8 @@ import com.google.inject.Injector;
  */
 public class Bug286935Test extends AbstractContentAssistProcessorTest {
 
-	public ISetup getBug286935TestLanguageSetup() {
+	@Override
+	public ISetup doGetSetup() {
 		return new Bug286935TestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
@@ -32,17 +35,21 @@ public class Bug286935Test extends AbstractContentAssistProcessorTest {
 	}
 	
 	public void testBug286935_01() throws Exception {
-    	newBuilder(getBug286935TestLanguageSetup())
+    	newBuilder()
     		.append("init cond")
     		.assertText("cond", "\"Label\"");
     }
     
     public void testBug286935_02() throws Exception {
-    	newBuilder(getBug286935TestLanguageSetup())
+    	newBuilder()
     		.append("init cond ")
     		.assertText("state", 
     				"stateName", 
     				"\"Label\"", 
     				"final");
     }
+
+    public static Test suite() {
+		return AbstractContentAssistProcessorTest.suite(Bug286935Test.class);
+	}
 }

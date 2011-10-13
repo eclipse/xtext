@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
+import junit.framework.Test;
+
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
@@ -22,7 +24,8 @@ import com.google.inject.Injector;
  */
 public class Bug281198Test extends AbstractContentAssistProcessorTest {
 
-	public ISetup getDatatypeRuleTestLanguageSetup() {
+	@Override
+	public ISetup doGetSetup() {
 		return new DatatypeRuleTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
@@ -33,7 +36,11 @@ public class Bug281198Test extends AbstractContentAssistProcessorTest {
 	}
 
 	public void testBug281198_01() throws Exception {
-		newBuilder(getDatatypeRuleTestLanguageSetup()).append(
+		newBuilder().append(
 				"Types\n" + "Type StringType;\n" + "Composite error base ").assertText("StringType", "error");
+	}
+
+	public static Test suite() {
+		return AbstractContentAssistProcessorTest.suite(Bug281198Test.class);
 	}
 }

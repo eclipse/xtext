@@ -23,7 +23,8 @@ import com.google.inject.Injector;
  */
 public abstract class AbstractBug348427Test extends AbstractContentAssistProcessorTest {
 
-	public ISetup getSetup() {
+	@Override
+	public ISetup doGetSetup() {
 		return new Bug348427TestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
@@ -34,7 +35,7 @@ public abstract class AbstractBug348427Test extends AbstractContentAssistProcess
 	}
 	
 	public void testEmptyDocument() throws Exception {
-		newBuilder(getSetup()).assertText(
+		super.newBuilder().assertText(
 				"1.1", "1.2", "1.3", "1.4",  
 				"2.1", "2.2", "2.3", "2.4", "2.5", "2.6", "2.7", "2.8");
 	}
@@ -101,8 +102,9 @@ public abstract class AbstractBug348427Test extends AbstractContentAssistProcess
 	
 	protected abstract String getScenario();
 	
+	@Override
 	public ContentAssistProcessorTestBuilder newBuilder() throws Exception {
-		return newBuilder(getSetup()).appendNl(getScenario());
+		return super.newBuilder().appendNl(getScenario());
 	}
 	
 }
