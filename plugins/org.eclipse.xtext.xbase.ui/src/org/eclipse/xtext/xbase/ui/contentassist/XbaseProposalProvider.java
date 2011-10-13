@@ -21,6 +21,7 @@ import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
@@ -113,8 +114,16 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		
 		public boolean apply(IEObjectDescription input) {
 			if (input instanceof IValidatedEObjectDescription) {
-				if (!((IValidatedEObjectDescription) input).isValid())
+				final IValidatedEObjectDescription desc = (IValidatedEObjectDescription) input;
+				if (!desc.isValid())
 					return false;
+				JvmIdentifiableElement element = desc.getEObjectOrProxy();
+				if (element instanceof JvmOperation) {
+					if ("java.lang.Object.finalize()".equals(element.getIdentifier()) ||
+						"java.lang.Object.clone()".equals(element.getIdentifier())) {
+						return false;
+					}
+				}
 				// filter operator method names from CA
 				return operatorMapping.getOperator(input.getName()) == null;
 			}
