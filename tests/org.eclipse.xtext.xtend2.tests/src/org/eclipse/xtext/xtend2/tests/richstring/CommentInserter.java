@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.tests.richstring;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,9 +19,14 @@ import com.google.common.collect.Lists;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class CommentInserter {
+	
+	private static boolean DISABLED = true;
+	
 	private Pattern pattern = Pattern.compile("('''|\u00BB)([^\u00AB]*)(\u00AB|''')");
 	
 	public List<String> getRichStringWithComments(String richString) {
+		if (DISABLED)
+			return Collections.singletonList(richString);
 		List<String> result = Lists.newArrayList();
 		Matcher matcher = pattern.matcher(richString);
 		while(matcher.find()) {
