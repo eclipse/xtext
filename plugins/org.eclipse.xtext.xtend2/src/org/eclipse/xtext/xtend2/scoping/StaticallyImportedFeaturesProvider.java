@@ -15,6 +15,7 @@ import java.util.Map;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -93,6 +94,8 @@ public class StaticallyImportedFeaturesProvider extends AbstractStaticMethodsFea
 											}
 										}
 									}
+								} else if (feature instanceof JvmField) {
+									result.add(feature);
 								}
 							}
 						}

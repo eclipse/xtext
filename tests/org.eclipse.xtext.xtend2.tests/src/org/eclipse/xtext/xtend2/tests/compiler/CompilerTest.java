@@ -11,6 +11,7 @@ import static com.google.common.collect.Lists.*;
 import static java.util.Collections.*;
 
 import java.io.IOException;
+import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -55,6 +56,35 @@ import com.google.inject.Injector;
  * @author Sebastian Zarnekow
  */
 public class CompilerTest extends AbstractXtend2TestCase {
+	
+	public void testReferenceStaticallyImportedFields() throws Exception {
+		String code = 
+				"import java.lang.annotation.RetentionPolicy\n" +
+				"import static java.lang.annotation.RetentionPolicy.*\n" +
+				"class Z {\n" +
+				"	def RetentionPolicy test() {\n" +
+				"       RUNTIME\n" + 
+				"	}\n" +
+				"}\n";
+		String javaCode = compileToJavaCode(code);
+		Class<?> class1 = javaCompiler.compileToClass("Z", javaCode);
+		Object object = class1.newInstance();
+		assertEquals(RetentionPolicy.RUNTIME, class1.getDeclaredMethod("test").invoke(object));
+	}
+	
+	public void testReferenceStaticallyImportedFields_1() throws Exception {
+		String code = 
+				"import static java.util.Collections.*\n" +
+				"class Z {\n" +
+				"	def Object test() {\n" +
+				"       EMPTY_SET\n" + 
+				"	}\n" +
+				"}\n";
+		String javaCode = compileToJavaCode(code);
+		Class<?> class1 = javaCompiler.compileToClass("Z", javaCode);
+		Object object = class1.newInstance();
+		assertEquals(Collections.EMPTY_SET, class1.getDeclaredMethod("test").invoke(object));
+	}
 	
 	public void testSimpleExtensionMethodCall() throws Exception {
 		String code = 
