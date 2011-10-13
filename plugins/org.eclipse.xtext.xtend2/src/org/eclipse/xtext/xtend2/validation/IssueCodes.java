@@ -44,5 +44,10 @@ public final class IssueCodes {
 	public static final String OVERRIDDEN_FINAL = ISSUE_CODE_PREFIX + "overridden_final";
 	public static final String OVERRIDE_REDUCES_VISIBILITY = ISSUE_CODE_PREFIX + "override_reduces_visibility";
 	public static final String CYCLIC_INHERITANCE = ISSUE_CODE_PREFIX + "cyclic_inheritance";
+	
+	public static final String IMPORT_WILDCARD_DEPRECATED = ISSUE_CODE_PREFIX + "import_wildcard_deprecated";
+	public static final String IMPORT_DUPLICATE = ISSUE_CODE_PREFIX + "import_duplicate";
+	public static final String IMPORT_UNUSED = ISSUE_CODE_PREFIX + "import_unsued";
+	
 
 }

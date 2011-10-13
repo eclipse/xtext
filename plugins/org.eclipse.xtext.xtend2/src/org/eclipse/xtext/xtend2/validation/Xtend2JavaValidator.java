@@ -24,10 +24,14 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EStructuralFeature.Setting;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
@@ -47,6 +51,8 @@ import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.validation.Check;
@@ -74,7 +80,9 @@ import org.eclipse.xtext.xtend2.xtend2.RichStringIf;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendField;
+import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
+import org.eclipse.xtext.xtend2.xtend2.XtendImport;
 import org.eclipse.xtext.xtend2.xtend2.XtendParameter;
 
 import com.google.common.base.Function;
@@ -692,11 +700,13 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 					if (commonVisibility == null) {
 						for (JvmOperation jvmOperation : collection) {
 							XtendFunction function = associations.getXtendFunction(jvmOperation);
-							EStructuralFeature feature = (function.eIsSet(XTEND_FUNCTION__VISIBILITY)) ? XTEND_FUNCTION__VISIBILITY
-									: XTEND_FUNCTION__DISPATCH;
-							warning("Dispatch functions should have the same visibility.", function, feature,
-									ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
-									DISPATCH_FUNCTIONS_WITH_DIFFERENT_VISIBILITY);
+							if (function != null) {
+								EStructuralFeature feature = (function.eIsSet(XTEND_FUNCTION__VISIBILITY)) ? XTEND_FUNCTION__VISIBILITY
+										: XTEND_FUNCTION__DISPATCH;
+								warning("Dispatch functions should have the same visibility.", function, feature,
+										ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+										DISPATCH_FUNCTIONS_WITH_DIFFERENT_VISIBILITY);
+							}
 						}
 					}
 					for (final List<JvmType> paramTypes : signatures.keySet()) {
@@ -785,6 +795,46 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 		}
 		for (EObject child : expr.eContents()) {
 			collectReturnExpressions(child, found);
+		}
+	}
+	
+	@Check
+	public void checkImports(XtendFile file) {
+		final Map<JvmType, XtendImport> imports = newHashMap();
+		final Map<JvmType, XtendImport> staticImports = newHashMap();
+		for (XtendImport imp : file.getImports()) {
+			if (imp.getImportedNamespace() != null) {
+				warning("The use of wildcard imports is deprecated.", imp, null, IssueCodes.IMPORT_WILDCARD_DEPRECATED);
+			} else {
+				JvmType importedType = imp.getImportedType();
+				if (importedType !=null && ! importedType.eIsProxy()) {
+					Map<JvmType, XtendImport> map = imports;
+					if (imp.isStatic())
+						map = staticImports;
+					if (map.containsKey(importedType)) {
+						warning("Duplicate import of '"+importedType.getSimpleName()+"'.", imp, null, IssueCodes.IMPORT_DUPLICATE);
+					} else {
+						map.put(importedType, imp);
+					}
+				}
+			}
+		}
+		
+		Map<EObject, Collection<Setting>> crossreferences = EcoreUtil.CrossReferencer.find(singleton(file.getXtendClass()));
+		for (Entry<EObject, Collection<Setting>> entry : crossreferences.entrySet()) {
+			Collection<Setting> value = entry.getValue();
+			for (Setting setting : value) {
+				final EClassifier eType = setting.getEStructuralFeature().getEType();
+				if (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf((EClass)eType)) {
+					List<INode> nodes = NodeModelUtils.findNodesForFeature(setting.getEObject(), setting.getEStructuralFeature());
+					if (nodes.size()==1 && nodes.get(0).getText().indexOf('.') == -1) {
+						imports.remove(setting.get(true));
+					}
+				}
+			}
+		}
+		for (XtendImport imp : imports.values()) {
+			warning("The import '"+imp.getImportedTypeName()+"' is never used.", imp, null, IssueCodes.IMPORT_UNUSED);
 		}
 	}
 }

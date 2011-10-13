@@ -18,6 +18,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.swing.plaf.synth.Region;
+import javax.swing.text.BadLocationException;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -37,7 +40,10 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.TextRegion;
+import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
@@ -57,7 +63,7 @@ public class OrganizeImports {
 
 	@Inject
 	private Provider<ReferenceAcceptor> referenceAcceptorProvider;
-
+	
 	public String getOrganizedImportSection(XtextResource state) {
 		ReferenceAcceptor acceptor = referenceAcceptorProvider.get();
 		final XtendFile xtendFile = getXtendFile(state);
