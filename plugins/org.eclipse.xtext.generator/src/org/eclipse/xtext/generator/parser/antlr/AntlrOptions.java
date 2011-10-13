@@ -42,6 +42,12 @@ public class AntlrOptions {
 	public void setK(int k) {
 		this.k = k;
 	}
+	/**
+	 * @since 2.1
+	 */
+	public void setKAsString(String k) {
+		this.k = Integer.parseInt(k);
+	}
 	public void setBacktrackLexer(boolean backtrackLexer) {
 		this.backtrackLexer = backtrackLexer;
 	}
