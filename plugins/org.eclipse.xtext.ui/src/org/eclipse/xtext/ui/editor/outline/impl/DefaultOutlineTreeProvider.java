@@ -103,16 +103,38 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 	protected void createNode(IOutlineNode parent, EObject modelElement) {
 		createNodeDispatcher.invoke(parent, modelElement);
 	}
+	
+	/**
+	 * @since 2.1
+	 */
+	protected void _createNode(DocumentRootNode parentNode, EObject modelElement) {
+		Object text = textDispatcher.invoke(modelElement);
+		if(text == null) {
+			text = modelElement.eResource().getURI().trimFileExtension().lastSegment();
+			createEObjectNode(parentNode, modelElement, imageDispatcher.invoke(modelElement), text, isLeafDispatcher.invoke(modelElement));
+		}
+	}
 
 	protected void _createNode(IOutlineNode parentNode, EObject modelElement) {
-		createEObjectNode(parentNode, modelElement);
+		Object text = textDispatcher.invoke(modelElement);
+		boolean isLeaf = isLeafDispatcher.invoke(modelElement);
+		if(text == null && isLeaf)
+			return;
+		Image image = imageDispatcher.invoke(modelElement);
+		createEObjectNode(parentNode, modelElement, image, text, isLeaf);
 	}
 
 	protected EObjectNode createEObjectNode(IOutlineNode parentNode, EObject modelElement) {
-		Object text = textDispatcher.invoke(modelElement);
-		Image image = imageDispatcher.invoke(modelElement);
-		EObjectNode eObjectNode = new EObjectNode(modelElement, parentNode, image, text,
-				isLeafDispatcher.invoke(modelElement));
+		return createEObjectNode(parentNode, modelElement, imageDispatcher.invoke(modelElement),
+				textDispatcher.invoke(modelElement), isLeafDispatcher.invoke(modelElement));
+	}
+
+	/**
+	 * @since 2.1
+	 */
+	protected EObjectNode createEObjectNode(IOutlineNode parentNode, EObject modelElement, Image image, Object text,
+			boolean isLeaf) {
+		EObjectNode eObjectNode = new EObjectNode(modelElement, parentNode, image, text, isLeaf);
 		ICompositeNode parserNode = NodeModelUtils.getNode(modelElement);
 		if (parserNode != null)
 			eObjectNode.setTextRegion(new TextRegion(parserNode.getOffset(), parserNode.getLength()));
