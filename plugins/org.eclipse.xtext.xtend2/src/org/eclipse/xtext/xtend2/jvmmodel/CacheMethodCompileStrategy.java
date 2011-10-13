@@ -68,7 +68,7 @@ public class CacheMethodCompileStrategy implements Functions.Function1<ImportMan
 				containerType);
 		String cacheVarName = cacheField.getSimpleName();
 		String cacheKeyVarName = appendable.declareVariable("CacheKey", "_cacheKey");
-		appendable.append("\nfinal ");
+		appendable.append("final ");
 		typeReferenceSerializer.serialize(listType, containerType, appendable);
 		appendable.append(cacheKeyVarName).append(" = ");
 		typeReferenceSerializer.serialize(collectonLiterals, containerType, appendable);
