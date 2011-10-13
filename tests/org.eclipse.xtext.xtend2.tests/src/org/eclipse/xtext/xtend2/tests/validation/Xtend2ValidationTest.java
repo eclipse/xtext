@@ -392,4 +392,29 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 		final XtendFunction function = function("def foo() " + body);
 		helper.assertNoError(function, INCOMPATIBLE_TYPES);
 	}
+	
+	public void testImportUnused() throws Exception {
+		XtendClass clazz = clazz("import java.util.List class X {}");
+		helper.assertWarning(clazz.eContainer(), Xtend2Package.Literals.XTEND_IMPORT, IMPORT_UNUSED);
+	}
+	
+	public void testImportUnused_1() throws Exception {
+		XtendClass clazz = clazz("import java.util.List class X { private java.util.List sb }");
+		helper.assertWarning(clazz.eContainer(), Xtend2Package.Literals.XTEND_IMPORT, IMPORT_UNUSED);
+	}
+	
+	public void testImportUnused_2() throws Exception {
+		XtendClass clazz = clazz("import java.util.List class X { private List sb }");
+		helper.assertNoIssues(clazz.eContainer());
+	}
+	
+	public void testImportDuplicate() throws Exception {
+		XtendClass clazz = clazz("import java.util.List import java.util.List class X { private List sb }");
+		helper.assertWarning(clazz.eContainer(), Xtend2Package.Literals.XTEND_IMPORT, IMPORT_DUPLICATE);
+	}
+	
+	public void testImportWildcard() throws Exception {
+		XtendClass clazz = clazz("import java.util.* import java.util.List class X { private List sb }");
+		helper.assertWarning(clazz.eContainer(), Xtend2Package.Literals.XTEND_IMPORT, IMPORT_WILDCARD_DEPRECATED);
+	}
 }

@@ -40,6 +40,7 @@ import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.ui.editor.quickfix.ReplaceModification;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xtend2.ui.edit.OrganizeImportsHandler;
 import org.eclipse.xtext.xtend2.validation.IssueCodes;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendImport;
@@ -56,6 +57,9 @@ public class Xtend2QuickfixProvider extends DefaultQuickfixProvider {
 
 	@Inject
 	private IJavaProjectProvider projectProvider;
+	
+	@Inject
+	private OrganizeImportsHandler organizeImports;
 	
 	/**
 	 * Filter quickfixes for types and constructors.
@@ -239,4 +243,26 @@ public class Xtend2QuickfixProvider extends DefaultQuickfixProvider {
 		});
 	}
 	
+	@Fix(IssueCodes.IMPORT_DUPLICATE)
+	public void fixDuplicateImport(final Issue issue, IssueResolutionAcceptor acceptor) {
+		organizeImports(issue, acceptor);
+	}
+	
+	@Fix(IssueCodes.IMPORT_WILDCARD_DEPRECATED)
+	public void fixDuplicateWildcardUse(final Issue issue, IssueResolutionAcceptor acceptor) {
+		organizeImports(issue, acceptor);
+	}
+	
+	@Fix(IssueCodes.IMPORT_UNUSED)
+	public void fixUnusedImport(final Issue issue, IssueResolutionAcceptor acceptor) {
+		organizeImports(issue, acceptor);
+	}
+	
+	protected void organizeImports(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Organize Imports.", "Organizes the whole import section. Removes wildcard imports as well as duplicates and unused ones.", "fix_indent.gif", new IModification() {
+			public void apply(IModificationContext context) throws Exception {
+				organizeImports.doOrganizeImports(context.getXtextDocument());
+			}
+		});
+	}
 }

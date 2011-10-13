@@ -14,6 +14,7 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.TextRegion;
@@ -34,30 +35,34 @@ public class OrganizeImportsHandler extends AbstractHandler {
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		XtextEditor editor = EditorUtils.getActiveXtextEditor(event);
 		if (editor != null) {
-			Pair<Region, String> result = editor.getDocument().readOnly(new IUnitOfWork<Pair<Region,String>, XtextResource>() {
-				public Pair<Region,String> exec(XtextResource state) throws Exception {
-					final TextRegion computeRegion = organizeImports.computeRegion(state);
-					if (computeRegion == null)
-						return null;
-					final String organizedImportSection = organizeImports.getOrganizedImportSection(state);
-					if (organizedImportSection == null)
-						return null;
-					return Tuples.create(new Region(computeRegion.getOffset(), computeRegion.getLength()) , organizedImportSection);
-				}
-			});
-			if (result == null)
-				return null;
-			try {
-				String string = editor.getDocument().get(result.getFirst().getOffset(), result.getFirst().getLength());
-				if (!string.equals(result.getSecond())) {
-					editor.getDocument().replace(result.getFirst().getOffset(), result.getFirst().getLength(), result.getSecond());
-				}
-			} catch (BadLocationException e) {
-				// ignore
-			}
-			
+			final IXtextDocument document = editor.getDocument();
+			doOrganizeImports(document);
 		}
 		return null;
 	}
 	
+	public void doOrganizeImports(final IXtextDocument document) {
+		Pair<Region, String> result = document.readOnly(new IUnitOfWork<Pair<Region,String>, XtextResource>() {
+			public Pair<Region,String> exec(XtextResource state) throws Exception {
+				final TextRegion computeRegion = organizeImports.computeRegion(state);
+				if (computeRegion == null)
+					return null;
+				final String organizedImportSection = organizeImports.getOrganizedImportSection(state);
+				if (organizedImportSection == null)
+					return null;
+				return Tuples.create(new Region(computeRegion.getOffset(), computeRegion.getLength()) , organizedImportSection);
+			}
+		});
+		if (result == null)
+			return;
+		try {
+			String string = document.get(result.getFirst().getOffset(), result.getFirst().getLength());
+			if (!string.equals(result.getSecond())) {
+				document.replace(result.getFirst().getOffset(), result.getFirst().getLength(), result.getSecond());
+			}
+		} catch (BadLocationException e) {
+			// ignore
+		}
+	}
+
 }
