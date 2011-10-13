@@ -199,6 +199,13 @@ public class XtextTokenStream extends CommonTokenStream {
 		}
 	}
 	
+	/**
+	 * @since 2.1
+	 */
+	protected int getFirstMarker() {
+		return firstMarker;
+	}
+	
 	@Override
 	public int mark() {
 		int result = super.mark();
