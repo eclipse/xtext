@@ -148,7 +148,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		if (input.size() == input.index()) {
 			int idx = localTrace.indexOf(grammarElement);
 			// due to error recovery inconveniences we have to add some grammarElements
-			// twice immediatly after each other
+			// twice immediately after each other
 			if (idx >= 0 && idx != localTrace.size() - 1)
 				throw new InfiniteRecursion();
 		}

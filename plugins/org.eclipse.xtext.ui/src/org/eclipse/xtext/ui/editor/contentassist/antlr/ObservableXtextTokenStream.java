@@ -59,7 +59,8 @@ public class ObservableXtextTokenStream extends XtextTokenStream {
 	
 	@Override
 	public void rewind(int marker) {
-		attemptedToConsumePastEof = false;
+		if (marker != tokens.size())
+			attemptedToConsumePastEof = false;
 		if (getListener() != null)
 			getListener().announceRewind(marker);
 		super.rewind(marker);
