@@ -335,7 +335,7 @@ public class FeatureCallChecker {
 	protected String _case(JvmField input, XFeatureCall context, EReference reference,
 			JvmFeatureDescription jvmFeatureDescription) {
 		if (context.getDeclaringType() == null) {
-			if (input.isStatic())
+			if (input.isStatic() && jvmFeatureDescription.getImplicitReceiver() != null)
 				return INSTANCE_ACCESS_TO_STATIC_MEMBER;
 		} else {
 			if (!input.isStatic())
