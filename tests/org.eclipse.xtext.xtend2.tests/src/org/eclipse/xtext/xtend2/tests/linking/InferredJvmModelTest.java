@@ -628,6 +628,72 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		assertEquals(inferredType, xtendFunction.getReturnType().getType());
 	}
 	
+	public void testNameClashWithAnonymousExtension_00() throws Exception {
+		XtendFile xtendFile = file("package foo import com.google.inject.Inject class Foo { @Inject extension String String _string }");
+		JvmGenericType inferredType = getInferredType(xtendFile);
+		JvmField extension = (JvmField) inferredType.getMembers().get(1);
+		assertEquals("_string_1", extension.getSimpleName());
+		JvmField field = (JvmField) inferredType.getMembers().get(2);
+		assertEquals("_string", field.getSimpleName());
+	}
+
+	public void testNameClashWithAnonymousExtension_01() throws Exception {
+		XtendFile xtendFile = file("package foo import com.google.inject.Inject class Foo { @Inject extension String @Inject extension String }");
+		JvmGenericType inferredType = getInferredType(xtendFile);
+		JvmField extension0 = (JvmField) inferredType.getMembers().get(1);
+		assertEquals("_string", extension0.getSimpleName());
+		JvmField extension1 = (JvmField) inferredType.getMembers().get(2);
+		assertEquals("_string_1", extension1.getSimpleName());
+	}
+
+	public void testNameClashWithCreateExtension_00() throws Exception {
+		XtendFile xtendFile = file("package foo class Foo { def create new String() s(String x) { '' } String _createCache_s }");  
+		JvmGenericType inferredType = getInferredType(xtendFile);
+		JvmField cacheVar = (JvmField) inferredType.getMembers().get(2);
+		assertEquals("_createCache_s_1", cacheVar.getSimpleName());
+		JvmOperation initializer = (JvmOperation) inferredType.getMembers().get(3);
+		assertEquals("_init_s", initializer.getSimpleName());
+		JvmField field = (JvmField) inferredType.getMembers().get(4);
+		assertEquals("_createCache_s", field.getSimpleName());
+	}
+	
+	public void testNameClashWithCreateExtension_01() throws Exception {
+		XtendFile xtendFile = file("package foo class Foo { def create new String() s(String x) { '' } String _init_s }");  
+		JvmGenericType inferredType = getInferredType(xtendFile);
+		JvmField cacheVar = (JvmField) inferredType.getMembers().get(2);
+		assertEquals("_createCache_s", cacheVar.getSimpleName());
+		JvmOperation initializer = (JvmOperation) inferredType.getMembers().get(3);
+		assertEquals("_init_s_1", initializer.getSimpleName());
+		JvmField field = (JvmField) inferredType.getMembers().get(4);
+		assertEquals("_init_s", field.getSimpleName());
+	}
+	
+	public void testNameClashWithCreateExtension_02() throws Exception {
+		XtendFile xtendFile = file("package foo class Foo { def create new String() s(String x) { '' } def create new String() s(Object x) { '' }}");  
+		JvmGenericType inferredType = getInferredType(xtendFile);
+		JvmField cacheVar0 = (JvmField) inferredType.getMembers().get(2);
+		assertEquals("_createCache_s", cacheVar0.getSimpleName());
+		JvmOperation initializer0 = (JvmOperation) inferredType.getMembers().get(3);
+		assertEquals("_init_s", initializer0.getSimpleName());
+		JvmField cacheVar1 = (JvmField) inferredType.getMembers().get(5);
+		assertEquals("_createCache_s_1", cacheVar1.getSimpleName());
+		JvmOperation initializer1 = (JvmOperation) inferredType.getMembers().get(6);
+		assertEquals("_init_s_1", initializer1.getSimpleName());
+	}
+	
+	public void testNameClashWithCreateExtension_03() throws Exception {
+		XtendFile xtendFile = file("package foo class Foo { def create new String() s(String x) { '' } def create new String() s(Object x, Object y) { '' }}");  
+		JvmGenericType inferredType = getInferredType(xtendFile);
+		JvmField cacheVar0 = (JvmField) inferredType.getMembers().get(2);
+		assertEquals("_createCache_s", cacheVar0.getSimpleName());
+		JvmOperation initializer0 = (JvmOperation) inferredType.getMembers().get(3);
+		assertEquals("_init_s", initializer0.getSimpleName());
+		JvmField cacheVar1 = (JvmField) inferredType.getMembers().get(5);
+		assertEquals("_createCache_s_1", cacheVar1.getSimpleName());
+		JvmOperation initializer1 = (JvmOperation) inferredType.getMembers().get(6);
+		assertEquals("_init_s", initializer1.getSimpleName());
+	}
+	
 //	public void testInferredFunctionWithTypeParameter() throws Exception {
 //		XtendFile xtendFile = file("class Foo<S> { java.util.List<S> foo() {null} }");
 //		JvmGenericType inferredType = getInferredType(xtendFile);

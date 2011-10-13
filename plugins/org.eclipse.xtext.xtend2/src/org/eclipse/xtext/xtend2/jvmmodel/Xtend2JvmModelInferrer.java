@@ -71,6 +71,10 @@ import com.google.inject.Inject;
  */
 public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 
+	public static final String CREATE_INITIALIZER_PREFIX = "_init_";
+
+	public static final String CREATE_CHACHE_VARIABLE_PREFIX = "_createCache_";
+
 	@Inject
 	protected TypesFactory typesFactory;
 
@@ -93,7 +97,7 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 	private JvmTypesBuilder jvmTypesBuilder;
 	
 	@Inject
-	private MemberNames.Factory namesFactory;
+	private SyntheticNameClashResolver nameClashResolver; 
 	
 	public void infer(EObject xtendFile, IAcceptor<JvmDeclaredType> acceptor, boolean prelinkingPhase) {
 		if (!(xtendFile instanceof XtendFile))
@@ -115,7 +119,6 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 		inferredJvmType.setSimpleName(source.getName());
 		inferredJvmType.setVisibility(JvmVisibility.PUBLIC);
 		if (!prelinkingPhase) {
-			MemberNames names = namesFactory.create(source);
 			JvmAnnotationReference suppressWarnings = typesFactory.createJvmAnnotationReference();
 			JvmAnnotationType annotation = (JvmAnnotationType) typeReferences.findDeclaredType(SuppressWarnings.class, source);
 			suppressWarnings.setAnnotation(annotation);
@@ -136,13 +139,15 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			for (XtendMember member : source.getMembers()) {
 				if (member instanceof XtendField || member instanceof XtendFunction
 						&& ((XtendFunction) member).getName() != null) {
-					transform(member, names, inferredJvmType);
+					transform(member, inferredJvmType);
 				}
 			}
 			appendSyntheticDispatchMethods(source, inferredJvmType);
 			computeInferredReturnTypes(inferredJvmType);
 			jvmTypesBuilder.translateAnnotationsTo(source.getAnnotations(), inferredJvmType);
 			jvmTypesBuilder.translateDocumentationTo(source, inferredJvmType);
+			
+			nameClashResolver.resolveNameClashes(inferredJvmType);
 		}
 		return inferredJvmType;
 	}
@@ -228,16 +233,16 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 		constructor.setVisibility(JvmVisibility.PUBLIC);
 	}
 
-	protected JvmMember transform(XtendMember sourceMember, MemberNames names, JvmGenericType container) {
+	protected JvmMember transform(XtendMember sourceMember, JvmGenericType container) {
 		if (sourceMember instanceof XtendFunction) {
-			return transform((XtendFunction) sourceMember, names, container);
+			return transform((XtendFunction) sourceMember, container);
 		} else if (sourceMember instanceof XtendField) {
-			return transform((XtendField) sourceMember, names, container);
+			return transform((XtendField) sourceMember, container);
 		}
 		throw new IllegalArgumentException("Cannot transform " + notNull(sourceMember) + " to a JvmMember");
 	}
 
-	protected JvmMember transform(XtendFunction source, MemberNames names, JvmGenericType container) {
+	protected JvmMember transform(XtendFunction source, JvmGenericType container) {
 		JvmOperation operation = typesFactory.createJvmOperation();
 		container.getMembers().add(operation);
 		associator.associatePrimary(source, operation);
@@ -271,16 +276,14 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			JvmTypeReference arrayList = typeReferences.getTypeForName(ArrayList.class, container, typeReferences.wildCard());
 			JvmTypeReference hashMap = typeReferences.getTypeForName(HashMap.class, container, arrayList, cloneWithProxies(returnType));
 			
-			String varName = names.newName(source.getName(), "_createChache_", "_init_"); 
-			
-			JvmField cacheVar = jvmTypesBuilder.toField(source, "_createCache_" + varName, hashMap);
+			JvmField cacheVar = jvmTypesBuilder.toField(source, CREATE_CHACHE_VARIABLE_PREFIX + source.getName(), hashMap);
 			cacheVar.setFinal(true);
 			jvmTypesBuilder.initialization(cacheVar, compileStrategies.forCacheVariable(container));
 			container.getMembers().add(cacheVar);
 			
 			JvmOperation initializer = typesFactory.createJvmOperation();
 			container.getMembers().add(initializer);
-			initializer.setSimpleName("_init_" + varName);
+			initializer.setSimpleName(CREATE_INITIALIZER_PREFIX + source.getName());
 			initializer.setVisibility(JvmVisibility.PRIVATE);
 			initializer.setReturnType(typeReferences.getTypeForName(Void.TYPE, source));
 
@@ -312,11 +315,10 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 		return operation;
 	}
 
-	protected JvmMember transform(XtendField source, MemberNames names, JvmGenericType container) {
+	protected JvmMember transform(XtendField source, JvmGenericType container) {
 		if ((source.isExtension() || source.getName() != null) && source.getType() != null) {
 			JvmField field = typesFactory.createJvmField();
-			final String fieldName = computeFieldName(source, names, container);
-			field.setSimpleName(fieldName);
+			field.setSimpleName(computeFieldName(source, container));
 			container.getMembers().add(field);
 			associator.associatePrimary(source, field);
 			field.setVisibility(source.getVisibility());
@@ -329,10 +331,9 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 		}
 	}
 
-	protected String computeFieldName(XtendField field, MemberNames names, JvmGenericType declaringType) {
+	protected String computeFieldName(XtendField field, JvmGenericType declaringType) {
 		if (field.getName() != null)
 			return field.getName();
-		
 		JvmTypeReference type = field.getType();
 		String name = null;
 		if (type != null) {
@@ -351,7 +352,7 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 				}
 			}
 		}
-		return names.newName(name);
+		return name;
 	}
 
 	protected void computeInferredReturnTypes(JvmGenericType inferredJvmType) {
