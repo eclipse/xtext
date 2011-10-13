@@ -7,9 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
+import junit.framework.Test;
+
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
-import org.eclipse.xtext.ui.junit.editor.contentassist.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.BacktrackingContentAssistTestLanguageUiModule;
@@ -23,7 +24,8 @@ import com.google.inject.Injector;
  */
 public class BacktrackingContentAssistTest extends AbstractContentAssistProcessorTest {
 
-	public ISetup getSetup() {
+	@Override
+	public ISetup doGetSetup() {
 		return new BacktrackingContentAssistTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
@@ -262,9 +264,9 @@ public class BacktrackingContentAssistTest extends AbstractContentAssistProcesso
 						"context", "endpackage"
 				);
 	}
-	
-	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
-		return newBuilder(getSetup());
+
+	public static Test suite() {
+		return AbstractContentAssistProcessorTest.suite(BacktrackingContentAssistTest.class);
 	}
 	
 }

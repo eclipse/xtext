@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
 import junit.framework.Assert;
+import junit.framework.Test;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Assignment;
@@ -15,6 +16,7 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.testlanguages.backtracking.services.BeeLangTestLanguageGrammarAccess;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -65,12 +67,16 @@ public class Bug326948MissingInvocationTest extends AbstractBug326948Test {
 	}
 	
 	public void testAllAlternativesProposed() throws Exception {
-		newBuilder(getSetup())
+		newBuilder()
 			.append("function foo() { \"\".")
 			.computeCompletionProposals();
 		assertTrue(featureNameCalled);
 		assertTrue(nameCalled);
 		assertTrue(keywordCalled);
+	}
+
+	public static Test suite() {
+		return AbstractContentAssistProcessorTest.suite(Bug326948MissingInvocationTest.class);
 	}
 
 }

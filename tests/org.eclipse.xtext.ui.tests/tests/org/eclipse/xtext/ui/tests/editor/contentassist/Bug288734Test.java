@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
+import junit.framework.Test;
+
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
@@ -22,7 +24,8 @@ import com.google.inject.Injector;
  */
 public class Bug288734Test extends AbstractContentAssistProcessorTest {
 
-	public ISetup getBug288734TestLanguageSetup() {
+	@Override
+	public ISetup doGetSetup() {
 		return new Bug288734TestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
@@ -33,73 +36,77 @@ public class Bug288734Test extends AbstractContentAssistProcessorTest {
 	}
 
 	public void testBug288734_01() throws Exception {
-		newBuilder(getBug288734TestLanguageSetup()).assertText("@desc", "constant");
+		newBuilder().assertText("@desc", "constant");
 	}
 
 	public void testBug288734_02() throws Exception {
-		newBuilder(getBug288734TestLanguageSetup()).append("constant").assertText("constant");
+		newBuilder().append("constant").assertText("constant");
 	}
 
 	public void testBug288734_03() throws Exception {
-		newBuilder(getBug288734TestLanguageSetup()).append("constant ").assertText("string", "boolean", "integer");
+		newBuilder().append("constant ").assertText("string", "boolean", "integer");
 	}
 
 	public void testBug288734_04() throws Exception {
-		newBuilder(getBug288734TestLanguageSetup()).append("constant string").assertText("string");
+		newBuilder().append("constant string").assertText("string");
 	}
 
 	public void testBug288734_05() throws Exception {
-		newBuilder(getBug288734TestLanguageSetup()).append("constant boolean").assertText("boolean");
+		newBuilder().append("constant boolean").assertText("boolean");
 	}
 
 	public void testBug288734_06() throws Exception {
-		newBuilder(getBug288734TestLanguageSetup()).append("constant string ").assertText("Name");
+		newBuilder().append("constant string ").assertText("Name");
 	}
 
 	public void testBug288734_07() throws Exception {
-		newBuilder(getBug288734TestLanguageSetup()).append("constant boolean ").assertText("Name");
+		newBuilder().append("constant boolean ").assertText("Name");
 	}
 
 	public void testBug288734_08() throws Exception {
-		newBuilder(getBug288734TestLanguageSetup()).append("@desc").assertText("@desc", "\"Description\"");
+		newBuilder().append("@desc").assertText("@desc", "\"Description\"");
 	}
 
 	public void testBug288734_09() throws Exception {
-		newBuilder(getBug288734TestLanguageSetup()).append("@desc ").assertText("\"Description\"");
+		newBuilder().append("@desc ").assertText("\"Description\"");
 	}
 
 	public void testBug288734_10() throws Exception {
-		newBuilder(getBug288734TestLanguageSetup()).append("@desc 'Name' ").assertText("@desc", "constant");
+		newBuilder().append("@desc 'Name' ").assertText("@desc", "constant");
 	}
 
 	public void testBug288734_11() throws Exception {
-		newBuilder(getBug288734TestLanguageSetup()).append("@desc 'Name' @desc").assertText("@desc", "\"Description\"");
+		newBuilder().append("@desc 'Name' @desc").assertText("@desc", "\"Description\"");
 	}
 
 	public void testBug288734_12() throws Exception {
-		newBuilder(getBug288734TestLanguageSetup()).append("@desc 'Name' @desc ").assertText("\"Description\"");
+		newBuilder().append("@desc 'Name' @desc ").assertText("\"Description\"");
 	}
 
 	public void testBug288734_13() throws Exception {
-		newBuilder(getBug288734TestLanguageSetup()).append("@desc 'Name' constant").assertText("constant");
+		newBuilder().append("@desc 'Name' constant").assertText("constant");
 	}
 
 	public void testBug288734_14() throws Exception {
-		newBuilder(getBug288734TestLanguageSetup()).append("@desc 'Name' constant ").assertText("string", "integer",
+		newBuilder().append("@desc 'Name' constant ").assertText("string", "integer",
 				"boolean");
 	}
 
 	public void testBug288734_15() throws Exception {
-		newBuilder(getBug288734TestLanguageSetup()).append("@desc 'Name' @desc 'Name' constant").assertText("constant");
+		newBuilder().append("@desc 'Name' @desc 'Name' constant").assertText("constant");
 	}
 
 	public void testBug288734_16() throws Exception {
-		newBuilder(getBug288734TestLanguageSetup()).append("@desc 'Name' @desc 'Name' constant ").assertText("string",
+		newBuilder().append("@desc 'Name' @desc 'Name' constant ").assertText("string",
 				"integer", "boolean");
 	}
 	
 	public void testBug288734_17() throws Exception {
-		newBuilder(getBug288734TestLanguageSetup()).append("@des").assertText("@desc");
+		newBuilder().append("@des").assertText("@desc");
+	}
+
+	public static Test suite() {
+		return AbstractContentAssistProcessorTest.suite(Bug288734Test.class);
 	}
 
 }

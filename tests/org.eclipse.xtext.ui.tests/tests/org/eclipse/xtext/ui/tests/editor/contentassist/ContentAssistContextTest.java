@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
+import junit.framework.Test;
+
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
@@ -22,7 +24,8 @@ import com.google.inject.Injector;
  */
 public class ContentAssistContextTest extends AbstractContentAssistProcessorTest {
 
-	public ISetup getContentAssistContextTestLanguageSetup() {
+	@Override
+	public ISetup doGetSetup() {
 		return new ContentAssistContextTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
@@ -33,30 +36,34 @@ public class ContentAssistContextTest extends AbstractContentAssistProcessorTest
 	}
 
 	public void testBug276742_01() throws Exception {
-		newBuilder(getContentAssistContextTestLanguageSetup()).assertText("A1", "B1");
+		newBuilder().assertText("A1", "B1");
 	}
 
 	public void testBug276742_02() throws Exception {
-		newBuilder(getContentAssistContextTestLanguageSetup()).append("A1").assertText("A1");
+		newBuilder().append("A1").assertText("A1");
 	}
 
 	public void testBug276742_03() throws Exception {
-		newBuilder(getContentAssistContextTestLanguageSetup()).append("A1 ").assertText("A1", "A2", "Name");
+		newBuilder().append("A1 ").assertText("A1", "A2", "Name");
 	}
 
 	public void testBug276742_04() throws Exception {
-		newBuilder(getContentAssistContextTestLanguageSetup()).append("A").assertText("A1");
+		newBuilder().append("A").assertText("A1");
 	}
 
 	public void testBug276742_05() throws Exception {
-		newBuilder(getContentAssistContextTestLanguageSetup()).append("A1 A1").assertText("A1");
+		newBuilder().append("A1 A1").assertText("A1");
 	}
 
 	public void testBug276742_06() throws Exception {
-		newBuilder(getContentAssistContextTestLanguageSetup()).append("A1 A").assertText(/* "A", */"A1", "A2");
+		newBuilder().append("A1 A").assertText(/* "A", */"A1", "A2");
 	}
 
 	public void testBug276742_07() throws Exception {
-		newBuilder(getContentAssistContextTestLanguageSetup()).append("A1 A A2").assertText("A2");
+		newBuilder().append("A1 A A2").assertText("A2");
+	}
+
+	public static Test suite() {
+		return AbstractContentAssistProcessorTest.suite(ContentAssistContextTest.class);
 	}
 }

@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
+import junit.framework.Test;
+
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.junit.editor.contentassist.ContentAssistProcessorTestBuilder;
@@ -23,7 +25,8 @@ import com.google.inject.Injector;
  */
 public class Bug348199Test extends AbstractContentAssistProcessorTest {
 
-	public ISetup getSetup() {
+	@Override
+	public ISetup doGetSetup() {
 		return new Bug348199TestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
@@ -34,7 +37,7 @@ public class Bug348199Test extends AbstractContentAssistProcessorTest {
 	}
 	
 	public void testEmptyDocument() throws Exception {
-		newBuilder(getSetup()).assertText(
+		newBuilder().assertText(
 				"define");
 	}
 	
@@ -139,7 +142,11 @@ public class Bug348199Test extends AbstractContentAssistProcessorTest {
 	}
 	
 	public ContentAssistProcessorTestBuilder newBuilder(int scenario) throws Exception {
-		return newBuilder(getSetup()).appendNl("define timeperiod " + scenario + "{");
+		return newBuilder().appendNl("define timeperiod " + scenario + "{");
+	}
+
+	public static Test suite() {
+		return AbstractContentAssistProcessorTest.suite(Bug348199Test.class);
 	}
 	
 }

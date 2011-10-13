@@ -7,13 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.xtext.ui;
 
+import junit.framework.Test;
+
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
 import org.eclipse.xtext.common.types.tests.AbstractActivator;
 import org.eclipse.xtext.common.types.xtext.ui.ui.ContentAssistTestLanguageUiModule;
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
-import org.eclipse.xtext.ui.junit.editor.contentassist.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.util.Modules2;
 
@@ -25,7 +26,8 @@ import com.google.inject.Injector;
  */
 public class ContentAssistTest extends AbstractContentAssistProcessorTest {
 
-	public ISetup getSetup() {
+	@Override
+	public ISetup doGetSetup() {
 		return new ContentAssistTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
@@ -115,9 +117,9 @@ public class ContentAssistTest extends AbstractContentAssistProcessorTest {
 	public void testMap_03() throws Exception {
 		newBuilder().append("import java.util.* custom java.util.Map").assertText("Map");
 	}
-	
-	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
-		return newBuilder(getSetup());
+
+	public static Test suite() {
+		return AbstractContentAssistProcessorTest.suite(ContentAssistTest.class);
 	}
 	
 }

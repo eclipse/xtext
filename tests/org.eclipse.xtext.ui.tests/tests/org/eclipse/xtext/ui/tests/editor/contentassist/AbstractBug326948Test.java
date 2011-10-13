@@ -77,7 +77,8 @@ public abstract class AbstractBug326948Test extends AbstractContentAssistProcess
 		}
 	}
 	
-	public ISetup getSetup() {
+	@Override
+	public ISetup doGetSetup() {
 		return new BeeLangTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {

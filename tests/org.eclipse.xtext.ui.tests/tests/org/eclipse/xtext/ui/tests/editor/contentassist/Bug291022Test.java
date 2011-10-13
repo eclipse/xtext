@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
+import junit.framework.Test;
+
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
@@ -22,7 +24,8 @@ import com.google.inject.Injector;
  */
 public class Bug291022Test extends AbstractContentAssistProcessorTest {
 
-	public ISetup getBug291022TestLanguageSetup() {
+	@Override
+	public ISetup doGetSetup() {
 		return new Bug291022TestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
@@ -33,7 +36,7 @@ public class Bug291022Test extends AbstractContentAssistProcessorTest {
 	}
 
 	public void testBug291022_01() throws Exception {
-		newBuilder(getBug291022TestLanguageSetup()).append(
+		newBuilder().append(
 				"rootModelElement {\n" +
 				"  rootModelElement modelElement {" +
 				"  }\n" + 
@@ -41,12 +44,16 @@ public class Bug291022Test extends AbstractContentAssistProcessorTest {
 	}
 	
 	public void testBug291022_02() throws Exception {
-		newBuilder(getBug291022TestLanguageSetup()).append(
+		newBuilder().append(
 				"rootModelElement {\n" +
 				"  rootModelElement : modelElement {" +
 				"    modelElement findMe {" +
 				"    }\n" +
 				"  }\n" + 
 				"}").assertTextAtCursorPosition("findMe", "modelElement", ":", "=", ";", "{");
+	}
+
+	public static Test suite() {
+		return AbstractContentAssistProcessorTest.suite(Bug291022Test.class);
 	}
 }

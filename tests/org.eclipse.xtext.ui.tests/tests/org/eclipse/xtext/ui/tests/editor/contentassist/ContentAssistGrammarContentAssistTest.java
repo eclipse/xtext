@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
+import junit.framework.Test;
+
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
@@ -24,7 +26,8 @@ import com.google.inject.Injector;
  */
 public class ContentAssistGrammarContentAssistTest extends AbstractContentAssistProcessorTest {
 
-	public ISetup getContentAssistGrammarSetup() {
+	@Override
+	public ISetup doGetSetup() {
 		return new ContentAssistTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
@@ -34,7 +37,7 @@ public class ContentAssistGrammarContentAssistTest extends AbstractContentAssist
 	}
 	
 	public void testCompleteAbstractRuleCall() throws Exception {
-		newBuilder(getContentAssistGrammarSetup())
+		newBuilder()
 			.appendNl("abstract rules")
 			.appendNl("R1 ();")
 			.append("R2 rule :").assertText(
@@ -48,7 +51,7 @@ public class ContentAssistGrammarContentAssistTest extends AbstractContentAssist
      * https://bugs.eclipse.org/bugs/show_bug.cgi?id=269593
      */
     public void testCompleteAbstractRuleCallWithSpace() throws Exception {
-        newBuilder(getContentAssistGrammarSetup())
+        newBuilder()
         .appendNl("abstract rules")
         .appendNl("R1 ();")
         .append("R2 rule : ").assertText(
@@ -56,4 +59,8 @@ public class ContentAssistGrammarContentAssistTest extends AbstractContentAssist
                         "R2"
         );
     }
+
+    public static Test suite() {
+		return AbstractContentAssistProcessorTest.suite(ContentAssistGrammarContentAssistTest.class);
+	}
 }

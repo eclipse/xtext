@@ -18,5 +18,5 @@ import com.google.inject.Injector;
 public interface ISetup {
 
 	Injector createInjectorAndDoEMFRegistration();
-
+	
 }

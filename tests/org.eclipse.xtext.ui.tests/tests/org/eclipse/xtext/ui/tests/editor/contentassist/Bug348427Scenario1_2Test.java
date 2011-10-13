@@ -7,6 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
+import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
+
+import junit.framework.Test;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -30,6 +34,10 @@ public class Bug348427Scenario1_2Test extends AbstractBug348427Test {
 	@Override
 	public void testExpectNextKeyword_3() throws Exception {
 		newBuilder().append("Name : bool keyword a child3 end ").assertText("next", "Name");
+	}
+
+	public static Test suite() {
+		return AbstractContentAssistProcessorTest.suite(Bug348427Scenario1_2Test.class);
 	}
 
 }
