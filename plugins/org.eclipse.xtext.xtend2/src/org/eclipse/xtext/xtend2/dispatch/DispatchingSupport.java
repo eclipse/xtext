@@ -25,6 +25,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.FeatureOverridesService;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.common.types.util.VisibilityService;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
@@ -49,22 +50,27 @@ public class DispatchingSupport {
 
 	@Inject
 	private Primitives primitives;
-	
+
 	@Inject
 	private IXtend2JvmAssociations associations;
+
+	@Inject
+	private VisibilityService visibilityService;
 
 	public Multimap<Pair<String, Integer>, JvmOperation> getDispatchMethods(JvmGenericType type) {
 		Multimap<Pair<String, Integer>, JvmOperation> result = LinkedHashMultimap.create();
 		collectDispatchMethods(type, result);
 		return result;
 	}
-	
-	public JvmOperation findSyntheticDispatchMethod(XtendClass clazz, final Pair<String,Integer> signature) {
-		Iterable<XtendFunction> filter = filter(filter(clazz.getMembers(),XtendFunction.class), new Predicate<XtendFunction>() {
-			public boolean apply(XtendFunction input) {
-				return input.isDispatch() && input.getParameters().size()==signature.getSecond() && input.getName().equals(signature.getFirst()); 
-			}
-		});
+
+	public JvmOperation findSyntheticDispatchMethod(XtendClass clazz, final Pair<String, Integer> signature) {
+		Iterable<XtendFunction> filter = filter(filter(clazz.getMembers(), XtendFunction.class),
+				new Predicate<XtendFunction>() {
+					public boolean apply(XtendFunction input) {
+						return input.isDispatch() && input.getParameters().size() == signature.getSecond()
+								&& input.getName().equals(signature.getFirst());
+					}
+				});
 		final Iterator<XtendFunction> iterator = filter.iterator();
 		if (iterator.hasNext()) {
 			return associations.getDispatchOperation(iterator.next());
@@ -72,11 +78,12 @@ public class DispatchingSupport {
 		return null;
 	}
 
-	protected void collectDispatchMethods(final JvmGenericType type, Multimap<Pair<String, Integer>, JvmOperation> result) {
+	protected void collectDispatchMethods(final JvmGenericType type,
+			Multimap<Pair<String, Integer>, JvmOperation> result) {
 		Iterable<JvmOperation> features = filter(overridesService.getAllJvmFeatures(typeRefs.createTypeRef(type)),
 				JvmOperation.class);
 		for (JvmOperation operation : features) {
-			if (isDispatchOperation(operation)) {
+			if (isDispatchOperation(operation, type)) {
 				final Pair<String, Integer> signatureTuple = Tuples.create(operation.getSimpleName().substring(1),
 						operation.getParameters().size());
 				result.put(signatureTuple, operation);
@@ -86,10 +93,10 @@ public class DispatchingSupport {
 	}
 
 	protected void removeNonLocalMethods(final JvmGenericType type, Multimap<Pair<String, Integer>, JvmOperation> result) {
-		List<Pair<String, Integer>> removeKeys = newArrayList(); 
-		for(Pair<String, Integer> signatureTuple : result.keySet()) {
+		List<Pair<String, Integer>> removeKeys = newArrayList();
+		for (Pair<String, Integer> signatureTuple : result.keySet()) {
 			Collection<JvmOperation> collection = result.get(signatureTuple);
-			if(!any(collection, new Predicate<JvmOperation>() {
+			if (!any(collection, new Predicate<JvmOperation>() {
 				public boolean apply(JvmOperation input) {
 					return input.getDeclaringType() == type;
 				}
@@ -97,19 +104,24 @@ public class DispatchingSupport {
 				removeKeys.add(signatureTuple);
 			}
 		}
-		for(Pair<String, Integer> signatureTuple: removeKeys) {
+		for (Pair<String, Integer> signatureTuple : removeKeys) {
 			result.removeAll(signatureTuple);
 		}
 	}
 
-	protected boolean isDispatchOperation(JvmOperation operation) {
-		List<XtendFunction> sourceElements = newArrayList(filter(associations.getSourceElements(operation), XtendFunction.class));
-		if (sourceElements.size() == 1) {
-			final XtendFunction xtendFunction = sourceElements.get(0);
-			return xtendFunction.isDispatch() && operation.getSimpleName().equals("_"+xtendFunction.getName());
+	protected boolean isDispatchOperation(JvmOperation operation, JvmGenericType contextType) {
+		if (visibilityService.isVisible(operation, contextType)) {
+			List<XtendFunction> sourceElements = newArrayList(filter(associations.getSourceElements(operation),
+					XtendFunction.class));
+			if (sourceElements.size() == 1) {
+				final XtendFunction xtendFunction = sourceElements.get(0);
+				return xtendFunction.isDispatch() && operation.getSimpleName().equals("_" + xtendFunction.getName());
+			}
+			return !operation.getParameters().isEmpty() && !operation.isStatic()
+					&& operation.getSimpleName().startsWith("_");
+		} else {
+			return false;
 		}
-		return !operation.getParameters().isEmpty() && !operation.isStatic()
-				&& operation.getSimpleName().startsWith("_");
 	}
 
 	public List<JvmOperation> sort(Collection<JvmOperation> collection) {
@@ -121,15 +133,15 @@ public class DispatchingSupport {
 		});
 		return list;
 	}
-	
+
 	protected int compare(JvmOperation o1, JvmOperation o2) {
 		int params = o1.getParameters().size();
 		for (int i = 0; i < params; i++) {
 			final JvmTypeReference p1 = o1.getParameters().get(i).getParameterType();
 			final JvmTypeReference p2 = o2.getParameters().get(i).getParameterType();
-			int distance1 = p1==null?Integer.MAX_VALUE : getMaxDistanceToObject(p1);
-			int distance2 = p2==null?Integer.MAX_VALUE : getMaxDistanceToObject(p2);
-			if (distance1!=distance2) {
+			int distance1 = p1 == null ? Integer.MAX_VALUE : getMaxDistanceToObject(p1);
+			int distance2 = p2 == null ? Integer.MAX_VALUE : getMaxDistanceToObject(p2);
+			if (distance1 != distance2) {
 				return distance2 - distance1;
 			}
 		}
@@ -139,7 +151,7 @@ public class DispatchingSupport {
 		String parameterTypes2 = identifier2.substring(identifier2.indexOf('('));
 		return parameterTypes1.compareTo(parameterTypes2);
 	}
-	
+
 	protected int getMaxDistanceToObject(JvmTypeReference type) {
 		type = primitives.asWrapperTypeIfPrimitive(type);
 		if (typeRefs.is(type, Object.class))
@@ -150,7 +162,7 @@ public class DispatchingSupport {
 			EList<JvmTypeReference> list = ((JvmDeclaredType) jvmType).getSuperTypes();
 			for (JvmTypeReference jvmTypeReference : list) {
 				int result = 1 + getMaxDistanceToObject(jvmTypeReference);
-				if (result>maxDistance)
+				if (result > maxDistance)
 					maxDistance = result;
 			}
 		}

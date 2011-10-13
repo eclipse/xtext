@@ -12,9 +12,13 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xtend2.dispatch.DispatchingSupport;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
@@ -81,5 +85,39 @@ public class DispatchingSupportTest extends AbstractXtend2TestCase {
 		assertEquals(Integer.TYPE.getName(), i.next().getParameters().get(0).getParameterType().getIdentifier());
 		assertEquals(Boolean.class.getName(), i.next().getParameters().get(0).getParameterType().getIdentifier());
 		assertEquals(Object.class.getName(), i.next().getParameters().get(0).getParameterType().getIdentifier());
+	}
+	
+	public void testVisibility_00() throws Exception {
+		XtendClass superClazz = clazz(
+				"class Super {\n" +
+				"  def private dispatch foo(Object x) {} \n" +
+				"}");
+		Resource subResource = superClazz.eResource().getResourceSet().createResource(URI.createURI("Foo.xtend", true));
+		subResource.load(new StringInputStream(
+				"class Sub extends Super {\n" +
+				"  def dispatch foo(String x) {}\n" +
+				"  def dispatch foo(Number x) {}\n" +
+				"}"), null);
+		JvmGenericType inferredType = (JvmGenericType) subResource.getContents().get(1);
+		Multimap<Pair<String, Integer>, JvmOperation> dispatchMethods = dispatchingSupport.getDispatchMethods(inferredType);
+		Collection<JvmOperation> collection = dispatchMethods.get(Tuples.create("foo", 1));
+		assertEquals(2, collection.size());
+	}
+	
+	public void testVisibility_01() throws Exception {
+		XtendClass superClazz = clazz(
+				"class Super {\n" +
+				"  def dispatch foo(Object x) {} \n" +
+				"}");
+		Resource subResource = superClazz.eResource().getResourceSet().createResource(URI.createURI("Foo.xtend", true));
+		subResource.load(new StringInputStream(
+				"class Sub extends Super {\n" +
+				"  def dispatch foo(String x) {}\n" +
+				"  def dispatch foo(Number x) {}\n" +
+				"}"), null);
+		JvmGenericType inferredType = (JvmGenericType) subResource.getContents().get(1);
+		Multimap<Pair<String, Integer>, JvmOperation> dispatchMethods = dispatchingSupport.getDispatchMethods(inferredType);
+		Collection<JvmOperation> collection = dispatchMethods.get(Tuples.create("foo", 1));
+		assertEquals(3, collection.size());
 	}
 }
