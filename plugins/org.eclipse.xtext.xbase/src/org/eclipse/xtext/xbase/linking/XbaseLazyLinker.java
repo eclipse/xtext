@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.linking.lazy.LazyLinker;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xtype.XtypePackage;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -27,6 +28,9 @@ public class XbaseLazyLinker extends LazyLinker {
 			featureCall.setInvalidFeatureIssueCode(null);
 		} else if (obj instanceof JvmSpecializedTypeReference) {
 			((JvmSpecializedTypeReference) obj).setEquivalent(null);
+			if (ref == XtypePackage.Literals.XFUNCTION_TYPE_REF__TYPE) {
+				obj.eUnset(ref);
+			}
 		}
 	}
 
