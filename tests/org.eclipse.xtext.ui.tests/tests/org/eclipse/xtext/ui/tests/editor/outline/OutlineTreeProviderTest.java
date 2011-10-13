@@ -68,6 +68,7 @@ public class OutlineTreeProviderTest extends AbstractXtextTests {
 				treeProvider.createChildren(rootNode, state.getContents().get(0));
 				assertEquals(1, rootNode.getChildren().size());
 				IOutlineNode modelNode = rootNode.getChildren().get(0);
+				assertEquals(state.getURI().trimFileExtension().lastSegment(), modelNode.getText());
 				assertEquals(new TextRegion(0, modelAsText.length()), modelNode.getSignificantTextRegion());
 				assertEquals(new TextRegion(0, modelAsText.length()), modelNode.getFullTextRegion());
 				assertEquals(rootNode, modelNode.getParent());
@@ -87,6 +88,40 @@ public class OutlineTreeProviderTest extends AbstractXtextTests {
 				assertEquals(new TextRegion(25, 11), element2.getFullTextRegion());
 				assertEquals(modelNode, element2.getParent());
 				assertFalse(element2.hasChildren());
+			}
+		});
+	}
+
+	public void testNoNames() throws Exception {
+		final DefaultOutlineTreeProvider noNamesTreeProvider = new DefaultOutlineTreeProvider(new DefaultEObjectLabelProvider(),
+				new DefaultLocationInFileProvider()) {
+			@Override
+			protected Object _text(Object modelElement) {
+				return null;
+			}
+		};
+		final String modelAsText = "element1 { element11 {}} element2 {}";
+		IXtextDocument document = createXtextDocument(modelAsText);
+		final IOutlineNode rootNode = noNamesTreeProvider.createRoot(document);
+		document.readOnly(new IUnitOfWork.Void<XtextResource>() {
+			@Override
+			public void process(XtextResource state) throws Exception {
+				noNamesTreeProvider.createChildren(rootNode, state.getContents().get(0));
+				
+				assertEquals(1, rootNode.getChildren().size());
+				IOutlineNode modelNode = rootNode.getChildren().get(0);
+				assertEquals(state.getURI().trimFileExtension().lastSegment(), modelNode.getText());
+				assertTrue(modelNode.hasChildren());
+				
+				assertEquals(1, modelNode.getChildren().size());
+				IOutlineNode element1 = modelNode.getChildren().get(0);
+				assertEquals("<unnamed>", element1.getText().toString());
+				assertEquals(new TextRegion(0, 8), element1.getSignificantTextRegion());
+				assertEquals(new TextRegion(0, 24), element1.getFullTextRegion());
+				assertEquals(modelNode, element1.getParent());
+				// node does not know that its children will be skipped
+				assertTrue(element1.hasChildren());
+				assertTrue(element1.getChildren().isEmpty());
 			}
 		});
 	}
