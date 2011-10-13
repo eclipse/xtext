@@ -141,10 +141,10 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest imp
 		List<String> result = Lists.newArrayList(super.getKeywordsAndStatics());
 		result.add("super");
 		result.add("this");
-		result.add("clone");
+//		result.add("clone");
 		result.add("hashCode");
 		result.add("toString");
-		result.add("finalize");
+//		result.add("finalize");
 		result.add("notify");
 		result.add("notifyAll");
 		result.add("equals()");
@@ -158,9 +158,6 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest imp
 	public String[] getStringFeatures() {
 		ArrayList<String> features = newArrayList(super.getStringFeatures());
 		features.remove("class");
-		//TODO remove protected elements from Object. They are included because of #bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=343710
-		features.add("clone");
-		features.add("finalize");
 		return features.toArray(new String[features.size()]);
 	}
 	
