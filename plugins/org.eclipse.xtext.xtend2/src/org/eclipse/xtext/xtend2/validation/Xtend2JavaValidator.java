@@ -30,8 +30,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.EStructuralFeature.Setting;
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
@@ -51,6 +50,7 @@ import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.Pair;
@@ -92,6 +92,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
@@ -819,16 +820,31 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 				}
 			}
 		}
-		
-		Map<EObject, Collection<Setting>> crossreferences = EcoreUtil.CrossReferencer.find(singleton(file.getXtendClass()));
-		for (Entry<EObject, Collection<Setting>> entry : crossreferences.entrySet()) {
-			Collection<Setting> value = entry.getValue();
-			for (Setting setting : value) {
-				final EClassifier eType = setting.getEStructuralFeature().getEType();
-				if (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf((EClass)eType)) {
-					List<INode> nodes = NodeModelUtils.findNodesForFeature(setting.getEObject(), setting.getEStructuralFeature());
-					if (nodes.size()==1 && nodes.get(0).getText().indexOf('.') == -1) {
-						imports.remove(setting.get(true));
+		final Map<String, JvmType> simpleNames = newHashMap(Maps.uniqueIndex(imports.keySet(), new Function<JvmType,String>() {
+			public String apply(JvmType from) {
+				return from.getSimpleName();
+			}}));
+		ICompositeNode node = NodeModelUtils.findActualNodeFor(file.getXtendClass());
+		for (INode n : node.getAsTreeIterable()) {
+			if (n.getGrammarElement() instanceof CrossReference) {
+				EClassifier classifier = ((CrossReference)n.getGrammarElement()).getType().getClassifier();
+				if (classifier instanceof EClass && (
+						TypesPackage.Literals.JVM_TYPE.isSuperTypeOf((EClass)classifier)
+						|| TypesPackage.Literals.JVM_CONSTRUCTOR.isSuperTypeOf((EClass)classifier)) ) {
+					String simpleName = n.getText().trim();
+					// handle StaticQualifier Workaround (see Xbase grammar)
+					if (simpleName.endsWith("::"))
+						simpleName = simpleName.substring(0, simpleName.length()-2);
+					if (simpleNames.containsKey(simpleName)) {
+						imports.remove(simpleNames.remove(simpleName));
+					} else {
+						while (simpleName.contains("$")) {
+							simpleName = simpleName.substring(0, simpleName.lastIndexOf('$'));
+							if (simpleNames.containsKey(simpleName)) {
+								imports.remove(simpleNames.remove(simpleName));
+								break;
+							}
+						}
 					}
 				}
 			}
