@@ -198,13 +198,13 @@ public class XtextLinker extends Linker {
 			}
 		}
 		super.beforeModelLinked(model, diagnosticsConsumer);
-		cache.getOrCreate(model.eResource()).setIgnoreNotifications(true);
+		cache.getOrCreate(model.eResource()).ignoreNotifications();
 	}
 	
 	@Override
 	protected void afterModelLinked(EObject model, IDiagnosticConsumer diagnosticsConsumer) {
 		super.afterModelLinked(model, diagnosticsConsumer);
-		cache.getOrCreate(model.eResource()).setIgnoreNotifications(false);
+		cache.getOrCreate(model.eResource()).listenToNotifications();
 	}
 
 	@Override
