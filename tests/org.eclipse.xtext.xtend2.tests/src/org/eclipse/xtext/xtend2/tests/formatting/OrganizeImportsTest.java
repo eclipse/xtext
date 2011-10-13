@@ -46,7 +46,7 @@ public class OrganizeImportsTest extends AbstractXtend2TestCase {
 				"import java.util.List\n" +
 				"import java.util.List\n" +
 				"import java.util.List\n" +
-				"import java.special.X\n" +
+				"import java.lang.Integer\n" +
 				"\n" +
 				"class Foo {\n" +
 				"  def void test(List<String> s) {\n" +
