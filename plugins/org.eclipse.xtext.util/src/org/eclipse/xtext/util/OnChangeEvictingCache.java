@@ -201,14 +201,20 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 			}
 		}
 
-		private void listenToNotifications() {
+		/**
+		 * @since 2.1
+		 */
+		public void listenToNotifications() {
 			ignoreNotificationCounter--;
 			if (ignoreNotificationCounter < 0) {
 				throw new IllegalStateException("ignoreNotificationCounter may not be less than zero");
 			}
 		}
 
-		private void ignoreNotifications() {
+		/**
+		 * @since 2.1
+		 */
+		public void ignoreNotifications() {
 			ignoreNotificationCounter++;
 		}
 
