@@ -65,7 +65,7 @@ public class PolymorphicDispatcherTest extends TestCase {
 			assertNotNull(string);
 		}
 		long after = System.currentTimeMillis();
-		assertTrue((after - before) < 1000);
+		assertTrue(String.format("Expected %d < 1000", after - before), (after - before) < 1000);
 	}
 
 	public void testSimple() throws Exception {
