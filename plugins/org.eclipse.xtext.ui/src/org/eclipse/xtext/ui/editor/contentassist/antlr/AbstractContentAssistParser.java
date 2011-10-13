@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.contentassist.antlr;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -31,6 +32,7 @@ import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
 import org.eclipse.xtext.ui.LexerUIBindings;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.ObservableXtextTokenStream.StreamListener;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.InfiniteRecursion;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer;
 
 import com.google.common.collect.Lists;
@@ -204,7 +206,12 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 				wasRecovering[0] = false;
 				Method method = parser.getClass().getMethod(ruleNames[i]);
 				method.setAccessible(true);
-				method.invoke(parser);
+				try {
+					method.invoke(parser);
+				} catch(InvocationTargetException targetException) {
+					if (!(targetException.getCause() instanceof InfiniteRecursion))
+						throw targetException;
+				}
 				result = parser.getFollowElements();
 				if (i == ruleNames.length - 1 && !GrammarUtil.isMultipleCardinality(elementToParse)) {
 					if (consumedSomething[0] || announcedEofWithLA[0])
@@ -289,7 +296,11 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 		parser.setUnorderedGroupHelper(helper);
 		helper.initializeWith(parser);
 		tokens.setListener(parser);
-		return Lists.newArrayList(getFollowElements(parser));
+		try {
+			return Lists.newArrayList(getFollowElements(parser));
+		} catch(InfiniteRecursion infinite) {
+			return Lists.newArrayList(parser.getFollowElements());
+		}
 	}
 
 	public void setUnorderedGroupHelper(Provider<IUnorderedGroupHelper> unorderedGroupHelper) {
