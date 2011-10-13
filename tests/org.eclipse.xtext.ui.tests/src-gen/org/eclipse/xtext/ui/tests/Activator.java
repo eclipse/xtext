@@ -51,6 +51,7 @@ public class Activator extends AbstractUIPlugin {
 			registerInjectorFor("org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage");
 			registerInjectorFor("org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage");
 			registerInjectorFor("org.eclipse.xtext.ui.tests.editor.contentassist.Bug348199TestLanguage");
+			registerInjectorFor("org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage");
 			registerInjectorFor("org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage");
 			registerInjectorFor("org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguage");
 			registerInjectorFor("org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistCustomizingTestLanguage");
@@ -142,6 +143,9 @@ public class Activator extends AbstractUIPlugin {
 		}
 		if ("org.eclipse.xtext.ui.tests.editor.contentassist.Bug348199TestLanguage".equals(grammar)) {
 		  return new org.eclipse.xtext.ui.tests.editor.contentassist.Bug348199TestLanguageRuntimeModule();
+		}
+		if ("org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguageRuntimeModule();
 		}
 		if ("org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage".equals(grammar)) {
 		  return new org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguageRuntimeModule();
@@ -255,6 +259,9 @@ public class Activator extends AbstractUIPlugin {
 		}
 		if ("org.eclipse.xtext.ui.tests.editor.contentassist.Bug348199TestLanguage".equals(grammar)) {
 		  return new org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug348199TestLanguageUiModule(this);
+		}
+		if ("org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug360834TestLanguageUiModule(this);
 		}
 		if ("org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage".equals(grammar)) {
 		  return new org.eclipse.xtext.ui.tests.editor.contentassist.ui.BacktrackingContentAssistTestLanguageUiModule(this);
