@@ -105,4 +105,25 @@ public class ImportNormalizer {
 		return false;
 	}
 	
+	/**
+	 * @since 2.1
+	 */
+	public QualifiedName getImportedNamespacePrefix() {
+		return importedNamespacePrefix;
+	}
+	
+	/**
+	 * @since 2.1
+	 */
+	public boolean hasWildCard() {
+		return hasWildCard;
+	}
+	
+	/**
+	 * @since 2.1
+	 */
+	public boolean isIgnoreCase() {
+		return ignoreCase;
+	}
+	
 }
