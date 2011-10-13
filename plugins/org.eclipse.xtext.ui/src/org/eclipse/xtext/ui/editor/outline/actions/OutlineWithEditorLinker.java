@@ -98,7 +98,7 @@ public class OutlineWithEditorLinker implements IPropertyChangeListener {
 
 	public void setLinkingEnabled(boolean enabled) {
 		isLinkingEnabled = enabled;
-		if (enabled && !treeViewer.getTree().isDisposed()) {
+		if (enabled && treeViewer != null && !treeViewer.getTree().isDisposed()) {
 			ISelection selection = treeViewer.getSelection();
 			selectInTextEditor(selection);
 		}
