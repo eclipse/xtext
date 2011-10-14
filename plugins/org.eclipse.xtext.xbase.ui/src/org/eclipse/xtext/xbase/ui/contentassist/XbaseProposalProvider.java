@@ -32,6 +32,7 @@ import org.eclipse.xtext.conversion.impl.QualifiedNameValueConverter;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -171,8 +172,19 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 				typeProposalProvider.createTypeProposals(this, context, reference, filter, valueConverter, acceptor);
 			}
 		} else {
-			if (forced || !getXbaseCrossReferenceProposalCreator().isShowSmartProposals())
+			if (forced || !getXbaseCrossReferenceProposalCreator().isShowSmartProposals()) {
+				INode lastCompleteNode = context.getLastCompleteNode();
+				if (lastCompleteNode instanceof ILeafNode && !((ILeafNode) lastCompleteNode).isHidden()) {
+					if (lastCompleteNode.getLength() > 0 && lastCompleteNode.getTotalEndOffset() == context.getOffset()) {
+						String text = lastCompleteNode.getText();
+						char lastChar = text.charAt(text.length() - 1);
+						if (Character.isJavaIdentifierPart(lastChar)) {
+							return;
+						}
+					}
+				}
 				typeProposalProvider.createTypeProposals(this, context, reference, filter, valueConverter, acceptor);
+			}
 		}
 	}
 	
@@ -588,7 +600,8 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 
 	protected void appendParameters(StyledString result, JvmExecutable executable, int insignificantParameters) {
 		boolean first = true;
-		for(JvmFormalParameter parameter: executable.getParameters().subList(insignificantParameters, executable.getParameters().size())) {
+		List<JvmFormalParameter> declaredParameters = executable.getParameters();
+		for(JvmFormalParameter parameter: declaredParameters.subList(Math.min(insignificantParameters, declaredParameters.size()), declaredParameters.size())) {
 			if (!first)
 				result.append(", ");
 			first = false;

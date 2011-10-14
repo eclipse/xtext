@@ -358,6 +358,17 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 							calculator.doSwitch((UnorderedGroup) abstractElement, element.getHandledUnorderedGroupElements());
 						} else {
 							calculator.doSwitch(abstractElement);
+							if (GrammarUtil.isOptionalCardinality(abstractElement)) {
+								EObject container = abstractElement.eContainer();
+								if (container instanceof Group) {
+									Group group = (Group) container;
+									if (group.getElements().get(group.getElements().size() - 1) == abstractElement) {
+										if (!currentState.contains(group) && GrammarUtil.isMultipleCardinality(group)) {
+											calculator.doSwitch(group);
+										}
+									}
+								}
+							}
 						}
 					}
 				}

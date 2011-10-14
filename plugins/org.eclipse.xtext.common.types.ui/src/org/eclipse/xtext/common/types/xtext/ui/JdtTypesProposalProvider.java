@@ -230,7 +230,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 		SearchEngine searchEngine = new SearchEngine();
 		searchEngine.searchAllTypeNames(
 				packageName, SearchPattern.R_PATTERN_MATCH, 
-				typeName, SearchPattern.R_PREFIX_MATCH, 
+				typeName, SearchPattern.R_PREFIX_MATCH | SearchPattern.R_CAMELCASE_MATCH, 
 				filter.getSearchFor(), scope, 
 				new TypeNameRequestor() {
 					@Override
