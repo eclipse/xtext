@@ -149,8 +149,17 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 			int idx = localTrace.indexOf(grammarElement);
 			// due to error recovery inconveniences we have to add some grammarElements
 			// twice immediately after each other
-			if (idx >= 0 && idx != localTrace.size() - 1)
-				throw new InfiniteRecursion();
+			if (idx >= 0 && idx != localTrace.size() - 1) {
+				List<EObject> traceAfterFirstOccurrence = localTrace.subList(idx + 1, localTrace.size());
+				int secondIdx = traceAfterFirstOccurrence.indexOf(grammarElement);
+				if (secondIdx >= 0 && secondIdx != traceAfterFirstOccurrence.size() - 1) {
+					List<EObject> firstRun = localTrace.subList(idx, idx + 1 + secondIdx);
+					List<EObject> secondRun = traceAfterFirstOccurrence.subList(secondIdx, traceAfterFirstOccurrence.size());
+					if (firstRun.equals(secondRun)) {
+						throw new InfiniteRecursion();
+					}
+				}
+			}
 		}
 		grammarElements.add(grammarElement);
 		localTrace.add(grammarElement);
