@@ -111,8 +111,8 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 		Object text = textDispatcher.invoke(modelElement);
 		if(text == null) {
 			text = modelElement.eResource().getURI().trimFileExtension().lastSegment();
-			createEObjectNode(parentNode, modelElement, imageDispatcher.invoke(modelElement), text, isLeafDispatcher.invoke(modelElement));
 		}
+		createEObjectNode(parentNode, modelElement, imageDispatcher.invoke(modelElement), text, isLeafDispatcher.invoke(modelElement));
 	}
 
 	protected void _createNode(IOutlineNode parentNode, EObject modelElement) {
