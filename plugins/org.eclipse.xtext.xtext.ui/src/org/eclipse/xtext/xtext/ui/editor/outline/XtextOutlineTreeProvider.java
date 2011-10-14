@@ -9,7 +9,6 @@ package org.eclipse.xtext.xtext.ui.editor.outline;
 
 import java.util.Set;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
