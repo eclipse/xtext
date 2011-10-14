@@ -7,9 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.editor.autoedit;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.ITypedRegion;
 import org.eclipse.xtext.ui.editor.autoedit.DefaultAutoEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.autoedit.MultiLineTerminalsEditStrategy;
+import org.eclipse.xtext.ui.editor.autoedit.SingleLineTerminalsStrategy.StrategyPredicate;
 import org.eclipse.xtext.ui.editor.model.DocumentUtil;
 
 /**
@@ -17,10 +23,22 @@ import org.eclipse.xtext.ui.editor.model.DocumentUtil;
  */
 public class XtextAutoEditStrategy extends DefaultAutoEditStrategyProvider {
 
+	private static final Pattern singleColonPattern = Pattern.compile("[^:]:($|[^:])");
+	private static final Pattern returnsPattern = Pattern.compile("\\sreturns\\s");
+	
 	@Override
 	protected void configure(IEditStrategyAcceptor acceptor) {
 		super.configure(acceptor);
-		acceptor.accept(singleLineTerminals.newInstance(":", ";"),IDocument.DEFAULT_CONTENT_TYPE);
+		acceptor.accept(singleLineTerminals.newInstance(":", ";", new StrategyPredicate() {
+			public boolean isInsertClosingBracket(IDocument doc, final int offset) throws BadLocationException {
+				String currentRuleUptoOffset = getCurrentRuleUptoOffset(offset, doc);
+				Matcher matcher = singleColonPattern.matcher(currentRuleUptoOffset);
+				boolean isInsideRuleBody = matcher.find();
+				if(isInsideRuleBody) 
+					return false;
+				return !returnsPattern.matcher(currentRuleUptoOffset).find();
+			}
+		}), IDocument.DEFAULT_CONTENT_TYPE);
 		MultiLineTerminalsEditStrategy configure = multiLineTerminals.newInstance(":", null, ";");
 		// the following is a cheap but working hack, which replaces any double colons '::' by whitespace '  ' temporarily.
 		configure.setDocumentUtil(new DocumentUtil() {
@@ -31,5 +49,24 @@ public class XtextAutoEditStrategy extends DefaultAutoEditStrategyProvider {
 		});
 		acceptor.accept(configure, IDocument.DEFAULT_CONTENT_TYPE);
 	}
-	
+
+	protected String getCurrentRuleUptoOffset(int offset, IDocument doc) throws BadLocationException {
+		ITypedRegion currentPartition = doc.getPartition(offset);
+		String partitionType = currentPartition.getType();
+		String currentSegment = doc.get(currentPartition.getOffset(), offset - currentPartition.getOffset());
+		StringBuilder ruleAsString = new StringBuilder(); 
+		while(currentSegment.indexOf(';') == -1) {
+			ruleAsString.insert(0, currentSegment);
+			do {
+				if(currentPartition.getOffset()==0) {
+					return ruleAsString.toString();
+				}
+				currentPartition = doc.getPartition(currentPartition.getOffset()-1);
+				currentSegment = doc.get(currentPartition.getOffset(), currentPartition.getLength());
+			} while(!partitionType.equals(currentPartition.getType()));
+		}
+		ruleAsString.insert(0, currentSegment.substring(currentSegment.lastIndexOf(';') + 1));
+		return ruleAsString.toString();
+	}
+
 }

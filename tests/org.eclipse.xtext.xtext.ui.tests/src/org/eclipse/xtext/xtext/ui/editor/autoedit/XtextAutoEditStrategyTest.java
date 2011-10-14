@@ -108,6 +108,68 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 				"//\n|", editor);
 	}
 	
+	public void testBug346032_00() throws Exception {
+		XtextEditor editor = openEditor(
+				"grammar foo\n" +
+				"generate foo 'foo' as foo" + 
+				"Bar|");
+		pressKey(editor, ':');
+		assertState("grammar foo\n" +
+				"generate foo 'foo' as foo" + 
+				"Bar:|;", 
+				editor);
+	}
+
+	public void testBug346032_01() throws Exception {
+		XtextEditor editor = openEditor(
+				"grammar foo\n" +
+				"generate foo 'foo' as foo" + 
+				"Bar:|");
+		pressKey(editor, ':');
+		assertState("grammar foo\n" +
+				"generate foo 'foo' as foo" + 
+				"Bar::|", 
+				editor);
+	}
+	
+	public void testBug346032_02() throws Exception {
+		XtextEditor editor = openEditor(
+				"grammar foo\n" +
+				"generate foo 'foo' as foo" + 
+				"Bar returns foo|");
+		pressKey(editor, ':');
+		assertState("grammar foo\n" +
+				"generate foo 'foo' as foo" + 
+				"Bar returns foo:|", 
+				editor);
+	}
+	
+	public void testBug346032_03() throws Exception {
+		XtextEditor editor = openEditor(
+				"grammar foo\n" +
+				"generate foo 'foo' as foo" + 
+				"Bar returns foo|");
+		pressKey(editor, ':');
+		assertState("grammar foo\n" +
+				"generate foo 'foo' as foo" + 
+				"Bar returns foo:|", 
+				editor);
+	}
+	
+	public void testBug346032_04() throws Exception {
+		XtextEditor editor = openEditor(
+				"grammar foo\n" +
+				"generate foo 'foo' as foo" + 
+				"Bar // returns foo\n" +
+				"|");
+		pressKey(editor, ':');
+		assertState("grammar foo\n" +
+				"generate foo 'foo' as foo" + 
+				"Bar // returns foo\n" +
+				":|;", 
+				editor);
+	}
+	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
