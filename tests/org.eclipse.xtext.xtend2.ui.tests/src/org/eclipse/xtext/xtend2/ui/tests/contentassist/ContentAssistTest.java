@@ -231,9 +231,17 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest imp
 		return resourceSet;
 	}
 	
+	protected void initializeTypeProvider(XtextResource result) {
+		XtextResourceSet resourceSet = (XtextResourceSet) result.getResourceSet();
+		IJvmTypeProvider.Factory typeProviderFactory = new JdtTypeProviderFactory(this);
+		typeProviderFactory.findOrCreateTypeProvider(resourceSet);
+		resourceSet.setClasspathURIContext(getJavaProject(resourceSet));
+	}
+	
 	@Override
 	public XtextResource getResourceFor(InputStream stream) {
 		XtextResource result = super.getResourceFor(stream);
+		initializeTypeProvider(result);
 		return result;
 	}
 	

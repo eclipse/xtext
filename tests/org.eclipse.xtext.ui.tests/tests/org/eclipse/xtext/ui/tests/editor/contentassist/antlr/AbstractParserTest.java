@@ -210,7 +210,7 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 //		Collection<FollowElement> followList = com.google.common.collect.Lists.newArrayList(getFollowSet(input));
 		assertEquals(expected.size(), followSet.size());
 		Set<AbstractElement> grammarElements = computeSearchElements(followSet);
-//		Collection<AbstractElement> followElementList = Lists.newArrayList(grammarElements);
+//		Collection<AbstractElement> followElementList = com.google.common.collect.Lists.newArrayList(grammarElements);
 		assertEquals(expected, grammarElements);
 	}
 

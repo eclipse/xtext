@@ -24,16 +24,14 @@ public class CamelCasePrefixMatcherTest extends AbstractPrefixMatcherTest<Prefix
 		assertTrue(matcher.isCandidateMatchingPrefix("ExactMatch", "ExMa"));
 		assertTrue(matcher.isCandidateMatchingPrefix("EXACTMatch", "EXACT"));
 		assertTrue(matcher.isCandidateMatchingPrefix("EXactMatch", "EXM"));
+		assertTrue(matcher.isCandidateMatchingPrefix("exactMatch", "exM"));
+		assertTrue(matcher.isCandidateMatchingPrefix("EXactMatch", "EXACTm"));
+		assertTrue(matcher.isCandidateMatchingPrefix("EXACTMatch", "EXaCT"));
+		assertTrue(matcher.isCandidateMatchingPrefix("exactMatch", "exMa"));
 	}
 	
 	public void testCamelCaseMisMatch() {
 		assertFalse(matcher.isCandidateMatchingPrefix("ExactMatch", "EXMa"));
 	}
 	
-	// Fix the implementation to assert the following test cases when inverted
-	public void testFixMe() {
-		assertTrue(matcher.isCandidateMatchingPrefix("EXACTMatch", "EXaCT"));
-		assertFalse(matcher.isCandidateMatchingPrefix("exactMatch", "exM"));
-		assertTrue(matcher.isCandidateMatchingPrefix("EXactMatch", "EXACTm"));
-	}
 }

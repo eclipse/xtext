@@ -413,6 +413,14 @@ public abstract class AbstractXbaseContentAssistTest extends TestCase implements
 		newBuilder().append("try {} catch(NullPointerException e) ").assertText(expect(new String[]{"e"}, getKeywordsAndStatics()));
 	}
 	
+	@Test public void testCamelCase_01() throws Exception {
+		newBuilder().append("newLLis").assertText("newLinkedList()");
+	}
+	
+	@Test public void testCamelCase_02() throws Exception {
+		newBuilder().append("new ArrBloQu").assertText("java.util.concurrent.ArrayBlockingQueue");
+	}
+	
 	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
 		return new ContentAssistProcessorTestBuilder(getInjector(), this);
 	}
