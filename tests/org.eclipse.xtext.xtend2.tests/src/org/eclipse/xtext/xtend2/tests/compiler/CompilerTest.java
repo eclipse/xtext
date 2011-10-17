@@ -15,6 +15,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -31,6 +32,7 @@ import org.eclipse.xtext.junit.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -2029,6 +2031,44 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"}";
 		String javaCode = compileToJavaCode(code);
 		javaCompiler.compileToClass("foo.Bar", javaCode);
+	}
+	
+	public void testArrayConversion_01() throws Exception {
+		int[] expected = new int[] { 1, 2, 3 };
+		Object wrappedArray = Conversions.doWrapArray(expected);
+		invokeAndExpect3(
+				expected, 
+				"def int[] unpackArray(Iterable<Integer> iterable) {" + 
+				"    return iterable\n" +
+				"}", "unpackArray", new Class[] { Iterable.class }, wrappedArray);
+	}
+	
+	public void testArrayConversion_02() throws Exception {
+		int[] expected = new int[] { 1, 2, 3 };
+		String classBody = 
+				"def int[] unpackArray(Iterable<Integer> iterable) {" + 
+				"    return iterable\n" +
+				"}";
+		
+		
+		Class<?> class1 = compileJavaCode("x.Y", "package x class Y {" + classBody + "}");
+		Object result = applyImpl(class1, "unpackArray", new Class[] { Iterable.class }, Lists.newArrayList(1, 2, 3));
+		assertTrue(result instanceof int[]);
+		assertTrue(Arrays.toString((int[]) result) + "!=" + Arrays.toString(expected), Arrays.equals(expected, (int[]) result));
+	}
+	
+	public void testArrayConversion_03() throws Exception {
+		String code =
+				"package foo " + 
+				"class Bar extends testdata.ArrayClient {" +
+				"  override toStringArray(String s1, String s2) {" +
+				"    newArrayList(s1, s2)"+
+				"  }"+
+				"}";
+		Class<?> class1 = compileJavaCode("foo.Bar", code);
+		Object result = applyImpl(class1, "toStringArray", new Class[] { String.class, String.class }, "a", "b");
+		assertTrue(result instanceof String[]);
+		assertEquals(Lists.newArrayList("a", "b"), Arrays.asList((String[])result));
 	}
 	
 	@Inject

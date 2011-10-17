@@ -24,6 +24,7 @@ import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmCompoundTypeReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -231,6 +232,9 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		}
 		if (reference instanceof JvmAnyTypeReference) {
 			return allowAnyType;
+		}
+		if (reference instanceof JvmGenericArrayTypeReference) {
+			return isResolved(((JvmGenericArrayTypeReference) reference).getComponentType(), declarator, rawType, allowAnyType, visited);
 		}
 		return true;
 	}

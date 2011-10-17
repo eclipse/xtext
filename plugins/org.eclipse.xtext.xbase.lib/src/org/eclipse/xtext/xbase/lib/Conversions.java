@@ -9,7 +9,10 @@ package org.eclipse.xtext.xbase.lib;
 
 import java.lang.reflect.Array;
 import java.util.AbstractList;
+import java.util.List;
 import java.util.RandomAccess;
+
+import com.google.common.collect.Iterables;
 
 /**
  * This is a library used to convert arrays to lists and vice versa in a way that keeps the identity of the
@@ -49,7 +52,8 @@ public class Conversions {
 
 	/**
 	 * Unwraps {@code object} to extract the original array if and only if {@code object} was previously created by
-	 * {@link #doWrapArray(Object)}.
+	 * {@link #doWrapArray(Object)}. If the array's component type cannot be determined at runtime, {@link Object} is  
+	 * used.
 	 * 
 	 * @param value
 	 *            the object to be unwrapped. May be <code>null</code>.
@@ -57,12 +61,75 @@ public class Conversions {
 	 *         May return <code>null</code> if the value was <code>null</code>.
 	 */
 	public static Object unwrapArray(Object value) {
-		//TODO if value is instanceof List return list. needs type information.
-		if (value instanceof WrappedArray<?>)
-			return ((WrappedArray<?>) value).internalToArray();
-		if (value instanceof WrappedPrimitiveArray)
-			return ((WrappedPrimitiveArray) value).internalToArray();
+		return unwrapArray(value, Object.class);
+	}
+	
+	/**
+	 * Unwraps {@code object} to extract the original array if and only if {@code object} was previously created by
+	 * {@link #doWrapArray(Object)}.
+	 * 
+	 * @param value
+	 *            the object to be unwrapped. May be <code>null</code>.
+	 * @param componentType
+	 *            the expected component type of the array. May not be <code>null</code>.
+	 * @return the previously wrapped array if the given value represents such. Otherwise returns the value unmodified.
+	 *         May return <code>null</code> if the value was <code>null</code>.
+	 * @throws ArrayStoreException
+	 *             if the expected runtime {@code componentType} does not match the actual runtime component type.
+	 */
+	public static Object unwrapArray(Object value, Class<?> componentType) {
+		if (value instanceof WrappedArray<?>) {
+			Object result = ((WrappedArray<?>) value).internalToArray();
+			return checkComponentType(result, componentType);
+		}
+		if (value instanceof WrappedPrimitiveArray) {
+			Object result = ((WrappedPrimitiveArray) value).internalToArray();
+			return checkComponentType(result, componentType);
+		}
+		if (value instanceof Iterable<?>) {
+			if (!componentType.isPrimitive()) {
+				@SuppressWarnings({ "unchecked", "rawtypes" })
+				Object result = Iterables.toArray((Iterable)value, componentType);
+				return result;
+			} else {
+				try {
+					List<?> list = IterableExtensions.toList((Iterable<?>) value);
+					Object result = Array.newInstance(componentType, list.size());
+					for(int i = 0; i < list.size(); i++) {
+						Object element = list.get(i);
+						if (element == null) {
+							throw new ArrayStoreException("Cannot store <null> in primitive arrays.");
+						}
+						Array.set(result, i, element);
+					}
+					return result;
+				} catch(IllegalArgumentException iae) {
+					throw new ArrayStoreException("Primitive conversion failed: " + iae.getMessage());
+				}
+			}
+		}
 		return value;
+	}
+
+	/**
+	 * Checks the component type of the given array against the expected component type.
+	 * 
+	 * @param array
+	 *            the array to be checked. May not be <code>null</code>.
+	 * @param expectedComponentType
+	 *            the expected component type of the array. May not be <code>null</code>.
+	 * @return the unchanged array.
+	 * @throws ArrayStoreException
+	 *             if the expected runtime {@code componentType} does not match the actual runtime component type.
+	 */
+	private static Object checkComponentType(Object array, Class<?> expectedComponentType) {
+		Class<?> actualComponentType = array.getClass().getComponentType();
+		if (!expectedComponentType.isAssignableFrom(actualComponentType)) {
+			throw new ArrayStoreException(String.format(
+					"The expected component type %s is not assignable from the actual type %s", 
+					expectedComponentType.getCanonicalName(), actualComponentType.getCanonicalName()));
+		}
+		return array;
 	}
 
 	/**
