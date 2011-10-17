@@ -25,6 +25,7 @@ public class XtextAutoEditStrategy extends DefaultAutoEditStrategyProvider {
 
 	private static final Pattern singleColonPattern = Pattern.compile("[^:]:($|[^:])");
 	private static final Pattern returnsPattern = Pattern.compile("\\sreturns\\s");
+	private static final Pattern doubleColonPattern = Pattern.compile("::");
 	
 	@Override
 	protected void configure(IEditStrategyAcceptor acceptor) {
@@ -36,7 +37,11 @@ public class XtextAutoEditStrategy extends DefaultAutoEditStrategyProvider {
 				boolean isInsideRuleBody = matcher.find();
 				if(isInsideRuleBody) 
 					return false;
-				return !returnsPattern.matcher(currentRuleUptoOffset).find();
+				Matcher returnsPatternMatcher = returnsPattern.matcher(currentRuleUptoOffset);
+				if(returnsPatternMatcher.find()) {
+					return doubleColonPattern.matcher(currentRuleUptoOffset).find(returnsPatternMatcher.end());
+				}
+				return true;
 			}
 		}), IDocument.DEFAULT_CONTENT_TYPE);
 		MultiLineTerminalsEditStrategy configure = multiLineTerminals.newInstance(":", null, ";");
