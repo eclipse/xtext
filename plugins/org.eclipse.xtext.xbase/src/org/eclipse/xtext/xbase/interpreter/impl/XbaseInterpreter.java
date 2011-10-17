@@ -74,6 +74,7 @@ import org.eclipse.xtext.xbase.interpreter.IEvaluationResult;
 import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions;
+import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
@@ -759,6 +760,20 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 						invocationHandler = new DelegatingInvocationHandler(value, getClass(Functions.Function5.class));
 					} else if (getClass(Functions.Function6.class).isInstance(value)) {
 						invocationHandler = new DelegatingInvocationHandler(value, getClass(Functions.Function6.class));
+					}  else if (getClass(Procedures.Procedure0.class).isInstance(value)) {
+						invocationHandler = new DelegatingInvocationHandler(value, getClass(Procedures.Procedure0.class));
+					} else if (getClass(Procedures.Procedure1.class).isInstance(value)) {
+						invocationHandler = new DelegatingInvocationHandler(value, getClass(Procedures.Procedure1.class));
+					} else if (getClass(Procedures.Procedure2.class).isInstance(value)) {
+						invocationHandler = new DelegatingInvocationHandler(value, getClass(Procedures.Procedure2.class));
+					} else if (getClass(Procedures.Procedure3.class).isInstance(value)) {
+						invocationHandler = new DelegatingInvocationHandler(value, getClass(Procedures.Procedure3.class));
+					} else if (getClass(Procedures.Procedure4.class).isInstance(value)) {
+						invocationHandler = new DelegatingInvocationHandler(value, getClass(Procedures.Procedure4.class));
+					} else if (getClass(Procedures.Procedure5.class).isInstance(value)) {
+						invocationHandler = new DelegatingInvocationHandler(value, getClass(Procedures.Procedure5.class));
+					} else if (getClass(Procedures.Procedure6.class).isInstance(value)) {
+						invocationHandler = new DelegatingInvocationHandler(value, getClass(Procedures.Procedure6.class));
 					} else {
 						return value;
 					}
