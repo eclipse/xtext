@@ -32,7 +32,7 @@ public class EclipseLogAppender extends AppenderSkeleton {
 			final String version = "1.2.15";
 			Bundle[] bundles = Platform.getBundles(ORG_APACHE_LOG4J,version);
 			if (bundles==null || bundles.length==0)
-			      throw new IllegalStateException("Host bundle "+ORG_APACHE_LOG4J+" "+version+" not found!");
+			      throw new IllegalStateException("Host bundle "+ORG_APACHE_LOG4J+" "+version+" not found! If you run outside Eclipse, you might want to remove the jar org.eclipse.xtext.logging*.jar from your classpath.");
 			log = Platform.getLog(bundles[0]);
 		}
 		return log;
