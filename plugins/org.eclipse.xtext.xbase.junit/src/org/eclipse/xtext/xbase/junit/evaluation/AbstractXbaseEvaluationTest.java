@@ -1203,6 +1203,47 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
+	@Test public void testArrayConversion_06() throws Exception {
+		assertEvaluatesTo(Lists.newArrayList("b", "c"), 
+				"{" +
+				"  var a = 'a,b,c'.split(',')\n" + 
+				"  a = a.tail" +
+				"  a.toList" +
+				"}");
+	}
+	
+	@Test public void testArrayConversion_07() throws Exception {
+		assertEvaluatesTo(Lists.newArrayList(2, 3), 
+				"{" +
+				"  var int[] result = newArrayList(1, 2, 3)\n" + 
+				"  result = result.tail" +
+				"  result.toList" +
+				"}");
+	}
+	
+	@Test public void testArrayConversion_08() throws Exception {
+		assertEvaluatesTo(Lists.newArrayList("c", "b"), 
+				"{" +
+				"  var a = 'b,c'.split(',')\n" + 
+				"  new testdata.ArrayClient().swap(a).toList" +
+				"}");
+	}
+	
+	@Test public void testArrayConversion_09() throws Exception {
+		assertEvaluatesTo(Lists.newArrayList("c", "b"), 
+				"new testdata.ArrayClient().swap('b,c'.split(',')).toList");
+	}
+	
+	@Test public void testArrayConversion_10() throws Exception {
+		assertEvaluatesTo(Lists.newArrayList("c", "b"), 
+				"{" +
+				"  var a = 'a,b,c'.split(',')\n" + 
+				"  a = a.tail" +
+				"  a = new testdata.ArrayClient().swap(a)" +
+				"  a.toList" +
+				"}");
+	}
+	
 	@Test public void testConstructorVarArgs_01() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE, "new testdata.ClassWithVarArgs().defaultConstructor");
 	}
