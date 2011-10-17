@@ -117,6 +117,10 @@ public class SerializerTester {
 		}
 		EcoreUtil.resolveAll(parsed);
 		Assert.assertTrue(parsed.eResource().getErrors().toString(), parsed.eResource().getErrors().isEmpty());
+		assertEqualWithEmfFormatter(semanticObject, parsed);
+	}
+
+	protected void assertEqualWithEmfFormatter(EObject semanticObject, EObject parsed) {
 		String expected = EmfFormatter.objToStr(semanticObject);
 		String actual = EmfFormatter.objToStr(parsed);
 		Assert.assertEquals(expected, actual);

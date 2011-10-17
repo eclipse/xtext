@@ -8,6 +8,7 @@
 package testdata;
 
 import org.eclipse.xtext.xbase.lib.Functions;
+import org.eclipse.xtext.xbase.lib.Procedures;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -72,6 +73,26 @@ public class ClosureClient {
 	
 	public <In> boolean useGoogleCollectPredicate2(Predicate<? super In> predicate, In value) {
 		return predicate.apply(value);
+	}
+	
+	public void useRunnable(Runnable runnable) {
+		runnable.run();
+	}
+	
+	public Runnable asRunnable(final Procedures.Procedure0 procedure) {
+		return new Runnable() {
+			public void run() {
+				procedure.apply();
+			}
+		};
+	}
+	
+	public Procedures.Procedure0 asProcedure(final Runnable runnable) {
+		return new Procedures.Procedure0() {
+			public void apply() {
+				runnable.run();
+			}
+		};
 	}
 	
 	public <Obj> Functions.Function1<Obj, Obj> getIdentityFunction() {

@@ -7,9 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
-import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -29,6 +27,7 @@ import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions;
+import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.typing.Closures;
 
 import com.google.inject.Inject;
@@ -92,6 +91,8 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		} else if (isList(right) && getTypeReferences().isArray(left)) {
 			convertListToArray(left, appendable, context, expression);
 		} else if (right.getType().getIdentifier().startsWith(Functions.class.getCanonicalName())) {
+			convertFunctionType(left, right, appendable, expression, context);
+		} else if (right.getType().getIdentifier().startsWith(Procedures.class.getCanonicalName())) {
 			convertFunctionType(left, right, appendable, expression, context);
 		} else {
 			expression.exec();
@@ -167,7 +168,10 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		}
 		appendable.append(") {");
 		appendable.increaseIndentation();
-		appendable.append("\nreturn ");
+		if (!getTypeReferences().is(operation.getReturnType(), Void.TYPE))
+			appendable.append("\nreturn ");
+		else
+			appendable.append("\n");
 		expression.exec();
 		appendable.append(".apply(");
 		for (Iterator<JvmFormalParameter> iterator = params.iterator(); iterator.hasNext();) {
