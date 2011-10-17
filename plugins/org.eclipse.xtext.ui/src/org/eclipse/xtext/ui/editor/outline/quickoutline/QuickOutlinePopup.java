@@ -40,6 +40,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
@@ -96,6 +97,9 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 
 	@Inject
 	private OutlineNodeContentProvider contentProvider;
+	
+	@Inject
+	private PrefixMatcher prefixMatcher;
 
 	private int TREESTYLE = SWT.V_SCROLL | SWT.H_SCROLL;
 
@@ -107,7 +111,7 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 
 	private Text filterText;
 
-	private StringMatcher stringMatcher;
+	private PrefixMatcherOutlineAdapter prefixMatcherOutlineAdapter;
 
 	public QuickOutlinePopup() {
 		this(null);
@@ -219,29 +223,24 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 		filterText.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
 				String text = ((Text) e.widget).getText();
-				int length = text.length();
-				if (length > 0 && text.charAt(length - 1) != '*') {
-					text = text + '*';
-				}
 				setMatcherString(text, true);
 			}
 		});
 	}
 
 	protected StringMatcher getMatcher() {
-		return stringMatcher;
+		return prefixMatcherOutlineAdapter;
 	}
 
 	protected boolean hasMatcher() {
-		return stringMatcher != null;
+		return prefixMatcherOutlineAdapter != null;
 	}
 
 	protected void setMatcherString(String pattern, boolean update) {
 		if (pattern.length() == 0) {
-			stringMatcher = null;
+			prefixMatcherOutlineAdapter = null;
 		} else {
-			boolean ignoreCase = pattern.toLowerCase().equals(pattern);
-			stringMatcher = new StringMatcher(pattern, ignoreCase);
+			prefixMatcherOutlineAdapter = new PrefixMatcherOutlineAdapter(pattern, prefixMatcher);
 		}
 
 		if (update)
