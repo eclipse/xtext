@@ -170,6 +170,18 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 				editor);
 	}
 	
+	public void testBug346032_05() throws Exception {
+		XtextEditor editor = openEditor(
+				"grammar foo\n" +
+				"generate foo 'foo' as foo" + 
+				"Bar returns foo::bar|");
+		pressKey(editor, ':');
+		assertState("grammar foo\n" +
+				"generate foo 'foo' as foo" + 
+				"Bar returns foo::bar:|;", 
+				editor);
+	}
+
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
