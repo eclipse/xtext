@@ -70,6 +70,14 @@ public class AbstractEMFBasedPersisterTest extends TestCase {
 		checkEquals(loaded);
 	}
 	
+	public void testResourceReleased() throws Exception {
+		persister.save(descriptions);
+		List<IResourceDescription> loaded = Lists.newArrayList(persister.load());
+		for(IResourceDescription description: loaded) {
+			assertNull(((EObject)description).eResource());
+		}
+	}
+	
 	// this test will fail for binary resources ... :-(
 	public void testSaveAndReloadTwice() throws Exception {
 		persister.save(descriptions);

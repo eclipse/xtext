@@ -10,6 +10,7 @@ package org.eclipse.xtext.builder.builderState;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
@@ -109,7 +110,10 @@ public class EMFBasedPersister implements PersistedStateProvider {
 	}
 
 	public Iterable<IResourceDescription> loadFromResource(Resource resource) {
-		return Iterables.filter(resource.getContents(), IResourceDescription.class);
+		List<IResourceDescription> result = Lists.newArrayList(
+				Iterables.filter(resource.getContents(), IResourceDescription.class));
+		resource.getContents().clear();
+		return result;
 	}
 
 	public void save(Iterable<IResourceDescription> descriptions) {
