@@ -17,7 +17,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Proxy;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -212,7 +211,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			throw new InterpreterCanceledException();
 		Object result = evaluateDispatcher.invoke(expression, context, indicator);
 		final JvmTypeReference expectedType = typeProvider.getExpectedType(expression);
-		result = wrapArray(result, expectedType);
+		result = wrapOrUnwrapArray(result, expectedType);
 		return result;
 	}
 
@@ -347,7 +346,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 
 	protected Object _evaluateCastedExpression(XCastedExpression castedExpression, IEvaluationContext context, CancelIndicator indicator) {
 		Object result = internalEvaluate(castedExpression.getTarget(), context, indicator);
-		result = wrapArray(result, castedExpression.getType());
+		result = wrapOrUnwrapArray(result, castedExpression.getType());
 		result = coerceArgumentType(result, castedExpression.getType());
 		String typeName = castedExpression.getType().getType().getQualifiedName();
 		Class<?> expectedType = null;
@@ -422,9 +421,12 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 				+ " but got: " + result.getClass().getCanonicalName()));
 	}
 
-	protected Object wrapArray(Object result, JvmTypeReference jvmTypeReference) {
-		if (typeRefs.is(jvmTypeReference, List.class) || typeRefs.is(jvmTypeReference, Iterable.class) || typeRefs.is(jvmTypeReference, Collection.class)) {
+	protected Object wrapOrUnwrapArray(Object result, JvmTypeReference expectedType) {
+		if (typeRefs.isInstanceOf(expectedType, Iterable.class)) {
 			return Conversions.doWrapArray(result);
+		} else if (typeRefs.isArray(expectedType)) {
+			Class<?> arrayType = getJavaReflectAccess().getRawType(expectedType.getType());
+			return Conversions.unwrapArray(result, arrayType.getComponentType());
 		}
 		return result;
 	}

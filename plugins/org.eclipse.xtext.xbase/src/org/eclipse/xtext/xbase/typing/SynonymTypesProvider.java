@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.typing;
 
 import static java.util.Collections.*;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -26,6 +25,7 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.inject.Inject;
 
 /**
@@ -78,14 +78,24 @@ public class SynonymTypesProvider {
 			}
 			if (componentType == null)
 				componentType = typeRefs.getTypeForName(Object.class, type.getType());
-			JvmTypeReference result = typeRefs.createArrayType(componentType);
-			return singleton(result);
+			if (primitives.isPrimitive(componentType)) {
+				JvmTypeReference primitive = typeRefs.createArrayType(componentType);
+				JvmTypeReference wrapper = typeRefs.createArrayType(primitives.asWrapperTypeIfPrimitive(componentType));
+				return ImmutableSet.of(primitive, wrapper);
+			} else if (primitives.isWrapperType(componentType)) {
+				JvmTypeReference wrapper = typeRefs.createArrayType(componentType);
+				JvmTypeReference primitive = typeRefs.createArrayType(primitives.asPrimitiveIfWrapperType(componentType));
+				return ImmutableSet.of(wrapper, primitive);
+			} else {
+				JvmTypeReference result = typeRefs.createArrayType(componentType);
+				return singleton(result);
+			}
 		}
 		return emptySet();
 	}
 
 	protected boolean isList(JvmTypeReference type) {
-		return typeRefs.is(type, List.class) || typeRefs.is(type, Iterable.class) || typeRefs.is(type, Collection.class);
+		return typeRefs.isInstanceOf(type, Iterable.class);
 	}
 
 	protected EObject findContext(JvmType type) {
