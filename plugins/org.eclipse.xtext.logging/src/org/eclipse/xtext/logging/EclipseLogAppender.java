@@ -29,9 +29,10 @@ public class EclipseLogAppender extends AppenderSkeleton {
 
 	private synchronized ILog getLog(String loggerName) {
 		if (log == null) {
-			Bundle[] bundles = Platform.getBundles(ORG_APACHE_LOG4J,"1.2.15");
-			if (bundles.length==0)
-				throw new IllegalStateException("Host bundle not found!");
+			final String version = "1.2.15";
+			Bundle[] bundles = Platform.getBundles(ORG_APACHE_LOG4J,version);
+			if (bundles==null || bundles.length==0)
+			      throw new IllegalStateException("Host bundle "+ORG_APACHE_LOG4J+" "+version+" not found!");
 			log = Platform.getLog(bundles[0]);
 		}
 		return log;
@@ -60,7 +61,7 @@ public class EclipseLogAppender extends AppenderSkeleton {
 	}
 
 	private boolean isDoLog(Level level) {
-		return (level.toInt() >= Priority.WARN_INT);
+		return log!=null && (level.toInt() >= Priority.WARN_INT);
 	}
 
 	private int mapLevel(Level level) {
