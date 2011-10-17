@@ -1146,6 +1146,47 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
+	@Test public void testClosure_15() throws Exception {
+		assertEvaluatesTo(Collections.singletonList("literal"), 
+				"{" +
+				"  val result = newArrayList" +
+				"  val =>void runMe = [|result.add('literal')]" +
+				"  new testdata.ClosureClient().useRunnable(runMe)" +
+				"  result" +
+				"}");
+	}
+	
+	@Test public void testClosure_16() throws Exception {
+		assertEvaluatesTo(Collections.singletonList("literal"), 
+				"{" +
+				"  val result = newArrayList" +
+				"  new testdata.ClosureClient().useRunnable(|result.add('literal'))" +
+				"  result" +
+				"}");
+	}
+	
+	@Test public void testClosure_17() throws Exception {
+		assertEvaluatesTo(Collections.singletonList("literal"), 
+				"{" +
+				"  val result = newArrayList" +
+				"  val client = new testdata.ClosureClient()" +
+				"  val runnable = client.asRunnable(|result.add('literal'))" +
+				"  client.useRunnable(runnable)" +
+				"  result" +
+				"}");
+	}
+	
+	@Test public void testClosure_18() throws Exception {
+		assertEvaluatesTo(Collections.singletonList("literal"), 
+				"{" +
+				"  val result = newArrayList" +
+				"  val client = new testdata.ClosureClient()" +
+				"  val procedure = client.asProcedure(|result.add('literal'))" +
+				"  client.useRunnable(procedure)" +
+				"  result" +
+				"}");
+	}
+	
 	@Test public void testArrayConversion_01() throws Exception {
 		assertEvaluatesTo("LITERAL", 
 				"{" +
