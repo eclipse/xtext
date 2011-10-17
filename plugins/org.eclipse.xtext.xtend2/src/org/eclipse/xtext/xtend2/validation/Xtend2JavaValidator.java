@@ -83,6 +83,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendField;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendImport;
+import org.eclipse.xtext.xtend2.xtend2.XtendMember;
 import org.eclipse.xtext.xtend2.xtend2.XtendParameter;
 
 import com.google.common.base.Function;
@@ -223,6 +224,41 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 			error("Primitive void cannot be a dependency.", dep.getType(), null, INVALID_USE_OF_TYPE);
 		}
 	}
+	
+	@Check
+	public void checkMemberNamesAreUnique(XtendClass xtendClass) {
+		final Multimap<String, XtendField> name2field = HashMultimap.create();
+		final Multimap<JvmType, XtendField> type2extension = HashMultimap.create();
+		for(XtendMember member: xtendClass.getMembers()) {
+			if(member instanceof XtendField) {
+				XtendField field = (XtendField)member;
+				 if(isEmpty(field.getName())) {
+					 if(field.isExtension()) {
+						 JvmType type = field.getType().getType();
+						 if(type != null) 
+							 type2extension.put(type, field);
+					 }
+				 } else {
+					 name2field.put(field.getName(), field);
+				 }
+			}
+		}
+		for(String name: name2field.keySet()) {
+			Collection<XtendField> fields = name2field.get(name);
+			if(fields.size() >1) {
+				for(XtendField field: fields)
+					error("Duplicate field " + name, field, Xtend2Package.Literals.XTEND_FIELD__NAME, DUPLICATE_FIELD);
+			}
+		}
+		for(JvmType type: type2extension.keySet()) {
+			Collection<XtendField> fields = type2extension.get(type);
+			if(fields.size() >1) {
+				for(XtendField field: fields)
+					error("Duplicate extension with same type", field, XTEND_FIELD__TYPE, DUPLICATE_FIELD);
+			}
+		}
+	}
+
 
 	@Check
 	public void checkXtendParameterNotPrimitiveVoid(XtendParameter param) {

@@ -25,6 +25,7 @@ import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
+import org.eclipse.xtext.xtend2.xtend2.XtendMember;
 
 import com.google.inject.Inject;
 
@@ -252,6 +253,18 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 				,"package test class Baz implements java.io.Serializable {}");
 	}
 
+	public void testDuplicateFieldName() throws Exception {
+		XtendClass clazz = clazz("class Foo { int foo String foo double foo }");
+		for(XtendMember member: clazz.getMembers())
+			helper.assertError(member, Xtend2Package.Literals.XTEND_FIELD, DUPLICATE_FIELD, "foo", "duplicate");
+	}
+	
+	public void testDuplicateAnonymousExtension() throws Exception {
+		XtendClass clazz = clazz("import com.google.inject.Inject class Foo { @Inject extension String @Inject extension String }");
+		for(XtendMember member: clazz.getMembers())
+			helper.assertError(member, Xtend2Package.Literals.XTEND_FIELD, DUPLICATE_FIELD, "duplicate", "same", "type");
+	}
+	
 	public void testCaseFunctionNoParameters() throws Exception {
 		XtendFunction function = function("def dispatch foo() { null }");
 		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, IssueCodes.DISPATCH_FUNC_WITHOUT_PARAMS);
