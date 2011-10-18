@@ -72,7 +72,7 @@ public class NfaToProductionTest extends TestCase {
 		nfa.start().followedBy("x", "y", "stop");
 		nfa.state("x").followedBy("stop", "x");
 		nfa.state("y").followedBy("stop");
-		assertEquals("start (x+ | y)? stop", nfa2g(nfa));
+		assertEquals("start (x* | y?) stop", nfa2g(nfa));
 	}
 
 	public void testAlternative7() {
@@ -95,6 +95,14 @@ public class NfaToProductionTest extends TestCase {
 		nfa.state("x").followedBy("stop");
 		nfa.state("y").followedBy("stop");
 		assertEquals("start (a | b) (c | d) (x | y) stop", nfa2g(nfa));
+	}
+
+	public void testManyGroups1() {
+		StringNfa nfa = new StringNfa("start", "stop");
+		nfa.start().followedBy("x", "y");
+		nfa.state("x").followedBy("x", "y");
+		nfa.state("y").followedBy("x", "y", "stop");
+		assertEquals("start (x* y)+ stop", nfa2g(nfa));
 	}
 
 	public void testManyAlternative1() {
