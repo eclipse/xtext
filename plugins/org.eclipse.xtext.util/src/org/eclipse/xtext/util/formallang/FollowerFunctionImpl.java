@@ -42,36 +42,36 @@ public class FollowerFunctionImpl<E, T> implements FollowerFunction<E> {
 		this.production = production;
 	}
 
-	protected void collectByParent(E element, Set<E> result) {
+	protected void collectByParent(E element, Set<E> result, Set<E> visited) {
 		E container = production.getParent(element);
 		Iterable<E> children;
 		if (container == null)
 			result.add(null);
 		else if ((children = production.getSequentialChildren(container)) != null)
-			collectByParentSequence(element, container, children, result);
+			collectByParentSequence(element, container, children, result, visited);
 		else if ((children = production.getUnorderedChildren(container)) != null)
 			switch (unorderedStrategy) {
 				case SEQUENCE:
-					collectByParentSequence(element, container, children, result);
+					collectByParentSequence(element, container, children, result, visited);
 					break;
 				case MULIT_ALTERNATIVE:
-					collectElement(container, result);
-					collectByParent(container, result);
+					collectElement(container, result, visited);
+					collectByParent(container, result, visited);
 					break;
 			}
 		else {
 			if (production.isMany(container))
-				collectElement(container, result);
-			collectByParent(container, result);
+				collectElement(container, result, visited);
+			collectByParent(container, result, visited);
 		}
 	}
 
-	protected void collectByParentSequence(E element, E container, Iterable<E> children, Set<E> result) {
+	protected void collectByParentSequence(E element, E container, Iterable<E> children, Set<E> result, Set<E> visited) {
 		List<E> sequentialChildren = orderedList(children);
 		int i = sequentialChildren.indexOf(element) + 1;
 		while (i < sequentialChildren.size()) {
 			E next = sequentialChildren.get(i);
-			collectElement(next, result);
+			collectElement(next, result, visited);
 			if (production.isOptional(next))
 				i++;
 			else
@@ -79,71 +79,73 @@ public class FollowerFunctionImpl<E, T> implements FollowerFunction<E> {
 		}
 		if (i >= sequentialChildren.size()) {
 			if (production.isMany(container))
-				collectElement(container, result);
-			collectByParent(container, result);
+				collectElement(container, result, visited);
+			collectByParent(container, result, visited);
 		}
 	}
 
-	protected void collectChildren(E element, Set<E> result) {
+	protected void collectChildren(E element, Set<E> result, Set<E> visited) {
 		Iterable<E> children;
 		if ((children = production.getSequentialChildren(element)) != null)
-			collectChildrenSequence(element, children, result);
+			collectChildrenSequence(element, children, result, visited);
 		else if ((children = production.getAlternativeChildren(element)) != null)
-			collectChildrenAlternative(element, children, result);
+			collectChildrenAlternative(element, children, result, visited);
 		else if ((children = production.getUnorderedChildren(element)) != null)
 			switch (unorderedStrategy) {
 				case SEQUENCE:
-					collectChildrenSequence(element, children, result);
+					collectChildrenSequence(element, children, result, visited);
 					break;
 				case MULIT_ALTERNATIVE:
-					collectChildrenUnorderedAlt(element, children, result);
+					collectChildrenUnorderedAlt(element, children, result, visited);
 					break;
 			}
 		else {
 			if (production.isMany(element) /* && filter(element) */)
-				collectElement(element, result);
-			collectByParent(element, result);
+				collectElement(element, result, visited);
+			collectByParent(element, result, visited);
 		}
 	}
 
-	protected void collectChildrenAlternative(E element, Iterable<E> alternativeChildren, Set<E> result) {
-		boolean hasOptional = false;
+	protected void collectChildrenAlternative(E element, Iterable<E> alternativeChildren, Set<E> result, Set<E> visited) {
+		boolean optional = production.isOptional(element);
 		for (E child : orderedIterable(alternativeChildren)) {
-			hasOptional |= production.isOptional(child);
-			collectElement(child, result);
+			optional |= production.isOptional(child);
+			collectElement(child, result, visited);
 		}
-		if (hasOptional)
-			collectByParent(element, result);
+		if (optional)
+			collectByParent(element, result, visited);
 	}
 
-	protected void collectChildrenSequence(E element, Iterable<E> sequentialChildren, Set<E> result) {
+	protected void collectChildrenSequence(E element, Iterable<E> sequentialChildren, Set<E> result, Set<E> visited) {
 		boolean reachedEnd = true;
 		for (E child : orderedIterable(sequentialChildren)) {
-			collectElement(child, result);
+			collectElement(child, result, visited);
 			if (!production.isOptional(child)) {
 				reachedEnd = false;
 				break;
 			}
 		}
-		if (reachedEnd)
-			collectByParent(element, result);
+		if (reachedEnd || production.isOptional(element))
+			collectByParent(element, result, visited);
 	}
 
-	protected void collectChildrenUnorderedAlt(E element, Iterable<E> alternativeChildren, Set<E> result) {
+	protected void collectChildrenUnorderedAlt(E element, Iterable<E> alternativeChildren, Set<E> result, Set<E> visited) {
 		boolean hasMandatory = false;
 		for (E child : orderedIterable(alternativeChildren)) {
 			hasMandatory |= !production.isOptional(child);
-			collectElement(child, result);
+			collectElement(child, result, visited);
 		}
-		if (!hasMandatory)
-			collectByParent(element, result);
+		if (!hasMandatory || production.isOptional(element))
+			collectByParent(element, result, visited);
 	}
 
-	protected void collectElement(E ele, Set<E> result) {
+	protected void collectElement(E ele, Set<E> result, Set<E> visited) {
+		if (!visited.add(ele))
+			return;
 		if (filter(ele))
 			result.add(ele);
 		else
-			collectChildren(ele, result);
+			collectChildren(ele, result, visited);
 	}
 
 	protected boolean filter(E ele) {
@@ -166,7 +168,7 @@ public class FollowerFunctionImpl<E, T> implements FollowerFunction<E> {
 			if (element == null)
 				throw new NullPointerException();
 			Set<E> outgoing = Sets.newLinkedHashSet();
-			collectChildren(element, outgoing);
+			collectChildren(element, outgoing, Sets.<E> newHashSet());
 			return outgoing;
 		} else
 			return Collections.emptyList();
@@ -180,7 +182,12 @@ public class FollowerFunctionImpl<E, T> implements FollowerFunction<E> {
 		if (root == null)
 			throw new NullPointerException();
 		Set<E> outgoing = Sets.newLinkedHashSet();
-		collectElement(root, outgoing);
+		if (filter(root)) {
+			outgoing.add(root);
+			if (production.isOptional(root))
+				outgoing.add(null);
+		} else
+			collectChildren(root, outgoing, Sets.<E> newHashSet());
 		return outgoing;
 	}
 
