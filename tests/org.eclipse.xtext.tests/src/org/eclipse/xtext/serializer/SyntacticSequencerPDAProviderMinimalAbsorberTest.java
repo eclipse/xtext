@@ -370,4 +370,24 @@ public class SyntacticSequencerPDAProviderMinimalAbsorberTest extends AbstractSy
 		assertEquals(expected.toString(), actual);
 	}
 
+	public void testAlternativeManyNested() throws Exception {
+		StringBuilder grammar = new StringBuilder();
+		grammar.append("Model: (('x' x+=ID*) | ('y' y+=ID*))*;");
+		String actual = getParserRule2(grammar.toString());
+		StringBuilder expected = new StringBuilder();
+		expected.append("Model_Model:\n");
+		expected.append("  start ('x' | 'y')* stop\n");
+		expected.append("  start ('x'* 'y')+ y+=ID\n");
+		expected.append("  start ('y'* 'x')+ x+=ID\n");
+		expected.append("  x+=ID ('x' | 'y')* stop\n");
+		expected.append("  x+=ID ('x'* 'y')+ y+=ID\n");
+		expected.append("  x+=ID ('y'* 'x')* x+=ID\n");
+		expected.append("  y+=ID ('x' | 'y')* stop\n");
+		expected.append("  y+=ID ('x'* 'y')* y+=ID\n");
+		expected.append("  y+=ID ('y'* 'x')+ x+=ID\n");
+		expected.append("null_Model:\n");
+		expected.append("  start ('x' | 'y')* stop");
+		assertEquals(expected.toString(), actual);
+	}
+
 }
