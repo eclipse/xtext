@@ -15,6 +15,14 @@ import org.eclipse.osgi.util.NLS;
  */
 public class Messages extends NLS {
 	private static final String BUNDLE_NAME = "org.eclipse.xtext.builder.preferences.messages"; //$NON-NLS-1$
+	public static String BuilderConfigurationBlock_BuildJob_Title0;
+	public static String BuilderConfigurationBlock_BuildJob_TitleBuildAll_TaskName;
+	public static String BuilderConfigurationBlock_BuildJob_TitleBuildProject_TaskName;
+	public static String BuilderConfigurationBlock_GeneralSection_Label;
+	public static String BuilderConfigurationBlock_OutputFolderSection_Label;
+	public static String BuilderConfigurationBlock_SettingsChanged_ProjectBuild;
+	public static String BuilderConfigurationBlock_SettingsChanged_Title;
+	public static String BuilderConfigurationBlock_SettingsChanged_WorkspaceBuild;
 	public static String BuilderPreferencePage_GenerateAuto;
 	public static String BuilderPreferencePage_Output;
 	public static String OutputConfigurationPage_CleanDirectory;
@@ -26,6 +34,14 @@ public class Messages extends NLS {
 	public static String OutputConfigurationPage_Name;
 	public static String OutputConfigurationPage_OverrideExistingResources;
 	public static String ProjectDirectoryFieldEditor_OutputDirectory;
+
+	public static String PropertyAndPreferencePage_useworkspacesettings_change;
+	public static String PropertyAndPreferencePage_showprojectspecificsettings_label;
+	public static String PropertyAndPreferencePage_useprojectsettings_label;
+
+	public static String ProjectSelectionDialog_title;
+	public static String ProjectSelectionDialog_desciption;
+	public static String ProjectSelectionDialog_filter;
 	static {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
