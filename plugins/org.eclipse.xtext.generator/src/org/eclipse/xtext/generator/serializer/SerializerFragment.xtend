@@ -39,6 +39,10 @@ class SerializerFragment extends Xtend2GeneratorFragment {
 		state.srcGenOnly = srcGen;
 	}
 	
+	def setGenerateStub(boolean generateStub) {
+		srcGenOnly = !generateStub
+	}
+	
 	override Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		val bf = new BindFactory();
 		if(state.srcGenOnly) {

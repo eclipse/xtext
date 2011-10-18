@@ -21,6 +21,7 @@ import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.IGeneratorFragment;
 import org.eclipse.xtext.generator.Naming;
+import org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment;
 
 /**
  * An {@link IGeneratorFragment} to create a formatter for an Xtext language.
@@ -47,6 +48,9 @@ public class GeneratorFragment extends AbstractGeneratorFragment {
 	
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
+		if (XbaseGeneratorFragment.doesUseXbase(grammar)) {
+			return newArrayList((Object)false, (Object)false, (Object)false);
+		}
 		return newArrayList((Object)generatorStub, (Object)generateMwe, (Object)generateJavaMain);
 	}
 	
