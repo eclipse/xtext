@@ -15,23 +15,27 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.generator.serializer.SyntacticSequencerPDA2ExtendedDot;
+import org.eclipse.xtext.grammaranalysis.IPDAState.PDAStateType;
+import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
 import org.eclipse.xtext.serializer.analysis.IContextProvider;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.GetGrammarElement;
 import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.formallang.NfaToProduction;
-import org.eclipse.xtext.util.formallang.NfaUtil;
 import org.eclipse.xtext.util.formallang.ProductionStringFactory;
 import org.eclipse.xtext.xbase.lib.Pair;
 
+import com.google.common.base.Function;
 import com.google.common.base.Functions;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
@@ -102,15 +106,16 @@ public abstract class AbstractSyntacticSequencerPDAProviderTest extends Abstract
 	}
 
 	protected String getParserRule(String body) throws Exception {
-		Grammar grammar = (Grammar) getModel(HEADER + body);
-		drawGrammar("pdf/" + getName(), grammar);
-		List<String> result = Lists.newArrayList();
-		for (Triple<EClass, EObject, String> ctx : getContexts(grammar)) {
-			String t = ctx.getFirst() == null ? "null" : ctx.getFirst().getName();
-			result.add(t + "_" + ctx.getThird() + ":");
-			result.addAll(pda2lines(createSequenceParserPDAProvider().getPDA(ctx.getSecond(), ctx.getFirst())));
-		}
-		return Join.join("\n", result);
+		return getParserRule2(body);
+		//		Grammar grammar = (Grammar) getModel(HEADER + body);
+		//		drawGrammar("pdf/" + getName(), grammar);
+		//		List<String> result = Lists.newArrayList();
+		//		for (Triple<EClass, EObject, String> ctx : getContexts(grammar)) {
+		//			String t = ctx.getFirst() == null ? "null" : ctx.getFirst().getName();
+		//			result.add(t + "_" + ctx.getThird() + ":");
+		//			result.addAll(pda2lines(createSequenceParserPDAProvider().getPDA(ctx.getSecond(), ctx.getFirst())));
+		//		}
+		//		return Join.join("\n", result);
 	}
 
 	protected String getParserRule2(String body) throws Exception {
@@ -202,7 +207,19 @@ public abstract class AbstractSyntacticSequencerPDAProviderTest extends Abstract
 		return Joiner.on(" ").join(result);
 	}
 
+	private static class ToStr implements Function<ISynState, String> {
+		private Function<AbstractElement, String> ts = new GrammarElementTitleSwitch().showAssignments()
+				.hideCardinality().showQualified();
+
+		public String apply(ISynState from) {
+			return from.getType().getSimpleType() == PDAStateType.ELEMENT ? ts.apply(from.getGrammarElement()) : from
+					.toString();
+		}
+
+	}
+
 	private String pathToStr2(ISynTransition state) {
-		return new NfaToProduction().nfaToGrammar(state.getPathToTarget(), new ProductionStringFactory<ISynState>());
+		ProductionStringFactory<String> factory = new ProductionStringFactory<String>();
+		return new NfaToProduction().nfaToGrammar(state.getPathToTarget(), new ToStr(), factory);
 	}
 }
