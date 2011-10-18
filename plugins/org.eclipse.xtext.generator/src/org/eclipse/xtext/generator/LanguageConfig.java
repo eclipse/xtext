@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.xpand2.XpandExecutionContext;
@@ -155,8 +156,12 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 	
 	public void setUri(String uri) {
 		ResourceSet rs = forcedResourceSet != null ? forcedResourceSet : new XtextResourceSet();
-		for(String loadedResource: loadedResources) {
-			rs.getResource(URI.createURI(loadedResource), true);
+		for (String loadedResource : loadedResources) {
+			Resource res = rs.getResource(URI.createURI(loadedResource), true);
+			if (res == null || res.getContents().isEmpty())
+				LOG.error("Error loading '" + loadedResource + "'");
+			else if (!res.getErrors().isEmpty())
+				LOG.error("Error loading '" + loadedResource + "': " + res.getErrors().toString());
 		}
 		XtextResource resource = (XtextResource) rs.getResource(URI.createURI(uri), true);
 		if (resource.getContents().isEmpty()) {
