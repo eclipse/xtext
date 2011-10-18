@@ -62,14 +62,14 @@ public interface IResourceLoader {
 
 
 		/**
-		 * Get the next Resource.
-		 * This is a blocking call, it returns the next resource that was finished processing.
+		 * Get the next {@link LoadResult}.
+		 * This is a blocking call, it returns the next result that was finished processing.
 		 *
-		 * @return the next available resource
+		 * @return the next available load result
 		 * @throws IllegalStateException If the loading was cancelled or it hasn't started yet.
 		 * @throws LoadOperationException the load operation exception
 		 */
-		Resource next() throws LoadOperationException;
+		LoadResult next() throws LoadOperationException;
 
 		/**
 		 * Cancel loading the resources. This method can be executed multiple times.
@@ -78,6 +78,27 @@ public interface IResourceLoader {
 		 */
 		Collection<URI> cancel();
 
+	}
+	
+	/**
+	 * Represents a resource with its associated {@link URI}, which was used to load or look up the resource from its {@link ResourceSet}
+	 * 
+	 * Note, that the {@link URI} returned from {@link #getUri()} must not neccessarily be equals to what'S returned by {@link #getResource()}.getURI().
+	 */
+	static class LoadResult {
+		private Resource resource;
+		private URI uri;
+		public Resource getResource() {
+			return resource;
+		}
+		public URI getUri() {
+			return uri;
+		}
+		public LoadResult(Resource resource, URI uri) {
+			super();
+			this.resource = resource;
+			this.uri = uri;
+		}
 	}
 
 	@ImplementedBy(org.eclipse.xtext.builder.resourceloader.IResourceLoader.Sorter.NoSorting.class)

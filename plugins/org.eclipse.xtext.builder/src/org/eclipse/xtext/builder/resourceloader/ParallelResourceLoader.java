@@ -123,7 +123,7 @@ public class ParallelResourceLoader extends AbstractResourceLoader {
 			}
 		}
 
-		public Resource next() {
+		public LoadResult next() {
 			if (!hasNext())
 				throw new NoSuchElementException("The resource queue is empty or the execution was cancelled.");
 			Triple<URI, Resource, Throwable> result = null;
@@ -146,7 +146,7 @@ public class ParallelResourceLoader extends AbstractResourceLoader {
 					throw new LoadOperationException(uri, throwable.getCause());
 				throw new LoadOperationException(uri, throwable);
 			}
-			return resource;
+			return new LoadResult(resource, uri);
 		}
 
 		public boolean hasNext() {
