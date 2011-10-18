@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,38 +7,291 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer;
 
+import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.generator.serializer.SyntacticSequencerPDA2ExtendedDot;
+import org.eclipse.xtext.grammaranalysis.IPDAState.PDAStateType;
+import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
+import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
+import org.eclipse.xtext.serializer.analysis.IContextProvider;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynAbsorberState;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynState;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
+import org.eclipse.xtext.util.Triple;
+import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.util.formallang.NfaToProduction;
+import org.eclipse.xtext.util.formallang.ProductionStringFactory;
+import org.eclipse.xtext.xbase.lib.Pair;
+
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+import com.google.inject.internal.Join;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class SyntacticSequencerPDAProviderMinimalAbsorberTest extends AbstractSyntacticSequencerPDAProviderTest {
+public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 
-	@Override
-	protected SyntacticSequencerPDAProvider createSequenceParserPDAProvider() {
-		SyntacticSequencerPDAProvider result = new SyntacticSequencerPDAProvider() {
-			@Override
-			protected boolean isOptionalAbsorber(AbstractElement ele) {
-				return false;
+	private static class ToStr implements Function<ISynState, String> {
+		private Function<AbstractElement, String> ts = new GrammarElementTitleSwitch().showAssignments()
+				.hideCardinality().showQualified();
+
+		public String apply(ISynState from) {
+			return from.getType().getSimpleType() == PDAStateType.ELEMENT ? ts.apply(from.getGrammarElement()) : from
+					.toString();
+		}
+	}
+
+	final static String HEADER = "grammar org.eclipse.xtext.serializer.SequenceParserPDAProviderTestLanguage"
+			+ " with org.eclipse.xtext.common.Terminals "
+			+ "generate sequenceParserPDAProviderTest \"http://www.eclipse.org/2010/tmf/xtext/SequenceParserPDAProvider\"  ";
+
+	private void collectAbsorberStates(ISynState state, Set<ISynState> visited, Set<ISynAbsorberState> result) {
+		if (!visited.add(state))
+			return;
+		if (state instanceof ISynAbsorberState)
+			result.add((ISynAbsorberState) state);
+		for (ISynState follower : state.getFollowers())
+			collectAbsorberStates(follower, visited, result);
+	}
+
+	public void drawGrammar(String path, Grammar grammar) {
+		try {
+			IContextProvider contexts = get(IContextProvider.class);
+			SyntacticSequencerPDA2ExtendedDot seq2dot = get(SyntacticSequencerPDA2ExtendedDot.class);
+			for (EObject ctx : contexts.getAllContexts(grammar))
+				for (EClass type : contexts.getTypesForContext(ctx))
+					seq2dot.draw(
+							new Pair<EObject, EClass>(ctx, type),
+							path + "-" + new Context2NameFunction().apply(ctx) + "_"
+									+ (type == null ? "null" : type.getName()) + "-PDA.pdf", "-T pdf");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private List<Triple<EClass, EObject, String>> getContexts(Grammar grammar) {
+		final Context2NameFunction ctx2name = get(Context2NameFunction.class);
+		final IContextProvider contextProvider = get(IContextProvider.class);
+		List<Triple<EClass, EObject, String>> result = Lists.newArrayList();
+		for (EObject ctx : contextProvider.getAllContexts(grammar))
+			for (EClass type : contextProvider.getTypesForContext(ctx))
+				result.add(Tuples.create(type, ctx, ctx2name.getContextName(ctx)));
+		Collections.sort(result, new Comparator<Triple<EClass, EObject, String>>() {
+			public int compare(Triple<EClass, EObject, String> o1, Triple<EClass, EObject, String> o2) {
+				String n1 = o1.getFirst() == null ? "null" : o1.getFirst().getName();
+				String n2 = o2.getFirst() == null ? "null" : o2.getFirst().getName();
+				int c = n1.compareTo(n2);
+				if (c != 0)
+					return c;
+				return o1.getThird().compareTo(o2.getThird());
 			}
-		};
-		getInjector().injectMembers(result);
+		});
 		return result;
 	}
 
-	//	public void testXtext() {
-	//		Grammar grammar = get(IGrammarAccess.class).getGrammar();
-	//		try {
-	//			new SequenceParserNDA2Dot().draw(grammar, "pdf/" + getName() + "-NFA.pdf", "-T pdf");
-	//			SequenceParserPDA2Dot.drawGrammar(createSequenceParserPDAProvider(), "pdf/xtext", get(IGrammarAccess.class)
-	//					.getGrammar());
-	//			//			long time = System.currentTimeMillis();
-	//			//				System.out.println(new SequenceParserPDA2Dot(createSequenceParserPDAProvider()).draw(grammar));
-	//			//				System.out.println((System.currentTimeMillis() - time) + " msec");
-	//		} catch (IOException e) {
-	//		}
-	//	}
+	protected String getParserRule(String body) throws Exception {
+		Grammar grammar = (Grammar) getModel(HEADER + body);
+		drawGrammar("pdf/" + getName(), grammar);
+		List<String> result = Lists.newArrayList();
+		for (Triple<EClass, EObject, String> ctx : getContexts(grammar)) {
+			String t = ctx.getFirst() == null ? "null" : ctx.getFirst().getName();
+			result.add(t + "_" + ctx.getThird() + ":");
+			result.addAll(pda2lines2(get(ISyntacticSequencerPDAProvider.class).getPDA(ctx.getSecond(), ctx.getFirst())));
+		}
+		return Join.join("\n", result);
+	}
+
+	private String pathToStr2(ISynTransition state) {
+		ProductionStringFactory<String> factory = new ProductionStringFactory<String>();
+		return new NfaToProduction().nfaToGrammar(state.getPathToTarget(), new ToStr(), factory);
+	}
+
+	private List<String> pda2lines2(ISynAbsorberState start) {
+		Set<ISynAbsorberState> states = Sets.newHashSet(start);
+		collectAbsorberStates(start, Sets.<ISynState> newHashSet(), states);
+		List<String> pdalines = Lists.newArrayList();
+		for (ISynAbsorberState state : states)
+			for (ISynTransition child : state.getOutTransitions())
+				pdalines.add("  " + pathToStr2(child));
+		Collections.sort(pdalines);
+		return pdalines;
+	}
+
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		with(XtextStandaloneSetup.class);
+	}
+
+	public void testKeyword() throws Exception {
+		String actual = getParserRule("Rule: a1=ID 'kw1' a2=ID;");
+		StringBuilder expected = new StringBuilder();
+		expected.append("Rule_Rule:\n");
+		expected.append("  a1=ID 'kw1' a2=ID\n");
+		expected.append("  a2=ID stop\n");
+		expected.append("  start a1=ID");
+		assertEquals(expected.toString(), actual);
+	}
+
+	public void testKeywordOptional() throws Exception {
+		String actual = getParserRule("Rule: a1=ID 'kw1' 'kw2'? a2=ID;");
+		StringBuilder expected = new StringBuilder();
+		expected.append("Rule_Rule:\n");
+		expected.append("  a1=ID 'kw1' 'kw2'? a2=ID\n");
+		expected.append("  a2=ID stop\n");
+		expected.append("  start a1=ID");
+		assertEquals(expected.toString(), actual);
+	}
+
+	public void testKeywordMany() throws Exception {
+		String actual = getParserRule("Rule: a1=ID 'kw1' 'kw2'+ a2=ID;");
+		StringBuilder expected = new StringBuilder();
+		expected.append("Rule_Rule:\n");
+		expected.append("  a1=ID 'kw1' 'kw2'+ a2=ID\n");
+		expected.append("  a2=ID stop\n");
+		expected.append("  start a1=ID");
+		assertEquals(expected.toString(), actual);
+	}
+
+	public void testKeywordOptionalMany() throws Exception {
+		String actual = getParserRule("Rule: a1=ID 'kw1' 'kw2'* a2=ID;");
+		StringBuilder expected = new StringBuilder();
+		expected.append("Rule_Rule:\n");
+		expected.append("  a1=ID 'kw1' 'kw2'* a2=ID\n");
+		expected.append("  a2=ID stop\n");
+		expected.append("  start a1=ID");
+		assertEquals(expected.toString(), actual);
+	}
+
+	public void testKeywordAlternative() throws Exception {
+		String actual = getParserRule("Rule: a1=ID ('kw1' | 'kw2') a2=ID;");
+		StringBuilder expected = new StringBuilder();
+		expected.append("Rule_Rule:\n");
+		expected.append("  a1=ID ('kw1' | 'kw2') a2=ID\n");
+		expected.append("  a2=ID stop\n");
+		expected.append("  start a1=ID");
+		assertEquals(expected.toString(), actual);
+	}
+
+	public void testKeywordAllMandatory() throws Exception {
+		String actual = getParserRule("Rule: a1=ID ('kw1' a2=ID | 'kw2' a3=ID 'kw3');");
+		StringBuilder expected = new StringBuilder();
+		expected.append("Rule_Rule:\n");
+		expected.append("  a1=ID 'kw1' a2=ID\n");
+		expected.append("  a1=ID 'kw2' a3=ID\n");
+		expected.append("  a2=ID stop\n");
+		expected.append("  a3=ID 'kw3' stop\n");
+		expected.append("  start a1=ID");
+		assertEquals(expected.toString(), actual);
+	}
+
+	public void testUnassignedRuleCall1() throws Exception {
+		StringBuilder grammar = new StringBuilder();
+		grammar.append("Model: Sub;\n");
+		grammar.append("Sub: val=ID;\n");
+		String actual = getParserRule(grammar.toString());
+		StringBuilder expected = new StringBuilder();
+		expected.append("Sub_Model:\n");
+		expected.append("  start >>Sub val=ID\n");
+		expected.append("  val=ID <<Sub stop\n");
+		expected.append("Sub_Sub:\n");
+		expected.append("  start val=ID\n");
+		expected.append("  val=ID stop");
+		assertEquals(expected.toString(), actual);
+	}
+
+	public void testUnassignedRuleCall2() throws Exception {
+		StringBuilder grammar = new StringBuilder();
+		grammar.append("Model: 'kw1' Sub 'kw4';\n");
+		grammar.append("Sub: 'kw2' val=ID 'kw3';\n");
+		String actual = getParserRule(grammar.toString());
+		StringBuilder expected = new StringBuilder();
+		expected.append("Sub_Model:\n");
+		expected.append("  start 'kw1' >>Sub 'kw2' val=ID\n");
+		expected.append("  val=ID 'kw3' <<Sub 'kw4' stop\n");
+		expected.append("Sub_Sub:\n");
+		expected.append("  start 'kw2' val=ID\n");
+		expected.append("  val=ID 'kw3' stop");
+		assertEquals(expected.toString(), actual);
+	}
+
+	public void testAssignedRuleCall2() throws Exception {
+		StringBuilder grammar = new StringBuilder();
+		grammar.append("Model: 'kw1' sub=Sub 'kw4';\n");
+		grammar.append("Sub: 'kw2' val=ID 'kw3';\n");
+		String actual = getParserRule(grammar.toString());
+		StringBuilder expected = new StringBuilder();
+		expected.append("Model_Model:\n");
+		expected.append("  start 'kw1' sub=Sub\n");
+		expected.append("  sub=Sub 'kw4' stop\n");
+		expected.append("Sub_Sub:\n");
+		expected.append("  start 'kw2' val=ID\n");
+		expected.append("  val=ID 'kw3' stop");
+		assertEquals(expected.toString(), actual);
+	}
+
+	public void testAssignedRuleCallNested1() throws Exception {
+		StringBuilder grammar = new StringBuilder();
+		grammar.append("Model: start=ID sub1=Sub1 val1=ID;\n");
+		grammar.append("Sub1: 'sub1' sub2=Sub2 val2=ID;\n");
+		grammar.append("Sub2: 'sub2' sub3=Sub3 val3=ID;\n");
+		grammar.append("Sub3: 'sub3' val4=ID;\n");
+		String actual = getParserRule(grammar.toString());
+		StringBuilder expected = new StringBuilder();
+		expected.append("Model_Model:\n");
+		expected.append("  start start=ID\n");
+		expected.append("  start=ID sub1=Sub1\n");
+		expected.append("  sub1=Sub1 val1=ID\n");
+		expected.append("  val1=ID stop\n");
+		expected.append("Sub1_Sub1:\n");
+		expected.append("  start 'sub1' sub2=Sub2\n");
+		expected.append("  sub2=Sub2 val2=ID\n");
+		expected.append("  val2=ID stop\n");
+		expected.append("Sub2_Sub2:\n");
+		expected.append("  start 'sub2' sub3=Sub3\n");
+		expected.append("  sub3=Sub3 val3=ID\n");
+		expected.append("  val3=ID stop\n");
+		expected.append("Sub3_Sub3:\n");
+		expected.append("  start 'sub3' val4=ID\n");
+		expected.append("  val4=ID stop");
+		assertEquals(expected.toString(), actual);
+	}
+
+	public void testAssignedElements() throws Exception {
+		StringBuilder grammar = new StringBuilder();
+		grammar.append("Model: t=MyTerminal 'kw1' d=MyDatatype 'kw2' e=MyEnum 'kw3' k='kw4' 'kw5' b='kw6'? \n");
+		grammar.append("       c1=[Model|MyTerminal] 'kw7' c2=[Model|MyDatatype] 'kw8' c3=[Model|'kw9'];\n");
+		grammar.append("terminal MyTerminal: '$' ('a'..'z')+;\n");
+		grammar.append("MyDatatype: 'kw1' | 'kw2';\n");
+		grammar.append("enum MyEnum: kw1 | kw2;\n");
+		String actual = getParserRule(grammar.toString());
+		StringBuilder expected = new StringBuilder();
+		expected.append("Model_Model:\n");
+		expected.append("  b='kw6' c1=[Model|MyTerminal]\n");
+		expected.append("  c1=[Model|MyTerminal] 'kw7' c2=[Model|MyDatatype]\n");
+		expected.append("  c2=[Model|MyDatatype] 'kw8' c3=[Model|'kw9']\n");
+		expected.append("  c3=[Model|'kw9'] stop\n");
+		expected.append("  d=MyDatatype 'kw2' e=MyEnum\n");
+		expected.append("  e=MyEnum 'kw3' k='kw4'\n");
+		expected.append("  k='kw4' 'kw5' b='kw6'\n");
+		expected.append("  k='kw4' 'kw5' c1=[Model|MyTerminal]\n");
+		expected.append("  start t=MyTerminal\n");
+		expected.append("  t=MyTerminal 'kw1' d=MyDatatype");
+		assertEquals(expected.toString(), actual);
+	}
 
 	public void testRecursion() throws Exception {
 		StringBuilder grammar = new StringBuilder();
@@ -353,7 +606,7 @@ public class SyntacticSequencerPDAProviderMinimalAbsorberTest extends AbstractSy
 	public void testAlternativeManyNested() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Model: (('x' x+=ID*) | ('y' y+=ID*))*;");
-		String actual = getParserRule2(grammar.toString());
+		String actual = getParserRule(grammar.toString());
 		StringBuilder expected = new StringBuilder();
 		expected.append("Model_Model:\n");
 		expected.append("  start ('x' | 'y')* stop\n");
