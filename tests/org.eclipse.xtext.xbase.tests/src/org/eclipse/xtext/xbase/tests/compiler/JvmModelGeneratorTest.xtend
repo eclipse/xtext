@@ -1,27 +1,25 @@
 package org.eclipse.xtext.xbase.tests.compiler
 
-import com.google.inject.Inject
-import org.eclipse.xtext.common.types.util.TypeReferences
-import org.eclipse.xtext.generator.InMemoryFileSystemAccess
-import org.eclipse.xtext.junit.validation.ValidationTestHelper
-import org.eclipse.xtext.xbase.generator.XbaseGenerator
-import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
-import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
-import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
-import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler$EclipseRuntimeDependentJavaCompiler
-import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest
-import org.eclipse.xtext.xbase.lib.Functions
-import com.google.inject.Provider
 import com.google.common.base.Supplier
-
-import static junit.framework.Assert.*
-import org.eclipse.xtext.generator.OutputConfiguration
-import org.eclipse.xtext.generator.IFileSystemAccess
-import org.eclipse.xtext.common.types.JvmTypeReference
+import com.google.inject.Inject
+import com.google.inject.Provider
+import java.util.AbstractList
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.common.types.JvmDeclaredType
-import java.util.AbstractList
+import org.eclipse.xtext.common.types.JvmTypeReference
+import org.eclipse.xtext.common.types.util.TypeReferences
+import org.eclipse.xtext.generator.IFileSystemAccess
+import org.eclipse.xtext.generator.InMemoryFileSystemAccess
+import org.eclipse.xtext.junit.validation.ValidationTestHelper
+import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
+import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler$EclipseRuntimeDependentJavaCompiler
+import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest
+import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
+import org.eclipse.xtext.xbase.lib.Functions
+import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
+
+import static junit.framework.Assert.*
 
 class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	
