@@ -52,11 +52,15 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 	private boolean useInferredJvmModel = true;
 	
 	protected boolean usesXbaseGrammar(Grammar grammar) {
+		return doesUseXbase(grammar);
+	}
+	
+	public static boolean doesUseXbase(Grammar grammar) {
 		if (grammar.getName().equals("org.eclipse.xtext.xbase.Xbase"))
 			return true;
 		EList<Grammar> usedGrammars = grammar.getUsedGrammars();
 		for (Grammar grammar2 : usedGrammars) {
-			if (usesXbaseGrammar(grammar2)) {
+			if (doesUseXbase(grammar2)) {
 				return true;
 			}
 		}

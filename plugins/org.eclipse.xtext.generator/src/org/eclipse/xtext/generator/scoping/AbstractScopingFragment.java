@@ -18,6 +18,7 @@ import org.eclipse.xtext.generator.AbstractInheritingGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.Naming;
+import org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.IgnoreCaseLinking;
@@ -47,7 +48,7 @@ public abstract class AbstractScopingFragment extends AbstractInheritingGenerato
 	public void setGenerateStub(boolean generateStub) {
 		this.generateStub = generateStub;
 	}
-
+	
 	private boolean ignoreCase;
 
 	public boolean isIgnoreCase() {
@@ -92,6 +93,10 @@ public abstract class AbstractScopingFragment extends AbstractInheritingGenerato
 
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
-		return newArrayList((Object)getScopeProviderSuperClassName(grammar), (Object)isGenerateStub());
+		boolean genStub = isGenerateStub();
+		if (XbaseGeneratorFragment.doesUseXbase(grammar)) {
+			genStub = false;
+		}
+		return newArrayList((Object)getScopeProviderSuperClassName(grammar), (Object)genStub);
 	}
 }

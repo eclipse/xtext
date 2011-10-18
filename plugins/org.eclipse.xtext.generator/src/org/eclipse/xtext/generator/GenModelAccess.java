@@ -151,5 +151,17 @@ public class GenModelAccess {
 		else
 			return pkg + ".eINSTANCE.get" + genFeature.getFeatureAccessorName() + "()";
 	}
+	
+	/**
+	 * @since 2.1
+	 */
+	public static String getJavaTypeName(EClassifier classifier, ResourceSet resourceSet) {
+		GenClassifier genClassifier = getGenClassifier(classifier, resourceSet);
+		if (genClassifier instanceof GenClass) {
+			return ((GenClass) genClassifier).getQualifiedInterfaceName();
+		} else {
+			return ((GenDataType) genClassifier).getQualifiedInstanceClassName();
+		}
+	}
 
 }

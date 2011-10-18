@@ -1,0 +1,2 @@
+String javaTypeName(org::eclipse::emf::ecore::EClassifier classifier, org::eclipse::emf::ecore::resource::ResourceSet resourceSet) :
+	JAVA org.eclipse.xtext.generator.GenModelAccess.getJavaTypeName(org.eclipse.emf.ecore.EClassifier, org.eclipse.emf.ecore.resource.ResourceSet); 

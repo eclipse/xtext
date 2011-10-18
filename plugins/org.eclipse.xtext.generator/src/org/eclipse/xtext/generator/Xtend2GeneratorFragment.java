@@ -24,9 +24,6 @@ public class Xtend2GeneratorFragment extends DefaultGeneratorFragment implements
 
 	private Naming naming;
 
-	public Xtend2GeneratorFragment() {
-	}
-
 	protected Module createModule(final Grammar grammar) {
 		return new Module() {
 			public void configure(Binder binder) {
@@ -39,14 +36,30 @@ public class Xtend2GeneratorFragment extends DefaultGeneratorFragment implements
 	@Override
 	final public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		Guice.createInjector(createModule(grammar)).injectMembers(this);
-		generate(new Xtend2ExecutionContext(ctx));
+		generate(grammar, new Xtend2ExecutionContext(ctx));
 	}
+	
+	
 
+	/**
+	 * @since 2.1
+	 */
+	public void generate(Grammar grammar, Xtend2ExecutionContext ctx) {
+		generate(ctx);
+	}
+	
 	public void generate(Xtend2ExecutionContext ctx) {
 	}
 
 	public void registerNaming(Naming n) {
 		naming = n;
+	}
+	
+	/**
+	 * @since 2.1
+	 */
+	public Naming getNaming() {
+		return naming;
 	}
 
 	/**

@@ -21,3 +21,6 @@ String getJvmRenameStrategyName(Grammar grammar) :
 	
 String getJvmRenameStrategyName(Grammar grammar, Naming n) :
 	JAVA org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment.getJvmRenameStrategyName(org.eclipse.xtext.Grammar,org.eclipse.xtext.generator.Naming);
+	
+S() : '«';
+E() : '»';
