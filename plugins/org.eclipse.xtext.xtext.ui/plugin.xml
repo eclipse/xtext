@@ -313,6 +313,9 @@
     bean = StandaloneSetup {
         scanClassPath = true
         platformUri = "${runtimeProject}/.."
+        // The following two lines ca be removed, if Xbase is not used.
+        registerGeneratedEPackage = "org.eclipse.xtext.xbase.XbasePackage"
+        registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
     }
 
     component = DirectoryCleaner {
@@ -345,7 +348,9 @@
             }
 
             // Serializer 2.0
-            fragment = serializer.SerializerFragment {}
+            fragment = serializer.SerializerFragment {
+            	generateStub = false
+            }
             
             // the serialization component (1.0)
             // fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
@@ -379,8 +384,8 @@
 
             // generator API
             fragment = generator.GeneratorFragment {
-                generateMwe = true
-                generateJavaMain = true
+                generateMwe = false
+                generateJavaMain = false
             }
 
             // formatter API
