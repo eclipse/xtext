@@ -15,6 +15,7 @@ import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategy;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.doubleClicking.DoubleClickStrategyProvider;
 import org.eclipse.xtext.ui.editor.folding.IFoldingRegionProvider;
+import org.eclipse.xtext.ui.editor.folding.IFoldingStructureProvider;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapper;
@@ -27,6 +28,7 @@ import org.eclipse.xtext.ui.editor.toggleComments.ToggleSLCommentAction;
 import org.eclipse.xtext.xtend2.ui.autoedit.AutoEditStrategyProvider;
 import org.eclipse.xtext.xtend2.ui.autoedit.TokenTypeToPartitionMapper;
 import org.eclipse.xtext.xtend2.ui.contentassist.ImportingTypesProposalProvider;
+import org.eclipse.xtext.xtend2.ui.editor.InitiallyCollapsableAwareFoldingStructureProvider;
 import org.eclipse.xtext.xtend2.ui.editor.RichStringAwareSourceViewer;
 import org.eclipse.xtext.xtend2.ui.editor.RichStringAwareToggleCommentAction;
 import org.eclipse.xtext.xtend2.ui.editor.SingleLineCommentHelper;
@@ -145,5 +147,9 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 	
 	public void configureBuilderPreferenceStoreInitializer(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer.class).to(org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.Initializer.class);
+	}
+	
+	public Class<? extends IFoldingStructureProvider> bindIFoldingStructureProvider(){
+		return InitiallyCollapsableAwareFoldingStructureProvider.class;
 	}
 }
