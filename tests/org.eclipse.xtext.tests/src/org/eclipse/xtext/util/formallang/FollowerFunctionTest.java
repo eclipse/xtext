@@ -227,18 +227,43 @@ public class FollowerFunctionTest extends TestCase {
 	}
 
 	public void testStarts2() {
+		StringProduction p = sp("'a'?");
+		assertEquals("'a', null", new FF(p).starts());
+	}
+
+	public void testStarts3() {
+		StringProduction p = sp("'a'*");
+		assertEquals("'a', null", new FF(p).starts());
+	}
+
+	public void testStarts4() {
 		StringProduction p = sp("'a' 'b'");
 		assertEquals("'a'", new FF(p).starts());
 	}
 
-	public void testStarts3() {
+	public void testStarts5() {
 		StringProduction p = sp("'a'? 'b'");
 		assertEquals("'a', 'b'", new FF(p).starts());
 	}
 
-	public void testStarts4() {
+	public void testStarts6() {
 		StringProduction p = sp("('a' | 'b') 'c'");
 		assertEquals("'a', 'b'", new FF(p).starts());
+	}
+
+	public void testStarts7() {
+		StringProduction p = sp("('a' | 'b')*");
+		assertEquals("'a', 'b', null", new FF(p).starts());
+	}
+
+	public void testStarts8() {
+		StringProduction p = sp("('a' 'b')*");
+		assertEquals("'a', null", new FF(p).starts());
+	}
+
+	public void testStarts9() {
+		StringProduction p = sp("('a' & 'b')*");
+		assertEquals("'a', 'b', null", new FF(p).starts());
 	}
 
 }
