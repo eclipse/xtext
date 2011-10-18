@@ -39,11 +39,11 @@ public class SerialResourceLoader extends AbstractResourceLoader {
 		final Queue<URI> queue = Lists.newLinkedList();
 		return new CheckedLoadOperation(new LoadOperation() {
 
-			public Resource next() {
+			public LoadResult next() {
 				URI uri = queue.poll();
 				try {
 					Resource resource = parent.getResource(uri, true);
-					return resource;
+					return new LoadResult(resource, uri);
 				} catch(WrappedException e) {
 					throw new LoadOperationException(uri, e.getCause());
 				}

@@ -68,7 +68,7 @@ public abstract class AbstractResourceLoader implements IResourceLoader {
 			return parent.hasNext();
 		}
 
-		public Resource next() throws LoadOperationException {
+		public LoadResult next() throws LoadOperationException {
 			checkIsLoading();
 			checkIsNotCancelled();
 			return parent.next();
