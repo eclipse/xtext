@@ -528,7 +528,7 @@ public class NfaToProduction {
 
 	protected <T> void splitState(StateAlias<T> state) {
 		if (state.getIncoming().size() >= state.getOutgoing().size()) {
-			for (StateAlias<T> in : state.getIncoming()) {
+			for (StateAlias<T> in : Lists.newArrayList(state.getIncoming())) {
 				StateAlias<T> rep = new StateAlias<T>(state.getElement());
 				rep.getIncoming().add(in);
 				rep.getOutgoing().addAll(state.getOutgoing());
@@ -540,7 +540,7 @@ public class NfaToProduction {
 			for (StateAlias<T> out : state.getOutgoing())
 				out.getIncoming().remove(state);
 		} else {
-			for (StateAlias<T> out : state.getOutgoing()) {
+			for (StateAlias<T> out : Lists.newArrayList(state.getOutgoing())) {
 				StateAlias<T> rep = new StateAlias<T>(state.getElement());
 				rep.getOutgoing().add(out);
 				rep.getIncoming().addAll(state.getIncoming());
