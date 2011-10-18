@@ -25,9 +25,9 @@ public class PdaListFormatter<STATE, STACKITEM> implements Function<Pda<STATE, S
 		}
 	}
 
-	protected Function<STACKITEM, String> stackitemFormatter = new ObjToStrFunction<STACKITEM>();
+	protected Function<? super STACKITEM, String> stackitemFormatter = new ObjToStrFunction<STACKITEM>();
 
-	protected Function<STATE, String> stateFormatter = new ObjToStrFunction<STATE>();
+	protected Function<? super STATE, String> stateFormatter = new ObjToStrFunction<STATE>();
 
 	public String apply(Pda<STATE, STACKITEM> pda) {
 		return format(pda);
@@ -43,7 +43,9 @@ public class PdaListFormatter<STATE, STACKITEM> implements Function<Pda<STATE, S
 					result.add(str);
 			}
 		Collections.sort(result);
-		result.add(0, format(pda, start));
+		String startstring = format(pda, start);
+		if (startstring != null)
+			result.add(0, startstring);
 		return Joiner.on('\n').join(result);
 	}
 
@@ -74,20 +76,21 @@ public class PdaListFormatter<STATE, STACKITEM> implements Function<Pda<STATE, S
 		return title(pda, state) + " -> " + Joiner.on(", ").join(followers);
 	}
 
-	public Function<STACKITEM, String> getStackitemFormatter() {
+	public Function<? super STACKITEM, String> getStackitemFormatter() {
 		return stackitemFormatter;
 	}
 
-	public Function<STATE, String> getStateFormatter() {
+	public Function<? super STATE, String> getStateFormatter() {
 		return stateFormatter;
 	}
 
-	public PdaListFormatter<STATE, STACKITEM> setStackitemFormatter(Function<STACKITEM, String> stackitemFormatter) {
+	public PdaListFormatter<STATE, STACKITEM> setStackitemFormatter(
+			Function<? super STACKITEM, String> stackitemFormatter) {
 		this.stackitemFormatter = stackitemFormatter;
 		return this;
 	}
 
-	public PdaListFormatter<STATE, STACKITEM> setStateFormatter(Function<STATE, String> stateFormatter) {
+	public PdaListFormatter<STATE, STACKITEM> setStateFormatter(Function<? super STATE, String> stateFormatter) {
 		this.stateFormatter = stateFormatter;
 		return this;
 	}
