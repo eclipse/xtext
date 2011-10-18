@@ -35,6 +35,7 @@ import org.eclipse.xtext.builder.impl.BuildData;
 import org.eclipse.xtext.builder.resourceloader.IResourceLoader;
 import org.eclipse.xtext.builder.resourceloader.IResourceLoader.LoadOperation;
 import org.eclipse.xtext.builder.resourceloader.IResourceLoader.LoadOperationException;
+import org.eclipse.xtext.builder.resourceloader.IResourceLoader.LoadResult;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -192,9 +193,9 @@ public class ClusteringBuilderState extends AbstractBuilderState {
 
                     try {
                         // Load the resource and create a new resource description
-                        Resource loadResult = loadOperation.next();
-                        changedURI = loadResult.getURI();
-                        resource = addResource(loadResult, resourceSet);
+                        LoadResult loadResult = loadOperation.next();
+                        changedURI = loadResult.getUri();
+                        resource = addResource(loadResult.getResource(), resourceSet);
 
                         subProgress.subTask("Updating resource description for " + changedURI.lastSegment() + " (" + index + " of " + (index + queue.size()) + ")");
                         queue.remove(changedURI);
@@ -316,9 +317,9 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                 URI uri = null;
                 Resource resource = null;
                 try {
-                    Resource loadResult = loadOperation.next();
-                    uri = loadResult.getURI();
-                    resource = addResource(loadResult, resourceSet);
+                    LoadResult loadResult = loadOperation.next();
+                    uri = loadResult.getUri();
+                    resource = addResource(loadResult.getResource(), resourceSet);
 
                     subMonitor.subTask("Writing new resource description for " + uri.lastSegment() + " (" + index++ + " of " + n + ")"); // TODO: NLS
 

@@ -421,6 +421,21 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 		helper.assertNoIssues(clazz.eContainer());
 	}
 	
+	public void testImportUnused_3() throws Exception {
+		XtendClass clazz = clazz("import java.util.Map$Entry class X { private Entry sb }");
+		helper.assertNoIssues(clazz.eContainer());
+	}
+	
+	public void testImportUnused_4() throws Exception {
+		XtendClass clazz = clazz("import java.util.Map class X { private Map$Entry sb }");
+		helper.assertNoIssues(clazz.eContainer());
+	}
+	
+	public void testImportUnused_5() throws Exception {
+		XtendClass clazz = clazz("import java.util.Map$Entry class X { private Map$Entry sb }");
+		helper.assertNoIssues(clazz.eContainer());
+	}
+	
 	public void testImportDuplicate() throws Exception {
 		XtendClass clazz = clazz("import java.util.List import java.util.List class X { private List sb }");
 		helper.assertWarning(clazz.eContainer(), Xtend2Package.Literals.XTEND_IMPORT, IMPORT_DUPLICATE);

@@ -22,7 +22,7 @@ public class OutputConfigurationProvider implements IOutputConfigurationProvider
 	 */
 	public Set<OutputConfiguration> getOutputConfigurations() {
 		OutputConfiguration defaultOutput = new OutputConfiguration(IFileSystemAccess.DEFAULT_OUTPUT);
-		defaultOutput.setDescription("The output directory for generated Xtend2 files.");
+		defaultOutput.setDescription("Output Folder");
 		defaultOutput.setOutputDirectory("./src-gen");
 		defaultOutput.setOverrideExistingResources(true);
 		defaultOutput.setCreateOutputDirectory(true);

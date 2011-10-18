@@ -81,6 +81,8 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 	public void createLinkingIssueResolutions(final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
 		final IModificationContext modificationContext = modificationContextFactory.createModificationContext(issue);
 		final IXtextDocument xtextDocument = modificationContext.getXtextDocument();
+		if (xtextDocument == null)
+			return;
 		xtextDocument.readOnly(new IUnitOfWork.Void<XtextResource>() {
 			@Override
 			public void process(XtextResource state) throws Exception {

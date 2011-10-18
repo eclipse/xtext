@@ -93,7 +93,6 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
@@ -849,30 +848,34 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 	public void checkImports(XtendFile file) {
 		final Map<JvmType, XtendImport> imports = newHashMap();
 		final Map<JvmType, XtendImport> staticImports = newHashMap();
+		final Map<String, JvmType> importedNames = newHashMap();
+		
 		for (XtendImport imp : file.getImports()) {
 			if (imp.getImportedNamespace() != null) {
 				warning("The use of wildcard imports is deprecated.", imp, null, IssueCodes.IMPORT_WILDCARD_DEPRECATED);
 			} else {
 				JvmType importedType = imp.getImportedType();
 				if (importedType != null && !importedType.eIsProxy()) {
-					Map<JvmType, XtendImport> map = imports;
-					if (imp.isStatic())
-						map = staticImports;
+					Map<JvmType, XtendImport> map = imp.isStatic() ? staticImports : imports;
 					if (map.containsKey(importedType)) {
 						warning("Duplicate import of '" + importedType.getSimpleName() + "'.", imp, null,
 								IssueCodes.IMPORT_DUPLICATE);
 					} else {
 						map.put(importedType, imp);
+						if (!imp.isStatic()) {
+							JvmType currentType = importedType;
+							String currentSuffix = currentType.getSimpleName();
+							importedNames.put(currentSuffix, importedType);
+							while (currentType.eContainer() instanceof JvmType) {
+								currentType = (JvmType) currentType.eContainer();
+								currentSuffix = currentType.getSimpleName()+"$"+currentSuffix;
+								importedNames.put(currentSuffix, importedType);
+							}
+						}
 					}
 				}
 			}
 		}
-		final Map<String, JvmType> simpleNames = newHashMap(Maps.uniqueIndex(imports.keySet(),
-				new Function<JvmType, String>() {
-					public String apply(JvmType from) {
-						return from.getSimpleName();
-					}
-				}));
 		ICompositeNode node = NodeModelUtils.findActualNodeFor(file.getXtendClass());
 		for (INode n : node.getAsTreeIterable()) {
 			if (n.getGrammarElement() instanceof CrossReference) {
@@ -884,13 +887,14 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 					// handle StaticQualifier Workaround (see Xbase grammar)
 					if (simpleName.endsWith("::"))
 						simpleName = simpleName.substring(0, simpleName.length() - 2);
-					if (simpleNames.containsKey(simpleName)) {
-						imports.remove(simpleNames.remove(simpleName));
+					if (importedNames.containsKey(simpleName)) {
+						JvmType type = importedNames.remove(simpleName);
+						imports.remove(type);
 					} else {
 						while (simpleName.contains("$")) {
 							simpleName = simpleName.substring(0, simpleName.lastIndexOf('$'));
-							if (simpleNames.containsKey(simpleName)) {
-								imports.remove(simpleNames.remove(simpleName));
+							if (importedNames.containsKey(simpleName)) {
+								imports.remove(importedNames.remove(simpleName));
 								break;
 							}
 						}

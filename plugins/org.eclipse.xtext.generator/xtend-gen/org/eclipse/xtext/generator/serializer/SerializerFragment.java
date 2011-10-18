@@ -47,7 +47,6 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
   private SyntacticSequencerPDA2ExtendedDot seq2dot;
   
   public SerializerFragmentState state() {
-    
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList();
     final SerializerFragmentState _result;
     synchronized (_createCache_state) {
@@ -77,6 +76,12 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
     SerializerFragmentState _state = this.state();
     boolean _srcGenOnly = _state.srcGenOnly = srcGen;
     return _srcGenOnly;
+  }
+  
+  public boolean setGenerateStub(final boolean generateStub) {
+    boolean _operator_not = BooleanExtensions.operator_not(generateStub);
+    boolean _setSrcGenOnly = this.setSrcGenOnly(_operator_not);
+    return _setSrcGenOnly;
   }
   
   public Set<Binding> getGuiceBindingsRt(final Grammar grammar) {
