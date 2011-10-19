@@ -21,11 +21,18 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.resource.XtextResource;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 
 public class InheritanceTest extends AbstractXtextTests {
+	
+	@Override
+	protected boolean shouldTestSerializer(XtextResource resource) {
+		// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=361355
+		return false;
+	}
 
 	@Override
 	protected void setUp() throws Exception {

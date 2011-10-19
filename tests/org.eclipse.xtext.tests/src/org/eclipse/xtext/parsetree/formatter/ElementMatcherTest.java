@@ -26,6 +26,7 @@ import org.eclipse.xtext.parsetree.formatter.services.ElementMatcherTestLanguage
 import org.eclipse.xtext.parsetree.formatter.services.ElementMatcherTestLanguageGrammarAccess.OptionalCallsElements;
 import org.eclipse.xtext.parsetree.formatter.services.ElementMatcherTestLanguageGrammarAccess.RuleCallsElements;
 import org.eclipse.xtext.parsetree.formatter.services.ElementMatcherTestLanguageGrammarAccess.SimpleElements;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 
@@ -35,6 +36,20 @@ import com.google.common.collect.Lists;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class ElementMatcherTest extends AbstractXtextTests {
+	
+	@Override
+	protected boolean shouldTestSerializer(XtextResource resource) {
+		// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=361355
+		if ("testRecursion".equals(getName()))
+			return false;
+
+		// missing values for unassigned rule call.
+		if ("testRuleCalls2a".equals(getName()) || "testRuleCalls2b".equals(getName())
+				|| "testRuleCalls2c".equals(getName()))
+			return false;
+		return true;
+	}
+	
 	private ElementMatcherTestLanguageGrammarAccess g;
 
 	private static class Patterns {

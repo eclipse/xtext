@@ -30,6 +30,11 @@ import org.eclipse.xtext.util.StringInputStream;
  *
  */
 public class BasicLazyLinkingTest extends AbstractXtextTests {
+	
+	@Override
+	protected boolean shouldTestSerializer(XtextResource resource) {
+		return false;
+	}
 
 	@Override
 	protected void setUp() throws Exception {

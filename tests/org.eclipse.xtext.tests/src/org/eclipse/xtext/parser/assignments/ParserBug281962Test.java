@@ -11,11 +11,17 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parser.assignments.assignmentsTestLanguage.Model;
 import org.eclipse.xtext.parser.assignments.assignmentsTestLanguage.MultiValue;
 import org.eclipse.xtext.parser.assignments.assignmentsTestLanguage.SingleValue;
+import org.eclipse.xtext.resource.XtextResource;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class ParserBug281962Test extends AbstractXtextTests {
+	
+	@Override
+	protected boolean shouldTestSerializer(XtextResource resource) {
+		return false;
+	}
 	
 	@Override
 	protected void setUp() throws Exception {

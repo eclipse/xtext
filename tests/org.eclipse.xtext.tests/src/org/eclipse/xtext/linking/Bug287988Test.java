@@ -11,11 +11,18 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.linking.bug287988Test.BaseAttribute;
 import org.eclipse.xtext.linking.bug287988Test.Model;
+import org.eclipse.xtext.resource.XtextResource;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class Bug287988Test extends AbstractXtextTests {
+	
+	@Override
+	protected boolean shouldTestSerializer(XtextResource resource) {
+		// https://bugs.eclipse.org/bugs/show_bug.cgi?id=361355
+		return !"testInlinedActions_01".equals(getName());
+	}
 
 	@Override
 	protected void setUp() throws Exception {

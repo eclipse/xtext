@@ -6,6 +6,11 @@ import org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguageStanda
 import org.eclipse.xtext.util.StringInputStream;
 
 public class PartialParsingEmptyTokensTest extends AbstractXtextTests {
+	
+	@Override
+	protected boolean shouldTestSerializer(XtextResource resource) {
+		return false;
+	}
 
 	private static final String DOC = 
 		"1\n" + 

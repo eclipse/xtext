@@ -12,11 +12,24 @@ import java.util.List;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.Model;
 import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.NestedModel;
+import org.eclipse.xtext.resource.XtextResource;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public abstract class AbstractParserTest extends AbstractXtextTests {
+	
+	@Override
+	protected boolean shouldTestSerializer(XtextResource resource) {
+		// for these cases, the ConcreteSyntaxValidator returns false positives.
+		if ("testParse_3".equals(getName()))
+			return false;
+		if ("testParse_10".equals(getName()))
+			return false;
+		if ("testParse_11".equals(getName()))
+			return false;
+		return true;
+	}
 
 	public void testParse_1_A_B() throws Exception {
 		Model model = (Model) getModel("1 a b");

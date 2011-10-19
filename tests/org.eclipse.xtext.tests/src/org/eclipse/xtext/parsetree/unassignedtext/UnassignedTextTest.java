@@ -1,6 +1,7 @@
 package org.eclipse.xtext.parsetree.unassignedtext;
 
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.resource.XtextResource;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -11,6 +12,11 @@ public class UnassignedTextTest extends AbstractXtextTests {
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(UnassignedTextTestLanguageStandaloneSetup.class);
+	}
+
+	@Override
+	protected boolean shouldTestSerializer(XtextResource resource) {
+		return false;
 	}
 
 	public void testCaseInsensitiveKeyword() throws Exception {
