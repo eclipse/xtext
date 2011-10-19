@@ -9,6 +9,7 @@ package org.eclipse.xtext.scoping.impl;
 
 import static com.google.common.collect.Iterables.*;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 
@@ -125,6 +126,10 @@ public abstract class AbstractScope implements IScope {
 	
 	public Iterable<IEObjectDescription> getElements(final QualifiedName name) {
 		Iterable<IEObjectDescription> localElements = getLocalElementsByName(name);
+		if (localElements instanceof Collection) {
+			if (((Collection<?>) localElements).isEmpty())
+				return getParent().getElements(name);
+		}
 		Iterable<IEObjectDescription> parentElements = getParentElements(new Provider<Iterable<IEObjectDescription>>() {
 			public Iterable<IEObjectDescription> get() {
 				return getParent().getElements(name);
