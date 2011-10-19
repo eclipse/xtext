@@ -83,6 +83,11 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 		IFile generatedFile = project.getProject().getFile("./src-gen/Foo.txt");
 		assertTrue(generatedFile.exists());
 		preferenceStoreAccess.getWritablePreferenceStore().setValue(getDefaultOutputDirectoryKey(), "./src2-gen");
+		
+		DerivedResourceCleanerJob derivedResourceCleanerJob = getInjector().getInstance(DerivedResourceCleanerJob.class);
+		derivedResourceCleanerJob.setUser(true);
+		derivedResourceCleanerJob.initialize(project.getProject(), "src-gen");
+		derivedResourceCleanerJob.schedule();
 		waitForResourceCleanerJob();
 		generatedFile = project.getProject().getFile("./src-gen/Foo.txt");
 		assertFalse(generatedFile.exists());
@@ -91,7 +96,6 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 		generatedFile = project.getProject().getFile("./src2-gen/Foo.txt");
 		assertTrue(generatedFile.exists());
 		preferenceStoreAccess.getWritablePreferenceStore().setValue(getDefaultOutputDirectoryKey(), "./src-gen");
-		waitForResourceCleanerJob();
 	}
 
 	public void testDefaultConfiguration() throws Exception {
@@ -152,7 +156,6 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 		};
 		BuilderPreferenceAccess.Initializer initializer = new BuilderPreferenceAccess.Initializer();
 		initializer.setOutputConfigurationProvider(outputConfigurationProvider);
-		initializer.setChangeListener(getInjector().getInstance(BuilderPreferenceAccess.ChangeListener.class));
 		initializer.initialize(preferenceStoreAccess);
 		
 		IJavaProject project = createJavaProject("foo");
@@ -211,7 +214,6 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 		};
 		BuilderPreferenceAccess.Initializer initializer = new BuilderPreferenceAccess.Initializer();
 		initializer.setOutputConfigurationProvider(outputConfigurationProvider);
-		initializer.setChangeListener(getInjector().getInstance(BuilderPreferenceAccess.ChangeListener.class));
 		initializer.initialize(preferenceStoreAccess);
 		
 		IJavaProject project = createJavaProject("foo");
