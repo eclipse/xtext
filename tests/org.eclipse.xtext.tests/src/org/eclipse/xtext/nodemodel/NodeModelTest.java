@@ -26,6 +26,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.TestLanguageStandaloneSetup;
 
@@ -34,6 +35,11 @@ import com.google.common.collect.Lists;
 public class NodeModelTest extends AbstractXtextTests {
 
 	private static final String MODEL = "reducible 'x' choice optional y choice z reducible 'x' 'y'";
+	
+	@Override
+	protected boolean shouldTestSerializer(XtextResource resource) {
+		return false;
+	}
 
 	@Override
 	protected void setUp() throws Exception {

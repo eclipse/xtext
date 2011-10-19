@@ -22,11 +22,16 @@ import com.google.common.collect.Iterables;
 public class UnassignedRuleCallTest extends AbstractXtextTests {
 
 	@Override
+	protected boolean shouldTestSerializer(XtextResource resource) {
+		return false;
+	}
+
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(UnassignedRuleCallTestLanguageStandaloneSetup.class);
 	}
-	
+
 	public void testParseModel_01() throws Exception {
 		String modelAsText = "model 7 feature Zonk 1 keyword 1;";
 		Model model = (Model) getModel(modelAsText);
@@ -34,7 +39,7 @@ public class UnassignedRuleCallTest extends AbstractXtextTests {
 		assertNotNull(model.getModelFeatures());
 		assertEquals("Zonk", model.getModelFeatures().getName());
 	}
-	
+
 	public void testParseModel_02() throws Exception {
 		String modelAsText = "model 7 13 feature Foo 1 keyword 1 'bar';";
 		Model model = (Model) getModel(modelAsText);
@@ -42,19 +47,19 @@ public class UnassignedRuleCallTest extends AbstractXtextTests {
 		assertNotNull(model.getModelFeatures());
 		assertEquals("Foo", model.getModelFeatures().getName());
 	}
-	
+
 	public void testParseModel_03() throws Exception {
 		String modelAsText = "model 7 feature Zonk 1 keyword 1;";
 		XtextResource resource = getResourceFromString(modelAsText);
 		assertTrue(resource.getErrors().isEmpty());
 	}
-	
+
 	public void testParseModel_04() throws Exception {
 		String modelAsText = "model 7 13 137 feature Foo 1 keyword 1 'bar';";
 		XtextResource resource = getResourceFromString(modelAsText);
 		assertTrue(resource.getErrors().isEmpty());
 	}
-	
+
 	public void testNodeModel_01() throws Exception {
 		String modelAsText = "model 7 feature Zonk 1 keyword 1;";
 		Model model = (Model) getModel(modelAsText);
@@ -67,7 +72,7 @@ public class UnassignedRuleCallTest extends AbstractXtextTests {
 		ICompositeNode dataTypeNode = (ICompositeNode) Iterables.get(featuresNode.getChildren(), 4);
 		assertEquals(6, Iterables.size(dataTypeNode.getChildren()));
 	}
-	
+
 	public void testNodeModel_02() throws Exception {
 		String modelAsText = "model 7 13 137 feature Foo 1 keyword 1 'bar';";
 		Model model = (Model) getModel(modelAsText);
@@ -75,7 +80,7 @@ public class UnassignedRuleCallTest extends AbstractXtextTests {
 		assertEquals(8, Iterables.size(node.getChildren()));
 		ModelFeatures modelFeatures = model.getModelFeatures();
 		ICompositeNode featuresNode = NodeModelUtils.getNode(modelFeatures);
-		assertSame(featuresNode, Iterables.get(node.getChildren(),7));
+		assertSame(featuresNode, Iterables.get(node.getChildren(), 7));
 		assertEquals(6, Iterables.size(featuresNode.getChildren()));
 		ICompositeNode dataTypeNode = (ICompositeNode) Iterables.get(featuresNode.getChildren(), 4);
 		assertEquals(8, Iterables.size(dataTypeNode.getChildren()));

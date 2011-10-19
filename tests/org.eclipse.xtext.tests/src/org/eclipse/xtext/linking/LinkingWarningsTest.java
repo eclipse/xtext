@@ -20,6 +20,11 @@ import com.google.inject.Injector;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class LinkingWarningsTest extends AbstractXtextTests implements ILinkingDiagnosticMessageProvider {
+	
+	@Override
+	protected boolean shouldTestSerializer(XtextResource resource) {
+		return false;
+	}
 
 	private final String expected = "Expected Message";
 	

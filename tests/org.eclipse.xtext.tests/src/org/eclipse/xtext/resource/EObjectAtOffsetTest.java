@@ -19,6 +19,12 @@ import org.eclipse.xtext.util.TextRegion;
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class EObjectAtOffsetTest extends AbstractXtextTests {
+	
+	@Override
+	protected boolean shouldTestSerializer(XtextResource resource) {
+		// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=361355
+		return false;
+	}
 
 	private EObjectAtOffsetHelper eObjectAtOffsetHelper;
 	

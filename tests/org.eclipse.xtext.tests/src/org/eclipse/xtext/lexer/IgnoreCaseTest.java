@@ -22,7 +22,12 @@ public class IgnoreCaseTest extends AbstractXtextTests {
 		super.setUp();
 		with(IgnoreCaseLexerTestLanguageStandaloneSetup.class);
 	}
-	
+
+	@Override
+	protected boolean shouldTestSerializer(XtextResource resource) {
+		return false;
+	}
+
 	public void testLowercase() throws Exception {
 		XtextResource resource = getResourceFromString("case case");
 		Model model = (Model) resource.getContents().get(0);
@@ -49,25 +54,25 @@ public class IgnoreCaseTest extends AbstractXtextTests {
 		String serialized = serialize(model);
 		assertEquals("case case", serialized);
 	}
-	
+
 	public void testSerializeUppercase() throws Exception {
 		Model model = getModel("CASE CASE");
 		String serialized = serialize(model);
 		assertEquals("CASE CASE", serialized);
 	}
-	
+
 	public void testSerializeMixedCase() throws Exception {
 		Model model = getModel("CaSe CaSe");
 		String serialized = serialize(model);
 		assertEquals("CaSe CaSe", serialized);
 	}
-	
+
 	public void testSerializeInvertedMixedCase() throws Exception {
 		Model model = getModel("cAsE cAsE");
 		String serialized = serialize(model);
 		assertEquals("cAsE cAsE", serialized);
 	}
-	
+
 	@Override
 	public Model getModel(String model) throws Exception {
 		return (Model) super.getModel(model);
