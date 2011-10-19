@@ -55,6 +55,11 @@ public class Bug250313Test extends AbstractXtextTests {
 		convertCallCount = 0;
 		super.tearDown();
 	}
+	
+	@Override
+	protected boolean shouldTestSerializer(XtextResource resource) {
+		return false;
+	}
 
 	public static class MyBug250313RuntimeModule extends Bug250313RuntimeModule {
 

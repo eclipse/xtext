@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.SaveOptions;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.tests.EmfAssert;
 import org.eclipse.xtext.util.EmfFormatter;
@@ -27,6 +28,11 @@ public class ComplexReconstrTest extends AbstractXtextTests {
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(ComplexReconstrTestLanguageStandaloneSetup.class);
+	}
+	
+	@Override
+	protected boolean shouldTestSerializer(XtextResource resource) {
+		return false;
 	}
 
 	public void testPrintGrammar() {

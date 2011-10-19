@@ -31,6 +31,7 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.formatting.INodeModelFormatter;
 import org.eclipse.xtext.junit.GlobalRegistries.GlobalStateMemento;
+import org.eclipse.xtext.junit.serializer.SerializerTester;
 import org.eclipse.xtext.junit.util.ResourceLoadHelper;
 import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
@@ -260,8 +261,19 @@ public abstract class AbstractXtextTests extends TestCase implements ResourceLoa
 
 		for(Diagnostic d: resource.getWarnings())
 			System.out.println("Resource Warning: "+d);
+				
+		if (expectedErrors == 0 && resource.getContents().size() > 0 && shouldTestSerializer(resource)) {
+			SerializerTester tester = get(SerializerTester.class);
+			EObject obj = resource.getContents().get(0);
+			tester.assertSerializeWithNodeModel(obj);
+			tester.assertSerializeWithoutNodeModel(obj);
+		}
 
 		return resource;
+	}
+
+	protected boolean shouldTestSerializer(XtextResource resource) {
+		return !"org.eclipse.xtext.Xtext".equals(resource.getResourceServiceProvider().get(IGrammarAccess.class).getGrammar().getName());
 	}
 
 	protected XtextResource doGetResource(InputStream in, URI uri) throws Exception {
