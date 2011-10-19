@@ -14,7 +14,7 @@ class SimpleJvmModelInferrer extends AbstractModelInferrer {
 	@Inject TypeReferences references
 	
 	def dispatch void infer(XExpression e, IAcceptor<JvmDeclaredType> acceptor, boolean prelinkingPhase) {
-		acceptor.accept(e.toClazz("Test") [
+		acceptor.accept(e.toClass("Test") [
 			members += e.toMethod("doStuff", references.getTypeForName(typeof(String), e)) [
 				parameters += e.toParameter("s", references.getTypeForName(typeof(String), e))
 				e.associate(it)
