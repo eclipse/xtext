@@ -175,25 +175,29 @@ public class Xtend2ScopeProvider extends XbaseWithAnnotationsScopeProvider {
 		IEObjectDescription thisVariable = localVariableScope.getSingleElement(THIS);
 		if (thisVariable != null) {
 			EObject implicitReceiver = thisVariable.getEObjectOrProxy();
-			JvmTypeReference implicitReceiverType = getTypeProvider().getTypeForIdentifiable((JvmIdentifiableElement) implicitReceiver);
-			if (implicitReceiverType != null && implicitReceiver instanceof JvmIdentifiableElement) {
-				IEObjectDescription itVariable = localVariableScope.getSingleElement(IT);
-				if (itVariable != null) {
-					EObject implicitArgument = itVariable.getEObjectOrProxy();
-					JvmTypeReference implicitArgumentType = getTypeProvider().getTypeForIdentifiable((JvmIdentifiableElement) implicitReceiver);
-					if (implicitArgumentType != null && implicitArgument instanceof JvmIdentifiableElement) {
-						XFeatureCall receiver = XbaseFactory.eINSTANCE.createXFeatureCall();
-						receiver.setFeature((JvmIdentifiableElement) implicitReceiver);
-						XFeatureCall argument = XbaseFactory.eINSTANCE.createXFeatureCall();
-						argument.setFeature((JvmIdentifiableElement) implicitArgument);
-						result = createFeatureScopeForTypeRef(
-								implicitReceiverType,
-								implicitArgumentType,
-								call, 
-								getContextType(call),
-								receiver,
-								argument,
-								result);
+			if (implicitReceiver instanceof JvmIdentifiableElement) {
+				JvmTypeReference implicitReceiverType = getTypeProvider().getTypeForIdentifiable((JvmIdentifiableElement) implicitReceiver);
+				if (implicitReceiverType != null) {
+					IEObjectDescription itVariable = localVariableScope.getSingleElement(IT);
+					if (itVariable != null) {
+						EObject implicitArgument = itVariable.getEObjectOrProxy();
+						if (implicitArgument instanceof JvmIdentifiableElement) {
+							JvmTypeReference implicitArgumentType = getTypeProvider().getTypeForIdentifiable((JvmIdentifiableElement) implicitArgument);
+							if (implicitArgumentType != null) {
+								XFeatureCall receiver = XbaseFactory.eINSTANCE.createXFeatureCall();
+								receiver.setFeature((JvmIdentifiableElement) implicitReceiver);
+								XFeatureCall argument = XbaseFactory.eINSTANCE.createXFeatureCall();
+								argument.setFeature((JvmIdentifiableElement) implicitArgument);
+								result = createFeatureScopeForTypeRef(
+										implicitReceiverType,
+										implicitArgumentType,
+										call, 
+										getContextType(call),
+										receiver,
+										argument,
+										result);
+							}
+						}
 					}
 				}
 			}

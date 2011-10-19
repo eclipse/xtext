@@ -44,6 +44,7 @@ import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 
 import test.ExtensionMethods;
+import test.SampleBuilder;
 import testdata.Properties1;
 
 import com.google.common.base.Function;
@@ -2079,6 +2080,59 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"}", 
 				"testExtensionMethods", 
 				"World");
+	}
+	
+	public void testImplictFirstArgument_02() throws Exception {
+		String code =
+				"package foo " + 
+				"class Bar {\n" +
+				"  @com.google.inject.Inject\n" +
+				"  extension test.SampleBuilder" +
+				"  def createRoot(String first, String second, String third) {" +
+				"    root [" +
+				"      name = first" +
+				"      parent [" +
+				"        name = second" +
+				"        child [" +
+				"          name = third" +
+				"        ]" +
+				"      ]\n" +
+				"    ]"+
+				"  }"+
+				"}";
+		Class<?> class1 = compileJavaCode("foo.Bar", code);
+		Object result = applyImpl(class1, "createRoot", new Class[] { String.class, String.class, String.class }, "a", "b", "c");
+		assertTrue(result instanceof SampleBuilder.Root);
+		SampleBuilder.Root root = (SampleBuilder.Root) result;
+		assertEquals("a", root.name);
+		assertEquals("b", root.parent.name);
+		assertEquals("c", root.parent.child.name);
+	}
+	
+	public void testImplictFirstArgument_03() throws Exception {
+		String code =
+				"package foo " +
+				"import static extension test.SampleBuilder.*" + 
+				"class Bar {\n" +
+				"  def createRoot(String first, String second, String third) {" +
+				"    staticRoot [" +
+				"      name = first" +
+				"      staticParent [" +
+				"        name = second" +
+				"        staticChild [" +
+				"          name = third" +
+				"        ]" +
+				"      ]\n" +
+				"    ]"+
+				"  }"+
+				"}";
+		Class<?> class1 = compileJavaCode("foo.Bar", code);
+		Object result = applyImpl(class1, "createRoot", new Class[] { String.class, String.class, String.class }, "a", "b", "c");
+		assertTrue(result instanceof SampleBuilder.Root);
+		SampleBuilder.Root root = (SampleBuilder.Root) result;
+		assertEquals("a", root.name);
+		assertEquals("b", root.parent.name);
+		assertEquals("c", root.parent.child.name);
 	}
 	
 	@Inject

@@ -64,7 +64,7 @@ public class ExtensionMethodsFeaturesProvider extends AbstractFeaturesForTypePro
 					List<JvmFormalParameter> parameters = operation.getParameters();
 					if (isCandidate(operation)) {
 						atLeastOneCandidate = true;
-						if (parameters.size()>0) {
+						if (parameters.size()>0 && !noParameters) {
 							JvmTypeReference parameterType = parameters.get(0).getParameterType();
 							if (isSameTypeOrAssignableToUpperBound(reference, parameterType)) {
 								result.add(operation);
@@ -83,9 +83,7 @@ public class ExtensionMethodsFeaturesProvider extends AbstractFeaturesForTypePro
 	private boolean isCandidate(JvmOperation operation) {
 		if (operation.isStatic())
 			return false;
-		if (noParameters)
-			return operation.getParameters().isEmpty();
-		return operation.getParameters().size() > 0;
+		return true;
 	}
 
 	protected boolean isFiltered(JvmOperation candidate) {
@@ -108,7 +106,7 @@ public class ExtensionMethodsFeaturesProvider extends AbstractFeaturesForTypePro
 	}
 
 	public boolean isExtensionProvider() {
-		return true;
+		return !noParameters;
 	}
 
 }
