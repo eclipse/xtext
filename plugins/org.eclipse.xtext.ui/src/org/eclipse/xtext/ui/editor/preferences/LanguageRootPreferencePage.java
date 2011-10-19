@@ -9,7 +9,6 @@
 package org.eclipse.xtext.ui.editor.preferences;
 
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.xtext.ui.editor.preferences.fields.LabelFieldEditor;
 
 import com.google.inject.Inject;
 
@@ -24,7 +23,6 @@ public class LanguageRootPreferencePage extends AbstractPreferencePage {
 	
 	@Override
 	protected void createFieldEditors() {
-		addField(new LabelFieldEditor(Messages.LanguageRootPreferencePage_generalSettings, getFieldEditorParent()));
 	}
 
 	/**

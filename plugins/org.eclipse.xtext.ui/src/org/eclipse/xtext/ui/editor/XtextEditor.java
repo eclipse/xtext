@@ -97,6 +97,7 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.TextAttributeProvider;
 import org.eclipse.xtext.ui.editor.toggleComments.ToggleSLCommentAction;
 import org.eclipse.xtext.ui.internal.Activator;
 
+import com.google.common.collect.ObjectArrays;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.name.Named;
@@ -524,16 +525,21 @@ public class XtextEditor extends TextEditor {
 
 	@Override
 	protected String[] collectContextMenuPreferencePages() {
-		String[] ids = super.collectContextMenuPreferencePages();
-		String[] more = new String[ids.length + 4];
+		String[] commonPages = super.collectContextMenuPreferencePages();
+		String[] langSpecificPages = collectLanguageContextMenuPreferencePages();
+		return ObjectArrays.concat(langSpecificPages, commonPages, String.class);
+	}
+
+	private String[] collectLanguageContextMenuPreferencePages() {
+		String[] additionalPages = new String[5];
 		// NOTE: preference page at index 0 will be opened, see
 		// PreferencesUtil.createPreferenceDialogOn
-		more[0] = getLanguageName() + ".editor"; //$NON-NLS-1$
-		more[1] = getLanguageName();
-		more[2] = getLanguageName() + ".templates"; //$NON-NLS-1$
-		more[3] = getLanguageName() + ".coloring"; //$NON-NLS-1$
-		System.arraycopy(ids, 0, more, 4, ids.length);
-		return more;
+		additionalPages[0] = getLanguageName();
+		additionalPages[1] = getLanguageName() + ".editor"; //$NON-NLS-1$
+		additionalPages[2] = getLanguageName() + ".templates"; //$NON-NLS-1$
+		additionalPages[3] = getLanguageName() + ".coloring"; //$NON-NLS-1$
+		additionalPages[4] = getLanguageName() + ".compiler.preferencePage"; //$NON-NLS-1$
+		return additionalPages;
 	}
 
 	@Override
