@@ -86,6 +86,19 @@
         </page>
     </extension>
     <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="«executableExtensionFactory()»:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="«name»"
+            name="«name.toSimpleName()»">
+            <keywordReference id="«name.toJavaPackage() + ".ui.keyword_"+name.toSimpleName()»"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension
         point="org.eclipse.ui.keywords">
         <keyword
             id="«name.toJavaPackage() + ".ui.keyword_"+name.toSimpleName()»"
