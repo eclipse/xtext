@@ -39,6 +39,7 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBinaryOperation;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -164,6 +165,14 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 					}
 				}
 			}
+			if (featureCall instanceof XFeatureCall) {
+				if(!feature.eIsProxy() && feature instanceof JvmOperation){
+					if(((XFeatureCall)featureCall).getImplicitFirstArgument() != null){
+						highlightFeatureCall(featureCall, acceptor, 
+								XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION_WITH_IMPLICIT_ARGUMENT);
+					}
+				}
+			}
 			if(feature instanceof JvmAnnotationTarget && DeprecationUtil.isDeprecated((JvmAnnotationTarget)feature)){
 				highlightFeatureCall(featureCall, acceptor, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
 			}
@@ -217,6 +226,7 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 			result.put(p.name().toLowerCase(), DefaultHighlightingConfiguration.KEYWORD_ID);
 		}
 		result.put("this", DefaultHighlightingConfiguration.KEYWORD_ID);
+		result.put("it", DefaultHighlightingConfiguration.KEYWORD_ID);
 		return result;
 	}
 
