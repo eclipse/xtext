@@ -15,6 +15,7 @@ import org.eclipse.core.runtime.preferences.IScopeContext;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.ui.preferences.IWorkingCopyManager;
 import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.ChangeListener;
 import org.osgi.service.prefs.BackingStoreException;
 
 import com.google.inject.Inject;
@@ -28,13 +29,20 @@ public class WorkingCopyPreferencesAccess {
 	private String qualifier;
 	private IScopeContext[] lookupOrder;
 	private IWorkingCopyManager workingCopyManager;
+	private BuilderPreferenceAccess.ChangeListener changeListener;
 
 	public static class Factory {
 		private String qualifier;
+		private BuilderPreferenceAccess.ChangeListener changeListener;
 
 		@Inject
 		public Factory(@Named(Constants.LANGUAGE_NAME) String qualifier) {
 			this.qualifier = qualifier;
+		}
+		
+		@Inject
+		public void setChangeListener(BuilderPreferenceAccess.ChangeListener changeListener) {
+			this.changeListener = changeListener;
 		}
 
 		public WorkingCopyPreferencesAccess create(IProject project, IWorkingCopyManager workingCopyManager) {
@@ -44,7 +52,7 @@ public class WorkingCopyPreferencesAccess {
 			} else {
 				lookupOrder = new IScopeContext[] { new InstanceScope(), new DefaultScope() };
 			}
-			return new WorkingCopyPreferencesAccess(this.qualifier, lookupOrder, workingCopyManager);
+			return new WorkingCopyPreferencesAccess(this.qualifier, lookupOrder, workingCopyManager,changeListener);
 		}
 	}
 
@@ -53,10 +61,11 @@ public class WorkingCopyPreferencesAccess {
 	}
 
 	public WorkingCopyPreferencesAccess(String qualifier, IScopeContext[] lookupOrder,
-			IWorkingCopyManager workingCopyManager) {
+			IWorkingCopyManager workingCopyManager, ChangeListener changeListener) {
 		this.qualifier = qualifier;
 		this.lookupOrder = lookupOrder;
 		this.workingCopyManager = workingCopyManager;
+		this.changeListener = changeListener;
 	}
 
 	public void setValue(String key, String value) {
@@ -119,11 +128,14 @@ public class WorkingCopyPreferencesAccess {
 	}
 
 	private IEclipsePreferences getNode(IScopeContext context, IWorkingCopyManager manager) {
-		IEclipsePreferences node = context.getNode(qualifier);
-		if (manager != null) {
-			return manager.getWorkingCopy(node);
+		IEclipsePreferences eclipsePreferences = context.getNode(qualifier);
+		if (eclipsePreferences != null) {
+			eclipsePreferences.addPreferenceChangeListener(changeListener);
 		}
-		return node;
+		if (manager != null) {
+			return manager.getWorkingCopy(eclipsePreferences);
+		}
+		return eclipsePreferences;
 	}
 
 }
