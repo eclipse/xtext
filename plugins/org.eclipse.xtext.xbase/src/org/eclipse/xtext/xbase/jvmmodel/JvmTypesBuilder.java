@@ -97,10 +97,16 @@ public class JvmTypesBuilder {
 	}
 
 	/**
-	 * Creates a public class declaration, associated to the given sourceElement. It sets the given name, which might be fully
-	 * qualified using the standard Java notation.
+	 * Creates a public class declaration, associated to the given sourceElement. It sets the given name, which might be
+	 * fully qualified using the standard Java notation.
+	 * 
+	 * @param sourceElement - the sourceElement the resulting element is associated with.
+	 * @param qualifiedName - the qualifiedName of the resulting class.
+	 * @param initializer - the initializer to apply on the created class element
+	 * 
+	 * @return a {@link JvmGenericType} representing a Java class of the given name.
 	 */
-	public JvmGenericType toClass(EObject sourceElement, String name, Procedure1<JvmGenericType> init) {
+	public JvmGenericType toClass(EObject sourceElement, String name, Procedure1<JvmGenericType> initializer) {
 		String simpleName = name;
 		String packageName = null;
 		final int dotIdx = name.lastIndexOf('.');
@@ -113,7 +119,7 @@ public class JvmTypesBuilder {
 		if (packageName != null)
 			result.setPackageName(packageName);
 		result.setVisibility(JvmVisibility.PUBLIC);
-		init.apply(result);
+		initializer.apply(result);
 
 		// if no super type add Object
 		if (result.getSuperTypes().isEmpty()) {
@@ -130,6 +136,12 @@ public class JvmTypesBuilder {
 
 	/**
 	 * Creates a private field with the given name and the given type associated to the given sourceElement.
+	 * 
+	 * @param sourceElement - the sourceElement the resulting element is associated with.
+	 * @param name - the simple name of the resulting class.
+	 * @param typeRef - the type of the field
+	 * 
+	 * @return a {@link JvmField} representing a Java field with the given simple name and type.
 	 */
 	public JvmField toField(EObject sourceElement, String name, JvmTypeReference typeRef) {
 		JvmField result = TypesFactory.eINSTANCE.createJvmField();
@@ -142,6 +154,7 @@ public class JvmTypesBuilder {
 	/**
 	 * Associates a source element with a target element. This association is used for tracing. Navigation, for
 	 * instance, uses this information to find the real declaration of a Jvm element.
+	 * 
 	 * @see IJvmModelAssociator
 	 * @see IJvmModelAssociations
 	 */
@@ -151,9 +164,11 @@ public class JvmTypesBuilder {
 	}
 
 	/**
-	 * Creates a public method with the given name and the given return type and associates it with the given sourceElement.
+	 * Creates a public method with the given name and the given return type and associates it with the given
+	 * sourceElement.
 	 */
-	public JvmOperation toMethod(EObject sourceElement, String name, JvmTypeReference returnType, Procedure1<JvmOperation> init) {
+	public JvmOperation toMethod(EObject sourceElement, String name, JvmTypeReference returnType,
+			Procedure1<JvmOperation> init) {
 		JvmOperation result = TypesFactory.eINSTANCE.createJvmOperation();
 		result.setSimpleName(name);
 		result.setVisibility(JvmVisibility.PUBLIC);
@@ -162,6 +177,16 @@ public class JvmTypesBuilder {
 		return associate(sourceElement, result);
 	}
 
+	/**
+	 * Creates a getter method for the given properties name with a simple implementation returning the value of a
+	 * similarly named field.
+	 * 
+	 * Example: <code>
+	 * public String getFoo() {
+	 *   return this.foo;
+	 * }
+	 * </code>
+	 */
 	public JvmOperation toGetter(EObject sourceElement, final String name, JvmTypeReference typeRef) {
 		JvmOperation result = TypesFactory.eINSTANCE.createJvmOperation();
 		result.setVisibility(JvmVisibility.PUBLIC);
@@ -175,6 +200,16 @@ public class JvmTypesBuilder {
 		return associate(sourceElement, result);
 	}
 
+	/**
+	 * Creates a setter method for the given properties name with the standard implementation assigning the passed
+	 * parameter to a similarly named field.
+	 * 
+	 * Example: <code>
+	 * public void setFoo(String foo) {
+	 *   this.foo = foo;
+	 * }
+	 * </code>
+	 */
 	public JvmOperation toSetter(EObject sourceElement, final String name, JvmTypeReference typeRef) {
 		JvmOperation result = TypesFactory.eINSTANCE.createJvmOperation();
 		result.setVisibility(JvmVisibility.PUBLIC);
@@ -188,6 +223,10 @@ public class JvmTypesBuilder {
 		return associate(sourceElement, result);
 	}
 
+	/**
+	 * Creates and returns a formal parameter for the given name and type, which is associated to the given source
+	 * element.
+	 */
 	public JvmFormalParameter toParameter(EObject sourceElement, String name, JvmTypeReference typeRef) {
 		JvmFormalParameter result = TypesFactory.eINSTANCE.createJvmFormalParameter();
 		result.setName(name);
@@ -195,6 +234,10 @@ public class JvmTypesBuilder {
 		return associate(sourceElement, result);
 	}
 
+	/**
+	 * Creates and returns a constructor with the given simple name associated to the given source element. By default
+	 * the constructor will have an empty body and no arguments, hence the Java default constructor.
+	 */
 	public JvmConstructor toConstructor(EObject sourceElement, String simpleName, Procedure1<JvmConstructor> init) {
 		JvmConstructor constructor = TypesFactory.eINSTANCE.createJvmConstructor();
 		constructor.setSimpleName(simpleName);
@@ -208,18 +251,44 @@ public class JvmTypesBuilder {
 		return associate(sourceElement, constructor);
 	}
 
+	/**
+	 * Creates and returns an annotation of the given annotation type.
+	 */
 	public JvmAnnotationReference toAnnotation(EObject sourceElement, Class<?> annotationType) {
 		return toAnnotation(sourceElement, annotationType, null);
 	}
 
+	/**
+	 * Creates and returns an annotation of the given annotation type's name.
+	 */
 	public JvmAnnotationReference toAnnotation(EObject sourceElement, String annotationTypeName) {
 		return toAnnotation(sourceElement, annotationTypeName, null);
 	}
 
+	/**
+	 * Creates and returns an annotation of the given annotation type's name and the given value.
+	 * 
+	 * @param sourceElement
+	 *            - the source element to associate the created element with.
+	 * @param annotationType
+	 *            - the type of the created annotation.
+	 * @param value
+	 *            - the value of the single
+	 */
 	public JvmAnnotationReference toAnnotation(EObject sourceElement, Class<?> annotationType, Object value) {
 		return toAnnotation(sourceElement, annotationType.getCanonicalName(), value);
 	}
 
+	/**
+	 * Creates and returns an annotation of the given annotation type's name and the given value.
+	 * 
+	 * @param sourceElement
+	 *            - the source element to associate the created element with.
+	 * @param annotationTypeNAme
+	 *            - the type name of the created annotation.
+	 * @param value
+	 *            - the value of the single
+	 */
 	public JvmAnnotationReference toAnnotation(EObject sourceElement, String annotationTypeName, Object value) {
 		JvmAnnotationReference result = TypesFactory.eINSTANCE.createJvmAnnotationReference();
 		JvmType jvmType = references.findDeclaredType(annotationTypeName, sourceElement);
@@ -237,6 +306,9 @@ public class JvmTypesBuilder {
 		return result;
 	}
 
+	/**
+	 * Creates a clone of the given {@link JvmTypeReference} without resolving any proxies.
+	 */
 	public JvmTypeReference cloneWithProxies(JvmTypeReference typeRef) {
 		if (typeRef instanceof JvmParameterizedTypeReference
 				&& !typeRef.eIsSet(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE))
@@ -244,10 +316,22 @@ public class JvmTypesBuilder {
 		return EcoreUtil2.cloneWithProxies(typeRef);
 	}
 
-	public void body(JvmExecutable op, Functions.Function1<ImportManager, ? extends CharSequence> strategy) {
-		addCompilationStrategy(op, strategy);
+	/**
+	 * Attaches the given compile strategy to the given {@link JvmExecutable} such that the compiler knows how to
+	 * implement the {@link JvmExecutable} when it is translated to Java source code.
+	 * @param executable - the operation or constructor to add the method body to.
+	 * @param strategy - the compilation strategy. Must return zero or more Java statements.
+	 */
+	public void body(JvmExecutable executable, Functions.Function1<ImportManager, ? extends CharSequence> strategy) {
+		addCompilationStrategy(executable, strategy);
 	}
 
+	/**
+	 * Attaches the given compile strategy to the given {@link JvmField} such that the compiler knows how to
+	 * initialize the {@link JvmField} when it is translated to Java source code.
+	 * @param field - the field to add the initializer to.
+	 * @param strategy - the compilation strategy. Must return just one valid Java expression.
+	 */
 	public void initialization(JvmField field, Functions.Function1<ImportManager, ? extends CharSequence> strategy) {
 		addCompilationStrategy(field, strategy);
 	}
@@ -259,18 +343,51 @@ public class JvmTypesBuilder {
 		member.eAdapters().add(adapter);
 	}
 
+	/**
+	 * Creates a new {@link JvmTypeReference} pointing to the given class and containing the given type arguments.
+	 * 
+	 * @param ctx
+	 *            - an EMF context, which is used to look up the {@link org.eclipse.xtext.common.types.JvmType} for the
+	 *            given clazz.
+	 * @param clazz
+	 *            - the class the type reference shall point to.
+	 * @param typeArgs
+	 *            - type arguments
+	 * 
+	 * @return the newly created {@link JvmTypeReference}
+	 */
 	public JvmTypeReference newTypeRef(EObject ctx, Class<?> clazz, JvmTypeReference... typeArgs) {
 		return references.getTypeForName(clazz, ctx, typeArgs);
 	}
 
-	public JvmTypeReference newTypeRef(EObject ctx, String name, JvmTypeReference... typeArgs) {
-		return references.getTypeForName(name, ctx, typeArgs);
+	/**
+	 * Creates a new {@link JvmTypeReference} pointing to the given class and containing the given type arguments.
+	 * 
+	 * @param ctx
+	 *            - an EMF context, which is used to look up the {@link org.eclipse.xtext.common.types.JvmType} for the
+	 *            given clazz.
+	 * @param typeName
+	 *            - the name of the type the reference shall point to.
+	 * @param typeArgs
+	 *            - type arguments
+	 * @return the newly created {@link JvmTypeReference}
+	 */
+	public JvmTypeReference newTypeRef(EObject ctx, String typeName, JvmTypeReference... typeArgs) {
+		return references.getTypeForName(typeName, ctx, typeArgs);
 	}
 
+	/**
+	 * @return an array type of the given type reference. Add one dimension if the given {@link JvmTypeReference} is
+	 *         already an array.
+	 */
 	public JvmTypeReference addArrayTypeDimension(JvmTypeReference componentType) {
 		return references.createArrayType(componentType);
 	}
 
+	/**
+	 * translates {@link XAnnotation}s to {@link JvmAnnotationReference}s and adds them to the given
+	 * {@link JvmAnnotationTarget}
+	 */
 	public void translateAnnotationsTo(Iterable<? extends XAnnotation> annotations, JvmAnnotationTarget target) {
 		for (XAnnotation anno : annotations) {
 			JvmAnnotationReference annotationReference = getJvmAnnotationReference(anno);
@@ -278,13 +395,23 @@ public class JvmTypesBuilder {
 		}
 	}
 
-	public void translateDocumentationTo(EObject source, EObject jvmElement) {
+	/**
+	 * Translates documentation from a source element to the given jvmElement.
+	 */
+	public void translateDocumentationTo(EObject source, JvmIdentifiableElement jvmElement) {
 		String documentation = documentationProvider.getDocumentation(source).trim();
 		if (!isEmpty(documentation)) {
-			DocumentationAdapter documentationAdapter = new DocumentationAdapter();
-			documentationAdapter.setDocumentation(documentation);
-			jvmElement.eAdapters().add(documentationAdapter);
+			addDocumentation(jvmElement, documentation);
 		}
+	}
+	
+	/**
+	 * Attaches the given documentation to the given jvmElement.
+	 */
+	public void addDocumentation(JvmIdentifiableElement jvmElement, String documentation) {
+		DocumentationAdapter documentationAdapter = new DocumentationAdapter();
+		documentationAdapter.setDocumentation(documentation);
+		jvmElement.eAdapters().add(documentationAdapter);
 	}
 
 	protected JvmAnnotationReference getJvmAnnotationReference(XAnnotation anno) {
