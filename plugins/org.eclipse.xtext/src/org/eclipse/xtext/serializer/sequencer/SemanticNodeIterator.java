@@ -82,6 +82,8 @@ public class SemanticNodeIterator implements Iterator<Triple<INode, AbstractElem
 	}
 
 	protected boolean isEObjectNode(INode node) {
+		if (node.getGrammarElement() instanceof AbstractRule)
+			return true;
 		if (node.getGrammarElement() instanceof Action)
 			return true;
 		if (GrammarUtil.isAssignedEObjectRuleCall(node.getGrammarElement())) {
@@ -110,8 +112,11 @@ public class SemanticNodeIterator implements Iterator<Triple<INode, AbstractElem
 	}
 
 	protected INode next(INode node, boolean prune) {
-		if (!prune && node instanceof ICompositeNode)
-			return ((ICompositeNode) node).getFirstChild();
+		if (!prune && node instanceof ICompositeNode) {
+			INode child = ((ICompositeNode) node).getFirstChild();
+			if (child != null)
+				return child;
+		}
 		INode n = node.getNextSibling();
 		while (n == null) {
 			node = node.getParent();

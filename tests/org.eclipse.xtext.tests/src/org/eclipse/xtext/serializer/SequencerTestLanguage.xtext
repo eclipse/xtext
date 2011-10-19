@@ -17,7 +17,8 @@ Model:
 	x10=MultiKeywords | x11=MultiKeywordsOrID | x12=MultiTerminals |
 	x13=SingleEnum | x14=SingleCrossReference | x15=SingleContainmentReference |
 	x19=DependentAlternative1 | x20=DependentAlternative2 | x21=Optional | x22=Float |
-	x23=UnorderedAlternative | x24=UnorderedGroup | x25=UnorderedGroupOptional;
+	x23=UnorderedAlternative | x24=UnorderedGroup | x25=UnorderedGroupOptional |
+	x26=UnorderedGroupBoolean;
 
 SimpleGroup:
 	"#1" val1=ID val2=ID;
@@ -139,4 +140,6 @@ UnorderedGroupVal2:
 
 UnorderedGroupOptional:
 	"#25" {UnorderedGroupOptional} (("kw1" val1=ID)? & ("kw2" va2=ID)? & ("kw3" val3=ID)?);
-	
+
+UnorderedGroupBoolean:
+	'#26' {UnorderedGroupBoolean} (val1?='kw1'?  & val2?='kw2'? & val3?='kw3'?);
