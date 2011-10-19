@@ -28,7 +28,6 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.ExpandableComposite;
 import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
@@ -116,26 +115,17 @@ public class BuilderConfigurationBlock extends OptionsConfigurationBlock {
 		Set<OutputConfiguration> outputConfigurations = configurationProvider.getOutputConfigurations(getProject());
 
 		for (OutputConfiguration outputConfiguration : outputConfigurations) {
-			label = String.format(Messages.BuilderConfigurationBlock_OutputFolderSection_Label,
-					outputConfiguration.getName());
+			label = outputConfiguration.getDescription();
 			excomposite = createStyleSection(composite, label, columns);
 			othersComposite = new Composite(excomposite, SWT.NONE);
 			excomposite.setClient(othersComposite);
 			othersComposite.setLayout(new GridLayout(columns, false));
-			Text textField = addTextField(othersComposite, Messages.OutputConfigurationPage_Description,
-					BuilderPreferenceAccess.getKey(outputConfiguration,
-							EclipseOutputConfigurationProvider.OUTPUT_DESCRIPTION), 0, 300);
-			textField.setEnabled(false);
-			textField.setEditable(false);
-			textField = addTextField(othersComposite, Messages.OutputConfigurationPage_Directory,
+			addTextField(othersComposite, Messages.OutputConfigurationPage_Directory,
 					BuilderPreferenceAccess.getKey(outputConfiguration,
 							EclipseOutputConfigurationProvider.OUTPUT_DIRECTORY), 0, 200);
 			addCheckBox(othersComposite, Messages.OutputConfigurationPage_CreateDirectory,
 					BuilderPreferenceAccess.getKey(outputConfiguration,
 							EclipseOutputConfigurationProvider.OUTPUT_CREATE_DIRECTORY), trueFalseValues, 0);
-			addCheckBox(othersComposite, Messages.OutputConfigurationPage_CleanDirectory,
-					BuilderPreferenceAccess.getKey(outputConfiguration,
-							EclipseOutputConfigurationProvider.OUTPUT_CLEAN_DIRECTORY), trueFalseValues, 0);
 			addCheckBox(othersComposite, Messages.OutputConfigurationPage_OverrideExistingResources,
 					BuilderPreferenceAccess.getKey(outputConfiguration,
 							EclipseOutputConfigurationProvider.OUTPUT_OVERRIDE), trueFalseValues, 0);
@@ -145,6 +135,9 @@ public class BuilderConfigurationBlock extends OptionsConfigurationBlock {
 			addCheckBox(othersComposite, Messages.OutputConfigurationPage_CleanupDerivedResources,
 					BuilderPreferenceAccess.getKey(outputConfiguration,
 							EclipseOutputConfigurationProvider.OUTPUT_CLEANUP_DERIVED), trueFalseValues, 0);
+			addCheckBox(othersComposite, Messages.OutputConfigurationPage_CleanDirectory,
+					BuilderPreferenceAccess.getKey(outputConfiguration,
+							EclipseOutputConfigurationProvider.OUTPUT_CLEAN_DIRECTORY), trueFalseValues, 0);
 		}
 		IDialogSettings section = Activator.getDefault().getDialogSettings().getSection(SETTINGS_SECTION_NAME);
 		restoreSectionExpansionStates(section);
