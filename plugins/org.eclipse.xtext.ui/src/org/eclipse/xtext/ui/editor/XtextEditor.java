@@ -529,18 +529,18 @@ public class XtextEditor extends TextEditor {
 	protected String[] collectContextMenuPreferencePages() {
 		String[] commonPages = super.collectContextMenuPreferencePages();
 		String[] langSpecificPages = collectLanguageContextMenuPreferencePages();
-		return ObjectArrays.concat(commonPages, langSpecificPages, String.class);
+		return ObjectArrays.concat(langSpecificPages, commonPages, String.class);
 	}
 
 	private String[] collectLanguageContextMenuPreferencePages() {
 		String[] additionalPages = new String[5];
 		// NOTE: preference page at index 0 will be opened, see
 		// PreferencesUtil.createPreferenceDialogOn
-		additionalPages[0] = getLanguageName() + ".editor"; //$NON-NLS-1$
-		additionalPages[1] = getLanguageName();
+		additionalPages[0] = getLanguageName();
+		additionalPages[1] = getLanguageName() + ".editor"; //$NON-NLS-1$
 		additionalPages[2] = getLanguageName() + ".templates"; //$NON-NLS-1$
 		additionalPages[3] = getLanguageName() + ".coloring"; //$NON-NLS-1$
-		additionalPages[4] = getLanguageName() + ".compiler"; //$NON-NLS-1$
+		additionalPages[4] = getLanguageName() + ".compiler.preferencePage"; //$NON-NLS-1$
 		return additionalPages;
 	}
 
