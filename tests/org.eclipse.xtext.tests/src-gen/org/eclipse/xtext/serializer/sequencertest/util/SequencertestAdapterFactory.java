@@ -43,6 +43,7 @@ import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal2;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeValDelegate;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedGroup;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupBoolean;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupOptional;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal2;
@@ -285,6 +286,11 @@ public class SequencertestAdapterFactory extends AdapterFactoryImpl
       public Adapter caseUnorderedGroupOptional(UnorderedGroupOptional object)
       {
         return createUnorderedGroupOptionalAdapter();
+      }
+      @Override
+      public Adapter caseUnorderedGroupBoolean(UnorderedGroupBoolean object)
+      {
+        return createUnorderedGroupBooleanAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -829,6 +835,21 @@ public class SequencertestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createUnorderedGroupOptionalAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.sequencertest.UnorderedGroupBoolean <em>Unordered Group Boolean</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.sequencertest.UnorderedGroupBoolean
+   * @generated
+   */
+  public Adapter createUnorderedGroupBooleanAdapter()
   {
     return null;
   }

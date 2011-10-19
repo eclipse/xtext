@@ -41,6 +41,7 @@ import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal2;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeValDelegate;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedGroup;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupBoolean;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupOptional;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal2;
@@ -373,6 +374,13 @@ public class SequencertestSwitch<T>
       {
         UnorderedGroupOptional unorderedGroupOptional = (UnorderedGroupOptional)theEObject;
         T result = caseUnorderedGroupOptional(unorderedGroupOptional);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SequencertestPackage.UNORDERED_GROUP_BOOLEAN:
+      {
+        UnorderedGroupBoolean unorderedGroupBoolean = (UnorderedGroupBoolean)theEObject;
+        T result = caseUnorderedGroupBoolean(unorderedGroupBoolean);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -936,6 +944,22 @@ public class SequencertestSwitch<T>
    * @generated
    */
   public T caseUnorderedGroupOptional(UnorderedGroupOptional object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Unordered Group Boolean</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Unordered Group Boolean</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseUnorderedGroupBoolean(UnorderedGroupBoolean object)
   {
     return null;
   }

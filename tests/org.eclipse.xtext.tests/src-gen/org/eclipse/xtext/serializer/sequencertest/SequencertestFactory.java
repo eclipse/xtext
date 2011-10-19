@@ -341,6 +341,15 @@ public interface SequencertestFactory extends EFactory
   UnorderedGroupOptional createUnorderedGroupOptional();
 
   /**
+   * Returns a new object of class '<em>Unordered Group Boolean</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Unordered Group Boolean</em>'.
+   * @generated
+   */
+  UnorderedGroupBoolean createUnorderedGroupBoolean();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

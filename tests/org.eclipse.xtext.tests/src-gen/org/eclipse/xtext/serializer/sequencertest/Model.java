@@ -37,6 +37,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX23 <em>X23</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX24 <em>X24</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX25 <em>X25</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX26 <em>X26</em>}</li>
  * </ul>
  * </p>
  *
@@ -617,5 +618,31 @@ public interface Model extends EObject
    * @generated
    */
   void setX25(UnorderedGroupOptional value);
+
+  /**
+   * Returns the value of the '<em><b>X26</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X26</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X26</em>' containment reference.
+   * @see #setX26(UnorderedGroupBoolean)
+   * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getModel_X26()
+   * @model containment="true"
+   * @generated
+   */
+  UnorderedGroupBoolean getX26();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX26 <em>X26</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X26</em>' containment reference.
+   * @see #getX26()
+   * @generated
+   */
+  void setX26(UnorderedGroupBoolean value);
 
 } // Model

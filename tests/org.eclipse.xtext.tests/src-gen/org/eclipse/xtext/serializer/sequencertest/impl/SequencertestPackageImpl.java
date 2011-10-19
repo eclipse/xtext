@@ -47,6 +47,7 @@ import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal2;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeValDelegate;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedGroup;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupBoolean;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupOptional;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal2;
@@ -304,6 +305,13 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * @generated
    */
   private EClass unorderedGroupOptionalEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass unorderedGroupBooleanEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -606,6 +614,16 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
   public EReference getModel_X25()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(21);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_X26()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(22);
   }
 
   /**
@@ -1603,6 +1621,46 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getUnorderedGroupBoolean()
+  {
+    return unorderedGroupBooleanEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getUnorderedGroupBoolean_Val1()
+  {
+    return (EAttribute)unorderedGroupBooleanEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getUnorderedGroupBoolean_Val2()
+  {
+    return (EAttribute)unorderedGroupBooleanEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getUnorderedGroupBoolean_Val3()
+  {
+    return (EAttribute)unorderedGroupBooleanEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EEnum getDefEnum()
   {
     return defEnumEEnum;
@@ -1661,6 +1719,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
     createEReference(modelEClass, MODEL__X23);
     createEReference(modelEClass, MODEL__X24);
     createEReference(modelEClass, MODEL__X25);
+    createEReference(modelEClass, MODEL__X26);
 
     simpleGroupEClass = createEClass(SIMPLE_GROUP);
     createEAttribute(simpleGroupEClass, SIMPLE_GROUP__VAL1);
@@ -1795,6 +1854,11 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
     createEAttribute(unorderedGroupOptionalEClass, UNORDERED_GROUP_OPTIONAL__VA2);
     createEAttribute(unorderedGroupOptionalEClass, UNORDERED_GROUP_OPTIONAL__VAL3);
 
+    unorderedGroupBooleanEClass = createEClass(UNORDERED_GROUP_BOOLEAN);
+    createEAttribute(unorderedGroupBooleanEClass, UNORDERED_GROUP_BOOLEAN__VAL1);
+    createEAttribute(unorderedGroupBooleanEClass, UNORDERED_GROUP_BOOLEAN__VAL2);
+    createEAttribute(unorderedGroupBooleanEClass, UNORDERED_GROUP_BOOLEAN__VAL3);
+
     // Create enums
     defEnumEEnum = createEEnum(DEF_ENUM);
   }
@@ -1858,6 +1922,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
     initEReference(getModel_X23(), this.getUnorderedAlternative(), null, "x23", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X24(), this.getUnorderedGroup(), null, "x24", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X25(), this.getUnorderedGroupOptional(), null, "x25", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_X26(), this.getUnorderedGroupBoolean(), null, "x26", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(simpleGroupEClass, SimpleGroup.class, "SimpleGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSimpleGroup_Val1(), theEcorePackage.getEString(), "val1", null, 0, 1, SimpleGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1991,6 +2056,11 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
     initEAttribute(getUnorderedGroupOptional_Val1(), theEcorePackage.getEString(), "val1", null, 0, 1, UnorderedGroupOptional.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getUnorderedGroupOptional_Va2(), theEcorePackage.getEString(), "va2", null, 0, 1, UnorderedGroupOptional.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getUnorderedGroupOptional_Val3(), theEcorePackage.getEString(), "val3", null, 0, 1, UnorderedGroupOptional.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(unorderedGroupBooleanEClass, UnorderedGroupBoolean.class, "UnorderedGroupBoolean", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getUnorderedGroupBoolean_Val1(), theEcorePackage.getEBoolean(), "val1", null, 0, 1, UnorderedGroupBoolean.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getUnorderedGroupBoolean_Val2(), theEcorePackage.getEBoolean(), "val2", null, 0, 1, UnorderedGroupBoolean.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getUnorderedGroupBoolean_Val3(), theEcorePackage.getEBoolean(), "val3", null, 0, 1, UnorderedGroupBoolean.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
     initEEnum(defEnumEEnum, DefEnum.class, "DefEnum");

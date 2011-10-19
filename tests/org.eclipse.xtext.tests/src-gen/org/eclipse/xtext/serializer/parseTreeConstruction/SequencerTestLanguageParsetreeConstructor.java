@@ -66,6 +66,7 @@ protected class ThisRootNode extends RootToken {
 			case 32: return new UnorderedGroupValDelegate_UnorderedGroupVal2ParserRuleCall(this, this, 32, inst);
 			case 33: return new UnorderedGroupVal2_Group(this, this, 33, inst);
 			case 34: return new UnorderedGroupOptional_Group(this, this, 34, inst);
+			case 35: return new UnorderedGroupBoolean_Group(this, this, 35, inst);
 			default: return null;
 		}	
 	}	
@@ -80,7 +81,7 @@ protected class ThisRootNode extends RootToken {
  * 	x11=SingleKeywordsOrID | x12=SingleTerminals | x10=MultiKeywords | x11=MultiKeywordsOrID | x12=MultiTerminals |
  * 	x13=SingleEnum | x14=SingleCrossReference | x15=SingleContainmentReference | x19=DependentAlternative1 |
  * 	x20=DependentAlternative2 | x21=Optional | x22=Float | x23=UnorderedAlternative | x24=UnorderedGroup |
- * 	x25=UnorderedGroupOptional;
+ * 	x25=UnorderedGroupOptional | x26=UnorderedGroupBoolean;
  *
  **/
 
@@ -88,7 +89,7 @@ protected class ThisRootNode extends RootToken {
 // | x6=List1 | x7=List2 | x8=AltList1 | x9=AltList2 | x10=SingleKeywords | x11=SingleKeywordsOrID | x12=SingleTerminals |
 // x10=MultiKeywords | x11=MultiKeywordsOrID | x12=MultiTerminals | x13=SingleEnum | x14=SingleCrossReference |
 // x15=SingleContainmentReference | x19=DependentAlternative1 | x20=DependentAlternative2 | x21=Optional | x22=Float |
-// x23=UnorderedAlternative | x24=UnorderedGroup | x25=UnorderedGroupOptional
+// x23=UnorderedAlternative | x24=UnorderedGroup | x25=UnorderedGroupOptional | x26=UnorderedGroupBoolean
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -128,6 +129,7 @@ protected class Model_Alternatives extends AlternativesToken {
 			case 22: return new Model_X23Assignment_22(lastRuleCallOrigin, this, 22, inst);
 			case 23: return new Model_X24Assignment_23(lastRuleCallOrigin, this, 23, inst);
 			case 24: return new Model_X25Assignment_24(lastRuleCallOrigin, this, 24, inst);
+			case 25: return new Model_X26Assignment_25(lastRuleCallOrigin, this, 25, inst);
 			default: return null;
 		}	
 	}
@@ -1250,6 +1252,51 @@ protected class Model_X25Assignment_24 extends AssignmentToken  {
 			if(param.isInstanceOf(grammarAccess.getUnorderedGroupOptionalRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getModelAccess().getX25UnorderedGroupOptionalParserRuleCall_24_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, consumed);
+		}	
+	}	
+}
+
+// x26=UnorderedGroupBoolean
+protected class Model_X26Assignment_25 extends AssignmentToken  {
+	
+	public Model_X26Assignment_25(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getX26Assignment_25();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new UnorderedGroupBoolean_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("x26",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("x26");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getUnorderedGroupBooleanRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getModelAccess().getX26UnorderedGroupBooleanParserRuleCall_25_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -7411,5 +7458,224 @@ protected class UnorderedGroupOptional_Val3Assignment_2_2_1 extends AssignmentTo
 
 
 /************ end Rule UnorderedGroupOptional ****************/
+
+
+/************ begin Rule UnorderedGroupBoolean ****************
+ *
+ * UnorderedGroupBoolean:
+ * 	"#26" {UnorderedGroupBoolean} (val1?="kw1"? & val2?="kw2"? & val3?="kw3"?);
+ *
+ **/
+
+// "#26" {UnorderedGroupBoolean} (val1?="kw1"? & val2?="kw2"? & val3?="kw3"?)
+protected class UnorderedGroupBoolean_Group extends GroupToken {
+	
+	public UnorderedGroupBoolean_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getUnorderedGroupBooleanAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new UnorderedGroupBoolean_UnorderedGroup_2(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getUnorderedGroupBooleanAccess().getUnorderedGroupBooleanAction_1().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// "#26"
+protected class UnorderedGroupBoolean_NumberSignDigitTwoDigitSixKeyword_0 extends KeywordToken  {
+	
+	public UnorderedGroupBoolean_NumberSignDigitTwoDigitSixKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getUnorderedGroupBooleanAccess().getNumberSignDigitTwoDigitSixKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+}
+
+// {UnorderedGroupBoolean}
+protected class UnorderedGroupBoolean_UnorderedGroupBooleanAction_1 extends ActionToken  {
+
+	public UnorderedGroupBoolean_UnorderedGroupBooleanAction_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Action getGrammarElement() {
+		return grammarAccess.getUnorderedGroupBooleanAccess().getUnorderedGroupBooleanAction_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new UnorderedGroupBoolean_NumberSignDigitTwoDigitSixKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
+	}
+}
+
+// val1?="kw1"? & val2?="kw2"? & val3?="kw3"?
+protected class UnorderedGroupBoolean_UnorderedGroup_2 extends UnorderedGroupToken {
+	
+	public UnorderedGroupBoolean_UnorderedGroup_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public UnorderedGroup getGrammarElement() {
+		return grammarAccess.getUnorderedGroupBooleanAccess().getUnorderedGroup_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new UnorderedGroupBoolean_Val3Assignment_2_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new UnorderedGroupBoolean_Val2Assignment_2_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new UnorderedGroupBoolean_Val1Assignment_2_0(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new UnorderedGroupBoolean_UnorderedGroupBooleanAction_1(lastRuleCallOrigin, this, 3, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// val1?="kw1"?
+protected class UnorderedGroupBoolean_Val1Assignment_2_0 extends AssignmentToken  {
+	
+	public UnorderedGroupBoolean_Val1Assignment_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getUnorderedGroupBooleanAccess().getVal1Assignment_2_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new UnorderedGroupBoolean_UnorderedGroupBooleanAction_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("val1",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("val1");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getUnorderedGroupBooleanAccess().getVal1Kw1Keyword_2_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// val2?="kw2"?
+protected class UnorderedGroupBoolean_Val2Assignment_2_1 extends AssignmentToken  {
+	
+	public UnorderedGroupBoolean_Val2Assignment_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getUnorderedGroupBooleanAccess().getVal2Assignment_2_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new UnorderedGroupBoolean_Val1Assignment_2_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new UnorderedGroupBoolean_UnorderedGroupBooleanAction_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("val2",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("val2");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getUnorderedGroupBooleanAccess().getVal2Kw2Keyword_2_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// val3?="kw3"?
+protected class UnorderedGroupBoolean_Val3Assignment_2_2 extends AssignmentToken  {
+	
+	public UnorderedGroupBoolean_Val3Assignment_2_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getUnorderedGroupBooleanAccess().getVal3Assignment_2_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new UnorderedGroupBoolean_Val2Assignment_2_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new UnorderedGroupBoolean_Val1Assignment_2_0(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new UnorderedGroupBoolean_UnorderedGroupBooleanAction_1(lastRuleCallOrigin, this, 2, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("val3",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("val3");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getUnorderedGroupBooleanAccess().getVal3Kw3Keyword_2_2_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+
+/************ end Rule UnorderedGroupBoolean ****************/
 
 }

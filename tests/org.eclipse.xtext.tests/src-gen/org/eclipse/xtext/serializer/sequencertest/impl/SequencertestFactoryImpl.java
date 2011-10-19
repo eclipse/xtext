@@ -47,6 +47,7 @@ import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal2;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeValDelegate;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedGroup;
+import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupBoolean;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupOptional;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal2;
@@ -139,6 +140,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
       case SequencertestPackage.UNORDERED_GROUP_VAL_DELEGATE: return createUnorderedGroupValDelegate();
       case SequencertestPackage.UNORDERED_GROUP_VAL2: return createUnorderedGroupVal2();
       case SequencertestPackage.UNORDERED_GROUP_OPTIONAL: return createUnorderedGroupOptional();
+      case SequencertestPackage.UNORDERED_GROUP_BOOLEAN: return createUnorderedGroupBoolean();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -561,6 +563,17 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
   {
     UnorderedGroupOptionalImpl unorderedGroupOptional = new UnorderedGroupOptionalImpl();
     return unorderedGroupOptional;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public UnorderedGroupBoolean createUnorderedGroupBoolean()
+  {
+    UnorderedGroupBooleanImpl unorderedGroupBoolean = new UnorderedGroupBooleanImpl();
+    return unorderedGroupBoolean;
   }
 
   /**
