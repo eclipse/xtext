@@ -267,8 +267,9 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		public void clearValues() {
 			if (!empty) {
 				if (log.isDebugEnabled()) {
+					String lastSegment = resource != null && resource.getURI() != null ? resource.getURI().lastSegment() : "null";
 					log.debug(String.format("Clear %d cache entries for resource %s after %d hits and %d misses (quota: %d%%)", 
-							values.size(), resource.getURI().lastSegment(), hits, misses, hits + misses != 0 ? hits * 100 / (hits + misses) : 0));
+							values.size(), lastSegment, hits, misses, hits + misses != 0 ? hits * 100 / (hits + misses) : 0));
 				}
 				values.clear();
 				empty = true;
