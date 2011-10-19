@@ -59,9 +59,7 @@ import com.google.inject.name.Names;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
  */
-@SuppressWarnings("restriction")
 public abstract class AbstractXtextTests extends TestCase implements ResourceLoadHelper {
 
 	private Injector injector;
@@ -273,7 +271,7 @@ public abstract class AbstractXtextTests extends TestCase implements ResourceLoa
 	}
 
 	protected boolean shouldTestSerializer(XtextResource resource) {
-		return !"org.eclipse.xtext.Xtext".equals(resource.getResourceServiceProvider().get(IGrammarAccess.class).getGrammar().getName());
+		return !"org.eclipse.xtext.Xtext".equals(resource.getLanguageName());
 	}
 
 	protected XtextResource doGetResource(InputStream in, URI uri) throws Exception {
