@@ -68,12 +68,12 @@ public class BuilderPreferencePage extends PropertyAndPreferencePage {
 
 	@Override
 	protected String getPreferencePageID() {
-		return languageName + ".builder.preferencePage";
+		return languageName + ".compiler.preferencePage";
 	}
 
 	@Override
 	protected String getPropertyPageID() {
-		return languageName + ".builder.propertyPage";
+		return languageName + ".compiler.propertyPage";
 	}
 
 	@Override

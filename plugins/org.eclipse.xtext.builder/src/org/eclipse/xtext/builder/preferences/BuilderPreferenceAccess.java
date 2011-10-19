@@ -9,6 +9,10 @@ package org.eclipse.xtext.builder.preferences;
 
 import static org.eclipse.xtext.builder.EclipseOutputConfigurationProvider.*;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences.IPreferenceChangeListener;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences.PreferenceChangeEvent;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
@@ -18,14 +22,17 @@ import org.eclipse.xtext.generator.OutputConfigurationProvider;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
 import org.eclipse.xtext.ui.editor.preferences.PreferenceConstants;
+import org.osgi.service.prefs.Preferences;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
 
 /**
  * @author Michael Clay - Initial contribution and API
  * @since 2.1
  */
+@Singleton
 public class BuilderPreferenceAccess {
 	/**
 	 * Name of a preference for configuring whether the builder participant is enabled or not.
@@ -88,19 +95,48 @@ public class BuilderPreferenceAccess {
 				+ PreferenceConstants.SEPARATOR + preferenceName;
 	}
 
-	public static class ChangeListener implements IPropertyChangeListener {
-		
+	public static class ChangeListener implements IPropertyChangeListener, IPreferenceChangeListener {
+
 		@Inject
 		private Provider<DerivedResourceCleanerJob> cleanerProvider;
+		
+		@Inject
+		private IWorkspace workspace;
+		
+		public ChangeListener() {
+//			new Exception("New ChangeListener").printStackTrace();
+		}
 
 		public void propertyChange(PropertyChangeEvent event) {
-			if (event.getProperty().matches("^"+OUTPUT_PREFERENCE_TAG+"\\.\\w+\\."+OUTPUT_DIRECTORY+"$")) {
+			if (isOutputDirectoryKey(event.getProperty())) {
 				String oldValue = (String) event.getOldValue();
-				DerivedResourceCleanerJob cleaner = cleanerProvider.get();
-				cleaner.setUser(true);
-				cleaner.initialize(null, oldValue);
-				cleaner.schedule();
+				scheduleCleanerJob(null, oldValue);
 			}
+		}
+
+		public void preferenceChange(PreferenceChangeEvent preferenceChangeEvent) {
+			if (isOutputDirectoryKey(preferenceChangeEvent.getKey())) {
+				Preferences node = preferenceChangeEvent.getNode();
+				IProject project = null;
+				// TODO: this is a hack
+				if (node.absolutePath().startsWith("/project/")) {
+					String projectName = node.parent().name();
+					project = workspace.getRoot().getProject(projectName);
+				}
+				String oldValue = (String) preferenceChangeEvent.getOldValue();
+				scheduleCleanerJob(project, oldValue);
+			}
+		}
+
+		private void scheduleCleanerJob(IProject project, String folderNameToClean) {
+			DerivedResourceCleanerJob cleaner = cleanerProvider.get();
+			cleaner.setUser(true);
+			cleaner.initialize(project, folderNameToClean);
+			cleaner.schedule();
+		}
+
+		private boolean isOutputDirectoryKey(String key) {
+			return key.matches("^" + OUTPUT_PREFERENCE_TAG + "\\.\\w+\\." + OUTPUT_DIRECTORY + "$");
 		}
 	}
 

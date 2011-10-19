@@ -24,10 +24,10 @@ public class Xtend2OutputConfigurationProvider extends OutputConfigurationProvid
 	public Set<OutputConfiguration> getOutputConfigurations() {
 		OutputConfiguration defaultOutput = new OutputConfiguration(IFileSystemAccess.DEFAULT_OUTPUT);
 		defaultOutput.setDescription("Output Folder For Generated Java Files");
-		defaultOutput.setOutputDirectory("./xtend-gen");
+		defaultOutput.setOutputDirectory("xtend-gen");
 		defaultOutput.setOverrideExistingResources(true);
 		defaultOutput.setCreateOutputDirectory(true);
-		defaultOutput.setCanClearOutputDirectory(true);
+		defaultOutput.setCanClearOutputDirectory(false);
 		defaultOutput.setCleanUpDerivedResources(true);
 		defaultOutput.setSetDerivedProperty(true);
 		return newHashSet(defaultOutput);
