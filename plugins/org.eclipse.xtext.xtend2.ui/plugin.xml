@@ -70,6 +70,26 @@
             name="Templates">
             <keywordReference id="org.eclipse.xtext.xtend2.ui.keyword_Xtend2"/>
         </page>
+        <page
+            category="org.eclipse.xtext.xtend2.Xtend2"
+            class="org.eclipse.xtext.xtend2.ui.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
+            id="org.eclipse.xtext.xtend2.Xtend2.refactoring"
+            name="Refactoring">
+            <keywordReference id="org.eclipse.xtext.xtend2.ui.keyword_Xtend2"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.xtend2.ui.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.xtend2.Xtend2"
+            name="Xtend">
+            <keywordReference id="org.eclipse.xtext.xtend2.ui.keyword_Xtend2"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
     </extension>
     <extension
         point="org.eclipse.ui.keywords">
@@ -239,9 +259,23 @@
         <page
             category="org.eclipse.xtext.xtend2.Xtend2"
             class="org.eclipse.xtext.xtend2.ui.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
-            id="org.eclipse.xtext.xtend2.Xtend2.compiler"
+            id="org.eclipse.xtext.xtend2.Xtend2.compiler.preferencePage"
             name="Compiler">
             <keywordReference id="org.eclipse.xtext.xtend2.ui.keyword_Xtend2"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            category="org.eclipse.xtext.xtend2.Xtend2"
+            class="org.eclipse.xtext.xtend2.ui.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+            id="org.eclipse.xtext.xtend2.Xtend2.compiler.propertyPage"
+            name="Compiler">
+            <keywordReference id="org.eclipse.xtext.xtend2.ui.keyword_Xtend2"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
         </page>
     </extension>
    <extension

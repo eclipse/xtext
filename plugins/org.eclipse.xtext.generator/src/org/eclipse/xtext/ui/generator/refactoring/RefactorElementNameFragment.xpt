@@ -43,6 +43,15 @@
          </command>
       </menuContribution>
    </extension>
+   <extension point="org.eclipse.ui.preferencePages">
+	    <page
+	        category="«name»"
+	        class="«executableExtensionFactory()»:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
+	        id="«name».refactoring"
+	        name="Refactoring">
+	        <keywordReference id="«name.toJavaPackage() + ".ui.keyword_"+name.toSimpleName()»"/>
+	    </page>
+	</extension>
 «ENDDEFINE»
 
 «DEFINE addToStandaloneSetup FOR Grammar-»«ENDDEFINE»

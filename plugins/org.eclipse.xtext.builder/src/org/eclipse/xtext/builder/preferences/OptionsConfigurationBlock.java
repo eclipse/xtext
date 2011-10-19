@@ -121,7 +121,7 @@ public abstract class OptionsConfigurationBlock {
 		if (project == null || hasProjectSpecificOptions(project)) {
 			disabledProjectSettings = null;
 		} else {
-			disabledProjectSettings = Maps.newIdentityHashMap();
+			disabledProjectSettings = Maps.newHashMap();
 			for (String key : allKeys) {
 				disabledProjectSettings.put(key, workingCopyPreferencesAccess.getValue(key));
 			}
@@ -349,7 +349,7 @@ public abstract class OptionsConfigurationBlock {
 				updateControls();
 				validateSettings(null, null, null);
 			} else {
-				disabledProjectSettings = Maps.newIdentityHashMap();
+				disabledProjectSettings = Maps.newHashMap();
 				for (int i = 0; i < keys.length; i++) {
 					String curr = keys[i];
 					String oldSetting = workingCopyPreferencesAccess.getValue(curr);

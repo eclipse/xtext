@@ -9,6 +9,8 @@ package org.eclipse.xtext.builder.preferences;
 
 import static org.eclipse.xtext.builder.EclipseOutputConfigurationProvider.*;
 
+import org.eclipse.core.runtime.preferences.IEclipsePreferences.IPreferenceChangeListener;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences.PreferenceChangeEvent;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
@@ -88,19 +90,34 @@ public class BuilderPreferenceAccess {
 				+ PreferenceConstants.SEPARATOR + preferenceName;
 	}
 
-	public static class ChangeListener implements IPropertyChangeListener {
-		
+	public static class ChangeListener implements IPropertyChangeListener, IPreferenceChangeListener {
+
 		@Inject
 		private Provider<DerivedResourceCleanerJob> cleanerProvider;
 
 		public void propertyChange(PropertyChangeEvent event) {
-			if (event.getProperty().matches("^"+OUTPUT_PREFERENCE_TAG+"\\.\\w+\\."+OUTPUT_DIRECTORY+"$")) {
+			if (isOutputDirectoryKey(event.getProperty())) {
 				String oldValue = (String) event.getOldValue();
-				DerivedResourceCleanerJob cleaner = cleanerProvider.get();
-				cleaner.setUser(true);
-				cleaner.initialize(null, oldValue);
-				cleaner.schedule();
+				scheduleCleanerJob(oldValue);
 			}
+		}
+
+		public void preferenceChange(PreferenceChangeEvent preferenceChangeEvent) {
+			if (isOutputDirectoryKey(preferenceChangeEvent.getKey())) {
+				String oldValue = (String) preferenceChangeEvent.getOldValue();
+				scheduleCleanerJob(oldValue);
+			}
+		}
+
+		private void scheduleCleanerJob(String folderNameToClean) {
+			DerivedResourceCleanerJob cleaner = cleanerProvider.get();
+			cleaner.setUser(true);
+			cleaner.initialize(null, folderNameToClean);
+			cleaner.schedule();
+		}
+
+		private boolean isOutputDirectoryKey(String key) {
+			return key.matches("^" + OUTPUT_PREFERENCE_TAG + "\\.\\w+\\." + OUTPUT_DIRECTORY + "$");
 		}
 	}
 
