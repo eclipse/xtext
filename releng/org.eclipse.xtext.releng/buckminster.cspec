@@ -22,6 +22,7 @@
 		<cs:dependency name="org.eclipse.xpand.ui" componentType="eclipse.feature" />
 		<cs:dependency name="org.eclipse.xtend.util.stdlib" componentType="osgi.bundle" />
 		<cs:dependency name="org.junit4" componentType="osgi.bundle" versionDesignator="4.5.0" />
+		<cs:dependency name="org.junit" componentType="osgi.bundle"/>
 	</cs:dependencies>
 	<cs:actions>
 		<cs:public name="create.javadoc" actor="ant">
