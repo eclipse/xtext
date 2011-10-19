@@ -113,7 +113,8 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 					EObject resolved = EcoreUtil.resolve(element.getEObjectOrProxy(), context);
 					if (!resolved.eIsProxy()) {
 						IEObjectDescription shortendElement = scope.getSingleElement(resolved);
-						replacementString = applyValueConverter(shortendElement.getName());
+						if (shortendElement != null)
+							replacementString = applyValueConverter(shortendElement.getName());
 					}
 				}
 			}
