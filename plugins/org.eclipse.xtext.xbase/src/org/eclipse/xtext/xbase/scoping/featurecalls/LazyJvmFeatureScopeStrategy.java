@@ -45,5 +45,10 @@ public class LazyJvmFeatureScopeStrategy {
 	public Iterable<IEObjectDescription> getAllDescriptions() {
 		return jvmFeatureDescriptionProvider.getAllDescriptions(featureProvider, typeReference, genericContextFactory, context, hierarchy);
 	}
+	
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + "[" + jvmFeatureDescriptionProvider + "]";
+	}
 
 }

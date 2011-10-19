@@ -38,6 +38,7 @@ public class JvmFeatureDescription extends EObjectDescription implements IValida
 	private Provider<String> shadowingStringProvider;
 	private final boolean isValid;
 	private XExpression implicitReceiver;
+	private XExpression implicitArgument;
 	private int numberOfIrrelevantArguments = 0;
 	private String issueCode;
 	private CheckState checkState;
@@ -50,8 +51,9 @@ public class JvmFeatureDescription extends EObjectDescription implements IValida
 			String shadowingString, 
 			boolean isValid, 
 			XExpression implicitReceiver,
+			XExpression implicitArgument,
 			int numberOfIrrelevantArguments) {
-		this(qualifiedName, feature, rawTypeContext, isValid, implicitReceiver, numberOfIrrelevantArguments);
+		this(qualifiedName, feature, rawTypeContext, isValid, implicitReceiver, implicitArgument, numberOfIrrelevantArguments);
 		this.shadowingString = shadowingString;
 		this.shadowingStringProvider = null;
 	}
@@ -63,8 +65,9 @@ public class JvmFeatureDescription extends EObjectDescription implements IValida
 			Provider<String> shadowingStringProvider, 
 			boolean isValid, 
 			XExpression implicitReceiver,
+			XExpression implicitArgument,
 			int numberOfIrrelevantArguments) {
-		this(qualifiedName, feature, rawTypeContext, isValid, implicitReceiver, numberOfIrrelevantArguments);
+		this(qualifiedName, feature, rawTypeContext, isValid, implicitReceiver, implicitArgument, numberOfIrrelevantArguments);
 		this.shadowingStringProvider = shadowingStringProvider;
 	}
 	
@@ -74,11 +77,13 @@ public class JvmFeatureDescription extends EObjectDescription implements IValida
 			ITypeArgumentContext rawTypeContext,
 			boolean isValid, 
 			XExpression implicitReceiver,
+			XExpression implicitArgument,
 			int numberOfIrrelevantArguments) {
 		super(qualifiedName, feature, Collections.<String, String> emptyMap());
 		this.rawTypeContext = rawTypeContext;
 		this.isValid = isValid;
 		this.implicitReceiver = implicitReceiver;
+		this.implicitArgument = implicitArgument;
 		this.numberOfIrrelevantArguments = numberOfIrrelevantArguments;
 		this.checkState = CheckState.UNCHECKED;
 	}
@@ -125,6 +130,10 @@ public class JvmFeatureDescription extends EObjectDescription implements IValida
 
 	public XExpression getImplicitReceiver() {
 		return implicitReceiver;
+	}
+	
+	public XExpression getImplicitArgument() {
+		return implicitArgument;
 	}
 
 	public int getNumberOfIrrelevantArguments() {

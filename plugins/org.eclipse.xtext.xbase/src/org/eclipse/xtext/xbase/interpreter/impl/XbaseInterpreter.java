@@ -606,8 +606,8 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 				return true;
 			}
 			JvmOperation operation = (JvmOperation) featureCall.getFeature();
-			XExpression receiver = callToJavaMapping.getActualReceiver(featureCall, featureCall.getFeature(), featureCall.getImplicitReceiver());
-			List<XExpression> operationArguments = callToJavaMapping.getActualArguments(featureCall, featureCall.getFeature(), featureCall.getImplicitReceiver());
+			XExpression receiver = callToJavaMapping.getActualReceiver(featureCall);
+			List<XExpression> operationArguments = callToJavaMapping.getActualArguments(featureCall);
 			List<Object> argumentValues = newArrayList();
 			for (XExpression expr : operationArguments) {
 				if (expr == leftOperand) {
@@ -618,7 +618,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			}
 			return invokeOperation(operation, receiver, argumentValues);
 		}
-		XExpression receiver = callToJavaMapping.getActualReceiver(featureCall, featureCall.getFeature(), featureCall.getImplicitReceiver());
+		XExpression receiver = callToJavaMapping.getActualReceiver(featureCall);
 		Object receiverObj = receiver==null?null:internalEvaluate(receiver, context, indicator);
 		return internalFeatureCallDispatch(featureCall, receiverObj, context, indicator);
 	}
@@ -658,7 +658,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 
 	protected Object _featureCallOperation(JvmOperation operation, XAbstractFeatureCall featureCall, Object receiver,
 			IEvaluationContext context, CancelIndicator indicator) {
-		List<XExpression> operationArguments = callToJavaMapping.getActualArguments(featureCall, featureCall.getFeature(), featureCall.getImplicitReceiver());
+		List<XExpression> operationArguments = callToJavaMapping.getActualArguments(featureCall);
 		List<Object> argumentValues = evaluateArgumentExpressions(operation, operationArguments, context, indicator);
 		return invokeOperation(operation, receiver, argumentValues);
 	}

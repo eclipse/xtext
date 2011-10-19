@@ -125,6 +125,7 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 	
 	protected JvmDeclaredType contextType;
 	protected XExpression implicitReceiver;
+	protected XExpression implicitArgument;
 	
 	public void setContextType(JvmDeclaredType contextType) {
 		this.contextType = contextType;
@@ -134,24 +135,28 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 		this.implicitReceiver = implicitReceiver;
 	}
 	
+	public void setImplicitArgument(XExpression implicitArgument) {
+		this.implicitArgument = implicitArgument;
+	}
+	
 	protected JvmFeatureDescription createJvmFeatureDescription(QualifiedName name, JvmFeature jvmFeature,
 			ITypeArgumentContext rawTypeContext, String shadowingString, boolean isValid) {
-		return new JvmFeatureDescription(name, jvmFeature, rawTypeContext, shadowingString, isValid, implicitReceiver, getNumberOfIrrelevantArguments());
+		return new JvmFeatureDescription(name, jvmFeature, rawTypeContext, shadowingString, isValid, implicitReceiver, implicitArgument, getNumberOfIrrelevantArguments());
 	}
 	
 	protected JvmFeatureDescription createJvmFeatureDescription(QualifiedName name, JvmFeature jvmFeature,
 			ITypeArgumentContext rawTypeContext, Provider<String> shadowingStringProvider, boolean isValid) {
-		return new JvmFeatureDescription(name, jvmFeature, rawTypeContext, shadowingStringProvider, isValid, implicitReceiver, getNumberOfIrrelevantArguments());
+		return new JvmFeatureDescription(name, jvmFeature, rawTypeContext, shadowingStringProvider, isValid, implicitReceiver, implicitArgument, getNumberOfIrrelevantArguments());
 	}
 	
 	private int getNumberOfIrrelevantArguments() {
-		if (isExtensionProvider())
+		if (isExtensionProvider() || implicitArgument != null)
 			return 1;
 		return 0;
 	}
 
 	public boolean isExtensionProvider() {
-		return featuresForTypeProvider!=null?featuresForTypeProvider.isExtensionProvider():false;
+		return featuresForTypeProvider!=null ? featuresForTypeProvider.isExtensionProvider() : false;
 	}
 
 	protected JvmFeatureDescription createJvmFeatureDescription(
@@ -166,7 +171,6 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 			ITypeArgumentContext rawTypeContext, 
 			IAcceptor<JvmFeatureDescription> acceptor) {
 		Provider<String> signatureProvider = getSignature(feature, rawTypeContext);
-		
 		acceptor.accept(createJvmFeatureDescription(feature, rawTypeContext, signatureProvider, isValid(feature)));
 	}
 
@@ -185,5 +189,10 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 
 	public String getText() {
 		return getClass().getSimpleName();
+	}
+	
+	@Override
+	public String toString() {
+		return getText() + " with " + featuresForTypeProvider;
 	}
 }

@@ -13,6 +13,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 
 import com.google.inject.Provider;
@@ -47,17 +48,20 @@ public class LinkingAssumptions {
 		private final JvmIdentifiableElement candidate;
 		private final XAbstractFeatureCall featureCall;
 		private final XExpression implicitReceiver;
+		private final XExpression implicitFirstArgumentReceiver;
 
 		public Assumption(JvmIdentifiableElement proxy, JvmIdentifiableElement candidate) {
-			this(proxy, candidate, null, null);
+			this(proxy, candidate, null, null, null);
 		}
 		
 		public Assumption(JvmIdentifiableElement proxy, JvmIdentifiableElement candidate, 
-				XAbstractFeatureCall featureCall, XExpression implicitReceiver) {
+				XAbstractFeatureCall featureCall, XExpression implicitReceiver,
+				XExpression implicitFirstArgumentReceiver) {
 			this.proxy = proxy;
 			this.candidate = candidate;
 			this.featureCall = featureCall;
 			this.implicitReceiver = implicitReceiver;
+			this.implicitFirstArgumentReceiver = implicitFirstArgumentReceiver;
 		}
 	}
 	
@@ -69,8 +73,9 @@ public class LinkingAssumptions {
 	}
 	
 	public Assumption createAssumption(JvmIdentifiableElement proxy, JvmIdentifiableElement candidate,
-			XAbstractFeatureCall featureCall, XExpression implicitReceiver) {
-		return new Assumption(proxy, candidate, featureCall, implicitReceiver);
+			XAbstractFeatureCall featureCall, XExpression implicitReceiver,
+			XExpression implicitFirstArgumentReceiver) {
+		return new Assumption(proxy, candidate, featureCall, implicitReceiver, implicitFirstArgumentReceiver);
 	}
 	
 	public Assumption createAssumption(JvmIdentifiableElement proxy, JvmIdentifiableElement candidate) {
@@ -84,6 +89,7 @@ public class LinkingAssumptions {
 					assumption.candidate,
 					assumption.featureCall,
 					assumption.implicitReceiver,
+					assumption.implicitFirstArgumentReceiver,
 					strategy);
 			return result;
 		} else {
@@ -97,6 +103,17 @@ public class LinkingAssumptions {
 			return ((XbaseResource) resource).getImplicitReceiver(featureCall);
 		}
 		return featureCall.getImplicitReceiver();
+	}
+	
+	public XExpression getImplicitFirstArgument(XAbstractFeatureCall featureCall) {
+		if (!(featureCall instanceof XFeatureCall))
+			return null;
+		XFeatureCall casted = (XFeatureCall) featureCall;
+		Resource resource = casted.eResource();
+		if (resource instanceof XbaseResource) {
+			return ((XbaseResource) resource).getImplicitFirstArgument(casted);
+		}
+		return casted.getImplicitFirstArgument();
 	}
 	
 	public JvmIdentifiableElement getFeature(XAbstractFeatureCall featureCall, boolean resolve) {

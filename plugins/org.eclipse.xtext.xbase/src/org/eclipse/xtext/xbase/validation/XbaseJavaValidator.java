@@ -63,6 +63,7 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
+import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.SynonymTypesProvider;
@@ -287,24 +288,50 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	}
 
 	@Check
-	public void checkTypes(XExpression obj) {
+	public void checkTypes(final XExpression obj) {
+		if (obj instanceof XFeatureCall) {
+			XExpression firstArgument = ((XFeatureCall) obj).getImplicitFirstArgument();
+			if (firstArgument != null) {
+				validateType(firstArgument, new Procedures.Procedure2<JvmTypeReference, JvmTypeReference>() {
+					public void apply(JvmTypeReference expectedType, JvmTypeReference actualType) {
+						error("Incompatible implicit first argument. Expected " + 
+								getNameOfTypes(expectedType) + " but was "
+								+ canonicalName(actualType), 
+								obj, 
+								null, 
+								ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+								INCOMPATIBLE_TYPES);	
+					}
+				});
+			}
+ 		}
 		if (!getTypeConformanceCheckedReferences().contains(obj.eContainingFeature())) {
 			return;
 		}
 		try {
-			JvmTypeReference expectedType = typeProvider.getExpectedType(obj);
-			if (expectedType == null || expectedType.getType() == null)
-				return;
-			JvmTypeReference actualType = typeProvider.getType(obj);
-			if (actualType == null || actualType.getType() == null)
-				return;
-			if (!conformanceComputer.isConformant(expectedType, actualType))
-				error("Incompatible types. Expected " + getNameOfTypes(expectedType) + " but was "
-						+ canonicalName(actualType), obj, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
-						INCOMPATIBLE_TYPES);
+			validateType(obj, new Procedures.Procedure2<JvmTypeReference, JvmTypeReference>() {
+				public void apply(JvmTypeReference expectedType, JvmTypeReference actualType) {
+					error("Incompatible types. Expected " + getNameOfTypes(expectedType) + " but was "
+							+ canonicalName(actualType), obj, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+							INCOMPATIBLE_TYPES);
+				}
+			});
 		} catch (WrappedException e) {
 			throw new WrappedException("XbaseJavaValidator#checkTypes for " + obj + " caused: "
 					+ e.getCause().getMessage(), e);
+		}
+	}
+	
+	protected void validateType(XExpression expression, Procedures.Procedure2<JvmTypeReference, JvmTypeReference> messageProducer) {
+		JvmTypeReference expectedType = typeProvider.getExpectedType(expression);
+		if (expectedType == null || expectedType.getType() == null)
+			return;
+		JvmTypeReference actualType = typeProvider.getType(expression);
+		if (actualType == null || actualType.getType() == null)
+			return;
+		boolean valid = conformanceComputer.isConformant(expectedType, actualType);
+		if (!valid) {
+			messageProducer.apply(expectedType, actualType);
 		}
 	}
 	
@@ -318,23 +345,20 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		doCheckReceiverOfStaticFeature(featureCall, featureCall.getImplicitReceiver());
 	}
 	
-	protected void doCheckReceiverOfStaticFeature(XAbstractFeatureCall featureCall, XExpression receiver) {
+	protected void doCheckReceiverOfStaticFeature(final XAbstractFeatureCall featureCall, XExpression receiver) {
 		if (receiver != null && featureCall.getFeature() instanceof JvmOperation) {
 			JvmOperation operation = (JvmOperation) featureCall.getFeature();
 			if (operation.isStatic()) {
 				try {
-					JvmTypeReference expectedType = typeProvider.getExpectedType(receiver);
-					if (expectedType == null || expectedType.getType() == null)
-						return;
-					JvmTypeReference actualType = typeProvider.getType(receiver);
-					if (actualType == null || actualType.getType() == null)
-						return;
-					if (!conformanceComputer.isConformant(expectedType, actualType))
-						error("Incompatible receiver type. Expected " + getNameOfTypes(expectedType) + " but was "
-								+ canonicalName(actualType), featureCall, 
-								XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, 
-								ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
-								INCOMPATIBLE_TYPES);
+					validateType(receiver, new Procedures.Procedure2<JvmTypeReference, JvmTypeReference>() {
+						public void apply(JvmTypeReference expectedType, JvmTypeReference actualType) {
+							error("Incompatible receiver type. Expected " + getNameOfTypes(expectedType) + " but was "
+									+ canonicalName(actualType), featureCall, 
+									XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, 
+									ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+									INCOMPATIBLE_TYPES);
+						}
+					});
 				} catch (WrappedException e) {
 					throw new WrappedException("XbaseJavaValidator#checkTypes for " + receiver + " caused: "
 							+ e.getCause().getMessage(), e);

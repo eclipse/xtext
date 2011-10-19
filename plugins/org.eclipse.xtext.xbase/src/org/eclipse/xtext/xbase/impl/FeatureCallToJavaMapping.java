@@ -19,6 +19,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.resource.LinkingAssumptions;
 
 import com.google.inject.Inject;
+import com.google.inject.internal.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -59,12 +60,24 @@ public class FeatureCallToJavaMapping {
 	protected XExpression getImplicitReceiver(XAbstractFeatureCall expr) {
 		return linkingAssumptions.getImplicitReceiver(expr);
 	}
-	
-	public List<XExpression> getActualArguments(XAbstractFeatureCall featureCall) {
-		return getActualArguments(featureCall, getFeature(featureCall), getImplicitReceiver(featureCall));
+
+	protected XExpression getImplicitFirstArgument(XAbstractFeatureCall expr) {
+		return linkingAssumptions.getImplicitFirstArgument(expr);
 	}
 	
-	public List<XExpression> getActualArguments(XAbstractFeatureCall featureCall, JvmIdentifiableElement feature, XExpression implicitReceiver) {
+	public List<XExpression> getActualArguments(XAbstractFeatureCall featureCall) {
+		return getActualArguments(
+				featureCall, 
+				getFeature(featureCall), 
+				getImplicitReceiver(featureCall), 
+				getImplicitFirstArgument(featureCall));
+	}
+	
+	public List<XExpression> getActualArguments(
+			XAbstractFeatureCall featureCall, 
+			JvmIdentifiableElement feature, 
+			XExpression implicitReceiver, 
+			XExpression implicitFirstArgument) {
 		final List<? extends XExpression> explicitArguments = featureCall.getExplicitArguments();
 		if (isStaticJavaFeature(feature)) {
 			if (implicitReceiver == null || explicitArguments.contains(implicitReceiver))
@@ -73,6 +86,11 @@ public class FeatureCallToJavaMapping {
 			result.addAll(explicitArguments);
 			return result;
 		} else if (implicitReceiver != null) {
+			if (implicitFirstArgument != null) {
+				List<XExpression> result = Lists.newArrayList(implicitFirstArgument);
+				result.addAll(explicitArguments);
+				return result;
+			}
 			return newArrayList(explicitArguments);
 		}
 		if (explicitArguments.size()<=1)

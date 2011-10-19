@@ -78,10 +78,9 @@ public class JvmFeatureScope extends SimpleScope {
 				return true;
 		}
 		if (result == false) {
-			String parentShadowingKey = getShadowingKey(fromParent);
-			int assignmentIndicator = parentShadowingKey.indexOf("=(");
+			int assignmentIndicator = parentKey.indexOf("=(");
 			if (assignmentIndicator >= 0) { // sugared assignment
-				String shortShadowingKey = parentShadowingKey.substring(0, assignmentIndicator);
+				String shortShadowingKey = parentKey.substring(0, assignmentIndicator);
 				for(IEObjectDescription local: localElements) {
 					String localKey = getShadowingKey(local);
 					if (shortShadowingKey.equals(localKey))
