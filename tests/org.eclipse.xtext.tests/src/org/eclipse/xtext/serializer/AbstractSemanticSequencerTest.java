@@ -395,4 +395,36 @@ public abstract class AbstractSemanticSequencerTest extends AbstractXtextTests {
 		testSequence("#25 kw3 c kw2 b");
 	}
 
+	public void testUnorderedGroupBoolean1() throws Exception {
+		testSequence("#26 kw1 kw2");
+	}
+
+	public void testUnorderedGroupBoolean2() throws Exception {
+		testSequence("#26 kw2 kw1");
+	}
+
+	public void testUnorderedGroupBoolean3() throws Exception {
+		testSequence("#26 kw2 kw3");
+	}
+
+	public void testUnorderedGroupBoolean4() throws Exception {
+		testSequence("#26 kw3 kw2");
+	}
+
+	public void testUnorderedGroupBoolean5() throws Exception {
+		testSequence("#26 kw1 kw3");
+	}
+
+	public void testUnorderedGroupBoolean6() throws Exception {
+		testSequence("#26 kw3 kw1");
+	}
+
+	public void testUnorderedGroupBoolean7() throws Exception {
+		testSequence("#26 kw1 kw2 kw3");
+	}
+
+	public void testUnorderedGroupBoolean8() throws Exception {
+		testSequence("#26 kw3 kw2 kw1");
+	}
+
 }
