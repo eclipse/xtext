@@ -9,6 +9,8 @@ package org.eclipse.xtext.builder.preferences;
 
 import static org.eclipse.xtext.builder.EclipseOutputConfigurationProvider.*;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences.IPreferenceChangeListener;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences.PreferenceChangeEvent;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -20,14 +22,17 @@ import org.eclipse.xtext.generator.OutputConfigurationProvider;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
 import org.eclipse.xtext.ui.editor.preferences.PreferenceConstants;
+import org.osgi.service.prefs.Preferences;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
 
 /**
  * @author Michael Clay - Initial contribution and API
  * @since 2.1
  */
+@Singleton
 public class BuilderPreferenceAccess {
 	/**
 	 * Name of a preference for configuring whether the builder participant is enabled or not.
@@ -94,25 +99,39 @@ public class BuilderPreferenceAccess {
 
 		@Inject
 		private Provider<DerivedResourceCleanerJob> cleanerProvider;
+		
+		@Inject
+		private IWorkspace workspace;
+		
+		public ChangeListener() {
+//			new Exception("New ChangeListener").printStackTrace();
+		}
 
 		public void propertyChange(PropertyChangeEvent event) {
 			if (isOutputDirectoryKey(event.getProperty())) {
 				String oldValue = (String) event.getOldValue();
-				scheduleCleanerJob(oldValue);
+				scheduleCleanerJob(null, oldValue);
 			}
 		}
 
 		public void preferenceChange(PreferenceChangeEvent preferenceChangeEvent) {
 			if (isOutputDirectoryKey(preferenceChangeEvent.getKey())) {
+				Preferences node = preferenceChangeEvent.getNode();
+				IProject project = null;
+				// TODO: this is a hack
+				if (node.absolutePath().startsWith("/project/")) {
+					String projectName = node.parent().name();
+					project = workspace.getRoot().getProject(projectName);
+				}
 				String oldValue = (String) preferenceChangeEvent.getOldValue();
-				scheduleCleanerJob(oldValue);
+				scheduleCleanerJob(project, oldValue);
 			}
 		}
 
-		private void scheduleCleanerJob(String folderNameToClean) {
+		private void scheduleCleanerJob(IProject project, String folderNameToClean) {
 			DerivedResourceCleanerJob cleaner = cleanerProvider.get();
 			cleaner.setUser(true);
-			cleaner.initialize(null, folderNameToClean);
+			cleaner.initialize(project, folderNameToClean);
 			cleaner.schedule();
 		}
 

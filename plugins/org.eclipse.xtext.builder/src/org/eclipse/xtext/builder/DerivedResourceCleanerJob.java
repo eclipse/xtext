@@ -16,6 +16,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
@@ -100,8 +101,10 @@ public class DerivedResourceCleanerJob extends Job {
 			return Status.CANCEL_STATUS;
 		}
 		if (shouldBeProcessed(project)) {
-			for (IFile derivedFile : derivedResourceMarkers.findDerivedResources(project.getFolder(folderNameToClean),
-					null)) {
+			IContainer container = project;
+			if (folderNameToClean != null)
+				container = container.getFolder(new Path(folderNameToClean));
+			for (IFile derivedFile : derivedResourceMarkers.findDerivedResources(container, null)) {
 				derivedFile.delete(true, monitor);
 //				deleteEmptyParent(monitor, derivedFile.getParent());
 				if (monitor.isCanceled()) {
@@ -121,7 +124,7 @@ public class DerivedResourceCleanerJob extends Job {
 	}
 
 	protected boolean shouldBeProcessed(IProject project) {
-		return XtextProjectHelper.hasNature(project) && project.getFolder(folderNameToClean).exists();
+		return XtextProjectHelper.hasNature(project) && (folderNameToClean == null || project.getFolder(folderNameToClean).exists());
 	}
 
 }
