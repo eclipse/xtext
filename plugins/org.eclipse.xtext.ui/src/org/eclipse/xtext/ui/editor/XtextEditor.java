@@ -97,6 +97,7 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.TextAttributeProvider;
 import org.eclipse.xtext.ui.editor.toggleComments.ToggleSLCommentAction;
 import org.eclipse.xtext.ui.internal.Activator;
 
+import com.google.common.collect.ObjectArrays;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.name.Named;
@@ -144,7 +145,7 @@ public class XtextEditor extends TextEditor {
 
 	@Inject
 	private IPreferenceStoreAccess preferenceStoreAccess;
-	
+
 	@Inject
 	private TextAttributeProvider textAttributeProvider;
 
@@ -240,7 +241,7 @@ public class XtextEditor extends TextEditor {
 		super.doRevertToSaved();
 		callback.afterSave(this);
 	}
-	
+
 	/**
 	 * Set key binding scope. Needed to make F3 work properly.
 	 */
@@ -303,7 +304,7 @@ public class XtextEditor extends TextEditor {
 
 	@Inject
 	private IActionContributor.CompositeImpl actioncontributor;
-	
+
 	@Inject
 	private ToggleSLCommentAction.Factory toggleSLCommentActionFactory;
 
@@ -341,7 +342,7 @@ public class XtextEditor extends TextEditor {
 		SourceViewerConfiguration configuration = getSourceViewerConfiguration();
 		action.configure(sourceViewer, configuration);
 	}
-	
+
 	/**
 	 * @since 2.1
 	 */
@@ -369,14 +370,15 @@ public class XtextEditor extends TextEditor {
 			}
 
 			protected IStatus validateEditorInputState(IAdaptable info, IStatus status) {
-				if (Status.OK_STATUS.equals(status) && info != null && info.getAdapter(ITextEditor.class) == XtextEditor.this) {
+				if (Status.OK_STATUS.equals(status) && info != null
+						&& info.getAdapter(ITextEditor.class) == XtextEditor.this) {
 					if (!XtextEditor.this.validateEditorInputState()) {
 						return Status.CANCEL_STATUS;
 					}
 				}
 				return status;
 			}
-			
+
 		};
 	}
 
@@ -384,7 +386,8 @@ public class XtextEditor extends TextEditor {
 	 * @return true if content assist is available
 	 */
 	public boolean isContentAssistAvailable() {
-		boolean result = getSourceViewer().getTextOperationTarget().canDoOperation(ISourceViewer.CONTENTASSIST_PROPOSALS);
+		boolean result = getSourceViewer().getTextOperationTarget().canDoOperation(
+				ISourceViewer.CONTENTASSIST_PROPOSALS);
 		return result;
 	}
 
@@ -431,8 +434,8 @@ public class XtextEditor extends TextEditor {
 	protected ProjectionSupport installProjectionSupport(ProjectionViewer projectionViewer) {
 		ProjectionSupport projectionSupport = new ProjectionSupport(projectionViewer, getAnnotationAccess(),
 				getSharedColors());
-		projectionSupport.addSummarizableAnnotationType(WARNING_ANNOTATION_TYPE); 
-		projectionSupport.addSummarizableAnnotationType(ERROR_ANNOTATION_TYPE); 
+		projectionSupport.addSummarizableAnnotationType(WARNING_ANNOTATION_TYPE);
+		projectionSupport.addSummarizableAnnotationType(ERROR_ANNOTATION_TYPE);
 		projectionSupport.setAnnotationPainterDrawingStrategy(projectionAnnotationDrawingStrategy);
 		projectionSupport.install();
 		return projectionSupport;
@@ -524,16 +527,21 @@ public class XtextEditor extends TextEditor {
 
 	@Override
 	protected String[] collectContextMenuPreferencePages() {
-		String[] ids = super.collectContextMenuPreferencePages();
-		String[] more = new String[ids.length + 4];
+		String[] commonPages = super.collectContextMenuPreferencePages();
+		String[] langSpecificPages = collectLanguageContextMenuPreferencePages();
+		return ObjectArrays.concat(commonPages, langSpecificPages, String.class);
+	}
+
+	private String[] collectLanguageContextMenuPreferencePages() {
+		String[] additionalPages = new String[5];
 		// NOTE: preference page at index 0 will be opened, see
 		// PreferencesUtil.createPreferenceDialogOn
-		more[0] = getLanguageName() + ".editor"; //$NON-NLS-1$
-		more[1] = getLanguageName();
-		more[2] = getLanguageName() + ".templates"; //$NON-NLS-1$
-		more[3] = getLanguageName() + ".coloring"; //$NON-NLS-1$
-		System.arraycopy(ids, 0, more, 4, ids.length);
-		return more;
+		additionalPages[0] = getLanguageName() + ".editor"; //$NON-NLS-1$
+		additionalPages[1] = getLanguageName();
+		additionalPages[2] = getLanguageName() + ".templates"; //$NON-NLS-1$
+		additionalPages[3] = getLanguageName() + ".coloring"; //$NON-NLS-1$
+		additionalPages[4] = getLanguageName() + ".compiler"; //$NON-NLS-1$
+		return additionalPages;
 	}
 
 	@Override
@@ -644,15 +652,15 @@ public class XtextEditor extends TextEditor {
 	public void setXtextEditorCallback(CompoundXtextEditorCallback callback) {
 		this.callback = callback;
 	}
-	
+
 	/**
-	 * Copied from {@link org.eclipse.ui.texteditor.AbstractTextEditor#selectAndReveal(int, int)} 
-	 * and removed selection functionality.
+	 * Copied from {@link org.eclipse.ui.texteditor.AbstractTextEditor#selectAndReveal(int, int)}  and removed selection
+	 * functionality.
 	 */
 	public void reveal(int offset, int length) {
 		if (getSourceViewer() == null)
 			return;
-		StyledText widget= getSourceViewer().getTextWidget();
+		StyledText widget = getSourceViewer().getTextWidget();
 		widget.setRedraw(false);
 		{
 			adjustHighlightRange(offset, length);
@@ -661,11 +669,11 @@ public class XtextEditor extends TextEditor {
 		}
 		widget.setRedraw(true);
 	}
-	
+
 	protected CommonWordIterator createWordIterator() {
 		return new CommonWordIterator(true);
 	}
-	
+
 	protected DeleteNextSubWordAction createDeleteNextSubWordAction() {
 		return new DeleteNextSubWordAction();
 	}
@@ -693,14 +701,14 @@ public class XtextEditor extends TextEditor {
 	protected SmartLineStartAction createSmartLineStartAction(final StyledText textWidget, boolean doSelect) {
 		return new SmartLineStartAction(textWidget, doSelect);
 	}
-	
+
 	// CODE BELOW WAS INITIALLY COPIED FROM JavaEditor
-	
+
 	@Override
 	protected void createNavigationActions() {
 		super.createNavigationActions();
-		
-		final StyledText textWidget= getSourceViewer().getTextWidget();
+
+		final StyledText textWidget = getSourceViewer().getTextWidget();
 
 		IAction action = createSmartLineStartAction(textWidget, false);
 		action.setActionDefinitionId(ITextEditorActionDefinitionIds.LINE_START);
@@ -1185,9 +1193,8 @@ public class XtextEditor extends TextEditor {
 	 * Instead of going to the start of a line it does the following:
 	 * 
 	 * - if smart home/end is enabled and the caret is after the line's first non-whitespace then the caret is moved
-	 * directly before it, taking comments into account. 
-	 * - if the caret is before the line's first non-whitespace the caret is moved to the beginning of the line 
-	 * - if the caret is at the beginning of the line see first case.
+	 * directly before it, taking comments into account. - if the caret is before the line's first non-whitespace the
+	 * caret is moved to the beginning of the line - if the caret is at the beginning of the line see first case.
 	 */
 	protected class SmartLineStartAction extends LineStartAction {
 
@@ -1224,14 +1231,16 @@ public class XtextEditor extends TextEditor {
 					do {
 						++index;
 					} while (index < length && Character.isWhitespace(line.charAt(index)));
-				} else if (index < length - 1 && line.charAt(index) == '/' && (line.charAt(index + 1) == '/' || line.charAt(index + 1) == '*')) {
+				} else if (index < length - 1 && line.charAt(index) == '/'
+						&& (line.charAt(index + 1) == '/' || line.charAt(index + 1) == '*')) {
 					index++;
-					do { 
+					do {
 						++index;
 					} while (index < length && Character.isWhitespace(line.charAt(index)));
 				}
 			} else if (type.equals(IDocument.DEFAULT_CONTENT_TYPE)) {
-				if (index < length - 1 && line.charAt(index) == '/' && (line.charAt(index + 1) == '/' || line.charAt(index + 1) == '*')) {
+				if (index < length - 1 && line.charAt(index) == '/'
+						&& (line.charAt(index + 1) == '/' || line.charAt(index + 1) == '*')) {
 					index++;
 					do {
 						++index;
