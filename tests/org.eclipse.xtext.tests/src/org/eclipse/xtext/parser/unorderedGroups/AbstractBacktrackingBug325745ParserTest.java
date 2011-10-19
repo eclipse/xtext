@@ -8,11 +8,18 @@
 package org.eclipse.xtext.parser.unorderedGroups;
 
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.resource.XtextResource;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public abstract class AbstractBacktrackingBug325745ParserTest extends AbstractXtextTests {
+	
+	@Override
+	protected boolean shouldTestSerializer(XtextResource resource) {
+		// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=361355
+		return false;
+	}
 
 	public void testValid_01() throws Exception {
 		getModel("foo '+' 1 c.");

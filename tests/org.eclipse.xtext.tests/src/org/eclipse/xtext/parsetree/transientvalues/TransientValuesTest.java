@@ -2,6 +2,7 @@ package org.eclipse.xtext.parsetree.transientvalues;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.resource.XtextResource;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -12,6 +13,11 @@ public class TransientValuesTest extends AbstractXtextTests {
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(TransientValuesTestStandaloneSetup.class);
+	}
+	
+	@Override
+	protected boolean shouldTestSerializer(XtextResource resource) {
+		return false;
 	}
 
 	public void testRequired1() throws Exception {
