@@ -94,7 +94,7 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
                             _parameters.add(_parameter);
                           }
                           XExpression _body = f_3.getBody();
-                          DomainmodelJvmModelInferrer.this._jvmTypesBuilder.associate(_body, it);
+                          DomainmodelJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>associate(_body, it);
                         }
                       }
                     };
@@ -106,8 +106,8 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
           }
         }
       };
-    JvmGenericType _clazz = this._jvmTypesBuilder.toClazz(e, _fullName, _function);
-    acceptor.accept(_clazz);
+    JvmGenericType _class = this._jvmTypesBuilder.toClass(e, _fullName, _function);
+    acceptor.accept(_class);
   }
   
   public String fullName(final EObject x) {

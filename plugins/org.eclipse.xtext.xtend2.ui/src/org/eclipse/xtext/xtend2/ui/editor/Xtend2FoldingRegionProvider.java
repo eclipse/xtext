@@ -13,9 +13,12 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jface.text.IRegion;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.folding.DefaultFoldingRegionAcceptor;
 import org.eclipse.xtext.ui.editor.folding.DefaultFoldingRegionProvider;
 import org.eclipse.xtext.ui.editor.folding.FoldedPosition;
 import org.eclipse.xtext.ui.editor.folding.IFoldingRegionAcceptor;
@@ -45,17 +48,20 @@ public class Xtend2FoldingRegionProvider extends DefaultFoldingRegionProvider {
 	@Override
 	protected Collection<FoldedPosition> doGetFoldingRegions(IXtextDocument xtextDocument, XtextResource xtextResource) {
 		Collection<FoldedPosition> result = super.doGetFoldingRegions(xtextDocument, xtextResource);
-		IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor = createAcceptor(xtextDocument, result);
+		IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor = createAcceptor(xtextDocument, result, true);
 		computeImportFolding(xtextResource, foldingRegionAcceptor);
 		return result;
 	}
 	
 	protected void computeImportFolding(XtextResource xtextResource, IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
-		if(xtextResource.getContents().size() > 0){
-			EObject xtextFile = xtextResource.getContents().get(0);
-			ITextRegion textRegion =getFullTextRegionForFeature(xtextFile, Xtend2Package.Literals.XTEND_FILE__IMPORTS);
-			if(textRegion != null)
-				foldingRegionAcceptor.accept(textRegion.getOffset(), textRegion.getLength());
+		IParseResult parseResult = xtextResource.getParseResult();
+		if(parseResult != null){
+			EObject rootASTElement = parseResult.getRootASTElement();
+			if(rootASTElement != null){
+				ITextRegion textRegion =getFullTextRegionForFeature(rootASTElement, Xtend2Package.Literals.XTEND_FILE__IMPORTS);
+				if(textRegion != null)
+					foldingRegionAcceptor.accept(textRegion.getOffset(), textRegion.getLength());
+			}
 		}
 	}
 	
@@ -70,5 +76,18 @@ public class Xtend2FoldingRegionProvider extends DefaultFoldingRegionProvider {
 				return new TextRegion(offset,length);
 		}
 		return null;
+	}
+
+	protected IFoldingRegionAcceptor<ITextRegion> createAcceptor(IXtextDocument xtextDocument, Collection<FoldedPosition> foldedPositions, final boolean initiallyCollapsed) {
+		return new DefaultFoldingRegionAcceptor(xtextDocument, foldedPositions){
+			@Override
+			protected FoldedPosition newFoldedPosition(IRegion region, ITextRegion significantRegion) {
+				if (region == null)
+					return null;
+				if (significantRegion != null)
+					return new InitiallyCollapsableFoldedPosition(region.getOffset(), region.getLength(), significantRegion.getOffset() - region.getOffset(), significantRegion.getLength(), initiallyCollapsed);
+				return new InitiallyCollapsableFoldedPosition(region.getOffset(), region.getLength(), -1, -1, initiallyCollapsed);
+			}
+		};
 	}
 }

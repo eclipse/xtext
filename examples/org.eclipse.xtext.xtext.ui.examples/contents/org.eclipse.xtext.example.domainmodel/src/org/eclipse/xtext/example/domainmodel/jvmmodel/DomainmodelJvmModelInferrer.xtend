@@ -19,11 +19,11 @@ class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
 
 	def dispatch infer(Entity e, IAcceptor<JvmDeclaredType> acceptor, boolean prelinkingPhase) {
 		acceptor.accept(
-			e.toClazz( e.fullName ) [
+			e.toClass( e.fullName ) [
 				
 				if (e.superType != null)
 					superTypes += e.superType.cloneWithProxies
-				
+					
 				for ( f : e.features ) {
 					switch f {
 				

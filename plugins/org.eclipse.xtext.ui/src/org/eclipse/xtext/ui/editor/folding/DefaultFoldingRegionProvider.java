@@ -20,6 +20,7 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.BadPartitioningException;
 import org.eclipse.jface.text.IDocumentExtension3;
 import org.eclipse.jface.text.ITypedRegion;
+import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -73,14 +74,20 @@ public class DefaultFoldingRegionProvider implements IFoldingRegionProvider {
 	}
 
 	protected void computeObjectFolding(XtextResource xtextResource, IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
-		TreeIterator<EObject> allContents = xtextResource.getAllContents();
-		while (allContents.hasNext()) {
-			EObject eObject = allContents.next();
-			if (isHandled(eObject)) {
-				computeObjectFolding(eObject, foldingRegionAcceptor);
-			}
-			if (!shouldProcessContent(eObject)) {
-				allContents.prune();
+		IParseResult parseResult = xtextResource.getParseResult();
+		if(parseResult != null){
+			EObject rootASTElement = parseResult.getRootASTElement();
+			if(rootASTElement != null){
+				TreeIterator<EObject> allContents = rootASTElement.eAllContents();
+				while (allContents.hasNext()) {
+					EObject eObject = allContents.next();
+					if (isHandled(eObject)) {
+						computeObjectFolding(eObject, foldingRegionAcceptor);
+					}
+					if (!shouldProcessContent(eObject)) {
+						allContents.prune();
+					}
+				}
 			}
 		}
 	}

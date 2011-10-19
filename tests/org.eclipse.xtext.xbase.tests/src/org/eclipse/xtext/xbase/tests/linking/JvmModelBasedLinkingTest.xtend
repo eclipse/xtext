@@ -22,7 +22,7 @@ class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
 		val expr = expression("x", false)
 		val resource = expr.eResource
 		resource.eSetDeliver(false)
-		resource.contents += expr.toClazz("Foo") [
+		resource.contents += expr.toClass("Foo") [
 			members += expr.toMethod("doStuff", expr.stringType) [
 				parameters += expr.toParameter("x", expr.stringType)
 				expr.associate(it)
@@ -38,7 +38,7 @@ class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
 		val expr = expression("x", false) as XFeatureCall
 		val resource = expr.eResource
 		resource.eSetDeliver(false)
-		resource.contents += expr.toClazz("Foo") [
+		resource.contents += expr.toClass("Foo") [
 			members += expr.toField("x", expr.stringType)
 			members += expr.toMethod("doStuff", expr.stringType) [
 				parameters += expr.toParameter("x", expr.stringType)
@@ -55,7 +55,7 @@ class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
 		val expr = expression("x", false) as XFeatureCall
 		val resource = expr.eResource
 		resource.eSetDeliver(false)
-		resource.contents += expr.toClazz("Foo") [
+		resource.contents += expr.toClass("Foo") [
 			members += expr.toField("x", expr.stringType)
 			members += expr.toMethod("doStuff", expr.stringType) [
 				parameters += expr.toParameter("y", expr.stringType)
@@ -72,7 +72,7 @@ class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
 		val expr = expression("x", false) as XFeatureCall
 		val resource = expr.eResource
 		resource.eSetDeliver(false)
-		resource.contents += expr.toClazz("Foo") [
+		resource.contents += expr.toClass("Foo") [
 			members += expr.toField("x", expr.stringType)
 			members += expr.toMethod("getX", expr.stringType) [
 				expr.associate(it)

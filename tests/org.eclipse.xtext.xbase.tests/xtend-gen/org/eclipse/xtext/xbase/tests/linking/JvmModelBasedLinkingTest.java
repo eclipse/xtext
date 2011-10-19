@@ -51,7 +51,7 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
                       JvmTypeReference _stringType = JvmModelBasedLinkingTest.this.stringType(expr);
                       JvmFormalParameter _parameter = JvmModelBasedLinkingTest.this._jvmTypesBuilder.toParameter(expr, "x", _stringType);
                       CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter);
-                      JvmModelBasedLinkingTest.this._jvmTypesBuilder.associate(expr, it);/*null*/;
+                      JvmModelBasedLinkingTest.this._jvmTypesBuilder.<JvmOperation>associate(expr, it);/*null*/;
                     }
                   }
                 };
@@ -60,8 +60,8 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
             }
           }
         };
-      JvmGenericType _clazz = this._jvmTypesBuilder.toClazz(expr, "Foo", _function);
-      CollectionExtensions.<JvmGenericType>operator_add(_contents, _clazz);
+      JvmGenericType _class = this._jvmTypesBuilder.toClass(expr, "Foo", _function);
+      CollectionExtensions.<JvmGenericType>operator_add(_contents, _class);
       this._validationTestHelper.assertNoErrors(expr);
   }
   
@@ -97,8 +97,8 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
             }
           }
         };
-      JvmGenericType _clazz = this._jvmTypesBuilder.toClazz(expr, "Foo", _function);
-      CollectionExtensions.<JvmGenericType>operator_add(_contents, _clazz);
+      JvmGenericType _class = this._jvmTypesBuilder.toClass(expr, "Foo", _function);
+      CollectionExtensions.<JvmGenericType>operator_add(_contents, _class);
       this._validationTestHelper.assertNoErrors(expr);
       JvmIdentifiableElement _feature = expr.getFeature();
       Assert.assertTrue((_feature instanceof JvmFormalParameter));
@@ -136,8 +136,8 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
             }
           }
         };
-      JvmGenericType _clazz = this._jvmTypesBuilder.toClazz(expr, "Foo", _function);
-      CollectionExtensions.<JvmGenericType>operator_add(_contents, _clazz);
+      JvmGenericType _class = this._jvmTypesBuilder.toClass(expr, "Foo", _function);
+      CollectionExtensions.<JvmGenericType>operator_add(_contents, _class);
       this._validationTestHelper.assertNoErrors(expr);
       JvmIdentifiableElement _feature = expr.getFeature();
       Assert.assertTrue((_feature instanceof JvmField));
@@ -171,8 +171,8 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
             }
           }
         };
-      JvmGenericType _clazz = this._jvmTypesBuilder.toClazz(expr, "Foo", _function);
-      CollectionExtensions.<JvmGenericType>operator_add(_contents, _clazz);
+      JvmGenericType _class = this._jvmTypesBuilder.toClass(expr, "Foo", _function);
+      CollectionExtensions.<JvmGenericType>operator_add(_contents, _class);
       this._validationTestHelper.assertNoErrors(expr);
       JvmIdentifiableElement _feature = expr.getFeature();
       Assert.assertTrue((_feature instanceof JvmField));

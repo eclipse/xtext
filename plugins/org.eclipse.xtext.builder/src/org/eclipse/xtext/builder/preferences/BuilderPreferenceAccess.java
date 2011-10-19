@@ -9,7 +9,6 @@ package org.eclipse.xtext.builder.preferences;
 
 import static org.eclipse.xtext.builder.EclipseOutputConfigurationProvider.*;
 
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
@@ -82,10 +81,11 @@ public class BuilderPreferenceAccess {
 			}
 		}
 
-		private String getKey(OutputConfiguration outputConfiguration, String preferenceName) {
-			return OUTPUT_PREFERENCE_TAG + PreferenceConstants.SEPARATOR + outputConfiguration.getName()
-					+ PreferenceConstants.SEPARATOR + preferenceName;
-		}
+	}
+
+	public static String getKey(OutputConfiguration outputConfiguration, String preferenceName) {
+		return OUTPUT_PREFERENCE_TAG + PreferenceConstants.SEPARATOR + outputConfiguration.getName()
+				+ PreferenceConstants.SEPARATOR + preferenceName;
 	}
 
 	public static class ChangeListener implements IPropertyChangeListener {
