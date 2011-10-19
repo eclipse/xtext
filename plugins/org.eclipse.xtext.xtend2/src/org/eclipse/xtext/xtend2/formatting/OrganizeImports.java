@@ -47,6 +47,7 @@ import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
+import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -173,7 +174,8 @@ public class OrganizeImports {
 		private Set<String> implicitPackageImports = newLinkedHashSet();
 
 		public void acceptType(JvmTypeReference ref) {
-			acceptType(ref.getType());
+			if (!(ref.eContainer() instanceof XFunctionTypeRef) && !(ref instanceof XFunctionTypeRef))
+				acceptType(ref.getType());
 			if (ref instanceof JvmParameterizedTypeReference) {
 				EList<JvmTypeReference> list = ((JvmParameterizedTypeReference) ref).getArguments();
 				for (JvmTypeReference jvmTypeReference : list) {
