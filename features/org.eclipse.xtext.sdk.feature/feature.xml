@@ -41,10 +41,6 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.xtext.sdk.source"
-         version="0.0.0"/>
-
-   <includes
          id="org.eclipse.xtext.runtime.source"
          version="0.0.0"/>
 
@@ -124,7 +120,40 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+<plugin
+         id="org.eclipse.xtext.junit.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 
+   <plugin
+         id="org.eclipse.xtext.junit4.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.ui.junit.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.purexbase.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.purexbase.ui.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
    <plugin
          id="org.apache.log4j.source"
          download-size="0"
