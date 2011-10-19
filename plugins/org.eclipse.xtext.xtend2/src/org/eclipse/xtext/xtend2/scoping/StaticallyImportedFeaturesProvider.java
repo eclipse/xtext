@@ -37,7 +37,7 @@ public class StaticallyImportedFeaturesProvider extends AbstractStaticMethodsFea
 
 	@Override
 	protected Map<JvmTypeReference, Collection<String>> getVisibleTypesContainingStaticMethods(Iterable<JvmTypeReference> hierarchy) {
-		boolean extension = true;
+		boolean extension = isExtensionProvider();
 		if (hierarchy == null || Iterables.isEmpty(hierarchy)) {
 			extension = false;
 		}

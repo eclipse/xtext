@@ -91,22 +91,21 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	public void testSimpleExtensionMethodCall() throws Exception {
 		String code = 
 				"package x class Z {" +
-				"" +
-				"	def create result : <String>newArrayList() copyNet(String append) {\n" +
-				"       result.map( x | x.toUpperCase)\n" +	
-				"		result += append\n" + 
-				"	}" +
+				"  def create result : <String>newArrayList() copyNet(String append) {\n" +
+				"    result.map( x | x.toUpperCase)\n" +	
+				"    result += append\n" + 
+				"  }" +
 				"  def ifExpression(String param) {\n" + 
-				"	if (param!=null) {\n" + 
-				"	  param.length\n" + 
-				"	} else {\n" + 
-				"	  0\n" + 
-				"	} \n" + 
+				"    if (param!=null) {\n" + 
+				"      param.length\n" + 
+				"    } else {\n" + 
+				"      0\n" + 
+				"    } \n" + 
 				"  }\n" + 
 				"\n" + 
-				"	def ifExpression_01(String param) {\n" + 
-				"		ifExpression(if (param=='foo') 'bar' else 'baz') \n" + 
-				"	}\n" +
+				"  def ifExpression_01(String param) {\n" + 
+				"    ifExpression(if (param=='foo') 'bar' else 'baz') \n" + 
+				"  }\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
 		Class<?> class1 = javaCompiler.compileToClass("x.Z", javaCode);
@@ -1114,7 +1113,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"    else " +
 				"       super.equals(p)" + 
 				"  }\n" + 
-		"}");
+				"}");
 		Object instance = clazz.newInstance();
 		assertFalse(instance.equals(clazz.newInstance()));
 		assertTrue(instance.equals(instance));
@@ -1183,8 +1182,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"class Bar { " +
 				"  def create result: '' transform(String x) {} " +
 				"  def create result: new Object() transform(Object x) {} " +
-				"}"
-				);
+				"}");
 		Object instance = clazz.newInstance();
 		Method stringMethod = clazz.getDeclaredMethod("transform", String.class);
 		Object stringResult = stringMethod.invoke(instance, "");
@@ -1296,7 +1294,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				" def test() {" +
 				"    return 'foo'.size" +
 				" }" +
-		"}");
+				"}");
 		assertEquals(3,apply(class1,"test"));
 	}
 	
@@ -1354,7 +1352,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"  def foo(String arg) { " +
 				"    (arg as CharSequence).generic()" +
 				"  }" +
-		"}");
+				"}");
 		assertEquals(ExtensionMethods.GENERIC_T, apply(class1,"foo","x"));
 	}
 	
@@ -1367,7 +1365,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"  def foo(String arg) { " +
 				"    arg.generic()" +
 				"  }" +
-		"}");
+				"}");
 		assertEquals(ExtensionMethods.GENERIC_STRING, apply(class1,"foo","x"));
 	}
 	
@@ -1421,7 +1419,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"  def foo(String arg) { " +
 				"    (arg as CharSequence).generic()" +
 				"  }" +
-		"}");
+				"}");
 		assertEquals(ExtensionMethods.GENERIC_T, apply(class1,"foo","x"));
 	}
 	
@@ -1434,7 +1432,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"  def foo(String arg) { " +
 				"    arg.generic()" +
 				"  }" +
-		"}");
+				"}");
 		assertEquals(ExtensionMethods.GENERIC_STRING, apply(class1,"foo","x"));
 	}
 	
@@ -2050,7 +2048,6 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"    return iterable\n" +
 				"}";
 		
-		
 		Class<?> class1 = compileJavaCode("x.Y", "package x class Y {" + classBody + "}");
 		Object result = applyImpl(class1, "unpackArray", new Class[] { Iterable.class }, Lists.newArrayList(1, 2, 3));
 		assertTrue(result instanceof int[]);
@@ -2069,6 +2066,19 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		Object result = applyImpl(class1, "toStringArray", new Class[] { String.class, String.class }, "a", "b");
 		assertTrue(result instanceof String[]);
 		assertEquals(Lists.newArrayList("a", "b"), Arrays.asList((String[])result));
+	}
+	
+	public void testImplictFirstArgument_01() throws Exception {
+		invokeAndExpect2(
+				"Hello World", 
+				"def prependHello(String myString) {\n" + 
+				"  'Hello '+myString\n" + 
+				"}\n" + 
+				"def testExtensionMethods(String it) {\n" + 
+				"  prependHello\n" + 
+				"}", 
+				"testExtensionMethods", 
+				"World");
 	}
 	
 	@Inject

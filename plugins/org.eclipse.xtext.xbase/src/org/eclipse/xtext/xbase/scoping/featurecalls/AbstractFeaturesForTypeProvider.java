@@ -80,4 +80,10 @@ public abstract class AbstractFeaturesForTypeProvider implements IFeaturesForTyp
 	protected IRawTypeHelper getRawTypeHelper() {
 		return rawTypeHelper;
 	}
+	
+	@Override
+	public String toString() {
+		return getClass().getSimpleName();
+	}
 }
+

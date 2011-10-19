@@ -18,9 +18,9 @@ import org.eclipse.xtext.scoping.IScope;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.inject.Provider;
-import com.google.inject.internal.Lists;
-import com.google.inject.internal.Maps;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

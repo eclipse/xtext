@@ -28,6 +28,7 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IValidatedEObjectDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
@@ -89,7 +90,11 @@ public class BestMatchingJvmFeatureScope implements IScope {
 					if (validated instanceof JvmFeatureDescription) {
 						final XExpression implicitReceiver = ((JvmFeatureDescription) validated).getImplicitReceiver();
 						if (implicitReceiver!=null) {
-								featureCall.setImplicitReceiver(EcoreUtil2.clone(implicitReceiver));
+							featureCall.setImplicitReceiver(EcoreUtil2.clone(implicitReceiver));
+						}
+						XExpression implicitArgument = ((JvmFeatureDescription) validated).getImplicitArgument();
+						if (implicitArgument != null) {
+							((XFeatureCall)featureCall).setImplicitFirstArgument(EcoreUtil2.clone(implicitArgument));
 						}
 					}
 				} finally {

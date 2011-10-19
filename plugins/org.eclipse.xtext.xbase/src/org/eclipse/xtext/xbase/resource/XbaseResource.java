@@ -21,6 +21,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 
 import com.google.common.collect.Maps;
@@ -98,6 +99,7 @@ public class XbaseResource extends DerivedStateAwareResource {
 	protected static class AssumptionState {
 		protected Map<JvmIdentifiableElement, JvmIdentifiableElement> proxyToAssumption = Maps.newHashMap();
 		protected Map<XAbstractFeatureCall, XExpression> featureCallToReceiverAssumption = Maps.newHashMap();
+		protected Map<XFeatureCall, XExpression> featureCallToFirstArgumentAssumption = Maps.newHashMap();
 		protected AssumptionTracker assumptionTracker = new RootAssumptionTracker();
 	}
 	
@@ -120,6 +122,7 @@ public class XbaseResource extends DerivedStateAwareResource {
 			final JvmIdentifiableElement candidate, 
 			final XAbstractFeatureCall featureCall, 
 			final XExpression implicitReceiver,
+			final XExpression implicitFirstArgument,
 			final Provider<T> algorithm) {
 		AssumptionState state = assumptionState.get();
 		try {
@@ -129,6 +132,9 @@ public class XbaseResource extends DerivedStateAwareResource {
 						"in your scoping implementation but AbstractTypeProvider#getFeature instead.");
 			if (featureCall != null) {
 				state.featureCallToReceiverAssumption.put(featureCall, implicitReceiver);
+				if (featureCall instanceof XFeatureCall) {
+					state.featureCallToFirstArgumentAssumption.put((XFeatureCall) featureCall, implicitFirstArgument);
+				}
 			}
 			return algorithm.get();
 		} finally {
@@ -146,6 +152,20 @@ public class XbaseResource extends DerivedStateAwareResource {
 				return null;
 			}
 			return featureCall.getImplicitReceiver();
+		}
+		state.assumptionTracker.markDependent();
+		return result;
+	}
+	
+	protected XExpression getImplicitFirstArgument(XFeatureCall featureCall) {
+		AssumptionState state = assumptionState.get();
+		XExpression result = state.featureCallToFirstArgumentAssumption.get(featureCall);
+		if (result == null) {
+			if (state.featureCallToFirstArgumentAssumption.containsKey(featureCall)) {
+				state.assumptionTracker.markDependent();
+				return null;
+			}
+			return featureCall.getImplicitFirstArgument();
 		}
 		state.assumptionTracker.markDependent();
 		return result;

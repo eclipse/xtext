@@ -105,7 +105,9 @@ public class XFeatureCallSugarDescriptionProvider extends DefaultJvmFeatureDescr
 
 	protected int getSyntacticalNumberOfArguments(JvmOperation op) {
 		int numberOfArgs = op.getParameters().size();
-		if (isExtensionProvider()) {
+		if (numberOfArgs == 0)
+			return numberOfArgs;
+		if (isExtensionProvider() || implicitArgument != null) {
 			numberOfArgs--;
 		}
 		if (numberOfArgs == 1 && op.isVarArgs()) {

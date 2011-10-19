@@ -29,9 +29,14 @@ import com.google.common.collect.Lists;
 public class ExtensionMethodsFeaturesProvider extends AbstractFeaturesForTypeProvider {
 	
 	private JvmTypeReference extensionProvidingType;
+	private boolean noParameters;
 	
 	public void setContext(JvmTypeReference type) {
 		this.extensionProvidingType = type;
+	}
+	
+	public void setExpectNoParameters(boolean noParameters) {
+		this.noParameters = noParameters;
 	}
 	
 	public Iterable<JvmFeature> getFeaturesByName(String name, JvmTypeReference declarator,
@@ -57,20 +62,32 @@ public class ExtensionMethodsFeaturesProvider extends AbstractFeaturesForTypePro
 				if (candidate instanceof JvmOperation && !isFiltered((JvmOperation)candidate)) {
 					JvmOperation operation = (JvmOperation) candidate;
 					List<JvmFormalParameter> parameters = operation.getParameters();
-					if (!operation.isStatic() && parameters.size()>0) {
+					if (isCandidate(operation)) {
 						atLeastOneCandidate = true;
-						JvmTypeReference parameterType = parameters.get(0).getParameterType();
-						if (isSameTypeOrAssignableToUpperBound(reference, parameterType)) {
+						if (parameters.size()>0) {
+							JvmTypeReference parameterType = parameters.get(0).getParameterType();
+							if (isSameTypeOrAssignableToUpperBound(reference, parameterType)) {
+								result.add(operation);
+							}
+						} else {
 							result.add(operation);
 						}
 					}
 				}
 			}
-			if (!atLeastOneCandidate)
+			if (!atLeastOneCandidate || noParameters)
 				return;
 		}
 	}
 	
+	private boolean isCandidate(JvmOperation operation) {
+		if (operation.isStatic())
+			return false;
+		if (noParameters)
+			return operation.getParameters().isEmpty();
+		return operation.getParameters().size() > 0;
+	}
+
 	protected boolean isFiltered(JvmOperation candidate) {
 		return Object.class.getCanonicalName().equals(candidate.getDeclaringType().getIdentifier());
 	}

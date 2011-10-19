@@ -1,14 +1,13 @@
 package org.eclipse.xtext.xtend2.tests.smoke
 
 import static junit.framework.Assert.*
-import org.junit.runner.RunWith
 import com.google.inject.Inject
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.junit.util.ParseHelper
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.util.EcoreUtil
 
-//@RunWith(typeof(XtextRunner))
+//@org.junit.runner.RunWith(typeof(XtextRunner))
 //@InjectWith(typeof(ClasspathAwareInjectorProvider))
 class Case_8 {
 
