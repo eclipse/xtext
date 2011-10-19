@@ -16,7 +16,9 @@
   <rm:locator pattern="^org\.easymock$" searchPathRef="orbit"/>
   <rm:locator pattern="^org\.antlr\.runtime(?:\..+)?$" searchPathRef="orbit"/>
   <rm:locator pattern="^org\.eclipse\.draw2d$" searchPathRef="gef"/>
+  <rm:locator pattern="org.junit" searchPathRef="orbit"/>
   <rm:locator searchPathRef="platform"/>
+  
   <rm:searchPath name="local.releng">
     <rm:provider componentTypes="buckminster" readerType="local" mutable="false">
       <rm:uri format="{0}/releng/{1}">
