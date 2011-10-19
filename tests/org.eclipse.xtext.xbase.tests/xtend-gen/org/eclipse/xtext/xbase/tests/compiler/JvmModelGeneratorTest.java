@@ -69,27 +69,25 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       final XExpression expression = _expression;
       final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
           public void apply(final JvmGenericType it) {
-            {
-              EList<JvmMember> _members = it.getMembers();
-              JvmTypeReference _typeForName = JvmModelGeneratorTest.this.references.getTypeForName(java.lang.String.class, expression);
-              final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
-                  public void apply(final JvmOperation it) {
-                    {
-                      EList<JvmFormalParameter> _parameters = it.getParameters();
-                      JvmTypeReference _typeForName = JvmModelGeneratorTest.this.references.getTypeForName(java.lang.String.class, expression);
-                      JvmFormalParameter _parameter = JvmModelGeneratorTest.this.builder.toParameter(expression, "s", _typeForName);
-                      CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter);
-                      JvmModelGeneratorTest.this.builder.associate(expression, it);
-                    }
+            EList<JvmMember> _members = it.getMembers();
+            JvmTypeReference _typeForName = JvmModelGeneratorTest.this.references.getTypeForName(java.lang.String.class, expression);
+            final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+                public void apply(final JvmOperation it) {
+                  {
+                    EList<JvmFormalParameter> _parameters = it.getParameters();
+                    JvmTypeReference _typeForName = JvmModelGeneratorTest.this.references.getTypeForName(java.lang.String.class, expression);
+                    JvmFormalParameter _parameter = JvmModelGeneratorTest.this.builder.toParameter(expression, "s", _typeForName);
+                    CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter);
+                    JvmModelGeneratorTest.this.builder.<JvmOperation>associate(expression, it);
                   }
-                };
-              JvmOperation _method = JvmModelGeneratorTest.this.builder.toMethod(expression, "doStuff", _typeForName, _function);
-              CollectionExtensions.<JvmOperation>operator_add(_members, _method);/*null*/;
-            }
+                }
+              };
+            JvmOperation _method = JvmModelGeneratorTest.this.builder.toMethod(expression, "doStuff", _typeForName, _function);
+            CollectionExtensions.<JvmOperation>operator_add(_members, _method);
           }
         };
-      JvmGenericType _clazz = this.builder.toClazz(expression, "my.test.Foo", _function);
-      final JvmGenericType clazz = _clazz;
+      JvmGenericType _class = this.builder.toClass(expression, "my.test.Foo", _function);
+      final JvmGenericType clazz = _class;
       Resource _eResource = expression.eResource();
       Class<?> _compile = this.compile(_eResource, clazz);
       final Class<?> compiledClass = _compile;
@@ -109,12 +107,12 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
               it.setAbstract(true);
               EList<JvmTypeReference> _superTypes = it.getSuperTypes();
               JvmTypeReference _typeRef = JvmModelGeneratorTest.this.typeRef(expression, java.lang.Iterable.class, java.lang.String.class);
-              CollectionExtensions.<JvmTypeReference>operator_add(_superTypes, _typeRef);/*null*/;
+              CollectionExtensions.<JvmTypeReference>operator_add(_superTypes, _typeRef);
             }
           }
         };
-      JvmGenericType _clazz = this.builder.toClazz(expression, "my.test.Foo", _function);
-      final JvmGenericType clazz = _clazz;
+      JvmGenericType _class = this.builder.toClass(expression, "my.test.Foo", _function);
+      final JvmGenericType clazz = _class;
       Resource _eResource = expression.eResource();
       Class<?> _compile = this.compile(_eResource, clazz);
       final Class<?> compiled = _compile;
@@ -131,12 +129,12 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
               it.setAbstract(true);
               EList<JvmTypeReference> _superTypes = it.getSuperTypes();
               JvmTypeReference _typeRef = JvmModelGeneratorTest.this.typeRef(expression, java.util.AbstractList.class, java.lang.String.class);
-              CollectionExtensions.<JvmTypeReference>operator_add(_superTypes, _typeRef);/*null*/;
+              CollectionExtensions.<JvmTypeReference>operator_add(_superTypes, _typeRef);
             }
           }
         };
-      JvmGenericType _clazz = this.builder.toClazz(expression, "my.test.Foo", _function);
-      final JvmGenericType clazz = _clazz;
+      JvmGenericType _class = this.builder.toClass(expression, "my.test.Foo", _function);
+      final JvmGenericType clazz = _class;
       Resource _eResource = expression.eResource();
       Class<?> _compile = this.compile(_eResource, clazz);
       final Class<?> compiled = _compile;
@@ -163,12 +161,12 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
               EList<JvmMember> _members_2 = it.getMembers();
               JvmTypeReference _typeRef_2 = JvmModelGeneratorTest.this.typeRef(expression, java.lang.String.class);
               JvmOperation _setter = JvmModelGeneratorTest.this.builder.toSetter(expression, "x", _typeRef_2);
-              CollectionExtensions.<JvmOperation>operator_add(_members_2, _setter);/*null*/;
+              CollectionExtensions.<JvmOperation>operator_add(_members_2, _setter);
             }
           }
         };
-      JvmGenericType _clazz = this.builder.toClazz(expression, "my.test.Foo", _function);
-      final JvmGenericType clazz = _clazz;
+      JvmGenericType _class = this.builder.toClass(expression, "my.test.Foo", _function);
+      final JvmGenericType clazz = _class;
       Resource _eResource = expression.eResource();
       Class<?> _compile = this.compile(_eResource, clazz);
       final Class<?> compiled = _compile;

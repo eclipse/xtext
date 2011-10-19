@@ -143,8 +143,8 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
             }
           }
         };
-      JvmGenericType _clazz = this._jvmTypesBuilder.toClazz(e, _name, _function);
-      acceptor.accept(_clazz);
+      JvmGenericType _class = this._jvmTypesBuilder.toClass(e, _name, _function);
+      acceptor.accept(_class);
   }
   
   public String name(final Resource res) {

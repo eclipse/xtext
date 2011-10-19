@@ -43,12 +43,11 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	
 	def void testSimple() {
 		val expression = expression("return s.toUpperCase", false);
-		val clazz = expression.toClazz("my.test.Foo") [
+		val clazz = expression.toClass("my.test.Foo") [
 			members += expression.toMethod("doStuff", references.getTypeForName(typeof(String), expression)) [
 				parameters += expression.toParameter("s", references.getTypeForName(typeof(String), expression))
 				expression.associate(it)
 			]
-			null as Void
 		]
 		
 		val compiledClass = compile(expression.eResource, clazz)
@@ -58,10 +57,9 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	
 	def void testImplements() {
 		val expression = expression("null", false);
-		val clazz = expression.toClazz("my.test.Foo") [
+		val clazz = expression.toClass("my.test.Foo") [
 			abstract = true
 			superTypes += expression.typeRef(typeof(Iterable), typeof(String))
-			null as Void
 		]
 		val compiled = compile(expression.eResource, clazz)
 		assertTrue(typeof(Iterable).isAssignableFrom(compiled))
@@ -69,10 +67,9 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	
 	def void testExtends() {
 		val expression = expression("null", false);
-		val clazz = expression.toClazz("my.test.Foo") [
+		val clazz = expression.toClass("my.test.Foo") [
 			abstract = true
 			superTypes += expression.typeRef(typeof(AbstractList), typeof(String))
-			null as Void
 		]
 		val compiled = compile(expression.eResource, clazz)
 		assertTrue(typeof(Iterable).isAssignableFrom(compiled))
@@ -81,11 +78,10 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	
 	def void testCompilationStrategy() {
 		val expression = expression("null", false);
-		val clazz = expression.toClazz("my.test.Foo") [
+		val clazz = expression.toClass("my.test.Foo") [
 			members += expression.toField("x", expression.typeRef(typeof(String)))
 			members += expression.toGetter("x", expression.typeRef(typeof(String)))
 			members += expression.toSetter("x", expression.typeRef(typeof(String)))
-			null as Void
 		]
 		val compiled = compile(expression.eResource, clazz)
 		

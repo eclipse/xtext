@@ -38,7 +38,7 @@ public class SimpleJvmModelInferrer extends AbstractModelInferrer {
                     JvmTypeReference _typeForName = SimpleJvmModelInferrer.this.references.getTypeForName(java.lang.String.class, e);
                     JvmFormalParameter _parameter = SimpleJvmModelInferrer.this._jvmTypesBuilder.toParameter(e, "s", _typeForName);
                     CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter);
-                    SimpleJvmModelInferrer.this._jvmTypesBuilder.associate(e, it);
+                    SimpleJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>associate(e, it);
                   }
                 }
               };
@@ -47,8 +47,8 @@ public class SimpleJvmModelInferrer extends AbstractModelInferrer {
           }
         }
       };
-    JvmGenericType _clazz = this._jvmTypesBuilder.toClazz(e, "Test", _function);
-    acceptor.accept(_clazz);
+    JvmGenericType _class = this._jvmTypesBuilder.toClass(e, "Test", _function);
+    acceptor.accept(_class);
   }
   
   public void infer(final EObject e, final IAcceptor<JvmDeclaredType> acceptor, final boolean prelinkingPhase) {
