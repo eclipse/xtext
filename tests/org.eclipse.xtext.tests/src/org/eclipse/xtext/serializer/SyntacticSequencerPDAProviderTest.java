@@ -104,7 +104,7 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 
 	protected String getParserRule(String body) throws Exception {
 		Grammar grammar = (Grammar) getModel(HEADER + body);
-		drawGrammar("pdf/" + getName(), grammar);
+		//		drawGrammar("pdf/" + getName(), grammar);
 		List<String> result = Lists.newArrayList();
 		for (Triple<EClass, EObject, String> ctx : getContexts(grammar)) {
 			String t = ctx.getFirst() == null ? "null" : ctx.getFirst().getName();
