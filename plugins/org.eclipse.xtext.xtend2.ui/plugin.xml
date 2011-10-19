@@ -12,7 +12,7 @@
               extensions="xtend"
               icon="icons/xtend_file.png"
               id="org.eclipse.xtext.xtend2.Xtend2"
-              name="Xtend2 Editor">
+              name="Xtend Editor">
         </editor>
     </extension>
     <extension
@@ -53,7 +53,7 @@
         <page
             class="org.eclipse.xtext.xtend2.ui.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.xtext.xtend2.Xtend2"
-            name="Xtend2">
+            name="Xtend">
             <keywordReference id="org.eclipse.xtext.xtend2.ui.keyword_Xtend2"/>
         </page>
         <page
