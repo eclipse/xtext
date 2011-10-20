@@ -52,7 +52,7 @@ import com.google.common.collect.Maps;
  */
 public abstract class OptionsConfigurationBlock {
 
-	private static final String IS_PROJECT_SPECIFIC = "is_project_specific"; //$NON-NLS-1$
+	public static final String IS_PROJECT_SPECIFIC = "is_project_specific"; //$NON-NLS-1$
 	private static final String SETTINGS_EXPANDED = "expanded"; //$NON-NLS-1$
 	private static final String REBUILD_COUNT_KEY = "preferences_build_requested"; //$NON-NLS-1$
 
@@ -119,6 +119,7 @@ public abstract class OptionsConfigurationBlock {
 		this.project = project;
 		this.keys = allKeys;
 		this.preferenceStore = preferenceStore;
+		this.rebuildCount = getRebuildCount();
 		this.workbenchPreferenceContainer = container;
 		if (project == null || hasProjectSpecificOptions(project)) {
 			disabledProjectSettings = null;
@@ -312,7 +313,7 @@ public abstract class OptionsConfigurationBlock {
 				for (int i = 0; i < keys.length; i++) {
 					String curr = keys[i];
 					String val = disabledProjectSettings.get(curr);
-					preferenceStore.setValue(curr, val);
+					preferenceStore.putValue(curr, val);
 				}
 				disabledProjectSettings = null;
 				updateControls();
