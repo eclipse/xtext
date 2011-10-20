@@ -52,7 +52,7 @@ public class BuilderConfigurationBlock extends OptionsConfigurationBlock {
 	}
 
 	private static String[] getKeys(IProject project, EclipseOutputConfigurationProvider configurationProvider) {
-		Set<String> keys = Sets.newHashSet(BuilderPreferenceAccess.PREF_AUTO_BUILDING);
+		Set<String> keys = Sets.newHashSet(BuilderPreferenceAccess.PREF_AUTO_BUILDING, OptionsConfigurationBlock.IS_PROJECT_SPECIFIC);
 		Set<OutputConfiguration> outputConfigurations = configurationProvider.getOutputConfigurations(project);
 		for (OutputConfiguration outputConfiguration : outputConfigurations) {
 			keys.add(BuilderPreferenceAccess.getKey(outputConfiguration,
