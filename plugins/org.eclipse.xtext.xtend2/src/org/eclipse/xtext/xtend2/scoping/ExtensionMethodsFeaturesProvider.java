@@ -109,4 +109,10 @@ public class ExtensionMethodsFeaturesProvider extends AbstractFeaturesForTypePro
 		return !noParameters;
 	}
 
+	@Override
+	public String toString() {
+		return "ExtensionMethodsFeaturesProvider [extensionProvidingType=" + extensionProvidingType + ", noParameters="
+				+ noParameters + "]";
+	}
+	
 }
