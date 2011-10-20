@@ -47,7 +47,7 @@ class «getJvmModelInferrerName().toSimpleName()» extends AbstractModelInferrer {
 	 * @param element - the model to create one or more JvmDeclaredTypes from.
 	 * @param acceptor - each created JvmDeclaredType without a container should be passed to the acceptor in order get attached to the
 	 *                   current resource.
-	 * @param isPreLinkingPhase - whether the method is called in a pre linking üphase, i.e. when the global index isn't fully updated. You
+	 * @param isPreLinkingPhase - whether the method is called in a pre linking phase, i.e. when the global index isn't fully updated. You
 	 *        must not rely on linking using the index if iPrelinkingPhase is <code>true</code>
 	 */
    	def dispatch void infer(«rules.first().type.classifier.javaTypeName(eResource().resourceSet).toSimpleName()» element, IAcceptor<JvmDeclaredType> acceptor, boolean isPrelinkingPhase) {
