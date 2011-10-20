@@ -337,7 +337,7 @@ public abstract class OptionsConfigurationBlock {
 	}
 
 	public boolean performApply() {
-		return processChanges(null);
+		return processChanges(workbenchPreferenceContainer);
 	}
 
 	private int getRebuildCount() {
@@ -345,8 +345,7 @@ public abstract class OptionsConfigurationBlock {
 	}
 
 	private void incrementRebuildCount() {
-		rebuildCount++;
-		preferenceStore.setDefault(REBUILD_COUNT_KEY, rebuildCount);
+		preferenceStore.setDefault(REBUILD_COUNT_KEY, getRebuildCount() + 1);
 	}
 
 	protected boolean processChanges(IWorkbenchPreferenceContainer container) {
