@@ -917,8 +917,10 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 				JvmTypeReference resultParam = parameterTypes.get(i);
 				if (resultParam == null) {
 					JvmFormalParameter p = getParam(singleMethod, i);
-					final JvmTypeReference resolved = context.getLowerBound(p.getParameterType());
-					parameterTypes.set(i, resolved);
+					if (p != null) {
+						final JvmTypeReference resolved = context.getLowerBound(p.getParameterType());
+						parameterTypes.set(i, resolved);
+					}
 				}
 			}
 		}
