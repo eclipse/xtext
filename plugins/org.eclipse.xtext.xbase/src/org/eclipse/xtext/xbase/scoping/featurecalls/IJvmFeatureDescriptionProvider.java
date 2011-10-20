@@ -20,11 +20,13 @@ import com.google.common.base.Function;
  * @author Sebastian Zarnekow
  */
 public interface IJvmFeatureDescriptionProvider {
+
+	@Override
+	String toString();
 	
-	/**
-	 * Used to name scopes created using this provider
-	 */
-	String getText();
+	void setPriority(int priority);
+	
+	int getPriority();
 
 	Iterable<IEObjectDescription> getDescriptionsByName(
 			String name, 
