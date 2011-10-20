@@ -126,6 +126,15 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 	protected JvmDeclaredType contextType;
 	protected XExpression implicitReceiver;
 	protected XExpression implicitArgument;
+	protected int priority;
+	
+	public void setPriority(int priority) {
+		this.priority = priority;
+	}
+	
+	public int getPriority() {
+		return priority;
+	}
 	
 	public void setContextType(JvmDeclaredType contextType) {
 		this.contextType = contextType;
@@ -135,8 +144,16 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 		this.implicitReceiver = implicitReceiver;
 	}
 	
+	public XExpression getImplicitReceiver() {
+		return implicitReceiver;
+	}
+	
 	public void setImplicitArgument(XExpression implicitArgument) {
 		this.implicitArgument = implicitArgument;
+	}
+	
+	public XExpression getImplicitArgument() {
+		return implicitArgument;
 	}
 	
 	protected JvmFeatureDescription createJvmFeatureDescription(QualifiedName name, JvmFeature jvmFeature,
@@ -149,7 +166,7 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 		return new JvmFeatureDescription(name, jvmFeature, rawTypeContext, shadowingStringProvider, isValid, implicitReceiver, implicitArgument, getNumberOfIrrelevantArguments());
 	}
 	
-	private int getNumberOfIrrelevantArguments() {
+	protected int getNumberOfIrrelevantArguments() {
 		if (isExtensionProvider() || implicitArgument != null)
 			return 1;
 		return 0;
@@ -184,15 +201,18 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 
 	protected boolean isValid(JvmFeature feature) {
 		final JvmMember jvmMember = feature;
-		return visibilityService.isVisible(jvmMember,contextType);
+		return visibilityService.isVisible(jvmMember, contextType);
 	}
 
-	public String getText() {
-		return getClass().getSimpleName();
-	}
-	
 	@Override
 	public String toString() {
-		return getText() + " with " + featuresForTypeProvider;
+		return getClass().getSimpleName() + " [featuresForTypeProvider=" + featuresForTypeProvider
+				+ ", contextType=" + getContextIdentifier() + ", implicitReceiver=" + implicitReceiver + ", implicitArgument="
+				+ implicitArgument + ", priority=" + priority + "]";
 	}
+
+	private String getContextIdentifier() {
+		return contextType == null ? null : contextType.getIdentifier();
+	}
+
 }

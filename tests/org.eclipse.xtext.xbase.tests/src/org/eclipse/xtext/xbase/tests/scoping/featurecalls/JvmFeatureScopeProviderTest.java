@@ -14,18 +14,15 @@ import java.util.Set;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.xbase.scoping.featurecalls.IJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScope;
 
 import testdata.FieldAccess;
 import testdata.FieldAccessSub;
 
-import com.google.common.base.Functions;
 import com.google.common.collect.Sets;
 
 /**
@@ -36,9 +33,9 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 
 	public void testPublicFieldShadowed_01() throws Exception {
 		JvmTypeReference reference = getTypeRef(FieldAccessSub.class.getCanonicalName());
-		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(IScope.NULLSCOPE, reference,
-				Functions.<ITypeArgumentContext>constant(null),
-				Collections.<IJvmFeatureDescriptionProvider>singletonList(defaultFeatureProvider.get()));
+		JvmFeatureScope scope = getFeatureProvider().createFeatureScope(IScope.NULLSCOPE, 
+				createScopeDescriptions(reference,
+						Collections.singletonList(defaultFeatureProvider.get())));
 		Iterable<IEObjectDescription> descriptions = scope.getElements(QualifiedName.create("stringField"));
 		Set<String> expected = Sets.newHashSet("stringField", "stringField()");
 		for(IEObjectDescription description: descriptions) {
@@ -54,9 +51,9 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 	
 	public void testPublicFieldShadowed_02() throws Exception {
 		JvmTypeReference reference = getTypeRef(FieldAccessSub.class.getCanonicalName());
-		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(IScope.NULLSCOPE, reference,
-				Functions.<ITypeArgumentContext>constant(null),
-				Collections.<IJvmFeatureDescriptionProvider>singletonList(defaultFeatureProvider.get()));
+		JvmFeatureScope scope = getFeatureProvider().createFeatureScope(IScope.NULLSCOPE, 
+				createScopeDescriptions(reference,
+						Collections.singletonList(defaultFeatureProvider.get())));
 		Iterable<IEObjectDescription> descriptions = scope.getElements(QualifiedName.create("shadowedByPrivateField"));
 		Set<String> expected = Sets.newHashSet("shadowedByPrivateField");
 		for(IEObjectDescription description: descriptions) {
@@ -72,9 +69,9 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 
 	public void testPrivateMemberDescriptions() throws Exception {
 		JvmTypeReference reference = getTypeRef(FieldAccessSub.class.getCanonicalName());
-		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(IScope.NULLSCOPE, reference,
-				Functions.<ITypeArgumentContext>constant(null),
-				Collections.<IJvmFeatureDescriptionProvider>singletonList(defaultFeatureProvider.get()));
+		JvmFeatureScope scope = getFeatureProvider().createFeatureScope(IScope.NULLSCOPE, 
+				createScopeDescriptions(reference,
+						Collections.singletonList(defaultFeatureProvider.get())));
 		Iterable<IEObjectDescription> descriptions = scope.getElements(QualifiedName.create("privateField"));
 		Set<String> expected = Sets.newHashSet("privateField()", "privateField");
 		for(IEObjectDescription description: descriptions) {
@@ -89,9 +86,9 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 	
 	public void testInheritedDescriptions() throws Exception {
 		JvmTypeReference reference = getTypeRef(FieldAccessSub.class.getCanonicalName());
-		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(IScope.NULLSCOPE, reference,
-				Functions.<ITypeArgumentContext>constant(null),
-				Collections.<IJvmFeatureDescriptionProvider>singletonList(defaultFeatureProvider.get()));
+		JvmFeatureScope scope = getFeatureProvider().createFeatureScope(IScope.NULLSCOPE, 
+				createScopeDescriptions(reference,
+						Collections.singletonList(defaultFeatureProvider.get())));
 		Iterable<IEObjectDescription> descriptions = scope.getAllElements();
 		Set<String> expected = Sets.newHashSet("finalField", "staticField");
 		for(IEObjectDescription description: descriptions) {

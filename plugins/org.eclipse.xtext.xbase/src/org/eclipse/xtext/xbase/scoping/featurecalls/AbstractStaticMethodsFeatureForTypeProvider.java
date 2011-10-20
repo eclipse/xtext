@@ -101,7 +101,7 @@ public abstract class AbstractStaticMethodsFeatureForTypeProvider extends Abstra
 
 	protected abstract Map<JvmTypeReference, Collection<String>> getVisibleTypesContainingStaticMethods(Iterable<JvmTypeReference> hierarchy);
 
-	public void setContext(Resource context) {
+	public void setResourceContext(Resource context) {
 		this.context = context;
 	}
 	
@@ -114,8 +114,19 @@ public abstract class AbstractStaticMethodsFeatureForTypeProvider extends Abstra
 	public boolean isExtensionProvider() {
 		return isExtensionProvider;
 	}
+	
 	public void setExtensionProvider(boolean isExtensionProvider) {
 		this.isExtensionProvider = isExtensionProvider;
+	}
+
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + " [context=" + getContextURI() + ", isExtensionProvider="
+				+ isExtensionProvider + "]";
+	}
+	
+	protected String getContextURI() {
+		return context == null ? "" : String.valueOf(context.getURI().lastSegment());
 	}
 
 }
