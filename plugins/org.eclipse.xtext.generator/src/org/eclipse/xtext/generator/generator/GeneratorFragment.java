@@ -22,6 +22,7 @@ import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.IGeneratorFragment;
 import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment;
+import org.eclipse.xtext.util.Strings;
 
 /**
  * An {@link IGeneratorFragment} to create a formatter for an Xtext language.
@@ -80,5 +81,10 @@ public class GeneratorFragment extends AbstractGeneratorFragment {
 						"BuilderPreferenceStoreInitializer",
 						"binder.bind(org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer.class).to(org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.Initializer.class)")
 		.getBindings();
+	}
+	
+	@Override
+	public String[] getExportedPackagesRt(Grammar grammar) {
+		return new String[] { Strings.skipLastToken(getGeneratorName(grammar, getNaming()), ".") };
 	}
 }
