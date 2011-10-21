@@ -16,7 +16,8 @@ import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
- * Xbase and Xtend come with libraies which are implicitly on the scope.
+ * Xbase and Xtend come with libraies which are automatically on the
+ * extension scope.
  */
 @SuppressWarnings("all")
 public class Xtend07_Libraries extends TestCase {

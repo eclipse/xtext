@@ -14,10 +14,12 @@ import xtend.tutorial.util.Shape;
 @SuppressWarnings("all")
 public class Xtend09_DispatchMethods extends TestCase {
   /**
-   * in addition to the switch expression the dispatch keyword for overloaded functions can be used
-   * to enable dynamic polymorphic dispatching.
+   * In addition to the switch expression the dispatch keyword for
+   * overloaded functions can be used to enable dynamic polymorphic
+   * dispatching.
    * 
-   * Have a look at the generated Java code to understand how it is mapped to Java.
+   * Have a look at the generated Java code to understand how it is
+   * mapped to Java.
    */
   protected StringConcatenation _toLabel(final Rectangle rectangle) {
     StringConcatenation _xifexpression = null;

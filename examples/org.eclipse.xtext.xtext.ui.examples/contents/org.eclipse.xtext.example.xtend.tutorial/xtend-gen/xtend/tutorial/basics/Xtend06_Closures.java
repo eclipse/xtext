@@ -14,9 +14,9 @@ import xtend.tutorial.util.Person;
 @SuppressWarnings("all")
 public class Xtend06_Closures {
   /**
-   * Xbase (and so soed Xtend) supports closures.
-   * A closure is very similar to Java's anonymous classes, but has
-   * a much more convenient and readable syntax.
+   * Xbase (and so Xtend) supports closures.
+   * A closure is very similar to Java's anonymous classes, but has a
+   * much more convenient and readable syntax.
    */
   public ArrayList<Object> closures_01(final List<Person> persons) {
     final Function1<Person,String> _function = new Function1<Person,String>() {
@@ -33,10 +33,12 @@ public class Xtend06_Closures {
   }
   
   /**
-   * a function accepting a closure
-   * (Person)=>String is a synonym for org.eclipse.xtext.xbase.lib.Functions$Function1<Person,String>
-   * The general syntax if
-   * (typeParam1 ,... typeParamN) => returnType
+   * A function accepting a closure
+   *   (Person)=>String
+   * is a synonym for
+   *   org.eclipse.xtext.xbase.lib.Functions$Function1<Person,String>.
+   * The general syntax is
+   *   (typeParam1 ,... typeParamN) => returnType
    */
   public ArrayList<Object> personsToString(final List<Person> persons, final Function1<? super Person,? extends String> toString) {
       ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
@@ -49,15 +51,18 @@ public class Xtend06_Closures {
   }
   
   /**
-   * Xtend can coerce function types into any other type,
-   * as long as such a type has only one method defined
-   * (in addition to the methods inherited from java.lang.Object)
+   * Xtend can coerce function types into any other type, as long as
+   * such a type has only one method defined (in addition to the
+   * methods inherited from 'java.lang.Object')
    * 
-   * In the following example java.util.Collections#sort(List<T>, Comparator<T>) is invoked.
-   * Where a closure is passed in as second parameter and automatically
-   * converted to an instance of Comparator<Person>.
+   * In the following example
+   *   java.util.Collections#sort(List<T>, Comparator<T>)
+   * is invoked with a closure as second parameter.
+   * The closure is automatically converted to an instance of
+   *   Comparator<Person>.
    * 
-   * Note also that you have to put a closure into square brackets is it isn't the only argument to a function.
+   * Note also that you have to put a closure into square brackets is
+   * it isn't the only argument of a function call.
    */
   public void closures_02(final List<Person> persons) {
     final Function2<Person,Person,Integer> _function = new Function2<Person,Person,Integer>() {
@@ -76,8 +81,8 @@ public class Xtend06_Closures {
   }
   
   /**
-   * sometimes one need to explicitly specify the parameter types,
-   * because there is no context to they can be inferred from.
+   * Sometimes one need to explicitly specify the parameter types,
+   * because there is no context from which they could be inferred.
    */
   public Function1<String,String> closures_withoutTypeInference() {
     final Function1<String,String> _function = new Function1<String,String>() {

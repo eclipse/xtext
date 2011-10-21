@@ -7,8 +7,8 @@ import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 @SuppressWarnings("all")
 public class Xtend02_SimpleExpressions {
   /**
-   * string literals can be multi line and
-   * can be terminated by either single quotes or double quotes
+   * String literals can be multi-line and can be terminated by
+   * either single quotes or double quotes.
    */
   public String stringLiteral() {
     return "Hello World";
@@ -39,14 +39,14 @@ public class Xtend02_SimpleExpressions {
   }
   
   /**
-   * The equivalent to Java's String.class is typeof(String)
+   * The equivalent to Java's String.class is typeof(String).
    */
   public Class<String> clazzLiteral() {
     return java.lang.String.class;
   }
   
   /**
-   * the equivalent to Java's ((String)null) is (null as String)
+   * The equivalent to Java's ((String)null) is (null as String).
    */
   public String casts() {
     String _string = ((String) null).toString();
@@ -54,8 +54,8 @@ public class Xtend02_SimpleExpressions {
   }
   
   /**
-   * variable declaration can occure within a block expression.
-   * Which in turn can occure everywhere an expression can occure.
+   * Variable declaration can occur within a block expression, which
+   * in turn can occur where an expression is allowed
    */
   public String variableDeclaration() {
     String _xblockexpression = null;

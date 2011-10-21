@@ -3,7 +3,8 @@ package xtend.tutorial.basics
 import junit.framework.TestCase
 
 /**
- * Xbase and Xtend come with libraies which are implicitly on the scope.
+ * Xbase and Xtend come with libraies which are automatically on the
+ * extension scope.
  */
 class Xtend07_Libraries extends TestCase {
 	
