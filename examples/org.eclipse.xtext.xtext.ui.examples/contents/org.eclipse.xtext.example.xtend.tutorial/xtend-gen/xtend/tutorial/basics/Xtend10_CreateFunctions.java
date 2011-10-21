@@ -10,10 +10,14 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import xtend.tutorial.util.NetNode;
 
 /**
- * create functions are used to transform object graphs to nw object graphs in jsut one pass
- * instead of the usual two pass was, where you first create a tree and then establish cross links.
+ * Create functions are used to transform object graphs to new object
+ * graphs. The function is only exectued once and the cached result is
+ * returned in each subsequent call with the same argument.
  * 
- * It solves the m2m transformation problem.
+ * This solves two common M2M transformation problems:
+ * - identities are preserved.
+ * - cross links can be established in the same pass in which the objects
+ *   are transformed.
  */
 @SuppressWarnings("all")
 public class Xtend10_CreateFunctions extends TestCase {
@@ -53,11 +57,9 @@ public class Xtend10_CreateFunctions extends TestCase {
   }
   
   /**
-   * create a copy of the given NetNode
-   * initializes the fields lazily
+   * Create a copy of the given NetNode. Initialize the fields lazily.
    */
   public NetNode copyNet(final NetNode toCopy) {
-    
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(toCopy);
     final NetNode _result;
     synchronized (_createCache_copyNet) {

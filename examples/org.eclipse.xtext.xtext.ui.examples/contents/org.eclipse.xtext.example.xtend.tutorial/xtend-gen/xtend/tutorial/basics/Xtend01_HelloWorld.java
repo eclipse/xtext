@@ -13,7 +13,8 @@ public class Xtend01_HelloWorld extends TestCase {
   }
   
   /**
-   * Hello World with explicit return type and explicit return expression.
+   * Hello World with explicit return type and explicit return
+   * expression.
    */
   public String sayHelloTo(final String to) {
     String _operator_plus = StringExtensions.operator_plus("Hello ", to);
@@ -22,7 +23,8 @@ public class Xtend01_HelloWorld extends TestCase {
   }
   
   /**
-   * Hello World with explicit return type and explicit return expression.
+   * Hello World with implicit return type and implicit return
+   * expression.
    */
   public String sayHelloTo2(final String to) {
     String _operator_plus = StringExtensions.operator_plus("Hello ", to);
@@ -31,7 +33,7 @@ public class Xtend01_HelloWorld extends TestCase {
   }
   
   /**
-   * prints hello world to System.out
+   * Prints hello world to System.out.
    */
   public void sayHelloToSystemOut(final String to) {
     String _sayHelloTo = this.sayHelloTo(to);
@@ -39,7 +41,7 @@ public class Xtend01_HelloWorld extends TestCase {
   }
   
   /**
-   * using the shorter extension method.
+   * Uses the shorter extension method.
    */
   public void sayHelloToSystemOut2(final String to) {
     String _sayHelloTo = this.sayHelloTo(to);

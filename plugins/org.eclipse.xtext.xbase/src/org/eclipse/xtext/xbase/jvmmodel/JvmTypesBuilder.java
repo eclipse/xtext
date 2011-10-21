@@ -100,26 +100,32 @@ public class JvmTypesBuilder {
 	 * Creates a public class declaration, associated to the given sourceElement. It sets the given name, which might be
 	 * fully qualified using the standard Java notation.
 	 * 
-	 * @param sourceElement - the sourceElement the resulting element is associated with.
-	 * @param qualifiedName - the qualifiedName of the resulting class.
-	 * @param initializer - the initializer to apply on the created class element
+	 * @param sourceElement
+	 *            - the sourceElement the resulting element is associated with.
+	 * @param qualifiedName
+	 *            - the qualifiedName of the resulting class.
+	 * @param initializer
+	 *            - the initializer to apply on the created class element
 	 * 
 	 * @return a {@link JvmGenericType} representing a Java class of the given name.
 	 */
 	public JvmGenericType toClass(EObject sourceElement, String name, Procedure1<JvmGenericType> initializer) {
 		String simpleName = name;
 		String packageName = null;
-		final int dotIdx = name.lastIndexOf('.');
-		if (dotIdx != -1) {
-			simpleName = name.substring(dotIdx + 1);
-			packageName = name.substring(0, dotIdx);
+		if (name != null) {
+			final int dotIdx = name.lastIndexOf('.');
+			if (dotIdx != -1) {
+				simpleName = name.substring(dotIdx + 1);
+				packageName = name.substring(0, dotIdx);
+			}
 		}
 		final JvmGenericType result = TypesFactory.eINSTANCE.createJvmGenericType();
 		result.setSimpleName(simpleName);
 		if (packageName != null)
 			result.setPackageName(packageName);
 		result.setVisibility(JvmVisibility.PUBLIC);
-		initializer.apply(result);
+		if(initializer != null) 
+			initializer.apply(result);
 
 		// if no super type add Object
 		if (result.getSuperTypes().isEmpty()) {
@@ -160,6 +166,17 @@ public class JvmTypesBuilder {
 	 */
 	public <T extends JvmIdentifiableElement> T associate(EObject sourceElement, T target) {
 		associator.associatePrimary(sourceElement, target);
+		return target;
+	}
+
+	/**
+	 * Embeds an expression from the source model into the body of a JvmExecutable.
+	 * 
+	 * @see IJvmModelAssociator
+	 * @see IJvmModelAssociations
+	 */
+	public JvmExecutable toBody(XExpression sourceExpression, JvmExecutable target) {
+		associator.associateLogicalContainer(sourceExpression, target);
 		return target;
 	}
 
@@ -310,6 +327,8 @@ public class JvmTypesBuilder {
 	 * Creates a clone of the given {@link JvmTypeReference} without resolving any proxies.
 	 */
 	public JvmTypeReference cloneWithProxies(JvmTypeReference typeRef) {
+		if(typeRef == null)
+			return null;
 		if (typeRef instanceof JvmParameterizedTypeReference
 				&& !typeRef.eIsSet(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE))
 			throw new IllegalArgumentException("typeref#type was null");
@@ -399,12 +418,12 @@ public class JvmTypesBuilder {
 	 * Translates documentation from a source element to the given jvmElement.
 	 */
 	public void translateDocumentationTo(EObject source, JvmIdentifiableElement jvmElement) {
-		String documentation = documentationProvider.getDocumentation(source).trim();
+		String documentation = documentationProvider.getDocumentation(source);
 		if (!isEmpty(documentation)) {
-			addDocumentation(jvmElement, documentation);
+			addDocumentation(jvmElement, documentation.trim());
 		}
 	}
-	
+
 	/**
 	 * Attaches the given documentation to the given jvmElement.
 	 */

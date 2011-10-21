@@ -10,7 +10,7 @@ import xtend.tutorial.util.Person;
 @SuppressWarnings("all")
 public class Xtend03_MethodInvocation {
   /**
-   * Xtend supports the Java syntax
+   * Xtend supports the Java syntax for method calls.
    */
   public String simpleMethodCall_01(final Object myObject) {
     String _string = myObject.toString();
@@ -18,7 +18,8 @@ public class Xtend03_MethodInvocation {
   }
   
   /**
-   * if a method does not take arguments you can leave out the parenthesis
+   * If a method does not take arguments you can leave out the
+   * parentheses.
    */
   public String simpleMethodCall_02(final Object myObject) {
     String _string = myObject.toString();
@@ -26,7 +27,7 @@ public class Xtend03_MethodInvocation {
   }
   
   /**
-   * Static property or method access is done using th
+   * Static property or method access is done via '::'.
    */
   public String staticProperties() {
     String _xblockexpression = null;
@@ -39,7 +40,8 @@ public class Xtend03_MethodInvocation {
   }
   
   /**
-   * properties (i.e. getter and setter) can be accessed using the more readable property-syntax
+   * Properties (i.e. getter and setter) can be accessed using the
+   * more readable property-syntax.
    */
   public String propertAccess(final Person person) {
       person.setForename("Joe");
@@ -53,8 +55,11 @@ public class Xtend03_MethodInvocation {
   
   /**
    * Xtend supports operator overloading.
-   * An operator is just a mapping to a method with a special name (starting with the prefix 'operator_') and the correct number of arguments.
-   * A table of supported operators and their precedence can be found in the Xbase language reference (see Help->Help Contents).
+   * An operator is just a mapping to a method with a special name
+   * (starting with the prefix 'operator_') and the correct number of
+   * arguments. A table of supported operators and their precedence
+   * can be found in the Xbase language reference
+   * (see Help->Help Contents).
    * 
    * (Tip: Hover or use F3 over an operator to go to its declaration)
    */
@@ -66,8 +71,9 @@ public class Xtend03_MethodInvocation {
   
   /**
    * Extension methods are a special Xtend feature.
-   * They allow for adding functions to existing types withot modifying them.
-   * Local functions within Xtend classes can be used using the extension syntax by default.
+   * They allow for adding functions to existing types withot modifying
+   * them. Local functions within Xtend classes can be used using the
+   * extension syntax by default.
    */
   public String[] extensionMethods(final String string) {
     String[] _splitOnUnderscore = this.splitOnUnderscore(string);
@@ -80,8 +86,9 @@ public class Xtend03_MethodInvocation {
   }
   
   /**
-   * If you put the keyword 'extension' in a 'static' import, the imported static functions
-   * can be accessed using the extension syntax as well.
+   * If you put the keyword 'extension' in a 'static' import, the
+   * imported static functions can be accessed using the extension
+   * syntax as well.
    */
   public List<String> staticExtensionMethods(final String string) {
     List<String> _singletonList = Collections.<String>singletonList("foo");

@@ -14,8 +14,9 @@ public class Xtend08_RichStrings extends TestCase {
   }
   
   /**
-   * Rich strings are a special feature for readable code concatenation.
-   * It supports a unique automatic indentation handling, which is also refelected tooling-wise
+   * Rich strings are a special feature for readable code
+   * concatenation. They support a unique automatic indentation
+   * handling, which is also refelected tooling-wise.
    * Note the indentation before the call to signature.
    */
   public StringConcatenation writeLetterTo(final Person p) {
