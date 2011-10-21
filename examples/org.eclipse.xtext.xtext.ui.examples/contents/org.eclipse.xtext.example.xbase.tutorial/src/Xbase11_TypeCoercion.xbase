@@ -1,6 +1,7 @@
 /*
  * AUTOBOXING
- * Xbase supports Java's primitives and also the autoboxing introduced with Java 1.4.
+ * Xbase supports Java's primitives and also the autoboxing introduced
+ * with Java 1.4.
  */
  
 'string'.length
@@ -11,14 +12,14 @@ i
 // 6 (Integer)
 
 /*
- * It does autoboxing even when used in the receiver context
+ * It does autoboxing even when used in the receiver context.
  */
 
 'string'.length.toString
 // 6 (String)
 
 /*
- * Arrays are auto coerced to Lists
+ * Arrays are automatically coerced to Lists.
  */
  
 'string'.toCharArray
@@ -28,7 +29,7 @@ val java.util.List<Character> l = 'string'.toCharArray
 // [s, t, r, i, n, g] (void)
 
 /*
- * again this works also in a receiver context
+ * Again this works also in a receiver context.
  */
 
 'string'.toCharArray.get(3)

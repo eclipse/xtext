@@ -1,6 +1,7 @@
 import helper.*
 /*
- * Xbase comes with sugared accessor syntax for getter and setter methods
+ * Xbase comes with sugared accessor syntax for getter and setter 
+ * methods
  */
  
 val person = new Person()

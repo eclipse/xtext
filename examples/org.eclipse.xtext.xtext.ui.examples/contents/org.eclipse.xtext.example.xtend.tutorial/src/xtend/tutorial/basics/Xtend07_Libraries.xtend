@@ -3,7 +3,8 @@ package xtend.tutorial.basics
 import junit.framework.TestCase
 
 /**
- * Xbase and Xtend come with libraies which are implicitly on the scope.
+ * Xbase and Xtend come with libraies which are automatically on the
+ * extension scope.
  */
 class Xtend07_Libraries extends TestCase {
 	
@@ -19,13 +20,13 @@ class Xtend07_Libraries extends TestCase {
 	
 	def testHigherOrderFunctions(Iterable<String> myStrings) {
 		
-		// find the first string with length 3
+		// Find the first string with length 3.
 		println(myStrings.findFirst(e|e.length == 3))
 		
-		// convert all to uppercase
+		// Convert all to uppercase.
 		println(myStrings.map(e|e.toUpperCase))
 		
-		// filter out strings longer than 3 characters
+		// Filter out strings longer than 3 characters.
 		println(myStrings.filter(e| e.length <= 3 ))
 	}
 	
@@ -33,7 +34,7 @@ class Xtend07_Libraries extends TestCase {
 	 * all operator are built via library
 	 */
 	def operators() {
-		// string concatenation is built via library
+		// String concatenation is built via library.
 		println('Hello'+' '+'World!')
 		
 		// arithemetics

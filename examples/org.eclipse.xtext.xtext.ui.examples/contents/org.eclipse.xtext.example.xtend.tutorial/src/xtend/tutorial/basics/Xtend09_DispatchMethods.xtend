@@ -8,10 +8,12 @@ import xtend.tutorial.util.Shape
 class Xtend09_DispatchMethods extends TestCase {
 	
 	/**
-	 * in addition to the switch expression the dispatch keyword for overloaded functions can be used
-	 * to enable dynamic polymorphic dispatching.
+	 * In addition to the switch expression the dispatch keyword for
+	 * overloaded functions can be used to enable dynamic polymorphic 
+	 * dispatching.
 	 * 
-	 * Have a look at the generated Java code to understand how it is mapped to Java.
+	 * Have a look at the generated Java code to understand how it is 
+	 * mapped to Java.
 	 */
 	 
 	 def dispatch toLabel(Rectangle rectangle) {
@@ -26,7 +28,11 @@ class Xtend09_DispatchMethods extends TestCase {
 	 	'''It's a circle (diameter : «circle.diameter»)'''
 	 
 	 def void testDispatchMethods() {
-	 	val list = newArrayList(new Rectangle( 3, 4 ), new Circle( 3 ), new Rectangle( 5, 5 ))
+	 	val list = newArrayList(
+	 		new Rectangle( 3, 4 ), 
+	 		new Circle( 3 ), 
+	 		new Rectangle( 5, 5 )
+	 	)
 	 	for (Shape shape : list) {
 	 		println(shape.toLabel)
 	 	}
