@@ -57,21 +57,21 @@ import com.google.inject.name.Named;
  */
 public class XtextResource extends ResourceImpl {
 
-	public static String OPTION_RESOLVE_ALL = XtextResource.class.getName() + ".RESOLVE_ALL";
+	public static final String OPTION_RESOLVE_ALL = XtextResource.class.getName() + ".RESOLVE_ALL";
 
 	/**
 	 * @deprecated use {@link SaveOptions#configure(Map)} instead.
 	 */
 	@Deprecated
-	public static String OPTION_FORMAT = XtextResource.class.getName() + ".FORMAT";
+	public static final String OPTION_FORMAT = XtextResource.class.getName() + ".FORMAT";
 
 	/**
 	 * @deprecated use {@link SaveOptions#configure(Map)} instead.
 	 */
 	@Deprecated
-	public static String OPTION_SERIALIZATION_OPTIONS = XtextResource.class.getName() + ".SERIALIZATION_OPTIONS";
+	public static final String OPTION_SERIALIZATION_OPTIONS = XtextResource.class.getName() + ".SERIALIZATION_OPTIONS";
 
-	public static String OPTION_ENCODING = XtextResource.class.getName() + ".DEFAULT_ENCODING";
+	public static final String OPTION_ENCODING = XtextResource.class.getName() + ".DEFAULT_ENCODING";
 
 	private boolean validationDisabled;
 	
