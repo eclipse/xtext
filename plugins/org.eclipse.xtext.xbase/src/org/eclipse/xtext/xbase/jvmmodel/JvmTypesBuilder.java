@@ -170,6 +170,17 @@ public class JvmTypesBuilder {
 	}
 
 	/**
+	 * Embeds an expression from the source model into the body of a JvmExecutable.
+	 * 
+	 * @see IJvmModelAssociator
+	 * @see IJvmModelAssociations
+	 */
+	public JvmExecutable toBody(XExpression sourceExpression, JvmExecutable target) {
+		associator.associateLogicalContainer(sourceExpression, target);
+		return target;
+	}
+
+	/**
 	 * Creates a public method with the given name and the given return type and associates it with the given
 	 * sourceElement.
 	 */
