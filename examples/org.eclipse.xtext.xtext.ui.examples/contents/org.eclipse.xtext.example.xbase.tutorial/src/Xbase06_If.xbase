@@ -9,14 +9,18 @@ if ('foo'.length>3) {
 }
 // always true! (String)
 
-// the else branch is optional and if not specified 'else null' is inferred:
+/*
+ * The else branch is optional and if not specified 'else null' is 
+ * inferred:
+ */
 if ('foo'.length>3) {
 	'never true!'
 }
 // null (String)
 
 /*
- * This also means that control structure expressions like 'if' can occur wherever an expression is expected
+ * This also means that control structure expressions like 'if' can 
+ * occur wherever an expression is expected.
  */
 if (if ('foo'.length>3) 
 		false 
