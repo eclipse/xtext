@@ -20,7 +20,7 @@ val String s = "my String"
 // my String (void)
 
 /*
- * Generally Variable Declarations are only allowed within a Block, in
+ * Generally, variable Declarations are only allowed within a block. In
  * this language (pure xbase) the whole script is one block expression, 
  * which is why variable declarations are allowed without curly braces.
  * 
