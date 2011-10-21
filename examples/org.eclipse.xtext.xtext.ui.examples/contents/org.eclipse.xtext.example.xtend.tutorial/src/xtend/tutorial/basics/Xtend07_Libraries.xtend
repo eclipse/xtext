@@ -20,13 +20,13 @@ class Xtend07_Libraries extends TestCase {
 	
 	def testHigherOrderFunctions(Iterable<String> myStrings) {
 		
-		// find the first string with length 3
+		// Find the first string with length 3.
 		println(myStrings.findFirst(e|e.length == 3))
 		
-		// convert all to uppercase
+		// Convert all to uppercase.
 		println(myStrings.map(e|e.toUpperCase))
 		
-		// filter out strings longer than 3 characters
+		// Filter out strings longer than 3 characters.
 		println(myStrings.filter(e| e.length <= 3 ))
 	}
 	
@@ -34,7 +34,7 @@ class Xtend07_Libraries extends TestCase {
 	 * all operator are built via library
 	 */
 	def operators() {
-		// string concatenation is built via library
+		// String concatenation is built via library.
 		println('Hello'+' '+'World!')
 		
 		// arithemetics
