@@ -24,7 +24,6 @@ import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
 import org.eclipse.xtext.ui.tests.refactoring.resource.RefactoringTestLanguageFragmentProvider;
 
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -38,15 +37,11 @@ public class RenamedElementTrackerTest extends AbstractXtextTests {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		setInjector(Activator.getInstance().getInjector("org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage"));
 		getInjector().injectMembers(this);
 		fragmentProvider.setUseNames(true);
 	}
 	
-	@Override
-	public Injector getInjector() {
-		return Activator.getInstance().getInjector("org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage");
-	}
-
 	public void testResolveElements() throws Exception {
 		URI resourceURI = URI.createFileURI("testresource.refactoringtestlanguage");
 		String textualModel = "A { B { C { ref A.B } } ref B }";
