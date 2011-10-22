@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.featurecalls;
 
+import java.util.Collection;
 import java.util.Collections;
 
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -21,7 +22,7 @@ public class JvmFeatureScope extends SimpleScope {
 	private String scopeDescription;
 
 	@SuppressWarnings("unchecked")
-	public JvmFeatureScope(IScope parent, String scopeDescription, final Iterable<? extends IValidatedEObjectDescription> descriptions) {
+	public JvmFeatureScope(IScope parent, String scopeDescription, final Collection<? extends IValidatedEObjectDescription> descriptions) {
 		super(parent, (Iterable<IEObjectDescription>)(Iterable<?>)descriptions);
 		this.scopeDescription = scopeDescription;
 	}
@@ -41,9 +42,10 @@ public class JvmFeatureScope extends SimpleScope {
 		return String.valueOf(super.getShadowingKey(description));
 	}
 	
-	@SuppressWarnings("unchecked")
-	public Iterable<? extends IValidatedEObjectDescription> getJvmFeatureDescriptions() {
-		return (Iterable<? extends IValidatedEObjectDescription>) getAllLocalElements();
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public Iterable<IValidatedEObjectDescription> getJvmFeatureDescriptions() {
+		Iterable result = getAllLocalElements();
+		return result;
 	}
 	
 	@Override

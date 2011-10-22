@@ -67,13 +67,14 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 	
 	public JvmFeatureScope createFeatureScope(IScope parent, List<FeatureScopeDescription> featureScopeDescriptions) {
 		IScope result = parent;
+		List<LazyJvmFeatureScope> lazyScopes = Lists.newArrayListWithCapacity(featureScopeDescriptions.size());
 		for(IJvmFeatureScopeProvider.FeatureScopeDescription description: featureScopeDescriptions) {
-			result = createFeatureScopeForTypeRef(
-					result, description, false);
+			LazyJvmFeatureScope lazyScope = createFeatureScopeForTypeRef(description);
+			lazyScopes.add(lazyScope);
+			result = new FilteredDelegatingScope(result, lazyScope, false);
 		}
-		for(IJvmFeatureScopeProvider.FeatureScopeDescription description: featureScopeDescriptions) {
-			result = createFeatureScopeForTypeRef(
-					result, description, true);
+		for(LazyJvmFeatureScope lazyScope: lazyScopes) {
+			result = new FilteredDelegatingScope(result, lazyScope, true);
 		}
 		if (!(result instanceof JvmFeatureScope)) {
 			return new JvmFeatureScope(parent, "Empty feature scope", Collections.<IValidatedEObjectDescription>emptyList());
@@ -98,10 +99,7 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 	 * it is shadowed by valid elements and can be filtered out if not needed.
 	 * </p>
 	 */
-	protected JvmFeatureScope createFeatureScopeForTypeRef(
-			IScope parent,
-			FeatureScopeDescription featureScopeDescription,
-			boolean valid) {
+	protected LazyJvmFeatureScope createFeatureScopeForTypeRef(FeatureScopeDescription featureScopeDescription) {
 		JvmTypeReference receiverType = featureScopeDescription.getReceiverType();
 		ITypeArgumentContext context = typeArgumentContextProvider.getTypeArgumentContext(
 				new TypeArgumentContextProvider.ReceiverRequest(receiverType));
@@ -111,10 +109,10 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 		IFeaturesForTypeProvider featureProvider = featuresProvider;
 		if (featureDescriptionProvider instanceof IFeaturesForTypeProvider)
 			featureProvider = (IFeaturesForTypeProvider) featureDescriptionProvider;
-		LazyJvmFeatureScopeStrategy configuration = new LazyJvmFeatureScopeStrategy(
+		LazyJvmFeatureScopeStrategy strategy = new LazyJvmFeatureScopeStrategy(
 				featureDescriptionProvider, featureProvider, receiverType, 
 				featureScopeDescription.getContextFactory(), context, hierarchy);
-		JvmFeatureScope result = new LazyJvmFeatureScope(parent, featureDescriptionProvider.toString(), configuration, valid);
+		LazyJvmFeatureScope result = new LazyJvmFeatureScope(featureDescriptionProvider.toString(), strategy);
 		return result;
 	}
 	
