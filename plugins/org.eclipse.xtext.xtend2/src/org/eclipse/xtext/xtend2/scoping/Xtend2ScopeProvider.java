@@ -122,14 +122,14 @@ public class Xtend2ScopeProvider extends XbaseWithAnnotationsScopeProvider {
 					if (dependencyImplicitReceiver != null) {
 						ExtensionMethodsFeaturesProvider extensionFeatureProvider = extensionMethodsFeaturesProvider.get();
 						extensionFeatureProvider.setContext(extensionField.getType());
-						extensionFeatureProvider.setExpectNoParameters(implicitReceiver != null);
+						extensionFeatureProvider.setExpectNoParameters(isThis);
 						addFeatureDescriptionProviders(contextType, extensionFeatureProvider, callToDependency, implicitArgument, extensionPriority, acceptor);
 					}
 				}
 				JvmParameterizedTypeReference typeRef = typeReferences.createTypeRef(inferredJvmType);
 				ExtensionMethodsFeaturesProvider featureProvider = extensionMethodsFeaturesProvider.get();
 				featureProvider.setContext(typeRef);
-				featureProvider.setExpectNoParameters(implicitReceiver != null);
+				featureProvider.setExpectNoParameters(isThis);
 				addFeatureDescriptionProviders(contextType, featureProvider, callToThis, implicitArgument, priority + THIS_EXTENSION_PRIORITY_OFFSET, acceptor);
 			}
 		}

@@ -69,7 +69,7 @@ public class ExtensionMethodsFeaturesProvider extends AbstractFeaturesForTypePro
 							if (isSameTypeOrAssignableToUpperBound(reference, parameterType)) {
 								result.add(operation);
 							}
-						} else {
+						} else if (noParameters) {
 							result.add(operation);
 						}
 					}

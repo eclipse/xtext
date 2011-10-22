@@ -158,6 +158,20 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("org.eclipse.xtext.xbase.lib.ListExtensions.map(java.util.List,org.eclipse.xtext.xbase.lib.Functions$Function1)", call.getFeature().getIdentifier());
 	}
 	
+	public void testExtensionMethodCall_02() throws Exception {
+		XtendClass clazz = clazz("" +
+				"class Foo {" +
+				"  def doSomething() {\n" + 
+				"    new Object().doSomething\n" +
+				"  }\n" +
+				"  def doSomething(Object o) {}" +
+				"}");
+		XtendFunction func = (XtendFunction) clazz.getMembers().get(0);
+		final XMemberFeatureCall call = (XMemberFeatureCall)((XBlockExpression)func.getExpression()).getExpressions().get(0);
+		assertEquals("Foo.doSomething(java.lang.Object)", call.getFeature().getIdentifier());
+		assertNull(call.getInvalidFeatureIssueCode(), call.getInvalidFeatureIssueCode());
+	}
+	
 	public void testCaseFunction_00() throws Exception {
 		XtendFunction function = function("def dispatch String foo(String s) {_foo(s)}");
 		final XBlockExpression block = (XBlockExpression) function.getExpression();
@@ -1005,10 +1019,6 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertNull(seventh.getImplicitFirstArgument());
 		assertNull(seventh.getInvalidFeatureIssueCode(), seventh.getInvalidFeatureIssueCode());
 		assertEquals("it", ((XAbstractFeatureCall) seventh.getImplicitReceiver()).getFeature().getSimpleName());
-//		assertNull(seventh.getImplicitFirstArgument());
-//		assertNotNull(seventh.getImplicitReceiver());
-//		assertEquals("it", ((XAbstractFeatureCall) seventh.getImplicitReceiver()).getFeature().getSimpleName());
-//		assertNull(seventh.getInvalidFeatureIssueCode());
 	}
 	
 }
