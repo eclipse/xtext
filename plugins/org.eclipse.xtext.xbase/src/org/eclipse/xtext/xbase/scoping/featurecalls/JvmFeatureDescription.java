@@ -36,7 +36,7 @@ public class JvmFeatureDescription extends EObjectDescription implements IValida
 	private ITypeArgumentContext genericTypeContext;
 	private String shadowingString;
 	private Provider<String> shadowingStringProvider;
-	private final boolean isValid;
+	private final boolean isVisible;
 	private XExpression implicitReceiver;
 	private XExpression implicitArgument;
 	private int numberOfIrrelevantArguments = 0;
@@ -49,11 +49,11 @@ public class JvmFeatureDescription extends EObjectDescription implements IValida
 			JvmFeature feature, 
 			ITypeArgumentContext rawTypeContext,
 			String shadowingString, 
-			boolean isValid, 
+			boolean isVisible, 
 			XExpression implicitReceiver,
 			XExpression implicitArgument,
 			int numberOfIrrelevantArguments) {
-		this(qualifiedName, feature, rawTypeContext, isValid, implicitReceiver, implicitArgument, numberOfIrrelevantArguments);
+		this(qualifiedName, feature, rawTypeContext, isVisible, implicitReceiver, implicitArgument, numberOfIrrelevantArguments);
 		this.shadowingString = shadowingString;
 		this.shadowingStringProvider = null;
 	}
@@ -63,11 +63,11 @@ public class JvmFeatureDescription extends EObjectDescription implements IValida
 			JvmFeature feature, 
 			ITypeArgumentContext rawTypeContext,
 			Provider<String> shadowingStringProvider, 
-			boolean isValid, 
+			boolean isVisible, 
 			XExpression implicitReceiver,
 			XExpression implicitArgument,
 			int numberOfIrrelevantArguments) {
-		this(qualifiedName, feature, rawTypeContext, isValid, implicitReceiver, implicitArgument, numberOfIrrelevantArguments);
+		this(qualifiedName, feature, rawTypeContext, isVisible, implicitReceiver, implicitArgument, numberOfIrrelevantArguments);
 		this.shadowingStringProvider = shadowingStringProvider;
 	}
 	
@@ -75,13 +75,13 @@ public class JvmFeatureDescription extends EObjectDescription implements IValida
 			QualifiedName qualifiedName, 
 			JvmFeature feature, 
 			ITypeArgumentContext rawTypeContext,
-			boolean isValid, 
+			boolean isVisible, 
 			XExpression implicitReceiver,
 			XExpression implicitArgument,
 			int numberOfIrrelevantArguments) {
 		super(qualifiedName, feature, Collections.<String, String> emptyMap());
 		this.rawTypeContext = rawTypeContext;
-		this.isValid = isValid;
+		this.isVisible = isVisible;
 		this.implicitReceiver = implicitReceiver;
 		this.implicitArgument = implicitArgument;
 		this.numberOfIrrelevantArguments = numberOfIrrelevantArguments;
@@ -125,7 +125,11 @@ public class JvmFeatureDescription extends EObjectDescription implements IValida
 	}
 
 	public boolean isValid() {
-		return isValid && isEmpty(issueCode);
+		return isVisible && isEmpty(issueCode);
+	}
+	
+	public boolean isVisible() {
+		return isVisible;
 	}
 
 	public XExpression getImplicitReceiver() {

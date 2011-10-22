@@ -35,6 +35,10 @@ public class LocalVarDescription extends EObjectDescription implements IValidate
 		return isEmpty(issueCode);
 	}
 	
+	public boolean isVisible() {
+		return true;
+	}
+	
 	public String getKey() {
 		return getName().toString();
 	}
