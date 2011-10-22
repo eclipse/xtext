@@ -15,6 +15,7 @@ import java.util.List;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
@@ -73,6 +74,8 @@ public class ExtensionMethodsFeaturesProvider extends AbstractFeaturesForTypePro
 							result.add(operation);
 						}
 					}
+				} else if (candidate instanceof JvmField && noParameters) {
+					result.add(candidate);
 				}
 			}
 			if (!atLeastOneCandidate || noParameters)
