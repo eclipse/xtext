@@ -728,8 +728,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			}
 		});
 		if (log.isDebugEnabled()) {
-			log.debug("sortedDescriptionsFromLowestToHighest:\n");
-			log.debug(Joiner.on('\n').join(list));
+			log.debug("sortedDescriptionsFromLowestToHighest:\n" + Joiner.on('\n').join(list));
 		}
 	}
 	
