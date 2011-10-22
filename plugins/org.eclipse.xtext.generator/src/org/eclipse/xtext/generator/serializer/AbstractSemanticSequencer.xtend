@@ -15,7 +15,6 @@ import org.eclipse.xtext.serializer.analysis.Context2NameFunction
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic
-import org.eclipse.xtext.serializer.sequencer.AbstractSemanticSequencer
 import org.eclipse.xtext.serializer.sequencer.GenericSequencer
 import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer
