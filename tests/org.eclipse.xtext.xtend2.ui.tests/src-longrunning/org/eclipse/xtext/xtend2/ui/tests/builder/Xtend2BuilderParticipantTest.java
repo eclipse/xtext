@@ -63,7 +63,8 @@ public class Xtend2BuilderParticipantTest extends AbstractXtend2UITestCase {
 		waitForAutoBuild();
 		cleanBuild();
 		assertFalse(targetFile.exists());
-		assertFalse(targetFile.getParent().exists());
+		// don't delete folders per default
+		assertTrue(targetFile.getParent().exists());
 		assertFalse(classFile.exists());
 	}
 	
