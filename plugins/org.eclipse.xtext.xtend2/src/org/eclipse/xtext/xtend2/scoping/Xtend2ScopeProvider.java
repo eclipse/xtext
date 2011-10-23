@@ -70,7 +70,7 @@ public class Xtend2ScopeProvider extends XbaseWithAnnotationsScopeProvider {
 		staticProvider.setResourceContext(resource);
 		staticProvider.setExtensionProvider(false);
 		
-		addFeatureDescriptionProviders(contextType, staticProvider, null, null, IMPORTED_STATIC_FEATURE_PRIORITY, acceptor);
+		addFeatureDescriptionProviders(contextType, staticProvider, null, null, IMPORTED_STATIC_FEATURE_PRIORITY, true, acceptor);
 	}
 
 	@Override
@@ -92,9 +92,9 @@ public class Xtend2ScopeProvider extends XbaseWithAnnotationsScopeProvider {
 				SimpleAcceptor casted = (SimpleAcceptor) acceptor;
 				JvmTypeReference implicitArgumentType = getTypeProvider().getType(implicitArgument, true);
 				IAcceptor<IJvmFeatureDescriptionProvider> myAcceptor = casted.getParent().curry(implicitArgumentType, casted.getExpression());
-				addFeatureDescriptionProviders(contextType, staticProvider, implicitArgument, null, priority + STATIC_EXTENSION_PRIORITY_OFFSET, myAcceptor);
+				addFeatureDescriptionProviders(contextType, staticProvider, implicitArgument, null, priority + STATIC_EXTENSION_PRIORITY_OFFSET, true, myAcceptor);
 			} else {
-				addFeatureDescriptionProviders(contextType, staticProvider, implicitReceiver, implicitArgument, priority + STATIC_EXTENSION_PRIORITY_OFFSET, acceptor);
+				addFeatureDescriptionProviders(contextType, staticProvider, implicitReceiver, implicitArgument, priority + STATIC_EXTENSION_PRIORITY_OFFSET, true, acceptor);
 			}
 		}
 		
@@ -123,14 +123,14 @@ public class Xtend2ScopeProvider extends XbaseWithAnnotationsScopeProvider {
 						ExtensionMethodsFeaturesProvider extensionFeatureProvider = extensionMethodsFeaturesProvider.get();
 						extensionFeatureProvider.setContext(extensionField.getType());
 						extensionFeatureProvider.setExpectNoParameters(isThis);
-						addFeatureDescriptionProviders(contextType, extensionFeatureProvider, callToDependency, implicitArgument, extensionPriority, acceptor);
+						addFeatureDescriptionProviders(contextType, extensionFeatureProvider, callToDependency, implicitArgument, extensionPriority, false, acceptor);
 					}
 				}
 				JvmParameterizedTypeReference typeRef = typeReferences.createTypeRef(inferredJvmType);
 				ExtensionMethodsFeaturesProvider featureProvider = extensionMethodsFeaturesProvider.get();
 				featureProvider.setContext(typeRef);
 				featureProvider.setExpectNoParameters(isThis);
-				addFeatureDescriptionProviders(contextType, featureProvider, callToThis, implicitArgument, priority + THIS_EXTENSION_PRIORITY_OFFSET, acceptor);
+				addFeatureDescriptionProviders(contextType, featureProvider, callToThis, implicitArgument, priority + THIS_EXTENSION_PRIORITY_OFFSET, false, acceptor);
 			}
 		}
 	}

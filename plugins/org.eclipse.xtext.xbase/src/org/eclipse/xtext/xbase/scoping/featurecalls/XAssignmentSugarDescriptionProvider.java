@@ -42,7 +42,7 @@ public class XAssignmentSugarDescriptionProvider extends DefaultJvmFeatureDescri
 					}
 				};
 				JvmFeatureDescription description = createJvmFeatureDescription(QualifiedName.create(propertyName), 
-						jvmOperation, context, signatureProvider, isValid(feature));
+						jvmOperation, context, signatureProvider, isVisible(feature), isValidStaticState(feature));
 				acceptor.accept(description);
 			}
 		}

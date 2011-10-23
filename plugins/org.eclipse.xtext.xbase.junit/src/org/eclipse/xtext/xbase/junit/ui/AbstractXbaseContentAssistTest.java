@@ -3,6 +3,7 @@ package org.eclipse.xtext.xbase.junit.ui;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -135,38 +136,55 @@ public abstract class AbstractXbaseContentAssistTest extends TestCase implements
 	};
 	
 	protected static final String[] STRING_FEATURES;
+	protected static final String[] STATIC_STRING_FEATURES;
 	
 	static {
 		List<String> features = Lists.newArrayList();
+		List<String> staticFeatures = Lists.newArrayList();
 		for(Method method: String.class.getMethods()) {
+			List<String> list = features;
+			if (Modifier.isStatic(method.getModifiers()))
+				list = staticFeatures;
 			if (method.getParameterTypes().length == 0) {
 				if (method.getName().startsWith("get") && method.getParameterTypes().length == 0) {
-					features.add(Strings.toFirstLower(method.getName().substring(3)));
+					list.add(Strings.toFirstLower(method.getName().substring(3)));
 				} else if (method.getName().startsWith("is") && method.getParameterTypes().length == 0) {
-					features.add(Strings.toFirstLower(method.getName().substring(2)));
+					list.add(Strings.toFirstLower(method.getName().substring(2)));
 				} else {
-					features.add(method.getName());
+					list.add(method.getName());
 				}
 			} else {
-				features.add(method.getName() + "()");				
+				list.add(method.getName() + "()");				
 			}
 		}
 		// compareTo(T) is actually overridden by compareTo(String) but contained twice in String.class#getMethods
 		features.remove("compareTo()");
 		Set<String> featuresAsSet = Sets.newHashSet(features);
+		Set<String> staticFeaturesAsSet = Sets.newHashSet(staticFeatures);
 		for(Field field: String.class.getFields()) {
-			if (featuresAsSet.add(field.getName()))
-				features.add(field.getName());
+			Set<String> asSet = featuresAsSet;
+			List<String> list = features;
+			if (Modifier.isStatic(field.getModifiers())) {
+				list = staticFeatures;
+				asSet = staticFeaturesAsSet;
+			}
+			if (asSet.add(field.getName()))
+				list.add(field.getName());
 		}
 		// StringExtensions
 		features.add("toFirstLower");
 		features.add("toFirstUpper");
 		features.add("nullOrEmpty");
 		STRING_FEATURES = features.toArray(new String[features.size()]);
+		STATIC_STRING_FEATURES = staticFeatures.toArray(new String[staticFeatures.size()]);
 	}
 	
 	public String[] getStringFeatures() {
 		return STRING_FEATURES;
+	}
+	
+	public String[] getStaticStringFeatures() {
+		return STATIC_STRING_FEATURES;
 	}
 
 	protected String[] expect(String[]... arrays) {
@@ -374,7 +392,7 @@ public abstract class AbstractXbaseContentAssistTest extends TestCase implements
 	
 	// TODO: limit to static features
 	@Test public void testStaticFeatures_01() throws Exception {
-		newBuilder().append("String::").assertText(getStringFeatures());
+		newBuilder().append("String::").assertText(getStaticStringFeatures());
 	}
 	
 	@Test public void testNull() throws Exception {

@@ -39,6 +39,10 @@ public class LocalVarDescription extends EObjectDescription implements IValidate
 		return true;
 	}
 	
+	public boolean isValidStaticState() {
+		return true;
+	}
+	
 	public String getKey() {
 		return getName().toString();
 	}
