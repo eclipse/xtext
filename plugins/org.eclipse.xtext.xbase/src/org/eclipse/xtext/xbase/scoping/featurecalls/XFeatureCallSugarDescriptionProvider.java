@@ -81,7 +81,7 @@ public class XFeatureCallSugarDescriptionProvider extends DefaultJvmFeatureDescr
 						}
 					};
 					acceptor.accept(createJvmFeatureDescription(operator, op, context, shadowingStringProvider,
-							isValid(feature)));
+							isVisible(feature), isValidStaticState(feature)));
 				}
 			}
 			if (syntacticalNumberOfArguments==0) {
@@ -90,13 +90,13 @@ public class XFeatureCallSugarDescriptionProvider extends DefaultJvmFeatureDescr
 					public String get() {
 						return op.getSimpleName();
 					}
-				}, isValid(feature)));
+				}, isVisible(feature), isValidStaticState(feature)));
 				// handle property access for getter
 				if (isGetterMethod(op)) {
 					String propertyName = getPropertyNameForGetterMethod(op.getSimpleName());
 					if (propertyName != null) {
 						acceptor.accept(createJvmFeatureDescription(QualifiedName.create(propertyName), op, context,
-								propertyName, isValid(feature)));
+								propertyName, isVisible(feature), isValidStaticState(feature)));
 					}
 				}
 			}

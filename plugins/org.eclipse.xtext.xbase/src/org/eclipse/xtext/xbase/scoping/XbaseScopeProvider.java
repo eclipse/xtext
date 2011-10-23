@@ -276,6 +276,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 										typeArgumentContext,
 										constructor.getIdentifier(),
 										true,
+										true,
 										null,
 										null,
 										0);
@@ -345,7 +346,10 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			XFeatureCall featureCall = (XFeatureCall) context;
 			if (featureCall.getDeclaringType() != null) {
 				JvmParameterizedTypeReference typeReference = typeReferences.createTypeRef(featureCall.getDeclaringType());
-				IScope result = createFeatureScopeForTypeRef(typeReference, context, null, IScope.NULLSCOPE);
+				JvmFeatureScopeAcceptor featureScopeDescriptions = new JvmFeatureScopeAcceptor();
+				IAcceptor<IJvmFeatureDescriptionProvider> curried = featureScopeDescriptions.curry(typeReference, featureCall);
+				addFeatureDescriptionProviders(getContextType(featureCall), null, null, null, getDefaultPriority(), true, curried);
+				IScope result = featureScopeDescriptions.createScope(IScope.NULLSCOPE);
 				return result;
 			}
 		}
@@ -785,7 +789,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		StaticMethodsFeatureForTypeProvider staticProvider = newImplicitStaticFeaturesProvider();
 		staticProvider.setResourceContext(resource);
 		
-		addFeatureDescriptionProviders(contextType, staticProvider, null, null, getImplicitStaticFeaturePriority(), acceptor);
+		addFeatureDescriptionProviders(contextType, staticProvider, null, null, getImplicitStaticFeaturePriority(), true, acceptor);
 	}
 	
 	protected int getThisPriority() {
@@ -818,6 +822,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			XExpression implicitReceiver,
 			XExpression implicitArgument,
 			int priority,
+			boolean preferStatics,
 			IAcceptor<IJvmFeatureDescriptionProvider> acceptor) {
 		DefaultJvmFeatureDescriptionProvider defaultProvider = newDefaultFeatureDescriptionProvider();
 		defaultProvider.setContextType(contextType);
@@ -826,6 +831,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			defaultProvider.setFeaturesForTypeProvider(featureProvider);
 		defaultProvider.setImplicitReceiver(implicitReceiver);
 		defaultProvider.setImplicitArgument(implicitArgument);
+		defaultProvider.setPreferStatics(preferStatics);
 		acceptor.accept(defaultProvider);
 
 		XFeatureCallSugarDescriptionProvider sugarProvider = newSugarDescriptionProvider();
@@ -835,6 +841,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			sugarProvider.setFeaturesForTypeProvider(featureProvider);
 		sugarProvider.setImplicitReceiver(implicitReceiver);
 		sugarProvider.setImplicitArgument(implicitArgument);
+		sugarProvider.setPreferStatics(preferStatics);
 		acceptor.accept(sugarProvider);
 	}
 
@@ -845,14 +852,14 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			XExpression implicitArgument,
 			int priority,
 			IAcceptor<IJvmFeatureDescriptionProvider> acceptor) {
-		addFeatureDescriptionProviders(contextType, null, implicitReceiver, implicitArgument, priority, acceptor);
+		addFeatureDescriptionProviders(contextType, null, implicitReceiver, implicitArgument, priority, false, acceptor);
 		
 		if (implicitArgument == null) {
 			StaticMethodsFeatureForTypeProvider implicitStaticFeatures = newImplicitStaticFeaturesProvider();
 			implicitStaticFeatures.setResourceContext(resource);
 			implicitStaticFeatures.setExtensionProvider(true);
 			
-			addFeatureDescriptionProviders(contextType, implicitStaticFeatures, implicitReceiver, implicitArgument, priority + getImplicitStaticExtensionPriorityOffset(), acceptor);
+			addFeatureDescriptionProviders(contextType, implicitStaticFeatures, implicitReceiver, implicitArgument, priority + getImplicitStaticExtensionPriorityOffset(), true, acceptor);
 		}
 	}
 

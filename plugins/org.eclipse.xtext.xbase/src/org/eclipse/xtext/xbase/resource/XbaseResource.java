@@ -139,6 +139,7 @@ public class XbaseResource extends DerivedStateAwareResource {
 			return algorithm.get();
 		} finally {
 			state.proxyToAssumption.remove(proxy);
+			state.featureCallToFirstArgumentAssumption.remove(featureCall);
 			state.featureCallToReceiverAssumption.remove(featureCall);
 		}
 	}

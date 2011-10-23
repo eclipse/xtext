@@ -30,11 +30,11 @@ import com.google.inject.Provider;
  */
 public class FilteredDelegatingScope extends DelegatingScope implements Predicate<IEObjectDescription>{
 	
-	private final boolean onlyVisible;
+	private final boolean onlyVisibleAndValidStaticState;
 
-	protected FilteredDelegatingScope(IScope parent, LazyJvmFeatureScope unfiltered, boolean onlyVisible) {
+	protected FilteredDelegatingScope(IScope parent, LazyJvmFeatureScope unfiltered, boolean onlyVisibleAndValidStaticState) {
 		super(parent, "FilteredDelegatingScope");
-		this.onlyVisible = onlyVisible;
+		this.onlyVisibleAndValidStaticState = onlyVisibleAndValidStaticState;
 		super.setDelegate(unfiltered);
 	}
 	
@@ -92,7 +92,8 @@ public class FilteredDelegatingScope extends DelegatingScope implements Predicat
 
 	public boolean apply(IEObjectDescription input) {
 		if (input instanceof IValidatedEObjectDescription) {
-			boolean result = onlyVisible == ((IValidatedEObjectDescription) input).isVisible();
+			IValidatedEObjectDescription casted = (IValidatedEObjectDescription) input;
+			boolean result = onlyVisibleAndValidStaticState == (casted.isVisible() && casted.isValidStaticState());
 			return result;
 		}
 		return false;

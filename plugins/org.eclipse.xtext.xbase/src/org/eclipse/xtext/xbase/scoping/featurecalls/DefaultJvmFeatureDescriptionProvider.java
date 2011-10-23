@@ -11,7 +11,8 @@ import java.util.Map;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
-import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.VisibilityService;
@@ -127,6 +128,11 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 	protected XExpression implicitReceiver;
 	protected XExpression implicitArgument;
 	protected int priority;
+	protected boolean preferStatics;
+
+	public void setPreferStatics(boolean preferStatics) {
+		this.preferStatics = preferStatics;
+	}
 	
 	public void setPriority(int priority) {
 		this.priority = priority;
@@ -157,13 +163,13 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 	}
 	
 	protected JvmFeatureDescription createJvmFeatureDescription(QualifiedName name, JvmFeature jvmFeature,
-			ITypeArgumentContext rawTypeContext, String shadowingString, boolean isValid) {
-		return new JvmFeatureDescription(name, jvmFeature, rawTypeContext, shadowingString, isValid, implicitReceiver, implicitArgument, getNumberOfIrrelevantArguments());
+			ITypeArgumentContext rawTypeContext, String shadowingString, boolean isValid, boolean isValidStaticState) {
+		return new JvmFeatureDescription(name, jvmFeature, rawTypeContext, shadowingString, isValid, isValidStaticState, implicitReceiver, implicitArgument, getNumberOfIrrelevantArguments());
 	}
 	
 	protected JvmFeatureDescription createJvmFeatureDescription(QualifiedName name, JvmFeature jvmFeature,
-			ITypeArgumentContext rawTypeContext, Provider<String> shadowingStringProvider, boolean isValid) {
-		return new JvmFeatureDescription(name, jvmFeature, rawTypeContext, shadowingStringProvider, isValid, implicitReceiver, implicitArgument, getNumberOfIrrelevantArguments());
+			ITypeArgumentContext rawTypeContext, Provider<String> shadowingStringProvider, boolean isVisible, boolean isValidStaticState) {
+		return new JvmFeatureDescription(name, jvmFeature, rawTypeContext, shadowingStringProvider, isVisible, isValidStaticState, implicitReceiver, implicitArgument, getNumberOfIrrelevantArguments());
 	}
 	
 	protected int getNumberOfIrrelevantArguments() {
@@ -178,17 +184,17 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 
 	protected JvmFeatureDescription createJvmFeatureDescription(
 			JvmFeature jvmFeature, ITypeArgumentContext rawTypeContext,
-			Provider<String> shadowingStringProvider, boolean isValid) {
+			Provider<String> shadowingStringProvider, boolean isValid, boolean isValidStaticState) {
 		return createJvmFeatureDescription(
 				QualifiedName.create(jvmFeature.getSimpleName()), 
-				jvmFeature, rawTypeContext, shadowingStringProvider, isValid);
+				jvmFeature, rawTypeContext, shadowingStringProvider, isValid, isValidStaticState);
 	}
 
 	public void addFeatureDescriptions(JvmFeature feature, 
 			ITypeArgumentContext rawTypeContext, 
 			IAcceptor<JvmFeatureDescription> acceptor) {
 		Provider<String> signatureProvider = getSignature(feature, rawTypeContext);
-		acceptor.accept(createJvmFeatureDescription(feature, rawTypeContext, signatureProvider, isValid(feature)));
+		acceptor.accept(createJvmFeatureDescription(feature, rawTypeContext, signatureProvider, isVisible(feature), isValidStaticState(feature)));
 	}
 
 	protected Provider<String> getSignature(final JvmFeature feature, final ITypeArgumentContext context) {
@@ -199,9 +205,20 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 		};
 	}
 
-	protected boolean isValid(JvmFeature feature) {
-		final JvmMember jvmMember = feature;
-		return visibilityService.isVisible(jvmMember, contextType);
+	protected boolean isVisible(JvmFeature feature) {
+		return visibilityService.isVisible(feature, contextType);
+	}
+	
+	protected boolean isValidStaticState(JvmFeature feature) {
+		if (feature instanceof JvmOperation) {
+			if (preferStatics != ((JvmOperation) feature).isStatic())
+				return false;
+		}
+		if (feature instanceof JvmField) {
+			if (preferStatics != ((JvmField) feature).isStatic())
+				return false;
+		}
+		return true;
 	}
 
 	@Override

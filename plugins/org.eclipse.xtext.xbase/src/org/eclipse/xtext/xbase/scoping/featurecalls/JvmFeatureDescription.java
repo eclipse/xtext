@@ -43,6 +43,7 @@ public class JvmFeatureDescription extends EObjectDescription implements IValida
 	private String issueCode;
 	private CheckState checkState;
 	private List<EnumSet<TypeConformanceResult.Kind>> argumentConversionHints;
+	private boolean isValidStaticState;
 
 	public JvmFeatureDescription(
 			QualifiedName qualifiedName, 
@@ -50,10 +51,11 @@ public class JvmFeatureDescription extends EObjectDescription implements IValida
 			ITypeArgumentContext rawTypeContext,
 			String shadowingString, 
 			boolean isVisible, 
+			boolean isValidStaticState,
 			XExpression implicitReceiver,
 			XExpression implicitArgument,
 			int numberOfIrrelevantArguments) {
-		this(qualifiedName, feature, rawTypeContext, isVisible, implicitReceiver, implicitArgument, numberOfIrrelevantArguments);
+		this(qualifiedName, feature, rawTypeContext, isVisible, isValidStaticState, implicitReceiver, implicitArgument, numberOfIrrelevantArguments);
 		this.shadowingString = shadowingString;
 		this.shadowingStringProvider = null;
 	}
@@ -64,10 +66,11 @@ public class JvmFeatureDescription extends EObjectDescription implements IValida
 			ITypeArgumentContext rawTypeContext,
 			Provider<String> shadowingStringProvider, 
 			boolean isVisible, 
+			boolean isValidStaticState,
 			XExpression implicitReceiver,
 			XExpression implicitArgument,
 			int numberOfIrrelevantArguments) {
-		this(qualifiedName, feature, rawTypeContext, isVisible, implicitReceiver, implicitArgument, numberOfIrrelevantArguments);
+		this(qualifiedName, feature, rawTypeContext, isVisible, isValidStaticState, implicitReceiver, implicitArgument, numberOfIrrelevantArguments);
 		this.shadowingStringProvider = shadowingStringProvider;
 	}
 	
@@ -76,12 +79,14 @@ public class JvmFeatureDescription extends EObjectDescription implements IValida
 			JvmFeature feature, 
 			ITypeArgumentContext rawTypeContext,
 			boolean isVisible, 
+			boolean isValidStaticState, 
 			XExpression implicitReceiver,
 			XExpression implicitArgument,
 			int numberOfIrrelevantArguments) {
 		super(qualifiedName, feature, Collections.<String, String> emptyMap());
 		this.rawTypeContext = rawTypeContext;
 		this.isVisible = isVisible;
+		this.isValidStaticState = isValidStaticState;
 		this.implicitReceiver = implicitReceiver;
 		this.implicitArgument = implicitArgument;
 		this.numberOfIrrelevantArguments = numberOfIrrelevantArguments;
@@ -130,6 +135,10 @@ public class JvmFeatureDescription extends EObjectDescription implements IValida
 	
 	public boolean isVisible() {
 		return isVisible;
+	}
+	
+	public boolean isValidStaticState() {
+		return isValidStaticState;
 	}
 
 	public XExpression getImplicitReceiver() {

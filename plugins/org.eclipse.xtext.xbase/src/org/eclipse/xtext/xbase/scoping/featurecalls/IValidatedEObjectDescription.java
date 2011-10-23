@@ -19,6 +19,8 @@ public interface IValidatedEObjectDescription extends IEObjectDescription {
 	
 	boolean isVisible();
 	
+	boolean isValidStaticState();
+	
 	void setIssueCode(String issueCode);
 	
 	String getIssueCode();
