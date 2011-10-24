@@ -47,12 +47,30 @@ public class GeneratorFragment extends AbstractGeneratorFragment {
 		this.generateMwe = generateMwe;
 	}
 	
+	public boolean isGenerateStub(Grammar grammar) {
+		if (XbaseGeneratorFragment.doesUseXbase(grammar)) {
+			return false;
+		}
+		return generatorStub;
+	}
+	
+	public boolean isGenerateJavaMain(Grammar grammar) {
+		if (XbaseGeneratorFragment.doesUseXbase(grammar)) {
+			return false;
+		}
+		return generateJavaMain;
+	}
+	
+	public boolean isGenerateMwe(Grammar grammar) {
+		if (XbaseGeneratorFragment.doesUseXbase(grammar)) {
+			return false;
+		}
+		return generateMwe;
+	}
+	
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
-		if (XbaseGeneratorFragment.doesUseXbase(grammar)) {
-			return newArrayList((Object)false, (Object)false, (Object)false);
-		}
-		return newArrayList((Object)generatorStub, (Object)generateMwe, (Object)generateJavaMain);
+		return newArrayList((Object)isGenerateStub(grammar), (Object)isGenerateMwe(grammar), (Object)isGenerateJavaMain(grammar));
 	}
 	
 	@Override
@@ -85,6 +103,9 @@ public class GeneratorFragment extends AbstractGeneratorFragment {
 	
 	@Override
 	public String[] getExportedPackagesRt(Grammar grammar) {
-		return new String[] { Strings.skipLastToken(getGeneratorName(grammar, getNaming()), ".") };
+		if (isGenerateStub(grammar) || isGenerateMwe(grammar) || isGenerateJavaMain(grammar))
+			return new String[] { Strings.skipLastToken(getGeneratorName(grammar, getNaming()), ".") };
+		else 
+			return new String[0];
 	}
 }

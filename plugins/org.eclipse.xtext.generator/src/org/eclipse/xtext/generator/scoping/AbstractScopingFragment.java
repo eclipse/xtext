@@ -44,6 +44,16 @@ public abstract class AbstractScopingFragment extends AbstractInheritingGenerato
 	}
 	
 	/**
+	 * @since 2.1
+	 */
+	public boolean isGenerateStub(Grammar grammar) {
+		if (XbaseGeneratorFragment.doesUseXbase(grammar)) {
+			return false;
+		}
+		return isGenerateStub();
+	}
+	
+	/**
 	 * @since 2.0
 	 */
 	public void setGenerateStub(boolean generateStub) {
@@ -94,15 +104,14 @@ public abstract class AbstractScopingFragment extends AbstractInheritingGenerato
 
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
-		boolean genStub = isGenerateStub();
-		if (XbaseGeneratorFragment.doesUseXbase(grammar)) {
-			genStub = false;
-		}
+		boolean genStub = isGenerateStub(grammar);
 		return newArrayList((Object)getScopeProviderSuperClassName(grammar), (Object)genStub);
 	}
 	
 	@Override
 	public String[] getExportedPackagesRt(Grammar grammar) {
+		if (!isGenerateStub(grammar))
+			return new String[0];
 		return new String[] { Strings.skipLastToken(getScopeProviderName(grammar, getNaming()),".") };
 	}
 }

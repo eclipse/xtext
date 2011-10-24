@@ -18,8 +18,8 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.resource.LinkingAssumptions;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
-import com.google.inject.internal.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
