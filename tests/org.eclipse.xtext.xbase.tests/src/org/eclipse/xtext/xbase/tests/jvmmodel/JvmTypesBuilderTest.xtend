@@ -45,6 +45,22 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 		assertEquals("Foo", (type.annotations.head.values.head as JvmStringAnnotationValue).values.head)
 	}
 	
+	def void testStringAnnotationWithNullExpression() {
+		val f = XAnnotationsFactory::eINSTANCE
+		val typesFactory = TypesFactory::eINSTANCE
+		val context = expression("'Foo'");
+		
+		val anno = f.createXAnnotation;
+		anno.annotationType = references.findDeclaredType(typeof(Inject), context) as JvmAnnotationType
+		val pair = f.createXAnnotationElementValuePair
+		anno.elementValuePairs += pair
+		val type = typesFactory.createJvmGenericType
+		newArrayList(anno).translateAnnotationsTo(type)
+		
+		assertEquals(anno.annotationType, type.annotations.head.annotation)
+		assertTrue(type.annotations.head.values.empty)
+	}
+	
 	def void testStringArrayAnnotation() {
 		val f = XAnnotationsFactory::eINSTANCE
 		val typesFactory = TypesFactory::eINSTANCE
@@ -64,5 +80,22 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 		assertEquals(anno.annotationType, type.annotations.head.annotation)
 		assertEquals("Foo", (type.annotations.head.values.head as JvmStringAnnotationValue).values.head)
 		assertEquals("Bar", (type.annotations.head.values.head as JvmStringAnnotationValue).values.get(1))
+	}
+	
+	def void testStringArrayAnnotationWithNullExpression() {
+		val f = XAnnotationsFactory::eINSTANCE
+		val typesFactory = TypesFactory::eINSTANCE
+		val context = expression('"foo"')
+		
+		val anno = f.createXAnnotation
+		anno.annotationType = references.findDeclaredType(typeof(Inject), context) as JvmAnnotationType
+		val array = f.createXAnnotationValueArray
+		anno.value = array
+		
+		val type = typesFactory.createJvmGenericType
+		newArrayList(anno).translateAnnotationsTo(type)
+		
+		assertEquals(anno.annotationType, type.annotations.head.annotation)
+		assertTrue(type.annotations.head.values.empty)
 	}
 }
