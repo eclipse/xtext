@@ -10,7 +10,11 @@ package org.eclipse.xtext.ui.editor.outline.quickoutline;
 import java.util.regex.Pattern;
 
 /**
+ * Matches a given {@link String} against a prefix pattern. The matching algorithm
+ * will return <code>true</code> if the tested string starts with the given pattern.
+ * The pattern suppors wildcards such as <code>*</code> and <code>?</code>.
  * @author Peter Friese - Initial contribution and API
+ * @author Sebastian Zarnekow - Javadoc, minor fixes to the matching algorithm
  */
 public class StringMatcher {
 	
@@ -35,6 +39,8 @@ public class StringMatcher {
 		expression = expression.replaceAll("\\}", "\\\\}");
 		expression = expression.replaceAll("\\*", ".*");
 		expression = expression.replaceAll("\\?", ".");
+		if (!expression.startsWith("^"))
+			expression = "^" + expression;
 		return expression;
 	}
 	
@@ -54,7 +60,7 @@ public class StringMatcher {
 	}
 	
 	public boolean match(String text) {
-		return getPattern().matcher(text).matches();
+		return getPattern().matcher(text).find();
 	}
 
 }
