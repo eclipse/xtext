@@ -118,10 +118,118 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 			  }
 			  
 			  public void foo(final Object s) {
-			    if ((s instanceof String)) {
+			    if (s instanceof String) {
 			      _foo((String)s);
 			    } else {
-			      _foo((Object)s);
+			      _foo(s);
+			    }
+			  }
+			}
+		''')
+	}
+	
+	def testParenthesisInDispatchMethodsGuards() {
+		assertCompilesTo('''
+			package foo
+			class MyType {
+				def dispatch void foo(String s, CharSequence other) {}
+				def dispatch void foo(String s, Void other) {}
+				def dispatch void foo(Object s, Object other) {}
+			}
+		''', '''
+			package foo;
+
+			@SuppressWarnings("all")
+			public class MyType {
+			  protected void _foo(final String s, final CharSequence other) {
+			  }
+			  
+			  protected void _foo(final String s, final Void other) {
+			  }
+			  
+			  protected void _foo(final Object s, final Object other) {
+			  }
+			  
+			  public void foo(final Object s, final Object other) {
+			    if ((s instanceof String)
+			         && (other instanceof CharSequence)) {
+			      _foo((String)s, (CharSequence)other);
+			    } else if ((s instanceof String)
+			         && (other == null)) {
+			      _foo((String)s, (Void)null);
+			    } else {
+			      _foo(s, other);
+			    }
+			  }
+			}
+		''')
+	}
+	
+	def testParenthesisInDispatchMethodsGuards_reordered() {
+		assertCompilesTo('''
+			package foo
+			class MyType {
+				def dispatch void foo(Object s, Object other) {}
+				def dispatch void foo(String s, Void other) {}
+				def dispatch void foo(String s, CharSequence other) {}
+			}
+		''', '''
+			package foo;
+
+			@SuppressWarnings("all")
+			public class MyType {
+			  protected void _foo(final Object s, final Object other) {
+			  }
+			  
+			  protected void _foo(final String s, final Void other) {
+			  }
+			  
+			  protected void _foo(final String s, final CharSequence other) {
+			  }
+			  
+			  public void foo(final Object s, final Object other) {
+			    if ((s instanceof String)
+			         && (other instanceof CharSequence)) {
+			      _foo((String)s, (CharSequence)other);
+			    } else if ((s instanceof String)
+			         && (other == null)) {
+			      _foo((String)s, (Void)null);
+			    } else {
+			      _foo(s, other);
+			    }
+			  }
+			}
+		''')
+	}
+
+	def testNoUncessaryCastInDispatchMethods() {
+		assertCompilesTo('''
+			package foo
+			class MyType {
+				def dispatch void foo(StringBuilder s, boolean b, String other) {}
+				def dispatch void foo(StringBuffer s, boolean b, String other) {}
+			}
+		''', '''
+			package foo;
+			
+			import java.util.Arrays;
+			
+			@SuppressWarnings("all")
+			public class MyType {
+			  protected void _foo(final StringBuilder s, final boolean b, final String other) {
+			  }
+			  
+			  protected void _foo(final StringBuffer s, final boolean b, final String other) {
+			  }
+			  
+			  public void foo(final Object s, final boolean b, final String other) {
+			    if (s instanceof StringBuffer) {
+			      _foo((StringBuffer)s, b, other);
+			    } else if (s instanceof StringBuilder) {
+			      _foo((StringBuilder)s, b, other);
+			    } else {
+			      throw new IllegalArgumentException("Unhandled parameter types: " +
+			        Arrays.<Object>asList(s, b, other).toString());
 			    }
 			  }
 			}

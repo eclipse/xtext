@@ -796,16 +796,18 @@ public class JvmModelGenerator implements IGenerator {
       DocumentationAdapter _head = IterableExtensions.<DocumentationAdapter>head(_filter);
       final DocumentationAdapter adapter = _head;
       StringConcatenation _xifexpression = null;
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(adapter, null);
-      if (_operator_notEquals) {
+      String _documentation = adapter==null?(String)null:adapter.getDocumentation();
+      boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_documentation);
+      boolean _operator_not = BooleanExtensions.operator_not(_isNullOrEmpty);
+      if (_operator_not) {
         {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("/**");
           final StringConcatenation doc = _builder;
           doc.newLine();
           doc.append(" * ");
-          String _documentation = adapter.getDocumentation();
-          doc.append(_documentation, " * ");
+          String _documentation_1 = adapter.getDocumentation();
+          doc.append(_documentation_1, " * ");
           doc.newLine();
           doc.append(" */");
           doc.newLine();
