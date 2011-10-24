@@ -146,7 +146,13 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 			}
 			CacheAdapter adapter = getOrCreate(resource);
 			T element = adapter.<T>get(key);
-			if (element==null) {
+			// we could have unloaded cached values that were contained in another resource
+			// thus #resource was never notified about the change
+			boolean validEntry = element != null;
+			if (validEntry && element instanceof EObject) {
+				validEntry = !((EObject) element).eIsProxy();
+			}
+			if (!validEntry) {
 				cacheMiss(adapter);
 				Tracker tracker = linkingAssumptions.trackAssumptions(resource);
 				element = provider.get();
