@@ -212,7 +212,7 @@ class JvmModelGenerator implements IGenerator {
 	
 	def generateJavaDoc(EObject it) {
 		val adapter = it.eAdapters.filter(typeof(DocumentationAdapter)).head
-		if(adapter != null) {
+		if(!adapter?.documentation.nullOrEmpty) {
 			val doc = '''/**''';
 			doc.newLine
 			doc.append(" * ")
