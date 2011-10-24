@@ -2161,6 +2161,19 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"zonk");
 	}
 	
+	public void testAssignmentWithExtension_01() throws Exception {
+		invokeAndExpect2(
+				"Hello World", 
+				"def doStuff(String it, String addMe) {\n" + 
+				"  things=addMe\n" + 
+				"}\n" + 
+				"def setThings(String left, String right) {\n" + 
+				"  left + ' ' + right\n" + 
+				"}", 
+				"doStuff", 
+				"Hello", "World");
+	}
+	
 	@Inject
 	private EclipseRuntimeDependentJavaCompiler javaCompiler;
 

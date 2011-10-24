@@ -213,8 +213,7 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 		if (feature instanceof JvmOperation) {
 			if (preferStatics != ((JvmOperation) feature).isStatic())
 				return false;
-		}
-		if (feature instanceof JvmField) {
+		} else if (feature instanceof JvmField) {
 			if (preferStatics != ((JvmField) feature).isStatic())
 				return false;
 		}

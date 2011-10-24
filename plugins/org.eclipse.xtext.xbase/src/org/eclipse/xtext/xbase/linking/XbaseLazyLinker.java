@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.linking.lazy.LazyLinker;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
-import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 /**
@@ -27,9 +26,7 @@ public class XbaseLazyLinker extends LazyLinker {
 			XAbstractFeatureCall featureCall = (XAbstractFeatureCall) obj;
 			featureCall.setImplicitReceiver(null);
 			featureCall.setInvalidFeatureIssueCode(null);
-			if (featureCall instanceof XFeatureCall) {
-				((XFeatureCall) featureCall).setImplicitFirstArgument(null);
-			}
+			featureCall.setImplicitFirstArgument(null);
 		} else if (obj instanceof JvmSpecializedTypeReference) {
 			((JvmSpecializedTypeReference) obj).setEquivalent(null);
 			if (ref == XtypePackage.Literals.XFUNCTION_TYPE_REF__TYPE) {
