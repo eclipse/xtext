@@ -38,6 +38,7 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfigurati
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
@@ -157,7 +158,7 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 				if (jvmOperation.isStatic())
 					highlightFeatureCall(featureCall, acceptor, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
 			}
-			if (featureCall instanceof XMemberFeatureCall){
+			if (featureCall instanceof XMemberFeatureCall || (featureCall instanceof XAssignment && ((XAssignment)featureCall).getValue() != null)){
 				if(!feature.eIsProxy() && feature instanceof JvmOperation){
 					if(featureCall.getImplicitReceiver() != null || ((JvmOperation) feature).isStatic()){
 						highlightFeatureCall(featureCall, acceptor, 
@@ -165,9 +166,9 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 					}
 				}
 			}
-			if (featureCall instanceof XFeatureCall) {
+			if (featureCall instanceof XFeatureCall || featureCall instanceof XAssignment) {
 				if(!feature.eIsProxy() && feature instanceof JvmOperation){
-					if(((XFeatureCall)featureCall).getImplicitFirstArgument() != null){
+					if(featureCall.getImplicitFirstArgument() != null){
 						highlightFeatureCall(featureCall, acceptor, 
 								XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION_WITH_IMPLICIT_ARGUMENT);
 					}
