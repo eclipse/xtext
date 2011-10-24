@@ -123,17 +123,17 @@ public class SerializerPDAProvider implements ISerializerPDAProvider {
 		protected Boolean typeMatches(AbstractElement ele, Set<AbstractElement> visited) {
 			if (!visited.add(ele))
 				return null;
-			if (GrammarUtil.isEObjectRuleCall(ele))
-				for (Action act : GrammarUtil.containedActions(((RuleCall) ele).getRule().getAlternatives()))
-					if (act.getFeature() != null && act.getType().getClassifier() == type)
-						return true;
 			if (ele instanceof Action)
 				return type != null && ((Action) ele).getType().getClassifier() == type;
 			if (GrammarUtil.isAssigned(ele))
 				return type != null && GrammarUtil.containingRule(ele).getType().getClassifier() == type;
+			else if (GrammarUtil.isEObjectRuleCall(ele))
+				for (Action act : GrammarUtil.containedActions(((RuleCall) ele).getRule().getAlternatives()))
+					if (act.getFeature() != null && act.getType().getClassifier() == type)
+						return true;
 			boolean allFalse = true;
-			for (AbstractElement f : GrammarUtil.isEObjectRuleCall(ele) ? super.getStarts(((RuleCall) ele).getRule()
-					.getAlternatives()) : super.getFollowers(ele))
+			for (AbstractElement f : GrammarUtil.isEObjectRuleCall(ele) && !GrammarUtil.isAssigned(ele) ? super
+					.getStarts(((RuleCall) ele).getRule().getAlternatives()) : super.getFollowers(ele))
 				if (f != null) {
 					Boolean r = typeMatches(f, visited);
 					if (r == Boolean.TRUE)
