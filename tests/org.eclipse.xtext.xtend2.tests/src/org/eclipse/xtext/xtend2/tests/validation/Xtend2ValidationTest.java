@@ -58,7 +58,7 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testAnnotationTarget_00() throws Exception {
 		XtendClass clazz = clazz("@testdata.Annotation2('foo') class X { }");
-		helper.assertError(clazz, XAnnotationsPackage.Literals.XANNOTATION, IssueCodes.ANNOTATION_WRONG_TARGET);
+		helper.assertError(clazz, XAnnotationsPackage.Literals.XANNOTATION, IssueCodes.ANNOTATION_WRONG_TARGET, "@Annotation2");
 	}
 	
 	public void testAnnotationTarget_01() throws Exception {

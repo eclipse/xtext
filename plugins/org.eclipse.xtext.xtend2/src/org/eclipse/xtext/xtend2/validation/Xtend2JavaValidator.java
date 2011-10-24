@@ -170,7 +170,7 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 		for (Entry<Class<?>, ElementType> mapping : targetInfos.entrySet()) {
 			if (mapping.getKey().isInstance(eContainer)) {
 				if (!targets.contains(mapping.getValue())) {
-					error("The annotation @" + annotation.getAnnotationType().getIdentifier()
+					error("The annotation @" + annotation.getAnnotationType().getSimpleName()
 							+ " is disallowed for this location.", annotation, null, INSIGNIFICANT_INDEX,
 							ANNOTATION_WRONG_TARGET);
 				}

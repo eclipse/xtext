@@ -91,6 +91,8 @@ public class Xtend2LabelProvider extends DefaultEObjectLabelProvider {
 	}
 	
 	public String text(XtendField element) {
+		if (element.getName() == null && element.isExtension())
+			return element.getType().getSimpleName();
 		return element.getName() +" : " +element.getType().getSimpleName();
 	}
 
