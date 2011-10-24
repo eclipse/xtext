@@ -124,7 +124,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 	}
 	
 	@Override
-	protected JvmTypeReference typeForIdentifiableDispatcherInvoke(JvmIdentifiableElement identifiable, boolean rawType) {
+	protected JvmTypeReference typeForIdentifiable(JvmIdentifiableElement identifiable, boolean rawType) {
 		if (identifiable instanceof JvmConstructor) {
 			return _typeForIdentifiable((JvmConstructor)identifiable, rawType);
 		} else if (identifiable instanceof JvmField) {
@@ -142,12 +142,12 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 		} else if (identifiable instanceof XVariableDeclaration) {
 			return _typeForIdentifiable((XVariableDeclaration)identifiable, rawType);
 		} else {
-			return super.typeForIdentifiableDispatcherInvoke(identifiable, rawType);
+			return super.typeForIdentifiable(identifiable, rawType);
 		}
 	}
 	
 	@Override
-	protected JvmTypeReference typeDispatcherInvoke(XExpression expression, JvmTypeReference rawExpectation, boolean rawType) {
+	protected JvmTypeReference type(XExpression expression, JvmTypeReference rawExpectation, boolean rawType) {
 		if (expression instanceof XAbstractFeatureCall) {
 			return _type((XAbstractFeatureCall)expression, rawExpectation, rawType);
 		} else if (expression instanceof XAbstractWhileExpression) {
@@ -187,12 +187,12 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 		} else if (expression instanceof XVariableDeclaration) {
 			return _type((XVariableDeclaration)expression, rawExpectation, rawType);
 		} else { 
-			return super.typeDispatcherInvoke(expression, rawExpectation, rawType);
+			return super.type(expression, rawExpectation, rawType);
 		}
 	}
 	
 	@Override
-	protected JvmTypeReference expectedTypeDispatcherInvoke(EObject container, EReference reference, int index,
+	protected JvmTypeReference expectedType(EObject container, EReference reference, int index,
 			boolean rawType) {
 		if (container instanceof XAssignment) {
 			return _expectedType((XAssignment)container, reference, index, rawType);
@@ -229,7 +229,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 		} else if (container instanceof XVariableDeclaration) {
 			return _expectedType((XVariableDeclaration)container, reference, index, rawType);
 		} else {
-			return super.expectedTypeDispatcherInvoke(container, reference, index, rawType);
+			return super.expectedType(container, reference, index, rawType);
 		}
 	}
 	
@@ -356,7 +356,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 		if (info != null) {
 			EObject container = info.getFirst();
 			if (container instanceof XAbstractFeatureCall) {
-				JvmTypeReference result = expectedTypeDispatcherInvoke(container, info.getSecond(), info.getThird(), rawType);
+				JvmTypeReference result = expectedType(container, info.getSecond(), info.getThird(), rawType);
 				return result;
 			}
 		}
