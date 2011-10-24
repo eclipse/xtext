@@ -89,7 +89,7 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
                               return _builder;
                             }
                           };
-                        PureXbaseJvmModelInferrer.this._jvmTypesBuilder.body(it, _function);
+                        PureXbaseJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function);
                       } else {
                         final Function1<ImportManager,StringConcatenation> _function_1 = new Function1<ImportManager,StringConcatenation>() {
                             public StringConcatenation apply(final ImportManager it) {
@@ -104,7 +104,7 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
                               return _builder;
                             }
                           };
-                        PureXbaseJvmModelInferrer.this._jvmTypesBuilder.body(it, _function_1);
+                        PureXbaseJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function_1);
                       }
                     }
                   }
@@ -133,7 +133,7 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
                               return _builder;
                             }
                           };
-                        PureXbaseJvmModelInferrer.this._jvmTypesBuilder.body(it, _function);
+                        PureXbaseJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function);
                       }
                     }
                   };

@@ -39,7 +39,7 @@ class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
 								for (p : f.params) {
 									parameters.add(p.toParameter(p.name, p.parameterType))
 								}
-								f.body.toBody(it)
+								setBody(f.body)
 							]
 						}
 					}
