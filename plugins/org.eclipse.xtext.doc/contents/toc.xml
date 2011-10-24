@@ -432,7 +432,7 @@
 					</topic>
 					<topic href="contents/199h-xbase-language-reference-expressions.html#Xbase_Expressions_PropertyAccess" label="Property Access" >
 					</topic>
-					<topic href="contents/199h-xbase-language-reference-expressions.html#Xbase_Expressions_ImplicitThis" label="Implicit 'this' variable" >
+					<topic href="contents/199h-xbase-language-reference-expressions.html#Xbase_Expressions_ImplicitThis" label="Implicit variables 'this' and 'it'" >
 					</topic>
 					<topic href="contents/199h-xbase-language-reference-expressions.html#Xbase_Expressions_NullSafeFeatureCalls" label="Null-Safe Feature Call" >
 					</topic>
@@ -450,7 +450,9 @@
 					</topic>
 					<topic href="contents/199h-xbase-language-reference-expressions.html#Xbase_Expressions_FunctionMapping" label="Function Mapping" >
 					</topic>
-					<topic href="contents/199h-xbase-language-reference-expressions.html#Xbase_Expressions_Closures_5" label="Examples" >
+					<topic href="contents/199h-xbase-language-reference-expressions.html#Xbase_Expressions_implicit_parameter" label="Implicit Parameter it" >
+					</topic>
+					<topic href="contents/199h-xbase-language-reference-expressions.html#Xbase_Expressions_Closures_6" label="Examples" >
 					</topic>
 				</topic>
 				<topic href="contents/199h-xbase-language-reference-expressions.html#Xbase_Expressions_IfExpression" label="If Expression" >
@@ -508,6 +510,8 @@
 			</topic>
 			<topic href="contents/199i-xbase-language-reference-libraries.html" label="Extension Methods" >
 				<topic href="contents/199i-xbase-language-reference-libraries.html#xbaseLanguageRef_LibraryExtension_6" label="Examples" >
+				</topic>
+				<topic href="contents/199i-xbase-language-reference-libraries.html#XbaseLanguageRef_builderSyntax" label="Builder Syntax" >
 				</topic>
 			</topic>
 		</topic>

@@ -184,6 +184,7 @@
 			<div class="toc">
 			  <ul>
 			    <li><a href="199i-xbase-language-reference-libraries.php#xbaseLanguageRef_LibraryExtension_6" >Examples</a></li>
+			    <li><a href="199i-xbase-language-reference-libraries.php#XbaseLanguageRef_builderSyntax" >Builder Syntax</a></li>
 			  </ul>
 			</div>
 			<p>
@@ -221,6 +222,93 @@
 			  <li><span class="inlinecode">my.foo(x)</span></li>
 			  <li><span class="inlinecode">oh.my.foo(bar)</span></li>
 			</ul>
+			</p>
+			<a name="XbaseLanguageRef_builderSyntax" ></a>
+			<h2>Builder Syntax</h2>
+			<p>
+			If the last argument of a method call is a closure, it can be appended to the method call. Thus,
+			</p>
+			<p>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						foo(42)&nbsp;[String&nbsp;s&nbsp;|&nbsp;s.toUpperCase]
+					</p>
+				</div>
+			</div>
+			</p>
+			<p>
+			will call a Java method with the signature
+			</p>
+			<p>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						<span class="keyword">void</span>&nbsp;foo(<span class="keyword">int</span>,&nbsp;Function1&lt;String,&nbsp;String&gt;)
+					</p>
+				</div>
+			</div>
+			</p>
+			<p>
+			Used in combination with the <a href="199h-xbase-language-reference-expressions.php#Xbase_Expressions_implicit_parameter" title="Go to &quot;Implicit Parameter it&quot;">implicit parameter name in closures</a>
+			you can write <a href="199i-xbase-language-reference-libraries.php" title="Go to &quot;Extension Methods&quot;">extension libraries</a> to create and initialize graphs of
+			objects in a concise builder syntax like in Groovy. Consider you have a set of library methods 
+			</p>
+			<p>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						HtmlNode&nbsp;html(Function1&lt;HtmlNode,&nbsp;Void&gt;&nbsp;initializer)<br/>
+						HeadNode&nbsp;head(HtmlNode&nbsp;parent,&nbsp;Function1&lt;HeadNode,&nbsp;Void&gt;&nbsp;initializer)<br/>
+						...
+					</p>
+				</div>
+			</div>
+			</p>
+			<p>
+			that create DOM elements for HTML pages inside their respective parent elements. You can then create a DOM
+			using the following Xbase code:
+			</p>
+			<p>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						html(&nbsp;[&nbsp;html&nbsp;| <br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;head(html,&nbsp;[&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;initialize&nbsp;head<br/>
+						</span>&nbsp;&nbsp;&nbsp;&nbsp;]&nbsp;)&nbsp;<br/>
+						]&nbsp;)
+					</p>
+				</div>
+			</div>
+			</p>
+			<p>
+			Appending the closure parameters and prepending the parent parameters using extension syntax yields
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						html()&nbsp;[&nbsp;html&nbsp;| <br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;html.head()&nbsp;[&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;initialize&nbsp;head<br/>
+						</span>&nbsp;&nbsp;&nbsp;&nbsp;]&nbsp;&nbsp;<br/>
+						]
+					</p>
+				</div>
+			</div>
+			</p>
+			<p>
+			Using implicit parameter names and skipping empty parentheses you can simplify this to 
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						html&nbsp;[&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;head&nbsp;[&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;initialize&nbsp;head<br/>
+						</span>&nbsp;&nbsp;&nbsp;&nbsp;]&nbsp;&nbsp;<br/>
+						]
+					</p>
+				</div>
+			</div>
 			</p>
 		<div id="disqus_thread"></div>
 		<script type="text/javascript" src="documentationRoot.js"></script>

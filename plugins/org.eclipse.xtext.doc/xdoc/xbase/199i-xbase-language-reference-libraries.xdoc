@@ -29,3 +29,58 @@ ul[
 	item[code[my.foo(x)]]
 	item[code[oh.my.foo(bar)]]
 ]
+
+section2:XbaseLanguageRef_builderSyntax[Builder Syntax]
+
+If the last argument of a method call is a closure, it can be appended to the method call. Thus,
+
+code[Xbase][
+foo(42) \[String s | s.toUpperCase\] 	
+]
+
+will call a Java method with the signature
+
+code[Java][
+void foo(int, Function1<String, String>)
+] 
+
+Used in combination with the ref:Xbase_Expressions_implicit_parameter[implicit parameter name in closures]
+you can write ref:xbaseLanguageRef_LibraryExtension[extension libraries] to create and initialize graphs of
+objects in a concise builder syntax like in Groovy. Consider you have a set of library methods 
+
+code[Java][
+HtmlNode html(Function1<HtmlNode, Void> initializer)
+HeadNode head(HtmlNode parent, Function1<HeadNode, Void> initializer)
+...
+]
+
+that create DOM elements for HTML pages inside their respective parent elements. You can then create a DOM
+using the following Xbase code:
+
+code[Xbase][
+html( \[ html | 
+	head(html, \[ 
+		// initialize head
+	\] ) 
+\] )
+]   
+
+Appending the closure parameters and prepending the parent parameters using extension syntax yields
+code[Xbase][
+html() \[ html | 
+	html.head() \[ 
+		// initialize head
+	\]  
+\] 
+]  
+
+Using implicit parameter names and skipping empty parentheses you can simplify this to 
+code[Xbase][
+html \[ 
+	head \[ 
+		// initialize head
+	\]  
+\] 
+]  
+
+
