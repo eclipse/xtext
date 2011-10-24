@@ -37,11 +37,11 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.google.inject.internal.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
