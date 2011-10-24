@@ -41,23 +41,21 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
       EList<EObject> _contents = resource.getContents();
       final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
           public void apply(final JvmGenericType it) {
-            {
-              EList<JvmMember> _members = it.getMembers();
-              JvmTypeReference _stringType = JvmModelBasedLinkingTest.this.stringType(expr);
-              final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
-                  public void apply(final JvmOperation it) {
-                    {
-                      EList<JvmFormalParameter> _parameters = it.getParameters();
-                      JvmTypeReference _stringType = JvmModelBasedLinkingTest.this.stringType(expr);
-                      JvmFormalParameter _parameter = JvmModelBasedLinkingTest.this._jvmTypesBuilder.toParameter(expr, "x", _stringType);
-                      CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter);
-                      JvmModelBasedLinkingTest.this._jvmTypesBuilder.<JvmOperation>associate(expr, it);/*null*/;
-                    }
+            EList<JvmMember> _members = it.getMembers();
+            JvmTypeReference _stringType = JvmModelBasedLinkingTest.this.stringType(expr);
+            final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+                public void apply(final JvmOperation it) {
+                  {
+                    EList<JvmFormalParameter> _parameters = it.getParameters();
+                    JvmTypeReference _stringType = JvmModelBasedLinkingTest.this.stringType(expr);
+                    JvmFormalParameter _parameter = JvmModelBasedLinkingTest.this._jvmTypesBuilder.toParameter(expr, "x", _stringType);
+                    CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter);
+                    JvmModelBasedLinkingTest.this._jvmTypesBuilder.setBody(it, expr);
                   }
-                };
-              JvmOperation _method = JvmModelBasedLinkingTest.this._jvmTypesBuilder.toMethod(expr, "doStuff", _stringType, _function);
-              CollectionExtensions.<JvmOperation>operator_add(_members, _method);/*null*/;
-            }
+                }
+              };
+            JvmOperation _method = JvmModelBasedLinkingTest.this._jvmTypesBuilder.toMethod(expr, "doStuff", _stringType, _function);
+            CollectionExtensions.<JvmOperation>operator_add(_members, _method);
           }
         };
       JvmGenericType _class = this._jvmTypesBuilder.toClass(expr, "Foo", _function);
@@ -88,12 +86,12 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
                       JvmTypeReference _stringType = JvmModelBasedLinkingTest.this.stringType(expr);
                       JvmFormalParameter _parameter = JvmModelBasedLinkingTest.this._jvmTypesBuilder.toParameter(expr, "x", _stringType);
                       CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter);
-                      JvmModelBasedLinkingTest.this._jvmTypesBuilder.<JvmOperation>associate(expr, it);/*null*/;
+                      JvmModelBasedLinkingTest.this._jvmTypesBuilder.setBody(it, expr);
                     }
                   }
                 };
               JvmOperation _method = JvmModelBasedLinkingTest.this._jvmTypesBuilder.toMethod(expr, "doStuff", _stringType_1, _function);
-              CollectionExtensions.<JvmOperation>operator_add(_members_1, _method);/*null*/;
+              CollectionExtensions.<JvmOperation>operator_add(_members_1, _method);
             }
           }
         };
@@ -127,12 +125,12 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
                       JvmTypeReference _stringType = JvmModelBasedLinkingTest.this.stringType(expr);
                       JvmFormalParameter _parameter = JvmModelBasedLinkingTest.this._jvmTypesBuilder.toParameter(expr, "y", _stringType);
                       CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter);
-                      JvmModelBasedLinkingTest.this._jvmTypesBuilder.<JvmOperation>associate(expr, it);/*null*/;
+                      JvmModelBasedLinkingTest.this._jvmTypesBuilder.setBody(it, expr);
                     }
                   }
                 };
               JvmOperation _method = JvmModelBasedLinkingTest.this._jvmTypesBuilder.toMethod(expr, "doStuff", _stringType_1, _function);
-              CollectionExtensions.<JvmOperation>operator_add(_members_1, _method);/*null*/;
+              CollectionExtensions.<JvmOperation>operator_add(_members_1, _method);
             }
           }
         };
@@ -161,13 +159,11 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
               JvmTypeReference _stringType_1 = JvmModelBasedLinkingTest.this.stringType(expr);
               final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
                   public void apply(final JvmOperation it) {
-                    {
-                      JvmModelBasedLinkingTest.this._jvmTypesBuilder.<JvmOperation>associate(expr, it);/*null*/;
-                    }
+                    JvmModelBasedLinkingTest.this._jvmTypesBuilder.setBody(it, expr);
                   }
                 };
               JvmOperation _method = JvmModelBasedLinkingTest.this._jvmTypesBuilder.toMethod(expr, "getX", _stringType_1, _function);
-              CollectionExtensions.<JvmOperation>operator_add(_members_1, _method);/*null*/;
+              CollectionExtensions.<JvmOperation>operator_add(_members_1, _method);
             }
           }
         };
