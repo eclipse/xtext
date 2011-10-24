@@ -22,6 +22,7 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.source.Annotation;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.IReferenceDescription;
@@ -59,6 +60,9 @@ public class DefaultOccurrenceComputer implements IOccurrenceComputer {
 	
 	@Inject 
 	private FindReferenceQueryDataFactory queryDataFactory;
+	
+	@Inject
+	private IQualifiedNameProvider qualifiedNameProvider;
 	
 	@Inject 
 	private EditorResourceAccess editorResourceAccess;
@@ -101,8 +105,10 @@ public class DefaultOccurrenceComputer implements IOccurrenceComputer {
 						return emptyMap();
 					Map<Annotation, Position> result = newHashMapWithExpectedSize(references.size() + 1);
 					if (target.eResource() == resource) {
-						ITextRegion declarationRegion = locationInFileProvider.getSignificantTextRegion(target);
-						addOccurrenceAnnotation(DECLARATION_ANNOTATION_TYPE, document, declarationRegion, result);
+						if (!references.isEmpty() || canBeReferencedLocally(target)) {
+							ITextRegion declarationRegion = locationInFileProvider.getSignificantTextRegion(target);
+							addOccurrenceAnnotation(DECLARATION_ANNOTATION_TYPE, document, declarationRegion, result);
+						}
 					}
 					monitor.worked(5);
 					for (IReferenceDescription reference : references) {
@@ -117,6 +123,14 @@ public class DefaultOccurrenceComputer implements IOccurrenceComputer {
 				return emptyMap();
 			}
 		});
+	}
+	
+	/**
+	 * @since 2.1
+	 */
+	protected boolean canBeReferencedLocally(EObject object) {
+		boolean result = qualifiedNameProvider.getFullyQualifiedName(object) != null;
+		return result;
 	}
 
 	public boolean hasAnnotationType(String annotationType) {
