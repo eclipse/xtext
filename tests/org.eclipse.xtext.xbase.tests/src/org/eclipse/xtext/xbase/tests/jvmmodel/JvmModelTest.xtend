@@ -8,6 +8,8 @@ import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 
 import static junit.framework.Assert.*
+import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
+import static org.eclipse.xtext.xbase.validation.IssueCodes.*
 
 class JvmModelTest extends AbstractJvmModelTest {
 	
@@ -33,4 +35,10 @@ class JvmModelTest extends AbstractJvmModelTest {
 		assertEquals(1, list.size)
 		assertFalse(field.get(resource) as Boolean)
 	}
+	
+	def void testReturnTypeConformance() {
+		val expression = expression("return")
+		helper.assertError(expression, XRETURN_EXPRESSION, INVALID_RETURN);		
+	}
+	
 }

@@ -1267,6 +1267,10 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 				return expectedReturnType;
 			}
 		}
+		JvmIdentifiableElement logicalContainer = expressionContext.getLogicalContainer(expr);
+		if (logicalContainer instanceof JvmOperation) {
+			return ((JvmOperation) logicalContainer).getReturnType();
+		}
 		return null;
 	}
 	
