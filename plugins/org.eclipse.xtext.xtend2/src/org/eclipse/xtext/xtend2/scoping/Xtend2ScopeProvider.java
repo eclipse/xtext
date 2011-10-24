@@ -72,6 +72,65 @@ public class Xtend2ScopeProvider extends XbaseWithAnnotationsScopeProvider {
 		
 		addFeatureDescriptionProviders(contextType, staticProvider, null, null, IMPORTED_STATIC_FEATURE_PRIORITY, true, acceptor);
 	}
+	
+	@Override
+	protected void addFeatureDescriptionProvidersForAssignment(
+			Resource resource, JvmDeclaredType contextType,
+			XExpression implicitReceiver, XExpression implicitArgument, int priority,
+			IAcceptor<IJvmFeatureDescriptionProvider> acceptor) {
+		super.addFeatureDescriptionProvidersForAssignment(resource, contextType, implicitReceiver, implicitArgument, priority, acceptor);
+		
+		if (implicitReceiver == null || implicitArgument != null) {
+			final StaticallyImportedFeaturesProvider staticProvider = staticallyImportedFeaturesProvider.get();
+			staticProvider.setResourceContext(resource);
+			staticProvider.setExtensionProvider(true);
+			if (implicitArgument != null) {
+				// use the implicit argument as implicit receiver
+				SimpleAcceptor casted = (SimpleAcceptor) acceptor;
+				JvmTypeReference implicitArgumentType = getTypeProvider().getType(implicitArgument, true);
+				IAcceptor<IJvmFeatureDescriptionProvider> myAcceptor = casted.getParent().curry(implicitArgumentType, casted.getExpression());
+				addFeatureDescriptionProvidersForAssignment(contextType, staticProvider, implicitArgument, null, priority + STATIC_EXTENSION_PRIORITY_OFFSET, true, myAcceptor);
+			} else {
+				addFeatureDescriptionProvidersForAssignment(contextType, staticProvider, implicitReceiver, implicitArgument, priority + STATIC_EXTENSION_PRIORITY_OFFSET, true, acceptor);
+			}
+		}
+		
+		final XtendClass xtendClass = ((XtendFile) resource.getContents().get(0)).getXtendClass();
+		// extensions for this
+		JvmGenericType inferredJvmType = xtend2jvmAssociations.getInferredType(xtendClass);
+		if (inferredJvmType != null) {
+			boolean isThis = false;
+			if (implicitReceiver instanceof XFeatureCall) {
+				isThis = ((XFeatureCall) implicitReceiver).getFeature() == inferredJvmType;
+			}
+			if (implicitReceiver == null || isThis) {
+				XFeatureCall callToThis = XbaseFactory.eINSTANCE.createXFeatureCall();
+				callToThis.setFeature(inferredJvmType);
+				// injected extensions
+				Iterable<XtendField> extensionFields = getExtensionDependencies(xtendClass);
+				int extensionPriority = priority + DYNAMIC_EXTENSION_PRIORITY_OFFSET;
+				if (isThis && implicitArgument == null)
+					extensionPriority = DEFAULT_EXTENSION_PRIORITY;
+				for (XtendField extensionField : extensionFields) {
+					JvmIdentifiableElement dependencyImplicitReceiver = findImplicitReceiverFor(extensionField);
+					XMemberFeatureCall callToDependency = XbaseFactory.eINSTANCE.createXMemberFeatureCall();
+					callToDependency.setMemberCallTarget(EcoreUtil2.clone(callToThis));
+					callToDependency.setFeature(dependencyImplicitReceiver);
+					if (dependencyImplicitReceiver != null) {
+						ExtensionMethodsFeaturesProvider extensionFeatureProvider = extensionMethodsFeaturesProvider.get();
+						extensionFeatureProvider.setContext(extensionField.getType());
+						extensionFeatureProvider.setExpectNoParameters(isThis);
+						addFeatureDescriptionProvidersForAssignment(contextType, extensionFeatureProvider, callToDependency, implicitArgument, extensionPriority, false, acceptor);
+					}
+				}
+				JvmParameterizedTypeReference typeRef = typeReferences.createTypeRef(inferredJvmType);
+				ExtensionMethodsFeaturesProvider featureProvider = extensionMethodsFeaturesProvider.get();
+				featureProvider.setContext(typeRef);
+				featureProvider.setExpectNoParameters(isThis);
+				addFeatureDescriptionProvidersForAssignment(contextType, featureProvider, callToThis, implicitArgument, priority + THIS_EXTENSION_PRIORITY_OFFSET, false, acceptor);
+			}
+		}
+	}
 
 	@Override
 	protected void addFeatureDescriptionProviders(
