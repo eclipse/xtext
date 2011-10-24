@@ -19,7 +19,6 @@ public class Messages extends NLS {
 	public static String BuilderConfigurationBlock_BuildJob_TitleBuildAll_TaskName;
 	public static String BuilderConfigurationBlock_BuildJob_TitleBuildProject_TaskName;
 	public static String BuilderConfigurationBlock_GeneralSection_Label;
-	public static String BuilderConfigurationBlock_OutputFolderSection_Label;
 	public static String BuilderConfigurationBlock_SettingsChanged_ProjectBuild;
 	public static String BuilderConfigurationBlock_SettingsChanged_Title;
 	public static String BuilderConfigurationBlock_SettingsChanged_WorkspaceBuild;
@@ -29,9 +28,7 @@ public class Messages extends NLS {
 	public static String OutputConfigurationPage_CleanupDerivedResources;
 	public static String OutputConfigurationPage_CreateDirectory;
 	public static String OutputConfigurationPage_CreatesDerivedResources;
-	public static String OutputConfigurationPage_Description;
 	public static String OutputConfigurationPage_Directory;
-	public static String OutputConfigurationPage_Name;
 	public static String OutputConfigurationPage_OverrideExistingResources;
 	public static String ProjectDirectoryFieldEditor_OutputDirectory;
 
