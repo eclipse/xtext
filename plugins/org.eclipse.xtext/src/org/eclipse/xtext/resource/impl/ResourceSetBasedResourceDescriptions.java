@@ -74,7 +74,15 @@ public class ResourceSetBasedResourceDescriptions extends AbstractCompoundSelect
 	public boolean isEmpty() {
 		return resourceSet.getResources().isEmpty();
 	}
-
+	
+	/**
+	 * @since 2.1
+	 */
+	protected boolean hasDescription(URI uri) {
+		Resource resource = resourceSet.getResource(uri, false);
+		return resource != null;
+	}
+	
 	public IResourceDescription getResourceDescription(URI uri) {
 		Resource resource = resourceSet.getResource(uri, false);
 		if (resource == null)
