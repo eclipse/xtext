@@ -46,7 +46,7 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 		val clazz = expression.toClass("my.test.Foo") [
 			members += expression.toMethod("doStuff", references.getTypeForName(typeof(String), expression)) [
 				parameters += expression.toParameter("s", references.getTypeForName(typeof(String), expression))
-				expression.associate(it)
+				setBody(expression)
 			]
 		]
 		
