@@ -467,14 +467,18 @@ public class JvmTypesBuilder {
 		reference.setAnnotation(annotation);
 		for (XAnnotationElementValuePair val : anno.getElementValuePairs()) {
 			JvmAnnotationValue annotationValue = getJvmAnnotationValue(val.getValue());
-			JvmOperation op = (JvmOperation) val.eGet(
-					XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_PAIR__ELEMENT, false);
-			annotationValue.setOperation(op);
-			reference.getValues().add(annotationValue);
+			if (annotationValue != null) {
+				JvmOperation op = (JvmOperation) val.eGet(
+						XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_PAIR__ELEMENT, false);
+				annotationValue.setOperation(op);
+				reference.getValues().add(annotationValue);
+			}
 		}
 		if (anno.getValue() != null) {
 			JvmAnnotationValue value = getJvmAnnotationValue(anno.getValue());
-			reference.getValues().add(value);
+			if (value != null) {
+				reference.getValues().add(value);
+			}
 		}
 		return reference;
 	}
@@ -494,7 +498,7 @@ public class JvmTypesBuilder {
 				translator.appendValue(result, expr);
 			}
 			return result;
-		} else {
+		} else if (value != null) {
 			AnnotationValueTranslator translator = translator(value);
 			if (translator == null)
 				throw new IllegalArgumentException("expression " + value + " is not supported in annotation literals");
@@ -502,6 +506,7 @@ public class JvmTypesBuilder {
 			translator.appendValue(result, value);
 			return result;
 		}
+		return null;
 	}
 
 	private Map<EClass, AnnotationValueTranslator> translators = newLinkedHashMap();
