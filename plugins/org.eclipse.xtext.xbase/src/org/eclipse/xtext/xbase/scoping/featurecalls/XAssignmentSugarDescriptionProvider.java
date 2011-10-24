@@ -42,7 +42,7 @@ public class XAssignmentSugarDescriptionProvider extends DefaultJvmFeatureDescri
 					}
 				};
 				JvmFeatureDescription description = createJvmFeatureDescription(QualifiedName.create(propertyName), 
-						jvmOperation, context, signatureProvider, isValid(feature));
+						jvmOperation, context, signatureProvider, isVisible(feature), isValidStaticState(feature));
 				acceptor.accept(description);
 			}
 		}
@@ -63,7 +63,7 @@ public class XAssignmentSugarDescriptionProvider extends DefaultJvmFeatureDescri
 	}
 
 	protected boolean isSetterMethod(JvmOperation jvmOperation) {
-		if (jvmOperation.getParameters().size()!=1)
+		if (jvmOperation.getParameters().size() - getNumberOfIrrelevantArguments() != 1)
 			return false;
 		if (getPropertyNameForSetter(jvmOperation.getSimpleName())==null)
 			return false;

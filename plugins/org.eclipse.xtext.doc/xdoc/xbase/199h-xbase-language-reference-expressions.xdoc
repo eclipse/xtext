@@ -208,11 +208,12 @@ code[Xbase][
 the compiler first looks for an accessible field in the type of code[Xbase][myObj]. If no such field exists it looks for a method called code[Java][myProperty()] before it looks 
 for the getter methods code[Java][getMyProperty()]. If none of these members can be found the expression is unbound and a compiliation error is thrown.
 
-section3:Xbase_Expressions_ImplicitThis[Implicit 'this' variable]
+section3:Xbase_Expressions_ImplicitThis[Implicit variables 'this' and 'it']
 
-If the current scope contains a variable named code[Xbase][this], the compiler will make all its members available to the scope. 
-That is if 
+If the current scope contains a variable named code[Xbase][this] or code[Xbase][it], the compiler will make all its members available to the scope. 
+That is one of 
 code[Xbase][
+	it.myProperty
 	this.myProperty
 ]
 is a valid expression
@@ -220,7 +221,12 @@ code[Xbase][
 	myProperty
 ]
 is valid as well and is equivalent, as long as there is no local variable 'myProperty' on the scope,
-which would have higher precedence.
+which would have higher precedence. 
+
+As code[Xbase][this] is bound to the surrounding object in Java, code[Xbase][it] can be used
+in finer-grained constructs such as function parameters. That is why code[Xbase][it.myProperty] has 
+higher precedence than code[Xbase][this.myProperty]. code[Xbase][it] is also the 
+ref:Xbase_Expressions_implicit_parameter[default parameter name in closures]. 
 
 %%section2:spreadOperator[Spread Operator]
 %%
@@ -361,6 +367,7 @@ code[Xbase][
 	arrayList( "Foo", "Bar" ).findFirst( String e | e == "Bar" )
 ]
 
+
 section3:Xbase_Expressions_FunctionMapping[Function Mapping]
 
 An Xbase closure is a Java object of one of the e[Function] interfaces shipped with the runtime library of Xbase. There is an interface 
@@ -372,6 +379,15 @@ ul[
 	item[... ]
 	item[e[Function6<Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type, ReturnType>] for six parameters, ]
 ]
+or
+ul[
+	item[e[Procedure0] for zero parameters, ]
+	item[e[Procedure1<Param1Type>] for one parameters, ]
+	item[e[Procedure2<Param1Type, Param2Type>] for two parameters, ]
+	item[... ]
+	item[e[Procedure6<Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type>] for six parameters, ]
+]
+if the reutrn type is code[Java][void].
 
 In order to allow seamless integration with existing Java libraries such as the JDK or Google Guava (formerly known as Google Collect) closures
 are auto coerced to expected types if those types declare only one method (methods from java.lang.Object
@@ -391,12 +407,21 @@ newArrayList( 'aaa', 'bb', 'c' ).sort(
 			 })
 ]
 
+section3:Xbase_Expressions_implicit_parameter[Implicit Parameter e[it]]
+
+If a closure has a single parameter whose type can be inferred, the declaration of the parameter can
+be ommitted. Use e[it] to refer to the parameter inside the closure's body.
+code[Xbase][
+val (String s)=>String function = \[toUpperCase\] 
+  // equivalent to \[it | it.toUpperCase\]
+]
+
 section3[Examples]
 
 ul[
 	item[code[Xbase][\[ | "foo" \]   // closure without parameters]]
 	item[code[Xbase][\[ String s | s.toUpperCase() \] // explicit argument type]]
-	item[code[Xbase][\[ a,b,a | a+b+c \] // inferred argument types]]
+	item[code[Xbase][\[ a,b,c | a+b+c \] // inferred argument types]]
 ]
 
 section2:Xbase_Expressions_IfExpression[If Expression]

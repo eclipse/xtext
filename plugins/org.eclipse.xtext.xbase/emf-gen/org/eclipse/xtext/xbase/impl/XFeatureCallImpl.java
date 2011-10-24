@@ -36,7 +36,6 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl#getFeatureCallArguments <em>Feature Call Arguments</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl#isExplicitOperationCall <em>Explicit Operation Call</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl#getDeclaringType <em>Declaring Type</em>}</li>
- *   <li>{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl#getImplicitFirstArgument <em>Implicit First Argument</em>}</li>
  * </ul>
  * </p>
  *
@@ -83,16 +82,6 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 	 * @ordered
 	 */
 	protected JvmDeclaredType declaringType;
-
-	/**
-	 * The cached value of the '{@link #getImplicitFirstArgument() <em>Implicit First Argument</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getImplicitFirstArgument()
-	 * @generated
-	 * @ordered
-	 */
-	protected XExpression implicitFirstArgument;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -200,54 +189,6 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public XExpression getImplicitFirstArgument()
-	{
-		return implicitFirstArgument;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetImplicitFirstArgument(XExpression newImplicitFirstArgument, NotificationChain msgs)
-	{
-		XExpression oldImplicitFirstArgument = implicitFirstArgument;
-		implicitFirstArgument = newImplicitFirstArgument;
-		if (eNotificationRequired())
-		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XbasePackage.XFEATURE_CALL__IMPLICIT_FIRST_ARGUMENT, oldImplicitFirstArgument, newImplicitFirstArgument);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setImplicitFirstArgument(XExpression newImplicitFirstArgument)
-	{
-		if (newImplicitFirstArgument != implicitFirstArgument)
-		{
-			NotificationChain msgs = null;
-			if (implicitFirstArgument != null)
-				msgs = ((InternalEObject)implicitFirstArgument).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XbasePackage.XFEATURE_CALL__IMPLICIT_FIRST_ARGUMENT, null, msgs);
-			if (newImplicitFirstArgument != null)
-				msgs = ((InternalEObject)newImplicitFirstArgument).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XbasePackage.XFEATURE_CALL__IMPLICIT_FIRST_ARGUMENT, null, msgs);
-			msgs = basicSetImplicitFirstArgument(newImplicitFirstArgument, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XFEATURE_CALL__IMPLICIT_FIRST_ARGUMENT, newImplicitFirstArgument, newImplicitFirstArgument));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -255,8 +196,6 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 		{
 			case XbasePackage.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS:
 				return ((InternalEList<?>)getFeatureCallArguments()).basicRemove(otherEnd, msgs);
-			case XbasePackage.XFEATURE_CALL__IMPLICIT_FIRST_ARGUMENT:
-				return basicSetImplicitFirstArgument(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -278,8 +217,6 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 			case XbasePackage.XFEATURE_CALL__DECLARING_TYPE:
 				if (resolve) return getDeclaringType();
 				return basicGetDeclaringType();
-			case XbasePackage.XFEATURE_CALL__IMPLICIT_FIRST_ARGUMENT:
-				return getImplicitFirstArgument();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -305,9 +242,6 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 			case XbasePackage.XFEATURE_CALL__DECLARING_TYPE:
 				setDeclaringType((JvmDeclaredType)newValue);
 				return;
-			case XbasePackage.XFEATURE_CALL__IMPLICIT_FIRST_ARGUMENT:
-				setImplicitFirstArgument((XExpression)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -331,9 +265,6 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 			case XbasePackage.XFEATURE_CALL__DECLARING_TYPE:
 				setDeclaringType((JvmDeclaredType)null);
 				return;
-			case XbasePackage.XFEATURE_CALL__IMPLICIT_FIRST_ARGUMENT:
-				setImplicitFirstArgument((XExpression)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -354,8 +285,6 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 				return explicitOperationCall != EXPLICIT_OPERATION_CALL_EDEFAULT;
 			case XbasePackage.XFEATURE_CALL__DECLARING_TYPE:
 				return declaringType != null;
-			case XbasePackage.XFEATURE_CALL__IMPLICIT_FIRST_ARGUMENT:
-				return implicitFirstArgument != null;
 		}
 		return super.eIsSet(featureID);
 	}

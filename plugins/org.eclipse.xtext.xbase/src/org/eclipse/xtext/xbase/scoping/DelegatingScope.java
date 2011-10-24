@@ -25,11 +25,19 @@ public class DelegatingScope extends JvmFeatureScope {
 	private IScope delegate = IScope.NULLSCOPE;
 
 	protected DelegatingScope(IScope parent) {
-		super(parent, "DelegatingScope", Collections.<IValidatedEObjectDescription>emptyList());
+		this(parent, "DelegatingScope");
+	}
+	
+	protected DelegatingScope(IScope parent, String name) {
+		super(parent, name, Collections.<IValidatedEObjectDescription>emptyList());
 	}
 	
 	public void setDelegate(IScope delegate) {
 		this.delegate = delegate;
+	}
+	
+	protected IScope getDelegate() {
+		return delegate;
 	}
 	
 	@Override
@@ -52,18 +60,6 @@ public class DelegatingScope extends JvmFeatureScope {
 		return delegate.getAllElements();
 	}
 	
-//	@Override
-//	protected boolean isShadowed(IEObjectDescription input) {
-//		// TODO Auto-generated method stub
-//		return super.isShadowed(input);
-//	}
-//	
-//	protected String getShadowingKey(IEObjectDescription description) {
-//		if (description instanceof IValidatedEObjectDescription)
-//			return ((IValidatedEObjectDescription)description).getKey();
-//		return description.getName().toString();
-//	}
-//	
 	@Override
 	public String toString() {
 		return super.toString()+" -> "+delegate;

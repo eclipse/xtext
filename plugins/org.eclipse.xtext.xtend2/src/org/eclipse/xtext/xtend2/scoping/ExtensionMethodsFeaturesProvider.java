@@ -15,6 +15,7 @@ import java.util.List;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
@@ -69,10 +70,12 @@ public class ExtensionMethodsFeaturesProvider extends AbstractFeaturesForTypePro
 							if (isSameTypeOrAssignableToUpperBound(reference, parameterType)) {
 								result.add(operation);
 							}
-						} else {
+						} else if (noParameters) {
 							result.add(operation);
 						}
 					}
+				} else if (candidate instanceof JvmField && noParameters) {
+					result.add(candidate);
 				}
 			}
 			if (!atLeastOneCandidate || noParameters)
@@ -109,4 +112,10 @@ public class ExtensionMethodsFeaturesProvider extends AbstractFeaturesForTypePro
 		return !noParameters;
 	}
 
+	@Override
+	public String toString() {
+		return "ExtensionMethodsFeaturesProvider [extensionProvidingType=" + extensionProvidingType + ", noParameters="
+				+ noParameters + "]";
+	}
+	
 }

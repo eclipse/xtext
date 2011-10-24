@@ -14,9 +14,11 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.tests.jvmmodel.AbstractJvmModelTest;
+import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 @SuppressWarnings("all")
 public class JvmModelTest extends AbstractJvmModelTest {
@@ -61,5 +63,11 @@ public class JvmModelTest extends AbstractJvmModelTest {
       Assert.assertEquals(1, _size);
       Object _get_1 = field.get(resource);
       Assert.assertFalse(((Boolean) _get_1));
+  }
+  
+  public void testReturnTypeConformance() throws Exception {
+      XExpression _expression = this.expression("return");
+      final XExpression expression = _expression;
+      this.helper.assertError(expression, Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN);
   }
 }

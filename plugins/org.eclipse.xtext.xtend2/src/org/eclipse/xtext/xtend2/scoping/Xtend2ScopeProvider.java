@@ -3,51 +3,50 @@
  */
 package org.eclipse.xtext.xtend2.scoping;
 
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.annotations.scoping.XbaseWithAnnotationsScopeProvider;
-import org.eclipse.xtext.xbase.scoping.featurecalls.DefaultJvmFeatureDescriptionProvider;
-import org.eclipse.xtext.xbase.scoping.featurecalls.IFeaturesForTypeProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IJvmFeatureDescriptionProvider;
-import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
-import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScope;
-import org.eclipse.xtext.xbase.scoping.featurecalls.XFeatureCallSugarDescriptionProvider;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendField;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.google.inject.util.Providers;
 
 /**
  * @author Sven Efftinge
+ * @author Sebastian Zarnekow - Implicit first argument
  */
 public class Xtend2ScopeProvider extends XbaseWithAnnotationsScopeProvider {
 
+	private static final int IMPORTED_STATIC_FEATURE_PRIORITY = 50;
+	private static final int DEFAULT_EXTENSION_PRIORITY = 45;
+	private static final int IMPLICIT_ARGUMENT_PRIORITY = 400;
+	
+	private static final int THIS_EXTENSION_PRIORITY_OFFSET = 200;
+	private static final int DYNAMIC_EXTENSION_PRIORITY_OFFSET = 210;
+	private static final int STATIC_EXTENSION_PRIORITY_OFFSET = 220;
+	
 	@Inject
 	private IXtend2JvmAssociations xtend2jvmAssociations;
 
@@ -61,65 +60,140 @@ public class Xtend2ScopeProvider extends XbaseWithAnnotationsScopeProvider {
 	private TypeReferences typeReferences;
 
 	@Override
-	protected List<IJvmFeatureDescriptionProvider> getStaticFeatureDescriptionProviders(Resource context,
-			JvmDeclaredType contextType) {
-		List<IJvmFeatureDescriptionProvider> result = super.getStaticFeatureDescriptionProviders(context, contextType);
-		final DefaultJvmFeatureDescriptionProvider defaultProvider = newDefaultFeatureDescProvider();
-		XFeatureCallSugarDescriptionProvider sugarProvider = newSugarDescriptionProvider();
+	protected void addStaticFeatureDescriptionProviders(
+			Resource resource, 
+			JvmDeclaredType contextType,
+			IAcceptor<IJvmFeatureDescriptionProvider> acceptor) {
+		super.addStaticFeatureDescriptionProviders(resource, contextType, acceptor);
+		
 		StaticallyImportedFeaturesProvider staticProvider = staticallyImportedFeaturesProvider.get();
-		staticProvider.setContext(context);
+		staticProvider.setResourceContext(resource);
 		staticProvider.setExtensionProvider(false);
-		defaultProvider.setContextType(contextType);
-		defaultProvider.setFeaturesForTypeProvider(staticProvider);
-		sugarProvider.setContextType(contextType);
-		sugarProvider.setFeaturesForTypeProvider(staticProvider);
-		result.add(0, defaultProvider);
-		result.add(1, sugarProvider);
-		return result;
+		
+		addFeatureDescriptionProviders(contextType, staticProvider, null, null, IMPORTED_STATIC_FEATURE_PRIORITY, true, acceptor);
 	}
-
+	
 	@Override
-	protected List<IJvmFeatureDescriptionProvider> getFeatureDescriptionProviders(JvmTypeReference type,
-			EObject expression, JvmDeclaredType currentContext, XExpression implicitReceiver) {
-		List<IJvmFeatureDescriptionProvider> result = super.getFeatureDescriptionProviders(type, expression,
-				currentContext, implicitReceiver);
-
-		final StaticallyImportedFeaturesProvider staticProvider = staticallyImportedFeaturesProvider.get();
-		staticProvider.setContext(expression.eResource());
-		staticProvider.setExtensionProvider(true);
-		insertDescriptionProviders(staticProvider, currentContext, implicitReceiver, result);
-
-		final XtendClass xtendClass = ((XtendFile) expression.eResource().getContents().get(0)).getXtendClass();
+	protected void addFeatureDescriptionProvidersForAssignment(
+			Resource resource, JvmDeclaredType contextType,
+			XExpression implicitReceiver, XExpression implicitArgument, int priority,
+			IAcceptor<IJvmFeatureDescriptionProvider> acceptor) {
+		super.addFeatureDescriptionProvidersForAssignment(resource, contextType, implicitReceiver, implicitArgument, priority, acceptor);
+		
+		if (implicitReceiver == null || implicitArgument != null) {
+			final StaticallyImportedFeaturesProvider staticProvider = staticallyImportedFeaturesProvider.get();
+			staticProvider.setResourceContext(resource);
+			staticProvider.setExtensionProvider(true);
+			if (implicitArgument != null) {
+				// use the implicit argument as implicit receiver
+				SimpleAcceptor casted = (SimpleAcceptor) acceptor;
+				JvmTypeReference implicitArgumentType = getTypeProvider().getType(implicitArgument, true);
+				IAcceptor<IJvmFeatureDescriptionProvider> myAcceptor = casted.getParent().curry(implicitArgumentType, casted.getExpression());
+				addFeatureDescriptionProvidersForAssignment(contextType, staticProvider, implicitArgument, null, priority + STATIC_EXTENSION_PRIORITY_OFFSET, true, myAcceptor);
+			} else {
+				addFeatureDescriptionProvidersForAssignment(contextType, staticProvider, implicitReceiver, implicitArgument, priority + STATIC_EXTENSION_PRIORITY_OFFSET, true, acceptor);
+			}
+		}
+		
+		final XtendClass xtendClass = ((XtendFile) resource.getContents().get(0)).getXtendClass();
 		// extensions for this
 		JvmGenericType inferredJvmType = xtend2jvmAssociations.getInferredType(xtendClass);
-		if (implicitReceiver == null || 
-				(implicitReceiver instanceof XFeatureCall && (((XAbstractFeatureCall) implicitReceiver).getFeature() == inferredJvmType))) {
-			XFeatureCall callToThis = XbaseFactory.eINSTANCE.createXFeatureCall();
-			callToThis.setFeature(inferredJvmType);
-			// injected extensions
-			Iterable<XtendField> extensionFields = getExtensionDependencies(xtendClass);
-			for (XtendField extensionField : extensionFields) {
-				JvmIdentifiableElement dependencyImplicitReceiver = findImplicitReceiverFor(extensionField);
-				XMemberFeatureCall callToDependency = XbaseFactory.eINSTANCE.createXMemberFeatureCall();
-				callToDependency.setMemberCallTarget(EcoreUtil2.clone(callToThis));
-				callToDependency.setFeature(dependencyImplicitReceiver);
-				if (dependencyImplicitReceiver != null) {
-					ExtensionMethodsFeaturesProvider extensionFeatureProvider = extensionMethodsFeaturesProvider.get();
-					extensionFeatureProvider.setContext(extensionField.getType());
-					extensionFeatureProvider.setExpectNoParameters(implicitReceiver != null);
-					insertDescriptionProviders(extensionFeatureProvider, currentContext, callToDependency, result);
-				}
+		if (inferredJvmType != null) {
+			boolean isThis = false;
+			if (implicitReceiver instanceof XFeatureCall) {
+				isThis = ((XFeatureCall) implicitReceiver).getFeature() == inferredJvmType;
 			}
-			if (inferredJvmType != null && implicitReceiver == null) {
+			if (implicitReceiver == null || isThis) {
+				XFeatureCall callToThis = XbaseFactory.eINSTANCE.createXFeatureCall();
+				callToThis.setFeature(inferredJvmType);
+				// injected extensions
+				Iterable<XtendField> extensionFields = getExtensionDependencies(xtendClass);
+				int extensionPriority = priority + DYNAMIC_EXTENSION_PRIORITY_OFFSET;
+				if (isThis && implicitArgument == null)
+					extensionPriority = DEFAULT_EXTENSION_PRIORITY;
+				for (XtendField extensionField : extensionFields) {
+					JvmIdentifiableElement dependencyImplicitReceiver = findImplicitReceiverFor(extensionField);
+					XMemberFeatureCall callToDependency = XbaseFactory.eINSTANCE.createXMemberFeatureCall();
+					callToDependency.setMemberCallTarget(EcoreUtil2.clone(callToThis));
+					callToDependency.setFeature(dependencyImplicitReceiver);
+					if (dependencyImplicitReceiver != null) {
+						ExtensionMethodsFeaturesProvider extensionFeatureProvider = extensionMethodsFeaturesProvider.get();
+						extensionFeatureProvider.setContext(extensionField.getType());
+						extensionFeatureProvider.setExpectNoParameters(isThis);
+						addFeatureDescriptionProvidersForAssignment(contextType, extensionFeatureProvider, callToDependency, implicitArgument, extensionPriority, false, acceptor);
+					}
+				}
 				JvmParameterizedTypeReference typeRef = typeReferences.createTypeRef(inferredJvmType);
 				ExtensionMethodsFeaturesProvider featureProvider = extensionMethodsFeaturesProvider.get();
 				featureProvider.setContext(typeRef);
-				insertDescriptionProviders(featureProvider, currentContext, callToThis, result);
+				featureProvider.setExpectNoParameters(isThis);
+				addFeatureDescriptionProvidersForAssignment(contextType, featureProvider, callToThis, implicitArgument, priority + THIS_EXTENSION_PRIORITY_OFFSET, false, acceptor);
 			}
 		}
-		return result;
 	}
 
+	@Override
+	protected void addFeatureDescriptionProviders(
+			Resource resource, 
+			JvmDeclaredType contextType,
+			XExpression implicitReceiver,
+			XExpression implicitArgument,
+			int priority,
+			IAcceptor<IJvmFeatureDescriptionProvider> acceptor) {
+		super.addFeatureDescriptionProviders(resource, contextType, implicitReceiver, implicitArgument, priority, acceptor);
+		
+		if (implicitReceiver == null || implicitArgument != null) {
+			final StaticallyImportedFeaturesProvider staticProvider = staticallyImportedFeaturesProvider.get();
+			staticProvider.setResourceContext(resource);
+			staticProvider.setExtensionProvider(true);
+			if (implicitArgument != null) {
+				// use the implicit argument as implicit receiver
+				SimpleAcceptor casted = (SimpleAcceptor) acceptor;
+				JvmTypeReference implicitArgumentType = getTypeProvider().getType(implicitArgument, true);
+				IAcceptor<IJvmFeatureDescriptionProvider> myAcceptor = casted.getParent().curry(implicitArgumentType, casted.getExpression());
+				addFeatureDescriptionProviders(contextType, staticProvider, implicitArgument, null, priority + STATIC_EXTENSION_PRIORITY_OFFSET, true, myAcceptor);
+			} else {
+				addFeatureDescriptionProviders(contextType, staticProvider, implicitReceiver, implicitArgument, priority + STATIC_EXTENSION_PRIORITY_OFFSET, true, acceptor);
+			}
+		}
+		
+		final XtendClass xtendClass = ((XtendFile) resource.getContents().get(0)).getXtendClass();
+		// extensions for this
+		JvmGenericType inferredJvmType = xtend2jvmAssociations.getInferredType(xtendClass);
+		if (inferredJvmType != null) {
+			boolean isThis = false;
+			if (implicitReceiver instanceof XFeatureCall) {
+				isThis = ((XFeatureCall) implicitReceiver).getFeature() == inferredJvmType;
+			}
+			if (implicitReceiver == null || isThis) {
+				XFeatureCall callToThis = XbaseFactory.eINSTANCE.createXFeatureCall();
+				callToThis.setFeature(inferredJvmType);
+				// injected extensions
+				Iterable<XtendField> extensionFields = getExtensionDependencies(xtendClass);
+				int extensionPriority = priority + DYNAMIC_EXTENSION_PRIORITY_OFFSET;
+				if (isThis && implicitArgument == null)
+					extensionPriority = DEFAULT_EXTENSION_PRIORITY;
+				for (XtendField extensionField : extensionFields) {
+					JvmIdentifiableElement dependencyImplicitReceiver = findImplicitReceiverFor(extensionField);
+					XMemberFeatureCall callToDependency = XbaseFactory.eINSTANCE.createXMemberFeatureCall();
+					callToDependency.setMemberCallTarget(EcoreUtil2.clone(callToThis));
+					callToDependency.setFeature(dependencyImplicitReceiver);
+					if (dependencyImplicitReceiver != null) {
+						ExtensionMethodsFeaturesProvider extensionFeatureProvider = extensionMethodsFeaturesProvider.get();
+						extensionFeatureProvider.setContext(extensionField.getType());
+						extensionFeatureProvider.setExpectNoParameters(isThis);
+						addFeatureDescriptionProviders(contextType, extensionFeatureProvider, callToDependency, implicitArgument, extensionPriority, false, acceptor);
+					}
+				}
+				JvmParameterizedTypeReference typeRef = typeReferences.createTypeRef(inferredJvmType);
+				ExtensionMethodsFeaturesProvider featureProvider = extensionMethodsFeaturesProvider.get();
+				featureProvider.setContext(typeRef);
+				featureProvider.setExpectNoParameters(isThis);
+				addFeatureDescriptionProviders(contextType, featureProvider, callToThis, implicitArgument, priority + THIS_EXTENSION_PRIORITY_OFFSET, false, acceptor);
+			}
+		}
+	}
+	
 	protected JvmIdentifiableElement findImplicitReceiverFor(XtendField XtendField) {
 		Set<EObject> elements = xtend2jvmAssociations.getJvmElements(XtendField);
 		if (!elements.isEmpty()) {
@@ -138,26 +212,6 @@ public class Xtend2ScopeProvider extends XbaseWithAnnotationsScopeProvider {
 				});
 	}
 
-	protected void insertDescriptionProviders(
-			IFeaturesForTypeProvider staticProvider,
-			JvmDeclaredType currentContext,
-			XExpression implicitReceiver,
-			List<IJvmFeatureDescriptionProvider> result) {
-		final DefaultJvmFeatureDescriptionProvider defaultProvider = newDefaultFeatureDescProvider();
-		defaultProvider.setFeaturesForTypeProvider(staticProvider);
-
-		final XFeatureCallSugarDescriptionProvider sugaredProvider = newSugarDescriptionProvider();
-		sugaredProvider.setFeaturesForTypeProvider(staticProvider);
-
-		defaultProvider.setContextType(currentContext);
-		defaultProvider.setImplicitReceiver(implicitReceiver);
-		sugaredProvider.setContextType(currentContext);
-		sugaredProvider.setImplicitReceiver(implicitReceiver);
-
-		result.add(2, defaultProvider);
-		result.add(3, sugaredProvider);
-	}
-
 	@Override
 	protected JvmDeclaredType getContextType(EObject call) {
 		if (call == null)
@@ -170,78 +224,33 @@ public class Xtend2ScopeProvider extends XbaseWithAnnotationsScopeProvider {
 	}
 	
 	@Override
-	protected IScope createImplicitFeatureCallScope(final EObject call, final IScope parent, IScope localVariableScope) {
-		IScope result = parent;
-		IEObjectDescription thisVariable = localVariableScope.getSingleElement(THIS);
-		if (thisVariable != null) {
-			EObject implicitReceiver = thisVariable.getEObjectOrProxy();
+	protected void addFeatureCallScopes(
+			EObject featureCall, 
+			final IScope localVariableScope,
+			final IJvmFeatureScopeAcceptor featureScopeDescriptions) {
+		IEObjectDescription implicitThis = localVariableScope.getSingleElement(THIS);
+		if (implicitThis != null) {
+			EObject implicitReceiver = implicitThis.getEObjectOrProxy();
 			if (implicitReceiver instanceof JvmIdentifiableElement) {
-				JvmTypeReference implicitReceiverType = getTypeProvider().getTypeForIdentifiable((JvmIdentifiableElement) implicitReceiver);
-				if (implicitReceiverType != null) {
-					IEObjectDescription itVariable = localVariableScope.getSingleElement(IT);
-					if (itVariable != null) {
-						EObject implicitArgument = itVariable.getEObjectOrProxy();
+				JvmTypeReference receiverType = getTypeProvider().getTypeForIdentifiable((JvmIdentifiableElement) implicitReceiver);
+				if (receiverType != null) {
+					XFeatureCall receiver = XbaseFactory.eINSTANCE.createXFeatureCall();
+					receiver.setFeature((JvmIdentifiableElement) implicitReceiver);
+					IEObjectDescription implicitIt = localVariableScope.getSingleElement(IT);
+					if (implicitIt != null) {
+						EObject implicitArgument = implicitIt.getEObjectOrProxy();
 						if (implicitArgument instanceof JvmIdentifiableElement) {
-							JvmTypeReference implicitArgumentType = getTypeProvider().getTypeForIdentifiable((JvmIdentifiableElement) implicitArgument);
-							if (implicitArgumentType != null) {
-								XFeatureCall receiver = XbaseFactory.eINSTANCE.createXFeatureCall();
-								receiver.setFeature((JvmIdentifiableElement) implicitReceiver);
+							JvmTypeReference argumentType = getTypeProvider().getTypeForIdentifiable((JvmIdentifiableElement) implicitArgument);
+							if (argumentType != null) {
 								XFeatureCall argument = XbaseFactory.eINSTANCE.createXFeatureCall();
 								argument.setFeature((JvmIdentifiableElement) implicitArgument);
-								result = createFeatureScopeForTypeRef(
-										implicitReceiverType,
-										implicitArgumentType,
-										call, 
-										getContextType(call),
-										receiver,
-										argument,
-										result);
+								addFeatureScopes(receiverType, featureCall, getContextType(featureCall), receiver, argument, IMPLICIT_ARGUMENT_PRIORITY, featureScopeDescriptions);
 							}
 						}
 					}
 				}
 			}
 		}
-		result = super.createImplicitFeatureCallScope(call, result, localVariableScope);
-		return result;
+		super.addFeatureCallScopes(featureCall, localVariableScope, featureScopeDescriptions);
 	}
-	
-	protected JvmFeatureScope createFeatureScopeForTypeRef(
-			final JvmTypeReference receiverType,
-			final JvmTypeReference argumentType,
-			final EObject expression,
-			JvmDeclaredType currentContext, 
-			XExpression implicitReceiver,
-			XExpression implicitArgument,
-			IScope parent) {
-		List<IJvmFeatureDescriptionProvider> providers = getFeatureDescriptionProviders(
-				receiverType, expression,
-				currentContext, implicitReceiver);
-		Function<JvmFeatureDescription, ITypeArgumentContext> contextFactory = new Function<JvmFeatureDescription, ITypeArgumentContext>() {
-			public ITypeArgumentContext apply(JvmFeatureDescription from) {
-				JvmIdentifiableElement feature = from.getEObjectOrProxy();
-				if (feature instanceof JvmExecutable && expression instanceof XAbstractFeatureCall) {
-					XAbstractFeatureCall featureCall = (XAbstractFeatureCall) expression;
-					List<XExpression> arguments = getFeatureCallToJavaMapping().getActualArguments(
-							featureCall, feature, 
-							from.getImplicitReceiver(),
-							from.getImplicitArgument());
-					ITypeArgumentContext result = getTypeArgumentContextHelper().getTypeArgumentContext(
-							featureCall,
-							arguments,
-							Providers.of(receiverType), 
-							feature);
-					return result;
-				}
-				return null;
-			}
-		};
-		for(IJvmFeatureDescriptionProvider provider: providers) {
-			if (provider instanceof DefaultJvmFeatureDescriptionProvider) {
-				((DefaultJvmFeatureDescriptionProvider) provider).setImplicitArgument(implicitArgument);
-			}
-		}
-		return jvmFeatureScopeProvider.createFeatureScopeForTypeRef(parent, receiverType, contextFactory, providers);
-	}
-
 }

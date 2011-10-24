@@ -18,6 +18,9 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(DefaultFeaturesForTypeProvider.class)
 public interface IFeaturesForTypeProvider {
 	
+	@Override
+	String toString();
+	
 	boolean isExtensionProvider();
 
 	// TODO use a specialized IJvmTypeHierarchy instance that allows to obtain more information

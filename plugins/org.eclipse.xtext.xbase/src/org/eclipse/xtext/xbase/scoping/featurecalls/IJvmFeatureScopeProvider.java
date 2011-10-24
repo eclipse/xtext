@@ -14,6 +14,7 @@ import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.scoping.IScope;
 
 import com.google.common.base.Function;
+import com.google.inject.ImplementedBy;
 
 /**
  * Provides a feature scope for a type, based on the type hierarchy.
@@ -23,9 +24,46 @@ import com.google.common.base.Function;
  * {@link JvmFeatureDescription}s contained in the provided Scope.
  * 
  * @author Sven Efftinge - Initial contribution and API
+ * @author Sebastian Zarnekow
  */
+@ImplementedBy(JvmFeatureScopeProvider.class)
 public interface IJvmFeatureScopeProvider {
 
+	static class FeatureScopeDescription {
+
+		private final JvmTypeReference receiverType;
+		private final Function<? super JvmFeatureDescription, ? extends ITypeArgumentContext> contextFactory;
+		private final IJvmFeatureDescriptionProvider descriptionProvider;
+
+		public FeatureScopeDescription(
+				JvmTypeReference receiverType,
+				Function<? super JvmFeatureDescription, ? extends ITypeArgumentContext> contextFactory,
+				IJvmFeatureDescriptionProvider descriptionProvider) {
+					this.receiverType = receiverType;
+					this.contextFactory = contextFactory;
+					this.descriptionProvider = descriptionProvider;
+		}
+
+		public JvmTypeReference getReceiverType() {
+			return receiverType;
+		}
+
+		public Function<? super JvmFeatureDescription, ? extends ITypeArgumentContext> getContextFactory() {
+			return contextFactory;
+		}
+
+		public IJvmFeatureDescriptionProvider getDescriptionProvider() {
+			return descriptionProvider;
+		}
+
+		@Override
+		public String toString() {
+			return "FeatureScopeDescription [receiverType=" + receiverType + ", descriptionProvider="
+					+ descriptionProvider + "]";
+		}
+		
+	}
+	
 	/**
 	 * <p>
 	 * Provides the feature scope for a given {@link JvmTypeReference}, using the given {@link IJvmFeatureDescriptionProvider}.
@@ -41,6 +79,7 @@ public interface IJvmFeatureScopeProvider {
 	 * </p>
 	 * @param typeReference the type whose features should be provided.
 	 */
-	public JvmFeatureScope createFeatureScopeForTypeRef(IScope parent, JvmTypeReference typeReference, 
-			Function<? super JvmFeatureDescription, ? extends ITypeArgumentContext> genericContextFactory, List<IJvmFeatureDescriptionProvider> descriptionProvider);
+	public JvmFeatureScope createFeatureScope(
+			IScope parent, 
+			List<FeatureScopeDescription> featureScopeDescriptions);
 }

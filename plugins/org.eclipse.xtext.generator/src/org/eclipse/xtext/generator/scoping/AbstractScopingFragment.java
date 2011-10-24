@@ -23,6 +23,7 @@ import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.IgnoreCaseLinking;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -40,6 +41,16 @@ public abstract class AbstractScopingFragment extends AbstractInheritingGenerato
 	 */
 	public boolean isGenerateStub() {
 		return generateStub;
+	}
+	
+	/**
+	 * @since 2.1
+	 */
+	public boolean isGenerateStub(Grammar grammar) {
+		if (XbaseGeneratorFragment.doesUseXbase(grammar)) {
+			return false;
+		}
+		return isGenerateStub();
 	}
 	
 	/**
@@ -93,10 +104,14 @@ public abstract class AbstractScopingFragment extends AbstractInheritingGenerato
 
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
-		boolean genStub = isGenerateStub();
-		if (XbaseGeneratorFragment.doesUseXbase(grammar)) {
-			genStub = false;
-		}
+		boolean genStub = isGenerateStub(grammar);
 		return newArrayList((Object)getScopeProviderSuperClassName(grammar), (Object)genStub);
+	}
+	
+	@Override
+	public String[] getExportedPackagesRt(Grammar grammar) {
+		if (!isGenerateStub(grammar))
+			return new String[0];
+		return new String[] { Strings.skipLastToken(getScopeProviderName(grammar, getNaming()),".") };
 	}
 }

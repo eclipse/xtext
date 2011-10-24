@@ -116,9 +116,10 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		public boolean apply(IEObjectDescription input) {
 			if (input instanceof IValidatedEObjectDescription) {
 				final IValidatedEObjectDescription desc = (IValidatedEObjectDescription) input;
-				if (!desc.isValid())
+				if (!desc.isVisible() || !desc.isValidStaticState() || !desc.isValid())
 					return false;
 				JvmIdentifiableElement element = desc.getEObjectOrProxy();
+				// TODO remove the workaround below
 				if (element instanceof JvmOperation) {
 					if ("java.lang.Object.finalize()".equals(element.getIdentifier()) ||
 						"java.lang.Object.clone()".equals(element.getIdentifier())) {

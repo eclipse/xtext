@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtend2.richstring;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xtend2.richstring.util.ProcessedRichStringSwitch;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
@@ -337,7 +338,7 @@ public class RichStringProcessor {
 				announced = object.getLiteral();
 			}
 			Line line = object.getLine();
-			TextLine textLine = new TextLine(object.getLiteral().getValue(), object.getOffset(), object.getLength(), 0);
+			TextLine textLine = new TextLine(Strings.emptyIfNull(object.getLiteral().getValue()), object.getOffset(), object.getLength(), 0);
 			CharSequence ws = textLine.getLeadingWhiteSpace();
 			ProcessedRichString string = line.getRichString();
 			boolean firstOrLast = string.getLines().get(0) == line || string.getLines().get(string.getLines().size()-1) == line;

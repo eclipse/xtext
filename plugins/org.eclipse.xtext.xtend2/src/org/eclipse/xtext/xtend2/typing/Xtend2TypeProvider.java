@@ -69,7 +69,7 @@ public class Xtend2TypeProvider extends XbaseWithAnnotationsTypeProvider {
 	private Primitives primitives;
 	
 	@Override
-	protected JvmTypeReference typeForIdentifiableDispatcherInvoke(JvmIdentifiableElement identifiable, boolean rawType) {
+	protected JvmTypeReference typeForIdentifiable(JvmIdentifiableElement identifiable, boolean rawType) {
 		if (identifiable instanceof JvmGenericType) {
 			return _typeForIdentifiable((JvmGenericType)identifiable, rawType);
 		} else if (identifiable instanceof XtendClass) {
@@ -79,12 +79,12 @@ public class Xtend2TypeProvider extends XbaseWithAnnotationsTypeProvider {
 		} else if (identifiable instanceof XtendParameter) {
 			return _typeForIdentifiable((XtendParameter)identifiable, rawType);
 		} else {
-			return super.typeForIdentifiableDispatcherInvoke(identifiable, rawType);
+			return super.typeForIdentifiable(identifiable, rawType);
 		}
 	}
 	
 	@Override
-	protected JvmTypeReference typeDispatcherInvoke(XExpression expression, JvmTypeReference rawExpectation, boolean rawType) {
+	protected JvmTypeReference type(XExpression expression, JvmTypeReference rawExpectation, boolean rawType) {
 		if (expression instanceof RichString) {
 			return _type((RichString)expression, rawExpectation, rawType);
 		} else if (expression instanceof RichStringForLoop) {
@@ -94,12 +94,12 @@ public class Xtend2TypeProvider extends XbaseWithAnnotationsTypeProvider {
 		} else if (expression instanceof RichStringLiteral) {
 			return _type((RichStringLiteral)expression, rawExpectation, rawType);
 		} else {
-			return super.typeDispatcherInvoke(expression, rawExpectation, rawType);
+			return super.type(expression, rawExpectation, rawType);
 		}
 	}
 	
 	@Override
-	protected JvmTypeReference expectedTypeDispatcherInvoke(EObject container, EReference reference, int index,
+	protected JvmTypeReference expectedType(EObject container, EReference reference, int index,
 			boolean rawType) {
 		if (container instanceof CreateExtensionInfo) {
 			return _expectedType((CreateExtensionInfo)container, reference, index, rawType);
@@ -112,7 +112,7 @@ public class Xtend2TypeProvider extends XbaseWithAnnotationsTypeProvider {
 		} else if (container instanceof XtendFunction) {
 			return _expectedType((XtendFunction)container, reference, index, rawType);
 		} else {
-			return super.expectedTypeDispatcherInvoke(container, reference, index, rawType);
+			return super.expectedType(container, reference, index, rawType);
 		}
 	}
 	

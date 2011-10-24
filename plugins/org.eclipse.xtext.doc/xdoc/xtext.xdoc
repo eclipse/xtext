@@ -52,6 +52,7 @@ codelanguage-def[Xbase][
 	catch,
 	finally,
 	this, 
+	it,
 	int, 
 	boolean, 
 	short, 
@@ -86,7 +87,7 @@ codelanguage-def[Xpand][
 ]
 
 codelanguage-def[Xtend][
-	import, extension, this, create, cached, this, true, false, let, switch,
+	import, extension, this, it, create, cached, this, true, false, let, switch,
 	case, if, then, else, public, protected, private
 ]
 

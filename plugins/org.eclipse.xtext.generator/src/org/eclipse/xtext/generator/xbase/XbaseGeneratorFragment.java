@@ -36,6 +36,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Lists;
 
@@ -211,6 +212,14 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
 		return Lists.<Object>newArrayList(useInferredJvmModel, generateXtendInferrer);
+	}
+	
+	@Override
+	public String[] getExportedPackagesRt(Grammar grammar) {
+		if(usesXbaseGrammar(grammar) && (generateXtendInferrer || useInferredJvmModel)) {
+			return new String[] { Strings.skipLastToken(getJvmModelInferrerName(grammar, getNaming()), ".") };
+		}
+		return null;
 	}
 
 }

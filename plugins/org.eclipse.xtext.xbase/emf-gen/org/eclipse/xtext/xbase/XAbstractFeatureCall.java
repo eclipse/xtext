@@ -23,6 +23,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  *   <li>{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getImplicitReceiver <em>Implicit Receiver</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getInvalidFeatureIssueCode <em>Invalid Feature Issue Code</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#isValidFeature <em>Valid Feature</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getImplicitFirstArgument <em>Implicit First Argument</em>}</li>
  * </ul>
  * </p>
  *
@@ -140,6 +141,32 @@ public interface XAbstractFeatureCall extends XExpression
 	 * @generated
 	 */
 	boolean isValidFeature();
+
+	/**
+	 * Returns the value of the '<em><b>Implicit First Argument</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Implicit First Argument</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Implicit First Argument</em>' containment reference.
+	 * @see #setImplicitFirstArgument(XExpression)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXAbstractFeatureCall_ImplicitFirstArgument()
+	 * @model containment="true" transient="true" derived="true"
+	 * @generated
+	 */
+	XExpression getImplicitFirstArgument();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getImplicitFirstArgument <em>Implicit First Argument</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Implicit First Argument</em>' containment reference.
+	 * @see #getImplicitFirstArgument()
+	 * @generated
+	 */
+	void setImplicitFirstArgument(XExpression value);
 
 	/**
 	 * <!-- begin-user-doc -->

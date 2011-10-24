@@ -27,7 +27,9 @@ Export-Package: org.eclipse.xtext.example.arithmetics,
  org.eclipse.xtext.example.arithmetics.arithmetics,
  org.eclipse.xtext.example.arithmetics.arithmetics.impl,
  org.eclipse.xtext.example.arithmetics.arithmetics.util,
- org.eclipse.xtext.example.arithmetics.parseTreeConstruction,
  org.eclipse.xtext.example.arithmetics.parser.antlr,
- org.eclipse.xtext.example.arithmetics.parser.antlr.internal
+ org.eclipse.xtext.example.arithmetics.parser.antlr.internal,
+ org.eclipse.xtext.example.arithmetics.scoping,
+ org.eclipse.xtext.example.arithmetics.formatting,
+ org.eclipse.xtext.example.arithmetics.serializer
 Import-Package: org.apache.log4j

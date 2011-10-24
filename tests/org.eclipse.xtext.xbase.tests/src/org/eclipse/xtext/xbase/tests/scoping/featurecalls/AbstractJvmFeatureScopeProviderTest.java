@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.tests.scoping.featurecalls;
 
 import static com.google.common.collect.Sets.*;
 
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -17,8 +18,11 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
+import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.scoping.featurecalls.DefaultJvmFeatureDescriptionProvider;
+import org.eclipse.xtext.xbase.scoping.featurecalls.IJvmFeatureDescriptionProvider;
+import org.eclipse.xtext.xbase.scoping.featurecalls.IJvmFeatureScopeProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IValidatedEObjectDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScope;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScopeProvider;
@@ -27,7 +31,9 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.XFeatureCallSugarDescription
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 
 import com.google.common.base.Function;
+import com.google.common.base.Functions;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -63,6 +69,19 @@ public abstract class AbstractJvmFeatureScopeProviderTest extends AbstractXbaseT
 		};
 		final Iterable<String> transformed = Iterables.transform(scope.getJvmFeatureDescriptions(), function);
 		return newHashSet(transformed);
+	}
+	
+	protected List<IJvmFeatureScopeProvider.FeatureScopeDescription> createScopeDescriptions(
+			JvmTypeReference reference,
+			List<? extends IJvmFeatureDescriptionProvider> providers) {
+		List<IJvmFeatureScopeProvider.FeatureScopeDescription> result = Lists.newArrayList();
+		for(int i = providers.size() - 1; i >= 0; i--) {
+			result.add(new IJvmFeatureScopeProvider.FeatureScopeDescription(
+					reference, 
+					Functions.<TypeArgumentContext>constant(null), 
+					providers.get(i)));
+		}
+		return result;
 	}
 
 	protected int numberOfScopes(JvmFeatureScope scope) {

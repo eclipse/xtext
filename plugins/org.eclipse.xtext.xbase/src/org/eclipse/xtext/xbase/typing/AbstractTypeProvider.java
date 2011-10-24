@@ -281,7 +281,7 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 
 		@Override
 		protected JvmTypeReference doComputation(Pair<XExpression, JvmTypeReference> t, boolean rawType) {
-			return typeDispatcherInvoke(t.getFirst(), t.getSecond(), rawType);
+			return type(t.getFirst(), t.getSecond(), rawType);
 		}
 		
 		@Override
@@ -311,7 +311,7 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		return getConstructor(expr, true);
 	}
 	
-	protected JvmTypeReference typeDispatcherInvoke(XExpression expression, JvmTypeReference rawExpectation, boolean rawType) {
+	protected JvmTypeReference type(XExpression expression, JvmTypeReference rawExpectation, boolean rawType) {
 		return _type(expression, rawExpectation, rawType);
 	}
 
@@ -374,7 +374,7 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 			Triple<EObject, EReference, Integer> triple = getContainingInfo(t);
 			if (triple == null)
 				return null;
-			return expectedTypeDispatcherInvoke(triple.getFirst(), triple.getSecond(), triple.getThird(), rawType);
+			return expectedType(triple.getFirst(), triple.getSecond(), triple.getThird(), rawType);
 		}
 
 		@Override
@@ -388,7 +388,7 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		}
 	};
 	
-	protected JvmTypeReference expectedTypeDispatcherInvoke(EObject container, EReference reference, int index, boolean rawType) {
+	protected JvmTypeReference expectedType(EObject container, EReference reference, int index, boolean rawType) {
 		return _expectedType(container, reference, index, rawType);
 	}
 	
@@ -429,7 +429,7 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 	protected CyclicHandlingSupport<JvmIdentifiableElement> getTypeForIdentifiable = new CyclicHandlingSupport<JvmIdentifiableElement>() {
 		@Override
 		protected JvmTypeReference doComputation(JvmIdentifiableElement t, boolean rawType) {
-			return typeForIdentifiableDispatcherInvoke(t, rawType);
+			return typeForIdentifiable(t, rawType);
 		}
 
 		@Override
@@ -443,7 +443,7 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		}
 	};
 
-	protected JvmTypeReference typeForIdentifiableDispatcherInvoke(JvmIdentifiableElement identifiable, boolean rawType) {
+	protected JvmTypeReference typeForIdentifiable(JvmIdentifiableElement identifiable, boolean rawType) {
 		return _typeForIdentifiable(identifiable, rawType);
 	}
 	

@@ -7,34 +7,33 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.featurecalls;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.inject.Provider;
 
 /**
+ * Internal scope implementation for Xbase feature scopes. Clients should not use this directly.
+ * @see FilteredDelegatingScope
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class LazyJvmFeatureScope extends JvmFeatureScope implements Predicate<IEObjectDescription> {
+public class LazyJvmFeatureScope extends JvmFeatureScope {
 
 	private final LazyJvmFeatureScopeStrategy strategy;
-	private final boolean onlyValidDescriptions;
 
-	public LazyJvmFeatureScope(IScope parent, String scopeDescription,
-			LazyJvmFeatureScopeStrategy strategy, boolean onlyValidDescriptions) {
-		super(parent, scopeDescription, Collections.<JvmFeatureDescription>emptyList());
+	protected LazyJvmFeatureScope(String scopeDescription,
+			LazyJvmFeatureScopeStrategy strategy) {
+		super(IScope.NULLSCOPE, scopeDescription, Collections.<JvmFeatureDescription>emptyList());
 		this.strategy = strategy;
-		this.onlyValidDescriptions = onlyValidDescriptions;
 	}
 
 	private Map<QualifiedName, List<IEObjectDescription>> cachedLocalElements = Maps.newHashMap();
@@ -44,48 +43,29 @@ public class LazyJvmFeatureScope extends JvmFeatureScope implements Predicate<IE
 		List<IEObjectDescription> result = cachedLocalElements.get(name);
 		if (result == null) {
 			Iterable<IEObjectDescription> candidates = strategy.getDescriptionsByName(name);
-			result = Lists.newArrayList(Iterables.filter(candidates, this));
+			result = Lists.newArrayList(candidates);
 			cachedLocalElements.put(name, result);
 		}
 		return result;
 	}
 	
 	@Override
-	public Iterable<IEObjectDescription> getElements(final QualifiedName name) {
-		// avoid using Iterables.concat here
-		List<IEObjectDescription> localElements = getLocalElementsByName(name);
-		if (localElements.isEmpty())
-			return getParent().getElements(name);
-		Iterable<IEObjectDescription> parentElements = getParentElements(new Provider<Iterable<IEObjectDescription>>() {
-			public Iterable<IEObjectDescription> get() {
-				return getParent().getElements(name);
-			}
-		});
-		Iterable<IEObjectDescription> result = Iterables.concat(localElements, parentElements);
-		return result;
-	}
-	
-	@Override
-	protected boolean isShadowedBy(IEObjectDescription fromParent, Iterable<IEObjectDescription> localElements) {
-		if (localElements instanceof Collection<?>) {
-			if (((Collection<?>) localElements).isEmpty())
-				return false;
-		}
-		return super.isShadowedBy(fromParent, localElements);
-	}
-	
-	@Override
 	protected Iterable<IEObjectDescription> getAllLocalElements() {
-		Iterable<IEObjectDescription> result = strategy.getAllDescriptions();
-		return Iterables.filter(result, this);
+		return strategy.getAllDescriptions();
+	}
+	
+	@Override
+	public List<IEObjectDescription> getElements(final QualifiedName name) {
+		// we know that we never have a parent scope
+		return getLocalElementsByName(name);
 	}
 
-	public boolean apply(IEObjectDescription input) {
-		if (input instanceof IValidatedEObjectDescription) {
-			boolean result = onlyValidDescriptions == ((IValidatedEObjectDescription) input).isValid();
-			return result;
-		}
-		return false;
+	@Override
+	public Iterable<IEObjectDescription> getElements(EObject object) {
+		// we know that we never have a parent scope
+		URI uri = EcoreUtil2.getNormalizedURI(object);
+		Iterable<IEObjectDescription> result = getLocalElementsByEObject(object, uri);
+		return result;
 	}
 	
 }

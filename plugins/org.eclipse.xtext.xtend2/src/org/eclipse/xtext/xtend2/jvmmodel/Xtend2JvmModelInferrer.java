@@ -200,7 +200,7 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			JvmFormalParameter parameter2 = first.getParameters().get(i);
 			parameter.setName(parameter2.getName());
 		}
-		jvmTypesBuilder.body(result, compileStrategies.forDispatcher(result, sortedOperations));
+		jvmTypesBuilder.setBody(result, compileStrategies.forDispatcher(result, sortedOperations));
 		JvmVisibility commonVisibility = null;
 		boolean isFirst = true;
 		for (JvmOperation jvmOperation : sortedOperations) {
@@ -287,7 +287,7 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			initializer.setVisibility(JvmVisibility.PRIVATE);
 			initializer.setReturnType(typeReferences.getTypeForName(Void.TYPE, source));
 
-			jvmTypesBuilder.body(operation, compileStrategies.forCacheMethod(createExtensionInfo, cacheVar, initializer));
+			jvmTypesBuilder.setBody(operation, compileStrategies.forCacheMethod(createExtensionInfo, cacheVar, initializer));
 
 			// the first parameter is the created object
 			JvmFormalParameter jvmParam = typesFactory.createJvmFormalParameter();

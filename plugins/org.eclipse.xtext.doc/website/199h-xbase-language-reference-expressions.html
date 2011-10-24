@@ -547,13 +547,14 @@
 			for the getter methods <span class="inlinecode">getMyProperty()</span>. If none of these members can be found the expression is unbound and a compiliation error is thrown.
 			</p>
 			<a name="Xbase_Expressions_ImplicitThis" ></a>
-			<h3>Implicit 'this' variable</h3>
+			<h3>Implicit variables 'this' and 'it'</h3>
 			<p>
-			If the current scope contains a variable named <span class="inlinecode"><span class="keyword">this</span></span>, the compiler will make all its members available to the scope. 
-			That is if 
+			If the current scope contains a variable named <span class="inlinecode"><span class="keyword">this</span></span> or <span class="inlinecode"><span class="keyword">it</span></span>, the compiler will make all its members available to the scope. 
+			That is one of 
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
+						<span class="keyword">it</span>.myProperty<br/>
 						<span class="keyword">this</span>.myProperty
 					</p>
 				</div>
@@ -569,7 +570,13 @@
 			</div>
 			
 			is valid as well and is equivalent, as long as there is no local variable 'myProperty' on the scope,
-			which would have higher precedence.
+			which would have higher precedence. 
+			</p>
+			<p>
+			As <span class="inlinecode"><span class="keyword">this</span></span> is bound to the surrounding object in Java, <span class="inlinecode"><span class="keyword">it</span></span> can be used
+			in finer-grained constructs such as function parameters. That is why <span class="inlinecode"><span class="keyword">it</span>.myProperty</span> has 
+			higher precedence than <span class="inlinecode"><span class="keyword">this</span>.myProperty</span>. <span class="inlinecode"><span class="keyword">it</span></span> is also the 
+			<a href="199h-xbase-language-reference-expressions.php#Xbase_Expressions_implicit_parameter" title="Go to &quot;Implicit Parameter it&quot;">default parameter name in closures</a>. 
 			</p>
 			<a name="Xbase_Expressions_NullSafeFeatureCalls" ></a>
 			<h3>Null-Safe Feature Call</h3>
@@ -750,6 +757,17 @@
 			  <li>... </li>
 			  <li><em>Function6&lt;Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type, ReturnType&gt;</em> for six parameters, </li>
 			</ul>
+			
+			or
+			<ul>
+			  <li><em>Procedure0</em> for zero parameters, </li>
+			  <li><em>Procedure1&lt;Param1Type&gt;</em> for one parameters, </li>
+			  <li><em>Procedure2&lt;Param1Type, Param2Type&gt;</em> for two parameters, </li>
+			  <li>... </li>
+			  <li><em>Procedure6&lt;Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type&gt;</em> for six parameters, </li>
+			</ul>
+			
+			if the reutrn type is <span class="inlinecode"><span class="keyword">void</span></span>.
 			</p>
 			<p>
 			In order to allow seamless integration with existing Java libraries such as the JDK or Google Guava (formerly known as Google Collect) closures
@@ -776,13 +794,27 @@
 				</div>
 			</div>
 			</p>
-			<a name="Xbase_Expressions_Closures_5" ></a>
+			<a name="Xbase_Expressions_implicit_parameter" ></a>
+			<h3>Implicit Parameter <em>it</em></h3>
+			<p>
+			If a closure has a single parameter whose type can be inferred, the declaration of the parameter can
+			be ommitted. Use <em>it</em> to refer to the parameter inside the closure's body.
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						<span class="keyword">val</span>&nbsp;(String&nbsp;s)=&gt;String&nbsp;function&nbsp;=&nbsp;[toUpperCase]&nbsp;<br/>
+						&nbsp;&nbsp;<span class="comment">//&nbsp;equivalent&nbsp;to&nbsp;[it&nbsp;| it.toUpperCase]</span>
+					</p>
+				</div>
+			</div>
+			</p>
+			<a name="Xbase_Expressions_Closures_6" ></a>
 			<h3>Examples</h3>
 			<p>
 			<ul>
 			  <li><span class="inlinecode">[&nbsp;|&nbsp;<span class="string">"foo"</span>&nbsp;]&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;closure&nbsp;without&nbsp;parameters</span></span></li>
 			  <li><span class="inlinecode">[&nbsp;String&nbsp;s&nbsp;|&nbsp;s.toUpperCase()&nbsp;]&nbsp;<span class="comment">//&nbsp;explicit&nbsp;argument&nbsp;type</span></span></li>
-			  <li><span class="inlinecode">[&nbsp;a,b,a&nbsp;|&nbsp;a+b+c&nbsp;]&nbsp;<span class="comment">//&nbsp;inferred&nbsp;argument&nbsp;types</span></span></li>
+			  <li><span class="inlinecode">[&nbsp;a,b,c&nbsp;|&nbsp;a+b+c&nbsp;]&nbsp;<span class="comment">//&nbsp;inferred&nbsp;argument&nbsp;types</span></span></li>
 			</ul>
 			</p>
 			<a name="Xbase_Expressions_IfExpression" ></a>

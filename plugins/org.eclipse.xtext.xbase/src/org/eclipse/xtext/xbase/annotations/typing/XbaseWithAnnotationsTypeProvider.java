@@ -36,7 +36,7 @@ public class XbaseWithAnnotationsTypeProvider extends XbaseTypeProvider {
 	private XAnnotationUtil annotationUtil;
 	
 	@Override
-	protected JvmTypeReference expectedTypeDispatcherInvoke(EObject container, EReference reference, int index,
+	protected JvmTypeReference expectedType(EObject container, EReference reference, int index,
 			boolean rawType) {
 		if (container instanceof XAnnotation) {
 			return _expectedType((XAnnotation)container, reference, index, rawType);
@@ -47,7 +47,7 @@ public class XbaseWithAnnotationsTypeProvider extends XbaseTypeProvider {
 		} else if (container instanceof XAnnotationValueArray) {
 			return _expectedType((XAnnotationValueArray)container, reference, index, rawType);
 		} else {
-			return super.expectedTypeDispatcherInvoke(container, reference, index, rawType);
+			return super.expectedType(container, reference, index, rawType);
 		}
 	}
 	
@@ -86,7 +86,7 @@ public class XbaseWithAnnotationsTypeProvider extends XbaseTypeProvider {
 	}
 	
 	@Override
-	protected JvmTypeReference typeDispatcherInvoke(XExpression expression, JvmTypeReference rawExpectation, boolean rawType) {
+	protected JvmTypeReference type(XExpression expression, JvmTypeReference rawExpectation, boolean rawType) {
 		if (expression instanceof XAnnotation) {
 			return _type((XAnnotation)expression, rawExpectation, rawType);
 		} else if (expression instanceof XAnnotationElementValueBinaryOperation) {
@@ -94,7 +94,7 @@ public class XbaseWithAnnotationsTypeProvider extends XbaseTypeProvider {
 		} else if (expression instanceof XAnnotationValueArray) {
 			return _type((XAnnotationValueArray)expression, rawExpectation, rawType);
 		} else {
-			return super.typeDispatcherInvoke(expression, rawExpectation, rawType);
+			return super.type(expression, rawExpectation, rawType);
 		}
 	}
 

@@ -5,8 +5,8 @@ import java.util.ArrayList
 class Xtend02_SimpleExpressions {
 	
 	/**
-	 * string literals can be multi line and 
-	 * can be terminated by either single quotes or double quotes
+	 * String literals can be multi-line and can be terminated by 
+	 * either single quotes or double quotes.
 	 */
 	def stringLiteral() {
 		'Hello World'
@@ -29,22 +29,22 @@ class Xtend02_SimpleExpressions {
 	}
 	
 	/**
-	 * The equivalent to Java's String.class is typeof(String)
+	 * The equivalent to Java's String.class is typeof(String).
 	 */
 	def clazzLiteral() {
 		typeof(String)
 	}
 	
 	/**
-	 * the equivalent to Java's ((String)null) is (null as String)
+	 * The equivalent to Java's ((String)null) is (null as String).
 	 */
 	def casts() {
 		(null as String).toString() // results in a NullPointerException
 	}
 	
 	/**
-	 * variable declaration can occure within a block expression.
-	 * Which in turn can occure everywhere an expression can occure.
+	 * Variable declaration can occur within a block expression, which 
+	 * in turn can occur where an expression is allowed
 	 */
 	def variableDeclaration() {
 		val myString = 'Hello World'

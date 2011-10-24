@@ -45,18 +45,16 @@ public class BuilderConfigurationBlock extends OptionsConfigurationBlock {
 
 	private EclipseOutputConfigurationProvider configurationProvider;
 
-	public BuilderConfigurationBlock(IProject project, WorkingCopyPreferencesAccess workingCopyPreferencesAccess,
+	public BuilderConfigurationBlock(IProject project, IPreferenceStore preferenceStore,
 			EclipseOutputConfigurationProvider configurationProvider, IWorkbenchPreferenceContainer container) {
-		super(project, getKeys(project, configurationProvider), workingCopyPreferencesAccess, container);
+		super(project, getKeys(project, configurationProvider), preferenceStore, container);
 		this.configurationProvider = configurationProvider;
 	}
 
 	private static String[] getKeys(IProject project, EclipseOutputConfigurationProvider configurationProvider) {
-		Set<String> keys = Sets.newHashSet(BuilderPreferenceAccess.PREF_AUTO_BUILDING);
+		Set<String> keys = Sets.newHashSet(BuilderPreferenceAccess.PREF_AUTO_BUILDING, OptionsConfigurationBlock.IS_PROJECT_SPECIFIC);
 		Set<OutputConfiguration> outputConfigurations = configurationProvider.getOutputConfigurations(project);
 		for (OutputConfiguration outputConfiguration : outputConfigurations) {
-			keys.add(BuilderPreferenceAccess.getKey(outputConfiguration,
-					EclipseOutputConfigurationProvider.OUTPUT_DESCRIPTION));
 			keys.add(BuilderPreferenceAccess.getKey(outputConfiguration,
 					EclipseOutputConfigurationProvider.OUTPUT_DIRECTORY));
 			keys.add(BuilderPreferenceAccess.getKey(outputConfiguration,

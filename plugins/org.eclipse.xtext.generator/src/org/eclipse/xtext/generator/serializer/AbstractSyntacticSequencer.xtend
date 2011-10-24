@@ -16,7 +16,6 @@ import org.eclipse.xtext.generator.grammarAccess.GrammarAccess
 import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtext.serializer.analysis.GrammarAlias
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider
-import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer
 import org.eclipse.xtext.util.Strings
 
 import static extension org.eclipse.xtext.GrammarUtil.*

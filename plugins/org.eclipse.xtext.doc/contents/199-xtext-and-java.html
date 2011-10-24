@@ -2010,13 +2010,14 @@ the compiler first looks for an accessible field in the type of <span class="inl
 for the getter methods <span class="inlinecode">getMyProperty()</span>. If none of these members can be found the expression is unbound and a compiliation error is thrown.
 </p>
 <a name="Xbase_Expressions_ImplicitThis"></a>
-<h4>Implicit 'this' variable</h4>
+<h4>Implicit variables 'this' and 'it'</h4>
 <p>
-If the current scope contains a variable named <span class="inlinecode"><span class="keyword">this</span></span>, the compiler will make all its members available to the scope. 
-That is if 
+If the current scope contains a variable named <span class="inlinecode"><span class="keyword">this</span></span> or <span class="inlinecode"><span class="keyword">it</span></span>, the compiler will make all its members available to the scope. 
+That is one of 
 <div class="literallayout">
 <div class="incode">
 <p class="code">
+<span class="keyword">it</span>.myProperty<br/>
 <span class="keyword">this</span>.myProperty<br/>
 </p>
 </div>
@@ -2032,7 +2033,13 @@ myProperty<br/>
 </div>
 
 is valid as well and is equivalent, as long as there is no local variable &apos;myProperty&apos; on the scope,
-which would have higher precedence.
+which would have higher precedence. 
+</p>
+<p>
+As <span class="inlinecode"><span class="keyword">this</span></span> is bound to the surrounding object in Java, <span class="inlinecode"><span class="keyword">it</span></span> can be used
+in finer-grained constructs such as function parameters. That is why <span class="inlinecode"><span class="keyword">it</span>.myProperty</span> has 
+higher precedence than <span class="inlinecode"><span class="keyword">this</span>.myProperty</span>. <span class="inlinecode"><span class="keyword">it</span></span> is also the 
+<a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_implicit_parameter" title="Go to &quot;Implicit Parameter it&quot;">default parameter name in closures</a>. 
 </p>
 <a name="Xbase_Expressions_NullSafeFeatureCalls"></a>
 <h4>Null-Safe Feature Call</h4>
@@ -2225,6 +2232,27 @@ for each number of parameters (current maximum is six parameters). The names of 
 		<em>Function6&lt;Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type, ReturnType&gt;</em> for six parameters, 
 	</li>
 </ul>
+
+or
+<ul>
+	<li>
+		<em>Procedure0</em> for zero parameters, 
+	</li>
+	<li>
+		<em>Procedure1&lt;Param1Type&gt;</em> for one parameters, 
+	</li>
+	<li>
+		<em>Procedure2&lt;Param1Type, Param2Type&gt;</em> for two parameters, 
+	</li>
+	<li>
+		... 
+	</li>
+	<li>
+		<em>Procedure6&lt;Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type&gt;</em> for six parameters, 
+	</li>
+</ul>
+
+if the reutrn type is <span class="inlinecode"><span class="keyword">void</span></span>.
 </p>
 <p>
 In order to allow seamless integration with existing Java libraries such as the JDK or Google Guava (formerly known as Google Collect) closures
@@ -2251,7 +2279,22 @@ newArrayList(&nbsp;<span class="string">&apos;aaa&apos;</span>,&nbsp;<span class
 </div>
 </div>
 </p>
-<a name="Xbase_Expressions_Closures_5"></a>
+<a name="Xbase_Expressions_implicit_parameter"></a>
+<h4>Implicit Parameter it</h4>
+<p>
+If a closure has a single parameter whose type can be inferred, the declaration of the parameter can
+be ommitted. Use <em>it</em> to refer to the parameter inside the closure&apos;s body.
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">val</span>&nbsp;(String&nbsp;s)=&gt;String&nbsp;function&nbsp;=&nbsp;[toUpperCase]&nbsp;<br/>
+&nbsp;&nbsp;<span class="comment">//&nbsp;equivalent&nbsp;to&nbsp;[it&nbsp;| it.toUpperCase]<br/>
+</span>
+</p>
+</div>
+</div>
+</p>
+<a name="Xbase_Expressions_Closures_6"></a>
 <h4>Examples</h4>
 <p>
 <ul>
@@ -2262,7 +2305,7 @@ newArrayList(&nbsp;<span class="string">&apos;aaa&apos;</span>,&nbsp;<span class
 		<span class="inlinecode">[&nbsp;String&nbsp;s&nbsp;|&nbsp;s.toUpperCase()&nbsp;]&nbsp;<span class="comment">//&nbsp;explicit&nbsp;argument&nbsp;type</span></span>
 	</li>
 	<li>
-		<span class="inlinecode">[&nbsp;a,b,a&nbsp;|&nbsp;a+b+c&nbsp;]&nbsp;<span class="comment">//&nbsp;inferred&nbsp;argument&nbsp;types</span></span>
+		<span class="inlinecode">[&nbsp;a,b,c&nbsp;|&nbsp;a+b+c&nbsp;]&nbsp;<span class="comment">//&nbsp;inferred&nbsp;argument&nbsp;types</span></span>
 	</li>
 </ul>
 </p>
@@ -2853,6 +2896,93 @@ bind and invoke <span class="inlinecode">foo(Object)</span>.
 		<span class="inlinecode">oh.my.foo(bar)</span>
 	</li>
 </ul>
+</p>
+<a name="XbaseLanguageRef_builderSyntax"></a>
+<h3>Builder Syntax</h3>
+<p>
+If the last argument of a method call is a closure, it can be appended to the method call. Thus,
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+foo(42)&nbsp;[String&nbsp;s&nbsp;|&nbsp;s.toUpperCase]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+will call a Java method with the signature
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">void</span>&nbsp;foo(<span class="keyword">int</span>,&nbsp;Function1&lt;String,&nbsp;String&gt;)<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+Used in combination with the <a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_implicit_parameter" title="Go to &quot;Implicit Parameter it&quot;">implicit parameter name in closures</a>
+you can write <a href="199i-xbase-language-reference-libraries.html" title="Go to &quot;Extension Methods&quot;">extension libraries</a> to create and initialize graphs of
+objects in a concise builder syntax like in Groovy. Consider you have a set of library methods 
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+HtmlNode&nbsp;html(Function1&lt;HtmlNode,&nbsp;Void&gt;&nbsp;initializer)<br/>
+HeadNode&nbsp;head(HtmlNode&nbsp;parent,&nbsp;Function1&lt;HeadNode,&nbsp;Void&gt;&nbsp;initializer)<br/>
+...<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+that create DOM elements for HTML pages inside their respective parent elements. You can then create a DOM
+using the following Xbase code:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+html(&nbsp;[&nbsp;html&nbsp;| <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;head(html,&nbsp;[&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;initialize&nbsp;head<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;]&nbsp;)&nbsp;<br/>
+]&nbsp;)<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+Appending the closure parameters and prepending the parent parameters using extension syntax yields
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+html()&nbsp;[&nbsp;html&nbsp;| <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;html.head()&nbsp;[&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;initialize&nbsp;head<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;]&nbsp;&nbsp;<br/>
+]&nbsp;<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+Using implicit parameter names and skipping empty parentheses you can simplify this to 
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+html&nbsp;[&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;head&nbsp;[&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;initialize&nbsp;head<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;]&nbsp;&nbsp;<br/>
+]&nbsp;<br/>
+</p>
+</div>
+</div>
 </p>
 </body>
 </html>

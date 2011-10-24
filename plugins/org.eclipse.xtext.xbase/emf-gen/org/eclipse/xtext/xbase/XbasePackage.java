@@ -366,13 +366,22 @@ public interface XbasePackage extends EPackage
 	int XABSTRACT_FEATURE_CALL__VALID_FEATURE = XEXPRESSION_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Implicit First Argument</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT = XEXPRESSION_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>XAbstract Feature Call</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XABSTRACT_FEATURE_CALL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 5;
+	int XABSTRACT_FEATURE_CALL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl <em>XMember Feature Call</em>}' class.
@@ -428,6 +437,15 @@ public interface XbasePackage extends EPackage
 	 * @ordered
 	 */
 	int XMEMBER_FEATURE_CALL__VALID_FEATURE = XABSTRACT_FEATURE_CALL__VALID_FEATURE;
+
+	/**
+	 * The feature id for the '<em><b>Implicit First Argument</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XMEMBER_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT = XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT;
 
 	/**
 	 * The feature id for the '<em><b>Member Call Target</b></em>' containment reference.
@@ -539,6 +557,15 @@ public interface XbasePackage extends EPackage
 	int XFEATURE_CALL__VALID_FEATURE = XABSTRACT_FEATURE_CALL__VALID_FEATURE;
 
 	/**
+	 * The feature id for the '<em><b>Implicit First Argument</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XFEATURE_CALL__IMPLICIT_FIRST_ARGUMENT = XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT;
+
+	/**
 	 * The feature id for the '<em><b>Feature Call Arguments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -566,22 +593,13 @@ public interface XbasePackage extends EPackage
 	int XFEATURE_CALL__DECLARING_TYPE = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Implicit First Argument</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XFEATURE_CALL__IMPLICIT_FIRST_ARGUMENT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 3;
-
-	/**
 	 * The number of structural features of the '<em>XFeature Call</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XFEATURE_CALL_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 4;
+	int XFEATURE_CALL_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl <em>XConstructor Call</em>}' class.
@@ -898,6 +916,15 @@ public interface XbasePackage extends EPackage
 	int XBINARY_OPERATION__VALID_FEATURE = XABSTRACT_FEATURE_CALL__VALID_FEATURE;
 
 	/**
+	 * The feature id for the '<em><b>Implicit First Argument</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XBINARY_OPERATION__IMPLICIT_FIRST_ARGUMENT = XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT;
+
+	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -978,6 +1005,15 @@ public interface XbasePackage extends EPackage
 	 * @ordered
 	 */
 	int XUNARY_OPERATION__VALID_FEATURE = XABSTRACT_FEATURE_CALL__VALID_FEATURE;
+
+	/**
+	 * The feature id for the '<em><b>Implicit First Argument</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XUNARY_OPERATION__IMPLICIT_FIRST_ARGUMENT = XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT;
 
 	/**
 	 * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -1386,6 +1422,15 @@ public interface XbasePackage extends EPackage
 	int XASSIGNMENT__VALID_FEATURE = XABSTRACT_FEATURE_CALL__VALID_FEATURE;
 
 	/**
+	 * The feature id for the '<em><b>Implicit First Argument</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XASSIGNMENT__IMPLICIT_FIRST_ARGUMENT = XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT;
+
+	/**
 	 * The feature id for the '<em><b>Assignable</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1732,6 +1777,17 @@ public interface XbasePackage extends EPackage
 	EAttribute getXAbstractFeatureCall_ValidFeature();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getImplicitFirstArgument <em>Implicit First Argument</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Implicit First Argument</em>'.
+	 * @see org.eclipse.xtext.xbase.XAbstractFeatureCall#getImplicitFirstArgument()
+	 * @see #getXAbstractFeatureCall()
+	 * @generated
+	 */
+	EReference getXAbstractFeatureCall_ImplicitFirstArgument();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XMemberFeatureCall <em>XMember Feature Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1838,17 +1894,6 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 */
 	EReference getXFeatureCall_DeclaringType();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XFeatureCall#getImplicitFirstArgument <em>Implicit First Argument</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Implicit First Argument</em>'.
-	 * @see org.eclipse.xtext.xbase.XFeatureCall#getImplicitFirstArgument()
-	 * @see #getXFeatureCall()
-	 * @generated
-	 */
-	EReference getXFeatureCall_ImplicitFirstArgument();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XConstructorCall <em>XConstructor Call</em>}'.
@@ -2678,6 +2723,14 @@ public interface XbasePackage extends EPackage
 		EAttribute XABSTRACT_FEATURE_CALL__VALID_FEATURE = eINSTANCE.getXAbstractFeatureCall_ValidFeature();
 
 		/**
+		 * The meta object literal for the '<em><b>Implicit First Argument</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT = eINSTANCE.getXAbstractFeatureCall_ImplicitFirstArgument();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl <em>XMember Feature Call</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2760,14 +2813,6 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EReference XFEATURE_CALL__DECLARING_TYPE = eINSTANCE.getXFeatureCall_DeclaringType();
-
-		/**
-		 * The meta object literal for the '<em><b>Implicit First Argument</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference XFEATURE_CALL__IMPLICIT_FIRST_ARGUMENT = eINSTANCE.getXFeatureCall_ImplicitFirstArgument();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl <em>XConstructor Call</em>}' class.

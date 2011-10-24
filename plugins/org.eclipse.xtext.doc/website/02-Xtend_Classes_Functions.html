@@ -246,19 +246,19 @@
 			<h2>Imports</h2>
 			<p>
 			The ordinary imports of type names are equivalent to the imports known from Java. 
-			Again one can escape any names conflicting with keywords using the <em>^</em>. In constrast to Java, the import statement is never
+			Again one can escape any names conflicting with keywords using the <em>^</em>. In contrast to Java, the import statement is never
 			terminated with a semicolon. Xtend also features static imports but allows only a wildcard at the end.
-			So far you cannot import single members using a static import.
+			So far you cannot import single members using a static import. For non-static imports the use of wildcards
+			is deprecated for the benefit of better tooling. 
 			</p>
 			<p>
-			As in Java the package 'java.lang.*' is implicitly imported.
+			As in Java all classes from the 'java.lang' package are implicitly imported.
 			</p>
 			<p>
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">import</span>&nbsp;java.math.BigDecimal<br/>
-						<span class="keyword">import</span>&nbsp;java.math.*<br/>
 						<span class="keyword">import</span>&nbsp;static&nbsp;java.util.Collections.*
 					</p>
 				</div>
@@ -351,7 +351,7 @@
 			<a name="fields" ></a>
 			<h2>Fields</h2>
 			<p>
-			Fields in Xtend are always private and are usually used together with an annotation for a dependency
+			Fields in Xtend are commonly used together with an annotation for a dependency
 			injection container. Example:
 			</p>
 			<p>
@@ -378,7 +378,8 @@
 			</p>
 			<p>
 			Note that the default visibility is <span class="inlinecode"><span class="keyword">private</span></span>. You can also declare it explicitly as being <span class="inlinecode"><span class="keyword">public</span></span>,
-			<span class="inlinecode"><span class="keyword">protected</span></span>, or <span class="inlinecode"><span class="keyword">private</span></span>. Alternatively, you can write accessor methods.
+			<span class="inlinecode"><span class="keyword">protected</span></span>, or <span class="inlinecode"><span class="keyword">private</span></span>. Alternatively, you can write accessor methods. Xtend
+			does not yet support any other modifier from Java on fields.  
 			</p>
 			<a name="fields_6" ></a>
 			<h3>Extension Methods</h3>
@@ -409,14 +410,14 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						@Inject&nbsp;<span class="keyword">extension</span>&nbsp;PersonExtensions&nbsp;personExtensions
+						@Inject&nbsp;<span class="keyword">extension</span>&nbsp;PersonExtensions
 					</p>
 				</div>
 			</div>
 			</p>
 			<p>
-			The method is being put on the member scope of Person.
-			So you can write the following
+			The method is being put on the member scope of Person. This is why you can skip the field's name. 
+			You can now write the following
 			</p>
 			<p>
 			<div class="literallayout">
@@ -428,19 +429,20 @@
 			</div>
 			</p>
 			<p>
-			which is the a shorthand for 
+			which is translated to the Java code 
 			</p>
 			<p>
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						personExtensions.getFullName(myPerson)
+						_personExtensions.getFullName(myPerson)
 					</p>
 				</div>
 			</div>
 			</p>
 			<p>
-			Of course the property shorthand is also available
+			where <span class="inlinecode">_personExtensions</span> is the default name of the field. Of course the property shorthand 
+			is still available
 			</p>
 			<p>
 			<div class="literallayout">
@@ -745,15 +747,15 @@
 				<div class="incode">
 					<p class="code">
 						class&nbsp;MyLabelProvider&nbsp;extends&nbsp;AbstractLabelProvider&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;def&nbsp;dispatch&nbsp;label(Entity&nbsp;<span class="keyword">this</span>)&nbsp;&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;def&nbsp;dispatch&nbsp;label(Entity&nbsp;<span class="keyword">it</span>)&nbsp;&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name<br/>
 						&nbsp;&nbsp;&nbsp;}<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;def&nbsp;dispatch&nbsp;label(Method&nbsp;<span class="keyword">this</span>)&nbsp;{&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;def&nbsp;dispatch&nbsp;label(Method&nbsp;<span class="keyword">it</span>)&nbsp;{&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name+<span class="string">"("</span>+params.toString(<span class="string">","</span>)+<span class="string">"):"</span>+type<br/>
 						&nbsp;&nbsp;&nbsp;}<br/>
 						&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;def&nbsp;dispatch&nbsp;label(Field&nbsp;<span class="keyword">this</span>)&nbsp;{&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;def&nbsp;dispatch&nbsp;label(Field&nbsp;<span class="keyword">it</span>)&nbsp;{&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name+type<br/>
 						&nbsp;&nbsp;&nbsp;}<br/>
 						}
@@ -860,16 +862,17 @@
 			</div>
 			</p>
 			<p>
-			It is even possible to define the return type of a create function by means of
+			If you do not specify the name of the result variable it is assumed to be the <a href="199h-xbase-language-reference-expressions.php#Xbase_Expressions_ImplicitThis" title="Go to &quot;Implicit variables 'this' and 'it'&quot;">implicit receiver variable</a> 
+			<span class="inlinecode"><span class="keyword">it</span></span>, which can be skipped in feature calls inside the body. Furthermore, you can define the return type of a create function:
 			</p>
 			<p>
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						def&nbsp;Person&nbsp;<span class="keyword">create</span>&nbsp;r:&nbsp;new&nbsp;PersonImpl()&nbsp;copy(Person&nbsp;p)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;r.name&nbsp;=&nbsp;p.name<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;r.friendWith&nbsp;=&nbsp;p.friendWith.map(&nbsp;p&nbsp;|&nbsp;p.copy&nbsp;)&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;r.marriedWith&nbsp;=&nbsp;p.marriedWith.map(&nbsp;p&nbsp;|&nbsp;p.copy&nbsp;)&nbsp;<br/>
+						def&nbsp;Person&nbsp;<span class="keyword">create</span>&nbsp;new&nbsp;PersonImpl()&nbsp;copy(Person&nbsp;p)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/*&nbsp;it.*/</span>name&nbsp;=&nbsp;p.name<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;friendWith&nbsp;=&nbsp;p.friendWith.map(&nbsp;p&nbsp;|&nbsp;p.copy&nbsp;)&nbsp;&nbsp;&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;marriedWith&nbsp;=&nbsp;p.marriedWith.map(&nbsp;p&nbsp;|&nbsp;p.copy&nbsp;)&nbsp;<br/>
 						}
 					</p>
 				</div>

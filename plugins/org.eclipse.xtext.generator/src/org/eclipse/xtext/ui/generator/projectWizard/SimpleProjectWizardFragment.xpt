@@ -28,7 +28,6 @@
       <wizard
             category="org.eclipse.xtext.projectwiz"
             class="«executableExtensionFactory()»:«projectWizardClassName()»"
-            icon="icons/editor.gif"
             id="«projectWizardClassName()»"
             name="«getName()» Project"
             project="true">

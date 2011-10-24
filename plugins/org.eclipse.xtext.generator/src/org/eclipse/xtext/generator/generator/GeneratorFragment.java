@@ -22,6 +22,7 @@ import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.IGeneratorFragment;
 import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment;
+import org.eclipse.xtext.util.Strings;
 
 /**
  * An {@link IGeneratorFragment} to create a formatter for an Xtext language.
@@ -46,12 +47,30 @@ public class GeneratorFragment extends AbstractGeneratorFragment {
 		this.generateMwe = generateMwe;
 	}
 	
+	public boolean isGenerateStub(Grammar grammar) {
+		if (XbaseGeneratorFragment.doesUseXbase(grammar)) {
+			return false;
+		}
+		return generatorStub;
+	}
+	
+	public boolean isGenerateJavaMain(Grammar grammar) {
+		if (XbaseGeneratorFragment.doesUseXbase(grammar)) {
+			return false;
+		}
+		return generateJavaMain;
+	}
+	
+	public boolean isGenerateMwe(Grammar grammar) {
+		if (XbaseGeneratorFragment.doesUseXbase(grammar)) {
+			return false;
+		}
+		return generateMwe;
+	}
+	
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
-		if (XbaseGeneratorFragment.doesUseXbase(grammar)) {
-			return newArrayList((Object)false, (Object)false, (Object)false);
-		}
-		return newArrayList((Object)generatorStub, (Object)generateMwe, (Object)generateJavaMain);
+		return newArrayList((Object)isGenerateStub(grammar), (Object)isGenerateMwe(grammar), (Object)isGenerateJavaMain(grammar));
 	}
 	
 	@Override
@@ -80,5 +99,13 @@ public class GeneratorFragment extends AbstractGeneratorFragment {
 						"BuilderPreferenceStoreInitializer",
 						"binder.bind(org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer.class).to(org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.Initializer.class)")
 		.getBindings();
+	}
+	
+	@Override
+	public String[] getExportedPackagesRt(Grammar grammar) {
+		if (isGenerateStub(grammar) || isGenerateMwe(grammar) || isGenerateJavaMain(grammar))
+			return new String[] { Strings.skipLastToken(getGeneratorName(grammar, getNaming()), ".") };
+		else 
+			return new String[0];
 	}
 }

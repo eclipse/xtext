@@ -13,7 +13,7 @@ import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@org.junit.runner.RunWith(typeof(XtextRunner))
+@RunWith(typeof(XtextRunner))
 @InjectWith(typeof(InjectorProviderCustom))
 class ParserTest {
 	

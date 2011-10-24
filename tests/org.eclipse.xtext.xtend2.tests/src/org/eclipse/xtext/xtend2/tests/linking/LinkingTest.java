@@ -158,6 +158,20 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("org.eclipse.xtext.xbase.lib.ListExtensions.map(java.util.List,org.eclipse.xtext.xbase.lib.Functions$Function1)", call.getFeature().getIdentifier());
 	}
 	
+	public void testExtensionMethodCall_02() throws Exception {
+		XtendClass clazz = clazz("" +
+				"class Foo {" +
+				"  def doSomething() {\n" + 
+				"    new Object().doSomething\n" +
+				"  }\n" +
+				"  def doSomething(Object o) {}" +
+				"}");
+		XtendFunction func = (XtendFunction) clazz.getMembers().get(0);
+		final XMemberFeatureCall call = (XMemberFeatureCall)((XBlockExpression)func.getExpression()).getExpressions().get(0);
+		assertEquals("Foo.doSomething(java.lang.Object)", call.getFeature().getIdentifier());
+		assertNull(call.getInvalidFeatureIssueCode(), call.getInvalidFeatureIssueCode());
+	}
+	
 	public void testCaseFunction_00() throws Exception {
 		XtendFunction function = function("def dispatch String foo(String s) {_foo(s)}");
 		final XBlockExpression block = (XBlockExpression) function.getExpression();
@@ -824,6 +838,25 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("it", implicitArgument.getFeature().getSimpleName());
 	}
 	
+	public void testImplicitFirstArgument_00_a() throws Exception {
+		XtendClass clazz = clazz(
+				"class MyXtendClass {\n" + 
+				"  def prependHello(String myString) {\n" + 
+				"    'Hello '+myString\n" + 
+				"  }\n" + 
+				"  def testExtensionMethods(String it) {\n" + 
+				"    it.prependHello\n" + 
+				"  }\n" + 
+				"}");
+		XtendFunction func= (XtendFunction) clazz.getMembers().get(1);
+		XMemberFeatureCall first = (XMemberFeatureCall) ((XBlockExpression)func.getExpression()).getExpressions().get(0);
+		JvmOperation firstFeature = (JvmOperation) first.getFeature();
+		assertEquals("prependHello", firstFeature.getSimpleName());
+		assertNull(first.getInvalidFeatureIssueCode(), first.getInvalidFeatureIssueCode());
+		XFeatureCall firstReceiver = (XFeatureCall) first.getImplicitReceiver();
+		assertEquals("MyXtendClass", firstReceiver.getFeature().getSimpleName());
+	}
+	
 	public void testImplicitFirstArgument_00_b() throws Exception {
 		XtendClass clazz = clazz(
 				"class MyXtendClass {\n" + 
@@ -937,15 +970,13 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		
 		XFeatureCall fifth = (XFeatureCall) ((XBlockExpression)func.getExpression()).getExpressions().get(0);
 		JvmOperation fifthFeature = (JvmOperation) fifth.getFeature();
-		// TODO Fix us
-//		assertEquals("MyXtendClass.withObject(java.lang.Object)", fifthFeature.getIdentifier());
-//		assertEquals(1, fifthFeature.getParameters().size());
-//		assertNotNull(fifth.getImplicitFirstArgument());
-//		assertEquals("it", ((XAbstractFeatureCall) fifth.getImplicitFirstArgument()).getFeature().getSimpleName());
-//		XFeatureCall fifthReceiver = (XFeatureCall) fifth.getImplicitReceiver();
-//		assertTrue(fifthReceiver.getFeature() instanceof JvmGenericType);
-//		assertNull(fifth.getInvalidFeatureIssueCode(), fifth.getInvalidFeatureIssueCode());
-		assertEquals("test.ImplicitFirstArgumentStatics.withObject(java.lang.Object)", fifthFeature.getIdentifier());
+		assertEquals("MyXtendClass.withObject(java.lang.Object)", fifthFeature.getIdentifier());
+		assertEquals(1, fifthFeature.getParameters().size());
+		assertNotNull(fifth.getImplicitFirstArgument());
+		assertEquals("it", ((XAbstractFeatureCall) fifth.getImplicitFirstArgument()).getFeature().getSimpleName());
+		XFeatureCall fifthReceiver = (XFeatureCall) fifth.getImplicitReceiver();
+		assertTrue(fifthReceiver.getFeature() instanceof JvmGenericType);
+		assertNull(fifth.getInvalidFeatureIssueCode(), fifth.getInvalidFeatureIssueCode());
 	}
 	
 	public void testImplicitFirstArgument_06() throws Exception {
@@ -961,16 +992,13 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		
 		XFeatureCall sixth = (XFeatureCall) ((XBlockExpression)func.getExpression()).getExpressions().get(0);
 		JvmOperation sixthFeature = (JvmOperation) sixth.getFeature();
-		// TODO Fix us
-//		assertEquals("java.lang.String.contains(java.lang.CharSequence)", sixthFeature.getIdentifier());
-//		assertEquals("java.lang.String", sixthFeature.getDeclaringType().getQualifiedName());
-//		assertNotNull(sixth.getImplicitFirstArgument());
-//		assertEquals("it", ((XAbstractFeatureCall) sixth.getImplicitFirstArgument()).getFeature().getSimpleName());
-//		XMemberFeatureCall sixthReceiver = (XMemberFeatureCall) sixth.getImplicitReceiver();
-//		assertTrue(sixthReceiver.getFeature() instanceof JvmField);
-//		assertNull(sixth.getInvalidFeatureIssueCode(), sixth.getInvalidFeatureIssueCode());
-		assertEquals("test.ImplicitFirstArgumentStatics.contains(java.lang.CharSequence)", sixthFeature.getIdentifier());
-		
+		assertEquals("java.lang.String.contains(java.lang.CharSequence)", sixthFeature.getIdentifier());
+		assertEquals("java.lang.String", sixthFeature.getDeclaringType().getQualifiedName());
+		assertNotNull(sixth.getImplicitFirstArgument());
+		assertEquals("it", ((XAbstractFeatureCall) sixth.getImplicitFirstArgument()).getFeature().getSimpleName());
+		XMemberFeatureCall sixthReceiver = (XMemberFeatureCall) sixth.getImplicitReceiver();
+		assertTrue(sixthReceiver.getFeature() instanceof JvmField);
+		assertNull(sixth.getInvalidFeatureIssueCode(), sixth.getInvalidFeatureIssueCode());
 	}
 	
 	public void testImplicitFirstArgument_07() throws Exception {
@@ -980,7 +1008,6 @@ public class LinkingTest extends AbstractXtend2TestCase {
 				"  def testExtensionMethods(CharSequence it) {\n" + 
 				"    withCharSequence\n" + 
 				"  }\n" +
-				"  extension String" +
 				"}");
 		XtendFunction func= (XtendFunction) clazz.getMembers().get(0);
 		
@@ -988,15 +1015,10 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		JvmOperation seventhFeature = (JvmOperation) seventh.getFeature();
 		assertEquals("test.ImplicitFirstArgumentStatics.withCharSequence(java.lang.CharSequence)", 
 				seventhFeature.getIdentifier());
-		// TODO Fix us
-//		assertNotNull(seventh.getImplicitFirstArgument());
-//		assertEquals("it", ((XAbstractFeatureCall) seventh.getImplicitFirstArgument()).getFeature().getSimpleName());
-//		assertNull(seventh.getImplicitReceiver());
-//		assertNull(seventh.getInvalidFeatureIssueCode());
-		assertNull(seventh.getImplicitFirstArgument());
 		assertNotNull(seventh.getImplicitReceiver());
+		assertNull(seventh.getImplicitFirstArgument());
+		assertNull(seventh.getInvalidFeatureIssueCode(), seventh.getInvalidFeatureIssueCode());
 		assertEquals("it", ((XAbstractFeatureCall) seventh.getImplicitReceiver()).getFeature().getSimpleName());
-		assertNull(seventh.getInvalidFeatureIssueCode());
 	}
 	
 }
