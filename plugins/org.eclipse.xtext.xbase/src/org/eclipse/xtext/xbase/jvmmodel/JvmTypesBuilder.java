@@ -9,13 +9,13 @@ package org.eclipse.xtext.xbase.jvmmodel;
 
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Maps.*;
-import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
@@ -43,6 +43,7 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XExpression;
@@ -103,7 +104,48 @@ public class JvmTypesBuilder {
 	public void setBody(JvmExecutable executable, Functions.Function1<ImportManager, ? extends CharSequence> strategy) {
 		addCompilationStrategy(executable, strategy);
 	}
+	
+	public String getDocumentation(EObject source) {
+		if (source == null)
+			return null;
+		if (source instanceof JvmIdentifiableElement) {
+			DocumentationAdapter adapter = (DocumentationAdapter) EcoreUtil.getAdapter(source.eAdapters(), DocumentationAdapter.class);
+			if (adapter != null)
+				return adapter.getDocumentation();
+		}
+		String documentation = documentationProvider.getDocumentation(source);
+		return documentation;
+	}
 
+	/**
+	 * Attaches the given documentation to the given jvmElement.
+	 */
+	public void setDocumentation(JvmIdentifiableElement jvmElement, String documentation) {
+		if (documentation == null)
+			return;
+		DocumentationAdapter documentationAdapter = new DocumentationAdapter();
+		documentationAdapter.setDocumentation(documentation);
+		jvmElement.eAdapters().add(documentationAdapter);
+	}
+
+
+	/**
+	 * Creates a public class declaration, associated to the given sourceElement. It sets the given name, which might be
+	 * fully qualified using the standard Java notation.
+	 * 
+	 * @param sourceElement
+	 *            - the sourceElement the resulting element is associated with.
+	 * @param qualifiedName
+	 *            - the qualifiedName of the resulting class.
+	 * @param initializer
+	 *            - the initializer to apply on the created class element
+	 * 
+	 * @return a {@link JvmGenericType} representing a Java class of the given name.
+	 */
+	public JvmGenericType toClass(EObject sourceElement, QualifiedName name, Procedure1<JvmGenericType> initializer) {
+		return toClass(sourceElement, name!=null?name.toString():null, initializer);
+	}
+	
 	/**
 	 * Creates a public class declaration, associated to the given sourceElement. It sets the given name, which might be
 	 * fully qualified using the standard Java notation.
@@ -160,10 +202,16 @@ public class JvmTypesBuilder {
 	 * @return a {@link JvmField} representing a Java field with the given simple name and type.
 	 */
 	public JvmField toField(EObject sourceElement, String name, JvmTypeReference typeRef) {
+		return toField(sourceElement, name, typeRef, null);
+	}
+	
+	public JvmField toField(EObject sourceElement, String name, JvmTypeReference typeRef, Procedure1<JvmField> initializer) {
 		JvmField result = TypesFactory.eINSTANCE.createJvmField();
 		result.setSimpleName(nullSaveName(name));
 		result.setVisibility(JvmVisibility.PRIVATE);
 		result.setType(cloneWithProxies(typeRef));
+		if (initializer != null && name != null)
+			initializer.apply(result);
 		return associate(sourceElement, result);
 	}
 
@@ -410,25 +458,6 @@ public class JvmTypesBuilder {
 			JvmAnnotationReference annotationReference = getJvmAnnotationReference(anno);
 			target.getAnnotations().add(annotationReference);
 		}
-	}
-
-	/**
-	 * Translates documentation from a source element to the given jvmElement.
-	 */
-	public void translateDocumentationTo(EObject source, JvmIdentifiableElement jvmElement) {
-		String documentation = documentationProvider.getDocumentation(source);
-		if (!isEmpty(documentation)) {
-			addDocumentation(jvmElement, documentation.trim());
-		}
-	}
-
-	/**
-	 * Attaches the given documentation to the given jvmElement.
-	 */
-	public void addDocumentation(JvmIdentifiableElement jvmElement, String documentation) {
-		DocumentationAdapter documentationAdapter = new DocumentationAdapter();
-		documentationAdapter.setDocumentation(documentation);
-		jvmElement.eAdapters().add(documentationAdapter);
 	}
 
 	protected JvmAnnotationReference getJvmAnnotationReference(XAnnotation anno) {
