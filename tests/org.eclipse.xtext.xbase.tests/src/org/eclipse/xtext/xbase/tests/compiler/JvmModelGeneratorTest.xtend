@@ -106,7 +106,6 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 		val fsa = new InMemoryFileSystemAccess()
 		generator.doGenerate(res, fsa)
 		val code = fsa.files.get(IFileSystemAccess::DEFAULT_OUTPUT + type.identifier.replace('.','/')+".java").toString
-		println(code)
 		val compiledClass = javaCompiler.compileToClass(type.identifier, code)
 		helper.assertNoErrors(res.contents.head)
 		return compiledClass
