@@ -148,10 +148,6 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 		return RichStringAwareToggleCommentAction.Factory.class;
 	}
 	
-	public void configureBuilderPreferenceStoreInitializer(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer.class).to(org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.Initializer.class);
-	}
-	
 	public Class<? extends IFoldingStructureProvider> bindIFoldingStructureProvider(){
 		return InitiallyCollapsableAwareFoldingStructureProvider.class;
 	}
