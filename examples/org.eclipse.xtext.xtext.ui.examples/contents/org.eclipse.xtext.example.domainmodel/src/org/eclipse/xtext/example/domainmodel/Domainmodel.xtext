@@ -35,11 +35,8 @@ Property:
 	name=ValidID ':' type=JvmTypeReference;
 
 Operation:
-	visibility=Visibility? 'op' name=ValidID '(' (params+=FullJvmFormalParameter (',' params+=FullJvmFormalParameter)*)? ')' ':' type=JvmTypeReference 
+	'op' name=ValidID '(' (params+=FullJvmFormalParameter (',' params+=FullJvmFormalParameter)*)? ')' ':' type=JvmTypeReference 
 		body=XBlockExpression;
-
-enum Visibility:
-	public | private | protected;
 
 QualifiedNameWithWildCard :
 	QualifiedName  ('.' '*')?;
