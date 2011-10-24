@@ -16,7 +16,8 @@ Export-Package: org.eclipse.xtext.builder,
  org.eclipse.xtext.builder.impl.javasupport;x-friends:="org.eclipse.xtext.builder.tests,org.eclipse.xtext.ui.shared",
  org.eclipse.xtext.builder.internal;x-friends:="org.eclipse.xtext.builder.tests,org.eclipse.xtext.ui.shared",
  org.eclipse.xtext.builder.nature;x-friends:="org.eclipse.xtext.builder.tests,org.eclipse.xtext.ui.shared",
- org.eclipse.xtext.builder.preferences;x-friends:="org.eclipse.xtext.builder.tests,org.eclipse.xtext.ui.shared",
+ org.eclipse.xtext.builder.navigation;x-friends:="org.eclipse.xtext.common.types.shared",
+ org.eclipse.xtext.builder.preferences;x-friends:="org.eclipse.xtext.builder.tests,org.eclipse.xtext.ui.shared,org.eclipse.xtext.xtend2.ui",
  org.eclipse.xtext.builder.resourceloader;x-friends:="org.eclipse.xtext.builder.tests,org.eclipse.xtext.ui.shared"
 Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0",
  org.eclipse.xtext.util;bundle-version="2.0.0",
@@ -32,7 +33,8 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0",
  org.eclipse.ui.ide;bundle-version="3.5.0";resolution:=optional,
  org.eclipse.xtext.common.types.ui;bundle-version="2.0.0";resolution:=optional,
  org.eclipse.jdt.launching;bundle-version="3.5.0";resolution:=optional,
- org.eclipse.ui.forms;bundle-version="3.4.1";resolution:=optional
+ org.eclipse.ui.forms;bundle-version="3.4.1";resolution:=optional,
+ org.eclipse.jdt.ui;bundle-version="3.5.0";resolution:=optional
 Bundle-ActivationPolicy: lazy
 Import-Package: org.apache.log4j;version="1.2.15"
 Bundle-Activator: org.eclipse.xtext.builder.internal.Activator
