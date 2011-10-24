@@ -93,4 +93,10 @@ public class PrefixMatcherOutlineAdapterTest extends StringMatcherTest {
 		StringMatcher matcher = createStringMatcher("*:StrMat");
 		assertTrue(matcher.match("createStringMatcher(String) : StringMatcher"));
 	}
+	
+	public void testWildcardStarMatching2() {
+		StringMatcher matcher = createStringMatcher("*J");
+		assertTrue(matcher.match("generateJavaDoc"));
+		assertTrue(matcher.match("generateJavaDoc(EObject) : StringConcatenation"));
+	}
 }
