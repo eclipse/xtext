@@ -63,7 +63,7 @@ public class XAssignmentSugarDescriptionProvider extends DefaultJvmFeatureDescri
 	}
 
 	protected boolean isSetterMethod(JvmOperation jvmOperation) {
-		if (jvmOperation.getParameters().size()!=1)
+		if (jvmOperation.getParameters().size() - getNumberOfIrrelevantArguments() != 1)
 			return false;
 		if (getPropertyNameForSetter(jvmOperation.getSimpleName())==null)
 			return false;

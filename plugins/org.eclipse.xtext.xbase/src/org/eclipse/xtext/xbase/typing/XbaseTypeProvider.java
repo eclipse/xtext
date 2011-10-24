@@ -287,7 +287,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 			(featureCall instanceof XFeatureCall && (
 				reference == XbasePackage.Literals.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS || 
 				reference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER ||
-				reference == XbasePackage.Literals.XFEATURE_CALL__IMPLICIT_FIRST_ARGUMENT))) {
+				reference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT))) {
 			if (getFeature(featureCall) instanceof JvmOperation) {
 				JvmOperation operation = (JvmOperation) getFeature(featureCall);
 				XExpression argumentExpression = getExpression(featureCall, reference, index);

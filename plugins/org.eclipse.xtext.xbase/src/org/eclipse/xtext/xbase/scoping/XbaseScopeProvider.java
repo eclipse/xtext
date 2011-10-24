@@ -776,7 +776,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			IJvmFeatureScopeAcceptor acceptor) {
 		IAcceptor<IJvmFeatureDescriptionProvider> curried = acceptor.curry(receiverType, expression);
 		if (expression instanceof XAssignment) {
-			addFeatureDescriptionProvidersForAssignment(contextType, implicitReceiver, implicitArgument, priority, curried);
+			addFeatureDescriptionProvidersForAssignment(expression.eResource(), contextType, implicitReceiver, implicitArgument, priority, curried);
 		} else {
 			addFeatureDescriptionProviders(expression.eResource(), contextType, implicitReceiver, implicitArgument, priority, curried);
 		}
@@ -868,23 +868,41 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	}
 
 	protected void addFeatureDescriptionProvidersForAssignment(
+			Resource resource,
 			JvmDeclaredType contextType, 
 			XExpression implicitReceiver,
 			XExpression implicitArgument,
 			int priority,
 			IAcceptor<IJvmFeatureDescriptionProvider> acceptor) {
+		addFeatureDescriptionProvidersForAssignment(contextType, null, implicitReceiver, implicitArgument, priority, false, acceptor);
+	}
+
+	protected void addFeatureDescriptionProvidersForAssignment(
+			JvmDeclaredType contextType,
+			IFeaturesForTypeProvider featureProvider,
+			XExpression implicitReceiver,
+			XExpression implicitArgument, 
+			int priority,
+			boolean preferStatics,
+			IAcceptor<IJvmFeatureDescriptionProvider> acceptor) {
 		XAssignmentDescriptionProvider assignmentProvider = assignmentFeatureDescProvider.get();
 		assignmentProvider.setContextType(contextType);
+		if (featureProvider != null)
+			assignmentProvider.setFeaturesForTypeProvider(featureProvider);
 		assignmentProvider.setImplicitReceiver(implicitReceiver);
 		assignmentProvider.setImplicitArgument(implicitArgument);
 		assignmentProvider.setPriority(priority);
+		assignmentProvider.setPreferStatics(preferStatics);
 		acceptor.accept(assignmentProvider);
 		
 		XAssignmentSugarDescriptionProvider sugarProvider = assignmentSugarFeatureDescProvider.get();
 		sugarProvider.setContextType(contextType);
+		if (featureProvider != null)
+			sugarProvider.setFeaturesForTypeProvider(featureProvider);
 		sugarProvider.setImplicitReceiver(implicitReceiver);
 		sugarProvider.setImplicitArgument(implicitArgument);
 		sugarProvider.setPriority(getSugarPriorityOffset() + priority);
+		sugarProvider.setPreferStatics(preferStatics);
 		acceptor.accept(sugarProvider);
 	}
 

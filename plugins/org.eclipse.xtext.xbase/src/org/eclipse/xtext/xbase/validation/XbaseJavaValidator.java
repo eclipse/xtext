@@ -289,8 +289,8 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	@Check
 	public void checkTypes(final XExpression obj) {
-		if (obj instanceof XFeatureCall) {
-			XExpression firstArgument = ((XFeatureCall) obj).getImplicitFirstArgument();
+		if (obj instanceof XAbstractFeatureCall) {
+			XExpression firstArgument = ((XAbstractFeatureCall) obj).getImplicitFirstArgument();
 			if (firstArgument != null) {
 				validateType(firstArgument, new Procedures.Procedure2<JvmTypeReference, JvmTypeReference>() {
 					public void apply(JvmTypeReference expectedType, JvmTypeReference actualType) {

@@ -13,7 +13,6 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 
 import com.google.inject.Provider;
@@ -106,14 +105,11 @@ public class LinkingAssumptions {
 	}
 	
 	public XExpression getImplicitFirstArgument(XAbstractFeatureCall featureCall) {
-		if (!(featureCall instanceof XFeatureCall))
-			return null;
-		XFeatureCall casted = (XFeatureCall) featureCall;
-		Resource resource = casted.eResource();
+		Resource resource = featureCall.eResource();
 		if (resource instanceof XbaseResource) {
-			return ((XbaseResource) resource).getImplicitFirstArgument(casted);
+			return ((XbaseResource) resource).getImplicitFirstArgument(featureCall);
 		}
-		return casted.getImplicitFirstArgument();
+		return featureCall.getImplicitFirstArgument();
 	}
 	
 	public JvmIdentifiableElement getFeature(XAbstractFeatureCall featureCall, boolean resolve) {
