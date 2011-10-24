@@ -79,6 +79,7 @@ Workflow {
 				options = auto-inject {}
 			}
 			fragment = validation.JavaValidatorFragment {}
+			fragment = generator.GeneratorFragment {}
 			fragment = scoping.ImportNamespacesScopingFragment {}
 			fragment = builder.BuilderIntegrationFragment {}
 			fragment = formatting.FormatterFragment {}
