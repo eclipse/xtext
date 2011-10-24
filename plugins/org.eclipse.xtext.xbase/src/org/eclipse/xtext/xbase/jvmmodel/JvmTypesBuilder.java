@@ -80,20 +80,28 @@ public class JvmTypesBuilder {
 	private IEObjectDocumentationProvider documentationProvider;
 
 	/**
-	 * Establishes a logical containment relation ship between the expression and {@link JvmIdentifiableElement}. A
-	 * typical example would be an association between an expression and a {@link JvmOperation}, which has the effect
-	 * that the expression's scope and type expectation are defined by the {@link JvmOperation}.
+	 * Sets the given {@link JvmExecutable} as the logical container for the given {@link XExpression}.
+	 * This defines the context and s´the scope for the given expression.
 	 * 
-	 * The {@link org.eclipse.xtext.xbase.compiler.JvmModelGenerator} also makes use of the logical containment and will
-	 * compile the given expression in the context of the given JvmElement.
-	 * 
+	 * @param logicalContainer
+	 *            - the {@link JvmExecutable} the expression is associated with. Must not be <code>null</code>.
 	 * @param expr
-	 *            - the expression. Must not be <code>null</code>.
-	 * @param element
-	 *            - the jvm element the expression is associated with. Must not be <code>null</code>.
+	 *            - the expression. Can be <code>null</code> in which case this function does nothing.
 	 */
-	public void isLogicallyContainedIn(XExpression expr, JvmIdentifiableElement logicalContainer) {
+	public void setBody(JvmExecutable logicalContainer, XExpression expr) {
+		if (expr == null)
+			return;
 		associator.associateLogicalContainer(expr, logicalContainer);
+	}
+	
+	/**
+	 * Attaches the given compile strategy to the given {@link JvmExecutable} such that the compiler knows how to
+	 * implement the {@link JvmExecutable} when it is translated to Java source code.
+	 * @param executable - the operation or constructor to add the method body to.
+	 * @param strategy - the compilation strategy. Must return zero or more Java statements.
+	 */
+	public void setBody(JvmExecutable executable, Functions.Function1<ImportManager, ? extends CharSequence> strategy) {
+		addCompilationStrategy(executable, strategy);
 	}
 
 	/**
@@ -110,14 +118,16 @@ public class JvmTypesBuilder {
 	 * @return a {@link JvmGenericType} representing a Java class of the given name.
 	 */
 	public JvmGenericType toClass(EObject sourceElement, String name, Procedure1<JvmGenericType> initializer) {
+		if (sourceElement == null)
+			return null;
+		if (name == null)
+			return null;
 		String simpleName = name;
 		String packageName = null;
-		if (name != null) {
-			final int dotIdx = name.lastIndexOf('.');
-			if (dotIdx != -1) {
-				simpleName = name.substring(dotIdx + 1);
-				packageName = name.substring(0, dotIdx);
-			}
+		final int dotIdx = name.lastIndexOf('.');
+		if (dotIdx != -1) {
+			simpleName = name.substring(dotIdx + 1);
+			packageName = name.substring(0, dotIdx);
 		}
 		final JvmGenericType result = TypesFactory.eINSTANCE.createJvmGenericType();
 		result.setSimpleName(simpleName);
@@ -151,10 +161,14 @@ public class JvmTypesBuilder {
 	 */
 	public JvmField toField(EObject sourceElement, String name, JvmTypeReference typeRef) {
 		JvmField result = TypesFactory.eINSTANCE.createJvmField();
-		result.setSimpleName(name);
+		result.setSimpleName(nullSaveName(name));
 		result.setVisibility(JvmVisibility.PRIVATE);
 		result.setType(cloneWithProxies(typeRef));
 		return associate(sourceElement, result);
+	}
+
+	protected String nullSaveName(String name) {
+		return name != null ? name : "<unknown>";
 	}
 
 	/**
@@ -170,27 +184,17 @@ public class JvmTypesBuilder {
 	}
 
 	/**
-	 * Embeds an expression from the source model into the body of a JvmExecutable.
-	 * 
-	 * @see IJvmModelAssociator
-	 * @see IJvmModelAssociations
-	 */
-	public JvmExecutable toBody(XExpression sourceExpression, JvmExecutable target) {
-		associator.associateLogicalContainer(sourceExpression, target);
-		return target;
-	}
-
-	/**
 	 * Creates a public method with the given name and the given return type and associates it with the given
 	 * sourceElement.
 	 */
 	public JvmOperation toMethod(EObject sourceElement, String name, JvmTypeReference returnType,
 			Procedure1<JvmOperation> init) {
 		JvmOperation result = TypesFactory.eINSTANCE.createJvmOperation();
-		result.setSimpleName(name);
+		result.setSimpleName(nullSaveName(name));
 		result.setVisibility(JvmVisibility.PUBLIC);
 		result.setReturnType(cloneWithProxies(returnType));
-		init.apply(result);
+		if (init != null && name != null)
+			init.apply(result);
 		return associate(sourceElement, result);
 	}
 
@@ -207,13 +211,15 @@ public class JvmTypesBuilder {
 	public JvmOperation toGetter(EObject sourceElement, final String name, JvmTypeReference typeRef) {
 		JvmOperation result = TypesFactory.eINSTANCE.createJvmOperation();
 		result.setVisibility(JvmVisibility.PUBLIC);
-		result.setSimpleName("get" + Strings.toFirstUpper(name));
+		result.setSimpleName("get" + nullSaveName(Strings.toFirstUpper(name)));
 		result.setReturnType(cloneWithProxies(typeRef));
-		body(result, new Functions.Function1<ImportManager, CharSequence>() {
-			public CharSequence apply(ImportManager p) {
-				return "return this." + name + ";";
-			}
-		});
+		if (name != null) {
+			setBody(result, new Functions.Function1<ImportManager, CharSequence>() {
+				public CharSequence apply(ImportManager p) {
+					return "return this." + name + ";";
+				}
+			});
+		}
 		return associate(sourceElement, result);
 	}
 
@@ -230,13 +236,15 @@ public class JvmTypesBuilder {
 	public JvmOperation toSetter(EObject sourceElement, final String name, JvmTypeReference typeRef) {
 		JvmOperation result = TypesFactory.eINSTANCE.createJvmOperation();
 		result.setVisibility(JvmVisibility.PUBLIC);
-		result.setSimpleName("set" + Strings.toFirstUpper(name));
-		result.getParameters().add(toParameter(sourceElement, name, cloneWithProxies(typeRef)));
-		body(result, new Functions.Function1<ImportManager, CharSequence>() {
-			public CharSequence apply(ImportManager p) {
-				return "this." + name + " = " + name + ";";
-			}
-		});
+		result.setSimpleName("set" + nullSaveName(Strings.toFirstUpper(name)));
+		result.getParameters().add(toParameter(sourceElement, nullSaveName(name), cloneWithProxies(typeRef)));
+		if (name != null) {
+			setBody(result, new Functions.Function1<ImportManager, CharSequence>() {
+				public CharSequence apply(ImportManager p) {
+					return "this." + name + " = " + name + ";";
+				}
+			});
+		}
 		return associate(sourceElement, result);
 	}
 
@@ -246,7 +254,7 @@ public class JvmTypesBuilder {
 	 */
 	public JvmFormalParameter toParameter(EObject sourceElement, String name, JvmTypeReference typeRef) {
 		JvmFormalParameter result = TypesFactory.eINSTANCE.createJvmFormalParameter();
-		result.setName(name);
+		result.setName(nullSaveName(name));
 		result.setParameterType(cloneWithProxies(typeRef));
 		return associate(sourceElement, result);
 	}
@@ -257,13 +265,13 @@ public class JvmTypesBuilder {
 	 */
 	public JvmConstructor toConstructor(EObject sourceElement, String simpleName, Procedure1<JvmConstructor> init) {
 		JvmConstructor constructor = TypesFactory.eINSTANCE.createJvmConstructor();
-		constructor.setSimpleName(simpleName);
-		body(constructor, new Function1<ImportManager, CharSequence>() {
+		constructor.setSimpleName(nullSaveName(simpleName));
+		setBody(constructor, new Function1<ImportManager, CharSequence>() {
 			public CharSequence apply(ImportManager p) {
 				return "{}";
 			}
 		});
-		if (init != null)
+		if (init != null && simpleName != null)
 			init.apply(constructor);
 		return associate(sourceElement, constructor);
 	}
@@ -333,16 +341,6 @@ public class JvmTypesBuilder {
 				&& !typeRef.eIsSet(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE))
 			throw new IllegalArgumentException("typeref#type was null");
 		return EcoreUtil2.cloneWithProxies(typeRef);
-	}
-
-	/**
-	 * Attaches the given compile strategy to the given {@link JvmExecutable} such that the compiler knows how to
-	 * implement the {@link JvmExecutable} when it is translated to Java source code.
-	 * @param executable - the operation or constructor to add the method body to.
-	 * @param strategy - the compilation strategy. Must return zero or more Java statements.
-	 */
-	public void body(JvmExecutable executable, Functions.Function1<ImportManager, ? extends CharSequence> strategy) {
-		addCompilationStrategy(executable, strategy);
 	}
 
 	/**

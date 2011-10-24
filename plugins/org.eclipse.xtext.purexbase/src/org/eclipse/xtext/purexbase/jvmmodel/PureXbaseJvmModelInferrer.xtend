@@ -38,12 +38,12 @@ class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
    				^static = true
    				parameters += e.toParameter("args", e.newTypeRef(typeof(String)).addArrayTypeDimension)
    				if (!e.containsReturn) {
-   					it.body ['''
+   					setBody ['''
 						try {«e.compile(it)»
 						} catch (Throwable t) {}
    					''']
    				} else {
-   					it.body ['''
+   					setBody ['''
 						try {
 							xbaseExpression();
 						} catch (Throwable t) {}
@@ -53,7 +53,7 @@ class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
    			if ( e.containsReturn ) {
    				members += e.toMethod("xbaseExpression", e.newTypeRef(typeof(Object))) [
    				^static = true
-				it.body ['''
+				setBody ['''
 					if (Boolean.TRUE) {«e.compile(it)»
 					}
 					return null;
