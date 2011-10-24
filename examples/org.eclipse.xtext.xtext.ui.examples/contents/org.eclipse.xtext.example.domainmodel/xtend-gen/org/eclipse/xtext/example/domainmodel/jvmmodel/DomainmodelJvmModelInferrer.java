@@ -11,13 +11,12 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Entity;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Feature;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Operation;
-import org.eclipse.xtext.example.domainmodel.domainmodel.PackageDeclaration;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Property;
-import org.eclipse.xtext.example.domainmodel.domainmodel.Visibility;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer;
@@ -25,18 +24,22 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
   @Inject
   private JvmTypesBuilder _jvmTypesBuilder;
   
+  @Inject
+  private IQualifiedNameProvider _iQualifiedNameProvider;
+  
   protected void _infer(final Entity e, final IAcceptor<JvmDeclaredType> acceptor, final boolean prelinkingPhase) {
-    String _fullName = this.fullName(e);
+    QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(e);
     final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
         public void apply(final JvmGenericType it) {
           {
+            String _documentation = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(e);
+            DomainmodelJvmModelInferrer.this._jvmTypesBuilder.setDocumentation(it, _documentation);
             JvmParameterizedTypeReference _superType = e.getSuperType();
             boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_superType, null);
             if (_operator_notEquals) {
@@ -82,9 +85,8 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
                   final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
                       public void apply(final JvmOperation it) {
                         {
-                          Visibility _visibility = f_3.getVisibility();
-                          JvmVisibility _jvm = DomainmodelJvmModelInferrer.this.toJvm(_visibility);
-                          it.setVisibility(_jvm);
+                          String _documentation = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(f_3);
+                          DomainmodelJvmModelInferrer.this._jvmTypesBuilder.setDocumentation(it, _documentation);
                           EList<JvmFormalParameter> _params = f_3.getParams();
                           for (final JvmFormalParameter p : _params) {
                             EList<JvmFormalParameter> _parameters = it.getParameters();
@@ -106,63 +108,8 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
           }
         }
       };
-    JvmGenericType _class = this._jvmTypesBuilder.toClass(e, _fullName, _function);
+    JvmGenericType _class = this._jvmTypesBuilder.toClass(e, _fullyQualifiedName, _function);
     acceptor.accept(_class);
-  }
-  
-  public String fullName(final EObject x) {
-    String _switchResult = null;
-    final EObject x_1 = x;
-    boolean matched = false;
-    if (!matched) {
-      if (x_1 instanceof Entity) {
-        final Entity x_2 = (Entity) x_1;
-        matched=true;
-        EObject _eContainer = x_2.eContainer();
-        String _fullName = this.fullName(_eContainer);
-        String _name = x_2.getName();
-        String _operator_plus = StringExtensions.operator_plus(_fullName, _name);
-        _switchResult = _operator_plus;
-      }
-    }
-    if (!matched) {
-      if (x_1 instanceof PackageDeclaration) {
-        final PackageDeclaration x_3 = (PackageDeclaration) x_1;
-        matched=true;
-        EObject _eContainer_1 = x_3.eContainer();
-        String _fullName_1 = this.fullName(_eContainer_1);
-        String _name_1 = x_3.getName();
-        String _operator_plus_1 = StringExtensions.operator_plus(_fullName_1, _name_1);
-        String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, ".");
-        _switchResult = _operator_plus_2;
-      }
-    }
-    if (!matched) {
-      _switchResult = "";
-    }
-    return _switchResult;
-  }
-  
-  public JvmVisibility toJvm(final Visibility visibility) {
-    JvmVisibility _switchResult = null;
-    final Visibility visibility_1 = visibility;
-    boolean matched = false;
-    if (!matched) {
-      if (ObjectExtensions.operator_equals(visibility_1,Visibility.PRIVATE)) {
-        matched=true;
-        _switchResult = JvmVisibility.PRIVATE;
-      }
-    }
-    if (!matched) {
-      if (ObjectExtensions.operator_equals(visibility_1,Visibility.PROTECTED)) {
-        matched=true;
-        _switchResult = JvmVisibility.PROTECTED;
-      }
-    }
-    if (!matched) {
-      _switchResult = JvmVisibility.PUBLIC;
-    }
-    return _switchResult;
   }
   
   public void infer(final EObject e, final IAcceptor<JvmDeclaredType> acceptor, final boolean prelinkingPhase) {

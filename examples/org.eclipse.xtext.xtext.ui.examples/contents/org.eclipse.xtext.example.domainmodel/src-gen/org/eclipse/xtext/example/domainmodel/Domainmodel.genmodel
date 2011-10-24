@@ -9,11 +9,6 @@
     editorPluginID="org.eclipse.xtext.example.domainmodel.editor" usedGenPackages="../../../../../../../org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types ../../../../../../../org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase">
   <genPackages prefix="Domainmodel" basePackage="org.eclipse.xtext.example.domainmodel"
       disposableProviderFactory="true" ecorePackage="Domainmodel.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Domainmodel.ecore#//Visibility">
-      <genEnumLiterals ecoreEnumLiteral="Domainmodel.ecore#//Visibility/public"/>
-      <genEnumLiterals ecoreEnumLiteral="Domainmodel.ecore#//Visibility/private"/>
-      <genEnumLiterals ecoreEnumLiteral="Domainmodel.ecore#//Visibility/protected"/>
-    </genEnums>
     <genClasses ecoreClass="Domainmodel.ecore#//DomainModel">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Domainmodel.ecore#//DomainModel/elements"/>
     </genClasses>
@@ -36,7 +31,6 @@
     </genClasses>
     <genClasses ecoreClass="Domainmodel.ecore#//Property"/>
     <genClasses ecoreClass="Domainmodel.ecore#//Operation">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Domainmodel.ecore#//Operation/visibility"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Domainmodel.ecore#//Operation/params"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Domainmodel.ecore#//Operation/body"/>
     </genClasses>
