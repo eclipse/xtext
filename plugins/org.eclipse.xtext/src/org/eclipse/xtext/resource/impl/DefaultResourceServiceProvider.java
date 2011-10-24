@@ -10,6 +10,7 @@ package org.eclipse.xtext.resource.impl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.FileExtensionProvider;
+import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.validation.IResourceValidator;
@@ -23,31 +24,43 @@ import com.google.inject.Injector;
  */
 public class DefaultResourceServiceProvider implements IResourceServiceProvider {
 	
-	public org.eclipse.xtext.resource.IContainer.Manager getContainerManager() {
-		return get(org.eclipse.xtext.resource.IContainer.Manager.class);
-	}
+	@Inject
+	private IContainer.Manager containerManager;
 	
-	public IResourceDescription.Manager getResourceDescriptionManager() {
-		return get(IResourceDescription.Manager.class);
-	}
+	@Inject
+	private IResourceDescription.Manager resourceDescriptionManager;
 	
-	public IResourceValidator getResourceValidator() {
-		return get(IResourceValidator.class);
-	}
+	@Inject
+	private IResourceValidator resourceValidator;
 	
 	@Inject
 	private FileExtensionProvider fileExtensionProvider;
+	
+	@Inject(optional = true)
+	private IEncodingProvider encodingProvider;
+	
+	@Inject
+	private Injector injector;
+	
+	public org.eclipse.xtext.resource.IContainer.Manager getContainerManager() {
+		return containerManager;
+	}
+	
+	public IResourceDescription.Manager getResourceDescriptionManager() {
+		return resourceDescriptionManager;
+	}
+	
+	public IResourceValidator getResourceValidator() {
+		return resourceValidator;
+	}
 	
 	public boolean canHandle(URI uri) {
 		return fileExtensionProvider.isValid(uri.fileExtension());
 	}
 
 	public IEncodingProvider getEncodingProvider() {
-		return get(IEncodingProvider.class);
+		return encodingProvider;
 	}
-	
-	@Inject
-	private Injector injector;
 	
 	public <T> T get(Class<T> t) {
 		try {
