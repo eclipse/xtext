@@ -23,6 +23,9 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(MultiLineCommentDocumentationProvider.class)
 public interface IEObjectDocumentationProvider {
 
+	/**
+	 * returns the documentation or <code>null</code> if no documentation is attached to the given {@link EObject}.
+	 */
 	public String getDocumentation (EObject o);
 
 }
