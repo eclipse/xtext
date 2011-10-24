@@ -7,14 +7,24 @@
  *******************************************************************************/
 package testdata;
 
-public class ClassA implements InterfaceA, InterfaceB {
+public class LinkingType {
 
-	public String getUpperCaseClassName() {
-		return getClassName().toUpperCase();
+	protected String protectedField;
+	
+	public String publicField;
+	
+	public void fieldOverloadsMethod() {}
+	public void withArgument(Object o) {}
+	public void getWithArgument2(Object o) {}
+	
+	public void withArgument(Object o, int i, int j) {}
+	public void getWithArgument2(Object o, int i, int j) {}
+	public void fieldOverloadsMethod(int i, int j) {}
+	
+	protected String getProtectedField() {
+		return protectedField;
 	}
-
-	public String getClassName() {
-		return getClass().getSimpleName();
+	public String getPublicField() {
+		return publicField;
 	}
-
 }

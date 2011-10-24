@@ -7,16 +7,23 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.preferences;
 
+import java.util.Map;
+
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.preference.IPreferencePageContainer;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
 import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.builder.DerivedResourceCleanerJob;
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
+import org.eclipse.xtext.ui.editor.preferences.PreferenceStoreAccessImpl;
 
+import com.google.common.collect.MapDifference.ValueDifference;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.name.Named;
 
 /**
@@ -26,8 +33,14 @@ import com.google.inject.name.Named;
 public class BuilderPreferencePage extends PropertyAndPreferencePage {
 	private BuilderConfigurationBlock builderConfigurationBlock;
 	private EclipseOutputConfigurationProvider configurationProvider;
-	private WorkingCopyPreferencesAccess.Factory workingCopyPreferencesAccessFactory;
 	private String languageName;
+	private PreferenceStoreAccessImpl preferenceStoreAccessImpl;
+	private Provider<DerivedResourceCleanerJob> cleanerProvider;
+
+	@Inject
+	public void setCleanerProvider(Provider<DerivedResourceCleanerJob> cleanerProvider) {
+		this.cleanerProvider = cleanerProvider;
+	}
 
 	@Inject
 	public void setLanguageName(@Named(Constants.LANGUAGE_NAME) String languageName) {
@@ -40,18 +53,16 @@ public class BuilderPreferencePage extends PropertyAndPreferencePage {
 	}
 
 	@Inject
-	public void setWorkingCopyPreferencesAccessFactory(
-			WorkingCopyPreferencesAccess.Factory workingCopyPreferencesAccessFactory) {
-		this.workingCopyPreferencesAccessFactory = workingCopyPreferencesAccessFactory;
+	public void setPreferenceStoreAccessImpl(PreferenceStoreAccessImpl preferenceStoreAccessImpl) {
+		this.preferenceStoreAccessImpl = preferenceStoreAccessImpl;
 	}
 
 	@Override
 	public void createControl(Composite parent) {
-		WorkingCopyPreferencesAccess workingCopyPreferencesAccess = workingCopyPreferencesAccessFactory.create(
-				getProject(), getWorkingCopyManager());
 		IWorkbenchPreferenceContainer container = (IWorkbenchPreferenceContainer) getContainer();
-		builderConfigurationBlock = new BuilderConfigurationBlock(getProject(), workingCopyPreferencesAccess,
-				configurationProvider, container);
+		IPreferenceStore preferenceStore = preferenceStoreAccessImpl.getWritablePreferenceStore(getProject());
+		builderConfigurationBlock = new BuilderConfigurationBlock(getProject(), preferenceStore, configurationProvider,
+				container);
 		builderConfigurationBlock.setStatusChangeListener(getNewStatusChangedListener());
 		super.createControl(parent);
 	}
@@ -102,8 +113,11 @@ public class BuilderPreferencePage extends PropertyAndPreferencePage {
 
 	@Override
 	public boolean performOk() {
-		if (builderConfigurationBlock != null && !builderConfigurationBlock.performOk()) {
-			return false;
+		if (builderConfigurationBlock != null) {
+			scheduleCleanerJobIfNecessary(getContainer());
+			if (!builderConfigurationBlock.performOk()) {
+				return false;
+			}
 		}
 		return super.performOk();
 	}
@@ -111,6 +125,7 @@ public class BuilderPreferencePage extends PropertyAndPreferencePage {
 	@Override
 	public void performApply() {
 		if (builderConfigurationBlock != null) {
+			scheduleCleanerJobIfNecessary(null);
 			builderConfigurationBlock.performApply();
 		}
 	}
@@ -119,6 +134,29 @@ public class BuilderPreferencePage extends PropertyAndPreferencePage {
 	public void setElement(IAdaptable element) {
 		super.setElement(element);
 		setDescription(null); // no description for property page
+	}
+
+	private void scheduleCleanerJobIfNecessary(IPreferencePageContainer preferencePageContainer) {
+		Map<String, ValueDifference<String>> changes = builderConfigurationBlock.getPreferenceChanges();
+		for (String key : changes.keySet()) {
+			if (key.matches("^" + EclipseOutputConfigurationProvider.OUTPUT_PREFERENCE_TAG + "\\.\\w+\\."
+					+ EclipseOutputConfigurationProvider.OUTPUT_DIRECTORY + "$")) {
+				ValueDifference<String> difference = changes.get(key);
+				scheduleCleanerJob(preferencePageContainer, difference.rightValue());
+			}
+		}
+	}
+
+	private void scheduleCleanerJob(IPreferencePageContainer preferencePageContainer, String folderNameToClean) {
+		DerivedResourceCleanerJob derivedResourceCleanerJob = cleanerProvider.get();
+		derivedResourceCleanerJob.setUser(true);
+		derivedResourceCleanerJob.initialize(getProject(), folderNameToClean);
+		if (preferencePageContainer != null) {
+			IWorkbenchPreferenceContainer container = (IWorkbenchPreferenceContainer) getContainer();
+			container.registerUpdateJob(derivedResourceCleanerJob);
+		} else {
+			derivedResourceCleanerJob.schedule();
+		}
 	}
 
 }

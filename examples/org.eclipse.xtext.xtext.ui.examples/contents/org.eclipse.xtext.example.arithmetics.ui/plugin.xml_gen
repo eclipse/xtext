@@ -71,6 +71,19 @@
         </page>
     </extension>
     <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.example.arithmetics.ui.ArithmeticsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.example.arithmetics.Arithmetics"
+            name="Arithmetics">
+            <keywordReference id="org.eclipse.xtext.example.arithmetics.ui.keyword_Arithmetics"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.xtext.example.arithmetics.ui.keyword_Arithmetics"

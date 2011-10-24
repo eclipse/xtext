@@ -7,13 +7,24 @@
  *******************************************************************************/
 package testdata;
 
-import java.util.Collections;
-import java.util.List;
+public class LinkingStaticType {
 
-public class PropertiesHolder {
-
-	public List<Properties1> getProperties() {
-		return Collections.emptyList();
+	protected static String protectedField;
+	
+	public static String publicField;
+	
+	public static String fieldOverloadsMethod;
+	
+	public static void withArgument(Object o, int i, int j) {}
+	public static void fieldOverloadsMethod(int i, int j) {}
+	protected static String getProtectedField() {
+		return protectedField;
+	}
+	public static String getPublicField() {
+		return publicField;
+	}
+	public static String getFieldOverloadsMethod() {
+		return fieldOverloadsMethod;
 	}
 	
 }

@@ -28,7 +28,6 @@ import org.eclipse.xtext.ui.tests.refactoring.services.RefactoringTestLanguageGr
 import org.eclipse.xtext.util.TextRegion;
 
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -54,6 +53,7 @@ public class CrossReferenceSerializerFacadeTest extends AbstractXtextTests {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		setInjector(Activator.getInstance().getInjector("org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage"));
 		getInjector().injectMembers(this);
 	}
 	
@@ -63,11 +63,6 @@ public class CrossReferenceSerializerFacadeTest extends AbstractXtextTests {
 		super.tearDown();
 	}
 	
-	@Override
-	public Injector getInjector() {
-		return Activator.getInstance().getInjector("org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage");
-	}
-
 	public void testOldSerializer() throws Exception {
 		facade.setSerializer(oldSerializer);
 		assertFalse(facade.useNewSerializer());

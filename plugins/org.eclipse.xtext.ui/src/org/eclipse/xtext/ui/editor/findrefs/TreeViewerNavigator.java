@@ -19,6 +19,7 @@ import org.eclipse.swt.widgets.TreeItem;
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class TreeViewerNavigator {
 
 	private TreeViewer viewer;

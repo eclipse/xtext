@@ -7,7 +7,26 @@
  *******************************************************************************/
 package testdata;
 
-public interface InterfaceA {
+public class LinkingTypeEquallyNamed {
 
-	String getClassName();
+	protected String protectedField;
+	
+	public String publicField;
+	
+	public String fieldOverloadsMethod;
+	
+	public void withArgument(Object o) {}
+	
+	public void withArgument(Object o, int i, int j) {}
+	public void fieldOverloadsMethod(int i, int j) {}
+	
+	protected String getProtectedField() {
+		return protectedField;
+	}
+	public String getPublicField() {
+		return publicField;
+	}
+	public String getFieldOverloadsMethod() {
+		return fieldOverloadsMethod;
+	}
 }

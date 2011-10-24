@@ -30,7 +30,6 @@ import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
 
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -47,12 +46,8 @@ public class DefaultRenameElementStrategyTest extends AbstractXtextTests impleme
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		setInjector(Activator.getInstance().getInjector("org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage"));
 		getInjector().injectMembers(this);
-	}
-	
-	@Override
-	public Injector getInjector() {
-		return Activator.getInstance().getInjector("org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage");
 	}
 	
 	public void testRenameElementStrategy() throws Exception {

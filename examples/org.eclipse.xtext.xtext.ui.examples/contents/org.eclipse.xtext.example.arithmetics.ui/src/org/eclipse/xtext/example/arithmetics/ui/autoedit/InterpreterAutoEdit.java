@@ -73,13 +73,15 @@ public class InterpreterAutoEdit implements IAutoEditStrategy {
 
 	protected Evaluation findEvaluation(final DocumentCommand command,
 			XtextResource state) {
-		Module m = (Module) state.getContents().get(0);
-		for (Statement stmt : m.getStatements()) {
-			if (stmt instanceof Evaluation) {
-				ICompositeNode node = NodeModelUtils.getNode(stmt);
-				if (node.getOffset() <= command.offset
-						&& (node.getOffset() + node.getLength()) >= command.offset) {
-					return (Evaluation) stmt;
+		if(!state.getContents().isEmpty()) {
+			Module m = (Module) state.getContents().get(0);
+			for (Statement stmt : m.getStatements()) {
+				if (stmt instanceof Evaluation) {
+					ICompositeNode node = NodeModelUtils.getNode(stmt);
+					if (node.getOffset() <= command.offset
+							&& (node.getOffset() + node.getLength()) >= command.offset) {
+						return (Evaluation) stmt;
+					}
 				}
 			}
 		}

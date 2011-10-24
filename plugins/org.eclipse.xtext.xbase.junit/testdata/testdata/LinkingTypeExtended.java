@@ -7,7 +7,8 @@
  *******************************************************************************/
 package testdata;
 
-public interface InterfaceA {
+public class LinkingTypeExtended extends LinkingType {
 
-	String getClassName();
+	public String fieldOverloadsMethod;
+	
 }

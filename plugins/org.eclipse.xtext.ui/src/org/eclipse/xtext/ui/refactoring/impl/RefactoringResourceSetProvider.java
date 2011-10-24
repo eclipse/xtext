@@ -8,11 +8,15 @@
 package org.eclipse.xtext.ui.refactoring.impl;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
 /**
@@ -43,6 +47,9 @@ public class RefactoringResourceSetProvider {
 	protected void configure(ResourceSet resourceSet) {
 		resourceSet.getLoadOptions().put(org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider.LIVE_SCOPE,
 				Boolean.TRUE);
+		if (resourceSet instanceof ResourceSetImpl) {
+			((ResourceSetImpl) resourceSet).setURIResourceMap(Maps.<URI, Resource>newHashMap());
+		}
 		externalContentSupport.configureResourceSet(resourceSet, dirtyStateManager.getActualContentProvider());
 	}
 }
