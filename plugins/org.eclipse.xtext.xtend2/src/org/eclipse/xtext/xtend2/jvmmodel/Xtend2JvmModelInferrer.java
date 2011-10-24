@@ -145,7 +145,7 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			appendSyntheticDispatchMethods(source, inferredJvmType);
 			computeInferredReturnTypes(inferredJvmType);
 			jvmTypesBuilder.translateAnnotationsTo(source.getAnnotations(), inferredJvmType);
-			jvmTypesBuilder.translateDocumentationTo(source, inferredJvmType);
+			jvmTypesBuilder.setDocumentation(inferredJvmType, jvmTypesBuilder.getDocumentation(source));
 			
 			nameClashResolver.resolveNameClashes(inferredJvmType);
 		}
@@ -311,7 +311,7 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 		} else {
 			associator.associateLogicalContainer(source.getExpression(), operation);
 		}
-		jvmTypesBuilder.translateDocumentationTo(source, operation);
+		jvmTypesBuilder.setDocumentation(operation, jvmTypesBuilder.getDocumentation(source));
 		return operation;
 	}
 
@@ -324,7 +324,7 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			field.setVisibility(source.getVisibility());
 			field.setType(cloneWithProxies(source.getType()));
 			jvmTypesBuilder.translateAnnotationsTo(source.getAnnotationInfo().getAnnotations(), field);
-			jvmTypesBuilder.translateDocumentationTo(source, field);
+			jvmTypesBuilder.setDocumentation(field, jvmTypesBuilder.getDocumentation(source));
 			return field;
 		} else {
 			return null;
