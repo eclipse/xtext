@@ -37,6 +37,18 @@
 			<topic href="contents/050-validation.html" label="Creating Custom Validation Rules" >
 			</topic>
 		</topic>
+		<topic href="contents/015-domainmodel-java.html" label="10 Minutes to your fully-fledged JVM language" >
+			<topic href="contents/015-domainmodel-java.html#JvmDomainmodel_7" label="Step One: Create A New Xtext Project" >
+			</topic>
+			<topic href="contents/015-domainmodel-java.html#JvmDomainmodel_8" label="Step Two: Write the Grammar" >
+			</topic>
+			<topic href="contents/015-domainmodel-java.html#JvmDomainmodel_9" label="Generate Language Artifacts" >
+			</topic>
+			<topic href="contents/015-domainmodel-java.html#JvmDomainmodel_10" label="Step Three: Define the Mapping to JVM Concepts" >
+			</topic>
+			<topic href="contents/015-domainmodel-java.html#JvmDomainmodel_11" label="Try It!" >
+			</topic>
+		</topic>
 	</topic>
 	<topic href="contents/xtext_16.html" label="Reference Documentation" >
 		<topic href="contents/000-introduction.html" label="Overview" >

@@ -267,8 +267,8 @@
 			</p>
 			<p>
 			<ul>
-			  <li><span class="inlinecode"><span class="keyword">true</span></span></li>
-			  <li><span class="inlinecode"><span class="keyword">false</span></span></li>
+			  <li><span class="inlinecode">true</span></li>
+			  <li><span class="inlinecode">false</span></li>
 			</ul>
 			</p>
 			<a name="Xtend_Expressions_NullLiteral" ></a>
@@ -289,7 +289,7 @@
 			</p>
 			<p>
 			<ul>
-			  <li><span class="inlinecode">typeof(java.lang.String)</span> which yields java.lang.String.class</li>
+			  <li><span class="inlinecode"><span class="keyword">typeof</span>(java.lang.String)</span> which yields java.lang.String.class</li>
 			</ul>
 			</p>
 			<a name="Xtend_Expressions_TypeCasts" ></a>
@@ -317,8 +317,8 @@
 			<h3>Examples</h3>
 			<p>
 			<ul>
-			  <li><span class="inlinecode">my.foo&nbsp;as&nbsp;MyType</span></li>
-			  <li><span class="inlinecode">(1&nbsp;+&nbsp;3&nbsp;*&nbsp;5&nbsp;*&nbsp;(-&nbsp;23))&nbsp;as&nbsp;BigInteger</span></li>
+			  <li><span class="inlinecode">my.foo&nbsp;<span class="keyword">as</span>&nbsp;MyType</span></li>
+			  <li><span class="inlinecode">(1&nbsp;+&nbsp;3&nbsp;*&nbsp;5&nbsp;*&nbsp;(-&nbsp;23))&nbsp;<span class="keyword">as</span>&nbsp;BigInteger</span></li>
 			</ul>
 			</p>
 			<a name="Xtend_Expressions_Operators" ></a>
@@ -453,8 +453,8 @@
 			If the operators <span class="inlinecode">||</span> and <span class="inlinecode">&amp;&amp;</span> are used in a context where the left hand operand is of type boolean, the operation is evaluated
 			in short circuit mode, which means that the right hand operand might not be evaluated at all in the following cases: 
 			<ol>
-			  <li>in the case of <span class="inlinecode">||</span> the operand on the right hand side is not evaluated if the left operand evaluates to <span class="inlinecode"><span class="keyword">true</span></span>.</li>
-			  <li>in the case of <span class="inlinecode">&amp;&amp;</span> the operand on the right hand side is not evaluated if the left operand evaluates to <span class="inlinecode"><span class="keyword">false</span></span>.</li>
+			  <li>in the case of <span class="inlinecode">||</span> the operand on the right hand side is not evaluated if the left operand evaluates to <span class="inlinecode">true</span>.</li>
+			  <li>in the case of <span class="inlinecode">&amp;&amp;</span> the operand on the right hand side is not evaluated if the left operand evaluates to <span class="inlinecode">false</span>.</li>
 			</ol>
 			</p>
 			<a name="Xtend_Expressions_Operators_4" ></a>
@@ -627,7 +627,7 @@
 			  		<div class="literallayout">
 			  	<div class="incode">
 			  		<p class="code">
-			  			new&nbsp;String()
+			  			<span class="keyword">new</span>&nbsp;String()
 			  		</p>
 			  	</div>
 			  </div>
@@ -637,7 +637,7 @@
 			  		<div class="literallayout">
 			  	<div class="incode">
 			  		<p class="code">
-			  			new&nbsp;java.util.ArrayList&lt;java.math.BigDecimal&gt;()
+			  			<span class="keyword">new</span>&nbsp;java.util.ArrayList&lt;java.math.BigDecimal&gt;()
 			  		</p>
 			  	</div>
 			  </div>
@@ -710,7 +710,7 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						val&nbsp;func&nbsp;=&nbsp;[String&nbsp;s|&nbsp;s.length&gt;3]
+						<span class="keyword">val</span>&nbsp;func&nbsp;=&nbsp;[String&nbsp;s|&nbsp;s.length&gt;3]
 					</p>
 				</div>
 			</div>
@@ -821,7 +821,7 @@
 			</p>
 			<p>
 			An expression <span class="inlinecode"><span class="keyword">if</span>&nbsp;(p)&nbsp;e1&nbsp;<span class="keyword">else</span>&nbsp;e2</span> results in either the value <span class="inlinecode">e1</span> or <span class="inlinecode">e2</span> depending on whether the predicate <span class="inlinecode">p</span> 
-			evaluates to <span class="inlinecode"><span class="keyword">true</span></span> or <span class="inlinecode"><span class="keyword">false</span></span>. The else part is optional which is a shorthand for <span class="inlinecode"><span class="keyword">else</span>&nbsp;null</span>.
+			evaluates to <span class="inlinecode">true</span> or <span class="inlinecode">false</span>. The else part is optional which is a shorthand for <span class="inlinecode"><span class="keyword">else</span>&nbsp;null</span>.
 			That means 
 			</p>
 			<p>
@@ -875,7 +875,7 @@
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;e2&nbsp;:&nbsp;er2<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;en&nbsp;:&nbsp;ern<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;default&nbsp;:&nbsp;er<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;er<br/>
 						}
 					</p>
 				</div>
@@ -919,11 +919,11 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						var&nbsp;Object&nbsp;x&nbsp;=&nbsp;...;<br/>
+						<span class="keyword">var</span>&nbsp;Object&nbsp;x&nbsp;=&nbsp;...;<br/>
 						<span class="keyword">switch</span>&nbsp;x&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;<span class="keyword">case</span>&nbsp;x.length()&gt;0&nbsp;:&nbsp;x.length()<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;List&lt;?&gt;&nbsp;:&nbsp;x.size()<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;default&nbsp;:&nbsp;-1<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;-1<br/>
 						}
 					</p>
 				</div>
@@ -953,7 +953,7 @@
 			  			<span class="keyword">switch</span>&nbsp;foo&nbsp;{<br/>
 			  			&nbsp;&nbsp;&nbsp;&nbsp;Entity&nbsp;:&nbsp;foo.superType.name<br/>
 			  			&nbsp;&nbsp;&nbsp;&nbsp;Datatype&nbsp;:&nbsp;foo.name<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;default&nbsp;:&nbsp;throw&nbsp;new&nbsp;IllegalStateException<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalStateException<br/>
 			  			}
 			  		</p>
 			  	</div>
@@ -967,7 +967,7 @@
 			  			<span class="keyword">switch</span>&nbsp;x&nbsp;:&nbsp;foo.bar.complicated(<span class="string">&apos;hello&apos;</span>,42)&nbsp;{<br/>
 			  			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">"hello42"</span>&nbsp;:&nbsp;...<br/>
 			  			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;x.length&lt;2&nbsp;:&nbsp;...<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;default&nbsp;:&nbsp;....<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;....<br/>
 			  			}
 			  		</p>
 			  	</div>
@@ -1004,18 +1004,18 @@
 			unqualified manner.
 			</p>
 			<p>
-			A variable declaration starting with the keyword <span class="inlinecode">val</span> denotes a so called value, which is essentially a final (i.e. unsettable) variable. In rare cases, one
-			needs to update the value of a reference. In such situations the variable needs to be declared with the keyword <span class="inlinecode">var</span>, which stands for 'variable'.
+			A variable declaration starting with the keyword <span class="inlinecode"><span class="keyword">val</span></span> denotes a so called value, which is essentially a final (i.e. unsettable) variable. In rare cases, one
+			needs to update the value of a reference. In such situations the variable needs to be declared with the keyword <span class="inlinecode"><span class="keyword">var</span></span>, which stands for 'variable'.
 			</p>
 			<p>
-			A typical example for using <span class="inlinecode">var</span> is a counter in a loop. 
+			A typical example for using <span class="inlinecode"><span class="keyword">var</span></span> is a counter in a loop. 
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
 						{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;max&nbsp;=&nbsp;100<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;i&nbsp;=&nbsp;0<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;(i&nbsp;&gt;&nbsp;max)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;max&nbsp;=&nbsp;100<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;i&nbsp;=&nbsp;0<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span>&nbsp;(i&nbsp;&gt;&nbsp;max)&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;println(<span class="string">"Hi&nbsp;there!"</span>)<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i&nbsp;=&nbsp;i&nbsp;+1<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
@@ -1049,7 +1049,7 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						var&nbsp;List&lt;String&gt;&nbsp;msg&nbsp;=&nbsp;new&nbsp;ArrayList&lt;String&gt;();
+						<span class="keyword">var</span>&nbsp;List&lt;String&gt;&nbsp;msg&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;String&gt;();
 					</p>
 				</div>
 			</div>
@@ -1061,7 +1061,7 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						var&nbsp;msg&nbsp;=&nbsp;new&nbsp;ArrayList&lt;String&gt;();&nbsp;<span class="comment">//&nbsp;-&gt;&nbsp;type&nbsp;ArrayList&lt;String&gt;</span>
+						<span class="keyword">var</span>&nbsp;msg&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;String&gt;();&nbsp;<span class="comment">//&nbsp;-&gt;&nbsp;type&nbsp;ArrayList&lt;String&gt;</span>
 					</p>
 				</div>
 			</div>
@@ -1095,7 +1095,7 @@
 				<div class="incode">
 					<p class="code">
 						{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;x&nbsp;=&nbsp;greeting();<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;x&nbsp;=&nbsp;greeting();<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x.equals(<span class="string">"Hello&nbsp;"</span>))&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x+<span class="string">"World!"</span>;&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
@@ -1123,12 +1123,12 @@
 			<a name="Xtend_Expressions_ForLoop" ></a>
 			<h2>For Loop</h2>
 			<p>
-			The for loop <span class="inlinecode">for&nbsp;(T1&nbsp;variable&nbsp;:&nbsp;iterableOfT1)&nbsp;expression</span> is used to execute a certain expression for each element of an
+			The for loop <span class="inlinecode"><span class="keyword">for</span>&nbsp;(T1&nbsp;variable&nbsp;:&nbsp;iterableOfT1)&nbsp;expression</span> is used to execute a certain expression for each element of an
 			array of an instance of <span class="inlinecode">java.lang.Iterable</span>.
 			The local <span class="inlinecode">variable</span> is final, hence canot be updated. 
 			</p>
 			<p>
-			The return type of a for loop is <span class="inlinecode">void</span>.
+			The return type of a for loop is <span class="inlinecode"><span class="keyword">void</span></span>.
 			The type of the local variable can be left out. In that case it is inferred from the type of the array
 			or <span class="inlinecode">java.lang.Iterable</span> returned by the iterable expression.
 			</p>
@@ -1138,7 +1138,7 @@
 			  		<div class="literallayout">
 			  	<div class="incode">
 			  		<p class="code">
-			  			for&nbsp;(String&nbsp;s&nbsp;:&nbsp;myStrings)&nbsp;{<br/>
+			  			<span class="keyword">for</span>&nbsp;(String&nbsp;s&nbsp;:&nbsp;myStrings)&nbsp;{<br/>
 			  			&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(s);<br/>
 			  			}
 			  		</p>
@@ -1150,7 +1150,7 @@
 			  		<div class="literallayout">
 			  	<div class="incode">
 			  		<p class="code">
-			  			for&nbsp;(s&nbsp;:&nbsp;myStrings)<br/>
+			  			<span class="keyword">for</span>&nbsp;(s&nbsp;:&nbsp;myStrings)<br/>
 			  			&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(s)
 			  		</p>
 			  	</div>
@@ -1176,8 +1176,8 @@
 			<a name="Xtend_Expressions_WhileExpression" ></a>
 			<h2>While Loop</h2>
 			<p>
-			A while loop <span class="inlinecode">while&nbsp;(predicate)&nbsp;expression</span> is used to execute a certain expression unless the predicate is evaluated to <span class="inlinecode"><span class="keyword">false</span></span>.
-			The return type of a while loop is <span class="inlinecode">void</span>.
+			A while loop <span class="inlinecode"><span class="keyword">while</span>&nbsp;(predicate)&nbsp;expression</span> is used to execute a certain expression unless the predicate is evaluated to <span class="inlinecode">false</span>.
+			The return type of a while loop is <span class="inlinecode"><span class="keyword">void</span></span>.
 			</p>
 			<a name="Xtend_Expressions_WhileExpression_2" ></a>
 			<h3>Syntax</h3>
@@ -1199,7 +1199,7 @@
 			  <li><div class="literallayout">
 			  	<div class="incode">
 			  		<p class="code">
-			  			while&nbsp;(<span class="keyword">true</span>)&nbsp;{<br/>
+			  			<span class="keyword">while</span>&nbsp;(true)&nbsp;{<br/>
 			  			&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>);<br/>
 			  			}
 			  		</p>
@@ -1209,7 +1209,7 @@
 			  <li><div class="literallayout">
 			  	<div class="incode">
 			  		<p class="code">
-			  			while&nbsp;(&nbsp;(&nbsp;i&nbsp;=&nbsp;i&nbsp;+&nbsp;1&nbsp;)&nbsp;&lt;&nbsp;max&nbsp;)&nbsp;<br/>
+			  			<span class="keyword">while</span>&nbsp;(&nbsp;(&nbsp;i&nbsp;=&nbsp;i&nbsp;+&nbsp;1&nbsp;)&nbsp;&lt;&nbsp;max&nbsp;)&nbsp;<br/>
 			  			&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(&nbsp;<span class="string">"foo"</span>&nbsp;)
 			  		</p>
 			  	</div>
@@ -1220,9 +1220,9 @@
 			<a name="Xtend_Expressions_DoWhileExpression" ></a>
 			<h2>Do-While Loop</h2>
 			<p>
-			A do-while loop <span class="inlinecode">do&nbsp;expression&nbsp;while&nbsp;(predicate)</span> is used to execute a certain expression unless the predicate is evaluated to <span class="inlinecode"><span class="keyword">false</span></span>.
+			A do-while loop <span class="inlinecode"><span class="keyword">do</span>&nbsp;expression&nbsp;<span class="keyword">while</span>&nbsp;(predicate)</span> is used to execute a certain expression unless the predicate is evaluated to <span class="inlinecode">false</span>.
 			The difference to the <a href="03-Xtend_Expressions.php#Xtend_Expressions_WhileExpression" title="Go to &quot;While Loop&quot;">while loop</a> is that the execution starts by executing the block once before evaluating the predicate for the first time.
-			The return type of a do-while loop is <span class="inlinecode">void</span>.
+			The return type of a do-while loop is <span class="inlinecode"><span class="keyword">void</span></span>.
 			</p>
 			<a name="Xtend_Expressions_DoWhileExpression_2" ></a>
 			<h3>Syntax</h3>
@@ -1245,9 +1245,9 @@
 			  <li><div class="literallayout">
 			  	<div class="incode">
 			  		<p class="code">
-			  			do&nbsp;{<br/>
+			  			<span class="keyword">do</span>&nbsp;{<br/>
 			  			&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>);<br/>
-			  			}&nbsp;while&nbsp;(<span class="keyword">true</span>)
+			  			}&nbsp;<span class="keyword">while</span>&nbsp;(true)
 			  		</p>
 			  	</div>
 			  </div>
@@ -1255,7 +1255,7 @@
 			  <li><div class="literallayout">
 			  	<div class="incode">
 			  		<p class="code">
-			  			do&nbsp;doSideEffect(<span class="string">"foo"</span>)&nbsp;while&nbsp;((i=i+1)&lt;max)
+			  			<span class="keyword">do</span>&nbsp;doSideEffect(<span class="string">"foo"</span>)&nbsp;<span class="keyword">while</span>&nbsp;((i=i+1)&lt;max)
 			  		</p>
 			  	</div>
 			  </div>
@@ -1267,7 +1267,7 @@
 			<p>
 			Although an explicit return is often not necessary, it is supported.
 			In a closure for instance a return expression is always implied if the expression itself is not of type
-			<span class="inlinecode">void</span>. Anyway you can make it explicit:
+			<span class="inlinecode"><span class="keyword">void</span></span>. Anyway you can make it explicit:
 			</p>
 			<p>
 			<div class="literallayout">
@@ -1275,7 +1275,7 @@
 					<p class="code">
 						listOfStrings.map(e|&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(e==null)&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;<span class="string">"NULL"</span><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"NULL"</span><br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;e.toUpperCase<br/>
 						})
 					</p>
@@ -1294,7 +1294,7 @@
 						{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(myList.isEmpty)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;IllegalArgumentException(<span class="string">"the&nbsp;list&nbsp;must&nbsp;not&nbsp;be&nbsp;empty"</span>)<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<span class="string">"the&nbsp;list&nbsp;must&nbsp;not&nbsp;be&nbsp;empty"</span>)<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
 						}
 					</p>
@@ -1313,11 +1313,11 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						try&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;RuntimeException()<br/>
-						}&nbsp;catch&nbsp;(NullPointerException&nbsp;e)&nbsp;{<br/>
+						<span class="keyword">try</span>&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;RuntimeException()<br/>
+						}&nbsp;<span class="keyword">catch</span>&nbsp;(NullPointerException&nbsp;e)&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;handle&nbsp;e<br/>
-						</span>}&nbsp;finally&nbsp;{<br/>
+						</span>}&nbsp;<span class="keyword">finally</span>&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;do&nbsp;stuff<br/>
 						</span>}
 					</p>
@@ -1372,17 +1372,17 @@
 			<a name="RichStringIF" ></a>
 			<h2>Conditions in Rich Strings</h2>
 			<p>
-			There is a special <span class="inlinecode">IF</span> to be used within rich strings which is identical in syntax and meaning to the
-			old <span class="inlinecode">IF</span> from Xpand. Note that you could also use the if expression, but since it has not an explicit
+			There is a special <span class="inlinecode"><span class="keyword">IF</span></span> to be used within rich strings which is identical in syntax and meaning to the
+			old <span class="inlinecode"><span class="keyword">IF</span></span> from Xpand. Note that you could also use the if expression, but since it has not an explicit
 			terminal token, it is not as readable in that context.
 			</p>
 			<a name="RichStringFOREACH" ></a>
 			<h2>Loops in Rich Strings</h2>
 			<p>
-			Also the <span class="inlinecode">FOR</span> statement is available and can only be used in the context of a rich string.
-			It also supports the <span class="inlinecode">SEPARATOR</span> from Xpand. In addition, a <span class="inlinecode">BEFORE</span> expression
+			Also the <span class="inlinecode"><span class="keyword">FOR</span></span> statement is available and can only be used in the context of a rich string.
+			It also supports the <span class="inlinecode"><span class="keyword">SEPARATOR</span></span> from Xpand. In addition, a <span class="inlinecode"><span class="keyword">BEFORE</span></span> expression
 			can be defined that is only evaluated if the loop is at least evaluated once before the very first iteration.
-			Consequently <span class="inlinecode">AFTER</span> is evaluated after the last iteration if there is any element.
+			Consequently <span class="inlinecode"><span class="keyword">AFTER</span></span> is evaluated after the last iteration if there is any element.
 			</p>
 			<a name="RichStringType" ></a>
 			<h2>Typing</h2>
@@ -1406,7 +1406,7 @@
 			  </li>
 			  <li>
 			  		Indentation in the template that is relative to a control structure will not be propagated to
-			  		the output string. A control structure is a <span class="inlinecode">FOR</span>-loop or a condition (<span class="inlinecode">IF</span>) as well
+			  		the output string. A control structure is a <span class="inlinecode"><span class="keyword">FOR</span></span>-loop or a condition (<span class="inlinecode"><span class="keyword">IF</span></span>) as well
 			  		as the opening and closing marks of the rich string itself.
 			  		
 			  		The indentation is considered to be relative to such a control structure if the previous line
@@ -1430,7 +1430,7 @@
 			    			<div class="literallayout">
 			    	<div class="incode">
 			    		<p class="code">
-			    			class&nbsp;Template&nbsp;{<br/>
+			    			<span class="keyword">class</span>&nbsp;Template&nbsp;{<br/>
 			    			&nbsp;&nbsp;&nbsp;&nbsp;print(Node&nbsp;n)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
 			    			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;&laquo;n.name&raquo;&nbsp;{}<br/>
 			    			&nbsp;&nbsp;&nbsp;&nbsp;&apos;</span><span class="string">&apos;&apos;</span><br/>
@@ -1465,7 +1465,7 @@
 			    			<div class="literallayout">
 			    	<div class="incode">
 			    		<p class="code">
-			    			class&nbsp;Template&nbsp;{<br/>
+			    			<span class="keyword">class</span>&nbsp;Template&nbsp;{<br/>
 			    			&nbsp;&nbsp;&nbsp;&nbsp;print(Node&nbsp;n)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
 			    			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;&laquo;n.name&raquo;&nbsp;{<br/>
 			    			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;IF&nbsp;hasChildren&raquo;<br/>
@@ -1502,10 +1502,10 @@
 			<p>
 			As in the previous example, there is no indentation on the root level for the same reason.
 			The first nesting level has only one indentation level in the output. This is derived from
-			the indentation of the <span class="inlinecode">IF&nbsp;hasChildren</span> condition in the template which is nested in
+			the indentation of the <span class="inlinecode"><span class="keyword">IF</span>&nbsp;hasChildren</span> condition in the template which is nested in
 			the node. The additional nesting of the recursive invocation <span class="inlinecode">children*.print</span> is not
 			visible in the output as it is relative the the surrounding control structure. The line with
-			<span class="inlinecode">IF</span> and <span class="inlinecode">ENDIF</span> contain only control structures thus they are skipped in the output.
+			<span class="inlinecode"><span class="keyword">IF</span></span> and <span class="inlinecode"><span class="keyword">ENDIF</span></span> contain only control structures thus they are skipped in the output.
 			Note the additional indentation of the node <em>Leaf</em> which happens due to the first rule:
 			Indentation is propagated to called templates.
 			</p>

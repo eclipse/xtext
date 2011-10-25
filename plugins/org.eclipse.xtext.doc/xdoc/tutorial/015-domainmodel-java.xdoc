@@ -276,7 +276,7 @@ This will trigger the Xtext language generator. It generates the parser and
 serializer and some additional infrastructure code. You will see its logging 
 messages in the Console View. 
 
-img[images/30min_rungenerator.png][ ][ ][ ]
+img[images/JvmTutorial_RunGenerator.png][ ][ ][ ]
 
 section[Step Three: Define the Mapping to JVM Concepts]
 
@@ -459,4 +459,4 @@ the generated entity editor. Try it and discover the default
 functionality for code completion, syntax highlighting, syntactic validation, linking errors, 
 the outline view, find references etc.
 
-img[images/30min_editor.png][][][]
+img[images/JvmTutorial_Editor.png][][][]

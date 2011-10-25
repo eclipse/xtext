@@ -210,7 +210,7 @@
 					<br/>
 					<span class="keyword">entity</span>&nbsp;Blog&nbsp;{<br/>
 					&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">many</span>&nbsp;posts:&nbsp;Post<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;many&nbsp;posts:&nbsp;Post<br/>
 					}<br/>
 					<br/>
 					<span class="keyword">entity</span>&nbsp;HasAuthor&nbsp;{<br/>
@@ -220,7 +220,7 @@
 					<span class="keyword">entity</span>&nbsp;Post&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{<br/>
 					&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String<br/>
 					&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">many</span>&nbsp;comments:&nbsp;Comment<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;many&nbsp;comments:&nbsp;Comment<br/>
 					}<br/>
 					<br/>
 					<span class="keyword">entity</span>&nbsp;Comment&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{<br/>
@@ -463,7 +463,7 @@
 			  </div>
 			  
 			  		
-			  		The keyword <span class="inlinecode"><span class="keyword">many</span></span> is used to model a multi valued feature in the domain model
+			  		The keyword <span class="inlinecode">many</span> is used to model a multi valued feature in the domain model
 			  		DSL. The assignment operator (<span class="inlinecode">?=</span>) implies that the feature <em>many</em> is of type <em>boolean</em>. You are already familiar with
 			  		the other syntax elements in this parser rule. 
 			  </li>
@@ -613,13 +613,13 @@
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Blog&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">many</span>&nbsp;posts:&nbsp;Post<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;many&nbsp;posts:&nbsp;Post<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Post&nbsp;<span class="keyword">extends</span>&nbsp;my.company.common.HasAuthor&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">many</span>&nbsp;comments:&nbsp;Comment<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;many&nbsp;comments:&nbsp;Comment<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Comment&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{<br/>
