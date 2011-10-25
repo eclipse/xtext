@@ -420,4 +420,11 @@ public class AutoEditInCodeBlockTest extends AutoEditTest {
 		pressKey(editor, '\n');
 		assertState("[{}\n\t\t|\n\t]", editor);
 	}
+	
+	@Override
+	public void testBug358555() throws Exception {
+		XtextEditor editor = openEditor("/* | /**/");
+		pressKey(editor, '\n');
+		assertState("/* \n\t * | /**/", editor);
+	}
 }
