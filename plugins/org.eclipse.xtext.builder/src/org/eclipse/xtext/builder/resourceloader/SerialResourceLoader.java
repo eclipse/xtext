@@ -18,7 +18,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
+import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 
 import com.google.common.collect.Lists;
 
@@ -26,12 +26,12 @@ import com.google.common.collect.Lists;
  * Loads resources in sequentially in the same thread as it was invoked.
  *
  * @author Lieven Lemiengre - Initial contribution and API
- * @author Sebastian Zarnekow - Use IProject aware XtextResourceSetProvider instead of Provider<XtextResourceSet>
+ * @author Sebastian Zarnekow - Use IProject aware IResourceSetProvider instead of Provider<XtextResourceSet>
  * @since 2.1
  */
 public class SerialResourceLoader extends AbstractResourceLoader {
 
-	public SerialResourceLoader(XtextResourceSetProvider resourceSetProvider, Sorter sorter) {
+	public SerialResourceLoader(IResourceSetProvider resourceSetProvider, Sorter sorter) {
 		super(resourceSetProvider, sorter);
 	}
 
