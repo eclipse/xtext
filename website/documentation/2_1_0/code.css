@@ -5,31 +5,37 @@
 	padding: 1em;
 	background-color: #F0F0F0;
 	color: #000000 !important;
-	font-family: "Lucida Console", Monaco, monospace;
-	font-size: 12px;
+	font-family: monospace;
+ 	font-size: 14px;
 }
 
 .inlinecode{
 	padding-left: 3pt;
 	padding-right: 3pt;
-	font-size: 9.000000pt;
-	font-family: "Lucida Console", Monaco, monospace;
+    font-size: 14px;
+	font-family: monospace;
 	color: #000000 !important;
 }
 
 .keyword {
 	font-weight: bold;
 	color: #7F0055;
+	font-size: 14px;
+	font-family: monospace;
 }
 
 .string {
 	font-weight: normal !important;
 	color: #2A00FF;
+	font-size: 14px;
+	font-family: monospace;
 }
 
 .comment {
 	font-style: italic;
 	color: #3F7F5F;
+	font-size: 14px;
+	font-family: monospace;
 }
 
 .incode {
@@ -44,12 +50,12 @@ P.Code {
 	margin-bottom: 0.000000pt;
 	margin-right: 0.000000pt;
 	margin-left: 15pt;
-	font-size: 9.000000pt;
+//	font-size: 9px;
 	font-weight: normal; 
 	font-style: Regular;
 	color: #000000 !important;
 	text-decoration: none;
 	vertical-align: baseline;
 	text-transform: none;
-	font-family: "Lucida Console", Monaco, monospace;
+	font-family: monospace;
 }
