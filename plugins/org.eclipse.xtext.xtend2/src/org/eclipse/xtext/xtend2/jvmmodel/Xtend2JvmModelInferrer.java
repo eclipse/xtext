@@ -119,17 +119,20 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 		inferredJvmType.setSimpleName(source.getName());
 		inferredJvmType.setVisibility(JvmVisibility.PUBLIC);
 		if (!prelinkingPhase) {
-			JvmAnnotationReference suppressWarnings = typesFactory.createJvmAnnotationReference();
 			JvmAnnotationType annotation = (JvmAnnotationType) typeReferences.findDeclaredType(SuppressWarnings.class, source);
-			suppressWarnings.setAnnotation(annotation);
-			JvmStringAnnotationValue annotationValue = typesFactory.createJvmStringAnnotationValue();
-			annotationValue.getValues().add("all");
-			suppressWarnings.getValues().add(annotationValue);
-			inferredJvmType.getAnnotations().add(suppressWarnings);
+			if (annotation != null) {
+				JvmAnnotationReference suppressWarnings = typesFactory.createJvmAnnotationReference();
+				suppressWarnings.setAnnotation(annotation);
+				JvmStringAnnotationValue annotationValue = typesFactory.createJvmStringAnnotationValue();
+				annotationValue.getValues().add("all");
+				suppressWarnings.getValues().add(annotationValue);
+				inferredJvmType.getAnnotations().add(suppressWarnings);
+			}
 			addConstructor(source, inferredJvmType);
 			if (source.getSuperTypes().isEmpty()) {
 				JvmTypeReference typeRefToObject = typeReferences.getTypeForName(Object.class, source);
-				inferredJvmType.getSuperTypes().add(typeRefToObject);
+				if (typeRefToObject != null)
+					inferredJvmType.getSuperTypes().add(typeRefToObject);
 			} else {
 				for (JvmTypeReference superType : source.getSuperTypes()) {
 					inferredJvmType.getSuperTypes().add(cloneWithProxies(superType));
