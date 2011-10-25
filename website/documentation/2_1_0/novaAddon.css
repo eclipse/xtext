@@ -1,0 +1,41 @@
+#novaContent em {
+	font-size: 13px !important
+}
+
+#midcolumn a {
+	color: #7036be
+}
+
+#leftnav li.partentry {
+	border-top: 1px dotted #D4D4DD;
+	list-style-image: none;
+	margin-left: 0;
+	margin-top: 8px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	font-weight: bold;
+	color: #333333;
+	font-size: 14px;
+}
+
+h1 {
+	line-height: 20pt
+}
+
+h2 {
+	line-height: 16pt
+}
+
+h3 {
+	line-height: 12pt
+}
+
+h1, h2, h3 {
+	padding-top: 10px
+}
+
+#novaContent {
+	background: url("/eclipse.org-common/themes/Nova/images/faux.jpg") repeat-y scroll 0 0 #FFFFFF !important;
+	padding-bottom: 20px;
+	padding-top: 20px;
+}
