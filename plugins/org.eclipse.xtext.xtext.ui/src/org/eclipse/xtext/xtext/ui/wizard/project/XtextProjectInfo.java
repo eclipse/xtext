@@ -32,6 +32,15 @@ public class XtextProjectInfo implements IProjectInfo {
 	private IWorkbench workbench;
 	private IPath projectLocation;
 	private WizardContribution wizardContribution;
+	private boolean createEclipseRuntimeLaunchConfig;
+	
+	public boolean isCreateEclipseRuntimeLaunchConfig() {
+		return createEclipseRuntimeLaunchConfig;
+	}
+	
+	public void setCreateEclipseRuntimeLaunchConfig(boolean createEclipseRuntimeLaunchConfig) {
+		this.createEclipseRuntimeLaunchConfig = createEclipseRuntimeLaunchConfig;
+	}
 
 	public void setWizardContribution(WizardContribution wizardContribution) {
 		this.wizardContribution = wizardContribution;
