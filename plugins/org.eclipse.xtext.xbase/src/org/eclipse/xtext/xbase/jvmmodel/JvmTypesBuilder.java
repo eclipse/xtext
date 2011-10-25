@@ -25,6 +25,7 @@ import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmCustomAnnotationValue;
+import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -44,7 +45,9 @@ import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XIntLiteral;
@@ -160,22 +163,9 @@ public class JvmTypesBuilder {
 	 * @return a {@link JvmGenericType} representing a Java class of the given name.
 	 */
 	public JvmGenericType toClass(EObject sourceElement, String name, Procedure1<JvmGenericType> initializer) {
-		if (sourceElement == null)
+		final JvmGenericType result = createJvmGenericType(sourceElement, name);
+		if (result == null)
 			return null;
-		if (name == null)
-			return null;
-		String simpleName = name;
-		String packageName = null;
-		final int dotIdx = name.lastIndexOf('.');
-		if (dotIdx != -1) {
-			simpleName = name.substring(dotIdx + 1);
-			packageName = name.substring(0, dotIdx);
-		}
-		final JvmGenericType result = TypesFactory.eINSTANCE.createJvmGenericType();
-		result.setSimpleName(simpleName);
-		if (packageName != null)
-			result.setPackageName(packageName);
-		result.setVisibility(JvmVisibility.PUBLIC);
 		if(initializer != null) 
 			initializer.apply(result);
 
@@ -187,9 +177,117 @@ public class JvmTypesBuilder {
 		}
 		// if no constructors have been added, add a default constructor
 		if (isEmpty(result.getDeclaredConstructors())) {
-			result.getMembers().add(toConstructor(sourceElement, simpleName, null));
+			result.getMembers().add(toConstructor(sourceElement, result.getSimpleName(), null));
 		}
 		return associate(sourceElement, result);
+	}
+	
+	/**
+	 * Creates a public interface declaration, associated to the given sourceElement. It sets the given name, which might be
+	 * fully qualified using the standard Java notation.
+	 * 
+	 * @param sourceElement
+	 *            - the sourceElement the resulting element is associated with.
+	 * @param qualifiedName
+	 *            - the qualifiedName of the resulting class.
+	 * @param initializer
+	 *            - the initializer to apply on the created interface declaration.
+	 * 
+	 * @return a {@link JvmGenericType} representing a Java interface of the given name.
+	 */
+	public JvmGenericType toInterface(EObject sourceElement, String name, Procedure1<JvmGenericType> initializer) {
+		final JvmGenericType result = createJvmGenericType(sourceElement, name);
+		if (result == null)
+			return null;
+		result.setInterface(true);
+		if(initializer != null) 
+			initializer.apply(result);
+
+		return associate(sourceElement, result);
+	}
+	
+	/**
+	 * Creates a public annotation declaration, associated to the given sourceElement. It sets the given name, which might be
+	 * fully qualified using the standard Java notation.
+	 * 
+	 * @param sourceElement
+	 *            - the sourceElement the resulting element is associated with.
+	 * @param qualifiedName
+	 *            - the qualifiedName of the resulting class.
+	 * @param initializer
+	 *            - the initializer to apply on the created annotation
+	 * 
+	 * @return a {@link JvmAnnotationType} representing a Java annatation of the given name.
+	 */
+	public JvmAnnotationType toAnnotationType(EObject sourceElement, String name, Procedure1<JvmAnnotationType> initializer) {
+		if (sourceElement == null)
+			return null;
+		if (name == null)
+			return null;
+		Pair<String, String> fullName = splitQualifiedName(name);
+		JvmAnnotationType annotationType = TypesFactory.eINSTANCE.createJvmAnnotationType();
+		annotationType.setSimpleName(fullName.getSecond());
+		if (fullName.getFirst() != null)
+			annotationType.setPackageName(fullName.getFirst());
+		if(initializer != null) 
+			initializer.apply(annotationType);
+
+		return associate(sourceElement, annotationType);
+	}
+	
+	/**
+	 * Creates a public enum declaration, associated to the given sourceElement. It sets the given name, which might be
+	 * fully qualified using the standard Java notation.
+	 * 
+	 * @param sourceElement
+	 *            - the sourceElement the resulting element is associated with.
+	 * @param qualifiedName
+	 *            - the qualifiedName of the resulting class.
+	 * @param initializer
+	 *            - the initializer to apply on the created enumeration type
+	 * 
+	 * @return a {@link result} representing a Java class of the given name.
+	 */
+	public JvmEnumerationType toEnumerationType(EObject sourceElement, String name, Procedure1<JvmEnumerationType> initializer) {
+		if (sourceElement == null)
+			return null;
+		if (name == null)
+			return null;
+		Pair<String, String> fullName = splitQualifiedName(name);
+		JvmEnumerationType result = TypesFactory.eINSTANCE.createJvmEnumerationType();
+		result.setSimpleName(fullName.getSecond());
+		if (fullName.getFirst() != null)
+			result.setPackageName(fullName.getFirst());
+		if(initializer != null) 
+			initializer.apply(result);
+
+		return associate(sourceElement, result);
+	}
+
+	protected JvmGenericType createJvmGenericType(EObject sourceElement, String name) {
+		if (sourceElement == null)
+			return null;
+		if (name == null)
+			return null;
+		Pair<String, String> fullName = splitQualifiedName(name);
+		final JvmGenericType result = TypesFactory.eINSTANCE.createJvmGenericType();
+		result.setSimpleName(fullName.getSecond());
+		if (fullName.getFirst() != null)
+			result.setPackageName(fullName.getFirst());
+		result.setVisibility(JvmVisibility.PUBLIC);
+		return result;
+	}
+
+	protected Pair<String, String> splitQualifiedName(String name) {
+		String simpleName = name;
+		String packageName = null;
+		final int dotIdx = name.lastIndexOf('.');
+		if (dotIdx != -1) {
+			simpleName = name.substring(dotIdx + 1);
+			packageName = name.substring(0, dotIdx);
+		}
+		Pair<String,String> fullName = Tuples.create(packageName, simpleName);
+		return fullName;
 	}
 
 	/**

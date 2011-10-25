@@ -7,9 +7,11 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
+import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmStringAnnotationValue;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.XExpression;
@@ -21,6 +23,7 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 
 @SuppressWarnings("all")
@@ -177,5 +180,64 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       EList<JvmAnnotationValue> _values = _head_1.getValues();
       boolean _isEmpty = _values.isEmpty();
       Assert.assertTrue(_isEmpty);
+  }
+  
+  public void testAnnotationCreation() throws Exception {
+      XExpression _expression = this.expression("\'foo\'");
+      final XExpression e = _expression;
+      final Procedure1<JvmAnnotationType> _function = new Procedure1<JvmAnnotationType>() {
+          public void apply(final JvmAnnotationType it) {
+            JvmTypesBuilderTest.this._jvmTypesBuilder.setDocumentation(it, "Foo");
+          }
+        };
+      JvmAnnotationType _annotationType = this._jvmTypesBuilder.toAnnotationType(e, "foo.bar.MyAnnotation", _function);
+      final JvmAnnotationType anno = _annotationType;
+      String _packageName = anno.getPackageName();
+      Assert.assertEquals("foo.bar", _packageName);
+      String _simpleName = anno.getSimpleName();
+      Assert.assertEquals("MyAnnotation", _simpleName);
+      String _documentation = this._jvmTypesBuilder.getDocumentation(anno);
+      Assert.assertEquals("Foo", _documentation);
+  }
+  
+  public void testInterfaceCreation() throws Exception {
+      XExpression _expression = this.expression("\'foo\'");
+      final XExpression e = _expression;
+      final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+          public void apply(final JvmGenericType it) {
+            EList<JvmTypeReference> _superTypes = it.getSuperTypes();
+            JvmTypeReference _newTypeRef = JvmTypesBuilderTest.this._jvmTypesBuilder.newTypeRef(e, java.lang.Iterable.class);
+            CollectionExtensions.<JvmTypeReference>operator_add(_superTypes, _newTypeRef);
+          }
+        };
+      JvmGenericType _interface = this._jvmTypesBuilder.toInterface(e, "foo.bar.MyAnnotation", _function);
+      final JvmGenericType anno = _interface;
+      boolean _isInterface = anno.isInterface();
+      Assert.assertTrue(_isInterface);
+      String _packageName = anno.getPackageName();
+      Assert.assertEquals("foo.bar", _packageName);
+      String _simpleName = anno.getSimpleName();
+      Assert.assertEquals("MyAnnotation", _simpleName);
+      EList<JvmTypeReference> _superTypes = anno.getSuperTypes();
+      int _size = _superTypes.size();
+      Assert.assertEquals(1, _size);
+  }
+  
+  public void testEnumCreation() throws Exception {
+      XExpression _expression = this.expression("\'foo\'");
+      final XExpression e = _expression;
+      final Procedure1<JvmEnumerationType> _function = new Procedure1<JvmEnumerationType>() {
+          public void apply(final JvmEnumerationType it) {
+            JvmTypesBuilderTest.this._jvmTypesBuilder.setDocumentation(it, "Foo");
+          }
+        };
+      JvmEnumerationType _enumerationType = this._jvmTypesBuilder.toEnumerationType(e, "MyEnum", _function);
+      final JvmEnumerationType anno = _enumerationType;
+      String _packageName = anno.getPackageName();
+      Assert.assertNull(_packageName);
+      String _simpleName = anno.getSimpleName();
+      Assert.assertEquals("MyEnum", _simpleName);
+      String _documentation = this._jvmTypesBuilder.getDocumentation(anno);
+      Assert.assertEquals("Foo", _documentation);
   }
 }

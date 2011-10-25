@@ -98,4 +98,33 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 		assertEquals(anno.annotationType, type.annotations.head.annotation)
 		assertTrue(type.annotations.head.values.empty)
 	}
+	
+	def void testAnnotationCreation() {
+		val e = expression("'foo'")
+		val anno = e.toAnnotationType("foo.bar.MyAnnotation") [
+			documentation = "Foo"
+		]
+		assertEquals("foo.bar", anno.packageName)
+		assertEquals("MyAnnotation", anno.simpleName)
+		assertEquals("Foo", anno.documentation)
+	}
+	def void testInterfaceCreation() {
+		val e = expression("'foo'")
+		val anno = e.toInterface("foo.bar.MyAnnotation") [
+			superTypes += e.newTypeRef(typeof(Iterable))
+		]
+		assertTrue(anno.interface)
+		assertEquals("foo.bar", anno.packageName)
+		assertEquals("MyAnnotation", anno.simpleName)
+		assertEquals(1, anno.superTypes.size)
+	}
+	def void testEnumCreation() {
+		val e = expression("'foo'")
+		val anno = e.toEnumerationType("MyEnum") [
+			documentation = "Foo"
+		]
+		assertNull(anno.packageName)
+		assertEquals("MyEnum", anno.simpleName)
+		assertEquals("Foo", anno.documentation)
+	}
 }
