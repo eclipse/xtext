@@ -78,17 +78,19 @@ public class SynonymTypesProvider {
 			}
 			if (componentType == null)
 				componentType = typeRefs.getTypeForName(Object.class, type.getType());
-			if (primitives.isPrimitive(componentType)) {
-				JvmTypeReference primitive = typeRefs.createArrayType(componentType);
-				JvmTypeReference wrapper = typeRefs.createArrayType(primitives.asWrapperTypeIfPrimitive(componentType));
-				return ImmutableSet.of(primitive, wrapper);
-			} else if (primitives.isWrapperType(componentType)) {
-				JvmTypeReference wrapper = typeRefs.createArrayType(componentType);
-				JvmTypeReference primitive = typeRefs.createArrayType(primitives.asPrimitiveIfWrapperType(componentType));
-				return ImmutableSet.of(wrapper, primitive);
-			} else {
-				JvmTypeReference result = typeRefs.createArrayType(componentType);
-				return singleton(result);
+			if (componentType != null) {
+				if (primitives.isPrimitive(componentType)) {
+					JvmTypeReference primitive = typeRefs.createArrayType(componentType);
+					JvmTypeReference wrapper = typeRefs.createArrayType(primitives.asWrapperTypeIfPrimitive(componentType));
+					return ImmutableSet.of(primitive, wrapper);
+				} else if (primitives.isWrapperType(componentType)) {
+					JvmTypeReference wrapper = typeRefs.createArrayType(componentType);
+					JvmTypeReference primitive = typeRefs.createArrayType(primitives.asPrimitiveIfWrapperType(componentType));
+					return ImmutableSet.of(wrapper, primitive);
+				} else {
+					JvmTypeReference result = typeRefs.createArrayType(componentType);
+					return singleton(result);
+				}
 			}
 		}
 		return emptySet();
