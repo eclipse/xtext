@@ -163,7 +163,7 @@ public class UriBasedReaderTest extends AbstractXtextTests {
 				IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("xtexterror", serviceProvider);
 			}
 		});
-		final String errorURI = "classpath:/" + (getClass().getName() + "ResourceWithError").replace('.', '/')
+		final String errorURI = (getClass().getName() + "ResourceWithError").replace('.', '/')
 				+ ".xtexterror";
 		final String loadingURI = "classpath:/" + (getClass().getName() + "LoadingResourceWithError").replace('.', '/')
 				+ ".xtexterror";
