@@ -85,11 +85,10 @@ public class DocumentUtil {
 	public int findNextOffSetInPartition(IDocument doc, int partitionOffSet, int minIndex) throws BadLocationException {
 		ITypedRegion partition = doc.getPartition(partitionOffSet);
 		ITypedRegion partition2 = doc.getPartition(minIndex);
-		if (partition.getType().equals(partition2.getType())) {
+		if (partition.getType().equals(partition2.getType()) || partition2.getLength() == 0) {
 			return minIndex;
 		} else {
-			int min = minIndex + (partition2.getLength() == 0 ? 1 : partition2.getLength());
-			return findNextOffSetInPartition(doc, partitionOffSet, min);
+			return findNextOffSetInPartition(doc, partitionOffSet, minIndex + partition2.getLength());
 		}
 	}
 }
