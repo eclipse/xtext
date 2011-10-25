@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
-<title>10 Minutes to your fully-fledged JVM language</title>
+<title>5 simple steps to your JVM language</title>
 
 <link href="book.css" rel="stylesheet" type="text/css">
 <link href="code.css" rel="stylesheet" type="text/css">
@@ -9,7 +9,7 @@
 </head>
 <body>
 <a name="JvmDomainmodel"></a>
-<h1>10 Minutes to your fully-fledged JVM language</h1>
+<h1>5 simple steps to your JVM language</h1>
 <p>
 In this tutorial we will implement the domain model language again, but this time, we will make use of
 the special JVM support shipped with Xtext 2.1. This kind of language really is a sweet spot for DSLs,
@@ -32,12 +32,12 @@ The syntax is very suggestive. Here&apos;s an example :
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;firstName:&nbsp;String<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;friends:&nbsp;List&lt;Person&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address&nbsp;:&nbsp;Address<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;op&nbsp;getFullName()&nbsp;:&nbsp;String&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;firstName&nbsp;+&nbsp;<span class="string">"&nbsp;"</span>&nbsp;+&nbsp;name;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">op</span>&nbsp;getFullName()&nbsp;:&nbsp;String&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;firstName&nbsp;+&nbsp;<span class="string">"&nbsp;"</span>&nbsp;+&nbsp;name;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;op&nbsp;getFriendsSortedByFullName()&nbsp;:&nbsp;List&lt;Person&gt;&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;friends.sortBy(&nbsp;f&nbsp;|&nbsp;f.fullName);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">op</span>&nbsp;getFriendsSortedByFullName()&nbsp;:&nbsp;List&lt;Person&gt;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;friends.sortBy(&nbsp;f&nbsp;|&nbsp;f.fullName);<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<br/>
@@ -57,7 +57,7 @@ including even closures. Don&apos;t panic you&apos;ll not have to implement thes
 reuse a lot of helpful infrastructure to build the language.
 </p>
 <p>
-We will now go through the <em>three!</em> steps needed to get this language fully working including
+We will now go through the <em>five!</em> little steps needed to get this language fully working including
 a compiler.
 </p>
 <p>
@@ -272,8 +272,6 @@ Let&apos;s have a look at what the different grammar statements mean:
 	</li>
 	<li>
 		
-				The rule <em>AbstractElement</em> delegates to either the rule <em>PackageDeclaration</em>, the rule <em>Entity</em> or the rule <em>Import</em>.
-				  
 				<div class="literallayout">
 		<div class="incode">
 		<p class="code">
@@ -283,6 +281,7 @@ Let&apos;s have a look at what the different grammar statements mean:
 		</div>
 		</div>
 		
+				The rule <em>AbstractElement</em> delegates to either the rule <em>PackageDeclaration</em>, the rule <em>Entity</em> or the rule <em>Import</em>.
 	</li>
 	<li>
 		
@@ -325,8 +324,6 @@ Let&apos;s have a look at what the different grammar statements mean:
 	</li>
 	<li>
 		
-				The rule <em>Entity</em> again starts with the definition of a keyword followed by a name.
-				
 				<div class="literallayout">
 		<div class="incode">
 		<p class="code">
@@ -339,6 +336,8 @@ Let&apos;s have a look at what the different grammar statements mean:
 		</div>
 		</div>
 		
+				The rule <em>Entity</em> again starts with the definition of a keyword followed by a name.
+				
 				The <em>extends</em> clause which is parenthesized and optional (<span class="inlinecode">?</span>) makes use of the rule
 				<em>JvmTypeReference</em> which is defined in a super grammar. This rule defines the
 				syntax for full Java-like type names. That is everything from simple names, over fully qualified
@@ -407,7 +406,7 @@ Let&apos;s have a look at what the different grammar statements mean:
 </ol>
 </p>
 <a name="JvmDomainmodel_9"></a>
-<h2>Generate Language Artifacts</h2>
+<h2>Step Three: Generate Language Artifacts</h2>
 <p>
 Now that we have the grammar in place and defined we need to execute the code generator that will derive the
 various language components. To do so right click in the grammar editor. From the opened context menu, choose
@@ -429,7 +428,7 @@ messages in the Console View.
 </div>
 </p>
 <a name="JvmDomainmodel_10"></a>
-<h2>Step Three: Define the Mapping to JVM Concepts</h2>
+<h2>Step Four: Define the Mapping to JVM Concepts</h2>
 <p>
 Only the syntax isn&apos;t enough to make the language work. We need to map the concepts to some other language
 in order to tell Xtext how it is executed. Usually you define a code generator or an interpreter for that matter,
@@ -567,7 +566,7 @@ Let&apos;s go through the code to get an idea of what&apos;s going on. (Please a
 		    and <span class="inlinecode">element.documentation</span> is in fact calling the extension method  
 		    <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder" >JvmTypesBuilder</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java" title="View Source Code" >(src)</a><em>#getDocumentation(<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a> element)</em>
 		    
-		    Xtend&apos;s extension methods are explained in detail in section <a href="02-Xtend_Classes_Functions.html#extensionMethods" title="Go to &quot;Extension Methods&quot;" >section extensionMethods</a> and <a href="02-Xtend_Classes_Functions.html#imports" title="Go to &quot;Imports&quot;" >section imports</a>.
+		    Xtend&apos;s extension methods are explained in detail in the sections about <a href="02-Xtend_Classes_Functions.html#extensionMethods" title="Go to &quot;Extension Methods&quot;">extension methods</a> and <a href="02-Xtend_Classes_Functions.html#imports" title="Go to &quot;Imports&quot;">imports</a>.
 	</li>
 	<li>
 		
@@ -640,7 +639,7 @@ Let&apos;s go through the code to get an idea of what&apos;s going on. (Please a
 </ol>
 </p>
 <a name="JvmDomainmodel_11"></a>
-<h2>Try It!</h2>
+<h2>Step Five : Try the Editor!</h2>
 <p>
 We are now able to test the IDE integration. If you select <em>Run -&gt; Run Configurations...</em> from the Eclipse menu, you can
 create a new Eclipse Application. Select the node <em>Eclipse Application</em> in the left tree and add a new

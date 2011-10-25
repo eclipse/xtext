@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-<toc topic="contents/xtext.html" label="Xtext Documentation" >
+<toc topic="contents/xtext.html" label="Xtext 2.1 Documentation" >
 	<topic href="contents/xtext_15.html" label="Getting Started" >
 		<topic href="contents/005-installation.html" label="Installation" >
 			<topic href="contents/005-installation.html#InstallDistro" label="Install Pre-Configured Eclipse With Xtext" >
@@ -37,16 +37,16 @@
 			<topic href="contents/050-validation.html" label="Creating Custom Validation Rules" >
 			</topic>
 		</topic>
-		<topic href="contents/015-domainmodel-java.html" label="10 Minutes to your fully-fledged JVM language" >
+		<topic href="contents/015-domainmodel-java.html" label="5 simple steps to your JVM language" >
 			<topic href="contents/015-domainmodel-java.html#JvmDomainmodel_7" label="Step One: Create A New Xtext Project" >
 			</topic>
 			<topic href="contents/015-domainmodel-java.html#JvmDomainmodel_8" label="Step Two: Write the Grammar" >
 			</topic>
-			<topic href="contents/015-domainmodel-java.html#JvmDomainmodel_9" label="Generate Language Artifacts" >
+			<topic href="contents/015-domainmodel-java.html#JvmDomainmodel_9" label="Step Three: Generate Language Artifacts" >
 			</topic>
-			<topic href="contents/015-domainmodel-java.html#JvmDomainmodel_10" label="Step Three: Define the Mapping to JVM Concepts" >
+			<topic href="contents/015-domainmodel-java.html#JvmDomainmodel_10" label="Step Four: Define the Mapping to JVM Concepts" >
 			</topic>
-			<topic href="contents/015-domainmodel-java.html#JvmDomainmodel_11" label="Try It!" >
+			<topic href="contents/015-domainmodel-java.html#JvmDomainmodel_11" label="Step Five : Try the Editor!" >
 			</topic>
 		</topic>
 	</topic>

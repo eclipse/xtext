@@ -1,4 +1,4 @@
-chapter:JvmDomainmodel[10 Minutes to your fully-fledged JVM language]
+chapter:JvmDomainmodel[5 simple steps to your JVM language]
 
 In this tutorial we will implement the domain model language again, but this time, we will make use of
 the special JVM support shipped with Xtext 2.1. This kind of language really is a sweet spot for DSLs,
@@ -38,7 +38,7 @@ As you can see, it supports all kinds of advanced features such as Java generics
 including even closures. Don't panic you'll not have to implement these concepts on your own but will
 reuse a lot of helpful infrastructure to build the language.
 
-We will now go through the e[three!] steps needed to get this language fully working including
+We will now go through the e[five!] little steps needed to get this language fully working including
 a compiler.
 
 After you've ref:Installation[installed] Xtext on your machine, start Eclipse and set up a fresh workspace.
@@ -175,12 +175,11 @@ ol[
 		to a feature called code[Xtext][elements].
 	]
 	item[
-		The rule e[AbstractElement] delegates to either the rule e[PackageDeclaration], the rule e[Entity] or the rule e[Import].
-		  
 		code[Xtext][
 		AbstractElement:
 			PackageDeclaration | Entity | Import;
 		]
+		The rule e[AbstractElement] delegates to either the rule e[PackageDeclaration], the rule e[Entity] or the rule e[Import].
 	]
 	item[
 		code[Xtext][
@@ -210,8 +209,6 @@ ol[
 		name space import functionality, by just having these two rules in place.
 	]
 	item[
-		The rule e[Entity] again starts with the definition of a keyword followed by a name.
-		
 		code[Xtext][
 		Entity:
 			'entity' name=ValidID 
@@ -219,6 +216,8 @@ ol[
 				features+=Feature*
 			'}';
 		]
+		The rule e[Entity] again starts with the definition of a keyword followed by a name.
+		
 		The e[extends] clause which is parenthesized and optional (code[Xtext][?]) makes use of the rule
 		e[JvmTypeReference] which is defined in a super grammar. This rule defines the
 		syntax for full Java-like type names. That is everything from simple names, over fully qualified
@@ -265,7 +264,7 @@ ol[
 
 ]
 
-section[Generate Language Artifacts]
+section[Step Three: Generate Language Artifacts]
 
 Now that we have the grammar in place and defined we need to execute the code generator that will derive the
 various language components. To do so right click in the grammar editor. From the opened context menu, choose
@@ -278,7 +277,7 @@ messages in the Console View.
 
 img[images/JvmTutorial_RunGenerator.png][ ][ ][ ]
 
-section[Step Three: Define the Mapping to JVM Concepts]
+section[Step Four: Define the Mapping to JVM Concepts]
 
 Only the syntax isn't enough to make the language work. We need to map the concepts to some other language
 in order to tell Xtext how it is executed. Usually you define a code generator or an interpreter for that matter,
@@ -387,7 +386,7 @@ ol[
     and code[element.documentation] is in fact calling the extension method  
     codeRef[org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder]e[#getDocumentation(codeRef[org.eclipse.emf.ecore.EObject] element)]
     
-    Xtend's extension methods are explained in detail in section ref:extensionMethods and ref:imports.
+    Xtend's extension methods are explained in detail in the sections about ref:extensionMethods[extension methods] and ref:imports[imports].
   ]
   item[
   	code[Xtend2][
@@ -441,7 +440,7 @@ ol[
   ]
 ]
 
-section[Try It!]
+section[Step Five : Try the Editor!]
 
 We are now able to test the IDE integration. If you select e[Run -> Run Configurations...] from the Eclipse menu, you can
 create a new Eclipse Application. Select the node e[Eclipse Application] in the left tree and add a new

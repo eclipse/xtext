@@ -22,4 +22,6 @@ Require-Bundle: org.eclipse.help,
  org.eclipse.emf.mwe2.launch;bundle-version="2.0.0";resolution:=optional,
  org.eclipse.jdt.core;resolution:=optional,
  org.eclipse.xtext.junit4;bundle-version="2.0.1",
- org.eclipse.xtext.xdoc.generator;bundle-version="0.1.0";resolution:=optional
+ org.eclipse.xtext.xdoc.generator;bundle-version="0.1.0";resolution:=optional,
+ org.junit4;bundle-version="4.5.0",
+ org.aopalliance;bundle-version="1.0.0"

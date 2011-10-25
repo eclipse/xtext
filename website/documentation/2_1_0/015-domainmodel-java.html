@@ -47,13 +47,13 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-		<a href="015-domainmodel-java.php">10 Minutes to your fully-fledged JVM language</a></div>
+		<a href="015-domainmodel-java.php">5 simple steps to your JVM language</a></div>
 		<ul style="display: none;" id="subToc_015-domainmodel-java.html">
 		<li id="015-domainmodel-java.html#JvmDomainmodel_7" ><a href="015-domainmodel-java.php#JvmDomainmodel_7" >Step One: Create A New Xtext Project</a></li>
 		<li id="015-domainmodel-java.html#JvmDomainmodel_8" ><a href="015-domainmodel-java.php#JvmDomainmodel_8" >Step Two: Write the Grammar</a></li>
-		<li id="015-domainmodel-java.html#JvmDomainmodel_9" ><a href="015-domainmodel-java.php#JvmDomainmodel_9" >Generate Language Artifacts</a></li>
-		<li id="015-domainmodel-java.html#JvmDomainmodel_10" ><a href="015-domainmodel-java.php#JvmDomainmodel_10" >Step Three: Define the Mapping to JVM Concepts</a></li>
-		<li id="015-domainmodel-java.html#JvmDomainmodel_11" ><a href="015-domainmodel-java.php#JvmDomainmodel_11" >Try It!</a></li>
+		<li id="015-domainmodel-java.html#JvmDomainmodel_9" ><a href="015-domainmodel-java.php#JvmDomainmodel_9" >Step Three: Generate Language Artifacts</a></li>
+		<li id="015-domainmodel-java.html#JvmDomainmodel_10" ><a href="015-domainmodel-java.php#JvmDomainmodel_10" >Step Four: Define the Mapping to JVM Concepts</a></li>
+		<li id="015-domainmodel-java.html#JvmDomainmodel_11" ><a href="015-domainmodel-java.php#JvmDomainmodel_11" >Step Five : Try the Editor!</a></li>
 		</ul>
 		</li>
 		<li class="partentry" >
@@ -187,14 +187,14 @@
 	</div>
 	<div id="midcolumn">
 		<a name="JvmDomainmodel" ></a>
-		<h1>10 Minutes to your fully-fledged JVM language</h1>
+		<h1>5 simple steps to your JVM language</h1>
 				<div class="toc">
 				  <ul>
 				    <li><a href="015-domainmodel-java.php#JvmDomainmodel_7" >Step One: Create A New Xtext Project</a></li>
 				    <li><a href="015-domainmodel-java.php#JvmDomainmodel_8" >Step Two: Write the Grammar</a></li>
-				    <li><a href="015-domainmodel-java.php#JvmDomainmodel_9" >Generate Language Artifacts</a></li>
-				    <li><a href="015-domainmodel-java.php#JvmDomainmodel_10" >Step Three: Define the Mapping to JVM Concepts</a></li>
-				    <li><a href="015-domainmodel-java.php#JvmDomainmodel_11" >Try It!</a></li>
+				    <li><a href="015-domainmodel-java.php#JvmDomainmodel_9" >Step Three: Generate Language Artifacts</a></li>
+				    <li><a href="015-domainmodel-java.php#JvmDomainmodel_10" >Step Four: Define the Mapping to JVM Concepts</a></li>
+				    <li><a href="015-domainmodel-java.php#JvmDomainmodel_11" >Step Five : Try the Editor!</a></li>
 				  </ul>
 				</div>
 				
@@ -220,12 +220,12 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;firstName:&nbsp;String<br/>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;friends:&nbsp;List&lt;Person&gt;<br/>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address&nbsp;:&nbsp;Address<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;op&nbsp;getFullName()&nbsp;:&nbsp;String&nbsp;{<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;firstName&nbsp;+&nbsp;<span class="string">"&nbsp;"</span>&nbsp;+&nbsp;name;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">op</span>&nbsp;getFullName()&nbsp;:&nbsp;String&nbsp;{<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;firstName&nbsp;+&nbsp;<span class="string">"&nbsp;"</span>&nbsp;+&nbsp;name;<br/>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;op&nbsp;getFriendsSortedByFullName()&nbsp;:&nbsp;List&lt;Person&gt;&nbsp;{<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;friends.sortBy(&nbsp;f&nbsp;|&nbsp;f.fullName);<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">op</span>&nbsp;getFriendsSortedByFullName()&nbsp;:&nbsp;List&lt;Person&gt;&nbsp;{<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;friends.sortBy(&nbsp;f&nbsp;|&nbsp;f.fullName);<br/>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 					&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 					&nbsp;&nbsp;&nbsp;&nbsp;<br/>
@@ -245,7 +245,7 @@
 		reuse a lot of helpful infrastructure to build the language.
 		</p>
 		<p>
-		We will now go through the <em>three!</em> steps needed to get this language fully working including
+		We will now go through the <em>five!</em> little steps needed to get this language fully working including
 		a compiler.
 		</p>
 		<p>
@@ -446,8 +446,6 @@
 			  		to a feature called <span class="inlinecode">elements</span>.
 			  </li>
 			  <li>
-			  		The rule <em>AbstractElement</em> delegates to either the rule <em>PackageDeclaration</em>, the rule <em>Entity</em> or the rule <em>Import</em>.
-			  		  
 			  		<div class="literallayout">
 			  	<div class="incode">
 			  		<p class="code">
@@ -457,6 +455,7 @@
 			  	</div>
 			  </div>
 			  
+			  		The rule <em>AbstractElement</em> delegates to either the rule <em>PackageDeclaration</em>, the rule <em>Entity</em> or the rule <em>Import</em>.
 			  </li>
 			  <li>
 			  		<div class="literallayout">
@@ -496,8 +495,6 @@
 			  		name space import functionality, by just having these two rules in place.
 			  </li>
 			  <li>
-			  		The rule <em>Entity</em> again starts with the definition of a keyword followed by a name.
-			  		
 			  		<div class="literallayout">
 			  	<div class="incode">
 			  		<p class="code">
@@ -510,6 +507,8 @@
 			  	</div>
 			  </div>
 			  
+			  		The rule <em>Entity</em> again starts with the definition of a keyword followed by a name.
+			  		
 			  		The <em>extends</em> clause which is parenthesized and optional (<span class="inlinecode">?</span>) makes use of the rule
 			  		<em>JvmTypeReference</em> which is defined in a super grammar. This rule defines the
 			  		syntax for full Java-like type names. That is everything from simple names, over fully qualified
@@ -583,7 +582,7 @@
 			padding: 5px 0;
 			padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
 			<br style="clear:both"></br>
-			<h1>Generate Language Artifacts</h1>
+			<h1>Step Three: Generate Language Artifacts</h1>
 			<p>
 			Now that we have the grammar in place and defined we need to execute the code generator that will derive the
 			various language components. To do so right click in the grammar editor. From the opened context menu, choose
@@ -612,7 +611,7 @@
 			padding: 5px 0;
 			padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
 			<br style="clear:both"></br>
-			<h1>Step Three: Define the Mapping to JVM Concepts</h1>
+			<h1>Step Four: Define the Mapping to JVM Concepts</h1>
 			<p>
 			Only the syntax isn't enough to make the language work. We need to map the concepts to some other language
 			in order to tell Xtext how it is executed. Usually you define a code generator or an interpreter for that matter,
@@ -746,7 +745,7 @@
 			      and <span class="inlinecode">element.documentation</span> is in fact calling the extension method  
 			      <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html" title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder">JvmTypesBuilder</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java" title="View Source Code" >(src)</a><em>#getDocumentation(<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="org.eclipse.emf.ecore.EObject">EObject</abbr></a> element)</em>
 			      
-			      Xtend's extension methods are explained in detail in section <a href="02-Xtend_Classes_Functions.php#extensionMethods" title="Go to &quot;Extension Methods&quot;" >section extensionMethods</a> and <a href="02-Xtend_Classes_Functions.php#imports" title="Go to &quot;Imports&quot;" >section imports</a>.
+			      Xtend's extension methods are explained in detail in the sections about <a href="02-Xtend_Classes_Functions.php#extensionMethods" title="Go to &quot;Extension Methods&quot;">extension methods</a> and <a href="02-Xtend_Classes_Functions.php#imports" title="Go to &quot;Imports&quot;">imports</a>.
 			  </li>
 			  <li>
 			    	<div class="literallayout">
@@ -820,7 +819,7 @@
 			padding: 5px 0;
 			padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
 			<br style="clear:both"></br>
-			<h1>Try It!</h1>
+			<h1>Step Five : Try the Editor!</h1>
 			<p>
 			We are now able to test the IDE integration. If you select <em>Run -&gt; Run Configurations...</em> from the Eclipse menu, you can
 			create a new Eclipse Application. Select the node <em>Eclipse Application</em> in the left tree and add a new

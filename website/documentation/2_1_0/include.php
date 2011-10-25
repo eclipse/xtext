@@ -12,7 +12,7 @@ $theme = "Nova";
 # $Nav->setLinkList(array());
 
 $pageKeywords	= "xtext, dsl, modeling, domain specific language, textual";
-$pageTitle 		= "Xtext Documentation";
+$pageTitle 		= "Xtext 2.1 Documentation";
 
 $Menu->setMenuItemList(array());
 $Menu->addMenuItem("Home", "/Xtext", "_self");
