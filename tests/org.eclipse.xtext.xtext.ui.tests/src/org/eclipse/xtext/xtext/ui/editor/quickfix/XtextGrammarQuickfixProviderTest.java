@@ -136,6 +136,7 @@ public class XtextGrammarQuickfixProviderTest extends AbstractXtextTests {
 
 	protected XtextEditor newXtextEditor(String projectName, String modelFile, String model) throws CoreException,
 			PartInitException {
+		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().closeAllEditors(false);
 		IProject project = JavaProjectSetupUtil.createSimpleProject(PROJECT_NAME);
 		IResourcesSetupUtil.addNature(project, XtextProjectHelper.NATURE_ID);
 		IFile file = project.getProject().getFile(modelFile);
