@@ -37,16 +37,16 @@
 			<topic href="contents/050-validation.html" label="Creating Custom Validation Rules" >
 			</topic>
 		</topic>
-		<topic href="contents/015-domainmodel-java.html" label="5 simple steps to your JVM language" >
-			<topic href="contents/015-domainmodel-java.html#JvmDomainmodel_7" label="Step One: Create A New Xtext Project" >
+		<topic href="contents/035-domainmodel-java.html" label="5 simple steps to your JVM language" >
+			<topic href="contents/035-domainmodel-java.html#JvmDomainmodel_7" label="Step One: Create A New Xtext Project" >
 			</topic>
-			<topic href="contents/015-domainmodel-java.html#JvmDomainmodel_8" label="Step Two: Write the Grammar" >
+			<topic href="contents/035-domainmodel-java.html#JvmDomainmodel_8" label="Step Two: Write the Grammar" >
 			</topic>
-			<topic href="contents/015-domainmodel-java.html#JvmDomainmodel_9" label="Step Three: Generate Language Artifacts" >
+			<topic href="contents/035-domainmodel-java.html#JvmDomainmodel_9" label="Step Three: Generate Language Artifacts" >
 			</topic>
-			<topic href="contents/015-domainmodel-java.html#JvmDomainmodel_10" label="Step Four: Define the Mapping to JVM Concepts" >
+			<topic href="contents/035-domainmodel-java.html#JvmDomainmodel_10" label="Step Four: Define the Mapping to JVM Concepts" >
 			</topic>
-			<topic href="contents/015-domainmodel-java.html#JvmDomainmodel_11" label="Step Five : Try the Editor!" >
+			<topic href="contents/035-domainmodel-java.html#JvmDomainmodel_11" label="Step Five : Try the Editor!" >
 			</topic>
 		</topic>
 	</topic>

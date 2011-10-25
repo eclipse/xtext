@@ -2,14 +2,14 @@
 	include("include.php");
 	$pageTitle 		= "5 simple steps to your JVM language";
 	
-	$html = file_get_contents('015-domainmodel-java.html');
+	$html = file_get_contents('035-domainmodel-java.html');
 
 	$Nav->setLinkList(array());
 	
 	$App->AddExtraHtmlHeader('
 	<script type="text/javascript">
 	function init() {
-		var docName = "015-domainmodel-java.html";
+		var docName = "035-domainmodel-java.html";
 	    initTocMenu(docName);
 		highlightCurrentSection(docName);
 	}
