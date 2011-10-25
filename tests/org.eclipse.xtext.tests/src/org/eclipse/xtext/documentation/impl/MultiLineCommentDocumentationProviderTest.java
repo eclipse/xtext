@@ -128,6 +128,6 @@ public class MultiLineCommentDocumentationProviderTest extends AbstractXtextTest
 	
 	public void testNoComment() throws Exception {
 		String documentation = getComment (document);
-		assertEquals ("", documentation);		
+		assertNull (documentation);		
 	}
 }
