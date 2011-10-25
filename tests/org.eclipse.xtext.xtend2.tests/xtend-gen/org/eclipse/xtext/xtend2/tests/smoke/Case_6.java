@@ -51,11 +51,11 @@ public class Case_6 {
   }
   
   public Object transform(final ENamedElement model) {
-    if ((model instanceof EClass)) {
+    if (model instanceof EClass) {
       return _transform((EClass)model);
-    } else if ((model instanceof EStructuralFeature)) {
+    } else if (model instanceof EStructuralFeature) {
       return _transform((EStructuralFeature)model);
-    } else if ((model instanceof EPackage)) {
+    } else if (model instanceof EPackage) {
       return _transform((EPackage)model);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
