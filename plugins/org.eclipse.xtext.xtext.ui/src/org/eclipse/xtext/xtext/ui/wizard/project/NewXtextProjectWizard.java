@@ -12,6 +12,7 @@ package org.eclipse.xtext.xtext.ui.wizard.project;
 
 import java.util.Map;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
@@ -62,6 +63,7 @@ public class NewXtextProjectWizard extends XtextNewProjectWizard {
 		projectInfo.setWizardContribution(contributions.get(mainPage.getGeneratorConfig()));
 		projectInfo.setProjectLocation(new Path(mainPage.getLocationURI().getPath()));
 		projectInfo.setWorkbench(getWorkbench());
+		projectInfo.setCreateEclipseRuntimeLaunchConfig(!existsEclipseRuntimeLaunchConfig());
 		String encoding = null;
 		try {
 			encoding = ResourcesPlugin.getWorkspace().getRoot().getDefaultCharset();
@@ -71,6 +73,19 @@ public class NewXtextProjectWizard extends XtextNewProjectWizard {
 		}
 		projectInfo.setEncoding(encoding);
 		return projectInfo;
+	}
+
+	private boolean existsEclipseRuntimeLaunchConfig() {
+		IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
+		for (IProject p : projects) {
+			try {
+				if (p.isAccessible() && p.getFile(".launch/Launch Runtime Eclipse.launch").exists())
+					return true;
+			} catch (Exception e) {
+				// ignore
+			}
+		}
+		return false;
 	}
 
 	protected XtextProjectInfo createProjectInfo() {
