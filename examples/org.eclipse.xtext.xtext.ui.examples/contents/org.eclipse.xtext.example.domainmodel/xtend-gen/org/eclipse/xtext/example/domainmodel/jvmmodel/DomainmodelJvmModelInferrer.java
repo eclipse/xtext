@@ -113,10 +113,10 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
   }
   
   public void infer(final EObject e, final IAcceptor<JvmDeclaredType> acceptor, final boolean prelinkingPhase) {
-    if ((e instanceof Entity)) {
-      _infer((Entity)e, (IAcceptor<JvmDeclaredType>)acceptor, (Boolean)prelinkingPhase);
+    if (e instanceof Entity) {
+      _infer((Entity)e, acceptor, prelinkingPhase);
     } else {
-      _infer((EObject)e, (IAcceptor<JvmDeclaredType>)acceptor, (Boolean)prelinkingPhase);
+      _infer(e, acceptor, prelinkingPhase);
     }
   }
 }

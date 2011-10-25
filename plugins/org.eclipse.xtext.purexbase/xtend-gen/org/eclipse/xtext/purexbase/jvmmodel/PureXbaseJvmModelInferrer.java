@@ -181,10 +181,10 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
   }
   
   public void infer(final EObject m, final IAcceptor<JvmDeclaredType> acceptor, final boolean prelinkingPhase) {
-    if ((m instanceof Model)) {
-      _infer((Model)m, (IAcceptor<JvmDeclaredType>)acceptor, (Boolean)prelinkingPhase);
+    if (m instanceof Model) {
+      _infer((Model)m, acceptor, prelinkingPhase);
     } else {
-      _infer((EObject)m, (IAcceptor<JvmDeclaredType>)acceptor, (Boolean)prelinkingPhase);
+      _infer(m, acceptor, prelinkingPhase);
     }
   }
 }
