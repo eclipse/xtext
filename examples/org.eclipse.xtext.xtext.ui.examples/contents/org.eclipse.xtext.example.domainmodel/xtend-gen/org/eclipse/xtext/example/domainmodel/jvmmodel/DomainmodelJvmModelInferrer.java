@@ -93,7 +93,7 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
                             String _name = p.getName();
                             JvmTypeReference _parameterType = p.getParameterType();
                             JvmFormalParameter _parameter = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toParameter(p, _name, _parameterType);
-                            _parameters.add(_parameter);
+                            CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter);
                           }
                           XExpression _body = f_3.getBody();
                           DomainmodelJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _body);
