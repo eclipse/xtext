@@ -35,7 +35,7 @@ class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
 							members += f.toMethod(f.name, f.type) [
 								documentation = f.documentation
 								for (p : f.params) {
-									parameters.add(p.toParameter(p.name, p.parameterType))
+									parameters += p.toParameter(p.name, p.parameterType)
 								}
 								body = f.body
 							]
