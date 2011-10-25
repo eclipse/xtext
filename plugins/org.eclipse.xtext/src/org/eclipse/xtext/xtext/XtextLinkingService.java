@@ -105,8 +105,10 @@ public class XtextLinkingService extends DefaultLinkingService {
 						}
 					}
 				}
-				final Resource resource = resourceSet.getResource(URI.createURI(
-						ClasspathUriUtil.CLASSPATH_SCHEME + ":/" + grammarName.replace('.', '/') + "." + fileExtension), true);
+				URI classpathURI = URI.createURI(
+						ClasspathUriUtil.CLASSPATH_SCHEME + ":/" + grammarName.replace('.', '/') + "." + fileExtension);
+				URI normalizedURI = resourceSet.getURIConverter().normalize(classpathURI);
+				final Resource resource = resourceSet.getResource(normalizedURI, true);
 				final Grammar usedGrammar = (Grammar) resource.getContents().get(0);
 				if (grammarName.equals(usedGrammar.getName()))
 					return Collections.<EObject>singletonList(usedGrammar);
