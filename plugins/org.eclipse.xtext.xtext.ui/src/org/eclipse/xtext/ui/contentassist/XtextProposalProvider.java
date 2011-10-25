@@ -57,6 +57,7 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.services.XtextGrammarAccess;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
@@ -87,6 +88,12 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 
 	@Inject
 	private StylerFactory stylerFactory;
+	
+	@Inject
+	private XtextGrammarAccess grammarAccess;
+	
+	@Inject
+	private IQualifiedNameConverter.DefaultImpl grammarIdQualifiedNameConverter;
 
 	public static class ClassifierPrefixMatcher extends PrefixMatcher {
 		private PrefixMatcher delegate;
@@ -643,6 +650,15 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 				}
 			});
 		}
+	}
+	
+	@Override
+	protected Function<IEObjectDescription, ICompletionProposal> getProposalFactory(String ruleName,
+			ContentAssistContext contentAssistContext) {
+		if (grammarAccess.getGrammarIDRule().getName().equals(ruleName)) {
+			return new DefaultProposalCreator(contentAssistContext, ruleName, grammarIdQualifiedNameConverter);
+		}
+		return new DefaultProposalCreator(contentAssistContext, ruleName, getQualifiedNameConverter());
 	}
 	
 }

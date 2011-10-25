@@ -187,7 +187,7 @@ public class HyperlinkHelperTest extends AbstractXtextTests {
 		URI uri = action.getURI();
 		assertNotNull(uri);
 		assertFalse(ClasspathUriUtil.isClasspathUri(uri));
-		assertTrue(ClasspathUriUtil.isClasspathUri(EcoreUtil.getURI(terminalGrammar)));
+		assertFalse(ClasspathUriUtil.isClasspathUri(EcoreUtil.getURI(terminalGrammar)));
 		EObject obj = grammar.eResource().getResourceSet().getEObject(uri, true);
 		assertNotNull(obj);
 		Grammar terminalGrammar = grammar.getUsedGrammars().get(0);
