@@ -88,7 +88,8 @@ public class DocumentUtil {
 		if (partition.getType().equals(partition2.getType())) {
 			return minIndex;
 		} else {
-			return findNextOffSetInPartition(doc, partitionOffSet, minIndex+partition2.getLength());
+			int min = minIndex + (partition2.getLength() == 0 ? 1 : partition2.getLength());
+			return findNextOffSetInPartition(doc, partitionOffSet, min);
 		}
 	}
 }
