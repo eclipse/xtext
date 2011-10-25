@@ -10,7 +10,7 @@ section:NewProject[Creating A New Xtext Project]
 The first step is to create a new Xtext project by choosing e[File -> New -> Project...]. The dialog
 offers a couple of different project types. Select e[New Xtext Project] from the category e[Xtext] and
 finish the wizard with the default settings. You'll find 3 new projects in your workspace which are mostly
-empty and the Xtext grammar editor will be opened and show the definition of a very simple e[Hello World] language.
+empty. The Xtext grammar editor will be opened and show the definition of a very simple e[Hello World] language.
 
 code[Xtext][
 grammar org.xtext.example.mydsl.MyDsl with 
@@ -44,20 +44,19 @@ for a brain-dead language :-).
 
 section:TestingTheEditor[Try The Editor]
 
-Let's give the editor a try. If you select e[Run -> Run Configurations...] from the Eclipse menu, you can
-create a new Eclipse Application. Select the node e[Eclipse Application] in the left tree and add a new
-one. Choose a meaningful name and go to the tab e[Arguments] where you add the VM arguments code[-XX:MaxPermSize=128m
--Xmx512m] to make sure that the memory settings are sufficient for a new Eclipse instance. Now you can
-hit e[Run] to create a new process.
+Let's give the editor a try. If you select e[Run As -> Eclipse Application] from the project's context menu, you can
+create a new Eclipse Application. A new Eclipse instance will be launched and allow to test drive the
+editor.
 
 img[images/FiveMinTutorial_LaunchConfig.png][ ][ ][ ]
 
-A new project is necessary to create a file for the sample language. Select e[File -> New -> Project...]
+Before you can create a file for the sample language, you'll have to create a sample project. Select
+e[File -> New -> Project...]
 and choose a project type of your choice, e.g. e[Java Project], name it e[Sample] and create a new file
 in the e[src] folder of the project: From the context menu of the folder choose e[New -> File], name
 it e[Sample.mydsl] hit e[Finish]. The newly created editor will open for you language and ask you in
 a dialog, whether you want to add the Xtext nature to your project, which is a good idea. You can now
-test-drive the editor, e.g. use content assist (e[Ctrl+Space]) to insert the keyword code[MyDsl][Hello] 
+give the editor a try, e.g. use content assist (e[Ctrl+Space]) to insert the keyword code[MyDsl][Hello] 
 and see how the input is validated immediately.
 
 img[images/FiveMinTutorial_Editor.png][ ][ ][ ]

@@ -1,11 +1,11 @@
 chapter:JvmDomainmodel[5 simple steps to your JVM language]
 
-In this tutorial we will implement the domain model language again, but this time, we will make use of
+In this tutorial we will basically implement the domain model language again, but this time, we will make use of
 the special JVM support shipped with Xtext 2.1. This kind of language really is a sweet spot for DSLs,
-so feel free to use this as a starting blueprint and add your project specific features later on.
+so feel free to use this as a blueprint and add your project specific features later on.
 
-The language supports full expressions and links to Java types. It also is translated to executable Java code.
-The syntax is very suggestive. Here's an example :
+The revised domain model language supports expressions and cross links to Java types. It is directly
+translated to Java source code. The expression's syntax is very suggestive. Here is an example :
 
 code[DomainExample][
 import java.util.List
@@ -35,13 +35,13 @@ package my.model {
 ]
 
 As you can see, it supports all kinds of advanced features such as Java generics and full expressions
-including even closures. Don't panic you'll not have to implement these concepts on your own but will
+even including closures. Don't panic you'll not have to implement these concepts on your own but will
 reuse a lot of helpful infrastructure to build the language.
 
-We will now go through the e[five!] little steps needed to get this language fully working including
-a compiler.
+We will now walk through the e[five!] little steps needed to get this language fully working including
+its compiler.
 
-After you've ref:Installation[installed] Xtext on your machine, start Eclipse and set up a fresh workspace.
+After you have ref:Installation[installed] Xtext on your machine, start Eclipse and set up a fresh workspace.
 
 section[Step One: Create A New Xtext Project]
 
@@ -86,7 +86,7 @@ section[Step Two: Write the Grammar]
 %% works fine. 
 
 The wizard will automatically open the grammar file 
-e[Domainmodel.xtext] in the editor. As you can see that it already contains a simple e[Hello World] grammar:
+e[Domainmodel.xtext] in the editor. As you can see it already contains a simple e[Hello World] grammar:
 
 code[Xtext][
 grammar org.example.domainmodel.Domainmodel with
@@ -147,7 +147,7 @@ Operation:
 
 ]
 
-Let's have a look at what the different grammar statements mean:
+Let's have a look at what the different grammar constructs mean:
 
 ol[
 	item[
@@ -158,9 +158,9 @@ ol[
 		The first thing to note is that instead of inheriting from the usual e[org.eclipse.xtext.common.Terminals]
 		grammar, we make use of e[org.eclipse.xtext.xbase.Xbase]. 
 		
-		Xbase allows us to easily reuse and embed modern, statically typed expressions as well as Java type signatures in any language.
+		Xbase allows us to easily reuse and embed modern, statically typed expressions as well as Java type signatures in our language.
 		
-		In case you also want to use Java annotations, you should extend e[org.eclipse.xtext.xbase.XbaseWithAnnotations]
+		In case you also want to use Java annotations, you can extend e[org.eclipse.xtext.xbase.XbaseWithAnnotations]
 		instead.
 	]
 	item[
@@ -171,7 +171,7 @@ ol[
 		
 		The first rule in a grammar is always used as the entry or start rule.  
 		
-		It says that a e[Domainmodel] contains an arbitrary number (code[Xtext][*]) of e[AbstractElement]s which will be added (code[Xtext][+=])
+		It says that a e[DomainModel] contains an arbitrary number (code[Xtext][*]) of e[AbstractElement]s which will be added (code[Xtext][+=])
 		to a feature called code[Xtext][elements].
 	]
 	item[
@@ -191,9 +191,10 @@ ol[
 		A e[PackageDeclaration] is used to declare a name space which can again contain any number
 		of e[AbstractElement]s.  
 		
-		Xtext has built-in support for qualified names and scoping based on that. The default
-		implementation will add the package names as the prefix to nested entities and packages.
-		Such that the qualified name of an Entity 'Boo' which is contained in a PackageDeclaration 'foo.bar'
+		Xtext has built-in support for qualified names and scoping based on the hierarchy
+		of the produced model. The default
+		implementation will add the package names as the prefix to contained entities and nested packages.
+		The qualified name of an Entity 'Baz' which is contained in a PackageDeclaration 'foo.bar'
 		will be 'foo.bar.Baz'. In case you don't like the default behavior you'll need
 		to use a different implementation of codeRef[org.eclipse.xtext.naming.IQualifiedNameProvider].
 	]
@@ -205,8 +206,8 @@ ol[
 		QualifiedNameWithWildCard :
 			QualifiedName  ('.' '*')?;
 		]
-		The rule e[Import] makes use of the ref:namespaceImports. It basically allows you to get full-blown
-		name space import functionality, by just having these two rules in place.
+		The rule e[Import] makes use of the ref:namespaceImports[namespace support], too. It basically allows you to get full-blown
+		import functionality as you are used to from Java, just by having these two rules in place.
 	]
 	item[
 		code[Xtext][
@@ -216,14 +217,14 @@ ol[
 				features+=Feature*
 			'}';
 		]
-		The rule e[Entity] again starts with the definition of a keyword followed by a name.
+		The rule e[Entity] starts with the definition of a keyword followed by a name.
 		
-		The e[extends] clause which is parenthesized and optional (code[Xtext][?]) makes use of the rule
+		The e[extends] clause which is parenthesized and optional (not the trailing code[Xtext][?]) makes use of the rule
 		e[JvmTypeReference] which is defined in a super grammar. This rule defines the
 		syntax for full Java-like type names. That is everything from simple names, over fully qualified
-		names to fully-fledged generics, including wildrcads, lower bounds and upper bounds.
+		names to fully-fledged generics, including wildcards, lower bounds and upper bounds.
 		
-		Finally between curly braces there can be any number of e[Features], which invokes the next rule.
+		Finally between curly braces there can be any number of e[Features], which leads us to the next rule.
 	]
 	item[
 		code[Xtext][
@@ -253,11 +254,11 @@ ol[
 		reuse a rule from the super grammar.
 
 		The e[Operation]'s body, that is the actual implementation is defined by the rule e[XBlockExpression]
-		which is one of the most often used entry rules from Xbase. It's defined to consist of any
+		which is one of the most often used entry rules from Xbase. A block consist of any
 		number of expressions between curly braces. Example:
 		code[Xbase][
 		{
-		  return "Hello World"
+		  return "Hello World" + "!"
 		}
 		]
 	]
@@ -279,11 +280,11 @@ img[images/JvmTutorial_RunGenerator.png][ ][ ][ ]
 
 section[Step Four: Define the Mapping to JVM Concepts]
 
-Only the syntax isn't enough to make the language work. We need to map the concepts to some other language
+The syntax alone is not enough to make the language work. We need to map the domain specific concepts to some other language
 in order to tell Xtext how it is executed. Usually you define a code generator or an interpreter for that matter,
 but languages using Xbase can omit this step and make use of the codeRef[org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer].
 
-The idea is that you translate your language conceptes to any number of Java types (codeRef[org.eclipse.xtext.common.types.JvmDeclaredType] ). 
+The idea is that you translate your language concepts to any number of Java types (codeRef[org.eclipse.xtext.common.types.JvmDeclaredType] ). 
 Such a type can be a Java class, Java interface, Java annotation type or a Java enum and may contain
 any valid members. In the end you as a language developer are responsible to create a correct model
 according to the Java language.
@@ -292,7 +293,8 @@ By mapping your language concepts to Java elements, you implicitly tell Xtext in
 the various expressions live and what return types are expected from them. Xtext 2.1 also comes with
 a code generator which can translate that Java model into readable Java code, including the expressions.
 
-IF you already have triggered the 'Generate Xtext Artfacts' action, you should find a stub called e[org/example/domainmodel/jvmmodel/DomainModelJvmModelInferrer.xtend]
+If you have already triggered the 'Generate Xtext Artifacts' action, you should find a stub called 
+e[org/example/domainmodel/jvmmodel/DomainModelJvmModelInferrer.xtend]
 in the src folder. Please replace its contents with the following :
 
 code[Xtend2][
@@ -348,7 +350,7 @@ class DomainModelJvmModelInferrer extends AbstractModelInferrer {
 ]
 
 Let's go through the code to get an idea of what's going on. (Please also refer to the JavaDoc of the involved API, especially 
-codeRef[org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder].)
+the codeRef[org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder].)
 
 ol[
   item[
@@ -370,7 +372,7 @@ ol[
 	to be passed to the e[acceptor] in order to get recognized.
 	
 	The extension method e[toClass] comes from codeRef[org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder].
-	That class provides a lot of convenient extension methods, which helps making the code extremely readable and concise.
+	That class provides a lot of convenient extension methods, which help making the code extremely readable and concise.
 	
 	Most of the methods accept initializer blocks as the last argument, in which the currently created model element is bound
 	to the implicit variable e[it]. Therein you can further initialize the created Java element. 
@@ -380,8 +382,8 @@ ol[
     	documentation = element.documentation
     ]
     
-    Here for instance we assign some JavaDoc to the newly created element. The assignement is translated
-    to a call to the method 
+    Here for instance we assign some JavaDoc to the newly created element. The assignment is translated
+    to an invocation of the method 
     codeRef[org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder]e[#setDocumentation(codeRef[org.eclipse.xtext.common.types.JvmIdentifiableElement] element,String documentation)]
     and code[element.documentation] is in fact calling the extension method  
     codeRef[org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder]e[#getDocumentation(codeRef[org.eclipse.emf.ecore.EObject] element)]
@@ -403,7 +405,7 @@ ol[
     ]
     
     When iterating over a list of heterogeneous types, the switch expression with its type guards comes in handy.
-    If e[feature] is of type e[Property] the first block is executed. If it's of type e[Operation] the
+    If e[feature] is of type e[Property] the first block is executed. If it is an e[Operation] the
     second block is executed. Note that the variable e[feature] will be implicitly casted to the respective
     type within the blocks.
   ]
@@ -435,8 +437,8 @@ ol[
     the parameters are added within the initializer.
     
     The line code[Xtend2][body = feature.body] registers the e[Operation]'s expression as the body of
-    the create Java method. This defines the scope of the expression, such that for instance the parameters
-    are visible there.
+    the newly created Java method. This defines the scope of the expression. The frameworks deduces the
+    visible fields and parameters as well as the expected return type from that information.
   ]
 ]
 

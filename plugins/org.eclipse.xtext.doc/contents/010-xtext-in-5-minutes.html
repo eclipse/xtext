@@ -22,7 +22,7 @@ Eclipse Xtext properly installed. If you are not sure about that, you should fol
 The first step is to create a new Xtext project by choosing <em>File -&gt; New -&gt; Project...</em>. The dialog
 offers a couple of different project types. Select <em>New Xtext Project</em> from the category <em>Xtext</em> and
 finish the wizard with the default settings. You&apos;ll find 3 new projects in your workspace which are mostly
-empty and the Xtext grammar editor will be opened and show the definition of a very simple <em>Hello World</em> language.
+empty. The Xtext grammar editor will be opened and show the definition of a very simple <em>Hello World</em> language.
 </p>
 <p>
 <div class="literallayout">
@@ -74,18 +74,9 @@ for a brain-dead language :-).
 <a name="TestingTheEditor"></a>
 <h2>Try The Editor</h2>
 <p>
-Let&apos;s give the editor a try. If you select <em>Run -&gt; Run Configurations...</em> from the Eclipse menu, you can
-create a new Eclipse Application. Select the node <em>Eclipse Application</em> in the left tree and add a new
-one. Choose a meaningful name and go to the tab <em>Arguments</em> where you add the VM arguments <div class="literallayout">
-<div class="incode">
-<p class="code">
--XX:MaxPermSize=128m<br/>
--Xmx512m
-</p>
-</div>
-</div>
- to make sure that the memory settings are sufficient for a new Eclipse instance. Now you can
-hit <em>Run</em> to create a new process.
+Let&apos;s give the editor a try. If you select <em>Run As -&gt; Eclipse Application</em> from the project&apos;s context menu, you can
+create a new Eclipse Application. A new Eclipse instance will be launched and allow to test drive the
+editor.
 </p>
 <p>
 <div class="image" >
@@ -96,12 +87,13 @@ hit <em>Run</em> to create a new process.
 </div>
 </p>
 <p>
-A new project is necessary to create a file for the sample language. Select <em>File -&gt; New -&gt; Project...</em>
+Before you can create a file for the sample language, you&apos;ll have to create a sample project. Select
+<em>File -&gt; New -&gt; Project...</em>
 and choose a project type of your choice, e.g. <em>Java Project</em>, name it <em>Sample</em> and create a new file
 in the <em>src</em> folder of the project: From the context menu of the folder choose <em>New -&gt; File</em>, name
 it <em>Sample.mydsl</em> hit <em>Finish</em>. The newly created editor will open for you language and ask you in
 a dialog, whether you want to add the Xtext nature to your project, which is a good idea. You can now
-test-drive the editor, e.g. use content assist (<em>Ctrl+Space</em>) to insert the keyword <span class="inlinecode"><span class="keyword">Hello</span></span> 
+give the editor a try, e.g. use content assist (<em>Ctrl+Space</em>) to insert the keyword <span class="inlinecode"><span class="keyword">Hello</span></span> 
 and see how the input is validated immediately.
 </p>
 <p>
