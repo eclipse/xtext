@@ -40,7 +40,6 @@
             class="org.eclipse.xtext.common.types.shared.SharedCommonTypesExecutableExtensionFactory:org.eclipse.xtext.builder.navigation.LinkToOriginDetector"
             description="Navigates to the source element if the selected type was generated."
             id="org.eclipse.xtext.builder.navigation.linkToOrigin"
-            modifierKeys="M1"
             name="Source element for generated code"
             targetId="org.eclipse.jdt.ui.javaCode">
       </hyperlinkDetector>
