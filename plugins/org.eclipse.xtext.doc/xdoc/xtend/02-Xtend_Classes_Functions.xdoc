@@ -120,7 +120,7 @@ Note that the default visibility is code[Xtend][private]. You can also declare i
 code[Xtend][protected], or code[Xtend][private]. Alternatively, you can write accessor methods. Xtend
 does not yet support any other modifier from Java on fields.  
 
-section3[Extension Methods]
+section3:extensionMethods[Extension Methods]
 
 You can make the instance methods provided by the field available as extension
 methods, by adding the keyword code[Xtend][extension] to the field declaration.

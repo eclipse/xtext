@@ -215,10 +215,10 @@
 					<topic href="contents/080-scoping.html#local_scoping_7" label="Declarative Scoping" >
 					</topic>
 				</topic>
-				<topic href="contents/080-scoping.html#scoping_12" label="Imported Namespace-Aware Scoping" >
-					<topic href="contents/080-scoping.html#scoping_12_2" label="org.eclipse.xtext.naming.IQualifiedNameProvider" >
+				<topic href="contents/080-scoping.html#namespaceImports" label="Imported Namespace-Aware Scoping" >
+					<topic href="contents/080-scoping.html#namespaceImports_2" label="org.eclipse.xtext.naming.IQualifiedNameProvider" >
 					</topic>
-					<topic href="contents/080-scoping.html#scoping_12_3" label="Importing Namespaces" >
+					<topic href="contents/080-scoping.html#namespaceImports_3" label="Importing Namespaces" >
 					</topic>
 				</topic>
 			</topic>
@@ -570,7 +570,7 @@
 					</topic>
 				</topic>
 				<topic href="contents/02-Xtend_Classes_Functions.html#fields" label="Fields" >
-					<topic href="contents/02-Xtend_Classes_Functions.html#fields_6" label="Extension Methods" >
+					<topic href="contents/02-Xtend_Classes_Functions.html#extensionMethods" label="Extension Methods" >
 					</topic>
 				</topic>
 				<topic href="contents/02-Xtend_Classes_Functions.html#Functions" label="Functions" >
