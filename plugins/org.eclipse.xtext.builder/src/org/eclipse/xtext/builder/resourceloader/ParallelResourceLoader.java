@@ -25,7 +25,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
+import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 
@@ -35,7 +35,7 @@ import com.google.common.collect.Lists;
  * Loads resources in one more separate threads.
  *
  * @author Lieven Lemiengre - Initial contribution and API
- * @author Sebastian Zarnekow - Use IProject aware XtextResourceSetProvider instead of Provider<XtextResourceSet>
+ * @author Sebastian Zarnekow - Use IProject aware IResourceSetProvider instead of Provider<XtextResourceSet>
  * @since 2.1
  */
 public class ParallelResourceLoader extends AbstractResourceLoader {
@@ -46,7 +46,7 @@ public class ParallelResourceLoader extends AbstractResourceLoader {
 	private final int queueSize;
 	private long timeout;
 
-	public ParallelResourceLoader(XtextResourceSetProvider resourceSetProvider, Sorter sorter, int nThreads, int queueSize) {
+	public ParallelResourceLoader(IResourceSetProvider resourceSetProvider, Sorter sorter, int nThreads, int queueSize) {
 		super(resourceSetProvider, sorter);
 		this.nThreads = nThreads;
 		this.queueSize = queueSize;
