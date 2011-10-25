@@ -442,20 +442,17 @@ ol[
 
 section[Step Five : Try the Editor!]
 
-We are now able to test the IDE integration. If you select e[Run -> Run Configurations...] from the Eclipse menu, you can
-create a new Eclipse Application. Select the node e[Eclipse Application] in the left tree and add a new
-one. Choose a meaningful name and go to the tab e[Arguments] where you add the VM arguments code[-XX:MaxPermSize=128m
--Xmx512m] to make sure that the memory settings are sufficient for a new Eclipse instance. Now you can
-hit e[Run] to create a new process.
+We are now able to test the IDE integration, by spawning a new Eclipse using our plug-ins. To do so just
+use the launch shortcut called "Launch Runtime Eclipse", clicking on the green play button in the tool
+bar.
 
-img[images/30min_launchconfiguration.png][ ][ ][ ]
+img[images/JvmTutorial_LaunchEditor.png][ ][ ][ ]
 
-This will spawn a new Eclipse workbench with your newly developed plug-ins installed. 
-In the new workbench, create a new project of your choice, e.g.
-e[File -> New -> Project...  -> Java Project] and therein a new file 
-with the file extension you chose in the beginning (e[*.dmodel]). This will open
-the generated entity editor. Try it and discover the default 
-functionality for code completion, syntax highlighting, syntactic validation, linking errors, 
-the outline view, find references etc.
+In the new workbench, create a Java project (e[File -> New -> Project...  -> Java Project] and therein a new file 
+with the file extension you chose in the beginning (e[*.dmodel]). This will open the generated entity editor. 
+Try it and discover the rich functionality it provides. You should also have a look at the preferences
+of your language to find out what can be individually configured to your users needs.
+
+Have fun!
 
 img[images/JvmTutorial_Editor.png][][][]

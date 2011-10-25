@@ -821,23 +821,14 @@
 			<br style="clear:both"></br>
 			<h1>Step Five : Try the Editor!</h1>
 			<p>
-			We are now able to test the IDE integration. If you select <em>Run -&gt; Run Configurations...</em> from the Eclipse menu, you can
-			create a new Eclipse Application. Select the node <em>Eclipse Application</em> in the left tree and add a new
-			one. Choose a meaningful name and go to the tab <em>Arguments</em> where you add the VM arguments <div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						-XX:MaxPermSize=128m<br/>
-						-Xmx512m
-					</p>
-				</div>
-			</div>
-			 to make sure that the memory settings are sufficient for a new Eclipse instance. Now you can
-			hit <em>Run</em> to create a new process.
+			We are now able to test the IDE integration, by spawning a new Eclipse using our plug-ins. To do so just
+			use the launch shortcut called &quot;Launch Runtime Eclipse&quot;, clicking on the green play button in the tool
+			bar.
 			</p>
 			<p>
 			<div class="image" >
-			<a class="gallery" rel="prettyPhoto[all]" title=" " href="images/30min_launchconfiguration.png">
-				<img src="images/30min_launchconfiguration.png" 
+			<a class="gallery" rel="prettyPhoto[all]" title=" " href="images/JvmTutorial_LaunchEditor.png">
+				<img src="images/JvmTutorial_LaunchEditor.png" 
 					width="600px"
 				/>
 			</a>
@@ -846,13 +837,13 @@
 			</div>
 			</p>
 			<p>
-			This will spawn a new Eclipse workbench with your newly developed plug-ins installed. 
-			In the new workbench, create a new project of your choice, e.g.
-			<em>File -&gt; New -&gt; Project...  -&gt; Java Project</em> and therein a new file 
-			with the file extension you chose in the beginning (<em>*.dmodel</em>). This will open
-			the generated entity editor. Try it and discover the default 
-			functionality for code completion, syntax highlighting, syntactic validation, linking errors, 
-			the outline view, find references etc.
+			In the new workbench, create a Java project (<em>File -&gt; New -&gt; Project...  -&gt; Java Project</em> and therein a new file 
+			with the file extension you chose in the beginning (<em>*.dmodel</em>). This will open the generated entity editor. 
+			Try it and discover the rich functionality it provides. You should also have a look at the preferences
+			of your language to find out what can be individually configured to your users needs.
+			</p>
+			<p>
+			Have fun!
 			</p>
 			<p>
 			<div class="image" >
