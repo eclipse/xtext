@@ -1156,6 +1156,8 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 	}
 
 	protected JvmTypeReference _typeForIdentifiable(JvmGenericType thisOrSuper, boolean rawType) {
+		if (thisOrSuper.eIsProxy())
+			return null;
 		JvmParameterizedTypeReference reference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
 		reference.setType(thisOrSuper);
 		for (JvmTypeParameter param : thisOrSuper.getTypeParameters()) {
@@ -1167,6 +1169,8 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 	}
 	
 	protected JvmTypeReference _typeForIdentifiable(JvmConstructor constructor, boolean rawType) {
+		if (constructor.eIsProxy())
+			return null;
 		JvmParameterizedTypeReference reference = factory.createJvmParameterizedTypeReference();
 		JvmDeclaredType declaringType = constructor.getDeclaringType();
 		reference.setType(declaringType);
@@ -1187,6 +1191,8 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 	}
 	
 	protected JvmTypeReference _typeForIdentifiable(JvmType type, boolean rawType) {
+		if (type.eIsProxy())
+			return null;
 		return getTypeReferences().createTypeRef(type);
 	}
 
