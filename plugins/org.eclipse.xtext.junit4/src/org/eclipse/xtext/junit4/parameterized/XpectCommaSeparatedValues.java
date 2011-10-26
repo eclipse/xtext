@@ -111,7 +111,7 @@ public @interface XpectCommaSeparatedValues {
 					}
 					if (expItem != null) {
 						expString.append(expItem);
-						expEmpty = expItem.trim().isEmpty();
+						expEmpty = expItem.trim().length() == 0;
 					}
 					if (actItem != null)
 						actString.append(actItem);
