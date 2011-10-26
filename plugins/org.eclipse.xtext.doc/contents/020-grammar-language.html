@@ -194,13 +194,86 @@ rules in your grammar, as described in <a href="020-grammar-language.html#metamo
 <a name="package_declarations_3"></a>
 <h4>EPackage Import</h4>
 <p>
-If you already have an existing <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a>, you can import it using either a namespace URI or a resource URI. 
+If you already have an existing <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a>, you can import it using its namespace URI or a resource URI. 
 An <a href="http://www.ietf.org/rfc/rfc2396.txt">URI</a> (Uniform Resource Identifier) provides a simple and extensible 
 means for identifying an abstract or physical resource. For all the nifty details about EMF URIs 
-please refer to its <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" title="View JavaDoc"><abbr title="org.eclipse.emf.common.util.URI" >documentation</abbr></a>.
+please refer to its <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" title="View JavaDoc"><abbr title="org.eclipse.emf.common.util.URI" >documentation</abbr></a>. It is strongly recommended
+to use the namespace URI instead of the resource uri because it is independent from the concrete location
+in the file system and much more portable across different machines, easier to configure in the workflow
+and works better with language mixins. The import via platform URIs or file URIs can be considered deprecated
+and is only supported for backwards compatibility reasons.
 </p>
 <a name="package_declarations_3_2"></a>
-<h5>Using Resource URIs to Import Existing EPackages</h5>
+<h5>Using Namespace URIs to Import Existing EPackages</h5>
+<p>
+You can use namespace URI in order to import existing <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a>. This is generally 
+preferrable. The package will be read from the Xtext index and therefore your grammar is independent
+from the concrete location of the respective ecore file. You have to make sure though, that the ecore file is contained
+in a project, that is managed by Xtext. Therefore the project has to have to Xtext project nature attached.
+Ecore files that reside in referenced Java archives (JARs) are automatically picked up and indexed if
+the referencing project itself is an Xtext project.
+</p>
+<p>
+To import an EPackage, you have to state its namespace URI like this:
+</p>
+<p>
+<span class="inlinecode"><span class="keyword">import</span>&nbsp;<span class="string">"http://www.xtext.org/example/Domainmodel"</span>&nbsp;<span class="keyword">as</span>&nbsp;dmodel</span>
+</p>
+<p>
+In order to be able to find the referenced package in the language generator, some configuration values
+have to be set. It is usually the easiest way to register the generated <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a> 
+interface in the workflow.
+The <abbr title="org.eclipse.emf.mwe.utils.StandaloneSetup" >StandaloneSetup</abbr> offers the respective methods to achieve this.
+Simply state something like this in the workflow:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+bean&nbsp;=&nbsp;StandaloneSetup&nbsp;{<br/>
+&nbsp;&nbsp;platformUri&nbsp;=&nbsp;<span class="string">"${runtimeProject}/../.."</span><br/>
+&nbsp;&nbsp;scanClassPath&nbsp;=&nbsp;<span class="keyword">true</span><br/>
+&nbsp;&nbsp;registerGeneratedEPackage&nbsp;=&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;<span class="string">"org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage"</span><br/>
+&nbsp;&nbsp;registerGenModelFile&nbsp;=&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;<span class="string">"platform:/resource/.../path/to/Domainmodel.genmodel"</span><br/>
+}<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+The registered genmodel is necessary to tell the code generator how the referenced Java classes are named.
+Please see below for alternatives that allow to register the genmodel, too. They may be handy if you
+create the genmodel in the workflow itself. 
+</p>
+<p>
+If the generated EPackage interface is not available when the language workflow is executed, you can
+use another approach to register the reference packages. This may happen if your want to generate EMF
+classes and the language infrastructure in one and the same workflow. The section in the workflow, that
+refers the your grammar, allows to set additional resources that should be loaded prior to loading the
+grammar file. The ecore files that contain the referenced EPackages are a good candidate for preloaded
+resources.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+language&nbsp;=&nbsp;{<br/>
+&nbsp;&nbsp;loadedResource&nbsp;=&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;<span class="string">"platform:/resource/.../path/to/Domainmodel.ecore"</span><br/>
+&nbsp;&nbsp;uri&nbsp;=&nbsp;grammarURI<br/>
+}<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+You can use either platform URIs or classpath URIs to list the required ecore files (see below for details
+on both URI schemes).
+</p>
+<a name="package_declarations_3_3"></a>
+<h5>Using Resource URIs to Import Existing EPackages - Deprecated</h5>
 <p>
 In order to import an existing Ecore model, you&apos;ll have to have the *.ecore file describing the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a> 
 you want to 
@@ -240,10 +313,10 @@ fragment&nbsp;=&nbsp;org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment&nb
 </div>
 </div>
 </p>
-<a name="package_declarations_3_3"></a>
-<h5>Using Classpath URIs to Import Existing EPackages</h5>
+<a name="package_declarations_3_4"></a>
+<h5>Using Classpath URIs to Import Existing EPackages - Deprecated</h5>
 <p>
-We like to leverage Java&apos;s classpath mechanism, because is is well understood and can be configured easily
+We usually like to leverage Java&apos;s classpath mechanism, because is is well understood and can be configured easily
 with Eclipse. Furthermore it allows us to package libraries as jars. If you want to reference an existing
 <em>*.ecore</em> file which is contained in a jar, you can make use of the 
 classpath URI scheme we&apos;ve introduced. For instance if you want to reference Java elements, you can use the JvmType Ecore model 
@@ -272,17 +345,6 @@ fragment&nbsp;=&nbsp;org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment&nb
 </p>
 <p>
 See the section on <a href="199a-jvmtypes.html" title="Go to &quot;Referring to Java Elements using JVM Types&quot;">Referring Java Types</a> for a full explanation of this useful feature.
-</p>
-<a name="package_declarations_3_4"></a>
-<h5>Using Namespace URIs to Import Existing EPackages</h5>
-<p>
-You can also use nsURI in order to import existing <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a>. Note that this is generally not
-preferrable, because you&apos;ll have to have the corresponding EPackage installed in the workbench.
-There&apos;s mainly just one exception, that is Ecore itself. So if you refer to Ecore it is best
-to use its nsURI :
-</p>
-<p>
-<span class="inlinecode"><span class="keyword">import</span>&nbsp;<span class="string">"http://www.eclipse.org/emf/2002/Ecore"</span>&nbsp;<span class="keyword">as</span>&nbsp;ecore</span>
 </p>
 <a name="package_declarations_4"></a>
 <h4>Ecore Model Aliases for EPackages</h4>

@@ -75,11 +75,11 @@
 					<topic href="contents/020-grammar-language.html#package_declarations_2" label="EPackage Generation" >
 					</topic>
 					<topic href="contents/020-grammar-language.html#package_declarations_3" label="EPackage Import" >
-						<topic href="contents/020-grammar-language.html#package_declarations_3_2" label="Using Resource URIs to Import Existing EPackages" >
+						<topic href="contents/020-grammar-language.html#package_declarations_3_2" label="Using Namespace URIs to Import Existing EPackages" >
 						</topic>
-						<topic href="contents/020-grammar-language.html#package_declarations_3_3" label="Using Classpath URIs to Import Existing EPackages" >
+						<topic href="contents/020-grammar-language.html#package_declarations_3_3" label="Using Resource URIs to Import Existing EPackages - Deprecated" >
 						</topic>
-						<topic href="contents/020-grammar-language.html#package_declarations_3_4" label="Using Namespace URIs to Import Existing EPackages" >
+						<topic href="contents/020-grammar-language.html#package_declarations_3_4" label="Using Classpath URIs to Import Existing EPackages - Deprecated" >
 						</topic>
 					</topic>
 					<topic href="contents/020-grammar-language.html#package_declarations_4" label="Ecore Model Aliases for EPackages" >
