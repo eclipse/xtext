@@ -102,7 +102,7 @@ codelanguage-def[DomainExample][package, entity, datatype, import, extends, publ
 
 codelanguage-def[JavaTypesExample][datatype, mapped-to]
 
-codelanguage-def[FowlerExample][events, commands, state, actions, end, resetting]
+codelanguage-def[FowlerExample][events, commands, state, actions, end, resetEvents]
 
 codelanguage-def[LinkingExample][ref]
 

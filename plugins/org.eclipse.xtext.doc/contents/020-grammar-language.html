@@ -35,7 +35,10 @@ could look like this:
 &nbsp;&nbsp;lightOn&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;L1ON<br/>
 &nbsp;&nbsp;doorOpened&nbsp;&nbsp;D1OP<br/>
 &nbsp;&nbsp;panelClosed&nbsp;PNCL<br/>
-&nbsp;&nbsp;<span class="keyword">resetting</span>&nbsp;doorOpened&nbsp;D1OP<br/>
+&nbsp;<span class="keyword">end</span><br/>
+&nbsp;<br/>
+<span class="keyword">resetEvents</span>&nbsp;<br/>
+&nbsp;&nbsp;doorOpened&nbsp;D1OP<br/>
 <span class="keyword">end</span><br/>
 &nbsp;<br/>
 <span class="keyword">commands</span><br/>
@@ -72,9 +75,10 @@ could look like this:
 </div>
 </p>
 <p>
-What we have are a bunch of declared events, commands, and states. Within states there are references to declared actions.
-Actions should be executed when entering the state. Furthermore, there are transitions consisting of a reference to an event and 
-a state.
+What we have are a bunch of declared events, commands, and states. Some events are addiitonally marked
+as being reset events. Within states there are references to declared actions. Actions should be executed 
+when entering the state. Furthermore, there are transitions consisting of a reference to an event and a 
+state.
 </p>
 <p>
 The first thing that you have to do in order to implement this tiny state machine example with Xtext,

@@ -19,7 +19,10 @@ code[FowlerExample][events
   lightOn     L1ON
   doorOpened  D1OP
   panelClosed PNCL
-  resetting doorOpened D1OP
+ end
+ 
+resetEvents 
+  doorOpened D1OP
 end
  
 commands
@@ -53,9 +56,10 @@ state unlockedPanel
 end
 ]
 
-What we have are a bunch of declared events, commands, and states. Within states there are references to declared actions.
-Actions should be executed when entering the state. Furthermore, there are transitions consisting of a reference to an event and 
-a state.
+What we have are a bunch of declared events, commands, and states. Some events are addiitonally marked
+as being reset events. Within states there are references to declared actions. Actions should be executed 
+when entering the state. Furthermore, there are transitions consisting of a reference to an event and a 
+state.
 
 The first thing that you have to do in order to implement this tiny state machine example with Xtext,
 is to provide a grammar. It could look like this example:
