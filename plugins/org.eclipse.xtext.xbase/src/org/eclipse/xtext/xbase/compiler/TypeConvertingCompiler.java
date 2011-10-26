@@ -90,13 +90,30 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 			convertArrayToList(left, appendable, context, expression);
 		} else if (isList(right) && getTypeReferences().isArray(left)) {
 			convertListToArray(left, appendable, context, expression);
-		} else if (right.getType().getIdentifier().startsWith(Functions.class.getCanonicalName())) {
+		} else if (isFunction(right)) {
 			convertFunctionType(left, right, appendable, expression, context);
-		} else if (right.getType().getIdentifier().startsWith(Procedures.class.getCanonicalName())) {
+		} else if (isProcedure(right)) {
 			convertFunctionType(left, right, appendable, expression, context);
 		} else {
 			expression.exec();
 		}
+	}
+	
+	protected boolean isFunction(JvmTypeReference typeReference) {
+		return identifierStartWith(typeReference, Functions.class.getCanonicalName());
+	}
+	
+	protected boolean isProcedure(JvmTypeReference typeReference) {
+		return identifierStartWith(typeReference, Procedures.class.getCanonicalName());		
+	}
+	
+	protected boolean identifierStartWith(JvmTypeReference typeReference, String prefix) {
+		if (typeReference == null || typeReference.getType() == null)
+			return false;
+		String identifier = typeReference.getType().getIdentifier();
+		if (identifier != null)
+			return identifier.startsWith(prefix);
+		return false;
 	}
 
 	protected void convertMultiType(JvmTypeReference expectation, JvmMultiTypeReference multiType, XExpression context,
