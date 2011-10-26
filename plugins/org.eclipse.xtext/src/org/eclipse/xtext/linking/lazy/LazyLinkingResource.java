@@ -211,6 +211,9 @@ public class LazyLinkingResource extends XtextResource {
 		return super.getEObject(uriFragment);
 	}
 
+	/**
+	 * @since 2.1
+	 */
 	protected boolean isUnresolveableProxyCacheable(Triple<EObject, EReference, INode> triple) {
 		return true;
 	}
