@@ -109,9 +109,9 @@
         <menuContribution
             locationURI="popup:#TextEditorContext?after=group.edit">
              <command
-                 commandId="org.eclipse.xtext.xtend2.Xtend2.validate"
+                 commandId="org.eclipse.xtext.xbase.ui.organizeImports"
                  style="push"
-                 tooltip="Trigger expensive validation">
+                 tooltip="Organize Imports">
             <visibleWhen checkEnabled="false">
                 <reference
                     definitionId="org.eclipse.xtext.xtend2.Xtend2.Editor.opened">
