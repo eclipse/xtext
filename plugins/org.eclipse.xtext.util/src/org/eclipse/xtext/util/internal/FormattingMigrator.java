@@ -7,8 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.util.internal;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.eclipse.xtext.util.Strings;
+
+import com.google.inject.internal.Lists;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -35,8 +40,30 @@ public class FormattingMigrator {
 			return semantic.charAt(index);
 		}
 
+		public int indexOf(String str, int fromIndex) {
+			return semantic.indexOf(str, fromIndex);
+		}
+
 		public int length() {
 			return semantic.length();
+		}
+
+		public void migrateFrom(FormattedString source, Mapping mapping) {
+			int src = mapping.srcOffset;
+			int dst = mapping.dstOffset;
+			int len = mapping.length;
+			if (src > 0 && dst > 0) {
+				src++;
+				dst++;
+				len--;
+			}
+			if (src + len + 1 < source.formatting.length && dst + len == semantic.length())
+				len++;
+			System.arraycopy(source.formatting, src, formatting, dst, len);
+		}
+
+		public String substring(int index, int lenght) {
+			return semantic.substring(index, lenght);
 		}
 
 		@Override
@@ -53,48 +80,57 @@ public class FormattingMigrator {
 		}
 	}
 
-	protected class FormattingMatch {
-		protected int overlapCharsAfter;
-		protected int overlapCharsBefore;
-		protected int overlapTokensAfter;
-		protected int overlapTokensBefore;
-		protected int pos;
+	protected class Mapping {
+		protected FormattedString dst;
+		protected int dstOffset;
+		protected int length;
+		protected FormattedString src;
+		protected int srcOffset;
 
-		public FormattingMatch(int pos) {
+		public Mapping(FormattedString src, FormattedString dst, int srcOffset, int dstOffset, int length) {
 			super();
-			this.pos = pos;
+			this.src = src;
+			this.dst = dst;
+			this.srcOffset = srcOffset;
+			this.dstOffset = dstOffset;
+			this.length = length;
 		}
 
-		protected void calcOverlap(FormattedString s1, int i1, FormattedString s2, int i2) {
-			overlapCharsAfter = 0;
-			overlapCharsBefore = 0;
-			overlapTokensAfter = 0;
-			overlapTokensBefore = 0;
-			int downTo = Math.min(i1, i2);
-			int i = 1;
-			while (downTo - i >= 0 && s1.charAt(i1 - i) == s2.charAt(i2 - i)) {
-				overlapCharsBefore++;
-				if (s1.formatting[i1 - i] != null || s2.formatting[i2 - i] != null)
-					overlapTokensBefore++;
-				i++;
-			}
-			int upTo = Math.min(s1.length() - i1, s2.length() - i2);
-			int j = 1;
-			while (j < upTo && s1.charAt(i1 + j) == s2.charAt(i2 + j)) {
-				overlapCharsAfter++;
-				if (s1.formatting[i1 + j + 1] != null || s2.formatting[i2 + j + 1] != null)
-					overlapTokensAfter++;
-				j++;
-			}
+		@Override
+		public String toString() {
+			String s1 = src.substring(srcOffset, srcOffset + length);
+			String s2 = dst.substring(dstOffset, dstOffset + length);
+			if (s1.equals(s2))
+				return s1;
+			return "'" + s1 + "' != '" + s2 + "'";
 		}
 
-		public int getOverlapChars() {
-			return overlapCharsBefore + overlapCharsAfter;
+	}
+
+	protected class Region {
+		protected int length;
+		protected int offset;
+
+		public Region(int offset, int length) {
+			super();
+			this.offset = offset;
+			this.length = length;
 		}
 
-		public int getOverlapTokens() {
-			return overlapTokensBefore + overlapTokensAfter;
+		@Override
+		public String toString() {
+			return offset + ">" + length;
 		}
+	}
+
+	protected static final Pattern WS = Pattern.compile("\\s+", Pattern.MULTILINE);
+
+	protected int countOverlappingChars(FormattedString s1, FormattedString s2, int s1Offset, int s2Offset) {
+		int i = 0;
+		while (i + s1Offset < s1.length() && i + s2Offset < s2.length()
+				&& s1.charAt(i + s1Offset) == s2.charAt(i + s2Offset))
+			i++;
+		return i;
 	}
 
 	protected FormattedString createFormattedString(String string, Pattern format) {
@@ -111,57 +147,65 @@ public class FormattingMigrator {
 		return new FormattedString(semantic.toString(), formatting);
 	}
 
-	protected FormattingMatch match(FormattedString searchFor, int searchAt, FormattedString searchIn) {
-		char c1 = searchAt > 0 ? searchFor.charAt(searchAt - 1) : 0;
-		char c2 = searchAt < searchFor.length() ? searchFor.charAt(searchAt) : 0;
-		FormattingMatch lastMatch = null;
-		for (int i = 0; i < searchIn.length(); i++) {
-			FormattingMatch match = null;
-			if (searchIn.charAt(i) == c1) {
-				match = new FormattingMatch(i + 1);
-				match.calcOverlap(searchFor, searchAt - 1, searchIn, i);
-			} else if (searchIn.charAt(i) == c2) {
-				match = new FormattingMatch(i);
-				match.calcOverlap(searchFor, searchAt, searchIn, i);
+	protected void findLinearMatches(FormattedString formattedString, FormattedString toBeFormattedString,
+			List<Mapping> mappings, List<Region> remainingRegions) {
+		int i1 = 0;
+		int i2 = 0;
+		while (i1 < formattedString.length() && i2 < toBeFormattedString.length()) {
+			int match = countOverlappingChars(formattedString, toBeFormattedString, i1, i2);
+			if (match > 0) {
+				mappings.add(new Mapping(formattedString, toBeFormattedString, i1, i2, match));
+				i1 += match;
+				i2 += match;
 			}
-			if (match != null && qualifies(match) && (lastMatch == null || precedes(match, lastMatch)))
-				lastMatch = match;
+			if (i1 >= formattedString.length() || i2 >= toBeFormattedString.length())
+				return;
+			int[] next = findNextOverlappingChar(formattedString, toBeFormattedString, i1, i2);
+			if (next == null) {
+				remainingRegions.add(new Region(i2, toBeFormattedString.length() - i2));
+				return;
+			}
+			remainingRegions.add(new Region(i2, next[1]));
+			i1 += next[0];
+			i2 += next[1];
 		}
-		return lastMatch;
+	}
+
+	protected int[] findNextOverlappingChar(FormattedString s1, FormattedString s2, int s1Offset, int s2Offset) {
+		final int lenght = 2;
+		if (lenght + s2Offset >= s2.length())
+			return null;
+		int[] best = null;
+		int i1 = 0;
+		while (i1 + lenght + s1Offset < s1.length()) {
+			String cand = s1.substring(s1Offset + i1, s1Offset + i1 + lenght);
+			int i2 = s2.indexOf(cand, s2Offset) - s2Offset;
+			if (i2 >= 0 && (best == null || best[0] + best[1] > i1 + i2))
+				best = new int[] { i1, i2 };
+			if (best != null && best[0] + best[1] > i1)
+				return best;
+			i1++;
+		}
+		return best;
+	}
+
+	public String migrate(String formattedString, String toBeFormattedString) {
+		return migrate(formattedString, toBeFormattedString, WS);
 	}
 
 	public String migrate(String formattedString, String toBeFormattedString, Pattern format) {
+		if (Strings.isEmpty(toBeFormattedString) || Strings.isEmpty(formattedString))
+			return toBeFormattedString;
 		FormattedString formatted = createFormattedString(formattedString, format);
 		FormattedString toBeFormatted = createFormattedString(toBeFormattedString, format);
 		if (formatted.semantic.equals(toBeFormatted.semantic))
 			return formattedString;
-		FormattedString result = new FormattedString(toBeFormatted.semantic);
-		for (int i = 0; i <= formatted.semantic.length(); i++)
-			if (formatted.formatting[i] != null) {
-				FormattingMatch match = match(formatted, i, result);
-				if (match != null) {
-					//					result.formatting[match.pos] = "[" + formatted.formatting[i] + i + "]";
-					result.formatting[match.pos] = formatted.formatting[i];
-					if (toBeFormatted.formatting[match.pos] != null)
-						toBeFormatted.formatting[match.pos] = null;
-				}
-			}
-		for (int i = 0; i <= toBeFormatted.semantic.length(); i++)
-			if (toBeFormatted.formatting[i] != null)
-				result.formatting[i] = toBeFormatted.formatting[i];
-		return result.toString();
-	}
-
-	protected boolean precedes(FormattingMatch candidate, FormattingMatch competitor) {
-		if (candidate.getOverlapTokens() > competitor.getOverlapTokens())
-			return true;
-		if (candidate.getOverlapChars() > competitor.getOverlapChars())
-			return true;
-		return false;
-	}
-
-	protected boolean qualifies(FormattingMatch match) {
-		return match.getOverlapTokens() >= 1;
+		List<Mapping> mappings = Lists.newArrayList();
+		List<Region> remainingRegions = Lists.newArrayList();
+		findLinearMatches(formatted, toBeFormatted, mappings, remainingRegions);
+		for (Mapping m : mappings)
+			toBeFormatted.migrateFrom(formatted, m);
+		return toBeFormatted.toString();
 	}
 
 }

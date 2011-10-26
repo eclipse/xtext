@@ -22,6 +22,26 @@ public class FormattingMigratorTest extends TestCase {
 
 	private Pattern ws = Pattern.compile("\\s+");
 
+	public void testRobust1() {
+		String act = mig.migrate("  foo  bar  ", null, ws);
+		assertNull(act);
+	}
+
+	public void testRobust2() {
+		String act = mig.migrate("  foo  bar  ", "", ws);
+		assertEquals("", act);
+	}
+
+	public void testRobust3() {
+		String act = mig.migrate(null, "  foo  bar  ", ws);
+		assertEquals("  foo  bar  ", act);
+	}
+
+	public void testRobust4() {
+		String act = mig.migrate("", "  foo  bar  ", ws);
+		assertEquals("  foo  bar  ", act);
+	}
+
 	public void testKeepFormatting() {
 		String act = mig.migrate("  foo  bar  ", "  foo  bar  ", ws);
 		assertEquals("  foo  bar  ", act);
@@ -58,8 +78,8 @@ public class FormattingMigratorTest extends TestCase {
 	}
 
 	public void testPartialMatch() {
-		String act = mig.migrate("  foo baz  ", "foo  bar  baz", ws);
-		assertEquals("  foo bar  baz  ", act);
+		String act = mig.migrate("  xxx zzz  ", "xxx  yyy  zzz", ws);
+		assertEquals("  xxx  yyy  zzz  ", act);
 	}
 
 }
