@@ -94,8 +94,8 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 						// no need to convert the string twice
 						newContent.reset();
 						file.setContents(newContent, true, true, monitor);
-						if (!file.isDerived() && outputConfig.isSetDerivedProperty()) {
-							file.setDerived(true);
+						if (file.isDerived() != outputConfig.isSetDerivedProperty()) {
+							file.setDerived(outputConfig.isSetDerivedProperty());
 						}
 					}
 				} catch (CoreException e) {
