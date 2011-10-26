@@ -56,6 +56,17 @@ public class ResourceURICollector {
 		return collectFiles(directory, new FilePredicate(fileExtensions));
 	}
 
+	public List<URI> collectFiles(String... files) {
+		List<URI> result = Lists.newArrayList();
+		for (String file : files) {
+			File f = new File(file);
+			if (!f.exists())
+				throw new RuntimeException("File not found: " + file);
+			result.add(createURI(f));
+		}
+		return result;
+	}
+
 	protected URI createURI(File file) {
 		return URI.createFileURI(file.getAbsolutePath());
 	}

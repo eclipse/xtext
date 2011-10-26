@@ -7,72 +7,287 @@
  *******************************************************************************/
 package org.eclipse.xtext.junit4.parameterized;
 
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.Exceptions;
+import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Wrapper;
+import org.eclipse.xtext.util.formallang.FollowerFunctionImpl;
+import org.eclipse.xtext.util.formallang.Nfa;
+import org.eclipse.xtext.util.formallang.NfaUtil;
+import org.eclipse.xtext.util.formallang.NfaUtil.BacktrackHandler;
+import org.eclipse.xtext.util.formallang.StringProduction;
+import org.eclipse.xtext.util.formallang.StringProduction.ElementType;
+import org.eclipse.xtext.util.formallang.StringProduction.ProdElement;
+import org.junit.Test;
 
-import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class XpectParameterProvider implements IParameterProvider {
 
-	protected static Pattern XPECT_PATTERN = Pattern.compile("(\\S)?XPECT(_TEST_CLASS)?\\s*([a-zA-Z0-9]+)");
+	protected static class AssignedProduction extends StringProduction {
 
-	// XPECT foo
-	// XPECT foo("param")
-	// XPECT foo("param", param2)
-	// XPECT foo at location
-	// XPECT foo at loca!tion
-	// XPECT foo("param") at location
-	// XPECT foo --> expectation
-	/* XPECT foo ---
-	 expectation
-	--- */
-	/* XPECT foo("param") at location ---
-	 expectation
-	--- */
+		public AssignedProduction(String production) {
+			super(production);
+		}
 
-	public void collectParameters(XtextResource resource, IParameterAcceptor acceptor) {
-		for (ILeafNode leaf : resource.getParseResult().getRootNode().getLeafNodes())
-			if (leaf.isHidden() && leaf.getText().contains("XPECT"))
-				parseLeaf(resource, leaf, acceptor);
+		@Override
+		protected ProdElement parsePrim(Stack<Pair<Token, String>> tokens) {
+			Pair<Token, String> current = tokens.pop();
+			switch (current.getFirst()) {
+				case PL:
+					ProdElement result1 = parseAlt(tokens);
+					if (tokens.peek().getFirst().equals(Token.PR))
+						tokens.pop();
+					else
+						throw new RuntimeException("')' expected, but " + tokens.peek().getFirst() + " found");
+					parseCardinality(tokens, result1);
+					return result1;
+				case STRING:
+					ProdElement result2 = createElement(ElementType.TOKEN);
+					result2.setValue(current.getSecond());
+					parseCardinality(tokens, result2);
+					return result2;
+				case ID:
+					ProdElement result3 = createElement(ElementType.TOKEN);
+					result3.setName(current.getSecond());
+					Pair<Token, String> eq = tokens.pop();
+					if (eq.getFirst() == Token.EQ) {
+						Pair<Token, String> val = tokens.pop();
+						switch (val.getFirst()) {
+							case ID:
+							case STRING:
+								result3.setValue(val.getSecond());
+								break;
+							default:
+								throw new RuntimeException("Unexpected token " + current.getFirst());
+						}
+					} else
+						throw new RuntimeException("Unexpected token " + eq.getFirst() + ", expected '='");
+					parseCardinality(tokens, result3);
+					return result3;
+				default:
+					throw new RuntimeException("Unexpected token " + current.getFirst());
+			}
+		}
+	}
+
+	protected static class BacktrackItem {
+		protected int offset;
+		protected ProdElement token;
+		protected String value;
+
+		public BacktrackItem(int offset) {
+			super();
+			this.offset = offset;
+		}
+
+		public BacktrackItem(int offset, ProdElement token, String value) {
+			super();
+			this.offset = offset;
+			this.token = token;
+			this.value = value;
+		}
+
+		@Override
+		public String toString() {
+			return token + ":" + value;
+		}
+	}
+
+	protected static class Expectation implements IExpectation {
+		protected String expectation;
+		protected String indentation = null;
+		protected int lenght;
+		protected int offset;
+
+		public Expectation(int offset, int lenght, String expectation) {
+			super();
+			this.offset = offset;
+			this.lenght = lenght;
+			this.expectation = expectation;
+		}
+
+		public Expectation(int offset, int lenght, String expectation, String indentation) {
+			super();
+			this.offset = offset;
+			this.lenght = lenght;
+			this.expectation = expectation;
+			this.indentation = indentation;
+		}
+
+		public String getExpectation() {
+			return expectation;
+		}
+
+		public String getIndentation() {
+			return indentation;
+		}
+
+		public int getLength() {
+			return lenght;
+		}
+
+		public int getOffset() {
+			return offset;
+		}
 
 	}
 
-	protected void parseLeaf(XtextResource resource, ILeafNode leaf, IParameterAcceptor acceptor) {
+	protected enum Token {
+		ID("[a-zA-Z][a-zA-Z0-9_]*"), //
+		INT("[0-9]+"), //
+		OFFSET("'([^']*)'|[^\\s]+"), //
+		STRING("'([^']*)'"), //
+		TEXT("[^\\s]+");
+
+		public final Pattern pattern;
+
+		private Token(String regex) {
+			this.pattern = Pattern.compile("^" + regex);
+		}
+	}
+
+	public final static String OFFSET = "offset";
+
+	protected static final Pattern WS = Pattern.compile("^[\\s]+");
+
+	protected static Pattern XPECT_PATTERN = Pattern.compile("(\\S)?XPECT(_CLASS|_IMPORT)?\\s*([a-zA-Z0-9]+)");
+
+	public void collectParameters(Class<?> testClass, XtextResource resource, IParameterAcceptor acceptor) {
+		collectTestMethods(testClass, resource, acceptor);
+		for (ILeafNode leaf : resource.getParseResult().getRootNode().getLeafNodes())
+			if (leaf.isHidden() && leaf.getText().contains("XPECT"))
+				parseLeaf(testClass, resource, leaf, acceptor);
+
+	}
+
+	protected void collectTestMethods(Class<?> testClass, XtextResource res, IParameterAcceptor acceptor) {
+		for (Method meth : testClass.getMethods()) {
+			if (Modifier.isPublic(meth.getModifiers()) && !Modifier.isStatic(meth.getModifiers())) {
+				Test annotation = meth.getAnnotation(Test.class);
+				if (annotation != null) {
+					Object[][] params = createParams(res, Collections.<String, String> emptyMap());
+					acceptor.acceptTest(null, meth.getName(), params, null, false);
+				}
+			}
+		}
+	}
+
+	protected String convertValue(INode ctx, int offset, Token token, String value) {
+		switch (token) {
+			case OFFSET:
+				int add = value.indexOf('!');
+				if (add >= 0)
+					value = value.substring(0, add) + value.substring(add + 1);
+				else
+					add = 0;
+				String text = ctx.getRootNode().getText();
+				int result = text.indexOf(value, offset);
+				if (result >= 0)
+					return String.valueOf(result + add);
+				else
+					throw new RuntimeException("OFFSET '" + value + "' not found");
+			case ID:
+			case INT:
+			case STRING:
+			case TEXT:
+				return value;
+		}
+		return value;
+	}
+
+	protected Object[][] createParams(XtextResource res, Map<String, String> params) {
+		Object[] params1 = new Object[] { res, params };
+		Object[] params2 = new Object[] { res };
+		return new Object[][] { params1, params2 };
+	}
+
+	protected String getIndentation(INode ctx, int offset) {
+		String text = ctx.getRootNode().getText();
+		int nl = text.lastIndexOf("\n", offset);
+		if (nl < 0)
+			nl = 0;
+		StringBuilder result = new StringBuilder();
+		for (int i = nl + 1; i < text.length() && Character.isWhitespace(text.charAt(i)); i++)
+			result.append(text.charAt(i));
+		return result.toString();
+	}
+
+	protected int getOffsetOfNextSemanticNode(INode node) {
+		Iterator<INode> it = new NodeIterator(node);
+		while (it.hasNext()) {
+			INode n = it.next();
+			if (n instanceof ILeafNode && !((ILeafNode) n).isHidden())
+				return n.getOffset();
+		}
+		return node.getOffset() + node.getLength();
+	}
+
+	protected Nfa<ProdElement> getParameterNfa(String syntax) {
+		AssignedProduction prod = new AssignedProduction(syntax);
+		FollowerFunctionImpl<ProdElement, String> ff = new FollowerFunctionImpl<ProdElement, String>(prod);
+		ProdElement start = prod.new ProdElement(ElementType.TOKEN);
+		ProdElement stop = prod.new ProdElement(ElementType.TOKEN);
+		Nfa<ProdElement> result = new NfaUtil().create(prod, ff, start, stop);
+		return result;
+	}
+
+	protected String getParameterSyntax(Class<?> testClass, String methodName) {
+		try {
+			Method method = testClass.getMethod(methodName);
+			Parameter annotation = method.getAnnotation(Parameter.class);
+			if (annotation != null)
+				return annotation.syntax();
+		} catch (SecurityException e) {
+			Exceptions.throwUncheckedException(e);
+		} catch (NoSuchMethodException e) {
+			Exceptions.throwUncheckedException(e);
+		}
+		return null;
+	}
+
+	protected void parseLeaf(Class<?> testClass, XtextResource resource, ILeafNode leaf, IParameterAcceptor acceptor) {
 		String text = leaf.getText();
 		Matcher matcher = XPECT_PATTERN.matcher(text);
 		int offset = 0;
 		while (offset < text.length() && matcher.find(offset)) {
 			if (matcher.group(2) == null) {
 				int newOffset;
-				if ((newOffset = parseXpect(resource, leaf, text, matcher.group(3), matcher.end(), acceptor,
+				if ((newOffset = parseXpect(testClass, resource, leaf, text, matcher.group(3), matcher.end(), acceptor,
 						matcher.group(1) != null)) >= 0)
 					offset = newOffset;
 				else
 					offset = matcher.end();
-			} else {
-				int newOffset;
-				if ((newOffset = parseXpectTest(text, matcher.group(3), matcher.end())) >= 0)
-					offset = newOffset;
-				else
-					offset = matcher.end();
+			} else if ("_IMPORT".equals(matcher.group(2))) {
+				offset = parseXpectImport(resource, text, matcher.end(2), acceptor);
 			}
+			//			} else {
+			//				int newOffset;
+			//				if ((newOffset = parseXpectTest(testClass, text, matcher.end(), acceptor)) >= 0)
+			//					offset = newOffset;
+			//				else
+			//					offset = matcher.end();
+			//			}
 		}
-	}
-
-	protected int parseStringOrText(String text, int offset, Wrapper<String> value) {
-		int newOffset = parseString(text, offset, value);
-		if (newOffset < 0)
-			newOffset = parseText(text, offset, value);
-		return newOffset;
 	}
 
 	protected int parseString(String text, int offset, Wrapper<String> value) {
@@ -86,6 +301,13 @@ public class XpectParameterProvider implements IParameterProvider {
 			}
 		}
 		return -1;
+	}
+
+	protected int parseStringOrText(String text, int offset, Wrapper<String> value) {
+		int newOffset = parseString(text, offset, value);
+		if (newOffset < 0)
+			newOffset = parseText(text, offset, value);
+		return newOffset;
 	}
 
 	protected int parseText(String text, int offset, Wrapper<String> value) {
@@ -105,95 +327,148 @@ public class XpectParameterProvider implements IParameterProvider {
 		return i;
 	}
 
-	protected int parseXpect(XtextResource res, INode ctx, String text, String method, int offset,
+	protected int parseXpect(Class<?> testClass, XtextResource res, INode ctx, String text, String method, int offset,
 			IParameterAcceptor acceptor, boolean ignore) {
 		int newOffset;
-		List<String> params = Lists.newArrayList();
-		Wrapper<String> location = new Wrapper<String>(null);
-		Wrapper<String> expectation = new Wrapper<String>(null);
+		Map<String, String> params = Maps.newLinkedHashMap();
+		Wrapper<Expectation> expectation = new Wrapper<Expectation>(null);
 		offset = skipWhitespace(text, offset);
-		if ((newOffset = parseXpectParams(text, offset, params)) >= 0)
+		if ((newOffset = parseXpectParams(testClass, ctx, method, text, offset, params)) >= 0)
 			offset = newOffset;
 		offset = skipWhitespace(text, offset);
-		if ((newOffset = parseXpectLocation(text, offset, location)) >= 0)
-			offset = skipWhitespace(text, newOffset);
-		if ((newOffset = parseXpectSLExpectation(text, offset, expectation)) >= 0)
+		if ((newOffset = parseXpectSLExpectation(ctx, text, offset, expectation)) >= 0)
 			offset = newOffset;
-		else if ((newOffset = parseXpectMLExpectation(text, offset, expectation)) >= 0)
+		else if ((newOffset = parseXpectMLExpectation(ctx, text, offset, expectation)) >= 0)
 			offset = newOffset;
-
-		int loc;
-		if (location.get() != null)
-			loc = res.getParseResult().getRootNode().getText()
-					.indexOf(location.get(), ctx.getOffset() + ctx.getLength());
-		else
-			loc = ctx.getOffset();
-		Object[] testParms = new Object[] { res, loc, params.toArray(new String[params.size()]) };
-		acceptor.acceptTest("", method, testParms, expectation.get(), ignore);
+		acceptor.acceptTest(null, method, createParams(res, params), expectation.get(), ignore);
 		return offset;
 	}
 
-	protected int parseXpectLocation(String text, int offset, Wrapper<String> location) {
-		if (offset + 1 < text.length() && text.substring(offset, offset + 2).equals("at")) {
-			offset = skipWhitespace(text, offset + 2);
-			return parseStringOrText(text, offset, location);
-		}
-		return -1;
+	protected int parseXpectImport(XtextResource res, String text, int offset, IParameterAcceptor acceptor) {
+		offset = skipWhitespace(text, offset);
+		int end = text.indexOf("\n", offset);
+		String fileName = text.substring(offset, end).trim();
+		URI uri = URI.createURI(fileName);
+		if (uri.isRelative() && !res.getURI().isRelative())
+			uri = uri.resolve(res.getURI());
+		acceptor.acceptImportURI(uri);
+		return end;
 	}
 
-	protected int parseXpectMLExpectation(String text, int offset, Wrapper<String> expectation) {
-		if (offset + 2 < text.length() && text.substring(offset, offset + 3).equals("---")) {
+	protected int parseXpectMLExpectation(INode node, String text, int offset, Wrapper<Expectation> expectation) {
+		if (offset + 3 < text.length() && text.substring(offset, offset + 3).equals("---")) {
+			String indentation = getIndentation(node, node.getOffset() + offset);
 			int start = text.indexOf('\n', offset + 3);
 			int end = text.indexOf("---", offset + 3);
 			if (start >= 0 && end >= 0) {
 				String substring = text.substring(start + 1, end);
 				end = substring.lastIndexOf('\n');
 				if (end >= 0) {
-					expectation.set(substring.substring(0, end));
-					return end;
+					String exp = substring.substring(0, end);
+					int len = exp.length();
+					if (exp.startsWith(indentation))
+						exp = exp.substring(indentation.length());
+					exp = exp.replace("\n" + indentation, "\n");
+					expectation.set(new Expectation(node.getOffset() + start + 1, len, exp, indentation));
+					return end + start + 1;
 				}
 			}
 		}
 		return -1;
 	}
 
-	protected int parseXpectParams(String text, int offset, List<String> params) {
-		if (offset < text.length() && text.charAt(offset) == '(') {
-			int index = text.indexOf(')', offset);
-			params.add(text.substring(offset, index));
-			return index;
+	protected int parseXpectParams(Class<?> testClass, INode node, String methodName, final String text, int offset,
+			Map<String, String> params) {
+		String paramSyntax = getParameterSyntax(testClass, methodName);
+		if (org.eclipse.xtext.util.Strings.isEmpty(paramSyntax))
+			return -1;
+		Nfa<ProdElement> nfa = getParameterNfa(paramSyntax);
+		List<BacktrackItem> trace = new NfaUtil().backtrack(nfa, new BacktrackItem(offset),
+				new BacktrackHandler<ProdElement, BacktrackItem>() {
+					public BacktrackItem handle(ProdElement state, BacktrackItem previous) {
+						if (Strings.isEmpty(state.getValue()))
+							return previous;
+						if (Strings.isEmpty(state.getName())) {
+							if (text.regionMatches(previous.offset, state.getValue(), 0, state.getValue().length())) {
+								int newOffset = previous.offset + state.getValue().length();
+								Matcher ws = WS.matcher(text).region(newOffset, text.length());
+								int childOffset = ws.find() ? ws.end() : newOffset;
+								return new BacktrackItem(childOffset, state, state.getValue());
+							}
+						} else {
+							Token t = Token.valueOf(state.getValue());
+							Matcher matcher = t.pattern.matcher(text).region(previous.offset, text.length());
+							if (matcher.find()) {
+								Matcher ws = WS.matcher(text).region(matcher.end(), text.length());
+								int childOffset = ws.find() ? ws.end() : matcher.end();
+								String value = matcher.groupCount() > 0 && matcher.group(1) != null ? matcher.group(1)
+										: matcher.group(0);
+								return new BacktrackItem(childOffset, state, value);
+							}
+						}
+						return null;
+					}
+
+					public boolean isSolution(BacktrackItem result) {
+						return true;
+					}
+
+					public Iterable<ProdElement> sortFollowers(BacktrackItem result, Iterable<ProdElement> followers) {
+						return followers;
+					}
+				});
+		int semanticOffset = getOffsetOfNextSemanticNode(node);
+		params.put(OFFSET, String.valueOf(semanticOffset));
+		if (trace != null && !trace.isEmpty()) {
+			for (BacktrackItem item : trace)
+				if (item.token != null && item.token.getName() != null)
+					params.put(item.token.getName(),
+							convertValue(node, semanticOffset, Token.valueOf(item.token.getValue()), item.value));
+			return trace.get(trace.size() - 1).offset;
 		}
 		return -1;
 	}
 
-	protected int parseXpectSLExpectation(String text, int offset, Wrapper<String> expectation) {
-		if (offset + 2 < text.length() && text.substring(offset, offset + 3).equals("-->")) {
-			int index = text.indexOf('\n', offset + 3);
-			if (index < 0)
-				index = text.length();
-			expectation.set(text.substring(offset + 3, index));
-			return index;
+	protected int parseXpectSLExpectation(INode node, String text, int offset, Wrapper<Expectation> expectation) {
+		if (offset + 3 < text.length() && text.substring(offset, offset + 3).equals("-->")) {
+			int begin = offset + 3;
+			if (text.charAt(begin) == '\r' || text.charAt(begin) == '\n') {
+				expectation.set(new Expectation(node.getOffset() + begin, 0, ""));
+				return begin;
+			} else if (Character.isWhitespace(text.charAt(begin)))
+				begin++;
+			int end = text.indexOf('\n', begin);
+			if (end < 0)
+				end = text.length();
+			String exp = text.substring(begin, end);
+			expectation.set(new Expectation(node.getOffset() + begin, exp.length(), exp));
+			return end;
 		}
 		return -1;
 	}
 
-	protected int parseXpectTest(String text, String name, int offset) {
-		return -1;
-	}
+	//	protected int parseXpectTest(Wrapper<Class<?>> test, String text, int offset, IParameterAcceptor acceptor) {
+	//		int index = text.indexOf("\n", offset);
+	//		if (index > offset) {
+	//			String name = text.substring(offset, index).trim();
+	//			try {
+	//				Class<?> clazz = Class.forName(name);
+	//				acceptor.acceptTestClass(clazz);
+	//			} catch (ClassNotFoundException e) {
+	//				Exceptions.throwUncheckedException(e);
+	//			}
+	//			return index;
+	//		}
+	//		return -1;
+	//	}
 
 	protected int skipWhitespace(String text, int offset) {
 		int i = offset;
 		while (i < text.length())
-			switch (text.charAt(i)) {
-				case ' ':
-				case '\t':
-				case '\r':
-				case '\n':
-					i++;
-					break;
-				default:
-					return i;
-			}
+			if (Character.isWhitespace(text.charAt(i)))
+				i++;
+			else
+				return i;
 		return i;
 	}
 

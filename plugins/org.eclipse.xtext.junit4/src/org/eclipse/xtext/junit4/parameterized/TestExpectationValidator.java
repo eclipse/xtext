@@ -12,6 +12,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import org.eclipse.xtext.junit4.parameterized.IParameterProvider.IExpectation;
+import org.eclipse.xtext.resource.XtextResource;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -24,15 +26,19 @@ public @interface TestExpectationValidator {
 
 	public interface ITestExpectationValidator<RESULT> {
 
-		void validate(String expectation, RESULT actual);
+		void validate(XtextResource resource, IExpectation expectation, RESULT actual);
 	}
 
 	public class NullTestResultValidator implements ITestExpectationValidator<Void> {
 		public NullTestResultValidator(Test config) {
 		}
 
-		public void validate(String expectation, @TestResult Void actual) {
-			if (expectation != null && expectation.length() > 0)
+		public NullTestResultValidator(Xpect config) {
+		}
+
+		public void validate(XtextResource resource, IExpectation expectation, @TestResult Void actual) {
+			if (expectation != null && expectation.getExpectation() != null
+					&& expectation.getExpectation().length() > 0)
 				Assert.fail("This test should not have an expectation. Expectation: '" + expectation + "'.");
 		}
 	}
