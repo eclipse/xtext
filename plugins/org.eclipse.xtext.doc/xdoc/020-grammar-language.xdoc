@@ -955,8 +955,8 @@ generator cannot be convinced that easy. We have to guide it to this decision po
 predicates which are expressed by a leading code[=>] operator.
 
 code[Xtext][Condition: 
-	'if' condition=Expression 
-		'then' then=Expression 
+	'if' '(' condition=BooleanExpression ')' 
+		then=Expression 
 		(=>'else' else=Expression)?
 ]
 
