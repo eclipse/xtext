@@ -115,6 +115,15 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		return null;
 	}
 	
+	public JvmIdentifiableElement getNearestLogicalContainer(EObject context) {
+		if (context == null)
+			return null;
+		JvmIdentifiableElement locicalContainer = getLogicalContainer(context);
+		if (locicalContainer != null)
+			return locicalContainer;
+		return getNearestLogicalContainer(context.eContainer());
+	}
+
 	public void associateLogicalContainer(EObject logicalChild, JvmIdentifiableElement element) {
 		if (logicalChild == null)
 			return;

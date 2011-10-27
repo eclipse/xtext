@@ -141,7 +141,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	private TypeReferences typeReferences;
 	
 	@Inject
-	private ILogicalContainerProvider expressionContext;
+	private ILogicalContainerProvider logicalContainerProvider;
 	
 	public void setFeatureNameProvider(IdentifiableSimpleNameProvider featureNameProvider) {
 		this.featureNameProvider = featureNameProvider;
@@ -194,7 +194,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 
 	protected IScope createTypeScope(EObject context, EReference reference) {
 		final IScope parentScope = super.getScope(context, reference);
-		JvmIdentifiableElement logicalContainer = getLogicalContainer(context);
+		JvmIdentifiableElement logicalContainer = logicalContainerProvider.getNearestLogicalContainer(context);
 		if (logicalContainer != null) {
 			 return createTypeScope(logicalContainer, reference, parentScope);
 		}
@@ -239,15 +239,6 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		return parentScope;
 	}
 
-	protected JvmIdentifiableElement getLogicalContainer(EObject context) {
-		if (context == null)
-			return null;
-		JvmIdentifiableElement associatedContainer = expressionContext.getLogicalContainer(context);
-		if (associatedContainer != null)
-			return associatedContainer;
-		return getLogicalContainer(context.eContainer());
-	}
-	
 	protected boolean isTypeScope(EReference reference) {
 		return TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(reference.getEReferenceType());
 	}
@@ -379,7 +370,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 
 	protected LocalVariableScopeContext createLocalVariableScopeContext(final EObject context, EReference reference,
 			boolean includeCurrentBlock, int idx) {
-		return new LocalVariableScopeContext(context, reference, includeCurrentBlock, idx, false, expressionContext);
+		return new LocalVariableScopeContext(context, reference, includeCurrentBlock, idx, false, logicalContainerProvider);
 	}
 
 	/**
@@ -465,7 +456,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			return (JvmDeclaredType) obj;
 		}
 		if (obj instanceof XExpression) {
-			JvmIdentifiableElement element = expressionContext.getLogicalContainer(obj);
+			JvmIdentifiableElement element = logicalContainerProvider.getLogicalContainer(obj);
 			if (element != null) {
 				if (element instanceof JvmDeclaredType) {
 					return (JvmDeclaredType) element;
@@ -578,7 +569,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 
 	protected boolean adaptsToJvmElement(EObject context) {
 		if (context instanceof XExpression) {
-			return expressionContext.getLogicalContainer(context) != null;
+			return logicalContainerProvider.getLogicalContainer(context) != null;
 		}
 		return false;
 	}
