@@ -91,10 +91,8 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''', '''
 			package foo;
 
-			import java.util.NoSuchElementException;
-
 			@SuppressWarnings("all")
-			public class NoSuchElementException extends NoSuchElementException {
+			public class NoSuchElementException extends java.util.NoSuchElementException {
 			}
 		''')
 	}
