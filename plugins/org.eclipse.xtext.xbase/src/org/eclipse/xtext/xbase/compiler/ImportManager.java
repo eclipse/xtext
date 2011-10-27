@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.xtext.common.types.JvmArrayType;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -32,15 +34,19 @@ public class ImportManager {
 
 	private boolean organizeImports;
 
-	private String seedSimpleName;
+	private String thisTypeSimpleName;
+	private String thisTypeQualifiedName;
 	
 	public ImportManager(boolean organizeImports) {
 		this(organizeImports, null);
 	}
 	
-	public ImportManager(boolean organizeImports, String seedSimpleName) {
+	public ImportManager(boolean organizeImports, JvmDeclaredType thisType) {
 		this.organizeImports = organizeImports;
-		this.seedSimpleName = seedSimpleName;
+		if(thisType != null) {
+			thisTypeSimpleName = thisType.getSimpleName();
+			thisTypeQualifiedName = thisType.getQualifiedName('.');
+		}
 	}
 	
 	public CharSequence serialize(JvmType type) {
@@ -58,25 +64,38 @@ public class ImportManager {
 			appendType(((JvmArrayType) type).getComponentType(), builder);
 			builder.append("[]");
 		} else {
-			final String qn = type.getQualifiedName('.');
+			final String qualifiedName = type.getQualifiedName('.');
 			final String simpleName = type.getSimpleName();
-			if (JAVA_LANG_PACK.matcher(qn).matches() || equal(qn,simpleName)) {
+			if (allowsSimpleName(qualifiedName, simpleName)) {
 				builder.append(simpleName);
-			} else if (!organizeImports || simpleName.equals(seedSimpleName)) {
-				builder.append(qn);
+			} else if (needsQualifiedName(qualifiedName, simpleName)) {
+				builder.append(qualifiedName);
 			} else {
 				if (imports.containsKey(simpleName)) {
-					if (qn.equals(imports.get(simpleName))) {
+					if (qualifiedName.equals(imports.get(simpleName))) {
 						builder.append(simpleName);
 					} else {
-						builder.append(qn);
+						builder.append(qualifiedName);
 					}
 				} else {
-					imports.put(simpleName, qn);
+					imports.put(simpleName, qualifiedName);
 					builder.append(simpleName);
 				}
 			}
 		}
+	}
+	
+	protected boolean allowsSimpleName(String qualifiedName, String simpleName) {
+		return equal(qualifiedName, thisTypeQualifiedName) 
+				|| JAVA_LANG_PACK.matcher(qualifiedName).matches() 
+				|| equal(qualifiedName, simpleName);
+	}
+	
+	protected boolean needsQualifiedName(String qualifiedName, String simpleName) {
+		return !organizeImports 
+				|| (equal(simpleName, thisTypeSimpleName) 
+						&& !equal(qualifiedName, thisTypeQualifiedName))
+				|| CodeGenUtil.isJavaLangType(simpleName);
 	}
 
 	public List<String> getImports() {
