@@ -68,7 +68,7 @@ You should also have a look into the <em>xtend-gen</em> folder which contains th
 </p>
 <p>
 <div class="image" >
-<img src="../../images/Xtend_and_Java.png" 
+<img src="images/xtend/Xtend_and_Java.png" 
 />
 <div class="caption">
 Xtend and Java Vis-a-Vis
@@ -179,7 +179,7 @@ allows to use its methods for example like this :
 </div>
 </p>
 <p>
-Although this is supported it is generally much nicer to use <a href="02-Xtend_Classes_Functions.html#fields" title="Go to &quot;Fields&quot;">injected extensions</a>, because
+Although this is supported it is generally much nicer to use <a href="01-Xtend_Introduction.html#fields" title="Go to &quot;Fields&quot;">injected extensions</a>, because
 they don&apos;t bind you to the actual implementation.
 </p>
 <a name="Xtend_ClassDeclaration"></a>
@@ -339,7 +339,7 @@ myPerson.fullName<br/>
 </p>
 <p>
 The nice thing with using dependency injection in combination with the extension modifier as opposed 
-to <a href="02-Xtend_Classes_Functions.html#imports" title="Go to &quot;Imports&quot;">static extensions</a> is, that in case there is a bug in the extension or it is implemented 
+to <a href="01-Xtend_Introduction.html#imports" title="Go to &quot;Imports&quot;">static extensions</a> is, that in case there is a bug in the extension or it is implemented 
 inefficiently or you just need a different strategy, you can simply exchange the component with another 
 implementation. You do this without modifying the library nor the client code. 
 You&apos;ll only have to change the binding in your guice module. Also this gives you a general hook for any 
@@ -350,7 +350,7 @@ can be provided by a third party.
 <h3>Functions</h3>
 <p>
 Xtend functions are declared within a class and are translated to a corresponding Java method with the exact same signature. 
-(The only exceptions are dispatch methods, which are explained <a href="02-Xtend_Classes_Functions.html#polymorphicDispatch" title="Go to &quot;Dispatch Functions&quot;">here</a>). 
+(The only exceptions are dispatch methods, which are explained <a href="01-Xtend_Introduction.html#polymorphicDispatch" title="Go to &quot;Dispatch Functions&quot;">here</a>). 
 </p>
 <p>
 Let&apos;s start with a simple example
@@ -746,7 +746,7 @@ object and a second one to initialize it.
 </div>
 </p>
 <p>
-If you do not specify the name of the result variable it is assumed to be the <a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_ImplicitThis" title="Go to &quot;Implicit variables 'this' and 'it'&quot;">implicit receiver variable</a> 
+If you do not specify the name of the result variable it is assumed to be the <a href="199-xtext-and-java.html#Xbase_Expressions_ImplicitThis" title="Go to &quot;Implicit variables 'this' and 'it'&quot;">implicit receiver variable</a> 
 <span class="inlinecode">it</span>, which can be skipped in feature calls inside the body. Furthermore, you can define the return type of a create function:
 </p>
 <p>
@@ -809,7 +809,7 @@ Example:
 <h2>Expressions</h2>
 <p>
 The most important part of a function is of course its implementation, which in Xtend is either a single
-<a href="03-Xtend_Expressions.html#Xtend_Expressions_Blocks" title="Go to &quot;Blocks&quot;">block expression</a> or a <a href="03-Xtend_Expressions.html#Xtend_RichStrings" title="Go to &quot;Rich Strings&quot;">rich string expression</a>. 
+<a href="01-Xtend_Introduction.html#Xtend_Expressions_Blocks" title="Go to &quot;Blocks&quot;">block expression</a> or a <a href="01-Xtend_Introduction.html#Xtend_RichStrings" title="Go to &quot;Rich Strings&quot;">rich string expression</a>. 
 </p>
 <a name="Xtend_Expressions_Literals"></a>
 <h3>Literals</h3>
@@ -1213,7 +1213,7 @@ in short circuit mode, which means that the right hand operand might not be eval
 <a name="Xtend_Expressions_PropertyAssignment"></a>
 <h4>Assignments</h4>
 <p>
-<a href="03-Xtend_Expressions.html#Xtend_Expressions_VariableDeclaration" title="Go to &quot;Variable Declarations&quot;">Local variables</a> can be reassigned using the <span class="inlinecode">=</span> operator. Also properties can be set using 
+<a href="01-Xtend_Introduction.html#Xtend_Expressions_VariableDeclaration" title="Go to &quot;Variable Declarations&quot;">Local variables</a> can be reassigned using the <span class="inlinecode">=</span> operator. Also properties can be set using 
 that operator:
 Given the expression 
 </p>
@@ -1282,7 +1282,7 @@ FeatureCall&nbsp;:<br/>
 <h4>Property Access</h4>
 <p>
 Feature calls are directly translated to their Java equivalent with the exception, that for calls to properties an equivalent rule as 
-described in <a href="03-Xtend_Expressions.html#Xtend_Expressions_PropertyAssignment" title="Go to &quot;Assignments&quot;" >section Xtend_Expressions_PropertyAssignment</a> applies. 
+described in <a href="01-Xtend_Introduction.html#Xtend_Expressions_PropertyAssignment" title="Go to &quot;Assignments&quot;" >section Xtend_Expressions_PropertyAssignment</a> applies. 
 That is, for the following expression
 </p>
 <p>
@@ -1459,7 +1459,7 @@ But in all other cases the square brackets are mandatory:
 <a name="Xtend_Expressions_ClosuresTypeInference"></a>
 <h4>Typing</h4>
 <p>
-Closures are expressions which produce function objects. The type is a <a href="199g-xbase-language-reference-types.html#Xbase_Types_FunctionTypes" title="Go to &quot;Function Types&quot;">function type</a>, consisting of the types of the 
+Closures are expressions which produce function objects. The type is a <a href="199-xtext-and-java.html#Xbase_Types_FunctionTypes" title="Go to &quot;Function Types&quot;">function type</a>, consisting of the types of the 
 parameters as well as the return type. The return type is never specified explicitly but is always inferred from the expression. 
 The parameter types can be inferred if the closure is used in a context where this is possible.
 </p>
@@ -1606,7 +1606,7 @@ is the a short hand for
 <h4>Typing</h4>
 <p>
 The type of an if expression is calculated by the return types <span class="inlinecode">T1</span> and <span class="inlinecode">T2</span> of the two expression <span class="inlinecode">e1</span> and <span class="inlinecode">e2</span>.
-It uses the rules defined in <a href="199g-xbase-language-reference-types.html#Xbase_Types_CommonSuperType" title="Go to &quot;Common Super Type&quot;" >section Xbase_Types_CommonSuperType</a>.
+It uses the rules defined in <a href="199-xtext-and-java.html#Xbase_Types_CommonSuperType" title="Go to &quot;Common Super Type&quot;" >section Xbase_Types_CommonSuperType</a>.
 </p>
 <a name="Xtend_Expressions_IfExpression_4"></a>
 <h4>Examples</h4>
@@ -1646,7 +1646,7 @@ For a switch expression
 </p>
 <p>
 the main expression <span class="inlinecode">e</span> is evaluated first and then each case sequentially. If the switch expression
-contains a variable declaration using the syntax known from <a href="03-Xtend_Expressions.html#Xtend_Expressions_ForLoop" title="Go to &quot;For Loop&quot;" >section Xtend_Expressions_ForLoop</a>, the value is bound to the given name.
+contains a variable declaration using the syntax known from <a href="01-Xtend_Introduction.html#Xtend_Expressions_ForLoop" title="Go to &quot;For Loop&quot;" >section Xtend_Expressions_ForLoop</a>, the value is bound to the given name.
 Expressions of type <span class="inlinecode">java.lang.Boolean</span> or <span class="inlinecode">boolean</span> are not allowed in a switch expression.
 </p>
 <p>
@@ -1676,7 +1676,7 @@ Example:
 <a name="Xtend_Expressions_SwitchExpression_7"></a>
 <h4>Type guards</h4>
 <p>
-In addition to the case guards one can add a so called <em>Type Guard</em> which is syntactically just a <a href="199g-xbase-language-reference-types.html#Xbase_Types_TypeReferences" title="Go to &quot;Simple Type References&quot;">type reference</a> preceding
+In addition to the case guards one can add a so called <em>Type Guard</em> which is syntactically just a <a href="199-xtext-and-java.html#Xbase_Types_TypeReferences" title="Go to &quot;Simple Type References&quot;">type reference</a> preceding
 the than optional case keyword. The compiler will use that type for the switch expression in subsequent expressions.
 Example:
 <div class="literallayout">
@@ -1701,7 +1701,7 @@ the type guard acts like a cast, that is all references to the switch value will
 <a name="Xtend_Expressions_SwitchExpression_8"></a>
 <h4>Typing</h4>
 <p>
-The return type of a switch expression is computed using the rules defined in <a href="199g-xbase-language-reference-types.html#Xbase_Types_CommonSuperType" title="Go to &quot;Common Super Type&quot;" >section Xbase_Types_CommonSuperType</a>. The set of types from which the common super type is 
+The return type of a switch expression is computed using the rules defined in <a href="199-xtext-and-java.html#Xbase_Types_CommonSuperType" title="Go to &quot;Common Super Type&quot;" >section Xbase_Types_CommonSuperType</a>. The set of types from which the common super type is 
 computed corresponds to the types of each case&apos;s result expression. In case a switch expression&apos;s type is
 computed using the expected type from the context, it is sufficient to return the expected type if all case branches types conform to the expected type.
 </p>
@@ -1763,7 +1763,7 @@ XCasePart:<br/>
 <a name="Xtend_Expressions_VariableDeclaration"></a>
 <h3>Variable Declarations</h3>
 <p>
-Variable declarations are only allowed within <a href="03-Xtend_Expressions.html#Xtend_Expressions_Blocks" title="Go to &quot;Blocks&quot;">blocks</a>. They are visible in any subsequent expressions in
+Variable declarations are only allowed within <a href="01-Xtend_Introduction.html#Xtend_Expressions_Blocks" title="Go to &quot;Blocks&quot;">blocks</a>. They are visible in any subsequent expressions in
 the block. Although overriding or shadowing variables from outer scopes is allowed, it is usually only
 used to overload the variable name &apos;this&apos;, in order to subsequently access an object&apos;s features in an
 unqualified manner.
@@ -1819,7 +1819,7 @@ Here is an example for an explicitly declared type:
 </div>
 </div>
 
-In such cases, the right hand expression&apos;s type must <a href="199g-xbase-language-reference-types.html#Xbase_Types_ConformanceRules" title="Go to &quot;Conformance and Conversion&quot;">conform</a> to the type on the left hand side. 
+In such cases, the right hand expression&apos;s type must <a href="199-xtext-and-java.html#Xbase_Types_ConformanceRules" title="Go to &quot;Conformance and Conversion&quot;">conform</a> to the type on the left hand side. 
 </p>
 <p>
 Alternatively the type can be left out and will be inferred from the initialization expression:  
@@ -1837,7 +1837,7 @@ Alternatively the type can be left out and will be inferred from the initializat
 <p>
 The block expression allows to have imperative code sequences. It consists of a sequence of expressions, and returns the value of the last expression.
 The return type of a block is also the type of the last expression. Empty blocks return <span class="inlinecode">null</span>. 
-<a href="03-Xtend_Expressions.html#Xtend_Expressions_VariableDeclaration" title="Go to &quot;Variable Declarations&quot;">Variable declarations</a> are only allowed within blocks and cannot be used as a block&apos;s last expression.
+<a href="01-Xtend_Introduction.html#Xtend_Expressions_VariableDeclaration" title="Go to &quot;Variable Declarations&quot;">Variable declarations</a> are only allowed within blocks and cannot be used as a block&apos;s last expression.
 </p>
 <p>
 A block expression is surrounded by curly braces and contains at least one expression.
@@ -1991,7 +1991,7 @@ XWhileExpression:<br/>
 <h3>Do-While Loop</h3>
 <p>
 A do-while loop <span class="inlinecode"><span class="keyword">do</span>&nbsp;expression&nbsp;<span class="keyword">while</span>&nbsp;(predicate)</span> is used to execute a certain expression unless the predicate is evaluated to <span class="inlinecode">false</span>.
-The difference to the <a href="03-Xtend_Expressions.html#Xtend_Expressions_WhileExpression" title="Go to &quot;While Loop&quot;">while loop</a> is that the execution starts by executing the block once before evaluating the predicate for the first time.
+The difference to the <a href="01-Xtend_Introduction.html#Xtend_Expressions_WhileExpression" title="Go to &quot;While Loop&quot;">while loop</a> is that the execution starts by executing the block once before evaluating the predicate for the first time.
 The return type of a do-while loop is <span class="inlinecode"><span class="keyword">void</span></span>.
 </p>
 <a name="Xtend_Expressions_DoWhileExpression_2"></a>
@@ -2124,7 +2124,7 @@ toClass(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;</span><span class=
 <p>
 If you are familiar with Xpand, you&apos;ll notice that it is exactly the same syntax. The difference is, that
 the template syntax is actually an expression, which means it can occur everywhere where an expression is
-expected. For instance in conjunction the powerful <a href="03-Xtend_Expressions.html#Xtend_Expressions_SwitchExpression" title="Go to &quot;Switch Expression&quot;">switch expression</a>:
+expected. For instance in conjunction the powerful <a href="01-Xtend_Introduction.html#Xtend_Expressions_SwitchExpression" title="Go to &quot;Switch Expression&quot;">switch expression</a>:
 </p>
 <p>
 <div class="literallayout">

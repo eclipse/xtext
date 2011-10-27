@@ -12,7 +12,7 @@
 <h1>Runtime Concepts</h1>
 <p>
 Xtext itself and every language infrastructure developed with Xtext is configured and wired-up using 
-<a href="040-dependency-injection.html" title="Go to &quot;Dependency Injection in Xtext with Google Guice&quot;">dependency injection</a>. Xtext may be used in different environments which introduce 
+<a href="030-generator.html#dependencyInjection" title="Go to &quot;Dependency Injection in Xtext with Google Guice&quot;">dependency injection</a>. Xtext may be used in different environments which introduce 
 different constraints. Especially important is the difference between OSGi managed containers and plain 
 vanilla Java programs. To honor these differences Xtext uses the concept of 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ISetup.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ISetup" >ISetup</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/ISetup.java" title="View Source Code" >(src)</a>-implementations in normal mode and uses Eclipse&apos;s 
@@ -41,7 +41,7 @@ of your language.
 <h2>Setup within Eclipse-Equinox (OSGi)</h2>
 <p>
 Within Eclipse we have a generated <em>Activator</em>, which creates a Guice <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Injector.html" title="View JavaDoc"><abbr title="com.google.inject.Injector" >Injector</abbr></a>
-using the <a href="040-dependency-injection.html#guicemodules" title="Go to &quot;The Module API&quot;">modules</a>. In addition an <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/runtime/IExecutableExtensionFactory.html" title="View JavaDoc"><abbr title="org.eclipse.core.runtime.IExecutableExtensionFactory" >IExecutableExtensionFactory</abbr></a> 
+using the <a href="030-generator.html#guicemodules" title="Go to &quot;The Module API&quot;">modules</a>. In addition an <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/runtime/IExecutableExtensionFactory.html" title="View JavaDoc"><abbr title="org.eclipse.core.runtime.IExecutableExtensionFactory" >IExecutableExtensionFactory</abbr></a> 
 is generated for each language, which is used to create <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/runtime/IExecutableExtension.html" title="View JavaDoc"><abbr title="org.eclipse.core.runtime.IExecutableExtension" >IExecutableExtensions</abbr></a>.
 This means that everything which is created via extension points is managed by Guice as well, i.e. you can 
 declare dependencies and get them injected upon creation. 
@@ -117,7 +117,7 @@ Any syntax errors can be retrieved from the Resource using the common EMF API:
 <h4>Linker: Crosslink Validation</h4>
 <p>
 Any broken crosslinks can be checked generically. As crosslink resolution is done lazily 
-(see <a href="070-linking.html" title="Go to &quot;Linking&quot;">linking</a>), any broken links are resolved lazily as well. If you want to validate whether 
+(see <a href="050-heading-runtime.html#linking" title="Go to &quot;Linking&quot;">linking</a>), any broken links are resolved lazily as well. If you want to validate whether 
 all links are valid, you will have to navigate through the model so that all installed EMF proxies 
 get resolved. This is done automatically in the editor.
 </p>
@@ -163,13 +163,13 @@ This implies several constraints:
 	<li>
 		Features: In case the <em>MyRule</em> and <em>MySubRule</em> have <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EStructuralFeature.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EStructuralFeature" >EStructuralFeatures</abbr></a> 
 				besides <em>strVal</em> and <em>intVal</em>, only <em>strVal</em> and <em>intVal</em> may have 
-				<a href="100-serialization.html#transientvalues" title="Go to &quot;Transient Values&quot;">non-transient values</a>.
+				<a href="050-heading-runtime.html#transientvalues" title="Go to &quot;Transient Values&quot;">non-transient values</a>.
 	</li>
 	<li>
 		Quantities: The following condition must be true: <span class="inlinecode">strVal.size()&nbsp;==&nbsp;intVal.size()</span>.
 	</li>
 	<li>
-		Values: It must be possible to <a href="090-valueconverter.html" title="Go to &quot;Value Converter&quot;">convert all values</a> to valid tokens for 
+		Values: It must be possible to <a href="050-heading-runtime.html#valueconverter" title="Go to &quot;Value Converter&quot;">convert all values</a> to valid tokens for 
 				terminal rule <em>STRING</em>.  The same is true for <em>intVal</em> and <em>INT</em>.
 	</li>
 </ol>
@@ -179,7 +179,7 @@ The typical use case for the concrete syntax validator is validation in non-Xtex
 however, use an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/XtextResource.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.XtextResource" >XtextResource</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java" title="View Source Code" >(src)</a>. This is, for example, the case 
 when combining GMF and Xtext. Another use case is when the semantic model is modified "manually" 
 (not by the parser) and then serialized again. Since it is very difficult for the serializer to provide 
-<a href="100-serialization.html#parsetreeconstructor" title="Go to &quot;Parse Tree Constructor&quot;">meaningful error messages</a>, the concrete syntax validator is executed by default
+<a href="050-heading-runtime.html#parsetreeconstructor" title="Go to &quot;Parse Tree Constructor&quot;">meaningful error messages</a>, the concrete syntax validator is executed by default
 before serialization. A textual Xtext editor itself is <em>not</em> a valid use case. Here, the parser ensures 
 that all syntactical constraints are met. Therefore, there is no value in additionally running the 
 concrete syntax validator.  
@@ -297,7 +297,7 @@ All in all this is very similar to how JUnit 4 works. Here is an example:
 </p>
 <p>
 You can also implement quick fixes for individual validation errors and warnings. See the 
-<a href="155-quickfix.html" title="Go to &quot;Quick Fixes&quot;">chapter on quick fixes</a> for details.
+<a href="120-heading-UI.html#quickfixes" title="Go to &quot;Quick Fixes&quot;">chapter on quick fixes</a> for details.
 </p>
 <a name="validation_4"></a>
 <h3>Validating Manually</h3>
@@ -481,7 +481,7 @@ The following things are needed for the linking:
 		declaration of a crosslink in the grammar (at least in the Ecore model)
 	</li>
 	<li>
-		specification of linking semantics (usually provided via the <a href="080-scoping.html" title="Go to &quot;Scoping&quot;">scoping API</a>)
+		specification of linking semantics (usually provided via the <a href="050-heading-runtime.html#scoping" title="Go to &quot;Scoping&quot;">scoping API</a>)
 	</li>
 </ol>
 </p>
@@ -520,7 +520,7 @@ The <a href="020-grammar-language.html#metamodelInference" title="Go to &quot;Ec
 <em>ReferringType</em> with an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EReference" >EReference</abbr></a> <em>referencedObject</em> of type <em>Entity</em>
 with its containment property set to <span class="inlinecode"><span class="keyword">false</span></span>. The referenced object would be identified 
 either by a <em>STRING</em> and the surrounding
-information in the current context (see <a href="080-scoping.html" title="Go to &quot;Scoping&quot;">scoping</a>). If you do not use <span class="inlinecode"><span class="keyword">generate</span></span> but <span class="inlinecode"><span class="keyword">import</span></span> 
+information in the current context (see <a href="050-heading-runtime.html#scoping" title="Go to &quot;Scoping&quot;">scoping</a>). If you do not use <span class="inlinecode"><span class="keyword">generate</span></span> but <span class="inlinecode"><span class="keyword">import</span></span> 
 an existing Ecore model, the class <em>ReferringType</em> (or one of its super types) would need to have an 
 <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EReference" >EReference</abbr></a> of type <em>Entity</em> (or one of its super types) declared. Also the 
 <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EReference" >EReference&apos;s</abbr></a> containment and container properties needs to be set to <span class="inlinecode"><span class="keyword">false</span></span>. 
@@ -556,12 +556,12 @@ uses the first part to obtain (i.e. load if it is not already loaded) the resour
 return the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a> based on the fragment in the URI. The actual cross-reference resolution 
 is done by <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/linking/lazy/LazyLinkingResource.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.linking.lazy.LazyLinkingResource" >LazyLinkingResource.getEObject(String)</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/lazy/LazyLinkingResource.java" title="View Source Code" >(src)</a> which receives the 
 fragment and delegates to the implementation of the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/linking/ILinkingService.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.linking.ILinkingService" >ILinkingService</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/ILinkingService.java" title="View Source Code" >(src)</a>. The default 
-implementation in turn delegates to the <a href="080-scoping.html" title="Go to &quot;Scoping&quot;">scoping API</a>.
+implementation in turn delegates to the <a href="050-heading-runtime.html#scoping" title="Go to &quot;Scoping&quot;">scoping API</a>.
 </p>
 <p>
 A <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/linking/impl/DefaultLinkingService.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.linking.impl.DefaultLinkingService" >simple implementation</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/impl/DefaultLinkingService.java" title="View Source Code" >(src)</a> of the linking service is shipped with Xtext 
 and used for any grammar per default. Usually any necessary customization of the linking behavior 
-can best be described using the <a href="080-scoping.html" title="Go to &quot;Scoping&quot;">scoping API</a>.
+can best be described using the <a href="050-heading-runtime.html#scoping" title="Go to &quot;Scoping&quot;">scoping API</a>.
 </p>
 <a name="scoping"></a>
 <h2>Scoping</h2>
@@ -825,11 +825,11 @@ Import&nbsp;:&nbsp;<br/>
 This effectively allows import statements to be declared before the events section. In addition 
 you will have to make sure that you have bound the 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/impl/ImportUriGlobalScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider" >ImportUriGlobalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportUriGlobalScopeProvider.java" title="View Source Code" >(src)</a> for the type 
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IGlobalScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IGlobalScopeProvider" >IGlobalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java" title="View Source Code" >(src)</a> by the means of <a href="040-dependency-injection.html" title="Go to &quot;Dependency Injection in Xtext with Google Guice&quot;">Guice</a>. 
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IGlobalScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IGlobalScopeProvider" >IGlobalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java" title="View Source Code" >(src)</a> by the means of <a href="030-generator.html#dependencyInjection" title="Go to &quot;Dependency Injection in Xtext with Google Guice&quot;">Guice</a>. 
 That implementation looks up any <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EAttribute" >EAttributes</abbr></a> named &apos;importURI&apos; in your
 model and interprets their values as URIs that point to imported resources. That is it adds the corresponding 
 resources to the current resource&apos;s resource set. In addition the scope provider uses the 
-<a href="080-scoping.html#resourcedescriptions" title="Go to &quot;Resource and EObject Descriptions&quot;"><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.Manager.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceDescription.Manager" >IResourceDescription.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a></a> of that 
+<a href="050-heading-runtime.html#resourcedescriptions" title="Go to &quot;Resource and EObject Descriptions&quot;"><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.Manager.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceDescription.Manager" >IResourceDescription.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a></a> of that 
 imported resource to compute all the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescriptions</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a> returned 
 by the <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/runtime/preferences/IScope.html" title="View JavaDoc"><abbr title="org.eclipse.core.runtime.preferences.IScope" >IScope</abbr></a>.  
 </p>
@@ -865,7 +865,7 @@ configuration needs to read that configuration in and be able to find all candid
 structure reflecting the actual qualified names of the referenceable <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObjects</abbr></a>, 
 you&apos;ll have to load all resources up front and either keep holding them in memory or remembering all information 
 which is needed for the resolution of cross-references. In Xtext that information is provided by a so called 
-<a href="080-scoping.html#resourcedescriptions" title="Go to &quot;Resource and EObject Descriptions&quot;"><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a></a>. 
+<a href="050-heading-runtime.html#resourcedescriptions" title="Go to &quot;Resource and EObject Descriptions&quot;"><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a></a>. 
 </p>
 <a name="containers"></a>
 <h5>About the Index, Containers and Their Manager</h5>
@@ -1329,7 +1329,7 @@ for details.
 <p>
 Value converters are registered to convert the parsed text into a data type instance and vice versa.
 The primary hook is the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/conversion/IValueConverterService.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.conversion.IValueConverterService" >IValueConverterService</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java" title="View Source Code" >(src)</a> 
-and the concrete implementation can be registered via the runtime <a href="040-dependency-injection.html#guicemodules" title="Go to &quot;The Module API&quot;">Guice module</a>.
+and the concrete implementation can be registered via the runtime <a href="030-generator.html#guicemodules" title="Go to &quot;The Module API&quot;">Guice module</a>.
 Simply override the corresponding binding in your runtime module like shown in this example:
 </p>
 <p>
@@ -1401,26 +1401,26 @@ In Xtext, the process of serialization is split into the following steps:
 <ol>
 	<li>
 		Validating the semantic model. This is optional, enabled by default, done by the 
-				 <a href="060-validation.html#concrete_syntax_validation" title="Go to &quot;Serializer: Concrete Syntax Validation&quot;">concrete syntax validator</a> and can be turned off in 
-				 the <a href="100-serialization.html#saveoptions" title="Go to &quot;Options&quot;">save options</a>.
+				 <a href="050-heading-runtime.html#concrete_syntax_validation" title="Go to &quot;Serializer: Concrete Syntax Validation&quot;">concrete syntax validator</a> and can be turned off in 
+				 the <a href="050-heading-runtime.html#saveoptions" title="Go to &quot;Options&quot;">save options</a>.
 	</li>
 	<li>
 		Matching the model elements with the grammar rules and creating a stream of tokens. 
-				 This is done by the <a href="100-serialization.html#parsetreeconstructor" title="Go to &quot;Parse Tree Constructor&quot;">parse tree constructor</a>.
+				 This is done by the <a href="050-heading-runtime.html#parsetreeconstructor" title="Go to &quot;Parse Tree Constructor&quot;">parse tree constructor</a>.
 	</li>
 	<li>
 		Associating comments with semantic objects. This is done by the
-				 <a href="100-serialization.html#commentassociater" title="Go to &quot;Preserving Comments from the Node Model&quot;">comment associator</a>.
+				 <a href="050-heading-runtime.html#commentassociater" title="Go to &quot;Preserving Comments from the Node Model&quot;">comment associator</a>.
 	</li>
 	<li>
 		Associating existing nodes from the node model with tokens from the token stream.
 	</li>
 	<li>
-		<a href="100-serialization.html#hiddentokenmerger" title="Go to &quot;Merge White Space&quot;">Merging existing white space</a> and line-wraps into the token stream.
+		<a href="050-heading-runtime.html#hiddentokenmerger" title="Go to &quot;Merge White Space&quot;">Merging existing white space</a> and line-wraps into the token stream.
 	</li>
 	<li>
 		Adding further needed white space or replacing all white space using a 
-				<a href="105-formatting.html" title="Go to &quot;Formatting (Pretty Printing)&quot;">formatter</a>.
+				<a href="050-heading-runtime.html#formatting" title="Go to &quot;Formatting (Pretty Printing)&quot;">formatter</a>.
 	</li>
 </ol>
 </p>
@@ -1428,7 +1428,7 @@ In Xtext, the process of serialization is split into the following steps:
 Serialization is invoked when calling 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/XtextResource.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.XtextResource" >XtextResource.save(..)</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java" title="View Source Code" >(src)</a>. Furthermore, the
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parsetree/reconstr/Serializer.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.parsetree.reconstr.Serializer" >Serializer</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/Serializer.java" title="View Source Code" >(src)</a> provides resource-independent 
-support for serialization. Another situation that triggers serialization is applying <a href="155-quickfix.html" title="Go to &quot;Quick Fixes&quot;">Quick Fixes</a> 
+support for serialization. Another situation that triggers serialization is applying <a href="120-heading-UI.html#quickfixes" title="Go to &quot;Quick Fixes&quot;">Quick Fixes</a> 
 with semantic modifications. Serialization is <em>not</em> called when a textual editors contents is saved to disk.
 </p>
 <a name="serializationcontract"></a>
@@ -1465,10 +1465,10 @@ A serialized document represents the state of the semantic model. However, if th
 available (i.e. the semantic model has been created by the parser), the serializer
 <ul>
 	<li>
-		preserves <a href="100-serialization.html#hiddentokenmerger" title="Go to &quot;Merge White Space&quot;">existing white spaces</a> from the node model.
+		preserves <a href="050-heading-runtime.html#hiddentokenmerger" title="Go to &quot;Merge White Space&quot;">existing white spaces</a> from the node model.
 	</li>
 	<li>
-		preserves <a href="100-serialization.html#commentassociater" title="Go to &quot;Preserving Comments from the Node Model&quot;">existing comments</a> from the node model.
+		preserves <a href="050-heading-runtime.html#commentassociater" title="Go to &quot;Preserving Comments from the Node Model&quot;">existing comments</a> from the node model.
 	</li>
 	<li>
 		preserves the representation of cross-references: If a cross-referenced object can be 
@@ -1478,7 +1478,7 @@ available (i.e. the semantic model has been created by the parser), the serializ
 	</li>
 	<li>
 		preserves the representation of values: For values handled by the 
-				<a href="090-valueconverter.html" title="Go to &quot;Value Converter&quot;">value converter</a>, the serializer checks whether the textual representation 
+				<a href="050-heading-runtime.html#valueconverter" title="Go to &quot;Value Converter&quot;">value converter</a>, the serializer checks whether the textual representation 
 				converted to a value equals the value from the semantic model. If that is true, the textual 
 				representation is kept.
 	</li>
@@ -1488,7 +1488,7 @@ available (i.e. the semantic model has been created by the parser), the serializ
 <h3>Parse Tree Constructor</h3>
 <p>
 The parse tree constructor usually does not need to be customized since it is automatically derived 
-from the <a href="020-grammar-language.html" title="Go to &quot;The Grammar Language&quot;">Xtext Grammar</a>. However, it can be helpful to look into it to understand 
+from the <a href="020-grammar-language.html#grammarLanguage" title="Go to &quot;The Grammar Language&quot;">Xtext Grammar</a>. However, it can be helpful to look into it to understand 
 its error messages and its runtime performance.
 </p>
 <p>
@@ -1496,7 +1496,7 @@ For serialization to succeed, the parse tree constructor must be able to <em>con
 element of the to-be-serialized EMF model. To <em>consume</em> means, in this context, to write the element to 
 the textual representation of the model. This can turn out to be a not-so-easy-to-fulfill requirement, 
 since a grammar usually introduces implicit constraints to the EMF model as explained for the 
-<a href="060-validation.html#concrete_syntax_validation" title="Go to &quot;Serializer: Concrete Syntax Validation&quot;">concrete syntax validator</a>.
+<a href="050-heading-runtime.html#concrete_syntax_validation" title="Go to &quot;Serializer: Concrete Syntax Validation&quot;">concrete syntax validator</a>.
 </p>
 <p>
 If a model can not be serialized, an 
@@ -1515,7 +1515,7 @@ Possible reasons are listed below:
 				The grammar needs an assignment which would consume the model element.
 			</li>
 			<li>
-				The <a href="100-serialization.html#transientvalues" title="Go to &quot;Transient Values&quot;">transient value service</a> can be used to indicate that this model 
+				The <a href="050-heading-runtime.html#transientvalues" title="Go to &quot;Transient Values&quot;">transient value service</a> can be used to indicate that this model 
 							element should not be consumed.
 			</li>
 		</ul>
@@ -1543,7 +1543,7 @@ Possible reasons are listed below:
 				Subtypes are not allowed.
 	</li>
 	<li>
-		<a href="090-valueconverter.html" title="Go to &quot;Value Converter&quot;">Value conversion</a> fails. The value converter can indicate that a value 
+		<a href="050-heading-runtime.html#valueconverter" title="Go to &quot;Value Converter&quot;">Value conversion</a> fails. The value converter can indicate that a value 
 				is not serializeable by throwing a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/conversion/ValueConverterException.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.conversion.ValueConverterException" >ValueConverterException</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/ValueConverterException.java" title="View Source Code" >(src)</a>.
 	</li>
 	<li>
@@ -1585,14 +1585,14 @@ taken. This behavior has two consequences:
 Available options are:
 <ul>
 	<li>
-		<em>Formatting</em>. Default: <span class="inlinecode"><span class="keyword">false</span></span>. If enabled, it is the <a href="105-formatting.html" title="Go to &quot;Formatting (Pretty Printing)&quot;">formatters</a> job to determine
+		<em>Formatting</em>. Default: <span class="inlinecode"><span class="keyword">false</span></span>. If enabled, it is the <a href="050-heading-runtime.html#formatting" title="Go to &quot;Formatting (Pretty Printing)&quot;">formatters</a> job to determine
 		 		all white space information during serialization. If disabled, the formatter only defines white
 		 		space 
 		 		information for the places in which no white space information can be preserved from the node model. 
 		 		E.g. When new model elements are inserted or there is no node model.
 	</li>
 	<li>
-		<em>Validating</em>. Default: <span class="inlinecode"><span class="keyword">true</span></span>: Run the <a href="060-validation.html#concrete_syntax_validation" title="Go to &quot;Serializer: Concrete Syntax Validation&quot;">concrete syntax validator</a> 
+		<em>Validating</em>. Default: <span class="inlinecode"><span class="keyword">true</span></span>: Run the <a href="050-heading-runtime.html#concrete_syntax_validation" title="Go to &quot;Serializer: Concrete Syntax Validation&quot;">concrete syntax validator</a> 
 				before serializing the model.
 	</li>
 </ul>
@@ -1657,7 +1657,7 @@ PluralRule:<br/>
 <p>
 Valid models for this example are <em>contents 1 item</em> or <em>contents 5 items</em>. However, it is not stored 
 in the semantic model whether the keyword <em>item</em> or <em>items</em> has been parsed. This is due to the fact 
-that the rule call <em>Plural</em> is unassigned. However, the <a href="100-serialization.html#parsetreeconstructor" title="Go to &quot;Parse Tree Constructor&quot;">parse tree constructor</a> 
+that the rule call <em>Plural</em> is unassigned. However, the <a href="050-heading-runtime.html#parsetreeconstructor" title="Go to &quot;Parse Tree Constructor&quot;">parse tree constructor</a> 
 needs to decide which value to write during serialization. This decision can be be made by customizing 
 the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parsetree/reconstr/ITokenSerializer.IValueSerializer.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IValueSerializer" >IValueSerializer.serializeUnassignedValue(EObject, RuleCall, INode)</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ITokenSerializer.java" title="View Source Code" >(src)</a>.
 </p>
@@ -1673,19 +1673,19 @@ The default implementation delegates to various other services such as the <a cl
 <a name="hiddentokenmerger"></a>
 <h3>Merge White Space</h3>
 <p>
-After the <a href="100-serialization.html#parsetreeconstructor" title="Go to &quot;Parse Tree Constructor&quot;">parse tree constructor</a> has done its job to create a stream of 
-tokens which are to be written to the textual representation, and the <a href="100-serialization.html#commentassociater" title="Go to &quot;Preserving Comments from the Node Model&quot;">comment associator</a> 
+After the <a href="050-heading-runtime.html#parsetreeconstructor" title="Go to &quot;Parse Tree Constructor&quot;">parse tree constructor</a> has done its job to create a stream of 
+tokens which are to be written to the textual representation, and the <a href="050-heading-runtime.html#commentassociater" title="Go to &quot;Preserving Comments from the Node Model&quot;">comment associator</a> 
 has done its work, existing white space form the node model is merged into the stream. 
 </p>
 <p>
 The strategy is as follows: If two tokens follow each other in the stream and the corresponding 
 nodes in the node model follow each other as well, then the white space information in between is kept. 
-In all other cases it is up to the <a href="105-formatting.html" title="Go to &quot;Formatting (Pretty Printing)&quot;">formatter</a> to calculate new white space information. 
+In all other cases it is up to the <a href="050-heading-runtime.html#formatting" title="Go to &quot;Formatting (Pretty Printing)&quot;">formatter</a> to calculate new white space information. 
 </p>
 <a name="tokenstream"></a>
 <h3>Token Stream</h3>
 <p>
-The <a href="100-serialization.html#parsetreeconstructor" title="Go to &quot;Parse Tree Constructor&quot;">parse tree constructor</a> and the <a href="105-formatting.html" title="Go to &quot;Formatting (Pretty Printing)&quot;">formatter</a> use an 
+The <a href="050-heading-runtime.html#parsetreeconstructor" title="Go to &quot;Parse Tree Constructor&quot;">parse tree constructor</a> and the <a href="050-heading-runtime.html#formatting" title="Go to &quot;Formatting (Pretty Printing)&quot;">formatter</a> use an 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parsetree/reconstr/ITokenStream.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.parsetree.reconstr.ITokenStream" >ITokenStream</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ITokenStream.java" title="View Source Code" >(src)</a> for their output, and the 
 latter for its input as well. This allows for chaining the two components. Token streams can be converted to a <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >String</abbr></a> 
 using the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parsetree/reconstr/impl/TokenStringBuffer.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.parsetree.reconstr.impl.TokenStringBuffer" >TokenStringBuffer</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/impl/TokenStringBuffer.java" title="View Source Code" >(src)</a> and to 
@@ -1709,11 +1709,11 @@ a <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/io
 <h2>Formatting (Pretty Printing)</h2>
 <p>
 A formatter can be implemented via the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/formatting/IFormatter.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.formatting.IFormatter" >IFormatter</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java" title="View Source Code" >(src)</a> 
-service. Technically speaking, a formatter is a <a href="100-serialization.html#tokenstream" title="Go to &quot;Token Stream&quot;">Token Stream</a> which 
+service. Technically speaking, a formatter is a <a href="050-heading-runtime.html#tokenstream" title="Go to &quot;Token Stream&quot;">Token Stream</a> which 
 inserts/removes/modifies hidden tokens (white space, line-breaks, comments).
 </p>
 <p>
-The formatter is invoked during the <a href="100-serialization.html" title="Go to &quot;Serialization&quot;">serialization phase</a> and when the user triggers 
+The formatter is invoked during the <a href="050-heading-runtime.html#serialization" title="Go to &quot;Serialization&quot;">serialization phase</a> and when the user triggers 
 formatting in the editor (for example, using the CTRL+SHIFT+F shortcut).
 </p>
 <p>
@@ -1858,7 +1858,7 @@ into account. The following abstract elements can <em>not</em> have assigned for
 	<li>
 		Grammar elements nested in data type rules. This is due to to the fact that tokens matched 
 				by a data type rule are treated as atomic by the serializer. To format these tokens, please 
-				implement a <a href="090-valueconverter.html" title="Go to &quot;Value Converter&quot;">ValueConverter</a>. 
+				implement a <a href="050-heading-runtime.html#valueconverter" title="Go to &quot;Value Converter&quot;">ValueConverter</a>. 
 	</li>
 	<li>
 		Grammar elements nested in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/CrossReference.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.CrossReference" >CrossReference</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/CrossReference.java" title="View Source Code" >(src)</a>.

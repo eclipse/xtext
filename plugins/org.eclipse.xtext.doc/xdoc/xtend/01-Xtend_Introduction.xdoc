@@ -15,7 +15,7 @@ ul[
 	item[e[property access syntax] - shorthands for getter and setter access]
 	item[e[multiple dispatch] aka polymorphic method invocation]
 	item[e[translates to Java] not bytecode - understand what's going on and use your code for platforms such as Android or GWT]
-]
+] 
 
 It is not aiming at replacing Java all together. Therefore its library is a thin layer over the Java Development Kit (JDK) and interacts with Java 
 exactly the same as it interacts with Xtend code. Also Java can call Xtend functions in a completely transparent way. And of course, it provides a 
@@ -30,7 +30,7 @@ You'll find it in the new project wizard dialog.
 The project contains a couple of sample Xtend files, which show the different language concepts in action.
 You should also have a look into the e[xtend-gen] folder which contains the generated Java-version of them.
 
-img[../../images/Xtend_and_Java.png][Xtend and Java Vis-a-Vis][][]
+img[../images/xtend/Xtend_and_Java.png][Xtend and Java Vis-a-Vis][][]
 
 section-ref[Xtend_Classes_Functions]
 

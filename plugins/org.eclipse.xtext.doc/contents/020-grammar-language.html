@@ -348,7 +348,7 @@ fragment&nbsp;=&nbsp;org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment&nb
 </div>
 </p>
 <p>
-See the section on <a href="199a-jvmtypes.html" title="Go to &quot;Referring to Java Elements using JVM Types&quot;">Referring Java Types</a> for a full explanation of this useful feature.
+See the section on <a href="199-xtext-and-java.html#jvmtypes" title="Go to &quot;Referring to Java Elements using JVM Types&quot;">Referring Java Types</a> for a full explanation of this useful feature.
 </p>
 <a name="package_declarations_4"></a>
 <h4>Ecore Model Aliases for EPackages</h4>
@@ -433,7 +433,7 @@ or underscore <span class="inlinecode"><span class="string">&apos;_&apos;</span>
 </p>
 <p>
 The caret is used to escape an identifier if there are conflicts with existing keywords. It is removed 
-by the <em>ID</em> rule&apos;s <a href="090-valueconverter.html" title="Go to &quot;Value Converter&quot;">ValueConverter</a>. 
+by the <em>ID</em> rule&apos;s <a href="050-heading-runtime.html#valueconverter" title="Go to &quot;Value Converter&quot;">ValueConverter</a>. 
 </p>
 <p>
 This is the simplified formal definition of terminal rules:
@@ -482,9 +482,9 @@ This means that the terminal rule <em>INT</em> returns instances of <span class=
 kind of data type here, which just needs to be an instance of <span class="inlinecode">ecore::EDataType</span>. In order to tell the framework 
 how to convert the parsed string to a value of the declared data type, you need to provide your own 
 implementation of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/conversion/IValueConverterService.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.conversion.IValueConverterService" >IValueConverterService</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java" title="View Source Code" >(src)</a> (cf. 
-<a href="090-valueconverter.html" title="Go to &quot;Value Converter&quot;">value converters</a>). The value converter is also the service that allows to remove escape
+<a href="050-heading-runtime.html#valueconverter" title="Go to &quot;Value Converter&quot;">value converters</a>). The value converter is also the service that allows to remove escape
 sequences or semantically unnecessary character like quotes from string literals or the caret <span class="inlinecode"><span class="string">&apos;^&apos;</span></span> from identifiers.
- Its implementation needs to be registered as a service (cf. <a href="040-dependency-injection.html" title="Go to &quot;Dependency Injection in Xtext with Google Guice&quot;">Service Framework</a>).
+ Its implementation needs to be registered as a service (cf. <a href="030-generator.html#dependencyInjection" title="Go to &quot;Dependency Injection in Xtext with Google Guice&quot;">Service Framework</a>).
 </p>
 <a name="syntax_4_4"></a>
 <h4>Extended Backus-Naur Form Expressions</h4>
@@ -651,7 +651,7 @@ starting with a special delimiter.
 <p>
 The parser is fed with a sequence of terminals and walks through the so called parser rules. Hence a parser rule - 
 contrary to a terminal rule - does not produce a single atomic terminal token but a tree of non-terminal 
-and terminal tokens. They lead to a so called <a href="016-working-with-Xtext-models.html#node_model" title="Go to &quot;Working with the Node Model&quot;">parse tree</a> (in Xtext it is also referred 
+and terminal tokens. They lead to a so called <a href="" title="Go to &quot;Working with the Node Model&quot;">parse tree</a> (in Xtext it is also referred 
 as node model). Furthermore, parser rules are handled as kind of a building plan for the creation of 
 the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObjects</abbr></a> that form the semantic model (the linked abstract syntax graph or AST). Due to this 
 fact, parser rules are even called production or EObject rules. Different constructs like actions and 
@@ -807,7 +807,7 @@ which the crosslink later should be established. If the terminal is omitted, it 
 with the name <em>ID</em> - if one can be found. The terminal is mandatory for languages that do not define a rule with the name <em>ID</em>.
 </p>
 <p>
-Have a look at the <a href="070-linking.html" title="Go to &quot;Linking&quot;">linking section</a> in order to understand how linking is done.
+Have a look at the <a href="050-heading-runtime.html#linking" title="Go to &quot;Linking&quot;">linking section</a> in order to understand how linking is done.
 </p>
 <a name="unordered_groups"></a>
 <h5>Unordered Groups</h5>
@@ -1264,7 +1264,7 @@ Note that rules that do not call other parser rules and do neither contain any a
  considered to be data type rules and the data type <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >EString</abbr></a> is implied if none has been explicitly declared.
 </p>
 <p>
-<a href="090-valueconverter.html" title="Go to &quot;Value Converter&quot;">Value converters</a> are used to transform the parsed string to the actually returned
+<a href="050-heading-runtime.html#valueconverter" title="Go to &quot;Value Converter&quot;">Value converters</a> are used to transform the parsed string to the actually returned
 data type value.
 </p>
 <a name="syntax_8"></a>

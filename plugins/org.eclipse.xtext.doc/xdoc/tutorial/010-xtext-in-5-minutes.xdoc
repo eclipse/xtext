@@ -32,7 +32,7 @@ code[MyDsl][
 	Hello World!
 ]
 
-img[images/FiveMinTutorial_FreshProject.png][ ][ ][ ]
+img[../images/tutorial/FiveMinTutorial_FreshProject.png][ ][ ][ ]
 
 section:RunWorkflow[Generating The Language Infrastructure]
 
@@ -48,7 +48,7 @@ Let's give the editor a try. If you select e[Run As -> Eclipse Application] from
 create a new Eclipse Application. A new Eclipse instance will be launched and allow to test drive the
 editor.
 
-img[images/FiveMinTutorial_LaunchConfig.png][ ][ ][ ]
+img[../images/tutorial/FiveMinTutorial_LaunchConfig.png][ ][ ][ ]
 
 Before you can create a file for the sample language, you'll have to create a sample project. Select
 e[File -> New -> Project...]
@@ -59,7 +59,7 @@ a dialog, whether you want to add the Xtext nature to your project, which is a g
 give the editor a try, e.g. use content assist (e[Ctrl+Space]) to insert the keyword code[MyDsl][Hello] 
 and see how the input is validated immediately.
 
-img[images/FiveMinTutorial_Editor.png][ ][ ][ ]
+img[../images/tutorial/FiveMinTutorial_Editor.png][ ][ ][ ]
 
 section:Conclusion[Conclusion]
 

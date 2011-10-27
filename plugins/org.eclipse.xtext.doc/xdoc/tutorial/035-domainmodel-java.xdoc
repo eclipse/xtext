@@ -59,7 +59,7 @@ table[
 
 Click on e[Finish] to create the projects. 
 
-img[images/30min_wizard.png][ ][ ][ ]
+img[../images/tutorial/30min_wizard.png][ ][ ][ ]
 
 After you've successfully finished the wizard, you'll find three new projects in your workspace.
 
@@ -75,7 +75,7 @@ table[
 	]
 ]
 
-img[images/30min_initialprojectlayout.png][ ][ ][ ]
+img[../images/tutorial/30min_initialprojectlayout.png][ ][ ][ ]
 
 section[Step Two: Write the Grammar]
 
@@ -276,7 +276,7 @@ This will trigger the Xtext language generator. It generates the parser and
 serializer and some additional infrastructure code. You will see its logging 
 messages in the Console View. 
 
-img[images/JvmTutorial_RunGenerator.png][ ][ ][ ]
+img[../images/tutorial/JvmTutorial_RunGenerator.png][ ][ ][ ]
 
 section[Step Four: Define the Mapping to JVM Concepts]
 
@@ -448,7 +448,7 @@ We are now able to test the IDE integration, by spawning a new Eclipse using our
 use the launch shortcut called "Launch Runtime Eclipse", clicking on the green play button in the tool
 bar.
 
-img[images/JvmTutorial_LaunchEditor.png][ ][ ][ ]
+img[../images/tutorial/JvmTutorial_LaunchEditor.png][ ][ ][ ]
 
 In the new workbench, create a Java project (e[File -> New -> Project...  -> Java Project] and therein a new file 
 with the file extension you chose in the beginning (e[*.dmodel]). This will open the generated entity editor. 
@@ -457,4 +457,4 @@ of your language to find out what can be individually configured to your users n
 
 Have fun!
 
-img[images/JvmTutorial_Editor.png][][][]
+img[../images/tutorial/JvmTutorial_Editor.png][][][]
