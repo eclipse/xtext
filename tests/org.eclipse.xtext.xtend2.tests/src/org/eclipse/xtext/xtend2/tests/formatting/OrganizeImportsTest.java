@@ -281,16 +281,33 @@ public class OrganizeImportsTest extends AbstractXtend2TestCase {
 				"\nimport java.util.Map$Entry", section);
 	}
 	
-	public void testFunctionTypes() throws Exception {
+	public void testFunctionTypes_afterResolve() throws Exception {
 		String model = 
 				"package foo.bar\n" +
-						"import java.util.Map$Entry\n" +
-						"class Foo {\n" +
-						"  def (Entry)=>void test() {" +
-						"    return null\n" +
-						"  }\n" +
-						"}\n";
+				"import java.util.Map$Entry\n" +
+				"class Foo {\n" +
+				"  def (Entry)=>void test() {" +
+				"    return null\n" +
+				"  }\n" +
+				"}\n";
 		XtendFile file = file(model, true);
+		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
+		
+		assertEquals(
+				"\n" +
+				"\nimport java.util.Map$Entry", section);
+	}
+	
+	public void testFunctionTypes_beforeResolve() throws Exception {
+		String model = 
+				"package foo.bar\n" +
+				"import java.util.Map$Entry\n" +
+				"class Foo {\n" +
+				"  def (Entry)=>void test() {" +
+				"    return null\n" +
+				"  }\n" +
+				"}\n";
+		XtendFile file = file(model, false);
 		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
 		
 		assertEquals(
