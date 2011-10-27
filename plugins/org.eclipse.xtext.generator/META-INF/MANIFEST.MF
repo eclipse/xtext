@@ -73,7 +73,8 @@ Require-Bundle: org.eclipse.xtext.util;bundle-version="2.0.0";resolution:=option
  org.eclipse.emf.mwe2.lib;bundle-version="2.0.0";resolution:=optional;visibility:=reexport,
  org.antlr.runtime,
  org.eclipse.xtext.xbase.lib;bundle-version="2.0.0";resolution:=optional;visibility:=reexport,
- org.eclipse.xtext.xtend2.lib;bundle-version="2.0.0";resolution:=optional;visibility:=reexport
+ org.eclipse.xtext.xtend2.lib;bundle-version="2.0.0";resolution:=optional;visibility:=reexport,
+ org.eclipse.xtext.ecore;bundle-version="2.1.0"
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
 Import-Package: org.apache.log4j;version="1.2.15",
