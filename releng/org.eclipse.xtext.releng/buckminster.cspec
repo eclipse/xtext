@@ -2,11 +2,18 @@
 <cs:cspec xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0" name="org.eclipse.xtext.releng"
 	componentType="buckminster" version="1.0.0.qualifier">
 	<cs:dependencies>
-		<cs:dependency name="com.google.collect" componentType="osgi.bundle" />
-		<cs:dependency name="com.google.inject" componentType="osgi.bundle" />
+		<!-- Third party -->
+		<cs:dependency name="com.google.collect" componentType="osgi.bundle"/>
+        <cs:dependency name="com.google.collect.source" componentType="osgi.bundle"/>
+        <cs:dependency name="com.google.inject" componentType="osgi.bundle"/>
+        <cs:dependency name="com.google.inject.source" componentType="osgi.bundle"/>
+        <cs:dependency name="org.apache.log4j" componentType="osgi.bundle"/>
+        <cs:dependency name="org.apache.log4j.source" componentType="osgi.bundle"/>
 		<cs:dependency name="org.aopalliance" componentType="osgi.bundle" />
 		<cs:dependency name="org.easymock" componentType="osgi.bundle" />
 		<cs:dependency name="org.antlr.runtime.source" componentType="osgi.bundle" />
+		
+		<!-- Eclipse platform and projects -->
 		<cs:dependency name="org.eclipse.draw2d" componentType="eclipse.feature" />
 		<cs:dependency name="org.eclipse.emf.ecore.editor" componentType="osgi.bundle" />
 		<cs:dependency name="org.eclipse.jdt" componentType="osgi.bundle" />
@@ -20,6 +27,7 @@
 		<cs:dependency name="org.junit4" componentType="osgi.bundle" versionDesignator="4.5.0" />
 		<cs:dependency name="org.junit" componentType="osgi.bundle"  versionDesignator="[3.8.0,4.0.0)" />
 
+		<!-- Friends of Xtext -->
 		<cs:dependency name="org.eclipse.emf.mwe.utils" componentType="osgi.bundle" />
 		<cs:dependency name="org.eclipse.emf.mwe.core" componentType="osgi.bundle" />
 		<cs:dependency name="org.eclipse.emf.mwe2.runtime" componentType="osgi.bundle" />
