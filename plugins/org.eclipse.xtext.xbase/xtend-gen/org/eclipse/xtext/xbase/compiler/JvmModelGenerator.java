@@ -90,8 +90,7 @@ public class JvmModelGenerator implements IGenerator {
   public StringConcatenation generateType(final JvmGenericType type) {
     StringConcatenation _xblockexpression = null;
     {
-      String _qualifiedName = type.getQualifiedName();
-      ImportManager _importManager = new ImportManager(true, _qualifiedName);
+      ImportManager _importManager = new ImportManager(true, type);
       final ImportManager importManager = _importManager;
       StringConcatenation _generateBody = this.generateBody(type, importManager);
       final StringConcatenation typeBody = _generateBody;

@@ -157,12 +157,9 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     _builder_1.append("package foo;");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("import java.util.NoSuchElementException;");
-    _builder_1.newLine();
-    _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
-    _builder_1.append("public class NoSuchElementException extends NoSuchElementException {");
+    _builder_1.append("public class NoSuchElementException extends java.util.NoSuchElementException {");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
