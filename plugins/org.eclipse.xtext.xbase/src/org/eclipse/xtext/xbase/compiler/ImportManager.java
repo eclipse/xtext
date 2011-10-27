@@ -46,6 +46,7 @@ public class ImportManager {
 		if(thisType != null) {
 			thisTypeSimpleName = thisType.getSimpleName();
 			thisTypeQualifiedName = thisType.getQualifiedName('.');
+			thisCollidesWithJavaLang = CodeGenUtil.isJavaLangType(thisTypeSimpleName);
 		}
 	}
 	
@@ -56,6 +57,8 @@ public class ImportManager {
 	}
 	
 	private Pattern JAVA_LANG_PACK = Pattern.compile("java\\.lang\\.[\\w]+");
+
+	private boolean thisCollidesWithJavaLang;
 
 	public void appendType(final JvmType type, StringBuilder builder) {
 		if (type instanceof JvmPrimitiveType || type instanceof JvmVoid || type instanceof JvmTypeParameter) {
@@ -87,7 +90,7 @@ public class ImportManager {
 	
 	protected boolean allowsSimpleName(String qualifiedName, String simpleName) {
 		return equal(qualifiedName, thisTypeQualifiedName) 
-				|| (JAVA_LANG_PACK.matcher(qualifiedName).matches() && !CodeGenUtil.isJavaLangType(thisTypeSimpleName)) 
+				|| (!thisCollidesWithJavaLang && JAVA_LANG_PACK.matcher(qualifiedName).matches()) 
 				|| equal(qualifiedName, simpleName);
 	}
 	
