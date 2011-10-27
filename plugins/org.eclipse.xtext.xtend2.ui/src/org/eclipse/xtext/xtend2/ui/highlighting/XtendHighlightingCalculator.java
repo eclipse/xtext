@@ -99,7 +99,7 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 		super.highlightReferenceJvmType(acceptor, referencer, reference, resolvedReferencedObject);
 		// Highlight referenced JvmTypes only as deprecated when the eContainer of the referencer is a XtendClass
 		// only reference to JvmTypes in extends or implements should be marked as it is in Java.
-		if(referencer.eContainer().eClass() == Xtend2Package.Literals.XTEND_CLASS)
+		if(referencer.eContainer() != null && referencer.eContainer().eClass() == Xtend2Package.Literals.XTEND_CLASS)
 			if(resolvedReferencedObject instanceof JvmAnnotationTarget){
 				if(DeprecationUtil.isDeprecated((JvmAnnotationTarget) resolvedReferencedObject))
 					highlightObjectAtFeature(acceptor, referencer, reference, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
