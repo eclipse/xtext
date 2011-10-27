@@ -9,8 +9,6 @@
 		<cs:dependency name="org.antlr.runtime.source" componentType="osgi.bundle" />
 		<cs:dependency name="org.eclipse.draw2d" componentType="eclipse.feature" />
 		<cs:dependency name="org.eclipse.emf.ecore.editor" componentType="osgi.bundle" />
-		<cs:dependency name="org.eclipse.emf.mwe.ui" componentType="eclipse.feature" />
-		<cs:dependency name="org.eclipse.emf.mwe2.runtime.sdk" componentType="eclipse.feature" />
 		<cs:dependency name="org.eclipse.jdt" componentType="osgi.bundle" />
 		<cs:dependency name="org.eclipse.jdt.junit" componentType="osgi.bundle" />
 		<cs:dependency name="org.eclipse.jdt.junit4.runtime" componentType="osgi.bundle" />
@@ -19,10 +17,16 @@
 		<cs:dependency name="org.eclipse.pde.junit.runtime" componentType="osgi.bundle" />
 		<cs:dependency name="org.eclipse.debug.ui" componentType="osgi.bundle" />
 		<cs:dependency name="org.eclipse.platform" componentType="eclipse.feature" />
-		<cs:dependency name="org.eclipse.xpand.ui" componentType="eclipse.feature" />
-		<cs:dependency name="org.eclipse.xtend.util.stdlib" componentType="osgi.bundle" />
 		<cs:dependency name="org.junit4" componentType="osgi.bundle" versionDesignator="4.5.0" />
 		<cs:dependency name="org.junit" componentType="osgi.bundle"  versionDesignator="[3.8.0,4.0.0)" />
+
+		<cs:dependency name="org.eclipse.emf.mwe.utils" componentType="osgi.bundle" />
+		<cs:dependency name="org.eclipse.emf.mwe.core" componentType="osgi.bundle" />
+		<cs:dependency name="org.eclipse.emf.mwe2.runtime" componentType="osgi.bundle" />
+		<cs:dependency name="org.eclipse.emf.mwe2.lib" componentType="osgi.bundle" />
+		<cs:dependency name="org.eclipse.xpand" componentType="osgi.bundle" />
+		<cs:dependency name="org.eclipse.xtend" componentType="osgi.bundle" />
+		<cs:dependency name="org.eclipse.xtend.typesystem.emf" componentType="osgi.bundle" />
 	</cs:dependencies>
 	<cs:actions>
 		<cs:public name="create.javadoc" actor="ant">
