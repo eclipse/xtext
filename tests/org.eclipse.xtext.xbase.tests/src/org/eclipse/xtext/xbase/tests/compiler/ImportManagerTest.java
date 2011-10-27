@@ -52,6 +52,14 @@ public class ImportManagerTest extends AbstractXbaseTestCase {
 		assertTrue(importManager.getImports().isEmpty());
 	}
 	
+	public void testJavaLangStringFromOtherString() {
+		JvmType otherString = typeReferences.findDeclaredType(foo.String.class, expression);
+		ImportManager importManager2 = new ImportManager(true, (JvmDeclaredType) otherString);
+		JvmType javaLangString = typeReferences.findDeclaredType("java.lang.String", expression);
+		assertEquals("java.lang.String", importManager2.serialize(javaLangString).toString());
+		assertTrue(importManager2.getImports().isEmpty());
+	}
+	
 	public void testThisClass() throws Exception {
 		assertEquals("TestClass", importManager.serialize(fooClass).toString());
 		assertTrue(importManager.getImports().toString(), importManager.getImports().isEmpty());

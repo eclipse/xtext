@@ -87,7 +87,7 @@ public class ImportManager {
 	
 	protected boolean allowsSimpleName(String qualifiedName, String simpleName) {
 		return equal(qualifiedName, thisTypeQualifiedName) 
-				|| JAVA_LANG_PACK.matcher(qualifiedName).matches() 
+				|| (JAVA_LANG_PACK.matcher(qualifiedName).matches() && !CodeGenUtil.isJavaLangType(thisTypeSimpleName)) 
 				|| equal(qualifiedName, simpleName);
 	}
 	
