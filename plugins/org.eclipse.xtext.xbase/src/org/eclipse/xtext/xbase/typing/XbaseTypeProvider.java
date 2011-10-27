@@ -103,7 +103,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 	private SuperTypeCollector collector;
 	
 	@Inject
-	private ILogicalContainerProvider expressionContext;
+	private ILogicalContainerProvider logicalContainerProvider;
 	
 	@Override
 	protected JvmTypeReference _expectedType(EObject obj, EReference reference, int index, boolean rawType) {
@@ -112,7 +112,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 			ele = ((List<?>)ele).get(index);
 		}
 		if (ele instanceof XExpression) {
-			JvmIdentifiableElement element = expressionContext.getLogicalContainer((XExpression) ele);
+			JvmIdentifiableElement element = logicalContainerProvider.getLogicalContainer((XExpression) ele);
 			if (element instanceof JvmOperation) {
 				return ((JvmOperation) element).getReturnType();
 			}
@@ -1273,7 +1273,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 				return expectedReturnType;
 			}
 		}
-		JvmIdentifiableElement logicalContainer = expressionContext.getLogicalContainer(expr);
+		JvmIdentifiableElement logicalContainer = logicalContainerProvider.getNearestLogicalContainer(expr);
 		if (logicalContainer instanceof JvmOperation) {
 			return ((JvmOperation) logicalContainer).getReturnType();
 		}

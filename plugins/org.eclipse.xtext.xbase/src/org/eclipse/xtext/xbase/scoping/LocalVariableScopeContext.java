@@ -45,15 +45,15 @@ public class LocalVariableScopeContext {
 	 */
 	public LocalVariableScopeContext spawnForContainer() {
 		if (context instanceof XClosure) {
-			return new LocalVariableScopeContext(getContainer(), reference, false, -1, true, expressionContext);
+			return new LocalVariableScopeContext(getLogicalOrRealContainer(), reference, false, -1, true, expressionContext);
 		}
-		return new LocalVariableScopeContext(getContainer(), reference, false, -1, referredFromClosure, expressionContext);
+		return new LocalVariableScopeContext(getLogicalOrRealContainer(), reference, false, -1, referredFromClosure, expressionContext);
 	}
 
-	public EObject getContainer() {
-		JvmIdentifiableElement associatedContainer = expressionContext.getLogicalContainer(context);
-		if (associatedContainer != null)
-			return associatedContainer;
+	public EObject getLogicalOrRealContainer() {
+		JvmIdentifiableElement logicalContainer = expressionContext.getLogicalContainer(context);
+		if (logicalContainer != null)
+			return logicalContainer;
 		return context.eContainer();
 	}
 	
@@ -61,7 +61,7 @@ public class LocalVariableScopeContext {
 	 * Used to decide whether the container hierarchy for the referenced {@link #context} should be walked up or not.
 	 */
 	public boolean canSpawnForContainer() {
-		return getContainer() != null;
+		return getLogicalOrRealContainer() != null;
 	}
 	
 	public EObject getContext() {
