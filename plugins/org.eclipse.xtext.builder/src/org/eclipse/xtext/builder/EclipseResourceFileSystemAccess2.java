@@ -118,11 +118,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 	}
 
 	protected void createFolder(IFolder folder) throws CoreException {
-		try {
-			folder.create(true, true, monitor);
-		} catch (CoreException e) {
-			throw new RuntimeException(e);
-		}
+		ensureExists(folder);
 	}
 
 	protected void ensureParentExists(IFile file) throws CoreException {
