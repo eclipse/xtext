@@ -68,57 +68,59 @@ public class Xtend2QuickfixProvider extends DefaultQuickfixProvider {
 	public void createLinkingIssueResolutions(final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
 		final IModificationContext modificationContext = getModificationContextFactory().createModificationContext(issue);
 		final IXtextDocument xtextDocument = modificationContext.getXtextDocument();
-		xtextDocument.readOnly(new IUnitOfWork.Void<XtextResource>() {
-			@Override
-			public void process(XtextResource state) throws Exception {
-				EObject target = state.getEObject(issue.getUriToProblem().fragment());
-				EReference reference = getUnresolvedEReference(issue, target);
-				if (reference == null)
-					return;
-
-				String issueString = xtextDocument.get(issue.getOffset(), issue.getLength());
-				IScope scope = getScopeProvider().getScope(target, reference);
-				boolean useJavaSearch = false;
-				if (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(reference.getEReferenceType()))
-					useJavaSearch = true;
-				if (TypesPackage.Literals.JVM_CONSTRUCTOR.isSuperTypeOf(reference.getEReferenceType()))
-					useJavaSearch = true;
-				if (useJavaSearch) {
-					scope = getImportedTypesScope(target, issueString, scope);
-				}
-				List<IEObjectDescription> discardedDescriptions = Lists.newArrayList();
-				Set<String> qualifiedNames = Sets.newHashSet();
-				int addedDescriptions = 0;
-				int checkedDescriptions = 0;
-				for (IEObjectDescription referableElement : queryScope(scope)) {
-					String referableElementQualifiedName = getQualifiedNameConverter().toString(referableElement.getQualifiedName());
-					if (useJavaSearch || getSimilarityMatcher().isSimilar(issueString, getQualifiedNameConverter().toString(referableElement.getName()))) {
-						addedDescriptions++;
-						createResolution(issueString, referableElement);
-						qualifiedNames.add(referableElementQualifiedName);
-					} else {
-						if (qualifiedNames.add(referableElementQualifiedName))
-							discardedDescriptions.add(referableElement);
+		if (xtextDocument != null) {
+			xtextDocument.readOnly(new IUnitOfWork.Void<XtextResource>() {
+				@Override
+				public void process(XtextResource state) throws Exception {
+					EObject target = state.getEObject(issue.getUriToProblem().fragment());
+					EReference reference = getUnresolvedEReference(issue, target);
+					if (reference == null)
+						return;
+	
+					String issueString = xtextDocument.get(issue.getOffset(), issue.getLength());
+					IScope scope = getScopeProvider().getScope(target, reference);
+					boolean useJavaSearch = false;
+					if (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(reference.getEReferenceType()))
+						useJavaSearch = true;
+					if (TypesPackage.Literals.JVM_CONSTRUCTOR.isSuperTypeOf(reference.getEReferenceType()))
+						useJavaSearch = true;
+					if (useJavaSearch) {
+						scope = getImportedTypesScope(target, issueString, scope);
 					}
-					checkedDescriptions++;
-					if (checkedDescriptions>100)
-						break;
-				}
-				if (discardedDescriptions.size() + addedDescriptions <= 5) {
-					for(IEObjectDescription referableElement: discardedDescriptions) {
-						createResolution(issueString, referableElement);
+					List<IEObjectDescription> discardedDescriptions = Lists.newArrayList();
+					Set<String> qualifiedNames = Sets.newHashSet();
+					int addedDescriptions = 0;
+					int checkedDescriptions = 0;
+					for (IEObjectDescription referableElement : queryScope(scope)) {
+						String referableElementQualifiedName = getQualifiedNameConverter().toString(referableElement.getQualifiedName());
+						if (useJavaSearch || getSimilarityMatcher().isSimilar(issueString, getQualifiedNameConverter().toString(referableElement.getName()))) {
+							addedDescriptions++;
+							createResolution(issueString, referableElement);
+							qualifiedNames.add(referableElementQualifiedName);
+						} else {
+							if (qualifiedNames.add(referableElementQualifiedName))
+								discardedDescriptions.add(referableElement);
+						}
+						checkedDescriptions++;
+						if (checkedDescriptions>100)
+							break;
+					}
+					if (discardedDescriptions.size() + addedDescriptions <= 5) {
+						for(IEObjectDescription referableElement: discardedDescriptions) {
+							createResolution(issueString, referableElement);
+						}
 					}
 				}
-			}
-
-			public void createResolution(String issueString, IEObjectDescription solution) {
-				String replacement = getQualifiedNameConverter().toString(solution.getName());
-				String replaceLabel = fixCrossReferenceLabel(issueString, replacement);
-				issueResolutionAcceptor.accept(issue, replaceLabel, replaceLabel, fixCrossReferenceImage(
-						issueString, replacement), new ReplaceModification(issue, replacement));
-			}
-
-		});
+	
+				public void createResolution(String issueString, IEObjectDescription solution) {
+					String replacement = getQualifiedNameConverter().toString(solution.getName());
+					String replaceLabel = fixCrossReferenceLabel(issueString, replacement);
+					issueResolutionAcceptor.accept(issue, replaceLabel, replaceLabel, fixCrossReferenceImage(
+							issueString, replacement), new ReplaceModification(issue, replacement));
+				}
+	
+			});
+		}
 	}
 	
 	protected IScope getImportedTypesScope(EObject model, String misspelled, IScope actualScope) {
