@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Eclipse Xtend</title>
+    <meta name="description" content="Eclipse Xtend is a statically-typed programming language running on the JVM.">
+    <meta name="author" content="Sven Efftinge">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+    	section {
+		  padding-bottom: 60px;
+		}
+    </style>
+    <link href="google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+  	<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
+  	<script type="text/javascript">
+  	</script>
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  </head>
+
+  <body onload="prettyPrint()">
+
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="http://www.eclipse.org">Eclipse.org</a>
+          <ul class="nav">
+            <li class="active"><a href="#">Xtend</a></li>
+            <li><a href="#download">Download</a></li>
+            <li><a href="#documentation">Documentation</a></li>
+            <li><a href="http://www.eclipse.org/Xtext">Xtext.org</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <header >
+      <div class="hero-unit" style="text-align: center">
+        <img src="images/Xtend-logo.png" width="500px">
+        <p>
+        	A language made for Java developers.
+		</p>
+        <p><a class="btn primary large" style=" width : 150px;" href="#download">Download &raquo;</a>
+        &nbsp;&nbsp;&nbsp;
+        <a class="btn primary large" style=" width : 150px;" href="#getting_started">Getting Started &raquo;</a></p>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="intro">
+	      <div class="row">
+	        <div class="span-one-third">
+	          <h2>Embrace Java ... </h2>
+	          <p>
+	          	Java is a great platform and also the language has some nice properties. Xtend is not meant to replace Java all together but to be a convenient alternative in situations where Java doesn't shine. Therefore Xtend ...
+	          </p>
+	          <ul>
+	          	<li> <a href="#compilestojava">compiles to readable Java code</a>
+	          	<li> comes with state-of-the-art Eclipse tooling
+	          	<li> resembles Java's syntax
+	          	<li> <a href="#typesystem">reuses Java's type system</a>
+	          	<li> <a href="#typesystem">is statically typed</a>
+	          	<li> relies on the JDK as a library mostly
+	          	<li> <a href="#scopeofxtend">does classes only</a>
+	          </ul>
+	        </div>
+	        <div class="span-one-third">
+	          <h2>... but kill the noise ... </h2>
+	           <p>In contrast to Java, Xtend removes unnecessary noise. Reducing code to the minimum not only helps you type less, but more important makes the code more readable and maintainable. Boilerplate is mainly avoided by the following features: </p>
+	           <ul>
+	          	<li> <a href="#typeinference">type inference</a> 
+	          	<li> <a href="#morenoisereduction">property access </a>
+	          	<li> <a href="#morenoisereduction">better defaults </a>
+	          	<li> <a href="#morenoisereduction">optional semicolons </a>
+	          	<li> <a href="#morenoisereduction">optional parenthesis </a>
+	          </ul>
+	       </div>
+	        <div class="span-one-third">
+	          <h2>... and give me sugar!</h2>
+	          <p>Simply improving on Java by removing the noise is already super helpful, but Java also lacks some important language features. Therefore Xtend adds the following features, which you will love ones you got your hands on them.</p>
+	           <ul>
+	          	<li> <a href="#closures">closures</a>
+	          	<li> <a href="#switchexpression">powerful switch expression</a>
+	          	<li> <a href="#templateexpression">templates expressions</a>
+	          	<li> <a href="#extensionmethods">extension methods</a>
+	          	<li> <a href="#multipledispatch">multiple dispatch</a>
+	          	<li> operator overloading
+	          </ul>
+	        </div>
+	      </div>
+	      <div class="row">
+	        <div class="span-one-third">
+	        	<p><a class="btn" href="#embracejava">View details &raquo;</a></p>
+	        </div>
+	        <div class="span-one-third">
+	        	<p><a class="btn" href="#noisereduction">View details &raquo;</a></p>
+	        </div>
+	        <div class="span-one-third">
+	        	<p><a class="btn" href="#sugar">View details &raquo;</a></p>
+	        </div>
+	      </div>
+	      <div class="row">
+	      	<section id="demo"></section>
+	      </div>
+	      <div class="row">
+	      	<div align="center">
+	      		<iframe src="http://player.vimeo.com/video/31248257?title=0&amp;byline=0&amp;portrait=0" width="960" height="540" frameborder="0" webkitAllowFullScreen allowFullScreen></iframe>
+	      	</div>
+	      </div>
+      </section>
+      <section id="download">
+	      <div class="page-header">
+	      	<h1>Getting Started <small>Installation and first steps</small></h1>
+	      </div>
+	      <div class="row">
+	      	<div class="span-one-third">
+	      		<h2>Download</h2>
+		      	<p>You need a running <a title="Go To http://www.eclipse.org/downloads" href="http://www.eclipse.org/downloads/">Eclipse including the Java Development Tools (JDT)</a>. To install the Xtend plugins open the update manager
+		      	and paste one of the following URLs into the field 'works with' just like shown in the screenshort below.</p>
+	      	</div>
+	      	<div class="span-two-thirds">
+	      		<h2>Update Site URLs <small>COPY TO CLIPBOARD!</small></h2>
+		      	<ul>
+					<li><span class="label success">&nbsp;&nbsp;&nbsp;&nbsp;Release&nbsp;&nbsp;&nbsp;&nbsp;</span>    : <a href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/" title="Copy To Clipboard" onclick="alert('Please copy the URL into Eclipse's install manager.'); return false;">http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/</a></li>
+					<li><span class="label warning">&nbsp;Milestones&nbsp;</span>    : <a href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/milestones/" title="Copy To Clipboard" onclick="alert('Please copy the URL into Eclipse's install manager.'); return false;">http://download.eclipse.org/modeling/tmf/xtext/updates/composite/milestones/</a></li>
+					<li><span class="label important">&nbsp;&nbsp;&nbsp;Nightlies&nbsp;&nbsp;&nbsp;</span>    : <a href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/nightly/" title="Copy To Clipboard" onclick="alert('Please copy the URL into Eclipse's install manager.'); return false;">http://download.eclipse.org/modeling/tmf/xtext/updates/composite/nightly/</a></li>
+		      	</ul>
+<!-- 				<img src="images/install_wizard.png" title="Copy and paste of the URLs above into the install manager in Eclipse."/> -->
+	      	</div>
+	      </div>
+	      <div class="row">
+	      <div class="span-one-third">
+		      	<h2>Tutorial</h2>
+		      	<p>If you want to get your hands on it, we recommend to materialize the tutorial example using Eclipse's
+		      	example wizard. To do so in the IDE click:</p>
+		      	<p><span class="label notice">File</span>-&gt;<span class="label notice">New</span>-&gt;<span class="label notice">Example...</span>
+		      	<p>
+		      		The project consists of a buch of Xtend files each named after the language feature illustrated.
+		      		Those files contain a lot of working code samples with explanation in the comments.</p>
+		      	<p> 
+		      		Just try it, it's straight forward.
+		      	</p>
+	      	</div>
+	      	<div class="span-one-third">
+	      		<h2>Documentation</h2>
+		      	<p>You might want to have a look at what is on this page first. To get more detailed information about the various languae features
+		      	you can have a look at the reference documentation. It's included as a chapter on its own in Xtext's documentation and is available 
+		      	online, as well as in Eclipse Help and as a big pdf.</p>
+	      	</div>
+	      	<div class="span-one-third">
+	      		<h2>&nbsp;</h2>
+		      	<a href="xtend-2.1.pdf">
+		      		<img src="images/pdf-sign.jpg" width="80px"/>
+		      	</a>
+	      	</div>
+	      </div>
+	  </section>
+	  <section id="embracejava">
+	      <div class="page-header">
+	      	<h1>Embrace Java <small>because there's so much goodness in it!</small></h1>
+	      </div>
+	      
+	      <!-- compiles to java code -->
+	      <section id="compilestojava">
+		      <div class="row">
+		      	<div class="span-two-third">
+		      		<h2>Xtend compiles to readable Java code</h2>
+		      	</div>
+		      </div>
+		      <div class="row">
+		      	<div class="span8">
+		      	<p>Instead of generating bytecode directly, you get Java source code you can actually look at and debug through if you want.
+		      	You could even remove Xtend from your project and work on the generated Java code (though that's not recommended ;-)).</p>
+		      	</div>
+		      	<div class="span8">
+		      	<p>	Compilation is done incrementally when ever you save a file in Eclipse just like with Java and the tooling makes sure you can
+		      	navigate to the generated code as well as to the original Xtend code oven when it is called from Java.</p>
+		      	</div>
+		      </div>
+		      <div class="row">
+		      	<div class="span-two-thirds" align="center">
+				    <img class="thumbnail" src="images/xtend-and-java.png" alt="">
+		      	</div>
+		      </div>
+	     </section>
+	     <section id="typesystem">
+		      <div class="row">
+		      	<div class="span-two-third">
+		      		<br>
+		      		<h2>Java Type System <small>It's the one you know!</small></h2>
+		      		<br>
+		      	</div>
+		      </div>
+		      <div class="row">
+		      	<div class="span8">
+			      	<p>Static typing is great because it allows for better static analysis and much better tooling based on type information. The downside, however, is the extra complexity of a (static) type system.</p> 
+					<p>Although Java's type system might not be perfect, it is widely used and understood.</p>
+					<p>That's why Xtend reuses just everything about it. In Xtend, however, one seldomly has to actually write types down because of type inference.
+		 			</p>
+		      	</div>
+		      	<div class="span8">
+			      	<pre class="prettyprint"> 
+// qualified names
+java.lang.Object
+// primitives
+boolean, int, long, char, ...
+// arrays
+String[]
+// generics
+List&lt;? extends CharSequence&gt;
+java.util.Map&lt;String,String&gt;
+			      	</pre>
+		      	</div>
+	      	</div>
+      	</section>
+	     <section id="scopeofxtend">
+		      <div class="row">
+		      	<div class="span-two-third">
+		      		<br>
+		      		<h2>Xtend just does classes <small>and nothing else</small></h2>
+		      		<br>
+		      	</div>
+		      </div>
+		      <div class="row">
+		      	<div class="span8">
+			      	<p>Interface definitions in Java are already nice and conise. They have a decent default visibility and also in other areas tere is very little 
+			      	to improve. Given all the knowledge and the great tools being able to handle these files there is no reason to define them in a different language.
+			      	The same applies for enums and annotation types.</p>
+		      	</div>
+		      	<div class="span8">
+			      	<p>That's why Xtend can do classes only and relies on interfaces, annotations and enums being defined in Java. Xtend is really not meant to kill 
+			      	Java but to modernize it a bit.
+			      	</p> 
+		      	</div>
+	      	</div>
+      	</section>
+	     
+	  </section>
+	  
+	  <section id="noisereduction">
+	      <div class="page-header">
+	      	<h1>Kill the noise <small>because it hurts in the eye</small></h1>
+	      </div>
+	      
+	     <section id="typeinference">
+		      <div class="row">
+		      	<div class="span-two-third">
+		      		<br>
+		      		<h2>Type Inference <small>Get rid of the redundancy</small></h2>
+		      		<br>
+		      	</div>
+		      </div>
+		      <div class="row">
+		      	<div class="span8">
+			      	<p>A lot of the information written down in a Java file is actually technically redundant. In
+			      	the following Java example, the type of the variable could already be determined from the right hand side.</p>
+			      	<pre class="prettyprint">
+//Java 
+List&lt;String&gt; names = getTheListOfNames()</pre>
+			      	<p>It's sometimes a good idea to write the type non-the-less, but most of the time it's just redundant noise,
+			      	distracting the reader.</p>
+			      	<p>Xtend doesn't force you to write the type everywhere, but you still can if you want.</p>
+		      	</div>
+		      	<div class="span8">
+			      	<ul>
+			      		<li>Variabel Declarations
+			      		<pre class="prettyprint">val names = getTheListOfNames()
+val List&lt;String&gt; names = getTheListOfNames()</pre>
+			      		</li>
+			      		<li>For-Loops
+			      		<pre class="prettyprint">for (name : getTheListOfNames())
+  // do something with name
+for (String name : getTheListOfNames())
+  // do something with name
+</pre>
+			      		</li>
+			      		<li>Return types
+<pre class="prettyprint">def getTheListOfNames() {
+  newArrayList("Tomte","Pippi","Carlson")
+}
+def List&lt;String&gt; getTheListOfNames() {
+  newArrayList("Tomte","Pippi","Carlson")
+}
+</pre>
+			      		</li>
+			      		<li>Closures
+			      		<pre class="prettyprint">getTheListOfNames().map( name | "Mr. "+name )
+getTheListOfNames().map( String name | "Mr. "+name )
+</pre>
+			      		</li>
+			      	</ul>
+		      	</div>
+	      	</div>
+      	</section>
+	     <section id="morenoisereduction">
+		      <div class="row">
+		      	<div class="span-two-third">
+		      		<br>
+		      		<h2>More Noise Reduction</h2>
+		      		<br>
+		      	</div>
+		      </div>
+		      <div class="row">
+		      	<div class="span8">
+			      	<h3>Property Access</h3>
+			      	<p> Getter methods can be called using the field name. That is you can write </p><pre class="prettyprint">person.name</pre>
+			      	<p> instead of </p><pre class="prettyprint">person.getName()</pre>
+			      	
+			      	<p>This also works great for setters and assignments. That is you can write </p>
+			      	<pre class="prettyprint">person.name = "Foo"</pre>
+			      	<p>instead of</p>
+			      	<pre class="prettyprint">person.setName("Foo")</pre>
+		      	</div>
+		      	<div class="span8">
+			      	<h3>Optionality</h3>
+			      	<p>Parenthesis for method invocations are optional, if no arguments are passed.</p>
+			      	<pre class="prettyprint">obj.compute</pre>
+			      	<p>instead of</p>
+			      	<pre class="prettyprint">obj.compute()</pre>
+			      	<p>Semicolons are optional and even the return keyword doesn't need to be specified in which case the result of the last expression in
+			      	a method definition is returned.</p>
+		      	</div>
+	      	</div>
+      	</section>
+      </section>
+      
+      
+      <section id="sugar">
+	      <div class="page-header">
+	      	<h1>Where is the Sugar? <small>Features not present in Java (or another language)</small></h1>
+	      </div>
+	      
+	     <section id="closures">
+		      <div class="row">
+		      	<div class="span-two-third">
+		      		<br>
+		      		<h2>Closures <small>Finally!</small></h2>
+		      		<br>
+		      	</div>
+		      </div>
+		      <div class="row">
+		      	<div class="span8">
+			      	<p>Closures are the single most demanded features for Java. They are useful in a lot of situations, but in practice 
+			      	the higher-order functions for collections are mostly missed. To collect all the names from persons in a list in 
+			      	in Java, you would typically write: 
+			      	</p>
+			      	<pre class="prettyprint">
+//Java 
+List&lt;String&gt; names = new ArrayList&lt;String&gt;();
+for (String name : persons) {
+  names.add(name);
+}
+</pre>
+					<p>Where in Xtend you can just use the <strong>map</strong> extension method, which is available on every instance of <strong>java.lang.Iterable</strong>:
+					</p>
+			      	<pre class="prettyprint">persons.map( p | p.name )</pre>
+			      	
+			      	<p>Closures can be passed around. Although they have a Java compatible type, Xtend provides a special notation for function types. The following example defines
+			      	a closure which would be useful to filter a list of persons by a specific name.</p>
+			      	<pre class="prettyprint">val (Person)=>Boolean predicate = 
+  [ person | "Hans" == person.name ]</pre>
+			      	You usually don't have to write the types for functions that often, but would write instead:
+			      	<pre class="prettyprint">val predicate = [ Person person | "Hans" == person.name ]</pre>
+			      	Such a function can for instance be passed to the extension method <strong>Iterable.filter((T)=>Boolean)</strong>:
+			      	<pre class="prettyprint">persons.filter(predicate)</pre>
+		      	</div>
+		      	<div class="span8">
+		      		<p>Closures can be used in a varity of scearios. In combination with extension methods it allows to define nice builder APIs:</p>
+			      	<pre class="prettyprint">
+html [
+  head [
+    title [$("XML encoding with Xtend")]
+  ]
+  body [
+    h1 [$("XML encoding with Xtend")]
+    p [$("this format can be used as an alternative to XML")]
+
+    // an element with attributes and text content
+    a("http://www.eclipse.org/Xtext") [$("Xtend")]
+
+    // mixed content
+    p [
+      $("This is some") 
+      b[$("mixed")] 
+      $("text. For more see the") 
+      a("http://www.eclipse.org/Xtext")[$("Xtext")] 
+      $("project")
+    ]
+    p [$("some text")]
+
+    // content generated by
+    p [
+      for (arg : args)
+        $(arg)
+    ]
+  ]
+]
+</pre>
+		      	</div>
+	      	</div>
+      	</section>
+      	
+      	<section id="switchexpression">
+		      <div class="row">
+		      	<div class="span-two-third">
+		      		<br>
+		      		<h2>Switch Expression <small>If pattern matching is too complicated</small></h2>
+		      		<br>
+		      	</div>
+		      </div>
+		      <div class="row">
+		      	<div class="span8">
+			      	<p>The switch statement in Java is a relict from C and has strange and errorprone semantics and is at the same time almost useless in
+			      	todays programming. Xtend comes with a switch expression, which is very different from what switch is in Java:
+			      	<ul>
+			      		<li>switch on anything using equals</li>
+			      		<li>no fall through!</li>
+			      		<li>it checks in the defined order</li>
+			      		<li>supports type guards</li>
+			      	</ul>
+			      	
+			      	<h3>Type Guards</h3>
+			      	<p>Type guards let you switch (or match) for types, which is much nicer and less errorprone than the usual lengthy instanceof-cascades
+			      	we write in Java. In practice it is almost as useful as pattern matching but without introducing all the additional complexity.</p>
+		      	</div>
+		      	<div class="span8">
+		      		<p>In the following example we have a a <strong>Shape</strong> which could be a <strong>Rectangle</strong> or a <strong>Circle</strong>.
+		      		We use the switch to create s descriptive string of the shape. Note that right after the type guard, the variable <strong>shape</strong> is 
+		      		automatically typed to the respective type.
+			      	<pre class="prettyprint">
+val Shape shape = ...
+switch (shape) {
+  Rectangle case shape.width == shape.height :
+     "Square ("+shape.width+")"
+  Rectangle :
+     "Rectangle ("+shape.width+" x "+shape.height+")"
+  Circle :
+     "Circle ("+shape.diameter+")"
+  default :
+  	 "Don't know"
+}
+</pre>
+		      	</div>
+	      	</div>
+      	</section>
+      	
+      	<section id="templateexpression">
+		      <div class="row">
+		      	<div class="span-two-third">
+		      		<br>
+		      		<h2>Template Expressions <small>with a unique way of whitespace handling</small></h2>
+		      		<br>
+		      	</div>
+		      </div>
+		      <div class="row">
+		      	<div class="span8">
+			      	<p>Java's support for string literals and string concatenation is very limited. It lacks multi-line string 
+			      	literals and although the string concatenation using the plus operator is better then using method invocations
+			      	it's better to use the latter for performance reasons.</p>
+			      	<p>In Xtend all string literlas are multi-line by default, and the simple literals provide two different terminal characters
+			      	so you can choose the one which makes you escape the least characters in your text. That is if you have a multilin containing a lot of 
+			      	double quotes better use the single quoted string literal:</p> 
+			      	<pre class="prettyprint">
+val msg =  'This is some multi line
+            text with "double quotes" in it '
+</pre>
+					<p>Template expressions can do more than multiline. They allow interpolation, support a special FOR loop and an IF statement, and most interesting
+		      		automatic whitespace handling!</p>
+		      		<h3>Whitespace <small> and Greyspace</small></h3>
+		      		<p>
+		      			A typical problem in string generation is, that you want to generate nice looking output with proper whitespaces and indentations. However, at the same
+		      			time you want to have the template prodcuing the string look good and be nicely indented.
+		      			Xtend comes with an algorithm which automatically detects what whitespace is meant to indent the template code and what is meant to 
+		      			indent the output code. To help the developer understand how the algoithm works, the editor supports coloring for the different kinds of
+		      			whitespace. We say whitespace and greyspace. 
+		      		</p>
+		      	</div>
+		      	<div class="span8">
+		      		<h3><strong>Hello World</strong> using JAX-RS and templates</h3>
+		      		<p>A small example using JAX-RS API. The greyspace will go into the result.</p>
+		      		<img src="images/templates.png"/>
+		      	</div>
+	      	</div>
+      	</section>
+      
+      	<section id="extensionmethods">
+		      <div class="row">
+		      	<div class="span-two-third">
+		      		<br>
+		      		<h2>Extension Methods</h2>
+		      		<br>
+		      	</div>
+		      </div>
+		      <div class="row">
+		      	<div class="span8">
+			      	<p>Xtend got its name from the great support for extending existing types using extension methods.
+			      	Extension methods allow to add new methods to existing types without touching them. In Xtend
+			      	local methods are always available as extension methods and are put on the member scope of the first argument's
+			      	type. That is given the following method definition ...</p>
+			        <pre class="prettyprint">
+/**
+ * will be available as extenion method locally.
+ */
+def fullName(Person p) {
+	p.firstName + " " + p.lastName
+}
+</pre>
+					<p>one can write <pre class="prettyprint">myPerson.fullName</pre>, which will be translated to and is the same as 
+					<pre class="prettyprint">this.fullName(myPerson)</pre>. So it's basically syntactic sugar, but it reads better and 
+					the content assist in the IDE can be much more helpful.
+			      	<h3>Static extenions</h3>
+			      	<p>Xtend puts a couple of default extension methods on the scope by default.
+			      	They are mostly higher-order functions for Java's collection library. However, you
+			      	can use any existing static method as an extension method if you use the keyword <strong>extension</strong>
+			      	in the static import: </p>
+			      	<pre class="prettyprint">import static extension java.util.Collections.*</pre>
+		      	</div>
+		      	<div class="span8">
+		      		<h3>Extension methods and injection</h3>
+		      		<p>The real fun begins when you use the extension keyword on fields together with some
+		      		dependency injection framework (we recommend <a href="http://code.google.com/p/google-guice/">Guice</a>):</p>
+		      		<pre class="prettyprint">
+@Inject extension PersonExtension /* no field name */
+		      		
+def example(Person p) {
+   // calls PersonExtension.fullName(Person) on 
+   // the injected instance
+   println( p.fullName )
+}
+</pre>
+					<p>This way you can define all kinds of layer-specific libraries for your domain model, without
+					poluting the model. And the best thing is, you can easily change the implementation without touching
+					the code. All you need to do is to change the dependency injection configuration.</p>
+					<p>If you wonder how you get polymorphism into this, that's what <a href="#multipledispatch">multiple dispatch</a> is for.
+		      	</div>
+	      	</div>
+      	</section>
+      	
+      	<section id="multipledispatch">
+		      <div class="row">
+		      	<div class="span-two-third">
+		      		<br>
+		      		<h2>Multiple Dispatch <small>No more visitors!</small></h2>
+		      		<br>
+		      	</div>
+		      </div>
+		      <div class="row">
+		      	<div class="span8">
+			      	<p>Everybody knows the <a href="http://en.wikipedia.org/wiki/Visitor_pattern">visitor pattern</a>.
+			      	<blockquote>
+			      	<p>In essence, the visitor allows one to add new virtual functions to a family of classes without modifying the classes themselves</p>
+			      	<small>Wikipedia, November 2011</small>
+			      	</blockquote>
+			      	<p>The visitor pattern is actually a work-around for the lack of <a href="http://en.wikipedia.org/wiki/Multiple_dispatch">multiple dispatch</a>. 
+			      	By default Xtend (like Java) links overloaded methods at compile time based on the static types of the arguments:</p>
+			        <pre class="prettyprint">
+def example() {
+  val Shape s = new Rectangle()
+  println(s.label) // prints "some shape"
+  
+  val Rectangle r = new Rectangle()
+  println(r.label) // prints "a rectangle"
+}
+			        
+def label(Shape s) {
+   "some shape"
+}
+
+def label(Rectangle r) {
+   "a rectangle"
+}
+</pre>
+		      	</div>
+		      	<div class="span8">
+		      		<p>However, Xtend also allows for a set of overloaded methods to do the dispatching
+		      		based on the actual runtime argument types. All you need to do is add the dispatch
+		      		keyword to the methods:</p>
+		      		<pre class="prettyprint">
+def example() {
+  val Shape s = new Rectangle()
+  println(s.label) // prints "a rectangle" !!!!!
+  
+  val Rectangle r = new Rectangle()
+  println(r.label) // prints "a rectangle"
+}
+			        
+def dispatch label(Shape s) {
+   "some shape"
+}
+
+def dispatch label(Rectangle r) {
+   "a rectangle"
+}
+</pre>
+					<p>Note, that the multiple dispatch behavior is compiled into the declaration, so
+					it will behave like that no matter from what JVM language you call the method.</p>
+		      	</div>
+	      	</div>
+      	</section>
+      </section>
+    </div> <!-- /container -->
+
+  </body>
+</html>
