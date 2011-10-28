@@ -202,7 +202,8 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		EObject eObject = resource.getContents().get(0);
 		inferrer.infer(eObject, new IAcceptor<JvmDeclaredType>() {
 			public void accept(JvmDeclaredType t) {
-				resource.getContents().add(t);
+				if(t != null)
+					resource.getContents().add(t);
 			}
 		}, isPreLinkingPhase);
 	}
