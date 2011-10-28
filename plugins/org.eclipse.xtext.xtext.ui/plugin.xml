@@ -165,6 +165,9 @@
 			id="org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectWizard"
 			name="%Xtext_Project"
 			project="true">
+			<description>
+            	%NewXtext_Project.description
+         	</description>
 		</wizard>
 		<wizard
 			category="org.eclipse.xtext.projectwiz"
@@ -173,6 +176,9 @@
 			id="org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.NewXtextProjectFromEcoreWizard"
 			name="%Xtext_Project_From_Ecore"
 			project="true">
+			<description>
+            	%NewXtext_Project_From_Ecore.description
+         	</description>
 		</wizard>
 	</extension>
 	

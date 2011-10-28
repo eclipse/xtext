@@ -395,18 +395,17 @@
       </category>
       <wizard
             category="org.eclipse.xtext.xtend2.ui.wizards"
-            descriptionImage="icons/xtend_wizard_big.png"
             icon="icons/Xtend-Icon-16.png"
             id="org.eclipse.xtext.xtend2.ui.wizards.NewXtend2ClassWizard"
-            name="Xtend Class">
+            name="%NewXtendClass.label">
             <class class="org.eclipse.xtext.xtend2.ui.Xtend2ExecutableExtensionFactory">
 				<parameter name="javatype" value="true" />
 				<parameter name="guicekey" value="org.eclipse.xtext.xtend2.ui.wizards.NewXtend2ClassWizard" />
 			</class>
+			<description>
+            	%NewXtendClass.description
+         	</description>
       </wizard>
-      <primaryWizard
-            id="org.eclipse.xtext.xtend2.ui.wizards.NewXtend2ClassWizard">
-      </primaryWizard>
    </extension>
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
