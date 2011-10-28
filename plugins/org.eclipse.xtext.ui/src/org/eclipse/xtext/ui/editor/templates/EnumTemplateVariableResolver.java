@@ -1,11 +1,14 @@
 package org.eclipse.xtext.ui.editor.templates;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.jface.text.templates.TemplateVariable;
+
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 
 /**
  * Resolves a template variable to <code>EEnumLiteral literals</code> which are
@@ -29,11 +32,14 @@ public class EnumTemplateVariableResolver extends
 				.getParams().iterator().next();
 		EEnum enumeration = (EEnum) getEClassifierForGrammar(enumerationName,
 				getGrammar(castedContext));
-		List<String> literals = new ArrayList<String>();
-		for (EEnumLiteral enumLiteral : enumeration.getELiterals()) {
-			literals.add(enumLiteral.getLiteral());
+		if (enumeration == null) {
+			return Collections.emptyList();
 		}
-		return literals;
+		return Lists.transform(enumeration.getELiterals(), new Function<EEnumLiteral, String>() {
+			public String apply(EEnumLiteral enumLiteral) {
+				return enumLiteral.getLiteral();
+			}
+		});
 	}
 
 }
