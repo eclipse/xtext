@@ -10,6 +10,7 @@ package org.eclipse.xtext.generator.generator;
 
 import static com.google.common.collect.Lists.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -75,7 +76,9 @@ public class GeneratorFragment extends AbstractGeneratorFragment {
 	
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
-		return new BindFactory().addTypeToType(IGenerator.class.getName(), getGeneratorName(grammar, getNaming())).getBindings();
+		if (isGenerateStub(grammar))
+			return new BindFactory().addTypeToType(IGenerator.class.getName(), getGeneratorName(grammar, getNaming())).getBindings();
+		return Collections.emptySet();
 	}
 
 	@Override
