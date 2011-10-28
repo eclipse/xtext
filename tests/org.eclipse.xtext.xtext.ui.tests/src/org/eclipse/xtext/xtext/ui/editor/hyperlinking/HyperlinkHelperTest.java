@@ -132,29 +132,34 @@ public class HyperlinkHelperTest extends AbstractXtextTests {
 
 	public void testCreateHyperlinksByOffset_05() {
 		assertNull(helper.createHyperlinksByOffset(resource, model.indexOf("[ecore::EObject]"), true));
-		assertNull(helper.createHyperlinksByOffset(resource, model.indexOf("[ecore::EObject]") + "[ecore::EObject".length(), true));
-		IHyperlink[] hyperlinks = helper.createHyperlinksByOffset(resource, model.indexOf("core::EObject]"), true);
-		assertNotNull(hyperlinks);
-		assertEquals(1, hyperlinks.length);
-		assertTrue(hyperlinks[0] instanceof XtextHyperlink);
-		XtextHyperlink hyperLink = (XtextHyperlink) hyperlinks[0];
-		assertEquals("ecore".length(), hyperLink.getHyperlinkRegion().getLength());
+		assertNull(helper.createHyperlinksByOffset(resource, model.indexOf("[ecore::EObject]") + "[ecore::EObject]".length(), true));
+		int idx = model.indexOf("ecore::EObject");
+		int length = "ecore".length();
+		for(int i = idx; i <= length; i++) {
+			IHyperlink[] hyperlinks = helper.createHyperlinksByOffset(resource, i, true);
+			assertNotNull(hyperlinks);
+			assertEquals(1, hyperlinks.length);
+			assertTrue(hyperlinks[0] instanceof XtextHyperlink);
+			XtextHyperlink hyperLink = (XtextHyperlink) hyperlinks[0];
+			assertEquals("ecore".length(), hyperLink.getHyperlinkRegion().getLength());
+		}
 	}
 
 	public void testCreateHyperlinksByOffset_06() {
-		assertNull(helper.createHyperlinksByOffset(resource, model.indexOf("::EObject]"), true));
 		assertNull(helper.createHyperlinksByOffset(resource, model.indexOf(":EObject]"), true));
-		assertNull(helper.createHyperlinksByOffset(resource, model.indexOf("EObject]") + "EObject".length(), true));
-		IHyperlink[] hyperlinks = helper.createHyperlinksByOffset(resource, model.indexOf("Object]"), true);
-		assertNotNull(hyperlinks);
-		assertEquals(1, hyperlinks.length);
-		assertTrue(hyperlinks[0] instanceof XtextHyperlink);
-		XtextHyperlink hyperLink = (XtextHyperlink) hyperlinks[0];
-		assertEquals("EObject".length(), hyperLink.getHyperlinkRegion().getLength());
-		assertEquals(
-				grammar.eResource().getResourceSet().getURIConverter().normalize(
-				EcoreUtil.getURI(EcorePackage.eINSTANCE.getEObject())), hyperLink.getURI());
-
+		int idx = model.indexOf("EObject]");
+		int length = "EObject".length();
+		for(int i = idx; i <= length; i++) {
+			IHyperlink[] hyperlinks = helper.createHyperlinksByOffset(resource, i, true);
+			assertNotNull(hyperlinks);
+			assertEquals(1, hyperlinks.length);
+			assertTrue(hyperlinks[0] instanceof XtextHyperlink);
+			XtextHyperlink hyperLink = (XtextHyperlink) hyperlinks[0];
+			assertEquals("EObject".length(), hyperLink.getHyperlinkRegion().getLength());
+			assertEquals(
+					grammar.eResource().getResourceSet().getURIConverter().normalize(
+					EcoreUtil.getURI(EcorePackage.eINSTANCE.getEObject())), hyperLink.getURI());
+		}
 	}
 
 	public void testCreateHyperlinksByOffset_07() {
@@ -182,7 +187,7 @@ public class HyperlinkHelperTest extends AbstractXtextTests {
 		URI uri = action.getURI();
 		assertNotNull(uri);
 		assertFalse(ClasspathUriUtil.isClasspathUri(uri));
-		assertTrue(ClasspathUriUtil.isClasspathUri(EcoreUtil.getURI(terminalGrammar)));
+		assertFalse(ClasspathUriUtil.isClasspathUri(EcoreUtil.getURI(terminalGrammar)));
 		EObject obj = grammar.eResource().getResourceSet().getEObject(uri, true);
 		assertNotNull(obj);
 		Grammar terminalGrammar = grammar.getUsedGrammars().get(0);

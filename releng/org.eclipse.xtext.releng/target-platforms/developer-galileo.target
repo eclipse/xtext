@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.6"?>
+
+<target name="developer-galileo" sequenceNumber="1">
+<locations>
+<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.xpand.feature.group" version="0.0.0"/>
+<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases"/>
+</location>
+<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.emf.sdk.feature.group" version="2.5.0.v200906151043"/>
+<unit id="org.eclipse.emf.compare.sdk.feature.group" version="1.0.1.v200909161031"/>
+<repository location="http://download.eclipse.org/modeling/emf/updates"/>
+</location>
+<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.platform.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.jdt.junit" version="0.0.0"/>
+<unit id="org.eclipse.jdt.junit4.runtime" version="0.0.0"/>
+<unit id="org.eclipse.pde.core" version="0.0.0"/>
+<unit id="org.eclipse.jdt.junit.runtime" version="0.0.0"/>
+<unit id="org.eclipse.pde.ui" version="0.0.0"/>
+<unit id="org.junit4" version="0.0.0"/>
+<unit id="org.junit" version="0.0.0"/>
+<repository location="http://download.eclipse.org/eclipse/updates/3.5"/>
+</location>
+<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="com.google.collect" version="0.0.0"/>
+<unit id="com.google.inject" version="0.0.0"/>
+<unit id="org.apache.log4j" version="0.0.0"/>
+<unit id="org.aopalliance" version="0.0.0"/>
+<unit id="org.easymock" version="0.0.0"/>
+<unit id="org.antlr.runtime" version="0.0.0"/>
+<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/S20110907174232/repository"/>
+</location>
+<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.draw2d.feature.group" version="0.0.0"/>
+<repository location="http://download.eclipse.org/tools/gef/updates/releases"/>
+</location>
+</locations>
+</target>

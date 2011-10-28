@@ -63,7 +63,10 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 		private final String ruleName;
 		private final IQualifiedNameConverter qualifiedNameConverter;
 
-		protected DefaultProposalCreator(ContentAssistContext contentAssistContext, String ruleName,
+		/**
+		 * @since 2.1
+		 */
+		public DefaultProposalCreator(ContentAssistContext contentAssistContext, String ruleName,
 				IQualifiedNameConverter qualifiedNameConverter) {
 			this.contentAssistContext = contentAssistContext;
 			this.ruleName = ruleName;

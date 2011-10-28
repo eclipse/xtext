@@ -11,11 +11,12 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import java.util.regex.Pattern;
 
+import org.eclipse.xtext.junit4.parameterized.IParameterProvider.IExpectation;
 import org.eclipse.xtext.junit4.parameterized.TestExpectationValidator.ITestExpectationValidator;
 import org.eclipse.xtext.junit4.parameterized.TestExpectationValidator.TestResult;
-import org.eclipse.xtext.junit4.parameterized.TestAsString.StringResultValidator;
+import org.eclipse.xtext.junit4.parameterized.XpectString.StringResultValidator;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.internal.FormattingMigrator;
 import org.junit.ComparisonFailure;
 
@@ -25,30 +26,29 @@ import org.junit.ComparisonFailure;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 @TestExpectationValidator(validator = StringResultValidator.class)
-public @interface TestAsString {
+public @interface XpectString {
 
 	public class StringResultValidator implements ITestExpectationValidator<String> {
-		protected static final Pattern WS = Pattern.compile("\\s+", Pattern.MULTILINE);
 
-		protected TestAsString config;
+		protected XpectString config;
 
-		public StringResultValidator(TestAsString config) {
+		public StringResultValidator(XpectString config) {
 			this.config = config;
 		}
 
-		public void validate(String expectation, @TestResult String actual) {
+		public void validate(XtextResource resource, IExpectation expectation, @TestResult String actual) {
 			String exp;
 			if (!config.whitespaceSensitive()) {
 				FormattingMigrator migrator = new FormattingMigrator();
-				exp = migrator.migrate(actual, expectation, WS);
+				exp = migrator.migrate(actual, expectation.getExpectation());
 			} else
-				exp = expectation;
-			if (config.caseSensitive()) {
-				if (!exp.equals(actual))
-					throw new ComparisonFailure("", exp, actual);
-			} else {
-				if (!exp.equalsIgnoreCase(actual))
-					throw new ComparisonFailure("", exp, actual);
+				exp = expectation.getExpectation();
+
+			if ((config.caseSensitive() && !exp.equals(actual))
+					|| (!config.caseSensitive() && !exp.equalsIgnoreCase(actual))) {
+				String expDoc = IExpectation.Util.replace(resource, expectation, exp);
+				String actDoc = IExpectation.Util.replace(resource, expectation, actual);
+				throw new ComparisonFailure("", expDoc, actDoc);
 			}
 		}
 	}

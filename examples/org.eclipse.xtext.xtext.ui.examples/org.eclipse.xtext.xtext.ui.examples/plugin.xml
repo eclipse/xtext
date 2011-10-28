@@ -124,30 +124,4 @@
 		 <projectDescriptor name="org.eclipse.xtext.example.xbase.tutorial" contentURI="contents/org.eclipse.xtext.example.xbase.tutorial.zip" description="A hands-on tutorial to learn the Xbase expression language."/>
 	  </example>
    </extension>
-   <!-- ========= org.eclipse.xtext.example.xtend.tutorial ========= -->
-	<extension point="org.eclipse.ui.newWizards">
-		<wizard	id="org.eclipse.xtext.examples.NewXtendTutorial" 
-			name="%XtendTutorial_name" 
-			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
-			category="org.eclipse.ui.Examples/org.eclipse.xtext.ui.Examples"
-			icon="icons/genproject.gif" 
-			project="true">
-			<description>%XtendTutorial_description</description>
-		</wizard>
-	</extension>
-	<extension point="org.eclipse.ui.newWizards">
-		<wizard	id="org.eclipse.xtext.examples.NewXtendTutorial" 
-			name="%XtendTutorial_name" 
-			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
-			category="org.eclipse.xtext.projectwiz/org.eclipse.xtext.project.Examples"
-			icon="icons/genproject.gif" 
-			project="true">
-			<description>%XtendTutorial_description</description>
-		</wizard>
-	</extension>
-	<extension point="org.eclipse.emf.common.ui.examples">
-	  <example wizardID="org.eclipse.xtext.examples.NewXtendTutorial" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="org.eclipse.xtext.example.xtend.tutorial" contentURI="contents/org.eclipse.xtext.example.xtend.tutorial.zip" description="A hands-on tutorial on Xtend."/>
-	  </example>
-   </extension>
 </plugin>
