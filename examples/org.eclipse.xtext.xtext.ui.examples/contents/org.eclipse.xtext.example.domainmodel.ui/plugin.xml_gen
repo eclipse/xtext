@@ -247,4 +247,35 @@
   </extension>
 
 
+   <extension
+         point="org.eclipse.xtext.builder.participant">
+      <participant
+            class="org.eclipse.xtext.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
+      </participant>
+   </extension>
+   <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            category="org.eclipse.xtext.example.domainmodel.Domainmodel"
+            class="org.eclipse.xtext.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+            id="org.eclipse.xtext.example.domainmodel.Domainmodel.compiler.preferencePage"
+            name="Compiler">
+            <keywordReference id="org.eclipse.xtext.example.domainmodel.ui.keyword_Domainmodel"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            category="org.eclipse.xtext.example.domainmodel.Domainmodel"
+            class="org.eclipse.xtext.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+            id="org.eclipse.xtext.example.domainmodel.Domainmodel.compiler.propertyPage"
+            name="Compiler">
+            <keywordReference id="org.eclipse.xtext.example.domainmodel.ui.keyword_Domainmodel"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+
 </plugin>
