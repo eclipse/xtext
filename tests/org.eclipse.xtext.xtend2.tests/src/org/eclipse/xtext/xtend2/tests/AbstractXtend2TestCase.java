@@ -29,7 +29,7 @@ import com.google.inject.Injector;
 
 public abstract class AbstractXtend2TestCase extends TestCase {
 
-	static final Injector injector = new TestSetup().createInjectorAndDoEMFRegistration();
+	private static Injector injector = null;
 
 	private static class TestSetup extends Xtend2StandaloneSetup {
 		
@@ -62,15 +62,21 @@ public abstract class AbstractXtend2TestCase extends TestCase {
 
 	@Override
 	protected void setUp() throws Exception {
-		getInjector().injectMembers(this);
+		doGetInjector().injectMembers(this);
 	}
 
 	public static Injector getInjector() {
+		if (injector == null)
+			injector = new TestSetup().createInjectorAndDoEMFRegistration();
 		return injector;
+	}
+	
+	protected Injector doGetInjector() {
+		return getInjector();
 	}
 
 	public <T> T get(Class<T> clazz) {
-		return getInjector().getInstance(clazz);
+		return doGetInjector().getInstance(clazz);
 	}
 
 	protected XtendClass clazz(String string) throws Exception {
@@ -82,7 +88,7 @@ public abstract class AbstractXtend2TestCase extends TestCase {
 	}
 
 	protected XtendFile file(String string, boolean validate) throws Exception {
-		XtextResourceSet set = get(XtextResourceSet.class);
+		XtextResourceSet set = getResourceSet();
 		String fileName = getFileName(string);
 		Resource resource = set.createResource(URI.createURI(fileName + ".xtend"));
 		resource.load(new StringInputStream(string), null);
@@ -95,9 +101,14 @@ public abstract class AbstractXtend2TestCase extends TestCase {
 		XtendFile file = (XtendFile) resource.getContents().get(0);
 		return file;
 	}
+
+	protected XtextResourceSet getResourceSet() {
+		XtextResourceSet set = get(XtextResourceSet.class);
+		return set;
+	}
 	
 	protected Iterable<XtendFile> files(boolean validate, String ... contents) throws Exception {
-		XtextResourceSet set = get(XtextResourceSet.class);
+		XtextResourceSet set = getResourceSet();
 		List<XtendFile> result = newArrayList();
 		for (String string : contents) {
 			String fileName = getFileName(string);

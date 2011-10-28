@@ -18,6 +18,7 @@ import java.util.Set;
 import junit.extensions.TestSetup;
 import junit.framework.Assert;
 import junit.framework.Test;
+import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.apache.log4j.Logger;
@@ -206,7 +207,7 @@ public class WorkbenchTestHelper extends Assert {
 		}
 	}
 
-	public static Test suite(Class<? extends AbstractXtend2UITestCase> clazz) {
+	public static Test suite(Class<? extends TestCase> clazz) {
 		return new TestSetup(new TestSuite(clazz, clazz.getCanonicalName())) {
 			private IProject project;
 
