@@ -86,6 +86,6 @@ public class MultiLineCommentDocumentationProvider implements IEObjectDocumentat
 			returnValue = returnValue.replaceAll("(?m)" + whitespace + linePostfix + whitespace + "$", "");
 			return returnValue.trim();
 		} else
-			return "";
+			return null;
 	}
 }

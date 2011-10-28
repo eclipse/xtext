@@ -90,8 +90,7 @@ public class JvmModelGenerator implements IGenerator {
   public StringConcatenation generateType(final JvmGenericType type) {
     StringConcatenation _xblockexpression = null;
     {
-      String _qualifiedName = type.getQualifiedName();
-      ImportManager _importManager = new ImportManager(true, _qualifiedName);
+      ImportManager _importManager = new ImportManager(true, type);
       final ImportManager importManager = _importManager;
       StringConcatenation _generateBody = this.generateBody(type, importManager);
       final StringConcatenation typeBody = _generateBody;
@@ -796,16 +795,18 @@ public class JvmModelGenerator implements IGenerator {
       DocumentationAdapter _head = IterableExtensions.<DocumentationAdapter>head(_filter);
       final DocumentationAdapter adapter = _head;
       StringConcatenation _xifexpression = null;
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(adapter, null);
-      if (_operator_notEquals) {
+      String _documentation = adapter==null?(String)null:adapter.getDocumentation();
+      boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_documentation);
+      boolean _operator_not = BooleanExtensions.operator_not(_isNullOrEmpty);
+      if (_operator_not) {
         {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("/**");
           final StringConcatenation doc = _builder;
           doc.newLine();
           doc.append(" * ");
-          String _documentation = adapter.getDocumentation();
-          doc.append(_documentation, " * ");
+          String _documentation_1 = adapter.getDocumentation();
+          doc.append(_documentation_1, " * ");
           doc.newLine();
           doc.append(" */");
           doc.newLine();
@@ -1093,21 +1094,21 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   public void internalDoGenerate(final EObject type, final IFileSystemAccess fsa) {
-    if ((type instanceof JvmGenericType)) {
-      _internalDoGenerate((JvmGenericType)type, (IFileSystemAccess)fsa);
+    if (type instanceof JvmGenericType) {
+      _internalDoGenerate((JvmGenericType)type, fsa);
     } else {
-      _internalDoGenerate((EObject)type, (IFileSystemAccess)fsa);
+      _internalDoGenerate(type, fsa);
     }
   }
   
   public StringConcatenation generateModifier(final JvmMember it) {
-    if ((it instanceof JvmConstructor)) {
+    if (it instanceof JvmConstructor) {
       return _generateModifier((JvmConstructor)it);
-    } else if ((it instanceof JvmGenericType)) {
+    } else if (it instanceof JvmGenericType) {
       return _generateModifier((JvmGenericType)it);
-    } else if ((it instanceof JvmOperation)) {
+    } else if (it instanceof JvmOperation) {
       return _generateModifier((JvmOperation)it);
-    } else if ((it instanceof JvmField)) {
+    } else if (it instanceof JvmField) {
       return _generateModifier((JvmField)it);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
@@ -1116,30 +1117,30 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   public CharSequence generateMember(final JvmMember it, final ImportManager importManager) {
-    if ((it instanceof JvmConstructor)) {
-      return _generateMember((JvmConstructor)it, (ImportManager)importManager);
-    } else if ((it instanceof JvmOperation)) {
-      return _generateMember((JvmOperation)it, (ImportManager)importManager);
-    } else if ((it instanceof JvmField)) {
-      return _generateMember((JvmField)it, (ImportManager)importManager);
+    if (it instanceof JvmConstructor) {
+      return _generateMember((JvmConstructor)it, importManager);
+    } else if (it instanceof JvmOperation) {
+      return _generateMember((JvmOperation)it, importManager);
+    } else if (it instanceof JvmField) {
+      return _generateMember((JvmField)it, importManager);
     } else {
-      return _generateMember((JvmMember)it, (ImportManager)importManager);
+      return _generateMember(it, importManager);
     }
   }
   
   public CharSequence toJavaLiteral(final JvmAnnotationValue it, final ImportManager importManager) {
-    if ((it instanceof JvmAnnotationAnnotationValue)) {
-      return _toJavaLiteral((JvmAnnotationAnnotationValue)it, (ImportManager)importManager);
-    } else if ((it instanceof JvmBooleanAnnotationValue)) {
-      return _toJavaLiteral((JvmBooleanAnnotationValue)it, (ImportManager)importManager);
-    } else if ((it instanceof JvmCustomAnnotationValue)) {
-      return _toJavaLiteral((JvmCustomAnnotationValue)it, (ImportManager)importManager);
-    } else if ((it instanceof JvmShortAnnotationValue)) {
-      return _toJavaLiteral((JvmShortAnnotationValue)it, (ImportManager)importManager);
-    } else if ((it instanceof JvmStringAnnotationValue)) {
-      return _toJavaLiteral((JvmStringAnnotationValue)it, (ImportManager)importManager);
-    } else if ((it instanceof JvmTypeAnnotationValue)) {
-      return _toJavaLiteral((JvmTypeAnnotationValue)it, (ImportManager)importManager);
+    if (it instanceof JvmAnnotationAnnotationValue) {
+      return _toJavaLiteral((JvmAnnotationAnnotationValue)it, importManager);
+    } else if (it instanceof JvmBooleanAnnotationValue) {
+      return _toJavaLiteral((JvmBooleanAnnotationValue)it, importManager);
+    } else if (it instanceof JvmCustomAnnotationValue) {
+      return _toJavaLiteral((JvmCustomAnnotationValue)it, importManager);
+    } else if (it instanceof JvmShortAnnotationValue) {
+      return _toJavaLiteral((JvmShortAnnotationValue)it, importManager);
+    } else if (it instanceof JvmStringAnnotationValue) {
+      return _toJavaLiteral((JvmStringAnnotationValue)it, importManager);
+    } else if (it instanceof JvmTypeAnnotationValue) {
+      return _toJavaLiteral((JvmTypeAnnotationValue)it, importManager);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(it, importManager).toString());

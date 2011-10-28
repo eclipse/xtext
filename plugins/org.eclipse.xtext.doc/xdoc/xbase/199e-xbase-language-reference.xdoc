@@ -32,3 +32,12 @@ ul[
 	item[Simple operator overloading]
 	item[Powerful switch expressions]
 ]
+
+section2-ref[xbaseLanguageRef_Syntax]
+
+section2-ref[xbaseLanguageRef_Types]
+
+section2-ref[xbaseLanguageRef_Expressions]
+
+section2-ref[xbaseLanguageRef_LibraryExtension]
+

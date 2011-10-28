@@ -35,7 +35,10 @@ could look like this:
 &nbsp;&nbsp;lightOn&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;L1ON<br/>
 &nbsp;&nbsp;doorOpened&nbsp;&nbsp;D1OP<br/>
 &nbsp;&nbsp;panelClosed&nbsp;PNCL<br/>
-&nbsp;&nbsp;<span class="keyword">resetting</span>&nbsp;doorOpened&nbsp;D1OP<br/>
+&nbsp;<span class="keyword">end</span><br/>
+&nbsp;<br/>
+<span class="keyword">resetEvents</span>&nbsp;<br/>
+&nbsp;&nbsp;doorOpened&nbsp;D1OP<br/>
 <span class="keyword">end</span><br/>
 &nbsp;<br/>
 <span class="keyword">commands</span><br/>
@@ -72,9 +75,10 @@ could look like this:
 </div>
 </p>
 <p>
-What we have are a bunch of declared events, commands, and states. Within states there are references to declared actions.
-Actions should be executed when entering the state. Furthermore, there are transitions consisting of a reference to an event and 
-a state.
+What we have are a bunch of declared events, commands, and states. Some events are addiitonally marked
+as being reset events. Within states there are references to declared actions. Actions should be executed 
+when entering the state. Furthermore, there are transitions consisting of a reference to an event and a 
+state.
 </p>
 <p>
 The first thing that you have to do in order to implement this tiny state machine example with Xtext,
@@ -194,13 +198,86 @@ rules in your grammar, as described in <a href="020-grammar-language.html#metamo
 <a name="package_declarations_3"></a>
 <h4>EPackage Import</h4>
 <p>
-If you already have an existing <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a>, you can import it using either a namespace URI or a resource URI. 
+If you already have an existing <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a>, you can import it using its namespace URI or a resource URI. 
 An <a href="http://www.ietf.org/rfc/rfc2396.txt">URI</a> (Uniform Resource Identifier) provides a simple and extensible 
 means for identifying an abstract or physical resource. For all the nifty details about EMF URIs 
-please refer to its <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" title="View JavaDoc"><abbr title="org.eclipse.emf.common.util.URI" >documentation</abbr></a>.
+please refer to its <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" title="View JavaDoc"><abbr title="org.eclipse.emf.common.util.URI" >documentation</abbr></a>. It is strongly recommended
+to use the namespace URI instead of the resource uri because it is independent from the concrete location
+in the file system and much more portable across different machines, easier to configure in the workflow
+and works better with language mixins. The import via platform URIs or file URIs can be considered deprecated
+and is only supported for backwards compatibility reasons.
 </p>
 <a name="package_declarations_3_2"></a>
-<h5>Using Resource URIs to Import Existing EPackages</h5>
+<h5>Using Namespace URIs to Import Existing EPackages</h5>
+<p>
+You can use namespace URI in order to import existing <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a>. This is generally 
+preferrable. The package will be read from the Xtext index and therefore your grammar is independent
+from the concrete location of the respective ecore file. You have to make sure though, that the ecore file is contained
+in a project, that is managed by Xtext. Therefore the project has to have to Xtext project nature attached.
+Ecore files that reside in referenced Java archives (JARs) are automatically picked up and indexed if
+the referencing project itself is an Xtext project.
+</p>
+<p>
+To import an EPackage, you have to state its namespace URI like this:
+</p>
+<p>
+<span class="inlinecode"><span class="keyword">import</span>&nbsp;<span class="string">"http://www.xtext.org/example/Domainmodel"</span>&nbsp;<span class="keyword">as</span>&nbsp;dmodel</span>
+</p>
+<p>
+In order to be able to find the referenced package in the language generator, some configuration values
+have to be set. It is usually the easiest way to register the generated <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a> 
+interface in the workflow.
+The <abbr title="org.eclipse.emf.mwe.utils.StandaloneSetup" >StandaloneSetup</abbr> offers the respective methods to achieve this.
+Simply state something like this in the workflow:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+bean&nbsp;=&nbsp;StandaloneSetup&nbsp;{<br/>
+&nbsp;&nbsp;platformUri&nbsp;=&nbsp;<span class="string">"${runtimeProject}/../.."</span><br/>
+&nbsp;&nbsp;scanClassPath&nbsp;=&nbsp;<span class="keyword">true</span><br/>
+&nbsp;&nbsp;registerGeneratedEPackage&nbsp;=&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;<span class="string">"org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage"</span><br/>
+&nbsp;&nbsp;registerGenModelFile&nbsp;=&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;<span class="string">"platform:/resource/.../path/to/Domainmodel.genmodel"</span><br/>
+}<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+The registered genmodel is necessary to tell the code generator how the referenced Java classes are named.
+Please see below for alternatives that allow to register the genmodel, too. They may be handy if you
+create the genmodel in the workflow itself. 
+</p>
+<p>
+If the generated EPackage interface is not available when the language workflow is executed, you can
+use another approach to register the reference packages. This may happen if your want to generate EMF
+classes and the language infrastructure in one and the same workflow. The section in the workflow, that
+refers the your grammar, allows to set additional resources that should be loaded prior to loading the
+grammar file. The ecore files that contain the referenced EPackages are a good candidate for preloaded
+resources.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+language&nbsp;=&nbsp;{<br/>
+&nbsp;&nbsp;loadedResource&nbsp;=&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;<span class="string">"platform:/resource/.../path/to/Domainmodel.ecore"</span><br/>
+&nbsp;&nbsp;uri&nbsp;=&nbsp;grammarURI<br/>
+}<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+You can use either platform URIs or classpath URIs to list the required ecore files (see below for details
+on both URI schemes).
+</p>
+<a name="package_declarations_3_3"></a>
+<h5>Using Resource URIs to Import Existing EPackages - Deprecated</h5>
 <p>
 In order to import an existing Ecore model, you&apos;ll have to have the *.ecore file describing the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a> 
 you want to 
@@ -240,10 +317,10 @@ fragment&nbsp;=&nbsp;org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment&nb
 </div>
 </div>
 </p>
-<a name="package_declarations_3_3"></a>
-<h5>Using Classpath URIs to Import Existing EPackages</h5>
+<a name="package_declarations_3_4"></a>
+<h5>Using Classpath URIs to Import Existing EPackages - Deprecated</h5>
 <p>
-We like to leverage Java&apos;s classpath mechanism, because is is well understood and can be configured easily
+We usually like to leverage Java&apos;s classpath mechanism, because is is well understood and can be configured easily
 with Eclipse. Furthermore it allows us to package libraries as jars. If you want to reference an existing
 <em>*.ecore</em> file which is contained in a jar, you can make use of the 
 classpath URI scheme we&apos;ve introduced. For instance if you want to reference Java elements, you can use the JvmType Ecore model 
@@ -271,18 +348,7 @@ fragment&nbsp;=&nbsp;org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment&nb
 </div>
 </p>
 <p>
-See the section on <a href="199a-jvmtypes.html" title="Go to &quot;Referring to Java Elements using JVM Types&quot;">Referring Java Types</a> for a full explanation of this useful feature.
-</p>
-<a name="package_declarations_3_4"></a>
-<h5>Using Namespace URIs to Import Existing EPackages</h5>
-<p>
-You can also use nsURI in order to import existing <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a>. Note that this is generally not
-preferrable, because you&apos;ll have to have the corresponding EPackage installed in the workbench.
-There&apos;s mainly just one exception, that is Ecore itself. So if you refer to Ecore it is best
-to use its nsURI :
-</p>
-<p>
-<span class="inlinecode"><span class="keyword">import</span>&nbsp;<span class="string">"http://www.eclipse.org/emf/2002/Ecore"</span>&nbsp;<span class="keyword">as</span>&nbsp;ecore</span>
+See the section on <a href="199-xtext-and-java.html#jvmtypes" title="Go to &quot;Referring to Java Elements using JVM Types&quot;">Referring Java Types</a> for a full explanation of this useful feature.
 </p>
 <a name="package_declarations_4"></a>
 <h4>Ecore Model Aliases for EPackages</h4>
@@ -367,7 +433,7 @@ or underscore <span class="inlinecode"><span class="string">&apos;_&apos;</span>
 </p>
 <p>
 The caret is used to escape an identifier if there are conflicts with existing keywords. It is removed 
-by the <em>ID</em> rule&apos;s <a href="090-valueconverter.html" title="Go to &quot;Value Converter&quot;">ValueConverter</a>. 
+by the <em>ID</em> rule&apos;s <a href="050-heading-runtime.html#valueconverter" title="Go to &quot;Value Converter&quot;">ValueConverter</a>. 
 </p>
 <p>
 This is the simplified formal definition of terminal rules:
@@ -416,9 +482,9 @@ This means that the terminal rule <em>INT</em> returns instances of <span class=
 kind of data type here, which just needs to be an instance of <span class="inlinecode">ecore::EDataType</span>. In order to tell the framework 
 how to convert the parsed string to a value of the declared data type, you need to provide your own 
 implementation of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/conversion/IValueConverterService.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.conversion.IValueConverterService" >IValueConverterService</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java" title="View Source Code" >(src)</a> (cf. 
-<a href="090-valueconverter.html" title="Go to &quot;Value Converter&quot;">value converters</a>). The value converter is also the service that allows to remove escape
+<a href="050-heading-runtime.html#valueconverter" title="Go to &quot;Value Converter&quot;">value converters</a>). The value converter is also the service that allows to remove escape
 sequences or semantically unnecessary character like quotes from string literals or the caret <span class="inlinecode"><span class="string">&apos;^&apos;</span></span> from identifiers.
- Its implementation needs to be registered as a service (cf. <a href="040-dependency-injection.html" title="Go to &quot;Dependency Injection in Xtext with Google Guice&quot;">Service Framework</a>).
+ Its implementation needs to be registered as a service (cf. <a href="030-generator.html#dependencyInjection" title="Go to &quot;Dependency Injection in Xtext with Google Guice&quot;">Service Framework</a>).
 </p>
 <a name="syntax_4_4"></a>
 <h4>Extended Backus-Naur Form Expressions</h4>
@@ -585,7 +651,7 @@ starting with a special delimiter.
 <p>
 The parser is fed with a sequence of terminals and walks through the so called parser rules. Hence a parser rule - 
 contrary to a terminal rule - does not produce a single atomic terminal token but a tree of non-terminal 
-and terminal tokens. They lead to a so called <a href="016-working-with-Xtext-models.html#node_model" title="Go to &quot;Working with the Node Model&quot;">parse tree</a> (in Xtext it is also referred 
+and terminal tokens. They lead to a so called <a href="" title="Go to &quot;Working with the Node Model&quot;">parse tree</a> (in Xtext it is also referred 
 as node model). Furthermore, parser rules are handled as kind of a building plan for the creation of 
 the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObjects</abbr></a> that form the semantic model (the linked abstract syntax graph or AST). Due to this 
 fact, parser rules are even called production or EObject rules. Different constructs like actions and 
@@ -741,7 +807,7 @@ which the crosslink later should be established. If the terminal is omitted, it 
 with the name <em>ID</em> - if one can be found. The terminal is mandatory for languages that do not define a rule with the name <em>ID</em>.
 </p>
 <p>
-Have a look at the <a href="070-linking.html" title="Go to &quot;Linking&quot;">linking section</a> in order to understand how linking is done.
+Have a look at the <a href="050-heading-runtime.html#linking" title="Go to &quot;Linking&quot;">linking section</a> in order to understand how linking is done.
 </p>
 <a name="unordered_groups"></a>
 <h5>Unordered Groups</h5>
@@ -1198,7 +1264,7 @@ Note that rules that do not call other parser rules and do neither contain any a
  considered to be data type rules and the data type <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >EString</abbr></a> is implied if none has been explicitly declared.
 </p>
 <p>
-<a href="090-valueconverter.html" title="Go to &quot;Value Converter&quot;">Value converters</a> are used to transform the parsed string to the actually returned
+<a href="050-heading-runtime.html#valueconverter" title="Go to &quot;Value Converter&quot;">Value converters</a> are used to transform the parsed string to the actually returned
 data type value.
 </p>
 <a name="syntax_8"></a>
@@ -1337,8 +1403,8 @@ predicates which are expressed by a leading <span class="inlinecode">=&gt;</span
 <div class="incode">
 <p class="code">
 Condition:&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;if&apos;</span>&nbsp;condition=Expression&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;then&apos;</span>&nbsp;then=Expression&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;if&apos;</span>&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;condition=BooleanExpression&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then=Expression&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(=&gt;<span class="string">&apos;else&apos;</span>&nbsp;else=Expression)?<br/>
 </p>
 </div>

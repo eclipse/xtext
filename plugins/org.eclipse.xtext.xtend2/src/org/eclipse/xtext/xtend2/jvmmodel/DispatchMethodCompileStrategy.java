@@ -57,7 +57,7 @@ public class DispatchMethodCompileStrategy implements Functions.Function1<Import
 		boolean needsElse = true;
 		for (JvmOperation operation : sortedDispatchOperations) {
 			Iterator<JvmFormalParameter> iter1 = dispatchOperation.getParameters().iterator();
-			List<Later> laters = newArrayList();
+			final List<Later> laters = newArrayList();
 			for (Iterator<JvmFormalParameter> iter2 = operation.getParameters().iterator(); iter2.hasNext();) {
 				JvmFormalParameter p1 = iter1.next();
 				JvmFormalParameter p2 = iter2.next();
@@ -68,15 +68,23 @@ public class DispatchMethodCompileStrategy implements Functions.Function1<Import
 						laters.add(new Later() {
 							@Override
 							public void exec() {
-								a.append("(").append(name).append(" == null)");
+								if (laters.size() > 1)
+									a.append("(");
+								a.append(name).append(" == null");
+								if (laters.size() > 1)
+									a.append(")");
 							}
 						});
 					} else {
 						laters.add(new Later() {
 							@Override
 							public void exec() {
-								a.append("(").append(name).append(" instanceof ");
-								a.append(primitives.asWrapperTypeIfPrimitive(type).getType()).append(")");
+								if (laters.size() > 1)
+									a.append("(");
+								a.append(name).append(" instanceof ");
+								a.append(primitives.asWrapperTypeIfPrimitive(type).getType());
+								if (laters.size() > 1)
+									a.append(")");
 							}
 						});
 					}
@@ -150,10 +158,12 @@ public class DispatchMethodCompileStrategy implements Functions.Function1<Import
 		for (Iterator<JvmFormalParameter> iter2 = actualOperationToCall.getParameters().iterator(); iter2.hasNext();) {
 			JvmFormalParameter p1 = iter1.next();
 			JvmFormalParameter p2 = iter2.next();
-			a.append("(");
-			typeReferenceSerializer.serialize(primitives.asWrapperTypeIfPrimitive(p2.getParameterType()),
-					dispatchOperation, a);
-			a.append(")");
+			if (!typeConformanceComputer.isConformant(p2.getParameterType(), p1.getParameterType(), true)) {
+				a.append("(");
+				typeReferenceSerializer.serialize(primitives.asWrapperTypeIfPrimitive(p2.getParameterType()),
+						dispatchOperation, a);
+				a.append(")");
+			}
 			if (typeReferences.is(p2.getParameterType(), Void.class)) {
 				a.append("null");
 			} else {

@@ -22,7 +22,7 @@ If you want to learn more about EMF, we recommend reading the <a href="http://ww
 Xtext uses EMF models as the in-memory representation of any parsed text files. This in-memory 
 object graph is called the <em>Abstract Syntax Tree</em> (AST). Depending on the community this concepts is 
 also called <em>document object graph (DOM)</em>, <em>semantic model</em>, or simply <em>model</em>. We use <em>model</em> and <em>AST</em> 
-interchangeably. Given the example model from the <a href="015-getting-started.html#getting_started_xtext" title="Go to &quot;Creating a DSL&quot;">introduction</a>, the AST 
+interchangeably. Given the example model from the <a href="020-domainmodel-step-by-step.html#DomainmodelWalkThrough" title="Go to &quot;15 Minutes Tutorial&quot;">tutorial</a>, the AST 
 looks similar to this
 </p>
 <p>
@@ -151,7 +151,7 @@ Among other things, the code generator will generate
 <p>
 Xtext provides an implementation of EMF&apos;s resource, the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/XtextResource.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.XtextResource" >XtextResource</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java" title="View Source Code" >(src)</a>. 
 This does not only encapsulate the parser that converts text to an EMF model but also the 
-<a href="100-serialization.html" title="Go to &quot;Serialization&quot;">serializer</a> working the opposite direction. That way, an Xtext model just looks like any 
+<a href="050-heading-runtime.html#serialization" title="Go to &quot;Serialization&quot;">serializer</a> working the opposite direction. That way, an Xtext model just looks like any 
 other Ecore-based model from the outside, making it amenable for the use by other EMF based tools. In fact,
 the Xpand templates in the generator plug-in created by the Xtext wizard do not make any assumption on the 
 fact that the model is described in Xtext, and they would work fine with any model based on the same Ecore 
@@ -216,18 +216,18 @@ want to use Xtext to serialize your models as described above, it is good to hav
 				file changes.
 	</li>
 	<li>
-		Implement an <a href="110-fragmentprovider.html" title="Go to &quot;Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)&quot;"><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IFragmentProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IFragmentProvider" >IFragmentProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IFragmentProvider.java" title="View Source Code" >(src)</a></a> to make 
+		Implement an <a href="050-heading-runtime.html#fragmentProvider" title="Go to &quot;Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)&quot;"><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IFragmentProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IFragmentProvider" >IFragmentProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IFragmentProvider.java" title="View Source Code" >(src)</a></a> to make 
 				the XtextResource return stable fragments for its contained
 				elements, e.g. based on composite names rather than order of 
 				appearance.
 	</li>
 	<li>
 		Implement an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/IQualifiedNameProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider" >IQualifiedNameProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java" title="View Source Code" >(src)</a> and an 
-				<a href="080-scoping.html" title="Go to &quot;Scoping&quot;"><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" title="View Source Code" >(src)</a></a> to make the 
+				<a href="050-heading-runtime.html#scoping" title="Go to &quot;Scoping&quot;"><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" title="View Source Code" >(src)</a></a> to make the 
 				names of all linkable elements in cross-references unique.
 	</li>
 	<li>
-		Provide an <a href="105-formatting.html" title="Go to &quot;Formatting (Pretty Printing)&quot;"><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/formatting/IFormatter.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.formatting.IFormatter" >IFormatter</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java" title="View Source Code" >(src)</a></a> to improve the readability 
+		Provide an <a href="050-heading-runtime.html#formatting" title="Go to &quot;Formatting (Pretty Printing)&quot;"><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/formatting/IFormatter.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.formatting.IFormatter" >IFormatter</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java" title="View Source Code" >(src)</a></a> to improve the readability 
 				of the generated textual models.
 	</li>
 	<li>

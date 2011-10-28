@@ -80,10 +80,12 @@ public class GeneratorFragment extends AbstractGeneratorFragment {
 
 	@Override
 	public String[] getImportedPackagesRt(Grammar grammar) {
-		return new String[] {
-				"org.eclipse.xtext.xbase.lib",
-				"org.eclipse.xtext.xtend2.lib"
-		};
+		if (isGenerateStub(grammar))
+			return new String[] {
+					"org.eclipse.xtext.xbase.lib",
+					"org.eclipse.xtext.xtend2.lib"
+			};
+		return Strings.EMPTY_ARRAY;
 	}
 
 	public static String getGeneratorName(Grammar grammar, Naming naming) {
@@ -97,13 +99,15 @@ public class GeneratorFragment extends AbstractGeneratorFragment {
 		.addTypeToInstance("org.eclipse.core.resources.IWorkspaceRoot", "org.eclipse.core.resources.ResourcesPlugin.getWorkspace().getRoot()")
 		.addConfiguredBinding(
 						"BuilderPreferenceStoreInitializer",
-						"binder.bind(org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer.class).to(org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.Initializer.class)")
+						"binder.bind(org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer.class)" +
+						".annotatedWith(com.google.inject.name.Names.named(\"builderPreferenceInitializer\"))" +
+						".to(org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.Initializer.class)")
 		.getBindings();
 	}
 	
 	@Override
 	public String[] getExportedPackagesRt(Grammar grammar) {
-		if (isGenerateStub(grammar) || isGenerateMwe(grammar) || isGenerateJavaMain(grammar))
+		if (isGenerateStub(grammar) || isGenerateJavaMain(grammar))
 			return new String[] { Strings.skipLastToken(getGeneratorName(grammar, getNaming()), ".") };
 		else 
 			return new String[0];

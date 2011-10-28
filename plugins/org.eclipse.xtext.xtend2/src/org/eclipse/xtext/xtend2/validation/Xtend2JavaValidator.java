@@ -61,7 +61,6 @@ import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XClosure;
-import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
@@ -136,7 +135,6 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 
 	private final Set<EReference> typeConformanceCheckedReferences = ImmutableSet.copyOf(Iterables.concat(super
 			.getTypeConformanceCheckedReferences(), ImmutableSet.of(
-			Xtend2Package.Literals.CREATE_EXTENSION_INFO__CREATE_EXPRESSION,
 			Xtend2Package.Literals.RICH_STRING_FOR_LOOP__AFTER, Xtend2Package.Literals.RICH_STRING_FOR_LOOP__BEFORE,
 			Xtend2Package.Literals.RICH_STRING_FOR_LOOP__SEPARATOR, Xtend2Package.Literals.RICH_STRING_IF__IF,
 			Xtend2Package.Literals.RICH_STRING_ELSE_IF__IF)));
@@ -170,7 +168,7 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 		for (Entry<Class<?>, ElementType> mapping : targetInfos.entrySet()) {
 			if (mapping.getKey().isInstance(eContainer)) {
 				if (!targets.contains(mapping.getValue())) {
-					error("The annotation @" + annotation.getAnnotationType().getIdentifier()
+					error("The annotation @" + annotation.getAnnotationType().getSimpleName()
 							+ " is disallowed for this location.", annotation, null, INSIGNIFICANT_INDEX,
 							ANNOTATION_WRONG_TARGET);
 				}
@@ -513,12 +511,6 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 				}
 			}
 		}
-	}
-
-	@Override
-	protected boolean isImplicitReturn(XExpression expr) {
-		return (expr.eContainer() instanceof XtendFunction || expr.eContainer() instanceof XClosure)
-				&& !getEarlyExitComputer().isEarlyExit(expr);
 	}
 
 	@Check

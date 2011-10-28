@@ -50,7 +50,7 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def generateType(JvmGenericType type) {
-		val importManager = new ImportManager(true, type.qualifiedName)
+		val importManager = new ImportManager(true, type)
 		val typeBody = generateBody(type, importManager)
 		'''
 			«IF type.packageName != null»package «type.packageName»;
@@ -212,7 +212,7 @@ class JvmModelGenerator implements IGenerator {
 	
 	def generateJavaDoc(EObject it) {
 		val adapter = it.eAdapters.filter(typeof(DocumentationAdapter)).head
-		if(adapter != null) {
+		if(!adapter?.documentation.nullOrEmpty) {
 			val doc = '''/**''';
 			doc.newLine
 			doc.append(" * ")

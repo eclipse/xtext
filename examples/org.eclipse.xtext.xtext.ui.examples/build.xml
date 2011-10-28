@@ -29,8 +29,6 @@
 		<zip_example name="org.eclipse.xtext.example.domainmodel" />
 		<zip_example name="org.eclipse.xtext.example.domainmodel.tests" />
 		<zip_example name="org.eclipse.xtext.example.domainmodel.ui" />
-		<zip_example name="org.eclipse.xtext.example.ecoredsl" />
-		<zip_example name="org.eclipse.xtext.example.ecoredsl.ui" />
 		<zip_example name="org.eclipse.xtext.example.fowlerdsl" />
 		<zip_example name="org.eclipse.xtext.example.fowlerdsl.ui" />
 		<zip_example name="org.eclipse.xtext.example.xbase.tutorial" />

@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -41,6 +42,7 @@ import org.eclipse.xtext.util.Triple;
 
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -161,19 +163,20 @@ public class LazyLinkingResource extends XtextResource {
 				try {
 					if (!resolving.add(triple))
 						return handleCyclicResolution(triple);
-//					Set<String> unresolveableProxies = getCache().get("UNRESOLVEABLE_PROXIES", this,
-//							new Provider<Set<String>>() {
-//								public Set<String> get() {
-//									return Sets.newHashSet();
-//								}
-//							});
-//					if (unresolveableProxies.contains(uriFragment))
-//						return null;
+					Set<String> unresolveableProxies = getCache().get("UNRESOLVEABLE_PROXIES", this,
+							new Provider<Set<String>>() {
+								public Set<String> get() {
+									return Sets.newHashSet();
+								}
+							});
+					if (unresolveableProxies.contains(uriFragment))
+						return null;
 					EReference reference = triple.getSecond();
 					List<EObject> linkedObjects = getLinkingService().getLinkedObjects(triple.getFirst(), reference,
 							triple.getThird());
 					if (linkedObjects.isEmpty()) {
-//						unresolveableProxies.add(uriFragment);
+						if (isUnresolveableProxyCacheable(triple))
+							unresolveableProxies.add(uriFragment);
 						createAndAddDiagnostic(triple);
 						return null;
 					}
@@ -185,12 +188,13 @@ public class LazyLinkingResource extends XtextResource {
 						log.error("An element of type " + result.getClass().getName()
 								+ " is not assignable to the reference " + reference.getEContainingClass().getName()
 								+ "." + reference.getName());
-//						unresolveableProxies.add(uriFragment);
+						if (isUnresolveableProxyCacheable(triple))
+							unresolveableProxies.add(uriFragment);
 						createAndAddDiagnostic(triple);
 						return null;
 					}
 					// remove previously added error markers, since everything should be fine now
-//					unresolveableProxies.remove(uriFragment);
+					unresolveableProxies.remove(uriFragment);
 					removeDiagnostic(triple);
 					return result;
 				} finally {
@@ -205,6 +209,13 @@ public class LazyLinkingResource extends XtextResource {
 			throw new WrappedException(e);
 		}
 		return super.getEObject(uriFragment);
+	}
+
+	/**
+	 * @since 2.1
+	 */
+	protected boolean isUnresolveableProxyCacheable(Triple<EObject, EReference, INode> triple) {
+		return true;
 	}
 
 	protected EObject handleCyclicResolution(Triple<EObject, EReference, INode> triple) throws AssertionError {

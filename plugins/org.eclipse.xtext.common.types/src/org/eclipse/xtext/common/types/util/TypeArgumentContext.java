@@ -81,6 +81,7 @@ public class TypeArgumentContext implements ITypeArgumentContext {
 	}
 	
 	protected abstract class CopyingTypeReferenceVisitor extends AbstractTypeReferenceVisitorWithParameter.InheritanceAware<Boolean, JvmTypeReference> {
+		
 		@Override
 		protected JvmTypeReference handleNullReference(Boolean parameter) {
 			return null;
@@ -91,11 +92,12 @@ public class TypeArgumentContext implements ITypeArgumentContext {
 			if (type instanceof JvmTypeParameter) {
 				if (isRawTypeContext() || boundParameters.containsKey(type)) {
 					JvmTypeReference bound = getBoundArgument((JvmTypeParameter) type);
-					if (bound.getType() == type) {
+					if (isRecursive(type, bound)) {
 						// TODO find the reason for this recursion
 //						System.out.println("Recursion2");
 						return bound;
 					}
+					
 					return visit(bound, replaceWildcards);
 				}
 			}
@@ -106,6 +108,38 @@ public class TypeArgumentContext implements ITypeArgumentContext {
 					result.getArguments().add(visit(argument, replaceWildcards));
 				}
 			}
+			return result;
+		}
+		
+		protected boolean isRecursive(final JvmType type, JvmTypeReference reference) {
+			boolean result = new AbstractTypeReferenceVisitor.InheritanceAware<Boolean>() {
+				@Override
+				protected Boolean handleNullReference() {
+					return true;
+				}
+				@Override
+				public Boolean doVisitTypeReference(JvmTypeReference reference) {
+					return false;
+				}
+				@Override
+				public Boolean doVisitWildcardTypeReference(JvmWildcardTypeReference reference) {
+					for(JvmTypeConstraint constraint: reference.getConstraints()) {
+						if (visit(constraint.getTypeReference()))
+							return true;
+					}
+					return false;
+				}
+				@Override
+				public Boolean doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference) {
+					if (type == reference.getType())
+						return true;
+					for(JvmTypeReference argument: reference.getArguments()) {
+						if (visit(argument))
+							return true;
+					}
+					return false;
+				}
+			}.visit(reference);
 			return result;
 		}
 		
@@ -170,7 +204,7 @@ public class TypeArgumentContext implements ITypeArgumentContext {
 					if (type instanceof JvmTypeParameter) {
 						if (isRawTypeContext() || boundParameters.containsKey(type)) {
 							JvmTypeReference bound = getBoundArgument((JvmTypeParameter) type);
-							if (bound.getType() == type) {
+							if (isRecursive(type, bound)) {
 								// TODO find the reason for this recursion
 //								System.out.println("Recursion2");
 								return bound;
@@ -299,7 +333,7 @@ public class TypeArgumentContext implements ITypeArgumentContext {
 					if (type instanceof JvmTypeParameter) {
 						if (isRawTypeContext() || boundParameters.containsKey(type)) {
 							JvmTypeReference bound = getBoundArgument((JvmTypeParameter) type);
-							if (bound.getType() == type) {
+							if (isRecursive(type, bound)) {
 								// TODO find the reason for this recursion
 //								System.out.println("Recursion2");
 								return bound;

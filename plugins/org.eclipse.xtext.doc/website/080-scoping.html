@@ -45,6 +45,17 @@
 		<li id="050-validation.html" ><a href="050-validation.php" >Creating Custom Validation Rules</a></li>
 		</ul>
 		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="035-domainmodel-java.php">Five simple steps to your JVM language</a></div>
+		<ul style="display: none;" id="subToc_035-domainmodel-java.html">
+		<li id="035-domainmodel-java.html#JvmDomainmodel_7" ><a href="035-domainmodel-java.php#JvmDomainmodel_7" >Step One: Create A New Xtext Project</a></li>
+		<li id="035-domainmodel-java.html#JvmDomainmodel_8" ><a href="035-domainmodel-java.php#JvmDomainmodel_8" >Step Two: Write the Grammar</a></li>
+		<li id="035-domainmodel-java.html#JvmDomainmodel_9" ><a href="035-domainmodel-java.php#JvmDomainmodel_9" >Step Three: Generate Language Artifacts</a></li>
+		<li id="035-domainmodel-java.html#JvmDomainmodel_10" ><a href="035-domainmodel-java.php#JvmDomainmodel_10" >Step Four: Define the Mapping to JVM Concepts</a></li>
+		<li id="035-domainmodel-java.html#JvmDomainmodel_11" ><a href="035-domainmodel-java.php#JvmDomainmodel_11" >Step Five : Try the Editor!</a></li>
+		</ul>
+		</li>
 		<li class="partentry" >
 		Reference Documentation
 		</li>
@@ -119,10 +130,6 @@
 		<li id="199c-xbase-inferred-type.html" ><a href="199c-xbase-inferred-type.php" >Inferring a JVM Model</a></li>
 		<li id="199d-xbase-expressions.html" ><a href="199d-xbase-expressions.php" >Using Xbase Expressions</a></li>
 		<li id="199e-xbase-language-reference.html" ><a href="199e-xbase-language-reference.php" >Xbase Language Reference</a></li>
-		<li id="199f-xbase-language-reference-syntax.html" ><a href="199f-xbase-language-reference-syntax.php" >Lexical Syntax</a></li>
-		<li id="199g-xbase-language-reference-types.html" ><a href="199g-xbase-language-reference-types.php" >Types</a></li>
-		<li id="199h-xbase-language-reference-expressions.html" ><a href="199h-xbase-language-reference-expressions.php" >Expressions</a></li>
-		<li id="199i-xbase-language-reference-libraries.html" ><a href="199i-xbase-language-reference-libraries.php" >Extension Methods</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -185,7 +192,7 @@
 			  <ul>
 			    <li><a href="080-scoping.php#global_scopes" >Global Scopes and Resource Descriptions</a></li>
 			    <li><a href="080-scoping.php#local_scoping" >Local Scoping</a></li>
-			    <li><a href="080-scoping.php#scoping_12" >Imported Namespace-Aware Scoping</a></li>
+			    <li><a href="080-scoping.php#namespaceImports" >Imported Namespace-Aware Scoping</a></li>
 			  </ul>
 			</div>
 			<p>
@@ -843,7 +850,7 @@
 			This scope can now be used for any cross-references of type <em>State</em> for context objects owned by the 
 			state machine.
 			</p>
-			<a name="scoping_12" ></a>
+			<a name="namespaceImports" ></a>
 			<h2>Imported Namespace-Aware Scoping</h2>
 			<p>
 			The imported namespace aware scoping is based on qualified names and namespaces. It adds namespace 
@@ -852,7 +859,7 @@
 			imported names are only visible within that namespace. See the domain model example: its scope provider 
 			extends <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.html" title="org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider">ImportedNamespaceAwareLocalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.java" title="View Source Code" >(src)</a>.
 			</p>
-			<a name="scoping_12_2" ></a>
+			<a name="namespaceImports_2" ></a>
 			<h3><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/IQualifiedNameProvider.html" title="org.eclipse.xtext.naming.IQualifiedNameProvider">IQualifiedNameProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java" title="View Source Code" >(src)</a></h3>
 			<p>
 			The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.html" title="org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider">ImportedNamespaceAwareLocalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.java" title="View Source Code" >(src)</a> 
@@ -888,7 +895,7 @@
 				</div>
 			</div>
 			</p>
-			<a name="scoping_12_3" ></a>
+			<a name="namespaceImports_3" ></a>
 			<h3>Importing Namespaces</h3>
 			<p>
 			The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.html" title="org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider">ImportedNamespaceAwareLocalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.java" title="View Source Code" >(src)</a> looks up 

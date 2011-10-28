@@ -40,11 +40,15 @@ public class StringProduction implements Production<ProdElement, String> {
 
 		protected String value;
 
-		protected ProdElement(ElementType type) {
+		public ProdElement(ElementType type) {
 			super();
 			this.type = type;
 			if (type != ElementType.TOKEN)
 				this.children = Lists.newArrayList();
+		}
+
+		public void setValue(String value) {
+			this.value = value;
 		}
 
 		protected void addChild(ProdElement ele) {
@@ -54,6 +58,18 @@ public class StringProduction implements Production<ProdElement, String> {
 
 		public List<ProdElement> getChildren() {
 			return children;
+		}
+
+		public void setMany(boolean many) {
+			this.many = many;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public void setOptional(boolean optional) {
+			this.optional = optional;
 		}
 
 		public String getName() {
@@ -67,6 +83,7 @@ public class StringProduction implements Production<ProdElement, String> {
 		public ElementType getType() {
 			return type;
 		}
+
 		public String getValue() {
 			return value;
 		}
@@ -92,6 +109,7 @@ public class StringProduction implements Production<ProdElement, String> {
 	protected enum Token {
 		AND("&"), // 
 		COLON(":"), //
+		EQ("="), //
 		ID("[a-zA-Z][a-zA-Z0-9]*"), //
 		PIPE("\\|"), //
 		PL("\\("), //

@@ -80,6 +80,17 @@ public class DerivedResourceMarkers {
 		return null;
 	}
 	
+	public String getSource(IMarker marker) {
+		try {
+			Object result = marker.getAttribute(ATTR_SOURCE);
+			if (result instanceof String)
+				return (String) result;
+			return null;
+		} catch (CoreException e) {
+			return null;
+		}
+	}
+	
 	public boolean installMarker(IFile file, String source) throws CoreException {
 		return installMarker(file, generatorIdProvider.getGeneratorIdentifier(), source);
 	}

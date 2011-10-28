@@ -119,17 +119,20 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 		inferredJvmType.setSimpleName(source.getName());
 		inferredJvmType.setVisibility(JvmVisibility.PUBLIC);
 		if (!prelinkingPhase) {
-			JvmAnnotationReference suppressWarnings = typesFactory.createJvmAnnotationReference();
 			JvmAnnotationType annotation = (JvmAnnotationType) typeReferences.findDeclaredType(SuppressWarnings.class, source);
-			suppressWarnings.setAnnotation(annotation);
-			JvmStringAnnotationValue annotationValue = typesFactory.createJvmStringAnnotationValue();
-			annotationValue.getValues().add("all");
-			suppressWarnings.getValues().add(annotationValue);
-			inferredJvmType.getAnnotations().add(suppressWarnings);
+			if (annotation != null) {
+				JvmAnnotationReference suppressWarnings = typesFactory.createJvmAnnotationReference();
+				suppressWarnings.setAnnotation(annotation);
+				JvmStringAnnotationValue annotationValue = typesFactory.createJvmStringAnnotationValue();
+				annotationValue.getValues().add("all");
+				suppressWarnings.getValues().add(annotationValue);
+				inferredJvmType.getAnnotations().add(suppressWarnings);
+			}
 			addConstructor(source, inferredJvmType);
 			if (source.getSuperTypes().isEmpty()) {
 				JvmTypeReference typeRefToObject = typeReferences.getTypeForName(Object.class, source);
-				inferredJvmType.getSuperTypes().add(typeRefToObject);
+				if (typeRefToObject != null)
+					inferredJvmType.getSuperTypes().add(typeRefToObject);
 			} else {
 				for (JvmTypeReference superType : source.getSuperTypes()) {
 					inferredJvmType.getSuperTypes().add(cloneWithProxies(superType));
@@ -145,7 +148,7 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			appendSyntheticDispatchMethods(source, inferredJvmType);
 			computeInferredReturnTypes(inferredJvmType);
 			jvmTypesBuilder.translateAnnotationsTo(source.getAnnotations(), inferredJvmType);
-			jvmTypesBuilder.translateDocumentationTo(source, inferredJvmType);
+			jvmTypesBuilder.setDocumentation(inferredJvmType, jvmTypesBuilder.getDocumentation(source));
 			
 			nameClashResolver.resolveNameClashes(inferredJvmType);
 		}
@@ -311,7 +314,7 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 		} else {
 			associator.associateLogicalContainer(source.getExpression(), operation);
 		}
-		jvmTypesBuilder.translateDocumentationTo(source, operation);
+		jvmTypesBuilder.setDocumentation(operation, jvmTypesBuilder.getDocumentation(source));
 		return operation;
 	}
 
@@ -324,7 +327,7 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			field.setVisibility(source.getVisibility());
 			field.setType(cloneWithProxies(source.getType()));
 			jvmTypesBuilder.translateAnnotationsTo(source.getAnnotationInfo().getAnnotations(), field);
-			jvmTypesBuilder.translateDocumentationTo(source, field);
+			jvmTypesBuilder.setDocumentation(field, jvmTypesBuilder.getDocumentation(source));
 			return field;
 		} else {
 			return null;

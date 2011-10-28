@@ -163,7 +163,7 @@ It is usually only necessary to change your code, if you face any compilation pr
 		
 				Renamed <em>DefaultScopeProvider</em> to <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/impl/SimpleLocalScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.impl.SimpleLocalScopeProvider" >SimpleLocalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/SimpleLocalScopeProvider.java" title="View Source Code" >(src)</a>. There have been 
 				further significant changes in the scoping API that allow for optimized implementations. Consult the 
-				<a href="080-scoping.html" title="Go to &quot;Scoping&quot;">section on scoping</a> for details.
+				<a href="050-heading-runtime.html#scoping" title="Go to &quot;Scoping&quot;">section on scoping</a> for details.
 	</li>
 	<li>
 		
@@ -173,14 +173,14 @@ It is usually only necessary to change your code, if you face any compilation pr
 	<li>
 		
 				The parser interfaces now use <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/io/Reader.html" title="View JavaDoc"><abbr title="java.io.Reader" >Reader</abbr></a> instead of <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/io/InputStream.html" title="View JavaDoc"><abbr title="java.io.InputStream" >InputStream</abbr></a> to explicitly address 
-				encoding. Have a look at the <a href="115-encoding.html" title="Go to &quot;Encoding in Xtext&quot;">section on encoding</a> for details.
+				encoding. Have a look at the <a href="050-heading-runtime.html#encoding" title="Go to &quot;Encoding in Xtext&quot;">section on encoding</a> for details.
 	</li>
 	<li>
 		
 				The handling of <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/viewers/ILabelProvider.html" title="View JavaDoc"><abbr title="org.eclipse.jface.viewers.ILabelProvider" >ILabelProvider</abbr></a> in various contexts has been refactored. 
 				The former base class <em>DefaultLabelProvider</em> no longer exists. Use the 
 				<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/label/DefaultEObjectLabelProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider" >DefaultEObjectLabelProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/DefaultEObjectLabelProvider.java" title="View Source Code" >(src)</a> instead. 
-				See the <a href="140-labelprovider.html" title="Go to &quot;Label Provider&quot;">section on label providers</a> for details.
+				See the <a href="120-heading-UI.html#labelProvider" title="Go to &quot;Label Provider&quot;">section on label providers</a> for details.
 	</li>
 	<li>
 		
@@ -254,7 +254,7 @@ It is usually only necessary to change your code, if you face any compilation pr
 		
 				The implementation-classes from <em>org.eclipse.xtext.index</em> were superseded by the builder infrastructure. Use the 
 				<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/exporting/QualifiedNamesFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.exporting.QualifiedNamesFragment" >QualifiedNamesFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/exporting/QualifiedNamesFragment.java" title="View Source Code" >(src)</a> and the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment" >ImportNamespacesScopingFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.java" title="View Source Code" >(src)</a> 
-				instead of the <em>ImportedNamespacesScopingFragment</em>. Please refer to the <a href="080-scoping.html#index_based" title="Go to &quot;Global Scopes Based On External Configuration (e.g. Classpath-Based)&quot;">section about the builder infrastructure</a> for details.
+				instead of the <em>ImportedNamespacesScopingFragment</em>. Please refer to the <a href="050-heading-runtime.html#index_based" title="Go to &quot;Global Scopes Based On External Configuration (e.g. Classpath-Based)&quot;">section about the builder infrastructure</a> for details.
 	</li>
 	<li>
 		
@@ -275,7 +275,7 @@ It is usually only necessary to change your code, if you face any compilation pr
 	</li>
 	<li>
 		
-				The method-signatures of the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IFragmentProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IFragmentProvider" >IFragmentProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IFragmentProvider.java" title="View Source Code" >(src)</a> have changed. The <a href="110-fragmentprovider.html" title="Go to &quot;Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)&quot;">documentation</a> 
+				The method-signatures of the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IFragmentProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IFragmentProvider" >IFragmentProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IFragmentProvider.java" title="View Source Code" >(src)</a> have changed. The <a href="050-heading-runtime.html#fragmentProvider" title="Go to &quot;Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)&quot;">documentation</a> 
 				will give a clue on how to update existing implementations.
 	</li>
 	<li>

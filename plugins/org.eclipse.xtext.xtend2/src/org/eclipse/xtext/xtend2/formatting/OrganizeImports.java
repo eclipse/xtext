@@ -34,6 +34,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -174,8 +175,11 @@ public class OrganizeImports {
 		private Set<String> implicitPackageImports = newLinkedHashSet();
 
 		public void acceptType(JvmTypeReference ref) {
-			if (!(ref.eContainer() instanceof XFunctionTypeRef) && !(ref instanceof XFunctionTypeRef))
-				acceptType(ref.getType());
+			if (ref instanceof XFunctionTypeRef)
+				return;
+			if (ref.eContainer() instanceof XFunctionTypeRef && ref.eContainmentFeature() == TypesPackage.Literals.JVM_SPECIALIZED_TYPE_REFERENCE__EQUIVALENT)
+				return;
+			acceptType(ref.getType());
 			if (ref instanceof JvmParameterizedTypeReference) {
 				EList<JvmTypeReference> list = ((JvmParameterizedTypeReference) ref).getArguments();
 				for (JvmTypeReference jvmTypeReference : list) {

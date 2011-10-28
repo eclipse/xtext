@@ -45,6 +45,22 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 		assertEquals("Foo", (type.annotations.head.values.head as JvmStringAnnotationValue).values.head)
 	}
 	
+	def void testStringAnnotationWithNullExpression() {
+		val f = XAnnotationsFactory::eINSTANCE
+		val typesFactory = TypesFactory::eINSTANCE
+		val context = expression("'Foo'");
+		
+		val anno = f.createXAnnotation;
+		anno.annotationType = references.findDeclaredType(typeof(Inject), context) as JvmAnnotationType
+		val pair = f.createXAnnotationElementValuePair
+		anno.elementValuePairs += pair
+		val type = typesFactory.createJvmGenericType
+		newArrayList(anno).translateAnnotationsTo(type)
+		
+		assertEquals(anno.annotationType, type.annotations.head.annotation)
+		assertTrue(type.annotations.head.values.empty)
+	}
+	
 	def void testStringArrayAnnotation() {
 		val f = XAnnotationsFactory::eINSTANCE
 		val typesFactory = TypesFactory::eINSTANCE
@@ -64,5 +80,51 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 		assertEquals(anno.annotationType, type.annotations.head.annotation)
 		assertEquals("Foo", (type.annotations.head.values.head as JvmStringAnnotationValue).values.head)
 		assertEquals("Bar", (type.annotations.head.values.head as JvmStringAnnotationValue).values.get(1))
+	}
+	
+	def void testStringArrayAnnotationWithNullExpression() {
+		val f = XAnnotationsFactory::eINSTANCE
+		val typesFactory = TypesFactory::eINSTANCE
+		val context = expression('"foo"')
+		
+		val anno = f.createXAnnotation
+		anno.annotationType = references.findDeclaredType(typeof(Inject), context) as JvmAnnotationType
+		val array = f.createXAnnotationValueArray
+		anno.value = array
+		
+		val type = typesFactory.createJvmGenericType
+		newArrayList(anno).translateAnnotationsTo(type)
+		
+		assertEquals(anno.annotationType, type.annotations.head.annotation)
+		assertTrue(type.annotations.head.values.empty)
+	}
+	
+	def void testAnnotationCreation() {
+		val e = expression("'foo'")
+		val anno = e.toAnnotationType("foo.bar.MyAnnotation") [
+			documentation = "Foo"
+		]
+		assertEquals("foo.bar", anno.packageName)
+		assertEquals("MyAnnotation", anno.simpleName)
+		assertEquals("Foo", anno.documentation)
+	}
+	def void testInterfaceCreation() {
+		val e = expression("'foo'")
+		val anno = e.toInterface("foo.bar.MyAnnotation") [
+			superTypes += e.newTypeRef(typeof(Iterable))
+		]
+		assertTrue(anno.interface)
+		assertEquals("foo.bar", anno.packageName)
+		assertEquals("MyAnnotation", anno.simpleName)
+		assertEquals(1, anno.superTypes.size)
+	}
+	def void testEnumCreation() {
+		val e = expression("'foo'")
+		val anno = e.toEnumerationType("MyEnum") [
+			documentation = "Foo"
+		]
+		assertNull(anno.packageName)
+		assertEquals("MyEnum", anno.simpleName)
+		assertEquals("Foo", anno.documentation)
 	}
 }

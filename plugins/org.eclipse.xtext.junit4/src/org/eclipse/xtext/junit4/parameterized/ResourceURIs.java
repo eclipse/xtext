@@ -13,4 +13,6 @@ public @interface ResourceURIs {
 	String baseDir() default "";
 
 	String[] fileExtensions() default {};
+
+	String[] files() default {};
 }

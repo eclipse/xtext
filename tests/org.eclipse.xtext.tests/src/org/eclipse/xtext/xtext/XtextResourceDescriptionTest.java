@@ -39,6 +39,14 @@ public class XtextResourceDescriptionTest extends AbstractXtextTests {
 		assertTrue(Lists.newArrayList(iterable).isEmpty());
 	}
 	
+	public void testComputeEObjectDescriptionsForUnnamedGrammar() throws Exception {
+		Resource res = getResourceAndExpect(new StringInputStream("grammar "),URI.createURI("foo.xtext"),1);
+		Manager manager = get(IResourceDescription.Manager.class);
+		IResourceDescription description = manager.getResourceDescription(res);
+		Iterable<IEObjectDescription> iterable = description.getExportedObjects();
+		assertTrue(Lists.newArrayList(iterable).isEmpty());
+	}
+	
 	public void testGetExportedEObjectsErroneousResource() throws Exception {
 		Resource res = getResourceAndExpect(new StringInputStream("grammar foo Start : 'main';"),URI.createURI("foo.xtext"),1);
 		Manager manager = get(IResourceDescription.Manager.class);

@@ -1,8 +1,8 @@
-section:xbaseLanguageRef_Types[Types]
+section2:xbaseLanguageRef_Types[Types]
 
 Basically all kinds of JVM types are available and referable. 
 
-section2:Xbase_Types_Arrays[Arrays]
+section3:Xbase_Types_Arrays[Arrays]
 
 Arrays cannot be declared explicitly,
 but they can be passed around and if needed are transparently converted to a List of the compound type.
@@ -12,12 +12,12 @@ a variable of type e[java.util.List<java.lang.Integer>] (in short e[List<Integer
 you can also defer the conversion. The conversion is bi-directional so any method, that takes an array as argument can be invoked with a e[List]
 instead.
 
-section2:Xbase_Types_TypeReferences[Simple Type References]
+section3:Xbase_Types_TypeReferences[Simple Type References]
 
 A simple type reference only consists of a e[qualified name]. A qualified name is a name made up of identifiers which are separated by a dot 
 (like in Java).
 
-section3[Syntax]
+section4[Syntax]
 
 code[Xtext][
 QualifiedName:
@@ -27,14 +27,14 @@ QualifiedName:
 
 There is no parser rule for a simple type reference, as it is expressed as a parameterized type references without parameters.
 
-section3[Examples]
+section4[Examples]
 
 ul[
 	item[code[java.lang.String]]
 	item[code[String]]
 ]
 
-section2:Xbase_Types_FunctionTypes[Function Types]
+section3:Xbase_Types_FunctionTypes[Function Types]
 
 Xbase introduces e[closures], and therefore an additional function type signature. On the JVM-Level a closure (or more
 generally any function object) is just an instance of one of the types in code[org.eclipse.xtext.xbase.lib.Function*], 
@@ -46,7 +46,7 @@ Primitives cannot be used in function types.
 
 For more information on closures see ref:Xbase_Expressions_Closures.
 
-section3[Syntax]
+section4[Syntax]
 
 code[Xtext][
 XFunctionTypeRef:
@@ -54,7 +54,7 @@ XFunctionTypeRef:
   	'=>' JvmTypeReference;
 ]
 
-section3[Examples]
+section4[Examples]
 
 ul[
 	item[code[=>Boolean // predicate without parameters]]
@@ -63,7 +63,7 @@ ul[
 	item[code[(List<String>, Integer)=>String]]
 ]
 
-section2:Xbase_Types_ParameterizedTypeReference[Parameterized Type References]
+section3:Xbase_Types_ParameterizedTypeReference[Parameterized Type References]
 
 The general syntax for type references allows to take any number of type arguments. The semantics as well as the syntax is almost the same as in Java, so please 
 refer to the third edition of the  link[http://java.sun.com/docs/books/jls/third_edition/html/j3TOC.html][Java Language Specification].
@@ -71,7 +71,7 @@ refer to the third edition of the  link[http://java.sun.com/docs/books/jls/third
 The only difference is that in Xbase a type reference can also be a function type. In the following the full syntax of type references is shown, including function types and
 type arguments.
 
-section3[Syntax]
+section4[Syntax]
 
 code[Xtext][
 JvmTypeReference:
@@ -103,7 +103,7 @@ JvmUpperBound :
 
 ]
 
-section3[Examples]
+section4[Examples]
 
 ul[
 	item[code[String]]
@@ -114,12 +114,12 @@ ul[
 	item[code[List<? extends =>Boolean>]]
 ]
 
-section2:Xbase_Types_Primitives[Primitives]
+section3:Xbase_Types_Primitives[Primitives]
 
 Xbase supports all Java primitives. The conformance rules (e.g. boxing unboxing) are also exactly like defined
 in the Java Language Specification.
 
-section2:Xbase_Types_ConformanceRules[Conformance and Conversion]
+section3:Xbase_Types_ConformanceRules[Conformance and Conversion]
 
 Conformance is used in order to find out whether some expression can be used in a certain situation. For instance when assigning a value to a variable, 
 the type of the right hand expression needs to conform to the type of the variable.
@@ -127,7 +127,7 @@ the type of the right hand expression needs to conform to the type of the variab
 As Xbase implements the unchanegd type system of Java it also fully supports the conformance rules defined
 in link[http://java.sun.com/docs/books/jls/third_edition/html/conversions.html][The Java Language Specification].
 
-section2:Xbase_Types_CommonSuperType[Common Super Type]
+section3:Xbase_Types_CommonSuperType[Common Super Type]
 
 Because of type inference Xbase sometimes needs to compute the most common super type of a given set
 of types. 

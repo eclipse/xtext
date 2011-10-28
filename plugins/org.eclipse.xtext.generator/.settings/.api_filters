@@ -1,12 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.generator" version="2">
-<resource path="src/org/eclipse/xtext/generator/parser/antlr/splitting/AntlrParserSplitter.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.AntlrParserSplitter">
-<filter comment="Field should not be referenced by client code" id="388194388">
-<message_arguments>
-<message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.AntlrParserSplitter"/>
-<message_argument value="FIELDS_PER_CLASS"/>
-<message_argument value="2500"/>
-</message_arguments>
-</filter>
-</resource>
+    <resource path="src/org/eclipse/xtext/generator/parser/antlr/splitting/AntlrParserSplitter.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.AntlrParserSplitter">
+        <filter comment="Field should not be referenced by client code" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.AntlrParserSplitter"/>
+                <message_argument value="FIELDS_PER_CLASS"/>
+                <message_argument value="2500"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtext/generator/grammarAccess/GrammarAccess.java" type="org.eclipse.xtext.generator.grammarAccess.GrammarAccess">
+        <filter comment="BOGUS!" id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.grammarAccess.GrammarAccess"/>
+                <message_argument value="org.eclipse.xtext.generator_2.1.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>

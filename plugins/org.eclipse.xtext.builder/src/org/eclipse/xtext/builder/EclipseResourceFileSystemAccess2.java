@@ -94,8 +94,8 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 						// no need to convert the string twice
 						newContent.reset();
 						file.setContents(newContent, true, true, monitor);
-						if (!file.isDerived() && outputConfig.isSetDerivedProperty()) {
-							file.setDerived(true);
+						if (file.isDerived() != outputConfig.isSetDerivedProperty()) {
+							file.setDerived(outputConfig.isSetDerivedProperty());
 						}
 					}
 				} catch (CoreException e) {
@@ -118,11 +118,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 	}
 
 	protected void createFolder(IFolder folder) throws CoreException {
-		try {
-			folder.create(true, true, monitor);
-		} catch (CoreException e) {
-			throw new RuntimeException(e);
-		}
+		ensureExists(folder);
 	}
 
 	protected void ensureParentExists(IFile file) throws CoreException {

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.eclipse.xtend.ui.Examples" 
+				  name="%XtendExamples_category" 
+				  parentCategory="org.eclipse.ui.Examples" />
+	</extension>
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.eclipse.xtend.project.Examples" 
+				  name="%XtendExamples_category2" 
+				  parentCategory="org.eclipse.xtext.xtend2.ui.wizards" />
+	</extension>
+
+   <!-- ========= org.eclipse.xtext.example.xtend.tutorial ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.xtext.examples.NewXtendTutorial" 
+			name="%XtendTutorial_name" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.ui.Examples/org.eclipse.xtend.ui.Examples"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>%XtendTutorial_description</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.xtext.examples.NewXtendTutorial" 
+			name="%XtendTutorial_name" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.xtext.xtend2.ui.wizards/org.eclipse.xtend.project.Examples"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>%XtendTutorial_description</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+	  <example wizardID="org.eclipse.xtext.examples.NewXtendTutorial" pageImage="icons/genproject.gif">
+		 <projectDescriptor name="org.eclipse.xtext.example.xtend.tutorial" contentURI="contents/org.eclipse.xtext.example.xtend.tutorial.zip" description="A hands-on tutorial on Xtend."/>
+	  </example>
+   </extension>
+</plugin>

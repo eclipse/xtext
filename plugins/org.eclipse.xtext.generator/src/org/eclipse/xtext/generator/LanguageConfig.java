@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator;
 
+import static org.eclipse.xtext.util.Strings.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -21,11 +23,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.XtextPackage;
+import org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.generator.ImplicitUiFragment;
@@ -157,12 +162,20 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 	public void setUri(String uri) {
 		ResourceSet rs = forcedResourceSet != null ? forcedResourceSet : new XtextResourceSet();
 		for (String loadedResource : loadedResources) {
-			Resource res = rs.getResource(URI.createURI(loadedResource), true);
+			URI loadedResourceUri = URI.createURI(loadedResource);
+			Resource res = rs.getResource(loadedResourceUri, true);
+			if(equal(loadedResourceUri.fileExtension(), "ecore")) {
+				IResourceServiceProvider resourceServiceProvider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(loadedResourceUri);
+				if(resourceServiceProvider == null) {
+					EcoreSupportStandaloneSetup.setup();
+				}
+			}
 			if (res == null || res.getContents().isEmpty())
 				LOG.error("Error loading '" + loadedResource + "'");
 			else if (!res.getErrors().isEmpty())
 				LOG.error("Error loading '" + loadedResource + "': " + res.getErrors().toString());
 		}
+		EcoreUtil.resolveAll(rs);
 		XtextResource resource = (XtextResource) rs.getResource(URI.createURI(uri), true);
 		if (resource.getContents().isEmpty()) {
 			throw new IllegalArgumentException("Couldn't load grammar for '" + uri + "'.");

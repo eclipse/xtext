@@ -45,6 +45,17 @@
 		<li id="050-validation.html" ><a href="050-validation.php" >Creating Custom Validation Rules</a></li>
 		</ul>
 		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="035-domainmodel-java.php">Five simple steps to your JVM language</a></div>
+		<ul style="display: none;" id="subToc_035-domainmodel-java.html">
+		<li id="035-domainmodel-java.html#JvmDomainmodel_7" ><a href="035-domainmodel-java.php#JvmDomainmodel_7" >Step One: Create A New Xtext Project</a></li>
+		<li id="035-domainmodel-java.html#JvmDomainmodel_8" ><a href="035-domainmodel-java.php#JvmDomainmodel_8" >Step Two: Write the Grammar</a></li>
+		<li id="035-domainmodel-java.html#JvmDomainmodel_9" ><a href="035-domainmodel-java.php#JvmDomainmodel_9" >Step Three: Generate Language Artifacts</a></li>
+		<li id="035-domainmodel-java.html#JvmDomainmodel_10" ><a href="035-domainmodel-java.php#JvmDomainmodel_10" >Step Four: Define the Mapping to JVM Concepts</a></li>
+		<li id="035-domainmodel-java.html#JvmDomainmodel_11" ><a href="035-domainmodel-java.php#JvmDomainmodel_11" >Step Five : Try the Editor!</a></li>
+		</ul>
+		</li>
 		<li class="partentry" >
 		Reference Documentation
 		</li>
@@ -119,10 +130,6 @@
 		<li id="199c-xbase-inferred-type.html" ><a href="199c-xbase-inferred-type.php" >Inferring a JVM Model</a></li>
 		<li id="199d-xbase-expressions.html" ><a href="199d-xbase-expressions.php" >Using Xbase Expressions</a></li>
 		<li id="199e-xbase-language-reference.html" ><a href="199e-xbase-language-reference.php" >Xbase Language Reference</a></li>
-		<li id="199f-xbase-language-reference-syntax.html" ><a href="199f-xbase-language-reference-syntax.php" >Lexical Syntax</a></li>
-		<li id="199g-xbase-language-reference-types.html" ><a href="199g-xbase-language-reference-types.php" >Types</a></li>
-		<li id="199h-xbase-language-reference-expressions.html" ><a href="199h-xbase-language-reference-expressions.php" >Expressions</a></li>
-		<li id="199i-xbase-language-reference-libraries.html" ><a href="199i-xbase-language-reference-libraries.php" >Extension Methods</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -202,13 +209,13 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						package&nbsp;com.acme<br/>
+						<span class="keyword">package</span>&nbsp;com.acme<br/>
 						<br/>
 						<span class="keyword">import</span>&nbsp;java.util.List<br/>
 						<br/>
-						class&nbsp;MyClass&nbsp;{<br/>
+						<span class="keyword">class</span>&nbsp;MyClass&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;first(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;elements.get(0)<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;elements.get(0)<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 						}
 					</p>
@@ -225,7 +232,7 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						package&nbsp;org.eclipse.xtext
+						<span class="keyword">package</span>&nbsp;org.eclipse.xtext
 					</p>
 				</div>
 			</div>
@@ -237,7 +244,7 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						package&nbsp;my.^public.^package
+						<span class="keyword">package</span>&nbsp;my.^public.^package
 					</p>
 				</div>
 			</div>
@@ -259,7 +266,7 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">import</span>&nbsp;java.math.BigDecimal<br/>
-						<span class="keyword">import</span>&nbsp;static&nbsp;java.util.Collections.*
+						<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;java.util.Collections.*
 					</p>
 				</div>
 			</div>
@@ -267,7 +274,7 @@
 			<p>
 			Xtend supports extension methods, which allows to add functions to existing classes without modifying
 			them. Static extension functions are just one possibility - simply put the keyword <span class="inlinecode"><span class="keyword">extension</span></span> after
-			the <span class="inlinecode">static</span> keyword and the static functions will be made available as member functions on their first
+			the <span class="inlinecode"><span class="keyword">static</span></span> keyword and the static functions will be made available as member functions on their first
 			parameter's type.
 			</p>
 			<p>
@@ -277,7 +284,7 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">import</span>&nbsp;static&nbsp;<span class="keyword">extension</span>&nbsp;java.util.Collections.*
+						<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;java.util.Collections.*
 					</p>
 				</div>
 			</div>
@@ -289,7 +296,7 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						new&nbsp;Foo().singletonList()
+						<span class="keyword">new</span>&nbsp;Foo().singletonList()
 					</p>
 				</div>
 			</div>
@@ -307,7 +314,7 @@
 			classes any Xtend class is <span class="inlinecode"><span class="keyword">public</span></span>. It is possible to write this explicitly. 
 			</p>
 			<p>
-			<em>To be implemented: </em>The <span class="inlinecode">abstract</span> as well as the <span class="inlinecode">final</span> modifiers are directly translated to Java and have the exact same meaning.
+			<em>To be implemented: </em>The <span class="inlinecode"><span class="keyword">abstract</span></span> as well as the <span class="inlinecode"><span class="keyword">final</span></span> modifiers are directly translated to Java and have the exact same meaning.
 			</p>
 			<a name="Xtend_ClassDeclaration_3" ></a>
 			<h3>Inheritance</h3>
@@ -328,7 +335,7 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						class&nbsp;MyClass&nbsp;{<br/>
+						<span class="keyword">class</span>&nbsp;MyClass&nbsp;{<br/>
 						}
 					</p>
 				</div>
@@ -339,8 +346,8 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						class&nbsp;ArrayList&lt;E&gt;&nbsp;extends&nbsp;AbstractList&lt;E&gt;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;implements&nbsp;List&lt;E&gt;,&nbsp;RandomAccess,&nbsp;<br/>
+						<span class="keyword">class</span>&nbsp;ArrayList&lt;E&gt;&nbsp;<span class="keyword">extends</span>&nbsp;AbstractList&lt;E&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">implements</span>&nbsp;List&lt;E&gt;,&nbsp;RandomAccess,&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cloneable,&nbsp;java.io.Serializable&nbsp;{<br/>
 						&nbsp;&nbsp;...<br/>
 						}
@@ -381,7 +388,7 @@
 			<span class="inlinecode"><span class="keyword">protected</span></span>, or <span class="inlinecode"><span class="keyword">private</span></span>. Alternatively, you can write accessor methods. Xtend
 			does not yet support any other modifier from Java on fields.  
 			</p>
-			<a name="fields_6" ></a>
+			<a name="extensionMethods" ></a>
 			<h3>Extension Methods</h3>
 			<p>
 			You can make the instance methods provided by the field available as extension
@@ -394,8 +401,8 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						class&nbsp;PersonExtensions&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;def&nbsp;getFullName(Person&nbsp;p)&nbsp;{<br/>
+						<span class="keyword">class</span>&nbsp;PersonExtensions&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;getFullName(Person&nbsp;p)&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p.forename&nbsp;+&nbsp;<span class="string">"&nbsp;"</span>&nbsp;+&nbsp;p.name<br/>
 						&nbsp;&nbsp;&nbsp;}<br/>
 						}
@@ -475,7 +482,7 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						def&nbsp;boolean&nbsp;equalsIgnoreCase(String&nbsp;s1,&nbsp;String&nbsp;s2)&nbsp;:<br/>
+						<span class="keyword">def</span>&nbsp;<span class="keyword">boolean</span>&nbsp;equalsIgnoreCase(String&nbsp;s1,&nbsp;String&nbsp;s2)&nbsp;:<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();
 					</p>
 				</div>
@@ -490,8 +497,8 @@
 			<a name="Xtend_Classes_Functions_8" ></a>
 			<h2>Overriding Functions</h2>
 			<p>
-			Functions can override a function/method from the super class or implemented interfaces using the keyword <span class="inlinecode">override</span>.
-			If a function is annotated with the keyword <span class="inlinecode">final</span>, it cannot be overridden.
+			Functions can override a function/method from the super class or implemented interfaces using the keyword <span class="inlinecode"><span class="keyword">override</span></span>.
+			If a function is annotated with the keyword <span class="inlinecode"><span class="keyword">final</span></span>, it cannot be overridden.
 			IF a function overrides a function (or method) from a super type, the <span class="inlinecode">override</span> keyword is mandatory and replaces the keyword <span class="inlinecode">def</span>.
 			</p>
 			<p>
@@ -499,7 +506,7 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						override&nbsp;boolean&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br/>
+						<span class="keyword">override</span>&nbsp;<span class="keyword">boolean</span>&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();
 					</p>
 				</div>
@@ -524,15 +531,15 @@
 						<span class="comment">/*<br/>
 						&nbsp;*&nbsp;throws&nbsp;an&nbsp;IOException<br/>
 						&nbsp;*/</span><br/>
-						def&nbsp;void&nbsp;throwIOException()&nbsp;throws&nbsp;IOException&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;IOException()<br/>
+						<span class="keyword">def</span>&nbsp;<span class="keyword">void</span>&nbsp;throwIOException()&nbsp;<span class="keyword">throws</span>&nbsp;IOException&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IOException()<br/>
 						}<br/>
 						<br/>
 						<span class="comment">/*<br/>
 						&nbsp;*&nbsp;throws&nbsp;a&nbsp;WrappedException<br/>
 						&nbsp;*/</span><br/>
-						def&nbsp;void&nbsp;throwWrappedException()&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;IOException()<br/>
+						<span class="keyword">def</span>&nbsp;<span class="keyword">void</span>&nbsp;throwWrappedException()&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IOException()<br/>
 						}
 					</p>
 				</div>
@@ -548,7 +555,7 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						def&nbsp;boolean&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br/>
+						<span class="keyword">def</span>&nbsp;<span class="keyword">boolean</span>&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();
 					</p>
 				</div>
@@ -561,7 +568,7 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						def&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br/>
+						<span class="keyword">def</span>&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();
 					</p>
 				</div>
@@ -590,14 +597,14 @@
 			invasive visitor pattern.
 			</p>
 			<p>
-			A dispatch function is marked using the keyword <span class="inlinecode">dispatch</span>.
+			A dispatch function is marked using the keyword <span class="inlinecode"><span class="keyword">dispatch</span></span>.
 			</p>
 			<p>
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						def&nbsp;dispatch&nbsp;foo(Number&nbsp;x)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;a&nbsp;number"</span>&nbsp;}<br/>
-						def&nbsp;dispatch&nbsp;foo(Integer&nbsp;x)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int"</span>&nbsp;}
+						<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Number&nbsp;x)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;a&nbsp;number"</span>&nbsp;}<br/>
+						<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Integer&nbsp;x)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int"</span>&nbsp;}
 					</p>
 				</div>
 			</div>
@@ -653,8 +660,8 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						def&nbsp;dispatch&nbsp;foo(Number&nbsp;x,&nbsp;Integer&nbsp;y)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;some&nbsp;number&nbsp;and&nbsp;an&nbsp;int"</span>&nbsp;}<br/>
-						def&nbsp;dispatch&nbsp;foo(Integer&nbsp;x,&nbsp;Number&nbsp;x)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int&nbsp;and&nbsp;a&nbsp;number"</span>&nbsp;}
+						<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Number&nbsp;x,&nbsp;Integer&nbsp;y)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;some&nbsp;number&nbsp;and&nbsp;an&nbsp;int"</span>&nbsp;}<br/>
+						<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Integer&nbsp;x,&nbsp;Number&nbsp;x)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int&nbsp;and&nbsp;a&nbsp;number"</span>&nbsp;}
 					</p>
 				</div>
 			</div>
@@ -689,9 +696,9 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						def&nbsp;dispatch&nbsp;foo(Number&nbsp;x)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;some&nbsp;number"</span>&nbsp;}<br/>
-						def&nbsp;dispatch&nbsp;foo(Integer&nbsp;x)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int"</span>&nbsp;}<br/>
-						def&nbsp;dispatch&nbsp;foo(Void&nbsp;x)&nbsp;{&nbsp;throw&nbsp;new&nbsp;NullPointerException(<span class="string">"x"</span>)&nbsp;}
+						<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Number&nbsp;x)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;some&nbsp;number"</span>&nbsp;}<br/>
+						<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Integer&nbsp;x)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int"</span>&nbsp;}<br/>
+						<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Void&nbsp;x)&nbsp;{&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;NullPointerException(<span class="string">"x"</span>)&nbsp;}
 					</p>
 				</div>
 			</div>
@@ -746,16 +753,16 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						class&nbsp;MyLabelProvider&nbsp;extends&nbsp;AbstractLabelProvider&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;def&nbsp;dispatch&nbsp;label(Entity&nbsp;<span class="keyword">it</span>)&nbsp;&nbsp;{<br/>
+						<span class="keyword">class</span>&nbsp;MyLabelProvider&nbsp;<span class="keyword">extends</span>&nbsp;AbstractLabelProvider&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;label(Entity&nbsp;it)&nbsp;&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name<br/>
 						&nbsp;&nbsp;&nbsp;}<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;def&nbsp;dispatch&nbsp;label(Method&nbsp;<span class="keyword">it</span>)&nbsp;{&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;label(Method&nbsp;it)&nbsp;{&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name+<span class="string">"("</span>+params.toString(<span class="string">","</span>)+<span class="string">"):"</span>+type<br/>
 						&nbsp;&nbsp;&nbsp;}<br/>
 						&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;def&nbsp;dispatch&nbsp;label(Field&nbsp;<span class="keyword">it</span>)&nbsp;{&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;label(Field&nbsp;it)&nbsp;{&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name+type<br/>
 						&nbsp;&nbsp;&nbsp;}<br/>
 						}
@@ -824,12 +831,12 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						def&nbsp;List&lt;Person&gt;&nbsp;copyPersons(List&lt;Person&gt;&nbsp;persons)&nbsp;{<br/>
+						<span class="keyword">def</span>&nbsp;List&lt;Person&gt;&nbsp;copyPersons(List&lt;Person&gt;&nbsp;persons)&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;persons.map(&nbsp;p&nbsp;|&nbsp;p.copy&nbsp;)<br/>
 						}<br/>
 						<br/>
-						def&nbsp;copy(Person&nbsp;p)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;result&nbsp;=&nbsp;new&nbsp;Person()<br/>
+						<span class="keyword">def</span>&nbsp;copy(Person&nbsp;p)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;result&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Person()<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;result.name&nbsp;=&nbsp;p.name<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;The&nbsp;following&nbsp;is&nbsp;wrong&nbsp;and&nbsp;results&nbsp;in&nbsp;a&nbsp;stack&nbsp;overflow<br/>
 						</span>&nbsp;&nbsp;&nbsp;&nbsp;result.friendWith&nbsp;=&nbsp;p.friendWith.map(&nbsp;p&nbsp;|&nbsp;p.copy&nbsp;)&nbsp;&nbsp;&nbsp;<br/>
@@ -851,7 +858,7 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						def&nbsp;<span class="keyword">create</span>&nbsp;result:&nbsp;new&nbsp;Person()&nbsp;copy(Person&nbsp;p)&nbsp;{<br/>
+						<span class="keyword">def</span>&nbsp;<span class="keyword">create</span>&nbsp;result:&nbsp;<span class="keyword">new</span>&nbsp;Person()&nbsp;copy(Person&nbsp;p)&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;result.name&nbsp;=&nbsp;p.name<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;now&nbsp;it&nbsp;works&nbsp;&nbsp;&nbsp;&nbsp;<br/>
 						</span>&nbsp;&nbsp;&nbsp;&nbsp;result.friendWith&nbsp;=&nbsp;p.friendWith.map(&nbsp;p&nbsp;|&nbsp;p.copy&nbsp;)&nbsp;&nbsp;&nbsp;<br/>
@@ -863,13 +870,13 @@
 			</p>
 			<p>
 			If you do not specify the name of the result variable it is assumed to be the <a href="199h-xbase-language-reference-expressions.php#Xbase_Expressions_ImplicitThis" title="Go to &quot;Implicit variables 'this' and 'it'&quot;">implicit receiver variable</a> 
-			<span class="inlinecode"><span class="keyword">it</span></span>, which can be skipped in feature calls inside the body. Furthermore, you can define the return type of a create function:
+			<span class="inlinecode">it</span>, which can be skipped in feature calls inside the body. Furthermore, you can define the return type of a create function:
 			</p>
 			<p>
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						def&nbsp;Person&nbsp;<span class="keyword">create</span>&nbsp;new&nbsp;PersonImpl()&nbsp;copy(Person&nbsp;p)&nbsp;{<br/>
+						<span class="keyword">def</span>&nbsp;Person&nbsp;<span class="keyword">create</span>&nbsp;<span class="keyword">new</span>&nbsp;PersonImpl()&nbsp;copy(Person&nbsp;p)&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/*&nbsp;it.*/</span>name&nbsp;=&nbsp;p.name<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;friendWith&nbsp;=&nbsp;p.friendWith.map(&nbsp;p&nbsp;|&nbsp;p.copy&nbsp;)&nbsp;&nbsp;&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;marriedWith&nbsp;=&nbsp;p.marriedWith.map(&nbsp;p&nbsp;|&nbsp;p.copy&nbsp;)&nbsp;<br/>
@@ -907,13 +914,13 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						@TypeAnnotation(typeof(String))<br/>
-						class&nbsp;MyClass&nbsp;{<br/>
-						&nbsp;&nbsp;@FieldAnnotation(children&nbsp;=&nbsp;{@MyAnno(<span class="keyword">true</span>),&nbsp;@MyAnnot(<span class="keyword">false</span>)}<br/>
+						@TypeAnnotation(<span class="keyword">typeof</span>(String))<br/>
+						<span class="keyword">class</span>&nbsp;MyClass&nbsp;{<br/>
+						&nbsp;&nbsp;@FieldAnnotation(children&nbsp;=&nbsp;{@MyAnno(true),&nbsp;@MyAnnot(false)}<br/>
 						&nbsp;&nbsp;String&nbsp;myField<br/>
 						&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;@MethodAnnotation(children&nbsp;=&nbsp;{@MyAnno(<span class="keyword">true</span>),&nbsp;@MyAnnot}<br/>
-						&nbsp;&nbsp;def&nbsp;String&nbsp;myMethod(@ParameterAnnotation&nbsp;String&nbsp;param)&nbsp;{<br/>
+						&nbsp;&nbsp;@MethodAnnotation(children&nbsp;=&nbsp;{@MyAnno(true),&nbsp;@MyAnnot}<br/>
+						&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;String&nbsp;myMethod(@ParameterAnnotation&nbsp;String&nbsp;param)&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//...<br/>
 						</span>&nbsp;&nbsp;}<br/>
 						}

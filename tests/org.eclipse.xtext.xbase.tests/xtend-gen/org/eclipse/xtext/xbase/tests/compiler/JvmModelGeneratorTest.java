@@ -25,7 +25,6 @@ import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
-import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -208,7 +207,6 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       CharSequence _get = _files.get(_operator_plus_1);
       String _string = _get.toString();
       final String code = _string;
-      InputOutput.<String>println(code);
       String _identifier_1 = type.getIdentifier();
       Class<? extends Object> _compileToClass = this.javaCompiler.compileToClass(_identifier_1, code);
       final Class<? extends Object> compiledClass = _compileToClass;

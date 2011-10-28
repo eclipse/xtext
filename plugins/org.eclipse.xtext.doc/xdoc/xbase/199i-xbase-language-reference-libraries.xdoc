@@ -1,4 +1,4 @@
-section:xbaseLanguageRef_LibraryExtension[Extension Methods]
+section2:xbaseLanguageRef_LibraryExtension[Extension Methods]
 
 Languages extending Xbase might want to contribute to the feature scope. Besides that one can of course
 change the whole implementation as it seems fit there is a special hook, which can be used to add so
@@ -21,7 +21,7 @@ member features. Also the extension members are not invoked polymorphic. If you 
 on the scope (code[foo(Object)] and code[foo(String)]) the expression code[(foo as Object).foo] would
 bind and invoke code[foo(Object)].
 
-section2[Examples]
+section3[Examples]
 
 ul[
 	item[code[foo]]
@@ -30,7 +30,7 @@ ul[
 	item[code[oh.my.foo(bar)]]
 ]
 
-section2:XbaseLanguageRef_builderSyntax[Builder Syntax]
+section3:XbaseLanguageRef_builderSyntax[Builder Syntax]
 
 If the last argument of a method call is a closure, it can be appended to the method call. Thus,
 
@@ -81,6 +81,4 @@ html \[
 		// initialize head
 	\]  
 \] 
-]  
-
-
+]

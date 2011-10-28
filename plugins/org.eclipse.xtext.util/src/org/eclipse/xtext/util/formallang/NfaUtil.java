@@ -18,6 +18,7 @@ import java.util.Set;
 import java.util.Stack;
 
 import com.google.common.base.Function;
+import com.google.common.base.Functions;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -51,6 +52,26 @@ public class NfaUtil {
 			this.result = result;
 			this.followers = followers.iterator();
 		}
+
+		@Override
+		public String toString() {
+			return result == null ? "null" : result.toString();
+		}
+	}
+
+	protected static class GetToken<E, T> implements Function<E, T> {
+
+		protected Production<E, T> production;
+
+		public GetToken(Production<E, T> production) {
+			super();
+			this.production = production;
+		}
+
+		public T apply(E from) {
+			return production.getToken(from);
+		}
+
 	}
 
 	public static class MappedComparator<S, COMPARABLE extends Comparable<COMPARABLE>> implements Comparator<S> {
@@ -68,6 +89,21 @@ public class NfaUtil {
 			if (c2 == null)
 				return -1;
 			return c1.compareTo(c2);
+		}
+	}
+
+	public static class NFAFactory<S> implements NfaFactory<Nfa<S>, S, S> {
+
+		public Nfa<S> create(S start, S stop) {
+			return new NFAImpl<S>(start, stop, Maps.<S, List<S>> newHashMap());
+		}
+
+		public S createState(Nfa<S> nfa, S token) {
+			return token;
+		}
+
+		public void setFollowers(Nfa<S> nfa, S owner, Iterable<S> followers) {
+			((NFAImpl<S>) nfa).followers.put(owner, Lists.newArrayList(followers));
 		}
 	}
 
@@ -209,25 +245,35 @@ public class NfaUtil {
 		return result;
 	}
 
+	public <E, T> Nfa<E> create(Production<E, T> production, FollowerFunction<E> ff, E start, E stop) {
+		return create(production, ff, Functions.<E> identity(), new NFAFactory<E>(), start, stop);
+	}
+
 	public <S, E, T, NFA extends Nfa<S>> NFA create(Production<E, T> production, FollowerFunction<E> ff,
 			NfaFactory<NFA, S, ? super T> factory) {
+		return create(production, ff, new GetToken<E, T>(production), factory, null, null);
+	}
+
+	public <S, E, T1, T2, NFA extends Nfa<S>> NFA create(Production<E, T1> production, FollowerFunction<E> ff,
+			Function<E, T2> tokenFunc, NfaFactory<NFA, S, ? super T2> factory, T2 start, T2 stop) {
 		Map<E, S> states = Maps.newHashMap();
-		NFA nfa = factory.create(null, null);
+		NFA nfa = factory.create(start, stop);
 		states.put(null, nfa.getStop());
-		create(production, nfa, nfa.getStart(), ff.getStarts(production.getRoot()), ff, factory, states);
+		create(production, nfa, nfa.getStart(), ff.getStarts(production.getRoot()), ff, tokenFunc, factory, states);
 		return nfa;
 	}
 
-	protected <S, E, T, NFA extends Nfa<S>> void create(Production<E, T> production, NFA nfa, S state,
-			Iterable<E> followerElements, FollowerFunction<E> followerFunc, NfaFactory<NFA, S, ? super T> factory,
-			Map<E, S> ele2state) {
+	protected <S, E, T1, T2, NFA extends Nfa<S>> void create(Production<E, T1> production, NFA nfa, S state,
+			Iterable<E> followerElements, FollowerFunction<E> followerFunc, Function<E, T2> tokenFunc,
+			NfaFactory<NFA, S, ? super T2> factory, Map<E, S> ele2state) {
 		List<S> sfollower = Lists.newArrayList();
 		for (E follower : followerElements) {
 			S fs = ele2state.get(follower);
 			if (fs == null) {
-				fs = factory.createState(nfa, production.getToken(follower));
+				fs = factory.createState(nfa, tokenFunc.apply(follower));
 				ele2state.put(follower, fs);
-				create(production, nfa, fs, followerFunc.getFollowers(follower), followerFunc, factory, ele2state);
+				create(production, nfa, fs, followerFunc.getFollowers(follower), followerFunc, tokenFunc, factory,
+						ele2state);
 			}
 			sfollower.add(fs);
 		}
@@ -247,16 +293,6 @@ public class NfaUtil {
 				return stop == input;
 			}
 		});
-	}
-
-	public <S> void removeOrphans(Nfa<S> nfa) {
-		Map<S, Integer> distances = distanceToFinalStateMap(nfa);
-		for (S s : collect(nfa)) {
-			Iterator<S> i = nfa.getFollowers(s).iterator();
-			while (i.hasNext())
-				if (!distances.containsKey(i.next()))
-					i.remove();
-		}
 	}
 
 	public <S> Map<S, Integer> distanceToStateMap(Nfa<S> nfa, Predicate<S> matches) {
@@ -323,6 +359,13 @@ public class NfaUtil {
 		};
 	}
 
+	public <S> Set<S> filterFollowers(Nfa<S> nfa, Iterable<S> followers, Predicate<S> filter) {
+		Set<S> result = Sets.newHashSet();
+		for (S follower : followers)
+			collectFollowers(nfa, follower, result, Sets.<S> newHashSet(), filter);
+		return result;
+	}
+
 	//	protected <S> void collectFinalStates(INfaAdapter<S> nfa, S owner, S last, Set<S> result,
 	//			Set<S> visited, Set<S> ends, Predicate<S> filter) {
 	//		if (!visited.add(owner))
@@ -335,13 +378,6 @@ public class NfaUtil {
 	//			collectFinalStates(nfa, follower, last, result, visited, ends, filter);
 	//	}
 
-	public <S> Set<S> filterFollowers(Nfa<S> nfa, Iterable<S> followers, Predicate<S> filter) {
-		Set<S> result = Sets.newHashSet();
-		for (S follower : followers)
-			collectFollowers(nfa, follower, result, Sets.<S> newHashSet(), filter);
-		return result;
-	}
-
 	public <S, ITERABLE extends Iterable<? extends S>> S find(Nfa<S> nfa, Iterable<S> starts, Predicate<S> matcher) {
 		Set<S> visited = Sets.newHashSet();
 		for (S s : starts) {
@@ -350,6 +386,11 @@ public class NfaUtil {
 				return r;
 		}
 		return null;
+	}
+
+	public <S> S find(Nfa<S> nfa, Predicate<S> matcher) {
+		Set<S> visited = Sets.newHashSet();
+		return find(nfa, nfa.getStart(), matcher, visited);
 	}
 
 	//	public <S, TOKEN> ITokenNfaAdapter<S, TOKEN> filter(final ITokenNfaAdapter<S, TOKEN> nfa, final Predicate<S> filter) {
@@ -383,11 +424,6 @@ public class NfaUtil {
 	//			collectFinalStates(nfa, start, null, result, Sets.<S> newHashSet(), ends, filter);
 	//		return result;
 	//	}
-
-	public <S> S find(Nfa<S> nfa, Predicate<S> matcher) {
-		Set<S> visited = Sets.newHashSet();
-		return find(nfa, nfa.getStart(), matcher, visited);
-	}
 
 	protected <S, ITERABLE extends Iterable<? extends S>> S find(Nfa<S> nfa, S state, Predicate<S> matcher,
 			Set<S> visited) {
@@ -428,6 +464,16 @@ public class NfaUtil {
 		Map<S, List<S>> inverseMap = Maps.newHashMap();
 		collectedInverseMap(nfa, nfa.getStart(), inverseMap, Sets.<S> newHashSet());
 		return new NFAImpl<S>(nfa.getStop(), nfa.getStart(), inverseMap);
+	}
+
+	public <S> void removeOrphans(Nfa<S> nfa) {
+		Map<S, Integer> distances = distanceToFinalStateMap(nfa);
+		for (S s : collect(nfa)) {
+			Iterator<S> i = nfa.getFollowers(s).iterator();
+			while (i.hasNext())
+				if (!distances.containsKey(i.next()))
+					i.remove();
+		}
 	}
 
 	public <S extends Comparable<S>> Nfa<S> sort(Nfa<S> nfa) {

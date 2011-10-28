@@ -18,7 +18,7 @@ to Java concepts. Last but not least, you will use both Java types and your conc
 expressions and execute it. 
 </p>
 <p>
-Throughout this chapter, we will step by step improve the <a href="030-tutorial-next-steps.html" title="Go to &quot;15 Minutes Tutorial - Extended&quot;">domain model example from the tutorial</a>.  
+Throughout this chapter, we will step by step improve the <a href="030-tutorial-next-steps.html#DomainmodelNextSteps" title="Go to &quot;15 Minutes Tutorial - Extended&quot;">domain model example from the tutorial</a>.  
 </p>
 <a name="Xbase_3"></a>
 <h2>Plug-in Setup</h2>
@@ -489,7 +489,7 @@ called <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/java
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator" >IJvmModelAssociator</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociator.java" title="View Source Code" >(src)</a>.
 </p>
 <p>
-By default, the inferred model is <a href="080-scoping.html#global_scopes" title="Go to &quot;Global Scopes and Resource Descriptions&quot;">indexed</a>, so it can be cross referenced from other
+By default, the inferred model is <a href="050-heading-runtime.html#global_scopes" title="Go to &quot;Global Scopes and Resource Descriptions&quot;">indexed</a>, so it can be cross referenced from other
 models.   
 <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=350812">In Xtext 2.0.0</a> you still have to make sure the qualified
 names are computed correctly by implementing and binding an appropriate <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/IQualifiedNameProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider" >IQualifiedNameProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java" title="View Source Code" >(src)</a>:
@@ -515,7 +515,7 @@ names are computed correctly by implementing and binding an appropriate <a class
 <a name="xbaseInferredType_8"></a>
 <h3>Generation Parameters For Inferred JVM Types</h3>
 <p>
-Several MWE generator fragments have additional properties for the <a href="199c-xbase-inferred-type.html" title="Go to &quot;Inferring a JVM Model&quot;">JVM model inference</a>:
+Several MWE generator fragments have additional properties for the <a href="199-xtext-and-java.html#xbaseInferredType" title="Go to &quot;Inferring a JVM Model&quot;">JVM model inference</a>:
 <table>
 <tr>
 <td>
@@ -651,7 +651,7 @@ for each <em>Operation</em>. We leave that as an exercise :-)
 <a name="xbaseScopeProvider"></a>
 <h3>Populating the Scopes</h3>
 <p>
-If you&apos;re not familiar with Xtext&apos;s concept of scopes yet, it would be a good idea to <a href="080-scoping.html" title="Go to &quot;Scoping&quot;">learn about
+If you&apos;re not familiar with Xtext&apos;s concept of scopes yet, it would be a good idea to <a href="050-heading-runtime.html#scoping" title="Go to &quot;Scoping&quot;">learn about
 scopes</a> before you go on reading this section. 
 </p>
 <p>
@@ -814,7 +814,7 @@ to conform to the declared return type. We can do so by specializing the default
 <p>
 and of course binding this new implementation in the languge&apos;s module. By default, Xbase only checks
 type conformance inside expressions. To address the validation at the expression&apos;s boundary, we have
-to add a <a href="060-validation.html" title="Go to &quot;Validation&quot;">validation rule</a>:
+to add a <a href="050-heading-runtime.html#validation" title="Go to &quot;Validation&quot;">validation rule</a>:
 </p>
 <p>
 <div class="literallayout">
@@ -890,7 +890,7 @@ to generate the code of an XbaseExpression into a <a class="jdoc" href="http://d
 compiler, we add the operation&apos;s parameters to the local variables. 
 </p>
 <p>
-Remember that in the <a href="199d-xbase-expressions.html#xbaseScopeProvider" title="Go to &quot;Populating the Scopes&quot;">scope provider</a> we bound the variable <em>this</em> to the inferred type of the current <em>Entity</em>. 
+Remember that in the <a href="199-xtext-and-java.html#xbaseScopeProvider" title="Go to &quot;Populating the Scopes&quot;">scope provider</a> we bound the variable <em>this</em> to the inferred type of the current <em>Entity</em>. 
 The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/compiler/XbaseCompiler.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.compiler.XbaseCompiler" >XbaseCompiler</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/XbaseCompiler.java" title="View Source Code" >(src)</a> will by default assign the value of all expressions
 to a new Java variable. If we just call <em>this</em>, we don&apos;t need that, so we override <em>isVariableDeclarationRequired</em>
 to return false in this case. Similarly, whenever the compiler needs to put a variable name for the inferred
@@ -1069,16 +1069,15 @@ Conceptually and syntactically, Xbase is very close to Java statements and expre
 		Powerful switch expressions
 	</li>
 </ul>
-
 </p>
 <a name="xbaseLanguageRef_Syntax"></a>
-<h2>Lexical Syntax</h2>
+<h3>Lexical Syntax</h3>
 <p>
 Xbase comes with a small set of lexer rules, which can be overridden and hence changed by users. However the default implementation is carefully 
 chosen and it is recommended to stick with the lexical syntax described in the following.
 </p>
 <a name="Xbase_Syntax_Identifiers"></a>
-<h3>Identifiers</h3>
+<h4>Identifiers</h4>
 <p>
 Identifiers are used to name all constructs, such as types, methods and variables. Xbase uses the default
 Identifier-Syntax from Xtext - compared to Java, they are slightly simplified to match the common cases
@@ -1086,15 +1085,15 @@ while having less ambiguities. They start with a letter <em>a</em>-<em>z</em>, <
 by more of these characters or a digit <em>0</em>-<em>9</em>. 
 </p>
 <a name="Xbase_Syntax_EscapedIdentifiers"></a>
-<h3>Escaped Identifiers</h3>
+<h5>Escaped Identifiers</h5>
 <p>
 Identifiers may not have the same spelling as any reserved keyword. 
 However, identifiers starting with a <span class="inlinecode">^</span> are so called escaped identifiers. Escaped identifiers are used in cases when there is a 
 conflict with a reserved keyword. Imagine you have introduced a keyword <span class="inlinecode">service</span> in your language but want to call a Java property <em>service</em> at some point. 
 In such cases you use an escaped identifier <span class="inlinecode">^service</span> to reference the Java property.
 </p>
-<a name="Xbase_Syntax_EscapedIdentifiers_2"></a>
-<h4>Syntax</h4>
+<a name="Xbase_Syntax_Identifiers_3"></a>
+<h5>Syntax</h5>
 <p>
 <div class="literallayout">
 <div class="incode">
@@ -1106,8 +1105,8 @@ In such cases you use an escaped identifier <span class="inlinecode">^service</s
 </div>
 </div>
 </p>
-<a name="Xbase_Syntax_EscapedIdentifiers_3"></a>
-<h4>Examples</h4>
+<a name="Xbase_Syntax_Identifiers_4"></a>
+<h5>Examples</h5>
 <p>
 <ul>
 	<li>
@@ -1131,7 +1130,7 @@ In such cases you use an escaped identifier <span class="inlinecode">^service</s
 </ul>
 </p>
 <a name="Xbase_Syntax_StringLiteral"></a>
-<h3>String Literals</h3>
+<h4>String Literals</h4>
 <p>
 String literals can either use single quotes (&apos;) or double quotes (") as their terminals. When using double quotes all literals allowed by Java string literals are
 supported. In addition new line characters are allowed, that is in Xbase all string literals can span multiple lines. When using single quotes the only difference
@@ -1144,7 +1143,7 @@ See <a href="http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#
 In contrast to Java, equal string literals within the same class do not neccessarily refer to the same instance at runtime.
 </p>
 <a name="Xbase_Syntax_StringLiteral_4"></a>
-<h4>Syntax</h4>
+<h5>Syntax</h5>
 <p>
 <div class="literallayout">
 <div class="incode">
@@ -1156,7 +1155,7 @@ In contrast to Java, equal string literals within the same class do not neccessa
 </div>
 </p>
 <a name="Xbase_Syntax_StringLiteral_5"></a>
-<h4>Examples</h4>
+<h5>Examples</h5>
 <p>
 <ul>
 	<li>
@@ -1184,18 +1183,18 @@ In contrast to Java, equal string literals within the same class do not neccessa
 </ul>
 </p>
 <a name="Xbase_Syntax_IntegerLiteral"></a>
-<h3>Integer Literals</h3>
+<h4>Integer Literals</h4>
 <p>
 Integer literals consist of one or more digits. 
 Only decimal literals are supported and they always result in a value of type <span class="inlinecode">java.lang.Integer</span> 
-(it might result in native type <span class="inlinecode">int</span> when translated to Java, see <a href="199g-xbase-language-reference-types.html" title="Go to &quot;Types&quot;">Types</a>).
+(it might result in native type <span class="inlinecode">int</span> when translated to Java, see <a href="199-xtext-and-java.html#xbaseLanguageRef_Types" title="Go to &quot;Types&quot;">Types</a>).
 The compiler makes sure that only numbers between 0 and <em>Integer.MAX</em> (0x7fffffff) are used.
 </p>
 <p>
 There is no negative integer literal, instead the expression <span class="inlinecode">-23</span> is parsed as the prefix operator <span class="inlinecode">-</span> applied to an integer literal.
 </p>
 <a name="Xbase_Syntax_IntegerLiteral_3"></a>
-<h4>Syntax</h4>
+<h5>Syntax</h5>
 <p>
 <div class="literallayout">
 <div class="incode">
@@ -1213,8 +1212,8 @@ There is no negative integer literal, instead the expression <span class="inline
 Xbase comes with two different kinds of comments: Single-line comments and multi-line comments.
 The syntax is the same as the one known from Java (see <a href="http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.7">§ 3.7 Comments</a>).
 </p>
-<a name="Xbase_Syntax_IntegerLiteral_5"></a>
-<h4>Syntax</h4>
+<a name="Xbase_Syntax_Comments_2"></a>
+<h5>Syntax</h5>
 <p>
 <div class="literallayout">
 <div class="incode">
@@ -1230,12 +1229,12 @@ The syntax is the same as the one known from Java (see <a href="http://java.sun.
 </div>
 </p>
 <a name="Xbase_Syntax_Whitespace"></a>
-<h3>White Space</h3>
+<h4>White Space</h4>
 <p>
 The white space characters <span class="inlinecode"><span class="string">&apos;&nbsp;&apos;</span></span>, <span class="inlinecode"><span class="string">&apos;\t&apos;</span></span>, <span class="inlinecode"><span class="string">&apos;\n&apos;</span></span>, and <span class="inlinecode"><span class="string">&apos;\r</span></span> are allowed to occur anywhere between the other syntactic elements. 
 </p>
 <a name="Xbase_Syntax_Keywords"></a>
-<h3>Reserved Keywords</h3>
+<h4>Reserved Keywords</h4>
 <p>
 The following list of words are reserved keywords, thus reducing the set of possible identifiers:
 <ol>
@@ -1311,15 +1310,15 @@ The following list of words are reserved keywords, thus reducing the set of poss
 </ol>
 </p>
 <p>
-However, in case some of the keywords have to be used as identifiers, the escape character for <a href="199f-xbase-language-reference-syntax.html#Xbase_Syntax_EscapedIdentifiers" title="Go to &quot;Escaped Identifiers&quot;">identifiers</a> comes in handy. 
+However, in case some of the keywords have to be used as identifiers, the escape character for <a href="199-xtext-and-java.html#Xbase_Syntax_EscapedIdentifiers" title="Go to &quot;Escaped Identifiers&quot;">identifiers</a> comes in handy. 
 </p>
 <a name="xbaseLanguageRef_Types"></a>
-<h2>Types</h2>
+<h3>Types</h3>
 <p>
 Basically all kinds of JVM types are available and referable. 
 </p>
 <a name="Xbase_Types_Arrays"></a>
-<h3>Arrays</h3>
+<h4>Arrays</h4>
 <p>
 Arrays cannot be declared explicitly,
 but they can be passed around and if needed are transparently converted to a List of the compound type.
@@ -1331,13 +1330,13 @@ you can also defer the conversion. The conversion is bi-directional so any metho
 instead.
 </p>
 <a name="Xbase_Types_TypeReferences"></a>
-<h3>Simple Type References</h3>
+<h4>Simple Type References</h4>
 <p>
 A simple type reference only consists of a <em>qualified name</em>. A qualified name is a name made up of identifiers which are separated by a dot 
 (like in Java).
 </p>
 <a name="Xbase_Types_TypeReferences_2"></a>
-<h4>Syntax</h4>
+<h5>Syntax</h5>
 <p>
 <div class="literallayout">
 <div class="incode">
@@ -1353,7 +1352,7 @@ QualifiedName:<br/>
 There is no parser rule for a simple type reference, as it is expressed as a parameterized type references without parameters.
 </p>
 <a name="Xbase_Types_TypeReferences_3"></a>
-<h4>Examples</h4>
+<h5>Examples</h5>
 <p>
 <ul>
 	<li>
@@ -1365,7 +1364,7 @@ There is no parser rule for a simple type reference, as it is expressed as a par
 </ul>
 </p>
 <a name="Xbase_Types_FunctionTypes"></a>
-<h3>Function Types</h3>
+<h4>Function Types</h4>
 <p>
 Xbase introduces <em>closures</em>, and therefore an additional function type signature. On the JVM-Level a closure (or more
 generally any function object) is just an instance of one of the types in <span class="inlinecode">org.eclipse.xtext.xbase.lib.Function*</span>, 
@@ -1377,10 +1376,10 @@ So instead of writing <span class="inlinecode">Function1&lt;String,Boolean&gt;</
 Primitives cannot be used in function types.
 </p>
 <p>
-For more information on closures see <a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_Closures" title="Go to &quot;Closures&quot;" >section Xbase_Expressions_Closures</a>.
+For more information on closures see <a href="199-xtext-and-java.html#Xbase_Expressions_Closures" title="Go to &quot;Closures&quot;" >section Xbase_Expressions_Closures</a>.
 </p>
 <a name="Xbase_Types_FunctionTypes_4"></a>
-<h4>Syntax</h4>
+<h5>Syntax</h5>
 <p>
 <div class="literallayout">
 <div class="incode">
@@ -1393,7 +1392,7 @@ XFunctionTypeRef:<br/>
 </div>
 </p>
 <a name="Xbase_Types_FunctionTypes_5"></a>
-<h4>Examples</h4>
+<h5>Examples</h5>
 <p>
 <ul>
 	<li>
@@ -1411,7 +1410,7 @@ XFunctionTypeRef:<br/>
 </ul>
 </p>
 <a name="Xbase_Types_ParameterizedTypeReference"></a>
-<h3>Parameterized Type References</h3>
+<h4>Parameterized Type References</h4>
 <p>
 The general syntax for type references allows to take any number of type arguments. The semantics as well as the syntax is almost the same as in Java, so please 
 refer to the third edition of the  <a href="http://java.sun.com/docs/books/jls/third_edition/html/j3TOC.html">Java Language Specification</a>.
@@ -1421,7 +1420,7 @@ The only difference is that in Xbase a type reference can also be a function typ
 type arguments.
 </p>
 <a name="Xbase_Types_ParameterizedTypeReference_3"></a>
-<h4>Syntax</h4>
+<h5>Syntax</h5>
 <p>
 <div class="literallayout">
 <div class="incode">
@@ -1458,7 +1457,7 @@ JvmUpperBound&nbsp;:&nbsp;<br/>
 </div>
 </p>
 <a name="Xbase_Types_ParameterizedTypeReference_4"></a>
-<h4>Examples</h4>
+<h5>Examples</h5>
 <p>
 <ul>
 	<li>
@@ -1482,13 +1481,13 @@ JvmUpperBound&nbsp;:&nbsp;<br/>
 </ul>
 </p>
 <a name="Xbase_Types_Primitives"></a>
-<h3>Primitives</h3>
+<h4>Primitives</h4>
 <p>
 Xbase supports all Java primitives. The conformance rules (e.g. boxing unboxing) are also exactly like defined
 in the Java Language Specification.
 </p>
 <a name="Xbase_Types_ConformanceRules"></a>
-<h3>Conformance and Conversion</h3>
+<h4>Conformance and Conversion</h4>
 <p>
 Conformance is used in order to find out whether some expression can be used in a certain situation. For instance when assigning a value to a variable, 
 the type of the right hand expression needs to conform to the type of the variable.
@@ -1498,7 +1497,7 @@ As Xbase implements the unchanegd type system of Java it also fully supports the
 in <a href="http://java.sun.com/docs/books/jls/third_edition/html/conversions.html">The Java Language Specification</a>.
 </p>
 <a name="Xbase_Types_CommonSuperType"></a>
-<h3>Common Super Type</h3>
+<h4>Common Super Type</h4>
 <p>
 Because of type inference Xbase sometimes needs to compute the most common super type of a given set
 of types. 
@@ -1514,7 +1513,7 @@ in the type hierarchy that implements the interface. If the distances for two cl
 the hierarchy, their qualified name is used as the compare-key to ensure deterministic results. 
 </p>
 <a name="xbaseLanguageRef_Expressions"></a>
-<h2>Expressions</h2>
+<h3>Expressions</h3>
 <p>
 Expressions are the main language constructs which are used to express behavior and computation of values. The concept of 
 statements is not supported, but instead powerful expressions are used to handle situations in which the imperative nature of statements would
@@ -1523,15 +1522,15 @@ expression always results in a value (might be the value &apos;null&apos; though
 of a static type.
 </p>
 <a name="Xbase_Expressions_Literals"></a>
-<h3>Literals</h3>
+<h4>Literals</h4>
 <p>
 A literal denotes a fixed unchangeable value. Literals for string, integers, booleans,
 null and Java types are supported.
 </p>
 <a name="Xbase_Expressions_StringLiterals"></a>
-<h4>String Literals</h4>
+<h5>String Literals</h5>
 <p>
-A string literal as syntactically defined in <a href="199f-xbase-language-reference-syntax.html#Xbase_Syntax_StringLiteral" title="Go to &quot;String Literals&quot;" >section Xbase_Syntax_StringLiteral</a> is a valid expression and returns an instance of <span class="inlinecode">java.lang.String</span> of the given value.
+A string literal as syntactically defined in <a href="199-xtext-and-java.html#Xbase_Syntax_StringLiteral" title="Go to &quot;String Literals&quot;" >section Xbase_Syntax_StringLiteral</a> is a valid expression and returns an instance of <span class="inlinecode">java.lang.String</span> of the given value.
 </p>
 <p>
 <ul>
@@ -1554,9 +1553,9 @@ A string literal as syntactically defined in <a href="199f-xbase-language-refere
 </ul>
 </p>
 <a name="Xbase_Expressions_IntegerLiterals"></a>
-<h4>Integer Literals</h4>
+<h5>Integer Literals</h5>
 <p>
-An integer literal as defined in <a href="199f-xbase-language-reference-syntax.html#Xbase_Syntax_IntegerLiteral" title="Go to &quot;Integer Literals&quot;" >section Xbase_Syntax_IntegerLiteral</a> creates an <span class="inlinecode">int</span>.
+An integer literal as defined in <a href="199-xtext-and-java.html#Xbase_Syntax_IntegerLiteral" title="Go to &quot;Integer Literals&quot;" >section Xbase_Syntax_IntegerLiteral</a> creates an <span class="inlinecode">int</span>.
 There is no signed int. If you put a minus operator in front of an int literal it is taken as a UnaryOperator
 with one argument (the positive int literal).
 </p>
@@ -1571,7 +1570,7 @@ with one argument (the positive int literal).
 </ul>
 </p>
 <a name="Xbase_Expressions_BooleanLiteral"></a>
-<h4>Boolean Literals</h4>
+<h5>Boolean Literals</h5>
 <p>
 There are two boolean literals, <span class="inlinecode">true</span> and <span class="inlinecode">false</span> which correspond to their Java counterpart of type <em>boolean</em>. 
 </p>
@@ -1586,7 +1585,7 @@ There are two boolean literals, <span class="inlinecode">true</span> and <span c
 </ul>
 </p>
 <a name="Xbase_Expressions_NullLiteral"></a>
-<h4>Null Literal</h4>
+<h5>Null Literal</h5>
 <p>
 The null pointer literal is, like in Java, <span class="inlinecode">null</span>. 
 It is a member of any reference type.
@@ -1599,7 +1598,7 @@ It is a member of any reference type.
 </ul>
 </p>
 <a name="Xbase_Expressions_TypeLiteral"></a>
-<h4>Type Literals</h4>
+<h5>Type Literals</h5>
 <p>
 Type literals are specified using the keyword <em>typeof</em> :
 </p>
@@ -1611,7 +1610,7 @@ Type literals are specified using the keyword <em>typeof</em> :
 </ul>
 </p>
 <a name="Xbase_Expressions_TypeCasts"></a>
-<h3>Type Casts</h3>
+<h4>Type Casts</h4>
 <p>
 Type cast behave like casts in Java, but have a slightly more readable syntax.
 Type casts bind stronger than any other operator but weaker than feature calls.
@@ -1620,7 +1619,7 @@ Type casts bind stronger than any other operator but weaker than feature calls.
 The conformance rules for casts are defined in the <a href="http://java.sun.com/docs/books/jls/third_edition/html/conversions.html#5.5">Java Language Specification</a>.
 </p>
 <a name="Xbase_Expressions_TypeCasts_3"></a>
-<h4>Syntax</h4>
+<h5>Syntax</h5>
 <p>
 <div class="literallayout">
 <div class="incode">
@@ -1632,7 +1631,7 @@ XCastedExpression:<br/>
 </div>
 </p>
 <a name="Xbase_Expressions_TypeCasts_4"></a>
-<h4>Examples</h4>
+<h5>Examples</h5>
 <p>
 <ul>
 	<li>
@@ -1644,7 +1643,7 @@ XCastedExpression:<br/>
 </ul>
 </p>
 <a name="Xbase_Expressions_Operators"></a>
-<h3>Infix Operators / Operator Overloading</h3>
+<h4>Infix Operators / Operator Overloading</h4>
 <p>
 There are a couple of common predefined infix operators. In contrast to Java, the operators are not limited
 to operations on certain types. Instead an operator-to-method mapping allows users to redefine the 
@@ -1878,7 +1877,7 @@ operator <span class="inlinecode">=</span> is. That is a = b = c is executed as 
 operators are left-to-right associative. Parenthesis can be used to adjust the default precedence and associativity. 
 </p>
 <a name="Xbase_Expressions_Operators_3"></a>
-<h4>Short-Circuit Boolean Operators</h4>
+<h5>Short-Circuit Boolean Operators</h5>
 <p>
 If the operators <span class="inlinecode">||</span> and <span class="inlinecode">&amp;&amp;</span> are used in a context where the left hand operand is of type boolean, the operation is evaluated
 in short circuit mode, which means that the right hand operand might not be evaluated at all in the following cases: 
@@ -1892,7 +1891,7 @@ in short circuit mode, which means that the right hand operand might not be eval
 </ol>
 </p>
 <a name="Xbase_Expressions_Operators_4"></a>
-<h4>Examples</h4>
+<h5>Examples</h5>
 <p>
 <ul>
 	<li>
@@ -1924,7 +1923,7 @@ in short circuit mode, which means that the right hand operand might not be eval
 <a name="Xbase_Expressions_PropertyAssignment"></a>
 <h4>Assignments</h4>
 <p>
-<a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_VariableDeclaration" title="Go to &quot;Variable Declarations&quot;">Local variables</a> can be reassigned using the <span class="inlinecode">=</span> operator. Also properties can be set using 
+<a href="199-xtext-and-java.html#Xbase_Expressions_VariableDeclaration" title="Go to &quot;Variable Declarations&quot;">Local variables</a> can be reassigned using the <span class="inlinecode">=</span> operator. Also properties can be set using 
 that operator:
 Given the expression 
 </p>
@@ -1970,13 +1969,13 @@ myObj.setMyProperty(<span class="string">"foo"</span>)<br/>
 </div>
 </p>
 <a name="Xbase_Expressions_FeatureCalls"></a>
-<h3>Feature Calls</h3>
+<h4>Feature Calls</h4>
 <p>
 A feature call is used to invoke members of objects, such as fields and methods, but also can refer to local variables and parameters, 
 which are made available for the current expression&apos;s scope. 
 </p>
 <a name="Xbase_Expressions_FeatureCalls_2"></a>
-<h4>Syntax</h4>
+<h5>Syntax</h5>
 <p>
 The following snippet is a simplification of the real Xtext rules, which cover more than the concrete syntax.
 <div class="literallayout">
@@ -1990,10 +1989,10 @@ FeatureCall&nbsp;:<br/>
 </div>
 </p>
 <a name="Xbase_Expressions_PropertyAccess"></a>
-<h4>Property Access</h4>
+<h5>Property Access</h5>
 <p>
 Feature calls are directly translated to their Java equivalent with the exception, that for calls to properties an equivalent rule as 
-described in <a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_PropertyAssignment" title="Go to &quot;Assignments&quot;" >section Xbase_Expressions_PropertyAssignment</a> applies. 
+described in <a href="199-xtext-and-java.html#Xbase_Expressions_PropertyAssignment" title="Go to &quot;Assignments&quot;" >section Xbase_Expressions_PropertyAssignment</a> applies. 
 That is, for the following expression
 </p>
 <p>
@@ -2039,10 +2038,10 @@ which would have higher precedence.
 As <span class="inlinecode"><span class="keyword">this</span></span> is bound to the surrounding object in Java, <span class="inlinecode"><span class="keyword">it</span></span> can be used
 in finer-grained constructs such as function parameters. That is why <span class="inlinecode"><span class="keyword">it</span>.myProperty</span> has 
 higher precedence than <span class="inlinecode"><span class="keyword">this</span>.myProperty</span>. <span class="inlinecode"><span class="keyword">it</span></span> is also the 
-<a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_implicit_parameter" title="Go to &quot;Implicit Parameter it&quot;">default parameter name in closures</a>. 
+<a href="199-xtext-and-java.html#Xbase_Expressions_implicit_parameter" title="Go to &quot;Implicit Parameter it&quot;">default parameter name in closures</a>. 
 </p>
 <a name="Xbase_Expressions_NullSafeFeatureCalls"></a>
-<h4>Null-Safe Feature Call</h4>
+<h5>Null-Safe Feature Call</h5>
 <p>
 Checking for null references can make code very unreadable. In many situations it is ok for an expression to return null if a receiver was null.
 Xbase supports the safe navigation operator <span class="inlinecode">?.</span> to make such code more readable.
@@ -2072,12 +2071,12 @@ myRef?.doStuff()<br/>
 </div>
 </p>
 <a name="Xbase_Expressions_ConstructorCall"></a>
-<h3>Constructor Call</h3>
+<h4>Constructor Call</h4>
 <p>
 Construction of objects is done by invoking Java constructors. The syntax is exactly as in Java.
 </p>
 <a name="Xbase_Expressions_ConstructorCall_2"></a>
-<h4>Examples</h4>
+<h5>Examples</h5>
 <p>
 <ul>
 	<li>
@@ -2105,7 +2104,7 @@ Construction of objects is done by invoking Java constructors. The syntax is exa
 </ul>
 </p>
 <a name="Xbase_Expressions_ConstructorCall_3"></a>
-<h4>Syntax</h4>
+<h5>Syntax</h5>
 <p>
 <div class="literallayout">
 <div class="incode">
@@ -2119,13 +2118,13 @@ XConstructorCall:<br/>
 </div>
 </p>
 <a name="Xbase_Expressions_Closures"></a>
-<h3>Closures</h3>
+<h4>Closures</h4>
 <p>
 A closure is a literal that defines an anonymous function. A closure also captures the current scope,
 so that any final variables and parameters visible at construction time can be referred to in the closure&apos;s expression. 
 </p>
 <a name="Xbase_Expressions_Closures_2"></a>
-<h4>Syntax</h4>
+<h5>Syntax</h5>
 <p>
 <div class="literallayout">
 <div class="incode">
@@ -2175,9 +2174,9 @@ But in all other cases the square brackets are mandatory:
 </div>
 </p>
 <a name="Xbase_Expressions_ClosuresTypeInference"></a>
-<h4>Typing</h4>
+<h5>Typing</h5>
 <p>
-Closures are expressions which produce function objects. The type is a <a href="199g-xbase-language-reference-types.html#Xbase_Types_FunctionTypes" title="Go to &quot;Function Types&quot;">function type</a>, consisting of the types of the 
+Closures are expressions which produce function objects. The type is a <a href="199-xtext-and-java.html#Xbase_Types_FunctionTypes" title="Go to &quot;Function Types&quot;">function type</a>, consisting of the types of the 
 parameters as well as the return type. The return type is never specified explicitly but is always inferred from the expression. 
 The parameter types can be inferred if the closure is used in a context where this is possible.
 </p>
@@ -2211,7 +2210,7 @@ arrayList(&nbsp;<span class="string">"Foo"</span>,&nbsp;<span class="string">"Ba
 </div>
 </p>
 <a name="Xbase_Expressions_FunctionMapping"></a>
-<h4>Function Mapping</h4>
+<h5>Function Mapping</h5>
 <p>
 An Xbase closure is a Java object of one of the <em>Function</em> interfaces shipped with the runtime library of Xbase. There is an interface 
 for each number of parameters (current maximum is six parameters). The names of the interfaces are 
@@ -2280,7 +2279,7 @@ newArrayList(&nbsp;<span class="string">&apos;aaa&apos;</span>,&nbsp;<span class
 </div>
 </p>
 <a name="Xbase_Expressions_implicit_parameter"></a>
-<h4>Implicit Parameter it</h4>
+<h5>Implicit Parameter <em>it</em></h5>
 <p>
 If a closure has a single parameter whose type can be inferred, the declaration of the parameter can
 be ommitted. Use <em>it</em> to refer to the parameter inside the closure&apos;s body.
@@ -2295,7 +2294,7 @@ be ommitted. Use <em>it</em> to refer to the parameter inside the closure&apos;s
 </div>
 </p>
 <a name="Xbase_Expressions_Closures_6"></a>
-<h4>Examples</h4>
+<h5>Examples</h5>
 <p>
 <ul>
 	<li>
@@ -2310,14 +2309,14 @@ be ommitted. Use <em>it</em> to refer to the parameter inside the closure&apos;s
 </ul>
 </p>
 <a name="Xbase_Expressions_IfExpression"></a>
-<h3>If Expression</h3>
+<h4>If Expression</h4>
 <p>
 An if expression is used to choose two different values based on a predicate. While it has the syntax of Java&apos;s if statement it behaves  
 like Java&apos;s ternary operator (<span class="inlinecode">predicate&nbsp;?&nbsp;thenPart&nbsp;:&nbsp;elsePart</span>), i.e. it is an expression that returns a value. Consequently, you can use 
 if expressions deeply nested within expressions.
 </p>
 <a name="Xbase_Expressions_IfExpression_2"></a>
-<h4>Syntax</h4>
+<h5>Syntax</h5>
 <p>
 <div class="literallayout">
 <div class="incode">
@@ -2357,13 +2356,13 @@ is the a short hand for
 </div>
 </p>
 <a name="Xbase_Expressions_IfTypeInference"></a>
-<h4>Typing</h4>
+<h5>Typing</h5>
 <p>
 The type of an if expression is calculated by the return types <span class="inlinecode">T1</span> and <span class="inlinecode">T2</span> of the two expression <span class="inlinecode">e1</span> and <span class="inlinecode">e2</span>.
-It uses the rules defined in <a href="199g-xbase-language-reference-types.html#Xbase_Types_CommonSuperType" title="Go to &quot;Common Super Type&quot;" >section Xbase_Types_CommonSuperType</a>.
+It uses the rules defined in <a href="199-xtext-and-java.html#Xbase_Types_CommonSuperType" title="Go to &quot;Common Super Type&quot;" >section Xbase_Types_CommonSuperType</a>.
 </p>
 <a name="Xbase_Expressions_IfExpression_4"></a>
-<h4>Examples</h4>
+<h5>Examples</h5>
 <p>
 <ul>
 	<li>
@@ -2378,7 +2377,7 @@ It uses the rules defined in <a href="199g-xbase-language-reference-types.html#X
 </ul>
 </p>
 <a name="Xbase_Expressions_SwitchExpression"></a>
-<h3>Switch Expression</h3>
+<h4>Switch Expression</h4>
 <p>
 The switch expression is a bit different from Java&apos;s. First, there is no fall through which means only one case is evaluated at most.
 Second, the use of switch is not limited to certain values but can be used for any object reference instead.
@@ -2400,7 +2399,7 @@ For a switch expression
 </p>
 <p>
 the main expression <span class="inlinecode">e</span> is evaluated first and then each case sequentially. If the switch expression
-contains a variable declaration using the syntax known from <a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_ForLoop" title="Go to &quot;For Loop&quot;" >section Xbase_Expressions_ForLoop</a>, the value is bound to the given name.
+contains a variable declaration using the syntax known from <a href="199-xtext-and-java.html#Xbase_Expressions_ForLoop" title="Go to &quot;For Loop&quot;" >section Xbase_Expressions_ForLoop</a>, the value is bound to the given name.
 Expressions of type <span class="inlinecode">java.lang.Boolean</span> or <span class="inlinecode">boolean</span> are not allowed in a switch expression.
 </p>
 <p>
@@ -2428,9 +2427,9 @@ Example:
 </div>
 </p>
 <a name="Xbase_Expressions_SwitchExpression_7"></a>
-<h4>Type guards</h4>
+<h5>Type guards</h5>
 <p>
-In addition to the case guards one can add a so called <em>Type Guard</em> which is syntactically just a <a href="199g-xbase-language-reference-types.html#Xbase_Types_TypeReferences" title="Go to &quot;Simple Type References&quot;">type reference</a> preceding
+In addition to the case guards one can add a so called <em>Type Guard</em> which is syntactically just a <a href="199-xtext-and-java.html#Xbase_Types_TypeReferences" title="Go to &quot;Simple Type References&quot;">type reference</a> preceding
 the than optional case keyword. The compiler will use that type for the switch expression in subsequent expressions.
 Example:
 <div class="literallayout">
@@ -2453,14 +2452,14 @@ If the switch expression contains an explicit declaration of a local variable or
 the type guard acts like a cast, that is all references to the switch value will be of the type specified in the type guard.
 </p>
 <a name="Xbase_Expressions_SwitchExpression_8"></a>
-<h4>Typing</h4>
+<h5>Typing</h5>
 <p>
-The return type of a switch expression is computed using the rules defined in <a href="199g-xbase-language-reference-types.html#Xbase_Types_CommonSuperType" title="Go to &quot;Common Super Type&quot;" >section Xbase_Types_CommonSuperType</a>. The set of types from which the common super type is 
+The return type of a switch expression is computed using the rules defined in <a href="199-xtext-and-java.html#Xbase_Types_CommonSuperType" title="Go to &quot;Common Super Type&quot;" >section Xbase_Types_CommonSuperType</a>. The set of types from which the common super type is 
 computed corresponds to the types of each case&apos;s result expression. In case a switch expression&apos;s type is
 computed using the expected type from the context, it is sufficient to return the expected type if all case branches types conform to the expected type.
 </p>
 <a name="Xbase_Expressions_SwitchExpression_9"></a>
-<h4>Examples</h4>
+<h5>Examples</h5>
 <p>
 <ul>
 	<li>
@@ -2496,7 +2495,7 @@ computed using the expected type from the context, it is sufficient to return th
 </ul>
 </p>
 <a name="Xbase_Expressions_SwitchExpression_10"></a>
-<h4>Syntax</h4>
+<h5>Syntax</h5>
 <p>
 <div class="literallayout">
 <div class="incode">
@@ -2515,9 +2514,9 @@ XCasePart:<br/>
 </div>
 </p>
 <a name="Xbase_Expressions_VariableDeclaration"></a>
-<h3>Variable Declarations</h3>
+<h4>Variable Declarations</h4>
 <p>
-Variable declarations are only allowed within <a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_Blocks" title="Go to &quot;Blocks&quot;">blocks</a>. They are visible in any subsequent expressions in
+Variable declarations are only allowed within <a href="199-xtext-and-java.html#Xbase_Expressions_Blocks" title="Go to &quot;Blocks&quot;">blocks</a>. They are visible in any subsequent expressions in
 the block. Although overriding or shadowing variables from outer scopes is allowed, it is usually only
 used to overload the variable name &apos;this&apos;, in order to subsequently access an object&apos;s features in an
 unqualified manner.
@@ -2548,7 +2547,7 @@ Variables declared outside a closure using the <span class="inlinecode">var</spa
 closure.
 </p>
 <a name="Xbase_Expressions_VariableDeclaration_5"></a>
-<h4>Syntax</h4>
+<h5>Syntax</h5>
 <p>
 <div class="literallayout">
 <div class="incode">
@@ -2560,7 +2559,7 @@ XVariableDeclaration:<br/>
 </div>
 </p>
 <a name="Xbase_Expressions_VariableDeclaration_6"></a>
-<h4>Typing</h4>
+<h5>Typing</h5>
 <p>
 The return type of a variable declaration expression is always <span class="inlinecode">void</span>. 
 The type of the variable itself can either be explicitly declared or be inferred from the right hand side expression.
@@ -2573,7 +2572,7 @@ Here is an example for an explicitly declared type:
 </div>
 </div>
 
-In such cases, the right hand expression&apos;s type must <a href="199g-xbase-language-reference-types.html#Xbase_Types_ConformanceRules" title="Go to &quot;Conformance and Conversion&quot;">conform</a> to the type on the left hand side. 
+In such cases, the right hand expression&apos;s type must <a href="199-xtext-and-java.html#Xbase_Types_ConformanceRules" title="Go to &quot;Conformance and Conversion&quot;">conform</a> to the type on the left hand side. 
 </p>
 <p>
 Alternatively the type can be left out and will be inferred from the initialization expression:  
@@ -2587,18 +2586,18 @@ Alternatively the type can be left out and will be inferred from the initializat
 </div>
 </p>
 <a name="Xbase_Expressions_Blocks"></a>
-<h3>Blocks</h3>
+<h4>Blocks</h4>
 <p>
 The block expression allows to have imperative code sequences. It consists of a sequence of expressions, and returns the value of the last expression.
 The return type of a block is also the type of the last expression. Empty blocks return <span class="inlinecode">null</span>. 
-<a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_VariableDeclaration" title="Go to &quot;Variable Declarations&quot;">Variable declarations</a> are only allowed within blocks and cannot be used as a block&apos;s last expression.
+<a href="199-xtext-and-java.html#Xbase_Expressions_VariableDeclaration" title="Go to &quot;Variable Declarations&quot;">Variable declarations</a> are only allowed within blocks and cannot be used as a block&apos;s last expression.
 </p>
 <p>
 A block expression is surrounded by curly braces and contains at least one expression.
 It can optionally be terminated by a semicolon.
 </p>
 <a name="Xbase_Expressions_Blocks_3"></a>
-<h4>Examples</h4>
+<h5>Examples</h5>
 <p>
 <div class="literallayout">
 <div class="incode">
@@ -2627,7 +2626,7 @@ It can optionally be terminated by a semicolon.
 </div>
 </p>
 <a name="Xbase_Expressions_Blocks_4"></a>
-<h4>Syntax</h4>
+<h5>Syntax</h5>
 <p>
 <div class="literallayout">
 <div class="incode">
@@ -2641,7 +2640,7 @@ XBlockExpression:<br/>
 </div>
 </p>
 <a name="Xbase_Expressions_ForLoop"></a>
-<h3>For Loop</h3>
+<h4>For Loop</h4>
 <p>
 The for loop <span class="inlinecode"><span class="keyword">for</span>&nbsp;(T1&nbsp;variable&nbsp;:&nbsp;iterableOfT1)&nbsp;expression</span> is used to execute a certain expression for each element of an
 array of an instance of <span class="inlinecode">java.lang.Iterable</span>.
@@ -2682,7 +2681,7 @@ or <span class="inlinecode">java.lang.Iterable</span> returned by the iterable e
 </ul>
 </p>
 <a name="Xbase_Expressions_ForLoop_4"></a>
-<h4>Syntax</h4>
+<h5>Syntax</h5>
 <p>
 <div class="literallayout">
 <div class="incode">
@@ -2696,13 +2695,13 @@ XForExpression:<br/>
 </div>
 </p>
 <a name="Xbase_Expressions_WhileExpression"></a>
-<h3>While Loop</h3>
+<h4>While Loop</h4>
 <p>
 A while loop <span class="inlinecode"><span class="keyword">while</span>&nbsp;(predicate)&nbsp;expression</span> is used to execute a certain expression unless the predicate is evaluated to <span class="inlinecode"><span class="keyword">false</span></span>.
 The return type of a while loop is <span class="inlinecode"><span class="keyword">void</span></span>.
 </p>
 <a name="Xbase_Expressions_WhileExpression_2"></a>
-<h4>Syntax</h4>
+<h5>Syntax</h5>
 <p>
 <div class="literallayout">
 <div class="incode">
@@ -2715,7 +2714,7 @@ XWhileExpression:<br/>
 </div>
 </p>
 <a name="Xbase_Expressions_WhileExpression_3"></a>
-<h4>Examples</h4>
+<h5>Examples</h5>
 <p>
 <ul>
 	<li>
@@ -2742,14 +2741,14 @@ XWhileExpression:<br/>
 </ul>
 </p>
 <a name="Xbase_Expressions_DoWhileExpression"></a>
-<h3>Do-While Loop</h3>
+<h4>Do-While Loop</h4>
 <p>
 A do-while loop <span class="inlinecode"><span class="keyword">do</span>&nbsp;expression&nbsp;<span class="keyword">while</span>&nbsp;(predicate)</span> is used to execute a certain expression unless the predicate is evaluated to <span class="inlinecode"><span class="keyword">false</span></span>.
-The difference to the <a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_WhileExpression" title="Go to &quot;While Loop&quot;">while loop</a> is that the execution starts by executing the block once before evaluating the predicate for the first time.
+The difference to the <a href="199-xtext-and-java.html#Xbase_Expressions_WhileExpression" title="Go to &quot;While Loop&quot;">while loop</a> is that the execution starts by executing the block once before evaluating the predicate for the first time.
 The return type of a do-while loop is <span class="inlinecode"><span class="keyword">void</span></span>.
 </p>
 <a name="Xbase_Expressions_DoWhileExpression_2"></a>
-<h4>Syntax</h4>
+<h5>Syntax</h5>
 <p>
 <div class="literallayout">
 <div class="incode">
@@ -2763,7 +2762,7 @@ XDoWhileExpression:<br/>
 </div>
 </p>
 <a name="Xbase_Expressions_DoWhileExpression_3"></a>
-<h4>Examples</h4>
+<h5>Examples</h5>
 <p>
 <ul>
 	<li>
@@ -2789,7 +2788,7 @@ XDoWhileExpression:<br/>
 </ul>
 </p>
 <a name="Xbase_Expressions_Return"></a>
-<h3>Return Expression</h3>
+<h4>Return Expression</h4>
 <p>
 Although an explicit return is often not necessary, it is supported.
 In a closure for instance a return expression is always implied if the expression itself is not of type
@@ -2809,7 +2808,7 @@ listOfStrings.map(e|&nbsp;{<br/>
 </div>
 </p>
 <a name="Xbase_Expressions_Throw"></a>
-<h3>Throwing Exceptions</h3>
+<h4>Throwing Exceptions</h4>
 <p>
 Like in Java it is possible to throw <span class="inlinecode">java.lang.Throwable</span>. The syntax is exactly the same as in Java.
 </p>
@@ -2828,7 +2827,7 @@ Like in Java it is possible to throw <span class="inlinecode">java.lang.Throwabl
 </div>
 </p>
 <a name="Xbase_Expressions_TryCatch"></a>
-<h3>Try, Catch, Finally</h3>
+<h4>Try, Catch, Finally</h4>
 <p>
 The try-catch-finally expression is used to handle exceptional situations.
 You are not forced to declare checked exceptions, if you don&apos;t catch checked exceptions they are rethrown
@@ -2852,7 +2851,7 @@ Other than that the syntax again is like the one known from Java.
 
 </p>
 <a name="xbaseLanguageRef_LibraryExtension"></a>
-<h2>Extension Methods</h2>
+<h3>Extension Methods</h3>
 <p>
 Languages extending Xbase might want to contribute to the feature scope. Besides that one can of course
 change the whole implementation as it seems fit there is a special hook, which can be used to add so
@@ -2880,7 +2879,7 @@ on the scope (<span class="inlinecode">foo(Object)</span> and <span class="inlin
 bind and invoke <span class="inlinecode">foo(Object)</span>.
 </p>
 <a name="xbaseLanguageRef_LibraryExtension_6"></a>
-<h3>Examples</h3>
+<h4>Examples</h4>
 <p>
 <ul>
 	<li>
@@ -2898,7 +2897,7 @@ bind and invoke <span class="inlinecode">foo(Object)</span>.
 </ul>
 </p>
 <a name="XbaseLanguageRef_builderSyntax"></a>
-<h3>Builder Syntax</h3>
+<h4>Builder Syntax</h4>
 <p>
 If the last argument of a method call is a closure, it can be appended to the method call. Thus,
 </p>
@@ -2924,8 +2923,8 @@ will call a Java method with the signature
 </div>
 </p>
 <p>
-Used in combination with the <a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_implicit_parameter" title="Go to &quot;Implicit Parameter it&quot;">implicit parameter name in closures</a>
-you can write <a href="199i-xbase-language-reference-libraries.html" title="Go to &quot;Extension Methods&quot;">extension libraries</a> to create and initialize graphs of
+Used in combination with the <a href="199-xtext-and-java.html#Xbase_Expressions_implicit_parameter" title="Go to &quot;Implicit Parameter it&quot;">implicit parameter name in closures</a>
+you can write <a href="199-xtext-and-java.html#xbaseLanguageRef_LibraryExtension" title="Go to &quot;Extension Methods&quot;">extension libraries</a> to create and initialize graphs of
 objects in a concise builder syntax like in Groovy. Consider you have a set of library methods 
 </p>
 <p>
@@ -2983,6 +2982,7 @@ html&nbsp;[&nbsp;<br/>
 </p>
 </div>
 </div>
+
 </p>
 </body>
 </html>

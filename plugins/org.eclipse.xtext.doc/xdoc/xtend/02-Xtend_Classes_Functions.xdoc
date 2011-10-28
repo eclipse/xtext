@@ -4,7 +4,7 @@ On a first glance an Xtend file pretty much looks like a Java file. It starts wi
 That class in fact is directly translated to a Java class in the corresponding Java package.
 
 Here is an example:
-code[Xtend][
+code[Xtend2][
 package com.acme
 
 import java.util.List
@@ -21,11 +21,11 @@ section2:packageDecl[Package Declaration]
 Package declarations are like in Java, with the small difference, that an identifier can be escaped with a  e[^] in case it conflicts with a keyword.
 Also you don't terminate a package declaration with a semicolon.
 
-code[Xtend][
+code[Xtend2][
 package org.eclipse.xtext
 ]
 todo[Would be interesting to document how the following example translates to java] 
-code[Xtend][
+code[Xtend2][
 package my.^public.^package
 ]
 
@@ -39,25 +39,25 @@ is deprecated for the benefit of better tooling.
 
 As in Java all classes from the 'java.lang' package are implicitly imported.
 
-code[Xtend][
+code[Xtend2][
 import java.math.BigDecimal
 import static java.util.Collections.*
 ]
 
 Xtend supports extension methods, which allows to add functions to existing classes without modifying
-them. Static extension functions are just one possibility - simply put the keyword code[Xtend][extension] after
-the code[Xtend][static] keyword and the static functions will be made available as member functions on their first
+them. Static extension functions are just one possibility - simply put the keyword code[Xtend2][extension] after
+the code[Xtend2][static] keyword and the static functions will be made available as member functions on their first
 parameter's type.
 
 That is the following import declaration 
 
-code[Xtend][
+code[Xtend2][
 import static extension java.util.Collections.*
 ]
 
 allows to use its methods for example like this :
 
-code[Xtend][
+code[Xtend2][
 new Foo().singletonList()
 ]
 
@@ -69,9 +69,9 @@ section2:Xtend_ClassDeclaration[Class Declaration]
 The class declaration reuses a lot of Java's syntax but still is a bit different in some aspects.
 Java's default "package private" visibility does not exist in Xtend. As an Xtend class is compiled to
 a top-level Java class and Java does not allow code[Java][private] or code[Java][protected] top-level
-classes any Xtend class is code[Xtend][public]. It is possible to write this explicitly. 
+classes any Xtend class is code[Xtend2][public]. It is possible to write this explicitly. 
 
-e[To be implemented: ]The code[Xtend][abstract] as well as the code[Xtend][final] modifiers are directly translated to Java and have the exact same meaning.
+e[To be implemented: ]The code[Xtend2][abstract] as well as the code[Xtend2][final] modifiers are directly translated to Java and have the exact same meaning.
 
 section3[Inheritance]
 
@@ -86,13 +86,13 @@ parameters just as in Java and provide type arguments to types you refer to (i.e
 section3[Examples]
 
 The most simple class :
-code[Xtend][
+code[Xtend2][
 class MyClass {
 }
 ]
 
 A more advanced class declaration in Xtend :
-code[Xtend][
+code[Xtend2][
 class ArrayList<E> extends AbstractList<E>
         implements List<E>, RandomAccess, 
                    Cloneable, java.io.Serializable {
@@ -105,7 +105,7 @@ section2:fields[Fields]
 Fields in Xtend are commonly used together with an annotation for a dependency
 injection container. Example:
 
-code[Xtend][
+code[Xtend2][
 	@Inject MyService myService
 ]
 
@@ -116,18 +116,18 @@ code[Java][
 	private MyService myService;
 ]
 
-Note that the default visibility is code[Xtend][private]. You can also declare it explicitly as being code[Xtend][public],
-code[Xtend][protected], or code[Xtend][private]. Alternatively, you can write accessor methods. Xtend
+Note that the default visibility is code[Xtend2][private]. You can also declare it explicitly as being code[Xtend2][public],
+code[Xtend2][protected], or code[Xtend2][private]. Alternatively, you can write accessor methods. Xtend
 does not yet support any other modifier from Java on fields.  
 
-section3[Extension Methods]
+section3:extensionMethods[Extension Methods]
 
 You can make the instance methods provided by the field available as extension
-methods, by adding the keyword code[Xtend][extension] to the field declaration.
+methods, by adding the keyword code[Xtend2][extension] to the field declaration.
 
 Imagine you want to add a method 'fullName' to a closed type 'Entity'. With extension methods, you could declare the following class
 
-code[Xtend][
+code[Xtend2][
 class PersonExtensions {
    def getFullName(Person p) {
      p.forename + " " + p.name
@@ -137,27 +137,27 @@ class PersonExtensions {
 
 And if you have an instance of this class injected as extension like this:
 
-code[Xtend][
+code[Xtend2][
 @Inject extension PersonExtensions
 ]  
 
 The method is being put on the member scope of Person. This is why you can skip the field's name. 
 You can now write the following
 
-code[Xtend][
+code[Xtend2][
 myPerson.getFullName()
 ]
 
 which is translated to the Java code 
 
-code[Xtend][
+code[Xtend2][
 _personExtensions.getFullName(myPerson)
 ]
 
-where code[Xtend][_personExtensions] is the default name of the field. Of course the property shorthand 
+where code[Xtend2][_personExtensions] is the default name of the field. Of course the property shorthand 
 is still available
 
-code[Xtend][
+code[Xtend2][
 myPerson.fullName
 ]
 
@@ -176,24 +176,24 @@ Xtend functions are declared within a class and are translated to a correspondin
 
 Let's start with a simple example
 
-code[Xtend][
+code[Xtend2][
 def boolean equalsIgnoreCase(String s1, String s2) :
 	s1.toLowerCase() == s2.toLowerCase();
 ]
 
 section3[Visibility]
 
-The default visibility of a plain function is code[Xtend][public]. You can explicitly declare it as
-being code[Xtend][public], code[Xtend][protected], or code[Xtend][private].
+The default visibility of a plain function is code[Xtend2][public]. You can explicitly declare it as
+being code[Xtend2][public], code[Xtend2][protected], or code[Xtend2][private].
 
 section2[Overriding Functions]
 
-Functions can override a function/method from the super class or implemented interfaces using the keyword code[Xtend][override].
-If a function is annotated with the keyword code[Xtend][final], it cannot be overridden.
+Functions can override a function/method from the super class or implemented interfaces using the keyword code[Xtend2][override].
+If a function is annotated with the keyword code[Xtend2][final], it cannot be overridden.
 IF a function overrides a function (or method) from a super type, the code[override] keyword is mandatory and replaces the keyword code[def].
 
 Example:
-code[Xtend][
+code[Xtend2][
 override boolean equalsIgnoreCase(String s1,String s2) :
 	s1.toLowerCase() == s2.toLowerCase();
 ]
@@ -207,7 +207,7 @@ it is not catched or explicitly declared to be rethrown it will be wrapped in a 
 
 A declared checked exception will not be wrapped automatically.
 
-code[Xtend][
+code[Xtend2][
 /*
  * throws an IOException
  */
@@ -228,14 +228,14 @@ section3:inferredReturnTypes[Inferred Return Types]
 If the return type of a function can be inferred it does not need to be declared.
 That is the function
 
-code[Xtend][
+code[Xtend2][
 def boolean equalsIgnoreCase(String s1,String s2) :
 	s1.toLowerCase() == s2.toLowerCase();
 ]
 
 could be declared like this:
 
-code[Xtend][
+code[Xtend2][
 def equalsIgnoreCase(String s1,String s2) :
 	s1.toLowerCase() == s2.toLowerCase();
 ]
@@ -258,9 +258,9 @@ Dispatch functions make a set of overloaded functions polymorphic. That is the r
 used to decide which of the overloaded methods is being invoked. This essentially removes the need for the quite 
 invasive visitor pattern.
 
-A dispatch function is marked using the keyword code[Xtend][dispatch].
+A dispatch function is marked using the keyword code[Xtend2][dispatch].
 
-code[Xtend][
+code[Xtend2][
 def dispatch foo(Number x) { "it's a number" }
 def dispatch foo(Integer x) { "it's an int" }
 ] 
@@ -295,15 +295,15 @@ protected String _foo(Number x) {
 
 Note that the instanceof cascade is ordered by how specific a type is. More specific types come first.
 
-The default visibility of dispatch functions is code[Xtend][protected]. If all dispatch functions
+The default visibility of dispatch functions is code[Xtend2][protected]. If all dispatch functions
 explicitly declare the same visibility, this will be the visibility of the inferred dispatcher, too.
-Otherwise it is code[Xtend][public] 
+Otherwise it is code[Xtend2][public] 
  
 In case there is no single most general signature, one is computed and the
 different overloaded methods are matched in the order they are declared within the class file.
 Example:
 
-code[Xtend][
+code[Xtend2][
 def dispatch foo(Number x, Integer y) { "it's some number and an int" }
 def dispatch foo(Integer x, Number x) { "it's an int and a number" }
 ]
@@ -327,7 +327,7 @@ public String foo(Number x, Number y) {
 
 As you can see a null reference is never a match. If you want to fetch null you can declare a parameter using the type code[java.lang.Void].
 
-code[Xtend][
+code[Xtend2][
 def dispatch foo(Number x) { "it's some number" }
 def dispatch foo(Integer x) { "it's an int" }
 def dispatch foo(Void x) { throw new NullPointerException("x") }
@@ -366,7 +366,7 @@ public abstract class AbstractLabelProvider {
 
 and the following Xtend class which extends the Java class :
 
-code[Xtend][
+code[Xtend2][
 class MyLabelProvider extends AbstractLabelProvider {
    def dispatch label(Entity it)  {
      name
@@ -425,7 +425,7 @@ code[
 
 A function like the following could do the trick :
 
-code[Xtend][
+code[Xtend2][
 def List<Person> copyPersons(List<Person> persons) {
 	persons.map( p | p.copy )
 }
@@ -446,7 +446,7 @@ and non coherent code. Xtend's create functions handle this problem by introduci
 tracking the origin of each created instance. Therefore, a create function takes two expressions. One to instantiate the actual
 object and a second one to initialize it. 
 
-code[Xtend][
+code[Xtend2][
 def create result: new Person() copy(Person p) {
 	result.name = p.name
 	// now it works	
@@ -456,9 +456,9 @@ def create result: new Person() copy(Person p) {
 ]
 
 If you do not specify the name of the result variable it is assumed to be the ref:Xbase_Expressions_ImplicitThis[implicit receiver variable] 
-code[Xtend][it], which can be skipped in feature calls inside the body. Furthermore, you can define the return type of a create function:
+code[Xtend2][it], which can be skipped in feature calls inside the body. Furthermore, you can define the return type of a create function:
 
-code[Xtend][
+code[Xtend2][
 def Person create new PersonImpl() copy(Person p) {
 	/* it.*/name = p.name
 	friendWith = p.friendWith.map( p | p.copy )   
@@ -468,7 +468,7 @@ def Person create new PersonImpl() copy(Person p) {
 
 section3[How it works]
 
-In addition to the keyword code[Xtend][create] one specifies two expressions.
+In addition to the keyword code[Xtend2][create] one specifies two expressions.
 The first expression is the factory to create an instance while the second will initialize it further.
 Prior to invoking the factory expression, a cache lookup is performed to find a previously created instance
 for the very same arguments. If there is no such instance, the factory expression is evaluated and the
@@ -487,7 +487,7 @@ Annotations are available on classes, fields, functions and parameters.
 
 Example:
 
-code[Xtend][
+code[Xtend2][
 @TypeAnnotation(typeof(String))
 class MyClass {
   @FieldAnnotation(children = {@MyAnno(true), @MyAnnot(false)}

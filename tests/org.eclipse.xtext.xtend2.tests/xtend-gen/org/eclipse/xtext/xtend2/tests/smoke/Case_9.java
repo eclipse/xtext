@@ -39,10 +39,10 @@ public class Case_9 {
   }
   
   public StringConcatenation generateTypeRef(final EObject c) {
-    if ((c instanceof ENamedElement)) {
+    if (c instanceof ENamedElement) {
       return _generateTypeRef((ENamedElement)c);
     } else {
-      return _generateTypeRef((EObject)c);
+      return _generateTypeRef(c);
     }
   }
 }

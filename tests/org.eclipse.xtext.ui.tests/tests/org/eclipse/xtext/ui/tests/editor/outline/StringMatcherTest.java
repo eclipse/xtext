@@ -30,7 +30,7 @@ public class StringMatcherTest extends TestCase {
 		StringMatcher matcher = createStringMatcher("*i");
 		assertTrue(matcher.match("abcdei"));
 		assertTrue(matcher.match("abcdeii"));
-		assertFalse(matcher.match("abcdeiip"));
+		assertTrue(matcher.match("abcdeiip"));
 		assertTrue(matcher.match("i"));
 		assertFalse(matcher.match(""));
 		assertTrue(matcher.match("(i"));
@@ -41,7 +41,7 @@ public class StringMatcherTest extends TestCase {
 		assertTrue(matcher.match("hallo"));
 		assertTrue(matcher.match("hello"));
 		assertTrue(matcher.match("hillo"));
-		assertFalse(matcher.match("hellooo"));
+		assertTrue(matcher.match("hellooo"));
 		assertFalse(matcher.match("hllo"));
 	}
 	

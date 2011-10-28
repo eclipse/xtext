@@ -17,6 +17,7 @@ import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.inject.Inject;
 
@@ -36,8 +37,10 @@ public class XtextResourceDescriptionStrategy extends DefaultResourceDescription
 	public boolean createEObjectDescriptions(EObject eObject, IAcceptor<IEObjectDescription> acceptor) {
 		if (eObject instanceof Grammar) {
 			String grammarName = ((Grammar) eObject).getName();
-			QualifiedName qualifiedName = defaultQualifiedNameConverter.toQualifiedName(grammarName);
-			acceptor.accept(EObjectDescription.create(qualifiedName, eObject));
+			if (!Strings.isEmpty(grammarName)) {
+				QualifiedName qualifiedName = defaultQualifiedNameConverter.toQualifiedName(grammarName);
+				acceptor.accept(EObjectDescription.create(qualifiedName, eObject));
+			}
 		} else if (eObject instanceof AbstractMetamodelDeclaration
 				|| eObject instanceof AbstractRule)
 			return super.createEObjectDescriptions(eObject, acceptor);

@@ -58,7 +58,7 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testAnnotationTarget_00() throws Exception {
 		XtendClass clazz = clazz("@testdata.Annotation2('foo') class X { }");
-		helper.assertError(clazz, XAnnotationsPackage.Literals.XANNOTATION, IssueCodes.ANNOTATION_WRONG_TARGET);
+		helper.assertError(clazz, XAnnotationsPackage.Literals.XANNOTATION, IssueCodes.ANNOTATION_WRONG_TARGET, "@Annotation2");
 	}
 	
 	public void testAnnotationTarget_01() throws Exception {
@@ -128,12 +128,12 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testCreateExpressionMayNotReturnVoid_02() throws Exception {
 		XtendFunction function = function("def String create result: while(true){} illegal() { }");
-		helper.assertError(function, XbasePackage.Literals.XWHILE_EXPRESSION, INCOMPATIBLE_TYPES, "void", "String");
+		helper.assertError(function, XbasePackage.Literals.XWHILE_EXPRESSION, INCOMPATIBLE_RETURN_TYPE, "implicit", "return", "type", "void", "String");
 	}
 
 	public void testCreateExpressionMayNotReturnVoid_03() throws Exception {
 		XtendFunction function = function("override create result: while(true){} toString() { }");
-		helper.assertError(function, XbasePackage.Literals.XWHILE_EXPRESSION, INCOMPATIBLE_TYPES, "void", "String");
+		helper.assertError(function, XbasePackage.Literals.XWHILE_EXPRESSION, INCOMPATIBLE_RETURN_TYPE, "implicit", "return", "type", "void", "String");
 	}
 	
 	public void testNoReturnInCreateFunctions() throws Exception {

@@ -80,130 +80,130 @@ public class SomeCustomTypeProviderWithXtend extends XbaseWithAnnotationsTypePro
   }
   
   public JvmTypeReference type(final XExpression binaryOperation, final JvmTypeReference rawExpectation, final boolean rawType) {
-    if ((binaryOperation instanceof XBinaryOperation)) {
-      return _type((XBinaryOperation)binaryOperation, (JvmTypeReference)rawExpectation, (Boolean)rawType);
-    } else if ((binaryOperation instanceof XAbstractFeatureCall)) {
-      return _type((XAbstractFeatureCall)binaryOperation, (JvmTypeReference)rawExpectation, (Boolean)rawType);
-    } else if ((binaryOperation instanceof XAbstractWhileExpression)) {
-      return _type((XAbstractWhileExpression)binaryOperation, (JvmTypeReference)rawExpectation, (Boolean)rawType);
-    } else if ((binaryOperation instanceof XBlockExpression)) {
-      return _type((XBlockExpression)binaryOperation, (JvmTypeReference)rawExpectation, (Boolean)rawType);
-    } else if ((binaryOperation instanceof XBooleanLiteral)) {
-      return _type((XBooleanLiteral)binaryOperation, (JvmTypeReference)rawExpectation, (Boolean)rawType);
-    } else if ((binaryOperation instanceof XCastedExpression)) {
-      return _type((XCastedExpression)binaryOperation, (JvmTypeReference)rawExpectation, (Boolean)rawType);
-    } else if ((binaryOperation instanceof XClosure)) {
-      return _type((XClosure)binaryOperation, (JvmTypeReference)rawExpectation, (Boolean)rawType);
-    } else if ((binaryOperation instanceof XConstructorCall)) {
-      return _type((XConstructorCall)binaryOperation, (JvmTypeReference)rawExpectation, (Boolean)rawType);
-    } else if ((binaryOperation instanceof XForLoopExpression)) {
-      return _type((XForLoopExpression)binaryOperation, (JvmTypeReference)rawExpectation, (Boolean)rawType);
-    } else if ((binaryOperation instanceof XIfExpression)) {
-      return _type((XIfExpression)binaryOperation, (JvmTypeReference)rawExpectation, (Boolean)rawType);
-    } else if ((binaryOperation instanceof XInstanceOfExpression)) {
-      return _type((XInstanceOfExpression)binaryOperation, (JvmTypeReference)rawExpectation, (Boolean)rawType);
-    } else if ((binaryOperation instanceof XIntLiteral)) {
-      return _type((XIntLiteral)binaryOperation, (JvmTypeReference)rawExpectation, (Boolean)rawType);
-    } else if ((binaryOperation instanceof XNullLiteral)) {
-      return _type((XNullLiteral)binaryOperation, (JvmTypeReference)rawExpectation, (Boolean)rawType);
-    } else if ((binaryOperation instanceof XReturnExpression)) {
-      return _type((XReturnExpression)binaryOperation, (JvmTypeReference)rawExpectation, (Boolean)rawType);
-    } else if ((binaryOperation instanceof XStringLiteral)) {
-      return _type((XStringLiteral)binaryOperation, (JvmTypeReference)rawExpectation, (Boolean)rawType);
-    } else if ((binaryOperation instanceof XSwitchExpression)) {
-      return _type((XSwitchExpression)binaryOperation, (JvmTypeReference)rawExpectation, (Boolean)rawType);
-    } else if ((binaryOperation instanceof XThrowExpression)) {
-      return _type((XThrowExpression)binaryOperation, (JvmTypeReference)rawExpectation, (Boolean)rawType);
-    } else if ((binaryOperation instanceof XTryCatchFinallyExpression)) {
-      return _type((XTryCatchFinallyExpression)binaryOperation, (JvmTypeReference)rawExpectation, (Boolean)rawType);
-    } else if ((binaryOperation instanceof XTypeLiteral)) {
-      return _type((XTypeLiteral)binaryOperation, (JvmTypeReference)rawExpectation, (Boolean)rawType);
-    } else if ((binaryOperation instanceof XVariableDeclaration)) {
-      return _type((XVariableDeclaration)binaryOperation, (JvmTypeReference)rawExpectation, (Boolean)rawType);
-    } else if ((binaryOperation instanceof XAnnotation)) {
-      return _type((XAnnotation)binaryOperation, (JvmTypeReference)rawExpectation, (Boolean)rawType);
-    } else if ((binaryOperation instanceof XAnnotationElementValueBinaryOperation)) {
-      return _type((XAnnotationElementValueBinaryOperation)binaryOperation, (JvmTypeReference)rawExpectation, (Boolean)rawType);
-    } else if ((binaryOperation instanceof XAnnotationValueArray)) {
-      return _type((XAnnotationValueArray)binaryOperation, (JvmTypeReference)rawExpectation, (Boolean)rawType);
+    if (binaryOperation instanceof XBinaryOperation) {
+      return _type((XBinaryOperation)binaryOperation, rawExpectation, rawType);
+    } else if (binaryOperation instanceof XAbstractFeatureCall) {
+      return _type((XAbstractFeatureCall)binaryOperation, rawExpectation, rawType);
+    } else if (binaryOperation instanceof XAbstractWhileExpression) {
+      return _type((XAbstractWhileExpression)binaryOperation, rawExpectation, rawType);
+    } else if (binaryOperation instanceof XBlockExpression) {
+      return _type((XBlockExpression)binaryOperation, rawExpectation, rawType);
+    } else if (binaryOperation instanceof XBooleanLiteral) {
+      return _type((XBooleanLiteral)binaryOperation, rawExpectation, rawType);
+    } else if (binaryOperation instanceof XCastedExpression) {
+      return _type((XCastedExpression)binaryOperation, rawExpectation, rawType);
+    } else if (binaryOperation instanceof XClosure) {
+      return _type((XClosure)binaryOperation, rawExpectation, rawType);
+    } else if (binaryOperation instanceof XConstructorCall) {
+      return _type((XConstructorCall)binaryOperation, rawExpectation, rawType);
+    } else if (binaryOperation instanceof XForLoopExpression) {
+      return _type((XForLoopExpression)binaryOperation, rawExpectation, rawType);
+    } else if (binaryOperation instanceof XIfExpression) {
+      return _type((XIfExpression)binaryOperation, rawExpectation, rawType);
+    } else if (binaryOperation instanceof XInstanceOfExpression) {
+      return _type((XInstanceOfExpression)binaryOperation, rawExpectation, rawType);
+    } else if (binaryOperation instanceof XIntLiteral) {
+      return _type((XIntLiteral)binaryOperation, rawExpectation, rawType);
+    } else if (binaryOperation instanceof XNullLiteral) {
+      return _type((XNullLiteral)binaryOperation, rawExpectation, rawType);
+    } else if (binaryOperation instanceof XReturnExpression) {
+      return _type((XReturnExpression)binaryOperation, rawExpectation, rawType);
+    } else if (binaryOperation instanceof XStringLiteral) {
+      return _type((XStringLiteral)binaryOperation, rawExpectation, rawType);
+    } else if (binaryOperation instanceof XSwitchExpression) {
+      return _type((XSwitchExpression)binaryOperation, rawExpectation, rawType);
+    } else if (binaryOperation instanceof XThrowExpression) {
+      return _type((XThrowExpression)binaryOperation, rawExpectation, rawType);
+    } else if (binaryOperation instanceof XTryCatchFinallyExpression) {
+      return _type((XTryCatchFinallyExpression)binaryOperation, rawExpectation, rawType);
+    } else if (binaryOperation instanceof XTypeLiteral) {
+      return _type((XTypeLiteral)binaryOperation, rawExpectation, rawType);
+    } else if (binaryOperation instanceof XVariableDeclaration) {
+      return _type((XVariableDeclaration)binaryOperation, rawExpectation, rawType);
+    } else if (binaryOperation instanceof XAnnotation) {
+      return _type((XAnnotation)binaryOperation, rawExpectation, rawType);
+    } else if (binaryOperation instanceof XAnnotationElementValueBinaryOperation) {
+      return _type((XAnnotationElementValueBinaryOperation)binaryOperation, rawExpectation, rawType);
+    } else if (binaryOperation instanceof XAnnotationValueArray) {
+      return _type((XAnnotationValueArray)binaryOperation, rawExpectation, rawType);
     } else {
-      return _type((XExpression)binaryOperation, (JvmTypeReference)rawExpectation, (Boolean)rawType);
+      return _type(binaryOperation, rawExpectation, rawType);
     }
   }
   
   public JvmTypeReference expectedType(final EObject assignment, final EReference reference, final int index, final boolean rawType) {
-    if ((assignment instanceof XAssignment)) {
-      return _expectedType((XAssignment)assignment, (EReference)reference, (Integer)index, (Boolean)rawType);
-    } else if ((assignment instanceof XBinaryOperation)) {
-      return _expectedType((XBinaryOperation)assignment, (EReference)reference, (Integer)index, (Boolean)rawType);
-    } else if ((assignment instanceof XMemberFeatureCall)) {
-      return _expectedType((XMemberFeatureCall)assignment, (EReference)reference, (Integer)index, (Boolean)rawType);
-    } else if ((assignment instanceof XAbstractFeatureCall)) {
-      return _expectedType((XAbstractFeatureCall)assignment, (EReference)reference, (Integer)index, (Boolean)rawType);
-    } else if ((assignment instanceof XAbstractWhileExpression)) {
-      return _expectedType((XAbstractWhileExpression)assignment, (EReference)reference, (Integer)index, (Boolean)rawType);
-    } else if ((assignment instanceof XBlockExpression)) {
-      return _expectedType((XBlockExpression)assignment, (EReference)reference, (Integer)index, (Boolean)rawType);
-    } else if ((assignment instanceof XCasePart)) {
-      return _expectedType((XCasePart)assignment, (EReference)reference, (Integer)index, (Boolean)rawType);
-    } else if ((assignment instanceof XCastedExpression)) {
-      return _expectedType((XCastedExpression)assignment, (EReference)reference, (Integer)index, (Boolean)rawType);
-    } else if ((assignment instanceof XClosure)) {
-      return _expectedType((XClosure)assignment, (EReference)reference, (Integer)index, (Boolean)rawType);
-    } else if ((assignment instanceof XConstructorCall)) {
-      return _expectedType((XConstructorCall)assignment, (EReference)reference, (Integer)index, (Boolean)rawType);
-    } else if ((assignment instanceof XForLoopExpression)) {
-      return _expectedType((XForLoopExpression)assignment, (EReference)reference, (Integer)index, (Boolean)rawType);
-    } else if ((assignment instanceof XIfExpression)) {
-      return _expectedType((XIfExpression)assignment, (EReference)reference, (Integer)index, (Boolean)rawType);
-    } else if ((assignment instanceof XReturnExpression)) {
-      return _expectedType((XReturnExpression)assignment, (EReference)reference, (Integer)index, (Boolean)rawType);
-    } else if ((assignment instanceof XSwitchExpression)) {
-      return _expectedType((XSwitchExpression)assignment, (EReference)reference, (Integer)index, (Boolean)rawType);
-    } else if ((assignment instanceof XThrowExpression)) {
-      return _expectedType((XThrowExpression)assignment, (EReference)reference, (Integer)index, (Boolean)rawType);
-    } else if ((assignment instanceof XTryCatchFinallyExpression)) {
-      return _expectedType((XTryCatchFinallyExpression)assignment, (EReference)reference, (Integer)index, (Boolean)rawType);
-    } else if ((assignment instanceof XVariableDeclaration)) {
-      return _expectedType((XVariableDeclaration)assignment, (EReference)reference, (Integer)index, (Boolean)rawType);
-    } else if ((assignment instanceof XAnnotation)) {
-      return _expectedType((XAnnotation)assignment, (EReference)reference, (Integer)index, (Boolean)rawType);
-    } else if ((assignment instanceof XAnnotationElementValueBinaryOperation)) {
-      return _expectedType((XAnnotationElementValueBinaryOperation)assignment, (EReference)reference, (Integer)index, (Boolean)rawType);
-    } else if ((assignment instanceof XAnnotationValueArray)) {
-      return _expectedType((XAnnotationValueArray)assignment, (EReference)reference, (Integer)index, (Boolean)rawType);
-    } else if ((assignment instanceof XCatchClause)) {
-      return _expectedType((XCatchClause)assignment, (EReference)reference, (Integer)index, (Boolean)rawType);
-    } else if ((assignment instanceof XAnnotationElementValuePair)) {
-      return _expectedType((XAnnotationElementValuePair)assignment, (EReference)reference, (Integer)index, (Boolean)rawType);
+    if (assignment instanceof XAssignment) {
+      return _expectedType((XAssignment)assignment, reference, index, rawType);
+    } else if (assignment instanceof XBinaryOperation) {
+      return _expectedType((XBinaryOperation)assignment, reference, index, rawType);
+    } else if (assignment instanceof XMemberFeatureCall) {
+      return _expectedType((XMemberFeatureCall)assignment, reference, index, rawType);
+    } else if (assignment instanceof XAbstractFeatureCall) {
+      return _expectedType((XAbstractFeatureCall)assignment, reference, index, rawType);
+    } else if (assignment instanceof XAbstractWhileExpression) {
+      return _expectedType((XAbstractWhileExpression)assignment, reference, index, rawType);
+    } else if (assignment instanceof XBlockExpression) {
+      return _expectedType((XBlockExpression)assignment, reference, index, rawType);
+    } else if (assignment instanceof XCasePart) {
+      return _expectedType((XCasePart)assignment, reference, index, rawType);
+    } else if (assignment instanceof XCastedExpression) {
+      return _expectedType((XCastedExpression)assignment, reference, index, rawType);
+    } else if (assignment instanceof XClosure) {
+      return _expectedType((XClosure)assignment, reference, index, rawType);
+    } else if (assignment instanceof XConstructorCall) {
+      return _expectedType((XConstructorCall)assignment, reference, index, rawType);
+    } else if (assignment instanceof XForLoopExpression) {
+      return _expectedType((XForLoopExpression)assignment, reference, index, rawType);
+    } else if (assignment instanceof XIfExpression) {
+      return _expectedType((XIfExpression)assignment, reference, index, rawType);
+    } else if (assignment instanceof XReturnExpression) {
+      return _expectedType((XReturnExpression)assignment, reference, index, rawType);
+    } else if (assignment instanceof XSwitchExpression) {
+      return _expectedType((XSwitchExpression)assignment, reference, index, rawType);
+    } else if (assignment instanceof XThrowExpression) {
+      return _expectedType((XThrowExpression)assignment, reference, index, rawType);
+    } else if (assignment instanceof XTryCatchFinallyExpression) {
+      return _expectedType((XTryCatchFinallyExpression)assignment, reference, index, rawType);
+    } else if (assignment instanceof XVariableDeclaration) {
+      return _expectedType((XVariableDeclaration)assignment, reference, index, rawType);
+    } else if (assignment instanceof XAnnotation) {
+      return _expectedType((XAnnotation)assignment, reference, index, rawType);
+    } else if (assignment instanceof XAnnotationElementValueBinaryOperation) {
+      return _expectedType((XAnnotationElementValueBinaryOperation)assignment, reference, index, rawType);
+    } else if (assignment instanceof XAnnotationValueArray) {
+      return _expectedType((XAnnotationValueArray)assignment, reference, index, rawType);
+    } else if (assignment instanceof XCatchClause) {
+      return _expectedType((XCatchClause)assignment, reference, index, rawType);
+    } else if (assignment instanceof XAnnotationElementValuePair) {
+      return _expectedType((XAnnotationElementValuePair)assignment, reference, index, rawType);
     } else {
-      return _expectedType((EObject)assignment, (EReference)reference, (Integer)index, (Boolean)rawType);
+      return _expectedType(assignment, reference, index, rawType);
     }
   }
   
   public JvmTypeReference typeForIdentifiable(final JvmIdentifiableElement constructor, final boolean rawType) {
-    if ((constructor instanceof JvmConstructor)) {
-      return _typeForIdentifiable((JvmConstructor)constructor, (Boolean)rawType);
-    } else if ((constructor instanceof JvmGenericType)) {
-      return _typeForIdentifiable((JvmGenericType)constructor, (Boolean)rawType);
-    } else if ((constructor instanceof JvmOperation)) {
-      return _typeForIdentifiable((JvmOperation)constructor, (Boolean)rawType);
-    } else if ((constructor instanceof JvmDeclaredType)) {
-      return _typeForIdentifiable((JvmDeclaredType)constructor, (Boolean)rawType);
-    } else if ((constructor instanceof JvmField)) {
-      return _typeForIdentifiable((JvmField)constructor, (Boolean)rawType);
-    } else if ((constructor instanceof JvmFormalParameter)) {
-      return _typeForIdentifiable((JvmFormalParameter)constructor, (Boolean)rawType);
-    } else if ((constructor instanceof JvmType)) {
-      return _typeForIdentifiable((JvmType)constructor, (Boolean)rawType);
-    } else if ((constructor instanceof XCasePart)) {
-      return _typeForIdentifiable((XCasePart)constructor, (Boolean)rawType);
-    } else if ((constructor instanceof XSwitchExpression)) {
-      return _typeForIdentifiable((XSwitchExpression)constructor, (Boolean)rawType);
-    } else if ((constructor instanceof XVariableDeclaration)) {
-      return _typeForIdentifiable((XVariableDeclaration)constructor, (Boolean)rawType);
+    if (constructor instanceof JvmConstructor) {
+      return _typeForIdentifiable((JvmConstructor)constructor, rawType);
+    } else if (constructor instanceof JvmGenericType) {
+      return _typeForIdentifiable((JvmGenericType)constructor, rawType);
+    } else if (constructor instanceof JvmOperation) {
+      return _typeForIdentifiable((JvmOperation)constructor, rawType);
+    } else if (constructor instanceof JvmDeclaredType) {
+      return _typeForIdentifiable((JvmDeclaredType)constructor, rawType);
+    } else if (constructor instanceof JvmField) {
+      return _typeForIdentifiable((JvmField)constructor, rawType);
+    } else if (constructor instanceof JvmFormalParameter) {
+      return _typeForIdentifiable((JvmFormalParameter)constructor, rawType);
+    } else if (constructor instanceof JvmType) {
+      return _typeForIdentifiable((JvmType)constructor, rawType);
+    } else if (constructor instanceof XCasePart) {
+      return _typeForIdentifiable((XCasePart)constructor, rawType);
+    } else if (constructor instanceof XSwitchExpression) {
+      return _typeForIdentifiable((XSwitchExpression)constructor, rawType);
+    } else if (constructor instanceof XVariableDeclaration) {
+      return _typeForIdentifiable((XVariableDeclaration)constructor, rawType);
     } else {
-      return _typeForIdentifiable((JvmIdentifiableElement)constructor, (Boolean)rawType);
+      return _typeForIdentifiable(constructor, rawType);
     }
   }
 }

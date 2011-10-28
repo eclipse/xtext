@@ -487,7 +487,7 @@ This scope can now be used for any cross-references of type e[State] for context
 state machine.
 
 
-section2[Imported Namespace-Aware Scoping]
+section2:namespaceImports[Imported Namespace-Aware Scoping]
 
 The imported namespace aware scoping is based on qualified names and namespaces. It adds namespace 
 support to your language, which is comparable and similar to the one in Scala and C#. Scala and C# both 

@@ -1,4 +1,4 @@
-document[Xtext Documentation]
+document[Xtext 2.1 Documentation]
 
 %% KEEP KEYWORDS IN SYNC WITH tutorial.xdoc
 codelanguage-def[Java][
@@ -98,11 +98,11 @@ codelanguage-def[MyDsl][Hello]
 
 codelanguage-def[XML][]
 
-codelanguage-def[DomainExample][package, entity, datatype, import, extends, public]
+codelanguage-def[DomainExample][package, entity, datatype, import, extends, public, op, return]
 
 codelanguage-def[JavaTypesExample][datatype, mapped-to]
 
-codelanguage-def[FowlerExample][events, commands, state, actions, end, resetting]
+codelanguage-def[FowlerExample][events, commands, state, actions, end, resetEvents]
 
 codelanguage-def[LinkingExample][ref]
 
@@ -115,6 +115,8 @@ chapter-ref[FirstFiveMinutes]
 chapter-ref[DomainmodelWalkThrough]
 
 chapter-ref[DomainmodelNextSteps]
+
+chapter-ref[JvmDomainmodel]
 
 part[Reference Documentation]
 

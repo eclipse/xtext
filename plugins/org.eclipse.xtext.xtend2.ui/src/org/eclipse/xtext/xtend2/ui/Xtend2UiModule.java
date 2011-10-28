@@ -4,6 +4,8 @@
 package org.eclipse.xtext.xtend2.ui;
 
 import org.eclipse.jface.text.rules.ITokenScanner;
+import org.eclipse.jface.text.source.DefaultCharacterPairMatcher;
+import org.eclipse.jface.text.source.ICharacterPairMatcher;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
@@ -148,10 +150,6 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 		return RichStringAwareToggleCommentAction.Factory.class;
 	}
 	
-	public void configureBuilderPreferenceStoreInitializer(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer.class).to(org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.Initializer.class);
-	}
-	
 	public Class<? extends IFoldingStructureProvider> bindIFoldingStructureProvider(){
 		return InitiallyCollapsableAwareFoldingStructureProvider.class;
 	}
@@ -164,5 +162,10 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 	
 	public Class<? extends IOccurrenceComputer> bindDefaultOccurrenceComputer() {
 		return OccurrenceComputer.class;
+	}
+	
+	@Override
+	public ICharacterPairMatcher bindICharacterPairMatcher() {
+		return new DefaultCharacterPairMatcher(new char[] { '(', ')', '{', '}', '[', ']', '«', '»' });
 	}
 }

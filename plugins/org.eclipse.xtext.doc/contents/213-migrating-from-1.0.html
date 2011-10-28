@@ -72,8 +72,8 @@ qualified name, you can also create it using <span class="inlinecode">QualifiedN
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/QualifiedName.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.naming.QualifiedName" >QualifiedName</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java" title="View Source Code" >(src)</a> is the new type of the <em>name</em> properties in the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a>. 
 So if you have customized indexing, e.g. implemented your own <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.Manager.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceDescription.Manager" >IResourceDescription.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a>,
 you will have to create <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/QualifiedName.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.naming.QualifiedName" >qualified names</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java" title="View Source Code" >(src)</a> instead of <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >strings</abbr></a>.
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescriptions</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a> are also used in other places such as <a href="080-scoping.html" title="Go to &quot;Scoping&quot;">scoping</a>, 
-<a href="070-linking.html" title="Go to &quot;Linking&quot;">linking</a>, <a href="100-serialization.html" title="Go to &quot;Serialization&quot;">serialization</a>, <a href="150-contentassist.html" title="Go to &quot;Content Assist&quot;">content assist</a>...
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescriptions</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a> are also used in other places such as <a href="050-heading-runtime.html#scoping" title="Go to &quot;Scoping&quot;">scoping</a>, 
+<a href="050-heading-runtime.html#linking" title="Go to &quot;Linking&quot;">linking</a>, <a href="050-heading-runtime.html#serialization" title="Go to &quot;Serialization&quot;">serialization</a>, <a href="120-heading-UI.html#contentAssist" title="Go to &quot;Content Assist&quot;">content assist</a>...
 </p>
 <p>
 Furthermore, the method <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/IQualifiedNameProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider" >IQualifiedNameProvider.getQualifiedName(EObject)</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java" title="View Source Code" >(src)</a> has been renamed 
@@ -154,7 +154,7 @@ fragment&nbsp;=&nbsp;outline.OutlineTreeProviderFragment&nbsp;{}<br/>
 </p>
 <p>
 After generating a new class named <em>MyDslOutlineTreeProvider</em> is generated. The API changed completely.
-For that reason you should take a closer look at the <a href="170-outline.html" title="Go to &quot;Outline View&quot;">chapter on the outline</a>. 
+For that reason you should take a closer look at the <a href="120-heading-UI.html#outline" title="Go to &quot;Outline View&quot;">chapter on the outline</a>. 
 The old classes named <em>MyDslTransformer</em> and <em>MyDslOutlineNodeAdapterFactory</em> have become obsolete
 and should be removed after having migrated your code to the new API.
 </p>
@@ -308,10 +308,10 @@ We recommend exploring
 		document partitions and auto edit
 	</li>
 	<li>
-		the redesigned <a href="170-outline.html" title="Go to &quot;Outline View&quot;">outline view</a>,
+		the redesigned <a href="120-heading-UI.html#outline" title="Go to &quot;Outline View&quot;">outline view</a>,
 	</li>
 	<li>
-		and the <a href="155-quickfix.html" title="Go to &quot;Quick Fixes&quot;">quick fixes for the Xtext grammar language</a>.
+		and the <a href="120-heading-UI.html#quickfixes" title="Go to &quot;Quick Fixes&quot;">quick fixes for the Xtext grammar language</a>.
 	</li>
 </ul>
 

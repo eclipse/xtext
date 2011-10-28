@@ -19,7 +19,10 @@ code[FowlerExample][events
   lightOn     L1ON
   doorOpened  D1OP
   panelClosed PNCL
-  resetting doorOpened D1OP
+ end
+ 
+resetEvents 
+  doorOpened D1OP
 end
  
 commands
@@ -53,9 +56,10 @@ state unlockedPanel
 end
 ]
 
-What we have are a bunch of declared events, commands, and states. Within states there are references to declared actions.
-Actions should be executed when entering the state. Furthermore, there are transitions consisting of a reference to an event and 
-a state.
+What we have are a bunch of declared events, commands, and states. Some events are addiitonally marked
+as being reset events. Within states there are references to declared actions. Actions should be executed 
+when entering the state. Furthermore, there are transitions consisting of a reference to an event and a 
+state.
 
 The first thing that you have to do in order to implement this tiny state machine example with Xtext,
 is to provide a grammar. It could look like this example:
@@ -152,12 +156,68 @@ rules in your grammar, as described in ref:metamodelInference[Ecore model infere
 
 section3[EPackage Import]
 
-If you already have an existing codeRef[org.eclipse.emf.ecore.EPackage], you can import it using either a namespace URI or a resource URI. 
+If you already have an existing codeRef[org.eclipse.emf.ecore.EPackage], you can import it using its namespace URI or a resource URI. 
 An link[http://www.ietf.org/rfc/rfc2396.txt][URI] (Uniform Resource Identifier) provides a simple and extensible 
 means for identifying an abstract or physical resource. For all the nifty details about EMF URIs 
-please refer to its codeRef[org.eclipse.emf.common.util.URI][documentation].
+please refer to its codeRef[org.eclipse.emf.common.util.URI][documentation]. It is strongly recommended
+to use the namespace URI instead of the resource uri because it is independent from the concrete location
+in the file system and much more portable across different machines, easier to configure in the workflow
+and works better with language mixins. The import via platform URIs or file URIs can be considered deprecated
+and is only supported for backwards compatibility reasons.
 
-section4[Using Resource URIs to Import Existing EPackages]
+section4[Using Namespace URIs to Import Existing EPackages]
+
+You can use namespace URI in order to import existing codeRef[org.eclipse.emf.ecore.EPackage]. This is generally 
+preferrable. The package will be read from the Xtext index and therefore your grammar is independent
+from the concrete location of the respective ecore file. You have to make sure though, that the ecore file is contained
+in a project, that is managed by Xtext. Therefore the project has to have to Xtext project nature attached.
+Ecore files that reside in referenced Java archives (JARs) are automatically picked up and indexed if
+the referencing project itself is an Xtext project.
+
+To import an EPackage, you have to state its namespace URI like this:
+
+code[Xtext][import "http://www.xtext.org/example/Domainmodel" as dmodel]
+
+In order to be able to find the referenced package in the language generator, some configuration values
+have to be set. It is usually the easiest way to register the generated codeRef[org.eclipse.emf.ecore.EPackage] 
+interface in the workflow.
+The codeRef[org.eclipse.emf.mwe.utils.StandaloneSetup] offers the respective methods to achieve this.
+Simply state something like this in the workflow:
+
+code[MWE2][
+bean = StandaloneSetup {
+  platformUri = "${runtimeProject}/../.."
+  scanClassPath = true
+  registerGeneratedEPackage = 
+   "org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage"
+  registerGenModelFile = 
+   "platform:/resource/.../path/to/Domainmodel.genmodel"
+}
+]
+
+The registered genmodel is necessary to tell the code generator how the referenced Java classes are named.
+Please see below for alternatives that allow to register the genmodel, too. They may be handy if you
+create the genmodel in the workflow itself. 
+
+If the generated EPackage interface is not available when the language workflow is executed, you can
+use another approach to register the reference packages. This may happen if your want to generate EMF
+classes and the language infrastructure in one and the same workflow. The section in the workflow, that
+refers the your grammar, allows to set additional resources that should be loaded prior to loading the
+grammar file. The ecore files that contain the referenced EPackages are a good candidate for preloaded
+resources.
+
+code[MWE2][
+language = {
+  loadedResource = 
+   "platform:/resource/.../path/to/Domainmodel.ecore"
+  uri = grammarURI
+}
+]
+
+You can use either platform URIs or classpath URIs to list the required ecore files (see below for details
+on both URI schemes).
+
+section4[Using Resource URIs to Import Existing EPackages - Deprecated]
 
 In order to import an existing Ecore model, you'll have to have the *.ecore file describing the codeRef[org.eclipse.emf.ecore.EPackage] 
 you want to 
@@ -186,9 +246,9 @@ code[MWE2][fragment = org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment {
 }
 ]
 
-section4[Using Classpath URIs to Import Existing EPackages]
+section4[Using Classpath URIs to Import Existing EPackages - Deprecated]
 
-We like to leverage Java's classpath mechanism, because is is well understood and can be configured easily
+We usually like to leverage Java's classpath mechanism, because is is well understood and can be configured easily
 with Eclipse. Furthermore it allows us to package libraries as jars. If you want to reference an existing
 e[*.ecore] file which is contained in a jar, you can make use of the 
 classpath URI scheme we've introduced. For instance if you want to reference Java elements, you can use the JvmType Ecore model 
@@ -207,15 +267,6 @@ code[MWE2][fragment = org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment {
 ]
 
 See the section on ref:jvmtypes[Referring Java Types] for a full explanation of this useful feature.
-
-section4[Using Namespace URIs to Import Existing EPackages]
-
-You can also use nsURI in order to import existing codeRef[org.eclipse.emf.ecore.EPackage]. Note that this is generally not
-preferrable, because you'll have to have the corresponding EPackage installed in the workbench.
-There's mainly just one exception, that is Ecore itself. So if you refer to Ecore it is best
-to use its nsURI :
-
-code[Xtext][import "http://www.eclipse.org/emf/2002/Ecore" as ecore]
 
 section3[Ecore Model Aliases for EPackages]
 
@@ -904,8 +955,8 @@ generator cannot be convinced that easy. We have to guide it to this decision po
 predicates which are expressed by a leading code[=>] operator.
 
 code[Xtext][Condition: 
-	'if' condition=Expression 
-		'then' then=Expression 
+	'if' '(' condition=BooleanExpression ')' 
+		then=Expression 
 		(=>'else' else=Expression)?
 ]
 

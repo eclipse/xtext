@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
@@ -226,6 +227,12 @@ public class XbaseResource extends DerivedStateAwareResource {
 				return XbaseResource.super.getEObject(uriFragment);
 			}
 		});
+	}
+	
+	@Override
+	protected boolean isUnresolveableProxyCacheable(Triple<EObject, EReference, INode> triple) {
+		boolean result = TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(triple.getSecond().getEReferenceType());
+		return result;
 	}
 
 	@Override

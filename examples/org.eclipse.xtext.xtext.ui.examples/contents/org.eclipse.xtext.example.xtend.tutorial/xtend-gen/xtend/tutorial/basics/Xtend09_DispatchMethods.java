@@ -63,9 +63,9 @@ public class Xtend09_DispatchMethods extends TestCase {
   }
   
   public StringConcatenation toLabel(final Shape circle) {
-    if ((circle instanceof Circle)) {
+    if (circle instanceof Circle) {
       return _toLabel((Circle)circle);
-    } else if ((circle instanceof Rectangle)) {
+    } else if (circle instanceof Rectangle) {
       return _toLabel((Rectangle)circle);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +

@@ -44,7 +44,7 @@ table[
 
 Click on e[Finish] to create the projects. 
 
-img[images/30min_wizard.png][ ][ ][ ]
+img[../images/tutorial/30min_wizard.png][ ][ ][ ]
 
 After you've successfully finished the wizard, you'll find three new projects in your workspace.
 
@@ -60,7 +60,7 @@ table[
 	]
 ]
 
-img[images/30min_initialprojectlayout.png][ ][ ][ ]
+img[../images/tutorial/30min_initialprojectlayout.png][ ][ ][ ]
 
 section[Write Your Own Grammar]
 
@@ -206,7 +206,7 @@ This will trigger the Xtext language generator. It generates the parser and
 serializer and some additional infrastructure code. You will see its logging 
 messages in the Console View. 
 
-img[images/30min_rungenerator.png][ ][ ][ ]
+img[../images/tutorial/30min_rungenerator.png][ ][ ][ ]
 
 section[Run the Generated IDE Plug-in]
 
@@ -216,7 +216,7 @@ one. Choose a meaningful name and go to the tab e[Arguments] where you add the V
 -Xmx512m] to make sure that the memory settings are sufficient for a new Eclipse instance. Now you can
 hit e[Run] to create a new process.
 
-img[images/30min_launchconfiguration.png][ ][ ][ ]
+img[../images/tutorial/30min_launchconfiguration.png][ ][ ][ ]
 
 This will spawn a new Eclipse workbench with your newly developed plug-ins installed. 
 In the new workbench, create a new project of your choice, e.g.
@@ -226,7 +226,7 @@ the generated entity editor. Try it and discover the default
 functionality for code completion, syntax highlighting, syntactic validation, linking errors, 
 the outline view, find references etc.
 
-img[images/30min_editor.png][][][]
+img[../images/tutorial/30min_editor.png][][][]
 
 section[Second Iteration : Adding Packages and Imports]
 
@@ -421,5 +421,5 @@ You should regenerate the language infrastructure as described in the
 previous section, and give the editor another try. You can even split up your model 
 into smaller parts and have cross-references across file boundaries.
 
-img[images/30min_multipleeditors.png][][][]
+img[../images/tutorial/30min_multipleeditors.png][][][]
 
