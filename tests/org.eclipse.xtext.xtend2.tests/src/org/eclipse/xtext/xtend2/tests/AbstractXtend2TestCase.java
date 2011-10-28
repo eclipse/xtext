@@ -29,7 +29,7 @@ import com.google.inject.Injector;
 
 public abstract class AbstractXtend2TestCase extends TestCase {
 
-	private static Injector injector = null;
+	private static Injector injector = new TestSetup().createInjectorAndDoEMFRegistration();
 
 	private static class TestSetup extends Xtend2StandaloneSetup {
 		
@@ -66,8 +66,8 @@ public abstract class AbstractXtend2TestCase extends TestCase {
 	}
 
 	public static Injector getInjector() {
-		if (injector == null)
-			injector = new TestSetup().createInjectorAndDoEMFRegistration();
+//		if (injector == null)
+//			injector = new TestSetup().createInjectorAndDoEMFRegistration();
 		return injector;
 	}
 	
