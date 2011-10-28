@@ -113,6 +113,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 
 		protected void writeElse() {
 			appendable.decreaseIndentation();
+			appendable.append("\n");
 			appendable.append("} else {");
 			appendable.increaseIndentation();
 		}
