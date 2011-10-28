@@ -47,7 +47,7 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-		<a href="035-domainmodel-java.php">5 simple steps to your JVM language</a></div>
+		<a href="035-domainmodel-java.php">Five simple steps to your JVM language</a></div>
 		<ul style="display: none;" id="subToc_035-domainmodel-java.html">
 		<li id="035-domainmodel-java.html#JvmDomainmodel_7" ><a href="035-domainmodel-java.php#JvmDomainmodel_7" >Step One: Create A New Xtext Project</a></li>
 		<li id="035-domainmodel-java.html#JvmDomainmodel_8" ><a href="035-domainmodel-java.php#JvmDomainmodel_8" >Step Two: Write the Grammar</a></li>
@@ -130,10 +130,6 @@
 		<li id="199c-xbase-inferred-type.html" ><a href="199c-xbase-inferred-type.php" >Inferring a JVM Model</a></li>
 		<li id="199d-xbase-expressions.html" ><a href="199d-xbase-expressions.php" >Using Xbase Expressions</a></li>
 		<li id="199e-xbase-language-reference.html" ><a href="199e-xbase-language-reference.php" >Xbase Language Reference</a></li>
-		<li id="199f-xbase-language-reference-syntax.html" ><a href="199f-xbase-language-reference-syntax.php" >Lexical Syntax</a></li>
-		<li id="199g-xbase-language-reference-types.html" ><a href="199g-xbase-language-reference-types.php" >Types</a></li>
-		<li id="199h-xbase-language-reference-expressions.html" ><a href="199h-xbase-language-reference-expressions.php" >Expressions</a></li>
-		<li id="199i-xbase-language-reference-libraries.html" ><a href="199i-xbase-language-reference-libraries.php" >Extension Methods</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -187,140 +183,131 @@
 	</div>
 	<div id="midcolumn">
 		<a name="xbaseLanguageRef_LibraryExtension" ></a>
-		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
-			padding: 5px 0;
-			padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
-			<br style="clear:both"></br>
-			<h1>Extension Methods</h1>
-			<div class="toc">
-			  <ul>
-			    <li><a href="199i-xbase-language-reference-libraries.php#xbaseLanguageRef_LibraryExtension_6" >Examples</a></li>
-			    <li><a href="199i-xbase-language-reference-libraries.php#XbaseLanguageRef_builderSyntax" >Builder Syntax</a></li>
-			  </ul>
+		<h2>Extension Methods</h2>
+		<p>
+		Languages extending Xbase might want to contribute to the feature scope. Besides that one can of course
+		change the whole implementation as it seems fit there is a special hook, which can be used to add so
+		called extension methods to existing types. 
+		</p>
+		<p>
+		Xbase itself comes with a standard library of such extension methods adding support for various operators
+		for the common types, such as java.lang.String, java.util.List, etc.
+		</p>
+		<p>
+		These extension methods are declared in separate Java classes. There are various ways how extension methods
+		can be added. The simplest is, that the language designer predefines, which extension methods are available.
+		This means, that language users cannot add additional library functions using this mechanism.
+		</p>
+		<p>
+		Another alternative is to have them looked up by a certain naming convention. Also for more general languages
+		it is possible to let users add extension methods using imports or the like. This approach can be seen in the
+		language Xtend2, where extension methods are lexically imported through static imports and/or dependency
+		injection.
+		</p>
+		<p>
+		The precedence of extension methods is always lower than real member methods, that is you cannot override
+		member features. Also the extension members are not invoked polymorphic. If you have two extension methods
+		on the scope (<span class="inlinecode">foo(Object)</span> and <span class="inlinecode">foo(String)</span>) the expression <span class="inlinecode">(foo&nbsp;as&nbsp;Object).foo</span> would
+		bind and invoke <span class="inlinecode">foo(Object)</span>.
+		</p>
+		<a name="xbaseLanguageRef_LibraryExtension_6" ></a>
+		<h3>Examples</h3>
+		<p>
+		<ul>
+		  <li><span class="inlinecode">foo</span></li>
+		  <li><span class="inlinecode">my.foo</span></li>
+		  <li><span class="inlinecode">my.foo(x)</span></li>
+		  <li><span class="inlinecode">oh.my.foo(bar)</span></li>
+		</ul>
+		</p>
+		<a name="XbaseLanguageRef_builderSyntax" ></a>
+		<h3>Builder Syntax</h3>
+		<p>
+		If the last argument of a method call is a closure, it can be appended to the method call. Thus,
+		</p>
+		<p>
+		<div class="literallayout">
+			<div class="incode">
+				<p class="code">
+					foo(42)&nbsp;[String&nbsp;s&nbsp;|&nbsp;s.toUpperCase]
+				</p>
 			</div>
-			<p>
-			Languages extending Xbase might want to contribute to the feature scope. Besides that one can of course
-			change the whole implementation as it seems fit there is a special hook, which can be used to add so
-			called extension methods to existing types. 
-			</p>
-			<p>
-			Xbase itself comes with a standard library of such extension methods adding support for various operators
-			for the common types, such as java.lang.String, java.util.List, etc.
-			</p>
-			<p>
-			These extension methods are declared in separate Java classes. There are various ways how extension methods
-			can be added. The simplest is, that the language designer predefines, which extension methods are available.
-			This means, that language users cannot add additional library functions using this mechanism.
-			</p>
-			<p>
-			Another alternative is to have them looked up by a certain naming convention. Also for more general languages
-			it is possible to let users add extension methods using imports or the like. This approach can be seen in the
-			language Xtend2, where extension methods are lexically imported through static imports and/or dependency
-			injection.
-			</p>
-			<p>
-			The precedence of extension methods is always lower than real member methods, that is you cannot override
-			member features. Also the extension members are not invoked polymorphic. If you have two extension methods
-			on the scope (<span class="inlinecode">foo(Object)</span> and <span class="inlinecode">foo(String)</span>) the expression <span class="inlinecode">(foo&nbsp;as&nbsp;Object).foo</span> would
-			bind and invoke <span class="inlinecode">foo(Object)</span>.
-			</p>
-			<a name="xbaseLanguageRef_LibraryExtension_6" ></a>
-			<h2>Examples</h2>
-			<p>
-			<ul>
-			  <li><span class="inlinecode">foo</span></li>
-			  <li><span class="inlinecode">my.foo</span></li>
-			  <li><span class="inlinecode">my.foo(x)</span></li>
-			  <li><span class="inlinecode">oh.my.foo(bar)</span></li>
-			</ul>
-			</p>
-			<a name="XbaseLanguageRef_builderSyntax" ></a>
-			<h2>Builder Syntax</h2>
-			<p>
-			If the last argument of a method call is a closure, it can be appended to the method call. Thus,
-			</p>
-			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						foo(42)&nbsp;[String&nbsp;s&nbsp;|&nbsp;s.toUpperCase]
-					</p>
-				</div>
+		</div>
+		</p>
+		<p>
+		will call a Java method with the signature
+		</p>
+		<p>
+		<div class="literallayout">
+			<div class="incode">
+				<p class="code">
+					<span class="keyword">void</span>&nbsp;foo(<span class="keyword">int</span>,&nbsp;Function1&lt;String,&nbsp;String&gt;)
+				</p>
 			</div>
-			</p>
-			<p>
-			will call a Java method with the signature
-			</p>
-			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">void</span>&nbsp;foo(<span class="keyword">int</span>,&nbsp;Function1&lt;String,&nbsp;String&gt;)
-					</p>
-				</div>
+		</div>
+		</p>
+		<p>
+		Used in combination with the <a href="199h-xbase-language-reference-expressions.php#Xbase_Expressions_implicit_parameter" title="Go to &quot;Implicit Parameter it&quot;">implicit parameter name in closures</a>
+		you can write <a href="199i-xbase-language-reference-libraries.php" title="Go to &quot;Extension Methods&quot;">extension libraries</a> to create and initialize graphs of
+		objects in a concise builder syntax like in Groovy. Consider you have a set of library methods 
+		</p>
+		<p>
+		<div class="literallayout">
+			<div class="incode">
+				<p class="code">
+					HtmlNode&nbsp;html(Function1&lt;HtmlNode,&nbsp;Void&gt;&nbsp;initializer)<br/>
+					HeadNode&nbsp;head(HtmlNode&nbsp;parent,&nbsp;Function1&lt;HeadNode,&nbsp;Void&gt;&nbsp;initializer)<br/>
+					...
+				</p>
 			</div>
-			</p>
-			<p>
-			Used in combination with the <a href="199h-xbase-language-reference-expressions.php#Xbase_Expressions_implicit_parameter" title="Go to &quot;Implicit Parameter it&quot;">implicit parameter name in closures</a>
-			you can write <a href="199i-xbase-language-reference-libraries.php" title="Go to &quot;Extension Methods&quot;">extension libraries</a> to create and initialize graphs of
-			objects in a concise builder syntax like in Groovy. Consider you have a set of library methods 
-			</p>
-			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						HtmlNode&nbsp;html(Function1&lt;HtmlNode,&nbsp;Void&gt;&nbsp;initializer)<br/>
-						HeadNode&nbsp;head(HtmlNode&nbsp;parent,&nbsp;Function1&lt;HeadNode,&nbsp;Void&gt;&nbsp;initializer)<br/>
-						...
-					</p>
-				</div>
+		</div>
+		</p>
+		<p>
+		that create DOM elements for HTML pages inside their respective parent elements. You can then create a DOM
+		using the following Xbase code:
+		</p>
+		<p>
+		<div class="literallayout">
+			<div class="incode">
+				<p class="code">
+					html(&nbsp;[&nbsp;html&nbsp;| <br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;head(html,&nbsp;[&nbsp;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;initialize&nbsp;head<br/>
+					</span>&nbsp;&nbsp;&nbsp;&nbsp;]&nbsp;)&nbsp;<br/>
+					]&nbsp;)
+				</p>
 			</div>
-			</p>
-			<p>
-			that create DOM elements for HTML pages inside their respective parent elements. You can then create a DOM
-			using the following Xbase code:
-			</p>
-			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						html(&nbsp;[&nbsp;html&nbsp;| <br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;head(html,&nbsp;[&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;initialize&nbsp;head<br/>
-						</span>&nbsp;&nbsp;&nbsp;&nbsp;]&nbsp;)&nbsp;<br/>
-						]&nbsp;)
-					</p>
-				</div>
+		</div>
+		</p>
+		<p>
+		Appending the closure parameters and prepending the parent parameters using extension syntax yields
+		<div class="literallayout">
+			<div class="incode">
+				<p class="code">
+					html()&nbsp;[&nbsp;html&nbsp;| <br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;html.head()&nbsp;[&nbsp;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;initialize&nbsp;head<br/>
+					</span>&nbsp;&nbsp;&nbsp;&nbsp;]&nbsp;&nbsp;<br/>
+					]
+				</p>
 			</div>
-			</p>
-			<p>
-			Appending the closure parameters and prepending the parent parameters using extension syntax yields
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						html()&nbsp;[&nbsp;html&nbsp;| <br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;html.head()&nbsp;[&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;initialize&nbsp;head<br/>
-						</span>&nbsp;&nbsp;&nbsp;&nbsp;]&nbsp;&nbsp;<br/>
-						]
-					</p>
-				</div>
+		</div>
+		</p>
+		<p>
+		Using implicit parameter names and skipping empty parentheses you can simplify this to 
+		<div class="literallayout">
+			<div class="incode">
+				<p class="code">
+					html&nbsp;[&nbsp;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;head&nbsp;[&nbsp;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;initialize&nbsp;head<br/>
+					</span>&nbsp;&nbsp;&nbsp;&nbsp;]&nbsp;&nbsp;<br/>
+					]
+				</p>
 			</div>
-			</p>
-			<p>
-			Using implicit parameter names and skipping empty parentheses you can simplify this to 
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						html&nbsp;[&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;head&nbsp;[&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;initialize&nbsp;head<br/>
-						</span>&nbsp;&nbsp;&nbsp;&nbsp;]&nbsp;&nbsp;<br/>
-						]
-					</p>
-				</div>
-			</div>
-			</p>
+		</div>
+		
+		</p>
 		<div id="disqus_thread"></div>
 		<script type="text/javascript" src="documentationRoot.js"></script>
 		<script type="text/javascript">

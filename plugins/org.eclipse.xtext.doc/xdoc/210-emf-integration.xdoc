@@ -11,7 +11,7 @@ section:model_metamodel[Model, Ecore Model, and Ecore]
 Xtext uses EMF models as the in-memory representation of any parsed text files. This in-memory 
 object graph is called the e[Abstract Syntax Tree] (AST). Depending on the community this concepts is 
 also called e[document object graph (DOM)], e[semantic model], or simply e[model]. We use e[model] and e[AST] 
-interchangeably. Given the example model from the ref:getting_started_xtext[introduction], the AST 
+interchangeably. Given the example model from the ref:DomainmodelWalkThrough[tutorial], the AST 
 looks similar to this
 
 img[images/ast.png][Sample AST][ ][width:50%]

@@ -1,4 +1,4 @@
-chapter:JvmDomainmodel[5 simple steps to your JVM language]
+chapter:JvmDomainmodel[Five simple steps to your JVM language]
 
 In this tutorial we will basically implement the domain model language again, but this time, we will make use of
 the special JVM support shipped with Xtext 2.1. This kind of language really is a sweet spot for DSLs,
