@@ -14,3 +14,20 @@ Require-Bundle: org.eclipse.xtext.xtend2;bundle-version="2.0.0",
  org.eclipse.xtext.xbase.ui;bundle-version="2.0.0"
 Import-Package: org.apache.log4j;version="1.2.15"
 Bundle-ClassPath: .
+Export-Package: .,
+ org.eclipse.xtext.xtend2.tests,
+ org.eclipse.xtext.xtend2.tests.annotations,
+ org.eclipse.xtext.xtend2.tests.compiler,
+ org.eclipse.xtext.xtend2.tests.conversion,
+ org.eclipse.xtext.xtend2.tests.dispatch,
+ org.eclipse.xtext.xtend2.tests.formatting,
+ org.eclipse.xtext.xtend2.tests.linking,
+ org.eclipse.xtext.xtend2.tests.naming,
+ org.eclipse.xtext.xtend2.tests.parsing,
+ org.eclipse.xtext.xtend2.tests.resource,
+ org.eclipse.xtext.xtend2.tests.richstring,
+ org.eclipse.xtext.xtend2.tests.serializer,
+ org.eclipse.xtext.xtend2.tests.smoke,
+ org.eclipse.xtext.xtend2.tests.typing,
+ org.eclipse.xtext.xtend2.tests.validation,
+ test
