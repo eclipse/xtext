@@ -379,8 +379,10 @@ public class XpectParameterProvider implements IParameterProvider {
 
 	protected int parseXpectParams(Class<?> testClass, INode node, String methodName, final String text, int offset,
 			Map<String, String> params) {
+		int semanticOffset = getOffsetOfNextSemanticNode(node);
+		params.put(OFFSET, String.valueOf(semanticOffset));
 		String paramSyntax = getParameterSyntax(testClass, methodName);
-		if (org.eclipse.xtext.util.Strings.isEmpty(paramSyntax))
+		if (Strings.isEmpty(paramSyntax))
 			return -1;
 		Nfa<ProdElement> nfa = getParameterNfa(paramSyntax);
 		List<BacktrackItem> trace = new NfaUtil().backtrack(nfa, new BacktrackItem(offset),
@@ -417,8 +419,6 @@ public class XpectParameterProvider implements IParameterProvider {
 						return followers;
 					}
 				});
-		int semanticOffset = getOffsetOfNextSemanticNode(node);
-		params.put(OFFSET, String.valueOf(semanticOffset));
 		if (trace != null && !trace.isEmpty()) {
 			for (BacktrackItem item : trace)
 				if (item.token != null && item.token.getName() != null)

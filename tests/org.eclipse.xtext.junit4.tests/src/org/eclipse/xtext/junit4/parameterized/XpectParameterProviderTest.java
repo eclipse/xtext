@@ -450,6 +450,13 @@ public class XpectParameterProviderTest
 	}
 
 	@Test
+	public void xpectSLParameterDefault()
+	{
+		String model = "// XPECT meth";
+		Assert.assertEquals("meth(offset at 'h\\n !foo')", params(model));
+	}
+
+	@Test
 	public void xpectSLParameterWithExp()
 	{
 		String model = "// XPECT optionalMeth text abc --> exp\n";
