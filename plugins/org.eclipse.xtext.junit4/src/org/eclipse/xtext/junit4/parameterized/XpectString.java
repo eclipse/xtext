@@ -18,6 +18,7 @@ import org.eclipse.xtext.junit4.parameterized.TestExpectationValidator.TestResul
 import org.eclipse.xtext.junit4.parameterized.XpectString.StringResultValidator;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.internal.FormattingMigrator;
+import org.junit.Assert;
 import org.junit.ComparisonFailure;
 
 /**
@@ -37,6 +38,10 @@ public @interface XpectString {
 		}
 
 		public void validate(XtextResource resource, IExpectation expectation, @TestResult String actual) {
+			Assert.assertNotNull(resource);
+			Assert.assertNotNull(expectation);
+			Assert.assertNotNull(expectation.getExpectation());
+			Assert.assertNotNull(actual);
 			String exp;
 			if (!config.whitespaceSensitive()) {
 				FormattingMigrator migrator = new FormattingMigrator();
