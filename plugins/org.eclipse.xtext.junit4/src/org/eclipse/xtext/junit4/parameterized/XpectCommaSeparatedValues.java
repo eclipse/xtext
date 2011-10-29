@@ -22,6 +22,7 @@ import org.eclipse.xtext.junit4.parameterized.TestExpectationValidator.TestResul
 import org.eclipse.xtext.junit4.parameterized.XpectCommaSeparatedValues.CSVResultValidator;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.Pair;
+import org.junit.Assert;
 import org.junit.ComparisonFailure;
 
 import com.google.common.base.Function;
@@ -49,6 +50,11 @@ public @interface XpectCommaSeparatedValues {
 		}
 
 		public void validate(XtextResource res, IExpectation expectation, @TestResult Iterable<Object> actual) {
+			Assert.assertNotNull(res);
+			Assert.assertNotNull(expectation);
+			Assert.assertNotNull(expectation.getExpectation());
+			Assert.assertNotNull(actual);
+
 			ExpectationCollection exp = new ExpectationCollection();
 			exp.setCaseSensitive(cfg.caseSensitive());
 			exp.setOrdered(cfg.ordered());
