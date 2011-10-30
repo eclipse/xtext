@@ -27,9 +27,11 @@ public class Case_4 {
     StringConcatenation _builder = new StringConcatenation();
     {
       if (false) {
-        _builder.append("foobar");} else {
+        _builder.append("foobar");
+      } else {
         if (false) {
-          _builder.append("foobar");} else {
+          _builder.append("foobar");
+        } else {
           _builder.append("zonk");
         }
       }

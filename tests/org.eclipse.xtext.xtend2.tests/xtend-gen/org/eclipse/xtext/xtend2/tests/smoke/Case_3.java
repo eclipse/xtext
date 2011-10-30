@@ -15,7 +15,7 @@ public class Case_3 {
             return i;
           }
         };
-      final Function1<Integer,Integer> closure = _function;
+      final Function1<? super Integer,? extends Integer> closure = _function;
       Iterable<Integer> _operator_upTo = IntegerExtensions.operator_upTo(((Integer)1), ((Integer)100));
       for (final Integer x : _operator_upTo) {
         closure.apply(x);
