@@ -25,6 +25,7 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.Primitives;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.annotations.typing.XbaseWithAnnotationsTypeProvider;
@@ -158,6 +159,9 @@ public class Xtend2TypeProvider extends XbaseWithAnnotationsTypeProvider {
 		if (returnType != null) {
 			return returnType;
 		}
+		XClosure closure = EcoreUtil2.getContainerOfType(expr, XClosure.class);
+		if (closure != null)
+			return returnType;
 		XtendFunction function = EcoreUtil2.getContainerOfType(expr, XtendFunction.class);
 		if (function==null)
 			return null;
