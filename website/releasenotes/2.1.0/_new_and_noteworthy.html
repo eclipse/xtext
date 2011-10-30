@@ -38,12 +38,82 @@ img {
 <body>
 <h1>Whats new in Xtext 2.1</h1>
 <p>Xtext 2.1 offers a lot of new features and improvements. All in all, 
-<a href="https://bugs.eclipse.org/bugs/buglist.cgi?field0-0-0=flagtypes.name;resolution=FIXED;classification=Modeling;query_based_on=Xtext%202.0M7;query_format=advanced;bug_status=RESOLVED;type0-0-0=substring;value0-0-0=Indigo;target_milestone=SR2;product=TMF;known_name=Xtext%202.0SR2">over 120 bugzillas (FIXME)</a> 
-have been fixed since Indigo SR1. Here is a summary of the most significant enhancements:</p>
+<a href="https://bugs.eclipse.org/bugs/buglist.cgi?chfieldto=Now;query_format=advanced;chfieldfrom=2011-06-01;bug_status=RESOLVED;bug_status=VERIFIED;bug_status=CLOSED;component=Xtext;resolution=FIXED;classification=Modeling;product=TMF;target_milestone=SR1;target_milestone=SR2">over 250 bug reports and feature requests</a> 
+have been solved since Xtext 2.0. Here is a summary of the most significant enhancements:</p>
 <ul>
+  <li><a href="#Xtext">Changes to Xtext</a></li>
   <li><a href="#Xtend">Changes to Xtend</a></li>
-  <li><a href="#Xtext">Changes to the Xtext</a></li>
 </ul>
+<h2>Changes to Xtext</h2>
+<table>
+	<tr>
+		<td class="entry_cell">Embed expressions easily</td>
+		<td>
+		<p>
+			Embedding the expression language Xbase in your own language has become very simple. For most cases
+			it is enough to specify how your language concepts relate to the JVM typesystem. The framework then derives 
+			all other services such as scoping or even the code generator from this mapping automatically. 
+		</p>
+		<img alt="Embedding Xbase - Xtext editor" src="./images/xtext-xbase-1.png">
+		<hr/>
+		<img alt="Embedding Xbase - Xtend editor" src="./images/xtext-xbase-4.png">
+		</td>	
+	</tr>
+	<tr>
+		<td class="entry_cell">Editor Improvements</td>
+		<td>
+		<p>
+			Selection can now be enlarged/shrinked with regard to the semantics by using CTRL-SHIFT-[LEFT|RIGHT]. 
+			Upper case letters are matched to camel case names in content assist. The outline view shows better
+			defaults.
+		</p>
+		<img alt="Camel Case Content assist" src="./images/xtext-camel-ca.png">
+		</td>	
+	</tr>
+	<tr>
+		<td class="entry_cell">Refactoring</td>
+		<td>
+		<p>
+			Rename refactoring has been revised and allows you to reliably rename elements and references
+			across language and resource boundaries. Saving and inline editing can be configured in the 
+			preferences.
+		</p>
+		<img alt="Refactoring preferences" src="./images/xtext-refactoring-props.png">
+		</td>	
+	</tr>
+	<tr>
+		<td class="entry_cell">Builder Performance</td>
+		<td>
+		<p>
+			The performance of the builder has had special attention. It not only runs less often now, but it 
+			also adapts better to files with different sizes. The resource loading can be parallelized to 
+			further minimize build times.   
+		</p>
+		<img alt="Builder performance" src="./../helios/images/speed.png">
+		</td>	
+	</tr>
+	<tr>
+		<td class="entry_cell">Enhancements for Xbase Expressions</td>
+		<td>
+		<p>
+			A couple of additions to the syntax allow you to simplify Xbase expressions even further:
+			<ul>
+			<li>
+				We have introduced a second implicit variable named <em>it</em>. As opposed to the existing 
+				<em>this</em>, you can declare and override <em>it</em>, e.g. as a function parameter. 
+			</li>
+			<li>
+				If the last argument of a function call is a closure it can now be specified after the 
+				feature call. This way you can provide extension libraries that look like new statements. 
+				In combination with <em>it</em> and procedures you can for example create object trees using
+				a very elegant syntax.
+			</li>
+			</ul>
+		</p>
+		<img alt="Syntactic sugar" src="./images/syntactic-sugar.png">
+		</td>	
+	</tr>
+</table>
 <h2 id="Xtend">Changes to Xtend</h2>
 <h3>Language Improvements</h3>
 <table>
@@ -165,81 +235,6 @@ have been fixed since Indigo SR1. Here is a summary of the most significant enha
 	</tr>
 </table>
 
-<h2>Changes to the Xtext</h2>
-<table>
-	<tr>
-		<td class="entry_cell">Embed Xbase easily</td>
-		<td>
-		<p>
-			Embedding the expression language Xbase in your own language has become very simple. For most cases
-			it is enough to specify how your own concepts relate to the JVM typesystem. The framework then derives 
-			all other services such as scoping or even the code generator from this mapping automatically. 
-		</p>
-		<img alt="Embedding Xbase - Xtext editor" src="./images/xtext-xbase-1.png">
-		<hr/>
-		<img alt="Embedding Xbase - Xtend editor" src="./images/xtext-xbase-4.png">
-		</td>	
-	</tr>
-	<tr>
-		<td class="entry_cell">More Syntactic Sugar for Xbase Expressions</td>
-		<td>
-		<p>
-			A couple of additions to the syntax allow you to simplify Xbase expressions even further:
-			<ul>
-			<li>
-				We have introduced a second implicit variable named <em>it</em>. As opposed to the existing 
-				<em>this</em>, you can declare and override <em>it</em>, e.g. as a function parameter. 
-				Use <em>it</em> to omit a single parameter in closures or as the default variable in create 
-				extensions.
-			</li>
-			<li>
-				Xtend now supports procedures. If a closure does not return a value you don't have to specify 
-				it.
-			</li>
-			<li>
-				If the last argument of a function call is a closure it can now be specified after the 
-				feature call. This way you can provide extension libraries that look like new statements. 
-				In combination with <em>it</em> and procedures you can for example create object trees using
-				a very elegant syntax.
-			</li>
-			</ul>
-		</p>
-		<img alt="Syntactic sugar" src="./images/syntactic-sugar.png">
-		</td>	
-	</tr>
-	<tr>
-		<td class="entry_cell">Editor Improvements</td>
-		<td>
-		<p>
-			Selection can now be enlarged/shrinked with regard to the semantics by using CTRL-SHIFT-[LEFT|RIGHT]. 
-			Upper case letters are matched to camel case names in content assist. The outline view shows better
-			defaults.
-		</p>
-		<img alt="Camel Case Content assist" src="./images/xtext-camel-ca.png">
-		</td>	
-	</tr>
-	<tr>
-		<td class="entry_cell">Refactoring</td>
-		<td>
-		<p>
-			Rename refactoring has been revised and allows you to reliably rename elements and references
-			across language and resource boundaries. Saving and inline editing can be configured in the 
-			preferences.
-		</p>
-		<img alt="Refactoring preferences" src="./images/xtext-refactoring-props.png">
-		</td>	
-	</tr>
-	<tr>
-		<td class="entry_cell">Builder Performance</td>
-		<td>
-		<p>
-			The performance of the builder has had special attention. It not only runs less often now, but it 
-			also adapts better to files with different sizes. The resource loading can be parallelized to 
-			further minimize build times.   
-		</p>
-		<img alt="Builder performance" src="./../helios/images/speed.png">
-		</td>	
-	</tr>
-</table>
+
 </body>
 </html>

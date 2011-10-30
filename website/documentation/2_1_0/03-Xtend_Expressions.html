@@ -47,13 +47,13 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-		<a href="015-domainmodel-java.php">5 simple steps to your JVM language</a></div>
-		<ul style="display: none;" id="subToc_015-domainmodel-java.html">
-		<li id="015-domainmodel-java.html#JvmDomainmodel_7" ><a href="015-domainmodel-java.php#JvmDomainmodel_7" >Step One: Create A New Xtext Project</a></li>
-		<li id="015-domainmodel-java.html#JvmDomainmodel_8" ><a href="015-domainmodel-java.php#JvmDomainmodel_8" >Step Two: Write the Grammar</a></li>
-		<li id="015-domainmodel-java.html#JvmDomainmodel_9" ><a href="015-domainmodel-java.php#JvmDomainmodel_9" >Step Three: Generate Language Artifacts</a></li>
-		<li id="015-domainmodel-java.html#JvmDomainmodel_10" ><a href="015-domainmodel-java.php#JvmDomainmodel_10" >Step Four: Define the Mapping to JVM Concepts</a></li>
-		<li id="015-domainmodel-java.html#JvmDomainmodel_11" ><a href="015-domainmodel-java.php#JvmDomainmodel_11" >Step Five : Try the Editor!</a></li>
+		<a href="035-domainmodel-java.php">Five simple steps to your JVM language</a></div>
+		<ul style="display: none;" id="subToc_035-domainmodel-java.html">
+		<li id="035-domainmodel-java.html#JvmDomainmodel_7" ><a href="035-domainmodel-java.php#JvmDomainmodel_7" >Step One: Create A New Xtext Project</a></li>
+		<li id="035-domainmodel-java.html#JvmDomainmodel_8" ><a href="035-domainmodel-java.php#JvmDomainmodel_8" >Step Two: Write the Grammar</a></li>
+		<li id="035-domainmodel-java.html#JvmDomainmodel_9" ><a href="035-domainmodel-java.php#JvmDomainmodel_9" >Step Three: Generate Language Artifacts</a></li>
+		<li id="035-domainmodel-java.html#JvmDomainmodel_10" ><a href="035-domainmodel-java.php#JvmDomainmodel_10" >Step Four: Define the Mapping to JVM Concepts</a></li>
+		<li id="035-domainmodel-java.html#JvmDomainmodel_11" ><a href="035-domainmodel-java.php#JvmDomainmodel_11" >Step Five : Try the Editor!</a></li>
 		</ul>
 		</li>
 		<li class="partentry" >
@@ -130,10 +130,6 @@
 		<li id="199c-xbase-inferred-type.html" ><a href="199c-xbase-inferred-type.php" >Inferring a JVM Model</a></li>
 		<li id="199d-xbase-expressions.html" ><a href="199d-xbase-expressions.php" >Using Xbase Expressions</a></li>
 		<li id="199e-xbase-language-reference.html" ><a href="199e-xbase-language-reference.php" >Xbase Language Reference</a></li>
-		<li id="199f-xbase-language-reference-syntax.html" ><a href="199f-xbase-language-reference-syntax.php" >Lexical Syntax</a></li>
-		<li id="199g-xbase-language-reference-types.html" ><a href="199g-xbase-language-reference-types.php" >Types</a></li>
-		<li id="199h-xbase-language-reference-expressions.html" ><a href="199h-xbase-language-reference-expressions.php" >Expressions</a></li>
-		<li id="199i-xbase-language-reference-libraries.html" ><a href="199i-xbase-language-reference-libraries.php" >Extension Methods</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -479,26 +475,14 @@
 			Given the expression 
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						myObj.myProperty&nbsp;=&nbsp;<span class="string">"foo"</span>
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode">myObj.myProperty&nbsp;=&nbsp;<span class="string">"foo"</span></span>
 			</p>
 			<p>
 			The compiler first looks up whether there is an accessible Java Field called <span class="inlinecode">myProperty</span> on the type of <span class="inlinecode">myObj</span>. If there is one it translates to
 			the following Java expression :
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						myObj.myProperty&nbsp;=&nbsp;<span class="string">"foo"</span>;
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode">myObj.myProperty&nbsp;=&nbsp;<span class="string">"foo"</span>;</span>
 			</p>
 			<p>
 			Remember in Xtend everything is an expression and has to return something. In the case of simple assignments the return value is the value returned from the corresponding
@@ -511,13 +495,7 @@
 			As a result the compiler translates to :
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						myObj.setMyProperty(<span class="string">"foo"</span>)
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode">myObj.setMyProperty(<span class="string">"foo"</span>)</span>
 			</p>
 			<a name="Xtend_Expressions_FeatureCalls" ></a>
 			<h2>Feature Calls</h2>
@@ -547,13 +525,7 @@
 			That is, for the following expression
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						myObj.myProperty
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode">myObj.myProperty</span>
 			</p>
 			<p>
 			the compiler first looks for an accessible field in the type of <span class="inlinecode">myObj</span>. If no such field exists it looks for a method called <span class="inlinecode">myProperty()</span> before it looks 
@@ -564,23 +536,9 @@
 			<p>
 			If the current scope contains a variable named <span class="inlinecode"><span class="keyword">this</span></span>, the compiler will make all its members available to the scope. 
 			That is if 
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">this</span>.myProperty
-					</p>
-				</div>
-			</div>
-			
+			<span class="inlinecode"><span class="keyword">this</span>.myProperty</span>
 			is a valid expression
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						myProperty
-					</p>
-				</div>
-			</div>
-			
+			<span class="inlinecode">myProperty</span>
 			is valid as well and is equivalent, as long as there is no local variable 'myProperty' on the scope,
 			which would have higher precedence.
 			</p>
@@ -594,25 +552,13 @@
 			Instead of writing 
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">if</span>&nbsp;(&nbsp;myRef&nbsp;!=&nbsp;<span class="keyword">null</span>&nbsp;)&nbsp;myRef.doStuff()
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode"><span class="keyword">if</span>&nbsp;(&nbsp;myRef&nbsp;!=&nbsp;<span class="keyword">null</span>&nbsp;)&nbsp;myRef.doStuff()</span>
 			</p>
 			<p>
 			one can write
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						myRef?.doStuff()
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode">myRef?.doStuff()</span>
 			</p>
 			<a name="Xtend_Expressions_ConstructorCall" ></a>
 			<h2>Constructor Call</h2>
@@ -624,24 +570,10 @@
 			<p>
 			<ul>
 			  <li>
-			  		<div class="literallayout">
-			  	<div class="incode">
-			  		<p class="code">
-			  			<span class="keyword">new</span>&nbsp;String()
-			  		</p>
-			  	</div>
-			  </div>
-			  
+			  		<span class="inlinecode"><span class="keyword">new</span>&nbsp;String()</span>
 			  </li>
 			  <li>
-			  		<div class="literallayout">
-			  	<div class="incode">
-			  		<p class="code">
-			  			<span class="keyword">new</span>&nbsp;java.util.ArrayList&lt;java.math.BigDecimal&gt;()
-			  		</p>
-			  	</div>
-			  </div>
-			  
+			  		<span class="inlinecode"><span class="keyword">new</span>&nbsp;java.util.ArrayList&lt;java.math.BigDecimal&gt;()</span>
 			  </li>
 			</ul>
 			</p>
@@ -683,37 +615,19 @@
 			That is you can write
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						myList.find(e|e.name==null)
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode">myList.find(e|e.name==null)</span>
 			</p>
 			<p>
 			instead of
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						myList.find([e|e.name==null])
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode">myList.find([e|e.name==null])</span>
 			</p>
 			<p>
 			But in all other cases the square brackets are mandatory:
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">val</span>&nbsp;func&nbsp;=&nbsp;[String&nbsp;s|&nbsp;s.length&gt;3]
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode"><span class="keyword">val</span>&nbsp;func&nbsp;=&nbsp;[String&nbsp;s|&nbsp;s.length&gt;3]</span>
 			</p>
 			<a name="Xtend_Expressions_ClosuresTypeInference" ></a>
 			<h3>Typing</h3>
@@ -724,32 +638,13 @@
 			</p>
 			<p>
 			For instance, given the following Java method signature:
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">public</span>&nbsp;T&nbsp;&lt;T&gt;getFirst(List&lt;T&gt;&nbsp;list,&nbsp;Function0&lt;T,Boolean&gt;&nbsp;predicate)
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode"><span class="keyword">public</span>&nbsp;T&nbsp;&lt;T&gt;getFirst(List&lt;T&gt;&nbsp;list,&nbsp;Function0&lt;T,Boolean&gt;&nbsp;predicate)</span> 
 			</p>
 			<p>
 			the type of the parameter can be inferred. Which allows users to write:
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						arrayList(&nbsp;<span class="string">"Foo"</span>,&nbsp;<span class="string">"Bar"</span>&nbsp;).findFirst(&nbsp;e&nbsp;|&nbsp;e&nbsp;==&nbsp;<span class="string">"Bar"</span>&nbsp;)
-					</p>
-				</div>
-			</div>
-			
+			<span class="inlinecode">arrayList(&nbsp;<span class="string">"Foo"</span>,&nbsp;<span class="string">"Bar"</span>&nbsp;).findFirst(&nbsp;e&nbsp;|&nbsp;e&nbsp;==&nbsp;<span class="string">"Bar"</span>&nbsp;)</span>
 			instead of 
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						arrayList(&nbsp;<span class="string">"Foo"</span>,&nbsp;<span class="string">"Bar"</span>&nbsp;).findFirst(&nbsp;String&nbsp;e&nbsp;|&nbsp;e&nbsp;==&nbsp;<span class="string">"Bar"</span>&nbsp;)
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode">arrayList(&nbsp;<span class="string">"Foo"</span>,&nbsp;<span class="string">"Bar"</span>&nbsp;).findFirst(&nbsp;String&nbsp;e&nbsp;|&nbsp;e&nbsp;==&nbsp;<span class="string">"Bar"</span>&nbsp;)</span>
 			</p>
 			<a name="Xtend_Expressions_FunctionMapping" ></a>
 			<h3>Function Mapping</h3>
@@ -825,25 +720,13 @@
 			That means 
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">if</span>&nbsp;(foo)&nbsp;x
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode"><span class="keyword">if</span>&nbsp;(foo)&nbsp;x</span>
 			</p>
 			<p>
 			is the a short hand for
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">if</span>&nbsp;(foo)&nbsp;x&nbsp;<span class="keyword">else</span>&nbsp;null
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode"><span class="keyword">if</span>&nbsp;(foo)&nbsp;x&nbsp;<span class="keyword">else</span>&nbsp;null</span>
 			</p>
 			<a name="Xtend_Expressions_IfTypeInference" ></a>
 			<h3>Typing</h3>
@@ -1046,25 +929,12 @@
 			The return type of a variable declaration expression is always <span class="inlinecode">void</span>. 
 			The type of the variable itself can either be explicitly declared or be inferred from the right hand side expression.
 			Here is an example for an explicitly declared type:
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">var</span>&nbsp;List&lt;String&gt;&nbsp;msg&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;String&gt;();
-					</p>
-				</div>
-			</div>
-			
+			<span class="inlinecode"><span class="keyword">var</span>&nbsp;List&lt;String&gt;&nbsp;msg&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;String&gt;();</span>
 			In such cases, the right hand expression's type must <a href="199g-xbase-language-reference-types.php#Xbase_Types_ConformanceRules" title="Go to &quot;Conformance and Conversion&quot;">conform</a> to the type on the left hand side. 
 			</p>
 			<p>
 			Alternatively the type can be left out and will be inferred from the initialization expression:  
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">var</span>&nbsp;msg&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;String&gt;();&nbsp;<span class="comment">//&nbsp;-&gt;&nbsp;type&nbsp;ArrayList&lt;String&gt;</span>
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode"><span class="keyword">var</span>&nbsp;msg&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;String&gt;();&nbsp;<span class="comment">//&nbsp;-&gt;&nbsp;type&nbsp;ArrayList&lt;String&gt;</span></span>
 			</p>
 			<a name="Xtend_Expressions_Blocks" ></a>
 			<h2>Blocks</h2>
@@ -1252,14 +1122,7 @@
 			  	</div>
 			  </div>
 			  </li>
-			  <li><div class="literallayout">
-			  	<div class="incode">
-			  		<p class="code">
-			  			<span class="keyword">do</span>&nbsp;doSideEffect(<span class="string">"foo"</span>)&nbsp;<span class="keyword">while</span>&nbsp;((i=i+1)&lt;max)
-			  		</p>
-			  	</div>
-			  </div>
-			  </li>
+			  <li><span class="inlinecode"><span class="keyword">do</span>&nbsp;doSideEffect(<span class="string">"foo"</span>)&nbsp;<span class="keyword">while</span>&nbsp;((i=i+1)&lt;max)</span></li>
 			</ul>
 			</p>
 			<a name="Xtend_Expressions_Return" ></a>
@@ -1441,14 +1304,7 @@
 			    
 			    </td>
 			    <td>
-			    			<div class="literallayout">
-			    	<div class="incode">
-			    		<p class="code">
-			    			node&nbsp;NodeName{}
-			    		</p>
-			    	</div>
-			    </div>
-			    
+			    			<span class="inlinecode">node&nbsp;NodeName{}</span>
 			    </td>
 			  </tr>
 			</table>

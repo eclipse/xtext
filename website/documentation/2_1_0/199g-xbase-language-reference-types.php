@@ -19,7 +19,7 @@
 	
 		var chapters = menu.children;
 		addHideSubsectionFunction(chapters);
-		var subToc = document.getElementById(ActiveSubTocElementId).parentNode;
+		var subToc = document.getElementById(\'subToc_\' + ActiveSubTocElementId);
 		if(subToc) {
 			subToc.style.display = "block";
 			subToc.previousElementSibling.children[0].style.display = "none"

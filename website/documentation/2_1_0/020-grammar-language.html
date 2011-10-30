@@ -47,13 +47,13 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-		<a href="015-domainmodel-java.php">5 simple steps to your JVM language</a></div>
-		<ul style="display: none;" id="subToc_015-domainmodel-java.html">
-		<li id="015-domainmodel-java.html#JvmDomainmodel_7" ><a href="015-domainmodel-java.php#JvmDomainmodel_7" >Step One: Create A New Xtext Project</a></li>
-		<li id="015-domainmodel-java.html#JvmDomainmodel_8" ><a href="015-domainmodel-java.php#JvmDomainmodel_8" >Step Two: Write the Grammar</a></li>
-		<li id="015-domainmodel-java.html#JvmDomainmodel_9" ><a href="015-domainmodel-java.php#JvmDomainmodel_9" >Step Three: Generate Language Artifacts</a></li>
-		<li id="015-domainmodel-java.html#JvmDomainmodel_10" ><a href="015-domainmodel-java.php#JvmDomainmodel_10" >Step Four: Define the Mapping to JVM Concepts</a></li>
-		<li id="015-domainmodel-java.html#JvmDomainmodel_11" ><a href="015-domainmodel-java.php#JvmDomainmodel_11" >Step Five : Try the Editor!</a></li>
+		<a href="035-domainmodel-java.php">Five simple steps to your JVM language</a></div>
+		<ul style="display: none;" id="subToc_035-domainmodel-java.html">
+		<li id="035-domainmodel-java.html#JvmDomainmodel_7" ><a href="035-domainmodel-java.php#JvmDomainmodel_7" >Step One: Create A New Xtext Project</a></li>
+		<li id="035-domainmodel-java.html#JvmDomainmodel_8" ><a href="035-domainmodel-java.php#JvmDomainmodel_8" >Step Two: Write the Grammar</a></li>
+		<li id="035-domainmodel-java.html#JvmDomainmodel_9" ><a href="035-domainmodel-java.php#JvmDomainmodel_9" >Step Three: Generate Language Artifacts</a></li>
+		<li id="035-domainmodel-java.html#JvmDomainmodel_10" ><a href="035-domainmodel-java.php#JvmDomainmodel_10" >Step Four: Define the Mapping to JVM Concepts</a></li>
+		<li id="035-domainmodel-java.html#JvmDomainmodel_11" ><a href="035-domainmodel-java.php#JvmDomainmodel_11" >Step Five : Try the Editor!</a></li>
 		</ul>
 		</li>
 		<li class="partentry" >
@@ -130,10 +130,6 @@
 		<li id="199c-xbase-inferred-type.html" ><a href="199c-xbase-inferred-type.php" >Inferring a JVM Model</a></li>
 		<li id="199d-xbase-expressions.html" ><a href="199d-xbase-expressions.php" >Using Xbase Expressions</a></li>
 		<li id="199e-xbase-language-reference.html" ><a href="199e-xbase-language-reference.php" >Xbase Language Reference</a></li>
-		<li id="199f-xbase-language-reference-syntax.html" ><a href="199f-xbase-language-reference-syntax.php" >Lexical Syntax</a></li>
-		<li id="199g-xbase-language-reference-types.html" ><a href="199g-xbase-language-reference-types.php" >Types</a></li>
-		<li id="199h-xbase-language-reference-expressions.html" ><a href="199h-xbase-language-reference-expressions.php" >Expressions</a></li>
-		<li id="199i-xbase-language-reference-libraries.html" ><a href="199i-xbase-language-reference-libraries.php" >Extension Methods</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -227,7 +223,10 @@
 						&nbsp;&nbsp;lightOn&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;L1ON<br/>
 						&nbsp;&nbsp;doorOpened&nbsp;&nbsp;D1OP<br/>
 						&nbsp;&nbsp;panelClosed&nbsp;PNCL<br/>
-						&nbsp;&nbsp;<span class="keyword">resetting</span>&nbsp;doorOpened&nbsp;D1OP<br/>
+						&nbsp;<span class="keyword">end</span><br/>
+						&nbsp;<br/>
+						<span class="keyword">resetEvents</span>&nbsp;<br/>
+						&nbsp;&nbsp;doorOpened&nbsp;D1OP<br/>
 						<span class="keyword">end</span><br/>
 						&nbsp;<br/>
 						<span class="keyword">commands</span><br/>
@@ -264,9 +263,10 @@
 			</div>
 			</p>
 			<p>
-			What we have are a bunch of declared events, commands, and states. Within states there are references to declared actions.
-			Actions should be executed when entering the state. Furthermore, there are transitions consisting of a reference to an event and 
-			a state.
+			What we have are a bunch of declared events, commands, and states. Some events are addiitonally marked
+			as being reset events. Within states there are references to declared actions. Actions should be executed 
+			when entering the state. Furthermore, there are transitions consisting of a reference to an event and a 
+			state.
 			</p>
 			<p>
 			The first thing that you have to do in order to implement this tiny state machine example with Xtext,
@@ -402,14 +402,90 @@
 			<a name="package_declarations_3" ></a>
 			<h3>EPackage Import</h3>
 			<p>
-			If you already have an existing <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a>, you can import it using either a namespace URI or a resource URI. 
+			If you already have an existing <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a>, you can import it using its namespace URI or a resource URI. 
 			An <a href="http://www.ietf.org/rfc/rfc2396.txt" >URI</a> (Uniform Resource Identifier) provides a simple and extensible 
 			means for identifying an abstract or physical resource. For all the nifty details about EMF URIs 
-			please refer to its <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" title="org.eclipse.emf.common.util.URI">documentation</abbr></a>.
+			please refer to its <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" title="org.eclipse.emf.common.util.URI">documentation</abbr></a>. It is strongly recommended
+			to use the namespace URI instead of the resource uri because it is independent from the concrete location
+			in the file system and much more portable across different machines, easier to configure in the workflow
+			and works better with language mixins. The import via platform URIs or file URIs can be considered deprecated
+			and is only supported for backwards compatibility reasons.
 			</p>
 			<a name="package_declarations_3_2" ></a>
 			<h4><p>
-			Using Resource URIs to Import Existing EPackages
+			Using Namespace URIs to Import Existing EPackages
+			</p>
+			</h4>
+			<p>
+			You can use namespace URI in order to import existing <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a>. This is generally 
+			preferrable. The package will be read from the Xtext index and therefore your grammar is independent
+			from the concrete location of the respective ecore file. You have to make sure though, that the ecore file is contained
+			in a project, that is managed by Xtext. Therefore the project has to have to Xtext project nature attached.
+			Ecore files that reside in referenced Java archives (JARs) are automatically picked up and indexed if
+			the referencing project itself is an Xtext project.
+			</p>
+			<p>
+			To import an EPackage, you have to state its namespace URI like this:
+			</p>
+			<p>
+			<span class="inlinecode"><span class="keyword">import</span>&nbsp;<span class="string">"http://www.xtext.org/example/Domainmodel"</span>&nbsp;<span class="keyword">as</span>&nbsp;dmodel</span>
+			</p>
+			<p>
+			In order to be able to find the referenced package in the language generator, some configuration values
+			have to be set. It is usually the easiest way to register the generated <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> 
+			interface in the workflow.
+			The <abbr title="org.eclipse.emf.mwe.utils.StandaloneSetup" >StandaloneSetup</abbr> offers the respective methods to achieve this.
+			Simply state something like this in the workflow:
+			</p>
+			<p>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						bean&nbsp;=&nbsp;StandaloneSetup&nbsp;{<br/>
+						&nbsp;&nbsp;platformUri&nbsp;=&nbsp;<span class="string">"${runtimeProject}/../.."</span><br/>
+						&nbsp;&nbsp;scanClassPath&nbsp;=&nbsp;<span class="keyword">true</span><br/>
+						&nbsp;&nbsp;registerGeneratedEPackage&nbsp;=&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;<span class="string">"org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage"</span><br/>
+						&nbsp;&nbsp;registerGenModelFile&nbsp;=&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;<span class="string">"platform:/resource/.../path/to/Domainmodel.genmodel"</span><br/>
+						}
+					</p>
+				</div>
+			</div>
+			</p>
+			<p>
+			The registered genmodel is necessary to tell the code generator how the referenced Java classes are named.
+			Please see below for alternatives that allow to register the genmodel, too. They may be handy if you
+			create the genmodel in the workflow itself. 
+			</p>
+			<p>
+			If the generated EPackage interface is not available when the language workflow is executed, you can
+			use another approach to register the reference packages. This may happen if your want to generate EMF
+			classes and the language infrastructure in one and the same workflow. The section in the workflow, that
+			refers the your grammar, allows to set additional resources that should be loaded prior to loading the
+			grammar file. The ecore files that contain the referenced EPackages are a good candidate for preloaded
+			resources.
+			</p>
+			<p>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						language&nbsp;=&nbsp;{<br/>
+						&nbsp;&nbsp;loadedResource&nbsp;=&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;<span class="string">"platform:/resource/.../path/to/Domainmodel.ecore"</span><br/>
+						&nbsp;&nbsp;uri&nbsp;=&nbsp;grammarURI<br/>
+						}
+					</p>
+				</div>
+			</div>
+			</p>
+			<p>
+			You can use either platform URIs or classpath URIs to list the required ecore files (see below for details
+			on both URI schemes).
+			</p>
+			<a name="package_declarations_3_3" ></a>
+			<h4><p>
+			Using Resource URIs to Import Existing EPackages - Deprecated
 			</p>
 			</h4>
 			<p>
@@ -451,13 +527,13 @@
 				</div>
 			</div>
 			</p>
-			<a name="package_declarations_3_3" ></a>
+			<a name="package_declarations_3_4" ></a>
 			<h4><p>
-			Using Classpath URIs to Import Existing EPackages
+			Using Classpath URIs to Import Existing EPackages - Deprecated
 			</p>
 			</h4>
 			<p>
-			We like to leverage Java's classpath mechanism, because is is well understood and can be configured easily
+			We usually like to leverage Java's classpath mechanism, because is is well understood and can be configured easily
 			with Eclipse. Furthermore it allows us to package libraries as jars. If you want to reference an existing
 			<em>*.ecore</em> file which is contained in a jar, you can make use of the 
 			classpath URI scheme we've introduced. For instance if you want to reference Java elements, you can use the JvmType Ecore model 
@@ -486,20 +562,6 @@
 			</p>
 			<p>
 			See the section on <a href="199a-jvmtypes.php" title="Go to &quot;Referring to Java Elements using JVM Types&quot;">Referring Java Types</a> for a full explanation of this useful feature.
-			</p>
-			<a name="package_declarations_3_4" ></a>
-			<h4><p>
-			Using Namespace URIs to Import Existing EPackages
-			</p>
-			</h4>
-			<p>
-			You can also use nsURI in order to import existing <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a>. Note that this is generally not
-			preferrable, because you'll have to have the corresponding EPackage installed in the workbench.
-			There's mainly just one exception, that is Ecore itself. So if you refer to Ecore it is best
-			to use its nsURI :
-			</p>
-			<p>
-			<span class="inlinecode"><span class="keyword">import</span>&nbsp;<span class="string">"http://www.eclipse.org/emf/2002/Ecore"</span>&nbsp;<span class="keyword">as</span>&nbsp;ecore</span>
 			</p>
 			<a name="package_declarations_4" ></a>
 			<h3>Ecore Model Aliases for EPackages</h3>
@@ -1049,13 +1111,7 @@
 			but not does not consume the following sequence without raising an error
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						0&nbsp;x&nbsp;8&nbsp;15&nbsp;<span class="comment">//&nbsp;wrong,&nbsp;as&nbsp;values&nbsp;may&nbsp;be&nbsp;interrupted&nbsp;by&nbsp;a&nbsp;name&nbsp;(ID)</span>
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode">0&nbsp;x&nbsp;8&nbsp;15&nbsp;<span class="comment">//&nbsp;wrong,&nbsp;as&nbsp;values&nbsp;may&nbsp;be&nbsp;interrupted&nbsp;by&nbsp;a&nbsp;name&nbsp;(ID)</span></span>
 			</p>
 			<a name="parser_rules_2_8" ></a>
 			<h4><p>
@@ -1554,8 +1610,8 @@
 				<div class="incode">
 					<p class="code">
 						Condition:&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;if&apos;</span>&nbsp;condition=Expression&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;then&apos;</span>&nbsp;then=Expression&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;if&apos;</span>&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;condition=BooleanExpression&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then=Expression&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(=&gt;<span class="string">&apos;else&apos;</span>&nbsp;else=Expression)?
 					</p>
 				</div>

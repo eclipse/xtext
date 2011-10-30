@@ -47,13 +47,13 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-		<a href="015-domainmodel-java.php">5 simple steps to your JVM language</a></div>
-		<ul style="display: none;" id="subToc_015-domainmodel-java.html">
-		<li id="015-domainmodel-java.html#JvmDomainmodel_7" ><a href="015-domainmodel-java.php#JvmDomainmodel_7" >Step One: Create A New Xtext Project</a></li>
-		<li id="015-domainmodel-java.html#JvmDomainmodel_8" ><a href="015-domainmodel-java.php#JvmDomainmodel_8" >Step Two: Write the Grammar</a></li>
-		<li id="015-domainmodel-java.html#JvmDomainmodel_9" ><a href="015-domainmodel-java.php#JvmDomainmodel_9" >Step Three: Generate Language Artifacts</a></li>
-		<li id="015-domainmodel-java.html#JvmDomainmodel_10" ><a href="015-domainmodel-java.php#JvmDomainmodel_10" >Step Four: Define the Mapping to JVM Concepts</a></li>
-		<li id="015-domainmodel-java.html#JvmDomainmodel_11" ><a href="015-domainmodel-java.php#JvmDomainmodel_11" >Step Five : Try the Editor!</a></li>
+		<a href="035-domainmodel-java.php">Five simple steps to your JVM language</a></div>
+		<ul style="display: none;" id="subToc_035-domainmodel-java.html">
+		<li id="035-domainmodel-java.html#JvmDomainmodel_7" ><a href="035-domainmodel-java.php#JvmDomainmodel_7" >Step One: Create A New Xtext Project</a></li>
+		<li id="035-domainmodel-java.html#JvmDomainmodel_8" ><a href="035-domainmodel-java.php#JvmDomainmodel_8" >Step Two: Write the Grammar</a></li>
+		<li id="035-domainmodel-java.html#JvmDomainmodel_9" ><a href="035-domainmodel-java.php#JvmDomainmodel_9" >Step Three: Generate Language Artifacts</a></li>
+		<li id="035-domainmodel-java.html#JvmDomainmodel_10" ><a href="035-domainmodel-java.php#JvmDomainmodel_10" >Step Four: Define the Mapping to JVM Concepts</a></li>
+		<li id="035-domainmodel-java.html#JvmDomainmodel_11" ><a href="035-domainmodel-java.php#JvmDomainmodel_11" >Step Five : Try the Editor!</a></li>
 		</ul>
 		</li>
 		<li class="partentry" >
@@ -130,10 +130,6 @@
 		<li id="199c-xbase-inferred-type.html" ><a href="199c-xbase-inferred-type.php" >Inferring a JVM Model</a></li>
 		<li id="199d-xbase-expressions.html" ><a href="199d-xbase-expressions.php" >Using Xbase Expressions</a></li>
 		<li id="199e-xbase-language-reference.html" ><a href="199e-xbase-language-reference.php" >Xbase Language Reference</a></li>
-		<li id="199f-xbase-language-reference-syntax.html" ><a href="199f-xbase-language-reference-syntax.php" >Lexical Syntax</a></li>
-		<li id="199g-xbase-language-reference-types.html" ><a href="199g-xbase-language-reference-types.php" >Types</a></li>
-		<li id="199h-xbase-language-reference-expressions.html" ><a href="199h-xbase-language-reference-expressions.php" >Expressions</a></li>
-		<li id="199i-xbase-language-reference-libraries.html" ><a href="199i-xbase-language-reference-libraries.php" >Extension Methods</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -233,25 +229,12 @@
 			Also you don't terminate a package declaration with a semicolon.
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">package</span>&nbsp;org.eclipse.xtext
-					</p>
-				</div>
-			</div>
-			
+			<span class="inlinecode"><span class="keyword">package</span>&nbsp;org.eclipse.xtext</span>
 			<div class="todo" >
 			Would be interesting to document how the following example translates to java
 			</div>
 			 
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">package</span>&nbsp;my.^public.^package
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode"><span class="keyword">package</span>&nbsp;my.^public.^package</span>
 			</p>
 			<a name="imports" ></a>
 			<h2>Imports</h2>
@@ -285,25 +268,13 @@
 			That is the following import declaration 
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;java.util.Collections.*
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode"><span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;java.util.Collections.*</span>
 			</p>
 			<p>
 			allows to use its methods for example like this :
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">new</span>&nbsp;Foo().singletonList()
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode"><span class="keyword">new</span>&nbsp;Foo().singletonList()</span>
 			</p>
 			<p>
 			Although this is supported it is generally much nicer to use <a href="02-Xtend_Classes_Functions.php#fields" title="Go to &quot;Fields&quot;">injected extensions</a>, because
@@ -366,13 +337,7 @@
 			injection container. Example:
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						@Inject&nbsp;MyService&nbsp;myService
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode">@Inject&nbsp;MyService&nbsp;myService</span>
 			</p>
 			<p>
 			This will translate to the following Java field: 
@@ -418,51 +383,27 @@
 			And if you have an instance of this class injected as extension like this:
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						@Inject&nbsp;<span class="keyword">extension</span>&nbsp;PersonExtensions
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode">@Inject&nbsp;<span class="keyword">extension</span>&nbsp;PersonExtensions</span>  
 			</p>
 			<p>
 			The method is being put on the member scope of Person. This is why you can skip the field's name. 
 			You can now write the following
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						myPerson.getFullName()
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode">myPerson.getFullName()</span>
 			</p>
 			<p>
 			which is translated to the Java code 
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						_personExtensions.getFullName(myPerson)
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode">_personExtensions.getFullName(myPerson)</span>
 			</p>
 			<p>
 			where <span class="inlinecode">_personExtensions</span> is the default name of the field. Of course the property shorthand 
 			is still available
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						myPerson.fullName
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode">myPerson.fullName</span>
 			</p>
 			<p>
 			The nice thing with using dependency injection in combination with the extension modifier as opposed 
