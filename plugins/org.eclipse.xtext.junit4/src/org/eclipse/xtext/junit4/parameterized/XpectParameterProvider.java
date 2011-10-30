@@ -173,7 +173,7 @@ public class XpectParameterProvider implements IParameterProvider {
 
 	protected static final Pattern WS = Pattern.compile("^[\\s]+");
 
-	protected static Pattern XPECT_PATTERN = Pattern.compile("(\\S)?XPECT(_CLASS|_IMPORT)?\\s*([a-zA-Z0-9]+)");
+	protected static Pattern XPECT_PATTERN = Pattern.compile("(\\S)?XPECT(_CLASS|_IMPORT)?\\s+([a-zA-Z0-9]*)");
 
 	public void collectParameters(Class<?> testClass, XtextResource resource, IParameterAcceptor acceptor) {
 		collectTestMethods(testClass, resource, acceptor);
