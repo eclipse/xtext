@@ -204,7 +204,73 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 		XtendClass clazz = clazz("class Foo { def dispatch void a(String x) {} def dispatch a(Object x) {return null} }");
 		helper.assertError(clazz.getMembers().get(1), Xtend2Package.Literals.XTEND_FUNCTION, INCOMPATIBLE_RETURN_TYPE);
 	}
+	
+	public void testReturnTypeCompatibility_07() throws Exception {
+		XtendClass clazz = clazz(
+				"class Foo { " +
+				"  def void a() {" +
+				"    val closure = [Integer i| return i]\n" + 
+				"    for (x : 1..100) closure.apply(x)" +
+				"  }" +
+				"}");
+		helper.assertNoErrors(clazz);
+	}
+	
+	public void testReturnTypeCompatibility_08() throws Exception {
+		XtendClass clazz = clazz(
+				"class Foo { " +
+				"  def void a() {" +
+				"    val closure = [Integer i| i]\n" + 
+				"    for (x : 1..100) closure.apply(x)" +
+				"  }" +
+				"}");
+		helper.assertNoErrors(clazz);
+	}
+	
+	public void testReturnTypeCompatibility_09() throws Exception {
+		XtendClass clazz = clazz(
+				"class Foo { " +
+				"  def void a() {" +
+				"    val (Integer)=>Integer closure = [Integer i| return i]\n" + 
+				"    for (x : 1..100) closure.apply(x)" +
+				"  }" +
+				"}");
+		helper.assertNoErrors(clazz);
+	}
 
+	public void testReturnTypeCompatibility_10() throws Exception {
+		XtendClass clazz = clazz(
+				"class Foo { " +
+				"  def a() {" +
+				"    val closure = [Integer i| return i]\n" + 
+				"    for (x : 1..100) closure.apply(x)" +
+				"  }" +
+				"}");
+		helper.assertNoErrors(clazz);
+	}
+	
+	public void testReturnTypeCompatibility_11() throws Exception {
+		XtendClass clazz = clazz(
+				"class Foo { " +
+				"  def a() {" +
+				"    val closure = [Integer i| i]\n" + 
+				"    for (x : 1..100) closure.apply(x)" +
+				"  }" +
+				"}");
+		helper.assertNoErrors(clazz);
+	}
+	
+	public void testReturnTypeCompatibility_12() throws Exception {
+		XtendClass clazz = clazz(
+				"class Foo { " +
+				"  def a() {" +
+				"    val (Integer)=>Integer closure = [Integer i| return i]\n" + 
+				"    for (x : 1..100) closure.apply(x)" +
+				"  }" +
+				"}");
+		helper.assertNoErrors(clazz);
+	}
+	
 	public void testAssignmentToFunctionParameter() throws Exception {
 		XtendFunction function = function("def void foo(int bar) { bar = 7 }");
 		helper.assertError(function, XbasePackage.Literals.XASSIGNMENT, ASSIGNMENT_TO_FINAL, "Assignment", "final",
