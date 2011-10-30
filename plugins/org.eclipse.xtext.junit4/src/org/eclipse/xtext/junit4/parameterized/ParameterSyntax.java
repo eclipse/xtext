@@ -17,7 +17,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface Parameter {
-	String syntax() default "";
+public @interface ParameterSyntax {
+	String value() default "";
 
 }

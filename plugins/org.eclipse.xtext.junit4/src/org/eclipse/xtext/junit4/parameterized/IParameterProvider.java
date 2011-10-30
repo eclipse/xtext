@@ -11,6 +11,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.Strings;
 
+import com.google.common.collect.Multimap;
 import com.google.inject.ImplementedBy;
 
 /**
@@ -46,7 +47,8 @@ public interface IParameterProvider {
 	public interface IParameterAcceptor {
 		void acceptImportURI(URI uri);
 
-		void acceptTest(String title, String method, Object[][] params, IExpectation expectation, boolean ignore);
+		void acceptTest(String title, String method, Multimap<String, Object> params, IExpectation expectation,
+				boolean ignore);
 
 		//		void acceptTestClass(Class<?> clazz);
 	}

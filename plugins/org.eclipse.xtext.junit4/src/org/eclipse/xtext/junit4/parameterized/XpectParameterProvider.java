@@ -9,10 +9,10 @@ package org.eclipse.xtext.junit4.parameterized;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.math.BigInteger;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -35,7 +35,9 @@ import org.eclipse.xtext.util.formallang.StringProduction.ElementType;
 import org.eclipse.xtext.util.formallang.StringProduction.ProdElement;
 import org.junit.Test;
 
-import com.google.common.collect.Maps;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Multimap;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -166,7 +168,8 @@ public class XpectParameterProvider implements IParameterProvider {
 		}
 	}
 
-	public final static String OFFSET = "offset";
+	public final static String PARAM_OFFSET = "offset";
+	public final static String PARAM_RESOURCE = "resource";
 
 	protected static final Pattern WS = Pattern.compile("^[\\s]+");
 
@@ -184,15 +187,13 @@ public class XpectParameterProvider implements IParameterProvider {
 		for (Method meth : testClass.getMethods()) {
 			if (Modifier.isPublic(meth.getModifiers()) && !Modifier.isStatic(meth.getModifiers())) {
 				Test annotation = meth.getAnnotation(Test.class);
-				if (annotation != null) {
-					Object[][] params = createParams(res, Collections.<String, String> emptyMap());
-					acceptor.acceptTest(null, meth.getName(), params, null, false);
-				}
+				if (annotation != null)
+					acceptor.acceptTest(null, meth.getName(), getDefaultParams(res, 0), null, false);
 			}
 		}
 	}
 
-	protected String convertValue(INode ctx, int offset, Token token, String value) {
+	protected Iterable<Object> convertValue(XtextResource res, INode ctx, int offset, Token token, String value) {
 		switch (token) {
 			case OFFSET:
 				int add = value.indexOf('!');
@@ -202,23 +203,37 @@ public class XpectParameterProvider implements IParameterProvider {
 					add = 0;
 				String text = ctx.getRootNode().getText();
 				int result = text.indexOf(value, offset);
-				if (result >= 0)
-					return String.valueOf(result + add);
-				else
+				if (result >= 0) {
+					int off = result + add;
+					return Lists.newArrayList(off, new Offset(res, off));
+				} else
 					throw new RuntimeException("OFFSET '" + value + "' not found");
-			case ID:
 			case INT:
+				List<Object> r = Lists.newArrayList();
+				try {
+					r.add(Integer.valueOf(value));
+				} catch (NumberFormatException e) {
+				}
+				try {
+					r.add(new BigInteger(value));
+				} catch (NumberFormatException e) {
+				}
+				r.add(value);
+				return r;
+			case ID:
 			case STRING:
 			case TEXT:
-				return value;
+				return Collections.<Object> singleton(value);
 		}
-		return value;
+		return Collections.<Object> singleton(value);
 	}
 
-	protected Object[][] createParams(XtextResource res, Map<String, String> params) {
-		Object[] params1 = new Object[] { res, params };
-		Object[] params2 = new Object[] { res };
-		return new Object[][] { params1, params2 };
+	protected Multimap<String, Object> getDefaultParams(XtextResource res, int offset) {
+		Multimap<String, Object> result = HashMultimap.create();
+		result.put(PARAM_RESOURCE, res);
+		result.put(PARAM_OFFSET, offset);
+		result.put(PARAM_OFFSET, new Offset(res, offset));
+		return result;
 	}
 
 	protected String getIndentation(INode ctx, int offset) {
@@ -254,9 +269,9 @@ public class XpectParameterProvider implements IParameterProvider {
 	protected String getParameterSyntax(Class<?> testClass, String methodName) {
 		try {
 			Method method = testClass.getMethod(methodName);
-			Parameter annotation = method.getAnnotation(Parameter.class);
+			ParameterSyntax annotation = method.getAnnotation(ParameterSyntax.class);
 			if (annotation != null)
-				return annotation.syntax();
+				return annotation.value();
 		} catch (SecurityException e) {
 			Exceptions.throwUncheckedException(e);
 		} catch (NoSuchMethodException e) {
@@ -330,17 +345,17 @@ public class XpectParameterProvider implements IParameterProvider {
 	protected int parseXpect(Class<?> testClass, XtextResource res, INode ctx, String text, String method, int offset,
 			IParameterAcceptor acceptor, boolean ignore) {
 		int newOffset;
-		Map<String, String> params = Maps.newLinkedHashMap();
+		Multimap<String, Object> params = HashMultimap.create();
 		Wrapper<Expectation> expectation = new Wrapper<Expectation>(null);
 		offset = skipWhitespace(text, offset);
-		if ((newOffset = parseXpectParams(testClass, ctx, method, text, offset, params)) >= 0)
+		if ((newOffset = parseXpectParams(testClass, res, ctx, method, text, offset, params)) >= 0)
 			offset = newOffset;
 		offset = skipWhitespace(text, offset);
 		if ((newOffset = parseXpectSLExpectation(ctx, text, offset, expectation)) >= 0)
 			offset = newOffset;
 		else if ((newOffset = parseXpectMLExpectation(ctx, text, offset, expectation)) >= 0)
 			offset = newOffset;
-		acceptor.acceptTest(null, method, createParams(res, params), expectation.get(), ignore);
+		acceptor.acceptTest(null, method, params, expectation.get(), ignore);
 		return offset;
 	}
 
@@ -377,10 +392,10 @@ public class XpectParameterProvider implements IParameterProvider {
 		return -1;
 	}
 
-	protected int parseXpectParams(Class<?> testClass, INode node, String methodName, final String text, int offset,
-			Map<String, String> params) {
+	protected int parseXpectParams(Class<?> testClass, XtextResource res, INode node, String methodName,
+			final String text, int offset, Multimap<String, Object> params) {
 		int semanticOffset = getOffsetOfNextSemanticNode(node);
-		params.put(OFFSET, String.valueOf(semanticOffset));
+		params.putAll(getDefaultParams(res, semanticOffset));
 		String paramSyntax = getParameterSyntax(testClass, methodName);
 		if (Strings.isEmpty(paramSyntax))
 			return -1;
@@ -421,9 +436,12 @@ public class XpectParameterProvider implements IParameterProvider {
 				});
 		if (trace != null && !trace.isEmpty()) {
 			for (BacktrackItem item : trace)
-				if (item.token != null && item.token.getName() != null)
-					params.put(item.token.getName(),
-							convertValue(node, semanticOffset, Token.valueOf(item.token.getValue()), item.value));
+				if (item.token != null && item.token.getName() != null) {
+					String key = item.token.getName();
+					params.removeAll(key);
+					params.putAll(key,
+							convertValue(res, node, semanticOffset, Token.valueOf(item.token.getValue()), item.value));
+				}
 			return trace.get(trace.size() - 1).offset;
 		}
 		return -1;
