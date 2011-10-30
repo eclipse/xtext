@@ -3,8 +3,7 @@ package org.eclipse.xtext.junit4.parameterized;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-
-import java.util.Map;
+import junit.framework.Assert;
 
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.junit4.InjectWith;
@@ -24,14 +23,20 @@ import com.google.inject.Inject;
 public class ParameterizedXtextRunnerTest
 {
 
+	@InjectParameter
 	private XtextResource resource;
-	private Map<String, String> params;
 
-	public ParameterizedXtextRunnerTest(XtextResource res, Map<String, String> params)
-	{
-		this.resource = res;
-		this.params = params;
-	}
+	@InjectParameter
+	private int from;
+
+	@InjectParameter
+	private int to;
+
+	@InjectParameter("from")
+	private Offset fromObj;
+
+	@InjectParameter("to")
+	private Offset toObj;
 
 	@Inject
 	IGrammarAccess injected;
@@ -62,7 +67,7 @@ public class ParameterizedXtextRunnerTest
 		assertEquals(2, xpectString);
 		assertEquals(1, xpectCsv);
 		assertEquals(1, xpectLines);
-		assertEquals(1, xpectSelect);
+		assertEquals(2, xpectSelect);
 	}
 
 	@Xpect
@@ -94,14 +99,23 @@ public class ParameterizedXtextRunnerTest
 	}
 
 	@XpectString
-	@Parameter(syntax = "'from' from=OFFSET 'to' to=OFFSET")
-	public String select()
+	@ParameterSyntax("'from' from=OFFSET 'to' to=OFFSET")
+	public String select1()
 	{
 		xpectSelect++;
 		String text = resource.getParseResult().getRootNode().getText();
-		int from = Integer.parseInt(params.get("from"));
-		int to = Integer.parseInt(params.get("to"));
 		return text.substring(from, to);
+	}
+
+	@XpectString
+	@ParameterSyntax("'from' from=OFFSET 'to' to=OFFSET")
+	public String select2()
+	{
+		xpectSelect++;
+		Assert.assertNotNull(fromObj);
+		Assert.assertNotNull(toObj);
+		String text = resource.getParseResult().getRootNode().getText();
+		return text.substring(fromObj.getOffset(), toObj.getOffset());
 	}
 
 }
