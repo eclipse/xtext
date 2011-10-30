@@ -634,7 +634,8 @@ public class AbstractSemanticSequencer extends GeneratedFile {
         _builder.append("superSequencer.createSequence(context, ");
         _builder.append(cast, "	");
         _builder.append("semanticObject);");
-        _builder.newLineIfNotEmpty();} else {
+        _builder.newLineIfNotEmpty();
+      } else {
         boolean _canGenerate = this.sequencerUtil.canGenerate(c);
         if (_canGenerate) {
           _builder.append("\t");
@@ -744,7 +745,8 @@ public class AbstractSemanticSequencer extends GeneratedFile {
           }
           _builder.append("\t");
           _builder.append("feeder.finish();");
-          _builder.newLine();} else {
+          _builder.newLine();
+        } else {
           _builder.append("\t");
           _builder.append("genericSequencer.createSequence(context, ");
           _builder.append(cast, "	");

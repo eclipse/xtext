@@ -2,7 +2,7 @@ package org.eclipse.xtext.xtend2.tests.smoke
 
 class Case_3 {
 	def testReturnExpression_06() {
-	    val closure = [Integer i| return i]
+	    val (Integer) => Integer closure = [Integer i| return i]
 	    for (x : 1..100) closure.apply(x)
 	}
 	def testReturnExpression_07() {
