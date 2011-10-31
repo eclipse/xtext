@@ -345,7 +345,13 @@
 			</div>
 			
 			and add 
-			<span class="inlinecode">fragment&nbsp;=&nbsp;outline.OutlineTreeProviderFragment&nbsp;{}</span>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						fragment&nbsp;=&nbsp;outline.OutlineTreeProviderFragment&nbsp;{}
+					</p>
+				</div>
+			</div>
 			</p>
 			<p>
 			After generating a new class named <em>MyDslOutlineTreeProvider</em> is generated. The API changed completely.
@@ -386,7 +392,14 @@
 			in the <em>MyDslUIModule</em> from
 			</p>
 			<p>
-			<span class="inlinecode"><span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IAutoEditStrategy&gt;&nbsp;bindIAutoEditStrategy()</span> 
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IAutoEditStrategy&gt;&nbsp;bindIAutoEditStrategy()
+					</p>
+				</div>
+			</div>
+			 
 			to 
 			<div class="literallayout">
 				<div class="incode">
@@ -425,7 +438,14 @@
 			  	    methods to resolve elements. In
 			  		Xtext 2.0 these methods aren't static anymore. For that reason you could create an instance of this class or let 
 			  		Guice do the job for you: 
-			  		<span class="inlinecode">@Inject&nbsp;<span class="keyword">private</span>&nbsp;EObjectAtOffsetHelper&nbsp;eObjectAtOffsetHelper;</span>
+			  		<div class="literallayout">
+			  	<div class="incode">
+			  		<p class="code">
+			  			@Inject&nbsp;<span class="keyword">private</span>&nbsp;EObjectAtOffsetHelper&nbsp;eObjectAtOffsetHelper;
+			  		</p>
+			  	</div>
+			  </div>
+			  
 			  </li>
 			  <li>The method <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/EObjectAtOffsetHelper.html" title="org.eclipse.xtext.resource.EObjectAtOffsetHelper">EObjectAtOffsetHelper.resolveElementAt(XtextResource, int, TextLocation)</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/EObjectAtOffsetHelper.java" title="View Source Code" >(src)</a> 
 			  		changed to <span class="inlinecode">resolveElementAt(XtextResource,&nbsp;<span class="keyword">int</span>)</span>.

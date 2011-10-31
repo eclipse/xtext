@@ -226,13 +226,25 @@
 		If the last argument of a method call is a closure, it can be appended to the method call. Thus,
 		</p>
 		<p>
-		<span class="inlinecode">foo(42)&nbsp;[String&nbsp;s&nbsp;|&nbsp;s.toUpperCase]</span>
+		<div class="literallayout">
+			<div class="incode">
+				<p class="code">
+					foo(42)&nbsp;[String&nbsp;s&nbsp;|&nbsp;s.toUpperCase]
+				</p>
+			</div>
+		</div>
 		</p>
 		<p>
 		will call a Java method with the signature
 		</p>
 		<p>
-		<span class="inlinecode"><span class="keyword">void</span>&nbsp;foo(<span class="keyword">int</span>,&nbsp;Function1&lt;String,&nbsp;String&gt;)</span> 
+		<div class="literallayout">
+			<div class="incode">
+				<p class="code">
+					<span class="keyword">void</span>&nbsp;foo(<span class="keyword">int</span>,&nbsp;Function1&lt;String,&nbsp;String&gt;)
+				</p>
+			</div>
+		</div>
 		</p>
 		<p>
 		Used in combination with the <a href="199h-xbase-language-reference-expressions.php#Xbase_Expressions_implicit_parameter" title="Go to &quot;Implicit Parameter it&quot;">implicit parameter name in closures</a>

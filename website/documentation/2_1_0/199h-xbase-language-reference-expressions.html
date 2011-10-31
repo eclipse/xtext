@@ -476,14 +476,26 @@
 		Given the expression 
 		</p>
 		<p>
-		<span class="inlinecode">myObj.myProperty&nbsp;=&nbsp;<span class="string">"foo"</span></span>
+		<div class="literallayout">
+			<div class="incode">
+				<p class="code">
+					myObj.myProperty&nbsp;=&nbsp;<span class="string">"foo"</span>
+				</p>
+			</div>
+		</div>
 		</p>
 		<p>
 		The compiler first looks up whether there is an accessible Java Field called <span class="inlinecode">myProperty</span> on the type of <span class="inlinecode">myObj</span>. If there is one it translates to
 		the following Java expression :
 		</p>
 		<p>
-		<span class="inlinecode">myObj.myProperty&nbsp;=&nbsp;<span class="string">"foo"</span>;</span>
+		<div class="literallayout">
+			<div class="incode">
+				<p class="code">
+					myObj.myProperty&nbsp;=&nbsp;<span class="string">"foo"</span>;
+				</p>
+			</div>
+		</div>
 		</p>
 		<p>
 		Remember in Xbase everything is an expression and has to return something. In the case of simple assignments the return value is the value returned from the corresponding
@@ -496,7 +508,13 @@
 		As a result the compiler translates to :
 		</p>
 		<p>
-		<span class="inlinecode">myObj.setMyProperty(<span class="string">"foo"</span>)</span>
+		<div class="literallayout">
+			<div class="incode">
+				<p class="code">
+					myObj.setMyProperty(<span class="string">"foo"</span>)
+				</p>
+			</div>
+		</div>
 		</p>
 		<a name="Xbase_Expressions_FeatureCalls" ></a>
 		<h3>Feature Calls</h3>
@@ -532,7 +550,13 @@
 		That is, for the following expression
 		</p>
 		<p>
-		<span class="inlinecode">myObj.myProperty</span>
+		<div class="literallayout">
+			<div class="incode">
+				<p class="code">
+					myObj.myProperty
+				</p>
+			</div>
+		</div>
 		</p>
 		<p>
 		the compiler first looks for an accessible field in the type of <span class="inlinecode">myObj</span>. If no such field exists it looks for a method called <span class="inlinecode">myProperty()</span> before it looks 
@@ -553,7 +577,14 @@
 		</div>
 		
 		is a valid expression
-		<span class="inlinecode">myProperty</span>
+		<div class="literallayout">
+			<div class="incode">
+				<p class="code">
+					myProperty
+				</p>
+			</div>
+		</div>
+		
 		is valid as well and is equivalent, as long as there is no local variable 'myProperty' on the scope,
 		which would have higher precedence. 
 		</p>
@@ -576,13 +607,25 @@
 		Instead of writing 
 		</p>
 		<p>
-		<span class="inlinecode"><span class="keyword">if</span>&nbsp;(&nbsp;myRef&nbsp;!=&nbsp;<span class="keyword">null</span>&nbsp;)&nbsp;myRef.doStuff()</span>
+		<div class="literallayout">
+			<div class="incode">
+				<p class="code">
+					<span class="keyword">if</span>&nbsp;(&nbsp;myRef&nbsp;!=&nbsp;<span class="keyword">null</span>&nbsp;)&nbsp;myRef.doStuff()
+				</p>
+			</div>
+		</div>
 		</p>
 		<p>
 		one can write
 		</p>
 		<p>
-		<span class="inlinecode">myRef?.doStuff()</span>
+		<div class="literallayout">
+			<div class="incode">
+				<p class="code">
+					myRef?.doStuff()
+				</p>
+			</div>
+		</div>
 		</p>
 		<a name="Xbase_Expressions_ConstructorCall" ></a>
 		<h3>Constructor Call</h3>
@@ -597,10 +640,24 @@
 		<p>
 		<ul>
 		  <li>
-		  		<span class="inlinecode"><span class="keyword">new</span>&nbsp;String()</span>
+		  		<div class="literallayout">
+		  	<div class="incode">
+		  		<p class="code">
+		  			<span class="keyword">new</span>&nbsp;String()
+		  		</p>
+		  	</div>
+		  </div>
+		  
 		  </li>
 		  <li>
-		  		<span class="inlinecode"><span class="keyword">new</span>&nbsp;java.util.ArrayList&lt;java.math.BigDecimal&gt;()</span>
+		  		<div class="literallayout">
+		  	<div class="incode">
+		  		<p class="code">
+		  			<span class="keyword">new</span>&nbsp;java.util.ArrayList&lt;java.math.BigDecimal&gt;()
+		  		</p>
+		  	</div>
+		  </div>
+		  
 		  </li>
 		</ul>
 		</p>
@@ -648,19 +705,37 @@
 		That is you can write
 		</p>
 		<p>
-		<span class="inlinecode">myList.find(e|e.name==<span class="keyword">null</span>)</span>
+		<div class="literallayout">
+			<div class="incode">
+				<p class="code">
+					myList.find(e|e.name==<span class="keyword">null</span>)
+				</p>
+			</div>
+		</div>
 		</p>
 		<p>
 		instead of
 		</p>
 		<p>
-		<span class="inlinecode">myList.find([e|e.name==<span class="keyword">null</span>])</span>
+		<div class="literallayout">
+			<div class="incode">
+				<p class="code">
+					myList.find([e|e.name==<span class="keyword">null</span>])
+				</p>
+			</div>
+		</div>
 		</p>
 		<p>
 		But in all other cases the square brackets are mandatory:
 		</p>
 		<p>
-		<span class="inlinecode"><span class="keyword">val</span>&nbsp;func&nbsp;=&nbsp;[String&nbsp;s|&nbsp;s.length&gt;3]</span>
+		<div class="literallayout">
+			<div class="incode">
+				<p class="code">
+					<span class="keyword">val</span>&nbsp;func&nbsp;=&nbsp;[String&nbsp;s|&nbsp;s.length&gt;3]
+				</p>
+			</div>
+		</div>
 		</p>
 		<a name="Xbase_Expressions_ClosuresTypeInference" ></a>
 		<h4><p>
@@ -674,13 +749,32 @@
 		</p>
 		<p>
 		For instance, given the following Java method signature:
-		<span class="inlinecode"><span class="keyword">public</span>&nbsp;T&nbsp;&lt;T&gt;getFirst(List&lt;T&gt;&nbsp;list,&nbsp;Function0&lt;T,Boolean&gt;&nbsp;predicate)</span> 
+		<div class="literallayout">
+			<div class="incode">
+				<p class="code">
+					<span class="keyword">public</span>&nbsp;T&nbsp;&lt;T&gt;getFirst(List&lt;T&gt;&nbsp;list,&nbsp;Function0&lt;T,Boolean&gt;&nbsp;predicate)
+				</p>
+			</div>
+		</div>
 		</p>
 		<p>
 		the type of the parameter can be inferred. Which allows users to write:
-		<span class="inlinecode">arrayList(&nbsp;<span class="string">"Foo"</span>,&nbsp;<span class="string">"Bar"</span>&nbsp;).findFirst(&nbsp;e&nbsp;|&nbsp;e&nbsp;==&nbsp;<span class="string">"Bar"</span>&nbsp;)</span>
+		<div class="literallayout">
+			<div class="incode">
+				<p class="code">
+					arrayList(&nbsp;<span class="string">"Foo"</span>,&nbsp;<span class="string">"Bar"</span>&nbsp;).findFirst(&nbsp;e&nbsp;|&nbsp;e&nbsp;==&nbsp;<span class="string">"Bar"</span>&nbsp;)
+				</p>
+			</div>
+		</div>
+		
 		instead of 
-		<span class="inlinecode">arrayList(&nbsp;<span class="string">"Foo"</span>,&nbsp;<span class="string">"Bar"</span>&nbsp;).findFirst(&nbsp;String&nbsp;e&nbsp;|&nbsp;e&nbsp;==&nbsp;<span class="string">"Bar"</span>&nbsp;)</span>
+		<div class="literallayout">
+			<div class="incode">
+				<p class="code">
+					arrayList(&nbsp;<span class="string">"Foo"</span>,&nbsp;<span class="string">"Bar"</span>&nbsp;).findFirst(&nbsp;String&nbsp;e&nbsp;|&nbsp;e&nbsp;==&nbsp;<span class="string">"Bar"</span>&nbsp;)
+				</p>
+			</div>
+		</div>
 		</p>
 		<a name="Xbase_Expressions_FunctionMapping" ></a>
 		<h4><p>
@@ -793,13 +887,25 @@
 		That means 
 		</p>
 		<p>
-		<span class="inlinecode"><span class="keyword">if</span>&nbsp;(foo)&nbsp;x</span>
+		<div class="literallayout">
+			<div class="incode">
+				<p class="code">
+					<span class="keyword">if</span>&nbsp;(foo)&nbsp;x
+				</p>
+			</div>
+		</div>
 		</p>
 		<p>
 		is the a short hand for
 		</p>
 		<p>
-		<span class="inlinecode"><span class="keyword">if</span>&nbsp;(foo)&nbsp;x&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">null</span></span>
+		<div class="literallayout">
+			<div class="incode">
+				<p class="code">
+					<span class="keyword">if</span>&nbsp;(foo)&nbsp;x&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">null</span>
+				</p>
+			</div>
+		</div>
 		</p>
 		<a name="Xbase_Expressions_IfTypeInference" ></a>
 		<h4><p>
@@ -1026,12 +1132,25 @@
 		The return type of a variable declaration expression is always <span class="inlinecode">void</span>. 
 		The type of the variable itself can either be explicitly declared or be inferred from the right hand side expression.
 		Here is an example for an explicitly declared type:
-		<span class="inlinecode"><span class="keyword">var</span>&nbsp;List&lt;String&gt;&nbsp;msg&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;String&gt;();</span>
+		<div class="literallayout">
+			<div class="incode">
+				<p class="code">
+					<span class="keyword">var</span>&nbsp;List&lt;String&gt;&nbsp;msg&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;String&gt;();
+				</p>
+			</div>
+		</div>
+		
 		In such cases, the right hand expression's type must <a href="199g-xbase-language-reference-types.php#Xbase_Types_ConformanceRules" title="Go to &quot;Conformance and Conversion&quot;">conform</a> to the type on the left hand side. 
 		</p>
 		<p>
 		Alternatively the type can be left out and will be inferred from the initialization expression:  
-		<span class="inlinecode"><span class="keyword">var</span>&nbsp;msg&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;String&gt;();&nbsp;<span class="comment">//&nbsp;-&gt;&nbsp;type&nbsp;ArrayList&lt;String&gt;</span></span>
+		<div class="literallayout">
+			<div class="incode">
+				<p class="code">
+					<span class="keyword">var</span>&nbsp;msg&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;String&gt;();&nbsp;<span class="comment">//&nbsp;-&gt;&nbsp;type&nbsp;ArrayList&lt;String&gt;</span>
+				</p>
+			</div>
+		</div>
 		</p>
 		<a name="Xbase_Expressions_Blocks" ></a>
 		<h3>Blocks</h3>
@@ -1240,7 +1359,14 @@
 		  	</div>
 		  </div>
 		  </li>
-		  <li><span class="inlinecode"><span class="keyword">do</span>&nbsp;doSideEffect(<span class="string">"foo"</span>)&nbsp;<span class="keyword">while</span>&nbsp;((i=i+1)&lt;max)</span></li>
+		  <li><div class="literallayout">
+		  	<div class="incode">
+		  		<p class="code">
+		  			<span class="keyword">do</span>&nbsp;doSideEffect(<span class="string">"foo"</span>)&nbsp;<span class="keyword">while</span>&nbsp;((i=i+1)&lt;max)
+		  		</p>
+		  	</div>
+		  </div>
+		  </li>
 		</ul>
 		</p>
 		<a name="Xbase_Expressions_Return" ></a>

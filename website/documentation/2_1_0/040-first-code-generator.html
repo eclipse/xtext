@@ -291,7 +291,14 @@
 			  		that is available for each language. Fortunately, Xtend allows to reuse that one easily. We simply
 			  		inject the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/IQualifiedNameProvider.html" title="org.eclipse.xtext.naming.IQualifiedNameProvider">IQualifiedNameProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java" title="View Source Code" >(src)</a> into the generator.
 			  		
-			  		<span class="inlinecode">@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IQualifiedNameProvider&nbsp;nameProvider</span>
+			  		<div class="literallayout">
+			  	<div class="incode">
+			  		<p class="code">
+			  			@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IQualifiedNameProvider&nbsp;nameProvider
+			  		</p>
+			  	</div>
+			  </div>
+			  
 			  		
 			  		This allows to ask for the name of an entity. It is straight forward to convert the name into
 			  		a file name:
