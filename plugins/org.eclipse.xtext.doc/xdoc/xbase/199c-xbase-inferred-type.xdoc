@@ -16,96 +16,53 @@ entity Person {
 i.e. use entities instead of Java types or even mix Java types as codeRef[java.util.List] with entities such as e[Person].
 One way to achieve this is to let your concepts inherit from a corresponding JVM type, e.g. let e[Entity]
 inherit from codeRef[org.eclipse.xtext.common.types.JvmGenericType]. But this would result in a lot of 
-accidentally inherited properties in your domain model. In Xbase there is an alternative: You can define how
+accidentally inherited properties in your domain model. In Xbase there is an alternative: You can simply define how
 to derive a JVM model from your model. This e[inferred JVM model] is the representation of your concepts
 in the typesystem of Xbase.  
 
 The main component for the inferred JVM model is the codeRef[org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer].
-It has a single method that gets a model element passed in and returns a list of 
+It has a single method that takes the root model element as an argument and produces a number of 
 codeRef[org.eclipse.xtext.common.types.JvmGenericType][JvmGenericTypes]. As Xbase cannot guess how you
 would like to map your concepts to JVM elements, you have to implement this component yourself. This
-usually boils down to use an injected codeRef[org.eclipse.xtext.common.types.TypesFactory] to create
-a hierarchy of JVM elements, initialize that with values from the input model, and eventually use an injected
-codeRef[org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator] to associate the model elements with the
-JVM elements. As this kind of transformation can be elegantly implemented using polymorphic dispatch
-functions and extension methods, it is a good choice to write the 
-codeRef[org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer] in Xtend.
+usually boils down to using an injected codeRef[org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder] to create
+a hierarchy of JVM elements. The codeRef[org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder][builder] helps
+to initialize the produced types with sensible default and encapsulates the logic that associates the
+source elements with the derived JVM concepts. As this kind of transformation can be elegantly implemented 
+using polymorphic dispatch functions and extension methods, it is a good choice to write the 
+codeRef[org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer] in Xtend. It becomes even simpler if you
+inherit from the codeRef[org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer] which traverses the
+input model and dispatches to its contents until you decide which elements to handle. 
 
-For our domain model example, we call a recursive polymorphic dispatch function e[transform] to traverse
-the containment hierarchy of the source model and generate JVM elements on the way. We transform each
-e[Entity] to a codeRef[org.eclipse.xtext.common.types.JvmGenericType] that holds a 
-codeRef[org.eclipse.xtext.common.types.JvmOperation] for each e[Operation] and a 
-codeRef[org.eclipse.xtext.common.types.JvmField] plus access methods for each e[Property]. Whenever
-we have to copy a subtree, e.g. for setting the supertype of the codeRef[org.eclipse.xtext.common.types.JvmGenericType],
-we use codeRef[org.eclipse.xtext.EcoreUtil2] e[.cloneWithProxies()] to avoid eager resolution of referenced
-types. The resulting e[DomainmodelJvmModelInferrer] looks like this:
+For our domain model example, we implement a polymorphic dispatch function e[infer] for
+e[Entities] to transform them into a codeRef[org.eclipse.xtext.common.types.JvmGenericType]. The produced
+type holds a codeRef[org.eclipse.xtext.common.types.JvmOperation] for each e[Operation] and a 
+codeRef[org.eclipse.xtext.common.types.JvmField] plus accessors for each e[Property]. The resulting 
+e[DomainmodelJvmModelInferrer] looks like this:
 
 code[Xtend2][
-class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
+class DomainModelJvmModelInferrer extends AbstractModelInferrer {
 
-   @Inject TypesFactory typesFactory
-   
-   @Inject extension IJvmModelAssociator jvmModelAssociator
-       
-   override List<JvmDeclaredType> inferJvmModel(EObject sourceObject) {
-       sourceObject.disassociate
-       transform( sourceObject ).toList
-   }
-   
-   def dispatch Iterable<JvmDeclaredType> transform(
-   		Domainmodel model) {
-       model.elements.map(e | transform(e)).flatten
-   }
+  /**
+   * a builder API to programmatically create Jvm elements 
+   * in readable way.
+   */
+  @Inject extension JvmTypesBuilder
+  
+  @Inject extension IQualifiedNameProvider
+  
+  def dispatch void infer(Entity element, 
+                IAcceptor<JvmDeclaredType> acceptor, 
+                boolean isPrelinkingPhase) {
     
-   def dispatch Iterable<JvmDeclaredType> transform(
-   		PackageDeclaration packageDecl) {
-       packageDecl.elements.map(e | transform(e)).flatten
-   }
-
-   def dispatch Iterable<JvmDeclaredType> transform(Entity entity) {
-       val jvmClass = typesFactory.createJvmGenericType 
-       jvmClass.simpleName = entity.name
-       jvmClass.packageName = 
-       		(entity.eContainer as PackageDeclaration).name
-       entity.associatePrimary(jvmClass)
-       jvmClass.visibility = JvmVisibility::PUBLIC
-       if (entity.superType != null)
-           jvmClass.superTypes += cloneWithProxies(entity.superType)
-       for(f : entity.features) {
-           transform(f, jvmClass)
-       } 
-       newArrayList(jvmClass as JvmDeclaredType)     
-   }
-   
-   def dispatch Iterable<JvmDeclaredType> transform(Import i) {
-       emptyList
-   }
-   
-   def void transform(Feature feature, JvmGenericType type) {
-       val jvmField = typesFactory.createJvmField
-       jvmField.simpleName = feature.name
-       jvmField.type = cloneWithProxies(feature.type)
-       jvmField.visibility = JvmVisibility::PRIVATE
-       type.members += jvmField
-       feature.associatePrimary(jvmField)
-       
-       val jvmGetter = typesFactory.createJvmOperation
-       jvmGetter.simpleName = "get" + feature.name.toFirstUpper
-       jvmGetter.returnType = cloneWithProxies(feature.type)
-       jvmGetter.visibility = JvmVisibility::PUBLIC
-       type.members += jvmGetter
-       feature.associatePrimary(jvmGetter)
-       
-       val jvmSetter = typesFactory.createJvmOperation
-       jvmSetter.simpleName = "set" + feature.name.toFirstUpper
-       val parameter = typesFactory.createJvmFormalParameter
-       parameter.name = feature.name.toFirstUpper
-       parameter.parameterType = cloneWithProxies(feature.type)
-       jvmSetter.visibility = JvmVisibility::PUBLIC
-       jvmSetter.parameters += parameter
-       type.members += jvmSetter
-       feature.associatePrimary(jvmSetter)
-   }
+    acceptor.accept(element.toClass(element.fullyQualifiedName) \[
+      documentation = element.documentation
+      for (feature : element.features) {
+        members += feature.toField(feature.name, feature.type)
+        members += feature.toSetter(feature.name, feature.type)
+        members += feature.toGetter(feature.name, feature.type)
+      }
+    \])
+  }
 }
 ]
 
@@ -118,54 +75,8 @@ as the corresponding Java type.
 The Xbase framework will automatically switch between the JVM element or the DSL element when needed, e.g. when 
 following hyperlinks. The component allowing to navigate between the source model and the JVM model is
 called codeRef[org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations], the read-only antagonist of the
-codeRef[org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator].
+codeRef[org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator] that is used by the 
+codeRef[org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder].
 
 By default, the inferred model is ref:global_scopes[indexed], so it can be cross referenced from other
-models.   
-link[https://bugs.eclipse.org/bugs/show_bug.cgi?id=350812][In Xtext 2.0.0] you still have to make sure the qualified
-names are computed correctly by implementing and binding an appropriate codeRef[org.eclipse.xtext.naming.IQualifiedNameProvider]:
-
-code[Java][
-public class DomainmodelQualifiedNameProvider 
-	extends DefaultDeclarativeQualifiedNameProvider {
-
-	@Inject
-	private IQualifiedNameConverter converter;
-	
-	QualifiedName qualifiedName(JvmGenericType type) {
-		return converter.toQualifiedName(type.getQualifiedName());
-	}
-}
-]
-
-section2[Generation Parameters For Inferred JVM Types]
-
-Several MWE generator fragments have additional properties for the ref:xbaseInferredType[JVM model inference]:
-table[
-	tr[
-		td[Fragment]
-		td[Property]
-		td[Purpose]
-		td[Default]
-	]
-	tr[
-		td[codeRef[org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment]]
-		td[e[useInferredJvmModel]]
-		td[Generate a codeRef[org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer] stub and hooks for an inferred JVM model]
-		td[e[true]]
-	]
-	tr[
-		td[codeRef[org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment]]
-		td[e[generateXtendInferrer]]
-		td[Generate the codeRef[org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer] stub in Xtend instead of Java]
-		td[e[true]]
-	]
-	tr[
-		td[codeRef[org.eclipse.xtext.ui.generator.refactoring.RefactorElementNameFragment]]
-		td[e[useJdtRefactoring]]
-		td[Always trigger JDT refactoring and register element rename refactoring as a participant thereof]
-		td[e[false]]
-	]
-]
-
-
+models.

@@ -62,17 +62,17 @@ codeRef[org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters]
 provides a comprehensive set of reusable filters that can be easily combined to reduce the list of proposals
 to a smaller number of valid entries.
 
-code[Java][
-import static org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters; 
-
-  // ..
-  proposalProvider.createSubTypeProposals(
-    superType, factory, context,
-    MyDslPackage.Literals.TYPE__MAPPED_TO,
-    TypeMatchFilters.and(
-      TypeMatchFilters.not(
-        TypeMatchFilters.canInstantiate()
-      ),
-      TypeMatchFilters.isPublic()
-    ), acceptor);
-]
+%%code[Java][
+%%import static org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters; 
+%%
+%%  // ..
+%%  proposalProvider.createSubTypeProposals(
+%%    superType, factory, context,
+%%    MyDslPackage.Literals.TYPE__MAPPED_TO,
+%%    TypeMatchFilters.and(
+%%      TypeMatchFilters.not(
+%%        TypeMatchFilters.canInstantiate()
+%%      ),
+%%      TypeMatchFilters.isPublic()
+%%    ), acceptor);
+%%]

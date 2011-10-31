@@ -314,7 +314,7 @@ class DomainModelJvmModelInferrer extends AbstractModelInferrer {
 
   /**
    * a builder API to programmatically create Jvm elements 
-   * in readble way.
+   * in readable way.
    */
   @Inject extension JvmTypesBuilder
   
