@@ -45,7 +45,6 @@ class Xtend06_Closures {
 	 * it isn't the only argument of a function call.
 	 */
 	def closures_02(List<Person> persons) {
-		// sort by name 
 		Collections::sort(persons, [ a, b | a.name.compareTo( b.name ) ])
 	}
 	
