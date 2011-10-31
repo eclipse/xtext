@@ -8,6 +8,9 @@ import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue
 import org.eclipse.xtext.common.types.JvmAnnotationReference
 import org.eclipse.xtext.common.types.JvmAnnotationValue
 import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue
+import org.eclipse.xtext.common.types.JvmConstructor
+import org.eclipse.xtext.common.types.JvmCustomAnnotationValue
+import org.eclipse.xtext.common.types.JvmExecutable
 import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.common.types.JvmGenericType
@@ -16,22 +19,20 @@ import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmShortAnnotationValue
 import org.eclipse.xtext.common.types.JvmStringAnnotationValue
 import org.eclipse.xtext.common.types.JvmTypeAnnotationValue
+import org.eclipse.xtext.common.types.JvmTypeParameter
+import org.eclipse.xtext.common.types.JvmTypeReference
+import org.eclipse.xtext.common.types.JvmUpperBound
 import org.eclipse.xtext.common.types.JvmVisibility
+import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.IGenerator
-import org.eclipse.xtext.common.types.JvmConstructor
-import org.eclipse.xtext.common.types.JvmExecutable
-import org.eclipse.xtext.common.types.JvmTypeParameter
-import org.eclipse.xtext.common.types.JvmUpperBound
-import org.eclipse.xtext.xbase.typing.ITypeProvider
-import org.eclipse.xtext.common.types.util.TypeReferences
-import org.eclipse.xtext.common.types.JvmTypeReference
-import org.eclipse.xtext.common.types.JvmCustomAnnotationValue
 import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
+import org.eclipse.xtext.xbase.typing.ITypeProvider
 
 class JvmModelGenerator implements IGenerator {
 	
-	@Inject extension org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
+	@Inject extension ILogicalContainerProvider
 	@Inject XbaseCompiler compiler
 	@Inject extension ITypeProvider 
 	@Inject extension TypeReferences 
