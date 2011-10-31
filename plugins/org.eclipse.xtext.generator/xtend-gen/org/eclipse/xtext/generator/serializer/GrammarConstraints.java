@@ -128,7 +128,8 @@ public class GrammarConstraints extends GeneratedFile {
             String _name_8 = _type_1.getName();
             _builder.append(_name_8, "	");
             _builder.append("};");
-            _builder.newLineIfNotEmpty();} else {
+            _builder.newLineIfNotEmpty();
+          } else {
             _builder.append("\t");
             IConstraintElement _body_1 = constraint_1.getBody();
             _builder.append(_body_1, "	");

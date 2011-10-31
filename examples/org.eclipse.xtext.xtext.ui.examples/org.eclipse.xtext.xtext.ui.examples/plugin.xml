@@ -121,7 +121,7 @@
 	</extension>
 	<extension point="org.eclipse.emf.common.ui.examples">
 	  <example wizardID="org.eclipse.xtext.examples.NewXbaseTutorial" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="org.eclipse.xtext.example.xbase.tutorial" contentURI="contents/org.eclipse.xtext.example.xbase.tutorial.zip" description="A hands-on tutorial to learn the Xbase expression language."/>
+		 <projectDescriptor name="org.eclipse.xtext.example.xbase.tutorial" contentURI="contents/xbase.tutorial.zip" description="A hands-on tutorial to learn the Xbase expression language."/>
 	  </example>
    </extension>
 </plugin>

@@ -1,13 +1,13 @@
 section:xbaseJavaReferences[Referring to Java Types Using Xbase]
 
-While the JVM types approach from the last chapter allow to refer to any Java element, it has its drawbacks
-when it comes to generics. Usually, a type reference in Java can have type arguments which can also include
+While the JVM types approach from the previous chapter allows to refer to any Java element, it is quite
+limited when it comes to generics. Usually, a type reference in Java can have type arguments which can also include
 wildcards, upper and lower bounds etc. A simple cross-reference using a qualified name is not enough
 to express neither the syntax nor the structure of such a type reference. 
 
 Xbase offers a parser rule e[JvmTypeReference] which supports the full syntax of a Java type reference
-and instantiates an JVM element of type codeRef[org.eclipse.xtext.common.types.JvmTypeReference]. So
-lets start by letting our language inherit from Xbase
+and instantiates a JVM element of type codeRef[org.eclipse.xtext.common.types.JvmTypeReference]. So
+let us start by inheriting from Xbase
 
 code[Xtext][
 grammar org.eclipse.xtext.example.Domainmodel 
@@ -15,7 +15,7 @@ grammar org.eclipse.xtext.example.Domainmodel
 ]
 
 As we can express all kinds of Java type references directly now, the indirection for e[DataTypes] 
-no longer makes sense. Let us turn all cross-references to e[Types] to calls to the e[JvmTypeReferences]
+is no longer necessary. To eliminate it, all cross-references to e[Types] have to be replaced by calls to the e[JvmTypeReferences]
 rule. The rules e[DataType], e[Type], and e[QualifiedName] become obsolete (the latter is already defined
 in Xbase), and the e[Type] in e[AbstractEntity] must be changed to e[Entity]. The whole grammar now reads
 as
@@ -64,13 +64,16 @@ Feature:
 
 As we changed the grammar, we have to regenerate the language now.
 
-Being able to parse a Java type reference is good, but we also have to write them back to their string
+Being able to parse a Java type reference is already nice, but we also have to write them back to their string
 representation when we generate Java code. Into the bargain, a generic type reference with fully qualified
 class names can become a bit bulky. The codeRef[org.eclipse.xtext.xbase.compiler.ImportManager] shortens
-fully qualified names, keeps track of imported namespaces, avoids name collisions, and serializes
-codeRef[org.eclipse.xtext.common.types.JvmTypeReference][JvmTypeReferences].
+fully qualified names, keeps track of imported namespaces, avoids name collisions, and helps to serialize
+codeRef[org.eclipse.xtext.common.types.JvmTypeReference][JvmTypeReferences] by means of the 
+codeRef[org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer]. This utility encapsulates how type
+references may be serialized depending on the concrete context in the output.
 
-The following snippet shows our code generator using an codeRef[org.eclipse.xtext.xbase.compiler.ImportManager].
+The following snippet shows our code generator using an codeRef[org.eclipse.xtext.xbase.compiler.ImportManager]
+in conjunction with as codeRef[org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer].
 We create a new instance and pass it through the generation functions, collecting types on the way. As
 the import section in a Java file precedes the class body, we create the body into a String variable
 and assemble the whole file's content in a second step.
@@ -78,7 +81,8 @@ and assemble the whole file's content in a second step.
 code[Xtend2][
 class DomainmodelGenerator implements IGenerator {
 	
-	@Inject extension IQualifiedNameProvider nameProvider
+	@Inject extension IQualifiedNameProvider
+	@Inject extension TypeReferenceSerializer 
 	
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
 		for(e: resource.allContentsIterable.filter(typeof(Entity))) {
@@ -88,11 +92,11 @@ class DomainmodelGenerator implements IGenerator {
 		}
 	}
 	
-	def compile(Entity e) '''
+	def compile(Entity it) '''
 		«val importManager = new ImportManager(true)» 
-		«val body = body(e, importManager)»
-		«IF e.eContainer != null»
-			package «e.eContainer.fullyQualifiedName»;
+		«val body = body(importManager)»
+		«IF eContainer != null»
+			package «eContainer.fullyQualifiedName»;
 		«ENDIF»
 		
 		«FOR i:importManager.imports»
@@ -102,33 +106,33 @@ class DomainmodelGenerator implements IGenerator {
 		«body»
 	'''
 	
-	def body(Entity e, ImportManager importManager) '''
-		public class «e.name» «IF e.superType != null»
-			extends «e.superType.shortName(importManager)» «ENDIF»{
-			«FOR f:e.features»
+	def body(Entity it, ImportManager importManager) '''
+		public class «name» «IF superType != null»
+			extends «superType.shortName(importManager)» «ENDIF»{
+			«FOR f : features»
 				«f.compile(importManager)»
 			«ENDFOR»
 		}
 	'''
 		
-	def compile(Feature f, ImportManager importManager) '''
-		private «f.type.shortName(importManager)» «f.name»;
+	def compile(Feature it, ImportManager importManager) '''
+		private «type.shortName(importManager)» «name»;
 		
-		public «f.type.shortName(importManager)» 
-			get«f.name.toFirstUpper»() {
-			return «f.name»;
+		public «type.shortName(importManager)» 
+			get«name.toFirstUpper»() {
+			return «name»;
 		}
 		
-		public void set«f.name.toFirstUpper»(
-			«f.type.shortName(importManager)» «f.name») {
-			this.«f.name» = «f.name»;
+		public void set«name.toFirstUpper»(
+			«type.shortName(importManager)» «name») {
+			this.«name» = «name»;
 		}
 	'''
 	
-	def shortName(JvmTypeReference typeRef, 
+	def shortName(JvmTypeReference ref, 
 				  ImportManager importManager) {
-		val result = new StringBuilder()
-		importManager.appendTypeRef(typeRef, result)
+		val result = new StringBuilderBasedAppendable(importManager)
+		ref.serialize(ref.eContainer, result);
 		result.toString
 	}
 }

@@ -180,9 +180,39 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertError(expression, XIF_EXPRESSION, INCOMPATIBLE_TYPES);
 	}
 	
-	public void testReturnExpressionInClosure() throws Exception {
+	public void testReturnExpressionInClosure_01() throws Exception {
 		XExpression expression = expression("{val (String)=>String func = [x | return true] func.apply('foo')}");
 		helper.assertError(expression, XBOOLEAN_LITERAL, INCOMPATIBLE_TYPES);
+	}
+	
+	public void testReturnExpressionInClosure_02() throws Exception {
+		XExpression expression = expression("{val (Integer)=>Integer func = [Integer i| return i]}");
+		helper.assertNoErrors(expression);
+	}
+	
+	public void testReturnExpressionInClosure_03() throws Exception {
+		XExpression expression = expression("{val (Integer)=>Integer func = [Integer i| i]}");
+		helper.assertNoErrors(expression);
+	}
+	
+	public void testReturnExpressionInClosure_04() throws Exception {
+		XExpression expression = expression("{val (Integer)=>String func = [Integer i| return i]}");
+		helper.assertError(expression, XCLOSURE, INCOMPATIBLE_TYPES);
+	}
+	
+	public void testReturnExpressionInClosure_05() throws Exception {
+		XExpression expression = expression("{val (Integer)=>String func = [Integer i| i]}");
+		helper.assertError(expression, XCLOSURE, INCOMPATIBLE_TYPES);
+	}
+	
+	public void testReturnExpressionInClosure_06() throws Exception {
+		XExpression expression = expression("{val func = [Integer i| return i]}");
+		helper.assertNoErrors(expression);
+	}
+	
+	public void testReturnExpressionInClosure_07() throws Exception {
+		XExpression expression = expression("{val func = [Integer i| i]}");
+		helper.assertNoErrors(expression);
 	}
 	
 	public void testInCompatibleRightOperand() throws Exception {

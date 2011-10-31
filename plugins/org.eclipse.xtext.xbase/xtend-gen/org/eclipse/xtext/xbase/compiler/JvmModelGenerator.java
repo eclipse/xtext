@@ -144,7 +144,8 @@ public class JvmModelGenerator implements IGenerator {
     {
       boolean _isInterface = it.isInterface();
       if (_isInterface) {
-        _builder.append("interface");} else {
+        _builder.append("interface");
+      } else {
         _builder.append("class");
       }
     }
@@ -490,7 +491,8 @@ public class JvmModelGenerator implements IGenerator {
     {
       boolean _isAbstract = it.isAbstract();
       if (_isAbstract) {
-        _builder.append(";");} else {
+        _builder.append(";");
+      } else {
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.append("  ");
@@ -893,7 +895,8 @@ public class JvmModelGenerator implements IGenerator {
       if (_operator_equals) {
         EList<Short> _values_1 = it.getValues();
         Short _head = IterableExtensions.<Short>head(_values_1);
-        _builder.append(_head, "");} else {
+        _builder.append(_head, "");
+      } else {
         _builder.append("{");
         EList<Short> _values_2 = it.getValues();
         String _join = IterableExtensions.join(_values_2, ",");
@@ -915,7 +918,8 @@ public class JvmModelGenerator implements IGenerator {
         EList<String> _values_1 = it.getValues();
         String _head = IterableExtensions.<String>head(_values_1);
         _builder.append(_head, "");
-        _builder.append("\"");} else {
+        _builder.append("\"");
+      } else {
         _builder.append("{");
         EList<String> _values_2 = it.getValues();
         final Function1<String,String> _function = new Function1<String,String>() {
@@ -945,7 +949,8 @@ public class JvmModelGenerator implements IGenerator {
         JvmTypeReference _head = IterableExtensions.<JvmTypeReference>head(_values_1);
         String _serialize = this.serialize(_head, importManager);
         _builder.append(_serialize, "");
-        _builder.append(".class");} else {
+        _builder.append(".class");
+      } else {
         _builder.append("{");
         EList<JvmTypeReference> _values_2 = it.getValues();
         final Function1<JvmTypeReference,String> _function = new Function1<JvmTypeReference,String>() {
@@ -973,7 +978,8 @@ public class JvmModelGenerator implements IGenerator {
       if (_operator_equals) {
         EList<Boolean> _values_1 = it.getValues();
         Boolean _head = IterableExtensions.<Boolean>head(_values_1);
-        _builder.append(_head, "");} else {
+        _builder.append(_head, "");
+      } else {
         _builder.append("{");
         EList<Boolean> _values_2 = it.getValues();
         String _join = IterableExtensions.join(_values_2, ",");

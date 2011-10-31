@@ -1,6 +1,5 @@
 document[Xtext 2.1 Documentation]
 
-%% KEEP KEYWORDS IN SYNC WITH tutorial.xdoc
 codelanguage-def[Java][
 	abstract,continue,for,new,switch,assert,default,goto,package,synchronized,
 	boolean,do,if,private,this,break,double,implements,protected,throw,
@@ -69,7 +68,7 @@ codelanguage-def[MWE2][module, var, auto-inject, auto, inject, import, true, fal
 
 codelanguage-def[Xtend2][
 	abstract,continue,def,override,for,new,switch,assert,default,goto,package,synchronized,
-	boolean,do,if,private,this,break,double,implements,protected,throw,
+	boolean,do,if,private,this,it,break,double,implements,protected,throw,
 	byte,else,import,public,throws,
 	case,enum,instanceof,return,
 	catch,extends,int,short,try,
@@ -87,7 +86,7 @@ codelanguage-def[Xpand][
 ]
 
 codelanguage-def[Xtend][
-	import, extension, this, it, create, cached, this, true, false, let, switch,
+	import, extension, this, create, cached, this, true, false, let, switch,
 	case, if, then, else, public, protected, private
 ]
 
@@ -98,7 +97,7 @@ codelanguage-def[MyDsl][Hello]
 
 codelanguage-def[XML][]
 
-codelanguage-def[DomainExample][package, entity, datatype, import, extends, public, op, return]
+codelanguage-def[DomainExample][package, entity, datatype, import, extends, public, op, return, mapped-to]
 
 codelanguage-def[JavaTypesExample][datatype, mapped-to]
 

@@ -5,7 +5,7 @@ the special JVM support shipped with Xtext 2.1. This kind of language really is 
 so feel free to use this as a blueprint and add your project specific features later on.
 
 The revised domain model language supports expressions and cross links to Java types. It is directly
-translated to Java source code. The expression's syntax is very suggestive. Here is an example :
+translated to Java source code. The syntax should look very familiar. Here is an example :
 
 code[DomainExample][
 import java.util.List
@@ -153,7 +153,7 @@ ol[
 	item[
 		code[Xtext][
 		grammar org.example.domainmodel.DomainModel with
-                                      org.eclipse.xtext.xbase.Xbase
+									org.eclipse.xtext.xbase.Xbase
 		]
 		The first thing to note is that instead of inheriting from the usual e[org.eclipse.xtext.common.Terminals]
 		grammar, we make use of e[org.eclipse.xtext.xbase.Xbase]. 
@@ -219,8 +219,8 @@ ol[
 		]
 		The rule e[Entity] starts with the definition of a keyword followed by a name.
 		
-		The e[extends] clause which is parenthesized and optional (not the trailing code[Xtext][?]) makes use of the rule
-		e[JvmTypeReference] which is defined in a super grammar. This rule defines the
+		The e[extends] clause which is parenthesized and optional (note the trailing code[Xtext][?]) makes use of the rule
+		e[JvmTypeReference] which is defined in a super grammar. e[JvmTypeReference] defines the
 		syntax for full Java-like type names. That is everything from simple names, over fully qualified
 		names to fully-fledged generics, including wildcards, lower bounds and upper bounds.
 		
@@ -314,19 +314,19 @@ class DomainModelJvmModelInferrer extends AbstractModelInferrer {
 
   /**
    * a builder API to programmatically create Jvm elements 
-   * in readble way.
+   * in readable way.
    */
   @Inject extension JvmTypesBuilder
   
   @Inject extension IQualifiedNameProvider
   
   def dispatch void infer(Entity element, 
-   	            IAcceptor<JvmDeclaredType> acceptor, 
-   	            boolean isPrelinkingPhase) {
+                IAcceptor<JvmDeclaredType> acceptor, 
+                boolean isPrelinkingPhase) {
     
-   	acceptor.accept(element.toClass(element.fullyQualifiedName) \[
-	  documentation = element.documentation
-   	  for (feature : element.features) {
+    acceptor.accept(element.toClass(element.fullyQualifiedName) \[
+      documentation = element.documentation
+      for (feature : element.features) {
         switch feature {
           Property : {
             members += feature.toField(feature.name, feature.type)
@@ -356,8 +356,8 @@ ol[
   item[
     code[Xtend2][
       def dispatch void infer(Entity element, 
-   	            IAcceptor<JvmDeclaredType> acceptor, 
-   	            boolean isPrelinkingPhase) { // (1)
+                IAcceptor<JvmDeclaredType> acceptor, 
+                boolean isPrelinkingPhase) { // (1)
     ]
 	  Using the dispatch keyword makes sure that the method is called for instances of type e[Entity]
 	  only. Have a look at ref:polymorphicDispatch to understand Xtend's dispatch functions. Extending 
@@ -365,8 +365,8 @@ ol[
   ]
   item[
     code[Xtend2][
-    	acceptor.accept(element.toClass(element.fullyQualifiedName) \[ 
-    	...
+        acceptor.accept(element.toClass(element.fullyQualifiedName) \[ 
+        ...
     ]
 	Every codeRef[org.eclipse.xtext.common.types.JvmDeclaredType] you create in the model inference needs
 	to be passed to the e[acceptor] in order to get recognized.
@@ -379,7 +379,7 @@ ol[
   ]
   item[
   	code[Xtend2][
-    	documentation = element.documentation
+        documentation = element.documentation
     ]
     
     Here for instance we assign some JavaDoc to the newly created element. The assignment is translated
@@ -392,10 +392,10 @@ ol[
   ]
   item[
   	code[Xtend2][
-  	  for (feature : element.features) {
-    	switch feature { // (4)
-   		  Property : {
-   	        // ...
+      for (feature : element.features) {
+        switch feature { // (4)
+          Property : {
+            // ...
           }
           Operation : {
             // ...
@@ -411,18 +411,18 @@ ol[
   ]
   item[
   	code[Xtend2][
-    	Property : {
-	      members += feature.toField(feature.name, feature.type) // (5)
-	      members += feature.toSetter(feature.name, feature.type)
-	      members += feature.toGetter(feature.name, feature.type)
-	    }
+        Property : {
+          members += feature.toField(feature.name, feature.type) // (5)
+          members += feature.toSetter(feature.name, feature.type)
+          members += feature.toGetter(feature.name, feature.type)
+        }
     ]
     
     For each e[Property] we create a field as well as a corresponding getter and setter.  
   ]
   item[
   	code[Xtend2][
-    	Operation : {
+        Operation : {
           members += feature.toMethod(feature.name, feature.type) \[
             for (p : feature.params) {
               parameters += p.toParameter(p.name, p.parameterType)

@@ -1,9 +1,9 @@
 section:xbaseExpressions[Using Xbase Expressions]
 
-Xbase is an expression language that can be embedded in Xtext languages. Its syntax is close to Java,
-but it additionally offers type inferrence, closures, a rich switch statement and a lot more. For details
-on the Xbase langugae itself, please consult the Xbase documentation and the Xbase tutorial. Xbase ships 
-with an interpreter and a compiler to Java code. Thus, it is easy to add executable behavior to your DSLs.
+Xbase is an expression language that can be embedded into Xtext languages. Its syntax is close to Java,
+but it additionally offers type inferrence, closures, a powerful switch expression and a lot more. For details
+on this expression langugae, please consult the reference documentation and the Xbase tutorial. Xbase ships 
+with an interpreter and a compiler that produces Java code. Thus, it is easy to add executable behavior to your DSLs.
 As Xbase integrates tightly with Java, there is usually no additional code needed to run your DSL as
 part of a Java application. 
 
@@ -17,19 +17,19 @@ import "http://www.eclipse.org/xtext/xbase/Xbase" as xbase
 ]
 
 Now identify the location in your grammar, where you want references to Java types and Xbase expression to appear
-and call the appropriate rules of the super grammar. todo[] Have a look at the domainmodel example: An e[Operation]'s 
+and call the appropriate rules of the super grammar. Have a look at the domainmodel example: An e[Operation]'s 
 parameters are e[JvmFormalParamters], its return type refers to a Java type and its e[body] is
 an e[XBlockExpression], so its parser rule reads as
 
 code[Xtext][
 Operation:
-	visibility=Visibility? 'op' name=ValidID '(' 
+	'op' name=ValidID '(' 
 	(params+=JvmFormalParameter (',' params+=JvmFormalParameter)*)? ')' 
 	':' type=JvmTypeReference 
 		body=XBlockExpression;
 ]
 
-If you're unsure which entry point to choose for your expressions, consider the root e[XExpression].
+If you're unsure which entry point to choose for your expressions, consider the e[XBlockExpression].
 
 To integrate e[Operations] in our models, we have to call this rule. We copy the previous e[Feature]
 to a new rule e[Property] and let e[Feature] become the supertype of e[Property] and e[Operation]:
@@ -48,241 +48,17 @@ Note: You will have to adapt the codeRef[org.eclipse.xtext.xbase.jvmmodel.IJvmMo
 changes, i.e. rename e[Feature] to e[Property] and create a codeRef[org.eclipse.xtext.common.types.JvmOperation]
 for each e[Operation]. We leave that as an exercise :-) 
 
+If you're done with that, everything should work out of the box. Since each expression is now logically
+contained in an codeRef[org.eclipse.xtext.common.types.JvmOperation][operation], all the scoping rules and
+visibility constrains can be deduced from that. The framework will take care of the fact, that the operation's
+parameters are reachable in the operation body or that the declared return types are validated against the actual
+expression types.
 
-section2:xbaseScopeProvider[Populating the Scopes]
-
-If you're not familiar with Xtext's concept of scopes yet, it would be a good idea to ref:scoping[learn about
-scopes] before you go on reading this section. 
-
-The codeRef[org.eclipse.xtext.xbase.scoping.XbaseScopeProvider] already builds a complex hierarchy of
-scopes that is necessary to link your expressions. There are a few points you may want to customize.
-
-Within the body of an operation, we want to have several variables on the scope. The variable e[this]
-should point to the JVM type of the entity, such that all its features are callable. In addition, the
-operation's parameters should be referrable by their name. The codeRef[org.eclipse.xtext.xbase.scoping.XbaseScopeProvider]
-has a template method e[createLocalVarScope] for exactly this purpose. The following code shows the Xtend
-implementation of the scope provider for our domain model language:
-
-code[Xtend2][
-class DomainmodelScopeProvider extends XbaseScopeProvider {
-
-	@Inject extension IJvmModelAssociations associations
-	
-	override IScope createLocalVarScope(EObject context, 
-			EReference reference, IScope parent,
-			boolean includeCurrentBlock, int idx) {
-		if (context instanceof Entity) {
-			val type = (context as Entity).jvmType
-			return new SimpleScope(parent, newImmutableList(
-				EObjectDescription::create(XbaseScopeProvider::THIS, 
-				type)))
-		}
-		if(context instanceof Operation){
-				val descriptions = (context as Operation)
-					.params.map(e | e.createIEObjectDescription())
-				return MapBasedScope::createScope(
-						super.createLocalVarScope(context, reference, 
-							parent, includeCurrentBlock, idx), 
-						descriptions);	
-		}
-		return super.createLocalVarScope(context, reference, parent, 
-			includeCurrentBlock, idx)
-	}
-	
-	def createIEObjectDescription(JvmFormalParameter jvmFormalParameter)
-	{
-		EObjectDescription::^create(
-			QualifiedName::^create(jvmFormalParameter.name), 
-			jvmFormalParameter, null);
-	}
-
-	def JvmType getJvmType(Entity entity) {
-		entity.jvmElements.filter(typeof(JvmType)).head
-	}
-	
-	override JvmDeclaredType getContextType(EObject call) {
-		if (call == null)
-			return null
-		val containerClass = getContainerOfType(call, typeof(Entity));
-		if (containerClass != null)
-			return getJvmType(containerClass) as JvmDeclaredType
-		else
-			return super.getContextType(call)
-	}
-}
-] 
-
-In addition to the variable binding and some helper functions, we defined the function e[getContextType]
-to tell Xbase, which features are visible (callable) in the context of a the given element. In out case,
-these are all features of the inferred type, including the private ones.    
-
-
-section2[Type Checking at the Boundaries]
-
-The scope provider from the last section allows Xbase to do static type analysis on the operation bodies,
-as all callable properties now have types.  The missing part is to make sure that the declared return type 
-conforms to the actual types of the method body's possible return values.
-
-Type analysis in Xbase boils down to compare expected types with the actual types returned by an expression. 
-For example, the condition of an codeRef[org.eclipse.xtext.xbase.XIfExpression]
-is expected to be a boolean, so any expression used as condition should conform to the boolean type.
-The component the defines these types and expectations is the codeRef[org.eclipse.xtext.xbase.typing.ITypeProvider]. 
-It has several responsibilities
-
-table[
-	tr[td[getType()]td[returns the type of an expression]]
-	tr[td[getExpectedType()]td[returns the expected type of an expression in a given context]]
-	tr[td[getTypeForIdentifiable()]td[returns the expected type of an element that is referenced]]
-	tr[td[getCommonReturnType()]td[returns the common supertype of all types used in return expressions
-	inside this expression]]
-	tr[td[getThrownExceptions()]td[returns the types of all declared exceptions thrown inside this expression]]
-]
-
-An additional flag e[rawType] signals a raw type without resolved type parameters is enough. This is
-needed to avoid cycles in the type inference while linking.
- 
-The codeRef[org.eclipse.xtext.xbase.typing.XbaseTypeProvider] implements polymorphic dispatch methods
-for the first three of these. In the domain model example, we expect the return type of the body of an e[Operation]
-to conform to the declared return type. We can do so by specializing the default 
-codeRef[org.eclipse.xtext.xbase.typing.XbaseTypeProvider] as
-
-code[Java][
-@Singleton
-public class DomainmodelTypeProvider extends XbaseTypeProvider {
-
-	protected JvmTypeReference _expectedType(Operation operation, 
-			EReference reference, int index, boolean rawType) {
-		if(reference == DomainmodelPackage.Literals.OPERATION__BODY) {
-			return operation.getType();
-		}				
-		return null; 
-	}
-}
-]
-
-and of course binding this new implementation in the languge's module. By default, Xbase only checks
-type conformance inside expressions. To address the validation at the expression's boundary, we have
-to add a ref:validation[validation rule]:
-
-code[Java][
-public class DomainmodelJavaValidator 
-		extends AbstractDomainmodelJavaValidator {
-
-	@Inject
-	private XbaseTypeConformanceComputer typeConformanceComputer;
-	
-	@Inject
-	private DomainmodelTypeProvider typeProvider;
-	
-	@Check
-	public void checkTypeConformanceOfOperation(Operation op){
-		JvmTypeReference expectedType = typeProvider
-			.getExpectedType(op.getBody());
-		JvmTypeReference commonReturnType = typeProvider
-			.getCommonReturnType(op.getBody(), true);
-		if(!typeConformanceComputer.isConformant(expectedType, 
-			commonReturnType))
-			error("Type does not conform to expected type!",
-				DomainmodelPackage.Literals.OPERATION__BODY);
-	}
-}
-] 
-
-
-section2[Generating Java Code using the Xbase Compiler]
-
-The codeRef[org.eclipse.xtext.xbase.compiler.XbaseCompiler] compiles Xbase expressions to Java code.
-You will now learn how to integrate it in the code generator of your DSL. 
-
-The following snippet shows how the code generator can call the compiler:
-
-code[Xtend2][
-class DomainmodelGenerator implements IGenerator {
-    
-    @Inject DomainmodelCompiler domainmodelCompiler
-    
-    ...
-    
-	def dispatch compile(Operation o, ImportManager importManager) '''
-		public «o.type.shortName(importManager)» «o.name»(«
-			o.parameterList(importManager)») {
-			«domainmodelCompiler.compile(o, importManager)» 
-		}
-	'''
-	
-	def parameterList(Operation o, ImportManager importManager) {
-		o.params.map(p| p.parameterType.shortName(importManager) 
-						+ ' ' + p.name).join(''', 
-			'''
-		)
-	}
-} 
-] 
-
-Now let us customize the compiler. The codeRef[org.eclipse.xtext.xbase.compiler.XbaseCompiler] writes its code output into an 
-codeRef[org.eclipse.xtext.xbase.compiler.IAppendable]. This component keeps track of the indentation, 
-of local variables, and of the generated code. Use an codeRef[org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable]
-to generate the code of an XbaseExpression into a codeRef[java.lang.StringBuilder]. Before calling the
-compiler, we add the operation's parameters to the local variables. 
-
-Remember that in the ref:xbaseScopeProvider[scope provider] we bound the variable e[this] to the inferred type of the current e[Entity]. 
-The codeRef[org.eclipse.xtext.xbase.compiler.XbaseCompiler] will by default assign the value of all expressions
-to a new Java variable. If we just call e[this], we don't need that, so we override e[isVariableDeclarationRequired]
-to return false in this case. Similarly, whenever the compiler needs to put a variable name for the inferred
-Java type, it should use e[this]. This can be achieved by overriding e[getVarName()]. In a similar way,
-we have to override the codeRef[org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider]
-to return e[this] for the type. It is likely that we will reduce the last two tasks to one in the future.
-
-Here's the complete code for the customized compiler:
-
-code[Java][
-public class DomainmodelCompiler extends XbaseCompiler {
-
-	public String compile(Operation operation, 
-						  ImportManager importManager) {
-		StringBuilderBasedAppendable appendable = 
-			new StringBuilderBasedAppendable(importManager);
-		for(JvmFormalParameter param: operation.getParams()) {
-			appendable.declareVariable(param, param.getName());
-		}
-		return compile(operation.getBody(), appendable, 
-			operation.getType()).toString();
-	}
-
-	@Override
-	protected boolean isVariableDeclarationRequired(XExpression expr, 
-													IAppendable b) {
-		if (expr instanceof XAbstractFeatureCall 
-			&& ((XAbstractFeatureCall)expr).getFeature() 
-				instanceof JvmGenericType) {
-			return false;
-		}
-		return super.isVariableDeclarationRequired(expr,b);
-	}
-
-	@Override
-	protected String getVarName(Object ex, IAppendable appendable) {
-		if(ex instanceof JvmGenericType) {
-			return "this";
-		}
-		return super.getVarName(ex, appendable);
-	}
-}
-] 
-
-code[Xtend2][
-class DomainmodelIdentifiableSimpleNameProvider extends 
-	IdentifiableSimpleNameProvider {
-	
-	def dispatch getSimpleName(JvmType element) {
-		return "this";
-	}
-	
-	def dispatch getSimpleName(JvmIdentifiableElement element) {
-		return super.getSimpleName(element);
-	}
-}
-]
+There is yet another aspect of the JVM model that can be explored. Since all the coarse grained concepts
+such as codeRef[org.eclipse.xtext.common.types.JvmType][types] and codeRef[org.eclipse.xtext.common.types.JvmOperation][operations]
+were already derived from the model, a generator can be used to serialize that information to Java code.
+There is no need to write a code generator on top of that. The codeRef[org.eclipse.xtext.xbase.compiler.JvmModelGenerator]
+knows how to generate operation bodies properly. 
 
 section2[Using the Xbase Interpreter]
 
@@ -293,7 +69,7 @@ rather easy.
 An interpreter is essentially an external visitor, that recursively processes a model based on the model
 element's types. By now you should be aware that polymorphic dispatch is exactly the technology needed
 here. In the codeRef[org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter], the dispatch method
-is called e[_evaluate<ElementTypeWithoutX>] and takes two parameters, e.g. 
+is called e[_evaluate<SomeDescription>] and takes three parameters, e.g. 
 
 code[Java][
 protected Object _evaluateBlockExpression(XBlockExpression literal, 
