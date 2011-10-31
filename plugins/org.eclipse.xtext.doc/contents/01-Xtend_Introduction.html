@@ -631,15 +631,15 @@ and the following Xtend class which extends the Java class :
 <div class="incode">
 <p class="code">
 <span class="keyword">class</span>&nbsp;MyLabelProvider&nbsp;<span class="keyword">extends</span>&nbsp;AbstractLabelProvider&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;label(Entity&nbsp;it)&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;label(Entity&nbsp;<span class="keyword">it</span>)&nbsp;&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name<br/>
 &nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;label(Method&nbsp;it)&nbsp;{&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;label(Method&nbsp;<span class="keyword">it</span>)&nbsp;{&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name+<span class="string">"("</span>+params.toString(<span class="string">","</span>)+<span class="string">"):"</span>+type<br/>
 &nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;label(Field&nbsp;it)&nbsp;{&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;label(Field&nbsp;<span class="keyword">it</span>)&nbsp;{&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name+type<br/>
 &nbsp;&nbsp;&nbsp;}<br/>
 }<br/>
@@ -747,7 +747,7 @@ object and a second one to initialize it.
 </p>
 <p>
 If you do not specify the name of the result variable it is assumed to be the <a href="199-xtext-and-java.html#Xbase_Expressions_ImplicitThis" title="Go to &quot;Implicit variables 'this' and 'it'&quot;">implicit receiver variable</a> 
-<span class="inlinecode">it</span>, which can be skipped in feature calls inside the body. Furthermore, you can define the return type of a create function:
+<span class="inlinecode"><span class="keyword">it</span></span>, which can be skipped in feature calls inside the body. Furthermore, you can define the return type of a create function:
 </p>
 <p>
 <div class="literallayout">

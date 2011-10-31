@@ -189,15 +189,15 @@
 			<br style="clear:both"></br>
 			<h1>Referring to Java Types Using Xbase</h1>
 			<p>
-			While the JVM types approach from the last chapter allow to refer to any Java element, it has its drawbacks
-			when it comes to generics. Usually, a type reference in Java can have type arguments which can also include
+			While the JVM types approach from the previous chapter allows to refer to any Java element, it is quite
+			limited when it comes to generics. Usually, a type reference in Java can have type arguments which can also include
 			wildcards, upper and lower bounds etc. A simple cross-reference using a qualified name is not enough
 			to express neither the syntax nor the structure of such a type reference. 
 			</p>
 			<p>
 			Xbase offers a parser rule <em>JvmTypeReference</em> which supports the full syntax of a Java type reference
-			and instantiates an JVM element of type <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/JvmTypeReference.html" title="org.eclipse.xtext.common.types.JvmTypeReference">JvmTypeReference</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/JvmTypeReference.java" title="View Source Code" >(src)</a>. So
-			lets start by letting our language inherit from Xbase
+			and instantiates a JVM element of type <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/JvmTypeReference.html" title="org.eclipse.xtext.common.types.JvmTypeReference">JvmTypeReference</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/JvmTypeReference.java" title="View Source Code" >(src)</a>. So
+			let us start by inheriting from Xbase
 			</p>
 			<p>
 			<div class="literallayout">
@@ -211,7 +211,7 @@
 			</p>
 			<p>
 			As we can express all kinds of Java type references directly now, the indirection for <em>DataTypes</em> 
-			no longer makes sense. Let us turn all cross-references to <em>Types</em> to calls to the <em>JvmTypeReferences</em>
+			is no longer necessary. To eliminate it, all cross-references to <em>Types</em> have to be replaced by calls to the <em>JvmTypeReferences</em>
 			rule. The rules <em>DataType</em>, <em>Type</em>, and <em>QualifiedName</em> become obsolete (the latter is already defined
 			in Xbase), and the <em>Type</em> in <em>AbstractEntity</em> must be changed to <em>Entity</em>. The whole grammar now reads
 			as
@@ -267,14 +267,17 @@
 			As we changed the grammar, we have to regenerate the language now.
 			</p>
 			<p>
-			Being able to parse a Java type reference is good, but we also have to write them back to their string
+			Being able to parse a Java type reference is already nice, but we also have to write them back to their string
 			representation when we generate Java code. Into the bargain, a generic type reference with fully qualified
 			class names can become a bit bulky. The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/compiler/ImportManager.html" title="org.eclipse.xtext.xbase.compiler.ImportManager">ImportManager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/ImportManager.java" title="View Source Code" >(src)</a> shortens
-			fully qualified names, keeps track of imported namespaces, avoids name collisions, and serializes
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/JvmTypeReference.html" title="org.eclipse.xtext.common.types.JvmTypeReference">JvmTypeReferences</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/JvmTypeReference.java" title="View Source Code" >(src)</a>.
+			fully qualified names, keeps track of imported namespaces, avoids name collisions, and helps to serialize
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/JvmTypeReference.html" title="org.eclipse.xtext.common.types.JvmTypeReference">JvmTypeReferences</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/JvmTypeReference.java" title="View Source Code" >(src)</a> by means of the 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/compiler/TypeReferenceSerializer.html" title="org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer">TypeReferenceSerializer</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/TypeReferenceSerializer.java" title="View Source Code" >(src)</a>. This utility encapsulates how type
+			references may be serialized depending on the concrete context in the output.
 			</p>
 			<p>
-			The following snippet shows our code generator using an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/compiler/ImportManager.html" title="org.eclipse.xtext.xbase.compiler.ImportManager">ImportManager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/ImportManager.java" title="View Source Code" >(src)</a>.
+			The following snippet shows our code generator using an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/compiler/ImportManager.html" title="org.eclipse.xtext.xbase.compiler.ImportManager">ImportManager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/ImportManager.java" title="View Source Code" >(src)</a>
+			in conjunction with as <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/compiler/TypeReferenceSerializer.html" title="org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer">TypeReferenceSerializer</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/TypeReferenceSerializer.java" title="View Source Code" >(src)</a>.
 			We create a new instance and pass it through the generation functions, collecting types on the way. As
 			the import section in a Java file precedes the class body, we create the body into a String variable
 			and assemble the whole file's content in a second step.
@@ -285,7 +288,8 @@
 					<p class="code">
 						<span class="keyword">class</span>&nbsp;DomainmodelGenerator&nbsp;<span class="keyword">implements</span>&nbsp;IGenerator&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IQualifiedNameProvider&nbsp;nameProvider<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IQualifiedNameProvider<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;TypeReferenceSerializer&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;<span class="keyword">void</span>&nbsp;doGenerate(Resource&nbsp;resource,&nbsp;IFileSystemAccess&nbsp;fsa)&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(e:&nbsp;resource.allContentsIterable.filter(<span class="keyword">typeof</span>(Entity)))&nbsp;{<br/>
@@ -295,11 +299,11 @@
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;<span class="keyword">it</span>)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;val&nbsp;importManager&nbsp;=&nbsp;new&nbsp;ImportManager(true)&raquo;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;val&nbsp;body&nbsp;=&nbsp;body(e,&nbsp;importManager)&raquo;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;IF&nbsp;e.eContainer&nbsp;!=&nbsp;null&raquo;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;e.eContainer.fullyQualifiedName&raquo;;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;val&nbsp;body&nbsp;=&nbsp;body(importManager)&raquo;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;IF&nbsp;eContainer&nbsp;!=&nbsp;null&raquo;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;eContainer.fullyQualifiedName&raquo;;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;ENDIF&raquo;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;FOR&nbsp;i:importManager.imports&raquo;<br/>
@@ -309,33 +313,33 @@
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;body&raquo;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&apos;</span><span class="string">&apos;&apos;</span><br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;body(Entity&nbsp;e,&nbsp;ImportManager&nbsp;importManager)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;e.name&raquo;&nbsp;&laquo;IF&nbsp;e.superType&nbsp;!=&nbsp;null&raquo;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extends&nbsp;&laquo;e.superType.shortName(importManager)&raquo;&nbsp;&laquo;ENDIF&raquo;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;FOR&nbsp;f:e.features&raquo;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;body(Entity&nbsp;<span class="keyword">it</span>,&nbsp;ImportManager&nbsp;importManager)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;name&raquo;&nbsp;&laquo;IF&nbsp;superType&nbsp;!=&nbsp;null&raquo;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extends&nbsp;&laquo;superType.shortName(importManager)&raquo;&nbsp;&laquo;ENDIF&raquo;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;FOR&nbsp;f&nbsp;:&nbsp;features&raquo;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;f.compile(importManager)&raquo;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;ENDFOR&raquo;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&apos;</span><span class="string">&apos;&apos;</span><br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;compile(Feature&nbsp;f,&nbsp;ImportManager&nbsp;importManager)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;&laquo;f.type.shortName(importManager)&raquo;&nbsp;&laquo;f.name&raquo;;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;compile(Feature&nbsp;<span class="keyword">it</span>,&nbsp;ImportManager&nbsp;importManager)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;&laquo;type.shortName(importManager)&raquo;&nbsp;&laquo;name&raquo;;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;&laquo;f.type.shortName(importManager)&raquo;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get&laquo;f.name.toFirstUpper&raquo;()&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&laquo;f.name&raquo;;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;&laquo;type.shortName(importManager)&raquo;&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get&laquo;name.toFirstUpper&raquo;()&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&laquo;name&raquo;;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;set&laquo;f.name.toFirstUpper&raquo;(<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;f.type.shortName(importManager)&raquo;&nbsp;&laquo;f.name&raquo;)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.&laquo;f.name&raquo;&nbsp;=&nbsp;&laquo;f.name&raquo;;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;set&laquo;name.toFirstUpper&raquo;(<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;type.shortName(importManager)&raquo;&nbsp;&laquo;name&raquo;)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.&laquo;name&raquo;&nbsp;=&nbsp;&laquo;name&raquo;;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&apos;</span><span class="string">&apos;&apos;</span><br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;shortName(JvmTypeReference&nbsp;typeRef,&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;shortName(JvmTypeReference&nbsp;ref,&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ImportManager&nbsp;importManager)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;result&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;StringBuilder()<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;importManager.appendTypeRef(typeRef,&nbsp;result)<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;result&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;StringBuilderBasedAppendable(importManager)<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ref.serialize(ref.eContainer,&nbsp;result);<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result.toString<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 						}

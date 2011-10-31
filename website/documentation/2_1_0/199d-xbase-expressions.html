@@ -191,17 +191,14 @@
 			<div class="toc">
 			  <ul>
 			    <li><a href="199d-xbase-expressions.php#xbaseExpressions_2" >Making Your Grammar Refer To Xbase</a></li>
-			    <li><a href="199d-xbase-expressions.php#xbaseScopeProvider" >Populating the Scopes</a></li>
-			    <li><a href="199d-xbase-expressions.php#xbaseExpressions_4" >Type Checking at the Boundaries</a></li>
-			    <li><a href="199d-xbase-expressions.php#xbaseExpressions_5" >Generating Java Code using the Xbase Compiler</a></li>
-			    <li><a href="199d-xbase-expressions.php#xbaseExpressions_6" >Using the Xbase Interpreter</a></li>
+			    <li><a href="199d-xbase-expressions.php#xbaseExpressions_3" >Using the Xbase Interpreter</a></li>
 			  </ul>
 			</div>
 			<p>
-			Xbase is an expression language that can be embedded in Xtext languages. Its syntax is close to Java,
-			but it additionally offers type inferrence, closures, a rich switch statement and a lot more. For details
-			on the Xbase langugae itself, please consult the Xbase documentation and the Xbase tutorial. Xbase ships 
-			with an interpreter and a compiler to Java code. Thus, it is easy to add executable behavior to your DSLs.
+			Xbase is an expression language that can be embedded into Xtext languages. Its syntax is close to Java,
+			but it additionally offers type inferrence, closures, a powerful switch expression and a lot more. For details
+			on this expression langugae, please consult the reference documentation and the Xbase tutorial. Xbase ships 
+			with an interpreter and a compiler that produces Java code. Thus, it is easy to add executable behavior to your DSLs.
 			As Xbase integrates tightly with Java, there is usually no additional code needed to run your DSL as
 			part of a Java application. 
 			</p>
@@ -222,9 +219,7 @@
 			</p>
 			<p>
 			Now identify the location in your grammar, where you want references to Java types and Xbase expression to appear
-			and call the appropriate rules of the super grammar. <div class="todo" >
-			</div>
-			 Have a look at the domainmodel example: An <em>Operation</em>'s 
+			and call the appropriate rules of the super grammar. Have a look at the domainmodel example: An <em>Operation</em>'s 
 			parameters are <em>JvmFormalParamters</em>, its return type refers to a Java type and its <em>body</em> is
 			an <em>XBlockExpression</em>, so its parser rule reads as
 			</p>
@@ -233,7 +228,7 @@
 				<div class="incode">
 					<p class="code">
 						Operation:<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;visibility=Visibility?&nbsp;<span class="string">&apos;op&apos;</span>&nbsp;name=ValidID&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;op&apos;</span>&nbsp;name=ValidID&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;(params+=JvmFormalParameter&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;params+=JvmFormalParameter)*)?&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type=JvmTypeReference&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body=XBlockExpression;
@@ -242,7 +237,7 @@
 			</div>
 			</p>
 			<p>
-			If you're unsure which entry point to choose for your expressions, consider the root <em>XExpression</em>.
+			If you're unsure which entry point to choose for your expressions, consider the <em>XBlockExpression</em>.
 			</p>
 			<p>
 			To integrate <em>Operations</em>&nbsp;in our models, we have to call this rule. We copy the previous <em>Feature</em>
@@ -268,299 +263,21 @@
 			changes, i.e. rename <em>Feature</em> to <em>Property</em> and create a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/JvmOperation.html" title="org.eclipse.xtext.common.types.JvmOperation">JvmOperation</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/JvmOperation.java" title="View Source Code" >(src)</a>
 			for each <em>Operation</em>. We leave that as an exercise :-) 
 			</p>
-			<a name="xbaseScopeProvider" ></a>
-			<h2>Populating the Scopes</h2>
 			<p>
-			If you're not familiar with Xtext's concept of scopes yet, it would be a good idea to <a href="080-scoping.php" title="Go to &quot;Scoping&quot;">learn about
-			scopes</a> before you go on reading this section. 
+			If you're done with that, everything should work out of the box. Since each expression is now logically
+			contained in an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/JvmOperation.html" title="org.eclipse.xtext.common.types.JvmOperation">operation</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/JvmOperation.java" title="View Source Code" >(src)</a>, all the scoping rules and
+			visibility constrains can be deduced from that. The framework will take care of the fact, that the operation's
+			parameters are reachable in the operation body or that the declared return types are validated against the actual
+			expression types.
 			</p>
 			<p>
-			The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/scoping/XbaseScopeProvider.html" title="org.eclipse.xtext.xbase.scoping.XbaseScopeProvider">XbaseScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/scoping/XbaseScopeProvider.java" title="View Source Code" >(src)</a> already builds a complex hierarchy of
-			scopes that is necessary to link your expressions. There are a few points you may want to customize.
+			There is yet another aspect of the JVM model that can be explored. Since all the coarse grained concepts
+			such as <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/JvmType.html" title="org.eclipse.xtext.common.types.JvmType">types</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/JvmType.java" title="View Source Code" >(src)</a> and <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/JvmOperation.html" title="org.eclipse.xtext.common.types.JvmOperation">operations</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/JvmOperation.java" title="View Source Code" >(src)</a>
+			were already derived from the model, a generator can be used to serialize that information to Java code.
+			There is no need to write a code generator on top of that. The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/compiler/JvmModelGenerator.html" title="org.eclipse.xtext.xbase.compiler.JvmModelGenerator">JvmModelGenerator</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/JvmModelGenerator.java" title="View Source Code" >(src)</a>
+			knows how to generate operation bodies properly. 
 			</p>
-			<p>
-			Within the body of an operation, we want to have several variables on the scope. The variable <em>this</em>
-			should point to the JVM type of the entity, such that all its features are callable. In addition, the
-			operation's parameters should be referrable by their name. The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/scoping/XbaseScopeProvider.html" title="org.eclipse.xtext.xbase.scoping.XbaseScopeProvider">XbaseScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/scoping/XbaseScopeProvider.java" title="View Source Code" >(src)</a>
-			has a template method <em>createLocalVarScope</em> for exactly this purpose. The following code shows the Xtend
-			implementation of the scope provider for our domain model language:
-			</p>
-			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">class</span>&nbsp;DomainmodelScopeProvider&nbsp;<span class="keyword">extends</span>&nbsp;XbaseScopeProvider&nbsp;{<br/>
-						<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IJvmModelAssociations&nbsp;associations<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;IScope&nbsp;createLocalVarScope(EObject&nbsp;context,&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EReference&nbsp;reference,&nbsp;IScope&nbsp;parent,<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">boolean</span>&nbsp;includeCurrentBlock,&nbsp;<span class="keyword">int</span>&nbsp;idx)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(context&nbsp;<span class="keyword">instanceof</span>&nbsp;Entity)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;type&nbsp;=&nbsp;(context&nbsp;<span class="keyword">as</span>&nbsp;Entity).jvmType<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;SimpleScope(parent,&nbsp;newImmutableList(<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EObjectDescription::<span class="keyword">create</span>(XbaseScopeProvider::THIS,&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type)))<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>(context&nbsp;<span class="keyword">instanceof</span>&nbsp;Operation){<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;descriptions&nbsp;=&nbsp;(context&nbsp;<span class="keyword">as</span>&nbsp;Operation)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.params.map(e&nbsp;|&nbsp;e.createIEObjectDescription())<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MapBasedScope::createScope(<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>.createLocalVarScope(context,&nbsp;reference,&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parent,&nbsp;includeCurrentBlock,&nbsp;idx),&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;descriptions);&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">super</span>.createLocalVarScope(context,&nbsp;reference,&nbsp;parent,&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;includeCurrentBlock,&nbsp;idx)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;createIEObjectDescription(JvmFormalParameter&nbsp;jvmFormalParameter)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EObjectDescription::^create(<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;QualifiedName::^create(jvmFormalParameter.name),&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jvmFormalParameter,&nbsp;null);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;JvmType&nbsp;getJvmType(Entity&nbsp;entity)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entity.jvmElements.filter(<span class="keyword">typeof</span>(JvmType)).head<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;JvmDeclaredType&nbsp;getContextType(EObject&nbsp;call)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(call&nbsp;==&nbsp;null)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;null<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;containerClass&nbsp;=&nbsp;getContainerOfType(call,&nbsp;<span class="keyword">typeof</span>(Entity));<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(containerClass&nbsp;!=&nbsp;null)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;getJvmType(containerClass)&nbsp;<span class="keyword">as</span>&nbsp;JvmDeclaredType<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">super</span>.getContextType(call)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						}
-					</p>
-				</div>
-			</div>
-			</p>
-			<p>
-			In addition to the variable binding and some helper functions, we defined the function <em>getContextType</em>
-			to tell Xbase, which features are visible (callable) in the context of a the given element. In out case,
-			these are all features of the inferred type, including the private ones.    
-			</p>
-			<a name="xbaseExpressions_4" ></a>
-			<h2>Type Checking at the Boundaries</h2>
-			<p>
-			The scope provider from the last section allows Xbase to do static type analysis on the operation bodies,
-			as all callable properties now have types.  The missing part is to make sure that the declared return type 
-			conforms to the actual types of the method body's possible return values.
-			</p>
-			<p>
-			Type analysis in Xbase boils down to compare expected types with the actual types returned by an expression. 
-			For example, the condition of an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/XIfExpression.html" title="org.eclipse.xtext.xbase.XIfExpression">XIfExpression</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/XIfExpression.java" title="View Source Code" >(src)</a>
-			is expected to be a boolean, so any expression used as condition should conform to the boolean type.
-			The component the defines these types and expectations is the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/typing/ITypeProvider.html" title="org.eclipse.xtext.xbase.typing.ITypeProvider">ITypeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/typing/ITypeProvider.java" title="View Source Code" >(src)</a>. 
-			It has several responsibilities
-			</p>
-			<p>
-			<table>
-			  <tr>
-			    <td>getType()</td>
-			    <td>returns the type of an expression</td>
-			  </tr>
-			  <tr>
-			    <td>getExpectedType()</td>
-			    <td>returns the expected type of an expression in a given context</td>
-			  </tr>
-			  <tr>
-			    <td>getTypeForIdentifiable()</td>
-			    <td>returns the expected type of an element that is referenced</td>
-			  </tr>
-			  <tr>
-			    <td>getCommonReturnType()</td>
-			    <td>returns the common supertype of all types used in return expressions
-			    	inside this expression</td>
-			  </tr>
-			  <tr>
-			    <td>getThrownExceptions()</td>
-			    <td>returns the types of all declared exceptions thrown inside this expression</td>
-			  </tr>
-			</table>
-			</p>
-			<p>
-			An additional flag <em>rawType</em> signals a raw type without resolved type parameters is enough. This is
-			needed to avoid cycles in the type inference while linking.
-			 
-			The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/typing/XbaseTypeProvider.html" title="org.eclipse.xtext.xbase.typing.XbaseTypeProvider">XbaseTypeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/typing/XbaseTypeProvider.java" title="View Source Code" >(src)</a> implements polymorphic dispatch methods
-			for the first three of these. In the domain model example, we expect the return type of the body of an <em>Operation</em>
-			to conform to the declared return type. We can do so by specializing the default 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/typing/XbaseTypeProvider.html" title="org.eclipse.xtext.xbase.typing.XbaseTypeProvider">XbaseTypeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/typing/XbaseTypeProvider.java" title="View Source Code" >(src)</a> as
-			</p>
-			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						@Singleton<br/>
-						<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;DomainmodelTypeProvider&nbsp;<span class="keyword">extends</span>&nbsp;XbaseTypeProvider&nbsp;{<br/>
-						<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;JvmTypeReference&nbsp;_expectedType(Operation&nbsp;operation,&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EReference&nbsp;reference,&nbsp;<span class="keyword">int</span>&nbsp;index,&nbsp;<span class="keyword">boolean</span>&nbsp;rawType)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>(reference&nbsp;==&nbsp;DomainmodelPackage.Literals.OPERATION__BODY)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;operation.getType();<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">null</span>;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						}
-					</p>
-				</div>
-			</div>
-			</p>
-			<p>
-			and of course binding this new implementation in the languge's module. By default, Xbase only checks
-			type conformance inside expressions. To address the validation at the expression's boundary, we have
-			to add a <a href="060-validation.php" title="Go to &quot;Validation&quot;">validation rule</a>:
-			</p>
-			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;DomainmodelJavaValidator&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">extends</span>&nbsp;AbstractDomainmodelJavaValidator&nbsp;{<br/>
-						<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;@Inject<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;XbaseTypeConformanceComputer&nbsp;typeConformanceComputer;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;@Inject<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;DomainmodelTypeProvider&nbsp;typeProvider;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;@Check<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;checkTypeConformanceOfOperation(Operation&nbsp;op){<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JvmTypeReference&nbsp;expectedType&nbsp;=&nbsp;typeProvider<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.getExpectedType(op.getBody());<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JvmTypeReference&nbsp;commonReturnType&nbsp;=&nbsp;typeProvider<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.getCommonReturnType(op.getBody(),&nbsp;<span class="keyword">true</span>);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>(!typeConformanceComputer.isConformant(expectedType,&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;commonReturnType))<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error(<span class="string">"Type&nbsp;does&nbsp;not&nbsp;conform&nbsp;to&nbsp;expected&nbsp;type!"</span>,<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.Literals.OPERATION__BODY);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						}
-					</p>
-				</div>
-			</div>
-			</p>
-			<a name="xbaseExpressions_5" ></a>
-			<h2>Generating Java Code using the Xbase Compiler</h2>
-			<p>
-			The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/compiler/XbaseCompiler.html" title="org.eclipse.xtext.xbase.compiler.XbaseCompiler">XbaseCompiler</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/XbaseCompiler.java" title="View Source Code" >(src)</a> compiles Xbase expressions to Java code.
-			You will now learn how to integrate it in the code generator of your DSL. 
-			</p>
-			<p>
-			The following snippet shows how the code generator can call the compiler:
-			</p>
-			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">class</span>&nbsp;DomainmodelGenerator&nbsp;<span class="keyword">implements</span>&nbsp;IGenerator&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;DomainmodelCompiler&nbsp;domainmodelCompiler<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;compile(Operation&nbsp;o,&nbsp;ImportManager&nbsp;importManager)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;&laquo;o.type.shortName(importManager)&raquo;&nbsp;&laquo;o.name&raquo;(&laquo;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o.parameterList(importManager)&raquo;)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;domainmodelCompiler.compile(o,&nbsp;importManager)&raquo;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&apos;</span><span class="string">&apos;&apos;</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;parameterList(Operation&nbsp;o,&nbsp;ImportManager&nbsp;importManager)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o.params.map(p|&nbsp;p.parameterType.shortName(importManager)&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;<span class="string">&apos;&nbsp;&apos;</span>&nbsp;+&nbsp;p.name).join(<span class="string">&apos;&apos;</span><span class="string">&apos;,&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&apos;</span><span class="string">&apos;&apos;</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						}
-					</p>
-				</div>
-			</div>
-			</p>
-			<p>
-			Now let us customize the compiler. The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/compiler/XbaseCompiler.html" title="org.eclipse.xtext.xbase.compiler.XbaseCompiler">XbaseCompiler</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/XbaseCompiler.java" title="View Source Code" >(src)</a> writes its code output into an 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/compiler/IAppendable.html" title="org.eclipse.xtext.xbase.compiler.IAppendable">IAppendable</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/IAppendable.java" title="View Source Code" >(src)</a>. This component keeps track of the indentation, 
-			of local variables, and of the generated code. Use an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/compiler/StringBuilderBasedAppendable.html" title="org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable">StringBuilderBasedAppendable</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/StringBuilderBasedAppendable.java" title="View Source Code" >(src)</a>
-			to generate the code of an XbaseExpression into a <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/StringBuilder.html" title="java.lang.StringBuilder">StringBuilder</abbr></a>. Before calling the
-			compiler, we add the operation's parameters to the local variables. 
-			</p>
-			<p>
-			Remember that in the <a href="199d-xbase-expressions.php#xbaseScopeProvider" title="Go to &quot;Populating the Scopes&quot;">scope provider</a> we bound the variable <em>this</em> to the inferred type of the current <em>Entity</em>. 
-			The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/compiler/XbaseCompiler.html" title="org.eclipse.xtext.xbase.compiler.XbaseCompiler">XbaseCompiler</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/XbaseCompiler.java" title="View Source Code" >(src)</a> will by default assign the value of all expressions
-			to a new Java variable. If we just call <em>this</em>, we don't need that, so we override <em>isVariableDeclarationRequired</em>
-			to return false in this case. Similarly, whenever the compiler needs to put a variable name for the inferred
-			Java type, it should use <em>this</em>. This can be achieved by overriding <em>getVarName()</em>. In a similar way,
-			we have to override the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/featurecalls/IdentifiableSimpleNameProvider.html" title="org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider">IdentifiableSimpleNameProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/featurecalls/IdentifiableSimpleNameProvider.java" title="View Source Code" >(src)</a>
-			to return <em>this</em> for the type. It is likely that we will reduce the last two tasks to one in the future.
-			</p>
-			<p>
-			Here's the complete code for the customized compiler:
-			</p>
-			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;DomainmodelCompiler&nbsp;<span class="keyword">extends</span>&nbsp;XbaseCompiler&nbsp;{<br/>
-						<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;compile(Operation&nbsp;operation,&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ImportManager&nbsp;importManager)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StringBuilderBasedAppendable&nbsp;appendable&nbsp;=&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">new</span>&nbsp;StringBuilderBasedAppendable(importManager);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(JvmFormalParameter&nbsp;param:&nbsp;operation.getParams())&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;appendable.declareVariable(param,&nbsp;param.getName());<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;compile(operation.getBody(),&nbsp;appendable,&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;operation.getType()).toString();<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;@Override<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;<span class="keyword">boolean</span>&nbsp;isVariableDeclarationRequired(XExpression&nbsp;expr,&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IAppendable&nbsp;b)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(expr&nbsp;<span class="keyword">instanceof</span>&nbsp;XAbstractFeatureCall&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;&amp;&nbsp;((XAbstractFeatureCall)expr).getFeature()&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">instanceof</span>&nbsp;JvmGenericType)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">false</span>;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">super</span>.isVariableDeclarationRequired(expr,b);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;@Override<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;String&nbsp;getVarName(Object&nbsp;ex,&nbsp;IAppendable&nbsp;appendable)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>(ex&nbsp;<span class="keyword">instanceof</span>&nbsp;JvmGenericType)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"this"</span>;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">super</span>.getVarName(ex,&nbsp;appendable);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						}
-					</p>
-				</div>
-			</div>
-			</p>
-			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">class</span>&nbsp;DomainmodelIdentifiableSimpleNameProvider&nbsp;<span class="keyword">extends</span>&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;IdentifiableSimpleNameProvider&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;getSimpleName(JvmType&nbsp;element)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"this"</span>;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;getSimpleName(JvmIdentifiableElement&nbsp;element)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">super</span>.getSimpleName(element);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						}
-					</p>
-				</div>
-			</div>
-			</p>
-			<a name="xbaseExpressions_6" ></a>
+			<a name="xbaseExpressions_3" ></a>
 			<h2>Using the Xbase Interpreter</h2>
 			<p>
 			Sometimes it is more convenient to interpret a model that uses Xbase than to generate code from it.  
@@ -571,7 +288,7 @@
 			An interpreter is essentially an external visitor, that recursively processes a model based on the model
 			element's types. By now you should be aware that polymorphic dispatch is exactly the technology needed
 			here. In the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.html" title="org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter">XbaseInterpreter</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java" title="View Source Code" >(src)</a>, the dispatch method
-			is called <em>_evaluate&lt;ElementTypeWithoutX&gt;</em> and takes two parameters, e.g. 
+			is called <em>_evaluate&lt;SomeDescription&gt;</em> and takes three parameters, e.g. 
 			</p>
 			<p>
 			<div class="literallayout">

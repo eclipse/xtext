@@ -281,27 +281,6 @@
 			provides a comprehensive set of reusable filters that can be easily combined to reduce the list of proposals
 			to a smaller number of valid entries.
 			</p>
-			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters;&nbsp;<br/>
-						<br/>
-						&nbsp;&nbsp;<span class="comment">//&nbsp;..<br/>
-						</span>&nbsp;&nbsp;proposalProvider.createSubTypeProposals(<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;superType,&nbsp;factory,&nbsp;context,<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;MyDslPackage.Literals.TYPE__MAPPED_TO,<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;TypeMatchFilters.and(<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TypeMatchFilters.not(<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TypeMatchFilters.canInstantiate()<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TypeMatchFilters.isPublic()<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;),&nbsp;acceptor);
-					</p>
-				</div>
-			</div>
-			
-			</p>
 		<div id="disqus_thread"></div>
 		<script type="text/javascript" src="documentationRoot.js"></script>
 		<script type="text/javascript">

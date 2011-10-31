@@ -201,7 +201,7 @@
 		</p>
 		<p>
 		The revised domain model language supports expressions and cross links to Java types. It is directly
-		translated to Java source code. The expression's syntax is very suggestive. Here is an example :
+		translated to Java source code. The syntax should look very familiar. Here is an example :
 		</p>
 		<p>
 		<div class="literallayout">
@@ -412,7 +412,7 @@
 			  	<div class="incode">
 			  		<p class="code">
 			  			<span class="keyword">grammar</span>&nbsp;org.example.domainmodel.DomainModel&nbsp;<span class="keyword">with</span><br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.xbase.Xbase
+			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.xbase.Xbase
 			  		</p>
 			  	</div>
 			  </div>
@@ -506,8 +506,8 @@
 			  
 			  		The rule <em>Entity</em> starts with the definition of a keyword followed by a name.
 			  		
-			  		The <em>extends</em> clause which is parenthesized and optional (not the trailing <span class="inlinecode">?</span>) makes use of the rule
-			  		<em>JvmTypeReference</em> which is defined in a super grammar. This rule defines the
+			  		The <em>extends</em> clause which is parenthesized and optional (note the trailing <span class="inlinecode">?</span>) makes use of the rule
+			  		<em>JvmTypeReference</em> which is defined in a super grammar. <em>JvmTypeReference</em> defines the
 			  		syntax for full Java-like type names. That is everything from simple names, over fully qualified
 			  		names to fully-fledged generics, including wildcards, lower bounds and upper bounds.
 			  		
@@ -650,19 +650,19 @@
 						<br/>
 						&nbsp;&nbsp;<span class="comment">/**<br/>
 						&nbsp;&nbsp;&nbsp;*&nbsp;a&nbsp;builder&nbsp;API&nbsp;to&nbsp;programmatically&nbsp;create&nbsp;Jvm&nbsp;elements&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;*&nbsp;in&nbsp;readble&nbsp;way.<br/>
+						&nbsp;&nbsp;&nbsp;*&nbsp;in&nbsp;readable&nbsp;way.<br/>
 						&nbsp;&nbsp;&nbsp;*/</span><br/>
 						&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;JvmTypesBuilder<br/>
 						&nbsp;&nbsp;<br/>
 						&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IQualifiedNameProvider<br/>
 						&nbsp;&nbsp;<br/>
 						&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;<span class="keyword">void</span>&nbsp;infer(Entity&nbsp;element,&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IAcceptor&lt;JvmDeclaredType&gt;&nbsp;acceptor,&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">boolean</span>&nbsp;isPrelinkingPhase)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IAcceptor&lt;JvmDeclaredType&gt;&nbsp;acceptor,&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">boolean</span>&nbsp;isPrelinkingPhase)&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;acceptor.accept(element.toClass(element.fullyQualifiedName)&nbsp;[<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;acceptor.accept(element.toClass(element.fullyQualifiedName)&nbsp;[<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;documentation&nbsp;=&nbsp;element.documentation<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(feature&nbsp;:&nbsp;element.features)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(feature&nbsp;:&nbsp;element.features)&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">switch</span>&nbsp;feature&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Property&nbsp;:&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toField(feature.name,&nbsp;feature.type)<br/>
@@ -750,15 +750,15 @@
 			  	<div class="incode">
 			  		<p class="code">
 			  			<span class="keyword">for</span>&nbsp;(feature&nbsp;:&nbsp;element.features)&nbsp;{<br/>
-			  			<span class="keyword">switch</span>&nbsp;feature&nbsp;{&nbsp;<span class="comment">//&nbsp;(4)<br/>
-			  			</span>&nbsp;&nbsp;Property&nbsp;:&nbsp;{<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;...<br/>
-			  			</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Operation&nbsp;:&nbsp;{<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;...<br/>
-			  			</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-			  			&nbsp;&nbsp;&nbsp;}<br/>
-			  			&nbsp;}
+			  			&nbsp;&nbsp;<span class="keyword">switch</span>&nbsp;feature&nbsp;{&nbsp;<span class="comment">//&nbsp;(4)<br/>
+			  			</span>&nbsp;&nbsp;&nbsp;&nbsp;Property&nbsp;:&nbsp;{<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;...<br/>
+			  			</span>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;Operation&nbsp;:&nbsp;{<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;...<br/>
+			  			</span>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+			  			&nbsp;&nbsp;}<br/>
+			  			}
 			  		</p>
 			  	</div>
 			  </div>
@@ -790,14 +790,14 @@
 			  	<div class="incode">
 			  		<p class="code">
 			  			Operation&nbsp;:&nbsp;{<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toMethod(feature.name,&nbsp;feature.type)&nbsp;[<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(p&nbsp;:&nbsp;feature.params)&nbsp;{<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameters&nbsp;+=&nbsp;p.toParameter(p.name,&nbsp;p.parameterType)<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;documentation&nbsp;=&nbsp;feature.documentation<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body&nbsp;=&nbsp;feature.body<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
-			  			&nbsp;&nbsp;&nbsp;}
+			  			&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toMethod(feature.name,&nbsp;feature.type)&nbsp;[<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(p&nbsp;:&nbsp;feature.params)&nbsp;{<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameters&nbsp;+=&nbsp;p.toParameter(p.name,&nbsp;p.parameterType)<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;documentation&nbsp;=&nbsp;feature.documentation<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;body&nbsp;=&nbsp;feature.body<br/>
+			  			&nbsp;&nbsp;]<br/>
+			  			}
 			  		</p>
 			  	</div>
 			  </div>

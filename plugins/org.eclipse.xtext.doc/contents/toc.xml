@@ -339,17 +339,9 @@
 			<topic href="contents/199-xtext-and-java.html#xbaseInferredType" label="Inferring a JVM Model" >
 				<topic href="contents/199-xtext-and-java.html" label="Linking and Indexing" >
 				</topic>
-				<topic href="contents/199-xtext-and-java.html" label="Generation Parameters For Inferred JVM Types" >
-				</topic>
 			</topic>
 			<topic href="contents/199-xtext-and-java.html#xbaseExpressions" label="Using Xbase Expressions" >
 				<topic href="contents/199-xtext-and-java.html" label="Making Your Grammar Refer To Xbase" >
-				</topic>
-				<topic href="contents/199-xtext-and-java.html#xbaseScopeProvider" label="Populating the Scopes" >
-				</topic>
-				<topic href="contents/199-xtext-and-java.html" label="Type Checking at the Boundaries" >
-				</topic>
-				<topic href="contents/199-xtext-and-java.html" label="Generating Java Code using the Xbase Compiler" >
 				</topic>
 				<topic href="contents/199-xtext-and-java.html" label="Using the Xbase Interpreter" >
 				</topic>

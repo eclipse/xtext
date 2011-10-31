@@ -191,7 +191,6 @@
 			<div class="toc">
 			  <ul>
 			    <li><a href="199c-xbase-inferred-type.php#xbaseInferredType_7" >Linking and Indexing</a></li>
-			    <li><a href="199c-xbase-inferred-type.php#xbaseInferredType_8" >Generation Parameters For Inferred JVM Types</a></li>
 			  </ul>
 			</div>
 			<p>
@@ -217,101 +216,58 @@
 			i.e. use entities instead of Java types or even mix Java types as <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/List.html" title="java.util.List">List</abbr></a> with entities such as <em>Person</em>.
 			One way to achieve this is to let your concepts inherit from a corresponding JVM type, e.g. let <em>Entity</em>
 			inherit from <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/JvmGenericType.html" title="org.eclipse.xtext.common.types.JvmGenericType">JvmGenericType</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/JvmGenericType.java" title="View Source Code" >(src)</a>. But this would result in a lot of 
-			accidentally inherited properties in your domain model. In Xbase there is an alternative: You can define how
+			accidentally inherited properties in your domain model. In Xbase there is an alternative: You can simply define how
 			to derive a JVM model from your model. This <em>inferred JVM model</em> is the representation of your concepts
 			in the typesystem of Xbase.  
 			</p>
 			<p>
 			The main component for the inferred JVM model is the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.html" title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer">IJvmModelInferrer</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java" title="View Source Code" >(src)</a>.
-			It has a single method that gets a model element passed in and returns a list of 
+			It has a single method that takes the root model element as an argument and produces a number of 
 			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/JvmGenericType.html" title="org.eclipse.xtext.common.types.JvmGenericType">JvmGenericTypes</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/JvmGenericType.java" title="View Source Code" >(src)</a>. As Xbase cannot guess how you
 			would like to map your concepts to JVM elements, you have to implement this component yourself. This
-			usually boils down to use an injected <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/TypesFactory.html" title="org.eclipse.xtext.common.types.TypesFactory">TypesFactory</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/TypesFactory.java" title="View Source Code" >(src)</a> to create
-			a hierarchy of JVM elements, initialize that with values from the input model, and eventually use an injected
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociator.html" title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator">IJvmModelAssociator</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociator.java" title="View Source Code" >(src)</a> to associate the model elements with the
-			JVM elements. As this kind of transformation can be elegantly implemented using polymorphic dispatch
-			functions and extension methods, it is a good choice to write the 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.html" title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer">IJvmModelInferrer</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java" title="View Source Code" >(src)</a> in Xtend.
+			usually boils down to using an injected <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html" title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder">JvmTypesBuilder</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java" title="View Source Code" >(src)</a> to create
+			a hierarchy of JVM elements. The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html" title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder">builder</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java" title="View Source Code" >(src)</a> helps
+			to initialize the produced types with sensible default and encapsulates the logic that associates the
+			source elements with the derived JVM concepts. As this kind of transformation can be elegantly implemented 
+			using polymorphic dispatch functions and extension methods, it is a good choice to write the 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.html" title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer">IJvmModelInferrer</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java" title="View Source Code" >(src)</a> in Xtend. It becomes even simpler if you
+			inherit from the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/jvmmodel/AbstractModelInferrer.html" title="org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer">AbstractModelInferrer</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/AbstractModelInferrer.java" title="View Source Code" >(src)</a> which traverses the
+			input model and dispatches to its contents until you decide which elements to handle. 
 			</p>
 			<p>
-			For our domain model example, we call a recursive polymorphic dispatch function <em>transform</em> to traverse
-			the containment hierarchy of the source model and generate JVM elements on the way. We transform each
-			<em>Entity</em> to a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/JvmGenericType.html" title="org.eclipse.xtext.common.types.JvmGenericType">JvmGenericType</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/JvmGenericType.java" title="View Source Code" >(src)</a> that holds a 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/JvmOperation.html" title="org.eclipse.xtext.common.types.JvmOperation">JvmOperation</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/JvmOperation.java" title="View Source Code" >(src)</a> for each <em>Operation</em> and a 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/JvmField.html" title="org.eclipse.xtext.common.types.JvmField">JvmField</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/JvmField.java" title="View Source Code" >(src)</a> plus access methods for each <em>Property</em>. Whenever
-			we have to copy a subtree, e.g. for setting the supertype of the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/JvmGenericType.html" title="org.eclipse.xtext.common.types.JvmGenericType">JvmGenericType</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/JvmGenericType.java" title="View Source Code" >(src)</a>,
-			we use <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/EcoreUtil2.html" title="org.eclipse.xtext.EcoreUtil2">EcoreUtil2</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/EcoreUtil2.java" title="View Source Code" >(src)</a> <em>.cloneWithProxies()</em> to avoid eager resolution of referenced
-			types. The resulting <em>DomainmodelJvmModelInferrer</em> looks like this:
+			For our domain model example, we implement a polymorphic dispatch function <em>infer</em> for
+			<em>Entities</em> to transform them into a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/JvmGenericType.html" title="org.eclipse.xtext.common.types.JvmGenericType">JvmGenericType</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/JvmGenericType.java" title="View Source Code" >(src)</a>. The produced
+			type holds a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/JvmOperation.html" title="org.eclipse.xtext.common.types.JvmOperation">JvmOperation</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/JvmOperation.java" title="View Source Code" >(src)</a> for each <em>Operation</em> and a 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/JvmField.html" title="org.eclipse.xtext.common.types.JvmField">JvmField</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/JvmField.java" title="View Source Code" >(src)</a> plus accessors for each <em>Property</em>. The resulting 
+			<em>DomainmodelJvmModelInferrer</em> looks like this:
 			</p>
 			<p>
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">class</span>&nbsp;DomainmodelJvmModelInferrer&nbsp;<span class="keyword">implements</span>&nbsp;IJvmModelInferrer&nbsp;{<br/>
+						<span class="keyword">class</span>&nbsp;DomainModelJvmModelInferrer&nbsp;<span class="keyword">extends</span>&nbsp;AbstractModelInferrer&nbsp;{<br/>
 						<br/>
-						&nbsp;&nbsp;&nbsp;@Inject&nbsp;TypesFactory&nbsp;typesFactory<br/>
-						&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IJvmModelAssociator&nbsp;jvmModelAssociator<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;List&lt;JvmDeclaredType&gt;&nbsp;inferJvmModel(EObject&nbsp;sourceObject)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sourceObject.disassociate<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;transform(&nbsp;sourceObject&nbsp;).toList<br/>
-						&nbsp;&nbsp;&nbsp;}<br/>
-						&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;Iterable&lt;JvmDeclaredType&gt;&nbsp;transform(<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Domainmodel&nbsp;model)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;model.elements.map(e&nbsp;|&nbsp;transform(e)).flatten<br/>
-						&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;<span class="comment">/**<br/>
+						&nbsp;&nbsp;&nbsp;*&nbsp;a&nbsp;builder&nbsp;API&nbsp;to&nbsp;programmatically&nbsp;create&nbsp;Jvm&nbsp;elements&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;*&nbsp;in&nbsp;readable&nbsp;way.<br/>
+						&nbsp;&nbsp;&nbsp;*/</span><br/>
+						&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;JvmTypesBuilder<br/>
+						&nbsp;&nbsp;<br/>
+						&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IQualifiedNameProvider<br/>
+						&nbsp;&nbsp;<br/>
+						&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;<span class="keyword">void</span>&nbsp;infer(Entity&nbsp;element,&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IAcceptor&lt;JvmDeclaredType&gt;&nbsp;acceptor,&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">boolean</span>&nbsp;isPrelinkingPhase)&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;Iterable&lt;JvmDeclaredType&gt;&nbsp;transform(<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PackageDeclaration&nbsp;packageDecl)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;packageDecl.elements.map(e&nbsp;|&nbsp;transform(e)).flatten<br/>
-						&nbsp;&nbsp;&nbsp;}<br/>
-						<br/>
-						&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;Iterable&lt;JvmDeclaredType&gt;&nbsp;transform(Entity&nbsp;entity)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;jvmClass&nbsp;=&nbsp;typesFactory.createJvmGenericType&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jvmClass.simpleName&nbsp;=&nbsp;entity.name<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jvmClass.packageName&nbsp;=&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(entity.eContainer&nbsp;<span class="keyword">as</span>&nbsp;PackageDeclaration).name<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entity.associatePrimary(jvmClass)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jvmClass.visibility&nbsp;=&nbsp;JvmVisibility::PUBLIC<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(entity.superType&nbsp;!=&nbsp;null)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jvmClass.superTypes&nbsp;+=&nbsp;cloneWithProxies(entity.superType)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(f&nbsp;:&nbsp;entity.features)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;transform(f,&nbsp;jvmClass)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;newArrayList(jvmClass&nbsp;<span class="keyword">as</span>&nbsp;JvmDeclaredType)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;}<br/>
-						&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;Iterable&lt;JvmDeclaredType&gt;&nbsp;transform(Import&nbsp;i)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;emptyList<br/>
-						&nbsp;&nbsp;&nbsp;}<br/>
-						&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">void</span>&nbsp;transform(Feature&nbsp;feature,&nbsp;JvmGenericType&nbsp;type)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;jvmField&nbsp;=&nbsp;typesFactory.createJvmField<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jvmField.simpleName&nbsp;=&nbsp;feature.name<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jvmField.type&nbsp;=&nbsp;cloneWithProxies(feature.type)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jvmField.visibility&nbsp;=&nbsp;JvmVisibility::PRIVATE<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type.members&nbsp;+=&nbsp;jvmField<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feature.associatePrimary(jvmField)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;jvmGetter&nbsp;=&nbsp;typesFactory.createJvmOperation<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jvmGetter.simpleName&nbsp;=&nbsp;<span class="string">"get"</span>&nbsp;+&nbsp;feature.name.toFirstUpper<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jvmGetter.returnType&nbsp;=&nbsp;cloneWithProxies(feature.type)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jvmGetter.visibility&nbsp;=&nbsp;JvmVisibility::PUBLIC<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type.members&nbsp;+=&nbsp;jvmGetter<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feature.associatePrimary(jvmGetter)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;jvmSetter&nbsp;=&nbsp;typesFactory.createJvmOperation<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jvmSetter.simpleName&nbsp;=&nbsp;<span class="string">"set"</span>&nbsp;+&nbsp;feature.name.toFirstUpper<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;parameter&nbsp;=&nbsp;typesFactory.createJvmFormalParameter<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameter.name&nbsp;=&nbsp;feature.name.toFirstUpper<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameter.parameterType&nbsp;=&nbsp;cloneWithProxies(feature.type)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jvmSetter.visibility&nbsp;=&nbsp;JvmVisibility::PUBLIC<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jvmSetter.parameters&nbsp;+=&nbsp;parameter<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type.members&nbsp;+=&nbsp;jvmSetter<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feature.associatePrimary(jvmSetter)<br/>
-						&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;acceptor.accept(element.toClass(element.fullyQualifiedName)&nbsp;[<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;documentation&nbsp;=&nbsp;element.documentation<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(feature&nbsp;:&nbsp;element.features)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toField(feature.name,&nbsp;feature.type)<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toSetter(feature.name,&nbsp;feature.type)<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toGetter(feature.name,&nbsp;feature.type)<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;])<br/>
+						&nbsp;&nbsp;}<br/>
 						}
 					</p>
 				</div>
@@ -328,62 +284,12 @@
 			The Xbase framework will automatically switch between the JVM element or the DSL element when needed, e.g. when 
 			following hyperlinks. The component allowing to navigate between the source model and the JVM model is
 			called <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociations.html" title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations">IJvmModelAssociations</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociations.java" title="View Source Code" >(src)</a>, the read-only antagonist of the
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociator.html" title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator">IJvmModelAssociator</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociator.java" title="View Source Code" >(src)</a>.
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociator.html" title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator">IJvmModelAssociator</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociator.java" title="View Source Code" >(src)</a> that is used by the 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html" title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder">JvmTypesBuilder</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java" title="View Source Code" >(src)</a>.
 			</p>
 			<p>
 			By default, the inferred model is <a href="080-scoping.php#global_scopes" title="Go to &quot;Global Scopes and Resource Descriptions&quot;">indexed</a>, so it can be cross referenced from other
-			models.   
-			<a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=350812" >In Xtext 2.0.0</a> you still have to make sure the qualified
-			names are computed correctly by implementing and binding an appropriate <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/IQualifiedNameProvider.html" title="org.eclipse.xtext.naming.IQualifiedNameProvider">IQualifiedNameProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java" title="View Source Code" >(src)</a>:
-			</p>
-			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;DomainmodelQualifiedNameProvider&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">extends</span>&nbsp;DefaultDeclarativeQualifiedNameProvider&nbsp;{<br/>
-						<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;@Inject<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;IQualifiedNameConverter&nbsp;converter;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;QualifiedName&nbsp;qualifiedName(JvmGenericType&nbsp;type)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;converter.toQualifiedName(type.getQualifiedName());<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						}
-					</p>
-				</div>
-			</div>
-			</p>
-			<a name="xbaseInferredType_8" ></a>
-			<h2>Generation Parameters For Inferred JVM Types</h2>
-			<p>
-			Several MWE generator fragments have additional properties for the <a href="199c-xbase-inferred-type.php" title="Go to &quot;Inferring a JVM Model&quot;">JVM model inference</a>:
-			<table>
-			  <tr>
-			    <td>Fragment</td>
-			    <td>Property</td>
-			    <td>Purpose</td>
-			    <td>Default</td>
-			  </tr>
-			  <tr>
-			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/xbase/XbaseGeneratorFragment.html" title="org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment">XbaseGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/xbase/XbaseGeneratorFragment.java" title="View Source Code" >(src)</a></td>
-			    <td><em>useInferredJvmModel</em></td>
-			    <td>Generate a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.html" title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer">IJvmModelInferrer</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java" title="View Source Code" >(src)</a> stub and hooks for an inferred JVM model</td>
-			    <td><em>true</em></td>
-			  </tr>
-			  <tr>
-			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/xbase/XbaseGeneratorFragment.html" title="org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment">XbaseGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/xbase/XbaseGeneratorFragment.java" title="View Source Code" >(src)</a></td>
-			    <td><em>generateXtendInferrer</em></td>
-			    <td>Generate the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.html" title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer">IJvmModelInferrer</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java" title="View Source Code" >(src)</a> stub in Xtend instead of Java</td>
-			    <td><em>true</em></td>
-			  </tr>
-			  <tr>
-			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/generator/refactoring/RefactorElementNameFragment.html" title="org.eclipse.xtext.ui.generator.refactoring.RefactorElementNameFragment">RefactorElementNameFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/refactoring/RefactorElementNameFragment.java" title="View Source Code" >(src)</a></td>
-			    <td><em>useJdtRefactoring</em></td>
-			    <td>Always trigger JDT refactoring and register element rename refactoring as a participant thereof</td>
-			    <td><em>false</em></td>
-			  </tr>
-			</table>
+			models.
 			</p>
 		<div id="disqus_thread"></div>
 		<script type="text/javascript" src="documentationRoot.js"></script>
