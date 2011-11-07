@@ -222,6 +222,8 @@ public class XtextLinkingService extends DefaultLinkingService {
 				return null;
 			if (uri.fragment() == null) {
 				Resource resource = resourceSet.getResource(uri, true);
+				if (resource.getContents().isEmpty())
+					return null;
 				EPackage result = (EPackage) resource.getContents().get(0);
 				return result;
 			}
