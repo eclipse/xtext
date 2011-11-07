@@ -81,7 +81,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	protected void doConversion(final JvmTypeReference left, final JvmTypeReference right,
 			final IAppendable appendable, XExpression context, final Later expression) {
 		if (getPrimitives().isPrimitive(right) && !getPrimitives().isPrimitive(left)) {
-			convertPrimitiveToWrapper(getPrimitives().asWrapperTypeIfPrimitive(right), appendable, expression);
+			convertPrimitiveToWrapper(getPrimitives().asWrapperTypeIfPrimitive(right), context, appendable, expression);
 		} else if (right instanceof JvmMultiTypeReference) {
 			convertMultiType(left, (JvmMultiTypeReference) right, context, appendable, expression);
 		} else if (right instanceof JvmDelegateTypeReference) {
@@ -235,7 +235,10 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		appendable.append("))");
 	}
 
-	protected void convertPrimitiveToWrapper(final JvmTypeReference wrapper, final IAppendable appendable,
+	protected void convertPrimitiveToWrapper(
+			final JvmTypeReference wrapper, 
+			XExpression context, 
+			final IAppendable appendable,
 			final Later expression) {
 		appendable.append("((");
 		serialize(wrapper, null, appendable);
