@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<site>
-   <feature url="features/org.eclipse.xtext.targetplatform35.feature_1.0.0.201011251618.jar" id="org.eclipse.xtext.targetplatform35.feature" version="1.0.0.201011251618">
-      <category name="Xtext Targetplatform 3.5 Galileo"/>
-   </feature>
-   <category-def name="Xtext Targetplatform 3.5 Galileo" label="targetplatform35"/>
-</site>
