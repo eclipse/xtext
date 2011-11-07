@@ -60,6 +60,20 @@ import com.google.inject.Injector;
  */
 public class CompilerTest extends AbstractXtend2TestCase {
 	
+	public void testBug_362651() throws Exception {
+		String code = 
+				"class Z {\n" +
+				"	def boolean test() {\n" +
+				"       val _class = 'Z'\n" +
+				"		[| this.^class.name == _class.toUpperCase].apply" + 
+				"	}\n" +
+				"}\n";
+		String javaCode = compileToJavaCode(code);
+		Class<?> class1 = javaCompiler.compileToClass("Z", javaCode);
+		Object object = class1.newInstance();
+		assertTrue((Boolean)class1.getDeclaredMethod("test").invoke(object));
+	}
+	
 	public void testReferenceStaticallyImportedFields() throws Exception {
 		String code = 
 				"import java.lang.annotation.RetentionPolicy\n" +
