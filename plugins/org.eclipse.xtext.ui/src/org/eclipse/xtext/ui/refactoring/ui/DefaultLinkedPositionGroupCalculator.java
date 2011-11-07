@@ -98,6 +98,9 @@ public class DefaultLinkedPositionGroupCalculator implements ILinkedPositionGrou
 		SubMonitor progress = SubMonitor.convert(monitor, 100);
 		XtextEditor editor = (XtextEditor) renameElementContext.getTriggeringEditor();
 		IProject project = projectUtil.getProject(renameElementContext.getContextResourceURI());
+		if(project == null) 
+			throw new IllegalStateException("Could not determine project for context resource " 
+					+ renameElementContext.getContextResourceURI());
 		ResourceSet resourceSet = resourceSetProvider.get(project);
 		EObject targetElement = resourceSet.getEObject(renameElementContext.getTargetElementURI(), true);
 		if (targetElement == null)

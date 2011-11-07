@@ -55,13 +55,12 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 	private RefactoringPreferences preferences;
 
 	protected IFileEditorInput getEditorInput(URI resourceURI, StatusWrapper status) {
-		try {
-			IFile file = projectUtil.findFileStorage(resourceURI, true);
-			return new FileEditorInput(file);
-		} catch (IllegalArgumentException e) {
+		IFile file = projectUtil.findFileStorage(resourceURI, true);
+		if(file == null) {
 			status.add(ERROR, "No suitable storage found for resource {0}.", resourceURI);
 			return null;
 		}
+		return new FileEditorInput(file);
 	}
 
 	public IRefactoringDocument get(URI uri, final StatusWrapper status) {

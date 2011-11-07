@@ -15,6 +15,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
@@ -77,7 +78,7 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 	@Inject
 	@Named(Constants.LANGUAGE_NAME)
 	private String languageName;
-	
+
 	@Inject
 	private StatusWrapper status;
 
@@ -117,18 +118,22 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 		}
 		return true;
 	}
-	
+
 	protected ResourceSet createResourceSet(IRenameElementContext renameElementContext) {
-		return resourceSetProvider.get(projectUtil.getProject(targetElementURI));
+		IProject project = projectUtil.getProject(targetElementURI);
+		if(project == null) {
+			status.add(FATAL, "Could not find project for ", renameElementContext.getTargetElementURI());
+			return null;
+		}
+		return resourceSetProvider.get(project);
 	}
 
 	protected boolean isValidTargetFile(Resource resource, StatusWrapper status) {
 		IFile targetFile = projectUtil.findFileStorage(resource.getURI(), true);
-		if (targetFile == null) {
-			status.add(FATAL, "Rename target file cannot be accessed");
-			return false;
-		}
-		return true;
+		if (targetFile != null)
+			return true;
+		status.add(FATAL, "Rename target file cannot be accessed");
+		return false;
 	}
 
 	protected IRenameStrategy createRenameElementStrategy(EObject targetElement,

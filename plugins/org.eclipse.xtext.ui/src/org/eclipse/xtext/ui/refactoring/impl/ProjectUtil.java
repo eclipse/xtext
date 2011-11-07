@@ -34,11 +34,19 @@ public class ProjectUtil {
 	@Inject
 	private IStorage2UriMapper mapper;
 
+	/**
+	 * @returns null if there is no such project or the file is not accessible
+	 */
 	public IProject getProject(URI uri) {
 		IFile file = findFileStorage(uri, false);
+		if(file == null)
+			return null;
 		return file.getProject();
 	}
 
+	/**
+	 * @returns null if there is no such file or the file is not editable
+	 */
 	public IFile findFileStorage(final URI uri, final boolean validateEdit) {
 		Iterable<Pair<IStorage, IProject>> storages = mapper.getStorages(uri);
 		try {
@@ -56,7 +64,7 @@ public class ProjectUtil {
 			});
 			return (IFile) fileStorage.getFirst();
 		} catch (NoSuchElementException e) {
-			throw new IllegalArgumentException("Cannot find file storage for " + uri, e);
+			return null;
 		}
 	}
 
