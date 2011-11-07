@@ -20,8 +20,6 @@ import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.TextEditBasedChange;
 import org.eclipse.ltk.core.refactoring.TextEditBasedChangeGroup;
 import org.eclipse.text.edits.TextEditGroup;
-import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
 
@@ -129,13 +127,14 @@ public class DisplayChangeWrapper extends TextEditBasedChange {
 		Change undoChange = new DisplayRunnableWithResult<Change>() {
 			@Override
 			protected Change run() throws Exception {
-				return delegate.perform(monitor.newChild(1));
+				Change result = delegate.perform(monitor.newChild(1));
+				if(editorToSave != null) {
+					editorToSave.doSave(monitor.newChild(1));
+				}
+				return result;
 			}
 		}.syncExec();
 		DisplayChangeWrapper undoWrap = new DisplayChangeWrapper(undoChange, editorToSave);
-		if(editorToSave != null) {
-			editorToSave.doSave(monitor.newChild(1));
-		}
 		return undoWrap;
 	}
 
