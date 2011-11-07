@@ -195,6 +195,15 @@ public abstract class AbstractXbaseCompiler {
 		return name;
 	}
 
+	protected String declareFreshNameInVariableScope(EObject declaration, IAppendable appendable) {
+		final String favoriteVariableName = makeJavaIdentifier(getFavoriteVariableName(declaration));
+		if (appendable instanceof StringBuilderBasedAppendable) {
+			StringBuilderBasedAppendable sbAppendable = (StringBuilderBasedAppendable) appendable;
+			return sbAppendable.declareFreshVariable(declaration, favoriteVariableName);
+		}
+		return appendable.declareVariable(declaration, favoriteVariableName);
+	}
+	
 	protected String declareNameInVariableScope(EObject declaration, IAppendable appendable) {
 		final String favoriteVariableName = makeJavaIdentifier(getFavoriteVariableName(declaration));
 		final String varName = appendable.declareVariable(declaration, favoriteVariableName);
@@ -249,7 +258,7 @@ public abstract class AbstractXbaseCompiler {
 		//TODO escape all Java keywords
 		return name.equals("this") ? "_this" : name;
 	}
-
+	
 	protected void declareLocalVariable(XExpression expr, final IAppendable b) {
 		declareLocalVariable(expr, b, getDefaultValueLiteral(expr));
 	}
@@ -275,6 +284,9 @@ public abstract class AbstractXbaseCompiler {
 		});
 	}
 
+	/**
+	 * TODO rename this method to 'declareFreshLocalVariable' after 2.1.x
+	 */
 	protected void declareLocalVariable(XExpression expr, IAppendable b, Later expression) {
 		JvmTypeReference type = getTypeProvider().getType(expr);
 		//TODO we need to replace any occurrence of JvmAnyTypeReference with a better match from the expected type
@@ -283,7 +295,7 @@ public abstract class AbstractXbaseCompiler {
 			if (expectedType!=null && !(expectedType.getType() instanceof JvmTypeParameter))
 				type = expectedType;
 		}
-		String varName = declareNameInVariableScope(expr, b);
+		String varName = declareFreshNameInVariableScope(expr, b);
 		b.append("\n");
 		serialize(type,expr,b);
 		b.append(" ").append(varName).append(" = ");
