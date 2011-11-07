@@ -8,8 +8,36 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.editor.quickfix;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.AbstractList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
+import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
+import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.EStructuralFeature.Setting;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.emf.ecore.xmi.impl.URIHandlerImpl;
 import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.EnumLiteralDeclaration;
@@ -18,8 +46,15 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.XtextFactory;
+import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
@@ -27,12 +62,19 @@ import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xtext.XtextLinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.xtext.XtextValidator;
 
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
+import com.google.inject.Inject;
+
 /**
  * @author Michael Clay - Initial contribution and API
+ * @author Sebastian Zarnekow - Quickfixes for bogus EPackage imports
  */
 public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 	private String NULL_QUICKFIX_IMAGE = null;
@@ -51,7 +93,13 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 //				});
 //		createLinkingIssueResolutions(issue, acceptor);
 //	}
-
+	
+	@Inject
+	private IValueConverterService valueConverterService;
+	
+	@Inject
+	private ResourceDescriptionsProvider resourceDescriptionsProvider;
+	
 	@Fix(XtextLinkingDiagnosticMessageProvider.UNRESOLVED_RULE)
 	public void fixUnresolvedRule(final Issue issue, IssueResolutionAcceptor acceptor) {
 		final String ruleName = issue.getData()[0];
@@ -104,6 +152,209 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 						context.getXtextDocument().replace(issue.getOffset(), issue.getLength(), "");
 					}
 				});
+	}
+	
+	@Fix(XtextValidator.INVALID_PACKAGE_REFERENCE_INHERITED)
+	public void fixImportedPackageFromSuperGrammar(final Issue issue, IssueResolutionAcceptor acceptor) {
+		if (issue.getData().length == 1)
+			acceptor.accept(issue, 
+					"Change to '" + issue.getData()[0] + "'", 
+					"Fix the bogus package import\n" +
+					"import '" + issue.getData()[0] + "'", NULL_QUICKFIX_IMAGE,
+					new IModification() {
+						public void apply(IModificationContext context) throws BadLocationException {
+							String replaceString = valueConverterService.toString(issue.getData()[0], "STRING");
+							IXtextDocument document = context.getXtextDocument();
+							String delimiter = document.get(issue.getOffset(), 1);
+							if (!replaceString.startsWith(delimiter)) {
+								replaceString = delimiter + replaceString.substring(1, replaceString.length() - 1) + delimiter; 
+							}
+							document.replace(issue.getOffset(), issue.getLength(), replaceString);
+						}
+					});
+	}
+	
+	@Fix(XtextValidator.INVALID_PACKAGE_REFERENCE_EXTERNAL)
+	public void fixExternalImportedPackage(final Issue issue, IssueResolutionAcceptor acceptor) {
+		if (issue.getData().length == 1)
+			acceptor.accept(issue, 
+					"Update the imported package '" + issue.getData()[0] + "'", 
+					"Fix the bogus package import\n" +
+					"import '" + issue.getData()[0] + "'", NULL_QUICKFIX_IMAGE,
+					new IModification() {
+						public void apply(IModificationContext context) throws BadLocationException {
+							String replaceString = valueConverterService.toString(issue.getData()[0], "STRING");
+							IXtextDocument document = context.getXtextDocument();
+							document.readOnly(new IUnitOfWork<Void, XtextResource>() {
+
+								public java.lang.Void exec(XtextResource state) throws Exception {
+									IResourceDescriptions descriptions = resourceDescriptionsProvider.getResourceDescriptions(state);
+									ResourceSet resourceSet = state.getResourceSet();
+									final Map<URI, URI> uriMap = Maps.newHashMap();
+									EPackage ePackage = loadPackageFromIndex(descriptions, resourceSet, uriMap, issue.getData()[0]);
+									if (ePackage != null) {
+										final Map<String, EPackage> packagePerNsURI = Maps.newHashMap();
+										packagePerNsURI.put(ePackage.getNsURI(), ePackage);
+										final Set<URI> updatedReferences = fixReferencesInPackages(ePackage, packagePerNsURI, uriMap, descriptions, resourceSet);
+										if (updatedReferences.isEmpty())
+											return null;
+										Iterator<EPackage> iterator = packagePerNsURI.values().iterator();
+										while(iterator.hasNext()) {
+											EPackage pack = iterator.next();
+											Resource resource = pack.eResource();
+											if (!resource.getURI().isPlatformResource()) {
+												iterator.remove();
+											}
+										}
+										new WorkspaceModifyOperation( /* workspace lock */ ) {
+											
+											@Override
+											protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException,
+													InterruptedException {
+												try {
+													for(EPackage pack: packagePerNsURI.values()) {
+														pack.eResource().save(Collections.singletonMap(
+																XMLResource.OPTION_URI_HANDLER, 
+																new URIHandlerImpl.PlatformSchemeAware() {
+																	@Override
+																	public URI deresolve(URI uri) {
+																		// replace archive uris with platform:/plugin
+																		if (!uri.isArchive() || !updatedReferences.contains(uri)) {
+																			return super.deresolve(uri);
+																		}
+																		URI withoutFragment = uri.trimFragment();
+																		if (uriMap.containsKey(withoutFragment)) {
+																			withoutFragment = uriMap.get(withoutFragment);
+																		}
+																		return super.deresolve(withoutFragment.appendFragment(uri.fragment()));
+																	}
+																}));
+													}
+												} catch(IOException ioe) {
+													throw new InvocationTargetException(ioe);
+												}
+											}
+										}.run(new NullProgressMonitor());
+										
+										for(int i = resourceSet.getResources().size() - 1; i >= 0; i-- ) {
+											Resource resource = resourceSet.getResources().get(i);
+											if (!resource.getContents().isEmpty() && resource.getContents().get(0) instanceof GenModel) {
+												resourceSet.getResources().remove(i);
+											}
+										}
+									}
+									return null;
+								}
+								
+								private Set<URI> fixReferencesInPackages(EPackage ePackage, Map<String, EPackage> packagePerNsURI, Map<URI, URI> uriMap, IResourceDescriptions descriptions, ResourceSet resourceSet) {
+									Set<URI> result = Sets.newHashSet();
+									Map<EObject, Collection<Setting>> allReferences = EcoreUtil.CrossReferencer.find(Collections.singletonList(ePackage));
+									for(final Setting setting: Iterables.concat(allReferences.values())) {
+										if (setting.getEStructuralFeature().isChangeable()) {
+											final Object referenced = setting.get(true);
+											List<Object> references = null;
+											if (referenced instanceof EObject) {
+												references = new AbstractList<Object>() {
+													@Override
+													public Object set(int index, Object element) {
+														setting.set(element);
+														return referenced;
+													}
+													@Override
+													public Object get(int index) {
+														return referenced;
+													}
+
+													@Override
+													public int size() {
+														return 1;
+													}
+												};
+											} else {
+												@SuppressWarnings("unchecked")
+												List<Object> casted = (List<Object>) referenced;
+												references = casted;
+											}
+											for(int i = 0; i < references.size(); i++) {
+												if (references.get(i) instanceof EObject) {
+													EObject referencedEObject = (EObject) references.get(i);
+													EPackage transitive = EcoreUtil2.getContainerOfType(referencedEObject, EPackage.class);
+													if (isRegisteredPackage(transitive)) {
+														if (referencedEObject instanceof EDataType)
+															continue;
+														if (referencedEObject == EcorePackage.Literals.EOBJECT)
+															continue;
+														EPackage fromWorkspace = packagePerNsURI.get(transitive.getNsURI());
+														if (fromWorkspace == null && !packagePerNsURI.containsKey(transitive.getNsURI())) {
+															fromWorkspace = loadPackageFromIndex(descriptions, resourceSet, uriMap, transitive.getNsURI());
+															packagePerNsURI.put(transitive.getNsURI(), fromWorkspace);
+														}
+														if (fromWorkspace != null) {
+															String fragment = transitive.eResource().getURIFragment(referencedEObject);
+															EObject replacement = fromWorkspace.eResource().getEObject(fragment);
+															if (replacement != null) {
+																result.add(EcoreUtil.getURI(replacement));
+																references.set(i, replacement);
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+									return result;
+								}
+								
+								private boolean isRegisteredPackage(EPackage ePackage) {
+									return ePackage != null && (ePackage.eResource() == null || ePackage.getNsURI().equals(ePackage.eResource().getURI().toString()));
+								}
+
+								private EPackage loadPackageFromIndex(
+										IResourceDescriptions descriptions,
+										ResourceSet resourceSet,
+										Map<URI, URI> uriMap, 
+										String nsURI) {
+									Iterable<IEObjectDescription> fixUs = descriptions.getExportedObjects(
+											EcorePackage.Literals.EPACKAGE, 
+											QualifiedName.create(nsURI), 
+											false);
+									for(IEObjectDescription description: fixUs) {
+										if (description.getEObjectURI().isPlatformResource()) {
+											EObject result = resourceSet.getEObject(description.getEObjectURI(), true);
+											if (result instanceof EPackage) {
+												return (EPackage) result;
+											}
+										}
+									}
+									URI genModelURI = EcorePlugin.getEPackageNsURIToGenModelLocationMap().get(nsURI);
+									if (genModelURI != null) {
+										Resource genmodelResource = resourceSet.getResource(genModelURI, true);
+										GenModel genModel = (GenModel) genmodelResource.getContents().get(0);
+										for(GenPackage genPackage: genModel.getGenPackages()) {
+											Object object = genPackage.eGet(GenModelPackage.Literals.GEN_PACKAGE__ECORE_PACKAGE, false);
+											if (object instanceof EObject) {
+												EObject proxy = (EObject) object;
+												URI proxyURI = EcoreUtil.getURI(proxy);
+												URI resolvedProxyURI = proxyURI.resolve(genModelURI);
+												if (nsURI.equals(genPackage.getEcorePackage().getNsURI())) {
+													EPackage result = genPackage.getEcorePackage();
+													uriMap.put(result.eResource().getURI(), resolvedProxyURI.trimFragment());
+													return result;
+												}
+											}
+										}
+									}
+									return null;
+								}
+								
+							});
+							String delimiter = document.get(issue.getOffset(), 1);
+							if (!replaceString.startsWith(delimiter)) {
+								replaceString = delimiter + replaceString.substring(1, replaceString.length() - 1) + delimiter; 
+							}
+							document.replace(issue.getOffset(), issue.getLength(), replaceString);
+						}
+					});
 	}
 
 }
