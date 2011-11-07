@@ -99,8 +99,7 @@ public class CrossReferenceSerializerFacadeTest extends AbstractXtextTests {
 
 		foo.setName("bar");
 		resource.getCache().clear(resource);
-		String linkText2 = facade.serializeCrossRef(bar, crossref, foo, linkTextRegion, status);
-		assertNull(linkText2, linkText2);
+		facade.serializeCrossRef(bar, crossref, foo, linkTextRegion, status);
 		assertTrue(status.getRefactoringStatus().hasError());
 		RefactoringStatusEntry fatalError = status.getRefactoringStatus().getEntryAt(0);
 		assertTrue(fatalError.getMessage().contains("cross-reference"));
