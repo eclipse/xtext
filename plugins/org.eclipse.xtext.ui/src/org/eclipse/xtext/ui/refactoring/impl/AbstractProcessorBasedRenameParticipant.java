@@ -13,6 +13,7 @@ import static org.eclipse.ltk.core.refactoring.RefactoringStatus.*;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -142,18 +143,20 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 	protected List<? extends IRenameElementContext> createRenameElementContexts(Object element) {
 		if (element instanceof IRenameElementContext) {
 			IRenameElementContext triggeringContext = (IRenameElementContext) element;
-			ResourceSet resourceSet = resourceSetProvider.get(projectUtil.getProject(triggeringContext
-					.getTargetElementURI()));
-			EObject originalTarget = resourceSet.getEObject(triggeringContext.getTargetElementURI(), true);
-			List<EObject> renamedElements = getRenamedElementsOrProxies(originalTarget);
-			if (renamedElements == null || renamedElements.isEmpty())
-				return null;
-			List<IRenameElementContext> contexts = newArrayListWithCapacity(renamedElements.size());
-			for (EObject renamedElement : renamedElements)
-				contexts.add(new IRenameElementContext.Impl(EcoreUtil.getURI(renamedElement), renamedElement.eClass(),
-						triggeringContext.getTriggeringEditor(), triggeringContext.getTriggeringEditorSelection(),
-						triggeringContext.getContextResourceURI()));
-			return contexts;
+			IProject project = projectUtil.getProject(triggeringContext.getTargetElementURI());
+			if (project != null) {
+				ResourceSet resourceSet = resourceSetProvider.get(project);
+				EObject originalTarget = resourceSet.getEObject(triggeringContext.getTargetElementURI(), true);
+				List<EObject> renamedElements = getRenamedElementsOrProxies(originalTarget);
+				if (renamedElements == null || renamedElements.isEmpty())
+					return null;
+				List<IRenameElementContext> contexts = newArrayListWithCapacity(renamedElements.size());
+				for (EObject renamedElement : renamedElements)
+					contexts.add(new IRenameElementContext.Impl(EcoreUtil.getURI(renamedElement), renamedElement
+							.eClass(), triggeringContext.getTriggeringEditor(), triggeringContext
+							.getTriggeringEditorSelection(), triggeringContext.getContextResourceURI()));
+				return contexts;
+			}
 		}
 		return null;
 	}

@@ -62,6 +62,8 @@ public class StatusWrapper {
 		if (textRegion != null)
 			region = new Region(textRegion.getOffset(), textRegion.getLength());
 		IFile file = projectUtil.findFileStorage(EcoreUtil2.getNormalizedURI(eObject), false);
+		if(file == null)
+			return null;
 		return new FileStatusContext(file, region);
 	}
 

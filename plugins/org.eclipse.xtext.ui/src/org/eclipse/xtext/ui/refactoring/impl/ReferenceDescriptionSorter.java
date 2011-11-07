@@ -30,7 +30,9 @@ public class ReferenceDescriptionSorter {
 		for (IReferenceDescription referenceDescription : referenceDescriptions) {
 			URI sourceResourceUri = referenceDescription.getSourceEObjectUri().trimFragment();
 			IProject project = projectUtil.getProject(sourceResourceUri);
-			referencesByProject.put(project, referenceDescription);
+			if(project != null) {
+				referencesByProject.put(project, referenceDescription);
+			}
 		}
 		return referencesByProject;
 	}
