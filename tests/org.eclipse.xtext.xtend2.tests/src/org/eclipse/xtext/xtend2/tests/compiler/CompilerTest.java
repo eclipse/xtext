@@ -1211,6 +1211,49 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		assertTrue(iterable instanceof ArrayList);
 		assertEquals(newArrayList("Foo", "Foo"), newArrayList(iterable));
 	}
+	
+	/**
+	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=362868
+	 */
+	public void testCreateExtension_Bug362868() throws Exception {
+		Class<?> clazz = compileJavaCode("x.Y", 
+				"package x " +
+				"import java.util.List " +
+				"import java.util.ArrayList " +
+				"class Y {" +
+				"  def List<String> newArrayList() {\n" +
+				"    return new ArrayList<String>()\n" +
+				"  }\n" +
+				"  def Iterable<String> create this.newArrayList listWith(String s) {" +
+				"   it.add(s)\n" +
+				"   add(s)\n" +
+				"  }" +
+				"}");
+		Object instance = clazz.newInstance();
+		Method method = clazz.getDeclaredMethod("listWith", String.class);
+		@SuppressWarnings("unchecked")
+		Iterable<String> iterable = (Iterable<String>) method.invoke(instance, "Foo");
+		assertSame(iterable, method.invoke(instance, "Foo"));
+		assertTrue(iterable instanceof ArrayList);
+		assertEquals(newArrayList("Foo", "Foo"), newArrayList(iterable));
+	}
+	
+	public void testCreateExtension_Bug362868_1() throws Exception {
+		Class<?> clazz = compileJavaCode("x.Y", 
+				"package x " +
+				"import java.util.List " +
+				"class Y {" +
+				"  def Iterable<String> create list listWith(List<String> list) {" +
+				"  }" +
+				"}");
+		Object instance = clazz.newInstance();
+		Method method = clazz.getDeclaredMethod("listWith", List.class);
+		@SuppressWarnings("unchecked")
+		Iterable<String> iterable = (Iterable<String>) method.invoke(instance, newArrayList("Foo"));
+		assertSame(iterable, method.invoke(instance, newArrayList("Foo")));
+		assertTrue(iterable instanceof ArrayList);
+		assertEquals(newArrayList("Foo"), newArrayList(iterable));
+	}
 
 	public void testCreateExtension_threadSafety() throws Exception {
 		String xtendCode = 
