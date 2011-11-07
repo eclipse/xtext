@@ -134,9 +134,7 @@ public class DisplayChangeWrapper extends TextEditBasedChange {
 		}.syncExec();
 		DisplayChangeWrapper undoWrap = new DisplayChangeWrapper(undoChange, editorToSave);
 		if(editorToSave != null) {
-			IEditorInput editorInput = editorToSave.getEditorInput();
-			IDocumentProvider documentProvider = editorToSave.getDocumentProvider();
-			documentProvider.saveDocument(monitor.newChild(1), editorInput, documentProvider.getDocument(editorInput), true);
+			editorToSave.doSave(monitor.newChild(1));
 		}
 		return undoWrap;
 	}
