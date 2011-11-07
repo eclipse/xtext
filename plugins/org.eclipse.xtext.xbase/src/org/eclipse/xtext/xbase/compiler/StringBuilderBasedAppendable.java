@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
+import static com.google.common.collect.Sets.*;
+
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -93,6 +95,20 @@ public class StringBuilderBasedAppendable implements IAppendable {
 		String newName = findNewName(names, proposedName);
 		currentScope.put(key, newName);
 		names.add(newName);
+		return newName;
+	}
+	
+	public String declareFreshVariable(Object key, String proposedName) {
+		if (localVars.isEmpty())
+			throw new IllegalStateException("No local scope has been opened.");
+		Map<Object, String> currentScope = localVars.peek();
+		final Set<String> names = newHashSet();
+		for (Set<String> nameSet : usedNamesInScope) {
+			names.addAll(nameSet);
+		}
+		String newName = findNewName(names, proposedName);
+		currentScope.put(key, newName);
+		usedNamesInScope.peek().add(newName);
 		return newName;
 	}
 
