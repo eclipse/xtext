@@ -268,6 +268,13 @@ public class XtendHighlightingCalculatorTest extends AbstractXtend2UITestCase im
 		highlight(model);
 	}
 	
+	public void testStaticExtensionOperationWithNoImplicitArguments() throws Exception {
+		addImport("java.util.List");
+		String model = "def toUpperCase(List<String> it) { map [ toUpperCase ]}";
+		expectAbsolut(model.lastIndexOf("map"), 3, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+		expectAbsolut(model.lastIndexOf("map"), 3, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+	}
+	
 	public void testAnnotaton() throws Exception {
 		addImport("com.google.inject.Inject");
 		String model = "{} @Inject extension StringBuilder";

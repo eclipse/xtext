@@ -166,6 +166,13 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 					}
 				}
 			}
+			if (featureCall instanceof XFeatureCall){
+				if(!feature.eIsProxy() && feature instanceof JvmOperation){
+					if((featureCall.getImplicitReceiver() != null && ((JvmOperation) feature).isStatic()))
+							highlightFeatureCall(featureCall, acceptor, 
+									XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+				}
+			}
 			if (featureCall instanceof XFeatureCall || featureCall instanceof XAssignment) {
 				if(!feature.eIsProxy() && feature instanceof JvmOperation){
 					if(featureCall.getImplicitFirstArgument() != null){
