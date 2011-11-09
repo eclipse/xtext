@@ -357,7 +357,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	 * @param receiver the instance that will receive the message.
 	 * @param expression the expression that is closest to the to-be-created scope. Usually the feature call.
 	 */
-	private IScope createFeatureScopeForTypeRef(
+	protected IScope createFeatureScopeForTypeRef(
 			JvmTypeReference declaringType, 
 			EObject expression,
 			XExpression implicitReceiver,
