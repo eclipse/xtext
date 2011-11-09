@@ -12,7 +12,8 @@ generate syntacticsequencertest "http://www.eclipse.org/2009/tmf/xtext/syntactic
 
 Model:
 	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative | 
-	x7=UnassignedDatatype | x8=AmbiguousTransition;
+	x7=UnassignedDatatype | x8=OptionalSingleTransition | x9=OptionalManyTransition | x10=MandatoryManyTransition | 
+	x11=AlternativeTransition;
 
 MandatoryKeywords:
 	"#1" val1=ID "kw1" val2=ID "kw2" "kw3" val3=ID "kw4";
@@ -67,10 +68,19 @@ BooleanAlternativeLiteral:
 	{BooleanAlternativeLiteral} ("kw1" | isTrue?="kw2");
 	
 UnassignedDatatype:
-	"#7" val=ID UnassignedDatatypeRule;
+	"#7" val=ID KW1;
 
-UnassignedDatatypeRule:
-	"kw1";
+KW1:
+	"kw1" | "matched" INT?;
 	
-AmbiguousTransition:
-	"#8" "kw1"? val=ID;			
+OptionalSingleTransition:
+	"#8" KW1? val=ID;
+				
+OptionalManyTransition:
+	"#9" KW1* val=ID;
+				
+MandatoryManyTransition:
+	"#10" KW1+ val=ID;
+				
+AlternativeTransition:
+	"#11" (KW1 | "kw2") val=ID;			
