@@ -74,9 +74,6 @@ public class AbstractUnicodeTestLanguageSemanticSequencer extends AbstractSemant
 	/**
 	 * Constraint:
 	 *     name=GERMAN_STRING
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_GString(EObject context, GString semanticObject) {
 		if(errorAcceptor != null) {
@@ -93,9 +90,6 @@ public class AbstractUnicodeTestLanguageSemanticSequencer extends AbstractSemant
 	/**
 	 * Constraint:
 	 *     strings+=AbstractString*
-	 *
-	 * Features:
-	 *    strings[0, *]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -105,9 +99,6 @@ public class AbstractUnicodeTestLanguageSemanticSequencer extends AbstractSemant
 	/**
 	 * Constraint:
 	 *     name=STRING
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_QuotedString(EObject context, QuotedString semanticObject) {
 		if(errorAcceptor != null) {

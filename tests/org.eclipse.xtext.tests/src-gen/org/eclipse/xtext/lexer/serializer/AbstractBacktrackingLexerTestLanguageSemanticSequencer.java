@@ -72,10 +72,6 @@ public class AbstractBacktrackingLexerTestLanguageSemanticSequencer extends Abst
 	/**
 	 * Constraint:
 	 *     (x=CharA y=Charb)
-	 *
-	 * Features:
-	 *    x[1, 1]
-	 *    y[1, 1]
 	 */
 	protected void sequence_Ab(EObject context, Ab semanticObject) {
 		if(errorAcceptor != null) {
@@ -102,14 +98,6 @@ public class AbstractBacktrackingLexerTestLanguageSemanticSequencer extends Abst
 	 *         ys+=CharY* 
 	 *         as+=CharA*
 	 *     )
-	 *
-	 * Features:
-	 *    enums[0, *]
-	 *    ycs[0, *]
-	 *    abs[0, *]
-	 *    xbs[0, *]
-	 *    ys[0, *]
-	 *    as[0, *]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -119,10 +107,6 @@ public class AbstractBacktrackingLexerTestLanguageSemanticSequencer extends Abst
 	/**
 	 * Constraint:
 	 *     (x=CharX y=Charb)
-	 *
-	 * Features:
-	 *    x[1, 1]
-	 *    y[1, 1]
 	 */
 	protected void sequence_Xb(EObject context, Xb semanticObject) {
 		if(errorAcceptor != null) {

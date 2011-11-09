@@ -62,9 +62,6 @@ public class AbstractIndentationAwareTestLanguageSemanticSequencer extends Abstr
 	/**
 	 * Constraint:
 	 *     (children+=Node children+=Node*)
-	 *
-	 * Features:
-	 *    children[1, *]
 	 */
 	protected void sequence_NodeList(EObject context, NodeList semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -74,10 +71,6 @@ public class AbstractIndentationAwareTestLanguageSemanticSequencer extends Abstr
 	/**
 	 * Constraint:
 	 *     (name=String children=NodeList?)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    children[0, 1]
 	 */
 	protected void sequence_Node(EObject context, Node semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

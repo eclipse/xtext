@@ -55,11 +55,6 @@ public class AbstractBug292245TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (fix+=Fix+ | error+=Error+ | tick+=Apostrophe+)*
-	 *
-	 * Features:
-	 *    fix[0, *]
-	 *    error[0, *]
-	 *    tick[0, *]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

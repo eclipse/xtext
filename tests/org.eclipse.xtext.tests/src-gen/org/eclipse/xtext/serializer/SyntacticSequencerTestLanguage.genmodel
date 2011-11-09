@@ -18,6 +18,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Model/x6"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Model/x7"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Model/x8"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Model/x9"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Model/x10"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Model/x11"/>
     </genClasses>
     <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//MandatoryKeywords">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//MandatoryKeywords/val1"/>
@@ -43,8 +46,17 @@
     <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//UnassignedDatatype">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//UnassignedDatatype/val"/>
     </genClasses>
-    <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//AmbiguousTransition">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//AmbiguousTransition/val"/>
+    <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//OptionalSingleTransition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//OptionalSingleTransition/val"/>
+    </genClasses>
+    <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//OptionalManyTransition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//OptionalManyTransition/val"/>
+    </genClasses>
+    <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//MandatoryManyTransition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//MandatoryManyTransition/val"/>
+    </genClasses>
+    <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//AlternativeTransition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//AlternativeTransition/val"/>
     </genClasses>
     <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//Add0">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Add0/left"/>

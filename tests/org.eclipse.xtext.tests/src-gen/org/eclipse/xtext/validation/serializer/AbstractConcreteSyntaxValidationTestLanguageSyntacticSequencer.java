@@ -22,7 +22,7 @@ public class AbstractConcreteSyntaxValidationTestLanguageSyntacticSequencer exte
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (ConcreteSyntaxValidationTestLanguageGrammarAccess) access;
-		match_StaticSimplification_Kw1Keyword_1_0_q = new TokenAlias(true, false, grammarAccess.getStaticSimplificationAccess().getKw1Keyword_1_0());
+		match_StaticSimplification_Kw1Keyword_1_0_q = new TokenAlias(false, true, grammarAccess.getStaticSimplificationAccess().getKw1Keyword_1_0());
 	}
 	
 	@Override

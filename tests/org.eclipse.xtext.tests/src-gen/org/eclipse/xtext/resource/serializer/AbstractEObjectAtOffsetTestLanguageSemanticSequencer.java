@@ -84,10 +84,6 @@ public class AbstractEObjectAtOffsetTestLanguageSemanticSequencer extends Abstra
 	/**
 	 * Constraint:
 	 *     (bar=AbstractBar_FooBar_3_0 foo+=[Foo|QualifiedNameWithOtherDelim] foo+=[Foo|QualifiedNameWithOtherDelim]?)
-	 *
-	 * Features:
-	 *    foo[1, 2]
-	 *    bar[1, 1]
 	 */
 	protected void sequence_AbstractBar(EObject context, FooBar semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -97,10 +93,6 @@ public class AbstractEObjectAtOffsetTestLanguageSemanticSequencer extends Abstra
 	/**
 	 * Constraint:
 	 *     (name=ID foo+=[Foo|QualifiedNameWithOtherDelim] foo+=[Foo|QualifiedNameWithOtherDelim]* foo+=[Foo|QualifiedNameWithOtherDelim]?)
-	 *
-	 * Features:
-	 *    foo[1, *]
-	 *    name[1, 1]
 	 */
 	protected void sequence_Bar(EObject context, Bar semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -110,9 +102,6 @@ public class AbstractEObjectAtOffsetTestLanguageSemanticSequencer extends Abstra
 	/**
 	 * Constraint:
 	 *     name=QualifiedNameWithOtherDelim
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_Foo(EObject context, Foo semanticObject) {
 		if(errorAcceptor != null) {
@@ -129,10 +118,6 @@ public class AbstractEObjectAtOffsetTestLanguageSemanticSequencer extends Abstra
 	/**
 	 * Constraint:
 	 *     (foos+=Foo | bars+=AbstractBar)*
-	 *
-	 * Features:
-	 *    foos[0, *]
-	 *    bars[0, *]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

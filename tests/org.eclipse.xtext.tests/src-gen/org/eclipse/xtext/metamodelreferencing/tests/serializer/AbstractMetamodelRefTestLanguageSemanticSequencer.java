@@ -72,10 +72,6 @@ public class AbstractMetamodelRefTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     (name=ID nameRefs+=NameRef*)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    nameRefs[0, *]
 	 */
 	protected void sequence_Foo(EObject context, Foo semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -85,9 +81,6 @@ public class AbstractMetamodelRefTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_MyRule(EObject context, ParserRule semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -97,9 +90,6 @@ public class AbstractMetamodelRefTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     rule=[ParserRule|ID]
-	 *
-	 * Features:
-	 *    rule[1, 1]
 	 */
 	protected void sequence_NameRef(EObject context, RuleCall semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

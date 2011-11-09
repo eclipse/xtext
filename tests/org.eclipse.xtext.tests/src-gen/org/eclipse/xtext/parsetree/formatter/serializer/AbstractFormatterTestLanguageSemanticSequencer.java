@@ -178,11 +178,6 @@ public class AbstractFormatterTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (var=ID (op='=' | op='+=') (val+=INT val+=INT*)?)
-	 *
-	 * Features:
-	 *    var[1, 1]
-	 *    op[0, 2]
-	 *    val[0, *]
 	 */
 	protected void sequence_Assign(EObject context, Assign semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -192,11 +187,6 @@ public class AbstractFormatterTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (val1=Datatype1 val2=Datatype2 val3=Datatype3)
-	 *
-	 * Features:
-	 *    val1[1, 1]
-	 *    val2[1, 1]
-	 *    val3[1, 1]
 	 */
 	protected void sequence_Datatypes(EObject context, Datatypes semanticObject) {
 		if(errorAcceptor != null) {
@@ -219,10 +209,6 @@ public class AbstractFormatterTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (type+=ID name+=ID)
-	 *
-	 * Features:
-	 *    type[1, 1]
-	 *    name[1, 1]
 	 */
 	protected void sequence_Decl(EObject context, Decl semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -232,9 +218,6 @@ public class AbstractFormatterTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (val+=Enum1+ val+=Enum1*)
-	 *
-	 * Features:
-	 *    val[1, *]
 	 */
 	protected void sequence_Enumeration(EObject context, Enumeration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -244,9 +227,6 @@ public class AbstractFormatterTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     name=FQN
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_FqnObj(EObject context, FqnObj semanticObject) {
 		if(errorAcceptor != null) {
@@ -263,9 +243,6 @@ public class AbstractFormatterTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     ref=[FqnObj|FQN]
-	 *
-	 * Features:
-	 *    ref[1, 1]
 	 */
 	protected void sequence_FqnRef(EObject context, FqnRef semanticObject) {
 		if(errorAcceptor != null) {
@@ -282,10 +259,6 @@ public class AbstractFormatterTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (name=ID (param+=Param param+=Param*)?)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    param[0, *]
 	 */
 	protected void sequence_Meth(EObject context, Meth semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -295,10 +268,6 @@ public class AbstractFormatterTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (name+=ID type+=ID)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    type[1, 1]
 	 */
 	protected void sequence_Param(EObject context, Param semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -308,9 +277,6 @@ public class AbstractFormatterTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     val=ID
-	 *
-	 * Features:
-	 *    val[1, 1]
 	 */
 	protected void sequence_Space(EObject context, Space semanticObject) {
 		if(errorAcceptor != null) {
@@ -327,9 +293,6 @@ public class AbstractFormatterTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     idval=ID
-	 *
-	 * Features:
-	 *    idval[1, 1]
 	 */
 	protected void sequence_SuppressedHiddenSubID(EObject context, SuppressedHiddenSubID semanticObject) {
 		if(errorAcceptor != null) {
@@ -346,9 +309,6 @@ public class AbstractFormatterTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     idval=ID
-	 *
-	 * Features:
-	 *    idval[1, 1]
 	 */
 	protected void sequence_SuppressedHiddenSubSub(EObject context, SuppressedHiddenSubSub semanticObject) {
 		if(errorAcceptor != null) {
@@ -365,9 +325,6 @@ public class AbstractFormatterTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     ((vals+=SuppressedHiddenSub vals+=SuppressedHiddenSub*)?)
-	 *
-	 * Features:
-	 *    vals[0, *]
 	 */
 	protected void sequence_SuppressedHidden(EObject context, SuppressedHidden semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -377,10 +334,6 @@ public class AbstractFormatterTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     ((items+=Line | items+=TestIndentation)* semi?=';'?)
-	 *
-	 * Features:
-	 *    items[0, *]
-	 *    semi[0, 1]
 	 */
 	protected void sequence_TestIndentation(EObject context, TestIndentation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -390,9 +343,6 @@ public class AbstractFormatterTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (items+=Line*)
-	 *
-	 * Features:
-	 *    items[0, *]
 	 */
 	protected void sequence_TestLinewrapMinMax(EObject context, TestLinewrapMinMax semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -402,9 +352,6 @@ public class AbstractFormatterTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (items+=Line*)
-	 *
-	 * Features:
-	 *    items[0, *]
 	 */
 	protected void sequence_TestLinewrap(EObject context, TestLinewrap semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -414,9 +361,6 @@ public class AbstractFormatterTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     datatype=WrappingDataType
-	 *
-	 * Features:
-	 *    datatype[1, 1]
 	 */
 	protected void sequence_WrappingDataTypeTest(EObject context, WrappingDataTypeTest semanticObject) {
 		if(errorAcceptor != null) {

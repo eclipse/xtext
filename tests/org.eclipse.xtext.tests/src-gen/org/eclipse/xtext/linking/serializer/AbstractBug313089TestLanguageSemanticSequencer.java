@@ -73,9 +73,6 @@ public class AbstractBug313089TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_Bar(EObject context, Bar semanticObject) {
 		if(errorAcceptor != null) {
@@ -92,13 +89,6 @@ public class AbstractBug313089TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     ((child=Baz_Baz_2_0 name=ID) | name=ID)
-	 *
-	 * Features:
-	 *    name[0, 2]
-	 *    child[0, 1]
-	 *         EXCLUDE_IF_UNSET name
-	 *         MANDATORY_IF_SET name
-	 *         EXCLUDE_IF_SET name
 	 */
 	protected void sequence_Baz(EObject context, Baz semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -108,14 +98,6 @@ public class AbstractBug313089TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (name=ID (bar=Bar | baz=Baz) ref=[Foo|ID])
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    bar[0, 1]
-	 *         EXCLUDE_IF_SET baz
-	 *    baz[0, 1]
-	 *         EXCLUDE_IF_SET bar
-	 *    ref[1, 1]
 	 */
 	protected void sequence_Foo(EObject context, Foo semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -74,9 +74,6 @@ public class AbstractBug287184TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     detailClass=[Model|FQN]
-	 *
-	 * Features:
-	 *    detailClass[1, 1]
 	 */
 	protected void sequence_AssociatedDetail(EObject context, AssociatedDetail semanticObject) {
 		if(errorAcceptor != null) {
@@ -93,10 +90,6 @@ public class AbstractBug287184TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     ((visibility='private' | visibility='protected' | visibility='public')? detailClass=[Model|FQN])
-	 *
-	 * Features:
-	 *    detailClass[1, 1]
-	 *    visibility[0, 3]
 	 */
 	protected void sequence_Detail(EObject context, Detail semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -106,10 +99,6 @@ public class AbstractBug287184TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (name=FQN (detail+=Detail | detail+=AssociatedDetail)+)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    detail[0, *]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

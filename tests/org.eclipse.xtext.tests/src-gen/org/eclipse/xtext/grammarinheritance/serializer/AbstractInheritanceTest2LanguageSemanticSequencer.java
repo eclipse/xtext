@@ -72,9 +72,6 @@ public class AbstractInheritanceTest2LanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_Element(EObject context, Element semanticObject) {
 		superSequencer.createSequence(context, semanticObject);
@@ -84,11 +81,6 @@ public class AbstractInheritanceTest2LanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     (name=ID elements+=Element* ids+=FQN)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    elements[0, *]
-	 *    ids[1, 1]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

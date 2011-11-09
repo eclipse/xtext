@@ -82,11 +82,6 @@ public class AbstractIgnoreCaseImportsTestLanguageSemanticSequencer extends Abst
 	/**
 	 * Constraint:
 	 *     (name=ID reference=[Element|ID]? elements+=Element*)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    reference[0, 1]
-	 *    elements[0, *]
 	 */
 	protected void sequence_Element(EObject context, Element semanticObject) {
 		superSequencer.createSequence(context, semanticObject);
@@ -96,9 +91,6 @@ public class AbstractIgnoreCaseImportsTestLanguageSemanticSequencer extends Abst
 	/**
 	 * Constraint:
 	 *     importURI=STRING
-	 *
-	 * Features:
-	 *    importURI[1, 1]
 	 */
 	protected void sequence_Import(EObject context, Import semanticObject) {
 		if(errorAcceptor != null) {
@@ -115,10 +107,6 @@ public class AbstractIgnoreCaseImportsTestLanguageSemanticSequencer extends Abst
 	/**
 	 * Constraint:
 	 *     (imports+=Import* elements+=Element+)
-	 *
-	 * Features:
-	 *    elements[1, *]
-	 *    imports[0, *]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

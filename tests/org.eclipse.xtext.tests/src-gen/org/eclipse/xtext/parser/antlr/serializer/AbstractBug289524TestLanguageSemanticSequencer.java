@@ -72,9 +72,6 @@ public class AbstractBug289524TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_Contained(EObject context, Contained semanticObject) {
 		if(errorAcceptor != null) {
@@ -91,10 +88,6 @@ public class AbstractBug289524TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (containments+=Contained | (refs+=[Contained|ID] refs+=[Contained|ID]*))+
-	 *
-	 * Features:
-	 *    containments[0, *]
-	 *    refs[0, *]
 	 */
 	protected void sequence_ModelElement(EObject context, ModelElement semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -104,9 +97,6 @@ public class AbstractBug289524TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (refs+=ModelElement*)
-	 *
-	 * Features:
-	 *    refs[0, *]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

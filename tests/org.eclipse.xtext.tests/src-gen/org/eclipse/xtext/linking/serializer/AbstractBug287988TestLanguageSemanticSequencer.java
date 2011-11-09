@@ -114,13 +114,6 @@ public class AbstractBug287988TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     ((typeRef=[BaseAttribute|ID] | type=ID) name=ID)
-	 *
-	 * Features:
-	 *    typeRef[0, 1]
-	 *         EXCLUDE_IF_SET type
-	 *    type[0, 1]
-	 *         EXCLUDE_IF_SET typeRef
-	 *    name[1, 1]
 	 */
 	protected void sequence_ActionAttribute(EObject context, Attribute semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -130,13 +123,6 @@ public class AbstractBug287988TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     ((typeRef=[BaseAttribute|ID] | type=ID) name=ID)
-	 *
-	 * Features:
-	 *    typeRef[0, 1]
-	 *         EXCLUDE_IF_SET type
-	 *    type[0, 1]
-	 *         EXCLUDE_IF_SET typeRef
-	 *    name[1, 1]
 	 */
 	protected void sequence_ActionAttribute(EObject context, Master semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -146,8 +132,6 @@ public class AbstractBug287988TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     {Attribute}
-	 *
-	 * Features:
 	 */
 	protected void sequence_Attribute(EObject context, Attribute semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -157,13 +141,6 @@ public class AbstractBug287988TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     ((typeRef=[BaseAttribute|ID] | type=ID) name=ID)
-	 *
-	 * Features:
-	 *    typeRef[0, 1]
-	 *         EXCLUDE_IF_SET type
-	 *    type[0, 1]
-	 *         EXCLUDE_IF_SET typeRef
-	 *    name[1, 1]
 	 */
 	protected void sequence_BaseAttribute(EObject context, Attribute semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -173,13 +150,6 @@ public class AbstractBug287988TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     ((typeRef=[BaseAttribute|ID] | type=ID) name=ID)
-	 *
-	 * Features:
-	 *    typeRef[0, 1]
-	 *         EXCLUDE_IF_SET type
-	 *    type[0, 1]
-	 *         EXCLUDE_IF_SET typeRef
-	 *    name[1, 1]
 	 */
 	protected void sequence_BaseAttribute(EObject context, Master semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -189,9 +159,6 @@ public class AbstractBug287988TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_CallMe2(EObject context, Attribute semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -201,9 +168,6 @@ public class AbstractBug287988TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_CallMe4(EObject context, Attribute semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -213,12 +177,6 @@ public class AbstractBug287988TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (typeRef=[BaseAttribute|ID] | type=ID)
-	 *
-	 * Features:
-	 *    typeRef[0, 1]
-	 *         EXCLUDE_IF_SET type
-	 *    type[0, 1]
-	 *         EXCLUDE_IF_SET typeRef
 	 */
 	protected void sequence_CallMe(EObject context, Attribute semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -228,8 +186,6 @@ public class AbstractBug287988TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     {Master}
-	 *
-	 * Features:
 	 */
 	protected void sequence_Master(EObject context, Master semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -246,9 +202,6 @@ public class AbstractBug287988TestLanguageSemanticSequencer extends AbstractSema
 	 *         attributes+=RuleCallAttribute3* | 
 	 *         attributes+=ActionAttribute*
 	 *     )
-	 *
-	 * Features:
-	 *    attributes[0, *]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -258,13 +211,6 @@ public class AbstractBug287988TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (name=ID (typeRef=[BaseAttribute|ID] | type=ID))
-	 *
-	 * Features:
-	 *    typeRef[0, 1]
-	 *         EXCLUDE_IF_SET type
-	 *    type[0, 1]
-	 *         EXCLUDE_IF_SET typeRef
-	 *    name[1, 1]
 	 */
 	protected void sequence_RuleCallAttribute2(EObject context, Attribute semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -274,13 +220,6 @@ public class AbstractBug287988TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (name=ID (typeRef=[BaseAttribute|ID] | type=ID))
-	 *
-	 * Features:
-	 *    typeRef[0, 1]
-	 *         EXCLUDE_IF_SET type
-	 *    type[0, 1]
-	 *         EXCLUDE_IF_SET typeRef
-	 *    name[1, 1]
 	 */
 	protected void sequence_RuleCallAttribute3(EObject context, Attribute semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -290,13 +229,6 @@ public class AbstractBug287988TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     ((typeRef=[BaseAttribute|ID] | type=ID) name=ID)
-	 *
-	 * Features:
-	 *    typeRef[0, 1]
-	 *         EXCLUDE_IF_SET type
-	 *    type[0, 1]
-	 *         EXCLUDE_IF_SET typeRef
-	 *    name[1, 1]
 	 */
 	protected void sequence_RuleCallAttribute(EObject context, Attribute semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -306,13 +238,6 @@ public class AbstractBug287988TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     ((typeRef=[BaseAttribute|ID] | type=ID) name=ID)
-	 *
-	 * Features:
-	 *    typeRef[0, 1]
-	 *         EXCLUDE_IF_SET type
-	 *    type[0, 1]
-	 *         EXCLUDE_IF_SET typeRef
-	 *    name[1, 1]
 	 */
 	protected void sequence_SimpleAttribute(EObject context, Attribute semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

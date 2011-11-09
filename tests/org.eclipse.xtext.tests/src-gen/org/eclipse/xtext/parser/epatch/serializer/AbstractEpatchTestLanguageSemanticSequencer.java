@@ -199,59 +199,6 @@ public class AbstractEpatchTestLanguageSemanticSequencer extends AbstractSemanti
 	/**
 	 * Constraint:
 	 *     (value=STRING | (refObject=[NamedObject|ID] (refFeature=ID refIndex=INT?)?) | newObject=CreatedObject | (import=[Import|ID] impFrag=FRAGMENT))
-	 *
-	 * Features:
-	 *    value[0, 1]
-	 *         EXCLUDE_IF_SET refObject
-	 *         EXCLUDE_IF_SET refFeature
-	 *         EXCLUDE_IF_SET refIndex
-	 *         EXCLUDE_IF_SET newObject
-	 *         EXCLUDE_IF_SET import
-	 *         EXCLUDE_IF_SET impFrag
-	 *    refObject[0, 1]
-	 *         MANDATORY_IF_SET refFeature
-	 *         MANDATORY_IF_SET refIndex
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET newObject
-	 *         EXCLUDE_IF_SET import
-	 *         EXCLUDE_IF_SET impFrag
-	 *    refFeature[0, 1]
-	 *         MANDATORY_IF_SET refIndex
-	 *         EXCLUDE_IF_UNSET refObject
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET newObject
-	 *         EXCLUDE_IF_SET import
-	 *         EXCLUDE_IF_SET impFrag
-	 *    refIndex[0, 1]
-	 *         EXCLUDE_IF_UNSET refFeature
-	 *         EXCLUDE_IF_UNSET refObject
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET newObject
-	 *         EXCLUDE_IF_SET import
-	 *         EXCLUDE_IF_SET impFrag
-	 *    newObject[0, 1]
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET refObject
-	 *         EXCLUDE_IF_SET refFeature
-	 *         EXCLUDE_IF_SET refIndex
-	 *         EXCLUDE_IF_SET import
-	 *         EXCLUDE_IF_SET impFrag
-	 *    import[0, 1]
-	 *         EXCLUDE_IF_UNSET impFrag
-	 *         MANDATORY_IF_SET impFrag
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET refObject
-	 *         EXCLUDE_IF_SET refFeature
-	 *         EXCLUDE_IF_SET refIndex
-	 *         EXCLUDE_IF_SET newObject
-	 *    impFrag[0, 1]
-	 *         EXCLUDE_IF_UNSET import
-	 *         MANDATORY_IF_SET import
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET refObject
-	 *         EXCLUDE_IF_SET refFeature
-	 *         EXCLUDE_IF_SET refIndex
-	 *         EXCLUDE_IF_SET newObject
 	 */
 	protected void sequence_AssignmentValue(EObject context, AssignmentValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -268,15 +215,6 @@ public class AbstractEpatchTestLanguageSemanticSequencer extends AbstractSemanti
 	 *         ) | 
 	 *         (feature=ID (leftValues+=AssignmentValue leftValues+=AssignmentValue*)?)
 	 *     )
-	 *
-	 * Features:
-	 *    feature[0, 2]
-	 *    leftValues[0, *]
-	 *    rightValues[0, *]
-	 *         EXCLUDE_IF_UNSET feature
-	 *         EXCLUDE_IF_SET feature
-	 *         EXCLUDE_IF_SET leftValues
-	 *         EXCLUDE_IF_SET leftValues
 	 */
 	protected void sequence_Assignment(EObject context, ListAssignment semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -286,17 +224,6 @@ public class AbstractEpatchTestLanguageSemanticSequencer extends AbstractSemanti
 	/**
 	 * Constraint:
 	 *     ((feature=ID leftValue=SingleAssignmentValue rightValue=SingleAssignmentValue) | (feature=ID leftValue=SingleAssignmentValue))
-	 *
-	 * Features:
-	 *    feature[0, 2]
-	 *    leftValue[0, 2]
-	 *    rightValue[0, 1]
-	 *         EXCLUDE_IF_UNSET feature
-	 *         MANDATORY_IF_SET feature
-	 *         EXCLUDE_IF_UNSET leftValue
-	 *         MANDATORY_IF_SET leftValue
-	 *         EXCLUDE_IF_SET feature
-	 *         EXCLUDE_IF_SET leftValue
 	 */
 	protected void sequence_Assignment(EObject context, SingleAssignment semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -310,11 +237,6 @@ public class AbstractEpatchTestLanguageSemanticSequencer extends AbstractSemanti
 	 *         (leftValues+=ListAssignmentValue leftValues+=ListAssignmentValue*)? 
 	 *         (rightValues+=ListAssignmentValue rightValues+=ListAssignmentValue*)?
 	 *     )
-	 *
-	 * Features:
-	 *    feature[1, 1]
-	 *    leftValues[0, *]
-	 *    rightValues[0, *]
 	 */
 	protected void sequence_BiListAssignment(EObject context, ListAssignment semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -324,11 +246,6 @@ public class AbstractEpatchTestLanguageSemanticSequencer extends AbstractSemanti
 	/**
 	 * Constraint:
 	 *     (feature=ID leftValue=SingleAssignmentValue rightValue=SingleAssignmentValue)
-	 *
-	 * Features:
-	 *    feature[1, 1]
-	 *    leftValue[1, 1]
-	 *    rightValue[1, 1]
 	 */
 	protected void sequence_BiSingleAssignment(EObject context, SingleAssignment semanticObject) {
 		if(errorAcceptor != null) {
@@ -356,13 +273,6 @@ public class AbstractEpatchTestLanguageSemanticSequencer extends AbstractSemanti
 	 *         name=ID? 
 	 *         ((assignments+=MonoSingleAssignment | assignments+=MonoListAssignment)+ leftMig=Migration?)?
 	 *     )
-	 *
-	 * Features:
-	 *    name[0, 1]
-	 *    assignments[0, *]
-	 *    leftMig[0, 1]
-	 *    resource[1, 1]
-	 *    fragment[1, 1]
 	 */
 	protected void sequence_CreatedObject(EObject context, ObjectCopy semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -372,13 +282,6 @@ public class AbstractEpatchTestLanguageSemanticSequencer extends AbstractSemanti
 	/**
 	 * Constraint:
 	 *     (import=[Import|ID] impFrag=FRAGMENT name=ID? ((assignments+=MonoSingleAssignment | assignments+=MonoListAssignment)+ leftMig=Migration?)?)
-	 *
-	 * Features:
-	 *    name[0, 1]
-	 *    assignments[0, *]
-	 *    leftMig[0, 1]
-	 *    import[1, 1]
-	 *    impFrag[1, 1]
 	 */
 	protected void sequence_CreatedObject(EObject context, ObjectNew semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -388,10 +291,6 @@ public class AbstractEpatchTestLanguageSemanticSequencer extends AbstractSemanti
 	/**
 	 * Constraint:
 	 *     (name=ID nsURI=STRING)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    nsURI[1, 1]
 	 */
 	protected void sequence_EPackageImport(EObject context, EPackageImport semanticObject) {
 		if(errorAcceptor != null) {
@@ -411,12 +310,6 @@ public class AbstractEpatchTestLanguageSemanticSequencer extends AbstractSemanti
 	/**
 	 * Constraint:
 	 *     (name=ID imports+=Import* resources+=NamedResource* objects+=ObjectRef*)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    imports[0, *]
-	 *    resources[0, *]
-	 *    objects[0, *]
 	 */
 	protected void sequence_EPatch(EObject context, EPatch semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -426,9 +319,6 @@ public class AbstractEpatchTestLanguageSemanticSequencer extends AbstractSemanti
 	/**
 	 * Constraint:
 	 *     exprstr=STRING
-	 *
-	 * Features:
-	 *    exprstr[1, 1]
 	 */
 	protected void sequence_ExpressionExecutable(EObject context, ExpressionExecutable semanticObject) {
 		if(errorAcceptor != null) {
@@ -445,9 +335,6 @@ public class AbstractEpatchTestLanguageSemanticSequencer extends AbstractSemanti
 	/**
 	 * Constraint:
 	 *     (path+=ID path+=ID*)
-	 *
-	 * Features:
-	 *    path[1, *]
 	 */
 	protected void sequence_ExtensionImport(EObject context, ExtensionImport semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -457,9 +344,6 @@ public class AbstractEpatchTestLanguageSemanticSequencer extends AbstractSemanti
 	/**
 	 * Constraint:
 	 *     method=ID
-	 *
-	 * Features:
-	 *    method[1, 1]
 	 */
 	protected void sequence_JavaExecutable(EObject context, JavaExecutable semanticObject) {
 		if(errorAcceptor != null) {
@@ -476,9 +360,6 @@ public class AbstractEpatchTestLanguageSemanticSequencer extends AbstractSemanti
 	/**
 	 * Constraint:
 	 *     (path+=ID path+=ID*)
-	 *
-	 * Features:
-	 *    path[1, *]
 	 */
 	protected void sequence_JavaImport(EObject context, JavaImport semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -497,64 +378,6 @@ public class AbstractEpatchTestLanguageSemanticSequencer extends AbstractSemanti
 	 *             (import=[Import|ID] impFrag=FRAGMENT)
 	 *         )
 	 *     )
-	 *
-	 * Features:
-	 *    value[0, 1]
-	 *         EXCLUDE_IF_SET refIndex
-	 *         EXCLUDE_IF_SET refObject
-	 *         EXCLUDE_IF_SET refFeature
-	 *         EXCLUDE_IF_SET refIndex
-	 *         EXCLUDE_IF_SET newObject
-	 *         EXCLUDE_IF_SET import
-	 *         EXCLUDE_IF_SET impFrag
-	 *    refObject[0, 1]
-	 *         MANDATORY_IF_SET refFeature
-	 *         MANDATORY_IF_SET refIndex
-	 *         EXCLUDE_IF_SET refIndex
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET newObject
-	 *         EXCLUDE_IF_SET import
-	 *         EXCLUDE_IF_SET impFrag
-	 *    refFeature[0, 1]
-	 *         MANDATORY_IF_SET refIndex
-	 *         EXCLUDE_IF_UNSET refObject
-	 *         EXCLUDE_IF_SET refIndex
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET newObject
-	 *         EXCLUDE_IF_SET import
-	 *         EXCLUDE_IF_SET impFrag
-	 *    refIndex[0, 2]
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET newObject
-	 *         EXCLUDE_IF_SET import
-	 *         EXCLUDE_IF_SET impFrag
-	 *    newObject[0, 1]
-	 *         EXCLUDE_IF_SET refIndex
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET refObject
-	 *         EXCLUDE_IF_SET refFeature
-	 *         EXCLUDE_IF_SET refIndex
-	 *         EXCLUDE_IF_SET import
-	 *         EXCLUDE_IF_SET impFrag
-	 *    import[0, 1]
-	 *         EXCLUDE_IF_UNSET impFrag
-	 *         MANDATORY_IF_SET impFrag
-	 *         EXCLUDE_IF_SET refIndex
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET refObject
-	 *         EXCLUDE_IF_SET refFeature
-	 *         EXCLUDE_IF_SET refIndex
-	 *         EXCLUDE_IF_SET newObject
-	 *    impFrag[0, 1]
-	 *         EXCLUDE_IF_UNSET import
-	 *         MANDATORY_IF_SET import
-	 *         EXCLUDE_IF_SET refIndex
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET refObject
-	 *         EXCLUDE_IF_SET refFeature
-	 *         EXCLUDE_IF_SET refIndex
-	 *         EXCLUDE_IF_SET newObject
-	 *    index[1, 1]
 	 */
 	protected void sequence_ListAssignmentValue(EObject context, AssignmentValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -564,13 +387,6 @@ public class AbstractEpatchTestLanguageSemanticSequencer extends AbstractSemanti
 	/**
 	 * Constraint:
 	 *     (first=Executable? (asOp=Executable | eachOp=Executable)?)
-	 *
-	 * Features:
-	 *    first[0, 1]
-	 *    asOp[0, 1]
-	 *         EXCLUDE_IF_SET eachOp
-	 *    eachOp[0, 1]
-	 *         EXCLUDE_IF_SET asOp
 	 */
 	protected void sequence_Migration(EObject context, Migration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -580,10 +396,6 @@ public class AbstractEpatchTestLanguageSemanticSequencer extends AbstractSemanti
 	/**
 	 * Constraint:
 	 *     (feature=ID (leftValues+=AssignmentValue leftValues+=AssignmentValue*)?)
-	 *
-	 * Features:
-	 *    feature[1, 1]
-	 *    leftValues[0, *]
 	 */
 	protected void sequence_MonoListAssignment(EObject context, ListAssignment semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -593,10 +405,6 @@ public class AbstractEpatchTestLanguageSemanticSequencer extends AbstractSemanti
 	/**
 	 * Constraint:
 	 *     (feature=ID leftValue=SingleAssignmentValue)
-	 *
-	 * Features:
-	 *    feature[1, 1]
-	 *    leftValue[1, 1]
 	 */
 	protected void sequence_MonoSingleAssignment(EObject context, SingleAssignment semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -606,17 +414,6 @@ public class AbstractEpatchTestLanguageSemanticSequencer extends AbstractSemanti
 	/**
 	 * Constraint:
 	 *     (name=ID (leftUri=STRING | leftRoot=CreatedObject) (rightUri=STRING | rightRoot=CreatedObject))
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    leftUri[0, 1]
-	 *         EXCLUDE_IF_SET leftRoot
-	 *    leftRoot[0, 1]
-	 *         EXCLUDE_IF_SET leftUri
-	 *    rightUri[0, 1]
-	 *         EXCLUDE_IF_SET rightRoot
-	 *    rightRoot[0, 1]
-	 *         EXCLUDE_IF_SET rightUri
 	 */
 	protected void sequence_NamedResource(EObject context, NamedResource semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -626,10 +423,6 @@ public class AbstractEpatchTestLanguageSemanticSequencer extends AbstractSemanti
 	/**
 	 * Constraint:
 	 *     (resource=[NamedResource|ID] fragment=FRAGMENT)
-	 *
-	 * Features:
-	 *    resource[1, 1]
-	 *    fragment[1, 1]
 	 */
 	protected void sequence_ObjectCopy(EObject context, ObjectCopy semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -639,10 +432,6 @@ public class AbstractEpatchTestLanguageSemanticSequencer extends AbstractSemanti
 	/**
 	 * Constraint:
 	 *     (import=[Import|ID] impFrag=FRAGMENT)
-	 *
-	 * Features:
-	 *    import[1, 1]
-	 *    impFrag[1, 1]
 	 */
 	protected void sequence_ObjectNew(EObject context, ObjectNew semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -656,32 +445,6 @@ public class AbstractEpatchTestLanguageSemanticSequencer extends AbstractSemanti
 	 *         ((leftRes=[NamedResource|ID] leftFrag=FRAGMENT) | (leftRes=[NamedResource|ID] leftFrag=FRAGMENT rightRes=[NamedResource|ID] rightFrag=FRAGMENT)) 
 	 *         ((assignments+=BiSingleAssignment | assignments+=BiListAssignment)+ leftMig=Migration? rightMig=Migration?)?
 	 *     )
-	 *
-	 * Features:
-	 *    name[0, 1]
-	 *    assignments[0, *]
-	 *    leftMig[0, 1]
-	 *    leftRes[0, 2]
-	 *    leftFrag[0, 2]
-	 *    rightRes[0, 1]
-	 *         EXCLUDE_IF_UNSET leftRes
-	 *         MANDATORY_IF_SET leftRes
-	 *         EXCLUDE_IF_UNSET leftFrag
-	 *         MANDATORY_IF_SET leftFrag
-	 *         EXCLUDE_IF_UNSET rightFrag
-	 *         MANDATORY_IF_SET rightFrag
-	 *         EXCLUDE_IF_SET leftRes
-	 *         EXCLUDE_IF_SET leftFrag
-	 *    rightFrag[0, 1]
-	 *         EXCLUDE_IF_UNSET leftRes
-	 *         MANDATORY_IF_SET leftRes
-	 *         EXCLUDE_IF_UNSET leftFrag
-	 *         MANDATORY_IF_SET leftFrag
-	 *         EXCLUDE_IF_UNSET rightRes
-	 *         MANDATORY_IF_SET rightRes
-	 *         EXCLUDE_IF_SET leftRes
-	 *         EXCLUDE_IF_SET leftFrag
-	 *    rightMig[0, 1]
 	 */
 	protected void sequence_ObjectRef(EObject context, ObjectRef semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -691,10 +454,6 @@ public class AbstractEpatchTestLanguageSemanticSequencer extends AbstractSemanti
 	/**
 	 * Constraint:
 	 *     (name=ID uri=STRING)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    uri[1, 1]
 	 */
 	protected void sequence_ResourceImport(EObject context, ResourceImport semanticObject) {
 		if(errorAcceptor != null) {
@@ -720,74 +479,6 @@ public class AbstractEpatchTestLanguageSemanticSequencer extends AbstractSemanti
 	 *         newObject=CreatedObject | 
 	 *         (import=[Import|ID] impFrag=FRAGMENT)
 	 *     )
-	 *
-	 * Features:
-	 *    value[0, 1]
-	 *         EXCLUDE_IF_SET keyword
-	 *         EXCLUDE_IF_SET refObject
-	 *         EXCLUDE_IF_SET refFeature
-	 *         EXCLUDE_IF_SET refIndex
-	 *         EXCLUDE_IF_SET newObject
-	 *         EXCLUDE_IF_SET import
-	 *         EXCLUDE_IF_SET impFrag
-	 *    refObject[0, 1]
-	 *         MANDATORY_IF_SET refFeature
-	 *         MANDATORY_IF_SET refIndex
-	 *         EXCLUDE_IF_SET keyword
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET newObject
-	 *         EXCLUDE_IF_SET import
-	 *         EXCLUDE_IF_SET impFrag
-	 *    refFeature[0, 1]
-	 *         MANDATORY_IF_SET refIndex
-	 *         EXCLUDE_IF_UNSET refObject
-	 *         EXCLUDE_IF_SET keyword
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET newObject
-	 *         EXCLUDE_IF_SET import
-	 *         EXCLUDE_IF_SET impFrag
-	 *    refIndex[0, 1]
-	 *         EXCLUDE_IF_UNSET refFeature
-	 *         EXCLUDE_IF_UNSET refObject
-	 *         EXCLUDE_IF_SET keyword
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET newObject
-	 *         EXCLUDE_IF_SET import
-	 *         EXCLUDE_IF_SET impFrag
-	 *    newObject[0, 1]
-	 *         EXCLUDE_IF_SET keyword
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET refObject
-	 *         EXCLUDE_IF_SET refFeature
-	 *         EXCLUDE_IF_SET refIndex
-	 *         EXCLUDE_IF_SET import
-	 *         EXCLUDE_IF_SET impFrag
-	 *    import[0, 1]
-	 *         EXCLUDE_IF_UNSET impFrag
-	 *         MANDATORY_IF_SET impFrag
-	 *         EXCLUDE_IF_SET keyword
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET refObject
-	 *         EXCLUDE_IF_SET refFeature
-	 *         EXCLUDE_IF_SET refIndex
-	 *         EXCLUDE_IF_SET newObject
-	 *    impFrag[0, 1]
-	 *         EXCLUDE_IF_UNSET import
-	 *         MANDATORY_IF_SET import
-	 *         EXCLUDE_IF_SET keyword
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET refObject
-	 *         EXCLUDE_IF_SET refFeature
-	 *         EXCLUDE_IF_SET refIndex
-	 *         EXCLUDE_IF_SET newObject
-	 *    keyword[0, 1]
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET refObject
-	 *         EXCLUDE_IF_SET refFeature
-	 *         EXCLUDE_IF_SET refIndex
-	 *         EXCLUDE_IF_SET newObject
-	 *         EXCLUDE_IF_SET import
-	 *         EXCLUDE_IF_SET impFrag
 	 */
 	protected void sequence_SingleAssignmentValue(EObject context, AssignmentValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

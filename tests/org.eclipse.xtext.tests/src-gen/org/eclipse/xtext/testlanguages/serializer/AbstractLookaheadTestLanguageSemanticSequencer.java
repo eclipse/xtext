@@ -96,9 +96,6 @@ public class AbstractLookaheadTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     contents+=Alts*
-	 *
-	 * Features:
-	 *    contents[0, *]
 	 */
 	protected void sequence_Entry(EObject context, Entry semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -108,9 +105,6 @@ public class AbstractLookaheadTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     x='a'
-	 *
-	 * Features:
-	 *    x[1, 1]
 	 */
 	protected void sequence_LookAhead0(EObject context, LookAhead0 semanticObject) {
 		if(errorAcceptor != null) {
@@ -127,11 +121,6 @@ public class AbstractLookaheadTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (y=LookAhead2 x='b' z='d')
-	 *
-	 * Features:
-	 *    x[1, 1]
-	 *    y[1, 1]
-	 *    z[1, 1]
 	 */
 	protected void sequence_LookAhead1(EObject context, LookAhead1 semanticObject) {
 		if(errorAcceptor != null) {
@@ -154,9 +143,6 @@ public class AbstractLookaheadTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (z='foo' | z='bar')
-	 *
-	 * Features:
-	 *    z[0, 2]
 	 */
 	protected void sequence_LookAhead2(EObject context, LookAhead2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -166,10 +152,6 @@ public class AbstractLookaheadTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (x='b' z=LookAhead4)
-	 *
-	 * Features:
-	 *    x[1, 1]
-	 *    z[1, 1]
 	 */
 	protected void sequence_LookAhead3(EObject context, LookAhead3 semanticObject) {
 		if(errorAcceptor != null) {
@@ -189,9 +171,6 @@ public class AbstractLookaheadTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (x='c' | x='d')
-	 *
-	 * Features:
-	 *    x[0, 2]
 	 */
 	protected void sequence_LookAhead4(EObject context, LookAhead4 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -95,10 +95,6 @@ public class AbstractReferenceGrammarTestLanguageSemanticSequencer extends Abstr
 	/**
 	 * Constraint:
 	 *     (name=ID age=INT)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    age[1, 1]
 	 */
 	protected void sequence_Erwachsener(EObject context, Erwachsener semanticObject) {
 		if(errorAcceptor != null) {
@@ -118,12 +114,6 @@ public class AbstractReferenceGrammarTestLanguageSemanticSequencer extends Abstr
 	/**
 	 * Constraint:
 	 *     ((name='keyword' | name=STRING | name=ID) mutter=[Erwachsener|ID] vater=[Erwachsener|ID] kinder+=[Kind|ID] kinder+=[Kind|ID]*)
-	 *
-	 * Features:
-	 *    name[0, 3]
-	 *    mutter[1, 1]
-	 *    vater[1, 1]
-	 *    kinder[1, *]
 	 */
 	protected void sequence_Familie(EObject context, Familie semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -133,9 +123,6 @@ public class AbstractReferenceGrammarTestLanguageSemanticSequencer extends Abstr
 	/**
 	 * Constraint:
 	 *     (wert='ROT' | wert='BLAU' | wert='GELB' | wert='GRÜN')
-	 *
-	 * Features:
-	 *    wert[0, 4]
 	 */
 	protected void sequence_Farbe(EObject context, Farbe semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -145,10 +132,6 @@ public class AbstractReferenceGrammarTestLanguageSemanticSequencer extends Abstr
 	/**
 	 * Constraint:
 	 *     (name=ID age=INT)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    age[1, 1]
 	 */
 	protected void sequence_Kind(EObject context, Kind semanticObject) {
 		if(errorAcceptor != null) {
@@ -168,24 +151,6 @@ public class AbstractReferenceGrammarTestLanguageSemanticSequencer extends Abstr
 	/**
 	 * Constraint:
 	 *     (groesse=INT beschreibung=STRING? (kinder+=Kind | erzieher+=Erwachsener | spielzeuge+=Spielzeug | familie+=Familie)*)?
-	 *
-	 * Features:
-	 *    groesse[0, 1]
-	 *         MANDATORY_IF_SET beschreibung
-	 *         MANDATORY_IF_SET kinder
-	 *         MANDATORY_IF_SET erzieher
-	 *         MANDATORY_IF_SET spielzeuge
-	 *         MANDATORY_IF_SET familie
-	 *    beschreibung[0, 1]
-	 *         EXCLUDE_IF_UNSET groesse
-	 *    kinder[0, *]
-	 *         EXCLUDE_IF_UNSET groesse
-	 *    erzieher[0, *]
-	 *         EXCLUDE_IF_UNSET groesse
-	 *    spielzeuge[0, *]
-	 *         EXCLUDE_IF_UNSET groesse
-	 *    familie[0, *]
-	 *         EXCLUDE_IF_UNSET groesse
 	 */
 	protected void sequence_Spielplatz(EObject context, Spielplatz semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -195,10 +160,6 @@ public class AbstractReferenceGrammarTestLanguageSemanticSequencer extends Abstr
 	/**
 	 * Constraint:
 	 *     (name=ID farbe=Farbe)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    farbe[1, 1]
 	 */
 	protected void sequence_Spielzeug(EObject context, Spielzeug semanticObject) {
 		if(errorAcceptor != null) {

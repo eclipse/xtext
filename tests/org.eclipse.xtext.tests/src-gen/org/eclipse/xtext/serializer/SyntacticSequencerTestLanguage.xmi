@@ -33,6 +33,15 @@
         <elements xsi:type="xtext:Assignment" feature="x8" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.19"/>
         </elements>
+        <elements xsi:type="xtext:Assignment" feature="x9" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.20"/>
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="x10" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.21"/>
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="x11" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.22"/>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="MandatoryKeywords">
@@ -332,19 +341,64 @@
         <elements xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
       </alternatives>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="UnassignedDatatypeRule">
+    <rules xsi:type="xtext:ParserRule" name="KW1">
       <type metamodel="/1/@metamodelDeclarations.0">
         <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
-      <alternatives xsi:type="xtext:Keyword" value="kw1"/>
+      <alternatives xsi:type="xtext:Alternatives">
+        <elements xsi:type="xtext:Keyword" value="kw1"/>
+        <elements xsi:type="xtext:Group">
+          <elements xsi:type="xtext:Keyword" value="matched"/>
+          <elements xsi:type="xtext:RuleCall" cardinality="?" rule="/1/@rules.1"/>
+        </elements>
+      </alternatives>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="AmbiguousTransition">
+    <rules xsi:type="xtext:ParserRule" name="OptionalSingleTransition">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/syntacticsequencertestlanguage#//AmbiguousTransition"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/syntacticsequencertestlanguage#//OptionalSingleTransition"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="#8"/>
-        <elements xsi:type="xtext:Keyword" cardinality="?" value="kw1"/>
+        <elements xsi:type="xtext:RuleCall" cardinality="?" rule="/0/@rules.18"/>
+        <elements xsi:type="xtext:Assignment" feature="val" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="OptionalManyTransition">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/syntacticsequencertestlanguage#//OptionalManyTransition"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="#9"/>
+        <elements xsi:type="xtext:RuleCall" cardinality="*" rule="/0/@rules.18"/>
+        <elements xsi:type="xtext:Assignment" feature="val" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="MandatoryManyTransition">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/syntacticsequencertestlanguage#//MandatoryManyTransition"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="#10"/>
+        <elements xsi:type="xtext:RuleCall" cardinality="+" rule="/0/@rules.18"/>
+        <elements xsi:type="xtext:Assignment" feature="val" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="AlternativeTransition">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/syntacticsequencertestlanguage#//AlternativeTransition"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="#11"/>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
+          <elements xsi:type="xtext:Keyword" value="kw2"/>
+        </elements>
         <elements xsi:type="xtext:Assignment" feature="val" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
         </elements>

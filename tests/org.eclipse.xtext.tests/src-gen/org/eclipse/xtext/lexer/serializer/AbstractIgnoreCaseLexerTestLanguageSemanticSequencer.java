@@ -58,9 +58,6 @@ public class AbstractIgnoreCaseLexerTestLanguageSemanticSequencer extends Abstra
 	/**
 	 * Constraint:
 	 *     value='CaSe'
-	 *
-	 * Features:
-	 *    value[1, 1]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		if(errorAcceptor != null) {

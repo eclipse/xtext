@@ -62,9 +62,6 @@ public class AbstractTreeTestLanguageSemanticSequencer extends AbstractSemanticS
 	/**
 	 * Constraint:
 	 *     children+=Node*
-	 *
-	 * Features:
-	 *    children[0, *]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -74,11 +71,6 @@ public class AbstractTreeTestLanguageSemanticSequencer extends AbstractSemanticS
 	/**
 	 * Constraint:
 	 *     (name=ID attrib=STRING children+=Node*)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    attrib[1, 1]
-	 *    children[0, *]
 	 */
 	protected void sequence_Node(EObject context, Node semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

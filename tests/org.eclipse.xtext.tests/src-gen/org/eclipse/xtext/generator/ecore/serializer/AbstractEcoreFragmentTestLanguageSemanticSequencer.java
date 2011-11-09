@@ -58,10 +58,6 @@ public class AbstractEcoreFragmentTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     (name=ID first=[First|ID])
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    first[1, 1]
 	 */
 	protected void sequence_Second(EObject context, Second semanticObject) {
 		if(errorAcceptor != null) {

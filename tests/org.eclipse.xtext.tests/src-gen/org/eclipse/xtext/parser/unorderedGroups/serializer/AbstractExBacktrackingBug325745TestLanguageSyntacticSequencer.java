@@ -28,11 +28,11 @@ public class AbstractExBacktrackingBug325745TestLanguageSyntacticSequencer exten
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (ExBacktrackingBug325745TestLanguageGrammarAccess) access;
 		match_Expression_LeftSquareBracketKeyword_1_0_a = new TokenAlias(true, true, grammarAccess.getExpressionAccess().getLeftSquareBracketKeyword_1_0());
-		match_Expression_LeftSquareBracketKeyword_2_0_q = new TokenAlias(true, false, grammarAccess.getExpressionAccess().getLeftSquareBracketKeyword_2_0());
-		match_Expression_RightSquareBracketKeyword_2_2_q = new TokenAlias(true, false, grammarAccess.getExpressionAccess().getRightSquareBracketKeyword_2_2());
+		match_Expression_LeftSquareBracketKeyword_2_0_q = new TokenAlias(false, true, grammarAccess.getExpressionAccess().getLeftSquareBracketKeyword_2_0());
+		match_Expression_RightSquareBracketKeyword_2_2_q = new TokenAlias(false, true, grammarAccess.getExpressionAccess().getRightSquareBracketKeyword_2_2());
 		match_Expression_RightSquareBracketKeyword_3_0_a = new TokenAlias(true, true, grammarAccess.getExpressionAccess().getRightSquareBracketKeyword_3_0());
-		match_SimpleTerm_AsteriskKeyword_0_1_q = new TokenAlias(true, false, grammarAccess.getSimpleTermAccess().getAsteriskKeyword_0_1());
-		match_SimpleTerm_ExclamationMarkKeyword_0_3_q = new TokenAlias(true, false, grammarAccess.getSimpleTermAccess().getExclamationMarkKeyword_0_3());
+		match_SimpleTerm_AsteriskKeyword_0_1_q = new TokenAlias(false, true, grammarAccess.getSimpleTermAccess().getAsteriskKeyword_0_1());
+		match_SimpleTerm_ExclamationMarkKeyword_0_3_q = new TokenAlias(false, true, grammarAccess.getSimpleTermAccess().getExclamationMarkKeyword_0_3());
 	}
 	
 	@Override

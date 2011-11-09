@@ -58,9 +58,6 @@ public class AbstractBaseInheritanceTestLanguageSemanticSequencer extends Abstra
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		if(errorAcceptor != null) {

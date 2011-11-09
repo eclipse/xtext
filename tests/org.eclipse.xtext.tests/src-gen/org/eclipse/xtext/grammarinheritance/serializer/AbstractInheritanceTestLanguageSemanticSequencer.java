@@ -65,9 +65,6 @@ public class AbstractInheritanceTestLanguageSemanticSequencer extends AbstractSe
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_Element(EObject context, Element semanticObject) {
 		if(errorAcceptor != null) {
@@ -84,10 +81,6 @@ public class AbstractInheritanceTestLanguageSemanticSequencer extends AbstractSe
 	/**
 	 * Constraint:
 	 *     (name=ID elements+=Element*)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    elements[0, *]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

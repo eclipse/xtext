@@ -62,9 +62,6 @@ public class AbstractBug289515TestLanguageSemanticSequencer extends AbstractSema
 	 *         value='%%' | 
 	 *         value='%%'
 	 *     )
-	 *
-	 * Features:
-	 *    value[0, 6]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

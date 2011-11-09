@@ -74,9 +74,6 @@ public class AbstractBug250313SemanticSequencer extends AbstractSemanticSequence
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_Child1(EObject context, Child1 semanticObject) {
 		if(errorAcceptor != null) {
@@ -93,9 +90,6 @@ public class AbstractBug250313SemanticSequencer extends AbstractSemanticSequence
 	/**
 	 * Constraint:
 	 *     name=STRING
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_Child2(EObject context, Child2 semanticObject) {
 		if(errorAcceptor != null) {
@@ -130,69 +124,6 @@ public class AbstractBug250313SemanticSequencer extends AbstractSemanticSequence
 	 *         multiValue+=NestedDatatype | 
 	 *         (children=Child (ref=[Child1|STRING] | ref=[Child2|ID])?)
 	 *     )
-	 *
-	 * Features:
-	 *    value[0, 8]
-	 *         EXCLUDE_IF_SET multiValue
-	 *         EXCLUDE_IF_SET multiValue
-	 *         EXCLUDE_IF_SET multiValue
-	 *         EXCLUDE_IF_SET multiValue
-	 *         EXCLUDE_IF_SET multiValue
-	 *         EXCLUDE_IF_SET multiValue
-	 *         EXCLUDE_IF_SET multiValue
-	 *         EXCLUDE_IF_SET multiValue
-	 *         EXCLUDE_IF_SET children
-	 *         EXCLUDE_IF_SET ref
-	 *         EXCLUDE_IF_SET ref
-	 *    multiValue[0, 8]
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET children
-	 *         EXCLUDE_IF_SET ref
-	 *         EXCLUDE_IF_SET ref
-	 *    children[0, 1]
-	 *         MANDATORY_IF_SET ref
-	 *         MANDATORY_IF_SET ref
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET multiValue
-	 *         EXCLUDE_IF_SET multiValue
-	 *         EXCLUDE_IF_SET multiValue
-	 *         EXCLUDE_IF_SET multiValue
-	 *         EXCLUDE_IF_SET multiValue
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET multiValue
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET multiValue
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET multiValue
-	 *    ref[0, 2]
-	 *         EXCLUDE_IF_UNSET children
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET multiValue
-	 *         EXCLUDE_IF_SET multiValue
-	 *         EXCLUDE_IF_SET multiValue
-	 *         EXCLUDE_IF_SET multiValue
-	 *         EXCLUDE_IF_SET multiValue
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET multiValue
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET multiValue
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET multiValue
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

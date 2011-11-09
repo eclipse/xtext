@@ -139,9 +139,6 @@ public class AbstractConcreteTestLanguageSemanticSequencer extends AbstractSeman
 	/**
 	 * Constraint:
 	 *     elements+=ExtendableParserRule*
-	 *
-	 * Features:
-	 *    elements[0, *]
 	 */
 	protected void sequence_AbstractCallExtendedParserRule(EObject context, AModel semanticObject) {
 		superSequencer.createSequence(context, semanticObject);
@@ -151,9 +148,6 @@ public class AbstractConcreteTestLanguageSemanticSequencer extends AbstractSeman
 	/**
 	 * Constraint:
 	 *     elements+=OverridableParserRule*
-	 *
-	 * Features:
-	 *    elements[0, *]
 	 */
 	protected void sequence_AbstractCallOverridenParserRule(EObject context, AModel semanticObject) {
 		superSequencer.createSequence(context, semanticObject);
@@ -163,9 +157,6 @@ public class AbstractConcreteTestLanguageSemanticSequencer extends AbstractSeman
 	/**
 	 * Constraint:
 	 *     call=AbstractCallExtendedParserRule
-	 *
-	 * Features:
-	 *    call[1, 1]
 	 */
 	protected void sequence_CallExtendedParserRule(EObject context, CallExtendedParserRule semanticObject) {
 		if(errorAcceptor != null) {
@@ -182,9 +173,6 @@ public class AbstractConcreteTestLanguageSemanticSequencer extends AbstractSeman
 	/**
 	 * Constraint:
 	 *     call=AbstractCallOverridenParserRule
-	 *
-	 * Features:
-	 *    call[1, 1]
 	 */
 	protected void sequence_CallOverridenParserRule(EObject context, CallOverridenParserRule semanticObject) {
 		if(errorAcceptor != null) {
@@ -201,10 +189,6 @@ public class AbstractConcreteTestLanguageSemanticSequencer extends AbstractSeman
 	/**
 	 * Constraint:
 	 *     (magicNumber=REAL elements+=InheritedParserRule*)
-	 *
-	 * Features:
-	 *    magicNumber[1, 1]
-	 *    elements[0, *]
 	 */
 	protected void sequence_ConcreteParserRule(EObject context, ConcreteParserRule semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -214,9 +198,6 @@ public class AbstractConcreteTestLanguageSemanticSequencer extends AbstractSeman
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_InheritedParserRule(EObject context, AType semanticObject) {
 		superSequencer.createSequence(context, semanticObject);
@@ -226,10 +207,6 @@ public class AbstractConcreteTestLanguageSemanticSequencer extends AbstractSeman
 	/**
 	 * Constraint:
 	 *     (name=ID age=INT)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    age[1, 1]
 	 */
 	protected void sequence_OverridableParserRule2(EObject context, AType2 semanticObject) {
 		if(errorAcceptor != null) {
@@ -249,9 +226,6 @@ public class AbstractConcreteTestLanguageSemanticSequencer extends AbstractSeman
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_OverridableParserRule(EObject context, AType semanticObject) {
 		if(errorAcceptor != null) {
@@ -268,10 +242,6 @@ public class AbstractConcreteTestLanguageSemanticSequencer extends AbstractSeman
 	/**
 	 * Constraint:
 	 *     (name=ID sub1=ID)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    sub1[1, 1]
 	 */
 	protected void sequence_Subrule1(EObject context, Subrule1 semanticObject) {
 		if(errorAcceptor != null) {
@@ -291,10 +261,6 @@ public class AbstractConcreteTestLanguageSemanticSequencer extends AbstractSeman
 	/**
 	 * Constraint:
 	 *     (name=ID sub2=STRING)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    sub2[1, 1]
 	 */
 	protected void sequence_Subrule2(EObject context, Subrule2 semanticObject) {
 		if(errorAcceptor != null) {
@@ -314,10 +280,6 @@ public class AbstractConcreteTestLanguageSemanticSequencer extends AbstractSeman
 	/**
 	 * Constraint:
 	 *     (name=ID sub1=INT)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    sub1[1, 1]
 	 */
 	protected void sequence_Subrule3(EObject context, Subrule3 semanticObject) {
 		if(errorAcceptor != null) {

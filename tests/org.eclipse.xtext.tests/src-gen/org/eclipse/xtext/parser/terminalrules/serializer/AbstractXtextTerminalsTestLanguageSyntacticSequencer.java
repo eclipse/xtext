@@ -28,11 +28,11 @@ public class AbstractXtextTerminalsTestLanguageSyntacticSequencer extends Abstra
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (XtextTerminalsTestLanguageGrammarAccess) access;
 		match_ParenthesizedAssignableElement_LeftParenthesisKeyword_0_a = new TokenAlias(true, true, grammarAccess.getParenthesizedAssignableElementAccess().getLeftParenthesisKeyword_0());
-		match_ParenthesizedAssignableElement_LeftParenthesisKeyword_0_p = new TokenAlias(false, true, grammarAccess.getParenthesizedAssignableElementAccess().getLeftParenthesisKeyword_0());
+		match_ParenthesizedAssignableElement_LeftParenthesisKeyword_0_p = new TokenAlias(true, false, grammarAccess.getParenthesizedAssignableElementAccess().getLeftParenthesisKeyword_0());
 		match_ParenthesizedElement_LeftParenthesisKeyword_0_a = new TokenAlias(true, true, grammarAccess.getParenthesizedElementAccess().getLeftParenthesisKeyword_0());
-		match_ParenthesizedElement_LeftParenthesisKeyword_0_p = new TokenAlias(false, true, grammarAccess.getParenthesizedElementAccess().getLeftParenthesisKeyword_0());
+		match_ParenthesizedElement_LeftParenthesisKeyword_0_p = new TokenAlias(true, false, grammarAccess.getParenthesizedElementAccess().getLeftParenthesisKeyword_0());
 		match_ParenthesizedTerminalElement_LeftParenthesisKeyword_0_a = new TokenAlias(true, true, grammarAccess.getParenthesizedTerminalElementAccess().getLeftParenthesisKeyword_0());
-		match_ParenthesizedTerminalElement_LeftParenthesisKeyword_0_p = new TokenAlias(false, true, grammarAccess.getParenthesizedTerminalElementAccess().getLeftParenthesisKeyword_0());
+		match_ParenthesizedTerminalElement_LeftParenthesisKeyword_0_p = new TokenAlias(true, false, grammarAccess.getParenthesizedTerminalElementAccess().getLeftParenthesisKeyword_0());
 	}
 	
 	@Override

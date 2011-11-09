@@ -111,9 +111,6 @@ public class AbstractPartialParserTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     abstractChildren+=AbstractChild+
-	 *
-	 * Features:
-	 *    abstractChildren[1, *]
 	 */
 	protected void sequence_AbstractChildren(EObject context, AbstractChildren semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -123,9 +120,6 @@ public class AbstractPartialParserTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     value=Named
-	 *
-	 * Features:
-	 *    value[1, 1]
 	 */
 	protected void sequence_Child(EObject context, Child semanticObject) {
 		if(errorAcceptor != null) {
@@ -142,9 +136,6 @@ public class AbstractPartialParserTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     (children+=Child children+=Child*)
-	 *
-	 * Features:
-	 *    children[1, *]
 	 */
 	protected void sequence_Children(EObject context, Children semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -154,10 +145,6 @@ public class AbstractPartialParserTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     (value=Named referencedContainer=[SomeContainer|ID]?)
-	 *
-	 * Features:
-	 *    value[1, 1]
-	 *    referencedContainer[0, 1]
 	 */
 	protected void sequence_FirstConcrete(EObject context, FirstConcrete semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -167,9 +154,6 @@ public class AbstractPartialParserTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_Named(EObject context, Named semanticObject) {
 		if(errorAcceptor != null) {
@@ -186,9 +170,6 @@ public class AbstractPartialParserTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     nested+=SomeContainer+
-	 *
-	 * Features:
-	 *    nested[1, *]
 	 */
 	protected void sequence_Nested(EObject context, Nested semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -198,10 +179,6 @@ public class AbstractPartialParserTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     (value=Named referencedChildren+=[Child|ID]?)
-	 *
-	 * Features:
-	 *    value[1, 1]
-	 *    referencedChildren[0, 1]
 	 */
 	protected void sequence_SecondConcrete(EObject context, SecondConcrete semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -211,11 +188,6 @@ public class AbstractPartialParserTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     (name=ID (nested+=Nested | content+=Content)*)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    nested[0, *]
-	 *    content[0, *]
 	 */
 	protected void sequence_SomeContainer(EObject context, SomeContainer semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

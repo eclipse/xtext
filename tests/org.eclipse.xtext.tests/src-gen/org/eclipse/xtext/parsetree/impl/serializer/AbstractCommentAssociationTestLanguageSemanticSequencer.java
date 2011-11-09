@@ -66,13 +66,6 @@ public class AbstractCommentAssociationTestLanguageSemanticSequencer extends Abs
 	/**
 	 * Constraint:
 	 *     ((child=Element_Element_2_0 name=ID) | name=ID)
-	 *
-	 * Features:
-	 *    name[0, 2]
-	 *    child[0, 1]
-	 *         EXCLUDE_IF_UNSET name
-	 *         MANDATORY_IF_SET name
-	 *         EXCLUDE_IF_SET name
 	 */
 	protected void sequence_Element(EObject context, Element semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -82,9 +75,6 @@ public class AbstractCommentAssociationTestLanguageSemanticSequencer extends Abs
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_Element_Element_2_0(EObject context, Element semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -94,9 +84,6 @@ public class AbstractCommentAssociationTestLanguageSemanticSequencer extends Abs
 	/**
 	 * Constraint:
 	 *     elements+=Element*
-	 *
-	 * Features:
-	 *    elements[0, *]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

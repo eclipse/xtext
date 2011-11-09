@@ -65,9 +65,6 @@ public class AbstractUnassignedRuleCallTestLanguageSemanticSequencer extends Abs
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_ModelFeatures(EObject context, ModelFeatures semanticObject) {
 		if(errorAcceptor != null) {
@@ -84,9 +81,6 @@ public class AbstractUnassignedRuleCallTestLanguageSemanticSequencer extends Abs
 	/**
 	 * Constraint:
 	 *     modelFeatures=ModelFeatures
-	 *
-	 * Features:
-	 *    modelFeatures[1, 1]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		if(errorAcceptor != null) {

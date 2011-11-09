@@ -72,9 +72,6 @@ public class AbstractLangATestLanguageSemanticSequencer extends AbstractSemantic
 	/**
 	 * Constraint:
 	 *     uri=STRING
-	 *
-	 * Features:
-	 *    uri[1, 1]
 	 */
 	protected void sequence_Import(EObject context, Import semanticObject) {
 		if(errorAcceptor != null) {
@@ -91,10 +88,6 @@ public class AbstractLangATestLanguageSemanticSequencer extends AbstractSemantic
 	/**
 	 * Constraint:
 	 *     (imports+=Import* types+=Type*)
-	 *
-	 * Features:
-	 *    imports[0, *]
-	 *    types[0, *]
 	 */
 	protected void sequence_Main(EObject context, Main semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -104,11 +97,6 @@ public class AbstractLangATestLanguageSemanticSequencer extends AbstractSemantic
 	/**
 	 * Constraint:
 	 *     (name=ID extends=[Type|ID]? (implements+=[Type|ID] implements+=[Type|ID]*)?)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    extends[0, 1]
-	 *    implements[0, *]
 	 */
 	protected void sequence_Type(EObject context, Type semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

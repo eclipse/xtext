@@ -55,11 +55,6 @@ public class AbstractEcoreTerminalsTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     (intValues+=EINT | doubleValues+=EDOUBLE | dateValues+=EDATE)*
-	 *
-	 * Features:
-	 *    intValues[0, *]
-	 *    doubleValues[0, *]
-	 *    dateValues[0, *]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

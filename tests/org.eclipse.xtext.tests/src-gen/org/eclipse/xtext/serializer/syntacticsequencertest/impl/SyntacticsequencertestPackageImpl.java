@@ -16,15 +16,18 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Add0;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Add1;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Add2;
-import org.eclipse.xtext.serializer.syntacticsequencertest.AmbiguousTransition;
+import org.eclipse.xtext.serializer.syntacticsequencertest.AlternativeTransition;
 import org.eclipse.xtext.serializer.syntacticsequencertest.BooleanAlternative;
 import org.eclipse.xtext.serializer.syntacticsequencertest.BooleanAlternativeLiteral;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Exp0;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Exp1;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Exp2;
 import org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryKeywords;
+import org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryManyTransition;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Model;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Mult2;
+import org.eclipse.xtext.serializer.syntacticsequencertest.OptionalManyTransition;
+import org.eclipse.xtext.serializer.syntacticsequencertest.OptionalSingleTransition;
 import org.eclipse.xtext.serializer.syntacticsequencertest.SingleCrossReference;
 import org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestFactory;
 import org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage;
@@ -109,7 +112,28 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass ambiguousTransitionEClass = null;
+  private EClass optionalSingleTransitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass optionalManyTransitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass mandatoryManyTransitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass alternativeTransitionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -321,6 +345,36 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getModel_X9()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(8);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_X10()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(9);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_X11()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(10);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getMandatoryKeywords()
   {
     return mandatoryKeywordsEClass;
@@ -511,9 +565,9 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getAmbiguousTransition()
+  public EClass getOptionalSingleTransition()
   {
-    return ambiguousTransitionEClass;
+    return optionalSingleTransitionEClass;
   }
 
   /**
@@ -521,9 +575,69 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAmbiguousTransition_Val()
+  public EAttribute getOptionalSingleTransition_Val()
   {
-    return (EAttribute)ambiguousTransitionEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)optionalSingleTransitionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getOptionalManyTransition()
+  {
+    return optionalManyTransitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getOptionalManyTransition_Val()
+  {
+    return (EAttribute)optionalManyTransitionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getMandatoryManyTransition()
+  {
+    return mandatoryManyTransitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getMandatoryManyTransition_Val()
+  {
+    return (EAttribute)mandatoryManyTransitionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAlternativeTransition()
+  {
+    return alternativeTransitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getAlternativeTransition_Val()
+  {
+    return (EAttribute)alternativeTransitionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -745,6 +859,9 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
     createEReference(modelEClass, MODEL__X6);
     createEReference(modelEClass, MODEL__X7);
     createEReference(modelEClass, MODEL__X8);
+    createEReference(modelEClass, MODEL__X9);
+    createEReference(modelEClass, MODEL__X10);
+    createEReference(modelEClass, MODEL__X11);
 
     mandatoryKeywordsEClass = createEClass(MANDATORY_KEYWORDS);
     createEAttribute(mandatoryKeywordsEClass, MANDATORY_KEYWORDS__VAL1);
@@ -773,8 +890,17 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
     unassignedDatatypeEClass = createEClass(UNASSIGNED_DATATYPE);
     createEAttribute(unassignedDatatypeEClass, UNASSIGNED_DATATYPE__VAL);
 
-    ambiguousTransitionEClass = createEClass(AMBIGUOUS_TRANSITION);
-    createEAttribute(ambiguousTransitionEClass, AMBIGUOUS_TRANSITION__VAL);
+    optionalSingleTransitionEClass = createEClass(OPTIONAL_SINGLE_TRANSITION);
+    createEAttribute(optionalSingleTransitionEClass, OPTIONAL_SINGLE_TRANSITION__VAL);
+
+    optionalManyTransitionEClass = createEClass(OPTIONAL_MANY_TRANSITION);
+    createEAttribute(optionalManyTransitionEClass, OPTIONAL_MANY_TRANSITION__VAL);
+
+    mandatoryManyTransitionEClass = createEClass(MANDATORY_MANY_TRANSITION);
+    createEAttribute(mandatoryManyTransitionEClass, MANDATORY_MANY_TRANSITION__VAL);
+
+    alternativeTransitionEClass = createEClass(ALTERNATIVE_TRANSITION);
+    createEAttribute(alternativeTransitionEClass, ALTERNATIVE_TRANSITION__VAL);
 
     add0EClass = createEClass(ADD0);
     createEReference(add0EClass, ADD0__LEFT);
@@ -851,7 +977,10 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
     initEReference(getModel_X5(), this.getSingleCrossReference(), null, "x5", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X6(), this.getBooleanAlternative(), null, "x6", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X7(), this.getUnassignedDatatype(), null, "x7", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getModel_X8(), this.getAmbiguousTransition(), null, "x8", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_X8(), this.getOptionalSingleTransition(), null, "x8", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_X9(), this.getOptionalManyTransition(), null, "x9", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_X10(), this.getMandatoryManyTransition(), null, "x10", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_X11(), this.getAlternativeTransition(), null, "x11", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(mandatoryKeywordsEClass, MandatoryKeywords.class, "MandatoryKeywords", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getMandatoryKeywords_Val1(), theEcorePackage.getEString(), "val1", null, 0, 1, MandatoryKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -880,8 +1009,17 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
     initEClass(unassignedDatatypeEClass, UnassignedDatatype.class, "UnassignedDatatype", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getUnassignedDatatype_Val(), theEcorePackage.getEString(), "val", null, 0, 1, UnassignedDatatype.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(ambiguousTransitionEClass, AmbiguousTransition.class, "AmbiguousTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getAmbiguousTransition_Val(), theEcorePackage.getEString(), "val", null, 0, 1, AmbiguousTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(optionalSingleTransitionEClass, OptionalSingleTransition.class, "OptionalSingleTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getOptionalSingleTransition_Val(), theEcorePackage.getEString(), "val", null, 0, 1, OptionalSingleTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(optionalManyTransitionEClass, OptionalManyTransition.class, "OptionalManyTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getOptionalManyTransition_Val(), theEcorePackage.getEString(), "val", null, 0, 1, OptionalManyTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(mandatoryManyTransitionEClass, MandatoryManyTransition.class, "MandatoryManyTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getMandatoryManyTransition_Val(), theEcorePackage.getEString(), "val", null, 0, 1, MandatoryManyTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(alternativeTransitionEClass, AlternativeTransition.class, "AlternativeTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getAlternativeTransition_Val(), theEcorePackage.getEString(), "val", null, 0, 1, AlternativeTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(add0EClass, Add0.class, "Add0", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAdd0_Left(), this.getExp0(), null, "left", null, 0, 1, Add0.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

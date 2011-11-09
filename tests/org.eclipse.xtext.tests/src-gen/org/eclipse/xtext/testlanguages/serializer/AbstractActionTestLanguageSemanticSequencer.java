@@ -67,9 +67,6 @@ public class AbstractActionTestLanguageSemanticSequencer extends AbstractSemanti
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_Child(EObject context, Child semanticObject) {
 		if(errorAcceptor != null) {
@@ -86,10 +83,6 @@ public class AbstractActionTestLanguageSemanticSequencer extends AbstractSemanti
 	/**
 	 * Constraint:
 	 *     (left=Model_Parent_1_0 right=Child)
-	 *
-	 * Features:
-	 *    left[1, 1]
-	 *    right[1, 1]
 	 */
 	protected void sequence_Model(EObject context, Parent semanticObject) {
 		if(errorAcceptor != null) {

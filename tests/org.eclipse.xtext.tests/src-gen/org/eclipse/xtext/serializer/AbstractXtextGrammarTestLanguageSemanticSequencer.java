@@ -380,15 +380,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     (type=TypeRef (feature=ID (operator='=' | operator='+='))? (cardinality='?' | cardinality='*' | cardinality='+')?)
-	 *
-	 * Features:
-	 *    cardinality[0, 3]
-	 *    type[1, 1]
-	 *    feature[0, 1]
-	 *         MANDATORY_IF_SET operator
-	 *         MANDATORY_IF_SET operator
-	 *    operator[0, 2]
-	 *         EXCLUDE_IF_UNSET feature
 	 */
 	protected void sequence_AbstractTokenWithCardinality(EObject context, Action semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -398,10 +389,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     (groups+=Alternatives_Alternatives_1_0 groups+=Group+ (cardinality='?' | cardinality='*' | cardinality='+')?)
-	 *
-	 * Features:
-	 *    cardinality[0, 3]
-	 *    groups[2, *]
 	 */
 	protected void sequence_AbstractTokenWithCardinality(EObject context, Alternatives semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -411,12 +398,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     (feature=ID (operator='+=' | operator='=' | operator='?=') terminal=AssignableTerminal (cardinality='?' | cardinality='*' | cardinality='+')?)
-	 *
-	 * Features:
-	 *    cardinality[0, 3]
-	 *    feature[1, 1]
-	 *    operator[0, 3]
-	 *    terminal[1, 1]
 	 */
 	protected void sequence_AbstractTokenWithCardinality(EObject context, Assignment semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -426,10 +407,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     (tokens+=Group_Group_1_0 tokens+=AbstractToken+ (cardinality='?' | cardinality='*' | cardinality='+')?)
-	 *
-	 * Features:
-	 *    cardinality[0, 3]
-	 *    tokens[2, *]
 	 */
 	protected void sequence_AbstractTokenWithCardinality(EObject context, Group semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -439,10 +416,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     (value=STRING (cardinality='?' | cardinality='*' | cardinality='+')?)
-	 *
-	 * Features:
-	 *    cardinality[0, 3]
-	 *    value[1, 1]
 	 */
 	protected void sequence_AbstractTokenWithCardinality(EObject context, Keyword semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -452,10 +425,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     (rule=[AbstractRule|ID] (cardinality='?' | cardinality='*' | cardinality='+')?)
-	 *
-	 * Features:
-	 *    cardinality[0, 3]
-	 *    rule[1, 1]
 	 */
 	protected void sequence_AbstractTokenWithCardinality(EObject context, RuleCall semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -465,14 +434,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     (type=TypeRef (feature=ID (operator='=' | operator='+='))?)
-	 *
-	 * Features:
-	 *    type[1, 1]
-	 *    feature[0, 1]
-	 *         MANDATORY_IF_SET operator
-	 *         MANDATORY_IF_SET operator
-	 *    operator[0, 2]
-	 *         EXCLUDE_IF_UNSET feature
 	 */
 	protected void sequence_Action(EObject context, Action semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -482,9 +443,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     (groups+=Alternatives_Alternatives_1_0 groups+=Group+)
-	 *
-	 * Features:
-	 *    groups[2, *]
 	 */
 	protected void sequence_Alternatives(EObject context, Alternatives semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -494,9 +452,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     (groups+=AssignableAlternatives_Alternatives_1_0 groups+=AssignableTerminal+)
-	 *
-	 * Features:
-	 *    groups[2, *]
 	 */
 	protected void sequence_AssignableAlternatives(EObject context, Alternatives semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -506,11 +461,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     (feature=ID (operator='+=' | operator='=' | operator='?=') terminal=AssignableTerminal)
-	 *
-	 * Features:
-	 *    feature[1, 1]
-	 *    operator[0, 3]
-	 *    terminal[1, 1]
 	 */
 	protected void sequence_Assignment(EObject context, Assignment semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -520,10 +470,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     (left=CharacterRange_CharacterRange_1_0 right=Keyword)
-	 *
-	 * Features:
-	 *    left[1, 1]
-	 *    right[1, 1]
 	 */
 	protected void sequence_CharacterRange(EObject context, CharacterRange semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -533,10 +479,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     (type=TypeRef terminal=CrossReferenceableTerminal?)
-	 *
-	 * Features:
-	 *    type[1, 1]
-	 *    terminal[0, 1]
 	 */
 	protected void sequence_CrossReference(EObject context, CrossReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -546,9 +488,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     (groups+=CrossReferenceableAlternatives_Alternatives_1_0 groups+=CrossReferenceableTerminal+)
-	 *
-	 * Features:
-	 *    groups[2, *]
 	 */
 	protected void sequence_CrossReferenceableAlternatives(EObject context, Alternatives semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -558,10 +497,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     (enumLiteral=[EEnumLiteral|ID] literal=Keyword?)
-	 *
-	 * Features:
-	 *    enumLiteral[1, 1]
-	 *    literal[0, 1]
 	 */
 	protected void sequence_EnumLiteralDeclaration(EObject context, EnumLiteralDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -571,9 +506,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     (groups+=EnumLiterals_Alternatives_1_0 groups+=EnumLiteralDeclaration+)
-	 *
-	 * Features:
-	 *    groups[2, *]
 	 */
 	protected void sequence_EnumLiterals(EObject context, Alternatives semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -583,11 +515,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     (name=ID type=TypeRef? alternatives=EnumLiterals)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    type[0, 1]
-	 *    alternatives[1, 1]
 	 */
 	protected void sequence_EnumRule(EObject context, EnumRule semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -597,11 +524,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     (name=ID ePackage=[EPackage|STRING] alias=ID?)
-	 *
-	 * Features:
-	 *    ePackage[1, 1]
-	 *    alias[0, 1]
-	 *    name[1, 1]
 	 */
 	protected void sequence_GeneratedMetamodel(EObject context, GeneratedMetamodel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -617,17 +539,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	 *         metamodelDeclarations+=AbstractMetamodelDeclaration* 
 	 *         rules+=AbstractRule+
 	 *     )
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    usedGrammars[0, *]
-	 *    definesHiddenTokens[0, 1]
-	 *         MANDATORY_IF_SET hiddenTokens
-	 *         MANDATORY_IF_SET hiddenTokens
-	 *    hiddenTokens[0, *]
-	 *         EXCLUDE_IF_UNSET definesHiddenTokens
-	 *    metamodelDeclarations[0, *]
-	 *    rules[1, *]
 	 */
 	protected void sequence_Grammar(EObject context, Grammar semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -637,9 +548,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     (tokens+=Group_Group_1_0 tokens+=AbstractToken+)
-	 *
-	 * Features:
-	 *    tokens[2, *]
 	 */
 	protected void sequence_Group(EObject context, Group semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -649,9 +557,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     value=STRING
-	 *
-	 * Features:
-	 *    value[1, 1]
 	 */
 	protected void sequence_Keyword(EObject context, Keyword semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -661,9 +566,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     terminal=TerminalTokenElement
-	 *
-	 * Features:
-	 *    terminal[1, 1]
 	 */
 	protected void sequence_NegatedToken(EObject context, NegatedToken semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -678,16 +580,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	 *         (definesHiddenTokens?='hidden' (hiddenTokens+=[AbstractRule|ID] hiddenTokens+=[AbstractRule|ID]*)?)? 
 	 *         alternatives=Alternatives
 	 *     )
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    type[0, 1]
-	 *    alternatives[1, 1]
-	 *    definesHiddenTokens[0, 1]
-	 *         MANDATORY_IF_SET hiddenTokens
-	 *         MANDATORY_IF_SET hiddenTokens
-	 *    hiddenTokens[0, *]
-	 *         EXCLUDE_IF_UNSET definesHiddenTokens
 	 */
 	protected void sequence_ParserRule(EObject context, ParserRule semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -697,10 +589,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     (ePackage=[EPackage|STRING] alias=ID?)
-	 *
-	 * Features:
-	 *    ePackage[1, 1]
-	 *    alias[0, 1]
 	 */
 	protected void sequence_ReferencedMetamodel(EObject context, ReferencedMetamodel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -710,9 +598,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     rule=[AbstractRule|ID]
-	 *
-	 * Features:
-	 *    rule[1, 1]
 	 */
 	protected void sequence_RuleCall(EObject context, RuleCall semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -722,9 +607,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     (groups+=TerminalAlternatives_Alternatives_1_0 groups+=TerminalGroup+)
-	 *
-	 * Features:
-	 *    groups[2, *]
 	 */
 	protected void sequence_TerminalAlternatives(EObject context, Alternatives semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -734,9 +616,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     (tokens+=TerminalGroup_Group_1_0 tokens+=TerminalToken+)
-	 *
-	 * Features:
-	 *    tokens[2, *]
 	 */
 	protected void sequence_TerminalGroup(EObject context, Group semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -746,11 +625,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     (name=ID type=TypeRef? alternatives=TerminalAlternatives)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    type[0, 1]
-	 *    alternatives[1, 1]
 	 */
 	protected void sequence_TerminalRule(EObject context, TerminalRule semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -760,8 +634,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     {Wildcard}
-	 *
-	 * Features:
 	 */
 	protected void sequence_TerminalTokenElement(EObject context, Wildcard semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -771,10 +643,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     (groups+=TerminalAlternatives_Alternatives_1_0 groups+=TerminalGroup+ (cardinality='?' | cardinality='*' | cardinality='+')?)
-	 *
-	 * Features:
-	 *    cardinality[0, 3]
-	 *    groups[2, *]
 	 */
 	protected void sequence_TerminalToken(EObject context, Alternatives semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -784,11 +652,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     (left=CharacterRange_CharacterRange_1_0 right=Keyword (cardinality='?' | cardinality='*' | cardinality='+')?)
-	 *
-	 * Features:
-	 *    cardinality[0, 3]
-	 *    left[1, 1]
-	 *    right[1, 1]
 	 */
 	protected void sequence_TerminalToken(EObject context, CharacterRange semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -798,10 +661,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     (tokens+=TerminalGroup_Group_1_0 tokens+=TerminalToken+ (cardinality='?' | cardinality='*' | cardinality='+')?)
-	 *
-	 * Features:
-	 *    cardinality[0, 3]
-	 *    tokens[2, *]
 	 */
 	protected void sequence_TerminalToken(EObject context, Group semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -811,10 +670,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     (value=STRING (cardinality='?' | cardinality='*' | cardinality='+')?)
-	 *
-	 * Features:
-	 *    cardinality[0, 3]
-	 *    value[1, 1]
 	 */
 	protected void sequence_TerminalToken(EObject context, Keyword semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -824,10 +679,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     (terminal=TerminalTokenElement (cardinality='?' | cardinality='*' | cardinality='+')?)
-	 *
-	 * Features:
-	 *    cardinality[0, 3]
-	 *    terminal[1, 1]
 	 */
 	protected void sequence_TerminalToken(EObject context, NegatedToken semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -837,10 +688,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     (rule=[AbstractRule|ID] (cardinality='?' | cardinality='*' | cardinality='+')?)
-	 *
-	 * Features:
-	 *    cardinality[0, 3]
-	 *    rule[1, 1]
 	 */
 	protected void sequence_TerminalToken(EObject context, RuleCall semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -850,10 +697,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     (terminal=TerminalTokenElement (cardinality='?' | cardinality='*' | cardinality='+')?)
-	 *
-	 * Features:
-	 *    cardinality[0, 3]
-	 *    terminal[1, 1]
 	 */
 	protected void sequence_TerminalToken(EObject context, UntilToken semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -863,9 +706,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     ((cardinality='?' | cardinality='*' | cardinality='+')?)
-	 *
-	 * Features:
-	 *    cardinality[0, 3]
 	 */
 	protected void sequence_TerminalToken(EObject context, Wildcard semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -875,10 +715,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     (metamodel=[AbstractMetamodelDeclaration|ID]? classifier=[EClassifier|ID])
-	 *
-	 * Features:
-	 *    metamodel[0, 1]
-	 *    classifier[1, 1]
 	 */
 	protected void sequence_TypeRef(EObject context, TypeRef semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -888,9 +724,6 @@ public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractS
 	/**
 	 * Constraint:
 	 *     terminal=TerminalTokenElement
-	 *
-	 * Features:
-	 *    terminal[1, 1]
 	 */
 	protected void sequence_UntilToken(EObject context, UntilToken semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

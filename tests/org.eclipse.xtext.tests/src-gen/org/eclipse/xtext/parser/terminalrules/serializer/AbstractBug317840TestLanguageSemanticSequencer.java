@@ -72,14 +72,6 @@ public class AbstractBug317840TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (first=Named second=Named? (third+=Named forth+=Named)*)
-	 *
-	 * Features:
-	 *    first[1, 1]
-	 *    second[0, 1]
-	 *    third[0, *]
-	 *         SAME forth
-	 *    forth[0, *]
-	 *         SAME third
 	 */
 	protected void sequence_Element(EObject context, Element semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -89,9 +81,6 @@ public class AbstractBug317840TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     elements+=Element*
-	 *
-	 * Features:
-	 *    elements[0, *]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -101,9 +90,6 @@ public class AbstractBug317840TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     name=NAME
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_Named(EObject context, Named semanticObject) {
 		if(errorAcceptor != null) {

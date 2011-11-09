@@ -63,11 +63,6 @@ public class AbstractBug301935ExTestLanguageSemanticSequencer extends AbstractSe
 	/**
 	 * Constraint:
 	 *     (name=ID value=ID value2=ID)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    value[1, 1]
-	 *    value2[1, 1]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		superSequencer.createSequence(context, semanticObject);

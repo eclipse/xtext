@@ -23,8 +23,8 @@ public class AbstractEObjectAtOffsetTestLanguageSyntacticSequencer extends Abstr
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (EObjectAtOffsetTestLanguageGrammarAccess) access;
-		match_AbstractBar_INTTerminalRuleCall_1_q = new TokenAlias(true, false, grammarAccess.getAbstractBarAccess().getINTTerminalRuleCall_1());
-		match_AbstractBar_ZonkKeyword_0_q = new TokenAlias(true, false, grammarAccess.getAbstractBarAccess().getZonkKeyword_0());
+		match_AbstractBar_INTTerminalRuleCall_1_q = new TokenAlias(false, true, grammarAccess.getAbstractBarAccess().getINTTerminalRuleCall_1());
+		match_AbstractBar_ZonkKeyword_0_q = new TokenAlias(false, true, grammarAccess.getAbstractBarAccess().getZonkKeyword_0());
 	}
 	
 	@Override

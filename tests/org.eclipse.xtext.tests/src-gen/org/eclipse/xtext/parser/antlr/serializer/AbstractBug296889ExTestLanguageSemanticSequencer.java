@@ -84,12 +84,6 @@ public class AbstractBug296889ExTestLanguageSemanticSequencer extends AbstractSe
 	/**
 	 * Constraint:
 	 *     (expressions+=Expression* | values+=DataTypeExpression*)
-	 *
-	 * Features:
-	 *    expressions[0, *]
-	 *         EXCLUDE_IF_SET values
-	 *    values[0, *]
-	 *         EXCLUDE_IF_SET expressions
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -99,10 +93,6 @@ public class AbstractBug296889ExTestLanguageSemanticSequencer extends AbstractSe
 	/**
 	 * Constraint:
 	 *     (expr=Postop_Postop_1_0 functionName='--')
-	 *
-	 * Features:
-	 *    expr[1, 1]
-	 *    functionName[1, 1]
 	 */
 	protected void sequence_Postop(EObject context, Postop semanticObject) {
 		if(errorAcceptor != null) {
@@ -122,10 +112,6 @@ public class AbstractBug296889ExTestLanguageSemanticSequencer extends AbstractSe
 	/**
 	 * Constraint:
 	 *     (functionName='--' expr=Variable)
-	 *
-	 * Features:
-	 *    functionName[1, 1]
-	 *    expr[1, 1]
 	 */
 	protected void sequence_Preop(EObject context, Preop semanticObject) {
 		if(errorAcceptor != null) {
@@ -145,9 +131,6 @@ public class AbstractBug296889ExTestLanguageSemanticSequencer extends AbstractSe
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_Variable(EObject context, Variable semanticObject) {
 		if(errorAcceptor != null) {

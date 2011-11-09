@@ -68,10 +68,6 @@ public class AbstractMultiGenMMTestLanguageSemanticSequencer extends AbstractSem
 	/**
 	 * Constraint:
 	 *     (name=ID nameRefs+=NameRef*)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    nameRefs[0, *]
 	 */
 	protected void sequence_Foo(EObject context, Foo semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -81,9 +77,6 @@ public class AbstractMultiGenMMTestLanguageSemanticSequencer extends AbstractSem
 	/**
 	 * Constraint:
 	 *     name=STRING
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_NameRef(EObject context, FooBar semanticObject) {
 		if(errorAcceptor != null) {

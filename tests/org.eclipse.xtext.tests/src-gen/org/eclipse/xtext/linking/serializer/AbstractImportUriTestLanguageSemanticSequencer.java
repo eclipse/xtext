@@ -72,9 +72,6 @@ public class AbstractImportUriTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     importURI=STRING
-	 *
-	 * Features:
-	 *    importURI[1, 1]
 	 */
 	protected void sequence_Import(EObject context, Import semanticObject) {
 		if(errorAcceptor != null) {
@@ -91,10 +88,6 @@ public class AbstractImportUriTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (imports+=Import* types+=Type*)
-	 *
-	 * Features:
-	 *    imports[0, *]
-	 *    types[0, *]
 	 */
 	protected void sequence_Main(EObject context, Main semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -104,10 +97,6 @@ public class AbstractImportUriTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (name=ID extends=[Type|ID])
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    extends[1, 1]
 	 */
 	protected void sequence_Type(EObject context, Type semanticObject) {
 		if(errorAcceptor != null) {

@@ -24,9 +24,9 @@ public class AbstractBug292245TestLanguageSyntacticSequencer extends AbstractSyn
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (Bug292245TestLanguageGrammarAccess) access;
-		match_Model_ERRORKeyword_1_0_q = new TokenAlias(true, false, grammarAccess.getModelAccess().getERRORKeyword_1_0());
-		match_Model_FIXKeyword_0_0_q = new TokenAlias(true, false, grammarAccess.getModelAccess().getFIXKeyword_0_0());
-		match_Model_TICKKeyword_2_0_q = new TokenAlias(true, false, grammarAccess.getModelAccess().getTICKKeyword_2_0());
+		match_Model_ERRORKeyword_1_0_q = new TokenAlias(false, true, grammarAccess.getModelAccess().getERRORKeyword_1_0());
+		match_Model_FIXKeyword_0_0_q = new TokenAlias(false, true, grammarAccess.getModelAccess().getFIXKeyword_0_0());
+		match_Model_TICKKeyword_2_0_q = new TokenAlias(false, true, grammarAccess.getModelAccess().getTICKKeyword_2_0());
 	}
 	
 	@Override

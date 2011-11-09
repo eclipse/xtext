@@ -107,13 +107,40 @@ public interface SyntacticsequencertestFactory extends EFactory
   UnassignedDatatype createUnassignedDatatype();
 
   /**
-   * Returns a new object of class '<em>Ambiguous Transition</em>'.
+   * Returns a new object of class '<em>Optional Single Transition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Ambiguous Transition</em>'.
+   * @return a new object of class '<em>Optional Single Transition</em>'.
    * @generated
    */
-  AmbiguousTransition createAmbiguousTransition();
+  OptionalSingleTransition createOptionalSingleTransition();
+
+  /**
+   * Returns a new object of class '<em>Optional Many Transition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Optional Many Transition</em>'.
+   * @generated
+   */
+  OptionalManyTransition createOptionalManyTransition();
+
+  /**
+   * Returns a new object of class '<em>Mandatory Many Transition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Mandatory Many Transition</em>'.
+   * @generated
+   */
+  MandatoryManyTransition createMandatoryManyTransition();
+
+  /**
+   * Returns a new object of class '<em>Alternative Transition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Alternative Transition</em>'.
+   * @generated
+   */
+  AlternativeTransition createAlternativeTransition();
 
   /**
    * Returns a new object of class '<em>Add0</em>'.

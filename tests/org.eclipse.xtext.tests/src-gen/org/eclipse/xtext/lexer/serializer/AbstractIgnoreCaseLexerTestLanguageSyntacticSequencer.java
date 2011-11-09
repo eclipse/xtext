@@ -22,7 +22,7 @@ public class AbstractIgnoreCaseLexerTestLanguageSyntacticSequencer extends Abstr
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (IgnoreCaseLexerTestLanguageGrammarAccess) access;
-		match_Model_FooKeyword_1_q = new TokenAlias(true, false, grammarAccess.getModelAccess().getFooKeyword_1());
+		match_Model_FooKeyword_1_q = new TokenAlias(false, true, grammarAccess.getModelAccess().getFooKeyword_1());
 	}
 	
 	@Override

@@ -76,7 +76,10 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
       case SyntacticsequencertestPackage.BOOLEAN_ALTERNATIVE: return createBooleanAlternative();
       case SyntacticsequencertestPackage.BOOLEAN_ALTERNATIVE_LITERAL: return createBooleanAlternativeLiteral();
       case SyntacticsequencertestPackage.UNASSIGNED_DATATYPE: return createUnassignedDatatype();
-      case SyntacticsequencertestPackage.AMBIGUOUS_TRANSITION: return createAmbiguousTransition();
+      case SyntacticsequencertestPackage.OPTIONAL_SINGLE_TRANSITION: return createOptionalSingleTransition();
+      case SyntacticsequencertestPackage.OPTIONAL_MANY_TRANSITION: return createOptionalManyTransition();
+      case SyntacticsequencertestPackage.MANDATORY_MANY_TRANSITION: return createMandatoryManyTransition();
+      case SyntacticsequencertestPackage.ALTERNATIVE_TRANSITION: return createAlternativeTransition();
       case SyntacticsequencertestPackage.ADD0: return createAdd0();
       case SyntacticsequencertestPackage.VAL0: return createVal0();
       case SyntacticsequencertestPackage.ADD1: return createAdd1();
@@ -193,10 +196,43 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
-  public AmbiguousTransition createAmbiguousTransition()
+  public OptionalSingleTransition createOptionalSingleTransition()
   {
-    AmbiguousTransitionImpl ambiguousTransition = new AmbiguousTransitionImpl();
-    return ambiguousTransition;
+    OptionalSingleTransitionImpl optionalSingleTransition = new OptionalSingleTransitionImpl();
+    return optionalSingleTransition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public OptionalManyTransition createOptionalManyTransition()
+  {
+    OptionalManyTransitionImpl optionalManyTransition = new OptionalManyTransitionImpl();
+    return optionalManyTransition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public MandatoryManyTransition createMandatoryManyTransition()
+  {
+    MandatoryManyTransitionImpl mandatoryManyTransition = new MandatoryManyTransitionImpl();
+    return mandatoryManyTransition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AlternativeTransition createAlternativeTransition()
+  {
+    AlternativeTransitionImpl alternativeTransition = new AlternativeTransitionImpl();
+    return alternativeTransition;
   }
 
   /**

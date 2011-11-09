@@ -107,8 +107,6 @@ public class AbstractEcoreReferenceTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     {EAttribute}
-	 *
-	 * Features:
 	 */
 	protected void sequence_EAttribute(EObject context, EAttribute semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -118,8 +116,6 @@ public class AbstractEcoreReferenceTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     {EObject}
-	 *
-	 * Features:
 	 */
 	protected void sequence_EObject(EObject context, EObject semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -149,79 +145,6 @@ public class AbstractEcoreReferenceTestLanguageSemanticSequencer extends Abstrac
 	 *             eObjectContainment+=MyEAttribute
 	 *         )?
 	 *     )
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    eObjectReference1[0, 4]
-	 *    eAttributeReference[0, 1]
-	 *         EXCLUDE_IF_UNSET eObjectReference2
-	 *         MANDATORY_IF_SET eObjectReference2
-	 *         EXCLUDE_IF_UNSET eObjectReference3
-	 *         MANDATORY_IF_SET eObjectReference3
-	 *         EXCLUDE_IF_UNSET eObjectReference4
-	 *         MANDATORY_IF_SET eObjectReference4
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *    eObjectReference2[0, 1]
-	 *         EXCLUDE_IF_UNSET eAttributeReference
-	 *         MANDATORY_IF_SET eAttributeReference
-	 *         EXCLUDE_IF_UNSET eObjectReference3
-	 *         MANDATORY_IF_SET eObjectReference3
-	 *         EXCLUDE_IF_UNSET eObjectReference4
-	 *         MANDATORY_IF_SET eObjectReference4
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *    eObjectReference3[0, 1]
-	 *         EXCLUDE_IF_UNSET eAttributeReference
-	 *         MANDATORY_IF_SET eAttributeReference
-	 *         EXCLUDE_IF_UNSET eObjectReference2
-	 *         MANDATORY_IF_SET eObjectReference2
-	 *         EXCLUDE_IF_UNSET eObjectReference4
-	 *         MANDATORY_IF_SET eObjectReference4
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *    eObjectReference4[0, 1]
-	 *         EXCLUDE_IF_UNSET eAttributeReference
-	 *         MANDATORY_IF_SET eAttributeReference
-	 *         EXCLUDE_IF_UNSET eObjectReference2
-	 *         MANDATORY_IF_SET eObjectReference2
-	 *         EXCLUDE_IF_UNSET eObjectReference3
-	 *         MANDATORY_IF_SET eObjectReference3
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *    eObjectContainment[0, 6]
-	 *         EXCLUDE_IF_UNSET eAttributeReference
-	 *         EXCLUDE_IF_UNSET eObjectReference2
-	 *         EXCLUDE_IF_UNSET eObjectReference3
-	 *         EXCLUDE_IF_UNSET eObjectReference4
 	 */
 	protected void sequence_ExtendsNsURIEObject(EObject context, ExtendsNsURIEObject semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -250,56 +173,6 @@ public class AbstractEcoreReferenceTestLanguageSemanticSequencer extends Abstrac
 	 *             eObjectContainment+=MyEAttribute
 	 *         )?
 	 *     )
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    eObjectReference1[0, 4]
-	 *    eObjectReference2[0, 1]
-	 *         EXCLUDE_IF_UNSET eObjectReference3
-	 *         MANDATORY_IF_SET eObjectReference3
-	 *         EXCLUDE_IF_UNSET eObjectReference4
-	 *         MANDATORY_IF_SET eObjectReference4
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *    eObjectReference3[0, 1]
-	 *         EXCLUDE_IF_UNSET eObjectReference2
-	 *         MANDATORY_IF_SET eObjectReference2
-	 *         EXCLUDE_IF_UNSET eObjectReference4
-	 *         MANDATORY_IF_SET eObjectReference4
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *    eObjectReference4[0, 1]
-	 *         EXCLUDE_IF_UNSET eObjectReference2
-	 *         MANDATORY_IF_SET eObjectReference2
-	 *         EXCLUDE_IF_UNSET eObjectReference3
-	 *         MANDATORY_IF_SET eObjectReference3
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *    eObjectContainment[0, 6]
-	 *         EXCLUDE_IF_UNSET eObjectReference2
-	 *         EXCLUDE_IF_UNSET eObjectReference3
-	 *         EXCLUDE_IF_UNSET eObjectReference4
 	 */
 	protected void sequence_ExtendsPluginEObject(EObject context, ExtendsPluginEObject semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -328,68 +201,6 @@ public class AbstractEcoreReferenceTestLanguageSemanticSequencer extends Abstrac
 	 *             eObjectContainment+=MyEAttribute
 	 *         )?
 	 *     )
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    eObjectReference1[0, 4]
-	 *    eObjectReference2[0, 1]
-	 *         EXCLUDE_IF_UNSET eObjectReference3
-	 *         MANDATORY_IF_SET eObjectReference3
-	 *         EXCLUDE_IF_UNSET eObjectReference4
-	 *         MANDATORY_IF_SET eObjectReference4
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *    eObjectReference3[0, 1]
-	 *         EXCLUDE_IF_UNSET eObjectReference2
-	 *         MANDATORY_IF_SET eObjectReference2
-	 *         EXCLUDE_IF_UNSET eObjectReference4
-	 *         MANDATORY_IF_SET eObjectReference4
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *    eObjectReference4[0, 1]
-	 *         EXCLUDE_IF_UNSET eObjectReference2
-	 *         MANDATORY_IF_SET eObjectReference2
-	 *         EXCLUDE_IF_UNSET eObjectReference3
-	 *         MANDATORY_IF_SET eObjectReference3
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *         EXCLUDE_IF_UNSET eObjectContainment
-	 *         MANDATORY_IF_SET eObjectContainment
-	 *    eObjectContainment[0, 6]
-	 *         EXCLUDE_IF_UNSET eObjectReference2
-	 *         MANDATORY_IF_SET eObjectReference2
-	 *         EXCLUDE_IF_UNSET eObjectReference3
-	 *         MANDATORY_IF_SET eObjectReference3
-	 *         EXCLUDE_IF_UNSET eObjectReference4
-	 *         MANDATORY_IF_SET eObjectReference4
 	 */
 	protected void sequence_ExtendsResourceEObject(EObject context, ExtendsResourceEObject semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -399,9 +210,6 @@ public class AbstractEcoreReferenceTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     (extends+=ExtendsNsURIEObject extends+=ExtendsPluginEObject extends+=ExtendsResourceEObject)
-	 *
-	 * Features:
-	 *    extends[3, 3]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -411,8 +219,6 @@ public class AbstractEcoreReferenceTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     {MyEAttribute}
-	 *
-	 * Features:
 	 */
 	protected void sequence_MyEAttribute(EObject context, EAttribute semanticObject) {
 		genericSequencer.createSequence(context, (EObject)semanticObject);

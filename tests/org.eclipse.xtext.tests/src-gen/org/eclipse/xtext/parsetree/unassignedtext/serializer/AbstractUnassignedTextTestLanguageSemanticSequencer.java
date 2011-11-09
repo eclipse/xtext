@@ -91,9 +91,6 @@ public class AbstractUnassignedTextTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     val=INT
-	 *
-	 * Features:
-	 *    val[1, 1]
 	 */
 	protected void sequence_CaseInsensitiveKeywordRule(EObject context, CaseInsensitiveKeywordRule semanticObject) {
 		if(errorAcceptor != null) {
@@ -110,9 +107,6 @@ public class AbstractUnassignedTextTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     val=ID
-	 *
-	 * Features:
-	 *    val[1, 1]
 	 */
 	protected void sequence_CommonTerminalsRule(EObject context, CommonTerminalsRule semanticObject) {
 		if(errorAcceptor != null) {
@@ -129,9 +123,6 @@ public class AbstractUnassignedTextTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     val=INT
-	 *
-	 * Features:
-	 *    val[1, 1]
 	 */
 	protected void sequence_DatatypeRule(EObject context, DatatypeRule semanticObject) {
 		if(errorAcceptor != null) {
@@ -148,9 +139,6 @@ public class AbstractUnassignedTextTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     val=INT
-	 *
-	 * Features:
-	 *    val[1, 1]
 	 */
 	protected void sequence_MultiRule(EObject context, MultiRule semanticObject) {
 		if(errorAcceptor != null) {
@@ -167,9 +155,6 @@ public class AbstractUnassignedTextTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     count=INT
-	 *
-	 * Features:
-	 *    count[1, 1]
 	 */
 	protected void sequence_PluralRule(EObject context, PluralRule semanticObject) {
 		if(errorAcceptor != null) {

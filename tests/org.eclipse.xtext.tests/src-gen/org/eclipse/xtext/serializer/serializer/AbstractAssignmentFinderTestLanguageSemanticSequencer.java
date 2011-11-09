@@ -136,9 +136,6 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	/**
 	 * Constraint:
 	 *     val1=ID
-	 *
-	 * Features:
-	 *    val1[1, 1]
 	 */
 	protected void sequence_ContainmentRef1(EObject context, ContainmentRefN semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -148,9 +145,6 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	/**
 	 * Constraint:
 	 *     val2=ID
-	 *
-	 * Features:
-	 *    val2[1, 1]
 	 */
 	protected void sequence_ContainmentRef2(EObject context, ContainmentRefN semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -160,9 +154,6 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	/**
 	 * Constraint:
 	 *     (ctx=ContainmentRef1 | ctx=ContainmentRef2)
-	 *
-	 * Features:
-	 *    ctx[0, 2]
 	 */
 	protected void sequence_ContainmentRef(EObject context, ContainmentRef semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -172,10 +163,6 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	/**
 	 * Constraint:
 	 *     ((name=Terminal1 | name=Terminal2) (crossRef=[CrossRef|Terminal1] | crossRef=[CrossRef|Terminal2]))
-	 *
-	 * Features:
-	 *    name[0, 2]
-	 *    crossRef[0, 2]
 	 */
 	protected void sequence_CrossRef(EObject context, CrossRef semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -185,9 +172,6 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	/**
 	 * Constraint:
 	 *     (en?=Enum1 | en?=Enum2)
-	 *
-	 * Features:
-	 *    en[0, 2]
 	 */
 	protected void sequence_EnumBool(EObject context, EnumBool semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -197,9 +181,6 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	/**
 	 * Constraint:
 	 *     (en=Enum1 | en=Enum2)
-	 *
-	 * Features:
-	 *    en[0, 2]
 	 */
 	protected void sequence_EnumVal(EObject context, EnumVal semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -209,9 +190,6 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	/**
 	 * Constraint:
 	 *     (kw?='kw1' | kw?='kw2')
-	 *
-	 * Features:
-	 *    kw[0, 2]
 	 */
 	protected void sequence_KeywordBool(EObject context, KeywordBool semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -221,9 +199,6 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	/**
 	 * Constraint:
 	 *     (kw='kw1' | kw='kw2')
-	 *
-	 * Features:
-	 *    kw[0, 2]
 	 */
 	protected void sequence_KeywordVal(EObject context, KeywordVal semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -233,9 +208,6 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	/**
 	 * Constraint:
 	 *     (val?='kw1' | val=Boolean)
-	 *
-	 * Features:
-	 *    val[0, 2]
 	 */
 	protected void sequence_MixedBool(EObject context, MixedBool semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -245,9 +217,6 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	/**
 	 * Constraint:
 	 *     (val=Enum1 | val=DatEnum)
-	 *
-	 * Features:
-	 *    val[0, 2]
 	 */
 	protected void sequence_MixedValue(EObject context, MixedValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -268,108 +237,6 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	 *         containmentRef=ContainmentRef | 
 	 *         crossRef=CrossRef
 	 *     )
-	 *
-	 * Features:
-	 *    keywordVal[0, 1]
-	 *         EXCLUDE_IF_SET terminalVal
-	 *         EXCLUDE_IF_SET enumVal
-	 *         EXCLUDE_IF_SET keywordBool
-	 *         EXCLUDE_IF_SET terminalBool
-	 *         EXCLUDE_IF_SET enumBool
-	 *         EXCLUDE_IF_SET mixedBool
-	 *         EXCLUDE_IF_SET mixedValue
-	 *         EXCLUDE_IF_SET containmentRef
-	 *         EXCLUDE_IF_SET crossRef
-	 *    terminalVal[0, 1]
-	 *         EXCLUDE_IF_SET keywordVal
-	 *         EXCLUDE_IF_SET enumVal
-	 *         EXCLUDE_IF_SET keywordBool
-	 *         EXCLUDE_IF_SET terminalBool
-	 *         EXCLUDE_IF_SET enumBool
-	 *         EXCLUDE_IF_SET mixedBool
-	 *         EXCLUDE_IF_SET mixedValue
-	 *         EXCLUDE_IF_SET containmentRef
-	 *         EXCLUDE_IF_SET crossRef
-	 *    enumVal[0, 1]
-	 *         EXCLUDE_IF_SET keywordVal
-	 *         EXCLUDE_IF_SET terminalVal
-	 *         EXCLUDE_IF_SET keywordBool
-	 *         EXCLUDE_IF_SET terminalBool
-	 *         EXCLUDE_IF_SET enumBool
-	 *         EXCLUDE_IF_SET mixedBool
-	 *         EXCLUDE_IF_SET mixedValue
-	 *         EXCLUDE_IF_SET containmentRef
-	 *         EXCLUDE_IF_SET crossRef
-	 *    keywordBool[0, 1]
-	 *         EXCLUDE_IF_SET keywordVal
-	 *         EXCLUDE_IF_SET terminalVal
-	 *         EXCLUDE_IF_SET enumVal
-	 *         EXCLUDE_IF_SET terminalBool
-	 *         EXCLUDE_IF_SET enumBool
-	 *         EXCLUDE_IF_SET mixedBool
-	 *         EXCLUDE_IF_SET mixedValue
-	 *         EXCLUDE_IF_SET containmentRef
-	 *         EXCLUDE_IF_SET crossRef
-	 *    terminalBool[0, 1]
-	 *         EXCLUDE_IF_SET keywordVal
-	 *         EXCLUDE_IF_SET terminalVal
-	 *         EXCLUDE_IF_SET enumVal
-	 *         EXCLUDE_IF_SET keywordBool
-	 *         EXCLUDE_IF_SET enumBool
-	 *         EXCLUDE_IF_SET mixedBool
-	 *         EXCLUDE_IF_SET mixedValue
-	 *         EXCLUDE_IF_SET containmentRef
-	 *         EXCLUDE_IF_SET crossRef
-	 *    enumBool[0, 1]
-	 *         EXCLUDE_IF_SET keywordVal
-	 *         EXCLUDE_IF_SET terminalVal
-	 *         EXCLUDE_IF_SET enumVal
-	 *         EXCLUDE_IF_SET keywordBool
-	 *         EXCLUDE_IF_SET terminalBool
-	 *         EXCLUDE_IF_SET mixedBool
-	 *         EXCLUDE_IF_SET mixedValue
-	 *         EXCLUDE_IF_SET containmentRef
-	 *         EXCLUDE_IF_SET crossRef
-	 *    mixedBool[0, 1]
-	 *         EXCLUDE_IF_SET keywordVal
-	 *         EXCLUDE_IF_SET terminalVal
-	 *         EXCLUDE_IF_SET enumVal
-	 *         EXCLUDE_IF_SET keywordBool
-	 *         EXCLUDE_IF_SET terminalBool
-	 *         EXCLUDE_IF_SET enumBool
-	 *         EXCLUDE_IF_SET mixedValue
-	 *         EXCLUDE_IF_SET containmentRef
-	 *         EXCLUDE_IF_SET crossRef
-	 *    mixedValue[0, 1]
-	 *         EXCLUDE_IF_SET keywordVal
-	 *         EXCLUDE_IF_SET terminalVal
-	 *         EXCLUDE_IF_SET enumVal
-	 *         EXCLUDE_IF_SET keywordBool
-	 *         EXCLUDE_IF_SET terminalBool
-	 *         EXCLUDE_IF_SET enumBool
-	 *         EXCLUDE_IF_SET mixedBool
-	 *         EXCLUDE_IF_SET containmentRef
-	 *         EXCLUDE_IF_SET crossRef
-	 *    containmentRef[0, 1]
-	 *         EXCLUDE_IF_SET keywordVal
-	 *         EXCLUDE_IF_SET terminalVal
-	 *         EXCLUDE_IF_SET enumVal
-	 *         EXCLUDE_IF_SET keywordBool
-	 *         EXCLUDE_IF_SET terminalBool
-	 *         EXCLUDE_IF_SET enumBool
-	 *         EXCLUDE_IF_SET mixedBool
-	 *         EXCLUDE_IF_SET mixedValue
-	 *         EXCLUDE_IF_SET crossRef
-	 *    crossRef[0, 1]
-	 *         EXCLUDE_IF_SET keywordVal
-	 *         EXCLUDE_IF_SET terminalVal
-	 *         EXCLUDE_IF_SET enumVal
-	 *         EXCLUDE_IF_SET keywordBool
-	 *         EXCLUDE_IF_SET terminalBool
-	 *         EXCLUDE_IF_SET enumBool
-	 *         EXCLUDE_IF_SET mixedBool
-	 *         EXCLUDE_IF_SET mixedValue
-	 *         EXCLUDE_IF_SET containmentRef
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -379,9 +246,6 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	/**
 	 * Constraint:
 	 *     (term?=Terminal1 | term?=Terminal2 | term?='%foo')
-	 *
-	 * Features:
-	 *    term[0, 3]
 	 */
 	protected void sequence_TerminalBool(EObject context, TerminalBool semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -391,9 +255,6 @@ public class AbstractAssignmentFinderTestLanguageSemanticSequencer extends Abstr
 	/**
 	 * Constraint:
 	 *     (term=Terminal1 | term=Terminal2 | term='%foo')
-	 *
-	 * Features:
-	 *    term[0, 3]
 	 */
 	protected void sequence_TerminalVal(EObject context, TerminalVal semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

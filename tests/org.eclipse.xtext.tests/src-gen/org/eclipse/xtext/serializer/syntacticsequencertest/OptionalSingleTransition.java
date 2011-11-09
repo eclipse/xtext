@@ -9,21 +9,21 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Ambiguous Transition</b></em>'.
+ * A representation of the model object '<em><b>Optional Single Transition</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.AmbiguousTransition#getVal <em>Val</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.OptionalSingleTransition#getVal <em>Val</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage#getAmbiguousTransition()
+ * @see org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage#getOptionalSingleTransition()
  * @model
  * @generated
  */
-public interface AmbiguousTransition extends EObject
+public interface OptionalSingleTransition extends EObject
 {
   /**
    * Returns the value of the '<em><b>Val</b></em>' attribute.
@@ -35,14 +35,14 @@ public interface AmbiguousTransition extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val</em>' attribute.
    * @see #setVal(String)
-   * @see org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage#getAmbiguousTransition_Val()
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage#getOptionalSingleTransition_Val()
    * @model
    * @generated
    */
   String getVal();
 
   /**
-   * Sets the value of the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.AmbiguousTransition#getVal <em>Val</em>}' attribute.
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.OptionalSingleTransition#getVal <em>Val</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Val</em>' attribute.
@@ -51,4 +51,4 @@ public interface AmbiguousTransition extends EObject
    */
   void setVal(String value);
 
-} // AmbiguousTransition
+} // OptionalSingleTransition

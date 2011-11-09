@@ -24,7 +24,7 @@ public class AbstractElementMatcherTestLanguageSyntacticSequencer extends Abstra
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (ElementMatcherTestLanguageGrammarAccess) access;
 		match_Prim_LeftParenthesisKeyword_3_0_a = new TokenAlias(true, true, grammarAccess.getPrimAccess().getLeftParenthesisKeyword_3_0());
-		match_Prim_LeftParenthesisKeyword_3_0_p = new TokenAlias(false, true, grammarAccess.getPrimAccess().getLeftParenthesisKeyword_3_0());
+		match_Prim_LeftParenthesisKeyword_3_0_p = new TokenAlias(true, false, grammarAccess.getPrimAccess().getLeftParenthesisKeyword_3_0());
 	}
 	
 	@Override

@@ -81,10 +81,6 @@ public class AbstractBug297105TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (left=Literal right=Literal)
-	 *
-	 * Features:
-	 *    left[1, 1]
-	 *    right[1, 1]
 	 */
 	protected void sequence_Expression(EObject context, Expression semanticObject) {
 		if(errorAcceptor != null) {
@@ -104,9 +100,6 @@ public class AbstractBug297105TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     value=IntValue
-	 *
-	 * Features:
-	 *    value[1, 1]
 	 */
 	protected void sequence_IntLiteral(EObject context, IntLiteral semanticObject) {
 		if(errorAcceptor != null) {
@@ -123,9 +116,6 @@ public class AbstractBug297105TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     expressions+=Expression*
-	 *
-	 * Features:
-	 *    expressions[0, *]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -135,9 +125,6 @@ public class AbstractBug297105TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     value=RealValue
-	 *
-	 * Features:
-	 *    value[1, 1]
 	 */
 	protected void sequence_RealLiteral(EObject context, RealLiteral semanticObject) {
 		if(errorAcceptor != null) {

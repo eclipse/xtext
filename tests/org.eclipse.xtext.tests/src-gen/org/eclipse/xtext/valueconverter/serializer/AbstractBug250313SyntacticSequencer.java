@@ -22,7 +22,7 @@ public class AbstractBug250313SyntacticSequencer extends AbstractSyntacticSequen
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (Bug250313GrammarAccess) access;
-		match_Model_DigitOneKeyword_0_0_q = new TokenAlias(true, false, grammarAccess.getModelAccess().getDigitOneKeyword_0_0());
+		match_Model_DigitOneKeyword_0_0_q = new TokenAlias(false, true, grammarAccess.getModelAccess().getDigitOneKeyword_0_0());
 	}
 	
 	@Override

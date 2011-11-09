@@ -55,12 +55,6 @@ public class AbstractEnumRulesTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     ((existing=ExistingEnum generated=GeneratedEnum?) | generated=GeneratedEnum)
-	 *
-	 * Features:
-	 *    existing[0, 1]
-	 *         MANDATORY_IF_SET generated
-	 *         EXCLUDE_IF_SET generated
-	 *    generated[0, 2]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

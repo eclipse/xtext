@@ -231,10 +231,6 @@ public class AbstractElementMatcherTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     (left=Add_Add_1_0 right=Mult)
-	 *
-	 * Features:
-	 *    left[1, 1]
-	 *    right[1, 1]
 	 */
 	protected void sequence_Add(EObject context, Add semanticObject) {
 		if(errorAcceptor != null) {
@@ -254,9 +250,6 @@ public class AbstractElementMatcherTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     (kw1?='kw1'?)
-	 *
-	 * Features:
-	 *    kw1[0, 1]
 	 */
 	protected void sequence_Constructor(EObject context, Constructor semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -266,12 +259,6 @@ public class AbstractElementMatcherTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     (names+=ID+ gr+=ID* (ints+=INT | strings+=STRING)*)
-	 *
-	 * Features:
-	 *    names[1, *]
-	 *    gr[0, *]
-	 *    ints[0, *]
-	 *    strings[0, *]
 	 */
 	protected void sequence_Loop(EObject context, Loop semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -281,10 +268,6 @@ public class AbstractElementMatcherTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     (left=Mult_Mult_1_0 right=Prim)
-	 *
-	 * Features:
-	 *    left[1, 1]
-	 *    right[1, 1]
 	 */
 	protected void sequence_Mult(EObject context, Mult semanticObject) {
 		if(errorAcceptor != null) {
@@ -304,8 +287,6 @@ public class AbstractElementMatcherTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     {NestedStartSub}
-	 *
-	 * Features:
 	 */
 	protected void sequence_NestedStartSub(EObject context, NestedStartSub semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -315,9 +296,6 @@ public class AbstractElementMatcherTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_NestedStart(EObject context, NestedStartSub semanticObject) {
 		if(errorAcceptor != null) {
@@ -334,10 +312,6 @@ public class AbstractElementMatcherTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     (opt2=OptionalCallsSub2? opt3=OptionalCallsSub3?)
-	 *
-	 * Features:
-	 *    opt2[0, 1]
-	 *    opt3[0, 1]
 	 */
 	protected void sequence_OptionalCallsSub1(EObject context, OptionalCallsSub1 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -347,9 +321,6 @@ public class AbstractElementMatcherTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_OptionalCallsSub2(EObject context, OptionalCallsSub2 semanticObject) {
 		if(errorAcceptor != null) {
@@ -366,9 +337,6 @@ public class AbstractElementMatcherTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_OptionalCallsSub3(EObject context, OptionalCallsSub3 semanticObject) {
 		if(errorAcceptor != null) {
@@ -385,10 +353,6 @@ public class AbstractElementMatcherTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     (opt1=OptionalCallsSub1? name=ID)
-	 *
-	 * Features:
-	 *    opt1[0, 1]
-	 *    name[1, 1]
 	 */
 	protected void sequence_OptionalCalls(EObject context, OptionalCalls semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -398,9 +362,6 @@ public class AbstractElementMatcherTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     (kw2?='kw2'?)
-	 *
-	 * Features:
-	 *    kw2[0, 1]
 	 */
 	protected void sequence_Parameter(EObject context, Parameter semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -410,10 +371,6 @@ public class AbstractElementMatcherTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     (func=ID param+=Add param+=Add*)
-	 *
-	 * Features:
-	 *    func[1, 1]
-	 *    param[1, *]
 	 */
 	protected void sequence_Prim(EObject context, Function semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -423,9 +380,6 @@ public class AbstractElementMatcherTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     target=Prim
-	 *
-	 * Features:
-	 *    target[1, 1]
 	 */
 	protected void sequence_Prim(EObject context, Pointer semanticObject) {
 		if(errorAcceptor != null) {
@@ -442,9 +396,6 @@ public class AbstractElementMatcherTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     val=INT
-	 *
-	 * Features:
-	 *    val[1, 1]
 	 */
 	protected void sequence_Prim(EObject context, Value semanticObject) {
 		if(errorAcceptor != null) {
@@ -461,11 +412,6 @@ public class AbstractElementMatcherTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     ((sub+=RecursionSub | vals+=ID)* semi?=';'?)
-	 *
-	 * Features:
-	 *    sub[0, *]
-	 *    vals[0, *]
-	 *    semi[0, 1]
 	 */
 	protected void sequence_RecursionSub(EObject context, RecursionSub semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -475,10 +421,6 @@ public class AbstractElementMatcherTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     (constructor=Constructor fields+=Field)
-	 *
-	 * Features:
-	 *    constructor[1, 1]
-	 *    fields[1, 1]
 	 */
 	protected void sequence_RuleCalls12(EObject context, RuleCalls12 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -488,9 +430,6 @@ public class AbstractElementMatcherTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_RuleCallsAss1(EObject context, RuleCallsAss1 semanticObject) {
 		if(errorAcceptor != null) {
@@ -507,9 +446,6 @@ public class AbstractElementMatcherTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_RuleCallsAss2(EObject context, RuleCallsAss2 semanticObject) {
 		if(errorAcceptor != null) {
@@ -526,9 +462,6 @@ public class AbstractElementMatcherTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     sub='sub'
-	 *
-	 * Features:
-	 *    sub[1, 1]
 	 */
 	protected void sequence_RuleCallsSub(EObject context, RuleCallsSub semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -538,12 +471,6 @@ public class AbstractElementMatcherTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     (sub='sub' name=ID call1=RuleCallsAss1? call2=RuleCallsAss2?)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    call1[0, 1]
-	 *    call2[0, 1]
-	 *    sub[1, 1]
 	 */
 	protected void sequence_RuleCalls(EObject context, RuleCallsSub semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -553,11 +480,6 @@ public class AbstractElementMatcherTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     (name=ID optional=ID? datatype=FQN)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    optional[0, 1]
-	 *    datatype[1, 1]
 	 */
 	protected void sequence_Simple(EObject context, Simple semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

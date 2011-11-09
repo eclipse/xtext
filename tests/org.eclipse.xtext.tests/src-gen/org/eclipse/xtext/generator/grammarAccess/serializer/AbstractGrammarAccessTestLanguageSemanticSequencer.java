@@ -74,9 +74,6 @@ public class AbstractGrammarAccessTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     elements+=Type*
-	 *
-	 * Features:
-	 *    elements[0, *]
 	 */
 	protected void sequence_Root(EObject context, AModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -86,8 +83,6 @@ public class AbstractGrammarAccessTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     {AType}
-	 *
-	 * Features:
 	 */
 	protected void sequence_Type(EObject context, AType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -97,8 +92,6 @@ public class AbstractGrammarAccessTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     {AnotherType}
-	 *
-	 * Features:
 	 */
 	protected void sequence_Type(EObject context, AnotherType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

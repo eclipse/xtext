@@ -65,9 +65,6 @@ public class AbstractSuperTestLanguageSemanticSequencer extends AbstractSemantic
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_AnotherSuperMain(EObject context, AnotherSuperMain semanticObject) {
 		if(errorAcceptor != null) {
@@ -84,9 +81,6 @@ public class AbstractSuperTestLanguageSemanticSequencer extends AbstractSemantic
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_SuperMain(EObject context, SuperMain semanticObject) {
 		if(errorAcceptor != null) {

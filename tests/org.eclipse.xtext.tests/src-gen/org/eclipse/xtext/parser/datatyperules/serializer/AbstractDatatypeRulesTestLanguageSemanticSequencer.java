@@ -62,9 +62,6 @@ public class AbstractDatatypeRulesTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     model+=Model+
-	 *
-	 * Features:
-	 *    model[1, *]
 	 */
 	protected void sequence_CompositeModel(EObject context, CompositeModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -74,13 +71,6 @@ public class AbstractDatatypeRulesTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     (id=NestedModelId value=Fraction? vector=Vector? dots=Dots? double=Double?)
-	 *
-	 * Features:
-	 *    id[1, 1]
-	 *    value[0, 1]
-	 *    vector[0, 1]
-	 *    dots[0, 1]
-	 *    double[0, 1]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

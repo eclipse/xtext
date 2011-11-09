@@ -65,9 +65,6 @@ public class AbstractEncodingTestLanguageSemanticSequencer extends AbstractSeman
 	/**
 	 * Constraint:
 	 *     words+=Word*
-	 *
-	 * Features:
-	 *    words[0, *]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -77,9 +74,6 @@ public class AbstractEncodingTestLanguageSemanticSequencer extends AbstractSeman
 	/**
 	 * Constraint:
 	 *     value=LEXEME
-	 *
-	 * Features:
-	 *    value[1, 1]
 	 */
 	protected void sequence_Word(EObject context, Word semanticObject) {
 		if(errorAcceptor != null) {

@@ -62,11 +62,6 @@ public class AbstractBug305397SemanticSequencer extends AbstractSemanticSequence
 	/**
 	 * Constraint:
 	 *     (a?='a'? name=ID? elements+=Element*)
-	 *
-	 * Features:
-	 *    a[0, 1]
-	 *    name[0, 1]
-	 *    elements[0, *]
 	 */
 	protected void sequence_Element(EObject context, Element semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -76,9 +71,6 @@ public class AbstractBug305397SemanticSequencer extends AbstractSemanticSequence
 	/**
 	 * Constraint:
 	 *     elements+=Element*
-	 *
-	 * Features:
-	 *    elements[0, *]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

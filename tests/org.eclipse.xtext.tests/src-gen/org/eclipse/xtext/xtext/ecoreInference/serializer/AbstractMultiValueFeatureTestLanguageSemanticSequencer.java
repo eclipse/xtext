@@ -55,9 +55,6 @@ public class AbstractMultiValueFeatureTestLanguageSemanticSequencer extends Abst
 	/**
 	 * Constraint:
 	 *     featureA+=ID+
-	 *
-	 * Features:
-	 *    featureA[1, *]
 	 */
 	protected void sequence_Start(EObject context, Start semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

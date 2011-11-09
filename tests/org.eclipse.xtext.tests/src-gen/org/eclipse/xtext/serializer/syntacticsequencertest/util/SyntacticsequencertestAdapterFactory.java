@@ -123,9 +123,24 @@ public class SyntacticsequencertestAdapterFactory extends AdapterFactoryImpl
         return createUnassignedDatatypeAdapter();
       }
       @Override
-      public Adapter caseAmbiguousTransition(AmbiguousTransition object)
+      public Adapter caseOptionalSingleTransition(OptionalSingleTransition object)
       {
-        return createAmbiguousTransitionAdapter();
+        return createOptionalSingleTransitionAdapter();
+      }
+      @Override
+      public Adapter caseOptionalManyTransition(OptionalManyTransition object)
+      {
+        return createOptionalManyTransitionAdapter();
+      }
+      @Override
+      public Adapter caseMandatoryManyTransition(MandatoryManyTransition object)
+      {
+        return createMandatoryManyTransitionAdapter();
+      }
+      @Override
+      public Adapter caseAlternativeTransition(AlternativeTransition object)
+      {
+        return createAlternativeTransitionAdapter();
       }
       @Override
       public Adapter caseAdd0(Add0 object)
@@ -320,16 +335,61 @@ public class SyntacticsequencertestAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.AmbiguousTransition <em>Ambiguous Transition</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.OptionalSingleTransition <em>Optional Single Transition</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.xtext.serializer.syntacticsequencertest.AmbiguousTransition
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.OptionalSingleTransition
    * @generated
    */
-  public Adapter createAmbiguousTransitionAdapter()
+  public Adapter createOptionalSingleTransitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.OptionalManyTransition <em>Optional Many Transition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.OptionalManyTransition
+   * @generated
+   */
+  public Adapter createOptionalManyTransitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryManyTransition <em>Mandatory Many Transition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryManyTransition
+   * @generated
+   */
+  public Adapter createMandatoryManyTransitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.AlternativeTransition <em>Alternative Transition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.AlternativeTransition
+   * @generated
+   */
+  public Adapter createAlternativeTransitionAdapter()
   {
     return null;
   }

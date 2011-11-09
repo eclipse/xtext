@@ -22,7 +22,7 @@ public class AbstractUnassignedRuleCallTestLanguageSyntacticSequencer extends Ab
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (UnassignedRuleCallTestLanguageGrammarAccess) access;
-		match_Model_INTTerminalRuleCall_1_p = new TokenAlias(false, true, grammarAccess.getModelAccess().getINTTerminalRuleCall_1());
+		match_Model_INTTerminalRuleCall_1_p = new TokenAlias(true, false, grammarAccess.getModelAccess().getINTTerminalRuleCall_1());
 	}
 	
 	@Override

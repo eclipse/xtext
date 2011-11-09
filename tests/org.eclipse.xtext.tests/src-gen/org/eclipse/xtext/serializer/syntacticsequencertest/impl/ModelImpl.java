@@ -14,13 +14,16 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.xtext.serializer.syntacticsequencertest.AmbiguousTransition;
+import org.eclipse.xtext.serializer.syntacticsequencertest.AlternativeTransition;
 import org.eclipse.xtext.serializer.syntacticsequencertest.BooleanAlternative;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Exp0;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Exp1;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Exp2;
 import org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryKeywords;
+import org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryManyTransition;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Model;
+import org.eclipse.xtext.serializer.syntacticsequencertest.OptionalManyTransition;
+import org.eclipse.xtext.serializer.syntacticsequencertest.OptionalSingleTransition;
 import org.eclipse.xtext.serializer.syntacticsequencertest.SingleCrossReference;
 import org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage;
 import org.eclipse.xtext.serializer.syntacticsequencertest.UnassignedDatatype;
@@ -40,6 +43,9 @@ import org.eclipse.xtext.serializer.syntacticsequencertest.UnassignedDatatype;
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.ModelImpl#getX6 <em>X6</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.ModelImpl#getX7 <em>X7</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.ModelImpl#getX8 <em>X8</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.ModelImpl#getX9 <em>X9</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.ModelImpl#getX10 <em>X10</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.ModelImpl#getX11 <em>X11</em>}</li>
  * </ul>
  * </p>
  *
@@ -125,7 +131,37 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @generated
    * @ordered
    */
-  protected AmbiguousTransition x8;
+  protected OptionalSingleTransition x8;
+
+  /**
+   * The cached value of the '{@link #getX9() <em>X9</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getX9()
+   * @generated
+   * @ordered
+   */
+  protected OptionalManyTransition x9;
+
+  /**
+   * The cached value of the '{@link #getX10() <em>X10</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getX10()
+   * @generated
+   * @ordered
+   */
+  protected MandatoryManyTransition x10;
+
+  /**
+   * The cached value of the '{@link #getX11() <em>X11</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getX11()
+   * @generated
+   * @ordered
+   */
+  protected AlternativeTransition x11;
 
   /**
    * <!-- begin-user-doc -->
@@ -489,7 +525,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public AmbiguousTransition getX8()
+  public OptionalSingleTransition getX8()
   {
     return x8;
   }
@@ -499,9 +535,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetX8(AmbiguousTransition newX8, NotificationChain msgs)
+  public NotificationChain basicSetX8(OptionalSingleTransition newX8, NotificationChain msgs)
   {
-    AmbiguousTransition oldX8 = x8;
+    OptionalSingleTransition oldX8 = x8;
     x8 = newX8;
     if (eNotificationRequired())
     {
@@ -516,7 +552,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setX8(AmbiguousTransition newX8)
+  public void setX8(OptionalSingleTransition newX8)
   {
     if (newX8 != x8)
     {
@@ -530,6 +566,150 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
     }
     else if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, SyntacticsequencertestPackage.MODEL__X8, newX8, newX8));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public OptionalManyTransition getX9()
+  {
+    return x9;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetX9(OptionalManyTransition newX9, NotificationChain msgs)
+  {
+    OptionalManyTransition oldX9 = x9;
+    x9 = newX9;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SyntacticsequencertestPackage.MODEL__X9, oldX9, newX9);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setX9(OptionalManyTransition newX9)
+  {
+    if (newX9 != x9)
+    {
+      NotificationChain msgs = null;
+      if (x9 != null)
+        msgs = ((InternalEObject)x9).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SyntacticsequencertestPackage.MODEL__X9, null, msgs);
+      if (newX9 != null)
+        msgs = ((InternalEObject)newX9).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SyntacticsequencertestPackage.MODEL__X9, null, msgs);
+      msgs = basicSetX9(newX9, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SyntacticsequencertestPackage.MODEL__X9, newX9, newX9));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public MandatoryManyTransition getX10()
+  {
+    return x10;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetX10(MandatoryManyTransition newX10, NotificationChain msgs)
+  {
+    MandatoryManyTransition oldX10 = x10;
+    x10 = newX10;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SyntacticsequencertestPackage.MODEL__X10, oldX10, newX10);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setX10(MandatoryManyTransition newX10)
+  {
+    if (newX10 != x10)
+    {
+      NotificationChain msgs = null;
+      if (x10 != null)
+        msgs = ((InternalEObject)x10).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SyntacticsequencertestPackage.MODEL__X10, null, msgs);
+      if (newX10 != null)
+        msgs = ((InternalEObject)newX10).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SyntacticsequencertestPackage.MODEL__X10, null, msgs);
+      msgs = basicSetX10(newX10, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SyntacticsequencertestPackage.MODEL__X10, newX10, newX10));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AlternativeTransition getX11()
+  {
+    return x11;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetX11(AlternativeTransition newX11, NotificationChain msgs)
+  {
+    AlternativeTransition oldX11 = x11;
+    x11 = newX11;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SyntacticsequencertestPackage.MODEL__X11, oldX11, newX11);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setX11(AlternativeTransition newX11)
+  {
+    if (newX11 != x11)
+    {
+      NotificationChain msgs = null;
+      if (x11 != null)
+        msgs = ((InternalEObject)x11).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SyntacticsequencertestPackage.MODEL__X11, null, msgs);
+      if (newX11 != null)
+        msgs = ((InternalEObject)newX11).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SyntacticsequencertestPackage.MODEL__X11, null, msgs);
+      msgs = basicSetX11(newX11, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SyntacticsequencertestPackage.MODEL__X11, newX11, newX11));
   }
 
   /**
@@ -558,6 +738,12 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return basicSetX7(null, msgs);
       case SyntacticsequencertestPackage.MODEL__X8:
         return basicSetX8(null, msgs);
+      case SyntacticsequencertestPackage.MODEL__X9:
+        return basicSetX9(null, msgs);
+      case SyntacticsequencertestPackage.MODEL__X10:
+        return basicSetX10(null, msgs);
+      case SyntacticsequencertestPackage.MODEL__X11:
+        return basicSetX11(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -588,6 +774,12 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return getX7();
       case SyntacticsequencertestPackage.MODEL__X8:
         return getX8();
+      case SyntacticsequencertestPackage.MODEL__X9:
+        return getX9();
+      case SyntacticsequencertestPackage.MODEL__X10:
+        return getX10();
+      case SyntacticsequencertestPackage.MODEL__X11:
+        return getX11();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -624,7 +816,16 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         setX7((UnassignedDatatype)newValue);
         return;
       case SyntacticsequencertestPackage.MODEL__X8:
-        setX8((AmbiguousTransition)newValue);
+        setX8((OptionalSingleTransition)newValue);
+        return;
+      case SyntacticsequencertestPackage.MODEL__X9:
+        setX9((OptionalManyTransition)newValue);
+        return;
+      case SyntacticsequencertestPackage.MODEL__X10:
+        setX10((MandatoryManyTransition)newValue);
+        return;
+      case SyntacticsequencertestPackage.MODEL__X11:
+        setX11((AlternativeTransition)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -662,7 +863,16 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         setX7((UnassignedDatatype)null);
         return;
       case SyntacticsequencertestPackage.MODEL__X8:
-        setX8((AmbiguousTransition)null);
+        setX8((OptionalSingleTransition)null);
+        return;
+      case SyntacticsequencertestPackage.MODEL__X9:
+        setX9((OptionalManyTransition)null);
+        return;
+      case SyntacticsequencertestPackage.MODEL__X10:
+        setX10((MandatoryManyTransition)null);
+        return;
+      case SyntacticsequencertestPackage.MODEL__X11:
+        setX11((AlternativeTransition)null);
         return;
     }
     super.eUnset(featureID);
@@ -694,6 +904,12 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return x7 != null;
       case SyntacticsequencertestPackage.MODEL__X8:
         return x8 != null;
+      case SyntacticsequencertestPackage.MODEL__X9:
+        return x9 != null;
+      case SyntacticsequencertestPackage.MODEL__X10:
+        return x10 != null;
+      case SyntacticsequencertestPackage.MODEL__X11:
+        return x11 != null;
     }
     return super.eIsSet(featureID);
   }

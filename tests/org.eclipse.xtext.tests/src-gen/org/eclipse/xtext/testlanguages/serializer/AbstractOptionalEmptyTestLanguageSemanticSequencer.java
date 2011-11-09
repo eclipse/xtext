@@ -65,9 +65,6 @@ public class AbstractOptionalEmptyTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_Greeting(EObject context, Greeting semanticObject) {
 		if(errorAcceptor != null) {
@@ -84,9 +81,6 @@ public class AbstractOptionalEmptyTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     child=Greeting?
-	 *
-	 * Features:
-	 *    child[0, 1]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

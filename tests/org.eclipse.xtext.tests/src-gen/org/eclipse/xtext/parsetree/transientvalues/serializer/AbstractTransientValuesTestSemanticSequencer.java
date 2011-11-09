@@ -75,9 +75,6 @@ public class AbstractTransientValuesTestSemanticSequencer extends AbstractSemant
 	/**
 	 * Constraint:
 	 *     (item+=INT*)
-	 *
-	 * Features:
-	 *    item[0, *]
 	 */
 	protected void sequence_TestList(EObject context, TestList semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -87,10 +84,6 @@ public class AbstractTransientValuesTestSemanticSequencer extends AbstractSemant
 	/**
 	 * Constraint:
 	 *     (opt1=INT? opt2=INT?)
-	 *
-	 * Features:
-	 *    opt1[0, 1]
-	 *    opt2[0, 1]
 	 */
 	protected void sequence_TestOptional(EObject context, TestOptional semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -100,10 +93,6 @@ public class AbstractTransientValuesTestSemanticSequencer extends AbstractSemant
 	/**
 	 * Constraint:
 	 *     (required1=INT required2=INT)
-	 *
-	 * Features:
-	 *    required1[1, 1]
-	 *    required2[1, 1]
 	 */
 	protected void sequence_TestRequired(EObject context, TestRequired semanticObject) {
 		if(errorAcceptor != null) {

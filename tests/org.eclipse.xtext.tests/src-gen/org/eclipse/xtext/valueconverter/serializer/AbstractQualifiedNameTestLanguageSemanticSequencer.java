@@ -58,9 +58,6 @@ public class AbstractQualifiedNameTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     qualifiedName=QualifiedName
-	 *
-	 * Features:
-	 *    qualifiedName[1, 1]
 	 */
 	protected void sequence_Element(EObject context, Element semanticObject) {
 		if(errorAcceptor != null) {

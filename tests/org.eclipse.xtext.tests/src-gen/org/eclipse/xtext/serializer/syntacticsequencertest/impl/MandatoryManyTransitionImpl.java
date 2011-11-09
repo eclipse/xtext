@@ -12,23 +12,23 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.xtext.serializer.syntacticsequencertest.AmbiguousTransition;
+import org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryManyTransition;
 import org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Ambiguous Transition</b></em>'.
+ * An implementation of the model object '<em><b>Mandatory Many Transition</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.AmbiguousTransitionImpl#getVal <em>Val</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.MandatoryManyTransitionImpl#getVal <em>Val</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class AmbiguousTransitionImpl extends MinimalEObjectImpl.Container implements AmbiguousTransition
+public class MandatoryManyTransitionImpl extends MinimalEObjectImpl.Container implements MandatoryManyTransition
 {
   /**
    * The default value of the '{@link #getVal() <em>Val</em>}' attribute.
@@ -55,7 +55,7 @@ public class AmbiguousTransitionImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
-  protected AmbiguousTransitionImpl()
+  protected MandatoryManyTransitionImpl()
   {
     super();
   }
@@ -68,7 +68,7 @@ public class AmbiguousTransitionImpl extends MinimalEObjectImpl.Container implem
   @Override
   protected EClass eStaticClass()
   {
-    return SyntacticsequencertestPackage.Literals.AMBIGUOUS_TRANSITION;
+    return SyntacticsequencertestPackage.Literals.MANDATORY_MANY_TRANSITION;
   }
 
   /**
@@ -91,7 +91,7 @@ public class AmbiguousTransitionImpl extends MinimalEObjectImpl.Container implem
     String oldVal = val;
     val = newVal;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SyntacticsequencertestPackage.AMBIGUOUS_TRANSITION__VAL, oldVal, val));
+      eNotify(new ENotificationImpl(this, Notification.SET, SyntacticsequencertestPackage.MANDATORY_MANY_TRANSITION__VAL, oldVal, val));
   }
 
   /**
@@ -104,7 +104,7 @@ public class AmbiguousTransitionImpl extends MinimalEObjectImpl.Container implem
   {
     switch (featureID)
     {
-      case SyntacticsequencertestPackage.AMBIGUOUS_TRANSITION__VAL:
+      case SyntacticsequencertestPackage.MANDATORY_MANY_TRANSITION__VAL:
         return getVal();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -120,7 +120,7 @@ public class AmbiguousTransitionImpl extends MinimalEObjectImpl.Container implem
   {
     switch (featureID)
     {
-      case SyntacticsequencertestPackage.AMBIGUOUS_TRANSITION__VAL:
+      case SyntacticsequencertestPackage.MANDATORY_MANY_TRANSITION__VAL:
         setVal((String)newValue);
         return;
     }
@@ -137,7 +137,7 @@ public class AmbiguousTransitionImpl extends MinimalEObjectImpl.Container implem
   {
     switch (featureID)
     {
-      case SyntacticsequencertestPackage.AMBIGUOUS_TRANSITION__VAL:
+      case SyntacticsequencertestPackage.MANDATORY_MANY_TRANSITION__VAL:
         setVal(VAL_EDEFAULT);
         return;
     }
@@ -154,7 +154,7 @@ public class AmbiguousTransitionImpl extends MinimalEObjectImpl.Container implem
   {
     switch (featureID)
     {
-      case SyntacticsequencertestPackage.AMBIGUOUS_TRANSITION__VAL:
+      case SyntacticsequencertestPackage.MANDATORY_MANY_TRANSITION__VAL:
         return VAL_EDEFAULT == null ? val != null : !VAL_EDEFAULT.equals(val);
     }
     return super.eIsSet(featureID);
@@ -177,4 +177,4 @@ public class AmbiguousTransitionImpl extends MinimalEObjectImpl.Container implem
     return result.toString();
   }
 
-} //AmbiguousTransitionImpl
+} //MandatoryManyTransitionImpl

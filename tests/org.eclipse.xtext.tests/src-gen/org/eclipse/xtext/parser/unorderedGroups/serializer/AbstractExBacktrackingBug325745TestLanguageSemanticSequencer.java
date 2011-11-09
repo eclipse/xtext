@@ -91,10 +91,6 @@ public class AbstractExBacktrackingBug325745TestLanguageSemanticSequencer extend
 	/**
 	 * Constraint:
 	 *     (baseType=ID defaultValue=STRING?)
-	 *
-	 * Features:
-	 *    baseType[1, 1]
-	 *    defaultValue[0, 1]
 	 */
 	protected void sequence_DataType(EObject context, DataType semanticObject) {
 		superSequencer.createSequence(context, semanticObject);
@@ -104,11 +100,6 @@ public class AbstractExBacktrackingBug325745TestLanguageSemanticSequencer extend
 	/**
 	 * Constraint:
 	 *     (name=ID dataType=DataType? expression=Expression)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    dataType[0, 1]
-	 *    expression[1, 1]
 	 */
 	protected void sequence_Element(EObject context, Element semanticObject) {
 		superSequencer.createSequence(context, semanticObject);
@@ -118,11 +109,6 @@ public class AbstractExBacktrackingBug325745TestLanguageSemanticSequencer extend
 	/**
 	 * Constraint:
 	 *     (prefix=STRING? terms+=SimpleTerm* postfix=STRING?)
-	 *
-	 * Features:
-	 *    prefix[0, 1]
-	 *    terms[0, *]
-	 *    postfix[0, 1]
 	 */
 	protected void sequence_Expression(EObject context, Expression semanticObject) {
 		superSequencer.createSequence(context, semanticObject);
@@ -132,9 +118,6 @@ public class AbstractExBacktrackingBug325745TestLanguageSemanticSequencer extend
 	/**
 	 * Constraint:
 	 *     fields+=Element+
-	 *
-	 * Features:
-	 *    fields[1, *]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		superSequencer.createSequence(context, semanticObject);
@@ -144,22 +127,6 @@ public class AbstractExBacktrackingBug325745TestLanguageSemanticSequencer extend
 	/**
 	 * Constraint:
 	 *     ((lineCount=INT charCount=INT? charSet=ID?) | refChar=ID)
-	 *
-	 * Features:
-	 *    lineCount[0, 1]
-	 *         MANDATORY_IF_SET charCount
-	 *         MANDATORY_IF_SET charSet
-	 *         EXCLUDE_IF_SET refChar
-	 *    charCount[0, 1]
-	 *         EXCLUDE_IF_UNSET lineCount
-	 *         EXCLUDE_IF_SET refChar
-	 *    charSet[0, 1]
-	 *         EXCLUDE_IF_UNSET lineCount
-	 *         EXCLUDE_IF_SET refChar
-	 *    refChar[0, 1]
-	 *         EXCLUDE_IF_SET lineCount
-	 *         EXCLUDE_IF_SET charCount
-	 *         EXCLUDE_IF_SET charSet
 	 */
 	protected void sequence_SimpleTerm(EObject context, SimpleTerm semanticObject) {
 		superSequencer.createSequence(context, semanticObject);

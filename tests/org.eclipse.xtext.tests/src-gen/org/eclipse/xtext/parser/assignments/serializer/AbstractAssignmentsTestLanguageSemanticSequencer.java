@@ -86,27 +86,6 @@ public class AbstractAssignmentsTestLanguageSemanticSequencer extends AbstractSe
 	 *         object=SingleDatatype | 
 	 *         object=MultiDatatype
 	 *     )
-	 *
-	 * Features:
-	 *    single[0, 2]
-	 *         EXCLUDE_IF_SET multi
-	 *         EXCLUDE_IF_SET multi
-	 *         EXCLUDE_IF_SET object
-	 *         EXCLUDE_IF_SET object
-	 *         EXCLUDE_IF_SET object
-	 *         EXCLUDE_IF_SET object
-	 *    multi[0, 2]
-	 *         EXCLUDE_IF_SET single
-	 *         EXCLUDE_IF_SET single
-	 *         EXCLUDE_IF_SET object
-	 *         EXCLUDE_IF_SET object
-	 *         EXCLUDE_IF_SET object
-	 *         EXCLUDE_IF_SET object
-	 *    object[0, 4]
-	 *         EXCLUDE_IF_SET single
-	 *         EXCLUDE_IF_SET multi
-	 *         EXCLUDE_IF_SET single
-	 *         EXCLUDE_IF_SET multi
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -116,9 +95,6 @@ public class AbstractAssignmentsTestLanguageSemanticSequencer extends AbstractSe
 	/**
 	 * Constraint:
 	 *     (value+=IdDatatype | value+=IdDatatype | value+=StringDatatype | value+=StringDatatype)
-	 *
-	 * Features:
-	 *    value[0, 4]
 	 */
 	protected void sequence_MultiDatatype(EObject context, MultiValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -128,9 +104,6 @@ public class AbstractAssignmentsTestLanguageSemanticSequencer extends AbstractSe
 	/**
 	 * Constraint:
 	 *     (value+=ID | value+=ID | value+=STRING | value+=STRING)
-	 *
-	 * Features:
-	 *    value[0, 4]
 	 */
 	protected void sequence_MultiValue(EObject context, MultiValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -140,9 +113,6 @@ public class AbstractAssignmentsTestLanguageSemanticSequencer extends AbstractSe
 	/**
 	 * Constraint:
 	 *     (value=IdDatatype | value=IdDatatype | value=StringDatatype | value=StringDatatype)
-	 *
-	 * Features:
-	 *    value[0, 4]
 	 */
 	protected void sequence_SingleDatatype(EObject context, SingleValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -152,9 +122,6 @@ public class AbstractAssignmentsTestLanguageSemanticSequencer extends AbstractSe
 	/**
 	 * Constraint:
 	 *     (value=ID | value=ID | value=STRING | value=STRING)
-	 *
-	 * Features:
-	 *    value[0, 4]
 	 */
 	protected void sequence_SingleValue(EObject context, SingleValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

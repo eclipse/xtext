@@ -88,10 +88,6 @@ public class AbstractSimpleExpressionsTestLanguageSemanticSequencer extends Abst
 	 *         (values+=Addition_Op_1_0 (operator='+' | operator='-') values+=Multiplication) | 
 	 *         (values+=Multiplication_Op_1_0 (operator='*' | operator='/') values+=Term)
 	 *     )
-	 *
-	 * Features:
-	 *    values[0, 4]
-	 *    operator[0, 4]
 	 */
 	protected void sequence_Addition(EObject context, Op semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -101,9 +97,6 @@ public class AbstractSimpleExpressionsTestLanguageSemanticSequencer extends Abst
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_Atom(EObject context, Atom semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -113,9 +106,6 @@ public class AbstractSimpleExpressionsTestLanguageSemanticSequencer extends Abst
 	/**
 	 * Constraint:
 	 *     (expressions+=Sequence_Sequence_1_0 expressions+=Addition)
-	 *
-	 * Features:
-	 *    expressions[2, 2]
 	 */
 	protected void sequence_Sequence(EObject context, Sequence semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

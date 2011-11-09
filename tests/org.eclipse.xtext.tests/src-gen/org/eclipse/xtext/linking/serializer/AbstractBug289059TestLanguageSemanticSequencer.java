@@ -62,11 +62,6 @@ public class AbstractBug289059TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (name=ID enabled=UnassignedAction? reference=[Model|ID]?)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    enabled[0, 1]
-	 *    reference[0, 1]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -76,8 +71,6 @@ public class AbstractBug289059TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     {UnassignedAction}
-	 *
-	 * Features:
 	 */
 	protected void sequence_UnassignedAction(EObject context, UnassignedAction semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

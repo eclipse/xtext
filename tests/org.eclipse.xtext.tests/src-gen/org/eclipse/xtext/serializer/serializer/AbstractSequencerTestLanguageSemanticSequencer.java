@@ -290,29 +290,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     ((val1=ID val2=ID) | (val1=ID val3=ID) | (val1=ID val4=ID?))
-	 *
-	 * Features:
-	 *    val1[0, 3]
-	 *    val2[0, 1]
-	 *         EXCLUDE_IF_UNSET val1
-	 *         MANDATORY_IF_SET val1
-	 *         EXCLUDE_IF_SET val1
-	 *         EXCLUDE_IF_SET val3
-	 *         EXCLUDE_IF_SET val1
-	 *         EXCLUDE_IF_SET val4
-	 *    val3[0, 1]
-	 *         EXCLUDE_IF_UNSET val1
-	 *         MANDATORY_IF_SET val1
-	 *         EXCLUDE_IF_SET val1
-	 *         EXCLUDE_IF_SET val2
-	 *         EXCLUDE_IF_SET val1
-	 *         EXCLUDE_IF_SET val4
-	 *    val4[0, 1]
-	 *         EXCLUDE_IF_UNSET val1
-	 *         EXCLUDE_IF_SET val1
-	 *         EXCLUDE_IF_SET val2
-	 *         EXCLUDE_IF_SET val1
-	 *         EXCLUDE_IF_SET val3
 	 */
 	protected void sequence_AltList1(EObject context, AltList1 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -322,21 +299,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     ((val1+=ID val2=ID) | (val1+=ID val1+=ID* val3=ID))
-	 *
-	 * Features:
-	 *    val1[0, *]
-	 *    val2[0, 1]
-	 *         EXCLUDE_IF_UNSET val1
-	 *         MANDATORY_IF_SET val1
-	 *         EXCLUDE_IF_SET val1
-	 *         EXCLUDE_IF_SET val1
-	 *         EXCLUDE_IF_SET val3
-	 *    val3[0, 1]
-	 *         EXCLUDE_IF_UNSET val1
-	 *         MANDATORY_IF_SET val1
-	 *         MANDATORY_IF_SET val1
-	 *         EXCLUDE_IF_SET val1
-	 *         EXCLUDE_IF_SET val2
 	 */
 	protected void sequence_AltList2(EObject context, AltList2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -346,16 +308,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     ((val2=ID | val3=ID)? (val4+=ID | val5+=ID)+ (val6+=ID | val7+=ID)*)
-	 *
-	 * Features:
-	 *    val2[0, 1]
-	 *         EXCLUDE_IF_SET val3
-	 *    val3[0, 1]
-	 *         EXCLUDE_IF_SET val2
-	 *    val4[0, *]
-	 *    val5[0, *]
-	 *    val6[0, *]
-	 *    val7[0, *]
 	 */
 	protected void sequence_AlternativeMultiplicities(EObject context, AlternativeMultiplicities semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -365,13 +317,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (val=ID | (val=ID flag?='kw1'))
-	 *
-	 * Features:
-	 *    val[0, 2]
-	 *    flag[0, 1]
-	 *         EXCLUDE_IF_UNSET val
-	 *         MANDATORY_IF_SET val
-	 *         EXCLUDE_IF_SET val
 	 */
 	protected void sequence_DependentAlternative1(EObject context, DependentAlternative1 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -381,14 +326,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     ((val+=ID val+=ID+) | (val+=ID+ flag?='kw1'))
-	 *
-	 * Features:
-	 *    val[0, *]
-	 *    flag[0, 1]
-	 *         EXCLUDE_IF_UNSET val
-	 *         MANDATORY_IF_SET val
-	 *         EXCLUDE_IF_SET val
-	 *         EXCLUDE_IF_SET val
 	 */
 	protected void sequence_DependentAlternative2(EObject context, DependentAlternative2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -398,8 +335,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     {Float}
-	 *
-	 * Features:
 	 */
 	protected void sequence_Float(EObject context, org.eclipse.xtext.serializer.sequencertest.Float semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -409,23 +344,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (val1=ID (val2=ID val3=ID)? (val4+=ID val5+=ID)+ (val6+=ID val7+=ID)*)
-	 *
-	 * Features:
-	 *    val1[1, 1]
-	 *    val2[0, 1]
-	 *         EXCLUDE_IF_UNSET val3
-	 *         MANDATORY_IF_SET val3
-	 *    val3[0, 1]
-	 *         EXCLUDE_IF_UNSET val2
-	 *         MANDATORY_IF_SET val2
-	 *    val4[1, *]
-	 *         SAME val5
-	 *    val5[1, *]
-	 *         SAME val4
-	 *    val6[0, *]
-	 *         SAME val7
-	 *    val7[0, *]
-	 *         SAME val6
 	 */
 	protected void sequence_GroupMultiplicities(EObject context, GroupMultiplicities semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -435,9 +353,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (val1+=ID val1+=ID*)
-	 *
-	 * Features:
-	 *    val1[1, *]
 	 */
 	protected void sequence_List1(EObject context, List1 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -447,9 +362,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     ((val1+=ID val1+=ID*)?)
-	 *
-	 * Features:
-	 *    val1[0, *]
 	 */
 	protected void sequence_List2(EObject context, List2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -486,603 +398,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         x25=UnorderedGroupOptional | 
 	 *         x26=UnorderedGroupBoolean
 	 *     )
-	 *
-	 * Features:
-	 *    x1[0, 1]
-	 *         EXCLUDE_IF_SET x2
-	 *         EXCLUDE_IF_SET x3
-	 *         EXCLUDE_IF_SET x4
-	 *         EXCLUDE_IF_SET x5
-	 *         EXCLUDE_IF_SET x6
-	 *         EXCLUDE_IF_SET x7
-	 *         EXCLUDE_IF_SET x8
-	 *         EXCLUDE_IF_SET x9
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x13
-	 *         EXCLUDE_IF_SET x14
-	 *         EXCLUDE_IF_SET x15
-	 *         EXCLUDE_IF_SET x19
-	 *         EXCLUDE_IF_SET x20
-	 *         EXCLUDE_IF_SET x21
-	 *         EXCLUDE_IF_SET x22
-	 *         EXCLUDE_IF_SET x23
-	 *         EXCLUDE_IF_SET x24
-	 *         EXCLUDE_IF_SET x25
-	 *         EXCLUDE_IF_SET x26
-	 *    x2[0, 1]
-	 *         EXCLUDE_IF_SET x1
-	 *         EXCLUDE_IF_SET x3
-	 *         EXCLUDE_IF_SET x4
-	 *         EXCLUDE_IF_SET x5
-	 *         EXCLUDE_IF_SET x6
-	 *         EXCLUDE_IF_SET x7
-	 *         EXCLUDE_IF_SET x8
-	 *         EXCLUDE_IF_SET x9
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x13
-	 *         EXCLUDE_IF_SET x14
-	 *         EXCLUDE_IF_SET x15
-	 *         EXCLUDE_IF_SET x19
-	 *         EXCLUDE_IF_SET x20
-	 *         EXCLUDE_IF_SET x21
-	 *         EXCLUDE_IF_SET x22
-	 *         EXCLUDE_IF_SET x23
-	 *         EXCLUDE_IF_SET x24
-	 *         EXCLUDE_IF_SET x25
-	 *         EXCLUDE_IF_SET x26
-	 *    x3[0, 1]
-	 *         EXCLUDE_IF_SET x1
-	 *         EXCLUDE_IF_SET x2
-	 *         EXCLUDE_IF_SET x4
-	 *         EXCLUDE_IF_SET x5
-	 *         EXCLUDE_IF_SET x6
-	 *         EXCLUDE_IF_SET x7
-	 *         EXCLUDE_IF_SET x8
-	 *         EXCLUDE_IF_SET x9
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x13
-	 *         EXCLUDE_IF_SET x14
-	 *         EXCLUDE_IF_SET x15
-	 *         EXCLUDE_IF_SET x19
-	 *         EXCLUDE_IF_SET x20
-	 *         EXCLUDE_IF_SET x21
-	 *         EXCLUDE_IF_SET x22
-	 *         EXCLUDE_IF_SET x23
-	 *         EXCLUDE_IF_SET x24
-	 *         EXCLUDE_IF_SET x25
-	 *         EXCLUDE_IF_SET x26
-	 *    x4[0, 1]
-	 *         EXCLUDE_IF_SET x1
-	 *         EXCLUDE_IF_SET x2
-	 *         EXCLUDE_IF_SET x3
-	 *         EXCLUDE_IF_SET x5
-	 *         EXCLUDE_IF_SET x6
-	 *         EXCLUDE_IF_SET x7
-	 *         EXCLUDE_IF_SET x8
-	 *         EXCLUDE_IF_SET x9
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x13
-	 *         EXCLUDE_IF_SET x14
-	 *         EXCLUDE_IF_SET x15
-	 *         EXCLUDE_IF_SET x19
-	 *         EXCLUDE_IF_SET x20
-	 *         EXCLUDE_IF_SET x21
-	 *         EXCLUDE_IF_SET x22
-	 *         EXCLUDE_IF_SET x23
-	 *         EXCLUDE_IF_SET x24
-	 *         EXCLUDE_IF_SET x25
-	 *         EXCLUDE_IF_SET x26
-	 *    x5[0, 1]
-	 *         EXCLUDE_IF_SET x1
-	 *         EXCLUDE_IF_SET x2
-	 *         EXCLUDE_IF_SET x3
-	 *         EXCLUDE_IF_SET x4
-	 *         EXCLUDE_IF_SET x6
-	 *         EXCLUDE_IF_SET x7
-	 *         EXCLUDE_IF_SET x8
-	 *         EXCLUDE_IF_SET x9
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x13
-	 *         EXCLUDE_IF_SET x14
-	 *         EXCLUDE_IF_SET x15
-	 *         EXCLUDE_IF_SET x19
-	 *         EXCLUDE_IF_SET x20
-	 *         EXCLUDE_IF_SET x21
-	 *         EXCLUDE_IF_SET x22
-	 *         EXCLUDE_IF_SET x23
-	 *         EXCLUDE_IF_SET x24
-	 *         EXCLUDE_IF_SET x25
-	 *         EXCLUDE_IF_SET x26
-	 *    x6[0, 1]
-	 *         EXCLUDE_IF_SET x1
-	 *         EXCLUDE_IF_SET x2
-	 *         EXCLUDE_IF_SET x3
-	 *         EXCLUDE_IF_SET x4
-	 *         EXCLUDE_IF_SET x5
-	 *         EXCLUDE_IF_SET x7
-	 *         EXCLUDE_IF_SET x8
-	 *         EXCLUDE_IF_SET x9
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x13
-	 *         EXCLUDE_IF_SET x14
-	 *         EXCLUDE_IF_SET x15
-	 *         EXCLUDE_IF_SET x19
-	 *         EXCLUDE_IF_SET x20
-	 *         EXCLUDE_IF_SET x21
-	 *         EXCLUDE_IF_SET x22
-	 *         EXCLUDE_IF_SET x23
-	 *         EXCLUDE_IF_SET x24
-	 *         EXCLUDE_IF_SET x25
-	 *         EXCLUDE_IF_SET x26
-	 *    x7[0, 1]
-	 *         EXCLUDE_IF_SET x1
-	 *         EXCLUDE_IF_SET x2
-	 *         EXCLUDE_IF_SET x3
-	 *         EXCLUDE_IF_SET x4
-	 *         EXCLUDE_IF_SET x5
-	 *         EXCLUDE_IF_SET x6
-	 *         EXCLUDE_IF_SET x8
-	 *         EXCLUDE_IF_SET x9
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x13
-	 *         EXCLUDE_IF_SET x14
-	 *         EXCLUDE_IF_SET x15
-	 *         EXCLUDE_IF_SET x19
-	 *         EXCLUDE_IF_SET x20
-	 *         EXCLUDE_IF_SET x21
-	 *         EXCLUDE_IF_SET x22
-	 *         EXCLUDE_IF_SET x23
-	 *         EXCLUDE_IF_SET x24
-	 *         EXCLUDE_IF_SET x25
-	 *         EXCLUDE_IF_SET x26
-	 *    x8[0, 1]
-	 *         EXCLUDE_IF_SET x1
-	 *         EXCLUDE_IF_SET x2
-	 *         EXCLUDE_IF_SET x3
-	 *         EXCLUDE_IF_SET x4
-	 *         EXCLUDE_IF_SET x5
-	 *         EXCLUDE_IF_SET x6
-	 *         EXCLUDE_IF_SET x7
-	 *         EXCLUDE_IF_SET x9
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x13
-	 *         EXCLUDE_IF_SET x14
-	 *         EXCLUDE_IF_SET x15
-	 *         EXCLUDE_IF_SET x19
-	 *         EXCLUDE_IF_SET x20
-	 *         EXCLUDE_IF_SET x21
-	 *         EXCLUDE_IF_SET x22
-	 *         EXCLUDE_IF_SET x23
-	 *         EXCLUDE_IF_SET x24
-	 *         EXCLUDE_IF_SET x25
-	 *         EXCLUDE_IF_SET x26
-	 *    x9[0, 1]
-	 *         EXCLUDE_IF_SET x1
-	 *         EXCLUDE_IF_SET x2
-	 *         EXCLUDE_IF_SET x3
-	 *         EXCLUDE_IF_SET x4
-	 *         EXCLUDE_IF_SET x5
-	 *         EXCLUDE_IF_SET x6
-	 *         EXCLUDE_IF_SET x7
-	 *         EXCLUDE_IF_SET x8
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x13
-	 *         EXCLUDE_IF_SET x14
-	 *         EXCLUDE_IF_SET x15
-	 *         EXCLUDE_IF_SET x19
-	 *         EXCLUDE_IF_SET x20
-	 *         EXCLUDE_IF_SET x21
-	 *         EXCLUDE_IF_SET x22
-	 *         EXCLUDE_IF_SET x23
-	 *         EXCLUDE_IF_SET x24
-	 *         EXCLUDE_IF_SET x25
-	 *         EXCLUDE_IF_SET x26
-	 *    x10[0, 2]
-	 *         EXCLUDE_IF_SET x1
-	 *         EXCLUDE_IF_SET x2
-	 *         EXCLUDE_IF_SET x3
-	 *         EXCLUDE_IF_SET x4
-	 *         EXCLUDE_IF_SET x5
-	 *         EXCLUDE_IF_SET x6
-	 *         EXCLUDE_IF_SET x7
-	 *         EXCLUDE_IF_SET x8
-	 *         EXCLUDE_IF_SET x9
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x13
-	 *         EXCLUDE_IF_SET x14
-	 *         EXCLUDE_IF_SET x15
-	 *         EXCLUDE_IF_SET x19
-	 *         EXCLUDE_IF_SET x20
-	 *         EXCLUDE_IF_SET x21
-	 *         EXCLUDE_IF_SET x22
-	 *         EXCLUDE_IF_SET x23
-	 *         EXCLUDE_IF_SET x24
-	 *         EXCLUDE_IF_SET x25
-	 *         EXCLUDE_IF_SET x26
-	 *    x11[0, 2]
-	 *         EXCLUDE_IF_SET x1
-	 *         EXCLUDE_IF_SET x2
-	 *         EXCLUDE_IF_SET x3
-	 *         EXCLUDE_IF_SET x4
-	 *         EXCLUDE_IF_SET x5
-	 *         EXCLUDE_IF_SET x6
-	 *         EXCLUDE_IF_SET x7
-	 *         EXCLUDE_IF_SET x8
-	 *         EXCLUDE_IF_SET x9
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x13
-	 *         EXCLUDE_IF_SET x14
-	 *         EXCLUDE_IF_SET x15
-	 *         EXCLUDE_IF_SET x19
-	 *         EXCLUDE_IF_SET x20
-	 *         EXCLUDE_IF_SET x21
-	 *         EXCLUDE_IF_SET x22
-	 *         EXCLUDE_IF_SET x23
-	 *         EXCLUDE_IF_SET x24
-	 *         EXCLUDE_IF_SET x25
-	 *         EXCLUDE_IF_SET x26
-	 *    x12[0, 2]
-	 *         EXCLUDE_IF_SET x1
-	 *         EXCLUDE_IF_SET x2
-	 *         EXCLUDE_IF_SET x3
-	 *         EXCLUDE_IF_SET x4
-	 *         EXCLUDE_IF_SET x5
-	 *         EXCLUDE_IF_SET x6
-	 *         EXCLUDE_IF_SET x7
-	 *         EXCLUDE_IF_SET x8
-	 *         EXCLUDE_IF_SET x9
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x13
-	 *         EXCLUDE_IF_SET x14
-	 *         EXCLUDE_IF_SET x15
-	 *         EXCLUDE_IF_SET x19
-	 *         EXCLUDE_IF_SET x20
-	 *         EXCLUDE_IF_SET x21
-	 *         EXCLUDE_IF_SET x22
-	 *         EXCLUDE_IF_SET x23
-	 *         EXCLUDE_IF_SET x24
-	 *         EXCLUDE_IF_SET x25
-	 *         EXCLUDE_IF_SET x26
-	 *    x13[0, 1]
-	 *         EXCLUDE_IF_SET x1
-	 *         EXCLUDE_IF_SET x2
-	 *         EXCLUDE_IF_SET x3
-	 *         EXCLUDE_IF_SET x4
-	 *         EXCLUDE_IF_SET x5
-	 *         EXCLUDE_IF_SET x6
-	 *         EXCLUDE_IF_SET x7
-	 *         EXCLUDE_IF_SET x8
-	 *         EXCLUDE_IF_SET x9
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x14
-	 *         EXCLUDE_IF_SET x15
-	 *         EXCLUDE_IF_SET x19
-	 *         EXCLUDE_IF_SET x20
-	 *         EXCLUDE_IF_SET x21
-	 *         EXCLUDE_IF_SET x22
-	 *         EXCLUDE_IF_SET x23
-	 *         EXCLUDE_IF_SET x24
-	 *         EXCLUDE_IF_SET x25
-	 *         EXCLUDE_IF_SET x26
-	 *    x14[0, 1]
-	 *         EXCLUDE_IF_SET x1
-	 *         EXCLUDE_IF_SET x2
-	 *         EXCLUDE_IF_SET x3
-	 *         EXCLUDE_IF_SET x4
-	 *         EXCLUDE_IF_SET x5
-	 *         EXCLUDE_IF_SET x6
-	 *         EXCLUDE_IF_SET x7
-	 *         EXCLUDE_IF_SET x8
-	 *         EXCLUDE_IF_SET x9
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x13
-	 *         EXCLUDE_IF_SET x15
-	 *         EXCLUDE_IF_SET x19
-	 *         EXCLUDE_IF_SET x20
-	 *         EXCLUDE_IF_SET x21
-	 *         EXCLUDE_IF_SET x22
-	 *         EXCLUDE_IF_SET x23
-	 *         EXCLUDE_IF_SET x24
-	 *         EXCLUDE_IF_SET x25
-	 *         EXCLUDE_IF_SET x26
-	 *    x15[0, 1]
-	 *         EXCLUDE_IF_SET x1
-	 *         EXCLUDE_IF_SET x2
-	 *         EXCLUDE_IF_SET x3
-	 *         EXCLUDE_IF_SET x4
-	 *         EXCLUDE_IF_SET x5
-	 *         EXCLUDE_IF_SET x6
-	 *         EXCLUDE_IF_SET x7
-	 *         EXCLUDE_IF_SET x8
-	 *         EXCLUDE_IF_SET x9
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x13
-	 *         EXCLUDE_IF_SET x14
-	 *         EXCLUDE_IF_SET x19
-	 *         EXCLUDE_IF_SET x20
-	 *         EXCLUDE_IF_SET x21
-	 *         EXCLUDE_IF_SET x22
-	 *         EXCLUDE_IF_SET x23
-	 *         EXCLUDE_IF_SET x24
-	 *         EXCLUDE_IF_SET x25
-	 *         EXCLUDE_IF_SET x26
-	 *    x19[0, 1]
-	 *         EXCLUDE_IF_SET x1
-	 *         EXCLUDE_IF_SET x2
-	 *         EXCLUDE_IF_SET x3
-	 *         EXCLUDE_IF_SET x4
-	 *         EXCLUDE_IF_SET x5
-	 *         EXCLUDE_IF_SET x6
-	 *         EXCLUDE_IF_SET x7
-	 *         EXCLUDE_IF_SET x8
-	 *         EXCLUDE_IF_SET x9
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x13
-	 *         EXCLUDE_IF_SET x14
-	 *         EXCLUDE_IF_SET x15
-	 *         EXCLUDE_IF_SET x20
-	 *         EXCLUDE_IF_SET x21
-	 *         EXCLUDE_IF_SET x22
-	 *         EXCLUDE_IF_SET x23
-	 *         EXCLUDE_IF_SET x24
-	 *         EXCLUDE_IF_SET x25
-	 *         EXCLUDE_IF_SET x26
-	 *    x20[0, 1]
-	 *         EXCLUDE_IF_SET x1
-	 *         EXCLUDE_IF_SET x2
-	 *         EXCLUDE_IF_SET x3
-	 *         EXCLUDE_IF_SET x4
-	 *         EXCLUDE_IF_SET x5
-	 *         EXCLUDE_IF_SET x6
-	 *         EXCLUDE_IF_SET x7
-	 *         EXCLUDE_IF_SET x8
-	 *         EXCLUDE_IF_SET x9
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x13
-	 *         EXCLUDE_IF_SET x14
-	 *         EXCLUDE_IF_SET x15
-	 *         EXCLUDE_IF_SET x19
-	 *         EXCLUDE_IF_SET x21
-	 *         EXCLUDE_IF_SET x22
-	 *         EXCLUDE_IF_SET x23
-	 *         EXCLUDE_IF_SET x24
-	 *         EXCLUDE_IF_SET x25
-	 *         EXCLUDE_IF_SET x26
-	 *    x21[0, 1]
-	 *         EXCLUDE_IF_SET x1
-	 *         EXCLUDE_IF_SET x2
-	 *         EXCLUDE_IF_SET x3
-	 *         EXCLUDE_IF_SET x4
-	 *         EXCLUDE_IF_SET x5
-	 *         EXCLUDE_IF_SET x6
-	 *         EXCLUDE_IF_SET x7
-	 *         EXCLUDE_IF_SET x8
-	 *         EXCLUDE_IF_SET x9
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x13
-	 *         EXCLUDE_IF_SET x14
-	 *         EXCLUDE_IF_SET x15
-	 *         EXCLUDE_IF_SET x19
-	 *         EXCLUDE_IF_SET x20
-	 *         EXCLUDE_IF_SET x22
-	 *         EXCLUDE_IF_SET x23
-	 *         EXCLUDE_IF_SET x24
-	 *         EXCLUDE_IF_SET x25
-	 *         EXCLUDE_IF_SET x26
-	 *    x22[0, 1]
-	 *         EXCLUDE_IF_SET x1
-	 *         EXCLUDE_IF_SET x2
-	 *         EXCLUDE_IF_SET x3
-	 *         EXCLUDE_IF_SET x4
-	 *         EXCLUDE_IF_SET x5
-	 *         EXCLUDE_IF_SET x6
-	 *         EXCLUDE_IF_SET x7
-	 *         EXCLUDE_IF_SET x8
-	 *         EXCLUDE_IF_SET x9
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x13
-	 *         EXCLUDE_IF_SET x14
-	 *         EXCLUDE_IF_SET x15
-	 *         EXCLUDE_IF_SET x19
-	 *         EXCLUDE_IF_SET x20
-	 *         EXCLUDE_IF_SET x21
-	 *         EXCLUDE_IF_SET x23
-	 *         EXCLUDE_IF_SET x24
-	 *         EXCLUDE_IF_SET x25
-	 *         EXCLUDE_IF_SET x26
-	 *    x23[0, 1]
-	 *         EXCLUDE_IF_SET x1
-	 *         EXCLUDE_IF_SET x2
-	 *         EXCLUDE_IF_SET x3
-	 *         EXCLUDE_IF_SET x4
-	 *         EXCLUDE_IF_SET x5
-	 *         EXCLUDE_IF_SET x6
-	 *         EXCLUDE_IF_SET x7
-	 *         EXCLUDE_IF_SET x8
-	 *         EXCLUDE_IF_SET x9
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x13
-	 *         EXCLUDE_IF_SET x14
-	 *         EXCLUDE_IF_SET x15
-	 *         EXCLUDE_IF_SET x19
-	 *         EXCLUDE_IF_SET x20
-	 *         EXCLUDE_IF_SET x21
-	 *         EXCLUDE_IF_SET x22
-	 *         EXCLUDE_IF_SET x24
-	 *         EXCLUDE_IF_SET x25
-	 *         EXCLUDE_IF_SET x26
-	 *    x24[0, 1]
-	 *         EXCLUDE_IF_SET x1
-	 *         EXCLUDE_IF_SET x2
-	 *         EXCLUDE_IF_SET x3
-	 *         EXCLUDE_IF_SET x4
-	 *         EXCLUDE_IF_SET x5
-	 *         EXCLUDE_IF_SET x6
-	 *         EXCLUDE_IF_SET x7
-	 *         EXCLUDE_IF_SET x8
-	 *         EXCLUDE_IF_SET x9
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x13
-	 *         EXCLUDE_IF_SET x14
-	 *         EXCLUDE_IF_SET x15
-	 *         EXCLUDE_IF_SET x19
-	 *         EXCLUDE_IF_SET x20
-	 *         EXCLUDE_IF_SET x21
-	 *         EXCLUDE_IF_SET x22
-	 *         EXCLUDE_IF_SET x23
-	 *         EXCLUDE_IF_SET x25
-	 *         EXCLUDE_IF_SET x26
-	 *    x25[0, 1]
-	 *         EXCLUDE_IF_SET x1
-	 *         EXCLUDE_IF_SET x2
-	 *         EXCLUDE_IF_SET x3
-	 *         EXCLUDE_IF_SET x4
-	 *         EXCLUDE_IF_SET x5
-	 *         EXCLUDE_IF_SET x6
-	 *         EXCLUDE_IF_SET x7
-	 *         EXCLUDE_IF_SET x8
-	 *         EXCLUDE_IF_SET x9
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x13
-	 *         EXCLUDE_IF_SET x14
-	 *         EXCLUDE_IF_SET x15
-	 *         EXCLUDE_IF_SET x19
-	 *         EXCLUDE_IF_SET x20
-	 *         EXCLUDE_IF_SET x21
-	 *         EXCLUDE_IF_SET x22
-	 *         EXCLUDE_IF_SET x23
-	 *         EXCLUDE_IF_SET x24
-	 *         EXCLUDE_IF_SET x26
-	 *    x26[0, 1]
-	 *         EXCLUDE_IF_SET x1
-	 *         EXCLUDE_IF_SET x2
-	 *         EXCLUDE_IF_SET x3
-	 *         EXCLUDE_IF_SET x4
-	 *         EXCLUDE_IF_SET x5
-	 *         EXCLUDE_IF_SET x6
-	 *         EXCLUDE_IF_SET x7
-	 *         EXCLUDE_IF_SET x8
-	 *         EXCLUDE_IF_SET x9
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x10
-	 *         EXCLUDE_IF_SET x11
-	 *         EXCLUDE_IF_SET x12
-	 *         EXCLUDE_IF_SET x13
-	 *         EXCLUDE_IF_SET x14
-	 *         EXCLUDE_IF_SET x15
-	 *         EXCLUDE_IF_SET x19
-	 *         EXCLUDE_IF_SET x20
-	 *         EXCLUDE_IF_SET x21
-	 *         EXCLUDE_IF_SET x22
-	 *         EXCLUDE_IF_SET x23
-	 *         EXCLUDE_IF_SET x24
-	 *         EXCLUDE_IF_SET x25
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1092,9 +407,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (val+='kw1' | val+='kw2' | val+='kw3' | val+=ID)
-	 *
-	 * Features:
-	 *    val[0, 4]
 	 */
 	protected void sequence_MultiKeywordsOrID(EObject context, MultiKeywordsOrID semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1104,9 +416,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (val+='kw1' | val+='kw2' | val+='kw3')
-	 *
-	 * Features:
-	 *    val[0, 3]
 	 */
 	protected void sequence_MultiKeywords(EObject context, MultiKeywords semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1116,9 +425,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (val+=ID1 | val+=ID2)
-	 *
-	 * Features:
-	 *    val[0, 2]
 	 */
 	protected void sequence_MultiTerminals(EObject context, MultiTerminals semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1128,15 +434,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (int0=INT (int1=INT int2=INT)?)
-	 *
-	 * Features:
-	 *    int0[1, 1]
-	 *    int1[0, 1]
-	 *         EXCLUDE_IF_UNSET int2
-	 *         MANDATORY_IF_SET int2
-	 *    int2[0, 1]
-	 *         EXCLUDE_IF_UNSET int1
-	 *         MANDATORY_IF_SET int1
 	 */
 	protected void sequence_Optional(EObject context, Optional semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1146,12 +443,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (val1=ID | val2=ID)
-	 *
-	 * Features:
-	 *    val1[0, 1]
-	 *         EXCLUDE_IF_SET val2
-	 *    val2[0, 1]
-	 *         EXCLUDE_IF_SET val1
 	 */
 	protected void sequence_SimpleAlternative(EObject context, SimpleAlternative semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1161,10 +452,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (val1=ID val2=ID)
-	 *
-	 * Features:
-	 *    val1[1, 1]
-	 *    val2[1, 1]
 	 */
 	protected void sequence_SimpleGroup(EObject context, SimpleGroup semanticObject) {
 		if(errorAcceptor != null) {
@@ -1184,12 +471,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (val1=ID val2=ID? val3+=ID+ val4+=ID*)
-	 *
-	 * Features:
-	 *    val1[1, 1]
-	 *    val2[0, 1]
-	 *    val3[1, *]
-	 *    val4[0, *]
 	 */
 	protected void sequence_SimpleMultiplicities(EObject context, SimpleMultiplicities semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1199,9 +480,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     val='kw1'
-	 *
-	 * Features:
-	 *    val[1, 1]
 	 */
 	protected void sequence_SingleContainmentReferenceChild1(EObject context, SingleContainmentReferenceChild1 semanticObject) {
 		if(errorAcceptor != null) {
@@ -1218,9 +496,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     val='kw2'
-	 *
-	 * Features:
-	 *    val[1, 1]
 	 */
 	protected void sequence_SingleContainmentReferenceChild2(EObject context, SingleContainmentReferenceChild2 semanticObject) {
 		if(errorAcceptor != null) {
@@ -1237,9 +512,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     val='kw3'
-	 *
-	 * Features:
-	 *    val[1, 1]
 	 */
 	protected void sequence_SingleContainmentReferenceChild3(EObject context, SingleContainmentReferenceChild3 semanticObject) {
 		if(errorAcceptor != null) {
@@ -1256,9 +528,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (child=SingleContainmentReferenceChild1 | child=SingleContainmentReferenceChild2 | child=SingleContainmentReferenceChild3)
-	 *
-	 * Features:
-	 *    child[0, 3]
 	 */
 	protected void sequence_SingleContainmentReference(EObject context, SingleContainmentReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1268,10 +537,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     ((name=ID1 | name=ID2 | name=ID3) (ref=[SingleCrossReference|ID1] | ref=[SingleCrossReference|ID2] | ref=[SingleCrossReference|ID3]))
-	 *
-	 * Features:
-	 *    name[0, 3]
-	 *    ref[0, 3]
 	 */
 	protected void sequence_SingleCrossReference(EObject context, SingleCrossReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1281,9 +546,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (val=DefEnum1 | val=DefEnum2 | val=DefEnum3)
-	 *
-	 * Features:
-	 *    val[0, 3]
 	 */
 	protected void sequence_SingleEnum(EObject context, SingleEnum semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1293,9 +555,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (val='kw1' | val='kw2' | val='kw3' | val=ID)
-	 *
-	 * Features:
-	 *    val[0, 4]
 	 */
 	protected void sequence_SingleKeywordsOrID(EObject context, SingleKeywordsOrID semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1305,9 +564,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (val='kw1' | val='kw2' | val='kw3')
-	 *
-	 * Features:
-	 *    val[0, 3]
 	 */
 	protected void sequence_SingleKeywords(EObject context, SingleKeywords semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1317,9 +573,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (val=ID1 | val=ID2)
-	 *
-	 * Features:
-	 *    val[0, 2]
 	 */
 	protected void sequence_SingleTerminals(EObject context, SingleTerminals semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1329,9 +582,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     val=ID
-	 *
-	 * Features:
-	 *    val[1, 1]
 	 */
 	protected void sequence_UnorderedAlternativeVal2(EObject context, UnorderedAlternativeVal2 semanticObject) {
 		if(errorAcceptor != null) {
@@ -1348,9 +598,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     val=ID
-	 *
-	 * Features:
-	 *    val[1, 1]
 	 */
 	protected void sequence_UnorderedAlternativeVal(EObject context, UnorderedAlternativeVal semanticObject) {
 		if(errorAcceptor != null) {
@@ -1367,12 +614,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     ((val1+=ID | val2+=INT | val3+=UnorderedAlternativeVal | val4+=UnorderedAlternativeValDelegate)*)
-	 *
-	 * Features:
-	 *    val1[0, *]
-	 *    val2[0, *]
-	 *    val3[0, *]
-	 *    val4[0, *]
 	 */
 	protected void sequence_UnorderedAlternative(EObject context, UnorderedAlternative semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1382,11 +623,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (val1?='kw1'? val2?='kw2'? val3?='kw3'?)
-	 *
-	 * Features:
-	 *    val1[0, 1]
-	 *    val2[0, 1]
-	 *    val3[0, 1]
 	 */
 	protected void sequence_UnorderedGroupBoolean(EObject context, UnorderedGroupBoolean semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1396,11 +632,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (val1=ID? va2=ID? val3=ID?)
-	 *
-	 * Features:
-	 *    val1[0, 1]
-	 *    va2[0, 1]
-	 *    val3[0, 1]
 	 */
 	protected void sequence_UnorderedGroupOptional(EObject context, UnorderedGroupOptional semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1410,9 +641,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     val=ID
-	 *
-	 * Features:
-	 *    val[1, 1]
 	 */
 	protected void sequence_UnorderedGroupVal2(EObject context, UnorderedGroupVal2 semanticObject) {
 		if(errorAcceptor != null) {
@@ -1429,9 +657,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     val=ID
-	 *
-	 * Features:
-	 *    val[1, 1]
 	 */
 	protected void sequence_UnorderedGroupVal(EObject context, UnorderedGroupVal semanticObject) {
 		if(errorAcceptor != null) {
@@ -1448,12 +673,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (val1=ID val2=INT val3=UnorderedGroupVal val4=UnorderedGroupValDelegate)
-	 *
-	 * Features:
-	 *    val1[1, 1]
-	 *    val2[1, 1]
-	 *    val3[1, 1]
-	 *    val4[1, 1]
 	 */
 	protected void sequence_UnorderedGroup(EObject context, UnorderedGroup semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

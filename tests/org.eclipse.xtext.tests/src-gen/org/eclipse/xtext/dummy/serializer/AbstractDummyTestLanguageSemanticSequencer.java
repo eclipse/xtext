@@ -62,11 +62,6 @@ public class AbstractDummyTestLanguageSemanticSequencer extends AbstractSemantic
 	/**
 	 * Constraint:
 	 *     (optional?='optional'? name=ID descriptions+=STRING*)
-	 *
-	 * Features:
-	 *    optional[0, 1]
-	 *    name[1, 1]
-	 *    descriptions[0, *]
 	 */
 	protected void sequence_Element(EObject context, Element semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -76,9 +71,6 @@ public class AbstractDummyTestLanguageSemanticSequencer extends AbstractSemantic
 	/**
 	 * Constraint:
 	 *     elements+=Element*
-	 *
-	 * Features:
-	 *    elements[0, *]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

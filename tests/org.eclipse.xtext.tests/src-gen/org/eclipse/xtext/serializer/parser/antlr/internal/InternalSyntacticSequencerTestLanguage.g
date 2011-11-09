@@ -213,9 +213,9 @@ ruleModel returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getModelAccess().getX8AmbiguousTransitionParserRuleCall_7_0()); 
+	        newCompositeNode(grammarAccess.getModelAccess().getX8OptionalSingleTransitionParserRuleCall_7_0()); 
 	    }
-		lv_x8_7_0=ruleAmbiguousTransition		{
+		lv_x8_7_0=ruleOptionalSingleTransition		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getModelRule());
 	        }
@@ -223,7 +223,64 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x8",
         		lv_x8_7_0, 
-        		"AmbiguousTransition");
+        		"OptionalSingleTransition");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getX9OptionalManyTransitionParserRuleCall_8_0()); 
+	    }
+		lv_x9_8_0=ruleOptionalManyTransition		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"x9",
+        		lv_x9_8_0, 
+        		"OptionalManyTransition");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getX10MandatoryManyTransitionParserRuleCall_9_0()); 
+	    }
+		lv_x10_9_0=ruleMandatoryManyTransition		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"x10",
+        		lv_x10_9_0, 
+        		"MandatoryManyTransition");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getX11AlternativeTransitionParserRuleCall_10_0()); 
+	    }
+		lv_x11_10_0=ruleAlternativeTransition		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"x11",
+        		lv_x11_10_0, 
+        		"AlternativeTransition");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1122,9 +1179,9 @@ ruleUnassignedDatatype returns [EObject current=null]
 )
 )
     { 
-        newCompositeNode(grammarAccess.getUnassignedDatatypeAccess().getUnassignedDatatypeRuleParserRuleCall_2()); 
+        newCompositeNode(grammarAccess.getUnassignedDatatypeAccess().getKW1ParserRuleCall_2()); 
     }
-ruleUnassignedDatatypeRule
+ruleKW1
     { 
         afterParserOrEnumRuleCall();
     }
@@ -1135,69 +1192,245 @@ ruleUnassignedDatatypeRule
 
 
 
-// Entry rule entryRuleUnassignedDatatypeRule
-entryRuleUnassignedDatatypeRule returns [String current=null] 
+// Entry rule entryRuleKW1
+entryRuleKW1 returns [String current=null] 
 	:
-	{ newCompositeNode(grammarAccess.getUnassignedDatatypeRuleRule()); } 
-	 iv_ruleUnassignedDatatypeRule=ruleUnassignedDatatypeRule 
-	 { $current=$iv_ruleUnassignedDatatypeRule.current.getText(); }  
+	{ newCompositeNode(grammarAccess.getKW1Rule()); } 
+	 iv_ruleKW1=ruleKW1 
+	 { $current=$iv_ruleKW1.current.getText(); }  
 	 EOF 
 ;
 
-// Rule UnassignedDatatypeRule
-ruleUnassignedDatatypeRule returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+// Rule KW1
+ruleKW1 returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-
+(
 	kw='kw1' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getUnassignedDatatypeRuleAccess().getKw1Keyword()); 
+        newLeafNode(kw, grammarAccess.getKW1Access().getKw1Keyword_0()); 
     }
 
+    |(
+	kw='matched' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getKW1Access().getMatchedKeyword_1_0()); 
+    }
+(    this_INT_2=RULE_INT    {
+		$current.merge(this_INT_2);
+    }
+
+    { 
+    newLeafNode(this_INT_2, grammarAccess.getKW1Access().getINTTerminalRuleCall_1_1()); 
+    }
+)?))
     ;
 
 
 
 
 
-// Entry rule entryRuleAmbiguousTransition
-entryRuleAmbiguousTransition returns [EObject current=null] 
+// Entry rule entryRuleOptionalSingleTransition
+entryRuleOptionalSingleTransition returns [EObject current=null] 
 	:
-	{ newCompositeNode(grammarAccess.getAmbiguousTransitionRule()); }
-	 iv_ruleAmbiguousTransition=ruleAmbiguousTransition 
-	 { $current=$iv_ruleAmbiguousTransition.current; } 
+	{ newCompositeNode(grammarAccess.getOptionalSingleTransitionRule()); }
+	 iv_ruleOptionalSingleTransition=ruleOptionalSingleTransition 
+	 { $current=$iv_ruleOptionalSingleTransition.current; } 
 	 EOF 
 ;
 
-// Rule AmbiguousTransition
-ruleAmbiguousTransition returns [EObject current=null] 
+// Rule OptionalSingleTransition
+ruleOptionalSingleTransition returns [EObject current=null] 
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
 (	otherlv_0='#8' 
     {
-    	newLeafNode(otherlv_0, grammarAccess.getAmbiguousTransitionAccess().getNumberSignDigitEightKeyword_0());
+    	newLeafNode(otherlv_0, grammarAccess.getOptionalSingleTransitionAccess().getNumberSignDigitEightKeyword_0());
     }
-(	otherlv_1='kw1' 
-    {
-    	newLeafNode(otherlv_1, grammarAccess.getAmbiguousTransitionAccess().getKw1Keyword_1());
+(
+    { 
+        newCompositeNode(grammarAccess.getOptionalSingleTransitionAccess().getKW1ParserRuleCall_1()); 
+    }
+ruleKW1
+    { 
+        afterParserOrEnumRuleCall();
     }
 )?(
 (
 		lv_val_2_0=RULE_ID
 		{
-			newLeafNode(lv_val_2_0, grammarAccess.getAmbiguousTransitionAccess().getValIDTerminalRuleCall_2_0()); 
+			newLeafNode(lv_val_2_0, grammarAccess.getOptionalSingleTransitionAccess().getValIDTerminalRuleCall_2_0()); 
 		}
 		{
 	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getAmbiguousTransitionRule());
+	            $current = createModelElement(grammarAccess.getOptionalSingleTransitionRule());
 	        }
        		setWithLastConsumed(
        			$current, 
        			"val",
         		lv_val_2_0, 
+        		"ID");
+	    }
+
+)
+))
+;
+
+
+
+
+
+// Entry rule entryRuleOptionalManyTransition
+entryRuleOptionalManyTransition returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getOptionalManyTransitionRule()); }
+	 iv_ruleOptionalManyTransition=ruleOptionalManyTransition 
+	 { $current=$iv_ruleOptionalManyTransition.current; } 
+	 EOF 
+;
+
+// Rule OptionalManyTransition
+ruleOptionalManyTransition returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='#9' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getOptionalManyTransitionAccess().getNumberSignDigitNineKeyword_0());
+    }
+(
+    { 
+        newCompositeNode(grammarAccess.getOptionalManyTransitionAccess().getKW1ParserRuleCall_1()); 
+    }
+ruleKW1
+    { 
+        afterParserOrEnumRuleCall();
+    }
+)*(
+(
+		lv_val_2_0=RULE_ID
+		{
+			newLeafNode(lv_val_2_0, grammarAccess.getOptionalManyTransitionAccess().getValIDTerminalRuleCall_2_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getOptionalManyTransitionRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"val",
+        		lv_val_2_0, 
+        		"ID");
+	    }
+
+)
+))
+;
+
+
+
+
+
+// Entry rule entryRuleMandatoryManyTransition
+entryRuleMandatoryManyTransition returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getMandatoryManyTransitionRule()); }
+	 iv_ruleMandatoryManyTransition=ruleMandatoryManyTransition 
+	 { $current=$iv_ruleMandatoryManyTransition.current; } 
+	 EOF 
+;
+
+// Rule MandatoryManyTransition
+ruleMandatoryManyTransition returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='#10' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getMandatoryManyTransitionAccess().getNumberSignDigitOneDigitZeroKeyword_0());
+    }
+(
+    { 
+        newCompositeNode(grammarAccess.getMandatoryManyTransitionAccess().getKW1ParserRuleCall_1()); 
+    }
+ruleKW1
+    { 
+        afterParserOrEnumRuleCall();
+    }
+)+(
+(
+		lv_val_2_0=RULE_ID
+		{
+			newLeafNode(lv_val_2_0, grammarAccess.getMandatoryManyTransitionAccess().getValIDTerminalRuleCall_2_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getMandatoryManyTransitionRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"val",
+        		lv_val_2_0, 
+        		"ID");
+	    }
+
+)
+))
+;
+
+
+
+
+
+// Entry rule entryRuleAlternativeTransition
+entryRuleAlternativeTransition returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getAlternativeTransitionRule()); }
+	 iv_ruleAlternativeTransition=ruleAlternativeTransition 
+	 { $current=$iv_ruleAlternativeTransition.current; } 
+	 EOF 
+;
+
+// Rule AlternativeTransition
+ruleAlternativeTransition returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='#11' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getAlternativeTransitionAccess().getNumberSignDigitOneDigitOneKeyword_0());
+    }
+(
+    { 
+        newCompositeNode(grammarAccess.getAlternativeTransitionAccess().getKW1ParserRuleCall_1_0()); 
+    }
+ruleKW1
+    { 
+        afterParserOrEnumRuleCall();
+    }
+
+    |	otherlv_2='kw2' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getAlternativeTransitionAccess().getKw2Keyword_1_1());
+    }
+)(
+(
+		lv_val_3_0=RULE_ID
+		{
+			newLeafNode(lv_val_3_0, grammarAccess.getAlternativeTransitionAccess().getValIDTerminalRuleCall_2_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getAlternativeTransitionRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"val",
+        		lv_val_3_0, 
         		"ID");
 	    }
 

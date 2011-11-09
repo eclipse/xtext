@@ -15,7 +15,13 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="x7" eType="#//UnassignedDatatype"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="x8" eType="#//AmbiguousTransition"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x8" eType="#//OptionalSingleTransition"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x9" eType="#//OptionalManyTransition"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x10" eType="#//MandatoryManyTransition"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x11" eType="#//AlternativeTransition"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MandatoryKeywords">
@@ -43,7 +49,16 @@
   <eClassifiers xsi:type="ecore:EClass" name="UnassignedDatatype">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AmbiguousTransition">
+  <eClassifiers xsi:type="ecore:EClass" name="OptionalSingleTransition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OptionalManyTransition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MandatoryManyTransition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AlternativeTransition">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Add0" eSuperTypes="#//Exp0">

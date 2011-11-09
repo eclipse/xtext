@@ -84,10 +84,6 @@ public class AbstractTestLanguageSemanticSequencer extends AbstractSemanticSeque
 	/**
 	 * Constraint:
 	 *     (optionalKeyword?='optional'? name=ID)
-	 *
-	 * Features:
-	 *    optionalKeyword[0, 1]
-	 *    name[1, 1]
 	 */
 	protected void sequence_ChoiceRule(EObject context, ChoiceElement semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -97,9 +93,6 @@ public class AbstractTestLanguageSemanticSequencer extends AbstractSemanticSeque
 	/**
 	 * Constraint:
 	 *     multiFeature+=AbstractRule*
-	 *
-	 * Features:
-	 *    multiFeature[0, *]
 	 */
 	protected void sequence_EntryRule(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -109,9 +102,6 @@ public class AbstractTestLanguageSemanticSequencer extends AbstractSemanticSeque
 	/**
 	 * Constraint:
 	 *     (actionFeature+=ReducibleRule_ReducibleComposite_2_0 actionFeature+=TerminalRule)
-	 *
-	 * Features:
-	 *    actionFeature[2, 2]
 	 */
 	protected void sequence_ReducibleRule(EObject context, ReducibleComposite semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -121,9 +111,6 @@ public class AbstractTestLanguageSemanticSequencer extends AbstractSemanticSeque
 	/**
 	 * Constraint:
 	 *     stringFeature=STRING
-	 *
-	 * Features:
-	 *    stringFeature[1, 1]
 	 */
 	protected void sequence_TerminalRule(EObject context, TerminalElement semanticObject) {
 		if(errorAcceptor != null) {

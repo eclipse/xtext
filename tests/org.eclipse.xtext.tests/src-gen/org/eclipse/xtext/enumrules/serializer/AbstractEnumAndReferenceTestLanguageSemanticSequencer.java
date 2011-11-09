@@ -58,11 +58,6 @@ public class AbstractEnumAndReferenceTestLanguageSemanticSequencer extends Abstr
 	/**
 	 * Constraint:
 	 *     (type=KindOfKeyword name=ID ref=[EntityWithEnumAndReference|ID])
-	 *
-	 * Features:
-	 *    type[1, 1]
-	 *    name[1, 1]
-	 *    ref[1, 1]
 	 */
 	protected void sequence_EntityWithEnumAndReference(EObject context, EntityWithEnumAndReference semanticObject) {
 		if(errorAcceptor != null) {

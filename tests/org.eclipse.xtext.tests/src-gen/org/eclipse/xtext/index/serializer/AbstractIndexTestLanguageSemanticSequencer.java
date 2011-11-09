@@ -99,9 +99,6 @@ public class AbstractIndexTestLanguageSemanticSequencer extends AbstractSemantic
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_Datatype(EObject context, Datatype semanticObject) {
 		if(errorAcceptor != null) {
@@ -118,10 +115,6 @@ public class AbstractIndexTestLanguageSemanticSequencer extends AbstractSemantic
 	/**
 	 * Constraint:
 	 *     (name=ID properties+=Property*)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    properties[0, *]
 	 */
 	protected void sequence_Entity(EObject context, Entity semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -131,9 +124,6 @@ public class AbstractIndexTestLanguageSemanticSequencer extends AbstractSemantic
 	/**
 	 * Constraint:
 	 *     elements+=Element*
-	 *
-	 * Features:
-	 *    elements[0, *]
 	 */
 	protected void sequence_File(EObject context, File semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -143,9 +133,6 @@ public class AbstractIndexTestLanguageSemanticSequencer extends AbstractSemantic
 	/**
 	 * Constraint:
 	 *     importedNamespace=QualifiedNameWithWildCard
-	 *
-	 * Features:
-	 *    importedNamespace[1, 1]
 	 */
 	protected void sequence_Import(EObject context, Import semanticObject) {
 		if(errorAcceptor != null) {
@@ -162,10 +149,6 @@ public class AbstractIndexTestLanguageSemanticSequencer extends AbstractSemantic
 	/**
 	 * Constraint:
 	 *     (name=QualifiedName elements+=Element*)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    elements[0, *]
 	 */
 	protected void sequence_Namespace(EObject context, Namespace semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -175,10 +158,6 @@ public class AbstractIndexTestLanguageSemanticSequencer extends AbstractSemantic
 	/**
 	 * Constraint:
 	 *     (type=[Type|QualifiedName] name=ID)
-	 *
-	 * Features:
-	 *    type[1, 1]
-	 *    name[1, 1]
 	 */
 	protected void sequence_Property(EObject context, Property semanticObject) {
 		if(errorAcceptor != null) {

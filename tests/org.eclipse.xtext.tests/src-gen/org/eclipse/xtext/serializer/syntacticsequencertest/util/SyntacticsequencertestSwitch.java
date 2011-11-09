@@ -158,10 +158,31 @@ public class SyntacticsequencertestSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case SyntacticsequencertestPackage.AMBIGUOUS_TRANSITION:
+      case SyntacticsequencertestPackage.OPTIONAL_SINGLE_TRANSITION:
       {
-        AmbiguousTransition ambiguousTransition = (AmbiguousTransition)theEObject;
-        T result = caseAmbiguousTransition(ambiguousTransition);
+        OptionalSingleTransition optionalSingleTransition = (OptionalSingleTransition)theEObject;
+        T result = caseOptionalSingleTransition(optionalSingleTransition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SyntacticsequencertestPackage.OPTIONAL_MANY_TRANSITION:
+      {
+        OptionalManyTransition optionalManyTransition = (OptionalManyTransition)theEObject;
+        T result = caseOptionalManyTransition(optionalManyTransition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SyntacticsequencertestPackage.MANDATORY_MANY_TRANSITION:
+      {
+        MandatoryManyTransition mandatoryManyTransition = (MandatoryManyTransition)theEObject;
+        T result = caseMandatoryManyTransition(mandatoryManyTransition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SyntacticsequencertestPackage.ALTERNATIVE_TRANSITION:
+      {
+        AlternativeTransition alternativeTransition = (AlternativeTransition)theEObject;
+        T result = caseAlternativeTransition(alternativeTransition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -370,17 +391,65 @@ public class SyntacticsequencertestSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Ambiguous Transition</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Optional Single Transition</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Ambiguous Transition</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Optional Single Transition</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseAmbiguousTransition(AmbiguousTransition object)
+  public T caseOptionalSingleTransition(OptionalSingleTransition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Optional Many Transition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Optional Many Transition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseOptionalManyTransition(OptionalManyTransition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Mandatory Many Transition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Mandatory Many Transition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMandatoryManyTransition(MandatoryManyTransition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Alternative Transition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Alternative Transition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAlternativeTransition(AlternativeTransition object)
   {
     return null;
   }

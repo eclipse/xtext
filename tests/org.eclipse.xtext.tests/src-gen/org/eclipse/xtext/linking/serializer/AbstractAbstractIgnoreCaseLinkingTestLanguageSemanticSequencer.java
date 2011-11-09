@@ -62,11 +62,6 @@ public class AbstractAbstractIgnoreCaseLinkingTestLanguageSemanticSequencer exte
 	/**
 	 * Constraint:
 	 *     (name=ID reference=[Element|ID]? elements+=Element*)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    reference[0, 1]
-	 *    elements[0, *]
 	 */
 	protected void sequence_Element(EObject context, Element semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -76,9 +71,6 @@ public class AbstractAbstractIgnoreCaseLinkingTestLanguageSemanticSequencer exte
 	/**
 	 * Constraint:
 	 *     elements+=Element+
-	 *
-	 * Features:
-	 *    elements[1, *]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

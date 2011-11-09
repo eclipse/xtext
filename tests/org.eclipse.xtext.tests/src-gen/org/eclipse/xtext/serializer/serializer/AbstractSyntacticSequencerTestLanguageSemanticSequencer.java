@@ -17,12 +17,15 @@ import org.eclipse.xtext.serializer.services.SyntacticSequencerTestLanguageGramm
 import org.eclipse.xtext.serializer.syntacticsequencertest.Add0;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Add1;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Add2;
-import org.eclipse.xtext.serializer.syntacticsequencertest.AmbiguousTransition;
+import org.eclipse.xtext.serializer.syntacticsequencertest.AlternativeTransition;
 import org.eclipse.xtext.serializer.syntacticsequencertest.BooleanAlternative;
 import org.eclipse.xtext.serializer.syntacticsequencertest.BooleanAlternativeLiteral;
 import org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryKeywords;
+import org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryManyTransition;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Model;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Mult2;
+import org.eclipse.xtext.serializer.syntacticsequencertest.OptionalManyTransition;
+import org.eclipse.xtext.serializer.syntacticsequencertest.OptionalSingleTransition;
 import org.eclipse.xtext.serializer.syntacticsequencertest.SingleCrossReference;
 import org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage;
 import org.eclipse.xtext.serializer.syntacticsequencertest.UnassignedDatatype;
@@ -86,9 +89,9 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 					return; 
 				}
 				else break;
-			case SyntacticsequencertestPackage.AMBIGUOUS_TRANSITION:
-				if(context == grammarAccess.getAmbiguousTransitionRule()) {
-					sequence_AmbiguousTransition(context, (AmbiguousTransition) semanticObject); 
+			case SyntacticsequencertestPackage.ALTERNATIVE_TRANSITION:
+				if(context == grammarAccess.getAlternativeTransitionRule()) {
+					sequence_AlternativeTransition(context, (AlternativeTransition) semanticObject); 
 					return; 
 				}
 				else break;
@@ -110,6 +113,12 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 					return; 
 				}
 				else break;
+			case SyntacticsequencertestPackage.MANDATORY_MANY_TRANSITION:
+				if(context == grammarAccess.getMandatoryManyTransitionRule()) {
+					sequence_MandatoryManyTransition(context, (MandatoryManyTransition) semanticObject); 
+					return; 
+				}
+				else break;
 			case SyntacticsequencertestPackage.MODEL:
 				if(context == grammarAccess.getModelRule()) {
 					sequence_Model(context, (Model) semanticObject); 
@@ -124,6 +133,18 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 				   context == grammarAccess.getMultiplication2Access().getMult2LeftAction_1_0() ||
 				   context == grammarAccess.getPrim2Rule()) {
 					sequence_Multiplication2(context, (Mult2) semanticObject); 
+					return; 
+				}
+				else break;
+			case SyntacticsequencertestPackage.OPTIONAL_MANY_TRANSITION:
+				if(context == grammarAccess.getOptionalManyTransitionRule()) {
+					sequence_OptionalManyTransition(context, (OptionalManyTransition) semanticObject); 
+					return; 
+				}
+				else break;
+			case SyntacticsequencertestPackage.OPTIONAL_SINGLE_TRANSITION:
+				if(context == grammarAccess.getOptionalSingleTransitionRule()) {
+					sequence_OptionalSingleTransition(context, (OptionalSingleTransition) semanticObject); 
 					return; 
 				}
 				else break;
@@ -175,10 +196,6 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	/**
 	 * Constraint:
 	 *     (left=Addition0_Add0_1_0 right=Prim0)
-	 *
-	 * Features:
-	 *    left[1, 1]
-	 *    right[1, 1]
 	 */
 	protected void sequence_Addition0(EObject context, Add0 semanticObject) {
 		if(errorAcceptor != null) {
@@ -198,10 +215,6 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	/**
 	 * Constraint:
 	 *     (left=Addition1_Add1_1_0 right=Prim1)
-	 *
-	 * Features:
-	 *    left[1, 1]
-	 *    right[1, 1]
 	 */
 	protected void sequence_Addition1(EObject context, Add1 semanticObject) {
 		if(errorAcceptor != null) {
@@ -221,10 +234,6 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	/**
 	 * Constraint:
 	 *     (left=Addition2_Add2_1_0 right=Multiplication2)
-	 *
-	 * Features:
-	 *    left[1, 1]
-	 *    right[1, 1]
 	 */
 	protected void sequence_Addition2(EObject context, Add2 semanticObject) {
 		if(errorAcceptor != null) {
@@ -244,18 +253,15 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	/**
 	 * Constraint:
 	 *     val=ID
-	 *
-	 * Features:
-	 *    val[1, 1]
 	 */
-	protected void sequence_AmbiguousTransition(EObject context, AmbiguousTransition semanticObject) {
+	protected void sequence_AlternativeTransition(EObject context, AlternativeTransition semanticObject) {
 		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.AMBIGUOUS_TRANSITION__VAL) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.AMBIGUOUS_TRANSITION__VAL));
+			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.ALTERNATIVE_TRANSITION__VAL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.ALTERNATIVE_TRANSITION__VAL));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getAmbiguousTransitionAccess().getValIDTerminalRuleCall_2_0(), semanticObject.getVal());
+		feeder.accept(grammarAccess.getAlternativeTransitionAccess().getValIDTerminalRuleCall_2_0(), semanticObject.getVal());
 		feeder.finish();
 	}
 	
@@ -263,9 +269,6 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	/**
 	 * Constraint:
 	 *     (isTrue?='kw2'?)
-	 *
-	 * Features:
-	 *    isTrue[0, 1]
 	 */
 	protected void sequence_BooleanAlternativeLiteral(EObject context, BooleanAlternativeLiteral semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -275,9 +278,6 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	/**
 	 * Constraint:
 	 *     bool=BooleanAlternativeLiteral
-	 *
-	 * Features:
-	 *    bool[1, 1]
 	 */
 	protected void sequence_BooleanAlternative(EObject context, BooleanAlternative semanticObject) {
 		if(errorAcceptor != null) {
@@ -294,11 +294,6 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	/**
 	 * Constraint:
 	 *     (val1=ID val2=ID val3=ID)
-	 *
-	 * Features:
-	 *    val1[1, 1]
-	 *    val2[1, 1]
-	 *    val3[1, 1]
 	 */
 	protected void sequence_MandatoryKeywords(EObject context, MandatoryKeywords semanticObject) {
 		if(errorAcceptor != null) {
@@ -320,6 +315,22 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	
 	/**
 	 * Constraint:
+	 *     val=ID
+	 */
+	protected void sequence_MandatoryManyTransition(EObject context, MandatoryManyTransition semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.MANDATORY_MANY_TRANSITION__VAL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.MANDATORY_MANY_TRANSITION__VAL));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getMandatoryManyTransitionAccess().getValIDTerminalRuleCall_2_0(), semanticObject.getVal());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     (
 	 *         x1=MandatoryKeywords | 
 	 *         x2=Exp0 | 
@@ -328,74 +339,11 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	 *         x5=SingleCrossReference | 
 	 *         x6=BooleanAlternative | 
 	 *         x7=UnassignedDatatype | 
-	 *         x8=AmbiguousTransition
+	 *         x8=OptionalSingleTransition | 
+	 *         x9=OptionalManyTransition | 
+	 *         x10=MandatoryManyTransition | 
+	 *         x11=AlternativeTransition
 	 *     )
-	 *
-	 * Features:
-	 *    x1[0, 1]
-	 *         EXCLUDE_IF_SET x2
-	 *         EXCLUDE_IF_SET x3
-	 *         EXCLUDE_IF_SET x4
-	 *         EXCLUDE_IF_SET x5
-	 *         EXCLUDE_IF_SET x6
-	 *         EXCLUDE_IF_SET x7
-	 *         EXCLUDE_IF_SET x8
-	 *    x2[0, 1]
-	 *         EXCLUDE_IF_SET x1
-	 *         EXCLUDE_IF_SET x3
-	 *         EXCLUDE_IF_SET x4
-	 *         EXCLUDE_IF_SET x5
-	 *         EXCLUDE_IF_SET x6
-	 *         EXCLUDE_IF_SET x7
-	 *         EXCLUDE_IF_SET x8
-	 *    x3[0, 1]
-	 *         EXCLUDE_IF_SET x1
-	 *         EXCLUDE_IF_SET x2
-	 *         EXCLUDE_IF_SET x4
-	 *         EXCLUDE_IF_SET x5
-	 *         EXCLUDE_IF_SET x6
-	 *         EXCLUDE_IF_SET x7
-	 *         EXCLUDE_IF_SET x8
-	 *    x4[0, 1]
-	 *         EXCLUDE_IF_SET x1
-	 *         EXCLUDE_IF_SET x2
-	 *         EXCLUDE_IF_SET x3
-	 *         EXCLUDE_IF_SET x5
-	 *         EXCLUDE_IF_SET x6
-	 *         EXCLUDE_IF_SET x7
-	 *         EXCLUDE_IF_SET x8
-	 *    x5[0, 1]
-	 *         EXCLUDE_IF_SET x1
-	 *         EXCLUDE_IF_SET x2
-	 *         EXCLUDE_IF_SET x3
-	 *         EXCLUDE_IF_SET x4
-	 *         EXCLUDE_IF_SET x6
-	 *         EXCLUDE_IF_SET x7
-	 *         EXCLUDE_IF_SET x8
-	 *    x6[0, 1]
-	 *         EXCLUDE_IF_SET x1
-	 *         EXCLUDE_IF_SET x2
-	 *         EXCLUDE_IF_SET x3
-	 *         EXCLUDE_IF_SET x4
-	 *         EXCLUDE_IF_SET x5
-	 *         EXCLUDE_IF_SET x7
-	 *         EXCLUDE_IF_SET x8
-	 *    x7[0, 1]
-	 *         EXCLUDE_IF_SET x1
-	 *         EXCLUDE_IF_SET x2
-	 *         EXCLUDE_IF_SET x3
-	 *         EXCLUDE_IF_SET x4
-	 *         EXCLUDE_IF_SET x5
-	 *         EXCLUDE_IF_SET x6
-	 *         EXCLUDE_IF_SET x8
-	 *    x8[0, 1]
-	 *         EXCLUDE_IF_SET x1
-	 *         EXCLUDE_IF_SET x2
-	 *         EXCLUDE_IF_SET x3
-	 *         EXCLUDE_IF_SET x4
-	 *         EXCLUDE_IF_SET x5
-	 *         EXCLUDE_IF_SET x6
-	 *         EXCLUDE_IF_SET x7
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -405,10 +353,6 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	/**
 	 * Constraint:
 	 *     (left=Multiplication2_Mult2_1_0 right=Prim2)
-	 *
-	 * Features:
-	 *    left[1, 1]
-	 *    right[1, 1]
 	 */
 	protected void sequence_Multiplication2(EObject context, Mult2 semanticObject) {
 		if(errorAcceptor != null) {
@@ -427,10 +371,39 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	
 	/**
 	 * Constraint:
+	 *     val=ID
+	 */
+	protected void sequence_OptionalManyTransition(EObject context, OptionalManyTransition semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.OPTIONAL_MANY_TRANSITION__VAL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.OPTIONAL_MANY_TRANSITION__VAL));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getOptionalManyTransitionAccess().getValIDTerminalRuleCall_2_0(), semanticObject.getVal());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     val=ID
+	 */
+	protected void sequence_OptionalSingleTransition(EObject context, OptionalSingleTransition semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.OPTIONAL_SINGLE_TRANSITION__VAL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.OPTIONAL_SINGLE_TRANSITION__VAL));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getOptionalSingleTransitionAccess().getValIDTerminalRuleCall_2_0(), semanticObject.getVal());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_Prim0(EObject context, Val0 semanticObject) {
 		if(errorAcceptor != null) {
@@ -447,9 +420,6 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_Prim1(EObject context, Val1 semanticObject) {
 		if(errorAcceptor != null) {
@@ -466,9 +436,6 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_Prim2(EObject context, Val2 semanticObject) {
 		if(errorAcceptor != null) {
@@ -491,13 +458,6 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	 *         ref3=[SingleCrossReference|ID]? 
 	 *         ref4=[SingleCrossReference|ID]?
 	 *     )
-	 *
-	 * Features:
-	 *    name[0, 2]
-	 *    ref1[0, 1]
-	 *    ref2[0, 1]
-	 *    ref3[0, 1]
-	 *    ref4[0, 1]
 	 */
 	protected void sequence_SingleCrossReference(EObject context, SingleCrossReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -507,9 +467,6 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	/**
 	 * Constraint:
 	 *     val=ID
-	 *
-	 * Features:
-	 *    val[1, 1]
 	 */
 	protected void sequence_UnassignedDatatype(EObject context, UnassignedDatatype semanticObject) {
 		if(errorAcceptor != null) {

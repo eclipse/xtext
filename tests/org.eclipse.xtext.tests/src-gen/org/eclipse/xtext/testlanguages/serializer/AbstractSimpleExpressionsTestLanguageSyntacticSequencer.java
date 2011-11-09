@@ -24,7 +24,7 @@ public class AbstractSimpleExpressionsTestLanguageSyntacticSequencer extends Abs
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (SimpleExpressionsTestLanguageGrammarAccess) access;
 		match_Parens_LeftParenthesisKeyword_0_a = new TokenAlias(true, true, grammarAccess.getParensAccess().getLeftParenthesisKeyword_0());
-		match_Parens_LeftParenthesisKeyword_0_p = new TokenAlias(false, true, grammarAccess.getParensAccess().getLeftParenthesisKeyword_0());
+		match_Parens_LeftParenthesisKeyword_0_p = new TokenAlias(true, false, grammarAccess.getParensAccess().getLeftParenthesisKeyword_0());
 	}
 	
 	@Override

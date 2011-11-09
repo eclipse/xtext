@@ -48,11 +48,11 @@ public class AbstractBug287988TestLanguageSyntacticSequencer extends AbstractSyn
 	 * Syntax:
 	 *     (
 	     'rulecall' | 
-	     'inlinedActions' | 
-	     'rulecall2' | 
-	     'simple' | 
 	     'actions' | 
-	     'rulecall3'
+	     'rulecall2' | 
+	     'rulecall3' | 
+	     'inlinedActions' | 
+	     'simple'
 	 )
 	 */
 	protected void emit_Model_ActionsKeyword_0_0_or_InlinedActionsKeyword_5_0_or_Rulecall2Keyword_3_0_or_Rulecall3Keyword_4_0_or_RulecallKeyword_2_0_or_SimpleKeyword_1_0(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {

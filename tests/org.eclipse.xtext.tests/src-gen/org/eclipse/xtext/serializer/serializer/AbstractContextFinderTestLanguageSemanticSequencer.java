@@ -174,9 +174,6 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     attr1=ID
-	 *
-	 * Features:
-	 *    attr1[1, 1]
 	 */
 	protected void sequence_AttributeExclusionTest1(EObject context, AttributeExclusionTest semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -186,9 +183,6 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     attr2=ID
-	 *
-	 * Features:
-	 *    attr2[1, 1]
 	 */
 	protected void sequence_AttributeExclusionTest2(EObject context, AttributeExclusionTest semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -198,8 +192,6 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     {Model}
-	 *
-	 * Features:
 	 */
 	protected void sequence_Model2(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -223,93 +215,6 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	 *         valueExclusion=ValueExclusionTest1 | 
 	 *         valueExclusion=ValueExclusionTest2
 	 *     )
-	 *
-	 * Features:
-	 *    model[0, 1]
-	 *         EXCLUDE_IF_SET attributeExclusion
-	 *         EXCLUDE_IF_SET attributeExclusion
-	 *         EXCLUDE_IF_SET nestedType
-	 *         EXCLUDE_IF_SET nestedType
-	 *         EXCLUDE_IF_SET nestedTypeRecursiveTest2
-	 *         EXCLUDE_IF_SET nestedTypeRecursiveTest2
-	 *         EXCLUDE_IF_SET parentRef
-	 *         EXCLUDE_IF_SET parentRef
-	 *         EXCLUDE_IF_SET quantityExclusion
-	 *         EXCLUDE_IF_SET quantityExclusion
-	 *         EXCLUDE_IF_SET valueExclusion
-	 *         EXCLUDE_IF_SET valueExclusion
-	 *    attributeExclusion[0, 2]
-	 *         EXCLUDE_IF_SET model
-	 *         EXCLUDE_IF_SET nestedType
-	 *         EXCLUDE_IF_SET nestedType
-	 *         EXCLUDE_IF_SET nestedTypeRecursiveTest2
-	 *         EXCLUDE_IF_SET nestedTypeRecursiveTest2
-	 *         EXCLUDE_IF_SET parentRef
-	 *         EXCLUDE_IF_SET parentRef
-	 *         EXCLUDE_IF_SET quantityExclusion
-	 *         EXCLUDE_IF_SET quantityExclusion
-	 *         EXCLUDE_IF_SET valueExclusion
-	 *         EXCLUDE_IF_SET valueExclusion
-	 *    nestedType[0, 2]
-	 *         EXCLUDE_IF_SET model
-	 *         EXCLUDE_IF_SET attributeExclusion
-	 *         EXCLUDE_IF_SET attributeExclusion
-	 *         EXCLUDE_IF_SET nestedTypeRecursiveTest2
-	 *         EXCLUDE_IF_SET nestedTypeRecursiveTest2
-	 *         EXCLUDE_IF_SET parentRef
-	 *         EXCLUDE_IF_SET parentRef
-	 *         EXCLUDE_IF_SET quantityExclusion
-	 *         EXCLUDE_IF_SET quantityExclusion
-	 *         EXCLUDE_IF_SET valueExclusion
-	 *         EXCLUDE_IF_SET valueExclusion
-	 *    nestedTypeRecursiveTest2[0, 2]
-	 *         EXCLUDE_IF_SET model
-	 *         EXCLUDE_IF_SET attributeExclusion
-	 *         EXCLUDE_IF_SET attributeExclusion
-	 *         EXCLUDE_IF_SET nestedType
-	 *         EXCLUDE_IF_SET nestedType
-	 *         EXCLUDE_IF_SET parentRef
-	 *         EXCLUDE_IF_SET parentRef
-	 *         EXCLUDE_IF_SET quantityExclusion
-	 *         EXCLUDE_IF_SET quantityExclusion
-	 *         EXCLUDE_IF_SET valueExclusion
-	 *         EXCLUDE_IF_SET valueExclusion
-	 *    parentRef[0, 2]
-	 *         EXCLUDE_IF_SET model
-	 *         EXCLUDE_IF_SET attributeExclusion
-	 *         EXCLUDE_IF_SET attributeExclusion
-	 *         EXCLUDE_IF_SET nestedType
-	 *         EXCLUDE_IF_SET nestedType
-	 *         EXCLUDE_IF_SET nestedTypeRecursiveTest2
-	 *         EXCLUDE_IF_SET nestedTypeRecursiveTest2
-	 *         EXCLUDE_IF_SET quantityExclusion
-	 *         EXCLUDE_IF_SET quantityExclusion
-	 *         EXCLUDE_IF_SET valueExclusion
-	 *         EXCLUDE_IF_SET valueExclusion
-	 *    quantityExclusion[0, 2]
-	 *         EXCLUDE_IF_SET model
-	 *         EXCLUDE_IF_SET attributeExclusion
-	 *         EXCLUDE_IF_SET attributeExclusion
-	 *         EXCLUDE_IF_SET nestedType
-	 *         EXCLUDE_IF_SET nestedType
-	 *         EXCLUDE_IF_SET nestedTypeRecursiveTest2
-	 *         EXCLUDE_IF_SET nestedTypeRecursiveTest2
-	 *         EXCLUDE_IF_SET parentRef
-	 *         EXCLUDE_IF_SET parentRef
-	 *         EXCLUDE_IF_SET valueExclusion
-	 *         EXCLUDE_IF_SET valueExclusion
-	 *    valueExclusion[0, 2]
-	 *         EXCLUDE_IF_SET model
-	 *         EXCLUDE_IF_SET attributeExclusion
-	 *         EXCLUDE_IF_SET attributeExclusion
-	 *         EXCLUDE_IF_SET nestedType
-	 *         EXCLUDE_IF_SET nestedType
-	 *         EXCLUDE_IF_SET nestedTypeRecursiveTest2
-	 *         EXCLUDE_IF_SET nestedTypeRecursiveTest2
-	 *         EXCLUDE_IF_SET parentRef
-	 *         EXCLUDE_IF_SET parentRef
-	 *         EXCLUDE_IF_SET quantityExclusion
-	 *         EXCLUDE_IF_SET quantityExclusion
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -319,9 +224,6 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     val=ID
-	 *
-	 * Features:
-	 *    val[1, 1]
 	 */
 	protected void sequence_NestedTypeChild1(EObject context, NestedTypeChild1 semanticObject) {
 		if(errorAcceptor != null) {
@@ -338,9 +240,6 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     val=ID
-	 *
-	 * Features:
-	 *    val[1, 1]
 	 */
 	protected void sequence_NestedTypeChild2(EObject context, NestedTypeChild2 semanticObject) {
 		if(errorAcceptor != null) {
@@ -357,9 +256,6 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     left=NestedTypeRecursiveTest1_NestedTypeRecursiveTest_2_0
-	 *
-	 * Features:
-	 *    left[1, 1]
 	 */
 	protected void sequence_NestedTypeRecursiveTest1(EObject context, NestedTypeRecursiveTest semanticObject) {
 		if(errorAcceptor != null) {
@@ -376,8 +272,6 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     {NestedTypeRecursiveTest1}
-	 *
-	 * Features:
 	 */
 	protected void sequence_NestedTypeRecursiveTest1_NestedTypeRecursiveTest_2_0(EObject context, NestedTypeRecursiveTest1 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -387,9 +281,6 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     left=NestedTypeRecursiveTest2_NestedTypeRecursiveTest_2_0
-	 *
-	 * Features:
-	 *    left[1, 1]
 	 */
 	protected void sequence_NestedTypeRecursiveTest2(EObject context, NestedTypeRecursiveTest semanticObject) {
 		if(errorAcceptor != null) {
@@ -406,8 +297,6 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     {NestedTypeRecursiveTest2}
-	 *
-	 * Features:
 	 */
 	protected void sequence_NestedTypeRecursiveTest2_NestedTypeRecursiveTest_2_0(EObject context, NestedTypeRecursiveTest2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -417,9 +306,6 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     nested=NestedTypeChild1
-	 *
-	 * Features:
-	 *    nested[1, 1]
 	 */
 	protected void sequence_NestedTypeTest1(EObject context, NestedTypeTest semanticObject) {
 		if(errorAcceptor != null) {
@@ -436,9 +322,6 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     nested=NestedTypeChild2
-	 *
-	 * Features:
-	 *    nested[1, 1]
 	 */
 	protected void sequence_NestedTypeTest2(EObject context, NestedTypeTest semanticObject) {
 		if(errorAcceptor != null) {
@@ -455,9 +338,6 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     child1=ParentRefTestChild1
-	 *
-	 * Features:
-	 *    child1[1, 1]
 	 */
 	protected void sequence_ParentRefTest1(EObject context, ParentRefTest1 semanticObject) {
 		if(errorAcceptor != null) {
@@ -474,9 +354,6 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     child2=ParentRefTestChild2
-	 *
-	 * Features:
-	 *    child2[1, 1]
 	 */
 	protected void sequence_ParentRefTest2(EObject context, ParentRefTest2 semanticObject) {
 		if(errorAcceptor != null) {
@@ -493,9 +370,6 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     (child=ParentRefTestChild1?)
-	 *
-	 * Features:
-	 *    child[0, 1]
 	 */
 	protected void sequence_ParentRefTestChild1(EObject context, ParentRefTestChild semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -505,9 +379,6 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     (child=ParentRefTestChild2?)
-	 *
-	 * Features:
-	 *    child[0, 1]
 	 */
 	protected void sequence_ParentRefTestChild2(EObject context, ParentRefTestChild semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -517,10 +388,6 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     (attr1=ID attr2=ID?)
-	 *
-	 * Features:
-	 *    attr1[1, 1]
-	 *    attr2[0, 1]
 	 */
 	protected void sequence_QuantityExclusionTest1(EObject context, QuantityExclusionTest semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -530,10 +397,6 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     (attr1=ID? attr2=ID)
-	 *
-	 * Features:
-	 *    attr1[0, 1]
-	 *    attr2[1, 1]
 	 */
 	protected void sequence_QuantityExclusionTest2(EObject context, QuantityExclusionTest semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -543,9 +406,6 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     val=ValueExclusionTestEn1
-	 *
-	 * Features:
-	 *    val[1, 1]
 	 */
 	protected void sequence_ValueExclusionTest1(EObject context, ValueExclusionTest semanticObject) {
 		if(errorAcceptor != null) {
@@ -562,9 +422,6 @@ public class AbstractContextFinderTestLanguageSemanticSequencer extends Abstract
 	/**
 	 * Constraint:
 	 *     val=ValueExclusionTestEn2
-	 *
-	 * Features:
-	 *    val[1, 1]
 	 */
 	protected void sequence_ValueExclusionTest2(EObject context, ValueExclusionTest semanticObject) {
 		if(errorAcceptor != null) {

@@ -82,9 +82,6 @@ public class AbstractSubTestLanguageSemanticSequencer extends AbstractSemanticSe
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_AnotherSuperMain(EObject context, AnotherSuperMain semanticObject) {
 		if(errorAcceptor != null) {
@@ -101,10 +98,6 @@ public class AbstractSubTestLanguageSemanticSequencer extends AbstractSemanticSe
 	/**
 	 * Constraint:
 	 *     (superMains+=SuperMain another=AnotherSuperMain?)
-	 *
-	 * Features:
-	 *    superMains[1, 1]
-	 *    another[0, 1]
 	 */
 	protected void sequence_SubMain(EObject context, SubMain semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -114,9 +107,6 @@ public class AbstractSubTestLanguageSemanticSequencer extends AbstractSemanticSe
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_SuperMain(EObject context, SuperMain semanticObject) {
 		superSequencer.createSequence(context, semanticObject);

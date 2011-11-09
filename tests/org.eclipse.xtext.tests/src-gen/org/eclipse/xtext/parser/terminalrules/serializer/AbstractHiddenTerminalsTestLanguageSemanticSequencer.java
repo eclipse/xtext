@@ -112,9 +112,6 @@ public class AbstractHiddenTerminalsTestLanguageSemanticSequencer extends Abstra
 	/**
 	 * Constraint:
 	 *     valid?=DatatypeRule
-	 *
-	 * Features:
-	 *    valid[1, 1]
 	 */
 	protected void sequence_DatatypeHiddens(EObject context, DatatypeHiddens semanticObject) {
 		if(errorAcceptor != null) {
@@ -131,10 +128,6 @@ public class AbstractHiddenTerminalsTestLanguageSemanticSequencer extends Abstra
 	/**
 	 * Constraint:
 	 *     (space=WS called=InheritingHiddensCall)
-	 *
-	 * Features:
-	 *    space[1, 1]
-	 *    called[1, 1]
 	 */
 	protected void sequence_HidingHiddens(EObject context, HidingHiddens semanticObject) {
 		if(errorAcceptor != null) {
@@ -154,9 +147,6 @@ public class AbstractHiddenTerminalsTestLanguageSemanticSequencer extends Abstra
 	/**
 	 * Constraint:
 	 *     valid?=';'
-	 *
-	 * Features:
-	 *    valid[1, 1]
 	 */
 	protected void sequence_InheritingHiddensCall(EObject context, InheritingHiddensCall semanticObject) {
 		if(errorAcceptor != null) {
@@ -173,13 +163,6 @@ public class AbstractHiddenTerminalsTestLanguageSemanticSequencer extends Abstra
 	/**
 	 * Constraint:
 	 *     ((called=InheritingHiddensCall | hidingCalled=HidingHiddens) valid?=';')
-	 *
-	 * Features:
-	 *    valid[1, 1]
-	 *    called[0, 1]
-	 *         EXCLUDE_IF_SET hidingCalled
-	 *    hidingCalled[0, 1]
-	 *         EXCLUDE_IF_SET called
 	 */
 	protected void sequence_InheritingHiddens(EObject context, InheritingHiddens semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -189,10 +172,6 @@ public class AbstractHiddenTerminalsTestLanguageSemanticSequencer extends Abstra
 	/**
 	 * Constraint:
 	 *     (spaces+=WS? valid?=';')
-	 *
-	 * Features:
-	 *    spaces[0, 1]
-	 *    valid[1, 1]
 	 */
 	protected void sequence_OverridingHiddensCall(EObject context, OverridingHiddensCall semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -202,10 +181,6 @@ public class AbstractHiddenTerminalsTestLanguageSemanticSequencer extends Abstra
 	/**
 	 * Constraint:
 	 *     (called=OverridingHiddensCall valid?=';')
-	 *
-	 * Features:
-	 *    valid[1, 1]
-	 *    called[1, 1]
 	 */
 	protected void sequence_OverridingHiddens(EObject context, OverridingHiddens semanticObject) {
 		if(errorAcceptor != null) {
@@ -225,9 +200,6 @@ public class AbstractHiddenTerminalsTestLanguageSemanticSequencer extends Abstra
 	/**
 	 * Constraint:
 	 *     valid?=';'
-	 *
-	 * Features:
-	 *    valid[1, 1]
 	 */
 	protected void sequence_WithHiddens(EObject context, WithHiddens semanticObject) {
 		if(errorAcceptor != null) {
@@ -244,10 +216,6 @@ public class AbstractHiddenTerminalsTestLanguageSemanticSequencer extends Abstra
 	/**
 	 * Constraint:
 	 *     (spaces+=WS spaces+=WS? valid?=';')
-	 *
-	 * Features:
-	 *    valid[1, 1]
-	 *    spaces[1, 2]
 	 */
 	protected void sequence_WithoutHiddens(EObject context, WithoutHiddens semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -76,9 +76,6 @@ public class AbstractLazyLinkingTestLanguageSemanticSequencer extends AbstractSe
 	/**
 	 * Constraint:
 	 *     types+=Type*
-	 *
-	 * Features:
-	 *    types[0, *]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -88,10 +85,6 @@ public class AbstractLazyLinkingTestLanguageSemanticSequencer extends AbstractSe
 	/**
 	 * Constraint:
 	 *     (type+=[Type|ID]+ name=ID)
-	 *
-	 * Features:
-	 *    type[1, *]
-	 *    name[1, 1]
 	 */
 	protected void sequence_Property(EObject context, Property semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -107,13 +100,6 @@ public class AbstractLazyLinkingTestLanguageSemanticSequencer extends AbstractSe
 	 *         properties+=Property* 
 	 *         unresolvedProxyProperty+=UnresolvedProxyProperty*
 	 *     )
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    extends[0, 2]
-	 *    parentId[0, 2]
-	 *    properties[0, *]
-	 *    unresolvedProxyProperty[0, *]
 	 */
 	protected void sequence_Type(EObject context, Type semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -123,10 +109,6 @@ public class AbstractLazyLinkingTestLanguageSemanticSequencer extends AbstractSe
 	/**
 	 * Constraint:
 	 *     (type+=[Type|ID]+ name=ID)
-	 *
-	 * Features:
-	 *    type[1, *]
-	 *    name[1, 1]
 	 */
 	protected void sequence_UnresolvedProxyProperty(EObject context, UnresolvedProxyProperty semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

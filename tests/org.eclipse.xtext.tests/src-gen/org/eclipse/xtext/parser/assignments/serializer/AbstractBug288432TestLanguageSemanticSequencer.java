@@ -97,11 +97,6 @@ public class AbstractBug288432TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     ((parameter+=Parameter parameter+=Parameter*)? (content=Content | content=ParameterRef) foo+=Foo+)
-	 *
-	 * Features:
-	 *    parameter[0, *]
-	 *    content[0, 2]
-	 *    foo[1, *]
 	 */
 	protected void sequence_Body(EObject context, Body semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -111,9 +106,6 @@ public class AbstractBug288432TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     fooValue=STRING
-	 *
-	 * Features:
-	 *    fooValue[1, 1]
 	 */
 	protected void sequence_Foo(EObject context, Foo semanticObject) {
 		if(errorAcceptor != null) {
@@ -130,9 +122,6 @@ public class AbstractBug288432TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (bar=MyInt | bar=ParameterRef)
-	 *
-	 * Features:
-	 *    bar[0, 2]
 	 */
 	protected void sequence_MyElement(EObject context, MyElement semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -142,9 +131,6 @@ public class AbstractBug288432TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     int=INT
-	 *
-	 * Features:
-	 *    int[1, 1]
 	 */
 	protected void sequence_MyInt(EObject context, MyInt semanticObject) {
 		if(errorAcceptor != null) {
@@ -161,9 +147,6 @@ public class AbstractBug288432TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     parameter=[Parameter|ID]
-	 *
-	 * Features:
-	 *    parameter[1, 1]
 	 */
 	protected void sequence_ParameterRef(EObject context, ParameterRef semanticObject) {
 		if(errorAcceptor != null) {
@@ -180,10 +163,6 @@ public class AbstractBug288432TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (name=ID value=[ParameterObject|ID]?)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    value[0, 1]
 	 */
 	protected void sequence_Parameter(EObject context, Parameter semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

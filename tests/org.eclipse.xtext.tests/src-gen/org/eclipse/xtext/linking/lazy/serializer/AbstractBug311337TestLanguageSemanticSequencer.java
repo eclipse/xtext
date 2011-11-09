@@ -88,10 +88,6 @@ public class AbstractBug311337TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (name=ID link=[Definition|ID]?)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    link[0, 1]
 	 */
 	protected void sequence_Child(EObject context, Child semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -101,11 +97,6 @@ public class AbstractBug311337TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (name=ID child+=Child ref+=Reference?)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    child[1, 1]
-	 *    ref[0, 1]
 	 */
 	protected void sequence_Definition(EObject context, Definition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -115,9 +106,6 @@ public class AbstractBug311337TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     def+=Definition+
-	 *
-	 * Features:
-	 *    def[1, *]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -127,10 +115,6 @@ public class AbstractBug311337TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     (left=Reference_NestedRef_2_1 refChild=[Child|ID])
-	 *
-	 * Features:
-	 *    refChild[1, 1]
-	 *    left[1, 1]
 	 */
 	protected void sequence_Reference(EObject context, NestedRef semanticObject) {
 		if(errorAcceptor != null) {
@@ -150,9 +134,6 @@ public class AbstractBug311337TestLanguageSemanticSequencer extends AbstractSema
 	/**
 	 * Constraint:
 	 *     refChild=[Child|ID]
-	 *
-	 * Features:
-	 *    refChild[1, 1]
 	 */
 	protected void sequence_Reference(EObject context, Reference semanticObject) {
 		if(errorAcceptor != null) {

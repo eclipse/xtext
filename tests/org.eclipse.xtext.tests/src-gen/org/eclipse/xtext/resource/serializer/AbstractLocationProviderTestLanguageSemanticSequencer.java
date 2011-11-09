@@ -115,10 +115,6 @@ public class AbstractLocationProviderTestLanguageSemanticSequencer extends Abstr
 	/**
 	 * Constraint:
 	 *     (name=ID port+=Port*)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    port[0, *]
 	 */
 	protected void sequence_Bus(EObject context, Bus semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -128,12 +124,6 @@ public class AbstractLocationProviderTestLanguageSemanticSequencer extends Abstr
 	/**
 	 * Constraint:
 	 *     (name=ID port+=Port* (mode+=Mode | transition+=Transition)*)
-	 *
-	 * Features:
-	 *    mode[0, *]
-	 *    transition[0, *]
-	 *    name[1, 1]
-	 *    port[0, *]
 	 */
 	protected void sequence_Component(EObject context, Bus semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -143,12 +133,6 @@ public class AbstractLocationProviderTestLanguageSemanticSequencer extends Abstr
 	/**
 	 * Constraint:
 	 *     (name=ID data+=Data* (mode+=Mode | transition+=Transition)*)
-	 *
-	 * Features:
-	 *    mode[0, *]
-	 *    transition[0, *]
-	 *    name[1, 1]
-	 *    data[0, *]
 	 */
 	protected void sequence_Component(EObject context, Processor semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -158,9 +142,6 @@ public class AbstractLocationProviderTestLanguageSemanticSequencer extends Abstr
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_Data(EObject context, Data semanticObject) {
 		if(errorAcceptor != null) {
@@ -177,11 +158,6 @@ public class AbstractLocationProviderTestLanguageSemanticSequencer extends Abstr
 	/**
 	 * Constraint:
 	 *     (name=ID singleref=[Element|ID]? multirefs+=[Element|ID]*)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    singleref[0, 1]
-	 *    multirefs[0, *]
 	 */
 	protected void sequence_Element(EObject context, Element semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -191,9 +167,6 @@ public class AbstractLocationProviderTestLanguageSemanticSequencer extends Abstr
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_Mode(EObject context, Mode semanticObject) {
 		if(errorAcceptor != null) {
@@ -210,10 +183,6 @@ public class AbstractLocationProviderTestLanguageSemanticSequencer extends Abstr
 	/**
 	 * Constraint:
 	 *     (elements+=Element* components+=Component*)
-	 *
-	 * Features:
-	 *    elements[0, *]
-	 *    components[0, *]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -223,9 +192,6 @@ public class AbstractLocationProviderTestLanguageSemanticSequencer extends Abstr
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_Port(EObject context, Port semanticObject) {
 		if(errorAcceptor != null) {
@@ -242,10 +208,6 @@ public class AbstractLocationProviderTestLanguageSemanticSequencer extends Abstr
 	/**
 	 * Constraint:
 	 *     (name=ID data+=Data*)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    data[0, *]
 	 */
 	protected void sequence_Processor(EObject context, Processor semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -255,11 +217,6 @@ public class AbstractLocationProviderTestLanguageSemanticSequencer extends Abstr
 	/**
 	 * Constraint:
 	 *     (name=ID source=[Mode|ID] destination=[Mode|ID])
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    source[1, 1]
-	 *    destination[1, 1]
 	 */
 	protected void sequence_Transition(EObject context, Transition semanticObject) {
 		if(errorAcceptor != null) {
