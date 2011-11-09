@@ -300,46 +300,55 @@
             name="Organize Imports"/>
    </extension>
    <extension
+         point="org.eclipse.ui.contexts">
+      <context
+            description="%XtendContext_description"
+            id="org.eclipse.xtext.xtend2.ui.XtendEditorScope"
+            name="%XtendContext_name"
+            parentId="org.eclipse.xtext.ui.XtextEditorScope">
+      </context>
+   </extension>
+   <extension
          point="org.eclipse.ui.bindings">
       <key
-            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            contextId="org.eclipse.xtext.xtend2.ui.XtendEditorScope"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+&lt;"
             commandId="org.eclipse.xtext.xtend2.ui.insertLeftGuillemet">
       </key>
       <key
-            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            contextId="org.eclipse.xtext.xtend2.ui.XtendEditorScope"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+&gt;"
             commandId="org.eclipse.xtext.xtend2.ui.insertRightGuillemet">
       </key>
       <key
-            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            contextId="org.eclipse.xtext.xtend2.ui.XtendEditorScope"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M4+&lt;"
             commandId="org.eclipse.xtext.xtend2.ui.insertLeftGuillemet">
       </key>
       <key
-            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            contextId="org.eclipse.xtext.xtend2.ui.XtendEditorScope"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M4+&gt;"
             commandId="org.eclipse.xtext.xtend2.ui.insertRightGuillemet">
       </key>
       <key
-            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            contextId="org.eclipse.xtext.xtend2.ui.XtendEditorScope"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+M2+O"
             commandId="org.eclipse.xtext.xbase.ui.organizeImports">
       </key>
 <!--
       <key
-            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            contextId="org.eclipse.xtext.xtend2.ui.XtendEditorScope"
             sequence="M1+M2+T"
             commandId="org.eclipse.jdt.ui.navigate.open.type"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
       </key>
       <key
-            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            contextId="org.eclipse.xtext.xtend2.ui.XtendEditorScope"
             sequence="M1+M2+H"
             commandId="org.eclipse.jdt.ui.navigate.open.type.in.hierarchy"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
