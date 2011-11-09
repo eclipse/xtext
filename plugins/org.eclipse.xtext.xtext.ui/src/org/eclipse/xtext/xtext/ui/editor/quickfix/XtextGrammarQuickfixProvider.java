@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext.ui.editor.quickfix;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URL;
 import java.util.AbstractList;
 import java.util.Collection;
 import java.util.Collections;
@@ -36,7 +37,11 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.URIHandlerImpl;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.EcoreUtil2;
@@ -68,6 +73,7 @@ import org.eclipse.xtext.xtext.XtextLinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.xtext.XtextValidator;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -99,6 +105,9 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 	
 	@Inject
 	private ResourceDescriptionsProvider resourceDescriptionsProvider;
+	
+	@Inject
+	private IWorkbench workbench;
 	
 	@Fix(XtextLinkingDiagnosticMessageProvider.UNRESOLVED_RULE)
 	public void fixUnresolvedRule(final Issue issue, IssueResolutionAcceptor acceptor) {
@@ -185,9 +194,9 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 						public void apply(IModificationContext context) throws BadLocationException {
 							String replaceString = valueConverterService.toString(issue.getData()[0], "STRING");
 							IXtextDocument document = context.getXtextDocument();
-							document.readOnly(new IUnitOfWork<Void, XtextResource>() {
+							final List<String> importedPackages = document.readOnly(new IUnitOfWork<List<String>, XtextResource>() {
 
-								public java.lang.Void exec(XtextResource state) throws Exception {
+								public List<String> exec(XtextResource state) throws Exception {
 									IResourceDescriptions descriptions = resourceDescriptionsProvider.getResourceDescriptions(state);
 									ResourceSet resourceSet = state.getResourceSet();
 									final Map<URI, URI> uriMap = Maps.newHashMap();
@@ -206,6 +215,7 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 												iterator.remove();
 											}
 										}
+										final List<String> result = Lists.newArrayList();
 										new WorkspaceModifyOperation( /* workspace lock */ ) {
 											
 											@Override
@@ -213,7 +223,8 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 													InterruptedException {
 												try {
 													for(EPackage pack: packagePerNsURI.values()) {
-														pack.eResource().save(Collections.singletonMap(
+														Resource resource = pack.eResource();
+														resource.save(Collections.singletonMap(
 																XMLResource.OPTION_URI_HANDLER, 
 																new URIHandlerImpl.PlatformSchemeAware() {
 																	@Override
@@ -229,6 +240,7 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 																		return super.deresolve(withoutFragment.appendFragment(uri.fragment()));
 																	}
 																}));
+														result.add(resource.getURI().toString());
 													}
 												} catch(IOException ioe) {
 													throw new InvocationTargetException(ioe);
@@ -242,6 +254,7 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 												resourceSet.getResources().remove(i);
 											}
 										}
+										return result;
 									}
 									return null;
 								}
@@ -353,6 +366,29 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 								replaceString = delimiter + replaceString.substring(1, replaceString.length() - 1) + delimiter; 
 							}
 							document.replace(issue.getOffset(), issue.getLength(), replaceString);
+							if (importedPackages != null && !importedPackages.isEmpty()) {
+								final Shell shell = workbench.getActiveWorkbenchWindow().getShell();
+								shell.getDisplay().asyncExec(new Runnable() {
+									public void run() {
+										String title = "Please update the workflow that generates the language.";
+										String message = "Please make sure that the workflow that generates the language is up-to date.\n" +
+												"Especially important is the registration of the referenced packages.\n" +
+												"Please refer to the reference documentation for details.";
+										
+										MessageDialog dialog = new MessageDialog(shell, title, null, message,
+												MessageDialog.INFORMATION, 
+												new String[] { "Open Documentation", "Close" }, 1);
+										if (dialog.open() == 0) {
+											String url = "http://www.eclipse.org/Xtext/documentation/2_1_0/020-grammar-language.php#package_declarations_3";
+											try {
+												workbench.getBrowserSupport().getExternalBrowser().openURL(new URL(url));
+											} catch (Exception e) {
+												// ignore
+											}
+										}
+									}});
+								
+							}
 						}
 					});
 	}
