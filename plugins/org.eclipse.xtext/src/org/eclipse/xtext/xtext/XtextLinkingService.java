@@ -109,9 +109,11 @@ public class XtextLinkingService extends DefaultLinkingService {
 						ClasspathUriUtil.CLASSPATH_SCHEME + ":/" + grammarName.replace('.', '/') + "." + fileExtension);
 				URI normalizedURI = resourceSet.getURIConverter().normalize(classpathURI);
 				final Resource resource = resourceSet.getResource(normalizedURI, true);
-				final Grammar usedGrammar = (Grammar) resource.getContents().get(0);
-				if (grammarName.equals(usedGrammar.getName()))
-					return Collections.<EObject>singletonList(usedGrammar);
+				if (!resource.getContents().isEmpty()) {
+					final Grammar usedGrammar = (Grammar) resource.getContents().get(0);
+					if (grammarName.equals(usedGrammar.getName()))
+						return Collections.<EObject>singletonList(usedGrammar);
+				}
 			}
 			return Collections.emptyList();
 		}
