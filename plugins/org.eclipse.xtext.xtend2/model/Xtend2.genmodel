@@ -4,7 +4,7 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.xtend2/emf-gen"
     modelPluginID="org.eclipse.xtext.xtend2" modelName="Xtend2" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
-    usedGenPackages="../../org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types ../../org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase ../../org.eclipse.xtext.xbase/model/Xbase.genmodel#//xAnnotations">
+    usedGenPackages="platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xAnnotations platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase">
   <foreignModel>Xtend2.ecore</foreignModel>
   <genPackages prefix="Xtend2" basePackage="org.eclipse.xtext.xtend2" disposableProviderFactory="true"
       ecorePackage="Xtend2.ecore#/">
@@ -17,6 +17,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtend2.ecore#//XtendImport/importedNamespace"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtend2.ecore#//XtendImport/static"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtend2.ecore#//XtendImport/extension"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtend2.ecore#//XtendImport/importedType"/>
       <genOperations ecoreOperation="Xtend2.ecore#//XtendImport/isWildcard"/>
       <genOperations ecoreOperation="Xtend2.ecore#//XtendImport/getImportedTypeName"/>
     </genClasses>
@@ -27,6 +28,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtend2.ecore#//XtendClass/superTypes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtend2.ecore#//XtendClass/members"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtend2.ecore#//XtendClass/superCallReferable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtend2.ecore#//XtendClass/typeParameters"/>
       <genOperations ecoreOperation="Xtend2.ecore#//XtendClass/getPackageName"/>
       <genOperations ecoreOperation="Xtend2.ecore#//XtendClass/getSimpleName"/>
     </genClasses>
@@ -37,22 +39,24 @@
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Xtend2.ecore#//XtendClassSuperCallReferable/xtendClass"/>
     </genClasses>
     <genClasses image="false" ecoreClass="Xtend2.ecore#//XtendMember">
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Xtend2.ecore#//XtendMember/declaringType"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtend2.ecore#//XtendMember/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtend2.ecore#//XtendMember/annotationInfo"/>
-      <genOperations ecoreOperation="Xtend2.ecore#//XtendMember/getSimpleName"/>
     </genClasses>
     <genClasses ecoreClass="Xtend2.ecore#//XtendFunction">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtend2.ecore#//XtendFunction/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtend2.ecore#//XtendFunction/expression"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtend2.ecore#//XtendFunction/returnType"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtend2.ecore#//XtendFunction/parameters"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtend2.ecore#//XtendFunction/override"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtend2.ecore#//XtendFunction/dispatch"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtend2.ecore#//XtendFunction/createExtensionInfo"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtend2.ecore#//XtendFunction/typeParameters"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtend2.ecore#//XtendFunction/visibility"/>
     </genClasses>
     <genClasses ecoreClass="Xtend2.ecore#//XtendField">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtend2.ecore#//XtendField/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtend2.ecore#//XtendField/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtend2.ecore#//XtendField/extension"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtend2.ecore#//XtendField/visibility"/>
     </genClasses>
     <genClasses ecoreClass="Xtend2.ecore#//XtendParameter">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtend2.ecore#//XtendParameter/name"/>
