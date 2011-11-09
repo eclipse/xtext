@@ -13,11 +13,8 @@
 <repository location="http://download.eclipse.org/modeling/emf/updates"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.platform.feature.group" version="0.0.0"/>
-<unit id="org.eclipse.jdt.junit" version="0.0.0"/>
-<unit id="org.eclipse.jdt.junit4.runtime" version="0.0.0"/>
+<unit id="org.eclipse.jdt.feature.group" version="3.5.2.r352_v20100108-7r88FEwFI0WTuoBl0iaG0tyhfZH6"/>
 <unit id="org.eclipse.pde.core" version="0.0.0"/>
-<unit id="org.eclipse.jdt.junit.runtime" version="0.0.0"/>
 <unit id="org.eclipse.pde.ui" version="0.0.0"/>
 <unit id="org.junit4" version="0.0.0"/>
 <unit id="org.junit" version="0.0.0"/>
