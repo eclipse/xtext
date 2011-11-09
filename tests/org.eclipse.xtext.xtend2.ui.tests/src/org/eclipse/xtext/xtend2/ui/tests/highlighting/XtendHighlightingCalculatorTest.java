@@ -272,7 +272,13 @@ public class XtendHighlightingCalculatorTest extends AbstractXtend2UITestCase im
 		addImport("java.util.List");
 		String model = "def toUpperCase(List<String> it) { map [ toUpperCase ]}";
 		expectAbsolut(model.lastIndexOf("map"), 3, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
-		expectAbsolut(model.lastIndexOf("map"), 3, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+		expectAbsolut(model.lastIndexOf("map"), 3, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
+	}
+	
+	public void testLocalExtensionOperation() throws Exception {
+		addImport("java.util.List");
+		String model = "def void zonk(List<String> it) { zonk }";
+		expectAbsolut(model.lastIndexOf("zonk"), 4, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
 	}
 	
 	public void testAnnotaton() throws Exception {
