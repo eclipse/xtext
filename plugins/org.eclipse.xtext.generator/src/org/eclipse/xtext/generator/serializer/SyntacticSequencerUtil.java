@@ -155,14 +155,14 @@ public class SyntacticSequencerUtil {
 			TokenAlias ele = (TokenAlias) alias;
 			String eleAlias = file.imported(TokenAlias.class);
 			String eleAcc = "grammarAccess." + grammarAccess.gaAccessor(ele.getToken());
-			return "new " + eleAlias + "(" + optional + ", " + many + ", " + eleAcc + ")";
+			return "new " + eleAlias + "(" + many + ", " + optional + ", " + eleAcc + ")";
 		} else if (alias instanceof GroupAlias) {
 			List<String> children = Lists.newArrayList();
 			for (AbstractElementAlias child : ((GroupAlias) alias).getChildren())
 				children.add(elementAliasToConstructor(child, file));
 			String body = Join.join(", ", children);
 			String grpAlias = file.imported(GroupAlias.class);
-			return "new " + grpAlias + "(" + optional + ", " + many + ", " + body + ")";
+			return "new " + grpAlias + "(" + many + ", " + optional + ", " + body + ")";
 		} else if (alias instanceof AlternativeAlias) {
 			List<String> children = Lists.newArrayList();
 			for (AbstractElementAlias child : ((AlternativeAlias) alias).getChildren())
@@ -170,7 +170,7 @@ public class SyntacticSequencerUtil {
 			Collections.sort(children);
 			String body = Join.join(", ", children);
 			String altAlias = file.imported(AlternativeAlias.class);
-			return "new " + altAlias + "(" + optional + ", " + many + ", " + body + ")";
+			return "new " + altAlias + "(" + many + ", " + optional + ", " + body + ")";
 		}
 		throw new RuntimeException("unknown element");
 	}
