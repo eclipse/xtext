@@ -113,6 +113,16 @@ public class XtextEditor extends TextEditor {
 	public static final String ERROR_ANNOTATION_TYPE = "org.eclipse.xtext.ui.editor.error";
 	public static final String WARNING_ANNOTATION_TYPE = "org.eclipse.xtext.ui.editor.warning";
 
+	/**
+	 * @since 2.2
+	 */
+	public static final String KEY_BINDING_SCOPE = "org.eclipse.xtext.ui.editor.XtextEditor.KEY_BINDING_SCOPE";
+
+	/**
+	 * @since 2.2
+	 */
+	public static final String DEFAULT_KEY_BINDING_SCOPE = "org.eclipse.xtext.ui.XtextEditorScope";
+
 	private static final Logger log = Logger.getLogger(XtextEditor.class);
 
 	public static final String ID = "org.eclipse.xtext.baseEditor"; //$NON-NLS-1$
@@ -149,6 +159,8 @@ public class XtextEditor extends TextEditor {
 	@Inject
 	private TextAttributeProvider textAttributeProvider;
 
+	private String keyBindingScope;
+
 	private ISelectionChangedListener selectionChangedListener;
 
 	private IPropertyListener dirtyListener = new IPropertyListener() {
@@ -177,6 +189,19 @@ public class XtextEditor extends TextEditor {
 
 	public String getLanguageName() {
 		return languageName;
+	}
+
+	/**
+	 * Note: Not injected directly into field as {@link #initializeKeyBindingScopes()} is called by constructor.
+	 * 
+	 * @since 2.2
+	 */
+	@Inject(optional = true)
+	public void setKeyBindingScope(@Named(KEY_BINDING_SCOPE) String scope) {
+		if (scope != null) {
+			this.keyBindingScope = scope;
+			initializeKeyBindingScopes();
+		}
 	}
 
 	@Override
@@ -243,11 +268,11 @@ public class XtextEditor extends TextEditor {
 	}
 
 	/**
-	 * Set key binding scope. Needed to make F3 work properly.
+	 * Set key binding scope. Required for custom key bindings (e.g. F3).
 	 */
 	@Override
 	protected void initializeKeyBindingScopes() {
-		setKeyBindingScopes(new String[] { "org.eclipse.xtext.ui.XtextEditorScope" }); //$NON-NLS-1$
+		setKeyBindingScopes(new String[] { keyBindingScope != null ? keyBindingScope : DEFAULT_KEY_BINDING_SCOPE });
 	}
 
 	public IResource getResource() {
