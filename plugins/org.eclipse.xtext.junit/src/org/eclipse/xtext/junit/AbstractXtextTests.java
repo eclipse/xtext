@@ -385,19 +385,24 @@ public abstract class AbstractXtextTests extends TestCase implements ResourceLoa
 						"Is your filesystem case insensitive? Please verify the spelling.");
 
 			InputStream resourceAsStream = classLoader.getResourceAsStream(filePath);
-			if (resourceAsStream == null) {
-				fail("Could not read resource: '" + filePath + "'. Is your file system case sensitive?");
-			} else {
-				byte[] buffer = new byte[2048];
-				int bytesRead = 0;
-				StringBuffer b = new StringBuffer();
-				do {
-					bytesRead = resourceAsStream.read(buffer);
-					if (bytesRead != -1)
-						b.append(new String(buffer, 0, bytesRead));
-				} while (bytesRead != -1);
-				String model = b.toString();
-				return model;
+			try {
+				if (resourceAsStream == null) {
+					fail("Could not read resource: '" + filePath + "'. Is your file system case sensitive?");
+				} else {
+						byte[] buffer = new byte[2048];
+						int bytesRead = 0;
+						StringBuffer b = new StringBuffer();
+						do {
+							bytesRead = resourceAsStream.read(buffer);
+							if (bytesRead != -1)
+								b.append(new String(buffer, 0, bytesRead));
+						} while (bytesRead != -1);
+						String model = b.toString();
+						return model;
+				}
+			} finally {
+				if (resourceAsStream != null)
+					resourceAsStream.close();
 			}
 		}
 		throw new IllegalStateException("May not happen, but helps to suppress false positives in eclipse' control flow analysis.");
