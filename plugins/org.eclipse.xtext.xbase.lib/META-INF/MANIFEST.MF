@@ -8,3 +8,5 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.xbase.lib
 Require-Bundle: com.google.collect;bundle-version="1.0.0";resolution:=optional;visibility:=reexport
 Bundle-Vendor: %providerName
+Import-Package: com.google.common.base;version="1.0.0",
+ com.google.common.collect;version="1.0.0"
