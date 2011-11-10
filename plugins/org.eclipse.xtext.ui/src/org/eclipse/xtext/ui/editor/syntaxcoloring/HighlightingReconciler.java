@@ -106,6 +106,8 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 		TextAttribute highlighting = ids.length == 1 ? 
 				attributeProvider.getAttribute(ids[0])
 			:	attributeProvider.getMergedAttributes(ids);
+		if (highlighting == null)
+			return;
 		boolean isExisting= false;
 		// TODO: use binary search
 		for (int i= 0, n= removedPositions.size(); i < n; i++) {
