@@ -258,8 +258,9 @@ public abstract class EClassifierInfo {
 				result &= f1Type.isSuperTypeOf(f2Type);
 				result &= ((EReference) f1).isContainment() == ((EReference) f2).isContainment();
 				result &= ((EReference) f1).isContainer() == ((EReference) f2).isContainer();
-			} else
-				result &= f1.getEType().equals(f2.getEType());
+			} else {
+				result &= f1.getEType().equals(EcoreUtil2.getCompatibleType(f1.getEType(), f2.getEType()));
+			}
 			return result;
 		}
 
@@ -337,7 +338,7 @@ public abstract class EClassifierInfo {
 			EClassifier compatibleType = EcoreUtil2.getCompatibleType(existingFeature.getEType(), newFeature.getEType(), grammarElement);
 			if (compatibleType == null)
 				throw new TransformationException(TransformationErrorCode.NoCompatibleFeatureTypeAvailable,
-						"Cannot find compatible type for features", grammarElement);
+						"Cannot find compatible type for the feature '" + existingFeature.getName() + "'", grammarElement);
 			
 			if (isGenerated(existingFeature)) {
 				existingFeature.setEType(compatibleType);
