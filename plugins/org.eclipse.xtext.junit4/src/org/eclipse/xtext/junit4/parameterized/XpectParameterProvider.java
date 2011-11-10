@@ -196,7 +196,7 @@ public class XpectParameterProvider implements IParameterProvider {
 	protected Iterable<Object> convertValue(XtextResource res, INode ctx, int offset, Token token, String value) {
 		switch (token) {
 			case OFFSET:
-				int add = value.indexOf('!');
+				int add = value.indexOf('|');
 				if (add >= 0)
 					value = value.substring(0, add) + value.substring(add + 1);
 				else

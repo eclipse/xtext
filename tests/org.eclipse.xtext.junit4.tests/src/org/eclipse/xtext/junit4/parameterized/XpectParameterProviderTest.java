@@ -422,7 +422,7 @@ public class XpectParameterProviderTest
 	@Test
 	public void xpectMLOffsetParameter2()
 	{
-		String model = "/* XPECT offsetMeth at fo!o -->  exp \n*/ Bar: val='foo';";
+		String model = "/* XPECT offsetMeth at fo|o -->  exp \n*/ Bar: val='foo';";
 		Assert.assertEquals(
 		    "offsetMeth(myOffset='l='fo!o';\\n ', myOffset=157, offset=' \\n*/ !Bar: ', offset=145, resource)",
 		    params(model));
