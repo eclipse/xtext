@@ -245,7 +245,9 @@ public class OrganizeImports {
 		}
 
 		protected void addType(Map<String, String> names, JvmDeclaredType type) {
-			final String simpleName = type.getSimpleName();
+			String packageName = type.getPackageName();
+			final String simpleName = packageName != null ? type.getQualifiedName().substring(packageName.length() + 1)
+					: type.getQualifiedName();
 			if (simpleName == null)
 				return;
 			if (!names.containsKey(simpleName)) {

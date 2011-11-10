@@ -125,7 +125,7 @@ public class OrganizeImportsTest extends AbstractXtend2TestCase {
 				"\nimport java.util.Map", section);
 	}
 	
-	public void testGetOrganizedImportSectionWithInnerClasses() throws Exception {
+	public void testGetOrganizedImportSectionWithInnerClasses_01() throws Exception {
 		String model = 
 						"class Foo {\n" +
 						"  def void test(org.eclipse.emf.ecore.resource.Resource$Factory a, org.eclipse.emf.ecore.resource.Resource$Factory$Registry b) {\n" +
@@ -137,6 +137,27 @@ public class OrganizeImportsTest extends AbstractXtend2TestCase {
 		assertEquals(
 				"\n" +
 				"\nimport org.eclipse.emf.ecore.resource.Resource$Factory" + 
+				"\nimport org.eclipse.emf.ecore.resource.Resource$Factory$Registry", section);
+	}
+	
+	public void testGetOrganizedImportSectionWithInnerClasses_02() throws Exception {
+		String model = 
+				"import org.eclipse.emf.ecore.resource.Resource\n" +
+				"import org.eclipse.emf.ecore.EPackage\n" +
+				"" +
+				"\n" +
+				"class Foo {\n" +
+				"  def test() {\n" +
+				"    val x = Resource$Factory$Registry::INSTANCE\n" +
+				"    val y = EPackage$Registry::INSTANCE\n" +
+				"  }\n" +
+				"}\n";
+		XtendFile file = file(model,true);
+		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
+		
+		assertEquals(
+				"\n" +
+				"\nimport org.eclipse.emf.ecore.EPackage$Registry" + 
 				"\nimport org.eclipse.emf.ecore.resource.Resource$Factory$Registry", section);
 	}
 	
