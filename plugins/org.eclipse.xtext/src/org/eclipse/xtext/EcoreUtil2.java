@@ -32,6 +32,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -307,18 +308,12 @@ public class EcoreUtil2 extends EcoreUtil {
 	}
 	
 	public static EClassifier getCompatibleType(EClassifier typeA, EClassifier typeB) {
-		if (typeA.equals(typeB))
-			return typeA;
-		// no common type for simple datatypes available
-		if (!(typeA instanceof EClass && typeB instanceof EClass))
-			return null;
-
-		List<EClass> sortedCandidates = getSortedCommonCompatibleTypeCandidates((EClass) typeA, (EClass) typeB);
-		for (EClass candidate : sortedCandidates)
-			if (isCommonCompatibleType(candidate, sortedCandidates))
-				return candidate;
-
-		return EcorePackage.Literals.EOBJECT;
+		EClassifier result = getCompatibleType(typeA, typeB, null);
+		if (result != null)
+			return result;
+		if (typeA instanceof EClass && typeB instanceof EClass)
+			return EcorePackage.Literals.EOBJECT;
+		return null;
 	}
 	
 	/**
@@ -327,6 +322,17 @@ public class EcoreUtil2 extends EcoreUtil {
 	public static EClassifier getCompatibleType(EClassifier typeA, EClassifier typeB, EObject grammarContext) {
 		if (typeA.equals(typeB))
 			return typeA;
+		if (typeA instanceof EDataType && typeB instanceof EDataType) {
+			Class<?> instanceClassA = typeA.getInstanceClass();
+			Class<?> instanceClassB = typeB.getInstanceClass();
+			if (instanceClassA != null && instanceClassB != null) {
+				if (instanceClassA.isAssignableFrom(instanceClassB))
+					return typeA;
+				if (instanceClassB.isAssignableFrom(instanceClassA))
+					return typeB;
+			}
+		}
+		
 		// no common type for simple datatypes available
 		if (!(typeA instanceof EClass && typeB instanceof EClass))
 			return null;

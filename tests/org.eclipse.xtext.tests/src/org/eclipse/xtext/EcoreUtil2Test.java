@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
@@ -40,6 +41,13 @@ public class EcoreUtil2Test extends AbstractXtextTests {
 	private EClass createEClass(String name) {
 		EClass result = EcoreFactory.eINSTANCE.createEClass();
 		result.setName(name);
+		return result;
+	}
+	
+	private EDataType createEDataType(String name, Class<?> instanceClass) {
+		EDataType result = EcoreFactory.eINSTANCE.createEDataType();
+		result.setName(name);
+		result.setInstanceClass(instanceClass);
 		return result;
 	}
 	
@@ -142,6 +150,54 @@ public class EcoreUtil2Test extends AbstractXtextTests {
 		assertSame(a, EcoreUtil2.getCompatibleType(b, c));
 		assertSame(b, EcoreUtil2.getCompatibleType(b, d));
 		assertSame(a, EcoreUtil2.getCompatibleType(d, e));
+	}
+	
+	public void testGetCompatibleType_01() {
+		EDataType aString = createEDataType("a", String.class);
+		EDataType anotherString = createEDataType("b", String.class);
+		
+		assertSame(aString, EcoreUtil2.getCompatibleType(aString, anotherString, null));
+		assertSame(anotherString, EcoreUtil2.getCompatibleType(anotherString, aString, null));
+	}
+	
+	public void testGetCompatibleType_02() {
+		EDataType aString = createEDataType("a", String.class);
+		EDataType anObject = createEDataType("b", Object.class);
+		
+		assertSame(anObject, EcoreUtil2.getCompatibleType(aString, anObject, null));
+		assertSame(anObject, EcoreUtil2.getCompatibleType(anObject, aString, null));
+	}
+	
+	public void testGetCompatibleType_03() {
+		EDataType aCharSequence = createEDataType("a", CharSequence.class);
+		EDataType anAppendable = createEDataType("b", Appendable.class);
+		
+		assertSame(null, EcoreUtil2.getCompatibleType(aCharSequence, anAppendable, null));
+		assertSame(null, EcoreUtil2.getCompatibleType(anAppendable, aCharSequence, null));
+	}
+	
+	public void testGetCompatibleType_04() {
+		EDataType aString = createEDataType("a", String.class);
+		EDataType anotherString = createEDataType("b", String.class);
+		
+		assertSame(aString, EcoreUtil2.getCompatibleType(aString, anotherString));
+		assertSame(anotherString, EcoreUtil2.getCompatibleType(anotherString, aString));
+	}
+	
+	public void testGetCompatibleType_05() {
+		EDataType aString = createEDataType("a", String.class);
+		EDataType anObject = createEDataType("b", Object.class);
+		
+		assertSame(anObject, EcoreUtil2.getCompatibleType(aString, anObject));
+		assertSame(anObject, EcoreUtil2.getCompatibleType(anObject, aString));
+	}
+	
+	public void testGetCompatibleType_06() {
+		EDataType aCharSequence = createEDataType("a", CharSequence.class);
+		EDataType anAppendable = createEDataType("b", Appendable.class);
+		
+		assertSame(null, EcoreUtil2.getCompatibleType(aCharSequence, anAppendable));
+		assertSame(null, EcoreUtil2.getCompatibleType(anAppendable, aCharSequence));
 	}
 	
 	public void testGetAllSuperTypesWithCycle() {
