@@ -253,7 +253,7 @@
 			<h2>Encoding at Language Runtime</h2>
 			<p>
 			As each language could handle the encoding problem differently, Xtext offers a service here. 
-			The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parser/IEncodingProvider.html" title="org.eclipse.xtext.parser.IEncodingProvider">IEncodingProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IEncodingProvider.java" title="View Source Code" >(src)</a> has a single method 
+			The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/parser/IEncodingProvider.html" title="org.eclipse.xtext.parser.IEncodingProvider">IEncodingProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IEncodingProvider.java" title="View Source Code" >(src)</a> has a single method 
 			<span class="inlinecode">getEncoding(URI)</span> to define the encoding of the resource with the given URI. Users can implement 
 			their own strategy but keep in mind that this is not intended to be a long running method. If the 
 			encoding is stored within the model file itself, it should be extractable in an easy way, like from 
@@ -263,7 +263,7 @@
 			<p>
 			In the UI scenario, when there is a workspace, users will expect the encoding of the model files 
 			to be settable the same way as for other files in the workspace. The default implementation 
-			of the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parser/IEncodingProvider.html" title="org.eclipse.xtext.parser.IEncodingProvider">IEncodingProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IEncodingProvider.java" title="View Source Code" >(src)</a> in the UI scenario therefore returns 
+			of the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/parser/IEncodingProvider.html" title="org.eclipse.xtext.parser.IEncodingProvider">IEncodingProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IEncodingProvider.java" title="View Source Code" >(src)</a> in the UI scenario therefore returns 
 			the file's workspace encoding for files in the workspace and delegates to the runtime implementation 
 			for all other resources, e.g. models in a jar or from a deployed plug-in. Keep in mind that you are 
 			going to loose the workspace encoding information as soon as you leave this workspace, e.g. deploy your 
@@ -272,7 +272,7 @@
 			<p>
 			Unless you want to enforce a uniform encoding for all models of your language, we advise to 
 			override the runtime service only. It is bound in the runtime module using the binding annotation 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/service/DispatchingProvider.Runtime.html" title="org.eclipse.xtext.service.DispatchingProvider.Runtime">@Runtime</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/service/DispatchingProvider.java" title="View Source Code" >(src)</a>:
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/service/DispatchingProvider.Runtime.html" title="org.eclipse.xtext.service.DispatchingProvider.Runtime">@Runtime</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/service/DispatchingProvider.java" title="View Source Code" >(src)</a>:
 			</p>
 			<p>
 			<div class="literallayout">
@@ -289,7 +289,7 @@
 			</div>
 			</p>
 			<p>
-			For the uniform encoding, bind the plain <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parser/IEncodingProvider.html" title="org.eclipse.xtext.parser.IEncodingProvider">IEncodingProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IEncodingProvider.java" title="View Source Code" >(src)</a> to the same
+			For the uniform encoding, bind the plain <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/parser/IEncodingProvider.html" title="org.eclipse.xtext.parser.IEncodingProvider">IEncodingProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IEncodingProvider.java" title="View Source Code" >(src)</a> to the same
 			implementation in both modules:
 			</p>
 			<p>
@@ -307,7 +307,7 @@
 			<a name="encoding_8" ></a>
 			<h2>Encoding of an XtextResource</h2>
 			<p>
-			An <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/XtextResource.html" title="org.eclipse.xtext.resource.XtextResource">XtextResource</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java" title="View Source Code" >(src)</a> uses the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parser/IEncodingProvider.html" title="org.eclipse.xtext.parser.IEncodingProvider">IEncodingProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IEncodingProvider.java" title="View Source Code" >(src)</a> 
+			An <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/resource/XtextResource.html" title="org.eclipse.xtext.resource.XtextResource">XtextResource</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java" title="View Source Code" >(src)</a> uses the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/parser/IEncodingProvider.html" title="org.eclipse.xtext.parser.IEncodingProvider">IEncodingProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IEncodingProvider.java" title="View Source Code" >(src)</a> 
 			of your language by default. You can override that by passing an option on load and save, e.g.
 			</p>
 			<p>
@@ -327,7 +327,7 @@
 			<a name="encoding_9" ></a>
 			<h2>Encoding in New Model Projects</h2>
 			<p>
-			The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/generator/projectWizard/SimpleProjectWizardFragment.html" title="org.eclipse.xtext.ui.generator.projectWizard.SimpleProjectWizardFragment">SimpleProjectWizardFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/projectWizard/SimpleProjectWizardFragment.java" title="View Source Code" >(src)</a> 
+			The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/ui/generator/projectWizard/SimpleProjectWizardFragment.html" title="org.eclipse.xtext.ui.generator.projectWizard.SimpleProjectWizardFragment">SimpleProjectWizardFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/projectWizard/SimpleProjectWizardFragment.java" title="View Source Code" >(src)</a> 
 			generates a wizard that clients of your language can use to create model 
 			projects. This wizard expects its templates to be in the encoding of the Generator that created it 
 			(see above). As for every new project wizard, its output will be encoded in the default encoding of the 

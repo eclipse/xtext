@@ -226,8 +226,8 @@
 			</p>
 			<p>
 			Serialization is invoked when calling 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/XtextResource.html" title="org.eclipse.xtext.resource.XtextResource">XtextResource.save(..)</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java" title="View Source Code" >(src)</a>. Furthermore, the
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parsetree/reconstr/Serializer.html" title="org.eclipse.xtext.parsetree.reconstr.Serializer">Serializer</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/Serializer.java" title="View Source Code" >(src)</a> provides resource-independent 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/resource/XtextResource.html" title="org.eclipse.xtext.resource.XtextResource">XtextResource.save(..)</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java" title="View Source Code" >(src)</a>. Furthermore, the
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/parsetree/reconstr/Serializer.html" title="org.eclipse.xtext.parsetree.reconstr.Serializer">Serializer</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/Serializer.java" title="View Source Code" >(src)</a> provides resource-independent 
 			support for serialization. Another situation that triggers serialization is applying <a href="155-quickfix.php" title="Go to &quot;Quick Fixes&quot;">Quick Fixes</a> 
 			with semantic modifications. Serialization is <em>not</em> called when a textual editors contents is saved to disk.
 			</p>
@@ -268,7 +268,7 @@
 			  <li>preserves <a href="100-serialization.php#commentassociater" title="Go to &quot;Preserving Comments from the Node Model&quot;">existing comments</a> from the node model.</li>
 			  <li>preserves the representation of cross-references: If a cross-referenced object can be 
 			  		 identified by multiple names (i.e. scoping returns multiple 
-			  		 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="org.eclipse.xtext.resource.IEObjectDescription">IEObjectDescriptions</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a> for the 
+			  		 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/resource/IEObjectDescription.html" title="org.eclipse.xtext.resource.IEObjectDescription">IEObjectDescriptions</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a> for the 
 			  		 same object), the serializer tries to keep the name that was used in the input file.</li>
 			  <li>preserves the representation of values: For values handled by the 
 			  		<a href="090-valueconverter.php" title="Go to &quot;Value Converter&quot;">value converter</a>, the serializer checks whether the textual representation 
@@ -292,7 +292,7 @@
 			</p>
 			<p>
 			If a model can not be serialized, an 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parsetree/reconstr/XtextSerializationException.html" title="org.eclipse.xtext.parsetree.reconstr.XtextSerializationException">XtextSerializationException</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/XtextSerializationException.java" title="View Source Code" >(src)</a> is thrown. 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/parsetree/reconstr/XtextSerializationException.html" title="org.eclipse.xtext.parsetree.reconstr.XtextSerializationException">XtextSerializationException</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/XtextSerializationException.java" title="View Source Code" >(src)</a> is thrown. 
 			Possible reasons are listed below:
 			</p>
 			<p>
@@ -321,7 +321,7 @@
 			  		element must be identical to the return type of the grammar rule or the action's type. 
 			  		Subtypes are not allowed.</li>
 			  <li><a href="090-valueconverter.php" title="Go to &quot;Value Converter&quot;">Value conversion</a> fails. The value converter can indicate that a value 
-			  		is not serializeable by throwing a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/conversion/ValueConverterException.html" title="org.eclipse.xtext.conversion.ValueConverterException">ValueConverterException</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/ValueConverterException.java" title="View Source Code" >(src)</a>.</li>
+			  		is not serializeable by throwing a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/conversion/ValueConverterException.html" title="org.eclipse.xtext.conversion.ValueConverterException">ValueConverterException</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/ValueConverterException.java" title="View Source Code" >(src)</a>.</li>
 			  <li>An enum literal is not allowed at this position. This can happen if the referenced enum 
 			  		rule only lists a subset of the literals of the actual enumeration.</li>
 			</ul>
@@ -349,9 +349,9 @@
 			<a name="saveoptions" ></a>
 			<h2>Options</h2>
 			<p>
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/SaveOptions.html" title="org.eclipse.xtext.resource.SaveOptions">SaveOptions</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/SaveOptions.java" title="View Source Code" >(src)</a> can be passed to 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/XtextResource.html" title="org.eclipse.xtext.resource.XtextResource">XtextResource.save(options)</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java" title="View Source Code" >(src)</a> and to 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parsetree/reconstr/Serializer.html" title="org.eclipse.xtext.parsetree.reconstr.Serializer">Serializer.serialize(..)</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/Serializer.java" title="View Source Code" >(src)</a>. 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/resource/SaveOptions.html" title="org.eclipse.xtext.resource.SaveOptions">SaveOptions</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/SaveOptions.java" title="View Source Code" >(src)</a> can be passed to 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/resource/XtextResource.html" title="org.eclipse.xtext.resource.XtextResource">XtextResource.save(options)</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java" title="View Source Code" >(src)</a> and to 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/parsetree/reconstr/Serializer.html" title="org.eclipse.xtext.parsetree.reconstr.Serializer">Serializer.serialize(..)</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/Serializer.java" title="View Source Code" >(src)</a>. 
 			Available options are:
 			<ul>
 			  <li><em>Formatting</em>. Default: <span class="inlinecode"><span class="keyword">false</span></span>. If enabled, it is the <a href="105-formatting.php" title="Go to &quot;Formatting (Pretty Printing)&quot;">formatters</a> job to determine
@@ -366,14 +366,14 @@
 			<a name="commentassociater" ></a>
 			<h2>Preserving Comments from the Node Model</h2>
 			<p>
-			The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parsetree/reconstr/ICommentAssociater.html" title="org.eclipse.xtext.parsetree.reconstr.ICommentAssociater">ICommentAssociater</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ICommentAssociater.java" title="View Source Code" >(src)</a> associates 
+			The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/parsetree/reconstr/ICommentAssociater.html" title="org.eclipse.xtext.parsetree.reconstr.ICommentAssociater">ICommentAssociater</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ICommentAssociater.java" title="View Source Code" >(src)</a> associates 
 			comments with semantic objects. This is important in case an element in the semantic model is moved 
 			to a different position and the model is serialized, one expects the comments to be moved to the 
 			new position in the document as well.
 			</p>
 			<p>
 			Which comment belongs to which semantic object is surely a very subjective issue. The 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parsetree/reconstr/impl/DefaultCommentAssociater.html" title="org.eclipse.xtext.parsetree.reconstr.impl.DefaultCommentAssociater">default 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/parsetree/reconstr/impl/DefaultCommentAssociater.html" title="org.eclipse.xtext.parsetree.reconstr.impl.DefaultCommentAssociater">default 
 			implementation</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/impl/DefaultCommentAssociater.java" title="View Source Code" >(src)</a>
 			behaves as follows, but can be customized:
 			<ul>
@@ -389,7 +389,7 @@
 			Transient values are values or model elements which are not persisted (written to the textual 
 			representation in the serialization phase). If a model contains model elements which can not be serialized 
 			with the current grammar, it is critical to mark them transient using the 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parsetree/reconstr/ITransientValueService.html" title="org.eclipse.xtext.parsetree.reconstr.ITransientValueService">ITransientValueService</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ITransientValueService.java" title="View Source Code" >(src)</a>, or serialization 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/parsetree/reconstr/ITransientValueService.html" title="org.eclipse.xtext.parsetree.reconstr.ITransientValueService">ITransientValueService</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ITransientValueService.java" title="View Source Code" >(src)</a>, or serialization 
 			will fail. The default implementation marks all model elements transient, which are <span class="inlinecode">eStructuralFeature.isTransient()</span> 
 			or not <span class="inlinecode">eObject.eIsSet(eStructuralFeature)</span>. By default, EMF returns <span class="inlinecode"><span class="keyword">false</span></span> for <span class="inlinecode">eIsSet(..)</span> if the 
 			value equals the default value.    
@@ -421,16 +421,16 @@
 			in the semantic model whether the keyword <em>item</em> or <em>items</em> has been parsed. This is due to the fact 
 			that the rule call <em>Plural</em> is unassigned. However, the <a href="100-serialization.php#parsetreeconstructor" title="Go to &quot;Parse Tree Constructor&quot;">parse tree constructor</a> 
 			needs to decide which value to write during serialization. This decision can be be made by customizing 
-			the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parsetree/reconstr/ITokenSerializer.IValueSerializer.html" title="org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IValueSerializer">IValueSerializer.serializeUnassignedValue(EObject, RuleCall, INode)</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ITokenSerializer.java" title="View Source Code" >(src)</a>.
+			the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/parsetree/reconstr/ITokenSerializer.IValueSerializer.html" title="org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IValueSerializer">IValueSerializer.serializeUnassignedValue(EObject, RuleCall, INode)</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ITokenSerializer.java" title="View Source Code" >(src)</a>.
 			</p>
 			<a name="crossreferenceserializer" ></a>
 			<h2>Cross-Reference Serializer</h2>
 			<p>
 			The cross-reference serializer specifies which values are to be written to the textual representation 
 			for cross-references. This behavior can be customized by implementing 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parsetree/reconstr/ITokenSerializer.ICrossReferenceSerializer.html" title="org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.ICrossReferenceSerializer">ITokenSerializer.ICrossReferenceSerializer</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ITokenSerializer.java" title="View Source Code" >(src)</a>. 
-			The default implementation delegates to various other services such as the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScopeProvider.html" title="org.eclipse.xtext.scoping.IScopeProvider">IScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" title="View Source Code" >(src)</a> or the 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/linking/impl/LinkingHelper.html" title="org.eclipse.xtext.linking.impl.LinkingHelper">LinkingHelper</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/impl/LinkingHelper.java" title="View Source Code" >(src)</a> each of which may be the better place for customization.
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/parsetree/reconstr/ITokenSerializer.ICrossReferenceSerializer.html" title="org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.ICrossReferenceSerializer">ITokenSerializer.ICrossReferenceSerializer</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ITokenSerializer.java" title="View Source Code" >(src)</a>. 
+			The default implementation delegates to various other services such as the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/scoping/IScopeProvider.html" title="org.eclipse.xtext.scoping.IScopeProvider">IScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" title="View Source Code" >(src)</a> or the 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/linking/impl/LinkingHelper.html" title="org.eclipse.xtext.linking.impl.LinkingHelper">LinkingHelper</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/impl/LinkingHelper.java" title="View Source Code" >(src)</a> each of which may be the better place for customization.
 			</p>
 			<a name="hiddentokenmerger" ></a>
 			<h2>Merge White Space</h2>
@@ -448,10 +448,10 @@
 			<h2>Token Stream</h2>
 			<p>
 			The <a href="100-serialization.php#parsetreeconstructor" title="Go to &quot;Parse Tree Constructor&quot;">parse tree constructor</a> and the <a href="105-formatting.php" title="Go to &quot;Formatting (Pretty Printing)&quot;">formatter</a> use an 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parsetree/reconstr/ITokenStream.html" title="org.eclipse.xtext.parsetree.reconstr.ITokenStream">ITokenStream</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ITokenStream.java" title="View Source Code" >(src)</a> for their output, and the 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/parsetree/reconstr/ITokenStream.html" title="org.eclipse.xtext.parsetree.reconstr.ITokenStream">ITokenStream</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ITokenStream.java" title="View Source Code" >(src)</a> for their output, and the 
 			latter for its input as well. This allows for chaining the two components. Token streams can be converted to a <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="java.lang.String">String</abbr></a> 
-			using the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parsetree/reconstr/impl/TokenStringBuffer.html" title="org.eclipse.xtext.parsetree.reconstr.impl.TokenStringBuffer">TokenStringBuffer</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/impl/TokenStringBuffer.java" title="View Source Code" >(src)</a> and to 
-			a <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/io/Writer.html" title="java.io.Writer">Writer</abbr></a> using the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parsetree/reconstr/impl/WriterTokenStream.html" title="org.eclipse.xtext.parsetree.reconstr.impl.WriterTokenStream">WriterTokenStream</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/impl/WriterTokenStream.java" title="View Source Code" >(src)</a>.
+			using the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/parsetree/reconstr/impl/TokenStringBuffer.html" title="org.eclipse.xtext.parsetree.reconstr.impl.TokenStringBuffer">TokenStringBuffer</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/impl/TokenStringBuffer.java" title="View Source Code" >(src)</a> and to 
+			a <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/io/Writer.html" title="java.io.Writer">Writer</abbr></a> using the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/parsetree/reconstr/impl/WriterTokenStream.html" title="org.eclipse.xtext.parsetree.reconstr.impl.WriterTokenStream">WriterTokenStream</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/impl/WriterTokenStream.java" title="View Source Code" >(src)</a>.
 			</p>
 			<p>
 			<div class="literallayout">

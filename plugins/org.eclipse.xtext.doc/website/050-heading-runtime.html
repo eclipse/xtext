@@ -205,7 +205,7 @@
 		<a href="040-dependency-injection.php" title="Go to &quot;Dependency Injection in Xtext with Google Guice&quot;">dependency injection</a>. Xtext may be used in different environments which introduce 
 		different constraints. Especially important is the difference between OSGi managed containers and plain 
 		vanilla Java programs. To honor these differences Xtext uses the concept of 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ISetup.html" title="org.eclipse.xtext.ISetup">ISetup</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/ISetup.java" title="View Source Code" >(src)</a>-implementations in normal mode and uses Eclipse's 
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/ISetup.html" title="org.eclipse.xtext.ISetup">ISetup</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/ISetup.java" title="View Source Code" >(src)</a>-implementations in normal mode and uses Eclipse's 
 		extension mechanism when it should be configured in an OSGi environment.   
 		</p>
 		<a name="runtimeSetup" ></a>
@@ -215,12 +215,12 @@
 			<br style="clear:both"></br>
 			<h1>Runtime Setup (ISetup)</h1>
 			<p>
-			For each language there is an implementation of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ISetup.html" title="org.eclipse.xtext.ISetup">ISetup</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/ISetup.java" title="View Source Code" >(src)</a> 
+			For each language there is an implementation of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/ISetup.html" title="org.eclipse.xtext.ISetup">ISetup</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/ISetup.java" title="View Source Code" >(src)</a> 
 			generated. It implements a method called <span class="inlinecode">createInjectorAndDoEMFRegistration()</span>, which can be called 
 			to do the initialization of the language infrastructure. 
 			</p>
 			<p>
-			<em>Caveat</em>: The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ISetup.html" title="org.eclipse.xtext.ISetup">ISetup</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/ISetup.java" title="View Source Code" >(src)</a> class is intended to be used for runtime and for unit 
+			<em>Caveat</em>: The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/ISetup.html" title="org.eclipse.xtext.ISetup">ISetup</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/ISetup.java" title="View Source Code" >(src)</a> class is intended to be used for runtime and for unit 
 			testing, only. if you use it in a Equinox scenario, you will very likely break the running application 
 			because entries to the global registries will be overwritten.
 			</p>

@@ -207,8 +207,8 @@
 			<p>
 			When navigating a hyperlink, Xtext will also select the text region corresponding to the referenced model 
 			element. Determining this text region is the responsibility of the 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/ILocationInFileProvider.html" title="org.eclipse.xtext.resource.ILocationInFileProvider">ILocationInFileProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/ILocationInFileProvider.java" title="View Source Code" >(src)</a>. The 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/DefaultLocationInFileProvider.html" title="org.eclipse.xtext.resource.DefaultLocationInFileProvider">default implementation</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/DefaultLocationInFileProvider.java" title="View Source Code" >(src)</a> implements a best 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/resource/ILocationInFileProvider.html" title="org.eclipse.xtext.resource.ILocationInFileProvider">ILocationInFileProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/ILocationInFileProvider.java" title="View Source Code" >(src)</a>. The 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/resource/DefaultLocationInFileProvider.html" title="org.eclipse.xtext.resource.DefaultLocationInFileProvider">default implementation</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/DefaultLocationInFileProvider.java" title="View Source Code" >(src)</a> implements a best 
 			effort strategy which can be summarized as:
 			</p>
 			<p>
@@ -236,7 +236,7 @@
 			</p>
 			<p>
 			As the default strategy is a best effort it may not always result in the selection you want. If that's 
-			the case you can <a href="040-dependency-injection.php#guicemodules" title="Go to &quot;The Module API&quot;">override</a> the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/ILocationInFileProvider.html" title="org.eclipse.xtext.resource.ILocationInFileProvider">ILocationInFileProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/ILocationInFileProvider.java" title="View Source Code" >(src)</a> binding in 
+			the case you can <a href="040-dependency-injection.php#guicemodules" title="Go to &quot;The Module API&quot;">override</a> the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/resource/ILocationInFileProvider.html" title="org.eclipse.xtext.resource.ILocationInFileProvider">ILocationInFileProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/ILocationInFileProvider.java" title="View Source Code" >(src)</a> binding in 
 			the UI module as in the following example:
 			</p>
 			<p>
@@ -256,15 +256,15 @@
 			</p>
 			<p>
 			Often the default strategy only needs some guidance (e.g. selecting the text corresponding to another 
-			feature than <em>name</em>). In that case you can simply subclass the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/DefaultLocationInFileProvider.html" title="org.eclipse.xtext.resource.DefaultLocationInFileProvider">DefaultLocationInFileProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/DefaultLocationInFileProvider.java" title="View Source Code" >(src)</a>
+			feature than <em>name</em>). In that case you can simply subclass the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/resource/DefaultLocationInFileProvider.html" title="org.eclipse.xtext.resource.DefaultLocationInFileProvider">DefaultLocationInFileProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/DefaultLocationInFileProvider.java" title="View Source Code" >(src)</a>
 			and override the methods <span class="inlinecode">getIdentifierFeature()</span> or <span class="inlinecode">useKeyword()</span> to guide the first and 
-			last steps of the strategy as described above (see <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xtext/XtextLocationInFileProvider.html" title="org.eclipse.xtext.xtext.XtextLocationInFileProvider">XtextLocationInFileProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xtext/src/org/eclipse/xtext/xtext/XtextLocationInFileProvider.java" title="View Source Code" >(src)</a> 
+			last steps of the strategy as described above (see <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/xtext/XtextLocationInFileProvider.html" title="org.eclipse.xtext.xtext.XtextLocationInFileProvider">XtextLocationInFileProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xtext/src/org/eclipse/xtext/xtext/XtextLocationInFileProvider.java" title="View Source Code" >(src)</a> 
 			for an example).
 			</p>
 			<a name="hyperlinking_3" ></a>
 			<h2>Customizing Available Hyperlinks</h2>
 			<p>
-			The hyperlinks are provided by the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/hyperlinking/HyperlinkHelper.html" title="org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkHelper">HyperlinkHelper</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/hyperlinking/HyperlinkHelper.java" title="View Source Code" >(src)</a>
+			The hyperlinks are provided by the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/ui/editor/hyperlinking/HyperlinkHelper.html" title="org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkHelper">HyperlinkHelper</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/hyperlinking/HyperlinkHelper.java" title="View Source Code" >(src)</a>
 			which will create links for cross-referenced objects by default. Clients may want to override 
 			<span class="inlinecode">createHyperlinksByOffset(XtextResource,&nbsp;<span class="keyword">int</span>,&nbsp;IHyperlinkAcceptor)</span> to provide additional links or 
 			supersede the default implementation. 

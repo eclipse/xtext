@@ -218,7 +218,7 @@
 			</p>
 			<p>
 			Now that the validation has a unique code identifying the problem we can register quick fixes for it. 
-			We start by adding the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/generator/quickfix/QuickfixProviderFragment.html" title="org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment">QuickfixProviderFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/quickfix/QuickfixProviderFragment.java" title="View Source Code" >(src)</a> 
+			We start by adding the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/ui/generator/quickfix/QuickfixProviderFragment.html" title="org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment">QuickfixProviderFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/quickfix/QuickfixProviderFragment.java" title="View Source Code" >(src)</a> 
 			to our workflow and after regenerating the code we should find an empty class <em>MyDslQuickfixProvider</em> 
 			in our DSL's UI project and new entries in the <em>plugin.xml_gen</em> file.
 			</p>
@@ -255,29 +255,29 @@
 			</p>
 			<p>
 			By using the correct signature (see below) and annotating the method with the 
-			@<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/quickfix/Fix.html" title="org.eclipse.xtext.ui.editor.quickfix.Fix">@Fix</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/quickfix/Fix.java" title="View Source Code" >(src)</a> annotation referencing the previously specified 
+			@<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/ui/editor/quickfix/Fix.html" title="org.eclipse.xtext.ui.editor.quickfix.Fix">@Fix</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/quickfix/Fix.java" title="View Source Code" >(src)</a> annotation referencing the previously specified 
 			issue code from the validator, Xtext knows that this method implements a fix for the problem. This 
 			also allows us to annotate multiple methods as fixes for the same problem.
 			</p>
 			<p>
 			The first three parameters given to the 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/quickfix/IssueResolutionAcceptor.html" title="org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor">IssueResolutionAcceptor</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/quickfix/IssueResolutionAcceptor.java" title="View Source Code" >(src)</a> define the 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/ui/editor/quickfix/IssueResolutionAcceptor.html" title="org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor">IssueResolutionAcceptor</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/quickfix/IssueResolutionAcceptor.java" title="View Source Code" >(src)</a> define the 
 			UI representation of the quick fix. As the document is not necessarily loaded when the quick fix is 
 			offered, we need to provide any additional data from the model that we want to refer to in the UI 
 			when creating the issue in the validator above. In this case, we provided the existing type name. 
-			The additional data is available as <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/validation/Issue.html" title="org.eclipse.xtext.validation.Issue">Issue.getData()</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Issue.java" title="View Source Code" >(src)</a>. As it is persisted in markers, only strings 
+			The additional data is available as <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/validation/Issue.html" title="org.eclipse.xtext.validation.Issue">Issue.getData()</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Issue.java" title="View Source Code" >(src)</a>. As it is persisted in markers, only strings 
 			are allowed. 
 			</p>
 			<p>
 			The actual model modification is implemented in the 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/model/edit/IModification.html" title="org.eclipse.xtext.ui.editor.model.edit.IModification">IModification</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/IModification.java" title="View Source Code" >(src)</a>. 
-			The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/model/edit/IModificationContext.html" title="org.eclipse.xtext.ui.editor.model.edit.IModificationContext">IModificationContext</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/IModificationContext.java" title="View Source Code" >(src)</a> provides 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/ui/editor/model/edit/IModification.html" title="org.eclipse.xtext.ui.editor.model.edit.IModification">IModification</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/IModification.java" title="View Source Code" >(src)</a>. 
+			The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/ui/editor/model/edit/IModificationContext.html" title="org.eclipse.xtext.ui.editor.model.edit.IModificationContext">IModificationContext</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/IModificationContext.java" title="View Source Code" >(src)</a> provides 
 			access to the erroneous document. In this case, we're using Eclipse's <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/text/IDocument.html" title="org.eclipse.jface.text.IDocument">IDocument</abbr></a> API to replace a 
 			text region.    
 			</p>
 			<p>
 			If you prefer to implement the quick fix in terms of the semantic model use a 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/model/edit/ISemanticModification.html" title="org.eclipse.xtext.ui.editor.model.edit.ISemanticModification">ISemanticModification</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/ISemanticModification.java" title="View Source Code" >(src)</a> instead. 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/ui/editor/model/edit/ISemanticModification.html" title="org.eclipse.xtext.ui.editor.model.edit.ISemanticModification">ISemanticModification</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/ISemanticModification.java" title="View Source Code" >(src)</a> instead. 
 			Its <span class="inlinecode">apply(EObject,&nbsp;IModificationContext)</span> method will be invoked inside a modify-transaction and the 
 			first argument will be the erroneous semantic element. This makes it very easy for the fix method to 
 			modify the model as necessary. After the method returns the model as well as the Xtext editor's content 
@@ -311,11 +311,11 @@
 			<h2>Quickfixes for Linking Errors and Syntax Errors</h2>
 			<p>
 			You can even define quick fixes for linking errors. The issue codes are assigned by the 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/linking/ILinkingDiagnosticMessageProvider.html" title="org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider">ILinkingDiagnosticMessageProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/ILinkingDiagnosticMessageProvider.java" title="View Source Code" >(src)</a>. Have a look at the domain model 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/linking/ILinkingDiagnosticMessageProvider.html" title="org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider">ILinkingDiagnosticMessageProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/ILinkingDiagnosticMessageProvider.java" title="View Source Code" >(src)</a>. Have a look at the domain model 
 			example how to add quick fixes for these errors.
 			</p>
 			<p>
-			Hence, there is the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parser/antlr/ISyntaxErrorMessageProvider.html" title="org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider">ISyntaxErrorMessageProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/antlr/ISyntaxErrorMessageProvider.java" title="View Source Code" >(src)</a> to assign 
+			Hence, there is the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/parser/antlr/ISyntaxErrorMessageProvider.html" title="org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider">ISyntaxErrorMessageProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/antlr/ISyntaxErrorMessageProvider.java" title="View Source Code" >(src)</a> to assign 
 			issue codes to syntactical errors.
 			</p>
 		<div id="disqus_thread"></div>

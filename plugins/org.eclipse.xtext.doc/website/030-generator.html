@@ -363,7 +363,7 @@
 			<p>
 			A language generator is composed of so called language configurations. 
 			For each language configuration a URI pointing to its grammar file and the file extensions for the DSL must be provided. 
-			In addition, a language is configured with a list of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/IGeneratorFragment.html" title="org.eclipse.xtext.generator.IGeneratorFragment">generator
+			In addition, a language is configured with a list of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/generator/IGeneratorFragment.html" title="org.eclipse.xtext.generator.IGeneratorFragment">generator
 			fragments</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java" title="View Source Code" >(src)</a>.
 			The whole generator is composed of theses fragments. We have fragments for generating parsers, the serializer, the EMF code, 
 			the outline view, etc.
@@ -387,7 +387,7 @@
 			to the generation of language infrastructure components and are called in the declared order.
 			Each fragment gets the grammar of the language as an EMF model passed in and is able to generate code in one 
 			of the configured locations and contribute to several shared artifacts. A generator fragment must implement
-			the interface <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/IGeneratorFragment.html" title="org.eclipse.xtext.generator.IGeneratorFragment">IGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java" title="View Source Code" >(src)</a>.
+			the interface <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/generator/IGeneratorFragment.html" title="org.eclipse.xtext.generator.IGeneratorFragment">IGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java" title="View Source Code" >(src)</a>.
 			</p>
 			<p>
 			There is usually no need to write your own generator fragments and only rarely you might want to extend an
@@ -482,62 +482,62 @@
 			    <td><em>Related Documentation</em></td>
 			  </tr>
 			  <tr>
-			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.html" title="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment">EcoreGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java" title="View Source Code" >(src)</a></td>
+			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.html" title="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment">EcoreGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java" title="View Source Code" >(src)</a></td>
 			    <td>EMF code for generated models</td>
 			    <td><a href="020-grammar-language.php#metamodelInference" title="Go to &quot;Ecore Model Inference&quot;">Model inference</a></td>
 			  </tr>
 			  <tr>
-			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/parser/antlr/XtextAntlrGeneratorFragment.html" title="org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment">XtextAntlrGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parser/antlr/XtextAntlrGeneratorFragment.java" title="View Source Code" >(src)</a></td>
+			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/generator/parser/antlr/XtextAntlrGeneratorFragment.html" title="org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment">XtextAntlrGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parser/antlr/XtextAntlrGeneratorFragment.java" title="View Source Code" >(src)</a></td>
 			    <td>ANTLR grammar, parser, lexer and related services</td>
 			    <td> </td>
 			  </tr>
 			  <tr>
-			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/grammarAccess/GrammarAccessFragment.html" title="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment">GrammarAccessFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/grammarAccess/GrammarAccessFragment.java" title="View Source Code" >(src)</a></td>
+			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/generator/grammarAccess/GrammarAccessFragment.html" title="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment">GrammarAccessFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/grammarAccess/GrammarAccessFragment.java" title="View Source Code" >(src)</a></td>
 			    <td>Access to the grammar</td>
 			    <td> </td>
 			  </tr>
 			  <tr>
-			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.html" title="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment">ResourceFactoryFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.java" title="View Source Code" >(src)</a></td>
+			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.html" title="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment">ResourceFactoryFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.java" title="View Source Code" >(src)</a></td>
 			    <td>EMF resource factory</td>
 			    <td><a href="210-emf-integration.php#xtext_resource" title="Go to &quot;XtextResource Implementation&quot;">Xtext Resource</a></td>
 			  </tr>
 			  <tr>
-			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/parseTreeConstructor/ParseTreeConstructorFragment.html" title="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment">ParseTreeConstructorFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parseTreeConstructor/ParseTreeConstructorFragment.java" title="View Source Code" >(src)</a></td>
+			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/generator/parseTreeConstructor/ParseTreeConstructorFragment.html" title="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment">ParseTreeConstructorFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parseTreeConstructor/ParseTreeConstructorFragment.java" title="View Source Code" >(src)</a></td>
 			    <td>Model-to-text serialization</td>
 			    <td><a href="100-serialization.php" title="Go to &quot;Serialization&quot;">Serialization</a></td>
 			  </tr>
 			  <tr>
-			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.html" title="org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment">ImportNamespacesScopingFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.java" title="View Source Code" >(src)</a></td>
+			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.html" title="org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment">ImportNamespacesScopingFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.java" title="View Source Code" >(src)</a></td>
 			    <td>Index-based scoping</td>
 			    <td><a href="080-scoping.php#index_based" title="Go to &quot;Global Scopes Based On External Configuration (e.g. Classpath-Based)&quot;">Index-based namespace scoping</a></td>
 			  </tr>
 			  <tr>
-			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/validation/JavaValidatorFragment.html" title="org.eclipse.xtext.generator.validation.JavaValidatorFragment">JavaValidatorFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/validation/JavaValidatorFragment.java" title="View Source Code" >(src)</a></td>
+			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/generator/validation/JavaValidatorFragment.html" title="org.eclipse.xtext.generator.validation.JavaValidatorFragment">JavaValidatorFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/validation/JavaValidatorFragment.java" title="View Source Code" >(src)</a></td>
 			    <td>Model validation</td>
 			    <td><a href="060-validation.php#custom_validation" title="Go to &quot;Custom Validation&quot;">Model validation</a></td>
 			  </tr>
 			  <tr>
-			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/formatting/FormatterFragment.html" title="org.eclipse.xtext.generator.formatting.FormatterFragment">FormatterFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/formatting/FormatterFragment.java" title="View Source Code" >(src)</a></td>
+			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/generator/formatting/FormatterFragment.html" title="org.eclipse.xtext.generator.formatting.FormatterFragment">FormatterFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/formatting/FormatterFragment.java" title="View Source Code" >(src)</a></td>
 			    <td>Code formatter</td>
 			    <td><a href="105-formatting.php" title="Go to &quot;Formatting (Pretty Printing)&quot;">Code formatter</a></td>
 			  </tr>
 			  <tr>
-			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.html" title="org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment">LabelProviderFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.java" title="View Source Code" >(src)</a></td>
+			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.html" title="org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment">LabelProviderFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.java" title="View Source Code" >(src)</a></td>
 			    <td>Label provider</td>
 			    <td><a href="140-labelprovider.php" title="Go to &quot;Label Provider&quot;">Label provider</a></td>
 			  </tr>
 			  <tr>
-			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/generator/outline/OutlineTreeProviderFragment.html" title="org.eclipse.xtext.ui.generator.outline.OutlineTreeProviderFragment">OutlineTreeProviderFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/outline/OutlineTreeProviderFragment.java" title="View Source Code" >(src)</a></td>
+			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/ui/generator/outline/OutlineTreeProviderFragment.html" title="org.eclipse.xtext.ui.generator.outline.OutlineTreeProviderFragment">OutlineTreeProviderFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/outline/OutlineTreeProviderFragment.java" title="View Source Code" >(src)</a></td>
 			    <td>Outline view configuration</td>
 			    <td><a href="170-outline.php" title="Go to &quot;Outline View&quot;">Outline</a></td>
 			  </tr>
 			  <tr>
-			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/generator/contentAssist/JavaBasedContentAssistFragment.html" title="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment">JavaBasedContentAssistFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/contentAssist/JavaBasedContentAssistFragment.java" title="View Source Code" >(src)</a></td>
+			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/ui/generator/contentAssist/JavaBasedContentAssistFragment.html" title="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment">JavaBasedContentAssistFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/contentAssist/JavaBasedContentAssistFragment.java" title="View Source Code" >(src)</a></td>
 			    <td>Java-based content assist</td>
 			    <td><a href="150-contentassist.php" title="Go to &quot;Content Assist&quot;">Content assist</a></td>
 			  </tr>
 			  <tr>
-			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/parser/antlr/XtextAntlrUiGeneratorFragment.html" title="org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment">XtextAntlrUiGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parser/antlr/XtextAntlrUiGeneratorFragment.java" title="View Source Code" >(src)</a></td>
+			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/generator/parser/antlr/XtextAntlrUiGeneratorFragment.html" title="org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment">XtextAntlrUiGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parser/antlr/XtextAntlrUiGeneratorFragment.java" title="View Source Code" >(src)</a></td>
 			    <td>Content assist helper based on ANTLR</td>
 			    <td><a href="150-contentassist.php" title="Go to &quot;Content Assist&quot;">Content assist</a></td>
 			  </tr>

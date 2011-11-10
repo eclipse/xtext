@@ -196,7 +196,7 @@
 			  </ul>
 			</div>
 			<p>
-			A formatter can be implemented via the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/formatting/IFormatter.html" title="org.eclipse.xtext.formatting.IFormatter">IFormatter</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java" title="View Source Code" >(src)</a> 
+			A formatter can be implemented via the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/formatting/IFormatter.html" title="org.eclipse.xtext.formatting.IFormatter">IFormatter</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java" title="View Source Code" >(src)</a> 
 			service. Technically speaking, a formatter is a <a href="100-serialization.php#tokenstream" title="Go to &quot;Token Stream&quot;">Token Stream</a> which 
 			inserts/removes/modifies hidden tokens (white space, line-breaks, comments).
 			</p>
@@ -207,16 +207,16 @@
 			<p>
 			Xtext ships with two formatters:
 			<ul>
-			  <li>The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/formatting/impl/OneWhitespaceFormatter.html" title="org.eclipse.xtext.formatting.impl.OneWhitespaceFormatter">OneWhitespaceFormatter</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/OneWhitespaceFormatter.java" title="View Source Code" >(src)</a> simply writes one 
+			  <li>The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/formatting/impl/OneWhitespaceFormatter.html" title="org.eclipse.xtext.formatting.impl.OneWhitespaceFormatter">OneWhitespaceFormatter</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/OneWhitespaceFormatter.java" title="View Source Code" >(src)</a> simply writes one 
 			  		white space between all tokens.</li>
-			  <li>The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/formatting/impl/AbstractDeclarativeFormatter.html" title="org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter">AbstractDeclarativeFormatter</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/AbstractDeclarativeFormatter.java" title="View Source Code" >(src)</a> allows advanced 
-			  		configuration using a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/formatting/impl/FormattingConfig.html" title="org.eclipse.xtext.formatting.impl.FormattingConfig">FormattingConfig</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java" title="View Source Code" >(src)</a>. Both are explained
+			  <li>The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/formatting/impl/AbstractDeclarativeFormatter.html" title="org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter">AbstractDeclarativeFormatter</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/AbstractDeclarativeFormatter.java" title="View Source Code" >(src)</a> allows advanced 
+			  		configuration using a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/formatting/impl/FormattingConfig.html" title="org.eclipse.xtext.formatting.impl.FormattingConfig">FormattingConfig</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java" title="View Source Code" >(src)</a>. Both are explained
 			  		below.</li>
 			</ul>
 			</p>
 			<p>
 			A declarative formatter can be implemented by subclassing 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/formatting/impl/AbstractDeclarativeFormatter.html" title="org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter">AbstractDeclarativeFormatter</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/AbstractDeclarativeFormatter.java" title="View Source Code" >(src)</a>, as shown in 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/formatting/impl/AbstractDeclarativeFormatter.html" title="org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter">AbstractDeclarativeFormatter</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/AbstractDeclarativeFormatter.java" title="View Source Code" >(src)</a>, as shown in 
 			the following example:
 			</p>
 			<p>
@@ -270,10 +270,10 @@
 			</p>
 			<p>
 			The formatter has to implement the method <span class="inlinecode">configureFormatting(...)</span> which declaratively sets up 
-			a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/formatting/impl/FormattingConfig.html" title="org.eclipse.xtext.formatting.impl.FormattingConfig">FormattingConfig</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java" title="View Source Code" >(src)</a>.
+			a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/formatting/impl/FormattingConfig.html" title="org.eclipse.xtext.formatting.impl.FormattingConfig">FormattingConfig</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java" title="View Source Code" >(src)</a>.
 			</p>
 			<p>
-			The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/formatting/impl/FormattingConfig.html" title="org.eclipse.xtext.formatting.impl.FormattingConfig">FormattingConfig</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java" title="View Source Code" >(src)</a> consist of general 
+			The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/formatting/impl/FormattingConfig.html" title="org.eclipse.xtext.formatting.impl.FormattingConfig">FormattingConfig</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java" title="View Source Code" >(src)</a> consist of general 
 			settings and a set of formatting instructions:
 			</p>
 			<a name="formatting_8" ></a>
@@ -317,8 +317,8 @@
 			terminology of the lexer a data type rule can match a composition of multiple tokens.
 			</p>
 			<p>
-			The parameter <em>element</em> can be a grammar's <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/AbstractElement.html" title="org.eclipse.xtext.AbstractElement">AbstractElement</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/AbstractElement.java" title="View Source Code" >(src)</a> or a grammar's 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/AbstractRule.html" title="org.eclipse.xtext.AbstractRule">AbstractRule</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/AbstractRule.java" title="View Source Code" >(src)</a>. All grammar 
+			The parameter <em>element</em> can be a grammar's <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/AbstractElement.html" title="org.eclipse.xtext.AbstractElement">AbstractElement</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/AbstractElement.java" title="View Source Code" >(src)</a> or a grammar's 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/AbstractRule.html" title="org.eclipse.xtext.AbstractRule">AbstractRule</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/AbstractRule.java" title="View Source Code" >(src)</a>. All grammar 
 			rules and almost all abstract elements can be matched. This includes rule calls, parser rules, groups 
 			and alternatives. The semantic of <span class="inlinecode">before(element)</span>, <span class="inlinecode">after(element)</span>, etc. for rule calls and parser rules is 
 			identical to when the parser would &quot;pass&quot; this part of the grammar. The stack of called rules is taken 
@@ -328,7 +328,7 @@
 			  <li>Grammar elements nested in data type rules. This is due to to the fact that tokens matched 
 			  		by a data type rule are treated as atomic by the serializer. To format these tokens, please 
 			  		implement a <a href="090-valueconverter.php" title="Go to &quot;Value Converter&quot;">ValueConverter</a>. </li>
-			  <li>Grammar elements nested in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/CrossReference.html" title="org.eclipse.xtext.CrossReference">CrossReference</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/CrossReference.java" title="View Source Code" >(src)</a>.</li>
+			  <li>Grammar elements nested in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/CrossReference.html" title="org.eclipse.xtext.CrossReference">CrossReference</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/CrossReference.java" title="View Source Code" >(src)</a>.</li>
 			</ul>
 			</p>
 			<p>
@@ -336,7 +336,7 @@
 			<ul>
 			  <li><span class="inlinecode">setIndentationIncrement()</span> increments indentation by one unit at this position. Whether 
 			  		one unit consists of one tab-character or spaces is defined by 
-			  		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/formatting/IIndentationInformation.html" title="org.eclipse.xtext.formatting.IIndentationInformation">IIndentationInformation</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IIndentationInformation.java" title="View Source Code" >(src)</a>. The default implementation 
+			  		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/formatting/IIndentationInformation.html" title="org.eclipse.xtext.formatting.IIndentationInformation">IIndentationInformation</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IIndentationInformation.java" title="View Source Code" >(src)</a>. The default implementation 
 			  		consults Eclipse's <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/preference/IPreferenceStore.html" title="org.eclipse.jface.preference.IPreferenceStore">IPreferenceStore</abbr></a>.</li>
 			  <li><span class="inlinecode">setIndentationDecrement()</span> decrements indentation by one unit.</li>
 			  <li><span class="inlinecode">setLinewrap()</span>: Inserts a line-wrap at this position.</li>
@@ -361,7 +361,7 @@
 			<p>
 			Sometimes, if a grammar contains many similar elements for which the same formatting instructions ought 
 			to apply, it can be tedious to specify them for each grammar element individually. The 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/IGrammarAccess.html" title="org.eclipse.xtext.IGrammarAccess">IGrammarAccess</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/IGrammarAccess.java" title="View Source Code" >(src)</a> provides convenience methods for this. The 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/org/eclipse/xtext/IGrammarAccess.html" title="org.eclipse.xtext.IGrammarAccess">IGrammarAccess</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/IGrammarAccess.java" title="View Source Code" >(src)</a> provides convenience methods for this. The 
 			find methods are available for the grammar and for each parser rule.
 			</p>
 			<p>
