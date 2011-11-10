@@ -14,6 +14,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.AssertionFailedException;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.BadLocationException;
@@ -129,6 +130,9 @@ public class DefaultFoldingRegionProvider implements IFoldingRegionProvider {
 		} catch (BadLocationException e) {
 			log.error(e, e);
 		} catch (BadPartitioningException e) {
+			log.error(e, e);
+		} catch (AssertionFailedException e) {
+			// partioning failed
 			log.error(e, e);
 		}
 	}
