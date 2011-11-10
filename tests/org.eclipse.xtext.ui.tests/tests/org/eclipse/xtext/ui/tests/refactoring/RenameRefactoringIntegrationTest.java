@@ -31,6 +31,7 @@ import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import org.eclipse.ui.texteditor.IDocumentProviderExtension;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -38,7 +39,6 @@ import org.eclipse.xtext.ui.junit.editor.AbstractEditorTest;
 import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.refactoring.impl.RenameElementProcessor;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
-import org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.RefactoringPackage;
 import org.eclipse.xtext.ui.tests.refactoring.referring.Reference;
@@ -61,9 +61,6 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 
 	@Inject
 	private RefactoringTestLanguageFragmentProvider fragmentProvider;
-
-	@Inject
-	private RefactoringPreferences preferences;
 
 	private static final String TEST_PROJECT = "refactoring.test";
 	private static final String TEST_FILE0_NAME = TEST_PROJECT + "/" + "File0.refactoringtestlanguage";
@@ -115,11 +112,13 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 	public void testEditorFileRename() throws Exception {
 		XtextEditor editor = openEditor(testFile0);
 		doRename();
+		synchronize(editor);
 		testFile0.refreshLocal(-1, null);
 		waitForAutoBuild();
 		assertEquals(initialModel0.replaceAll("B", "C"), editor.getDocument().get());
 		assertEquals(initialModel1.replaceAll("B", "C"), readFile(testFile1));
 		undoRename();
+		synchronize(editor);
 		assertEquals(initialModel0, editor.getDocument().get());
 		assertEquals(initialModel1, readFile(testFile1));
 	}
@@ -128,9 +127,11 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 		XtextEditor editor0 = openEditor(testFile0);
 		XtextEditor editor1 = openEditor(testFile1);
 		doRename();
+		synchronize(editor0, editor1);
 		assertEquals(initialModel0.replaceAll("B", "C"), editor0.getDocument().get());
 		assertEquals(initialModel1.replaceAll("B", "C"), editor1.getDocument().get());
 		undoRename();
+		synchronize(editor0, editor1);
 		assertEquals(initialModel0, editor0.getDocument().get());
 		assertEquals(initialModel1, editor1.getDocument().get());
 	}
@@ -153,9 +154,11 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 	public void testFileEditorRename() throws Exception {
 		XtextEditor editor1 = openEditor(testFile1);
 		doRename();
+		synchronize(editor1);
 		assertEquals(initialModel0.replaceAll("B", "C"), readFile(testFile0));
 		assertEquals(initialModel1.replaceAll("B", "C"), editor1.getDocument().get());
 		undoRename();
+		synchronize(editor1);
 		assertEquals(initialModel0, readFile(testFile0));
 		assertEquals(initialModel1, editor1.getDocument().get());
 	}
@@ -213,46 +216,6 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 		i = 0;
 		for (IFile file : referringFiles) {
 			assertEquals("foo" + i++ + " {ref B}", readFile(file));
-		}
-	}
-
-	public void testCleanEditor() throws Exception {
-		assertFalse(preferences.isSaveAllBeforeRefactoring());
-		XtextEditor editor = openEditor(testFile0);
-		assertFalse(editor.isDirty());
-		doRename();
-		assertFalse(editor.isDirty());
-		undoRename();
-		assertFalse(editor.isDirty());
-	}
-
-	public void testSaveDirtyEditor() throws Exception {
-		assertFalse(preferences.isSaveAllBeforeRefactoring());
-		XtextEditor editor = openEditor(testFile0);
-		String dirtyModel = "Y B A { ref B }";
-		editor.getDocument().set(dirtyModel);
-		waitForReconciler(editor);
-		assertTrue(editor.isDirty());
-		doRename();
-		assertTrue(editor.isDirty());
-		undoRename();
-		assertTrue(editor.isDirty());
-	}
-
-	public void testDontSaveEditor() throws Exception {
-		preferences.setSaveAllBeforeRefactoring(true);
-		try {
-			XtextEditor editor = openEditor(testFile0);
-			String dirtyModel = "Y B A { ref B }";
-			editor.getDocument().set(dirtyModel);
-			waitForReconciler(editor);
-			assertTrue(editor.isDirty());
-			doRename();
-			assertFalse(editor.isDirty());
-			undoRename();
-			assertFalse(editor.isDirty());
-		} finally {
-			preferences.setSaveAllBeforeRefactoring(false);
 		}
 	}
 
@@ -317,6 +280,11 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 				// just wait for the reconciler to announce the dirty state
 			}
 		});
+	}
+
+	protected void synchronize(XtextEditor... editors) throws CoreException {
+		for (XtextEditor editor : editors)
+			((IDocumentProviderExtension) editor.getDocumentProvider()).synchronize(editor.getEditorInput());
 	}
 
 }

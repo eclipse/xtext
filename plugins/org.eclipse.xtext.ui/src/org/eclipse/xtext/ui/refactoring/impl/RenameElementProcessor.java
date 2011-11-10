@@ -243,4 +243,8 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 	protected RefactoringResourceSetProvider getResourceSetProvider() {
 		return resourceSetProvider;
 	}
+	
+	protected StatusWrapper getStatus() {
+		return status;
+	}
 }

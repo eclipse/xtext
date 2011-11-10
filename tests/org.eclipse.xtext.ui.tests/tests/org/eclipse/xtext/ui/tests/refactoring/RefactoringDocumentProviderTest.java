@@ -27,11 +27,9 @@ import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRefactoringDocumentProvider.EditorDocument;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRefactoringDocumentProvider.FileDocument;
-import org.eclipse.xtext.ui.refactoring.impl.DefaultRefactoringDocumentProvider.SaveEditorDocument;
 import org.eclipse.xtext.ui.refactoring.impl.DisplayChangeWrapper;
 import org.eclipse.xtext.ui.refactoring.impl.IRefactoringDocument;
 import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
-import org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences;
 import org.eclipse.xtext.ui.tests.Activator;
 
 import com.google.inject.Inject;
@@ -56,9 +54,6 @@ public class RefactoringDocumentProviderTest extends AbstractEditorTest {
 	@Inject
 	private StatusWrapper status;
 
-	@Inject
-	private RefactoringPreferences preferences;
-
 	private IFile testFile;
 	private ReplaceEdit textEdit;
 
@@ -78,7 +73,7 @@ public class RefactoringDocumentProviderTest extends AbstractEditorTest {
 		textEdit = new ReplaceEdit(0, 1, "C");
 	}
 
-	public void testFileDocumentR() throws Exception {
+	public void testFileDocument() throws Exception {
 		IRefactoringDocument document = createAndCheckDocument(testFile);
 		assertTrue(document instanceof FileDocument);
 		assertEquals(testFile, ((FileDocument) document).getFile());
@@ -93,14 +88,12 @@ public class RefactoringDocumentProviderTest extends AbstractEditorTest {
 	}
 
 	public void testDirtyEditorDocument() throws Exception {
-		assertFalse(preferences.isSaveAllBeforeRefactoring());
 		XtextEditor editor = openEditor(testFile);
 		editor.getDocument().replace(0, 0, " ");
 		editor.getDocument().replace(0, 1, "");
 		assertTrue(editor.isDirty());
 		IRefactoringDocument cleanDocument = createAndCheckDocument(testFile);
 		assertTrue(cleanDocument instanceof EditorDocument);
-		assertFalse(cleanDocument instanceof SaveEditorDocument);
 
 		IXtextDocument editorDocument = editor.getDocument();
 		assertEquals(editorDocument, ((EditorDocument) cleanDocument).getDocument());
@@ -119,55 +112,19 @@ public class RefactoringDocumentProviderTest extends AbstractEditorTest {
 	}
 
 	public void testCleanEditorDocument() throws Exception {
-		assertFalse(preferences.isSaveAllBeforeRefactoring());
 		XtextEditor editor = openEditor(testFile);
-		IRefactoringDocument cleanDocument = createAndCheckDocument(testFile);
-		assertTrue(cleanDocument instanceof SaveEditorDocument);
+		assertFalse(editor.isDirty());
+		IRefactoringDocument document = createAndCheckDocument(testFile);
+		assertTrue(document instanceof FileDocument);
+		assertEquals(testFile, ((FileDocument) document).getFile());
+		assertEquals(TEST_FILE_CONTENT, document.getOriginalContents());
 
-		IXtextDocument editorDocument = editor.getDocument();
-		assertEquals(editorDocument, ((EditorDocument) cleanDocument).getDocument());
-		assertEquals(TEST_FILE_CONTENT, cleanDocument.getOriginalContents());
+		Change change = document.createChange(CHANGE_NAME, textEdit);
+		assertTrue(change instanceof TextFileChange);
+		assertEquals(CHANGE_NAME, change.getName());
 
-		Change change = cleanDocument.createChange(CHANGE_NAME, textEdit);
-		assertTrue(change instanceof DisplayChangeWrapper);
-		assertEquals(TEST_FILE_NAME + " - " + TEST_PROJECT, change.getName());
-		assertTrue(((DisplayChangeWrapper) change).getDelegate() instanceof DocumentChange);
-
-		Change undoChange = checkEdit(cleanDocument, textEdit);
+		Change undoChange = checkEdit(document, textEdit);
 		assertNotNull(undoChange);
-		IRefactoringDocument dirtyDocument = createAndCheckDocument(testFile);
-		assertTrue(cleanDocument instanceof SaveEditorDocument);
-		assertEquals(editorDocument, ((EditorDocument) dirtyDocument).getDocument());
-	}
-
-	public void testSaveEditorDocument() throws Exception {
-		preferences.setSaveAllBeforeRefactoring(true);
-		try {
-			assertTrue(preferences.isSaveAllBeforeRefactoring());
-			XtextEditor editor = openEditor(testFile);
-			editor.getDocument().replace(0, 0, " ");
-			editor.getDocument().replace(0, 1, "");
-			assertTrue(editor.isDirty());
-			IRefactoringDocument cleanDocument = createAndCheckDocument(testFile);
-			assertTrue(cleanDocument instanceof SaveEditorDocument);
-
-			IXtextDocument editorDocument = editor.getDocument();
-			assertEquals(editorDocument, ((EditorDocument) cleanDocument).getDocument());
-			assertEquals(TEST_FILE_CONTENT, cleanDocument.getOriginalContents());
-
-			Change change = cleanDocument.createChange(CHANGE_NAME, textEdit);
-			assertTrue(change instanceof DisplayChangeWrapper);
-			assertEquals(TEST_FILE_NAME + " - " + TEST_PROJECT, change.getName());
-			assertTrue(((DisplayChangeWrapper) change).getDelegate() instanceof DocumentChange);
-
-			Change undoChange = checkEdit(cleanDocument, textEdit);
-			assertNotNull(undoChange);
-			IRefactoringDocument dirtyDocument = createAndCheckDocument(testFile);
-			assertTrue(cleanDocument instanceof SaveEditorDocument);
-			assertEquals(editorDocument, ((EditorDocument) dirtyDocument).getDocument());
-		} finally {
-			preferences.setSaveAllBeforeRefactoring(false);
-		}
 	}
 
 	protected IRefactoringDocument createAndCheckDocument(IFile testFile) {

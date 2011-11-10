@@ -42,7 +42,6 @@ public class JdtRenameParticipant extends AbstractProcessorBasedRenameParticipan
 	@Inject
 	private JvmElementFinder jvmElementFinder;
 
-	
 	@Override
 	public String getName() {
 		return "Xtext JdtRenameParticipant";

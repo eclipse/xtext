@@ -42,6 +42,12 @@ public class RenamedElementTrackerTest extends AbstractXtextTests {
 		fragmentProvider.setUseNames(true);
 	}
 	
+	@Override
+	protected void tearDown() throws Exception {
+		fragmentProvider.setUseNames(false);
+		super.tearDown();
+	}
+	
 	public void testResolveElements() throws Exception {
 		URI resourceURI = URI.createFileURI("testresource.refactoringtestlanguage");
 		String textualModel = "A { B { C { ref A.B } } ref B }";

@@ -85,6 +85,8 @@ public class CrossReferenceSerializerFacadeTest extends AbstractXtextTests {
 		
 		Element bar = (Element) main.getElements().get(0);
 		Element foo = bar.getReferenced().get(0);
+		assertEquals("foo", foo.getName());
+		
 		CrossReference crossref = GrammarUtil.containedCrossReferences(grammarAccess.getElementRule()).get(0);
 		TextRegion linkTextRegion = new TextRegion(model.lastIndexOf("foo"), 3);
 		String linkText = facade.serializeCrossRef(bar, crossref, foo, linkTextRegion, status);
@@ -97,6 +99,7 @@ public class CrossReferenceSerializerFacadeTest extends AbstractXtextTests {
 		assertEquals(linkText1, "fooBar");
 		assertTrue(status.getRefactoringStatus().isOK());
 
+		assertEquals(foo, ((Main) resource.getContents().get(0)).getElements().get(1));
 		foo.setName("bar");
 		resource.getCache().clear(resource);
 		facade.serializeCrossRef(bar, crossref, foo, linkTextRegion, status);

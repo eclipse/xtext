@@ -30,7 +30,6 @@ import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.texteditor.ITextEditorExtension;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IGlobalServiceProvider;
-import org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences;
 import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
 
 import com.google.inject.Inject;
@@ -51,12 +50,9 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 	@Inject
 	private IGlobalServiceProvider globalServiceProvider;
 
-	@Inject
-	private RefactoringPreferences preferences;
-
 	protected IFileEditorInput getEditorInput(URI resourceURI, StatusWrapper status) {
 		IFile file = projectUtil.findFileStorage(resourceURI, true);
-		if(file == null) {
+		if (file == null) {
 			status.add(ERROR, "No suitable storage found for resource {0}.", resourceURI);
 			return null;
 		}
@@ -84,13 +80,8 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 			}.syncExec();
 			if (editor != null) {
 				IDocument document = editor.getDocumentProvider().getDocument(fileEditorInput);
-				if(document != null) {
-					if (preferences.isSaveAllBeforeRefactoring() || !editor.isDirty()) {
-						return new SaveEditorDocument(resourceURI, editor, document);
-					} else {
-						return new EditorDocument(resourceURI, document);
-					}
-				}
+				if (document != null && editor.isDirty())
+					return new EditorDocument(resourceURI, document);
 			}
 			return new FileDocument(resourceURI, fileEditorInput.getFile(), globalServiceProvider.findService(
 					resourceURI, IEncodingProvider.class));
@@ -159,6 +150,10 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 		}
 	}
 
+	/**
+	 * @depreacted Saving documents during changes causes unpredictable errors when the document is also renamed
+	 */
+	@Deprecated
 	public static class SaveEditorDocument extends EditorDocument {
 
 		private final ITextEditor editor;
