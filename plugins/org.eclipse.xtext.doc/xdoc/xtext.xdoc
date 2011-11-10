@@ -97,7 +97,7 @@ codelanguage-def[MyDsl][Hello]
 
 codelanguage-def[XML][]
 
-codelanguage-def[DomainExample][package, entity, datatype, import, extends, public, op, return, mapped-to]
+codelanguage-def[DomainExample][package, entity, datatype, many, import, extends, public, op, return, mapped-to]
 
 codelanguage-def[JavaTypesExample][datatype, mapped-to]
 

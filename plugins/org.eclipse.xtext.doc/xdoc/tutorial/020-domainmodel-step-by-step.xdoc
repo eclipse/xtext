@@ -145,7 +145,7 @@ ol[
 		which is parsed by a rule called e[ID]. The rule e[ID] is predefined in the super grammar
 		e[org.eclipse.xtext.common.Terminals] and parses a single word, a.k.a identifier. You can navigate
 		to it by using e[F3] on the rule call.
-		The value returned by the call to e[ID] is assigned (code[Xtext][*]) to the feature e[name].
+		The value returned by the call to e[ID] is assigned (code[Xtext][=]) to the feature e[name].
 		  
 		code[Xtext][
 		DataType:
