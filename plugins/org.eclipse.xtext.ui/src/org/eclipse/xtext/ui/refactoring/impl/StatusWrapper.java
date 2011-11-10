@@ -21,6 +21,7 @@ import org.eclipse.jface.text.Region;
 import org.eclipse.ltk.core.refactoring.FileStatusContext;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.RefactoringStatusContext;
+import org.eclipse.ltk.core.refactoring.RefactoringStatusEntry;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.util.ITextRegion;
@@ -137,7 +138,7 @@ public class StatusWrapper {
 	}
 
 	public void add(int severity, String message, Object... params) {
-		status.addError(format(message, params));
+		status.addEntry(new RefactoringStatusEntry(severity, format(message, params)));
 	}
 
 	public void merge(RefactoringStatus status) {
@@ -147,5 +148,4 @@ public class StatusWrapper {
 	public void merge(StatusWrapper status) {
 		this.status.merge(status.getRefactoringStatus());
 	}
-
 }

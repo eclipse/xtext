@@ -53,7 +53,7 @@ public class RenameRefactoringController {
 	private LinkedEditingUndoSupport undoSupport;
 
 	private String newName;
-
+	
 	public void initialize(IRenameElementContext renameElementContext) {
 		this.renameElementContext = renameElementContext;
 		this.newName = null;

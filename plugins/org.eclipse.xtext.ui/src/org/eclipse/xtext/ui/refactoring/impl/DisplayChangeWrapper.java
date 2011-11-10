@@ -34,21 +34,26 @@ import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
 public class DisplayChangeWrapper extends TextEditBasedChange {
 
 	private Change delegate;
-	
-	private ITextEditor editorToSave;
 
+	/**
+	 * @deprecated Saving editors cause unpredictable errors in combination with resource rename changes
+	 */
+	@Deprecated
 	public DisplayChangeWrapper(TextEditBasedChange delegate, ITextEditor editorToSave) {
 		this((Change) delegate, editorToSave);
 	}
 
-	public DisplayChangeWrapper(TextEditBasedChange delegate) {
-		this((Change) delegate, null);
+	public DisplayChangeWrapper(Change delegate) {
+		super(delegate.getName());
+		this.delegate = delegate;
 	}
 
+	/**
+	 * @deprecated Saving editors cause unpredictable errors in combination with resource rename changes
+	 */
+	@Deprecated
 	protected DisplayChangeWrapper(Change delegate, ITextEditor editorToSave) {
-		super(delegate.getName());
-		this.editorToSave = editorToSave;
-		this.delegate = delegate;
+		this(delegate);
 	}
 
 	public Change getDelegate() {
@@ -128,13 +133,10 @@ public class DisplayChangeWrapper extends TextEditBasedChange {
 			@Override
 			protected Change run() throws Exception {
 				Change result = delegate.perform(monitor.newChild(1));
-				if(editorToSave != null) {
-					editorToSave.doSave(monitor.newChild(1));
-				}
 				return result;
 			}
 		}.syncExec();
-		DisplayChangeWrapper undoWrap = new DisplayChangeWrapper(undoChange, editorToSave);
+		DisplayChangeWrapper undoWrap = new DisplayChangeWrapper(undoChange);
 		return undoWrap;
 	}
 

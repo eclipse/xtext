@@ -30,6 +30,7 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.editor.toggleComments.ISingleLineCommentHelper;
 import org.eclipse.xtext.ui.editor.toggleComments.ToggleSLCommentAction;
+import org.eclipse.xtext.ui.refactoring.impl.RenameElementProcessor;
 import org.eclipse.xtext.xtend2.ui.autoedit.AutoEditStrategyProvider;
 import org.eclipse.xtext.xtend2.ui.autoedit.TokenTypeToPartitionMapper;
 import org.eclipse.xtext.xtend2.ui.contentassist.ImportingTypesProposalProvider;
@@ -49,6 +50,7 @@ import org.eclipse.xtext.xtend2.ui.hover.XtendHoverProvider;
 import org.eclipse.xtext.xtend2.ui.hyperlinking.XtendHyperlinkHelper;
 import org.eclipse.xtext.xtend2.ui.outline.Xtend2OutlineNodeComparator;
 import org.eclipse.xtext.xtend2.ui.outline.Xtend2OutlinePage;
+import org.eclipse.xtext.xtend2.ui.refactoring.Xtend2RenameElementProcessor;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -56,6 +58,7 @@ import com.google.inject.name.Names;
 /**
  * Use this class to register components to be used within the IDE.
  */
+@SuppressWarnings("restriction")
 public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2UiModule {
 	public Xtend2UiModule(AbstractUIPlugin plugin) {
 		super(plugin);
@@ -170,5 +173,9 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 	@Override
 	public ICharacterPairMatcher bindICharacterPairMatcher() {
 		return new DefaultCharacterPairMatcher(new char[] { '(', ')', '{', '}', '[', ']', '«', '»' });
+	}
+	
+	public Class<? extends RenameElementProcessor> bindRenameElementProcessor() {
+		return Xtend2RenameElementProcessor.class;
 	}
 }

@@ -63,6 +63,9 @@ public class DefaultRenameSupport implements IRenameSupport {
 
 	private IRenameElementContext renameElementContext;
 
+	@Inject
+	private SaveHelper saveHelper;
+	
 	protected boolean initialize(IRenameElementContext renameElementContext, String newName) {
 		if (executerProvider != null && renameRefactoringProvider != null) {
 			this.renameRefactoring = renameRefactoringProvider.getRenameRefactoring(renameElementContext);
@@ -92,8 +95,9 @@ public class DefaultRenameSupport implements IRenameSupport {
 	}
 
 	public void startDirectRefactoring() throws InterruptedException {
+		saveHelper.saveEditors(renameElementContext);
 		RenameRefactoringExecuter renameRefactoringExecuter = executerProvider.get();
 		renameRefactoringExecuter.execute(renameElementContext.getTriggeringEditor(), renameRefactoring);
 	}
-
+	
 }

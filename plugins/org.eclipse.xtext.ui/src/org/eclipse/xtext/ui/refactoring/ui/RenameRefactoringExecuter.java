@@ -35,7 +35,10 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.refactoring.impl.Messages;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
 
@@ -104,6 +107,15 @@ public class RenameRefactoringExecuter {
 		} catch (InvocationTargetException e) {
 			LOG.error(e.getMessage(), e);
 		} finally {
+			while(Display.getCurrent().readAndDispatch()) {}
+			if (editor instanceof XtextEditor) {
+				((XtextEditor) editor).getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
+					@Override
+					public void process(XtextResource state) throws Exception {
+					}
+				});
+			}
+			while(Display.getCurrent().readAndDispatch()) {}
 			manager.endRule(rule);
 			refactoring.setValidationContext(null);
 		}

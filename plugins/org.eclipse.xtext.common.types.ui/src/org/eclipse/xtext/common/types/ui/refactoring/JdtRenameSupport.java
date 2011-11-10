@@ -21,8 +21,10 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.ui.refactoring.ui.DefaultRenameSupport;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameSupport;
+import org.eclipse.xtext.ui.refactoring.ui.SaveHelper;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -34,13 +36,17 @@ public class JdtRenameSupport implements IRenameSupport {
 		@Inject
 		private JvmRenameRefactoringProvider jvmRenameRefactorigProvider;
 
+		@Inject
+		private Provider<JdtRenameSupport> jdtRenameSupportProvider;
+
 		@Override
 		public IRenameSupport create(Object context, String newName) {
 			if (context instanceof JdtRefactoringContext) {
 				try {
-					RenameJavaElementDescriptor descriptor = createDescriptor(
-							(JdtRefactoringContext) context, newName);
-					return new JdtRenameSupport(descriptor);
+					RenameJavaElementDescriptor descriptor = createDescriptor((JdtRefactoringContext) context, newName);
+					JdtRenameSupport jdtRenameSupport = jdtRenameSupportProvider.get();
+					jdtRenameSupport.initialize((JdtRefactoringContext) context, descriptor);
+					return jdtRenameSupport;
 				} catch (Exception exc) {
 					throw new WrappedException(exc);
 				}
@@ -48,6 +54,7 @@ public class JdtRenameSupport implements IRenameSupport {
 			return super.create(context, newName);
 		}
 
+		@Deprecated
 		protected RenameJavaElementDescriptor createDescriptor(JdtRefactoringContext renameElementContext,
 				String newName) throws JavaModelException {
 			List<IJavaElement> javaElements = renameElementContext.getJavaElements();
@@ -57,9 +64,27 @@ public class JdtRenameSupport implements IRenameSupport {
 		}
 	}
 
+	@Inject
+	private SaveHelper saveHelper;
+
 	private RenameSupport renameSupport;
 
+	private JdtRefactoringContext renameParticipantContext;
+
+	/**
+	 * @deprecated Use DI and {@link #initialize(JdtRefactoringContext, RenameJavaElementDescriptor)} instead.
+	 */
+	@Deprecated
 	public JdtRenameSupport(RenameJavaElementDescriptor renameDescriptor) throws CoreException {
+		renameSupport = RenameSupport.create(renameDescriptor);
+	}
+
+	public JdtRenameSupport() {
+	}
+
+	protected void initialize(JdtRefactoringContext renameParticipantContext,
+			RenameJavaElementDescriptor renameDescriptor) throws CoreException {
+		this.renameParticipantContext = renameParticipantContext;
 		renameSupport = RenameSupport.create(renameDescriptor);
 	}
 
@@ -73,6 +98,8 @@ public class JdtRenameSupport implements IRenameSupport {
 
 	public void startDirectRefactoring() throws InterruptedException {
 		try {
+			if (saveHelper != null && renameParticipantContext != null)
+				saveHelper.saveEditors(renameParticipantContext);
 			renameSupport.perform(getShell(), PlatformUI.getWorkbench().getActiveWorkbenchWindow());
 		} catch (InvocationTargetException e) {
 			throw new WrappedException(e);
