@@ -113,9 +113,11 @@ public class DefaultOccurrenceComputer implements IOccurrenceComputer {
 					monitor.worked(5);
 					for (IReferenceDescription reference : references) {
 						EObject source = resource.getEObject(reference.getSourceEObjectUri().fragment());
-						ITextRegion textRegion = locationInFileProvider.getSignificantTextRegion(source,
-								reference.getEReference(), reference.getIndexInList());
-						addOccurrenceAnnotation(OCCURRENCE_ANNOTATION_TYPE, document, textRegion, result);
+						if (source != null && reference.getEReference() != null) { // prevent exception for outdated data
+							ITextRegion textRegion = locationInFileProvider.getSignificantTextRegion(source,
+									reference.getEReference(), reference.getIndexInList());
+							addOccurrenceAnnotation(OCCURRENCE_ANNOTATION_TYPE, document, textRegion, result);
+						}
 					}
 					monitor.worked(15);
 					return result;
