@@ -104,7 +104,9 @@ public class Xtend2OutlineTreeProvider extends DefaultOutlineTreeProvider {
 	}
 
 	protected Object _text(XtendImport xtendImport) {
-		return xtendImport.getImportedTypeName();
+		return (xtendImport.getImportedNamespace() != null) 
+			? xtendImport.getImportedNamespace()
+			: xtendImport.getImportedTypeName();
 	}
 	
 	protected int index(XtendFunction f) {
