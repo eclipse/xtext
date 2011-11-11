@@ -80,10 +80,6 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 		return naming.basePackageRuntime(grammar) + ".jvmmodel." + GrammarUtil.getName(grammar) + "JvmModelInferrer";
 	}
 
-	public static String getJvmRenameStrategyName(Grammar grammar, Naming naming) {
-		return naming.basePackageUi(grammar) + ".refactoring." + GrammarUtil.getName(grammar) + "RenameStrategy";
-	}
-
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		if (!usesXbaseGrammar(grammar))
@@ -178,12 +174,12 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelFindRefsQueryDataFactory")
 				.addTypeToType("org.eclipse.xtext.ui.refactoring.IReferenceUpdater",
 						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelReferenceUpdater")
-				.addTypeToType("org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler",
+				.addfinalTypeToType("org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler",
 						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelRenameElementHandler")
 				.addTypeToType("org.eclipse.xtext.common.types.ui.refactoring.participant.JdtRenameParticipant.ContextFactory",
 						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelJdtRenameParticipantContext.ContextFactory")
 			    .addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameStrategy", 
-			    		getJvmRenameStrategyName(grammar, getNaming()));
+			    		"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.DefaultJvmModelRenameStrategy");
 
 		}
 		return bindFactory.getBindings();

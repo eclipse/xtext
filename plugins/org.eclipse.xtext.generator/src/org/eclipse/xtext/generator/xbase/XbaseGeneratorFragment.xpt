@@ -68,32 +68,6 @@ class «getJvmModelInferrerName().toSimpleName()» extends AbstractModelInferrer {
 }
 «ENDFILE»
 «ENDIF»
-
-«IF useInferredJvmModel»
-«FILE getJvmRenameStrategyName().asPath() +".java" SRC_UI»
-/*
-«fileHeader()»
-*/
-package «getJvmRenameStrategyName().toJavaPackage()»;
-
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.AbstractJvmModelRenameStrategy;
-
-/**
- * Encapsulates the model changes of a rename refactoring.  
- */
-@SuppressWarnings("restriction")
-public class «getJvmRenameStrategyName().toSimpleName()» extends AbstractJvmModelRenameStrategy {
-
-	@Override
-	protected void setInferredJvmElementName(String name, EObject renamedSourceElement) {
-		/*
-		 * TODO: rename inferred elements as you would in IJvmModelInferrer 
-		 */
-	}
-}
-«ENDFILE»
-«ENDIF»
 «ENDDEFINE»
 
 «DEFINE addToPluginXmlRt(Boolean useInferredJvmModel, Boolean generateXtendInferrer) FOR Grammar»
