@@ -286,10 +286,6 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 			error("Mandatory library bundle 'org.eclipse.xtext.xbase.lib' not found on the classpath.", clazz,
 					XTEND_CLASS__NAME, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
 		}
-		if (getTypeRefs().findDeclaredType(Inject.class.getName(), clazz) == null) {
-			error("Mandatory library bundle 'com.google.inject' not found on the classpath.", clazz, XTEND_CLASS__NAME,
-					IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
-		}
 	}
 
 	@Check
