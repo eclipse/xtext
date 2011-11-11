@@ -105,7 +105,7 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 	@Inject
 	private ResourceDescriptionsProvider resourceDescriptionsProvider;
 	
-	@Inject
+	@Inject(optional=true)
 	private IWorkbench workbench;
 	
 	@Fix(XtextLinkingDiagnosticMessageProvider.UNRESOLVED_RULE)
