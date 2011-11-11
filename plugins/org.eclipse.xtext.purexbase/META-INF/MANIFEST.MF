@@ -26,11 +26,13 @@ Import-Package: org.apache.commons.logging,
  org.eclipse.xtext.xtend2.lib
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.purexbase,
- org.eclipse.xtext.purexbase.services,
- org.eclipse.xtext.purexbase.pureXbase,
- org.eclipse.xtext.purexbase.pureXbase.impl,
- org.eclipse.xtext.purexbase.pureXbase.util,
+ org.eclipse.xtext.purexbase.formatting,
+ org.eclipse.xtext.purexbase.jvmmodel,
  org.eclipse.xtext.purexbase.parseTreeConstruction,
  org.eclipse.xtext.purexbase.parser.antlr,
  org.eclipse.xtext.purexbase.parser.antlr.internal,
+ org.eclipse.xtext.purexbase.pureXbase,
+ org.eclipse.xtext.purexbase.pureXbase.impl,
+ org.eclipse.xtext.purexbase.pureXbase.util,
+ org.eclipse.xtext.purexbase.services,
  org.eclipse.xtext.purexbase.validation
