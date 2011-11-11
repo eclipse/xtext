@@ -19,6 +19,14 @@ Require-Bundle: org.eclipse.xtext.purexbase;visibility:=reexport,
 Import-Package: org.apache.log4j,
  org.apache.commons.logging
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: org.eclipse.xtext.purexbase.ui.contentassist.antlr,
- org.eclipse.xtext.purexbase.ui.internal
+Export-Package: org.eclipse.xtext.purexbase.ui,
+ org.eclipse.xtext.purexbase.ui.autoedit,
+ org.eclipse.xtext.purexbase.ui.contentassist,
+ org.eclipse.xtext.purexbase.ui.contentassist.antlr,
+ org.eclipse.xtext.purexbase.ui.contentassist.antlr.internal,
+ org.eclipse.xtext.purexbase.ui.folding,
+ org.eclipse.xtext.purexbase.ui.internal,
+ org.eclipse.xtext.purexbase.ui.labeling,
+ org.eclipse.xtext.purexbase.ui.outline,
+ org.eclipse.xtext.purexbase.ui.quickfix
 Bundle-Activator: org.eclipse.xtext.purexbase.ui.internal.PureXbaseActivator
