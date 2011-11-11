@@ -25,6 +25,7 @@ import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
+import org.eclipse.xtext.xtend2.xtend2.XtendImport;
 import org.eclipse.xtext.xtend2.xtend2.XtendMember;
 
 import com.google.inject.Inject;
@@ -102,6 +103,10 @@ public class Xtend2OutlineTreeProvider extends DefaultOutlineTreeProvider {
 		return true;
 	}
 
+	protected Object _text(XtendImport xtendImport) {
+		return xtendImport.getImportedTypeName();
+	}
+	
 	protected int index(XtendFunction f) {
 		return ((XtendClass) f.eContainer()).getMembers().indexOf(f);
 	}
