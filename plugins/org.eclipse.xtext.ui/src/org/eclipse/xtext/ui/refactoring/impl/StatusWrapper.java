@@ -116,24 +116,24 @@ public class StatusWrapper {
 	}
 
 	public void add(int severity, String message, URI uri, ResourceSet resourceSet) {
-		status.addError(format(message, uri), createContext(uri, resourceSet));
+		status.addEntry(new RefactoringStatusEntry(severity, format(message, uri), createContext(uri, resourceSet)));
 	}
 
 	public void add(int severity, String message, URI resourceUri) {
-		status.addError(format(message, resourceUri), createContext(resourceUri, null));
+		status.addEntry(new RefactoringStatusEntry(severity, format(message, resourceUri), createContext(resourceUri, null)));
 	}
 
 	public void add(int severity, String message, EObject element) {
-		status.addError(format(message, element), createContext(element));
+		status.addEntry(new RefactoringStatusEntry(severity, format(message, element), createContext(element)));
 	}
 
 	public void add(int severity, String message, EObject element, ITextRegion region) {
-		status.addError(message, createContext(element, region));
+		status.addEntry(new RefactoringStatusEntry(severity, message, createContext(element, region)));
 	}
 
 	public void add(int severity, String message, Exception exc, Logger log) {
 		String formatted = format(message, exc);
-		status.addError(formatted + ".\nSee log for details.");
+		status.addEntry(new RefactoringStatusEntry(severity, formatted + ".\nSee log for details."));
 		log.error(formatted, exc);
 	}
 
