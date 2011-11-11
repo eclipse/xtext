@@ -422,6 +422,9 @@
             //      modelFileExtension = file.extensions
             // }
 
+            // rename refactoring
+            fragment = refactoring.RefactorElementNameFragment {}
+
             // provides the necessary bindings for java types integration
             fragment = types.TypesGeneratorFragment {}
 
@@ -430,9 +433,6 @@
 
             // provides a preference page for template proposals
             fragment = templates.CodetemplatesGeneratorFragment {}
-
-            // rename refactoring
-            fragment = refactoring.RefactorElementNameFragment {}
 
             // provides a compare view
             fragment = compare.CompareFragment {

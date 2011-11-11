@@ -7,50 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.jvmmodel.refactoring;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.resource.DerivedStateAwareResource;
-import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy;
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
-
-import com.google.inject.Inject;
-
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @deprecated If your generated {@link org.eclipse.xtext.ui.refactoring.IRenameStrategy} inherits form this, it is no
+ *             longer being used as soon as you regenerate. In most cases the bound {@link DefaultJvmModelRenameStrategy} 
+ *             should work fine for you. If not, inherit from {@link DefaultJvmModelRenameStrategy} instead. 
+ *             See {@linkplain https://bugs.eclipse.org/bugs/show_bug.cgi?id=363559} for details.
  */
-@SuppressWarnings("restriction")
-public abstract class AbstractJvmModelRenameStrategy extends DefaultRenameStrategy {
-
-	@Inject
-	private IJvmModelAssociations jvmModelAssociations;
-
-	@Override
-	public void applyDeclarationChange(String newName, ResourceSet resourceSet) {
-		super.applyDeclarationChange(newName, resourceSet);
-		setInferredJvmElementName(newName, resourceSet);
-	}
-
-	@Override
-	public void revertDeclarationChange(ResourceSet resourceSet) {
-		super.revertDeclarationChange(resourceSet);
-		setInferredJvmElementName(getOriginalName(), resourceSet);
-	}
-
-	protected void setInferredJvmElementName(String newName, ResourceSet resourceSet) {
-		EObject renamedElement = resourceSet.getEObject(getTargetElementNewURI(), false);
-		setInferredJvmElementName(newName, renamedElement);
-	}
-
-	protected void setInferredJvmElementName(String name, EObject renamedElement) {
-		if (renamedElement.eResource() instanceof DerivedStateAwareResource) {
-			DerivedStateAwareResource resource = (DerivedStateAwareResource) renamedElement.eResource();
-			resource.discardDerivedState();
-			resource.installDerivedState(false);
-		}
-	}
-	
-	protected IJvmModelAssociations getJvmModelAssociations() {
-		return jvmModelAssociations;
-	}
-	
+@Deprecated
+public abstract class AbstractJvmModelRenameStrategy extends DefaultJvmModelRenameStrategy {
 }
