@@ -45,6 +45,7 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 
 import com.google.common.collect.Maps;
@@ -139,8 +140,9 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 
 	protected void highlightReferenceJvmType(IHighlightedPositionAcceptor acceptor, EObject referencer,
 			EReference reference, EObject resolvedReferencedObject) {
-		if(resolvedReferencedObject instanceof JvmAnnotationType)
+		if(resolvedReferencedObject instanceof JvmAnnotationType){
 			highlightObjectAtFeature(acceptor, referencer, reference, XbaseHighlightingConfiguration.ANNOTATION);
+		}
 	}
 
 	protected void computeFeatureCallHighlighting(XAbstractFeatureCall featureCall, IHighlightedPositionAcceptor acceptor) {
@@ -194,8 +196,11 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 	protected void highlightAnnotation(XAnnotation annotation, IHighlightedPositionAcceptor acceptor) {
 		JvmAnnotationType annotationType = annotation.getAnnotationType();
 		if (annotationType != null && !annotationType.eIsProxy()) {
-			ICompositeNode node = NodeModelUtils.findActualNodeFor(annotation);
-			acceptor.addPosition(node.getOffset(), node.getLength(), XbaseHighlightingConfiguration.ANNOTATION);
+			ICompositeNode xannotationNode = NodeModelUtils.findActualNodeFor(annotation);
+			ILeafNode firstLeafNode = NodeModelUtils.findLeafNodeAtOffset(xannotationNode, xannotationNode.getOffset() );
+			if(firstLeafNode != null)
+				highlightNode(firstLeafNode, XbaseHighlightingConfiguration.ANNOTATION, acceptor);
+			highlightObjectAtFeature(acceptor, annotation, XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, XbaseHighlightingConfiguration.ANNOTATION);
 		}
 	}
 
