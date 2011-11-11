@@ -37,7 +37,6 @@ Export-Package: org.eclipse.xtext.example.domainmodel.ui,
  org.eclipse.xtext.example.domainmodel.ui.navigation,
  org.eclipse.xtext.example.domainmodel.ui.outline,
  org.eclipse.xtext.example.domainmodel.ui.quickfix,
- org.eclipse.xtext.example.domainmodel.ui.refactoring,
  org.eclipse.xtext.example.domainmodel.ui.search,
  org.eclipse.xtext.example.domainmodel.ui.syntaxcoloring
 

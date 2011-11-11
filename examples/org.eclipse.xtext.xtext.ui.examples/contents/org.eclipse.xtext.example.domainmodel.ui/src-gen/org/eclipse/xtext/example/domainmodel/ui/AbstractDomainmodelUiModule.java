@@ -245,7 +245,7 @@ public abstract class AbstractDomainmodelUiModule extends DefaultUiModule {
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.refactoring.IRenameStrategy> bindIRenameStrategy() {
-		return org.eclipse.xtext.example.domainmodel.ui.refactoring.DomainmodelRenameStrategy.class;
+		return org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.DefaultJvmModelRenameStrategy.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.generator.GeneratorFragment

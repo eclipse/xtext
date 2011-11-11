@@ -100,9 +100,7 @@ Workflow {
 			fragment = quickfix.QuickfixProviderFragment {}
 			
 			// rename refactoring
-			fragment = refactoring.RefactorElementNameFragment {
-				useJdtRefactoring = true
-			}
+			fragment = refactoring.RefactorElementNameFragment {}
 			
 			// provides a compare view
 			fragment = compare.CompareFragment {
