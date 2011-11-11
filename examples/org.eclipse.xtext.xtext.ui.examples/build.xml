@@ -11,13 +11,15 @@
 <project name="project" default="zip_all_examples">
 
 	<property name="source" location="contents" />
-	<property name="target" location="org.eclipse.xtext.xtext.ui.examples/contents" />
+	<property name="target_xtext" location="org.eclipse.xtext.xtext.ui.examples/contents" />
+	<property name="target_xtend" location="org.eclipse.xtext.xtend2.ui.examples/contents" />
 
 	<macrodef name="zip_example">
 		<attribute name="name" default="default" />
+		<attribute name="target" default="${target_xtext}" />
 		<sequential>
-			<delete file="${target}/@{name}.zip" />
-			<zip destfile="${target}/@{name}.zip" basedir="${source}/@{name}" excludes="bin,bin/**"  />
+			<delete file="@{target}/@{name}.zip" />
+			<zip destfile="@{target}/@{name}.zip" basedir="${source}/@{name}" excludes="bin,bin/**"  />
 		</sequential>
 	</macrodef>
 
@@ -32,7 +34,7 @@
 		<zip_example name="org.eclipse.xtext.example.fowlerdsl" />
 		<zip_example name="org.eclipse.xtext.example.fowlerdsl.ui" />
 		<zip_example name="xbase.tutorial" />
-		<zip_example name="xtend.tutorial" />
+		<zip_example name="xtend.tutorial" target="${target_xtend}" />
 	</target>
 
 	<target name="generate_self">
