@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="project" default="default">
     <target name="default">
-		<fileset dir="." id="source">
-		    <exclude name="isLocalVersion"/>
-		    <exclude name="build.xml"/>
-		</fileset>
-    	<copy todir="../tmp">
+    	<copy todir="/Users/efftinge/Workspaces/ws-xtext/Xtext-CVS">
+			<fileset dir="." id="source">
+			    <exclude name="islocalversion"/>
+			    <exclude name="build.xml"/>
+			</fileset>
     	</copy>
     </target>
 
