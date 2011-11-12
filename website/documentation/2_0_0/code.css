@@ -5,7 +5,7 @@
 	padding: 1em;
 	background-color: #F0F0F0;
 	color: #000000 !important;
-	font-family: "Lucida Console", Monaco, monospace !important;
+	font-family: "Lucida Console", Monaco, monospace;
 	font-size: 12px;
 }
 
@@ -17,14 +17,12 @@
 	color: #000000 !important;
 }
 
-span.keyword {
-	font-size: inherit;
+.keyword {
 	font-weight: bold;
 	color: #7F0055;
 }
 
-span.string {
-	font-size: inherit;
+.string {
 	font-weight: normal !important;
 	color: #2A00FF;
 }

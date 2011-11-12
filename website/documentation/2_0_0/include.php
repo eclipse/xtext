@@ -22,19 +22,11 @@ $Menu->addMenuItem("Support", "/Xtext/support", "_self");
 $Menu->addMenuItem("Community", "/Xtext/community", "_self");
 $Menu->addMenuItem("Developers", "/Xtext/developers", "_self");
 
-$App->AddExtraHtmlHeader('<script src="/Xtext/js/jquery-1.4.4.min.js" type="text/javascript"></script>' . "\n\t");
-$App->AddExtraHtmlHeader('<link rel="stylesheet" href="/Xtext/css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />' . "\n\t"); 
-$App->AddExtraHtmlHeader('<script src="/Xtext/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>' . "\n\t"); 
 $App->AddExtraHtmlHeader('<link rel="stylesheet" type="text/css" href="/Xtext/style.css"/>' . "\n\t");
 $App->AddExtraHtmlHeader('<link rel="stylesheet" type="text/css" href="/Xtext/style2.css"/>' . "\n\t");
 $App->AddExtraHtmlHeader('<link rel="stylesheet" type="text/css" href="code.css"/>' . "\n\t");
 $App->AddExtraHtmlHeader('<link rel="stylesheet" type="text/css" href="book.css"/>' . "\n\t");
 $App->AddExtraHtmlHeader('<link rel="stylesheet" type="text/css" href="novaAddon.css"/>' . "\n\t");
-$App->AddExtraHtmlHeader('<script type="text/javascript" charset="utf-8">
-$(document).ready(function(){
-	$("a.gallery[rel^=\'prettyPhoto\']").prettyPhoto({animationSpeed:"slow",theme:"light_square",slideshow:2000,default_width: 640, default_height: 480, opacity: 0.40, slideshow: false});
-});
-</script>' . "\n\t");
 
 $App->Promotion = TRUE;
 ?>

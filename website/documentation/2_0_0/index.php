@@ -63,7 +63,7 @@
 	
 	$pageTitle 		= "Xtext Documentation";
 	
-	$html .=  iconv("latin1", "utf-8", file_get_contents('_index.html'));
+	$html .=  file_get_contents('_index.html');
 
 	# Generate the web page
 	$App->generatePage("Nova", $Menu, NULL, $pageAuthor, $pageKeywords, $pageTitle, $html);

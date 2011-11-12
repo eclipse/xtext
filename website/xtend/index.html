@@ -22,6 +22,19 @@
   	<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
   	<script type="text/javascript">
   	</script>
+  	<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-2429174-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
 
     <!-- Le fav and touch icons -->
     <link rel="shortcut icon" href="images/favicon.ico">
@@ -39,8 +52,9 @@
           <ul class="nav">
             <li class="active"><a href="#">Xtend</a></li>
             <li><a href="#download">Download</a></li>
-            <li><a href="#documentation">Documentation</a></li>
+            <li><a href="#download">Documentation</a></li>
             <li><a href="http://www.eclipse.org/Xtext">Xtext.org</a></li>
+            <li><a href="#whatsnext">Future Plans</a></li>
           </ul>
         </div>
       </div>
@@ -52,8 +66,8 @@
         	A language made for Java developers.
 		</p>
         <p><a class="btn primary large" style=" width : 150px;" href="#download">Download &raquo;</a>
-<!--         &nbsp;&nbsp;&nbsp; -->
-<!--         <a class="btn primary large" style=" width : 150px;" href="#getting_started">Getting Started &raquo;</a> -->
+        &nbsp;&nbsp;&nbsp;
+        <a class="btn primary large" style=" width : 150px;" href="http://twitter.com/#!/xtendlang">Follow us on Twitter &raquo;</a>
         </p>
       </div>
     </header>
@@ -125,18 +139,24 @@
 	      	<h1>Getting Started <small>Installation and first steps</small></h1>
 	      </div>
 	      <div class="row">
-	      	<div class="span-one-third">
-	      		<h2>Download</h2>
-		      	<p>You need a running <a title="Go To http://www.eclipse.org/downloads" href="http://www.eclipse.org/downloads/">Eclipse including the Java Development Tools (JDT)</a>. To install the Xtend plugins open the update manager
-		      	and paste one of the URLs on the right into the field 'Work with' and select the Xtend SDK.</p>
+	      	<div class="span8">
+	      		<h2>Download Eclipse</h2>
+	      		<p>The Eclipse Xtext distribution provided by <a href="http://www.itemis.com">itemis</a> includes Xtend and can be downloaded from their website.</p>
+	      		<br/> 
+	      		<a class="btn primary large" style="width : 250px;" href="http://xtext.itemis.com/xtext/language=en/36553/downloads">Download Eclipse from itemis.com &raquo;</a></p>
+<!-- 	      		<p>Use the Eclipse Marketplace client or use the link below.</p> -->
+				    		
 	      	</div>
-	      	<div class="span-two-thirds">
-	      		<h2>Update Site URLs <small>COPY TO CLIPBOARD!</small></h2>
-		      	<ul>
-					<li><span class="label success">&nbsp;&nbsp;&nbsp;&nbsp;Release&nbsp;&nbsp;&nbsp;&nbsp;</span>    : <a href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/" title="Copy To Clipboard" onclick="alert('Please copy the URL into Eclipse's install manager.'); return false;">http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/</a></li>
-					<li><span class="label warning">&nbsp;Milestones&nbsp;</span>    : <a href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/milestones/" title="Copy To Clipboard" onclick="alert('Please copy the URL into Eclipse's install manager.'); return false;">http://download.eclipse.org/modeling/tmf/xtext/updates/composite/milestones/</a></li>
-					<li><span class="label important">&nbsp;&nbsp;&nbsp;Nightlies&nbsp;&nbsp;&nbsp;</span>    : <a href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/nightly/" title="Copy To Clipboard" onclick="alert('Please copy the URL into Eclipse's install manager.'); return false;">http://download.eclipse.org/modeling/tmf/xtext/updates/composite/nightly/</a></li>
-		      	</ul>
+	      	<div class="span8">
+	      		<h2>Install the Xtend SDK</h2>
+		      	<p>If you already have a running <a title="Go To http://www.eclipse.org/downloads" href="http://www.eclipse.org/downloads/">Eclipse including the Java Development Tools (JDT)</a>, you can either use the 
+		      	Eclipse Marketplace Client in your IDE or click on the following link to install the Xtend SDK.</p>
+		      	<p><a class="btn primary large" style="width : 250px;" href="http://marketplace.eclipse.org/content/eclipse-xtend">Install from Eclipse Marketplace &raquo;</a></p>
+<!-- 		      	<ul> -->
+<!-- 					<li><span class="label success">&nbsp;&nbsp;&nbsp;&nbsp;Release&nbsp;&nbsp;&nbsp;&nbsp;</span>    : <a href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/" title="Copy To Clipboard" onclick="alert('Please copy the URL into Eclipse's install manager.'); return false;">http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/</a></li> -->
+<!-- 					<li><span class="label warning">&nbsp;Milestones&nbsp;</span>    : <a href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/milestones/" title="Copy To Clipboard" onclick="alert('Please copy the URL into Eclipse's install manager.'); return false;">http://download.eclipse.org/modeling/tmf/xtext/updates/composite/milestones/</a></li> -->
+<!-- 					<li><span class="label important">&nbsp;&nbsp;&nbsp;Nightlies&nbsp;&nbsp;&nbsp;</span>    : <a href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/nightly/" title="Copy To Clipboard" onclick="alert('Please copy the URL into Eclipse's install manager.'); return false;">http://download.eclipse.org/modeling/tmf/xtext/updates/composite/nightly/</a></li> -->
+<!-- 		      	</ul> -->
 <!-- 				<img src="images/install_wizard.png" title="Copy and paste of the URLs above into the install manager in Eclipse."/> -->
 	      	</div>
 	      </div>
@@ -452,7 +472,7 @@ html [
 		      <div class="row">
 		      	<div class="span8">
 			      	<p>The switch statement in Java is a relict from C and has strange and errorprone semantics. At the same time it is almost useless in
-			      	today's programming. Xtend comes with a switch expression, which is very egelent and different from what a switch means in Java:
+			      	today's programming. Xtend comes with a switch expression, which is very convenient and different from what a switch means in Java:
 			      	<ul>
 			      		<li>switch on anything using equals</li>
 			      		<li>no fall through!</li>
@@ -638,6 +658,31 @@ def dispatch label(Rectangle r) {
 	      	</div>
       	</section>
       </section>
+      <section id="whatsnext">
+	      <div class="page-header">
+	      	<h1>What's Next?</h1>
+	      </div>
+	      <div class="row">
+	      	<div class="span8">
+	      		<p><strong>The next release of Xtend is planned for mid December</strong>. 
+	      		It'll add some missing language features which are important to fully integrate with existing Java code:</p>
+		      	<ul>
+					<li><a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=363017">Support for declaring constructors.</a> Yes, Xtend doesn't have them yet.</li>
+					<li><a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=363016">Support for declaring static methods and fields.</a> Although this should be used as little as possible it's important to have them in some situations.</li>
+					<li><a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=363016">Field initializers.</a></li>
+					<li><a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=346827">Explicit declaration of throws-clause.</a></li>
+		      	</ul>
+	      	</div>
+	      	<div class="span8">
+		      	<p>These features are obvious and will indeed be implemented much like you know them from Java.</p>
+		      	<p>We are also going to remove any need for complicated project setup. Just add an Xtend file to an existing Java project and you are good to go. 
+		      	The runtime libs will be available in a <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=363020">public maven repository</a> and Eclipse will have a library container.</p>
+		      	<p>Finally we are working on <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=342759">a standalone compiler</a>, which can be run from maven or any other Java process. 
+		      	So you no longer need to check in the generated Java source.</p>
+		      	<p>Please use <a href="http://goo.gl/kMjhy">bugs.eclipse.org</a> if you find bugs or want to submit feature requests.</p>
+	      	</div>
+	      </div>
+	  </section>
     </div> <!-- /container -->
 
   </body>
