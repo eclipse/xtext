@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -501,7 +502,8 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 															.resolve(parameterType);
 													return result;
 												}
-											})), xtendClass, XTEND_CLASS__NAME, CLASS_MUST_BE_ABSTRACT);
+											})), xtendClass, XTEND_CLASS__NAME, CLASS_MUST_BE_ABSTRACT, 
+												EcoreUtil.getURI(operation).toString());
 						}
 					}
 				}

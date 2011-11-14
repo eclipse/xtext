@@ -14,6 +14,7 @@ import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.core.IJavaElement;
@@ -29,6 +30,7 @@ import org.eclipse.jface.text.FindReplaceDocumentAdapter;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITypedRegion;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -41,14 +43,20 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.TerminalsTokenTypeToPartitionMapper;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
+import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.ui.editor.quickfix.ReplaceModification;
+import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xtend2.formatting.OverrideFunction;
+import org.eclipse.xtext.xtend2.formatting.OrganizeImports;
+import org.eclipse.xtext.xtend2.formatting.OrganizeImports.ReferenceAcceptor;
 import org.eclipse.xtext.xtend2.ui.edit.OrganizeImportsHandler;
 import org.eclipse.xtext.xtend2.validation.IssueCodes;
+import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendImport;
 
@@ -66,8 +74,14 @@ public class Xtend2QuickfixProvider extends DefaultQuickfixProvider {
 	private IJavaProjectProvider projectProvider;
 
 	@Inject
-	private OrganizeImportsHandler organizeImports;
-
+	private OrganizeImportsHandler organizeImportsHandler;
+	
+	@Inject
+	private OrganizeImports organizeImports;
+	
+	@Inject 
+	private OverrideFunction overrideFunction; 
+	
 	/**
 	 * Filter quickfixes for types and constructors.
 	 */
@@ -269,6 +283,16 @@ public class Xtend2QuickfixProvider extends DefaultQuickfixProvider {
 		organizeImports(issue, acceptor);
 	}
 
+	protected void organizeImports(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Organize Imports.",
+				"Organizes the whole import section. Removes wildcard imports as well as duplicates and unused ones.",
+				"fix_indent.gif", new IModification() {
+					public void apply(IModificationContext context) throws Exception {
+						organizeImportsHandler.doOrganizeImports(context.getXtextDocument());
+					}
+				});
+	}
+
 	@Fix(IssueCodes.MISSING_OVERRIDE)
 	public void fixMissingOverride(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Change 'def' to 'override'", "Marks this function as 'override'", "fix_indent.gif",
@@ -303,13 +327,28 @@ public class Xtend2QuickfixProvider extends DefaultQuickfixProvider {
 		adapter.replace(with, false);
 	}
 
-	protected void organizeImports(final Issue issue, IssueResolutionAcceptor acceptor) {
-		acceptor.accept(issue, "Organize Imports.",
-				"Organizes the whole import section. Removes wildcard imports as well as duplicates and unused ones.",
-				"fix_indent.gif", new IModification() {
-					public void apply(IModificationContext context) throws Exception {
-						organizeImports.doOrganizeImports(context.getXtextDocument());
+	@Fix(IssueCodes.CLASS_MUST_BE_ABSTRACT)
+	public void implementAbstractMethods(final Issue issue, IssueResolutionAcceptor acceptor) {
+		if(issue.getData() != null && issue.getData().length >0)
+		acceptor.accept(issue, "Implement abstract methods", "Implement abstract methods", "fix_indent.gif",
+				new ISemanticModification() {
+					public void apply(EObject element, IModificationContext context) throws Exception {
+						XtendClass clazz = (XtendClass) element;
+						URI operationURI = URI.createURI(issue.getData()[0]);
+						EObject overridden = clazz.eResource().getResourceSet().getEObject(operationURI, true);
+						if (overridden instanceof JvmOperation) {
+							JvmOperation overriddenOperation = (JvmOperation) overridden;
+							IXtextDocument xtextDocument = context.getXtextDocument();
+							XtextResource xtextResource = (XtextResource) element.eResource();
+							ReferenceAcceptor referenceAcceptor = organizeImports.intitializeReferenceAcceptor(xtextResource);
+							String code = overrideFunction.createOverrideFunction(clazz, overriddenOperation, referenceAcceptor);
+							xtextDocument.replace(overrideFunction.getFunctionInsertOffset(clazz), 0, code);
+							TextRegion importRegion = organizeImports.computeRegion(xtextResource);
+							xtextDocument.replace(importRegion.getOffset(), importRegion.getLength(),
+									organizeImports.getOrganizedImportSection(xtextResource));
+						}
 					}
 				});
 	}
+	
 }
