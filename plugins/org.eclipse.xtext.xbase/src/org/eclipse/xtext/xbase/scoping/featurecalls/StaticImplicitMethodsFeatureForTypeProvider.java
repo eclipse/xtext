@@ -47,7 +47,7 @@ import com.google.inject.Singleton;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
-public class StaticMethodsFeatureForTypeProvider extends AbstractStaticMethodsFeatureForTypeProvider {
+public class StaticImplicitMethodsFeatureForTypeProvider extends AbstractStaticMethodsFeatureForTypeProvider {
 
 	@Singleton
 	public static class ExtensionClassNameProvider {

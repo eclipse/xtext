@@ -313,8 +313,11 @@ public class FeatureCallChecker {
 			JvmFeatureDescription jvmFeatureDescription) {
 		if (input.isFinal())
 			return ASSIGNMENT_TARGET_IS_NOT_WRITEABLE;
-		if (input.isStatic())
-			return INSTANCE_ACCESS_TO_STATIC_MEMBER;
+		if (input.isStatic()) {
+			if (context.getAssignable() != null)
+				return INSTANCE_ACCESS_TO_STATIC_MEMBER;
+			// TODO: validate if the field is from the current class or a superclass
+		}
 		return null;
 	}
 

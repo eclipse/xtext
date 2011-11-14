@@ -258,6 +258,7 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 		}
 		operation.setSimpleName(sourceName);
 		operation.setVisibility(visibility);
+		operation.setStatic(source.isStatic());
 		for (XtendParameter parameter : source.getParameters()) {
 			JvmFormalParameter jvmParam = typesFactory.createJvmFormalParameter();
 			jvmParam.setName(parameter.getName());
@@ -325,6 +326,7 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			container.getMembers().add(field);
 			associator.associatePrimary(source, field);
 			field.setVisibility(source.getVisibility());
+			field.setStatic(source.isStatic());
 			field.setType(cloneWithProxies(source.getType()));
 			jvmTypesBuilder.translateAnnotationsTo(source.getAnnotationInfo().getAnnotations(), field);
 			jvmTypesBuilder.setDocumentation(field, jvmTypesBuilder.getDocumentation(source));

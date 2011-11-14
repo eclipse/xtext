@@ -432,6 +432,40 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 			}
 			''');
 	}
+	
+	def testStaticMethod() {
+		assertCompilesTo('''
+			package foo
+			class Bar {
+				def static foo() { 42 }
+			}
+		''', '''
+			package foo;
+
+			@SuppressWarnings("all")
+			public class Bar {
+			  public static int foo() {
+			    return 42;
+			  }
+			}
+			''');
+	}
+	
+	def testStaticField() {
+		assertCompilesTo('''
+			package foo
+			class Bar {
+				static int foo
+			}
+		''', '''
+			package foo;
+
+			@SuppressWarnings("all")
+			public class Bar {
+			  private static int foo;
+			}
+			''');
+	}
 
 	def assertCompilesTo(CharSequence input, CharSequence expected) {
 		val file = file(input.toString(), true)
