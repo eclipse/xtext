@@ -456,13 +456,22 @@ public interface Xtend2Package extends EPackage
 	int XTEND_FUNCTION__VISIBILITY = XTEND_MEMBER_FEATURE_COUNT + 8;
 
 	/**
+	 * The feature id for the '<em><b>Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_FUNCTION__STATIC = XTEND_MEMBER_FEATURE_COUNT + 9;
+
+	/**
 	 * The number of structural features of the '<em>Xtend Function</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FUNCTION_FEATURE_COUNT = XTEND_MEMBER_FEATURE_COUNT + 9;
+	int XTEND_FUNCTION_FEATURE_COUNT = XTEND_MEMBER_FEATURE_COUNT + 10;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFieldImpl <em>Xtend Field</em>}' class.
@@ -529,13 +538,22 @@ public interface Xtend2Package extends EPackage
 	int XTEND_FIELD__VISIBILITY = XTEND_MEMBER_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_FIELD__STATIC = XTEND_MEMBER_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Xtend Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FIELD_FEATURE_COUNT = XTEND_MEMBER_FEATURE_COUNT + 4;
+	int XTEND_FIELD_FEATURE_COUNT = XTEND_MEMBER_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendParameterImpl <em>Xtend Parameter</em>}' class.
@@ -1199,6 +1217,17 @@ public interface Xtend2Package extends EPackage
 	EAttribute getXtendFunction_Visibility();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction#isStatic <em>Static</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Static</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.XtendFunction#isStatic()
+	 * @see #getXtendFunction()
+	 * @generated
+	 */
+	EAttribute getXtendFunction_Static();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xtend2.xtend2.XtendField <em>Xtend Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1251,6 +1280,17 @@ public interface Xtend2Package extends EPackage
 	 * @generated
 	 */
 	EAttribute getXtendField_Visibility();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtend2.xtend2.XtendField#isStatic <em>Static</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Static</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.XtendField#isStatic()
+	 * @see #getXtendField()
+	 * @generated
+	 */
+	EAttribute getXtendField_Static();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xtend2.xtend2.XtendParameter <em>Xtend Parameter</em>}'.
@@ -1767,6 +1807,14 @@ public interface Xtend2Package extends EPackage
 		EAttribute XTEND_FUNCTION__VISIBILITY = eINSTANCE.getXtendFunction_Visibility();
 
 		/**
+		 * The meta object literal for the '<em><b>Static</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XTEND_FUNCTION__STATIC = eINSTANCE.getXtendFunction_Static();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFieldImpl <em>Xtend Field</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1807,6 +1855,14 @@ public interface Xtend2Package extends EPackage
 		 * @generated
 		 */
 		EAttribute XTEND_FIELD__VISIBILITY = eINSTANCE.getXtendField_Visibility();
+
+		/**
+		 * The meta object literal for the '<em><b>Static</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XTEND_FIELD__STATIC = eINSTANCE.getXtendField_Static();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendParameterImpl <em>Xtend Parameter</em>}' class.

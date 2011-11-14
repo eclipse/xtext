@@ -30,6 +30,7 @@ import org.eclipse.xtext.xbase.XExpression;
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction#getCreateExtensionInfo <em>Create Extension Info</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction#getTypeParameters <em>Type Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction#getVisibility <em>Visibility</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction#isStatic <em>Static</em>}</li>
  * </ul>
  * </p>
  *
@@ -283,5 +284,31 @@ public interface XtendFunction extends XtendMember
 	 * @generated
 	 */
 	boolean isSetVisibility();
+
+	/**
+	 * Returns the value of the '<em><b>Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Static</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Static</em>' attribute.
+	 * @see #setStatic(boolean)
+	 * @see org.eclipse.xtext.xtend2.xtend2.Xtend2Package#getXtendFunction_Static()
+	 * @model
+	 * @generated
+	 */
+	boolean isStatic();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction#isStatic <em>Static</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Static</em>' attribute.
+	 * @see #isStatic()
+	 * @generated
+	 */
+	void setStatic(boolean value);
 
 } // XtendFunction
