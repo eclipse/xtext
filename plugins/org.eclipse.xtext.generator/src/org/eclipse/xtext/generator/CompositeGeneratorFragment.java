@@ -167,7 +167,13 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, NamingAwa
 							Binding binding = iterator.next();
 							if (binding.equals(entry)) {
 								if (binding.isFinal()) {
-									throw new IllegalStateException("Cannot override final binding '" + binding + "'");
+									if (entry.isFinal()) {
+										throw new IllegalStateException("Conflicting final bindings for '" + binding.getKey() + "' from fragments " +
+												""+binding.getContributedBy()+" and "+entry.getContributedBy());
+									} else {
+										LOG.warn("Cannot override final binding '" + binding + "'. " +
+												"Ignoring binding from fragment '"+module.getClass().getSimpleName() +"'");
+									}
 								} else {
 									if (LOG.isDebugEnabled()) {
 										LOG.debug("replacing binding : " + binding);
@@ -185,7 +191,7 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, NamingAwa
 		}
 		return bindings;
 	}
-
+	
 	public String[] getRequiredBundlesRt(Grammar grammar) {
 		Set<String> all = new LinkedHashSet<String>();
 		for (IGeneratorFragment f : this.fragments) {
