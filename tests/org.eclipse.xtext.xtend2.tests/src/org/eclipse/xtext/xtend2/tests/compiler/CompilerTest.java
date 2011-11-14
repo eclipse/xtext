@@ -2269,6 +2269,11 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		Class<?> class1 = compileJavaCode("x.Y", "package x class Y {" + xtendclassBody + "}");
 		assertEquals(expectation, apply(class1, methodToInvoke, args));
 	}
+	
+	protected void invokeAndExpectStatic(Object expectation, String xtendclassBody, String methodToInvoke, Object... args) throws Exception {
+		Class<?> class1 = compileJavaCode("x.Y", "package x class Y {" + xtendclassBody + "}");
+		assertEquals(expectation, applyStatic(class1, methodToInvoke, argTypes(args), args));
+	}
 
 	protected void invokeAndExpect3(Object expectation, String xtendclassBody, String methodToInvoke,
 			Class<?>[] parameterTypes, Object... args) throws Exception {
@@ -2292,7 +2297,11 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		assertEquals(expectation, apply(compiledClass,"testEntry",args));
 	}
 	
-	protected Object apply(Class<?> type,String methodName,Object...args) throws Exception {
+	protected Object apply(Class<?> type, String methodName, Object... args) throws Exception {
+		return applyImpl(type, methodName, argTypes(args), args);
+	}
+	
+	protected Class<?>[] argTypes(Object...args) throws Exception {
 		Class<?>[] argTypes = new Class[args.length];
 		for (int i = 0; i < argTypes.length; i++) {
 			if (args[i] == null) {
@@ -2301,8 +2310,9 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				argTypes[i] = args[i].getClass();
 			}
 		}
-		return applyImpl(type, methodName, argTypes, args);
+		return argTypes; 
 	}
+	
 	protected Object applyImpl(Class<?> type,String methodName,Class<?>[] parameterTypes,Object...args) throws Exception {
 		final Injector inj = Guice.createInjector();
 		Object instance = inj.getInstance(type);
@@ -2311,6 +2321,14 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		}
 		Method method = type.getDeclaredMethod(methodName, parameterTypes);
 		return method.invoke(instance,args);
+	}
+	
+	protected Object applyStatic(Class<?> type,String methodName,Class<?>[] parameterTypes,Object...args) throws Exception {
+		if (args==null) {
+			return type.getDeclaredMethod(methodName).invoke(null);
+		}
+		Method method = type.getDeclaredMethod(methodName, parameterTypes);
+		return method.invoke(null, args);
 	}
 
 	protected Class<?> compileJavaCode(String clazzName, String code) {
@@ -2335,5 +2353,26 @@ public class CompilerTest extends AbstractXtend2TestCase {
 			throw new RuntimeException("Xtend compilation failed:\n" + xtendCode, exc);
 		}
 	}
+	
+	public void testStaticMethod() throws Exception {
+		invokeAndExpectStatic(42, "def static foo() { 42 }", "foo");
+	}
+	
+	public void testStaticMethodStaticCall() throws Exception {
+		invokeAndExpectStatic(43, "def static foo() { bar() + 1 } def static bar() { 42 }", "foo");
+	}
+	
+	public void testStaticMethodDynamicCall() throws Exception {
+		invokeAndExpect2(43, "def foo() { bar + 1 } def static bar() { 42 }", "foo");
+	}
+	
+	public void testStaticFieldStaticCall() throws Exception {
+		invokeAndExpectStatic(42, "static int bar def static foo() { bar = 42; bar }", "foo");
+	}
+	
+	public void testStaticFieldDynamicCall() throws Exception {
+		invokeAndExpect2(42, "static int bar def foo() { bar = 42; bar }", "foo");
+	}
+
 
 }
