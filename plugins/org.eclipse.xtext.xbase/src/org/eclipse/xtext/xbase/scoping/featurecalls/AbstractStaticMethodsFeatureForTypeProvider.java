@@ -15,6 +15,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
@@ -22,6 +23,8 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.Tuples;
 
+import com.google.common.collect.LinkedListMultimap;
+import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -60,25 +63,21 @@ public abstract class AbstractStaticMethodsFeatureForTypeProvider extends Abstra
 	}
 
 	protected void collectFeatures(String name, Iterable<JvmTypeReference> hierarchy, Collection<JvmFeature> result) {
-		final Map<JvmTypeReference, Collection<String>> staticTypeNames = getVisibleTypesContainingStaticMethods(hierarchy);
-		for (final Map.Entry<JvmTypeReference, Collection<String>> e : staticTypeNames.entrySet()) {
-			for(final String staticTypeName: e.getValue()) {
-				JvmTypeReference staticType = cache.get(Tuples.create(this, staticTypeName), context, new Provider<JvmTypeReference>() {
-					public JvmTypeReference get() {
-						return getTypeReferences().getTypeForName(staticTypeName, context);
-					}
-				}) ;
-				if (staticType != null) {
-					List<JvmType> rawTypes = getRawTypeHelper().getAllRawTypes(staticType, context);
-					for(JvmType rawType: rawTypes) {
-						if (rawType instanceof JvmDeclaredType) {
-							Iterable<JvmFeature> features = name != null ? ((JvmDeclaredType) rawType).findAllFeaturesByName(name) : ((JvmDeclaredType) rawType).getAllFeatures();
-							for(JvmFeature feature: features) {
-								if (feature instanceof JvmOperation) {
-									if (isMatchingExtension(e.getKey(), (JvmOperation) feature)) {
-										result.add(feature);
-									}
+		final Map<JvmTypeReference, Collection<JvmTypeReference>> staticTypeNames = getVisibleJvmTypesContainingStaticMethods(hierarchy);
+		for (final Map.Entry<JvmTypeReference, Collection<JvmTypeReference>> e : staticTypeNames.entrySet()) {
+			for(final JvmTypeReference staticType: e.getValue()) {
+				List<JvmType> rawTypes = getRawTypeHelper().getAllRawTypes(staticType, context);
+				for(JvmType rawType: rawTypes) {
+					if (rawType instanceof JvmDeclaredType) {
+						Iterable<JvmFeature> features = name != null ? ((JvmDeclaredType) rawType).findAllFeaturesByName(name) : ((JvmDeclaredType) rawType).getAllFeatures();
+						for(JvmFeature feature: features) {
+							if (feature instanceof JvmOperation) {
+								if (isMatchingExtension(e.getKey(), (JvmOperation) feature)) {
+									result.add(feature);
 								}
+							} else if (feature instanceof JvmField) {
+								if (((JvmField) feature).isStatic() && e.getKey() == null)
+									result.add(feature);
 							}
 						}
 					}
@@ -99,7 +98,29 @@ public abstract class AbstractStaticMethodsFeatureForTypeProvider extends Abstra
 		return false;
 	}
 
-	protected abstract Map<JvmTypeReference, Collection<String>> getVisibleTypesContainingStaticMethods(Iterable<JvmTypeReference> hierarchy);
+	protected Map<JvmTypeReference, Collection<JvmTypeReference>> getVisibleJvmTypesContainingStaticMethods(
+			Iterable<JvmTypeReference> hierarchy) {
+		Multimap<JvmTypeReference, JvmTypeReference> result = LinkedListMultimap.create();
+		final Map<JvmTypeReference, Collection<String>> staticTypeNames = getVisibleTypesContainingStaticMethods(hierarchy);
+		for (final Map.Entry<JvmTypeReference, Collection<String>> e : staticTypeNames.entrySet()) {
+			for (final String staticTypeName : e.getValue()) {
+				JvmTypeReference staticType = cache.get(Tuples.create(this, staticTypeName), context,
+						new Provider<JvmTypeReference>() {
+							public JvmTypeReference get() {
+								return getTypeReferences().getTypeForName(staticTypeName, context);
+							}
+						});
+				if (staticType != null)
+					result.put(e.getKey(), staticType);
+			}
+		}
+		return result.asMap();
+	}
+	
+	protected Map<JvmTypeReference, Collection<String>> getVisibleTypesContainingStaticMethods(
+			Iterable<JvmTypeReference> hierarchy) {
+		throw new UnsupportedOperationException();
+	}
 
 	public void setResourceContext(Resource context) {
 		this.context = context;
