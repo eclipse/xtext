@@ -62,12 +62,23 @@ public class OrganizeImports {
 	private Provider<ReferenceAcceptor> referenceAcceptorProvider;
 	
 	public String getOrganizedImportSection(XtextResource state) {
+		ReferenceAcceptor acceptor = intitializeReferenceAcceptor(state);
+		if(acceptor == null)
+			return null;
+		return serializeImports(acceptor);
+	}
+
+	public ReferenceAcceptor intitializeReferenceAcceptor(XtextResource state) {
 		ReferenceAcceptor acceptor = referenceAcceptorProvider.get();
 		final XtendFile xtendFile = getXtendFile(state);
 		if (xtendFile == null)
 			return null;
 		acceptor.addImplicitlyImportedPackages(newArrayList("java.lang", xtendFile.getPackage()));
 		collectAllReferences(state, acceptor);
+		return acceptor;
+	}
+
+	public String serializeImports(ReferenceAcceptor acceptor) {
 		StringBuilder importsSection = new StringBuilder();
 		List<String> listofImportedTypeNames = acceptor.getListofImportedTypeNames();
 		if (!listofImportedTypeNames.isEmpty()) {
