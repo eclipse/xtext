@@ -30,6 +30,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendField;
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFieldImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFieldImpl#isExtension <em>Extension</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFieldImpl#getVisibility <em>Visibility</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFieldImpl#isStatic <em>Static</em>}</li>
  * </ul>
  * </p>
  *
@@ -115,6 +116,26 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 	 * @ordered
 	 */
 	protected boolean visibilityESet;
+
+	/**
+	 * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isStatic()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean STATIC_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isStatic() <em>Static</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isStatic()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean static_ = STATIC_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -286,6 +307,29 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isStatic()
+	{
+		return static_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStatic(boolean newStatic)
+	{
+		boolean oldStatic = static_;
+		static_ = newStatic;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FIELD__STATIC, oldStatic, static_));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -315,6 +359,8 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 				return isExtension();
 			case Xtend2Package.XTEND_FIELD__VISIBILITY:
 				return getVisibility();
+			case Xtend2Package.XTEND_FIELD__STATIC:
+				return isStatic();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -340,6 +386,9 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 				return;
 			case Xtend2Package.XTEND_FIELD__VISIBILITY:
 				setVisibility((JvmVisibility)newValue);
+				return;
+			case Xtend2Package.XTEND_FIELD__STATIC:
+				setStatic((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -367,6 +416,9 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 			case Xtend2Package.XTEND_FIELD__VISIBILITY:
 				unsetVisibility();
 				return;
+			case Xtend2Package.XTEND_FIELD__STATIC:
+				setStatic(STATIC_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -389,6 +441,8 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 				return extension != EXTENSION_EDEFAULT;
 			case Xtend2Package.XTEND_FIELD__VISIBILITY:
 				return isSetVisibility();
+			case Xtend2Package.XTEND_FIELD__STATIC:
+				return static_ != STATIC_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -410,6 +464,8 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 		result.append(extension);
 		result.append(", visibility: ");
 		if (visibilityESet) result.append(visibility); else result.append("<unset>");
+		result.append(", static: ");
+		result.append(static_);
 		result.append(')');
 		return result.toString();
 	}

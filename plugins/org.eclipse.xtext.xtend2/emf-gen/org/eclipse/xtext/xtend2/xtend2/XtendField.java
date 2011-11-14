@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmVisibility;
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendField#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendField#isExtension <em>Extension</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendField#getVisibility <em>Visibility</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendField#isStatic <em>Static</em>}</li>
  * </ul>
  * </p>
  *
@@ -163,5 +164,31 @@ public interface XtendField extends XtendMember
 	 * @generated
 	 */
 	boolean isSetVisibility();
+
+	/**
+	 * Returns the value of the '<em><b>Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Static</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Static</em>' attribute.
+	 * @see #setStatic(boolean)
+	 * @see org.eclipse.xtext.xtend2.xtend2.Xtend2Package#getXtendField_Static()
+	 * @model
+	 * @generated
+	 */
+	boolean isStatic();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xtend2.xtend2.XtendField#isStatic <em>Static</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Static</em>' attribute.
+	 * @see #isStatic()
+	 * @generated
+	 */
+	void setStatic(boolean value);
 
 } // XtendField

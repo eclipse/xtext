@@ -1317,9 +1317,12 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	 *         (
 	 *             annotationInfo=Member_XtendField_2_0_0 
 	 *             visibility=Visibility? 
-	 *             ((extension?='extension' type=JvmTypeReference name=ValidID?) | (type=JvmTypeReference name=ValidID))
+	 *             ((extension?='extension' type=JvmTypeReference name=ValidID?) | (static?='static'? type=JvmTypeReference name=ValidID))
 	 *         ) | 
-	 *         (annotationInfo=Member_XtendField_2_0_0 ((extension?='extension' type=JvmTypeReference name=ValidID?) | (type=JvmTypeReference name=ValidID)))
+	 *         (
+	 *             annotationInfo=Member_XtendField_2_0_0 
+	 *             ((extension?='extension' type=JvmTypeReference name=ValidID?) | (static?='static'? type=JvmTypeReference name=ValidID))
+	 *         )
 	 *     )
 	 */
 	protected void sequence_Member(EObject context, XtendField semanticObject) {
@@ -1342,6 +1345,7 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	 *         annotationInfo=Member_XtendFunction_2_1_0 
 	 *         override?='override'? 
 	 *         visibility=Visibility? 
+	 *         static?='static'? 
 	 *         dispatch?='dispatch'? 
 	 *         (typeParameters+=JvmTypeParameter typeParameters+=JvmTypeParameter*)? 
 	 *         (
