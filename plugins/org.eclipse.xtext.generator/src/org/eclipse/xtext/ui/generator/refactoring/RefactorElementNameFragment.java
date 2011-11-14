@@ -20,10 +20,19 @@ import org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment;
  */
 public class RefactorElementNameFragment extends AbstractGeneratorFragment {
 
+	// no default (depends on whther xbase is used or not)
 	private Boolean useJdtRefactoring = null;
 
 	public void setUseJdtRefactoring(boolean useInferredJvmModel) {
 		this.useJdtRefactoring = useInferredJvmModel;
+	}
+	
+	protected boolean isUseJdtRefactoring(Grammar grammar) {
+		if (useJdtRefactoring == null) {
+			return XbaseGeneratorFragment.doesUseXbase(grammar);
+		} else {
+			return useJdtRefactoring.booleanValue();
+		}
 	}
 
 	@Override
@@ -41,7 +50,7 @@ public class RefactorElementNameFragment extends AbstractGeneratorFragment {
 							+ "com.google.inject.name.Names.named(\"RefactoringPreferences\")"
 							+ ").to(" 
 							+ "org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences.Initializer.class)");
-		if ((useJdtRefactoring == null && XbaseGeneratorFragment.doesUseXbase(grammar)) || useJdtRefactoring)
+		if (isUseJdtRefactoring(grammar))
 			return bindFactory
 					.addTypeToType("org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler",
 							"org.eclipse.xtext.common.types.ui.refactoring.JvmRenameElementHandler")
@@ -70,4 +79,5 @@ public class RefactorElementNameFragment extends AbstractGeneratorFragment {
 											"org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler")
 											.getBindings();
 	}
+
 }
