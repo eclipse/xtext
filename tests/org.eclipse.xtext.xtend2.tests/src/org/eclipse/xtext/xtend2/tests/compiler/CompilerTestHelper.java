@@ -120,7 +120,7 @@ public class CompilerTestHelper {
 
 	protected String compileToJavaCode(String xtendCode) {
 		try {
-			final String text = "package foo class Test { def Object foo() {" + xtendCode + "} }";
+			final String text = "package foo class Test { def Object foo() throws Exception {" + xtendCode + "} }";
 			final XtendFile file = parseHelper.parse(text);
 			validationHelper.assertNoErrors(file);
 			JvmGenericType inferredType = associations.getInferredType(file.getXtendClass());
