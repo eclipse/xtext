@@ -7,11 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.buildpath;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jdt.core.ClasspathContainerInitializer;
@@ -20,11 +28,20 @@ import org.eclipse.jdt.core.IClasspathContainer;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.xtext.xtend2.ui.internal.Xtend2Activator;
+import org.osgi.framework.Bundle;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
 public class XtendContainerInitializer extends ClasspathContainerInitializer {
+
+	public static final Path XTEND_LIBRARY_PATH = new Path("org.eclipse.xtend.XTEND_CONTAINER"); //$NON-NLS-1$
+
+	public static final String[] BUNDLE_IDS_TO_INCLUDE = new String[] { "com.google.collect", "com.google.inject",
+			"org.eclipse.xtext.xbase.lib", "org.eclipse.xtext.xtend2.lib" };
+
+	private static final Logger LOG = Logger.getLogger(XtendContainerInitializer.class);
 
 	/**
 	 * {@inheritDoc}
@@ -38,6 +55,9 @@ public class XtendContainerInitializer extends ClasspathContainerInitializer {
 		}
 	}
 
+	/**
+	 * Allows users to manually add source bundles
+	 */
 	@Override
 	public boolean canUpdateClasspathContainer(IPath containerPath, IJavaProject project) {
 		return true;
@@ -45,16 +65,17 @@ public class XtendContainerInitializer extends ClasspathContainerInitializer {
 
 	@Override
 	public void requestClasspathContainerUpdate(final IPath containerPath, final IJavaProject project,
-			IClasspathContainer containerSuggestion) throws CoreException {
+			final IClasspathContainer containerSuggestion) throws CoreException {
 		super.requestClasspathContainerUpdate(containerPath, project, containerSuggestion);
-		new Job("Yob") {
+		new Job("Classpath container update") { //$NON-NLS-1$
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				try {
 					JavaCore.setClasspathContainer(containerPath, new IJavaProject[] { project },
-							new IClasspathContainer[] { createContainer(containerPath) }, null);
+							new IClasspathContainer[] { containerSuggestion }, null);
 				} catch (CoreException ex) {
-					return new Status(IStatus.ERROR, "d", 0, "ennis", ex);
+					return new Status(IStatus.ERROR, Xtend2Activator.getInstance().getBundle().getSymbolicName(), 0,
+							"Classpath container update failed", ex); //$NON-NLS-1$
 				}
 				return Status.OK_STATUS;
 			}
@@ -62,42 +83,85 @@ public class XtendContainerInitializer extends ClasspathContainerInitializer {
 	}
 
 	private IClasspathContainer createContainer(final IPath containerPath) {
-		return new IClasspathContainer() {
-			/**
-			 * {@inheritDoc}
-			 */
-			public IClasspathEntry[] getClasspathEntries() {
-				return new IClasspathEntry[] { JavaCore
-						.newLibraryEntry(
-								new Path("/Users/huebner/Entwicklung/tycho-workspace/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/com.google.collect_1.0.0.v201105210816.jar"),
-								null, null, new IAccessRule[] {}, null, false) };
-			}
-
-			/**
-			 * {@inheritDoc}
-			 */
-			public String getDescription() {
-				return "Xtend Library";
-			}
-
-			/**
-			 * {@inheritDoc}
-			 */
-			public int getKind() {
-				return IClasspathContainer.K_APPLICATION;
-			}
-
-			/**
-			 * {@inheritDoc}
-			 */
-			public IPath getPath() {
-				return containerPath;
-			}
-		};
+		return new XtendClasspathContainer(containerPath);
 	}
 
 	private boolean isXtendPath(final IPath containerPath) {
-		return true;
+		return XTEND_LIBRARY_PATH.equals(containerPath);
+	}
+
+	/**
+	 * @author huebner - Initial contribution and API
+	 */
+	private final static class XtendClasspathContainer implements IClasspathContainer {
+
+		private static final String SOURCE_SUFIX = ".source"; //$NON-NLS-1$
+
+		private final IPath containerPath;
+
+		private XtendClasspathContainer(IPath containerPath) {
+			this.containerPath = containerPath;
+		}
+
+		/**
+		 * {@inheritDoc}
+		 */
+		public IClasspathEntry[] getClasspathEntries() {
+			List<IClasspathEntry> cpEntries = new ArrayList<IClasspathEntry>();
+			for (String bundleId : BUNDLE_IDS_TO_INCLUDE) {
+				addEntry(cpEntries, bundleId);
+			}
+			return cpEntries.toArray(new IClasspathEntry[] {});
+		}
+
+		private void addEntry(final List<IClasspathEntry> cpEntries, final String bundleId) {
+			IPath bundlePath = findBundle(bundleId);
+			if (bundlePath != null) {
+				IPath sourceBundlePath = findBundle(bundleId.concat(SOURCE_SUFIX));
+				cpEntries.add(JavaCore.newLibraryEntry(bundlePath, sourceBundlePath, null, new IAccessRule[] {}, null,
+						false));
+			}
+		}
+
+		private IPath findBundle(String bundleId) {
+			Bundle bundle = Platform.getBundle(bundleId);
+			if (bundle != null) {
+				File bundleFile = null;
+				try {
+					bundleFile = FileLocator.getBundleFile(bundle);
+					IPath path = new Path(bundleFile.getAbsolutePath());
+					if (!path.isAbsolute()) {
+						path = path.makeAbsolute();
+					}
+					return path;
+				} catch (IOException e) {
+					LOG.error("Can't resolve bundle '" + bundleId + "'", e); //$NON-NLS-1$ //$NON-NLS-2$
+				}
+			}
+			return null;
+
+		}
+
+		/**
+		 * {@inheritDoc}
+		 */
+		public String getDescription() {
+			return Messages.XtendClasspathContainer_Description;
+		}
+
+		/**
+		 * {@inheritDoc}
+		 */
+		public int getKind() {
+			return IClasspathContainer.K_APPLICATION;
+		}
+
+		/**
+		 * {@inheritDoc}
+		 */
+		public IPath getPath() {
+			return containerPath;
+		}
 	}
 
 }
