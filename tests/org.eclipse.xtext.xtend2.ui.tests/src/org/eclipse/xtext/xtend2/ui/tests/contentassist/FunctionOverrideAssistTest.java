@@ -33,6 +33,14 @@ public class FunctionOverrideAssistTest extends AbstractXtendContentAssistBugTes
 				getOverridingFunctionCode("protected clone() throws CloneNotSupportedException"));
 	}
 
+	public void testStaticMethod() throws Exception {
+		newBuilder().append("class Foo extends Thread { currentT").assertText("");
+	}
+
+	public void testNonStaticMethod() throws Exception {
+		newBuilder().append("class Foo extends Thread { getI").assertText(getOverridingFunctionCode("getId()"));
+	}
+
 	protected String getOverridingFunctionCode(String signature) {
 		return "\n" + indent.getIndentString() + "override " + signature + " {\n" + indent.getIndentString()
 				+ indent.getIndentString() + OverrideFunction.DEFAULT_BODY + "\n" + indent.getIndentString() + "}\n\n";
