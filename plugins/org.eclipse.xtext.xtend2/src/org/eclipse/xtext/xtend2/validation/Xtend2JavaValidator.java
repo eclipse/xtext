@@ -18,7 +18,6 @@ import static org.eclipse.xtext.xtend2.xtend2.Xtend2Package.Literals.*;
 
 import java.lang.annotation.ElementType;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -55,7 +54,6 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
@@ -128,8 +126,11 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 	@Inject
 	private TypeReferences typeReferences;
 
-	@Inject
+	@Inject 
 	private IRawTypeHelper rawTypeHelper;
+	
+	@Inject
+	private OperationSignature.Provider operationSignatureProvider; 
 
 	@Inject
 	private XAnnotationUtil annotationUtil;
@@ -358,42 +359,6 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 		return false;
 	}
 
-	protected class Signature {
-
-		private final JvmOperation operation;
-
-		private List<JvmType> erasureParameterTypes;
-
-		protected Signature(JvmOperation operation) {
-			this.operation = operation;
-			if (operation != null) {
-				erasureParameterTypes = Lists.newArrayListWithCapacity(operation.getParameters().size());
-				for (JvmFormalParameter parameter : operation.getParameters()) {
-					List<JvmType> rawTypes = rawTypeHelper.getAllRawTypes(parameter.getParameterType(),
-							operation.eResource());
-					if (rawTypes.isEmpty()) {
-						erasureParameterTypes.add(null);
-					} else {
-						erasureParameterTypes.add(rawTypes.get(0));
-					}
-				}
-			} else {
-				erasureParameterTypes = Collections.emptyList();
-			}
-		}
-
-		protected String getName() {
-			if (operation == null)
-				return "null";
-			return operation.getSimpleName();
-		}
-
-		protected Object getErasureKey() {
-			return Tuples.create(getName(), erasureParameterTypes);
-		}
-
-	}
-
 	@Check
 	public void checkDuplicateAndOverriddenFunctions(XtendClass xtendClass) {
 		final JvmGenericType inferredType = associations.getInferredType(xtendClass);
@@ -421,7 +386,7 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 					});
 			Multimap<Object, JvmOperation> operationsPerErasure = HashMultimap.create();
 			for (JvmOperation operation : inferredType.getDeclaredOperations()) {
-				Signature signature = getSignature(operation);
+				OperationSignature signature = getSignature(operation);
 				operationsPerErasure.put(signature.getErasureKey(), operation);
 			}
 			for (Collection<JvmOperation> operationsWithSameSignature : operationsPerErasure.asMap().values()) {
@@ -456,7 +421,7 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 			for (JvmOperation operation : filter(
 					featureOverridesService.getAllJvmFeatures(inferredType, typeArgumentContext), JvmOperation.class)) {
 				if (operation.getDeclaringType() != inferredType) {
-					Signature signature = getSignature(operation);
+					OperationSignature signature = getSignature(operation);
 
 					if (operationsPerErasure.containsKey(signature.getErasureKey())) {
 						Collection<JvmOperation> myOperations = operationsPerErasure.get(signature.getErasureKey());
@@ -584,8 +549,8 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 		return (element != null) ? notNull(element.getIdentifier()) : null;
 	}
 
-	protected Signature getSignature(JvmOperation operation) {
-		return new Signature(operation);
+	protected OperationSignature getSignature(JvmOperation operation) {
+		return operationSignatureProvider.get(operation);
 	}
 
 	protected String getReadableSignature(JvmIdentifiableElement element, List<JvmFormalParameter> parameters) {
