@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -39,6 +40,12 @@ public class UIStrings {
 	
 	@Inject
 	private FeatureCallToJavaMapping featureCallToJavaMapping;
+	
+	public String signature(JvmOperation operation) {
+		StringBuilder b = new StringBuilder(operation.getSimpleName());
+		b.append(parameters(operation)).append(" : ").append(operation.getReturnType().getSimpleName());
+		return b.toString();
+	}
 	
 	public String parameters(JvmIdentifiableElement element) {
 		if (element instanceof JvmExecutable) {
