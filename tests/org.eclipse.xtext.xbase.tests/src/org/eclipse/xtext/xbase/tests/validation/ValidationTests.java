@@ -215,6 +215,31 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertNoErrors(expression);
 	}
 	
+	public void testExceptionInClosure_00() throws Exception {
+		XExpression expression = expression("{val func = [Integer i| throw new RuntimeException()]}");
+		helper.assertNoErrors(expression);
+	}
+	
+	public void testExceptionInClosure_01() throws Exception {
+		XExpression expression = expression("{val func = [Integer i| throw new Exception() ]}");
+		helper.assertError(expression, XBLOCK_EXPRESSION, UNHANDLED_EXCEPTION);
+	}
+	
+	public void testExceptionInClosure_02() throws Exception {
+		XExpression expression = expression("{val func = [Integer i| try { throw new Exception() } catch(Exception e) {} i]}");
+		helper.assertNoErrors(expression);
+	}
+	
+	public void testExceptionInClosure_03() throws Exception {
+		XExpression expression = expression("{val func = [Integer i| try { throw new Exception() } catch(NoSuchFieldException e) {} i]}");
+		helper.assertError(expression, XBLOCK_EXPRESSION, UNHANDLED_EXCEPTION);
+	}
+
+	public void testExceptionInClosure_04() throws Exception {
+		XExpression expression = expression("{val func = [Integer i| while(i==1) { throw new Exception() } i]}");
+		helper.assertError(expression, XBLOCK_EXPRESSION, UNHANDLED_EXCEPTION);
+	}
+	
 	public void testInCompatibleRightOperand() throws Exception {
 		XExpression expression = expression("true || 'foo'");
 		helper.assertError(expression, XSTRING_LITERAL, INCOMPATIBLE_TYPES);
