@@ -48,6 +48,7 @@ public class IssueCodes {
 	public static final String STATIC_ACCESS_TO_INSTANCE_MEMBER = ISSUE_CODE_PREFIX	+ "static_access_to_instance_member";
 	public static final String TOO_LITTLE_TYPE_INFORMATION = ISSUE_CODE_PREFIX + "too_little_type_information";
 	public static final String TOO_MANY_PARAMS_IN_CLOSURE = ISSUE_CODE_PREFIX + "too_many_params_in_closure";
+	public static final String UNHANDLED_EXCEPTION = ISSUE_CODE_PREFIX + "unhandled_exception";
 	public static final String UNREACHABLE_CODE = ISSUE_CODE_PREFIX + "unreachable_code";
 	public static final String UNRESOLVABLE_PROXY = ISSUE_CODE_PREFIX + "unresolvable_proxy";
 	public static final String VARIABLE_NAME_SHADOWING = ISSUE_CODE_PREFIX + "variable_name_shadowing";
