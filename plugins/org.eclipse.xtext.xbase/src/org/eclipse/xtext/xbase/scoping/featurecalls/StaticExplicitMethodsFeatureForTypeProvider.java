@@ -10,20 +10,25 @@ package org.eclipse.xtext.xbase.scoping.featurecalls;
 import java.util.Collection;
 import java.util.Map;
 
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.Primitives;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.google.inject.Inject;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class StaticExplicitMethodsFeatureForTypeProvider extends AbstractStaticMethodsFeatureForTypeProvider {
+
+	@Inject
+	private Primitives primitives;
 
 	private JvmTypeReference currentType;
 
@@ -35,29 +40,28 @@ public class StaticExplicitMethodsFeatureForTypeProvider extends AbstractStaticM
 		this.currentType = currentType;
 	}
 
-	protected void collectMethods(JvmTypeReference typeReference, Multimap<JvmTypeReference, JvmTypeReference> result) {
-		if (typeReference != null) {
-			JvmType type = typeReference.getType();
-			if (type instanceof JvmGenericType) {
-				JvmGenericType genericType = (JvmGenericType) type;
-				for (JvmMember member : genericType.getMembers()) {
-					if (member instanceof JvmOperation && ((JvmOperation) member).isStatic())
-						result.put(null, typeReference);
-					else if (member instanceof JvmField && ((JvmField) member).isStatic())
-						result.put(null, typeReference);
-				}
-			}
-		}
-	}
-
 	@Override
 	protected Map<JvmTypeReference, Collection<JvmTypeReference>> getVisibleJvmTypesContainingStaticMethods(
 			Iterable<JvmTypeReference> hierarchy) {
 		Multimap<JvmTypeReference, JvmTypeReference> result = HashMultimap.create();
-		collectMethods(currentType, result);
-		if (hierarchy != null)
-			for (JvmTypeReference ref : hierarchy)
-				collectMethods(ref, result);
+		if (currentType != null) {
+			JvmType type = currentType.getType();
+			if (type instanceof JvmGenericType) {
+				JvmGenericType genericType = (JvmGenericType) type;
+				for (JvmFeature feature : genericType.getAllFeatures()) {
+					if (feature instanceof JvmOperation && ((JvmOperation) feature).isStatic()) {
+						JvmOperation operation = (JvmOperation) feature;
+						result.put(null, currentType);
+						if (!operation.getParameters().isEmpty()) {
+							JvmTypeReference paramType = operation.getParameters().get(0).getParameterType();
+							JvmTypeReference wrapped = primitives.asWrapperTypeIfPrimitive(paramType);
+							result.put(wrapped, currentType);
+						}
+					} else if (feature instanceof JvmField && ((JvmField) feature).isStatic())
+						result.put(null, currentType);
+				}
+			}
+		}
 		return result.asMap();
 	}
 
