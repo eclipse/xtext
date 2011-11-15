@@ -39,6 +39,8 @@ import com.google.inject.Inject;
  */
 public class OverrideFunction {
 
+	public static final String DEFAULT_BODY = "throw new UnsupportedOperationException(\"TODO: Auto-generated function stub\");";
+
 	@Inject
 	private TypeArgumentContextProvider typeArgumentContextProvider;
 
@@ -107,7 +109,7 @@ public class OverrideFunction {
 			}
 		}
 		b.append(" {").increaseIndentation()
-				.append("\nthrow new UnsupportedOperationException(\"TODO: Auto-generated function stub\");")
+				.append("\n" + DEFAULT_BODY)
 				.decreaseIndentation().append("\n}").decreaseIndentation().append("\n\n");
 		return b.toString();
 	}
