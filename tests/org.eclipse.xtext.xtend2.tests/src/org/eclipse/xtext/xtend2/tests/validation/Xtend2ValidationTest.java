@@ -271,6 +271,59 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 		helper.assertNoErrors(clazz);
 	}
 	
+	public void testThrowsClauseCompatibility_00() throws Exception {
+		XtendClass clazz = clazz(
+				"class Foo {" +
+				"  def foo() {" +
+				"    throw new Exception()" +
+				"  }" +
+				"}");
+		helper.assertError(clazz, XbasePackage.Literals.XBLOCK_EXPRESSION, UNHANDLED_EXCEPTION, "unhandled", "exception");
+	}
+	
+	public void testThrowsClauseCompatibility_01() throws Exception {
+		XtendClass clazz = clazz(
+				"class Foo {" +
+				"  def foo() {" +
+				"    throw new RuntimeException()" +
+				"  }" +
+				"}");
+		helper.assertNoError(clazz, UNHANDLED_EXCEPTION);
+	}
+	
+	public void testThrowsClauseCompatibility_02() throws Exception {
+		XtendClass clazz = clazz(
+				"class Foo {" +
+				"  def foo() throws RuntimeException {" +
+				"    throw new Exception()" +
+				"  }" +
+				"}");
+		helper.assertError(clazz, XbasePackage.Literals.XBLOCK_EXPRESSION, UNHANDLED_EXCEPTION, "unhandled", "exception");
+	}
+	
+	public void testThrowsClauseCompatibility_03() throws Exception {
+		XtendClass clazz = clazz(
+				"class Foo {" +
+				"  def foo() throws Exception {" +
+				"    throw new NoSuchFieldException()" +
+				"  }" +
+				"}");
+		helper.assertNoError(clazz, UNHANDLED_EXCEPTION);
+	}
+	
+	public void testThrowsClauseCompatibility_04() throws Exception {
+		XtendClass clazz = clazz(
+				"class Foo {" +
+				"  def foo() {" +
+				"    try {" +
+				"      throw new NoSuchFieldException()" +
+				"    } catch(NoSuchFieldException e) {" +
+				"    }" +
+				"  }" +
+				"}");
+		helper.assertNoError(clazz, UNHANDLED_EXCEPTION);
+	}
+	
 	public void testAssignmentToFunctionParameter() throws Exception {
 		XtendFunction function = function("def void foo(int bar) { bar = 7 }");
 		helper.assertError(function, XbasePackage.Literals.XASSIGNMENT, ASSIGNMENT_TO_FINAL, "Assignment", "final",
