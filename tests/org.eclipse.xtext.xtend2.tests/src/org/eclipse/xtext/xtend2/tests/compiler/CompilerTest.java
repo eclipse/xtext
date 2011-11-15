@@ -2366,6 +2366,14 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		invokeAndExpect2(43, "def foo() { bar + 1 } def static bar() { 42 }", "foo");
 	}
 	
+	public void testStaticExtensionStaticCall() throws Exception {
+		invokeAndExpectStatic(43, "def static foo() { 42.bar } def static bar(int x) { x + 1 }", "foo");
+	}
+	
+	public void testStaticExtensionDynamicCall() throws Exception {
+		invokeAndExpect2(43, "def foo() { 42.bar } def static bar(int x) { x + 1 }", "foo");
+	}
+	
 	public void testStaticFieldStaticCall() throws Exception {
 		invokeAndExpectStatic(42, "static int bar def static foo() { bar = 42; bar }", "foo");
 	}
