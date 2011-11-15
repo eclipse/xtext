@@ -93,7 +93,7 @@ public class FunctionOverrideAssist {
 		for (JvmOperation operation : filter(
 				featureOverridesService.getAllJvmFeatures(inferredType, typeArgumentContext), JvmOperation.class)) {
 			if (operation.getDeclaringType() != inferredType && visibilityService.isVisible(operation, inferredType)
-					&& !operation.isFinal()) {
+					&& !operation.isFinal() && !operation.isStatic()) {
 				Object erasureKey = operationSignatureProvider.get(operation).getErasureKey();
 				if (erasureKeys.add(erasureKey)) {
 					result.add(operation);
