@@ -360,6 +360,11 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 	}
 
 	@Check
+	public void checkUnhandledException(XtendFunction function) {
+		doCheckUnhandledException(function.getExpression(), function.getExceptions());
+	}
+	
+	@Check
 	public void checkDuplicateAndOverriddenFunctions(XtendClass xtendClass) {
 		final JvmGenericType inferredType = associations.getInferredType(xtendClass);
 		if (inferredType != null) {
@@ -495,6 +500,13 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 		if (isMorePrivateThan(inferredOperation.getVisibility(), overriddenOperation.getVisibility())) {
 			error("Cannot reduce the visibility of the overridden method " + overriddenOperation.getIdentifier(),
 					function, XTEND_FUNCTION__NAME, OVERRIDE_REDUCES_VISIBILITY);
+		}
+		OUTER: for(JvmTypeReference exception: function.getExceptions()) {
+			for(JvmTypeReference overriddenException: overriddenOperation.getExceptions()) {
+				if(isConformant(overriddenException, exception)) continue OUTER;
+			}
+			error("Exception " + exception.getSimpleName() + " is not compatible with throws clause in " +
+					overriddenOperation.getIdentifier(), XTEND_FUNCTION__EXCEPTIONS, INCOMPATIBLE_THROWS_CLAUSE);
 		}
 		if (function.getReturnType() == null)
 			return;
