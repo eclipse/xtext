@@ -1078,46 +1078,48 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		javaCompiler.compileToClass("x.Z", javaCode);
 	}
 	
-	public void testRethrownCheckedExceptions_00() throws Exception {
-		Class<?> clazz = compileJavaCode("x.Y",
-				"package x class Y {" +
-				"  def foo() {\n" +
-				"    throw new java.io.IOException()" + 
-				"  }\n" +
-				"  def bar(){\n" +
-				"    foo()" +
-				"  }\n" + 
-				"}");
-		Object instance = clazz.newInstance();
-		Method method = clazz.getDeclaredMethod("bar");
-		try {
-			method.invoke(instance);
-		} catch (InvocationTargetException e) {
-			assertTrue(e.getCause() instanceof IOException);
-		}
-	}
-	
-	public void testRethrownCheckedExceptions_01() throws Exception {
-		Class<?> clazz = compileJavaCode("x.Y",
-				"package x class Y {" +
-				"  def dispatch foo(String x) {\n" +
-				"    throw new java.io.EOFException()" + 
-				"  }\n" +
-				"  def dispatch foo(Object x) {\n" +
-				"    throw new java.io.FileNotFoundException()" + 
-				"  }\n" +
-				"  def bar(){\n" +
-				"    foo('bar')" +
-				"  }\n" + 
-				"}");
-		Object instance = clazz.newInstance();
-		Method method = clazz.getDeclaredMethod("bar");
-		try {
-			method.invoke(instance);
-		} catch (InvocationTargetException e) {
-			assertTrue(e.getCause() instanceof java.io.EOFException);
-		}
-	}
+//  TODO: Checked exceptions are no longer re-thrown. Delete these tests if confirmed. 
+//	
+//	public void testRethrownCheckedExceptions_00() throws Exception {
+//		Class<?> clazz = compileJavaCode("x.Y",
+//				"package x class Y {" +
+//				"  def foo() {\n" +
+//				"    throw new java.io.IOException()" + 
+//				"  }\n" +
+//				"  def bar(){\n" +
+//				"    foo()" +
+//				"  }\n" + 
+//				"}");
+//		Object instance = clazz.newInstance();
+//		Method method = clazz.getDeclaredMethod("bar");
+//		try {
+//			method.invoke(instance);
+//		} catch (InvocationTargetException e) {
+//			assertTrue(e.getCause() instanceof IOException);
+//		}
+//	}
+//	
+//	public void testRethrownCheckedExceptions_01() throws Exception {
+//		Class<?> clazz = compileJavaCode("x.Y",
+//				"package x class Y {" +
+//				"  def dispatch foo(String x) {\n" +
+//				"    throw new java.io.EOFException()" + 
+//				"  }\n" +
+//				"  def dispatch foo(Object x) {\n" +
+//				"    throw new java.io.FileNotFoundException()" + 
+//				"  }\n" +
+//				"  def bar(){\n" +
+//				"    foo('bar')" +
+//				"  }\n" + 
+//				"}");
+//		Object instance = clazz.newInstance();
+//		Method method = clazz.getDeclaredMethod("bar");
+//		try {
+//			method.invoke(instance);
+//		} catch (InvocationTargetException e) {
+//			assertTrue(e.getCause() instanceof java.io.EOFException);
+//		}
+//	}
 	
 	public void testSuperCall() throws Exception {
 		Class<?> clazz = compileJavaCode("x.Y",
@@ -1273,7 +1275,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		String xtendCode = 
 			"package x " +
 			"class Y {" +
-			"  def create result: {Thread::sleep(10) new StringBuilder()} aBuilder(String x) {" +
+			"  def create result: {Thread::sleep(10) new StringBuilder()} aBuilder(String x) throws InterruptedException {" +
 			"   Thread::sleep(10)" +
 			"   result.append(x)" +
 			"  }" +
