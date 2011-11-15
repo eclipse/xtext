@@ -561,6 +561,16 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getXtendFunction_Exceptions()
+	{
+		return (EReference)xtendFunctionEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getXtendField()
 	{
 		return xtendFieldEClass;
@@ -886,6 +896,7 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 		createEReference(xtendFunctionEClass, XTEND_FUNCTION__TYPE_PARAMETERS);
 		createEAttribute(xtendFunctionEClass, XTEND_FUNCTION__VISIBILITY);
 		createEAttribute(xtendFunctionEClass, XTEND_FUNCTION__STATIC);
+		createEReference(xtendFunctionEClass, XTEND_FUNCTION__EXCEPTIONS);
 
 		xtendFieldEClass = createEClass(XTEND_FIELD);
 		createEAttribute(xtendFieldEClass, XTEND_FIELD__NAME);
@@ -1015,6 +1026,7 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 		initEReference(getXtendFunction_TypeParameters(), theTypesPackage.getJvmTypeParameter(), null, "typeParameters", null, 0, -1, XtendFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getXtendFunction_Visibility(), theTypesPackage.getJvmVisibility(), "visibility", "PUBLIC", 0, 1, XtendFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getXtendFunction_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, XtendFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXtendFunction_Exceptions(), theTypesPackage.getJvmTypeReference(), null, "exceptions", null, 0, -1, XtendFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xtendFieldEClass, XtendField.class, "XtendField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getXtendField_Name(), ecorePackage.getEString(), "name", null, 0, 1, XtendField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

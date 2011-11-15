@@ -465,13 +465,22 @@ public interface Xtend2Package extends EPackage
 	int XTEND_FUNCTION__STATIC = XTEND_MEMBER_FEATURE_COUNT + 9;
 
 	/**
+	 * The feature id for the '<em><b>Exceptions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_FUNCTION__EXCEPTIONS = XTEND_MEMBER_FEATURE_COUNT + 10;
+
+	/**
 	 * The number of structural features of the '<em>Xtend Function</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FUNCTION_FEATURE_COUNT = XTEND_MEMBER_FEATURE_COUNT + 10;
+	int XTEND_FUNCTION_FEATURE_COUNT = XTEND_MEMBER_FEATURE_COUNT + 11;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFieldImpl <em>Xtend Field</em>}' class.
@@ -1228,6 +1237,17 @@ public interface Xtend2Package extends EPackage
 	EAttribute getXtendFunction_Static();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction#getExceptions <em>Exceptions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Exceptions</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.XtendFunction#getExceptions()
+	 * @see #getXtendFunction()
+	 * @generated
+	 */
+	EReference getXtendFunction_Exceptions();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xtend2.xtend2.XtendField <em>Xtend Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1813,6 +1833,14 @@ public interface Xtend2Package extends EPackage
 		 * @generated
 		 */
 		EAttribute XTEND_FUNCTION__STATIC = eINSTANCE.getXtendFunction_Static();
+
+		/**
+		 * The meta object literal for the '<em><b>Exceptions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XTEND_FUNCTION__EXCEPTIONS = eINSTANCE.getXtendFunction_Exceptions();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFieldImpl <em>Xtend Field</em>}' class.

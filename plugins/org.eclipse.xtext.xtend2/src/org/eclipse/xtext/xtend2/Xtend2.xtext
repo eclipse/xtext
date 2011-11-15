@@ -52,6 +52,7 @@ Member returns XtendMember:
 			| name=ValidID '('
 			)
 			(parameters+=Parameter (',' parameters+=Parameter)*)? ')'
+			('throws' exceptions+=JvmTypeReference (',' exceptions+=JvmTypeReference)*)?
 			(expression=XBlockExpression | expression=RichString )?
 	) ;
 
