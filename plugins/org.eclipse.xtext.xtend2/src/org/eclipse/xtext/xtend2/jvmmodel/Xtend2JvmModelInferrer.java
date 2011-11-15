@@ -274,6 +274,9 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 		}
 		operation.setReturnType(returnType);
 		copyAndFixTypeParameters(source.getTypeParameters(), operation);
+		for(JvmTypeReference exception: source.getExceptions()) {
+			operation.getExceptions().add(cloneWithProxies(exception));
+		}
 		jvmTypesBuilder.translateAnnotationsTo(source.getAnnotationInfo().getAnnotations(), operation);
 		CreateExtensionInfo createExtensionInfo = source.getCreateExtensionInfo();
 		if (createExtensionInfo != null) {

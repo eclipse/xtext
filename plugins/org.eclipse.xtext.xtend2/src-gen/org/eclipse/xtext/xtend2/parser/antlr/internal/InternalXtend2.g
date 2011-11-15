@@ -1031,19 +1031,63 @@ ruleValidID
     {
     	newLeafNode(otherlv_36, grammarAccess.getMemberAccess().getRightParenthesisKeyword_2_1_8());
     }
-((
+(	otherlv_37='throws' 
+    {
+    	newLeafNode(otherlv_37, grammarAccess.getMemberAccess().getThrowsKeyword_2_1_9_0());
+    }
+(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getMemberAccess().getExpressionXBlockExpressionParserRuleCall_2_1_9_0_0()); 
+	        newCompositeNode(grammarAccess.getMemberAccess().getExceptionsJvmTypeReferenceParserRuleCall_2_1_9_1_0()); 
 	    }
-		lv_expression_37_0=ruleXBlockExpression		{
+		lv_exceptions_38_0=ruleJvmTypeReference		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getMemberRule());
+	        }
+       		add(
+       			$current, 
+       			"exceptions",
+        		lv_exceptions_38_0, 
+        		"JvmTypeReference");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(	otherlv_39=',' 
+    {
+    	newLeafNode(otherlv_39, grammarAccess.getMemberAccess().getCommaKeyword_2_1_9_2_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getMemberAccess().getExceptionsJvmTypeReferenceParserRuleCall_2_1_9_2_1_0()); 
+	    }
+		lv_exceptions_40_0=ruleJvmTypeReference		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getMemberRule());
+	        }
+       		add(
+       			$current, 
+       			"exceptions",
+        		lv_exceptions_40_0, 
+        		"JvmTypeReference");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))*)?((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getMemberAccess().getExpressionXBlockExpressionParserRuleCall_2_1_10_0_0()); 
+	    }
+		lv_expression_41_0=ruleXBlockExpression		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMemberRule());
 	        }
        		set(
        			$current, 
        			"expression",
-        		lv_expression_37_0, 
+        		lv_expression_41_0, 
         		"XBlockExpression");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -1053,16 +1097,16 @@ ruleValidID
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getMemberAccess().getExpressionRichStringParserRuleCall_2_1_9_1_0()); 
+	        newCompositeNode(grammarAccess.getMemberAccess().getExpressionRichStringParserRuleCall_2_1_10_1_0()); 
 	    }
-		lv_expression_38_0=ruleRichString		{
+		lv_expression_42_0=ruleRichString		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMemberRule());
 	        }
        		set(
        			$current, 
        			"expression",
-        		lv_expression_38_0, 
+        		lv_expression_42_0, 
         		"RichString");
 	        afterParserOrEnumRuleCall();
 	    }

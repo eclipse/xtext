@@ -75,6 +75,10 @@ ruleMember :
                 ',' ruleParameter
             )*
         )? ')' (
+            'throws' ruleJvmTypeReference (
+                ',' ruleJvmTypeReference
+            )*
+        )? (
             ruleXBlockExpression |
             ruleRichString
         )?

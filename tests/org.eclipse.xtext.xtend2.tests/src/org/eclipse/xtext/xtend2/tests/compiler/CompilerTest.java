@@ -2231,6 +2231,17 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"Hello", "World");
 	}
 	
+	public void testThrowsDeclaration() throws Exception {
+		try {
+			invokeAndExpect2(null, "def foo() throws NoSuchFieldException { throw new NoSuchFieldException(\"foo\") }", "foo");
+		} catch(InvocationTargetException e) {
+			assertTrue(e.getCause() instanceof NoSuchFieldException);
+			assertEquals("foo", e.getCause().getMessage());
+			return;
+		}
+		fail("Expected NoSuchFieldException not thrown");
+	}
+	
 	@Inject
 	private EclipseRuntimeDependentJavaCompiler javaCompiler;
 
