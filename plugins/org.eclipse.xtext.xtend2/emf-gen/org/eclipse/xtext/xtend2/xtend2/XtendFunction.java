@@ -31,6 +31,7 @@ import org.eclipse.xtext.xbase.XExpression;
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction#getTypeParameters <em>Type Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction#isStatic <em>Static</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction#getExceptions <em>Exceptions</em>}</li>
  * </ul>
  * </p>
  *
@@ -310,5 +311,21 @@ public interface XtendFunction extends XtendMember
 	 * @generated
 	 */
 	void setStatic(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Exceptions</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.xtext.common.types.JvmTypeReference}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Exceptions</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Exceptions</em>' containment reference list.
+	 * @see org.eclipse.xtext.xtend2.xtend2.Xtend2Package#getXtendFunction_Exceptions()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<JvmTypeReference> getExceptions();
 
 } // XtendFunction

@@ -1355,6 +1355,7 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	 *             name=ValidID
 	 *         ) 
 	 *         (parameters+=Parameter parameters+=Parameter*)? 
+	 *         (exceptions+=JvmTypeReference exceptions+=JvmTypeReference*)? 
 	 *         (expression=XBlockExpression | expression=RichString)?
 	 *     )
 	 */

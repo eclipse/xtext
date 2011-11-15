@@ -48,6 +48,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendParameter;
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#getTypeParameters <em>Type Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#isStatic <em>Static</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#getExceptions <em>Exceptions</em>}</li>
  * </ul>
  * </p>
  *
@@ -213,6 +214,16 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 	 * @ordered
 	 */
 	protected boolean static_ = STATIC_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getExceptions() <em>Exceptions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExceptions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<JvmTypeReference> exceptions;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -554,6 +565,20 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<JvmTypeReference> getExceptions()
+	{
+		if (exceptions == null)
+		{
+			exceptions = new EObjectContainmentEList<JvmTypeReference>(JvmTypeReference.class, this, Xtend2Package.XTEND_FUNCTION__EXCEPTIONS);
+		}
+		return exceptions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -569,6 +594,8 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 				return basicSetCreateExtensionInfo(null, msgs);
 			case Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS:
 				return ((InternalEList<?>)getTypeParameters()).basicRemove(otherEnd, msgs);
+			case Xtend2Package.XTEND_FUNCTION__EXCEPTIONS:
+				return ((InternalEList<?>)getExceptions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -603,6 +630,8 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 				return getVisibility();
 			case Xtend2Package.XTEND_FUNCTION__STATIC:
 				return isStatic();
+			case Xtend2Package.XTEND_FUNCTION__EXCEPTIONS:
+				return getExceptions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -650,6 +679,10 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 			case Xtend2Package.XTEND_FUNCTION__STATIC:
 				setStatic((Boolean)newValue);
 				return;
+			case Xtend2Package.XTEND_FUNCTION__EXCEPTIONS:
+				getExceptions().clear();
+				getExceptions().addAll((Collection<? extends JvmTypeReference>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -694,6 +727,9 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 			case Xtend2Package.XTEND_FUNCTION__STATIC:
 				setStatic(STATIC_EDEFAULT);
 				return;
+			case Xtend2Package.XTEND_FUNCTION__EXCEPTIONS:
+				getExceptions().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -728,6 +764,8 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 				return isSetVisibility();
 			case Xtend2Package.XTEND_FUNCTION__STATIC:
 				return static_ != STATIC_EDEFAULT;
+			case Xtend2Package.XTEND_FUNCTION__EXCEPTIONS:
+				return exceptions != null && !exceptions.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
