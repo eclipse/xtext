@@ -25,6 +25,7 @@ import org.eclipse.jdt.core.search.SearchEngine;
 import org.eclipse.jdt.core.search.SearchPattern;
 import org.eclipse.jdt.core.search.TypeNameRequestor;
 import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.IDocument;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -32,6 +33,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
+import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -52,6 +54,8 @@ import org.eclipse.xtext.ui.editor.quickfix.ReplaceModification;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xtend2.formatting.OrganizeImports;
 import org.eclipse.xtext.xtend2.formatting.OrganizeImports.ReferenceAcceptor;
 import org.eclipse.xtext.xtend2.formatting.OverrideFunction;
@@ -87,6 +91,9 @@ public class Xtend2QuickfixProvider extends DefaultQuickfixProvider {
 	
 	@Inject 
 	private Xtend2GrammarAccess grammarAccess;
+	
+	@Inject
+	private IIndentationInformation indentationInformation;
 	
 	/**
 	 * Filter quickfixes for types and constructors.
@@ -386,10 +393,72 @@ public class Xtend2QuickfixProvider extends DefaultQuickfixProvider {
 								}
 								xtextDocument.replace(insertPosition, 0, replacement);
 								TextRegion importRegion = organizeImports.computeRegion(xtextResource);
-								xtextDocument.replace(importRegion.getOffset(), importRegion.getLength(), organizeImports.getOrganizedImportSection(xtextResource));
+								xtextDocument.replace(importRegion.getOffset(), importRegion.getLength(), 
+										organizeImports.getOrganizedImportSection(xtextResource));
 							}
 						}
 					});
 	}
 	
+	@Fix(org.eclipse.xtext.xbase.validation.IssueCodes.UNHANDLED_EXCEPTION)
+	public void surroundWithTryCatch(final Issue issue, IssueResolutionAcceptor acceptor) {
+		if(issue.getData() != null && issue.getData().length >1)
+			acceptor.accept(issue, "Surround with try/catch block", "Surround with try/catch block", "fix_indent.gif",
+					new ISemanticModification() {
+						public void apply(EObject element, IModificationContext context) throws Exception {
+							URI exceptionURI = URI.createURI(issue.getData()[0]);
+							URI childURI = URI.createURI(issue.getData()[1]);
+							XtextResource xtextResource = (XtextResource) element.eResource();
+							EObject exception = xtextResource.getResourceSet().getEObject(exceptionURI, true);
+							if (exception instanceof JvmType) {
+								JvmType exceptionType = (JvmType) exception;
+								EObject childThrowingException = xtextResource.getResourceSet().getEObject(childURI, true);
+								XExpression toBeSurrounded = findContainerExpressionInBlock(childThrowingException);
+								IXtextDocument xtextDocument = context.getXtextDocument();
+								if(toBeSurrounded != null) {
+									ICompositeNode toBeSurroundedNode = NodeModelUtils.getNode(toBeSurrounded);
+									String indent = getIndentationAtOffset(toBeSurroundedNode.getOffset(), xtextDocument);
+									String indent2 = indentationInformation.getIndentString();
+									ReferenceAcceptor referenceAcceptor = organizeImports.intitializeReferenceAcceptor(xtextResource);
+									referenceAcceptor.acceptType(exceptionType);
+									String catchClause = "\n" + indent + "} catch(" + exceptionType.getSimpleName() + " exc) {\n" + 
+											indent + indent2 + "throw new RuntimeException(\"TODO: handle exception\")\n" + indent + "}"
+											+ indent;
+									xtextDocument.replace(toBeSurroundedNode.getTotalEndOffset(), 0, catchClause);
+									xtextDocument.replace(toBeSurroundedNode.getOffset(), 0, "try {\n" + indent + indent2);
+									TextRegion importRegion = organizeImports.computeRegion(xtextResource);
+									xtextDocument.replace(importRegion.getOffset(), importRegion.getLength(),
+											organizeImports.getOrganizedImportSection(xtextResource));
+								}
+							}
+						}
+					});
+	}
+	
+	
+	protected XExpression findContainerExpressionInBlock(EObject expr) {
+		if(expr==null)
+			return null;
+		if(expr.eContainer() instanceof XBlockExpression)
+			return (XExpression) expr;
+		else 
+			return findContainerExpressionInBlock(expr.eContainer());
+	}
+
+	protected String getIndentationAtOffset(int offset, IDocument document) throws BadLocationException {
+		if(offset == 0)
+			return "";
+		int currentOffset = offset-1;
+		char currentChr = document.getChar(currentOffset);
+		StringBuilder indentation = new StringBuilder();
+		while(currentChr != '\n' && currentChr != '\r' && currentOffset >0) {
+			if(Character.isWhitespace(currentChr))
+				indentation.append(currentChr);
+			else 
+				indentation = new StringBuilder();
+			--currentOffset;
+			currentChr = document.getChar(currentOffset);
+		}
+		return indentation.reverse().toString();
+	}
 }

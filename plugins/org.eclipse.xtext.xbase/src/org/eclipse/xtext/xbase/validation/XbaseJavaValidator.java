@@ -645,14 +645,15 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 				thrownException)) {
 			EObject container = childThrowingException.eContainer();
 			EStructuralFeature containmentRef = childThrowingException.eContainingFeature();
-			String typeURI = EcoreUtil.getURI(thrownException.getType()).toString();
+			String expressionTypeURI = EcoreUtil.getURI(thrownException.getType()).toString();
+			String childURI = EcoreUtil.getURI(childThrowingException).toString();
 			if (containmentRef.isMany()) {
 				int index = ((List<?>) container.eGet(containmentRef)).indexOf(childThrowingException);
 				error("Unhandled exception type " + thrownException.getIdentifier(), container, containmentRef, index,
-						UNHANDLED_EXCEPTION, typeURI);
+						UNHANDLED_EXCEPTION, expressionTypeURI, childURI);
 			} else {
 				error("Unhandled exception type " + thrownException.getIdentifier(), container, containmentRef,
-						ValidationMessageAcceptor.INSIGNIFICANT_INDEX, UNHANDLED_EXCEPTION, typeURI);
+						ValidationMessageAcceptor.INSIGNIFICANT_INDEX, UNHANDLED_EXCEPTION, expressionTypeURI, childURI);
 			}
 		}
 	}
