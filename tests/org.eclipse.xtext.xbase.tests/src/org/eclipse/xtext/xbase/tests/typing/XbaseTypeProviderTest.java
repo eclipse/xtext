@@ -224,11 +224,11 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testFeatureCall_13_2() throws Exception {
-		assertResolvedType("java.util.List<java.lang.Integer>", "{ var this = newArrayList('').map(s|1).toList() this.map(i|i+1) }");
+		assertResolvedType("java.util.List<java.lang.Integer>", "{ var it = newArrayList('').map(s|1).toList() it.map(i|i+1) }");
 	}
 	
 	public void testFeatureCall_13_3() throws Exception {
-		assertResolvedType("java.util.List<java.lang.Integer>", "{ var this = newArrayList('').map(s|1).toList() map(i|i+1) }");
+		assertResolvedType("java.util.List<java.lang.Integer>", "{ var it = newArrayList('').map(s|1).toList() map(i|i+1) }");
 	}
 	
 	public void testFeatureCall_14() throws Exception {
@@ -396,8 +396,8 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 		assertResolvedType("boolean", "new java.util.ArrayList<Byte>() += 'x'.getBytes()");
 	}
 	
-	public void testFeatureCallOnThis() throws Exception {
-		assertResolvedType("boolean", "{ val this = 'foo'; length == 3;}");
+	public void testFeatureCallOnIt() throws Exception {
+		assertResolvedType("boolean", "{ val it = 'foo'; length == 3;}");
 	}
 	
 	public void testStaticMethods_01() throws Exception {
