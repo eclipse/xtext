@@ -1,6 +1,5 @@
 package org.eclipse.xtext.xbase.validation;
 
-import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Sets.*;
 import static java.util.Collections.*;
 import static org.eclipse.xtext.util.Strings.*;
@@ -72,6 +71,7 @@ import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.typing.JvmExceptions;
 import org.eclipse.xtext.xbase.typing.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 
@@ -110,6 +110,9 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	@Inject
 	private ILogicalContainerProvider logicalContainerProvider;
+	
+	@Inject
+	private JvmExceptions jvmExceptions; 
 
 	private final Set<EReference> typeConformanceCheckedReferences = ImmutableSet.of(
 			XbasePackage.Literals.XVARIABLE_DECLARATION__RIGHT, XbasePackage.Literals.XIF_EXPRESSION__IF,
@@ -634,24 +637,10 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	protected Iterable<JvmTypeReference> findUnhandledExceptions(EObject context,
 			Iterable<JvmTypeReference> thrownExceptions, List<JvmTypeReference> declaredExceptions) {
-		JvmTypeReference runtimeException = typeRefs.getTypeForName("java.lang.RuntimeException", context);
-		List<JvmTypeReference> allowedExceptions = newArrayListWithCapacity(declaredExceptions.size() + 1);
-		allowedExceptions.add(runtimeException);
-		allowedExceptions.addAll(declaredExceptions);
-		List<JvmTypeReference> unhandledExceptions = null;
-		OUTER: for (JvmTypeReference thrownException : thrownExceptions) {
-			for (JvmTypeReference allowedException : allowedExceptions) {
-				if (isConformant(allowedException, thrownException))
-					continue OUTER;
-			}
-			if (unhandledExceptions == null)
-				unhandledExceptions = newArrayList();
-			unhandledExceptions.add(thrownException);
-		}
-		return (unhandledExceptions == null) ? Collections.<JvmTypeReference> emptyList() : unhandledExceptions;
+		return jvmExceptions.findUnhandledExceptions(context, thrownExceptions, declaredExceptions);
 	}
 
-	protected void reportUnhandledException(EObject element, JvmTypeReference thrownException) {
+	protected void reportUnhandledException(XExpression element, JvmTypeReference thrownException) {
 		for (EObject childThrowingException : exceptionInExpressionFinder.findChildrenThrowingException(element,
 				thrownException)) {
 			EObject container = childThrowingException.eContainer();
@@ -660,11 +649,11 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			String childURI = EcoreUtil.getURI(childThrowingException).toString();
 			if (containmentRef.isMany()) {
 				int index = ((List<?>) container.eGet(containmentRef)).indexOf(childThrowingException);
-				error("Unhandled exception type " + thrownException.getIdentifier(), container, containmentRef, index,
-						UNHANDLED_EXCEPTION, expressionTypeURI, childURI);
+//				error("Unhandled exception type " + thrownException.getIdentifier(), container, containmentRef, index,
+//						UNHANDLED_EXCEPTION, expressionTypeURI, childURI);
 			} else {
-				error("Unhandled exception type " + thrownException.getIdentifier(), container, containmentRef,
-						ValidationMessageAcceptor.INSIGNIFICANT_INDEX, UNHANDLED_EXCEPTION, expressionTypeURI, childURI);
+//				error("Unhandled exception type " + thrownException.getIdentifier(), container, containmentRef,
+//						ValidationMessageAcceptor.INSIGNIFICANT_INDEX, UNHANDLED_EXCEPTION, expressionTypeURI, childURI);
 			}
 		}
 	}
