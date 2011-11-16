@@ -1,11 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="ASCII"?>
 <aggregator:Aggregator xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:aggregator="http://www.eclipse.org/b3/2010/aggregator/1.0.0" label="Xtext to Maven" buildRoot="${WORKSPACE}/maven" mavenResult="true">
-  <configurations operatingSystem="macosx" windowSystem="cocoa" architecture="x86_64"/>
+  <configurations operatingSystem="macosx" windowSystem="cocoa"/>
   <contributions label="Xtext All in One">
-    <repositories enabled="true" location="http://download.eclipse.org/modeling/emft/mwe/updates/releases/R201108020506/mwe/"/>
-    <repositories enabled="true" location="http://download.eclipse.org/modeling/emft/mwe/updates/releases/R201108020809/mwe2lang/"/>
-    <repositories enabled="true" location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/head/R201108020636/"/>
-    <repositories enabled="true" location="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201108020519/"/>
+    <repositories location="http://download.eclipse.org/modeling/emft/mwe/updates/releases/R201108020506/mwe/">
+      <features name="org.eclipse.emf.mwe.sdk.feature.group"/>
+    </repositories>
+    <repositories location="http://download.eclipse.org/modeling/emft/mwe/updates/releases/R201108020809/mwe2lang/">
+      <features name="org.eclipse.emf.mwe2.language.sdk.feature.group"/>
+    </repositories>
+    <repositories location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/head/R201108020636/">
+      <features name="org.eclipse.xtext.sdk.feature.group"/>
+    </repositories>
+    <repositories location="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201108020519/">
+      <features name="org.eclipse.xpand.sdk.feature.group"/>
+    </repositories>
   </contributions>
   <validationRepositories location="http://download.eclipse.org/releases/indigo"/>
 </aggregator:Aggregator>
