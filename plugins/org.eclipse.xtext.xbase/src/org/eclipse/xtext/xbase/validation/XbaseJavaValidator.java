@@ -267,8 +267,11 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		if (attr.getEContainingClass().isInstance(attributeHolder)) {
 			String name = (String) attributeHolder.eGet(attr);
 			// shadowing 'it' is allowed
-			if (name == null || name.equals(XbaseScopeProvider.IT.toString()))
+			if(equal(name, XbaseScopeProvider.IT.toString()))
 				return;
+			else if(equal(name, XbaseScopeProvider.THIS.toString())) {
+				error("Variable name 'this' is not allowed", attributeHolder, attr, VARIABLE_NAME_SHADOWING);
+			}
 			int idx = 0;
 			if (nameDeclarator.eContainer() instanceof XBlockExpression) {
 				idx = ((XBlockExpression) nameDeclarator.eContainer()).getExpressions().indexOf(nameDeclarator);
@@ -278,7 +281,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			Iterable<IEObjectDescription> elements = scope.getElements(QualifiedName.create(name));
 			for (IEObjectDescription desc : elements) {
 				if (desc.getEObjectOrProxy() != nameDeclarator && !(desc.getEObjectOrProxy() instanceof JvmFeature)) {
-					error("Duplicate variable name '" + name + "'", attributeHolder, attr, -1,
+					error("Duplicate variable name '" + name + "'", attributeHolder, attr,
 							IssueCodes.VARIABLE_NAME_SHADOWING);
 				}
 			}
