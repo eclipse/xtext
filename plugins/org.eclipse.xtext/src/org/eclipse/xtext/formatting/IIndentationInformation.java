@@ -24,7 +24,7 @@ public interface IIndentationInformation {
 	 */
 	class Default implements IIndentationInformation{
 		public String getIndentString() {
-			return "    ";
+			return "\t";
 		}
 	}
 }
