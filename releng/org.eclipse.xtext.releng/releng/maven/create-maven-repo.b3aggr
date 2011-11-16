@@ -2,10 +2,10 @@
 <aggregator:Aggregator xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:aggregator="http://www.eclipse.org/b3/2010/aggregator/1.0.0" label="Xtext to Maven" buildRoot="${WORKSPACE}/maven" mavenResult="true">
   <configurations operatingSystem="macosx" windowSystem="cocoa" architecture="x86_64"/>
   <contributions label="Xtext All in One">
-    <repositories enabled="true" location="file:/opt/users/hudsonbuild/.hudson/jobs/MWE-nightly-HEAD/lastSuccessful/archive/mwe.p2.repository/"/>
-    <repositories enabled="true" location="file:/opt/users/hudsonbuild/.hudson/jobs/Xpand-nightly-HEAD/lastSuccessful/archive/xpand.p2.repository/"/>
-    <repositories enabled="true" location="file:/opt/users/hudsonbuild/.hudson/jobs/Xtext-nightly-HEAD/lastSuccessful/archive/xtext.p2.repository/"/>
-    <repositories enabled="true" location="file:/opt/users/hudsonbuild/.hudson/jobs/MWE-Language-nightly-HEAD/lastSuccessful/archive/mwe2lang.p2.repository/"/>
+    <repositories enabled="true" location="http://download.eclipse.org/modeling/emft/mwe/updates/releases/R201108020506/mwe/"/>
+    <repositories enabled="true" location="http://download.eclipse.org/modeling/emft/mwe/updates/releases/R201108020809/mwe2lang/"/>
+    <repositories enabled="true" location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/head/R201108020636/"/>
+    <repositories enabled="true" location="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201108020519/"/>
   </contributions>
   <validationRepositories location="http://download.eclipse.org/releases/indigo"/>
 </aggregator:Aggregator>
