@@ -267,10 +267,11 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		if (attr.getEContainingClass().isInstance(attributeHolder)) {
 			String name = (String) attributeHolder.eGet(attr);
 			// shadowing 'it' is allowed
-			if(equal(name, XbaseScopeProvider.IT.toString()))
+			if(name == null || equal(name, XbaseScopeProvider.IT.toString()))
 				return;
 			else if(equal(name, XbaseScopeProvider.THIS.toString())) {
 				error("Variable name 'this' is not allowed", attributeHolder, attr, VARIABLE_NAME_SHADOWING);
+				return;
 			}
 			int idx = 0;
 			if (nameDeclarator.eContainer() instanceof XBlockExpression) {
