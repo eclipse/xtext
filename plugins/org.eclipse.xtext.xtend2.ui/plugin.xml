@@ -537,4 +537,17 @@
          </description>
       </shortcut>
     </extension>  
+    <extension point="org.eclipse.jdt.core.classpathContainerInitializer">            
+   		<classpathContainerInitializer                                          
+			id="org.eclipse.xtend.XTEND_CONTAINER"                                                        
+			class="org.eclipse.xtext.xtend2.ui.buildpath.XtendContainerInitializer"/>                           
+	</extension>
+	<extension
+         point="org.eclipse.jdt.ui.classpathContainerPage">
+      <classpathContainerPage
+            name="%XtendLibrary_name"
+            class="org.eclipse.xtext.xtend2.ui.buildpath.XtendContainerWizardPage"
+            id="org.eclipse.xtend.XTEND_CONTAINER">
+      </classpathContainerPage>
+   </extension>
 </plugin>
