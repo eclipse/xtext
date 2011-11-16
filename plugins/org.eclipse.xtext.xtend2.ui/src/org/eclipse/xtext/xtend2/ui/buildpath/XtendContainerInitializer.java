@@ -24,22 +24,28 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jdt.core.ClasspathContainerInitializer;
 import org.eclipse.jdt.core.IAccessRule;
+import org.eclipse.jdt.core.IClasspathAttribute;
 import org.eclipse.jdt.core.IClasspathContainer;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.xtend2.ui.internal.Xtend2Activator;
 import org.osgi.framework.Bundle;
+import org.osgi.framework.Version;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
 public class XtendContainerInitializer extends ClasspathContainerInitializer {
 
+	private static final String XTEXT_XTEND2_LIB_BUNDLE_ID = "org.eclipse.xtext.xtend2.lib";
+
+	private static final String XTEXT_XBASE_LIB_BUNDLE_ID = "org.eclipse.xtext.xbase.lib";
+
 	public static final Path XTEND_LIBRARY_PATH = new Path("org.eclipse.xtend.XTEND_CONTAINER"); //$NON-NLS-1$
 
 	public static final String[] BUNDLE_IDS_TO_INCLUDE = new String[] { "com.google.collect", "com.google.inject",
-			"org.eclipse.xtext.xbase.lib", "org.eclipse.xtext.xtend2.lib" };
+			XTEXT_XBASE_LIB_BUNDLE_ID, XTEXT_XTEND2_LIB_BUNDLE_ID };
 
 	private static final Logger LOG = Logger.getLogger(XtendContainerInitializer.class);
 
@@ -91,7 +97,7 @@ public class XtendContainerInitializer extends ClasspathContainerInitializer {
 	}
 
 	/**
-	 * @author huebner - Initial contribution and API
+	 * @author Dennis Huebner - Initial contribution and API
 	 */
 	private final static class XtendClasspathContainer implements IClasspathContainer {
 
@@ -118,9 +124,28 @@ public class XtendContainerInitializer extends ClasspathContainerInitializer {
 			IPath bundlePath = findBundle(bundleId);
 			if (bundlePath != null) {
 				IPath sourceBundlePath = findBundle(bundleId.concat(SOURCE_SUFIX));
-				cpEntries.add(JavaCore.newLibraryEntry(bundlePath, sourceBundlePath, null, new IAccessRule[] {}, null,
-						false));
+				IClasspathAttribute[] extraAttributes = null;
+				if (XTEXT_XBASE_LIB_BUNDLE_ID.equals(bundleId) || XTEXT_XTEND2_LIB_BUNDLE_ID.equals(bundleId)) {
+					extraAttributes = new IClasspathAttribute[] { JavaCore.newClasspathAttribute(
+							IClasspathAttribute.JAVADOC_LOCATION_ATTRIBUTE_NAME, calculateJavadocURL()) };
+				}
+				cpEntries.add(JavaCore.newLibraryEntry(bundlePath, sourceBundlePath, null, new IAccessRule[] {},
+						extraAttributes, false));
 			}
+		}
+
+		/**
+		 * Builds the Javadoc online URL.<br>
+		 * For example javadoc for version 2.1.1 looks like this:<br>
+		 * http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/
+		 */
+		private String calculateJavadocURL() {
+			Version xtend2version = Xtend2Activator.getInstance().getBundle().getVersion();
+			StringBuilder builder = new StringBuilder("http://download.eclipse.org/modeling/tmf/xtext/javadoc/");
+			builder.append(xtend2version.getMajor()).append(".");
+			builder.append(xtend2version.getMinor()).append(".");
+			builder.append(xtend2version.getMicro()).append("/");
+			return builder.toString();
 		}
 
 		private IPath findBundle(String bundleId) {
