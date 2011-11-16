@@ -26,6 +26,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendMember;
+import org.eclipse.xtext.xtend2.xtend2.XtendParameter;
 
 import com.google.inject.Inject;
 
@@ -88,7 +89,7 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testShadowingVariableNames_03() throws Exception {
 		XtendClass clazz = clazz("class X { def foo(String this) { } }");
-		helper.assertError(clazz, TypesPackage.Literals.JVM_FORMAL_PARAMETER, VARIABLE_NAME_SHADOWING);
+		helper.assertError(clazz, Xtend2Package.Literals.XTEND_PARAMETER, VARIABLE_NAME_SHADOWING);
 	}
 	
 	public void testShadowingVariableNames_04() throws Exception {
