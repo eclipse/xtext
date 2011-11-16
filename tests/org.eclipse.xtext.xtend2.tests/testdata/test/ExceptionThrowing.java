@@ -14,6 +14,19 @@ import java.io.IOException;
  */
 public class ExceptionThrowing {
 
-	public void foo() throws IOException {
+	public void ioException() throws IOException {
 	}
+
+	public void runtimeException() throws RuntimeException {
+	}
+	
+	public void nullPointerException() throws NullPointerException {
+	}
+
+	public void throwable() throws Throwable {
+	}
+
+	public void noException() {
+	}
+
 }

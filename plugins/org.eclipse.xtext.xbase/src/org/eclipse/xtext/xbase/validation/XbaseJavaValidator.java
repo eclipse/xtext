@@ -608,26 +608,37 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	@Check
 	public void checkExceptionsInClosure(XClosure closure) {
-		doCheckUnhandledException(closure.getExpression(), Collections.<JvmTypeReference>emptyList());
+		doCheckUnhandledException(closure.getExpression(), Collections.<JvmTypeReference> emptyList());
 	}
 
 	@Inject
 	private ExceptionInExpressionFinder exceptionInExpressionFinder;
 
 	protected void doCheckUnhandledException(XExpression expression, List<JvmTypeReference> declaredExceptions) {
-		JvmTypeReference runtimeException = typeRefs.getTypeForName("java.lang.RuntimeException", expression);
-		List<JvmTypeReference> allowedExceptions = newArrayListWithCapacity(declaredExceptions.size()+1);
+		for(JvmTypeReference unhandledException: findUnhandledExceptions(expression, typeProvider.getThrownExceptionTypes(expression), declaredExceptions)) {
+			reportUnhandledException(expression, unhandledException);
+		}
+	}
+
+	protected Iterable<JvmTypeReference> findUnhandledExceptions(EObject context,
+			Iterable<JvmTypeReference> thrownExceptions, List<JvmTypeReference> declaredExceptions) {
+		JvmTypeReference runtimeException = typeRefs.getTypeForName("java.lang.RuntimeException", context);
+		List<JvmTypeReference> allowedExceptions = newArrayListWithCapacity(declaredExceptions.size() + 1);
 		allowedExceptions.add(runtimeException);
 		allowedExceptions.addAll(declaredExceptions);
-		OUTER: for (JvmTypeReference thrownException : typeProvider.getThrownExceptionTypes(expression)) {
-			for(JvmTypeReference allowedException: allowedExceptions) {
+		List<JvmTypeReference> unhandledExceptions = null;
+		OUTER: for (JvmTypeReference thrownException : thrownExceptions) {
+			for (JvmTypeReference allowedException : allowedExceptions) {
 				if (isConformant(allowedException, thrownException))
 					continue OUTER;
 			}
-			reportUnhandledException(expression, thrownException);
-		}		
+			if (unhandledExceptions == null)
+				unhandledExceptions = newArrayList();
+			unhandledExceptions.add(thrownException);
+		}
+		return (unhandledExceptions == null) ? Collections.<JvmTypeReference> emptyList() : unhandledExceptions;
 	}
-	
+
 	protected void reportUnhandledException(EObject element, JvmTypeReference thrownException) {
 		for (EObject childThrowingException : exceptionInExpressionFinder.findChildrenThrowingException(element,
 				thrownException)) {
