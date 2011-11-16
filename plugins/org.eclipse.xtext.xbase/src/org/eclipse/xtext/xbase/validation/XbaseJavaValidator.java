@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
@@ -644,13 +645,14 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 				thrownException)) {
 			EObject container = childThrowingException.eContainer();
 			EStructuralFeature containmentRef = childThrowingException.eContainingFeature();
+			String typeURI = EcoreUtil.getURI(thrownException.getType()).toString();
 			if (containmentRef.isMany()) {
 				int index = ((List<?>) container.eGet(containmentRef)).indexOf(childThrowingException);
 				error("Unhandled exception type " + thrownException.getIdentifier(), container, containmentRef, index,
-						UNHANDLED_EXCEPTION);
+						UNHANDLED_EXCEPTION, typeURI);
 			} else {
 				error("Unhandled exception type " + thrownException.getIdentifier(), container, containmentRef,
-						ValidationMessageAcceptor.INSIGNIFICANT_INDEX, UNHANDLED_EXCEPTION);
+						ValidationMessageAcceptor.INSIGNIFICANT_INDEX, UNHANDLED_EXCEPTION, typeURI);
 			}
 		}
 	}
