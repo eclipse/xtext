@@ -26,7 +26,6 @@ import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendMember;
-import org.eclipse.xtext.xtend2.xtend2.XtendParameter;
 
 import com.google.inject.Inject;
 
@@ -279,7 +278,8 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 				"    throw new Exception()" +
 				"  }" +
 				"}");
-		helper.assertError(clazz, XbasePackage.Literals.XBLOCK_EXPRESSION, UNHANDLED_EXCEPTION, "unhandled", "exception");
+		helper.assertNoError(clazz, UNHANDLED_EXCEPTION);
+//		helper.assertError(clazz, XbasePackage.Literals.XBLOCK_EXPRESSION, UNHANDLED_EXCEPTION, "unhandled", "exception");
 	}
 	
 	public void testThrowsClauseCompatibility_01() throws Exception {
@@ -299,7 +299,8 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 				"    throw new Exception()" +
 				"  }" +
 				"}");
-		helper.assertError(clazz, XbasePackage.Literals.XBLOCK_EXPRESSION, UNHANDLED_EXCEPTION, "unhandled", "exception");
+		helper.assertNoError(clazz, UNHANDLED_EXCEPTION);
+//		helper.assertError(clazz, XbasePackage.Literals.XBLOCK_EXPRESSION, UNHANDLED_EXCEPTION, "unhandled", "exception");
 	}
 	
 	public void testThrowsClauseCompatibility_03() throws Exception {
