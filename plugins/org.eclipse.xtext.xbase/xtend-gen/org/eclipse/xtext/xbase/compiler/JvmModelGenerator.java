@@ -3,7 +3,6 @@ package org.eclipse.xtext.xbase.compiler;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -645,9 +644,9 @@ public class JvmModelGenerator implements IGenerator {
   public StringConcatenation generateThrowsClause(final JvmExecutable it, final ImportManager importManager) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      List<JvmTypeReference> _checkedExceptions = this.checkedExceptions(it);
+      EList<JvmTypeReference> _exceptions = it.getExceptions();
       boolean hasAnyElements = false;
-      for(final JvmTypeReference exc : _checkedExceptions) {
+      for(final JvmTypeReference exc : _exceptions) {
         if (!hasAnyElements) {
           hasAnyElements = true;
           _builder.append(" throws ", "");
@@ -659,34 +658,6 @@ public class JvmModelGenerator implements IGenerator {
       }
     }
     return _builder;
-  }
-  
-  public List<JvmTypeReference> checkedExceptions(final JvmExecutable it) {
-    Iterable<JvmTypeReference> _thrownExceptionForIdentifiable = this._iTypeProvider.getThrownExceptionForIdentifiable(it);
-    final Function1<JvmTypeReference,Boolean> _function = new Function1<JvmTypeReference,Boolean>() {
-        public Boolean apply(final JvmTypeReference it) {
-          boolean _operator_and = false;
-          boolean _isInstanceOf = JvmModelGenerator.this._typeReferences.isInstanceOf(it, java.lang.Exception.class);
-          if (!_isInstanceOf) {
-            _operator_and = false;
-          } else {
-            boolean _isInstanceOf_1 = JvmModelGenerator.this._typeReferences.isInstanceOf(it, java.lang.RuntimeException.class);
-            boolean _operator_not = BooleanExtensions.operator_not(_isInstanceOf_1);
-            _operator_and = BooleanExtensions.operator_and(_isInstanceOf, _operator_not);
-          }
-          return ((Boolean)_operator_and);
-        }
-      };
-    Iterable<JvmTypeReference> _filter = IterableExtensions.<JvmTypeReference>filter(_thrownExceptionForIdentifiable, _function);
-    Set<JvmTypeReference> _set = IterableExtensions.<JvmTypeReference>toSet(_filter);
-    final Function1<JvmTypeReference,String> _function_1 = new Function1<JvmTypeReference,String>() {
-        public String apply(final JvmTypeReference it) {
-          String _identifier = it.getIdentifier();
-          return _identifier;
-        }
-      };
-    List<JvmTypeReference> _sortBy = IterableExtensions.<JvmTypeReference, String>sortBy(_set, _function_1);
-    return _sortBy;
   }
   
   public String generateParameter(final JvmFormalParameter it, final ImportManager importManager) {

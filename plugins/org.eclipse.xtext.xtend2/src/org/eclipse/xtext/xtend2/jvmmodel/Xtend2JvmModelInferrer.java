@@ -293,6 +293,9 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			initializer.setSimpleName(CREATE_INITIALIZER_PREFIX + source.getName());
 			initializer.setVisibility(JvmVisibility.PRIVATE);
 			initializer.setReturnType(typeReferences.getTypeForName(Void.TYPE, source));
+			for(JvmTypeReference exception: source.getExceptions()) {
+				initializer.getExceptions().add(cloneWithProxies(exception));
+			}
 
 			jvmTypesBuilder.setBody(operation, compileStrategies.forCacheMethod(createExtensionInfo, cacheVar, initializer));
 
