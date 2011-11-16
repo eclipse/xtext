@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.tests.serializer;
 import java.io.IOException;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCastedExpression;
@@ -20,10 +21,15 @@ import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 
+import com.google.inject.Inject;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class SerializerTest extends AbstractXbaseTestCase {
+	
+	@Inject
+	private IIndentationInformation indent;
 	
 	public void testSerialize_01() throws IOException {
 		Resource resource = newResource("'foo' as String");
@@ -66,7 +72,7 @@ public class SerializerTest extends AbstractXbaseTestCase {
 		String string = serializer.serialize(instanceOfExpression);
 		// TODO expectation is wrong --> I've (MEY) fixed the expectation, please verify 
 //		assertEquals("if ( false ) \"value\" instanceof String", string);
-		assertEquals("(if(false)\n\t\"value\") instanceof String", string);
+		assertEquals("(if(false)\n" + indent.getIndentString() + "\"value\") instanceof String", string);
 	}
 
 }

@@ -1,6 +1,7 @@
 package org.eclipse.xtext.xbase.validation;
 
 import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Sets.*;
 import static java.util.Collections.*;
 import static org.eclipse.xtext.util.Strings.*;
 import static org.eclipse.xtext.xbase.XbasePackage.*;
@@ -269,8 +270,9 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			// shadowing 'it' is allowed
 			if(name == null || equal(name, XbaseScopeProvider.IT.toString()))
 				return;
-			else if(equal(name, XbaseScopeProvider.THIS.toString())) {
-				error("Variable name 'this' is not allowed", attributeHolder, attr, VARIABLE_NAME_SHADOWING);
+			if (getDisallowedVariableNames().contains(name)) {
+				error("'" + name + "' is not a valid name.", attributeHolder, attr, -1,
+						IssueCodes.VARIABLE_NAME_SHADOWING);
 				return;
 			}
 			int idx = 0;
@@ -287,6 +289,11 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 				}
 			}
 		}
+	}
+
+	private Set<String> disallowedNames = newHashSet(XbaseScopeProvider.THIS.toString(), XbaseScopeProvider.SUPER.toString());
+	protected Set<String> getDisallowedVariableNames() {
+		return disallowedNames;
 	}
 
 	protected XbaseScopeProvider getScopeProvider() {

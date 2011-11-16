@@ -51,12 +51,12 @@ public class CompilerTest extends AbstractXbaseTestCase {
 				"\nint _xblockexpression = (int) 0;\n" +
 				"{\n" +
 				"  java.util.ArrayList<String> _arrayList = new java.util.ArrayList<String>();\n" + 
-				"  final java.util.ArrayList<String> _this = _arrayList;\n" +
-				"  int _size = _this.size();\n" + 
+				"  final java.util.ArrayList<String> it = _arrayList;\n" +
+				"  int _size = it.size();\n" + 
 				"  _xblockexpression = (_size);\n" +
 				"}\n" +
 				"return _xblockexpression;"
-				, "{ val this = new java.util.ArrayList<String>(); size;}");
+				, "{ val it = new java.util.ArrayList<String>(); size;}");
 	}
 	
 	public void testIf() throws Exception {
