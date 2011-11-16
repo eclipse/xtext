@@ -61,7 +61,7 @@ public class XtendContainerWizardPage extends NewElementWizardPage implements IC
 	}
 
 	public void setSelection(IClasspathEntry containerEntry) {
-		this.containerEntry = containerEntry;
+		//do nothing
 	}
 
 }
