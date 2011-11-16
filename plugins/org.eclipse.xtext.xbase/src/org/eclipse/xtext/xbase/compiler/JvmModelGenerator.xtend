@@ -168,13 +168,8 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def generateThrowsClause(JvmExecutable it, ImportManager importManager) '''«
-		FOR exc: it.checkedExceptions BEFORE ' throws ' SEPARATOR ', '»«exc.serialize(importManager)»«ENDFOR
+		FOR exc: it.exceptions BEFORE ' throws ' SEPARATOR ', '»«exc.serialize(importManager)»«ENDFOR
 	»'''
-
-	def checkedExceptions(JvmExecutable it) {
-		it.thrownExceptionForIdentifiable.filter [it.isInstanceOf(typeof(Exception)) && !it.isInstanceOf(typeof(RuntimeException))]
-			.toSet.sortBy [ identifier ]
-	}
 
 	def generateParameter(JvmFormalParameter it, ImportManager importManager) {
 		"final " + parameterType.serialize(importManager) + " " + simpleName
