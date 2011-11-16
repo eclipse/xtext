@@ -222,7 +222,8 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	
 	public void testExceptionInClosure_01() throws Exception {
 		XExpression expression = expression("{val func = [Integer i| throw new Exception() ]}");
-		helper.assertError(expression, XBLOCK_EXPRESSION, UNHANDLED_EXCEPTION);
+		helper.assertNoErrors(expression);
+//		helper.assertError(expression, XBLOCK_EXPRESSION, UNHANDLED_EXCEPTION);
 	}
 	
 	public void testExceptionInClosure_02() throws Exception {
@@ -232,12 +233,14 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	
 	public void testExceptionInClosure_03() throws Exception {
 		XExpression expression = expression("{val func = [Integer i| try { throw new Exception() } catch(NoSuchFieldException e) {} i]}");
-		helper.assertError(expression, XBLOCK_EXPRESSION, UNHANDLED_EXCEPTION);
+		helper.assertNoErrors(expression);
+//		helper.assertError(expression, XBLOCK_EXPRESSION, UNHANDLED_EXCEPTION);
 	}
 
 	public void testExceptionInClosure_04() throws Exception {
 		XExpression expression = expression("{val func = [Integer i| while(i==1) { throw new Exception() } i]}");
-		helper.assertError(expression, XBLOCK_EXPRESSION, UNHANDLED_EXCEPTION);
+		helper.assertNoErrors(expression);
+//		helper.assertError(expression, XBLOCK_EXPRESSION, UNHANDLED_EXCEPTION);
 	}
 	
 	public void testInCompatibleRightOperand() throws Exception {

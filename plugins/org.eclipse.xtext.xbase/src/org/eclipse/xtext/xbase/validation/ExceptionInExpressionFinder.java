@@ -23,6 +23,8 @@ import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * 
+ * TODO this should be a service of the type provider
  */
 public class ExceptionInExpressionFinder {
 

@@ -7,6 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
+import static com.google.common.collect.Sets.*;
+
+import java.util.Set;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
@@ -29,9 +33,12 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.typing.JvmExceptions;
 import org.eclipse.xtext.xbase.typing.JvmOnlyTypeConformanceComputer;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
@@ -73,6 +80,9 @@ public abstract class AbstractXbaseCompiler {
 	@Inject
 	private Primitives primitives;
 	
+	@Inject
+	private JvmExceptions jvmExceptions;
+	
 	protected Primitives getPrimitives() {
 		return primitives;
 	}
@@ -84,9 +94,19 @@ public abstract class AbstractXbaseCompiler {
 			"_toJavaStatement", 3, 3, this);
 
 	public IAppendable compile(XExpression obj, IAppendable appendable, JvmTypeReference expectedReturnType) {
+		return compile(obj, appendable, expectedReturnType, null);
+	}
+	
+	public IAppendable compile(XExpression obj, IAppendable appendable, JvmTypeReference expectedReturnType, Set<JvmTypeReference> declaredExceptions) {
+		if (declaredExceptions == null)
+			declaredExceptions = newHashSet();
 		final boolean isPrimitiveVoidExpected = typeReferences.is(expectedReturnType, Void.TYPE); 
 		final boolean isPrimitiveVoid = isPrimitiveVoid(obj);
 		final boolean earlyExit = exitComputer.isEarlyExit(obj);
+		boolean needsSneakyThrow = needsSneakyThrow(obj, declaredExceptions);
+		if (needsSneakyThrow) {
+			appendable.append("\ntry {").increaseIndentation();
+		}
 		internalToJavaStatement(obj, appendable, !isPrimitiveVoidExpected && !isPrimitiveVoid && !earlyExit);
 		if (!isPrimitiveVoidExpected && !earlyExit) {
 				appendable.append("\nreturn ");
@@ -97,7 +117,23 @@ public abstract class AbstractXbaseCompiler {
 				}
 				appendable.append(";");
 		}
+		if (needsSneakyThrow) {
+			String name = appendable.declareVariable(new Object(), "_e");
+			appendable.decreaseIndentation().append("\n} catch (Exception "+name+")  {").increaseIndentation();
+			appendable.append("\nthrow ");
+			appendable.append(typeReferences.findDeclaredType(Exceptions.class, obj));
+			appendable.append(".sneakyThrow(");
+			appendable.append(name);
+			appendable.append(");");
+			appendable.append("\n}").decreaseIndentation();
+		}
 		return appendable;
+	}
+
+	protected boolean needsSneakyThrow(XExpression obj, Set<JvmTypeReference> declaredExceptions) {
+		Iterable<JvmTypeReference> types = typeProvider.getThrownExceptionTypes(obj);
+		Iterable<JvmTypeReference> exceptions = jvmExceptions.findUnhandledExceptions(obj, types, declaredExceptions);
+		return ! Iterables.isEmpty(exceptions);
 	}
 	
 	/**
