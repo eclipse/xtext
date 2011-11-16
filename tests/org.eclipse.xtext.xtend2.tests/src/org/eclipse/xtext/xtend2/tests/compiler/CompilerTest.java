@@ -10,7 +10,6 @@ package org.eclipse.xtext.xtend2.tests.compiler;
 import static com.google.common.collect.Lists.*;
 import static java.util.Collections.*;
 
-import java.io.IOException;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -1076,50 +1075,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 			"}";
 		String javaCode = compileToJavaCode(code);
 		javaCompiler.compileToClass("x.Z", javaCode);
-	}
-	
-//  TODO: Checked exceptions are no longer re-thrown. Delete these tests if confirmed. 
-//	
-//	public void testRethrownCheckedExceptions_00() throws Exception {
-//		Class<?> clazz = compileJavaCode("x.Y",
-//				"package x class Y {" +
-//				"  def foo() {\n" +
-//				"    throw new java.io.IOException()" + 
-//				"  }\n" +
-//				"  def bar(){\n" +
-//				"    foo()" +
-//				"  }\n" + 
-//				"}");
-//		Object instance = clazz.newInstance();
-//		Method method = clazz.getDeclaredMethod("bar");
-//		try {
-//			method.invoke(instance);
-//		} catch (InvocationTargetException e) {
-//			assertTrue(e.getCause() instanceof IOException);
-//		}
-//	}
-//	
-//	public void testRethrownCheckedExceptions_01() throws Exception {
-//		Class<?> clazz = compileJavaCode("x.Y",
-//				"package x class Y {" +
-//				"  def dispatch foo(String x) {\n" +
-//				"    throw new java.io.EOFException()" + 
-//				"  }\n" +
-//				"  def dispatch foo(Object x) {\n" +
-//				"    throw new java.io.FileNotFoundException()" + 
-//				"  }\n" +
-//				"  def bar(){\n" +
-//				"    foo('bar')" +
-//				"  }\n" + 
-//				"}");
-//		Object instance = clazz.newInstance();
-//		Method method = clazz.getDeclaredMethod("bar");
-//		try {
-//			method.invoke(instance);
-//		} catch (InvocationTargetException e) {
-//			assertTrue(e.getCause() instanceof java.io.EOFException);
-//		}
-//	}
+	}	
 	
 	public void testSuperCall() throws Exception {
 		Class<?> clazz = compileJavaCode("x.Y",
