@@ -12,9 +12,14 @@
   <name>org.eclipse.xtext.nexus.deployer</name>
     <distributionManagement>
     <repository>
-      <id>xtext-repo</id>
+      <id>xtext-Testing</id>
       <name>Eclipse Xtext Repository</name>
       <url>http://maven.eclipse.org/nexus/content/repositories/testing/</url>
     </repository>
+    <snapshotRepository>
+      <id>xtext-Testing</id>
+      <name>Eclipse Xtext Repository</name>
+      <url>http://maven.eclipse.org/nexus/content/repositories/testing/</url>
+    </snapshotRepository>
   </distributionManagement>
 </project>
