@@ -198,15 +198,15 @@ public class OverrideValidationTest extends AbstractXtend2TestCase {
 				"compareTo(Object)");
 	}
 
-	//	public void testClassMustBeAbstract_05() throws Exception {
-	//		XtendClass xtendClass = clazz("class MyList<T> extends java.util.ArrayList<T> { }");
-	//		helper.assertNoErrors(xtendClass);
-	//	}
-	//	
-	//	public void testClassMustBeAbstract_06() throws Exception {
-	//		XtendClass xtendClass = clazz("class StringList extends java.util.ArrayList<StringList> { }");
-	//		helper.assertNoErrors(xtendClass);
-	//	}
+//		public void testClassMustBeAbstract_05() throws Exception {
+//			XtendClass xtendClass = clazz("class MyList<T> extends java.util.ArrayList<T> { }");
+//			helper.assertNoErrors(xtendClass);
+//		}
+//		
+//		public void testClassMustBeAbstract_06() throws Exception {
+//			XtendClass xtendClass = clazz("class StringList extends java.util.ArrayList<StringList> { }");
+//			helper.assertNoErrors(xtendClass);
+//		}
 
 	public void testOverrideFinalClass() throws Exception {
 		XtendClass xtendClass = clazz("class Foo extends String { }");
@@ -241,18 +241,67 @@ public class OverrideValidationTest extends AbstractXtend2TestCase {
 	}
 
 	public void testIncompatibleThrowsClause() throws Exception {
-		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override foo() throws NoSuchFieldException {} }");
+		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override ioException() throws Exception {} }");
 		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_THROWS_CLAUSE,
-				"NoSuchFieldException", "not", "compatible", "throws", "clause");
+				"Exception", "not", "compatible", "throws", "clause");
+	}
+	
+	public void testIncompatibleThrowsClause_01() throws Exception {
+		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override runtimeException() throws Exception {} }");
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_THROWS_CLAUSE,
+				"Exception", "not", "compatible", "throws", "clause");
+	}
+	
+	public void testIncompatibleThrowsClause_02() throws Exception {
+		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override nullPointerException() throws Exception {} }");
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_THROWS_CLAUSE,
+				"Exception", "not", "compatible", "throws", "clause");
+	}
+	
+	public void testIncompatibleThrowsClause_03() throws Exception {
+		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override noException() throws Exception {} }");
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_THROWS_CLAUSE,
+				"Exception", "not", "compatible", "throws", "clause");
 	}
 	
 	public void testCompatibleThrowsClause() throws Exception {
-		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override foo() throws java.io.FileNotFoundException {} }");
+		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override ioException() throws java.io.FileNotFoundException {} }");
 		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
 	}
 
-	public void testNoThrowsClause() throws Exception {
-		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override foo() {} }");
+	public void testCompatibleThrowsClause_01() throws Exception {
+		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override runtimeException() throws NullPointerException {} }");
 		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
 	}
+
+	public void testCompatibleThrowsClause_02() throws Exception {
+		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override nullPointerException() throws RuntimeException {} }");
+		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
+	}
+
+	public void testCompatibleThrowsClause_03() throws Exception {
+		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override noException() throws RuntimeException {} }");
+		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
+	}
+
+	public void testCompatibleThrowsClause_04() throws Exception {
+		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override throwable() throws RuntimeException {} }");
+		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
+	}
+
+	public void testCompatibleThrowsClause_05() throws Exception {
+		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override throwable() throws Exception {} }");
+		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
+	}
+
+	public void testCompatibleThrowsClause_06() throws Exception {
+		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override throwable() throws Throwable {} }");
+		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
+	}
+
+	public void testCompatibleThrowsClause_07() throws Exception {
+		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override ioException() {} }");
+		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
+	}
+
 }
