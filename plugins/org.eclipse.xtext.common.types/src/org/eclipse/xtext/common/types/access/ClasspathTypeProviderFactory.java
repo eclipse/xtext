@@ -21,9 +21,6 @@ public class ClasspathTypeProviderFactory extends AbstractTypeProviderFactory {
 	private final ClassLoader classLoader;
 	
 	@Inject
-	private IndexedJvmTypeAccess indexedJvmTypeAccess;
-
-	@Inject
 	public ClasspathTypeProviderFactory(ClassLoader classLoader) {
 		this.classLoader = classLoader;
 	}
@@ -36,7 +33,7 @@ public class ClasspathTypeProviderFactory extends AbstractTypeProviderFactory {
 	}
 
 	protected ClasspathTypeProvider createClasspathTypeProvider(ResourceSet resourceSet) {
-		return new ClasspathTypeProvider(classLoader, resourceSet, indexedJvmTypeAccess);
+		return new ClasspathTypeProvider(classLoader, resourceSet, getIndexedJvmTypeAccess());
 	}
 	
 	public ClassLoader getClassLoader() {
