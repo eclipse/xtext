@@ -233,8 +233,8 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
                   return ((Boolean)_operator_and);
                 }
               };
-            Iterable<RuleCall> _filter = IterableExtensions.<RuleCall>filter(_containedRuleCalls, _function);
-            return _filter;
+            Iterable<RuleCall> _filter_1 = IterableExtensions.<RuleCall>filter(_containedRuleCalls, _function);
+            return _filter_1;
           }
         };
       Iterable<Iterable<RuleCall>> _map = IterableExtensions.<AbstractRule, Iterable<RuleCall>>map(rules, _function_1);
@@ -311,8 +311,8 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
         EList<AbstractElement> _elements_1 = ele_3.getElements();
         final Function1<AbstractElement,String> _function = new Function1<AbstractElement,String>() {
             public String apply(final AbstractElement e) {
-              String _defaultValue = AbstractSyntacticSequencer.this.defaultValue(e, visited);
-              return _defaultValue;
+              String _defaultValue_1 = AbstractSyntacticSequencer.this.defaultValue(e, visited);
+              return _defaultValue_1;
             }
           };
         List<String> _map = ListExtensions.<AbstractElement, String>map(_elements_1, _function);

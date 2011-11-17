@@ -351,8 +351,8 @@ public class JvmModelGenerator implements IGenerator {
                   _operator_and = false;
                 } else {
                   JvmType _type_1 = typeRef.getType();
-                  boolean _isInterface = ((JvmGenericType) _type_1).isInterface();
-                  boolean _operator_not = BooleanExtensions.operator_not(_isInterface);
+                  boolean _isInterface_1 = ((JvmGenericType) _type_1).isInterface();
+                  boolean _operator_not = BooleanExtensions.operator_not(_isInterface_1);
                   _operator_and = BooleanExtensions.operator_and((_type instanceof JvmGenericType), _operator_not);
                 }
                 return ((Boolean)_operator_and);
@@ -383,8 +383,8 @@ public class JvmModelGenerator implements IGenerator {
             String _operator_plus_4 = StringExtensions.operator_plus(result, "implements ");
             final Function1<JvmTypeReference,String> _function_4 = new Function1<JvmTypeReference,String>() {
                 public String apply(final JvmTypeReference t) {
-                  String _serialize = JvmModelGenerator.this.serialize(t, importManager);
-                  return _serialize;
+                  String _serialize_1 = JvmModelGenerator.this.serialize(t, importManager);
+                  return _serialize_1;
                 }
               };
             Iterable<String> _map_1 = IterableExtensions.<JvmTypeReference, String>map(superInterfaces, _function_4);
@@ -926,8 +926,8 @@ public class JvmModelGenerator implements IGenerator {
         EList<JvmTypeReference> _values_2 = it.getValues();
         final Function1<JvmTypeReference,String> _function = new Function1<JvmTypeReference,String>() {
             public String apply(final JvmTypeReference t) {
-              String _serialize = JvmModelGenerator.this.serialize(t, importManager);
-              String _operator_plus = StringExtensions.operator_plus(_serialize, ".class");
+              String _serialize_1 = JvmModelGenerator.this.serialize(t, importManager);
+              String _operator_plus = StringExtensions.operator_plus(_serialize_1, ".class");
               return _operator_plus;
             }
           };

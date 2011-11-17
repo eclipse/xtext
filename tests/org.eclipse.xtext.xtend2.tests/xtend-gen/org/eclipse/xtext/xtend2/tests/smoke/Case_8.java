@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.junit.util.ParseHelper;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
@@ -32,15 +33,19 @@ public class Case_8 {
     EcoreUtil.resolveAll(_eResource);
   }
   
-  public EObject parseAcme(final CharSequence seq) throws Exception {
-    EObject _parse = this.helper.parse(seq);
-    EList<EObject> _eContents = _parse.eContents();
-    EObject _head = IterableExtensions.<EObject>head(_eContents);
-    return _head;
+  public EObject parseAcme(final CharSequence seq) {
+    try {
+      EObject _parse = this.helper.parse(seq);
+      EList<EObject> _eContents = _parse.eContents();
+      EObject _head = IterableExtensions.<EObject>head(_eContents);
+      return _head;
+    } catch (Exception _e)  {
+      throw Exceptions.sneakyThrow(_e);
+      }
   }
   
   @Inject
-  public void explicitName() throws Exception {
+  public void explicitName() {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("com.acme.SimpleElement as FooBar {}");
       _builder.newLine();

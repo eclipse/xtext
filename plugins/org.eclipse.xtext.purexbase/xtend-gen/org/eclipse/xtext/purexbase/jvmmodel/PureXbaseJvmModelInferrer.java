@@ -70,8 +70,8 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
                     {
                       it.setStatic(true);
                       EList<JvmFormalParameter> _parameters = it.getParameters();
-                      JvmTypeReference _newTypeRef = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(e, java.lang.String.class);
-                      JvmTypeReference _addArrayTypeDimension = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.addArrayTypeDimension(_newTypeRef);
+                      JvmTypeReference _newTypeRef_1 = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(e, java.lang.String.class);
+                      JvmTypeReference _addArrayTypeDimension = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.addArrayTypeDimension(_newTypeRef_1);
                       JvmFormalParameter _parameter = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.toParameter(e, "args", _addArrayTypeDimension);
                       CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter);
                       boolean _containsReturn = PureXbaseJvmModelInferrer.this.containsReturn(e);
