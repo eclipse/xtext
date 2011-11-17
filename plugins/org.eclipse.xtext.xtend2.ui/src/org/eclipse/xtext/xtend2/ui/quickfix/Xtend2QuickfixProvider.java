@@ -62,7 +62,6 @@ import org.eclipse.xtext.xtend2.formatting.OverrideFunction;
 import org.eclipse.xtext.xtend2.services.Xtend2GrammarAccess;
 import org.eclipse.xtext.xtend2.ui.edit.OrganizeImportsHandler;
 import org.eclipse.xtext.xtend2.validation.IssueCodes;
-import org.eclipse.xtext.xtend2.xtend2.RichString;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
@@ -414,7 +413,7 @@ public class Xtend2QuickfixProvider extends DefaultQuickfixProvider {
 							if (exception instanceof JvmType) {
 								JvmType exceptionType = (JvmType) exception;
 								EObject childThrowingException = xtextResource.getResourceSet().getEObject(childURI, true);
-								XExpression toBeSurrounded = findContainerExpressionInBlockOrRichString(childThrowingException);
+								XExpression toBeSurrounded = findContainerExpressionInBlockExpression(childThrowingException);
 								IXtextDocument xtextDocument = context.getXtextDocument();
 								if(toBeSurrounded != null) {
 									ICompositeNode toBeSurroundedNode = NodeModelUtils.getNode(toBeSurrounded);
@@ -437,14 +436,14 @@ public class Xtend2QuickfixProvider extends DefaultQuickfixProvider {
 	}
 	
 	
-	protected XExpression findContainerExpressionInBlockOrRichString(EObject expr) {
+	protected XExpression findContainerExpressionInBlockExpression(EObject expr) {
 		if(expr==null)
 			return null;
 		EObject container = expr.eContainer();
-		if(container instanceof XBlockExpression || container instanceof RichString)
+		if(container instanceof XBlockExpression)
 			return (XExpression) expr;
 		else 
-			return findContainerExpressionInBlockOrRichString(container);
+			return findContainerExpressionInBlockExpression(container);
 	}
 
 	protected String getIndentationAtOffset(int offset, IDocument document) throws BadLocationException {
