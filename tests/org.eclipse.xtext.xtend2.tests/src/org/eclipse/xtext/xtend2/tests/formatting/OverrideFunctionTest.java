@@ -43,7 +43,7 @@ public class OverrideFunctionTest extends AbstractXtend2TestCase {
 		model = "class Foo<U> implements test.OverrideFunctions<U, CharSequence> {}";
 		xtendClass = clazz(model);
 		implementedInterface = (JvmGenericType) xtendClass.getImplements().get(0).getType();
-		throwsExpression = "throw new UnsupportedOperationException(\"TODO: Auto-generated function stub\");";
+		throwsExpression = "throw new UnsupportedOperationException(\"Auto-generated function stub\")";
 	}
 
 	public void testInsertOffset() throws Exception {
