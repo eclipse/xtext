@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.impl;
 
-import java.util.Collections;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notifier;
@@ -26,70 +25,80 @@ import org.eclipse.xtext.resource.ISelectable;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  * @author Sebastian Zarnekow - Applied implementation pattern from DirtyStateAwareResourceDescriptions
+ * @author Knut Wannheden - Fixed performance issue caused by the inheritance from ResourceSetBasedResourceDescriptions
+ *         <p>
+ *         The implementation now manages local resources using an injected {@link ResourceSetBasedResourceDescriptions}
+ *         field. The class only inherits from {@link ResourceSetBasedResourceDescriptions} to remain backwards
+ *         compatible with the initial 2.1 release.
+ * 
  * @since 2.1
  */
 public class LiveShadowedResourceDescriptions extends ResourceSetBasedResourceDescriptions {
-	
+
 	@Inject
-	private IResourceDescriptions delegate;
-	
+	private ResourceSetBasedResourceDescriptions localDescriptions;
+
+	@Inject
+	private IResourceDescriptions globalDescriptions;
+
 	@Override
 	public void setContext(Notifier ctx) {
-		super.setContext(ctx);
-		if(delegate instanceof IResourceDescriptions.IContextAware)
-			((IResourceDescriptions.IContextAware) delegate).setContext(ctx);
+		localDescriptions.setContext(ctx);
+		if(globalDescriptions instanceof IResourceDescriptions.IContextAware)
+			((IResourceDescriptions.IContextAware) globalDescriptions).setContext(ctx);
 	}
-	
+
 	@Override
 	public IResourceDescription getResourceDescription(URI uri) {
-		IResourceDescription result = super.getResourceDescription(uri);
+		IResourceDescription result = localDescriptions.getResourceDescription(uri);
 		if (result == null && !isExistingOrRenamedResourceURI(uri))
-			result = delegate.getResourceDescription(uri);
+			result = globalDescriptions.getResourceDescription(uri);
 		return result;
 	}
-	
+
 	@Override
 	public Iterable<IResourceDescription> getAllResourceDescriptions() {
-		Iterable<IResourceDescription> notInLiveResourceSet = Iterables.transform(delegate.getAllResourceDescriptions(), new Function<IResourceDescription, IResourceDescription>() {
-			public IResourceDescription apply(IResourceDescription from) {
-				if (isExistingOrRenamedResourceURI(from.getURI())) {
-					return null;
-				}
-				return from;
+		Iterable<IResourceDescription> notInLiveResourceSet = Iterables.filter(globalDescriptions.getAllResourceDescriptions(), new Predicate<IResourceDescription>() {
+			public boolean apply(IResourceDescription input) {
+				return !isExistingOrRenamedResourceURI(input.getURI());
 			}
 		});
-		Iterable<IResourceDescription> withNullEntries = Iterables.concat(super.getAllResourceDescriptions(), notInLiveResourceSet);
-		Iterable<IResourceDescription> result = Iterables.filter(withNullEntries, Predicates.notNull());
+		Iterable<IResourceDescription> result = Iterables.concat(localDescriptions.getAllResourceDescriptions(), notInLiveResourceSet);
 		return result;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		return delegate.isEmpty() && super.isEmpty();
+		return globalDescriptions.isEmpty() && localDescriptions.isEmpty();
 	}
-	
+
+	@Override
+	public ResourceSet getResourceSet() {
+		return localDescriptions.getResourceSet();
+	}
+
 	@Override
 	protected boolean hasDescription(URI uri) {
-		boolean result = super.hasDescription(uri);
+		boolean result = localDescriptions.hasDescription(uri);
 		if (!result) {
 			if (isExistingOrRenamedResourceURI(uri)) {
 				result = false;
 			} else {
-				result = delegate.getResourceDescription(uri) != null;
+				result = globalDescriptions.getResourceDescription(uri) != null;
 			}
 		}
 		return result;
 	}
-	
+
 	protected boolean isExistingOrRenamedResourceURI(URI uri) {
-		ResourceSet resourceSet = getResourceSet();
+		ResourceSet resourceSet = localDescriptions.getResourceSet();
 		if (resourceSet instanceof ResourceSetImpl) {
 			Map<URI, Resource> map = ((ResourceSetImpl) resourceSet).getURIResourceMap();
 			boolean result = map.containsKey(uri.trimFragment());
@@ -104,15 +113,15 @@ public class LiveShadowedResourceDescriptions extends ResourceSetBasedResourceDe
 			public Iterable<IEObjectDescription> apply(ISelectable from) {
 				if (from != null)
 					return from.getExportedObjects();
-				return Collections.emptyList();
+				return ImmutableSet.of();
 			}
 		}));
 	}
 
 	@Override
 	public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName name, boolean ignoreCase) {
-		Iterable<IEObjectDescription> liveDescriptions = super.getExportedObjects(type, name, ignoreCase);
-		Iterable<IEObjectDescription> persistentDescriptions = delegate.getExportedObjects(type, name, ignoreCase);
+		Iterable<IEObjectDescription> liveDescriptions = localDescriptions.getExportedObjects(type, name, ignoreCase);
+		Iterable<IEObjectDescription> persistentDescriptions = globalDescriptions.getExportedObjects(type, name, ignoreCase);
 		return joinIterables(liveDescriptions, persistentDescriptions);
 	}
 
@@ -131,17 +140,17 @@ public class LiveShadowedResourceDescriptions extends ResourceSetBasedResourceDe
 
 	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
-		Iterable<IEObjectDescription> liveDescriptions = super.getExportedObjectsByType(type);
-		Iterable<IEObjectDescription> persistentDescriptions = delegate.getExportedObjectsByType(type);
+		Iterable<IEObjectDescription> liveDescriptions = localDescriptions.getExportedObjectsByType(type);
+		Iterable<IEObjectDescription> persistentDescriptions = globalDescriptions.getExportedObjectsByType(type);
 		return joinIterables(liveDescriptions, persistentDescriptions);
 	}
 
 	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
 		URI resourceURI = EcoreUtil2.getNormalizedResourceURI(object);
-		if (super.hasDescription(resourceURI))
-			return super.getExportedObjectsByObject(object);
-		return delegate.getExportedObjectsByObject(object);
+		if (localDescriptions.hasDescription(resourceURI))
+			return localDescriptions.getExportedObjectsByObject(object);
+		return globalDescriptions.getExportedObjectsByObject(object);
 	}
-	
+
 }
