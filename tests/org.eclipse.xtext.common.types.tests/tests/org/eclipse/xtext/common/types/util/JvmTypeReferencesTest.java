@@ -30,7 +30,7 @@ public class JvmTypeReferencesTest extends TestCase {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource syntheticResource = new XMLResourceImpl(URI.createURI("http://synthetic.resource"));
 		resourceSet.getResources().add(syntheticResource);
-		typeProvider = new ClasspathTypeProvider(getClass().getClassLoader(), resourceSet);
+		typeProvider = new ClasspathTypeProvider(getClass().getClassLoader(), resourceSet, null);
 	}
 	
 	@Override

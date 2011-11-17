@@ -31,7 +31,7 @@ public class ClasspathTypeProviderTest extends AbstractTypeProviderTest {
 	protected void setUp() throws Exception {
 		super.setUp();
 		resourceSet = new ResourceSetImpl();
-		typeProvider = new ClasspathTypeProvider(getClass().getClassLoader(), resourceSet);
+		typeProvider = new ClasspathTypeProvider(getClass().getClassLoader(), resourceSet, null);
 	}
 	
 	@Override
