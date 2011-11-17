@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -18,18 +17,16 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.generator.serializer.SyntacticSequencerPDA2ExtendedDot;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
 import org.eclipse.xtext.serializer.analysis.IContextProvider;
-import org.eclipse.xtext.serializer.analysis.ISerializerPDAProvider;
-import org.eclipse.xtext.serializer.analysis.ISerializerPDAProvider.ISerState;
+import org.eclipse.xtext.serializer.analysis.ISerState;
+import org.eclipse.xtext.serializer.analysis.IContextTypePDAProvider;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.formallang.Pda;
 import org.eclipse.xtext.util.formallang.PdaListFormatter;
-import org.eclipse.xtext.xbase.lib.Pair;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
@@ -38,7 +35,7 @@ import com.google.inject.internal.Join;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class SerializerPDAProviderTest extends AbstractXtextTests {
+public class ContextTypePDAProviderTest extends AbstractXtextTests {
 	private static class ToStr implements Function<ISerState, String> {
 		private Function<AbstractElement, String> ts = new GrammarElementTitleSwitch().showAssignments()
 				.hideCardinality().showQualified();
@@ -58,21 +55,6 @@ public class SerializerPDAProviderTest extends AbstractXtextTests {
 	final static String HEADER = "grammar org.eclipse.xtext.serializer.SequenceParserPDAProviderTestLanguage"
 			+ " with org.eclipse.xtext.common.Terminals "
 			+ "generate sequenceParserPDAProviderTest \"http://www.eclipse.org/2010/tmf/xtext/SequenceParserPDAProvider\"  ";
-
-	//	public void drawGrammar(String path, Grammar grammar) {
-	//		try {
-	//			IContextProvider contexts = get(IContextProvider.class);
-	//			SyntacticSequencerPDA2ExtendedDot seq2dot = get(SyntacticSequencerPDA2ExtendedDot.class);
-	//			for (EObject ctx : contexts.getAllContexts(grammar))
-	//				for (EClass type : contexts.getTypesForContext(ctx))
-	//					seq2dot.draw(
-	//							new Pair<EObject, EClass>(ctx, type),
-	//							path + "-" + new Context2NameFunction().apply(ctx) + "_"
-	//									+ (type == null ? "null" : type.getName()) + "-PDA.pdf", "-T pdf");
-	//		} catch (IOException e) {
-	//			e.printStackTrace();
-	//		}
-	//	}
 
 	private List<Triple<EClass, EObject, String>> getContexts(Grammar grammar) {
 		final Context2NameFunction ctx2name = get(Context2NameFunction.class);
@@ -101,11 +83,14 @@ public class SerializerPDAProviderTest extends AbstractXtextTests {
 		PdaListFormatter<ISerState, RuleCall> formatter = new PdaListFormatter<ISerState, RuleCall>();
 		formatter.setStateFormatter(new ToStr());
 		formatter.setStackitemFormatter(new GrammarElementTitleSwitch().showAssignments().hideCardinality());
+		formatter.sortFollowers();
 		for (Triple<EClass, EObject, String> ctx : getContexts(grammar)) {
+			//			System.out.println();
 			String t = ctx.getFirst() == null ? "null" : ctx.getFirst().getName();
+			//			System.out.println(t + "_" + ctx.getThird() + ":");
 			result.add(t + "_" + ctx.getThird() + ":");
-			Pda<? extends ISerState, RuleCall> pda = get(ISerializerPDAProvider.class).getPDA(ctx.getSecond(),
-					ctx.getFirst());
+			Pda<? extends ISerState, RuleCall> pda = get(IContextTypePDAProvider.class).getContextTypePDA(
+					ctx.getSecond(), ctx.getFirst());
 			result.add("  " + formatter.format((Pda<ISerState, RuleCall>) pda).replace("\n", "\n  "));
 		}
 		return Join.join("\n", result);
@@ -140,6 +125,35 @@ public class SerializerPDAProviderTest extends AbstractXtextTests {
 		expected.append("  <<Delegate -> stop\n");
 		expected.append("  >>Delegate -> val=ID\n");
 		expected.append("  val=ID -> <<Delegate");
+		assertEquals(expected.toString(), actual);
+	}
+
+	public void testLoop1() throws Exception {
+		String actual = getParserRule("Rule: ('x' x=ID*)*;");
+		StringBuilder expected = new StringBuilder();
+		expected.append("Rule_Rule:\n");
+		expected.append("  start -> 'x'\n");
+		expected.append("  'x' -> 'x', stop, x=ID\n");
+		expected.append("  x=ID -> 'x', stop, x=ID\n");
+		expected.append("null_Rule:\n");
+		expected.append("  start -> 'x', stop\n");
+		expected.append("  'x' -> 'x', stop");
+		assertEquals(expected.toString(), actual);
+	}
+
+	public void testLoop2() throws Exception {
+		String actual = getParserRule("Model: (('x' x+=ID*) | ('y' y+=ID*))*;");
+		StringBuilder expected = new StringBuilder();
+		expected.append("Model_Model:\n");
+		expected.append("  start -> 'x', 'y'\n");
+		expected.append("  'x' -> 'x', 'y', stop, x+=ID\n");
+		expected.append("  'y' -> 'x', 'y', stop, y+=ID\n");
+		expected.append("  x+=ID -> 'x', 'y', stop, x+=ID\n");
+		expected.append("  y+=ID -> 'x', 'y', stop, y+=ID\n");
+		expected.append("null_Model:\n");
+		expected.append("  start -> 'x', 'y', stop\n");
+		expected.append("  'x' -> 'x', 'y', stop\n");
+		expected.append("  'y' -> 'x', 'y', stop");
 		assertEquals(expected.toString(), actual);
 	}
 
@@ -224,7 +238,76 @@ public class SerializerPDAProviderTest extends AbstractXtextTests {
 		expected.append("  {Val} -> val=ID");
 		assertEquals(expected.toString(), actual);
 	}
-	
+
+	public void testExpression2() throws Exception {
+		String actual = getParserRule("Addition returns Expr: Prim ({Add.left=current} '+' right=Prim)*; Prim returns Expr: {Val} name=ID | '(' Addition ')';");
+		StringBuilder expected = new StringBuilder();
+		expected.append("Add_Addition:\n");
+		expected.append("  start -> >>Prim, {Add.left=}\n");
+		expected.append("  '(' -> >>Addition\n");
+		expected.append("  ')' -> <<Prim\n");
+		expected.append("  '+' -> right=Prim\n");
+		expected.append("  <<Addition -> ')'\n");
+		expected.append("  <<Prim -> <<Addition, stop\n");
+		expected.append("  >>Addition -> >>Prim, {Add.left=}\n");
+		expected.append("  >>Prim -> '('\n");
+		expected.append("  right=Prim -> <<Addition, stop\n");
+		expected.append("  {Add.left=} -> '+'\n");
+		expected.append("Add_Addition_Add_1_0:\n");
+		expected.append("  start -> >>Prim, {Add.left=}\n");
+		expected.append("  '(' -> >>Addition\n");
+		expected.append("  ')' -> <<Prim\n");
+		expected.append("  '+' -> right=Prim\n");
+		expected.append("  <<Addition -> ')'\n");
+		expected.append("  <<Prim -> <<Addition, stop\n");
+		expected.append("  >>Addition -> >>Prim, {Add.left=}\n");
+		expected.append("  >>Prim -> '('\n");
+		expected.append("  right=Prim -> <<Addition, stop\n");
+		expected.append("  {Add.left=} -> '+'\n");
+		expected.append("Add_Prim:\n");
+		expected.append("  start -> '('\n");
+		expected.append("  '(' -> >>Addition\n");
+		expected.append("  ')' -> <<Prim, stop\n");
+		expected.append("  '+' -> right=Prim\n");
+		expected.append("  <<Addition -> ')'\n");
+		expected.append("  <<Prim -> <<Addition\n");
+		expected.append("  >>Addition -> >>Prim, {Add.left=}\n");
+		expected.append("  >>Prim -> '('\n");
+		expected.append("  right=Prim -> <<Addition\n");
+		expected.append("  {Add.left=} -> '+'\n");
+		expected.append("Val_Addition:\n");
+		expected.append("  start -> >>Prim\n");
+		expected.append("  '(' -> >>Addition\n");
+		expected.append("  ')' -> <<Prim\n");
+		expected.append("  <<Addition -> ')'\n");
+		expected.append("  <<Prim -> <<Addition, stop\n");
+		expected.append("  >>Addition -> >>Prim\n");
+		expected.append("  >>Prim -> '(', {Val}\n");
+		expected.append("  name=ID -> <<Prim\n");
+		expected.append("  {Val} -> name=ID\n");
+		expected.append("Val_Addition_Add_1_0:\n");
+		expected.append("  start -> >>Prim\n");
+		expected.append("  '(' -> >>Addition\n");
+		expected.append("  ')' -> <<Prim\n");
+		expected.append("  <<Addition -> ')'\n");
+		expected.append("  <<Prim -> <<Addition, stop\n");
+		expected.append("  >>Addition -> >>Prim\n");
+		expected.append("  >>Prim -> '(', {Val}\n");
+		expected.append("  name=ID -> <<Prim\n");
+		expected.append("  {Val} -> name=ID\n");
+		expected.append("Val_Prim:\n");
+		expected.append("  start -> '(', {Val}\n");
+		expected.append("  '(' -> >>Addition\n");
+		expected.append("  ')' -> <<Prim, stop\n");
+		expected.append("  <<Addition -> ')'\n");
+		expected.append("  <<Prim -> <<Addition\n");
+		expected.append("  >>Addition -> >>Prim\n");
+		expected.append("  >>Prim -> '(', {Val}\n");
+		expected.append("  name=ID -> <<Prim, stop\n");
+		expected.append("  {Val} -> name=ID");
+		assertEquals(expected.toString(), actual);
+	}
+
 	public void testOptionalDelegate() throws Exception {
 		String actual = getParserRule("Rule: Mand | Opt; Mand: 'm' mand=ID; Opt: 'o' opt=ID?;");
 		StringBuilder expected = new StringBuilder();
@@ -240,11 +323,11 @@ public class SerializerPDAProviderTest extends AbstractXtextTests {
 		expected.append("  mand=ID -> <<Mand\n");
 		expected.append("Opt_Opt:\n");
 		expected.append("  start -> 'o'\n");
-		expected.append("  'o' -> opt=ID, stop\n");
+		expected.append("  'o' -> opt=ID\n");
 		expected.append("  opt=ID -> stop\n");
 		expected.append("Opt_Rule:\n");
 		expected.append("  start -> >>Opt\n");
-		expected.append("  'o' -> opt=ID, <<Opt\n");
+		expected.append("  'o' -> opt=ID\n");
 		expected.append("  <<Opt -> stop\n");
 		expected.append("  >>Opt -> 'o'\n");
 		expected.append("  opt=ID -> <<Opt\n");
