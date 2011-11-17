@@ -59,7 +59,26 @@ import com.google.inject.Injector;
  * @author Sebastian Zarnekow
  */
 public class CompilerTest extends AbstractXtend2TestCase {
-	
+
+	public void testBug363621() throws Exception {
+		String code = 
+				"import java.util.List\n" +
+				"class Z {\n"+
+				"    def methodOne() {\n" + 
+				"        val strings = newHashSet\n" + 
+				"        strings += \"a\"\n" + 
+				"    }\n" + 
+				"    def methodTwo() {\n" + 
+				"        val List<String> l = null\n" + 
+				"        l.getClass\n" + 
+				"        l.^class\n" + 
+				"    }\n" +
+				"}";
+		String javaCode = compileToJavaCode(code);
+		Class<?> class1 = javaCompiler.compileToClass("Z", javaCode);
+		Object object = class1.newInstance();
+		assertTrue((Boolean)class1.getDeclaredMethod("methodOne").invoke(object));
+	}
 	
 	public void testSneakyThrow() throws Exception {
 		String code = 
