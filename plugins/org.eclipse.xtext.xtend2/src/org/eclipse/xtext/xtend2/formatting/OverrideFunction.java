@@ -39,7 +39,7 @@ import com.google.inject.Inject;
  */
 public class OverrideFunction {
 
-	public static final String DEFAULT_BODY = "throw new UnsupportedOperationException(\"TODO: Auto-generated function stub\");";
+	public static final String DEFAULT_BODY = "throw new UnsupportedOperationException(\"Auto-generated function stub\")";
 
 	@Inject
 	private TypeArgumentContextProvider typeArgumentContextProvider;
