@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtend2.tests.compiler;
 import static com.google.common.collect.Lists.*;
 import static java.util.Collections.*;
 
+import java.io.IOException;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -58,6 +59,24 @@ import com.google.inject.Injector;
  * @author Sebastian Zarnekow
  */
 public class CompilerTest extends AbstractXtend2TestCase {
+	
+	
+	public void testSneakyThrow() throws Exception {
+		String code = 
+				"class Z {\n" +
+				"	def void test() {\n" +
+				"       throw new java.io.IOException()" + 
+				"	}\n" +
+				"}\n";
+		String javaCode = compileToJavaCode(code);
+		Class<?> class1 = javaCompiler.compileToClass("Z", javaCode);
+		Object object = class1.newInstance();
+		try {
+			class1.getDeclaredMethod("test").invoke(object);
+		} catch (Exception e) {
+			assertTrue(((InvocationTargetException)e).getCause() instanceof IOException);
+		}
+	}
 	
 	public void testBug_362651() throws Exception {
 		String code = 
