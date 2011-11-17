@@ -123,10 +123,13 @@ public class FunctionOverrideAssist {
 		ImportOrganizingProposal completionProposal = createCompletionProposal(code, context.getReplaceRegion(),
 				getLabel(overriddenOperation),
 				images.forFunction(overriddenOperation.getVisibility()));
+		int bodyOffset = code.lastIndexOf(OverrideFunction.DEFAULT_BODY);
+		completionProposal.setSelectionStart(bodyOffset + completionProposal.getReplacementOffset());
+		completionProposal.setSelectionLength(OverrideFunction.DEFAULT_BODY.length());
 		String importSection = organizeImports.serializeImports(typeRefAcceptor);
 		completionProposal.setOrganizedImportSection(importSection);
 		TextRegion importRegion = organizeImports.computeRegion(context.getResource());
-		completionProposal.setImportRegion(importRegion);
+		completionProposal.setImportRegion(importRegion);	
 		completionProposal.setPriority(getPriority(model, overriddenOperation, context));
 		return completionProposal;
 	}
