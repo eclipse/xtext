@@ -132,7 +132,7 @@ public class TypeReferenceSerializer {
 		} else if (type instanceof JvmSpecializedTypeReference) {
 			serialize(((JvmSpecializedTypeReference) type).getEquivalent(), context, appendable, withoutConstraints, paramsToWildcard, paramsToObject, allowPrimitives);
 		} else {
-			throw new IllegalArgumentException(type==null ? null : type.toString());
+			throw new IllegalArgumentException(String.valueOf(type));
 		}
 	}
 	
