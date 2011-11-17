@@ -19,7 +19,6 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.debug.ui.ILaunchShortcut;
-import org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IEditorPart;
@@ -39,8 +38,8 @@ public class WorkflowLaunchUtils {
 	static {
 		boolean b = true;
 		try {
-			Mwe2Launcher.class.isEnum();
-		} catch(Error e) {
+			Class.forName("org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher", false, WorkflowLaunchUtils.class.getClassLoader());
+		} catch(ClassNotFoundException e) {
 			b = false;
 		}
 		mwe2Available = b;
