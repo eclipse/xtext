@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.URIUtil;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.jdt.core.compiler.CompilationProgress;
 import org.eclipse.jdt.internal.compiler.batch.FileSystem;
@@ -197,8 +198,11 @@ public class OnTheFlyJavaCompiler {
 	}
 
 	public void addClassPathOfClass(Class<?> clazz) {
-		final String classNameAsPath = File.separator + clazz.getCanonicalName().replace('.', File.separatorChar);
-		URL url = clazz.getResource(classNameAsPath + ".class");
+		final String classNameAsPath = "/" + clazz.getCanonicalName().replace('.', '/');
+		String resourceName = classNameAsPath + ".class";
+		URL url = clazz.getResource(resourceName);
+		if (url == null)
+			throw new IllegalArgumentException(resourceName + " not found");
 		String pathToFolderOrJar = null;
 		if (url.getProtocol().startsWith("bundleresource")) {
 			try {
@@ -217,7 +221,7 @@ public class OnTheFlyJavaCompiler {
 		} else {
 			String resolvedRawPath;
 			try {
-				resolvedRawPath = url.toURI().getRawPath();
+				resolvedRawPath = URIUtil.toURI(url).getRawPath();
 			} catch (URISyntaxException e) {
 				throw new WrappedException(e);
 			}
@@ -257,7 +261,9 @@ public class OnTheFlyJavaCompiler {
 			sb.append(" ");
 			sb.append(getClasspathArgs());
 			sb.append(" ");
+			sb.append('\"');
 			sb.append(srcFile.getCanonicalPath());
+			sb.append('\"');
 			boolean compile = compile(sb.toString());
 			if (!compile)
 				throw new IllegalArgumentException("Couldn't compile : " + errorStream.toString() + "\n" + code);
