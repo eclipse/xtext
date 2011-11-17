@@ -188,8 +188,8 @@ class JvmModelGenerator implements IGenerator {
 				val returnType = switch(op) { 
 					JvmOperation: op.returnType 
 					default: null
-				}; 
-				compiler.compile(expression, appendable, returnType)
+				};
+				compiler.compile(expression, appendable, returnType, expression.thrownExceptionTypes.toSet)
 				return removeSurroundingCurlies(appendable.toString)
 			} else {
 				return '''throw new UnsupportedOperationException("«op.simpleName» is not implemented");'''

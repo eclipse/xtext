@@ -3,6 +3,7 @@ package org.eclipse.xtext.xbase.compiler;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -709,7 +710,9 @@ public class JvmModelGenerator implements IGenerator {
                 _switchResult = null;
               }
               final JvmTypeReference returnType = _switchResult;
-              this.compiler.compile(expression, appendable, returnType);
+              Iterable<JvmTypeReference> _thrownExceptionTypes = this._iTypeProvider.getThrownExceptionTypes(expression);
+              Set<JvmTypeReference> _set = IterableExtensions.<JvmTypeReference>toSet(_thrownExceptionTypes);
+              this.compiler.compile(expression, appendable, returnType, _set);
               String _string = appendable.toString();
               String _removeSurroundingCurlies = this.removeSurroundingCurlies(_string);
               return _removeSurroundingCurlies;

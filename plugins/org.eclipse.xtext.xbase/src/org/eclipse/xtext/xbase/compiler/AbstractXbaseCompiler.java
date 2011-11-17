@@ -119,13 +119,13 @@ public abstract class AbstractXbaseCompiler {
 		}
 		if (needsSneakyThrow) {
 			String name = appendable.declareVariable(new Object(), "_e");
-			appendable.decreaseIndentation().append("\n} catch (Exception "+name+")  {").increaseIndentation();
+			appendable.decreaseIndentation().append("\n} catch (Exception "+name+") {").increaseIndentation();
 			appendable.append("\nthrow ");
 			appendable.append(typeReferences.findDeclaredType(Exceptions.class, obj));
 			appendable.append(".sneakyThrow(");
 			appendable.append(name);
 			appendable.append(");");
-			appendable.append("\n}").decreaseIndentation();
+			appendable.decreaseIndentation().append("\n}");
 		}
 		return appendable;
 	}

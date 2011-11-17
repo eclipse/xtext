@@ -355,12 +355,12 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 		}
 		return false;
 	}
-
-	@Check
-	public void checkUnhandledException(XtendFunction function) {
-		doCheckUnhandledException(function.getExpression(), function.getExceptions());
-	}
 	
+	@Override
+	protected boolean supportsCheckedExceptions() {
+		return false;
+	}
+
 	@Check
 	public void checkDuplicateAndOverriddenFunctions(XtendClass xtendClass) {
 		final JvmGenericType inferredType = associations.getInferredType(xtendClass);
