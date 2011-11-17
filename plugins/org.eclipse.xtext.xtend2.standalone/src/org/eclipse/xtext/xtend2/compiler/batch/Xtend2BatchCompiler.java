@@ -1,21 +1,21 @@
 package org.eclipse.xtext.xtend2.compiler.batch;
 
 import static com.google.common.collect.Iterables.*;
+import static com.google.common.collect.Lists.*;
 import static java.util.Arrays.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Writer;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
-import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.compiler.batch.BatchCompiler;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
+import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.mwe.NameBasedFilter;
@@ -42,7 +43,6 @@ import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
-import org.eclipse.xtext.xtend2.Xtend2StandaloneSetup;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
@@ -54,7 +54,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import com.google.inject.Provider;
 
 /**
@@ -76,6 +75,8 @@ public class Xtend2BatchCompiler {
 	private IXtend2JvmAssociations xtend2JvmAssociations;
 	@Inject
 	private IQualifiedNameProvider qualifiedNameProvider;
+	@Inject
+	private IndexedJvmTypeAccess indexedJvmTypeAccess;
 
 	private String sourcePath;
 	private String classPath;
@@ -104,28 +105,6 @@ public class Xtend2BatchCompiler {
 		return verbose;
 	}
 
-	public static void main(String[] args) {
-		BasicConfigurator.configure();
-		Injector injector = new Xtend2StandaloneSetup().createInjectorAndDoEMFRegistration();
-		Xtend2BatchCompiler xtend2BatchCompiler = injector.getInstance(Xtend2BatchCompiler.class);
-		if ((args == null) || (args.length == 0)) {
-			printUsage();
-			return;
-		}
-		Iterator<String> arguments = Arrays.asList(args).iterator();
-		while (arguments.hasNext()) {
-			String argument = arguments.next();
-			if ("-d".equals(argument.trim())) {
-				xtend2BatchCompiler.setOutputPath(arguments.next().trim());
-			} else if ("-classpath".equals(argument.trim()) || "-cp".equals(argument.trim())) {
-				xtend2BatchCompiler.setClassPath(arguments.next().trim());
-			} else {
-				xtend2BatchCompiler.setSourcePath(argument);
-			}
-		}
-		xtend2BatchCompiler.compile();
-	}
-
 	public void compile() {
 		try {
 			ResourceSet resourceSet = loadXtendFiles();
@@ -140,7 +119,6 @@ public class Xtend2BatchCompiler {
 		} finally {
 			deleteTmpFolders();
 		}
-
 	}
 
 	protected ResourceSet loadXtendFiles() {
@@ -148,7 +126,7 @@ public class Xtend2BatchCompiler {
 		final NameBasedFilter nameBasedFilter = new NameBasedFilter();
 		nameBasedFilter.setExtension(fileExtensionProvider.getPrimaryFileExtension());
 		PathTraverser pathTraverser = new PathTraverser();
-		pathTraverser.resolvePathes(Strings.split(sourcePath, getPathSeparator()), new Predicate<URI>() {
+		pathTraverser.resolvePathes(getSourcePathDirectories(), new Predicate<URI>() {
 			public boolean apply(URI input) {
 				boolean matches = nameBasedFilter.matches(input);
 				if (matches) {
@@ -194,11 +172,24 @@ public class Xtend2BatchCompiler {
 		commandLine.add("-d " + classDirectory.toString());
 		commandLine.add("-" + getComplianceLevel());
 		commandLine.add("-proceedOnError");
-		List<String> sourceDirectories = getSourcePathDirectories();
+		List<String> sourceDirectories = newArrayList(getSourcePathDirectories());
 		sourceDirectories.add(tmpSourceDirectory.toString());
 		commandLine.add(concat(" ", sourceDirectories));
-		BatchCompiler.compile(concat(" ", commandLine), new PrintWriter(System.out), new PrintWriter(System.err), null);
+		BatchCompiler.compile(concat(" ", commandLine), getPrintWriter(), getPrintWriter(), null);
 		return classDirectory;
+	}
+
+	protected PrintWriter getPrintWriter() {
+		return new PrintWriter(new Writer() {
+			@Override
+			public void write(char[] cbuf, int off, int len) throws IOException {
+				log.debug(String.copyValueOf(cbuf, off, len));
+			}
+			@Override
+			public void flush() throws IOException {}
+			@Override
+			public void close() throws IOException {}
+		});
 	}
 
 	private List<Issue> validate(ResourceSet resourceSet) {
@@ -217,6 +208,11 @@ public class Xtend2BatchCompiler {
 	private void installJvmTypeProvider(ResourceSet resourceSet, File tmpClassDirectory) {
 		Iterable<String> classPathEntries = concat(getClassPathEntries(), getSourcePathDirectories(),
 				asList(tmpClassDirectory.toString()));
+		classPathEntries = filter(classPathEntries, new Predicate<String>() {
+			public boolean apply(String input) {
+				return !Strings.isEmpty(input.trim());
+			}
+		});
 		Iterable<URL> classPathUrls = Iterables.transform(classPathEntries, new Function<String, URL>() {
 
 			public URL apply(String from) {
@@ -227,14 +223,15 @@ public class Xtend2BatchCompiler {
 				}
 			}
 		});
-
-		URLClassLoader urlClassLoader = new URLClassLoader(toArray(classPathUrls, URL.class), getClass()
-				.getClassLoader());
-		new ClasspathTypeProvider(urlClassLoader, resourceSet);
+		if (log.isDebugEnabled()) {
+			log.debug("Classpath used for Xtend compilation : "+classPathUrls);
+		}
+		URLClassLoader urlClassLoader = new URLClassLoader(toArray(classPathUrls, URL.class), getClass().getClassLoader());
+		new ClasspathTypeProvider(urlClassLoader, resourceSet, indexedJvmTypeAccess);
 		((XtextResourceSet) resourceSet).setClasspathURIContext(urlClassLoader);
 	}
 
-	private boolean reportIssues(List<Issue> issues) {
+	protected boolean reportIssues(List<Issue> issues) {
 		boolean hasErrorOrWarnings = false;
 		for (Issue issue : issues) {
 			if (Severity.WARNING == issue.getSeverity() || Severity.ERROR == issue.getSeverity()) {
@@ -246,14 +243,14 @@ public class Xtend2BatchCompiler {
 					issueBuilder.append(resourceUri.toFileString());
 				}
 				issueBuilder.append("\n").append(issue.getLineNumber()).append(": ").append(issue.getMessage());
-				log(issueBuilder.toString());
+				log.error(issueBuilder);
 				hasErrorOrWarnings = true;
 			}
 		}
 		return hasErrorOrWarnings;
 	}
 
-	private void generateJavaFiles(ResourceSet resourceSet) {
+	protected void generateJavaFiles(ResourceSet resourceSet) {
 		JavaIoFileSystemAccess javaIoFileSystemAccess = javaIoFileSystemAccessProvider.get();
 		javaIoFileSystemAccess.setOutputPath(outputPath);
 		ResourceSetBasedResourceDescriptions resourceDescriptions = getResourceDescriptions(resourceSet);
@@ -269,22 +266,22 @@ public class Xtend2BatchCompiler {
 		}
 	}
 
-	private ResourceSetBasedResourceDescriptions getResourceDescriptions(ResourceSet resourceSet) {
+	protected ResourceSetBasedResourceDescriptions getResourceDescriptions(ResourceSet resourceSet) {
 		ResourceSetBasedResourceDescriptions resourceDescriptions = resourceSetDescriptionsProvider.get();
 		resourceDescriptions.setContext(resourceSet);
 		resourceDescriptions.setRegistry(IResourceServiceProvider.Registry.INSTANCE);
 		return resourceDescriptions;
 	}
 
-	private String getJavaFileName(XtendClass xtendClass) {
+	protected String getJavaFileName(XtendClass xtendClass) {
 		return Strings.concat("/", getFullyQualifiedName(xtendClass).getSegments()) + ".java";
 	}
 
-	private QualifiedName getFullyQualifiedName(XtendClass xtendClass) {
+	protected QualifiedName getFullyQualifiedName(XtendClass xtendClass) {
 		return qualifiedNameProvider.getFullyQualifiedName(xtendClass);
 	}
 
-	private XtendClass getXtendClass(Resource resource) {
+	protected XtendClass getXtendClass(Resource resource) {
 		XtextResource xtextResource = (XtextResource) resource;
 		IParseResult parseResult = xtextResource.getParseResult();
 		if (parseResult.getRootASTElement() instanceof XtendFile) {
@@ -294,27 +291,33 @@ public class Xtend2BatchCompiler {
 		return null;
 	}
 
-	private void log(String string) {
-		System.out.println(string);
-	}
-
-	private List<String> getClassPathEntries() {
+	protected List<String> getClassPathEntries() {
 		return getDirectories(classPath);
 	}
 
-	private List<String> getSourcePathDirectories() {
+	protected List<String> getSourcePathDirectories() {
 		return getDirectories(sourcePath);
 	}
 
-	private List<String> getDirectories(String path) {
-		return split(emptyIfNull(path), getPathSeparator());
+	protected List<String> getDirectories(String path) {
+		if (Strings.isEmpty(path))
+			return new java.util.ArrayList<String>();
+		final List<String> split = split(emptyIfNull(path), getPathSeparator());
+		return transform(split, new Function<String,String>(){
+			public String apply(String from) {
+				try {
+					return new File(from).getCanonicalPath();
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
+			}});
 	}
 
-	private String getPathSeparator() {
+	protected String getPathSeparator() {
 		return System.getProperty("path.separator");
 	}
 
-	private File createTempDir() {
+	protected File createTempDir() {
 		File baseDir = new File(System.getProperty("java.io.tmpdir"));
 		File tempDir = new File(baseDir, "tmpdir" + String.valueOf(System.nanoTime()));
 		tempDir.mkdir();
@@ -322,7 +325,7 @@ public class Xtend2BatchCompiler {
 		return tempDir;
 	}
 
-	private void deleteTmpFolders() {
+	protected void deleteTmpFolders() {
 		for (File file : tempFolders) {
 			try {
 				Files.cleanFolder(file, new FileFilter() {
@@ -333,13 +336,6 @@ public class Xtend2BatchCompiler {
 			} catch (FileNotFoundException fileNotFoundException) {
 			}
 		}
-	}
-
-	private static void printUsage() {
-		System.out.println("Usage: Xtend2BatchCompiler <options> <source directories>");
-		System.out.println("where possible options include:");
-		System.out.println("-d <directory>             Specify where to place generated xtend files");
-		System.out.println("-cp <path>                 Specify where to find user class files");
 	}
 
 }
