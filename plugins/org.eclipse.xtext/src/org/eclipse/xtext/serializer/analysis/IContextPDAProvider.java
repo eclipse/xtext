@@ -7,11 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer.analysis;
 
-import java.util.List;
-
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.util.formallang.Pda;
 
@@ -20,20 +16,8 @@ import com.google.inject.ImplementedBy;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-@ImplementedBy(SerializerPDAProvider.class)
-public interface ISerializerPDAProvider {
+@ImplementedBy(ContextPDAProvider.class)
+public interface IContextPDAProvider {
 
-	public interface ISerState {
-		List<? extends ISerState> getFollowers();
-		
-		AbstractElement getGrammarElement();
-
-		SerStateType getType();
-	}
-
-	public enum SerStateType {
-		ELEMENT, POP, PUSH, START, STOP;
-	}
-
-	Pda<? extends ISerState, RuleCall> getPDA(EObject context, EClass type);
+	Pda<ISerState, RuleCall> getContextPDA(EObject context);
 }
