@@ -189,7 +189,7 @@ class JvmModelGenerator implements IGenerator {
 					JvmOperation: op.returnType 
 					default: null
 				};
-				compiler.compile(expression, appendable, returnType, expression.thrownExceptionTypes.toSet)
+				compiler.compile(expression, appendable, returnType, op.exceptions.toSet)
 				return removeSurroundingCurlies(appendable.toString)
 			} else {
 				return '''throw new UnsupportedOperationException("«op.simpleName» is not implemented");'''
