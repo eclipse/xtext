@@ -8,13 +8,13 @@
 package org.eclipse.xtext.xbase.scoping.featurecalls;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.jdt.core.Flags;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.util.ReflectionUtil;
@@ -71,7 +71,7 @@ public class StaticImplicitMethodsFeatureForTypeProvider extends AbstractStaticM
 				Class<?> keyObjectType = ReflectionUtil.getObjectType(key);
 				Class<?> value = entry.getValue();
 				for(Method method: value.getDeclaredMethods()) {
-					if (Flags.isStatic(method.getModifiers()) && method.getParameterTypes().length > 0) {
+					if (Modifier.isStatic(method.getModifiers()) && method.getParameterTypes().length > 0) {
 						Class<?> paramType = method.getParameterTypes()[0];
 						Class<?> paramObjectType = ReflectionUtil.getObjectType(paramType);		
 						if (keyObjectType.isAssignableFrom(paramObjectType)) {
