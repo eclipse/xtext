@@ -710,8 +710,8 @@ public class JvmModelGenerator implements IGenerator {
                 _switchResult = null;
               }
               final JvmTypeReference returnType = _switchResult;
-              Iterable<JvmTypeReference> _thrownExceptionTypes = this._iTypeProvider.getThrownExceptionTypes(expression);
-              Set<JvmTypeReference> _set = IterableExtensions.<JvmTypeReference>toSet(_thrownExceptionTypes);
+              EList<JvmTypeReference> _exceptions = op.getExceptions();
+              Set<JvmTypeReference> _set = IterableExtensions.<JvmTypeReference>toSet(_exceptions);
               this.compiler.compile(expression, appendable, returnType, _set);
               String _string = appendable.toString();
               String _removeSurroundingCurlies = this.removeSurroundingCurlies(_string);
