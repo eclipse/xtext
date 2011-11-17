@@ -235,6 +235,9 @@ public class ParameterizedTypeConformanceStrategy extends
 			Set<Pair<JvmTypeReference, JvmTypeReference>> tested = Sets.newHashSet();
 			if (!boundParameters.isEmpty()) {
 				TypeArgumentContext rightArgumentContext = getBoundTypeParameters(rightReference);
+				if (rightArgumentContext == null) {
+					return TypeConformanceResult.FAILED;
+				}
 				if (!rightArgumentContext.isRawTypeContext()) {
 					for(JvmTypeParameter leftTypeParameter: boundParameters) {
 						JvmTypeReference leftBound = leftArgumentContext.getBoundArgument(leftTypeParameter);

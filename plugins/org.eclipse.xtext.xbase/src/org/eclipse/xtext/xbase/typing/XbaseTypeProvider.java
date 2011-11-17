@@ -876,6 +876,10 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 		JvmTypeReference expectedRawType = rawExpectation == null ? getExpectedType(object, true) : rawExpectation;
 		if (expectedRawType != null) {
 			singleMethod = closures.findImplementingOperation(expectedRawType, object.eResource());
+			if (singleMethod == null && !isResolved(expectedRawType, getNearestTypeParameterDeclarator(object), false)) {
+				expectedRawType = getExpectedType(object, false);
+				singleMethod = closures.findImplementingOperation(expectedRawType, object.eResource());
+			}
 		}
 		boolean procedure = false;
 		if (singleMethod != null) {
@@ -1086,6 +1090,12 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 				}
 				int indexOf = closure.getFormalParameters().indexOf(parameter);
 				JvmOperation operation = closures.findImplementingOperation(type, parameter.eResource());
+				if (operation == null && rawType && !isResolved(type, getNearestTypeParameterDeclarator(parameter), false)) {
+					type = getExpectedType(closure, false);
+					if (type != null) {
+						operation = closures.findImplementingOperation(type, parameter.eResource());
+					}
+				}
 				if (operation != null && indexOf < operation.getParameters().size()) {
 					JvmFormalParameter declaredParam = getParam(operation, indexOf);
 					if (rawType) {

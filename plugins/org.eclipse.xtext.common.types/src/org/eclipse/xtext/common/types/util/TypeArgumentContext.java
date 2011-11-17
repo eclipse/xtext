@@ -105,7 +105,11 @@ public class TypeArgumentContext implements ITypeArgumentContext {
 			result.setType(type);
 			if (!isRawTypeContext()) {
 				for(JvmTypeReference argument: reference.getArguments()) {
-					result.getArguments().add(visit(argument, replaceWildcards));
+					JvmTypeReference copy = visit(argument, replaceWildcards);
+					if (copy == null) {
+						copy = typeReferences.getTypeForName(Object.class, type);
+					}
+					result.getArguments().add(copy);
 				}
 			}
 			return result;

@@ -60,6 +60,85 @@ import com.google.inject.Injector;
  */
 public class CompilerTest extends AbstractXtend2TestCase {
 
+	public void testBug362236_01() throws Exception {
+		String code = 
+				"import java.util.List\n" +
+				"class Z {\n"+
+				"    def returnClosure() {  \n" + 
+				"      thing(int i|i.toString)\n" + 
+				"    }\n" + 
+				"    def thing(Object o) {" +
+				"      o\n" + 
+				"    }\n" +
+				"}";
+		String javaCode = compileToJavaCode(code);
+		Class<?> class1 = javaCompiler.compileToClass("Z", javaCode);
+		Object object = class1.newInstance();
+		Object closure = class1.getDeclaredMethod("returnClosure").invoke(object);
+		@SuppressWarnings("unchecked")
+		Functions.Function1<Object, Object> castedClosure = (Function1<Object, Object>) closure;
+		assertEquals("123", castedClosure.apply(123));
+	}
+	
+	public void testBug362236_02() throws Exception {
+		String code = 
+				"import java.util.List\n" +
+				"class Z {\n"+
+				"    def returnClosure() {  \n" + 
+				"      thing(Integer i|i.toString)\n" + 
+				"    }\n" + 
+				"    def thing(Object o) {" +
+				"      o\n" + 
+				"    }\n" +
+				"}";
+		String javaCode = compileToJavaCode(code);
+		Class<?> class1 = javaCompiler.compileToClass("Z", javaCode);
+		Object object = class1.newInstance();
+		Object closure = class1.getDeclaredMethod("returnClosure").invoke(object);
+		@SuppressWarnings("unchecked")
+		Functions.Function1<Object, Object> castedClosure = (Function1<Object, Object>) closure;
+		assertEquals("123", castedClosure.apply(123));
+	}
+	
+	public void testBug362236_03() throws Exception {
+		String code = 
+				"import java.util.List\n" +
+				"class Z {\n"+
+				"    def returnClosure() {  \n" + 
+				"      thing(i|i.toString)\n" + 
+				"    }\n" + 
+				"    def thing((Object)=>Object o) {" +
+				"      o\n" + 
+				"    }\n" +
+				"}";
+		String javaCode = compileToJavaCode(code);
+		Class<?> class1 = javaCompiler.compileToClass("Z", javaCode);
+		Object object = class1.newInstance();
+		Object closure = class1.getDeclaredMethod("returnClosure").invoke(object);
+		@SuppressWarnings("unchecked")
+		Functions.Function1<Object, Object> castedClosure = (Function1<Object, Object>) closure;
+		assertEquals("123", castedClosure.apply(123));
+	}
+	
+	public void testBug362236_04() throws Exception {
+		String code = 
+				"import java.util.List\n" +
+						"class Z {\n"+
+						"    def returnListOfClosures() {  \n" + 
+						"      val list = <(String)=>int>newArrayList()" +
+						"      list.add [ length ]" +
+						"      list\n" + 
+						"    }\n" + 
+						"}";
+		String javaCode = compileToJavaCode(code);
+		Class<?> class1 = javaCompiler.compileToClass("Z", javaCode);
+		Object object = class1.newInstance();
+		Object list = class1.getDeclaredMethod("returnListOfClosures").invoke(object);
+		@SuppressWarnings("unchecked")
+		Functions.Function1<String, Integer> castedClosure =  (Function1<String, Integer>)((List<?>)list).get(0);
+		assertEquals(Integer.valueOf(4), castedClosure.apply("4444"));
+	}
+	
 	public void testBug363621() throws Exception {
 		String code = 
 				"import java.util.List\n" +
