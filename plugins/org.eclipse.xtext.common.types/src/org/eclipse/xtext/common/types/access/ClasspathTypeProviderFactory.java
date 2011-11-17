@@ -9,7 +9,6 @@ package org.eclipse.xtext.common.types.access;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
-import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 
 import com.google.inject.Inject;
 
