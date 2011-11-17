@@ -19,6 +19,7 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.debug.ui.ILaunchShortcut;
+import org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IEditorPart;
@@ -31,8 +32,19 @@ public class WorkflowLaunchUtils {
 	protected static final String MWE2_FILE_EXTENSION = "mwe2";
 	protected static final String MWE2_LAUNCH_SHORCUT_ID = "org.eclipse.emf.mwe2.launch.shortcut1";
 	
-	
 	protected static final Logger logger = Logger.getLogger(WorkflowLaunchUtils.class);
+	
+	private static final boolean mwe2Available;
+	
+	static {
+		boolean b = true;
+		try {
+			Mwe2Launcher.class.isEnum();
+		} catch(Error e) {
+			b = false;
+		}
+		mwe2Available = b;
+	}
 
 	public static IResource workflowFileFor(ExecutionEvent event) {
 		IFile file = getSelectedFile(event);
@@ -54,7 +66,7 @@ public class WorkflowLaunchUtils {
 	}
 
 	public static boolean workflowFileAvailableForGrammarFile(IResource resource) {
-		return (workflowFileFor(resource) != null);
+		return mwe2Available && (workflowFileFor(resource) != null);
 	}
 
 	public static IResource workflowFileFor(IResource resource) {
@@ -88,8 +100,10 @@ public class WorkflowLaunchUtils {
 	public static void runWorkflow(IResource workflowFile, String mode) {
 		try {
 			ILaunchShortcut launchShortcut = findLaunchShortcut();
-			ISelection selection = new StructuredSelection(workflowFile);
-			launchShortcut.launch(selection, mode);
+			if (launchShortcut != null) {
+				ISelection selection = new StructuredSelection(workflowFile);
+				launchShortcut.launch(selection, mode);
+			}
 		} catch (CoreException e) {
 			logger.error("Could not delegate to MWE2 launch shortcut.", e);
 			e.printStackTrace();
