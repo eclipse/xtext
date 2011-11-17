@@ -16,10 +16,10 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -623,7 +623,23 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	@Check
 	public void checkExceptionsInClosure(XClosure closure) {
-		doCheckUnhandledException(closure.getExpression(), Collections.<JvmTypeReference> emptyList());
+		if (supportsCheckedExceptions())
+			doCheckUnhandledException(closure.getExpression(), Collections.<JvmTypeReference> emptyList());
+	}
+	
+	@Check
+	public void checkUnhandledException(XExpression expression) {
+		if (supportsCheckedExceptions()) {
+			final JvmIdentifiableElement logicalContainer = logicalContainerProvider.getLogicalContainer(expression);
+			if (logicalContainer instanceof JvmExecutable) {
+				JvmExecutable executable = (JvmExecutable) logicalContainer;
+				doCheckUnhandledException(expression, executable.getExceptions());
+			}
+		}
+	}
+
+	protected boolean supportsCheckedExceptions() {
+		return true;
 	}
 
 	@Inject
@@ -643,18 +659,10 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	protected void reportUnhandledException(XExpression element, JvmTypeReference thrownException) {
 		for (EObject childThrowingException : exceptionInExpressionFinder.findChildrenThrowingException(element,
 				thrownException)) {
-			EObject container = childThrowingException.eContainer();
-			EStructuralFeature containmentRef = childThrowingException.eContainingFeature();
 			String expressionTypeURI = EcoreUtil.getURI(thrownException.getType()).toString();
 			String childURI = EcoreUtil.getURI(childThrowingException).toString();
-			if (containmentRef.isMany()) {
-				int index = ((List<?>) container.eGet(containmentRef)).indexOf(childThrowingException);
-//				error("Unhandled exception type " + thrownException.getIdentifier(), container, containmentRef, index,
-//						UNHANDLED_EXCEPTION, expressionTypeURI, childURI);
-			} else {
-//				error("Unhandled exception type " + thrownException.getIdentifier(), container, containmentRef,
-//						ValidationMessageAcceptor.INSIGNIFICANT_INDEX, UNHANDLED_EXCEPTION, expressionTypeURI, childURI);
-			}
+			error("Unhandled exception type " + thrownException.getIdentifier(), childThrowingException, null,
+					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, UNHANDLED_EXCEPTION, expressionTypeURI, childURI);
 		}
 	}
 
