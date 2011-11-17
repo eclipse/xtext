@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.typing;
 
-import static com.google.common.collect.Iterables.*;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -16,7 +14,6 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -53,9 +50,6 @@ public class Xtend2TypeProvider extends XbaseWithAnnotationsTypeProvider {
 	@Inject
 	private IXtend2JvmAssociations xtend2jvmAssociations;
 
-//	@Inject
-//	private XtendOverridesService overridesService;
-//	
 	@Inject
 	private IEarlyExitComputer earlyExitComputer;
 	
@@ -131,9 +125,6 @@ public class Xtend2TypeProvider extends XbaseWithAnnotationsTypeProvider {
 		}
 		return null;
 	}
-	
-	
-	
 	
 	protected JvmTypeReference _expectedType(CreateExtensionInfo info, EReference reference, int index, boolean rawType) {
 		if (reference == Xtend2Package.Literals.CREATE_EXTENSION_INFO__CREATE_EXPRESSION) {
@@ -226,23 +217,6 @@ public class Xtend2TypeProvider extends XbaseWithAnnotationsTypeProvider {
 			return superType;
 		}
 		return getTypeReferences().getTypeForName(Object.class, xtendClass);
-	}
-	
-	@Override
-	public Iterable<JvmTypeReference> getThrownExceptionForIdentifiable(JvmIdentifiableElement identifiable) {
-		if (identifiable instanceof JvmOperation) {
-			return ((JvmOperation) identifiable).getExceptions();
-		}
-		return super.getThrownExceptionForIdentifiable(identifiable);
-	}
-
-	protected Iterable<JvmTypeReference> getThrownExceptions(final XtendFunction xtendFunction) {
-		Iterable<JvmTypeReference> thrownExceptionTypes = getThrownExceptionTypes(xtendFunction.getExpression());
-		if (xtendFunction.getCreateExtensionInfo()==null) {
-			return thrownExceptionTypes;
-		}
-		Iterable<JvmTypeReference> thrownExceptionTypesInCreateExpression = getThrownExceptionTypes(xtendFunction.getCreateExtensionInfo().getCreateExpression());
-		return concat(thrownExceptionTypes,thrownExceptionTypesInCreateExpression);
 	}
 	
 }
