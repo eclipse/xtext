@@ -8,26 +8,70 @@
 package org.eclipse.xtext.util.formallang;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import org.eclipse.xtext.util.formallang.NfaUtil.MappedComparator;
 
 import com.google.common.base.Function;
 import com.google.common.base.Functions;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.internal.Join;
-import com.google.inject.internal.Lists;
-import com.google.inject.internal.Maps;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class PdaUtil {
+
+	public static class HashStack<T> implements Iterable<T> {
+
+		protected LinkedList<T> list = Lists.newLinkedList();
+		protected Set<T> set = Sets.newLinkedHashSet();
+
+		public boolean contains(Object value) {
+			return set.contains(value);
+		}
+
+		public boolean isEmpty() {
+			return list.isEmpty();
+		}
+
+		public Iterator<T> iterator() {
+			return list.iterator();
+		}
+
+		public T peek() {
+			return list.getLast();
+		}
+
+		public T pop() {
+			T result = list.getLast();
+			list.removeLast();
+			set.remove(result);
+			return result;
+		}
+
+		public boolean push(T value) {
+			list.addLast(value);
+			return set.add(value);
+		}
+
+		@Override
+		public String toString() {
+			return list.toString();
+		}
+	}
 
 	protected static class IsPop<S, P> implements Predicate<S> {
 		private final Pda<S, P> pda;
@@ -137,6 +181,37 @@ public class PdaUtil {
 
 	}
 
+	protected static class TraversalItem<S, R> {
+		protected R data;
+		protected Iterator<S> followers;
+		protected S state;
+
+		public TraversalItem(S state, Iterable<S> followers, R previous) {
+			super();
+			this.state = state;
+			this.followers = followers.iterator();
+			this.data = previous;
+		}
+
+		@Override
+		@SuppressWarnings("rawtypes")
+		public boolean equals(Object obj) {
+			if (obj == null || obj.getClass() != getClass())
+				return false;
+			return data.equals(((TraversalItem) obj).data);
+		}
+
+		@Override
+		public int hashCode() {
+			return data.hashCode();
+		}
+
+		@Override
+		public String toString() {
+			return state.toString();
+		}
+	}
+
 	@Inject
 	protected NfaUtil nfaUtil = new NfaUtil();
 
@@ -149,17 +224,6 @@ public class PdaUtil {
 	public <S, P, E, T, D extends Pda<S, P>> D create(Cfg<E, T> cfg, FollowerFunction<E> ff,
 			PdaFactory<D, S, P, ? super E> fact) {
 		return create(cfg, ff, Functions.<E> identity(), fact);
-	}
-
-	public <S, P, E, T1, T2, D extends Pda<S, P>> D create(Cfg<E, T1> cfg, FollowerFunction<E> ff,
-			Function<E, T2> element2token, PdaFactory<D, S, P, ? super T2> fact) {
-		D pda = fact.create(null, null);
-		Map<E, S> states = Maps.newHashMap();
-		Map<E, S> stops = Maps.newHashMap();
-		Multimap<E, E> callers = new CfgUtil().getCallers(cfg);
-		create(cfg, pda, pda.getStart(), cfg.getRoot(), ff.getStarts(cfg.getRoot()), true, ff, element2token, fact,
-				states, stops, callers);
-		return pda;
 	}
 
 	protected <S, P, E, T1, T2, D extends Pda<S, P>> void create(Cfg<E, T1> cfg, D pda, S state, E ele,
@@ -203,6 +267,17 @@ public class PdaUtil {
 		fact.setFollowers(pda, state, followerStates);
 	}
 
+	public <S, P, E, T1, T2, D extends Pda<S, P>> D create(Cfg<E, T1> cfg, FollowerFunction<E> ff,
+			Function<E, T2> element2token, PdaFactory<D, S, P, ? super T2> fact) {
+		D pda = fact.create(null, null);
+		Map<E, S> states = Maps.newHashMap();
+		Map<E, S> stops = Maps.newHashMap();
+		Multimap<E, E> callers = new CfgUtil().getCallers(cfg);
+		create(cfg, pda, pda.getStart(), cfg.getRoot(), ff.getStarts(cfg.getRoot()), true, ff, element2token, fact,
+				states, stops, callers);
+		return pda;
+	}
+
 	protected <T> StackItem<T> createStack(Iterator<T> stack) {
 		if (stack.hasNext())
 			return new StackItem<T>(stack, stack.next());
@@ -215,6 +290,67 @@ public class PdaUtil {
 		if (trace != null)
 			return trace.size();
 		return UNREACHABLE;
+	}
+
+	public <S, P, R, D extends Pda<S, P>> D filterEdges(Pda<S, P> pda, Traverser<? super Pda<S, P>, S, R> traverser,
+			PdaFactory<D, S, P, S> factory) {
+		HashStack<TraversalItem<S, R>> trace = new HashStack<TraversalItem<S, R>>();
+		R previous = traverser.enter(pda, pda.getStart(), null);
+		if (previous == null)
+			return factory.create(pda.getStart(), pda.getStop());
+		Map<S, Integer> distances = new NfaUtil().distanceToFinalStateMap(pda);
+		MappedComparator<S, Integer> distanceComp = new MappedComparator<S, Integer>(distances);
+		trace.push(newItem(pda, distanceComp, pda.getStart(), previous));
+		Multimap<S, S> edges = LinkedHashMultimap.create();
+		HashSet<S> states = Sets.newHashSet();
+		HashSet<R> success = Sets.newHashSet();
+		states.add(pda.getStart());
+		states.add(pda.getStop());
+		ROOT: while (!trace.isEmpty()) {
+			TraversalItem<S, R> current = trace.peek();
+			while (current.followers.hasNext()) {
+				S next = current.followers.next();
+				R item = traverser.enter(pda, next, current.data);
+				if (item != null) {
+					if (next == pda.getStop() || success.contains(item)) {
+						S s = null;
+						for (TraversalItem<S, R> i : trace) {
+							if (s != null)
+								edges.put(s, i.state);
+							states.add(i.state);
+							success.add(i.data);
+							s = i.state;
+						}
+						edges.put(s, next);
+					} else {
+						if (trace.push(newItem(pda, distanceComp, next, item)))
+							continue ROOT;
+					}
+				}
+			}
+			trace.pop();
+		}
+		D result = factory.create(pda.getStart(), pda.getStop());
+		Map<S, S> old2new = Maps.newHashMap();
+		old2new.put(pda.getStart(), result.getStart());
+		old2new.put(pda.getStop(), result.getStop());
+		for (S old : states) {
+			if (old == pda.getStart() || old == pda.getStop())
+				continue;
+			else if (pda.getPop(old) != null)
+				old2new.put(old, factory.createPop(result, old));
+			else if (pda.getPush(old) != null)
+				old2new.put(old, factory.createPush(result, old));
+			else
+				old2new.put(old, factory.createState(result, old));
+		}
+		for (S old : states) {
+			List<S> followers = Lists.newArrayList();
+			for (S f : edges.get(old))
+				followers.add(old2new.get(f));
+			factory.setFollowers(result, old2new.get(old), followers);
+		}
+		return result;
 	}
 
 	public <S, P> Nfa<S> filterUnambiguousPaths(Pda<S, P> pda) {
@@ -258,6 +394,12 @@ public class PdaUtil {
 		followers.put(state, f);
 		for (S follower : f)
 			filterUnambiguousPaths(pda, follower, dist, followers);
+	}
+
+	protected <S, R, P> TraversalItem<S, R> newItem(Pda<S, P> pda, MappedComparator<S, Integer> comp, S next, R item) {
+		List<S> followers = Lists.newArrayList(pda.getFollowers(next));
+		Collections.sort(followers, comp);
+		return new TraversalItem<S, R>(next, followers, item);
 	}
 
 	public <S, P> List<S> shortestPathTo(Pda<S, P> pda, Iterable<S> starts, Iterator<P> stack, Predicate<S> matches,

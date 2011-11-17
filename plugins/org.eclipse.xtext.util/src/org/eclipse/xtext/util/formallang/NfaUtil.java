@@ -19,15 +19,15 @@ import java.util.Stack;
 
 import com.google.common.base.Function;
 import com.google.common.base.Functions;
+import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
-import com.google.inject.internal.Lists;
-import com.google.inject.internal.Maps;
-import com.google.inject.internal.Objects;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -75,9 +75,9 @@ public class NfaUtil {
 	}
 
 	public static class MappedComparator<S, COMPARABLE extends Comparable<COMPARABLE>> implements Comparator<S> {
-		private final Map<S, COMPARABLE> sortBy;
+		protected final Map<S, COMPARABLE> sortBy;
 
-		private MappedComparator(Map<S, COMPARABLE> sortBy) {
+		public MappedComparator(Map<S, COMPARABLE> sortBy) {
 			this.sortBy = sortBy;
 		}
 

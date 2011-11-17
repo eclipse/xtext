@@ -104,7 +104,7 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 
 	protected String getParserRule(String body) throws Exception {
 		Grammar grammar = (Grammar) getModel(HEADER + body);
-		//		drawGrammar("pdf/" + getName(), grammar);
+		//				drawGrammar("pdf/" + getName(), grammar);
 		List<String> result = Lists.newArrayList();
 		for (Triple<EClass, EObject, String> ctx : getContexts(grammar)) {
 			String t = ctx.getFirst() == null ? "null" : ctx.getFirst().getName();
@@ -540,7 +540,6 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 		String actual = getParserRule(grammar.toString());
 		StringBuilder expected = new StringBuilder();
 		expected.append("Optional_Optional:\n");
-		expected.append("  start stop\n");
 		expected.append("  start val1=ID\n");
 		expected.append("  start val2=ID\n");
 		expected.append("  start val3=ID\n");
@@ -609,7 +608,7 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 		String actual = getParserRule(grammar.toString());
 		StringBuilder expected = new StringBuilder();
 		expected.append("Model_Model:\n");
-		expected.append("  start ('x' | 'y')* stop\n");
+		expected.append("  start ('x' | 'y')+ stop\n");
 		expected.append("  start ('x'* 'y')+ y+=ID\n");
 		expected.append("  start ('y'* 'x')+ x+=ID\n");
 		expected.append("  x+=ID ('x' | 'y')* stop\n");

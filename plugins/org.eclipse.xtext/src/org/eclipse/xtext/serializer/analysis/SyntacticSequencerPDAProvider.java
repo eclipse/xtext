@@ -31,8 +31,7 @@ import org.eclipse.xtext.serializer.analysis.GrammarAlias.AlternativeAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.GrammarAliasFactory;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.GroupAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
-import org.eclipse.xtext.serializer.analysis.ISerializerPDAProvider.ISerState;
-import org.eclipse.xtext.serializer.analysis.ISerializerPDAProvider.SerStateType;
+import org.eclipse.xtext.serializer.analysis.ISerState.SerStateType;
 import org.eclipse.xtext.serializer.sequencer.RuleCallStack;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
@@ -505,7 +504,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 
 	//	protected SequencerPDAProvider pdaProvider = createSequencerPDAProvider();
 	@Inject
-	protected SerializerPDAProvider pdaProvider;
+	protected ContextTypePDAProvider pdaProvider;
 
 	protected boolean canReachAbsorber(ISerState from, ISerState to, Set<ISerState> visited) {
 		if (isMandatoryAbsorber(from.getGrammarElement()) || !visited.add(from))
@@ -602,7 +601,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 		if (result == null) {
 			Map<ISerState, SynAbsorberState> absorbers = Maps.newHashMap();
 			Map<SynAbsorberState, Map<ISerState, SynState>> emitters = Maps.newHashMap();
-			Pda<? extends ISerState, RuleCall> pda = pdaProvider.getPDA(context, type);
+			Pda<? extends ISerState, RuleCall> pda = pdaProvider.getContextTypePDA(context, type);
 			result = createAbsorberState(pda.getStart(), absorbers, emitters, context, type);
 			cache.put(key, result);
 		}
