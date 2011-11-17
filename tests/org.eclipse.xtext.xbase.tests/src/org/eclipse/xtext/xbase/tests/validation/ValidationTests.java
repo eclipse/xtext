@@ -31,9 +31,24 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	@Inject
 	protected ValidationTestHelper helper;
 	
-	public void testToLittleTypeInformation() throws Exception {
+	public void testToLittleTypeInformation_01() throws Exception {
 		XExpression expr = expression("{ val x = [e | e.toString()] }");
 		helper.assertError(expr, XCLOSURE, TOO_LITTLE_TYPE_INFORMATION);
+	}
+	
+	public void testToLittleTypeInformation_02() throws Exception {
+		XExpression expr = expression("{ <Object>newArrayList().add(e | e.toString()) }");
+		helper.assertError(expr, XCLOSURE, TOO_LITTLE_TYPE_INFORMATION);
+	}
+	
+	public void testToLittleTypeInformation_03() throws Exception {
+		XExpression expr = expression("{ newArrayList().add(e | e.toString()) }");
+		helper.assertNoErrors(expr);
+	}
+	
+	public void testToLittleTypeInformation_04() throws Exception {
+		XExpression expr = expression("{ <(String)=>int>newArrayList().add(s | s.length) }");
+		helper.assertNoErrors(expr);
 	}
 	
 	public void testNoWildCardsInTypeArgs() throws Exception {

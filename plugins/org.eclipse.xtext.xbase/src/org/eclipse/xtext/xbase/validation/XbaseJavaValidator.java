@@ -70,6 +70,7 @@ import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
+import org.eclipse.xtext.xbase.typing.Closures;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.JvmExceptions;
 import org.eclipse.xtext.xbase.typing.SynonymTypesProvider;
@@ -112,7 +113,10 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	private ILogicalContainerProvider logicalContainerProvider;
 	
 	@Inject
-	private JvmExceptions jvmExceptions; 
+	private JvmExceptions jvmExceptions;
+	
+	@Inject
+	private Closures closures;
 
 	private final Set<EReference> typeConformanceCheckedReferences = ImmutableSet.of(
 			XbasePackage.Literals.XVARIABLE_DECLARATION__RIGHT, XbasePackage.Literals.XIF_EXPRESSION__IF,
@@ -186,16 +190,30 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	public void checkClosureParameterTypes(XClosure closure) {
 		if (closure.getFormalParameters().isEmpty())
 			return;
+		boolean checkedClosure = false;
 		for (JvmFormalParameter p : closure.getFormalParameters()) {
 			if (p.getParameterType() == null) {
-				JvmTypeReference type = getTypeProvider().getExpectedType(closure);
-				if (type == null) {
-					error("There is no context to infer the closure's argument types from. Consider typing the arguments or put the closures into a typed context.",
+				if (!checkedClosure) {
+					JvmTypeReference type = getTypeProvider().getExpectedType(closure);
+					if (type == null) {
+						error("There is no context to infer the closure's argument types from. Consider typing the arguments or put the closures into a typed context.",
+								closure, null, INSIGNIFICANT_INDEX, TOO_LITTLE_TYPE_INFORMATION);
+						return;
+					} else {
+						JvmOperation operation = closures.findImplementingOperation(type, closure.eResource());
+						if (operation == null) {
+							error("There is no context to infer the closure's argument types from. Consider typing the arguments or use the closures in a more specific context.",
+									closure, null, INSIGNIFICANT_INDEX, TOO_LITTLE_TYPE_INFORMATION);
+							return;
+						}
+					}
+					checkedClosure = true;
+				}
+				if (getTypeProvider().getTypeForIdentifiable(p, true) == null) {
+					error("There is no context to infer the closure's argument types from. Consider typing the arguments or use the closures in a more specific context.",
 							closure, null, INSIGNIFICANT_INDEX, TOO_LITTLE_TYPE_INFORMATION);
 					return;
 				}
-			} else {
-				ensureNotPrimitiveNorWildcard(p.getParameterType());
 			}
 		}
 	}

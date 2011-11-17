@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.compiler;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -490,18 +491,19 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			serialize(returnType, closure, b, false, false, true, true);
 			b.append(" ").append(operation.getSimpleName());
 			b.append("(");
-			EList<JvmFormalParameter> closureParams = closure.getFormalParameters();
-			for (Iterator<JvmFormalParameter> iter = closureParams.iterator(); iter.hasNext();) {
-				JvmFormalParameter param = iter.next();
-				final JvmTypeReference parameterType2 = getTypeProvider().getTypeForIdentifiable(param);
-				final JvmTypeReference parameterType = context.resolve(parameterType2);
+			List<JvmFormalParameter> closureParams = closure.getFormalParameters();
+			List<JvmFormalParameter> operationParams = operation.getParameters();
+			for (int i = 0; i < closureParams.size(); i++) {
+				JvmFormalParameter closureParam = closureParams.get(i);
+				JvmFormalParameter operationParam = operationParams.get(i);
+				JvmTypeReference parameterType = context.resolve(operationParam.getParameterType());
 				b.append("final ");
 				serialize(parameterType, closure, b, false, false, true, true);
 				b.append(" ");
-				String name = declareNameInVariableScope(param, b);
+				String name = declareNameInVariableScope(closureParam, b);
 				b.append(name);
-				if (iter.hasNext())
-					b.append(" , ");
+				if (i != closureParams.size() - 1)
+					b.append(", ");
 			}
 			b.append(") {");
 			b.increaseIndentation();
