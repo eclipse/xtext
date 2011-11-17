@@ -44,10 +44,14 @@ public class Files {
 				try {
 					copy.createNewFile();
 					FileOutputStream fwr = new FileOutputStream(copy);
-					byte[] buff = new byte[1024];
-					int read;
-					while ((read = is.read(buff)) != -1) {
-						fwr.write(buff, 0, read);
+					try {
+						byte[] buff = new byte[1024];
+						int read;
+						while ((read = is.read(buff)) != -1) {
+							fwr.write(buff, 0, read);
+						}
+					} finally {
+						fwr.close();
 					}
 					log.debug("Copied " + copy);
 				} catch (IOException e) {
@@ -80,7 +84,7 @@ public class Files {
 		for (int j = 0; j < contents.length; j++) {
 			final File file = contents[j];
 			if (file.isDirectory()) {
-				if (!cleanFolder(file, myFilter, continueOnError, false) && !continueOnError)
+				if (!cleanFolder(file, myFilter, continueOnError, true) && !continueOnError)
 					return false;
 			} else {
 				if (!file.delete()) {
@@ -91,7 +95,7 @@ public class Files {
 			}
 		}
 		if (deleteParentFolder) {
-			if (!parentFolder.delete()) {
+			if (parentFolder.list().length==0 && !parentFolder.delete()) {
 				log.error("Couldn't delete " + parentFolder.getAbsolutePath());
 				return false;
 			}
