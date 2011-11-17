@@ -33,6 +33,7 @@ public class ClasspathTypeProvider extends AbstractJvmTypeProvider {
 		declaredTypeFactory = createDeclaredTypeFactory();
 	}
 	
+	@Deprecated
 	public ClasspathTypeProvider(ClassLoader classLoader, ResourceSet resourceSet) {
 		this(classLoader, resourceSet, null);
 	}
