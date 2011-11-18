@@ -71,7 +71,7 @@ public class FunctionOverrideAssist {
 	private UIStrings uiStrings;
 	
 	@Inject
-	private ContentProposalAppendable.Factory appendableFactory;
+	private ReplacingAppendable.Factory appendableFactory;
 
 	protected Iterable<JvmOperation> getOverrideableOperations(XtendClass clazz) {
 		final JvmGenericType inferredType = associations.getInferredType(clazz);
@@ -112,7 +112,8 @@ public class FunctionOverrideAssist {
 
 	protected ICompletionProposal createOverrideMethodProposal(XtendClass model, JvmOperation overriddenOperation,
 			ContentAssistContext context) {
-		ContentProposalAppendable appendable = appendableFactory.get(context.getDocument(), model, context.getOffset());
+		ReplacingAppendable appendable = appendableFactory.get(context.getDocument(), model, 
+				context.getReplaceRegion().getOffset(), context.getReplaceRegion().getLength(), true);
 		overrideFunction.appendOverrideFunction(model, overriddenOperation, appendable);
 		String code = appendable.toString();
 		if (!isEmpty(context.getPrefix()) && !overriddenOperation.getSimpleName().startsWith(context.getPrefix())
@@ -133,7 +134,7 @@ public class FunctionOverrideAssist {
 		return (overriddenOperation.isAbstract()) ? 400 : 350;
 	}
 
-	protected ImportOrganizingProposal createCompletionProposal(ContentProposalAppendable appendable, Region replaceRegion,
+	protected ImportOrganizingProposal createCompletionProposal(ReplacingAppendable appendable, Region replaceRegion,
 			StyledString displayString, Image image) {
 		return new ImportOrganizingProposal(appendable, replaceRegion.getOffset(), replaceRegion.getLength(),
 				replaceRegion.getOffset(), image, displayString);

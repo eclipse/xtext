@@ -50,7 +50,8 @@ public class OverrideFunction {
 	@Inject
 	private IXtend2JvmAssociations associations;
 
-	public void appendOverrideFunction(final XtendClass overrider, JvmOperation overriddenOperation, IAppendable appendable) {
+	public void appendOverrideFunction(final XtendClass overrider, JvmOperation overriddenOperation,
+			IAppendable appendable) {
 		final JvmGenericType overridingType = associations.getInferredType(overrider);
 		typeReferenceSerializer.setOverridingType(overridingType);
 		final ITypeArgumentContext typeArgumentContext = typeArgumentContextProvider
@@ -60,10 +61,34 @@ public class OverrideFunction {
 						return typeReferences.createTypeRef(overridingType);
 					}
 				});
-		appendable.append("\n").append("override ");
-		if(overriddenOperation.getVisibility() == JvmVisibility.PROTECTED) {
+		appendable.increaseIndentation().append("\n").append("override ");
+		if (overriddenOperation.getVisibility() == JvmVisibility.PROTECTED) {
 			appendable.append("protected ");
 		}
+		appendSignature(overriddenOperation, typeArgumentContext, appendable, false);
+		boolean isFirst;
+		if (!overriddenOperation.getExceptions().isEmpty()) {
+			appendable.append(" throws ");
+			isFirst = true;
+			for (JvmTypeReference exception : overriddenOperation.getExceptions()) {
+				if (!isFirst)
+					appendable.append(", ");
+				isFirst = false;
+				typeReferenceSerializer.serialize(exception, overridingType, appendable);
+			}
+		}
+		appendable.append(" {").increaseIndentation().append("\n");
+		if (overriddenOperation.isAbstract()) {
+			appendable.append(DEFAULT_BODY);
+		} else {
+			appendable.append("super.");
+			appendSignature(overriddenOperation, typeArgumentContext, appendable, true);
+		}
+		appendable.decreaseIndentation().append("\n}").decreaseIndentation().append("\n");
+	}
+
+	protected void appendSignature(JvmOperation overriddenOperation, final ITypeArgumentContext typeArgumentContext,
+			IAppendable appendable, boolean isCall) {
 		boolean isFirst = true;
 		if (!isEmpty(overriddenOperation.getTypeParameters())) {
 			appendable.append("<");
@@ -81,25 +106,15 @@ public class OverrideFunction {
 			if (!isFirst)
 				appendable.append(", ");
 			isFirst = false;
-			JvmTypeReference overriddenParameterType = typeArgumentContext.getLowerBound(param.getParameterType());
-			typeReferenceSerializer.serialize(overriddenParameterType,
-					overriddenOperation, appendable);
-			appendable.append(" ").append(param.getName());
-		}
-		appendable.append(")");
-		if (!overriddenOperation.getExceptions().isEmpty()) {
-			appendable.append(" throws ");
-			isFirst = true;
-			for (JvmTypeReference exception : overriddenOperation.getExceptions()) {
-				if (!isFirst)
-					appendable.append(", ");
-				isFirst = false;
-				typeReferenceSerializer.serialize(exception, overridingType, appendable);
+			if (isCall) {
+				appendable.append(appendable.getName(param));
+			} else {
+				JvmTypeReference overriddenParameterType = typeArgumentContext.getLowerBound(param.getParameterType());
+				typeReferenceSerializer.serialize(overriddenParameterType, overriddenOperation, appendable);
+				appendable.append(" ").append(appendable.declareVariable(param, param.getName()));
 			}
 		}
-		appendable.append(" {").increaseIndentation()
-				.append("\n" + DEFAULT_BODY)
-				.decreaseIndentation().append("\n}").decreaseIndentation().append("\n\n");
+		appendable.append(")");
 	}
 
 	public int getFunctionInsertOffset(XtendClass clazz) {
@@ -114,7 +129,7 @@ public class OverrideFunction {
 		return (lastClosingBraceOffset == -1) ? lastClosingBraceOffset = clazzNode.getTotalEndOffset()
 				: lastClosingBraceOffset;
 	}
-	
+
 	protected static class CustomTypeReferenceSerializer extends TypeReferenceSerializer {
 
 		private JvmGenericType overridingType;
@@ -122,10 +137,11 @@ public class OverrideFunction {
 		public void setOverridingType(JvmGenericType overridingType) {
 			this.overridingType = overridingType;
 		}
-		
+
 		@Override
 		public boolean isLocalTypeParameter(EObject context, JvmTypeParameter parameter) {
-			return super.isLocalTypeParameter(context, parameter) || super.isLocalTypeParameter(overridingType, parameter);
+			return super.isLocalTypeParameter(context, parameter)
+					|| super.isLocalTypeParameter(overridingType, parameter);
 		}
 	}
 

@@ -420,11 +420,11 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 					}
 				}
 			}
+			List<JvmOperation> operationsMissingImplementation = null;
 			for (JvmOperation operation : filter(
 					featureOverridesService.getAllJvmFeatures(inferredType, typeArgumentContext), JvmOperation.class)) {
 				if (operation.getDeclaringType() != inferredType) {
 					OperationSignature signature = getSignature(operation);
-
 					if (operationsPerErasure.containsKey(signature.getErasureKey())) {
 						Collection<JvmOperation> myOperations = operationsPerErasure.get(signature.getErasureKey());
 						if (myOperations.size() == 1) {
@@ -457,25 +457,51 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 							}
 						}
 						if (!overridden) {
-							error("The class "
-									+ inferredType.getSimpleName()
-									+ " must be defined abstract because it does not implement "
-									+ getReadableSignature(operation.getSimpleName(), Lists.transform(
-											operation.getParameters(),
-											new Function<JvmFormalParameter, JvmTypeReference>() {
-												public JvmTypeReference apply(JvmFormalParameter from) {
-													JvmTypeReference parameterType = from.getParameterType();
-													JvmTypeReference result = typeArgumentContext
-															.resolve(parameterType);
-													return result;
-												}
-											})), xtendClass, XTEND_CLASS__NAME, CLASS_MUST_BE_ABSTRACT, 
-												EcoreUtil.getURI(operation).toString());
+							if(operationsMissingImplementation == null)
+								operationsMissingImplementation = newArrayList();
+							operationsMissingImplementation.add(operation);
 						}
 					}
 				}
 			}
+			if(operationsMissingImplementation != null) {
+				reportMissingImplementations(xtendClass, typeArgumentContext, operationsMissingImplementation);
+			}
 		}
+	}
+
+	protected void reportMissingImplementations(XtendClass xtendClass, final ITypeArgumentContext typeArgumentContext,
+			List<JvmOperation> operationsMissingImplementation) {
+		StringBuilder errorMsg = new StringBuilder();
+		errorMsg.append("The class ").append(xtendClass.getName())
+			.append(" must be defined abstract because it does not implement ");
+		boolean needsNewLine = operationsMissingImplementation.size() > 1;
+		JvmOperation operation;
+		for(int i=0; i<operationsMissingImplementation.size() && i<3; ++i) {
+			operation = operationsMissingImplementation.get(i);
+			if(needsNewLine)
+				errorMsg.append("\n- ");
+			errorMsg.append(getReadableSignature(operation.getSimpleName(), Lists.transform(
+						operation.getParameters(),
+						new Function<JvmFormalParameter, JvmTypeReference>() {
+							public JvmTypeReference apply(JvmFormalParameter from) {
+								JvmTypeReference parameterType = from.getParameterType();
+								JvmTypeReference result = typeArgumentContext
+										.resolve(parameterType);
+								return result;
+							}
+						})));
+		}
+		int numUnshownOperations = operationsMissingImplementation.size() - 3;
+		if(numUnshownOperations >0)
+			errorMsg.append("\nand " +  numUnshownOperations + " more.");
+		List<String> uris = transform(operationsMissingImplementation, new Function<JvmOperation, String>() {
+			public String apply(JvmOperation from) {
+				return EcoreUtil.getURI(from).toString();
+			}
+		});
+		error(errorMsg.toString(), xtendClass, XTEND_CLASS__NAME, CLASS_MUST_BE_ABSTRACT, 
+						toArray(uris, String.class));
 	}
 
 	@Check

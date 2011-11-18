@@ -23,9 +23,9 @@ public class ImportOrganizingProposal extends ConfigurableCompletionProposal {
 
 	protected String organizedImportSection;
 
-	protected ContentProposalAppendable appendable;
+	protected ReplacingAppendable appendable;
 
-	public ImportOrganizingProposal(ContentProposalAppendable appendable, int replacementOffset, int replacementLength,
+	public ImportOrganizingProposal(ReplacingAppendable appendable, int replacementOffset, int replacementLength,
 			int cursorPosition, Image image, StyledString displayString) {
 		super(appendable.toString(), replacementOffset, replacementLength, cursorPosition, image, displayString, null, null);
 		this.appendable = appendable;
@@ -34,8 +34,7 @@ public class ImportOrganizingProposal extends ConfigurableCompletionProposal {
 	@Override
 	public void apply(IDocument document) {
 		try {
-			super.apply(document);
-			appendable.insertNewImports();
+			appendable.commitChanges();
 		} catch (BadLocationException e) {
 			e.printStackTrace();
 		}
