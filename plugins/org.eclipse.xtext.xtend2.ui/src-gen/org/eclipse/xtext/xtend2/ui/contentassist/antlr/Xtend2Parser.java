@@ -107,6 +107,11 @@ public class Xtend2Parser extends AbstractContentAssistParser {
 					put(grammarAccess.getMemberAccess().getGroup_2_1_7_1(), "rule__Member__Group_2_1_7_1__0");
 					put(grammarAccess.getMemberAccess().getGroup_2_1_9(), "rule__Member__Group_2_1_9__0");
 					put(grammarAccess.getMemberAccess().getGroup_2_1_9_2(), "rule__Member__Group_2_1_9_2__0");
+					put(grammarAccess.getMemberAccess().getGroup_2_2(), "rule__Member__Group_2_2__0");
+					put(grammarAccess.getMemberAccess().getGroup_2_2_4(), "rule__Member__Group_2_2_4__0");
+					put(grammarAccess.getMemberAccess().getGroup_2_2_4_1(), "rule__Member__Group_2_2_4_1__0");
+					put(grammarAccess.getMemberAccess().getGroup_2_2_6(), "rule__Member__Group_2_2_6__0");
+					put(grammarAccess.getMemberAccess().getGroup_2_2_6_2(), "rule__Member__Group_2_2_6_2__0");
 					put(grammarAccess.getCreateExtensionInfoAccess().getGroup(), "rule__CreateExtensionInfo__Group__0");
 					put(grammarAccess.getCreateExtensionInfoAccess().getGroup_1(), "rule__CreateExtensionInfo__Group_1__0");
 					put(grammarAccess.getParameterAccess().getGroup(), "rule__Parameter__Group__0");
@@ -308,6 +313,12 @@ public class Xtend2Parser extends AbstractContentAssistParser {
 					put(grammarAccess.getMemberAccess().getExceptionsAssignment_2_1_9_2_1(), "rule__Member__ExceptionsAssignment_2_1_9_2_1");
 					put(grammarAccess.getMemberAccess().getExpressionAssignment_2_1_10_0(), "rule__Member__ExpressionAssignment_2_1_10_0");
 					put(grammarAccess.getMemberAccess().getExpressionAssignment_2_1_10_1(), "rule__Member__ExpressionAssignment_2_1_10_1");
+					put(grammarAccess.getMemberAccess().getVisibilityAssignment_2_2_1(), "rule__Member__VisibilityAssignment_2_2_1");
+					put(grammarAccess.getMemberAccess().getParametersAssignment_2_2_4_0(), "rule__Member__ParametersAssignment_2_2_4_0");
+					put(grammarAccess.getMemberAccess().getParametersAssignment_2_2_4_1_1(), "rule__Member__ParametersAssignment_2_2_4_1_1");
+					put(grammarAccess.getMemberAccess().getExceptionsAssignment_2_2_6_1(), "rule__Member__ExceptionsAssignment_2_2_6_1");
+					put(grammarAccess.getMemberAccess().getExceptionsAssignment_2_2_6_2_1(), "rule__Member__ExceptionsAssignment_2_2_6_2_1");
+					put(grammarAccess.getMemberAccess().getExpressionAssignment_2_2_7(), "rule__Member__ExpressionAssignment_2_2_7");
 					put(grammarAccess.getCreateExtensionInfoAccess().getNameAssignment_1_0(), "rule__CreateExtensionInfo__NameAssignment_1_0");
 					put(grammarAccess.getCreateExtensionInfoAccess().getCreateExpressionAssignment_2(), "rule__CreateExtensionInfo__CreateExpressionAssignment_2");
 					put(grammarAccess.getParameterAccess().getAnnotationsAssignment_0(), "rule__Parameter__AnnotationsAssignment_0");

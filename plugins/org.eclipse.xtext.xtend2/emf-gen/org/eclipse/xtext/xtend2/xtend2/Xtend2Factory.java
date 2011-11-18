@@ -152,6 +152,15 @@ public interface Xtend2Factory extends EFactory
 	CreateExtensionInfo createCreateExtensionInfo();
 
 	/**
+	 * Returns a new object of class '<em>Xtend Constructor</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Xtend Constructor</em>'.
+	 * @generated
+	 */
+	XtendConstructor createXtendConstructor();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
