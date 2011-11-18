@@ -12,6 +12,7 @@ import static java.util.Collections.*;
 
 import java.util.List;
 
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -78,7 +79,7 @@ public class FeatureCallToJavaMapping {
 			JvmIdentifiableElement feature, 
 			XExpression implicitReceiver, 
 			XExpression implicitFirstArgument) {
-		final List<? extends XExpression> explicitArguments = featureCall.getExplicitArguments();
+		final List<XExpression> explicitArguments = featureCall.getExplicitArguments();
 		if (isStaticJavaFeature(feature)) {
 			if (implicitReceiver == null || explicitArguments.contains(implicitReceiver))
 				return newArrayList(explicitArguments);
@@ -92,6 +93,10 @@ public class FeatureCallToJavaMapping {
 				return result;
 			}
 			return newArrayList(explicitArguments);
+		}
+		if (feature instanceof JvmConstructor) {
+			// this or super call in constructor - don't strip the receiver
+			return explicitArguments;
 		}
 		if (explicitArguments.size()<=1)
 			return emptyList();

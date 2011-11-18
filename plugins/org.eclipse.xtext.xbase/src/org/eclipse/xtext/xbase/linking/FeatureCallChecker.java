@@ -374,6 +374,12 @@ public class FeatureCallChecker {
 		return checkJvmOperation(input, context, context.isExplicitOperationCallOrBuilderSyntax(), jvmFeatureDescription,
 				context.getFeatureCallArguments());
 	}
+	
+	protected String _case(JvmConstructor input, XFeatureCall context, EReference reference,
+			JvmFeatureDescription jvmFeatureDescription) {
+		return checkJvmOperation(input, context, context.isExplicitOperationCallOrBuilderSyntax(), jvmFeatureDescription,
+				context.getFeatureCallArguments());
+	}
 
 	protected String _case(JvmOperation input, XUnaryOperation context, EReference reference,
 			JvmFeatureDescription jvmFeatureDescription) {
@@ -390,14 +396,14 @@ public class FeatureCallChecker {
 		return null;
 	}
 
-	protected String checkJvmOperation(JvmOperation operation, XAbstractFeatureCall featureCall,
+	protected String checkJvmOperation(JvmExecutable executable, XAbstractFeatureCall featureCall,
 			boolean isExplicitOperationCall, JvmFeatureDescription jvmFeatureDescription, EList<XExpression> arguments) {
 		List<XExpression> actualArguments = featureCall2JavaMapping.getActualArguments(
 				featureCall, 
-				operation,
+				executable,
 				jvmFeatureDescription.getImplicitReceiver(),
 				jvmFeatureDescription.getImplicitArgument());
-		if (!isValidNumberOfArguments(operation, actualArguments))
+		if (!isValidNumberOfArguments(executable, actualArguments))
 			return INVALID_NUMBER_OF_ARGUMENTS;
 		if (!isExplicitOperationCall && !isSugaredMethodInvocationWithoutParanthesis(jvmFeatureDescription))
 			return METHOD_ACCESS_WITHOUT_PARENTHESES;
@@ -405,7 +411,7 @@ public class FeatureCallChecker {
 			return METHOD_ACCESS_WITHOUT_PARENTHESES;
 		}
 		if (!featureCall.getTypeArguments().isEmpty() // raw type or type inference
-				&& operation.getTypeParameters().size() != featureCall.getTypeArguments().size())
+				&& executable.getTypeParameters().size() != featureCall.getTypeArguments().size())
 			return INVALID_NUMBER_OF_TYPE_ARGUMENTS;
 		return null;
 	}
