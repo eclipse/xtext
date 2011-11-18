@@ -30,32 +30,32 @@ import org.eclipse.xtext.common.types.JvmVoid;
  */
 public class ImportManager {
 
-	private Map<String,String> imports = newHashMap();
+	private Map<String, String> imports = newHashMap();
 
 	private boolean organizeImports;
 
 	private String thisTypeSimpleName;
 	private String thisTypeQualifiedName;
-	
+
 	public ImportManager(boolean organizeImports) {
 		this(organizeImports, null);
 	}
-	
+
 	public ImportManager(boolean organizeImports, JvmDeclaredType thisType) {
 		this.organizeImports = organizeImports;
-		if(thisType != null) {
+		if (thisType != null) {
 			thisTypeSimpleName = thisType.getSimpleName();
 			thisTypeQualifiedName = thisType.getQualifiedName('.');
 			thisCollidesWithJavaLang = CodeGenUtil.isJavaLangType(thisTypeSimpleName);
 		}
 	}
-	
+
 	public CharSequence serialize(JvmType type) {
 		StringBuilder sb = new StringBuilder();
 		appendType(type, sb);
 		return sb;
 	}
-	
+
 	private Pattern JAVA_LANG_PACK = Pattern.compile("java\\.lang\\.[\\w]+");
 
 	private boolean thisCollidesWithJavaLang;
@@ -87,18 +87,28 @@ public class ImportManager {
 			}
 		}
 	}
-	
+
 	protected boolean allowsSimpleName(String qualifiedName, String simpleName) {
-		return equal(qualifiedName, thisTypeQualifiedName) 
-				|| (!thisCollidesWithJavaLang && JAVA_LANG_PACK.matcher(qualifiedName).matches()) 
+		return equal(qualifiedName, thisTypeQualifiedName)
+				|| (!thisCollidesWithJavaLang && JAVA_LANG_PACK.matcher(qualifiedName).matches())
 				|| equal(qualifiedName, simpleName);
 	}
-	
+
 	protected boolean needsQualifiedName(String qualifiedName, String simpleName) {
-		return !organizeImports 
-				|| (equal(simpleName, thisTypeSimpleName) 
-						&& !equal(qualifiedName, thisTypeQualifiedName))
+		return !organizeImports
+				|| (equal(simpleName, thisTypeSimpleName) && !equal(qualifiedName, thisTypeQualifiedName))
 				|| CodeGenUtil.isJavaLangType(simpleName);
+	}
+
+	public boolean addImportFor(JvmType type) {
+		final String qualifiedName = type.getQualifiedName('.');
+		final String simpleName = type.getSimpleName();
+		if (!allowsSimpleName(qualifiedName, simpleName) && !needsQualifiedName(qualifiedName, simpleName)
+				&& !imports.containsKey(simpleName)) {
+			imports.put(simpleName, qualifiedName);
+			return true;
+		}
+		return false;
 	}
 
 	public List<String> getImports() {

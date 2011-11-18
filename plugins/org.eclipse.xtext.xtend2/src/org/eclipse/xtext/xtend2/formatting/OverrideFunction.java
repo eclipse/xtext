@@ -21,14 +21,11 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.xbase.compiler.ImportManager;
-import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
+import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
-import org.eclipse.xtext.xtend2.formatting.OrganizeImports.ReferenceAcceptor;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 
@@ -53,13 +50,7 @@ public class OverrideFunction {
 	@Inject
 	private IXtend2JvmAssociations associations;
 
-	@Inject
-	private IIndentationInformation indentationInformation;
-
-	public String createOverrideFunction(final XtendClass overrider, JvmOperation overriddenOperation, ReferenceAcceptor acceptor) {
-		StringBuilderBasedAppendable b = new StringBuilderBasedAppendable(new ImportManager(true),
-				indentationInformation.getIndentString());
-		b.increaseIndentation();
+	public void appendOverrideFunction(final XtendClass overrider, JvmOperation overriddenOperation, IAppendable appendable) {
 		final JvmGenericType overridingType = associations.getInferredType(overrider);
 		typeReferenceSerializer.setOverridingType(overridingType);
 		final ITypeArgumentContext typeArgumentContext = typeArgumentContextProvider
@@ -69,49 +60,46 @@ public class OverrideFunction {
 						return typeReferences.createTypeRef(overridingType);
 					}
 				});
-		b.append("\n").append("override ");
+		appendable.append("\n").append("override ");
 		if(overriddenOperation.getVisibility() == JvmVisibility.PROTECTED) {
-			b.append("protected ");
+			appendable.append("protected ");
 		}
 		boolean isFirst = true;
 		if (!isEmpty(overriddenOperation.getTypeParameters())) {
-			b.append("<");
+			appendable.append("<");
 			for (JvmTypeParameter typeParameter : overriddenOperation.getTypeParameters()) {
 				if (!isFirst)
-					b.append(", ");
+					appendable.append(", ");
 				isFirst = false;
-				b.append(typeParameter);
+				appendable.append(typeParameter);
 			}
-			b.append("> ");
+			appendable.append("> ");
 		}
-		b.append(overriddenOperation.getSimpleName()).append("(");
+		appendable.append(overriddenOperation.getSimpleName()).append("(");
 		isFirst = true;
 		for (JvmFormalParameter param : overriddenOperation.getParameters()) {
 			if (!isFirst)
-				b.append(", ");
+				appendable.append(", ");
 			isFirst = false;
 			JvmTypeReference overriddenParameterType = typeArgumentContext.getLowerBound(param.getParameterType());
-			acceptor.acceptType(overriddenParameterType);
 			typeReferenceSerializer.serialize(overriddenParameterType,
-					overriddenOperation, b);
-			b.append(" ").append(param.getName());
+					overriddenOperation, appendable);
+			appendable.append(" ").append(param.getName());
 		}
-		b.append(")");
+		appendable.append(")");
 		if (!overriddenOperation.getExceptions().isEmpty()) {
-			b.append(" throws ");
+			appendable.append(" throws ");
 			isFirst = true;
 			for (JvmTypeReference exception : overriddenOperation.getExceptions()) {
 				if (!isFirst)
-					b.append(", ");
+					appendable.append(", ");
 				isFirst = false;
-				typeReferenceSerializer.serialize(exception, overridingType, b);
-				acceptor.acceptType(exception);
+				typeReferenceSerializer.serialize(exception, overridingType, appendable);
 			}
 		}
-		b.append(" {").increaseIndentation()
+		appendable.append(" {").increaseIndentation()
 				.append("\n" + DEFAULT_BODY)
 				.decreaseIndentation().append("\n}").decreaseIndentation().append("\n\n");
-		return b.toString();
 	}
 
 	public int getFunctionInsertOffset(XtendClass clazz) {
