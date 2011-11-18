@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtend2.compiler;
 import java.util.LinkedList;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.util.Strings;
@@ -244,7 +245,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 
 	public void _toJavaStatement(RichString richString, IAppendable b, boolean isReferenced) {
 		// declare variable
-		JvmTypeReference type = getTypeProvider().getType(richString);
+		JvmTypeReference type = getTypeReferences().getTypeForName(StringConcatenation.class, richString);
 		String variableName = b.declareVariable(Tuples.pair(richString, "result"), "_builder");
 		b.append("\n");
 		serialize(type, richString, b);

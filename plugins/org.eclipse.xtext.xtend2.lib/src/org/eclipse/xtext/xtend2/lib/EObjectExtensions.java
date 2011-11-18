@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
+@Deprecated
 public class EObjectExtensions {
 
 	/**
@@ -26,6 +27,10 @@ public class EObjectExtensions {
 	 *            the object whose contents should be traversed. May not be <code>null</code>.
 	 * @return an iterable that yields all the contents of the {@code eObject}. Never <code>null</code>.
 	 */
+	/**
+	 * @deprecated use {@link org.eclipse.xtext.xbase.lib.IteratorExtensions#toIterable(Iterator)}
+	 */
+	@Deprecated
 	public static Iterable<EObject> allContentsIterable(final EObject eObject) {
 		if (eObject == null)
 			throw new NullPointerException("eObject");
