@@ -1,0 +1,38 @@
+<project>
+	<!-- ================================= 
+          target: Fix empty version Tags in pom.xml              
+         ================================= -->
+	<property name="maven.repo" value="${WORKSPACE}/composite-repository/final/"/>
+	
+	<target name="fix-poms" description="Fix empty version Tags in pom.xml">
+		<fileset dir="${maven.repo}" id="allpoms">
+			<include name="**/*.pom" />
+		</fileset>
+		<!--
+	from:
+	<dependency>
+	<groupId>org.eclipse.emf</groupId>
+	<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
+	</dependency>
+
+	to:
+	<dependency>
+	<groupId>org.eclipse.emf</groupId>
+	<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
+	<version>[0.0,)</version>
+	</dependency>
+
+	-->
+		<replaceregexp flags="gs">
+			<regexp pattern="(&lt;/artifactId&gt;)(\s*)(&lt;/dependency&gt;)" />
+			<substitution expression="\1\2  &lt;version&gt;[0.0,)&lt;/version&gt;\2\3" />
+			<fileset refid="allpoms" />
+		</replaceregexp>
+		<checksum algorithm="md5" forceoverwrite="true">
+			<fileset refid="allpoms" />
+		</checksum>
+		<checksum algorithm="sha1" forceoverwrite="true">
+			<fileset refid="allpoms" />
+		</checksum>
+	</target>
+</project>
