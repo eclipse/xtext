@@ -169,4 +169,7 @@ public class StringBuilderBasedAppendable implements IAppendable {
 		return importManager.getImports();
 	}
 
+	protected ImportManager getImportManager() {
+		return importManager;
+	}
 }
