@@ -32,11 +32,11 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISyn
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
-import com.google.inject.internal.Join;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -123,7 +123,7 @@ public class SyntacticSequencerUtil {
 			List<String> children = Lists.newArrayList();
 			for (AbstractElementAlias child : ((GroupAlias) alias).getChildren())
 				children.add(elementAliasToIdentifyer(child, rules, true));
-			String body = Join.join("_", children);
+			String body = Joiner.on("_").join(children);
 			if (isNested || card != null) {
 				card = card == null ? "" : card;
 				return "__" + body + "__" + card;
@@ -134,7 +134,7 @@ public class SyntacticSequencerUtil {
 			for (AbstractElementAlias child : ((AlternativeAlias) alias).getChildren())
 				children.add(elementAliasToIdentifyer(child, rules, true));
 			Collections.sort(children);
-			String body = Join.join("_or_", children);
+			String body = Joiner.on("_or_").join(children);
 			if (isNested || card != null) {
 				card = card == null ? "" : card;
 				return "__" + body + "__" + card;
@@ -160,7 +160,7 @@ public class SyntacticSequencerUtil {
 			List<String> children = Lists.newArrayList();
 			for (AbstractElementAlias child : ((GroupAlias) alias).getChildren())
 				children.add(elementAliasToConstructor(child, file));
-			String body = Join.join(", ", children);
+			String body = Joiner.on(", ").join(children);
 			String grpAlias = file.imported(GroupAlias.class);
 			return "new " + grpAlias + "(" + many + ", " + optional + ", " + body + ")";
 		} else if (alias instanceof AlternativeAlias) {
@@ -168,7 +168,7 @@ public class SyntacticSequencerUtil {
 			for (AbstractElementAlias child : ((AlternativeAlias) alias).getChildren())
 				children.add(elementAliasToConstructor(child, file));
 			Collections.sort(children);
-			String body = Join.join(", ", children);
+			String body = Joiner.on(", ").join(children);
 			String altAlias = file.imported(AlternativeAlias.class);
 			return "new " + altAlias + "(" + many + ", " + optional + ", " + body + ")";
 		}
@@ -180,7 +180,7 @@ public class SyntacticSequencerUtil {
 		String body = elementAliasToIdentifyer(alias, rulesSet, false);
 		List<String> rulesList = Lists.newArrayList(rulesSet);
 		Collections.sort(rulesList);
-		String rule = Join.join("_", rulesList);
+		String rule = Joiner.on("_").join(rulesList);
 		return rule + "_" + body;
 	}
 
