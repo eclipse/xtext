@@ -58,7 +58,7 @@ public class ContentProposalAppendable extends StringBuilderBasedAppendable {
 					ImportManager importManager = new ImportManager(true);
 					for (XtendImport xImport : xtendFile.getImports()) {
 						if (xImport.getImportedType() != null) {
-							importManager.addImport(xImport.getImportedType());
+							importManager.addImportFor(xImport.getImportedType());
 						}
 					}
 					ContentProposalAppendable appendable = new ContentProposalAppendable(importManager,
