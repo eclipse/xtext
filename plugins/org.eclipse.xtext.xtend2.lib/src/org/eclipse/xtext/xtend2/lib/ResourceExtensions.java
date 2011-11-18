@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.resource.Resource;
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
+@Deprecated
 public class ResourceExtensions {
 
 	/**
@@ -26,6 +27,10 @@ public class ResourceExtensions {
 	 *            the resource whose contents should be traversed. May not be <code>null</code>.
 	 * @return an iterable that yields all the contents of the resource. Never <code>null</code>.
 	 */
+	/**
+	 * @deprecated use {@link org.eclipse.xtext.xbase.lib.IteratorExtensions#toIterable(Iterator)}
+	 */
+	@Deprecated
 	public static Iterable<EObject> allContentsIterable(final Resource resource) {
 		if (resource == null)
 			throw new NullPointerException("resource");

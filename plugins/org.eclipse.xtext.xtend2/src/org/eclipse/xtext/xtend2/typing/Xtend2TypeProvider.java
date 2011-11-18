@@ -24,7 +24,6 @@ import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.annotations.typing.XbaseWithAnnotationsTypeProvider;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
-import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xtend2.resource.Xtend2Resource;
 import org.eclipse.xtext.xtend2.xtend2.CreateExtensionInfo;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
@@ -159,33 +158,33 @@ public class Xtend2TypeProvider extends XbaseWithAnnotationsTypeProvider {
 	}
 	
 	protected JvmTypeReference _type(RichString richString, JvmTypeReference rawExpectation, boolean rawType) {
-		return getTypeReferences().getTypeForName(StringConcatenation.class, richString);
+		return getTypeReferences().getTypeForName(CharSequence.class, richString);
 	}
 
 	protected JvmTypeReference _type(RichStringLiteral stringLiteral, JvmTypeReference rawExpectation, boolean rawType) {
-		return getTypeReferences().getTypeForName(String.class, stringLiteral);
+		return getTypeReferences().getTypeForName(CharSequence.class, stringLiteral);
 	}
 	
 	protected JvmTypeReference _type(RichStringIf richStringIf, JvmTypeReference rawExpectation, boolean rawType) {
-		return getTypeReferences().getTypeForName(StringConcatenation.class, richStringIf);
+		return getTypeReferences().getTypeForName(CharSequence.class, richStringIf);
 	}
 	
 	protected JvmTypeReference _type(RichStringForLoop richStringFor, JvmTypeReference rawExpectation, boolean rawType) {
-		return getTypeReferences().getTypeForName(StringConcatenation.class, richStringFor);
+		return getTypeReferences().getTypeForName(CharSequence.class, richStringFor);
 	}
 	
 	protected JvmTypeReference _expectedType(RichStringIf container, EReference reference, int index, boolean rawType) {
 		if (reference == Xtend2Package.Literals.RICH_STRING_IF__IF) {
 			return getTypeReferences().getTypeForName(Boolean.TYPE, container);
 		}
-		return getTypeReferences().getTypeForName(StringConcatenation.class, container);
+		return getTypeReferences().getTypeForName(CharSequence.class, container);
 	}
 	
 	protected JvmTypeReference _expectedType(RichStringElseIf container, EReference reference, int index, boolean rawType) {
 		if (reference == Xtend2Package.Literals.RICH_STRING_ELSE_IF__IF) {
 			return getTypeReferences().getTypeForName(Boolean.TYPE, container);
 		}
-		return getTypeReferences().getTypeForName(StringConcatenation.class, container);
+		return getTypeReferences().getTypeForName(CharSequence.class, container);
 	}
 
 	protected JvmTypeReference _expectedType(RichStringForLoop expr, EReference reference, int index, boolean rawType) {

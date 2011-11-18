@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
+@Deprecated
 public class ResourceSetExtensions {
 
 	/**
@@ -26,6 +27,10 @@ public class ResourceSetExtensions {
 	 *            the resourceSet whose contents should be traversed. May not be <code>null</code>.
 	 * @return an iterable that yields all the contents of the resourceSet. Never <code>null</code>.
 	 */
+	/**
+	 * @deprecated use {@link org.eclipse.xtext.xbase.lib.IteratorExtensions#toIterable(Iterator)}
+	 */
+	@Deprecated
 	public static Iterable<Notifier> allContentsIterable(final ResourceSet resourceSet) {
 		if (resourceSet == null)
 			throw new NullPointerException("resourceSet");

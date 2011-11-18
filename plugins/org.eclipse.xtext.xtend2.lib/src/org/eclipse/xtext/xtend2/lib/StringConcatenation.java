@@ -39,6 +39,10 @@ import java.util.List;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+/**
+ * @deprecated use org.eclipse.xtend2.lib.StringConcatenation from bundle org.eclipse.xtend2.lib
+ */
+@Deprecated
 public class StringConcatenation implements CharSequence {
 
 	/**
