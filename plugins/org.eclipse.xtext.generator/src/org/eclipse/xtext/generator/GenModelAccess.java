@@ -125,6 +125,10 @@ public class GenModelAccess {
 		Resource genModelResource = resourceSet.getResource(genModelURI, true);
 		if (genModelResource == null)
 			throw new RuntimeException("Error loading GenModel " + genModelURI);
+		for(EObject content: genModelResource.getContents()) {
+			if (content instanceof GenModel)
+				((GenModel) content).reconcile();
+		}
 		return genModelResource;
 	}
 
