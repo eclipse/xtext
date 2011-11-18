@@ -29,10 +29,7 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.common.types.util.VisibilityService;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
-import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.validation.UIStrings;
-import org.eclipse.xtext.xtend2.formatting.OrganizeImports;
-import org.eclipse.xtext.xtend2.formatting.OrganizeImports.ReferenceAcceptor;
 import org.eclipse.xtext.xtend2.formatting.OverrideFunction;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.ui.labeling.Xtend2Images;
@@ -68,13 +65,13 @@ public class FunctionOverrideAssist {
 	private Xtend2Images images;
 
 	@Inject
-	private OrganizeImports organizeImports;
-
-	@Inject
 	private OverrideFunction overrideFunction;
 
 	@Inject
 	private UIStrings uiStrings;
+	
+	@Inject
+	private ContentProposalAppendable.Factory appendableFactory;
 
 	protected Iterable<JvmOperation> getOverrideableOperations(XtendClass clazz) {
 		final JvmGenericType inferredType = associations.getInferredType(clazz);
@@ -115,21 +112,18 @@ public class FunctionOverrideAssist {
 
 	protected ICompletionProposal createOverrideMethodProposal(XtendClass model, JvmOperation overriddenOperation,
 			ContentAssistContext context) {
-		ReferenceAcceptor typeRefAcceptor = organizeImports.intitializeReferenceAcceptor(context.getResource());
-		String code = overrideFunction.createOverrideFunction(model, overriddenOperation, typeRefAcceptor);
+		ContentProposalAppendable appendable = appendableFactory.get(context.getDocument(), model, context.getOffset());
+		overrideFunction.appendOverrideFunction(model, overriddenOperation, appendable);
+		String code = appendable.toString();
 		if (!isEmpty(context.getPrefix()) && !overriddenOperation.getSimpleName().startsWith(context.getPrefix())
 				&& !code.trim().startsWith(context.getPrefix()))
 			return null;
-		ImportOrganizingProposal completionProposal = createCompletionProposal(code, context.getReplaceRegion(),
+		ImportOrganizingProposal completionProposal = createCompletionProposal(appendable, context.getReplaceRegion(),
 				getLabel(overriddenOperation),
 				images.forFunction(overriddenOperation.getVisibility()));
 		int bodyOffset = code.lastIndexOf(OverrideFunction.DEFAULT_BODY);
 		completionProposal.setSelectionStart(bodyOffset + completionProposal.getReplacementOffset());
 		completionProposal.setSelectionLength(OverrideFunction.DEFAULT_BODY.length());
-		String importSection = organizeImports.serializeImports(typeRefAcceptor);
-		completionProposal.setOrganizedImportSection(importSection);
-		TextRegion importRegion = organizeImports.computeRegion(context.getResource());
-		completionProposal.setImportRegion(importRegion);	
 		completionProposal.setPriority(getPriority(model, overriddenOperation, context));
 		return completionProposal;
 	}
@@ -139,9 +133,9 @@ public class FunctionOverrideAssist {
 		return (overriddenOperation.isAbstract()) ? 400 : 350;
 	}
 
-	protected ImportOrganizingProposal createCompletionProposal(String replacementString, Region replaceRegion,
+	protected ImportOrganizingProposal createCompletionProposal(ContentProposalAppendable appendable, Region replaceRegion,
 			StyledString displayString, Image image) {
-		return new ImportOrganizingProposal(replacementString, replaceRegion.getOffset(), replaceRegion.getLength(),
+		return new ImportOrganizingProposal(appendable, replaceRegion.getOffset(), replaceRegion.getLength(),
 				replaceRegion.getOffset(), image, displayString);
 	}
 

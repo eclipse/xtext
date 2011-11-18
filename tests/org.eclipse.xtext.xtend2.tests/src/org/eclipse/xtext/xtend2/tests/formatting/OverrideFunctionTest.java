@@ -13,7 +13,7 @@ import static org.eclipse.xtext.util.Strings.*;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.xtend2.formatting.OrganizeImports.ReferenceAcceptor;
+import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xtend2.formatting.OverrideFunction;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
@@ -79,7 +79,9 @@ public class OverrideFunctionTest extends AbstractXtend2TestCase {
 	}
 
 	protected void checkOverrideCode(String operationName, String overrideCode) {
-		String code = overrideFunction.createOverrideFunction(xtendClass, findOperation(operationName), new ReferenceAcceptor());
+		StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable();
+		overrideFunction.appendOverrideFunction(xtendClass, findOperation(operationName), appendable);
+		String code = appendable.toString();
 		if(!equalsIgnoreWhitespace(overrideCode, code)) 
 			assertEquals(overrideCode, code);
 	}	

@@ -23,26 +23,19 @@ public class ImportOrganizingProposal extends ConfigurableCompletionProposal {
 
 	protected String organizedImportSection;
 
-	public ImportOrganizingProposal(String replacementString, int replacementOffset, int replacementLength,
+	protected ContentProposalAppendable appendable;
+
+	public ImportOrganizingProposal(ContentProposalAppendable appendable, int replacementOffset, int replacementLength,
 			int cursorPosition, Image image, StyledString displayString) {
-		super(replacementString, replacementOffset, replacementLength, cursorPosition, image, displayString, null, null);
-	}
-
-	public void setImportRegion(ITextRegion importRegion) {
-		this.importRegion = importRegion;
-	}
-
-	public void setOrganizedImportSection(String organizedImportSection) {
-		this.organizedImportSection = organizedImportSection;
+		super(appendable.toString(), replacementOffset, replacementLength, cursorPosition, image, displayString, null, null);
+		this.appendable = appendable;
 	}
 
 	@Override
 	public void apply(IDocument document) {
 		try {
 			super.apply(document);
-			if (importRegion != null)
-				document.replace(importRegion.getOffset(), importRegion.getLength(),
-						organizedImportSection == null ? "" : organizedImportSection);
+			appendable.insertNewImports();
 		} catch (BadLocationException e) {
 			e.printStackTrace();
 		}
