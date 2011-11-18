@@ -51,6 +51,11 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertNoErrors(expr);
 	}
 	
+	public void testToLittleTypeInformation_05() throws Exception {
+		XExpression expr = expression("{ <(String)=>int>newArrayList().add [ length ] }");
+		helper.assertNoErrors(expr);
+	}
+	
 	public void testNoWildCardsInTypeArgs() throws Exception {
 		XExpression expr = expression("java::util::Collections::<? extends String>singleton()");
 		helper.assertError(expr, TypesPackage.Literals.JVM_WILDCARD_TYPE_REFERENCE, INVALID_USE_OF_WILDCARD);
