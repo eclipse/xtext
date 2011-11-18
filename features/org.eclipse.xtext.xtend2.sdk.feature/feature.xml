@@ -46,6 +46,20 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+         
+   <plugin
+         id="org.eclipse.xtend2.lib"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtend2.lib.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 
    <plugin
          id="org.eclipse.xtext.xtend2.source"
@@ -60,7 +74,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="org.eclipse.xtext.xbase.lib.source"
          download-size="0"
@@ -74,20 +88,21 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-   
+
    <plugin
          id="com.google.collect.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="com.google.inject.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+
    <plugin
          id="org.eclipse.xtext.xtend2.ui.examples"
          download-size="0"
