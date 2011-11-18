@@ -57,7 +57,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xtend2.formatting.OverrideFunction;
 import org.eclipse.xtext.xtend2.services.Xtend2GrammarAccess;
-import org.eclipse.xtext.xtend2.ui.contentassist.ContentProposalAppendable;
+import org.eclipse.xtext.xtend2.ui.contentassist.ReplacingAppendable;
 import org.eclipse.xtext.xtend2.ui.edit.OrganizeImportsHandler;
 import org.eclipse.xtext.xtend2.validation.IssueCodes;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
@@ -91,14 +91,14 @@ public class Xtend2QuickfixProvider extends DefaultQuickfixProvider {
 	private OrganizeImportsHandler organizeImportsHandler;
 
 	@Inject
-	private ContentProposalAppendable.Factory appendableFactory;
-	
+	private ReplacingAppendable.Factory appendableFactory;
+
 	@Inject
 	private TypeReferenceSerializer typeRefSerializer;
 
-	@Inject 
+	@Inject
 	private TypeReferences typeRefs;
-	
+
 	/**
 	 * Filter quickfixes for types and constructors.
 	 */
@@ -300,8 +300,8 @@ public class Xtend2QuickfixProvider extends DefaultQuickfixProvider {
 						String label = "Import '" + new String(simpleTypeName) + "' (" + new String(packageName) + ")";
 						acceptor.accept(issue, label, label, "fix_indent.gif", new ISemanticModification() {
 							public void apply(EObject element, IModificationContext context) throws Exception {
-								ContentProposalAppendable appendable = appendableFactory.get(
-										context.getXtextDocument(), element);
+								ReplacingAppendable appendable = appendableFactory.get(context.getXtextDocument(),
+										element, 0, 0);
 								appendable.append(typeReferences.findDeclaredType(qualifiedTypeName, element));
 								appendable.insertNewImports();
 							}
@@ -388,18 +388,17 @@ public class Xtend2QuickfixProvider extends DefaultQuickfixProvider {
 					new ISemanticModification() {
 						public void apply(EObject element, IModificationContext context) throws Exception {
 							XtendClass clazz = (XtendClass) element;
-							URI operationURI = URI.createURI(issue.getData()[0]);
-							EObject overridden = clazz.eResource().getResourceSet().getEObject(operationURI, true);
-							if (overridden instanceof JvmOperation) {
-								JvmOperation overriddenOperation = (JvmOperation) overridden;
-								IXtextDocument xtextDocument = context.getXtextDocument();
-								ContentProposalAppendable appendable = appendableFactory.get(
-										context.getXtextDocument(), clazz);
-								overrideFunction.appendOverrideFunction(clazz, overriddenOperation, appendable);
-								String code = appendable.toString();
-								xtextDocument.replace(overrideFunction.getFunctionInsertOffset(clazz), 0, code);
-								appendable.insertNewImports();
+							ReplacingAppendable appendable = appendableFactory.get(context.getXtextDocument(), clazz,
+									overrideFunction.getFunctionInsertOffset(clazz), 0);
+							for (String operationUriAsString : issue.getData()) {
+								URI operationURI = URI.createURI(operationUriAsString);
+								EObject overridden = clazz.eResource().getResourceSet().getEObject(operationURI, true);
+								if (overridden instanceof JvmOperation) {
+									overrideFunction.appendOverrideFunction(clazz, (JvmOperation) overridden,
+											appendable);
+								}
 							}
+							appendable.commitChanges();
 						}
 					});
 	}
@@ -416,28 +415,28 @@ public class Xtend2QuickfixProvider extends DefaultQuickfixProvider {
 							EObject exception = xtextResource.getResourceSet().getEObject(exceptionURI, true);
 							if (exception instanceof JvmType) {
 								JvmType exceptionType = (JvmType) exception;
-								ContentProposalAppendable appendable = appendableFactory.get(
-										context.getXtextDocument(), xtendFunction);
-								EList<JvmTypeReference> thrownExceptions = xtendFunction.getExceptions();
-								if(thrownExceptions.isEmpty())
-									appendable.append("throws ");
-								else
-									appendable.append(", ");
-								typeRefSerializer.serialize(typeRefs.createTypeRef(exceptionType), xtendFunction, appendable);
-								String replacement = appendable.toString();
 								int insertPosition;
 								if (xtendFunction.getExpression() == null) {
 									ICompositeNode functionNode = NodeModelUtils.findActualNodeFor(xtendFunction);
 									insertPosition = functionNode.getOffset() + functionNode.getLength();
-									replacement = " " + replacement;
 								} else {
 									insertPosition = NodeModelUtils.findActualNodeFor(xtendFunction.getExpression())
 											.getOffset();
-									replacement += " ";
 								}
-								IXtextDocument xtextDocument = context.getXtextDocument();
-								xtextDocument.replace(insertPosition, 0, replacement);
-								appendable.insertNewImports();
+								ReplacingAppendable appendable = appendableFactory.get(context.getXtextDocument(),
+										xtendFunction, insertPosition, 0);
+								if (xtendFunction.getExpression() == null) 
+									appendable.append(" ");
+								EList<JvmTypeReference> thrownExceptions = xtendFunction.getExceptions();
+								if (thrownExceptions.isEmpty())
+									appendable.append("throws ");
+								else
+									appendable.append(", ");
+								typeRefSerializer.serialize(typeRefs.createTypeRef(exceptionType), xtendFunction,
+										appendable);
+								if (xtendFunction.getExpression() != null) 
+									appendable.append(" ");
+								appendable.commitChanges();
 							}
 						}
 					});
@@ -460,27 +459,26 @@ public class Xtend2QuickfixProvider extends DefaultQuickfixProvider {
 								XExpression toBeSurrounded = findContainerExpressionInBlockExpression(childThrowingException);
 								IXtextDocument xtextDocument = context.getXtextDocument();
 								if (toBeSurrounded != null) {
-									ICompositeNode toBeSurroundedNode = NodeModelUtils.getNode(toBeSurrounded);
-									ContentProposalAppendable appendable = appendableFactory.get(
-											context.getXtextDocument(), childThrowingException, issue.getOffset());
-									appendable.append("try {")
-										.increaseIndentation()
-										.append("\n")
-										.append(xtextDocument.get(toBeSurroundedNode.getOffset(), toBeSurroundedNode.getLength()))
-										.decreaseIndentation()
-										.append("\n} catch (");
-									typeRefSerializer.serialize(typeRefs.createTypeRef(exceptionType), childThrowingException, appendable);
+									ICompositeNode toBeSurroundedNode = NodeModelUtils
+											.findActualNodeFor(toBeSurrounded);
+									ReplacingAppendable appendable = appendableFactory.get(context.getXtextDocument(),
+											childThrowingException, toBeSurroundedNode.getOffset(),
+											toBeSurroundedNode.getLength());
+									appendable
+											.append("try {")
+											.increaseIndentation()
+											.append("\n")
+											.append(xtextDocument.get(toBeSurroundedNode.getOffset(),
+													toBeSurroundedNode.getLength())).decreaseIndentation()
+											.append("\n} catch (");
+									typeRefSerializer.serialize(typeRefs.createTypeRef(exceptionType),
+											childThrowingException, appendable);
 									appendable.append(" ");
-									String exceptionVar = appendable.declareVariable(exceptionType,  "exc");
-									appendable.append(exceptionVar)
-										.append(") {")
-										.increaseIndentation()
-										.append("\nthrow new RuntimeException(\"auto-generated try/catch\")")
-										.decreaseIndentation()
-										.append("\n}")
-										.closeScope();
-									xtextDocument.replace(toBeSurroundedNode.getOffset(), toBeSurroundedNode.getLength(), appendable.toString());
-									appendable.insertNewImports();
+									String exceptionVar = appendable.declareVariable(exceptionType, "exc");
+									appendable.append(exceptionVar).append(") {").increaseIndentation()
+											.append("\nthrow new RuntimeException(\"auto-generated try/catch\")")
+											.decreaseIndentation().append("\n}").closeScope();
+									appendable.commitChanges();
 								}
 							}
 						}
