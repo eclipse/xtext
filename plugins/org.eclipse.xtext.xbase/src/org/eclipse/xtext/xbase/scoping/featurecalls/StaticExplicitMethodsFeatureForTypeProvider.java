@@ -16,19 +16,14 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.Primitives;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import com.google.inject.Inject;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class StaticExplicitMethodsFeatureForTypeProvider extends AbstractStaticMethodsFeatureForTypeProvider {
-
-	@Inject
-	private Primitives primitives;
 
 	private JvmTypeReference currentType;
 
@@ -49,15 +44,9 @@ public class StaticExplicitMethodsFeatureForTypeProvider extends AbstractStaticM
 			if (type instanceof JvmGenericType) {
 				JvmGenericType genericType = (JvmGenericType) type;
 				for (JvmFeature feature : genericType.getAllFeatures()) {
-					if (feature instanceof JvmOperation && ((JvmOperation) feature).isStatic()) {
-						JvmOperation operation = (JvmOperation) feature;
+					if (feature instanceof JvmOperation && ((JvmOperation) feature).isStatic())
 						result.put(null, currentType);
-						if (!operation.getParameters().isEmpty()) {
-							JvmTypeReference paramType = operation.getParameters().get(0).getParameterType();
-							JvmTypeReference wrapped = primitives.asWrapperTypeIfPrimitive(paramType);
-							result.put(wrapped, currentType);
-						}
-					} else if (feature instanceof JvmField && ((JvmField) feature).isStatic())
+					else if (feature instanceof JvmField && ((JvmField) feature).isStatic())
 						result.put(null, currentType);
 				}
 			}

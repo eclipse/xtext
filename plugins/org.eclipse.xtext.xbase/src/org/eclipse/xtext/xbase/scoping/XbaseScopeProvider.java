@@ -898,12 +898,6 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			implicitStaticFeatures.setResourceContext(resource);
 			implicitStaticFeatures.setExtensionProvider(true);
 			addFeatureDescriptionProviders(contextType, implicitStaticFeatures, implicitReceiver, implicitArgument, priority + getImplicitStaticExtensionPriorityOffset(), true, acceptor);
-			
-			StaticExplicitMethodsFeatureForTypeProvider explicitMethodsProvider = newExplicitStaticFeaturesProvider();
-			explicitMethodsProvider.setResourceContext(resource);
-			explicitMethodsProvider.setExtensionProvider(true);
-			explicitMethodsProvider.setTypeContext(typeProvider.getTypeForIdentifiable(contextType));
-			addFeatureDescriptionProviders(contextType, explicitMethodsProvider, null, null, getImplicitStaticFeaturePriority(), true, acceptor);
 		}
 	}
 
