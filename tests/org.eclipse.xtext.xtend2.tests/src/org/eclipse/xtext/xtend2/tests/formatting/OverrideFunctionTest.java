@@ -78,6 +78,18 @@ public class OverrideFunctionTest extends AbstractXtend2TestCase {
 		checkOverrideCode("protectedMethod", "override protected protectedMethod() { " + throwsExpression + "}");
 	}
 
+	public void testPlain_1() {
+		checkOverrideCode("concretePlain", "override concretePlain() { super.concretePlain() }");
+	}
+
+	public void testClassTypeParam_1() {
+		checkOverrideCode("concreteClassTypeParameter", "override concreteClassTypeParameter(U p0) { super.concreteClassTypeParameter(p0) }");
+	}
+
+	public void testMethodTypeParam_1() {
+		checkOverrideCode("concreteMethodTypeParameter", "override <V> concreteMethodTypeParameter(V p0) { super.<V>concreteMethodTypeParameter(p0)}");
+	}
+
 	protected void checkOverrideCode(String operationName, String overrideCode) {
 		StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable();
 		overrideFunction.appendOverrideFunction(xtendClass, findOperation(operationName), appendable);

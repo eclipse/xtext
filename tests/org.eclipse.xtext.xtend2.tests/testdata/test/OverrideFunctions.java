@@ -26,4 +26,15 @@ public abstract class OverrideFunctions<T, W> {
 	public abstract void exception() throws Exception;
 	
 	protected abstract void protectedMethod();
+	
+	public void concretePlain() {}
+	
+	public T concreteClassTypeParameter(T param) {
+		return null;
+	}
+	
+	public <V> V concreteMethodTypeParameter(V param) {
+		return null;
+	}
+	
 }
