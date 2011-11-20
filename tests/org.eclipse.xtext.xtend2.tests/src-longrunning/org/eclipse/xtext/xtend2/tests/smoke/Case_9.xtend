@@ -3,13 +3,12 @@
  */
 package org.eclipse.xtext.xtend2.tests.smoke
 
-import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.ENamedElement
-import org.eclipse.xtext.xtend2.lib.StringConcatenation
+import org.eclipse.emf.ecore.EObject
 
 class Case_9 {
 	
-	def dispatch StringConcatenation generateTypeRef(ENamedElement c) {
+	def dispatch CharSequence generateTypeRef(ENamedElement c) {
 		  if (c.eContainer != null)
 		    c.eContainer.generateTypeRef
 		  else if (c.eIsProxy)
@@ -18,7 +17,7 @@ class Case_9 {
 		    ''''''
 		}
 
-	def dispatch StringConcatenation generateTypeRef(EObject o) {
+	def dispatch CharSequence generateTypeRef(EObject o) {
 	  	o.eContainer.generateTypeRef
 	}  
 		

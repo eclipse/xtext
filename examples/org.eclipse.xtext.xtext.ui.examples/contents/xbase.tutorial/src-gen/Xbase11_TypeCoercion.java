@@ -18,7 +18,7 @@ public class Xbase11_TypeCoercion {
     	char[] _charArray_1 = "string".toCharArray();
     	((List<Character>)Conversions.doWrapArray(_charArray_1)).get(3);
     	final Function2<String,String,Integer> _function = new Function2<String,String,Integer>() {
-    			public Integer apply(final String a , final String b) {
+    			public Integer apply(final String a, final String b) {
     				int _length_2 = a.length();
     				int _length_3 = b.length();
     				int _compareTo = ((Integer)_length_2).compareTo(((Integer)_length_3));

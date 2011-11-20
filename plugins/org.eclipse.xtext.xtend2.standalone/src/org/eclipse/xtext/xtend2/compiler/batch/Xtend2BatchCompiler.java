@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.compiler.batch.BatchCompiler;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
@@ -44,7 +45,6 @@ import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
-import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
@@ -258,7 +258,7 @@ public class Xtend2BatchCompiler {
 				.getExportedObjectsByType(Xtend2Package.eINSTANCE.getXtendClass())) {
 			XtendClass xtendClass = (XtendClass) eObjectDescription.getEObjectOrProxy();
 			JvmGenericType jvmGenericType = xtend2JvmAssociations.getInferredType(xtendClass);
-			StringConcatenation generatedType = generator.generateType(jvmGenericType);
+			CharSequence generatedType = generator.generateType(jvmGenericType);
 			if (log.isInfoEnabled()) {
 				log.info("Generate '" + getJavaFileName(xtendClass) + "'");
 			}

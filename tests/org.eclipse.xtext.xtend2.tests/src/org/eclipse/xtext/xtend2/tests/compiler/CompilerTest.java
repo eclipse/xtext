@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.junit.util.ParseHelper;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
@@ -38,7 +39,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.compiler.Xtend2Compiler;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
-import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
@@ -2433,7 +2433,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 			XtendFile file = parseHelper.parse(xtendCode);
 			validationHelper.assertNoErrors(file);
 			JvmGenericType inferredType = associations.getInferredType(file.getXtendClass());
-			StringConcatenation javaCode = generator.generateType(inferredType);
+			CharSequence javaCode = generator.generateType(inferredType);
 			return javaCode.toString();
 		} catch (Exception exc) {
 			throw new RuntimeException("Xtend compilation failed:\n" + xtendCode, exc);

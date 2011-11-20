@@ -43,8 +43,8 @@ public class TestBatchCompiler {
         File _file_3 = new File(out);
         Files.cleanFolder(_file_3, null, true, true);
       }
-    } catch (Exception _e)  {
+    } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
-      }
+    }
   }
 }

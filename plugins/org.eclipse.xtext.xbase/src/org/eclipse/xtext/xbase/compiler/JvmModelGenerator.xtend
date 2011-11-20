@@ -29,6 +29,7 @@ import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.typing.ITypeProvider
+import org.eclipse.xtend2.lib.StringConcatenation
 
 class JvmModelGenerator implements IGenerator {
 	
@@ -209,7 +210,7 @@ class JvmModelGenerator implements IGenerator {
 	def generateJavaDoc(EObject it) {
 		val adapter = it.eAdapters.filter(typeof(DocumentationAdapter)).head
 		if(!adapter?.documentation.nullOrEmpty) {
-			val doc = '''/**''';
+			val doc = '''/**''' as StringConcatenation;
 			doc.newLine
 			doc.append(" * ")
 			doc.append(adapter.documentation, " * ")

@@ -11,7 +11,6 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xtend2.Xtend2StandaloneSetup;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
-import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 
 import com.google.inject.Injector;
@@ -53,7 +52,7 @@ public class TestCaseCompiler {
 		JvmModelGenerator generator = injector.getInstance(JvmModelGenerator.class);
 		XtendFile xtendFile = (XtendFile)res.getContents().get(0);
 		JvmGenericType inferredType = associations.getInferredType(xtendFile.getXtendClass());
-		StringConcatenation javaCode = generator.generateType(inferredType);
+		CharSequence javaCode = generator.generateType(inferredType);
 		writer.append(javaCode);
 		writer.close();
 		System.out.println("compiled " + from + " to " + to);
