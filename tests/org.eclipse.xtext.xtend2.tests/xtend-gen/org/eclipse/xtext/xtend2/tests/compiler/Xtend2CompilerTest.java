@@ -2,11 +2,11 @@ package org.eclipse.xtext.xtend2.tests.compiler;
 
 import com.google.inject.Inject;
 import junit.framework.Assert;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
-import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
@@ -1013,14 +1013,14 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
         XtendClass _xtendClass = file.getXtendClass();
         JvmGenericType _inferredType = this._iXtend2JvmAssociations.getInferredType(_xtendClass);
         final JvmGenericType inferredType = _inferredType;
-        StringConcatenation _generateType = this.generator.generateType(inferredType);
-        final StringConcatenation javaCode = _generateType;
+        CharSequence _generateType = this.generator.generateType(inferredType);
+        final CharSequence javaCode = _generateType;
         String _string_1 = expected.toString();
         String _string_2 = javaCode.toString();
         Assert.assertEquals(_string_1, _string_2);
       }
-    } catch (Exception _e)  {
+    } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
-      }
+    }
   }
 }
