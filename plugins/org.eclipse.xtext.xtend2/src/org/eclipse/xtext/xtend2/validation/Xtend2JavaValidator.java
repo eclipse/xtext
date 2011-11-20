@@ -277,8 +277,8 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 			error("Xtend requires Java source level 1.5.", clazz, XTEND_CLASS__NAME,
 					IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
 		}
-		if (getTypeRefs().findDeclaredType("org.eclipse.xtext.xtend2.lib.StringConcatenation", clazz) == null) {
-			error("Mandatory library bundle 'org.eclipse.xtext.xtend2.lib' not found on the classpath.", clazz,
+		if (getTypeRefs().findDeclaredType("org.eclipse.xtend2.lib.StringConcatenation", clazz) == null) {
+			error("Mandatory library bundle 'org.eclipse.xtend2.lib' not found on the classpath.", clazz,
 					XTEND_CLASS__NAME, IssueCodes.XTEND_LIB_NOT_ON_CLASSPATH);
 		}
 		if (getTypeRefs().findDeclaredType("org.eclipse.xtext.xbase.lib.ObjectExtensions", clazz) == null) {
