@@ -100,7 +100,7 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 			"org.eclipse.pde.SchemaBuilder",
 			XtextProjectHelper.BUILDER_ID);
 		projectFactory.addProjectNatures(JavaCore.NATURE_ID, "org.eclipse.pde.PluginNature", XtextProjectHelper.NATURE_ID);
-		projectFactory.addRequiredBundles(newArrayList("org.eclipse.xtext.xbase.lib", "org.eclipse.xtext.xtend2.lib"));
+		projectFactory.addRequiredBundles(newArrayList("org.eclipse.xtext.xbase.lib", "org.eclipse.xtend2.lib"));
 		IProject result = projectFactory.createProject(new NullProgressMonitor(), null);
 		return result;
 	}

@@ -38,7 +38,7 @@ import org.osgi.framework.Version;
  */
 public class XtendContainerInitializer extends ClasspathContainerInitializer {
 
-	private static final String XTEXT_XTEND2_LIB_BUNDLE_ID = "org.eclipse.xtext.xtend2.lib";
+	private static final String XTEXT_XTEND2_LIB_BUNDLE_ID = "org.eclipse.xtend2.lib";
 
 	private static final String XTEXT_XBASE_LIB_BUNDLE_ID = "org.eclipse.xtext.xbase.lib";
 

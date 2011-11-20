@@ -13,6 +13,7 @@ import java.lang.reflect.Method;
 
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.junit.util.ParseHelper;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
@@ -23,7 +24,6 @@ import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
-import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
@@ -125,7 +125,7 @@ public class AnnotationsCompilerTest extends AbstractXtend2TestCase {
 		XtendFile file = parseHelper.parse(text);
 		validationHelper.assertNoErrors(file);
 		JvmGenericType inferredType = associations.getInferredType(file.getXtendClass());
-		StringConcatenation javaCode = generator.generateType(inferredType);
+		CharSequence javaCode = generator.generateType(inferredType);
 		Class<?> class1 = javaCompiler.compileToClass("Foo", javaCode.toString());
 		return class1;
 	}

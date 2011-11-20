@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.tests.richstring;
 
-import org.eclipse.xtext.xtend2.lib.StringConcatenation;
+import org.eclipse.xtend2.lib.StringConcatenation;
 
 import junit.framework.TestCase;
 

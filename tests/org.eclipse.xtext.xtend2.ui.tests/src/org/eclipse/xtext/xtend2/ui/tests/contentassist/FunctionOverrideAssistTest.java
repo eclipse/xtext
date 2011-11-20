@@ -7,12 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.tests.contentassist;
 
+import junit.framework.Test;
+
 import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.xtend2.formatting.OverrideFunction;
 
 import com.google.inject.Inject;
-
-import junit.framework.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -30,7 +30,9 @@ public class FunctionOverrideAssistTest extends AbstractXtendContentAssistBugTes
 	public void testAbstractAndNonAbstractMethod() throws Exception {
 		newBuilder().append("class Foo implements Comparable<String> { c").assertText(
 				getOverridingFunctionCode("compareTo(String o)"),
-				getOverridingFunctionCode("protected clone() throws CloneNotSupportedException"));
+				"\n"+indent.getIndentString() + "override protected clone() throws CloneNotSupportedException {\n" + 
+				indent.getIndentString() + indent.getIndentString() + "super.clone()\n" +
+				indent.getIndentString() + "}\n");
 	}
 
 	public void testStaticMethod() throws Exception {
@@ -38,12 +40,16 @@ public class FunctionOverrideAssistTest extends AbstractXtendContentAssistBugTes
 	}
 
 	public void testNonStaticMethod() throws Exception {
-		newBuilder().append("class Foo extends Thread { getI").assertText(getOverridingFunctionCode("getId()"));
+		newBuilder().append("class Foo extends Thread { getI").assertText(
+				"\n" + 
+				indent.getIndentString() + "override getId() {\n" + 
+				indent.getIndentString() + indent.getIndentString() + "super.getId()\n" + 
+				indent.getIndentString() + "}\n");
 	}
 
 	protected String getOverridingFunctionCode(String signature) {
 		return "\n" + indent.getIndentString() + "override " + signature + " {\n" + indent.getIndentString()
-				+ indent.getIndentString() + OverrideFunction.DEFAULT_BODY + "\n" + indent.getIndentString() + "}\n\n";
+				+ indent.getIndentString() + OverrideFunction.DEFAULT_BODY + "\n" + indent.getIndentString() + "}\n";
 	}
 
 	public static Test suite() {
