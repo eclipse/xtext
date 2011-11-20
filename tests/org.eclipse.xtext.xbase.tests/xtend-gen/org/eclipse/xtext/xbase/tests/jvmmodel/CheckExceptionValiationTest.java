@@ -20,8 +20,8 @@ public class CheckExceptionValiationTest extends AbstractJvmModelTest {
         final XExpression expression = _expression;
         this.helper.assertError(expression, Literals.XTHROW_EXPRESSION, IssueCodes.UNHANDLED_EXCEPTION);
       }
-    } catch (Exception _e)  {
+    } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
-      }
+    }
   }
 }

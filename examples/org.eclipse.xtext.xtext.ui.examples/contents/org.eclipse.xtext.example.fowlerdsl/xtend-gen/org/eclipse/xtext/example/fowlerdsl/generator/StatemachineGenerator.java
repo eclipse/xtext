@@ -5,6 +5,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.example.fowlerdsl.statemachine.Command;
 import org.eclipse.xtext.example.fowlerdsl.statemachine.Event;
 import org.eclipse.xtext.example.fowlerdsl.statemachine.State;
@@ -16,7 +17,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 public class StatemachineGenerator implements IGenerator {
@@ -25,7 +25,7 @@ public class StatemachineGenerator implements IGenerator {
     String _operator_plus = StringExtensions.operator_plus(_className, ".java");
     EList<EObject> _contents = resource.getContents();
     EObject _head = IterableExtensions.<EObject>head(_contents);
-    StringConcatenation _javaCode = this.toJavaCode(((Statemachine) _head));
+    CharSequence _javaCode = this.toJavaCode(((Statemachine) _head));
     fsa.generateFile(_operator_plus, _javaCode);
   }
   
@@ -38,7 +38,7 @@ public class StatemachineGenerator implements IGenerator {
       return _substring;
   }
   
-  public StringConcatenation toJavaCode(final Statemachine sm) {
+  public CharSequence toJavaCode(final Statemachine sm) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.io.BufferedReader;");
     _builder.newLine();
@@ -74,7 +74,7 @@ public class StatemachineGenerator implements IGenerator {
       EList<Command> _commands = sm.getCommands();
       for(final Command c : _commands) {
         _builder.append("\t");
-        StringConcatenation _declareCommand = this.declareCommand(c);
+        CharSequence _declareCommand = this.declareCommand(c);
         _builder.append(_declareCommand, "	");
         _builder.newLineIfNotEmpty();
       }
@@ -105,7 +105,7 @@ public class StatemachineGenerator implements IGenerator {
       EList<State> _states_1 = sm.getStates();
       for(final State state : _states_1) {
         _builder.append("\t\t\t");
-        StringConcatenation _generateCode = this.generateCode(state);
+        CharSequence _generateCode = this.generateCode(state);
         _builder.append(_generateCode, "			");
         _builder.newLineIfNotEmpty();
       }
@@ -186,7 +186,7 @@ public class StatemachineGenerator implements IGenerator {
     return _builder;
   }
   
-  public StringConcatenation declareCommand(final Command command) {
+  public CharSequence declareCommand(final Command command) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("protected void do");
     String _name = command.getName();
@@ -208,7 +208,7 @@ public class StatemachineGenerator implements IGenerator {
     return _builder;
   }
   
-  public StringConcatenation generateCode(final State state) {
+  public CharSequence generateCode(final State state) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("if (currentState.equals(\"");
     String _name = state.getName();

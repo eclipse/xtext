@@ -1,10 +1,10 @@
 package org.eclipse.xtext.generator.serializer;
 
 import com.google.inject.Inject;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.generator.serializer.AbstractSemanticSequencer;
 import org.eclipse.xtext.generator.serializer.GeneratedFile;
-import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 public class SemanticSequencer extends GeneratedFile {

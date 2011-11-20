@@ -3,10 +3,10 @@ package xtend.tutorial.basics;
 import java.util.ArrayList;
 import java.util.Arrays;
 import junit.framework.TestCase;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import xtend.tutorial.util.Circle;
 import xtend.tutorial.util.Rectangle;
 import xtend.tutorial.util.Shape;
@@ -21,8 +21,8 @@ public class Xtend09_DispatchMethods extends TestCase {
    * Have a look at the generated Java code to understand how it is
    * mapped to Java.
    */
-  protected StringConcatenation _toLabel(final Rectangle rectangle) {
-    StringConcatenation _xifexpression = null;
+  protected CharSequence _toLabel(final Rectangle rectangle) {
+    CharSequence _xifexpression = null;
     boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)rectangle.height), ((Integer)rectangle.width));
     if (_operator_equals) {
       StringConcatenation _builder = new StringConcatenation();
@@ -42,7 +42,7 @@ public class Xtend09_DispatchMethods extends TestCase {
     return _xifexpression;
   }
   
-  protected StringConcatenation _toLabel(final Circle circle) {
+  protected CharSequence _toLabel(final Circle circle) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("It\'s a circle (diameter : ");
     _builder.append(circle.diameter, "");
@@ -57,12 +57,12 @@ public class Xtend09_DispatchMethods extends TestCase {
       ArrayList<Shape> _newArrayList = CollectionLiterals.<Shape>newArrayList(_rectangle, _circle, _rectangle_1);
       final ArrayList<Shape> list = _newArrayList;
       for (final Shape shape : list) {
-        StringConcatenation _label = this.toLabel(shape);
-        InputOutput.<StringConcatenation>println(_label);
+        CharSequence _label = this.toLabel(shape);
+        InputOutput.<CharSequence>println(_label);
       }
   }
   
-  public StringConcatenation toLabel(final Shape circle) {
+  public CharSequence toLabel(final Shape circle) {
     if (circle instanceof Circle) {
       return _toLabel((Circle)circle);
     } else if (circle instanceof Rectangle) {

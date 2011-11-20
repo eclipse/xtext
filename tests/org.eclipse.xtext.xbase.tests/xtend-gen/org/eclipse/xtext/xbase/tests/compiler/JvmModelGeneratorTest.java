@@ -64,9 +64,9 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
         this.javaCompiler.addClassPathOfClass(com.google.inject.Provider.class);
         this.javaCompiler.addClassPathOfClass(com.google.common.base.Supplier.class);
       }
-    } catch (Exception _e)  {
+    } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
-      }
+    }
   }
   
   public void testSimple() {
@@ -104,9 +104,9 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
         Object _invoke = _method.invoke(instance, "foo");
         Assert.assertEquals("FOO", _invoke);
       }
-    } catch (Exception _e)  {
+    } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
-      }
+    }
   }
   
   public void testImplements() {
@@ -132,9 +132,9 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
         boolean _isAssignableFrom = java.lang.Iterable.class.isAssignableFrom(compiled);
         Assert.assertTrue(_isAssignableFrom);
       }
-    } catch (Exception _e)  {
+    } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
-      }
+    }
   }
   
   public void testExtends() {
@@ -162,9 +162,9 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
         boolean _isAssignableFrom_1 = java.util.AbstractList.class.isAssignableFrom(compiled);
         Assert.assertTrue(_isAssignableFrom_1);
       }
-    } catch (Exception _e)  {
+    } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
-      }
+    }
   }
   
   public void testCompilationStrategy() {
@@ -205,9 +205,9 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
         Object _invoke = getter.invoke(inst);
         Assert.assertEquals("FOO", _invoke);
       }
-    } catch (Exception _e)  {
+    } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
-      }
+    }
   }
   
   public JvmTypeReference typeRef(final EObject ctx, final Class<?> clazz) {

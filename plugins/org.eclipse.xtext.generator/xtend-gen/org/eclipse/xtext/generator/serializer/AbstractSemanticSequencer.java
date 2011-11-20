@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -40,7 +41,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 public class AbstractSemanticSequencer extends GeneratedFile {
@@ -66,7 +66,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
   
   public <T extends ENamedElement> List<T> sort(final Iterable<T> iterable) {
     final Function2<T,T,Integer> _function = new Function2<T,T,Integer>() {
-        public Integer apply(final T p1 , final T p2) {
+        public Integer apply(final T p1, final T p2) {
           String _name = p1.getName();
           String _name_1 = p2.getName();
           int _compareTo = _name.compareTo(_name_1);
@@ -240,7 +240,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     IConstraintElement _body = constraint.getBody();
     HashSet<Grammar> _grammars = this.getGrammars(_body);
     final Function2<Grammar,Grammar,Grammar> _function = new Function2<Grammar,Grammar,Grammar>() {
-        public Grammar apply(final Grammar x , final Grammar y) {
+        public Grammar apply(final Grammar x, final Grammar y) {
           Grammar _xifexpression = null;
           boolean _uses = AbstractSemanticSequencer.this.uses(x, y);
           if (_uses) {
@@ -414,7 +414,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
-      StringConcatenation _genMethodCreateSequence = this.genMethodCreateSequence(file);
+      CharSequence _genMethodCreateSequence = this.genMethodCreateSequence(file);
       _builder.append(_genMethodCreateSequence, "	");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
@@ -429,9 +429,9 @@ public class AbstractSemanticSequencer extends GeneratedFile {
           }
         };
       Iterable<IConstraint> _filter = IterableExtensions.<IConstraint>filter(_accessedConstraints, _function);
-      final Function1<IConstraint,StringConcatenation> _function_1 = new Function1<IConstraint,StringConcatenation>() {
-          public StringConcatenation apply(final IConstraint e) {
-            StringConcatenation _genMethodSequence = AbstractSemanticSequencer.this.genMethodSequence(file, e);
+      final Function1<IConstraint,CharSequence> _function_1 = new Function1<IConstraint,CharSequence>() {
+          public CharSequence apply(final IConstraint e) {
+            CharSequence _genMethodSequence = AbstractSemanticSequencer.this.genMethodSequence(file, e);
             return _genMethodSequence;
           }
         };
@@ -448,7 +448,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     return _xblockexpression;
   }
   
-  public StringConcatenation genMethodCreateSequence(final JavaEMFFile file) {
+  public CharSequence genMethodCreateSequence(final JavaEMFFile file) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("public void createSequence(EObject context, EObject semanticObject) {");
     _builder.newLine();
@@ -581,7 +581,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     return _builder;
   }
   
-  public StringConcatenation genMethodSequence(final JavaEMFFile file, final IConstraint c) {
+  public CharSequence genMethodSequence(final JavaEMFFile file, final IConstraint c) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();

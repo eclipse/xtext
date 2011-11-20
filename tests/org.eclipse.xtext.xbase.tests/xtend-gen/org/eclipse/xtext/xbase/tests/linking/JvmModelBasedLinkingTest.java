@@ -65,9 +65,9 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
         CollectionExtensions.<JvmGenericType>operator_add(_contents, _class);
         this._validationTestHelper.assertNoErrors(expr);
       }
-    } catch (Exception _e)  {
+    } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
-      }
+    }
   }
   
   public void testLinkToParameter_1() {
@@ -110,9 +110,9 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
         JvmIdentifiableElement _feature = expr.getFeature();
         Assert.assertTrue((_feature instanceof JvmFormalParameter));
       }
-    } catch (Exception _e)  {
+    } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
-      }
+    }
   }
   
   public void testLinkToField() {
@@ -155,9 +155,9 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
         JvmIdentifiableElement _feature = expr.getFeature();
         Assert.assertTrue((_feature instanceof JvmField));
       }
-    } catch (Exception _e)  {
+    } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
-      }
+    }
   }
   
   public void testLinkToField_1() {
@@ -194,9 +194,9 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
         JvmIdentifiableElement _feature = expr.getFeature();
         Assert.assertTrue((_feature instanceof JvmField));
       }
-    } catch (Exception _e)  {
+    } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
-      }
+    }
   }
   
   public JvmTypeReference stringType(final EObject ctx) {

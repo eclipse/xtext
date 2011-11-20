@@ -47,9 +47,9 @@ public class JvmModelTest extends AbstractJvmModelTest {
         final Resource resource = _eResource_1;
         this.helper.assertNoErrors(expression);
       }
-    } catch (Exception _e)  {
+    } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
-      }
+    }
   }
   
   public void testResourceDescriptionsAreCorrect() {
@@ -72,9 +72,9 @@ public class JvmModelTest extends AbstractJvmModelTest {
         Object _get_1 = field.get(resource);
         Assert.assertFalse(((Boolean) _get_1));
       }
-    } catch (Exception _e)  {
+    } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
-      }
+    }
   }
   
   public void testReturnTypeConformance() {
@@ -84,8 +84,8 @@ public class JvmModelTest extends AbstractJvmModelTest {
         final XExpression expression = _expression;
         this.helper.assertError(expression, Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN);
       }
-    } catch (Exception _e)  {
+    } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
-      }
+    }
   }
 }

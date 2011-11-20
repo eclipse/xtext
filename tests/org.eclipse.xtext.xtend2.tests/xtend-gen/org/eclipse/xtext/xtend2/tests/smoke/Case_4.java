@@ -1,16 +1,16 @@
 package org.eclipse.xtext.xtend2.tests.smoke;
 
-import org.eclipse.xtext.xtend2.lib.StringConcatenation;
+import org.eclipse.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 public class Case_4 {
-  public StringConcatenation richStrings_01() {
+  public CharSequence richStrings_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("foobar");
     return _builder;
   }
   
-  public StringConcatenation richStrings_02() {
+  public CharSequence richStrings_02() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("start", "");
     _builder.newLineIfNotEmpty();
@@ -23,7 +23,7 @@ public class Case_4 {
     return _builder;
   }
   
-  public StringConcatenation richStrings_03() {
+  public CharSequence richStrings_03() {
     StringConcatenation _builder = new StringConcatenation();
     {
       if (false) {
@@ -39,7 +39,7 @@ public class Case_4 {
     return _builder;
   }
   
-  public StringConcatenation richStrings_04() {
+  public CharSequence richStrings_04() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("  ");
     {
@@ -56,7 +56,7 @@ public class Case_4 {
     return _builder;
   }
   
-  public StringConcatenation richStrings_05() {
+  public CharSequence richStrings_05() {
     StringConcatenation _builder = new StringConcatenation();
     {
       char[] _charArray = "1".toCharArray();

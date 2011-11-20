@@ -3,6 +3,7 @@ package org.eclipse.xtext.example.domainmodel.tests;
 import com.google.inject.Inject;
 import junit.framework.Assert;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.example.domainmodel.domainmodel.AbstractElement;
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainModel;
@@ -16,7 +17,6 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -69,9 +69,9 @@ public class ParserTest {
         String _identifier = _type.getIdentifier();
         Assert.assertEquals("java.lang.String", _identifier);
       }
-    } catch (Exception _e)  {
+    } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
-      }
+    }
   }
   
   @Test
@@ -105,8 +105,8 @@ public class ParserTest {
       _builder.newLine();
       DomainModel _parse = this._parseHelper.parse(_builder);
       this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e)  {
+    } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
-      }
+    }
   }
 }

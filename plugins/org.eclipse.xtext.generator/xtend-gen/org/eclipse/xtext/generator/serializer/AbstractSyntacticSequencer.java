@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Alternatives;
@@ -30,7 +31,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 public class AbstractSyntacticSequencer extends GeneratedFile {
@@ -132,7 +132,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
-      StringConcatenation _genGetUnassignedRuleCallTokens = this.genGetUnassignedRuleCallTokens(file);
+      CharSequence _genGetUnassignedRuleCallTokens = this.genGetUnassignedRuleCallTokens(file);
       _builder.append(_genGetUnassignedRuleCallTokens, "	");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
@@ -141,7 +141,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
         List<AbstractRule> _unassignedCalledTokenRules = this.unassignedCalledTokenRules();
         for(final AbstractRule rule : _unassignedCalledTokenRules) {
           _builder.append("\t");
-          StringConcatenation _genGetUnassignedRuleCallToken = this.genGetUnassignedRuleCallToken(file, rule);
+          CharSequence _genGetUnassignedRuleCallToken = this.genGetUnassignedRuleCallToken(file, rule);
           _builder.append(_genGetUnassignedRuleCallToken, "	");
           _builder.newLineIfNotEmpty();
         }
@@ -149,7 +149,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
-      StringConcatenation _genEmitUnassignedTokens = this.genEmitUnassignedTokens(file);
+      CharSequence _genEmitUnassignedTokens = this.genEmitUnassignedTokens(file);
       _builder.append(_genEmitUnassignedTokens, "	");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -249,7 +249,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       Iterable<AbstractRule> _map_1 = IterableExtensions.<RuleCall, AbstractRule>map(calls, _function_2);
       Set<AbstractRule> _set = IterableExtensions.<AbstractRule>toSet(_map_1);
       final Function2<AbstractRule,AbstractRule,Integer> _function_3 = new Function2<AbstractRule,AbstractRule,Integer>() {
-          public Integer apply(final AbstractRule r1 , final AbstractRule r2) {
+          public Integer apply(final AbstractRule r1, final AbstractRule r2) {
             String _name = r1.getName();
             String _name_1 = r2.getName();
             int _compareTo = _name.compareTo(_name_1);
@@ -266,7 +266,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     return _xblockexpression;
   }
   
-  public StringConcatenation unassignedCalledTokenRuleName(final AbstractRule rule) {
+  public CharSequence unassignedCalledTokenRuleName(final AbstractRule rule) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("get");
     String _name = rule.getName();
@@ -344,7 +344,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     return _switchResult;
   }
   
-  public StringConcatenation genGetUnassignedRuleCallTokens(final JavaFile file) {
+  public CharSequence genGetUnassignedRuleCallTokens(final JavaFile file) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@Override");
     _builder.newLine();
@@ -373,7 +373,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
         _builder.append("\t");
         _builder.append("\t");
         _builder.append("return ");
-        StringConcatenation _unassignedCalledTokenRuleName = this.unassignedCalledTokenRuleName(rule);
+        CharSequence _unassignedCalledTokenRuleName = this.unassignedCalledTokenRuleName(rule);
         _builder.append(_unassignedCalledTokenRuleName, "		");
         _builder.append("(semanticObject, ruleCall, node);");
         _builder.newLineIfNotEmpty();
@@ -387,10 +387,10 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     return _builder;
   }
   
-  public StringConcatenation genGetUnassignedRuleCallToken(final JavaFile file, final AbstractRule rule) {
+  public CharSequence genGetUnassignedRuleCallToken(final JavaFile file, final AbstractRule rule) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("protected String ");
-    StringConcatenation _unassignedCalledTokenRuleName = this.unassignedCalledTokenRuleName(rule);
+    CharSequence _unassignedCalledTokenRuleName = this.unassignedCalledTokenRuleName(rule);
     _builder.append(_unassignedCalledTokenRuleName, "");
     _builder.append("(EObject semanticObject, RuleCall ruleCall, INode node) {");
     _builder.newLineIfNotEmpty();
@@ -414,7 +414,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     return _builder;
   }
   
-  public StringConcatenation genEmitUnassignedTokens(final JavaFile file) {
+  public CharSequence genEmitUnassignedTokens(final JavaFile file) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@Override");
     _builder.newLine();

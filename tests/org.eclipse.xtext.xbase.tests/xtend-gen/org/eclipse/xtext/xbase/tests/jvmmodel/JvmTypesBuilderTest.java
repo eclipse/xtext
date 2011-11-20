@@ -56,9 +56,9 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
         JvmAnnotationType _annotation = _head.getAnnotation();
         Assert.assertEquals(_annotationType, _annotation);
       }
-    } catch (Exception _e)  {
+    } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
-      }
+    }
   }
   
   public void testStringAnnotation() {
@@ -90,9 +90,9 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
         String _head_3 = IterableExtensions.<String>head(_values_1);
         Assert.assertEquals("Foo", _head_3);
       }
-    } catch (Exception _e)  {
+    } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
-      }
+    }
   }
   
   public void testStringAnnotationWithNullExpression() {
@@ -125,9 +125,9 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
         boolean _isEmpty = _values.isEmpty();
         Assert.assertTrue(_isEmpty);
       }
-    } catch (Exception _e)  {
+    } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
-      }
+    }
   }
   
   public void testStringArrayAnnotation() {
@@ -174,9 +174,9 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
         String _get = _values_5.get(1);
         Assert.assertEquals("Bar", _get);
       }
-    } catch (Exception _e)  {
+    } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
-      }
+    }
   }
   
   public void testStringArrayAnnotationWithNullExpression() {
@@ -208,9 +208,9 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
         boolean _isEmpty = _values.isEmpty();
         Assert.assertTrue(_isEmpty);
       }
-    } catch (Exception _e)  {
+    } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
-      }
+    }
   }
   
   public void testAnnotationCreation() {
@@ -232,9 +232,9 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
         String _documentation = this._jvmTypesBuilder.getDocumentation(anno);
         Assert.assertEquals("Foo", _documentation);
       }
-    } catch (Exception _e)  {
+    } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
-      }
+    }
   }
   
   public void testInterfaceCreation() {
@@ -261,9 +261,9 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
         int _size = _superTypes.size();
         Assert.assertEquals(1, _size);
       }
-    } catch (Exception _e)  {
+    } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
-      }
+    }
   }
   
   public void testEnumCreation() {
@@ -285,8 +285,8 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
         String _documentation = this._jvmTypesBuilder.getDocumentation(anno);
         Assert.assertEquals("Foo", _documentation);
       }
-    } catch (Exception _e)  {
+    } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
-      }
+    }
   }
 }

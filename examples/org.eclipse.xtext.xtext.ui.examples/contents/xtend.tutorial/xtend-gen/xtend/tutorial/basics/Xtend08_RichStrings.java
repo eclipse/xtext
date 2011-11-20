@@ -1,16 +1,16 @@
 package xtend.tutorial.basics;
 
 import junit.framework.TestCase;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.InputOutput;
-import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import xtend.tutorial.util.Person;
 
 @SuppressWarnings("all")
 public class Xtend08_RichStrings extends TestCase {
   public void testRichStrings() {
     Person _person = new Person("Joe", "Developer");
-    StringConcatenation _writeLetterTo = this.writeLetterTo(_person);
-    InputOutput.<StringConcatenation>println(_writeLetterTo);
+    CharSequence _writeLetterTo = this.writeLetterTo(_person);
+    InputOutput.<CharSequence>println(_writeLetterTo);
   }
   
   /**
@@ -19,7 +19,7 @@ public class Xtend08_RichStrings extends TestCase {
    * handling, which is also refelected tooling-wise.
    * Note the indentation before the call to signature.
    */
-  public StringConcatenation writeLetterTo(final Person p) {
+  public CharSequence writeLetterTo(final Person p) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Dear ");
     String _forename = p.getForename();
@@ -37,13 +37,13 @@ public class Xtend08_RichStrings extends TestCase {
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
-    StringConcatenation _signature = this.signature();
+    CharSequence _signature = this.signature();
     _builder.append(_signature, "	");
     _builder.newLineIfNotEmpty();
     return _builder;
   }
   
-  public StringConcatenation signature() {
+  public CharSequence signature() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Bla bla Foo Bar");
     _builder.newLine();

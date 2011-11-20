@@ -66,7 +66,7 @@ public class Xtend06_Closures {
    */
   public void closures_02(final List<Person> persons) {
     final Function2<Person,Person,Integer> _function = new Function2<Person,Person,Integer>() {
-        public Integer apply(final Person a , final Person b) {
+        public Integer apply(final Person a, final Person b) {
           String _name = a.getName();
           String _name_1 = b.getName();
           int _compareTo = _name.compareTo(_name_1);
