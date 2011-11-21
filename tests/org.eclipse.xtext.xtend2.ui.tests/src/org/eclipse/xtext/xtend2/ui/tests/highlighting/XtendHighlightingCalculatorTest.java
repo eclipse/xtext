@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.tests.highlighting;
 
+import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
+
 import java.util.Collection;
 import java.util.Set;
 
@@ -27,7 +29,6 @@ import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
 import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -121,6 +122,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtend2UITestCase im
 		ResourceSet set = testHelper.getResourceSet();
 		Resource resource = set.createResource(URI.createURI("Foo.xtend"));
 		resource.load(new StringInputStream(string), null);
+		
 		assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
 		XtendFile file = (XtendFile) resource.getContents().get(0);
 		return file;
