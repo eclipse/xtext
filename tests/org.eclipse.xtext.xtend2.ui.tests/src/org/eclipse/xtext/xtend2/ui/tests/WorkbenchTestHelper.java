@@ -235,6 +235,7 @@ public class WorkbenchTestHelper extends Assert {
 		projectFactory.addProjectNatures(JavaCore.NATURE_ID, "org.eclipse.pde.PluginNature",
 				XtextProjectHelper.NATURE_ID);
 		projectFactory.addRequiredBundles(newArrayList(
+				"com.google.inject",
 				"org.eclipse.xtext.xbase.lib", 
 				"org.eclipse.xtend2.lib",
 				"org.junit4"));
