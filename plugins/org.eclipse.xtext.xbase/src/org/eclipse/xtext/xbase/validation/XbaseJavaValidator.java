@@ -717,11 +717,11 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 							JvmIdentifiableElement calledFeature = ((XFeatureCall) firstInBody).getFeature();
 							if (calledFeature != null && !feature.eIsProxy() && feature instanceof JvmConstructor) {
 								calledConstructor = (JvmConstructor) calledFeature;
-							} else {
-								return;
-							}
-						}
-					}
+								continue;
+							} 
+						} 
+					} 
+					return;
 				}
 			}
 		}

@@ -60,6 +60,41 @@ import com.google.inject.Injector;
  */
 public class CompilerTest extends AbstractXtend2TestCase {
 
+	public void testDeclaredConstructor_01() throws Exception {
+		String code = "class Z { new() { this(1) } new(int a) { super() } }";
+		compileJavaCode("Z", code);
+	}
+	
+	public void testDeclaredConstructor_02() throws Exception {
+		String code = "class Z { new() { super() } new(int a) { this() } }";
+		compileJavaCode("Z", code);
+	}
+	
+	public void testDeclaredConstructor_03() throws Exception {
+		String code = "class Z { new() { this(1) } new(int i) {} }";
+		compileJavaCode("Z", code);
+	}
+	
+	public void testDeclaredConstructor_04() throws Exception {
+		String code = 
+				"  static int j " +
+				"  int i " +
+				"  new() { this(j) } " +
+				"  new(int i) { this.i = i } " +
+				"  def static invokeMe() { j = 47 new Y().i }";
+		invokeAndExpectStatic(Integer.valueOf(47), code, "invokeMe");
+	}
+	
+	public void testDeclaredConstructor_05() throws Exception {
+		String code = "class Z { new() { this(null as Object) } new(Object o) {} }";
+		compileJavaCode("Z", code);
+	}
+	
+	public void testDeclaredConstructor_06() throws Exception {
+		String code = "class Z { new(Object o) { this(o as String) } new(String o) {} }";
+		compileJavaCode("Z", code);
+	}
+	
 	public void testBug362236_01() throws Exception {
 		String code = 
 				"import java.util.List\n" +

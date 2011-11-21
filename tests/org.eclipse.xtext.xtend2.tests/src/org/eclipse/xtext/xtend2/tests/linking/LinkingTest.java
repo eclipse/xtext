@@ -15,6 +15,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -30,6 +31,7 @@ import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
@@ -40,6 +42,7 @@ import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendConstructor;
 import org.eclipse.xtext.xtend2.xtend2.XtendField;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
@@ -58,6 +61,26 @@ public class LinkingTest extends AbstractXtend2TestCase {
 	
 	@Inject
 	private IXtend2JvmAssociations associator;
+	
+	public void testDeclaredConstructor_01() throws Exception {
+		XtendClass clazz = clazz(
+				"class Foo { " +
+				"  int i" +
+				"  new(int i) { this.i = i }" +
+				"}");
+		assertEquals(2, clazz.getMembers().size());
+		
+		XtendConstructor constructor = (XtendConstructor) clazz.getMembers().get(1);
+		XAssignment assignment = (XAssignment) ((XBlockExpression)constructor.getExpression()).getExpressions().get(0);
+		JvmField field = (JvmField) assignment.getFeature();
+		assertEquals("i", field.getSimpleName());
+		XFeatureCall target = (XFeatureCall) assignment.getAssignable();
+		JvmDeclaredType identifiableElement = (JvmDeclaredType) target.getFeature();
+		assertEquals("Foo", identifiableElement.getSimpleName());
+		XFeatureCall value = (XFeatureCall) assignment.getValue();
+		JvmFormalParameter parameter = (JvmFormalParameter) value.getFeature();
+		assertEquals("i", parameter.getSimpleName());
+	}
 	
 	public void testCreateExtension_00() throws Exception {
 		XtendClass clazz = clazz(
