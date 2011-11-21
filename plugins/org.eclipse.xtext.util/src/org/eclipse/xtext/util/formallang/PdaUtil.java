@@ -19,6 +19,7 @@ import org.eclipse.xtext.util.formallang.NfaUtil.MappedComparator;
 
 import com.google.common.base.Function;
 import com.google.common.base.Functions;
+import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.LinkedHashMultimap;
@@ -27,7 +28,6 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
-import com.google.inject.internal.Join;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -137,7 +137,7 @@ public class PdaUtil {
 					result.add(current.value.toString());
 				current = current.pop();
 			}
-			return Join.join(", ", result);
+			return Joiner.on(", ").join(result);
 		}
 	}
 

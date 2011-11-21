@@ -11,10 +11,10 @@ import java.util.Collections;
 import java.util.List;
 
 import com.google.common.base.Function;
+import com.google.common.base.Joiner;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-import com.google.inject.internal.Join;
-import com.google.inject.internal.Lists;
+import com.google.common.collect.Lists;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -38,14 +38,14 @@ public class ProductionStringFactory<TOKEN> implements ProductionFactory<String,
 	public String createForAlternativeChildren(boolean many, boolean optional, Iterable<String> children) {
 		List<String> childrenSorted = Lists.newArrayList(Iterables.filter(children, Predicates.notNull()));
 		Collections.sort(childrenSorted);
-		return "(" + Join.join(" | ", childrenSorted) + ")" + card(many, optional);
+		return "(" + Joiner.on(" | ").join(childrenSorted) + ")" + card(many, optional);
 	}
 
 	public String createForSequentialChildren(boolean many, boolean optional, Iterable<String> children) {
 		children = Iterables.filter(children, Predicates.notNull());
 		if (many || optional)
-			return "(" + Join.join(" ", children) + ")" + card(many, optional);
-		return Join.join(" ", children) + card(many, optional);
+			return "(" + Joiner.on(" ").join(children) + ")" + card(many, optional);
+		return Joiner.on(" ").join(children) + card(many, optional);
 	}
 
 	public String createForToken(boolean many, boolean optional, TOKEN token) {
@@ -59,7 +59,7 @@ public class ProductionStringFactory<TOKEN> implements ProductionFactory<String,
 	public String createForUnordertedChildren(boolean many, boolean optional, Iterable<String> children) {
 		List<String> childrenSorted = Lists.newArrayList(Iterables.filter(children, Predicates.notNull()));
 		Collections.sort(childrenSorted);
-		return "(" + Join.join(" & ", childrenSorted) + ")" + card(many, optional);
+		return "(" + Joiner.on(" & ").join(childrenSorted) + ")" + card(many, optional);
 	}
 
 }
