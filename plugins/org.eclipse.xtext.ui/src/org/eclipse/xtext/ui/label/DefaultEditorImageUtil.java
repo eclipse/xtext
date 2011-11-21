@@ -12,14 +12,14 @@ import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.IWorkbench;
 
 import com.google.inject.Inject;
-import com.google.inject.internal.Nullable;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class DefaultEditorImageUtil {
 	
-	@Inject(optional=true)@Nullable
+	@Inject(optional=true)
+//	@Nullable
 	private IWorkbench workbench;
 	
 	public ImageDescriptor getDefaultEditorImageDescriptor(String fileName) {

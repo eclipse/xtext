@@ -369,6 +369,8 @@ public class OnTheFlyJavaCompiler {
 	}
 
 	protected String toString(Type returnType) {
+//		In Guice 3 this would be :
+//		return MoreTypes.typeToString(returnType);
 		return MoreTypes.toString(returnType);
 	}
 

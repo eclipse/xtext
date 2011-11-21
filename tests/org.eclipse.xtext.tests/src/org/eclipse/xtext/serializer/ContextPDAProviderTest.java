@@ -28,8 +28,8 @@ import org.eclipse.xtext.util.formallang.Pda;
 import org.eclipse.xtext.util.formallang.PdaListFormatter;
 
 import com.google.common.base.Function;
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
-import com.google.inject.internal.Join;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -80,7 +80,7 @@ public class ContextPDAProviderTest extends AbstractXtextTests {
 			Pda<ISerState, RuleCall> pda = get(IContextPDAProvider.class).getContextPDA(ctx.getFirst());
 			result.add("  " + formatter.format(pda).replace("\n", "\n  "));
 		}
-		return Join.join("\n", result);
+		return Joiner.on("\n").join(result);
 	}
 
 	@Override

@@ -13,8 +13,8 @@ import java.util.Set;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.google.inject.internal.Lists;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

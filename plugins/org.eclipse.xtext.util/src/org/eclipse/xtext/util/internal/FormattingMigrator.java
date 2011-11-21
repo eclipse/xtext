@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 
 import org.eclipse.xtext.util.Strings;
 
-import com.google.inject.internal.Lists;
+import com.google.common.collect.Lists;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

@@ -21,16 +21,16 @@ import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
 import org.eclipse.xtext.serializer.analysis.IContextProvider;
-import org.eclipse.xtext.serializer.analysis.ISerState;
 import org.eclipse.xtext.serializer.analysis.IContextTypePDAProvider;
+import org.eclipse.xtext.serializer.analysis.ISerState;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.formallang.Pda;
 import org.eclipse.xtext.util.formallang.PdaListFormatter;
 
 import com.google.common.base.Function;
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
-import com.google.inject.internal.Join;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -76,6 +76,7 @@ public class ContextTypePDAProviderTest extends AbstractXtextTests {
 		return result;
 	}
 
+	@SuppressWarnings("unchecked")
 	protected String getParserRule(String body) throws Exception {
 		Grammar grammar = (Grammar) getModel(HEADER + body);
 		//		drawGrammar("pdf/" + getName(), grammar);
@@ -93,7 +94,7 @@ public class ContextTypePDAProviderTest extends AbstractXtextTests {
 					ctx.getSecond(), ctx.getFirst());
 			result.add("  " + formatter.format((Pda<ISerState, RuleCall>) pda).replace("\n", "\n  "));
 		}
-		return Join.join("\n", result);
+		return Joiner.on("\n").join(result);
 	}
 
 	@Override

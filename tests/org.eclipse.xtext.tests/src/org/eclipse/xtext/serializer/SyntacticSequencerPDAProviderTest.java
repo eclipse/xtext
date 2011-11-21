@@ -35,9 +35,9 @@ import org.eclipse.xtext.util.formallang.ProductionStringFactory;
 import org.eclipse.xtext.xbase.lib.Pair;
 
 import com.google.common.base.Function;
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.google.inject.internal.Join;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -111,7 +111,7 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 			result.add(t + "_" + ctx.getThird() + ":");
 			result.addAll(pda2lines2(get(ISyntacticSequencerPDAProvider.class).getPDA(ctx.getSecond(), ctx.getFirst())));
 		}
-		return Join.join("\n", result);
+		return Joiner.on("\n").join(result);
 	}
 
 	private String pathToStr2(ISynTransition state) {
