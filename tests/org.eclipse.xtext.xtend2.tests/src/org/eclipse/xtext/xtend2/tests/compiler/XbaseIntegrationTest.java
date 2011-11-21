@@ -37,4 +37,7 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 		testHelper.assertEvaluatesWithException(class1, string);
 	}
 
+	public void testIteratorExtensions() throws Exception {
+		assertEvaluatesTo("Foo", "newArrayList('Foo').iterator.toIterable.iterator.next");
+	}
 }
