@@ -537,7 +537,6 @@ public class JvmModelGenerator implements IGenerator {
       _builder.newLineIfNotEmpty();
       CharSequence _generateModifier = this.generateModifier(it);
       _builder.append(_generateModifier, "");
-      _builder.append(" ");
       String _simpleName = it.getSimpleName();
       _builder.append(_simpleName, "");
       _builder.append("(");
@@ -704,6 +703,14 @@ public class JvmModelGenerator implements IGenerator {
                   matched=true;
                   JvmTypeReference _returnType = op_2.getReturnType();
                   _switchResult = _returnType;
+                }
+              }
+              if (!matched) {
+                if (op_1 instanceof JvmConstructor) {
+                  final JvmConstructor op_3 = (JvmConstructor) op_1;
+                  matched=true;
+                  JvmTypeReference _typeForName = this._typeReferences.getTypeForName(Void.TYPE, op_3);
+                  _switchResult = _typeForName;
                 }
               }
               if (!matched) {

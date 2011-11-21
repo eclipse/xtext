@@ -30,6 +30,53 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''')
 	}
 	
+	def testConstructorDeclaration_01() { 
+		assertCompilesTo('''
+			package foo
+			class Bar {
+				new() {
+					super()
+				}
+			}
+		''', '''
+			package foo;
+
+			@SuppressWarnings("all")
+			public class Bar {
+			  public Bar() {
+			    super();
+			  }
+			}
+		''')
+	}
+	
+	def testConstructorDeclaration_02() { 
+		assertCompilesTo('''
+			package foo
+			class Bar {
+				new() {
+					this(123)
+				}
+				new(int a) {
+					super()
+				}
+			}
+		''', '''
+			package foo;
+
+			@SuppressWarnings("all")
+			public class Bar {
+			  public Bar() {
+			    this(123);
+			  }
+			  
+			  public Bar(final int a) {
+			    super();
+			  }
+			}
+		''')
+	}
+	
 	def testSneakyThrow() { 
 		assertCompilesTo('''
 			package foo

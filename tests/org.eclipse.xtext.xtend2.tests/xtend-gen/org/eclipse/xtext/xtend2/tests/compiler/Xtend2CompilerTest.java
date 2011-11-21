@@ -52,6 +52,104 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  public void testConstructorDeclaration_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.append("class Bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("super()");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Bar {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Bar() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("super();");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  public void testConstructorDeclaration_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.append("class Bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("this(123)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new(int a) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("super()");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Bar {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Bar() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("this(123);");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Bar(final int a) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("super();");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
   public void testSneakyThrow() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");

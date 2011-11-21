@@ -43,7 +43,7 @@ public class FeatureCallToJavaMapping {
 	}
 
 	public XExpression getActualReceiver(XAbstractFeatureCall featureCall, JvmIdentifiableElement feature, XExpression implicitReceiver) {
-		if (isStaticJavaFeature(feature)) {
+		if (isStaticJavaFeature(feature) || feature instanceof JvmConstructor) {
 			return null;
 		}
 		if (implicitReceiver!=null)
