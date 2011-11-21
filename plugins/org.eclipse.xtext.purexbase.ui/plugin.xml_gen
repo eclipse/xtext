@@ -71,6 +71,19 @@
         </page>
     </extension>
     <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.purexbase.ui.PureXbaseExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.purexbase.PureXbase"
+            name="PureXbase">
+            <keywordReference id="org.eclipse.xtext.purexbase.ui.keyword_PureXbase"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.xtext.purexbase.ui.keyword_PureXbase"
@@ -204,6 +217,15 @@
          </command>
       </menuContribution>
    </extension>
+   <extension point="org.eclipse.ui.preferencePages">
+	    <page
+	        category="org.eclipse.xtext.purexbase.PureXbase"
+	        class="org.eclipse.xtext.purexbase.ui.PureXbaseExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
+	        id="org.eclipse.xtext.purexbase.PureXbase.refactoring"
+	        name="Refactoring">
+	        <keywordReference id="org.eclipse.xtext.purexbase.ui.keyword_PureXbase"/>
+	    </page>
+	</extension>
 
 
 </plugin>
