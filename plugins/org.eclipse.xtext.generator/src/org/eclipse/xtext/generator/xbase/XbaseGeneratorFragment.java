@@ -127,8 +127,6 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 				.addTypeToType(IGenerator.class.getCanonicalName(), "org.eclipse.xtext.xbase.compiler.JvmModelGenerator")
 				.addTypeToInstance("org.eclipse.xtext.xtype.XtypeFactory", "org.eclipse.xtext.xtype.XtypeFactory.eINSTANCE")
 				.addTypeToType(TypeArgumentContextProvider.class.getCanonicalName(), "org.eclipse.xtext.xbase.typing.XbaseTypeArgumentContextProvider");
-		
-			
 		if (useInferredJvmModel) {
 			config = config
 				.addTypeToType(ILocationInFileProvider.class.getName(),
@@ -142,6 +140,10 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 					.addTypeToType("org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer",
 						getJvmModelInferrerName(grammar, getNaming()));
 			}
+		} else {
+			config = config.addTypeToType(ILocationInFileProvider.class.getName(),
+					"org.eclipse.xtext.xbase.resource.XbaseLocationInFileProvider");
+
 		}
 		return config.getBindings();
 	}
@@ -180,7 +182,9 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelJdtRenameParticipantContext.ContextFactory")
 			    .addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameStrategy", 
 			    		"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.DefaultJvmModelRenameStrategy");
-
+		} else {
+			bindFactory =  bindFactory.addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameStrategy", 
+					"org.eclipse.xtext.xbase.ui.refactoring.XbaseRenameStrategy");
 		}
 		return bindFactory.getBindings();
 	}

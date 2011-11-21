@@ -9,15 +9,15 @@ package org.eclipse.xtext.xbase.jvmmodel;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.resource.DefaultLocationInFileProvider;
 import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.xbase.resource.XbaseLocationInFileProvider;
 
 import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class JvmLocationInFileProvider extends DefaultLocationInFileProvider {
+public class JvmLocationInFileProvider extends XbaseLocationInFileProvider {
 
 	@Inject
 	private IJvmModelAssociations jvmAssociations;
