@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
@@ -77,6 +78,7 @@ import org.eclipse.xtext.xbase.typing.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 @ComposedChecks(validators = { FeatureCallValidator.class, EarlyExitValidator.class })
@@ -147,7 +149,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		}
 	}
 
-	//TODO extract and put in separate class for general reuse (see also AbstractXbaseCompiler#isVariableDeclarationRequired )
+	// TODO extract and put in separate class for general reuse (see also #checkIsValidConstructorArgument and AbstractXbaseCompiler#isVariableDeclarationRequired)
 	protected boolean isSideEffectFree(XExpression expr) {
 		if (expr instanceof XMemberFeatureCall) {
 			return ((XMemberFeatureCall) expr).getFeature() instanceof JvmField;
@@ -161,7 +163,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		return expr instanceof XStringLiteral || expr instanceof XTypeLiteral || expr instanceof XIntLiteral
 				|| expr instanceof XNullLiteral || expr instanceof XBooleanLiteral || expr instanceof XClosure;
 	}
-
+	
 	@Check
 	public void checkTypeReferenceIsNotVoid(XExpression expression) {
 		EList<EObject> list = expression.eContents();
@@ -628,6 +630,100 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		if (constructorCall.getConstructor().getDeclaringType().isAbstract()) {
 			error("Cannot instantiate abstract class", null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
 					ABSTRACT_CLASS_INSTANTIATION);
+		}
+	}
+	
+	@Check
+	public void checkDelegateConstructorIsFirst(XFeatureCall featureCall) {
+		JvmIdentifiableElement feature = featureCall.getFeature();
+		if (feature != null && !feature.eIsProxy() && feature instanceof JvmConstructor) {
+			JvmIdentifiableElement container = logicalContainerProvider.getNearestLogicalContainer(featureCall);
+			if (container != null) {
+				if (container instanceof JvmConstructor) {
+					XExpression body = logicalContainerProvider.getAssociatedExpression(container);
+					if (body == featureCall)
+						return;
+					if (body instanceof XBlockExpression) {
+						List<XExpression> expressions = ((XBlockExpression) body).getExpressions();
+						if (expressions.isEmpty() || expressions.get(0) != featureCall) {
+							error("Constructor call must be the first expression in a constructor", null, INVALID_CONSTRUCTOR_INVOCATION);
+						}
+					}
+				} else {
+					error("Constructor call must be the first expression in a constructor", null, INVALID_CONSTRUCTOR_INVOCATION);
+				}
+			}
+		}
+	}
+	
+	@Check
+	public void checkConstructorArgumentsAreValid(XFeatureCall featureCall) {
+		JvmIdentifiableElement feature = featureCall.getFeature();
+		if (feature != null && !feature.eIsProxy() && feature instanceof JvmConstructor) {
+			for(XExpression argument: featureCall.getFeatureCallArguments()) {
+				checkIsValidConstructorArgument(argument);
+			}
+		}
+	}
+	
+	// TODO extract and put in separate class for general reuse (see also #isSideEffectFree and AbstractXbaseCompiler#isVariableDeclarationRequired)
+	protected void checkIsValidConstructorArgument(XExpression argument) {
+		if (argument instanceof XFeatureCall) {
+			JvmIdentifiableElement feature = ((XFeatureCall) argument).getFeature();
+			if (feature != null && !feature.eIsProxy()) {
+				if (feature instanceof JvmField) {
+					if (!((JvmField) feature).isStatic())
+						error("Cannot refer to an instance field " + feature.getSimpleName() + " while explicitly invoking a constructor", 
+							argument, null, INVALID_CONSTRUCTOR_ARGUMENT);
+				} else if (feature instanceof JvmOperation) {
+//					if (((JvmOperation) feature).isStatic())
+//						error("Cannot refer to an instance method while explicitly invoking a constructor", 
+//							argument, null, INVALID_CONSTRUCTOR_ARGUMENT);	
+					error("Cannot refer to a method while explicitly invoking a constructor",
+						argument, null, INVALID_CONSTRUCTOR_ARGUMENT);
+				}
+			}
+		} else if (argument instanceof XCastedExpression) {
+			checkIsValidConstructorArgument(((XCastedExpression) argument).getTarget());
+		} else if (!(argument instanceof XStringLiteral || argument instanceof XTypeLiteral || argument instanceof XIntLiteral
+				|| argument instanceof XNullLiteral || argument instanceof XBooleanLiteral)) {
+			error("Cannot refer to an expression with potential side effects while explicitly invoking a constructor", 
+				argument, null, INVALID_CONSTRUCTOR_ARGUMENT);
+		}
+	}
+
+	
+	@Check
+	public void checkNoCircularConstructorCall(XFeatureCall featureCall) {
+		JvmIdentifiableElement feature = featureCall.getFeature();
+		if (feature != null && !feature.eIsProxy() && feature instanceof JvmConstructor) {
+			JvmIdentifiableElement logicalContainer = logicalContainerProvider.getNearestLogicalContainer(featureCall);
+			if (logicalContainer instanceof JvmConstructor) {
+				JvmConstructor currentConstructor = (JvmConstructor) logicalContainer;
+				JvmConstructor calledConstructor = (JvmConstructor) feature;
+				Set<JvmConstructor> visited = Sets.newHashSet(currentConstructor);
+				while(calledConstructor.getDeclaringType() == currentConstructor.getDeclaringType()) {
+					if (!visited.add(calledConstructor)) {
+						error("Recursive constructor invocation", null, CIRCULAR_CONSTRUCTOR_INVOCATION);
+						return;
+					}
+					XExpression constructorBody = logicalContainerProvider.getAssociatedExpression(calledConstructor);
+					if (constructorBody instanceof XBlockExpression) {
+						List<XExpression> expressions = ((XBlockExpression) constructorBody).getExpressions();
+						if (expressions.isEmpty())
+							return;
+						XExpression firstInBody = ((XBlockExpression) constructorBody).getExpressions().get(0);
+						if (firstInBody instanceof XFeatureCall) {
+							JvmIdentifiableElement calledFeature = ((XFeatureCall) firstInBody).getFeature();
+							if (calledFeature != null && !feature.eIsProxy() && feature instanceof JvmConstructor) {
+								calledConstructor = (JvmConstructor) calledFeature;
+							} else {
+								return;
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 

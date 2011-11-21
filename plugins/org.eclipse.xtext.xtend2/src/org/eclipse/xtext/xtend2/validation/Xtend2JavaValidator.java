@@ -135,11 +135,14 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 	@Inject
 	private XAnnotationUtil annotationUtil;
 
-	private final Set<EReference> typeConformanceCheckedReferences = ImmutableSet.copyOf(Iterables.concat(super
-			.getTypeConformanceCheckedReferences(), ImmutableSet.of(
-			Xtend2Package.Literals.RICH_STRING_FOR_LOOP__AFTER, Xtend2Package.Literals.RICH_STRING_FOR_LOOP__BEFORE,
-			Xtend2Package.Literals.RICH_STRING_FOR_LOOP__SEPARATOR, Xtend2Package.Literals.RICH_STRING_IF__IF,
-			Xtend2Package.Literals.RICH_STRING_ELSE_IF__IF)));
+	private final Set<EReference> typeConformanceCheckedReferences = ImmutableSet.copyOf(Iterables.concat(
+			super.getTypeConformanceCheckedReferences(), 
+			ImmutableSet.of(
+					Xtend2Package.Literals.RICH_STRING_FOR_LOOP__AFTER, 
+					Xtend2Package.Literals.RICH_STRING_FOR_LOOP__BEFORE,
+					Xtend2Package.Literals.RICH_STRING_FOR_LOOP__SEPARATOR, 
+					Xtend2Package.Literals.RICH_STRING_IF__IF,
+					Xtend2Package.Literals.RICH_STRING_ELSE_IF__IF)));
 
 	@Override
 	protected List<EPackage> getEPackages() {
