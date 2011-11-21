@@ -29,8 +29,8 @@
 			<fileset refid="allpoms" />
 		</replaceregexp>
 		<replaceregexp flags="gs">
-			<regexp pattern="(&lt;/artifactId&gt;)(\s*)(&lt;/optional&gt;)" />
-			<substitution expression="\1\2  &lt;version&gt;[0.0,)&lt;/version&gt;\2\3" />
+			<regexp pattern="(&lt;/artifactId&gt;)(\s*)(&lt;optional&gt;)" />
+			<substitution expression="\1\2&lt;version&gt;[0.0,)&lt;/version&gt;\2\3" />
 			<fileset refid="allpoms" />
 		</replaceregexp>
 		<checksum algorithm="md5" forceoverwrite="true">
