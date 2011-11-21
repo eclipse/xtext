@@ -10,8 +10,8 @@ package org.eclipse.xtext.xbase.ui.jvmmodel.refactoring;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
-import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xbase.ui.refactoring.XbaseRenameStrategy;
 
 import com.google.inject.Inject;
 
@@ -19,7 +19,7 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("restriction")
-public class DefaultJvmModelRenameStrategy extends DefaultRenameStrategy {
+public class DefaultJvmModelRenameStrategy extends XbaseRenameStrategy {
 
 	@Inject
 	private IJvmModelAssociations jvmModelAssociations;
