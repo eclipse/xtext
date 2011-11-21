@@ -345,11 +345,12 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 				"    default : 'baz'" +
 				"  }" +
 				"}");
+		XVariableDeclaration xDeclaration = (XVariableDeclaration) block.getExpressions().get(0); 
 		XSwitchExpression switchExpr = (XSwitchExpression) block.getExpressions().get(1);
-		XFeatureCall feature = (XFeatureCall) switchExpr.getCases().get(0).getThen();
-		assertEquals(switchExpr.getCases().get(0), feature.getFeature());
+		XFeatureCall feature = (XFeatureCall) switchExpr.getSwitch();
+		assertEquals(xDeclaration, feature.getFeature());
 		feature = (XFeatureCall) switchExpr.getCases().get(1).getCase();
-		assertEquals(switchExpr.getCases().get(1), feature.getFeature());
+		assertEquals(xDeclaration, feature.getFeature());
 	}
 	
 	public void testSwitchExpression_01() throws Exception {
@@ -359,7 +360,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 		"}");
 		final XCasePart xCasePart = switchExpr.getCases().get(0);
 		assertEquals(switchExpr, ((XFeatureCall) xCasePart.getThen()).getFeature());
-		assertEquals(switchExpr, ((XFeatureCall)xCasePart.getCase()).getFeature());
+		assertEquals(switchExpr, ((XFeatureCall) xCasePart.getCase()).getFeature());
 	}
 	
 	public void testSwitchExpression_02() throws Exception {

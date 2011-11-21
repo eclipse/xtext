@@ -27,6 +27,7 @@ import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XDoWhileExpression;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
@@ -358,23 +359,28 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		internalToJavaStatement(expr.getSwitch(), b, true);
 
 		// declare local var for the switch expression
-		String name = getNameProvider().getSimpleName(expr);
-		if (name!=null) { 
-			name = makeJavaIdentifier(name);
-		} else {
-			// define synthetic name
-			name = "__valOfSwitchOver";
+		String variableName = null;
+		if(expr.getLocalVarName() == null && expr.getSwitch() instanceof XFeatureCall) {
+			variableName = b.getName(((XFeatureCall) expr.getSwitch()).getFeature());
+		} 
+		if(variableName == null) {
+			String name = getNameProvider().getSimpleName(expr);
+			if (name!=null) { 
+				name = makeJavaIdentifier(name);
+			} else {
+				// define synthetic name
+				name = "__valOfSwitchOver";
+			}
+			JvmTypeReference typeReference = getTypeProvider().getType(expr.getSwitch());
+			b.append("\nfinal ");
+			serialize(typeReference, expr, b);
+			b.append(" ");
+			variableName = b.declareVariable(expr, name);
+			b.append(variableName);
+			b.append(" = ");
+			internalToJavaExpression(expr.getSwitch(), b);
+			b.append(";");
 		}
-		JvmTypeReference typeReference = getTypeProvider().getType(expr.getSwitch());
-		b.append("\nfinal ");
-		serialize(typeReference, expr, b);
-		b.append(" ");
-		String variableName = b.declareVariable(expr, name);
-		b.append(variableName);
-		b.append(" = ");
-		internalToJavaExpression(expr.getSwitch(), b);
-		b.append(";");
-
 		// declare 'boolean matched' to check whether a case has matched already
 		b.append("\nboolean ");
 		String matchedVariable = b.declareVariable(Tuples.pair(expr, "matches"), "matched");
@@ -390,19 +396,6 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				b.append(casePart.getTypeGuard().getType());
 				b.append(") {");
 				b.increaseIndentation();
-
-				// declare local var for case
-				String simpleName = getNameProvider().getSimpleName(casePart);
-				if (simpleName != null) {
-					b.append("\nfinal ");
-					serialize(casePart.getTypeGuard(),casePart,b);
-					b.append(" ");
-					String typeGuardName = b.declareVariable(casePart, simpleName);
-					b.append(typeGuardName);
-					b.append(" = (");
-					serialize(casePart.getTypeGuard(),casePart,b);
-					b.append(") ").append(variableName).append(";");
-				}
 			}
 			if (casePart.getCase() != null) {
 				internalToJavaStatement(casePart.getCase(), b, true);

@@ -58,7 +58,6 @@ import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.DefaultConstructorDescriptionProvider;
@@ -142,9 +141,6 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	private ITypeProvider typeProvider;
 
 	@Inject
-	private IdentifiableSimpleNameProvider featureNameProvider;
-	
-	@Inject
 	private ITypeArgumentContextHelper typeArgumentContextHelper;
 	
 	@Inject
@@ -156,10 +152,6 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	@Inject
 	private ILogicalContainerProvider logicalContainerProvider;
 	
-	public void setFeatureNameProvider(IdentifiableSimpleNameProvider featureNameProvider) {
-		this.featureNameProvider = featureNameProvider;
-	}
-
 	public void setTypeProvider(ITypeProvider typeProvider) {
 		this.typeProvider = typeProvider;
 	}
@@ -626,15 +618,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	}
 
 	protected IScope createLocalVarScopeForTypeGuardedCase(XCasePart context, IScope parentScope) {
-		JvmTypeReference guard = context.getTypeGuard();
-		if (guard == null) {
-			return parentScope;
-		}
-		String varName = featureNameProvider.getSimpleName(context);
-		if (varName == null) {
-			return parentScope;
-		}
-		return new JvmFeatureScope(parentScope, "XCasePart", new LocalVarDescription(QualifiedName.create(varName), context));
+		return parentScope;
 	}
 
 	protected IScope createLocalVarScopeForCatchClause(XCatchClause catchClause, int indexOfContextExpressionInBlock,

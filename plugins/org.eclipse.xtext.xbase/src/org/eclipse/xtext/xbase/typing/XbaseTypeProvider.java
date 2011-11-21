@@ -46,6 +46,7 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAbstractWhileExpression;
@@ -101,10 +102,13 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 
 	@Inject
 	private SuperTypeCollector collector;
-	
+
 	@Inject
 	private ILogicalContainerProvider logicalContainerProvider;
 	
+	@Inject 
+	private TypeReferences typeReferences;
+
 	@Override
 	protected JvmTypeReference _expectedType(EObject obj, EReference reference, int index, boolean rawType) {
 		Object ele = obj.eGet(reference);
@@ -148,7 +152,9 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 	
 	@Override
 	protected JvmTypeReference type(XExpression expression, JvmTypeReference rawExpectation, boolean rawType) {
-		if (expression instanceof XAbstractFeatureCall) {
+		if (expression instanceof XFeatureCall) {
+			return _type((XFeatureCall)expression, rawExpectation, rawType);
+		} else if (expression instanceof XAbstractFeatureCall) {
 			return _type((XAbstractFeatureCall)expression, rawExpectation, rawType);
 		} else if (expression instanceof XAbstractWhileExpression) {
 			return _type((XAbstractWhileExpression)expression, rawExpectation, rawType);
@@ -980,7 +986,36 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 		return commonSuperType;
 	}
 
-	protected JvmTypeReference _type(final XAbstractFeatureCall featureCall, JvmTypeReference rawExpectation, boolean rawType) {
+	protected JvmTypeReference _type(final XFeatureCall featureCall, JvmTypeReference rawExpectation, boolean rawType) {
+		XCasePart typeGuardedXCasePartContainer = findTypeGuardedXCasePartContainer(featureCall, featureCall);
+		JvmTypeReference plainType = _type((XAbstractFeatureCall) featureCall, rawExpectation, rawType);
+		if (typeGuardedXCasePartContainer != null) {
+			return typeReferences.createMultiTypeReference(typeGuardedXCasePartContainer,
+					typeReferences.createDelegateTypeReference(typeGuardedXCasePartContainer.getTypeGuard()),
+					typeReferences.createDelegateTypeReference(plainType));
+		}
+		return plainType;
+	}
+
+	protected XCasePart findTypeGuardedXCasePartContainer(final EObject context, XFeatureCall call) {
+		if (context == null)
+			return null;
+		XCasePart containerCase = EcoreUtil2.getContainerOfType(context, XCasePart.class);
+		if (containerCase == null)
+			return null;
+		if (containerCase.getTypeGuard() != null) {
+			XSwitchExpression containerSwitch = (XSwitchExpression) containerCase.eContainer();
+			XExpression switchExpression = containerSwitch.getSwitch();
+			if (call.getFeature() == containerSwitch
+					|| (switchExpression instanceof XFeatureCall && ((XFeatureCall) switchExpression).getFeature() == call
+							.getFeature()))
+				return containerCase;
+		}
+		return findTypeGuardedXCasePartContainer(containerCase.eContainer(), call);
+	}
+
+	protected JvmTypeReference _type(final XAbstractFeatureCall featureCall, JvmTypeReference rawExpectation,
+			boolean rawType) {
 		final JvmIdentifiableElement feature = getFeature(featureCall);
 		if (feature == null || feature.eIsProxy())
 			return null;

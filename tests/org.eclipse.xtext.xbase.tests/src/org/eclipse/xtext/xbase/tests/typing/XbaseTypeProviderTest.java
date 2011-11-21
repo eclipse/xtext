@@ -14,6 +14,7 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
@@ -102,6 +103,14 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 				"switch true { case true : 's' case false : 'foo' default: 'bar'}");
 		assertResolvedType(Object.class.getName(),
 				"switch true { case true : 's' case false : new java.lang.Object() default: 'bar'}");
+	}
+	
+	public void testTypeGuardedCase() throws Exception {
+		XSwitchExpression expression = (XSwitchExpression) expression("switch  s: new Object() { String: s StringBuffer: s}", true);
+		assertEquals("java.lang.Object", toString(typeProvider.getType(expression.getSwitch())));
+		assertEquals("java.lang.String & java.lang.Object", toString(typeProvider.getType(expression.getCases().get(0).getThen())));
+		assertEquals("java.lang.StringBuffer & java.lang.Object", toString(typeProvider.getType(expression.getCases().get(1).getThen())));
+		assertEquals("java.io.Serializable", toString(typeProvider.getType(expression)));
 	}
 	
 	public void testSwitchExpression_Bug343100() throws Exception {
