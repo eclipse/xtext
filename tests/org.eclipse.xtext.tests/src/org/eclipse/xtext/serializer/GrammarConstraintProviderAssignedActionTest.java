@@ -7,21 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.GrammarToDot;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.grammaranalysis.IGrammarNFAProvider;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.serializer.analysis.ActionFilterNFAProvider;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
-import org.eclipse.xtext.serializer.analysis.ActionFilterNFAProvider.ActionFilterState;
-import org.eclipse.xtext.serializer.analysis.ActionFilterNFAProvider.ActionFilterTransition;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintContext;
 
@@ -34,41 +27,42 @@ import com.google.common.collect.Sets;
  */
 public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTests {
 
+	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(GrammarConstraintProviderAssignedActionTest.class);
 
-	private static class ActionFilter2Dot extends GrammarToDot {
-		protected IGrammarNFAProvider<ActionFilterState, ActionFilterTransition> nfaProvider = new ActionFilterNFAProvider();
-
-		@Override
-		protected Node drawAbstractElementTree(AbstractElement ele, Digraph d) {
-			Node n = super.drawAbstractElementTree(ele, d);
-			ActionFilterState nfas = nfaProvider.getNFA(ele);
-
-			for (ActionFilterTransition t : nfas.getOutgoing())
-				d.add(drawFollowerEdge(ele, t, false));
-			for (ActionFilterTransition t : nfas.getOutgoingAfterReturn())
-				d.add(drawFollowerEdge(ele, t, true));
-
-			if (nfas.getOutgoing().size() == 0 && nfas.getOutgoingAfterReturn().size() == 0 && !nfas.isEndState())
-				n.setStyle("dotted");
-			if (nfas.isEndState())
-				n.put("peripheries", "2");
-			return n;
-		}
-
-		protected Edge drawFollowerEdge(AbstractElement ele, ActionFilterTransition t, boolean isParent) {
-			Edge e = new Edge(ele, t.getTarget().getGrammarElement());
-			e.setLabel(String.valueOf(t.getPrecedence()));
-			e.setStyle("dotted");
-			if (isParent)
-				e.put("arrowtail", "odot");
-			if (t.isRuleCall())
-				e.put("arrowhead", "onormalonormal");
-			else
-				e.put("arrowhead", "onormal");
-			return e;
-		}
-	}
+//	private static class ActionFilter2Dot extends GrammarToDot {
+//		protected IGrammarNFAProvider<ActionFilterState, ActionFilterTransition> nfaProvider = new ActionFilterNFAProvider();
+//
+//		@Override
+//		protected Node drawAbstractElementTree(AbstractElement ele, Digraph d) {
+//			Node n = super.drawAbstractElementTree(ele, d);
+//			ActionFilterState nfas = nfaProvider.getNFA(ele);
+//
+//			for (ActionFilterTransition t : nfas.getOutgoing())
+//				d.add(drawFollowerEdge(ele, t, false));
+//			for (ActionFilterTransition t : nfas.getOutgoingAfterReturn())
+//				d.add(drawFollowerEdge(ele, t, true));
+//
+//			if (nfas.getOutgoing().size() == 0 && nfas.getOutgoingAfterReturn().size() == 0 && !nfas.isEndState())
+//				n.setStyle("dotted");
+//			if (nfas.isEndState())
+//				n.put("peripheries", "2");
+//			return n;
+//		}
+//
+//		protected Edge drawFollowerEdge(AbstractElement ele, ActionFilterTransition t, boolean isParent) {
+//			Edge e = new Edge(ele, t.getTarget().getGrammarElement());
+//			e.setLabel(String.valueOf(t.getPrecedence()));
+//			e.setStyle("dotted");
+//			if (isParent)
+//				e.put("arrowtail", "odot");
+//			if (t.isRuleCall())
+//				e.put("arrowhead", "onormalonormal");
+//			else
+//				e.put("arrowhead", "onormal");
+//			return e;
+//		}
+//	}
 
 	@Override
 	protected void setUp() throws Exception {
