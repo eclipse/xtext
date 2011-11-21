@@ -11,6 +11,8 @@ import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.List;
 
+import junit.framework.Test;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
@@ -18,20 +20,23 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
-import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.ui.contentassist.ReplacingAppendable;
-import org.eclipse.xtext.xtend2.ui.internal.Xtend2Activator;
+import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
+import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import com.google.inject.Provider;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class ReplacingAppendableTest extends AbstractXtend2TestCase {
+public class ReplacingAppendableTest extends AbstractXtend2UITestCase {
 
+	public static Test suite() {
+		return WorkbenchTestHelper.suite(ReplacingAppendableTest.class);
+	}
+	
 	@Inject
 	private ReplacingAppendable.Factory appendableFactory;
 
@@ -47,10 +52,8 @@ public class ReplacingAppendableTest extends AbstractXtend2TestCase {
 	@Inject
 	private EObjectAtOffsetHelper eObjectAtOffsetHelper;
 	
-	@Override
-	protected Injector doGetInjector() {
-		return Xtend2Activator.getInstance().getInjector("org.eclipse.xtext.xtend2.Xtend2");
-	}
+	@Inject 
+	private WorkbenchTestHelper testHelper;
 	
 	public void testImports_0() throws Exception {
 		final XtextDocument document = insertField("package test class Foo {|}", "foo", List.class);
@@ -81,7 +84,7 @@ public class ReplacingAppendableTest extends AbstractXtend2TestCase {
 			throws Exception {
 		final int cursorPosition = model.indexOf('|');
 		String actualModel = model.replace("|", " ");
-		final XtendFile file = file(actualModel);
+		final XtendFile file = testHelper.xtendFile("Foo", actualModel);
 		final XtextDocument document = documentProvider.get();
 		document.set(actualModel);
 		XtextResource xtextResource = (XtextResource) file.eResource();

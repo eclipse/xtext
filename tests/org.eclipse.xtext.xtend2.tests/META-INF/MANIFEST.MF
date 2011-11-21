@@ -15,7 +15,6 @@ Require-Bundle: org.eclipse.xtext.xtend2;bundle-version="2.0.0",
 Import-Package: org.apache.log4j;version="1.2.15"
 Bundle-ClassPath: .
 Export-Package: .,
- org.eclipse.xtext.xtend2.tests,
  org.eclipse.xtext.xtend2.tests.annotations,
  org.eclipse.xtext.xtend2.tests.compiler,
  org.eclipse.xtext.xtend2.tests.conversion,
