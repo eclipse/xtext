@@ -78,6 +78,18 @@ public class RefactoringIntegrationTest extends AbstractXtend2UITestCase {
 		performRenameTest("Foo", "class Foo <T> { def T foo() null }", "T", "U");
 	}
 
+	public void testRenameSwitchVar() throws Exception {
+		performRenameTest("Foo", "class Foo { " +
+				"def foo() {\n" +
+				"   val Object bar = ''\n" + 
+				"   switch(bar) {\n" + 
+				"      String: bar.length\n" +
+				"      Object: bar.hashCode\n" +
+				"      default: bar.hashCode\n" + 
+				"   }" +
+				"}", "bar", "baz");
+	}
+	
 	public void testRenameMethod() throws Exception {
 		performRenameTestWithReferringFile("Foo", "Foo", "class Foo { def Integer foo() { foo(); 1 }}", "Bar",
 				"class Baz { def baz(Foo arg) {arg.foo()} }", "foo", "bar");
