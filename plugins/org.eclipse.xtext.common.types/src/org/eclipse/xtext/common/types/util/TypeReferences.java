@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmArrayType;
+import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
@@ -101,6 +102,12 @@ public class TypeReferences {
 		if (!typeReferences.isEmpty())
 			reference.getArguments().addAll(typeReferences);
 		return reference;
+	}
+	
+	public JvmDelegateTypeReference createDelegateTypeReference(JvmTypeReference typeRef) {
+		JvmDelegateTypeReference delegate = factory.createJvmDelegateTypeReference();
+		delegate.setDelegate(typeRef);
+		return delegate;
 	}
 
 	public JvmTypeReference getArgument(JvmTypeReference left, int index) {
