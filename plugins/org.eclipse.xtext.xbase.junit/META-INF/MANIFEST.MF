@@ -12,8 +12,10 @@ Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.0.0";visibility:=r
  org.eclipse.xtext;bundle-version="2.0.0";resolution:=optional;visibility:=reexport,
  org.eclipse.xtext.ui.junit;bundle-version="2.0.0";resolution:=optional;visibility:=reexport,
  org.eclipse.xtext.xbase;bundle-version="2.0.0";resolution:=optional;visibility:=reexport,
- org.eclipse.core.runtime;resolution:=optional;visibility:=reexport
-Export-Package: org.eclipse.xtext.xbase.junit.evaluation,
+ org.eclipse.core.runtime;resolution:=optional;visibility:=reexport,
+ org.eclipse.jdt.core;bundle-version="3.5.2";resolution:=optional
+Export-Package: org.eclipse.xtext.xbase.compiler,
+ org.eclipse.xtext.xbase.junit.evaluation,
  org.eclipse.xtext.xbase.junit.ui,
  testdata
 Bundle-Name: %pluginName
