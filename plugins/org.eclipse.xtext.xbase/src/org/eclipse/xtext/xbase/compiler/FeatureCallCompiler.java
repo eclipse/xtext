@@ -12,11 +12,14 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
@@ -242,9 +245,9 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 					serialize(typeArgument, call, b);
 				}
 				b.append(">");
-			} else if (call.getFeature() instanceof JvmOperation) {
-				final JvmOperation operation = (JvmOperation) call.getFeature();
-				if (!operation.getTypeParameters().isEmpty()) {
+			} else if (call.getFeature() instanceof JvmExecutable) {
+				final JvmExecutable executable = (JvmExecutable) call.getFeature();
+				if (!executable.getTypeParameters().isEmpty()) {
 					XExpression receiver = featureCallToJavaMapping.getActualReceiver(call);
 					final JvmTypeReference receiverType = receiver != null
 						? getTypeProvider().getType(receiver)
@@ -259,7 +262,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 							new TypeArgumentContextProvider.AbstractRequest() {
 								@Override
 								public JvmFeature getFeature() {
-									return operation;
+									return executable;
 								}
 								@Override
 								public JvmTypeParameterDeclarator getNearestDeclarator() {
@@ -281,7 +284,9 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 								}
 								@Override
 								public JvmTypeReference getDeclaredType() {
-									return operation.getReturnType();
+									if (executable instanceof JvmOperation)
+										return ((JvmOperation) executable).getReturnType();
+									return null;
 								}
 								@Override
 								public JvmTypeReference getReceiverType() {
@@ -303,8 +308,8 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 					);
 					List<JvmTypeReference> resolvedTypeArguments = Lists.newArrayList();
 					boolean containedUnresolved = false;
-					for(int i = 0; i < operation.getTypeParameters().size() && !containedUnresolved; i++) {
-						JvmTypeParameter typeParameter = operation.getTypeParameters().get(i);
+					for(int i = 0; i < executable.getTypeParameters().size() && !containedUnresolved; i++) {
+						JvmTypeParameter typeParameter = executable.getTypeParameters().get(i);
 						JvmTypeReference typeArgument = typeArgumentContext.getBoundArgument(typeParameter);
 						if (typeArgument != null) {
 							if (isReferenceToForeignTypeParameter(typeArgument, call)) {
@@ -441,12 +446,24 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	}
 
 	protected void appendFeatureCall(XAbstractFeatureCall call, IAppendable b) {
-		String name = featureNameProvider.getSimpleName(call.getFeature());
+		JvmIdentifiableElement feature = call.getFeature();
+		String name;
+		if (feature instanceof JvmConstructor) {
+			JvmDeclaredType constructorContainer = ((JvmConstructor) feature).getDeclaringType();
+			JvmIdentifiableElement logicalContainer = contextProvider.getNearestLogicalContainer(call);
+			JvmDeclaredType contextType = ((JvmMember) logicalContainer).getDeclaringType();
+			if (contextType == constructorContainer)
+				name = "this";
+			else
+				name = "super";	
+		} else {
+			name = featureNameProvider.getSimpleName(feature);
+		}
 		b.append(name);
-		if (call.getFeature() instanceof JvmOperation) {
+		if (feature instanceof JvmExecutable) {
 			b.append("(");
 			List<XExpression> arguments = featureCallToJavaMapping.getActualArguments(call);
-			appendArguments(arguments, (JvmExecutable)call.getFeature(), call, b);
+			appendArguments(arguments, (JvmExecutable)feature, call, b);
 			b.append(")");
 		}
 	}

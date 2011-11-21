@@ -139,10 +139,10 @@ class JvmModelGenerator implements IGenerator {
 	'''
 	
 	def dispatch generateMember(JvmConstructor it, ImportManager importManager) {
-		if(!it.parameters.empty || it.associatedExpression != null) '''
+		if(!parameters.empty || associatedExpression != null) '''
 			«it.generateJavaDoc»
 			«IF !annotations.empty»«it.annotations.generateAnnotations(importManager)»«ENDIF»
-			«it.generateModifier» «simpleName»(«it.parameters.map( p | p.generateParameter(importManager)).join(", ")»)«generateThrowsClause(it, importManager)» {
+			«it.generateModifier»«simpleName»(«it.parameters.map( p | p.generateParameter(importManager)).join(", ")»)«generateThrowsClause(it, importManager)» {
 			  «it.generateBody(importManager)»
 			}
 		''' else null
@@ -187,7 +187,8 @@ class JvmModelGenerator implements IGenerator {
 				for(p: op.parameters) 
 					appendable.declareVariable(p, p.simpleName)
 				val returnType = switch(op) { 
-					JvmOperation: op.returnType 
+					JvmOperation: op.returnType
+					JvmConstructor: Void::TYPE.getTypeForName(op) 
 					default: null
 				};
 				compiler.compile(expression, appendable, returnType, op.exceptions.toSet)
