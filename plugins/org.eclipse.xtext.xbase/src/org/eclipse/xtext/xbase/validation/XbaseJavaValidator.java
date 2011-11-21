@@ -153,7 +153,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			return ((XMemberFeatureCall) expr).getFeature() instanceof JvmField;
 		}
 		if (expr instanceof XFeatureCall) {
-			return !(((XFeatureCall) expr).getFeature() instanceof JvmOperation);
+			return !(((XFeatureCall) expr).getFeature() instanceof JvmExecutable);
 		}
 		if (expr instanceof XCastedExpression) {
 			return isSideEffectFree(((XCastedExpression) expr).getTarget());
@@ -453,7 +453,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	}
 
 	protected boolean isImplicitReturn(XExpression expr) {
-		return (logicalContainerProvider.getLogicalContainer(expr) instanceof JvmOperation || expr.eContainer() instanceof XClosure)
+		return (logicalContainerProvider.getLogicalContainer(expr) instanceof JvmExecutable || expr.eContainer() instanceof XClosure)
 				&& !earlyExitComputer.isEarlyExit(expr);
 	}
 
