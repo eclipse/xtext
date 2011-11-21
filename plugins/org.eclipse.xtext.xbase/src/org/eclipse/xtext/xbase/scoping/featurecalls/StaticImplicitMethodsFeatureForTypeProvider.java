@@ -27,6 +27,7 @@ import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.MapExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -110,6 +111,7 @@ public class StaticImplicitMethodsFeatureForTypeProvider extends AbstractStaticM
 			result.put(Map.class, CollectionExtensions.class);
 			result.put(Map.class, MapExtensions.class);
 			result.put(Iterable.class, IterableExtensions.class);
+			result.put(Iterator.class, IteratorExtensions.class);
 			result.put(Functions.Function0.class, FunctionExtensions.class);
 			result.put(Functions.Function1.class, FunctionExtensions.class);
 			result.put(Functions.Function2.class, FunctionExtensions.class);
