@@ -37,6 +37,67 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	@Inject
 	private ValidationTestHelper helper;
 	
+	public void testCircularConstructor_01() throws Exception {
+		XtendClass clazz = clazz("class Z { new() { this() }}");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.CIRCULAR_CONSTRUCTOR_INVOCATION);
+	}
+	
+	public void testCircularConstructor_02() throws Exception {
+		XtendClass clazz = clazz("class Z { new() { this(1) } new(int a) { this() } }");
+		helper.assertError(clazz.getMembers().get(0), XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.CIRCULAR_CONSTRUCTOR_INVOCATION);
+		helper.assertError(clazz.getMembers().get(1), XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.CIRCULAR_CONSTRUCTOR_INVOCATION);
+	}
+	
+	public void testCircularConstructor_03() throws Exception {
+		XtendClass clazz = clazz("class Z { new() { this(1) } new(int a) { super() } }");
+		helper.assertNoErrors(clazz);
+	}
+	
+	public void testConstructorCallIsFirst_01() throws Exception {
+		XtendClass clazz = clazz("class Z { new() { super() } new(int a) { this() } }");
+		helper.assertNoErrors(clazz);
+	}
+	
+	public void testConstructorCallIsFirst_02() throws Exception {
+		XtendClass clazz = clazz("class Z { new() { { this() } }}");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_CONSTRUCTOR_INVOCATION);
+	}
+	
+	public void testConstructorCallIsFirst_03() throws Exception {
+		XtendClass clazz = clazz("class Z { new() { if (true) super() } }");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_CONSTRUCTOR_INVOCATION);
+	}
+	
+	public void testConstructorArgumentIsValid_01() throws Exception {
+		XtendClass clazz = clazz("class Z { new() { this(1) } new(int i) {} }");
+		helper.assertNoErrors(clazz);
+	}
+	
+	public void testConstructorArgumentIsValid_02() throws Exception {
+		XtendClass clazz = clazz("class Z { static int j new() { this(j) } new(int i) {} }");
+		helper.assertNoErrors(clazz);
+	}
+	
+	public void testConstructorArgumentIsValid_03() throws Exception {
+		XtendClass clazz = clazz("class Z { int j new() { this(j) } new(int i) {} }");
+		helper.assertError(clazz.getMembers().get(1), XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_CONSTRUCTOR_ARGUMENT);
+	}
+	
+	public void testConstructorArgumentIsValid_04() throws Exception {
+		XtendClass clazz = clazz("class Z { new() { this(z()) } new(Object o) {} def static z() { null } }");
+		helper.assertError(clazz.getMembers().get(0), XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_CONSTRUCTOR_ARGUMENT);
+	}
+	
+	public void testConstructorArgumentIsValid_05() throws Exception {
+		XtendClass clazz = clazz("class Z { new() { this(null as Object) } new(Object o) {} }");
+		helper.assertNoErrors(clazz);
+	}
+	
+	public void testConstructorArgumentIsValid_06() throws Exception {
+		XtendClass clazz = clazz("class Z { new(Object o) { this(o as String) } new(String o) {} }");
+		helper.assertNoErrors(clazz);
+	}
+	
 	public void testReturnStatement() throws Exception {
 		XtendClass clazz = clazz("class Z { def void foo() { return 'holla' }}");
 		helper.assertError(clazz, XbasePackage.Literals.XRETURN_EXPRESSION, org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_RETURN);
@@ -50,9 +111,9 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	public void testBug_357230() throws Exception {
 		XtendClass clazz = clazz(
 				"package x class Z {" +
-						"  def dispatch _foo(Object x, boolean b) {}\n" +
-						"  def dispatch _foo(String x, boolean b) {}\n" +
-						"}\n");
+				"  def dispatch _foo(Object x, boolean b) {}\n" +
+				"  def dispatch _foo(String x, boolean b) {}\n" +
+				"}\n");
 		helper.assertError(clazz, Xtend2Package.Literals.XTEND_FUNCTION, IssueCodes.DISPATCH_FUNC_NAME_STARTS_WITH_UNDERSCORE);
 	}
 	
@@ -182,7 +243,8 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	}
 
 	public void testReturnTypeCompatibility_03() throws Exception {
-		XtendFunction function = function("def String foo(int bar) { " 
+		XtendFunction function = function(
+				  "def String foo(int bar) { " 
 				+ " if (true) {"
 				+ "  return if (false) 42 else new Object()" 
 				+ " }" 
