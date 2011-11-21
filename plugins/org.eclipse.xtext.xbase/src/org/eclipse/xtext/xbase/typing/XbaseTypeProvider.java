@@ -984,6 +984,9 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 		final JvmIdentifiableElement feature = getFeature(featureCall);
 		if (feature == null || feature.eIsProxy())
 			return null;
+		if (feature instanceof JvmConstructor) {
+			return getPrimitiveVoid(featureCall);
+		}
 		final JvmTypeReference featureType = getTypeForIdentifiable(feature, rawType);
 		final JvmTypeParameterDeclarator nearestTypeParameterDeclarator = getNearestTypeParameterDeclarator(featureCall);
 		if (isResolved(featureType, nearestTypeParameterDeclarator, rawType)) {
@@ -1287,6 +1290,9 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 		JvmIdentifiableElement logicalContainer = logicalContainerProvider.getNearestLogicalContainer(expr);
 		if (logicalContainer instanceof JvmOperation) {
 			return ((JvmOperation) logicalContainer).getReturnType();
+		}
+		if (logicalContainer instanceof JvmConstructor) {
+			return getPrimitiveVoid(expr);
 		}
 		return null;
 	}
