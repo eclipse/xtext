@@ -32,7 +32,6 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-import com.google.inject.internal.Nullable;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -42,7 +41,7 @@ public class EditorResourceAccess implements ILocalResourceAccess {
 	private static final Logger LOG = Logger.getLogger(EditorResourceAccess.class);
 
 	@Inject(optional = true)
-	@Nullable
+//	@Nullable
 	private IWorkbench workbench;
 
 	@Inject

@@ -22,9 +22,9 @@ import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 
 import com.google.common.base.Function;
+import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.inject.internal.Join;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -57,9 +57,9 @@ public class ContextProviderTest extends AbstractXtextTests {
 				return o1.getFirst().compareTo(o2.getFirst());
 			}
 		});
-		return Join.join("\n", Iterables.transform(result, new Function<Pair<String, List<String>>, String>() {
+		return Joiner.on("\n").join(Iterables.transform(result, new Function<Pair<String, List<String>>, String>() {
 			public String apply(Pair<String, List<String>> from) {
-				return from.getFirst() + " returns " + Join.join(", ", from.getSecond());
+				return from.getFirst() + " returns " + Joiner.on(", ").join(from.getSecond());
 			}
 		}));
 	}

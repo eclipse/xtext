@@ -34,7 +34,6 @@ import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
-import com.google.inject.internal.Nullable;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -52,7 +51,8 @@ public class GlobalURIEditorOpener implements IURIEditorOpener {
 	@Inject
 	private IStorage2UriMapper mapper;
 	
-	@Inject @Nullable
+	@Inject 
+	//@Nullable
 	private IWorkbench workbench;
 	
 	public IEditorPart open(URI uri, boolean select) {

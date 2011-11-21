@@ -24,8 +24,8 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.google.inject.internal.Maps;
 
 /**
  * @author Sven Efftinge - Initial contribution and API

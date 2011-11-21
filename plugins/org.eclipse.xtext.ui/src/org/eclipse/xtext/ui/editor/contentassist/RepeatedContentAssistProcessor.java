@@ -18,7 +18,6 @@ import org.eclipse.ui.IWorkbenchCommandConstants;
 import org.eclipse.ui.keys.IBindingService;
 
 import com.google.inject.Inject;
-import com.google.inject.internal.Nullable;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -54,7 +53,7 @@ public class RepeatedContentAssistProcessor extends XtextContentAssistProcessor 
 	}
 	
 	@Inject(optional = true)
-	@Nullable
+//	@Nullable
 	private IWorkbench workbench;
 	
 	private IContentAssistantExtension2 currentAssistant;
