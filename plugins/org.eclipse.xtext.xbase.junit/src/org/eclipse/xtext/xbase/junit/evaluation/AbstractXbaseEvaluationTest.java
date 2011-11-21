@@ -51,6 +51,10 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo(newArrayList("a","bb","ccc"), "newArrayList('bb','a','ccc').sortBy([length])");
 	}
 	
+	@Test public void testBug362725() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE, "{ val =>int closure = null closure == null }");
+	}
+	
 	@Test public void testBuilderSyntax_01() throws Exception {
 		assertEvaluatesTo(newArrayList("a","bb","ccc"), "newArrayList('a','bb','ccc').sortBy [length]");
 	}

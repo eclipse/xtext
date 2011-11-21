@@ -16,6 +16,8 @@ import java.util.Map.Entry;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -130,7 +132,7 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 		final Map<JvmTypeReference, Integer> result = Maps.newLinkedHashMap();
 		final Wrapper<Integer> addOn = Wrapper.wrap(Integer.valueOf(0));
 		final Map<JvmType, JvmTypeReference> visited = Maps.newHashMap();
-		if (!(typeRef.getType() instanceof JvmTypeParameter)) {
+		if (!(typeRef instanceof JvmSpecializedTypeReference) && !(typeRef.getType() instanceof JvmTypeParameter)) {
 			result.put(typeRef, -1);
 			visited.put(typeRef.getType(), typeRef);
 		}
