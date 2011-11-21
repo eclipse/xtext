@@ -21,6 +21,7 @@ import org.eclipse.xtext.xtend2.Xtend2StandaloneSetup;
 import org.eclipse.xtext.xtend2.validation.ClasspathBasedChecks;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Factory;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendConstructor;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
@@ -143,6 +144,11 @@ public abstract class AbstractXtend2TestCase extends TestCase {
 	protected XtendFunction function(String string) throws Exception {
 		XtendClass clazz = clazz("class Foo { " + string + "}");
 		return (XtendFunction) clazz.getMembers().get(0);
+	}
+	
+	protected XtendConstructor constructor(String string) throws Exception {
+		XtendClass clazz = clazz("class Foo { " + string + "}");
+		return (XtendConstructor) clazz.getMembers().get(0);
 	}
 
 }
