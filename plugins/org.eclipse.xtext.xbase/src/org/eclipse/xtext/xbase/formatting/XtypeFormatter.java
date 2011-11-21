@@ -30,8 +30,8 @@ public class XtypeFormatter extends AbstractDeclarativeFormatter {
 
 	public void configureXFunctionTypeRef(FormattingConfig c, XFunctionTypeRefElements ele) {
 		c.setNoSpace().after(ele.getLeftParenthesisKeyword_0_0());
-		c.setNoSpace().before(ele.getCommaKeyword_0_2_0());
-		c.setNoSpace().before(ele.getLeftParenthesisKeyword_0_0());
+		c.setNoSpace().before(ele.getCommaKeyword_0_1_1_0());
+		c.setNoSpace().before(ele.getRightParenthesisKeyword_0_2());
 	}
 
 	public void configureJvmParameterizedTypeReference(FormattingConfig c, JvmParameterizedTypeReferenceElements ele) {
