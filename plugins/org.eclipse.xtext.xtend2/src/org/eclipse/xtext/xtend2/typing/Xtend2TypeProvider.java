@@ -34,6 +34,7 @@ import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendClassSuperCallReferable;
+import org.eclipse.xtext.xtend2.xtend2.XtendConstructor;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendParameter;
 
@@ -98,6 +99,8 @@ public class Xtend2TypeProvider extends XbaseWithAnnotationsTypeProvider {
 			return _expectedType((RichStringIf)container, reference, index, rawType);
 		} else if (container instanceof XtendFunction) {
 			return _expectedType((XtendFunction)container, reference, index, rawType);
+		} else if (container instanceof XtendConstructor) {
+			return _expectedType((XtendConstructor)container, reference, index, rawType);
 		} else {
 			return super.expectedType(container, reference, index, rawType);
 		}
@@ -121,6 +124,13 @@ public class Xtend2TypeProvider extends XbaseWithAnnotationsTypeProvider {
 				declaredOrInferredReturnType = getTypeReferences().getTypeForName(Object.class, function);
 			}
 			return declaredOrInferredReturnType;
+		}
+		return null;
+	}
+	
+	protected JvmTypeReference _expectedType(XtendConstructor constructor, EReference reference, int index, boolean rawType) {
+		if (reference == Xtend2Package.Literals.XTEND_CONSTRUCTOR__EXPRESSION) {
+			return getTypeReferences().getTypeForName(Void.TYPE, constructor);
 		}
 		return null;
 	}

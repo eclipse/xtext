@@ -5,6 +5,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -15,6 +16,7 @@ import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
+import org.eclipse.xtext.xtend2.xtend2.XtendConstructor;
 import org.eclipse.xtext.xtend2.xtend2.XtendField;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
 import org.eclipse.xtext.xtend2.xtend2.RichStringElseIf;
@@ -435,6 +437,22 @@ public class ParserTest extends AbstractXtend2TestCase {
 		assertTrue(importDeclaration.isWildcard());
 		assertTrue(importDeclaration.isStatic());
 		assertTrue(importDeclaration.isExtension());
+	}
+	
+	public void testConstructor_01() throws Exception {
+		XtendConstructor constructor = constructor("new() {}");
+		assertTrue(constructor.getTypeParameters().isEmpty());
+		assertTrue(constructor.getExceptions().isEmpty());
+		assertTrue(constructor.getParameters().isEmpty());
+		assertEquals(JvmVisibility.PUBLIC, constructor.getVisibility());
+	}
+	
+	public void testConstructor_02() throws Exception {
+		XtendConstructor constructor = constructor("protected new(int a) throws RuntimeException { super() }");
+		assertTrue(constructor.getTypeParameters().isEmpty());
+		assertEquals(1, constructor.getExceptions().size());
+		assertEquals(1, constructor.getParameters().size());
+		assertEquals(JvmVisibility.PROTECTED, constructor.getVisibility());
 	}
 	
 	protected XtendImport importDeclaration(String importAsString) throws Exception {
