@@ -82,7 +82,11 @@ ruleMember :
 			ruleXBlockExpression |
 			ruleRichString
 		)? |
-		ruleVisibility? 'new' '(' (
+		ruleVisibility? 'new' (
+			'<' ruleJvmTypeParameter (
+				',' ruleJvmTypeParameter
+			)* '>'
+		)? '(' (
 			ruleParameter (
 				',' ruleParameter
 			)*
@@ -730,9 +734,11 @@ ruleJvmTypeReference :
 // Rule XFunctionTypeRef
 ruleXFunctionTypeRef :
 	(
-		'(' ruleJvmTypeReference (
-			',' ruleJvmTypeReference
-		)* ')'
+		'(' (
+			ruleJvmTypeReference (
+				',' ruleJvmTypeReference
+			)*
+		)? ')'
 	)? '=>' ruleJvmTypeReference
 ;
 

@@ -56,7 +56,7 @@ Member returns XtendMember:
 			(expression=XBlockExpression | expression=RichString )?
 	|	{XtendConstructor.annotationInfo = current}
 			visibility=Visibility? 'new' 
-//			('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
+			('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
 			'(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')'
 			('throws' exceptions+=JvmTypeReference (',' exceptions+=JvmTypeReference)*)?
 			expression=XBlockExpression

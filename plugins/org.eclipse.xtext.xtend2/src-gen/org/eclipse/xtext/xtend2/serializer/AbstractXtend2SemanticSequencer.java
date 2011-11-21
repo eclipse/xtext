@@ -1326,7 +1326,13 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	 *             (
 	 *                 (
 	 *                     (
-	 *                         (annotationInfo=Member_XtendConstructor_2_2_0 visibility=Visibility? (parameters+=Parameter parameters+=Parameter*)?) | 
+	 *                         (
+	 *                             (
+	 *                                 (annotationInfo=Member_XtendConstructor_2_2_0 visibility=Visibility? (typeParameters+=JvmTypeParameter typeParameters+=JvmTypeParameter*)?) | 
+	 *                                 (annotationInfo=Member_XtendConstructor_2_2_0 (typeParameters+=JvmTypeParameter typeParameters+=JvmTypeParameter*)?)
+	 *                             ) 
+	 *                             (parameters+=Parameter parameters+=Parameter*)?
+	 *                         ) | 
 	 *                         (annotationInfo=Member_XtendConstructor_2_2_0 (parameters+=Parameter parameters+=Parameter*)?)
 	 *                     ) 
 	 *                     (exceptions+=JvmTypeReference exceptions+=JvmTypeReference*)?

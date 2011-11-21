@@ -411,25 +411,34 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cVisibilityAssignment_2_2_1 = (Assignment)cGroup_2_2.eContents().get(1);
 		private final RuleCall cVisibilityVisibilityEnumRuleCall_2_2_1_0 = (RuleCall)cVisibilityAssignment_2_2_1.eContents().get(0);
 		private final Keyword cNewKeyword_2_2_2 = (Keyword)cGroup_2_2.eContents().get(2);
-		private final Keyword cLeftParenthesisKeyword_2_2_3 = (Keyword)cGroup_2_2.eContents().get(3);
-		private final Group cGroup_2_2_4 = (Group)cGroup_2_2.eContents().get(4);
-		private final Assignment cParametersAssignment_2_2_4_0 = (Assignment)cGroup_2_2_4.eContents().get(0);
-		private final RuleCall cParametersParameterParserRuleCall_2_2_4_0_0 = (RuleCall)cParametersAssignment_2_2_4_0.eContents().get(0);
-		private final Group cGroup_2_2_4_1 = (Group)cGroup_2_2_4.eContents().get(1);
-		private final Keyword cCommaKeyword_2_2_4_1_0 = (Keyword)cGroup_2_2_4_1.eContents().get(0);
-		private final Assignment cParametersAssignment_2_2_4_1_1 = (Assignment)cGroup_2_2_4_1.eContents().get(1);
-		private final RuleCall cParametersParameterParserRuleCall_2_2_4_1_1_0 = (RuleCall)cParametersAssignment_2_2_4_1_1.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_2_2_5 = (Keyword)cGroup_2_2.eContents().get(5);
-		private final Group cGroup_2_2_6 = (Group)cGroup_2_2.eContents().get(6);
-		private final Keyword cThrowsKeyword_2_2_6_0 = (Keyword)cGroup_2_2_6.eContents().get(0);
-		private final Assignment cExceptionsAssignment_2_2_6_1 = (Assignment)cGroup_2_2_6.eContents().get(1);
-		private final RuleCall cExceptionsJvmTypeReferenceParserRuleCall_2_2_6_1_0 = (RuleCall)cExceptionsAssignment_2_2_6_1.eContents().get(0);
-		private final Group cGroup_2_2_6_2 = (Group)cGroup_2_2_6.eContents().get(2);
-		private final Keyword cCommaKeyword_2_2_6_2_0 = (Keyword)cGroup_2_2_6_2.eContents().get(0);
-		private final Assignment cExceptionsAssignment_2_2_6_2_1 = (Assignment)cGroup_2_2_6_2.eContents().get(1);
-		private final RuleCall cExceptionsJvmTypeReferenceParserRuleCall_2_2_6_2_1_0 = (RuleCall)cExceptionsAssignment_2_2_6_2_1.eContents().get(0);
-		private final Assignment cExpressionAssignment_2_2_7 = (Assignment)cGroup_2_2.eContents().get(7);
-		private final RuleCall cExpressionXBlockExpressionParserRuleCall_2_2_7_0 = (RuleCall)cExpressionAssignment_2_2_7.eContents().get(0);
+		private final Group cGroup_2_2_3 = (Group)cGroup_2_2.eContents().get(3);
+		private final Keyword cLessThanSignKeyword_2_2_3_0 = (Keyword)cGroup_2_2_3.eContents().get(0);
+		private final Assignment cTypeParametersAssignment_2_2_3_1 = (Assignment)cGroup_2_2_3.eContents().get(1);
+		private final RuleCall cTypeParametersJvmTypeParameterParserRuleCall_2_2_3_1_0 = (RuleCall)cTypeParametersAssignment_2_2_3_1.eContents().get(0);
+		private final Group cGroup_2_2_3_2 = (Group)cGroup_2_2_3.eContents().get(2);
+		private final Keyword cCommaKeyword_2_2_3_2_0 = (Keyword)cGroup_2_2_3_2.eContents().get(0);
+		private final Assignment cTypeParametersAssignment_2_2_3_2_1 = (Assignment)cGroup_2_2_3_2.eContents().get(1);
+		private final RuleCall cTypeParametersJvmTypeParameterParserRuleCall_2_2_3_2_1_0 = (RuleCall)cTypeParametersAssignment_2_2_3_2_1.eContents().get(0);
+		private final Keyword cGreaterThanSignKeyword_2_2_3_3 = (Keyword)cGroup_2_2_3.eContents().get(3);
+		private final Keyword cLeftParenthesisKeyword_2_2_4 = (Keyword)cGroup_2_2.eContents().get(4);
+		private final Group cGroup_2_2_5 = (Group)cGroup_2_2.eContents().get(5);
+		private final Assignment cParametersAssignment_2_2_5_0 = (Assignment)cGroup_2_2_5.eContents().get(0);
+		private final RuleCall cParametersParameterParserRuleCall_2_2_5_0_0 = (RuleCall)cParametersAssignment_2_2_5_0.eContents().get(0);
+		private final Group cGroup_2_2_5_1 = (Group)cGroup_2_2_5.eContents().get(1);
+		private final Keyword cCommaKeyword_2_2_5_1_0 = (Keyword)cGroup_2_2_5_1.eContents().get(0);
+		private final Assignment cParametersAssignment_2_2_5_1_1 = (Assignment)cGroup_2_2_5_1.eContents().get(1);
+		private final RuleCall cParametersParameterParserRuleCall_2_2_5_1_1_0 = (RuleCall)cParametersAssignment_2_2_5_1_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_2_2_6 = (Keyword)cGroup_2_2.eContents().get(6);
+		private final Group cGroup_2_2_7 = (Group)cGroup_2_2.eContents().get(7);
+		private final Keyword cThrowsKeyword_2_2_7_0 = (Keyword)cGroup_2_2_7.eContents().get(0);
+		private final Assignment cExceptionsAssignment_2_2_7_1 = (Assignment)cGroup_2_2_7.eContents().get(1);
+		private final RuleCall cExceptionsJvmTypeReferenceParserRuleCall_2_2_7_1_0 = (RuleCall)cExceptionsAssignment_2_2_7_1.eContents().get(0);
+		private final Group cGroup_2_2_7_2 = (Group)cGroup_2_2_7.eContents().get(2);
+		private final Keyword cCommaKeyword_2_2_7_2_0 = (Keyword)cGroup_2_2_7_2.eContents().get(0);
+		private final Assignment cExceptionsAssignment_2_2_7_2_1 = (Assignment)cGroup_2_2_7_2.eContents().get(1);
+		private final RuleCall cExceptionsJvmTypeReferenceParserRuleCall_2_2_7_2_1_0 = (RuleCall)cExceptionsAssignment_2_2_7_2_1.eContents().get(0);
+		private final Assignment cExpressionAssignment_2_2_8 = (Assignment)cGroup_2_2.eContents().get(8);
+		private final RuleCall cExpressionXBlockExpressionParserRuleCall_2_2_8_0 = (RuleCall)cExpressionAssignment_2_2_8.eContents().get(0);
 		
 		//Member returns XtendMember:
 		//	{XtendMember} annotations+=XAnnotation* ({XtendField.annotationInfo=current} visibility=Visibility?
@@ -440,9 +449,9 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		//	(returnType=JvmTypeReference name=ValidID "(") | => (createExtensionInfo=CreateExtensionInfo name=ValidID "(") |
 		//	name=ValidID "(") (parameters+=Parameter ("," parameters+=Parameter)*)? ")" ("throws" exceptions+=JvmTypeReference
 		//	("," exceptions+=JvmTypeReference)*)? (expression=XBlockExpression | expression=RichString)? |
-		//	{XtendConstructor.annotationInfo=current} visibility=Visibility? "new" //			('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
-		//	"(" (parameters+=Parameter ("," parameters+=Parameter)*)? ")" ("throws" exceptions+=JvmTypeReference (","
-		//	exceptions+=JvmTypeReference)*)? expression=XBlockExpression);
+		//	{XtendConstructor.annotationInfo=current} visibility=Visibility? "new" ("<" typeParameters+=JvmTypeParameter (","
+		//	typeParameters+=JvmTypeParameter)* ">")? "(" (parameters+=Parameter ("," parameters+=Parameter)*)? ")" ("throws"
+		//	exceptions+=JvmTypeReference ("," exceptions+=JvmTypeReference)*)? expression=XBlockExpression);
 		public ParserRule getRule() { return rule; }
 
 		//{XtendMember} annotations+=XAnnotation* ({XtendField.annotationInfo=current} visibility=Visibility?
@@ -453,9 +462,9 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		//(returnType=JvmTypeReference name=ValidID "(") | => (createExtensionInfo=CreateExtensionInfo name=ValidID "(") |
 		//name=ValidID "(") (parameters+=Parameter ("," parameters+=Parameter)*)? ")" ("throws" exceptions+=JvmTypeReference (","
 		//exceptions+=JvmTypeReference)*)? (expression=XBlockExpression | expression=RichString)? |
-		//{XtendConstructor.annotationInfo=current} visibility=Visibility? "new" //			('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
-		//"(" (parameters+=Parameter ("," parameters+=Parameter)*)? ")" ("throws" exceptions+=JvmTypeReference (","
-		//exceptions+=JvmTypeReference)*)? expression=XBlockExpression)
+		//{XtendConstructor.annotationInfo=current} visibility=Visibility? "new" ("<" typeParameters+=JvmTypeParameter (","
+		//typeParameters+=JvmTypeParameter)* ">")? "(" (parameters+=Parameter ("," parameters+=Parameter)*)? ")" ("throws"
+		//exceptions+=JvmTypeReference ("," exceptions+=JvmTypeReference)*)? expression=XBlockExpression)
 		public Group getGroup() { return cGroup; }
 
 		//{XtendMember}
@@ -475,8 +484,8 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		//(createExtensionInfo=CreateExtensionInfo name=ValidID "(") | name=ValidID "(") (parameters+=Parameter (","
 		//parameters+=Parameter)*)? ")" ("throws" exceptions+=JvmTypeReference ("," exceptions+=JvmTypeReference)*)?
 		//(expression=XBlockExpression | expression=RichString)? | {XtendConstructor.annotationInfo=current}
-		//visibility=Visibility? "new" //			('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
-		//"(" (parameters+=Parameter ("," parameters+=Parameter)*)? ")" ("throws" exceptions+=JvmTypeReference (","
+		//visibility=Visibility? "new" ("<" typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")? "("
+		//(parameters+=Parameter ("," parameters+=Parameter)*)? ")" ("throws" exceptions+=JvmTypeReference (","
 		//exceptions+=JvmTypeReference)*)? expression=XBlockExpression
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
@@ -755,9 +764,9 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		//RichString
 		public RuleCall getExpressionRichStringParserRuleCall_2_1_10_1_0() { return cExpressionRichStringParserRuleCall_2_1_10_1_0; }
 
-		//{XtendConstructor.annotationInfo=current} visibility=Visibility? "new" //			('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
-		//"(" (parameters+=Parameter ("," parameters+=Parameter)*)? ")" ("throws" exceptions+=JvmTypeReference (","
-		//exceptions+=JvmTypeReference)*)? expression=XBlockExpression
+		//{XtendConstructor.annotationInfo=current} visibility=Visibility? "new" ("<" typeParameters+=JvmTypeParameter (","
+		//typeParameters+=JvmTypeParameter)* ">")? "(" (parameters+=Parameter ("," parameters+=Parameter)*)? ")" ("throws"
+		//exceptions+=JvmTypeReference ("," exceptions+=JvmTypeReference)*)? expression=XBlockExpression
 		public Group getGroup_2_2() { return cGroup_2_2; }
 
 		//{XtendConstructor.annotationInfo=current}
@@ -772,63 +781,89 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		//"new"
 		public Keyword getNewKeyword_2_2_2() { return cNewKeyword_2_2_2; }
 
-		////			('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
+		//("<" typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")?
+		public Group getGroup_2_2_3() { return cGroup_2_2_3; }
+
+		//"<"
+		public Keyword getLessThanSignKeyword_2_2_3_0() { return cLessThanSignKeyword_2_2_3_0; }
+
+		//typeParameters+=JvmTypeParameter
+		public Assignment getTypeParametersAssignment_2_2_3_1() { return cTypeParametersAssignment_2_2_3_1; }
+
+		//JvmTypeParameter
+		public RuleCall getTypeParametersJvmTypeParameterParserRuleCall_2_2_3_1_0() { return cTypeParametersJvmTypeParameterParserRuleCall_2_2_3_1_0; }
+
+		//("," typeParameters+=JvmTypeParameter)*
+		public Group getGroup_2_2_3_2() { return cGroup_2_2_3_2; }
+
+		//","
+		public Keyword getCommaKeyword_2_2_3_2_0() { return cCommaKeyword_2_2_3_2_0; }
+
+		//typeParameters+=JvmTypeParameter
+		public Assignment getTypeParametersAssignment_2_2_3_2_1() { return cTypeParametersAssignment_2_2_3_2_1; }
+
+		//JvmTypeParameter
+		public RuleCall getTypeParametersJvmTypeParameterParserRuleCall_2_2_3_2_1_0() { return cTypeParametersJvmTypeParameterParserRuleCall_2_2_3_2_1_0; }
+
+		//">"
+		public Keyword getGreaterThanSignKeyword_2_2_3_3() { return cGreaterThanSignKeyword_2_2_3_3; }
+
 		//"("
-		public Keyword getLeftParenthesisKeyword_2_2_3() { return cLeftParenthesisKeyword_2_2_3; }
+		public Keyword getLeftParenthesisKeyword_2_2_4() { return cLeftParenthesisKeyword_2_2_4; }
 
 		//(parameters+=Parameter ("," parameters+=Parameter)*)?
-		public Group getGroup_2_2_4() { return cGroup_2_2_4; }
+		public Group getGroup_2_2_5() { return cGroup_2_2_5; }
 
 		//parameters+=Parameter
-		public Assignment getParametersAssignment_2_2_4_0() { return cParametersAssignment_2_2_4_0; }
+		public Assignment getParametersAssignment_2_2_5_0() { return cParametersAssignment_2_2_5_0; }
 
 		//Parameter
-		public RuleCall getParametersParameterParserRuleCall_2_2_4_0_0() { return cParametersParameterParserRuleCall_2_2_4_0_0; }
+		public RuleCall getParametersParameterParserRuleCall_2_2_5_0_0() { return cParametersParameterParserRuleCall_2_2_5_0_0; }
 
 		//("," parameters+=Parameter)*
-		public Group getGroup_2_2_4_1() { return cGroup_2_2_4_1; }
+		public Group getGroup_2_2_5_1() { return cGroup_2_2_5_1; }
 
 		//","
-		public Keyword getCommaKeyword_2_2_4_1_0() { return cCommaKeyword_2_2_4_1_0; }
+		public Keyword getCommaKeyword_2_2_5_1_0() { return cCommaKeyword_2_2_5_1_0; }
 
 		//parameters+=Parameter
-		public Assignment getParametersAssignment_2_2_4_1_1() { return cParametersAssignment_2_2_4_1_1; }
+		public Assignment getParametersAssignment_2_2_5_1_1() { return cParametersAssignment_2_2_5_1_1; }
 
 		//Parameter
-		public RuleCall getParametersParameterParserRuleCall_2_2_4_1_1_0() { return cParametersParameterParserRuleCall_2_2_4_1_1_0; }
+		public RuleCall getParametersParameterParserRuleCall_2_2_5_1_1_0() { return cParametersParameterParserRuleCall_2_2_5_1_1_0; }
 
 		//")"
-		public Keyword getRightParenthesisKeyword_2_2_5() { return cRightParenthesisKeyword_2_2_5; }
+		public Keyword getRightParenthesisKeyword_2_2_6() { return cRightParenthesisKeyword_2_2_6; }
 
 		//("throws" exceptions+=JvmTypeReference ("," exceptions+=JvmTypeReference)*)?
-		public Group getGroup_2_2_6() { return cGroup_2_2_6; }
+		public Group getGroup_2_2_7() { return cGroup_2_2_7; }
 
 		//"throws"
-		public Keyword getThrowsKeyword_2_2_6_0() { return cThrowsKeyword_2_2_6_0; }
+		public Keyword getThrowsKeyword_2_2_7_0() { return cThrowsKeyword_2_2_7_0; }
 
 		//exceptions+=JvmTypeReference
-		public Assignment getExceptionsAssignment_2_2_6_1() { return cExceptionsAssignment_2_2_6_1; }
+		public Assignment getExceptionsAssignment_2_2_7_1() { return cExceptionsAssignment_2_2_7_1; }
 
 		//JvmTypeReference
-		public RuleCall getExceptionsJvmTypeReferenceParserRuleCall_2_2_6_1_0() { return cExceptionsJvmTypeReferenceParserRuleCall_2_2_6_1_0; }
+		public RuleCall getExceptionsJvmTypeReferenceParserRuleCall_2_2_7_1_0() { return cExceptionsJvmTypeReferenceParserRuleCall_2_2_7_1_0; }
 
 		//("," exceptions+=JvmTypeReference)*
-		public Group getGroup_2_2_6_2() { return cGroup_2_2_6_2; }
+		public Group getGroup_2_2_7_2() { return cGroup_2_2_7_2; }
 
 		//","
-		public Keyword getCommaKeyword_2_2_6_2_0() { return cCommaKeyword_2_2_6_2_0; }
+		public Keyword getCommaKeyword_2_2_7_2_0() { return cCommaKeyword_2_2_7_2_0; }
 
 		//exceptions+=JvmTypeReference
-		public Assignment getExceptionsAssignment_2_2_6_2_1() { return cExceptionsAssignment_2_2_6_2_1; }
+		public Assignment getExceptionsAssignment_2_2_7_2_1() { return cExceptionsAssignment_2_2_7_2_1; }
 
 		//JvmTypeReference
-		public RuleCall getExceptionsJvmTypeReferenceParserRuleCall_2_2_6_2_1_0() { return cExceptionsJvmTypeReferenceParserRuleCall_2_2_6_2_1_0; }
+		public RuleCall getExceptionsJvmTypeReferenceParserRuleCall_2_2_7_2_1_0() { return cExceptionsJvmTypeReferenceParserRuleCall_2_2_7_2_1_0; }
 
 		//expression=XBlockExpression
-		public Assignment getExpressionAssignment_2_2_7() { return cExpressionAssignment_2_2_7; }
+		public Assignment getExpressionAssignment_2_2_8() { return cExpressionAssignment_2_2_8; }
 
 		//XBlockExpression
-		public RuleCall getExpressionXBlockExpressionParserRuleCall_2_2_7_0() { return cExpressionXBlockExpressionParserRuleCall_2_2_7_0; }
+		public RuleCall getExpressionXBlockExpressionParserRuleCall_2_2_8_0() { return cExpressionXBlockExpressionParserRuleCall_2_2_8_0; }
 	}
 
 	public class CreateExtensionInfoElements extends AbstractParserRuleElementFinder {
@@ -1585,9 +1620,9 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	//	(returnType=JvmTypeReference name=ValidID "(") | => (createExtensionInfo=CreateExtensionInfo name=ValidID "(") |
 	//	name=ValidID "(") (parameters+=Parameter ("," parameters+=Parameter)*)? ")" ("throws" exceptions+=JvmTypeReference
 	//	("," exceptions+=JvmTypeReference)*)? (expression=XBlockExpression | expression=RichString)? |
-	//	{XtendConstructor.annotationInfo=current} visibility=Visibility? "new" //			('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
-	//	"(" (parameters+=Parameter ("," parameters+=Parameter)*)? ")" ("throws" exceptions+=JvmTypeReference (","
-	//	exceptions+=JvmTypeReference)*)? expression=XBlockExpression);
+	//	{XtendConstructor.annotationInfo=current} visibility=Visibility? "new" ("<" typeParameters+=JvmTypeParameter (","
+	//	typeParameters+=JvmTypeParameter)* ">")? "(" (parameters+=Parameter ("," parameters+=Parameter)*)? ")" ("throws"
+	//	exceptions+=JvmTypeReference ("," exceptions+=JvmTypeReference)*)? expression=XBlockExpression);
 	public MemberElements getMemberAccess() {
 		return (pMember != null) ? pMember : (pMember = new MemberElements());
 	}
@@ -2429,7 +2464,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XFunctionTypeRef:
-	//	("(" paramTypes+=JvmTypeReference ("," paramTypes+=JvmTypeReference)* ")")? "=>" returnType=JvmTypeReference;
+	//	("(" (paramTypes+=JvmTypeReference ("," paramTypes+=JvmTypeReference)*)? ")")? "=>" returnType=JvmTypeReference;
 	public XtypeGrammarAccess.XFunctionTypeRefElements getXFunctionTypeRefAccess() {
 		return gaXbaseWithAnnotations.getXFunctionTypeRefAccess();
 	}
