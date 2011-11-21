@@ -412,6 +412,13 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 				.getExpressions().get(0), XbasePackage.Literals.XABSTRACT_FEATURE_CALL, FEATURE_NOT_VISIBLE, "Feature",
 				"not", "visible");
 	}
+	
+	public void testInaccessibleStaticMethod() throws Exception {
+		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { def foo() { privateStaticMethod() }}");
+		helper.assertError(((XBlockExpression) ((XtendFunction) xtendClass.getMembers().get(0)).getExpression())
+				.getExpressions().get(0), XbasePackage.Literals.XABSTRACT_FEATURE_CALL, FEATURE_NOT_VISIBLE, "Feature",
+				"not", "visible");
+	}
 
 	//TODO fails since Object is explicitly extended.
 //	public void testInaccessibleMethod2() throws Exception {
