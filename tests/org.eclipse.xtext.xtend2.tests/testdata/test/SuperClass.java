@@ -34,6 +34,11 @@ public class SuperClass {
 	private String privateMethod() {
 		return null;
 	}
+	
+	@SuppressWarnings("unused")
+	private static String privateStaticMethod() {
+		return null;
+	}
 
 	public List<String> returnsListString() {
 		return null;
