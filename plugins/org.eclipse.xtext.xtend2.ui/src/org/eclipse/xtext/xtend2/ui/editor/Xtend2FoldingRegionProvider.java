@@ -36,7 +36,7 @@ public class Xtend2FoldingRegionProvider extends DefaultFoldingRegionProvider {
 	@Override
 	protected boolean isHandled(EObject object) {
 		EClass clazz = object.eClass();
-		return clazz == Xtend2Package.Literals.XTEND_CLASS || clazz == Xtend2Package.Literals.XTEND_FUNCTION;
+		return clazz == Xtend2Package.Literals.XTEND_CLASS || clazz == Xtend2Package.Literals.XTEND_FUNCTION || clazz == Xtend2Package.Literals.XTEND_CONSTRUCTOR;
 	}
 	
 	@Override
