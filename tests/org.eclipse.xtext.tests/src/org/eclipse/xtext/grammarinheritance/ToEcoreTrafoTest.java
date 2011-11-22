@@ -57,7 +57,7 @@ public class ToEcoreTrafoTest extends AbstractXtextTests {
 
 	public void testConcreteLanguageToMetamodel() throws Exception {
 		XtextResource r = getResource("classpath:/" + ConcreteTestLanguage.class.getName().replace('.', '/') + ".xtext");
-		Grammar element = (Grammar) r.getParseResult().getRootASTElement();
+		Grammar element = (Grammar) r.getContents().get(0);
 		List<TerminalRule> lexerRules = GrammarUtil.allTerminalRules(element);
 		assertEquals(8, lexerRules.size());
 		List<EPackage> list = Xtext2EcoreTransformer.doGetGeneratedPackages(element);
@@ -74,7 +74,7 @@ public class ToEcoreTrafoTest extends AbstractXtextTests {
 
 	public void testConcreteLanguageToMetamodel1() throws Exception {
 		XtextResource r = getResource("classpath:/" + ConcreteTestLanguage.class.getName().replace('.', '/') + ".xtext");
-		EObject element = r.getParseResult().getRootASTElement();
+		EObject element = r.getContents().get(0);
 		Grammar g = (Grammar) element;
 		List<AbstractMetamodelDeclaration> mms = Lists.<AbstractMetamodelDeclaration>newArrayList(
 				Iterables.filter(g.getMetamodelDeclarations(), GeneratedMetamodel.class));
