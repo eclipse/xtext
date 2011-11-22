@@ -490,9 +490,38 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	protected IScope createLocalVarScope(IScope parentScope, LocalVariableScopeContext scopeContext) {
 		if (scopeContext == null || scopeContext.getContext() == null)
 			return parentScope;
+		EObject context = scopeContext.getContext();
+		if (context instanceof JvmOperation) {
+			JvmOperation jvmOperation = (JvmOperation) context;
+			if (jvmOperation.getDeclaringType() != null) {
+				JvmDeclaredType declaredType = jvmOperation.getDeclaringType();
+				if (!jvmOperation.isStatic()) {
+					parentScope = createLocalVarScopeForJvmDeclaredType(declaredType, parentScope);
+				}
+			}
+			return parentScope = createLocalVarScopeForJvmOperation((JvmOperation)context, parentScope);
+		}
+		if (context instanceof JvmConstructor) {
+			JvmConstructor constructor = (JvmConstructor) context;
+			if (constructor.getDeclaringType() != null) {
+				JvmDeclaredType declaredType = constructor.getDeclaringType();
+				parentScope = createLocalVarScopeForJvmDeclaredType(declaredType, parentScope);
+			}
+			return parentScope = createLocalVarScopeForJvmConstructor((JvmConstructor)context, parentScope);
+		}
+		if (context instanceof JvmField) {
+			JvmField field = (JvmField) context;
+			if (field.getDeclaringType() != null) {
+				JvmDeclaredType declaredType = field.getDeclaringType();
+				parentScope = createLocalVarScopeForJvmDeclaredType(declaredType, parentScope);
+			}
+			return parentScope;
+		}
+		if(context instanceof JvmDeclaredType) {
+			return createLocalVarScopeForJvmDeclaredType((JvmDeclaredType) context, parentScope);
+		}
 		if (scopeContext.canSpawnForContainer())
 			parentScope = createLocalVarScope(parentScope, scopeContext.spawnForContainer());
-		EObject context = scopeContext.getContext();
 		if (context.eContainer() instanceof XBlockExpression) {
 			XBlockExpression block = (XBlockExpression) context.eContainer();
 			parentScope = createLocalVarScopeForBlock(block, block.getExpressions().indexOf(context), scopeContext.isReferredFromClosure(), parentScope);
@@ -513,31 +542,6 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		}
 		if (context instanceof XSwitchExpression) {
 			parentScope = createLocalVarScopeForSwitchExpression((XSwitchExpression) context, parentScope);
-		}
-		if (context instanceof JvmOperation) {
-			JvmOperation jvmOperation = (JvmOperation) context;
-			if (jvmOperation.getDeclaringType() != null) {
-				JvmDeclaredType declaredType = jvmOperation.getDeclaringType();
-				if (!jvmOperation.isStatic()) {
-					parentScope = createLocalVarScopeForJvmDeclaredType(declaredType, parentScope);
-				}
-			}
-			parentScope = createLocalVarScopeForJvmOperation((JvmOperation)context, parentScope);
-		}
-		if (context instanceof JvmConstructor) {
-			JvmConstructor constructor = (JvmConstructor) context;
-			if (constructor.getDeclaringType() != null) {
-				JvmDeclaredType declaredType = constructor.getDeclaringType();
-				parentScope = createLocalVarScopeForJvmDeclaredType(declaredType, parentScope);
-			}
-			parentScope = createLocalVarScopeForJvmConstructor((JvmConstructor)context, parentScope);
-		}
-		if (context instanceof JvmField) {
-			JvmField field = (JvmField) context;
-			if (field.getDeclaringType() != null) {
-				JvmDeclaredType declaredType = field.getDeclaringType();
-				parentScope = createLocalVarScopeForJvmDeclaredType(declaredType, parentScope);
-			}
 		}
 		if (scopeContext.isIncludeCurrentBlock()) {
 			if (context instanceof XBlockExpression) {
