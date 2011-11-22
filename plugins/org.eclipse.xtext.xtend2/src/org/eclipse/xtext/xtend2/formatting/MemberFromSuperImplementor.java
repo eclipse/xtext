@@ -12,6 +12,8 @@ import static org.eclipse.xtext.util.Strings.*;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -35,7 +37,7 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class OverrideFunction {
+public class MemberFromSuperImplementor {
 
 	public static final String DEFAULT_BODY = "throw new UnsupportedOperationException(\"Auto-generated function stub\")";
 
@@ -50,10 +52,21 @@ public class OverrideFunction {
 
 	@Inject
 	private IXtend2JvmAssociations associations;
-
+	
 	public void appendOverrideFunction(final XtendClass overrider, JvmOperation overriddenOperation,
 			IAppendable appendable) {
+		appendExecutable(overrider, overriddenOperation, appendable);
+	}
+
+	public void appendConstructorFromSuper(final XtendClass overrider, JvmConstructor superConstructor,
+			IAppendable appendable) {
+		appendExecutable(overrider, superConstructor, appendable);
+	}
+
+	protected void appendExecutable(final XtendClass overrider, JvmExecutable executableFromSuper,
+			IAppendable appendable) {
 		appendable.openScope();
+		boolean isOperation = executableFromSuper instanceof JvmOperation;
 		final JvmGenericType overridingType = associations.getInferredType(overrider);
 		final ITypeArgumentContext typeArgumentContext = typeArgumentContextProvider
 				.getTypeArgumentContext(new TypeArgumentContextProvider.AbstractRequest() {
@@ -62,16 +75,19 @@ public class OverrideFunction {
 						return typeReferences.createTypeRef(overridingType);
 					}
 				});
-		appendable.increaseIndentation().append("\n").append("override ");
-		if (overriddenOperation.getVisibility() == JvmVisibility.PROTECTED) {
+		appendable.increaseIndentation();
+		appendable.append("\n");
+		if (isOperation)
+			appendable.append("override ");
+		if (executableFromSuper.getVisibility() == JvmVisibility.PROTECTED) {
 			appendable.append("protected ");
 		}
-		appendSignature(overriddenOperation, overridingType, typeArgumentContext, appendable, false);
+		appendSignature(executableFromSuper, overridingType, typeArgumentContext, appendable, false);
 		boolean isFirst;
-		if (!overriddenOperation.getExceptions().isEmpty()) {
+		if (!executableFromSuper.getExceptions().isEmpty()) {
 			appendable.append(" throws ");
 			isFirst = true;
-			for (JvmTypeReference exception : overriddenOperation.getExceptions()) {
+			for (JvmTypeReference exception : executableFromSuper.getExceptions()) {
 				if (!isFirst)
 					appendable.append(", ");
 				isFirst = false;
@@ -79,23 +95,22 @@ public class OverrideFunction {
 			}
 		}
 		appendable.append(" {").increaseIndentation().append("\n");
-		if (overriddenOperation.isAbstract()) {
+		if (isOperation && ((JvmOperation) executableFromSuper).isAbstract()) {
 			appendable.append(DEFAULT_BODY);
-		} else {
+		} else if (isOperation) {
 			appendable.append("super.");
-			appendSignature(overriddenOperation, overridingType, typeArgumentContext, appendable, true);
 		}
+		appendSignature(executableFromSuper, overridingType, typeArgumentContext, appendable, true);
 		appendable.decreaseIndentation().append("\n}").decreaseIndentation().append("\n");
 		appendable.closeScope();
 	}
 
-	protected void appendSignature(JvmOperation overriddenOperation, EObject context,
-			final ITypeArgumentContext typeArgumentContext,
-			IAppendable appendable, boolean isCall) {
+	protected void appendSignature(JvmExecutable overridden, EObject context,
+			final ITypeArgumentContext typeArgumentContext, IAppendable appendable, boolean isCall) {
 		boolean isFirst = true;
-		if (!isEmpty(overriddenOperation.getTypeParameters())) {
+		if (!isEmpty(overridden.getTypeParameters())) {
 			appendable.append("<");
-			for (JvmTypeParameter typeParameter : overriddenOperation.getTypeParameters()) {
+			for (JvmTypeParameter typeParameter : overridden.getTypeParameters()) {
 				if (!isFirst)
 					appendable.append(", ");
 				isFirst = false;
@@ -103,9 +118,17 @@ public class OverrideFunction {
 			}
 			appendable.append("> ");
 		}
-		appendable.append(overriddenOperation.getSimpleName()).append("(");
+		if (overridden instanceof JvmConstructor) {
+			if (isCall)
+				appendable.append("super");
+			else
+				appendable.append("new");
+		} else {
+			appendable.append(overridden.getSimpleName());
+		}
+		appendable.append("(");
 		isFirst = true;
-		for (JvmFormalParameter param : overriddenOperation.getParameters()) {
+		for (JvmFormalParameter param : overridden.getParameters()) {
 			if (!isFirst)
 				appendable.append(", ");
 			isFirst = false;
@@ -113,10 +136,11 @@ public class OverrideFunction {
 				appendable.append(appendable.getName(param));
 			} else {
 				JvmTypeReference overriddenParameterType = typeArgumentContext.getLowerBound(param.getParameterType());
-				typeReferenceSerializer.serialize(overriddenParameterType, context, appendable, false, false, false, true);
-				String declareVariable = (appendable instanceof StringBuilderBasedAppendable) 
-						? ((StringBuilderBasedAppendable) appendable).declareFreshVariable(param, param.getName())
-						: appendable.declareVariable(param, param.getName());
+				typeReferenceSerializer.serialize(overriddenParameterType, context, appendable, false, false, false,
+						true);
+				String declareVariable = (appendable instanceof StringBuilderBasedAppendable) ? ((StringBuilderBasedAppendable) appendable)
+						.declareFreshVariable(param, param.getName()) : appendable.declareVariable(param,
+						param.getName());
 				appendable.append(" ").append(declareVariable);
 			}
 		}
@@ -134,6 +158,10 @@ public class OverrideFunction {
 		}
 		return (lastClosingBraceOffset == -1) ? lastClosingBraceOffset = clazzNode.getTotalEndOffset()
 				: lastClosingBraceOffset;
+	}
+
+	public int getConstructorInsertOffset(XtendClass clazz) {
+		return getFunctionInsertOffset(clazz);
 	}
 
 }

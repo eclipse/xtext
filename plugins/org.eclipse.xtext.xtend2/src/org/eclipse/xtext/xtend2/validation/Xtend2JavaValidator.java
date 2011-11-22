@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
@@ -32,7 +33,9 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -60,6 +63,8 @@ import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XClosure;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
@@ -77,6 +82,7 @@ import org.eclipse.xtext.xtend2.xtend2.RichStringForLoop;
 import org.eclipse.xtext.xtend2.xtend2.RichStringIf;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendConstructor;
 import org.eclipse.xtext.xtend2.xtend2.XtendField;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
@@ -130,7 +136,7 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 	private IRawTypeHelper rawTypeHelper;
 	
 	@Inject
-	private OperationSignature.Provider operationSignatureProvider; 
+	private TypeErasedSignature.Provider signatureProvider; 
 
 	@Inject
 	private XAnnotationUtil annotationUtil;
@@ -391,85 +397,123 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 					});
 			Multimap<Object, JvmOperation> operationsPerErasure = HashMultimap.create();
 			for (JvmOperation operation : inferredType.getDeclaredOperations()) {
-				OperationSignature signature = getSignature(operation);
-				operationsPerErasure.put(signature.getErasureKey(), operation);
+				TypeErasedSignature signature = signatureProvider.get(operation);
+				operationsPerErasure.put(signature, operation);
 			}
-			for (Collection<JvmOperation> operationsWithSameSignature : operationsPerErasure.asMap().values()) {
-				if (operationsWithSameSignature.size() > 1) {
-					Multimap<String, JvmOperation> operationsPerReadableSignature = HashMultimap.create();
-					for (JvmOperation operation : operationsWithSameSignature) {
-						String readableSignature = getReadableSignature(operation, operation.getParameters());
-						operationsPerReadableSignature.put(readableSignature, operation);
-					}
-					for (Collection<JvmOperation> operationsWithSameReadableSignature : operationsPerReadableSignature
-							.asMap().values()) {
-						if (operationsWithSameReadableSignature.size() > 1) {
-							for (JvmOperation operation : operationsWithSameReadableSignature) {
-								XtendFunction otherSource = associations.getXtendFunction(operation);
-								error("Duplicate method " + getReadableSignature(operation, operation.getParameters())
-										+ " in type " + inferredType.getSimpleName(), otherSource,
-										XTEND_FUNCTION__NAME, DUPLICATE_METHOD);
-							}
-						} else {
-							for (JvmOperation operation : operationsWithSameReadableSignature) {
-								XtendFunction otherSource = associations.getXtendFunction(operation);
-								error("Method  " + getReadableSignature(operation, operation.getParameters())
-										+ " has the same erasure "
-										+ getReadableErasure(operation, operation.getParameters())
-										+ " as another method in type " + inferredType.getSimpleName(), otherSource,
-										XTEND_FUNCTION__NAME, DUPLICATE_METHOD);
-							}
+			doCheckDuplicateExecutables(inferredType, operationsPerErasure);
+			doCheckOverriddenMethods(xtendClass, inferredType, typeArgumentContext, operationsPerErasure);
+			
+			Multimap<Object, JvmConstructor> constructorsPerErasure = HashMultimap.create();
+			for (JvmConstructor constructor : inferredType.getDeclaredConstructors()) {
+				TypeErasedSignature signature = signatureProvider.get(constructor);
+				constructorsPerErasure.put(signature, constructor);
+			}
+			doCheckDuplicateExecutables(inferredType, constructorsPerErasure);
+		}
+	}
+	
+	protected void doCheckDuplicateExecutables(final JvmGenericType inferredType,
+			Multimap<Object, ? extends JvmExecutable> executablesPerErasure) {
+		for (Collection<? extends JvmExecutable> executablesWithSameSignature : executablesPerErasure.asMap().values()) {
+			if (executablesWithSameSignature.size() > 1) {
+				Multimap<String, JvmExecutable> executablesPerReadableSignature = HashMultimap.create();
+				for (JvmExecutable executable : executablesWithSameSignature) {
+					String readableSignature = getReadableSignature(executable);
+					executablesPerReadableSignature.put(readableSignature, executable);
+				}
+				for (Collection<JvmExecutable> executablesWithSameReadableSignature : executablesPerReadableSignature
+						.asMap().values()) {
+					if (executablesWithSameReadableSignature.size() > 1) {
+						for (JvmExecutable executable : executablesWithSameReadableSignature) {
+							EObject otherSource = associations.getPrimarySourceElement(executable);
+							error("Duplicate " + typeLabel(executable) + " " + getReadableSignature(executable)
+									+ " in type " + inferredType.getSimpleName(), otherSource,
+									nameFeature(otherSource), DUPLICATE_METHOD);
+						}
+					} else {
+						for (JvmExecutable executable : executablesWithSameReadableSignature) {
+							EObject otherSource = associations.getPrimarySourceElement(executable);
+							error("The " + typeLabel(executable) + " " + getReadableSignature(executable)
+									+ " has the same erasure "
+									+ getReadableErasure(executable, executable.getParameters())
+									+ " as another method in type " + inferredType.getSimpleName(), otherSource,
+									nameFeature(otherSource), DUPLICATE_METHOD);
 						}
 					}
 				}
 			}
-			List<JvmOperation> operationsMissingImplementation = null;
-			for (JvmOperation operation : filter(
-					featureOverridesService.getAllJvmFeatures(inferredType, typeArgumentContext), JvmOperation.class)) {
-				if (operation.getDeclaringType() != inferredType) {
-					OperationSignature signature = getSignature(operation);
-					if (operationsPerErasure.containsKey(signature.getErasureKey())) {
-						Collection<JvmOperation> myOperations = operationsPerErasure.get(signature.getErasureKey());
-						if (myOperations.size() == 1) {
-							JvmOperation myOperation = Iterables.getOnlyElement(myOperations);
-							if (!featureOverridesService.isOverridden(myOperation, operation, typeArgumentContext,
+		}
+	}
+
+	protected String typeLabel(JvmExecutable executable) {
+		if (executable instanceof JvmOperation) 
+			return "method";
+		else if(executable instanceof JvmConstructor) 
+			return "constructor";
+		else 
+			return "?";
+	}
+	
+	protected EStructuralFeature nameFeature(EObject member) {
+		if (member instanceof XtendFunction) 
+			return XTEND_FUNCTION__NAME;
+		else if(member instanceof XtendConstructor)
+			return null;
+		else if(member instanceof XtendField)
+			return XTEND_FIELD__NAME;
+		else
+			return null;
+	}
+	
+	
+	protected void doCheckOverriddenMethods(XtendClass xtendClass, final JvmGenericType inferredType,
+			final ITypeArgumentContext typeArgumentContext, Multimap<Object, JvmOperation> operationsPerErasure) {
+		List<JvmOperation> operationsMissingImplementation = null;
+		for (JvmOperation operation : filter(
+				featureOverridesService.getAllJvmFeatures(inferredType, typeArgumentContext), JvmOperation.class)) {
+			if (operation.getDeclaringType() != inferredType) {
+				TypeErasedSignature signature = signatureProvider.get(operation);
+				if (operationsPerErasure.containsKey(signature)) {
+					Collection<JvmOperation> myOperations = operationsPerErasure.get(signature);
+					if (myOperations.size() == 1) {
+						JvmOperation myOperation = Iterables.getOnlyElement(myOperations);
+						if (!featureOverridesService.isOverridden(myOperation, operation, typeArgumentContext,
+								false)) {
+							XtendFunction source = associations.getXtendFunction(myOperation);
+							error("Name clash: The method "
+									+ getReadableSignature(myOperation) + " of type "
+									+ inferredType.getSimpleName()
+									+ " has the same erasure as "
+									+
+									// use source with other operations parameters to avoid confusion
+									// due to name transformations in JVM model inference
+									getReadableSignature(operation) + " of type "
+									+ operation.getDeclaringType().getSimpleName() + " but does not override it.",
+									source, XTEND_FUNCTION__NAME, DUPLICATE_METHOD);
+						}
+					}
+				}
+				if (operation.isAbstract() && !inferredType.isAbstract()) {
+					boolean overridden = false;
+					if (operationsPerErasure.containsKey(signature)) {
+						for (JvmOperation myOperation : operationsPerErasure.get(signature)) {
+							if (featureOverridesService.isOverridden(myOperation, operation, typeArgumentContext,
 									false)) {
-								XtendFunction source = associations.getXtendFunction(myOperation);
-								error("Name clash: The method "
-										+ getReadableSignature(myOperation, myOperation.getParameters()) + " of type "
-										+ inferredType.getSimpleName()
-										+ " has the same erasure as "
-										+
-										// use source with other operations parameters to avoid confusion
-										// due to name transformations in JVM model inference
-										getReadableSignature(operation, operation.getParameters()) + " of type "
-										+ operation.getDeclaringType().getSimpleName() + " but does not override it.",
-										source, XTEND_FUNCTION__NAME, DUPLICATE_METHOD);
+								overridden = true;
+								break;
 							}
 						}
 					}
-					if (operation.isAbstract() && !inferredType.isAbstract()) {
-						boolean overridden = false;
-						if (operationsPerErasure.containsKey(signature.getErasureKey())) {
-							for (JvmOperation myOperation : operationsPerErasure.get(signature.getErasureKey())) {
-								if (featureOverridesService.isOverridden(myOperation, operation, typeArgumentContext,
-										false)) {
-									overridden = true;
-									break;
-								}
-							}
-						}
-						if (!overridden) {
-							if(operationsMissingImplementation == null)
-								operationsMissingImplementation = newArrayList();
-							operationsMissingImplementation.add(operation);
-						}
+					if (!overridden) {
+						if(operationsMissingImplementation == null)
+							operationsMissingImplementation = newArrayList();
+						operationsMissingImplementation.add(operation);
 					}
 				}
 			}
-			if(operationsMissingImplementation != null) {
-				reportMissingImplementations(xtendClass, typeArgumentContext, operationsMissingImplementation);
-			}
+		}
+		if(operationsMissingImplementation != null) {
+			reportMissingImplementations(xtendClass, typeArgumentContext, operationsMissingImplementation);
 		}
 	}
 
@@ -543,6 +587,7 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 		}
 	}
 
+	
 	protected boolean isMorePrivateThan(JvmVisibility o1, JvmVisibility o2) {
 		if (o1 == o2) {
 			return false;
@@ -574,6 +619,51 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 						})), JvmOperation.class);
 		return result;
 	}
+	
+	@Check
+	public void checkDefaultSuperConstructor(XtendClass xtendClass) {
+		Iterable<XtendConstructor> xtendConstructors = filter(xtendClass.getMembers(), XtendConstructor.class);
+		JvmGenericType inferredType = associations.getInferredType(xtendClass);
+		if(inferredType.getExtendedClass() != null) {
+			JvmType superType = inferredType.getExtendedClass().getType();
+			if(superType instanceof JvmGenericType) {
+				Iterable<JvmConstructor> superConstructors = ((JvmGenericType) superType).getDeclaredConstructors();
+				for(JvmConstructor superConstructor: superConstructors) {
+					if(superConstructor.getParameters().isEmpty()) 
+						// there is a default super constructor. nothing more to check
+						return;
+				}
+				if(isEmpty(xtendConstructors)) {
+					List<String> issueData = newArrayList();
+					for(JvmConstructor superConstructor:superConstructors) {
+						issueData.add(EcoreUtil.getURI(superConstructor).toString());
+						issueData.add(doGetReadableSignature(xtendClass.getSimpleName(), superConstructor.getParameters()));
+					}
+					error("Implicit super constructor " + superType.getSimpleName() + "() is " +
+							"undefined for default constructor. Must define an explicit constructor",
+							xtendClass, XTEND_CLASS__NAME, MISSING_CONSTRUCTOR, toArray(issueData, String.class));
+				} else {
+					for(XtendConstructor xtendConstructor: xtendConstructors) {
+						EList<XExpression> expressions = ((XBlockExpression) xtendConstructor.getExpression()).getExpressions();
+						if(expressions.isEmpty() || !isDelegatConstructorCall(expressions.get(0))) {
+							error("Implicit super constructor " + superType.getSimpleName() 
+									+ "() is undefined. Must explicitly invoke another constructor",
+									xtendConstructor, null, MUST_INVOKE_SUPER_CONSTRUCTOR);
+							
+						}
+					}
+				}
+			}
+		} 
+	}
+
+	protected boolean isDelegatConstructorCall(XExpression expression) {
+		if(expression instanceof XFeatureCall) {
+			JvmIdentifiableElement feature = ((XFeatureCall)expression).getFeature();
+			return (feature != null && !feature.eIsProxy() && feature instanceof JvmConstructor);
+		}
+		return false;
+	}
 
 	protected boolean isInterface(JvmDeclaredType type) {
 		return type instanceof JvmGenericType && ((JvmGenericType) type).isInterface();
@@ -583,14 +673,14 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 		return (element != null) ? notNull(element.getIdentifier()) : null;
 	}
 
-	protected OperationSignature getSignature(JvmOperation operation) {
-		return operationSignatureProvider.get(operation);
+	protected String getReadableSignature(JvmExecutable executable) {
+		if (executable == null)
+			return "null";
+		return doGetReadableSignature(executable.getSimpleName(), executable.getParameters());
 	}
 
-	protected String getReadableSignature(JvmIdentifiableElement element, List<JvmFormalParameter> parameters) {
-		if (element == null)
-			return "null";
-		return getReadableSignature(element.getSimpleName(),
+	protected String doGetReadableSignature(String simpleName, List<JvmFormalParameter> parameters) {
+		return getReadableSignature(simpleName,
 				Lists.transform(parameters, new Function<JvmFormalParameter, JvmTypeReference>() {
 					public JvmTypeReference apply(JvmFormalParameter from) {
 						return from.getParameterType();
@@ -598,14 +688,14 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 				}));
 	}
 
-	protected String getReadableSignature(String elementName, List<JvmTypeReference> parameters) {
+	protected String getReadableSignature(String elementName, List<JvmTypeReference> parameterTypes) {
 		StringBuilder result = new StringBuilder(elementName);
 		result.append('(');
-		for (int i = 0; i < parameters.size(); i++) {
+		for (int i = 0; i < parameterTypes.size(); i++) {
 			if (i != 0) {
 				result.append(", ");
 			}
-			JvmTypeReference parameterType = parameters.get(i);
+			JvmTypeReference parameterType = parameterTypes.get(i);
 			if (parameterType != null)
 				result.append(parameterType.getSimpleName());
 			else

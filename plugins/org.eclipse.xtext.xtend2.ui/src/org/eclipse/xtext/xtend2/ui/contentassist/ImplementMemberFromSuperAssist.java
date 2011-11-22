@@ -19,8 +19,12 @@ import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.FeatureOverridesService;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
@@ -30,21 +34,22 @@ import org.eclipse.xtext.common.types.util.VisibilityService;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.xbase.validation.UIStrings;
-import org.eclipse.xtext.xtend2.formatting.OverrideFunction;
+import org.eclipse.xtext.xtend2.formatting.MemberFromSuperImplementor;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.ui.labeling.Xtend2Images;
-import org.eclipse.xtext.xtend2.validation.OperationSignature;
+import org.eclipse.xtext.xtend2.validation.TypeErasedSignature;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 
+import com.google.common.base.Function;
 import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class FunctionOverrideAssist {
+public class ImplementMemberFromSuperAssist {
 
 	@Inject
-	private OperationSignature.Provider operationSignatureProvider;
+	private TypeErasedSignature.Provider signatureProvider;
 
 	@Inject
 	private IXtend2JvmAssociations associations;
@@ -65,15 +70,15 @@ public class FunctionOverrideAssist {
 	private Xtend2Images images;
 
 	@Inject
-	private OverrideFunction overrideFunction;
+	private MemberFromSuperImplementor implementor;
 
 	@Inject
 	private UIStrings uiStrings;
-	
+
 	@Inject
 	private ReplacingAppendable.Factory appendableFactory;
 
-	protected Iterable<JvmOperation> getOverrideableOperations(XtendClass clazz) {
+	protected Iterable<JvmExecutable> getImplementationCandidates(XtendClass clazz) {
 		final JvmGenericType inferredType = associations.getInferredType(clazz);
 		ITypeArgumentContext typeArgumentContext = typeArgumentContextProvider
 				.getTypeArgumentContext(new TypeArgumentContextProvider.AbstractRequest() {
@@ -82,56 +87,73 @@ public class FunctionOverrideAssist {
 						return typeReferences.createTypeRef(inferredType);
 					}
 				});
-		Set<Object> erasureKeys = newHashSet();
+		Set<TypeErasedSignature> erasureKeys = newHashSet();
 		for (JvmOperation op : inferredType.getDeclaredOperations()) {
-			erasureKeys.add(operationSignatureProvider.get(op).getErasureKey());
+			erasureKeys.add(signatureProvider.get(op));
 		}
-		List<JvmOperation> result = newArrayList();
-		for (JvmOperation operation : filter(
-				featureOverridesService.getAllJvmFeatures(inferredType, typeArgumentContext), JvmOperation.class)) {
-			if (operation.getDeclaringType() != inferredType && visibilityService.isVisible(operation, inferredType)
-					&& !operation.isFinal() && !operation.isStatic()) {
-				Object erasureKey = operationSignatureProvider.get(operation).getErasureKey();
+		List<JvmExecutable> result = newArrayList();
+		for (JvmExecutable executable : filter(
+				featureOverridesService.getAllJvmFeatures(inferredType, typeArgumentContext), JvmExecutable.class)) {
+			if (isCandidate(executable, inferredType)) {
+				TypeErasedSignature erasureKey = signatureProvider.get(executable);
 				if (erasureKeys.add(erasureKey)) {
-					result.add(operation);
+					result.add(executable);
 				}
 			}
 		}
 		return result;
 	}
 
+	protected boolean isCandidate(JvmExecutable executable, JvmDeclaredType overrider) {
+		if (executable.getDeclaringType() != overrider && visibilityService.isVisible(executable, overrider)) {
+			if (executable instanceof JvmOperation) {
+				JvmOperation operation = (JvmOperation) executable;
+				return !operation.isFinal() && !operation.isStatic();
+			} else {
+				return executable instanceof JvmConstructor
+						&& contains(transform(overrider.getSuperTypes(), new Function<JvmTypeReference, JvmType>() {
+							public JvmType apply(JvmTypeReference from) {
+								return from.getType();
+							}
+						}), executable.getDeclaringType());
+			}
+		}
+		return false;
+	}
+
 	public void createOverrideProposals(XtendClass model, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		Iterable<JvmOperation> overrideableOperations = getOverrideableOperations(model);
-		for (JvmOperation op : overrideableOperations) {
-			ICompletionProposal completionProposal = createOverrideMethodProposal(model, op, context);
+		Iterable<JvmExecutable> overrideables = getImplementationCandidates(model);
+		for (JvmExecutable overridden : overrideables) {
+			ICompletionProposal completionProposal = createOverrideMethodProposal(model, overridden, context);
 			if (completionProposal != null)
 				acceptor.accept(completionProposal);
 		}
 	}
 
-	protected ICompletionProposal createOverrideMethodProposal(XtendClass model, JvmOperation overriddenOperation,
+	protected ICompletionProposal createOverrideMethodProposal(XtendClass model, JvmExecutable overridden,
 			ContentAssistContext context) {
-		ReplacingAppendable appendable = appendableFactory.get(context.getDocument(), model, 
-				context.getReplaceRegion().getOffset(), context.getReplaceRegion().getLength(), true);
-		overrideFunction.appendOverrideFunction(model, overriddenOperation, appendable);
+		ReplacingAppendable appendable = appendableFactory.get(context.getDocument(), model, context.getReplaceRegion()
+				.getOffset(), context.getReplaceRegion().getLength(), true);
+		if (overridden instanceof JvmOperation)
+			implementor.appendOverrideFunction(model, (JvmOperation) overridden, appendable);
+		else
+			implementor.appendConstructorFromSuper(model, (JvmConstructor) overridden, appendable);
 		String code = appendable.toString();
-		if (!isEmpty(context.getPrefix()) && !overriddenOperation.getSimpleName().startsWith(context.getPrefix())
+		if (!isEmpty(context.getPrefix()) && !overridden.getSimpleName().startsWith(context.getPrefix())
 				&& !code.trim().startsWith(context.getPrefix()))
 			return null;
 		ImportOrganizingProposal completionProposal = createCompletionProposal(appendable, context.getReplaceRegion(),
-				getLabel(overriddenOperation),
-				images.forFunction(overriddenOperation.getVisibility()));
-		int bodyOffset = code.lastIndexOf(OverrideFunction.DEFAULT_BODY);
+				getLabel(overridden), images.forFunction(overridden.getVisibility()));
+		int bodyOffset = code.lastIndexOf(MemberFromSuperImplementor.DEFAULT_BODY);
 		completionProposal.setSelectionStart(bodyOffset + completionProposal.getReplacementOffset());
-		completionProposal.setSelectionLength(OverrideFunction.DEFAULT_BODY.length());
-		completionProposal.setPriority(getPriority(model, overriddenOperation, context));
+		completionProposal.setSelectionLength(MemberFromSuperImplementor.DEFAULT_BODY.length());
+		completionProposal.setPriority(getPriority(model, overridden, context));
 		return completionProposal;
 	}
 
-	protected int getPriority(XtendClass model, JvmOperation overriddenOperation,
-			ContentAssistContext context) {
-		return (overriddenOperation.isAbstract()) ? 400 : 350;
+	protected int getPriority(XtendClass model, JvmExecutable overridden, ContentAssistContext context) {
+		return (overridden instanceof JvmOperation && ((JvmOperation) overridden).isAbstract()) ? 400 : 350;
 	}
 
 	protected ImportOrganizingProposal createCompletionProposal(ReplacingAppendable appendable, Region replaceRegion,
@@ -140,9 +162,14 @@ public class FunctionOverrideAssist {
 				replaceRegion.getOffset(), image, displayString);
 	}
 
-	protected StyledString getLabel(JvmOperation operation) {
-		return new StyledString(uiStrings.signature(operation)).append(new StyledString(" - Override method from "
-				+ notNull(operation.getDeclaringType().getSimpleName()), StyledString.QUALIFIER_STYLER));
+	protected StyledString getLabel(JvmExecutable executable) {
+		if (executable instanceof JvmOperation) {
+			return new StyledString(uiStrings.signature(executable)).append(new StyledString(" - Override method from "
+					+ notNull(((JvmOperation) executable).getDeclaringType().getSimpleName()),
+					StyledString.QUALIFIER_STYLER));
+		} else {
+			return new StyledString("Add constructor '" + uiStrings.signature(executable) + "'");
+		}
 	}
 
 }
