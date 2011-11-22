@@ -10,14 +10,14 @@ package org.eclipse.xtext.xtend2.ui.tests.contentassist;
 import junit.framework.Test;
 
 import org.eclipse.xtext.formatting.IIndentationInformation;
-import org.eclipse.xtext.xtend2.formatting.OverrideFunction;
+import org.eclipse.xtext.xtend2.formatting.MemberFromSuperImplementor;
 
 import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class FunctionOverrideAssistTest extends AbstractXtendContentAssistBugTest {
+public class ImplementSuperMemberAssistTest extends AbstractXtendContentAssistBugTest {
 
 	@Inject
 	private IIndentationInformation indent;
@@ -49,11 +49,11 @@ public class FunctionOverrideAssistTest extends AbstractXtendContentAssistBugTes
 
 	protected String getOverridingFunctionCode(String signature) {
 		return "\n" + indent.getIndentString() + "override " + signature + " {\n" + indent.getIndentString()
-				+ indent.getIndentString() + OverrideFunction.DEFAULT_BODY + "\n" + indent.getIndentString() + "}\n";
+				+ indent.getIndentString() + MemberFromSuperImplementor.DEFAULT_BODY + "\n" + indent.getIndentString() + "}\n";
 	}
 
 	public static Test suite() {
-		return createSuite(FunctionOverrideAssistTest.class);
+		return createSuite(ImplementSuperMemberAssistTest.class);
 	}
 
 }

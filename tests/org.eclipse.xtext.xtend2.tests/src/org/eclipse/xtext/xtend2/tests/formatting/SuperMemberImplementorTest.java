@@ -14,7 +14,7 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
-import org.eclipse.xtext.xtend2.formatting.OverrideFunction;
+import org.eclipse.xtext.xtend2.formatting.MemberFromSuperImplementor;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 
@@ -24,12 +24,12 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class OverrideFunctionTest extends AbstractXtend2TestCase {
+public class SuperMemberImplementorTest extends AbstractXtend2TestCase {
 
 	private XtendClass xtendClass;
 
 	@Inject
-	private OverrideFunction overrideFunction;
+	private MemberFromSuperImplementor implementor;
 
 	private JvmGenericType implementedInterface;
 
@@ -47,7 +47,7 @@ public class OverrideFunctionTest extends AbstractXtend2TestCase {
 	}
 
 	public void testInsertOffset() throws Exception {
-		assertEquals(model.lastIndexOf('}'), overrideFunction.getFunctionInsertOffset(xtendClass));
+		assertEquals(model.lastIndexOf('}'), implementor.getFunctionInsertOffset(xtendClass));
 	}
 	
 	public void testPlain() {
@@ -92,7 +92,7 @@ public class OverrideFunctionTest extends AbstractXtend2TestCase {
 
 	protected void checkOverrideCode(String operationName, String overrideCode) {
 		StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable();
-		overrideFunction.appendOverrideFunction(xtendClass, findOperation(operationName), appendable);
+		implementor.appendOverrideFunction(xtendClass, findOperation(operationName), appendable);
 		String code = appendable.toString();
 		if(!equalsIgnoreWhitespace(overrideCode, code)) 
 			assertEquals(overrideCode, code);

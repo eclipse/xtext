@@ -7,14 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.validation;
 
+import static org.eclipse.xtext.util.Strings.*;
+
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.util.IRawTypeHelper;
-import org.eclipse.xtext.util.Tuples;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -22,29 +23,29 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class OperationSignature {
+public class TypeErasedSignature {
 
 	public static class Provider {
 		
 		@Inject
 		private IRawTypeHelper rawTypeHelper;
 		
-		public OperationSignature get(JvmOperation operation) {
-			return new OperationSignature(operation, rawTypeHelper);
+		public TypeErasedSignature get(JvmExecutable executable) {
+			return new TypeErasedSignature(executable, rawTypeHelper);
 		}
 	}
 
-	private JvmOperation operation;
+	private JvmExecutable executable;
 
 	private List<JvmType> erasureParameterTypes;
 
-	protected OperationSignature(JvmOperation operation, IRawTypeHelper rawTypeHelper) {
-		this.operation = operation;
-		if (operation != null) {
-			erasureParameterTypes = Lists.newArrayListWithCapacity(operation.getParameters().size());
-			for (JvmFormalParameter parameter : operation.getParameters()) {
+	protected TypeErasedSignature(JvmExecutable executable, IRawTypeHelper rawTypeHelper) {
+		this.executable = executable;
+		if (executable != null) {
+			erasureParameterTypes = Lists.newArrayListWithCapacity(executable.getParameters().size());
+			for (JvmFormalParameter parameter : executable.getParameters()) {
 				List<JvmType> rawTypes = rawTypeHelper.getAllRawTypes(parameter.getParameterType(),
-						operation.eResource());
+						executable.eResource());
 				if (rawTypes.isEmpty()) {
 					erasureParameterTypes.add(null);
 				} else {
@@ -57,13 +58,28 @@ public class OperationSignature {
 	}
 
 	public String getName() {
-		if (operation == null)
+		if (executable == null)
 			return "null";
-		return operation.getSimpleName();
+		return executable.getSimpleName();
 	}
 
-	public Object getErasureKey() {
-		return Tuples.create(getName(), erasureParameterTypes);
+	@Override
+	public boolean equals(Object other) {
+		if (other == null)
+			return false;
+		if (this == other)
+			return true;
+		if (other instanceof TypeErasedSignature) {
+			TypeErasedSignature otherSignature = (TypeErasedSignature) other;
+			return (equal(getName(), otherSignature.getName()))
+				&& erasureParameterTypes.equals(otherSignature.erasureParameterTypes);
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return getName() == null ? 0 : getName().hashCode() + 17 * erasureParameterTypes.hashCode();
 	}
 
 }

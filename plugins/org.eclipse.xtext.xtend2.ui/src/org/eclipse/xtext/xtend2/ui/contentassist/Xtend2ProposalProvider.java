@@ -52,7 +52,7 @@ public class Xtend2ProposalProvider extends AbstractXtend2ProposalProvider {
 	private IGrammarAccess grammarAccess;
 
 	@Inject
-	private FunctionOverrideAssist overrideAssist;
+	private ImplementMemberFromSuperAssist overrideAssist;
 
 	@SuppressWarnings("restriction")
 	@Override

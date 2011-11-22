@@ -27,6 +27,7 @@ import org.eclipse.jdt.core.search.TypeNameRequestor;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -55,7 +56,7 @@ import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
-import org.eclipse.xtext.xtend2.formatting.OverrideFunction;
+import org.eclipse.xtext.xtend2.formatting.MemberFromSuperImplementor;
 import org.eclipse.xtext.xtend2.services.Xtend2GrammarAccess;
 import org.eclipse.xtext.xtend2.ui.contentassist.ReplacingAppendable;
 import org.eclipse.xtext.xtend2.ui.edit.OrganizeImportsHandler;
@@ -79,7 +80,7 @@ public class Xtend2QuickfixProvider extends DefaultQuickfixProvider {
 	private IJavaProjectProvider projectProvider;
 
 	@Inject
-	private OverrideFunction overrideFunction;
+	private MemberFromSuperImplementor superMemberImplementor;
 
 	@Inject
 	private Xtend2GrammarAccess grammarAccess;
@@ -381,6 +382,30 @@ public class Xtend2QuickfixProvider extends DefaultQuickfixProvider {
 		}
 	}
 
+	@Fix(IssueCodes.MISSING_CONSTRUCTOR)
+	public void addConstuctorFromSuper(final Issue issue, IssueResolutionAcceptor acceptor) {
+		if (issue.getData() != null) {
+			for(int i=0; i<issue.getData().length; i+=2) {
+				final URI constructorURI = URI.createURI(issue.getData()[i]);
+				final String signature = issue.getData()[i+1];
+				acceptor.accept(issue, "Add constructor " + signature, "Add constructor " + signature, "fix_indent.gif",
+					new ISemanticModification() {
+						public void apply(EObject element, IModificationContext context) throws Exception {
+							XtendClass clazz = (XtendClass) element;
+							ReplacingAppendable appendable = appendableFactory.get(context.getXtextDocument(), clazz,
+									superMemberImplementor.getConstructorInsertOffset(clazz), 0);
+							EObject constructor = clazz.eResource().getResourceSet().getEObject(constructorURI, true);
+							if (constructor instanceof JvmConstructor) {
+								superMemberImplementor.appendConstructorFromSuper(clazz, (JvmConstructor) constructor,
+										appendable);
+							}
+							appendable.commitChanges();
+						}
+					});
+			}
+		}
+	}
+	
 	@Fix(IssueCodes.CLASS_MUST_BE_ABSTRACT)
 	public void implementAbstractMethods(final Issue issue, IssueResolutionAcceptor acceptor) {
 		if (issue.getData() != null && issue.getData().length > 0)
@@ -389,12 +414,12 @@ public class Xtend2QuickfixProvider extends DefaultQuickfixProvider {
 						public void apply(EObject element, IModificationContext context) throws Exception {
 							XtendClass clazz = (XtendClass) element;
 							ReplacingAppendable appendable = appendableFactory.get(context.getXtextDocument(), clazz,
-									overrideFunction.getFunctionInsertOffset(clazz), 0);
+									superMemberImplementor.getFunctionInsertOffset(clazz), 0);
 							for (String operationUriAsString : issue.getData()) {
 								URI operationURI = URI.createURI(operationUriAsString);
 								EObject overridden = clazz.eResource().getResourceSet().getEObject(operationURI, true);
 								if (overridden instanceof JvmOperation) {
-									overrideFunction.appendOverrideFunction(clazz, (JvmOperation) overridden,
+									superMemberImplementor.appendOverrideFunction(clazz, (JvmOperation) overridden,
 											appendable);
 								}
 							}

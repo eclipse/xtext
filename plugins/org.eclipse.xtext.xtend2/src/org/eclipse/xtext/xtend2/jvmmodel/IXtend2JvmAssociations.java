@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendConstructor;
 import org.eclipse.xtext.xtend2.xtend2.XtendField;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
@@ -92,6 +93,10 @@ public interface IXtend2JvmAssociations extends IJvmModelAssociations {
 
 		public XtendFunction getXtendFunction(JvmOperation jvmOperation) {
 			return (XtendFunction) getPrimarySourceElement(jvmOperation);
+		}
+
+		public XtendConstructor getXtendConstructor(JvmConstructor jvmConstructor) {
+			return (XtendConstructor) getPrimarySourceElement(jvmConstructor);
 		}
 
 		protected <T> T getFirstOrNull(Iterable<EObject> elements, Class<T> type) {

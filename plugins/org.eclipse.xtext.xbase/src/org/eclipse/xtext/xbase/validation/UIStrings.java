@@ -41,9 +41,11 @@ public class UIStrings {
 	@Inject
 	private FeatureCallToJavaMapping featureCallToJavaMapping;
 	
-	public String signature(JvmOperation operation) {
-		StringBuilder b = new StringBuilder(operation.getSimpleName());
-		b.append(parameters(operation)).append(" : ").append(operation.getReturnType().getSimpleName());
+	public String signature(JvmExecutable executable) {
+		StringBuilder b = new StringBuilder(executable.getSimpleName());
+		b.append(parameters(executable));
+		if(executable instanceof JvmOperation) 
+			b.append(" : ").append(((JvmOperation) executable).getReturnType().getSimpleName());
 		return b.toString();
 	}
 	
