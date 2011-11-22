@@ -41,10 +41,13 @@ import org.eclipse.xtext.nodemodel.BidiIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.ClasspathUriResolutionException;
 import org.eclipse.xtext.resource.ClasspathUriUtil;
+import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
@@ -95,13 +98,22 @@ public class XtextLinkingService extends DefaultLinkingService {
 			String grammarName = (String) valueConverterService.toValue("", "GrammarID", node);
 			if (grammarName != null) {
 				final ResourceSet resourceSet = grammar.eResource().getResourceSet();
-				for(Resource resource: resourceSet.getResources()) {
-					if (!resource.getContents().isEmpty()) {
-						EObject content = resource.getContents().get(0);
-						if (content instanceof Grammar) {
-							Grammar otherGrammar = (Grammar) content;
-							if (grammarName.equals(otherGrammar.getName()))
-								return Collections.<EObject>singletonList(otherGrammar);
+				List<Resource> resources = resourceSet.getResources();
+				for(int i = 0; i < resources.size(); i++) {
+					Resource resource = resources.get(i);
+					EObject rootElement = null;
+					if (resource instanceof XtextResource) {
+						IParseResult parseResult = ((XtextResource) resource).getParseResult();
+						rootElement = parseResult.getRootASTElement();
+					} else if (!resource.getContents().isEmpty()) {
+						rootElement = resource.getContents().get(0);
+					}
+					if (rootElement instanceof Grammar) {
+						Grammar otherGrammar = (Grammar) rootElement;
+						if (grammarName.equals(otherGrammar.getName())) {
+							if (resource instanceof DerivedStateAwareResource)
+								resource.getContents();
+							return Collections.<EObject>singletonList(otherGrammar);
 						}
 					}
 				}
