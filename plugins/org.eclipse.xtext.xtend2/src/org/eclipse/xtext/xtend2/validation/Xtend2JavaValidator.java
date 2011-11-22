@@ -48,7 +48,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.FeatureOverridesService;
-import org.eclipse.xtext.common.types.util.IRawTypeHelper;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
@@ -132,9 +131,6 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 	@Inject
 	private TypeReferences typeReferences;
 
-	@Inject 
-	private IRawTypeHelper rawTypeHelper;
-	
 	@Inject
 	private TypeErasedSignature.Provider signatureProvider; 
 
@@ -435,7 +431,7 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 							EObject otherSource = associations.getPrimarySourceElement(executable);
 							error("The " + typeLabel(executable) + " " + getReadableSignature(executable)
 									+ " has the same erasure "
-									+ getReadableErasure(executable, executable.getParameters())
+									+ signatureProvider.get(executable).toString()
 									+ " as another method in type " + inferredType.getSimpleName(), otherSource,
 									nameFeature(otherSource), DUPLICATE_METHOD);
 						}
@@ -700,28 +696,6 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 				result.append(parameterType.getSimpleName());
 			else
 				result.append("null");
-		}
-		result.append(')');
-		return result.toString();
-	}
-
-	protected String getReadableErasure(JvmIdentifiableElement element, List<JvmFormalParameter> parameters) {
-		if (element == null)
-			return "null";
-		StringBuilder result = new StringBuilder(element.getSimpleName());
-		result.append('(');
-		for (int i = 0; i < parameters.size(); i++) {
-			if (i != 0) {
-				result.append(", ");
-			}
-			List<JvmType> rawTypes = rawTypeHelper.getAllRawTypes(parameters.get(i).getParameterType(),
-					element.eResource());
-			if (!rawTypes.isEmpty()) {
-				// see comments in https://bugs.eclipse.org/bugs/show_bug.cgi?id=357958
-				result.append(rawTypes.get(0).getSimpleName());
-			} else {
-				result.append("null");
-			}
 		}
 		result.append(')');
 		return result.toString();

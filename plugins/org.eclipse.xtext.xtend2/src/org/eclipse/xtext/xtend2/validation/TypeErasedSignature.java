@@ -49,6 +49,7 @@ public class TypeErasedSignature {
 				if (rawTypes.isEmpty()) {
 					erasureParameterTypes.add(null);
 				} else {
+					// see comments in https://bugs.eclipse.org/bugs/show_bug.cgi?id=357958
 					erasureParameterTypes.add(rawTypes.get(0));
 				}
 			}
@@ -63,6 +64,29 @@ public class TypeErasedSignature {
 		return executable.getSimpleName();
 	}
 
+	@Override
+	public String toString() {
+		if (executable == null)
+			return "null";
+		StringBuilder result = new StringBuilder(getName());
+		result.append('(');
+		boolean isFirst = true;
+		for (JvmType parameterType: erasureParameterTypes) {
+			if (!isFirst) {
+				result.append(", ");
+			}
+			isFirst = false;
+			if(parameterType != null)
+				result.append(parameterType.getSimpleName());
+			else 
+				result.append("null");
+		}
+		result.append(')');
+		return result.toString();
+	}
+
+
+	
 	@Override
 	public boolean equals(Object other) {
 		if (other == null)
