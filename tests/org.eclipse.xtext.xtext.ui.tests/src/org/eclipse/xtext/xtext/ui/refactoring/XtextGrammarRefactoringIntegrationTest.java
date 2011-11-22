@@ -189,9 +189,7 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 		EcoreFactory eInstance = EcoreFactory.eINSTANCE;
 		Resource ecoreModelResource = createEcoreModel(rs, ecoreURI, initialModelRoot);
 		EClass greetingClass = getGreetingClass(ecoreModelResource);
-		EReference greetingRefLocal = getReferenceoGreeting(ecoreModelResource, greetingClass);
 		String greetingClassFragment = EcoreUtil.getURI(greetingClass).fragment();
-		String greetingRefFragment = EcoreUtil.getURI(greetingRefLocal).fragment();
 
 		EPackage refPackage = eInstance.createEPackage();
 		refPackage.setName("myDsl2");
