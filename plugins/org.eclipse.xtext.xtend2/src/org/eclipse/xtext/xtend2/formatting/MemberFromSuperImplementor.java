@@ -97,10 +97,11 @@ public class MemberFromSuperImplementor {
 		appendable.append(" {").increaseIndentation().append("\n");
 		if (isOperation && ((JvmOperation) executableFromSuper).isAbstract()) {
 			appendable.append(DEFAULT_BODY);
-		} else if (isOperation) {
-			appendable.append("super.");
+		} else {
+			if (isOperation)  
+				appendable.append("super.");
+			appendSignature(executableFromSuper, overridingType, typeArgumentContext, appendable, true);
 		}
-		appendSignature(executableFromSuper, overridingType, typeArgumentContext, appendable, true);
 		appendable.decreaseIndentation().append("\n}").decreaseIndentation().append("\n");
 		appendable.closeScope();
 	}
