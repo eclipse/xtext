@@ -32,6 +32,14 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.xtend2.lib.StringConcatenation">
+        <filter id="305422471">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.xtend2.lib.StringConcatenation"/>
+                <message_argument value="org.eclipse.xtext.generator_2.1.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtext/generator/parser/antlr/splitting/AntlrParserSplitter.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.AntlrParserSplitter">
         <filter comment="Field should not be referenced by client code" id="388194388">
             <message_arguments>
