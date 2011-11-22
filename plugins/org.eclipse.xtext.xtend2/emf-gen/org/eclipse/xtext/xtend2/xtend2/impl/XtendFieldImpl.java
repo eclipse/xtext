@@ -16,6 +16,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 
+import org.eclipse.xtext.xbase.XExpression;
+
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendField;
 
@@ -31,6 +33,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendField;
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFieldImpl#isExtension <em>Extension</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFieldImpl#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFieldImpl#isStatic <em>Static</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFieldImpl#getInitialValue <em>Initial Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -136,6 +139,16 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 	 * @ordered
 	 */
 	protected boolean static_ = STATIC_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getInitialValue() <em>Initial Value</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInitialValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected XExpression initialValue;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -330,6 +343,54 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public XExpression getInitialValue()
+	{
+		return initialValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetInitialValue(XExpression newInitialValue, NotificationChain msgs)
+	{
+		XExpression oldInitialValue = initialValue;
+		initialValue = newInitialValue;
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FIELD__INITIAL_VALUE, oldInitialValue, newInitialValue);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setInitialValue(XExpression newInitialValue)
+	{
+		if (newInitialValue != initialValue)
+		{
+			NotificationChain msgs = null;
+			if (initialValue != null)
+				msgs = ((InternalEObject)initialValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_FIELD__INITIAL_VALUE, null, msgs);
+			if (newInitialValue != null)
+				msgs = ((InternalEObject)newInitialValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_FIELD__INITIAL_VALUE, null, msgs);
+			msgs = basicSetInitialValue(newInitialValue, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FIELD__INITIAL_VALUE, newInitialValue, newInitialValue));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -337,6 +398,8 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 		{
 			case Xtend2Package.XTEND_FIELD__TYPE:
 				return basicSetType(null, msgs);
+			case Xtend2Package.XTEND_FIELD__INITIAL_VALUE:
+				return basicSetInitialValue(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -361,6 +424,8 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 				return getVisibility();
 			case Xtend2Package.XTEND_FIELD__STATIC:
 				return isStatic();
+			case Xtend2Package.XTEND_FIELD__INITIAL_VALUE:
+				return getInitialValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -389,6 +454,9 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 				return;
 			case Xtend2Package.XTEND_FIELD__STATIC:
 				setStatic((Boolean)newValue);
+				return;
+			case Xtend2Package.XTEND_FIELD__INITIAL_VALUE:
+				setInitialValue((XExpression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -419,6 +487,9 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 			case Xtend2Package.XTEND_FIELD__STATIC:
 				setStatic(STATIC_EDEFAULT);
 				return;
+			case Xtend2Package.XTEND_FIELD__INITIAL_VALUE:
+				setInitialValue((XExpression)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -443,6 +514,8 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 				return isSetVisibility();
 			case Xtend2Package.XTEND_FIELD__STATIC:
 				return static_ != STATIC_EDEFAULT;
+			case Xtend2Package.XTEND_FIELD__INITIAL_VALUE:
+				return initialValue != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -42,6 +42,7 @@ Member returns XtendMember:
 			visibility=Visibility?   
 		 	(extension?='extension' type=JvmTypeReference name=ValidID?
 			| static?='static'? type=JvmTypeReference name=ValidID)
+			('=' initialValue=XExpression)?
 		
 	|	{XtendFunction.annotationInfo = current}
 			('def' | override?='override') visibility=Visibility? static?='static'? (dispatch?='dispatch'?) 

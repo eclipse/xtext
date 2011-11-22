@@ -5038,6 +5038,7 @@ rule__Member__Group_2_0__2
     }
 :
 	rule__Member__Group_2_0__2__Impl
+	rule__Member__Group_2_0__3
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -5058,6 +5059,36 @@ rule__Member__Group_2_0__2__Impl
 finally {
 	restoreStackSize(stackSize);
 }
+
+
+rule__Member__Group_2_0__3
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__Member__Group_2_0__3__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Member__Group_2_0__3__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getMemberAccess().getGroup_2_0_3()); }
+(rule__Member__Group_2_0_3__0)?
+{ after(grammarAccess.getMemberAccess().getGroup_2_0_3()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
 
 
 
@@ -5244,6 +5275,69 @@ finally {
 }
 
 
+
+
+
+
+
+
+rule__Member__Group_2_0_3__0
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__Member__Group_2_0_3__0__Impl
+	rule__Member__Group_2_0_3__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Member__Group_2_0_3__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getMemberAccess().getEqualsSignKeyword_2_0_3_0()); }
+
+	'=' 
+
+{ after(grammarAccess.getMemberAccess().getEqualsSignKeyword_2_0_3_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__Member__Group_2_0_3__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__Member__Group_2_0_3__1__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Member__Group_2_0_3__1__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getMemberAccess().getInitialValueAssignment_2_0_3_1()); }
+(rule__Member__InitialValueAssignment_2_0_3_1)
+{ after(grammarAccess.getMemberAccess().getInitialValueAssignment_2_0_3_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
 
 
 
@@ -20457,6 +20551,21 @@ rule__Member__NameAssignment_2_0_2_1_2
 (
 { before(grammarAccess.getMemberAccess().getNameValidIDParserRuleCall_2_0_2_1_2_0()); }
 	ruleValidID{ after(grammarAccess.getMemberAccess().getNameValidIDParserRuleCall_2_0_2_1_2_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Member__InitialValueAssignment_2_0_3_1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getMemberAccess().getInitialValueXExpressionParserRuleCall_2_0_3_1_0()); }
+	ruleXExpression{ after(grammarAccess.getMemberAccess().getInitialValueXExpressionParserRuleCall_2_0_3_1_0()); }
 )
 
 ;
