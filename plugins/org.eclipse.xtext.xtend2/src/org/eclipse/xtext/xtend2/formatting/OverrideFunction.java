@@ -25,6 +25,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
+import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
@@ -42,7 +43,7 @@ public class OverrideFunction {
 	private TypeArgumentContextProvider typeArgumentContextProvider;
 
 	@Inject
-	private CustomTypeReferenceSerializer typeReferenceSerializer;
+	private TypeReferenceSerializer typeReferenceSerializer;
 
 	@Inject
 	private TypeReferences typeReferences;
@@ -52,8 +53,8 @@ public class OverrideFunction {
 
 	public void appendOverrideFunction(final XtendClass overrider, JvmOperation overriddenOperation,
 			IAppendable appendable) {
+		appendable.openScope();
 		final JvmGenericType overridingType = associations.getInferredType(overrider);
-		typeReferenceSerializer.setOverridingType(overridingType);
 		final ITypeArgumentContext typeArgumentContext = typeArgumentContextProvider
 				.getTypeArgumentContext(new TypeArgumentContextProvider.AbstractRequest() {
 					@Override
@@ -65,7 +66,7 @@ public class OverrideFunction {
 		if (overriddenOperation.getVisibility() == JvmVisibility.PROTECTED) {
 			appendable.append("protected ");
 		}
-		appendSignature(overriddenOperation, typeArgumentContext, appendable, false);
+		appendSignature(overriddenOperation, overridingType, typeArgumentContext, appendable, false);
 		boolean isFirst;
 		if (!overriddenOperation.getExceptions().isEmpty()) {
 			appendable.append(" throws ");
@@ -82,12 +83,14 @@ public class OverrideFunction {
 			appendable.append(DEFAULT_BODY);
 		} else {
 			appendable.append("super.");
-			appendSignature(overriddenOperation, typeArgumentContext, appendable, true);
+			appendSignature(overriddenOperation, overridingType, typeArgumentContext, appendable, true);
 		}
 		appendable.decreaseIndentation().append("\n}").decreaseIndentation().append("\n");
+		appendable.closeScope();
 	}
 
-	protected void appendSignature(JvmOperation overriddenOperation, final ITypeArgumentContext typeArgumentContext,
+	protected void appendSignature(JvmOperation overriddenOperation, EObject context,
+			final ITypeArgumentContext typeArgumentContext,
 			IAppendable appendable, boolean isCall) {
 		boolean isFirst = true;
 		if (!isEmpty(overriddenOperation.getTypeParameters())) {
@@ -110,8 +113,11 @@ public class OverrideFunction {
 				appendable.append(appendable.getName(param));
 			} else {
 				JvmTypeReference overriddenParameterType = typeArgumentContext.getLowerBound(param.getParameterType());
-				typeReferenceSerializer.serialize(overriddenParameterType, overriddenOperation, appendable);
-				appendable.append(" ").append(appendable.declareVariable(param, param.getName()));
+				typeReferenceSerializer.serialize(overriddenParameterType, context, appendable, false, false, false, true);
+				String declareVariable = (appendable instanceof StringBuilderBasedAppendable) 
+						? ((StringBuilderBasedAppendable) appendable).declareFreshVariable(param, param.getName())
+						: appendable.declareVariable(param, param.getName());
+				appendable.append(" ").append(declareVariable);
 			}
 		}
 		appendable.append(")");
@@ -128,21 +134,6 @@ public class OverrideFunction {
 		}
 		return (lastClosingBraceOffset == -1) ? lastClosingBraceOffset = clazzNode.getTotalEndOffset()
 				: lastClosingBraceOffset;
-	}
-
-	protected static class CustomTypeReferenceSerializer extends TypeReferenceSerializer {
-
-		private JvmGenericType overridingType;
-
-		public void setOverridingType(JvmGenericType overridingType) {
-			this.overridingType = overridingType;
-		}
-
-		@Override
-		public boolean isLocalTypeParameter(EObject context, JvmTypeParameter parameter) {
-			return super.isLocalTypeParameter(context, parameter)
-					|| super.isLocalTypeParameter(overridingType, parameter);
-		}
 	}
 
 }
