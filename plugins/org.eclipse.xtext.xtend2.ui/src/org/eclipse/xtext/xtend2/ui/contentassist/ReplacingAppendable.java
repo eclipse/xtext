@@ -14,9 +14,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.common.types.JvmFeature;
-import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.util.VisibilityService;
 import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -31,6 +28,7 @@ import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
+import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendImport;
 
 import com.google.inject.Inject;
@@ -58,9 +56,6 @@ public class ReplacingAppendable extends StringBuilderBasedAppendable {
 		@Inject
 		private IXtend2JvmAssociations associations;
 
-		@Inject
-		private VisibilityService visibilityService;
-
 		public ReplacingAppendable get(IXtextDocument document, EObject context, int offset, int length) {
 			return get(document, context, offset, length, false);
 		}
@@ -78,18 +73,10 @@ public class ReplacingAppendable extends StringBuilderBasedAppendable {
 					}
 					ReplacingAppendable appendable = new ReplacingAppendable(importManager,
 							indentation.getIndentString(), document, xtendFile, offset, length);
-					IScope scope = scopeProvider.createSimpleFeatureCallScope(context,
+					IScope scope = scopeProvider.createSimpleFeatureCallScope(getLocalVariableScopeContext(context),
 							XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, context.eResource(), true, -1);
-					appendable.openScope();
 					for (IEObjectDescription feature : scope.getAllElements())
 						appendable.declareVariable(feature, converter.toString(feature.getName()));
-					if (context instanceof XtendClass) {
-						JvmGenericType inferredType = associations.getInferredType((XtendClass) context);
-						for (JvmFeature feature : inferredType.getAllFeatures()) {
-							if (visibilityService.isVisible(feature, inferredType))
-								appendable.declareVariable(feature, feature.getSimpleName());
-						}
-					}
 					if (!ignoreIndentAtOffset) {
 						for (int i = 0; i < getIndentationLevelAtOffset(offset, document); ++i)
 							appendable.increaseIndentation();
@@ -100,6 +87,15 @@ public class ReplacingAppendable extends StringBuilderBasedAppendable {
 				LOG.error("Error initializing appendable", exc);
 			}
 			return null;
+		}
+
+		protected EObject getLocalVariableScopeContext(EObject context) {
+			if (context instanceof XtendClass)
+				return associations.getInferredType((XtendClass) context);
+			else if (context instanceof XtendFunction) {
+				return associations.getDirectlyInferredOperation((XtendFunction) context);
+			}
+			return context;
 		}
 
 		protected int getIndentationLevelAtOffset(int offset, IDocument document) throws BadLocationException {
