@@ -98,6 +98,33 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 		helper.assertNoErrors(clazz);
 	}
 	
+	public void testConstructorDuplicate() throws Exception {
+		XtendClass clazz = clazz("class K { new(Object o) {} new(Object o) {} }");
+		helper.assertError(clazz, Xtend2Package.Literals.XTEND_CONSTRUCTOR, IssueCodes.DUPLICATE_METHOD);
+		helper.assertError(clazz, Xtend2Package.Literals.XTEND_CONSTRUCTOR, IssueCodes.DUPLICATE_METHOD);
+	}
+	
+	public void testConstructorDuplicateErasure() throws Exception {
+		XtendClass clazz = clazz("class K { new(List<Object> o) {} new(List<String> o) {} }");
+		helper.assertError(clazz, Xtend2Package.Literals.XTEND_CONSTRUCTOR, IssueCodes.DUPLICATE_METHOD);
+		helper.assertError(clazz, Xtend2Package.Literals.XTEND_CONSTRUCTOR, IssueCodes.DUPLICATE_METHOD);
+	}
+
+	public void testMissingConstructor() throws Exception {
+		XtendClass clazz = clazz("class K extends test.NoDefaultConstructor {}");
+		helper.assertError(clazz, Xtend2Package.Literals.XTEND_CLASS, IssueCodes.MISSING_CONSTRUCTOR);
+	}
+	
+	public void testMissingSuperConstructorCall() throws Exception {
+		XtendClass clazz = clazz("class K extends test.NoDefaultConstructor { new() {} }");
+		helper.assertError(clazz, Xtend2Package.Literals.XTEND_CONSTRUCTOR, IssueCodes.MUST_INVOKE_SUPER_CONSTRUCTOR);
+	}
+	
+	public void testSuperConstructorCall() throws Exception {
+		XtendClass clazz = clazz("class K extends test.NoDefaultConstructor { new() { super('') } }");
+		helper.assertNoErrors(clazz);
+	}
+	
 	public void testReturnStatement() throws Exception {
 		XtendClass clazz = clazz("class Z { def void foo() { return 'holla' }}");
 		helper.assertError(clazz, XbasePackage.Literals.XRETURN_EXPRESSION, org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_RETURN);
