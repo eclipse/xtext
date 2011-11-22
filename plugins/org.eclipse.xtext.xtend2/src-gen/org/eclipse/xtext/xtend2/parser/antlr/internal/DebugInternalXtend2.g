@@ -45,7 +45,9 @@ ruleMember :
 		ruleVisibility? (
 			'extension' ruleJvmTypeReference ruleValidID? |
 			'static'? ruleJvmTypeReference ruleValidID
-		) |
+		) (
+			'=' ruleXExpression
+		)? |
 		(
 			'def' |
 			'override'

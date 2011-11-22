@@ -556,13 +556,22 @@ public interface Xtend2Package extends EPackage
 	int XTEND_FIELD__STATIC = XTEND_MEMBER_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Initial Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_FIELD__INITIAL_VALUE = XTEND_MEMBER_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>Xtend Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FIELD_FEATURE_COUNT = XTEND_MEMBER_FEATURE_COUNT + 5;
+	int XTEND_FIELD_FEATURE_COUNT = XTEND_MEMBER_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendParameterImpl <em>Xtend Parameter</em>}' class.
@@ -1404,6 +1413,17 @@ public interface Xtend2Package extends EPackage
 	EAttribute getXtendField_Static();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xtend2.xtend2.XtendField#getInitialValue <em>Initial Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Initial Value</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.XtendField#getInitialValue()
+	 * @see #getXtendField()
+	 * @generated
+	 */
+	EReference getXtendField_InitialValue();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xtend2.xtend2.XtendParameter <em>Xtend Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2058,6 +2078,14 @@ public interface Xtend2Package extends EPackage
 		 * @generated
 		 */
 		EAttribute XTEND_FIELD__STATIC = eINSTANCE.getXtendField_Static();
+
+		/**
+		 * The meta object literal for the '<em><b>Initial Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XTEND_FIELD__INITIAL_VALUE = eINSTANCE.getXtendField_InitialValue();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendParameterImpl <em>Xtend Parameter</em>}' class.

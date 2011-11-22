@@ -8,6 +8,8 @@ package org.eclipse.xtext.xtend2.xtend2;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 
+import org.eclipse.xtext.xbase.XExpression;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Xtend Field</b></em>'.
@@ -21,6 +23,7 @@ import org.eclipse.xtext.common.types.JvmVisibility;
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendField#isExtension <em>Extension</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendField#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendField#isStatic <em>Static</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendField#getInitialValue <em>Initial Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -190,5 +193,31 @@ public interface XtendField extends XtendMember
 	 * @generated
 	 */
 	void setStatic(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Initial Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Initial Value</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Initial Value</em>' containment reference.
+	 * @see #setInitialValue(XExpression)
+	 * @see org.eclipse.xtext.xtend2.xtend2.Xtend2Package#getXtendField_InitialValue()
+	 * @model containment="true"
+	 * @generated
+	 */
+	XExpression getInitialValue();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xtend2.xtend2.XtendField#getInitialValue <em>Initial Value</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Initial Value</em>' containment reference.
+	 * @see #getInitialValue()
+	 * @generated
+	 */
+	void setInitialValue(XExpression value);
 
 } // XtendField
