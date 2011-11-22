@@ -24,6 +24,7 @@ import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
@@ -82,6 +83,8 @@ public class SomeCustomTypeProviderWithXtend extends XbaseWithAnnotationsTypePro
   public JvmTypeReference type(final XExpression binaryOperation, final JvmTypeReference rawExpectation, final boolean rawType) {
     if (binaryOperation instanceof XBinaryOperation) {
       return _type((XBinaryOperation)binaryOperation, rawExpectation, rawType);
+    } else if (binaryOperation instanceof XFeatureCall) {
+      return _type((XFeatureCall)binaryOperation, rawExpectation, rawType);
     } else if (binaryOperation instanceof XAbstractFeatureCall) {
       return _type((XAbstractFeatureCall)binaryOperation, rawExpectation, rawType);
     } else if (binaryOperation instanceof XAbstractWhileExpression) {
