@@ -127,6 +127,8 @@ public class EClassifierInfos {
 	}
 
 	public EClassifierInfo getInfoOrNull(EClassifier eClassifier) {
+		if (eClassifier == null)
+			return null;
 		for (EClassifierInfo info : infoMap.values()) {
 			if (info.getEClassifier().equals(eClassifier))
 				return info;

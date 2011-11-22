@@ -12,7 +12,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -57,6 +56,7 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.XtextSwitch;
+import org.eclipse.xtext.xtext.GrammarResource;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicates;
@@ -147,15 +147,16 @@ public class Xtext2EcoreTransformer {
 
 	public void removeGeneratedPackages() {
 		final ResourceSet resourceSet = grammar.eResource().getResourceSet();
-		final Iterator<Resource> resourceIter = resourceSet.getResources().iterator();
+		final List<Resource> resources = resourceSet.getResources();
 		final Collection<EPackage> packages = getGeneratedPackages();
-		// TODO check against grammar
-		while (resourceIter.hasNext()) {
-			Resource r = resourceIter.next();
-			CONTENT: for (EObject content : r.getContents()) {
-				if (content instanceof EPackage && packages.contains(content) || generatedEPackages != null && generatedEPackages.containsValue(content)) {
-					clearPackage(r, (EPackage) content);
-					break CONTENT;
+		for(int i = 0; i < resources.size(); i++) {
+			Resource r = resources.get(i);
+			if (!(r instanceof GrammarResource)) {
+				CONTENT: for (EObject content : r.getContents()) {
+					if (content instanceof EPackage && packages.contains(content) || generatedEPackages != null && generatedEPackages.containsValue(content)) {
+						clearPackage(r, (EPackage) content);
+						break CONTENT;
+					}
 				}
 			}
 		}
@@ -781,7 +782,6 @@ public class Xtext2EcoreTransformer {
 			}
 			else if (eClassifier instanceof EDataType) {
 				EDataType eDataType = (EDataType) eClassifier;
-				// TODO: Enums
 				EClassifierInfo info = EClassifierInfo.createEDataTypeInfo(eDataType, generated);
 				target.addInfo(metaModel, eClassifier.getName(), info);
 			}

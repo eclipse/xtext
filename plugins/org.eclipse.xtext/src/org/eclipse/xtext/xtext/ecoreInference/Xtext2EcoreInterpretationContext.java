@@ -40,7 +40,7 @@ public class Xtext2EcoreInterpretationContext {
 
 	private final Collection<EClassifierInfo> currentTypes = Sets.newLinkedHashSet();
 
-	boolean isRuleCallAllowed = true;
+	private boolean isRuleCallAllowed = true;
 
 	private Xtext2EcoreInterpretationContext(EClassifierInfos classifierInfos) {
 		super();
@@ -128,7 +128,7 @@ public class Xtext2EcoreInterpretationContext {
 		if (result == null) {
 			final ICompositeNode node = NodeModelUtils.getNode(terminal);
 			if (node != null) {
-				throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot find type for '" + node.getText() + "'.", terminal);
+				throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot find type for '" + node.getText().trim() + "'.", terminal);
 			}
 			throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot find type for " + terminal.eClass().getName(), terminal);
 		}
@@ -139,8 +139,11 @@ public class Xtext2EcoreInterpretationContext {
 			throws TransformationException {
 		final EClassifierInfo featureTypeInfo = eClassifierInfos.getInfoOrNull(type);
 		if (featureTypeInfo == null) {
-			throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot resolve type " + type.getName(),
-					parserElement);
+			String typeName = "null";
+			if (type != null)
+				typeName = type.getName();
+			throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, 
+					"Cannot resolve type " + typeName, parserElement);
 		}
 		return featureTypeInfo;
 	}
