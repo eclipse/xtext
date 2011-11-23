@@ -409,6 +409,10 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 			package foo
 			class Bar {
 				@com.google.inject.Inject String string
+				
+				def user(){
+					string	
+				}
 			}
 		''', '''
 			package foo;
@@ -419,6 +423,10 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 			public class Bar {
 			  @Inject
 			  private String string;
+			  
+			  public String user() {
+			    return this.string;
+			  }
 			}
 		''')
 	}
@@ -512,6 +520,10 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 				 * really!
 				 */
 				int bar
+				
+				def user(){
+					bar
+				}
 			}
 		''', '''
 			package foo;
@@ -530,6 +542,10 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 			   * really!
 			   */
 			  private int bar;
+			  
+			  public int user() {
+			    return this.bar;
+			  }
 			}
 			''');
 	}
@@ -557,6 +573,10 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 			package foo
 			class Bar {
 				static int foo
+				
+				def user(){
+					foo
+				}
 			}
 		''', '''
 			package foo;
@@ -564,6 +584,10 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 			@SuppressWarnings("all")
 			public class Bar {
 			  private static int foo;
+			  
+			  public int user() {
+			    return Bar.foo;
+			  }
 			}
 			''');
 	}
