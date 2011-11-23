@@ -50,6 +50,7 @@ public final class IssueCodes {
 	public static final String IMPORT_WILDCARD_DEPRECATED = ISSUE_CODE_PREFIX + "import_wildcard_deprecated";
 	public static final String IMPORT_DUPLICATE = ISSUE_CODE_PREFIX + "import_duplicate";
 	public static final String IMPORT_UNUSED = ISSUE_CODE_PREFIX + "import_unsued";
+	public static final String FIELD_LOCALLY_NEVER_READ = "field_locally_newer_read";
 	
 	public static final String MISSING_CONSTRUCTOR = ISSUE_CODE_PREFIX + "missing_constructor";
 	public static final String MUST_INVOKE_SUPER_CONSTRUCTOR = ISSUE_CODE_PREFIX + "must_invoke_super_constructor";

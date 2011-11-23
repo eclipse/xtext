@@ -37,6 +37,7 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -958,6 +959,15 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 		for (XtendImport imp : imports.values()) {
 			warning("The import '" + imp.getImportedTypeName() + "' is never used.", imp, null,
 					IssueCodes.IMPORT_UNUSED);
+		}
+	}
+	
+	@Check
+	public void checkLocalUsageOfDeclaredFields(XtendField field){
+		JvmField jvmField = associations.getJvmField(field);
+		if(jvmField.getVisibility() == JvmVisibility.PRIVATE && !isLocallyUsed(jvmField)){
+			String message = "The field " + jvmField.getSimpleName() + " is never read locally";
+			warning(message, Xtend2Package.Literals.XTEND_FIELD__NAME, FIELD_LOCALLY_NEVER_READ);
 		}
 	}
 }
