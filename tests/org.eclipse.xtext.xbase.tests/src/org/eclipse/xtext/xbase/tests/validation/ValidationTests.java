@@ -17,6 +17,7 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
+import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 
@@ -414,6 +415,30 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	public void testPrimitiveAsTypeGuard() throws Exception {
 		XCasePart expression = ((XSwitchExpression) expression("switch(new Object()) { int: 1 }")).getCases().get(0);
 		helper.assertError(expression, XCASE_PART, INVALID_USE_OF_TYPE, "primitive", "not", "allowed", "type", "guard");
+	}
+	
+	public void testLocallyUnusedVariableDefintion() throws Exception {
+		XBlockExpression xblockExpression = (XBlockExpression) expression("{val a = 42 }");
+		XVariableDeclaration expressionA = (XVariableDeclaration) xblockExpression.getExpressions().get(0);
+		helper.assertWarning(expressionA, XVARIABLE_DECLARATION, UNUSED_LOCAL_VARIABLE, "used");
+	}
+	
+	public void testLocallyUsedVariableDefintion() throws Exception {
+		XBlockExpression xblockExpression = (XBlockExpression) expression("{val a = 42  a+1}");
+		XVariableDeclaration expressionA = (XVariableDeclaration) xblockExpression.getExpressions().get(0);
+		helper.assertNoIssues(expressionA);
+	}
+	
+	public void testLocallyWriteableUnusedVariableDefintion() throws Exception {
+		XBlockExpression xblockExpression = (XBlockExpression) expression("{var a = 42 }");
+		XVariableDeclaration expressionA = (XVariableDeclaration) xblockExpression.getExpressions().get(0);
+		helper.assertWarning(expressionA, XVARIABLE_DECLARATION, UNUSED_LOCAL_VARIABLE, "used");
+	}
+	
+	public void testLocallyWriteableUsedVariableDefintion() throws Exception {
+		XBlockExpression xblockExpression = (XBlockExpression) expression("{var a = 42  a+1}");
+		XVariableDeclaration expressionA = (XVariableDeclaration) xblockExpression.getExpressions().get(0);
+		helper.assertNoIssues(expressionA);
 	}
 	
 }
