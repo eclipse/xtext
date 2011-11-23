@@ -672,4 +672,24 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 		XtendClass clazz = clazz("import java.util.List class X { protected List foo public List bar}");
 		helper.assertNoIssues(clazz.eContainer());
 	}
+	
+	public void testUnusedFunction() throws Exception {
+		XtendClass clazz = clazz("class X { def private foo(String a, Integer b) }");
+		helper.assertWarning(clazz, Xtend2Package.Literals.XTEND_FUNCTION, FUNCTION_LOCALLY_NEVER_USED, "method","foo(String a, Integer b)","never", "used");
+	}
+	
+	public void testUsedFunction() throws Exception {
+		XtendClass clazz = clazz("class X { def private foo() def bar(){foo}}");
+		helper.assertNoIssues(clazz.eContainer());
+	}
+	
+	public void testUnusedDispatchFunction() throws Exception {
+		XtendClass clazz = clazz("class X { def private dispatch foo(String a) def private dispatch foo(Integer a) }");
+		helper.assertWarning(clazz, Xtend2Package.Literals.XTEND_FUNCTION, FUNCTION_LOCALLY_NEVER_USED, "method", "foo(Comparable<?>","never", "used");
+	}
+	
+	public void testUsedDispatchFunction() throws Exception {
+		XtendClass clazz = clazz("class X { def private dispatch foo(String a) def private dispatch foo(Integer a) def bar(){foo(42)}}");
+		helper.assertNoIssues(clazz.eContainer());
+	}
 }

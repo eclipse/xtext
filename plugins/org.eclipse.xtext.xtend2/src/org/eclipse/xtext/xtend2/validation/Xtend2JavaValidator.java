@@ -18,6 +18,7 @@ import static org.eclipse.xtext.xtend2.xtend2.Xtend2Package.Literals.*;
 
 import java.lang.annotation.ElementType;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -44,6 +45,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
@@ -730,7 +732,7 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 	public void dispatchFuncWithTypeParams(XtendFunction func) {
 		if (func.isDispatch()) {
 			if (func.getParameters().isEmpty()) {
-				error("A dispatch function mus at least have one parameter declared.", func, XTEND_FUNCTION__DISPATCH,
+				error("A dispatch function must at least have one parameter declared.", func, XTEND_FUNCTION__DISPATCH,
 						IssueCodes.DISPATCH_FUNC_WITHOUT_PARAMS);
 			}
 			if (!func.getTypeParameters().isEmpty()) {
@@ -968,6 +970,23 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 		if(jvmField.getVisibility() == JvmVisibility.PRIVATE && !isLocallyUsed(jvmField, field.eContainer())){
 			String message = "The field " + jvmField.getSimpleName() + " is never read locally";
 			warning(message, Xtend2Package.Literals.XTEND_FIELD__NAME, FIELD_LOCALLY_NEVER_READ);
+		}
+	}
+	
+	@Check
+	public void checkLocalUsageOfDeclaredXtendFunction(XtendFunction function){
+		JvmOperation jvmOperation = function.isDispatch()?associations.getDispatchOperation(function):associations.getDirectlyInferredOperation(function);
+		if(jvmOperation.getVisibility() == JvmVisibility.PRIVATE && !isLocallyUsed(jvmOperation, function.eContainer())){
+			StringBuilder message = new StringBuilder("The method " + jvmOperation.getSimpleName() + "(");
+			Iterator<JvmFormalParameter> parametersInterator = jvmOperation.getParameters().iterator();
+			while(parametersInterator.hasNext()){
+				JvmFormalParameter parameter = parametersInterator.next();
+				message.append(parameter.getParameterType().getSimpleName() + " " + parameter.getSimpleName());
+				if(parametersInterator.hasNext())
+					message.append(", ");
+			}
+			message.append(") is never used locally");
+			warning(message.toString(), Xtend2Package.Literals.XTEND_FUNCTION__NAME, FUNCTION_LOCALLY_NEVER_USED);
 		}
 	}
 }
