@@ -150,7 +150,6 @@ public class OrganizeImportsTest extends AbstractXtend2TestCase {
 				"  def test() {\n" +
 				"    val x = Resource$Factory$Registry::INSTANCE\n" +
 				"    val y = EPackage$Registry::INSTANCE\n" +
-				"    !x.equals(y)\n"+
 				"  }\n" +
 				"}\n";
 		XtendFile file = file(model,true);
