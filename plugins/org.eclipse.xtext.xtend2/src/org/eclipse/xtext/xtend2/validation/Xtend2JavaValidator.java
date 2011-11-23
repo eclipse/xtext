@@ -18,7 +18,6 @@ import static org.eclipse.xtext.xtend2.xtend2.Xtend2Package.Literals.*;
 
 import java.lang.annotation.ElementType;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -45,7 +44,6 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
@@ -74,6 +72,7 @@ import org.eclipse.xtext.xbase.annotations.typing.XAnnotationUtil;
 import org.eclipse.xtext.xbase.annotations.validation.XbaseWithAnnotationsJavaValidator;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
+import org.eclipse.xtext.xbase.validation.UIStrings;
 import org.eclipse.xtext.xtend2.dispatch.DispatchingSupport;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.richstring.RichStringProcessor;
@@ -139,6 +138,9 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 
 	@Inject
 	private XAnnotationUtil annotationUtil;
+	
+	@Inject 
+	private UIStrings uiStrings;
 
 	private final Set<EReference> typeConformanceCheckedReferences = ImmutableSet.copyOf(Iterables.concat(
 			super.getTypeConformanceCheckedReferences(), 
@@ -968,7 +970,8 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 	public void checkLocalUsageOfDeclaredFields(XtendField field){
 		JvmField jvmField = associations.getJvmField(field);
 		if(jvmField.getVisibility() == JvmVisibility.PRIVATE && !isLocallyUsed(jvmField, field.eContainer())){
-			String message = "The field " + jvmField.getSimpleName() + " is never read locally";
+			String message = "The value of the field " + jvmField.getDeclaringType().getSimpleName()+"."
+						+ jvmField.getSimpleName() + " is not used";
 			warning(message, Xtend2Package.Literals.XTEND_FIELD__NAME, FIELD_LOCALLY_NEVER_READ);
 		}
 	}
@@ -977,16 +980,11 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 	public void checkLocalUsageOfDeclaredXtendFunction(XtendFunction function){
 		JvmOperation jvmOperation = function.isDispatch()?associations.getDispatchOperation(function):associations.getDirectlyInferredOperation(function);
 		if(jvmOperation.getVisibility() == JvmVisibility.PRIVATE && !isLocallyUsed(jvmOperation, function.eContainer())){
-			StringBuilder message = new StringBuilder("The method " + jvmOperation.getSimpleName() + "(");
-			Iterator<JvmFormalParameter> parametersInterator = jvmOperation.getParameters().iterator();
-			while(parametersInterator.hasNext()){
-				JvmFormalParameter parameter = parametersInterator.next();
-				message.append(parameter.getParameterType().getSimpleName() + " " + parameter.getSimpleName());
-				if(parametersInterator.hasNext())
-					message.append(", ");
-			}
-			message.append(") is never used locally");
-			warning(message.toString(), Xtend2Package.Literals.XTEND_FUNCTION__NAME, FUNCTION_LOCALLY_NEVER_USED);
+			
+			String message = "The method " + jvmOperation.getSimpleName() 
+					+  uiStrings.parameters(jvmOperation)  
+					+ "from the type "+jvmOperation.getDeclaringType().getSimpleName()+" is never used locally.";
+			warning(message, Xtend2Package.Literals.XTEND_FUNCTION__NAME, FUNCTION_LOCALLY_NEVER_USED);
 		}
 	}
 }

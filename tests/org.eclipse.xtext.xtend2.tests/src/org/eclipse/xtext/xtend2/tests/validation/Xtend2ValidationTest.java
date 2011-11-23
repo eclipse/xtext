@@ -665,7 +665,7 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testPrivateUnusedField() throws Exception {
 		XtendClass clazz = clazz("import java.util.List class X { private List sb }");
-		helper.assertWarning(clazz.eContainer(), Xtend2Package.Literals.XTEND_FIELD,FIELD_LOCALLY_NEVER_READ , "never");
+		helper.assertWarning(clazz.eContainer(), Xtend2Package.Literals.XTEND_FIELD,FIELD_LOCALLY_NEVER_READ , "not");
 	}
 	
 	public void testUnusedField() throws Exception {
@@ -675,7 +675,7 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testUnusedFunction() throws Exception {
 		XtendClass clazz = clazz("class X { def private foo(String a, Integer b) }");
-		helper.assertWarning(clazz, Xtend2Package.Literals.XTEND_FUNCTION, FUNCTION_LOCALLY_NEVER_USED, "method","foo(String a, Integer b)","never", "used");
+		helper.assertWarning(clazz, Xtend2Package.Literals.XTEND_FUNCTION, FUNCTION_LOCALLY_NEVER_USED, "method","foo(String, Integer)","never", "used");
 	}
 	
 	public void testUsedFunction() throws Exception {
