@@ -965,7 +965,7 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 	@Check
 	public void checkLocalUsageOfDeclaredFields(XtendField field){
 		JvmField jvmField = associations.getJvmField(field);
-		if(jvmField.getVisibility() == JvmVisibility.PRIVATE && !isLocallyUsed(jvmField)){
+		if(jvmField.getVisibility() == JvmVisibility.PRIVATE && !isLocallyUsed(jvmField, field.eContainer())){
 			String message = "The field " + jvmField.getSimpleName() + " is never read locally";
 			warning(message, Xtend2Package.Literals.XTEND_FIELD__NAME, FIELD_LOCALLY_NEVER_READ);
 		}
