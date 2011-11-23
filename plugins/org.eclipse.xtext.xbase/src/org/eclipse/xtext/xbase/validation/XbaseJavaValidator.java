@@ -805,14 +805,14 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	@Check
 	public  void checkLocalUsageOfDeclared(XVariableDeclaration variableDeclaration) {
-		if(!isLocallyUsed(variableDeclaration)){
+		if(!isLocallyUsed(variableDeclaration, variableDeclaration.eContainer())){
 			String message = "The value of the local variable " + variableDeclaration.getName() + " is not used";
 			warning(message, XbasePackage.Literals.XVARIABLE_DECLARATION__NAME, UNUSED_LOCAL_VARIABLE);
 		}
 	}
 
-	protected boolean isLocallyUsed(EObject target) {
-		return !EcoreUtil.UsageCrossReferencer.find(target, target.eResource()).isEmpty();
+	protected boolean isLocallyUsed(EObject target, EObject containerToFindUsage) {
+		return !EcoreUtil.UsageCrossReferencer.find(target, containerToFindUsage).isEmpty();
 	}
 
 	@Override
