@@ -23,6 +23,7 @@ import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.validation.IssueCodes;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendField;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendMember;
@@ -634,32 +635,42 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testImportUnused_2() throws Exception {
-		XtendClass clazz = clazz("import java.util.List class X { private List sb }");
+		XtendClass clazz = clazz("import java.util.List class X { private List sb def foo(){sb}}");
 		helper.assertNoIssues(clazz.eContainer());
 	}
 	
 	public void testImportUnused_3() throws Exception {
-		XtendClass clazz = clazz("import java.util.Map$Entry class X { private Entry sb }");
+		XtendClass clazz = clazz("import java.util.Map$Entry class X { private Entry sb def foo(){sb}}");
 		helper.assertNoIssues(clazz.eContainer());
 	}
 	
 	public void testImportUnused_4() throws Exception {
-		XtendClass clazz = clazz("import java.util.Map class X { private Map$Entry sb }");
+		XtendClass clazz = clazz("import java.util.Map class X { private Map$Entry sb def foo(){sb}}");
 		helper.assertNoIssues(clazz.eContainer());
 	}
 	
 	public void testImportUnused_5() throws Exception {
-		XtendClass clazz = clazz("import java.util.Map$Entry class X { private Map$Entry sb }");
+		XtendClass clazz = clazz("import java.util.Map$Entry class X { private Map$Entry sb def foo(){sb}}");
 		helper.assertNoIssues(clazz.eContainer());
 	}
 	
 	public void testImportDuplicate() throws Exception {
-		XtendClass clazz = clazz("import java.util.List import java.util.List class X { private List sb }");
+		XtendClass clazz = clazz("import java.util.List import java.util.List class X { private List sb def foo(){sb}}");
 		helper.assertWarning(clazz.eContainer(), Xtend2Package.Literals.XTEND_IMPORT, IMPORT_DUPLICATE);
 	}
 	
 	public void testImportWildcard() throws Exception {
-		XtendClass clazz = clazz("import java.util.* import java.util.List class X { private List sb }");
+		XtendClass clazz = clazz("import java.util.* import java.util.List class X { private List sb def foo(){sb}}");
 		helper.assertWarning(clazz.eContainer(), Xtend2Package.Literals.XTEND_IMPORT, IMPORT_WILDCARD_DEPRECATED);
+	}
+	
+	public void testPrivateUnusedField() throws Exception {
+		XtendClass clazz = clazz("import java.util.List class X { private List sb }");
+		helper.assertWarning(clazz.eContainer(), Xtend2Package.Literals.XTEND_FIELD,FIELD_LOCALLY_NEVER_READ , "never");
+	}
+	
+	public void testUnusedField() throws Exception {
+		XtendClass clazz = clazz("import java.util.List class X { protected List foo public List bar}");
+		helper.assertNoIssues(clazz.eContainer());
 	}
 }
