@@ -170,7 +170,7 @@ public class OutlineTests extends AbstractXtend2UITestCase {
 	
 	public void testConstructor() throws Exception  {
 		AssertBuilder assertBuilder = newAssertBuilder("class Foo { new(int foo) {} }");
-		AssertBuilder dispatcher = assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "new(int)").numChildren(0);
+		assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "new(int)").numChildren(0);
 	}
 	
 	protected void setSorting(boolean isSorting) {
