@@ -67,7 +67,9 @@ public class TypeReferences {
 	public JvmMultiTypeReference createMultiTypeReference(EObject context, JvmTypeReference... references) {
 		 JvmMultiTypeReference result = factory.createJvmMultiTypeReference();
 		 if (references != null && references.length != 0) {
-			 result.getReferences().addAll(Arrays.asList(references));
+			 for(JvmTypeReference reference: references) {
+				 result.getReferences().add(createDelegateTypeReference(reference));
+			 }
 		 }
 		 result.setType(findDeclaredType(Object.class, context));
 		 return result;

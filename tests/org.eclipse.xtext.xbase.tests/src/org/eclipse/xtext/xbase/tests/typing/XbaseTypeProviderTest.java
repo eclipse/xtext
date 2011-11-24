@@ -105,12 +105,20 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 				"switch true { case true : 's' case false : new java.lang.Object() default: 'bar'}");
 	}
 	
-	public void testTypeGuardedCase() throws Exception {
+	public void testTypeGuardedCase_0() throws Exception {
 		XSwitchExpression expression = (XSwitchExpression) expression("switch  s: new Object() { String: s StringBuffer: s}", true);
 		assertEquals("java.lang.Object", toString(typeProvider.getType(expression.getSwitch())));
-		assertEquals("java.lang.String & java.lang.Object", toString(typeProvider.getType(expression.getCases().get(0).getThen())));
-		assertEquals("java.lang.StringBuffer & java.lang.Object", toString(typeProvider.getType(expression.getCases().get(1).getThen())));
+		assertEquals("java.lang.String", toString(typeProvider.getType(expression.getCases().get(0).getThen())));
+		assertEquals("java.lang.StringBuffer", toString(typeProvider.getType(expression.getCases().get(1).getThen())));
 		assertEquals("java.io.Serializable", toString(typeProvider.getType(expression)));
+	}
+	
+	public void testTypeGuardedCase_1() throws Exception {
+		XSwitchExpression expression = (XSwitchExpression) expression("switch s: '' as CharSequence { Cloneable: s String: s }", true);
+		assertEquals("java.lang.CharSequence", toString(typeProvider.getType(expression.getSwitch())));
+		assertEquals("java.lang.Cloneable & java.lang.CharSequence", toString(typeProvider.getType(expression.getCases().get(0).getThen())));
+		assertEquals("java.lang.String", toString(typeProvider.getType(expression.getCases().get(1).getThen())));
+		assertEquals("java.lang.CharSequence", toString(typeProvider.getType(expression)));
 	}
 	
 	public void testSwitchExpression_Bug343100() throws Exception {
