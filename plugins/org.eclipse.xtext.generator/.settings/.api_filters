@@ -50,10 +50,10 @@
         </filter>
     </resource>
     <resource path="xtend-gen/org/eclipse/xtext/generator/grammarAccess/GrammarAccess.java" type="org.eclipse.xtext.generator.grammarAccess.GrammarAccess">
-        <filter comment="BOGUS!" id="305324134">
+        <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.grammarAccess.GrammarAccess"/>
-                <message_argument value="org.eclipse.xtext.generator_2.1.0"/>
+                <message_argument value="org.eclipse.xtext.generator_2.2.0"/>
             </message_arguments>
         </filter>
     </resource>
