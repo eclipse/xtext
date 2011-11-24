@@ -51,6 +51,7 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 	
 	private boolean generateXtendInferrer = true;
 	private boolean useInferredJvmModel = true;
+	private boolean jdtTypeHierarchy = true;
 	
 	protected boolean usesXbaseGrammar(Grammar grammar) {
 		return doesUseXbase(grammar);
@@ -74,6 +75,10 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 	
 	public void setUseInferredJvmModel(boolean useInferredJvmModel) {
 		this.useInferredJvmModel = useInferredJvmModel;
+	}
+	
+	public void setJdtTypeHierarchy(boolean jdtTypeHierarchy){
+		this.jdtTypeHierarchy = jdtTypeHierarchy;
 	}
 
 	public static String getJvmModelInferrerName(Grammar grammar, Naming naming) {
@@ -211,12 +216,12 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 	
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
-		return Lists.<Object>newArrayList(useInferredJvmModel, generateXtendInferrer);
+		return Lists.<Object>newArrayList(useInferredJvmModel, generateXtendInferrer, jdtTypeHierarchy);
 	}
 	
 	@Override
 	public String[] getExportedPackagesRt(Grammar grammar) {
-		if(usesXbaseGrammar(grammar) && (generateXtendInferrer || useInferredJvmModel)) {
+		if(usesXbaseGrammar(grammar) && (generateXtendInferrer || useInferredJvmModel || jdtTypeHierarchy)) {
 			return new String[] { Strings.skipLastToken(getJvmModelInferrerName(grammar, getNaming()), ".") };
 		}
 		return null;
