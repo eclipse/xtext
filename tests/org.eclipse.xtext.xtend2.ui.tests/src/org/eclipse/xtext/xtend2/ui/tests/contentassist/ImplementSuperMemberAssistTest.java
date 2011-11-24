@@ -20,8 +20,16 @@ import com.google.inject.Inject;
 public class ImplementSuperMemberAssistTest extends AbstractXtendContentAssistBugTest {
 
 	@Inject
-	private IIndentationInformation indent;
+	private IIndentationInformation indentationInfo;
+	
+	private String indent;
 
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		indent = indentationInfo.getIndentString();
+	}
+	
 	public void testAbstractMethod() throws Exception {
 		newBuilder().append("class Foo implements Comparable<String> { co").assertText(
 				getOverridingFunctionCode("compareTo(String o)"));
@@ -30,9 +38,9 @@ public class ImplementSuperMemberAssistTest extends AbstractXtendContentAssistBu
 	public void testAbstractAndNonAbstractMethod() throws Exception {
 		newBuilder().append("class Foo implements Comparable<String> { c").assertText(
 				getOverridingFunctionCode("compareTo(String o)"),
-				"\n"+indent.getIndentString() + "override protected clone() throws CloneNotSupportedException {\n" + 
-				indent.getIndentString() + indent.getIndentString() + "super.clone()\n" +
-				indent.getIndentString() + "}\n");
+				"\n"+indent + "override protected clone() throws CloneNotSupportedException {\n" + 
+				indent + indent + "super.clone()\n" +
+				indent + "}\n");
 	}
 
 	public void testStaticMethod() throws Exception {
@@ -42,14 +50,24 @@ public class ImplementSuperMemberAssistTest extends AbstractXtendContentAssistBu
 	public void testNonStaticMethod() throws Exception {
 		newBuilder().append("class Foo extends Thread { getI").assertText(
 				"\n" + 
-				indent.getIndentString() + "override getId() {\n" + 
-				indent.getIndentString() + indent.getIndentString() + "super.getId()\n" + 
-				indent.getIndentString() + "}\n");
+				indent + "override getId() {\n" + 
+				indent + indent + "super.getId()\n" + 
+				indent + "}\n");
+	}
+	
+	public void testConstructor() throws Exception {
+		newBuilder().append("class Foo extends Exception { new").assertText(
+				"\n" + indent + "new() {\n"+ indent + indent + "\n"  + indent + "}\n",
+				"\n" + indent + "new(String message_1) {\n"+ indent + indent + "super(message_1)\n" + indent + "}\n",
+				"\n" + indent + "new(String message_1, Throwable cause_1) {\n"+ indent + indent + "super(message_1, cause_1)\n" + indent + "}\n",
+				"\n" + indent + "new(Throwable cause_1) {\n"+ indent + indent + "super(cause_1)\n" + indent + "}\n",
+				"new"
+				);
 	}
 
 	protected String getOverridingFunctionCode(String signature) {
-		return "\n" + indent.getIndentString() + "override " + signature + " {\n" + indent.getIndentString()
-				+ indent.getIndentString() + MemberFromSuperImplementor.DEFAULT_BODY + "\n" + indent.getIndentString() + "}\n";
+		return "\n" + indent + "override " + signature + " {\n" + indent
+				+ indent + MemberFromSuperImplementor.DEFAULT_BODY + "\n" + indent + "}\n";
 	}
 
 	public static Test suite() {

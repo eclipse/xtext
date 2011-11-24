@@ -52,7 +52,7 @@ public class MemberFromSuperImplementor {
 
 	@Inject
 	private IXtend2JvmAssociations associations;
-	
+
 	public void appendOverrideFunction(final XtendClass overrider, JvmOperation overriddenOperation,
 			IAppendable appendable) {
 		appendExecutable(overrider, overriddenOperation, appendable);
@@ -95,11 +95,14 @@ public class MemberFromSuperImplementor {
 			}
 		}
 		appendable.append(" {").increaseIndentation().append("\n");
-		if (isOperation && ((JvmOperation) executableFromSuper).isAbstract()) {
-			appendable.append(DEFAULT_BODY);
-		} else {
-			if (isOperation)  
+		if (isOperation) {
+			if (((JvmOperation) executableFromSuper).isAbstract()) {
+				appendable.append(DEFAULT_BODY);
+			} else {
 				appendable.append("super.");
+				appendSignature(executableFromSuper, overridingType, typeArgumentContext, appendable, true);
+			}
+		} else if (!executableFromSuper.getParameters().isEmpty()) {
 			appendSignature(executableFromSuper, overridingType, typeArgumentContext, appendable, true);
 		}
 		appendable.decreaseIndentation().append("\n}").decreaseIndentation().append("\n");
