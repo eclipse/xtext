@@ -32,12 +32,14 @@ public class LinkToOrigin extends XtextHyperlink {
 	public void open() {
 		URI resourceURI = getURI().trimFragment();
 		IResourceServiceProvider serviceProvider = resourceServiceProviderRegistry.getResourceServiceProvider(resourceURI);
-		IDerivedMemberAwareEditorOpener opener = serviceProvider.get(IDerivedMemberAwareEditorOpener.class);
-		if (opener != null) {
-			opener.open(getURI(), member, true);
-		} else {
-			super.open();
+		if (serviceProvider != null) {
+			IDerivedMemberAwareEditorOpener opener = serviceProvider.get(IDerivedMemberAwareEditorOpener.class);
+			if (opener != null) {
+				opener.open(getURI(), member, true);
+				return;
+			}
 		}
+		super.open();
 	}
 	
 }
