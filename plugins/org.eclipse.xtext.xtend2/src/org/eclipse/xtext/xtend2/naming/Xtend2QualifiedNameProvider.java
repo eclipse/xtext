@@ -16,6 +16,7 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.scoping.XbaseQualifiedNameProvider;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendConstructor;
 import org.eclipse.xtext.xtend2.xtend2.XtendField;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
@@ -37,6 +38,9 @@ public class Xtend2QualifiedNameProvider extends XbaseQualifiedNameProvider {
 			final String qualifiedName = (xtendClass.getPackageName() != null ? xtendClass.getPackageName() + "." : "")
 					+ xtendClass.getName();
 			return qualifiedNameConverter.toQualifiedName(qualifiedName);
+		}
+		if(obj instanceof XtendConstructor) {
+			return getFullyQualifiedName(obj.eContainer());
 		}
 		if (obj instanceof JvmGenericType
 			|| obj instanceof JvmOperation
