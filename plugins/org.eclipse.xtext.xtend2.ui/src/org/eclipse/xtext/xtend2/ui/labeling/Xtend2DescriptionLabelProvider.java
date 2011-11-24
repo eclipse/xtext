@@ -30,6 +30,7 @@ public class Xtend2DescriptionLabelProvider extends DefaultDescriptionLabelProvi
 	@Override
 	public Object image(IEObjectDescription element) {
 		EClass eClass = element.getEClass();
+		boolean isStatic = descriptionFlags.isStatic(element);
 		if (eClass == XTEND_FILE)
 			return images.forFile();
 		else if (eClass == XTEND_IMPORT)
@@ -37,12 +38,13 @@ public class Xtend2DescriptionLabelProvider extends DefaultDescriptionLabelProvi
 		else if (eClass == XTEND_CLASS || eClass == TypesPackage.Literals.JVM_GENERIC_TYPE)
 			return images.forClass(JvmVisibility.PUBLIC);
 		else if (eClass == XTEND_FUNCTION)
-			return images.forFunction(JvmVisibility.PUBLIC);
+			return images.forFunction(JvmVisibility.PUBLIC, isStatic);
 		else if (eClass == XTEND_FIELD)
-			return images.forField(JvmVisibility.PUBLIC, false);
+			return images.forField(JvmVisibility.PUBLIC, isStatic, false);
 		else if (eClass == TypesPackage.Literals.JVM_OPERATION)
-			return (descriptionFlags.isDispatcherOperation(element)) ? images.forDispatcherFunction(JvmVisibility.PUBLIC) : images
-					.forFunction(JvmVisibility.PUBLIC);
+			return (descriptionFlags.isDispatcherOperation(element)) 
+				? images.forDispatcherFunction(JvmVisibility.PUBLIC, isStatic) 
+				: images.forFunction(JvmVisibility.PUBLIC, isStatic);
 		else
 			return super.image(element);
 	}

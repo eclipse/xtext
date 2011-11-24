@@ -17,14 +17,24 @@ public class DescriptionFlags {
 	public static final String KEY = "Flags";
 	
 	public static final int DISPATCHER_OPERATION = 1;
+	public static final int IS_STATIC = 2;
 	
 	public boolean isDispatcherOperation(IEObjectDescription eObjectDescription) {
 		int flags = getFlags(eObjectDescription);
 		return (flags & DISPATCHER_OPERATION) != 0;
 	}
 
+	public boolean isStatic(IEObjectDescription eObjectDescription) {
+		int flags = getFlags(eObjectDescription);
+		return (flags & IS_STATIC) != 0;
+	}
+
 	public int setDispatcherOperation(int flags) {
 		return flags | DISPATCHER_OPERATION;
+	}
+	
+	public int setStatic(int flags) {
+		return flags | IS_STATIC;
 	}
 	
 	protected int getFlags(IEObjectDescription eObjectDescription) {
