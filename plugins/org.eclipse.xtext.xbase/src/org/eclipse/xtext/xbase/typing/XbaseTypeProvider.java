@@ -46,6 +46,7 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
+import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -108,6 +109,9 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 	
 	@Inject 
 	private TypeReferences typeReferences;
+	
+	@Inject
+	private TypeConformanceComputer typeConformanceComputer;
 
 	@Override
 	protected JvmTypeReference _expectedType(EObject obj, EReference reference, int index, boolean rawType) {
@@ -989,10 +993,12 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 	protected JvmTypeReference _type(final XFeatureCall featureCall, JvmTypeReference rawExpectation, boolean rawType) {
 		XCasePart typeGuardedXCasePartContainer = findTypeGuardedXCasePartContainer(featureCall, featureCall);
 		JvmTypeReference plainType = _type((XAbstractFeatureCall) featureCall, rawExpectation, rawType);
-		if (typeGuardedXCasePartContainer != null) {
-			return typeReferences.createMultiTypeReference(typeGuardedXCasePartContainer,
-					typeReferences.createDelegateTypeReference(typeGuardedXCasePartContainer.getTypeGuard()),
-					typeReferences.createDelegateTypeReference(plainType));
+  		if (plainType != null && typeGuardedXCasePartContainer != null) {
+			JvmTypeReference typeGuard = typeGuardedXCasePartContainer.getTypeGuard();
+			if(typeConformanceComputer.isConformant(plainType, typeGuard))
+				return typeGuard;
+			else 
+				return typeReferences.createMultiTypeReference(typeGuardedXCasePartContainer, typeGuard, plainType);
 		}
 		return plainType;
 	}
