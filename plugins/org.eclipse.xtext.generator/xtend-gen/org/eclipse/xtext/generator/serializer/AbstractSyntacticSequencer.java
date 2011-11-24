@@ -277,7 +277,6 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
   
   public String defaultValue(final AbstractElement ele, final Set<AbstractElement> visited) {
     String _switchResult = null;
-    final AbstractElement ele_1 = ele;
     boolean matched = false;
     if (!matched) {
       boolean _add = visited.add(ele);
@@ -295,20 +294,18 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       }
     }
     if (!matched) {
-      if (ele_1 instanceof Alternatives) {
-        final Alternatives ele_2 = (Alternatives) ele_1;
+      if (ele instanceof Alternatives) {
         matched=true;
-        EList<AbstractElement> _elements = ele_2.getElements();
+        EList<AbstractElement> _elements = ((Alternatives)ele).getElements();
         AbstractElement _head = IterableExtensions.<AbstractElement>head(_elements);
         String _defaultValue = this.defaultValue(_head, visited);
         _switchResult = _defaultValue;
       }
     }
     if (!matched) {
-      if (ele_1 instanceof Group) {
-        final Group ele_3 = (Group) ele_1;
+      if (ele instanceof Group) {
         matched=true;
-        EList<AbstractElement> _elements_1 = ele_3.getElements();
+        EList<AbstractElement> _elements_1 = ((Group)ele).getElements();
         final Function1<AbstractElement,String> _function = new Function1<AbstractElement,String>() {
             public String apply(final AbstractElement e) {
               String _defaultValue_1 = AbstractSyntacticSequencer.this.defaultValue(e, visited);
@@ -321,18 +318,16 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       }
     }
     if (!matched) {
-      if (ele_1 instanceof Keyword) {
-        final Keyword ele_4 = (Keyword) ele_1;
+      if (ele instanceof Keyword) {
         matched=true;
-        String _value = ele_4.getValue();
+        String _value = ((Keyword)ele).getValue();
         _switchResult = _value;
       }
     }
     if (!matched) {
-      if (ele_1 instanceof RuleCall) {
-        final RuleCall ele_5 = (RuleCall) ele_1;
+      if (ele instanceof RuleCall) {
         matched=true;
-        AbstractRule _rule = ele_5.getRule();
+        AbstractRule _rule = ((RuleCall)ele).getRule();
         AbstractElement _alternatives = _rule.getAlternatives();
         String _defaultValue_1 = this.defaultValue(_alternatives, visited);
         _switchResult = _defaultValue_1;

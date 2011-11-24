@@ -60,34 +60,30 @@ public class Xtend04_ControlStructures {
    */
   public String switchExpression_01(final Shape shape) {
     String _switchResult = null;
-    final Shape shape_1 = shape;
     boolean matched = false;
     if (!matched) {
-      if (shape_1 instanceof Circle) {
-        final Circle shape_2 = (Circle) shape_1;
+      if (shape instanceof Circle) {
         matched=true;
-        String _operator_plus = StringExtensions.operator_plus("a circle : diameter=", ((Integer)shape_2.diameter));
+        String _operator_plus = StringExtensions.operator_plus("a circle : diameter=", ((Integer)((Circle)shape).diameter));
         _switchResult = _operator_plus;
       }
     }
     if (!matched) {
-      if (shape_1 instanceof Rectangle) {
-        final Rectangle shape_3 = (Rectangle) shape_1;
-        boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)shape_3.height), ((Integer)shape_3.width));
+      if (shape instanceof Rectangle) {
+        boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)((Rectangle)shape).height), ((Integer)((Rectangle)shape).width));
         if (_operator_equals) {
           matched=true;
-          String _operator_plus_1 = StringExtensions.operator_plus("a square : size=", ((Integer)shape_3.width));
+          String _operator_plus_1 = StringExtensions.operator_plus("a square : size=", ((Integer)((Rectangle)shape).width));
           _switchResult = _operator_plus_1;
         }
       }
     }
     if (!matched) {
-      if (shape_1 instanceof Rectangle) {
-        final Rectangle shape_4 = (Rectangle) shape_1;
+      if (shape instanceof Rectangle) {
         matched=true;
-        String _operator_plus_2 = StringExtensions.operator_plus("a rectangle : width=", ((Integer)shape_4.width));
+        String _operator_plus_2 = StringExtensions.operator_plus("a rectangle : width=", ((Integer)((Rectangle)shape).width));
         String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, ", height=");
-        String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, ((Integer)shape_4.height));
+        String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, ((Integer)((Rectangle)shape).height));
         _switchResult = _operator_plus_4;
       }
     }
@@ -100,16 +96,15 @@ public class Xtend04_ControlStructures {
    */
   public String switchExpression_02(final String value) {
     String _switchResult = null;
-    final String value_1 = value;
     boolean matched = false;
     if (!matched) {
-      if (ObjectExtensions.operator_equals(value_1,"foo")) {
+      if (ObjectExtensions.operator_equals(value,"foo")) {
         matched=true;
         _switchResult = "it\'s foo";
       }
     }
     if (!matched) {
-      if (ObjectExtensions.operator_equals(value_1,"bar")) {
+      if (ObjectExtensions.operator_equals(value,"bar")) {
         matched=true;
         _switchResult = "a bar";
       }

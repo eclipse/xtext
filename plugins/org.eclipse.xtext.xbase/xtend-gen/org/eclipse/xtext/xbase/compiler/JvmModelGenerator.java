@@ -277,28 +277,27 @@ public class JvmModelGenerator implements IGenerator {
     boolean _operator_notEquals = ObjectExtensions.operator_notEquals(visibility, null);
     if (_operator_notEquals) {
       String _switchResult = null;
-      final JvmVisibility visibility_1 = visibility;
       boolean matched = false;
       if (!matched) {
-        if (ObjectExtensions.operator_equals(visibility_1,JvmVisibility.PRIVATE)) {
+        if (ObjectExtensions.operator_equals(visibility,JvmVisibility.PRIVATE)) {
           matched=true;
           _switchResult = "private ";
         }
       }
       if (!matched) {
-        if (ObjectExtensions.operator_equals(visibility_1,JvmVisibility.PUBLIC)) {
+        if (ObjectExtensions.operator_equals(visibility,JvmVisibility.PUBLIC)) {
           matched=true;
           _switchResult = "public ";
         }
       }
       if (!matched) {
-        if (ObjectExtensions.operator_equals(visibility_1,JvmVisibility.PROTECTED)) {
+        if (ObjectExtensions.operator_equals(visibility,JvmVisibility.PROTECTED)) {
           matched=true;
           _switchResult = "protected ";
         }
       }
       if (!matched) {
-        if (ObjectExtensions.operator_equals(visibility_1,JvmVisibility.DEFAULT)) {
+        if (ObjectExtensions.operator_equals(visibility,JvmVisibility.DEFAULT)) {
           matched=true;
           _switchResult = "";
         }
@@ -695,21 +694,18 @@ public class JvmModelGenerator implements IGenerator {
                 appendable.declareVariable(p, _simpleName);
               }
               JvmTypeReference _switchResult = null;
-              final JvmExecutable op_1 = op;
               boolean matched = false;
               if (!matched) {
-                if (op_1 instanceof JvmOperation) {
-                  final JvmOperation op_2 = (JvmOperation) op_1;
+                if (op instanceof JvmOperation) {
                   matched=true;
-                  JvmTypeReference _returnType = op_2.getReturnType();
+                  JvmTypeReference _returnType = ((JvmOperation)op).getReturnType();
                   _switchResult = _returnType;
                 }
               }
               if (!matched) {
-                if (op_1 instanceof JvmConstructor) {
-                  final JvmConstructor op_3 = (JvmConstructor) op_1;
+                if (op instanceof JvmConstructor) {
                   matched=true;
-                  JvmTypeReference _typeForName = this._typeReferences.getTypeForName(Void.TYPE, op_3);
+                  JvmTypeReference _typeForName = this._typeReferences.getTypeForName(Void.TYPE, ((JvmConstructor)op));
                   _switchResult = _typeForName;
                 }
               }
