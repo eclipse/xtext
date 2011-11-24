@@ -94,26 +94,35 @@ public class LanguageSpecificURIEditorOpener implements IURIEditorOpener {
 			final int indexInList, final boolean select) {
 		final XtextEditor xtextEditor = EditorUtils.getXtextEditor(openEditor);
 		if (xtextEditor != null) {
-			if (uri.fragment() != null) {
-				xtextEditor.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
-					@Override
-					public void process(XtextResource resource) throws Exception {
-						if (resource != null) {
-							EObject object = resource.getEObject(uri.fragment());
-							if (object != null) {
-								ITextRegion location = (crossReference != null) ? locationProvider
-										.getSignificantTextRegion(object, crossReference, indexInList)
-										: locationProvider.getSignificantTextRegion(object);
-								if (select) {
-									xtextEditor.selectAndReveal(location.getOffset(), location.getLength());
-								} else {
-									xtextEditor.reveal(location.getOffset(), location.getLength());
-								}
+			xtextEditor.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
+				@Override
+				public void process(XtextResource resource) throws Exception {
+					if (resource != null) {
+						EObject object = findEObjectByURI(uri, resource);
+						if (object != null) {
+							ITextRegion location = (crossReference != null) ? locationProvider
+									.getSignificantTextRegion(object, crossReference, indexInList)
+									: locationProvider.getSignificantTextRegion(object);
+							if (select) {
+								xtextEditor.selectAndReveal(location.getOffset(), location.getLength());
+							} else {
+								xtextEditor.reveal(location.getOffset(), location.getLength());
 							}
 						}
 					}
-				});
-			}
+				}
+			});
 		}
+	}
+
+	
+	/**
+	 * @since 2.2
+	 */
+	protected EObject findEObjectByURI(final URI uri, XtextResource resource) {
+		if (uri.fragment() == null)
+			return null;
+		EObject result = resource.getEObject(uri.fragment());
+		return result;
 	}
 }

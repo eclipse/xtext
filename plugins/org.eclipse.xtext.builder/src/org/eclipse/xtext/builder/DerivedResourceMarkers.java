@@ -64,7 +64,7 @@ public class DerivedResourceMarkers {
 	}
 	
 	public IMarker[] findDerivedResourceMarkers(IFile file) throws CoreException {
-		return file.findMarkers(MARKER_ID, true, 0);
+		return file.findMarkers(MARKER_ID, true, IResource.DEPTH_ZERO);
 	}
 	
 	public IMarker findDerivedResourceMarker(IFile file, String source) throws CoreException {

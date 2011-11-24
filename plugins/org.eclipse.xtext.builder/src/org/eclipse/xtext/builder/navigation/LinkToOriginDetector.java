@@ -16,7 +16,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;
-import org.eclipse.jdt.core.IType;
+import org.eclipse.jdt.core.IMember;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextViewer;
@@ -26,7 +26,6 @@ import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtext.builder.DerivedResourceMarkers;
-import org.eclipse.xtext.ui.editor.hyperlinking.XtextHyperlink;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -41,7 +40,7 @@ import com.google.inject.Provider;
 public class LinkToOriginDetector extends AbstractHyperlinkDetector {
 
 	@Inject
-	private Provider<XtextHyperlink> hyperlinkProvider;
+	private Provider<LinkToOrigin> hyperlinkProvider;
 	
 	@Inject
 	private DerivedResourceMarkers derivedResourceMarkers;
@@ -69,9 +68,9 @@ public class LinkToOriginDetector extends AbstractHyperlinkDetector {
 				// to its origin if it's contained in a 'derived' resource
 				IJavaElement[] javaElements = compilationUnit.codeSelect(selectedWord.getOffset(), selectedWord.getLength());
 				for(IJavaElement javaElement: javaElements) {
-					if (javaElement instanceof IType) {
-						IType selectedType = (IType) javaElement;
-						IResource resource = selectedType.getResource();
+					if (javaElement instanceof IMember) {
+						IMember selectedMember = (IMember) javaElement;
+						IResource resource = selectedMember.getResource();
 						if (resource instanceof IFile) {
 							IMarker[] markers = derivedResourceMarkers.findDerivedResourceMarkers((IFile) resource);
 							if (!canShowMultipleHyperlinks && markers.length > 1)
@@ -82,11 +81,12 @@ public class LinkToOriginDetector extends AbstractHyperlinkDetector {
 								if (source != null) {
 									try {
 										URI uri = URI.createURI(source);
-										XtextHyperlink hyperlink = hyperlinkProvider.get();
+										LinkToOrigin hyperlink = hyperlinkProvider.get();
 										hyperlink.setHyperlinkRegion(new Region(selectedWord.getOffset(), selectedWord.getLength()));
 										hyperlink.setURI(uri);
 										hyperlink.setHyperlinkText("Go to " + uri.lastSegment());
 										hyperlink.setTypeLabel("Navigate to source artifact");
+										hyperlink.setMember(selectedMember);
 										result.add(hyperlink);
 									} catch(IllegalArgumentException e) { /* invalid URI - ignore */ }
 								}
