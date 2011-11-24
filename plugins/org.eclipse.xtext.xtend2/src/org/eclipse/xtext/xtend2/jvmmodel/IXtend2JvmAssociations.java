@@ -35,6 +35,8 @@ public interface IXtend2JvmAssociations extends IJvmModelAssociations {
 	JvmGenericType getInferredType(XtendClass xtendClass);
 	
 	JvmConstructor getInferredConstructor(XtendClass xtendClass);
+
+	JvmConstructor getInferredConstructor(XtendConstructor xtendConstructor);
 	
 	JvmOperation getDirectlyInferredOperation(XtendFunction xtendFunction);
 	
@@ -55,6 +57,11 @@ public interface IXtend2JvmAssociations extends IJvmModelAssociations {
 
 		public JvmConstructor getInferredConstructor(XtendClass xtendClass) {
 			final JvmConstructor firstOrNull = getFirstOrNull(getJvmElements(xtendClass), JvmConstructor.class);
+			return firstOrNull;
+		}
+
+		public JvmConstructor getInferredConstructor(XtendConstructor xtendConstructor) {
+			final JvmConstructor firstOrNull = getFirstOrNull(getJvmElements(xtendConstructor), JvmConstructor.class);
 			return firstOrNull;
 		}
 

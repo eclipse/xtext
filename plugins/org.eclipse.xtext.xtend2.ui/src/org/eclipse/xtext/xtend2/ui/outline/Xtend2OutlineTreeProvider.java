@@ -112,5 +112,4 @@ public class Xtend2OutlineTreeProvider extends DefaultOutlineTreeProvider {
 	protected int index(XtendFunction f) {
 		return ((XtendClass) f.eContainer()).getMembers().indexOf(f);
 	}
-
 }

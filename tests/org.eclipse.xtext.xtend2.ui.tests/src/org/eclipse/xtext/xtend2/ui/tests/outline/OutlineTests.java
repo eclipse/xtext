@@ -124,7 +124,7 @@ public class OutlineTests extends AbstractXtend2UITestCase {
 		dispatcher.child(0, "foo(Object) : String").numChildren(0);
 		dispatcher.child(1, "foo(String) : String").numChildren(0);
 	}
-	
+
 	public void testDispatchMethods() throws Exception {
 		AssertBuilder assertBuilder = newAssertBuilder("class Foo {" +
 				" def dispatch foo(String x) {''}" +
@@ -166,6 +166,11 @@ public class OutlineTests extends AbstractXtend2UITestCase {
 		foo.child(0, "bar(Object) : String").numChildren(2).child(0, "bar(Object) : String");
 		foo.child(1, "foo(Object) : String").numChildren(2).child(0, "foo(Object) : String");
 		foo.child(2, "baz() : Object").numChildren(0);
+	}
+	
+	public void testConstructor() throws Exception  {
+		AssertBuilder assertBuilder = newAssertBuilder("class Foo { new(int foo) {} }");
+		AssertBuilder dispatcher = assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "new(int)").numChildren(0);
 	}
 	
 	protected void setSorting(boolean isSorting) {

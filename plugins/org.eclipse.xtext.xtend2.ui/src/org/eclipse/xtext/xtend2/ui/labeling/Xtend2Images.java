@@ -11,6 +11,7 @@ import org.eclipse.jdt.core.Flags;
 import org.eclipse.jdt.internal.ui.JavaPlugin;
 import org.eclipse.jdt.internal.ui.JavaPluginImages;
 import org.eclipse.jdt.internal.ui.viewsupport.JavaElementImageProvider;
+import org.eclipse.jdt.ui.JavaElementImageDescriptor;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.common.types.JvmVisibility;
@@ -26,7 +27,7 @@ public class Xtend2Images {
 
 	@Inject
 	private IImageHelper imageHelper;
-	
+
 	public Image forPackage() {
 		return getJdtImage(JavaPluginImages.DESC_OBJS_PACKDECL);
 	}
@@ -43,16 +44,29 @@ public class Xtend2Images {
 		return getJdtImage(JavaElementImageProvider.getTypeImageDescriptor(false, false, toFlags(visibility), false));
 	}
 
-	public Image forFunction(JvmVisibility visibility) {
-		return getJdtImage(JavaElementImageProvider.getMethodImageDescriptor(false, toFlags(visibility)));
+	public Image forConstructor(JvmVisibility visibility) {
+		return getDecoratedJdtImage(JavaElementImageProvider.getMethodImageDescriptor(false, toFlags(visibility)),
+				JavaElementImageDescriptor.CONSTRUCTOR);
 	}
-	
-	public Image forField(JvmVisibility visibility, boolean isExtension) {
-		return getJdtImage(JavaElementImageProvider.getFieldImageDescriptor(false, toFlags(visibility)));
+
+	public Image forFunction(JvmVisibility visibility, boolean isStatic) {
+		ImageDescriptor descriptor = JavaElementImageProvider.getMethodImageDescriptor(false, toFlags(visibility));
+		if (isStatic)
+			return getDecoratedJdtImage(descriptor, JavaElementImageDescriptor.STATIC);
+		else
+			return getJdtImage(descriptor);
 	}
-	
-	public Image forDispatcherFunction(JvmVisibility visibility) {
-		return getJdtImage(JavaElementImageProvider.getMethodImageDescriptor(false, toFlags(visibility)));
+
+	public Image forField(JvmVisibility visibility, boolean isStatic, boolean isExtension) {
+		ImageDescriptor descriptor = JavaElementImageProvider.getFieldImageDescriptor(false, toFlags(visibility));
+		if (isStatic)
+			return getDecoratedJdtImage(descriptor, JavaElementImageDescriptor.STATIC);
+		else
+			return getJdtImage(descriptor);
+	}
+
+	public Image forDispatcherFunction(JvmVisibility visibility, boolean isStatic) {
+		return forFunction(visibility, isStatic);
 	}
 
 	public Image forFile() {
@@ -62,9 +76,13 @@ public class Xtend2Images {
 	protected Image getJdtImage(ImageDescriptor descriptor) {
 		return JavaPlugin.getImageDescriptorRegistry().get(descriptor);
 	}
-	
+
+	protected Image getDecoratedJdtImage(ImageDescriptor descriptor, int adornment) {
+		return JavaElementImageProvider.getDecoratedImage(descriptor, adornment, JavaElementImageProvider.SMALL_SIZE);
+	}
+
 	protected int toFlags(JvmVisibility visibility) {
-		switch(visibility) {
+		switch (visibility) {
 			case PRIVATE:
 				return Flags.AccPrivate;
 			case PROTECTED:

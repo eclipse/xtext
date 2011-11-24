@@ -51,46 +51,46 @@ public class SuperMemberImplementorTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testPlain() {
-		checkOverrideCode("plain", "override plain() { " + throwsExpression + "}");
+		checkOverrideMethodCode("plain", "override plain() { " + throwsExpression + "}");
 	}
 
 	public void testClassTypeParam() {
-		checkOverrideCode("classTypeParameter", "override classTypeParameter(U p0) { " + throwsExpression + "}");
+		checkOverrideMethodCode("classTypeParameter", "override classTypeParameter(U p0) { " + throwsExpression + "}");
 	}
 
 	public void testClassTypeParam2() {
-		checkOverrideCode("classTypeParameter2", "override classTypeParameter2(Iterable<? extends CharSequence> p0) { " + throwsExpression + "}");
+		checkOverrideMethodCode("classTypeParameter2", "override classTypeParameter2(Iterable<? extends CharSequence> p0) { " + throwsExpression + "}");
 	}
 
 	public void testClassTypeParam3() {
-		checkOverrideCode("classTypeParameter3", "override classTypeParameter3(Iterable<? super CharSequence> p0) { " + throwsExpression + "}");
+		checkOverrideMethodCode("classTypeParameter3", "override classTypeParameter3(Iterable<? super CharSequence> p0) { " + throwsExpression + "}");
 	}
 
 	public void testMethodTypeParam() {
-		checkOverrideCode("methodTypeParameter", "override <V> methodTypeParameter(V p0) { " + throwsExpression + "}");
+		checkOverrideMethodCode("methodTypeParameter", "override <V> methodTypeParameter(V p0) { " + throwsExpression + "}");
 	}
 
 	public void testException() {
-		checkOverrideCode("exception", "override exception() throws Exception { " + throwsExpression + "}");
+		checkOverrideMethodCode("exception", "override exception() throws Exception { " + throwsExpression + "}");
 	}
 
 	public void testProtected() {
-		checkOverrideCode("protectedMethod", "override protected protectedMethod() { " + throwsExpression + "}");
+		checkOverrideMethodCode("protectedMethod", "override protected protectedMethod() { " + throwsExpression + "}");
 	}
 
 	public void testPlain_1() {
-		checkOverrideCode("concretePlain", "override concretePlain() { super.concretePlain() }");
+		checkOverrideMethodCode("concretePlain", "override concretePlain() { super.concretePlain() }");
 	}
 
 	public void testClassTypeParam_1() {
-		checkOverrideCode("concreteClassTypeParameter", "override concreteClassTypeParameter(U p0) { super.concreteClassTypeParameter(p0) }");
+		checkOverrideMethodCode("concreteClassTypeParameter", "override concreteClassTypeParameter(U p0) { super.concreteClassTypeParameter(p0) }");
 	}
 
 	public void testMethodTypeParam_1() {
-		checkOverrideCode("concreteMethodTypeParameter", "override <V> concreteMethodTypeParameter(V p0) { super.<V>concreteMethodTypeParameter(p0)}");
+		checkOverrideMethodCode("concreteMethodTypeParameter", "override <V> concreteMethodTypeParameter(V p0) { super.<V>concreteMethodTypeParameter(p0)}");
 	}
 
-	protected void checkOverrideCode(String operationName, String overrideCode) {
+	protected void checkOverrideMethodCode(String operationName, String overrideCode) {
 		StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable();
 		implementor.appendOverrideFunction(xtendClass, findOperation(operationName), appendable);
 		String code = appendable.toString();

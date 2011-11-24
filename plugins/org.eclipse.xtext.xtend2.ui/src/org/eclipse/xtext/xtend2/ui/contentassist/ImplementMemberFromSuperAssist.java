@@ -144,7 +144,7 @@ public class ImplementMemberFromSuperAssist {
 				&& !code.trim().startsWith(context.getPrefix()))
 			return null;
 		ImportOrganizingProposal completionProposal = createCompletionProposal(appendable, context.getReplaceRegion(),
-				getLabel(overridden), images.forFunction(overridden.getVisibility()));
+				getLabel(overridden), images.forFunction(overridden.getVisibility(), false));
 		int bodyOffset = code.lastIndexOf(MemberFromSuperImplementor.DEFAULT_BODY);
 		completionProposal.setSelectionStart(bodyOffset + completionProposal.getReplacementOffset());
 		completionProposal.setSelectionLength(MemberFromSuperImplementor.DEFAULT_BODY.length());
