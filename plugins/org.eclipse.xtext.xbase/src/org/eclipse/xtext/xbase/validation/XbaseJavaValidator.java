@@ -76,6 +76,7 @@ import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.JvmExceptions;
 import org.eclipse.xtext.xbase.typing.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
+import org.eclipse.xtext.xbase.util.XbaseUsageCrossReferencer;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
@@ -812,7 +813,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	}
 
 	protected boolean isLocallyUsed(EObject target, EObject containerToFindUsage) {
-		return !EcoreUtil.UsageCrossReferencer.find(target, containerToFindUsage).isEmpty();
+		return !XbaseUsageCrossReferencer.find(target, containerToFindUsage).isEmpty();
 	}
 
 	@Override
