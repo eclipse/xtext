@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.ui.hierachy;
+package org.eclipse.xtext.xbase.ui.hierarchy;
 
 import java.util.Set;
 
