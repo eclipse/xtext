@@ -19,12 +19,12 @@
 		point="org.eclipse.ui.commands">
 		<command
 			description="%OpenTypeHierarchyCommand_description"
-			id="org.eclipse.xtext.xbase.ui.hierachy.OpenTypeHierachy"
+			id="org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchy"
 			name="%OpenTypeHierarchyCommand_name">
 		</command>
 		<command
 			description="%QuickTypeHierarchyCommand_description"
-			id="org.eclipse.xtext.xbase.ui.hierachy.QuickTypeHierachy"
+			id="org.eclipse.xtext.xbase.ui.hierarchy.QuickTypeHierarchy"
 			name="%QuickTypeHierarchyCommand_name">
 		</command>
 	</extension>
@@ -34,13 +34,13 @@
 			contextId="org.eclipse.xtext.ui.XtextEditorScope"
 			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
 			sequence="F4"
-			commandId="org.eclipse.xtext.xbase.ui.hierachy.OpenTypeHierachy">
+			commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchy">
 		</key>
 		<key
 			contextId="org.eclipse.xtext.ui.XtextEditorScope"
 			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
 			sequence="M1+T"
-			commandId="org.eclipse.xtext.xbase.ui.hierachy.QuickTypeHierachy">
+			commandId="org.eclipse.xtext.xbase.ui.hierarchy.QuickTypeHierarchy">
 		</key>
 	</extension>
 </plugin>
