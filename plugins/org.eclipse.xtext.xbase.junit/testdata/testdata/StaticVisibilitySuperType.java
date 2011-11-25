@@ -12,20 +12,27 @@ package testdata;
  */
 @SuppressWarnings("unused")
 public class StaticVisibilitySuperType {
-	static private String privateField;
-	static private void privateMethod(){}
+	static private String staticPrivateField;
+	static protected String staticProtectedField;
+	static public String staticPublicField;
 	
-	static protected String protectedField;
-	static protected void protectedMethod(){}
+	static private void staticPrivateMethod(){}
+	static protected void staticProtectedMethod(){}
+	static public void staticPublicMethod(){}
 	
-	static public String publicField;
-	static public void publicMethod(){}
+	static private void setStaticPrivateProperty(String x) {}
+	static protected void setStaticProtectedProperty(String x) {}
+	static public void setStaticPublicProperty(String x) {}
 	
-	static private String getPrivateProperty() {return "";}
-	static protected String getProtectedProperty() {return "";}
-	static public String getPublicProperty() {return "";}
+	private String privateField;
+	protected String protectedField;
+	public String publicField;
 	
-	static private void setPrivateProperty(String x) {}
-	static protected void setProtectedProperty(String x) {}
-	static public void setPublicProperty(String x) {}
+	private void privateMethod(){}
+	protected void protectedMethod(){}
+	public void publicMethod(){}
+	
+	private void setPrivateProperty(String x) {}
+	protected void setProtectedProperty(String x) {}
+	public void setPublicProperty(String x) {}
 }
