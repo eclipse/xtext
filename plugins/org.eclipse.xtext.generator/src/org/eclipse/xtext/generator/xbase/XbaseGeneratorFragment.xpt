@@ -80,8 +80,8 @@ class «getJvmModelInferrerName().toSimpleName()» extends AbstractModelInferrer {
 	<extension
 		point="org.eclipse.ui.handlers">
 		<handler 
-			class="«executableExtensionFactory()»:org.eclipse.xtext.xbase.ui.hierachy.OpenTypeHierarchyHandler"
-			commandId="org.eclipse.xtext.xbase.ui.hierachy.OpenTypeHierachy">
+			class="«executableExtensionFactory()»:org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchyHandler"
+			commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchy">
 			<activeWhen>
 				<reference
 					definitionId="«name».Editor.opened">
@@ -89,8 +89,8 @@ class «getJvmModelInferrerName().toSimpleName()» extends AbstractModelInferrer {
 			</activeWhen>
 		</handler>
 		<handler 
-			class="«executableExtensionFactory()»:org.eclipse.xtext.xbase.ui.hierachy.QuickTypeHierarchyHandler"
-			commandId="org.eclipse.xtext.xbase.ui.hierachy.QuickTypeHierachy">
+			class="«executableExtensionFactory()»:org.eclipse.xtext.xbase.ui.hierarchy.QuickTypeHierarchyHandler"
+			commandId="org.eclipse.xtext.xbase.ui.hierarchy.QuickTypeHierarchy">
 			<activeWhen>
 				<reference
 					definitionId="«name».Editor.opened">
@@ -101,7 +101,7 @@ class «getJvmModelInferrerName().toSimpleName()» extends AbstractModelInferrer {
 	<extension point="org.eclipse.ui.menus">
 		<menuContribution
 			locationURI="popup:#TextEditorContext?after=group.open">
-			<command commandId="org.eclipse.xtext.xbase.ui.hierachy.OpenTypeHierachy"
+			<command commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchy"
 				style="push"
 				tooltip="Open Type Hierarchy">
 				<visibleWhen checkEnabled="false">
@@ -111,7 +111,7 @@ class «getJvmModelInferrerName().toSimpleName()» extends AbstractModelInferrer {
 		</menuContribution>
 		<menuContribution
 			locationURI="popup:#TextEditorContext?after=group.open">
-			<command commandId="org.eclipse.xtext.xbase.ui.hierachy.QuickTypeHierachy"
+			<command commandId="org.eclipse.xtext.xbase.ui.hierarchy.QuickTypeHierarchy"
 				style="push"
 				tooltip="Quick Type Hierarchy">
 				<visibleWhen checkEnabled="false">
