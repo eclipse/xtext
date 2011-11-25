@@ -591,10 +591,32 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 		helper.assertNoErrors(function);
 	}
 	
-	public void testDisptchFunctionVisibility() throws Exception {
+	public void testDispatchFunctionVisibility() throws Exception {
 		XtendClass xtendClass = clazz("class Foo { def dispatch foo(String bar) {} def public dispatch foo(Object bar) {}}");
 		helper.assertError(xtendClass.getMembers().get(0), Xtend2Package.Literals.XTEND_FUNCTION, DISPATCH_FUNCTIONS_WITH_DIFFERENT_VISIBILITY, 
 				"local", "must", "same", "visibility");
+	}
+	
+	public void testDispatchFunctionStatic1() throws Exception {
+		XtendClass xtendClass = clazz("class Foo { def dispatch foo(String bar) {} def static dispatch foo(Object bar) {}}");
+		helper.assertError(xtendClass.getMembers().get(0), Xtend2Package.Literals.XTEND_FUNCTION, DISPATCH_FUNCTIONS_MIXED_STATIC_AND_NON_STATIC, 
+				"Static", "non-static", "not", "mixed");
+	}
+	
+	public void testDispatchFunctionStatic2() throws Exception {
+		Iterator<XtendFile> iter = files(false, 
+				 "package test class Bar extends XXX { def dispatch foo(Boolean bar) {} def static dispatch foo(Double bar) {} }"
+				,"package test class XXX { def static dispatch foo(String bar) {} def static dispatch foo(Float bar) {}}").iterator();
+		waitForAutoBuild();
+		helper.assertError(iter.next(), Xtend2Package.Literals.XTEND_FUNCTION, DISPATCH_FUNCTIONS_STATIC_EXPECTED, "must", "be", "static");
+	}
+	
+	public void testDispatchFunctionStatic3() throws Exception {
+		Iterator<XtendFile> iter = files(false, 
+				"package test class Bar extends XXX { def dispatch foo(Boolean bar) {} def static dispatch foo(Double bar) {} }"
+				,"package test class XXX { def dispatch foo(String bar) {} def dispatch foo(Float bar) {}}").iterator();
+		waitForAutoBuild();
+		helper.assertError(iter.next(), Xtend2Package.Literals.XTEND_FUNCTION, DISPATCH_FUNCTIONS_NON_STATIC_EXPECTED, "must", "not", "be", "static");
 	}
 	
 //	public void testBug343096() throws Exception {

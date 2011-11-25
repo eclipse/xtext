@@ -208,12 +208,11 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 		jvmTypesBuilder.setBody(result, compileStrategies.forDispatcher(result, sortedOperations));
 		JvmVisibility commonVisibility = null;
 		boolean isFirst = true;
+		boolean allStatic = true;
 		for (JvmOperation jvmOperation : sortedOperations) {
-			Iterable<XtendFunction> xtendFunctions = filter(associations.getSourceElements(jvmOperation),
-					XtendFunction.class);
+			Iterable<XtendFunction> xtendFunctions = filter(associations.getSourceElements(jvmOperation), XtendFunction.class);
 			for (XtendFunction func : xtendFunctions) {
-				JvmVisibility xtendVisibility = func.eIsSet(Xtend2Package.Literals.XTEND_FUNCTION__VISIBILITY) ? func
-						.getVisibility() : null;
+				JvmVisibility xtendVisibility = func.eIsSet(Xtend2Package.Literals.XTEND_FUNCTION__VISIBILITY) ? func.getVisibility() : null;
 				if (isFirst) {
 					commonVisibility = xtendVisibility;
 					isFirst = false;
@@ -221,12 +220,15 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 					commonVisibility = null;
 				}
 				associator.associate(func, result);
+				if(!func.isStatic())
+					allStatic = false;
 			}
 		}
 		if (commonVisibility == null)
 			result.setVisibility(JvmVisibility.PUBLIC);
 		else
 			result.setVisibility(commonVisibility);
+		result.setStatic(allStatic);
 		return result;
 	}
 
