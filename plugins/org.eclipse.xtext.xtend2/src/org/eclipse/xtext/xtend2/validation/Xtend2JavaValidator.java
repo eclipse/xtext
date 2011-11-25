@@ -759,9 +759,14 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 				Collection<JvmOperation> dispatchOperations = dispatchMethods.get(key);
 				JvmOperation syntheticDispatchMethod = dispatchingSupport.findSyntheticDispatchMethod(clazz, key);
 				JvmOperation overriddenOperation = overridesService.findOverriddenOperation(syntheticDispatchMethod);
-				if(overriddenOperation != null && isMorePrivateThan(syntheticDispatchMethod.getVisibility(), overriddenOperation.getVisibility())) 
-					addVisibilityError(dispatchOperations, "Synthetic dispatch method reduces visibility of overridden function " + overriddenOperation.getIdentifier(), 
-							OVERRIDE_REDUCES_VISIBILITY);
+				Boolean expectStatic = null;
+				if(overriddenOperation != null) { 
+					if (isMorePrivateThan(syntheticDispatchMethod.getVisibility(), overriddenOperation.getVisibility())) {
+						String msg = "Synthetic dispatch method reduces visibility of overridden function " + overriddenOperation.getIdentifier();
+						addDispatchError(type, dispatchOperations, msg, XTEND_FUNCTION__VISIBILITY, OVERRIDE_REDUCES_VISIBILITY);
+					}
+					expectStatic = overriddenOperation.isStatic();
+				} 
 				if (dispatchOperations.size() == 1) {
 					JvmOperation singleOp = dispatchOperations.iterator().next();
 					XtendFunction function = associations.getXtendFunction(singleOp);
@@ -771,15 +776,30 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 					Multimap<List<JvmType>, JvmOperation> signatures = HashMultimap.create();
 					boolean isFirstLocalOperation = true;
 					JvmVisibility commonVisibility = null;
+					Boolean commonStatic = null;
 					for (JvmOperation jvmOperation : dispatchOperations) {
 						signatures.put(getParamTypes(jvmOperation, true), jvmOperation);
 						if(jvmOperation.getDeclaringType() == type) {
+							if(expectStatic != null) {
+								if (expectStatic && !jvmOperation.isStatic()) {
+									String msg = "The dispatch method must be static because the dispatch methods in the super-class are static.";
+									addDispatchError(jvmOperation, msg, XTEND_FUNCTION__STATIC, DISPATCH_FUNCTIONS_STATIC_EXPECTED);
+								}
+								if (!expectStatic && jvmOperation.isStatic()) {
+									String msg = "The dispatch method must not be static because the dispatch methods in the super-class are not static.";
+									addDispatchError(jvmOperation, msg, XTEND_FUNCTION__STATIC, DISPATCH_FUNCTIONS_NON_STATIC_EXPECTED);
+								}
+							}
 							if (isFirstLocalOperation) {
 								commonVisibility = jvmOperation.getVisibility();
+								commonStatic = jvmOperation.isStatic();
 								isFirstLocalOperation = false;
 							} else {
 								if (jvmOperation.getVisibility() != commonVisibility) {
 									commonVisibility = null;
+								}
+								if (commonStatic != null && commonStatic != jvmOperation.isStatic()) {
+									commonStatic = null;
 								}
 							}
 						}
@@ -801,8 +821,12 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 						}
 					}
 					if (commonVisibility == null) {
-						addVisibilityError(dispatchOperations, "All local dispatch functions must have the same visibility.", 
-									DISPATCH_FUNCTIONS_WITH_DIFFERENT_VISIBILITY);
+						addDispatchError(type, dispatchOperations, "All local dispatch functions must have the same visibility.", 
+								XTEND_FUNCTION__VISIBILITY, DISPATCH_FUNCTIONS_WITH_DIFFERENT_VISIBILITY);
+					}
+					if (expectStatic == null && commonStatic == null) {
+						addDispatchError(type, dispatchOperations, "Static and non-static dispatch functions can not be mixed.", 
+								XTEND_FUNCTION__STATIC,	DISPATCH_FUNCTIONS_MIXED_STATIC_AND_NON_STATIC);
 					}
 					for (final List<JvmType> paramTypes : signatures.keySet()) {
 						Collection<JvmOperation> ops = signatures.get(paramTypes);
@@ -825,14 +849,17 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 		}
 	}
 
-	protected void addVisibilityError(Iterable<JvmOperation> operations, String message, String ISSUE_ID) {
-		for (JvmOperation jvmOperation : operations) {
-			XtendFunction function = associations.getXtendFunction(jvmOperation);
-			if (function != null) {
-				EStructuralFeature feature = (function.eIsSet(XTEND_FUNCTION__VISIBILITY)) ? XTEND_FUNCTION__VISIBILITY
-						: XTEND_FUNCTION__DISPATCH;
-				error(message, function, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, ISSUE_ID);
-			}
+	protected void addDispatchError(JvmGenericType type, Iterable<JvmOperation> operations, String message, EStructuralFeature preferredFeature, String ISSUE_ID) {
+		for (JvmOperation jvmOperation : operations)
+			if (jvmOperation.getDeclaringType() == type)
+				addDispatchError(jvmOperation, message, preferredFeature, ISSUE_ID);
+	}
+	
+	protected void addDispatchError(JvmOperation jvmOperation, String message, EStructuralFeature preferredFeature, String ISSUE_ID) {
+		XtendFunction function = associations.getXtendFunction(jvmOperation);
+		if (function != null) {
+			EStructuralFeature feature = (function.eIsSet(preferredFeature)) ? preferredFeature : XTEND_FUNCTION__DISPATCH;
+			error(message, function, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, ISSUE_ID);
 		}
 	}
 
