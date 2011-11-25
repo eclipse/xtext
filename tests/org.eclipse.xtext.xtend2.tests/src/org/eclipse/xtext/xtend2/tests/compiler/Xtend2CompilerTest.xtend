@@ -30,6 +30,79 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''')
 	}
 	
+	def testFieldInitialization_01() { 
+		assertCompilesTo('''
+			package foo
+			class Bar {
+				String s1 = null
+				protected String s2 = ''
+				public String s3 = s2
+			}
+		''', '''
+			package foo;
+
+			@SuppressWarnings("all")
+			public class Bar {
+			  private String s1 = null;
+			  
+			  protected String s2 = "";
+			  
+			  public String s3 = this.s2;
+			}
+		''')
+	}
+	
+	def testFieldInitialization_02() { 
+		assertCompilesTo('''
+			package foo
+			class Bar {
+				String s0 = s1
+				static String s1 = null
+				protected static String s2 = ''
+				public static String s3 = s2
+			}
+		''', '''
+			package foo;
+
+			@SuppressWarnings("all")
+			public class Bar {
+			  private String s0 = Bar.s1;
+			  
+			  private static String s1 = null;
+			  
+			  protected static String s2 = "";
+			  
+			  public static String s3 = Bar.s2;
+			}
+		''')
+	}
+	
+	def testFieldInitialization_03() { 
+		assertCompilesTo('''
+			package foo
+			class Bar {
+				String s = newArrayList.toString
+			}
+		''', '''
+			package foo;
+			
+			import java.util.ArrayList;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+			import org.eclipse.xtext.xbase.lib.Functions.Function0;
+			
+			@SuppressWarnings("all")
+			public class Bar {
+			  private String s = new Function0<String>() {
+			    public String apply() {
+			      ArrayList _newArrayList = CollectionLiterals.<Object>newArrayList();
+			      String _string = _newArrayList.toString();
+			      return _string;
+			    }
+			  }.apply();
+			}
+		''')
+	}
+	
 	def testConstructorDeclaration_01() { 
 		assertCompilesTo('''
 			package foo
