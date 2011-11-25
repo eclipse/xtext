@@ -10,12 +10,21 @@ package org.eclipse.xtext.builder.navigation;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IMember;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 
 /**
+ * Extension to the {@link org.eclipse.xtext.ui.editor.IURIEditorOpener} that
+ * is aware of an {@link IMember} which is the actual navigation target.
+ * @see org.eclipse.xtext.ui.editor.IURIEditorOpener
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface IDerivedMemberAwareEditorOpener {
+public interface IDerivedMemberAwareEditorOpener extends IURIEditorOpener {
 
+	/**
+	 * Open the resource with the given {@link URI} and navigate to the element
+	 * that yields the given {@code member}.
+	 * @see #open(URI, boolean)
+	 */
 	IEditorPart open(URI uri, IMember member, boolean select);
 	
 }
