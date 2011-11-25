@@ -17,7 +17,6 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.scoping.featurecalls.DefaultJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScope;
-import org.eclipse.xtext.xbase.scoping.featurecalls.StaticExplicitMethodsFeatureForTypeProvider;
 
 import testdata.StaticVisibilitySubClass;
 import testdata.StaticVisibilitySuperType;
@@ -35,29 +34,12 @@ public class ExplicitStaticFeaturesTypeProviderTest extends AbstractJvmFeatureSc
 	@Inject
 	private Provider<DefaultJvmFeatureDescriptionProvider> defaultFeatureDescProvider;
 
-	@Inject
-	private Provider<StaticExplicitMethodsFeatureForTypeProvider> explicitStaticFeatures;
-
-	//	@Inject
-	//	private Provider<XFeatureCallSugarDescriptionProvider> sugarFeatureDescProvider;
-
 	protected JvmFeatureScope createScope(Resource resource, JvmTypeReference reference) {
-		StaticExplicitMethodsFeatureForTypeProvider explicitMethodsProvider = explicitStaticFeatures.get();
-		explicitMethodsProvider.setResourceContext(resource);
-		explicitMethodsProvider.setTypeContext(reference);
 		DefaultJvmFeatureDescriptionProvider defaultProvider = defaultFeatureDescProvider.get();
 		defaultProvider.setContextType((JvmDeclaredType) reference.getType());
-		defaultProvider.setFeaturesForTypeProvider(explicitMethodsProvider);
 		defaultProvider.setImplicitReceiver(null);
 		defaultProvider.setImplicitArgument(null);
 		defaultProvider.setPreferStatics(true);
-
-		//		XFeatureCallSugarDescriptionProvider sugarProvider = sugarFeatureDescProvider.get();
-		//		sugarProvider.setContextType((JvmDeclaredType) reference.getType());
-		//		sugarProvider.setFeaturesForTypeProvider(explicitMethodsProvider);
-		//		sugarProvider.setImplicitReceiver(null);
-		//		sugarProvider.setImplicitArgument(null);
-		//		sugarProvider.setPreferStatics(true);
 
 		JvmFeatureScope scope = getFeatureProvider().createFeatureScope(
 				IScope.NULLSCOPE,
@@ -84,20 +66,38 @@ public class ExplicitStaticFeaturesTypeProviderTest extends AbstractJvmFeatureSc
 		String actual = formatScope(scope);
 
 		StringBuilder expectation = new StringBuilder();
-		expectation.append("getProtectedProperty()\n");
-		expectation.append("getPublicProperty()\n");
-		expectation.append("protectedField\n");
-		expectation.append("protectedMethod()\n");
-		expectation.append("publicField\n");
-		expectation.append("publicMethod()\n");
-		expectation.append("setProtectedProperty(java.lang.String)\n");
-		expectation.append("setPublicProperty(java.lang.String)\n");
+		expectation.append("setStaticProtectedProperty(java.lang.String)\n");
+		expectation.append("setStaticPublicProperty(java.lang.String)\n");
+		expectation.append("staticProtectedField\n");
+		expectation.append("staticProtectedMethod()\n");
+		expectation.append("staticPublicField\n");
+		expectation.append("staticPublicMethod()\n");
 		expectation.append("parent = {\n");
-		expectation.append("  getPrivateProperty()\n");
+		expectation.append("  clone()\n");
+		expectation.append("  equals(java.lang.Object)\n");
+		expectation.append("  finalize()\n");
+		expectation.append("  getClass()\n");
+		expectation.append("  getSubPrivateProperty()\n");
+		expectation.append("  hashCode()\n");
+		expectation.append("  notify()\n");
+		expectation.append("  notifyAll()\n");
 		expectation.append("  privateField\n");
 		expectation.append("  privateMethod()\n");
+		expectation.append("  protectedField\n");
+		expectation.append("  protectedMethod()\n");
+		expectation.append("  publicField\n");
+		expectation.append("  publicMethod()\n");
 		expectation.append("  registerNatives()\n");
 		expectation.append("  setPrivateProperty(java.lang.String)\n");
+		expectation.append("  setProtectedProperty(java.lang.String)\n");
+		expectation.append("  setPublicProperty(java.lang.String)\n");
+		expectation.append("  setStaticPrivateProperty(java.lang.String)\n");
+		expectation.append("  staticPrivateField\n");
+		expectation.append("  staticPrivateMethod()\n");
+		expectation.append("  toString()\n");
+		expectation.append("  wait()\n");
+		expectation.append("  wait(long)\n");
+		expectation.append("  wait(long,int)\n");
 		expectation.append("}");
 		assertEquals(expectation.toString(), actual);
 	}
@@ -108,20 +108,37 @@ public class ExplicitStaticFeaturesTypeProviderTest extends AbstractJvmFeatureSc
 		String actual = formatScope(scope);
 
 		StringBuilder expectation = new StringBuilder();
-		expectation.append("getPrivateProperty()\n");
-		expectation.append("getProtectedProperty()\n");
-		expectation.append("getPublicProperty()\n");
-		expectation.append("privateField\n");
-		expectation.append("privateMethod()\n");
-		expectation.append("protectedField\n");
-		expectation.append("protectedMethod()\n");
-		expectation.append("publicField\n");
-		expectation.append("publicMethod()\n");
-		expectation.append("setPrivateProperty(java.lang.String)\n");
-		expectation.append("setProtectedProperty(java.lang.String)\n");
-		expectation.append("setPublicProperty(java.lang.String)\n");
+		expectation.append("setStaticPrivateProperty(java.lang.String)\n");
+		expectation.append("setStaticProtectedProperty(java.lang.String)\n");
+		expectation.append("setStaticPublicProperty(java.lang.String)\n");
+		expectation.append("staticPrivateField\n");
+		expectation.append("staticPrivateMethod()\n");
+		expectation.append("staticProtectedField\n");
+		expectation.append("staticProtectedMethod()\n");
+		expectation.append("staticPublicField\n");
+		expectation.append("staticPublicMethod()\n");
 		expectation.append("parent = {\n");
+		expectation.append("  clone()\n");
+		expectation.append("  equals(java.lang.Object)\n");
+		expectation.append("  finalize()\n");
+		expectation.append("  getClass()\n");
+		expectation.append("  hashCode()\n");
+		expectation.append("  notify()\n");
+		expectation.append("  notifyAll()\n");
+		expectation.append("  privateField\n");
+		expectation.append("  privateMethod()\n");
+		expectation.append("  protectedField\n");
+		expectation.append("  protectedMethod()\n");
+		expectation.append("  publicField\n");
+		expectation.append("  publicMethod()\n");
 		expectation.append("  registerNatives()\n");
+		expectation.append("  setPrivateProperty(java.lang.String)\n");
+		expectation.append("  setProtectedProperty(java.lang.String)\n");
+		expectation.append("  setPublicProperty(java.lang.String)\n");
+		expectation.append("  toString()\n");
+		expectation.append("  wait()\n");
+		expectation.append("  wait(long)\n");
+		expectation.append("  wait(long,int)\n");
 		expectation.append("}");
 		assertEquals(expectation.toString(), actual);
 	}
