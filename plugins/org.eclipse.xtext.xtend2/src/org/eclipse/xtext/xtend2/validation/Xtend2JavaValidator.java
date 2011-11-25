@@ -41,7 +41,6 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
@@ -999,30 +998,12 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 	public void checkLocalUsageOfDeclaredFields(XtendField field){
 		JvmField jvmField = associations.getJvmField(field);
 		if(jvmField.getVisibility() == JvmVisibility.PRIVATE && !isLocallyUsed(jvmField, field.eContainer())){
-			if(!field.isExtension() || !isImplicitLocallyUsed(jvmField, field.eContainer())){
 				String message = "The value of the field " + jvmField.getDeclaringType().getSimpleName()+"."
 							+ jvmField.getSimpleName() + " is not used";
 				warning(message, Xtend2Package.Literals.XTEND_FIELD__NAME, FIELD_LOCALLY_NEVER_READ);
-			}
 		}
 	}
 	
-	private boolean isImplicitLocallyUsed(JvmField jvmField, EObject containerToFindUsage) {
-		JvmTypeReference typeReference = jvmField.getType();
-		if(typeReference != null){
-			JvmType jvmType = typeReference.getType();
-			if(jvmType != null){
-				if(jvmType instanceof JvmDeclaredType){
-					for(JvmMember member : ((JvmDeclaredType) jvmType).getMembers()){
-						if(isLocallyUsed(member, containerToFindUsage))
-							return true;
-					}
-				}
-			}
-		}
-		return false;
-	}
-
 	@Check
 	public void checkLocalUsageOfDeclaredXtendFunction(XtendFunction function){
 		JvmOperation jvmOperation = function.isDispatch()?associations.getDispatchOperation(function):associations.getDirectlyInferredOperation(function);

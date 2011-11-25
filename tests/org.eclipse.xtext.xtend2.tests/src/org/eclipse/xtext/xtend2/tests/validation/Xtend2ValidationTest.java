@@ -739,4 +739,9 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 		XtendClass clazz = clazz("class X { extension java.util.Collection bar def foo(){  }}");
 		helper.assertWarning(clazz, Xtend2Package.Literals.XTEND_FIELD,FIELD_LOCALLY_NEVER_READ , "not");
 	}
+	
+	public void testUnusedMemberOfExtensionField_No_False_Positive() throws Exception {
+		XtendClass clazz = clazz("class X { extension java.util.Collection foo def bar(){  newArrayList.add('42') }}");
+		helper.assertWarning(clazz, Xtend2Package.Literals.XTEND_FIELD,FIELD_LOCALLY_NEVER_READ , "not");
+	}
 }
