@@ -692,4 +692,29 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 		XtendClass clazz = clazz("class X { def private dispatch foo(String a) def private dispatch foo(Integer a) def bar(){foo(42)}}");
 		helper.assertNoIssues(clazz.eContainer());
 	}
+	
+	public void testUsedMemberOfExtensionField() throws Exception {
+		XtendClass clazz = clazz("class X { extension java.util.Collection def foo(){ add('42') }}");
+		helper.assertNoIssues(clazz.eContainer());
+	}
+	
+	public void testUnusedMemberOfExtensionField() throws Exception {
+		XtendClass clazz = clazz("class X { extension java.util.Collection def foo(){  }}");
+		helper.assertWarning(clazz, Xtend2Package.Literals.XTEND_FIELD,FIELD_LOCALLY_NEVER_READ , "not");
+	}
+	
+	public void testUsedMemberOfExtensionFieldWithName() throws Exception {
+		XtendClass clazz = clazz("class X { extension java.util.Collection bar def foo(){ add('42') }}");
+		helper.assertNoIssues(clazz.eContainer());
+	}
+	
+	public void testUsedMemberOfExtensionFieldWithName_2() throws Exception {
+		XtendClass clazz = clazz("class X { extension java.util.Collection bar def foo(){ bar.add('42') }}");
+		helper.assertNoIssues(clazz.eContainer());
+	}
+	
+	public void testUnusedMemberOfExtensionFieldWithName() throws Exception {
+		XtendClass clazz = clazz("class X { extension java.util.Collection bar def foo(){  }}");
+		helper.assertWarning(clazz, Xtend2Package.Literals.XTEND_FIELD,FIELD_LOCALLY_NEVER_READ , "not");
+	}
 }
