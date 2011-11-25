@@ -552,6 +552,10 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 	protected TypeArgumentContextProvider getTypeArgumentContextProvider() {
 		return typeArgumentContextProvider;
 	}
+	
+	protected ILogicalContainerProvider getLogicalContainerProvider() {
+		return logicalContainerProvider;
+	}
 
 	abstract class CyclicHandlingSupport<T> {
 

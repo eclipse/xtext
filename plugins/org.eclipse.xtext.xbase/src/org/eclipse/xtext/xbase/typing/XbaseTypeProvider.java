@@ -46,8 +46,6 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
-import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAbstractWhileExpression;
@@ -77,7 +75,6 @@ import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping;
-import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
@@ -104,15 +101,6 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 	@Inject
 	private SuperTypeCollector collector;
 
-	@Inject
-	private ILogicalContainerProvider logicalContainerProvider;
-	
-	@Inject 
-	private TypeReferences typeReferences;
-	
-	@Inject
-	private TypeConformanceComputer typeConformanceComputer;
-
 	@Override
 	protected JvmTypeReference _expectedType(EObject obj, EReference reference, int index, boolean rawType) {
 		Object ele = obj.eGet(reference);
@@ -120,7 +108,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 			ele = ((List<?>)ele).get(index);
 		}
 		if (ele instanceof XExpression) {
-			JvmIdentifiableElement element = logicalContainerProvider.getLogicalContainer((XExpression) ele);
+			JvmIdentifiableElement element = getLogicalContainerProvider().getLogicalContainer((XExpression) ele);
 			if (element instanceof JvmOperation) {
 				return ((JvmOperation) element).getReturnType();
 			}
@@ -995,10 +983,12 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 		JvmTypeReference plainType = _type((XAbstractFeatureCall) featureCall, rawExpectation, rawType);
   		if (plainType != null && typeGuardedXCasePartContainer != null) {
 			JvmTypeReference typeGuard = typeGuardedXCasePartContainer.getTypeGuard();
-			if(typeConformanceComputer.isConformant(plainType, typeGuard))
+			if(getTypeConformanceComputer().isConformant(plainType, typeGuard))
 				return typeGuard;
-			else 
-				return typeReferences.createMultiTypeReference(typeGuardedXCasePartContainer, typeGuard, plainType);
+			else if (getTypeConformanceComputer().isConformant(typeGuard, plainType))
+				return plainType;
+			else
+				return getTypeReferences().createMultiTypeReference(typeGuardedXCasePartContainer, typeGuard, plainType);
 		}
 		return plainType;
 	}
@@ -1328,7 +1318,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 			}
 			return null;
 		}
-		JvmIdentifiableElement logicalContainer = logicalContainerProvider.getNearestLogicalContainer(expr);
+		JvmIdentifiableElement logicalContainer = getLogicalContainerProvider().getNearestLogicalContainer(expr);
 		if (logicalContainer instanceof JvmOperation) {
 			return ((JvmOperation) logicalContainer).getReturnType();
 		}
