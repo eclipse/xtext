@@ -6,11 +6,13 @@ import static org.eclipse.xtext.util.Strings.*;
 import static org.eclipse.xtext.xbase.XbasePackage.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
@@ -26,6 +28,7 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
@@ -723,6 +726,38 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 						} 
 					} 
 					return;
+				}
+			}
+		}
+	}
+
+	@Check
+	public void checkNoForwardReferences(XExpression fieldInitializer) {
+		JvmIdentifiableElement container = logicalContainerProvider.getLogicalContainer(fieldInitializer);
+		if (container instanceof JvmField) {
+			JvmField field = (JvmField) container;
+			boolean staticField = field.isStatic();
+			JvmDeclaredType declaredType = field.getDeclaringType();
+			Collection<JvmField> illegalFields = Sets.newHashSet();
+			for(int i = declaredType.getMembers().size() - 1; i>=0; i--) {
+				JvmMember member = declaredType.getMembers().get(i);
+				if (member instanceof JvmField) {
+					if (((JvmField) member).isStatic() == staticField) {
+						illegalFields.add((JvmField) member);
+					}
+				}
+				if (member == field)
+					break;
+			}
+			TreeIterator<EObject> iterator = EcoreUtil2.eAll(fieldInitializer);
+			while(iterator.hasNext()) {
+				EObject object = iterator.next();
+				if (object instanceof XFeatureCall) {
+					JvmIdentifiableElement feature = ((XFeatureCall) object).getFeature();
+					if (illegalFields.contains(((XFeatureCall) object).getFeature())) {
+						error("Cannot reference the field '" + feature.getSimpleName() + "' before it is defined", 
+								object, null, INSIGNIFICANT_INDEX, ILLEGAL_FORWARD_REFERENCE);
+					}
 				}
 			}
 		}

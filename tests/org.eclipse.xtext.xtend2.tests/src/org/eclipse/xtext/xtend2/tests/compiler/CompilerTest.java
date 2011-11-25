@@ -60,6 +60,16 @@ import com.google.inject.Injector;
  */
 public class CompilerTest extends AbstractXtend2TestCase {
 
+	public void testFieldInitialization_01() throws Exception {
+		String code =
+				"String field = if (true) newArrayList('a', 'b').join(',') else ''\n" +
+				"def getField() {\n" + 
+				"  field" + 
+				"}";
+		String expectation = "a,b";
+		invokeAndExpect2(expectation, code, "getField");
+	}
+	
 	public void testDeclaredConstructor_01() throws Exception {
 		String code = "class Z { new() { this(1) } new(int a) { super() } }";
 		compileJavaCode("Z", code);

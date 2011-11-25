@@ -37,6 +37,46 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	@Inject
 	private ValidationTestHelper helper;
 	
+	public void testForwardReferenceInFieldInitializer_01() throws Exception {
+		XtendClass clazz = clazz("class Z { String s = s }");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.ILLEGAL_FORWARD_REFERENCE);
+	}
+	
+	public void testForwardReferenceInFieldInitializer_02() throws Exception {
+		XtendClass clazz = clazz("class Z { String s1 = newArrayList(s2 + '').toString String s2 = '' }");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.ILLEGAL_FORWARD_REFERENCE);
+	}
+	
+	public void testForwardReferenceInFieldInitializer_03() throws Exception {
+		XtendClass clazz = clazz("class Z { static String s = s }");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.ILLEGAL_FORWARD_REFERENCE);
+	}
+	
+	public void testForwardReferenceInFieldInitializer_04() throws Exception {
+		XtendClass clazz = clazz("class Z { static String s1 = s2 static String s2 = '' }");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.ILLEGAL_FORWARD_REFERENCE);
+	}
+
+	public void testForwardReferenceInFieldInitializer_05() throws Exception {
+		XtendClass clazz = clazz("class Z { String s = '' }");
+		helper.assertNoErrors(clazz);
+	}
+	
+	public void testForwardReferenceInFieldInitializer_06() throws Exception {
+		XtendClass clazz = clazz("class Z { String s1 = '' String s2 = s1 }");
+		helper.assertNoErrors(clazz);
+	}
+	
+	public void testForwardReferenceInFieldInitializer_07() throws Exception {
+		XtendClass clazz = clazz("class Z { static String s = '' }");
+		helper.assertNoErrors(clazz);
+	}
+	
+	public void testForwardReferenceInFieldInitializer_08() throws Exception {
+		XtendClass clazz = clazz("class Z { static String s1 = '' static String s2 = s1 }");
+		helper.assertNoErrors(clazz);
+	}
+	
 	public void testCircularConstructor_01() throws Exception {
 		XtendClass clazz = clazz("class Z { new() { this() }}");
 		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.CIRCULAR_CONSTRUCTOR_INVOCATION);
