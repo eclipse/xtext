@@ -512,7 +512,9 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			JvmField field = (JvmField) context;
 			if (field.getDeclaringType() != null) {
 				JvmDeclaredType declaredType = field.getDeclaringType();
-				parentScope = createLocalVarScopeForJvmDeclaredType(declaredType, parentScope);
+				if (!field.isStatic()) {
+					parentScope = createLocalVarScopeForJvmDeclaredType(declaredType, parentScope);
+				}
 			}
 			return parentScope;
 		}

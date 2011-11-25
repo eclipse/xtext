@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.compiler;
 
 import static com.google.common.collect.Sets.*;
 
+import java.util.Collections;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
@@ -34,6 +35,8 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions;
+import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.JvmExceptions;
 import org.eclipse.xtext.xbase.typing.JvmOnlyTypeConformanceComputer;
@@ -95,6 +98,61 @@ public abstract class AbstractXbaseCompiler {
 
 	public IAppendable compile(XExpression obj, IAppendable appendable, JvmTypeReference expectedReturnType) {
 		return compile(obj, appendable, expectedReturnType, null);
+	}
+	
+	public IAppendable compileAsJavaExpression(XExpression obj, IAppendable appendable, JvmTypeReference expectedType) {
+		final boolean isPrimitiveVoidExpected = typeReferences.is(expectedType, Void.TYPE); 
+		final boolean isPrimitiveVoid = isPrimitiveVoid(obj);
+		final boolean earlyExit = exitComputer.isEarlyExit(obj);
+		boolean needsSneakyThrow = needsSneakyThrow(obj, Collections.<JvmTypeReference>emptySet());
+		boolean needsToBeWrapped = earlyExit || needsSneakyThrow || isVariableDeclarationRequired(obj, appendable);
+		if (needsToBeWrapped) {
+			appendable.append("new ");
+			JvmTypeReference procedureOrFunction = null;
+			if (isPrimitiveVoidExpected) {
+				procedureOrFunction = typeReferences.getTypeForName(Procedures.Procedure0.class, obj);
+			} else {
+				procedureOrFunction = typeReferences.getTypeForName(Functions.Function0.class, obj, expectedType);
+			}
+			referenceSerializer.serialize(procedureOrFunction, obj, appendable, false, false, true, false);
+			appendable.append("() {").increaseIndentation();
+			appendable.append("\npublic ");
+			referenceSerializer.serialize(primitives.asWrapperTypeIfPrimitive(expectedType), obj, appendable);
+			appendable.append(" apply() {").increaseIndentation();
+			if (needsSneakyThrow) {
+				appendable.append("\ntry {").increaseIndentation();
+			}
+			internalToJavaStatement(obj, appendable, !isPrimitiveVoidExpected && !isPrimitiveVoid && !earlyExit);
+			if (!isPrimitiveVoidExpected && !earlyExit) {
+					appendable.append("\nreturn ");
+					if (isPrimitiveVoid && !isPrimitiveVoidExpected) {
+						appendable.append("null");
+					} else {
+						internalToJavaExpression(obj, appendable);
+					}
+					appendable.append(";");
+			}
+			if (needsSneakyThrow) {
+				String name = appendable.declareVariable(new Object(), "_e");
+				appendable.decreaseIndentation().append("\n} catch (Exception "+name+") {").increaseIndentation();
+				appendable.append("\nthrow ");
+				appendable.append(typeReferences.findDeclaredType(Exceptions.class, obj));
+				appendable.append(".sneakyThrow(");
+				appendable.append(name);
+				appendable.append(");");
+				appendable.decreaseIndentation().append("\n}");
+			}
+			appendable.decreaseIndentation().append("\n}");
+			appendable.decreaseIndentation().append("\n}.apply()");
+		} else {
+			internalToJavaExpression(obj, appendable);
+		}
+		return appendable;
+	}
+	
+	protected boolean canCompileToJavaExpression(XExpression expression, IAppendable appendable) {
+		// TODO improve this decision, e.g. static methods with expression-args are ok
+		return !isVariableDeclarationRequired(expression, appendable);
 	}
 	
 	public IAppendable compile(XExpression obj, IAppendable appendable, JvmTypeReference expectedReturnType, Set<JvmTypeReference> declaredExceptions) {

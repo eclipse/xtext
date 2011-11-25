@@ -88,9 +88,9 @@ public class JvmTypesBuilder {
 	 * This defines the context and s´the scope for the given expression.
 	 * 
 	 * @param logicalContainer
-	 *            - the {@link JvmExecutable} the expression is associated with. Must not be <code>null</code>.
+	 *            the {@link JvmExecutable} the expression is associated with. Must not be <code>null</code>.
 	 * @param expr
-	 *            - the expression. Can be <code>null</code> in which case this function does nothing.
+	 *            the expression. Can be <code>null</code> in which case this function does nothing.
 	 */
 	public void setBody(JvmExecutable logicalContainer, XExpression expr) {
 		if (expr == null)
@@ -101,8 +101,8 @@ public class JvmTypesBuilder {
 	/**
 	 * Attaches the given compile strategy to the given {@link JvmExecutable} such that the compiler knows how to
 	 * implement the {@link JvmExecutable} when it is translated to Java source code.
-	 * @param executable - the operation or constructor to add the method body to.
-	 * @param strategy - the compilation strategy. Must return zero or more Java statements.
+	 * @param executable the operation or constructor to add the method body to.
+	 * @param strategy the compilation strategy. Must return zero or more Java statements.
 	 */
 	public void setBody(JvmExecutable executable, Functions.Function1<ImportManager, ? extends CharSequence> strategy) {
 		addCompilationStrategy(executable, strategy);
@@ -137,11 +137,11 @@ public class JvmTypesBuilder {
 	 * fully qualified using the standard Java notation.
 	 * 
 	 * @param sourceElement
-	 *            - the sourceElement the resulting element is associated with.
+	 *            the sourceElement the resulting element is associated with.
 	 * @param qualifiedName
-	 *            - the qualifiedName of the resulting class.
+	 *            the qualifiedName of the resulting class.
 	 * @param initializer
-	 *            - the initializer to apply on the created class element
+	 *            the initializer to apply on the created class element
 	 * 
 	 * @return a {@link JvmGenericType} representing a Java class of the given name.
 	 */
@@ -154,11 +154,11 @@ public class JvmTypesBuilder {
 	 * fully qualified using the standard Java notation.
 	 * 
 	 * @param sourceElement
-	 *            - the sourceElement the resulting element is associated with.
+	 *            the sourceElement the resulting element is associated with.
 	 * @param qualifiedName
-	 *            - the qualifiedName of the resulting class.
+	 *            the qualifiedName of the resulting class.
 	 * @param initializer
-	 *            - the initializer to apply on the created class element
+	 *            the initializer to apply on the created class element
 	 * 
 	 * @return a {@link JvmGenericType} representing a Java class of the given name.
 	 */
@@ -187,11 +187,11 @@ public class JvmTypesBuilder {
 	 * fully qualified using the standard Java notation.
 	 * 
 	 * @param sourceElement
-	 *            - the sourceElement the resulting element is associated with.
+	 *            the sourceElement the resulting element is associated with.
 	 * @param qualifiedName
-	 *            - the qualifiedName of the resulting class.
+	 *            the qualifiedName of the resulting class.
 	 * @param initializer
-	 *            - the initializer to apply on the created interface declaration.
+	 *            the initializer to apply on the created interface declaration.
 	 * 
 	 * @return a {@link JvmGenericType} representing a Java interface of the given name.
 	 */
@@ -211,11 +211,11 @@ public class JvmTypesBuilder {
 	 * fully qualified using the standard Java notation.
 	 * 
 	 * @param sourceElement
-	 *            - the sourceElement the resulting element is associated with.
+	 *            the sourceElement the resulting element is associated with.
 	 * @param qualifiedName
-	 *            - the qualifiedName of the resulting class.
+	 *            the qualifiedName of the resulting class.
 	 * @param initializer
-	 *            - the initializer to apply on the created annotation
+	 *            the initializer to apply on the created annotation
 	 * 
 	 * @return a {@link JvmAnnotationType} representing a Java annatation of the given name.
 	 */
@@ -240,11 +240,11 @@ public class JvmTypesBuilder {
 	 * fully qualified using the standard Java notation.
 	 * 
 	 * @param sourceElement
-	 *            - the sourceElement the resulting element is associated with.
+	 *            the sourceElement the resulting element is associated with.
 	 * @param qualifiedName
-	 *            - the qualifiedName of the resulting class.
+	 *            the qualifiedName of the resulting class.
 	 * @param initializer
-	 *            - the initializer to apply on the created enumeration type
+	 *            the initializer to apply on the created enumeration type
 	 * 
 	 * @return a {@link result} representing a Java class of the given name.
 	 */
@@ -293,9 +293,9 @@ public class JvmTypesBuilder {
 	/**
 	 * Creates a private field with the given name and the given type associated to the given sourceElement.
 	 * 
-	 * @param sourceElement - the sourceElement the resulting element is associated with.
-	 * @param name - the simple name of the resulting class.
-	 * @param typeRef - the type of the field
+	 * @param sourceElement the sourceElement the resulting element is associated with.
+	 * @param name the simple name of the resulting class.
+	 * @param typeRef the type of the field
 	 * 
 	 * @return a {@link JvmField} representing a Java field with the given simple name and type.
 	 */
@@ -440,11 +440,11 @@ public class JvmTypesBuilder {
 	 * Creates and returns an annotation of the given annotation type's name and the given value.
 	 * 
 	 * @param sourceElement
-	 *            - the source element to associate the created element with.
+	 *            the source element to associate the created element with.
 	 * @param annotationType
-	 *            - the type of the created annotation.
+	 *            the type of the created annotation.
 	 * @param value
-	 *            - the value of the single
+	 *            the value of the single
 	 */
 	public JvmAnnotationReference toAnnotation(EObject sourceElement, Class<?> annotationType, Object value) {
 		return toAnnotation(sourceElement, annotationType.getCanonicalName(), value);
@@ -454,11 +454,11 @@ public class JvmTypesBuilder {
 	 * Creates and returns an annotation of the given annotation type's name and the given value.
 	 * 
 	 * @param sourceElement
-	 *            - the source element to associate the created element with.
+	 *            the source element to associate the created element with.
 	 * @param annotationTypeNAme
-	 *            - the type name of the created annotation.
+	 *            the type name of the created annotation.
 	 * @param value
-	 *            - the value of the single
+	 *            the value of the single
 	 */
 	public JvmAnnotationReference toAnnotation(EObject sourceElement, String annotationTypeName, Object value) {
 		JvmAnnotationReference result = TypesFactory.eINSTANCE.createJvmAnnotationReference();
@@ -492,13 +492,28 @@ public class JvmTypesBuilder {
 	/**
 	 * Attaches the given compile strategy to the given {@link JvmField} such that the compiler knows how to
 	 * initialize the {@link JvmField} when it is translated to Java source code.
-	 * @param field - the field to add the initializer to.
-	 * @param strategy - the compilation strategy. Must return just one valid Java expression.
+	 * @param field the field to add the initializer to.
+	 * @param strategy the compilation strategy. Must return just one valid Java expression.
 	 */
-	public void initialization(JvmField field, Functions.Function1<ImportManager, ? extends CharSequence> strategy) {
+	public void setInitializer(JvmField field, Functions.Function1<ImportManager, ? extends CharSequence> strategy) {
 		addCompilationStrategy(field, strategy);
 	}
-
+	
+	/**
+	 * Sets the given {@link JvmField} as the logical container for the given {@link XExpression}.
+	 * This defines the context and the scope for the given expression.
+	 * 
+	 * @param logicalContainer
+	 *            the {@link JvmField} that is initialized by the expression. Must not be <code>null</code>.
+	 * @param expr
+	 *            the initialization expression. Can be <code>null</code> in which case this function does nothing.
+	 */
+	public void setInitializer(JvmField field, XExpression expr) {
+		if (expr == null)
+			return;
+		associator.associateLogicalContainer(expr, field);
+	}
+	
 	protected void addCompilationStrategy(JvmMember member,
 			Functions.Function1<ImportManager, ? extends CharSequence> strategy) {
 		CompilationStrategyAdapter adapter = new CompilationStrategyAdapter();
@@ -510,12 +525,12 @@ public class JvmTypesBuilder {
 	 * Creates a new {@link JvmTypeReference} pointing to the given class and containing the given type arguments.
 	 * 
 	 * @param ctx
-	 *            - an EMF context, which is used to look up the {@link org.eclipse.xtext.common.types.JvmType} for the
+	 *            an EMF context, which is used to look up the {@link org.eclipse.xtext.common.types.JvmType} for the
 	 *            given clazz.
 	 * @param clazz
-	 *            - the class the type reference shall point to.
+	 *            the class the type reference shall point to.
 	 * @param typeArgs
-	 *            - type arguments
+	 *            type arguments
 	 * 
 	 * @return the newly created {@link JvmTypeReference}
 	 */
@@ -527,12 +542,12 @@ public class JvmTypesBuilder {
 	 * Creates a new {@link JvmTypeReference} pointing to the given class and containing the given type arguments.
 	 * 
 	 * @param ctx
-	 *            - an EMF context, which is used to look up the {@link org.eclipse.xtext.common.types.JvmType} for the
+	 *            an EMF context, which is used to look up the {@link org.eclipse.xtext.common.types.JvmType} for the
 	 *            given clazz.
 	 * @param typeName
-	 *            - the name of the type the reference shall point to.
+	 *            the name of the type the reference shall point to.
 	 * @param typeArgs
-	 *            - type arguments
+	 *            type arguments
 	 * @return the newly created {@link JvmTypeReference}
 	 */
 	public JvmTypeReference newTypeRef(EObject ctx, String typeName, JvmTypeReference... typeArgs) {
@@ -548,8 +563,10 @@ public class JvmTypesBuilder {
 	}
 
 	/**
-	 * translates {@link XAnnotation}s to {@link JvmAnnotationReference}s and adds them to the given
-	 * {@link JvmAnnotationTarget}
+	 * Translates {@link XAnnotation XAnnotations} to {@link JvmAnnotationReference JvmAnnotationReferences} 
+	 * and adds them to the given {@link JvmAnnotationTarget}.
+	 * @param target the annotation target. May not be <code>null</code>.
+	 * @param annotations the annotations. May not be <code>null</code>.
 	 */
 	public void translateAnnotationsTo(Iterable<? extends XAnnotation> annotations, JvmAnnotationTarget target) {
 		for (XAnnotation anno : annotations) {
@@ -685,7 +702,7 @@ public class JvmTypesBuilder {
 		return translators.get(obj.eClass());
 	}
 
-	static interface AnnotationValueTranslator {
+	public interface AnnotationValueTranslator {
 		JvmAnnotationValue createValue(XExpression expr);
 
 		void appendValue(JvmAnnotationValue value, XExpression expr);
