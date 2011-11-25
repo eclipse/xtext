@@ -52,6 +52,11 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
+/**
+ * A generator implementation that processes the
+ * derived {@link org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer JVM model}
+ * and produces the respective java code.
+ */
 @SuppressWarnings("all")
 public class JvmModelGenerator implements IGenerator {
   @Inject
@@ -582,7 +587,28 @@ public class JvmModelGenerator implements IGenerator {
         String _operator_plus = StringExtensions.operator_plus(" = ", _apply);
         _xifexpression = _operator_plus;
       } else {
-        _xifexpression = "";
+        String _xblockexpression_1 = null;
+        {
+          XExpression _associatedExpression = this._iLogicalContainerProvider.getAssociatedExpression(it);
+          final XExpression expression = _associatedExpression;
+          String _xifexpression_1 = null;
+          boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(expression, null);
+          if (_operator_notEquals_1) {
+            {
+              StringBuilderBasedAppendable _createAppendable = this.createAppendable(it, importManager);
+              final StringBuilderBasedAppendable appendable = _createAppendable;
+              JvmTypeReference _type = it.getType();
+              this.compiler.compileAsJavaExpression(expression, appendable, _type);
+              String _string = appendable.toString();
+              String _operator_plus_1 = StringExtensions.operator_plus(" = ", _string);
+              return _operator_plus_1;
+            }
+          } else {
+            _xifexpression_1 = "";
+          }
+          _xblockexpression_1 = (_xifexpression_1);
+        }
+        _xifexpression = _xblockexpression_1;
       }
       _xblockexpression = (_xifexpression);
     }

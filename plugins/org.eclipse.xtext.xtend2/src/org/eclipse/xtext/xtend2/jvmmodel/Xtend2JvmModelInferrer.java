@@ -299,7 +299,7 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			
 			JvmField cacheVar = jvmTypesBuilder.toField(source, CREATE_CHACHE_VARIABLE_PREFIX + source.getName(), hashMap);
 			cacheVar.setFinal(true);
-			jvmTypesBuilder.initialization(cacheVar, compileStrategies.forCacheVariable(container));
+			jvmTypesBuilder.setInitializer(cacheVar, compileStrategies.forCacheVariable(container));
 			container.getMembers().add(cacheVar);
 			
 			JvmOperation initializer = typesFactory.createJvmOperation();
@@ -372,6 +372,7 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			field.setType(cloneWithProxies(source.getType()));
 			jvmTypesBuilder.translateAnnotationsTo(source.getAnnotationInfo().getAnnotations(), field);
 			jvmTypesBuilder.setDocumentation(field, jvmTypesBuilder.getDocumentation(source));
+			jvmTypesBuilder.setInitializer(field, source.getInitialValue());
 		} 
 	}
 
