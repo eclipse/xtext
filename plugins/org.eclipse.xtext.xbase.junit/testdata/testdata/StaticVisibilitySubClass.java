@@ -10,7 +10,10 @@ package testdata;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@SuppressWarnings("unused")
 public class StaticVisibilitySubClass extends StaticVisibilitySuperType
 {
-
+  private String getSubPrivateProperty() { return null; }
+	private String privateField;
+	private void setPrivateProperty(String x) {}
 }
