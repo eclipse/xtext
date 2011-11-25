@@ -295,6 +295,12 @@ public class FeatureCallChecker {
 
 	protected String _case(JvmOperation input, XAssignment context, EReference ref,
 			JvmFeatureDescription jvmFeatureDescription) {
+		if (!jvmFeatureDescription.isValidStaticState()) {
+			if (input.isStatic())
+				return INSTANCE_ACCESS_TO_STATIC_MEMBER;
+			else
+				return STATIC_ACCESS_TO_INSTANCE_MEMBER;
+		}
 		final int irrelevantArguments = jvmFeatureDescription.getNumberOfIrrelevantArguments();
 		if (input.getParameters().size() != (1 + irrelevantArguments))
 			return INVALID_NUMBER_OF_ARGUMENTS;
@@ -313,11 +319,13 @@ public class FeatureCallChecker {
 			JvmFeatureDescription jvmFeatureDescription) {
 		if (input.isFinal())
 			return ASSIGNMENT_TARGET_IS_NOT_WRITEABLE;
-		if (input.isStatic()) {
-			if (context.getAssignable() != null)
+		if (!jvmFeatureDescription.isValidStaticState()) {
+			if (input.isStatic())
 				return INSTANCE_ACCESS_TO_STATIC_MEMBER;
-			// TODO: validate if the field is from the current class or a superclass
+			else
+				return STATIC_ACCESS_TO_INSTANCE_MEMBER;
 		}
+		// TODO: validate if the field is from the current class or a superclass
 		return null;
 	}
 
@@ -341,38 +349,38 @@ public class FeatureCallChecker {
 
 	protected String _case(JvmField input, XFeatureCall context, EReference reference,
 			JvmFeatureDescription jvmFeatureDescription) {
-		if (context.getDeclaringType() == null) {
-			if (input.isStatic() && jvmFeatureDescription.getImplicitReceiver() != null)
+		if (!jvmFeatureDescription.isValidStaticState()) {
+			if (input.isStatic())
 				return INSTANCE_ACCESS_TO_STATIC_MEMBER;
-		} else {
-			if (!input.isStatic())
+			else
 				return STATIC_ACCESS_TO_INSTANCE_MEMBER;
 		}
 		if (context.isExplicitOperationCallOrBuilderSyntax())
 			return FIELD_ACCESS_WITH_PARENTHESES;
-			
+
 		return null;
 	}
 
 	protected String _case(JvmOperation input, XMemberFeatureCall context, EReference ref,
 			JvmFeatureDescription jvmFeatureDescription) {
-		if (input.isStatic()
-				&& input.getParameters().size() == context.getMemberCallArguments().size()) {
-			return INSTANCE_ACCESS_TO_STATIC_MEMBER;
-		} else {
-			return checkJvmOperation(input, context, context.isExplicitOperationCallOrBuilderSyntax(), jvmFeatureDescription,
-					context.getMemberCallArguments());
+		if (!jvmFeatureDescription.isValidStaticState()) {
+			if (input.isStatic())
+				return INSTANCE_ACCESS_TO_STATIC_MEMBER;
+			else
+				return STATIC_ACCESS_TO_INSTANCE_MEMBER;
 		}
+		return checkJvmOperation(input, context, context.isExplicitOperationCallOrBuilderSyntax(),
+				jvmFeatureDescription, context.getMemberCallArguments());
 	}
 
 	protected String _case(JvmOperation input, XFeatureCall context, EReference reference,
 			JvmFeatureDescription jvmFeatureDescription) {
-		if (context.getDeclaringType() != null) {
+		if (!jvmFeatureDescription.isValidStaticState()) {
 			if (!input.isStatic())
 				return STATIC_ACCESS_TO_INSTANCE_MEMBER;
 		}
-		return checkJvmOperation(input, context, context.isExplicitOperationCallOrBuilderSyntax(), jvmFeatureDescription,
-				context.getFeatureCallArguments());
+		return checkJvmOperation(input, context, context.isExplicitOperationCallOrBuilderSyntax(),
+				jvmFeatureDescription, context.getFeatureCallArguments());
 	}
 	
 	protected String _case(JvmConstructor input, XFeatureCall context, EReference reference,
