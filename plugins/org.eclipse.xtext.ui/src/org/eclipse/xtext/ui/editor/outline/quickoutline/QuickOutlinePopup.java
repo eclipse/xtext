@@ -9,6 +9,9 @@ package org.eclipse.xtext.ui.editor.outline.quickoutline;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.dialogs.PopupDialog;
@@ -35,15 +38,19 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
+import org.eclipse.xtext.ui.editor.outline.impl.ModeAwareOutlineTreeProvider;
+import org.eclipse.xtext.ui.editor.outline.impl.OutlineMode;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeContentProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeLabelProvider;
 import org.eclipse.xtext.ui.internal.Activator;
@@ -97,9 +104,12 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 
 	@Inject
 	private OutlineNodeContentProvider contentProvider;
-	
+
 	@Inject
 	private PrefixMatcher prefixMatcher;
+	
+	@Inject
+	private IURIEditorOpener editorOpener;
 
 	private int TREESTYLE = SWT.V_SCROLL | SWT.H_SCROLL;
 
@@ -112,6 +122,8 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 	private Text filterText;
 
 	private PrefixMatcherOutlineAdapter prefixMatcherOutlineAdapter;
+
+	private KeyStroke invokingKeystroke;
 
 	public QuickOutlinePopup() {
 		this(null);
@@ -136,8 +148,14 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 		tree.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.character == 0x1B) // ESC
+				if (e.character == 0x1B) { // ESC
 					dispose();
+				} else {
+					if(e.keyCode == invokingKeystroke.getNaturalKey() && e.stateMask == invokingKeystroke.getModifierKeys()) {
+						changeOutlineMode();
+						e.doit = false;
+					}
+				}
 			}
 		});
 
@@ -149,9 +167,21 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 		});
 
 		installFilter();
+		setInfoText();
 
 		addDisposeListener(this);
 		return treeViewer.getControl();
+	}
+	
+	/**
+	 * @since 2.2
+	 */
+	protected void setInfoText() {
+		if(treeProvider instanceof ModeAwareOutlineTreeProvider) 
+			setInfoText("Press " + invokingKeystroke + " to " + ((ModeAwareOutlineTreeProvider) treeProvider)
+					.getNextMode().getDescription());
+		else 
+			setInfoText(Messages.QuickOutlinePopup_pressESC);
 	}
 
 	protected TreeViewer createTreeViewer(Composite parent, int style) {
@@ -172,9 +202,9 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 				createChildrenRecursively(rootNode.getChildren());
 				return rootNode;
 			}
-			
+
 			protected void createChildrenRecursively(List<IOutlineNode> nodes) {
-				for(IOutlineNode node:nodes) {
+				for (IOutlineNode node : nodes) {
 					createChildrenRecursively(node.getChildren());
 				}
 			}
@@ -203,9 +233,13 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 					treeViewer.getTree().setFocus();
 				if (e.character == 0x1B) // ESC
 					dispose();
+				if(e.keyCode == invokingKeystroke.getNaturalKey() && e.stateMask == invokingKeystroke.getModifierKeys()) {
+					changeOutlineMode();
+					e.doit = false;
+				}
+
 			}
 		});
-
 		return filterText;
 	}
 
@@ -300,8 +334,14 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 			dispose();
 			if (selectedElement instanceof IOutlineNode) {
 				final IOutlineNode outlineNode = (IOutlineNode) selectedElement;
-				xtextEditor.selectAndReveal(outlineNode.getSignificantTextRegion().getOffset(), outlineNode
-						.getSignificantTextRegion().getLength());
+				outlineNode.readOnly(new IUnitOfWork.Void<EObject>() {
+					@Override
+					public void process(EObject state) throws Exception {
+						editorOpener.open(EcoreUtil.getURI(state), true);
+					}
+				});
+//				xtextEditor.selectAndReveal(outlineNode.getSignificantTextRegion().getOffset(), outlineNode
+//						.getSignificantTextRegion().getLength());
 			}
 		}
 	}
@@ -325,10 +365,9 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 
 	public void setInput(IXtextDocument document) {
 		if (treeViewer != null) {
-			treeViewer.setInput(document);
-		} else {
-			this.document = document;
-		}
+			treeViewer.setInput(treeProvider.createRoot(document));
+		} 
+		this.document = document;
 	}
 
 	@Override
@@ -355,4 +394,25 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 	public void setEditor(XtextEditor xtextEditor) {
 		this.xtextEditor = xtextEditor;
 	}
+
+	/**
+	 * @since 2.2
+	 */
+	public void setEvent(Event event) {
+		this.invokingKeystroke = KeyStroke.getInstance(event.stateMask, event.keyCode);
+	}
+	
+	/**
+	 * @since 2.2
+	 */
+	protected void changeOutlineMode() {
+		if(treeProvider instanceof ModeAwareOutlineTreeProvider) {
+			ModeAwareOutlineTreeProvider modeTreeProvider = (ModeAwareOutlineTreeProvider) treeProvider;
+			OutlineMode nextMode = modeTreeProvider.getNextMode();
+			((ModeAwareOutlineTreeProvider) treeProvider).setCurrentMode(nextMode);
+			setInfoText();
+			setInput(document);
+		}
+	}
+
 }
