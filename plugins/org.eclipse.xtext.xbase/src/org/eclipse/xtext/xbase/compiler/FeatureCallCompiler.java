@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
@@ -190,15 +191,27 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	protected boolean isSpreadingMemberFeatureCall(XAbstractFeatureCall expr) {
 		return expr instanceof XMemberFeatureCall && ((XMemberFeatureCall) expr).isSpreading();
 	}
-
-	protected void _toJavaExpression(XAbstractFeatureCall call, IAppendable b) {
+	
+	/**
+	 * Computes whether the feature call needs to be casted.
+	 * This is the case if the JvmIdentifiables type != expressions type,
+	 * which happens in cases where the type is different because a feature call was already tested to be an instance of a certain type.
+	 * For example in a switch with a type guard. 
+	 */
+	protected JvmTypeReference needsCastTo(XAbstractFeatureCall call) {
 		JvmTypeReference realType = getTypeProvider().getTypeForIdentifiable(call.getFeature());
 		JvmTypeReference currentContextType = getTypeProvider().getType(call);
-		boolean needsCast = !getTypeConformanceComputer().isConformant(currentContextType, realType);
-		if (needsCast) {
+		if (!(currentContextType instanceof JvmMultiTypeReference) && !getTypeConformanceComputer().isConformant(currentContextType, realType))
+			return currentContextType;
+		return null;
+	}
+
+	protected void _toJavaExpression(XAbstractFeatureCall call, IAppendable b) {
+		JvmTypeReference toCastTo = needsCastTo(call);
+		if (toCastTo != null) {
 			b.append("(");
 			b.append("(");
-			serialize(currentContextType, call, b);
+			serialize(toCastTo, call, b);
 			b.append(")");
 		}
 		if (isPrimitiveVoid(call)) {
@@ -234,7 +247,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				b.append(getVarName(call, b));
 			}
 		}
-		if (needsCast) {
+		if (toCastTo != null) {
 			b.append(")");
 		}
 	}

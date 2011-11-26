@@ -100,6 +100,39 @@ public class CompilerTest extends AbstractXbaseTestCase {
 //						"s.length");
 //	}
 	
+	
+	public void testSwitchTypeGuards() throws Exception {
+		assertCompilesTo(
+				"\n" + 
+				"String _switchResult = null;\n" + 
+				"final CharSequence x = ((CharSequence) \"foo\");\n" + 
+				"boolean matched = false;\n" + 
+				"if (!matched) {\n" + 
+				"  if (x instanceof String) {\n" + 
+				"    matched=true;\n" + 
+				"    String _substring = ((String)x).substring(3);\n" + 
+				"    String _operator_plus = org.eclipse.xtext.xbase.lib.StringExtensions.operator_plus(_substring, x);\n" + 
+				"    _switchResult = _operator_plus;\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"if (!matched) {\n" + 
+				"  if (x instanceof Comparable) {\n" + 
+				"    matched=true;\n" + 
+				"    int _compareTo = ((Comparable)x).compareTo(\"jho\");\n" + 
+				"    String _operator_plus_1 = org.eclipse.xtext.xbase.lib.StringExtensions.operator_plus(\"\", ((Integer)_compareTo));\n" + 
+				"    String _string = ((Comparable)x).toString();\n" + 
+				"    String _operator_plus_2 = org.eclipse.xtext.xbase.lib.StringExtensions.operator_plus(_operator_plus_1, _string);\n" + 
+				"    _switchResult = _operator_plus_2;\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"return _switchResult;"
+				, 
+				"switch x : 'foo' as CharSequence {" +
+				"  String : x.substring(3) + x " +
+				"  Comparable : '' + x.compareTo('jho') + x.toString" +
+				"}");
+	}
+	
 	protected void assertCompilesTo(final String expectedJavaCode, final String xbaseCode) throws Exception {
 		XExpression model = expression(xbaseCode,true);
 		XbaseCompiler compiler = get(XbaseCompiler.class);
