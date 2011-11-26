@@ -192,6 +192,15 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	}
 
 	protected void _toJavaExpression(XAbstractFeatureCall call, IAppendable b) {
+		JvmTypeReference realType = getTypeProvider().getTypeForIdentifiable(call.getFeature());
+		JvmTypeReference currentContextType = getTypeProvider().getType(call);
+		boolean needsCast = !getTypeConformanceComputer().isConformant(currentContextType, realType);
+		if (needsCast) {
+			b.append("(");
+			b.append("(");
+			serialize(currentContextType, call, b);
+			b.append(")");
+		}
 		if (isPrimitiveVoid(call)) {
 			b.append("null");
 		} else if (isSpreadingMemberFeatureCall(call)) {
@@ -224,6 +233,9 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			} else {
 				b.append(getVarName(call, b));
 			}
+		}
+		if (needsCast) {
+			b.append(")");
 		}
 	}
 

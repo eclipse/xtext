@@ -1786,9 +1786,9 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	}
 	
 	@Test public void testBug349762_02() throws Exception {
-		assertEvaluatesTo("a", 
+		assertEvaluatesTo("b", 
 				"switch s: 'abc' as CharSequence {\n" +
-				"  String: [Integer a, Integer b| s.substring(a, b)].apply(0, 1)\n" +
+				"  String: s.substring(1, 2)\n" +
 				"}");
 	}
 	
