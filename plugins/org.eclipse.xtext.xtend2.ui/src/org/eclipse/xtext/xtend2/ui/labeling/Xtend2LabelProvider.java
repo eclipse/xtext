@@ -4,6 +4,7 @@
 package org.eclipse.xtext.xtend2.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -76,9 +77,17 @@ public class Xtend2LabelProvider extends DefaultEObjectLabelProvider {
 		return images.forConstructor(inferredConstructor.getVisibility());
 	}
 
+	public Image image(JvmConstructor element) {
+		return images.forConstructor(element.getVisibility());
+	}
+
 	public Image image(XtendField element) {
 		JvmField inferredField = associations.getJvmField(element);
 		return images.forField(inferredField.getVisibility(), inferredField.isStatic(), element.isExtension());
+	}
+
+	public Image image(JvmField element) {
+		return images.forField(element.getVisibility(), element.isStatic(), false);
 	}
 
 	public String text(XtendFile element) {
@@ -97,8 +106,16 @@ public class Xtend2LabelProvider extends DefaultEObjectLabelProvider {
 		return "new" + uiStrings.parameters(associations.getInferredConstructor(element));
 	}
 	
-	public String text(XtendFunction element) {
+	public String text(JvmConstructor element) {
+		return "new" + uiStrings.parameters(element);
+	}
+	
+	public Object text(XtendFunction element) {
 		return signature(element.getName(), associations.getDirectlyInferredOperation(element));
+	}
+	
+	public Object text(JvmOperation element) {
+		return signature(element.getSimpleName(), element);
 	}
 	
 	public String text(XtendField element) {
@@ -107,11 +124,11 @@ public class Xtend2LabelProvider extends DefaultEObjectLabelProvider {
 		return element.getName() +" : " +element.getType().getSimpleName();
 	}
 
-	public String text(JvmOperation element) {
-		return signature(element.getSimpleName(), element);
+	public String text(JvmField element) {
+		return element.getSimpleName() +" : " + element.getType().getSimpleName();
 	}
-
-	protected String signature(String simpleName, JvmIdentifiableElement element) {
+	
+	protected StyledString signature(String simpleName, JvmIdentifiableElement element) {
 		JvmTypeReference returnType = typeProvider.getTypeForIdentifiable(element);
 		String returnTypeString = "void";
 		if (returnType != null) {
@@ -121,7 +138,7 @@ public class Xtend2LabelProvider extends DefaultEObjectLabelProvider {
 				returnTypeString = returnType.getSimpleName();
 			}
 		}
-		return simpleName + uiStrings.parameters(element) + " : " + returnTypeString;
+		return new StyledString(simpleName + uiStrings.parameters(element)).append(new StyledString(" : " + returnTypeString,StyledString.DECORATIONS_STYLER));
 	}
 
 }

@@ -60,7 +60,41 @@ public class DispatchingSupport {
 	public Multimap<Pair<String, Integer>, JvmOperation> getDispatchMethods(JvmGenericType type) {
 		Multimap<Pair<String, Integer>, JvmOperation> result = LinkedHashMultimap.create();
 		collectDispatchMethods(type, result);
+		removeNonLocalMethods(type, result);
 		return result;
+	}
+
+	public Multimap<JvmOperation, JvmOperation> getDispatcher2dispatched(XtendClass clazz, boolean isLocalOnly) {
+		final JvmGenericType type = associations.getInferredType(clazz);
+		Multimap<Pair<String, Integer>, JvmOperation> dispatchMethods = LinkedHashMultimap.create();
+		collectDispatchMethods(type, dispatchMethods);
+		Multimap<JvmOperation, JvmOperation> dispatcher2dispatched = LinkedHashMultimap.create();
+		for (final Pair<String, Integer> signature : dispatchMethods.keySet()) {
+			JvmOperation localDispatcher = findSyntheticDispatchMethod(clazz, signature);
+			if (localDispatcher != null) {
+				Iterable<JvmOperation> dispatched = dispatchMethods.get(signature);
+				if(isLocalOnly)
+					dispatched = filter(dispatched, new Predicate<JvmOperation>() {
+						public boolean apply(JvmOperation input) {
+							return input.getDeclaringType() == type;
+						}
+					});
+				dispatcher2dispatched.putAll(localDispatcher, dispatched);
+			} else if (!isLocalOnly) {
+				Iterator<JvmOperation> iterator = filter(filter(type.getAllFeatures(), JvmOperation.class),
+						new Predicate<JvmOperation>() {
+							public boolean apply(JvmOperation input) {
+								return visibilityService.isVisible(input, type)
+										&& input.getParameters().size() == signature.getSecond()
+										&& input.getSimpleName().equals(signature.getFirst());
+							}
+						}).iterator();
+				if (iterator.hasNext()) {
+					dispatcher2dispatched.putAll(iterator.next(), dispatchMethods.get(signature));
+				}
+			}
+		}
+		return dispatcher2dispatched;
 	}
 
 	public JvmOperation findSyntheticDispatchMethod(XtendClass clazz, final Pair<String, Integer> signature) {
@@ -89,7 +123,6 @@ public class DispatchingSupport {
 				result.put(signatureTuple, operation);
 			}
 		}
-		removeNonLocalMethods(type, result);
 	}
 
 	protected void removeNonLocalMethods(final JvmGenericType type, Multimap<Pair<String, Integer>, JvmOperation> result) {

@@ -6,19 +6,26 @@ package org.eclipse.xtext.xtend2.ui.outline;
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Sets.*;
-import static java.util.Collections.*;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.util.FeatureOverridesService;
+import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.common.types.util.VisibilityService;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
-import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
-import org.eclipse.xtext.xtend2.jvmmodel.DispatchUtil;
+import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
+import org.eclipse.xtext.ui.editor.outline.impl.ModeAwareOutlineTreeProvider;
+import org.eclipse.xtext.ui.editor.outline.impl.OutlineMode;
+import org.eclipse.xtext.xtend2.dispatch.DispatchingSupport;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.ui.labeling.Xtend2Images;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
@@ -28,6 +35,8 @@ import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendImport;
 import org.eclipse.xtext.xtend2.xtend2.XtendMember;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
 /**
@@ -35,7 +44,13 @@ import com.google.inject.Inject;
  * 
  * @author Jan Koehnlein
  */
-public class Xtend2OutlineTreeProvider extends DefaultOutlineTreeProvider {
+public class Xtend2OutlineTreeProvider extends ModeAwareOutlineTreeProvider {
+
+	private static final OutlineMode SHOW_INHERITED_MODE = new OutlineMode("show", "show inherited members");
+
+	private static final OutlineMode HIDE_INHERITED_MODE = new OutlineMode("hide", "hide inherited members");
+
+	private static final List<OutlineMode> MODES = newArrayList(HIDE_INHERITED_MODE, SHOW_INHERITED_MODE);
 
 	@Inject
 	private Xtend2Images images;
@@ -44,7 +59,16 @@ public class Xtend2OutlineTreeProvider extends DefaultOutlineTreeProvider {
 	private IXtend2JvmAssociations associations;
 
 	@Inject
-	private DispatchUtil dispatchUtil;
+	private DispatchingSupport dispatchingSupport;
+
+	@Inject
+	private FeatureOverridesService featureOverridesService;
+
+	@Inject
+	private TypeReferences typeReferences;
+
+	@Inject
+	private VisibilityService visibilityService;
 
 	protected void _createChildren(DocumentRootNode parentNode, XtendFile xtendFile) {
 		if (xtendFile.getPackage() != null)
@@ -53,31 +77,50 @@ public class Xtend2OutlineTreeProvider extends DefaultOutlineTreeProvider {
 		if (!xtendFile.getImports().isEmpty())
 			createEStructuralFeatureNode(parentNode, xtendFile, Xtend2Package.Literals.XTEND_FILE__IMPORTS,
 					images.forImportContainer(), "import declarations", false);
-		if (xtendFile.getXtendClass() != null)
-			createEObjectNode(parentNode, xtendFile.getXtendClass());
+		if (xtendFile.getXtendClass() != null) {
+			EObjectNode classNode = createEObjectNode(parentNode, xtendFile.getXtendClass());
+			createFeatureNodes(classNode, xtendFile.getXtendClass());
+		}
 	}
 
-	protected void _createChildren(IOutlineNode parentNode, XtendClass xtendClass) {
-		JvmGenericType inferredType = associations.getInferredType(xtendClass);
+	protected void createFeatureNodes(IOutlineNode parentNode, XtendClass xtendClass) {
+		final JvmGenericType inferredType = associations.getInferredType(xtendClass);
 		if (inferredType != null) {
-			Set<XtendFunction> dispatchFunctions = newHashSet();
-			for (XtendMember member : xtendClass.getMembers()) {
-				if (!dispatchFunctions.contains(member) && member instanceof XtendFunction
-						&& ((XtendFunction) member).isDispatch()) {
-					for (JvmOperation inferredOperation : filter(associations
-							.getJvmElements(member), JvmOperation.class)) {
-						if (dispatchUtil.isDispatcherFunction(inferredOperation)) {
-							createEObjectNode(parentNode, inferredOperation);
-							final Set<EObject> xtendFunctions = associations.getSourceElements(inferredOperation);
-							dispatchFunctions.addAll(newArrayList(filter(xtendFunctions,
-									XtendFunction.class)));
-						}
-					}
+			Multimap<JvmOperation, JvmOperation> dispatcher2dispatched = dispatchingSupport.getDispatcher2dispatched(
+					xtendClass, getCurrentMode() == HIDE_INHERITED_MODE);
+			Set<JvmFeature> processedFeatures = newHashSet();
+			for (JvmOperation dispatcher : dispatcher2dispatched.keySet()) {
+				EObjectNode dispatcherNode = createEObjectNode(parentNode, dispatcher);
+				processedFeatures.add(dispatcher);
+				for (JvmOperation dispatchCase : dispatcher2dispatched.get(dispatcher)) {
+					XtendFunction xtendFunction = associations.getXtendFunction(dispatchCase);
+					if (xtendFunction == null)
+						createNodeForFeature(dispatcherNode, inferredType, dispatchCase);
+					else
+						createNode(dispatcherNode, xtendFunction);
+					processedFeatures.add(dispatchCase);
 				}
 			}
-			for (XtendMember member : xtendClass.getMembers()) {
-				if (!dispatchFunctions.contains(member))
-					createEObjectNode(parentNode, member);
+			Iterable<JvmFeature> remainingFeatures;
+			if (getCurrentMode() == SHOW_INHERITED_MODE) {
+				remainingFeatures = filter(
+						featureOverridesService.getAllJvmFeatures(typeReferences.createTypeRef(inferredType)),
+						new Predicate<JvmMember>() {
+							public boolean apply(JvmMember input) {
+								return visibilityService.isVisible(input, inferredType);
+							}
+						});
+			} else {
+				remainingFeatures = filter(inferredType.getMembers(), JvmFeature.class);
+			}
+			for (JvmConstructor constructor : inferredType.getDeclaredConstructors()) {
+				if (associations.getXtendConstructor(constructor) == null)
+					processedFeatures.add(constructor);
+			}
+			for (JvmFeature feature : remainingFeatures) {
+				if (!processedFeatures.contains(feature)) {
+					createNodeForFeature(parentNode, inferredType, feature);
+				}
 			}
 		} else {
 			for (XtendMember member : xtendClass.getMembers())
@@ -85,31 +128,35 @@ public class Xtend2OutlineTreeProvider extends DefaultOutlineTreeProvider {
 		}
 	}
 
-	protected void _createChildren(IOutlineNode parentNode, JvmOperation inferredOperation) {
-		List<XtendFunction> xtendFunctions = newArrayList(filter(associations.getSourceElements(inferredOperation),
-				XtendFunction.class));
-		sort(xtendFunctions, new Comparator<XtendFunction>() {
-			public int compare(XtendFunction arg0, XtendFunction arg1) {
-				return index(arg0) - index(arg1);
+	protected IOutlineNode createNodeForFeature(IOutlineNode parentNode, final JvmGenericType inferredType,
+			JvmFeature feature) {
+		if (feature.getDeclaringType() != inferredType) {
+			if (getCurrentMode() == SHOW_INHERITED_MODE) {
+				Object text = textDispatcher.invoke(feature);
+				StyledString label = (text instanceof StyledString) ? (StyledString) text : new StyledString(
+						text.toString());
+				label.append(new StyledString(" - " + feature.getDeclaringType().getIdentifier(),
+						StyledString.COUNTER_STYLER));
+				return createEObjectNode(parentNode, feature, imageDispatcher.invoke(feature), label, true);
 			}
-		});
-		for (XtendFunction xtendFunction : xtendFunctions) {
-			if (xtendFunction.isDispatch())
-				createEObjectNode(parentNode, xtendFunction);
+			return null;
+		} else {
+			return createEObjectNode(parentNode, feature);
 		}
 	}
 
-	protected boolean _isLeaf(XtendMember function) {
+	@Override
+	protected boolean _isLeaf(EObject element) {
 		return true;
 	}
 
 	protected Object _text(XtendImport xtendImport) {
-		return (xtendImport.getImportedNamespace() != null) 
-			? xtendImport.getImportedNamespace()
-			: xtendImport.getImportedTypeName();
+		return (xtendImport.getImportedNamespace() != null) ? xtendImport.getImportedNamespace() : xtendImport
+				.getImportedTypeName();
 	}
-	
-	protected int index(XtendFunction f) {
-		return ((XtendClass) f.eContainer()).getMembers().indexOf(f);
+
+	@Override
+	public List<OutlineMode> getOutlineModes() {
+		return MODES;
 	}
 }

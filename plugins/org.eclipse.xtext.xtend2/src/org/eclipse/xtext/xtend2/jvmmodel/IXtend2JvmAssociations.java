@@ -47,6 +47,8 @@ public interface IXtend2JvmAssociations extends IJvmModelAssociations {
 	XtendClass getXtendClass(JvmGenericType jvmType);
 	
 	XtendFunction getXtendFunction(JvmOperation jvmOperation);
+
+	XtendConstructor getXtendConstructor(JvmConstructor jvmConstructor);
 	
 	static class Impl extends JvmModelAssociator implements IXtend2JvmAssociations {
 
@@ -103,7 +105,8 @@ public interface IXtend2JvmAssociations extends IJvmModelAssociations {
 		}
 
 		public XtendConstructor getXtendConstructor(JvmConstructor jvmConstructor) {
-			return (XtendConstructor) getPrimarySourceElement(jvmConstructor);
+			EObject primarySourceElement = getPrimarySourceElement(jvmConstructor);
+			return primarySourceElement instanceof XtendConstructor ? (XtendConstructor) primarySourceElement : null;
 		}
 
 		protected <T> T getFirstOrNull(Iterable<EObject> elements, Class<T> type) {
