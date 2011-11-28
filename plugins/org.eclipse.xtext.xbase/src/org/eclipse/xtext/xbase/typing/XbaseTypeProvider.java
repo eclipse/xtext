@@ -1325,6 +1325,9 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 		if (logicalContainer instanceof JvmConstructor) {
 			return getPrimitiveVoid(expr);
 		}
+		if (logicalContainer instanceof JvmField) {
+			return ((JvmField) logicalContainer).getType();
+		}
 		return null;
 	}
 	

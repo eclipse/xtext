@@ -125,10 +125,14 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	private Closures closures;
 
 	private final Set<EReference> typeConformanceCheckedReferences = ImmutableSet.of(
-			XbasePackage.Literals.XVARIABLE_DECLARATION__RIGHT, XbasePackage.Literals.XIF_EXPRESSION__IF,
-			XbasePackage.Literals.XTHROW_EXPRESSION__EXPRESSION, XbasePackage.Literals.XRETURN_EXPRESSION__EXPRESSION,
-			XbasePackage.Literals.XSWITCH_EXPRESSION__SWITCH, XbasePackage.Literals.XCASE_PART__CASE,
-			XbasePackage.Literals.XASSIGNMENT__ASSIGNABLE, XbasePackage.Literals.XABSTRACT_WHILE_EXPRESSION__PREDICATE,
+			XbasePackage.Literals.XVARIABLE_DECLARATION__RIGHT, 
+			XbasePackage.Literals.XIF_EXPRESSION__IF,
+			XbasePackage.Literals.XTHROW_EXPRESSION__EXPRESSION, 
+			XbasePackage.Literals.XRETURN_EXPRESSION__EXPRESSION,
+			XbasePackage.Literals.XSWITCH_EXPRESSION__SWITCH, 
+			XbasePackage.Literals.XCASE_PART__CASE,
+			XbasePackage.Literals.XASSIGNMENT__ASSIGNABLE, 
+			XbasePackage.Literals.XABSTRACT_WHILE_EXPRESSION__PREDICATE,
 			XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS,
 			XbasePackage.Literals.XCONSTRUCTOR_CALL__ARGUMENTS,
 			XbasePackage.Literals.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS,
@@ -136,7 +140,8 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			// Should be checked in case of extension methods only (i.e. when they are arguments)
 			//			XbasePackage.Literals.XBINARY_OPERATION__LEFT_OPERAND,
 			//			XbasePackage.Literals.XUNARY_OPERATION__OPERAND
-			XbasePackage.Literals.XASSIGNMENT__VALUE, XbasePackage.Literals.XBINARY_OPERATION__RIGHT_OPERAND);
+			XbasePackage.Literals.XASSIGNMENT__VALUE, 
+			XbasePackage.Literals.XBINARY_OPERATION__RIGHT_OPERAND);
 
 	protected Set<EReference> getTypeConformanceCheckedReferences() {
 		return typeConformanceCheckedReferences;
@@ -459,7 +464,8 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	}
 
 	protected boolean isImplicitReturn(XExpression expr) {
-		return (logicalContainerProvider.getLogicalContainer(expr) instanceof JvmExecutable || expr.eContainer() instanceof XClosure)
+		JvmIdentifiableElement logicalContainer = logicalContainerProvider.getLogicalContainer(expr);
+		return (logicalContainer instanceof JvmExecutable || logicalContainer instanceof JvmField || expr.eContainer() instanceof XClosure)
 				&& !earlyExitComputer.isEarlyExit(expr);
 	}
 
