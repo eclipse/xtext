@@ -26,10 +26,15 @@ public class Xtend2OutlineNodeComparator extends SortOutlineContribution.Default
 			EClass eClass = ((EObjectNode) node).getEClass();
 			if(eClass == Xtend2Package.Literals.XTEND_CLASS)
 				return 20;
-			else if(eClass == TypesPackage.Literals.JVM_OPERATION)
-				return 30;
-			else if(eClass == Xtend2Package.Literals.XTEND_FUNCTION)
-				return 40;
+			if(eClass == Xtend2Package.Literals.XTEND_FIELD
+					|| eClass == TypesPackage.Literals.JVM_FIELD)
+					return 20;
+			if(eClass == Xtend2Package.Literals.XTEND_CONSTRUCTOR
+					|| eClass == TypesPackage.Literals.JVM_CONSTRUCTOR)
+					return 30;
+			if(eClass == Xtend2Package.Literals.XTEND_FUNCTION
+					|| eClass == TypesPackage.Literals.JVM_OPERATION)
+					return 40;
 		}
 		return Integer.MAX_VALUE;
 	}

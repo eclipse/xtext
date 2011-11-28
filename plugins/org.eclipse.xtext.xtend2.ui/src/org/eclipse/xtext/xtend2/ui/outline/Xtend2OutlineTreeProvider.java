@@ -90,14 +90,16 @@ public class Xtend2OutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 					xtendClass, getCurrentMode() == HIDE_INHERITED_MODE);
 			Set<JvmFeature> processedFeatures = newHashSet();
 			for (JvmOperation dispatcher : dispatcher2dispatched.keySet()) {
-				EObjectNode dispatcherNode = createEObjectNode(parentNode, dispatcher);
+				IOutlineNode dispatcherNode = createNodeForFeature(parentNode, inferredType, dispatcher, dispatcher);
 				processedFeatures.add(dispatcher);
 				for (JvmOperation dispatchCase : dispatcher2dispatched.get(dispatcher)) {
 					XtendFunction xtendFunction = associations.getXtendFunction(dispatchCase);
-					if (xtendFunction == null)
-						createNodeForFeature(dispatcherNode, inferredType, dispatchCase);
-					else
-						createNode(dispatcherNode, xtendFunction);
+					if (xtendFunction == null) {
+						createNodeForFeature(dispatcherNode, inferredType, dispatchCase, dispatchCase);
+					} else {
+						
+						createNodeForFeature(dispatcherNode, inferredType, dispatchCase, xtendFunction);
+					}
 					processedFeatures.add(dispatchCase);
 				}
 			}
@@ -119,7 +121,7 @@ public class Xtend2OutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 			}
 			for (JvmFeature feature : remainingFeatures) {
 				if (!processedFeatures.contains(feature)) {
-					createNodeForFeature(parentNode, inferredType, feature);
+					createNodeForFeature(parentNode, inferredType, feature, feature);
 				}
 			}
 		} else {
@@ -129,19 +131,19 @@ public class Xtend2OutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 	}
 
 	protected IOutlineNode createNodeForFeature(IOutlineNode parentNode, final JvmGenericType inferredType,
-			JvmFeature feature) {
-		if (feature.getDeclaringType() != inferredType) {
+			JvmFeature jvmFeature, EObject semanticFeature) {
+		if (jvmFeature.getDeclaringType() != inferredType) {
 			if (getCurrentMode() == SHOW_INHERITED_MODE) {
-				Object text = textDispatcher.invoke(feature);
+				Object text = textDispatcher.invoke(semanticFeature);
 				StyledString label = (text instanceof StyledString) ? (StyledString) text : new StyledString(
 						text.toString());
-				label.append(new StyledString(" - " + feature.getDeclaringType().getIdentifier(),
+				label.append(new StyledString(" - " + jvmFeature.getDeclaringType().getIdentifier(),
 						StyledString.COUNTER_STYLER));
-				return createEObjectNode(parentNode, feature, imageDispatcher.invoke(feature), label, true);
+				return createEObjectNode(parentNode, jvmFeature, imageDispatcher.invoke(semanticFeature), label, true);
 			}
 			return null;
 		} else {
-			return createEObjectNode(parentNode, feature);
+			return createEObjectNode(parentNode, semanticFeature);
 		}
 	}
 
