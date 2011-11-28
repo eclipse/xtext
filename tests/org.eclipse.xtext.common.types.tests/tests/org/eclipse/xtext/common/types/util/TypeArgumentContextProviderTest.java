@@ -728,7 +728,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 		JvmParameterizedTypeReference lists = typeRefs.typeReference(Iterables.class.getCanonicalName()).create();
 		final JvmOperation operation = find(((JvmDeclaredType)lists.getType()).getDeclaredOperations(), new Predicate<JvmOperation>(){
 			public boolean apply(JvmOperation input) {
-				return input.getSimpleName().equals("getLast");
+				return input.getSimpleName().equals("getLast") && input.getParameters().size() == 1;
 			}
 		});
 		final JvmTypeReference actualArg = typeRefs.typeReference("java.util.List").wildCardExtends("java.lang.String").create();
@@ -770,7 +770,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 		JvmParameterizedTypeReference lists = typeRefs.typeReference(Iterables.class.getCanonicalName()).create();
 		final JvmOperation operation = find(((JvmDeclaredType)lists.getType()).getDeclaredOperations(), new Predicate<JvmOperation>(){
 			public boolean apply(JvmOperation input) {
-				return input.getSimpleName().equals("getLast");
+				return input.getSimpleName().equals("getLast") && input.getParameters().size() == 1;
 			}
 		});
 		final JvmGenericArrayTypeReference actualArg = TypesFactory.eINSTANCE.createJvmGenericArrayTypeReference();
