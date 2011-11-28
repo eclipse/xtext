@@ -198,6 +198,59 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  public void testFieldInitialization_04() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.append("class Bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("String s = toString + super.toString");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Functions.Function0;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.StringExtensions;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Bar {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private String s = new Function0<String>() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("public String apply() {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("String _string = Bar.this.toString();");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("String _string_1 = Bar.super.toString();");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("String _operator_plus = StringExtensions.operator_plus(_string, _string_1);");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("return _operator_plus;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}.apply();");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
   public void testConstructorDeclaration_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");

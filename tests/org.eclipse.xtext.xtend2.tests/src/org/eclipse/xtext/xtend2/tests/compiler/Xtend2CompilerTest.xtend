@@ -103,6 +103,32 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''')
 	}
 	
+	def testFieldInitialization_04() { 
+		assertCompilesTo('''
+			package foo
+			class Bar {
+				String s = toString + super.toString
+			}
+		''', '''
+			package foo;
+
+			import org.eclipse.xtext.xbase.lib.Functions.Function0;
+			import org.eclipse.xtext.xbase.lib.StringExtensions;
+
+			@SuppressWarnings("all")
+			public class Bar {
+			  private String s = new Function0<String>() {
+			    public String apply() {
+			      String _string = Bar.this.toString();
+			      String _string_1 = Bar.super.toString();
+			      String _operator_plus = StringExtensions.operator_plus(_string, _string_1);
+			      return _operator_plus;
+			    }
+			  }.apply();
+			}
+		''')
+	}
+	
 	def testConstructorDeclaration_01() { 
 		assertCompilesTo('''
 			package foo
