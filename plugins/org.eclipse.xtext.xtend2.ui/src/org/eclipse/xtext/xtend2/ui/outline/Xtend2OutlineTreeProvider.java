@@ -12,6 +12,7 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -20,11 +21,14 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.util.FeatureOverridesService;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.common.types.util.VisibilityService;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
 import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
 import org.eclipse.xtext.ui.editor.outline.impl.ModeAwareOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineMode;
+import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xtend2.dispatch.DispatchingSupport;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.ui.labeling.Xtend2Images;
@@ -90,14 +94,14 @@ public class Xtend2OutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 					xtendClass, getCurrentMode() == HIDE_INHERITED_MODE);
 			Set<JvmFeature> processedFeatures = newHashSet();
 			for (JvmOperation dispatcher : dispatcher2dispatched.keySet()) {
-				IOutlineNode dispatcherNode = createNodeForFeature(parentNode, inferredType, dispatcher, dispatcher);
+				XtendFeatureNode dispatcherNode = createNodeForFeature(parentNode, inferredType, dispatcher, dispatcher);
+				dispatcherNode.setDispatch(true);
 				processedFeatures.add(dispatcher);
 				for (JvmOperation dispatchCase : dispatcher2dispatched.get(dispatcher)) {
 					XtendFunction xtendFunction = associations.getXtendFunction(dispatchCase);
 					if (xtendFunction == null) {
 						createNodeForFeature(dispatcherNode, inferredType, dispatchCase, dispatchCase);
 					} else {
-						
 						createNodeForFeature(dispatcherNode, inferredType, dispatchCase, xtendFunction);
 					}
 					processedFeatures.add(dispatchCase);
@@ -130,22 +134,35 @@ public class Xtend2OutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 		}
 	}
 
-	protected IOutlineNode createNodeForFeature(IOutlineNode parentNode, final JvmGenericType inferredType,
+	protected XtendFeatureNode createNodeForFeature(IOutlineNode parentNode, final JvmGenericType inferredType,
 			JvmFeature jvmFeature, EObject semanticFeature) {
+		Object text = textDispatcher.invoke(semanticFeature);
+		Image image = imageDispatcher.invoke(semanticFeature);
 		if (jvmFeature.getDeclaringType() != inferredType) {
 			if (getCurrentMode() == SHOW_INHERITED_MODE) {
-				Object text = textDispatcher.invoke(semanticFeature);
 				StyledString label = (text instanceof StyledString) ? (StyledString) text : new StyledString(
 						text.toString());
 				label.append(new StyledString(" - " + jvmFeature.getDeclaringType().getIdentifier(),
 						StyledString.COUNTER_STYLER));
-				return createEObjectNode(parentNode, jvmFeature, imageDispatcher.invoke(semanticFeature), label, true);
+				return createXtendFeatureNode(parentNode, jvmFeature, image, label, true);
 			}
 			return null;
 		} else {
-			return createEObjectNode(parentNode, semanticFeature);
+			return createXtendFeatureNode(parentNode, semanticFeature, image, text, true);
 		}
 	}
+	
+	protected XtendFeatureNode createXtendFeatureNode(IOutlineNode parentNode, EObject modelElement, Image image, Object text,
+			boolean isLeaf) {
+		XtendFeatureNode featureNode = new XtendFeatureNode(modelElement, parentNode, image, text, isLeaf);
+		ICompositeNode parserNode = NodeModelUtils.getNode(modelElement);
+		if (parserNode != null)
+			featureNode.setTextRegion(new TextRegion(parserNode.getOffset(), parserNode.getLength()));
+		if(isLocalElement(parentNode, modelElement))
+			featureNode.setShortTextRegion(locationInFileProvider.getSignificantTextRegion(modelElement));
+		return featureNode;
+	}
+
 
 	@Override
 	protected boolean _isLeaf(EObject element) {
