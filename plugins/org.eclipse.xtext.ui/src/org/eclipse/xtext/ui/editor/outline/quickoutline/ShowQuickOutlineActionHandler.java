@@ -10,9 +10,7 @@ package org.eclipse.xtext.ui.editor.outline.quickoutline;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -22,15 +20,11 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.google.inject.Provider;
 
 /**
  * @author Peter Friese - Initial contribution and API
  */
 public class ShowQuickOutlineActionHandler extends AbstractHandler {
-	
-	@Inject
-	private Provider<QuickOutlinePopup> quickOutlinePopupProvider;
 	
 	@Inject
 	private Injector injector;
