@@ -70,6 +70,15 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		invokeAndExpect2(expectation, code, "getField");
 	}
 	
+	public void testFieldInitialization_02() throws Exception {
+		String code =
+				"String field = return 123.toString\n" +
+				"def getField() {\n" + 
+				"  field" + 
+				"}";
+		invokeAndExpect2("123", code, "getField");
+	}
+	
 	public void testDeclaredConstructor_01() throws Exception {
 		String code = "class Z { new() { this(1) } new(int a) { super() } }";
 		compileJavaCode("Z", code);
