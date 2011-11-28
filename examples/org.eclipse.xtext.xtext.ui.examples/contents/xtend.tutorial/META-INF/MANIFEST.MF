@@ -7,5 +7,4 @@ Bundle-Vendor: Eclipse Modeling
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.xtend2.lib;bundle-version="2.0.0",
  org.junit4,
- org.aopalliance;bundle-version="1.0.0",
  com.google.inject;bundle-version="2.0.0"
