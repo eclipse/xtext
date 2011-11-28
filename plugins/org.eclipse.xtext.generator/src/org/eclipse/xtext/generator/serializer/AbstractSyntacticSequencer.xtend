@@ -26,8 +26,6 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 	
 	@Inject extension GrammarAccess grammarAccess
 	
-	@Inject SyntacticSequencer sequencer
-	
 	@Inject extension SyntacticSequencerUtil util
 	
 	override String getQualifiedName(Grammar grammar) {
