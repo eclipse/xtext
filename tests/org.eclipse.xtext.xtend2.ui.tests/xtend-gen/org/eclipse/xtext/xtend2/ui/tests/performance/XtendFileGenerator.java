@@ -962,7 +962,7 @@ public class XtendFileGenerator {
     Pair<String,CharSequence> _rectangle = this.getRectangle();
     Pair<String,CharSequence> _shape = this.getShape();
     HashMap<String,CharSequence> _newHashMap = CollectionLiterals.<String, CharSequence>newHashMap(_amount, _circle, _netNode, _person, _rectangle, _shape);
-    return ((HashMap<String,CharSequence>)_newHashMap);
+    return _newHashMap;
   }
   
   public Pair<String,CharSequence> getAmount() {
@@ -1070,7 +1070,7 @@ public class XtendFileGenerator {
     _builder.append("}");
     _builder.newLine();
     Pair<String,CharSequence> _operator_mappedTo = ObjectExtensions.<String, CharSequence>operator_mappedTo("xtend/tutorial/util/Amount.java", _builder);
-    return ((Pair<String,CharSequence>)_operator_mappedTo);
+    return _operator_mappedTo;
   }
   
   public Pair<String,CharSequence> getCircle() {
@@ -1101,7 +1101,7 @@ public class XtendFileGenerator {
     _builder.append("}");
     _builder.newLine();
     Pair<String,CharSequence> _operator_mappedTo = ObjectExtensions.<String, CharSequence>operator_mappedTo("xtend/tutorial/util/Circle.java", _builder);
-    return ((Pair<String,CharSequence>)_operator_mappedTo);
+    return _operator_mappedTo;
   }
   
   public Pair<String,CharSequence> getNetNode() {
@@ -1169,7 +1169,7 @@ public class XtendFileGenerator {
     _builder.append("}");
     _builder.newLine();
     Pair<String,CharSequence> _operator_mappedTo = ObjectExtensions.<String, CharSequence>operator_mappedTo("xtend/tutorial/util/NetNode.java", _builder);
-    return ((Pair<String,CharSequence>)_operator_mappedTo);
+    return _operator_mappedTo;
   }
   
   public Pair<String,CharSequence> getPerson() {
@@ -1288,7 +1288,7 @@ public class XtendFileGenerator {
     _builder.append("}");
     _builder.newLine();
     Pair<String,CharSequence> _operator_mappedTo = ObjectExtensions.<String, CharSequence>operator_mappedTo("xtend/tutorial/util/Person.java", _builder);
-    return ((Pair<String,CharSequence>)_operator_mappedTo);
+    return _operator_mappedTo;
   }
   
   public Pair<String,CharSequence> getRectangle() {
@@ -1324,7 +1324,7 @@ public class XtendFileGenerator {
     _builder.append("}");
     _builder.newLine();
     Pair<String,CharSequence> _operator_mappedTo = ObjectExtensions.<String, CharSequence>operator_mappedTo("xtend/tutorial/util/Rectangle.java", _builder);
-    return ((Pair<String,CharSequence>)_operator_mappedTo);
+    return _operator_mappedTo;
   }
   
   public Pair<String,CharSequence> getShape() {
@@ -1337,6 +1337,6 @@ public class XtendFileGenerator {
     _builder.append("}");
     _builder.newLine();
     Pair<String,CharSequence> _operator_mappedTo = ObjectExtensions.<String, CharSequence>operator_mappedTo("xtend/tutorial/util/Shape.java", _builder);
-    return ((Pair<String,CharSequence>)_operator_mappedTo);
+    return _operator_mappedTo;
   }
 }
