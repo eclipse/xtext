@@ -7,14 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
-import static com.google.common.collect.Lists.*;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -37,6 +36,8 @@ import org.eclipse.xtext.xbase.lib.Functions.Function0;
 
 import com.google.inject.Inject;
 import com.google.inject.internal.MoreTypes;
+
+import static com.google.common.collect.Lists.*;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -369,9 +370,20 @@ public class OnTheFlyJavaCompiler {
 	}
 
 	protected String toString(Type returnType) {
-//		In Guice 3 this would be :
-//		return MoreTypes.typeToString(returnType);
-		return MoreTypes.toString(returnType);
+		Class<MoreTypes> clazz = MoreTypes.class;
+		Method method = null;
+		try {
+			try {
+				// Guice 3
+				method = clazz.getDeclaredMethod("typeToString", Type.class);
+			} catch (NoSuchMethodException e) {
+				// Guice <3
+				method = clazz.getDeclaredMethod("toString", Type.class);
+			}
+			return (String) method.invoke(null, returnType);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 }
