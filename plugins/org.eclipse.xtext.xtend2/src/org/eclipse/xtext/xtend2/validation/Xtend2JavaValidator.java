@@ -713,19 +713,32 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 			String leftParameterName = function.getParameters().get(i).getName();
 			for (int j = i + 1; j < function.getParameters().size(); ++j) {
 				if (equal(leftParameterName, function.getParameters().get(j).getName())) {
-					error("Duplicate parameter name", XTEND_FUNCTION__PARAMETERS, i, DUPLICATE_PARAMETER_NAME);
-					error("Duplicate parameter name", XTEND_FUNCTION__PARAMETERS, j, DUPLICATE_PARAMETER_NAME);
+					error("Duplicate parameter " + leftParameterName, XTEND_FUNCTION__PARAMETERS, i, DUPLICATE_PARAMETER_NAME);
+					error("Duplicate parameter " + leftParameterName, XTEND_FUNCTION__PARAMETERS, j, DUPLICATE_PARAMETER_NAME);
 				}
 			}
 			if (function.getCreateExtensionInfo() != null) {
 				if (equal(leftParameterName, function.getCreateExtensionInfo().getName())) {
-					error("Duplicate parameter name", XTEND_FUNCTION__PARAMETERS, i, DUPLICATE_PARAMETER_NAME);
+					error("Duplicate parameter " + leftParameterName, XTEND_FUNCTION__PARAMETERS, i, DUPLICATE_PARAMETER_NAME);
 					if (function.getCreateExtensionInfo().eIsSet(CREATE_EXTENSION_INFO__NAME))
-						error("Duplicate parameter name", function.getCreateExtensionInfo(),
+						error("Duplicate parameter " + leftParameterName, function.getCreateExtensionInfo(),
 								CREATE_EXTENSION_INFO__NAME, DUPLICATE_PARAMETER_NAME);
 					else
-						error("Duplicate implicit parameter name 'it'", function.getCreateExtensionInfo(),
+						error("Duplicate implicit parameter 'it'", function.getCreateExtensionInfo(),
 								CREATE_EXTENSION_INFO__NAME, DUPLICATE_PARAMETER_NAME);
+				}
+			}
+		}
+	}
+	
+	@Check
+	public void checkParameterNames(XtendConstructor constructor) {
+		for (int i = 0; i < constructor.getParameters().size(); ++i) {
+			String leftParameterName = constructor.getParameters().get(i).getName();
+			for (int j = i + 1; j < constructor.getParameters().size(); ++j) {
+				if (equal(leftParameterName, constructor.getParameters().get(j).getName())) {
+					error("Duplicate parameter " + leftParameterName, XTEND_CONSTRUCTOR__PARAMETERS, i, DUPLICATE_PARAMETER_NAME);
+					error("Duplicate parameter " + leftParameterName, XTEND_CONSTRUCTOR__PARAMETERS, j, DUPLICATE_PARAMETER_NAME);
 				}
 			}
 		}

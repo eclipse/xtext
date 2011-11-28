@@ -296,6 +296,74 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  public void testConstructorDeclaration_03() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.append("class Bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("this(123.toString)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new(String s) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Functions.Function0;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Bar {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Bar() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("this(new Function0<String>() {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("public String apply() {");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("String _string = ((Integer)123).toString();");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("return _string;");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}.apply());");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Bar(final String s) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
   public void testSneakyThrow() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");

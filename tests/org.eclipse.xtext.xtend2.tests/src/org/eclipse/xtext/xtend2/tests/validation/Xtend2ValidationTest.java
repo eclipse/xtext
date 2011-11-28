@@ -23,6 +23,7 @@ import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.validation.IssueCodes;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendConstructor;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendMember;
@@ -124,7 +125,7 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testConstructorArgumentIsValid_04() throws Exception {
-		XtendClass clazz = clazz("class Z { new() { this(z()) } new(Object o) {} def static z() { null } }");
+		XtendClass clazz = clazz("class Z { new() { this(z()) } new(Object o) {} def z() { null } }");
 		helper.assertError(clazz.getMembers().get(0), XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_CONSTRUCTOR_ARGUMENT);
 	}
 	
@@ -136,6 +137,31 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	public void testConstructorArgumentIsValid_06() throws Exception {
 		XtendClass clazz = clazz("class Z { new(Object o) { this(o as String) } new(String o) {} }");
 		helper.assertNoErrors(clazz);
+	}
+	
+	public void testConstructorArgumentIsValid_07() throws Exception {
+		XtendClass clazz = clazz("class Z { new() { this(z()) } new(Object o) {} def static z() { null } }");
+		helper.assertNoErrors(clazz);
+	}
+	
+	public void testConstructorArgumentIsValid_08() throws Exception {
+		XtendClass clazz = clazz("class Z { new() { this(z() as String) } new(Object o) {} def static z() { null } }");
+		helper.assertNoErrors(clazz);
+	}
+	
+	public void testConstructorArgumentIsValid_09() throws Exception {
+		XtendClass clazz = clazz("class Z { new() { this(z() as String) } new(Object o) {} def z() { null } }");
+		helper.assertError(clazz.getMembers().get(0), XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_CONSTRUCTOR_ARGUMENT);
+	}
+	
+	public void testConstructorArgumentIsValid_10() throws Exception {
+		XtendClass clazz = clazz("class Z { new() { this(z().toString + '') } new(Object o) {} def static z() { null } }");
+		helper.assertNoErrors(clazz);
+	}
+	
+	public void testConstructorArgumentIsValid_11() throws Exception {
+		XtendClass clazz = clazz("class Z { new() { this(z().toString + '') } new(Object o) {} def z() { null } }");
+		helper.assertError(clazz.getMembers().get(0), XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_CONSTRUCTOR_ARGUMENT);
 	}
 	
 	public void testConstructorDuplicate() throws Exception {
@@ -559,19 +585,24 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 
 	public void testDuplicateParameter() throws Exception {
 		XtendFunction function = function("def foo(int x, int x) {null}");
-		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, DUPLICATE_PARAMETER_NAME, "duplicate", "name");
+		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, DUPLICATE_PARAMETER_NAME, "duplicate", "x");
+	}
+	
+	public void testDuplicateConstructorParameter() throws Exception {
+		XtendConstructor constructor = constructor("new(int x, int x) {null}");
+		helper.assertError(constructor, Xtend2Package.Literals.XTEND_CONSTRUCTOR, DUPLICATE_PARAMETER_NAME, "duplicate", "x");
 	}
 	
 	public void testDuplicateParameter_CreateExtension_01() throws Exception {
 		XtendFunction function = function("def create newArrayList foo(int it) {}");
-		helper.assertError(function, Xtend2Package.Literals.CREATE_EXTENSION_INFO, DUPLICATE_PARAMETER_NAME, "duplicate", "implicit", "name");
-		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, DUPLICATE_PARAMETER_NAME, "duplicate", "name");
+		helper.assertError(function, Xtend2Package.Literals.CREATE_EXTENSION_INFO, DUPLICATE_PARAMETER_NAME, "duplicate", "implicit", "it");
+		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, DUPLICATE_PARAMETER_NAME, "duplicate", "it");
 	}
 	
 	public void testDuplicateParameter_CreateExtension_02() throws Exception {
 		XtendFunction function = function("def create result: newArrayList foo(int result) {}");
-		helper.assertError(function, Xtend2Package.Literals.CREATE_EXTENSION_INFO, DUPLICATE_PARAMETER_NAME, "duplicate", "name");
-		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, DUPLICATE_PARAMETER_NAME, "duplicate", "name");
+		helper.assertError(function, Xtend2Package.Literals.CREATE_EXTENSION_INFO, DUPLICATE_PARAMETER_NAME, "duplicate", "result");
+		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, DUPLICATE_PARAMETER_NAME, "duplicate", "result");
 	}
 	
 	public void testRichStringIfPredicate() throws Exception {
