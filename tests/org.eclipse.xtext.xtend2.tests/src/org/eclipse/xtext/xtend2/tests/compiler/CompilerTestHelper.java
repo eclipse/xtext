@@ -59,6 +59,7 @@ public class CompilerTestHelper {
 		javaCompiler.addClassPathOfClass(Functions.class);
 		javaCompiler.addClassPathOfClass(StringConcatenation.class);
 		javaCompiler.addClassPathOfClass(Provider.class);
+		javaCompiler.addClassPathOfClass(javax.inject.Provider.class);
 		javaCompiler.addClassPathOfClass(Supplier.class);
 		javaCompiler.addClassPathOfClass(Notifier.class);
 		javaCompiler.addClassPathOfClass(EcorePackage.class);
