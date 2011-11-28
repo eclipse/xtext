@@ -17,3 +17,4 @@ Require-Bundle: org.eclipse.xtext.xbase;bundle-version="2.0.0",
 Bundle-Vendor: itemis AG
 Export-Package: org.eclipse.xtext.xbase.tests,
  org.eclipse.xtext.xbase.tests.interpreter
+Import-Package: javax.inject;version="1.0.0"
