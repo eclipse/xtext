@@ -670,29 +670,24 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		}
 	}
 	
-	// TODO extract and put in separate class for general reuse (see also #isSideEffectFree and AbstractXbaseCompiler#isVariableDeclarationRequired)
 	protected void checkIsValidConstructorArgument(XExpression argument) {
-		if (argument instanceof XFeatureCall) {
-			JvmIdentifiableElement feature = ((XFeatureCall) argument).getFeature();
-			if (feature != null && !feature.eIsProxy()) {
-				if (feature instanceof JvmField) {
-					if (!((JvmField) feature).isStatic())
-						error("Cannot refer to an instance field " + feature.getSimpleName() + " while explicitly invoking a constructor", 
-							argument, null, INVALID_CONSTRUCTOR_ARGUMENT);
-				} else if (feature instanceof JvmOperation) {
-//					if (((JvmOperation) feature).isStatic())
-//						error("Cannot refer to an instance method while explicitly invoking a constructor", 
-//							argument, null, INVALID_CONSTRUCTOR_ARGUMENT);	
-					error("Cannot refer to a method while explicitly invoking a constructor",
-						argument, null, INVALID_CONSTRUCTOR_ARGUMENT);
+		TreeIterator<EObject> iterator = EcoreUtil2.eAll(argument);
+		while(iterator.hasNext()) {
+			EObject partOfArgumentExpression = iterator.next();
+			if (partOfArgumentExpression instanceof XFeatureCall) {
+				JvmIdentifiableElement feature = ((XFeatureCall) partOfArgumentExpression).getFeature();
+				if (feature != null && !feature.eIsProxy()) {
+					if (feature instanceof JvmField) {
+						if (!((JvmField) feature).isStatic())
+							error("Cannot refer to an instance field " + feature.getSimpleName() + " while explicitly invoking a constructor", 
+									partOfArgumentExpression, null, INVALID_CONSTRUCTOR_ARGUMENT);
+					} else if (feature instanceof JvmOperation) {
+						if (!((JvmOperation) feature).isStatic())
+							error("Cannot refer to an instance method while explicitly invoking a constructor", 
+									partOfArgumentExpression, null, INVALID_CONSTRUCTOR_ARGUMENT);	
+					}
 				}
 			}
-		} else if (argument instanceof XCastedExpression) {
-			checkIsValidConstructorArgument(((XCastedExpression) argument).getTarget());
-		} else if (!(argument instanceof XStringLiteral || argument instanceof XTypeLiteral || argument instanceof XIntLiteral
-				|| argument instanceof XNullLiteral || argument instanceof XBooleanLiteral)) {
-			error("Cannot refer to an expression with potential side effects while explicitly invoking a constructor", 
-				argument, null, INVALID_CONSTRUCTOR_ARGUMENT);
 		}
 	}
 
