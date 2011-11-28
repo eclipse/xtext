@@ -75,6 +75,7 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 		javaCompiler.addClassPathOfClass(AbstractXbaseEvaluationTest.class);
 		javaCompiler.addClassPathOfClass(Functions.class);
 		javaCompiler.addClassPathOfClass(Provider.class);
+		javaCompiler.addClassPathOfClass(javax.inject.Provider.class);
 		javaCompiler.addClassPathOfClass(Supplier.class);
 	}
 
