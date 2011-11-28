@@ -7,8 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.outline;
 
+import static org.eclipse.xtext.util.Strings.*;
+
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
-import org.eclipse.xtext.ui.editor.outline.impl.EStructuralFeatureNode;
 import org.eclipse.xtext.ui.editor.outline.quickoutline.QuickOutlineFilterAndSorter;
 
 /**
@@ -20,8 +21,7 @@ public class Xtend2QuickOutlineFilterAndSorter extends QuickOutlineFilterAndSort
 		addFilter(new IFilter() {
 			
 			public boolean apply(IOutlineNode input) {
-				// skip imports
-				return !(input instanceof EStructuralFeatureNode);
+				return !equal("import declarations", input.getText().toString());
 			}
 			
 			public boolean isEnabled() {

@@ -9,7 +9,6 @@ package org.eclipse.xtext.common.types.util;
 
 import static com.google.common.collect.Lists.*;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;

@@ -15,6 +15,7 @@ import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -34,6 +35,7 @@ import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.ui.labeling.Xtend2Images;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendField;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendImport;
@@ -160,10 +162,22 @@ public class Xtend2OutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 			featureNode.setTextRegion(new TextRegion(parserNode.getOffset(), parserNode.getLength()));
 		if(isLocalElement(parentNode, modelElement))
 			featureNode.setShortTextRegion(locationInFileProvider.getSignificantTextRegion(modelElement));
+		featureNode.setStatic(isStatic(modelElement));
 		return featureNode;
 	}
 
-
+	protected boolean isStatic(EObject element) {
+		if (element instanceof JvmField) 
+			return  ((JvmField) element).isStatic();
+		else if(element instanceof JvmOperation) 
+			return  ((JvmOperation) element).isStatic();
+		else if(element instanceof XtendField) 
+			return  ((XtendField) element).isStatic();
+		else if(element instanceof XtendFunction) 
+			return  ((XtendFunction) element).isStatic();
+		else return false;
+	}
+	
 	@Override
 	protected boolean _isLeaf(EObject element) {
 		return true;
