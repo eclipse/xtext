@@ -20,12 +20,14 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.TextRegion;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -130,6 +132,20 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 	}
 
 	/**
+	 * @since 2.2
+	 */
+	protected boolean isLocalElement(IOutlineNode node, final EObject element) {
+		if(node instanceof AbstractOutlineNode) {
+			return ((AbstractOutlineNode)node).getDocument().readOnly(new IUnitOfWork<Boolean, XtextResource>() {
+				public Boolean exec(XtextResource state) throws Exception {
+					return element.eResource() == state;
+				}
+			});
+		}
+		return true;
+	}
+	
+	/**
 	 * @since 2.1
 	 */
 	protected EObjectNode createEObjectNode(IOutlineNode parentNode, EObject modelElement, Image image, Object text,
@@ -138,7 +154,8 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 		ICompositeNode parserNode = NodeModelUtils.getNode(modelElement);
 		if (parserNode != null)
 			eObjectNode.setTextRegion(new TextRegion(parserNode.getOffset(), parserNode.getLength()));
-		eObjectNode.setShortTextRegion(locationInFileProvider.getSignificantTextRegion(modelElement));
+		if(isLocalElement(parentNode, modelElement))
+			eObjectNode.setShortTextRegion(locationInFileProvider.getSignificantTextRegion(modelElement));
 		return eObjectNode;
 	}
 

@@ -7,9 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.navigation;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IMember;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.ui.editor.GlobalURIEditorOpener;
 import org.eclipse.xtext.ui.editor.hyperlinking.XtextHyperlink;
 
 import com.google.inject.Inject;
@@ -20,7 +19,7 @@ import com.google.inject.Inject;
 public class LinkToOrigin extends XtextHyperlink {
 
 	@Inject
-	private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
+	private GlobalURIEditorOpener uriEditorOpener;
 	
 	private IMember member;
 
@@ -30,16 +29,7 @@ public class LinkToOrigin extends XtextHyperlink {
 
 	@Override
 	public void open() {
-		URI resourceURI = getURI().trimFragment();
-		IResourceServiceProvider serviceProvider = resourceServiceProviderRegistry.getResourceServiceProvider(resourceURI);
-		if (serviceProvider != null) {
-			IDerivedMemberAwareEditorOpener opener = serviceProvider.get(IDerivedMemberAwareEditorOpener.class);
-			if (opener != null) {
-				opener.open(getURI(), member, true);
-				return;
-			}
-		}
-		super.open();
+		uriEditorOpener.open(getURI(), member, true);
 	}
 	
 }

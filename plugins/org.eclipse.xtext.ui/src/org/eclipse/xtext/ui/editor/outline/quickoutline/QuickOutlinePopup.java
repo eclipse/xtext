@@ -9,8 +9,6 @@ package org.eclipse.xtext.ui.editor.outline.quickoutline;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogSettings;
@@ -43,15 +41,16 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.ModeAwareOutlineTreeProvider;
+import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineMode;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeContentProvider;
+import org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeElementOpener;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeLabelProvider;
 import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -115,7 +114,7 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 	private PrefixMatcher prefixMatcher;
 	
 	@Inject
-	private IURIEditorOpener editorOpener;
+	private OutlineNodeElementOpener elementOpener;
 
 	private int TREESTYLE = SWT.V_SCROLL | SWT.H_SCROLL;
 
@@ -136,7 +135,7 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 	}
 
 	public QuickOutlinePopup(Shell parent) {
-		super(parent, PopupDialog.HOVER_SHELLSTYLE | SWT.RESIZE, true, true, true, true, true, null,
+		super(parent, PopupDialog.HOVER_SHELLSTYLE | SWT.RESIZE, true, false, true, true, true, null,
 				Messages.QuickOutlinePopup_pressESC);
 	}
 
@@ -341,15 +340,7 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 		if (selectedElement != null) {
 			dispose();
 			if (selectedElement instanceof IOutlineNode) {
-				final IOutlineNode outlineNode = (IOutlineNode) selectedElement;
-				outlineNode.readOnly(new IUnitOfWork.Void<EObject>() {
-					@Override
-					public void process(EObject state) throws Exception {
-						editorOpener.open(EcoreUtil.getURI(state), true);
-					}
-				});
-//				xtextEditor.selectAndReveal(outlineNode.getSignificantTextRegion().getOffset(), outlineNode
-//						.getSignificantTextRegion().getLength());
+				elementOpener.open((IOutlineNode) selectedElement, xtextEditor.getInternalSourceViewer());
 			}
 		}
 	}

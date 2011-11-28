@@ -55,6 +55,13 @@ public class GlobalURIEditorOpener implements IURIEditorOpener {
 	//@Nullable
 	private IWorkbench workbench;
 	
+	/**
+	 * @since 2.2
+	 */
+	public IEditorPart open(URI uri, Object context, boolean select) {
+		return open(uri, select);
+	}
+	
 	public IEditorPart open(URI uri, boolean select) {
 		IResourceServiceProvider resourceServiceProvider = resourceServiceProviderRegistry.getResourceServiceProvider(uri.trimFragment());
 		if(resourceServiceProvider instanceof IResourceUIServiceProvider) {
