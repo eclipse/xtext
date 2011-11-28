@@ -892,7 +892,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	}
 	
 	@Test public void testSwitchExpression_11() throws Exception {
-		assertEvaluatesTo(3, "switch new java.util.ArrayList<String>() { java.util.Set<String> : 5 java.util.List<Object>: 3 }");
+		assertEvaluatesTo(3, "switch new java.util.ArrayList<String>() { java.util.Set<String> : 5 java.util.List<String>: 3 }");
 	}
 	
 	@Test public void testSwitchExpression_12() throws Exception {
