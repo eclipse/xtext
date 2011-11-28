@@ -21,3 +21,4 @@ Bundle-DocURL: http://code.google.com/p/google-guice/
 Bundle-SymbolicName: com.google.inject
 Bundle-ClassPath: .
 Import-Package: javax.inject;version="1.0.0"
+Require-Bundle: javax.inject;bundle-version="1.0.0";resolution:=optional;visibility:=reexport
