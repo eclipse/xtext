@@ -65,5 +65,9 @@ public class DelegatingAppendable implements IAppendable {
 	public Object getObject(String name) {
 		return appendable.getObject(name);
 	}
+
+	public String declareFreshVariable(Object key, String proposedName) {
+		return appendable.declareFreshVariable(key, proposedName);
+	}
 	
 }
