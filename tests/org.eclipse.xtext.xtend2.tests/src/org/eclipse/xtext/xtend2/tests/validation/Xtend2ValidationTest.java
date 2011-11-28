@@ -38,6 +38,26 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	@Inject
 	private ValidationTestHelper helper;
 	
+	public void testFieldInitializerType_01() throws Exception {
+		XtendClass clazz = clazz("class Z { String s = 1 }");
+		helper.assertError(clazz, XbasePackage.Literals.XINT_LITERAL, org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_RETURN_TYPE);
+	}
+	
+	public void testFieldInitializerType_02() throws Exception {
+		XtendClass clazz = clazz("class Z { String s = 1.toString }");
+		helper.assertNoErrors(clazz);
+	}
+	
+	public void testFieldInitializerType_03() throws Exception {
+		XtendClass clazz = clazz("class Z { String s = return 1 }");
+		helper.assertError(clazz, XbasePackage.Literals.XINT_LITERAL, org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_TYPES);
+	}
+	
+	public void testFieldInitializerType_04() throws Exception {
+		XtendClass clazz = clazz("class Z { String s = return '' }");
+		helper.assertNoErrors(clazz);
+	}
+	
 	public void testForwardReferenceInFieldInitializer_01() throws Exception {
 		XtendClass clazz = clazz("class Z { String s = s }");
 		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.ILLEGAL_FORWARD_REFERENCE);
