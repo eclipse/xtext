@@ -21,6 +21,7 @@ Require-Bundle: org.eclipse.xtext.xtend2;bundle-version="2.0.0";visibility:=reex
  org.eclipse.compare,
  org.apache.commons.lang,
  org.eclipse.jdt.junit;bundle-version="3.5.0";resolution:=optional,
+ org.eclipse.jdt.debug.ui;bundle-version="3.4.0";resolution:=optional,
  org.eclipse.debug.ui;bundle-version="3.5.0";resolution:=optional,
  org.eclipse.pde.ui;bundle-version="3.5.0";resolution:=optional
 Import-Package: org.apache.log4j
