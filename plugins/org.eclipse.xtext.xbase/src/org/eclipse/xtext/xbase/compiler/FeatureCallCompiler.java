@@ -20,7 +20,6 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
-import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
@@ -28,9 +27,9 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
-import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
-import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
+import org.eclipse.xtext.common.types.util.Primitives;
+import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
@@ -192,28 +191,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		return expr instanceof XMemberFeatureCall && ((XMemberFeatureCall) expr).isSpreading();
 	}
 	
-	/**
-	 * Computes whether the feature call needs to be casted.
-	 * This is the case if the JvmIdentifiables type != expressions type,
-	 * which happens in cases where the type is different because a feature call was already tested to be an instance of a certain type.
-	 * For example in a switch with a type guard. 
-	 */
-	protected JvmTypeReference needsCastTo(XAbstractFeatureCall call) {
-		JvmTypeReference realType = getTypeProvider().getTypeForIdentifiable(call.getFeature());
-		JvmTypeReference currentContextType = getTypeProvider().getType(call);
-		if (!(currentContextType instanceof JvmMultiTypeReference) && !getTypeConformanceComputer().isConformant(currentContextType, realType))
-			return currentContextType;
-		return null;
-	}
-
 	protected void _toJavaExpression(XAbstractFeatureCall call, IAppendable b) {
-		JvmTypeReference toCastTo = needsCastTo(call);
-		if (toCastTo != null) {
-			b.append("(");
-			b.append("(");
-			serialize(toCastTo, call, b);
-			b.append(")");
-		}
 		if (isPrimitiveVoid(call)) {
 			b.append("null");
 		} else if (isSpreadingMemberFeatureCall(call)) {
@@ -246,9 +224,6 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			} else {
 				b.append(getVarName(call, b));
 			}
-		}
-		if (toCastTo != null) {
-			b.append(")");
 		}
 	}
 

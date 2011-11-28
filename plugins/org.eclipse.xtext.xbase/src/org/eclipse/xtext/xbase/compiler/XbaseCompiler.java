@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
@@ -18,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
@@ -396,6 +398,19 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				b.append(casePart.getTypeGuard().getType());
 				b.append(") {");
 				b.increaseIndentation();
+				JvmIdentifiableElement switchOver = expr.getSwitch() instanceof XFeatureCall ? ((XFeatureCall)expr.getSwitch()).getFeature() : expr;
+				b.openScope();
+				final String proposedName = "_"+Strings.toFirstLower(casePart.getTypeGuard().getType().getSimpleName());
+				final String castedVariableName = b.declareFreshVariable(switchOver, proposedName);
+				b.append("\nfinal ");
+				serialize(casePart.getTypeGuard(), expr, b);
+				b.append(" ");
+				b.append(castedVariableName);
+				b.append(" = (");
+				serialize(casePart.getTypeGuard(), expr, b);
+				b.append(")");
+				b.append(variableName);
+				b.append(";");
 			}
 			if (casePart.getCase() != null) {
 				internalToJavaStatement(casePart.getCase(), b, true);
@@ -431,6 +446,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			}
 			if (casePart.getTypeGuard() != null) {
 				b.decreaseIndentation().append("\n}");
+				b.closeScope();
 			}
 			b.decreaseIndentation();
 			b.append("\n}");

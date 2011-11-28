@@ -100,29 +100,44 @@ public class CompilerTest extends AbstractXbaseTestCase {
 //						"s.length");
 //	}
 	
+	public void testFeatureCall() throws Exception {
+		assertCompilesTo(
+				"\n" + 
+				"java.util.ArrayList<String> _xblockexpression = null;\n" + 
+				"{\n" + 
+				"  java.util.ArrayList<String> _newArrayList = org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList(\"foo\");\n" + 
+				"  final java.util.ArrayList<String> x = _newArrayList;\n" + 
+				"  _xblockexpression = (x);\n" + 
+				"}\n" + 
+				"return _xblockexpression;",
+				"{val x = newArrayList('foo')\n" +
+				"x}");
+	}
 	
 	public void testSwitchTypeGuards() throws Exception {
 		assertCompilesTo(
-				"\n" + 
+				"\n" +
 				"String _switchResult = null;\n" + 
 				"final CharSequence x = ((CharSequence) \"foo\");\n" + 
 				"boolean matched = false;\n" + 
 				"if (!matched) {\n" + 
 				"  if (x instanceof String) {\n" + 
+				"    final String _string = (String)x;\n" + 
 				"    matched=true;\n" + 
-				"    String _substring = ((String)x).substring(3);\n" + 
-				"    String _operator_plus = org.eclipse.xtext.xbase.lib.StringExtensions.operator_plus(_substring, x);\n" + 
+				"    String _substring = _string.substring(3);\n" + 
+				"    String _operator_plus = org.eclipse.xtext.xbase.lib.StringExtensions.operator_plus(_substring, _string);\n" + 
 				"    _switchResult = _operator_plus;\n" + 
 				"  }\n" + 
 				"}\n" + 
 				"if (!matched) {\n" + 
 				"  if (x instanceof Comparable) {\n" + 
+				"    final Comparable _comparable = (Comparable)x;\n" + 
 				"    matched=true;\n" + 
-				"    int _compareTo = ((Comparable)x).compareTo(\"jho\");\n" + 
-				"    String _operator_plus_1 = org.eclipse.xtext.xbase.lib.StringExtensions.operator_plus(\"\", ((Integer)_compareTo));\n" + 
-				"    String _string = ((Comparable)x).toString();\n" + 
-				"    String _operator_plus_2 = org.eclipse.xtext.xbase.lib.StringExtensions.operator_plus(_operator_plus_1, _string);\n" + 
-				"    _switchResult = _operator_plus_2;\n" + 
+				"    int _compareTo = ((Comparable)_comparable).compareTo(\"jho\");\n" + 
+				"    String _operator_plus = org.eclipse.xtext.xbase.lib.StringExtensions.operator_plus(\"\", ((Integer)_compareTo));\n" + 
+				"    String _string = ((Comparable)_comparable).toString();\n" + 
+				"    String _operator_plus_1 = org.eclipse.xtext.xbase.lib.StringExtensions.operator_plus(_operator_plus, _string);\n" + 
+				"    _switchResult = _operator_plus_1;\n" + 
 				"  }\n" + 
 				"}\n" + 
 				"return _switchResult;"

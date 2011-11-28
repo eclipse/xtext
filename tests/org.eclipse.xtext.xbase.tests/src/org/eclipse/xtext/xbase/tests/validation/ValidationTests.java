@@ -10,6 +10,9 @@ package org.eclipse.xtext.xbase.tests.validation;
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
@@ -392,6 +395,13 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		XExpression expression = expression("new String() as Boolean");
 		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_CAST, "Cannot", "cast");
 		helper.assertNoError(expression, OBSOLETE_CAST);
+	}
+	
+	//TODO fix me - see https://bugs.eclipse.org/bugs/show_bug.cgi?id=364931
+	public void testCast_3() throws Exception {
+//		XExpression expression = expression("new java.util.ArrayList<String>() as java.util.List<Object>");
+//		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_CAST, "Cannot", "cast");
+//		helper.assertNoError(expression, OBSOLETE_CAST);
 	}
 
 	public void testInstanceOf_0() throws Exception {
