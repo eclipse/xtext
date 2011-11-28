@@ -27,6 +27,7 @@
 <unit id="org.aopalliance" version="0.0.0"/>
 <unit id="org.easymock" version="0.0.0"/>
 <unit id="org.antlr.runtime" version="0.0.0"/>
+<unit id="javax.inject" version="0.0.0"/>
 <repository location="http://download.eclipse.org/tools/orbit/downloads/drops/S20110907174232/repository"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
