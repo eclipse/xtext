@@ -581,6 +581,54 @@
          </description>
       </shortcut>
     </extension>  
+    <extension
+         point="org.eclipse.debug.ui.launchShortcuts">
+      <shortcut
+            class="org.eclipse.xtext.xtend2.ui.launching.JavaApplicationLaunchShortcut"
+            description="%JavaLaunchShortcut.description"
+            helpContextId="org.eclipse.jdt.debug.ui.shortcut_local_java_application"
+            icon="$nl$/icons/full/etool16/java_app.gif"
+            id="org.eclipse.xtext.xtend2.ui.launching.localJavaShortcut"
+            label="%JavaApplicationShortcut.label"
+            modes="run, debug">
+         <contextualLaunch>
+           <enablement>
+             <with variable="selection">
+               <count value="1"/>
+               <iterate>
+                 <and>
+                   <not><adapt type="org.eclipse.jdt.core.IJavaElement"/></not>
+                   <adapt type="org.eclipse.xtext.xtend2.ui.launching.JavaElementDelegate">
+                     <and>
+                       <adapt type="org.eclipse.jdt.core.IJavaElement">
+                         <test property="org.eclipse.jdt.core.isInJavaProject"/>
+                       </adapt>
+                       <or>
+                         <test property="org.eclipse.jdt.launching.hasMain"/>
+                         <test property="org.eclipse.jdt.launching.isContainer"/>
+                         <test property="org.eclipse.jdt.launching.isPackageFragment"/>
+                         <test property="org.eclipse.jdt.launching.isPackageFragmentRoot"/>
+                       </or>
+                     </and> 
+                   </adapt>
+                 </and>
+               </iterate>
+             </with>
+           </enablement>
+           </contextualLaunch>
+         <configurationType
+               id="org.eclipse.jdt.launching.localJavaApplication">
+         </configurationType>
+         <description
+               description="%JavaApplicationShortcut.description.run"
+               mode="run">
+         </description>
+         <description
+               description="%JavaApplicationShortcut.description.debug"
+               mode="debug">
+         </description>
+      </shortcut>
+    </extension>
     <extension point="org.eclipse.jdt.core.classpathContainerInitializer">            
    		<classpathContainerInitializer                                          
 			id="org.eclipse.xtend.XTEND_CONTAINER"                                                        
