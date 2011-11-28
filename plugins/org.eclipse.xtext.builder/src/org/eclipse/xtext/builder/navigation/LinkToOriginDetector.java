@@ -55,7 +55,7 @@ public class LinkToOriginDetector extends AbstractHyperlinkDetector {
 			IEditorInput editorInput = textEditor.getEditorInput();
 			if (editorInput == null)
 				return null;
-			IJavaElement adaptedJavaElement = (ICompilationUnit) Platform.getAdapterManager().getAdapter(editorInput, IJavaElement.class);
+			IJavaElement adaptedJavaElement = (IJavaElement) Platform.getAdapterManager().getAdapter(editorInput, IJavaElement.class);
 			if (adaptedJavaElement == null)
 				return null;
 			ICompilationUnit compilationUnit = (ICompilationUnit) adaptedJavaElement.getAncestor(IJavaElement.COMPILATION_UNIT);
