@@ -18,7 +18,6 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccess;
 import org.eclipse.xtext.generator.serializer.GeneratedFile;
 import org.eclipse.xtext.generator.serializer.JavaFile;
-import org.eclipse.xtext.generator.serializer.SyntacticSequencer;
 import org.eclipse.xtext.generator.serializer.SyntacticSequencerUtil;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
 import org.eclipse.xtext.util.Pair;
@@ -39,9 +38,6 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
   
   @Inject
   private GrammarAccess grammarAccess;
-  
-  @Inject
-  private SyntacticSequencer sequencer;
   
   @Inject
   private SyntacticSequencerUtil util;
@@ -91,7 +87,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
           _builder.append(_imported_1, "	");
           _builder.append(" match_");
           String _first = group.getFirst();
-          _builder.append(((String)_first), "	");
+          _builder.append(_first, "	");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
         }
@@ -117,10 +113,10 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
           _builder.append("\t\t");
           _builder.append("match_");
           String _first_1 = group_1.getFirst();
-          _builder.append(((String)_first_1), "		");
+          _builder.append(_first_1, "		");
           _builder.append(" = ");
           AbstractElementAlias _second = group_1.getSecond();
-          String _elementAliasToConstructor = this.util.elementAliasToConstructor(((AbstractElementAlias)_second), file);
+          String _elementAliasToConstructor = this.util.elementAliasToConstructor(_second, file);
           _builder.append(_elementAliasToConstructor, "		");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
@@ -167,7 +163,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
           _builder.append(" ");
           _builder.append("*     ");
           AbstractElementAlias _second_1 = group_2.getSecond();
-          _builder.append(((AbstractElementAlias)_second_1), "	 ");
+          _builder.append(_second_1, "	 ");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
           _builder.append(" ");
@@ -176,7 +172,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
           _builder.append("\t");
           _builder.append("protected void emit_");
           String _first_2 = group_2.getFirst();
-          _builder.append(((String)_first_2), "	");
+          _builder.append(_first_2, "	");
           _builder.append("(EObject semanticObject, ");
           String _imported_3 = file.imported(org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable.class);
           _builder.append(_imported_3, "	");
@@ -214,7 +210,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
           }
         };
       Iterable<AbstractRule> _filter = IterableExtensions.<AbstractRule>filter(_allRules, _function);
-      final Iterable<AbstractRule> rules = ((Iterable<AbstractRule>)_filter);
+      final Iterable<AbstractRule> rules = _filter;
       final Function1<AbstractRule,Iterable<RuleCall>> _function_1 = new Function1<AbstractRule,Iterable<RuleCall>>() {
           public Iterable<RuleCall> apply(final AbstractRule r) {
             List<RuleCall> _containedRuleCalls = GrammarUtil.containedRuleCalls(r);
@@ -234,12 +230,12 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
                 }
               };
             Iterable<RuleCall> _filter_1 = IterableExtensions.<RuleCall>filter(_containedRuleCalls, _function);
-            return ((Iterable<RuleCall>)_filter_1);
+            return _filter_1;
           }
         };
       Iterable<Iterable<RuleCall>> _map = IterableExtensions.<AbstractRule, Iterable<RuleCall>>map(rules, _function_1);
-      Iterable<RuleCall> _flatten = IterableExtensions.<RuleCall>flatten(((Iterable<Iterable<RuleCall>>)_map));
-      final Iterable<RuleCall> calls = ((Iterable<RuleCall>)_flatten);
+      Iterable<RuleCall> _flatten = IterableExtensions.<RuleCall>flatten(_map);
+      final Iterable<RuleCall> calls = _flatten;
       final Function1<RuleCall,AbstractRule> _function_2 = new Function1<RuleCall,AbstractRule>() {
           public AbstractRule apply(final RuleCall e) {
             AbstractRule _rule = e.getRule();
@@ -247,7 +243,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
           }
         };
       Iterable<AbstractRule> _map_1 = IterableExtensions.<RuleCall, AbstractRule>map(calls, _function_2);
-      Set<AbstractRule> _set = IterableExtensions.<AbstractRule>toSet(((Iterable<AbstractRule>)_map_1));
+      Set<AbstractRule> _set = IterableExtensions.<AbstractRule>toSet(_map_1);
       final Function2<AbstractRule,AbstractRule,Integer> _function_3 = new Function2<AbstractRule,AbstractRule,Integer>() {
           public Integer apply(final AbstractRule r1, final AbstractRule r2) {
             String _name = r1.getName();
@@ -256,12 +252,12 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
             return _compareTo;
           }
         };
-      List<AbstractRule> _sort = IterableExtensions.<AbstractRule>sort(((Set<AbstractRule>)_set), new Comparator<AbstractRule>() {
+      List<AbstractRule> _sort = IterableExtensions.<AbstractRule>sort(_set, new Comparator<AbstractRule>() {
           public int compare(AbstractRule o1,AbstractRule o2) {
             return _function_3.apply(o1,o2);
           }
       });
-      _xblockexpression = (((List<AbstractRule>)_sort));
+      _xblockexpression = (_sort);
     }
     return _xblockexpression;
   }
@@ -295,42 +291,46 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     }
     if (!matched) {
       if (ele instanceof Alternatives) {
+        final Alternatives _alternatives = (Alternatives)ele;
         matched=true;
-        EList<AbstractElement> _elements = ((Alternatives)ele).getElements();
+        EList<AbstractElement> _elements = _alternatives.getElements();
         AbstractElement _head = IterableExtensions.<AbstractElement>head(_elements);
-        String _defaultValue = this.defaultValue(((AbstractElement)_head), visited);
+        String _defaultValue = this.defaultValue(_head, visited);
         _switchResult = _defaultValue;
       }
     }
     if (!matched) {
       if (ele instanceof Group) {
+        final Group _group = (Group)ele;
         matched=true;
-        EList<AbstractElement> _elements_1 = ((Group)ele).getElements();
+        EList<AbstractElement> _elements = _group.getElements();
         final Function1<AbstractElement,String> _function = new Function1<AbstractElement,String>() {
             public String apply(final AbstractElement e) {
-              String _defaultValue_1 = AbstractSyntacticSequencer.this.defaultValue(e, visited);
-              return _defaultValue_1;
+              String _defaultValue = AbstractSyntacticSequencer.this.defaultValue(e, visited);
+              return _defaultValue;
             }
           };
-        List<String> _map = ListExtensions.<AbstractElement, String>map(_elements_1, _function);
-        String _join = IterableExtensions.join(((List<String>)_map));
+        List<String> _map = ListExtensions.<AbstractElement, String>map(_elements, _function);
+        String _join = IterableExtensions.join(_map);
         _switchResult = _join;
       }
     }
     if (!matched) {
       if (ele instanceof Keyword) {
+        final Keyword _keyword = (Keyword)ele;
         matched=true;
-        String _value = ((Keyword)ele).getValue();
+        String _value = _keyword.getValue();
         _switchResult = _value;
       }
     }
     if (!matched) {
       if (ele instanceof RuleCall) {
+        final RuleCall _ruleCall = (RuleCall)ele;
         matched=true;
-        AbstractRule _rule = ((RuleCall)ele).getRule();
+        AbstractRule _rule = _ruleCall.getRule();
         AbstractElement _alternatives = _rule.getAlternatives();
-        String _defaultValue_1 = this.defaultValue(_alternatives, visited);
-        _switchResult = _defaultValue_1;
+        String _defaultValue = this.defaultValue(_alternatives, visited);
+        _switchResult = _defaultValue;
       }
     }
     if (!matched) {
@@ -399,7 +399,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     _builder.append("return \"");
     AbstractElement _alternatives = rule.getAlternatives();
     HashSet<AbstractElement> _newHashSet = CollectionLiterals.<AbstractElement>newHashSet();
-    String _defaultValue = this.defaultValue(_alternatives, ((HashSet<AbstractElement>)_newHashSet));
+    String _defaultValue = this.defaultValue(_alternatives, _newHashSet);
     String _convertToJavaString = Strings.convertToJavaString(_defaultValue);
     _builder.append(_convertToJavaString, "	");
     _builder.append("\";");
@@ -444,14 +444,14 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
         }
         _builder.append("if(match_");
         String _first = group.getFirst();
-        _builder.append(((String)_first), "		");
+        _builder.append(_first, "		");
         _builder.append(".equals(syntax))");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
         _builder.append("\t");
         _builder.append("emit_");
         String _first_1 = group.getFirst();
-        _builder.append(((String)_first_1), "			");
+        _builder.append(_first_1, "			");
         _builder.append("(semanticObject, getLastNavigableState(), syntaxNodes);");
         _builder.newLineIfNotEmpty();
       }

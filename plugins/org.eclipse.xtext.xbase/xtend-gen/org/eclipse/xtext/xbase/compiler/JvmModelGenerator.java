@@ -723,15 +723,17 @@ public class JvmModelGenerator implements IGenerator {
               boolean matched = false;
               if (!matched) {
                 if (op instanceof JvmOperation) {
+                  final JvmOperation _jvmOperation = (JvmOperation)op;
                   matched=true;
-                  JvmTypeReference _returnType = ((JvmOperation)op).getReturnType();
+                  JvmTypeReference _returnType = _jvmOperation.getReturnType();
                   _switchResult = _returnType;
                 }
               }
               if (!matched) {
                 if (op instanceof JvmConstructor) {
+                  final JvmConstructor _jvmConstructor = (JvmConstructor)op;
                   matched=true;
-                  JvmTypeReference _typeForName = this._typeReferences.getTypeForName(Void.TYPE, ((JvmConstructor)op));
+                  JvmTypeReference _typeForName = this._typeReferences.getTypeForName(Void.TYPE, _jvmConstructor);
                   _switchResult = _typeForName;
                 }
               }

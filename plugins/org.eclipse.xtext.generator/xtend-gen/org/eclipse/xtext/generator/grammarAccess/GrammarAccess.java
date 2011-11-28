@@ -205,27 +205,29 @@ public class GrammarAccess {
     boolean matched = false;
     if (!matched) {
       if (cnt instanceof AbstractElement) {
+        final AbstractElement _abstractElement = (AbstractElement)cnt;
         matched=true;
-        String _gaRuleElementAccessor = this.gaRuleElementAccessor(((AbstractElement)cnt));
+        String _gaRuleElementAccessor = this.gaRuleElementAccessor(_abstractElement);
         String _operator_plus = StringExtensions.operator_plus(_gaRuleElementAccessor, ".getType()");
         _switchResult = _operator_plus;
       }
     }
     if (!matched) {
       if (cnt instanceof AbstractRule) {
+        final AbstractRule _abstractRule = (AbstractRule)cnt;
         matched=true;
-        String _gaRuleAccessor = this.gaRuleAccessor(((AbstractRule)cnt));
-        String _operator_plus_1 = StringExtensions.operator_plus(_gaRuleAccessor, ".getType()");
-        _switchResult = _operator_plus_1;
+        String _gaRuleAccessor = this.gaRuleAccessor(_abstractRule);
+        String _operator_plus = StringExtensions.operator_plus(_gaRuleAccessor, ".getType()");
+        _switchResult = _operator_plus;
       }
     }
     if (!matched) {
       EObject _eContainer_1 = ele.eContainer();
       EClass _eClass = _eContainer_1.eClass();
       String _name = _eClass.getName();
-      String _operator_plus_2 = StringExtensions.operator_plus("<error: unknown type ", _name);
-      String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, ">");
-      _switchResult = _operator_plus_3;
+      String _operator_plus = StringExtensions.operator_plus("<error: unknown type ", _name);
+      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, ">");
+      _switchResult = _operator_plus_1;
     }
     return _switchResult;
   }
@@ -240,15 +242,17 @@ public class GrammarAccess {
     boolean matched = false;
     if (!matched) {
       if (ele instanceof AbstractElement) {
+        final AbstractElement _abstractElement = (AbstractElement)ele;
         matched=true;
-        String _gaRuleElementAccessor = this.gaRuleElementAccessor(((AbstractElement)ele));
+        String _gaRuleElementAccessor = this.gaRuleElementAccessor(_abstractElement);
         _switchResult = _gaRuleElementAccessor;
       }
     }
     if (!matched) {
       if (ele instanceof AbstractRule) {
+        final AbstractRule _abstractRule = (AbstractRule)ele;
         matched=true;
-        String _gaRuleAccessor = this.gaRuleAccessor(((AbstractRule)ele));
+        String _gaRuleAccessor = this.gaRuleAccessor(_abstractRule);
         _switchResult = _gaRuleAccessor;
       }
     }

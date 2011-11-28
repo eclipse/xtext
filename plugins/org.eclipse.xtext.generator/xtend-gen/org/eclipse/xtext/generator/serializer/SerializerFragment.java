@@ -143,7 +143,7 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
           for (final Pair<String,String> obj : _render2Dot) {
             String _key = obj.getKey();
             String _value = obj.getValue();
-            ctx.writeFile(Generator.SRC_GEN, ((String)_key), ((String)_value));
+            ctx.writeFile(Generator.SRC_GEN, _key, _value);
           }
         }
       }
@@ -152,6 +152,6 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
   public List<String> getExportedPackagesRtList(final Grammar grammar) {
     String _packageName = this.semanticSequencer.getPackageName();
     ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(_packageName);
-    return ((ArrayList<String>)_newArrayList);
+    return _newArrayList;
   }
 }
