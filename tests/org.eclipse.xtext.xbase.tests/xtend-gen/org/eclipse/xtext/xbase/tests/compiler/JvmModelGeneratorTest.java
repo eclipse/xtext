@@ -235,14 +235,14 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       String _operator_plus = StringExtensions.operator_plus(IFileSystemAccess.DEFAULT_OUTPUT, _replace);
       String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, ".java");
       CharSequence _get = _files.get(_operator_plus_1);
-      String _string = _get.toString();
+      String _string = ((CharSequence)_get).toString();
       final String code = _string;
       String _identifier_1 = type.getIdentifier();
       Class<? extends Object> _compileToClass = this.javaCompiler.compileToClass(_identifier_1, code);
       final Class<? extends Object> compiledClass = _compileToClass;
       EList<EObject> _contents_1 = res.getContents();
       EObject _head = IterableExtensions.<EObject>head(_contents_1);
-      this.helper.assertNoErrors(_head);
+      this.helper.assertNoErrors(((EObject)_head));
       return compiledClass;
   }
 }

@@ -78,7 +78,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
           return _function.apply(o1,o2);
         }
     });
-    return _sort;
+    return ((List<T>)_sort);
   }
   
   public Iterable<EPackage> getAccessedPackages() {
@@ -98,10 +98,10 @@ public class AbstractSemanticSequencer extends GeneratedFile {
           return _ePackage;
         }
       };
-    Iterable<EPackage> _map = IterableExtensions.<IConstraint, EPackage>map(_filter, _function_1);
-    Set<EPackage> _set = IterableExtensions.<EPackage>toSet(_map);
-    List<EPackage> _sort = this.<EPackage>sort(_set);
-    return _sort;
+    Iterable<EPackage> _map = IterableExtensions.<IConstraint, EPackage>map(((Iterable<IConstraint>)_filter), _function_1);
+    Set<EPackage> _set = IterableExtensions.<EPackage>toSet(((Iterable<EPackage>)_map));
+    List<EPackage> _sort = this.<EPackage>sort(((Set<EPackage>)_set));
+    return ((List<EPackage>)_sort);
   }
   
   public Iterable<EClass> getAccessedClasses(final EPackage pkg) {
@@ -127,10 +127,10 @@ public class AbstractSemanticSequencer extends GeneratedFile {
           return ((Boolean)_operator_and);
         }
       };
-    Iterable<EClass> _filter = IterableExtensions.<EClass>filter(_map, _function_1);
-    Set<EClass> _set = IterableExtensions.<EClass>toSet(_filter);
-    List<EClass> _sort = this.<EClass>sort(_set);
-    return _sort;
+    Iterable<EClass> _filter = IterableExtensions.<EClass>filter(((Iterable<EClass>)_map), _function_1);
+    Set<EClass> _set = IterableExtensions.<EClass>toSet(((Iterable<EClass>)_filter));
+    List<EClass> _sort = this.<EClass>sort(((Set<EClass>)_set));
+    return ((List<EClass>)_sort);
   }
   
   public Iterable<EClass> getAccessedClasses() {
@@ -142,9 +142,9 @@ public class AbstractSemanticSequencer extends GeneratedFile {
         }
       };
     Iterable<EClass> _map = IterableExtensions.<IConstraint, EClass>map(_grammarConstraints, _function);
-    Set<EClass> _set = IterableExtensions.<EClass>toSet(_map);
-    List<EClass> _sort = this.<EClass>sort(_set);
-    return _sort;
+    Set<EClass> _set = IterableExtensions.<EClass>toSet(((Iterable<EClass>)_map));
+    List<EClass> _sort = this.<EClass>sort(((Set<EClass>)_set));
+    return ((List<EClass>)_sort);
   }
   
   public Map<IConstraint,List<EObject>> getAccessedConstraints(final EClass clazz) {
@@ -169,7 +169,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
   
   public HashSet<Grammar> getGrammars(final IConstraintElement ele) {
       HashSet<Grammar> _newHashSet = CollectionLiterals.<Grammar>newHashSet();
-      final HashSet<Grammar> result = _newHashSet;
+      final HashSet<Grammar> result = ((HashSet<Grammar>)_newHashSet);
       boolean _operator_and = false;
       boolean _operator_notEquals = ObjectExtensions.operator_notEquals(ele, null);
       if (!_operator_notEquals) {
@@ -202,8 +202,8 @@ public class AbstractSemanticSequencer extends GeneratedFile {
             }
           };
         List<HashSet<Grammar>> _map = ListExtensions.<IConstraintElement, HashSet<Grammar>>map(_children_1, _function);
-        Iterable<Grammar> _flatten = IterableExtensions.<Grammar>flatten(_map);
-        for (final Grammar g : _flatten) {
+        Iterable<Grammar> _flatten = IterableExtensions.<Grammar>flatten(((List<HashSet<Grammar>>)_map));
+        for (final Grammar g : ((Iterable<Grammar>)_flatten)) {
           result.add(g);
         }
       }
@@ -252,7 +252,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
         }
       };
     Grammar _reduce = IterableExtensions.<Grammar>reduce(_grammars, _function);
-    return _reduce;
+    return ((Grammar)_reduce);
   }
   
   public boolean usesSuperGrammar() {
@@ -277,7 +277,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
           return ((Boolean)_operator_and);
         }
       };
-    boolean _exists = IterableExtensions.<Grammar>exists(_map, _function_1);
+    boolean _exists = IterableExtensions.<Grammar>exists(((Iterable<Grammar>)_map), _function_1);
     return _exists;
   }
   
@@ -358,7 +358,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
           _builder.append("\t");
           EList<Grammar> _usedGrammars = this.grammar.getUsedGrammars();
           Grammar _head = IterableExtensions.<Grammar>head(_usedGrammars);
-          String _qualifiedName = this.sequencer.getQualifiedName(_head);
+          String _qualifiedName = this.sequencer.getQualifiedName(((Grammar)_head));
           String _imported_1 = file.imported(_qualifiedName);
           final String superGrammar = _imported_1;
           _builder.newLineIfNotEmpty();
@@ -435,7 +435,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
             return _genMethodSequence;
           }
         };
-      String _join = IterableExtensions.<IConstraint>join(_filter, "\n\n", _function_1);
+      String _join = IterableExtensions.<IConstraint>join(((Iterable<IConstraint>)_filter), "\n\n", _function_1);
       _builder.append(_join, "	");
       _builder.newLineIfNotEmpty();
       _builder.append("}");
@@ -493,12 +493,12 @@ public class AbstractSemanticSequencer extends GeneratedFile {
               final Function1<Entry<IConstraint,List<EObject>>,String> _function = new Function1<Entry<IConstraint,List<EObject>>,String>() {
                   public String apply(final Entry<IConstraint,List<EObject>> e) {
                     IConstraint _key = e.getKey();
-                    String _name = _key.getName();
+                    String _name = ((IConstraint)_key).getName();
                     return _name;
                   }
                 };
-              List<Entry<IConstraint,List<EObject>>> _sortBy = IterableExtensions.<Entry<IConstraint,List<EObject>>, String>sortBy(_entrySet, _function);
-              for(final Entry<IConstraint,List<EObject>> ctx : _sortBy) {
+              List<Entry<IConstraint,List<EObject>>> _sortBy = IterableExtensions.<Entry<IConstraint,List<EObject>>, String>sortBy(((Set<Entry<IConstraint,List<EObject>>>)_entrySet), _function);
+              for(final Entry<IConstraint,List<EObject>> ctx : ((List<Entry<IConstraint,List<EObject>>>)_sortBy)) {
                 _builder.append("\t");
                 _builder.append("\t");
                 _builder.append("\t");
@@ -519,9 +519,9 @@ public class AbstractSemanticSequencer extends GeneratedFile {
                         return _contextName;
                       }
                     };
-                  List<EObject> _sortBy_1 = IterableExtensions.<EObject, String>sortBy(_value, _function_1);
+                  List<EObject> _sortBy_1 = IterableExtensions.<EObject, String>sortBy(((List<EObject>)_value), _function_1);
                   boolean hasAnyElements = false;
-                  for(final EObject c : _sortBy_1) {
+                  for(final EObject c : ((List<EObject>)_sortBy_1)) {
                     if (!hasAnyElements) {
                       hasAnyElements = true;
                     } else {
@@ -540,7 +540,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
                 _builder.append("\t");
                 _builder.append("sequence_");
                 IConstraint _key = ctx.getKey();
-                String _simpleName = _key.getSimpleName();
+                String _simpleName = ((IConstraint)_key).getSimpleName();
                 _builder.append(_simpleName, "				");
                 _builder.append("(context, (");
                 String _importedGenTypeName = file.importedGenTypeName(type);
@@ -627,7 +627,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     {
       HashSet<Grammar> _newHashSet = CollectionLiterals.<Grammar>newHashSet(this.grammar, null);
       Grammar _mostConcreteGrammar = this.getMostConcreteGrammar(c);
-      boolean _contains = _newHashSet.contains(_mostConcreteGrammar);
+      boolean _contains = ((HashSet<Grammar>)_newHashSet).contains(_mostConcreteGrammar);
       boolean _operator_not = BooleanExtensions.operator_not(_contains);
       if (_operator_not) {
         _builder.append("\t");
@@ -650,7 +650,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
                 }
               };
             Iterable<IFeatureInfo> _filter = IterableExtensions.<IFeatureInfo>filter(((Iterable<IFeatureInfo>)Conversions.doWrapArray(_features)), _function);
-            for(final IFeatureInfo f : _filter) {
+            for(final IFeatureInfo f : ((Iterable<IFeatureInfo>)_filter)) {
               _builder.append("\t");
               _builder.append("\t");
               _builder.append("if(transientValues.isValueTransient(");
@@ -703,7 +703,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
               IConstraintElement _body_3 = c.getBody();
               IFeatureInfo _featureInfo_1 = _body_3.getFeatureInfo();
               ArrayList<IFeatureInfo> _newArrayList = CollectionLiterals.<IFeatureInfo>newArrayList(_featureInfo_1);
-              _xifexpression_1 = _newArrayList;
+              _xifexpression_1 = ((ArrayList<IFeatureInfo>)_newArrayList);
             } else {
               IConstraintElement _body_4 = c.getBody();
               List<IConstraintElement> _children = _body_4.getChildren();
@@ -721,14 +721,14 @@ public class AbstractSemanticSequencer extends GeneratedFile {
                     return _featureInfo_2;
                   }
                 };
-              Iterable<IFeatureInfo> _map = IterableExtensions.<IConstraintElement, IFeatureInfo>map(_filter_1, _function_2);
-              _xifexpression_1 = _map;
+              Iterable<IFeatureInfo> _map = IterableExtensions.<IConstraintElement, IFeatureInfo>map(((Iterable<IConstraintElement>)_filter_1), _function_2);
+              _xifexpression_1 = ((Iterable<IFeatureInfo>)_map);
             }
             for(final IFeatureInfo f_1 : _xifexpression_1) {
               _builder.append("\t");
               IConstraintElement[] _assignments = f_1.getAssignments();
               IConstraintElement _get = ((List<IConstraintElement>)Conversions.doWrapArray(_assignments)).get(0);
-              final IConstraintElement assignment = _get;
+              final IConstraintElement assignment = ((IConstraintElement)_get);
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
               _builder.append("feeder.accept(grammarAccess.");

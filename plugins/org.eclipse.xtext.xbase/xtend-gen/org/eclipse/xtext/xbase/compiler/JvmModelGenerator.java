@@ -180,9 +180,9 @@ public class JvmModelGenerator implements IGenerator {
             return ((Boolean)_operator_notEquals);
           }
         };
-      Iterable<CharSequence> _filter = IterableExtensions.<CharSequence>filter(_map, _function_1);
+      Iterable<CharSequence> _filter = IterableExtensions.<CharSequence>filter(((List<CharSequence>)_map), _function_1);
       boolean hasAnyElements = false;
-      for(final CharSequence memberCode : _filter) {
+      for(final CharSequence memberCode : ((Iterable<CharSequence>)_filter)) {
         if (!hasAnyElements) {
           hasAnyElements = true;
         } else {
@@ -332,7 +332,7 @@ public class JvmModelGenerator implements IGenerator {
             }
           };
         List<String> _map = ListExtensions.<JvmTypeReference, String>map(_superTypes_1, _function);
-        String _join = IterableExtensions.join(_map, ", ");
+        String _join = IterableExtensions.join(((List<String>)_map), ", ");
         String _operator_plus = StringExtensions.operator_plus("extends ", _join);
         String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, " ");
         _xifexpression = _operator_plus_1;
@@ -347,7 +347,7 @@ public class JvmModelGenerator implements IGenerator {
               }
             };
           Iterable<JvmTypeReference> _filter = IterableExtensions.<JvmTypeReference>filter(_superTypes_2, _function_1);
-          final Iterable<JvmTypeReference> withoutObject = _filter;
+          final Iterable<JvmTypeReference> withoutObject = ((Iterable<JvmTypeReference>)_filter);
           final Function1<JvmTypeReference,Boolean> _function_2 = new Function1<JvmTypeReference,Boolean>() {
               public Boolean apply(final JvmTypeReference typeRef) {
                 boolean _operator_and = false;
@@ -364,8 +364,8 @@ public class JvmModelGenerator implements IGenerator {
               }
             };
           Iterable<JvmTypeReference> _filter_1 = IterableExtensions.<JvmTypeReference>filter(withoutObject, _function_2);
-          JvmTypeReference _head = IterableExtensions.<JvmTypeReference>head(_filter_1);
-          final JvmTypeReference superClazz = _head;
+          JvmTypeReference _head = IterableExtensions.<JvmTypeReference>head(((Iterable<JvmTypeReference>)_filter_1));
+          final JvmTypeReference superClazz = ((JvmTypeReference)_head);
           final Function1<JvmTypeReference,Boolean> _function_3 = new Function1<JvmTypeReference,Boolean>() {
               public Boolean apply(final JvmTypeReference typeRef) {
                 boolean _operator_notEquals = ObjectExtensions.operator_notEquals(typeRef, superClazz);
@@ -373,7 +373,7 @@ public class JvmModelGenerator implements IGenerator {
               }
             };
           Iterable<JvmTypeReference> _filter_2 = IterableExtensions.<JvmTypeReference>filter(withoutObject, _function_3);
-          final Iterable<JvmTypeReference> superInterfaces = _filter_2;
+          final Iterable<JvmTypeReference> superInterfaces = ((Iterable<JvmTypeReference>)_filter_2);
           String result = "";
           boolean _operator_notEquals = ObjectExtensions.operator_notEquals(superClazz, null);
           if (_operator_notEquals) {
@@ -393,7 +393,7 @@ public class JvmModelGenerator implements IGenerator {
                 }
               };
             Iterable<String> _map_1 = IterableExtensions.<JvmTypeReference, String>map(superInterfaces, _function_4);
-            String _join_1 = IterableExtensions.join(_map_1, ", ");
+            String _join_1 = IterableExtensions.join(((Iterable<String>)_map_1), ", ");
             String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, _join_1);
             String _operator_plus_6 = StringExtensions.operator_plus(_operator_plus_5, " ");
             result = _operator_plus_6;
@@ -487,7 +487,7 @@ public class JvmModelGenerator implements IGenerator {
         }
       };
     List<String> _map = ListExtensions.<JvmFormalParameter, String>map(_parameters, _function);
-    String _join = IterableExtensions.join(_map, ", ");
+    String _join = IterableExtensions.join(((List<String>)_map), ", ");
     _builder.append(_join, "");
     _builder.append(")");
     CharSequence _generateThrowsClause = this.generateThrowsClause(it, importManager);
@@ -552,7 +552,7 @@ public class JvmModelGenerator implements IGenerator {
           }
         };
       List<String> _map = ListExtensions.<JvmFormalParameter, String>map(_parameters_1, _function);
-      String _join = IterableExtensions.join(_map, ", ");
+      String _join = IterableExtensions.join(((List<String>)_map), ", ");
       _builder.append(_join, "");
       _builder.append(")");
       CharSequence _generateThrowsClause = this.generateThrowsClause(it, importManager);
@@ -577,14 +577,14 @@ public class JvmModelGenerator implements IGenerator {
     {
       EList<Adapter> _eAdapters = it.eAdapters();
       Iterable<CompilationStrategyAdapter> _filter = IterableExtensions.<CompilationStrategyAdapter>filter(_eAdapters, org.eclipse.xtext.xbase.compiler.CompilationStrategyAdapter.class);
-      CompilationStrategyAdapter _head = IterableExtensions.<CompilationStrategyAdapter>head(_filter);
-      final CompilationStrategyAdapter adapter = _head;
+      CompilationStrategyAdapter _head = IterableExtensions.<CompilationStrategyAdapter>head(((Iterable<CompilationStrategyAdapter>)_filter));
+      final CompilationStrategyAdapter adapter = ((CompilationStrategyAdapter)_head);
       String _xifexpression = null;
       boolean _operator_notEquals = ObjectExtensions.operator_notEquals(adapter, null);
       if (_operator_notEquals) {
         Function1<ImportManager,? extends CharSequence> _compilationStrategy = adapter.getCompilationStrategy();
         CharSequence _apply = _compilationStrategy.apply(importManager);
-        String _operator_plus = StringExtensions.operator_plus(" = ", _apply);
+        String _operator_plus = StringExtensions.operator_plus(" = ", ((CharSequence)_apply));
         _xifexpression = _operator_plus;
       } else {
         String _xblockexpression_1 = null;
@@ -651,7 +651,7 @@ public class JvmModelGenerator implements IGenerator {
       EList<JvmTypeConstraint> _constraints = it.getConstraints();
       Iterable<JvmUpperBound> _filter = IterableExtensions.<JvmUpperBound>filter(_constraints, org.eclipse.xtext.common.types.JvmUpperBound.class);
       boolean hasAnyElements = false;
-      for(final JvmUpperBound it_1 : _filter) {
+      for(final JvmUpperBound it_1 : ((Iterable<JvmUpperBound>)_filter)) {
         if (!hasAnyElements) {
           hasAnyElements = true;
           _builder.append(" extends ", "");
@@ -698,13 +698,13 @@ public class JvmModelGenerator implements IGenerator {
   public CharSequence generateBody(final JvmExecutable op, final ImportManager importManager) {
       EList<Adapter> _eAdapters = op.eAdapters();
       Iterable<CompilationStrategyAdapter> _filter = IterableExtensions.<CompilationStrategyAdapter>filter(_eAdapters, org.eclipse.xtext.xbase.compiler.CompilationStrategyAdapter.class);
-      CompilationStrategyAdapter _head = IterableExtensions.<CompilationStrategyAdapter>head(_filter);
-      final CompilationStrategyAdapter adapter = _head;
+      CompilationStrategyAdapter _head = IterableExtensions.<CompilationStrategyAdapter>head(((Iterable<CompilationStrategyAdapter>)_filter));
+      final CompilationStrategyAdapter adapter = ((CompilationStrategyAdapter)_head);
       boolean _operator_notEquals = ObjectExtensions.operator_notEquals(adapter, null);
       if (_operator_notEquals) {
         Function1<ImportManager,? extends CharSequence> _compilationStrategy = adapter.getCompilationStrategy();
         CharSequence _apply = _compilationStrategy.apply(importManager);
-        return _apply;
+        return ((CharSequence)_apply);
       } else {
         {
           XExpression _associatedExpression = this._iLogicalContainerProvider.getAssociatedExpression(op);
@@ -741,7 +741,7 @@ public class JvmModelGenerator implements IGenerator {
               final JvmTypeReference returnType = _switchResult;
               EList<JvmTypeReference> _exceptions = op.getExceptions();
               Set<JvmTypeReference> _set = IterableExtensions.<JvmTypeReference>toSet(_exceptions);
-              this.compiler.compile(expression, appendable, returnType, _set);
+              this.compiler.compile(expression, appendable, returnType, ((Set<JvmTypeReference>)_set));
               String _string = appendable.toString();
               String _removeSurroundingCurlies = this.removeSurroundingCurlies(_string);
               return _removeSurroundingCurlies;
@@ -797,8 +797,8 @@ public class JvmModelGenerator implements IGenerator {
     {
       EList<Adapter> _eAdapters = it.eAdapters();
       Iterable<DocumentationAdapter> _filter = IterableExtensions.<DocumentationAdapter>filter(_eAdapters, org.eclipse.xtext.xbase.compiler.DocumentationAdapter.class);
-      DocumentationAdapter _head = IterableExtensions.<DocumentationAdapter>head(_filter);
-      final DocumentationAdapter adapter = _head;
+      DocumentationAdapter _head = IterableExtensions.<DocumentationAdapter>head(((Iterable<DocumentationAdapter>)_filter));
+      final DocumentationAdapter adapter = ((DocumentationAdapter)_head);
       StringConcatenation _xifexpression = null;
       String _documentation = adapter==null?(String)null:adapter.getDocumentation();
       boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_documentation);
@@ -898,7 +898,7 @@ public class JvmModelGenerator implements IGenerator {
       if (_operator_equals) {
         EList<Short> _values_1 = it.getValues();
         Short _head = IterableExtensions.<Short>head(_values_1);
-        _builder.append(_head, "");
+        _builder.append(((Short)_head), "");
       } else {
         _builder.append("{");
         EList<Short> _values_2 = it.getValues();
@@ -920,7 +920,7 @@ public class JvmModelGenerator implements IGenerator {
         _builder.append("\"");
         EList<String> _values_1 = it.getValues();
         String _head = IterableExtensions.<String>head(_values_1);
-        _builder.append(_head, "");
+        _builder.append(((String)_head), "");
         _builder.append("\"");
       } else {
         _builder.append("{");
@@ -933,7 +933,7 @@ public class JvmModelGenerator implements IGenerator {
             }
           };
         List<String> _map = ListExtensions.<String, String>map(_values_2, _function);
-        String _join = IterableExtensions.join(_map, ",");
+        String _join = IterableExtensions.join(((List<String>)_map), ",");
         _builder.append(_join, "");
         _builder.append("}");
       }
@@ -950,7 +950,7 @@ public class JvmModelGenerator implements IGenerator {
       if (_operator_equals) {
         EList<JvmTypeReference> _values_1 = it.getValues();
         JvmTypeReference _head = IterableExtensions.<JvmTypeReference>head(_values_1);
-        String _serialize = this.serialize(_head, importManager);
+        String _serialize = this.serialize(((JvmTypeReference)_head), importManager);
         _builder.append(_serialize, "");
         _builder.append(".class");
       } else {
@@ -964,7 +964,7 @@ public class JvmModelGenerator implements IGenerator {
             }
           };
         List<String> _map = ListExtensions.<JvmTypeReference, String>map(_values_2, _function);
-        String _join = IterableExtensions.join(_map, ",");
+        String _join = IterableExtensions.join(((List<String>)_map), ",");
         _builder.append(_join, "");
         _builder.append("}");
       }
@@ -981,7 +981,7 @@ public class JvmModelGenerator implements IGenerator {
       if (_operator_equals) {
         EList<Boolean> _values_1 = it.getValues();
         Boolean _head = IterableExtensions.<Boolean>head(_values_1);
-        _builder.append(_head, "");
+        _builder.append(((Boolean)_head), "");
       } else {
         _builder.append("{");
         EList<Boolean> _values_2 = it.getValues();
@@ -1024,7 +1024,7 @@ public class JvmModelGenerator implements IGenerator {
           this.compiler.toJavaExpression(((XExpression) _head_1), appendable);
           EList<Object> _values_3 = it.getValues();
           Iterable<Object> _tail = IterableExtensions.<Object>tail(_values_3);
-          Iterable<XExpression> _filter = IterableExtensions.<XExpression>filter(_tail, org.eclipse.xtext.xbase.XExpression.class);
+          Iterable<XExpression> _filter = IterableExtensions.<XExpression>filter(((Iterable<Object>)_tail), org.eclipse.xtext.xbase.XExpression.class);
           final Procedure1<XExpression> _function = new Procedure1<XExpression>() {
               public void apply(final XExpression it) {
                 {
@@ -1033,7 +1033,7 @@ public class JvmModelGenerator implements IGenerator {
                 }
               }
             };
-          IterableExtensions.<XExpression>forEach(_filter, _function);
+          IterableExtensions.<XExpression>forEach(((Iterable<XExpression>)_filter), _function);
           appendable.append("}");
         }
       }

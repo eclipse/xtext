@@ -25,7 +25,7 @@ public class StatemachineGenerator implements IGenerator {
     String _operator_plus = StringExtensions.operator_plus(_className, ".java");
     EList<EObject> _contents = resource.getContents();
     EObject _head = IterableExtensions.<EObject>head(_contents);
-    CharSequence _javaCode = this.toJavaCode(((Statemachine) _head));
+    CharSequence _javaCode = this.toJavaCode(((Statemachine) ((EObject)_head)));
     fsa.generateFile(_operator_plus, _javaCode);
   }
   
@@ -91,7 +91,7 @@ public class StatemachineGenerator implements IGenerator {
     _builder.append("String currentState = \"");
     EList<State> _states = sm.getStates();
     State _head = IterableExtensions.<State>head(_states);
-    String _name = _head.getName();
+    String _name = ((State)_head).getName();
     _builder.append(_name, "		");
     _builder.append("\";");
     _builder.newLineIfNotEmpty();
@@ -128,7 +128,7 @@ public class StatemachineGenerator implements IGenerator {
         _builder.append("currentState = \"");
         EList<State> _states_2 = sm.getStates();
         State _head_1 = IterableExtensions.<State>head(_states_2);
-        String _name_2 = _head_1.getName();
+        String _name_2 = ((State)_head_1).getName();
         _builder.append(_name_2, "				");
         _builder.append("\";");
         _builder.newLineIfNotEmpty();
@@ -250,7 +250,7 @@ public class StatemachineGenerator implements IGenerator {
         }
       };
     List<String> _map = ListExtensions.<Transition, String>map(_transitions, _function);
-    String _join = IterableExtensions.join(_map, ", ");
+    String _join = IterableExtensions.join(((List<String>)_map), ", ");
     _builder.append(_join, "	");
     _builder.append("].\");");
     _builder.newLineIfNotEmpty();
