@@ -52,6 +52,9 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 	@Inject
 	private IOutlineTreeProvider treeProvider;
 
+	@Inject 
+	private OutlineFilterAndSorter filterAndSorter;
+	
 	@Inject
 	private IOutlineContribution.Composite contribution;
 
@@ -79,6 +82,7 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 		TreeViewer treeViewer = getTreeViewer();
 		treeViewer.setLabelProvider(labelProvider);
 		treeViewer.setContentProvider(contentProvider);
+		contentProvider.setFilterAndSorter(filterAndSorter);
 		treeViewer.setUseHashlookup(true);
 		List<IOutlineNode> initiallyExpandedNodes = xtextDocument
 				.readOnly(new IUnitOfWork<List<IOutlineNode>, XtextResource>() {
@@ -196,6 +200,13 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 		return treeProvider;
 	}
 
+	/**
+	 * @since 2.2
+	 */
+	public OutlineFilterAndSorter getFilterAndSorter() {
+		return filterAndSorter;
+	}
+	
 	protected void refreshViewer(final IOutlineNode rootNode, final Collection<IOutlineNode> nodesToBeExpanded,
 			final Collection<IOutlineNode> selectedNodes) {
 		DisplayRunHelper.runAsyncInDisplayThread(new Runnable() {

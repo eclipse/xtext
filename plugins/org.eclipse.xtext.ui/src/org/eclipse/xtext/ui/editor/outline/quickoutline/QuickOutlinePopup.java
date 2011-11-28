@@ -106,6 +106,12 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 	private OutlineNodeContentProvider contentProvider;
 
 	@Inject
+	private OutlineFilterAndSorter.IComparator comparator;
+	
+	@Inject
+	private QuickOutlineFilterAndSorter filterAndSorter;
+	
+	@Inject
 	private PrefixMatcher prefixMatcher;
 	
 	@Inject
@@ -194,6 +200,8 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 		treeViewer.addFilter(new NamePatternFilter());
 
 		treeViewer.setContentProvider(contentProvider);
+		filterAndSorter.setComparator(comparator);
+		contentProvider.setFilterAndSorter(filterAndSorter);
 		treeViewer.setLabelProvider(labelProvider);
 		treeViewer.setAutoExpandLevel(AbstractTreeViewer.ALL_LEVELS);
 		IOutlineNode rootNode = document.readOnly(new IUnitOfWork<IOutlineNode, XtextResource>() {
