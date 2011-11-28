@@ -30,6 +30,11 @@ public interface IAppendable {
 	void openScope();
 
 	String declareVariable(Object key, String proposedName);
+	
+	/**
+	 * declares a fresh variable, where the name is not used in the current or any parent scope.
+	 */
+	String declareFreshVariable(Object key, String proposedName);
 
 	String getName(Object key);
 	
