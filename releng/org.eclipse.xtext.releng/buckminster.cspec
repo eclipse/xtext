@@ -5,7 +5,6 @@
 		<!-- Third party -->
 		<cs:dependency name="org.apache.log4j" componentType="osgi.bundle"/>
         <cs:dependency name="org.apache.log4j.source" componentType="osgi.bundle"/>
-		<cs:dependency name="org.aopalliance" componentType="osgi.bundle" />
 		<cs:dependency name="org.easymock" componentType="osgi.bundle" />
 		<cs:dependency name="org.antlr.runtime.source" componentType="osgi.bundle" />
 		<cs:dependency name="javax.inject" componentType="osgi.bundle" />

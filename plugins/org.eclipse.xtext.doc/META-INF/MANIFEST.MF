@@ -25,5 +25,4 @@ Require-Bundle: org.eclipse.help,
  org.eclipse.xtext.xdoc.generator;bundle-version="0.1.0";resolution:=optional,
  org.eclipse.ui.ide;bundle-version="3.5.2";resolution:=optional,
  org.eclipse.core.filesystem;bundle-version="1.2.1";resolution:=optional,
- org.junit4;bundle-version="4.5.0";resolution:=optional,
- org.aopalliance;bundle-version="1.0.0";visibility:=reexport
+ org.junit4;bundle-version="4.5.0";resolution:=optional
