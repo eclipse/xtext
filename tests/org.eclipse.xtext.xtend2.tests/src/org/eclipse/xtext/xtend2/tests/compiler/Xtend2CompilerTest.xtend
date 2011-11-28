@@ -150,6 +150,37 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''')
 	}
 	
+	def testConstructorDeclaration_03() { 
+		assertCompilesTo('''
+			package foo
+			class Bar {
+				new() {
+					this(123.toString)
+				}
+				new(String s) {}
+			}
+		''', '''
+			package foo;
+			
+			import org.eclipse.xtext.xbase.lib.Functions.Function0;
+
+			@SuppressWarnings("all")
+			public class Bar {
+			  public Bar() {
+			    this(new Function0<String>() {
+			      public String apply() {
+			        String _string = ((Integer)123).toString();
+			        return _string;
+			      }
+			    }.apply());
+			  }
+			  
+			  public Bar(final String s) {
+			  }
+			}
+		''')
+	}
+	
 	def testSneakyThrow() { 
 		assertCompilesTo('''
 			package foo

@@ -105,6 +105,16 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		compileJavaCode("Z", code);
 	}
 	
+	public void testDeclaredConstructor_07() throws Exception {
+		String code = 
+				"  static int j " +
+				"  int i " +
+				"  new() { this(1 + j * 2 - 1) } " +
+				"  new(int i) { this.i = i } " +
+				"  def static invokeMe() { j = 47 new Y().i }";
+		invokeAndExpectStatic(Integer.valueOf(94), code, "invokeMe");
+	}
+	
 	public void testBug362236_01() throws Exception {
 		String code = 
 				"import java.util.List\n" +
