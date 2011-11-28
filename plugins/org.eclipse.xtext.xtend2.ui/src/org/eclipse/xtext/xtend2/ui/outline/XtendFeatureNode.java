@@ -19,6 +19,8 @@ public class XtendFeatureNode extends EObjectNode {
 
 	private boolean isDispatch;
 	
+	private boolean isStatic;
+	
 	public XtendFeatureNode(EObject eObject, IOutlineNode parent, Image image, Object text, boolean isLeaf) {
 		super(eObject, parent, image, text, isLeaf);
 	}
@@ -30,5 +32,12 @@ public class XtendFeatureNode extends EObjectNode {
 	public boolean isDispatch() {
 		return isDispatch;
 	}
+	
+	public void setStatic(boolean isStatic) {
+		this.isStatic = isStatic;
+	}
 
+	public boolean isStatic() {
+		return isStatic;
+	}
 }
