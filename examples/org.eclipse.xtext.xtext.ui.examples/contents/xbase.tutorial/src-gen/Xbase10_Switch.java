@@ -41,28 +41,31 @@ public class Xbase10_Switch {
     				boolean matched = false;
     				if (!matched) {
     					if (shape instanceof Circle) {
+    						final Circle _circle_1 = (Circle)shape;
     						matched=true;
-    						String _operator_plus = StringExtensions.operator_plus("a circle : diameter=", ((Integer)((Circle)shape).diameter));
+    						String _operator_plus = StringExtensions.operator_plus("a circle : diameter=", ((Integer)_circle_1.diameter));
     						_switchResult = _operator_plus;
     					}
     				}
     				if (!matched) {
     					if (shape instanceof Rectangle) {
-    						boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)((Rectangle)shape).height), ((Integer)((Rectangle)shape).width));
+    						final Rectangle _rectangle_2 = (Rectangle)shape;
+    						boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_rectangle_2.height), ((Integer)_rectangle_2.width));
     						if (_operator_equals) {
     							matched=true;
-    							String _operator_plus_1 = StringExtensions.operator_plus("a square : size=", ((Integer)((Rectangle)shape).width));
-    							_switchResult = _operator_plus_1;
+    							String _operator_plus = StringExtensions.operator_plus("a square : size=", ((Integer)_rectangle_2.width));
+    							_switchResult = _operator_plus;
     						}
     					}
     				}
     				if (!matched) {
     					if (shape instanceof Rectangle) {
+    						final Rectangle _rectangle_2 = (Rectangle)shape;
     						matched=true;
-    						String _operator_plus_2 = StringExtensions.operator_plus("a rectangle : width=", ((Integer)((Rectangle)shape).width));
-    						String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, ", height=");
-    						String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, ((Integer)((Rectangle)shape).height));
-    						_switchResult = _operator_plus_4;
+    						String _operator_plus = StringExtensions.operator_plus("a rectangle : width=", ((Integer)_rectangle_2.width));
+    						String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, ", height=");
+    						String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, ((Integer)_rectangle_2.height));
+    						_switchResult = _operator_plus_2;
     					}
     				}
     				return _switchResult;
