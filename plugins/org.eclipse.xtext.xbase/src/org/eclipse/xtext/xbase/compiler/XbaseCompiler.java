@@ -518,10 +518,10 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			Object element = b.getObject("this");
 			if (element instanceof JvmType) {
 				b.declareVariable(element, ((JvmType) element).getSimpleName()+".this");
-			}
-			Object superElement = b.getObject("super");
-			if (superElement instanceof JvmType) {
-				b.declareVariable(superElement, ((JvmType) superElement).getSimpleName()+".super");
+				Object superElement = b.getObject("super");
+				if (superElement instanceof JvmType) {
+					b.declareVariable(superElement, ((JvmType) element).getSimpleName()+".super");
+				}
 			}
 			compile(closure.getExpression(), b, operation.getReturnType());
 		} finally {

@@ -107,43 +107,56 @@ public abstract class AbstractXbaseCompiler {
 		boolean needsSneakyThrow = needsSneakyThrow(obj, Collections.<JvmTypeReference>emptySet());
 		boolean needsToBeWrapped = earlyExit || needsSneakyThrow || isVariableDeclarationRequired(obj, appendable);
 		if (needsToBeWrapped) {
-			appendable.append("new ");
-			JvmTypeReference procedureOrFunction = null;
-			if (isPrimitiveVoidExpected) {
-				procedureOrFunction = typeReferences.getTypeForName(Procedures.Procedure0.class, obj);
-			} else {
-				procedureOrFunction = typeReferences.getTypeForName(Functions.Function0.class, obj, expectedType);
-			}
-			referenceSerializer.serialize(procedureOrFunction, obj, appendable, false, false, true, false);
-			appendable.append("() {").increaseIndentation();
-			appendable.append("\npublic ");
-			referenceSerializer.serialize(primitives.asWrapperTypeIfPrimitive(expectedType), obj, appendable);
-			appendable.append(" apply() {").increaseIndentation();
-			if (needsSneakyThrow) {
-				appendable.append("\ntry {").increaseIndentation();
-			}
-			internalToJavaStatement(obj, appendable, !isPrimitiveVoidExpected && !isPrimitiveVoid && !earlyExit);
-			if (!isPrimitiveVoidExpected && !earlyExit) {
-					appendable.append("\nreturn ");
-					if (isPrimitiveVoid && !isPrimitiveVoidExpected) {
-						appendable.append("null");
-					} else {
-						internalToJavaExpression(obj, appendable);
+			appendable.openScope();
+			try {
+				Object thisElement = appendable.getObject("this");
+				if (thisElement instanceof JvmType) {
+					appendable.declareVariable(thisElement, ((JvmType) thisElement).getSimpleName()+".this");
+					Object superElement = appendable.getObject("super");
+					if (superElement instanceof JvmType) {
+						appendable.declareVariable(superElement, ((JvmType) thisElement).getSimpleName()+".super");
 					}
-					appendable.append(";");
-			}
-			if (needsSneakyThrow) {
-				String name = appendable.declareVariable(new Object(), "_e");
-				appendable.decreaseIndentation().append("\n} catch (Exception "+name+") {").increaseIndentation();
-				appendable.append("\nthrow ");
-				appendable.append(typeReferences.findDeclaredType(Exceptions.class, obj));
-				appendable.append(".sneakyThrow(");
-				appendable.append(name);
-				appendable.append(");");
+				}
+				appendable.append("new ");
+				JvmTypeReference procedureOrFunction = null;
+				if (isPrimitiveVoidExpected) {
+					procedureOrFunction = typeReferences.getTypeForName(Procedures.Procedure0.class, obj);
+				} else {
+					procedureOrFunction = typeReferences.getTypeForName(Functions.Function0.class, obj, expectedType);
+				}
+				referenceSerializer.serialize(procedureOrFunction, obj, appendable, false, false, true, false);
+				appendable.append("() {").increaseIndentation();
+				appendable.append("\npublic ");
+				referenceSerializer.serialize(primitives.asWrapperTypeIfPrimitive(expectedType), obj, appendable);
+				appendable.append(" apply() {").increaseIndentation();
+				if (needsSneakyThrow) {
+					appendable.append("\ntry {").increaseIndentation();
+				}
+				internalToJavaStatement(obj, appendable, !isPrimitiveVoidExpected && !isPrimitiveVoid && !earlyExit);
+				if (!isPrimitiveVoidExpected && !earlyExit) {
+						appendable.append("\nreturn ");
+						if (isPrimitiveVoid && !isPrimitiveVoidExpected) {
+							appendable.append("null");
+						} else {
+							internalToJavaExpression(obj, appendable);
+						}
+						appendable.append(";");
+				}
+				if (needsSneakyThrow) {
+					String name = appendable.declareVariable(new Object(), "_e");
+					appendable.decreaseIndentation().append("\n} catch (Exception "+name+") {").increaseIndentation();
+					appendable.append("\nthrow ");
+					appendable.append(typeReferences.findDeclaredType(Exceptions.class, obj));
+					appendable.append(".sneakyThrow(");
+					appendable.append(name);
+					appendable.append(");");
+					appendable.decreaseIndentation().append("\n}");
+				}
 				appendable.decreaseIndentation().append("\n}");
+				appendable.decreaseIndentation().append("\n}.apply()");
+			} finally {
+				appendable.closeScope();
 			}
-			appendable.decreaseIndentation().append("\n}");
-			appendable.decreaseIndentation().append("\n}.apply()");
 		} else {
 			internalToJavaExpression(obj, appendable);
 		}
