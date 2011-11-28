@@ -13,14 +13,11 @@ import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter.IFilter;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlinePage;
 
-import com.google.inject.Inject;
-
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 public abstract class AbstractFilterOutlineContribution extends AbstractToggleOutlineContribution {
 
-	@Inject
 	private OutlineFilterAndSorter outlineFilterAndSorter;
 
 	private IFilter filter;
@@ -53,6 +50,7 @@ public abstract class AbstractFilterOutlineContribution extends AbstractToggleOu
 	@Override
 	public void register(OutlinePage outlinePage) {
 		super.register(outlinePage);
+		outlineFilterAndSorter = outlinePage.getFilterAndSorter();
 		outlineFilterAndSorter.addFilter(getFilter());
 		treeViewer = outlinePage.getTreeViewer();
 	}
