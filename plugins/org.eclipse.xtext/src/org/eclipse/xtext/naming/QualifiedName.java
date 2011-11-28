@@ -95,6 +95,9 @@ public class QualifiedName implements Comparable<QualifiedName> {
 	}
 
 	public QualifiedName append(String segment) {
+		if (segment == null) {
+			throw new IllegalArgumentException("Segment cannot be null");
+		}
 		String[] newSegments = new String[getSegmentCount() + 1];
 		System.arraycopy(segments, 0, newSegments, 0, segments.length);
 		newSegments[segments.length] = segment;
