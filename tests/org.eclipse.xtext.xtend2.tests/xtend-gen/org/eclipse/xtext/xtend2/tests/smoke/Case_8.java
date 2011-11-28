@@ -38,7 +38,7 @@ public class Case_8 {
       EObject _parse = this.helper.parse(seq);
       EList<EObject> _eContents = _parse.eContents();
       EObject _head = IterableExtensions.<EObject>head(_eContents);
-      return ((EObject)_head);
+      return _head;
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }

@@ -66,7 +66,7 @@ public class JvmModelTest extends AbstractJvmModelTest {
         final IResourceDescription desc = _resourceDescription;
         Iterable<IEObjectDescription> _exportedObjects = desc.getExportedObjects();
         ArrayList<Iterable<IEObjectDescription>> _newArrayList = CollectionLiterals.<Iterable<IEObjectDescription>>newArrayList(_exportedObjects);
-        final ArrayList<Iterable<IEObjectDescription>> list = ((ArrayList<Iterable<IEObjectDescription>>)_newArrayList);
+        final ArrayList<Iterable<IEObjectDescription>> list = _newArrayList;
         int _size = list.size();
         Assert.assertEquals(1, _size);
         Object _get_1 = field.get(resource);

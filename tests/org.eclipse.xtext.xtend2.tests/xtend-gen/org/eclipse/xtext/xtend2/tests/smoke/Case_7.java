@@ -12,9 +12,9 @@ public class Case_7 {
     Entry<String,List<String>> _xblockexpression = null;
     {
       ArrayList<Entry<String,List<String>>> _newArrayList = CollectionLiterals.<Entry<String,List<String>>>newArrayList();
-      final ArrayList<Entry<String,List<String>>> result = ((ArrayList<Entry<String,List<String>>>)_newArrayList);
+      final ArrayList<Entry<String,List<String>>> result = _newArrayList;
       Entry<String,List<String>> _head = result==null?(Entry<String,List<String>>)null:IterableExtensions.<Entry<String,List<String>>>head(result);
-      _xblockexpression = (((Entry<String,List<String>>)_head));
+      _xblockexpression = (_head);
     }
     return _xblockexpression;
   }

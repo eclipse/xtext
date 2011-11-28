@@ -25,7 +25,7 @@ public class Case_6 {
         }
       };
     List<Object> _map = ListExtensions.<ETypeParameter, Object>map(_eTypeParameters, _function);
-    return ((List<Object>)_map);
+    return _map;
   }
   
   protected Object _transform(final EPackage packageDecl) {
@@ -37,7 +37,7 @@ public class Case_6 {
         }
       };
     List<Object> _map = ListExtensions.<EObject, Object>map(_eContents, _function);
-    return ((List<Object>)_map);
+    return _map;
   }
   
   protected Object _transform(final EStructuralFeature entity) {
@@ -45,7 +45,7 @@ public class Case_6 {
     {
       final Object inferredType = null;
       ArrayList<EObject> _newArrayList = CollectionLiterals.<EObject>newArrayList(((EObject) inferredType));
-      _xblockexpression = (((ArrayList<EObject>)_newArrayList));
+      _xblockexpression = (_newArrayList);
     }
     return _xblockexpression;
   }

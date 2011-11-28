@@ -36,11 +36,11 @@ public class Context2DotRenderer {
     final Function1<EClass,Pair<EObject,EClass>> _function = new Function1<EClass,Pair<EObject,EClass>>() {
         public Pair<EObject,EClass> apply(final EClass t) {
           Pair<EObject,EClass> _operator_mappedTo = ObjectExtensions.<EObject, EClass>operator_mappedTo(ctx, t);
-          return ((Pair<EObject,EClass>)_operator_mappedTo);
+          return _operator_mappedTo;
         }
       };
     Iterable<Pair<EObject,EClass>> _map = IterableExtensions.<EClass, Pair<EObject,EClass>>map(_typesForContext, _function);
-    return ((Iterable<Pair<EObject,EClass>>)_map);
+    return _map;
   }
   
   public Iterable<Pair<EObject,EClass>> contexts() {
@@ -52,8 +52,8 @@ public class Context2DotRenderer {
         }
       };
     List<Iterable<Pair<EObject,EClass>>> _map = ListExtensions.<EObject, Iterable<Pair<EObject,EClass>>>map(_allContexts, _function);
-    Iterable<Pair<EObject,EClass>> _flatten = IterableExtensions.<Pair<EObject,EClass>>flatten(((List<Iterable<Pair<EObject,EClass>>>)_map));
-    return ((Iterable<Pair<EObject,EClass>>)_flatten);
+    Iterable<Pair<EObject,EClass>> _flatten = IterableExtensions.<Pair<EObject,EClass>>flatten(_map);
+    return _flatten;
   }
   
   public Iterable<Pair<String,String>> render2Dot(final GraphvizDotBuilder builder, final String name) {
@@ -63,11 +63,11 @@ public class Context2DotRenderer {
           String _fileName = Context2DotRenderer.this.getFileName(c, name);
           String _draw = builder.draw(c);
           Pair<String,String> _operator_mappedTo = ObjectExtensions.<String, String>operator_mappedTo(_fileName, _draw);
-          return ((Pair<String,String>)_operator_mappedTo);
+          return _operator_mappedTo;
         }
       };
     Iterable<Pair<String,String>> _map = IterableExtensions.<Pair<EObject,EClass>, Pair<String,String>>map(_contexts, _function);
-    return ((Iterable<Pair<String,String>>)_map);
+    return _map;
   }
   
   public String getFileName(final Pair<EObject,EClass> ctx, final String name) {
@@ -77,11 +77,11 @@ public class Context2DotRenderer {
       String _simpleName = this.naming.toSimpleName(_name);
       String _operator_plus = StringExtensions.operator_plus(_simpleName, "_");
       EClass _value = ctx.getValue();
-      String _name_1 = ((EClass)_value).getName();
+      String _name_1 = _value.getName();
       String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _name_1);
       String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "_");
       EObject _key = ctx.getKey();
-      String _contextName = this.nameFunction.getContextName(((EObject)_key));
+      String _contextName = this.nameFunction.getContextName(_key);
       String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, _contextName);
       String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, "_");
       String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, name);
