@@ -8,15 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
-import static com.google.common.collect.Sets.*;
-
-import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.Stack;
 
 import org.eclipse.xtext.common.types.JvmType;
 
@@ -64,8 +56,11 @@ public class StringBuilderBasedAppendable implements IAppendable {
 		return this;
 	}
 
-	private Stack<Map<Object, String>> localVars = new Stack<Map<Object, String>>();
-	private Stack<Set<String>> usedNamesInScope = new Stack<Set<String>>();
+	private ScopeStack scopes = new ScopeStack();
+	
+	public void setScopeStack(ScopeStack scopes) {
+		this.scopes = scopes;
+	}
 
 	public StringBuilderBasedAppendable(ImportManager typeSerializer, String indentation) {
 		this.importManager = typeSerializer;
@@ -83,82 +78,23 @@ public class StringBuilderBasedAppendable implements IAppendable {
 	}
 
 	public void openScope() {
-		localVars.push(new HashMap<Object, String>());
-		usedNamesInScope.push(new LinkedHashSet<String>());
-	}
-
-	public String declareVariable(Object key, String proposedName) {
-		if (localVars.isEmpty())
-			throw new IllegalStateException("No local scope has been opened.");
-		Map<Object, String> currentScope = localVars.peek();
-		final Set<String> names = usedNamesInScope.peek();
-		String newName = findNewName(names, proposedName);
-		currentScope.put(key, newName);
-		names.add(newName);
-		return newName;
+		scopes.openScope(false);
 	}
 	
-	public String declareFreshVariable(Object key, String proposedName) {
-		if (localVars.isEmpty())
-			throw new IllegalStateException("No local scope has been opened.");
-		Map<Object, String> currentScope = localVars.peek();
-		final Set<String> names = newHashSet();
-		for (Set<String> nameSet : usedNamesInScope) {
-			names.addAll(nameSet);
-		}
-		String newName = findNewName(names, proposedName);
-		currentScope.put(key, newName);
-		usedNamesInScope.peek().add(newName);
-		return newName;
+	public void openPseudoScope() {
+		scopes.openScope(true);
 	}
-
-	protected String findNewName(Set<String> names, String proposedName) {
-		if (names.contains(proposedName)) {
-			for (int i = 1; i < Integer.MAX_VALUE; i++) {
-				String newProposal = proposedName + "_" + i;
-				if (!names.contains(newProposal))
-					return newProposal;
-			}
-		}
-		return proposedName;
+	
+	public String declareVariable(Object key, String proposedName) {
+		return scopes.declareVariable(key, proposedName, false);
 	}
-
-	public String getName(Object key) {
-		if (localVars.isEmpty())
-			throw new IllegalStateException("No local scope has been opened.");
-		int size = localVars.size();
-		int i = size - 1;
-		while (i >= 0) {
-			Map<Object, String> currentScope = localVars.get(i--);
-			final String string = currentScope.get(key);
-			if (string != null)
-				return string;
-		}
-		return null;
+	
+	public String declareSyntheticVariable(Object key, String proposedName) {
+		return scopes.declareVariable(key, proposedName, true);
 	}
-
-	public Object getObject(String name) {
-		if (name == null)
-			throw new NullPointerException("name");
-		if (localVars.isEmpty())
-			throw new IllegalStateException("No local scope has been opened.");
-		int size = localVars.size();
-		int i = size - 1;
-		while (i >= 0) {
-			Map<Object, String> currentScope = localVars.get(i--);
-			for (Entry<Object, String> entry : currentScope.entrySet()) {
-				if (name.equals(entry.getValue()))
-					return entry.getKey();
-			}
-		}
-		return null;
-	}
-
+	
 	public void closeScope() {
-		if (localVars.isEmpty())
-			throw new IllegalStateException("No local scope has been opened.");
-		localVars.pop();
-		usedNamesInScope.pop();
+		scopes.closeScope();
 	}
 
 	protected void appendType(final JvmType type) {
@@ -171,5 +107,13 @@ public class StringBuilderBasedAppendable implements IAppendable {
 
 	protected ImportManager getImportManager() {
 		return importManager;
+	}
+
+	public String getName(Object key) {
+		return scopes.getName(key);
+	}
+
+	public Object getObject(String name) {
+		return scopes.get(name);
 	}
 }

@@ -143,7 +143,7 @@ public abstract class AbstractXbaseCompiler {
 						appendable.append(";");
 				}
 				if (needsSneakyThrow) {
-					String name = appendable.declareVariable(new Object(), "_e");
+					String name = appendable.declareSyntheticVariable(new Object(), "_e");
 					appendable.decreaseIndentation().append("\n} catch (Exception "+name+") {").increaseIndentation();
 					appendable.append("\nthrow ");
 					appendable.append(typeReferences.findDeclaredType(Exceptions.class, obj));
@@ -189,7 +189,7 @@ public abstract class AbstractXbaseCompiler {
 				appendable.append(";");
 		}
 		if (needsSneakyThrow) {
-			String name = appendable.declareVariable(new Object(), "_e");
+			String name = appendable.declareSyntheticVariable(new Object(), "_e");
 			appendable.decreaseIndentation().append("\n} catch (Exception "+name+") {").increaseIndentation();
 			appendable.append("\nthrow ");
 			appendable.append(typeReferences.findDeclaredType(Exceptions.class, obj));
@@ -302,21 +302,6 @@ public abstract class AbstractXbaseCompiler {
 		return name;
 	}
 
-	protected String declareFreshNameInVariableScope(EObject declaration, IAppendable appendable) {
-		final String favoriteVariableName = makeJavaIdentifier(getFavoriteVariableName(declaration));
-		if (appendable instanceof StringBuilderBasedAppendable) {
-			StringBuilderBasedAppendable sbAppendable = (StringBuilderBasedAppendable) appendable;
-			return sbAppendable.declareFreshVariable(declaration, favoriteVariableName);
-		}
-		return appendable.declareVariable(declaration, favoriteVariableName);
-	}
-	
-	protected String declareNameInVariableScope(EObject declaration, IAppendable appendable) {
-		final String favoriteVariableName = makeJavaIdentifier(getFavoriteVariableName(declaration));
-		final String varName = appendable.declareVariable(declaration, favoriteVariableName);
-		return varName;
-	}
-
 	@Inject
 	private IdentifiableSimpleNameProvider nameProvider;
 
@@ -366,8 +351,13 @@ public abstract class AbstractXbaseCompiler {
 		return name.equals("this") ? "_this" : name;
 	}
 	
-	protected void declareLocalVariable(XExpression expr, final IAppendable b) {
-		declareLocalVariable(expr, b, getDefaultValueLiteral(expr));
+	protected void declareSyntheticVariable(final XExpression expr, final IAppendable b) {
+		declareSyntheticVariable(expr, b, new Later() {
+			@Override
+			public void exec() {
+				b.append(getDefaultValueLiteral(expr));
+			}
+		});
 	}
 
 	protected String getDefaultValueLiteral(XExpression expr) {
@@ -382,19 +372,10 @@ public abstract class AbstractXbaseCompiler {
 		return "null";
 	}
 
-	protected void declareLocalVariable(XExpression expr, final IAppendable b, final String expression) {
-		declareLocalVariable(expr, b, new Later() {
-			@Override
-			public void exec() {
-				b.append(expression);
-			}
-		});
-	}
-
 	/**
 	 * TODO rename this method to 'declareFreshLocalVariable' after 2.1.x
 	 */
-	protected void declareLocalVariable(XExpression expr, IAppendable b, Later expression) {
+	protected void declareSyntheticVariable(XExpression expr, IAppendable b, Later expression) {
 		JvmTypeReference type = getTypeProvider().getType(expr);
 		//TODO we need to replace any occurrence of JvmAnyTypeReference with a better match from the expected type
 		if (type instanceof JvmAnyTypeReference) {
@@ -402,7 +383,8 @@ public abstract class AbstractXbaseCompiler {
 			if (expectedType!=null && !(expectedType.getType() instanceof JvmTypeParameter))
 				type = expectedType;
 		}
-		String varName = declareFreshNameInVariableScope(expr, b);
+		final String proposedName = makeJavaIdentifier(getFavoriteVariableName(expr));
+		final String varName = b.declareSyntheticVariable(expr, proposedName);
 		b.append("\n");
 		serialize(type,expr,b);
 		b.append(" ").append(varName).append(" = ");
