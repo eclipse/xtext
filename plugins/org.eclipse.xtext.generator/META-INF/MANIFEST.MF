@@ -77,5 +77,5 @@ Require-Bundle: org.eclipse.xtext.util;bundle-version="2.0.0";resolution:=option
  org.eclipse.xtend2.lib;bundle-version="2.2.0";resolution:=optional;visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
-Import-Package: org.apache.log4j;version="1.2.15",
- com.ibm.icu.text
+Import-Package: com.ibm.icu.text,
+ org.apache.log4j;version="1.2.15"
