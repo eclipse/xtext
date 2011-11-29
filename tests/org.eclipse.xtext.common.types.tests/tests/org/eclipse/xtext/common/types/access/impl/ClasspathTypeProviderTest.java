@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
+import static com.google.common.collect.Iterables.*;
+
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
@@ -18,6 +20,8 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeResource;
+
+import com.google.common.base.Function;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -148,7 +152,28 @@ public class ClasspathTypeProviderTest extends AbstractTypeProviderTest {
 		getAndResolveAllFragments(resource);
 		recomputeAndCheckIdentifiers(resource);
 	}
+	
+	public void testFindTypeByName_$ImmutableList() {
+		String typeName = "com.google.inject.internal.util.$ImmutableList";
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		assertNotNull(type);
+		Iterable<String> innerTypes = transform(filter(type.getMembers(), JvmType.class), new Function<JvmType, String>() {
+			public String apply(JvmType input) {
+				return input.getSimpleName();
+			}
+		});
+		assertTrue("Missing member type $Builder", contains(innerTypes, "Builder"));
+		assertTrue("Missing member type $EmptyImmutableList", contains(innerTypes, "EmptyImmutableList"));
+		assertTrue("Missing member type $RegularImmutableList", contains(innerTypes, "RegularImmutableList"));
+		assertTrue("Missing member type $SerializedForm", contains(innerTypes, "SerializedForm"));
+		assertEquals(4, size(innerTypes));
+		diagnose(type);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
 
+	}
+	
 	@Override
 	public ClasspathTypeProvider getTypeProvider() {
 		return typeProvider;
