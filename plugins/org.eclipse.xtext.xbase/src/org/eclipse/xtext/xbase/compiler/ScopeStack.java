@@ -84,6 +84,10 @@ public class ScopeStack {
 					names.add(variable.name);
 			}
 			scopeClosed = scopeClosed || !scope.pseudoScope;
+			// if we left the current scope (incl. pseudo scopes) and the variable is not synthetic, we can stop collecting names. 
+			// Overriding names from outside is ok in that case. 
+			if (scopeClosed && !synthetic)
+				break;
 		}
 		String newName = findNewName(names, proposedName);
 		currentScope.addVariable(newName, synthetic, key);
