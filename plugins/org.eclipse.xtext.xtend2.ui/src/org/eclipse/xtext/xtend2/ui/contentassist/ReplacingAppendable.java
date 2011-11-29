@@ -25,6 +25,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
+import org.eclipse.xtext.xbase.scoping.featurecalls.IValidatedEObjectDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
@@ -77,7 +78,7 @@ public class ReplacingAppendable extends StringBuilderBasedAppendable {
 					IScope scope = scopeProvider.createSimpleFeatureCallScope(getLocalVariableScopeContext(context),
 							XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, context.eResource(), true, -1);
 					for (IEObjectDescription feature : scope.getAllElements()) {
-						if(feature instanceof JvmFeatureDescription && ((JvmFeatureDescription)feature).isVisible())
+						if(feature instanceof IValidatedEObjectDescription && ((IValidatedEObjectDescription)feature).isVisible())
 							appendable.declareVariable(feature, converter.toString(feature.getName()));
 					}
 					if (!ignoreIndentAtOffset) {
