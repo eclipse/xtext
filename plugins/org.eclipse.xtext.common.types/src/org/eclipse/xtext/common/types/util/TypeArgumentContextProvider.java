@@ -886,7 +886,7 @@ public class TypeArgumentContextProvider {
 							if (declaredConstraint instanceof JvmUpperBound) {
 								for(JvmTypeConstraint actualConstraint: reference.getConstraints()) {
 									if (actualConstraint instanceof JvmUpperBound) {
-										outerVisit(declaredConstraint.getTypeReference(), new ResolveInfo(actualConstraint.getTypeReference(), ResolveInfoKind.UPPER, param.hint));
+										outerVisit(declaredConstraint.getTypeReference(), new ResolveInfo(actualConstraint.getTypeReference(), allowWildcardResolutions ? ResolveInfoKind.WC_UPPER : ResolveInfoKind.UPPER, param.hint));
 									}
 								}
 							} else {

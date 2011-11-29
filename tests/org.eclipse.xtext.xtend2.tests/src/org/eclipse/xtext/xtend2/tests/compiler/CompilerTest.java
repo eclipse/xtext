@@ -59,6 +59,19 @@ import com.google.inject.Injector;
  * @author Sebastian Zarnekow
  */
 public class CompilerTest extends AbstractXtend2TestCase {
+	
+	
+	public void testFunctionTypes() throws Exception {
+		String code = "" +
+				"def String test() {\n" +
+				"  newArrayList('fo','bar').maxBy[length]" +
+				"}\n" +
+				"" +
+				"def <A,B extends Comparable<? super B>> A maxBy(Iterable<A> iterable, (A)=>B maxOn) {\n" + 
+				"  iterable.sortBy(maxOn).last\n" + 
+				"}";
+		invokeAndExpect2("bar", code, "test");
+	}
 
 	public void testFieldInitialization_01() throws Exception {
 		String code =
