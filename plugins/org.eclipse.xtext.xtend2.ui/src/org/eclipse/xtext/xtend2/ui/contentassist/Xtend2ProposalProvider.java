@@ -148,8 +148,7 @@ public class Xtend2ProposalProvider extends AbstractXtend2ProposalProvider {
 	@Override
 	public void completeClass_Members(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		if ("".equals(context.getPrefix()) && context.getLastCompleteNode().getTotalEndOffset() < context.getOffset())
-			overrideAssist.createOverrideProposals((XtendClass) model, context, acceptor);
+		overrideAssist.createOverrideProposals((XtendClass) model, context, acceptor, getConflictHelper());
 		super.completeClass_Members(model, assignment, context, acceptor);
 	}
 
