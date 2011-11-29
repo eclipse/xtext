@@ -143,7 +143,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 			internalToJavaStatement(expression, appendable, true);
 			String variableName = null;
 			if (forLoop.getAfter() != null || forLoop.getSeparator() != null || forLoop.getAfter() != null) {
-				variableName = appendable.declareSyntheticVariable(forLoop, "_FOR");
+				variableName = appendable.declareSyntheticVariable(forLoop, "_hasElements");
 				appendable.append("\n");
 				appendable.append("boolean ");
 				appendable.append(variableName);
