@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.ISyntheticResourceProvider;
+import org.eclipse.xtext.ui.editor.embedded.IEditedResourceProvider;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 
 import com.google.inject.Inject;
@@ -21,7 +21,7 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class SyntheticResourceProvider implements ISyntheticResourceProvider {
+public class TemplateResourceProvider implements IEditedResourceProvider {
 
 	public static final String SYNTHETIC_SCHEME = "synthetic";
 	

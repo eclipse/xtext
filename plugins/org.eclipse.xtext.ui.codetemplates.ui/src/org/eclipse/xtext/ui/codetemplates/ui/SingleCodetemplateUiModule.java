@@ -17,8 +17,6 @@ import org.eclipse.xtext.ui.codetemplates.ui.highlighting.SingleTemplateTokenDef
 import org.eclipse.xtext.ui.codetemplates.ui.highlighting.TemplatesHighlightingConfiguration;
 import org.eclipse.xtext.ui.codetemplates.ui.highlighting.TokenToAttributeMapper;
 import org.eclipse.xtext.ui.codetemplates.ui.internal.CodetemplatesActivator;
-import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.ISyntheticResourceProvider;
-import org.eclipse.xtext.ui.codetemplates.ui.preferences.SyntheticResourceProvider;
 import org.eclipse.xtext.ui.codetemplates.ui.registry.LanguageRegistry;
 import org.eclipse.xtext.ui.codetemplates.ui.scoping.SyntheticResourceAwareScopeProvider;
 import org.eclipse.xtext.ui.codetemplates.ui.validation.TemplateValidator;
@@ -65,10 +63,6 @@ public class SingleCodetemplateUiModule extends org.eclipse.xtext.ui.codetemplat
 	
 	public Class<? extends IScopeProvider> bindIScopeProvider() {
 		return SyntheticResourceAwareScopeProvider.class;
-	}
-	
-	public Class<? extends ISyntheticResourceProvider> bindSyntheticResourceProvider() {
-		return SyntheticResourceProvider.class;
 	}
 	
 	public Class<? extends ISemanticHighlightingCalculator> bindSemanticHighlightingCalculator() {

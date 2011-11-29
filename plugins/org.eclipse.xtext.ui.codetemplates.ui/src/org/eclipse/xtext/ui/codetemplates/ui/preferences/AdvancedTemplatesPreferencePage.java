@@ -18,9 +18,8 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.ISyntheticResourceProvider;
-import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.PartialModelEditor;
-import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.SourceViewerHandle;
+import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorModelAccess;
+import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditor;
 import org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage;
 
 import com.google.inject.Inject;
@@ -40,9 +39,9 @@ public class AdvancedTemplatesPreferencePage extends XtextTemplatePreferencePage
 	private IGrammarAccess grammarAccess;
 	
 	@Inject
-	private ISyntheticResourceProvider resourceProvider;
+	private TemplateResourceProvider resourceProvider;
 	
-	private PartialModelEditor partialEditor;
+	private EmbeddedEditorModelAccess partialEditor;
 	
 	@Inject
 	public AdvancedTemplatesPreferencePage(IPreferenceStore preferenceStore,
@@ -87,8 +86,8 @@ public class AdvancedTemplatesPreferencePage extends XtextTemplatePreferencePage
 	
 	@Override
 	protected SourceViewer createViewer(Composite parent) {
-		SourceViewerHandle handle = configuration.getSourceViewerHandleFactory().create(parent, resourceProvider);
-		partialEditor = handle.createPartialEditor();
+		EmbeddedEditor handle = configuration.getEmbeddedEditorFactory().newEditor(resourceProvider).readOnly().withParent(parent);
+		partialEditor = handle.createPartialEditor(true);
 		configuration.getHighlightingHelper().install(handle.getConfiguration(), handle.getViewer());
 		return handle.getViewer();
 	}

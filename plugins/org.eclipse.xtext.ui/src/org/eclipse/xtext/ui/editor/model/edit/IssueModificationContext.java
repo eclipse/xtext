@@ -49,8 +49,6 @@ public class IssueModificationContext implements IModificationContext {
 		return null;
 	}
 
-	
-	
 	@ImplementedBy(Factory.Default.class)
 	public static interface Factory {
 		IModificationContext createModificationContext(Issue issue);

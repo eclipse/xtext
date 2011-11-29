@@ -11,7 +11,6 @@ import org.eclipse.jface.text.templates.ContextTypeRegistry;
 import org.eclipse.jface.text.templates.Template;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtext.Constants;
-import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.ISyntheticResourceProvider;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -29,7 +28,7 @@ public class EditTemplateDialogFactory {
 	private ContextTypeRegistry contextTypeRegistry;
 	
 	@Inject
-	private ISyntheticResourceProvider resourceProvider;
+	private TemplateResourceProvider resourceProvider;
 	
 	@Inject
 	@Named(Constants.LANGUAGE_NAME)
