@@ -121,6 +121,8 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 			IType type = javaProject.findType(name);
 			if (type == null || !type.exists())
 				return null;
+			if(type.getTypeQualifiedName().startsWith("$"))
+				return null;
 			return new JdtTypeMirror(type, typeFactory);
 		}
 		catch (JavaModelException e) {
