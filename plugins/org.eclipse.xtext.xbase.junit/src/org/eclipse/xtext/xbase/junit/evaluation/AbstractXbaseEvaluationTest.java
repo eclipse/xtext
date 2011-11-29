@@ -752,17 +752,17 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"  value" +
 				"}");
 	}
-//	
-//	@Test public void testWhileLoop_03() throws Exception {
-//		assertEvaluatesTo("startfoo", 
-//				"{\n" +
-//				"  var value = 'start'\n" +
-//				"  while(value.length<6) " +
-//				"     value = value + 'foo'" +
-//				"  value" +
-//				"}");
-//	}
-//	
+	
+	@Test public void testWhileLoop_03() throws Exception {
+		assertEvaluatesTo("startfoo", 
+				"{\n" +
+				"  var value = 'start'\n" +
+				"  while(value.length<6) " +
+				"     value = value + 'foo'" +
+				"  value" +
+				"}");
+	}
+	
 	@Test public void testDoWhileLoop_01() throws Exception {
 		assertEvaluatesTo("newValue", 
 				"{\n" +
@@ -1794,9 +1794,9 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	}
 	
 	@Test public void testBug349762_02() throws Exception {
-		assertEvaluatesTo("b", 
+		assertEvaluatesTo("a", 
 				"switch s: 'abc' as CharSequence {\n" +
-				"  String: s.substring(1, 2)\n" +
+				"  String: [Integer a, Integer b| s.substring(a, b)].apply(0, 1)\n" +
 				"}");
 	}
 	

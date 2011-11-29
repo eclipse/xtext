@@ -210,11 +210,13 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append("\nwhile (");
 		b.append(varName);
 		b.append(") {").increaseIndentation();
+		b.openPseudoScope();
 		internalToJavaStatement(expr.getBody(), b, false);
 		internalToJavaStatement(expr.getPredicate(), b, true);
 		b.append("\n").append(varName).append(" = ");
 		internalToJavaExpression(expr.getPredicate(), b);
 		b.append(";");
+		b.closeScope();
 		b.decreaseIndentation().append("\n}");
 	}
 
