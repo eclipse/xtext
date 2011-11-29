@@ -33,6 +33,7 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.common.types.util.VisibilityService;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper;
 import org.eclipse.xtext.xbase.validation.UIStrings;
 import org.eclipse.xtext.xtend2.formatting.MemberFromSuperImplementor;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
@@ -122,17 +123,17 @@ public class ImplementMemberFromSuperAssist {
 	}
 
 	public void createOverrideProposals(XtendClass model, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
+			ICompletionProposalAcceptor acceptor, IProposalConflictHelper conflictHelper) {
 		Iterable<JvmExecutable> overrideables = getImplementationCandidates(model);
 		for (JvmExecutable overridden : overrideables) {
-			ICompletionProposal completionProposal = createOverrideMethodProposal(model, overridden, context);
+			ICompletionProposal completionProposal = createOverrideMethodProposal(model, overridden, context, conflictHelper);
 			if (completionProposal != null)
 				acceptor.accept(completionProposal);
 		}
 	}
 
 	protected ICompletionProposal createOverrideMethodProposal(XtendClass model, JvmExecutable overridden,
-			ContentAssistContext context) {
+			ContentAssistContext context, IProposalConflictHelper conflictHelper) {
 		ReplacingAppendable appendable = appendableFactory.get(context.getDocument(), model, context.getReplaceRegion()
 				.getOffset(), context.getReplaceRegion().getLength(), true);
 		if (overridden instanceof JvmOperation)
@@ -140,8 +141,7 @@ public class ImplementMemberFromSuperAssist {
 		else
 			implementor.appendConstructorFromSuper(model, (JvmConstructor) overridden, appendable);
 		String code = appendable.toString();
-		if (!isEmpty(context.getPrefix()) && !overridden.getSimpleName().startsWith(context.getPrefix())
-				&& !code.trim().startsWith(context.getPrefix()))
+		if (!isValidProposal(code.trim(), context, conflictHelper) && !isValidProposal(overridden.getSimpleName(), context, conflictHelper))
 			return null;
 		ImportOrganizingProposal completionProposal = createCompletionProposal(appendable, context.getReplaceRegion(),
 				getLabel(overridden), images.forFunction(overridden.getVisibility(), false));
@@ -150,6 +150,16 @@ public class ImplementMemberFromSuperAssist {
 		completionProposal.setSelectionLength(MemberFromSuperImplementor.DEFAULT_BODY.length());
 		completionProposal.setPriority(getPriority(model, overridden, context));
 		return completionProposal;
+	}
+
+	protected boolean isValidProposal(String proposal, ContentAssistContext context, IProposalConflictHelper conflictHelper) {
+		if (proposal == null)
+			return false;
+		if (!context.getMatcher().isCandidateMatchingPrefix(proposal, context.getPrefix()))
+			return false;
+		if (conflictHelper.existsConflict(proposal, context))
+			return false;
+		return true;
 	}
 
 	protected int getPriority(XtendClass model, JvmExecutable overridden, ContentAssistContext context) {
