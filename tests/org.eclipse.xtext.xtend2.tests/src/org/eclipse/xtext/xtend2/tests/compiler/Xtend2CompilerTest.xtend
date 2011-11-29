@@ -30,6 +30,7 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''')
 	}
 	
+	
 	def testFieldInitialization_01() { 
 		assertCompilesTo('''
 			package foo
@@ -696,6 +697,75 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 			  private static int foo;
 			}
 			''');
+	}
+	
+	def testNestedClosureWithIt() {
+		assertCompilesTo('''
+			class X {
+				def foo() {
+					val (String)=>String function = [ [String it | it].apply(it) ]
+					function.apply('foo')
+				}
+			}
+		''','''
+			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+			
+			@SuppressWarnings("all")
+			public class X {
+			  public String foo() {
+			    String _xblockexpression = null;
+			    {
+			      final Function1<String,String> _function = new Function1<String,String>() {
+			          public String apply(final String it) {
+			            final Function1<String,String> _function = new Function1<String,String>() {
+			                public String apply(final String it) {
+			                  return it;
+			                }
+			              };
+			            String _apply = _function.apply(it);
+			            return _apply;
+			          }
+			        };
+			      final Function1<? super String,? extends String> function = _function;
+			      String _apply = function.apply("foo");
+			      _xblockexpression = (_apply);
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+	
+	def testNestedClosureSuperCall() {
+		assertCompilesTo('''
+			class X {
+				def foo() {
+					[| [| super.toString ].apply ].apply
+				}
+			}
+		''','''
+			import org.eclipse.xtext.xbase.lib.Functions.Function0;
+			
+			@SuppressWarnings("all")
+			public class X {
+			  public String foo() {
+			    final Function0<String> _function = new Function0<String>() {
+			        public String apply() {
+			          final Function0<String> _function = new Function0<String>() {
+			              public String apply() {
+			                String _string = X.super.toString();
+			                return _string;
+			              }
+			            };
+			          String _apply = _function.apply();
+			          return _apply;
+			        }
+			      };
+			    String _apply = _function.apply();
+			    return _apply;
+			  }
+			}
+		''')
 	}
 
 	def assertCompilesTo(CharSequence input, CharSequence expected) {
