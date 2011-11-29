@@ -51,21 +51,21 @@ public class Xtend2BatchCompilerPlugin extends AbstractMojo {
 	/**
 	 * Location of the generated source files.
 	 * 
-	 * @parameter default-value="${basedir}/src/main/xtend2-gen"
+	 * @parameter default-value="${basedir}/src/main/xtend-gen"
 	 * @required
 	 */
 	private String outputDirectory;
 	/**
 	 * Location of the generated test files.
 	 * 
-	 * @parameter default-value="${basedir}/src/test/xtend2-gen"
+	 * @parameter default-value="${basedir}/src/test/xtend-gen"
 	 * @required
 	 */
 	private String testOutputDirectory;
 	/**
 	 * Location of the temporary compiler directory.
 	 * 
-	 * @parameter default-value="${project.build.directory}/xtend2"
+	 * @parameter default-value="${project.build.directory}/xtend"
 	 * @required
 	 */
 	private String tempDirectory;
@@ -97,7 +97,7 @@ public class Xtend2BatchCompilerPlugin extends AbstractMojo {
 		compile(xtend2BatchCompiler, classPath, Collections.singletonList(sourceDirectory), outputDirectory);
 	}
 
-	private void compileTestSources(Xtend2BatchCompiler xtend2BatchCompiler) throws MojoExecutionException {
+	protected void compileTestSources(Xtend2BatchCompiler xtend2BatchCompiler) throws MojoExecutionException {
 		String sourceDirectory = project.getBuild().getSourceDirectory();
 		String testSourceDirectory = project.getBuild().getTestSourceDirectory();
 		String testClassPath = concat(File.pathSeparator, getTestClassPath());
@@ -106,7 +106,7 @@ public class Xtend2BatchCompilerPlugin extends AbstractMojo {
 				testOutputDirectory);
 	}
 
-	private void compile(Xtend2BatchCompiler xtend2BatchCompiler, String classPath, List<String> sourceDirectories,
+	protected void compile(Xtend2BatchCompiler xtend2BatchCompiler, String classPath, List<String> sourceDirectories,
 			String outputPath) throws MojoExecutionException {
 		Iterable<String> filtered = filter(sourceDirectories, FILE_EXISTS);
 		if (Iterables.isEmpty(filtered)) {
@@ -126,7 +126,7 @@ public class Xtend2BatchCompilerPlugin extends AbstractMojo {
 		}
 	}
 
-	private void configureLog4j() {
+	protected void configureLog4j() {
 		if (!Logger.getRootLogger().getAllAppenders().hasMoreElements()) {
 			Logger.getRootLogger().setLevel(Level.DEBUG);
 			Logger.getRootLogger().addAppender(createMojoLogAppender());
@@ -139,7 +139,7 @@ public class Xtend2BatchCompilerPlugin extends AbstractMojo {
 		}
 	}
 
-	private AppenderSkeleton createMojoLogAppender() {
+	protected AppenderSkeleton createMojoLogAppender() {
 		return new AppenderSkeleton() {
 
 			public void close() {
@@ -172,7 +172,7 @@ public class Xtend2BatchCompilerPlugin extends AbstractMojo {
 	}
 
 	@SuppressWarnings("unchecked")
-	private List<String> getClassPath() {
+	protected List<String> getClassPath() {
 		Set<String> classPath = Sets.newLinkedHashSet();
 		classPath.add(project.getBuild().getSourceDirectory());
 		try {
@@ -185,7 +185,7 @@ public class Xtend2BatchCompilerPlugin extends AbstractMojo {
 	}
 
 	@SuppressWarnings("unchecked")
-	private List<String> getTestClassPath() {
+	protected List<String> getTestClassPath() {
 		Set<String> classPath = Sets.newLinkedHashSet();
 		classPath.add(project.getBuild().getSourceDirectory());
 		classPath.add(project.getBuild().getTestSourceDirectory());
@@ -198,7 +198,7 @@ public class Xtend2BatchCompilerPlugin extends AbstractMojo {
 		return newArrayList(filter(classPath, FILE_EXISTS));
 	}
 
-	private void addDependencies(Set<String> classPath, List<Artifact> dependencies) {
+	protected void addDependencies(Set<String> classPath, List<Artifact> dependencies) {
 		for (Artifact artifact : dependencies) {
 			classPath.add(artifact.getFile().getAbsolutePath());
 		}
