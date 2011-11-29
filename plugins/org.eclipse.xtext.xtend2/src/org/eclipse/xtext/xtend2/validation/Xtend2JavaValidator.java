@@ -1023,7 +1023,7 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 		if(jvmOperation.getVisibility() == JvmVisibility.PRIVATE && !isLocallyUsed(jvmOperation, function.eContainer())){
 			String message = "The method " + jvmOperation.getSimpleName() 
 					+  uiStrings.parameters(jvmOperation)  
-					+ "from the type "+jvmOperation.getDeclaringType().getSimpleName()+" is never used locally.";
+					+ " from the type "+jvmOperation.getDeclaringType().getSimpleName()+" is never used locally.";
 			warning(message, Xtend2Package.Literals.XTEND_FUNCTION__NAME, FUNCTION_LOCALLY_NEVER_USED);
 		}
 	}
