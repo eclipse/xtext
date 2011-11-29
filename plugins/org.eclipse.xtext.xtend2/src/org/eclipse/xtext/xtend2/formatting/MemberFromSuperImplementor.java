@@ -143,7 +143,7 @@ public class MemberFromSuperImplementor {
 				typeReferenceSerializer.serialize(overriddenParameterType, context, appendable, false, false, false,
 						true);
 				String declareVariable = (appendable instanceof StringBuilderBasedAppendable) ? ((StringBuilderBasedAppendable) appendable)
-						.declareFreshVariable(param, param.getName()) : appendable.declareVariable(param,
+						.declareSyntheticVariable(param, param.getName()) : appendable.declareVariable(param,
 						param.getName());
 				appendable.append(" ").append(declareVariable);
 			}
