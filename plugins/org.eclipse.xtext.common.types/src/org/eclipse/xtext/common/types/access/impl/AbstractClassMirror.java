@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
+import static org.eclipse.xtext.util.Strings.*;
+
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -77,23 +79,31 @@ public abstract class AbstractClassMirror implements IClassMirror {
 				}
 				return resource.getContents().get(0);
 			}
-			int paren = fragment.indexOf('(');
-			if (paren == -1)
-				paren = fragment.length();
-			int dollar = fragment.lastIndexOf('$', paren);
-			int dot = fragment.lastIndexOf('.', paren);
-			String subFragment = fragment.substring(0, Math.max(dollar, dot));
-			EObject container = getEObject(resource, subFragment, fallback);
-			if (container instanceof JvmDeclaredType) {
-				EList<JvmMember> members = ((JvmDeclaredType) container).getMembers();
-				for(JvmMember member: members) {
-					String name = member.getIdentifier();
-					if (name.equals(fragment))
-						return member;
-				}
+			if(fragment.startsWith(getTypeName())) {
+				EObject member = findMember(resource.getContents().get(0), fragment);
+				if(member != null)
+					return member;
 			}
 		}
 		return fallback.getEObject(fragment);	
+	}
+	
+	protected EObject findMember(EObject container, String fragment) {
+		if (container instanceof JvmDeclaredType) {
+			EList<JvmMember> members = ((JvmDeclaredType) container).getMembers();
+			for(JvmMember member: members) {
+				String name = member.getIdentifier();
+				if(equal(fragment,name)) {
+					return member;
+				}
+				if(fragment.startsWith(name)) {
+					EObject match = findMember(member, fragment);
+					if(match != null) 
+						return match;
+				}
+			}
+		}
+		return null;
 	}
 
 	protected EObject getArrayEObject(Resource resource, String fragment, IFragmentProvider.Fallback fallback) {
