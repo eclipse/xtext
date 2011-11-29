@@ -68,7 +68,7 @@ public class CacheMethodCompileStrategy implements Functions.Function1<ImportMan
 		JvmTypeReference collectonLiterals = typeReferences.getTypeForName(CollectionLiterals.class,
 				containerType);
 		String cacheVarName = cacheField.getSimpleName();
-		String cacheKeyVarName = appendable.declareVariable("CacheKey", "_cacheKey");
+		String cacheKeyVarName = appendable.declareSyntheticVariable("CacheKey", "_cacheKey");
 		appendable.append("final ");
 		typeReferenceSerializer.serialize(listType, containerType, appendable);
 		appendable.append(cacheKeyVarName).append(" = ");

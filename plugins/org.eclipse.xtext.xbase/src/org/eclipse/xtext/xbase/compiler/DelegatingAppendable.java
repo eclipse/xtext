@@ -23,23 +23,19 @@ public class DelegatingAppendable implements IAppendable {
 	}
 
 	public IAppendable append(String string) {
-		appendable = appendable.append(string);
-		return this;
+		return appendable.append(string);
 	}
 
 	public IAppendable append(JvmType type) {
-		appendable = appendable.append(type);
-		return this;
+		return appendable.append(type);
 	}
 
 	public IAppendable increaseIndentation() {
-		appendable = appendable.increaseIndentation();
-		return this;
+		return appendable.increaseIndentation();
 	}
 
 	public IAppendable decreaseIndentation() {
-		appendable = appendable.decreaseIndentation();
-		return this;
+		return appendable.decreaseIndentation();
 	}
 
 	public List<String> getImports() {
@@ -50,24 +46,28 @@ public class DelegatingAppendable implements IAppendable {
 		appendable.openScope();
 	}
 
+	public void openPseudoScope() {
+		appendable.openPseudoScope();
+	}
+
 	public String declareVariable(Object key, String proposedName) {
 		return appendable.declareVariable(key, proposedName);
+	}
+
+	public String declareSyntheticVariable(Object key, String proposedName) {
+		return appendable.declareSyntheticVariable(key, proposedName);
 	}
 
 	public String getName(Object key) {
 		return appendable.getName(key);
 	}
 
-	public void closeScope() {
-		appendable.closeScope();
-	}
-
 	public Object getObject(String name) {
 		return appendable.getObject(name);
 	}
 
-	public String declareFreshVariable(Object key, String proposedName) {
-		return appendable.declareFreshVariable(key, proposedName);
+	public void closeScope() {
+		appendable.closeScope();
 	}
-	
+
 }

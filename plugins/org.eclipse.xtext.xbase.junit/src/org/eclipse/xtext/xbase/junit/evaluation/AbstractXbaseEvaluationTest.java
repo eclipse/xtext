@@ -752,17 +752,17 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"  value" +
 				"}");
 	}
-	
-	@Test public void testWhileLoop_03() throws Exception {
-		assertEvaluatesTo("startfoo", 
-				"{\n" +
-				"  var value = 'start'\n" +
-				"  while(value.length<6) " +
-				"     value = value + 'foo'" +
-				"  value" +
-				"}");
-	}
-	
+//	
+//	@Test public void testWhileLoop_03() throws Exception {
+//		assertEvaluatesTo("startfoo", 
+//				"{\n" +
+//				"  var value = 'start'\n" +
+//				"  while(value.length<6) " +
+//				"     value = value + 'foo'" +
+//				"  value" +
+//				"}");
+//	}
+//	
 	@Test public void testDoWhileLoop_01() throws Exception {
 		assertEvaluatesTo("newValue", 
 				"{\n" +
@@ -901,6 +901,14 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	
 	@Test public void testSwitchExpression_13() throws Exception {
 		assertEvaluatesTo("bar", "switch 'foo' { case 'bar' : 'foo' default : return 'bar' }");
+	}
+	
+	@Test public void testSwitchExpression_14() throws Exception {
+		assertEvaluatesTo("bar", "{ val _string = 'foo' switch _string { String : 'bar' default : 'foo'} }");
+	}
+	
+	@Test public void testSwitchExpression_15() throws Exception {
+		assertEvaluatesTo("bar", "switch x : 'foo' { String : switch x { String : 'bar' default : 'other' } default : 'foo'}");
 	}
 	
 	@Test public void testCastedExpression_01() throws Exception {

@@ -94,7 +94,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 								featureCalltoJavaExpression(expr, b);
 							}
 						};
-						declareLocalVariable(expr, b, later);
+						declareSyntheticVariable(expr, b, later);
 					} else {
 						b.append("\n");
 						featureCalltoJavaExpression(expr, b);
@@ -118,7 +118,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	protected void generateShortCircuitInvocation(final XAbstractFeatureCall binaryOperation,
 			final IAppendable b) {
 		XExpression leftOperand = ((XBinaryOperation)binaryOperation).getLeftOperand();
-		declareLocalVariable(binaryOperation, b);
+		declareSyntheticVariable(binaryOperation, b);
 		prepareExpression(leftOperand, b);
 		b.append("\nif (");
 		if (binaryOperation.getConcreteSyntaxFeatureName().equals(expressionHelper.getAndOperator())) {
@@ -180,7 +180,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			JvmTypeReference type = getTypeProvider().getType(arg);
 			if (expectedType != null && !jvmConformance.isConformant( expectedType, type ) ) {
 				String varName = getVarName(((XAbstractFeatureCall) arg).getFeature(), b);
-				String finalVariable = b.declareVariable(Tuples.create("Convertable", arg), "typeConverted_" + varName);
+				String finalVariable = b.declareSyntheticVariable(Tuples.create("Convertable", arg), "_typeConverted_" + varName);
 				b.append("\n")
 					.append("final ");
 				serialize(type,arg,b);
@@ -227,7 +227,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 						String variableName = getFavoriteVariableName(call.getFeature());
 						if (log.isInfoEnabled())
 							log.info("The variable '"+variableName+"' has not been declared.");
-						b.declareVariable(call.getFeature(), variableName);
+						b.declareSyntheticVariable(call.getFeature(), variableName);
 					}
 					final String varName = getVarName(call.getFeature(), b);
 					b.append(varName);

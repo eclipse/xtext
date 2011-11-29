@@ -2391,6 +2391,13 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		fail("Expected NoSuchFieldException not thrown");
 	}
 	
+	public void testRichStringAndSwitch() throws Exception {
+		invokeAndExpect2(
+				"foo", 
+				"def x() { runTest().toString() } def runTest() '''«switch x : '''test''' { CharSequence : '''foo''' }»'''", 
+				"x");
+	}
+	
 	@Inject
 	private EclipseRuntimeDependentJavaCompiler javaCompiler;
 

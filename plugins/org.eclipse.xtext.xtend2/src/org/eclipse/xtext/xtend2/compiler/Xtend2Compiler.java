@@ -143,7 +143,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 			internalToJavaStatement(expression, appendable, true);
 			String variableName = null;
 			if (forLoop.getAfter() != null || forLoop.getSeparator() != null || forLoop.getAfter() != null) {
-				variableName = declareNameInVariableScope(forLoop, appendable);
+				variableName = appendable.declareSyntheticVariable(forLoop, "_FOR");
 				appendable.append("\n");
 				appendable.append("boolean ");
 				appendable.append(variableName);
@@ -154,7 +154,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 			JvmTypeReference paramType = getTypeProvider().getTypeForIdentifiable(parameter);
 			serialize(paramType, parameter, appendable);
 			appendable.append(" ");
-			String loopParam = declareNameInVariableScope(parameter, appendable);
+			String loopParam = appendable.declareVariable(parameter, parameter.getName());
 			appendable.append(loopParam);
 			appendable.append(" : ");
 			internalToJavaExpression(expression, appendable);
@@ -246,7 +246,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 	public void _toJavaStatement(RichString richString, IAppendable b, boolean isReferenced) {
 		// declare variable
 		JvmTypeReference type = getTypeReferences().getTypeForName(StringConcatenation.class, richString);
-		String variableName = b.declareVariable(Tuples.pair(richString, "result"), "_builder");
+		String variableName = b.declareSyntheticVariable(Tuples.pair(richString, "result"), "_builder");
 		b.append("\n");
 		serialize(type, richString, b);
 		b.append(" ");

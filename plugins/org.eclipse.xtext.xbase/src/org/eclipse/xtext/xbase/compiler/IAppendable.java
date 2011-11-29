@@ -27,14 +27,22 @@ public interface IAppendable {
 	
 	List<String> getImports();
 
+	/**
+	 * opens a new scope, backed up by a  real Java Scope
+	 */
 	void openScope();
+	
+	/**
+	 * opens a new variable scope, without having a new Java scope.
+	 */
+	void openPseudoScope();
 
 	String declareVariable(Object key, String proposedName);
 	
 	/**
-	 * declares a fresh variable, where the name is not used in the current or any parent scope.
+	 * declares a synthetic variable, where the name is not used in the current or any parent scope.
 	 */
-	String declareFreshVariable(Object key, String proposedName);
+	String declareSyntheticVariable(Object key, String proposedName);
 
 	String getName(Object key);
 	

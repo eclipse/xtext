@@ -57,7 +57,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			return;
 		}
 		if (isReferenced)
-			declareLocalVariable(expr, b);
+			declareSyntheticVariable(expr, b);
 		b.append("\n{").increaseIndentation();
 		final EList<XExpression> expressions = expr.getExpressions();
 		for (int i = 0; i < expressions.size(); i++) {
@@ -90,7 +90,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	protected void _toJavaStatement(XTryCatchFinallyExpression expr, IAppendable b, boolean isReferenced) {
 		if (isReferenced && !isPrimitiveVoid(expr)) {
-			declareLocalVariable(expr, b);
+			declareSyntheticVariable(expr, b);
 		}
 		b.append("\ntry {").increaseIndentation();
 		final boolean canBeReferenced = isReferenced && !isPrimitiveVoid(expr.getExpression());
@@ -107,7 +107,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	protected void appendCatchAndFinally(XTryCatchFinallyExpression expr, IAppendable b, boolean isReferenced) {
 		for (XCatchClause catchClause : expr.getCatchClauses()) {
 			JvmTypeReference type = catchClause.getDeclaredParam().getParameterType();
-			final String name = declareNameInVariableScope(catchClause.getDeclaredParam(), b);
+			final String name = b.declareVariable(catchClause.getDeclaredParam(), catchClause.getDeclaredParam().getName());
 			b.append(" catch (final ");
 			serialize(type,expr,b);
 			b.append(" ").append(name).append(") {");
@@ -175,7 +175,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 		serialize(type, varDeclaration, b);
 		b.append(" ");
-		b.append(declareNameInVariableScope(varDeclaration, b));
+		b.append(b.declareVariable(varDeclaration, varDeclaration.getName()));
 		b.append(" = ");
 		if (varDeclaration.getRight() != null) {
 			internalToConvertedExpression(varDeclaration.getRight(), b, type);
@@ -203,15 +203,16 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	protected void _toJavaStatement(XWhileExpression expr, IAppendable b, boolean isReferenced) {
 		internalToJavaStatement(expr.getPredicate(), b, true);
-		b.append("\nBoolean ").append(declareNameInVariableScope(expr, b)).append(" = ");
+		final String varName = b.declareSyntheticVariable(expr, "_while");
+		b.append("\nboolean ").append(varName).append(" = ");
 		internalToJavaExpression(expr.getPredicate(), b);
 		b.append(";");
 		b.append("\nwhile (");
-		b.append(getVarName(expr, b));
+		b.append(varName);
 		b.append(") {").increaseIndentation();
 		internalToJavaStatement(expr.getBody(), b, false);
 		internalToJavaStatement(expr.getPredicate(), b, true);
-		b.append("\n").append(getVarName(expr, b)).append(" = ");
+		b.append("\n").append(varName).append(" = ");
 		internalToJavaExpression(expr.getPredicate(), b);
 		b.append(";");
 		b.decreaseIndentation().append("\n}");
@@ -222,15 +223,16 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	protected void _toJavaStatement(XDoWhileExpression expr, IAppendable b, boolean isReferenced) {
-		b.append("\nBoolean ").append(declareNameInVariableScope(expr, b)).append(";");
+		String variable = b.declareSyntheticVariable(expr, "_dowhile");
+		b.append("\nboolean ").append(variable).append(" = false;");
 		b.append("\ndo {").increaseIndentation();
 		internalToJavaStatement(expr.getBody(), b, false);
 		internalToJavaStatement(expr.getPredicate(), b, true);
-		b.append("\n").append(getVarName(expr, b)).append(" = ");
+		b.append("\n").append(variable).append(" = ");
 		internalToJavaExpression(expr.getPredicate(), b);
 		b.append(";");
 		b.decreaseIndentation().append("\n} while(");
-		b.append(getVarName(expr, b));
+		b.append(variable);
 		b.append(");");
 	}
 
@@ -244,7 +246,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		JvmTypeReference paramType = getTypeProvider().getTypeForIdentifiable(expr.getDeclaredParam());
 		serialize(paramType,expr,b);
 		b.append(" ");
-		String varName = declareNameInVariableScope(expr.getDeclaredParam(), b);
+		String varName = b.declareVariable(expr.getDeclaredParam(), expr.getDeclaredParam().getName());
 		b.append(varName);
 		b.append(" : ");
 		internalToJavaExpression(expr.getForExpression(), b);
@@ -270,7 +272,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			}
 		};
 		if (isReferenced) {
-			declareLocalVariable(expr, b, later);
+			declareSyntheticVariable(expr, b, later);
 		} else {
 			b.append("\n");
 			later.exec();
@@ -312,7 +314,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	protected void _toJavaStatement(XIfExpression expr, IAppendable b, boolean isReferenced) {
 		if (isReferenced)
-			declareLocalVariable(expr, b);
+			declareSyntheticVariable(expr, b);
 		internalToJavaStatement(expr.getIf(), b, true);
 		b.append("\nif (");
 		internalToJavaExpression(expr.getIf(), b);
@@ -349,7 +351,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	protected void _toJavaStatement(XSwitchExpression expr, IAppendable b, boolean isReferenced) {
 		// declare variable
 		JvmTypeReference type = getTypeProvider().getType(expr);
-		String switchResultName = b.declareVariable(Tuples.pair(expr,"result"), "_switchResult");
+		String switchResultName = b.declareSyntheticVariable(Tuples.pair(expr,"result"), "_switchResult");
 		if (isReferenced) {
 			b.append("\n");
 			serialize(type, expr, b);
@@ -377,7 +379,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			b.append("\nfinal ");
 			serialize(typeReference, expr, b);
 			b.append(" ");
-			variableName = b.declareVariable(expr, name);
+			variableName = b.declareSyntheticVariable(expr, name);
 			b.append(variableName);
 			b.append(" = ");
 			internalToJavaExpression(expr.getSwitch(), b);
@@ -385,7 +387,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 		// declare 'boolean matched' to check whether a case has matched already
 		b.append("\nboolean ");
-		String matchedVariable = b.declareVariable(Tuples.pair(expr, "matches"), "matched");
+		String matchedVariable = b.declareSyntheticVariable(Tuples.pair(expr, "matches"), "matched");
 		b.append(matchedVariable).append(" = false;");
 
 		for (XCasePart casePart : expr.getCases()) {
@@ -399,9 +401,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				b.append(") {");
 				b.increaseIndentation();
 				JvmIdentifiableElement switchOver = expr.getSwitch() instanceof XFeatureCall ? ((XFeatureCall)expr.getSwitch()).getFeature() : expr;
-				b.openScope();
+				b.openPseudoScope();
 				final String proposedName = "_"+Strings.toFirstLower(casePart.getTypeGuard().getType().getSimpleName());
-				final String castedVariableName = b.declareFreshVariable(switchOver, proposedName);
+				final String castedVariableName = b.declareSyntheticVariable(switchOver, proposedName);
 				b.append("\nfinal ");
 				serialize(casePart.getTypeGuard(), expr, b);
 				b.append(" ");
@@ -484,7 +486,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append("\n").append("final ");
 		serialize(type, closure, b);
 		b.append(" ");
-		String variableName = b.declareVariable(closure, "_function");
+		String variableName = b.declareSyntheticVariable(closure, "_function");
 		b.append(variableName).append(" = ");
 		b.append("new ");
 		// TODO parameters in type arguments are safe to be a wildcard
@@ -508,7 +510,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				b.append("final ");
 				serialize(parameterType, closure, b, false, false, true, true);
 				b.append(" ");
-				String name = declareNameInVariableScope(closureParam, b);
+				String name = b.declareVariable(closureParam, closureParam.getName());
 				b.append(name);
 				if (i != closureParams.size() - 1)
 					b.append(", ");
@@ -517,10 +519,13 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			b.increaseIndentation();
 			Object element = b.getObject("this");
 			if (element instanceof JvmType) {
-				b.declareVariable(element, ((JvmType) element).getSimpleName()+".this");
-				Object superElement = b.getObject("super");
-				if (superElement instanceof JvmType) {
-					b.declareVariable(superElement, ((JvmType) element).getSimpleName()+".super");
+				final String proposedName = ((JvmType) element).getSimpleName()+".this";
+				if (b.getObject(proposedName) == null) {
+					b.declareSyntheticVariable(element, proposedName);
+					Object superElement = b.getObject("super");
+					if (superElement instanceof JvmType) {
+						b.declareSyntheticVariable(superElement, ((JvmType) element).getSimpleName()+".super");
+					}
 				}
 			}
 			compile(closure.getExpression(), b, operation.getReturnType());
