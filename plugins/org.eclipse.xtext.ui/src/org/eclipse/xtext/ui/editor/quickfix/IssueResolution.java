@@ -42,6 +42,18 @@ public class IssueResolution {
 	public String getImage() {
 		return image;
 	}
+	/**
+	 * @since 2.2
+	 */
+	public IModification getModification() {
+		return modification;
+	}
+	/**
+	 * @since 2.2
+	 */
+	public IModificationContext getModificationContext() {
+		return modificationContext;
+	}
 
 	public void apply() {
 		try {
