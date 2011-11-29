@@ -31,13 +31,13 @@ public class Xtend05_Loops {
       Iterator<String> _iterator = strings.iterator();
       final Iterator<String> iter = _iterator;
       boolean _hasNext = iter.hasNext();
-      Boolean _xwhileexpression = _hasNext;
-      while (_xwhileexpression) {
+      boolean _while = _hasNext;
+      while (_while) {
         String _next = iter.next();
         String _operator_plus = StringExtensions.operator_plus("Hi ", _next);
         InputOutput.<String>println(_operator_plus);
         boolean _hasNext_1 = iter.hasNext();
-        _xwhileexpression = _hasNext_1;
+        _while = _hasNext_1;
       }
   }
 }

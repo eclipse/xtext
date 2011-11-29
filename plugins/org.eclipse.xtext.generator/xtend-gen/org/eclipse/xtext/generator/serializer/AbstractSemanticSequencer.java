@@ -520,10 +520,10 @@ public class AbstractSemanticSequencer extends GeneratedFile {
                       }
                     };
                   List<EObject> _sortBy_1 = IterableExtensions.<EObject, String>sortBy(_value, _function_1);
-                  boolean hasAnyElements = false;
+                  boolean _FOR = false;
                   for(final EObject c : _sortBy_1) {
-                    if (!hasAnyElements) {
-                      hasAnyElements = true;
+                    if (!_FOR) {
+                      _FOR = true;
                     } else {
                       _builder.appendImmediate(" ||\n   ", "			");
                     }
@@ -709,16 +709,16 @@ public class AbstractSemanticSequencer extends GeneratedFile {
               List<IConstraintElement> _children = _body_4.getChildren();
               final Function1<IConstraintElement,Boolean> _function_1 = new Function1<IConstraintElement,Boolean>() {
                   public Boolean apply(final IConstraintElement e) {
-                    IFeatureInfo _featureInfo_2 = e.getFeatureInfo();
-                    boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_featureInfo_2, null);
-                    return ((Boolean)_operator_notEquals_1);
+                    IFeatureInfo _featureInfo = e.getFeatureInfo();
+                    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_featureInfo, null);
+                    return ((Boolean)_operator_notEquals);
                   }
                 };
               Iterable<IConstraintElement> _filter_1 = IterableExtensions.<IConstraintElement>filter(_children, _function_1);
               final Function1<IConstraintElement,IFeatureInfo> _function_2 = new Function1<IConstraintElement,IFeatureInfo>() {
                   public IFeatureInfo apply(final IConstraintElement e) {
-                    IFeatureInfo _featureInfo_2 = e.getFeatureInfo();
-                    return _featureInfo_2;
+                    IFeatureInfo _featureInfo = e.getFeatureInfo();
+                    return _featureInfo;
                   }
                 };
               Iterable<IFeatureInfo> _map = IterableExtensions.<IConstraintElement, IFeatureInfo>map(_filter_1, _function_2);

@@ -23,8 +23,8 @@ public class Xbase08_Loops {
     	int i = 0;
     	int _size = list.size();
     	boolean _operator_lessThan = ComparableExtensions.<Integer>operator_lessThan(((Integer)i), ((Integer)_size));
-    	Boolean _xwhileexpression = _operator_lessThan;
-    	while (_xwhileexpression) {
+    	boolean _while = _operator_lessThan;
+    	while (_while) {
     		{
     			String _get = list.get(i);
     			String _operator_plus = StringExtensions.operator_plus("whiled-", _get);
@@ -34,7 +34,7 @@ public class Xbase08_Loops {
     		}
     		int _size_1 = list.size();
     		boolean _operator_lessThan_1 = ComparableExtensions.<Integer>operator_lessThan(((Integer)i), ((Integer)_size_1));
-    		_xwhileexpression = _operator_lessThan_1;
+    		_while = _operator_lessThan_1;
     	}
     } catch (Throwable t) {}
   }

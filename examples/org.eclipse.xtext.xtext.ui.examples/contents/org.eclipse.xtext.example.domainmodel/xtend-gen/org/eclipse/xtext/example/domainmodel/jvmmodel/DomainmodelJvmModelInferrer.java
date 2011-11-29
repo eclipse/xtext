@@ -82,20 +82,20 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
                   String _name = _operation.getName();
                   JvmTypeReference _type = _operation.getType();
                   final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
-                      public void apply(final JvmOperation it) {
+                      public void apply(final JvmOperation it_1) {
                         {
-                          String _documentation_1 = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(_operation);
-                          DomainmodelJvmModelInferrer.this._jvmTypesBuilder.setDocumentation(it, _documentation_1);
+                          String _documentation = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(_operation);
+                          DomainmodelJvmModelInferrer.this._jvmTypesBuilder.setDocumentation(it_1, _documentation);
                           EList<JvmFormalParameter> _params = _operation.getParams();
                           for (final JvmFormalParameter p : _params) {
-                            EList<JvmFormalParameter> _parameters = it.getParameters();
-                            String _name_1 = p.getName();
+                            EList<JvmFormalParameter> _parameters = it_1.getParameters();
+                            String _name = p.getName();
                             JvmTypeReference _parameterType = p.getParameterType();
-                            JvmFormalParameter _parameter = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toParameter(p, _name_1, _parameterType);
+                            JvmFormalParameter _parameter = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toParameter(p, _name, _parameterType);
                             CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter);
                           }
                           XExpression _body = _operation.getBody();
-                          DomainmodelJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _body);
+                          DomainmodelJvmModelInferrer.this._jvmTypesBuilder.setBody(it_1, _body);
                         }
                       }
                     };

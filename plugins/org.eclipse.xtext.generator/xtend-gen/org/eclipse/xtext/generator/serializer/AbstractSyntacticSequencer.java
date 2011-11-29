@@ -229,8 +229,8 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
                   return ((Boolean)_operator_and);
                 }
               };
-            Iterable<RuleCall> _filter_1 = IterableExtensions.<RuleCall>filter(_containedRuleCalls, _function);
-            return _filter_1;
+            Iterable<RuleCall> _filter = IterableExtensions.<RuleCall>filter(_containedRuleCalls, _function);
+            return _filter;
           }
         };
       Iterable<Iterable<RuleCall>> _map = IterableExtensions.<AbstractRule, Iterable<RuleCall>>map(rules, _function_1);
