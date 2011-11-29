@@ -12,7 +12,6 @@ import static com.google.common.collect.Lists.newArrayList;
 import static org.eclipse.xtext.util.Strings.concat;
 
 import java.io.File;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -21,55 +20,23 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.spi.LoggingEvent;
 import org.apache.maven.artifact.Artifact;
-import org.apache.maven.artifact.DependencyResolutionRequiredException;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
-import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtext.xtend2.Xtend2StandaloneSetup;
 import org.eclipse.xtext.xtend2.compiler.batch.Xtend2BatchCompiler;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Sets;
 import com.google.inject.Injector;
 
-/**
- * Goal which compiles Xtend2 sources.
- * 
- * @goal compile
- * @requiresDependencyResolution test
- * @phase process-sources
- */
-public class Xtend2BatchCompilerPlugin extends AbstractMojo {
-	private static final Predicate<String> FILE_EXISTS = new Predicate<String>() {
+public abstract class AbstractXtend2CompilerMojo extends AbstractMojo {
+	protected static final Predicate<String> FILE_EXISTS = new Predicate<String>() {
 
 		public boolean apply(String filePath) {
 			return new File(filePath).exists();
 		}
 	};
-	/**
-	 * Location of the generated source files.
-	 * 
-	 * @parameter default-value="${basedir}/src/main/xtend-gen"
-	 * @required
-	 */
-	private String outputDirectory;
-	/**
-	 * Location of the generated test files.
-	 * 
-	 * @parameter default-value="${basedir}/src/test/xtend-gen"
-	 * @required
-	 */
-	private String testOutputDirectory;
-	/**
-	 * Location of the temporary compiler directory.
-	 * 
-	 * @parameter default-value="${project.build.directory}/xtend"
-	 * @required
-	 */
-	private String tempDirectory;
-
 	/**
 	 * The project itself. This parameter is set by maven.
 	 * 
@@ -81,29 +48,14 @@ public class Xtend2BatchCompilerPlugin extends AbstractMojo {
 	public void execute() throws MojoExecutionException {
 		configureLog4j();
 		Xtend2BatchCompiler xtend2BatchCompiler = createXtend2BatchCompiler();
-		compileSources(xtend2BatchCompiler);
-		compileTestSources(xtend2BatchCompiler);
+		internalExecute(xtend2BatchCompiler);
 	}
+
+	protected abstract void internalExecute(Xtend2BatchCompiler xtend2BatchCompiler) throws MojoExecutionException;
 
 	protected Xtend2BatchCompiler createXtend2BatchCompiler() {
 		Injector injector = new Xtend2StandaloneSetup().createInjectorAndDoEMFRegistration();
 		return injector.getInstance(Xtend2BatchCompiler.class);
-	}
-
-	private void compileSources(Xtend2BatchCompiler xtend2BatchCompiler) throws MojoExecutionException {
-		String sourceDirectory = project.getBuild().getSourceDirectory();
-		String classPath = concat(File.pathSeparator, getClassPath());
-		project.addCompileSourceRoot(outputDirectory);
-		compile(xtend2BatchCompiler, classPath, Collections.singletonList(sourceDirectory), outputDirectory);
-	}
-
-	protected void compileTestSources(Xtend2BatchCompiler xtend2BatchCompiler) throws MojoExecutionException {
-		String sourceDirectory = project.getBuild().getSourceDirectory();
-		String testSourceDirectory = project.getBuild().getTestSourceDirectory();
-		String testClassPath = concat(File.pathSeparator, getTestClassPath());
-		project.addTestCompileSourceRoot(testOutputDirectory);
-		compile(xtend2BatchCompiler, testClassPath, newArrayList(sourceDirectory, testSourceDirectory),
-				testOutputDirectory);
 	}
 
 	protected void compile(Xtend2BatchCompiler xtend2BatchCompiler, String classPath, List<String> sourceDirectories,
@@ -115,7 +67,7 @@ public class Xtend2BatchCompilerPlugin extends AbstractMojo {
 							+ "' does not exists.");
 			return;
 		}
-		xtend2BatchCompiler.setTempDirectory(tempDirectory);
+		xtend2BatchCompiler.setTempDirectory(getTempDirectory());
 		xtend2BatchCompiler.setDeleteTempDirectory(false);
 		xtend2BatchCompiler.setClassPath(classPath);
 		xtend2BatchCompiler.setSourcePath(concat(File.pathSeparator, newArrayList(filtered)));
@@ -125,6 +77,8 @@ public class Xtend2BatchCompilerPlugin extends AbstractMojo {
 					+ concat(File.pathSeparator, newArrayList(filtered)) + "'.");
 		}
 	}
+
+	protected abstract String getTempDirectory();
 
 	protected void configureLog4j() {
 		if (!Logger.getRootLogger().getAllAppenders().hasMoreElements()) {
@@ -169,33 +123,6 @@ public class Xtend2BatchCompilerPlugin extends AbstractMojo {
 				return event.getThrowableInformation() != null ? event.getThrowableInformation().getThrowable() : null;
 			}
 		};
-	}
-
-	@SuppressWarnings("unchecked")
-	protected List<String> getClassPath() {
-		Set<String> classPath = Sets.newLinkedHashSet();
-		classPath.add(project.getBuild().getSourceDirectory());
-		try {
-			classPath.addAll(project.getCompileClasspathElements());
-		} catch (DependencyResolutionRequiredException e) {
-			throw new WrappedException(e);
-		}
-		addDependencies(classPath, project.getCompileArtifacts());
-		return newArrayList(filter(classPath, FILE_EXISTS));
-	}
-
-	@SuppressWarnings("unchecked")
-	protected List<String> getTestClassPath() {
-		Set<String> classPath = Sets.newLinkedHashSet();
-		classPath.add(project.getBuild().getSourceDirectory());
-		classPath.add(project.getBuild().getTestSourceDirectory());
-		try {
-			classPath.addAll(project.getTestClasspathElements());
-		} catch (DependencyResolutionRequiredException e) {
-			throw new WrappedException(e);
-		}
-		addDependencies(classPath, project.getTestArtifacts());
-		return newArrayList(filter(classPath, FILE_EXISTS));
 	}
 
 	protected void addDependencies(Set<String> classPath, List<Artifact> dependencies) {
