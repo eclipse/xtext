@@ -420,6 +420,14 @@ public class XtendHighlightingCalculatorTest extends AbstractXtend2UITestCase im
 		highlight(model);
 	}
 	
+	public void testDeclaredStaticField() throws Exception {
+		String model = "{} private static String foo def bar() {foo}";
+		expectAbsolut(model.indexOf("foo"), 3,XbaseHighlightingConfiguration.STATIC_FIELD);
+		expectAbsolut(model.indexOf("foo"), 3,XbaseHighlightingConfiguration.FIELD);
+		expectAbsolut(model.lastIndexOf("foo"), 3,XbaseHighlightingConfiguration.STATIC_FIELD);
+		expectAbsolut(model.lastIndexOf("foo"), 3,XbaseHighlightingConfiguration.FIELD);
+	}
+	
 	
 	protected void highlight(String functionBody) {
 		try {
