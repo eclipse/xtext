@@ -206,10 +206,14 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                         final IResourceDescription.Manager manager = getResourceDescriptionManager(changedURI);
                         if (manager != null) {
                             // Resolve links here!
-                            EcoreUtil2.resolveLazyCrossReferences(resource, cancelMonitor);
-                            final IResourceDescription description = manager.getResourceDescription(resource);
-                            final IResourceDescription copiedDescription = BuilderStateUtil.create(description);
-                            newDelta = manager.createDelta(this.getResourceDescription(changedURI), copiedDescription);
+                        	try {
+	                            EcoreUtil2.resolveLazyCrossReferences(resource, cancelMonitor);
+	                            final IResourceDescription description = manager.getResourceDescription(resource);
+	                            final IResourceDescription copiedDescription = BuilderStateUtil.create(description);
+	                            newDelta = manager.createDelta(this.getResourceDescription(changedURI), copiedDescription);
+                        	} catch (RuntimeException e) {
+                        		LOGGER.error("Error resolving cross references on resource '"+resource.getURI()+"'", e);
+                        	}
                         }
                     } catch (final WrappedException ex) {
                         if(ex instanceof LoadOperationException) {
