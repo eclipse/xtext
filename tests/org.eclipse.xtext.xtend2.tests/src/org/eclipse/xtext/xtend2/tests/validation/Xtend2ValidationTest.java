@@ -843,11 +843,41 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testConstructorThrownExceptionsOfTypeThrowable() throws Exception {
 		XtendClass clazz = clazz("class X { new () throws Integer { }}");
-		helper.assertError(clazz, Xtend2Package.Literals.XTEND_CONSTRUCTOR, EXCEPTON_NOT_THROWABLE, "No", "can", "subclass", "Throwable");
+		helper.assertError(clazz, Xtend2Package.Literals.XTEND_CONSTRUCTOR, EXCEPTION_NOT_THROWABLE, "No", "can", "subclass", "Throwable");
 	}
 	
 	public void testFunctionThrownExceptionsOfTypeThrowable() throws Exception {
 		XtendClass clazz = clazz("class X { def foo() throws Integer { } }");
-		helper.assertError(clazz, Xtend2Package.Literals.XTEND_FUNCTION, EXCEPTON_NOT_THROWABLE, "No", "can", "subclass", "Throwable");
+		helper.assertError(clazz, Xtend2Package.Literals.XTEND_FUNCTION, EXCEPTION_NOT_THROWABLE, "No", "can", "subclass", "Throwable");
+	}
+	
+	public void testExceptionsDeclaredTwiceOnConstructor() throws Exception {
+		XtendClass clazz = clazz("import java.io.IOException class X { new () throws IOException, IOException { }}");
+		helper.assertError(clazz, Xtend2Package.Literals.XTEND_CONSTRUCTOR, EXCEPTION_DECLARED_TWICE, "Exception", "declared", "twice");
+	}
+	
+	public void testExceptionsNotDeclaredTwiceOnConstructor() throws Exception {
+		XtendClass clazz = clazz("import java.io.IOException class X { new () throws IOException, NullPointerException { }}");
+		helper.assertNoIssues(clazz);
+	}
+	
+	public void testExceptionsDeclaredTwiceOnFunction() throws Exception {
+		XtendClass clazz = clazz("import java.io.IOException class X {def foo() throws IOException, IOException { }}");
+		helper.assertError(clazz, Xtend2Package.Literals.XTEND_FUNCTION, EXCEPTION_DECLARED_TWICE, "Exception", "declared", "twice");
+	}
+	
+	public void testExceptionsNotDeclaredTwiceOnFunction() throws Exception {
+		XtendClass clazz = clazz("import java.io.IOException class X {def foo() throws IOException, NullPointerException { }}");
+		helper.assertNoIssues(clazz);
+	}
+	
+	public void testSubTypeExceptionDeclaredOnFunction() throws Exception {
+		XtendClass clazz = clazz("import java.io.IOException class X {def foo() throws IOException, Exception { }}");
+		helper.assertError(clazz, Xtend2Package.Literals.XTEND_FUNCTION, EXCEPTION_SUPTYPE_OF_DECLARED_EXCEPTION, "subtype");
+	}
+	
+	public void testSubTypeExceptionDeclaredOnConstructor() throws Exception {
+		XtendClass clazz = clazz("import java.io.IOException class X { new () throws IOException, Exception { }}");
+		helper.assertError(clazz, Xtend2Package.Literals.XTEND_CONSTRUCTOR, EXCEPTION_SUPTYPE_OF_DECLARED_EXCEPTION, "subtype");
 	}
 }

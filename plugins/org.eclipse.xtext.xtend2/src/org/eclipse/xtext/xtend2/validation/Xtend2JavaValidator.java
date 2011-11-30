@@ -53,6 +53,7 @@ import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
+import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -100,6 +101,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
@@ -137,6 +139,9 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 
 	@Inject
 	private TypeErasedSignature.Provider signatureProvider; 
+	
+	@Inject
+	private TypeConformanceComputer typeConformanceComputer;
 
 	@Inject
 	private XAnnotationUtil annotationUtil;
@@ -1042,22 +1047,35 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 	}
 	
 	@Check
-	public void checkConstructorOnlyThrowsThrowableExceptions(XtendConstructor constructor){
+	public void checkDeclaredExceptions(XtendConstructor constructor){
 		JvmConstructor jvmType = associations.getInferredConstructor(constructor);
-		checkExceptionsForThrowAblility(jvmType.getExceptions(), Xtend2Package.Literals.XTEND_CONSTRUCTOR__EXCEPTIONS);
+		checkExceptions(constructor,jvmType.getExceptions(), Xtend2Package.Literals.XTEND_CONSTRUCTOR__EXCEPTIONS);
 	}
 	
 	@Check
-	public void checkFunctionOnlyThrowsThrowableExceptions(XtendFunction function){
+	public void checkDeclaredExceptions(XtendFunction function){
 		JvmOperation jvmType = associations.getDirectlyInferredOperation(function);
-		checkExceptionsForThrowAblility(jvmType.getExceptions(), Xtend2Package.Literals.XTEND_FUNCTION__EXCEPTIONS);
+		checkExceptions(function,jvmType.getExceptions(), Xtend2Package.Literals.XTEND_FUNCTION__EXCEPTIONS);
 	}
 	
-	private void checkExceptionsForThrowAblility(EList<JvmTypeReference> exceptions, EReference reference){
+	private void checkExceptions(EObject context, EList<JvmTypeReference> exceptions, EReference reference){
+		Set<String> declaredExceptionNames = Sets.newHashSet();
+		JvmTypeReference throwableType = typeReferences.getTypeForName(Throwable.class, context);
 		for(JvmTypeReference exception : exceptions){
-			if(!superTypeCollector.collectSuperTypeNames(exception).contains("java.lang.Throwable"))
+			if(!typeConformanceComputer.isConformant(throwableType, exception))
 				error("No exception of type " + exception.getSimpleName() + " can be thrown; an exception type must be a subclass of Throwable"
-						, reference, exceptions.indexOf(exception), EXCEPTON_NOT_THROWABLE);
+						, reference, exceptions.indexOf(exception), EXCEPTION_NOT_THROWABLE);
+			if(!declaredExceptionNames.add(exception.getQualifiedName()))
+				error("Exception " + exception.getSimpleName() + " is declared twice", reference, exceptions.indexOf(exception), EXCEPTION_DECLARED_TWICE);
 		}
+		for(JvmTypeReference exception : exceptions){
+			for(String superTypeName :  superTypeCollector.collectSuperTypeNames(exception)){
+				if(declaredExceptionNames.contains(superTypeName)){
+					error(exception.getSimpleName() + " is a subtype of also declared " + superTypeName ,reference, exceptions.indexOf(exception),EXCEPTION_SUPTYPE_OF_DECLARED_EXCEPTION);
+				}
+			}
+		}
+		
 	}
+	
 }
