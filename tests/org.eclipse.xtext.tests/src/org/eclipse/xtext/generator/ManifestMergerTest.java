@@ -18,6 +18,7 @@ import java.util.jar.Manifest;
 
 import junit.framework.TestCase;
 
+import org.eclipse.xtext.util.MergeableManifest;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.Wrapper;
 
