@@ -421,6 +421,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 							nsURI);
 					return;
 				}
+				return;
 			}
 		}
 		checkExternalPackage(metamodel, text);
