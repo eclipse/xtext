@@ -52,7 +52,8 @@
 			</cs:actorProperties>
 			<cs:properties>
 				<cs:property key="content.ius" value="org.eclipse.xtext.sdk.feature.group" />
-				<cs:property key="target.platform.ius" value="org.antlr.runtime,org.antlr.runtime.source,org.apache.log4j,org.apache.log4j.source" />
+				<cs:property key="target.platform.ius" value="javax.inject,org.antlr.runtime,org.antlr.runtime.source,org.apache.log4j,org.apache.log4j.source" />
+				<cs:property key="prerequisite.ius" value="com.google.guava,com.google.inject" />
 				<cs:property key="package.name" value="tmf-xtext-SDK" />
 			</cs:properties>
 			<cs:prerequisites>
@@ -87,7 +88,6 @@
 			</cs:actorProperties>
 			<cs:properties>
 				<cs:property key="content.ius" value="org.eclipse.xtext.runtime.feature.group" />
-				<cs:property key="prerequisite.ius" value="com.google.collect" />
 				<cs:property key="package.name" value="tmf-xtext-runtime" />
 			</cs:properties>
 			<cs:prerequisites>
@@ -104,7 +104,6 @@
 			</cs:actorProperties>
 			<cs:properties>
 				<cs:property key="content.ius" value="org.eclipse.xtext.tests.feature.group" />
-				<cs:property key="prerequisite.ius" value="com.google.collect" />
 				<cs:property key="package.name" value="tmf-xtext-Automated-Tests" />
 			</cs:properties>
 			<cs:prerequisites>
