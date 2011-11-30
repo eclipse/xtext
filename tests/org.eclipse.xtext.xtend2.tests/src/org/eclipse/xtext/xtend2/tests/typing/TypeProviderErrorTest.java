@@ -152,6 +152,22 @@ public class TypeProviderErrorTest extends AbstractXtend2TestCase {
 		}
 	}
 	
+	public void testNoException_07() throws Exception {
+		XtendFile file = file("class foo  {\n" + 
+							  "		def bar() {" + 
+							  "			try catch()" +
+		    				  "		}" +
+							  "}");
+		Iterator<Object> contents = EcoreUtil.getAllContents(file.eResource(), true);
+		while(contents.hasNext()) {
+			EObject object = (EObject) contents.next();
+			if (object instanceof XExpression) {
+				XExpression expression = (XExpression) object;
+				typeProvider.getCommonReturnType(expression, true);
+			}
+		}
+	}
+	
 	@Override
 	protected XtendFile file(String string, boolean validate) throws Exception {
 		if (validate)
