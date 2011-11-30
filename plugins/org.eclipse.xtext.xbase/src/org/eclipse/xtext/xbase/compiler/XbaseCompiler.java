@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
+import static com.google.common.collect.Sets.*;
+
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
@@ -530,7 +532,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 					}
 				}
 			}
-			compile(closure.getExpression(), b, operation.getReturnType());
+			compile(closure.getExpression(), b, operation.getReturnType(), newHashSet(operation.getExceptions()));
 		} finally {
 			b.closeScope();
 		}

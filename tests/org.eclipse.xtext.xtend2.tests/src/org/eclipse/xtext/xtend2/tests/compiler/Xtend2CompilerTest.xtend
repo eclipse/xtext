@@ -30,6 +30,26 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''')
 	}
 	
+//	see  
+//	def testClosureSneakyThrow() {
+//		assertCompilesTo('''
+//		import java.io.File
+//		import java.io.IOException
+//		import java.util.Collections
+//		
+//		class Foo  {     
+//		   def bar() {               
+//		       try {       
+//		           newArrayList("file1.ext").map(f| new File(f).canonicalFile) 
+//		       } catch(IOException o) {  
+//		           Collections::<File>emptyList
+//		       } 
+//		   }
+//		}
+//		''','''
+//		''')
+//	}
+	
 	
 	def testFieldInitialization_01() { 
 		assertCompilesTo('''
