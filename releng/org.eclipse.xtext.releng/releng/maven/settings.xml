@@ -8,7 +8,12 @@
 -->
    <servers>
       <server>
-        <id>xtext-Testing</id>
+        <id>xtext-releases</id>
+        <username>dhubner</username>
+        <password>${encrypt-this}</password>
+      </server>
+      <server>
+        <id>xtext-snapshot</id>
         <username>dhubner</username>
         <password>${encrypt-this}</password>
       </server>

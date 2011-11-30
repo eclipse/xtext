@@ -10,15 +10,15 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>org.eclipse.xtext.nexus.deployer</name>
-    <distributionManagement>
+     <distributionManagement>
     <repository>
-      <id>xtext-Testing</id>
-      <name>Eclipse Xtext Repository</name>
-      <url>http://maven.eclipse.org/nexus/content/repositories/testing/</url>
+      <id>xtext-releases</id>
+      <name>Eclipse Xtext Releases</name>
+      <url>http://maven.eclipse.org/nexus/content/repositories/xtext-proxy/</url>
     </repository>
     <snapshotRepository>
-      <id>xtext-Testing</id>
-      <name>Eclipse Xtext Repository</name>
+      <id>xtext-snapshot</id>
+      <name>Eclipse Xtext Snapshots</name>
       <url>http://maven.eclipse.org/nexus/content/repositories/testing/</url>
     </snapshotRepository>
   </distributionManagement>
