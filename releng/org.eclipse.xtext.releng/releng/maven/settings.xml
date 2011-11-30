@@ -66,6 +66,26 @@
           <url>http://maven.eclipse.org/nightly</url>
           <snapshots><enabled>true</enabled></snapshots>
         </repository>
+        <repository>
+        <id>Xtext Latest</id>
+        <url>http://build.eclipse.org/jobs/Xtext-Maven-Deploy/maven-snapshot/</url>
+        <releases>
+           <enabled>true</enabled>
+        </releases>
+        <snapshots>
+          <enabled>true</enabled>
+        </snapshots>        
+     	</repository>
+     	 <repository>
+        <id>Eclipse Testing</id>
+        <url>http://maven.eclipse.org/nexus/content/repositories/testing/</url>
+        <releases>
+           <enabled>true</enabled>
+        </releases>
+        <snapshots>
+          <enabled>true</enabled>
+        </snapshots>        
+     	</repository>
       </repositories>  
     </profile>
   </profiles>
