@@ -19,8 +19,8 @@ import com.google.common.collect.Sets;
 /**
  * Goal which compiles Xtend2 test sources.
  * 
- * @goal test-compile
- * @phase generate-test-sourcess
+ * @goal testCompile
+ * @phase generate-test-sources
  * @requiresDependencyResolution test
  */
 public class XtendTestCompile extends AbstractXtend2CompilerMojo {
