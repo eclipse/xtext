@@ -60,6 +60,16 @@ import com.google.inject.Injector;
  */
 public class CompilerTest extends AbstractXtend2TestCase {
 	
+	public void testClosuresAndExceptions() throws Exception {
+		String code = "" +
+				"def test() {\n" +
+				"  newArrayList('foo').map( s | throwing(s) ).head\n" +
+				"}\n" +
+				"def String throwing(String s) throws java.io.IOException {\n" +
+				"  s\n" +
+				"}\n";
+		invokeAndExpect2("foo", code, "test");
+	}
 	
 	public void testFunctionTypes() throws Exception {
 		String code = "" +
