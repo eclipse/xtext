@@ -38,10 +38,10 @@ public class GrammarConstraints extends GeneratedFile {
     _builder.append(_name, "");
     {
       EList<Grammar> _usedGrammars = this.grammar.getUsedGrammars();
-      boolean _FOR = false;
+      boolean _hasElements = false;
       for(final Grammar ug : _usedGrammars) {
-        if (!_FOR) {
-          _FOR = true;
+        if (!_hasElements) {
+          _hasElements = true;
           _builder.append(" with ", "");
         } else {
           _builder.appendImmediate(", ", "");
@@ -63,10 +63,10 @@ public class GrammarConstraints extends GeneratedFile {
     _builder.newLine();
     {
       List<IConstraintContext> _grammarConstraintContexts = this.sequencerUtil.getGrammarConstraintContexts(this.grammar);
-      boolean _FOR_1 = false;
+      boolean _hasElements_1 = false;
       for(final IConstraintContext gcc : _grammarConstraintContexts) {
-        if (!_FOR_1) {
-          _FOR_1 = true;
+        if (!_hasElements_1) {
+          _hasElements_1 = true;
         } else {
           _builder.appendImmediate("\n", "");
         }
@@ -81,10 +81,10 @@ public class GrammarConstraints extends GeneratedFile {
         _builder.append("\t");
         {
           List<IConstraint> _constraints = gcc.getConstraints();
-          boolean _FOR_2 = false;
+          boolean _hasElements_2 = false;
           for(final IConstraint constraint : _constraints) {
-            if (!_FOR_2) {
-              _FOR_2 = true;
+            if (!_hasElements_2) {
+              _hasElements_2 = true;
             } else {
               _builder.appendImmediate(" | ", "	");
             }
@@ -103,10 +103,10 @@ public class GrammarConstraints extends GeneratedFile {
     _builder.newLine();
     {
       Collection<IConstraint> _grammarConstraints = this.sequencerUtil.getGrammarConstraints(this.grammar);
-      boolean _FOR_3 = false;
+      boolean _hasElements_3 = false;
       for(final IConstraint constraint_1 : _grammarConstraints) {
-        if (!_FOR_3) {
-          _FOR_3 = true;
+        if (!_hasElements_3) {
+          _hasElements_3 = true;
         } else {
           _builder.appendImmediate("\n", "");
         }

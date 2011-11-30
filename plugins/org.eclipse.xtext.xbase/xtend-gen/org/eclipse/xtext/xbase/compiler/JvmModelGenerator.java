@@ -114,17 +114,17 @@ public class JvmModelGenerator implements IGenerator {
       }
       {
         List<String> _imports = importManager.getImports();
-        boolean _FOR = false;
+        boolean _hasElements = false;
         for(final String i : _imports) {
-          if (!_FOR) {
-            _FOR = true;
+          if (!_hasElements) {
+            _hasElements = true;
           }
           _builder.append("import ");
           _builder.append(i, "");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
         }
-        if (_FOR) {
+        if (_hasElements) {
           _builder.append("\n", "");
         }
       }
@@ -181,10 +181,10 @@ public class JvmModelGenerator implements IGenerator {
           }
         };
       Iterable<CharSequence> _filter = IterableExtensions.<CharSequence>filter(_map, _function_1);
-      boolean _FOR = false;
+      boolean _hasElements = false;
       for(final CharSequence memberCode : _filter) {
-        if (!_FOR) {
-          _FOR = true;
+        if (!_hasElements) {
+          _hasElements = true;
         } else {
           _builder.appendImmediate("\n", "  ");
         }
@@ -618,10 +618,10 @@ public class JvmModelGenerator implements IGenerator {
   public CharSequence generateTypeParameterDeclaration(final List<JvmTypeParameter> typeParameters, final ImportManager importManager) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      boolean _FOR = false;
+      boolean _hasElements = false;
       for(final JvmTypeParameter it : typeParameters) {
-        if (!_FOR) {
-          _FOR = true;
+        if (!_hasElements) {
+          _hasElements = true;
           _builder.append("<", "");
         } else {
           _builder.appendImmediate(", ", "");
@@ -629,7 +629,7 @@ public class JvmModelGenerator implements IGenerator {
         CharSequence _generateTypeParameterDeclaration = this.generateTypeParameterDeclaration(it, importManager);
         _builder.append(_generateTypeParameterDeclaration, "");
       }
-      if (_FOR) {
+      if (_hasElements) {
         _builder.append("> ", "");
       }
     }
@@ -650,10 +650,10 @@ public class JvmModelGenerator implements IGenerator {
     {
       EList<JvmTypeConstraint> _constraints = it.getConstraints();
       Iterable<JvmUpperBound> _filter = IterableExtensions.<JvmUpperBound>filter(_constraints, org.eclipse.xtext.common.types.JvmUpperBound.class);
-      boolean _FOR = false;
+      boolean _hasElements = false;
       for(final JvmUpperBound it_1 : _filter) {
-        if (!_FOR) {
-          _FOR = true;
+        if (!_hasElements) {
+          _hasElements = true;
           _builder.append(" extends ", "");
         } else {
           _builder.appendImmediate(" & ", "");
@@ -670,10 +670,10 @@ public class JvmModelGenerator implements IGenerator {
     StringConcatenation _builder = new StringConcatenation();
     {
       EList<JvmTypeReference> _exceptions = it.getExceptions();
-      boolean _FOR = false;
+      boolean _hasElements = false;
       for(final JvmTypeReference exc : _exceptions) {
-        if (!_FOR) {
-          _FOR = true;
+        if (!_hasElements) {
+          _hasElements = true;
           _builder.append(" throws ", "");
         } else {
           _builder.appendImmediate(", ", "");
@@ -843,10 +843,10 @@ public class JvmModelGenerator implements IGenerator {
           _builder.append(_serialize, "");
           {
             EList<JvmAnnotationValue> _values = a.getValues();
-            boolean _FOR = false;
+            boolean _hasElements = false;
             for(final JvmAnnotationValue value : _values) {
-              if (!_FOR) {
-                _FOR = true;
+              if (!_hasElements) {
+                _hasElements = true;
                 _builder.append("(", "");
               } else {
                 _builder.appendImmediate(", ", "");
@@ -854,7 +854,7 @@ public class JvmModelGenerator implements IGenerator {
               CharSequence _java = this.toJava(value, importManager);
               _builder.append(_java, "");
             }
-            if (_FOR) {
+            if (_hasElements) {
               _builder.append(")", "");
             }
           }
@@ -1028,10 +1028,10 @@ public class JvmModelGenerator implements IGenerator {
           Iterable<Object> _tail = IterableExtensions.<Object>tail(_values_3);
           Iterable<XExpression> _filter = IterableExtensions.<XExpression>filter(_tail, org.eclipse.xtext.xbase.XExpression.class);
           final Procedure1<XExpression> _function = new Procedure1<XExpression>() {
-              public void apply(final XExpression it_1) {
+              public void apply(final XExpression it) {
                 {
                   appendable.append(",");
-                  JvmModelGenerator.this.compiler.toJavaExpression(it_1, appendable);
+                  JvmModelGenerator.this.compiler.toJavaExpression(it, appendable);
                 }
               }
             };

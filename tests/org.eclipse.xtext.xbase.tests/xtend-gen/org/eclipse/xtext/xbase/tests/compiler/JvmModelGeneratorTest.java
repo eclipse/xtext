@@ -79,13 +79,13 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
               EList<JvmMember> _members = it.getMembers();
               JvmTypeReference _typeForName = JvmModelGeneratorTest.this.references.getTypeForName(java.lang.String.class, expression);
               final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
-                  public void apply(final JvmOperation it_1) {
+                  public void apply(final JvmOperation it) {
                     {
-                      EList<JvmFormalParameter> _parameters = it_1.getParameters();
+                      EList<JvmFormalParameter> _parameters = it.getParameters();
                       JvmTypeReference _typeForName = JvmModelGeneratorTest.this.references.getTypeForName(java.lang.String.class, expression);
                       JvmFormalParameter _parameter = JvmModelGeneratorTest.this.builder.toParameter(expression, "s", _typeForName);
                       CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter);
-                      JvmModelGeneratorTest.this.builder.setBody(it_1, expression);
+                      JvmModelGeneratorTest.this.builder.setBody(it, expression);
                     }
                   }
                 };

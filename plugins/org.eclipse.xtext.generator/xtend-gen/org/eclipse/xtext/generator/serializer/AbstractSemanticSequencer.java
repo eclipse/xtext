@@ -520,10 +520,10 @@ public class AbstractSemanticSequencer extends GeneratedFile {
                       }
                     };
                   List<EObject> _sortBy_1 = IterableExtensions.<EObject, String>sortBy(_value, _function_1);
-                  boolean _FOR = false;
+                  boolean _hasElements = false;
                   for(final EObject c : _sortBy_1) {
-                    if (!_FOR) {
-                      _FOR = true;
+                    if (!_hasElements) {
+                      _hasElements = true;
                     } else {
                       _builder.appendImmediate(" ||\n   ", "			");
                     }

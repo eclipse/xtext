@@ -31,13 +31,13 @@ public class SimpleJvmModelInferrer implements IJvmModelInferrer {
           EList<JvmMember> _members = it.getMembers();
           JvmTypeReference _typeForName = SimpleJvmModelInferrer.this.references.getTypeForName(java.lang.String.class, e);
           final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
-              public void apply(final JvmOperation it_1) {
+              public void apply(final JvmOperation it) {
                 {
-                  EList<JvmFormalParameter> _parameters = it_1.getParameters();
+                  EList<JvmFormalParameter> _parameters = it.getParameters();
                   JvmTypeReference _typeForName = SimpleJvmModelInferrer.this.references.getTypeForName(java.lang.String.class, e);
                   JvmFormalParameter _parameter = SimpleJvmModelInferrer.this._jvmTypesBuilder.toParameter(e, "s", _typeForName);
                   CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter);
-                  SimpleJvmModelInferrer.this._jvmTypesBuilder.setBody(it_1, ((XExpression) e));
+                  SimpleJvmModelInferrer.this._jvmTypesBuilder.setBody(it, ((XExpression) e));
                 }
               }
             };

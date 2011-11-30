@@ -66,10 +66,10 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
               EList<JvmMember> _members = it.getMembers();
               JvmTypeReference _newTypeRef = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(e, Void.TYPE);
               final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
-                  public void apply(final JvmOperation it_1) {
+                  public void apply(final JvmOperation it) {
                     {
-                      it_1.setStatic(true);
-                      EList<JvmFormalParameter> _parameters = it_1.getParameters();
+                      it.setStatic(true);
+                      EList<JvmFormalParameter> _parameters = it.getParameters();
                       JvmTypeReference _newTypeRef = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(e, java.lang.String.class);
                       JvmTypeReference _addArrayTypeDimension = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.addArrayTypeDimension(_newTypeRef);
                       JvmFormalParameter _parameter = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.toParameter(e, "args", _addArrayTypeDimension);
@@ -78,10 +78,10 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
                       boolean _operator_not = BooleanExtensions.operator_not(_containsReturn);
                       if (_operator_not) {
                         final Function1<ImportManager,CharSequence> _function = new Function1<ImportManager,CharSequence>() {
-                            public CharSequence apply(final ImportManager it_2) {
+                            public CharSequence apply(final ImportManager it) {
                               StringConcatenation _builder = new StringConcatenation();
                               _builder.append("try {");
-                              String _compile = PureXbaseJvmModelInferrer.this.compile(e, it_2);
+                              String _compile = PureXbaseJvmModelInferrer.this.compile(e, it);
                               _builder.append(_compile, "");
                               _builder.newLineIfNotEmpty();
                               _builder.append("} catch (Throwable t) {}");
@@ -89,10 +89,10 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
                               return _builder;
                             }
                           };
-                        PureXbaseJvmModelInferrer.this._jvmTypesBuilder.setBody(it_1, _function);
+                        PureXbaseJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function);
                       } else {
                         final Function1<ImportManager,CharSequence> _function_1 = new Function1<ImportManager,CharSequence>() {
-                            public CharSequence apply(final ImportManager it_2) {
+                            public CharSequence apply(final ImportManager it) {
                               StringConcatenation _builder = new StringConcatenation();
                               _builder.append("try {");
                               _builder.newLine();
@@ -104,7 +104,7 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
                               return _builder;
                             }
                           };
-                        PureXbaseJvmModelInferrer.this._jvmTypesBuilder.setBody(it_1, _function_1);
+                        PureXbaseJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function_1);
                       }
                     }
                   }
@@ -116,14 +116,14 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
                 EList<JvmMember> _members_1 = it.getMembers();
                 JvmTypeReference _newTypeRef_1 = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(e, java.lang.Object.class);
                 final Procedure1<JvmOperation> _function_1 = new Procedure1<JvmOperation>() {
-                    public void apply(final JvmOperation it_1) {
+                    public void apply(final JvmOperation it) {
                       {
-                        it_1.setStatic(true);
+                        it.setStatic(true);
                         final Function1<ImportManager,CharSequence> _function = new Function1<ImportManager,CharSequence>() {
-                            public CharSequence apply(final ImportManager it_2) {
+                            public CharSequence apply(final ImportManager it) {
                               StringConcatenation _builder = new StringConcatenation();
                               _builder.append("if (Boolean.TRUE) {");
-                              String _compile = PureXbaseJvmModelInferrer.this.compile(e, it_2);
+                              String _compile = PureXbaseJvmModelInferrer.this.compile(e, it);
                               _builder.append(_compile, "");
                               _builder.newLineIfNotEmpty();
                               _builder.append("}");
@@ -133,7 +133,7 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
                               return _builder;
                             }
                           };
-                        PureXbaseJvmModelInferrer.this._jvmTypesBuilder.setBody(it_1, _function);
+                        PureXbaseJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function);
                       }
                     }
                   };
