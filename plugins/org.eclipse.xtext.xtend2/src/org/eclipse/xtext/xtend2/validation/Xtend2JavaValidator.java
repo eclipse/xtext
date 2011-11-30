@@ -924,6 +924,15 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 						func.getReturnType(), null, INVALID_USE_OF_TYPE);
 		}
 	}
+	
+	@Check
+	public void checkCreateFunctionIsNotStatic(XtendFunction func) {
+		if (func.getCreateExtensionInfo() == null)
+			return;
+		if (func.isStatic())
+			error("Create methods can not be static.", func, Xtend2Package.Literals.XTEND_FUNCTION__STATIC,
+					INVALID_USE_OF_STATIC);
+	}
 
 	@Override
 	public void checkInnerExpressions(XBlockExpression block) {

@@ -295,6 +295,11 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 		helper.assertError(function, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE, "void", "create", "newObject");
 	}
 	
+	public void testCreateMayNotBeStatic() throws Exception {
+		XtendFunction function = function("def static create new Object() newObject() { }");
+		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, INVALID_USE_OF_STATIC, "not", "static");
+	}
+	
 	public void testCreateExpressionMayNotReturnVoid_01() throws Exception {
 		XtendFunction function = function("def create result: while(true){} illegal() { }");
 		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, INVALID_USE_OF_TYPE, "void", "create", "function", "illegal");
