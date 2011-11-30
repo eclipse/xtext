@@ -51,6 +51,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.FeatureOverridesService;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.Primitives;
+import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -142,6 +143,9 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 	
 	@Inject 
 	private UIStrings uiStrings;
+	
+	@Inject
+	private SuperTypeCollector superTypeCollector;
 
 	private final Set<EReference> typeConformanceCheckedReferences = ImmutableSet.copyOf(Iterables.concat(
 			super.getTypeConformanceCheckedReferences(), 
@@ -1034,6 +1038,26 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 					+  uiStrings.parameters(jvmOperation)  
 					+ " from the type "+jvmOperation.getDeclaringType().getSimpleName()+" is never used locally.";
 			warning(message, Xtend2Package.Literals.XTEND_FUNCTION__NAME, FUNCTION_LOCALLY_NEVER_USED);
+		}
+	}
+	
+	@Check
+	public void checkConstructorOnlyThrowsThrowableExceptions(XtendConstructor constructor){
+		JvmConstructor jvmType = associations.getInferredConstructor(constructor);
+		checkExceptionsForThrowAblility(jvmType.getExceptions(), Xtend2Package.Literals.XTEND_CONSTRUCTOR__EXCEPTIONS);
+	}
+	
+	@Check
+	public void checkFunctionOnlyThrowsThrowableExceptions(XtendFunction function){
+		JvmOperation jvmType = associations.getDirectlyInferredOperation(function);
+		checkExceptionsForThrowAblility(jvmType.getExceptions(), Xtend2Package.Literals.XTEND_FUNCTION__EXCEPTIONS);
+	}
+	
+	private void checkExceptionsForThrowAblility(EList<JvmTypeReference> exceptions, EReference reference){
+		for(JvmTypeReference exception : exceptions){
+			if(!superTypeCollector.collectSuperTypeNames(exception).contains("java.lang.Throwable"))
+				error("No exception of type " + exception.getSimpleName() + " can be thrown; an exception type must be a subclass of Throwable"
+						, reference, exceptions.indexOf(exception), EXCEPTON_NOT_THROWABLE);
 		}
 	}
 }

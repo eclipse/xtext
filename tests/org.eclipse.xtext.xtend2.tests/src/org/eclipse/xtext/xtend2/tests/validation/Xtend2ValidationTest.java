@@ -833,11 +833,21 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testUnusedMemberOfExtensionFieldWithName() throws Exception {
 		XtendClass clazz = clazz("class X { extension java.util.Collection bar def foo(){  }}");
-		helper.assertWarning(clazz, Xtend2Package.Literals.XTEND_FIELD,FIELD_LOCALLY_NEVER_READ , "not");
+		helper.assertWarning(clazz, Xtend2Package.Literals.XTEND_FIELD, FIELD_LOCALLY_NEVER_READ , "not");
 	}
 	
 	public void testUnusedMemberOfExtensionField_No_False_Positive() throws Exception {
 		XtendClass clazz = clazz("class X { extension java.util.Collection foo def bar(){  newArrayList.add('42') }}");
 		helper.assertWarning(clazz, Xtend2Package.Literals.XTEND_FIELD,FIELD_LOCALLY_NEVER_READ , "not");
+	}
+	
+	public void testConstructorThrownExceptionsOfTypeThrowable() throws Exception {
+		XtendClass clazz = clazz("class X { new () throws Integer { }}");
+		helper.assertError(clazz, Xtend2Package.Literals.XTEND_CONSTRUCTOR, EXCEPTON_NOT_THROWABLE, "No", "can", "subclass", "Throwable");
+	}
+	
+	public void testFunctionThrownExceptionsOfTypeThrowable() throws Exception {
+		XtendClass clazz = clazz("class X { def foo() throws Integer { } }");
+		helper.assertError(clazz, Xtend2Package.Literals.XTEND_FUNCTION, EXCEPTON_NOT_THROWABLE, "No", "can", "subclass", "Throwable");
 	}
 }
