@@ -42,7 +42,8 @@ public class PresentationDamager implements IPresentationDamager {
 		IRegion lastDamage = document.getLastDamage();
 		// check whether this is just a presentation invalidation not based on a real document change
 		if (lastDamage == null || !isEventMatchingLastDamage(e, lastDamage)) {
-			return computeInterSection(partition, e, document);
+			IRegion result = computeInterSection(partition, e, document);
+			return result;
 		}
 		
 		if (!TextUtilities.overlaps(partition, lastDamage) && lastDamage.getOffset()<e.getDocument().getLength()) {
@@ -54,7 +55,8 @@ public class PresentationDamager implements IPresentationDamager {
 		int offset = Math.max(lastDamage.getOffset(),partition.getOffset());
 		int endOffset = Math.min(lastDamage.getOffset()+lastDamage.getLength(),partition.getOffset()+partition.getLength());
 			
-		return new Region(offset,endOffset-offset);
+		IRegion result = new Region(offset,endOffset-offset);
+		return result;
 	}
 
 	/**
@@ -82,7 +84,8 @@ public class PresentationDamager implements IPresentationDamager {
 		int eventEnd = eventStart+e.getText().length();
 		int damageStart = lastDamage.getOffset();
 		int damageEnd = damageStart+lastDamage.getLength();
-		return damageStart<=eventStart && damageEnd>=eventEnd ;
+		boolean result = damageStart<=eventStart && damageEnd>=eventEnd;
+		return result;
 	}
 
 }
