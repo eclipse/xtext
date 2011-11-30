@@ -228,6 +228,8 @@ public class OnTheFlyJavaCompiler {
 			}
 			pathToFolderOrJar = resolvedRawPath.substring(0, resolvedRawPath.indexOf(classNameAsPath));
 		}
+		if (clazz.getSimpleName().equals("Provider"))
+			System.out.println("Found \t"+clazz.getName()+" in "+pathToFolderOrJar);
 		this.classpath.add(pathToFolderOrJar);
 	}
 
