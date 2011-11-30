@@ -93,7 +93,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          unpack="false"/>
 
    <plugin
-         id="com.google.collect"
+         id="javax.inject"
          download-size="0"
          install-size="0"
          version="0.0.0"
