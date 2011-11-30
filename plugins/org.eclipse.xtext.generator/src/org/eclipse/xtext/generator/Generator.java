@@ -45,6 +45,7 @@ import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.util.MergeableManifest;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Lists;

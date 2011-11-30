@@ -16,6 +16,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaModelException;
@@ -58,6 +59,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xtend2.formatting.MemberFromSuperImplementor;
 import org.eclipse.xtext.xtend2.services.Xtend2GrammarAccess;
+import org.eclipse.xtext.xtend2.ui.buildpath.XtendLibClasspathAdder;
 import org.eclipse.xtext.xtend2.ui.contentassist.ReplacingAppendable;
 import org.eclipse.xtext.xtend2.ui.edit.OrganizeImportsHandler;
 import org.eclipse.xtext.xtend2.validation.IssueCodes;
@@ -100,6 +102,9 @@ public class Xtend2QuickfixProvider extends DefaultQuickfixProvider {
 	@Inject
 	private TypeReferences typeRefs;
 
+	@Inject
+	private XtendLibClasspathAdder xtendLibAdder;
+	
 	/**
 	 * Filter quickfixes for types and constructors.
 	 */
@@ -519,5 +524,14 @@ public class Xtend2QuickfixProvider extends DefaultQuickfixProvider {
 		else
 			return findContainerExpressionInBlockExpression(container);
 	}
-
-}
+	
+	@Fix(IssueCodes.XTEND_LIB_NOT_ON_CLASSPATH)
+	public void putXtendOnClasspath(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Add Xtend libs to classpath", "Add Xtend libs to classpath", "fix_indent.gif", new ISemanticModification() {
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				ResourceSet resourceSet = element.eResource().getResourceSet();
+				IJavaProject javaProject = projectProvider.getJavaProject(resourceSet);
+				xtendLibAdder.addLibsToClasspath(javaProject.getProject(), new NullProgressMonitor());
+			}
+		});
+	}}
