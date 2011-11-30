@@ -189,8 +189,8 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 	
 	protected IFile getFile(String fileName, String outputName) {
 		OutputConfiguration configuration = getOutputConfig(outputName);
-		final Path path = new Path(configuration.getOutputDirectory()+"/"+fileName);
-		return project.getFile(path);
+		IFolder folder = getFolder(configuration);
+		return folder.getFile(new Path(fileName));
 	}
 	
 }
