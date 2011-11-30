@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtend2.ui.buildpath;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -154,7 +155,12 @@ public class XtendContainerInitializer extends ClasspathContainerInitializer {
 				File bundleFile = null;
 				try {
 					bundleFile = FileLocator.getBundleFile(bundle);
-					IPath path = new Path(bundleFile.getAbsolutePath());
+					URL binFolderURL = FileLocator.find(bundle, new Path("bin"),null);
+					IPath path; 
+					if(binFolderURL != null)
+						path = new Path(FileLocator.toFileURL(binFolderURL).getPath());
+					else
+						path = new Path(bundleFile.getAbsolutePath());
 					if (!path.isAbsolute()) {
 						path = path.makeAbsolute();
 					}
