@@ -55,6 +55,7 @@ public final class IssueCodes {
 	public static final String IMPORT_UNUSED = ISSUE_CODE_PREFIX + "import_unsued";
 	public static final String FIELD_LOCALLY_NEVER_READ = "field_locally_never_read";
 	public static final String FUNCTION_LOCALLY_NEVER_USED = "function_locally_never_used";
+	public static final String EXCEPTON_NOT_THROWABLE = "exception_not_throwable";
 	
 	public static final String MISSING_CONSTRUCTOR = ISSUE_CODE_PREFIX + "missing_constructor";
 	public static final String MUST_INVOKE_SUPER_CONSTRUCTOR = ISSUE_CODE_PREFIX + "must_invoke_super_constructor";
