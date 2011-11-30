@@ -75,6 +75,20 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 	public EclipseOutputConfigurationProvider getOutputConfigurationProvider() {
 		return outputConfigurationProvider;
 	}
+	
+	/**
+	 * @since 2.2
+	 */
+	public IGenerator getGenerator() {
+		return generator;
+	}
+	
+	/**
+	 * @since 2.2
+	 */
+	public IResourceServiceProvider getResourceServiceProvider() {
+		return resourceServiceProvider;
+	}
 
 	@Inject
 	public void setOutputConfigurationProvider(EclipseOutputConfigurationProvider outputConfigurationProvider) {
