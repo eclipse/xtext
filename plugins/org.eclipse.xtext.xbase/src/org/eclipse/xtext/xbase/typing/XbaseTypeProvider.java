@@ -969,10 +969,12 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 	protected JvmTypeReference _type(XTryCatchFinallyExpression object, JvmTypeReference rawExpectation, boolean rawType) {
 		List<JvmTypeReference> returnTypes = newArrayList();
 		final JvmTypeReference getType = getType(object.getExpression(), rawType);
-		returnTypes.add(getType);
+		if(getType != null) 
+			returnTypes.add(getType);
 		for (XCatchClause catchClause : object.getCatchClauses()) {
 			JvmTypeReference type = getType(catchClause.getExpression(), rawType);
-			returnTypes.add(type);
+			if(type != null)
+				returnTypes.add(type);
 		}
 		JvmTypeReference commonSuperType = getCommonType(returnTypes);
 		return commonSuperType;
