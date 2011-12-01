@@ -870,14 +870,4 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 		XtendClass clazz = clazz("import java.io.IOException class X {def foo() throws IOException, NullPointerException { }}");
 		helper.assertNoIssues(clazz);
 	}
-	
-	public void testSubTypeExceptionDeclaredOnFunction() throws Exception {
-		XtendClass clazz = clazz("import java.io.IOException class X {def foo() throws IOException, Exception { }}");
-		helper.assertError(clazz, Xtend2Package.Literals.XTEND_FUNCTION, EXCEPTION_SUPTYPE_OF_DECLARED_EXCEPTION, "subtype");
-	}
-	
-	public void testSubTypeExceptionDeclaredOnConstructor() throws Exception {
-		XtendClass clazz = clazz("import java.io.IOException class X { new () throws IOException, Exception { }}");
-		helper.assertError(clazz, Xtend2Package.Literals.XTEND_CONSTRUCTOR, EXCEPTION_SUPTYPE_OF_DECLARED_EXCEPTION, "subtype");
-	}
 }

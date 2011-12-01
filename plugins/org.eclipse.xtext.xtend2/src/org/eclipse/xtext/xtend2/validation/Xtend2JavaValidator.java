@@ -51,7 +51,6 @@ import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.FeatureOverridesService;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.Primitives;
-import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
@@ -148,9 +147,6 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 	
 	@Inject 
 	private UIStrings uiStrings;
-	
-	@Inject
-	private SuperTypeCollector superTypeCollector;
 
 	private final Set<EReference> typeConformanceCheckedReferences = ImmutableSet.copyOf(Iterables.concat(
 			super.getTypeConformanceCheckedReferences(), 
@@ -1068,14 +1064,6 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 			if(!declaredExceptionNames.add(exception.getQualifiedName()))
 				error("Exception " + exception.getSimpleName() + " is declared twice", reference, exceptions.indexOf(exception), EXCEPTION_DECLARED_TWICE);
 		}
-		for(JvmTypeReference exception : exceptions){
-			for(String superTypeName :  superTypeCollector.collectSuperTypeNames(exception)){
-				if(declaredExceptionNames.contains(superTypeName)){
-					error(exception.getSimpleName() + " is a subtype of also declared " + superTypeName ,reference, exceptions.indexOf(exception),EXCEPTION_SUPTYPE_OF_DECLARED_EXCEPTION);
-				}
-			}
-		}
-		
 	}
 	
 }
