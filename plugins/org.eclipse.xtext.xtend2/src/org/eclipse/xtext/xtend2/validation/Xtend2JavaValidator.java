@@ -931,6 +931,15 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 	}
 	
 	@Check
+	public void checkCreateFunctionIsNotGeneric(XtendFunction func) {
+		if (func.getCreateExtensionInfo() == null)
+			return;
+		if (!func.getTypeParameters().isEmpty())
+			error("Create methods can not have type parameters.", func, Xtend2Package.Literals.XTEND_FUNCTION__STATIC,
+					INVALID_USE_OF_STATIC);
+	}
+	
+	@Check
 	public void checkCreateFunctionIsNotStatic(XtendFunction func) {
 		if (func.getCreateExtensionInfo() == null)
 			return;
