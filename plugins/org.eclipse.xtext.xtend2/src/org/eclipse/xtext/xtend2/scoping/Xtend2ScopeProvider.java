@@ -27,6 +27,8 @@ import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendField;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
+import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
+import org.eclipse.xtext.xtend2.xtend2.XtendMember;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -173,6 +175,7 @@ public class Xtend2ScopeProvider extends XbaseWithAnnotationsScopeProvider {
 				int extensionPriority = priority + DYNAMIC_EXTENSION_PRIORITY_OFFSET;
 				if (isThis && implicitArgument == null)
 					extensionPriority = DEFAULT_EXTENSION_PRIORITY;
+				boolean isStatic = isStaticContext(((SimpleAcceptor)acceptor).getExpression());
 				for (XtendField extensionField : extensionFields) {
 					JvmIdentifiableElement dependencyImplicitReceiver = findImplicitReceiverFor(extensionField);
 					XMemberFeatureCall callToDependency = XbaseFactory.eINSTANCE.createXMemberFeatureCall();
@@ -182,16 +185,25 @@ public class Xtend2ScopeProvider extends XbaseWithAnnotationsScopeProvider {
 						ExtensionMethodsFeaturesProvider extensionFeatureProvider = extensionMethodsFeaturesProvider.get();
 						extensionFeatureProvider.setContext(extensionField.getType());
 						extensionFeatureProvider.setExpectNoParameters(isThis);
-						addFeatureDescriptionProviders(contextType, extensionFeatureProvider, callToDependency, implicitArgument, extensionPriority, false, acceptor);
+						addFeatureDescriptionProviders(contextType, extensionFeatureProvider, callToDependency, implicitArgument, extensionPriority, isStatic, acceptor);
 					}
 				}
 				JvmParameterizedTypeReference typeRef = typeReferences.createTypeRef(inferredJvmType);
 				ExtensionMethodsFeaturesProvider featureProvider = extensionMethodsFeaturesProvider.get();
 				featureProvider.setContext(typeRef);
 				featureProvider.setExpectNoParameters(isThis);
-				addFeatureDescriptionProviders(contextType, featureProvider, callToThis, implicitArgument, priority + THIS_EXTENSION_PRIORITY_OFFSET, false, acceptor);
+				addFeatureDescriptionProviders(contextType, featureProvider, callToThis, implicitArgument, priority + THIS_EXTENSION_PRIORITY_OFFSET, isStatic, acceptor);
 			}
 		}
+	}
+	
+	protected boolean isStaticContext(EObject expression) {
+		XtendMember feature = EcoreUtil2.getContainerOfType(expression, XtendMember.class);
+		if (feature instanceof XtendFunction)
+			return ((XtendFunction) feature).isStatic();
+		if (feature instanceof XtendField)
+			return ((XtendField) feature).isStatic();
+		return false;
 	}
 	
 	protected JvmIdentifiableElement findImplicitReceiverFor(XtendField XtendField) {
