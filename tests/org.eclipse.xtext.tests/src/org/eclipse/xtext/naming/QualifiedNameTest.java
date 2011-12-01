@@ -25,13 +25,6 @@ public class QualifiedNameTest extends TestCase {
 			fail("Exception expected");
 		} catch(IllegalArgumentException e) {}
 	}
-	
-	public void testAppendNull() {
-		try {
-			QualifiedName.create().append((String) null);
-			fail("Exception expected");
-		} catch (IllegalArgumentException e) {}
-	}
 
 	public void testSegments() {
 		QualifiedName qn = QualifiedName.create("foo", "bar", "baz");
