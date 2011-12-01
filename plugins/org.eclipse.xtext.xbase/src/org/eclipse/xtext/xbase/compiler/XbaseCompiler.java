@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.compiler;
 
 import static com.google.common.collect.Sets.*;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
@@ -41,6 +42,7 @@ import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.typing.Closures;
 
@@ -107,20 +109,48 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	protected void appendCatchAndFinally(XTryCatchFinallyExpression expr, IAppendable b, boolean isReferenced) {
-		for (XCatchClause catchClause : expr.getCatchClauses()) {
-			JvmTypeReference type = catchClause.getDeclaredParam().getParameterType();
-			final String name = b.declareVariable(catchClause.getDeclaredParam(), catchClause.getDeclaredParam().getName());
-			b.append(" catch (final ");
-			serialize(type,expr,b);
-			b.append(" ").append(name).append(") {");
-			b.increaseIndentation();
-			final boolean canBeReferenced = isReferenced && ! isPrimitiveVoid(catchClause.getExpression());
-			internalToJavaStatement(catchClause.getExpression(), b, canBeReferenced);
-			if (canBeReferenced) {
-				b.append("\n").append(getVarName(expr, b)).append(" = ");
-				internalToConvertedExpression(catchClause.getExpression(), b, null);
-				b.append(";");
+		final EList<XCatchClause> catchClauses = expr.getCatchClauses();
+		if (!catchClauses.isEmpty()) {
+			String variable = b.declareSyntheticVariable(Tuples.pair(expr, "_catchedThrowable"), "_t");
+			b.append(" catch (final Throwable ").append(variable).append(") ");
+			b.append("{").increaseIndentation();
+			b.append("\n");
+			Iterator<XCatchClause> iterator = catchClauses.iterator();
+			while (iterator.hasNext()) {
+				XCatchClause catchClause = iterator.next();
+				JvmTypeReference type = catchClause.getDeclaredParam().getParameterType();
+				final String name = b.declareVariable(catchClause.getDeclaredParam(), catchClause.getDeclaredParam().getName());
+				b.append("if (").append(variable).append(" instanceof ");
+				b.append(type.getType());
+				b.append(") ").append("{");
+				b.increaseIndentation();
+				b.append("\nfinal ");
+				serialize(type,expr,b);
+				b.append(" ").append(name).append(" = (");
+				serialize(type,expr,b);
+				b.append(")").append(variable).append(";");
+				final boolean canBeReferenced = isReferenced && ! isPrimitiveVoid(catchClause.getExpression());
+				internalToJavaStatement(catchClause.getExpression(), b, canBeReferenced);
+				if (canBeReferenced) {
+					b.append("\n").append(getVarName(expr, b)).append(" = ");
+					internalToConvertedExpression(catchClause.getExpression(), b, null);
+					b.append(";");
+				}
+				b.decreaseIndentation();
+				b.append("\n}");
+				if (iterator.hasNext()) {
+					b.append(" else ");
+				}
 			}
+			b.append(" else {");
+			b.increaseIndentation();
+			b.append("\nthrow ");
+			b.append(getTypeReferences().findDeclaredType(Exceptions.class, expr));
+			b.append(".sneakyThrow(");
+			b.append(variable);
+			b.append(");");
+			b.decreaseIndentation();
+			b.append("\n}");
 			b.decreaseIndentation();
 			b.append("\n}");
 		}
