@@ -84,7 +84,7 @@ public class CollectionLiterals {
 	 *             if {@code elements} or any of items in {@code elements} is <code>null</code>
 	 */
 	public static final <T> List<T> newImmutableList(T... elements) {
-		return ImmutableList.of(elements);
+		return ImmutableList.copyOf(elements);
 	}
 
 	/**
@@ -99,7 +99,7 @@ public class CollectionLiterals {
 	 *             if {@code elements} or any of items in {@code elements} is <code>null</code>
 	 */
 	public static final <T> Set<T> newImmutableSet(T... elements) {
-		return ImmutableSet.of(elements);
+		return ImmutableSet.copyOf(elements);
 	}
 
 	/**
