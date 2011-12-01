@@ -35,12 +35,11 @@ public class ImplementSuperMemberAssistTest extends AbstractXtendContentAssistBu
 				getOverridingFunctionCode("compareTo(String o)"));
 	}
 
-	public void testAbstractAndNonAbstractMethod() throws Exception {
-		newBuilder().append("class Foo implements Comparable<String> { c").assertText(
-				getOverridingFunctionCode("compareTo(String o)"),
-				"\n"+indent + "override protected clone() throws CloneNotSupportedException {\n" + 
+	public void testNonAbstractMethod() throws Exception {
+		newBuilder().append("class Foo implements Comparable<String> { cl").assertText(
+				"\n" + indent + "\n" + indent + "override protected clone() throws CloneNotSupportedException {\n" + 
 				indent + indent + "super.clone()\n" +
-				indent + "}\n");
+				indent + "}");
 	}
 
 	public void testStaticMethod() throws Exception {
@@ -52,22 +51,22 @@ public class ImplementSuperMemberAssistTest extends AbstractXtendContentAssistBu
 				"\n" + indent + "\n" + 
 				indent + "override getId() {\n" + 
 				indent + indent + "super.getId()\n" + 
-				indent + "}\n");
+				indent + "}");
 	}
 	
 	public void testConstructor() throws Exception {
 		newBuilder().append("class Foo extends Exception { new").assertText(
-				"\n" + indent + "\n" + indent + "new() {\n"+ indent + indent + "\n"  + indent + "}\n",
-				"\n" + indent + "\n" + indent + "new(String message_1) {\n"+ indent + indent + "super(message_1)\n" + indent + "}\n",
-				"\n" + indent + "\n" + indent + "new(String message_1, Throwable cause_1) {\n"+ indent + indent + "super(message_1, cause_1)\n" + indent + "}\n",
-				"\n" + indent + "\n" + indent + "new(Throwable cause_1) {\n"+ indent + indent + "super(cause_1)\n" + indent + "}\n",
+				"\n" + indent + "\n" + indent + "new() {\n"+ indent + indent + "\n"  + indent + "}",
+				"\n" + indent + "\n" + indent + "new(String message_1) {\n"+ indent + indent + "super(message_1)\n" + indent + "}",
+				"\n" + indent + "\n" + indent + "new(String message_1, Throwable cause_1) {\n"+ indent + indent + "super(message_1, cause_1)\n" + indent + "}",
+				"\n" + indent + "\n" + indent + "new(Throwable cause_1) {\n"+ indent + indent + "super(cause_1)\n" + indent + "}",
 				"new"
 				);
 	}
 
 	protected String getOverridingFunctionCode(String signature) {
 		return "\n" + indent + "\n" + indent + "override " + signature + " {\n" + indent
-				+ indent + MemberFromSuperImplementor.DEFAULT_BODY + "\n" + indent + "}\n\n";
+				+ indent + MemberFromSuperImplementor.DEFAULT_BODY + "\n" + indent + "}";
 	}
 
 	public static Test suite() {
