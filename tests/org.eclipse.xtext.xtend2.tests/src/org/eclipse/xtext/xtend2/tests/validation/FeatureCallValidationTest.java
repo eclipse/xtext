@@ -150,4 +150,52 @@ public class FeatureCallValidationTest extends AbstractXtend2TestCase {
 	//		helper.assertNoErrors(clazz);
 	//	}
 
+	public void testXMemberFeatureCallImportedMemberExtension1() throws Exception {
+		XtendClass clazz = clazz("class X { extension test.ExtensionMethods def meth() { 'foo'.instanceExtension } }");
+		helper.assertNoErrors(clazz);
+	}
+
+	public void testXMemberFeatureCallImportedMemberExtension2() throws Exception {
+		XtendClass clazz = clazz("class X { extension test.ExtensionMethods def static meth() { 'foo'.instanceExtension } }");
+		helper.assertError(clazz, XbasePackage.Literals.XMEMBER_FEATURE_CALL,
+				org.eclipse.xtext.xbase.validation.IssueCodes.STATIC_ACCESS_TO_INSTANCE_MEMBER);
+	}
+
+	//	 static methods from instance extensions are not on the scope
+	//	public void testXMemberFeatureCallImportedMemberExtension3() throws Exception {
+	//		XtendClass clazz = clazz("class X { extension test.ExtensionMethods def meth() { 'foo'.staticExtension } }");
+	//		helper.assertError(clazz, XbasePackage.Literals.XMEMBER_FEATURE_CALL,
+	//				org.eclipse.xtext.xbase.validation.IssueCodes.STATIC_ACCESS_TO_INSTANCE_MEMBER);
+	//	}
+	//
+	//	public void testXMemberFeatureCallImprotedMemberExtension4() throws Exception {
+	//		XtendClass clazz = clazz("class X { extension test.ExtensionMethods def static meth() { 'foo'.staticExtension } }");
+	//		helper.assertError(clazz, XbasePackage.Literals.XMEMBER_FEATURE_CALL,
+	//				org.eclipse.xtext.xbase.validation.IssueCodes.STATIC_ACCESS_TO_INSTANCE_MEMBER);
+	//	}
+
+	public void testXMemberFeatureCallLocalMemberExtension1() throws Exception {
+		XtendClass clazz = clazz("class X { def instanceExtension(String foo) { foo + 'inst' } def meth() { 'foo'.instanceExtension } }");
+		helper.assertNoErrors(clazz);
+	}
+
+	public void testXMemberFeatureCallLocalMemberExtension2() throws Exception {
+		XtendClass clazz = clazz("class X { def instanceExtension(String foo) { foo + 'inst' } def static meth() { 'foo'.instanceExtension } }");
+		helper.assertError(clazz, XbasePackage.Literals.XMEMBER_FEATURE_CALL,
+				org.eclipse.xtext.xbase.validation.IssueCodes.STATIC_ACCESS_TO_INSTANCE_MEMBER);
+	}
+
+	//	 static methods from instance extensions are not on the scope
+	//	public void testXMemberFeatureCallLocalMemberExtension3() throws Exception {
+	//		XtendClass clazz = clazz("class X { def static staticExtension(String foo) { foo + 'inst' } def meth() { 'foo'.staticExtension } }");
+	//		helper.assertError(clazz, XbasePackage.Literals.XMEMBER_FEATURE_CALL,
+	//				org.eclipse.xtext.xbase.validation.IssueCodes.STATIC_ACCESS_TO_INSTANCE_MEMBER);
+	//	}
+	//
+	//	public void testXMemberFeatureCallLocalMemberExtension4() throws Exception {
+	//		XtendClass clazz = clazz("class X { def static staticExtension(String foo) { foo + 'inst' } def static meth() { 'foo'.staticExtension } }");
+	//		helper.assertError(clazz, XbasePackage.Literals.XMEMBER_FEATURE_CALL,
+	//				org.eclipse.xtext.xbase.validation.IssueCodes.STATIC_ACCESS_TO_INSTANCE_MEMBER);
+	//	}
+
 }

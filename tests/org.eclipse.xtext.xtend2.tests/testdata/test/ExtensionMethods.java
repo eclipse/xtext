@@ -41,4 +41,12 @@ public class ExtensionMethods {
 	public String generic(String t) {
 		return GENERIC_STRING;
 	}
+
+	public static String staticExtension(String s) {
+		return "static" + s;
+	}
+
+	public String instanceExtension(String s) {
+		return "static" + s;
+	}
 }
