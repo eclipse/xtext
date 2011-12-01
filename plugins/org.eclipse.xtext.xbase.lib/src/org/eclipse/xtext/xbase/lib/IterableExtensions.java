@@ -20,10 +20,10 @@ import java.util.SortedSet;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.internal.BooleanFunctionDelegate;
+import org.eclipse.xtext.xbase.lib.internal.FunctionDelegate;
 
-import com.google.common.base.Function;
 import com.google.common.base.Joiner;
-import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.Iterables;
@@ -283,6 +283,8 @@ public class IterableExtensions {
 	 * @return <code>true</code> if one or more elements in {@code iterable} satisfy the predicate.
 	 */
 	public static <T> boolean forall(Iterable<T> iterable, Function1<? super T, Boolean> predicate) {
+		if (predicate == null)
+			throw new NullPointerException("predicate");
 		for (T t : iterable) {
 			if (!predicate.apply(t))
 				return false;
@@ -486,8 +488,8 @@ public class IterableExtensions {
 
 	/**
 	 * Determines whether two iterables contain equal elements in the same order. More specifically, this method returns
-	 * {@code true} if {@code iterable1} and {@code iterable2} contain the same number of elements and every element of
-	 * {@code iterable1} is equal to the corresponding element of {@code iterable2}.
+	 * {@code true} if {@code iterable} and {@code other} contain the same number of elements and every element of
+	 * {@code iterable} is equal to the corresponding element of {@code other}.
 	 * 
 	 * @param iterable
 	 *            an iterable. May not be <code>null</code>.
@@ -747,68 +749,6 @@ public class IterableExtensions {
 	public static <T, C extends Comparable<? super C>> List<T> sortBy(Iterable<T> iterable,
 			final Functions.Function1<? super T, C> key) {
 		return ListExtensions.sortInplaceBy(Lists.newArrayList(iterable), key);
-	}
-
-	/**
-	 * Internal wrapper to look like a google.collect predicate
-	 * 
-	 * @param <T>
-	 *            the type of the objects that can be used by this predicate.
-	 */
-	protected static class BooleanFunctionDelegate<T> implements Predicate<T> {
-
-		private final Function1<? super T, Boolean> delegate;
-
-		/**
-		 * Creates a new {@link BooleanFunctionDelegate} that wraps the given delegate function. This implementation
-		 * will throw a {@link NullPointerException} if the delegate's {@link Function1#apply(Object) implementation}
-		 * returns <code>null</code> for a given object.
-		 * 
-		 * @param delegate
-		 *            the delegate function. May not be <code>null</code>.
-		 */
-		protected BooleanFunctionDelegate(Function1<? super T, Boolean> delegate) {
-			if (delegate == null)
-				throw new NullPointerException("delegate");
-			this.delegate = delegate;
-		}
-
-		public boolean apply(T input) {
-			Boolean result = delegate.apply(input);
-			return result.booleanValue();
-		}
-
-	}
-
-	/**
-	 * Internal wrapper to look like a google.collect function
-	 * 
-	 * @param <P>
-	 *            the type of the arguments that can be passed to this function.
-	 * @param <R>
-	 *            the type of the result instances of this function.
-	 */
-	protected static class FunctionDelegate<P, R> implements Function<P, R> {
-
-		private final Function1<? super P, ? extends R> delegate;
-
-		/**
-		 * Creates a new {@link FunctionDelegate} that wraps the given delegate function.
-		 * 
-		 * @param delegate
-		 *            the delegate function. May not be <code>null</code>.
-		 */
-		protected FunctionDelegate(Function1<? super P, ? extends R> delegate) {
-			if (delegate == null)
-				throw new NullPointerException("delegate");
-			this.delegate = delegate;
-		}
-
-		public R apply(P input) {
-			R result = delegate.apply(input);
-			return result;
-		}
-
 	}
 
 }

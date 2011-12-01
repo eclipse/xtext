@@ -11,8 +11,8 @@ import java.util.Map;
 
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
-import org.eclipse.xtext.xbase.lib.IterableExtensions.FunctionDelegate;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
+import org.eclipse.xtext.xbase.lib.internal.FunctionDelegate;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Maps;
