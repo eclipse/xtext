@@ -14,6 +14,8 @@ import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
@@ -79,6 +81,9 @@ public class ImplementMemberFromSuperAssist {
 	@Inject
 	private ReplacingAppendable.Factory appendableFactory;
 
+	private static Pattern bodyExpressionPattern = Pattern.compile("\\{\\s*(.*?)\\s*$\\s*\\}", Pattern.MULTILINE
+			| Pattern.DOTALL);
+
 	protected Iterable<JvmExecutable> getImplementationCandidates(XtendClass clazz) {
 		final JvmGenericType inferredType = associations.getInferredType(clazz);
 		ITypeArgumentContext typeArgumentContext = typeArgumentContextProvider
@@ -126,7 +131,8 @@ public class ImplementMemberFromSuperAssist {
 			ICompletionProposalAcceptor acceptor, IProposalConflictHelper conflictHelper) {
 		Iterable<JvmExecutable> overrideables = getImplementationCandidates(model);
 		for (JvmExecutable overridden : overrideables) {
-			ICompletionProposal completionProposal = createOverrideMethodProposal(model, overridden, context, conflictHelper);
+			ICompletionProposal completionProposal = createOverrideMethodProposal(model, overridden, context,
+					conflictHelper);
 			if (completionProposal != null)
 				acceptor.accept(completionProposal);
 		}
@@ -135,24 +141,33 @@ public class ImplementMemberFromSuperAssist {
 	protected ICompletionProposal createOverrideMethodProposal(XtendClass model, JvmExecutable overridden,
 			ContentAssistContext context, IProposalConflictHelper conflictHelper) {
 		ReplacingAppendable appendable = appendableFactory.get(context.getDocument(), model, context.getReplaceRegion()
-				.getOffset(), context.getReplaceRegion().getLength(), true);
+				.getOffset(), context.getReplaceRegion().getLength(), 1, true);
 		if (overridden instanceof JvmOperation)
 			implementor.appendOverrideFunction(model, (JvmOperation) overridden, appendable);
 		else
 			implementor.appendConstructorFromSuper(model, (JvmConstructor) overridden, appendable);
 		String code = appendable.toString();
-		if (!isValidProposal(code.trim(), context, conflictHelper) && !isValidProposal(overridden.getSimpleName(), context, conflictHelper))
+		if (!isValidProposal(code.trim(), context, conflictHelper)
+				&& !isValidProposal(overridden.getSimpleName(), context, conflictHelper))
 			return null;
 		ImportOrganizingProposal completionProposal = createCompletionProposal(appendable, context.getReplaceRegion(),
 				getLabel(overridden), images.forFunction(overridden.getVisibility(), false));
-		int bodyOffset = code.lastIndexOf(MemberFromSuperImplementor.DEFAULT_BODY);
-		completionProposal.setSelectionStart(bodyOffset + completionProposal.getReplacementOffset());
-		completionProposal.setSelectionLength(MemberFromSuperImplementor.DEFAULT_BODY.length());
+		Matcher matcher = bodyExpressionPattern.matcher(code);
+		if (matcher.find()) {
+			int bodyExpressionLength = matcher.end(1) - matcher.start(1);
+			if (bodyExpressionLength == 0) {
+				completionProposal.setCursorPosition(matcher.start(1));
+			} else {
+				completionProposal.setSelectionStart(completionProposal.getReplacementOffset() + matcher.start(1));
+				completionProposal.setSelectionLength(bodyExpressionLength);
+			}
+		}
 		completionProposal.setPriority(getPriority(model, overridden, context));
 		return completionProposal;
 	}
 
-	protected boolean isValidProposal(String proposal, ContentAssistContext context, IProposalConflictHelper conflictHelper) {
+	protected boolean isValidProposal(String proposal, ContentAssistContext context,
+			IProposalConflictHelper conflictHelper) {
 		if (proposal == null)
 			return false;
 		if (!context.getMatcher().isCandidateMatchingPrefix(proposal, context.getPrefix()))
@@ -178,7 +193,7 @@ public class ImplementMemberFromSuperAssist {
 					+ notNull(((JvmOperation) executable).getDeclaringType().getSimpleName()),
 					StyledString.QUALIFIER_STYLER));
 		} else {
-			return new StyledString("Add constructor '" + uiStrings.signature(executable) + "'");
+			return new StyledString("Add constructor 'new" + uiStrings.parameters(executable) + "'");
 		}
 	}
 
