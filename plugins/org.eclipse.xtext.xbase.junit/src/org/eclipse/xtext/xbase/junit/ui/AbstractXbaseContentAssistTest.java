@@ -121,7 +121,9 @@ public abstract class AbstractXbaseContentAssistTest extends TestCase implements
 		"newTreeMap()",
 		// InputOutput,
 		"print()",
-		"println()"
+		"println()",
+		// ObjectExtensions
+		"identityEquals()"
 	};
 	
 	protected static String[] STRING_OPERATORS = {
@@ -175,6 +177,8 @@ public abstract class AbstractXbaseContentAssistTest extends TestCase implements
 		features.add("toFirstLower");
 		features.add("toFirstUpper");
 		features.add("nullOrEmpty");
+		// Object extensions
+		features.add("identityEquals()");
 		STRING_FEATURES = features.toArray(new String[features.size()]);
 		STATIC_STRING_FEATURES = staticFeatures.toArray(new String[staticFeatures.size()]);
 	}
