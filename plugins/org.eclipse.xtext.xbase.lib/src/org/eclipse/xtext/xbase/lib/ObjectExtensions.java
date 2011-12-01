@@ -43,6 +43,21 @@ public class ObjectExtensions {
 			return false;
 		return a.equals(b);
 	}
+	
+	/**
+	 * Returns <code>true</code> if {@code a} and {@code b} are identical (the same instance)
+	 * or both <code>null</code>. This is the equivalent to Java's <code>==</code>
+	 * operator.
+	 * 
+	 * @param a
+	 *            an object.
+	 * @param b
+	 *            another object.
+	 * @return Java's <code>a == b</code>
+	 */
+	public static boolean identityEquals(Object a, Object b) {
+		return a == b;
+	}
 
 	/**
 	 * The <code>mappedTo</code> operator yields a {@link Pair} with {@code a} as the {@link Pair#getKey() key} and
