@@ -30,7 +30,7 @@ public class StringBuilderBasedAppendable implements IAppendable {
 		return this;
 	}
 
-	private CharSequence getIndentationString() {
+	protected CharSequence getIndentationString() {
 		StringBuilder sb = new StringBuilder(10);
 		sb.append("\n");
 		for (int i = 0; i < indentationlevel; i++) {
@@ -116,4 +116,5 @@ public class StringBuilderBasedAppendable implements IAppendable {
 	public Object getObject(String name) {
 		return scopes.get(name);
 	}
+	
 }

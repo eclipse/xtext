@@ -49,7 +49,7 @@ public class ImplementSuperMemberAssistTest extends AbstractXtendContentAssistBu
 
 	public void testNonStaticMethod() throws Exception {
 		newBuilder().append("class Foo extends Thread { getI").assertText(
-				"\n" + 
+				"\n" + indent + "\n" + 
 				indent + "override getId() {\n" + 
 				indent + indent + "super.getId()\n" + 
 				indent + "}\n");
@@ -57,17 +57,17 @@ public class ImplementSuperMemberAssistTest extends AbstractXtendContentAssistBu
 	
 	public void testConstructor() throws Exception {
 		newBuilder().append("class Foo extends Exception { new").assertText(
-				"\n" + indent + "new() {\n"+ indent + indent + "\n"  + indent + "}\n",
-				"\n" + indent + "new(String message_1) {\n"+ indent + indent + "super(message_1)\n" + indent + "}\n",
-				"\n" + indent + "new(String message_1, Throwable cause_1) {\n"+ indent + indent + "super(message_1, cause_1)\n" + indent + "}\n",
-				"\n" + indent + "new(Throwable cause_1) {\n"+ indent + indent + "super(cause_1)\n" + indent + "}\n",
+				"\n" + indent + "\n" + indent + "new() {\n"+ indent + indent + "\n"  + indent + "}\n",
+				"\n" + indent + "\n" + indent + "new(String message_1) {\n"+ indent + indent + "super(message_1)\n" + indent + "}\n",
+				"\n" + indent + "\n" + indent + "new(String message_1, Throwable cause_1) {\n"+ indent + indent + "super(message_1, cause_1)\n" + indent + "}\n",
+				"\n" + indent + "\n" + indent + "new(Throwable cause_1) {\n"+ indent + indent + "super(cause_1)\n" + indent + "}\n",
 				"new"
 				);
 	}
 
 	protected String getOverridingFunctionCode(String signature) {
-		return "\n" + indent + "override " + signature + " {\n" + indent
-				+ indent + MemberFromSuperImplementor.DEFAULT_BODY + "\n" + indent + "}\n";
+		return "\n" + indent + "\n" + indent + "override " + signature + " {\n" + indent
+				+ indent + MemberFromSuperImplementor.DEFAULT_BODY + "\n" + indent + "}\n\n";
 	}
 
 	public static Test suite() {

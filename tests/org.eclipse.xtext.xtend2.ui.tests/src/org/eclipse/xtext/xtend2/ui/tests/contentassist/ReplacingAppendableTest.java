@@ -93,7 +93,7 @@ public class ReplacingAppendableTest extends AbstractXtend2UITestCase {
 		document.modify(new IUnitOfWork.Void<XtextResource>() {
 			@Override
 			public void process(XtextResource state) throws Exception {
-				ReplacingAppendable a = appendableFactory.get(document, context, cursorPosition, 1, true);
+				ReplacingAppendable a = appendableFactory.get(document, context, cursorPosition, 1, 0, false);
 				typeRefSerializer.serialize(typeReferences.getTypeForName(fieldType, context), context, a);
 				a.append(" ").append(a.declareVariable(new Object(), fieldName));
 				a.commitChanges();
