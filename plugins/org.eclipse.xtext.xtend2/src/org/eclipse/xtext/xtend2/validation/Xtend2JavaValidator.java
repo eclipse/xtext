@@ -647,7 +647,7 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 						issueData.add(doGetReadableSignature(xtendClass.getSimpleName(), superConstructor.getParameters()));
 					}
 					error("No default constructor in super type " + superType.getSimpleName() + "." +
-							xtendClass.getName() + " must define an explicit constructor",
+							xtendClass.getName() + " must define an explicit constructor.",
 							xtendClass, XTEND_CLASS__NAME, MISSING_CONSTRUCTOR, toArray(issueData, String.class));
 				} else {
 					for(XtendConstructor xtendConstructor: xtendConstructors) {
