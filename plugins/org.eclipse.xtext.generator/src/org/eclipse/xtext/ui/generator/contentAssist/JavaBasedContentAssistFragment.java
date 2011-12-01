@@ -53,6 +53,11 @@ public class JavaBasedContentAssistFragment extends AbstractGeneratorFragment {
 	}
 
 	@Override
+	public String[] getExportedPackagesUi(Grammar grammar) {
+		return new String[] { getNaming().packageName(getProposalProviderClassName(grammar)) };
+	}
+	
+	@Override
 	protected List<Object> getParameters(Grammar grammar) {
 		return Collections.<Object>singletonList(inherit);
 	}
