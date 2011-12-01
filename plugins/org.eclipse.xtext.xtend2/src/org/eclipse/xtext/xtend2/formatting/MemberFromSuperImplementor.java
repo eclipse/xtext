@@ -75,8 +75,6 @@ public class MemberFromSuperImplementor {
 						return typeReferences.createTypeRef(overridingType);
 					}
 				});
-		appendable.increaseIndentation();
-		appendable.append("\n");
 		if (isOperation)
 			appendable.append("override ");
 		if (executableFromSuper.getVisibility() == JvmVisibility.PROTECTED) {
@@ -105,7 +103,7 @@ public class MemberFromSuperImplementor {
 		} else if (!executableFromSuper.getParameters().isEmpty()) {
 			appendSignature(executableFromSuper, overridingType, typeArgumentContext, appendable, true);
 		}
-		appendable.decreaseIndentation().append("\n}").decreaseIndentation().append("\n");
+		appendable.decreaseIndentation().append("\n}");
 		appendable.closeScope();
 	}
 
