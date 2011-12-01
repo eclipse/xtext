@@ -531,7 +531,7 @@ public class Xtend2QuickfixProvider extends DefaultQuickfixProvider {
 			public void apply(EObject element, IModificationContext context) throws Exception {
 				ResourceSet resourceSet = element.eResource().getResourceSet();
 				IJavaProject javaProject = projectProvider.getJavaProject(resourceSet);
-				xtendLibAdder.addLibsToClasspath(javaProject.getProject(), new NullProgressMonitor());
+				xtendLibAdder.addLibsToClasspath(javaProject, new NullProgressMonitor());
 			}
 		});
 	}}
