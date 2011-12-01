@@ -38,6 +38,13 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 		assertEvaluatesWithException(IOException.class, 
 				"{ newArrayList('foo').forEach( s | throw new java.io.IOException() ) return null }");
 	}
+	
+	public void testTryCatch_06() throws Exception {
+		assertEvaluatesTo("", 
+				"try new String() " +
+				"  catch(java.io.IOException e) 'foo'" +
+				"  catch(Exception e) 'bar'");
+	}
 
 	@Override
 	protected void assertEvaluatesTo(Object object, String string) {
