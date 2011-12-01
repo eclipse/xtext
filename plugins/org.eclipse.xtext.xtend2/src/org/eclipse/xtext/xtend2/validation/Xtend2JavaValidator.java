@@ -646,15 +646,15 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 						issueData.add(EcoreUtil.getURI(superConstructor).toString());
 						issueData.add(doGetReadableSignature(xtendClass.getSimpleName(), superConstructor.getParameters()));
 					}
-					error("Implicit super constructor " + superType.getSimpleName() + "() is " +
-							"undefined for default constructor. Must define an explicit constructor",
+					error("No default constructor in super type " + superType.getSimpleName() + "." +
+							xtendClass.getName() + " must define an explicit constructor",
 							xtendClass, XTEND_CLASS__NAME, MISSING_CONSTRUCTOR, toArray(issueData, String.class));
 				} else {
 					for(XtendConstructor xtendConstructor: xtendConstructors) {
 						EList<XExpression> expressions = ((XBlockExpression) xtendConstructor.getExpression()).getExpressions();
 						if(expressions.isEmpty() || !isDelegatConstructorCall(expressions.get(0))) {
-							error("Implicit super constructor " + superType.getSimpleName() 
-									+ "() is undefined. Must explicitly invoke another constructor",
+							error("No default constructor in super type " + superType.getSimpleName() 
+									+ ". Another constructor must be invoked explicitly.",
 									xtendConstructor, null, MUST_INVOKE_SUPER_CONSTRUCTOR);
 							
 						}
