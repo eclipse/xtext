@@ -342,6 +342,42 @@
             description="Organize Imports"
             id="org.eclipse.xtext.xbase.ui.organizeImports"
             name="Organize Imports"/>
+      <command
+            name="%JavaApplicationShortcut.description.debug"
+            description="%JavaApplicationShortcut.description.debug"
+            categoryId="org.eclipse.debug.ui.category.run"
+            id="org.eclipse.xtext.xtend2.ui.launching.localJavaShortcut.debug">
+      </command>
+      <command
+            name="%JavaApplicationShortcut.description.run"
+            description="%JavaApplicationShortcut.description.run"
+            categoryId="org.eclipse.debug.ui.category.run"
+            id="org.eclipse.xtext.xtend2.ui.launching.localJavaShortcut.run">
+      </command>
+      <command
+            name="%JUnitShortcut.description.run"
+            description="%JUnitShortcut.description.run"
+            categoryId="org.eclipse.debug.ui.category.run"
+            id="org.eclipse.xtext.xtend2.ui.launching.junitShortcut.run">
+      </command>
+      <command
+            name="%JUnitShortcut.description.debug"
+            description="%JUnitShortcut.description.debug"
+            categoryId="org.eclipse.debug.ui.category.run"
+            id="org.eclipse.xtext.xtend2.ui.launching.junitShortcut.debug">
+      </command>
+      <command
+            name="%JUnitApplicationShortcut.description.run"
+            description="%JUnitApplicationShortcut.description.run"
+            categoryId="org.eclipse.debug.ui.category.run"
+            id="org.eclipse.xtext.xtend2.ui.launching.junitPdeShortcut.run">
+      </command>
+      <command
+            name="%JUnitApplicationShortcut.description.debug"
+            description="%JUnitApplicationShortcut.description.debug"
+            categoryId="org.eclipse.debug.ui.category.run"
+            id="org.eclipse.xtext.xtend2.ui.launching.junitPdeShortcut.debug">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.contexts">
@@ -398,6 +434,119 @@
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
       </key>
 -->
+
+		<!--
+			known bug in JDT:
+			Launch using shortcut key Alt+Shift+X doesn't work until launch actions are loaded
+			https://bugs.eclipse.org/bugs/show_bug.cgi?id=218881
+		-->
+
+		<!-- run Java application -->
+       <key
+             commandId="org.eclipse.xtext.xtend2.ui.launching.localJavaShortcut.debug"
+             contextId="org.eclipse.xtext.xtend2.ui.XtendEditorScope"
+             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+             sequence="M3+M4+D J"/>
+       <!-- On carbon: Shift+Option+D is a character, Command+Option+D is Show/Hide Dock, Command+Control+D is dictionary lookup -->
+       <key
+             contextId="org.eclipse.xtext.xtend2.ui.XtendEditorScope"
+             platform="carbon"
+             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+             sequence="M3+M4+D J"/>
+       <key
+             commandId="org.eclipse.xtext.xtend2.ui.launching.localJavaShortcut.debug"
+             contextId="org.eclipse.xtext.xtend2.ui.XtendEditorScope"
+             platform="carbon"
+             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+             sequence="M1+M3+M4+D J"/>
+       <key
+             commandId="org.eclipse.xtext.xtend2.ui.launching.localJavaShortcut.run"
+             contextId="org.eclipse.xtext.xtend2.ui.XtendEditorScope"
+             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+             sequence="M2+M3+X J"/>
+       <key
+             platform="carbon"
+             contextId="org.eclipse.xtext.xtend2.ui.XtendEditorScope"
+             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+             sequence="M2+M3+X J"/>
+       <key
+             commandId="org.eclipse.xtext.xtend2.ui.launching.localJavaShortcut.run"
+             platform="carbon"
+             contextId="org.eclipse.xtext.xtend2.ui.XtendEditorScope"
+             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+             sequence="M1+M3+X J"/>
+      
+      
+      <!-- run JUnit test -->
+      <key
+            commandId="org.eclipse.xtext.xtend2.ui.launching.junitShortcut.debug"
+            contextId="org.eclipse.xtext.xtend2.ui.XtendEditorScope"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M2+M3+D T"/>
+      <!-- On carbon: Shift+Option+D is a character, Command+Option+D is Show/Hide Dock, Command+Control+D is dictionary lookup -->
+      <key
+            contextId="org.eclipse.xtext.xtend2.ui.XtendEditorScope"
+            platform="carbon"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M2+M3+D T"/>
+      <key
+            commandId="org.eclipse.xtext.xtend2.ui.launching.junitShortcut.debug"
+            contextId="org.eclipse.xtext.xtend2.ui.XtendEditorScope"
+            platform="carbon"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+M3+M4+D T"/>
+      <key
+            commandId="org.eclipse.xtext.xtend2.ui.launching.junitShortcut.run"
+            contextId="org.eclipse.xtext.xtend2.ui.XtendEditorScope"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M2+M3+X T"/>
+      <key
+            contextId="org.eclipse.xtext.xtend2.ui.XtendEditorScope"
+            platform="carbon"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M2+M3+X T"/>
+      <key
+            commandId="org.eclipse.xtext.xtend2.ui.launching.junitShortcut.run"
+            contextId="org.eclipse.xtext.xtend2.ui.XtendEditorScope"
+            platform="carbon"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+M3+X T"/>
+            
+            
+      <!-- run JUnit Plug-In test -->      
+      <key
+            commandId="org.eclipse.xtext.xtend2.ui.launching.junitPdeShortcut.debug"
+            contextId="org.eclipse.xtext.xtend2.ui.XtendEditorScope"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M2+M3+D P"/>
+      <!-- On carbon: Shift+Option+D is a character, Command+Option+D is Show/Hide Dock, Command+Control+D is dictionary lookup -->
+      <key
+            contextId="org.eclipse.xtext.xtend2.ui.XtendEditorScope"
+            platform="carbon"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M2+M3+D P"/>
+      <key
+            commandId="org.eclipse.xtext.xtend2.ui.launching.junitPdeShortcut.debug"
+            contextId="org.eclipse.xtext.xtend2.ui.XtendEditorScope"
+            platform="carbon"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+M3+M4+D P"/>
+      <key
+            commandId="org.eclipse.xtext.xtend2.ui.launching.junitPdeShortcut.run"
+            contextId="org.eclipse.xtext.xtend2.ui.XtendEditorScope"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M2+M3+X P"/>
+      <key
+            contextId="org.eclipse.xtext.xtend2.ui.XtendEditorScope"
+            platform="carbon"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M2+M3+X P"/>
+      <key
+            commandId="org.eclipse.xtext.xtend2.ui.launching.junitPdeShortcut.run"
+            contextId="org.eclipse.xtext.xtend2.ui.XtendEditorScope"
+            platform="carbon"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+M3+X P"/>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
