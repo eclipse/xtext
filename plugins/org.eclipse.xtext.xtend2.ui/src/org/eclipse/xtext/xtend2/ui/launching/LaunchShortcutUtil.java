@@ -11,7 +11,6 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 
 /**
@@ -41,12 +40,9 @@ public class LaunchShortcutUtil {
 	}
 	
 	public static IStructuredSelection toSelectionWithJavaElementDelegates(IEditorPart editor) {
-		IEditorInput input = editor.getEditorInput();
-		if (input != null) {
-			JavaElementDelegate javaElementDelegate = (JavaElementDelegate) input.getAdapter(JavaElementDelegate.class);
-			if (javaElementDelegate != null) {
-				return new StructuredSelection(javaElementDelegate);
-			}
+		JavaElementDelegate javaElementDelegate = (JavaElementDelegate) editor.getAdapter(JavaElementDelegate.class);
+		if (javaElementDelegate != null) {
+			return new StructuredSelection(javaElementDelegate);
 		}
 		return null;
 	}

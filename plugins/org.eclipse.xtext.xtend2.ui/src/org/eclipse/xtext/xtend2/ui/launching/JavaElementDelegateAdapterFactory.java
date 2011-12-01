@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtend2.ui.launching;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IAdapterFactory;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
 
 import com.google.inject.Inject;
@@ -35,6 +36,11 @@ public class JavaElementDelegateAdapterFactory implements IAdapterFactory {
 			if (adaptableObject instanceof IResource) {
 				JavaElementDelegate result = delegateProvider.get();
 				result.initializeWith((IResource) adaptableObject);
+				return result;
+			}
+			if (adaptableObject instanceof IEditorPart) {
+				JavaElementDelegate result = delegateProvider.get();
+				result.initializeWith((IEditorPart) adaptableObject);
 				return result;
 			}
 		}

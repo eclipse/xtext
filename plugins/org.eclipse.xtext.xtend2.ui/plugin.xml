@@ -638,6 +638,11 @@
         <adapter type="org.eclipse.xtext.xtend2.ui.launching.JavaElementDelegate"/>
      </factory>
      <factory 
+        class="org.eclipse.xtext.xtend2.ui.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.xtend2.ui.launching.JavaElementDelegateAdapterFactory"
+        adaptableType="org.eclipse.ui.IEditorPart">
+        <adapter type="org.eclipse.xtext.xtend2.ui.launching.JavaElementDelegate"/>
+     </factory>
+     <factory 
         class="org.eclipse.xtext.xtend2.ui.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.xtend2.ui.launching.JavaElementDelegateAdapterFactory" 
         adaptableType="org.eclipse.core.resources.IResource">
         <adapter type="org.eclipse.xtext.xtend2.ui.launching.JavaElementDelegate"/>
