@@ -30,6 +30,54 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''')
 	}
 	
+	def testTryCatch() { 
+		assertCompilesTo('''
+			package foo
+			class Bar {
+				def void doStuff(java.lang.reflect.Method m) {
+					try {
+						// do nothing
+					} catch (java.io.IOException e) {
+						throw e
+					} catch (Exception e) {
+						throw e
+					} finally {
+						// do nothing
+					}
+				}
+			}
+		''', '''
+			package foo;
+			
+			import java.io.IOException;
+			import java.lang.reflect.Method;
+			import org.eclipse.xtext.xbase.lib.Exceptions;
+			
+			@SuppressWarnings("all")
+			public class Bar {
+			  public void doStuff(final Method m) {
+			    try {
+			      try {
+			      } catch (final Throwable _t) {
+			        if (_t instanceof IOException) {
+			          final IOException e = (IOException)_t;
+			          throw e;
+			        } else if (_t instanceof Exception) {
+			          final Exception e_1 = (Exception)_t;
+			          throw e_1;
+			        } else {
+			          throw Exceptions.sneakyThrow(_t);
+			        }
+			      } finally {
+			      }
+			    } catch (Exception _e) {
+			      throw Exceptions.sneakyThrow(_e);
+			    }
+			  }
+			}
+		''')
+	}
+	
 //	see  
 //	def testClosureSneakyThrow() {
 //		assertCompilesTo('''
