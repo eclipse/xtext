@@ -65,7 +65,7 @@ public class PomModifier {
 			}
 
 		} catch (IOException ioe) {
-			logError("Error during root folder descovering", ioe);
+			logError("Error during root folder discovering", ioe);
 		}
 	}
 
