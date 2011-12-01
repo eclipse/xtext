@@ -59,7 +59,7 @@ public class XtendLibClasspathAdderTest extends AbstractXtend2UITestCase {
 		file.create(new StringInputStream("class Foo {}"), true, null);
 		IResourcesSetupUtil.waitForAutoBuild();
 		assertErrorMarker(file);
-		adder.addLibsToClasspath(project, null);
+		adder.addLibsToClasspath(javaProject, null);
 		IResourcesSetupUtil.waitForAutoBuild();
 		assertNoErrorMarker(file);
 	}
@@ -78,7 +78,7 @@ public class XtendLibClasspathAdderTest extends AbstractXtend2UITestCase {
 		file.create(new StringInputStream("class Foo {}"), true, null);
 		IResourcesSetupUtil.waitForAutoBuild();
 		assertErrorMarker(file);
-		adder.addLibsToClasspath(project, null);
+		adder.addLibsToClasspath(javaProject, null);
 		IResourcesSetupUtil.waitForAutoBuild();
 		assertNoErrorMarker(file);
 	}

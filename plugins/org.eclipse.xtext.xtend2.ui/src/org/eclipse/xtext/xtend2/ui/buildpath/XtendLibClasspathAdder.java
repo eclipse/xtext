@@ -39,13 +39,10 @@ public class XtendLibClasspathAdder {
 
 	private static final String PLUGIN_NATURE = "org.eclipse.pde.PluginNature";
 
-	public void addLibsToClasspath(IProject project, IProgressMonitor monitor) {
+	public void addLibsToClasspath(IJavaProject javaProject, IProgressMonitor monitor) {
 		try {
 			SubMonitor progress = SubMonitor.convert(monitor, 2);
-			IJavaProject javaProject = JavaCore.create(project);
-			if (!javaProject.exists()) {
-				makeJavaProject(project, progress.newChild(1));
-			}
+			IProject project = javaProject.getProject();
 			if (project.hasNature(PLUGIN_NATURE)) {
 				addToPluginManifest(project, progress.newChild(1));
 			} else {
@@ -54,10 +51,6 @@ public class XtendLibClasspathAdder {
 		} catch (Exception exc) {
 			LOG.error("Error adding Xtend libs to classpath", exc);
 		}
-	}
-
-	protected void makeJavaProject(IProject project, IProgressMonitor monitor) {
-		// TODO implement
 	}
 
 	protected void addToClasspath(IJavaProject javaProject, IProgressMonitor monitor) throws JavaModelException {
