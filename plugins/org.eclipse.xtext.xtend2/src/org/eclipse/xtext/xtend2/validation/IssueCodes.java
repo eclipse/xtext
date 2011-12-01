@@ -57,7 +57,6 @@ public final class IssueCodes {
 	public static final String FUNCTION_LOCALLY_NEVER_USED = "function_locally_never_used";
 	public static final String EXCEPTION_NOT_THROWABLE = "exception_not_throwable";
 	public static final String EXCEPTION_DECLARED_TWICE = "exception_declared_twice";
-	public static final String EXCEPTION_SUPTYPE_OF_DECLARED_EXCEPTION = "exception_is_subtype_of_declared_exception";
 	
 	public static final String MISSING_CONSTRUCTOR = ISSUE_CODE_PREFIX + "missing_constructor";
 	public static final String MUST_INVOKE_SUPER_CONSTRUCTOR = ISSUE_CODE_PREFIX + "must_invoke_super_constructor";
