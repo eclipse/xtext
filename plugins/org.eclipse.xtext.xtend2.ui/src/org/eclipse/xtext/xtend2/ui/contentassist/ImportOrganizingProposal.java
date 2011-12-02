@@ -30,11 +30,18 @@ public class ImportOrganizingProposal extends ConfigurableCompletionProposal {
 		super(appendable.toString(), replacementOffset, replacementLength, cursorPosition, image, displayString, null, null);
 		this.appendable = appendable;
 	}
+	
+	@Override
+	public void setTextApplier(IReplacementTextApplier textApplier) {
+		throw new UnsupportedOperationException("ImportOrganizingProposal does not support custom text appliers");
+	}
 
 	@Override
 	public void apply(IDocument document) {
 		try {
-			appendable.commitChanges();
+			appendable.commitChanges(getReplacementOffset(), getReplacementLength());
+			if (isLinkedMode())
+				setUpLinkedMode(document);
 		} catch (BadLocationException e) {
 			e.printStackTrace();
 		}
