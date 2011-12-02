@@ -4,6 +4,7 @@ import com.google.inject.Inject
 import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtend2.lib.StringConcatenation
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue
 import org.eclipse.xtext.common.types.JvmAnnotationReference
 import org.eclipse.xtext.common.types.JvmAnnotationValue
@@ -28,8 +29,6 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
-import org.eclipse.xtext.xbase.typing.ITypeProvider
-import org.eclipse.xtend2.lib.StringConcatenation
 
 /**
  * A generator implementation that processes the 
@@ -39,9 +38,8 @@ import org.eclipse.xtend2.lib.StringConcatenation
 class JvmModelGenerator implements IGenerator {
 	
 	@Inject extension ILogicalContainerProvider
-	@Inject XbaseCompiler compiler
-	@Inject extension ITypeProvider
 	@Inject extension TypeReferences 
+	@Inject XbaseCompiler compiler
 	@Inject TypeReferenceSerializer typeRefSerializer
 	
 	override void doGenerate(Resource input, IFileSystemAccess fsa) {
