@@ -151,22 +151,22 @@ public class ImplementMemberFromSuperAssist {
 			implementor.appendConstructorFromSuper(model, (JvmConstructor) overridden, appendable);
 			simpleName = "new";
 		}
-		String code = appendable.toString();
-		if (!isValidProposal(code.trim(), context, conflictHelper)
-				&& !isValidProposal(overridden.getSimpleName(), context, conflictHelper))
+		String code = appendable.getCode();
+		if (!isValidProposal(code.trim(), context, conflictHelper) && !isValidProposal(simpleName, context, conflictHelper))
 			return null;
 		ImportOrganizingProposal completionProposal = createCompletionProposal(appendable, context.getReplaceRegion(),
 				getLabel(overridden), images.forFunction(overridden.getVisibility(), false));
-		Matcher matcher = bodyExpressionPattern.matcher(code.trim());
+		Matcher matcher = bodyExpressionPattern.matcher(code);
 		if (matcher.find()) {
 			int bodyExpressionLength = matcher.end(1) - matcher.start(1);
+			int bodyExpressionStart = matcher.start(1) + appendable.getTotalOffset() - completionProposal.getReplacementOffset();
 			if (bodyExpressionLength == 0) {
-				completionProposal.setCursorPosition(matcher.start(1));
+				completionProposal.setCursorPosition(bodyExpressionStart);
 			} else {
-				completionProposal.setSelectionStart(completionProposal.getReplacementOffset() + matcher.start(1));
+				completionProposal.setSelectionStart(completionProposal.getReplacementOffset() + bodyExpressionStart);
 				completionProposal.setSelectionLength(bodyExpressionLength);
 				completionProposal.setAutoInsertable(false);
-				completionProposal.setCursorPosition(matcher.start(1) + bodyExpressionLength);
+				completionProposal.setCursorPosition(bodyExpressionStart + bodyExpressionLength);
 				completionProposal.setSimpleLinkedMode(context.getViewer(), '\t');
 			}
 		}
