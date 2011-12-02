@@ -219,6 +219,11 @@ public abstract class AbstractXbaseWithAnnotationsRuntimeModule extends DefaultR
 		return org.eclipse.xtext.xbase.typing.XbaseTypeArgumentContextProvider.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.resource.ILocationInFileProvider> bindILocationInFileProvider() {
+		return org.eclipse.xtext.xbase.resource.XbaseLocationInFileProvider.class;
+	}
+
 	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
 	public Class<? extends org.eclipse.xtext.resource.IContainer.Manager> bindIContainer$Manager() {
 		return org.eclipse.xtext.resource.containers.StateBasedContainerManager.class;

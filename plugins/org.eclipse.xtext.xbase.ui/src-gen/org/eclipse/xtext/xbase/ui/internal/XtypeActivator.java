@@ -13,46 +13,59 @@ import org.osgi.framework.BundleContext;
 
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
 
-import java.util.Map;
-import java.util.HashMap;
+import java.util.concurrent.ExecutionException;
+
+import org.eclipse.xtext.ui.shared.SharedStateModule;
 
 /**
  * This class was generated. Customizations should only happen in a newly
  * introduced subclass. 
  */
 public class XtypeActivator extends AbstractUIPlugin {
-
-	private Map<String,Injector> injectors = new HashMap<String,Injector>();
+	
+	private static final Logger logger = Logger.getLogger(XtypeActivator.class);
+	
+	private Cache<String, Injector> injectors = CacheBuilder.newBuilder().build(new CacheLoader<String, Injector>() {
+		@Override
+		public Injector load(String language) throws Exception {
+			Module runtimeModule = getRuntimeModule(language);
+			Module sharedStateModule = getSharedStateModule();
+			Module uiModule = getUiModule(language);
+			Module mergedModule = override(override(runtimeModule).with(sharedStateModule)).with(uiModule);
+			return createInjector(mergedModule);
+		}
+	});
+	
 	private static XtypeActivator INSTANCE;
-
+	
+	public static final String ORG_ECLIPSE_XTEXT_XBASE_XTYPE = "org.eclipse.xtext.xbase.Xtype";
+	public static final String ORG_ECLIPSE_XTEXT_XBASE_XBASE = "org.eclipse.xtext.xbase.Xbase";
+	public static final String ORG_ECLIPSE_XTEXT_XBASE_ANNOTATIONS_XBASEWITHANNOTATIONS = "org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations";
+	
 	public Injector getInjector(String languageName) {
-		return injectors.get(languageName);
+		try {
+			return injectors.get(languageName);
+		} catch(ExecutionException e) {
+			logger.error("Failed to create injector for " + languageName);
+			logger.error(e.getMessage(), e);
+			throw new RuntimeException("Failed to create injector for " + languageName, e);
+		}
 	}
 	
 	@Override
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		INSTANCE = this;
-		try {
-			registerInjectorFor("org.eclipse.xtext.xbase.Xtype");
-			registerInjectorFor("org.eclipse.xtext.xbase.Xbase");
-			registerInjectorFor("org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations");
-			
-		} catch (Exception e) {
-			Logger.getLogger(getClass()).error(e.getMessage(), e);
-			throw e;
-		}
-	}
-	
-	protected void registerInjectorFor(String language) throws Exception {
-		injectors.put(language, createInjector(
-		  override(override(getRuntimeModule(language)).with(getSharedStateModule())).with(getUiModule(language))));
 	}
 	
 	@Override
 	public void stop(BundleContext context) throws Exception {
-		injectors.clear();
+		injectors.invalidateAll();
+		injectors.cleanUp();
 		INSTANCE = null;
 		super.stop(context);
 	}
@@ -62,35 +75,35 @@ public class XtypeActivator extends AbstractUIPlugin {
 	}
 	
 	protected Module getRuntimeModule(String grammar) {
-		if ("org.eclipse.xtext.xbase.Xtype".equals(grammar)) {
-		  return new org.eclipse.xtext.xbase.XtypeRuntimeModule();
+		if (ORG_ECLIPSE_XTEXT_XBASE_XTYPE.equals(grammar)) {
+			return new org.eclipse.xtext.xbase.XtypeRuntimeModule();
 		}
-		if ("org.eclipse.xtext.xbase.Xbase".equals(grammar)) {
-		  return new org.eclipse.xtext.xbase.XbaseRuntimeModule();
+		if (ORG_ECLIPSE_XTEXT_XBASE_XBASE.equals(grammar)) {
+			return new org.eclipse.xtext.xbase.XbaseRuntimeModule();
 		}
-		if ("org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations".equals(grammar)) {
-		  return new org.eclipse.xtext.xbase.annotations.XbaseWithAnnotationsRuntimeModule();
+		if (ORG_ECLIPSE_XTEXT_XBASE_ANNOTATIONS_XBASEWITHANNOTATIONS.equals(grammar)) {
+			return new org.eclipse.xtext.xbase.annotations.XbaseWithAnnotationsRuntimeModule();
 		}
 		
 		throw new IllegalArgumentException(grammar);
 	}
 	
 	protected Module getUiModule(String grammar) {
-		if ("org.eclipse.xtext.xbase.Xtype".equals(grammar)) {
-		  return new org.eclipse.xtext.xbase.ui.XtypeUiModule(this);
+		if (ORG_ECLIPSE_XTEXT_XBASE_XTYPE.equals(grammar)) {
+			return new org.eclipse.xtext.xbase.ui.XtypeUiModule(this);
 		}
-		if ("org.eclipse.xtext.xbase.Xbase".equals(grammar)) {
-		  return new org.eclipse.xtext.xbase.ui.XbaseUiModule(this);
+		if (ORG_ECLIPSE_XTEXT_XBASE_XBASE.equals(grammar)) {
+			return new org.eclipse.xtext.xbase.ui.XbaseUiModule(this);
 		}
-		if ("org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations".equals(grammar)) {
-		  return new org.eclipse.xtext.xbase.annotations.ui.XbaseWithAnnotationsUiModule(this);
+		if (ORG_ECLIPSE_XTEXT_XBASE_ANNOTATIONS_XBASEWITHANNOTATIONS.equals(grammar)) {
+			return new org.eclipse.xtext.xbase.annotations.ui.XbaseWithAnnotationsUiModule(this);
 		}
 		
 		throw new IllegalArgumentException(grammar);
 	}
 	
 	protected Module getSharedStateModule() {
-		return new org.eclipse.xtext.ui.shared.SharedStateModule();
+		return new SharedStateModule();
 	}
 	
 }
