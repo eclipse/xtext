@@ -28,7 +28,6 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	@Inject ValidationTestHelper helper
 	@Inject JvmModelGenerator generator
 	@Inject EclipseRuntimeDependentJavaCompiler javaCompiler
-	@Inject TypeReferences typeReferences
 
 	override void setUp() {
 		super.setUp();

@@ -47,9 +47,6 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
   @Inject
   private EclipseRuntimeDependentJavaCompiler javaCompiler;
   
-  @Inject
-  private TypeReferences typeReferences;
-  
   public void setUp() {
     try {
       {
