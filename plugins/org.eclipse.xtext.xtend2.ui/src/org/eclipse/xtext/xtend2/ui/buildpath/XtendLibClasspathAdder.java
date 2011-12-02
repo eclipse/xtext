@@ -43,34 +43,32 @@ public class XtendLibClasspathAdder {
 		try {
 			SubMonitor progress = SubMonitor.convert(monitor, 2);
 			IProject project = javaProject.getProject();
-			if (project.hasNature(PLUGIN_NATURE)) {
-				addToPluginManifest(project, progress.newChild(1));
-			} else {
+			if (!project.hasNature(PLUGIN_NATURE) || !addToPluginManifest(project, progress.newChild(1)))
 				addToClasspath(javaProject, progress.newChild(1));
-			}
 		} catch (Exception exc) {
 			LOG.error("Error adding Xtend libs to classpath", exc);
 		}
 	}
 
-	protected void addToClasspath(IJavaProject javaProject, IProgressMonitor monitor) throws JavaModelException {
+	protected boolean addToClasspath(IJavaProject javaProject, IProgressMonitor monitor) throws JavaModelException {
 		IClasspathEntry xtendContainerEntry = JavaCore.newContainerEntry(XtendContainerInitializer.XTEND_LIBRARY_PATH);
 		IClasspathEntry[] rawClasspath = javaProject.getRawClasspath();
 		IClasspathEntry[] newRawClasspath = new IClasspathEntry[rawClasspath.length + 1];
 		for(int i=0; i<rawClasspath.length; ++i) {
 			IClasspathEntry entry = rawClasspath[i];
 			if (entry.getEntryKind() == IClasspathEntry.CPE_CONTAINER && entry.getPath().equals(xtendContainerEntry.getPath())){
-				return;
+				return false;
 			}
 			newRawClasspath[i+1] = entry;
 		}
 		newRawClasspath[0] = xtendContainerEntry;
 		javaProject.setRawClasspath(newRawClasspath, monitor);
+		return true;
 	}
 
-	protected void addToPluginManifest(IProject project, IProgressMonitor monitor) throws IOException, CoreException {
+	protected boolean addToPluginManifest(IProject project, IProgressMonitor monitor) throws IOException, CoreException {
 		IResource manifestFile = project.findMember("META-INF/MANIFEST.MF");
-		if (manifestFile.isAccessible() && !manifestFile.getResourceAttributes().isReadOnly()
+		if (manifestFile != null && manifestFile.isAccessible() && !manifestFile.getResourceAttributes().isReadOnly()
 				&& manifestFile instanceof IFile) {
 			OutputStream output = null;
 			InputStream input = null;
@@ -83,6 +81,7 @@ public class XtendLibClasspathAdder {
 				ByteArrayInputStream in = new ByteArrayInputStream(out.toByteArray());
 				input = new BufferedInputStream(in);
 				((IFile) manifestFile).setContents(input, true, true, monitor);
+				return true;
 			} finally {
 				if (output != null)
 					output.close();
@@ -90,5 +89,6 @@ public class XtendLibClasspathAdder {
 					input.close();
 			}
 		}
+		return false;
 	}
 }
