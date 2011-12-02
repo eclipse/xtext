@@ -59,6 +59,7 @@ public class OutlineWithEditorLinker implements IPropertyChangeListener {
 
 		public void doubleClick(DoubleClickEvent event) {
 			selectInTextEditor(event.getSelection());
+			textViewer.getTextWidget().setFocus();
 		}
 	}
 

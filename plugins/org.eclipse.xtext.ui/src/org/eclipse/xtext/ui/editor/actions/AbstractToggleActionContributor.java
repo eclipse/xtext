@@ -93,7 +93,14 @@ public abstract class AbstractToggleActionContributor {
 	}
 
 	public void initialize(IPreferenceStoreAccess preferenceStoreAccess) {
-		preferenceStoreAccess.getWritablePreferenceStore().setDefault(getPreferenceKey(), false);
+		preferenceStoreAccess.getWritablePreferenceStore().setDefault(getPreferenceKey(), getPreferenceDefaultValue());
+	}
+
+	/**
+	 * @since 2.2
+	 */
+	protected boolean getPreferenceDefaultValue() {
+		return false;
 	}
 
 	protected void addPropertyChangeListener() {
