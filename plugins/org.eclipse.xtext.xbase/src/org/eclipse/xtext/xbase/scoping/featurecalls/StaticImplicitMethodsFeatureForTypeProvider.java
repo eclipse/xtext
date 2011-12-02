@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ComparableExtensions;
+import org.eclipse.xtext.xbase.lib.DoubleExtensions;
 import org.eclipse.xtext.xbase.lib.FunctionExtensions;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
@@ -105,6 +106,8 @@ public class StaticImplicitMethodsFeatureForTypeProvider extends AbstractStaticM
 			result.put(String.class, StringExtensions.class);
 			result.put(Integer.class, IntegerExtensions.class);
 			result.put(Integer.TYPE, IntegerExtensions.class);
+			result.put(Double.class, DoubleExtensions.class);
+			result.put(Double.TYPE, DoubleExtensions.class);
 			result.put(Comparable.class, ComparableExtensions.class);
 			result.put(Object.class, ObjectExtensions.class);
 			result.put(List.class, ListExtensions.class);

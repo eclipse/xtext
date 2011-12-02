@@ -22,56 +22,41 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class IntegerExtensionsTest extends AbstractXbaseTestCase {
+public class NumberExtensionsTest extends AbstractXbaseTestCase {
 
 	@Inject
 	private Primitives primitives;
-	
-	public void testPrimitiveBindings_0() throws Exception {
-		XExpression expression = expression("!(-1+2**3*4/5%6||7&&8)", true);
+
+	public void testPrimitiveDoubleBindings() throws Exception {
+		XExpression expression = expression("{val double x=1; -x+x**x*x/x<x  x<=x x>x x>=x x!=x x==x}", true); 
 		assertOnlyPrimitveOperationsBound(expression);
 	}
 
-	public void testPrimitiveBindings_1() throws Exception {
-		XExpression expression = expression("1<2", true);
-		assertOnlyPrimitveOperationsBound(expression);
-	}
-
-	public void testPrimitiveBindings_2() throws Exception {
-		XExpression expression = expression("1<=2", true);
-		assertOnlyPrimitveOperationsBound(expression);
-	}
-
-	public void testPrimitiveBindings_3() throws Exception {
-		XExpression expression = expression("1>2", true);
-		assertOnlyPrimitveOperationsBound(expression);
-	}
-
-	public void testPrimitiveBindings_4() throws Exception {
-		XExpression expression = expression("1>=2", true);
-		assertOnlyPrimitveOperationsBound(expression);
-	}
-
-	public void testPrimitiveBindings_5() throws Exception {
-		XExpression expression = expression("1==2", true);
+	public void testPrimitiveIntBindings() throws Exception {
+		XExpression expression = expression("{!(-1+2**3*4/5%6||7&&8)<9 10<=11 12>13 13>=14 15!=16 17==18}", true);
 		assertOnlyPrimitveOperationsBound(expression);
 	}
 
 	protected void assertOnlyPrimitveOperationsBound(XExpression expression) {
-		for(XAbstractFeatureCall featureCall: EcoreUtil2.eAllOfType(expression, XAbstractFeatureCall.class)) {
+		boolean operationsFound = false;
+		for (XAbstractFeatureCall featureCall : EcoreUtil2.eAllOfType(expression, XAbstractFeatureCall.class)) {
 			JvmIdentifiableElement feature = featureCall.getFeature();
-			assertTrue(feature instanceof JvmOperation);
-			for(JvmFormalParameter parameter: ((JvmOperation)feature).getParameters()) {
-				assertTrue(parameter.getParameterType().getIdentifier(), primitives.isPrimitive(parameter.getParameterType()));
+			if (feature instanceof JvmOperation) {
+				for (JvmFormalParameter parameter : ((JvmOperation) feature).getParameters()) {
+					operationsFound = true;
+					assertTrue(parameter.getParameterType().getIdentifier(),
+							primitives.isPrimitive(parameter.getParameterType()));
+				}
 			}
 		}
+		assertTrue("No operations found", operationsFound);
 	}
-	
+
 	public void testNot() {
 		assertEquals(0x55555555, IntegerExtensions.operator_not(0xaaaaaaaa));
 		assertEquals(0xaaaaaaaa, IntegerExtensions.operator_not(0x55555555));
 		assertEquals(-1, IntegerExtensions.operator_not(0));
 		assertEquals(0, IntegerExtensions.operator_not(-1));
 	}
-	
+
 }
