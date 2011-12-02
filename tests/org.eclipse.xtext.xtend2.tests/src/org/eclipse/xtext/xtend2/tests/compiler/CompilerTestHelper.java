@@ -54,12 +54,13 @@ public class CompilerTestHelper {
 	private IXtend2JvmAssociations associations;
 	
 	public void setUp() {
+		javaCompiler.clearClassPath();
 		javaCompiler.addClassPathOfClass(getClass());
 		javaCompiler.addClassPathOfClass(AbstractXbaseEvaluationTest.class);
 		javaCompiler.addClassPathOfClass(Functions.class);
 		javaCompiler.addClassPathOfClass(StringConcatenation.class);
-		javaCompiler.addClassPathOfClass(Provider.class);
 		javaCompiler.addClassPathOfClass(javax.inject.Provider.class);
+		javaCompiler.addClassPathOfClass(Provider.class);
 		javaCompiler.addClassPathOfClass(Supplier.class);
 		javaCompiler.addClassPathOfClass(Notifier.class);
 		javaCompiler.addClassPathOfClass(EcorePackage.class);
