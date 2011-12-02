@@ -195,6 +195,11 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 		helper.assertError(clazz, Xtend2Package.Literals.XTEND_CONSTRUCTOR, IssueCodes.DUPLICATE_METHOD);
 		helper.assertError(clazz, Xtend2Package.Literals.XTEND_CONSTRUCTOR, IssueCodes.DUPLICATE_METHOD);
 	}
+	
+	public void testConstructorDoesNotSupportTypeArguments() throws Exception {
+		XtendClass clazz = clazz("class K { new<T>() {} }");
+		helper.assertError(clazz, Xtend2Package.Literals.XTEND_CONSTRUCTOR, IssueCodes.CONSTRUCTOR_TYPE_PARAMS_NOT_SUPPORTED);
+	}
 
 	public void testMissingConstructor() throws Exception {
 		XtendClass clazz = clazz("class K extends test.NoDefaultConstructor {}");

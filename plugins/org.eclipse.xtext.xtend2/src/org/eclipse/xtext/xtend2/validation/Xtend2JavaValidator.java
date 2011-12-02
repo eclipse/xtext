@@ -1058,6 +1058,13 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 	}
 	
 	@Check
+	public void checkTypeParametersAreUnsupported(XtendConstructor constructor){
+		if (!constructor.getTypeParameters().isEmpty()) {
+			error("Type parameters are not supported for constructors", Xtend2Package.Literals.XTEND_CONSTRUCTOR__TYPE_PARAMETERS, INSIGNIFICANT_INDEX, CONSTRUCTOR_TYPE_PARAMS_NOT_SUPPORTED);
+		}
+	}
+	
+	@Check
 	public void checkDeclaredExceptions(XtendFunction function){
 		JvmOperation jvmType = associations.getDirectlyInferredOperation(function);
 		checkExceptions(function,jvmType.getExceptions(), Xtend2Package.Literals.XTEND_FUNCTION__EXCEPTIONS);
