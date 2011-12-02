@@ -21,8 +21,6 @@ public class WhitespaceHelper {
 
 	private static Logger LOG = Logger.getLogger(WhitespaceHelper.class);
 
-	private IDocument document;
-
 	private int offset;
 
 	private int length;
@@ -32,12 +30,11 @@ public class WhitespaceHelper {
 	private String suffix;
 
 	public void initialize(IDocument document, int offset, int length, boolean ensureEmptyLinesAround) {
-		this.document = document;
 		this.offset = offset;
 		this.length = length;
 		if (ensureEmptyLinesAround) {
-			prefix = calculateLeadingWhitespace();
-			suffix = calculateTrailingWhitespace();
+			prefix = calculateLeadingWhitespace(document);
+			suffix = calculateTrailingWhitespace(document);
 		}
 	}
 
@@ -57,7 +54,7 @@ public class WhitespaceHelper {
 		return suffix;
 	}
 
-	protected String calculateLeadingWhitespace() {
+	protected String calculateLeadingWhitespace(IDocument document) {
 		try {
 			IRegion line = document.getLineInformationOfOffset(offset);
 			if (line != null) {
@@ -81,12 +78,12 @@ public class WhitespaceHelper {
 				}
 			}
 		} catch (BadLocationException e) {
-			LOG.error("Error ensuring regex in document", e);
+			LOG.error("Error calculating leading whitespace", e);
 		}
 		return null;
 	}
 
-	protected String calculateTrailingWhitespace() {
+	protected String calculateTrailingWhitespace(IDocument document) {
 		try {
 			IRegion line = document.getLineInformationOfOffset(offset + length);
 			if (line != null) {
@@ -112,7 +109,7 @@ public class WhitespaceHelper {
 				}
 			}
 		} catch (BadLocationException e) {
-			LOG.error("Error ensuring regex in document", e);
+			LOG.error("Error calculating trailing whitespace", e);
 		}
 		return null;
 	}
