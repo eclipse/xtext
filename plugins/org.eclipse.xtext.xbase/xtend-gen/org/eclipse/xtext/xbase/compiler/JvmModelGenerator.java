@@ -50,7 +50,6 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
 /**
  * A generator implementation that processes the
@@ -63,13 +62,10 @@ public class JvmModelGenerator implements IGenerator {
   private ILogicalContainerProvider _iLogicalContainerProvider;
   
   @Inject
-  private XbaseCompiler compiler;
-  
-  @Inject
-  private ITypeProvider _iTypeProvider;
-  
-  @Inject
   private TypeReferences _typeReferences;
+  
+  @Inject
+  private XbaseCompiler compiler;
   
   @Inject
   private TypeReferenceSerializer typeRefSerializer;
