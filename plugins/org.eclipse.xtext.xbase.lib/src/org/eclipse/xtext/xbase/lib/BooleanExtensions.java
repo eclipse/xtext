@@ -50,4 +50,32 @@ public class BooleanExtensions {
 	public static boolean operator_not(boolean b) {
 		return !b;
 	}
+	
+	/**
+	 * The binary <code>equals</code> operator. This is the equivalent to the java <code>==</code> operator.
+	 * 
+	 * @param a
+	 *            an boolean.
+	 * @param b
+	 *            an boolean.
+	 * @return <code>a==b</code>
+	 */
+	public static boolean operator_equals(boolean a, boolean b) {
+		return a == b;
+	}
+
+	/**
+	 * The binary <code>not equals</code> operator. This is the equivalent to the java <code>!=</code> operator.
+	 * 
+	 * @param a
+	 *            an boolean.
+	 * @param b
+	 *            an boolean.
+	 * @return <code>a!=b</code>
+	 */
+	public static boolean operator_notEquals(boolean a, boolean b) {
+		return a != b;
+	}
+
+
 }
