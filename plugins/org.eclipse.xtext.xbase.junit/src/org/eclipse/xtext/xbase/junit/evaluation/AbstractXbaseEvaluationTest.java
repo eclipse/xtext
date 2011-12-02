@@ -1852,22 +1852,21 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"new java.math.BigInteger('1').or(new java.math.BigInteger('2')).and(new java.math.BigInteger('3')).not()"); 
 	}
 
-//  TODO: make these run in XbaseSerializerWithoutNodeModelTest
-//	@Test public void testBigIntegerArithmetics() throws Exception {
-//		BigInteger x = new BigInteger("2");
-//		assertEvaluatesTo(x.negate().add(x.multiply(x).divide(x).mod(x)), 
-//				"{ val x=new java.math.BigInteger('2'); -x+x*x/x%x}"); 
-//	}
-//
-//	@Test public void testDoubleArithmetics() throws Exception {
-//		assertEvaluatesTo(-(2.+2.*2./2.), "{ val x = Double::parseDouble('2'); -(x+x*x/x) }"); 
-//	}
-//	
-//	@Test public void testBigDecimalArithmetics() throws Exception {
-//		BigDecimal x = new BigDecimal("2");
-//		assertEvaluatesTo(x.negate().add(x.multiply(x).divide(x)), 
-//				"{ val x=new java.math.BigDecimal('2'); -x+x*x/x }"); 
-//	}
+	@Test public void testBigIntegerArithmetics() throws Exception {
+		BigInteger x = new BigInteger("2");
+		assertEvaluatesTo(x.negate().add(x.multiply(x).divide(x).mod(x)), 
+				"{ val x=new java.math.BigInteger('2'); -x+x*x/x%x}"); 
+	}
+
+	@Test public void testDoubleArithmetics() throws Exception {
+		assertEvaluatesTo(-(2.+2.*2./2.), "{ val x = Double::parseDouble('2'); -(x+x*x/x) }"); 
+	}
+	
+	@Test public void testBigDecimalArithmetics() throws Exception {
+		BigDecimal x = new BigDecimal("2");
+		assertEvaluatesTo(x.negate().add(x.multiply(x).divide(x)), 
+				"{ val x=new java.math.BigDecimal('2'); -x+x*x/x }"); 
+	}
 	
 	protected void assertEvaluatesTo(Object object, String string) throws Exception {
 		assertEquals(object, invokeXbaseExpression(string));
