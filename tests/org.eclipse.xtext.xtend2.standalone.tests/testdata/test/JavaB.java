@@ -12,6 +12,9 @@ package test;
  */
 public class JavaB extends XtendC {
 	public XtendA foo(XtendC test) {
-		return null;
+		XtendA result = new XtendA();
+		result.test2(new XtendB());
+		test.test( result);
+		return result;
 	}
 }
