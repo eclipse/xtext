@@ -146,9 +146,17 @@ public class ReplacingAppendable extends StringBuilderBasedAppendable {
 		this.whitespaceHelper = whitespaceHelper;
 		existingImports = importManager.getImports();
 	}
-
+	
 	@Override
 	public String toString() {
+		return getCode();
+	}
+	
+	public int getTotalOffset() {
+		return whitespaceHelper.getTotalOffset();
+	}
+
+	public String getCode() {
 		StringBuilder b = new StringBuilder();
 		if (whitespaceHelper.getPrefix() != null)
 			b.append(whitespaceHelper.getPrefix().replace("\n", getIndentationString()));
@@ -163,15 +171,16 @@ public class ReplacingAppendable extends StringBuilderBasedAppendable {
 		insertNewImports();
 	}
 	
-	public void commitChanges(int from, int length) throws BadLocationException {
-		int actualOffset = Math.min(whitespaceHelper.getTotalOffset(), from);
-		int endOffset = Math.max(whitespaceHelper.getTotalOffset() + whitespaceHelper.getTotalLength(), from + length);
+	public int commitChanges(int offset, int length) throws BadLocationException {
+		int actualOffset = Math.min(whitespaceHelper.getTotalOffset(), offset);
+		int endOffset = Math.max(whitespaceHelper.getTotalOffset() + whitespaceHelper.getTotalLength(), offset + length);
 		int actualLength = endOffset - actualOffset;
 		document.replace(actualOffset, actualLength, toString());
-		insertNewImports();
+		int shiftCursorBy = insertNewImports();
+		return shiftCursorBy;
 	}
 
-	public void insertNewImports() throws BadLocationException {
+	public int insertNewImports() throws BadLocationException {
 		List<String> newImports = getNewImports();
 		if (!newImports.isEmpty()) {
 			StringBuilder importSection = new StringBuilder();
@@ -192,7 +201,9 @@ public class ReplacingAppendable extends StringBuilderBasedAppendable {
 				offset = lastImportNode.getOffset() + lastImportNode.getLength();
 			}
 			document.replace(offset, 0, importSection.toString());
+			return importSection.length();
 		}
+		return 0;
 	}
 
 	protected List<String> getNewImports() {

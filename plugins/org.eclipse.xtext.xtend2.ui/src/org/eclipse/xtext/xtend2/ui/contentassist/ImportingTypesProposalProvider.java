@@ -9,7 +9,10 @@ package org.eclipse.xtext.xtend2.ui.contentassist;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.DocumentRewriteSession;
+import org.eclipse.jface.text.DocumentRewriteSessionType;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.IDocumentExtension4;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.ITextViewerExtension;
 import org.eclipse.swt.custom.StyledText;
@@ -110,7 +113,11 @@ public class ImportingTypesProposalProvider extends JdtTypesProposalProvider {
 				viewerExtension = (ITextViewerExtension) viewer;
 				viewerExtension.setRedraw(false);
 			}
+			DocumentRewriteSession rewriteSession = null;
 			try {
+				if (document instanceof IDocumentExtension4) {
+					rewriteSession = ((IDocumentExtension4) document).startRewriteSession(DocumentRewriteSessionType.UNRESTRICTED_SMALL);
+				}
 				// compute import statement's offset
 				int offset = 0;
 				boolean startWithLineBreak = true;
@@ -155,6 +162,9 @@ public class ImportingTypesProposalProvider extends JdtTypesProposalProvider {
 					widget.setTopPixel(topPixel + additionalTopPixel);
 				}
 			} finally {
+				if (rewriteSession != null) {
+					((IDocumentExtension4) document).stopRewriteSession(rewriteSession);
+				}
 				if (viewerExtension != null)
 					viewerExtension.setRedraw(true);
 			}

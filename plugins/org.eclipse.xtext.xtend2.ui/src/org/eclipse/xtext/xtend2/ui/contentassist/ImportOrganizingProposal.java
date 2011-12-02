@@ -27,7 +27,7 @@ public class ImportOrganizingProposal extends ConfigurableCompletionProposal {
 
 	public ImportOrganizingProposal(ReplacingAppendable appendable, int replacementOffset, int replacementLength,
 			int cursorPosition, Image image, StyledString displayString) {
-		super(appendable.toString(), replacementOffset, replacementLength, cursorPosition, image, displayString, null, null);
+		super(appendable.getCode(), replacementOffset, replacementLength, cursorPosition, image, displayString, null, null);
 		this.appendable = appendable;
 	}
 	
@@ -39,9 +39,12 @@ public class ImportOrganizingProposal extends ConfigurableCompletionProposal {
 	@Override
 	public void apply(IDocument document) {
 		try {
-			appendable.commitChanges(getReplacementOffset(), getReplacementLength());
-			if (isLinkedMode())
+			int shiftOffsetBy = appendable.commitChanges(getReplacementOffset(), getReplacementLength());
+			setSelectionStart(getSelectionStart() + shiftOffsetBy);
+			setCursorPosition(getCursorPosition() + shiftOffsetBy);
+			if (isLinkedMode()) {
 				setUpLinkedMode(document);
+			}
 		} catch (BadLocationException e) {
 			e.printStackTrace();
 		}
