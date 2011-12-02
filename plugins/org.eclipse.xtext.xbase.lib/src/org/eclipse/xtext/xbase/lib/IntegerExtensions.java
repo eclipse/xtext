@@ -391,6 +391,48 @@ public class IntegerExtensions {
 	}
 
 	/**
+	 * The binary <code>signed left shift</code> operator. This is the equivalent to the java <code>&lt;&lt;</code> operator.
+	 * Fills in a zero as the least significant bit.
+	 * 
+	 * @param a
+	 *            an integer.
+	 * @param distance 
+	 *            the number of times to shift.
+	 * @return <code>a&lt;&lt;distance</code>
+	 */
+	public static int shiftLeft(int a, int distance) {
+		return a << distance;
+	}
+
+	/**
+	 * The binary <code>signed right sift</code> operator. This is the equivalent to the java <code>&gt;&gt;</code> operator.
+	 * Shifts in the value of the sign bit as the leftmost bit, thus preserving the sign of the initial value.
+	 * 
+	 * @param a
+	 *            an integer.
+	 * @param distance 
+	 *            the number of times to shift.
+	 * @return <code>a&gt;&gt;distance</code>
+	 */
+	public static int shiftRight(int a, int distance) {
+		return a >> distance;
+	}
+
+	/**
+	 * The binary <code>unsigned right shift</code> operator. This is the equivalent to the java <code>&gt;&gt;&gt;</code> operator.
+	 * Shifts in zeros into as leftmost bits, thus always yielding a positive integer.
+	 * 
+	 * @param a
+	 *            an integer.
+	 * @param distance
+	 *            the number of times to shift.
+	 * @return <code>a&gt;&gt;&gt;distance</code>
+	 */
+	public static int shiftRightUnsigned(int a, int distance) {
+		return a >>> distance;
+	}
+
+	/**
 	 * Implementation of an iterator for integers.
 	 */
 	protected static class IntIterator implements Iterator<Integer> {
