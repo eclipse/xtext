@@ -119,42 +119,4 @@ public class BigIntegerExtensions {
 		return a.mod(b);
 	}
 
-	/**
-	 * The binary <code>or</code> operator. 
-	 * 
-	 * @param a
-	 *            a BigInteger. May not be <code>null</code>.
-	 * @param b
-	 *            a BigInteger. May not be <code>null</code>.
-	 * @return <code>a.or(b)</code>
-	 */
-	public static BigInteger operator_or(BigInteger a, BigInteger b) {
-		return a.or(b);
-	}
-
-	/**
-	 * The binary <code>and</code> operator. 
-	 * 
-	 * @param a
-	 *            a BigInteger. May not be <code>null</code>.
-	 * @param b
-	 *            a BigInteger. May not be <code>null</code>.
-	 * @return <code>a.and(b)</code>
-	 */
-	public static BigInteger operator_and(BigInteger a, BigInteger b) {
-		return a.and(b);
-	}
-
-	/**
-	 * The unary <code>not</code> operator. 
-	 * 
-	 * @param a
-	 *            a BigInteger. May not be <code>null</code>.
-	 * @return <code>a</code> inverted.
-	 * @throws NullPoBigIntegererException
-	 *             if {@code a} is <code>null</code>.
-	 */
-	public static BigInteger operator_not(BigInteger a) {
-		return a.not();
-	}
 }
