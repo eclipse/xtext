@@ -107,6 +107,7 @@ Workflow {
 			fragment = xbase.XbaseGeneratorFragment {
 				generateXtendInferrer = false
 				useInferredJvmModel = false
+				jdtTypeHierarchy = false
 			}
 			fragment = builder.BuilderIntegrationFragment {}
 			fragment = formatting.FormatterFragment {}
@@ -143,6 +144,7 @@ Workflow {
 			fragment = xbase.XbaseGeneratorFragment {
 				generateXtendInferrer = false
 				useInferredJvmModel = false
+				jdtTypeHierarchy = false
 			}
 			fragment = builder.BuilderIntegrationFragment {}
 			fragment = formatting.FormatterFragment {}

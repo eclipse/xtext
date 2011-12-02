@@ -243,7 +243,7 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 	
 	@Override
 	public String[] getExportedPackagesRt(Grammar grammar) {
-		if(usesXbaseGrammar(grammar) && (generateXtendInferrer || useInferredJvmModel || jdtTypeHierarchy)) {
+		if(usesXbaseGrammar(grammar) && (generateXtendInferrer || useInferredJvmModel)) {
 			return new String[] { Strings.skipLastToken(getJvmModelInferrerName(grammar, getNaming()), ".") };
 		}
 		return null;
