@@ -45,7 +45,7 @@ public class XtendContainerInitializer extends ClasspathContainerInitializer {
 
 	public static final Path XTEND_LIBRARY_PATH = new Path("org.eclipse.xtend.XTEND_CONTAINER"); //$NON-NLS-1$
 
-	public static final String[] BUNDLE_IDS_TO_INCLUDE = new String[] { "com.google.collect", "com.google.inject",
+	public static final String[] BUNDLE_IDS_TO_INCLUDE = new String[] { "com.google.guava", "com.google.inject",
 			XTEXT_XBASE_LIB_BUNDLE_ID, XTEXT_XTEND2_LIB_BUNDLE_ID };
 
 	private static final Logger LOG = Logger.getLogger(XtendContainerInitializer.class);
