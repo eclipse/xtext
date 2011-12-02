@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.scoping.featurecalls;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Collections;
@@ -19,6 +20,7 @@ import java.util.Map;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.util.ReflectionUtil;
+import org.eclipse.xtext.xbase.lib.BigDecimalExtensions;
 import org.eclipse.xtext.xbase.lib.BigIntegerExtensions;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
@@ -111,6 +113,7 @@ public class StaticImplicitMethodsFeatureForTypeProvider extends AbstractStaticM
 			result.put(Double.class, DoubleExtensions.class);
 			result.put(Double.TYPE, DoubleExtensions.class);
 			result.put(BigInteger.class, BigIntegerExtensions.class);
+			result.put(BigDecimal.class, BigDecimalExtensions.class);
 			result.put(Comparable.class, ComparableExtensions.class);
 			result.put(Object.class, ObjectExtensions.class);
 			result.put(List.class, ListExtensions.class);

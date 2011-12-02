@@ -73,4 +73,9 @@ public class NumberExtensionsTest extends AbstractXbaseTestCase {
 		XExpression expression = expression("{val a=new java.math.BigInteger(1); !(-a+a-a*a/a%a||a&&a)}", true);
 		assertEquals("java.math.BigInteger", typeProvider.getType(expression).getIdentifier());
 	}
+
+	public void testBigDecimalAllOperationsBound() throws Exception {
+		XExpression expression = expression("{val a=new java.math.BigDecimal(1); -a+a-a*a/a}", true);
+		assertEquals("java.math.BigDecimal", typeProvider.getType(expression).getIdentifier());
+	}
 }
