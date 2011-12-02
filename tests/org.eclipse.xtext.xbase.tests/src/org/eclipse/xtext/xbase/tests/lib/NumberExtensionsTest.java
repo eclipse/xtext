@@ -31,8 +31,8 @@ public class NumberExtensionsTest extends AbstractXbaseTestCase {
 	@Inject
 	private ITypeProvider typeProvider;
 	
-	public void testPrimitiveDoubleBindings() throws Exception {
-		XExpression expression = expression("{val double x=1; -x+x**x*x/x<x  x<=x x>x x>=x x!=x x==x}", true); 
+	public void testPrimitiveBooleanBindings() throws Exception {
+		XExpression expression = expression("{!true||false&&true==false!=true}", true);
 		assertOnlyPrimitveOperationsBound(expression);
 	}
 
@@ -41,6 +41,11 @@ public class NumberExtensionsTest extends AbstractXbaseTestCase {
 		assertOnlyPrimitveOperationsBound(expression);
 	}
 
+	public void testPrimitiveDoubleBindings() throws Exception {
+		XExpression expression = expression("{val double x=1; -x+x**x*x/x<x  x<=x x>x x>=x x!=x x==x}", true); 
+		assertOnlyPrimitveOperationsBound(expression);
+	}
+	
 	protected void assertOnlyPrimitveOperationsBound(XExpression expression) {
 		boolean operationsFound = false;
 		for (XAbstractFeatureCall featureCall : EcoreUtil2.eAllOfType(expression, XAbstractFeatureCall.class)) {
