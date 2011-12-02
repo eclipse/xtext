@@ -162,6 +162,14 @@ public class ReplacingAppendable extends StringBuilderBasedAppendable {
 		document.replace(whitespaceHelper.getTotalOffset(), whitespaceHelper.getTotalLength(), toString());
 		insertNewImports();
 	}
+	
+	public void commitChanges(int from, int length) throws BadLocationException {
+		int actualOffset = Math.min(whitespaceHelper.getTotalOffset(), from);
+		int endOffset = Math.max(whitespaceHelper.getTotalOffset() + whitespaceHelper.getTotalLength(), from + length);
+		int actualLength = endOffset - actualOffset;
+		document.replace(actualOffset, actualLength, toString());
+		insertNewImports();
+	}
 
 	public void insertNewImports() throws BadLocationException {
 		List<String> newImports = getNewImports();
@@ -192,4 +200,5 @@ public class ReplacingAppendable extends StringBuilderBasedAppendable {
 		imports.removeAll(existingImports);
 		return imports;
 	}
+
 }
