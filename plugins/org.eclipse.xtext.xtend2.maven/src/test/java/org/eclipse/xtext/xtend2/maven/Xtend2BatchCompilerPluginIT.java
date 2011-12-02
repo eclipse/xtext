@@ -9,21 +9,21 @@ import org.apache.maven.it.util.ResourceExtractor;
 import org.junit.Test;
 
 public class Xtend2BatchCompilerPluginIT {
-	
-	@Test
-	public void simpleProject() throws Exception {
-		verifyErrorFreeLog("/it/simple");
-	}
-
-	@Test
-	public void pluginPrefix() throws Exception {
-		verifyErrorFreeLog("/it/simple", "xtend2:compile");
-	}
-
-	@Test
-	public void simpleProjectXtend2Tests() throws Exception {
-		verifyErrorFreeLog("/it/withtestsrc");
-	}
+//	
+//	@Test
+//	public void simpleProject() throws Exception {
+//		verifyErrorFreeLog("/it/simple");
+//	}
+//
+//	@Test
+//	public void pluginPrefix() throws Exception {
+//		verifyErrorFreeLog("/it/simple", "xtend2:compile");
+//	}
+//
+//	@Test
+//	public void simpleProjectXtend2Tests() throws Exception {
+//		verifyErrorFreeLog("/it/withtestsrc");
+//	}
 
 	@Test
 	public void aggregation() throws Exception {
@@ -39,6 +39,7 @@ public class Xtend2BatchCompilerPluginIT {
 		Verifier verifier = new Verifier(testDir.getAbsolutePath());
 		verifier.executeGoal(goal);
 		verifier.verifyErrorFreeLog();
+		verifier.setDebug(true);
 		verifier.resetStreams();
 	}
 }
