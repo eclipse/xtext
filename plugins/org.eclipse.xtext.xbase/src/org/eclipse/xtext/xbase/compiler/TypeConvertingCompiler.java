@@ -80,8 +80,10 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 
 	protected void doConversion(final JvmTypeReference left, final JvmTypeReference right,
 			final IAppendable appendable, XExpression context, final Later expression) {
-		if (getPrimitives().isPrimitive(right) && !getPrimitives().isPrimitive(left)) {
-			convertPrimitiveToWrapper(getPrimitives().asWrapperTypeIfPrimitive(right), context, appendable, expression);
+		if(getPrimitives().isPrimitive(left) && !getPrimitives().isPrimitive(right)) {
+			convertWrapperToPrimitive(right, getPrimitives().asPrimitiveIfWrapperType(right), context, appendable, expression);
+		} else if (getPrimitives().isPrimitive(right) && !getPrimitives().isPrimitive(left)) {
+			convertPrimitiveToWrapper(right, getPrimitives().asWrapperTypeIfPrimitive(right), context, appendable, expression);
 		} else if (right instanceof JvmMultiTypeReference) {
 			convertMultiType(left, (JvmMultiTypeReference) right, context, appendable, expression);
 		} else if (right instanceof JvmDelegateTypeReference) {
@@ -236,14 +238,30 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	}
 
 	protected void convertPrimitiveToWrapper(
+			final JvmTypeReference primitive, 
 			final JvmTypeReference wrapper, 
 			XExpression context, 
 			final IAppendable appendable,
 			final Later expression) {
-		appendable.append("((");
 		serialize(wrapper, null, appendable);
-		appendable.append(")");
+		appendable.append(".");
+		appendable.append("valueOf(");
 		expression.exec();
+		appendable.append(")");
+	}
+
+	protected void convertWrapperToPrimitive(
+			final JvmTypeReference wrapper, 
+			final JvmTypeReference primitive, 
+			XExpression context, 
+			final IAppendable appendable,
+			final Later expression) {
+		appendable.append("(");
+		expression.exec();
+		appendable.append(")");
+		appendable.append(".");
+		serialize(primitive, null, appendable);
+		appendable.append("Value(");
 		appendable.append(")");
 	}
 

@@ -134,7 +134,7 @@ public class CompilerTest extends AbstractXbaseTestCase {
 				"    final Comparable _comparable = (Comparable)x;\n" + 
 				"    matched=true;\n" + 
 				"    int _compareTo = ((Comparable)_comparable).compareTo(\"jho\");\n" + 
-				"    String _operator_plus = org.eclipse.xtext.xbase.lib.StringExtensions.operator_plus(\"\", ((Integer)_compareTo));\n" + 
+				"    String _operator_plus = org.eclipse.xtext.xbase.lib.StringExtensions.operator_plus(\"\", Integer.valueOf(_compareTo));\n" + 
 				"    String _string = ((Comparable)_comparable).toString();\n" + 
 				"    String _operator_plus_1 = org.eclipse.xtext.xbase.lib.StringExtensions.operator_plus(_operator_plus, _string);\n" + 
 				"    _switchResult = _operator_plus_1;\n" + 

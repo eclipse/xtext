@@ -264,7 +264,7 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 			  public Bar() {
 			    this(new Function0<String>() {
 			      public String apply() {
-			        String _string = ((Integer)123).toString();
+			        String _string = Integer.valueOf(123).toString();
 			        return _string;
 			      }
 			    }.apply());
@@ -343,7 +343,7 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 			public class Bar {
 			  public Integer doStuff(final String x) {
 			    int _length = x.length();
-			    return ((Integer)_length);
+			    return Integer.valueOf(_length);
 			  }
 			}
 		''')
