@@ -122,8 +122,6 @@ public abstract class AbstractXbaseContentAssistTest extends TestCase implements
 		// InputOutput,
 		"print()",
 		"println()",
-		// ObjectExtensions
-		"identityEquals()"
 	};
 	
 	protected static String[] STRING_OPERATORS = {
