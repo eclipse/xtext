@@ -344,14 +344,14 @@ public class IntegerExtensions {
 	}
 
 	/**
-	 * The unary <code>not</code> operator. Inverts all bits of the given integer.
+	 * The unary <code>not</code> operator. This is the equivalent to the java <code>~</code> operator.
 	 * 
 	 * @param a
 	 *            an integer.
 	 * @return <code>a</code> inverted.
 	 */
 	public static int operator_not(int a) {
-		return a ^ -1;
+		return ~a;
 	}
 
 	/**
