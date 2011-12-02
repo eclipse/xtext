@@ -8,7 +8,6 @@
 package org.eclipse.xtext.builder.navigation;
 
 import org.eclipse.jdt.core.IMember;
-import org.eclipse.xtext.ui.editor.GlobalURIEditorOpener;
 import org.eclipse.xtext.ui.editor.hyperlinking.XtextHyperlink;
 
 import com.google.inject.Inject;
@@ -19,7 +18,7 @@ import com.google.inject.Inject;
 public class LinkToOrigin extends XtextHyperlink {
 
 	@Inject
-	private GlobalURIEditorOpener uriEditorOpener;
+	private GlobalDerivedMemberAwareURIEditorOpener uriEditorOpener;
 	
 	private IMember member;
 
