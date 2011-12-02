@@ -59,4 +59,9 @@ public class NumberExtensionsTest extends AbstractXbaseTestCase {
 		assertEquals(0, IntegerExtensions.operator_not(-1));
 	}
 
+	public void testShiftOperators() {
+		assertEquals(0x80000000, IntegerExtensions.shiftLeft(0x1, 31));
+		assertEquals(0xffffffff, IntegerExtensions.shiftRight(0x80000000, 31));
+		assertEquals(0x1, IntegerExtensions.shiftRightUnsigned(0x80000000, 31));
+	}
 }
