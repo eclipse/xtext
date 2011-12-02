@@ -8,9 +8,8 @@ import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 import org.junit.Test;
 
-import com.google.common.collect.Lists;
-
 public class Xtend2BatchCompilerPluginIT {
+	
 	@Test
 	public void simpleProject() throws Exception {
 		verifyErrorFreeLog("/it/simple");

@@ -59,6 +59,17 @@
 			<version>2.2.3</version>
 			<scope>runtime</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.antlr</groupId>
+			<artifactId>antlr-runtime</artifactId>
+			<version>3.2</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>stringtemplate</artifactId>
+					<groupId>org.antlr</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 	</dependencies>
 	<repositories>
 		<repository>
@@ -71,16 +82,16 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
-		<repository>
-			<id>Eclipse Maven</id>
-			<url>http://maven.eclipse.org/nexus/content/groups/public/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
+<!-- 		<repository> -->
+<!-- 			<id>Eclipse Maven</id> -->
+<!-- 			<url>http://maven.eclipse.org/nexus/content/groups/public/</url> -->
+<!-- 			<releases> -->
+<!-- 				<enabled>true</enabled> -->
+<!-- 			</releases> -->
+<!-- 			<snapshots> -->
+<!-- 				<enabled>true</enabled> -->
+<!-- 			</snapshots> -->
+<!-- 		</repository> -->
 		<repository>
 			<id>Eclipse Testing</id>
 			<url>http://maven.eclipse.org/nexus/content/repositories/testing/</url>
