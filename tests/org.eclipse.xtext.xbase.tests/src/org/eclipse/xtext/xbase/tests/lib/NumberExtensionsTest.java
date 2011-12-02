@@ -11,11 +11,15 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
 import com.google.inject.Inject;
 
@@ -27,6 +31,9 @@ public class NumberExtensionsTest extends AbstractXbaseTestCase {
 	@Inject
 	private Primitives primitives;
 
+	@Inject
+	private ITypeProvider typeProvider;
+	
 	public void testPrimitiveDoubleBindings() throws Exception {
 		XExpression expression = expression("{val double x=1; -x+x**x*x/x<x  x<=x x>x x>=x x!=x x==x}", true); 
 		assertOnlyPrimitveOperationsBound(expression);
@@ -63,5 +70,10 @@ public class NumberExtensionsTest extends AbstractXbaseTestCase {
 		assertEquals(0x80000000, IntegerExtensions.shiftLeft(0x1, 31));
 		assertEquals(0xffffffff, IntegerExtensions.shiftRight(0x80000000, 31));
 		assertEquals(0x1, IntegerExtensions.shiftRightUnsigned(0x80000000, 31));
+	}
+	
+	public void testBigIntegerAllOperationsBound() throws Exception {
+		XExpression expression = expression("{val a=new java.math.BigInteger(1); !(-a+a-a*a/a%a||a&&a)}", true);
+		assertEquals("java.math.BigInteger", typeProvider.getType(expression).getIdentifier());
 	}
 }
