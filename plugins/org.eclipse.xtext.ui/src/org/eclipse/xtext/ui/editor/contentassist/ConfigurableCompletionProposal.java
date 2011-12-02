@@ -297,6 +297,13 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 		this.exitChars = exitChars;
 	}
 	
+	/**
+	 * @since 2.2
+	 */
+	protected boolean isLinkedMode() {
+		return linkedMode;
+	}
+	
 	public void apply(ITextViewer viewer, char trigger, int stateMask, int offset) {
 		this.setReplacementLength(offset - getReplacementOffset() + viewer.getSelectedRange().y);
 		boolean replaceRight = (stateMask & SWT.CTRL) != 0;
