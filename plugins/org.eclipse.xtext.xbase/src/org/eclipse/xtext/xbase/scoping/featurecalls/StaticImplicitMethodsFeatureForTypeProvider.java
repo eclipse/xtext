@@ -104,6 +104,7 @@ public class StaticImplicitMethodsFeatureForTypeProvider extends AbstractStaticM
 			result.put(Boolean.class, BooleanExtensions.class);
 			result.put(String.class, StringExtensions.class);
 			result.put(Integer.class, IntegerExtensions.class);
+			result.put(Integer.TYPE, IntegerExtensions.class);
 			result.put(Comparable.class, ComparableExtensions.class);
 			result.put(Object.class, ObjectExtensions.class);
 			result.put(List.class, ListExtensions.class);
