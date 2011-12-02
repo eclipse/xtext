@@ -151,6 +151,8 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest imp
 		result.add("wait");
 		result.add("wait()");
 		result.add("wait()");
+		// ObjectExtensions
+		result.add("identityEquals()");
 		return result.toArray(new String[result.size()]);
 	}
 	
