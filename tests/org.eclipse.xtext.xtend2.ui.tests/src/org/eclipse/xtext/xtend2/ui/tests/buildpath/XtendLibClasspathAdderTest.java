@@ -83,6 +83,26 @@ public class XtendLibClasspathAdderTest extends AbstractXtend2UITestCase {
 		assertNoErrorMarker(file);
 	}
 
+	public void testAddToBrokenPlugin() throws Exception {
+		pluginProjectFactory.setProjectName("test");
+		pluginProjectFactory.addFolders(Collections.singletonList("src"));
+		pluginProjectFactory.addBuilderIds(JavaCore.BUILDER_ID, "org.eclipse.pde.ManifestBuilder",
+				"org.eclipse.pde.SchemaBuilder", XtextProjectHelper.BUILDER_ID);
+		pluginProjectFactory.addProjectNatures(JavaCore.NATURE_ID, "org.eclipse.pde.PluginNature",
+				XtextProjectHelper.NATURE_ID);
+		IProject project = pluginProjectFactory.createProject(null, null);
+		IJavaProject javaProject = JavaCore.create(project);
+		JavaProjectSetupUtil.makeJava5Compliant(javaProject);
+		project.findMember("META-INF").delete(true, null);
+		IFile file = project.getFile("src/Foo.xtend");
+		file.create(new StringInputStream("class Foo {}"), true, null);
+		IResourcesSetupUtil.waitForAutoBuild();
+		assertErrorMarker(file);
+		adder.addLibsToClasspath(javaProject, null);
+		IResourcesSetupUtil.waitForAutoBuild();
+		assertNoErrorMarker(file);
+	}
+
 	protected void assertErrorMarker(IFile file) throws CoreException {
 		int severity = file.findMaxProblemSeverity(null, true, IResource.DEPTH_INFINITE);
 		assertEquals("Expected error marker", IMarker.SEVERITY_ERROR, severity);
