@@ -13,8 +13,20 @@ import java.util.Iterator;
  * This is an extension library for {@link Integer integral numbers}, e.g. <code>int</code> or <code>Integer</code>.
  * 
  * @author Sven Efftinge - Initial contribution and API
+ * @author Jan Koehnlein - Primitive versions
  */
 public class IntegerExtensions {
+
+	/**
+	 * The unary <code>minus</code> operator. This is the equivalent to the unary java <code>-</code> operator.
+	 * 
+	 * @param a
+	 *            an integer.
+	 * @return <code>-a</code>
+	 */
+	public static int operator_minus(int a) {
+		return -a;
+	}
 
 	/**
 	 * The unary <code>minus</code> operator. This is the equivalent to the unary java <code>-</code> operator.
@@ -27,6 +39,19 @@ public class IntegerExtensions {
 	 */
 	public static int operator_minus(Integer a) {
 		return -a;
+	}
+
+	/**
+	 * The binary <code>plus</code> operator. This is the equivalent to the java <code>+</code> operator.
+	 * 
+	 * @param a
+	 *            an integer.
+	 * @param b
+	 *            an integer.
+	 * @return <code>a+b</code>
+	 */
+	public static int operator_plus(int a, int b) {
+		return a + b;
 	}
 
 	/**
@@ -48,6 +73,19 @@ public class IntegerExtensions {
 	 * The binary <code>minus</code> operator. This is the equivalent to the java <code>-</code> operator.
 	 * 
 	 * @param a
+	 *            an integer.
+	 * @param b
+	 *            an integer.
+	 * @return <code>a-b</code>
+	 */
+	public static int operator_minus(int a, int b) {
+		return a - b;
+	}
+
+	/**
+	 * The binary <code>minus</code> operator. This is the equivalent to the java <code>-</code> operator.
+	 * 
+	 * @param a
 	 *            an integer. May not be <code>null</code>.
 	 * @param b
 	 *            a number. May not be <code>null</code>.
@@ -57,6 +95,47 @@ public class IntegerExtensions {
 	 */
 	public static int operator_minus(Integer a, Number b) {
 		return a - b.intValue();
+	}
+
+	/**
+	 * The <code>power</code> operator.
+	 * 
+	 * @param a
+	 *            an integer.
+	 * @param b
+	 *            an integer.
+	 * @return <code>a ** b</code>
+	 */
+	public static int operator_power(int a, int b) {
+		return (int) Math.pow(a, b);
+	}
+
+	/**
+	 * The <code>power</code> operator.
+	 * 
+	 * @param a
+	 *            an integer. May not be <code>null</code>.
+	 * @param b
+	 *            a number. May not be <code>null</code>.
+	 * @return <code>a ** b</code>
+	 * @throws NullPointerException
+	 *             if {@code a} or {@code b} is <code>null</code>.
+	 */
+	public static int operator_power(Integer a, Number b) {
+		return (int) Math.pow(a, b.intValue());
+	}
+
+	/**
+	 * The binary <code>times</code> operator. This is the equivalent to the java <code>*</code> operator.
+	 * 
+	 * @param a
+	 *            an integer.
+	 * @param b
+	 *            an integer.
+	 * @return <code>a*b</code>
+	 */
+	public static int operator_multiply(int a, int b) {
+		return a * b;
 	}
 
 	/**
@@ -80,6 +159,21 @@ public class IntegerExtensions {
 	 * .
 	 * 
 	 * @param a
+	 *            an integer.
+	 * @param b
+	 *            an integer.
+	 * @return <code>a/b</code>
+	 */
+	public static int operator_divide(int a, int b) {
+		return a / b;
+	}
+
+	/**
+	 * The binary <code>divide</code> operator. This is the equivalent to the java <code>/</code> operator. That is, the
+	 * result will be the integral result of the division, e.g. <code>operator_divide(1, 2)</code> yields <code>0</code>
+	 * .
+	 * 
+	 * @param a
 	 *            an integer. May not be <code>null</code>.
 	 * @param b
 	 *            a number. May not be <code>null</code>.
@@ -89,6 +183,19 @@ public class IntegerExtensions {
 	 */
 	public static int operator_divide(Integer a, Number b) {
 		return a / b.intValue();
+	}
+
+	/**
+	 * The binary <code>modulo</code> operator. This is the equivalent to the java <code>%</code> operator.
+	 * 
+	 * @param a
+	 *            an integer.
+	 * @param b
+	 *            an integer.
+	 * @return <code>a%b</code>
+	 */
+	public static int operator_modulo(int a, int b) {
+		return a % b;
 	}
 
 	/**
@@ -107,18 +214,157 @@ public class IntegerExtensions {
 	}
 
 	/**
-	 * The <code>power</code> operator.
+	 * The binary <code>or</code> operator. This is the equivalent to the java <code>|</code> operator.
+	 * 
+	 * @param a
+	 *            an integer.
+	 * @param b
+	 *            an integer.
+	 * @return <code>a|b</code>
+	 */
+	public static int operator_or(int a, int b) {
+		return a | b;
+	}
+
+	/**
+	 * The binary <code>or</code> operator. This is the equivalent to the java <code>|</code> operator.
 	 * 
 	 * @param a
 	 *            an integer. May not be <code>null</code>.
 	 * @param b
 	 *            a number. May not be <code>null</code>.
-	 * @return <code>a ** b</code>
-	 * @throws NullPointerException
-	 *             if {@code a} or {@code b} is <code>null</code>.
+	 * @return <code>a|b</code>
 	 */
-	public static int operator_power(Integer a, Number b) {
-		return (int) Math.pow(a, b.intValue());
+	public static int operator_or(Integer a, Number b) {
+		return a | b.intValue();
+	}
+
+	/**
+	 * The binary <code>and</code> operator. This is the equivalent to the java <code>&</code> operator.
+	 * 
+	 * @param a
+	 *            an integer.
+	 * @param b
+	 *            an integer.
+	 * @return <code>a&b</code>
+	 */
+	public static int operator_and(int a, int b) {
+		return a & b;
+	}
+
+	/**
+	 * The binary <code>and</code> operator. This is the equivalent to the java <code>&</code> operator.
+	 * 
+	 * @param a
+	 *            an integer. May not be <code>null</code>.
+	 * @param b
+	 *            a number. May not be <code>null</code>.
+	 * @return <code>a&b</code>
+	 */
+	public static int operator_and(Integer a, Number b) {
+		return a & b.intValue();
+	}
+
+	/**
+	 * The binary <code>equals</code> operator. This is the equivalent to the java <code>==</code> operator.
+	 * 
+	 * @param a
+	 *            an integer.
+	 * @param b
+	 *            an integer.
+	 * @return <code>a==b</code>
+	 */
+	public static boolean operator_equals(int a, int b) {
+		return a == b;
+	}
+
+	/**
+	 * The binary <code>not equals</code> operator. This is the equivalent to the java <code>!=</code> operator.
+	 * 
+	 * @param a
+	 *            an integer.
+	 * @param b
+	 *            an integer.
+	 * @return <code>a!=b</code>
+	 */
+	public static boolean operator_notEquals(int a, int b) {
+		return a != b;
+	}
+
+	/**
+	 * The binary <code>less than</code> operator. This is the equivalent to the java <code>&lt;</code> operator.
+	 * 
+	 * @param a
+	 *            an integer.
+	 * @param b
+	 *            an integer.
+	 * @return <code>a&lt;b</code>
+	 */
+	public static boolean operator_lessThan(int a, int b) {
+		return a < b;
+	}
+
+	/**
+	 * The binary <code>less than or equals</code> operator. This is the equivalent to the java <code>&lt;=</code> operator.
+	 * 
+	 * @param a
+	 *            an integer.
+	 * @param b
+	 *            an integer.
+	 * @return <code>a&lt;=b</code>
+	 */
+	public static boolean operator_lessEqualsThan(int a, int b) {
+		return a <= b;
+	}
+
+	/**
+	 * The binary <code>greater than</code> operator. This is the equivalent to the java <code>&gt;</code> operator.
+	 * 
+	 * @param a
+	 *            an integer.
+	 * @param b
+	 *            an integer.
+	 * @return <code>a&gt;b</code>
+	 */
+	public static boolean operator_greaterThan(int a, int b) {
+		return a > b;
+	}
+
+	/**
+	 * The binary <code>greater than or equals</code> operator. This is the equivalent to the java <code>&gt;=</code> operator.
+	 * 
+	 * @param a
+	 *            an integer.
+	 * @param b
+	 *            an integer.
+	 * @return <code>a&gt;=b</code>
+	 */
+	public static boolean operator_greaterEqualsThan(int a, int b) {
+		return a >= b;
+	}
+
+	/**
+	 * The unary <code>not</code> operator. Inverts all bits of the given integer.
+	 * 
+	 * @param a
+	 *            an integer.
+	 * @return <code>a</code> inverted.
+	 */
+	public static int operator_not(int a) {
+		return a ^ -1;
+	}
+
+	/**
+	 * The unary <code>not</code> operator. Inverts all bits of the given integer.
+	 * 
+	 * @param a
+	 *            an integer. May not be <code>null</code>.
+	 * @return <code>a</code> inverted.
+	 * @throws NullPointerException
+	 *             if {@code a} is <code>null</code>.
+	 */
+	public static int operator_not(Integer a) {
+		return a ^ -1;
 	}
 
 	/**
