@@ -214,58 +214,6 @@ public class IntegerExtensions {
 	}
 
 	/**
-	 * The binary <code>or</code> operator. This is the equivalent to the java <code>|</code> operator.
-	 * 
-	 * @param a
-	 *            an integer.
-	 * @param b
-	 *            an integer.
-	 * @return <code>a|b</code>
-	 */
-	public static int operator_or(int a, int b) {
-		return a | b;
-	}
-
-	/**
-	 * The binary <code>or</code> operator. This is the equivalent to the java <code>|</code> operator.
-	 * 
-	 * @param a
-	 *            an integer. May not be <code>null</code>.
-	 * @param b
-	 *            a number. May not be <code>null</code>.
-	 * @return <code>a|b</code>
-	 */
-	public static int operator_or(Integer a, Number b) {
-		return a | b.intValue();
-	}
-
-	/**
-	 * The binary <code>and</code> operator. This is the equivalent to the java <code>&</code> operator.
-	 * 
-	 * @param a
-	 *            an integer.
-	 * @param b
-	 *            an integer.
-	 * @return <code>a&b</code>
-	 */
-	public static int operator_and(int a, int b) {
-		return a & b;
-	}
-
-	/**
-	 * The binary <code>and</code> operator. This is the equivalent to the java <code>&</code> operator.
-	 * 
-	 * @param a
-	 *            an integer. May not be <code>null</code>.
-	 * @param b
-	 *            a number. May not be <code>null</code>.
-	 * @return <code>a&b</code>
-	 */
-	public static int operator_and(Integer a, Number b) {
-		return a & b.intValue();
-	}
-
-	/**
 	 * The binary <code>equals</code> operator. This is the equivalent to the java <code>==</code> operator.
 	 * 
 	 * @param a
@@ -344,30 +292,6 @@ public class IntegerExtensions {
 	}
 
 	/**
-	 * The unary <code>not</code> operator. This is the equivalent to the java <code>~</code> operator.
-	 * 
-	 * @param a
-	 *            an integer.
-	 * @return <code>a</code> inverted.
-	 */
-	public static int operator_not(int a) {
-		return ~a;
-	}
-
-	/**
-	 * The unary <code>not</code> operator. Inverts all bits of the given integer.
-	 * 
-	 * @param a
-	 *            an integer. May not be <code>null</code>.
-	 * @return <code>a</code> inverted.
-	 * @throws NullPointerException
-	 *             if {@code a} is <code>null</code>.
-	 */
-	public static int operator_not(Integer a) {
-		return a ^ -1;
-	}
-
-	/**
 	 * The <code>upTo</code> operator yields an iterable of integral numbers from {@code a} up to {@code b} if {@code b}
 	 * is larger than {@code a} or otherwise from {@code a} down to {@code b}.
 	 * 
@@ -388,6 +312,82 @@ public class IntegerExtensions {
 				return new IntIterator(a, upTo);
 			}
 		};
+	}
+
+	/**
+	 * The binary <code>or</code> operator. This is the equivalent to the java <code>|</code> operator.
+	 * 
+	 * @param a
+	 *            an integer.
+	 * @param b
+	 *            an integer.
+	 * @return <code>a|b</code>
+	 */
+	public static int or(int a, int b) {
+		return a | b;
+	}
+
+	/**
+	 * The binary <code>or</code> operator. This is the equivalent to the java <code>|</code> operator.
+	 * 
+	 * @param a
+	 *            an integer. May not be <code>null</code>.
+	 * @param b
+	 *            a number. May not be <code>null</code>.
+	 * @return <code>a|b</code>
+	 */
+	public static int or(Integer a, Number b) {
+		return a | b.intValue();
+	}
+
+	/**
+	 * The binary <code>and</code> operator. This is the equivalent to the java <code>&</code> operator.
+	 * 
+	 * @param a
+	 *            an integer.
+	 * @param b
+	 *            an integer.
+	 * @return <code>a&b</code>
+	 */
+	public static int and(int a, int b) {
+		return a & b;
+	}
+
+	/**
+	 * The binary <code>and</code> operator. This is the equivalent to the java <code>&</code> operator.
+	 * 
+	 * @param a
+	 *            an integer. May not be <code>null</code>.
+	 * @param b
+	 *            a number. May not be <code>null</code>.
+	 * @return <code>a&b</code>
+	 */
+	public static int and(Integer a, Number b) {
+		return a & b.intValue();
+	}
+
+	/**
+	 * The unary <code>not</code> operator. This is the equivalent to the java <code>~</code> operator.
+	 * 
+	 * @param a
+	 *            an integer.
+	 * @return <code>a</code> inverted.
+	 */
+	public static int not(int a) {
+		return ~a;
+	}
+
+	/**
+	 * The unary <code>not</code> operator. Inverts all bits of the given integer.
+	 * 
+	 * @param a
+	 *            an integer. May not be <code>null</code>.
+	 * @return <code>a</code> inverted.
+	 * @throws NullPointerException
+	 *             if {@code a} is <code>null</code>.
+	 */
+	public static int not(Integer a) {
+		return ~a;
 	}
 
 	/**

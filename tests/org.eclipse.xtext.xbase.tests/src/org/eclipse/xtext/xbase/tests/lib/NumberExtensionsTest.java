@@ -37,7 +37,7 @@ public class NumberExtensionsTest extends AbstractXbaseTestCase {
 	}
 
 	public void testPrimitiveIntBindings() throws Exception {
-		XExpression expression = expression("{!(-1+2**3*4/5%6||7&&8)<9 10<=11 12>13 13>=14 15!=16 17==18}", true);
+		XExpression expression = expression("{-1+2**3*4/5%6<9 10<=11 12>13 13>=14 15!=16 17==18}", true);
 		assertOnlyPrimitveOperationsBound(expression);
 	}
 
@@ -61,21 +61,14 @@ public class NumberExtensionsTest extends AbstractXbaseTestCase {
 		assertTrue("No operations found", operationsFound);
 	}
 
-	public void testNot() {
-		assertEquals(0x55555555, IntegerExtensions.operator_not(0xaaaaaaaa));
-		assertEquals(0xaaaaaaaa, IntegerExtensions.operator_not(0x55555555));
-		assertEquals(-1, IntegerExtensions.operator_not(0));
-		assertEquals(0, IntegerExtensions.operator_not(-1));
-	}
-
 	public void testShiftOperators() {
 		assertEquals(0x80000000, IntegerExtensions.shiftLeft(0x1, 31));
 		assertEquals(0xffffffff, IntegerExtensions.shiftRight(0x80000000, 31));
 		assertEquals(0x1, IntegerExtensions.shiftRightUnsigned(0x80000000, 31));
 	}
-	
+
 	public void testBigIntegerAllOperationsBound() throws Exception {
-		XExpression expression = expression("{val a=new java.math.BigInteger(1); !(-a+a-a*a/a%a||a&&a)}", true);
+		XExpression expression = expression("{val a=new java.math.BigInteger(1); -a+a-a*a/a%a}", true);
 		assertEquals("java.math.BigInteger", typeProvider.getType(expression).getIdentifier());
 	}
 
