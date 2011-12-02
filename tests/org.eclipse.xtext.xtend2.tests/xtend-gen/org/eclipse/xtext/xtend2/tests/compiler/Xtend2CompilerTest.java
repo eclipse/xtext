@@ -508,7 +508,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     _builder_1.append("public String apply() {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("String _string = ((Integer)123).toString();");
+    _builder_1.append("String _string = Integer.valueOf(123).toString();");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("return _string;");
@@ -669,7 +669,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     _builder_1.append("int _length = x.length();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("return ((Integer)_length);");
+    _builder_1.append("return Integer.valueOf(_length);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
