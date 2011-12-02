@@ -6,7 +6,6 @@ import java.util.HashSet;
 import junit.framework.TestCase;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.ComparableExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
@@ -43,7 +42,7 @@ public class Xtend07_Libraries extends TestCase {
       final Function1<String,Boolean> _function = new Function1<String,Boolean>() {
           public Boolean apply(final String e) {
             int _length = e.length();
-            boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_length), ((Integer)3));
+            boolean _operator_equals = IntegerExtensions.operator_equals(_length, 3);
             return ((Boolean)_operator_equals);
           }
         };
@@ -60,7 +59,7 @@ public class Xtend07_Libraries extends TestCase {
       final Function1<String,Boolean> _function_2 = new Function1<String,Boolean>() {
           public Boolean apply(final String e) {
             int _length = e.length();
-            boolean _operator_lessEqualsThan = ComparableExtensions.<Integer>operator_lessEqualsThan(((Integer)_length), ((Integer)3));
+            boolean _operator_lessEqualsThan = IntegerExtensions.operator_lessEqualsThan(_length, 3);
             return ((Boolean)_operator_lessEqualsThan);
           }
         };
@@ -80,15 +79,15 @@ public class Xtend07_Libraries extends TestCase {
       String _operator_plus = StringExtensions.operator_plus("Hello", " ");
       String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "World!");
       InputOutput.<String>println(_operator_plus_1);
-      int _operator_plus_2 = IntegerExtensions.operator_plus(((Integer)46), ((Integer)2));
-      int _operator_divide = IntegerExtensions.operator_divide(((Integer)8), ((Integer)_operator_plus_2));
-      int _operator_plus_3 = IntegerExtensions.operator_plus(((Integer)42), ((Integer)_operator_divide));
+      int _operator_plus_2 = IntegerExtensions.operator_plus(46, 2);
+      int _operator_divide = IntegerExtensions.operator_divide(8, _operator_plus_2);
+      int _operator_plus_3 = IntegerExtensions.operator_plus(42, _operator_divide);
       InputOutput.<Integer>println(((Integer)_operator_plus_3));
       boolean _operator_and = false;
       if (!true) {
         _operator_and = false;
       } else {
-        boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)42), ((Integer)13));
+        boolean _operator_greaterThan = IntegerExtensions.operator_greaterThan(42, 13);
         _operator_and = BooleanExtensions.operator_and(true, _operator_greaterThan);
       }
       Boolean _println = InputOutput.<Boolean>println(((Boolean)_operator_and));

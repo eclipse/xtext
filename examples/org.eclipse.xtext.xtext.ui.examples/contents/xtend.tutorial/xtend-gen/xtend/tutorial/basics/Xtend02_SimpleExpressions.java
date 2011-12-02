@@ -25,7 +25,7 @@ public class Xtend02_SimpleExpressions {
   }
   
   public int intLiteral() {
-    int _operator_plus = IntegerExtensions.operator_plus(((Integer)42), ((Integer)21));
+    int _operator_plus = IntegerExtensions.operator_plus(42, 21);
     return _operator_plus;
   }
   

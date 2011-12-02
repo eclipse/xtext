@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.ComparableExtensions;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -22,18 +21,18 @@ public class Xbase08_Loops {
     	}
     	int i = 0;
     	int _size = list.size();
-    	boolean _operator_lessThan = ComparableExtensions.<Integer>operator_lessThan(((Integer)i), ((Integer)_size));
+    	boolean _operator_lessThan = IntegerExtensions.operator_lessThan(i, _size);
     	boolean _while = _operator_lessThan;
     	while (_while) {
     		{
     			String _get = list.get(i);
     			String _operator_plus = StringExtensions.operator_plus("whiled-", _get);
     			CollectionExtensions.<String>operator_add(result, _operator_plus);
-    			int _operator_plus_1 = IntegerExtensions.operator_plus(((Integer)i), ((Integer)1));
+    			int _operator_plus_1 = IntegerExtensions.operator_plus(i, 1);
     			i = _operator_plus_1;
     		}
     		int _size_1 = list.size();
-    		boolean _operator_lessThan_1 = ComparableExtensions.<Integer>operator_lessThan(((Integer)i), ((Integer)_size_1));
+    		boolean _operator_lessThan_1 = IntegerExtensions.operator_lessThan(i, _size_1);
     		_while = _operator_lessThan_1;
     	}
     } catch (Throwable t) {}

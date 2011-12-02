@@ -1,5 +1,6 @@
 package xtend.tutorial.basics;
 
+import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import xtend.tutorial.util.Circle;
@@ -72,7 +73,7 @@ public class Xtend04_ControlStructures {
     if (!matched) {
       if (shape instanceof Rectangle) {
         final Rectangle _rectangle = (Rectangle)shape;
-        boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_rectangle.height), ((Integer)_rectangle.width));
+        boolean _operator_equals = IntegerExtensions.operator_equals(_rectangle.height, _rectangle.width);
         if (_operator_equals) {
           matched=true;
           String _operator_plus = StringExtensions.operator_plus("a square : size=", ((Integer)_rectangle.width));

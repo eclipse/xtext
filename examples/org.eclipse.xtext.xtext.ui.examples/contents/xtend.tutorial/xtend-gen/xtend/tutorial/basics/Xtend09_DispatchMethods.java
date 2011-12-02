@@ -6,7 +6,7 @@ import junit.framework.TestCase;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.InputOutput;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import xtend.tutorial.util.Circle;
 import xtend.tutorial.util.Rectangle;
 import xtend.tutorial.util.Shape;
@@ -23,7 +23,7 @@ public class Xtend09_DispatchMethods extends TestCase {
    */
   protected CharSequence _toLabel(final Rectangle rectangle) {
     CharSequence _xifexpression = null;
-    boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)rectangle.height), ((Integer)rectangle.width));
+    boolean _operator_equals = IntegerExtensions.operator_equals(rectangle.height, rectangle.width);
     if (_operator_equals) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("It\'s a square (x : ");
