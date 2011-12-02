@@ -41,6 +41,7 @@ public class PomModifier {
 		PomModifier modifier = new PomModifier();
 		modifier.addModifier(new XtendGroupIdDependencyModifier());
 		modifier.addModifier(new ThirdPartyArifactDependencyModifier());
+		modifier.addModifier(new LicensePusher());
 
 		File rootDir = new File(rootFolder);
 		modifier.modify(rootDir);
@@ -48,21 +49,24 @@ public class PomModifier {
 
 	@SuppressWarnings("unchecked")
 	public void modify(File rootFolder) {
+		logInfo("Working with: " + rootFolder.getAbsolutePath());
 		try {
 			List<File> files = FileUtils.getFiles(rootFolder, "**/*.pom", null);
-
+			logInfo("Found " + files.size() + " pom's");
+			int modified = 0;
 			for (File file : files) {
 				Model pomModel = readModel(file);
 				if (pomModel != null) {
-					if (executeModifieres(pomModel)) {
-						logInfo(pomModel.getArtifactId() + " was modified");
-						if (saveModel(pomModel, file)) {
-							logInfo(pomModel.getArtifactId()
-									+ " was saved under " + file.getName());
-						}
+					String executeModifieres = executeModifieres(pomModel);
+					if (!executeModifieres.isEmpty()) {
+						logInfo(pomModel.getArtifactId() + " was modified by "
+								+ executeModifieres);
+						modified++;
+						saveModel(pomModel, file);
 					}
 				}
 			}
+			logInfo("Modified " + modified + " pom's");
 
 		} catch (IOException ioe) {
 			logError("Error during root folder discovering", ioe);
@@ -83,24 +87,27 @@ public class PomModifier {
 
 	/**
 	 * @param pomModel
-	 * @return <code>true</code> if some modifier changed model
+	 * @return separated involved Modifier names if any, empty string otherwise
 	 */
-	private boolean executeModifieres(Model pomModel) {
-		boolean modelChanged = false;
+	private String executeModifieres(Model pomModel) {
+		StringBuilder modifiersInvolved = new StringBuilder();
 		for (ModelModifier modifier : modifiers) {
-			modelChanged |= modifier.modifiy(pomModel);
+			if (modifier.modifiy(pomModel)) {
+				if (modifiersInvolved.length() != 0) {
+					modifiersInvolved.append(", ");
+				}
+				modifiersInvolved.append(modifier.getClass().getSimpleName());
+			}
 		}
-		return modelChanged;
+		return modifiersInvolved.toString();
 	}
 
-	private boolean saveModel(Model pomModel, File file) {
+	private void saveModel(Model pomModel, File file) {
 		ModelWriter writer = new DefaultModelWriter();
 		try {
 			writer.write(file, null, pomModel);
-			return true;
 		} catch (IOException ioe) {
-			LOG.log(Level.SEVERE, "Failed to save pom " + file.getName(), ioe);
-			return false;
+			logError("Failed to save pom " + file.getName(), ioe);
 		}
 	}
 
@@ -109,7 +116,7 @@ public class PomModifier {
 	}
 
 	private void logError(String errorMessage, Exception exception) {
-		System.err.println(errorMessage + exception.getMessage());
+		LOG.log(Level.SEVERE, errorMessage, exception);
 	}
 
 	private void logInfo(String infoMessage) {
