@@ -836,6 +836,24 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''')
 	}
 
+	def testExplicitBoxingUnboxing() {
+		assertCompilesTo('''
+			class X {
+				def foo(int p0, Integer p1) {
+					foo(p1,p0)
+				}
+			}
+		''','''
+			@SuppressWarnings("all")
+			public class X {
+			  public Object foo(final int p0, final Integer p1) {
+			    Object _foo = this.foo((p1).intValue(), Integer.valueOf(p0));
+			    return _foo;
+			  }
+			}
+		''')
+	}
+
 	def assertCompilesTo(CharSequence input, CharSequence expected) {
 		val file = file(input.toString(), true)
 		val inferredType = file.xtendClass.inferredType

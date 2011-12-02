@@ -1654,6 +1654,43 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  public void testExplicitBoxingUnboxing() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class X {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(int p0, Integer p1) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("foo(p1,p0)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class X {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Object foo(final int p0, final Integer p1) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Object _foo = this.foo((p1).intValue(), Integer.valueOf(p0));");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _foo;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
   public void assertCompilesTo(final CharSequence input, final CharSequence expected) {
     try {
       {
