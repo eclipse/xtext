@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentEvent;
+import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextListener;
 import org.eclipse.jface.text.ITextPresentationListener;
 import org.eclipse.jface.text.SlaveDocumentEvent;
@@ -86,9 +87,10 @@ public class XtextSourceViewer extends ProjectionViewer {
 				event= ((SlaveDocumentEvent) event).getMasterEvent();
 			int usedDiff = 0;
 			if (event == null) {
-				if (lengthDiff > 0)
+				if (lengthDiff > 0) {
 					usedDiff = lengthDiff;
-				lengthDiff = Integer.MIN_VALUE; 
+				}
+				lengthDiff = Integer.MIN_VALUE;
 			} else {
 				lengthDiff = event.fText.length() - event.fLength;
 			}
@@ -96,7 +98,9 @@ public class XtextSourceViewer extends ProjectionViewer {
 			String text = cmd.text;
 			if (usedDiff != 0) {
 				try {
-					text = getDocument().get(cmd.start, length);
+					IRegion model = getModelCoverage();
+					length = Math.min(cmd.start + length, model.getLength()) - cmd.start;
+					text = getDocument().get(cmd.start + model.getOffset(), length);
 				} catch(BadLocationException e) {
 					length = cmd.length;
 					log.debug("Ignored BadLocationException when fixing document events", e);
