@@ -86,10 +86,6 @@ public class AbstractStatemachineSemanticSequencer extends AbstractSemanticSeque
 	/**
 	 * Constraint:
 	 *     (name=ID code=ID)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    code[1, 1]
 	 */
 	protected void sequence_Command(EObject context, Command semanticObject) {
 		if(errorAcceptor != null) {
@@ -109,10 +105,6 @@ public class AbstractStatemachineSemanticSequencer extends AbstractSemanticSeque
 	/**
 	 * Constraint:
 	 *     (name=ID code=ID)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    code[1, 1]
 	 */
 	protected void sequence_Event(EObject context, Event semanticObject) {
 		if(errorAcceptor != null) {
@@ -132,11 +124,6 @@ public class AbstractStatemachineSemanticSequencer extends AbstractSemanticSeque
 	/**
 	 * Constraint:
 	 *     (name=ID actions+=[Command|ID]* transitions+=Transition*)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    actions[0, *]
-	 *    transitions[0, *]
 	 */
 	protected void sequence_State(EObject context, State semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -146,12 +133,6 @@ public class AbstractStatemachineSemanticSequencer extends AbstractSemanticSeque
 	/**
 	 * Constraint:
 	 *     (events+=Event* resetEvents+=[Event|ID]* commands+=Command* states+=State*)
-	 *
-	 * Features:
-	 *    events[0, *]
-	 *    resetEvents[0, *]
-	 *    commands[0, *]
-	 *    states[0, *]
 	 */
 	protected void sequence_Statemachine(EObject context, Statemachine semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -161,10 +142,6 @@ public class AbstractStatemachineSemanticSequencer extends AbstractSemanticSeque
 	/**
 	 * Constraint:
 	 *     (event=[Event|ID] state=[State|ID])
-	 *
-	 * Features:
-	 *    event[1, 1]
-	 *    state[1, 1]
 	 */
 	protected void sequence_Transition(EObject context, Transition semanticObject) {
 		if(errorAcceptor != null) {

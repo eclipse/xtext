@@ -31,4 +31,8 @@ Export-Package: org.eclipse.xtext.example.fowlerdsl,
  org.eclipse.xtext.example.fowlerdsl.serializer,
  org.eclipse.xtext.example.fowlerdsl.parser.antlr,
  org.eclipse.xtext.example.fowlerdsl.parser.antlr.internal,
- org.eclipse.xtext.example.fowlerdsl.validation
+ org.eclipse.xtext.example.fowlerdsl.validation,
+ org.eclipse.xtext.example.fowlerdsl.scoping,
+ org.eclipse.xtext.example.fowlerdsl.generator,
+ org.eclipse.xtext.example.fowlerdsl.formatting
+
