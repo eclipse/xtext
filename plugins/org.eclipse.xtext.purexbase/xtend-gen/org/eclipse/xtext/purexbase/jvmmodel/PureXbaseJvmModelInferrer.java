@@ -153,7 +153,7 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
       final String s = _lastSegment;
       int _length = s.length();
       int _length_1 = ".xbase".length();
-      int _operator_minus = IntegerExtensions.operator_minus(((Integer)_length), ((Integer)_length_1));
+      int _operator_minus = IntegerExtensions.operator_minus(_length, _length_1);
       String _substring = s.substring(0, _operator_minus);
       return _substring;
   }

@@ -773,7 +773,7 @@ public class JvmModelGenerator implements IGenerator {
       }
       if (_operator_and) {
         int _length = result.length();
-        int _operator_minus = IntegerExtensions.operator_minus(((Integer)_length), ((Integer)1));
+        int _operator_minus = IntegerExtensions.operator_minus(_length, 1);
         String _substring = result.substring(2, _operator_minus);
         return _substring;
       }
@@ -787,7 +787,7 @@ public class JvmModelGenerator implements IGenerator {
       }
       if (_operator_and_1) {
         int _length_1 = result.length();
-        int _operator_minus_1 = IntegerExtensions.operator_minus(((Integer)_length_1), ((Integer)1));
+        int _operator_minus_1 = IntegerExtensions.operator_minus(_length_1, 1);
         String _substring_1 = result.substring(1, _operator_minus_1);
         return _substring_1;
       }
@@ -896,7 +896,7 @@ public class JvmModelGenerator implements IGenerator {
     {
       EList<Short> _values = it.getValues();
       int _size = _values.size();
-      boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_size), ((Integer)1));
+      boolean _operator_equals = IntegerExtensions.operator_equals(_size, 1);
       if (_operator_equals) {
         EList<Short> _values_1 = it.getValues();
         Short _head = IterableExtensions.<Short>head(_values_1);
@@ -917,7 +917,7 @@ public class JvmModelGenerator implements IGenerator {
     {
       EList<String> _values = it.getValues();
       int _size = _values.size();
-      boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_size), ((Integer)1));
+      boolean _operator_equals = IntegerExtensions.operator_equals(_size, 1);
       if (_operator_equals) {
         _builder.append("\"");
         EList<String> _values_1 = it.getValues();
@@ -948,7 +948,7 @@ public class JvmModelGenerator implements IGenerator {
     {
       EList<JvmTypeReference> _values = it.getValues();
       int _size = _values.size();
-      boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_size), ((Integer)1));
+      boolean _operator_equals = IntegerExtensions.operator_equals(_size, 1);
       if (_operator_equals) {
         EList<JvmTypeReference> _values_1 = it.getValues();
         JvmTypeReference _head = IterableExtensions.<JvmTypeReference>head(_values_1);
@@ -979,7 +979,7 @@ public class JvmModelGenerator implements IGenerator {
     {
       EList<Boolean> _values = it.getValues();
       int _size = _values.size();
-      boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_size), ((Integer)1));
+      boolean _operator_equals = IntegerExtensions.operator_equals(_size, 1);
       if (_operator_equals) {
         EList<Boolean> _values_1 = it.getValues();
         Boolean _head = IterableExtensions.<Boolean>head(_values_1);

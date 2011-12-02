@@ -24,7 +24,6 @@ import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.ComparableExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
@@ -353,9 +352,9 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       for(final AbstractRule rule : _unassignedCalledTokenRules) {
         _builder.append("\t");
         {
-          int _operator_plus = IntegerExtensions.operator_plus(((Integer)i), ((Integer)1));
+          int _operator_plus = IntegerExtensions.operator_plus(i, 1);
           int _i = i = _operator_plus;
-          boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_i), ((Integer)1));
+          boolean _operator_greaterThan = IntegerExtensions.operator_greaterThan(_i, 1);
           if (_operator_greaterThan) {
             _builder.append("else ");
           }
@@ -435,9 +434,9 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       for(final Pair<String,AbstractElementAlias> group : _allAmbiguousTransitionsBySyntax) {
         _builder.append("\t\t");
         {
-          int _operator_plus = IntegerExtensions.operator_plus(((Integer)i), ((Integer)1));
+          int _operator_plus = IntegerExtensions.operator_plus(i, 1);
           int _i = i = _operator_plus;
-          boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_i), ((Integer)1));
+          boolean _operator_greaterThan = IntegerExtensions.operator_greaterThan(_i, 1);
           if (_operator_greaterThan) {
             _builder.append("else ");
           }
@@ -458,7 +457,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     }
     _builder.append("\t\t");
     {
-      boolean _operator_greaterThan_1 = ComparableExtensions.<Integer>operator_greaterThan(((Integer)i), ((Integer)0));
+      boolean _operator_greaterThan_1 = IntegerExtensions.operator_greaterThan(i, 0);
       if (_operator_greaterThan_1) {
         _builder.append("else ");
       }

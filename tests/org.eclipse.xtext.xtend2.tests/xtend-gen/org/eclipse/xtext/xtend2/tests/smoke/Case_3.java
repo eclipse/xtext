@@ -51,7 +51,7 @@ public class Case_3 {
       {
         int x2 = y;
         final int y2 = 1;
-        int _operator_plus = IntegerExtensions.operator_plus(((Integer)x2), ((Integer)y2));
+        int _operator_plus = IntegerExtensions.operator_plus(x2, y2);
         _xblockexpression_1 = (_operator_plus);
       }
       _xblockexpression = (_xblockexpression_1);
