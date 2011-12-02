@@ -13,12 +13,12 @@ public class TestClass1 {
   }
   
   public Integer testFunction3() {
-    int _operator_plus = IntegerExtensions.operator_plus(((Integer)40), ((Integer)2));
+    int _operator_plus = IntegerExtensions.operator_plus(40, 2);
     return ((Integer)_operator_plus);
   }
   
   public Integer testFunction4() {
-    int _operator_multiply = IntegerExtensions.operator_multiply(((Integer)6), ((Integer)7));
+    int _operator_multiply = IntegerExtensions.operator_multiply(6, 7);
     return ((Integer)_operator_multiply);
   }
 }
