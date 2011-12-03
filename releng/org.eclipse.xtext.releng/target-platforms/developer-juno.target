@@ -9,7 +9,11 @@
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
-<repository location="http://download.eclipse.org/modeling/emf/emf/updates/2.8milestones/core/S201111070904"/>
+<repository location="http://download.eclipse.org/modeling/emf/emf/updates/2.8milestones/"/>
+</location>
+<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.emf.compare.sdk.feature.group" version="0.0.0"/>
+<repository location="http://download.eclipse.org/modeling/emf/compare/updates/milestones/1.3"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.jdt.feature.group" version="0.0.0"/>
