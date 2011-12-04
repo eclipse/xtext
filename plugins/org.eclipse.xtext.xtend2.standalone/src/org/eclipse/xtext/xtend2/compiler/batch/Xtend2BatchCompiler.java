@@ -58,6 +58,21 @@ import com.google.inject.Provider;
  * @author Michael Clay - Initial contribution and API
  */
 public class Xtend2BatchCompiler {
+
+	private final static class SeverityFilter implements Predicate<Issue> {
+		private static final SeverityFilter WARNING = new SeverityFilter(Severity.WARNING);
+		private static final SeverityFilter ERROR = new SeverityFilter(Severity.ERROR);
+		private Severity severity;
+
+		private SeverityFilter(Severity severity) {
+			this.severity = severity;
+		}
+
+		public boolean apply(Issue issue) {
+			return this.severity == issue.getSeverity();
+		}
+	}
+
 	private final static Logger log = Logger.getLogger(Xtend2BatchCompiler.class.getName());
 
 	protected static final FileFilter ACCEPT_ALL_FILTER = new FileFilter() {
@@ -144,7 +159,7 @@ public class Xtend2BatchCompiler {
 				public void write(char[] data, int offset, int count) throws IOException {
 					String message = String.copyValueOf(data, offset, count);
 					if (!Strings.isEmpty(message.trim())) {
-						log.debug(message);
+						log.error(message);
 					}
 				}
 
@@ -194,11 +209,14 @@ public class Xtend2BatchCompiler {
 			File sourceDirectory = createStubs(resourceSet);
 			File classDirectory = createTempDir("classes");
 			if (!preCompileStubs(sourceDirectory, classDirectory)) {
-				//System.out.println("problems");
+				return false;
 			}
 			installJvmTypeProvider(resourceSet, classDirectory);
 			List<Issue> issues = validate(resourceSet);
-			if (reportIssues(issues)) {
+			Iterable<Issue> errors = Iterables.filter(issues, SeverityFilter.ERROR);
+			Iterable<Issue> warnings = Iterables.filter(issues, SeverityFilter.WARNING);
+			reportIssues(Iterables.concat(errors,warnings));
+			if (!Iterables.isEmpty(errors)) {
 				return false;
 			}
 			generateJavaFiles(resourceSet);
@@ -240,10 +258,10 @@ public class Xtend2BatchCompiler {
 				continue;
 			}
 			StringBuilder classSignatureBuilder = new StringBuilder();
-//			if (xtendClass.getPackageName() != null) {
+			if (!Strings.isEmpty(xtendClass.getPackageName())) {
 				classSignatureBuilder.append("package " + xtendClass.getPackageName() + ";");
 				classSignatureBuilder.append("\n");
-//			}
+			}
 			classSignatureBuilder.append("public class " + xtendClass.getName() + "{}");
 			if (log.isDebugEnabled()) {
 				log.debug("create java stub '" + getJavaFileName(xtendClass) + "'");
@@ -315,23 +333,27 @@ public class Xtend2BatchCompiler {
 		((XtextResourceSet) resourceSet).setClasspathURIContext(urlClassLoader);
 	}
 
-	protected boolean reportIssues(List<Issue> issues) {
-		boolean hasErrorOrWarnings = false;
+	protected void reportIssues(Iterable<Issue> issues) {
 		for (Issue issue : issues) {
-			if (Severity.WARNING == issue.getSeverity() || Severity.ERROR == issue.getSeverity()) {
-				URI resourceUri = issue.getUriToProblem().trimFragment();
-				StringBuilder issueBuilder = new StringBuilder("\n");
-				issueBuilder.append(issue.getSeverity()).append(": \t");
-				issueBuilder.append(resourceUri.lastSegment()).append(" - ");
-				if (resourceUri.isFile()) {
-					issueBuilder.append(resourceUri.toFileString());
-				}
-				issueBuilder.append("\n").append(issue.getLineNumber()).append(": ").append(issue.getMessage());
+			StringBuilder issueBuilder = createIssueMessage(issue);
+			if (Severity.ERROR == issue.getSeverity()) {
 				log.error(issueBuilder.toString());
-				hasErrorOrWarnings = true;
+			} else if (Severity.WARNING == issue.getSeverity()) {
+				log.warn(issueBuilder.toString());
 			}
 		}
-		return hasErrorOrWarnings;
+	}
+
+	private StringBuilder createIssueMessage(Issue issue) {
+		URI resourceUri = issue.getUriToProblem().trimFragment();
+		StringBuilder issueBuilder = new StringBuilder("\n");
+		issueBuilder.append(issue.getSeverity()).append(": \t");
+		issueBuilder.append(resourceUri.lastSegment()).append(" - ");
+		if (resourceUri.isFile()) {
+			issueBuilder.append(resourceUri.toFileString());
+		}
+		issueBuilder.append("\n").append(issue.getLineNumber()).append(": ").append(issue.getMessage());
+		return issueBuilder;
 	}
 
 	protected void generateJavaFiles(ResourceSet resourceSet) {
