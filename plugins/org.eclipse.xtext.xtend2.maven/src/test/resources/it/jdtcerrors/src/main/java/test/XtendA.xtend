@@ -1,0 +1,4 @@
+
+class XtendA extends JavaB {
+	
+}
