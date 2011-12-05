@@ -11,6 +11,6 @@ public class Case_1 {
   }
   
   public Integer testFunction3() {
-    return ((Integer)42);
+    return Integer.valueOf(42);
   }
 }
