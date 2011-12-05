@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: M2e metadata for maven plugin
+Bundle-SymbolicName: org.eclipse.xtext.xtend2.m2e;singleton:=true
+Bundle-Version: 2.2.0.qualifier
+Bundle-Vendor: Eclipse.org
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Require-Bundle: org.eclipse.m2e.core;bundle-version="1.0.0"
