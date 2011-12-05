@@ -2,9 +2,9 @@
 
 	<property name="eclipsePluginFolder" value="/Users/huebner/Entwicklung/tycho-workspace/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/" />
 	<property name="xtextPluginFolder" value="${eclipsePluginFolder}" />
-	<property name="version" value="2.2.0-SNAPSHOT" />
+	<property name="maven.version" value="2.2.0-SNAPSHOT" />
 	<property name="output.folder" value="output" />
-	<echo>${version}</echo>
+	<echo>${maven.version}</echo>
 
 	<target name="run" depends="createSourcesUberjar">
 		<loadfile property="modifiedPomXml" srcFile="pom-template.pom">
@@ -12,7 +12,7 @@
 				<expandproperties />
 			</filterchain>
 		</loadfile>
-		<echo file="${output.folder}/org.eclipse.xtend2.standalone-${version}.pom">${modifiedPomXml}</echo>
+		<echo file="${output.folder}/org.eclipse.xtend2.standalone-${maven.version}.pom">${modifiedPomXml}</echo>
 		<echo>Pom stored: ${output.folder}/org.eclipse.xtend2.standalone-${version}.pom</echo>
 	</target>
 
@@ -79,6 +79,6 @@
 		</unzip>
 
 		<!-- Jar uber jar -->
-		<jar destfile="${output.folder}/org.eclipse.xtend2.standalone-${version}-source.jar" basedir="${sourceJarTemp}" />
+		<jar destfile="${output.folder}/org.eclipse.xtend2.standalone-${version}-sources.jar" basedir="${sourceJarTemp}" />
 	</target>
 </project>
