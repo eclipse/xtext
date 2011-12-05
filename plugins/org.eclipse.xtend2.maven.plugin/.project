@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>org.eclipse.xtext.xtend2.maven</name>
+	<name>org.eclipse.xtend2.maven.plugin</name>
 	<comment></comment>
 	<projects>
 	</projects>
