@@ -16,7 +16,10 @@
 <link href="bootstrap.css" rel="stylesheet">
 <style type="text/css">
 section {
-	padding-bottom: 60px;
+	padding-bottom: 40px;
+}
+div#maincontainer > section {
+	padding-top: 80px;
 }
 </style>
 <link href="google-code-prettify/prettify.css" type="text/css"
@@ -60,7 +63,7 @@ section {
 				<ul class="nav">
 					<li class="active"><a href="#">Xtend</a></li>
 					<li><a href="#download">Download</a></li>
-					<li><a href="#download">Documentation</a></li>
+					<li><a href="#documentation">Documentation</a></li>
 					<li><a href="#whatsnext">Future Plans <span
 							class="label success">Updated!</span></a></li>
 					<li><a href="http://www.eclipse.org/Xtext">Xtext.org</a></li>
@@ -81,7 +84,7 @@ section {
 		</div>
 	</header>
 
-	<div class="container">
+	<div id="maincontainer" class="container">
 		<section id="intro">
 			<div class="row">
 				<div class="span-one-third">
@@ -109,12 +112,15 @@ section {
 						Boilerplate is mainly avoided by the following features:</p>
 					<ul>
 						<li><a href="#typeinference">type inference</a>
-						<li><a href="#morenoisereduction">property access </a>
-						<li><a href="#morenoisereduction">better defaults </a>
-						<li><a href="#morenoisereduction">optional semicolons </a>
-						<li><a href="#morenoisereduction">optional parenthesis </a>
-						<li>operator overloading</li>
-						<li>everything is an expression</li>
+						<li><a href="#morenoisereduction">property access</a>
+						<li><a href="#morenoisereduction">better defaults</a>
+						<li><a href="#morenoisereduction">optional semicolons</a>
+						<li><a href="#morenoisereduction">optional parenthesis</a>
+						<li><a href="#operatoroverloading">operator overloading</a> <span
+								class="label success">Updated !</span></li>
+						<li><a href="#everythingisanexpression">everything is an
+								expression</a> <span
+								class="label success">Updated !</span></li>
 					</ul>
 				</div>
 				<div class="span-one-third">
@@ -130,9 +136,8 @@ section {
 						<li><a href="#templateexpression">template expressions</a>
 						<li><a href="#extensionmethods">extension methods</a>
 						<li><a href="#multipledispatch">multiple dispatch</a>
-						<li><a href="#dslsupport">exceptional DSL support <span
-								class="label success">New !</span>
-						</a>
+						<li><a href="#dslsupport">exceptional DSL support</a> <span
+								class="label success">Updated !</span>
 					</ul>
 				</div>
 			</div>
@@ -168,18 +173,18 @@ section {
 		<section id="download">
 			<div class="page-header">
 				<h1>
-					Getting Started <small>Installation and first steps</small>
+					Download <small>Installation and first steps</small>
 				</h1>
 			</div>
 			<div class="row">
 				<div class="span8">
-					<h2>Download Eclipse</h2>
+					<h2>Option 1: Download Eclipse</h2>
 					<p>
 						The Eclipse Xtext distribution provided by <a
 							href="http://www.itemis.com">itemis</a> includes Xtend and can be
 						downloaded from their website.
 					</p>
-					<br /> <a class="btn primary large" style="width: 250px;"
+					<p> <a class="btn primary large" style="width: 250px;"
 						href="http://xtext.itemis.com/xtext/language=en/36553/downloads">Download
 						Eclipse from itemis.com &raquo;</a>
 					</p>
@@ -187,7 +192,7 @@ section {
 
 				</div>
 				<div class="span8">
-					<h2>Install the Xtend SDK</h2>
+					<h2>Option 2: Install the Xtend SDK</h2>
 					<p>
 						If you already have a running <a
 							title="Go To http://www.eclipse.org/downloads"
@@ -208,6 +213,14 @@ section {
 					<!-- 		      	</ul> -->
 					<!-- 				<img src="images/install_wizard.png" title="Copy and paste of the URLs above into the install manager in Eclipse."/> -->
 				</div>
+			</div>
+		</section>
+		
+		<section id="documentation">
+			<div class="page-header">
+				<h1>
+					Documentation <small>Getting started</small>
+				</h1>
 			</div>
 			<div class="row">
 				<div class="span8">
@@ -246,6 +259,7 @@ section {
 				</div>
 			</div>
 		</section>
+		
 		<section id="embracejava">
 			<div class="page-header">
 				<h1>
@@ -318,11 +332,9 @@ section {
 			<section id="typesystem">
 				<div class="row">
 					<div class="span-two-third">
-						<br>
 						<h2>
 							Java type system <small>It's the one you know!</small>
 						</h2>
-						<br>
 					</div>
 				</div>
 				<div class="row">
@@ -357,11 +369,9 @@ java.util.Map&lt;String,String&gt;
 			<section id="scopeofxtend">
 				<div class="row">
 					<div class="span-two-third">
-						<br>
 						<h2>
 							Xtend just does classes <small>and nothing else</small>
 						</h2>
-						<br>
 					</div>
 				</div>
 				<div class="row">
@@ -393,11 +403,9 @@ java.util.Map&lt;String,String&gt;
 			<section id="typeinference">
 				<div class="row">
 					<div class="span-two-third">
-						<br>
 						<h2>
 							Type inference <small>Get rid of the redundancy</small>
 						</h2>
-						<br>
 					</div>
 				</div>
 				<div class="row">
@@ -445,9 +453,7 @@ getTheListOfNames().map( String name | "Mr. "+name )
 			<section id="morenoisereduction">
 				<div class="row">
 					<div class="span-two-third">
-						<br>
 						<h2>More noise reduction</h2>
-						<br>
 					</div>
 				</div>
 				<div class="row">
@@ -477,6 +483,72 @@ getTheListOfNames().map( String name | "Mr. "+name )
 					</div>
 				</div>
 			</section>
+			<section id="operatoroverloading">
+				<div class="row">
+					<div class="span-two-third">
+						<span class="label success">New !</span>
+						<h2>Operator Overloading</h2>
+					</div>
+				</div>
+				<div class="row">
+					<div class="span8">
+						<p>
+							Operators in Xtend are just a shortcut syntax for method
+							invocations. This means that you can for instance use <strong>arithmetic operators</strong>
+							when working with numeric types like <strong>BigDecimal</strong>.</p>
+						<p> Also this is handy when using concatenation on collections:</p>
+						<pre class="prettyprint">
+val apples = newArrayList(new Apple())
+val oranges = newArrayList(new Orange())
+val fruits = apples + oranges 
+// fruits is now of type Iterable&lt;Fruit&gt;
+</pre>
+					</div>
+					<div class="span8">
+						<p>The user's guide contains a list of all operators, their precedence, and associativity. 
+						Each operator is mapped to a special method name starting with prefix 'operator_'.</p>
+						<p>The standard library already enhances some types from Java's SDK with operators through extension methods.</p>
+					</div>
+				</div>
+			</section>
+			<section id="everythingisanexpression">
+				<div class="row">
+					<div class="span-two-third">
+						<span
+								class="label success">New !</span>
+						<h2>Everything is an expression</h2>
+					</div>
+				</div>
+				<div class="row">
+					<div class="span8">
+						<p>In Xtend everything that looks like a statement is actually
+							an expression. Even a block is just an expression. This allows
+							for using them in places where it would just not be allowed in
+							Java. Here’s an example:</p>
+						<pre class="prettyprint">
+val data = try { 
+    fileContentsToString(‘data.txt’) 
+  } catch (IOException e) { 
+    ‘dummy data’
+  }</pre>
+					</div>
+					<div class="span8">
+						<p>
+							In Java it wouldn’t be possible to use a try-catch on the
+							righthand side of an assignment. Since it’s a statement it
+							doesn’t result in a value. In Xtend however it's valid code and
+							the result would be either the result of <i>fileContentsToString</i>
+							or the string <i>“dummy data”</i> (in case an <i>IOException</i>
+							was thrown).
+						</p>
+						<p>
+							<strong>By the way: Xtend doesn’t force you to catch or
+								declare checked exceptions.</strong> They are treated like any other
+							exception.
+						</p>
+					</div>
+				</div>
+			</section>
 		</section>
 
 
@@ -490,11 +562,9 @@ getTheListOfNames().map( String name | "Mr. "+name )
 			<section id="closures">
 				<div class="row">
 					<div class="span-two-third">
-						<br>
 						<h2>
 							Closures <small>finally!</small>
 						</h2>
-						<br>
 					</div>
 				</div>
 				<div class="row">
@@ -572,12 +642,10 @@ html [
 			<section id="switchexpression">
 				<div class="row">
 					<div class="span-two-third">
-						<br>
 						<h2>
 							Switch expression <small>'cause pattern matching is
 								complicated</small>
 						</h2>
-						<br>
 					</div>
 				</div>
 				<div class="row">
@@ -631,12 +699,10 @@ switch (shape) {
 			<section id="templateexpression">
 				<div class="row">
 					<div class="span-two-third">
-						<br>
 						<h2>
 							Template expressions <small>with a unique way of
 								whitespace handling</small>
 						</h2>
-						<br>
 					</div>
 				</div>
 				<div class="row">
@@ -667,7 +733,8 @@ val msg =  'This is some multi line
 							generate nice looking output with proper whitespaces and
 							indentation. However, at the same time you want the template to
 							be nicely indented. Therefore until now, templates either looked
-							great and the output looked bad, or vice versa.<br /> Xtend can
+							great and the output looked bad, or vice versa.</p>
+						<p> Xtend can
 							do better. It detects what whitespace is meant to indent the
 							template code and what is meant to indent the output code using
 							an algorthm which feels surprisingly intuitive. To help
@@ -689,9 +756,7 @@ val msg =  'This is some multi line
 			<section id="extensionmethods">
 				<div class="row">
 					<div class="span-two-third">
-						<br>
 						<h2>Extension methods</h2>
-						<br>
 					</div>
 				</div>
 				<div class="row">
@@ -757,11 +822,9 @@ def example(Person p) {
 			<section id="multipledispatch">
 				<div class="row">
 					<div class="span-two-third">
-						<br>
 						<h2>
 							Multiple dispatch <small>no more visitors!</small>
 						</h2>
-						<br>
 					</div>
 				</div>
 				<div class="row">
@@ -830,12 +893,11 @@ def dispatch label(Rectangle r) {
 			<section id="dslsupport">
 				<div class="row">
 					<div class="span-two-third">
-						<br>
+						<span class="label success">New!</span>
 						<h2>
-							Exceptional DSL support <small>When
-								APIs are not sufficient</small> <span class="label success">New!</span> 
+							Exceptional DSL support <small>When APIs are not
+								sufficient</small>
 						</h2>
-						<br>
 					</div>
 				</div>
 				<div class="row">
@@ -847,9 +909,9 @@ def dispatch label(Rectangle r) {
 							that in an untyped, clumsy XML file you could define it like
 							this:</p>
 						<pre class="prettyprint">
-GET /index            -> StartController.index()
-GET /list/Persons     -> PersonController.list()
-GET /edit/Person/{id} -> PersonController.edit(id)
+GET /index            -&gt; StartController.index()
+GET /list/Persons     -&gt; PersonController.list()
+GET /edit/Person/{id} -&gt; PersonController.edit(id)
 </pre>
 						<p>
 							Wouldn’t it be cool to have all the great tool support you see in
@@ -890,7 +952,6 @@ GET /edit/Person/{id} -> PersonController.edit(id)
 						</p>
 						<img src="images/jvm-dsl.png" />
 						<p>
-							<br />
 							<!-- 							<a href="http://xtext.org"><img width="400" -->
 							<!-- 								src="images/xtext-logo-color-800.png" /></a> -->
 						</p>
@@ -900,28 +961,34 @@ GET /edit/Person/{id} -> PersonController.edit(id)
 		</section>
 		<section id="whatsnext">
 			<div class="page-header">
-				<h1>What's Next? <span class="label success">Updated!</span> </h1>
+				<span class="label success">Updated!</span>
+				<h1>
+					What's Next?
+				</h1>
 			</div>
 			<div class="row">
 				<div class="span16">
 					<p>With the recently released version, Xtend is now a fully
-						working, readable and convenient alternative to Java classes. 
-						The editor is close to what Eclipse's Java tooling can do and 
-						in some aspects even better.</p>
-					<p>Here's a list of things we want to focus on during the next months:</p>
+						working, readable and convenient alternative to Java classes. The
+						editor is close to what Eclipse's Java tooling can do and in some
+						aspects even better.</p>
+					<p>Here's a list of things we want to focus on during the next
+						months:</p>
 				</div>
 			</div>
 			<div class="row">
 				<div class="span8">
 					<ul>
 						<li>
-						<h4>Even tighter integration with Eclipse's Java tooling.</h4>
-						<p>	Whenever you click on a Java class derived from Xtend, being it
-							in a search result, in a type hierarchy, junit test results or
-							within the debugger. The original Xtend source will be opened.
-							Follow <a
-							href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=364281">this
-								bugzilla</a> to stay tuned.</p>
+							<h4>Even tighter integration with Eclipse's Java tooling.</h4>
+							<p>
+								Whenever you click on a Java class derived from Xtend, being it
+								in a search result, in a type hierarchy, junit test results or
+								within the debugger. The original Xtend source will be opened.
+								Follow <a
+									href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=364281">this
+									bugzilla</a> to stay tuned.
+							</p>
 						</li>
 						<li><h4>Debugging.</h4>
 							<p>We are working on support for JSR-45, which is already
@@ -930,26 +997,29 @@ GET /edit/Person/{id} -> PersonController.edit(id)
 								will also make sure the stacktraces contain proper xtend
 								entries.</p></li>
 						<li><h4>Further editor improvements.</h4>
-							<p>Although the editor and the rest of the DIE is already quite advanced, there are still a lot of 
-							cool features we want to work on. Among them are useful refactorings such as extract method or extract local variable.
-							But also things like JavaDoc support will be added.</p>
-						</li>
+							<p>Although the editor and the rest of the DIE is already
+								quite advanced, there are still a lot of cool features we want
+								to work on. Among them are useful refactorings such as extract
+								method or extract local variable. But also things like JavaDoc
+								support will be added.</p></li>
 					</ul>
 				</div>
 				<div class="span8">
 					<ul>
 						<li>
-						<h4>Nullsafety.</h4>
-						<p>	It seems like JDT finally get's control-flow analysis @Nullable types.
-							This is an important feature and we will definitely work on supporting this in Xtend as well.</p>
+							<h4>Nullsafety.</h4>
+							<p>It seems like JDT finally get's control-flow analysis
+								@Nullable types. This is an important feature and we will
+								definitely work on supporting this in Xtend as well.</p>
 						</li>
 						<li><h4>Quality and Performance.</h4>
-							<p>We'll further improve the performance of the static analysis, type inference and compilation, to make sure
-							people experience a super short turn-around.</p></li>
+							<p>We'll further improve the performance of the static
+								analysis, type inference and compilation, to make sure people
+								experience a super short turn-around.</p></li>
 						<li><h4>Move Xtend to its own project at Eclipse.</h4>
-							<p>Today Xtend is released as part of Xtext. Although it's more or less the same team working
-							on both technologies we feel that it'S time to move Xtend to its own project at Eclipse.</p>
-						</li>
+							<p>Today Xtend is released as part of Xtext. Although it's
+								more or less the same team working on both technologies we feel
+								that it'S time to move Xtend to its own project at Eclipse.</p></li>
 					</ul>
 				</div>
 			</div>
