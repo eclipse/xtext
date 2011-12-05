@@ -1,0 +1,36 @@
+<project>
+
+	<property name="eclipsePluginFolder" value="../.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/" />
+	<property name="xtextPluginFolder" value="../.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/" />
+	<property name="binJarTemp" value="binJarTemp" />
+
+	<!-- ================================= 
+          target: name              
+         ================================= -->
+	<target name="createUberjar">
+		<!-- TP bundles -->
+		<fileset dir="${eclipsePluginFolder}" id="binEclipseJars">
+			<include name="org.antlr.runtime_3.2.0*.jar" />
+			<include name="org.eclipse.jdt.core_3.5.2*.jar" />
+		</fileset>
+		<unzip dest="${binJarTemp}">
+			<fileset refid="binEclipseJars" />
+		</unzip>
+
+		<!-- Xtext bundles -->
+		<fileset dir="${xtextPluginFolder}" id="binXtextJars">
+			<include name="org.eclipse.xtext_2.2.0*.jar" />
+			<include name="org.eclipse.xtext.common.types_2.2.0*.jar" />
+			<include name="org.eclipse.xtext.util_2.2.0*.jar" />
+			<include name="org.eclipse.xtext.xbase_2.2.0*.jar" />
+			<include name="org.eclipse.xtext.xbase.lib_2.2.0*.jar" />
+			<include name="org.eclipse.xtext.xtend2_2.2.0*.jar" />
+			<include name="org.eclipse.xtend2.lib_2.2.0*.jar" />
+			<include name="org.eclipse.xtext.xtend2.standalone_2.0.0*.jar" />
+		</fileset>
+		<unzip dest="${binJarTemp}">
+			<fileset refid="binXtextJars" />
+		</unzip>
+
+	</target>
+</project>
