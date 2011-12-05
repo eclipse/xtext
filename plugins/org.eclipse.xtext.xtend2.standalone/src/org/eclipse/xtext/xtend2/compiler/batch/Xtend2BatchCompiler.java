@@ -209,7 +209,7 @@ public class Xtend2BatchCompiler {
 			File sourceDirectory = createStubs(resourceSet);
 			File classDirectory = createTempDir("classes");
 			if (!preCompileStubs(sourceDirectory, classDirectory)) {
-				return false;
+				log.debug("Compilation of stubs and exsiting Java code had errors. This is expected and usually is not a probblem.");
 			}
 			installJvmTypeProvider(resourceSet, classDirectory);
 			List<Issue> issues = validate(resourceSet);
