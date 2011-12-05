@@ -1844,10 +1844,10 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	
 	
 	@Test public void testIntegerBitOperations() throws Exception {
-		assertEvaluatesTo(~(1 | 2 & 3), "1.or(2).and(3).not()");
+		assertEvaluatesTo(~(1 | 2 & 3), "1.bitwiseOr(2).bitwiseAnd(3).bitwiseNot()");
 	}
 
-	@Test public void testBigIntegeBitOperations() throws Exception {
+	@Test public void testBigIntegerBitOperations() throws Exception {
 		assertEvaluatesTo(new BigInteger("1").or(new BigInteger("2")).and(new BigInteger("3")).not(), 
 				"new java.math.BigInteger('1').or(new java.math.BigInteger('2')).and(new java.math.BigInteger('3')).not()"); 
 	}
