@@ -3,7 +3,7 @@
     <pluginExecution>
       <pluginExecutionFilter>
         <groupId>org.eclipse.xtend2</groupId>
-        <artifactId>xtend-plugin</artifactId>
+        <artifactId>xtend-maven-plugin</artifactId>
         <versionRange>[2.2.0,)</versionRange>
         <goals>
           <goal>compile</goal>
