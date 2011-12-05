@@ -360,7 +360,7 @@ ol[
                 boolean isPrelinkingPhase) { // (1)
     ]
 	  Using the dispatch keyword makes sure that the method is called for instances of type e[Entity]
-	  only. Have a look at ref:polymorphicDispatch to understand Xtend's dispatch functions. Extending 
+	  only. Have a look at link[http://www.eclipse.org/Xtext/xtend/Xtend%20Reference%20Documentation.pdf][polymorphic dispatch] to understand Xtend's dispatch functions. Extending 
 	  codeRef[org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer] makes sure we don't have to walk the syntax model on our own.
   ]
   item[
@@ -388,7 +388,7 @@ ol[
     and code[element.documentation] is in fact calling the extension method  
     codeRef[org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder]e[#getDocumentation(codeRef[org.eclipse.emf.ecore.EObject] element)]
     
-    Xtend's extension methods are explained in detail in the sections about ref:extensionMethods[extension methods] and ref:imports[imports].
+    Xtend's extension methods are explained in detail in the sections about link[http://www.eclipse.org/Xtext/xtend/Xtend%20Reference%20Documentation.pdf][extension methods] and link[http://www.eclipse.org/Xtext/xtend/Xtend%20Reference%20Documentation.pdf][imports].
   ]
   item[
   	code[Xtend2][
