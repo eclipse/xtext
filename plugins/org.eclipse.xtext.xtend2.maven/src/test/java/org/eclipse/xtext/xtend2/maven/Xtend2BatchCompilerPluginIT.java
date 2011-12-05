@@ -32,11 +32,11 @@ public class Xtend2BatchCompilerPluginIT {
 		verifyErrorFreeLog("/it/aggregation");
 	}
 
-	@Test
-	public void continueOnErrorsFromJdtCompiler() throws Exception {
-		Verifier verifier = newVerifier("/it/jdtcerrors");
-		verifier.executeGoal("verify");
-	}
+//	@Test
+//	public void continueOnErrorsFromJdtCompiler() throws Exception {
+//		Verifier verifier = newVerifier("/it/jdtcerrors");
+//		verifier.executeGoal("verify");
+//	}
 
 	@Test
 	public void haltOnXtendValidationErrors() throws Exception {
