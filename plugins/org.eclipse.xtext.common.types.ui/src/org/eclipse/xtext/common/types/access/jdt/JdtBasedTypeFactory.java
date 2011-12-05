@@ -133,10 +133,14 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 	}
 
 	public void createAnnotationValues(IBinding annotated, JvmAnnotationTarget result) {
-		if (annotated.getAnnotations().length == 0)
-			return;
-		for (IAnnotationBinding annotation : annotated.getAnnotations()) {
-			createAnnotationReference(result, annotation);
+		try {
+			if (annotated.getAnnotations().length == 0)
+				return;
+			for (IAnnotationBinding annotation : annotated.getAnnotations()) {
+				createAnnotationReference(result, annotation);
+			}
+		} catch(@SuppressWarnings("restriction") org.eclipse.jdt.internal.compiler.problem.AbortCompilation aborted) {
+			log.info("Couldn't resolve annotations of "+annotated, aborted);
 		}
 	}
 
