@@ -19,6 +19,9 @@
   <rm:locator pattern="^org\.junit4$" searchPathRef="platform"/>
   <rm:locator pattern="^org\.junit$" searchPathRef="orbit"/>
   <rm:locator pattern="^org\.eclipse\.m2e(?:\..+)?$" searchPathRef="maven"/>
+  <rm:locator pattern="^org\.jboss\.netty$" searchPathRef="maven"/>
+  <rm:locator pattern="^org\.slf4j\.api$" searchPathRef="maven"/>
+  <rm:locator pattern="^com\.ning(?:\..+)?$" searchPathRef="maven"/>
   <rm:locator searchPathRef="platform"/>
   
   <rm:searchPath name="local.releng">
