@@ -44,7 +44,7 @@ public class Xbase10_Switch {
     					if (shape instanceof Circle) {
     						final Circle _circle = (Circle)shape;
     						matched=true;
-    						String _operator_plus = StringExtensions.operator_plus("a circle : diameter=", ((Integer)_circle.diameter));
+    						String _operator_plus = StringExtensions.operator_plus("a circle : diameter=", Integer.valueOf(_circle.diameter));
     						_switchResult = _operator_plus;
     					}
     				}
@@ -54,7 +54,7 @@ public class Xbase10_Switch {
     						boolean _operator_equals = IntegerExtensions.operator_equals(_rectangle.height, _rectangle.width);
     						if (_operator_equals) {
     							matched=true;
-    							String _operator_plus = StringExtensions.operator_plus("a square : size=", ((Integer)_rectangle.width));
+    							String _operator_plus = StringExtensions.operator_plus("a square : size=", Integer.valueOf(_rectangle.width));
     							_switchResult = _operator_plus;
     						}
     					}
@@ -63,9 +63,9 @@ public class Xbase10_Switch {
     					if (shape instanceof Rectangle) {
     						final Rectangle _rectangle = (Rectangle)shape;
     						matched=true;
-    						String _operator_plus = StringExtensions.operator_plus("a rectangle : width=", ((Integer)_rectangle.width));
+    						String _operator_plus = StringExtensions.operator_plus("a rectangle : width=", Integer.valueOf(_rectangle.width));
     						String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, ", height=");
-    						String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, ((Integer)_rectangle.height));
+    						String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, Integer.valueOf(_rectangle.height));
     						_switchResult = _operator_plus_2;
     					}
     				}

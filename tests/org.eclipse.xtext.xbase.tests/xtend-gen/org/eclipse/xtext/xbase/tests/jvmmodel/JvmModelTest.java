@@ -61,7 +61,7 @@ public class JvmModelTest extends AbstractJvmModelTest {
         final Field field = _declaredField;
         field.setAccessible(true);
         Object _get = field.get(resource);
-        Assert.assertFalse(((Boolean) _get));
+        Assert.assertFalse((((Boolean) _get)).booleanValue());
         IResourceDescription _resourceDescription = this.manager.getResourceDescription(resource);
         final IResourceDescription desc = _resourceDescription;
         Iterable<IEObjectDescription> _exportedObjects = desc.getExportedObjects();
@@ -70,7 +70,7 @@ public class JvmModelTest extends AbstractJvmModelTest {
         int _size = list.size();
         Assert.assertEquals(1, _size);
         Object _get_1 = field.get(resource);
-        Assert.assertFalse(((Boolean) _get_1));
+        Assert.assertFalse((((Boolean) _get_1)).booleanValue());
       }
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);

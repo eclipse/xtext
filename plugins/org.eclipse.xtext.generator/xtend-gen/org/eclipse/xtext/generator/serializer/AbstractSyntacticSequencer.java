@@ -205,7 +205,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       final Function1<AbstractRule,Boolean> _function = new Function1<AbstractRule,Boolean>() {
           public Boolean apply(final AbstractRule e) {
             boolean _isEObjectRule = GrammarUtil.isEObjectRule(e);
-            return ((Boolean)_isEObjectRule);
+            return Boolean.valueOf(_isEObjectRule);
           }
         };
       Iterable<AbstractRule> _filter = IterableExtensions.<AbstractRule>filter(_allRules, _function);
@@ -225,7 +225,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
                     boolean _operator_not_1 = BooleanExtensions.operator_not(_isEObjectRuleCall);
                     _operator_and = BooleanExtensions.operator_and(_operator_not, _operator_not_1);
                   }
-                  return ((Boolean)_operator_and);
+                  return Boolean.valueOf(_operator_and);
                 }
               };
             Iterable<RuleCall> _filter = IterableExtensions.<RuleCall>filter(_containedRuleCalls, _function);

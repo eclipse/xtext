@@ -177,7 +177,7 @@ public class JvmModelGenerator implements IGenerator {
       final Function1<CharSequence,Boolean> _function_1 = new Function1<CharSequence,Boolean>() {
           public Boolean apply(final CharSequence c) {
             boolean _operator_notEquals = ObjectExtensions.operator_notEquals(c, null);
-            return ((Boolean)_operator_notEquals);
+            return Boolean.valueOf(_operator_notEquals);
           }
         };
       Iterable<CharSequence> _filter = IterableExtensions.<CharSequence>filter(_map, _function_1);
@@ -343,7 +343,7 @@ public class JvmModelGenerator implements IGenerator {
               public Boolean apply(final JvmTypeReference typeRef) {
                 String _identifier = typeRef.getIdentifier();
                 boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_identifier, "java.lang.Object");
-                return ((Boolean)_operator_notEquals);
+                return Boolean.valueOf(_operator_notEquals);
               }
             };
           Iterable<JvmTypeReference> _filter = IterableExtensions.<JvmTypeReference>filter(_superTypes_2, _function_1);
@@ -360,7 +360,7 @@ public class JvmModelGenerator implements IGenerator {
                   boolean _operator_not = BooleanExtensions.operator_not(_isInterface);
                   _operator_and = BooleanExtensions.operator_and((_type instanceof JvmGenericType), _operator_not);
                 }
-                return ((Boolean)_operator_and);
+                return Boolean.valueOf(_operator_and);
               }
             };
           Iterable<JvmTypeReference> _filter_1 = IterableExtensions.<JvmTypeReference>filter(withoutObject, _function_2);
@@ -369,7 +369,7 @@ public class JvmModelGenerator implements IGenerator {
           final Function1<JvmTypeReference,Boolean> _function_3 = new Function1<JvmTypeReference,Boolean>() {
               public Boolean apply(final JvmTypeReference typeRef) {
                 boolean _operator_notEquals = ObjectExtensions.operator_notEquals(typeRef, superClazz);
-                return ((Boolean)_operator_notEquals);
+                return Boolean.valueOf(_operator_notEquals);
               }
             };
           Iterable<JvmTypeReference> _filter_2 = IterableExtensions.<JvmTypeReference>filter(withoutObject, _function_3);

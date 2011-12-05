@@ -45,7 +45,7 @@ public class GrammarAccess {
    * @return the java identifier
    */
   public String toJavaIdentifier(final String text, final boolean uppercaseFirst) {
-    String _javaIdentifier = GrammarAccessUtil.toJavaIdentifier(text, ((Boolean)uppercaseFirst));
+    String _javaIdentifier = GrammarAccessUtil.toJavaIdentifier(text, Boolean.valueOf(uppercaseFirst));
     return _javaIdentifier;
   }
   

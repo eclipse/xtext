@@ -18,7 +18,7 @@ public class Case_0 {
         String x = a;
         char[] _charArray = b.toCharArray();
         for (final char y : _charArray) {
-          String _operator_plus_1 = StringExtensions.operator_plus(x, ((Character)y));
+          String _operator_plus_1 = StringExtensions.operator_plus(x, Character.valueOf(y));
           x = _operator_plus_1;
         }
         _xblockexpression = (x);

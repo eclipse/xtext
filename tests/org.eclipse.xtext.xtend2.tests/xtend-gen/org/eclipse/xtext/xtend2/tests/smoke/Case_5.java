@@ -4,7 +4,7 @@ import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 
 @SuppressWarnings("all")
 public class Case_5 {
@@ -18,13 +18,13 @@ public class Case_5 {
     boolean _xblockexpression = false;
     {
       int _indexOf = this.s.indexOf(i);
-      boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_indexOf), ((Integer)0));
+      boolean _operator_equals = IntegerExtensions.operator_equals(_indexOf, 0);
       if (_operator_equals) {
-        boolean _contains = this.myList.contains(((Integer)i));
+        boolean _contains = this.myList.contains(Integer.valueOf(i));
         return _contains;
       }
-      Arrays.<Integer>asList(((Integer)i));
-      Collections.<Integer>singletonList(((Integer)i));
+      Arrays.<Integer>asList(Integer.valueOf(i));
+      Collections.<Integer>singletonList(Integer.valueOf(i));
       _xblockexpression = (false);
     }
     return _xblockexpression;
