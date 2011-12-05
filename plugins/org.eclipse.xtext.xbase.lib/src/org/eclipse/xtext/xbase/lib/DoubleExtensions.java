@@ -192,6 +192,8 @@ public class DoubleExtensions {
 	 * @return <code>a==b</code>
 	 */
 	public static boolean operator_equals(double a, double b) {
+		// TODO: should we use?
+//		return Double.compare(a, b) == 0;
 		return a == b;
 	}
 
@@ -205,6 +207,8 @@ public class DoubleExtensions {
 	 * @return <code>a!=b</code>
 	 */
 	public static boolean operator_notEquals(double a, double b) {
+		// TODO: should we use?
+//		return Double.compare(a, b) != 0;
 		return a != b;
 	}
 

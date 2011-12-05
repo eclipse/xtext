@@ -315,7 +315,7 @@ public class IntegerExtensions {
 	}
 
 	/**
-	 * The binary <code>or</code> operator. This is the equivalent to the java <code>|</code> operator.
+	 * The bitwise inclusive <code>or</code> operation. This is the equivalent to the java <code>|</code> operator.
 	 * 
 	 * @param a
 	 *            an integer.
@@ -323,25 +323,55 @@ public class IntegerExtensions {
 	 *            an integer.
 	 * @return <code>a|b</code>
 	 */
-	public static int or(int a, int b) {
+	public static int bitwiseOr(int a, int b) {
 		return a | b;
 	}
 
 	/**
-	 * The binary <code>or</code> operator. This is the equivalent to the java <code>|</code> operator.
+	 * The bitwise inclusive <code>or</code> operation. This is the equivalent to the java <code>|</code> operator.
 	 * 
 	 * @param a
 	 *            an integer. May not be <code>null</code>.
 	 * @param b
 	 *            a number. May not be <code>null</code>.
 	 * @return <code>a|b</code>
+	 * @throws NullPointerException
+	 *             if {@code a} or {@code b} is <code>null</code>.
 	 */
-	public static int or(Integer a, Number b) {
+	public static int bitwiseOr(Integer a, Number b) {
 		return a | b.intValue();
+	}
+	
+	/**
+	 * The bitwise exclusive <code>or</code> operation. This is the equivalent to the java <code>^</code> operator.
+	 * 
+	 * @param a
+	 *            an integer.
+	 * @param b
+	 *            an integer.
+	 * @return <code>a^b</code>
+	 */
+	public static int bitwiseXor(int a, int b) {
+		return a ^ b;
 	}
 
 	/**
-	 * The binary <code>and</code> operator. This is the equivalent to the java <code>&</code> operator.
+	 * The bitwise exclusive <code>or</code> operation. This is the equivalent to the java <code>^</code> operator.
+	 * 
+	 * @param a
+	 *            an integer. May not be <code>null</code>.
+	 * @param b
+	 *            a number. May not be <code>null</code>.
+	 * @return <code>a^b</code>
+	 * @throws NullPointerException
+	 *             if {@code a} or {@code b} is <code>null</code>.
+	 */
+	public static int bitwiseXor(Integer a, Number b) {
+		return a ^ b.intValue();
+	}
+
+	/**
+	 * The bitwise <code>and</code> operation. This is the equivalent to the java <code>&</code> operator.
 	 * 
 	 * @param a
 	 *            an integer.
@@ -349,12 +379,12 @@ public class IntegerExtensions {
 	 *            an integer.
 	 * @return <code>a&b</code>
 	 */
-	public static int and(int a, int b) {
+	public static int bitwiseAnd(int a, int b) {
 		return a & b;
 	}
 
 	/**
-	 * The binary <code>and</code> operator. This is the equivalent to the java <code>&</code> operator.
+	 * The bitwise <code>and</code> operation. This is the equivalent to the java <code>&</code> operator.
 	 * 
 	 * @param a
 	 *            an integer. May not be <code>null</code>.
@@ -362,31 +392,31 @@ public class IntegerExtensions {
 	 *            a number. May not be <code>null</code>.
 	 * @return <code>a&b</code>
 	 */
-	public static int and(Integer a, Number b) {
+	public static int bitwiseAnd(Integer a, Number b) {
 		return a & b.intValue();
 	}
 
 	/**
-	 * The unary <code>not</code> operator. This is the equivalent to the java <code>~</code> operator.
+	 * The bitwise complement operation. This is the equivalent to the java <code>~</code> operator.
 	 * 
 	 * @param a
 	 *            an integer.
-	 * @return <code>a</code> inverted.
+	 * @return the bitwise complement of <code>a</code>.
 	 */
-	public static int not(int a) {
+	public static int bitwiseNot(int a) {
 		return ~a;
 	}
 
 	/**
-	 * The unary <code>not</code> operator. Inverts all bits of the given integer.
+	 * The bitwise complement operation. This is the equivalent to the java <code>~</code> operator.
 	 * 
 	 * @param a
 	 *            an integer. May not be <code>null</code>.
-	 * @return <code>a</code> inverted.
+	 * @return the bitwise complement of <code>a</code>.
 	 * @throws NullPointerException
 	 *             if {@code a} is <code>null</code>.
 	 */
-	public static int not(Integer a) {
+	public static int bitwiseNot(Integer a) {
 		return ~a;
 	}
 

@@ -466,8 +466,8 @@ public class IteratorExtensions {
 	 * 
 	 * @param iterator
 	 *            an iterator. May not be <code>null</code>.
-	 * @param other
-	 *            an iterator. May not be <code>null</code>.
+	 * @param iterable
+	 *            an iterable. May not be <code>null</code>.
 	 * @return <code>true</code> if the two iterators contain equal elements in the same order.
 	 */
 	public static final boolean elementsEqual(Iterator<?> iterator, Iterable<?> iterable) {

@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib.internal;
 
-import org.eclipse.xtext.xbase.lib.Functions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 
 import com.google.common.base.Predicate;
 
@@ -19,7 +19,7 @@ import com.google.common.base.Predicate;
  */
 public class BooleanFunctionDelegate<T> implements Predicate<T> {
 
-	private final Functions.Function1<? super T, Boolean> delegate;
+	private final Function1<? super T, Boolean> delegate;
 
 	/**
 	 * Creates a new {@link BooleanFunctionDelegate} that wraps the given delegate function. This implementation will
@@ -29,7 +29,7 @@ public class BooleanFunctionDelegate<T> implements Predicate<T> {
 	 * @param delegate
 	 *            the delegate function. May not be <code>null</code>.
 	 */
-	public BooleanFunctionDelegate(Functions.Function1<? super T, Boolean> delegate) {
+	public BooleanFunctionDelegate(Function1<? super T, Boolean> delegate) {
 		if (delegate == null)
 			throw new NullPointerException("delegate");
 		this.delegate = delegate;
