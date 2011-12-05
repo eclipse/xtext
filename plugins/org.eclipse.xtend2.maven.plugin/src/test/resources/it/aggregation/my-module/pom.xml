@@ -6,8 +6,8 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.eclipse.xtext</groupId>
-				<artifactId>org.eclipse.xtext.xtend2.maven</artifactId>
+				<groupId>org.eclipse.xtend2</groupId>
+				<artifactId>xtend-plugin</artifactId>
 				<version>IT-SNAPSHOT</version>
 				<executions>
 					<execution>

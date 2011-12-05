@@ -9,8 +9,8 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
   <build>
     <plugins>
       <plugin>
-        <groupId>org.eclipse.xtext</groupId>
-        <artifactId>org.eclipse.xtext.xtend2.maven</artifactId>
+        <groupId>org.eclipse.xtend2</groupId>
+		<artifactId>xtend-plugin</artifactId>
         <version>IT-SNAPSHOT</version>
         <executions>
           <execution>
