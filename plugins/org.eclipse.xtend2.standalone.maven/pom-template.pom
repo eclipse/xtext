@@ -4,7 +4,7 @@
 	<groupId>org.eclipse.xtext</groupId>
 	<artifactId>org.eclipse.xtext.xtend2.standalone</artifactId>
 	<packaging>jar</packaging>
-	<version>${version}</version>
+	<version>${maven.version}</version>
 	<dependencies>
 		<dependency>
 			<groupId>com.google.guava</groupId>
