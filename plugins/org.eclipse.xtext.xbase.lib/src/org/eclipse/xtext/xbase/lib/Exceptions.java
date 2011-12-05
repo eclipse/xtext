@@ -8,13 +8,27 @@
 package org.eclipse.xtext.xbase.lib;
 
 /**
+ * Useful helper methods when dealing with exceptions.
  * @author Sven Efftinge - Initial contribution and API
  */
 public class Exceptions {
 
-	/**
+	/*
 	 * shamelessly taken from Project Lombok
 	 * https://github.com/rzwitserloot/lombok/blob/master/src/core/lombok/Lombok.java
+	 */
+	/**
+	 * Throws the given exception and sneaks it through any compiler checks. This
+	 * allows to throw checked exceptions without the need to declare it.
+	 * Clients should use the following idiom to trick static analysis and dead code checks:
+	 * <pre>
+	 * throw sneakyThrow(new CheckedException("Catch me if you can ;-)")).
+	 * </pre>
+	 * This method is heavily inspired by project
+	 * <a href="https://github.com/rzwitserloot/lombok/blob/master/src/core/lombok/Lombok.java">Lombok</a>.
+	 * @param t the throwable that should be sneaked through compiler checks. May not be <code>null</code>.
+	 * @return never returns anything since {@code t} is always thrown.
+	 * @throws NullPointerException if {@code t} is <code>null</code>.
 	 */
 	public static RuntimeException sneakyThrow(Throwable t) {
 		if (t == null)
