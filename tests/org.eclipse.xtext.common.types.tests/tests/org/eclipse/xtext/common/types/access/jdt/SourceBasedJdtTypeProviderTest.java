@@ -61,11 +61,6 @@ public class SourceBasedJdtTypeProviderTest extends AbstractTypeProviderTest {
 	}
 
 	@Override
-	public void testGoogleFunction() {
-		//FIXME deactivated, since it fails on the server while it succeeds locally.
-	}
-	
-	@Override
 	protected IJvmTypeProvider getTypeProvider() {
 		return typeProvider;
 	}
