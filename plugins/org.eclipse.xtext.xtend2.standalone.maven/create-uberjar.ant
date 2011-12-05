@@ -1,21 +1,31 @@
-<project>
+<project default="run">
 
-	<property name="eclipsePluginFolder" value="../.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/" />
-	<property name="xtextPluginFolder" value="../.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/" />
-	<property name="binJarTemp" value="binJarTemp" />
+	<property name="eclipsePluginFolder" value="/Users/huebner/Entwicklung/tycho-workspace/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/" />
+	<property name="xtextPluginFolder" value="${eclipsePluginFolder}" />
+	<property name="version" value="2.2.0-SNAPSHOT" />
+	<property name="output.folder" value="output" />
+	<echo>${version}</echo>
+
+	<target name="run" depends="createSourcesUberjar">
+		<loadfile property="modifiedPomXml" srcFile="pom-template.pom">
+			<filterchain>
+				<expandproperties />
+			</filterchain>
+		</loadfile>
+		<echo file="${output.folder}/org.eclipse.xtend2.standalone-${version}.pom">${modifiedPomXml}</echo>
+		<echo>Pom stored: ${output.folder}/org.eclipse.xtend2.standalone-${version}.pom</echo>
+	</target>
 
 	<!-- ================================= 
-          target: name              
+          target: createUberjar              
          ================================= -->
 	<target name="createUberjar">
+		<property name="binJarTemp" value="binJarTemp" />
 		<!-- TP bundles -->
 		<fileset dir="${eclipsePluginFolder}" id="binEclipseJars">
 			<include name="org.antlr.runtime_3.2.0*.jar" />
 			<include name="org.eclipse.jdt.core_3.5.2*.jar" />
 		</fileset>
-		<unzip dest="${binJarTemp}">
-			<fileset refid="binEclipseJars" />
-		</unzip>
 
 		<!-- Xtext bundles -->
 		<fileset dir="${xtextPluginFolder}" id="binXtextJars">
@@ -28,9 +38,47 @@
 			<include name="org.eclipse.xtend2.lib_2.2.0*.jar" />
 			<include name="org.eclipse.xtext.xtend2.standalone_2.0.0*.jar" />
 		</fileset>
+
+
 		<unzip dest="${binJarTemp}">
+			<fileset refid="binEclipseJars" />
 			<fileset refid="binXtextJars" />
 		</unzip>
 
+		<!-- Jar uber jar -->
+		<jar destfile="${output.folder}/org.eclipse.xtend2.standalone-${version}.jar" basedir="${binJarTemp}" />
+	</target>
+
+	<!-- ================================= 
+	          target: createSourcesUberjar              
+	         ================================= -->
+	<target name="createSourcesUberjar" depends="createUberjar">
+		<property name="sourceJarTemp" value="sourceJarTemp" />
+		<!-- TP bundles -->
+		<fileset dir="${eclipsePluginFolder}" id="sourceEclipseJars">
+			<include name="org.antlr.runtime.source_3.2.0*.jar" />
+			<include name="org.eclipse.jdt.core.source_3.5.2*.jar" />
+		</fileset>
+
+
+		<!-- Xtext bundles -->
+		<fileset dir="${xtextPluginFolder}" id="sourceXtextJars">
+			<include name="org.eclipse.xtext.source_2.2.0*.jar" />
+			<include name="org.eclipse.xtext.common.types.source_2.2.0*.jar" />
+			<include name="org.eclipse.xtext.util.source_2.2.0*.jar" />
+			<include name="org.eclipse.xtext.xbase.source_2.2.0*.jar" />
+			<include name="org.eclipse.xtext.xbase.lib.source_2.2.0*.jar" />
+			<include name="org.eclipse.xtext.xtend2.source_2.2.0*.jar" />
+			<include name="org.eclipse.xtend2.lib.source_2.2.0*.jar" />
+			<include name="org.eclipse.xtext.xtend2.standalone.source_2.0.0*.jar" />
+		</fileset>
+
+		<unzip dest="${sourceJarTemp}">
+			<fileset refid="sourceEclipseJars" />
+			<fileset refid="sourceXtextJars" />
+		</unzip>
+
+		<!-- Jar uber jar -->
+		<jar destfile="${output.folder}/org.eclipse.xtend2.standalone-${version}-source.jar" basedir="${sourceJarTemp}" />
 	</target>
 </project>
