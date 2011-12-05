@@ -307,7 +307,7 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testCreateExpressionMayNotReturnVoid_01() throws Exception {
 		XtendFunction function = function("def create result: while(true){} illegal() { }");
-		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, INVALID_USE_OF_TYPE, "void", "create", "function", "illegal");
+		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, INVALID_USE_OF_TYPE, "void", "create", "method", "illegal");
 	}
 	
 	public void testCreateExpressionMayNotReturnVoid_02() throws Exception {
