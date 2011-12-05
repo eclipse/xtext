@@ -13,7 +13,7 @@
 			</filterchain>
 		</loadfile>
 		<echo file="${output.folder}/org.eclipse.xtend2.standalone-${maven.version}.pom">${modifiedPomXml}</echo>
-		<echo>Pom stored: ${output.folder}/org.eclipse.xtend2.standalone-${version}.pom</echo>
+		<echo>Pom stored: ${output.folder}/org.eclipse.xtend2.standalone-${maven.version}.pom</echo>
 	</target>
 
 	<!-- ================================= 
@@ -46,7 +46,7 @@
 		</unzip>
 
 		<!-- Jar uber jar -->
-		<jar destfile="${output.folder}/org.eclipse.xtend2.standalone-${version}.jar" basedir="${binJarTemp}" />
+		<jar destfile="${output.folder}/org.eclipse.xtend2.standalone-${maven.version}.jar" basedir="${binJarTemp}" />
 	</target>
 
 	<!-- ================================= 
@@ -79,6 +79,6 @@
 		</unzip>
 
 		<!-- Jar uber jar -->
-		<jar destfile="${output.folder}/org.eclipse.xtend2.standalone-${version}-sources.jar" basedir="${sourceJarTemp}" />
+		<jar destfile="${output.folder}/org.eclipse.xtend2.standalone-${maven.version}-sources.jar" basedir="${sourceJarTemp}" />
 	</target>
 </project>
