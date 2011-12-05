@@ -9,6 +9,7 @@ package org.eclipse.xtext.common.types.xtext.ui;
 
 import junit.framework.Test;
 
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
@@ -17,6 +18,7 @@ import org.eclipse.xtext.common.types.xtext.ui.ui.ContentAssistTestLanguageUiMod
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.util.Modules2;
+import org.osgi.framework.Version;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -44,22 +46,29 @@ public class ContentAssistTest extends AbstractContentAssistProcessorTest {
 		};
 	}
 	
-// FIXME these tests don't succceed on the server
-//	public void testDefaultArrayList_01() throws Exception {
-//		newBuilder().append("default ArrayLis").assertText("java.util.ArrayList", "com.google.common.collect.ArrayListMultimap");
-//	}
-//	
-//	public void testDefaultArrayList_02() throws Exception {
-//		newBuilder().append("import java.util.* default ArrayLis").assertText("ArrayList", "com.google.common.collect.ArrayListMultimap");
-//	}
-//
-//	public void testCustomArrayList_01() throws Exception {
-//		newBuilder().append("custom ArrayLis").assertText("java.util.ArrayList", "com.google.common.collect.ArrayListMultimap");
-//	}
-//	
-//	public void testCustomArrayList_02() throws Exception {
-//		newBuilder().append("import java.util.* custom ArrayLis").assertText("ArrayList", "com.google.common.collect.ArrayListMultimap");
-//	}
+	protected boolean isJDT_3_6_orLater() {
+		Version jdtVersion = JavaCore.getPlugin().getBundle().getVersion();
+		if (jdtVersion.compareTo(new Version(3, 6, 0)) >= 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	public void testDefaultArrayList_01() throws Exception {
+		newBuilder().append("default ArrayLis").assertText("java.util.ArrayList", "com.google.common.collect.ArrayListMultimap");
+	}
+	
+	public void testDefaultArrayList_02() throws Exception {
+		newBuilder().append("import java.util.* default ArrayLis").assertText("ArrayList", "com.google.common.collect.ArrayListMultimap");
+	}
+
+	public void testCustomArrayList_01() throws Exception {
+		newBuilder().append("custom ArrayLis").assertText("java.util.ArrayList", "com.google.common.collect.ArrayListMultimap");
+	}
+	
+	public void testCustomArrayList_02() throws Exception {
+		newBuilder().append("import java.util.* custom ArrayLis").assertText("ArrayList", "com.google.common.collect.ArrayListMultimap");
+	}
 	
 	public void testDefaultBlockingQueue_01() throws Exception {
 		newBuilder().append("import java.util.* default BlockingQ").assertText("concurrent.BlockingQueue");
@@ -68,7 +77,6 @@ public class ContentAssistTest extends AbstractContentAssistProcessorTest {
 	public void testDefaultBlockingQueue_02() throws Exception {
 		newBuilder().append("import java.* default BlockingQ").assertText("util.concurrent.BlockingQueue");
 	}
-	
 	
 	public void testCustomArrayList_03() throws Exception {
 		newBuilder().append("import java.util.* custom java.util.ArrayLis").assertText("ArrayList");
@@ -87,11 +95,17 @@ public class ContentAssistTest extends AbstractContentAssistProcessorTest {
 	}
 	
 	public void testSubtypeArrayList_01() throws Exception {
-		newBuilder().append("subtype ArrayLis").assertText("java.util.ArrayList");
+		if (isJDT_3_6_orLater())
+			newBuilder().append("subtype ArrayLis").assertText("java.util.ArrayList");
+		else // hierarchy scope is broken in 3.5.2 thus we accept all types with valid prefix
+			newBuilder().append("subtype ArrayLis").assertText("java.util.ArrayList", "com.google.common.collect.ArrayListMultimap");
 	}
 	
 	public void testSubtypeArrayList_02() throws Exception {
-		newBuilder().append("import java.util.* subtype ArrayLis").assertText("ArrayList");
+		if (isJDT_3_6_orLater())
+			newBuilder().append("import java.util.* subtype ArrayLis").assertText("ArrayList");
+		else // hierarchy scope is broken in 3.5.2 thus we accept all types with valid prefix
+			newBuilder().append("import java.util.* subtype ArrayLis").assertText("ArrayList", "com.google.common.collect.ArrayListMultimap");
 	}
 
 	public void testSubtypeBlockingQueue_01() throws Exception {
