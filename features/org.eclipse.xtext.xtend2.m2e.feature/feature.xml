@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.eclipse.xtext.xtend2.m2e.feature"
+      id="org.eclipse.xtext.xtend2.m2e"
       label="Xtend2 M2E extensions"
       version="2.2.0.qualifier"
       provider-name="Eclipse.org">
