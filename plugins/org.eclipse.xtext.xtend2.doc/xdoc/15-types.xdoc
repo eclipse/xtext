@@ -40,5 +40,5 @@ Conformance is used in order to find out whether some expression can be used in 
 For instance when assigning a value to a variable,  the type of the right hand expression needs to 
 conform to the type of the variable.
 
-As Xbase implements the unchanegd type system of Java it also fully supports the conformance rules 
+As Xbase implements the unchanged type system of Java it also fully supports the conformance rules 
 defined in link[http://java.sun.com/docs/books/jls/third_edition/html/conversions.html][The Java Language Specification].
