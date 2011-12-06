@@ -15,7 +15,6 @@
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
 		<a href="15-types.php">Types</a></div>
 		<ul style="display: none;" id="subToc_15-types.html">
-		<li id="15-types.html#commonSuperType" ><a href="15-types.php#commonSuperType" >Common Super Type</a></li>
 		<li id="15-types.html#Xbase_Types_ConformanceRules" ><a href="15-types.php#Xbase_Types_ConformanceRules" >Conformance and Conversion</a></li>
 		</ul>
 		</li>
@@ -98,17 +97,17 @@
 			<div class="incode">
 				<p class="code">
 					<span class="keyword">val</span>&nbsp;data&nbsp;=&nbsp;<span class="keyword">try</span>&nbsp;{<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fileContentsToString(<span class="string">&apos;data.txt&apos;</span>)<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">catch</span>&nbsp;(IOException&nbsp;e)&nbsp;{<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;dummy&nbsp;data&apos;</span><br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;}
+					&nbsp;&nbsp;&nbsp;&nbsp;fileContentsToString(<span class="string">&apos;data.txt&apos;</span>)<br/>
+					}&nbsp;<span class="keyword">catch</span>&nbsp;(IOException&nbsp;e)&nbsp;{<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;dummy&nbsp;data&apos;</span><br/>
+					}
 				</p>
 			</div>
 		</div>
 		</p>
 		<p>
 		If <span class="inlinecode">fileContentsToString()</span> throws an <span class="inlinecode">IOException</span>, it is caught and a default value is returned 
-		and thus assigned to the variable data.
+		and assigned to the variable <span class="inlinecode">data</span>.
 		 
 		In Xtend, expressions appear as <a href="20-classes-and-functions.php#fields" title="Go to &quot;Fields&quot;">initializers of fields</a> or as the bodies of constructors
 		or methods. A method body in Xtend can either be a single <a href="30-expressions.php#blocks" title="Go to &quot;Blocks&quot;">block expression</a> 
@@ -140,7 +139,7 @@
 			A string literal is a valid expression and returns an instance of <span class="inlinecode">java.lang.String</span> of the given value.
 			String literals are enclosed by a pair of single quotes or double quotes allowing to use the respective
 			other unquoted inside the string. Special characters can be quoted with a backslash or defined using
-			Java's unicode notation. Strings can span multiple lines. 
+			Java's unicode notation. On the contrary to Java, Xtend's strings can span multiple lines. 
 			<ul>
 			  <li><span class="inlinecode"><span class="string">&apos;Hello&nbsp;World&nbsp;!&apos;</span></span></li>
 			  <li><span class="inlinecode"><span class="string">"Hello&nbsp;World&nbsp;!"</span></span></li>
@@ -182,7 +181,7 @@
 			<a name="nullLiteral" ></a>
 			<h2>Null Literal</h2>
 			<p>
-			The null pointer literal is, like in Java, <span class="inlinecode"><span class="keyword">null</span></span>. It is a member of any reference type and
+			The null pointer literal is <span class="inlinecode"><span class="keyword">null</span></span>. It is a member of any reference type and
 			the only member of the type <span class="inlinecode">java.lang.Void</span>.
 			<ul>
 			  <li><span class="inlinecode"><span class="keyword">null</span></span></li>
@@ -193,21 +192,19 @@
 			<p>
 			Type literals are specified using the keyword <span class="inlinecode"><span class="keyword">typeof</span></span> :
 			<ul>
-			  <li><span class="inlinecode"><span class="keyword">typeof</span>(java.lang.String)</span> which yields <span class="inlinecode">java.lang.String.<span class="keyword">class</span></span></li>
+			  <li><span class="inlinecode"><span class="keyword">typeof</span>(java.lang.String)</span> which yields <span class="inlinecode">java.lang.String.<span class="keyword">class</span></span>
+			    in the generated Java code.</li>
 			</ul>
 			</p>
 			<a name="functionTypes" ></a>
 			<h2>Function Types</h2>
 			<p>
 			Xbase introduces <a href="30-expressions.php#closures" title="Go to &quot;Closures&quot;">closures</a>, and therefore an additional function 
-			type signature. On the JVM-Level a closure (or more generally any function object) is just an 
-			instance of one of the types in <span class="inlinecode">org.eclipse.xtext.xbase.lib.Function*</span>, depending on the 
+			type signature. On the Java level a closure (or more generally any function object) is just an 
+			instance of one of the types in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.2.0/org/eclipse/xtext/xbase/lib/Functions.html" title="org.eclipse.xtext.xbase.lib.Functions">Functions</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java" title="View Source Code" >(src)</a>, depending on the 
 			number of arguments. However, as closures are a very important language feature, a special 
-			sugared syntax for function types has been introduced. So instead of writing 
-			<span class="inlinecode">Function1&lt;String,Boolean&gt;</span> one can write <span class="inlinecode">(String)=&gt;Boolean</span>.
-			</p>
-			<p>
-			Primitives cannot be used in function types.
+			syntax for function types has been introduced. So instead of writing 
+			<span class="inlinecode">Function1&lt;String,Boolean&gt;</span> one can write <span class="inlinecode">(String)=&gt;<span class="keyword">boolean</span></span>.
 			</p>
 		<a name="typeCasts" ></a>
 		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
@@ -224,7 +221,7 @@
 			<a href="http://java.sun.com/docs/books/jls/third_edition/html/conversions.html#5.5" >Java Language Specification</a>.
 			Here is an example:
 			<ul>
-			  <li><span class="inlinecode">my.foo&nbsp;<span class="keyword">as</span>&nbsp;MyType</span></li>
+			  <li><span class="inlinecode">something&nbsp;<span class="keyword">as</span>&nbsp;MyClass</span></li>
 			</ul>
 			</p>
 		<a name="operators" ></a>
@@ -397,21 +394,19 @@
 			<h2>Examples</h2>
 			<p>
 			<ul>
-			  <li><span class="inlinecode">my.foo&nbsp;=&nbsp;23</span></li>
+			  <li><span class="inlinecode">my.property&nbsp;=&nbsp;23</span></li>
 			  <li><span class="inlinecode">myList&nbsp;+=&nbsp;23</span></li>
 			  <li><span class="inlinecode">x&nbsp;&gt;&nbsp;23&nbsp;&amp;&amp;&nbsp;y&nbsp;&lt;&nbsp;23</span></li>
 			  <li><span class="inlinecode">x&nbsp;&amp;&amp;&nbsp;y&nbsp;||&nbsp;z</span></li>
 			  <li><span class="inlinecode">1&nbsp;+&nbsp;3&nbsp;*&nbsp;5&nbsp;*&nbsp;(-&nbsp;23)</span></li>
 			  <li><span class="inlinecode">!(x)</span></li>
-			  <li><span class="inlinecode">my.foo&nbsp;=&nbsp;23</span></li>
-			  <li><span class="inlinecode">my.foo&nbsp;=&nbsp;23</span></li>
 			</ul>
 			</p>
 			<a name="propertyAssignment" ></a>
 			<h2>Assignments</h2>
 			<p>
 			<a href="30-expressions.php#variableDeclaration" title="Go to &quot;Variable Declarations&quot;">Local variables</a> can be reassigned using the <span class="inlinecode">=</span> operator. Also 
-			properties can be set using this operator: Given the expression 
+			properties can be set using this operator given the following expression: 
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
@@ -422,7 +417,7 @@
 			</p>
 			<p>
 			The compiler first looks up whether there is an accessible Java Field called <span class="inlinecode">myProperty</span> on 
-			the type of <span class="inlinecode">myObj</span>. If there is one it translates to the following Java expression :
+			the type of <span class="inlinecode">myObj</span>. If there exists such a field it translates to the following Java expression:
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
@@ -438,9 +433,9 @@
 			</p>
 			<p>
 			If there is no accessible field on the left operand's type, a method called 
-			<span class="inlinecode">setMyProperty(OneArg)</span> (JavaBeans setter method) is looked up. It has to take one argument 
+			<span class="inlinecode">setMyProperty(..)</span> (JavaBeans setter method) is looked up. It has to take one argument 
 			of the type (or a super type) of the right hand operand. The return value will be whatever the 
-			setter method returns (which usually is <span class="inlinecode">null</span>). As a result the compiler translates to :
+			setter method returns (which usually is <span class="inlinecode"><span class="keyword">void</span></span>). As a result the compiler translates to:
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
@@ -466,7 +461,7 @@
 			</p>
 			<p>
 			A variable declaration starting with the keyword <span class="inlinecode"><span class="keyword">val</span></span> denotes a so called value, which
-			is essentially a final (i.e. unsettable) variable. In rare cases, one needs to update the value of 
+			is essentially a final (i.e. unsettable) variable. In some cases, one needs to update the value of 
 			a reference. In such situations the variable needs to be declared with the keyword <span class="inlinecode"><span class="keyword">var</span></span>, 
 			which stands for 'variable'.
 			</p>
@@ -478,9 +473,9 @@
 						{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;max&nbsp;=&nbsp;100<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;i&nbsp;=&nbsp;0<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span>&nbsp;(i&nbsp;&gt;&nbsp;max)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span>&nbsp;(i&nbsp;&lt;&nbsp;max)&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;println(<span class="string">"Hi&nbsp;there!"</span>)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i&nbsp;=&nbsp;i&nbsp;+1<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i&nbsp;=&nbsp;i&nbsp;+&nbsp;1<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 						}
 					</p>
@@ -505,7 +500,7 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">var</span>&nbsp;List&lt;String&gt;&nbsp;msg&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;String&gt;();
+						<span class="keyword">var</span>&nbsp;List&lt;String&gt;&nbsp;msg&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList();
 					</p>
 				</div>
 			</div>
@@ -559,7 +554,7 @@
 			the compiler first looks for an accessible field in the type of <span class="inlinecode">myObj</span>. If no such field 
 			exists it looks for a method called <span class="inlinecode">myProperty()</span> before it looks for the getter methods 
 			<span class="inlinecode">getMyProperty()</span>. If none of these members can be found the expression is unbound and a 
-			compiliation error is thrown.
+			compiliation error is indicated.
 			</p>
 			<a name="implicitVariables" ></a>
 			<h2>Implicit Variables <em>this</em> and <em>it</em></h2>
@@ -608,7 +603,7 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">if</span>&nbsp;(&nbsp;myRef&nbsp;!=&nbsp;<span class="keyword">null</span>&nbsp;)&nbsp;myRef.doStuff()
+						<span class="keyword">if</span>&nbsp;(myRef&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;myRef.doStuff()
 					</p>
 				</div>
 			</div>
@@ -633,7 +628,7 @@
 			Construction of objects is done by invoking Java constructors. The syntax is exactly as in Java, e.g.
 			<ul>
 			  <li><span class="inlinecode"><span class="keyword">new</span>&nbsp;String()</span></li>
-			  <li><span class="inlinecode"><span class="keyword">new</span>&nbsp;java.util.ArrayList&lt;java.math.BigDecimal&gt;()</span></li>
+			  <li><span class="inlinecode"><span class="keyword">new</span>&nbsp;ArrayList&lt;BigDecimal&gt;()</span></li>
 			</ul>
 			</p>
 		<a name="closures" ></a>
@@ -662,7 +657,7 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						myList.find(e|e.name==<span class="keyword">null</span>)
+						myList.findFirst(e&nbsp;|&nbsp;e.name==<span class="keyword">null</span>)
 					</p>
 				</div>
 			</div>
@@ -672,7 +667,7 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						myList.find([e|e.name==<span class="keyword">null</span>])
+						myList.findFirst([e&nbsp;|&nbsp;e.name==<span class="keyword">null</span>])
 					</p>
 				</div>
 			</div>
@@ -682,7 +677,7 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">val</span>&nbsp;func&nbsp;=&nbsp;[String&nbsp;s|&nbsp;s.length&gt;3]
+						<span class="keyword">val</span>&nbsp;func&nbsp;=&nbsp;[String&nbsp;s&nbsp;|&nbsp;s.length&gt;3]
 					</p>
 				</div>
 			</div>
@@ -699,7 +694,7 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">public</span>&nbsp;T&nbsp;&lt;T&gt;getFirst(List&lt;T&gt;&nbsp;list,&nbsp;Function0&lt;T,Boolean&gt;&nbsp;predicate)
+						<span class="keyword">public</span>&nbsp;&lt;T&gt;&nbsp;T&nbsp;find(List&lt;T&gt;&nbsp;list,&nbsp;Function1&lt;T,Boolean&gt;&nbsp;predicate)
 					</p>
 				</div>
 			</div>
@@ -709,7 +704,7 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						arrayList(&nbsp;<span class="string">"Foo"</span>,&nbsp;<span class="string">"Bar"</span>&nbsp;).findFirst(&nbsp;e&nbsp;|&nbsp;e&nbsp;==&nbsp;<span class="string">"Bar"</span>&nbsp;)
+						newArrayList(<span class="string">"Foo"</span>,&nbsp;<span class="string">"Bar"</span>).find(e&nbsp;|&nbsp;e==<span class="string">"Bar"</span>)
 					</p>
 				</div>
 			</div>
@@ -719,7 +714,7 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						arrayList(&nbsp;<span class="string">"Foo"</span>,&nbsp;<span class="string">"Bar"</span>&nbsp;).findFirst(&nbsp;String&nbsp;e&nbsp;|&nbsp;e&nbsp;==&nbsp;<span class="string">"Bar"</span>&nbsp;)
+						newArrayList(<span class="string">"Foo"</span>,&nbsp;<span class="string">"Bar"</span>).find(String&nbsp;e&nbsp;|&nbsp;e==<span class="string">"Bar"</span>)
 					</p>
 				</div>
 			</div>
@@ -729,7 +724,7 @@
 			<ul>
 			  <li><span class="inlinecode">[&nbsp;|&nbsp;<span class="string">"foo"</span>&nbsp;]&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;closure&nbsp;without&nbsp;parameters</span></span></li>
 			  <li><span class="inlinecode">[&nbsp;String&nbsp;s&nbsp;|&nbsp;s.toUpperCase()&nbsp;]&nbsp;<span class="comment">//&nbsp;explicit&nbsp;argument&nbsp;type</span></span></li>
-			  <li><span class="inlinecode">[&nbsp;a,b,a&nbsp;|&nbsp;a+b+c&nbsp;]&nbsp;<span class="comment">//&nbsp;inferred&nbsp;argument&nbsp;types</span></span></li>
+			  <li><span class="inlinecode">[&nbsp;a,b,c&nbsp;|&nbsp;a+b+c&nbsp;]&nbsp;<span class="comment">//&nbsp;inferred&nbsp;argument&nbsp;types</span></span></li>
 			</ul>
 			</p>
 			<a name="functionMapping" ></a>
@@ -762,7 +757,7 @@
 			do not count).
 			</p>
 			<p>
-			As a result given the method <span class="inlinecode">java.util.Collections.sort(List&lt;T&gt;,&nbsp;Comparator&lt;?&nbsp;super&nbsp;T&gt;)</span> is available
+			As a result given the method <span class="inlinecode">IterableExtensions.sort(Iterable&lt;T&gt;,&nbsp;Comparator&lt;?&nbsp;super&nbsp;T&gt;)</span> is available
 			as an extension method, it can be invoked like this
 			</p>
 			<p>
@@ -789,8 +784,8 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">val</span>&nbsp;(String&nbsp;s)=&gt;String&nbsp;function&nbsp;=&nbsp;[toUpperCase]&nbsp;<br/>
-						&nbsp;&nbsp;<span class="comment">//&nbsp;equivalent&nbsp;to&nbsp;[it&nbsp;| it.toUpperCase]</span>
+						<span class="keyword">val</span>&nbsp;(String)=&gt;String&nbsp;function&nbsp;=&nbsp;[toUpperCase]&nbsp;<br/>
+						&nbsp;&nbsp;<span class="comment">//&nbsp;equivalent&nbsp;to&nbsp;[it&nbsp;|&nbsp;it.toUpperCase]</span>
 					</p>
 				</div>
 			</div>
@@ -814,7 +809,7 @@
 					<p class="code">
 						<span class="keyword">val</span>&nbsp;fruit&nbsp;=&nbsp;newArrayList(<span class="string">&apos;apple&apos;</span>,&nbsp;<span class="string">&apos;pear&apos;</span>,&nbsp;<span class="string">&apos;lemon&apos;</span>)<br/>
 						fruit.map[toUpperCase]&nbsp;<br/>
-						&nbsp;&nbsp;<span class="comment">//&nbsp;same&nbsp;as&nbsp;map(fruit,&nbsp;[it&nbsp;| it.toUpperCase])</span>
+						&nbsp;&nbsp;<span class="comment">//&nbsp;same&nbsp;as&nbsp;fruit.map([it&nbsp;| it.toUpperCase])</span>
 					</p>
 				</div>
 			</div>
@@ -828,21 +823,27 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">def</span>&nbsp;createNode(Node&nbsp;parent,&nbsp;(Node)=&gt;Void&nbsp;initializer)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;child=<span class="keyword">new</span>&nbsp;Node()<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;initializer.apply(child)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;child<br/>
-						}<br/>
+						<span class="keyword">class</span>&nbsp;Node&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;label<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Node&gt;&nbsp;children<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;createNode(Node&nbsp;parent,&nbsp;(Node)=&gt;<span class="keyword">void</span>&nbsp;initializer)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;child=<span class="keyword">new</span>&nbsp;Node()<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initializer.apply(child)<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;child<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 						<br/>
-						newNode(<span class="keyword">null</span>)&nbsp;[<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;label=<span class="string">"root"</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;children&nbsp;+=&nbsp;createNode&nbsp;[<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label=<span class="string">"child0"</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;children&nbsp;+=&nbsp;createNode&nbsp;[<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label=<span class="string">"child1"</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
-						]
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;tree()&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;createNode(<span class="keyword">null</span>)&nbsp;[<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label=<span class="string">"root"</span><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;children&nbsp;+=&nbsp;createNode&nbsp;[<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label=<span class="string">"child0"</span><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;children&nbsp;+=&nbsp;createNode&nbsp;[<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label=<span class="string">"child1"</span><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;}
 					</p>
 				</div>
 			</div>
@@ -856,7 +857,6 @@
 			<div class="toc">
 			  <ul>
 			    <li><a href="30-expressions.php#Xtend_Expressions_IfTypeInference" >Typing</a></li>
-			    <li><a href="30-expressions.php#ifExpression_7" >Examples</a></li>
 			  </ul>
 			</div>
 			<p>
@@ -894,17 +894,8 @@
 			<a name="Xtend_Expressions_IfTypeInference" ></a>
 			<h2>Typing</h2>
 			<p>
-			The type of an if expression is calculated by the return types <span class="inlinecode">T1</span> and <span class="inlinecode">T2</span> of the two 
-			expression <span class="inlinecode">e1</span> and <span class="inlinecode">e2</span>. It uses the rules defined in <a href="15-types.php#commonSuperType" title="Go to &quot;Common Super Type&quot;" >section commonSuperType</a>.
-			</p>
-			<a name="ifExpression_7" ></a>
-			<h2>Examples</h2>
-			<p>
-			<ul>
-			  <li><span class="inlinecode"><span class="keyword">if</span>&nbsp;(isFoo)&nbsp;<span class="keyword">this</span>&nbsp;<span class="keyword">else</span>&nbsp;that</span></li>
-			  <li><span class="inlinecode"><span class="keyword">if</span>&nbsp;(isFoo)&nbsp;{&nbsp;<span class="keyword">this</span>&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(thatFoo)&nbsp;{&nbsp;that&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{&nbsp;other&nbsp;}</span></li>
-			  <li><span class="inlinecode"><span class="keyword">if</span>&nbsp;(isFoo)&nbsp;<span class="keyword">this</span></span></li>
-			</ul>
+			The type of an if expression is the common super type of the return types <span class="inlinecode">T1</span> and <span class="inlinecode">T2</span> 
+			of the two expression <span class="inlinecode">e1</span> and <span class="inlinecode">e2</span>. 
 			</p>
 		<a name="switchExpression" ></a>
 		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
@@ -915,12 +906,10 @@
 			<div class="toc">
 			  <ul>
 			    <li><a href="30-expressions.php#switchExpression_7" >Type guards</a></li>
-			    <li><a href="30-expressions.php#switchExpression_8" >Typing</a></li>
-			    <li><a href="30-expressions.php#switchExpression_9" >Examples</a></li>
 			  </ul>
 			</div>
 			<p>
-			The switch expression is a bit different from Java's. First, there is no fall through which means 
+			The switch expression is different from Java's. First, there is no fall through which means 
 			only one case is evaluated at most. Second, the use of switch is not limited to certain values but 
 			can be used for any object reference instead.
 			 
@@ -962,9 +951,9 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">switch</span>&nbsp;myString&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;myString.length&gt;5&nbsp;:&nbsp;<span class="string">&apos;a&nbsp;long&nbsp;string.&apos;</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">&apos;foo&apos;</span>&nbsp;:&nbsp;<span class="string">&apos;It&apos;</span>s&nbsp;a&nbsp;foo.<span class="string">&apos;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;default&nbsp;:&nbsp;&apos;</span>It<span class="string">&apos;s&nbsp;a&nbsp;short&nbsp;non-foo&nbsp;string.&apos;</span><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;myString.length&gt;5&nbsp;:&nbsp;<span class="string">"a&nbsp;long&nbsp;string."</span><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">&apos;some&apos;</span>&nbsp;:&nbsp;<span class="string">"It&apos;s&nbsp;some&nbsp;string."</span><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;<span class="string">"It&apos;s&nbsp;another&nbsp;short&nbsp;string."</span><br/>
 						}
 					</p>
 				</div>
@@ -974,7 +963,7 @@
 			<h2>Type guards</h2>
 			<p>
 			In addition to the case guards one can add a so called <em>Type Guard</em> which is syntactically just a
-			<a href="15-types.php" title="Go to &quot;Types&quot;">type reference</a> preceding the than optional case keyword. The compiler will use that type
+			<a href="15-types.php" title="Go to &quot;Types&quot;">type reference</a> preceding an optional case keyword. The compiler will use that type
 			for the switch expression in subsequent expressions. Example:
 			<div class="literallayout">
 				<div class="incode">
@@ -991,53 +980,10 @@
 			</p>
 			<p>
 			Only if the switch value passes a type guard, i.e. an instanceof operation returns <span class="inlinecode">true</span>, the 
-			case's guard expression is executed using the same semantics explained in previously. If the switch 
+			case's guard expression is executed using the same semantics explained previously. If the switch 
 			expression contains an explicit declaration of a local variable or the expression references a local 
 			variable, the type guard acts like a cast, that is all references to the switch value will be of the 
 			type specified in the type guard.
-			</p>
-			<a name="switchExpression_8" ></a>
-			<h2>Typing</h2>
-			<p>
-			The return type of a switch expression is computed using the rules defined in <a href="15-types.php#commonSuperType" title="Go to &quot;Common Super Type&quot;" >section commonSuperType</a>. 
-			The set of types from which the common super type is computed corresponds to the types of each case's 
-			result expression. In case a switch expression's type is computed using the expected type from the 
-			context, it is sufficient to return the expected type if all case branches types conform to the 
-			expected type.
-			</p>
-			<a name="switchExpression_9" ></a>
-			<h2>Examples</h2>
-			<p>
-			<ul>
-			  <li>
-			  		<div class="literallayout">
-			  	<div class="incode">
-			  		<p class="code">
-			  			<span class="keyword">switch</span>&nbsp;foo&nbsp;{<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;Entity&nbsp;:&nbsp;foo.superType.name<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;Datatype&nbsp;:&nbsp;foo.name<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalStateException<br/>
-			  			}
-			  		</p>
-			  	</div>
-			  </div>
-			  
-			  </li>
-			  <li>
-			  		<div class="literallayout">
-			  	<div class="incode">
-			  		<p class="code">
-			  			<span class="keyword">switch</span>&nbsp;x&nbsp;:&nbsp;foo.bar.complicated(<span class="string">&apos;hello&apos;</span>,42)&nbsp;{<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">"hello42"</span>&nbsp;:&nbsp;...<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;x.length&lt;2&nbsp;:&nbsp;...<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;....<br/>
-			  			}
-			  		</p>
-			  	</div>
-			  </div>
-			  
-			  </li>
-			</ul>
 			</p>
 		<a name="blocks" ></a>
 		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
@@ -1166,8 +1112,8 @@
 			  <li><div class="literallayout">
 			  	<div class="incode">
 			  		<p class="code">
-			  			<span class="keyword">while</span>&nbsp;(&nbsp;(&nbsp;i&nbsp;=&nbsp;i&nbsp;+&nbsp;1&nbsp;)&nbsp;&lt;&nbsp;max&nbsp;)&nbsp;<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(&nbsp;<span class="string">"foo"</span>&nbsp;)
+			  			<span class="keyword">while</span>&nbsp;((i=i+1)&nbsp;&lt;&nbsp;max)&nbsp;<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>)
 			  		</p>
 			  	</div>
 			  </div>

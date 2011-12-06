@@ -15,7 +15,6 @@
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
 		<a href="15-types.php">Types</a></div>
 		<ul style="display: none;" id="subToc_15-types.html">
-		<li id="15-types.html#commonSuperType" ><a href="15-types.php#commonSuperType" >Common Super Type</a></li>
 		<li id="15-types.html#Xbase_Types_ConformanceRules" ><a href="15-types.php#Xbase_Types_ConformanceRules" >Conformance and Conversion</a></li>
 		</ul>
 		</li>
@@ -116,7 +115,7 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">class</span>&nbsp;HelloWorld&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">static</span>&nbsp;main(String[]&nbsp;args)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">void</span>&nbsp;main(String[]&nbsp;args)&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;println(<span class="string">"Hello&nbsp;World"</span>)<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 						}
@@ -138,9 +137,8 @@
 						<br/>
 						@SuppressWarnings(<span class="string">"all"</span>)<br/>
 						<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;HelloWorld&nbsp;{<br/>
-						&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;String&nbsp;main(<span class="keyword">final</span>&nbsp;String[]&nbsp;args)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;_println&nbsp;=&nbsp;InputOutput.&lt;String&gt;println(<span class="string">"Hello&nbsp;World"</span>);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_println;<br/>
+						&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">void</span>&nbsp;main(<span class="keyword">final</span>&nbsp;String[]&nbsp;args)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;InputOutput.&lt;String&gt;println(<span class="string">"Hello&nbsp;World"</span>);<br/>
 						&nbsp;&nbsp;}<br/>
 						}
 					</p>
@@ -152,9 +150,10 @@
 			<p>
 			The only surprising fact in the generated Java code may be the library class <span class="inlinecode">InputOutput</span>. Many 
 			features of Xtend are not built into the language itself but provided via small libraries 
-			<em>org.eclipse.xtend.lib.jar</em>. This library and its dependencies have to reside on the classpath of each
-			Xtend class. The libraries provide a lot of useful helper methods to create and manipulate collections,
-			default operator bindings for primitives and other handy things the generated Java code relies on.  
+			<em>org.eclipse.xtend2.lib.jar</em>. This library and its dependencies have to reside on the classpath of each
+			Xtend class. The libraries provide a lot of useful helper methods to create and manipulate collections.
+			They define default operator bindings for primitives and contain some other handy things that are used by
+			the generated Java code.  
 			</p>
 			<a name="Tutorial" ></a>
 			<h2>The Xtend Tutorial</h2>

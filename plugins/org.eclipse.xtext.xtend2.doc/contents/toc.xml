@@ -9,8 +9,6 @@
 		</topic>
 	</topic>
 	<topic href="contents/15-types.html#types" label="Types" >
-		<topic href="contents/15-types.html#commonSuperType" label="Common Super Type" >
-		</topic>
 		<topic href="contents/15-types.html#Xbase_Types_ConformanceRules" label="Conformance and Conversion" >
 		</topic>
 	</topic>
@@ -20,9 +18,9 @@
 		<topic href="contents/20-classes-and-functions.html#imports" label="Imports" >
 		</topic>
 		<topic href="contents/20-classes-and-functions.html#Xtend_ClassDeclaration" label="Class Declaration" >
-			<topic href="contents/20-classes-and-functions.html#Xtend_ClassDeclaration_3" label="Inheritance" >
+			<topic href="contents/20-classes-and-functions.html#Xtend_ClassDeclaration_2" label="Inheritance" >
 			</topic>
-			<topic href="contents/20-classes-and-functions.html#Xtend_ClassDeclaration_4" label="Examples" >
+			<topic href="contents/20-classes-and-functions.html#Xtend_ClassDeclaration_3" label="Examples" >
 			</topic>
 		</topic>
 		<topic href="contents/20-classes-and-functions.html#constructors" label="Constructors" >
@@ -46,7 +44,7 @@
 		<topic href="contents/20-classes-and-functions.html#Annotations" label="Annotations" >
 		</topic>
 		<topic href="contents/20-classes-and-functions.html#extensionMethods" label="Extension Methods" >
-			<topic href="contents/20-classes-and-functions.html#extensionMethods_4" label="Local Methods" >
+			<topic href="contents/20-classes-and-functions.html#extensionMethods_3" label="Local Extension Methods" >
 			</topic>
 			<topic href="contents/20-classes-and-functions.html#libraryExtensions" label="Library Extensions" >
 			</topic>
@@ -110,15 +108,9 @@
 		<topic href="contents/30-expressions.html#ifExpression" label="If Expression" >
 			<topic href="contents/30-expressions.html#Xtend_Expressions_IfTypeInference" label="Typing" >
 			</topic>
-			<topic href="contents/30-expressions.html#ifExpression_7" label="Examples" >
-			</topic>
 		</topic>
 		<topic href="contents/30-expressions.html#switchExpression" label="Switch Expression" >
 			<topic href="contents/30-expressions.html#switchExpression_7" label="Type guards" >
-			</topic>
-			<topic href="contents/30-expressions.html#switchExpression_8" label="Typing" >
-			</topic>
-			<topic href="contents/30-expressions.html#switchExpression_9" label="Examples" >
 			</topic>
 		</topic>
 		<topic href="contents/30-expressions.html#blocks" label="Blocks" >
