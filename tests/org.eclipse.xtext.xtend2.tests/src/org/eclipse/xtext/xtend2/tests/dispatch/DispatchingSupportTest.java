@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.util.Pair;
@@ -33,6 +34,17 @@ public class DispatchingSupportTest extends AbstractXtend2TestCase {
 	
 	@Inject
 	private DispatchingSupport dispatchingSupport;
+	
+	public void testIgnoreVoidInParameterTypeInferrence() throws Exception {
+		XtendClass clazz = clazz("class X {\n" +
+				" def dispatch foo(Integer i) {null}" +
+				" def dispatch foo(Number n) {null}" +
+				" def dispatch foo(Void ignore) {null}" +
+			"}");
+		JvmOperation dispatchMethod = dispatchingSupport.findSyntheticDispatchMethod(clazz, Tuples.create("foo", 1));
+		JvmFormalParameter firstParameter = dispatchMethod.getParameters().get(0);
+		assertEquals("java.lang.Number", firstParameter.getParameterType().getIdentifier());
+	}
 	
 	public void testSort_00() throws Exception {
 		XtendClass clazz = clazz("class X {\n" +

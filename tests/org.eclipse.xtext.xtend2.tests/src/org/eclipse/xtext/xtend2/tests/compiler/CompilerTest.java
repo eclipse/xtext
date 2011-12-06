@@ -1834,20 +1834,16 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testDispatchFunction_07() throws Exception {
-		final String definition = "foo(p1)} " +
+		final String definition = 
+				"def invokeMe(String p1) { foo(p1) }\n" +
 				"def dispatch foo (String string) {\n" + 
 				"    string + string\n" + 
 				"}\n" + 
 				"def dispatch foo (Void nullCase) {\n" + 
-				"    'literal'\n";
-		invokeAndExpect("zonkzonk", definition, "zonk");
-		invokeAndExpect("literal", definition, new Object[]{ null });
-		try {
-			invokeAndExpect(null, definition, Integer.valueOf(1));
-			fail();
-		} catch (InvocationTargetException e) {
-			assertTrue(e.getCause() instanceof IllegalArgumentException);
-		}
+				"    'literal'\n" +
+				"}";
+		invokeAndExpect2("zonkzonk", definition, "invokeMe", "zonk");
+		invokeAndExpect3("literal", definition, "invokeMe", new Class[] { String.class }, new Object[]{ null });
 	}
 	
 	public void testDispatchFunction_08() throws Exception {
