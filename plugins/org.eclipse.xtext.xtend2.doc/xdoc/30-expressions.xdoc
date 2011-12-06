@@ -67,7 +67,7 @@ ul[
 
 section2:nullLiteral[Null Literal]
 
-The null pointer literal is, like in Java, code[Xtend][null]. It is a member of any reference type and
+The null pointer literal is code[Xtend][null]. It is a member of any reference type and
 the only member of the type code[java.lang.Void].
 ul[
 	item[code[Xtend][null]]
@@ -79,20 +79,18 @@ section2:typeLiteral[Type Literals]
 Type literals are specified using the keyword code[Xtend][typeof] :
 ul[
   item[code[Xtend][typeof(java.lang.String)] which yields code[Java][java.lang.String.class]]
+  in the generated Java code.
 ]
 
 
 section2:functionTypes[Function Types]
 
 Xbase introduces ref:closures[closures], and therefore an additional function 
-type signature. On the JVM-Level a closure (or more generally any function object) is just an 
-instance of one of the types in code[org.eclipse.xtext.xbase.lib.Function*], depending on the 
+type signature. On the Java level a closure (or more generally any function object) is just an 
+instance of one of the types in codeRef[org.eclipse.xtext.xbase.lib.Functions], depending on the 
 number of arguments. However, as closures are a very important language feature, a special 
-sugared syntax for function types has been introduced. So instead of writing 
-code[Function1<String,Boolean>] one can write code[(String)=>Boolean].
-
-Primitives cannot be used in function types.
-
+syntax for function types has been introduced. So instead of writing 
+code[Function1<String,Boolean>] one can write code[Xtend][(String)=>boolean].
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -105,7 +103,7 @@ The conformance rules for casts are defined in the
 link[http://java.sun.com/docs/books/jls/third_edition/html/conversions.html#5.5][Java Language Specification].
 Here is an example:
 ul[
-	item[code[Xtend][my.foo as MyType]]
+	item[code[Xtend][something as MyClass]]
 ]
 
 
@@ -187,27 +185,25 @@ ol[
 section2[Examples]
 
 ul[
-	item[code[Xtend][my.foo = 23]]
+	item[code[Xtend][my.property = 23]]
 	item[code[Xtend][myList += 23]]
 	item[code[Xtend][x > 23 && y < 23]]
 	item[code[Xtend][x && y || z]]
 	item[code[Xtend][1 + 3 * 5 * (- 23)]]
 	item[code[Xtend][!(x)]]
-	item[code[Xtend][my.foo = 23]]
-	item[code[Xtend][my.foo = 23]]
 ]
 
 
 section2:propertyAssignment[Assignments]
 
 ref:variableDeclaration[Local variables] can be reassigned using the code[=] operator. Also 
-properties can be set using this operator: Given the expression 
+properties can be set using this operator given the following expression: 
 code[Xtend][
 	myObj.myProperty = "foo"
 ]
 
 The compiler first looks up whether there is an accessible Java Field called code[myProperty] on 
-the type of code[myObj]. If there is one it translates to the following Java expression :
+the type of code[myObj]. If there exists such a field it translates to the following Java expression:
 code[Java][
 	myObj.myProperty = "foo";
 ]
@@ -217,9 +213,9 @@ assignments the return value is the value returned from the corresponding Java e
 is the assigned value.
 
 If there is no accessible field on the left operand's type, a method called 
-code[setMyProperty(OneArg)] (JavaBeans setter method) is looked up. It has to take one argument 
+code[setMyProperty(..)] (JavaBeans setter method) is looked up. It has to take one argument 
 of the type (or a super type) of the right hand operand. The return value will be whatever the 
-setter method returns (which usually is code[null]). As a result the compiler translates to :
+setter method returns (which usually is code[Xtend][void]). As a result the compiler translates to:
 code[Java][
 	myObj.setMyProperty("foo")
 ]
@@ -233,7 +229,7 @@ Variable declarations are only allowed within ref:blocks[blocks]. They are visib
 subsequent expressions in the block. 
 
 A variable declaration starting with the keyword code[Xtend][val] denotes a so called value, which
-is essentially a final (i.e. unsettable) variable. In rare cases, one needs to update the value of 
+is essentially a final (i.e. unsettable) variable. In some cases, one needs to update the value of 
 a reference. In such situations the variable needs to be declared with the keyword code[Xtend][var], 
 which stands for 'variable'.
 
@@ -242,7 +238,7 @@ code[Xtend][
 {
 	val max = 100
 	var i = 0
-	while (i > max) {
+	while (i < max) {
 		println("Hi there!")
 		i = i +1
 	}
@@ -262,7 +258,7 @@ The return type of a variable declaration expression is always code[Xtend][void]
 The type of the variable itself can either be explicitly declared or be inferred from the right hand side
 expression. Here is an example for an explicitly declared type:
 code[Xtend][
-	var List<String> msg = new ArrayList<String>(); 
+	var List<String> msg = new ArrayList(); 
 ]
 
 In such cases, the right hand expression's type must ref:Xbase_Types_ConformanceRules[conform] to the type 
@@ -294,7 +290,7 @@ code[Xtend][
 the compiler first looks for an accessible field in the type of code[Xtend][myObj]. If no such field 
 exists it looks for a method called code[Java][myProperty()] before it looks for the getter methods 
 code[Java][getMyProperty()]. If none of these members can be found the expression is unbound and a 
-compiliation error is thrown.
+compiliation error is indicated.
 
 
 section2:implicitVariables[Implicit Variables e[this] and e[it]]
@@ -345,7 +341,7 @@ section:constructorCall[Constructor Call]
 Construction of objects is done by invoking Java constructors. The syntax is exactly as in Java, e.g.
 ul[
 	item[code[Xtend][new String()]]
-	item[code[Xtend][new java.util.ArrayList<java.math.BigDecimal>()]]
+	item[code[Xtend][new ArrayList<BigDecimal>()]]
 ]
 
 
@@ -428,7 +424,7 @@ In order to allow seamless integration with existing Java libraries such as the 
 are automatically coerced to expected types if those types declare only one method (methods from code[java.lang.Object]
 do not count).
 
-As a result given the method code[java.util.Collections.sort(List<T>, Comparator<? super T>)] is available
+As a result given the method code[IterableExtensions.sort(Iterable<T>, Comparator<? super T>)] is available
 as an extension method, it can be invoked like this
 
 code[Xtend][
@@ -482,7 +478,7 @@ def createNode(Node parent, (Node)=>Void initializer) {
 	child
 }
 
-newNode(null) \[
+createNode(null) \[
 	label="root"
 	children += createNode \[
 		label="child0"
@@ -521,20 +517,11 @@ section2:Xtend_Expressions_IfTypeInference[Typing]
 The type of an if expression is calculated by the return types code[T1] and code[T2] of the two 
 expression code[e1] and code[e2]. It uses the rules defined in ref:commonSuperType.
 
-section2[Examples]
-
-ul[
-	item[code[Xtend][if (isFoo) this else that]]
-	item[code[Xtend][if (isFoo) { this } else if (thatFoo) { that } else { other }]]
-	item[code[Xtend][if (isFoo) this]]
-]
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:switchExpression[Switch Expression]
 
-The switch expression is a bit different from Java's. First, there is no fall through which means 
+The switch expression is different from Java's. First, there is no fall through which means 
 only one case is evaluated at most. Second, the use of switch is not limited to certain values but 
 can be used for any object reference instead.
  
@@ -566,15 +553,15 @@ Example:
 code[Xtend][
 switch myString {
 	case myString.length>5 : 'a long string.'
-	case 'foo' : 'It's a foo.'
-	default : 'It's a short non-foo string.'
+	case 'some' : 'It's some string.'
+	default : 'It's another short string.'
 }
 ]
 
 section2[Type guards]
 
 In addition to the case guards one can add a so called e[Type Guard] which is syntactically just a
-ref:types[type reference] preceding the than optional case keyword. The compiler will use that type
+ref:types[type reference] preceding an optional case keyword. The compiler will use that type
 for the switch expression in subsequent expressions. Example:
 code[Xtend][
 var Object x = ...;
@@ -586,41 +573,41 @@ switch x {
 ]
 
 Only if the switch value passes a type guard, i.e. an instanceof operation returns code[true], the 
-case's guard expression is executed using the same semantics explained in previously. If the switch 
+case's guard expression is executed using the same semantics explained previously. If the switch 
 expression contains an explicit declaration of a local variable or the expression references a local 
 variable, the type guard acts like a cast, that is all references to the switch value will be of the 
 type specified in the type guard.
 
-section2[Typing]
-
-The return type of a switch expression is computed using the rules defined in ref:commonSuperType. 
-The set of types from which the common super type is computed corresponds to the types of each case's 
-result expression. In case a switch expression's type is computed using the expected type from the 
-context, it is sufficient to return the expected type if all case branches types conform to the 
-expected type.
-
-section2[Examples]
-
-ul[
-	item[
-		code[Xtend][
-			switch foo {
-				Entity : foo.superType.name
-				Datatype : foo.name
-				default : throw new IllegalStateException
-			}
-		]
-	]
-	item[
-		code[Xtend][
-			switch x : foo.bar.complicated('hello',42) {
-				case "hello42" : ...
-				case x.length<2 : ...
-				default : ....
-			}
-		]
-	]
-]
+%% section2[Typing]
+%% 
+%% The return type of a switch expression is computed using the rules defined in ref:commonSuperType. 
+%% The set of types from which the common super type is computed corresponds to the types of each case's 
+%% result expression. In case a switch expression's type is computed using the expected type from the 
+%% context, it is sufficient to return the expected type if all case branches types conform to the 
+%% expected type.
+%% 
+%% section2[Examples]
+%% 
+%% ul[
+%% 	item[
+%% 		code[Xtend][
+%% 			switch foo {
+%% 				Entity : foo.superType.name
+%% 				Datatype : foo.name
+%% 				default : throw new IllegalStateException
+%% 			}
+%% 		]
+%% 	]
+%% 	item[
+%% 		code[Xtend][
+%% 			switch x : foo.bar.complicated('hello',42) {
+%% 				case "hello42" : ...
+%% 				case x.length<2 : ...
+%% 				default : ....
+%% 			}
+%% 		]
+%% 	]
+%% ]
 
 
 
