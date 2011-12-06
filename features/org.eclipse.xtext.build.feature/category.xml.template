@@ -18,18 +18,26 @@
    <feature id="org.eclipse.xtext.xtext" version="0.0.0">
       <category name="xtext"/>
    </feature>
-   <feature id="org.eclipse.xtext.xtend2.sdk" version="0.0.0">
-      <category name="xtext"/>
-   </feature>
    <feature id="org.eclipse.xtext.xbase" version="0.0.0">
       <category name="xtext"/>
    </feature>
-   <category-def name="xtext" label="TMF Xtext${package.qualifier}">
+   <feature id="org.eclipse.xtext.xtend2.sdk" version="0.0.0">
+      <category name="xtend2"/>
+   </feature>
+   <feature id="org.eclipse.xtext.xtend2.m2e" version="0.0.0">
+      <category name="xtend2"/>
+   </feature>
+   <category-def name="xtext" label="Xtext${package.qualifier}">
       <description>
         With Xtext you can easily create your own programming languages
         and domain-specific languages (DSLs). The framework supports the
         development of language infrastructures including compilers and
         interpreters as well as full blown Eclipse-based IDE integration. 
+      </description>
+   </category-def>
+   <category-def name="xtend2" label="Xtend2${package.qualifier}">
+      <description>
+        A programming language for Java developers. 
       </description>
    </category-def>
 </site>
