@@ -55,15 +55,22 @@ public class DispatchMethodCompileStrategy implements Functions.Function1<Import
 	public CharSequence apply(ImportManager importManager) {
 		final StringBuilderBasedAppendable a = new StringBuilderBasedAppendable(importManager);
 		boolean needsElse = true;
+		int parameterCount = dispatchOperation.getParameters().size();
+		boolean[] isVoidParameterPresent = new boolean[parameterCount];
+		for(int i = 0; i < parameterCount; i++) {
+			for (JvmOperation operation : sortedDispatchOperations) {
+				JvmFormalParameter parameter = operation.getParameters().get(i);
+				isVoidParameterPresent[i] |= typeReferences.is(parameter.getParameterType(), Void.class);
+			}
+		}
 		for (JvmOperation operation : sortedDispatchOperations) {
-			Iterator<JvmFormalParameter> iter1 = dispatchOperation.getParameters().iterator();
 			final List<Later> laters = newArrayList();
-			for (Iterator<JvmFormalParameter> iter2 = operation.getParameters().iterator(); iter2.hasNext();) {
-				JvmFormalParameter p1 = iter1.next();
-				JvmFormalParameter p2 = iter2.next();
+			for (int i = 0; i < parameterCount; i++) {
+				final JvmFormalParameter p1 = dispatchOperation.getParameters().get(i);
+				final JvmFormalParameter p2 = operation.getParameters().get(i);
 				final JvmTypeReference type = p2.getParameterType();
 				final String name = getVarName(p1, a);
-				if (!typeConformanceComputer.isConformant(p2.getParameterType(), p1.getParameterType(), true)) {
+				if (!typeConformanceComputer.isConformant(p2.getParameterType(), p1.getParameterType(), true) || isVoidParameterPresent[i]) {
 					if (typeReferences.is(type, Void.class)) {
 						laters.add(new Later() {
 							@Override
@@ -81,8 +88,12 @@ public class DispatchMethodCompileStrategy implements Functions.Function1<Import
 							public void exec() {
 								if (laters.size() > 1)
 									a.append("(");
-								a.append(name).append(" instanceof ");
-								a.append(primitives.asWrapperTypeIfPrimitive(type).getType());
+								if (typeConformanceComputer.isConformant(p2.getParameterType(), p1.getParameterType(), true)) {
+									a.append(name).append(" != null");
+								} else {
+									a.append(name).append(" instanceof ");
+									a.append(primitives.asWrapperTypeIfPrimitive(type).getType());
+								}
 								if (laters.size() > 1)
 									a.append(")");
 							}

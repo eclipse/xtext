@@ -175,9 +175,18 @@ public class Xtend2Resource extends XbaseResource {
 		List<JvmTypeReference> references = newArrayList();
 		for (T element : iterable) {
 			JvmTypeReference apply = mapping.apply(element);
-			if (!typeReferences.isNullOrProxy(apply)) {
+			if (!typeReferences.isNullOrProxy(apply) && !typeReferences.is(apply, Void.class)) {
 				references.add(apply);
 			}
+		}
+		if (references.isEmpty()) {
+			// broken model - include Void.class in parameter type computation
+			for (T element : iterable) {
+				JvmTypeReference apply = mapping.apply(element);
+				if (!typeReferences.isNullOrProxy(apply)) {
+					references.add(apply);
+				}
+			}	
 		}
 		JvmTypeReference result = jvmTypeConformanceComputer.getCommonSuperType(references);
 		while(result instanceof JvmMultiTypeReference) {
