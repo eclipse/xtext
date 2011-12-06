@@ -46,7 +46,7 @@ translated to Java source code. The syntax should look very familiar. Here is an
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;zip:&nbsp;String<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;city:&nbsp;String<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -172,7 +172,7 @@ Model:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;greetings+=Greeting*;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<br/>
 Greeting:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;Hello&apos;</span>&nbsp;name=ID&nbsp;<span class="string">&apos;!&apos;</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;Hello&apos;</span>&nbsp;name=ID&nbsp;<span class="string">&apos;!&apos;</span>;
 </p>
 </div>
 </div>
@@ -223,8 +223,7 @@ Operation:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;(&apos;</span>(params+=FullJvmFormalParameter&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;params+=FullJvmFormalParameter)*)?<span class="string">&apos;)&apos;</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type=JvmTypeReference&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body=XBlockExpression;<br/>
-<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body=XBlockExpression;
 </p>
 </div>
 </div>
@@ -240,7 +239,7 @@ Let&apos;s have a look at what the different grammar constructs mean:
 		<div class="incode">
 		<p class="code">
 		<span class="keyword">grammar</span>&nbsp;org.example.domainmodel.DomainModel&nbsp;<span class="keyword">with</span><br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.xbase.Xbase<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.xbase.Xbase
 		</p>
 		</div>
 		</div>
@@ -259,7 +258,7 @@ Let&apos;s have a look at what the different grammar constructs mean:
 		<div class="incode">
 		<p class="code">
 		DomainModel:<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;elements+=AbstractElement*;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;elements+=AbstractElement*;
 		</p>
 		</div>
 		</div>
@@ -276,7 +275,7 @@ Let&apos;s have a look at what the different grammar constructs mean:
 		<div class="incode">
 		<p class="code">
 		AbstractElement:<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;PackageDeclaration&nbsp;|&nbsp;Entity&nbsp;|&nbsp;Import;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;PackageDeclaration&nbsp;|&nbsp;Entity&nbsp;|&nbsp;Import;
 		</p>
 		</div>
 		</div>
@@ -291,7 +290,7 @@ Let&apos;s have a look at what the different grammar constructs mean:
 		PackageDeclaration:<br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;package&apos;</span>&nbsp;name=QualifiedName&nbsp;<span class="string">&apos;{&apos;</span><br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elements+=AbstractElement*<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;}&apos;</span>;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;}&apos;</span>;
 		</p>
 		</div>
 		</div>
@@ -315,7 +314,7 @@ Let&apos;s have a look at what the different grammar constructs mean:
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;import&apos;</span>&nbsp;importedNamespace=QualifiedNameWithWildCard;<br/>
 		<br/>
 		QualifiedNameWithWildCard&nbsp;:<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;QualifiedName&nbsp;&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;<span class="string">&apos;*&apos;</span>)?;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;QualifiedName&nbsp;&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;<span class="string">&apos;*&apos;</span>)?;
 		</p>
 		</div>
 		</div>
@@ -332,7 +331,7 @@ Let&apos;s have a look at what the different grammar constructs mean:
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;entity&apos;</span>&nbsp;name=ValidID&nbsp;<br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;extends&apos;</span>&nbsp;superType=JvmTypeReference)?&nbsp;<span class="string">&apos;{&apos;</span><br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;features+=Feature*<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;}&apos;</span>;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;}&apos;</span>;
 		</p>
 		</div>
 		</div>
@@ -352,7 +351,7 @@ Let&apos;s have a look at what the different grammar constructs mean:
 		<div class="incode">
 		<p class="code">
 		Feature:<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;Property&nbsp;|&nbsp;Operation;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;Property&nbsp;|&nbsp;Operation;
 		</p>
 		</div>
 		</div>
@@ -366,7 +365,7 @@ Let&apos;s have a look at what the different grammar constructs mean:
 		<div class="incode">
 		<p class="code">
 		Property:<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;name=ValidID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type=JvmTypeReference;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;name=ValidID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type=JvmTypeReference;
 		</p>
 		</div>
 		</div>
@@ -383,7 +382,7 @@ Let&apos;s have a look at what the different grammar constructs mean:
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;(&apos;</span>(params+=FullJvmFormalParameter&nbsp;<br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;params+=FullJvmFormalParameter)*)?<span class="string">&apos;)&apos;</span><br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type=JvmTypeReference&nbsp;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;body=XBlockExpression;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;body=XBlockExpression;
 		</p>
 		</div>
 		</div>
@@ -398,7 +397,7 @@ Let&apos;s have a look at what the different grammar constructs mean:
 		<p class="code">
 		{<br/>
 		&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"Hello&nbsp;World"</span>&nbsp;+&nbsp;<span class="string">"!"</span><br/>
-		}<br/>
+		}
 		</p>
 		</div>
 		</div>
@@ -503,7 +502,7 @@ in the src folder. Please replace its contents with the following :
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;])<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -521,8 +520,7 @@ the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc
 		<p class="code">
 		<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;<span class="keyword">void</span>&nbsp;infer(Entity&nbsp;element,&nbsp;<br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IAcceptor&lt;JvmDeclaredType&gt;&nbsp;acceptor,&nbsp;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">boolean</span>&nbsp;isPrelinkingPhase)&nbsp;{&nbsp;<span class="comment">//&nbsp;(1)<br/>
-		</span>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">boolean</span>&nbsp;isPrelinkingPhase)&nbsp;{&nbsp;<span class="comment">//&nbsp;(1)</span>
 		</p>
 		</div>
 		</div>
@@ -537,7 +535,7 @@ the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc
 		<div class="incode">
 		<p class="code">
 		acceptor.accept(element.toClass(element.fullyQualifiedName)&nbsp;[&nbsp;<br/>
-		...<br/>
+		...
 		</p>
 		</div>
 		</div>
@@ -553,14 +551,7 @@ the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc
 	</li>
 	<li>
 		
-		  	<div class="literallayout">
-		<div class="incode">
-		<p class="code">
-		documentation&nbsp;=&nbsp;element.documentation<br/>
-		</p>
-		</div>
-		</div>
-		
+		  	<span class="inlinecode">documentation&nbsp;=&nbsp;element.documentation</span>
 		    
 		    Here for instance we assign some JavaDoc to the newly created element. The assignment is translated
 		    to an invocation of the method 
@@ -584,7 +575,7 @@ the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;...<br/>
 		</span>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 		&nbsp;&nbsp;}<br/>
-		}<br/>
+		}
 		</p>
 		</div>
 		</div>
@@ -604,7 +595,7 @@ the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc
 		&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toField(feature.name,&nbsp;feature.type)&nbsp;<span class="comment">//&nbsp;(5)<br/>
 		</span>&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toSetter(feature.name,&nbsp;feature.type)<br/>
 		&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toGetter(feature.name,&nbsp;feature.type)<br/>
-		}<br/>
+		}
 		</p>
 		</div>
 		</div>
@@ -625,7 +616,7 @@ the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc
 		&nbsp;&nbsp;&nbsp;&nbsp;documentation&nbsp;=&nbsp;feature.documentation<br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;body&nbsp;=&nbsp;feature.body<br/>
 		&nbsp;&nbsp;]<br/>
-		}<br/>
+		}
 		</p>
 		</div>
 		</div>
