@@ -1,8 +1,8 @@
 chapter:Xtend_Expressions[Expressions]
 
 There are no statements in Xtend. Instead, everything is an expression and has a return value. That
-allows to use every Xtend expression on the right hand side of an assignment. For example, as a code[Xtend][try
-catch] is an expression the following code is legal in Xtend: 
+allows to use every Xtend expression on the right hand side of an assignment. For example, as a 
+code[Xtend][try catch] is an expression the following code is legal in Xtend: 
 code[Xtend][
 	val data = try {
 		fileContentsToString('data.txt')
@@ -31,27 +31,29 @@ section2:stringLiterals[String Literals]
 A string literal is a valid expression and returns an instance of code[java.lang.String] of the given value.
 String literals are enclosed by a pair of single quotes or double quotes allowing to use the respective
 other unquoted inside the string. Special characters can be quoted with a backslash or defined using
-Java's unicode notation. On the contrary to Java, Xtend's strings can span multiple lines. 
-ul[
-	item[code['Hello World !']]
-	item[code["Hello World !"]]
-	item[code['Hello "World" !']]
-	item[code["Hello \"World\" !"]]
-	item[code['\u00a1Hola el mundo!']]
-	item[code["Hello 
+Java's unicode notation. On the contrary to Java, Xtend's strings can span multiple lines without the
+need to quote newline characters.
+code[Xtend][
+	'Hello World !'
+	"Hello World !"
+	'Hello "World" !'
+	"Hello \"World\" !"
+	'\u00a1Hola el mundo!'
+	"Hello 
+	
 		World !"
-	]]
 ]
 
 
 section2:integerLiterals[Integer Literals]
 
 An integer literal creates an code[Xtend][int]. There is no signed integer. If you put a minus 
-operator in front of an integer literal it is taken as a UnaryOperator with one argument (the positive 
-integer literal).
-ul[
-	item[code[42]]
-	item[code[234254]]
+operator in front of an integer literal it is taken as a code[UnaryOperator] with one argument 
+(the positive integer literal).
+code[Xtend][
+	42
+	234254
+	-1 // an expression consisting of the unary - operator and an integer literal  
 ]
 
 
@@ -59,27 +61,19 @@ section2:booleanLiteral[Boolean Literals]
 
 There are two boolean literals, code[Xtend][true] and code[Xtend][false] which correspond to their 
 Java counterpart of type code[Xtend][boolean]. 
-ul[
-	item[code[Xtend][true]]
-	item[code[Xtend][false]]
-]
 
 
 section2:nullLiteral[Null Literal]
 
 The null pointer literal is code[Xtend][null]. It is a member of any reference type and
 the only member of the type code[java.lang.Void].
-ul[
-	item[code[Xtend][null]]
-]
 
 
 section2:typeLiteral[Type Literals]
 
 Type literals are specified using the keyword code[Xtend][typeof] :
-ul[
-  item[code[Xtend][typeof(java.lang.String)] which yields code[Java][java.lang.String.class]
-  in the generated Java code.]
+code[Xtend][
+	typeof(java.lang.String) // yields java.lang.String.class
 ]
 
 
@@ -90,7 +84,13 @@ type signature. On the Java level a closure (or more generally any function obje
 instance of one of the types in codeRef[org.eclipse.xtext.xbase.lib.Functions], depending on the 
 number of arguments. However, as closures are a very important language feature, a special 
 syntax for function types has been introduced. So instead of writing 
-code[Function1<String,Boolean>] one can write code[Xtend][(String)=>boolean].
+code[Xtend][
+	Function1<String,Boolean>
+] 
+one can write 
+code[Xtend][
+	(String)=>boolean
+]
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -101,9 +101,10 @@ Type casts bind stronger than any other operator but weaker than feature calls.
 
 The conformance rules for casts are defined in the 
 link[http://java.sun.com/docs/books/jls/third_edition/html/conversions.html#5.5][Java Language Specification].
-Here is an example:
-ul[
-	item[code[Xtend][something as MyClass]]
+Here are some examples:
+code[Xtend][
+	something as MyClass
+	"" as Object
 ]
 
 
@@ -123,6 +124,7 @@ code[Xtend][
 ]
 
 The following defines the operators and the corresponding Java method signatures / expressions.
+
 table[
 	tr[td[code[e1 += e2]]				td[code[e1.operator_add(e2)]]]
 	tr[td[code[ ]]						td[code[ ]]]
@@ -184,13 +186,13 @@ ol[
 
 section2[Examples]
 
-ul[
-	item[code[Xtend][my.property = 23]]
-	item[code[Xtend][myList += 23]]
-	item[code[Xtend][x > 23 && y < 23]]
-	item[code[Xtend][x && y || z]]
-	item[code[Xtend][1 + 3 * 5 * (- 23)]]
-	item[code[Xtend][!(x)]]
+code[Xtend][
+my.property = 23
+myList += 23
+x > 23 && y < 23
+x && y || z
+1 + 3 * 5 * (- 23)
+!(x)
 ]
 
 
@@ -213,7 +215,7 @@ assignments the return value is the value returned from the corresponding Java e
 is the assigned value.
 
 If there is no accessible field on the left operand's type, a method called 
-code[setMyProperty(..)] (JavaBeans setter method) is looked up. It has to take one argument 
+code[setMyProperty] (JavaBeans setter method) is looked up. It has to take one argument 
 of the type (or a super type) of the right hand operand. The return value will be whatever the 
 setter method returns (which usually is code[Xtend][void]). As a result the compiler translates to:
 code[Java][
@@ -233,7 +235,7 @@ is essentially a final (i.e. unsettable) variable. In some cases, one needs to u
 a reference. In such situations the variable needs to be declared with the keyword code[Xtend][var], 
 which stands for 'variable'.
 
-A typical example for using code[Xtend][var] is a counter in a loop. 
+A typical example for using code[Xtend][var] is a counter in a loop:
 code[Xtend][
 {
 	val max = 100
@@ -261,8 +263,8 @@ code[Xtend][
 	var List<String> msg = new ArrayList(); 
 ]
 
-In such cases, the right hand expression's type must ref:Xbase_Types_ConformanceRules[conform] to the type 
-on the left hand side. 
+In such cases, the type of the right hand expression must ref:Xbase_Types_ConformanceRules[conform] to the type 
+of the expression on the left side. 
 
 Alternatively the type can be left out and will be inferred from the initialization expression:  
 code[Xtend][
@@ -319,9 +321,9 @@ ref:implicitParameter[default parameter name in closures].
 
 section2:nullSafeFeatureCalls[Null-Safe Feature Call]
 
-Checking for null references can make code very unreadable. In many situations it is ok for an 
-expression to return null if a receiver was null. Xtend supports the safe navigation operator 
-code[?.] to make such code more readable.
+Checking for code[Xtend][null] references can make code very unreadable. In many situations it is ok for an 
+expression to return code[Xtend][null] if a receiver was code[Xtend][null]. Xtend supports the safe navigation 
+operator code[?.] to make such code better readable.
 
 Instead of writing 
 code[Java][
@@ -339,9 +341,9 @@ code[Xtend][
 section:constructorCall[Constructor Call]
 
 Construction of objects is done by invoking Java constructors. The syntax is exactly as in Java, e.g.
-ul[
-	item[code[Xtend][new String()]]
-	item[code[Xtend][new ArrayList<BigDecimal>()]]
+code[Xtend][
+	new String()
+	new ArrayList<BigDecimal>()
 ]
 
 
@@ -352,22 +354,21 @@ section:closures[Closures]
 A closure is a literal that defines an anonymous function. A closure also captures the current
 scope, so that any final variables and parameters visible at construction time can be referred to 
 in the closure's expression. 
+code[Xtend][
+	val func = \[String s | s.length>3\]
+]
 
 The surrounding square brackets are optional if the closure is the single argument of a method 
 invocation. That is you can write
 code[Xtend][
 	myList.findFirst(e | e.name==null)
 ]
-
 instead of
 code[Xtend][
 	myList.findFirst(\[e | e.name==null\])
 ]
 
-But in all other cases the square brackets are mandatory:
-code[Xtend][
-	val func = \[String s | s.length>3\]
-]
+But in all other cases the square brackets are mandatory.
 
 
 section2:closuresTypeInference[Typing]
@@ -392,10 +393,10 @@ code[Xtend][
 ]
 
 Here are some more examples:
-ul[
-	item[code[Xtend][\[ | "foo" \]   // closure without parameters]]
-	item[code[Xtend][\[ String s | s.toUpperCase() \] // explicit argument type]]
-	item[code[Xtend][\[ a,b,c | a+b+c \] // inferred argument types]]
+code[Xtend][
+	\[| "foo"\]   // closure without parameters
+	\[String s | s.toUpperCase()\] // explicit argument type
+	\[a,b,c | a+b+c\] // inferred argument types
 ]
 
 
@@ -442,10 +443,9 @@ code[Xtend][
 section2:implicitParameter[Implicit Parameter e[it]]
 
 If a closure has a single parameter whose type can be inferred, the declaration of the parameter can
-be ommitted. Use e[it] to refer to the parameter inside the closure's body.
+be ommitted. Use code[Xtend][it] to refer to the parameter inside the closure's body.
 code[Xtend][
-	val (String)=>String function = \[toUpperCase\] 
-	  // equivalent to \[it | it.toUpperCase\]
+	val (String)=>String function = \[toUpperCase\]  // equivalent to \[it | it.toUpperCase\]
 ]
 
 
@@ -463,8 +463,7 @@ methods, this yields a very concise syntax.
 
 code[Xtend][
 	val fruit = newArrayList('apple', 'pear', 'lemon')
-	fruit.map\[toUpperCase\] 
-	  // same as fruit.map(\[it | it.toUpperCase\])
+	fruit.map\[toUpperCase\]  // same as fruit.map(\[it | it.toUpperCase\])
 ]
 
 This feature is especially useful when you are building object trees. A common pattern is to provide a set 
@@ -493,6 +492,7 @@ class Node {
 			\]
 		\]
 	}
+}
 ]
 
 
@@ -504,7 +504,11 @@ syntax of Java's if statement it behaves like Java's ternary operator
 (code[Java][predicate ? thenPart : elsePart]), i.e. it is an expression that returns a value.
 Consequently, you can use if expressions deeply nested within expressions.
 
-An expression code[Xtend][if (p) e1 else e2] results in either the value code[e1] or code[e2] 
+An expression 
+code[Xtend][
+	if (p) e1 else e2
+] 
+results in either the value code[e1] or code[e2] 
 depending on whether the predicate code[p] evaluates to code[Xtend][true] or code[Xtend][false]. 
 The else part is optional which is a shorthand for code[Xtend][else null]. That means 
 
@@ -518,8 +522,6 @@ code[Xtend][
 	if (foo) x else null
 ]
 
-section2:Xtend_Expressions_IfTypeInference[Typing]
-
 The type of an if expression is the common super type of the return types code[T1] and code[T2] 
 of the two expression code[e1] and code[e2]. 
 
@@ -527,11 +529,11 @@ of the two expression code[e1] and code[e2].
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:switchExpression[Switch Expression]
 
-The switch expression is different from Java's. First, there is no fall through which means 
-only one case is evaluated at most. Second, the use of switch is not limited to certain values but 
-can be used for any object reference instead.
+The code[Xtend][switch] expression is different from Java's. First, there is no fall through which means 
+only one code[Xtend][case] is evaluated at most. Second, the use of code[Xtend][switch] is not limited 
+to certain values but can be used for any object reference instead.
  
-For a switch expression 
+For a code[Xtend][switch] expression 
 code[Xtend][
 switch e {
 	case e1 : er1
@@ -547,8 +549,8 @@ expression contains a variable declaration using the syntax known from ref:forLo
 the value is bound to the given name. Expressions of type code[java.lang.Boolean] or code[boolean] 
 are not allowed in a switch expression.
 
-The guard of each case clause is evaluated until the switch value equals the result of the case's 
-guard expression or if the case's guard expression evaluates to code[true]. Then the right hand 
+The guard of each code[Xtend][case] clause is evaluated until the switch value equals the result of the 
+case's guard expression or if the case's guard expression evaluates to code[true]. Then the right hand 
 expression of the case evaluated and the result is returned.
 
 If none of the guards matches the default expression is evaluated an returned. If no default expression
@@ -650,28 +652,24 @@ code[Xtend][
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:forLoop[For Loop]
 
-The for loop code[Xtend][for (T1 variable : iterableOfT1) expression] is used to execute a certain 
-expression for each element of an array of an instance of code[java.lang.Iterable]. The local 
-code[variable] is final, hence canot be updated. 
+The for loop 
+code[Xtend][
+	for (T1 variable : arrayOrIterable) expression
+] 
+is used to execute a certain expression for each element of an array of an instance of 
+code[java.lang.Iterable]. The local code[variable] is final, hence canot be updated. 
 
 The return type of a for loop is code[Xtend][void]. The type of the local variable can be left out. 
 In that case it is inferred from the type of the array or code[java.lang.Iterable] returned by the 
 iterable expression.
 
-ul[
-	item[
-		code[Xtend][
-			for (String s : myStrings) {
-				doSideEffect(s);
-			}
-		]
-	]
-	item[
-		code[Xtend][
-			for (s : myStrings)
-				doSideEffect(s)
-		]
-	]
+code[Xtend][
+	for (String s : myStrings) {
+		doSideEffect(s)
+	}
+	
+	for (s : myStrings)
+		doSideEffect(s)
 ]
 
 
@@ -679,20 +677,20 @@ ul[
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:whileExpression[While Loop]
 
-A while loop code[Xtend][while (predicate) expression] is used to execute a certain expression 
-unless the predicate is evaluated to code[Xtend][false]. The return type of a while loop is 
-code[Xtend][void].
+A while loop 
+code[Xtend][
+	while (predicate) expression
+] 
+is used to execute a certain expression unless the predicate is evaluated to code[Xtend][false]. 
+The return type of a while loop is code[Xtend][void].
 
-ul[
-	item[code[Xtend][
-		while (true) {
-			doSideEffect("foo");
-		}
-	]]
-	item[code[Xtend][
-		while ((i=i+1) < max) 
-			doSideEffect("foo")
-	]]
+code[Xtend][
+	while (true) {
+		doSideEffect("foo")
+	}
+	
+	while ((i=i+1) < max) 
+		doSideEffect("foo")
 ]
 
 
@@ -700,21 +698,22 @@ ul[
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:doWhileExpression[Do-While Loop]
 
-A do-while loop code[Xtend][do expression while (predicate)] is used to execute a certain 
-expression unless the predicate is evaluated to code[Xtend][false]. The difference to the 
-ref:whileExpression[while loop] is that the execution starts by executing the block once before 
-evaluating the predicate for the first time. The return type of a do-while loop is 
-code[Xtend][void].
+A do-while loop 
+code[Xtend][
+	do expression while (predicate)
+] 
+is used to execute a certain expression unless the predicate is evaluated to code[Xtend][false]. 
+The difference to the ref:whileExpression[while loop] is that the execution starts by executing 
+the block once before evaluating the predicate for the first time. The return type of a do-while 
+loop is code[Xtend][void].
 
-ul[
-	item[code[Xtend][
-		do {
-			doSideEffect("foo");
-		} while (true)
-	]]
-	item[code[Xtend][
-		do doSideEffect("foo") while ((i=i+1)<max)
-	]]
+code[Xtend][
+	do {
+		doSideEffect("foo");
+	} while (true)
+	
+	
+	do doSideEffect("foo") while ((i=i+1)<max)
 ]
 
 
@@ -777,8 +776,11 @@ code[Xtend][
 section:templates[Template Expressions]
 
 Templates allow for readable string concatenation, which is the main thing you do when writing a 
-code generator. Let us have a look at an example of how a typical method with template expressions 
-looks like:
+code generator. Template are surrounded by triple single or double quotes. The text of a template 
+can be interrupted by expressions in french quotes code[Xtend][«»]. One way to type these 
+e[guillemets] is to use content assist inside the template. 
+
+Let us have a look at an example of how a typical method with template expressions looks like:
 
 code[Xtend][
 def toClass(Entity e) '''
@@ -794,11 +796,8 @@ def toClass(Entity e) '''
 '''
 ]
 
-If you are familiar with Xpand, you will notice that it is exactly the same syntax. The difference 
-is, that the template syntax is actually an expression, which means it can occur everywhere where 
-an expression is expected. For instance in conjunction the powerful 
-ref:switchExpression[switch expression]:
-
+A template is actually an expression, which means it can occur everywhere where an expression is
+expected. For instance in conjunction the powerful ref:switchExpression[switch expression]:
 code[Xtend][
 toMember(Member m) {
 	switch m {
