@@ -1,0 +1,51 @@
+document[Xtend User Guide]
+
+codelanguage-def[Xtend][
+	abstract,continue,def,override,for,new,switch,assert,default,goto,package,synchronized,
+	boolean,do,if,private,this,it,break,double,implements,protected,throw,
+	byte,else,import,public,throws,
+	case,enum,instanceof,return,
+	catch,extends,int,short,try,
+	char,final,static,void,
+	class,finally,long,
+	float,super,while,create,dispatch,extension,typeof,as,
+	val, var,
+	true, false, null,
+	IF, ELSE, ELSEIF, ENDIF, FOR, ENDFOR, BEFORE, AFTER, SEPARATOR
+]
+
+codelanguage-def[Java][
+	abstract,continue,for,new,switch,assert,default,goto,package,synchronized,
+	boolean,do,if,private,this,break,double,implements,protected,throw,
+	byte,else,import,public,throws,
+	case,enum,instanceof,return,transient,
+	catch,extends,int,short,try,
+	char,final,interface,static,void,
+	class,finally,long,strictfp,volatile,
+	const,float,native,super,while,null,true,false
+]
+
+codelanguage-def[Xtext][
+	grammar,
+	import,
+	generate,
+	terminal,
+	enum,
+	returns,
+	with,
+	hidden,
+	as,
+	current,
+	fragment,
+	EOF
+]
+
+chapter-ref[Introduction]
+
+chapter-ref[types]
+
+chapter-ref[Xtend_Classes_Members]
+
+chapter-ref[Xtend_Expressions]
+
+

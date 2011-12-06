@@ -1,0 +1,74 @@
+chapter:Introduction[Introduction]
+
+Xtend is a statically-typed programming language which is tightly integrated with and runs on the Java Virtual Machine. 
+It has its roots in the Java programming language but improves on many concepts:   
+
+ul[
+	item[e[Advanced type inference] - You rarely need to write down type signatures]
+	item[e[Full support for Java Generics] - Including all conformance and conversion rules]
+	item[e[Closures] - concise syntax for anonymous function literals]
+	item[e[Operator overloading] - make your libraries even more expressive]
+	item[e[Powerful switch expressions] - type based switching with implicit casts]
+	item[e[No statements] - Everything is an expression]
+	item[e[Template expressions] - with intelligent white space handling]
+	item[e[Extension methods] - Enhance closed types with new functionality]
+	item[e[Property access syntax] - shorthands for getter and setter access]
+	item[e[Multiple dispatch] a.k.a. polymorphic method invocation]
+	item[e[Translates to Java] not bytecode - understand what is going on and use your code for platforms 
+		such as Android or GWT]
+] 
+
+It is not aiming at replacing Java all together. Therefore its library is a thin layer on top of the 
+Java Development Kit (JDK) and interacts with Java exactly the same as it interacts with Xtend code. 
+Java can call Xtend methods, too, in a completely transparent way. And of course, Xtend provides a modern 
+Eclipse-based IDE closely integrated with the Java Development Tools (JDT).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+section:Getting_Started[Getting Started]
+
+todo[describe how to get it]
+
+Let us start with a simple "Hello World" example. In Xtend, that reads as
+code[Xtend][
+class HelloWorld {
+	def static main(String\[\] args) {
+		println("Hello World")
+	}
+}
+]
+The Xtend code resembles Java a lot. You can already see how the syntactic noise is reduced: No semicolons,
+no return types etc. 
+
+An Xtend class has to reside in a Java project which allows to setup its classpath. If the project
+has the Xtext nature, the Xtend class will automatically be compiled to Java code in the e[xtend-gen]
+source folder. The resulting Java code will look like this
+code[Java][
+import org.eclipse.xtext.xbase.lib.InputOutput;
+
+@SuppressWarnings("all")
+public class HelloWorld {
+  public static String main(final String\[\] args) {
+    String _println = InputOutput.<String>println("Hello World");
+    return _println;
+  }
+}
+] 
+
+
+section2:library[The Runtime Library]
+
+The only surprising fact in the generated Java code may be the library class code[InputOutput]. Many 
+features of Xtend are not built into the language itself but provided via small libraries 
+e[org.eclipse.xtend.lib.jar]. This library and its dependencies have to reside on the classpath of each
+Xtend class. The libraries provide a lot of useful helper methods to create and manipulate collections,
+default operator bindings for primitives and other handy things the generated Java code relies on.  
+
+
+section2:Tutorial[The Xtend Tutorial]
+
+The best way to get acquainted with the language is to materialize the e[Xtend Tutorial] example project 
+in your workspace. You will find it in the new project wizard dialog.
+
+The project contains a couple of sample Xtend files, which show the different language concepts in 
+action. Looking into the e[xtend-gen] folder which holds the compiled Java code will help you understand 
+the concepts better.
