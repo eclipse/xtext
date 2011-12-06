@@ -1838,10 +1838,13 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
+	@Test public void testBooleanArithmetics() throws Exception {
+		assertEvaluatesTo(false ^ (false || true) && true, "false.xor(false || true) && true");
+	}
+	
 	@Test public void testIntegerArithmetics() throws Exception {
 		assertEvaluatesTo(-1+2*3/4%5, "-1+2*3/4%5"); 
 	}
-	
 	
 	@Test public void testIntegerBitOperations() throws Exception {
 		assertEvaluatesTo(~(1 | 2 & 3), "1.bitwiseOr(2).bitwiseAnd(3).bitwiseNot()");
