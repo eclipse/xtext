@@ -1,6 +1,6 @@
 chapter:types[Types]
 
-Xtend fully supports Java's type system: The primitive types as code[Xtend][int] or 
+Xtend completely supports Java's type system: The primitive types as code[Xtend][int] or 
 code[Xtend][boolean] are available as well as all classes and interfaces that reside on the 
 classpath.  
 
@@ -14,22 +14,22 @@ already very concise.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-section:commonSuperType[Common Super Type]
-
-Because of type inference Xbase sometimes needs to compute the most common super type of a given 
-set of types. 
-
-For a set e[\[T1,T2,...Tn\]] of types the common super type is computed by using the linear type 
-inheritance sequence of e[T1] and is iterated until one type conforms to each e[T2,..,Tn]. The 
-linear type inheritance sequence of e[T1] is computed by ordering all types which are part if the 
-type hierarchy of e[T1] by their specificity. A type e[T1] is considered more specific than e[T2] 
-if e[T1] is a subtype of e[T2]. Any types with equal specificity will be sorted by the maximal 
-distance to the originating subtype. e[CharSequence] has distance 2 to e[StringBuilder] because the 
-supertype e[AbstractStringBuilder] implements the interface, too. Even if e[StringBuilder] 
-implements e[CharSequence] directly, the interface gets distance 2 in the ordering because it is 
-not the most general class in the type hierarchy that implements the interface. If the distances 
-for two classes are the same in the hierarchy, their qualified name is used as the compare-key to 
-ensure deterministic results. 
+%% section:commonSuperType[Common Super Type]
+%%
+%% Because of type inference Xbase sometimes needs to compute the most common super type of a given 
+%% set of types. 
+%% 
+%% For a set e[\[T1,T2,...Tn\]] of types the common super type is computed by using the linear type 
+%% inheritance sequence of e[T1] and is iterated until one type conforms to each e[T2,..,Tn]. The 
+%% linear type inheritance sequence of e[T1] is computed by ordering all types which are part if the 
+%% type hierarchy of e[T1] by their specificity. A type e[T1] is considered more specific than e[T2] 
+%% if e[T1] is a subtype of e[T2]. Any types with equal specificity will be sorted by the maximal 
+%% distance to the originating subtype. e[CharSequence] has distance 2 to e[StringBuilder] because the 
+%% supertype e[AbstractStringBuilder] implements the interface, too. Even if e[StringBuilder] 
+%% implements e[CharSequence] directly, the interface gets distance 2 in the ordering because it is 
+%% not the most general class in the type hierarchy that implements the interface. If the distances 
+%% for two classes are the same in the hierarchy, their qualified name is used as the compare-key to 
+%% ensure deterministic results. 
 
 
 
