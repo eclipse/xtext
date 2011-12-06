@@ -15,7 +15,6 @@
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
 		<a href="15-types.php">Types</a></div>
 		<ul style="display: none;" id="subToc_15-types.html">
-		<li id="15-types.html#commonSuperType" ><a href="15-types.php#commonSuperType" >Common Super Type</a></li>
 		<li id="15-types.html#Xbase_Types_ConformanceRules" ><a href="15-types.php#Xbase_Types_ConformanceRules" >Conformance and Conversion</a></li>
 		</ul>
 		</li>
@@ -121,7 +120,7 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">package</span>&nbsp;org.eclipse.xtext
+						<span class="keyword">package</span>&nbsp;com.acme
 					</p>
 				</div>
 			</div>
@@ -162,8 +161,8 @@
 			<h1>Class Declaration</h1>
 			<div class="toc">
 			  <ul>
-			    <li><a href="20-classes-and-functions.php#Xtend_ClassDeclaration_3" >Inheritance</a></li>
-			    <li><a href="20-classes-and-functions.php#Xtend_ClassDeclaration_4" >Examples</a></li>
+			    <li><a href="20-classes-and-functions.php#Xtend_ClassDeclaration_2" >Inheritance</a></li>
+			    <li><a href="20-classes-and-functions.php#Xtend_ClassDeclaration_3" >Examples</a></li>
 			  </ul>
 			</div>
 			<p>
@@ -172,21 +171,17 @@
 			a top-level Java class and Java does not allow <span class="inlinecode"><span class="keyword">private</span></span> or <span class="inlinecode"><span class="keyword">protected</span></span> top-level
 			classes any Xtend class is <span class="inlinecode"><span class="keyword">public</span></span>. It is possible to write this explicitly. 
 			</p>
-			<p>
-			<em>To be implemented: </em>The <span class="inlinecode"><span class="keyword">abstract</span></span> as well as the <span class="inlinecode"><span class="keyword">final</span></span> modifiers are directly
-			translated to Java and have the exact same meaning.
-			</p>
-			<a name="Xtend_ClassDeclaration_3" ></a>
+			<a name="Xtend_ClassDeclaration_2" ></a>
 			<h2>Inheritance</h2>
 			<p>
-			Inheritance is directly reused from Java. Single inheritance of Java classes as well as implementing 
+			Xtend's approach to inheritance is conceptionally the same as in Java. Single inheritance of Java classes as well as implementing 
 			multiple Java interfaces is supported. Because Xtend classes are compiled to Java, Xtend classes can extend
 			other Xtend classes, and even Java classes can inherit from Xtend classes. 
 			</p>
-			<a name="Xtend_ClassDeclaration_4" ></a>
+			<a name="Xtend_ClassDeclaration_3" ></a>
 			<h2>Examples</h2>
 			<p>
-			The most simple class :
+			The most simple class:
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
@@ -197,14 +192,14 @@
 			</div>
 			</p>
 			<p>
-			A more advanced class declaration in Xtend :
+			A more advanced class declaration in Xtend:
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">class</span>&nbsp;ArrayList&lt;E&gt;&nbsp;<span class="keyword">extends</span>&nbsp;AbstractList&lt;E&gt;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">implements</span>&nbsp;List&lt;E&gt;,&nbsp;RandomAccess,&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cloneable,&nbsp;java.io.Serializable&nbsp;{<br/>
-						&nbsp;&nbsp;...<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
 						}
 					</p>
 				</div>
@@ -217,21 +212,20 @@
 			<br style="clear:both"></br>
 			<h1>Constructors</h1>
 			<p>
-			An Xtend class can define one or more constructors. Unlike Java, constructors are always named <em>new</em>.
+			An Xtend class can define one or more constructors. Unlike Java, the keyword <em>new</em> is used to declare a constructor.
 			Constructors can also delegate to other constructors using <span class="inlinecode"><span class="keyword">this</span>(args...)</span> in their first
 			line. 
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">class</span>&nbsp;Foo&nbsp;{<br/>
+						<span class="keyword">class</span>&nbsp;MyClass&nbsp;<span class="keyword">extends</span>&nbsp;AnotherClass&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">new</span>(String&nbsp;s)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>(s)<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">new</span>()&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>(<span class="string">"default"</span>)<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
 						}
 					</p>
 				</div>
@@ -240,19 +234,7 @@
 			<p>
 			The same rules with regard to inheritance apply as in Java, i.e. if the super class does not define a 
 			no-argument constructor, you have to explicitly call one using <span class="inlinecode"><span class="keyword">super</span>(args...)</span> as the first 
-			expression in the body of the constructor:
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">class</span>&nbsp;Foo&nbsp;<span class="keyword">extends</span>&nbsp;Bar&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">new</span>(String&nbsp;s)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>(s.length)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
-						}
-					</p>
-				</div>
-			</div>
+			expression in the body of the constructor.
 			</p>
 			<p>
 			The default visibility of constructors is <span class="inlinecode"><span class="keyword">public</span></span> but you can also specify <span class="inlinecode"><span class="keyword">protected</span></span>
@@ -265,17 +247,19 @@
 			<br style="clear:both"></br>
 			<h1>Fields</h1>
 			<p>
-			An Xtend class can define fields, too. The syntax is the same as in Java. Fields can be declared and
-			initialized in the same line. Fields marked as <span class="inlinecode"><span class="keyword">static</span></span> will be compiled to static Java fields.  
-			Any other modifier from Java on fields is not yet supported.
+			An Xtend class can define fields, too. As for Java fields, you can optionally declare an initializer
+			expression and use annotations on fields. Fields marked as <span class="inlinecode"><span class="keyword">static</span></span> will be compiled to static Java fields.  
+			</p>
+			<p>
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">class</span>&nbsp;Foo&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;name<br/>
+						<span class="keyword">class</span>&nbsp;MyClass&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;@Nullable&nbsp;String&nbsp;name<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">int</span>&nbsp;count&nbsp;=&nbsp;1<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;Foo&nbsp;foo&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Foo()<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;string&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;String()<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">boolean</span>&nbsp;debug&nbsp;=&nbsp;<span class="keyword">false</span><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
 						}
 					</p>
 				</div>
@@ -283,32 +267,11 @@
 			</p>
 			<p>
 			The default visibility is <span class="inlinecode"><span class="keyword">private</span></span>. You can also declare it explicitly as 
-			being <span class="inlinecode"><span class="keyword">public</span></span>, <span class="inlinecode"><span class="keyword">protected</span></span>, or <span class="inlinecode"><span class="keyword">private</span></span>. Alternatively, you 
-			can write accessor methods.   
+			being <span class="inlinecode"><span class="keyword">public</span></span>, <span class="inlinecode"><span class="keyword">protected</span></span>, or <span class="inlinecode"><span class="keyword">private</span></span>. 
 			</p>
 			<p>
-			Fields in Xtend are commonly used together with an annotation for a dependency injection container. Example:
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						@Inject&nbsp;MyService&nbsp;myService
-					</p>
-				</div>
-			</div>
-			</p>
-			<p>
-			This will translate to the following Java field: 
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						@Inject&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						<span class="keyword">private</span>&nbsp;MyService&nbsp;myService;
-					</p>
-				</div>
-			</div>
-			</p>
-			<p>
-			A speciality of Xtend are <em>extension methods</em> which are covered in <a href="20-classes-and-functions.php#extensionMethods" title="Go to &quot;Extension Methods&quot;">their own section</a>.
+			A specialty of Xtend are fields that provide <em>extension methods</em> which are covered in 
+			<a href="20-classes-and-functions.php#extensionMethods" title="Go to &quot;Extension Methods&quot;">their own section</a>.
 			</p>
 			<p>
 			</p>
@@ -333,8 +296,8 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">def</span>&nbsp;<span class="keyword">boolean</span>&nbsp;equalsIgnoreCase(String&nbsp;s1,&nbsp;String&nbsp;s2)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();<br/>
+						<span class="keyword">def</span>&nbsp;String&nbsp;first(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;elements.get(0);<br/>
 						}
 					</p>
 				</div>
@@ -349,8 +312,8 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">def</span>&nbsp;<span class="keyword">static</span>&nbsp;createInstance() {<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">new</span>&nbsp;Foo()<br/>
+						<span class="keyword">def</span>&nbsp;<span class="keyword">static</span>&nbsp;createInstance()&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">new</span>&nbsp;MyClass(<span class="string">&apos;foo&apos;</span>)<br/>
 						}
 					</p>
 				</div>
@@ -369,8 +332,9 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">override</span>&nbsp;<span class="keyword">boolean</span>&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();
+						<span class="keyword">override</span>&nbsp;String&nbsp;first(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;elements.get(0);<br/>
+						}
 					</p>
 				</div>
 			</div>
@@ -410,8 +374,9 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">def</span>&nbsp;<span class="keyword">boolean</span>&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();
+						<span class="keyword">def</span>&nbsp;String&nbsp;first(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;elements.get(0);<br/>
+						}
 					</p>
 				</div>
 			</div>
@@ -421,8 +386,9 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">def</span>&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();
+						<span class="keyword">def</span>&nbsp;first(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;elements.get(0);<br/>
+						}
 					</p>
 				</div>
 			</div>
@@ -435,7 +401,7 @@
 			<a name="polymorphicDispatch" ></a>
 			<h2>Dispatch Methods</h2>
 			<p>
-			Generally method binding works just like method binding in Java. That is method calls are bound 
+			Generally method binding works just like method binding in Java. Method calls are bound 
 			based on the static types of arguments. Sometimes this is not what you want. Especially in the 
 			context of <a href="20-classes-and-functions.php#extensionMethods" title="Go to &quot;Extension Methods&quot;">extension methods</a> you would like to have polymorphic behavior.
 			</p>
@@ -449,8 +415,13 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Number&nbsp;x)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;a&nbsp;number"</span>&nbsp;}<br/>
-						<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Integer&nbsp;x)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int"</span>&nbsp;}
+						<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;printType(Number&nbsp;x)&nbsp;{&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;a&nbsp;number"</span>&nbsp;<br/>
+						}<br/>
+						<br/>
+						<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;printType(Integer&nbsp;x)&nbsp;{&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int"</span>&nbsp;<br/>
+						}
 					</p>
 				</div>
 			</div>
@@ -466,23 +437,18 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">public</span>&nbsp;String&nbsp;foo(Number&nbsp;x)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Integer)x);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Number)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Number)x);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Couldn&apos;t&nbsp;handle&nbsp;argument&nbsp;x:"</span>+x);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						}&nbsp;<br/>
-						<br/>
-						<span class="keyword">protected</span>&nbsp;String&nbsp;_foo(Integer&nbsp;x)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"It&apos;s&nbsp;an&nbsp;int"</span>;<br/>
+						<span class="keyword">protected</span>&nbsp;String&nbsp;_printType(<span class="keyword">final</span>&nbsp;Number&nbsp;x)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"it\&apos;s&nbsp;a&nbsp;number"</span>;<br/>
 						}<br/>
-						<br/>
-						<span class="keyword">protected</span>&nbsp;String&nbsp;_foo(Number&nbsp;x)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"It&apos;s&nbsp;a&nbsp;number"</span>;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;String&nbsp;_printType(<span class="keyword">final</span>&nbsp;Integer&nbsp;x)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"it\&apos;s&nbsp;an&nbsp;int"</span>;<br/>
+						}<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;printType(<span class="keyword">final</span>&nbsp;Number&nbsp;x)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_printType((Integer)x);<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_printType(x);<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 						}
 					</p>
 				</div>
@@ -493,7 +459,7 @@
 			types come first.
 			</p>
 			<p>
-			The default visibility of dispatch methods is <span class="inlinecode"><span class="keyword">protected</span></span>. If all dispatch methods
+			The default visibility of the underscore-methods is <span class="inlinecode"><span class="keyword">protected</span></span>. If all dispatch methods
 			explicitly declare the same visibility, this will be the visibility of the inferred dispatcher, too.
 			Otherwise it is <span class="inlinecode"><span class="keyword">public</span></span> 
 			 
@@ -503,8 +469,13 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Number&nbsp;x,&nbsp;Integer&nbsp;y)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;some&nbsp;number&nbsp;and&nbsp;an&nbsp;int"</span>&nbsp;}<br/>
-						<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Integer&nbsp;x,&nbsp;Number&nbsp;x)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int&nbsp;and&nbsp;a&nbsp;number"</span>&nbsp;}
+						<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;printTypes(Number&nbsp;x,&nbsp;Integer&nbsp;y)&nbsp;{&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;some&nbsp;number&nbsp;and&nbsp;an&nbsp;int"</span>&nbsp;<br/>
+						}<br/>
+						<br/>
+						<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;printTypes(Integer&nbsp;x,&nbsp;Number&nbsp;y)&nbsp;{&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int&nbsp;and&nbsp;a&nbsp;number"</span>&nbsp;<br/>
+						}
 					</p>
 				</div>
 			</div>
@@ -514,16 +485,14 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">public</span>&nbsp;String&nbsp;foo(Number&nbsp;x,&nbsp;Number&nbsp;y)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;((x&nbsp;<span class="keyword">instanceof</span>&nbsp;Number)&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;&amp;&nbsp;(y&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer))&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Number)x,(Integer)y);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;((x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;&amp;&nbsp;(y&nbsp;<span class="keyword">instanceof</span>&nbsp;Number)){<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Integer)x,(Number)y);<br/>
+						<span class="keyword">public</span>&nbsp;String&nbsp;printTypes(<span class="keyword">final</span>&nbsp;Number&nbsp;x,&nbsp;<span class="keyword">final</span>&nbsp;Number&nbsp;y)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_printTypes((Integer)x,&nbsp;y);<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(y&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_printTypes(x,&nbsp;(Integer)y);<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Couldn&apos;t&nbsp;handle&nbsp;argument&nbsp;x:"</span>+x+<span class="string">",&nbsp;argument&nbsp;y:"</span>+y);<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<span class="string">"Unhandled&nbsp;parameter&nbsp;types:&nbsp;"</span>&nbsp;+<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arrays.&lt;Object&gt;asList(x,&nbsp;y).toString());<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 						}
 					</p>
@@ -536,9 +505,17 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Number&nbsp;x)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;some&nbsp;number"</span>&nbsp;}<br/>
-						<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Integer&nbsp;x)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int"</span>&nbsp;}<br/>
-						<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Void&nbsp;x)&nbsp;{&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;NullPointerException(<span class="string">"x"</span>)&nbsp;}
+						<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;printType(Number&nbsp;x)&nbsp;{&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;some&nbsp;number"</span>&nbsp;<br/>
+						}<br/>
+						<br/>
+						<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;printType(Integer&nbsp;x)&nbsp;{&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int"</span>&nbsp;<br/>
+						}<br/>
+						<br/>
+						<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;printType(Void&nbsp;x)&nbsp;{&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;null"</span>&nbsp;<br/>
+						}
 					</p>
 				</div>
 			</div>
@@ -548,16 +525,16 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">public</span>&nbsp;String&nbsp;foo(Number&nbsp;x)&nbsp;{<br/>
+						<span class="keyword">public</span>&nbsp;String&nbsp;printType(<span class="keyword">final</span>&nbsp;Number&nbsp;x)&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Integer)x);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Number){<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Number)x);<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_printType((Integer)x);<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Number)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_printType((Number)x);<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;==&nbsp;<span class="keyword">null</span>)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Void)<span class="keyword">null</span>);<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_printType((Void)<span class="keyword">null</span>);<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Couldn&apos;t&nbsp;handle&nbsp;argument&nbsp;x:"</span>+x);<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<span class="string">"Unhandled&nbsp;parameter&nbsp;types:&nbsp;"</span>&nbsp;+<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arrays.&lt;Object&gt;asList(x).toString());<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 						}
 					</p>
@@ -596,7 +573,7 @@
 						&nbsp;&nbsp;&nbsp;}<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;label(Method&nbsp;<span class="keyword">it</span>)&nbsp;{&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name+<span class="string">"("</span>+params.toString(<span class="string">","</span>)+<span class="string">"):"</span>+type<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name+<span class="string">"("</span>+params.join(<span class="string">","</span>)+<span class="string">"):"</span>+type<br/>
 						&nbsp;&nbsp;&nbsp;}<br/>
 						&nbsp;&nbsp;&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;label(Field&nbsp;<span class="keyword">it</span>)&nbsp;{&nbsp;<br/>
@@ -612,18 +589,15 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">public</span>&nbsp;String&nbsp;label(Object&nbsp;o)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(o&nbsp;<span class="keyword">instanceof</span>&nbsp;Field)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_label((Field)o);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(o&nbsp;<span class="keyword">instanceof</span>&nbsp;Method){<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Method)o);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(o&nbsp;<span class="keyword">instanceof</span>&nbsp;Entity){<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Entity)o);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(o&nbsp;<span class="keyword">instanceof</span>&nbsp;Object){<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Object)o);<br/>
+						<span class="keyword">public</span>&nbsp;String&nbsp;label(<span class="keyword">final</span>&nbsp;Object&nbsp;it)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(it&nbsp;<span class="keyword">instanceof</span>&nbsp;Entity)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_label((Entity)it);<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(it&nbsp;<span class="keyword">instanceof</span>&nbsp;Field)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_label((Field)it);<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(it&nbsp;<span class="keyword">instanceof</span>&nbsp;Method)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_label((Method)it);<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Couldn&apos;t&nbsp;handle&nbsp;argument&nbsp;o:"</span>+o);<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_label(it);<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 						}
 					</p>
@@ -654,13 +628,13 @@
 					<p class="code">
 						@TypeAnnotation(<span class="keyword">typeof</span>(String))<br/>
 						<span class="keyword">class</span>&nbsp;MyClass&nbsp;{<br/>
-						&nbsp;&nbsp;@FieldAnnotation(children&nbsp;=&nbsp;{@MyAnno(<span class="keyword">true</span>),&nbsp;@MyAnnot(<span class="keyword">false</span>)}<br/>
-						&nbsp;&nbsp;String&nbsp;myField<br/>
-						&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;@MethodAnnotation(children&nbsp;=&nbsp;{@MyAnno(<span class="keyword">true</span>),&nbsp;@MyAnnot}<br/>
-						&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;String&nbsp;myMethod(@ParameterAnnotation&nbsp;String&nbsp;param)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//...<br/>
-						</span>&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;@FieldAnnotation(children&nbsp;=&nbsp;{@MyAnno(<span class="keyword">true</span>),&nbsp;@MyAnno(<span class="keyword">false</span>)}<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;myField<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;@MethodAnnotation(children&nbsp;=&nbsp;{@MyAnno(<span class="keyword">true</span>),&nbsp;@MyAnno}<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;String&nbsp;myMethod(@ParameterAnnotation&nbsp;String&nbsp;param)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//...<br/>
+						</span>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 						}
 					</p>
 				</div>
@@ -674,21 +648,21 @@
 			<h1>Extension Methods</h1>
 			<div class="toc">
 			  <ul>
-			    <li><a href="20-classes-and-functions.php#extensionMethods_4" >Local Methods</a></li>
+			    <li><a href="20-classes-and-functions.php#extensionMethods_3" >Local Extension Methods</a></li>
 			    <li><a href="20-classes-and-functions.php#libraryExtensions" >Library Extensions</a></li>
 			    <li><a href="20-classes-and-functions.php#extensionImports" >Extension Imports</a></li>
 			    <li><a href="20-classes-and-functions.php#Extension_Fields" >Extension Fields</a></li>
 			  </ul>
 			</div>
 			<p>
-			Extensions methods are a technique to add methods to existing classes without modifying their code. 
-			This feature is actually where Xtend has its name from. They are based on a simple syntactic trick: 
+			Extensions methods are a technique to add behavior to existing classes without modifying their code. 
+			This feature is actually where Xtend got its name from. They are based on a simple syntactic trick: 
 			Instead of passing the first argument of an extension method inside the parentheses of a call, the 
 			method is called on the argument parameter as if it was one of its members.
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="string">"foo"</span>.toFirstUpper()&nbsp;<span class="comment">//&nbsp;calls&nbsp;toFirstUper("foo")</span>
+						<span class="string">"hello"</span>.toFirstUpper()&nbsp;<span class="comment">//&nbsp;calls&nbsp;toFirstUper("hello")</span>
 					</p>
 				</div>
 			</div>
@@ -697,24 +671,20 @@
 			Method calls in extension syntax often result in much better readable code, as function calls are rather
 			concatenated than nested. They also allow to add methods in a certain context only. 
 			</p>
-			<p>
-			To be callable in the extension syntax, a method has to be on the extension scope of the callers context.
-			Xtend supports a variety of ways to put methods on this scope. 
-			</p>
-			<a name="extensionMethods_4" ></a>
-			<h2>Local Methods</h2>
+			<a name="extensionMethods_3" ></a>
+			<h2>Local Extension Methods</h2>
 			<p>
 			All methods of the current Xtend class are automatically available in extension syntax. For example
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">class</span>&nbsp;Foo&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;foo(Bar&nbsp;bar)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;do&nbsp;something&nbsp;with&nbsp;bar<br/>
+						<span class="keyword">class</span>&nbsp;MyClass&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;doSomething(Object&nbsp;obj)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;do&nbsp;something&nbsp;with&nbsp;obj<br/>
 						</span>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;extensionCall(Bar&nbsp;bar) {<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bar.foo()&nbsp;&nbsp;<span class="comment">//&nbsp;calls&nbsp;this.foo(bar)<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;extensionCall(Object&nbsp;obj)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;obj.doSomething()&nbsp;&nbsp;<span class="comment">//&nbsp;calls&nbsp;this.doSomething(obj)<br/>
 						</span>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 						}
 					</p>
@@ -729,8 +699,8 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						newArrayList()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;CollectionLiterals.newArrayList()<br/>
-						</span><span class="string">"foo"</span>.toFirstUpper&nbsp;<span class="comment">//&nbsp;StringExtensions.toFirstUpper(String)</span>
+						newArrayList()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;CollectionLiterals.newArrayList()<br/>
+						</span><span class="string">"hello"</span>.toFirstUpper&nbsp;<span class="comment">//&nbsp;StringExtensions.toFirstUpper(String)</span>
 					</p>
 				</div>
 			</div>
@@ -738,13 +708,13 @@
 			<a name="extensionImports" ></a>
 			<h2>Extension Imports</h2>
 			<p>
-			In Java, you would usually write a helper class with static helper functions to decorate an exisiting
-			class with additional behavior. In order to integrate such static helper classes, Xtend allow to put
+			In Java, you would usually write a helper class with static methods to decorate an exisiting
+			class with additional behavior. In order to integrate such static helper classes, Xtend allows to put
 			the keyword <span class="inlinecode"><span class="keyword">extension</span></span> after the <span class="inlinecode"><span class="keyword">static</span></span> keyword of a <a href="20-classes-and-functions.php#imports" title="Go to &quot;Imports&quot;">static import</a>
-			thus putting making all imported static functions available as extensions methods.
+			thus making all imported static functions available as extensions methods.
 			</p>
 			<p>
-			That is the following import declaration 
+			The following import declaration 
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
@@ -754,18 +724,19 @@
 			</div>
 			</p>
 			<p>
-			allows to use its methods for example like this :
+			allows to use its methods like this:
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">new</span>&nbsp;Foo().singletonList()&nbsp;&nbsp;<span class="comment">//&nbsp;calls&nbsp;Collections.singletonList(new&nbsp;Foo)</span>
+						<span class="keyword">new</span>&nbsp;MyClass().singletonList()&nbsp;<br/>
+						&nbsp;&nbsp;<span class="comment">//&nbsp;calls&nbsp;Collections.singletonList(new&nbsp;MyClass())</span>
 					</p>
 				</div>
 			</div>
 			</p>
 			<p>
 			Although this is supported it is generally much nicer to use <a href="20-classes-and-functions.php#Extension_Fields" title="Go to &quot;Extension Fields&quot;">extension fields</a>, because
-			they allow to change the bound implementation.    
+			they allow to change the actual implementation easily.    
 			</p>
 			<a name="Extension_Fields" ></a>
 			<h2>Extension Fields</h2>
@@ -774,15 +745,15 @@
 			<span class="inlinecode"><span class="keyword">extension</span></span> to the field declaration.
 			</p>
 			<p>
-			Imagine you want to add a method <em>fullName</em> to a closed type <em>Entity</em>. With extension methods, you could 
+			Imagine you want to add a method <em>fullName</em> to a closed type <em>Person</em>. With extension methods, you could 
 			declare the following class
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">class</span>&nbsp;PersonExtensions&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;getFullName(Person&nbsp;p)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p.forename&nbsp;+&nbsp;<span class="string">"&nbsp;"</span>&nbsp;+&nbsp;p.name<br/>
-						&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;getFullName(Person&nbsp;p)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p.forename&nbsp;+&nbsp;<span class="string">"&nbsp;"</span>&nbsp;+&nbsp;p.name<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 						}
 					</p>
 				</div>
@@ -802,13 +773,13 @@
 			</div>
 			</p>
 			<p>
-			The method is being put on the extension scope of the class <span class="inlinecode">Person</span>. This is why you can skip the 
+			The method is available on the extension scope of the class <span class="inlinecode">Person</span>. This is why you can skip the 
 			field's name. You can now write the following
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">def</span>&nbsp;print(Person&nbsp;myPerson)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;myPerson.getFullName())<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;myPerson.getFullName()<br/>
 						}
 					</p>
 				</div>
@@ -819,9 +790,9 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						@Override<br/>
-						<span class="keyword">public</span>&nbsp;String&nbsp;print(Person&nbsp;myPerson)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_personExtensions.getFullName(myPerson);<br/>
+						<span class="keyword">public</span>&nbsp;String&nbsp;print(<span class="keyword">final</span>&nbsp;Person&nbsp;myPerson)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;_fullName&nbsp;=&nbsp;<span class="keyword">this</span>._personExtensions.getFullName(myPerson);<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_fullName;<br/>
 						}
 					</p>
 				</div>
@@ -840,10 +811,10 @@
 			</p>
 			<p>
 			The nice thing with using dependency injection in combination with the extension modifier as opposed 
-			to <a href="20-classes-and-functions.php#extensionImports" title="Go to &quot;Extension Imports&quot;">extension imports</a> is, that in case there is a bug in the extension or it is implemented 
-			inefficiently or you just need a different strategy, you can simply exchange the component with another 
-			implementation. You do this without modifying the library nor the client code. 
-			You will only have to change the binding in your DI configuration. Also this gives you a general hook for any 
+			to static <a href="20-classes-and-functions.php#extensionImports" title="Go to &quot;Extension Imports&quot;">extension imports</a> is, that you can simply exchange the component that provides
+			the referenced extension with another 
+			implementation. You do this without modifying the library or the client code. 
+			You will only have to change the binding in your dependency injection configuration. Also this gives you a general hook for any 
 			AOP-like thing you would want to do, or allows you to write against an SPI, where the concrete implementation 
 			can be provided by a third party.
 			</p>

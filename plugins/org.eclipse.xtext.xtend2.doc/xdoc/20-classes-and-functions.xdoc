@@ -296,13 +296,13 @@ In case there is no single most general signature, one is computed and the
 different overloaded methods are matched in the order they are declared within the class file.
 Example:
 code[Xtend][
-def dispatch printTypes(Number x, Integer y) { 
-	"it's some number and an int" 
-}
-
-def dispatch printTypes(Integer x, Number y) { 
-	"it's an int and a number" 
-}
+	def dispatch printTypes(Number x, Integer y) { 
+		"it's some number and an int" 
+	}
+	
+	def dispatch printTypes(Integer x, Number y) { 
+		"it's an int and a number" 
+	}
 ]
 
 generates the following Java code :
@@ -322,17 +322,17 @@ code[Java][
 As you can see a code[Xtend][null] reference is never a match. If you want to fetch code[Xtend][null] 
 you can declare a parameter using the type code[java.lang.Void].
 code[Xtend][
-def dispatch printType(Number x) { 
-	"it's some number" 
-}
-
-def dispatch printType(Integer x) { 
-	"it's an int" 
-}
-
-def dispatch printType(Void x) { 
-	"it's null" 
-}
+	def dispatch printType(Number x) { 
+		"it's some number" 
+	}
+	
+	def dispatch printType(Integer x) { 
+		"it's an int" 
+	}
+	
+	def dispatch printType(Void x) { 
+		"it's null" 
+	}
 ]
 
 Which compiles to the following Java code:
@@ -415,16 +415,16 @@ Annotations are available on classes, fields, methods and parameters.
 
 Example:
 code[Xtend][
-@TypeAnnotation(typeof(String))
-class MyClass {
-  @FieldAnnotation(children = {@MyAnno(true), @MyAnno(false)}
-  String myField
-  
-  @MethodAnnotation(children = {@MyAnno(true), @MyAnno}
-  def String myMethod(@ParameterAnnotation String param) {
-  	//...
-  }
-}
+	@TypeAnnotation(typeof(String))
+	class MyClass {
+		@FieldAnnotation(children = {@MyAnno(true), @MyAnno(false)}
+		String myField
+		
+		@MethodAnnotation(children = {@MyAnno(true), @MyAnno}
+		def String myMethod(@ParameterAnnotation String param) {
+			//...
+		}
+	}
 ]
 
 
@@ -437,7 +437,7 @@ This feature is actually where Xtend got its name from. They are based on a simp
 Instead of passing the first argument of an extension method inside the parentheses of a call, the 
 method is called on the argument parameter as if it was one of its members.
 code[Xtend][
-"hello".toFirstUpper() // calls toFirstUper("hello")
+	"hello".toFirstUpper() // calls toFirstUper("hello")
 ]   
 
 Method calls in extension syntax often result in much better readable code, as function calls are rather
@@ -450,15 +450,15 @@ section2[Local Extension Methods]
 
 All methods of the current Xtend class are automatically available in extension syntax. For example
 code[Xtend][
-class MyClass {
-	def doSomething(Object obj) {
-		// do something with obj
+	class MyClass {
+		def doSomething(Object obj) {
+			// do something with obj
+		}
+		
+		def extensionCall(Object obj) {
+			obj.doSomething()  // calls this.doSomething(obj)
+		}
 	}
-	
-	def extensionCall(Object obj) {
-		obj.doSomething()  // calls this.doSomething(obj)
-	}
-}
 ]
 
 
@@ -467,8 +467,8 @@ section2:libraryExtensions[Library Extensions]
 The static methods methods of the classes in the ref:library[Xtend runtime library] are automatically
 available as extensions, e.g.
 code[Xtend][
-newArrayList()       // CollectionLiterals.newArrayList()
-"hello".toFirstUpper // StringExtensions.toFirstUpper(String)
+	newArrayList()       // CollectionLiterals.newArrayList()
+	"hello".toFirstUpper // StringExtensions.toFirstUpper(String)
 ] 
 
 
@@ -481,13 +481,13 @@ thus making all imported static functions available as extensions methods.
 
 The following import declaration 
 code[Xtend][
-import static extension java.util.Collections.*
+	import static extension java.util.Collections.*
 ]
 
 allows to use its methods like this:
 code[Xtend][
-new MyClass().singletonList() 
-  // calls Collections.singletonList(new MyClass())
+	new MyClass().singletonList() 
+	  // calls Collections.singletonList(new MyClass())
 ]
 
 Although this is supported it is generally much nicer to use ref:Extension_Fields[extension fields], because
@@ -502,41 +502,41 @@ code[Xtend][extension] to the field declaration.
 Imagine you want to add a method e[fullName] to a closed type e[Person]. With extension methods, you could 
 declare the following class
 code[Xtend][
-class PersonExtensions {
-   def getFullName(Person p) {
-     p.forename + " " + p.name
-   }
-}
+	class PersonExtensions {
+		def getFullName(Person p) {
+			p.forename + " " + p.name
+		}
+	}
 ]
 
 And if you have an instance of this class injected as extension like this:
 code[Xtend][
-class PersonPrinter {
-	@Inject extension PersonExtensions
-	...
-}
+	class PersonPrinter {
+		@Inject extension PersonExtensions
+		...
+	}
 ]  
 
 The method is available on the extension scope of the class code[Person]. This is why you can skip the 
 field's name. You can now write the following
 code[Xtend][
-def print(Person myPerson) {
-	myPerson.getFullName()
-}
+	def print(Person myPerson) {
+		myPerson.getFullName()
+	}
 ]
 
 which is translated to the Java method 
 code[Xtend][
-@Override
-public String print(Person myPerson) {
-	return _personExtensions.getFullName(myPerson);
-}
+	public String print(final Person myPerson) {
+		String _fullName = this._personExtensions.getFullName(myPerson);
+		return _fullName;
+	}
 ]
 
 where code[Xtend][_personExtensions] is the default name of the field. Of course the 
 property shorthand (see ref:propertyAccess[section on property access]) is still available.
 code[Xtend][
-myPerson.fullName
+	myPerson.fullName
 ]
 
 The nice thing with using dependency injection in combination with the extension modifier as opposed 

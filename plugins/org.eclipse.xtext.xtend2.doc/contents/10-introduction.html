@@ -71,7 +71,7 @@ Let us start with a simple "Hello World" example. In Xtend, that reads as
 <div class="incode">
 <p class="code">
 <span class="keyword">class</span>&nbsp;HelloWorld&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">static</span>&nbsp;main(String[]&nbsp;args)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">void</span>&nbsp;main(String[]&nbsp;args)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;println(<span class="string">"Hello&nbsp;World"</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 }<br/>
@@ -93,9 +93,8 @@ source folder. The resulting Java code will look like this
 <br/>
 @SuppressWarnings(<span class="string">"all"</span>)<br/>
 <span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;HelloWorld&nbsp;{<br/>
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;String&nbsp;main(<span class="keyword">final</span>&nbsp;String[]&nbsp;args)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;_println&nbsp;=&nbsp;InputOutput.&lt;String&gt;println(<span class="string">"Hello&nbsp;World"</span>);<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_println;<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">void</span>&nbsp;main(<span class="keyword">final</span>&nbsp;String[]&nbsp;args)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;InputOutput.&lt;String&gt;println(<span class="string">"Hello&nbsp;World"</span>);<br/>
 &nbsp;&nbsp;}<br/>
 }<br/>
 </p>
@@ -107,9 +106,10 @@ source folder. The resulting Java code will look like this
 <p>
 The only surprising fact in the generated Java code may be the library class <span class="inlinecode">InputOutput</span>. Many 
 features of Xtend are not built into the language itself but provided via small libraries 
-<em>org.eclipse.xtend.lib.jar</em>. This library and its dependencies have to reside on the classpath of each
-Xtend class. The libraries provide a lot of useful helper methods to create and manipulate collections,
-default operator bindings for primitives and other handy things the generated Java code relies on.  
+<em>org.eclipse.xtend2.lib.jar</em>. This library and its dependencies have to reside on the classpath of each
+Xtend class. The libraries provide a lot of useful helper methods to create and manipulate collections.
+They define default operator bindings for primitives and contain some other handy things that are used by
+the generated Java code.  
 </p>
 <a name="Tutorial"></a>
 <h3>The Xtend Tutorial</h3>

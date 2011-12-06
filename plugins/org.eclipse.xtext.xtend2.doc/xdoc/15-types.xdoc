@@ -30,9 +30,6 @@ already very concise.
 %% not the most general class in the type hierarchy that implements the interface. If the distances 
 %% for two classes are the same in the hierarchy, their qualified name is used as the compare-key to 
 %% ensure deterministic results. 
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:Xbase_Types_ConformanceRules[Conformance and Conversion]
 

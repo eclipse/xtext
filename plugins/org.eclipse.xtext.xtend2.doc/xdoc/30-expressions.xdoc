@@ -4,9 +4,9 @@ There are no statements in Xtend. Instead, everything is an expression and has a
 allows to use every Xtend expression on the right hand side of an assignment. For example, as a code[Xtend][try
 catch] is an expression the following code is legal in Xtend: 
 code[Xtend][
-val data = try {
+	val data = try {
 		fileContentsToString('data.txt')
-	} catch (IOException e) {
+	} catch (IOException e) {
 		'dummy data'
 	}
 ] 
@@ -78,8 +78,8 @@ section2:typeLiteral[Type Literals]
 
 Type literals are specified using the keyword code[Xtend][typeof] :
 ul[
-  item[code[Xtend][typeof(java.lang.String)] which yields code[Java][java.lang.String.class]]
-  in the generated Java code.
+  item[code[Xtend][typeof(java.lang.String)] which yields code[Java][java.lang.String.class]
+  in the generated Java code.]
 ]
 
 
@@ -117,9 +117,9 @@ operators for any type just by implementing the corresponding method signature. 
 ref:library[Xtend runtime library] contains a class code[BigDecimalExtensions] that defines operators for 
 code[BigDecimals] which allows the following code:
 code[Xtend][
-val x=new BigDecimal('2.71')
-val y=new BigDecimal('3.14')
-x+y    // calls BigDecimalExtension.operator_plus(x,y)
+	val x=new BigDecimal('2.71')
+	val y=new BigDecimal('3.14')
+	x+y    // calls BigDecimalExtension.operator_plus(x,y)
 ]
 
 The following defines the operators and the corresponding Java method signatures / expressions.
@@ -240,7 +240,7 @@ code[Xtend][
 	var i = 0
 	while (i < max) {
 		println("Hi there!")
-		i = i +1
+		i = i + 1
 	}
 }
 ]
@@ -325,7 +325,7 @@ code[?.] to make such code more readable.
 
 Instead of writing 
 code[Java][
-	if ( myRef != null ) myRef.doStuff()
+	if (myRef != null) myRef.doStuff()
 ]
 
 one can write
@@ -356,17 +356,17 @@ in the closure's expression.
 The surrounding square brackets are optional if the closure is the single argument of a method 
 invocation. That is you can write
 code[Xtend][
-	myList.find(e|e.name==null)
+	myList.findFirst(e | e.name==null)
 ]
 
 instead of
 code[Xtend][
-	myList.find(\[e|e.name==null\])
+	myList.findFirst(\[e | e.name==null\])
 ]
 
 But in all other cases the square brackets are mandatory:
 code[Xtend][
-	val func = \[String s| s.length>3\]
+	val func = \[String s | s.length>3\]
 ]
 
 
@@ -378,24 +378,24 @@ The parameter types can be inferred if the closure is used in a context where th
 
 For instance, given the following Java method signature:
 code[Java][
-	public T <T>getFirst(List<T> list, Function0<T,Boolean> predicate) 
+	public <T> T find(List<T> list, Function1<T,Boolean> predicate) 
 ] 
 
 the type of the parameter can be inferred. Which allows users to write:
 code[Xtend][
-	arrayList( "Foo", "Bar" ).findFirst( e | e == "Bar" )
+	newArrayList("Foo", "Bar").find(e | e=="Bar")
 ]
 
 instead of 
 code[Xtend][
-	arrayList( "Foo", "Bar" ).findFirst( String e | e == "Bar" )
+	newArrayList("Foo", "Bar").find(String e | e=="Bar")
 ]
 
 Here are some more examples:
 ul[
 	item[code[Xtend][\[ | "foo" \]   // closure without parameters]]
 	item[code[Xtend][\[ String s | s.toUpperCase() \] // explicit argument type]]
-	item[code[Xtend][\[ a,b,a | a+b+c \] // inferred argument types]]
+	item[code[Xtend][\[ a,b,c | a+b+c \] // inferred argument types]]
 ]
 
 
@@ -428,14 +428,14 @@ As a result given the method code[IterableExtensions.sort(Iterable<T>, Comparato
 as an extension method, it can be invoked like this
 
 code[Xtend][
-newArrayList( 'aaa', 'bb', 'c' ).sort(
-	e1, e2 | if ( e1.length > e2.length ) {
-				-1 
-			 } else if ( e1.length < e2.length ) { 
-				1
-			 } else { 
-				0
-			 })
+	newArrayList( 'aaa', 'bb', 'c' ).sort(
+		e1, e2 | if ( e1.length > e2.length ) {
+					-1 
+				 } else if ( e1.length < e2.length ) { 
+					1
+				 } else { 
+					0
+				 })
 ]
 
 
@@ -444,8 +444,8 @@ section2:implicitParameter[Implicit Parameter e[it]]
 If a closure has a single parameter whose type can be inferred, the declaration of the parameter can
 be ommitted. Use e[it] to refer to the parameter inside the closure's body.
 code[Xtend][
-	val (String s)=>String function = \[toUpperCase\] 
-	  // equivalent to \[it | it.toUpperCase\]
+	val (String)=>String function = \[toUpperCase\] 
+	  // equivalent to \[it | it.toUpperCase\]
 ]
 
 
@@ -464,7 +464,7 @@ methods, this yields a very concise syntax.
 code[Xtend][
 	val fruit = newArrayList('apple', 'pear', 'lemon')
 	fruit.map\[toUpperCase\] 
-	  // same as map(fruit, \[it | it.toUpperCase\])
+	  // same as fruit.map(\[it | it.toUpperCase\])
 ]
 
 This feature is especially useful when you are building object trees. A common pattern is to provide a set 
@@ -472,21 +472,27 @@ of extension functions taking two parameters: the parent object and a closure to
 Here is an example for creating a simple tree of code[Nodes]:
 
 code[Xtend][
-def createNode(Node parent, (Node)=>Void initializer) {
-	val child=new Node()
-	initializer.apply(child)
-	child
-}
+class Node {
+	String label
+	List<Node> children
+	
+	def createNode(Node parent, (Node)=>void initializer) {
+		val child=new Node()
+		initializer.apply(child)
+		child
+	}
 
-createNode(null) \[
-	label="root"
-	children += createNode \[
-		label="child0"
-	\]
-	children += createNode \[
-		label="child1"
-	\]
-\]
+	def tree() {
+		createNode(null) \[
+			label="root"
+			children += createNode \[
+				label="child0"
+			\]
+			children += createNode \[
+				label="child1"
+			\]
+		\]
+	}
 ]
 
 
@@ -514,8 +520,8 @@ code[Xtend][
 
 section2:Xtend_Expressions_IfTypeInference[Typing]
 
-The type of an if expression is calculated by the return types code[T1] and code[T2] of the two 
-expression code[e1] and code[e2]. It uses the rules defined in ref:commonSuperType.
+The type of an if expression is the common super type of the return types code[T1] and code[T2] 
+of the two expression code[e1] and code[e2]. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -551,11 +557,11 @@ is specified the expression evaluates to code[Xtend][null].
 Example:
 
 code[Xtend][
-switch myString {
-	case myString.length>5 : 'a long string.'
-	case 'some' : 'It's some string.'
-	default : 'It's another short string.'
-}
+	switch myString {
+		case myString.length>5 : "a long string."
+		case 'some' : "It's some string."
+		default : "It's another short string."
+	}
 ]
 
 section2[Type guards]
@@ -564,11 +570,11 @@ In addition to the case guards one can add a so called e[Type Guard] which is sy
 ref:types[type reference] preceding an optional case keyword. The compiler will use that type
 for the switch expression in subsequent expressions. Example:
 code[Xtend][
-var Object x = ...;
-switch x {
-	String case x.length()>0 : x.length()
-	List<?> : x.size()
-	default : -1
+	var Object x = ...;
+	switch x {
+		String case x.length()>0 : x.length()
+		List<?> : x.size()
+		default : -1
 }
 ]
 
@@ -608,9 +614,6 @@ type specified in the type guard.
 %% 		]
 %% 	]
 %% ]
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:blocks[Blocks]
 
@@ -626,20 +629,20 @@ optionally be terminated by a semicolon.
 section2[Examples]
 
 code[Xtend][
-{
-	doSideEffect("foo")
-	result
-}
+	{
+		doSideEffect("foo")
+		result
+	}
 ]
 code[Xtend][
-{
-	var x = greeting();
-	if (x.equals("Hello ")) {
-		x+"World!"; 
-	} else {
-		x;
+	{
+		var x = greeting();
+		if (x.equals("Hello ")) {
+			x+"World!"; 
+		} else {
+			x;
+		}
 	}
-}
 ]
 
 
@@ -689,8 +692,8 @@ ul[
 		}
 	]]
 	item[code[Xtend][
-		while ( ( i = i + 1 ) < max ) 
-			doSideEffect( "foo" )
+		while ((i=i+1) < max) 
+			doSideEffect("foo")
 	]]
 ]
 
