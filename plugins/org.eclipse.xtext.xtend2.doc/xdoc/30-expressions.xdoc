@@ -624,9 +624,9 @@ ref:variableDeclaration[Variable declarations] are only allowed within blocks an
 a block's last expression.
 
 A block expression is surrounded by curly braces and contains at least one expression. It can 
-optionally be terminated by a semicolon.
+optionally be terminated by a semicolon. 
 
-section2[Examples]
+Here are two examples:
 
 code[Xtend][
 	{
@@ -683,8 +683,6 @@ A while loop code[Xtend][while (predicate) expression] is used to execute a cert
 unless the predicate is evaluated to code[Xtend][false]. The return type of a while loop is 
 code[Xtend][void].
 
-section2[Examples]
-
 ul[
 	item[code[Xtend][
 		while (true) {
@@ -707,8 +705,6 @@ expression unless the predicate is evaluated to code[Xtend][false]. The differen
 ref:whileExpression[while loop] is that the execution starts by executing the block once before 
 evaluating the predicate for the first time. The return type of a do-while loop is 
 code[Xtend][void].
-
-section2[Examples]
 
 ul[
 	item[code[Xtend][
@@ -785,12 +781,12 @@ code generator. Let us have a look at an example of how a typical method with te
 looks like:
 
 code[Xtend][
-toClass(Entity e) '''
+def toClass(Entity e) '''
   package «e.packageName»;
 
   «placeImports»
 
-  public class «e.name» «IF e.extends!=null»extends «e.extends»«ENDIF» {
+  public class «e.name» «IF e.superClass!=null»extends «e.superClass»«ENDIF» {
     «FOR e.members»
       «member.toMember»
     «ENDFOR»
@@ -898,7 +894,7 @@ class Template {
 	print(Node n) '''
 		node «n.name» {
 			«IF hasChildren»
-				«n.children*.print»
+				«n.children.map\[print\]»
 			«ENDIF»
 		}
 	'''
@@ -923,7 +919,7 @@ node Parent{
 As in the previous example, there is no indentation on the root level for the same reason.
 The first nesting level has only one indentation level in the output. This is derived from
 the indentation of the code[Xtend][IF hasChildren] condition in the template which is nested in
-the node. The additional nesting of the recursive invocation code[Xtend][children*.print] is not
+the node. The additional nesting of the recursive invocation code[Xtend][children.map\[print\]] is not
 visible in the output as it is relative the the surrounding control structure. The line with
 code[Xtend][IF] and code[Xtend][ENDIF] contain only control structures thus they are skipped in 
 the output. Note the additional indentation of the node e[Leaf] which happens due to the first rule:

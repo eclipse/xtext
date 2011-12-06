@@ -2,6 +2,8 @@
 <toc topic="contents/Xtend.html" label="Xtend User Guide" >
 	<topic href="contents/10-introduction.html#Introduction" label="Introduction" >
 		<topic href="contents/10-introduction.html#Getting_Started" label="Getting Started" >
+			<topic href="contents/10-introduction.html#Getting_Started_2" label="Hello World" >
+			</topic>
 			<topic href="contents/10-introduction.html#library" label="The Runtime Library" >
 			</topic>
 			<topic href="contents/10-introduction.html#Tutorial" label="The Xtend Tutorial" >
@@ -18,10 +20,6 @@
 		<topic href="contents/20-classes-and-functions.html#imports" label="Imports" >
 		</topic>
 		<topic href="contents/20-classes-and-functions.html#Xtend_ClassDeclaration" label="Class Declaration" >
-			<topic href="contents/20-classes-and-functions.html#Xtend_ClassDeclaration_2" label="Inheritance" >
-			</topic>
-			<topic href="contents/20-classes-and-functions.html#Xtend_ClassDeclaration_3" label="Examples" >
-			</topic>
 		</topic>
 		<topic href="contents/20-classes-and-functions.html#constructors" label="Constructors" >
 		</topic>
@@ -114,18 +112,12 @@
 			</topic>
 		</topic>
 		<topic href="contents/30-expressions.html#blocks" label="Blocks" >
-			<topic href="contents/30-expressions.html#blocks_3" label="Examples" >
-			</topic>
 		</topic>
 		<topic href="contents/30-expressions.html#forLoop" label="For Loop" >
 		</topic>
 		<topic href="contents/30-expressions.html#whileExpression" label="While Loop" >
-			<topic href="contents/30-expressions.html#whileExpression_2" label="Examples" >
-			</topic>
 		</topic>
 		<topic href="contents/30-expressions.html#doWhileExpression" label="Do-While Loop" >
-			<topic href="contents/30-expressions.html#doWhileExpression_2" label="Examples" >
-			</topic>
 		</topic>
 		<topic href="contents/30-expressions.html#Xtend_Expressions_Return" label="Return Expression" >
 		</topic>

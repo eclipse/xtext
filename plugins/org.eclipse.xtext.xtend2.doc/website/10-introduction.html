@@ -72,14 +72,14 @@
 		</p>
 		<p>
 		<ul>
-		  <li><em>Advanced type inference</em> - You rarely need to write down type signatures</li>
-		  <li><em>Full support for Java Generics</em> - Including all conformance and conversion rules</li>
+		  <li><em>Advanced type inference</em> - you rarely need to write down type signatures</li>
+		  <li><em>Full support for Java Generics</em> - including all conformance and conversion rules</li>
 		  <li><em>Closures</em> - concise syntax for anonymous function literals</li>
 		  <li><em>Operator overloading</em> - make your libraries even more expressive</li>
 		  <li><em>Powerful switch expressions</em> - type based switching with implicit casts</li>
-		  <li><em>No statements</em> - Everything is an expression</li>
+		  <li><em>No statements</em> - everything is an expression</li>
 		  <li><em>Template expressions</em> - with intelligent white space handling</li>
-		  <li><em>Extension methods</em> - Enhance closed types with new functionality</li>
+		  <li><em>Extension methods</em> - enhance closed types with new functionality</li>
 		  <li><em>Property access syntax</em> - shorthands for getter and setter access</li>
 		  <li><em>Multiple dispatch</em> a.k.a. polymorphic method invocation</li>
 		  <li><em>Translates to Java</em> not bytecode - understand what is going on and use your code for platforms 
@@ -100,15 +100,20 @@
 			<h1>Getting Started</h1>
 			<div class="toc">
 			  <ul>
+			    <li><a href="10-introduction.php#Getting_Started_2" >Hello World</a></li>
 			    <li><a href="10-introduction.php#library" >The Runtime Library</a></li>
 			    <li><a href="10-introduction.php#Tutorial" >The Xtend Tutorial</a></li>
 			  </ul>
 			</div>
 			<p>
-			<div class="todo" >
-			describe how to get it
-			</div>
+			Xtend requires Eclipse 3.5 or higher and a Java SDK version 5 or above. There are multiple of ways to 
+			install Xtend in your Eclipse. The easiest way is via the 
+			<a href="http://marketplace.eclipse.org/" >Eclipse Market Place</a>. Go to 
+			<a href="http://marketplace.eclipse.org/content/eclipse-xtend" >the Xtend page</a> and drag the <em>Install</em> 
+			icon into your Eclipse. 
 			</p>
+			<a name="Getting_Started_2" ></a>
+			<h2>Hello World</h2>
 			<p>
 			Let us start with a simple &quot;Hello World&quot; example. In Xtend, that reads as
 			<div class="literallayout">
@@ -129,7 +134,7 @@
 			<p>
 			An Xtend class has to reside in a Java project which allows to setup its classpath. If the project
 			has the Xtext nature, the Xtend class will automatically be compiled to Java code in the <em>xtend-gen</em>
-			source folder. The resulting Java code will look like this
+			source folder. In this case it will look like this
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
@@ -149,20 +154,20 @@
 			<h2>The Runtime Library</h2>
 			<p>
 			The only surprising fact in the generated Java code may be the library class <span class="inlinecode">InputOutput</span>. Many 
-			features of Xtend are not built into the language itself but provided via small libraries 
-			<em>org.eclipse.xtend2.lib.jar</em>. This library and its dependencies have to reside on the classpath of each
-			Xtend class. The libraries provide a lot of useful helper methods to create and manipulate collections.
-			They define default operator bindings for primitives and contain some other handy things that are used by
-			the generated Java code.  
+			features of Xtend are not built into the language itself but provided via the library
+			<em>org.eclipse.xtend2.lib.jar</em>. This library and its three dependencies have to reside on the classpath 
+			of each Xtend class. The libraries provide a lot of useful helper methods to create and manipulate 
+			collections. They define default operator bindings for primitives and contain some other handy things 
+			that are used by the generated Java code.  
 			</p>
 			<a name="Tutorial" ></a>
 			<h2>The Xtend Tutorial</h2>
 			<p>
 			The best way to get acquainted with the language is to materialize the <em>Xtend Tutorial</em> example project 
-			in your workspace. You will find it in the new project wizard dialog.
+			in your workspace. You will find it in the <em>New &gt; Project..</em> wizard dialog.
 			</p>
 			<p>
-			The project contains a couple of sample Xtend files, which show the different language concepts in 
+			The project contains a couple of sample Xtend files which show the different language concepts in 
 			action. Looking into the <em>xtend-gen</em> folder which holds the compiled Java code will help you understand 
 			the concepts better.
 			</p>
