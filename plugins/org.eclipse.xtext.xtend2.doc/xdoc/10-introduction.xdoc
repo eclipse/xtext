@@ -59,9 +59,10 @@ section2:library[The Runtime Library]
 
 The only surprising fact in the generated Java code may be the library class code[InputOutput]. Many 
 features of Xtend are not built into the language itself but provided via small libraries 
-e[org.eclipse.xtend.lib.jar]. This library and its dependencies have to reside on the classpath of each
-Xtend class. The libraries provide a lot of useful helper methods to create and manipulate collections,
-default operator bindings for primitives and other handy things the generated Java code relies on.  
+e[org.eclipse.xtend2.lib.jar]. This library and its dependencies have to reside on the classpath of each
+Xtend class. The libraries provide a lot of useful helper methods to create and manipulate collections.
+They define default operator bindings for primitives and contain some other handy things that are used by
+the generated Java code.  
 
 
 section2:Tutorial[The Xtend Tutorial]

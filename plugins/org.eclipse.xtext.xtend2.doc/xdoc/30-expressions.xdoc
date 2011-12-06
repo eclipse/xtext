@@ -4,20 +4,19 @@ There are no statements in Xtend. Instead, everything is an expression and has a
 allows to use every Xtend expression on the right hand side of an assignment. For example, as a code[Xtend][try
 catch] is an expression the following code is legal in Xtend: 
 code[Xtend][
-	val data = try {
-			fileContentsToString('data.txt')
-		} catch (IOException e) {
-			'dummy data'
-		}
+val data = try {
+		fileContentsToString('data.txt')
+	} catch (IOException e) {
+		'dummy data'
+	}
 ] 
 
 If code[fileContentsToString()] throws an code[IOException], it is caught and a default value is returned 
-and thus assigned to the variable data.
+and assigned to the variable code[data].
  
 In Xtend, expressions appear as ref:fields[initializers of fields] or as the bodies of constructors
 or methods. A method body in Xtend can either be a single ref:blocks[block expression] 
 or a ref:templates[template expression]. 
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -32,7 +31,7 @@ section2:stringLiterals[String Literals]
 A string literal is a valid expression and returns an instance of code[java.lang.String] of the given value.
 String literals are enclosed by a pair of single quotes or double quotes allowing to use the respective
 other unquoted inside the string. Special characters can be quoted with a backslash or defined using
-Java's unicode notation. Strings can span multiple lines. 
+Java's unicode notation. On the contrary to Java, Xtend's strings can span multiple lines. 
 ul[
 	item[code['Hello World !']]
 	item[code["Hello World !"]]
