@@ -16,6 +16,11 @@
 			<username>dhubner</username>
 			<password>${encrypt-this}</password>
 		</server>
+		<server>
+			<id>nexus-local</id>
+			<username>deployment</username>
+			<password>deployment123</password>
+		</server>
 	</servers>
 	<mirrors>
 		<mirror>
