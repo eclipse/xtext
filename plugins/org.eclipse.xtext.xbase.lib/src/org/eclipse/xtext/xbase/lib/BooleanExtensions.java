@@ -77,5 +77,18 @@ public class BooleanExtensions {
 		return a != b;
 	}
 
+	/**
+	 * A logical <code>xor</code>. This is the equivalent to the java <code>^</code> operator.
+	 * 
+	 * @param a
+	 *            a boolean value.
+	 * @param b
+	 *            another boolean value.
+	 * @return <code>a ^ b</code>
+	 */
+	public static boolean xor(boolean a, boolean b) {
+		return a ^ b;
+	}
+
 
 }
