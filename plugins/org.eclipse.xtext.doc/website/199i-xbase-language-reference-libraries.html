@@ -143,15 +143,6 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-		<a href="01-Xtend_Introduction.php">Xtend</a></div>
-		<ul style="display: none;" id="subToc_01-Xtend_Introduction.html">
-		<li id="01-Xtend_Introduction.html#Getting_Started" ><a href="01-Xtend_Introduction.php#Getting_Started" >Getting Started</a></li>
-		<li id="02-Xtend_Classes_Functions.html" ><a href="02-Xtend_Classes_Functions.php" >Classes and Functions</a></li>
-		<li id="03-Xtend_Expressions.html" ><a href="03-Xtend_Expressions.php" >Expressions</a></li>
-		</ul>
-		</li>
-		<li class="separator"><div class="separator">
-		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
 		<a href="210-emf-integration.php">Integration with EMF and Other EMF Editors</a></div>
 		<ul style="display: none;" id="subToc_210-emf-integration.html">
 		<li id="210-emf-integration.html#model_metamodel" ><a href="210-emf-integration.php#model_metamodel" >Model, Ecore Model, and Ecore</a></li>
@@ -226,25 +217,13 @@
 		If the last argument of a method call is a closure, it can be appended to the method call. Thus,
 		</p>
 		<p>
-		<div class="literallayout">
-			<div class="incode">
-				<p class="code">
-					foo(42)&nbsp;[String&nbsp;s&nbsp;|&nbsp;s.toUpperCase]
-				</p>
-			</div>
-		</div>
+		<span class="inlinecode">foo(42)&nbsp;[String&nbsp;s&nbsp;|&nbsp;s.toUpperCase]</span>
 		</p>
 		<p>
 		will call a Java method with the signature
 		</p>
 		<p>
-		<div class="literallayout">
-			<div class="incode">
-				<p class="code">
-					<span class="keyword">void</span>&nbsp;foo(<span class="keyword">int</span>,&nbsp;Function1&lt;String,&nbsp;String&gt;)
-				</p>
-			</div>
-		</div>
+		<span class="inlinecode"><span class="keyword">void</span>&nbsp;foo(<span class="keyword">int</span>,&nbsp;Function1&lt;String,&nbsp;String&gt;)</span> 
 		</p>
 		<p>
 		Used in combination with the <a href="199h-xbase-language-reference-expressions.php#Xbase_Expressions_implicit_parameter" title="Go to &quot;Implicit Parameter it&quot;">implicit parameter name in closures</a>
