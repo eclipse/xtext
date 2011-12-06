@@ -136,7 +136,7 @@
 			Again one can escape any names conflicting with keywords using a <span class="inlinecode">^</span>. In contrast to Java, the 
 			import statement is never terminated with a semicolon. Xtend also features static imports but 
 			allows only a wildcard <span class="inlinecode">*</span> at the end, i.e. you cannot import single members using a static 
-			import. For non-static imports the use of wildcards is deprecated for the benefit of better tooling. 
+			import. Non-static wildcard imports are deprecated for the benefit of better tooling. 
 			</p>
 			<p>
 			As in Java all classes from the <span class="inlinecode">java.lang</span> package are implicitly imported.
@@ -159,29 +159,20 @@
 			padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
 			<br style="clear:both"></br>
 			<h1>Class Declaration</h1>
-			<div class="toc">
-			  <ul>
-			    <li><a href="20-classes-and-functions.php#Xtend_ClassDeclaration_2" >Inheritance</a></li>
-			    <li><a href="20-classes-and-functions.php#Xtend_ClassDeclaration_3" >Examples</a></li>
-			  </ul>
-			</div>
 			<p>
 			The class declaration reuses a lot of Java's syntax but still is a bit different in some aspects:
 			Java's default &quot;package private&quot; visibility does not exist in Xtend. As an Xtend class is compiled to
 			a top-level Java class and Java does not allow <span class="inlinecode"><span class="keyword">private</span></span> or <span class="inlinecode"><span class="keyword">protected</span></span> top-level
 			classes any Xtend class is <span class="inlinecode"><span class="keyword">public</span></span>. It is possible to write this explicitly. 
 			</p>
-			<a name="Xtend_ClassDeclaration_2" ></a>
-			<h2>Inheritance</h2>
 			<p>
-			Xtend's approach to inheritance is conceptionally the same as in Java. Single inheritance of Java classes as well as implementing 
-			multiple Java interfaces is supported. Because Xtend classes are compiled to Java, Xtend classes can extend
-			other Xtend classes, and even Java classes can inherit from Xtend classes. 
+			
+			Xtend's approach to inheritance is conceptionally the same as in Java. Single inheritance of Java 
+			classes as well as implementing multiple Java interfaces is supported. Because Xtend classes are compiled 
+			to Java, Xtend classes can extend other Xtend classes, and even Java classes can inherit from Xtend classes. 
 			</p>
-			<a name="Xtend_ClassDeclaration_3" ></a>
-			<h2>Examples</h2>
 			<p>
-			The most simple class:
+			The most simple class looks like this:
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
@@ -324,8 +315,8 @@
 			<p>
 			Methods can override other methods from the super class or implemented interface methods using the
 			keyword <span class="inlinecode"><span class="keyword">override</span></span>. If a method overrides a method from a super type, the 
-			<span class="inlinecode">override</span> keyword is mandatory and replaces the keyword <span class="inlinecode">def</span>. As in Java <span class="inlinecode"><span class="keyword">final</span></span>
-			methods cannot be overridden by subclasses.
+			<span class="inlinecode"><span class="keyword">override</span></span> keyword is mandatory and replaces the keyword <span class="inlinecode"><span class="keyword">def</span></span>. As in Java 
+			<span class="inlinecode"><span class="keyword">final</span></span> methods cannot be overridden by subclasses.
 			</p>
 			<p>
 			Example:
@@ -401,7 +392,7 @@
 			<a name="polymorphicDispatch" ></a>
 			<h2>Dispatch Methods</h2>
 			<p>
-			Generally method binding works just like method binding in Java. Method calls are bound 
+			Generally, method binding works just like method binding in Java. Method calls are bound 
 			based on the static types of arguments. Sometimes this is not what you want. Especially in the 
 			context of <a href="20-classes-and-functions.php#extensionMethods" title="Go to &quot;Extension Methods&quot;">extension methods</a> you would like to have polymorphic behavior.
 			</p>
@@ -440,10 +431,12 @@
 						<span class="keyword">protected</span>&nbsp;String&nbsp;_printType(<span class="keyword">final</span>&nbsp;Number&nbsp;x)&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"it\&apos;s&nbsp;a&nbsp;number"</span>;<br/>
 						}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;String&nbsp;_printType(<span class="keyword">final</span>&nbsp;Integer&nbsp;x)&nbsp;{<br/>
+						<br/>
+						<span class="keyword">protected</span>&nbsp;String&nbsp;_printType(<span class="keyword">final</span>&nbsp;Integer&nbsp;x)&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"it\&apos;s&nbsp;an&nbsp;int"</span>;<br/>
 						}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;printType(<span class="keyword">final</span>&nbsp;Number&nbsp;x)&nbsp;{<br/>
+						<br/>
+						<span class="keyword">public</span>&nbsp;String&nbsp;printType(<span class="keyword">final</span>&nbsp;Number&nbsp;x)&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_printType((Integer)x);<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
@@ -455,13 +448,12 @@
 			</div>
 			</p>
 			<p>
-			Note that the <span class="inlinecode"><span class="keyword">instanceof</span></span> cascade is ordered by how specific a type is. More specific 
-			types come first.
+			Note that the <span class="inlinecode"><span class="keyword">instanceof</span></span> cascade is ordered such that more specific types come first.
 			</p>
 			<p>
-			The default visibility of the underscore-methods is <span class="inlinecode"><span class="keyword">protected</span></span>. If all dispatch methods
+			The default visibility of the underscore methods is <span class="inlinecode"><span class="keyword">protected</span></span>. If all dispatch methods
 			explicitly declare the same visibility, this will be the visibility of the inferred dispatcher, too.
-			Otherwise it is <span class="inlinecode"><span class="keyword">public</span></span> 
+			Otherwise it is <span class="inlinecode"><span class="keyword">public</span></span>.
 			 
 			In case there is no single most general signature, one is computed and the
 			different overloaded methods are matched in the order they are declared within the class file.
@@ -585,7 +577,7 @@
 			</div>
 			</p>
 			<p>
-			The resulting dispatch method in the generated Java class 'MyLabelProvider' would then look like this:
+			The resulting dispatch method in the generated Java class <span class="inlinecode">MyLabelProvider</span> would then look like this:
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
@@ -619,10 +611,9 @@
 			<p>
 			Xtend supports Java annotations. The syntax is exactly like defined in the 
 			<a href="http://java.sun.com/docs/books/jls/third_edition/html/j3TOC.html" >Java Language Specification</a>. 
-			Annotations are available on classes, fields, methods and parameters.
+			Annotations are available on classes, fields, methods and parameters. Here is an example:
 			</p>
 			<p>
-			Example:
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
@@ -669,7 +660,7 @@
 			</p>
 			<p>
 			Method calls in extension syntax often result in much better readable code, as function calls are rather
-			concatenated than nested. They also allow to add methods in a certain context only. 
+			concatenated than nested. They also allow to add methods in a specific context only. 
 			</p>
 			<a name="extensionMethods_3" ></a>
 			<h2>Local Extension Methods</h2>
@@ -745,7 +736,7 @@
 			<span class="inlinecode"><span class="keyword">extension</span></span> to the field declaration.
 			</p>
 			<p>
-			Imagine you want to add a method <em>fullName</em> to a closed type <em>Person</em>. With extension methods, you could 
+			Imagine you want to add a method <span class="inlinecode">fullName()</span> to a closed type <span class="inlinecode">Person</span>. With extension methods, you could 
 			declare the following class
 			<div class="literallayout">
 				<div class="incode">
@@ -810,11 +801,10 @@
 			</div>
 			</p>
 			<p>
-			The nice thing with using dependency injection in combination with the extension modifier as opposed 
-			to static <a href="20-classes-and-functions.php#extensionImports" title="Go to &quot;Extension Imports&quot;">extension imports</a> is, that you can simply exchange the component that provides
-			the referenced extension with another 
-			implementation. You do this without modifying the library or the client code. 
-			You will only have to change the binding in your dependency injection configuration. Also this gives you a general hook for any 
+			Using dependency injection in combination with the extension modifier has a significant advantage over 
+			to static <a href="20-classes-and-functions.php#extensionImports" title="Go to &quot;Extension Imports&quot;">extension imports</a>: You can simply exchange the component that provides
+			the referenced extension with another implementation without touching the client code. You will only have to 
+			change the binding in your dependency injection configuration. Also this gives you a general hook for any 
 			AOP-like thing you would want to do, or allows you to write against an SPI, where the concrete implementation 
 			can be provided by a third party.
 			</p>

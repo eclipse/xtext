@@ -1027,10 +1027,11 @@ a block&apos;s last expression.
 </p>
 <p>
 A block expression is surrounded by curly braces and contains at least one expression. It can 
-optionally be terminated by a semicolon.
+optionally be terminated by a semicolon. 
 </p>
-<a name="blocks_3"></a>
-<h3>Examples</h3>
+<p>
+Here are two examples:
+</p>
 <p>
 <div class="literallayout">
 <div class="incode">
@@ -1106,8 +1107,6 @@ A while loop <span class="inlinecode"><span class="keyword">while</span>&nbsp;(p
 unless the predicate is evaluated to <span class="inlinecode"><span class="keyword">false</span></span>. The return type of a while loop is 
 <span class="inlinecode"><span class="keyword">void</span></span>.
 </p>
-<a name="whileExpression_2"></a>
-<h3>Examples</h3>
 <p>
 <ul>
 	<li>
@@ -1142,8 +1141,6 @@ expression unless the predicate is evaluated to <span class="inlinecode"><span c
 evaluating the predicate for the first time. The return type of a do-while loop is 
 <span class="inlinecode"><span class="keyword">void</span></span>.
 </p>
-<a name="doWhileExpression_2"></a>
-<h3>Examples</h3>
 <p>
 <ul>
 	<li>
@@ -1242,12 +1239,12 @@ looks like:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-toClass(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
+<span class="keyword">def</span>&nbsp;toClass(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
 &nbsp;&nbsp;package&nbsp;&laquo;e.packageName&raquo;;<br/>
 <br/>
 &nbsp;&nbsp;&laquo;placeImports&raquo;<br/>
 <br/>
-&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;e.name&raquo;&nbsp;&laquo;IF&nbsp;e.extends!=null&raquo;extends&nbsp;&laquo;e.extends&raquo;&laquo;ENDIF&raquo;&nbsp;{<br/>
+&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;e.name&raquo;&nbsp;&laquo;IF&nbsp;e.superClass!=null&raquo;extends&nbsp;&laquo;e.superClass&raquo;&laquo;ENDIF&raquo;&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&laquo;FOR&nbsp;e.members&raquo;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;member.toMember&raquo;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&laquo;ENDFOR&raquo;<br/>
@@ -1386,7 +1383,7 @@ of the template itself.
 &nbsp;&nbsp;&nbsp;&nbsp;print(Node&nbsp;n)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;&laquo;n.name&raquo;&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;IF&nbsp;hasChildren&raquo;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;n.children*.print&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;n.children.map[print]&raquo;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;ENDIF&raquo;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&apos;</span><span class="string">&apos;&apos;</span><br/>
@@ -1421,7 +1418,7 @@ node&nbsp;Parent{<br/>
 As in the previous example, there is no indentation on the root level for the same reason.
 The first nesting level has only one indentation level in the output. This is derived from
 the indentation of the <span class="inlinecode"><span class="keyword">IF</span>&nbsp;hasChildren</span> condition in the template which is nested in
-the node. The additional nesting of the recursive invocation <span class="inlinecode">children*.print</span> is not
+the node. The additional nesting of the recursive invocation <span class="inlinecode">children.map[print]</span> is not
 visible in the output as it is relative the the surrounding control structure. The line with
 <span class="inlinecode"><span class="keyword">IF</span></span> and <span class="inlinecode"><span class="keyword">ENDIF</span></span> contain only control structures thus they are skipped in 
 the output. Note the additional indentation of the node <em>Leaf</em> which happens due to the first rule:

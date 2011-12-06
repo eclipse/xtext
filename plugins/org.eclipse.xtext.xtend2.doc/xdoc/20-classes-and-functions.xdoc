@@ -48,7 +48,7 @@ The ordinary imports of type names are equivalent to the imports known from Java
 Again one can escape any names conflicting with keywords using a code[^]. In contrast to Java, the 
 import statement is never terminated with a semicolon. Xtend also features static imports but 
 allows only a wildcard code[*] at the end, i.e. you cannot import single members using a static 
-import. For non-static imports the use of wildcards is deprecated for the benefit of better tooling. 
+import. Non-static wildcard imports are deprecated for the benefit of better tooling. 
 
 As in Java all classes from the code[java.lang] package are implicitly imported.
 code[Xtend][
@@ -71,15 +71,12 @@ classes any Xtend class is code[Xtend][public]. It is possible to write this exp
 
 %% e[To be implemented: ]The code[Xtend][abstract] as well as the code[Xtend][final] modifiers are directly
 %% translated to Java and have the exact same meaning.
-section2[Inheritance]
 
-Xtend's approach to inheritance is conceptionally the same as in Java. Single inheritance of Java classes as well as implementing 
-multiple Java interfaces is supported. Because Xtend classes are compiled to Java, Xtend classes can extend
-other Xtend classes, and even Java classes can inherit from Xtend classes. 
+Xtend's approach to inheritance is conceptionally the same as in Java. Single inheritance of Java 
+classes as well as implementing multiple Java interfaces is supported. Because Xtend classes are compiled 
+to Java, Xtend classes can extend other Xtend classes, and even Java classes can inherit from Xtend classes. 
 
-section2[Examples]
-
-The most simple class:
+The most simple class looks like this:
 code[Xtend][
 	class MyClass {
 	}
@@ -184,8 +181,8 @@ section2[Overriding Methods]
 
 Methods can override other methods from the super class or implemented interface methods using the
 keyword code[Xtend][override]. If a method overrides a method from a super type, the 
-code[override] keyword is mandatory and replaces the keyword code[def]. As in Java code[Xtend][final]
-methods cannot be overridden by subclasses.
+code[Xtend][override] keyword is mandatory and replaces the keyword code[Xtend][def]. As in Java 
+code[Xtend][final] methods cannot be overridden by subclasses.
 
 Example:
 code[Xtend][
@@ -242,7 +239,7 @@ specified.
 
 section2:polymorphicDispatch[Dispatch Methods]
 
-Generally method binding works just like method binding in Java. Method calls are bound 
+Generally, method binding works just like method binding in Java. Method calls are bound 
 based on the static types of arguments. Sometimes this is not what you want. Especially in the 
 context of ref:extensionMethods[extension methods] you would like to have polymorphic behavior.
 
@@ -271,11 +268,11 @@ code[Java][
 	protected String _printType(final Number x) {
 		return "it\'s a number";
 	}
-
+	
 	protected String _printType(final Integer x) {
 		return "it\'s an int";
 	}
-
+	
 	public String printType(final Number x) {
 		if (x instanceof Integer) {
 			return _printType((Integer)x);
@@ -285,12 +282,11 @@ code[Java][
 	}
  ]
 
-Note that the code[Java][instanceof] cascade is ordered by how specific a type is. More specific 
-types come first.
+Note that the code[Java][instanceof] cascade is ordered such that more specific types come first.
 
-The default visibility of the underscore-methods is code[Xtend][protected]. If all dispatch methods
+The default visibility of the underscore methods is code[Xtend][protected]. If all dispatch methods
 explicitly declare the same visibility, this will be the visibility of the inferred dispatcher, too.
-Otherwise it is code[Xtend][public] 
+Otherwise it is code[Xtend][public].
  
 In case there is no single most general signature, one is computed and the
 different overloaded methods are matched in the order they are declared within the class file.
@@ -383,7 +379,7 @@ code[Xtend][
 	}
 ]
 
-The resulting dispatch method in the generated Java class 'MyLabelProvider' would then look like this:
+The resulting dispatch method in the generated Java class code[MyLabelProvider] would then look like this:
 code[Java][
 	public String label(final Object it) {
 		if (it instanceof Entity) {
@@ -411,9 +407,8 @@ section:Annotations[Annotations]
 
 Xtend supports Java annotations. The syntax is exactly like defined in the 
 link[http://java.sun.com/docs/books/jls/third_edition/html/j3TOC.html][Java Language Specification]. 
-Annotations are available on classes, fields, methods and parameters.
+Annotations are available on classes, fields, methods and parameters. Here is an example:
 
-Example:
 code[Xtend][
 	@TypeAnnotation(typeof(String))
 	class MyClass {
@@ -441,7 +436,7 @@ code[Xtend][
 ]   
 
 Method calls in extension syntax often result in much better readable code, as function calls are rather
-concatenated than nested. They also allow to add methods in a certain context only. 
+concatenated than nested. They also allow to add methods in a specific context only. 
 
 
 %% To be callable in the extension syntax, a method has to be on the extension scope of the callers context.
@@ -499,7 +494,7 @@ section2:Extension_Fields[Extension Fields]
 You can make the instance methods provided by the field available as extension methods, by adding the keyword 
 code[Xtend][extension] to the field declaration.
 
-Imagine you want to add a method e[fullName] to a closed type e[Person]. With extension methods, you could 
+Imagine you want to add a method code[fullName()] to a closed type code[Person]. With extension methods, you could 
 declare the following class
 code[Xtend][
 	class PersonExtensions {
@@ -539,10 +534,9 @@ code[Xtend][
 	myPerson.fullName
 ]
 
-The nice thing with using dependency injection in combination with the extension modifier as opposed 
-to static ref:extensionImports[extension imports] is, that you can simply exchange the component that provides
-the referenced extension with another 
-implementation. You do this without modifying the library or the client code. 
-You will only have to change the binding in your dependency injection configuration. Also this gives you a general hook for any 
+Using dependency injection in combination with the extension modifier has a significant advantage over 
+to static ref:extensionImports[extension imports]: You can simply exchange the component that provides
+the referenced extension with another implementation without touching the client code. You will only have to 
+change the binding in your dependency injection configuration. Also this gives you a general hook for any 
 AOP-like thing you would want to do, or allows you to write against an SPI, where the concrete implementation 
 can be provided by a third party.
