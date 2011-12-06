@@ -5,5 +5,5 @@ Bundle-SymbolicName: org.eclipse.xtext.xtend2.doc;singleton:=true
 Bundle-Version: 2.2.0.qualifier
 Bundle-Vendor: %providerName
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.emf.mwe2.launch;bundle-version="2.2.0",
+Require-Bundle: org.eclipse.emf.mwe2.launch;bundle-version="2.2.0";resolution:=optional,
  org.eclipse.xtext.xdoc.generator;bundle-version="0.1.0";resolution:=optional
