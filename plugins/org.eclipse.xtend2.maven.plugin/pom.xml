@@ -9,9 +9,27 @@
 	<url>http://xtend-lang.org</url>
 	<dependencies>
 		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.xtend2.standalone</artifactId>
+			<groupId>org.eclipse.xtend2</groupId>
+			<artifactId>org.eclipse.xtend2.standalone</artifactId>
 			<version>[2.2.0,)</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>jmxtools</artifactId>
+					<groupId>com.sun.jdmk</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jmxri</artifactId>
+					<groupId>com.sun.jmx</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jms</artifactId>
+					<groupId>javax.jms</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>mail</artifactId>
+					<groupId>javax.mail</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.maven</groupId>
@@ -54,13 +72,18 @@
 			<version>10.0.1</version>
 		</dependency>
 		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+			<version>[3.0.0]</version>
+		</dependency>
+		<dependency>
 			<groupId>org.eclipse.emf</groupId>
 			<artifactId>codegen</artifactId>
 			<version>2.2.3</version>
 			<scope>runtime</scope>
 		</dependency>
-	<!-- Explicit antl-runtime dependency to 3.2 to avoid loading of mismatched 
-		transitive dependencies -->
+		<!-- Explicit antl-runtime dependency to 3.2 to avoid loading of mismatched 
+			transitive dependencies -->
 		<dependency>
 			<groupId>org.antlr</groupId>
 			<artifactId>antlr-runtime</artifactId>
@@ -73,28 +96,6 @@
 			</exclusions>
 		</dependency>
 	</dependencies>
-	<repositories>
-		<repository>
-			<id>Xtext Latest</id>
-			<url>http://build.eclipse.org/jobs/Xtext-Maven-Deploy/maven-snapshot/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>Eclipse Testing</id>
-			<url>http://maven.eclipse.org/nexus/content/repositories/testing/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
 	<build>
 		<plugins>
 			<plugin>
@@ -168,6 +169,18 @@
 			</plugin>
 		</plugins>
 	</build>
+	<repositories>
+		<repository>
+			<id>nexus-local</id>
+			<url>http://localhost:8081/nexus/content/repositories/xtend2-maven/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 	<distributionManagement>
 		<repository>
 			<id>xtext-releases</id>
@@ -177,7 +190,7 @@
 		<snapshotRepository>
 			<id>xtext-snapshot</id>
 			<name>Eclipse Xtext Snapshots</name>
-			<url>http://maven.eclipse.org/nexus/content/repositories/nightly-juno/</url>
+			<url>http://localhost:8081/nexus/content/repositories/snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
 </project>

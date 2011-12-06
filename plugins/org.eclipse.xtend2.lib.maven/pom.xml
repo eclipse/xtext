@@ -1,8 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.eclipse.xtend2</groupId>
-  <artifactId>xtend-library</artifactId>
-  <version>2.2.0-SNAPSHOT</version>
+  <artifactId>org.eclipse.xtend2.lib</artifactId>
+  <version>2.2.0</version>
   <name>Eclipse Xtend Runtime Library</name>
   <description>The runtime library for the Xtend programming language.</description>
   <dependencies>

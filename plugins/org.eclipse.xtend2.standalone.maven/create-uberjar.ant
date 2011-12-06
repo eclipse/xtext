@@ -1,12 +1,16 @@
 <project default="run">
 
 	<property name="eclipsePluginFolder" value="/Users/huebner/Entwicklung/tycho-workspace/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/" />
-	<property name="xtextPluginFolder" value="${eclipsePluginFolder}" />
-	<property name="maven.version" value="2.2.0-SNAPSHOT" />
+	<property name="xtextPluginFolder" value="/Users/huebner/Downloads/plugins/" />
+	<property name="maven.version" value="2.2.0" />
 	<property name="output.folder" value="output" />
 	<echo>${maven.version}</echo>
 
-	<target name="run" depends="createSourcesUberjar">
+	<property name="binJarTemp" value="binJarTemp" />
+	<property name="sourceJarTemp" value="sourceJarTemp" />
+
+	<target name="run" depends="clean,createSourcesUberjar">
+
 		<loadfile property="modifiedPomXml" srcFile="pom-template.pom">
 			<filterchain>
 				<expandproperties />
@@ -14,17 +18,49 @@
 		</loadfile>
 		<echo file="${output.folder}/org.eclipse.xtend2.standalone-${maven.version}.pom">${modifiedPomXml}</echo>
 		<echo>Pom stored: ${output.folder}/org.eclipse.xtend2.standalone-${maven.version}.pom</echo>
+		<antcall target="deploy.artifacts" inheritall="true" />
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: deploy.artifacts                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="deploy.artifacts" if="allow.deploy">
+		<copy verbose="true" todir="/Users/huebner/.m2/repository/org/eclipse/xtend2/org.eclipse.xtend2.standalone/2.2.0/">
+			<fileset dir="${output.folder}">
+				<include name="org.eclipse.xtend2.standalone-${maven.version}.jar" />
+				<include name="org.eclipse.xtend2.standalone-${maven.version}-sources.jar" />
+				<include name="org.eclipse.xtend2.standalone-${maven.version}.pom" />
+			</fileset>
+		</copy>
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: clean                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="clean">
+		<delete>
+			<fileset dir="${output.folder}">
+				<include name="**" />
+			</fileset>
+			<fileset dir="${binJarTemp}">
+				<include name="**" />
+			</fileset>
+			<fileset dir="${sourceJarTemp}">
+				<include name="**" />
+			</fileset>
+		</delete>
 	</target>
 
 	<!-- ================================= 
-          target: createUberjar              
+          target: createUberjar    Binary           
          ================================= -->
 	<target name="createUberjar">
-		<property name="binJarTemp" value="binJarTemp" />
 		<!-- TP bundles -->
 		<fileset dir="${eclipsePluginFolder}" id="binEclipseJars">
 			<include name="org.antlr.runtime_3.2.0*.jar" />
 			<include name="org.eclipse.jdt.core_3.5.2*.jar" />
+			<include name="org.eclipse.emf.ecore.xmi_2.5.0.*.jar" />
+			<include name="org.eclipse.emf.common_2.5.0.*.jar" />
 		</fileset>
 
 		<!-- Xtext bundles -->
@@ -36,28 +72,40 @@
 			<include name="org.eclipse.xtext.xbase.lib_2.2.0*.jar" />
 			<include name="org.eclipse.xtext.xtend2_2.2.0*.jar" />
 			<include name="org.eclipse.xtend2.lib_2.2.0*.jar" />
-			<include name="org.eclipse.xtext.xtend2.standalone_2.0.0*.jar" />
 		</fileset>
 
 
 		<unzip dest="${binJarTemp}">
 			<fileset refid="binEclipseJars" />
 			<fileset refid="binXtextJars" />
+			<fileset dir="${xtextPluginFolder}">
+				<include name="org.eclipse.xtext.xtend2.standalone_2.2.0*.jar" />
+			</fileset>
+			<fileset dir="${eclipsePluginFolder}">
+				<include name="org.eclipse.emf.ecore_2.5.0.*.jar" />
+			</fileset>
 		</unzip>
-
+		<delete>
+			<fileset dir="${binJarTemp}">
+				<include name="META-INF/**" />
+			</fileset>
+		</delete>
 		<!-- Jar uber jar -->
 		<jar destfile="${output.folder}/org.eclipse.xtend2.standalone-${maven.version}.jar" basedir="${binJarTemp}" />
 	</target>
 
 	<!-- ================================= 
-	          target: createSourcesUberjar              
+	          target: createSourcesUberjar     Sources   
 	         ================================= -->
 	<target name="createSourcesUberjar" depends="createUberjar">
-		<property name="sourceJarTemp" value="sourceJarTemp" />
 		<!-- TP bundles -->
 		<fileset dir="${eclipsePluginFolder}" id="sourceEclipseJars">
+
 			<include name="org.antlr.runtime.source_3.2.0*.jar" />
 			<include name="org.eclipse.jdt.core.source_3.5.2*.jar" />
+			<include name="org.eclipse.emf.ecore.source_2.5.0.*.jar" />
+			<include name="org.eclipse.emf.ecore.xmi.source_2.5.0.*.jar" />
+			<include name="org.eclipse.emf.common.source_2.5.0.*.jar" />
 		</fileset>
 
 
@@ -70,15 +118,19 @@
 			<include name="org.eclipse.xtext.xbase.lib.source_2.2.0*.jar" />
 			<include name="org.eclipse.xtext.xtend2.source_2.2.0*.jar" />
 			<include name="org.eclipse.xtend2.lib.source_2.2.0*.jar" />
-			<include name="org.eclipse.xtext.xtend2.standalone.source_2.0.0*.jar" />
 		</fileset>
 
-		<unzip dest="${sourceJarTemp}">
+		<unzip dest="${sourceJarTemp}" overwrite="true">
 			<fileset refid="sourceEclipseJars" />
 			<fileset refid="sourceXtextJars" />
+			<fileset dir="${xtextPluginFolder}">
+				<include name="org.eclipse.xtext.xtend2.standalone.source_2.2.0*.jar" />
+			</fileset>
 		</unzip>
 
 		<!-- Jar uber jar -->
-		<jar destfile="${output.folder}/org.eclipse.xtend2.standalone-${maven.version}-sources.jar" basedir="${sourceJarTemp}" />
+		<jar destfile="${output.folder}/org.eclipse.xtend2.standalone-${maven.version}-sources.jar" basedir="${sourceJarTemp}">
+			<exclude name="META-INF/*" />
+		</jar>
 	</target>
 </project>
