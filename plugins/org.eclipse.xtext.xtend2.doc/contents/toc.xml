@@ -70,9 +70,9 @@
 		<topic href="contents/30-expressions.html#typeCasts" label="Type Casts" >
 		</topic>
 		<topic href="contents/30-expressions.html#operators" label="Infix Operators and Operator Overloading" >
-			<topic href="contents/30-expressions.html#operators_3" label="Short-Circuit Boolean Operators" >
+			<topic href="contents/30-expressions.html#operators_4" label="Short-Circuit Boolean Operators" >
 			</topic>
-			<topic href="contents/30-expressions.html#operators_4" label="Examples" >
+			<topic href="contents/30-expressions.html#operators_5" label="Examples" >
 			</topic>
 			<topic href="contents/30-expressions.html#propertyAssignment" label="Assignments" >
 			</topic>
@@ -104,8 +104,6 @@
 			</topic>
 		</topic>
 		<topic href="contents/30-expressions.html#ifExpression" label="If Expression" >
-			<topic href="contents/30-expressions.html#Xtend_Expressions_IfTypeInference" label="Typing" >
-			</topic>
 		</topic>
 		<topic href="contents/30-expressions.html#switchExpression" label="Switch Expression" >
 			<topic href="contents/30-expressions.html#switchExpression_7" label="Type guards" >

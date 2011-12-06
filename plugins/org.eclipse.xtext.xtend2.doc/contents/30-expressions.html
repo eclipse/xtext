@@ -12,15 +12,8 @@
 <h1>Expressions</h1>
 <p>
 There are no statements in Xtend. Instead, everything is an expression and has a return value. That
-allows to use every Xtend expression on the right hand side of an assignment. For example, as a <div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="keyword">try</span><br/>
-<span class="keyword">catch</span>
-</p>
-</div>
-</div>
- is an expression the following code is legal in Xtend: 
+allows to use every Xtend expression on the right hand side of an assignment. For example, as a 
+<span class="inlinecode"><span class="keyword">try</span>&nbsp;<span class="keyword">catch</span></span> is an expression the following code is legal in Xtend: 
 <div class="literallayout">
 <div class="incode">
 <p class="code">
@@ -53,85 +46,65 @@ A literal denotes a fixed unchangeable value. Literals for strings, integers, bo
 A string literal is a valid expression and returns an instance of <span class="inlinecode">java.lang.String</span> of the given value.
 String literals are enclosed by a pair of single quotes or double quotes allowing to use the respective
 other unquoted inside the string. Special characters can be quoted with a backslash or defined using
-Java&apos;s unicode notation. On the contrary to Java, Xtend&apos;s strings can span multiple lines. 
-<ul>
-	<li>
-		<span class="inlinecode"><span class="string">&apos;Hello&nbsp;World&nbsp;!&apos;</span></span>
-	</li>
-	<li>
-		<span class="inlinecode"><span class="string">"Hello&nbsp;World&nbsp;!"</span></span>
-	</li>
-	<li>
-		<span class="inlinecode"><span class="string">&apos;Hello&nbsp;"World"&nbsp;!&apos;</span></span>
-	</li>
-	<li>
-		<span class="inlinecode"><span class="string">"Hello&nbsp;\"World\"&nbsp;!"</span></span>
-	</li>
-	<li>
-		<span class="inlinecode">&apos;\u00a1Hola&nbsp;el&nbsp;mundo!<span class="string">&apos;</span></span>
-	</li>
-	<li>
-		<div class="literallayout">
-		<div class="incode">
-		<p class="code">
-		<span class="string">"Hello&nbsp;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;World&nbsp;!"</span><br/>
-		</p>
-		</div>
-		</div>
-	</li>
-</ul>
+Java&apos;s unicode notation. On the contrary to Java, Xtend&apos;s strings can span multiple lines without the
+need to quote newline characters.
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="string">&apos;Hello&nbsp;World&nbsp;!&apos;</span><br/>
+<span class="string">"Hello&nbsp;World&nbsp;!"</span><br/>
+<span class="string">&apos;Hello&nbsp;"World"&nbsp;!&apos;</span><br/>
+<span class="string">"Hello&nbsp;\"World\"&nbsp;!"</span><br/>
+&apos;\u00a1Hola&nbsp;el&nbsp;mundo!<span class="string">&apos;<br/>
+"Hello&nbsp;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;World&nbsp;!"<br/>
+</span>
+</p>
+</div>
+</div>
 </p>
 <a name="integerLiterals"></a>
 <h3>Integer Literals</h3>
 <p>
 An integer literal creates an <span class="inlinecode"><span class="keyword">int</span></span>. There is no signed integer. If you put a minus 
-operator in front of an integer literal it is taken as a UnaryOperator with one argument (the positive 
-integer literal).
-<ul>
-	<li>
-		<span class="inlinecode">42</span>
-	</li>
-	<li>
-		<span class="inlinecode">234254</span>
-	</li>
-</ul>
+operator in front of an integer literal it is taken as a <span class="inlinecode">UnaryOperator</span> with one argument 
+(the positive integer literal).
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+42<br/>
+234254<br/>
+-1&nbsp;<span class="comment">//&nbsp;an&nbsp;expression&nbsp;consisting&nbsp;of&nbsp;the&nbsp;unary&nbsp;-&nbsp;operator&nbsp;and&nbsp;an&nbsp;integer&nbsp;literal&nbsp;&nbsp;<br/>
+</span>
+</p>
+</div>
+</div>
 </p>
 <a name="booleanLiteral"></a>
 <h3>Boolean Literals</h3>
 <p>
 There are two boolean literals, <span class="inlinecode"><span class="keyword">true</span></span> and <span class="inlinecode"><span class="keyword">false</span></span> which correspond to their 
 Java counterpart of type <span class="inlinecode"><span class="keyword">boolean</span></span>. 
-<ul>
-	<li>
-		<span class="inlinecode"><span class="keyword">true</span></span>
-	</li>
-	<li>
-		<span class="inlinecode"><span class="keyword">false</span></span>
-	</li>
-</ul>
 </p>
 <a name="nullLiteral"></a>
 <h3>Null Literal</h3>
 <p>
 The null pointer literal is <span class="inlinecode"><span class="keyword">null</span></span>. It is a member of any reference type and
 the only member of the type <span class="inlinecode">java.lang.Void</span>.
-<ul>
-	<li>
-		<span class="inlinecode"><span class="keyword">null</span></span>
-	</li>
-</ul>
 </p>
 <a name="typeLiteral"></a>
 <h3>Type Literals</h3>
 <p>
 Type literals are specified using the keyword <span class="inlinecode"><span class="keyword">typeof</span></span> :
-<ul>
-	<li>
-		<span class="inlinecode"><span class="keyword">typeof</span>(java.lang.String)</span> which yields <span class="inlinecode">java.lang.String.<span class="keyword">class</span></span>
-		  in the generated Java code.
-	</li>
-</ul>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">typeof</span>(java.lang.String)&nbsp;<span class="comment">//&nbsp;yields&nbsp;java.lang.String.class<br/>
+</span>
+</p>
+</div>
+</div>
 </p>
 <a name="functionTypes"></a>
 <h3>Function Types</h3>
@@ -141,7 +114,22 @@ type signature. On the Java level a closure (or more generally any function obje
 instance of one of the types in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.2.0/org/eclipse/xtext/xbase/lib/Functions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.Functions" >Functions</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java" title="View Source Code" >(src)</a>, depending on the 
 number of arguments. However, as closures are a very important language feature, a special 
 syntax for function types has been introduced. So instead of writing 
-<span class="inlinecode">Function1&lt;String,Boolean&gt;</span> one can write <span class="inlinecode">(String)=&gt;<span class="keyword">boolean</span></span>.
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+Function1&lt;String,Boolean&gt;<br/>
+</p>
+</div>
+</div>
+ 
+one can write 
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+(String)=&gt;<span class="keyword">boolean</span><br/>
+</p>
+</div>
+</div>
 </p>
 <a name="typeCasts"></a>
 <h2>Type Casts</h2>
@@ -152,12 +140,15 @@ Type casts bind stronger than any other operator but weaker than feature calls.
 <p>
 The conformance rules for casts are defined in the 
 <a href="http://java.sun.com/docs/books/jls/third_edition/html/conversions.html#5.5">Java Language Specification</a>.
-Here is an example:
-<ul>
-	<li>
-		<span class="inlinecode">something&nbsp;<span class="keyword">as</span>&nbsp;MyClass</span>
-	</li>
-</ul>
+Here are some examples:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+something&nbsp;<span class="keyword">as</span>&nbsp;MyClass<br/>
+<span class="string">""</span>&nbsp;<span class="keyword">as</span>&nbsp;Object<br/>
+</p>
+</div>
+</div>
 </p>
 <a name="operators"></a>
 <h2>Infix Operators and Operator Overloading</h2>
@@ -180,6 +171,8 @@ x+y&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;calls&nbsp;BigDecimalEx
 </p>
 <p>
 The following defines the operators and the corresponding Java method signatures / expressions.
+</p>
+<p>
 <table>
 <tr>
 <td>
@@ -414,7 +407,7 @@ as the plain assignment operator <span class="inlinecode">=</span> is. That is a
 other operators are left-to-right associative. Parenthesis can be used to adjust the default 
 precedence and associativity. 
 </p>
-<a name="operators_3"></a>
+<a name="operators_4"></a>
 <h3>Short-Circuit Boolean Operators</h3>
 <p>
 If the operators <span class="inlinecode">||</span> and <span class="inlinecode">&amp;&amp;</span> are used in a context where the left hand operand is of 
@@ -431,29 +424,21 @@ hand operand might not be evaluated at all in the following cases:
 	</li>
 </ol>
 </p>
-<a name="operators_4"></a>
+<a name="operators_5"></a>
 <h3>Examples</h3>
 <p>
-<ul>
-	<li>
-		<span class="inlinecode">my.property&nbsp;=&nbsp;23</span>
-	</li>
-	<li>
-		<span class="inlinecode">myList&nbsp;+=&nbsp;23</span>
-	</li>
-	<li>
-		<span class="inlinecode">x&nbsp;&gt;&nbsp;23&nbsp;&amp;&amp;&nbsp;y&nbsp;&lt;&nbsp;23</span>
-	</li>
-	<li>
-		<span class="inlinecode">x&nbsp;&amp;&amp;&nbsp;y&nbsp;||&nbsp;z</span>
-	</li>
-	<li>
-		<span class="inlinecode">1&nbsp;+&nbsp;3&nbsp;*&nbsp;5&nbsp;*&nbsp;(-&nbsp;23)</span>
-	</li>
-	<li>
-		<span class="inlinecode">!(x)</span>
-	</li>
-</ul>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+my.property&nbsp;=&nbsp;23<br/>
+myList&nbsp;+=&nbsp;23<br/>
+x&nbsp;&gt;&nbsp;23&nbsp;&amp;&amp;&nbsp;y&nbsp;&lt;&nbsp;23<br/>
+x&nbsp;&amp;&amp;&nbsp;y&nbsp;||&nbsp;z<br/>
+1&nbsp;+&nbsp;3&nbsp;*&nbsp;5&nbsp;*&nbsp;(-&nbsp;23)<br/>
+!(x)<br/>
+</p>
+</div>
+</div>
 </p>
 <a name="propertyAssignment"></a>
 <h3>Assignments</h3>
@@ -486,7 +471,7 @@ is the assigned value.
 </p>
 <p>
 If there is no accessible field on the left operand&apos;s type, a method called 
-<span class="inlinecode">setMyProperty(..)</span> (JavaBeans setter method) is looked up. It has to take one argument 
+<span class="inlinecode">setMyProperty</span> (JavaBeans setter method) is looked up. It has to take one argument 
 of the type (or a super type) of the right hand operand. The return value will be whatever the 
 setter method returns (which usually is <span class="inlinecode"><span class="keyword">void</span></span>). As a result the compiler translates to:
 <div class="literallayout">
@@ -510,7 +495,7 @@ a reference. In such situations the variable needs to be declared with the keywo
 which stands for &apos;variable&apos;.
 </p>
 <p>
-A typical example for using <span class="inlinecode"><span class="keyword">var</span></span> is a counter in a loop. 
+A typical example for using <span class="inlinecode"><span class="keyword">var</span></span> is a counter in a loop:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
@@ -550,8 +535,8 @@ expression. Here is an example for an explicitly declared type:
 </div>
 </p>
 <p>
-In such cases, the right hand expression&apos;s type must <a href="15-types.html#Xbase_Types_ConformanceRules" title="Go to &quot;Conformance and Conversion&quot;">conform</a> to the type 
-on the left hand side. 
+In such cases, the type of the right hand expression must <a href="15-types.html#Xbase_Types_ConformanceRules" title="Go to &quot;Conformance and Conversion&quot;">conform</a> to the type 
+of the expression on the left side. 
 </p>
 <p>
 Alternatively the type can be left out and will be inferred from the initialization expression:  
@@ -628,9 +613,9 @@ higher precedence than <span class="inlinecode"><span class="keyword">this</span
 <a name="nullSafeFeatureCalls"></a>
 <h3>Null-Safe Feature Call</h3>
 <p>
-Checking for null references can make code very unreadable. In many situations it is ok for an 
-expression to return null if a receiver was null. Xtend supports the safe navigation operator 
-<span class="inlinecode">?.</span> to make such code more readable.
+Checking for <span class="inlinecode"><span class="keyword">null</span></span> references can make code very unreadable. In many situations it is ok for an 
+expression to return <span class="inlinecode"><span class="keyword">null</span></span> if a receiver was <span class="inlinecode"><span class="keyword">null</span></span>. Xtend supports the safe navigation 
+operator <span class="inlinecode">?.</span> to make such code better readable.
 </p>
 <p>
 Instead of writing 
@@ -656,14 +641,14 @@ myRef?.doStuff()<br/>
 <h2>Constructor Call</h2>
 <p>
 Construction of objects is done by invoking Java constructors. The syntax is exactly as in Java, e.g.
-<ul>
-	<li>
-		<span class="inlinecode"><span class="keyword">new</span>&nbsp;String()</span>
-	</li>
-	<li>
-		<span class="inlinecode"><span class="keyword">new</span>&nbsp;ArrayList&lt;BigDecimal&gt;()</span>
-	</li>
-</ul>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">new</span>&nbsp;String()<br/>
+<span class="keyword">new</span>&nbsp;ArrayList&lt;BigDecimal&gt;()<br/>
+</p>
+</div>
+</div>
 </p>
 <a name="closures"></a>
 <h2>Closures</h2>
@@ -671,6 +656,13 @@ Construction of objects is done by invoking Java constructors. The syntax is exa
 A closure is a literal that defines an anonymous function. A closure also captures the current
 scope, so that any final variables and parameters visible at construction time can be referred to 
 in the closure&apos;s expression. 
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">val</span>&nbsp;func&nbsp;=&nbsp;[String&nbsp;s&nbsp;|&nbsp;s.length&gt;3]<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 The surrounding square brackets are optional if the closure is the single argument of a method 
@@ -682,8 +674,7 @@ myList.findFirst(e&nbsp;|&nbsp;e.name==<span class="keyword">null</span>)<br/>
 </p>
 </div>
 </div>
-</p>
-<p>
+
 instead of
 <div class="literallayout">
 <div class="incode">
@@ -694,14 +685,7 @@ myList.findFirst([e&nbsp;|&nbsp;e.name==<span class="keyword">null</span>])<br/>
 </div>
 </p>
 <p>
-But in all other cases the square brackets are mandatory:
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="keyword">val</span>&nbsp;func&nbsp;=&nbsp;[String&nbsp;s&nbsp;|&nbsp;s.length&gt;3]<br/>
-</p>
-</div>
-</div>
+But in all other cases the square brackets are mandatory.
 </p>
 <a name="closuresTypeInference"></a>
 <h3>Typing</h3>
@@ -742,17 +726,16 @@ newArrayList(<span class="string">"Foo"</span>,&nbsp;<span class="string">"Bar"<
 </p>
 <p>
 Here are some more examples:
-<ul>
-	<li>
-		<span class="inlinecode">[&nbsp;|&nbsp;<span class="string">"foo"</span>&nbsp;]&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;closure&nbsp;without&nbsp;parameters</span></span>
-	</li>
-	<li>
-		<span class="inlinecode">[&nbsp;String&nbsp;s&nbsp;|&nbsp;s.toUpperCase()&nbsp;]&nbsp;<span class="comment">//&nbsp;explicit&nbsp;argument&nbsp;type</span></span>
-	</li>
-	<li>
-		<span class="inlinecode">[&nbsp;a,b,c&nbsp;|&nbsp;a+b+c&nbsp;]&nbsp;<span class="comment">//&nbsp;inferred&nbsp;argument&nbsp;types</span></span>
-	</li>
-</ul>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+[|&nbsp;<span class="string">"foo"</span>]&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;closure&nbsp;without&nbsp;parameters<br/>
+</span>[String&nbsp;s&nbsp;|&nbsp;s.toUpperCase()]&nbsp;<span class="comment">//&nbsp;explicit&nbsp;argument&nbsp;type<br/>
+</span>[a,b,c&nbsp;|&nbsp;a+b+c]&nbsp;<span class="comment">//&nbsp;inferred&nbsp;argument&nbsp;types<br/>
+</span>
+</p>
+</div>
+</div>
 </p>
 <a name="functionMapping"></a>
 <h3>Function Mapping</h3>
@@ -827,12 +810,11 @@ newArrayList(&nbsp;<span class="string">&apos;aaa&apos;</span>,&nbsp;<span class
 <h3>Implicit Parameter it</h3>
 <p>
 If a closure has a single parameter whose type can be inferred, the declaration of the parameter can
-be ommitted. Use <em>it</em> to refer to the parameter inside the closure&apos;s body.
+be ommitted. Use <span class="inlinecode"><span class="keyword">it</span></span> to refer to the parameter inside the closure&apos;s body.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">val</span>&nbsp;(String)=&gt;String&nbsp;function&nbsp;=&nbsp;[toUpperCase]&nbsp;<br/>
-&nbsp;&nbsp;<span class="comment">//&nbsp;equivalent&nbsp;to&nbsp;[it&nbsp;|&nbsp;it.toUpperCase]<br/>
+<span class="keyword">val</span>&nbsp;(String)=&gt;String&nbsp;function&nbsp;=&nbsp;[toUpperCase]&nbsp;&nbsp;<span class="comment">//&nbsp;equivalent&nbsp;to&nbsp;[it&nbsp;|&nbsp;it.toUpperCase]<br/>
 </span>
 </p>
 </div>
@@ -856,8 +838,7 @@ methods, this yields a very concise syntax.
 <div class="incode">
 <p class="code">
 <span class="keyword">val</span>&nbsp;fruit&nbsp;=&nbsp;newArrayList(<span class="string">&apos;apple&apos;</span>,&nbsp;<span class="string">&apos;pear&apos;</span>,&nbsp;<span class="string">&apos;lemon&apos;</span>)<br/>
-fruit.map[toUpperCase]&nbsp;<br/>
-&nbsp;&nbsp;<span class="comment">//&nbsp;same&nbsp;as&nbsp;fruit.map([it&nbsp;| it.toUpperCase])<br/>
+fruit.map[toUpperCase]&nbsp;&nbsp;<span class="comment">//&nbsp;same&nbsp;as&nbsp;fruit.map([it&nbsp;| it.toUpperCase])<br/>
 </span>
 </p>
 </div>
@@ -893,6 +874,7 @@ Here is an example for creating a simple tree of <span class="inlinecode">Nodes<
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -906,7 +888,16 @@ syntax of Java&apos;s if statement it behaves like Java&apos;s ternary operator
 Consequently, you can use if expressions deeply nested within expressions.
 </p>
 <p>
-An expression <span class="inlinecode"><span class="keyword">if</span>&nbsp;(p)&nbsp;e1&nbsp;<span class="keyword">else</span>&nbsp;e2</span> results in either the value <span class="inlinecode">e1</span> or <span class="inlinecode">e2</span> 
+An expression 
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">if</span>&nbsp;(p)&nbsp;e1&nbsp;<span class="keyword">else</span>&nbsp;e2<br/>
+</p>
+</div>
+</div>
+ 
+results in either the value <span class="inlinecode">e1</span> or <span class="inlinecode">e2</span> 
 depending on whether the predicate <span class="inlinecode">p</span> evaluates to <span class="inlinecode"><span class="keyword">true</span></span> or <span class="inlinecode"><span class="keyword">false</span></span>. 
 The else part is optional which is a shorthand for <span class="inlinecode"><span class="keyword">else</span>&nbsp;<span class="keyword">null</span></span>. That means 
 </p>
@@ -931,8 +922,6 @@ is the a short hand for
 </div>
 </div>
 </p>
-<a name="Xtend_Expressions_IfTypeInference"></a>
-<h3>Typing</h3>
 <p>
 The type of an if expression is the common super type of the return types <span class="inlinecode">T1</span> and <span class="inlinecode">T2</span> 
 of the two expression <span class="inlinecode">e1</span> and <span class="inlinecode">e2</span>. 
@@ -940,11 +929,11 @@ of the two expression <span class="inlinecode">e1</span> and <span class="inline
 <a name="switchExpression"></a>
 <h2>Switch Expression</h2>
 <p>
-The switch expression is different from Java&apos;s. First, there is no fall through which means 
-only one case is evaluated at most. Second, the use of switch is not limited to certain values but 
-can be used for any object reference instead.
+The <span class="inlinecode"><span class="keyword">switch</span></span> expression is different from Java&apos;s. First, there is no fall through which means 
+only one <span class="inlinecode"><span class="keyword">case</span></span> is evaluated at most. Second, the use of <span class="inlinecode"><span class="keyword">switch</span></span> is not limited 
+to certain values but can be used for any object reference instead.
  
-For a switch expression 
+For a <span class="inlinecode"><span class="keyword">switch</span></span> expression 
 <div class="literallayout">
 <div class="incode">
 <p class="code">
@@ -966,8 +955,8 @@ the value is bound to the given name. Expressions of type <span class="inlinecod
 are not allowed in a switch expression.
 </p>
 <p>
-The guard of each case clause is evaluated until the switch value equals the result of the case&apos;s 
-guard expression or if the case&apos;s guard expression evaluates to <span class="inlinecode">true</span>. Then the right hand 
+The guard of each <span class="inlinecode"><span class="keyword">case</span></span> clause is evaluated until the switch value equals the result of the 
+case&apos;s guard expression or if the case&apos;s guard expression evaluates to <span class="inlinecode">true</span>. Then the right hand 
 expression of the case evaluated and the result is returned.
 </p>
 <p>
@@ -1062,9 +1051,17 @@ Here are two examples:
 <a name="forLoop"></a>
 <h2>For Loop</h2>
 <p>
-The for loop <span class="inlinecode"><span class="keyword">for</span>&nbsp;(T1&nbsp;variable&nbsp;:&nbsp;iterableOfT1)&nbsp;expression</span> is used to execute a certain 
-expression for each element of an array of an instance of <span class="inlinecode">java.lang.Iterable</span>. The local 
-<span class="inlinecode">variable</span> is final, hence canot be updated. 
+The for loop 
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">for</span>&nbsp;(T1&nbsp;variable&nbsp;:&nbsp;arrayOrIterable)&nbsp;expression<br/>
+</p>
+</div>
+</div>
+ 
+is used to execute a certain expression for each element of an array of an instance of 
+<span class="inlinecode">java.lang.Iterable</span>. The local <span class="inlinecode">variable</span> is final, hence canot be updated. 
 </p>
 <p>
 The return type of a for loop is <span class="inlinecode"><span class="keyword">void</span></span>. The type of the local variable can be left out. 
@@ -1072,98 +1069,78 @@ In that case it is inferred from the type of the array or <span class="inlinecod
 iterable expression.
 </p>
 <p>
-<ul>
-	<li>
-		
-				<div class="literallayout">
-		<div class="incode">
-		<p class="code">
-		<span class="keyword">for</span>&nbsp;(String&nbsp;s&nbsp;:&nbsp;myStrings)&nbsp;{<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(s);<br/>
-		}<br/>
-		</p>
-		</div>
-		</div>
-		
-	</li>
-	<li>
-		
-				<div class="literallayout">
-		<div class="incode">
-		<p class="code">
-		<span class="keyword">for</span>&nbsp;(s&nbsp;:&nbsp;myStrings)<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(s)<br/>
-		</p>
-		</div>
-		</div>
-		
-	</li>
-</ul>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">for</span>&nbsp;(String&nbsp;s&nbsp;:&nbsp;myStrings)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(s)<br/>
+}<br/>
+<br/>
+<span class="keyword">for</span>&nbsp;(s&nbsp;:&nbsp;myStrings)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(s)<br/>
+</p>
+</div>
+</div>
 </p>
 <a name="whileExpression"></a>
 <h2>While Loop</h2>
 <p>
-A while loop <span class="inlinecode"><span class="keyword">while</span>&nbsp;(predicate)&nbsp;expression</span> is used to execute a certain expression 
-unless the predicate is evaluated to <span class="inlinecode"><span class="keyword">false</span></span>. The return type of a while loop is 
-<span class="inlinecode"><span class="keyword">void</span></span>.
+A while loop 
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">while</span>&nbsp;(predicate)&nbsp;expression<br/>
+</p>
+</div>
+</div>
+ 
+is used to execute a certain expression unless the predicate is evaluated to <span class="inlinecode"><span class="keyword">false</span></span>. 
+The return type of a while loop is <span class="inlinecode"><span class="keyword">void</span></span>.
 </p>
 <p>
-<ul>
-	<li>
-		<div class="literallayout">
-		<div class="incode">
-		<p class="code">
-		<span class="keyword">while</span>&nbsp;(<span class="keyword">true</span>)&nbsp;{<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>);<br/>
-		}<br/>
-		</p>
-		</div>
-		</div>
-	</li>
-	<li>
-		<div class="literallayout">
-		<div class="incode">
-		<p class="code">
-		<span class="keyword">while</span>&nbsp;((i=i+1)&nbsp;&lt;&nbsp;max)&nbsp;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>)<br/>
-		</p>
-		</div>
-		</div>
-	</li>
-</ul>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">while</span>&nbsp;(<span class="keyword">true</span>)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>)<br/>
+}<br/>
+<br/>
+<span class="keyword">while</span>&nbsp;((i=i+1)&nbsp;&lt;&nbsp;max)&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>)<br/>
+</p>
+</div>
+</div>
 </p>
 <a name="doWhileExpression"></a>
 <h2>Do-While Loop</h2>
 <p>
-A do-while loop <span class="inlinecode"><span class="keyword">do</span>&nbsp;expression&nbsp;<span class="keyword">while</span>&nbsp;(predicate)</span> is used to execute a certain 
-expression unless the predicate is evaluated to <span class="inlinecode"><span class="keyword">false</span></span>. The difference to the 
-<a href="30-expressions.html#whileExpression" title="Go to &quot;While Loop&quot;">while loop</a> is that the execution starts by executing the block once before 
-evaluating the predicate for the first time. The return type of a do-while loop is 
-<span class="inlinecode"><span class="keyword">void</span></span>.
+A do-while loop 
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">do</span>&nbsp;expression&nbsp;<span class="keyword">while</span>&nbsp;(predicate)<br/>
+</p>
+</div>
+</div>
+ 
+is used to execute a certain expression unless the predicate is evaluated to <span class="inlinecode"><span class="keyword">false</span></span>. 
+The difference to the <a href="30-expressions.html#whileExpression" title="Go to &quot;While Loop&quot;">while loop</a> is that the execution starts by executing 
+the block once before evaluating the predicate for the first time. The return type of a do-while 
+loop is <span class="inlinecode"><span class="keyword">void</span></span>.
 </p>
 <p>
-<ul>
-	<li>
-		<div class="literallayout">
-		<div class="incode">
-		<p class="code">
-		<span class="keyword">do</span>&nbsp;{<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>);<br/>
-		}&nbsp;<span class="keyword">while</span>&nbsp;(<span class="keyword">true</span>)<br/>
-		</p>
-		</div>
-		</div>
-	</li>
-	<li>
-		<div class="literallayout">
-		<div class="incode">
-		<p class="code">
-		<span class="keyword">do</span>&nbsp;doSideEffect(<span class="string">"foo"</span>)&nbsp;<span class="keyword">while</span>&nbsp;((i=i+1)&lt;max)<br/>
-		</p>
-		</div>
-		</div>
-	</li>
-</ul>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">do</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>);<br/>
+}&nbsp;<span class="keyword">while</span>&nbsp;(<span class="keyword">true</span>)<br/>
+<br/>
+<br/>
+<span class="keyword">do</span>&nbsp;doSideEffect(<span class="string">"foo"</span>)&nbsp;<span class="keyword">while</span>&nbsp;((i=i+1)&lt;max)<br/>
+</p>
+</div>
+</div>
 </p>
 <a name="Xtend_Expressions_Return"></a>
 <h2>Return Expression</h2>
@@ -1232,8 +1209,12 @@ from Java.
 <h2>Template Expressions</h2>
 <p>
 Templates allow for readable string concatenation, which is the main thing you do when writing a 
-code generator. Let us have a look at an example of how a typical method with template expressions 
-looks like:
+code generator. Template are surrounded by triple single or double quotes. The text of a template 
+can be interrupted by expressions in french quotes <span class="inlinecode">&laquo;&raquo;</span>. One way to type these 
+<em>guillemets</em> is to use content assist inside the template. 
+</p>
+<p>
+Let us have a look at an example of how a typical method with template expressions looks like:
 </p>
 <p>
 <div class="literallayout">
@@ -1255,12 +1236,8 @@ looks like:
 </div>
 </p>
 <p>
-If you are familiar with Xpand, you will notice that it is exactly the same syntax. The difference 
-is, that the template syntax is actually an expression, which means it can occur everywhere where 
-an expression is expected. For instance in conjunction the powerful 
-<a href="30-expressions.html#switchExpression" title="Go to &quot;Switch Expression&quot;">switch expression</a>:
-</p>
-<p>
+A template is actually an expression, which means it can occur everywhere where an expression is
+expected. For instance in conjunction the powerful <a href="30-expressions.html#switchExpression" title="Go to &quot;Switch Expression&quot;">switch expression</a>:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
