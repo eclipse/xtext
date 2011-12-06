@@ -30,11 +30,11 @@ todo[describe how to get it]
 
 Let us start with a simple "Hello World" example. In Xtend, that reads as
 code[Xtend][
-class HelloWorld {
-	def static main(String\[\] args) {
-		println("Hello World")
+	class HelloWorld {
+		def static void main(String\[\] args) {
+			println("Hello World")
+		}
 	}
-}
 ]
 The Xtend code resembles Java a lot. You can already see how the syntactic noise is reduced: No semicolons,
 no return types etc. 
@@ -43,15 +43,14 @@ An Xtend class has to reside in a Java project which allows to setup its classpa
 has the Xtext nature, the Xtend class will automatically be compiled to Java code in the e[xtend-gen]
 source folder. The resulting Java code will look like this
 code[Java][
-import org.eclipse.xtext.xbase.lib.InputOutput;
-
-@SuppressWarnings("all")
-public class HelloWorld {
-  public static String main(final String\[\] args) {
-    String _println = InputOutput.<String>println("Hello World");
-    return _println;
-  }
-}
+	import org.eclipse.xtext.xbase.lib.InputOutput;
+	
+	@SuppressWarnings("all")
+	public class HelloWorld {
+	  public static void main(final String\[\] args) {
+	    InputOutput.<String>println("Hello World");
+	  }
+	}
 ] 
 
 
