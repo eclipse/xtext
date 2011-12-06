@@ -132,7 +132,7 @@ public class Xtend2BatchCompiler {
 				public void write(char[] data, int offset, int count) throws IOException {
 					String message = String.copyValueOf(data, offset, count);
 					if (!Strings.isEmpty(message.trim())) {
-						log.info(message);
+						log.debug(message);
 					}
 				}
 
@@ -159,7 +159,7 @@ public class Xtend2BatchCompiler {
 				public void write(char[] data, int offset, int count) throws IOException {
 					String message = String.copyValueOf(data, offset, count);
 					if (!Strings.isEmpty(message.trim())) {
-						log.error(message);
+						log.debug(message);
 					}
 				}
 
