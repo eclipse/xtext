@@ -1,5 +1,6 @@
 package bootstrap;
 
+import bootstrap.HtmlExtensions;
 import bootstrap.XdocExtensions;
 import com.google.inject.Inject;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -12,6 +13,9 @@ import org.eclipse.xtext.xdoc.xdoc.XdocFile;
 public class Menu {
   @Inject
   private XdocExtensions _xdocExtensions;
+  
+  @Inject
+  private HtmlExtensions _htmlExtensions;
   
   public CharSequence menu(final XdocFile file) {
     StringConcatenation _builder = new StringConcatenation();
@@ -39,11 +43,12 @@ public class Menu {
           if (_isEmpty) {
             _builder.append("\t\t\t\t");
             _builder.append("<li><a href=\"#");
-            String _id = this._xdocExtensions.id(s);
-            _builder.append(_id, "				");
+            String _href = this._htmlExtensions.href(s);
+            _builder.append(_href, "				");
             _builder.append("\">");
             TextOrMarkup _title = s.getTitle();
-            _builder.append(_title, "				");
+            CharSequence _html = this._htmlExtensions.toHtml(_title);
+            _builder.append(_html, "				");
             _builder.append("</a></li>");
             _builder.newLineIfNotEmpty();
           } else {
@@ -53,11 +58,12 @@ public class Menu {
             _builder.append("\t\t\t\t");
             _builder.append("\t");
             _builder.append("<a href=\"#");
-            String _id_1 = this._xdocExtensions.id(s);
-            _builder.append(_id_1, "					");
+            String _href_1 = this._htmlExtensions.href(s);
+            _builder.append(_href_1, "					");
             _builder.append("\">");
             TextOrMarkup _title_1 = s.getTitle();
-            _builder.append(_title_1, "					");
+            CharSequence _html_1 = this._htmlExtensions.toHtml(_title_1);
+            _builder.append(_html_1, "					");
             _builder.append("</a>");
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t\t\t");
@@ -70,11 +76,12 @@ public class Menu {
                 _builder.append("\t\t\t\t");
                 _builder.append("\t\t");
                 _builder.append("<li><a href=\"#");
-                String _id_2 = this._xdocExtensions.id(subSection);
-                _builder.append(_id_2, "						");
+                String _href_2 = this._htmlExtensions.href(subSection);
+                _builder.append(_href_2, "						");
                 _builder.append("\">");
                 TextOrMarkup _title_2 = subSection.getTitle();
-                _builder.append(_title_2, "						");
+                CharSequence _html_2 = this._htmlExtensions.toHtml(_title_2);
+                _builder.append(_html_2, "						");
                 _builder.append("</a></li>");
                 _builder.newLineIfNotEmpty();
               }

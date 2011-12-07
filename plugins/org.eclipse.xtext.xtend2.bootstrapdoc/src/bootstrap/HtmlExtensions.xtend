@@ -10,6 +10,10 @@ import java.util.List
 import org.eclipse.xtext.xdoc.xdoc.OrderedList
 import org.eclipse.xtext.xdoc.xdoc.Item
 import java.util.Map
+import org.eclipse.xtext.xdoc.xdoc.UnorderedList
+import org.eclipse.xtext.xdoc.xdoc.CodeBlock
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.xdoc.xdoc.Todo
 
 class HtmlExtensions {
 	
@@ -49,12 +53,23 @@ class HtmlExtensions {
 		<li>«contents.toHtml»</li>
 	'''
 	
+	def dispatch toHtml(UnorderedList it) '''
+		<ol>
+			«FOR item:items»
+				«item.toHtml»
+			«ENDFOR»
+		</ol>
+	'''
 	
-	/*Emphasize |
-	Anchor |
-	Ref |
-	OrderedList |
-	UnorderedList |
+	def dispatch toHtml(Todo it) {
+		println("TODO: " + text)
+	}
+	
+	def dispatch toHtml(EObject it) {
+		println("Missing toHtml for " + eClass.name)
+	}
+	
+	/*
 	CodeBlock |
 	CodeRef |
 	Link |

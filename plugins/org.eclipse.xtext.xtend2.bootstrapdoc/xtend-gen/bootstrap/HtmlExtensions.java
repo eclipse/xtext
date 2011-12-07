@@ -11,6 +11,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -23,6 +24,8 @@ import org.eclipse.xtext.xdoc.xdoc.OrderedList;
 import org.eclipse.xtext.xdoc.xdoc.Ref;
 import org.eclipse.xtext.xdoc.xdoc.TextOrMarkup;
 import org.eclipse.xtext.xdoc.xdoc.TextPart;
+import org.eclipse.xtext.xdoc.xdoc.Todo;
+import org.eclipse.xtext.xdoc.xdoc.UnorderedList;
 
 @SuppressWarnings("all")
 public class HtmlExtensions {
@@ -114,12 +117,40 @@ public class HtmlExtensions {
     return _builder;
   }
   
+  protected CharSequence _toHtml(final UnorderedList it) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("<ol>");
+    _builder.newLine();
+    {
+      EList<Item> _items = it.getItems();
+      for(final Item item : _items) {
+        _builder.append("\t");
+        CharSequence _html = this.toHtml(item);
+        _builder.append(_html, "	");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append("</ol>");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  protected CharSequence _toHtml(final Todo it) {
+    String _text = it.getText();
+    String _operator_plus = StringExtensions.operator_plus("TODO: ", _text);
+    String _println = InputOutput.<String>println(_operator_plus);
+    return _println;
+  }
+  
+  protected CharSequence _toHtml(final EObject it) {
+    EClass _eClass = it.eClass();
+    String _name = _eClass.getName();
+    String _operator_plus = StringExtensions.operator_plus("Missing toHtml for ", _name);
+    String _println = InputOutput.<String>println(_operator_plus);
+    return _println;
+  }
+  
   /**
-   * Emphasize |
-   * Anchor |
-   * Ref |
-   * OrderedList |
-   * UnorderedList |
    * CodeBlock |
    * CodeRef |
    * Link |
@@ -174,6 +205,10 @@ public class HtmlExtensions {
       return _toHtml((OrderedList)it);
     } else if (it instanceof Ref) {
       return _toHtml((Ref)it);
+    } else if (it instanceof Todo) {
+      return _toHtml((Todo)it);
+    } else if (it instanceof UnorderedList) {
+      return _toHtml((UnorderedList)it);
     } else if (it instanceof List) {
       return _toHtml((List<TextOrMarkup>)it);
     } else if (it instanceof Item) {
@@ -182,6 +217,8 @@ public class HtmlExtensions {
       return _toHtml((TextOrMarkup)it);
     } else if (it instanceof TextPart) {
       return _toHtml((TextPart)it);
+    } else if (it instanceof EObject) {
+      return _toHtml((EObject)it);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(it).toString());
