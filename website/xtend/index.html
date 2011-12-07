@@ -20,6 +20,10 @@ body {
 	padding-top: 40px;
 }
 
+section#announcement {
+	padding-top: 0px !important;
+}
+
 section {
 	padding-top: 40px;
 }
@@ -27,6 +31,7 @@ section {
 div#maincontainer>section {
 	padding-top: 90px;
 }
+
 </style>
 <link href="google-code-prettify/prettify.css" type="text/css"
 	rel="stylesheet" />
@@ -131,13 +136,13 @@ div#maincontainer>section {
 				<a class="btn primary large" style="width: 150px;" href="#download">Download
 					&raquo;</a>
 				&nbsp;&nbsp;&nbsp;
-				<!-- TODO: should we link to #documentation or ./documentation? --> 
-				<a class="btn primary large" style="width: 150px;" href="./documentation">Documentation
+				<a class="btn primary large" style="width: 150px;" href="#documentation">Documentation
 					&raquo;</a>
 			</p>
 		</div>
 	</header>
 	<div id="maincontainer" class="container">
+		<section id="announcement" align="center"><h3><i>December 2011 : Xtend 2.2 has been <a href="#latestrelease">released</a>.</i></h3></section>
 		<section id="intro">
 			<div class="row">
 				<div class="span-one-third">
@@ -272,6 +277,64 @@ div#maincontainer>section {
 			</div>
 			<div class="row">
 				<div class="span8">
+					<div class="row">
+						<div class="span3">
+							<h2>User Guide</h2>
+						</div>
+						<div class="span2">
+						<a class="btn default medium" style="width: 80px;"
+								href="documentation/index.html"><strong>HTML &raquo;</strong></a>
+						</div>
+						<div class="span3">
+						<a class="btn default medium" style="width: 80px;"
+								href="documentation/Xtend%20User%20Guide.pdf"><strong>PDF &raquo;</strong></a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="span8">
+						<p>The user guide provides detailed information about the various language concepts.</p>
+						</div>
+					</div>
+						<br/>
+						<br/>
+					<div class="row">
+						<div class="span3">
+							<h2>Intro Article</h2>
+						</div>
+						<div class="span2">
+						<a class="btn default medium" style="width: 80px;"
+								href="http://pragprog.com/magazines/2011-12/extending-java"><strong>HTML &raquo;</strong></a>
+						</div>
+						<div class="span3">
+						<a class="btn default medium" style="width: 80px;"
+								href="http://pragprog.com/magazines/download/30.PDF"><strong>PDF &raquo;</strong></a>
+						</div>
+					</div>
+					<div class="row">
+					<div class="span8">
+						<p>An introductory article we wrote for the <a href="http://pragprog.com/magazines">PragPub Magazine</a> in December 2011.
+						It covers a walkthough of the language and outlines the motivations behind its design.</p>
+						</div>
+					</div>
+<!-- 					<h2>Documentation</h2> -->
+<!-- 					<p> -->
+<!-- 						You might want to have a look at <a href="#embracejava"> -->
+<!-- 						    this page first</a>. To get more detailed information about the -->
+<!-- 						various language features you can have a look at the <a -->
+<!-- 							href="./documentation/Xtend%20User%20Guide.pdf">user -->
+<!-- 							guide</a>. In addition to the <a -->
+<!-- 							href="./documentation/Xtend%20User%20Guide.pdf">pdf version</a> it&apos;s -->
+<!-- 						also available <a -->
+<!-- 							href="./documentation/10-introduction.php">as html</a>. -->
+<!-- 					</p> -->
+<!-- 				</div> -->
+<!-- 				<div class="span2"> -->
+<!-- 					<h2>&nbsp;</h2> -->
+<!-- 					<a href="./documentation/Xtend%20User%20Guide.pdf"> <img -->
+<!-- 						src="images/pdf-sign.jpg" width="80px" /> -->
+<!-- 					</a> -->
+				</div>
+				<div class="span8">
 					<h2>Tutorial</h2>
 					<p>If you want to get your hands on it, we recommend to
 						materialize the tutorial example using Eclipse&apos;s example wizard.
@@ -285,24 +348,39 @@ div#maincontainer>section {
 						snippets with some explanation in the comments.</p>
 					<p>Just try it, it&apos;s straight forward.</p>
 				</div>
-				<div class="span6">
-					<h2>Documentation</h2>
-					<p>
-						You might want to have a look at <a href="#embracejava">
-						    this page first</a>. To get more detailed information about the
-						various language features you can have a look at the <a
-							href="./documentation/Xtend%20User%20Guide.pdf">user
-							guide</a>. In addition to the <a
-							href="./documentation/Xtend%20User%20Guide.pdf">pdf version</a> it&apos;s
-						also available <a
-							href="./documentation/10-introduction.php">as html</a>.
-					</p>
+			</div>
+		</section>
+		<section id="latestrelease">
+			<div class="page-header">
+				<h1>
+					Latest Release <small>Xtend 2.2 December 2011</small>
+				</h1>
+			</div>
+			<div class="row">
+				<div class="span8">
+					<dl>
+				        <dt>Standalone Compiler</dt>
+				        <dd>A standalone compiler allows to translate Xtend files to Java source code. No Eclipse required!</dd>
+				        <dt>Maven Support</dt>
+				        <dd>A Maven plugin for standalone compilation as well as the standrad lib is available.</dd>
+				        <dt>Reworked Exception Handling</dt>
+				        <dd>It's now possible to declare a throw clause just like in Java. Unlike in Java, checked exceptions
+				        don't need to be declared or caught.</dd>
+				        <dt>Constructors, Static Members, Field Initializer</dt>
+				      </dl>
 				</div>
-				<div class="span2">
-					<h2>&nbsp;</h2>
-					<a href="./documentation/Xtend%20User%20Guide.pdf"> <img
-						src="images/pdf-sign.jpg" width="80px" />
-					</a>
+				<div class="span8">
+					<dl>
+				        <dt>Launch Shortcuts</dt>
+				        <dd>Launch shortcuts for main methods and junit tests.</dd>
+				        <dt>Open Type Hierarchy</dt>
+				        <dt>Quick Outline shows inherited members</dt>
+				        <dd>Like in JDT the quick outline can optionally show inherited members.</dd>
+				        <dt>More Quick Fixes</dt>
+				        <dd>Quick fixes for implementing abstract methods, adding imports, and more.</dd>
+				        <dt>Better Content Assist</dt>
+				        <dd>Content Assist for overriding methods and implementing constructors from supertypes.</dd>
+				      </dl>
 				</div>
 			</div>
 		</section>
