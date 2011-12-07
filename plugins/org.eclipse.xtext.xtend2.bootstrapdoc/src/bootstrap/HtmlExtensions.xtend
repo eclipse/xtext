@@ -142,10 +142,11 @@ class HtmlExtensions {
 		""
 	}
 	
-	def quote(CharSequence it) {
+	def protected quote(CharSequence it) {
 		toString.replace('<', '&lt;').replace('>', '&gt;')
 			.replace('«', '&laquo;').replace('»', '&raquo;')
 			.replace('\\[', '[').replace('\\]',']')
+			.replace("'", '&apos;').replace('´','&apos;').replace('`','&apos;')
 	}
 
 	def toHtmlParagraph(List<? extends EObject> it) '''
