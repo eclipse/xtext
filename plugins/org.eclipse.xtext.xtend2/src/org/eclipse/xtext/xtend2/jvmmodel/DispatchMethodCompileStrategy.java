@@ -12,6 +12,7 @@ import static com.google.common.collect.Lists.*;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -56,49 +57,46 @@ public class DispatchMethodCompileStrategy implements Functions.Function1<Import
 		final StringBuilderBasedAppendable a = new StringBuilderBasedAppendable(importManager);
 		boolean needsElse = true;
 		int parameterCount = dispatchOperation.getParameters().size();
-		boolean[] isVoidParameterPresent = new boolean[parameterCount];
+		boolean[] allCasesSameType = new boolean[parameterCount];
 		for(int i = 0; i < parameterCount; i++) {
+			allCasesSameType[i] = true;
+			JvmTypeReference dispatchParameterType = dispatchOperation.getParameters().get(i).getParameterType();
 			for (JvmOperation operation : sortedDispatchOperations) {
 				JvmFormalParameter parameter = operation.getParameters().get(i);
-				isVoidParameterPresent[i] |= typeReferences.is(parameter.getParameterType(), Void.class);
+				JvmTypeReference caseParameterType = parameter.getParameterType();
+				if (!EcoreUtil.equals(dispatchParameterType, caseParameterType)) {
+					allCasesSameType[i] = false;
+					break;
+				}
 			}
 		}
 		for (JvmOperation operation : sortedDispatchOperations) {
 			final List<Later> laters = newArrayList();
 			for (int i = 0; i < parameterCount; i++) {
-				final JvmFormalParameter p1 = dispatchOperation.getParameters().get(i);
-				final JvmFormalParameter p2 = operation.getParameters().get(i);
-				final JvmTypeReference type = p2.getParameterType();
-				final String name = getVarName(p1, a);
-				if (!typeConformanceComputer.isConformant(p2.getParameterType(), p1.getParameterType(), true) || isVoidParameterPresent[i]) {
-					if (typeReferences.is(type, Void.class)) {
-						laters.add(new Later() {
-							@Override
-							public void exec() {
-								if (laters.size() > 1)
-									a.append("(");
-								a.append(name).append(" == null");
-								if (laters.size() > 1)
-									a.append(")");
+				final JvmFormalParameter dispatchParam = dispatchOperation.getParameters().get(i);
+				final JvmTypeReference dispatchParamType = dispatchParam.getParameterType();
+				final JvmFormalParameter caseParam = operation.getParameters().get(i);
+				final JvmTypeReference caseParamType = caseParam.getParameterType();
+				final String name = getVarName(dispatchParam, a);
+				if (typeReferences.is(caseParamType, Void.class)) {
+					laters.add(new Later() {
+						@Override
+						public void exec() {
+							a.append(name).append(" == null");
+						}
+					});
+				} else if (!allCasesSameType[i]) {
+					laters.add(new Later() {
+						@Override
+						public void exec() {
+							if (typeConformanceComputer.isConformant(caseParamType, dispatchParamType, true) && !primitives.isPrimitive(dispatchParamType)) {
+								a.append(name).append(" != null");
+							} else {
+								a.append(name).append(" instanceof ");
+								a.append(primitives.asWrapperTypeIfPrimitive(caseParamType).getType());
 							}
-						});
-					} else {
-						laters.add(new Later() {
-							@Override
-							public void exec() {
-								if (laters.size() > 1)
-									a.append("(");
-								if (typeConformanceComputer.isConformant(p2.getParameterType(), p1.getParameterType(), true)) {
-									a.append(name).append(" != null");
-								} else {
-									a.append(name).append(" instanceof ");
-									a.append(primitives.asWrapperTypeIfPrimitive(type).getType());
-								}
-								if (laters.size() > 1)
-									a.append(")");
-							}
-						});
-					}
+						}
+					});
 				}
 			}
 			// if it's not the first if append an 'else'
