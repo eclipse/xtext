@@ -16,8 +16,8 @@ class Menu {
 					<a class="brand" href="http://xtend-lang.org">Xtend</a>
 					<ul class="nav">
 						«FOR s : document.sections»
-							«IF s.sections.empty»
-								<li><a href="#«s.href»>«s.title.toHtml»</a></li>
+							«IF s.sections.size <= 1»
+								<li><a href="#«s.href»">«s.title.toHtml»</a></li>
 							«ELSE»
 								<li class="dropdown">
 									<a href="#«s.href»" class="dropdown-toggle">«s.title.toHtml»</a>

@@ -132,7 +132,10 @@ public class Body {
     _builder.newLine();
     _builder.append("<h");
     _builder.append(hLevel, "");
-    _builder.append(">");
+    _builder.append(" id=\"");
+    String _id = this._xdocExtensions.id(section);
+    _builder.append(_id, "");
+    _builder.append("\">");
     TextOrMarkup _title = section.getTitle();
     CharSequence _html = this._htmlExtensions.toHtml(_title);
     _builder.append(_html, "");
