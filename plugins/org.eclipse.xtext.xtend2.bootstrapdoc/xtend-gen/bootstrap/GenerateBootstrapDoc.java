@@ -1,7 +1,9 @@
 package bootstrap;
 
+import bootstrap.Body;
 import bootstrap.MainSite;
 import bootstrap.Menu;
+import bootstrap.PostProcessor;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
@@ -34,7 +36,7 @@ import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xdoc.XdocStandaloneSetup;
-import org.eclipse.xtext.xdoc.xdoc.XdocFile;
+import org.eclipse.xtext.xdoc.xdoc.Document;
 
 @SuppressWarnings("all")
 public class GenerateBootstrapDoc {
@@ -56,30 +58,37 @@ public class GenerateBootstrapDoc {
   private Menu _menu;
   
   @Inject
+  private Body _body;
+  
+  @Inject
+  private PostProcessor _postProcessor;
+  
+  @Inject
   private IResourceValidator validator;
   
   public void generate() {
     try {
       {
-        XdocFile _loadFile = this.loadFile();
-        final XdocFile file = _loadFile;
+        Document _loadDocument = this.loadDocument();
+        final Document document = _loadDocument;
         File _file = new File("bootstrap/index.html");
         FileWriter _fileWriter = new FileWriter(_file);
         final FileWriter writer = _fileWriter;
-        CharSequence _main = this.main(file);
+        String _main = this.main(document);
         writer.append(_main);
         writer.close();
+        InputOutput.<String>println("Done.");
       }
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  public XdocFile loadFile() {
+  public Document loadDocument() {
       ResourceSet _get = this.provider.get();
       final ResourceSet rs = _get;
       PathTraverser _pathTraverser = new PathTraverser();
-      List<String> _singletonList = Collections.<String>singletonList("xdoc");
+      List<String> _singletonList = Collections.<String>singletonList("../org.eclipse.xtext.xtend2.doc/xdoc");
       final Function1<URI,Boolean> _function = new Function1<URI,Boolean>() {
           public Boolean apply(final URI it) {
             String _fileExtension = it.fileExtension();
@@ -123,23 +132,28 @@ public class GenerateBootstrapDoc {
         }
       }
       TreeIterator<Notifier> _allContents = rs.getAllContents();
-      Iterator<XdocFile> _filter = IteratorExtensions.<XdocFile>filter(_allContents, org.eclipse.xtext.xdoc.xdoc.XdocFile.class);
-      XdocFile _head = IteratorExtensions.<XdocFile>head(_filter);
+      Iterator<Document> _filter = IteratorExtensions.<Document>filter(_allContents, org.eclipse.xtext.xdoc.xdoc.Document.class);
+      Document _head = IteratorExtensions.<Document>head(_filter);
       return _head;
   }
   
-  public CharSequence main(final XdocFile file) {
+  public String main(final Document document) {
     StringConcatenation _builder = new StringConcatenation();
     CharSequence _header = this.mainSite.header();
     _builder.append(_header, "");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    CharSequence _menu = this._menu.menu(file);
+    CharSequence _menu = this._menu.menu(document);
     _builder.append(_menu, "	");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    CharSequence _body = this._body.body(document);
+    _builder.append(_body, "	");
     _builder.newLineIfNotEmpty();
     CharSequence _footer = this.mainSite.footer();
     _builder.append(_footer, "");
     _builder.newLineIfNotEmpty();
-    return _builder;
+    String _postProcess = this._postProcessor.postProcess(_builder);
+    return _postProcess;
   }
 }

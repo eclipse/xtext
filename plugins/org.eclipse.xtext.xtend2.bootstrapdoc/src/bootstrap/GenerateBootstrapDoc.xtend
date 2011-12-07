@@ -1,21 +1,18 @@
 package bootstrap
 
-import bootstrap.MainSite
-import bootstrap.Menu
 import com.google.inject.Inject
 import com.google.inject.Provider
 import java.io.File
 import java.io.FileWriter
-import org.eclipse.emf.common.util.URI
+import java.util.Collections
 import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.xtext.EcoreUtil2
+import org.eclipse.xtext.diagnostics.Severity
+import org.eclipse.xtext.mwe.PathTraverser
 import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.validation.IResourceValidator
 import org.eclipse.xtext.xdoc.XdocStandaloneSetup
-import org.eclipse.xtext.xdoc.xdoc.XdocFile
-import org.eclipse.xtext.diagnostics.Severity
-import org.eclipse.xtext.mwe.PathTraverser
-import java.util.Collections
-import org.eclipse.xtext.EcoreUtil2
+import org.eclipse.xtext.xdoc.xdoc.Document
 
 class GenerateBootstrapDoc {
 	
@@ -32,19 +29,30 @@ class GenerateBootstrapDoc {
 	
 	@Inject
 	extension Menu
+
+	@Inject
+	extension Body
+
+	@Inject
+	extension PostProcessor
 	
 	@Inject IResourceValidator validator
 	
 	def void generate() {
-		val file = loadFile
+		val document = loadDocument
 		val writer = new FileWriter(new File("bootstrap/index.html"))
-		writer.append(main(file))
+		writer.append(main(document))
 		writer.close
+		println("Done.")
 	}
 	
-	def loadFile() {
+	def loadDocument() {
 		val rs = provider.get
-		val uris = new PathTraverser().resolvePathes(Collections::singletonList("xdoc"), [fileExtension == "xdoc"]).values
+		// TODO: use classpath rather than relative path
+		val uris = new PathTraverser().resolvePathes(
+			Collections::singletonList("../org.eclipse.xtext.xtend2.doc/xdoc"), 
+			[fileExtension == "xdoc"]
+		).values
 		for(uri: uris) {
 			println("Loading " + uri)
 			rs.getResource(uri, true)
@@ -56,13 +64,17 @@ class GenerateBootstrapDoc {
 				throw new IllegalStateException(issues.toString)
 			}
 		}
-		return rs.allContents.filter(typeof(XdocFile)).head
+		return rs.allContents.filter(typeof(Document)).head
 	}
 	
 	
-	def main(XdocFile file) '''
-		«mainSite.header»
-			«file.menu»
-		«mainSite.footer»
-	'''
+	def main(Document document) {
+		'''
+			«mainSite.header»
+				«document.menu»
+				«document.body»
+			«mainSite.footer»
+		'''.postProcess
+	}
+		
 }

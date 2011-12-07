@@ -6,8 +6,8 @@ import com.google.inject.Inject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xdoc.xdoc.AbstractSection;
+import org.eclipse.xtext.xdoc.xdoc.Document;
 import org.eclipse.xtext.xdoc.xdoc.TextOrMarkup;
-import org.eclipse.xtext.xdoc.xdoc.XdocFile;
 
 @SuppressWarnings("all")
 public class Menu {
@@ -17,7 +17,7 @@ public class Menu {
   @Inject
   private HtmlExtensions _htmlExtensions;
   
-  public CharSequence menu(final XdocFile file) {
+  public CharSequence menu(final Document document) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<div class=\"topbar\" data-dropdown=\"dropdown\">");
     _builder.newLine();
@@ -34,8 +34,7 @@ public class Menu {
     _builder.append("<ul class=\"nav\">");
     _builder.newLine();
     {
-      AbstractSection _mainSection = file.getMainSection();
-      Iterable<? extends AbstractSection> _sections = this._xdocExtensions.getSections(_mainSection);
+      Iterable<? extends AbstractSection> _sections = this._xdocExtensions.getSections(document);
       for(final AbstractSection s : _sections) {
         {
           Iterable<? extends AbstractSection> _sections_1 = this._xdocExtensions.getSections(s);
@@ -45,7 +44,7 @@ public class Menu {
             _builder.append("<li><a href=\"#");
             String _href = this._htmlExtensions.href(s);
             _builder.append(_href, "				");
-            _builder.append("\">");
+            _builder.append(">");
             TextOrMarkup _title = s.getTitle();
             CharSequence _html = this._htmlExtensions.toHtml(_title);
             _builder.append(_html, "				");
@@ -60,7 +59,7 @@ public class Menu {
             _builder.append("<a href=\"#");
             String _href_1 = this._htmlExtensions.href(s);
             _builder.append(_href_1, "					");
-            _builder.append("\">");
+            _builder.append("\" class=\"dropdown-toggle\">");
             TextOrMarkup _title_1 = s.getTitle();
             CharSequence _html_1 = this._htmlExtensions.toHtml(_title_1);
             _builder.append(_html_1, "					");
@@ -97,6 +96,9 @@ public class Menu {
         }
       }
     }
+    _builder.append("\t\t\t\t");
+    _builder.append("<li><a href=\"http://www.eclipse.org\">Eclipse.org</a></li>");
+    _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("</ul>");
     _builder.newLine();
