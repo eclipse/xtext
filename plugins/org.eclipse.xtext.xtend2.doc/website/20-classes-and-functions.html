@@ -117,13 +117,7 @@
 			</ul>
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">package</span>&nbsp;com.acme
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode"><span class="keyword">package</span>&nbsp;com.acme</span>
 			</p>
 		<a name="imports" ></a>
 		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
@@ -650,13 +644,7 @@
 			This feature is actually where Xtend got its name from. They are based on a simple syntactic trick: 
 			Instead of passing the first argument of an extension method inside the parentheses of a call, the 
 			method is called on the argument parameter as if it was one of its members.
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="string">"hello"</span>.toFirstUpper()&nbsp;<span class="comment">//&nbsp;calls&nbsp;toFirstUper("hello")</span>
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode"><span class="string">"hello"</span>.toFirstUpper()&nbsp;<span class="comment">//&nbsp;calls&nbsp;toFirstUper("hello")</span></span>   
 			</p>
 			<p>
 			Method calls in extension syntax often result in much better readable code, as function calls are rather
@@ -706,13 +694,7 @@
 			</p>
 			<p>
 			The following import declaration 
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;java.util.Collections.*
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode"><span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;java.util.Collections.*</span>
 			</p>
 			<p>
 			allows to use its methods like this:
@@ -792,13 +774,7 @@
 			<p>
 			where <span class="inlinecode">_personExtensions</span> is the default name of the field. Of course the 
 			property shorthand (see <a href="30-expressions.php#propertyAccess" title="Go to &quot;Property Access&quot;">section on property access</a>) is still available.
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						myPerson.fullName
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode">myPerson.fullName</span>
 			</p>
 			<p>
 			Using dependency injection in combination with the extension modifier has a significant advantage over 
