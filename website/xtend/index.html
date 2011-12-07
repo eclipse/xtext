@@ -316,23 +316,6 @@ div#maincontainer>section {
 						It covers a walkthough of the language and outlines the motivations behind its design.</p>
 						</div>
 					</div>
-<!-- 					<h2>Documentation</h2> -->
-<!-- 					<p> -->
-<!-- 						You might want to have a look at <a href="#embracejava"> -->
-<!-- 						    this page first</a>. To get more detailed information about the -->
-<!-- 						various language features you can have a look at the <a -->
-<!-- 							href="./documentation/Xtend%20User%20Guide.pdf">user -->
-<!-- 							guide</a>. In addition to the <a -->
-<!-- 							href="./documentation/Xtend%20User%20Guide.pdf">pdf version</a> it&apos;s -->
-<!-- 						also available <a -->
-<!-- 							href="./documentation/10-introduction.php">as html</a>. -->
-<!-- 					</p> -->
-<!-- 				</div> -->
-<!-- 				<div class="span2"> -->
-<!-- 					<h2>&nbsp;</h2> -->
-<!-- 					<a href="./documentation/Xtend%20User%20Guide.pdf"> <img -->
-<!-- 						src="images/pdf-sign.jpg" width="80px" /> -->
-<!-- 					</a> -->
 				</div>
 				<div class="span8">
 					<h2>Tutorial</h2>
@@ -470,7 +453,7 @@ div#maincontainer>section {
 						<p>Although Java&apos;s type system might not be perfect, it is
 							widely used and well understood.</p>
 						<p>
-							That&apos;s why Xtend <a href="./documentation/15-types.php">reuses</a> just everything about it. In contrast to
+							That&apos;s why Xtend reuses just everything about it. In contrast to
 							Java, however, one seldomly has to write types down because of
 							Xtend&apos;s <a href="#typeinference">type inference</a>.
 						</p>
@@ -508,7 +491,7 @@ java.util.Map&lt;String,String&gt;
 							annotation types.</p>
 					</div>
 					<div class="span8">
-						<p>That&apos;s why Xtend can do <a href="./documentation/20-classes-and-functions.php">classes</a> only and relies on
+						<p>That&apos;s why Xtend can do classes only and relies on
 							interfaces, annotations and enums being defined in Java. Xtend is
 							really not meant to replace Java but to modernize it.</p>
 					</div>
@@ -585,7 +568,7 @@ getTheListOfNames().map( String name | "Mr. "+name )
 					<div class="span8">
 						<h3>Property access</h3>
 						<p>Getter methods can be called using the Java 
-						    <a href="./documentation/30-expressions.php#propertyAccess">property
+						    <a href="./documentation/index.html#propertyAccess">property
 							syntax</a>. For example, you can write</p>
 						<pre class="prettyprint lang-xtend">person.name</pre>
 						<p>instead of</p>
@@ -633,7 +616,7 @@ val fruits = apples + oranges
 					</div>
 					<div class="span8">
 						<p>The user&apos;s guide contains a 
-						    <a href="./documentation/30-expressions.php#operators">list of all operators</a>, their
+						    <a href="./documentation/index.html#operators">list of all operators</a>, their
 							precedence, and associativity. Each operator is mapped to a
 							special method name starting with prefix &apos;operator_&apos;.</p>
 						<p>The standard library already enhances some types from
@@ -673,7 +656,7 @@ val data = try {
 						<p>
 							<strong>By the way: Xtend doesn&apos;t force you to catch or
 								declare exceptions.</strong> 
-								All exceptions are <a href="./documentation/20-classes-and-functions.php#declaredExceptions">treated like runtime exceptions</a>.
+								All exceptions are <a href="./documentation/index.html#declaredExceptions">treated like runtime exceptions</a>.
 						</p>
 					</div>
 				</div>
@@ -698,7 +681,7 @@ val data = try {
 					<div class="span8">
 						<p>Xtend got its name from the great support for extending
 							existing types using extension methods. 
-							<a href="./documentation/20-classes-and-functions.php#extensionMethods">Extension methods</a> 
+							<a href="./documentation/index.html#extensionMethods">Extension methods</a> 
 							allow to add new methods to existing types without touching them. In
 							Xtend local methods are always available as extension methods and
 							are available on the member scope of the first argument&apos;s type.
@@ -823,7 +806,7 @@ def dispatch label(Rectangle r) {
    "a rectangle"
 }
 </pre>
-						<p>Note, that the <a href="./documentation/20-classes-and-functions.php#polymorphicDispatch">multiple dispatch</a> behavior is compiled into
+						<p>Note, that the <a href="./documentation/index.html#polymorphicDispatch">multiple dispatch</a> behavior is compiled into
 							the declaration, so it will always behave the same no matter
 							whether it&apos;s called from Java or Xtend.</p>
 					</div>
@@ -858,7 +841,7 @@ for (String name : persons) {
 						</p>
 						<pre class="prettyprint lang-xtend">persons.map( p | p.name )</pre>
 
-						<p>Although <a href="./documentation/30-expressions.php#closures">closures</a> 
+						<p>Although <a href="./documentation/index.html#closures">closures</a> 
 						    have a Java compatible type, Xtend
 							provides a nicer notation for function types. The following
 							example defines a closure which would be useful to filter a list
@@ -876,7 +859,7 @@ for (String name : persons) {
 						<p>
 							Closures are helpful in many different scenarios. For instance,
 							in combination with <a href="#extensionmethods">extension
-								methods</a> they allow to define nice <a href="./documentation/30-expressions.php#builderSyntax">builder</a> APIs:
+								methods</a> they allow to define nice <a href="./documentation/index.html#builderSyntax">builder</a> APIs:
 						</p>
 						<pre class="prettyprint lang-xtend">
 html [
@@ -925,7 +908,7 @@ html [
 						<p>The switch statement in Java is a relict from C and has
 							strange and errorprone semantics. At the same time it is almost
 							useless in today&apos;s programming. Xtend comes with a 
-							<a href="documentation/30-expressions.php#switchExpression">switch
+							<a href="documentation/index.html#switchExpression">switch
 							expression</a>, which is very convenient and different from what a
 							switch means in Java:
 						
@@ -996,7 +979,7 @@ switch (shape) {
 val msg =  &apos;This is some multi-line
             text with "double quotes" in it&apos;
 </pre>
-						<p><a href="./documentation/30-expressions.php#templates">Template expressions</a> 
+						<p><a href="./documentation/index-html#templates">Template expressions</a> 
 						    can do more than plain multi-line
 							strings. They allow interpolating expressions and support a
 							FOR-loop and an IF-condition. The most compelling feature is

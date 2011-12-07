@@ -53,7 +53,7 @@ class Body {
 	
 	def h3plus(AbstractSection section, int hLevel) '''
 		<!-- subsection -->
-		<h«hLevel»>«section.title.toHtml»</h«hLevel»>
+		<h«hLevel» id="«section.id»">«section.title.toHtml»</h«hLevel»>
 		«section.contents.toHtmlParagraph»
 		«FOR subSection: section.sections»
 			«subSection.h3plus(hLevel + 1)»
