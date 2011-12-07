@@ -28,10 +28,14 @@ class Body {
 				<h1>
 					«chapter.title.toHtml»
 				</h1>
-				«chapter.contents.toHtmlParagraph»
-				«FOR section: chapter.sections»
-					«section.h2»
-				«ENDFOR»
+			</div>
+			<div class="row">
+				<div class="span12 offset2">
+					«chapter.contents.toHtmlParagraph»
+					«FOR section: chapter.sections»
+						«section.h2»
+					«ENDFOR»
+				</div>
 			</div>
 		</section>
 	'''
@@ -39,15 +43,11 @@ class Body {
 	def h2(AbstractSection section) '''
 		<!--  section -->
 		<section id="«section.href»">
-			<div class="row">
-				<div class="span-two-third">
-					<h2>«section.title.toHtml»</h2>
-					«section.contents.toHtmlParagraph»
-					«FOR subsection: section.sections»
-						«subsection.h3plus(3)»
-					«ENDFOR»
-				</div>
-			</div>
+		<h2>«section.title.toHtml»</h2>
+		«section.contents.toHtmlParagraph»
+		«FOR subsection: section.sections»
+			«subsection.h3plus(3)»
+		«ENDFOR»
 		</section>
 	'''
 	

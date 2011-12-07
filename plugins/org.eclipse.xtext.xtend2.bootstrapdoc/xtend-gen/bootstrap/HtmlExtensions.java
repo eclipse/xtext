@@ -455,7 +455,7 @@ public class HtmlExtensions {
     return _xblockexpression;
   }
   
-  public String quote(final CharSequence it) {
+  protected String quote(final CharSequence it) {
     String _string = it.toString();
     String _replace = _string.replace("<", "&lt;");
     String _replace_1 = _replace.replace(">", "&gt;");
@@ -463,7 +463,10 @@ public class HtmlExtensions {
     String _replace_3 = _replace_2.replace("\u00BB", "&raquo;");
     String _replace_4 = _replace_3.replace("\\[", "[");
     String _replace_5 = _replace_4.replace("\\]", "]");
-    return _replace_5;
+    String _replace_6 = _replace_5.replace("\'", "&apos;");
+    String _replace_7 = _replace_6.replace("\u00B4", "&apos;");
+    String _replace_8 = _replace_7.replace("`", "&apos;");
+    return _replace_8;
   }
   
   public CharSequence toHtmlParagraph(final List<? extends EObject> it) {
