@@ -162,12 +162,8 @@ div#maincontainer>section {
 					is a client integrated into Eclipse. You&apos;ll find it in the Help-menu.
 					</p>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="">Hello World</h3>
-=======
 					<section id="Section21">
 					<h3>Hello World</h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					Let us start with a simple "Hello World" example. In Xtend, that reads as
 					</p><pre class="prettyprint lang-xtend">
@@ -192,12 +188,8 @@ public class HelloWorld {
 					</p>
 					</section>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="library">The Runtime Library</h3>
-=======
 					<section id="library">
 					<h3>The Runtime Library</h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					The only surprising fact in the generated Java code may be the library class <code class="prettyprint lang-xtend">InputOutput</code>. Many 
 					features of Xtend are not built into the language itself but provided via the library
@@ -213,12 +205,8 @@ val listOfNames = myList.map( e | myMap.get(e) )</pre><p>
 					</p>
 					</section>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="Tutorial">The Xtend Tutorial</h3>
-=======
 					<section id="Tutorial">
 					<h3>The Xtend Tutorial</h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					The best way to get acquainted with the language is to materialize the <strong>Xtend Tutorial</strong> example project 
 					in your workspace. You will find it in the <strong>New &gt; Project..</strong> wizard dialog.The project contains a couple of sample Xtend files which show the different language concepts in 
@@ -403,12 +391,8 @@ def static createInstance() {
 }</pre><p>
 					</p>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="">Overriding Methods</h3>
-=======
 					<section id="Section24">
 					<h3>Overriding Methods</h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					Methods can override other methods from the super class or implemented interface methods using the
 					keyword <code class="prettyprint lang-xtend">override</code>. If a method overrides a method from a super type, the 
@@ -421,12 +405,8 @@ override String first(List&lt;String&gt; elements) {
 					</p>
 					</section>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="declaredExceptions">Declared Exceptions</h3>
-=======
 					<section id="declaredExceptions">
 					<h3>Declared Exceptions</h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					Xtend does not force you to catch checked exceptions. Instead, they are rethrown in a way the compiler
 					does not complain about a missing throws clause, using the sneaky-throw technique introduced by 
@@ -449,12 +429,8 @@ def void sneakyThrowException() {
 					</p>
 					</section>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="inferredReturnTypes">Inferred Return Types</h3>
-=======
 					<section id="inferredReturnTypes">
 					<h3>Inferred Return Types</h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					If the return type of a method can be inferred from its body it does not have to be declared.
 					That is the method
@@ -473,12 +449,8 @@ def first(List&lt;String&gt; elements) {
 					</p>
 					</section>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="polymorphicDispatch">Dispatch Methods</h3>
-=======
 					<section id="polymorphicDispatch">
 					<h3>Dispatch Methods</h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					Generally, method binding works just like method binding in Java. Method calls are bound 
 					based on the static types of arguments. Sometimes this is not what you want. Especially in the 
@@ -570,12 +542,8 @@ public String printType(final Number x) {
 }</pre><p>
 					</p>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h4 id="">Dispatch Methods and Inheritance</h4>
-=======
 					<section id="Section35">
 					<h4>Dispatch Methods and Inheritance</h4>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					Any visible Java methods from super types conforming to the compiled form of a dispatch method are
 					also included in the dispatch. Conforming means they have the right number of arguments and have 
@@ -617,12 +585,8 @@ public String label(final Object it) {
 					</p>
 					</section>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h4 id="">Static Dispatch Methods</h4>
-=======
 					<section id="Section36">
 					<h4>Static Dispatch Methods</h4>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					Even static dispatch methods are allowed. The same rules apply, but you cannot mix static and non-static
 					dispatch methods.  
@@ -663,12 +627,8 @@ class MyClass {
 					concatenated than nested. They also allow to add methods in a specific context only. 
 					</p>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="">Local Extension Methods</h3>
-=======
 					<section id="Section27">
 					<h3>Local Extension Methods</h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					All methods of the current Xtend class are automatically available in extension syntax. For example
 					</p><pre class="prettyprint lang-xtend">
@@ -684,12 +644,8 @@ class MyClass {
 					</p>
 					</section>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="libraryExtensions">Library Extensions</h3>
-=======
 					<section id="libraryExtensions">
 					<h3>Library Extensions</h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					The static methods methods of the classes in the <a href="#library">Xtend runtime library</a> are automatically
 					available as extensions, e.g.
@@ -699,12 +655,8 @@ newArrayList()       // CollectionLiterals.newArrayList()
 					</p>
 					</section>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="extensionImports">Extension Imports</h3>
-=======
 					<section id="extensionImports">
 					<h3>Extension Imports</h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					In Java, you would usually write a helper class with static methods to decorate an exisiting
 					class with additional behavior. In order to integrate such static helper classes, Xtend allows to put
@@ -721,12 +673,8 @@ new MyClass().singletonList()
 					</p>
 					</section>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="Extension_Fields">Extension Fields</h3>
-=======
 					<section id="Extension_Fields">
 					<h3>Extension Fields</h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					You can make the instance methods provided by the field available as extension methods, by adding the keyword 
 					<code class="prettyprint lang-xtend">extension</code> to the field declaration.Imagine you want to add a method <code class="prettyprint lang-xtend">fullName()</code> to a closed type <code class="prettyprint lang-xtend">Person</code>. With extension methods, you could 
@@ -805,12 +753,8 @@ val data = try {
 					<code class="prettyprint lang-xtend">null</code> and Java types are supported.
 					</p>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="stringLiterals">String Literals</h3>
-=======
 					<section id="stringLiterals">
 					<h3>String Literals</h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					A string literal is a valid expression and returns an instance of <code class="prettyprint lang-xtend">java.lang.String</code> of the given value.
 					String literals are enclosed by a pair of single quotes or double quotes allowing to use the respective
@@ -829,12 +773,8 @@ val data = try {
 					</p>
 					</section>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="integerLiterals">Integer Literals</h3>
-=======
 					<section id="integerLiterals">
 					<h3>Integer Literals</h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					An integer literal creates an <code class="prettyprint lang-xtend">int</code>. There is no signed integer. If you put a minus 
 					operator in front of an integer literal it is taken as a <code class="prettyprint lang-xtend">UnaryOperator</code> with one argument 
@@ -846,36 +786,24 @@ val data = try {
 					</p>
 					</section>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="booleanLiteral">Boolean Literals</h3>
-=======
 					<section id="booleanLiteral">
 					<h3>Boolean Literals</h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					There are two boolean literals, <code class="prettyprint lang-xtend">true</code> and <code class="prettyprint lang-xtend">false</code> which correspond to their 
 					Java counterpart of type <code class="prettyprint lang-xtend">boolean</code>. 
 					</p>
 					</section>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="nullLiteral">Null Literal</h3>
-=======
 					<section id="nullLiteral">
 					<h3>Null Literal</h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					The null pointer literal is <code class="prettyprint lang-xtend">null</code>. It is a member of any reference type and
 					the only member of the type <code class="prettyprint lang-xtend">java.lang.Void</code>.
 					</p>
 					</section>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="typeLiteral">Type Literals</h3>
-=======
 					<section id="typeLiteral">
 					<h3>Type Literals</h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					Type literals are specified using the keyword <code class="prettyprint lang-xtend">typeof</code> :
 					</p><pre class="prettyprint lang-xtend">
@@ -883,12 +811,8 @@ typeof(java.lang.String) // yields java.lang.String.class</pre><p>
 					</p>
 					</section>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="functionTypes">Function Types</h3>
-=======
 					<section id="functionTypes">
 					<h3>Function Types</h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					Xbase introduces <a href="#closures">closures</a>, and therefore an additional function 
 					type signature. On the Java level a closure (or more generally any function object) is just an 
@@ -1022,12 +946,8 @@ x+y    // calls BigDecimalExtension.operator_plus(x,y)</pre><p>
 					precedence and associativity. 
 					</p>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="">Short-Circuit Boolean Operators</h3>
-=======
 					<section id="Section29">
 					<h3>Short-Circuit Boolean Operators</h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					If the operators <code class="prettyprint lang-xtend">||</code> and <code class="prettyprint lang-xtend">&&</code> are used in a context where the left hand operand is of 
 					type <code class="prettyprint lang-xtend">boolean</code>, the operation is evaluated in short circuit mode, which means that the right 
@@ -1041,12 +961,8 @@ x+y    // calls BigDecimalExtension.operator_plus(x,y)</pre><p>
 					</p>
 					</section>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="">Examples</h3>
-=======
 					<section id="Section210">
 					<h3>Examples</h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					</p><pre class="prettyprint lang-xtend">
 my.property = 23
@@ -1058,12 +974,8 @@ x && y || z
 					</p>
 					</section>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="propertyAssignment">Assignments</h3>
-=======
 					<section id="propertyAssignment">
 					<h3>Assignments</h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					<a href="#variableDeclaration">Local variables</a> can be reassigned using the <code class="prettyprint lang-xtend">=</code> operator. Also 
 					properties can be set using this operator given the following expression: 
@@ -1108,12 +1020,8 @@ myObj.setMyProperty("foo")</pre><p>
 					closure.
 					</p>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="">Typing</h3>
-=======
 					<section id="Section211">
 					<h3>Typing</h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					The return type of a variable declaration expression is always <code class="prettyprint lang-xtend">void</code>. 
 					The type of the variable itself can either be explicitly declared or be inferred from the right hand side
@@ -1135,12 +1043,8 @@ var msg = new ArrayList&lt;String&gt;(); // -&gt; type ArrayList&lt;String&gt;</
 					to local variables and parameters, which are made available for the current expression&apos;s scope. 
 					</p>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="propertyAccess">Property Access</h3>
-=======
 					<section id="propertyAccess">
 					<h3>Property Access</h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					Feature calls are directly translated to their Java equivalent with the exception, that for calls 
 					to properties an equivalent rule as described in <a href="#propertyAssignment"></a> applies. That is, for the 
@@ -1154,12 +1058,8 @@ myObj.myProperty</pre><p>
 					</p>
 					</section>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="implicitVariables">Implicit Variables <strong>this</strong> and <strong>it</strong></h3>
-=======
 					<section id="implicitVariables">
 					<h3>Implicit Variables <strong>this</strong> and <strong>it</strong></h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					If the current scope contains a variable named <code class="prettyprint lang-xtend">this</code> or <code class="prettyprint lang-xtend">it</code>, the compiler 
 					will make all its members available to the scope. 
@@ -1178,12 +1078,8 @@ myProperty</pre><p>
 					</p>
 					</section>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="nullSafeFeatureCalls">Null-Safe Feature Call</h3>
-=======
 					<section id="nullSafeFeatureCalls">
 					<h3>Null-Safe Feature Call</h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					Checking for <code class="prettyprint lang-xtend">null</code> references can make code very unreadable. In many situations it is ok for an 
 					expression to return <code class="prettyprint lang-xtend">null</code> if a receiver was <code class="prettyprint lang-xtend">null</code>. Xtend supports the safe navigation 
@@ -1226,12 +1122,8 @@ myList.findFirst([e | e.name==null])</pre><p>
 					But in all other cases the square brackets are mandatory.
 					</p>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="closuresTypeInference">Typing</h3>
-=======
 					<section id="closuresTypeInference">
 					<h3>Typing</h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					Closures are expressions which produce <strong>Function</strong> objects. The type is a <a href="#functionTypes">function type</a>, consisting of the types of the 
 					parameters as well as the return type. The return type is never specified explicitly but is always inferred from the expression. 
@@ -1252,12 +1144,8 @@ newArrayList("Foo", "Bar").find(String e | e=="Bar")</pre><p>
 					</p>
 					</section>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="functionMapping">Function Mapping</h3>
-=======
 					<section id="functionMapping">
 					<h3>Function Mapping</h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					An Xtend closure is a Java object of one of the <strong>Function</strong> interfaces shipped with the runtime library of Xtend. There is an interface 
 					for each number of parameters (current maximum is six parameters). The names of the interfaces are 
@@ -1293,12 +1181,8 @@ newArrayList( &apos;aaa&apos;, &apos;bb&apos;, &apos;c&apos; ).sort(
 					</p>
 					</section>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="implicitParameter">Implicit Parameter <strong>it</strong></h3>
-=======
 					<section id="implicitParameter">
 					<h3>Implicit Parameter <strong>it</strong></h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					If a closure has a single parameter whose type can be inferred, the declaration of the parameter can
 					be ommitted. Use <code class="prettyprint lang-xtend">it</code> to refer to the parameter inside the closure&apos;s body.
@@ -1307,24 +1191,16 @@ val (String)=&gt;String function = [toUpperCase]  // equivalent to [it | it.toUp
 					</p>
 					</section>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="closuresExceptions">Exceptions in Closures</h3>
-=======
 					<section id="closuresExceptions">
 					<h3>Exceptions in Closures</h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					Checked exceptions that are thrown in the body of a closure are rethrown using the 
 					<a href="#declaredExceptions">sneaky-throw technique</a>, i.e. you do not have to declare them explicitly.
 					</p>
 					</section>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="builderSyntax">Builder Syntax</h3>
-=======
 					<section id="builderSyntax">
 					<h3>Builder Syntax</h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					If the last argument of a function call is a closure, it can be appended after the parenthesized parameter
 					list. In combination with the implicit <code class="prettyprint lang-xtend">it</code> parameter, skipping empty parentheses, and extension
@@ -1411,12 +1287,8 @@ switch myString {
 }</pre><p>
 					</p>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="">Type guards</h3>
-=======
 					<section id="Section212">
 					<h3>Type guards</h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					In addition to the case guards one can add a so called <strong>Type Guard</strong> which is syntactically just a
 					<a href="#types">type reference</a> preceding an optional case keyword. The compiler will use that type
@@ -1595,12 +1467,8 @@ toMember(Member m) {
 }</pre><p>
 					</p>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="templateIF">Conditions in Templates</h3>
-=======
 					<section id="templateIF">
 					<h3>Conditions in Templates</h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					There is a special <code class="prettyprint lang-xtend">IF</code> to be used within templates which is identical in syntax and 
 					meaning to the old <code class="prettyprint lang-xtend">IF</code> from Xpand. Note that you could also use the if expression, but 
@@ -1608,12 +1476,8 @@ toMember(Member m) {
 					</p>
 					</section>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="templateFOREACH">Loops in Templates</h3>
-=======
 					<section id="templateFOREACH">
 					<h3>Loops in Templates</h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					Also the <code class="prettyprint lang-xtend">FOR</code> statement is available and can only be used in the context of a template.
 					It also supports the <code class="prettyprint lang-xtend">SEPARATOR</code> from Xpand. In addition, a <code class="prettyprint lang-xtend">BEFORE</code> 
@@ -1623,24 +1487,16 @@ toMember(Member m) {
 					</p>
 					</section>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="templateType">Typing</h3>
-=======
 					<section id="templateType">
 					<h3>Typing</h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					The rich string is translated to an efficient string concatenation and the return type of a rich 
 					string is <code class="prettyprint lang-java">java.lang.CharSequence</code> which allows room for efficient implementation.
 					</p>
 					</section>
 					<!-- subsection -->
-<<<<<<< HEAD
-					<h3 id="WhitespaceHandling">White Space Handling</h3>
-=======
 					<section id="WhitespaceHandling">
 					<h3>White Space Handling</h3>
->>>>>>> [xtend doc] Fix section3 links
 					<p>
 					One of the key features of templates is the smart handling of white space in the template output. 
 					The white space is not written into the output data structure as is but preprocessed. This allows 
