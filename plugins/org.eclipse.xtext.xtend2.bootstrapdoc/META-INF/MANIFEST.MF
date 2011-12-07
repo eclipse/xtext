@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Documentation Generator for Twitter Bootstrap
+Bundle-SymbolicName: org.eclipse.xtext.xtend2.bootstrapdoc
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Eclipse Modeling Project
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.xtext.xdoc.generator;bundle-version="0.1.0"

@@ -10,6 +10,7 @@ import org.eclipse.xtext.xdoc.xdoc.SectionRef
 import org.eclipse.xtext.xdoc.xdoc.Section
 import org.eclipse.xtext.xdoc.xdoc.Section3
 import org.eclipse.xtext.xdoc.xdoc.Section4
+import org.eclipse.xtext.xdoc.xdoc.TextOrMarkup
 
 class XdocExtensions {
 	
@@ -36,4 +37,5 @@ class XdocExtensions {
 	def id(AbstractSection section) {
 		section.name
 	}
+	
 }

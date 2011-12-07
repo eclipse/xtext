@@ -14,8 +14,7 @@
 
 <!-- Le styles -->
 <!-- <link href="bootstrap.css" rel="stylesheet"> -->
-<link rel="stylesheet"
-	href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+<link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
 <style type="text/css">
 body {
 	padding-top: 40px;
@@ -55,14 +54,11 @@ div#maincontainer>section {
 
 <!-- Place this render call where appropriate -->
 <script type="text/javascript">
-	(function() {
-		var po = document.createElement('script');
-		po.type = 'text/javascript';
-		po.async = true;
-		po.src = 'https://apis.google.com/js/plusone.js';
-		var s = document.getElementsByTagName('script')[0];
-		s.parentNode.insertBefore(po, s);
-	})();
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
 </script>
 
 <script type="text/javascript">
@@ -79,114 +75,38 @@ div#maincontainer>section {
 </head>
 
 <body onload="prettyPrint()">
-
 	<div class="topbar" data-dropdown="dropdown">
 		<div class="fill">
 			<div class="container">
 				<a class="brand" href="http://xtend-lang.org">Xtend</a>
-				
 				<ul class="nav">
-					<li class="dropdown"><a href="#aFirstChapter" class="dropdown-toggle">Introduction</a>
+					<li><a href="#packageDecl">org.eclipse.xtext.xdoc.xdoc.impl.TextOrMarkupImpl@7c4f8358</a></li>
+					<li><a href="#imports">org.eclipse.xtext.xdoc.xdoc.impl.TextOrMarkupImpl@7e98cbf7</a></li>
+					<li><a href="#Xtend_ClassDeclaration">org.eclipse.xtext.xdoc.xdoc.impl.TextOrMarkupImpl@2f8fc9ba</a></li>
+					<li><a href="#constructors">org.eclipse.xtext.xdoc.xdoc.impl.TextOrMarkupImpl@4f786b98</a></li>
+					<li><a href="#fields">org.eclipse.xtext.xdoc.xdoc.impl.TextOrMarkupImpl@174fa0ef</a></li>
+					<li class="dropdown">
+						<a href="#methods">org.eclipse.xtext.xdoc.xdoc.impl.TextOrMarkupImpl@f292738</a>
 						<ul class="dropdown-menu">
-							<li><a href="#afirstsection">A First Section</a></li>
-							<li><a href="#">A Second Section</a></li>
-						</ul></li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle">Classes And Its Members</a>
+							<li><a href="#">org.eclipse.xtext.xdoc.xdoc.impl.TextOrMarkupImpl@447bbfb8</a></li>
+							<li><a href="#declaredExceptions">org.eclipse.xtext.xdoc.xdoc.impl.TextOrMarkupImpl@4b33f6dd</a></li>
+							<li><a href="#inferredReturnTypes">org.eclipse.xtext.xdoc.xdoc.impl.TextOrMarkupImpl@73e492d8</a></li>
+							<li><a href="#polymorphicDispatch">org.eclipse.xtext.xdoc.xdoc.impl.TextOrMarkupImpl@3c07ae6d</a></li>
+						</ul>
+					</li>
+					<li><a href="#Annotations">org.eclipse.xtext.xdoc.xdoc.impl.TextOrMarkupImpl@19de041e</a></li>
+					<li class="dropdown">
+						<a href="#extensionMethods">org.eclipse.xtext.xdoc.xdoc.impl.TextOrMarkupImpl@50c3d062</a>
 						<ul class="dropdown-menu">
-							<li><a href="#classes">Classes</a></li>
-							<li><a href="#constructors">Constructors</a></li>
-							<li><a href="#fields">Fields</a></li>
-							<li><a href="#methods">Methods</a></li>
-						</ul></li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle">Expressions</a>
-						<ul class="dropdown-menu">
-							<li><a href="#foo">Foo</a></li>
-							<li><a href="#bar">Bar</a></li>
-							<li><a href="#baz">Baz</a></li>
-						</ul></li>
-					<li><a href="http://www.eclipse.org">Eclipse.org</a></li>
+							<li><a href="#">org.eclipse.xtext.xdoc.xdoc.impl.TextOrMarkupImpl@134683c0</a></li>
+							<li><a href="#libraryExtensions">org.eclipse.xtext.xdoc.xdoc.impl.TextOrMarkupImpl@26e56ae</a></li>
+							<li><a href="#extensionImports">org.eclipse.xtext.xdoc.xdoc.impl.TextOrMarkupImpl@21aac775</a></li>
+							<li><a href="#Extension_Fields">org.eclipse.xtext.xdoc.xdoc.impl.TextOrMarkupImpl@4599d5b</a></li>
+						</ul>
+					</li>
 				</ul>
 			</div>
 		</div>
 	</div>
-
-	<div id="maincontainer" class="container">
-		<!-- chapter -->
-		<section id="firstchapter">
-			<div class="page-header">
-				<h1>
-					First Chapter <small>subtitle</small>
-				</h1>
-			</div>
-
-			<!--  section -->
-			<section id="afirstsection">
-				<div class="row">
-					<div class="span-two-third">
-						<h2>A first Section</h2>
-					</div>
-				</div>
-				<div class="row">
-					<div class="span16">
-						<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-							sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
-							aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
-							duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-							takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
-							dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-							eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-							sed diam voluptua. At vero eos et accusam et justo duo dolores et
-							ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-							Lorem ipsum dolor sit amet.</p>
-						<pre class="prettyprint lang-xtend">
-/**
- * Some code
- */
-def getFullName(Person p) {
-	p.firstName + " " + p.lastName
-}
-</pre>
-						<p>you can write <pre class="prettyprint lang-xtend">some inline code</pre>
-						also.
-						<!-- subsection -->
-						<h3>A Section2</h3>
-						<p>
-							Xtend puts some useful extension methods on the scope by default.
-							They are mostly higher-order functions for Java's collection
-							library. However, you can use any existing static method as an
-							extension method if you use the keyword <strong>extension</strong>
-							in the static import:
-						</p>
-						<h4>A Section3</h4>
-						<p>
-							Xtend puts some useful extension methods on the scope by default.
-							They are mostly higher-order functions for Java's collection
-							library. However, you can use any existing static method as an
-							extension method if you use the keyword <strong>extension</strong>
-							in the static import:
-						</p>
-						<p>
-							<ul>
-								<li><strong>Advanced type inference</strong> - you rarely need to write down type signatures</li>
-								<li><strong>Full support for Java Generics</strong> - including all conformance and conversion rules</li>
-								<li><strong>Closures</strong> - concise syntax for anonymous function literals</li>
-								<li><strong>Operator overloading</strong> - make your libraries even more expressive</li>
-								<li><strong>Powerful switch expressions</strong> - type based switching with implicit casts</li>
-								<li><strong>No statements</strong> - everything is an expression</li>
-								<li><strong>Template expressions</strong> - with intelligent white space handling</li>
-								<li><strong>Extension methods</strong> - enhance closed types with new functionality</li>
-								<li><strong>Property access syntax</strong> - shorthands for getter and setter access</li>
-								<li><strong>Multiple dispatch</strong> a.k.a. polymorphic method invocation</li>
-								<li><strong>Translates to Java</strong> not bytecode - understand what is going on and use your code for platforms 
-									such as Android or GWT</li>
-							</ul>
-						</p>
-					</div>
-				</div>
-			</section>
-		</section>
-	</div>
-	<!-- /container -->
-
-</body>
+	</body>
 </html>
