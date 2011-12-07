@@ -6,6 +6,8 @@ import org.eclipse.xtext.xdoc.xdoc.XdocFile
 class Menu {
 	
 	@Inject extension XdocExtensions
+
+	@Inject extension HtmlExtensions
 	
 	def menu(XdocFile file) '''
 		<div class="topbar" data-dropdown="dropdown">
@@ -15,13 +17,13 @@ class Menu {
 					<ul class="nav">
 						«FOR s : file.mainSection.sections»
 							«IF s.sections.empty»
-								<li><a href="#«s.id»">«s.title»</a></li>
+								<li><a href="#«s.href»">«s.title.toHtml»</a></li>
 							«ELSE»
 								<li class="dropdown">
-									<a href="#«s.id»">«s.title»</a>
+									<a href="#«s.href»">«s.title.toHtml»</a>
 									<ul class="dropdown-menu">
 										«FOR subSection : s.sections»
-										<li><a href="#«subSection.id»">«subSection.title»</a></li>
+										<li><a href="#«subSection.href»">«subSection.title.toHtml»</a></li>
 										«ENDFOR»
 									</ul>
 								</li>
