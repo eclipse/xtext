@@ -463,7 +463,7 @@ methods, this yields a very concise syntax.
 
 code[Xtend][
 	val fruit = newArrayList('apple', 'pear', 'lemon')
-	fruit.map\[toUpperCase\]  // same as fruit.map(\[it | it.toUpperCase\])
+	fruit.map\[toUpperCase\]  // same as fruit.map(\[it | it.toUpperCase\])
 ]
 
 This feature is especially useful when you are building object trees. A common pattern is to provide a set 
