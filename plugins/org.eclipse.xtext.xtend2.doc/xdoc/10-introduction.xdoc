@@ -4,16 +4,16 @@ Xtend is a statically-typed programming language which is tightly integrated wit
 It has its roots in the Java programming language but improves on many concepts:   
 
 ul[
-	item[e[Advanced type inference] - you rarely need to write down type signatures]
-	item[e[Full support for Java Generics] - including all conformance and conversion rules]
+	item[e[Extension methods] - enhance closed types with new functionality]
+	item[e[Multiple dispatch] a.k.a. polymorphic method invocation]
 	item[e[Closures] - concise syntax for anonymous function literals]
 	item[e[Operator overloading] - make your libraries even more expressive]
 	item[e[Powerful switch expressions] - type based switching with implicit casts]
-	item[e[No statements] - everything is an expression]
 	item[e[Template expressions] - with intelligent white space handling]
-	item[e[Extension methods] - enhance closed types with new functionality]
+	item[e[No statements] - everything is an expression]
 	item[e[Property access syntax] - shorthands for getter and setter access]
-	item[e[Multiple dispatch] a.k.a. polymorphic method invocation]
+	item[e[Advanced type inference] - you rarely need to write down type signatures]
+	item[e[Full support for Java Generics] - including all conformance and conversion rules]
 	item[e[Translates to Java] not bytecode - understand what is going on and use your code for platforms 
 		such as Android or GWT]
 ] 
@@ -21,17 +21,14 @@ ul[
 It is not aiming at replacing Java all together. Therefore its library is a thin layer on top of the 
 Java Development Kit (JDK) and interacts with Java exactly the same as it interacts with Xtend code. 
 Java can call Xtend methods, too, in a completely transparent way. And of course, Xtend provides a modern 
-Eclipse-based IDE closely integrated with the Java Development Tools (JDT).
+Eclipse-based IDE closely integrated with Eclipse's Java Development Tools (JDT).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:Getting_Started[Getting Started]
 
-Xtend requires Eclipse 3.5 or higher and a Java SDK version 5 or above. There are multiple of ways to 
-install Xtend in your Eclipse. The easiest way is via the 
-link[http://marketplace.eclipse.org/][Eclipse Market Place]. Go to 
-link[http://marketplace.eclipse.org/content/eclipse-xtend][the Xtend page] and drag the e[Install] 
-icon into your Eclipse. 
-
+Xtend requires Eclipse 3.5 or higher and a Java SDK version 5 or above. The easiest way to install the
+SDK is via link[http://marketplace.eclipse.org/content/eclipse-xtend][Eclipse Marketplace]. There even
+is a client integrated into Eclipse. You'll find it in the Help-menu.
 
 section2[Hello World]
 
@@ -46,13 +43,12 @@ code[Xtend][
 The Xtend code resembles Java a lot. You can already see how the syntactic noise is reduced: No semicolons,
 no return types etc. 
 
-An Xtend class has to reside in a Java project which allows to setup its classpath. If the project
-has the Xtext nature, the Xtend class will automatically be compiled to Java code in the e[xtend-gen]
-source folder. In this case it will look like this
+An Xtend class resides in a plain Java project. As soon as the SDK is installed, Eclipse will automatically 
+translate it to Java code. You'll find it in a source folder e[xtend-gen].
+The hello world example is translated to the following Java code:
 code[Java][
 	import org.eclipse.xtext.xbase.lib.InputOutput;
 	
-	@SuppressWarnings("all")
 	public class HelloWorld {
 	  public static void main(final String\[\] args) {
 	    InputOutput.<String>println("Hello World");
@@ -65,11 +61,25 @@ section2:library[The Runtime Library]
 
 The only surprising fact in the generated Java code may be the library class code[InputOutput]. Many 
 features of Xtend are not built into the language itself but provided via the library
-e[org.eclipse.xtend2.lib.jar]. This library and its three dependencies have to reside on the classpath 
-of each Xtend class. The libraries provide a lot of useful helper methods to create and manipulate 
-collections. They define default operator bindings for primitives and contain some other handy things 
-that are used by the generated Java code.  
+e[org.eclipse.xtend2.lib]. The library is available from a Maven repository (check the website for details) and 
+provides a lot of useful functionality annotating existing types from Java's SDK.
 
+It provides means to create collections in a readable way:
+
+code[Xtend][
+	val myList = newArrayList(1, 2, 3)
+	val mySet = newHashSet(4, 5, 6)
+	val myMap = newHashMap(1 -> 'one', 2 -> 'two', 3 -> 'three')
+] 
+
+It also extends the collection types with a lot of very useful functions.
+One example is the ubiquitous code[map] function:
+
+code[Xtend][
+	val listOfNames = myList.map( e | myMap.get(e) )
+]
+
+Operators to concat collections or to do arithmetics with types like code[BigDecimal] are also available. 
 
 section2:Tutorial[The Xtend Tutorial]
 

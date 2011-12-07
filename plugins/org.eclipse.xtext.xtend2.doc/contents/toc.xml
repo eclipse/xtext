@@ -14,7 +14,7 @@
 		<topic href="contents/15-types.html#Xbase_Types_ConformanceRules" label="Conformance and Conversion" >
 		</topic>
 	</topic>
-	<topic href="contents/20-classes-and-functions.html#Xtend_Classes_Members" label="Classes, Constructors, Fields and Methods" >
+	<topic href="contents/20-classes-and-functions.html#Xtend_Classes_Members" label="Classes and Members" >
 		<topic href="contents/20-classes-and-functions.html#packageDecl" label="Package Declaration" >
 		</topic>
 		<topic href="contents/20-classes-and-functions.html#imports" label="Imports" >

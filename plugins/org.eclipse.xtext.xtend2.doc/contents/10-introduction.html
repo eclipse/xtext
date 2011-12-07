@@ -17,10 +17,10 @@ It has its roots in the Java programming language but improves on many concepts:
 <p>
 <ul>
 	<li>
-		<em>Advanced type inference</em> - you rarely need to write down type signatures
+		<em>Extension methods</em> - enhance closed types with new functionality
 	</li>
 	<li>
-		<em>Full support for Java Generics</em> - including all conformance and conversion rules
+		<em>Multiple dispatch</em> a.k.a. polymorphic method invocation
 	</li>
 	<li>
 		<em>Closures</em> - concise syntax for anonymous function literals
@@ -32,19 +32,19 @@ It has its roots in the Java programming language but improves on many concepts:
 		<em>Powerful switch expressions</em> - type based switching with implicit casts
 	</li>
 	<li>
-		<em>No statements</em> - everything is an expression
-	</li>
-	<li>
 		<em>Template expressions</em> - with intelligent white space handling
 	</li>
 	<li>
-		<em>Extension methods</em> - enhance closed types with new functionality
+		<em>No statements</em> - everything is an expression
 	</li>
 	<li>
 		<em>Property access syntax</em> - shorthands for getter and setter access
 	</li>
 	<li>
-		<em>Multiple dispatch</em> a.k.a. polymorphic method invocation
+		<em>Advanced type inference</em> - you rarely need to write down type signatures
+	</li>
+	<li>
+		<em>Full support for Java Generics</em> - including all conformance and conversion rules
 	</li>
 	<li>
 		<em>Translates to Java</em> not bytecode - understand what is going on and use your code for platforms 
@@ -56,16 +56,14 @@ It has its roots in the Java programming language but improves on many concepts:
 It is not aiming at replacing Java all together. Therefore its library is a thin layer on top of the 
 Java Development Kit (JDK) and interacts with Java exactly the same as it interacts with Xtend code. 
 Java can call Xtend methods, too, in a completely transparent way. And of course, Xtend provides a modern 
-Eclipse-based IDE closely integrated with the Java Development Tools (JDT).
+Eclipse-based IDE closely integrated with Eclipse&apos;s Java Development Tools (JDT).
 </p>
 <a name="Getting_Started"></a>
 <h2>Getting Started</h2>
 <p>
-Xtend requires Eclipse 3.5 or higher and a Java SDK version 5 or above. There are multiple of ways to 
-install Xtend in your Eclipse. The easiest way is via the 
-<a href="http://marketplace.eclipse.org/">Eclipse Market Place</a>. Go to 
-<a href="http://marketplace.eclipse.org/content/eclipse-xtend">the Xtend page</a> and drag the <em>Install</em> 
-icon into your Eclipse. 
+Xtend requires Eclipse 3.5 or higher and a Java SDK version 5 or above. The easiest way to install the
+SDK is via <a href="http://marketplace.eclipse.org/content/eclipse-xtend">Eclipse Marketplace</a>. There even
+is a client integrated into Eclipse. You&apos;ll find it in the Help-menu.
 </p>
 <a name="Getting_Started_2"></a>
 <h3>Hello World</h3>
@@ -87,15 +85,14 @@ The Xtend code resembles Java a lot. You can already see how the syntactic noise
 no return types etc. 
 </p>
 <p>
-An Xtend class has to reside in a Java project which allows to setup its classpath. If the project
-has the Xtext nature, the Xtend class will automatically be compiled to Java code in the <em>xtend-gen</em>
-source folder. In this case it will look like this
+An Xtend class resides in a plain Java project. As soon as the SDK is installed, Eclipse will automatically 
+translate it to Java code. You&apos;ll find it in a source folder <em>xtend-gen</em>.
+The hello world example is translated to the following Java code:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
 <span class="keyword">import</span>&nbsp;org.eclipse.xtext.xbase.lib.InputOutput;<br/>
 <br/>
-@SuppressWarnings(<span class="string">"all"</span>)<br/>
 <span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;HelloWorld&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">void</span>&nbsp;main(<span class="keyword">final</span>&nbsp;String[]&nbsp;args)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;InputOutput.&lt;String&gt;println(<span class="string">"Hello&nbsp;World"</span>);<br/>
@@ -110,10 +107,38 @@ source folder. In this case it will look like this
 <p>
 The only surprising fact in the generated Java code may be the library class <span class="inlinecode">InputOutput</span>. Many 
 features of Xtend are not built into the language itself but provided via the library
-<em>org.eclipse.xtend2.lib.jar</em>. This library and its three dependencies have to reside on the classpath 
-of each Xtend class. The libraries provide a lot of useful helper methods to create and manipulate 
-collections. They define default operator bindings for primitives and contain some other handy things 
-that are used by the generated Java code.  
+<em>org.eclipse.xtend2.lib</em>. The library is available from a Maven repository (check the website for details) and 
+provides a lot of useful functionality annotating existing types from Java&apos;s SDK.
+</p>
+<p>
+It provides means to create collections in a readable way:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">val</span>&nbsp;myList&nbsp;=&nbsp;newArrayList(1,&nbsp;2,&nbsp;3)<br/>
+<span class="keyword">val</span>&nbsp;mySet&nbsp;=&nbsp;newHashSet(4,&nbsp;5,&nbsp;6)<br/>
+<span class="keyword">val</span>&nbsp;myMap&nbsp;=&nbsp;newHashMap(1&nbsp;-&gt;&nbsp;<span class="string">&apos;one&apos;</span>,&nbsp;2&nbsp;-&gt;&nbsp;<span class="string">&apos;two&apos;</span>,&nbsp;3&nbsp;-&gt;&nbsp;<span class="string">&apos;three&apos;</span>)<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+It also extends the collection types with a lot of very useful functions.
+One example is the ubiquitous <span class="inlinecode">map</span> function:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">val</span>&nbsp;listOfNames&nbsp;=&nbsp;myList.map(&nbsp;e&nbsp;|&nbsp;myMap.get(e)&nbsp;)<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+Operators to concat collections or to do arithmetics with types like <span class="inlinecode">BigDecimal</span> are also available. 
 </p>
 <a name="Tutorial"></a>
 <h3>The Xtend Tutorial</h3>
