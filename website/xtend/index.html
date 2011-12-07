@@ -142,7 +142,9 @@ div#maincontainer>section {
 		</div>
 	</header>
 	<div id="maincontainer" class="container">
-		<section id="announcement" align="center"><h3><i>December 2011 : Xtend 2.2 has been <a href="#latestrelease">released</a>.</i></h3></section>
+		<div align="center">
+			<section id="announcement"><h3><i>December 2011 : Xtend 2.2 has been <a href="#latestrelease"><i>released</i></a>.</i></h3></section>
+		</div>
 		<section id="intro">
 			<div class="row">
 				<div class="span-one-third">
@@ -336,7 +338,7 @@ div#maincontainer>section {
 		<section id="latestrelease">
 			<div class="page-header">
 				<h1>
-					Latest Release <small>Xtend 2.2 December 2011</small>
+					Latest Release <small>Xtend 2.2 - December 2011</small>
 				</h1>
 			</div>
 			<div class="row">
@@ -568,8 +570,7 @@ getTheListOfNames().map( String name | "Mr. "+name )
 					<div class="span8">
 						<h3>Property access</h3>
 						<p>Getter methods can be called using the Java 
-						    <a href="./documentation/index.html#propertyAccess">property
-							syntax</a>. For example, you can write</p>
+						    property syntax. For example, you can write</p>
 						<pre class="prettyprint lang-xtend">person.name</pre>
 						<p>instead of</p>
 						<pre class="prettyprint lang-xtend">person.getName()</pre>
@@ -588,7 +589,8 @@ getTheListOfNames().map( String name | "Mr. "+name )
 						<pre class="prettyprint lang-xtend">obj.compute()</pre>
 						<p>Semicolons are optional and even the return keyword doesn&apos;t
 							need to be specified. The result of the last expression in a
-							method definition is treated as the implicit return value.</p>
+							method definition is treated as the implicit return value. 
+							<a href="documentation/index.html#propertyAccess">Read more &raquo;</a></p>
 					</div>
 				</div>
 			</section>
@@ -656,7 +658,8 @@ val data = try {
 						<p>
 							<strong>By the way: Xtend doesn&apos;t force you to catch or
 								declare exceptions.</strong> 
-								All exceptions are <a href="./documentation/index.html#declaredExceptions">treated like runtime exceptions</a>.
+								All exceptions are treated like runtime exceptions.
+								<a href="documentation/index.html#declaredExceptions">Read more &raquo;</a>
 						</p>
 					</div>
 				</div>
@@ -680,8 +683,7 @@ val data = try {
 				<div class="row">
 					<div class="span8">
 						<p>Xtend got its name from the great support for extending
-							existing types using extension methods. 
-							<a href="./documentation/index.html#extensionMethods">Extension methods</a> 
+							existing types using extension methods. Extension methods 
 							allow to add new methods to existing types without touching them. In
 							Xtend local methods are always available as extension methods and
 							are available on the member scope of the first argument&apos;s type.
@@ -806,9 +808,10 @@ def dispatch label(Rectangle r) {
    "a rectangle"
 }
 </pre>
-						<p>Note, that the <a href="./documentation/index.html#polymorphicDispatch">multiple dispatch</a> behavior is compiled into
+						<p>Note, that the multiple dispatch behavior is compiled into
 							the declaration, so it will always behave the same no matter
-							whether it&apos;s called from Java or Xtend.</p>
+							whether it&apos;s called from Java or Xtend. 
+							<a href="documentation/index.html#polymorphicDispatch">Read more &raquo;</a></p>
 					</div>
 				</div>
 			</section>
@@ -841,8 +844,7 @@ for (String name : persons) {
 						</p>
 						<pre class="prettyprint lang-xtend">persons.map( p | p.name )</pre>
 
-						<p>Although <a href="./documentation/index.html#closures">closures</a> 
-						    have a Java compatible type, Xtend
+						<p>Although closures have a Java compatible type, Xtend
 							provides a nicer notation for function types. The following
 							example defines a closure which would be useful to filter a list
 							of persons by a specific name.</p>
@@ -859,7 +861,7 @@ for (String name : persons) {
 						<p>
 							Closures are helpful in many different scenarios. For instance,
 							in combination with <a href="#extensionmethods">extension
-								methods</a> they allow to define nice <a href="./documentation/index.html#builderSyntax">builder</a> APIs:
+								methods</a> they allow to define nice builder APIs:
 						</p>
 						<pre class="prettyprint lang-xtend">
 html [
@@ -908,8 +910,7 @@ html [
 						<p>The switch statement in Java is a relict from C and has
 							strange and errorprone semantics. At the same time it is almost
 							useless in today&apos;s programming. Xtend comes with a 
-							<a href="documentation/index.html#switchExpression">switch
-							expression</a>, which is very convenient and different from what a
+							switch expression, which is very convenient and different from what a
 							switch means in Java:
 						
 										<ul>
@@ -979,8 +980,7 @@ switch (shape) {
 val msg =  &apos;This is some multi-line
             text with "double quotes" in it&apos;
 </pre>
-						<p><a href="./documentation/index-html#templates">Template expressions</a> 
-						    can do more than plain multi-line
+						<p>Template expressions can do more than plain multi-line
 							strings. They allow interpolating expressions and support a
 							FOR-loop and an IF-condition. The most compelling feature is
 							however the automatic whitespace handling!</p>
@@ -999,6 +999,7 @@ val msg =  &apos;This is some multi-line
 							an algorithm which feels surprisingly intuitive. To help
 							developers understand how Xtend handles whitespace, the editor
 							supports coloring for the different kinds of whitespace.
+							<a href="documentation/index.html#templates">Read more &raquo;</a>
 						</p>
 					</div>
 					<div class="span8">
