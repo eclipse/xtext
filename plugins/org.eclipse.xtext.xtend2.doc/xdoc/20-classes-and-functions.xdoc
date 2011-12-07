@@ -1,4 +1,4 @@
-chapter:Xtend_Classes_Members[Classes, Constructors, Fields and Methods]
+chapter:Xtend_Classes_Members[Classes and Members]
 
 At a first glance an Xtend file pretty much looks like a Java file. It starts with a package 
 declaration followed by an import section and a class definition.

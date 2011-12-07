@@ -4,7 +4,7 @@ Xtend completely supports Java's type system: The primitive types as code[Xtend]
 code[Xtend][boolean] are available as well as all classes and interfaces that reside on the 
 classpath.  
 
-Java Generics are fully integrated, such that you can define type parameters and type arguments 
+Java Generics are fully supported, such that you can define type parameters and type arguments 
 in just the same way as in Java.
 
 As Xtend classes compile to Java classes, you can integrate both Java classes in Xtend and Xtend 
@@ -34,7 +34,7 @@ already very concise.
 section:Xbase_Types_ConformanceRules[Conformance and Conversion]
 
 Conformance is used in order to find out whether some expression can be used in a certain situation. 
-For instance when assigning a value to a variable,  the type of the right hand expression needs to 
+For instance when assigning a value to a variable, the type of the right hand expression needs to 
 conform to the type of the variable.
 
 As Xbase implements the unchanged type system of Java it also fully supports the conformance rules 
