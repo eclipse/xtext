@@ -1,16 +1,15 @@
 package bootstrap
 
 import org.eclipse.xtext.xdoc.xdoc.AbstractSection
-import org.eclipse.xtext.xdoc.xdoc.Document
-import org.eclipse.xtext.xdoc.xdoc.ChapterRef
 import org.eclipse.xtext.xdoc.xdoc.Chapter
-import org.eclipse.xtext.xdoc.xdoc.Section2Ref
-import org.eclipse.xtext.xdoc.xdoc.Section2
-import org.eclipse.xtext.xdoc.xdoc.SectionRef
+import org.eclipse.xtext.xdoc.xdoc.ChapterRef
+import org.eclipse.xtext.xdoc.xdoc.Document
 import org.eclipse.xtext.xdoc.xdoc.Section
+import org.eclipse.xtext.xdoc.xdoc.Section2
+import org.eclipse.xtext.xdoc.xdoc.Section2Ref
 import org.eclipse.xtext.xdoc.xdoc.Section3
 import org.eclipse.xtext.xdoc.xdoc.Section4
-import org.eclipse.xtext.xdoc.xdoc.TextOrMarkup
+import org.eclipse.xtext.xdoc.xdoc.SectionRef
 
 class XdocExtensions {
 	

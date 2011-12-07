@@ -1,7 +1,7 @@
 package bootstrap
 
 import com.google.inject.Inject
-import org.eclipse.xtext.xdoc.xdoc.XdocFile
+import org.eclipse.xtext.xdoc.xdoc.Document
 
 class Menu {
 	
@@ -9,18 +9,18 @@ class Menu {
 
 	@Inject extension HtmlExtensions
 	
-	def menu(XdocFile file) '''
+	def menu(Document document) '''
 		<div class="topbar" data-dropdown="dropdown">
 			<div class="fill">
 				<div class="container">
 					<a class="brand" href="http://xtend-lang.org">Xtend</a>
 					<ul class="nav">
-						«FOR s : file.mainSection.sections»
+						«FOR s : document.sections»
 							«IF s.sections.empty»
-								<li><a href="#«s.href»">«s.title.toHtml»</a></li>
+								<li><a href="#«s.href»>«s.title.toHtml»</a></li>
 							«ELSE»
 								<li class="dropdown">
-									<a href="#«s.href»">«s.title.toHtml»</a>
+									<a href="#«s.href»" class="dropdown-toggle">«s.title.toHtml»</a>
 									<ul class="dropdown-menu">
 										«FOR subSection : s.sections»
 										<li><a href="#«subSection.href»">«subSection.title.toHtml»</a></li>
@@ -29,6 +29,7 @@ class Menu {
 								</li>
 							«ENDIF»
 						«ENDFOR»
+						<li><a href="http://www.eclipse.org">Eclipse.org</a></li>
 					</ul>
 				</div>
 			</div>
