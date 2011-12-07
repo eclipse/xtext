@@ -1,6 +1,7 @@
 package org.eclipse.xtext.xbase.tests.typing;
 
 import com.google.inject.Singleton;
+import java.util.Arrays;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -129,8 +130,11 @@ public class SomeCustomTypeProviderWithXtend extends XbaseWithAnnotationsTypePro
       return _type((XAnnotationElementValueBinaryOperation)binaryOperation, rawExpectation, rawType);
     } else if (binaryOperation instanceof XAnnotationValueArray) {
       return _type((XAnnotationValueArray)binaryOperation, rawExpectation, rawType);
-    } else {
+    } else if (binaryOperation != null) {
       return _type(binaryOperation, rawExpectation, rawType);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(binaryOperation, rawExpectation, rawType).toString());
     }
   }
   
@@ -179,8 +183,11 @@ public class SomeCustomTypeProviderWithXtend extends XbaseWithAnnotationsTypePro
       return _expectedType((XCatchClause)assignment, reference, index, rawType);
     } else if (assignment instanceof XAnnotationElementValuePair) {
       return _expectedType((XAnnotationElementValuePair)assignment, reference, index, rawType);
-    } else {
+    } else if (assignment != null) {
       return _expectedType(assignment, reference, index, rawType);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(assignment, reference, index, rawType).toString());
     }
   }
   
@@ -205,8 +212,11 @@ public class SomeCustomTypeProviderWithXtend extends XbaseWithAnnotationsTypePro
       return _typeForIdentifiable((XSwitchExpression)constructor, rawType);
     } else if (constructor instanceof XVariableDeclaration) {
       return _typeForIdentifiable((XVariableDeclaration)constructor, rawType);
-    } else {
+    } else if (constructor != null) {
       return _typeForIdentifiable(constructor, rawType);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(constructor, rawType).toString());
     }
   }
 }
