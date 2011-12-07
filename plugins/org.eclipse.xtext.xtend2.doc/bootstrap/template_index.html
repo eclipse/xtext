@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Eclipse Xtend</title>
+<meta name="description"
+	content="Eclipse Xtend is a statically-typed programming language running on the JVM.">
+<meta name="author" content="Sven Efftinge">
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<!-- Le styles -->
+<!-- <link href="bootstrap.css" rel="stylesheet"> -->
+<link rel="stylesheet"
+	href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+<style type="text/css">
+body {
+	padding-top: 40px;
+}
+
+section {
+	padding-top: 40px;
+}
+
+div#maincontainer>section {
+	padding-top: 90px;
+}
+</style>
+<link href="google-code-prettify/prettify.css" type="text/css"
+	rel="stylesheet" />
+<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
+<script type="text/javascript" src="google-code-prettify/lang-xtend.js"></script>
+<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="bootstrap-dropdown.js"></script>
+
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push([ '_setAccount', 'UA-2429174-4' ]);
+	_gaq.push([ '_trackPageview' ]);
+
+	(function() {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+				: 'http://www')
+				+ '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+
+<!-- Place this render call where appropriate -->
+<script type="text/javascript">
+	(function() {
+		var po = document.createElement('script');
+		po.type = 'text/javascript';
+		po.async = true;
+		po.src = 'https://apis.google.com/js/plusone.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(po, s);
+	})();
+</script>
+
+<script type="text/javascript">
+	$('#topbar').dropdown();
+</script>
+
+<!-- Le fav and touch icons -->
+<link rel="shortcut icon" href="images/favicon.ico">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72"
+	href="images/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114"
+	href="images/apple-touch-icon-114x114.png">
+</head>
+
+<body onload="prettyPrint()">
+
+	<div class="topbar" data-dropdown="dropdown">
+		<div class="fill">
+			<div class="container">
+				<a class="brand" href="http://xtend-lang.org">Xtend</a>
+				
+				<ul class="nav">
+					<li class="dropdown"><a href="#aFirstChapter" class="dropdown-toggle">Introduction</a>
+						<ul class="dropdown-menu">
+							<li><a href="#afirstsection">A First Section</a></li>
+							<li><a href="#">A Second Section</a></li>
+						</ul></li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle">Classes And Its Members</a>
+						<ul class="dropdown-menu">
+							<li><a href="#classes">Classes</a></li>
+							<li><a href="#constructors">Constructors</a></li>
+							<li><a href="#fields">Fields</a></li>
+							<li><a href="#methods">Methods</a></li>
+						</ul></li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle">Expressions</a>
+						<ul class="dropdown-menu">
+							<li><a href="#foo">Foo</a></li>
+							<li><a href="#bar">Bar</a></li>
+							<li><a href="#baz">Baz</a></li>
+						</ul></li>
+					<li><a href="http://www.eclipse.org">Eclipse.org</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div id="maincontainer" class="container">
+		<!-- chapter -->
+		<section id="firstchapter">
+			<div class="page-header">
+				<h1>
+					First Chapter <small>subtitle</small>
+				</h1>
+			</div>
+
+			<!--  section -->
+			<section id="afirstsection">
+				<div class="row">
+					<div class="span-two-third">
+						<h2>A first Section</h2>
+					</div>
+				</div>
+				<div class="row">
+					<div class="span16">
+						<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+							sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
+							aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
+							duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+							takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
+							dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+							eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+							sed diam voluptua. At vero eos et accusam et justo duo dolores et
+							ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
+							Lorem ipsum dolor sit amet.</p>
+						<pre class="prettyprint lang-xtend">
+/**
+ * Some code
+ */
+def getFullName(Person p) {
+	p.firstName + " " + p.lastName
+}
+</pre>
+						<p>you can write <pre class="prettyprint lang-xtend">some inline code</pre>
+						also.
+						<!-- subsection -->
+						<h3>A Section2</h3>
+						<p>
+							Xtend puts some useful extension methods on the scope by default.
+							They are mostly higher-order functions for Java's collection
+							library. However, you can use any existing static method as an
+							extension method if you use the keyword <strong>extension</strong>
+							in the static import:
+						</p>
+						<h4>A Section3</h4>
+						<p>
+							Xtend puts some useful extension methods on the scope by default.
+							They are mostly higher-order functions for Java's collection
+							library. However, you can use any existing static method as an
+							extension method if you use the keyword <strong>extension</strong>
+							in the static import:
+						</p>
+						<p>
+							<ul>
+								<li><strong>Advanced type inference</strong> - you rarely need to write down type signatures</li>
+								<li><strong>Full support for Java Generics</strong> - including all conformance and conversion rules</li>
+								<li><strong>Closures</strong> - concise syntax for anonymous function literals</li>
+								<li><strong>Operator overloading</strong> - make your libraries even more expressive</li>
+								<li><strong>Powerful switch expressions</strong> - type based switching with implicit casts</li>
+								<li><strong>No statements</strong> - everything is an expression</li>
+								<li><strong>Template expressions</strong> - with intelligent white space handling</li>
+								<li><strong>Extension methods</strong> - enhance closed types with new functionality</li>
+								<li><strong>Property access syntax</strong> - shorthands for getter and setter access</li>
+								<li><strong>Multiple dispatch</strong> a.k.a. polymorphic method invocation</li>
+								<li><strong>Translates to Java</strong> not bytecode - understand what is going on and use your code for platforms 
+									such as Android or GWT</li>
+							</ul>
+						</p>
+					</div>
+				</div>
+			</section>
+		</section>
+	</div>
+	<!-- /container -->
+
+</body>
+</html>
