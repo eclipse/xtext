@@ -521,7 +521,9 @@ section2:parser_rules[Parser Rules]
 
 The parser is fed with a sequence of terminals and walks through the so called parser rules. Hence a parser rule - 
 contrary to a terminal rule - does not produce a single atomic terminal token but a tree of non-terminal 
-and terminal tokens. They lead to a so called ref:node_model[parse tree] (in Xtext it is also referred 
+and terminal tokens. They lead to a so called 
+%% ref:node_model[parse tree] 
+parse tree (in Xtext it is also referred 
 as node model). Furthermore, parser rules are handled as kind of a building plan for the creation of 
 the codeRef[org.eclipse.emf.ecore.EObject][EObjects] that form the semantic model (the linked abstract syntax graph or AST). Due to this 
 fact, parser rules are even called production or EObject rules. Different constructs like actions and 
