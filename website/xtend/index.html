@@ -14,7 +14,7 @@
 
 <!-- Le styles -->
 <!-- <link href="bootstrap.css" rel="stylesheet"> -->
-<link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+<link rel="stylesheet" href="bootstrap.min.css">
 <style type="text/css">
 body {
 	padding-top: 40px;
@@ -130,6 +130,10 @@ div#maincontainer>section {
 			<p>
 				<a class="btn primary large" style="width: 150px;" href="#download">Download
 					&raquo;</a>
+				&nbsp;&nbsp;&nbsp;
+				<!-- TODO: should we link to #documentation or ./documentation? --> 
+				<a class="btn primary large" style="width: 150px;" href="./documentation">Documentation
+					&raquo;</a>
 			</p>
 		</div>
 	</header>
@@ -140,15 +144,15 @@ div#maincontainer>section {
 					<h2>Embrace Java ...</h2>
 					<p>Java is a great platform and also the language has some nice
 						features. Xtend is not meant to replace Java all together but to
-						be a convenient alternative in situations where Java doesn't
+						be a convenient alternative in situations where Java doesn&apos;t
 						shine. Therefore Xtend ...</p>
 					<ul>
 						<li><a href="#compilestojava">compiles to readable Java
 								code</a>
 						<li><a href="#eclipsetooling">comes with state-of-the-art
 								Eclipse tooling</a>
-						<li>resembles Java's syntax
-						<li><a href="#typesystem">uses Java's type system and SDK</a>
+						<li>resembles Java&apos;s syntax
+						<li><a href="#typesystem">uses Java&apos;s type system and SDK</a>
 						<li><a href="#typesystem">is statically typed</a>
 						<li><a href="#scopeofxtend">does classes only</a>
 					</ul>
@@ -270,7 +274,7 @@ div#maincontainer>section {
 				<div class="span8">
 					<h2>Tutorial</h2>
 					<p>If you want to get your hands on it, we recommend to
-						materialize the tutorial example using Eclipse's example wizard.
+						materialize the tutorial example using Eclipse&apos;s example wizard.
 						To do so in the IDE click:</p>
 					<p>
 						<span class="label notice">File</span>-&gt;<span
@@ -279,25 +283,24 @@ div#maincontainer>section {
 						illustrates a certain language feature and they are named
 						accordingly. Those sample files contain a lot of working code
 						snippets with some explanation in the comments.</p>
-					<p>Just try it, it's straight forward.</p>
+					<p>Just try it, it&apos;s straight forward.</p>
 				</div>
 				<div class="span6">
 					<h2>Documentation</h2>
 					<p>
-						You might want to have a look at <a href="#embracejava">what's
-							on this page first</a>. To get more detailed information about the
+						You might want to have a look at <a href="#embracejava">
+						    this page first</a>. To get more detailed information about the
 						various language features you can have a look at the <a
-							href="Xtend%20Reference%20Documentation.pdf">reference
-							documentation</a>. In addition to the <a
-							href="Xtend%20Reference%20Documentation.pdf">pdf version</a> it's
-						also included in Xtext's <a
-							href="/Xtext/documentation/2_1_0/01-Xtend_Introduction.php">html
-							documentation</a>.
+							href="./documentation/Xtend%20User%20Guide.pdf">user
+							guide</a>. In addition to the <a
+							href="./documentation/Xtend%20User%20Guide.pdf">pdf version</a> it&apos;s
+						also available <a
+							href="./documentation/10-introduction.php">as html</a>.
 					</p>
 				</div>
 				<div class="span2">
 					<h2>&nbsp;</h2>
-					<a href="Xtend%20Reference%20Documentation.pdf"> <img
+					<a href="./documentation/Xtend%20User%20Guide.pdf"> <img
 						src="images/pdf-sign.jpg" width="80px" />
 					</a>
 				</div>
@@ -347,7 +350,7 @@ div#maincontainer>section {
 					<div class="span8">
 						<p>Xtend was designed and developed together with the IDE
 							support.</p>
-						<p>The Eclipse support is deeply integrated with Java's
+						<p>The Eclipse support is deeply integrated with Java&apos;s
 							development tools in Eclipse, such that the development
 							experience is as seamless as possible.</p>
 						<img class="thumbnail" src="images/built_on_eclipse.jpg" alt="">
@@ -377,7 +380,7 @@ div#maincontainer>section {
 				<div class="row">
 					<div class="span-two-third">
 						<h2>
-							Java type system <small>It's the one you know!</small>
+							Java type system <small>It&apos;s the one you know!</small>
 						</h2>
 					</div>
 				</div>
@@ -386,12 +389,12 @@ div#maincontainer>section {
 						<p>Static typing is great! It allows for better static
 							analysis and much better tooling based on the available type
 							information.</p>
-						<p>Although Java's type system might not be perfect, it is
+						<p>Although Java&apos;s type system might not be perfect, it is
 							widely used and well understood.</p>
 						<p>
-							That's why Xtend reuses just everything about it. In contrast to
+							That&apos;s why Xtend <a href="./documentation/15-types.php">reuses</a> just everything about it. In contrast to
 							Java, however, one seldomly has to write types down because of
-							Xtend's <a href="#typeinference">type inference</a>.
+							Xtend&apos;s <a href="#typeinference">type inference</a>.
 						</p>
 					</div>
 					<div class="span8">
@@ -427,7 +430,7 @@ java.util.Map&lt;String,String&gt;
 							annotation types.</p>
 					</div>
 					<div class="span8">
-						<p>That's why Xtend can do classes only and relies on
+						<p>That&apos;s why Xtend can do <a href="./documentation/20-classes-and-functions.php">classes</a> only and relies on
 							interfaces, annotations and enums being defined in Java. Xtend is
 							really not meant to replace Java but to modernize it.</p>
 					</div>
@@ -460,10 +463,10 @@ java.util.Map&lt;String,String&gt;
 						<pre class="prettyprint">
 //Java 
 List&lt;String&gt; names = getTheListOfNames()</pre>
-						<p>It's sometimes a good idea to write the type nevertheless,
-							but most of the time it's just redundant noise and distracting
+						<p>It&apos;s sometimes a good idea to write the type nevertheless,
+							but most of the time it&apos;s just redundant noise and distracting
 							the reader.</p>
-						<p>Xtend doesn't force you to write the type everywhere, but
+						<p>Xtend doesn&apos;t force you to write the type everywhere, but
 							you still can, if you want.</p>
 					</div>
 					<div class="span8">
@@ -503,8 +506,9 @@ getTheListOfNames().map( String name | "Mr. "+name )
 				<div class="row">
 					<div class="span8">
 						<h3>Property access</h3>
-						<p>Getter methods can be called using the Java property
-							syntax. For example, you can write</p>
+						<p>Getter methods can be called using the Java 
+						    <a href="./documentation/30-expressions.php#propertyAccess">property
+							syntax</a>. For example, you can write</p>
 						<pre class="prettyprint lang-xtend">person.name</pre>
 						<p>instead of</p>
 						<pre class="prettyprint lang-xtend">person.getName()</pre>
@@ -521,7 +525,7 @@ getTheListOfNames().map( String name | "Mr. "+name )
 						<pre class="prettyprint lang-xtend">obj.compute</pre>
 						<p>instead of</p>
 						<pre class="prettyprint lang-xtend">obj.compute()</pre>
-						<p>Semicolons are optional and even the return keyword doesn't
+						<p>Semicolons are optional and even the return keyword doesn&apos;t
 							need to be specified. The result of the last expression in a
 							method definition is treated as the implicit return value.</p>
 					</div>
@@ -550,11 +554,12 @@ val fruits = apples + oranges
 </pre>
 					</div>
 					<div class="span8">
-						<p>The user's guide contains a list of all operators, their
+						<p>The user&apos;s guide contains a 
+						    <a href="./documentation/30-expressions.php#operators">list of all operators</a>, their
 							precedence, and associativity. Each operator is mapped to a
-							special method name starting with prefix 'operator_'.</p>
+							special method name starting with prefix &apos;operator_&apos;.</p>
 						<p>The standard library already enhances some types from
-							Java's SDK with operators through extension methods.</p>
+							Java&apos;s SDK with operators through extension methods.</p>
 					</div>
 				</div>
 			</section>
@@ -570,27 +575,27 @@ val fruits = apples + oranges
 						<p>In Xtend everything that looks like a statement is actually
 							an expression. Even a block is just an expression. This allows
 							for using them in places where it would just not be allowed in
-							Java. Here’s an example:</p>
+							Java. Here&apos;s an example:</p>
 						<pre class="prettyprint lang-xtend">
 val data = try { 
-    fileContentsToString(‘data.txt’) 
+    fileContentsToString(&apos;data.txt&apos;) 
   } catch (IOException e) { 
-    ‘dummy data’
+    &apos;data.txt&apos;
   }</pre>
 					</div>
 					<div class="span8">
 						<p>
-							In Java it wouldn’t be possible to use a try-catch on the
-							righthand side of an assignment. Since it’s a statement it
-							doesn’t result in a value. In Xtend however it's valid code and
+							In Java it wouldn&apos;t be possible to use a try-catch on the
+							righthand side of an assignment. Since it&apos;s a statement it
+							doesn&apos;t result in a value. In Xtend however it&apos;s valid code and
 							the result would be either the result of <i>fileContentsToString</i>
-							or the string <i>“dummy data”</i> (in case an <i>IOException</i>
+							or the string <i>&apos;data.txt&apos;</i> (in case an <i>IOException</i>
 							was thrown).
 						</p>
 						<p>
-							<strong>By the way: Xtend doesn’t force you to catch or
-								declare checked exceptions.</strong> They are treated like any other
-							exception.
+							<strong>By the way: Xtend doesn&apos;t force you to catch or
+								declare exceptions.</strong> 
+								All exceptions are <a href="./documentation/20-classes-and-functions.php#declaredExceptions">treated like runtime exceptions</a>.
 						</p>
 					</div>
 				</div>
@@ -614,10 +619,11 @@ val data = try {
 				<div class="row">
 					<div class="span8">
 						<p>Xtend got its name from the great support for extending
-							existing types using extension methods. Extension methods allow
-							to add new methods to existing types without touching them. In
+							existing types using extension methods. 
+							<a href="./documentation/20-classes-and-functions.php#extensionMethods">Extension methods</a> 
+							allow to add new methods to existing types without touching them. In
 							Xtend local methods are always available as extension methods and
-							are available on the member scope of the first argument's type.
+							are available on the member scope of the first argument&apos;s type.
 							Given the following method definition ...</p>
 						<pre class="prettyprint lang-xtend">
 /**
@@ -632,12 +638,12 @@ def getFullName(Person p) {
 							<pre class="prettyprint lang-xtend">myPerson.fullName</pre>
 						which will be translated to and is the same as
 						<pre class="prettyprint lang-xtend">this.getFullName(myPerson)</pre>
-						So it's basically syntactic sugar, but it reads better and the
+						So it&apos;s basically syntactic sugar, but it reads better and the
 						content assist in the IDE can be much more helpful.
 						<h3>Static extensions</h3>
 						<p>
 							Xtend puts some useful extension methods on the scope by
-							default. They are mostly higher-order functions for Java's
+							default. They are mostly higher-order functions for Java&apos;s
 							collection library. However, you can use any existing static
 							method as an extension method if you use the keyword <strong>extension</strong>
 							in the static import:
@@ -666,7 +672,7 @@ def example(Person p) {
 							code. All you need to do is to change the configuration of the
 							dependency injection container.</p>
 						<p>
-							If you wonder how you get polymorphism into this, that's what <a
+							If you wonder how you get polymorphism into this, that&apos;s what <a
 								href="#multipledispatch">multiple dispatch</a> is for.
 					
 					</div>
@@ -739,9 +745,9 @@ def dispatch label(Rectangle r) {
    "a rectangle"
 }
 </pre>
-						<p>Note, that the multiple dispatch behavior is compiled into
+						<p>Note, that the <a href="./documentation/20-classes-and-functions.php#polymorphicDispatch">multiple dispatch</a> behavior is compiled into
 							the declaration, so it will always behave the same no matter
-							whether it's called from Java or Xtend.</p>
+							whether it&apos;s called from Java or Xtend.</p>
 					</div>
 				</div>
 			</section>
@@ -774,13 +780,14 @@ for (String name : persons) {
 						</p>
 						<pre class="prettyprint lang-xtend">persons.map( p | p.name )</pre>
 
-						<p>Although closures have a Java compatible type, Xtend
+						<p>Although <a href="./documentation/30-expressions.php#closures">closures</a> 
+						    have a Java compatible type, Xtend
 							provides a nicer notation for function types. The following
 							example defines a closure which would be useful to filter a list
 							of persons by a specific name.</p>
 						<pre class="prettyprint lang-xtend">val (Person) =&gt; Boolean predicate = 
   [ person | "Hans" == person.name ]</pre>
-						You usually don't have to write the types for functions that
+						You usually don&apos;t have to write the types for functions that
 						often, but would write instead:
 						<pre class="prettyprint lang-xtend">val predicate = [ Person person | "Hans" == person.name ]</pre>
 						Such a function can be passed to the extension method <strong>Iterable.filter((T)
@@ -791,7 +798,7 @@ for (String name : persons) {
 						<p>
 							Closures are helpful in many different scenarios. For instance,
 							in combination with <a href="#extensionmethods">extension
-								methods</a> they allow to define nice builder APIs:
+								methods</a> they allow to define nice <a href="./documentation/30-expressions.php#builderSyntax">builder</a> APIs:
 						</p>
 						<pre class="prettyprint lang-xtend">
 html [
@@ -839,8 +846,9 @@ html [
 					<div class="span8">
 						<p>The switch statement in Java is a relict from C and has
 							strange and errorprone semantics. At the same time it is almost
-							useless in today's programming. Xtend comes with a switch
-							expression, which is very convenient and different from what a
+							useless in today&apos;s programming. Xtend comes with a 
+							<a href="documentation/30-expressions.php#switchExpression">switch
+							expression</a>, which is very convenient and different from what a
 							switch means in Java:
 						
 										<ul>
@@ -878,7 +886,7 @@ switch (shape) {
   Circle :
      "Circle ("+shape.diameter+")"
   default :
-  	 "Don't know"
+  	 "Don&apos;t know"
 }
 </pre>
 					</div>
@@ -896,10 +904,10 @@ switch (shape) {
 				</div>
 				<div class="row">
 					<div class="span8">
-						<p>Java's support for string literals and string concatenation
+						<p>Java&apos;s support for string literals and string concatenation
 							is very limited. It lacks multi-line string literals and although
 							the string concatenation using the plus operator is better then
-							using method invocations it's often recommended to use the
+							using method invocations it&apos;s often recommended to use the
 							latter.</p>
 						<p>In Xtend all string literals can span multiple lines by
 							default. Also you can use single quotes or double quotes, to
@@ -907,10 +915,11 @@ switch (shape) {
 							containing a lot of double quotes better use the single quoted
 							string literal and vice versa:</p>
 						<pre class="prettyprint lang-xtend">
-val msg =  'This is some multi-line
-            text with "double quotes" in it'
+val msg =  &apos;This is some multi-line
+            text with "double quotes" in it&apos;
 </pre>
-						<p>Template expressions can do more than plain multi-line
+						<p><a href="./documentation/30-expressions.php#templates">Template expressions</a> 
+						    can do more than plain multi-line
 							strings. They allow interpolating expressions and support a
 							FOR-loop and an IF-condition. The most compelling feature is
 							however the automatic whitespace handling!</p>
@@ -942,147 +951,6 @@ val msg =  'This is some multi-line
 				</div>
 			</section>
 
-			<section id="extensionmethods">
-				<div class="row">
-					<div class="span-two-third">
-						<h2>Extension methods</h2>
-					</div>
-				</div>
-				<div class="row">
-					<div class="span8">
-						<p>Xtend got its name from the great support for extending
-							existing types using extension methods. Extension methods allow
-							to add new methods to existing types without touching them. In
-							Xtend local methods are always available as extension methods and
-							are available on the member scope of the first argument's type.
-							Given the following method definition ...</p>
-						<pre class="prettyprint lang-xtend">
-/**
- * will be available as extension method locally.
- */
-def getFullName(Person p) {
-	p.firstName + " " + p.lastName
-}
-</pre>
-						<p>you can write
-						
-										<pre class="prettyprint lang-xtend">myPerson.fullName</pre>
-						which will be translated to and is the same as
-						<pre class="prettyprint lang-xtend">this.getFullName(myPerson)</pre>
-						So it's basically syntactic sugar, but it reads better and the
-						content assist in the IDE can be much more helpful.
-						<h3>Static extensions</h3>
-						<p>
-							Xtend puts some useful extension methods on the scope by
-							default. They are mostly higher-order functions for Java's
-							collection library. However, you can use any existing static
-							method as an extension method if you use the keyword <strong>extension</strong>
-							in the static import:
-						</p>
-						<pre class="prettyprint lang-xtend">import static extension java.util.Collections.*</pre>
-					</div>
-					<div class="span8">
-						<h3>Extension methods and injection</h3>
-						<p>
-							The real fun begins when you use the extension keyword on fields
-							together with some dependency injection framework (we recommend <a
-												href="http://code.google.com/p/google-guice/">Guice</a>):
-						</p>
-						<pre class="prettyprint lang-xtend">
-@Inject extension PersonExtension /* no field name */
-		      		
-def example(Person p) {
-   // calls PersonExtension#getFullName(Person) on 
-   // the injected instance
-   println( p.fullName )
-}
-</pre>
-						<p>This way you can define layer-specific libraries for your
-							domain model, without poluting the model. And the best thing is,
-							you can easily change the implementation without touching the
-							code. All you need to do is to change the configuration of the
-							dependency injection container.</p>
-						<p>
-							If you wonder how you get polymorphism into this, that's what <a
-												href="#multipledispatch">multiple dispatch</a> is for.
-					
-									</div>
-				</div>
-			</section>
-
-			<section id="multipledispatch">
-				<div class="row">
-					<div class="span-two-third">
-						<h2>
-							Multiple dispatch <small>no more visitors!</small>
-						</h2>
-					</div>
-				</div>
-				<div class="row">
-					<div class="span8">
-						<p>
-							Everybody knows the <a
-												href="http://en.wikipedia.org/wiki/Visitor_pattern">visitor
-								pattern</a>.
-						
-										<blockquote>
-							<p>In essence, the visitor allows to add new virtual
-								functions to a family of classes without modifying the classes
-								themselves</p>
-							<small>Wikipedia, November 2011</small>
-						</blockquote>
-						<p>
-							The visitor pattern is actually a work-around for the lack of <a
-												href="http://en.wikipedia.org/wiki/Multiple_dispatch">multiple
-								dispatch</a>. By default Xtend (like Java) links overloaded methods
-							at compile time based on the static types of the arguments:
-						</p>
-						<pre class="prettyprint lang-xtend">
-def example() {
-  val Shape s = new Rectangle()
-  println(s.label) // prints "some shape"
-  
-  val Rectangle r = new Rectangle()
-  println(r.label) // prints "a rectangle"
-}
-			        
-def label(Shape s) {
-   "some shape"
-}
-
-def label(Rectangle r) {
-   "a rectangle"
-}
-</pre>
-					</div>
-					<div class="span8">
-						<p>However, Xtend also allows for a set of overloaded methods
-							to do the dispatching based on the actual runtime argument types.
-							All you need to do is add the dispatch keyword to the methods:</p>
-						<pre class="prettyprint lang-xtend">
-def example() {
-  val Shape s = new Rectangle()
-  println(s.label) // prints "a rectangle" !!!
-  
-  val Rectangle r = new Rectangle()
-  println(r.label) // prints "a rectangle"
-}
-			        
-def dispatch label(Shape s) {
-   "some shape"
-}
-
-def dispatch label(Rectangle r) {
-   "a rectangle"
-}
-</pre>
-						<p>Note, that the multiple dispatch behavior is compiled into
-							the declaration, so it will always behave the same no matter
-							whether it's called from Java or Xtend.</p>
-					</div>
-				</div>
-			</section>
-			
 			<section id="dslsupport">
 				<div class="row">
 					<div class="span-two-third">
@@ -1107,30 +975,30 @@ GET /list/Persons     -&gt; PersonController.list()
 GET /edit/Person/{id} -&gt; PersonController.edit(id)
 </pre>
 						<p>
-							Wouldn’t it be cool to have all the great tool support you see in
+							Wouldn&apos;t it be cool to have all the great tool support you see in
 							Xtend, including specific validations, which for instance would
 							warn you about certain unreachable mappings? Also the references
 							to classes and methods should be statically typed, including
 							content assist and even cross-language rename refactoring would
-							be extremely nice. <strong>With Xtend and it’s support
+							be extremely nice. <strong>With Xtend and it&apos;s support
 								for DSLs this is an easy thing to do.</strong>
 						</p>
 						<p>
 							Xtend is built with <a href="http://xtext.org"><img
 												height="12" src="images/xtext-logo-color-100.png"
 												alt="Xtext">,
-								Eclipse’s language and IDE development framework</a>. With that tool
+								Eclipse&apos;s language and IDE development framework</a>. With that tool
 							chain you can build such a request mapping language in no time.
 							It will support you to embed Xtend’s expressions, Java types and
 							annotations everywhere you want. You can reuse the whole type
-							inferrer, compilation and editor support. There's even an
+							inferrer, compilation and editor support. There&apos;s even an
 							interpreter allowing for execution of any DSLs at runtime.
 						</p>
 
 						<p>
 							Have a look at <img height="12"
-												src="images/xtext-logo-color-100.png" alt="Xtext">’s
-							website to understand how to do that. You'll be amazed how simple
+												src="images/xtext-logo-color-100.png" alt="Xtext">&apos;s
+							website to understand how to do that. You&apos;ll be amazed how simple
 							it is to build compiling, statically typed domain-specific
 							language with full blown Xtend expressions.
 						</p>
@@ -1141,7 +1009,7 @@ GET /edit/Person/{id} -&gt; PersonController.edit(id)
 						</p>
 					</div>
 					<div class="span8">
-						<p>Here's another example. A DSL for Behavior Driven Design :
+						<p>Here&apos;s another example. A DSL for Behavior Driven Design :
 						</p>
 						<img src="images/jvm-dsl.png" />
 						<p>
@@ -1189,16 +1057,16 @@ GET /edit/Person/{id} -&gt; PersonController.edit(id)
 			<div class="page-header">
 				<span class="label success">Updated!</span>
 				<h1>
-					Future Plans <small>What's Next?</small>
+					Future Plans <small>What&apos;s Next?</small>
 				</h1>
 			</div>
 			<div class="row">
 				<div class="span16">
 					<p>With the recently released version, Xtend is now a fully
 						working, readable and convenient alternative to Java classes. The
-						editor is close to what Eclipse's Java tooling can do and in some
+						editor is close to what Eclipse&apos;s Java tooling can do and in some
 						aspects even better.</p>
-					<p>Here's a list of things we want to focus on during the next
+					<p>Here&apos;s a list of things we want to focus on during the next
 						months:</p>
 				</div>
 			</div>
@@ -1206,7 +1074,7 @@ GET /edit/Person/{id} -&gt; PersonController.edit(id)
 				<div class="span8">
 					<ul>
 						<li>
-							<h4>Even tighter integration with Eclipse's Java tooling.</h4>
+							<h4>Even tighter integration with Eclipse&apos;s Java tooling.</h4>
 							<p>
 								Whenever you click on a Java class derived from Xtend, being it
 								in a search result, in a type hierarchy, junit test results or
@@ -1218,7 +1086,7 @@ GET /edit/Person/{id} -&gt; PersonController.edit(id)
 						</li>
 						<li><h4>Debugging.</h4>
 							<p>We are working on support for JSR-45, which is already
-								supported by JDT. With that you'll be able to easily switch
+								supported by JDT. With that you&apos;ll be able to easily switch
 								between stepping through Xtend and the derived Java source. This
 								will also make sure the stacktraces contain proper xtend
 								entries.</p></li>
@@ -1234,18 +1102,18 @@ GET /edit/Person/{id} -&gt; PersonController.edit(id)
 					<ul>
 						<li>
 							<h4>Nullsafety.</h4>
-							<p>It seems like JDT finally get's control-flow analysis
+							<p>Finally, the JDT got control-flow analysis for
 								@Nullable types. This is an important feature and we will
 								definitely work on supporting this in Xtend as well.</p>
 						</li>
 						<li><h4>Quality and Performance.</h4>
-							<p>We'll further improve the performance of the static
+							<p>We&apos;ll further improve the performance of the static
 								analysis, type inference and compilation, to make sure people
 								experience a super short turn-around.</p></li>
 						<li><h4>Move Xtend to its own project at Eclipse.</h4>
-							<p>Today Xtend is released as part of Xtext. Although it's
+							<p>Today Xtend is released as part of Xtext. Although it&apos;s
 								more or less the same team working on both technologies we feel
-								that it's time to move Xtend to its own project at Eclipse.</p></li>
+								that it&apos;s time to move Xtend to its own project at Eclipse.</p></li>
 					</ul>
 				</div>
 			</div>
