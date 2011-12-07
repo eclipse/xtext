@@ -1,0 +1,1 @@
+var documentationRoot = 'http://www.eclipse.org/Xtext/documentation/2_0_0/'
