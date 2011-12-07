@@ -130,12 +130,14 @@ public class Body {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<!-- subsection -->");
     _builder.newLine();
+    _builder.append("<section id=\"");
+    String _href = this._htmlExtensions.href(section);
+    _builder.append(_href, "");
+    _builder.append("\">");
+    _builder.newLineIfNotEmpty();
     _builder.append("<h");
     _builder.append(hLevel, "");
-    _builder.append(" id=\"");
-    String _id = this._xdocExtensions.id(section);
-    _builder.append(_id, "");
-    _builder.append("\">");
+    _builder.append(">");
     TextOrMarkup _title = section.getTitle();
     CharSequence _html = this._htmlExtensions.toHtml(_title);
     _builder.append(_html, "");
@@ -156,6 +158,8 @@ public class Body {
         _builder.newLineIfNotEmpty();
       }
     }
+    _builder.append("</section>");
+    _builder.newLine();
     return _builder;
   }
 }
