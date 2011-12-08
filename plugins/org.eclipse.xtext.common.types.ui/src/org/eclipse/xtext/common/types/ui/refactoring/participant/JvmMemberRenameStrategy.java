@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
-import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
@@ -55,7 +55,7 @@ public class JvmMemberRenameStrategy implements IRenameStrategy {
 		JvmMember member = (JvmMember) resourceSet.getEObject(targetURI, true);
 		member.internalSetIdentifier(null);
 		member.setSimpleName(newName);
-		if (member instanceof JvmGenericType && ((InternalEObject) member).eDirectResource() != null) {
+		if (member instanceof JvmDeclaredType && ((InternalEObject) member).eDirectResource() != null) {
 			Resource typeResource = member.eResource();
 			if (typeResource instanceof TypeResource) {
 				String originalURI = typeResource.getURI().toString();

@@ -18,9 +18,12 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import static org.eclipse.emf.ecore.util.EcoreUtil.*;
+
+import org.eclipse.jdt.core.IField;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IMethod;
+import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -64,7 +67,7 @@ public class JdtRenameParticipant extends AbstractProcessorBasedRenameParticipan
 						// jvmElement is indexed, thus contained in an XtextResurce and likely inferred from some Xtext-based elements
 						return getContextFactory(indexedJvmElement).createJdtParticipantXtextSourceContexts(indexedJvmElement);
 					else if (directJvmElement instanceof JvmMember)
-						// jvmElement is only cross referenced by Xtext-based elements
+						// jvmElement could only be cross referenced by Xtext-based elements
 						return createJdtRenameParticipantContext((JvmMember) directJvmElement, javaElement);
 				}
 			}
@@ -86,16 +89,21 @@ public class JdtRenameParticipant extends AbstractProcessorBasedRenameParticipan
 	protected EClass getExpectedJvmType(IJavaElement javaElement) {
 		try {
 			switch (javaElement.getElementType()) {
-				case IJavaElement.TYPE:
-					return TypesPackage.Literals.JVM_TYPE;
+				case IJavaElement.TYPE: 
+					if(((IType) javaElement).isEnum()) 
+						return TypesPackage.Literals.JVM_ENUMERATION_TYPE;
+					else
+						return TypesPackage.Literals.JVM_TYPE;
 				case IJavaElement.METHOD:
-					IMethod method = (IMethod) javaElement;
-					if (method.isConstructor())
+					if (((IMethod) javaElement).isConstructor())
 						return TypesPackage.Literals.JVM_CONSTRUCTOR;
 					else
 						return TypesPackage.Literals.JVM_OPERATION;
 				case IJavaElement.FIELD:
-					return TypesPackage.Literals.JVM_FIELD;
+					if(((IField)javaElement).isEnumConstant())
+						return TypesPackage.Literals.JVM_ENUMERATION_LITERAL;
+					else
+						return TypesPackage.Literals.JVM_FIELD;
 				default:
 					return null;
 			}
