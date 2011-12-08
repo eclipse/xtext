@@ -139,6 +139,14 @@ public abstract class AbstractOutlineTests extends AbstractXtend2UITestCase {
 			assertEquals("Wrong number of children", num, getSorter().filterAndSort(node.getChildren()).length);
 			return this;
 		}
+		
+		AssertBuilder hasTextRegion(boolean hasTextRegion) {
+			if(hasTextRegion)
+				assertNotNull(node.getSignificantTextRegion());
+			else 
+				assertNull(node.getSignificantTextRegion());
+			return this;
+		}
 
 		AssertBuilder child(int index, String text) {
 			IOutlineNode[] sortedChildren = getSorter().filterAndSort(node.getChildren());

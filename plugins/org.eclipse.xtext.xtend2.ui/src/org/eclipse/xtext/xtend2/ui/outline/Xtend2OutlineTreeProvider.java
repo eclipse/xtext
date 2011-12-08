@@ -127,7 +127,9 @@ public class Xtend2OutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 			}
 			for (JvmFeature feature : remainingFeatures) {
 				if (!processedFeatures.contains(feature)) {
-					createNodeForFeature(parentNode, inferredType, feature, feature);
+					EObject primarySourceElement = associations.getPrimarySourceElement(feature);
+					createNodeForFeature(parentNode, inferredType, feature, 
+							primarySourceElement != null ? primarySourceElement : feature);
 				}
 			}
 		} else {
