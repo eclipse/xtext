@@ -19,7 +19,6 @@ import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xdoc.xdoc.Anchor;
 import org.eclipse.xtext.xdoc.xdoc.Code;
@@ -67,9 +66,10 @@ public class HtmlExtensions {
         {
           EClass _eClass = it.eClass();
           String _name_2 = _eClass.getName();
+          String _operator_plus = StringExtensions.operator_plus(_name_2, "_");
           int _size = this.artificialHrefs.size();
-          String _operator_plus = StringExtensions.operator_plus(_name_2, Integer.valueOf(_size));
-          final String newHref = _operator_plus;
+          String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, Integer.valueOf(_size));
+          final String newHref = _operator_plus_1;
           this.artificialHrefs.put(it, newHref);
           _xblockexpression = (newHref);
         }
@@ -170,7 +170,7 @@ public class HtmlExtensions {
   
   protected CharSequence _toHtml(final UnorderedList it) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<ol>");
+    _builder.append("<ul>");
     _builder.newLine();
     {
       EList<Item> _items = it.getItems();
@@ -181,7 +181,7 @@ public class HtmlExtensions {
         _builder.newLineIfNotEmpty();
       }
     }
-    _builder.append("</ol>");
+    _builder.append("</ul>");
     _builder.newLine();
     return _builder;
   }
@@ -232,6 +232,77 @@ public class HtmlExtensions {
   protected CharSequence _toHtml(final CodeBlock it) {
     CharSequence _internalToHtml = this.internalToHtml(it, false);
     return _internalToHtml;
+  }
+  
+  protected CharSequence _toHtml(final Link it) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("<a href=\"");
+    String _url = it.getUrl();
+    _builder.append(_url, "");
+    _builder.append("\">");
+    String _text = it.getText();
+    _builder.append(_text, "");
+    _builder.append("</a>");
+    return _builder;
+  }
+  
+  protected CharSequence _toHtml(final Table it) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("<table class=\"bordered-table zebra-striped\">");
+    _builder.newLine();
+    {
+      EList<TableRow> _rows = it.getRows();
+      for(final TableRow row : _rows) {
+        CharSequence _html = this.toHtml(row);
+        _builder.append(_html, "");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append("</table>");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  protected CharSequence _toHtml(final TableRow it) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("<tr>");
+    EList<TableData> _data = it.getData();
+    CharSequence _html = this.toHtml(_data);
+    _builder.append(_html, "");
+    _builder.append("</tr>");
+    _builder.newLineIfNotEmpty();
+    return _builder;
+  }
+  
+  protected CharSequence _toHtml(final TableData it) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("<td>");
+    EList<TextOrMarkup> _contents = it.getContents();
+    CharSequence _html = this.toHtml(_contents);
+    _builder.append(_html, "");
+    _builder.append("</td>");
+    _builder.newLineIfNotEmpty();
+    return _builder;
+  }
+  
+  protected CharSequence _toHtml(final EObject it) {
+    String _xblockexpression = null;
+    {
+      EClass _eClass = it.eClass();
+      String _name = _eClass.getName();
+      String _operator_plus = StringExtensions.operator_plus("Missing toHtml for ", _name);
+      InputOutput.<String>println(_operator_plus);
+      _xblockexpression = ("");
+    }
+    return _xblockexpression;
+  }
+  
+  public String markCodeBegin() {
+    return "###xdoc code begin###";
+  }
+  
+  public String markCodeEnd() {
+    return "###xdoc code end###";
   }
   
   protected CharSequence internalToHtml(final CodeBlock it, final boolean isParagraph) {
@@ -392,69 +463,6 @@ public class HtmlExtensions {
     return _xblockexpression;
   }
   
-  protected CharSequence _toHtml(final Link it) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<a href=\"");
-    String _url = it.getUrl();
-    _builder.append(_url, "");
-    _builder.append("\">");
-    String _text = it.getText();
-    _builder.append(_text, "");
-    _builder.append("</a>");
-    return _builder;
-  }
-  
-  protected CharSequence _toHtml(final Table it) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<table class=\"bordered-table zebra-striped\">");
-    _builder.newLine();
-    {
-      EList<TableRow> _rows = it.getRows();
-      for(final TableRow row : _rows) {
-        CharSequence _html = this.toHtml(row);
-        _builder.append(_html, "");
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    _builder.append("</table>");
-    _builder.newLine();
-    return _builder;
-  }
-  
-  protected CharSequence _toHtml(final TableRow it) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<tr>");
-    EList<TableData> _data = it.getData();
-    CharSequence _html = this.toHtml(_data);
-    _builder.append(_html, "");
-    _builder.append("</tr>");
-    _builder.newLineIfNotEmpty();
-    return _builder;
-  }
-  
-  protected CharSequence _toHtml(final TableData it) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<td>");
-    EList<TextOrMarkup> _contents = it.getContents();
-    CharSequence _html = this.toHtml(_contents);
-    _builder.append(_html, "");
-    _builder.append("</td>");
-    _builder.newLineIfNotEmpty();
-    return _builder;
-  }
-  
-  protected CharSequence _toHtml(final EObject it) {
-    String _xblockexpression = null;
-    {
-      EClass _eClass = it.eClass();
-      String _name = _eClass.getName();
-      String _operator_plus = StringExtensions.operator_plus("Missing toHtml for ", _name);
-      InputOutput.<String>println(_operator_plus);
-      _xblockexpression = ("");
-    }
-    return _xblockexpression;
-  }
-  
   protected String quote(final CharSequence it) {
     String _string = it.toString();
     String _replace = _string.replace("<", "&lt;");
@@ -473,7 +481,7 @@ public class HtmlExtensions {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<p>");
     _builder.newLine();
-    Object _internalToHtmlParagraph = this.internalToHtmlParagraph(it);
+    CharSequence _internalToHtmlParagraph = this.internalToHtmlParagraph(it);
     _builder.append(_internalToHtmlParagraph, "");
     _builder.newLineIfNotEmpty();
     _builder.append("</p>");
@@ -481,69 +489,76 @@ public class HtmlExtensions {
     return _builder;
   }
   
-  protected Object _internalToHtmlParagraph(final TextOrMarkup it) {
-    EList<EObject> _contents = it.getContents();
-    Object _internalToHtmlParagraph = this.internalToHtmlParagraph(_contents);
-    return _internalToHtmlParagraph;
-  }
-  
-  protected Object _internalToHtmlParagraph(final List<EObject> it) {
-    final Function1<EObject,Object> _function = new Function1<EObject,Object>() {
-        public Object apply(final EObject it) {
-          Object _internalToHtmlParagraph = HtmlExtensions.this.internalToHtmlParagraph(it);
-          return _internalToHtmlParagraph;
-        }
-      };
-    List<Object> _map = ListExtensions.<EObject, Object>map(it, _function);
-    String _join = IterableExtensions.join(_map);
-    return _join;
-  }
-  
-  protected Object _internalToHtmlParagraph(final TextPart it) {
-    String _xblockexpression = null;
-    {
-      String _text = it.getText();
-      String _quote = this.quote(_text);
-      String[] _split = _quote.split("^\\s*$");
-      final String[] paragraphs = _split;
-      final String[] _typeConverted_paragraphs = (String[])paragraphs;
-      final Procedure1<String> _function = new Procedure1<String>() {
-          public void apply(final String it) {
-            it.trim();
-          }
-        };
-      IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(_typeConverted_paragraphs)), _function);
-      final String[] _typeConverted_paragraphs_1 = (String[])paragraphs;
-      final Function1<String,Boolean> _function_1 = new Function1<String,Boolean>() {
-          public Boolean apply(final String it) {
-            boolean _isEmpty = it.isEmpty();
-            boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
-            return Boolean.valueOf(_operator_not);
-          }
-        };
-      Iterable<String> _filter = IterableExtensions.<String>filter(((Iterable<String>)Conversions.doWrapArray(_typeConverted_paragraphs_1)), _function_1);
-      String _join = IterableExtensions.join(_filter, "</p><p>");
-      _xblockexpression = (_join);
+  protected CharSequence internalToHtmlParagraph(final Object it) {
+    CharSequence _switchResult = null;
+    boolean matched = false;
+    if (!matched) {
+      if (it instanceof TextOrMarkup) {
+        final TextOrMarkup _textOrMarkup = (TextOrMarkup)it;
+        matched=true;
+        EList<EObject> _contents = _textOrMarkup.getContents();
+        CharSequence _internalToHtmlParagraph = this.internalToHtmlParagraph(_contents);
+        _switchResult = _internalToHtmlParagraph;
+      }
     }
-    return _xblockexpression;
-  }
-  
-  protected Object _internalToHtmlParagraph(final CodeBlock it) {
-    CharSequence _internalToHtml = this.internalToHtml(it, true);
-    return _internalToHtml;
-  }
-  
-  protected Object _internalToHtmlParagraph(final EObject it) {
-    CharSequence _html = this.toHtml(it);
-    return _html;
-  }
-  
-  public String markCodeBegin() {
-    return "###xdoc code begin###";
-  }
-  
-  public String markCodeEnd() {
-    return "###xdoc code end###";
+    if (!matched) {
+      if (it instanceof List) {
+        final List<EObject> _list = (List<EObject>)it;
+        matched=true;
+        final Function1<EObject,CharSequence> _function = new Function1<EObject,CharSequence>() {
+            public CharSequence apply(final EObject it) {
+              CharSequence _internalToHtmlParagraph = HtmlExtensions.this.internalToHtmlParagraph(it);
+              return _internalToHtmlParagraph;
+            }
+          };
+        List<CharSequence> _map = ListExtensions.<EObject, CharSequence>map(_list, _function);
+        String _join = IterableExtensions.join(_map);
+        _switchResult = _join;
+      }
+    }
+    if (!matched) {
+      if (it instanceof TextPart) {
+        final TextPart _textPart = (TextPart)it;
+        matched=true;
+        String _xblockexpression = null;
+        {
+          String _text = _textPart.getText();
+          String _quote = this.quote(_text);
+          String[] _split = _quote.split("^\\s*$");
+          final String[] paragraphs = _split;
+          final String[] _typeConverted_paragraphs = (String[])paragraphs;
+          final Function1<String,Boolean> _function = new Function1<String,Boolean>() {
+              public Boolean apply(final String it) {
+                boolean _isEmpty = it.isEmpty();
+                boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
+                return Boolean.valueOf(_operator_not);
+              }
+            };
+          Iterable<String> _filter = IterableExtensions.<String>filter(((Iterable<String>)Conversions.doWrapArray(_typeConverted_paragraphs)), _function);
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("</p>");
+          _builder.newLine();
+          _builder.append("<p>");
+          _builder.newLine();
+          String _join = IterableExtensions.join(_filter, _builder);
+          _xblockexpression = (_join);
+        }
+        _switchResult = _xblockexpression;
+      }
+    }
+    if (!matched) {
+      if (it instanceof CodeBlock) {
+        final CodeBlock _codeBlock = (CodeBlock)it;
+        matched=true;
+        CharSequence _internalToHtml = this.internalToHtml(_codeBlock, true);
+        _switchResult = _internalToHtml;
+      }
+    }
+    if (!matched) {
+      CharSequence _html = this.toHtml(it);
+      _switchResult = _html;
+    }
+    return _switchResult;
   }
   
   public CharSequence toHtml(final Object it) {
@@ -583,23 +598,6 @@ public class HtmlExtensions {
       return _toHtml((TextPart)it);
     } else if (it instanceof EObject) {
       return _toHtml((EObject)it);
-    } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(it).toString());
-    }
-  }
-  
-  protected Object internalToHtmlParagraph(final Object it) {
-    if (it instanceof CodeBlock) {
-      return _internalToHtmlParagraph((CodeBlock)it);
-    } else if (it instanceof List) {
-      return _internalToHtmlParagraph((List<EObject>)it);
-    } else if (it instanceof TextOrMarkup) {
-      return _internalToHtmlParagraph((TextOrMarkup)it);
-    } else if (it instanceof TextPart) {
-      return _internalToHtmlParagraph((TextPart)it);
-    } else if (it instanceof EObject) {
-      return _internalToHtmlParagraph((EObject)it);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(it).toString());
