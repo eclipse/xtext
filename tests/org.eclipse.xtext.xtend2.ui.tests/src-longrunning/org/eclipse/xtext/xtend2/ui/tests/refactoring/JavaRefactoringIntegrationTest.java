@@ -119,9 +119,27 @@ public class JavaRefactoringIntegrationTest extends AbstractXtend2UITestCase {
 			renameSupport
 					.perform(workbench.getActiveWorkbenchWindow().getShell(), workbench.getActiveWorkbenchWindow());
 			assertFileContains(xtendClass, "extends NewJavaClass");
-			testHelper.getProject().getFile("src/NewJavaClass.java").delete(true, new NullProgressMonitor());
 		} finally {
 			testHelper.getProject().getFile("src/NewJavaClass.java").delete(true, new NullProgressMonitor());
+		}
+	}
+
+	public void testRenameJavaEnum() throws Exception {
+		try {
+			testHelper.createFile("JavaEnum.java", "public enum JavaEnum { FOO, BAR }");
+			String xtendModel = "class XtendClass { JavaEnum fooBar }";
+			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+			IResourcesSetupUtil.waitForAutoBuild();
+			IJavaProject javaProject = JavaCore.create(testHelper.getProject());
+			IType javaEnum = javaProject.findType("JavaEnum");
+			assertNotNull(javaEnum);
+			RenameSupport renameSupport = RenameSupport.create(javaEnum, "NewJavaEnum",
+					RenameSupport.UPDATE_REFERENCES);
+			renameSupport
+					.perform(workbench.getActiveWorkbenchWindow().getShell(), workbench.getActiveWorkbenchWindow());
+			assertFileContains(xtendClass, "NewJavaEnum fooBar");
+		} finally {
+			testHelper.getProject().getFile("src/NewJavaEnum.java").delete(true, new NullProgressMonitor());
 		}
 	}
 
