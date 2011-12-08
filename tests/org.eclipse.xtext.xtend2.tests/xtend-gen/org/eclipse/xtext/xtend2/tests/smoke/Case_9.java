@@ -1,5 +1,6 @@
 package org.eclipse.xtext.xtend2.tests.smoke;
 
+import java.util.Arrays;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -41,8 +42,11 @@ public class Case_9 {
   public CharSequence generateTypeRef(final EObject c) {
     if (c instanceof ENamedElement) {
       return _generateTypeRef((ENamedElement)c);
-    } else {
+    } else if (c != null) {
       return _generateTypeRef(c);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(c).toString());
     }
   }
 }
