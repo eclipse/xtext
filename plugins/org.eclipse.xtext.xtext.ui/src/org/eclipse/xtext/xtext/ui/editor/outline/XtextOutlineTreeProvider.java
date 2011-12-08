@@ -100,23 +100,25 @@ public class XtextOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 	}
 
 	protected void _createNode(IOutlineNode parentNode, AbstractRule rule) {
-		createRuleNode(parentNode, rule, false);
+		createRuleNode(parentNode, rule, false, true);
 	}
 
-	protected void createRuleNode(IOutlineNode parentNode, AbstractRule rule, boolean isShowGrammar) {
+	protected void createRuleNode(IOutlineNode parentNode, AbstractRule rule, boolean isShowGrammar, boolean isLocalRule) {
 		StyledString text = (StyledString) textDispatcher.invoke(rule);
-		if(isShowGrammar) {
+		if (isShowGrammar) {
 			EObject grammar = rule.eContainer();
-			if (grammar instanceof Grammar) 
-				text.append(new StyledString(" (" + ((Grammar)grammar).getName()+")", StyledString.COUNTER_STYLER));			
+			if (grammar instanceof Grammar)
+				text.append(new StyledString(" (" + ((Grammar) grammar).getName() + ")", StyledString.COUNTER_STYLER));
 		}
 		Image image = imageDispatcher.invoke(rule);
 		RuleNode ruleNode = new RuleNode(rule, parentNode, image, text, isLeafDispatcher.invoke(rule));
-		ICompositeNode parserNode = NodeModelUtils.getNode(rule);
-		if (parserNode != null)
-			ruleNode.setTextRegion(new TextRegion(parserNode.getOffset(), parserNode.getLength()));
-		ruleNode.setShortTextRegion(locationInFileProvider.getSignificantTextRegion(rule));
-		ruleNode.setFullText(new StyledString().append(text).append(getReturnTypeText(rule)));
+		if (isLocalRule) {
+			ICompositeNode parserNode = NodeModelUtils.getNode(rule);
+			if (parserNode != null)
+				ruleNode.setTextRegion(new TextRegion(parserNode.getOffset(), parserNode.getLength()));
+			ruleNode.setShortTextRegion(locationInFileProvider.getSignificantTextRegion(rule));
+			ruleNode.setFullText(new StyledString().append(text).append(getReturnTypeText(rule)));
+		}
 	}
 
 	protected void _createChildren(IOutlineNode parentNode, Grammar grammar) {
@@ -126,10 +128,10 @@ public class XtextOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 		for (AbstractRule rule : grammar.getRules()) {
 			createNode(parentNode, rule);
 		}
-		if(getCurrentMode() == SHOW_INHERITED_MODE) {
-			for(AbstractRule rule: GrammarUtil.allRules(grammar)) {
-				if(rule.eContainer() != grammar) {
-					createRuleNode(parentNode, rule, true);
+		if (getCurrentMode() == SHOW_INHERITED_MODE) {
+			for (AbstractRule rule : GrammarUtil.allRules(grammar)) {
+				if (rule.eContainer() != grammar) {
+					createRuleNode(parentNode, rule, true, false);
 				}
 			}
 		}

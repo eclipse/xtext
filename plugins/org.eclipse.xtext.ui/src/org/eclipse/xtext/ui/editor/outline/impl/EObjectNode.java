@@ -57,6 +57,6 @@ public class EObjectNode extends AbstractOutlineNode {
 	}
 
 	public EObject getEObject(Resource resource) {
-		return resource.getEObject(eObjectURI.fragment());
+		return resource.getResourceSet().getEObject(eObjectURI, true);
 	}
 }
