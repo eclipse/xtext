@@ -1,6 +1,7 @@
 package org.eclipse.xtext.example.domainmodel.jvmmodel;
 
 import com.google.inject.Inject;
+import java.util.Arrays;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -114,8 +115,11 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
   public void infer(final EObject e, final IAcceptor<JvmDeclaredType> acceptor, final boolean prelinkingPhase) {
     if (e instanceof Entity) {
       _infer((Entity)e, acceptor, prelinkingPhase);
-    } else {
+    } else if (e != null) {
       _infer(e, acceptor, prelinkingPhase);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(e, acceptor, prelinkingPhase).toString());
     }
   }
 }
