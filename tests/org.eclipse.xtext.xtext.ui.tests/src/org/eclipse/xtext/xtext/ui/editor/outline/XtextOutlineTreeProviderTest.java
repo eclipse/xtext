@@ -15,6 +15,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineMode;
+import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xtext.ui.Activator;
 
@@ -60,17 +61,26 @@ public class XtextOutlineTreeProviderTest extends AbstractXtextTests {
 
 	public void testInheritMode() throws Exception{
 		setShowInherited(true);
-		IOutlineNode node = assertNoException("grammar Foo with org.eclipse.xtext.common.Terminals " +
+		String model = "grammar Foo with org.eclipse.xtext.common.Terminals " +
 				"generate foo 'Foo' " +
 				"Foo: 'foo'; " +
-				"Bar: 'bar';");
+				"Bar: 'bar';";
+		IOutlineNode node = assertNoException(model);
 		assertEquals(1, node.getChildren().size());
 		IOutlineNode grammar = node.getChildren().get(0);
 		assertNode(grammar, "grammar Foo", 10);
 		assertNode(grammar.getChildren().get(0), "generate foo", 0);
-		assertNode(grammar.getChildren().get(1), "Foo", 0);
+		IOutlineNode foo = grammar.getChildren().get(1);
+		assertNode(foo, "Foo", 0);
+		assertEquals(model.lastIndexOf("Foo"), foo.getFullTextRegion().getOffset());
+		assertEquals(11, foo.getFullTextRegion().getLength());
+		assertEquals(model.lastIndexOf("Foo"), foo.getSignificantTextRegion().getOffset());
+		assertEquals(3, foo.getSignificantTextRegion().getLength());
 		assertNode(grammar.getChildren().get(2), "Bar", 0);
-		assertNode(grammar.getChildren().get(3), "ID (org.eclipse.xtext.common.Terminals)", 0);
+		IOutlineNode id = grammar.getChildren().get(3);
+		assertNode(id, "ID (org.eclipse.xtext.common.Terminals)", 0);
+		assertNull(id.getSignificantTextRegion());
+		assertEquals(ITextRegion.EMPTY_REGION, id.getFullTextRegion());
 		assertNode(grammar.getChildren().get(4), "INT (org.eclipse.xtext.common.Terminals)", 0);
 		assertNode(grammar.getChildren().get(5), "STRING (org.eclipse.xtext.common.Terminals)", 0);
 		assertNode(grammar.getChildren().get(6), "ML_COMMENT (org.eclipse.xtext.common.Terminals)", 0);
