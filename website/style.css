@@ -34,7 +34,7 @@ a strong {
 body {
 	background: url("images/subpage_header_top.png") top repeat-x;
 	height: auto !important;
-	background-color: #ecedf1 !important;
+/*	background-color: #ecedf1 !important; */
 }
 
 #header {
