@@ -17,6 +17,7 @@ import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
 import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendConstructor;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
 import com.google.inject.Inject;
@@ -69,6 +70,13 @@ public class RenameStrategyTest extends AbstractXtend2UITestCase {
 		inferredOperation = associations.getDirectlyInferredOperation(fooMethod);
 		assertEquals("foo", fooMethod.getName());
 		assertEquals("foo", inferredOperation.getSimpleName());
+	}
+
+	public void testXtendConstructorIgnored() throws Exception {
+		XtendConstructor constructor = (XtendConstructor) testHelper.xtendFile("Foo", "class Foo { new() {} }")
+				.getXtendClass().getMembers().get(0);
+		IRenameStrategy renameStrategy = renameStrategyProvider.get(constructor, null);
+		assertNull(renameStrategy);
 	}
 
 }

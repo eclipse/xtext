@@ -12,8 +12,10 @@ import org.eclipse.ltk.core.refactoring.resource.RenameResourceChange;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.impl.RefactoringException;
+import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.DefaultJvmModelRenameStrategy;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendConstructor;
 
 /**
  * Encapsulates the model changes of a rename refactoring.
@@ -21,6 +23,13 @@ import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 @SuppressWarnings("restriction")
 public class Xtend2RenameStrategy extends DefaultJvmModelRenameStrategy {
 
+	@Override
+	public boolean initialize(EObject targetElement, IRenameElementContext context) {
+		if(targetElement instanceof XtendConstructor)
+			return false;
+		return super.initialize(targetElement, context);
+	}
+	
 	@Override
 	public void createDeclarationUpdates(String newName, ResourceSet resourceSet,
 			IRefactoringUpdateAcceptor updateAcceptor) {
