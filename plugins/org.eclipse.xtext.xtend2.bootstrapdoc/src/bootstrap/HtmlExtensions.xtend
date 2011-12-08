@@ -31,11 +31,12 @@ class HtmlExtensions {
 		} else if(artificialHrefs.containsKey(it)) {
 			artificialHrefs.get(it)
 		} else {
-			val newHref = it.eClass.name + artificialHrefs.size()
+			val newHref = it.eClass.name + '_' + artificialHrefs.size()
 			artificialHrefs.put(it, newHref)
 			newHref
 		}  
 	}
+	
 	
 	def dispatch CharSequence toHtml(TextOrMarkup it) {
 		contents.toHtml
@@ -70,11 +71,11 @@ class HtmlExtensions {
 	'''
 	
 	def dispatch toHtml(UnorderedList it) '''
-		<ol>
+		<ul>
 			«FOR item:items»
 				«item.toHtml»
 			«ENDFOR»
-		</ol>
+		</ul>
 	'''
 	
 	def dispatch toHtml(Todo it) {
@@ -96,27 +97,6 @@ class HtmlExtensions {
 	
 	def dispatch toHtml(CodeBlock it) {
 		internalToHtml(false)
-	}
-	
-	def protected internalToHtml(CodeBlock it, boolean isParagraph) {
-		val code = contents.toHtml.toString
-		val languageName = if (language?.name==null) "xtend" else language.name
-		if(code.contains('\n') || code.contains('\r')) '''
-			«IF isParagraph»</p>«ENDIF»<pre class="prettyprint lang-«languageName.toLowerCase»">«markCodeBegin»
-			«code.trimCode»«markCodeEnd»</pre>«IF isParagraph»<p>«ENDIF»
-		''' else '''<code class="prettyprint lang-«languageName.toLowerCase»">«code.trimCode»</code>'''
-	}
-	
-	def protected trimCode(String it) {
-		var start = 0
-		while(start < length()-1 && (substring(start, 1) == ' ' || substring(start,1)=='\t'))
-			start = start + 1;
-		if(substring(start,1) =='\n')
-			start = start + 1;
-		var end = length()-1
-		while(end >0 && Character::isWhitespace(charAt(end)))
-			end = end - 1
-		substring(start, end+1)
 	}
 	
 	def dispatch toHtml(Link it) '''<a href="«url»">«text»</a>'''
@@ -142,6 +122,34 @@ class HtmlExtensions {
 		""
 	}
 	
+	def markCodeBegin() {
+		'###xdoc code begin###'
+	}	
+	def markCodeEnd() {
+		'###xdoc code end###'
+	}	
+	
+	def protected internalToHtml(CodeBlock it, boolean isParagraph) {
+		val code = contents.toHtml.toString
+		val languageName = if (language?.name==null) "xtend" else language.name
+		if(code.contains('\n') || code.contains('\r')) '''
+			«IF isParagraph»</p>«ENDIF»<pre class="prettyprint lang-«languageName.toLowerCase»">«markCodeBegin»
+			«code.trimCode»«markCodeEnd»</pre>«IF isParagraph»<p>«ENDIF»
+		''' else '''<code class="prettyprint lang-«languageName.toLowerCase»">«code.trimCode»</code>'''
+	}
+	
+	def protected trimCode(String it) {
+		var start = 0
+		while(start < length()-1 && (substring(start, 1) == ' ' || substring(start,1)=='\t'))
+			start = start + 1;
+		if(substring(start,1) =='\n')
+			start = start + 1;
+		var end = length()-1
+		while(end >0 && Character::isWhitespace(charAt(end)))
+			end = end - 1
+		substring(start, end+1)
+	}
+	
 	def protected quote(CharSequence it) {
 		toString.replace('<', '&lt;').replace('>', '&gt;')
 			.replace('«', '&laquo;').replace('»', '&raquo;')
@@ -155,33 +163,20 @@ class HtmlExtensions {
 		</p>
 	'''
 	
-	def protected dispatch internalToHtmlParagraph(TextOrMarkup it) {
-		contents.internalToHtmlParagraph
+	def protected internalToHtmlParagraph(Object it) {
+		switch(it) {
+			TextOrMarkup:	it.contents.internalToHtmlParagraph
+			List<EObject>:	it.map[internalToHtmlParagraph].join
+			TextPart: {
+							val paragraphs = it.text.quote.split('^\\s*$')
+							paragraphs.filter([!isEmpty]).join('''
+								</p>
+								<p>
+							''')
+			}
+			CodeBlock:		internalToHtml(true)
+			default: 		toHtml
+		} 
 	}
-	
-	def protected dispatch internalToHtmlParagraph(List<EObject> it) {
-		map[internalToHtmlParagraph].join
-	}
-	
-	def protected dispatch internalToHtmlParagraph(TextPart it) {
-		val paragraphs = text.quote.split('^\\s*$')
-		paragraphs.forEach[trim]
-		paragraphs.filter([!isEmpty]).join('</p><p>')
-	}
-
-	def protected dispatch internalToHtmlParagraph(CodeBlock it) {
-		internalToHtml(true)
-	}
-
-	def protected dispatch internalToHtmlParagraph(EObject it) {
-		toHtml
-	}
-	
-	def markCodeBegin() {
-		'###xdoc code begin###'
-	}	
-	def markCodeEnd() {
-		'###xdoc code end###'
-	}	
 	
 }
