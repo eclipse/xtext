@@ -4,11 +4,11 @@ There are no statements in Xtend. Instead, everything is an expression and has a
 allows to use every Xtend expression on the right hand side of an assignment. For example, as a 
 code[Xtend][try catch] is an expression the following code is legal in Xtend: 
 code[Xtend][
-	val data = try {
-		fileContentsToString('data.txt')
-	} catch (IOException e) {
-		'dummy data'
-	}
+  val data = try {
+    fileContentsToString('data.txt')
+  } catch (IOException e) {
+    'dummy data'
+  }
 ] 
 
 If code[fileContentsToString()] throws an code[IOException], it is caught and a default value is returned 
@@ -34,14 +34,14 @@ other unquoted inside the string. Special characters can be quoted with a backsl
 Java's unicode notation. On the contrary to Java, Xtend's strings can span multiple lines without the
 need to quote newline characters.
 code[Xtend][
-	'Hello World !'
-	"Hello World !"
-	'Hello "World" !'
-	"Hello \"World\" !"
-	'\u00a1Hola el mundo!'
-	"Hello 
-	
-		World !"
+  'Hello World !'
+  "Hello World !"
+  'Hello "World" !'
+  "Hello \"World\" !"
+  '\u00a1Hola el mundo!'
+  "Hello 
+  
+    World !"
 ]
 
 
@@ -51,9 +51,9 @@ An integer literal creates an code[Xtend][int]. There is no signed integer. If y
 operator in front of an integer literal it is taken as a code[UnaryOperator] with one argument 
 (the positive integer literal).
 code[Xtend][
-	42
-	234254
-	-1 // an expression consisting of the unary - operator and an integer literal  
+  42
+  234254
+  -1 // an expression consisting of the unary - operator and an integer literal  
 ]
 
 
@@ -73,7 +73,7 @@ section2:typeLiteral[Type Literals]
 
 Type literals are specified using the keyword code[Xtend][typeof] :
 code[Xtend][
-	typeof(java.lang.String) // yields java.lang.String.class
+  typeof(java.lang.String) // yields java.lang.String.class
 ]
 
 
@@ -85,11 +85,11 @@ instance of one of the types in codeRef[org.eclipse.xtext.xbase.lib.Functions], 
 number of arguments. However, as closures are a very important language feature, a special 
 syntax for function types has been introduced. So instead of writing 
 code[Xtend][
-	Function1<String,Boolean>
+  Function1<String,Boolean>
 ] 
 one can write 
 code[Xtend][
-	(String)=>boolean
+  (String)=>boolean
 ]
 
 
@@ -103,8 +103,8 @@ The conformance rules for casts are defined in the
 link[http://java.sun.com/docs/books/jls/third_edition/html/conversions.html#5.5][Java Language Specification].
 Here are some examples:
 code[Xtend][
-	something as MyClass
-	"" as Object
+  something as MyClass
+  "" as Object
 ]
 
 
@@ -118,51 +118,51 @@ operators for any type just by implementing the corresponding method signature. 
 ref:library[Xtend runtime library] contains a class code[BigDecimalExtensions] that defines operators for 
 code[BigDecimals] which allows the following code:
 code[Xtend][
-	val x=new BigDecimal('2.71')
-	val y=new BigDecimal('3.14')
-	x+y    // calls BigDecimalExtension.operator_plus(x,y)
+  val x=new BigDecimal('2.71')
+  val y=new BigDecimal('3.14')
+  x+y    // calls BigDecimalExtension.operator_plus(x,y)
 ]
 
 The following defines the operators and the corresponding Java method signatures / expressions.
 
 table[
-	tr[td[code[e1 += e2]]				td[code[e1.operator_add(e2)]]]
-	tr[td[]td[]]
-	
-	tr[td[code[e1 || e2]]				td[code[e1.operator_or(e2)]]]
-	tr[td[]td[]]
-	
-	tr[td[code[e1 && e2]]				td[code[e1.operator_and(e2)]]]
-	tr[td[]td[]]
-	
-	tr[td[code[e1 == e2]]				td[code[e1.operator_equals(e2)]]]
-	tr[td[code[e1 != e2]]				td[code[e1.operator_notEquals(e2)]]]
-	tr[td[]td[]]
+  tr[td[code[e1 += e2]]        td[code[e1.operator_add(e2)]]]
+  tr[td[]td[]]
+  
+  tr[td[code[e1 || e2]]        td[code[e1.operator_or(e2)]]]
+  tr[td[]td[]]
+  
+  tr[td[code[e1 && e2]]        td[code[e1.operator_and(e2)]]]
+  tr[td[]td[]]
+  
+  tr[td[code[e1 == e2]]        td[code[e1.operator_equals(e2)]]]
+  tr[td[code[e1 != e2]]        td[code[e1.operator_notEquals(e2)]]]
+  tr[td[]td[]]
 
-	tr[td[code[e1 < e2]]				td[code[e1.operator_lessThan(e2)]]]
-	tr[td[code[e1 > e2]]				td[code[e1.operator_greaterThan(e2)]]]
-	tr[td[code[e1 <= e2]]				td[code[e1.operator_lessEqualsThan(e2)]]]
-	tr[td[code[e1 >= e2]]				td[code[e1.operator_greaterEqualsThan(e2)]]]
-	tr[td[]td[]]
-	
-	tr[td[code[e1 -> e2]]				td[code[e1.operator_mappedTo(e2)]]]
-	tr[td[code[e1 .. e2]]				td[code[e1.operator_upTo(e2)]]]
-	tr[td[]td[]]
-	
-	tr[td[code[e1 + e2]]				td[code[e1.operator_plus(e2)]]]
-	tr[td[code[e1 - e2]]				td[code[e1.operator_minus(e2)]]]
-	tr[td[]td[]]
-	
-	tr[td[code[e1 * e2]]				td[code[e1.operator_multiply(e2)]]]
-	tr[td[code[e1 / e2]]				td[code[e1.operator_divide(e2)]]]
-	tr[td[code[e1 % e2]]				td[code[e1.operator_modulo(e2)]]]
-	tr[td[code[e1 ** e2]]				td[code[e1.operator_power(e2)]]]
-	tr[td[]td[]]
-	
-	tr[td[code[! e1]]					td[code[e1.operator_not()]]]
-	tr[td[code[- e1]]					td[code[e1.operator_minus()]]]
+  tr[td[code[e1 < e2]]        td[code[e1.operator_lessThan(e2)]]]
+  tr[td[code[e1 > e2]]        td[code[e1.operator_greaterThan(e2)]]]
+  tr[td[code[e1 <= e2]]        td[code[e1.operator_lessEqualsThan(e2)]]]
+  tr[td[code[e1 >= e2]]        td[code[e1.operator_greaterEqualsThan(e2)]]]
+  tr[td[]td[]]
+  
+  tr[td[code[e1 -> e2]]        td[code[e1.operator_mappedTo(e2)]]]
+  tr[td[code[e1 .. e2]]        td[code[e1.operator_upTo(e2)]]]
+  tr[td[]td[]]
+  
+  tr[td[code[e1 + e2]]        td[code[e1.operator_plus(e2)]]]
+  tr[td[code[e1 - e2]]        td[code[e1.operator_minus(e2)]]]
+  tr[td[]td[]]
+  
+  tr[td[code[e1 * e2]]        td[code[e1.operator_multiply(e2)]]]
+  tr[td[code[e1 / e2]]        td[code[e1.operator_divide(e2)]]]
+  tr[td[code[e1 % e2]]        td[code[e1.operator_modulo(e2)]]]
+  tr[td[code[e1 ** e2]]        td[code[e1.operator_power(e2)]]]
+  tr[td[]td[]]
+  
+  tr[td[code[! e1]]          td[code[e1.operator_not()]]]
+  tr[td[code[- e1]]          td[code[e1.operator_minus()]]]
 ]
-		
+    
 The table above also defines the operator precedence in ascending order. The blank lines separate 
 precedence levels. The assignment operator code[+=] is right-to-left associative in the same way 
 as the plain assignment operator code[=] is. That is a = b = c is executed as a = (b = c), all
@@ -176,10 +176,10 @@ If the operators code[||] and code[&&] are used in a context where the left hand
 type code[boolean], the operation is evaluated in short circuit mode, which means that the right 
 hand operand might not be evaluated at all in the following cases: 
 ol[
-	item[in the case of code[||] the operand on the right hand side is not evaluated if the left 
-		operand evaluates to code[Xtend][true].]
-	item[in the case of code[&&] the operand on the right hand side is not evaluated if the left 
-		operand evaluates to code[Xtend][false].]
+  item[in the case of code[||] the operand on the right hand side is not evaluated if the left 
+    operand evaluates to code[Xtend][true].]
+  item[in the case of code[&&] the operand on the right hand side is not evaluated if the left 
+    operand evaluates to code[Xtend][false].]
 ] 
 
 
@@ -200,13 +200,13 @@ section2:propertyAssignment[Assignments]
 ref:variableDeclaration[Local variables] can be reassigned using the code[=] operator. Also 
 properties can be set using this operator given the following expression: 
 code[Xtend][
-	myObj.myProperty = "foo"
+  myObj.myProperty = "foo"
 ]
 
 The compiler first looks up whether there is an accessible Java Field called code[myProperty] on 
 the type of code[myObj]. If there exists such a field it translates to the following Java expression:
 code[Java][
-	myObj.myProperty = "foo";
+  myObj.myProperty = "foo";
 ]
 
 Remember in Xtend everything is an expression and has to return something. In the case of simple 
@@ -218,7 +218,7 @@ code[setMyProperty] (JavaBeans setter method) is looked up. It has to take one a
 of the type (or a super type) of the right hand operand. The return value will be whatever the 
 setter method returns (which usually is code[Xtend][void]). As a result the compiler translates to:
 code[Java][
-	myObj.setMyProperty("foo")
+  myObj.setMyProperty("foo")
 ]
 
 
@@ -237,12 +237,12 @@ which stands for 'variable'.
 A typical example for using code[Xtend][var] is a counter in a loop:
 code[Xtend][
 {
-	val max = 100
-	var i = 0
-	while (i < max) {
-		println("Hi there!")
-		i = i + 1
-	}
+  val max = 100
+  var i = 0
+  while (i < max) {
+    println("Hi there!")
+    i = i + 1
+  }
 }
 ]
 
@@ -259,7 +259,7 @@ The return type of a variable declaration expression is always code[Xtend][void]
 The type of the variable itself can either be explicitly declared or be inferred from the right hand side
 expression. Here is an example for an explicitly declared type:
 code[Xtend][
-	var List<String> msg = new ArrayList(); 
+  var List<String> msg = new ArrayList(); 
 ]
 
 In such cases, the type of the right hand expression must ref:Xbase_Types_ConformanceRules[conform] to the type 
@@ -267,7 +267,7 @@ of the expression on the left side.
 
 Alternatively the type can be left out and will be inferred from the initialization expression:  
 code[Xtend][
-	var msg = new ArrayList<String>(); // -> type ArrayList<String>  
+  var msg = new ArrayList<String>(); // -> type ArrayList<String>  
 ]
 
 
@@ -285,7 +285,7 @@ Feature calls are directly translated to their Java equivalent with the exceptio
 to properties an equivalent rule as described in ref:propertyAssignment applies. That is, for the 
 following expression
 code[Xtend][
-	myObj.myProperty
+  myObj.myProperty
 ]
 
 the compiler first looks for an accessible field in the type of code[Xtend][myObj]. If no such field 
@@ -300,13 +300,13 @@ If the current scope contains a variable named code[Xtend][this] or code[Xtend][
 will make all its members available to the scope. 
 That is one of 
 code[Xtend][
-	it.myProperty
-	this.myProperty
+  it.myProperty
+  this.myProperty
 ]
 
 is a valid expression
 code[Xtend][
-	myProperty
+  myProperty
 ]
 
 is valid as well and is equivalent, as long as there is no local variable 'myProperty' on the scope,
@@ -326,12 +326,12 @@ operator code[?.] to make such code better readable.
 
 Instead of writing 
 code[Java][
-	if (myRef != null) myRef.doStuff()
+  if (myRef != null) myRef.doStuff()
 ]
 
 one can write
 code[Xtend][
-	myRef?.doStuff()
+  myRef?.doStuff()
 ]
 
 
@@ -341,8 +341,8 @@ section:constructorCall[Constructor Call]
 
 Construction of objects is done by invoking Java constructors. The syntax is exactly as in Java, e.g.
 code[Xtend][
-	new String()
-	new ArrayList<BigDecimal>()
+  new String()
+  new ArrayList<BigDecimal>()
 ]
 
 
@@ -354,17 +354,17 @@ A closure is a literal that defines an anonymous function. A closure also captur
 scope, so that any final variables and parameters visible at construction time can be referred to 
 in the closure's expression. 
 code[Xtend][
-	val func = \[String s | s.length>3\]
+  val func = \[String s | s.length>3\]
 ]
 
 The surrounding square brackets are optional if the closure is the single argument of a method 
 invocation. That is you can write
 code[Xtend][
-	myList.findFirst(e | e.name==null)
+  myList.findFirst(e | e.name==null)
 ]
 instead of
 code[Xtend][
-	myList.findFirst(\[e | e.name==null\])
+  myList.findFirst(\[e | e.name==null\])
 ]
 
 But in all other cases the square brackets are mandatory.
@@ -378,24 +378,24 @@ The parameter types can be inferred if the closure is used in a context where th
 
 For instance, given the following Java method signature:
 code[Java][
-	public <T> T find(List<T> list, Function1<T,Boolean> predicate) 
+  public <T> T find(List<T> list, Function1<T,Boolean> predicate) 
 ] 
 
 the type of the parameter can be inferred. Which allows users to write:
 code[Xtend][
-	newArrayList("Foo", "Bar").find(e | e=="Bar")
+  newArrayList("Foo", "Bar").find(e | e=="Bar")
 ]
 
 instead of 
 code[Xtend][
-	newArrayList("Foo", "Bar").find(String e | e=="Bar")
+  newArrayList("Foo", "Bar").find(String e | e=="Bar")
 ]
 
 Here are some more examples:
 code[Xtend][
-	\[| "foo"\]   // closure without parameters
-	\[String s | s.toUpperCase()\] // explicit argument type
-	\[a,b,c | a+b+c\] // inferred argument types
+  \[| "foo"\]   // closure without parameters
+  \[String s | s.toUpperCase()\] // explicit argument type
+  \[a,b,c | a+b+c\] // inferred argument types
 ]
 
 
@@ -404,19 +404,19 @@ section2:functionMapping[Function Mapping]
 An Xtend closure is a Java object of one of the e[Function] interfaces shipped with the runtime library of Xtend. There is an interface 
 for each number of parameters (current maximum is six parameters). The names of the interfaces are 
 ul[
-	item[e[Function0<ReturnType>] for zero parameters, ]
-	item[e[Function1<Param1Type, ReturnType>] for one parameters, ]
-	item[e[Function2<Param1Type, Param2Type, ReturnType>] for two parameters, ]
-	item[... ]
-	item[e[Function6<Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type, ReturnType>] for six parameters, ]
+  item[e[Function0<ReturnType>] for zero parameters, ]
+  item[e[Function1<Param1Type, ReturnType>] for one parameters, ]
+  item[e[Function2<Param1Type, Param2Type, ReturnType>] for two parameters, ]
+  item[... ]
+  item[e[Function6<Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type, ReturnType>] for six parameters, ]
 ]
 or
 ul[
-	item[e[Procedure0] for zero parameters, ]
-	item[e[Procedure1<Param1Type>] for one parameters, ]
-	item[e[Procedure2<Param1Type, Param2Type>] for two parameters, ]
-	item[... ]
-	item[e[Procedure6<Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type>] for six parameters, ]
+  item[e[Procedure0] for zero parameters, ]
+  item[e[Procedure1<Param1Type>] for one parameters, ]
+  item[e[Procedure2<Param1Type, Param2Type>] for two parameters, ]
+  item[... ]
+  item[e[Procedure6<Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type>] for six parameters, ]
 ]
 if the return type is code[Java][void].
 
@@ -428,14 +428,14 @@ As a result given the method code[IterableExtensions.sort(Iterable<T>, Comparato
 as an extension method, it can be invoked like this
 
 code[Xtend][
-	newArrayList( 'aaa', 'bb', 'c' ).sort(
-		e1, e2 | if ( e1.length > e2.length ) {
-					-1 
-				 } else if ( e1.length < e2.length ) { 
-					1
-				 } else { 
-					0
-				 })
+  newArrayList( 'aaa', 'bb', 'c' ).sort(
+    e1, e2 | if ( e1.length > e2.length ) {
+          -1 
+         } else if ( e1.length < e2.length ) { 
+          1
+         } else { 
+          0
+         })
 ]
 
 
@@ -444,7 +444,7 @@ section2:implicitParameter[Implicit Parameter e[it]]
 If a closure has a single parameter whose type can be inferred, the declaration of the parameter can
 be ommitted. Use code[Xtend][it] to refer to the parameter inside the closure's body.
 code[Xtend][
-	val (String)=>String function = \[toUpperCase\]  // equivalent to \[it | it.toUpperCase\]
+  val (String)=>String function = \[toUpperCase\]  // equivalent to \[it | it.toUpperCase\]
 ]
 
 
@@ -461,8 +461,8 @@ list. In combination with the implicit code[Xtend][it] parameter, skipping empty
 methods, this yields a very concise syntax. 
 
 code[Xtend][
-	val fruit = newArrayList('apple', 'pear', 'lemon')
-	fruit.map\[toUpperCase\]  // same as fruit.map(\[it | it.toUpperCase\])
+  val fruit = newArrayList('apple', 'pear', 'lemon')
+  fruit.map\[toUpperCase\]  // same as fruit.map(\[it | it.toUpperCase\])
 ]
 
 This feature is especially useful when you are building object trees. A common pattern is to provide a set 
@@ -471,26 +471,26 @@ Here is an example for creating a simple tree of code[Nodes]:
 
 code[Xtend][
 class Node {
-	String label
-	List<Node> children
-	
-	def createNode(Node parent, (Node)=>void initializer) {
-		val child=new Node()
-		initializer.apply(child)
-		child
-	}
+  String label
+  List<Node> children
+  
+  def createNode(Node parent, (Node)=>void initializer) {
+    val child=new Node()
+    initializer.apply(child)
+    child
+  }
 
-	def tree() {
-		createNode(null) \[
-			label="root"
-			children += createNode \[
-				label="child0"
-			\]
-			children += createNode \[
-				label="child1"
-			\]
-		\]
-	}
+  def tree() {
+    createNode(null) \[
+      label="root"
+      children += createNode \[
+        label="child0"
+      \]
+      children += createNode \[
+        label="child1"
+      \]
+    \]
+  }
 }
 ]
 
@@ -505,20 +505,20 @@ Consequently, you can use if expressions deeply nested within expressions.
 
 An expression 
 code[Xtend][
-	if (p) e1 else e2
+  if (p) e1 else e2
 ] 
 results in either the value code[e1] or code[e2] 
 depending on whether the predicate code[p] evaluates to code[Xtend][true] or code[Xtend][false]. 
 The else part is optional which is a shorthand for code[Xtend][else null]. That means 
 
 code[Xtend][
-	if (foo) x 
+  if (foo) x 
 ]
 
 is the a short hand for
 
 code[Xtend][
-	if (foo) x else null
+  if (foo) x else null
 ]
 
 The type of an if expression is the common super type of the return types code[T1] and code[T2] 
@@ -535,11 +535,11 @@ to certain values but can be used for any object reference instead.
 For a code[Xtend][switch] expression 
 code[Xtend][
 switch e {
-	case e1 : er1
-	case e2 : er2
-	...
-	case en : ern
-	default : er
+  case e1 : er1
+  case e2 : er2
+  ...
+  case en : ern
+  default : er
 }
 ]
 
@@ -558,11 +558,11 @@ is specified the expression evaluates to code[Xtend][null].
 Example:
 
 code[Xtend][
-	switch myString {
-		case myString.length>5 : "a long string."
-		case 'some' : "It's some string."
-		default : "It's another short string."
-	}
+  switch myString {
+    case myString.length>5 : "a long string."
+    case 'some' : "It's some string."
+    default : "It's another short string."
+  }
 ]
 
 section2[Type guards]
@@ -571,11 +571,11 @@ In addition to the case guards one can add a so called e[Type Guard] which is sy
 ref:types[type reference] preceding an optional case keyword. The compiler will use that type
 for the switch expression in subsequent expressions. Example:
 code[Xtend][
-	var Object x = ...;
-	switch x {
-		String case x.length()>0 : x.length()
-		List<?> : x.size()
-		default : -1
+  var Object x = ...;
+  switch x {
+    String case x.length()>0 : x.length()
+    List<?> : x.size()
+    default : -1
 }
 ]
 
@@ -596,24 +596,24 @@ type specified in the type guard.
 %% section2[Examples]
 %% 
 %% ul[
-%% 	item[
-%% 		code[Xtend][
-%% 			switch foo {
-%% 				Entity : foo.superType.name
-%% 				Datatype : foo.name
-%% 				default : throw new IllegalStateException
-%% 			}
-%% 		]
-%% 	]
-%% 	item[
-%% 		code[Xtend][
-%% 			switch x : foo.bar.complicated('hello',42) {
-%% 				case "hello42" : ...
-%% 				case x.length<2 : ...
-%% 				default : ....
-%% 			}
-%% 		]
-%% 	]
+%%   item[
+%%     code[Xtend][
+%%       switch foo {
+%%         Entity : foo.superType.name
+%%         Datatype : foo.name
+%%         default : throw new IllegalStateException
+%%       }
+%%     ]
+%%   ]
+%%   item[
+%%     code[Xtend][
+%%       switch x : foo.bar.complicated('hello',42) {
+%%         case "hello42" : ...
+%%         case x.length<2 : ...
+%%         default : ....
+%%       }
+%%     ]
+%%   ]
 %% ]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:blocks[Blocks]
@@ -630,20 +630,20 @@ optionally be terminated by a semicolon.
 Here are two examples:
 
 code[Xtend][
-	{
-		doSideEffect("foo")
-		result
-	}
+  {
+    doSideEffect("foo")
+    result
+  }
 ]
 code[Xtend][
-	{
-		var x = greeting();
-		if (x.equals("Hello ")) {
-			x+"World!"; 
-		} else {
-			x;
-		}
-	}
+  {
+    var x = greeting();
+    if (x.equals("Hello ")) {
+      x+"World!"; 
+    } else {
+      x;
+    }
+  }
 ]
 
 
@@ -653,7 +653,7 @@ section:forLoop[For Loop]
 
 The for loop 
 code[Xtend][
-	for (T1 variable : arrayOrIterable) expression
+  for (T1 variable : arrayOrIterable) expression
 ] 
 is used to execute a certain expression for each element of an array of an instance of 
 code[java.lang.Iterable]. The local code[variable] is final, hence canot be updated. 
@@ -663,12 +663,12 @@ In that case it is inferred from the type of the array or code[java.lang.Iterabl
 iterable expression.
 
 code[Xtend][
-	for (String s : myStrings) {
-		doSideEffect(s)
-	}
-	
-	for (s : myStrings)
-		doSideEffect(s)
+  for (String s : myStrings) {
+    doSideEffect(s)
+  }
+  
+  for (s : myStrings)
+    doSideEffect(s)
 ]
 
 
@@ -678,18 +678,18 @@ section:whileExpression[While Loop]
 
 A while loop 
 code[Xtend][
-	while (predicate) expression
+  while (predicate) expression
 ] 
 is used to execute a certain expression unless the predicate is evaluated to code[Xtend][false]. 
 The return type of a while loop is code[Xtend][void].
 
 code[Xtend][
-	while (true) {
-		doSideEffect("foo")
-	}
-	
-	while ((i=i+1) < max) 
-		doSideEffect("foo")
+  while (true) {
+    doSideEffect("foo")
+  }
+  
+  while ((i=i+1) < max) 
+    doSideEffect("foo")
 ]
 
 
@@ -699,7 +699,7 @@ section:doWhileExpression[Do-While Loop]
 
 A do-while loop 
 code[Xtend][
-	do expression while (predicate)
+  do expression while (predicate)
 ] 
 is used to execute a certain expression unless the predicate is evaluated to code[Xtend][false]. 
 The difference to the ref:whileExpression[while loop] is that the execution starts by executing 
@@ -707,12 +707,12 @@ the block once before evaluating the predicate for the first time. The return ty
 loop is code[Xtend][void].
 
 code[Xtend][
-	do {
-		doSideEffect("foo");
-	} while (true)
-	
-	
-	do doSideEffect("foo") while ((i=i+1)<max)
+  do {
+    doSideEffect("foo");
+  } while (true)
+  
+  
+  do doSideEffect("foo") while ((i=i+1)<max)
 ]
 
 
@@ -725,11 +725,11 @@ In a closure for instance a return expression is always implied if the expressio
 type code[Xtend][void]. Anyway you can make it explicit:
 
 code[Xtend][
-	listOfStrings.map(e| {
-		if (e==null) 
-			return "NULL"
-		e.toUpperCase
-	}) 
+  listOfStrings.map(e| {
+    if (e==null) 
+      return "NULL"
+    e.toUpperCase
+  }) 
 ]
 
 
@@ -742,11 +742,11 @@ in Java.
 
 code[Xtend][
 {
-	...
-	if (myList.isEmpty)
-		throw new IllegalArgumentException("the list must not be empty")
-	...
-} 	
+  ...
+  if (myList.isEmpty)
+    throw new IllegalArgumentException("the list must not be empty")
+  ...
+}   
 ]
 
 
@@ -760,13 +760,13 @@ rethrown in a wrapping runtime exception. Other than that the syntax again is li
 from Java.
 
 code[Xtend][
-	try {
-		throw new RuntimeException()
-	} catch (NullPointerException e) {
-		// handle e
-	} finally {
-		// do stuff
-	}
+  try {
+    throw new RuntimeException()
+  } catch (NullPointerException e) {
+    // handle e
+  } finally {
+    // do stuff
+  }
 ]
 
 
@@ -799,11 +799,11 @@ A template is actually an expression, which means it can occur everywhere where 
 expected. For instance in conjunction the powerful ref:switchExpression[switch expression]:
 code[Xtend][
 toMember(Member m) {
-	switch m {
-		Field : '''private «m.type» «m.name» ;'''
-		Method case isAbstract : ''' abstract «...'''
-		Method : ''' ..... '''
-	}
+  switch m {
+    Field : '''private «m.type» «m.name» ;'''
+    Method case isAbstract : ''' abstract «...'''
+    Method : ''' ..... '''
+  }
 }
 ]
 
@@ -838,46 +838,46 @@ for readable templates as well as nicely formatted output. This can be achieved 
 simple rules when the rich string is evaluated.
 
 ol[
-	item[
-		An evaluated rich string as part of another string will be prefixed with the current 
-		indentation of the caller before it is inserted into the result.
-	]
-	item[
-		Indentation in the template that is relative to a control structure will not be propagated 
-		to the output string. A control structure is a code[Xtend][FOR]-loop or a condition 
-		(code[Xtend][IF]) as well as the opening and closing marks of the rich string itself.
-		
-		The indentation is considered to be relative to such a control structure if the previous 
-		line ends with a control structure followed by optional white space. The amount of white 
-		space is not taken into account but the delta to the other lines.
-	]
-	item[
-		Lines that do not contain any static text which is not white space but do contain control 
-		structures or invocations of other templates which evaluate to an empty string, will not 
-		appear in the output.
-	]		
+  item[
+    An evaluated rich string as part of another string will be prefixed with the current 
+    indentation of the caller before it is inserted into the result.
+  ]
+  item[
+    Indentation in the template that is relative to a control structure will not be propagated 
+    to the output string. A control structure is a code[Xtend][FOR]-loop or a condition 
+    (code[Xtend][IF]) as well as the opening and closing marks of the rich string itself.
+    
+    The indentation is considered to be relative to such a control structure if the previous 
+    line ends with a control structure followed by optional white space. The amount of white 
+    space is not taken into account but the delta to the other lines.
+  ]
+  item[
+    Lines that do not contain any static text which is not white space but do contain control 
+    structures or invocations of other templates which evaluate to an empty string, will not 
+    appear in the output.
+  ]    
 ]
 
 The behavior is best described with a set of examples. The following table assumes a data structure 
 of nested nodes.
 
 table[
-	tr[
-		td[
-			code[Xtend][
+  tr[
+    td[
+      code[Xtend][
 class Template {
-	print(Node n) '''
-		node «n.name» {}
-	'''
+  print(Node n) '''
+    node «n.name» {}
+  '''
 }
-			]
-		]
-		td[
-			code[
-				node NodeName {}
-			]
-		]
-	]
+      ]
+    ]
+    td[
+      code[
+        node NodeName {}
+      ]
+    ]
+  ]
 ]
 
 The indentation before code[node «n.name»] will be skipped as it is relative to the opening mark of
@@ -885,33 +885,33 @@ the rich string and thereby not considered to be relevant for the output but onl
 of the template itself.
 
 table[
-	tr[
-		td[
-			code[Xtend][
+  tr[
+    td[
+      code[Xtend][
 class Template {
-	print(Node n) '''
-		node «n.name» {
-			«IF hasChildren»
-				«n.children.map\[print\]»
-			«ENDIF»
-		}
-	'''
+  print(Node n) '''
+    node «n.name» {
+      «IF hasChildren»
+        «n.children.map\[print\]»
+      «ENDIF»
+    }
+  '''
 }
-			]
-		]
-		td[
-			code[
+      ]
+    ]
+    td[
+      code[
 node Parent{
-	node FirstChild {
-	}
-	node SecondChild {
-		node Leaf {
-		}
-	}
+  node FirstChild {
+  }
+  node SecondChild {
+    node Leaf {
+    }
+  }
 }
-			]
-		]
-	]
+      ]
+    ]
+  ]
 ]
 
 As in the previous example, there is no indentation on the root level for the same reason.

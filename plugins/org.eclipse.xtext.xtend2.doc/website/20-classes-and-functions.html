@@ -89,15 +89,15 @@
 					<span class="keyword">import</span>&nbsp;java.util.List<br/>
 					<br/>
 					<span class="keyword">class</span>&nbsp;MyClass&nbsp;{<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;name<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">new</span>(String&nbsp;name)&nbsp;{<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.name&nbsp;=&nbsp;name<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;String&nbsp;first(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elements.get(0)<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+					&nbsp;&nbsp;String&nbsp;name<br/>
+					&nbsp;&nbsp;<br/>
+					&nbsp;&nbsp;<span class="keyword">new</span>(String&nbsp;name)&nbsp;{<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.name&nbsp;=&nbsp;name<br/>
+					&nbsp;&nbsp;}<br/>
+					&nbsp;&nbsp;<br/>
+					&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;String&nbsp;first(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;elements.get(0)<br/>
+					&nbsp;&nbsp;}<br/>
 					}
 				</p>
 			</div>
@@ -110,7 +110,7 @@
 			<br style="clear:both"></br>
 			<h1>Package Declaration</h1>
 			<p>
-			Package declarations are mostly like in Java. There are two the small differences: 
+			Package declarations are mostly like in Java. There are two small differences: 
 			<ul>
 			  <li>An identifier can be escaped with a <span class="inlinecode">^</span> character in case it conflicts with a keyword.</li>
 			  <li>There is no terminating semicolon.</li>
@@ -190,7 +190,7 @@
 						<span class="keyword">class</span>&nbsp;ArrayList&lt;E&gt;&nbsp;<span class="keyword">extends</span>&nbsp;AbstractList&lt;E&gt;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">implements</span>&nbsp;List&lt;E&gt;,&nbsp;RandomAccess,&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cloneable,&nbsp;java.io.Serializable&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
+						&nbsp;&nbsp;...<br/>
 						}
 					</p>
 				</div>
@@ -210,13 +210,13 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">class</span>&nbsp;MyClass&nbsp;<span class="keyword">extends</span>&nbsp;AnotherClass&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">new</span>(String&nbsp;s)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>(s)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">new</span>()&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>(<span class="string">"default"</span>)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;<span class="keyword">new</span>(String&nbsp;s)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>(s)<br/>
+						&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;<br/>
+						&nbsp;&nbsp;<span class="keyword">new</span>()&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>(<span class="string">"default"</span>)<br/>
+						&nbsp;&nbsp;}<br/>
 						}
 					</p>
 				</div>
@@ -246,11 +246,11 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">class</span>&nbsp;MyClass&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;@Nullable&nbsp;String&nbsp;name<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">int</span>&nbsp;count&nbsp;=&nbsp;1<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;string&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;String()<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">boolean</span>&nbsp;debug&nbsp;=&nbsp;<span class="keyword">false</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
+						&nbsp;&nbsp;@Nullable&nbsp;String&nbsp;name<br/>
+						&nbsp;&nbsp;<span class="keyword">int</span>&nbsp;count&nbsp;=&nbsp;1<br/>
+						&nbsp;&nbsp;String&nbsp;string&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;String()<br/>
+						&nbsp;&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">boolean</span>&nbsp;debug&nbsp;=&nbsp;<span class="keyword">false</span><br/>
+						&nbsp;&nbsp;...<br/>
 						}
 					</p>
 				</div>
@@ -288,7 +288,7 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">def</span>&nbsp;String&nbsp;first(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;elements.get(0);<br/>
+						&nbsp;&nbsp;elements.get(0);<br/>
 						}
 					</p>
 				</div>
@@ -304,7 +304,7 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">def</span>&nbsp;<span class="keyword">static</span>&nbsp;createInstance()&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">new</span>&nbsp;MyClass(<span class="string">&apos;foo&apos;</span>)<br/>
+						&nbsp;&nbsp;<span class="keyword">new</span>&nbsp;MyClass(<span class="string">&apos;foo&apos;</span>)<br/>
 						}
 					</p>
 				</div>
@@ -324,7 +324,7 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">override</span>&nbsp;String&nbsp;first(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;elements.get(0);<br/>
+						&nbsp;&nbsp;elements.get(0);<br/>
 						}
 					</p>
 				</div>
@@ -366,7 +366,7 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">def</span>&nbsp;String&nbsp;first(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;elements.get(0);<br/>
+						&nbsp;&nbsp;elements.get(0);<br/>
 						}
 					</p>
 				</div>
@@ -378,7 +378,7 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">def</span>&nbsp;first(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;elements.get(0);<br/>
+						&nbsp;&nbsp;elements.get(0);<br/>
 						}
 					</p>
 				</div>
@@ -407,11 +407,11 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;printType(Number&nbsp;x)&nbsp;{&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;a&nbsp;number"</span>&nbsp;<br/>
+						&nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;a&nbsp;number"</span>&nbsp;<br/>
 						}<br/>
 						<br/>
 						<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;printType(Integer&nbsp;x)&nbsp;{&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int"</span>&nbsp;<br/>
+						&nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int"</span>&nbsp;<br/>
 						}
 					</p>
 				</div>
@@ -429,19 +429,19 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">protected</span>&nbsp;String&nbsp;_printType(<span class="keyword">final</span>&nbsp;Number&nbsp;x)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"it\&apos;s&nbsp;a&nbsp;number"</span>;<br/>
+						&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"it\&apos;s&nbsp;a&nbsp;number"</span>;<br/>
 						}<br/>
 						<br/>
 						<span class="keyword">protected</span>&nbsp;String&nbsp;_printType(<span class="keyword">final</span>&nbsp;Integer&nbsp;x)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"it\&apos;s&nbsp;an&nbsp;int"</span>;<br/>
+						&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"it\&apos;s&nbsp;an&nbsp;int"</span>;<br/>
 						}<br/>
 						<br/>
 						<span class="keyword">public</span>&nbsp;String&nbsp;printType(<span class="keyword">final</span>&nbsp;Number&nbsp;x)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_printType((Integer)x);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_printType(x);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_printType((Integer)x);<br/>
+						&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_printType(x);<br/>
+						&nbsp;&nbsp;}<br/>
 						}
 					</p>
 				</div>
@@ -462,11 +462,11 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;printTypes(Number&nbsp;x,&nbsp;Integer&nbsp;y)&nbsp;{&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;some&nbsp;number&nbsp;and&nbsp;an&nbsp;int"</span>&nbsp;<br/>
+						&nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;some&nbsp;number&nbsp;and&nbsp;an&nbsp;int"</span>&nbsp;<br/>
 						}<br/>
 						<br/>
 						<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;printTypes(Integer&nbsp;x,&nbsp;Number&nbsp;y)&nbsp;{&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int&nbsp;and&nbsp;a&nbsp;number"</span>&nbsp;<br/>
+						&nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int&nbsp;and&nbsp;a&nbsp;number"</span>&nbsp;<br/>
 						}
 					</p>
 				</div>
@@ -478,14 +478,14 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">public</span>&nbsp;String&nbsp;printTypes(<span class="keyword">final</span>&nbsp;Number&nbsp;x,&nbsp;<span class="keyword">final</span>&nbsp;Number&nbsp;y)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_printTypes((Integer)x,&nbsp;y);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(y&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_printTypes(x,&nbsp;(Integer)y);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<span class="string">"Unhandled&nbsp;parameter&nbsp;types:&nbsp;"</span>&nbsp;+<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arrays.&lt;Object&gt;asList(x,&nbsp;y).toString());<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_printTypes((Integer)x,&nbsp;y);<br/>
+						&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(y&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_printTypes(x,&nbsp;(Integer)y);<br/>
+						&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<span class="string">"Unhandled&nbsp;parameter&nbsp;types:&nbsp;"</span>&nbsp;+<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arrays.&lt;Object&gt;asList(x,&nbsp;y).toString());<br/>
+						&nbsp;&nbsp;}<br/>
 						}
 					</p>
 				</div>
@@ -498,15 +498,15 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;printType(Number&nbsp;x)&nbsp;{&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;some&nbsp;number"</span>&nbsp;<br/>
+						&nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;some&nbsp;number"</span>&nbsp;<br/>
 						}<br/>
 						<br/>
 						<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;printType(Integer&nbsp;x)&nbsp;{&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int"</span>&nbsp;<br/>
+						&nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int"</span>&nbsp;<br/>
 						}<br/>
 						<br/>
 						<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;printType(Void&nbsp;x)&nbsp;{&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;null"</span>&nbsp;<br/>
+						&nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;null"</span>&nbsp;<br/>
 						}
 					</p>
 				</div>
@@ -518,16 +518,16 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">public</span>&nbsp;String&nbsp;printType(<span class="keyword">final</span>&nbsp;Number&nbsp;x)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_printType((Integer)x);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Number)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_printType((Number)x);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;==&nbsp;<span class="keyword">null</span>)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_printType((Void)<span class="keyword">null</span>);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<span class="string">"Unhandled&nbsp;parameter&nbsp;types:&nbsp;"</span>&nbsp;+<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arrays.&lt;Object&gt;asList(x).toString());<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_printType((Integer)x);<br/>
+						&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Number)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_printType((Number)x);<br/>
+						&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;==&nbsp;<span class="keyword">null</span>)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_printType((Void)<span class="keyword">null</span>);<br/>
+						&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<span class="string">"Unhandled&nbsp;parameter&nbsp;types:&nbsp;"</span>&nbsp;+<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arrays.&lt;Object&gt;asList(x).toString());<br/>
+						&nbsp;&nbsp;}<br/>
 						}
 					</p>
 				</div>
@@ -547,7 +547,7 @@
 					<p class="code">
 						<span class="keyword">public</span>&nbsp;<span class="keyword">abstract</span>&nbsp;<span class="keyword">class</span>&nbsp;AbstractLabelProvider&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;String&nbsp;_label(Object&nbsp;o)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;some&nbsp;generic&nbsp;implementation<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;some&nbsp;generic&nbsp;implementation<br/>
 						</span>&nbsp;&nbsp;&nbsp;}<br/>
 						}
 					</p>
@@ -582,15 +582,15 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">public</span>&nbsp;String&nbsp;label(<span class="keyword">final</span>&nbsp;Object&nbsp;it)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(it&nbsp;<span class="keyword">instanceof</span>&nbsp;Entity)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_label((Entity)it);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(it&nbsp;<span class="keyword">instanceof</span>&nbsp;Field)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_label((Field)it);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(it&nbsp;<span class="keyword">instanceof</span>&nbsp;Method)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_label((Method)it);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_label(it);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(it&nbsp;<span class="keyword">instanceof</span>&nbsp;Entity)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_label((Entity)it);<br/>
+						&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(it&nbsp;<span class="keyword">instanceof</span>&nbsp;Field)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_label((Field)it);<br/>
+						&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(it&nbsp;<span class="keyword">instanceof</span>&nbsp;Method)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_label((Method)it);<br/>
+						&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_label(it);<br/>
+						&nbsp;&nbsp;}<br/>
 						}
 					</p>
 				</div>
@@ -619,13 +619,13 @@
 					<p class="code">
 						@TypeAnnotation(<span class="keyword">typeof</span>(String))<br/>
 						<span class="keyword">class</span>&nbsp;MyClass&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;@FieldAnnotation(children&nbsp;=&nbsp;{@MyAnno(<span class="keyword">true</span>),&nbsp;@MyAnno(<span class="keyword">false</span>)}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;myField<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;@MethodAnnotation(children&nbsp;=&nbsp;{@MyAnno(<span class="keyword">true</span>),&nbsp;@MyAnno}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;String&nbsp;myMethod(@ParameterAnnotation&nbsp;String&nbsp;param)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//...<br/>
-						</span>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;@FieldAnnotation(children&nbsp;=&nbsp;{@MyAnno(<span class="keyword">true</span>),&nbsp;@MyAnno(<span class="keyword">false</span>)})<br/>
+						&nbsp;&nbsp;String&nbsp;myField<br/>
+						&nbsp;&nbsp;<br/>
+						&nbsp;&nbsp;@MethodAnnotation(children&nbsp;=&nbsp;{@MyAnno(<span class="keyword">true</span>),&nbsp;@MyAnno})<br/>
+						&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;String&nbsp;myMethod(@ParameterAnnotation&nbsp;String&nbsp;param)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//...<br/>
+						</span>&nbsp;&nbsp;}<br/>
 						}
 					</p>
 				</div>
@@ -670,13 +670,13 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">class</span>&nbsp;MyClass&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;doSomething(Object&nbsp;obj)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;do&nbsp;something&nbsp;with&nbsp;obj<br/>
-						</span>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;extensionCall(Object&nbsp;obj)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;obj.doSomething()&nbsp;&nbsp;<span class="comment">//&nbsp;calls&nbsp;this.doSomething(obj)<br/>
-						</span>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;doSomething(Object&nbsp;obj)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;do&nbsp;something&nbsp;with&nbsp;obj<br/>
+						</span>&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;<br/>
+						&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;extensionCall(Object&nbsp;obj)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;obj.doSomething()&nbsp;&nbsp;<span class="comment">//&nbsp;calls&nbsp;this.doSomething(obj)<br/>
+						</span>&nbsp;&nbsp;}<br/>
 						}
 					</p>
 				</div>
@@ -742,9 +742,9 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">class</span>&nbsp;PersonExtensions&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;getFullName(Person&nbsp;p)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p.forename&nbsp;+&nbsp;<span class="string">"&nbsp;"</span>&nbsp;+&nbsp;p.name<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;getFullName(Person&nbsp;p)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;p.forename&nbsp;+&nbsp;<span class="string">"&nbsp;"</span>&nbsp;+&nbsp;p.name<br/>
+						&nbsp;&nbsp;}<br/>
 						}
 					</p>
 				</div>
@@ -756,8 +756,8 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">class</span>&nbsp;PersonPrinter&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;PersonExtensions<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
+						&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;PersonExtensions<br/>
+						&nbsp;&nbsp;...<br/>
 						}
 					</p>
 				</div>
@@ -770,7 +770,7 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">def</span>&nbsp;print(Person&nbsp;myPerson)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;myPerson.getFullName()<br/>
+						&nbsp;&nbsp;myPerson.getFullName()<br/>
 						}
 					</p>
 				</div>
@@ -782,8 +782,8 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">public</span>&nbsp;String&nbsp;print(<span class="keyword">final</span>&nbsp;Person&nbsp;myPerson)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;_fullName&nbsp;=&nbsp;<span class="keyword">this</span>._personExtensions.getFullName(myPerson);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_fullName;<br/>
+						&nbsp;&nbsp;String&nbsp;_fullName&nbsp;=&nbsp;<span class="keyword">this</span>._personExtensions.getFullName(myPerson);<br/>
+						&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_fullName;<br/>
 						}
 					</p>
 				</div>

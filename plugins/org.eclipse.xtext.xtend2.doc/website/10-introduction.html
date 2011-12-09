@@ -83,7 +83,7 @@
 		  <li><em>Advanced type inference</em> - you rarely need to write down type signatures</li>
 		  <li><em>Full support for Java Generics</em> - including all conformance and conversion rules</li>
 		  <li><em>Translates to Java</em> not bytecode - understand what is going on and use your code for platforms 
-		  		such as Android or GWT</li>
+		      such as Android or GWT</li>
 		</ul>
 		</p>
 		<p>
@@ -103,6 +103,7 @@
 			    <li><a href="10-introduction.php#Getting_Started_2" >Hello World</a></li>
 			    <li><a href="10-introduction.php#library" >The Runtime Library</a></li>
 			    <li><a href="10-introduction.php#Tutorial" >The Xtend Tutorial</a></li>
+			    <li><a href="10-introduction.php#MavenSupport" >Maven Support</a></li>
 			  </ul>
 			</div>
 			<p>
@@ -118,9 +119,9 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">class</span>&nbsp;HelloWorld&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">void</span>&nbsp;main(String[]&nbsp;args)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;println(<span class="string">"Hello&nbsp;World"</span>)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">void</span>&nbsp;main(String[]&nbsp;args)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;println(<span class="string">"Hello&nbsp;World"</span>)<br/>
+						&nbsp;&nbsp;}<br/>
 						}
 					</p>
 				</div>
@@ -195,6 +196,53 @@
 			The project contains a couple of sample Xtend files which show the different language concepts in 
 			action. Looking into the <em>xtend-gen</em> folder which holds the compiled Java code will help you understand 
 			the concepts better.
+			</p>
+			<a name="MavenSupport" ></a>
+			<h2>Maven Support</h2>
+			<p>
+			The runtime library as well as a plugin to run the compiler in a Maven build can be be obtained from
+			the following maven repository: <span class="inlinecode">http:<span class="comment">//build.eclipse.org/common/xtend/maven/</span></span>. We are working on having these artifacts in Maven Central soon.
+			</p>
+			<p>
+			Here's the XML for the library dependency:
+			</p>
+			<p>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						&lt;dependency&gt;<br/>
+						&nbsp;&nbsp;&lt;groupId&gt;org.eclipse.xtend2&lt;/groupId&gt;<br/>
+						&nbsp;&nbsp;&lt;artifactId&gt;org.eclipse.xtend2.lib&lt;/artifactId&gt;<br/>
+						&nbsp;&nbsp;&lt;version&gt;2.2.0&lt;/version&gt;<br/>
+						&lt;/dependency&gt;
+					</p>
+				</div>
+			</div>
+			</p>
+			<p>
+			And this is the XML for the plugin:
+			</p>
+			<p>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						&lt;plugin&gt;<br/>
+						&nbsp;&nbsp;&lt;groupId&gt;org.eclipse.xtend2&lt;/groupId&gt;<br/>
+						&nbsp;&nbsp;&lt;artifactId&gt;xtend-maven-plugin&lt;/artifactId&gt;<br/>
+						&nbsp;&nbsp;&lt;version&gt;2.2.0&lt;/version&gt;<br/>
+						&nbsp;&nbsp;&lt;executions&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&lt;execution&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goals&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal&gt;compile&lt;/goal&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal&gt;testCompile&lt;/goal&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/goals&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&lt;/execution&gt;<br/>
+						&nbsp;&nbsp;&lt;/executions&gt;<br/>
+						&lt;/plugin&gt;
+					</p>
+				</div>
+			</div>
+			
 			</p>
 		<div id="disqus_thread"></div>
 		<script type="text/javascript" src="documentationRoot.js"></script>

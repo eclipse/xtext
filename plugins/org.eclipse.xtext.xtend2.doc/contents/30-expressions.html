@@ -5,7 +5,7 @@
 
 <link href="book.css" rel="stylesheet" type="text/css">
 <link href="code.css" rel="stylesheet" type="text/css">
-<link rel="home" href="xtext.html" title="">
+<link rel="home" href="index.html" title="">
 </head>
 <body>
 <a name="Xtend_Expressions"></a>
@@ -18,9 +18,9 @@ allows to use every Xtend expression on the right hand side of an assignment. Fo
 <div class="incode">
 <p class="code">
 <span class="keyword">val</span>&nbsp;data&nbsp;=&nbsp;<span class="keyword">try</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;fileContentsToString(<span class="string">&apos;data.txt&apos;</span>)<br/>
+&nbsp;&nbsp;fileContentsToString(<span class="string">&apos;data.txt&apos;</span>)<br/>
 }&nbsp;<span class="keyword">catch</span>&nbsp;(IOException&nbsp;e)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;dummy&nbsp;data&apos;</span><br/>
+&nbsp;&nbsp;<span class="string">&apos;dummy&nbsp;data&apos;</span><br/>
 }<br/>
 </p>
 </div>
@@ -58,7 +58,7 @@ need to quote newline characters.
 &apos;\u00a1Hola&nbsp;el&nbsp;mundo!<span class="string">&apos;<br/>
 "Hello&nbsp;<br/>
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;World&nbsp;!"<br/>
+&nbsp;&nbsp;World&nbsp;!"<br/>
 </span>
 </p>
 </div>
@@ -111,7 +111,7 @@ Type literals are specified using the keyword <span class="inlinecode"><span cla
 <p>
 Xbase introduces <a href="30-expressions.html#closures" title="Go to &quot;Closures&quot;">closures</a>, and therefore an additional function 
 type signature. On the Java level a closure (or more generally any function object) is just an 
-instance of one of the types in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.2.0/org/eclipse/xtext/xbase/lib/Functions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.Functions" >Functions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java" title="View Source Code" >(src)</a>, depending on the 
+instance of one of the types in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.2.0/org/eclipse/xtext/xbase/lib/Functions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.Functions" >Functions</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java" title="View Source Code" >(src)</a>, depending on the 
 number of arguments. However, as closures are a very important language feature, a special 
 syntax for function types has been introduced. So instead of writing 
 <div class="literallayout">
@@ -184,10 +184,8 @@ The following defines the operators and the corresponding Java method signatures
 </tr>
 <tr>
 <td>
-<span class="inlinecode">&nbsp;</span>
 </td>
 <td>
-<span class="inlinecode">&nbsp;</span>
 </td>
 </tr>
 <tr>
@@ -200,10 +198,8 @@ The following defines the operators and the corresponding Java method signatures
 </tr>
 <tr>
 <td>
-<span class="inlinecode">&nbsp;</span>
 </td>
 <td>
-<span class="inlinecode">&nbsp;</span>
 </td>
 </tr>
 <tr>
@@ -216,10 +212,8 @@ The following defines the operators and the corresponding Java method signatures
 </tr>
 <tr>
 <td>
-<span class="inlinecode">&nbsp;</span>
 </td>
 <td>
-<span class="inlinecode">&nbsp;</span>
 </td>
 </tr>
 <tr>
@@ -240,10 +234,8 @@ The following defines the operators and the corresponding Java method signatures
 </tr>
 <tr>
 <td>
-<span class="inlinecode">&nbsp;</span>
 </td>
 <td>
-<span class="inlinecode">&nbsp;</span>
 </td>
 </tr>
 <tr>
@@ -280,10 +272,8 @@ The following defines the operators and the corresponding Java method signatures
 </tr>
 <tr>
 <td>
-<span class="inlinecode">&nbsp;</span>
 </td>
 <td>
-<span class="inlinecode">&nbsp;</span>
 </td>
 </tr>
 <tr>
@@ -304,10 +294,8 @@ The following defines the operators and the corresponding Java method signatures
 </tr>
 <tr>
 <td>
-<span class="inlinecode">&nbsp;</span>
 </td>
 <td>
-<span class="inlinecode">&nbsp;</span>
 </td>
 </tr>
 <tr>
@@ -328,10 +316,8 @@ The following defines the operators and the corresponding Java method signatures
 </tr>
 <tr>
 <td>
-<span class="inlinecode">&nbsp;</span>
 </td>
 <td>
-<span class="inlinecode">&nbsp;</span>
 </td>
 </tr>
 <tr>
@@ -368,10 +354,8 @@ The following defines the operators and the corresponding Java method signatures
 </tr>
 <tr>
 <td>
-<span class="inlinecode">&nbsp;</span>
 </td>
 <td>
-<span class="inlinecode">&nbsp;</span>
 </td>
 </tr>
 <tr>
@@ -390,17 +374,9 @@ The following defines the operators and the corresponding Java method signatures
 <span class="inlinecode">e1.operator_minus()</span>
 </td>
 </tr>
-<tr>
-<td>
-<span class="inlinecode">&nbsp;</span>
-</td>
-<td>
-<span class="inlinecode">&nbsp;</span>
-</td>
-</tr>
 </table>
 
-		
+    
 The table above also defines the operator precedence in ascending order. The blank lines separate 
 precedence levels. The assignment operator <span class="inlinecode">+=</span> is right-to-left associative in the same way 
 as the plain assignment operator <span class="inlinecode">=</span> is. That is a = b = c is executed as a = (b = c), all
@@ -416,11 +392,11 @@ hand operand might not be evaluated at all in the following cases:
 <ol>
 	<li>
 		in the case of <span class="inlinecode">||</span> the operand on the right hand side is not evaluated if the left 
-				operand evaluates to <span class="inlinecode"><span class="keyword">true</span></span>.
+		    operand evaluates to <span class="inlinecode"><span class="keyword">true</span></span>.
 	</li>
 	<li>
 		in the case of <span class="inlinecode">&amp;&amp;</span> the operand on the right hand side is not evaluated if the left 
-				operand evaluates to <span class="inlinecode"><span class="keyword">false</span></span>.
+		    operand evaluates to <span class="inlinecode"><span class="keyword">false</span></span>.
 	</li>
 </ol>
 </p>
@@ -500,12 +476,12 @@ A typical example for using <span class="inlinecode"><span class="keyword">var</
 <div class="incode">
 <p class="code">
 {<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;max&nbsp;=&nbsp;100<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;i&nbsp;=&nbsp;0<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span>&nbsp;(i&nbsp;&lt;&nbsp;max)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;println(<span class="string">"Hi&nbsp;there!"</span>)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i&nbsp;=&nbsp;i&nbsp;+&nbsp;1<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;max&nbsp;=&nbsp;100<br/>
+&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;i&nbsp;=&nbsp;0<br/>
+&nbsp;&nbsp;<span class="keyword">while</span>&nbsp;(i&nbsp;&lt;&nbsp;max)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;println(<span class="string">"Hi&nbsp;there!"</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;i&nbsp;=&nbsp;i&nbsp;+&nbsp;1<br/>
+&nbsp;&nbsp;}<br/>
 }<br/>
 </p>
 </div>
@@ -795,13 +771,13 @@ as an extension method, it can be invoked like this
 <div class="incode">
 <p class="code">
 newArrayList(&nbsp;<span class="string">&apos;aaa&apos;</span>,&nbsp;<span class="string">&apos;bb&apos;</span>,&nbsp;<span class="string">&apos;c&apos;</span>&nbsp;).sort(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;e1,&nbsp;e2&nbsp;|&nbsp;<span class="keyword">if</span>&nbsp;(&nbsp;e1.length&nbsp;&gt;&nbsp;e2.length&nbsp;)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(&nbsp;e1.length&nbsp;&lt;&nbsp;e2.length&nbsp;)&nbsp;{&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})<br/>
+&nbsp;&nbsp;e1,&nbsp;e2&nbsp;|&nbsp;<span class="keyword">if</span>&nbsp;(&nbsp;e1.length&nbsp;&gt;&nbsp;e2.length&nbsp;)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(&nbsp;e1.length&nbsp;&lt;&nbsp;e2.length&nbsp;)&nbsp;{&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})<br/>
 </p>
 </div>
 </div>
@@ -854,26 +830,26 @@ Here is an example for creating a simple tree of <span class="inlinecode">Nodes<
 <div class="incode">
 <p class="code">
 <span class="keyword">class</span>&nbsp;Node&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;label<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Node&gt;&nbsp;children<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;createNode(Node&nbsp;parent,&nbsp;(Node)=&gt;<span class="keyword">void</span>&nbsp;initializer)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;child=<span class="keyword">new</span>&nbsp;Node()<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initializer.apply(child)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;child<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;String&nbsp;label<br/>
+&nbsp;&nbsp;List&lt;Node&gt;&nbsp;children<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;createNode(Node&nbsp;parent,&nbsp;(Node)=&gt;<span class="keyword">void</span>&nbsp;initializer)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;child=<span class="keyword">new</span>&nbsp;Node()<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;initializer.apply(child)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;child<br/>
+&nbsp;&nbsp;}<br/>
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;tree()&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;createNode(<span class="keyword">null</span>)&nbsp;[<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label=<span class="string">"root"</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;children&nbsp;+=&nbsp;createNode&nbsp;[<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label=<span class="string">"child0"</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;children&nbsp;+=&nbsp;createNode&nbsp;[<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label=<span class="string">"child1"</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;tree()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;createNode(<span class="keyword">null</span>)&nbsp;[<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label=<span class="string">"root"</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;children&nbsp;+=&nbsp;createNode&nbsp;[<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label=<span class="string">"child0"</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;children&nbsp;+=&nbsp;createNode&nbsp;[<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label=<span class="string">"child1"</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
+&nbsp;&nbsp;}<br/>
 }<br/>
 </p>
 </div>
@@ -938,11 +914,11 @@ For a <span class="inlinecode"><span class="keyword">switch</span></span> expres
 <div class="incode">
 <p class="code">
 <span class="keyword">switch</span>&nbsp;e&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;e1&nbsp;:&nbsp;er1<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;e2&nbsp;:&nbsp;er2<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;en&nbsp;:&nbsp;ern<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;er<br/>
+&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;e1&nbsp;:&nbsp;er1<br/>
+&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;e2&nbsp;:&nbsp;er2<br/>
+&nbsp;&nbsp;...<br/>
+&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;en&nbsp;:&nbsp;ern<br/>
+&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;er<br/>
 }<br/>
 </p>
 </div>
@@ -971,9 +947,9 @@ Example:
 <div class="incode">
 <p class="code">
 <span class="keyword">switch</span>&nbsp;myString&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;myString.length&gt;5&nbsp;:&nbsp;<span class="string">"a&nbsp;long&nbsp;string."</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">&apos;some&apos;</span>&nbsp;:&nbsp;<span class="string">"It&apos;s&nbsp;some&nbsp;string."</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;<span class="string">"It&apos;s&nbsp;another&nbsp;short&nbsp;string."</span><br/>
+&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;myString.length&gt;5&nbsp;:&nbsp;<span class="string">"a&nbsp;long&nbsp;string."</span><br/>
+&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">&apos;some&apos;</span>&nbsp;:&nbsp;<span class="string">"It&apos;s&nbsp;some&nbsp;string."</span><br/>
+&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;<span class="string">"It&apos;s&nbsp;another&nbsp;short&nbsp;string."</span><br/>
 }<br/>
 </p>
 </div>
@@ -990,9 +966,9 @@ for the switch expression in subsequent expressions. Example:
 <p class="code">
 <span class="keyword">var</span>&nbsp;Object&nbsp;x&nbsp;=&nbsp;...;<br/>
 <span class="keyword">switch</span>&nbsp;x&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;<span class="keyword">case</span>&nbsp;x.length()&gt;0&nbsp;:&nbsp;x.length()<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;List&lt;?&gt;&nbsp;:&nbsp;x.size()<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;-1<br/>
+&nbsp;&nbsp;String&nbsp;<span class="keyword">case</span>&nbsp;x.length()&gt;0&nbsp;:&nbsp;x.length()<br/>
+&nbsp;&nbsp;List&lt;?&gt;&nbsp;:&nbsp;x.size()<br/>
+&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;-1<br/>
 }<br/>
 </p>
 </div>
@@ -1026,8 +1002,8 @@ Here are two examples:
 <div class="incode">
 <p class="code">
 {<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;result<br/>
+&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>)<br/>
+&nbsp;&nbsp;result<br/>
 }<br/>
 </p>
 </div>
@@ -1037,12 +1013,12 @@ Here are two examples:
 <div class="incode">
 <p class="code">
 {<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;x&nbsp;=&nbsp;greeting();<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x.equals(<span class="string">"Hello&nbsp;"</span>))&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x+<span class="string">"World!"</span>;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;x&nbsp;=&nbsp;greeting();<br/>
+&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x.equals(<span class="string">"Hello&nbsp;"</span>))&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;x+<span class="string">"World!"</span>;&nbsp;<br/>
+&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;x;<br/>
+&nbsp;&nbsp;}<br/>
 }<br/>
 </p>
 </div>
@@ -1073,11 +1049,11 @@ iterable expression.
 <div class="incode">
 <p class="code">
 <span class="keyword">for</span>&nbsp;(String&nbsp;s&nbsp;:&nbsp;myStrings)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(s)<br/>
+&nbsp;&nbsp;doSideEffect(s)<br/>
 }<br/>
 <br/>
 <span class="keyword">for</span>&nbsp;(s&nbsp;:&nbsp;myStrings)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(s)<br/>
+&nbsp;&nbsp;doSideEffect(s)<br/>
 </p>
 </div>
 </div>
@@ -1102,11 +1078,11 @@ The return type of a while loop is <span class="inlinecode"><span class="keyword
 <div class="incode">
 <p class="code">
 <span class="keyword">while</span>&nbsp;(<span class="keyword">true</span>)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>)<br/>
+&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>)<br/>
 }<br/>
 <br/>
 <span class="keyword">while</span>&nbsp;((i=i+1)&nbsp;&lt;&nbsp;max)&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>)<br/>
+&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>)<br/>
 </p>
 </div>
 </div>
@@ -1133,7 +1109,7 @@ loop is <span class="inlinecode"><span class="keyword">void</span></span>.
 <div class="incode">
 <p class="code">
 <span class="keyword">do</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>);<br/>
+&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>);<br/>
 }&nbsp;<span class="keyword">while</span>&nbsp;(<span class="keyword">true</span>)<br/>
 <br/>
 <br/>
@@ -1154,9 +1130,9 @@ type <span class="inlinecode"><span class="keyword">void</span></span>. Anyway y
 <div class="incode">
 <p class="code">
 listOfStrings.map(e|&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(e==<span class="keyword">null</span>)&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"NULL"</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;e.toUpperCase<br/>
+&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(e==<span class="keyword">null</span>)&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"NULL"</span><br/>
+&nbsp;&nbsp;e.toUpperCase<br/>
 })&nbsp;<br/>
 </p>
 </div>
@@ -1173,11 +1149,11 @@ in Java.
 <div class="incode">
 <p class="code">
 {<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(myList.isEmpty)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<span class="string">"the&nbsp;list&nbsp;must&nbsp;not&nbsp;be&nbsp;empty"</span>)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
-}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;...<br/>
+&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(myList.isEmpty)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<span class="string">"the&nbsp;list&nbsp;must&nbsp;not&nbsp;be&nbsp;empty"</span>)<br/>
+&nbsp;&nbsp;...<br/>
+}&nbsp;&nbsp;&nbsp;<br/>
 </p>
 </div>
 </div>
@@ -1195,11 +1171,11 @@ from Java.
 <div class="incode">
 <p class="code">
 <span class="keyword">try</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;RuntimeException()<br/>
+&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;RuntimeException()<br/>
 }&nbsp;<span class="keyword">catch</span>&nbsp;(NullPointerException&nbsp;e)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;handle&nbsp;e<br/>
+&nbsp;&nbsp;<span class="comment">//&nbsp;handle&nbsp;e<br/>
 </span>}&nbsp;<span class="keyword">finally</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;do&nbsp;stuff<br/>
+&nbsp;&nbsp;<span class="comment">//&nbsp;do&nbsp;stuff<br/>
 </span>}<br/>
 </p>
 </div>
@@ -1242,11 +1218,11 @@ expected. For instance in conjunction the powerful <a href="30-expressions.html#
 <div class="incode">
 <p class="code">
 toMember(Member&nbsp;m)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">switch</span>&nbsp;m&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Field&nbsp;:&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;private&nbsp;&laquo;m.type&raquo;&nbsp;&laquo;m.name&raquo;&nbsp;;&apos;</span><span class="string">&apos;&apos;</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Method&nbsp;<span class="keyword">case</span>&nbsp;isAbstract&nbsp;:&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;&nbsp;abstract&nbsp;&laquo;...&apos;</span><span class="string">&apos;&apos;</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Method&nbsp;:&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;&nbsp;.....&nbsp;&apos;</span><span class="string">&apos;&apos;</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<span class="keyword">switch</span>&nbsp;m&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Field&nbsp;:&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;private&nbsp;&laquo;m.type&raquo;&nbsp;&laquo;m.name&raquo;&nbsp;;&apos;</span><span class="string">&apos;&apos;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Method&nbsp;<span class="keyword">case</span>&nbsp;isAbstract&nbsp;:&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;&nbsp;abstract&nbsp;&laquo;...&apos;</span><span class="string">&apos;&apos;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Method&nbsp;:&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;&nbsp;.....&nbsp;&apos;</span><span class="string">&apos;&apos;</span><br/>
+&nbsp;&nbsp;}<br/>
 }<br/>
 </p>
 </div>
@@ -1286,24 +1262,24 @@ simple rules when the rich string is evaluated.
 <ol>
 	<li>
 		
-				An evaluated rich string as part of another string will be prefixed with the current 
-				indentation of the caller before it is inserted into the result.
+		    An evaluated rich string as part of another string will be prefixed with the current 
+		    indentation of the caller before it is inserted into the result.
 	</li>
 	<li>
 		
-				Indentation in the template that is relative to a control structure will not be propagated 
-				to the output string. A control structure is a <span class="inlinecode"><span class="keyword">FOR</span></span>-loop or a condition 
-				(<span class="inlinecode"><span class="keyword">IF</span></span>) as well as the opening and closing marks of the rich string itself.
-				
-				The indentation is considered to be relative to such a control structure if the previous 
-				line ends with a control structure followed by optional white space. The amount of white 
-				space is not taken into account but the delta to the other lines.
+		    Indentation in the template that is relative to a control structure will not be propagated 
+		    to the output string. A control structure is a <span class="inlinecode"><span class="keyword">FOR</span></span>-loop or a condition 
+		    (<span class="inlinecode"><span class="keyword">IF</span></span>) as well as the opening and closing marks of the rich string itself.
+		    
+		    The indentation is considered to be relative to such a control structure if the previous 
+		    line ends with a control structure followed by optional white space. The amount of white 
+		    space is not taken into account but the delta to the other lines.
 	</li>
 	<li>
 		
-				Lines that do not contain any static text which is not white space but do contain control 
-				structures or invocations of other templates which evaluate to an empty string, will not 
-				appear in the output.
+		    Lines that do not contain any static text which is not white space but do contain control 
+		    structures or invocations of other templates which evaluate to an empty string, will not 
+		    appear in the output.
 	</li>
 </ol>
 </p>
@@ -1316,13 +1292,13 @@ of nested nodes.
 <tr>
 <td>
 
-			<div class="literallayout">
+      <div class="literallayout">
 <div class="incode">
 <p class="code">
 <span class="keyword">class</span>&nbsp;Template&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;print(Node&nbsp;n)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;&laquo;n.name&raquo;&nbsp;{}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&apos;</span><span class="string">&apos;&apos;</span><br/>
+&nbsp;&nbsp;print(Node&nbsp;n)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;&laquo;n.name&raquo;&nbsp;{}<br/>
+&nbsp;&nbsp;&apos;</span><span class="string">&apos;&apos;</span><br/>
 }<br/>
 </p>
 </div>
@@ -1331,10 +1307,10 @@ of nested nodes.
 </td>
 <td>
 
-			<div class="literallayout">
+      <div class="literallayout">
 <div class="incode">
 <p class="code">
-node&nbsp;NodeName{}<br/>
+node&nbsp;NodeName&nbsp;{}<br/>
 </p>
 </div>
 </div>
@@ -1353,17 +1329,17 @@ of the template itself.
 <tr>
 <td>
 
-			<div class="literallayout">
+      <div class="literallayout">
 <div class="incode">
 <p class="code">
 <span class="keyword">class</span>&nbsp;Template&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;print(Node&nbsp;n)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;&laquo;n.name&raquo;&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;IF&nbsp;hasChildren&raquo;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;n.children.map[print]&raquo;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;ENDIF&raquo;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&apos;</span><span class="string">&apos;&apos;</span><br/>
+&nbsp;&nbsp;print(Node&nbsp;n)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;&laquo;n.name&raquo;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;IF&nbsp;hasChildren&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;n.children.map[print]&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;ENDIF&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&apos;</span><span class="string">&apos;&apos;</span><br/>
 }<br/>
 </p>
 </div>
@@ -1372,16 +1348,16 @@ of the template itself.
 </td>
 <td>
 
-			<div class="literallayout">
+      <div class="literallayout">
 <div class="incode">
 <p class="code">
 node&nbsp;Parent{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;FirstChild&nbsp;{<br/>
+&nbsp;&nbsp;node&nbsp;FirstChild&nbsp;{<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;node&nbsp;SecondChild&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;Leaf&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;SecondChild&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;Leaf&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;}<br/>
 }<br/>
 </p>
 </div>

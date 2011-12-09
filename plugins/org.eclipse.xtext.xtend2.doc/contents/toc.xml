@@ -8,6 +8,8 @@
 			</topic>
 			<topic href="contents/10-introduction.html#Tutorial" label="The Xtend Tutorial" >
 			</topic>
+			<topic href="contents/10-introduction.html#MavenSupport" label="Maven Support" >
+			</topic>
 		</topic>
 	</topic>
 	<topic href="contents/15-types.html#types" label="Types" >
