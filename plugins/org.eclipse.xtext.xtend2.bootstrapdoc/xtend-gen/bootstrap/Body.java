@@ -27,7 +27,8 @@ public class Body {
       EList<Chapter> _chapters = document.getChapters();
       for(final Chapter chapter : _chapters) {
         _builder.append("\t");
-        CharSequence _h1 = this.h1(chapter);
+        AbstractSection _resolve = this._xdocExtensions.resolve(chapter);
+        CharSequence _h1 = this.h1(((Chapter) _resolve));
         _builder.append(_h1, "	");
         _builder.newLineIfNotEmpty();
       }
