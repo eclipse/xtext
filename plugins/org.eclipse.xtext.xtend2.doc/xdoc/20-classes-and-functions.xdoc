@@ -29,7 +29,7 @@ code[Xtend][
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:packageDecl[Package Declaration]
 
-Package declarations are mostly like in Java. There are two the small differences: 
+Package declarations are mostly like in Java. There are two small differences: 
 ul[
 	item[An identifier can be escaped with a code[^] character in case it conflicts with a keyword.]
 	item[There is no terminating semicolon.]
@@ -412,10 +412,10 @@ Annotations are available on classes, fields, methods and parameters. Here is an
 code[Xtend][
 	@TypeAnnotation(typeof(String))
 	class MyClass {
-		@FieldAnnotation(children = {@MyAnno(true), @MyAnno(false)}
+		@FieldAnnotation(children = {@MyAnno(true), @MyAnno(false)})
 		String myField
 		
-		@MethodAnnotation(children = {@MyAnno(true), @MyAnno}
+		@MethodAnnotation(children = {@MyAnno(true), @MyAnno})
 		def String myMethod(@ParameterAnnotation String param) {
 			//...
 		}
