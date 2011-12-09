@@ -19,7 +19,7 @@ public class Xtend2BatchCompilerPluginIT {
 
 	@Test
 	public void pluginPrefix() throws Exception {
-		verifyErrorFreeLog("/it/simple", "xtend2:compile");
+		verifyErrorFreeLog("/it/simple", "xtend:compile");
 	}
 
 	@Test
