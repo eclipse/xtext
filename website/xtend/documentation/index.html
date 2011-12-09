@@ -124,7 +124,7 @@ div#maincontainer>section {
 	</div>
 	<div id="maincontainer" class="container">
 		<!-- chapter -->
-		<section id="ChapterRef0">
+		<section id="Introduction">
 			<div class="page-header">
 				<h1>
 					Introduction
@@ -146,7 +146,7 @@ div#maincontainer>section {
 						<li><strong>Advanced type inference</strong> - you rarely need to write down type signatures</li>
 						<li><strong>Full support for Java Generics</strong> - including all conformance and conversion rules</li>
 						<li><strong>Translates to Java</strong> not bytecode - understand what is going on and use your code for platforms 
-								such as Android or GWT</li>
+						    such as Android or GWT</li>
 					</ol>
 					It is not aiming at replacing Java all together. Therefore its library is a thin layer on top of the 
 					Java Development Kit (JDK) and interacts with Java exactly the same as it interacts with Xtend code. 
@@ -162,15 +162,15 @@ div#maincontainer>section {
 					is a client integrated into Eclipse. You&apos;ll find it in the Help-menu.
 					</p>
 					<!-- subsection -->
-					<section id="Section21">
+					<section id="Section20">
 					<h3>Hello World</h3>
 					<p>
 					Let us start with a simple "Hello World" example. In Xtend, that reads as
 					</p><pre class="prettyprint lang-xtend">
 class HelloWorld {
-	def static void main(String[] args) {
-		println("Hello World")
-	}
+  def static void main(String[] args) {
+    println("Hello World")
+  }
 }</pre><p>
 					
 					The Xtend code resembles Java a lot. You can already see how the syntactic noise is reduced: No semicolons,
@@ -214,12 +214,39 @@ val listOfNames = myList.map( e | myMap.get(e) )</pre><p>
 					the concepts better.
 					</p>
 					</section>
+					<!-- subsection -->
+					<section id="MavenSupport">
+					<h3>Maven Support</h3>
+					<p>
+					The runtime library as well as a plugin to run the compiler in a Maven build can be be obtained from
+					the following maven repository: <code class="prettyprint lang-xtend">http://build.eclipse.org/common/xtend/maven/</code>. We are working on having these artifacts in Maven Central soon.Here&apos;s the XML for the library dependency:</p><pre class="prettyprint lang-xtend">
+&lt;dependency&gt;
+  &lt;groupId&gt;org.eclipse.xtend2&lt;/groupId&gt;
+  &lt;artifactId&gt;org.eclipse.xtend2.lib&lt;/artifactId&gt;
+  &lt;version&gt;2.2.0&lt;/version&gt;
+&lt;/dependency&gt;</pre><p>
+					And this is the XML for the plugin:</p><pre class="prettyprint lang-xtend">
+&lt;plugin&gt;
+  &lt;groupId&gt;org.eclipse.xtend2&lt;/groupId&gt;
+  &lt;artifactId&gt;xtend-maven-plugin&lt;/artifactId&gt;
+  &lt;version&gt;2.2.0&lt;/version&gt;
+  &lt;executions&gt;
+    &lt;execution&gt;
+      &lt;goals&gt;
+        &lt;goal&gt;compile&lt;/goal&gt;
+        &lt;goal&gt;testCompile&lt;/goal&gt;
+      &lt;/goals&gt;
+    &lt;/execution&gt;
+  &lt;/executions&gt;
+&lt;/plugin&gt;</pre><p>
+					</p>
+					</section>
 					</section>
 				</div>
 			</div>
 		</section>
 		<!-- chapter -->
-		<section id="ChapterRef2">
+		<section id="types">
 			<div class="page-header">
 				<h1>
 					Types
@@ -249,7 +276,7 @@ val listOfNames = myList.map( e | myMap.get(e) )</pre><p>
 			</div>
 		</section>
 		<!-- chapter -->
-		<section id="ChapterRef3">
+		<section id="Xtend_Classes_Members">
 			<div class="page-header">
 				<h1>
 					Classes and Members
@@ -268,15 +295,15 @@ package com.acme
 import java.util.List
 
 class MyClass {
-	String name
-	
-	new(String name) {
-		this.name = name
-	}
-	
-	def String first(List&lt;String&gt; elements) {
-		elements.get(0)
-	}
+  String name
+  
+  new(String name) {
+    this.name = name
+  }
+  
+  def String first(List&lt;String&gt; elements) {
+    elements.get(0)
+  }
 }</pre><p>
 					</p>
 					<!--  section -->
@@ -327,7 +354,7 @@ class MyClass {
 class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt;
         implements List&lt;E&gt;, RandomAccess, 
                    Cloneable, java.io.Serializable {
-	...
+  ...
 }</pre><p>
 					</p>
 					</section>
@@ -340,13 +367,13 @@ class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt;
 					line. 
 					</p><pre class="prettyprint lang-xtend">
 class MyClass extends AnotherClass {
-	new(String s) {
-		super(s)
-	}
-	
-	new() {
-		this("default")
-	}
+  new(String s) {
+    super(s)
+  }
+  
+  new() {
+    this("default")
+  }
 }</pre><p>
 					The same rules with regard to inheritance apply as in Java, i.e. if the super class does not define a 
 					no-argument constructor, you have to explicitly call one using <code class="prettyprint lang-xtend">super(args...)</code> as the first 
@@ -361,11 +388,11 @@ class MyClass extends AnotherClass {
 					An Xtend class can define fields, too. As for Java fields, you can optionally declare an initializer
 					expression and use annotations on fields. Fields marked as <code class="prettyprint lang-xtend">static</code> will be compiled to static Java fields.  </p><pre class="prettyprint lang-xtend">
 class MyClass {
-	@Nullable String name
-	int count = 1
-	String string = new String()
-	static boolean debug = false
-	...
+  @Nullable String name
+  int count = 1
+  String string = new String()
+  static boolean debug = false
+  ...
 }</pre><p>
 					The default visibility is <code class="prettyprint lang-xtend">private</code>. You can also declare it explicitly as 
 					being <code class="prettyprint lang-xtend">public</code>, <code class="prettyprint lang-xtend">protected</code>, or <code class="prettyprint lang-xtend">private</code>. A specialty of Xtend are fields that provide <strong>extension methods</strong> which are covered in 
@@ -381,17 +408,17 @@ class MyClass {
 					<a href="#polymorphicDispatch">here</a>. 
 					</p><pre class="prettyprint lang-xtend">
 def String first(List&lt;String&gt; elements) {
-	elements.get(0);
+  elements.get(0);
 }</pre><p>
 					The default visibility of a plain method is <code class="prettyprint lang-xtend">public</code>. You can explicitly declare it as
 					being <code class="prettyprint lang-xtend">public</code>, <code class="prettyprint lang-xtend">protected</code>, or <code class="prettyprint lang-xtend">private</code>.Xtend supports the <code class="prettyprint lang-xtend">static</code> modifier for methods:
 					</p><pre class="prettyprint lang-xtend">
 def static createInstance() {
-	new MyClass(&apos;foo&apos;)
+  new MyClass(&apos;foo&apos;)
 }</pre><p>
 					</p>
 					<!-- subsection -->
-					<section id="Section24">
+					<section id="Section21">
 					<h3>Overriding Methods</h3>
 					<p>
 					Methods can override other methods from the super class or implemented interface methods using the
@@ -400,7 +427,7 @@ def static createInstance() {
 					<code class="prettyprint lang-xtend">final</code> methods cannot be overridden by subclasses.Example:
 					</p><pre class="prettyprint lang-xtend">
 override String first(List&lt;String&gt; elements) {
-	elements.get(0);
+  elements.get(0);
 }</pre><p>
 					</p>
 					</section>
@@ -436,12 +463,12 @@ def void sneakyThrowException() {
 					That is the method
 					</p><pre class="prettyprint lang-xtend">
 def String first(List&lt;String&gt; elements) {
-	elements.get(0);
+  elements.get(0);
 }</pre><p>
 					could be declared like this:
 					</p><pre class="prettyprint lang-xtend">
 def first(List&lt;String&gt; elements) {
-	elements.get(0);
+  elements.get(0);
 }</pre><p>
 					This does not work for abstract method declarations as well as if the return type of a method 
 					depends on a recursive call of the same method. The compiler tells the user when it needs to be 
@@ -459,11 +486,11 @@ def first(List&lt;String&gt; elements) {
 					essentially removes the need for the quite invasive visitor pattern.A dispatch method is marked using the keyword <code class="prettyprint lang-xtend">dispatch</code>.
 					</p><pre class="prettyprint lang-xtend">
 def dispatch printType(Number x) { 
-	"it&apos;s a number" 
+  "it&apos;s a number" 
 }
 
 def dispatch printType(Integer x) { 
-	"it&apos;s an int" 
+  "it&apos;s an int" 
 }</pre><p>
 					For a set of visible dispatch methods in the current type hierarchy, the compiler infers a common
 					signature using the common super type of all declared arguments and generates a Java method made up
@@ -471,19 +498,19 @@ def dispatch printType(Integer x) {
 					actually declared methods are all compiled to Java methods that are prefixed with an underscore.For the two dispatch methods in the example above the following Java code would be generated:
 					</p><pre class="prettyprint lang-java">
 protected String _printType(final Number x) {
-	return "it\&apos;s a number";
+  return "it\&apos;s a number";
 }
 
 protected String _printType(final Integer x) {
-	return "it\&apos;s an int";
+  return "it\&apos;s an int";
 }
 
 public String printType(final Number x) {
-	if (x instanceof Integer) {
-		return _printType((Integer)x);
-	} else {
-		return _printType(x);
-	}
+  if (x instanceof Integer) {
+    return _printType((Integer)x);
+  } else {
+    return _printType(x);
+  }
 }</pre><p>
 					Note that the <code class="prettyprint lang-java">instanceof</code> cascade is ordered such that more specific types come first.The default visibility of the underscore methods is <code class="prettyprint lang-xtend">protected</code>. If all dispatch methods
 					explicitly declare the same visibility, this will be the visibility of the inferred dispatcher, too.
@@ -494,55 +521,55 @@ public String printType(final Number x) {
 					Example:
 					</p><pre class="prettyprint lang-xtend">
 def dispatch printTypes(Number x, Integer y) { 
-	"it&apos;s some number and an int" 
+  "it&apos;s some number and an int" 
 }
 
 def dispatch printTypes(Integer x, Number y) { 
-	"it&apos;s an int and a number" 
+  "it&apos;s an int and a number" 
 }</pre><p>
 					generates the following Java code :
 					</p><pre class="prettyprint lang-java">
 public String printTypes(final Number x, final Number y) {
-	if (x instanceof Integer) {
-		return _printTypes((Integer)x, y);
-	} else if (y instanceof Integer) {
-		return _printTypes(x, (Integer)y);
-	} else {
-		throw new IllegalArgumentException("Unhandled parameter types: " +
-			Arrays.&lt;Object&gt;asList(x, y).toString());
-	}
+  if (x instanceof Integer) {
+    return _printTypes((Integer)x, y);
+  } else if (y instanceof Integer) {
+    return _printTypes(x, (Integer)y);
+  } else {
+    throw new IllegalArgumentException("Unhandled parameter types: " +
+      Arrays.&lt;Object&gt;asList(x, y).toString());
+  }
 }</pre><p>
 					As you can see a <code class="prettyprint lang-xtend">null</code> reference is never a match. If you want to fetch <code class="prettyprint lang-xtend">null</code> 
 					you can declare a parameter using the type <code class="prettyprint lang-xtend">java.lang.Void</code>.
 					</p><pre class="prettyprint lang-xtend">
 def dispatch printType(Number x) { 
-	"it&apos;s some number" 
+  "it&apos;s some number" 
 }
 
 def dispatch printType(Integer x) { 
-	"it&apos;s an int" 
+  "it&apos;s an int" 
 }
 
 def dispatch printType(Void x) { 
-	"it&apos;s null" 
+  "it&apos;s null" 
 }</pre><p>
 					Which compiles to the following Java code:
 					</p><pre class="prettyprint lang-java">
 public String printType(final Number x) {
-	if (x instanceof Integer) {
-		return _printType((Integer)x);
-	} else if (x instanceof Number) {
-		return _printType((Number)x);
-	} else if (x == null) {
-		return _printType((Void)null);
-	} else {
-		throw new IllegalArgumentException("Unhandled parameter types: " +
-			Arrays.&lt;Object&gt;asList(x).toString());
-	}
+  if (x instanceof Integer) {
+    return _printType((Integer)x);
+  } else if (x instanceof Number) {
+    return _printType((Number)x);
+  } else if (x == null) {
+    return _printType((Void)null);
+  } else {
+    throw new IllegalArgumentException("Unhandled parameter types: " +
+      Arrays.&lt;Object&gt;asList(x).toString());
+  }
 }</pre><p>
 					</p>
 					<!-- subsection -->
-					<section id="Section35">
+					<section id="Section32">
 					<h4>Dispatch Methods and Inheritance</h4>
 					<p>
 					Any visible Java methods from super types conforming to the compiled form of a dispatch method are
@@ -551,7 +578,7 @@ public String printType(final Number x) {
 					</p><pre class="prettyprint lang-java">
 public abstract class AbstractLabelProvider {
    protected String _label(Object o) {
-   	 // some generic implementation
+      // some generic implementation
    }
 }</pre><p>
 					and the following Xtend class which extends the Java class :
@@ -572,20 +599,20 @@ class MyLabelProvider extends AbstractLabelProvider {
 					The resulting dispatch method in the generated Java class <code class="prettyprint lang-xtend">MyLabelProvider</code> would then look like this:
 					</p><pre class="prettyprint lang-java">
 public String label(final Object it) {
-	if (it instanceof Entity) {
-		return _label((Entity)it);
-	} else if (it instanceof Field) {
-		return _label((Field)it);
-	} else if (it instanceof Method) {
-		return _label((Method)it);
-	} else {
-		return _label(it);
-	}
+  if (it instanceof Entity) {
+    return _label((Entity)it);
+  } else if (it instanceof Field) {
+    return _label((Field)it);
+  } else if (it instanceof Method) {
+    return _label((Method)it);
+  } else {
+    return _label(it);
+  }
 }</pre><p>
 					</p>
 					</section>
 					<!-- subsection -->
-					<section id="Section36">
+					<section id="Section33">
 					<h4>Static Dispatch Methods</h4>
 					<p>
 					Even static dispatch methods are allowed. The same rules apply, but you cannot mix static and non-static
@@ -603,13 +630,13 @@ public String label(final Object it) {
 					Annotations are available on classes, fields, methods and parameters. Here is an example:</p><pre class="prettyprint lang-xtend">
 @TypeAnnotation(typeof(String))
 class MyClass {
-	@FieldAnnotation(children = {@MyAnno(true), @MyAnno(false)}
-	String myField
-	
-	@MethodAnnotation(children = {@MyAnno(true), @MyAnno}
-	def String myMethod(@ParameterAnnotation String param) {
-		//...
-	}
+  @FieldAnnotation(children = {@MyAnno(true), @MyAnno(false)}
+  String myField
+  
+  @MethodAnnotation(children = {@MyAnno(true), @MyAnno}
+  def String myMethod(@ParameterAnnotation String param) {
+    //...
+  }
 }</pre><p>
 					</p>
 					</section>
@@ -627,19 +654,19 @@ class MyClass {
 					concatenated than nested. They also allow to add methods in a specific context only. 
 					</p>
 					<!-- subsection -->
-					<section id="Section27">
+					<section id="Section24">
 					<h3>Local Extension Methods</h3>
 					<p>
 					All methods of the current Xtend class are automatically available in extension syntax. For example
 					</p><pre class="prettyprint lang-xtend">
 class MyClass {
-	def doSomething(Object obj) {
-		// do something with obj
-	}
-	
-	def extensionCall(Object obj) {
-		obj.doSomething()  // calls this.doSomething(obj)
-	}
+  def doSomething(Object obj) {
+    // do something with obj
+  }
+  
+  def extensionCall(Object obj) {
+    obj.doSomething()  // calls this.doSomething(obj)
+  }
 }</pre><p>
 					</p>
 					</section>
@@ -681,27 +708,27 @@ new MyClass().singletonList()
 					declare the following class
 					</p><pre class="prettyprint lang-xtend">
 class PersonExtensions {
-	def getFullName(Person p) {
-		p.forename + " " + p.name
-	}
+  def getFullName(Person p) {
+    p.forename + " " + p.name
+  }
 }</pre><p>
 					And if you have an instance of this class injected as extension like this:
 					</p><pre class="prettyprint lang-xtend">
 class PersonPrinter {
-	@Inject extension PersonExtensions
-	...
+  @Inject extension PersonExtensions
+  ...
 }</pre><p>
 					The method is available on the extension scope of the class <code class="prettyprint lang-xtend">Person</code>. This is why you can skip the 
 					field&apos;s name. You can now write the following
 					</p><pre class="prettyprint lang-xtend">
 def print(Person myPerson) {
-	myPerson.getFullName()
+  myPerson.getFullName()
 }</pre><p>
 					which is translated to the Java method 
 					</p><pre class="prettyprint lang-xtend">
 public String print(final Person myPerson) {
-	String _fullName = this._personExtensions.getFullName(myPerson);
-	return _fullName;
+  String _fullName = this._personExtensions.getFullName(myPerson);
+  return _fullName;
 }</pre><p>
 					where <code class="prettyprint lang-xtend">_personExtensions</code> is the default name of the field. Of course the 
 					property shorthand (see <a href="#propertyAccess">section on property access</a>) is still available.
@@ -720,7 +747,7 @@ myPerson.fullName</pre><p>
 			</div>
 		</section>
 		<!-- chapter -->
-		<section id="ChapterRef8">
+		<section id="Xtend_Expressions">
 			<div class="page-header">
 				<h1>
 					Expressions
@@ -734,9 +761,9 @@ myPerson.fullName</pre><p>
 					<code class="prettyprint lang-xtend">try catch</code> is an expression the following code is legal in Xtend: 
 					</p><pre class="prettyprint lang-xtend">
 val data = try {
-	fileContentsToString(&apos;data.txt&apos;)
+  fileContentsToString(&apos;data.txt&apos;)
 } catch (IOException e) {
-	&apos;dummy data&apos;
+  &apos;dummy data&apos;
 }</pre><p>
 					If <code class="prettyprint lang-xtend">fileContentsToString()</code> throws an <code class="prettyprint lang-xtend">IOException</code>, it is caught and a default value is returned 
 					and assigned to the variable <code class="prettyprint lang-xtend">data</code>.
@@ -769,7 +796,7 @@ val data = try {
 &apos;\u00a1Hola el mundo!&apos;
 "Hello 
 
-	World !"</pre><p>
+  World !"</pre><p>
 					</p>
 					</section>
 					<!-- subsection -->
@@ -938,7 +965,7 @@ x+y    // calls BigDecimalExtension.operator_plus(x,y)</pre><p>
 					</tr>
 					</table>
 					
-							
+					    
 					The table above also defines the operator precedence in ascending order. The blank lines separate 
 					precedence levels. The assignment operator <code class="prettyprint lang-xtend">+=</code> is right-to-left associative in the same way 
 					as the plain assignment operator <code class="prettyprint lang-xtend">=</code> is. That is a = b = c is executed as a = (b = c), all
@@ -946,7 +973,7 @@ x+y    // calls BigDecimalExtension.operator_plus(x,y)</pre><p>
 					precedence and associativity. 
 					</p>
 					<!-- subsection -->
-					<section id="Section29">
+					<section id="Section25">
 					<h3>Short-Circuit Boolean Operators</h3>
 					<p>
 					If the operators <code class="prettyprint lang-xtend">||</code> and <code class="prettyprint lang-xtend">&&</code> are used in a context where the left hand operand is of 
@@ -954,14 +981,14 @@ x+y    // calls BigDecimalExtension.operator_plus(x,y)</pre><p>
 					hand operand might not be evaluated at all in the following cases: 
 					<ol>
 						<li>in the case of <code class="prettyprint lang-xtend">||</code> the operand on the right hand side is not evaluated if the left 
-								operand evaluates to <code class="prettyprint lang-xtend">true</code>.</li>
+						    operand evaluates to <code class="prettyprint lang-xtend">true</code>.</li>
 						<li>in the case of <code class="prettyprint lang-xtend">&&</code> the operand on the right hand side is not evaluated if the left 
-								operand evaluates to <code class="prettyprint lang-xtend">false</code>.</li>
+						    operand evaluates to <code class="prettyprint lang-xtend">false</code>.</li>
 					</ol>
 					</p>
 					</section>
 					<!-- subsection -->
-					<section id="Section210">
+					<section id="Section26">
 					<h3>Examples</h3>
 					<p>
 					</p><pre class="prettyprint lang-xtend">
@@ -1007,12 +1034,12 @@ myObj.setMyProperty("foo")</pre><p>
 					which stands for &apos;variable&apos;.A typical example for using <code class="prettyprint lang-xtend">var</code> is a counter in a loop:
 					</p><pre class="prettyprint lang-xtend">
 {
-	val max = 100
-	var i = 0
-	while (i &lt; max) {
-		println("Hi there!")
-		i = i + 1
-	}
+  val max = 100
+  var i = 0
+  while (i &lt; max) {
+    println("Hi there!")
+    i = i + 1
+  }
 }</pre><p>
 					Although overriding or shadowing variables from outer scopes is allowed, it is usually only used 
 					to overload the <a href="#implicitVariables">implicit variable <code class="prettyprint lang-xtend">it</code></a>, in order to subsequently access 
@@ -1020,7 +1047,7 @@ myObj.setMyProperty("foo")</pre><p>
 					closure.
 					</p>
 					<!-- subsection -->
-					<section id="Section211">
+					<section id="Section27">
 					<h3>Typing</h3>
 					<p>
 					The return type of a variable declaration expression is always <code class="prettyprint lang-xtend">void</code>. 
@@ -1171,13 +1198,13 @@ newArrayList("Foo", "Bar").find(String e | e=="Bar")</pre><p>
 					do not count).As a result given the method <code class="prettyprint lang-xtend">IterableExtensions.sort(Iterable&lt;T&gt;, Comparator&lt;? super T&gt;)</code> is available
 					as an extension method, it can be invoked like this</p><pre class="prettyprint lang-xtend">
 newArrayList( &apos;aaa&apos;, &apos;bb&apos;, &apos;c&apos; ).sort(
-	e1, e2 | if ( e1.length &gt; e2.length ) {
-				-1 
-			 } else if ( e1.length &lt; e2.length ) { 
-				1
-			 } else { 
-				0
-			 })</pre><p>
+  e1, e2 | if ( e1.length &gt; e2.length ) {
+        -1 
+       } else if ( e1.length &lt; e2.length ) { 
+        1
+       } else { 
+        0
+       })</pre><p>
 					</p>
 					</section>
 					<!-- subsection -->
@@ -1211,26 +1238,26 @@ fruit.map[toUpperCase]  // same as fruit.map([it | it.toUpperCase])</pre><p>
 					of extension functions taking two parameters: the parent object and a closure to initialize the new child. 
 					Here is an example for creating a simple tree of <code class="prettyprint lang-xtend">Nodes</code>:</p><pre class="prettyprint lang-xtend">
 class Node {
-	String label
-	List&lt;Node&gt; children
-	
-	def createNode(Node parent, (Node)=&gt;void initializer) {
-		val child=new Node()
-		initializer.apply(child)
-		child
-	}
+  String label
+  List&lt;Node&gt; children
+  
+  def createNode(Node parent, (Node)=&gt;void initializer) {
+    val child=new Node()
+    initializer.apply(child)
+    child
+  }
 
-	def tree() {
-		createNode(null) [
-			label="root"
-			children += createNode [
-				label="child0"
-			]
-			children += createNode [
-				label="child1"
-			]
-		]
-	}
+  def tree() {
+    createNode(null) [
+      label="root"
+      children += createNode [
+        label="child0"
+      ]
+      children += createNode [
+        label="child1"
+      ]
+    ]
+  }
 }</pre><p>
 					</p>
 					</section>
@@ -1267,11 +1294,11 @@ if (foo) x else null</pre><p>
 					For a <code class="prettyprint lang-xtend">switch</code> expression 
 					</p><pre class="prettyprint lang-xtend">
 switch e {
-	case e1 : er1
-	case e2 : er2
-	...
-	case en : ern
-	default : er
+  case e1 : er1
+  case e2 : er2
+  ...
+  case en : ern
+  default : er
 }</pre><p>
 					the main expression <code class="prettyprint lang-xtend">e</code> is evaluated first and then each case sequentially. If the switch 
 					expression contains a variable declaration using the syntax known from <a href="#forLoop"></a>, 
@@ -1281,13 +1308,13 @@ switch e {
 					expression of the case evaluated and the result is returned.If none of the guards matches the default expression is evaluated an returned. If no default expression
 					is specified the expression evaluates to <code class="prettyprint lang-xtend">null</code>.Example:</p><pre class="prettyprint lang-xtend">
 switch myString {
-	case myString.length&gt;5 : "a long string."
-	case &apos;some&apos; : "It&apos;s some string."
-	default : "It&apos;s another short string."
+  case myString.length&gt;5 : "a long string."
+  case &apos;some&apos; : "It&apos;s some string."
+  default : "It&apos;s another short string."
 }</pre><p>
 					</p>
 					<!-- subsection -->
-					<section id="Section212">
+					<section id="Section28">
 					<h3>Type guards</h3>
 					<p>
 					In addition to the case guards one can add a so called <strong>Type Guard</strong> which is syntactically just a
@@ -1296,9 +1323,9 @@ switch myString {
 					</p><pre class="prettyprint lang-xtend">
 var Object x = ...;
 switch x {
-	String case x.length()&gt;0 : x.length()
-	List&lt;?&gt; : x.size()
-	default : -1
+  String case x.length()&gt;0 : x.length()
+  List&lt;?&gt; : x.size()
+  default : -1
 					}</pre><p>
 					Only if the switch value passes a type guard, i.e. an instanceof operation returns <code class="prettyprint lang-xtend">true</code>, the 
 					case&apos;s guard expression is executed using the same semantics explained previously. If the switch 
@@ -1319,17 +1346,17 @@ switch x {
 					a block&apos;s last expression.A block expression is surrounded by curly braces and contains at least one expression. It can 
 					optionally be terminated by a semicolon. Here are two examples:</p><pre class="prettyprint lang-xtend">
 {
-	doSideEffect("foo")
-	result
+  doSideEffect("foo")
+  result
 }</pre><p>
 					</p><pre class="prettyprint lang-xtend">
 {
-	var x = greeting();
-	if (x.equals("Hello ")) {
-		x+"World!"; 
-	} else {
-		x;
-	}
+  var x = greeting();
+  if (x.equals("Hello ")) {
+    x+"World!"; 
+  } else {
+    x;
+  }
 }</pre><p>
 					</p>
 					</section>
@@ -1346,11 +1373,11 @@ for (T1 variable : arrayOrIterable) expression</pre><p>
 					In that case it is inferred from the type of the array or <code class="prettyprint lang-xtend">java.lang.Iterable</code> returned by the 
 					iterable expression.</p><pre class="prettyprint lang-xtend">
 for (String s : myStrings) {
-	doSideEffect(s)
+  doSideEffect(s)
 }
 
 for (s : myStrings)
-	doSideEffect(s)</pre><p>
+  doSideEffect(s)</pre><p>
 					</p>
 					</section>
 					<!--  section -->
@@ -1364,11 +1391,11 @@ while (predicate) expression</pre><p>
 					is used to execute a certain expression unless the predicate is evaluated to <code class="prettyprint lang-xtend">false</code>. 
 					The return type of a while loop is <code class="prettyprint lang-xtend">void</code>.</p><pre class="prettyprint lang-xtend">
 while (true) {
-	doSideEffect("foo")
+  doSideEffect("foo")
 }
 
 while ((i=i+1) &lt; max) 
-	doSideEffect("foo")</pre><p>
+  doSideEffect("foo")</pre><p>
 					</p>
 					</section>
 					<!--  section -->
@@ -1384,7 +1411,7 @@ do expression while (predicate)</pre><p>
 					the block once before evaluating the predicate for the first time. The return type of a do-while 
 					loop is <code class="prettyprint lang-xtend">void</code>.</p><pre class="prettyprint lang-xtend">
 do {
-	doSideEffect("foo");
+  doSideEffect("foo");
 } while (true)
 
 
@@ -1399,9 +1426,9 @@ do doSideEffect("foo") while ((i=i+1)&lt;max)</pre><p>
 					In a closure for instance a return expression is always implied if the expression itself is not of 
 					type <code class="prettyprint lang-xtend">void</code>. Anyway you can make it explicit:</p><pre class="prettyprint lang-xtend">
 listOfStrings.map(e| {
-	if (e==null) 
-		return "NULL"
-	e.toUpperCase
+  if (e==null) 
+    return "NULL"
+  e.toUpperCase
 })</pre><p>
 					</p>
 					</section>
@@ -1412,10 +1439,10 @@ listOfStrings.map(e| {
 					Like in Java it is possible to throw <code class="prettyprint lang-xtend">java.lang.Throwable</code>. The syntax is exactly the same as 
 					in Java.</p><pre class="prettyprint lang-xtend">
 {
-	...
-	if (myList.isEmpty)
-		throw new IllegalArgumentException("the list must not be empty")
-	...
+  ...
+  if (myList.isEmpty)
+    throw new IllegalArgumentException("the list must not be empty")
+  ...
 }</pre><p>
 					</p>
 					</section>
@@ -1428,11 +1455,11 @@ listOfStrings.map(e| {
 					rethrown in a wrapping runtime exception. Other than that the syntax again is like the one known 
 					from Java.</p><pre class="prettyprint lang-xtend">
 try {
-	throw new RuntimeException()
+  throw new RuntimeException()
 } catch (NullPointerException e) {
-	// handle e
+  // handle e
 } finally {
-	// do stuff
+  // do stuff
 }</pre><p>
 					</p>
 					</section>
@@ -1459,11 +1486,11 @@ def toClass(Entity e) &apos;&apos;&apos;
 					expected. For instance in conjunction the powerful <a href="#switchExpression">switch expression</a>:
 					</p><pre class="prettyprint lang-xtend">
 toMember(Member m) {
-	switch m {
-		Field : &apos;&apos;&apos;private &laquo;m.type&raquo; &laquo;m.name&raquo; ;&apos;&apos;&apos;
-		Method case isAbstract : &apos;&apos;&apos; abstract &laquo;...&apos;&apos;&apos;
-		Method : &apos;&apos;&apos; ..... &apos;&apos;&apos;
-	}
+  switch m {
+    Field : &apos;&apos;&apos;private &laquo;m.type&raquo; &laquo;m.name&raquo; ;&apos;&apos;&apos;
+    Method case isAbstract : &apos;&apos;&apos; abstract &laquo;...&apos;&apos;&apos;
+    Method : &apos;&apos;&apos; ..... &apos;&apos;&apos;
+  }
 }</pre><p>
 					</p>
 					<!-- subsection -->
@@ -1503,70 +1530,70 @@ toMember(Member m) {
 					for readable templates as well as nicely formatted output. This can be achieved by applying three 
 					simple rules when the rich string is evaluated.<ol>
 						<li>
-								An evaluated rich string as part of another string will be prefixed with the current 
-								indentation of the caller before it is inserted into the result.
-							</li>
+						    An evaluated rich string as part of another string will be prefixed with the current 
+						    indentation of the caller before it is inserted into the result.
+						  </li>
 						<li>
-								Indentation in the template that is relative to a control structure will not be propagated 
-								to the output string. A control structure is a <code class="prettyprint lang-xtend">FOR</code>-loop or a condition 
-								(<code class="prettyprint lang-xtend">IF</code>) as well as the opening and closing marks of the rich string itself.
-								
-								The indentation is considered to be relative to such a control structure if the previous 
-								line ends with a control structure followed by optional white space. The amount of white 
-								space is not taken into account but the delta to the other lines.
-							</li>
+						    Indentation in the template that is relative to a control structure will not be propagated 
+						    to the output string. A control structure is a <code class="prettyprint lang-xtend">FOR</code>-loop or a condition 
+						    (<code class="prettyprint lang-xtend">IF</code>) as well as the opening and closing marks of the rich string itself.
+						    
+						    The indentation is considered to be relative to such a control structure if the previous 
+						    line ends with a control structure followed by optional white space. The amount of white 
+						    space is not taken into account but the delta to the other lines.
+						  </li>
 						<li>
-								Lines that do not contain any static text which is not white space but do contain control 
-								structures or invocations of other templates which evaluate to an empty string, will not 
-								appear in the output.
-							</li>
+						    Lines that do not contain any static text which is not white space but do contain control 
+						    structures or invocations of other templates which evaluate to an empty string, will not 
+						    appear in the output.
+						  </li>
 					</ol>
 					The behavior is best described with a set of examples. The following table assumes a data structure 
 					of nested nodes.<table class="bordered-table zebra-striped">
 					<tr><td>
-								<pre class="prettyprint lang-xtend">
+					      <pre class="prettyprint lang-xtend">
 class Template {
-	print(Node n) &apos;&apos;&apos;
-		node &laquo;n.name&raquo; {}
-	&apos;&apos;&apos;
+  print(Node n) &apos;&apos;&apos;
+    node &laquo;n.name&raquo; {}
+  &apos;&apos;&apos;
 }</pre>
 					
-							</td>
+					    </td>
 					<td>
-								<pre class="prettyprint lang-xtend">
+					      <pre class="prettyprint lang-xtend">
 node NodeName {}</pre>
 					
-							</td>
+					    </td>
 					</tr>
 					</table>
 					The indentation before <code class="prettyprint lang-xtend">node &laquo;n.name&raquo;</code> will be skipped as it is relative to the opening mark of
 					the rich string and thereby not considered to be relevant for the output but only for readability 
 					of the template itself.<table class="bordered-table zebra-striped">
 					<tr><td>
-								<pre class="prettyprint lang-xtend">
+					      <pre class="prettyprint lang-xtend">
 class Template {
-	print(Node n) &apos;&apos;&apos;
-		node &laquo;n.name&raquo; {
-			&laquo;IF hasChildren&raquo;
-				&laquo;n.children.map[print]&raquo;
-			&laquo;ENDIF&raquo;
-		}
-	&apos;&apos;&apos;
+  print(Node n) &apos;&apos;&apos;
+    node &laquo;n.name&raquo; {
+      &laquo;IF hasChildren&raquo;
+        &laquo;n.children.map[print]&raquo;
+      &laquo;ENDIF&raquo;
+    }
+  &apos;&apos;&apos;
 }</pre>
 					
-							</td>
+					    </td>
 					<td>
-								<pre class="prettyprint lang-xtend">
+					      <pre class="prettyprint lang-xtend">
 node Parent{
-	node FirstChild {
-	}
-	node SecondChild {
-		node Leaf {
-		}
-	}
+  node FirstChild {
+  }
+  node SecondChild {
+    node Leaf {
+    }
+  }
 }</pre>
 					
-							</td>
+					    </td>
 					</tr>
 					</table>
 					As in the previous example, there is no indentation on the root level for the same reason.
