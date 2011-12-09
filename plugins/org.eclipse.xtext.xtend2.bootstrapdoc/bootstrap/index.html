@@ -310,7 +310,7 @@ class MyClass {
 					<section id="packageDecl">
 					<h2>Package Declaration</h2>
 					<p>
-					Package declarations are mostly like in Java. There are two the small differences: 
+					Package declarations are mostly like in Java. There are two small differences: 
 					<ul>
 						<li>An identifier can be escaped with a <code class="prettyprint lang-xtend">^</code> character in case it conflicts with a keyword.</li>
 						<li>There is no terminating semicolon.</li>
@@ -630,10 +630,10 @@ public String label(final Object it) {
 					Annotations are available on classes, fields, methods and parameters. Here is an example:</p><pre class="prettyprint lang-xtend">
 @TypeAnnotation(typeof(String))
 class MyClass {
-  @FieldAnnotation(children = {@MyAnno(true), @MyAnno(false)}
+  @FieldAnnotation(children = {@MyAnno(true), @MyAnno(false)})
   String myField
   
-  @MethodAnnotation(children = {@MyAnno(true), @MyAnno}
+  @MethodAnnotation(children = {@MyAnno(true), @MyAnno})
   def String myMethod(@ParameterAnnotation String param) {
     //...
   }
