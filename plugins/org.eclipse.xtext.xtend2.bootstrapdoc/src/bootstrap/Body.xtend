@@ -15,7 +15,7 @@ class Body {
 		'''
 		<div id="maincontainer" class="container">
 			«FOR chapter: document.chapters»
-				«chapter.h1»
+				«(chapter.resolve as Chapter).h1»
 			«ENDFOR»
 		</div>
 		'''
