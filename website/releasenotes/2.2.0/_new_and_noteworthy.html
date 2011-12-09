@@ -52,7 +52,7 @@ have been solved since Xtext 2.1. Here is a summary of the most significant enha
 		<td class="entry_cell">Guava and Inject 3.0</td>
 		<td>
 		<p>
-			Xtext ships now with Google Guava and Google Guice 3.0.  
+			Xtext ships now with Google Guava 10 and Google Guice 3.0.  
 		</p>
 		<img alt="Embedding Xbase - Xtext editor" src="./images/plugin-update-small.png">
 		</td>	
@@ -81,8 +81,7 @@ factory.newEditor(resource).
 		<td class="entry_cell">Constructors</td>
 		<td>
 		<p>
-			It is now possible to declare constructors in Xtend classes. Constructors can delegate to 
-			other constructors from the same class or from super classes. To avoid repetitive typing of 
+			It is now possible to declare constructors in Xtend classes. To avoid redundant typing of 
 			long class names, constructors are always named "new".  
 		</p>
 		<img alt="Xtend - Constructors" src="./images/xtend-constructors.png">
@@ -102,7 +101,8 @@ factory.newEditor(resource).
 		<td class="entry_cell">Field Initializer</td>
 		<td>
 		<p>
-			Field declarations can now specify an expression to initialized the field with a value. 
+			Field declarations can now specify an expression to initialized the field with a value.
+			Note, that since in Xtend everything is an expression, fields can be initialized with whole blocks.
 		</p>
 		<img alt="Xtend - Member Field Initializers" src="./images/xtend-initializers.png">
 		</td>	
@@ -147,10 +147,12 @@ factory.newEditor(resource).
 		</td>	
 	</tr>
 	<tr>
-		<td class="entry_cell">Maven Build</td>
+		<td class="entry_cell">Maven Support</td>
 		<td>
 		<p>
-			Dennis, nu sach ma wat dazu.
+			Xtend compilation can be executed standalone. No Eclipse required.
+			There even is a Maven plugin for that. Also Xtend's standard lib is available
+			from a Maven repository. <a href="http://www.eclipse.org/Xtext/xtend/documentation/index.html#MavenSupport">Read more &raquo;</a>
 		</p>
 <pre>
 &lt;build&gt;
@@ -197,6 +199,8 @@ factory.newEditor(resource).
 		<td>
 		<p>
 			Xtend ships with a small set of libraries, which are now available in a predefined container.
+			There also is a quick fix to add this library to your project's class path conveniently.
+			The library can alternatively be retrieved from a Maven repository :  <a href="documentation/index.html#MavenSupport">Read more &raquo;</a>  
 		</p>
 		<img alt="Xtend - Type Hierarchy" src="./images/tooling-xtend-lib-add.png">
 		<hr/>
