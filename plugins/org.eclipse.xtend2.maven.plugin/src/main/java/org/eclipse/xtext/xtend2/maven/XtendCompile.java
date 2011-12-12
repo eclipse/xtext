@@ -27,7 +27,7 @@ public class XtendCompile extends AbstractXtend2CompilerMojo {
 	/**
 	 * Location of the generated source files.
 	 * 
-	 * @parameter default-value="${basedir}/src/main/xtend-gen"
+	 * @parameter default-value="${basedir}/src/main/generated-sources/xtend"
 	 * @required
 	 */
 	private String outputDirectory;
