@@ -1,7 +1,6 @@
 package org.eclipse.xtext.purexbase.jvmmodel;
 
 import com.google.inject.Inject;
-import java.util.Arrays;
 import java.util.Collection;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -184,11 +183,8 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
   public void infer(final EObject m, final IAcceptor<JvmDeclaredType> acceptor, final boolean prelinkingPhase) {
     if (m instanceof Model) {
       _infer((Model)m, acceptor, prelinkingPhase);
-    } else if (m != null) {
-      _infer(m, acceptor, prelinkingPhase);
     } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(m, acceptor, prelinkingPhase).toString());
+      _infer(m, acceptor, prelinkingPhase);
     }
   }
 }
