@@ -74,7 +74,7 @@ public class FeatureCallValidator extends AbstractDeclarativeValidator {
 		} else if (INVALID_MUTABLE_VARIABLE_ACCESS.equals(issueCode)) {
 			message = "Cannot refer to a non-final variable "+ featureCall.getFeature().getIdentifier() + " from within a closure";
 		} else {
-			message = "Missig error message for " + issueCode;
+			message = "Missing error message for " + issueCode;
 		}
 		if (message != null)
 			error(message, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, issueCode);
