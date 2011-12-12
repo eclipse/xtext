@@ -431,7 +431,7 @@ public class Xtend2BatchCompiler {
 	}
 
 	protected File createTempDir(String prefix) {
-		File tempDir = new File(getTempDirectory(), prefix);
+		File tempDir = new File(getTempDirectory(), prefix + System.nanoTime());
 		cleanFolder(tempDir, ACCEPT_ALL_FILTER, true, true);
 		if (!tempDir.mkdirs()) {
 			throw new RuntimeException("Error creating temp directory '" + tempDir.getAbsolutePath() + "'");
