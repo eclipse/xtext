@@ -30,6 +30,9 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.inject.Injector;
 
+/**
+ * @author Michael Clay - Initial contribution and API
+ */
 public abstract class AbstractXtend2CompilerMojo extends AbstractMojo {
 	protected static final Predicate<String> FILE_EXISTS = new Predicate<String>() {
 
@@ -44,6 +47,12 @@ public abstract class AbstractXtend2CompilerMojo extends AbstractMojo {
 	 * @required
 	 */
 	protected MavenProject project;
+	/**
+     * Xtend-File encoding argument for the compiler.
+     *
+     * @parameter expression="${encoding}" default-value="${project.build.sourceEncoding}"
+     */
+	protected String encoding;
 
 	public void execute() throws MojoExecutionException {
 		configureLog4j();
@@ -63,7 +72,7 @@ public abstract class AbstractXtend2CompilerMojo extends AbstractMojo {
 		Iterable<String> filtered = filter(sourceDirectories, FILE_EXISTS);
 		if (Iterables.isEmpty(filtered)) {
 			getLog().info(
-					"skip compiling sources because (test)sourceDirectory '" + Iterables.toString(sourceDirectories)
+					"skip compiling sources because the configured directory '" + Iterables.toString(sourceDirectories)
 							+ "' does not exists.");
 			return;
 		}
@@ -72,6 +81,7 @@ public abstract class AbstractXtend2CompilerMojo extends AbstractMojo {
 		xtend2BatchCompiler.setClassPath(classPath);
 		xtend2BatchCompiler.setSourcePath(concat(File.pathSeparator, newArrayList(filtered)));
 		xtend2BatchCompiler.setOutputPath(outputPath);
+		xtend2BatchCompiler.setFileEncoding(encoding);
 		if (!xtend2BatchCompiler.compile()) {
 			throw new MojoExecutionException("Error compiling xtend sources in '"
 					+ concat(File.pathSeparator, newArrayList(filtered)) + "'.");

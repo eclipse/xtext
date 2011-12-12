@@ -19,6 +19,7 @@ import com.google.common.collect.Sets;
 /**
  * Goal which compiles Xtend2 sources.
  * 
+ * @author Michael Clay - Initial contribution and API
  * @goal compile
  * @phase generate-sources
  * @requiresDependencyResolution compile

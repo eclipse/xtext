@@ -103,6 +103,7 @@ public class Xtend2BatchCompiler {
 	protected String sourcePath;
 	protected String classPath;
 	protected String outputPath;
+	protected String fileEncoding;
 	protected String complianceLevel = "1.5";
 	protected boolean verbose = false;
 	protected String tempDirectory = System.getProperty("java.io.tmpdir");
@@ -203,6 +204,14 @@ public class Xtend2BatchCompiler {
 		return verbose;
 	}
 
+	public String getFileEncoding() {
+		return fileEncoding;
+	}
+
+	public void setFileEncoding(String encoding) {
+		this.fileEncoding = encoding;
+	}
+
 	public boolean compile() {
 		try {
 			ResourceSet resourceSet = loadXtendFiles();
@@ -230,6 +239,7 @@ public class Xtend2BatchCompiler {
 
 	protected ResourceSet loadXtendFiles() {
 		final ResourceSet resourceSet = resourceSetProvider.get();
+		resourceSet.getLoadOptions().put(XtextResource.OPTION_ENCODING, getFileEncoding());
 		final NameBasedFilter nameBasedFilter = new NameBasedFilter();
 		nameBasedFilter.setExtension(fileExtensionProvider.getPrimaryFileExtension());
 		PathTraverser pathTraverser = new PathTraverser();

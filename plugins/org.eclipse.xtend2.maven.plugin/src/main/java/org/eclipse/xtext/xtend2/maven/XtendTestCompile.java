@@ -18,7 +18,8 @@ import com.google.common.collect.Sets;
 
 /**
  * Goal which compiles Xtend2 test sources.
- * 
+ *
+ * @author Michael Clay - Initial contribution and API
  * @goal testCompile
  * @phase generate-test-sources
  * @requiresDependencyResolution test
