@@ -20,6 +20,7 @@ import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IStorageEditorInput;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder.ILocalResourceAccess;
@@ -80,7 +81,10 @@ public class EditorResourceAccess implements ILocalResourceAccess {
 			return new DisplayRunnableWithResult<IXtextDocument>() {
 				@Override
 				protected IXtextDocument run() throws Exception {
-					IWorkbenchPage activePage = workbench.getActiveWorkbenchWindow().getActivePage();
+					final IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
+					if (activeWorkbenchWindow == null)
+						return null;
+					IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
 					if (activePage == null)
 						return null;
 					for (IEditorReference editorReference : activePage.getEditorReferences()) {
