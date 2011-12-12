@@ -184,7 +184,7 @@
 	
 	<extension
          point="org.eclipse.xtext.xtext.ui.wizardContribution">
-      <generatorConfiguration name="Use Stable API only">
+      <generatorConfiguration name="Use Stable API only" sortKey="2">
          <MweSnippet>
 <![CDATA[
 	bean = StandaloneSetup {
@@ -313,7 +313,7 @@
 
    <extension
          point="org.eclipse.xtext.xtext.ui.wizardContribution">
-      <generatorConfiguration name="Use provisional API (Compare,Refactoring and new Serializer)">
+      <generatorConfiguration name="Use Provisional API (Compare,Refactoring and new Serializer)" sortKey="1">
         <MweSnippet>
 <![CDATA[
     bean = StandaloneSetup {

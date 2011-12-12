@@ -10,7 +10,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.project;
 
-import java.util.ArrayList;
+import static com.google.common.collect.Lists.*;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +33,9 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
+
+import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
 
 /**
  * The main page of the Xtext project wizard.
@@ -103,9 +107,13 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 	protected void fillMweSnippet() {
 		Map<String, WizardContribution> contributions = WizardContribution.getFromRegistry();
 
-		List<String> names = new ArrayList<String>(contributions.keySet());
-
-		Collections.sort(names);
+		List<WizardContribution> contrib = newArrayList(contributions.values());
+		Collections.sort(contrib);
+		List<String> names = newArrayList(Iterables.transform(contrib, new Function<WizardContribution, String>() {
+			public String apply(WizardContribution input) {
+				return input.getName();
+			}
+		}) );
 		if (generatorConfigurationField != null) {
 			generatorConfigurationField.setItems(names.toArray(new String[names.size()]));
 			generatorConfigurationField.select(indexOfDefault(names));
