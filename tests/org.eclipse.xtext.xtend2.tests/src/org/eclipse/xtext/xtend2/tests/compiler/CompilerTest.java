@@ -2417,6 +2417,38 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"x");
 	}
 	
+	public void testBug366293() throws Exception {
+		invokeAndExpect2("success", 
+				"def String whileLoopTest () {\n" + 
+				"        while (true)\n" + 
+				"            try {\n" + 
+				"                return 'success'\n" + 
+				"            }\n" + 
+				"            catch (Exception ex)\n" + 
+				"            {\n" + 
+				"                throw ex\n" + 
+				"            }    \n" +
+				"		 return 'failure'" + 
+				"    }", "whileLoopTest");
+	}
+	
+	public void testBug366293_related() throws Exception {
+		invokeAndExpect2("success", 
+				"def String whileLoopTest () {\n" + 
+						"        do {\n" + 
+						"            try {\n" + 
+						"                toString()\n" +
+						"                return 'success'\n" + 
+						"            }\n" + 
+						"            catch (Exception ex)\n" + 
+						"            {\n" + 
+						"                throw ex\n" + 
+						"            }\n" +
+						"		  } while (true)" + 
+						"    }", "whileLoopTest");
+	}
+
+	
 	@Inject
 	private EclipseRuntimeDependentJavaCompiler javaCompiler;
 

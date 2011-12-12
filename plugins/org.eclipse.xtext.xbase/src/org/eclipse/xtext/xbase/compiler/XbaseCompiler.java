@@ -42,6 +42,7 @@ import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
+import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.typing.Closures;
@@ -52,6 +53,8 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class XbaseCompiler extends FeatureCallCompiler {
+	
+	@Inject IEarlyExitComputer earlyExitComputer;
 	
 	protected void _toJavaStatement(XBlockExpression expr, IAppendable b, boolean isReferenced) {
 		if (expr.getExpressions().isEmpty())
@@ -245,9 +248,12 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.openPseudoScope();
 		internalToJavaStatement(expr.getBody(), b, false);
 		internalToJavaStatement(expr.getPredicate(), b, true);
-		b.append("\n").append(varName).append(" = ");
-		internalToJavaExpression(expr.getPredicate(), b);
-		b.append(";");
+		b.append("\n");
+		if (!earlyExitComputer.isEarlyExit(expr.getBody())) {
+			b.append(varName).append(" = ");
+			internalToJavaExpression(expr.getPredicate(), b);
+			b.append(";");
+		}
 		b.closeScope();
 		b.decreaseIndentation().append("\n}");
 	}
@@ -262,9 +268,12 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append("\ndo {").increaseIndentation();
 		internalToJavaStatement(expr.getBody(), b, false);
 		internalToJavaStatement(expr.getPredicate(), b, true);
-		b.append("\n").append(variable).append(" = ");
-		internalToJavaExpression(expr.getPredicate(), b);
-		b.append(";");
+		b.append("\n");
+		if (!earlyExitComputer.isEarlyExit(expr.getBody())) {
+			b.append(variable).append(" = ");
+			internalToJavaExpression(expr.getPredicate(), b);
+			b.append(";");
+		}
 		b.decreaseIndentation().append("\n} while(");
 		b.append(variable);
 		b.append(");");
