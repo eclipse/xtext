@@ -420,14 +420,19 @@ public class Xtend2QuickfixProvider extends DefaultQuickfixProvider {
 							XtendClass clazz = (XtendClass) element;
 							ReplacingAppendable appendable = appendableFactory.get(context.getXtextDocument(), clazz,
 									superMemberImplementor.getFunctionInsertOffset(clazz), 0);
+							appendable.increaseIndentation();
 							for (String operationUriAsString : issue.getData()) {
 								URI operationURI = URI.createURI(operationUriAsString);
 								EObject overridden = clazz.eResource().getResourceSet().getEObject(operationURI, true);
 								if (overridden instanceof JvmOperation) {
+									appendable.append("\n");
 									superMemberImplementor.appendOverrideFunction(clazz, (JvmOperation) overridden,
 											appendable);
+									appendable.append("\n");
 								}
 							}
+							appendable.decreaseIndentation();
+							appendable.append("\n");
 							appendable.commitChanges();
 						}
 					});
