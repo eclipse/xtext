@@ -4,7 +4,7 @@
 package org.eclipse.xtext.xtend2;
 
 import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.generator.OutputConfigurationProvider;
+import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
@@ -96,7 +96,7 @@ public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2
 		return Xtend2Compiler.class; 
 	}
 	
-	public Class<? extends OutputConfigurationProvider> bindOutputConfigurationProvider() {
+	public Class<? extends IOutputConfigurationProvider> bindIOutputConfigurationProvider() {
 		return Xtend2OutputConfigurationProvider.class;
 	}
 	
