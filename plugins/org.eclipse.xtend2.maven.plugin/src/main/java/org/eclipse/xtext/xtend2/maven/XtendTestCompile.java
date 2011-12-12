@@ -27,7 +27,7 @@ public class XtendTestCompile extends AbstractXtend2CompilerMojo {
 	/**
 	 * Location of the generated test files.
 	 * 
-	 * @parameter default-value="${basedir}/src/test/generated-sources/test-xtend"
+	 * @parameter default-value="${basedir}/src/test/generated-sources/xtend"
 	 * @required
 	 */
 	private String testOutputDirectory;
