@@ -135,7 +135,7 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 	}
 
 	public QuickOutlinePopup(Shell parent) {
-		super(parent, PopupDialog.HOVER_SHELLSTYLE | SWT.RESIZE, true, false, true, true, true, null,
+		super(parent, SWT.RESIZE, true, false, true, true, true, null,
 				Messages.QuickOutlinePopup_pressESC);
 	}
 
