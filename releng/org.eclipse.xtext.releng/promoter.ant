@@ -83,7 +83,7 @@
 	<target name="publish.build">
 		<fail message="build.root property must be defined" unless="build.root" />
 		<property file="${publisher.properties.file.name}" />
-		<property name="property.file.location" location="${build.root}/archive/${promoter.properties.file.name}" />
+		<property name="property.file.location" location="${build.root}/${promoter.properties.file.name}" />
 		<property name="property.load.prefix" value="saved." />
 
 		<antcall target="publish.build.stage.2" inheritall="true" />
@@ -162,9 +162,9 @@
 		<property name="tests.base" value="test.results" />
 		<property name="javadoc.base" value="javadoc" />
 
-		<property name="packages.directory" location="${build.root}/archive/${packages.base}" />
-		<property name="testresults.directory" location="${build.root}/archive/${tests.base}" />
-		<property name="javadoc.directory" location="${build.root}/archive/${javadoc.base}" />
+		<property name="packages.directory" location="${build.root}/${packages.base}" />
+		<property name="testresults.directory" location="${build.root}/${tests.base}" />
+		<property name="javadoc.directory" location="${build.root}/${javadoc.base}" />
 
 		<property name="build.drop.directory" location="${downloads.area}/downloads/drops/${version}/${saved.build.id}" />
 		<available file="${build.drop.directory}" type="dir" property="alreadyPromoted" />
