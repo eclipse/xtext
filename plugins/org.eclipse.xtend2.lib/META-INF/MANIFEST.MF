@@ -2,8 +2,8 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Runtime library for Xtend
 Bundle-SymbolicName: org.eclipse.xtend2.lib
-Bundle-Version: 2.2.0.qualifier
+Bundle-Version: 2.2.1.qualifier
 Bundle-Vendor: Eclipse Modeling
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.2.0";visibility:=reexport
+Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.2.1";visibility:=reexport
 Export-Package: org.eclipse.xtend2.lib
