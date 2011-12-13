@@ -3,7 +3,7 @@
     <resource path="META-INF/MANIFEST.MF">
         <filter id="923795461">
             <message_arguments>
-                <message_argument value="2.2.0"/>
+                <message_argument value="2.2.1"/>
                 <message_argument value="2.1.0"/>
             </message_arguments>
         </filter>
@@ -53,7 +53,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.grammarAccess.GrammarAccess"/>
-                <message_argument value="org.eclipse.xtext.generator_2.2.0"/>
+                <message_argument value="org.eclipse.xtext.generator_2.2.1"/>
             </message_arguments>
         </filter>
     </resource>

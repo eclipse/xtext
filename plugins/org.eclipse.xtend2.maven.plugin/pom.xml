@@ -11,7 +11,7 @@
 		<dependency>
 			<groupId>org.eclipse.xtend2</groupId>
 			<artifactId>org.eclipse.xtend2.standalone</artifactId>
-			<version>2.2.0</version>
+			<version>2.2.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.maven</groupId>

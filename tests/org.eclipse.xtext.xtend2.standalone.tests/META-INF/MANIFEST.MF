@@ -2,14 +2,14 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Standalone compiler tests
 Bundle-SymbolicName: org.eclipse.xtext.xtend2.standalone.tests
-Bundle-Version: 2.2.0.qualifier
+Bundle-Version: 2.2.1.qualifier
 Bundle-Vendor: Eclipse Modeling
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.2.0",
- org.eclipse.xtend2.lib;bundle-version="2.2.0",
- org.eclipse.xtext.junit4;bundle-version="2.2.0",
+Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.2.1",
+ org.eclipse.xtend2.lib;bundle-version="2.2.1",
+ org.eclipse.xtext.junit4;bundle-version="2.2.1",
  org.junit4;bundle-version="4.5.0",
- org.eclipse.xtext.xtend2.standalone;bundle-version="2.2.0",
- org.eclipse.xtext.xtend2;bundle-version="2.2.0",
- org.eclipse.xtext.xtend2.tests;bundle-version="2.2.0",
- org.eclipse.xtext.util;bundle-version="2.2.0"
+ org.eclipse.xtext.xtend2.standalone;bundle-version="2.2.1",
+ org.eclipse.xtext.xtend2;bundle-version="2.2.1",
+ org.eclipse.xtext.xtend2.tests;bundle-version="2.2.1",
+ org.eclipse.xtext.util;bundle-version="2.2.1"

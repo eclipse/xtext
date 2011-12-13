@@ -296,11 +296,11 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 					IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
 		}
 		if (getTypeRefs().findDeclaredType(StringConcatenation.class, clazz) == null) {
-			error("Mandatory library bundle 'org.eclipse.xtend2.lib' 2.2.0 not found on the classpath.", clazz,
+			error("Mandatory library bundle 'org.eclipse.xtend2.lib' 2.2.0 or higher not found on the classpath.", clazz,
 					XTEND_CLASS__NAME, IssueCodes.XTEND_LIB_NOT_ON_CLASSPATH);
 		}
 		if (getTypeRefs().findDeclaredType(Exceptions.class, clazz) == null) {
-			error("Mandatory library bundle 'org.eclipse.xtext.xbase.lib' 2.2.0 not found on the classpath.", clazz,
+			error("Mandatory library bundle 'org.eclipse.xtext.xbase.lib' 2.2.0 or higher not found on the classpath.", clazz,
 					XTEND_CLASS__NAME, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
 		}
 	}
