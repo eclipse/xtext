@@ -1,7 +1,7 @@
 <project default="run">
 
-	<property name="eclipsePluginFolder" value="/Users/huebner/Entwicklung/tycho-workspace/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/" />
-	<property name="xtextPluginFolder" value="/Users/huebner/Downloads/plugins/" />
+	<property name="eclipsePluginFolder" value="/Users/dhuebner/Entwicklung/workspace/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/" />
+	<property name="xtextPluginFolder" value="/Users/dhuebner/Downloads/tmf-xtext-Update-2/plugins/" />
 	<property name="maven.version" value="2.2.1" />
 	<property name="output.folder" value="output" />
 	<echo>${maven.version}</echo>
@@ -38,7 +38,7 @@
           target: clean                      
          - - - - - - - - - - - - - - - - - -->
 	<target name="clean">
-		<delete>
+		<delete failonerror="false">
 			<fileset dir="${output.folder}">
 				<include name="**" />
 			</fileset>
