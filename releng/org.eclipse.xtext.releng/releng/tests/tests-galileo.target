@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.6"?>
 
-<target name="developer-galileo" sequenceNumber="1">
+<target name="tests-galileo" sequenceNumber="1">
 <locations>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.emf.sdk.feature.group" version="2.5.0.v200906151043"/>
@@ -32,15 +32,15 @@
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.xpand.feature.group" version="0.0.0"/>
-<repository location="http://hudson.eclipse.org/hudson/job/Xpand-nightly-HEAD/lastSuccessfulBuild/artifact/xpand.p2.repository/"/>
+<repository location="/shared/jobs/Xpand-nightly-HEAD/lastSuccessful/archive/xpand.p2.repository/"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.emf.mwe.sdk.feature.group" version="0.0.0"/>
-<repository location="http://hudson.eclipse.org/hudson/job/MWE-nightly-HEAD/lastSuccessfulBuild/artifact/mwe.p2.repository/"/>
+<repository location="/shared/jobs/MWE-nightly-HEAD/lastSuccessful/archive/mwe.p2.repository/"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
-<repository location="http://hudson.eclipse.org/hudson/job/Xtext-nightly-HEAD/lastSuccessfulBuild/artifact/xtext.p2.repository/"/>
+<repository location="/shared/jobs/Xtext-nightly-HEAD/lastSuccessful/archive/xtext.p2.repository"/>
 </location>
 </locations>
 </target>
