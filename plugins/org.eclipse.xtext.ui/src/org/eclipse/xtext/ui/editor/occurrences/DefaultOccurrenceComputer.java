@@ -92,8 +92,7 @@ public class DefaultOccurrenceComputer implements IOccurrenceComputer {
 					IQueryData queryData = queryDataFactory.createQueryData(target, resource.getURI());
 					IAcceptor<IReferenceDescription> acceptor = new IAcceptor<IReferenceDescription>() {
 						public void accept(IReferenceDescription reference) {
-							if (resource.getURI().equals(reference.getSourceEObjectUri().trimFragment()))
-								references.add(reference);
+							references.add(reference);
 						}
 					};
 					if (target.eResource() == resource) {
@@ -112,11 +111,15 @@ public class DefaultOccurrenceComputer implements IOccurrenceComputer {
 					}
 					monitor.worked(5);
 					for (IReferenceDescription reference : references) {
-						EObject source = resource.getEObject(reference.getSourceEObjectUri().fragment());
-						if (source != null && reference.getEReference() != null) { // prevent exception for outdated data
-							ITextRegion textRegion = locationInFileProvider.getSignificantTextRegion(source,
-									reference.getEReference(), reference.getIndexInList());
-							addOccurrenceAnnotation(OCCURRENCE_ANNOTATION_TYPE, document, textRegion, result);
+						try {
+							EObject source = resource.getEObject(reference.getSourceEObjectUri().fragment());
+							if (source != null && reference.getEReference() != null) { // prevent exception for outdated data
+								ITextRegion textRegion = locationInFileProvider.getSignificantTextRegion(source,
+										reference.getEReference(), reference.getIndexInList());
+								addOccurrenceAnnotation(OCCURRENCE_ANNOTATION_TYPE, document, textRegion, result);
+							}
+						} catch(Exception exc) {
+							// outdated index information. Ignore
 						}
 					}
 					monitor.worked(15);
