@@ -25,7 +25,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
    </license>
 
    <url>
-      <update label="%updateSiteName" url="http://download.eclipse.org/modeling/tmf/updates/"/>
+      <update label="%updateSiteName" url="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases"/>
    </url>
 
    <includes
