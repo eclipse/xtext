@@ -647,10 +647,16 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			if (field == null) {
 				throw new NoSuchFieldException("Could not find field " + jvmField.getIdentifier());
 			}
+			if(!Modifier.isStatic(field.getModifiers()) && receiver == null) {
+				throw new EvaluationException(new NullPointerException("cannot access field " + field + " on null"));
+			}
 			field.setAccessible(true);
 			Object result = field.get(receiver);
 			return result;
-		} catch (Exception e) {
+		} catch(EvaluationException ee) {
+			 throw ee;
+		}
+		catch (Exception e) {
 			throw new IllegalStateException("Could not access field: " + jvmField.getIdentifier()
 					+ " on instance: " + receiver, e);
 		}

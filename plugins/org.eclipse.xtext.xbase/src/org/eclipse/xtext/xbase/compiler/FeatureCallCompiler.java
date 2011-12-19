@@ -50,7 +50,7 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class FeatureCallCompiler extends LiteralsCompiler {
-	
+
 	private final static Logger log = Logger.getLogger(FeatureCallCompiler.class);
 
 	@Inject
@@ -58,19 +58,19 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 
 	@Inject
 	private IdentifiableSimpleNameProvider featureNameProvider;
-	
+
 	@Inject
-	private XExpressionHelper expressionHelper; 
-	
+	private XExpressionHelper expressionHelper;
+
 	@Inject
 	private JvmOnlyTypeConformanceComputer jvmConformance;
-	
-	@Inject
-	private Primitives primitives; 
 
-	@Inject 
+	@Inject
+	private Primitives primitives;
+
+	@Inject
 	private ILogicalContainerProvider contextProvider;
-	
+
 	protected void _toJavaStatement(final XAbstractFeatureCall expr, final IAppendable b, boolean isReferenced) {
 		if (isSpreadingMemberFeatureCall(expr)) {
 			prepareSpreadingMemberFeatureCall((XMemberFeatureCall) expr, b);
@@ -104,7 +104,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			}
 		}
 	}
-	
+
 	protected void _toJavaStatement(final XFeatureCall expr, final IAppendable b, boolean isReferenced) {
 		if (expr.getFeature() instanceof JvmConstructor) {
 			b.append("\n");
@@ -115,9 +115,8 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 	}
 
-	protected void generateShortCircuitInvocation(final XAbstractFeatureCall binaryOperation,
-			final IAppendable b) {
-		XExpression leftOperand = ((XBinaryOperation)binaryOperation).getLeftOperand();
+	protected void generateShortCircuitInvocation(final XAbstractFeatureCall binaryOperation, final IAppendable b) {
+		XExpression leftOperand = ((XBinaryOperation) binaryOperation).getLeftOperand();
 		declareSyntheticVariable(binaryOperation, b);
 		prepareExpression(leftOperand, b);
 		b.append("\nif (");
@@ -127,72 +126,69 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		toJavaExpression(leftOperand, b);
 		b.append(") {").increaseIndentation();
 		boolean rightOperand = binaryOperation.getConcreteSyntaxFeatureName().equals(expressionHelper.getOrOperator());
-		b.append("\n").append(b.getName(binaryOperation)).append(" = ").append(Boolean.toString(rightOperand)).append(";");
-		
+		b.append("\n").append(b.getName(binaryOperation)).append(" = ").append(Boolean.toString(rightOperand))
+				.append(";");
+
 		b.decreaseIndentation().append("\n} else {").increaseIndentation();
-		
-		if (binaryOperation.getImplicitReceiver()!=null) {
+
+		if (binaryOperation.getImplicitReceiver() != null) {
 			internalToJavaStatement(binaryOperation.getImplicitReceiver(), b, true);
 		}
 		for (XExpression arg : binaryOperation.getExplicitArguments()) {
-			if (arg!=leftOperand)
+			if (arg != leftOperand)
 				prepareExpression(arg, b);
 		}
-		
+
 		b.append("\n").append(b.getName(binaryOperation)).append(" = ");
 		featureCalltoJavaExpression(binaryOperation, b);
 		b.append(";");
 		b.decreaseIndentation().append("\n}");
 	}
-	
+
 	@Override
 	protected boolean isVariableDeclarationRequired(XExpression expr, IAppendable b) {
 		if (expr instanceof XAssignment)
 			return true;
 		if (expr instanceof XAbstractFeatureCall) {
-			JvmIdentifiableElement feature = ((XAbstractFeatureCall)expr).getFeature();
-			if (feature instanceof JvmField 
-				|| feature instanceof JvmFormalParameter)
+			JvmIdentifiableElement feature = ((XAbstractFeatureCall) expr).getFeature();
+			if ((feature instanceof JvmField && expr instanceof XMemberFeatureCall && !((XMemberFeatureCall) expr)
+					.isNullSafe()) || feature instanceof JvmFormalParameter)
 				return false;
-			return b.getName(feature)==null;
+			return b.getName(feature) == null;
 		}
-		return super.isVariableDeclarationRequired(expr,b);
+		return super.isVariableDeclarationRequired(expr, b);
 	}
 
 	protected void prepareSpreadingMemberFeatureCall(XMemberFeatureCall expr, IAppendable b) {
 		throw new UnsupportedOperationException("spread operator not yet supported");
-//		prepareAllArguments(expr, b);
-//		declareLocalVariable(expr, b, Lists.class.getCanonicalName() + ".newArrayList()");
-//		b.append("\nfor(");
-//		final String varName = getJavaVarName(expr, b) + "_spread";
-//		b.append(makeJavaIdentifier(varName)).append(" : ");
-////		toConvertedJavaExpression(expr, b);
-//		b.append(") {");
-//		b.append("\n").append(getJavaVarName(expr, b)).append("add(");
-//		b.append(varName).append(".");
-//		appendFeatureCall(expr, b);
-//		b.append(";");
+		//		prepareAllArguments(expr, b);
+		//		declareLocalVariable(expr, b, Lists.class.getCanonicalName() + ".newArrayList()");
+		//		b.append("\nfor(");
+		//		final String varName = getJavaVarName(expr, b) + "_spread";
+		//		b.append(makeJavaIdentifier(varName)).append(" : ");
+		////		toConvertedJavaExpression(expr, b);
+		//		b.append(") {");
+		//		b.append("\n").append(getJavaVarName(expr, b)).append("add(");
+		//		b.append(varName).append(".");
+		//		appendFeatureCall(expr, b);
+		//		b.append(";");
 	}
-	
+
 	protected void prepareExpression(XExpression arg, IAppendable b) {
-		if (arg instanceof XAbstractFeatureCall && !(((XAbstractFeatureCall)arg).getFeature() instanceof JvmField) && !isVariableDeclarationRequired(arg,b)) {
+		if (arg instanceof XAbstractFeatureCall && !(((XAbstractFeatureCall) arg).getFeature() instanceof JvmField)
+				&& !isVariableDeclarationRequired(arg, b)) {
 			JvmTypeReference expectedType = getTypeProvider().getExpectedType(arg);
 			JvmTypeReference type = getTypeProvider().getType(arg);
-			if (expectedType != null && !jvmConformance.isConformant( expectedType, type ) ) {
+			if (expectedType != null && !jvmConformance.isConformant(expectedType, type)) {
 				String varName = getVarName(((XAbstractFeatureCall) arg).getFeature(), b);
-				String finalVariable = b.declareSyntheticVariable(Tuples.create("Convertable", arg), "_typeConverted_" + varName);
-				b.append("\n")
-					.append("final ");
-				serialize(type,arg,b);
-				b.append(" ")
-					.append(finalVariable)
-					.append(" = ")
-					.append("(");
-				serialize(type,arg,b);
-				b.append(")")
-					.append(varName)
-					.append(";");
-			}	
+				String finalVariable = b.declareSyntheticVariable(Tuples.create("Convertable", arg), "_typeConverted_"
+						+ varName);
+				b.append("\n").append("final ");
+				serialize(type, arg, b);
+				b.append(" ").append(finalVariable).append(" = ").append("(");
+				serialize(type, arg, b);
+				b.append(")").append(varName).append(";");
+			}
 		} else {
 			internalToJavaStatement(arg, b, true);
 		}
@@ -201,7 +197,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	protected boolean isSpreadingMemberFeatureCall(XAbstractFeatureCall expr) {
 		return expr instanceof XMemberFeatureCall && ((XMemberFeatureCall) expr).isSpreading();
 	}
-	
+
 	protected void _toJavaExpression(XAbstractFeatureCall call, IAppendable b) {
 		if (isPrimitiveVoid(call)) {
 			b.append("null");
@@ -209,14 +205,14 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			throw new UnsupportedOperationException();
 			//			b.append(getVarName(call));
 		} else {
-			if (!isVariableDeclarationRequired(call,b)) {
+			if (!isVariableDeclarationRequired(call, b)) {
 				if (call.getFeature() instanceof JvmField) {
 					if (isStatic(call.getFeature())) {
 						b.append(((JvmFeature) call.getFeature()).getDeclaringType());
 						b.append(".");
 					} else {
 						XExpression receiver = featureCallToJavaMapping.getActualReceiver(call);
-						if (receiver!=null) {
+						if (receiver != null) {
 							internalToJavaExpression(receiver, b);
 							b.append(".");
 						}
@@ -226,7 +222,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 					if (b.getName(call.getFeature()) == null) {
 						String variableName = getFavoriteVariableName(call.getFeature());
 						if (log.isInfoEnabled())
-							log.info("The variable '"+variableName+"' has not been declared.");
+							log.info("The variable '" + variableName + "' has not been declared.");
 						b.declareSyntheticVariable(call.getFeature(), variableName);
 					}
 					final String varName = getVarName(call.getFeature(), b);
@@ -241,8 +237,9 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	protected void featureCalltoJavaExpression(final XAbstractFeatureCall call, IAppendable b) {
 		featureCalltoJavaExpression(call, b, false);
 	}
-	
-	protected void featureCalltoJavaExpression(final XAbstractFeatureCall call, IAppendable b, boolean unpreparedArguments) {
+
+	protected void featureCalltoJavaExpression(final XAbstractFeatureCall call, IAppendable b,
+			boolean unpreparedArguments) {
 		if (call instanceof XAssignment) {
 			xAssignmentToJavaExpression((XAssignment) call, b);
 			return;
@@ -252,7 +249,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			b.append(".");
 			if (!call.getTypeArguments().isEmpty()) {
 				b.append("<");
-				for(int i = 0; i < call.getTypeArguments().size(); i++) {
+				for (int i = 0; i < call.getTypeArguments().size(); i++) {
 					if (i != 0) {
 						b.append(", ");
 					}
@@ -264,30 +261,30 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				final JvmExecutable executable = (JvmExecutable) call.getFeature();
 				if (!executable.getTypeParameters().isEmpty()) {
 					XExpression receiver = featureCallToJavaMapping.getActualReceiver(call);
-					final JvmTypeReference receiverType = receiver != null
-						? getTypeProvider().getType(receiver)
-						: null;
+					final JvmTypeReference receiverType = receiver != null ? getTypeProvider().getType(receiver) : null;
 					final JvmTypeReference expectedType = getTypeProvider().getExpectedType(call);
 					final List<JvmTypeReference> argumentTypes = Lists.newArrayList();
-					for(XExpression argument: featureCallToJavaMapping.getActualArguments(call)) {
+					for (XExpression argument : featureCallToJavaMapping.getActualArguments(call)) {
 						argumentTypes.add(getTypeProvider().getType(argument));
 					}
-					
+
 					ITypeArgumentContext typeArgumentContext = getContextProvider().getTypeArgumentContext(
 							new TypeArgumentContextProvider.AbstractRequest() {
 								@Override
 								public JvmFeature getFeature() {
 									return executable;
 								}
+
 								@Override
 								public JvmTypeParameterDeclarator getNearestDeclarator() {
 									EObject context = call;
 									JvmTypeParameterDeclarator result = null;
-									while(context != null && result == null) {
+									while (context != null && result == null) {
 										if (context instanceof JvmTypeParameterDeclarator) {
 											result = (JvmTypeParameterDeclarator) context;
 										} else {
-											JvmIdentifiableElement logicalContainer = contextProvider.getLogicalContainer(context);
+											JvmIdentifiableElement logicalContainer = contextProvider
+													.getLogicalContainer(context);
 											if (logicalContainer != null) {
 												context = logicalContainer;
 											} else {
@@ -297,33 +294,37 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 									}
 									return result;
 								}
+
 								@Override
 								public JvmTypeReference getDeclaredType() {
 									if (executable instanceof JvmOperation)
 										return ((JvmOperation) executable).getReturnType();
 									return null;
 								}
+
 								@Override
 								public JvmTypeReference getReceiverType() {
 									return receiverType;
 								}
+
 								@Override
 								public JvmTypeReference getExpectedType() {
 									return expectedType;
 								}
+
 								@Override
 								public List<JvmTypeReference> getArgumentTypes() {
 									return argumentTypes;
 								}
+
 								@Override
 								public String toString() {
 									return "FeatureCallCompiler.featureCalltoJavaExpression [call=" + call + "]";
 								}
-							}
-					);
+							});
 					List<JvmTypeReference> resolvedTypeArguments = Lists.newArrayList();
 					boolean containedUnresolved = false;
-					for(int i = 0; i < executable.getTypeParameters().size() && !containedUnresolved; i++) {
+					for (int i = 0; i < executable.getTypeParameters().size() && !containedUnresolved; i++) {
 						JvmTypeParameter typeParameter = executable.getTypeParameters().get(i);
 						JvmTypeReference typeArgument = typeArgumentContext.getBoundArgument(typeParameter);
 						if (typeArgument != null) {
@@ -342,12 +343,12 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 					}
 					if (!containedUnresolved) {
 						b.append("<");
-						for(int i = 0; i < resolvedTypeArguments.size(); i++) {
+						for (int i = 0; i < resolvedTypeArguments.size(); i++) {
 							if (i != 0) {
 								b.append(", ");
 							}
 							JvmTypeReference typeArgument = resolvedTypeArguments.get(i);
-							serialize(typeArgument,call,b);
+							serialize(typeArgument, call, b);
 						}
 						b.append(">");
 					}
@@ -364,7 +365,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				internalToJavaExpression(expr.getMemberCallTarget(), b);
 				b.append("==null?");
 				JvmTypeReference type = getTypeProvider().getType(call);
-				appendNullValue(type,call,b);
+				appendNullValue(type, call, b);
 				b.append(":");
 			} else if (expr.isSpreading()) {
 				throw new UnsupportedOperationException();
@@ -382,18 +383,18 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			return false;
 		}
 	}
-		
+
 	protected void appendNullValue(JvmTypeReference type, EObject context, IAppendable b) {
-		if(!primitives.isPrimitive(type)) {
+		if (!primitives.isPrimitive(type)) {
 			b.append("(");
-			serialize(type, context,b);
+			serialize(type, context, b);
 			b.append(")");
 			b.append("null");
 		} else {
-			b.append(getDefaultLiteral((JvmPrimitiveType)type.getType()));
+			b.append(getDefaultLiteral((JvmPrimitiveType) type.getType()));
 		}
 	}
-	
+
 	protected String getDefaultLiteral(JvmPrimitiveType primitiveType) {
 		final String name = primitiveType.getIdentifier();
 		if (Boolean.TYPE.getName().equals(name)) {
@@ -420,11 +421,9 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		if (Double.TYPE.getName().equals(name)) {
 			return "0.0";
 		}
-		throw new IllegalArgumentException("Unkown primitive "+name);
+		throw new IllegalArgumentException("Unkown primitive " + name);
 	}
 
-
-	
 	protected boolean isMemberCall(XAbstractFeatureCall call) {
 		return featureCallToJavaMapping.isTargetsMemberSyntaxCall(call, call.getFeature(), call.getImplicitReceiver());
 	}
@@ -470,7 +469,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			if (contextType == constructorContainer)
 				name = "this";
 			else
-				name = "super";	
+				name = "super";
 		} else {
 			name = featureNameProvider.getSimpleName(feature);
 		}
@@ -478,7 +477,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		if (feature instanceof JvmExecutable) {
 			b.append("(");
 			List<XExpression> arguments = featureCallToJavaMapping.getActualArguments(call);
-			appendArguments(arguments, (JvmExecutable)feature, call, b, forceArgumentsAsExpression);
+			appendArguments(arguments, (JvmExecutable) feature, call, b, forceArgumentsAsExpression);
 			b.append(")");
 		}
 	}
@@ -493,7 +492,8 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		return typeArg;
 	}
 
-	protected void appendArguments(List<? extends XExpression> arguments, JvmExecutable executable, XExpression context, IAppendable b, boolean forceArgumentsAsExpression) {
+	protected void appendArguments(List<? extends XExpression> arguments, JvmExecutable executable,
+			XExpression context, IAppendable b, boolean forceArgumentsAsExpression) {
 		if (arguments == null)
 			return;
 		for (int i = 0; i < arguments.size(); i++) {
