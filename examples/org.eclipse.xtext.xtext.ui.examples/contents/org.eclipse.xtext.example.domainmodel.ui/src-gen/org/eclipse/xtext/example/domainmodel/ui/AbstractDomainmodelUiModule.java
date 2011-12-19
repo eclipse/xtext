@@ -214,18 +214,13 @@ public abstract class AbstractDomainmodelUiModule extends DefaultUiModule {
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
-	public Class<? extends org.eclipse.xtext.ui.editor.findrefs.FindReferenceQueryDataFactory> bindFindReferenceQueryDataFactory() {
-		return org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelFindReferenceQueryDataFactory.class;
+	public Class<? extends org.eclipse.xtext.ui.editor.findrefs.ReferenceQueryExecutor> bindReferenceQueryExecutor() {
+		return org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelReferenceQueryExecutor.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator> bindIDependentElementsCalculator() {
 		return org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelDependentElementsCalculator.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
-	public Class<? extends org.eclipse.xtext.ui.refactoring.impl.RefactoringReferenceQueryDataFactory> bindRefactoringReferenceQueryDataFactory() {
-		return org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelFindRefsQueryDataFactory.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
