@@ -84,7 +84,7 @@ public class TypeArgumentContext implements ITypeArgumentContext {
 		
 		@Override
 		protected JvmTypeReference handleNullReference(Boolean parameter) {
-			return null;
+			return TypesFactory.eINSTANCE.createJvmUnknownTypeReference();
 		}
 		@Override
 		public JvmTypeReference doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference, Boolean replaceWildcards) {
@@ -220,7 +220,8 @@ public class TypeArgumentContext implements ITypeArgumentContext {
 					result.setType(type);
 					if (!isRawTypeContext()) {
 						for(JvmTypeReference argument: reference.getArguments()) {
-							result.getArguments().add(visit(argument, Boolean.FALSE));
+							final JvmTypeReference visit = visit(argument, Boolean.FALSE);
+							result.getArguments().add(visit);
 						}
 					}
 					return result;
