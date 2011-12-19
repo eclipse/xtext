@@ -191,7 +191,8 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 		return null;
 	}
 	
-	public Class<? extends IOccurrenceComputer> bindDefaultOccurrenceComputer() {
+	@Override
+	public Class<? extends IOccurrenceComputer> bindIOccurrenceComputer() {
 		return OccurrenceComputer.class;
 	}
 	
