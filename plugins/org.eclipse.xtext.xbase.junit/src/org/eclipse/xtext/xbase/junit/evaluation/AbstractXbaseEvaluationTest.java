@@ -842,6 +842,14 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo(null, "(null as Object)?.toString()?.toString()");
 	}
 	
+	@Test public void testNullSafeFieldAccess_0() throws Exception {
+		assertEvaluatesWithException(NullPointerException.class, "new foo.FieldAccess().child.child");
+	}
+
+	@Test public void testNullSafeFieldAccess_1() throws Exception {
+		assertEvaluatesTo(null, "new foo.FieldAccess()?.child?.child");
+	}
+	
 //	TODO see https://bugs.eclipse.org/bugs/show_bug.cgi?id=341048
 //	@Test public void testSpreadOperator_01() throws Exception {
 //		assertEvaluatesWithException(NullPointerException.class, "(null as java.util.List<Object>)*.toString()");
