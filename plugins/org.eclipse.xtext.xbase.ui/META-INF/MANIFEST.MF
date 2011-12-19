@@ -36,6 +36,7 @@ Export-Package: org.eclipse.xtext.xbase.annotations.ui;x-friends:="org.eclipse.x
  org.eclipse.xtext.xbase.ui.internal;x-friends:="org.eclipse.xtext.xbase.ui.tests",
  org.eclipse.xtext.xbase.ui.jvmmodel.findrefs;x-friends:="org.eclipse.xtext.xbase.ui.tests",
  org.eclipse.xtext.xbase.ui.jvmmodel.navigation;x-internal:=true,
+ org.eclipse.xtext.xbase.ui.jvmmodel.occurrence;x-internal:=true,
  org.eclipse.xtext.xbase.ui.jvmmodel.outline;x-internal:=true,
  org.eclipse.xtext.xbase.ui.jvmmodel.refactoring;x-friends:="org.eclipse.xtext.xbase.ui.tests",
  org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt;x-friends:="org.eclipse.xtext.xbase.ui.tests",

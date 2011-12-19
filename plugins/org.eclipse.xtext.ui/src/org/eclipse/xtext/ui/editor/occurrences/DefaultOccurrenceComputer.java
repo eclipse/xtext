@@ -13,9 +13,11 @@ import static java.util.Collections.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
@@ -82,7 +84,7 @@ public class DefaultOccurrenceComputer implements IOccurrenceComputer {
 		return document.readOnly(new IUnitOfWork<Map<Annotation, Position>, XtextResource>() {
 			public Map<Annotation, Position> exec(final XtextResource resource) throws Exception {
 				EObject target = eObjectAtOffsetHelper.resolveElementAt(resource, (selection).getOffset());
-				if (target != null) {
+				if (target != null && ! target.eIsProxy()) {
 					monitor.setWorkRemaining(100);
 					final List<IReferenceDescription> references = newArrayList();
 					IAcceptor<IReferenceDescription> acceptor = new IAcceptor<IReferenceDescription>() {
@@ -90,7 +92,7 @@ public class DefaultOccurrenceComputer implements IOccurrenceComputer {
 							references.add(reference);
 						}
 					};
-					referenceFinder.findReferences(singleton(EcoreUtil2.getNormalizedURI(target)), 
+					referenceFinder.findReferences(getTargetURIs(target), 
 							singleton(resource.getURI()), editorResourceAccess, acceptor, monitor.newChild(40));
 					if (monitor.isCanceled())
 						return emptyMap();
@@ -119,7 +121,15 @@ public class DefaultOccurrenceComputer implements IOccurrenceComputer {
 				}
 				return emptyMap();
 			}
+
 		});
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	protected Iterable<URI> getTargetURIs(EObject target) {
+		return singleton(EcoreUtil2.getNormalizedURI(target));
 	}
 	
 	/**

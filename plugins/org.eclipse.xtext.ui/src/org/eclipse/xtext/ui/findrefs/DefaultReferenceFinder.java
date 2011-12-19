@@ -11,6 +11,7 @@ import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Maps.*;
 import static com.google.common.collect.Sets.*;
 import static java.util.Collections.*;
+import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.Collection;
 import java.util.List;
@@ -21,6 +22,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
@@ -152,7 +154,7 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 					}
 				}
 			} catch (Exception exc) {
-				LOG.error("Error finding references", exc);
+				LOG.error("Error finding reference to " + notNull(targetURI), exc);
 			}
 		}
 	}
