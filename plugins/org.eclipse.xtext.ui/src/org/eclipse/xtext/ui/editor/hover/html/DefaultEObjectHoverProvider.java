@@ -48,7 +48,6 @@ import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.internal.XtextPluginImages;
-import org.w3c.dom.html.HTMLParagraphElement;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
