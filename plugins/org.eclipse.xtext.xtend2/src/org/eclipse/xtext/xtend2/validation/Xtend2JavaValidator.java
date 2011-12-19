@@ -1033,24 +1033,40 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 		}
 	}
 	
+	public boolean doCheckValidMemberName(XtendMember member) {
+		EStructuralFeature nameAttribute = member.eClass().getEStructuralFeature("name");
+		if(nameAttribute != null) {
+			String name = (String) member.eGet(nameAttribute);
+			if(name != null && (name.equals("this") || name.equals("it"))) { 
+				error("'it' and 'this' are not allowed as member names", nameAttribute, INVALID_MEMBER_NAME);
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	@Check
 	public void checkLocalUsageOfDeclaredFields(XtendField field){
-		JvmField jvmField = associations.getJvmField(field);
-		if(jvmField.getVisibility() == JvmVisibility.PRIVATE && !isLocallyUsed(jvmField, field.eContainer())){
-				String message = "The value of the field " + jvmField.getDeclaringType().getSimpleName()+"."
-							+ jvmField.getSimpleName() + " is not used";
+		if(doCheckValidMemberName(field)) {
+			JvmField jvmField = associations.getJvmField(field);
+			if (jvmField.getVisibility() == JvmVisibility.PRIVATE && !isLocallyUsed(jvmField, field.eContainer())) {
+				String message = "The value of the field " + jvmField.getDeclaringType().getSimpleName() + "."
+						+ jvmField.getSimpleName() + " is not used";
 				warning(message, Xtend2Package.Literals.XTEND_FIELD__NAME, FIELD_LOCALLY_NEVER_READ);
+			}
 		}
 	}
 	
 	@Check
 	public void checkLocalUsageOfDeclaredXtendFunction(XtendFunction function){
-		JvmOperation jvmOperation = function.isDispatch()?associations.getDispatchOperation(function):associations.getDirectlyInferredOperation(function);
-		if(jvmOperation.getVisibility() == JvmVisibility.PRIVATE && !isLocallyUsed(jvmOperation, function.eContainer())){
-			String message = "The method " + jvmOperation.getSimpleName() 
-					+  uiStrings.parameters(jvmOperation)  
-					+ " from the type "+jvmOperation.getDeclaringType().getSimpleName()+" is never used locally.";
-			warning(message, Xtend2Package.Literals.XTEND_FUNCTION__NAME, FUNCTION_LOCALLY_NEVER_USED);
+		if(doCheckValidMemberName(function)) {
+			JvmOperation jvmOperation = function.isDispatch()?associations.getDispatchOperation(function):associations.getDirectlyInferredOperation(function);
+			if(jvmOperation.getVisibility() == JvmVisibility.PRIVATE && !isLocallyUsed(jvmOperation, function.eContainer())){
+				String message = "The method " + jvmOperation.getSimpleName() 
+						+  uiStrings.parameters(jvmOperation)  
+						+ " from the type "+jvmOperation.getDeclaringType().getSimpleName()+" is never used locally.";
+				warning(message, Xtend2Package.Literals.XTEND_FUNCTION__NAME, FUNCTION_LOCALLY_NEVER_USED);
+			}
 		}
 	}
 	
