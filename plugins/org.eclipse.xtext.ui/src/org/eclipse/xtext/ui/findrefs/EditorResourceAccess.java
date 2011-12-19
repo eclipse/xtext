@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.editor.findrefs;
+package org.eclipse.xtext.ui.findrefs;
 
 import static com.google.common.collect.Iterables.*;
 
@@ -23,7 +23,6 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder.ILocalResourceAccess;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
@@ -36,8 +35,9 @@ import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @since 2.3
  */
-public class EditorResourceAccess implements ILocalResourceAccess {
+public class EditorResourceAccess implements IReferenceFinder.ILocalResourceAccess {
 
 	private static final Logger LOG = Logger.getLogger(EditorResourceAccess.class);
 

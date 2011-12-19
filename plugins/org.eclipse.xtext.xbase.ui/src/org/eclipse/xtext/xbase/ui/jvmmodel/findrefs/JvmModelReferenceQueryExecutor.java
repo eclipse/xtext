@@ -15,7 +15,7 @@ import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.resource.IReferenceDescription;
-import org.eclipse.xtext.ui.editor.findrefs.FindReferenceQueryDataFactory;
+import org.eclipse.xtext.ui.editor.findrefs.ReferenceQueryExecutor;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 
 import com.google.common.base.Predicate;
@@ -25,22 +25,27 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("restriction")
-public class JvmModelFindReferenceQueryDataFactory extends FindReferenceQueryDataFactory {
+public class JvmModelReferenceQueryExecutor extends ReferenceQueryExecutor {
 
 	@Inject
 	private IJvmModelAssociations jvmModelAssociations;
-
+	
 	@Override
-	protected Predicate<IReferenceDescription> createResultFilter(EObject target) {
-		return new JvmModelReferenceFilter();
+	protected String getLabelPrefix() {
+		return "JVM References to ";
 	}
-
+	
 	@Override
-	protected Set<URI> createTargetURIs(EObject target) {
+	protected Iterable<URI> getTargetURIs(EObject target) {
 		Set<URI> targetURIs = newLinkedHashSet();
 		targetURIs.add(getURI(target));
 		for (EObject jvmElement : jvmModelAssociations.getJvmElements(target))
 			targetURIs.add(getURI(jvmElement));
 		return targetURIs;
+	}
+	
+	@Override
+	protected Predicate<IReferenceDescription> getFilter(EObject primaryTarget) {
+		return new JvmModelReferenceFilter();
 	}
 }

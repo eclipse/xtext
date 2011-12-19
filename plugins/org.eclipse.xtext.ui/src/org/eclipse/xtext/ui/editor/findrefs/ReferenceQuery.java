@@ -11,10 +11,14 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.search.ui.ISearchQuery;
 import org.eclipse.search.ui.ISearchResult;
-import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder.IQueryData;
+import org.eclipse.xtext.resource.IReferenceDescription;
+import org.eclipse.xtext.ui.findrefs.EditorResourceAccess;
+import org.eclipse.xtext.ui.findrefs.IReferenceFinder;
 
+import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 
 /**
@@ -30,13 +34,19 @@ public class ReferenceQuery implements ISearchQuery {
 
 	private ReferenceSearchResult searchResult;
 
-	private IQueryData queryData;
+	private String label;
+	
+	private Iterable<URI> targetURIs;
+
+	private Predicate<IReferenceDescription> filter;
 
 	public ReferenceQuery() {
 	}
 
-	public void init(IQueryData queryData) {
-		this.queryData = queryData;
+	public void init(Iterable<URI> targetURIs, Predicate<IReferenceDescription> filter, String label) {
+		this.targetURIs = targetURIs;
+		this.label = label;
+		this.filter = filter;
 		this.searchResult = createSearchResult();
 	}
 
@@ -49,16 +59,20 @@ public class ReferenceQuery implements ISearchQuery {
 	}
 
 	public String getLabel() {
-		return queryData.getLabel();
+		return label;
 	}
-
+	
+	public Predicate<IReferenceDescription> getFilter() {
+		return filter;
+	}
+	
 	public ISearchResult getSearchResult() {
 		return searchResult;
 	}
 
 	public IStatus run(IProgressMonitor monitor) throws OperationCanceledException {
 		searchResult.reset();
-		finder.findAllReferences(queryData, localContextProvider, searchResult, monitor);
+		finder.findAllReferences(targetURIs, localContextProvider, searchResult, monitor);
 		searchResult.finish();
 		return (monitor.isCanceled()) ? Status.CANCEL_STATUS : Status.OK_STATUS;
 	}
