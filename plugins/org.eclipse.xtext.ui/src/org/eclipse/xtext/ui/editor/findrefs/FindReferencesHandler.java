@@ -14,21 +14,19 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.ITextSelection;
-import org.eclipse.search.ui.NewSearchUI;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.IGlobalServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder.IQueryData;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 /**
  * This class must neither be renamed nor moved.
- *  
+ * 
  * @author Jan Köhnlein - Initial contribution and API
  * @author Peter Friese
  */
@@ -39,9 +37,6 @@ public class FindReferencesHandler extends AbstractHandler {
 
 	@Inject
 	protected IGlobalServiceProvider globalServiceProvider;
-	
-	@Inject
-	protected FindReferenceQueryDataFactory queryDataFactory;
 
 	private static final Logger LOG = Logger.getLogger(FindReferencesHandler.class);
 
@@ -50,18 +45,22 @@ public class FindReferencesHandler extends AbstractHandler {
 			XtextEditor editor = EditorUtils.getActiveXtextEditor(event);
 			if (editor != null) {
 				final ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
-				IQueryData context = editor.getDocument().readOnly(new IUnitOfWork<IQueryData, XtextResource>() {
-					public IQueryData exec(XtextResource localResource) throws Exception {
-						return createQueryData(localResource, selection);
+				ReferenceQueryExecutor queryExecutor = editor.getDocument().readOnly(new IUnitOfWork<ReferenceQueryExecutor, XtextResource>() {
+					public ReferenceQueryExecutor exec(XtextResource state) throws Exception {
+						EObject target = eObjectAtOffsetHelper.resolveElementAt(state, selection.getOffset());
+						URI targetURI = EcoreUtil2.getNormalizedURI(target);
+						if(targetURI != null) {
+							ReferenceQueryExecutor queryExecutor = globalServiceProvider.findService(targetURI.trimFragment(), ReferenceQueryExecutor.class);
+							if (queryExecutor != null) {
+								queryExecutor.init(target);
+								return queryExecutor;
+							}
+						}
+						return null;
 					}
 				});
-				if (context != null) {
-					QueryExecutor queryExecutor = globalServiceProvider.findService(context.getLeadElementURI()
-							.trimFragment(), QueryExecutor.class);
-					if (queryExecutor != null) {
-						queryExecutor.execute(context);
-					}
-				}
+				if(queryExecutor != null) 
+					queryExecutor.execute();
 			}
 		} catch (Exception e) {
 			LOG.error(Messages.FindReferencesHandler_3, e);
@@ -69,27 +68,4 @@ public class FindReferencesHandler extends AbstractHandler {
 		return null;
 	}
 
-	protected IQueryData createQueryData(XtextResource localResource, ITextSelection selection) {
-		EObject element = eObjectAtOffsetHelper.resolveElementAt(localResource, selection.getOffset());
-		if (element != null) {
-			URI localResourceURI = localResource.getURI();
-			IQueryData queryData = queryDataFactory.createQueryData(element, localResourceURI);
-			return queryData;
-		}
-		return null;
-	}
-
-	public static class QueryExecutor {
-		@Inject
-		private Provider<ReferenceQuery> queryProvider;
-
-		public void execute(final IQueryData queryData) {
-			if (!queryData.getTargetURIs().isEmpty()) {
-				ReferenceQuery referenceQuery = queryProvider.get();
-				referenceQuery.init(queryData);
-				NewSearchUI.activateSearchResultView();
-				NewSearchUI.runQueryInBackground(referenceQuery);
-			}
-		}
-	}
 }

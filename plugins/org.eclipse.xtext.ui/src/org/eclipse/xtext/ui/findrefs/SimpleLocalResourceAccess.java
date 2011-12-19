@@ -5,18 +5,19 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.editor.findrefs;
+package org.eclipse.xtext.ui.findrefs;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder.ILocalResourceAccess;
+import org.eclipse.xtext.ui.findrefs.IReferenceFinder;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @since 2.3
  */
-public class SimpleLocalResourceAccess implements ILocalResourceAccess {
+public class SimpleLocalResourceAccess implements IReferenceFinder.ILocalResourceAccess {
 
 	private ResourceSet resourceSet;
 

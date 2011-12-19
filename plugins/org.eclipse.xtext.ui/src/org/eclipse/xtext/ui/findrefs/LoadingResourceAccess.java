@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.editor.findrefs;
+package org.eclipse.xtext.ui.findrefs;
 
 import java.util.Iterator;
 
@@ -14,6 +14,7 @@ import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.ui.findrefs.IReferenceFinder;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.util.Pair;
@@ -23,6 +24,7 @@ import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @since 2.3
  */
 public class LoadingResourceAccess implements IReferenceFinder.ILocalResourceAccess {
 

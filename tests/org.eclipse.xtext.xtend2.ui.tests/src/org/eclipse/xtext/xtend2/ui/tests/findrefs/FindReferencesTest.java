@@ -12,7 +12,6 @@ import static org.eclipse.xtext.common.types.TypesPackage.Literals.*;
 import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
 
-import java.util.Iterator;
 import java.util.Queue;
 
 import junit.framework.Test;
@@ -20,29 +19,25 @@ import junit.framework.Test;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.impl.DefaultReferenceDescription;
-import org.eclipse.xtext.ui.editor.findrefs.FindReferenceQueryDataFactory;
-import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
-import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder.IQueryData;
-import org.eclipse.xtext.ui.editor.findrefs.SimpleLocalResourceAccess;
-import org.eclipse.xtext.ui.resource.IResourceSetProvider;
+import org.eclipse.xtext.ui.findrefs.IReferenceFinder;
+import org.eclipse.xtext.ui.findrefs.SimpleLocalResourceAccess;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XBlockExpression;
-import org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelReferenceFilter;
+import org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelReferenceQueryExecutor;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
 import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
-import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
+import com.google.common.base.Predicate;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -58,59 +53,20 @@ public class FindReferencesTest extends AbstractXtend2UITestCase {
 	private WorkbenchTestHelper testHelper;
 
 	@Inject
-	private FindReferenceQueryDataFactory queryDataFactory;
-
-	@Inject
-	private IReferenceFinder referenceFinder;
-
-	@Inject
 	private IXtend2JvmAssociations associations;
 
 	@Inject
-	private IResourceSetProvider resourceSetProvider;
-
-	private ResourceSet resourceSet;
+	private Provider<CheckingReferenceQueryExecutor> executorProvider;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		resourceSet = resourceSetProvider.get(testHelper.getProject());
 	}
 
 	@Override
 	protected void tearDown() throws Exception {
 		testHelper.tearDown();
 		super.tearDown();
-	}
-
-	public void testClassQueryData() throws Exception {
-		XtendFile fileFoo = testHelper.xtendFile("Foo", "class Foo { }");
-		waitForAutoBuild();
-		XtendClass classFoo = fileFoo.getXtendClass();
-		JvmGenericType inferredTypeFoo = associations.getInferredType(classFoo);
-		JvmConstructor inferredConstructor = associations.getInferredConstructor(classFoo);
-
-		IQueryData queryData = createQueryData(classFoo);
-		assertEquals(3, queryData.getTargetURIs().size());
-		Iterator<URI> targetURIs = queryData.getTargetURIs().iterator();
-		assertEquals(targetURIs.next(), EcoreUtil.getURI(classFoo));
-		assertEquals(targetURIs.next(), EcoreUtil.getURI(inferredConstructor));
-		assertEquals(targetURIs.next(), EcoreUtil.getURI(inferredTypeFoo));
-		assertTrue(queryData.getResultFilter() instanceof JvmModelReferenceFilter);
-	}
-
-	public void testFunctionQueryData() throws Exception {
-		XtendFile fileFoo = testHelper.xtendFile("Foo", "class Foo { def foo() {null} }");
-		waitForAutoBuild();
-		XtendFunction functionFoo = (XtendFunction) fileFoo.getXtendClass().getMembers().get(0);
-		JvmOperation inferredOperation = associations.getDirectlyInferredOperation(functionFoo);
-
-		IQueryData queryData = createQueryData(functionFoo);
-		assertEquals(2, queryData.getTargetURIs().size());
-		Iterator<URI> targetURIs = queryData.getTargetURIs().iterator();
-		assertEquals(targetURIs.next(), EcoreUtil.getURI(functionFoo));
-		assertEquals(targetURIs.next(), EcoreUtil.getURI(inferredOperation));
-		assertTrue(queryData.getResultFilter() instanceof JvmModelReferenceFilter);
 	}
 
 	public void testFindReferencesToClass() throws Exception {
@@ -121,7 +77,7 @@ public class FindReferencesTest extends AbstractXtend2UITestCase {
 
 		final MockAcceptor mockAcceptor = new MockAcceptor();
 		mockAcceptor.expect(classBar.getSuperTypes().get(0), inferredTypeFoo, JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
-		checkFindReferences(classFoo, mockAcceptor);
+		checkFindReferences(classFoo, "JVM References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
 	}
 
 	public void testFindReferencesThis() throws Exception {
@@ -131,8 +87,9 @@ public class FindReferencesTest extends AbstractXtend2UITestCase {
 		XtendFunction functionFoo = (XtendFunction) classFoo.getMembers().get(0);
 
 		final MockAcceptor mockAcceptor = new MockAcceptor();
-		mockAcceptor.expect(((XBlockExpression)functionFoo.getExpression()).getExpressions().get(0), inferredType, XABSTRACT_FEATURE_CALL__FEATURE);
-		checkFindReferences(inferredType, mockAcceptor);
+		mockAcceptor.expect(((XBlockExpression) functionFoo.getExpression()).getExpressions().get(0), inferredType,
+				XABSTRACT_FEATURE_CALL__FEATURE);
+		checkFindReferences(inferredType, "JVM References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
 	}
 
 	public void testFindReferencesToConstructor() throws Exception {
@@ -143,8 +100,9 @@ public class FindReferencesTest extends AbstractXtend2UITestCase {
 		XtendFunction functionBar = (XtendFunction) classBar.getMembers().get(0);
 
 		final MockAcceptor mockAcceptor = new MockAcceptor();
-		mockAcceptor.expect(((XBlockExpression)functionBar.getExpression()).getExpressions().get(0), inferredConstructor, XCONSTRUCTOR_CALL__CONSTRUCTOR);
-		checkFindReferences(classFoo, mockAcceptor);
+		mockAcceptor.expect(((XBlockExpression) functionBar.getExpression()).getExpressions().get(0),
+				inferredConstructor, XCONSTRUCTOR_CALL__CONSTRUCTOR);
+		checkFindReferences(classFoo, "JVM References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
 	}
 
 	public void testFindReferencesFromReturnType() throws Exception {
@@ -156,7 +114,7 @@ public class FindReferencesTest extends AbstractXtend2UITestCase {
 
 		final MockAcceptor mockAcceptor = new MockAcceptor();
 		mockAcceptor.expect(functionBar.getReturnType(), inferredTypeFoo, JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
-		checkFindReferences(classFoo, mockAcceptor);
+		checkFindReferences(classFoo, "JVM References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
 	}
 
 	public void testFindReferencesFromParameter() throws Exception {
@@ -169,11 +127,12 @@ public class FindReferencesTest extends AbstractXtend2UITestCase {
 		final MockAcceptor mockAcceptor = new MockAcceptor();
 		mockAcceptor.expect(functionBar.getParameters().get(0).getParameterType(), inferredTypeFoo,
 				JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
-		checkFindReferences(classFoo, mockAcceptor);
+		checkFindReferences(classFoo, "JVM References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
 	}
 
 	public void testFindReferencesToFunction() throws Exception {
-		XtendClass classFoo = testHelper.xtendFile("Foo", "class Foo { def foo() {this} def bar() {foo()} }").getXtendClass();
+		XtendClass classFoo = testHelper.xtendFile("Foo", "class Foo { def foo() {this} def bar() {foo()} }")
+				.getXtendClass();
 		XtendClass classBar = testHelper.xtendFile("Bar", "class Bar { def baz(Foo this) {foo()} }").getXtendClass();
 		waitForAutoBuild();
 		XtendFunction functionFoo = (XtendFunction) classFoo.getMembers().get(0);
@@ -182,20 +141,50 @@ public class FindReferencesTest extends AbstractXtend2UITestCase {
 		XtendFunction functionBaz = (XtendFunction) classBar.getMembers().get(0);
 
 		final MockAcceptor mockAcceptor = new MockAcceptor();
-		mockAcceptor.expect(((XBlockExpression)functionBar.getExpression()).getExpressions().get(0), inferredOperation, XABSTRACT_FEATURE_CALL__FEATURE);
-		mockAcceptor.expect(((XBlockExpression)functionBaz.getExpression()).getExpressions().get(0), inferredOperation, XABSTRACT_FEATURE_CALL__FEATURE);
-		checkFindReferences(functionFoo, mockAcceptor);
+		mockAcceptor.expect(((XBlockExpression) functionBar.getExpression()).getExpressions().get(0),
+				inferredOperation, XABSTRACT_FEATURE_CALL__FEATURE);
+		mockAcceptor.expect(((XBlockExpression) functionBaz.getExpression()).getExpressions().get(0),
+				inferredOperation, XABSTRACT_FEATURE_CALL__FEATURE);
+		checkFindReferences(functionFoo, "JVM References to Foo.foo (/test.project/src/Foo.xtend)", mockAcceptor);
 	}
 
-	protected void checkFindReferences(EObject target, final MockAcceptor mockAcceptor) {
-		SimpleLocalResourceAccess localResourceAccess = new SimpleLocalResourceAccess(resourceSet);
-		IQueryData queryData = createQueryData(target);
-		referenceFinder.findAllReferences(queryData, localResourceAccess, mockAcceptor, null);
+	protected void checkFindReferences(EObject target, String expectedLabel, final MockAcceptor mockAcceptor) {
+		CheckingReferenceQueryExecutor executor = executorProvider.get();
+		executor.init(target, expectedLabel, mockAcceptor);
+		executor.execute();
 		mockAcceptor.assertFinished();
 	}
 
-	protected IQueryData createQueryData(EObject target) {
-		return queryDataFactory.createQueryData(target, target.eResource().getURI());
+	public static class CheckingReferenceQueryExecutor extends JvmModelReferenceQueryExecutor {
+
+		@Inject
+		private IReferenceFinder referenceFinder;
+		private Iterable<URI> targetURIs;
+		private Predicate<IReferenceDescription> filter;
+		private SimpleLocalResourceAccess localResourceAccess;
+		private IAcceptor<IReferenceDescription> filteringAcceptor;
+
+		@Override
+		public void init(EObject target) {
+		}
+
+		public void init(EObject target, String expectedLabel, final IAcceptor<IReferenceDescription> acceptor) {
+			targetURIs = getTargetURIs(target);
+			filter = getFilter(target);
+			assertEquals(expectedLabel, getLabel(target));
+			this.filteringAcceptor = new IAcceptor<IReferenceDescription>() {
+				public void accept(IReferenceDescription t) {
+					if (filter.apply(t))
+						acceptor.accept(t);
+				}
+			};
+			localResourceAccess = new SimpleLocalResourceAccess(target.eResource().getResourceSet());
+		}
+
+		@Override
+		public void execute() {
+			referenceFinder.findAllReferences(targetURIs, localResourceAccess, filteringAcceptor, null);
+		}
 	}
 
 	public static class MockAcceptor implements IAcceptor<IReferenceDescription> {

@@ -18,21 +18,19 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.DefaultReferenceDescription;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
-import org.eclipse.xtext.ui.editor.findrefs.DefaultReferenceFinder;
-import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
-import org.eclipse.xtext.ui.editor.findrefs.ReferenceQueryData;
-import org.eclipse.xtext.ui.editor.findrefs.SimpleLocalResourceAccess;
+import org.eclipse.xtext.ui.findrefs.DefaultReferenceFinder;
+import org.eclipse.xtext.ui.findrefs.IReferenceFinder;
+import org.eclipse.xtext.ui.findrefs.SimpleLocalResourceAccess;
 import org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguageStandaloneSetup;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.RefactoringPackage;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.StringInputStream;
-
-import com.google.common.base.Predicate;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -47,7 +45,7 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 	private EObject elementC;
 
 	private DefaultReferenceFinder referenceFinder;
-	private MockAcceptor acceptor;
+	private CheckingAcceptor acceptor;
 	private IReferenceFinder.ILocalResourceAccess localResourceAccess;
 
 	@Override
@@ -65,7 +63,7 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 		resourceDescriptions.setContext(resourceSet);
 		referenceFinder = new DefaultReferenceFinder(resourceDescriptions);
 		localResourceAccess = new SimpleLocalResourceAccess(resourceSet);
-		acceptor = new MockAcceptor();
+		acceptor = new CheckingAcceptor();
 	}
 
 	protected Resource loadResource(String pathName, String content) throws IOException {
@@ -76,89 +74,86 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 	}
 
 	public void testLocalRefs() throws Exception {
-		IReferenceFinder.IQueryData queryData = new ReferenceQueryData(EcoreUtil.getURI(elementA));
 		acceptor.expect(new DefaultReferenceDescription(elementB, elementA,
 				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementB)));
-		findLocalRefs(queryData);
+		findAllRefs(elementA, localResourceAccess);
 		acceptor.assertFinished();
-		findIndexedRefs(queryData);
-		acceptor.assertFinished();
+
 		acceptor.expect(new DefaultReferenceDescription(elementB, elementA,
 				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementB)));
-		findAllRefs(queryData);
+		findRefs(elementA, resource, localResourceAccess);
 		acceptor.assertFinished();
 	}
 
-	public void testIndexedRefs() throws Exception {
-		IReferenceFinder.IQueryData queryData = new ReferenceQueryData(EcoreUtil.getURI(elementC));
+	public void testExternalRefs() throws Exception {
 		Resource refResource = loadResource("ref.refactoringtestlanguage", "D { ref C }");
 		EObject elementD = refResource.getContents().get(0).eContents().get(0);
 
-		findLocalRefs(queryData);
-		acceptor.assertFinished();
-		acceptor.expect(new DefaultReferenceDescription(elementD, elementC,
-				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementD)));
-		findIndexedRefs(queryData);
+		findRefs(elementC, resource, localResourceAccess);
 		acceptor.assertFinished();
 
 		acceptor.expect(new DefaultReferenceDescription(elementD, elementC,
 				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementD)));
-		findAllRefs(queryData);
+		findAllRefs(elementC, localResourceAccess);
+		acceptor.assertFinished();
+
+		acceptor.expect(new DefaultReferenceDescription(elementD, elementC,
+				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementD)));
+		findRefs(elementC, refResource, localResourceAccess);
 		acceptor.assertFinished();
 	}
 
-	public void testLocalAndIndexedFiltered() throws Exception {
-		final URI uriA = EcoreUtil.getURI(elementA);
-		Predicate<IReferenceDescription> filter = new Predicate<IReferenceDescription>() {
-			public boolean apply(IReferenceDescription input) {
-				return !input.getTargetEObjectUri().equals(uriA);
-			}
-		};
-		IReferenceFinder.IQueryData queryData = new ReferenceQueryData(uriA, singleton(uriA), uriA.trimFragment(),
-				filter, "");
-		loadResource("ref.refactoringtestlanguage", "D { ref A }");
-		findLocalRefs(queryData);
-		acceptor.assertFinished();
-		findIndexedRefs(queryData);
-		acceptor.assertFinished();
-		findAllRefs(queryData);
-		acceptor.assertFinished();
-	}
-
-	public void testLocalAndIndexed() throws Exception {
-		IReferenceFinder.IQueryData queryData = new ReferenceQueryData(EcoreUtil.getURI(elementA));
+	public void testLocalAndExternalRefs() throws Exception {
 		Resource refResource = loadResource("ref.refactoringtestlanguage", "D { ref A }");
 		EObject elementD = refResource.getContents().get(0).eContents().get(0);
 
 		acceptor.expect(new DefaultReferenceDescription(elementB, elementA,
 				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementB)));
-		findLocalRefs(queryData);
+		findRefs(elementA, resource, localResourceAccess);
 		acceptor.assertFinished();
-		acceptor.expect(new DefaultReferenceDescription(elementD, elementA,
-				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementD)));
-		findIndexedRefs(queryData);
-		acceptor.assertFinished();
+
 		acceptor.expect(new DefaultReferenceDescription(elementB, elementA,
 				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementB)));
 		acceptor.expect(new DefaultReferenceDescription(elementD, elementA,
 				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementD)));
-		findAllRefs(queryData);
+		findAllRefs(elementA, localResourceAccess);
+		acceptor.assertFinished();
+
+		acceptor.expect(new DefaultReferenceDescription(elementD, elementA,
+				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementD)));
+		findRefs(elementA, refResource, localResourceAccess);
 		acceptor.assertFinished();
 	}
 
-	protected void findIndexedRefs(IReferenceFinder.IQueryData queryData) {
-		referenceFinder.findIndexedReferences(queryData, acceptor, null);
+	public void testExcludeLocalRefs() throws Exception {
+		Resource refResource = loadResource("ref.refactoringtestlanguage", "D { ref A }");
+		EObject elementD = refResource.getContents().get(0).eContents().get(0);
+
+		findRefs(elementA, resource, null);
+		acceptor.assertFinished();
+
+		acceptor.expect(new DefaultReferenceDescription(elementD, elementA,
+				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementD)));
+		findAllRefs(elementA, null);
+		acceptor.assertFinished();
+
+		acceptor.expect(new DefaultReferenceDescription(elementD, elementA,
+				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementD)));
+		findRefs(elementA, refResource, null);
+		acceptor.assertFinished();
 	}
 
-	protected void findAllRefs(IReferenceFinder.IQueryData queryData) {
-		referenceFinder.findAllReferences(queryData, localResourceAccess, acceptor, null);
+	protected void findAllRefs(EObject target, IReferenceFinder.ILocalResourceAccess localResourceAccess) {
+		referenceFinder.findAllReferences(singleton(EcoreUtil2.getNormalizedURI(target)), localResourceAccess,
+				acceptor, null);
 	}
 
-	protected void findLocalRefs(IReferenceFinder.IQueryData queryData) {
-		referenceFinder.findLocalReferences(queryData, localResourceAccess, acceptor, null);
+	protected void findRefs(EObject target, Resource sourceResource, IReferenceFinder.ILocalResourceAccess localResourceAccess) {
+		referenceFinder.findReferences(singleton(EcoreUtil2.getNormalizedURI(target)),
+				singleton(sourceResource.getURI()), localResourceAccess, acceptor, null);
 	}
 
-	public static class MockAcceptor implements IAcceptor<IReferenceDescription> {
+	public static class CheckingAcceptor implements IAcceptor<IReferenceDescription> {
 
 		private Queue<IReferenceDescription> expectationQueue = newLinkedList();
 

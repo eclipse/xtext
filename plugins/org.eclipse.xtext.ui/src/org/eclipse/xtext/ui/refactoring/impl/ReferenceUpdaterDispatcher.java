@@ -19,8 +19,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider.Registry;
-import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
-import org.eclipse.xtext.ui.editor.findrefs.SimpleLocalResourceAccess;
+import org.eclipse.xtext.ui.findrefs.IReferenceFinder;
+import org.eclipse.xtext.ui.findrefs.SimpleLocalResourceAccess;
 import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
@@ -44,15 +44,12 @@ public class ReferenceUpdaterDispatcher {
 	@Inject
 	private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
 
-	@Inject
-	private RefactoringReferenceQueryDataFactory queryDataFactory;
-
 	public void createReferenceUpdates(ElementRenameArguments elementRenameArguments, ResourceSet resourceSet,
 			IRefactoringUpdateAcceptor updateAcceptor, IProgressMonitor monitor) {
 		SubMonitor progress = SubMonitor.convert(monitor, "Updating references", 100);
 		ReferenceDescriptionAcceptor referenceDescriptionAcceptor = createFindReferenceAcceptor(updateAcceptor);
-		IReferenceFinder.IQueryData referenceQueryData = queryDataFactory.create(elementRenameArguments);
-		referenceFinder.findAllReferences(referenceQueryData, new SimpleLocalResourceAccess(resourceSet),
+		referenceFinder.findAllReferences(elementRenameArguments.getRenamedElementURIs(), 
+				new SimpleLocalResourceAccess(resourceSet),
 				referenceDescriptionAcceptor, progress.newChild(2));
 		Multimap<IReferenceUpdater, IReferenceDescription> updater2descriptions = referenceDescriptionAcceptor
 				.getReferenceUpdater2ReferenceDescriptions();
