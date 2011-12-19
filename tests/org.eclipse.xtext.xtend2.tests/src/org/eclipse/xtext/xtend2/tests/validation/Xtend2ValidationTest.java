@@ -559,6 +559,26 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 				,"package test class Baz implements java.io.Serializable {}");
 	}
 
+	public void testInvalidFieldName_00() throws Exception {
+		XtendClass clazz = clazz("class Foo { int this }");
+		helper.assertError(clazz.getMembers().get(0), Xtend2Package.Literals.XTEND_FIELD, INVALID_MEMBER_NAME, "'this'", "'it'", "names");
+	}
+	
+	public void testInvalidFieldName_01() throws Exception {
+		XtendClass clazz = clazz("class Foo { int it }");
+		helper.assertError(clazz.getMembers().get(0), Xtend2Package.Literals.XTEND_FIELD, INVALID_MEMBER_NAME, "'this'", "'it'", "names");
+	}
+	
+	public void testInvalidMethodName_00() throws Exception {
+		XtendClass clazz = clazz("class Foo { def void this() {} }");
+		helper.assertError(clazz.getMembers().get(0), Xtend2Package.Literals.XTEND_FUNCTION, INVALID_MEMBER_NAME, "'this'", "'it'", "names");
+	}
+	
+	public void testInvalidMethodName_01() throws Exception {
+		XtendClass clazz = clazz("class Foo { def void it() {} }");
+		helper.assertError(clazz.getMembers().get(0), Xtend2Package.Literals.XTEND_FUNCTION, INVALID_MEMBER_NAME, "'this'", "'it'", "names");
+	}
+	
 	public void testDuplicateFieldName() throws Exception {
 		XtendClass clazz = clazz("class Foo { int foo String foo double foo }");
 		for(XtendMember member: clazz.getMembers())
