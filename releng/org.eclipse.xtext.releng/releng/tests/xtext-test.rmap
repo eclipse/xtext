@@ -20,14 +20,7 @@
 			</rm:uri>
 		</rm:provider>
 	</rm:searchPath>
-	<rm:searchPath name="tmf">
-		<rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false"
-			mutable="false">
-			<rm:uri format="{0}">
-				<bc:propertyRef key="xtext.p2.repository" />
-			</rm:uri>
-		</rm:provider>
-	</rm:searchPath>
+	
 
 	<rm:searchPath name="xtext.examples">
 		<rm:provider componentTypes="osgi.bundle" readerType="local" mutable="false">

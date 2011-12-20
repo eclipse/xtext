@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ASCII"?>
+<aggregator:Aggregation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:aggregator="http://www.eclipse.org/b3/2011/aggregator/1.1.0" label="Xtext to Maven" buildRoot="/Users/dhuebner/Entwicklung/buckminster/tp/" packedStrategy="UNPACK_AS_SIBLING">
+  <validationSets label="main">
+    <contributions label="Xpand">
+      <repositories location="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/">
+        <features name="org.eclipse.xpand.sdk.feature.group" versionRange="1.1.1"/>
+      </repositories>
+      <mavenMappings namePattern="^([^.]+(?:\.[^.]+(?:\.[^.]+)?)?)(?:\.[^.]+)*$" groupId="org.eclipse.xpand" artifactId="$0"/>
+    </contributions>
+    <contributions label="Xtext MWE">
+      <repositories location="http://download.eclipse.org/modeling/emft/mwe/updates/releases/">
+        <features name="org.eclipse.emf.mwe.sdk.feature.group" versionRange="1.2.1.v201112070431"/>
+      </repositories>
+      <repositories location="http://download.eclipse.org/modeling/emft/mwe/updates/releases/">
+        <features name="org.eclipse.emf.mwe2.language.sdk.feature.group" versionRange="2.2.0"/>
+      </repositories>
+      <repositories location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/">
+        <features name="org.eclipse.xtext.sdk.feature.group" versionRange="2.2.1"/>
+      </repositories>
+    </contributions>
+    <contributions label="Target Runtime">
+      <repositories location="http://download.eclipse.org/releases/galileo">
+        <features name="org.eclipse.platform.feature.group"/>
+        <features name="org.eclipse.emf.sdk.feature.group"/>
+        <features name="org.eclipse.jdt.feature.group"/>
+        <features name="org.eclipse.emf.compare.sdk.feature.group"/>
+        <features name="org.eclipse.pde.ui"/>
+        <features name="org.junit4" versionRange="4.5.0.v20090824"/>
+        <features name="org.junit" versionRange="3.8.2.v20090203-1005"/>
+      </repositories>
+    </contributions>
+    <contributions label="Orbit">
+      <repositories location="http://download.eclipse.org/tools/orbit/downloads/drops/S20110907174232/repository">
+        <bundles name="org.easymock"/>
+      </repositories>
+    </contributions>
+  </validationSets>
+  <configurations operatingSystem="macosx" windowSystem="cocoa" architecture="x86_64"/>
+</aggregator:Aggregation>
