@@ -12,7 +12,13 @@ import org.eclipse.xtext.ui.editor.XtextSourceViewerConfiguration;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 
 /**
+ * Handle for an embedded Xtext editor. It allows to initialize the edited model
+ * and provides accessors for the {@link #getDocument() document}, 
+ * the {@link #getConfiguration() source viewer configuration}, and the {@link #getViewer() viewer}.
+ * 
+ * @since 2.2
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @noinstantiate This class is not intended to be instantiated by clients.
  */
 public class EmbeddedEditor {
 	private final XtextSourceViewer viewer;
@@ -45,17 +51,38 @@ public class EmbeddedEditor {
 		return this.configuration;
 	}
 	
-	public EmbeddedEditorModelAccess createPartialEditor(String prefix, String editablePart, String suffix, boolean lineBreaks) {
-		EmbeddedEditorModelAccess result = new EmbeddedEditorModelAccess(this.viewer, this.resourceProvider, lineBreaks);
+	/**
+	 * Obtain the {@link EmbeddedEditorModelAccess model access} for this editor instance. 
+ 	 * It can be used to query the currently edited text or update it externally.
+ 	 * The prefix and the suffix will not be visible in the editor. It is possible to 
+ 	 * insert artificial line-breaks between the three parts (prefix, editablePart, suffix). 
+ 	 * @return the model access. Never <code>null</code>.
+	 */
+	public EmbeddedEditorModelAccess createPartialEditor(String prefix, String editablePart, String suffix, boolean insertLineBreaks) {
+		EmbeddedEditorModelAccess result = new EmbeddedEditorModelAccess(this.viewer, this.resourceProvider, insertLineBreaks);
 		result.setModel(getDocument(), prefix, editablePart, suffix);
 		afterSetDocument.run();
 		return result;
 	}
 
+	/**
+	 * Obtain the {@link EmbeddedEditorModelAccess model access} for this editor instance. 
+ 	 * It can be used to query the currently edited text or update it externally.
+ 	 * This is a shortcut for 
+ 	 * {@link #createPartialEditor(String, String, String, boolean) createPartialEditor("", "", "", insertLinebreaks)}.
+ 	 * @return the model access. Never <code>null</code>.
+	 */
 	public EmbeddedEditorModelAccess createPartialEditor(boolean insertLinebreaks) {
 		return createPartialEditor("", "", "", insertLinebreaks);
 	}
 	
+	/**
+	 * Obtain the {@link EmbeddedEditorModelAccess model access} for this editor instance. 
+ 	 * It can be used to query the currently edited text or update it externally.
+ 	 * This is a shortcut for 
+ 	 * {@link #createPartialEditor(String, String, String, boolean) createPartialEditor("", "", "", false)}.
+ 	 * @return the model access. Never <code>null</code>.
+	 */
 	public EmbeddedEditorModelAccess createPartialEditor() {
 		return createPartialEditor("", "", "", false);
 	}

@@ -16,6 +16,7 @@ import org.eclipse.xtext.resource.XtextResource;
  * {@link org.eclipse.xtext.resource.XtextResourceSet resource set}.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @since 2.2
  */
 public interface IEditedResourceProvider {
 

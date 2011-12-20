@@ -30,6 +30,8 @@ public class OperationHistoryListener implements IOperationHistoryListener {
 		switch (type) {
 			case OperationHistoryEvent.UNDONE:
 			case OperationHistoryEvent.REDONE:
+			case OperationHistoryEvent.OPERATION_ADDED:
+			case OperationHistoryEvent.OPERATION_REMOVED:
 			case OperationHistoryEvent.OPERATION_NOT_OK:
 				// if this is one of our operations
 				if (event.getOperation().hasContext(this.context)) {

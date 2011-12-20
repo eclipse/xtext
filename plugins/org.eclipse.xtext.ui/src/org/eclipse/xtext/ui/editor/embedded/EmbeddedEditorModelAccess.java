@@ -21,6 +21,10 @@ import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.util.StringInputStream;
 
 /**
+ * The model access allows to obtain or manipulate the edited text.
+ * 
+ * @since 2.2
+ * @noinstantiate This class is not intended to be instantiated by clients.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class EmbeddedEditorModelAccess {
@@ -31,7 +35,7 @@ public class EmbeddedEditorModelAccess {
 
 	private final IEditedResourceProvider resourceProvider;
 
-	protected EmbeddedEditorModelAccess(
+	public EmbeddedEditorModelAccess(
 			SourceViewer viewer, 
 			IEditedResourceProvider resourceProvider, 
 			boolean insertLineBreaks) {
