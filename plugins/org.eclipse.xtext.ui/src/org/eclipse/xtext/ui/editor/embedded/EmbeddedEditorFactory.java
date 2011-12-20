@@ -9,57 +9,42 @@ package org.eclipse.xtext.ui.editor.embedded;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.core.commands.operations.IOperationHistory;
 import org.eclipse.core.commands.operations.IUndoContext;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jface.action.GroupMarker;
-import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.action.IMenuListener;
-import org.eclipse.jface.action.IMenuManager;
-import org.eclipse.jface.action.MenuManager;
-import org.eclipse.jface.action.Separator;
-import org.eclipse.jface.commands.ActionHandler;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentPartitioner;
 import org.eclipse.jface.text.ITextListener;
-import org.eclipse.jface.text.ITextOperationTarget;
 import org.eclipse.jface.text.TextEvent;
+import org.eclipse.jface.text.contentassist.ContentAssistEvent;
+import org.eclipse.jface.text.contentassist.ICompletionListener;
+import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.AnnotationRulerColumn;
 import org.eclipse.jface.text.source.CompositeRuler;
 import org.eclipse.jface.text.source.IAnnotationAccessExtension;
 import org.eclipse.jface.text.source.ICharacterPairMatcher;
 import org.eclipse.jface.text.source.ISharedTextColors;
-import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.SourceViewer;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
-import org.eclipse.swt.events.FocusEvent;
-import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.text.undo.DocumentUndoManagerRegistry;
 import org.eclipse.text.undo.IDocumentUndoManager;
-import org.eclipse.ui.ActiveShellExpression;
-import org.eclipse.ui.IWorkbenchCommandConstants;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.editors.text.EditorsUI;
-import org.eclipse.ui.handlers.IHandlerActivation;
-import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.ui.texteditor.AnnotationPreference;
 import org.eclipse.ui.texteditor.DefaultMarkerAnnotationAccess;
 import org.eclipse.ui.texteditor.ITextEditorActionConstants;
-import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
 import org.eclipse.ui.texteditor.IUpdate;
 import org.eclipse.ui.texteditor.MarkerAnnotationPreferences;
 import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
@@ -83,21 +68,33 @@ import org.eclipse.xtext.validation.Issue;
 import com.google.common.base.Function;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 /**
+ * Factory to create embedded editors for arbitrary {@link Resource resources}.
+ * A typical usage pattern looks like this:
+ * <pre>
+ * EmbeddedEditorFactory editorFactory;
+ * 
+ * EmbeddedEditor editor = editorFactory
+ *    .newEditor(resourceProvider)
+ *    .showErrorAndWarningAnnotations()
+ *    .withParent(parentComposite);
+ * EmbeddedEditorModelAccess model = editor.createPartialEditor();
+ * // work with the model 
+ * </pre>
+ * 
+ * @since 2.2
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class EmbeddedEditorFactory {
-
-	// EmbeddedEditorBuilder.showAnnotations().showLineNumbers().processIssues(..).writable().withParent(Composite)
 
 	@Inject
 	private Provider<Builder> builderProvider;
 	
 	public static class Builder {
+		
 		/** The width of the vertical ruler. */
 		protected static final int VERTICAL_RULER_WIDTH = 12;
 		
@@ -124,6 +121,9 @@ public class EmbeddedEditorFactory {
 		
 		@Inject
 		protected ICharacterPairMatcher characterPairMatcher;
+		
+		@Inject
+		protected EmbeddedEditorActions.Factory actionFactory;
 		
 		protected IEditedResourceProvider resourceProvider;
 		protected String[] annotationTypes;
@@ -171,7 +171,7 @@ public class EmbeddedEditorFactory {
 			this.readonly = true;
 			return this;
 		}
-		public EmbeddedEditor withParent(Composite parent) {
+		public EmbeddedEditor withParent(final Composite parent) {
 			if (editorBuild)
 				throw new IllegalStateException();
 			editorBuild = true;
@@ -216,16 +216,18 @@ public class EmbeddedEditorFactory {
 						BracketMatchingPreferencesInitializer.COLOR_KEY);
 			}
 			viewerDecorationSupport.install(this.preferenceStoreAccess.getPreferenceStore());
+			
+			final XtextDocument document = this.documentProvider.get();
+			IDocumentPartitioner partitioner = this.documentPartitionerProvider.get();
+			partitioner.connect(document);
+			document.setDocumentPartitioner(partitioner);
+			
+			final EmbeddedEditorActions actions = initializeActions(viewer);
 			parent.addDisposeListener(new DisposeListener() {
 				public void widgetDisposed(DisposeEvent e) {
 					viewerDecorationSupport.dispose();
 				}
 			});
-			final XtextDocument document = this.documentProvider.get();
-			IDocumentPartitioner partitioner = this.documentPartitionerProvider.get();
-			partitioner.connect(document);
-			document.setDocumentPartitioner(partitioner);
-			final Map<String, TextViewerAction> actions = initializeActions(viewer);
 			final EmbeddedEditor result = new EmbeddedEditor(
 					document, viewer, viewerConfiguration, resourceProvider, new Runnable() {
 						public void run() {
@@ -233,6 +235,23 @@ public class EmbeddedEditorFactory {
 						}
 					});
 			viewer.setEditable(!Boolean.TRUE.equals(readonly));
+			viewer.getContentAssistantFacade().addCompletionListener(new ICompletionListener() {
+				
+				private Button defaultButton;
+
+				public void selectionChanged(ICompletionProposal proposal, boolean smartToggle) {
+				}
+				
+				public void assistSessionStarted(ContentAssistEvent event) {
+					defaultButton = parent.getShell().getDefaultButton();
+					parent.getShell().setDefaultButton(null);
+				}
+				
+				public void assistSessionEnded(ContentAssistEvent event) {
+					parent.getShell().setDefaultButton(defaultButton);
+					defaultButton = null;
+				}
+			});
 			ValidationJob job = new ValidationJob(this.resourceValidator, document, new IValidationIssueProcessor() {
 				private AnnotationIssueProcessor annotationIssueProcessor;
 
@@ -296,7 +315,8 @@ public class EmbeddedEditorFactory {
 			return result;
 		}
 		
-		protected void afterCreatePartialEditor(XtextSourceViewer viewer, XtextDocument document, CompositeRuler verticalRuler, final Map<String, TextViewerAction> actions) {
+		protected void afterCreatePartialEditor(XtextSourceViewer viewer, XtextDocument document, CompositeRuler verticalRuler, 
+				final EmbeddedEditorActions actions) {
 			if (verticalRuler != null && annotationTypes != null && annotationTypes.length > 0) {
 				AnnotationRulerColumn annotationRulerColumn = new AnnotationRulerColumn(viewer.getAnnotationModel(), VERTICAL_RULER_WIDTH, new DefaultMarkerAnnotationAccess() {
 					@Override
@@ -321,26 +341,20 @@ public class EmbeddedEditorFactory {
 			viewer.addTextListener(new ITextListener() {
 				public void textChanged(TextEvent event) {
 					if (event.getDocumentEvent() != null) {
-						updateUndoAction(actions);
+						actions.updateAllActions();
 					}
 				}
 			});
 			viewer.addSelectionChangedListener(new ISelectionChangedListener() {
 				public void selectionChanged(SelectionChangedEvent event) {
-					updateSelectionDependentActions(actions);
+					actions.updateSelectionDependentActions();
 				}
 			});
 			viewer.getUndoManager().reset();
 		}
 
-		protected void updateSelectionDependentActions(Map<String, TextViewerAction> actions) {
-			updateAction(actions, ITextEditorActionConstants.CUT);
-			updateAction(actions, ITextEditorActionConstants.COPY);
-			updateAction(actions, ITextEditorActionConstants.PASTE);
-		}
-
-		protected void updateUndoAction(Map<String, TextViewerAction> actions) {
-			updateAction(actions, ITextEditorActionConstants.UNDO);
+		protected void updateUndoAction(EmbeddedEditorActions actions) {
+			actions.updateAction(ITextEditorActionConstants.UNDO);
 		}
 
 		protected void uninstallUndoRedoSupport(OperationHistoryListener listener) {
@@ -348,27 +362,20 @@ public class EmbeddedEditorFactory {
 			operationHistory.removeOperationHistoryListener(listener);
 		}
 
-		protected OperationHistoryListener installUndoRedoSupport(SourceViewer viewer, IDocument document, final Map<String, TextViewerAction> actions) {
+		protected OperationHistoryListener installUndoRedoSupport(SourceViewer viewer, IDocument document, final EmbeddedEditorActions actions) {
 			IDocumentUndoManager undoManager = DocumentUndoManagerRegistry.getDocumentUndoManager(document);
 			final IUndoContext context = undoManager.getUndoContext();
 			IOperationHistory operationHistory = PlatformUI.getWorkbench().getOperationSupport().getOperationHistory();
 			OperationHistoryListener operationHistoryListener = new OperationHistoryListener(context, new IUpdate() {
 				public void update() {
-					updateAction(actions, ITextEditorActionConstants.REDO);
-					updateAction(actions, ITextEditorActionConstants.UNDO);
+					actions.updateAction(ITextEditorActionConstants.REDO);
+					actions.updateAction(ITextEditorActionConstants.UNDO);
 				}
 			});
 			operationHistory.addOperationHistoryListener(operationHistoryListener);
 			return operationHistoryListener;
 		}
 
-		protected void updateAction(Map<String, TextViewerAction> actions, String actionId) {
-			IAction action = actions.get(actionId);
-			if (action instanceof IUpdate) {
-				((IUpdate) action).update();
-			}
-		}
-		
 		protected void setResourceProvider(IEditedResourceProvider resourceProvider) {
 			this.resourceProvider = resourceProvider;
 		}
@@ -377,98 +384,10 @@ public class EmbeddedEditorFactory {
 			return EditorsUI.getSharedTextColors();
 		}
 
-		protected void fillContextMenu(IMenuManager menu, Map<String, TextViewerAction> globalActions) {
-			menu.add(new GroupMarker(ITextEditorActionConstants.GROUP_UNDO));
-			menu.appendToGroup(ITextEditorActionConstants.GROUP_UNDO, globalActions.get(ITextEditorActionConstants.UNDO));
-			menu.appendToGroup(ITextEditorActionConstants.GROUP_UNDO, globalActions.get(ITextEditorActionConstants.REDO));
-
-			menu.add(new Separator(ITextEditorActionConstants.GROUP_EDIT));
-			menu.appendToGroup(ITextEditorActionConstants.GROUP_EDIT, globalActions.get(ITextEditorActionConstants.CUT));
-			menu.appendToGroup(ITextEditorActionConstants.GROUP_EDIT, globalActions.get(ITextEditorActionConstants.COPY));
-			menu.appendToGroup(ITextEditorActionConstants.GROUP_EDIT, globalActions.get(ITextEditorActionConstants.PASTE));
-			menu.appendToGroup(ITextEditorActionConstants.GROUP_EDIT, globalActions.get(ITextEditorActionConstants.SELECT_ALL));
-
-			if (!Boolean.TRUE.equals(readonly)) {
-				menu.add(new Separator(ITextEditorActionConstants.GROUP_GENERATE));
-				menu.appendToGroup(ITextEditorActionConstants.GROUP_GENERATE, globalActions.get("ContentAssistProposal")); //$NON-NLS-1$
-			}
+		protected EmbeddedEditorActions initializeActions(final SourceViewer viewer) {
+			return actionFactory.createActions(viewer);
 		}
-
-		protected Map<String, TextViewerAction> initializeActions(SourceViewer viewer) {
-			final Map<String, TextViewerAction> globalActions = Maps.newHashMapWithExpectedSize(10);
-
-			final List<IHandlerActivation> handlerActivations = Lists.newArrayListWithExpectedSize(3);
-			final IHandlerService handlerService = (IHandlerService) PlatformUI.getWorkbench().getAdapter(IHandlerService.class);
-			Shell shell = viewer.getControl().getShell();
-			final ActiveShellExpression expression = new ActiveShellExpression(shell);
-
-			shell.addDisposeListener(new DisposeListener() {
-				public void widgetDisposed(DisposeEvent e) {
-					handlerService.deactivateHandlers(handlerActivations);
-				}
-			});
-
-			viewer.getTextWidget().addFocusListener(new FocusListener() {
-				public void focusLost(FocusEvent e) {
-					handlerService.deactivateHandlers(handlerActivations);
-				}
-
-				public void focusGained(FocusEvent e) {
-					IAction action = globalActions.get(ITextEditorActionConstants.REDO);
-					handlerActivations.add(handlerService.activateHandler(IWorkbenchCommandConstants.EDIT_REDO, new ActionHandler(action), expression));
-					action = globalActions.get(ITextEditorActionConstants.UNDO);
-					handlerActivations.add(handlerService.activateHandler(IWorkbenchCommandConstants.EDIT_UNDO, new ActionHandler(action), expression));
-					if (!Boolean.TRUE.equals(readonly)) {
-						action = globalActions.get(ITextEditorActionConstants.CONTENT_ASSIST);
-						handlerActivations.add(handlerService.activateHandler(ITextEditorActionDefinitionIds.CONTENT_ASSIST_PROPOSALS, new ActionHandler(action), expression));
-					}
-				}
-			});
-
-			TextViewerAction action = new TextViewerAction(viewer, ITextOperationTarget.UNDO);
-			action.setText(EmbeddedEditorMessages.EmbeddedEditor_undo);
-			globalActions.put(ITextEditorActionConstants.UNDO, action);
-
-			action = new TextViewerAction(viewer, ITextOperationTarget.REDO);
-			action.setText(EmbeddedEditorMessages.EmbeddedEditor_redo);
-			globalActions.put(ITextEditorActionConstants.REDO, action);
-
-			action = new TextViewerAction(viewer, ITextOperationTarget.CUT);
-			action.setText(EmbeddedEditorMessages.EmbeddedEditor_cut);
-			globalActions.put(ITextEditorActionConstants.CUT, action);
-
-			action = new TextViewerAction(viewer, ITextOperationTarget.COPY);
-			action.setText(EmbeddedEditorMessages.EmbeddedEditor_copy);
-			globalActions.put(ITextEditorActionConstants.COPY, action);
-
-			action = new TextViewerAction(viewer, ITextOperationTarget.PASTE);
-			action.setText(EmbeddedEditorMessages.EmbeddedEditor_paste);
-			globalActions.put(ITextEditorActionConstants.PASTE, action);
-
-			action = new TextViewerAction(viewer, ITextOperationTarget.SELECT_ALL);
-			action.setText(EmbeddedEditorMessages.EmbeddedEditor_select_all);
-			globalActions.put(ITextEditorActionConstants.SELECT_ALL, action);
-
-			if (!Boolean.TRUE.equals(readonly)) {
-				action = new TextViewerAction(viewer, ISourceViewer.CONTENTASSIST_PROPOSALS);
-				action.setText(EmbeddedEditorMessages.EmbeddedEditor_content_assist);
-				globalActions.put(ITextEditorActionConstants.CONTENT_ASSIST, action);
-			}
-
-			// create context menu
-			MenuManager manager = new MenuManager(null, null);
-			manager.setRemoveAllWhenShown(true);
-			manager.addMenuListener(new IMenuListener() {
-				public void menuAboutToShow(IMenuManager mgr) {
-					fillContextMenu(mgr, globalActions);
-				}
-			});
-
-			StyledText text = viewer.getTextWidget();
-			Menu menu = manager.createContextMenu(text);
-			text.setMenu(menu);
-			return globalActions;
-		}
+		
 	}
 	
 	public Builder newEditor(IEditedResourceProvider resourceProvider) {
