@@ -18,12 +18,14 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ui.codetemplates.templates.Codetemplate;
 import org.eclipse.xtext.ui.codetemplates.templates.Codetemplates;
+import org.eclipse.xtext.ui.codetemplates.templates.TemplatesPackage;
 import org.eclipse.xtext.ui.codetemplates.templates.Variable;
 import org.eclipse.xtext.ui.codetemplates.ui.registry.LanguageRegistry;
 import org.eclipse.xtext.ui.codetemplates.ui.resolvers.IInspectableTemplateVariableResolver;
 import org.eclipse.xtext.ui.codetemplates.ui.resolvers.InspectableTemplateVariableResolverRegistry;
 import org.eclipse.xtext.ui.codetemplates.validation.CodetemplatesJavaValidator;
 import org.eclipse.xtext.ui.editor.templates.ContextTypeIdHelper;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Check;
 
 import com.google.common.collect.Iterators;
@@ -66,6 +68,13 @@ public class TemplateValidator extends CodetemplatesJavaValidator {
 					}
 				}
 			}
+		}
+	}
+	
+	@Check
+	public void checkNameIsNotEmpty(Codetemplate template) {
+		if (Strings.isEmpty(template.getName())) {
+			error("Template name cannot be empty.", TemplatesPackage.Literals.CODETEMPLATE__NAME);
 		}
 	}
 	
