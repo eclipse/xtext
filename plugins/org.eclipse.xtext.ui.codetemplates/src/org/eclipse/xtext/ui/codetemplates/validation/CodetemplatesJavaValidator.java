@@ -11,5 +11,10 @@ public class CodetemplatesJavaValidator extends AbstractCodetemplatesJavaValidat
 		if (!dollar.isEscaped())
 			error("Invalid escape sequence '$'", null);
 	}
+	
+	@Override
+	public boolean isLanguageSpecific() {
+		return false;
+	}
 
 }

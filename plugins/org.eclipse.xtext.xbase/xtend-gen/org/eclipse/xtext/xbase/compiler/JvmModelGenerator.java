@@ -1103,8 +1103,11 @@ public class JvmModelGenerator implements IGenerator {
   public void internalDoGenerate(final EObject type, final IFileSystemAccess fsa) {
     if (type instanceof JvmGenericType) {
       _internalDoGenerate((JvmGenericType)type, fsa);
-    } else {
+    } else if (type != null) {
       _internalDoGenerate(type, fsa);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(type, fsa).toString());
     }
   }
   
@@ -1130,8 +1133,11 @@ public class JvmModelGenerator implements IGenerator {
       return _generateMember((JvmOperation)it, importManager);
     } else if (it instanceof JvmField) {
       return _generateMember((JvmField)it, importManager);
-    } else {
+    } else if (it != null) {
       return _generateMember(it, importManager);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(it, importManager).toString());
     }
   }
   

@@ -101,7 +101,7 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 	
 	public void infer(EObject xtendFile, IAcceptor<JvmDeclaredType> acceptor, boolean prelinkingPhase) {
 		if (!(xtendFile instanceof XtendFile))
-			throw new IllegalArgumentException("expected XtendFile but was " + xtendFile);
+			return;
 		final XtendFile xtendFile2 = (XtendFile) xtendFile;
 		XtendClass xtendClass = xtendFile2.getXtendClass();
 		if (xtendClass == null)
