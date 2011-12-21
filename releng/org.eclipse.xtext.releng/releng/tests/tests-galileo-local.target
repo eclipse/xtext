@@ -16,6 +16,11 @@
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.xtext.xtend2.sdk.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.xtext.ui.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.xtext.junit" version="0.0.0"/>
+<unit id="org.eclipse.xtext.ui.junit" version="0.0.0"/>
+<unit id="org.eclipse.xtext.junit4" version="0.0.0"/>
+<unit id="org.eclipse.xtext.purexbase.ui" version="0.0.0"/>
 <repository location="https://hudson.eclipse.org/hudson/job/Xtext-nightly-HEAD/lastSuccessfulBuild/artifact/xtext.p2.repository/"/>
 </location>
 </locations>
