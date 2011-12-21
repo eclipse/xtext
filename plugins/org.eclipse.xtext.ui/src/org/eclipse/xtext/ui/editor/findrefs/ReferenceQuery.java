@@ -15,8 +15,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.search.ui.ISearchQuery;
 import org.eclipse.search.ui.ISearchResult;
 import org.eclipse.xtext.resource.IReferenceDescription;
-import org.eclipse.xtext.ui.findrefs.EditorResourceAccess;
-import org.eclipse.xtext.ui.findrefs.IReferenceFinder;
 
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
