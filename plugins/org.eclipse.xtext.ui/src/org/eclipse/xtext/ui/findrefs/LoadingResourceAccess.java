@@ -43,6 +43,7 @@ public class LoadingResourceAccess implements IReferenceFinder.ILocalResourceAcc
 			if (project != null) {
 				ResourceSet resourceSet = resourceSetProvider.get(project);
 				if(resourceSet != null)
+					resourceSet.getResource(targetURI, true);
 					try {
 						return work.exec(resourceSet);
 					} catch (Exception e) {
