@@ -22,7 +22,6 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
@@ -76,7 +75,8 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 			subMonitor.setWorkRemaining(targetURIsAsSet.size());
 			for (URI sourceResourceURI : sourceResourceURIs) {
 				IResourceDescription resourceDescription = indexData.getResourceDescription(sourceResourceURI);
-				findIndexedReferences(targetURIsAsSet, resourceDescription, referenceAcceptor, subMonitor.newChild(1));
+				if(resourceDescription != null) 
+					findIndexedReferences(targetURIsAsSet, resourceDescription, referenceAcceptor, subMonitor.newChild(1));
 			}
 		}
 	}
