@@ -12,8 +12,10 @@ import static com.google.common.collect.Maps.*;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IPageListener;
@@ -121,26 +123,20 @@ public class OpenDocumentTracker {
 
 	@Inject
 	protected void initialize(final IWorkbench workbench) {
-		synchronized (resourceUri2document) {
-			new DisplayRunnable() {
-				@Override
-				protected void run() throws Exception {
-					partListener = new PartListener();
-					pageListener = new PageListener();
-					for (IWorkbenchWindow window : workbench.getWorkbenchWindows()) {
-						window.addPageListener(pageListener);
-						for (IWorkbenchPage page : window.getPages()) {
-							page.addPartListener(partListener);
-							for (IEditorReference editorRef : page.getEditorReferences()) {
-								Pair<URI, IXtextDocument> entry = getEntry(editorRef);
-								if (entry != null) {
-									resourceUri2document.put(entry.getFirst(), entry.getSecond());
-								}
-							}
-						}
+		Assert.isNotNull(Display.getCurrent());
+		partListener = new PartListener();
+		pageListener = new PageListener();
+		for (IWorkbenchWindow window : workbench.getWorkbenchWindows()) {
+			window.addPageListener(pageListener);
+			for (IWorkbenchPage page : window.getPages()) {
+				page.addPartListener(partListener);
+				for (IEditorReference editorRef : page.getEditorReferences()) {
+					Pair<URI, IXtextDocument> entry = getEntry(editorRef);
+					if (entry != null) {
+						resourceUri2document.put(entry.getFirst(), entry.getSecond());
 					}
 				}
-			}.syncExec();
+			}
 		}
 	}
 
