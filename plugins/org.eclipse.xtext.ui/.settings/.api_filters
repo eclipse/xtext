@@ -1,21 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.ui" version="2">
-    <resource path="META-INF/MANIFEST.MF">
-        <filter comment="Removed empty class" id="923795461">
-            <message_arguments>
-                <message_argument value="2.1.0"/>
-                <message_argument value="2.0.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.ui.label.EditorImageHelper">
-        <filter comment="Removed unnecessary class" id="305324134">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.label.EditorImageHelper"/>
-                <message_argument value="org.eclipse.xtext.ui_2.1.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
     <resource path="src/org/eclipse/xtext/ui/editor/XtextSourceViewer.java" type="org.eclipse.xtext.ui.editor.XtextSourceViewer">
         <filter id="571473929">
             <message_arguments>
