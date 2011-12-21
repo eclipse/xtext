@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.6"?>
+
+<target name="api-baseline" sequenceNumber="2">
+<locations>
+<location includeAllPlatforms="false" includeMode="slicer" includeSource="false" type="InstallableUnit">
+<unit id="org.eclipse.xtext.runtime.feature.group" version="2.2.1.v201112130541"/>
+<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/"/>
+</location>
+</locations>
+</target>
