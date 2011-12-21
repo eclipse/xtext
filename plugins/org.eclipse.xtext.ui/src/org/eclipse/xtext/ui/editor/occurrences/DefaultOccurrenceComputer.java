@@ -13,7 +13,6 @@ import static java.util.Collections.*;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.SubMonitor;
@@ -31,9 +30,9 @@ import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.findrefs.IReferenceFinder;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.findrefs.EditorResourceAccess;
+import org.eclipse.xtext.ui.findrefs.IReferenceFinder;
+import org.eclipse.xtext.ui.findrefs.SimpleLocalResourceAccess;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -62,9 +61,6 @@ public class DefaultOccurrenceComputer implements IOccurrenceComputer {
 	@Inject
 	private IQualifiedNameProvider qualifiedNameProvider;
 	
-	@Inject 
-	private EditorResourceAccess editorResourceAccess;
-
 	protected void addOccurrenceAnnotation(String type, IDocument document, ITextRegion textRegion,
 			Map<Annotation, Position> annotationMap) {
 		try {
@@ -92,8 +88,9 @@ public class DefaultOccurrenceComputer implements IOccurrenceComputer {
 							references.add(reference);
 						}
 					};
+					SimpleLocalResourceAccess localResourceAccess = new SimpleLocalResourceAccess(resource.getResourceSet());
 					referenceFinder.findReferences(getTargetURIs(target), 
-							singleton(resource.getURI()), editorResourceAccess, acceptor, monitor.newChild(40));
+							singleton(resource.getURI()), localResourceAccess, acceptor, monitor.newChild(40));
 					if (monitor.isCanceled())
 						return emptyMap();
 					Map<Annotation, Position> result = newHashMapWithExpectedSize(references.size() + 1);
