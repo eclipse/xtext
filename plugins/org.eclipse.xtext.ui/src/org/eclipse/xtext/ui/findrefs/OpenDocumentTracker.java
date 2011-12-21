@@ -29,7 +29,6 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
-import org.eclipse.xtext.ui.util.DisplayRunnable;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 
