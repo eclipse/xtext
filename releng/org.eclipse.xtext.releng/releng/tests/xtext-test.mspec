@@ -3,4 +3,6 @@
   <mspec:property key="target.os" value="*"/>
   <mspec:property key="target.arch" value="*"/>
   <mspec:property key="target.ws" value="*"/>
+  <mspec:property key="eclipse.target.platform" value="${eclipse.download}/eclipse/updates/3.5"/>
+  <mspec:property key="emf.target.platform" value="${eclipse.download}/modeling/emf/updates"/>
 </mspec:mspec>
