@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.findrefs;
+package org.eclipse.xtext.ui.editor.findrefs;
 
 import static com.google.common.collect.Maps.*;
 
