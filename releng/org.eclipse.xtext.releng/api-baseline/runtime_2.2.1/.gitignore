@@ -1,4 +1,2 @@
-*.jar
-binary
-features
-plugins
+*
+!*.target
