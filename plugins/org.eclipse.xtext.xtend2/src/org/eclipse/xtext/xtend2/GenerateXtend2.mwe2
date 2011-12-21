@@ -101,6 +101,7 @@ Workflow {
 			fragment = xbase.XbaseGeneratorFragment {
 				generateXtendInferrer = false
 			}
+			fragment = templates.CodetemplatesGeneratorFragment {}
 		}
 	}
 }
