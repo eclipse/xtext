@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.tests.editor.findrefs;
+package org.eclipse.xtext.ui.tests.findrefs;
 
 import static com.google.common.collect.Lists.*;
 import static java.util.Collections.*;
@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.IReferenceDescription;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.DefaultReferenceDescription;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
@@ -61,7 +62,7 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 
 		ResourceSetBasedResourceDescriptions resourceDescriptions = get(ResourceSetBasedResourceDescriptions.class);
 		resourceDescriptions.setContext(resourceSet);
-		referenceFinder = new DefaultReferenceFinder(resourceDescriptions);
+		referenceFinder = new DefaultReferenceFinder(resourceDescriptions, get(IResourceServiceProvider.Registry.class));
 		localResourceAccess = new SimpleLocalResourceAccess(resourceSet);
 		acceptor = new CheckingAcceptor();
 	}

@@ -22,7 +22,6 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
@@ -34,6 +33,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.DefaultReferenceDescription;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -52,11 +52,15 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 	private static final Logger LOG = Logger.getLogger(DefaultReferenceFinder.class);
 
 	private IResourceDescriptions indexData;
-	
+
+	private IResourceServiceProvider.Registry serviceProviderRegistry;
+
 	@Inject
-	public DefaultReferenceFinder(IResourceDescriptions indexData) {
+	public DefaultReferenceFinder(IResourceDescriptions indexData,
+			IResourceServiceProvider.Registry serviceProviderRegistry) {
 		super();
 		this.indexData = indexData;
+		this.serviceProviderRegistry = serviceProviderRegistry;
 	}
 
 	public void findReferences(Iterable<URI> targetURIs, final Iterable<URI> sourceResourceURIs,
@@ -76,7 +80,9 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 			subMonitor.setWorkRemaining(targetURIsAsSet.size());
 			for (URI sourceResourceURI : sourceResourceURIs) {
 				IResourceDescription resourceDescription = indexData.getResourceDescription(sourceResourceURI);
-				findIndexedReferences(targetURIsAsSet, resourceDescription, referenceAcceptor, subMonitor.newChild(1));
+				if (resourceDescription != null)
+					findIndexedReferences(targetURIsAsSet, resourceDescription, referenceAcceptor,
+							subMonitor.newChild(1));
 			}
 		}
 	}
@@ -88,11 +94,16 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 			if (localResourceAccess != null) {
 				findLocalReferences(targetURIs, localResourceAccess, referenceAcceptor, subMonitor.newChild(1));
 			}
-			subMonitor.setWorkRemaining(size(indexData.getAllResourceDescriptions()));
 			Set<URI> targetURIsAsSet = newLinkedHashSet(targetURIs);
-			for (IResourceDescription resourceDescription : indexData.getAllResourceDescriptions()) {
-				findIndexedReferences(targetURIsAsSet, resourceDescription, referenceAcceptor, subMonitor.newChild(1));
-			}
+			findAllIndexedReferences(referenceAcceptor, subMonitor, targetURIsAsSet);
+		}
+	}
+
+	protected void findAllIndexedReferences(IAcceptor<IReferenceDescription> referenceAcceptor, SubMonitor subMonitor,
+			Set<URI> targetURIsAsSet) {
+		subMonitor.setWorkRemaining(size(indexData.getAllResourceDescriptions()));
+		for (IResourceDescription resourceDescription : indexData.getAllResourceDescriptions()) {
+			findIndexedReferences(targetURIsAsSet, resourceDescription, referenceAcceptor, subMonitor.newChild(1));
 		}
 	}
 
@@ -133,7 +144,7 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 							EObject source = crossRefSetting.getEObject();
 							if (crossRefSetting.getEStructuralFeature() instanceof EReference) {
 								EReference reference = (EReference) crossRefSetting.getEStructuralFeature();
-								int index = 0;
+								int index = -1;
 								if (reference.isMany()) {
 									List<?> values = (List<?>) source.eGet(reference);
 									for (int i = 0; i < values.size(); ++i) {
@@ -160,8 +171,11 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 	}
 
 	protected Map<EObject, URI> createExportedElementsMap(Resource resource) {
-		IResourceDescription resourceDescription = indexData.getResourceDescription(EcoreUtil2.getNormalizedURI(resource));
-		Map<EObject, URI> exportedElementMap = newHashMap();
+		URI uri = EcoreUtil2.getNormalizedURI(resource);
+		IResourceServiceProvider resourceServiceProvider = serviceProviderRegistry.getResourceServiceProvider(uri);
+		IResourceDescription resourceDescription = resourceServiceProvider.getResourceDescriptionManager()
+				.getResourceDescription(resource);
+		Map<EObject, URI> exportedElementMap = newIdentityHashMap();
 		if (resourceDescription != null) {
 			for (IEObjectDescription exportedEObjectDescription : resourceDescription.getExportedObjects()) {
 				EObject eObject = resource.getEObject(exportedEObjectDescription.getEObjectURI().fragment());
