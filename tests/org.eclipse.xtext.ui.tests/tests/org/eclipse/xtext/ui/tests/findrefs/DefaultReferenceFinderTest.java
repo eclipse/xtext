@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.tests.editor.findrefs;
+package org.eclipse.xtext.ui.tests.findrefs;
 
 import static com.google.common.collect.Lists.*;
 import static java.util.Collections.*;

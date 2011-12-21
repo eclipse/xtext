@@ -216,13 +216,13 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 										for (ReferenceSearchViewTreeNode referenceNode : rootNode.getChildren()) {
 											final URI referenceSourceURI = ((IReferenceDescription) referenceNode
 													.getDescription()).getSourceEObjectUri();
-											if (Iterables.isEmpty(Iterables.filter(newReferenceDescriptions,
+											if (!Iterables.any(newReferenceDescriptions,
 													new Predicate<IReferenceDescription>() {
 														public boolean apply(IReferenceDescription input) {
 															return input.getSourceEObjectUri().equals(
 																	referenceSourceURI);
 														}
-													}))) {
+													})) {
 												removedReferenceNodes.add(referenceNode);
 											}
 										}
