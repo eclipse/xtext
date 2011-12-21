@@ -1,5 +1,4 @@
-/artifacts.jar
-/plugins
-/content.jar
-/binary
-/features
+*.jar
+binary
+features
+plugins
