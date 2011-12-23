@@ -29,6 +29,7 @@ import org.eclipse.xtext.ui.codetemplates.templates.Variable;
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.impl.VariableImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.impl.VariableImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.impl.VariableImpl#isExpectingParameters <em>Expecting Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.impl.VariableImpl#getParameters <em>Parameters</em>}</li>
  * </ul>
  * </p>
@@ -76,6 +77,26 @@ public class VariableImpl extends TemplatePartImpl implements Variable
    * @ordered
    */
   protected String type = TYPE_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #isExpectingParameters() <em>Expecting Parameters</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isExpectingParameters()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean EXPECTING_PARAMETERS_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isExpectingParameters() <em>Expecting Parameters</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isExpectingParameters()
+   * @generated
+   * @ordered
+   */
+  protected boolean expectingParameters = EXPECTING_PARAMETERS_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getParameters() <em>Parameters</em>}' attribute list.
@@ -159,6 +180,29 @@ public class VariableImpl extends TemplatePartImpl implements Variable
    * <!-- end-user-doc -->
    * @generated
    */
+  public boolean isExpectingParameters()
+  {
+    return expectingParameters;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setExpectingParameters(boolean newExpectingParameters)
+  {
+    boolean oldExpectingParameters = expectingParameters;
+    expectingParameters = newExpectingParameters;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, TemplatesPackage.VARIABLE__EXPECTING_PARAMETERS, oldExpectingParameters, expectingParameters));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EList<String> getParameters()
   {
     if (parameters == null)
@@ -182,6 +226,8 @@ public class VariableImpl extends TemplatePartImpl implements Variable
         return getName();
       case TemplatesPackage.VARIABLE__TYPE:
         return getType();
+      case TemplatesPackage.VARIABLE__EXPECTING_PARAMETERS:
+        return isExpectingParameters();
       case TemplatesPackage.VARIABLE__PARAMETERS:
         return getParameters();
     }
@@ -204,6 +250,9 @@ public class VariableImpl extends TemplatePartImpl implements Variable
         return;
       case TemplatesPackage.VARIABLE__TYPE:
         setType((String)newValue);
+        return;
+      case TemplatesPackage.VARIABLE__EXPECTING_PARAMETERS:
+        setExpectingParameters((Boolean)newValue);
         return;
       case TemplatesPackage.VARIABLE__PARAMETERS:
         getParameters().clear();
@@ -229,6 +278,9 @@ public class VariableImpl extends TemplatePartImpl implements Variable
       case TemplatesPackage.VARIABLE__TYPE:
         setType(TYPE_EDEFAULT);
         return;
+      case TemplatesPackage.VARIABLE__EXPECTING_PARAMETERS:
+        setExpectingParameters(EXPECTING_PARAMETERS_EDEFAULT);
+        return;
       case TemplatesPackage.VARIABLE__PARAMETERS:
         getParameters().clear();
         return;
@@ -250,6 +302,8 @@ public class VariableImpl extends TemplatePartImpl implements Variable
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case TemplatesPackage.VARIABLE__TYPE:
         return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
+      case TemplatesPackage.VARIABLE__EXPECTING_PARAMETERS:
+        return expectingParameters != EXPECTING_PARAMETERS_EDEFAULT;
       case TemplatesPackage.VARIABLE__PARAMETERS:
         return parameters != null && !parameters.isEmpty();
     }
@@ -271,6 +325,8 @@ public class VariableImpl extends TemplatePartImpl implements Variable
     result.append(name);
     result.append(", type: ");
     result.append(type);
+    result.append(", expectingParameters: ");
+    result.append(expectingParameters);
     result.append(", parameters: ");
     result.append(parameters);
     result.append(')');

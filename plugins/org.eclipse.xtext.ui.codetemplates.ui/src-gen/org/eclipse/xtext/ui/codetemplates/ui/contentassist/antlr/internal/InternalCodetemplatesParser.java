@@ -1315,9 +1315,9 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
     // $ANTLR end "rule__Variable__Alternatives_2"
 
 
-    // $ANTLR start "rule__Variable__ParametersAlternatives_2_1_4_3_0"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:533:1: rule__Variable__ParametersAlternatives_2_1_4_3_0 : ( ( RULE_STRING ) | ( ruleFQN ) );
-    public final void rule__Variable__ParametersAlternatives_2_1_4_3_0() throws RecognitionException {
+    // $ANTLR start "rule__Variable__ParametersAlternatives_2_1_4_3_0_0"
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:533:1: rule__Variable__ParametersAlternatives_2_1_4_3_0_0 : ( ( RULE_STRING ) | ( ruleFQN ) );
+    public final void rule__Variable__ParametersAlternatives_2_1_4_3_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -1345,9 +1345,9 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
                     // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:538:1: ( RULE_STRING )
                     // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:539:1: RULE_STRING
                     {
-                     before(grammarAccess.getVariableAccess().getParametersSTRINGTerminalRuleCall_2_1_4_3_0_0()); 
-                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__Variable__ParametersAlternatives_2_1_4_3_01019); 
-                     after(grammarAccess.getVariableAccess().getParametersSTRINGTerminalRuleCall_2_1_4_3_0_0()); 
+                     before(grammarAccess.getVariableAccess().getParametersSTRINGTerminalRuleCall_2_1_4_3_0_0_0()); 
+                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__Variable__ParametersAlternatives_2_1_4_3_0_01019); 
+                     after(grammarAccess.getVariableAccess().getParametersSTRINGTerminalRuleCall_2_1_4_3_0_0_0()); 
 
                     }
 
@@ -1360,13 +1360,13 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
                     // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:544:6: ( ruleFQN )
                     // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:545:1: ruleFQN
                     {
-                     before(grammarAccess.getVariableAccess().getParametersFQNParserRuleCall_2_1_4_3_0_1()); 
-                    pushFollow(FOLLOW_ruleFQN_in_rule__Variable__ParametersAlternatives_2_1_4_3_01036);
+                     before(grammarAccess.getVariableAccess().getParametersFQNParserRuleCall_2_1_4_3_0_0_1()); 
+                    pushFollow(FOLLOW_ruleFQN_in_rule__Variable__ParametersAlternatives_2_1_4_3_0_01036);
                     ruleFQN();
 
                     state._fsp--;
 
-                     after(grammarAccess.getVariableAccess().getParametersFQNParserRuleCall_2_1_4_3_0_1()); 
+                     after(grammarAccess.getVariableAccess().getParametersFQNParserRuleCall_2_1_4_3_0_0_1()); 
 
                     }
 
@@ -1387,12 +1387,12 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
         }
         return ;
     }
-    // $ANTLR end "rule__Variable__ParametersAlternatives_2_1_4_3_0"
+    // $ANTLR end "rule__Variable__ParametersAlternatives_2_1_4_3_0_0"
 
 
-    // $ANTLR start "rule__Variable__ParametersAlternatives_2_1_4_4_3_0"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:555:1: rule__Variable__ParametersAlternatives_2_1_4_4_3_0 : ( ( RULE_STRING ) | ( ruleFQN ) );
-    public final void rule__Variable__ParametersAlternatives_2_1_4_4_3_0() throws RecognitionException {
+    // $ANTLR start "rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0"
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:555:1: rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0 : ( ( RULE_STRING ) | ( ruleFQN ) );
+    public final void rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -1420,9 +1420,9 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
                     // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:560:1: ( RULE_STRING )
                     // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:561:1: RULE_STRING
                     {
-                     before(grammarAccess.getVariableAccess().getParametersSTRINGTerminalRuleCall_2_1_4_4_3_0_0()); 
-                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__Variable__ParametersAlternatives_2_1_4_4_3_01068); 
-                     after(grammarAccess.getVariableAccess().getParametersSTRINGTerminalRuleCall_2_1_4_4_3_0_0()); 
+                     before(grammarAccess.getVariableAccess().getParametersSTRINGTerminalRuleCall_2_1_4_3_1_3_0_0()); 
+                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__Variable__ParametersAlternatives_2_1_4_3_1_3_01068); 
+                     after(grammarAccess.getVariableAccess().getParametersSTRINGTerminalRuleCall_2_1_4_3_1_3_0_0()); 
 
                     }
 
@@ -1435,13 +1435,13 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
                     // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:566:6: ( ruleFQN )
                     // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:567:1: ruleFQN
                     {
-                     before(grammarAccess.getVariableAccess().getParametersFQNParserRuleCall_2_1_4_4_3_0_1()); 
-                    pushFollow(FOLLOW_ruleFQN_in_rule__Variable__ParametersAlternatives_2_1_4_4_3_01085);
+                     before(grammarAccess.getVariableAccess().getParametersFQNParserRuleCall_2_1_4_3_1_3_0_1()); 
+                    pushFollow(FOLLOW_ruleFQN_in_rule__Variable__ParametersAlternatives_2_1_4_3_1_3_01085);
                     ruleFQN();
 
                     state._fsp--;
 
-                     after(grammarAccess.getVariableAccess().getParametersFQNParserRuleCall_2_1_4_4_3_0_1()); 
+                     after(grammarAccess.getVariableAccess().getParametersFQNParserRuleCall_2_1_4_3_1_3_0_1()); 
 
                     }
 
@@ -1462,7 +1462,7 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
         }
         return ;
     }
-    // $ANTLR end "rule__Variable__ParametersAlternatives_2_1_4_4_3_0"
+    // $ANTLR end "rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0"
 
 
     // $ANTLR start "rule__ValidID__Alternatives"
@@ -4832,21 +4832,31 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Variable__Group_2_1_4__1__Impl"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1815:1: rule__Variable__Group_2_1_4__1__Impl : ( KEYWORD_2 ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1815:1: rule__Variable__Group_2_1_4__1__Impl : ( ( rule__Variable__ExpectingParametersAssignment_2_1_4_1 ) ) ;
     public final void rule__Variable__Group_2_1_4__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1819:1: ( ( KEYWORD_2 ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1820:1: ( KEYWORD_2 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1819:1: ( ( ( rule__Variable__ExpectingParametersAssignment_2_1_4_1 ) ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1820:1: ( ( rule__Variable__ExpectingParametersAssignment_2_1_4_1 ) )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1820:1: ( KEYWORD_2 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1821:1: KEYWORD_2
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1820:1: ( ( rule__Variable__ExpectingParametersAssignment_2_1_4_1 ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1821:1: ( rule__Variable__ExpectingParametersAssignment_2_1_4_1 )
             {
-             before(grammarAccess.getVariableAccess().getLeftParenthesisKeyword_2_1_4_1()); 
-            match(input,KEYWORD_2,FOLLOW_KEYWORD_2_in_rule__Variable__Group_2_1_4__1__Impl3605); 
-             after(grammarAccess.getVariableAccess().getLeftParenthesisKeyword_2_1_4_1()); 
+             before(grammarAccess.getVariableAccess().getExpectingParametersAssignment_2_1_4_1()); 
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1822:1: ( rule__Variable__ExpectingParametersAssignment_2_1_4_1 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1822:2: rule__Variable__ExpectingParametersAssignment_2_1_4_1
+            {
+            pushFollow(FOLLOW_rule__Variable__ExpectingParametersAssignment_2_1_4_1_in_rule__Variable__Group_2_1_4__1__Impl3604);
+            rule__Variable__ExpectingParametersAssignment_2_1_4_1();
+
+            state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getVariableAccess().getExpectingParametersAssignment_2_1_4_1()); 
 
             }
 
@@ -4869,21 +4879,21 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Variable__Group_2_1_4__2"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1834:1: rule__Variable__Group_2_1_4__2 : rule__Variable__Group_2_1_4__2__Impl rule__Variable__Group_2_1_4__3 ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1832:1: rule__Variable__Group_2_1_4__2 : rule__Variable__Group_2_1_4__2__Impl rule__Variable__Group_2_1_4__3 ;
     public final void rule__Variable__Group_2_1_4__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1838:1: ( rule__Variable__Group_2_1_4__2__Impl rule__Variable__Group_2_1_4__3 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1839:2: rule__Variable__Group_2_1_4__2__Impl rule__Variable__Group_2_1_4__3
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1836:1: ( rule__Variable__Group_2_1_4__2__Impl rule__Variable__Group_2_1_4__3 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1837:2: rule__Variable__Group_2_1_4__2__Impl rule__Variable__Group_2_1_4__3
             {
-            pushFollow(FOLLOW_rule__Variable__Group_2_1_4__2__Impl_in_rule__Variable__Group_2_1_4__23636);
+            pushFollow(FOLLOW_rule__Variable__Group_2_1_4__2__Impl_in_rule__Variable__Group_2_1_4__23634);
             rule__Variable__Group_2_1_4__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Variable__Group_2_1_4__3_in_rule__Variable__Group_2_1_4__23639);
+            pushFollow(FOLLOW_rule__Variable__Group_2_1_4__3_in_rule__Variable__Group_2_1_4__23637);
             rule__Variable__Group_2_1_4__3();
 
             state._fsp--;
@@ -4907,20 +4917,20 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Variable__Group_2_1_4__2__Impl"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1846:1: rule__Variable__Group_2_1_4__2__Impl : ( ( RULE_WS )* ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1844:1: rule__Variable__Group_2_1_4__2__Impl : ( ( RULE_WS )* ) ;
     public final void rule__Variable__Group_2_1_4__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1850:1: ( ( ( RULE_WS )* ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1851:1: ( ( RULE_WS )* )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1848:1: ( ( ( RULE_WS )* ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1849:1: ( ( RULE_WS )* )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1851:1: ( ( RULE_WS )* )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1852:1: ( RULE_WS )*
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1849:1: ( ( RULE_WS )* )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1850:1: ( RULE_WS )*
             {
              before(grammarAccess.getVariableAccess().getWSTerminalRuleCall_2_1_4_2()); 
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1853:1: ( RULE_WS )*
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1851:1: ( RULE_WS )*
             loop22:
             do {
                 int alt22=2;
@@ -4933,9 +4943,9 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
                 switch (alt22) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1853:3: RULE_WS
+            	    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1851:3: RULE_WS
             	    {
-            	    match(input,RULE_WS,FOLLOW_RULE_WS_in_rule__Variable__Group_2_1_4__2__Impl3667); 
+            	    match(input,RULE_WS,FOLLOW_RULE_WS_in_rule__Variable__Group_2_1_4__2__Impl3665); 
 
             	    }
             	    break;
@@ -4968,21 +4978,21 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Variable__Group_2_1_4__3"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1863:1: rule__Variable__Group_2_1_4__3 : rule__Variable__Group_2_1_4__3__Impl rule__Variable__Group_2_1_4__4 ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1861:1: rule__Variable__Group_2_1_4__3 : rule__Variable__Group_2_1_4__3__Impl rule__Variable__Group_2_1_4__4 ;
     public final void rule__Variable__Group_2_1_4__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1867:1: ( rule__Variable__Group_2_1_4__3__Impl rule__Variable__Group_2_1_4__4 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1868:2: rule__Variable__Group_2_1_4__3__Impl rule__Variable__Group_2_1_4__4
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1865:1: ( rule__Variable__Group_2_1_4__3__Impl rule__Variable__Group_2_1_4__4 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1866:2: rule__Variable__Group_2_1_4__3__Impl rule__Variable__Group_2_1_4__4
             {
-            pushFollow(FOLLOW_rule__Variable__Group_2_1_4__3__Impl_in_rule__Variable__Group_2_1_4__33698);
+            pushFollow(FOLLOW_rule__Variable__Group_2_1_4__3__Impl_in_rule__Variable__Group_2_1_4__33696);
             rule__Variable__Group_2_1_4__3__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Variable__Group_2_1_4__4_in_rule__Variable__Group_2_1_4__33701);
+            pushFollow(FOLLOW_rule__Variable__Group_2_1_4__4_in_rule__Variable__Group_2_1_4__33699);
             rule__Variable__Group_2_1_4__4();
 
             state._fsp--;
@@ -5006,31 +5016,42 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Variable__Group_2_1_4__3__Impl"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1875:1: rule__Variable__Group_2_1_4__3__Impl : ( ( rule__Variable__ParametersAssignment_2_1_4_3 ) ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1873:1: rule__Variable__Group_2_1_4__3__Impl : ( ( rule__Variable__Group_2_1_4_3__0 )? ) ;
     public final void rule__Variable__Group_2_1_4__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1879:1: ( ( ( rule__Variable__ParametersAssignment_2_1_4_3 ) ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1880:1: ( ( rule__Variable__ParametersAssignment_2_1_4_3 ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1877:1: ( ( ( rule__Variable__Group_2_1_4_3__0 )? ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1878:1: ( ( rule__Variable__Group_2_1_4_3__0 )? )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1880:1: ( ( rule__Variable__ParametersAssignment_2_1_4_3 ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1881:1: ( rule__Variable__ParametersAssignment_2_1_4_3 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1878:1: ( ( rule__Variable__Group_2_1_4_3__0 )? )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1879:1: ( rule__Variable__Group_2_1_4_3__0 )?
             {
-             before(grammarAccess.getVariableAccess().getParametersAssignment_2_1_4_3()); 
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1882:1: ( rule__Variable__ParametersAssignment_2_1_4_3 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1882:2: rule__Variable__ParametersAssignment_2_1_4_3
-            {
-            pushFollow(FOLLOW_rule__Variable__ParametersAssignment_2_1_4_3_in_rule__Variable__Group_2_1_4__3__Impl3728);
-            rule__Variable__ParametersAssignment_2_1_4_3();
+             before(grammarAccess.getVariableAccess().getGroup_2_1_4_3()); 
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1880:1: ( rule__Variable__Group_2_1_4_3__0 )?
+            int alt23=2;
+            int LA23_0 = input.LA(1);
 
-            state._fsp--;
+            if ( (LA23_0==KEYWORD_14||LA23_0==KEYWORD_13||(LA23_0>=RULE_ID && LA23_0<=RULE_STRING)) ) {
+                alt23=1;
+            }
+            switch (alt23) {
+                case 1 :
+                    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1880:2: rule__Variable__Group_2_1_4_3__0
+                    {
+                    pushFollow(FOLLOW_rule__Variable__Group_2_1_4_3__0_in_rule__Variable__Group_2_1_4__3__Impl3726);
+                    rule__Variable__Group_2_1_4_3__0();
 
+                    state._fsp--;
+
+
+                    }
+                    break;
 
             }
 
-             after(grammarAccess.getVariableAccess().getParametersAssignment_2_1_4_3()); 
+             after(grammarAccess.getVariableAccess().getGroup_2_1_4_3()); 
 
             }
 
@@ -5053,22 +5074,17 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Variable__Group_2_1_4__4"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1892:1: rule__Variable__Group_2_1_4__4 : rule__Variable__Group_2_1_4__4__Impl rule__Variable__Group_2_1_4__5 ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1890:1: rule__Variable__Group_2_1_4__4 : rule__Variable__Group_2_1_4__4__Impl ;
     public final void rule__Variable__Group_2_1_4__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1896:1: ( rule__Variable__Group_2_1_4__4__Impl rule__Variable__Group_2_1_4__5 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1897:2: rule__Variable__Group_2_1_4__4__Impl rule__Variable__Group_2_1_4__5
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1894:1: ( rule__Variable__Group_2_1_4__4__Impl )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1895:2: rule__Variable__Group_2_1_4__4__Impl
             {
-            pushFollow(FOLLOW_rule__Variable__Group_2_1_4__4__Impl_in_rule__Variable__Group_2_1_4__43758);
+            pushFollow(FOLLOW_rule__Variable__Group_2_1_4__4__Impl_in_rule__Variable__Group_2_1_4__43757);
             rule__Variable__Group_2_1_4__4__Impl();
-
-            state._fsp--;
-
-            pushFollow(FOLLOW_rule__Variable__Group_2_1_4__5_in_rule__Variable__Group_2_1_4__43761);
-            rule__Variable__Group_2_1_4__5();
 
             state._fsp--;
 
@@ -5091,43 +5107,21 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Variable__Group_2_1_4__4__Impl"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1904:1: rule__Variable__Group_2_1_4__4__Impl : ( ( rule__Variable__Group_2_1_4_4__0 )* ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1901:1: rule__Variable__Group_2_1_4__4__Impl : ( KEYWORD_3 ) ;
     public final void rule__Variable__Group_2_1_4__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1908:1: ( ( ( rule__Variable__Group_2_1_4_4__0 )* ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1909:1: ( ( rule__Variable__Group_2_1_4_4__0 )* )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1905:1: ( ( KEYWORD_3 ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1906:1: ( KEYWORD_3 )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1909:1: ( ( rule__Variable__Group_2_1_4_4__0 )* )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1910:1: ( rule__Variable__Group_2_1_4_4__0 )*
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1906:1: ( KEYWORD_3 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1907:1: KEYWORD_3
             {
-             before(grammarAccess.getVariableAccess().getGroup_2_1_4_4()); 
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1911:1: ( rule__Variable__Group_2_1_4_4__0 )*
-            loop23:
-            do {
-                int alt23=2;
-                alt23 = dfa23.predict(input);
-                switch (alt23) {
-            	case 1 :
-            	    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1911:2: rule__Variable__Group_2_1_4_4__0
-            	    {
-            	    pushFollow(FOLLOW_rule__Variable__Group_2_1_4_4__0_in_rule__Variable__Group_2_1_4__4__Impl3788);
-            	    rule__Variable__Group_2_1_4_4__0();
-
-            	    state._fsp--;
-
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop23;
-                }
-            } while (true);
-
-             after(grammarAccess.getVariableAccess().getGroup_2_1_4_4()); 
+             before(grammarAccess.getVariableAccess().getRightParenthesisKeyword_2_1_4_4()); 
+            match(input,KEYWORD_3,FOLLOW_KEYWORD_3_in_rule__Variable__Group_2_1_4__4__Impl3785); 
+             after(grammarAccess.getVariableAccess().getRightParenthesisKeyword_2_1_4_4()); 
 
             }
 
@@ -5149,23 +5143,23 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
     // $ANTLR end "rule__Variable__Group_2_1_4__4__Impl"
 
 
-    // $ANTLR start "rule__Variable__Group_2_1_4__5"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1921:1: rule__Variable__Group_2_1_4__5 : rule__Variable__Group_2_1_4__5__Impl rule__Variable__Group_2_1_4__6 ;
-    public final void rule__Variable__Group_2_1_4__5() throws RecognitionException {
+    // $ANTLR start "rule__Variable__Group_2_1_4_3__0"
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1930:1: rule__Variable__Group_2_1_4_3__0 : rule__Variable__Group_2_1_4_3__0__Impl rule__Variable__Group_2_1_4_3__1 ;
+    public final void rule__Variable__Group_2_1_4_3__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1925:1: ( rule__Variable__Group_2_1_4__5__Impl rule__Variable__Group_2_1_4__6 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1926:2: rule__Variable__Group_2_1_4__5__Impl rule__Variable__Group_2_1_4__6
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1934:1: ( rule__Variable__Group_2_1_4_3__0__Impl rule__Variable__Group_2_1_4_3__1 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1935:2: rule__Variable__Group_2_1_4_3__0__Impl rule__Variable__Group_2_1_4_3__1
             {
-            pushFollow(FOLLOW_rule__Variable__Group_2_1_4__5__Impl_in_rule__Variable__Group_2_1_4__53819);
-            rule__Variable__Group_2_1_4__5__Impl();
+            pushFollow(FOLLOW_rule__Variable__Group_2_1_4_3__0__Impl_in_rule__Variable__Group_2_1_4_3__03826);
+            rule__Variable__Group_2_1_4_3__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Variable__Group_2_1_4__6_in_rule__Variable__Group_2_1_4__53822);
-            rule__Variable__Group_2_1_4__6();
+            pushFollow(FOLLOW_rule__Variable__Group_2_1_4_3__1_in_rule__Variable__Group_2_1_4_3__03829);
+            rule__Variable__Group_2_1_4_3__1();
 
             state._fsp--;
 
@@ -5184,39 +5178,122 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
         }
         return ;
     }
-    // $ANTLR end "rule__Variable__Group_2_1_4__5"
+    // $ANTLR end "rule__Variable__Group_2_1_4_3__0"
 
 
-    // $ANTLR start "rule__Variable__Group_2_1_4__5__Impl"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1933:1: rule__Variable__Group_2_1_4__5__Impl : ( ( RULE_WS )* ) ;
-    public final void rule__Variable__Group_2_1_4__5__Impl() throws RecognitionException {
+    // $ANTLR start "rule__Variable__Group_2_1_4_3__0__Impl"
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1942:1: rule__Variable__Group_2_1_4_3__0__Impl : ( ( rule__Variable__ParametersAssignment_2_1_4_3_0 ) ) ;
+    public final void rule__Variable__Group_2_1_4_3__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1937:1: ( ( ( RULE_WS )* ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1938:1: ( ( RULE_WS )* )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1946:1: ( ( ( rule__Variable__ParametersAssignment_2_1_4_3_0 ) ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1947:1: ( ( rule__Variable__ParametersAssignment_2_1_4_3_0 ) )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1938:1: ( ( RULE_WS )* )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1939:1: ( RULE_WS )*
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1947:1: ( ( rule__Variable__ParametersAssignment_2_1_4_3_0 ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1948:1: ( rule__Variable__ParametersAssignment_2_1_4_3_0 )
             {
-             before(grammarAccess.getVariableAccess().getWSTerminalRuleCall_2_1_4_5()); 
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1940:1: ( RULE_WS )*
+             before(grammarAccess.getVariableAccess().getParametersAssignment_2_1_4_3_0()); 
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1949:1: ( rule__Variable__ParametersAssignment_2_1_4_3_0 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1949:2: rule__Variable__ParametersAssignment_2_1_4_3_0
+            {
+            pushFollow(FOLLOW_rule__Variable__ParametersAssignment_2_1_4_3_0_in_rule__Variable__Group_2_1_4_3__0__Impl3856);
+            rule__Variable__ParametersAssignment_2_1_4_3_0();
+
+            state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getVariableAccess().getParametersAssignment_2_1_4_3_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Variable__Group_2_1_4_3__0__Impl"
+
+
+    // $ANTLR start "rule__Variable__Group_2_1_4_3__1"
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1959:1: rule__Variable__Group_2_1_4_3__1 : rule__Variable__Group_2_1_4_3__1__Impl rule__Variable__Group_2_1_4_3__2 ;
+    public final void rule__Variable__Group_2_1_4_3__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1963:1: ( rule__Variable__Group_2_1_4_3__1__Impl rule__Variable__Group_2_1_4_3__2 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1964:2: rule__Variable__Group_2_1_4_3__1__Impl rule__Variable__Group_2_1_4_3__2
+            {
+            pushFollow(FOLLOW_rule__Variable__Group_2_1_4_3__1__Impl_in_rule__Variable__Group_2_1_4_3__13886);
+            rule__Variable__Group_2_1_4_3__1__Impl();
+
+            state._fsp--;
+
+            pushFollow(FOLLOW_rule__Variable__Group_2_1_4_3__2_in_rule__Variable__Group_2_1_4_3__13889);
+            rule__Variable__Group_2_1_4_3__2();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Variable__Group_2_1_4_3__1"
+
+
+    // $ANTLR start "rule__Variable__Group_2_1_4_3__1__Impl"
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1971:1: rule__Variable__Group_2_1_4_3__1__Impl : ( ( rule__Variable__Group_2_1_4_3_1__0 )* ) ;
+    public final void rule__Variable__Group_2_1_4_3__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1975:1: ( ( ( rule__Variable__Group_2_1_4_3_1__0 )* ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1976:1: ( ( rule__Variable__Group_2_1_4_3_1__0 )* )
+            {
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1976:1: ( ( rule__Variable__Group_2_1_4_3_1__0 )* )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1977:1: ( rule__Variable__Group_2_1_4_3_1__0 )*
+            {
+             before(grammarAccess.getVariableAccess().getGroup_2_1_4_3_1()); 
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1978:1: ( rule__Variable__Group_2_1_4_3_1__0 )*
             loop24:
             do {
                 int alt24=2;
-                int LA24_0 = input.LA(1);
-
-                if ( (LA24_0==RULE_WS) ) {
-                    alt24=1;
-                }
-
-
+                alt24 = dfa24.predict(input);
                 switch (alt24) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1940:3: RULE_WS
+            	    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1978:2: rule__Variable__Group_2_1_4_3_1__0
             	    {
-            	    match(input,RULE_WS,FOLLOW_RULE_WS_in_rule__Variable__Group_2_1_4__5__Impl3850); 
+            	    pushFollow(FOLLOW_rule__Variable__Group_2_1_4_3_1__0_in_rule__Variable__Group_2_1_4_3__1__Impl3916);
+            	    rule__Variable__Group_2_1_4_3_1__0();
+
+            	    state._fsp--;
+
 
             	    }
             	    break;
@@ -5226,7 +5303,7 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
                 }
             } while (true);
 
-             after(grammarAccess.getVariableAccess().getWSTerminalRuleCall_2_1_4_5()); 
+             after(grammarAccess.getVariableAccess().getGroup_2_1_4_3_1()); 
 
             }
 
@@ -5245,21 +5322,21 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
         }
         return ;
     }
-    // $ANTLR end "rule__Variable__Group_2_1_4__5__Impl"
+    // $ANTLR end "rule__Variable__Group_2_1_4_3__1__Impl"
 
 
-    // $ANTLR start "rule__Variable__Group_2_1_4__6"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1950:1: rule__Variable__Group_2_1_4__6 : rule__Variable__Group_2_1_4__6__Impl ;
-    public final void rule__Variable__Group_2_1_4__6() throws RecognitionException {
+    // $ANTLR start "rule__Variable__Group_2_1_4_3__2"
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1988:1: rule__Variable__Group_2_1_4_3__2 : rule__Variable__Group_2_1_4_3__2__Impl ;
+    public final void rule__Variable__Group_2_1_4_3__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1954:1: ( rule__Variable__Group_2_1_4__6__Impl )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1955:2: rule__Variable__Group_2_1_4__6__Impl
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1992:1: ( rule__Variable__Group_2_1_4_3__2__Impl )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1993:2: rule__Variable__Group_2_1_4_3__2__Impl
             {
-            pushFollow(FOLLOW_rule__Variable__Group_2_1_4__6__Impl_in_rule__Variable__Group_2_1_4__63881);
-            rule__Variable__Group_2_1_4__6__Impl();
+            pushFollow(FOLLOW_rule__Variable__Group_2_1_4_3__2__Impl_in_rule__Variable__Group_2_1_4_3__23947);
+            rule__Variable__Group_2_1_4_3__2__Impl();
 
             state._fsp--;
 
@@ -5278,99 +5355,24 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
         }
         return ;
     }
-    // $ANTLR end "rule__Variable__Group_2_1_4__6"
+    // $ANTLR end "rule__Variable__Group_2_1_4_3__2"
 
 
-    // $ANTLR start "rule__Variable__Group_2_1_4__6__Impl"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1961:1: rule__Variable__Group_2_1_4__6__Impl : ( KEYWORD_3 ) ;
-    public final void rule__Variable__Group_2_1_4__6__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1965:1: ( ( KEYWORD_3 ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1966:1: ( KEYWORD_3 )
-            {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1966:1: ( KEYWORD_3 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1967:1: KEYWORD_3
-            {
-             before(grammarAccess.getVariableAccess().getRightParenthesisKeyword_2_1_4_6()); 
-            match(input,KEYWORD_3,FOLLOW_KEYWORD_3_in_rule__Variable__Group_2_1_4__6__Impl3909); 
-             after(grammarAccess.getVariableAccess().getRightParenthesisKeyword_2_1_4_6()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Variable__Group_2_1_4__6__Impl"
-
-
-    // $ANTLR start "rule__Variable__Group_2_1_4_4__0"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1994:1: rule__Variable__Group_2_1_4_4__0 : rule__Variable__Group_2_1_4_4__0__Impl rule__Variable__Group_2_1_4_4__1 ;
-    public final void rule__Variable__Group_2_1_4_4__0() throws RecognitionException {
+    // $ANTLR start "rule__Variable__Group_2_1_4_3__2__Impl"
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1999:1: rule__Variable__Group_2_1_4_3__2__Impl : ( ( RULE_WS )* ) ;
+    public final void rule__Variable__Group_2_1_4_3__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1998:1: ( rule__Variable__Group_2_1_4_4__0__Impl rule__Variable__Group_2_1_4_4__1 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1999:2: rule__Variable__Group_2_1_4_4__0__Impl rule__Variable__Group_2_1_4_4__1
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2003:1: ( ( ( RULE_WS )* ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2004:1: ( ( RULE_WS )* )
             {
-            pushFollow(FOLLOW_rule__Variable__Group_2_1_4_4__0__Impl_in_rule__Variable__Group_2_1_4_4__03954);
-            rule__Variable__Group_2_1_4_4__0__Impl();
-
-            state._fsp--;
-
-            pushFollow(FOLLOW_rule__Variable__Group_2_1_4_4__1_in_rule__Variable__Group_2_1_4_4__03957);
-            rule__Variable__Group_2_1_4_4__1();
-
-            state._fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Variable__Group_2_1_4_4__0"
-
-
-    // $ANTLR start "rule__Variable__Group_2_1_4_4__0__Impl"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2006:1: rule__Variable__Group_2_1_4_4__0__Impl : ( ( RULE_WS )* ) ;
-    public final void rule__Variable__Group_2_1_4_4__0__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2010:1: ( ( ( RULE_WS )* ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2011:1: ( ( RULE_WS )* )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2004:1: ( ( RULE_WS )* )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2005:1: ( RULE_WS )*
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2011:1: ( ( RULE_WS )* )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2012:1: ( RULE_WS )*
-            {
-             before(grammarAccess.getVariableAccess().getWSTerminalRuleCall_2_1_4_4_0()); 
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2013:1: ( RULE_WS )*
+             before(grammarAccess.getVariableAccess().getWSTerminalRuleCall_2_1_4_3_2()); 
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2006:1: ( RULE_WS )*
             loop25:
             do {
                 int alt25=2;
@@ -5383,9 +5385,9 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
                 switch (alt25) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2013:3: RULE_WS
+            	    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2006:3: RULE_WS
             	    {
-            	    match(input,RULE_WS,FOLLOW_RULE_WS_in_rule__Variable__Group_2_1_4_4__0__Impl3985); 
+            	    match(input,RULE_WS,FOLLOW_RULE_WS_in_rule__Variable__Group_2_1_4_3__2__Impl3975); 
 
             	    }
             	    break;
@@ -5395,7 +5397,7 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
                 }
             } while (true);
 
-             after(grammarAccess.getVariableAccess().getWSTerminalRuleCall_2_1_4_4_0()); 
+             after(grammarAccess.getVariableAccess().getWSTerminalRuleCall_2_1_4_3_2()); 
 
             }
 
@@ -5414,101 +5416,26 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
         }
         return ;
     }
-    // $ANTLR end "rule__Variable__Group_2_1_4_4__0__Impl"
+    // $ANTLR end "rule__Variable__Group_2_1_4_3__2__Impl"
 
 
-    // $ANTLR start "rule__Variable__Group_2_1_4_4__1"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2023:1: rule__Variable__Group_2_1_4_4__1 : rule__Variable__Group_2_1_4_4__1__Impl rule__Variable__Group_2_1_4_4__2 ;
-    public final void rule__Variable__Group_2_1_4_4__1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2027:1: ( rule__Variable__Group_2_1_4_4__1__Impl rule__Variable__Group_2_1_4_4__2 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2028:2: rule__Variable__Group_2_1_4_4__1__Impl rule__Variable__Group_2_1_4_4__2
-            {
-            pushFollow(FOLLOW_rule__Variable__Group_2_1_4_4__1__Impl_in_rule__Variable__Group_2_1_4_4__14016);
-            rule__Variable__Group_2_1_4_4__1__Impl();
-
-            state._fsp--;
-
-            pushFollow(FOLLOW_rule__Variable__Group_2_1_4_4__2_in_rule__Variable__Group_2_1_4_4__14019);
-            rule__Variable__Group_2_1_4_4__2();
-
-            state._fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Variable__Group_2_1_4_4__1"
-
-
-    // $ANTLR start "rule__Variable__Group_2_1_4_4__1__Impl"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2035:1: rule__Variable__Group_2_1_4_4__1__Impl : ( KEYWORD_4 ) ;
-    public final void rule__Variable__Group_2_1_4_4__1__Impl() throws RecognitionException {
+    // $ANTLR start "rule__Variable__Group_2_1_4_3_1__0"
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2022:1: rule__Variable__Group_2_1_4_3_1__0 : rule__Variable__Group_2_1_4_3_1__0__Impl rule__Variable__Group_2_1_4_3_1__1 ;
+    public final void rule__Variable__Group_2_1_4_3_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2039:1: ( ( KEYWORD_4 ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2040:1: ( KEYWORD_4 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2026:1: ( rule__Variable__Group_2_1_4_3_1__0__Impl rule__Variable__Group_2_1_4_3_1__1 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2027:2: rule__Variable__Group_2_1_4_3_1__0__Impl rule__Variable__Group_2_1_4_3_1__1
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2040:1: ( KEYWORD_4 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2041:1: KEYWORD_4
-            {
-             before(grammarAccess.getVariableAccess().getCommaKeyword_2_1_4_4_1()); 
-            match(input,KEYWORD_4,FOLLOW_KEYWORD_4_in_rule__Variable__Group_2_1_4_4__1__Impl4047); 
-             after(grammarAccess.getVariableAccess().getCommaKeyword_2_1_4_4_1()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Variable__Group_2_1_4_4__1__Impl"
-
-
-    // $ANTLR start "rule__Variable__Group_2_1_4_4__2"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2054:1: rule__Variable__Group_2_1_4_4__2 : rule__Variable__Group_2_1_4_4__2__Impl rule__Variable__Group_2_1_4_4__3 ;
-    public final void rule__Variable__Group_2_1_4_4__2() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2058:1: ( rule__Variable__Group_2_1_4_4__2__Impl rule__Variable__Group_2_1_4_4__3 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2059:2: rule__Variable__Group_2_1_4_4__2__Impl rule__Variable__Group_2_1_4_4__3
-            {
-            pushFollow(FOLLOW_rule__Variable__Group_2_1_4_4__2__Impl_in_rule__Variable__Group_2_1_4_4__24078);
-            rule__Variable__Group_2_1_4_4__2__Impl();
+            pushFollow(FOLLOW_rule__Variable__Group_2_1_4_3_1__0__Impl_in_rule__Variable__Group_2_1_4_3_1__04012);
+            rule__Variable__Group_2_1_4_3_1__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Variable__Group_2_1_4_4__3_in_rule__Variable__Group_2_1_4_4__24081);
-            rule__Variable__Group_2_1_4_4__3();
+            pushFollow(FOLLOW_rule__Variable__Group_2_1_4_3_1__1_in_rule__Variable__Group_2_1_4_3_1__04015);
+            rule__Variable__Group_2_1_4_3_1__1();
 
             state._fsp--;
 
@@ -5527,24 +5454,24 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
         }
         return ;
     }
-    // $ANTLR end "rule__Variable__Group_2_1_4_4__2"
+    // $ANTLR end "rule__Variable__Group_2_1_4_3_1__0"
 
 
-    // $ANTLR start "rule__Variable__Group_2_1_4_4__2__Impl"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2066:1: rule__Variable__Group_2_1_4_4__2__Impl : ( ( RULE_WS )* ) ;
-    public final void rule__Variable__Group_2_1_4_4__2__Impl() throws RecognitionException {
+    // $ANTLR start "rule__Variable__Group_2_1_4_3_1__0__Impl"
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2034:1: rule__Variable__Group_2_1_4_3_1__0__Impl : ( ( RULE_WS )* ) ;
+    public final void rule__Variable__Group_2_1_4_3_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2070:1: ( ( ( RULE_WS )* ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2071:1: ( ( RULE_WS )* )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2038:1: ( ( ( RULE_WS )* ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2039:1: ( ( RULE_WS )* )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2071:1: ( ( RULE_WS )* )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2072:1: ( RULE_WS )*
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2039:1: ( ( RULE_WS )* )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2040:1: ( RULE_WS )*
             {
-             before(grammarAccess.getVariableAccess().getWSTerminalRuleCall_2_1_4_4_2()); 
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2073:1: ( RULE_WS )*
+             before(grammarAccess.getVariableAccess().getWSTerminalRuleCall_2_1_4_3_1_0()); 
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2041:1: ( RULE_WS )*
             loop26:
             do {
                 int alt26=2;
@@ -5557,9 +5484,9 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
                 switch (alt26) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2073:3: RULE_WS
+            	    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2041:3: RULE_WS
             	    {
-            	    match(input,RULE_WS,FOLLOW_RULE_WS_in_rule__Variable__Group_2_1_4_4__2__Impl4109); 
+            	    match(input,RULE_WS,FOLLOW_RULE_WS_in_rule__Variable__Group_2_1_4_3_1__0__Impl4043); 
 
             	    }
             	    break;
@@ -5569,7 +5496,7 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
                 }
             } while (true);
 
-             after(grammarAccess.getVariableAccess().getWSTerminalRuleCall_2_1_4_4_2()); 
+             after(grammarAccess.getVariableAccess().getWSTerminalRuleCall_2_1_4_3_1_0()); 
 
             }
 
@@ -5588,21 +5515,26 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
         }
         return ;
     }
-    // $ANTLR end "rule__Variable__Group_2_1_4_4__2__Impl"
+    // $ANTLR end "rule__Variable__Group_2_1_4_3_1__0__Impl"
 
 
-    // $ANTLR start "rule__Variable__Group_2_1_4_4__3"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2083:1: rule__Variable__Group_2_1_4_4__3 : rule__Variable__Group_2_1_4_4__3__Impl ;
-    public final void rule__Variable__Group_2_1_4_4__3() throws RecognitionException {
+    // $ANTLR start "rule__Variable__Group_2_1_4_3_1__1"
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2051:1: rule__Variable__Group_2_1_4_3_1__1 : rule__Variable__Group_2_1_4_3_1__1__Impl rule__Variable__Group_2_1_4_3_1__2 ;
+    public final void rule__Variable__Group_2_1_4_3_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2087:1: ( rule__Variable__Group_2_1_4_4__3__Impl )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2088:2: rule__Variable__Group_2_1_4_4__3__Impl
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2055:1: ( rule__Variable__Group_2_1_4_3_1__1__Impl rule__Variable__Group_2_1_4_3_1__2 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2056:2: rule__Variable__Group_2_1_4_3_1__1__Impl rule__Variable__Group_2_1_4_3_1__2
             {
-            pushFollow(FOLLOW_rule__Variable__Group_2_1_4_4__3__Impl_in_rule__Variable__Group_2_1_4_4__34140);
-            rule__Variable__Group_2_1_4_4__3__Impl();
+            pushFollow(FOLLOW_rule__Variable__Group_2_1_4_3_1__1__Impl_in_rule__Variable__Group_2_1_4_3_1__14074);
+            rule__Variable__Group_2_1_4_3_1__1__Impl();
+
+            state._fsp--;
+
+            pushFollow(FOLLOW_rule__Variable__Group_2_1_4_3_1__2_in_rule__Variable__Group_2_1_4_3_1__14077);
+            rule__Variable__Group_2_1_4_3_1__2();
 
             state._fsp--;
 
@@ -5621,35 +5553,25 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
         }
         return ;
     }
-    // $ANTLR end "rule__Variable__Group_2_1_4_4__3"
+    // $ANTLR end "rule__Variable__Group_2_1_4_3_1__1"
 
 
-    // $ANTLR start "rule__Variable__Group_2_1_4_4__3__Impl"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2094:1: rule__Variable__Group_2_1_4_4__3__Impl : ( ( rule__Variable__ParametersAssignment_2_1_4_4_3 ) ) ;
-    public final void rule__Variable__Group_2_1_4_4__3__Impl() throws RecognitionException {
+    // $ANTLR start "rule__Variable__Group_2_1_4_3_1__1__Impl"
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2063:1: rule__Variable__Group_2_1_4_3_1__1__Impl : ( KEYWORD_4 ) ;
+    public final void rule__Variable__Group_2_1_4_3_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2098:1: ( ( ( rule__Variable__ParametersAssignment_2_1_4_4_3 ) ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2099:1: ( ( rule__Variable__ParametersAssignment_2_1_4_4_3 ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2067:1: ( ( KEYWORD_4 ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2068:1: ( KEYWORD_4 )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2099:1: ( ( rule__Variable__ParametersAssignment_2_1_4_4_3 ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2100:1: ( rule__Variable__ParametersAssignment_2_1_4_4_3 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2068:1: ( KEYWORD_4 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2069:1: KEYWORD_4
             {
-             before(grammarAccess.getVariableAccess().getParametersAssignment_2_1_4_4_3()); 
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2101:1: ( rule__Variable__ParametersAssignment_2_1_4_4_3 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2101:2: rule__Variable__ParametersAssignment_2_1_4_4_3
-            {
-            pushFollow(FOLLOW_rule__Variable__ParametersAssignment_2_1_4_4_3_in_rule__Variable__Group_2_1_4_4__3__Impl4167);
-            rule__Variable__ParametersAssignment_2_1_4_4_3();
-
-            state._fsp--;
-
-
-            }
-
-             after(grammarAccess.getVariableAccess().getParametersAssignment_2_1_4_4_3()); 
+             before(grammarAccess.getVariableAccess().getCommaKeyword_2_1_4_3_1_1()); 
+            match(input,KEYWORD_4,FOLLOW_KEYWORD_4_in_rule__Variable__Group_2_1_4_3_1__1__Impl4105); 
+             after(grammarAccess.getVariableAccess().getCommaKeyword_2_1_4_3_1_1()); 
 
             }
 
@@ -5668,25 +5590,204 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
         }
         return ;
     }
-    // $ANTLR end "rule__Variable__Group_2_1_4_4__3__Impl"
+    // $ANTLR end "rule__Variable__Group_2_1_4_3_1__1__Impl"
+
+
+    // $ANTLR start "rule__Variable__Group_2_1_4_3_1__2"
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2082:1: rule__Variable__Group_2_1_4_3_1__2 : rule__Variable__Group_2_1_4_3_1__2__Impl rule__Variable__Group_2_1_4_3_1__3 ;
+    public final void rule__Variable__Group_2_1_4_3_1__2() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2086:1: ( rule__Variable__Group_2_1_4_3_1__2__Impl rule__Variable__Group_2_1_4_3_1__3 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2087:2: rule__Variable__Group_2_1_4_3_1__2__Impl rule__Variable__Group_2_1_4_3_1__3
+            {
+            pushFollow(FOLLOW_rule__Variable__Group_2_1_4_3_1__2__Impl_in_rule__Variable__Group_2_1_4_3_1__24136);
+            rule__Variable__Group_2_1_4_3_1__2__Impl();
+
+            state._fsp--;
+
+            pushFollow(FOLLOW_rule__Variable__Group_2_1_4_3_1__3_in_rule__Variable__Group_2_1_4_3_1__24139);
+            rule__Variable__Group_2_1_4_3_1__3();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Variable__Group_2_1_4_3_1__2"
+
+
+    // $ANTLR start "rule__Variable__Group_2_1_4_3_1__2__Impl"
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2094:1: rule__Variable__Group_2_1_4_3_1__2__Impl : ( ( RULE_WS )* ) ;
+    public final void rule__Variable__Group_2_1_4_3_1__2__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2098:1: ( ( ( RULE_WS )* ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2099:1: ( ( RULE_WS )* )
+            {
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2099:1: ( ( RULE_WS )* )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2100:1: ( RULE_WS )*
+            {
+             before(grammarAccess.getVariableAccess().getWSTerminalRuleCall_2_1_4_3_1_2()); 
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2101:1: ( RULE_WS )*
+            loop27:
+            do {
+                int alt27=2;
+                int LA27_0 = input.LA(1);
+
+                if ( (LA27_0==RULE_WS) ) {
+                    alt27=1;
+                }
+
+
+                switch (alt27) {
+            	case 1 :
+            	    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2101:3: RULE_WS
+            	    {
+            	    match(input,RULE_WS,FOLLOW_RULE_WS_in_rule__Variable__Group_2_1_4_3_1__2__Impl4167); 
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop27;
+                }
+            } while (true);
+
+             after(grammarAccess.getVariableAccess().getWSTerminalRuleCall_2_1_4_3_1_2()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Variable__Group_2_1_4_3_1__2__Impl"
+
+
+    // $ANTLR start "rule__Variable__Group_2_1_4_3_1__3"
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2111:1: rule__Variable__Group_2_1_4_3_1__3 : rule__Variable__Group_2_1_4_3_1__3__Impl ;
+    public final void rule__Variable__Group_2_1_4_3_1__3() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2115:1: ( rule__Variable__Group_2_1_4_3_1__3__Impl )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2116:2: rule__Variable__Group_2_1_4_3_1__3__Impl
+            {
+            pushFollow(FOLLOW_rule__Variable__Group_2_1_4_3_1__3__Impl_in_rule__Variable__Group_2_1_4_3_1__34198);
+            rule__Variable__Group_2_1_4_3_1__3__Impl();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Variable__Group_2_1_4_3_1__3"
+
+
+    // $ANTLR start "rule__Variable__Group_2_1_4_3_1__3__Impl"
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2122:1: rule__Variable__Group_2_1_4_3_1__3__Impl : ( ( rule__Variable__ParametersAssignment_2_1_4_3_1_3 ) ) ;
+    public final void rule__Variable__Group_2_1_4_3_1__3__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2126:1: ( ( ( rule__Variable__ParametersAssignment_2_1_4_3_1_3 ) ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2127:1: ( ( rule__Variable__ParametersAssignment_2_1_4_3_1_3 ) )
+            {
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2127:1: ( ( rule__Variable__ParametersAssignment_2_1_4_3_1_3 ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2128:1: ( rule__Variable__ParametersAssignment_2_1_4_3_1_3 )
+            {
+             before(grammarAccess.getVariableAccess().getParametersAssignment_2_1_4_3_1_3()); 
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2129:1: ( rule__Variable__ParametersAssignment_2_1_4_3_1_3 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2129:2: rule__Variable__ParametersAssignment_2_1_4_3_1_3
+            {
+            pushFollow(FOLLOW_rule__Variable__ParametersAssignment_2_1_4_3_1_3_in_rule__Variable__Group_2_1_4_3_1__3__Impl4225);
+            rule__Variable__ParametersAssignment_2_1_4_3_1_3();
+
+            state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getVariableAccess().getParametersAssignment_2_1_4_3_1_3()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Variable__Group_2_1_4_3_1__3__Impl"
 
 
     // $ANTLR start "rule__FQN__Group__0"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2119:1: rule__FQN__Group__0 : rule__FQN__Group__0__Impl rule__FQN__Group__1 ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2147:1: rule__FQN__Group__0 : rule__FQN__Group__0__Impl rule__FQN__Group__1 ;
     public final void rule__FQN__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2123:1: ( rule__FQN__Group__0__Impl rule__FQN__Group__1 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2124:2: rule__FQN__Group__0__Impl rule__FQN__Group__1
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2151:1: ( rule__FQN__Group__0__Impl rule__FQN__Group__1 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2152:2: rule__FQN__Group__0__Impl rule__FQN__Group__1
             {
-            pushFollow(FOLLOW_rule__FQN__Group__0__Impl_in_rule__FQN__Group__04205);
+            pushFollow(FOLLOW_rule__FQN__Group__0__Impl_in_rule__FQN__Group__04263);
             rule__FQN__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__FQN__Group__1_in_rule__FQN__Group__04208);
+            pushFollow(FOLLOW_rule__FQN__Group__1_in_rule__FQN__Group__04266);
             rule__FQN__Group__1();
 
             state._fsp--;
@@ -5710,20 +5811,20 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__FQN__Group__0__Impl"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2131:1: rule__FQN__Group__0__Impl : ( ruleValidID ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2159:1: rule__FQN__Group__0__Impl : ( ruleValidID ) ;
     public final void rule__FQN__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2135:1: ( ( ruleValidID ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2136:1: ( ruleValidID )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2163:1: ( ( ruleValidID ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2164:1: ( ruleValidID )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2136:1: ( ruleValidID )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2137:1: ruleValidID
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2164:1: ( ruleValidID )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2165:1: ruleValidID
             {
              before(grammarAccess.getFQNAccess().getValidIDParserRuleCall_0()); 
-            pushFollow(FOLLOW_ruleValidID_in_rule__FQN__Group__0__Impl4235);
+            pushFollow(FOLLOW_ruleValidID_in_rule__FQN__Group__0__Impl4293);
             ruleValidID();
 
             state._fsp--;
@@ -5751,16 +5852,16 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__FQN__Group__1"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2148:1: rule__FQN__Group__1 : rule__FQN__Group__1__Impl ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2176:1: rule__FQN__Group__1 : rule__FQN__Group__1__Impl ;
     public final void rule__FQN__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2152:1: ( rule__FQN__Group__1__Impl )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2153:2: rule__FQN__Group__1__Impl
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2180:1: ( rule__FQN__Group__1__Impl )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2181:2: rule__FQN__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__FQN__Group__1__Impl_in_rule__FQN__Group__14264);
+            pushFollow(FOLLOW_rule__FQN__Group__1__Impl_in_rule__FQN__Group__14322);
             rule__FQN__Group__1__Impl();
 
             state._fsp--;
@@ -5784,35 +5885,35 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__FQN__Group__1__Impl"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2159:1: rule__FQN__Group__1__Impl : ( ( rule__FQN__Group_1__0 )* ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2187:1: rule__FQN__Group__1__Impl : ( ( rule__FQN__Group_1__0 )* ) ;
     public final void rule__FQN__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2163:1: ( ( ( rule__FQN__Group_1__0 )* ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2164:1: ( ( rule__FQN__Group_1__0 )* )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2191:1: ( ( ( rule__FQN__Group_1__0 )* ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2192:1: ( ( rule__FQN__Group_1__0 )* )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2164:1: ( ( rule__FQN__Group_1__0 )* )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2165:1: ( rule__FQN__Group_1__0 )*
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2192:1: ( ( rule__FQN__Group_1__0 )* )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2193:1: ( rule__FQN__Group_1__0 )*
             {
              before(grammarAccess.getFQNAccess().getGroup_1()); 
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2166:1: ( rule__FQN__Group_1__0 )*
-            loop27:
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2194:1: ( rule__FQN__Group_1__0 )*
+            loop28:
             do {
-                int alt27=2;
-                int LA27_0 = input.LA(1);
+                int alt28=2;
+                int LA28_0 = input.LA(1);
 
-                if ( (LA27_0==KEYWORD_5) ) {
-                    alt27=1;
+                if ( (LA28_0==KEYWORD_5) ) {
+                    alt28=1;
                 }
 
 
-                switch (alt27) {
+                switch (alt28) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2166:2: rule__FQN__Group_1__0
+            	    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2194:2: rule__FQN__Group_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__FQN__Group_1__0_in_rule__FQN__Group__1__Impl4291);
+            	    pushFollow(FOLLOW_rule__FQN__Group_1__0_in_rule__FQN__Group__1__Impl4349);
             	    rule__FQN__Group_1__0();
 
             	    state._fsp--;
@@ -5822,7 +5923,7 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
             	    break;
 
             	default :
-            	    break loop27;
+            	    break loop28;
                 }
             } while (true);
 
@@ -5849,21 +5950,21 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__FQN__Group_1__0"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2180:1: rule__FQN__Group_1__0 : rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2208:1: rule__FQN__Group_1__0 : rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 ;
     public final void rule__FQN__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2184:1: ( rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2185:2: rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2212:1: ( rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2213:2: rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1
             {
-            pushFollow(FOLLOW_rule__FQN__Group_1__0__Impl_in_rule__FQN__Group_1__04326);
+            pushFollow(FOLLOW_rule__FQN__Group_1__0__Impl_in_rule__FQN__Group_1__04384);
             rule__FQN__Group_1__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__FQN__Group_1__1_in_rule__FQN__Group_1__04329);
+            pushFollow(FOLLOW_rule__FQN__Group_1__1_in_rule__FQN__Group_1__04387);
             rule__FQN__Group_1__1();
 
             state._fsp--;
@@ -5887,20 +5988,20 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__FQN__Group_1__0__Impl"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2192:1: rule__FQN__Group_1__0__Impl : ( KEYWORD_5 ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2220:1: rule__FQN__Group_1__0__Impl : ( KEYWORD_5 ) ;
     public final void rule__FQN__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2196:1: ( ( KEYWORD_5 ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2197:1: ( KEYWORD_5 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2224:1: ( ( KEYWORD_5 ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2225:1: ( KEYWORD_5 )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2197:1: ( KEYWORD_5 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2198:1: KEYWORD_5
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2225:1: ( KEYWORD_5 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2226:1: KEYWORD_5
             {
              before(grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); 
-            match(input,KEYWORD_5,FOLLOW_KEYWORD_5_in_rule__FQN__Group_1__0__Impl4357); 
+            match(input,KEYWORD_5,FOLLOW_KEYWORD_5_in_rule__FQN__Group_1__0__Impl4415); 
              after(grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); 
 
             }
@@ -5924,16 +6025,16 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__FQN__Group_1__1"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2211:1: rule__FQN__Group_1__1 : rule__FQN__Group_1__1__Impl ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2239:1: rule__FQN__Group_1__1 : rule__FQN__Group_1__1__Impl ;
     public final void rule__FQN__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2215:1: ( rule__FQN__Group_1__1__Impl )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2216:2: rule__FQN__Group_1__1__Impl
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2243:1: ( rule__FQN__Group_1__1__Impl )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2244:2: rule__FQN__Group_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__FQN__Group_1__1__Impl_in_rule__FQN__Group_1__14388);
+            pushFollow(FOLLOW_rule__FQN__Group_1__1__Impl_in_rule__FQN__Group_1__14446);
             rule__FQN__Group_1__1__Impl();
 
             state._fsp--;
@@ -5957,20 +6058,20 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__FQN__Group_1__1__Impl"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2222:1: rule__FQN__Group_1__1__Impl : ( ruleValidID ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2250:1: rule__FQN__Group_1__1__Impl : ( ruleValidID ) ;
     public final void rule__FQN__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2226:1: ( ( ruleValidID ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2227:1: ( ruleValidID )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2254:1: ( ( ruleValidID ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2255:1: ( ruleValidID )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2227:1: ( ruleValidID )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2228:1: ruleValidID
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2255:1: ( ruleValidID )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2256:1: ruleValidID
             {
              before(grammarAccess.getFQNAccess().getValidIDParserRuleCall_1_1()); 
-            pushFollow(FOLLOW_ruleValidID_in_rule__FQN__Group_1__1__Impl4415);
+            pushFollow(FOLLOW_ruleValidID_in_rule__FQN__Group_1__1__Impl4473);
             ruleValidID();
 
             state._fsp--;
@@ -5998,21 +6099,21 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Dollar__Group__0"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2243:1: rule__Dollar__Group__0 : rule__Dollar__Group__0__Impl rule__Dollar__Group__1 ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2271:1: rule__Dollar__Group__0 : rule__Dollar__Group__0__Impl rule__Dollar__Group__1 ;
     public final void rule__Dollar__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2247:1: ( rule__Dollar__Group__0__Impl rule__Dollar__Group__1 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2248:2: rule__Dollar__Group__0__Impl rule__Dollar__Group__1
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2275:1: ( rule__Dollar__Group__0__Impl rule__Dollar__Group__1 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2276:2: rule__Dollar__Group__0__Impl rule__Dollar__Group__1
             {
-            pushFollow(FOLLOW_rule__Dollar__Group__0__Impl_in_rule__Dollar__Group__04448);
+            pushFollow(FOLLOW_rule__Dollar__Group__0__Impl_in_rule__Dollar__Group__04506);
             rule__Dollar__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Dollar__Group__1_in_rule__Dollar__Group__04451);
+            pushFollow(FOLLOW_rule__Dollar__Group__1_in_rule__Dollar__Group__04509);
             rule__Dollar__Group__1();
 
             state._fsp--;
@@ -6036,21 +6137,21 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Dollar__Group__0__Impl"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2255:1: rule__Dollar__Group__0__Impl : ( () ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2283:1: rule__Dollar__Group__0__Impl : ( () ) ;
     public final void rule__Dollar__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2259:1: ( ( () ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2260:1: ( () )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2287:1: ( ( () ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2288:1: ( () )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2260:1: ( () )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2261:1: ()
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2288:1: ( () )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2289:1: ()
             {
              before(grammarAccess.getDollarAccess().getDollarAction_0()); 
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2262:1: ()
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2264:1: 
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2290:1: ()
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2292:1: 
             {
             }
 
@@ -6073,16 +6174,16 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Dollar__Group__1"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2274:1: rule__Dollar__Group__1 : rule__Dollar__Group__1__Impl ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2302:1: rule__Dollar__Group__1 : rule__Dollar__Group__1__Impl ;
     public final void rule__Dollar__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2278:1: ( rule__Dollar__Group__1__Impl )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2279:2: rule__Dollar__Group__1__Impl
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2306:1: ( rule__Dollar__Group__1__Impl )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2307:2: rule__Dollar__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__Dollar__Group__1__Impl_in_rule__Dollar__Group__14509);
+            pushFollow(FOLLOW_rule__Dollar__Group__1__Impl_in_rule__Dollar__Group__14567);
             rule__Dollar__Group__1__Impl();
 
             state._fsp--;
@@ -6106,23 +6207,23 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Dollar__Group__1__Impl"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2285:1: rule__Dollar__Group__1__Impl : ( ( rule__Dollar__Alternatives_1 ) ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2313:1: rule__Dollar__Group__1__Impl : ( ( rule__Dollar__Alternatives_1 ) ) ;
     public final void rule__Dollar__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2289:1: ( ( ( rule__Dollar__Alternatives_1 ) ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2290:1: ( ( rule__Dollar__Alternatives_1 ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2317:1: ( ( ( rule__Dollar__Alternatives_1 ) ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2318:1: ( ( rule__Dollar__Alternatives_1 ) )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2290:1: ( ( rule__Dollar__Alternatives_1 ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2291:1: ( rule__Dollar__Alternatives_1 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2318:1: ( ( rule__Dollar__Alternatives_1 ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2319:1: ( rule__Dollar__Alternatives_1 )
             {
              before(grammarAccess.getDollarAccess().getAlternatives_1()); 
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2292:1: ( rule__Dollar__Alternatives_1 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2292:2: rule__Dollar__Alternatives_1
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2320:1: ( rule__Dollar__Alternatives_1 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2320:2: rule__Dollar__Alternatives_1
             {
-            pushFollow(FOLLOW_rule__Dollar__Alternatives_1_in_rule__Dollar__Group__1__Impl4536);
+            pushFollow(FOLLOW_rule__Dollar__Alternatives_1_in_rule__Dollar__Group__1__Impl4594);
             rule__Dollar__Alternatives_1();
 
             state._fsp--;
@@ -6153,24 +6254,24 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Codetemplates__LanguageAssignment_2"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2307:1: rule__Codetemplates__LanguageAssignment_2 : ( ( ruleFQN ) ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2335:1: rule__Codetemplates__LanguageAssignment_2 : ( ( ruleFQN ) ) ;
     public final void rule__Codetemplates__LanguageAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2311:1: ( ( ( ruleFQN ) ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2312:1: ( ( ruleFQN ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2339:1: ( ( ( ruleFQN ) ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2340:1: ( ( ruleFQN ) )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2312:1: ( ( ruleFQN ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2313:1: ( ruleFQN )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2340:1: ( ( ruleFQN ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2341:1: ( ruleFQN )
             {
              before(grammarAccess.getCodetemplatesAccess().getLanguageGrammarCrossReference_2_0()); 
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2314:1: ( ruleFQN )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2315:1: ruleFQN
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2342:1: ( ruleFQN )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2343:1: ruleFQN
             {
              before(grammarAccess.getCodetemplatesAccess().getLanguageGrammarFQNParserRuleCall_2_0_1()); 
-            pushFollow(FOLLOW_ruleFQN_in_rule__Codetemplates__LanguageAssignment_24579);
+            pushFollow(FOLLOW_ruleFQN_in_rule__Codetemplates__LanguageAssignment_24637);
             ruleFQN();
 
             state._fsp--;
@@ -6202,20 +6303,20 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Codetemplates__TemplatesAssignment_4"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2326:1: rule__Codetemplates__TemplatesAssignment_4 : ( ruleCodetemplate ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2354:1: rule__Codetemplates__TemplatesAssignment_4 : ( ruleCodetemplate ) ;
     public final void rule__Codetemplates__TemplatesAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2330:1: ( ( ruleCodetemplate ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2331:1: ( ruleCodetemplate )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2358:1: ( ( ruleCodetemplate ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2359:1: ( ruleCodetemplate )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2331:1: ( ruleCodetemplate )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2332:1: ruleCodetemplate
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2359:1: ( ruleCodetemplate )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2360:1: ruleCodetemplate
             {
              before(grammarAccess.getCodetemplatesAccess().getTemplatesCodetemplateParserRuleCall_4_0()); 
-            pushFollow(FOLLOW_ruleCodetemplate_in_rule__Codetemplates__TemplatesAssignment_44614);
+            pushFollow(FOLLOW_ruleCodetemplate_in_rule__Codetemplates__TemplatesAssignment_44672);
             ruleCodetemplate();
 
             state._fsp--;
@@ -6243,20 +6344,20 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Codetemplate__NameAssignment_0"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2341:1: rule__Codetemplate__NameAssignment_0 : ( ruleValidID ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2369:1: rule__Codetemplate__NameAssignment_0 : ( ruleValidID ) ;
     public final void rule__Codetemplate__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2345:1: ( ( ruleValidID ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2346:1: ( ruleValidID )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2373:1: ( ( ruleValidID ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2374:1: ( ruleValidID )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2346:1: ( ruleValidID )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2347:1: ruleValidID
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2374:1: ( ruleValidID )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2375:1: ruleValidID
             {
              before(grammarAccess.getCodetemplateAccess().getNameValidIDParserRuleCall_0_0()); 
-            pushFollow(FOLLOW_ruleValidID_in_rule__Codetemplate__NameAssignment_04645);
+            pushFollow(FOLLOW_ruleValidID_in_rule__Codetemplate__NameAssignment_04703);
             ruleValidID();
 
             state._fsp--;
@@ -6284,20 +6385,20 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Codetemplate__IdAssignment_2"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2356:1: rule__Codetemplate__IdAssignment_2 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2384:1: rule__Codetemplate__IdAssignment_2 : ( RULE_ID ) ;
     public final void rule__Codetemplate__IdAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2360:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2361:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2388:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2389:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2361:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2362:1: RULE_ID
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2389:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2390:1: RULE_ID
             {
              before(grammarAccess.getCodetemplateAccess().getIdIDTerminalRuleCall_2_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Codetemplate__IdAssignment_24676); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Codetemplate__IdAssignment_24734); 
              after(grammarAccess.getCodetemplateAccess().getIdIDTerminalRuleCall_2_0()); 
 
             }
@@ -6321,20 +6422,20 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Codetemplate__DescriptionAssignment_4"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2371:1: rule__Codetemplate__DescriptionAssignment_4 : ( RULE_STRING ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2399:1: rule__Codetemplate__DescriptionAssignment_4 : ( RULE_STRING ) ;
     public final void rule__Codetemplate__DescriptionAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2375:1: ( ( RULE_STRING ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2376:1: ( RULE_STRING )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2403:1: ( ( RULE_STRING ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2404:1: ( RULE_STRING )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2376:1: ( RULE_STRING )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2377:1: RULE_STRING
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2404:1: ( RULE_STRING )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2405:1: RULE_STRING
             {
              before(grammarAccess.getCodetemplateAccess().getDescriptionSTRINGTerminalRuleCall_4_0()); 
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__Codetemplate__DescriptionAssignment_44707); 
+            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__Codetemplate__DescriptionAssignment_44765); 
              after(grammarAccess.getCodetemplateAccess().getDescriptionSTRINGTerminalRuleCall_4_0()); 
 
             }
@@ -6358,24 +6459,24 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Codetemplate__ContextAssignment_7_0"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2386:1: rule__Codetemplate__ContextAssignment_7_0 : ( ( ruleValidID ) ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2414:1: rule__Codetemplate__ContextAssignment_7_0 : ( ( ruleValidID ) ) ;
     public final void rule__Codetemplate__ContextAssignment_7_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2390:1: ( ( ( ruleValidID ) ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2391:1: ( ( ruleValidID ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2418:1: ( ( ( ruleValidID ) ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2419:1: ( ( ruleValidID ) )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2391:1: ( ( ruleValidID ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2392:1: ( ruleValidID )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2419:1: ( ( ruleValidID ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2420:1: ( ruleValidID )
             {
              before(grammarAccess.getCodetemplateAccess().getContextAbstractRuleCrossReference_7_0_0()); 
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2393:1: ( ruleValidID )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2394:1: ruleValidID
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2421:1: ( ruleValidID )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2422:1: ruleValidID
             {
              before(grammarAccess.getCodetemplateAccess().getContextAbstractRuleValidIDParserRuleCall_7_0_0_1()); 
-            pushFollow(FOLLOW_ruleValidID_in_rule__Codetemplate__ContextAssignment_7_04742);
+            pushFollow(FOLLOW_ruleValidID_in_rule__Codetemplate__ContextAssignment_7_04800);
             ruleValidID();
 
             state._fsp--;
@@ -6407,20 +6508,20 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Codetemplate__KeywordContextAssignment_7_1"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2405:1: rule__Codetemplate__KeywordContextAssignment_7_1 : ( RULE_STRING ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2433:1: rule__Codetemplate__KeywordContextAssignment_7_1 : ( RULE_STRING ) ;
     public final void rule__Codetemplate__KeywordContextAssignment_7_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2409:1: ( ( RULE_STRING ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2410:1: ( RULE_STRING )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2437:1: ( ( RULE_STRING ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2438:1: ( RULE_STRING )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2410:1: ( RULE_STRING )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2411:1: RULE_STRING
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2438:1: ( RULE_STRING )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2439:1: RULE_STRING
             {
              before(grammarAccess.getCodetemplateAccess().getKeywordContextSTRINGTerminalRuleCall_7_1_0()); 
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__Codetemplate__KeywordContextAssignment_7_14777); 
+            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__Codetemplate__KeywordContextAssignment_7_14835); 
              after(grammarAccess.getCodetemplateAccess().getKeywordContextSTRINGTerminalRuleCall_7_1_0()); 
 
             }
@@ -6444,20 +6545,20 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Codetemplate__BodyAssignment_8"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2420:1: rule__Codetemplate__BodyAssignment_8 : ( ruleTemplateBodyWithQuotes ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2448:1: rule__Codetemplate__BodyAssignment_8 : ( ruleTemplateBodyWithQuotes ) ;
     public final void rule__Codetemplate__BodyAssignment_8() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2424:1: ( ( ruleTemplateBodyWithQuotes ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2425:1: ( ruleTemplateBodyWithQuotes )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2452:1: ( ( ruleTemplateBodyWithQuotes ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2453:1: ( ruleTemplateBodyWithQuotes )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2425:1: ( ruleTemplateBodyWithQuotes )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2426:1: ruleTemplateBodyWithQuotes
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2453:1: ( ruleTemplateBodyWithQuotes )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2454:1: ruleTemplateBodyWithQuotes
             {
              before(grammarAccess.getCodetemplateAccess().getBodyTemplateBodyWithQuotesParserRuleCall_8_0()); 
-            pushFollow(FOLLOW_ruleTemplateBodyWithQuotes_in_rule__Codetemplate__BodyAssignment_84808);
+            pushFollow(FOLLOW_ruleTemplateBodyWithQuotes_in_rule__Codetemplate__BodyAssignment_84866);
             ruleTemplateBodyWithQuotes();
 
             state._fsp--;
@@ -6485,20 +6586,20 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__TemplateBody__PartsAssignment_1"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2435:1: rule__TemplateBody__PartsAssignment_1 : ( ruleLiteral ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2463:1: rule__TemplateBody__PartsAssignment_1 : ( ruleLiteral ) ;
     public final void rule__TemplateBody__PartsAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2439:1: ( ( ruleLiteral ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2440:1: ( ruleLiteral )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2467:1: ( ( ruleLiteral ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2468:1: ( ruleLiteral )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2440:1: ( ruleLiteral )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2441:1: ruleLiteral
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2468:1: ( ruleLiteral )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2469:1: ruleLiteral
             {
              before(grammarAccess.getTemplateBodyAccess().getPartsLiteralParserRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleLiteral_in_rule__TemplateBody__PartsAssignment_14839);
+            pushFollow(FOLLOW_ruleLiteral_in_rule__TemplateBody__PartsAssignment_14897);
             ruleLiteral();
 
             state._fsp--;
@@ -6526,20 +6627,20 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__TemplateBody__PartsAssignment_2_0"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2450:1: rule__TemplateBody__PartsAssignment_2_0 : ( ruleVariableOrDollar ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2478:1: rule__TemplateBody__PartsAssignment_2_0 : ( ruleVariableOrDollar ) ;
     public final void rule__TemplateBody__PartsAssignment_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2454:1: ( ( ruleVariableOrDollar ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2455:1: ( ruleVariableOrDollar )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2482:1: ( ( ruleVariableOrDollar ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2483:1: ( ruleVariableOrDollar )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2455:1: ( ruleVariableOrDollar )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2456:1: ruleVariableOrDollar
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2483:1: ( ruleVariableOrDollar )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2484:1: ruleVariableOrDollar
             {
              before(grammarAccess.getTemplateBodyAccess().getPartsVariableOrDollarParserRuleCall_2_0_0()); 
-            pushFollow(FOLLOW_ruleVariableOrDollar_in_rule__TemplateBody__PartsAssignment_2_04870);
+            pushFollow(FOLLOW_ruleVariableOrDollar_in_rule__TemplateBody__PartsAssignment_2_04928);
             ruleVariableOrDollar();
 
             state._fsp--;
@@ -6567,20 +6668,20 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__TemplateBody__PartsAssignment_2_1"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2465:1: rule__TemplateBody__PartsAssignment_2_1 : ( ruleLiteral ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2493:1: rule__TemplateBody__PartsAssignment_2_1 : ( ruleLiteral ) ;
     public final void rule__TemplateBody__PartsAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2469:1: ( ( ruleLiteral ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2470:1: ( ruleLiteral )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2497:1: ( ( ruleLiteral ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2498:1: ( ruleLiteral )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2470:1: ( ruleLiteral )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2471:1: ruleLiteral
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2498:1: ( ruleLiteral )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2499:1: ruleLiteral
             {
              before(grammarAccess.getTemplateBodyAccess().getPartsLiteralParserRuleCall_2_1_0()); 
-            pushFollow(FOLLOW_ruleLiteral_in_rule__TemplateBody__PartsAssignment_2_14901);
+            pushFollow(FOLLOW_ruleLiteral_in_rule__TemplateBody__PartsAssignment_2_14959);
             ruleLiteral();
 
             state._fsp--;
@@ -6608,20 +6709,20 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Variable__NameAssignment_2_0"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2480:1: rule__Variable__NameAssignment_2_0 : ( ruleValidID ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2508:1: rule__Variable__NameAssignment_2_0 : ( ruleValidID ) ;
     public final void rule__Variable__NameAssignment_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2484:1: ( ( ruleValidID ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2485:1: ( ruleValidID )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2512:1: ( ( ruleValidID ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2513:1: ( ruleValidID )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2485:1: ( ruleValidID )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2486:1: ruleValidID
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2513:1: ( ruleValidID )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2514:1: ruleValidID
             {
              before(grammarAccess.getVariableAccess().getNameValidIDParserRuleCall_2_0_0()); 
-            pushFollow(FOLLOW_ruleValidID_in_rule__Variable__NameAssignment_2_04932);
+            pushFollow(FOLLOW_ruleValidID_in_rule__Variable__NameAssignment_2_04990);
             ruleValidID();
 
             state._fsp--;
@@ -6649,20 +6750,20 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Variable__NameAssignment_2_1_0_0"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2495:1: rule__Variable__NameAssignment_2_1_0_0 : ( ruleValidID ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2523:1: rule__Variable__NameAssignment_2_1_0_0 : ( ruleValidID ) ;
     public final void rule__Variable__NameAssignment_2_1_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2499:1: ( ( ruleValidID ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2500:1: ( ruleValidID )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2527:1: ( ( ruleValidID ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2528:1: ( ruleValidID )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2500:1: ( ruleValidID )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2501:1: ruleValidID
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2528:1: ( ruleValidID )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2529:1: ruleValidID
             {
              before(grammarAccess.getVariableAccess().getNameValidIDParserRuleCall_2_1_0_0_0()); 
-            pushFollow(FOLLOW_ruleValidID_in_rule__Variable__NameAssignment_2_1_0_04963);
+            pushFollow(FOLLOW_ruleValidID_in_rule__Variable__NameAssignment_2_1_0_05021);
             ruleValidID();
 
             state._fsp--;
@@ -6690,20 +6791,20 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Variable__TypeAssignment_2_1_3"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2510:1: rule__Variable__TypeAssignment_2_1_3 : ( ruleValidID ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2538:1: rule__Variable__TypeAssignment_2_1_3 : ( ruleValidID ) ;
     public final void rule__Variable__TypeAssignment_2_1_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2514:1: ( ( ruleValidID ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2515:1: ( ruleValidID )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2542:1: ( ( ruleValidID ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2543:1: ( ruleValidID )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2515:1: ( ruleValidID )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2516:1: ruleValidID
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2543:1: ( ruleValidID )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2544:1: ruleValidID
             {
              before(grammarAccess.getVariableAccess().getTypeValidIDParserRuleCall_2_1_3_0()); 
-            pushFollow(FOLLOW_ruleValidID_in_rule__Variable__TypeAssignment_2_1_34994);
+            pushFollow(FOLLOW_ruleValidID_in_rule__Variable__TypeAssignment_2_1_35052);
             ruleValidID();
 
             state._fsp--;
@@ -6730,32 +6831,30 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
     // $ANTLR end "rule__Variable__TypeAssignment_2_1_3"
 
 
-    // $ANTLR start "rule__Variable__ParametersAssignment_2_1_4_3"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2525:1: rule__Variable__ParametersAssignment_2_1_4_3 : ( ( rule__Variable__ParametersAlternatives_2_1_4_3_0 ) ) ;
-    public final void rule__Variable__ParametersAssignment_2_1_4_3() throws RecognitionException {
+    // $ANTLR start "rule__Variable__ExpectingParametersAssignment_2_1_4_1"
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2553:1: rule__Variable__ExpectingParametersAssignment_2_1_4_1 : ( ( KEYWORD_2 ) ) ;
+    public final void rule__Variable__ExpectingParametersAssignment_2_1_4_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2529:1: ( ( ( rule__Variable__ParametersAlternatives_2_1_4_3_0 ) ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2530:1: ( ( rule__Variable__ParametersAlternatives_2_1_4_3_0 ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2557:1: ( ( ( KEYWORD_2 ) ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2558:1: ( ( KEYWORD_2 ) )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2530:1: ( ( rule__Variable__ParametersAlternatives_2_1_4_3_0 ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2531:1: ( rule__Variable__ParametersAlternatives_2_1_4_3_0 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2558:1: ( ( KEYWORD_2 ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2559:1: ( KEYWORD_2 )
             {
-             before(grammarAccess.getVariableAccess().getParametersAlternatives_2_1_4_3_0()); 
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2532:1: ( rule__Variable__ParametersAlternatives_2_1_4_3_0 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2532:2: rule__Variable__ParametersAlternatives_2_1_4_3_0
+             before(grammarAccess.getVariableAccess().getExpectingParametersLeftParenthesisKeyword_2_1_4_1_0()); 
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2560:1: ( KEYWORD_2 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2561:1: KEYWORD_2
             {
-            pushFollow(FOLLOW_rule__Variable__ParametersAlternatives_2_1_4_3_0_in_rule__Variable__ParametersAssignment_2_1_4_35025);
-            rule__Variable__ParametersAlternatives_2_1_4_3_0();
-
-            state._fsp--;
-
+             before(grammarAccess.getVariableAccess().getExpectingParametersLeftParenthesisKeyword_2_1_4_1_0()); 
+            match(input,KEYWORD_2,FOLLOW_KEYWORD_2_in_rule__Variable__ExpectingParametersAssignment_2_1_4_15088); 
+             after(grammarAccess.getVariableAccess().getExpectingParametersLeftParenthesisKeyword_2_1_4_1_0()); 
 
             }
 
-             after(grammarAccess.getVariableAccess().getParametersAlternatives_2_1_4_3_0()); 
+             after(grammarAccess.getVariableAccess().getExpectingParametersLeftParenthesisKeyword_2_1_4_1_0()); 
 
             }
 
@@ -6774,35 +6873,35 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
         }
         return ;
     }
-    // $ANTLR end "rule__Variable__ParametersAssignment_2_1_4_3"
+    // $ANTLR end "rule__Variable__ExpectingParametersAssignment_2_1_4_1"
 
 
-    // $ANTLR start "rule__Variable__ParametersAssignment_2_1_4_4_3"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2541:1: rule__Variable__ParametersAssignment_2_1_4_4_3 : ( ( rule__Variable__ParametersAlternatives_2_1_4_4_3_0 ) ) ;
-    public final void rule__Variable__ParametersAssignment_2_1_4_4_3() throws RecognitionException {
+    // $ANTLR start "rule__Variable__ParametersAssignment_2_1_4_3_0"
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2576:1: rule__Variable__ParametersAssignment_2_1_4_3_0 : ( ( rule__Variable__ParametersAlternatives_2_1_4_3_0_0 ) ) ;
+    public final void rule__Variable__ParametersAssignment_2_1_4_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2545:1: ( ( ( rule__Variable__ParametersAlternatives_2_1_4_4_3_0 ) ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2546:1: ( ( rule__Variable__ParametersAlternatives_2_1_4_4_3_0 ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2580:1: ( ( ( rule__Variable__ParametersAlternatives_2_1_4_3_0_0 ) ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2581:1: ( ( rule__Variable__ParametersAlternatives_2_1_4_3_0_0 ) )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2546:1: ( ( rule__Variable__ParametersAlternatives_2_1_4_4_3_0 ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2547:1: ( rule__Variable__ParametersAlternatives_2_1_4_4_3_0 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2581:1: ( ( rule__Variable__ParametersAlternatives_2_1_4_3_0_0 ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2582:1: ( rule__Variable__ParametersAlternatives_2_1_4_3_0_0 )
             {
-             before(grammarAccess.getVariableAccess().getParametersAlternatives_2_1_4_4_3_0()); 
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2548:1: ( rule__Variable__ParametersAlternatives_2_1_4_4_3_0 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2548:2: rule__Variable__ParametersAlternatives_2_1_4_4_3_0
+             before(grammarAccess.getVariableAccess().getParametersAlternatives_2_1_4_3_0_0()); 
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2583:1: ( rule__Variable__ParametersAlternatives_2_1_4_3_0_0 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2583:2: rule__Variable__ParametersAlternatives_2_1_4_3_0_0
             {
-            pushFollow(FOLLOW_rule__Variable__ParametersAlternatives_2_1_4_4_3_0_in_rule__Variable__ParametersAssignment_2_1_4_4_35058);
-            rule__Variable__ParametersAlternatives_2_1_4_4_3_0();
+            pushFollow(FOLLOW_rule__Variable__ParametersAlternatives_2_1_4_3_0_0_in_rule__Variable__ParametersAssignment_2_1_4_3_05127);
+            rule__Variable__ParametersAlternatives_2_1_4_3_0_0();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getVariableAccess().getParametersAlternatives_2_1_4_4_3_0()); 
+             after(grammarAccess.getVariableAccess().getParametersAlternatives_2_1_4_3_0_0()); 
 
             }
 
@@ -6821,24 +6920,71 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
         }
         return ;
     }
-    // $ANTLR end "rule__Variable__ParametersAssignment_2_1_4_4_3"
+    // $ANTLR end "rule__Variable__ParametersAssignment_2_1_4_3_0"
+
+
+    // $ANTLR start "rule__Variable__ParametersAssignment_2_1_4_3_1_3"
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2592:1: rule__Variable__ParametersAssignment_2_1_4_3_1_3 : ( ( rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0 ) ) ;
+    public final void rule__Variable__ParametersAssignment_2_1_4_3_1_3() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2596:1: ( ( ( rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0 ) ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2597:1: ( ( rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0 ) )
+            {
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2597:1: ( ( rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0 ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2598:1: ( rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0 )
+            {
+             before(grammarAccess.getVariableAccess().getParametersAlternatives_2_1_4_3_1_3_0()); 
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2599:1: ( rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2599:2: rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0
+            {
+            pushFollow(FOLLOW_rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0_in_rule__Variable__ParametersAssignment_2_1_4_3_1_35160);
+            rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0();
+
+            state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getVariableAccess().getParametersAlternatives_2_1_4_3_1_3_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Variable__ParametersAssignment_2_1_4_3_1_3"
 
 
     // $ANTLR start "rule__Literal__ValueAssignment"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2557:1: rule__Literal__ValueAssignment : ( ruleLiteralValue ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2608:1: rule__Literal__ValueAssignment : ( ruleLiteralValue ) ;
     public final void rule__Literal__ValueAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2561:1: ( ( ruleLiteralValue ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2562:1: ( ruleLiteralValue )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2612:1: ( ( ruleLiteralValue ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2613:1: ( ruleLiteralValue )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2562:1: ( ruleLiteralValue )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2563:1: ruleLiteralValue
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2613:1: ( ruleLiteralValue )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2614:1: ruleLiteralValue
             {
              before(grammarAccess.getLiteralAccess().getValueLiteralValueParserRuleCall_0()); 
-            pushFollow(FOLLOW_ruleLiteralValue_in_rule__Literal__ValueAssignment5091);
+            pushFollow(FOLLOW_ruleLiteralValue_in_rule__Literal__ValueAssignment5193);
             ruleLiteralValue();
 
             state._fsp--;
@@ -6866,24 +7012,24 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Dollar__EscapedAssignment_1_0"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2572:1: rule__Dollar__EscapedAssignment_1_0 : ( ( KEYWORD_8 ) ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2623:1: rule__Dollar__EscapedAssignment_1_0 : ( ( KEYWORD_8 ) ) ;
     public final void rule__Dollar__EscapedAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2576:1: ( ( ( KEYWORD_8 ) ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2577:1: ( ( KEYWORD_8 ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2627:1: ( ( ( KEYWORD_8 ) ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2628:1: ( ( KEYWORD_8 ) )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2577:1: ( ( KEYWORD_8 ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2578:1: ( KEYWORD_8 )
-            {
-             before(grammarAccess.getDollarAccess().getEscapedDollarSignDollarSignKeyword_1_0_0()); 
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2579:1: ( KEYWORD_8 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2580:1: KEYWORD_8
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2628:1: ( ( KEYWORD_8 ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2629:1: ( KEYWORD_8 )
             {
              before(grammarAccess.getDollarAccess().getEscapedDollarSignDollarSignKeyword_1_0_0()); 
-            match(input,KEYWORD_8,FOLLOW_KEYWORD_8_in_rule__Dollar__EscapedAssignment_1_05127); 
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2630:1: ( KEYWORD_8 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2631:1: KEYWORD_8
+            {
+             before(grammarAccess.getDollarAccess().getEscapedDollarSignDollarSignKeyword_1_0_0()); 
+            match(input,KEYWORD_8,FOLLOW_KEYWORD_8_in_rule__Dollar__EscapedAssignment_1_05229); 
              after(grammarAccess.getDollarAccess().getEscapedDollarSignDollarSignKeyword_1_0_0()); 
 
             }
@@ -6914,7 +7060,7 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
     protected DFA4 dfa4 = new DFA4(this);
     protected DFA19 dfa19 = new DFA19(this);
-    protected DFA23 dfa23 = new DFA23(this);
+    protected DFA24 dfa24 = new DFA24(this);
     static final String DFA4_eotS =
         "\7\uffff";
     static final String DFA4_eofS =
@@ -7022,56 +7168,56 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
             return "1693:1: ( rule__Variable__Group_2_1_4__0 )?";
         }
     }
-    static final String DFA23_eotS =
+    static final String DFA24_eotS =
         "\4\uffff";
-    static final String DFA23_eofS =
+    static final String DFA24_eofS =
         "\4\uffff";
-    static final String DFA23_minS =
+    static final String DFA24_minS =
         "\2\15\2\uffff";
-    static final String DFA23_maxS =
+    static final String DFA24_maxS =
         "\2\24\2\uffff";
-    static final String DFA23_acceptS =
+    static final String DFA24_acceptS =
         "\2\uffff\1\2\1\1";
-    static final String DFA23_specialS =
+    static final String DFA24_specialS =
         "\4\uffff}>";
-    static final String[] DFA23_transitionS = {
+    static final String[] DFA24_transitionS = {
             "\1\2\1\3\5\uffff\1\1",
             "\1\2\1\3\5\uffff\1\1",
             "",
             ""
     };
 
-    static final short[] DFA23_eot = DFA.unpackEncodedString(DFA23_eotS);
-    static final short[] DFA23_eof = DFA.unpackEncodedString(DFA23_eofS);
-    static final char[] DFA23_min = DFA.unpackEncodedStringToUnsignedChars(DFA23_minS);
-    static final char[] DFA23_max = DFA.unpackEncodedStringToUnsignedChars(DFA23_maxS);
-    static final short[] DFA23_accept = DFA.unpackEncodedString(DFA23_acceptS);
-    static final short[] DFA23_special = DFA.unpackEncodedString(DFA23_specialS);
-    static final short[][] DFA23_transition;
+    static final short[] DFA24_eot = DFA.unpackEncodedString(DFA24_eotS);
+    static final short[] DFA24_eof = DFA.unpackEncodedString(DFA24_eofS);
+    static final char[] DFA24_min = DFA.unpackEncodedStringToUnsignedChars(DFA24_minS);
+    static final char[] DFA24_max = DFA.unpackEncodedStringToUnsignedChars(DFA24_maxS);
+    static final short[] DFA24_accept = DFA.unpackEncodedString(DFA24_acceptS);
+    static final short[] DFA24_special = DFA.unpackEncodedString(DFA24_specialS);
+    static final short[][] DFA24_transition;
 
     static {
-        int numStates = DFA23_transitionS.length;
-        DFA23_transition = new short[numStates][];
+        int numStates = DFA24_transitionS.length;
+        DFA24_transition = new short[numStates][];
         for (int i=0; i<numStates; i++) {
-            DFA23_transition[i] = DFA.unpackEncodedString(DFA23_transitionS[i]);
+            DFA24_transition[i] = DFA.unpackEncodedString(DFA24_transitionS[i]);
         }
     }
 
-    class DFA23 extends DFA {
+    class DFA24 extends DFA {
 
-        public DFA23(BaseRecognizer recognizer) {
+        public DFA24(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 23;
-            this.eot = DFA23_eot;
-            this.eof = DFA23_eof;
-            this.min = DFA23_min;
-            this.max = DFA23_max;
-            this.accept = DFA23_accept;
-            this.special = DFA23_special;
-            this.transition = DFA23_transition;
+            this.decisionNumber = 24;
+            this.eot = DFA24_eot;
+            this.eof = DFA24_eof;
+            this.min = DFA24_min;
+            this.max = DFA24_max;
+            this.accept = DFA24_accept;
+            this.special = DFA24_special;
+            this.transition = DFA24_transition;
         }
         public String getDescription() {
-            return "()* loopback of 1911:1: ( rule__Variable__Group_2_1_4_4__0 )*";
+            return "()* loopback of 1978:1: ( rule__Variable__Group_2_1_4_3_1__0 )*";
         }
     }
  
@@ -7116,10 +7262,10 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
     public static final BitSet FOLLOW_ruleDollar_in_rule__VariableOrDollar__Alternatives936 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Variable__NameAssignment_2_0_in_rule__Variable__Alternatives_2968 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Variable__Group_2_1__0_in_rule__Variable__Alternatives_2986 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__Variable__ParametersAlternatives_2_1_4_3_01019 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFQN_in_rule__Variable__ParametersAlternatives_2_1_4_3_01036 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__Variable__ParametersAlternatives_2_1_4_4_3_01068 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFQN_in_rule__Variable__ParametersAlternatives_2_1_4_4_3_01085 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_rule__Variable__ParametersAlternatives_2_1_4_3_0_01019 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFQN_in_rule__Variable__ParametersAlternatives_2_1_4_3_0_01036 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_rule__Variable__ParametersAlternatives_2_1_4_3_1_3_01068 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFQN_in_rule__Variable__ParametersAlternatives_2_1_4_3_1_3_01085 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__ValidID__Alternatives1117 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_KEYWORD_13_in_rule__ValidID__Alternatives1135 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_KEYWORD_14_in_rule__ValidID__Alternatives1155 = new BitSet(new long[]{0x0000000000000002L});
@@ -7228,65 +7374,68 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
     public static final BitSet FOLLOW_rule__Variable__Group_2_1_4__0__Impl_in_rule__Variable__Group_2_1_4__03512 = new BitSet(new long[]{0x0000000000101000L});
     public static final BitSet FOLLOW_rule__Variable__Group_2_1_4__1_in_rule__Variable__Group_2_1_4__03515 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_WS_in_rule__Variable__Group_2_1_4__0__Impl3543 = new BitSet(new long[]{0x0000000000100002L});
-    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4__1__Impl_in_rule__Variable__Group_2_1_4__13574 = new BitSet(new long[]{0x00000000001C0050L});
+    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4__1__Impl_in_rule__Variable__Group_2_1_4__13574 = new BitSet(new long[]{0x00000000001C2050L});
     public static final BitSet FOLLOW_rule__Variable__Group_2_1_4__2_in_rule__Variable__Group_2_1_4__13577 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_2_in_rule__Variable__Group_2_1_4__1__Impl3605 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4__2__Impl_in_rule__Variable__Group_2_1_4__23636 = new BitSet(new long[]{0x00000000001C0050L});
-    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4__3_in_rule__Variable__Group_2_1_4__23639 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_WS_in_rule__Variable__Group_2_1_4__2__Impl3667 = new BitSet(new long[]{0x0000000000100002L});
-    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4__3__Impl_in_rule__Variable__Group_2_1_4__33698 = new BitSet(new long[]{0x0000000000106000L});
-    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4__4_in_rule__Variable__Group_2_1_4__33701 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Variable__ParametersAssignment_2_1_4_3_in_rule__Variable__Group_2_1_4__3__Impl3728 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4__4__Impl_in_rule__Variable__Group_2_1_4__43758 = new BitSet(new long[]{0x0000000000106000L});
-    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4__5_in_rule__Variable__Group_2_1_4__43761 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4_4__0_in_rule__Variable__Group_2_1_4__4__Impl3788 = new BitSet(new long[]{0x0000000000104002L});
-    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4__5__Impl_in_rule__Variable__Group_2_1_4__53819 = new BitSet(new long[]{0x0000000000106000L});
-    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4__6_in_rule__Variable__Group_2_1_4__53822 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_WS_in_rule__Variable__Group_2_1_4__5__Impl3850 = new BitSet(new long[]{0x0000000000100002L});
-    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4__6__Impl_in_rule__Variable__Group_2_1_4__63881 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_3_in_rule__Variable__Group_2_1_4__6__Impl3909 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4_4__0__Impl_in_rule__Variable__Group_2_1_4_4__03954 = new BitSet(new long[]{0x0000000000104000L});
-    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4_4__1_in_rule__Variable__Group_2_1_4_4__03957 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_WS_in_rule__Variable__Group_2_1_4_4__0__Impl3985 = new BitSet(new long[]{0x0000000000100002L});
-    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4_4__1__Impl_in_rule__Variable__Group_2_1_4_4__14016 = new BitSet(new long[]{0x00000000001C0050L});
-    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4_4__2_in_rule__Variable__Group_2_1_4_4__14019 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_4_in_rule__Variable__Group_2_1_4_4__1__Impl4047 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4_4__2__Impl_in_rule__Variable__Group_2_1_4_4__24078 = new BitSet(new long[]{0x00000000001C0050L});
-    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4_4__3_in_rule__Variable__Group_2_1_4_4__24081 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_WS_in_rule__Variable__Group_2_1_4_4__2__Impl4109 = new BitSet(new long[]{0x0000000000100002L});
-    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4_4__3__Impl_in_rule__Variable__Group_2_1_4_4__34140 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Variable__ParametersAssignment_2_1_4_4_3_in_rule__Variable__Group_2_1_4_4__3__Impl4167 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FQN__Group__0__Impl_in_rule__FQN__Group__04205 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_rule__FQN__Group__1_in_rule__FQN__Group__04208 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__FQN__Group__0__Impl4235 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FQN__Group__1__Impl_in_rule__FQN__Group__14264 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FQN__Group_1__0_in_rule__FQN__Group__1__Impl4291 = new BitSet(new long[]{0x0000000000008002L});
-    public static final BitSet FOLLOW_rule__FQN__Group_1__0__Impl_in_rule__FQN__Group_1__04326 = new BitSet(new long[]{0x0000000000040050L});
-    public static final BitSet FOLLOW_rule__FQN__Group_1__1_in_rule__FQN__Group_1__04329 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_5_in_rule__FQN__Group_1__0__Impl4357 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FQN__Group_1__1__Impl_in_rule__FQN__Group_1__14388 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__FQN__Group_1__1__Impl4415 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Dollar__Group__0__Impl_in_rule__Dollar__Group__04448 = new BitSet(new long[]{0x0000000000000980L});
-    public static final BitSet FOLLOW_rule__Dollar__Group__1_in_rule__Dollar__Group__04451 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Dollar__Group__1__Impl_in_rule__Dollar__Group__14509 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Dollar__Alternatives_1_in_rule__Dollar__Group__1__Impl4536 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFQN_in_rule__Codetemplates__LanguageAssignment_24579 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCodetemplate_in_rule__Codetemplates__TemplatesAssignment_44614 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__Codetemplate__NameAssignment_04645 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Codetemplate__IdAssignment_24676 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__Codetemplate__DescriptionAssignment_44707 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__Codetemplate__ContextAssignment_7_04742 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__Codetemplate__KeywordContextAssignment_7_14777 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTemplateBodyWithQuotes_in_rule__Codetemplate__BodyAssignment_84808 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLiteral_in_rule__TemplateBody__PartsAssignment_14839 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVariableOrDollar_in_rule__TemplateBody__PartsAssignment_2_04870 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLiteral_in_rule__TemplateBody__PartsAssignment_2_14901 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__Variable__NameAssignment_2_04932 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__Variable__NameAssignment_2_1_0_04963 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__Variable__TypeAssignment_2_1_34994 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Variable__ParametersAlternatives_2_1_4_3_0_in_rule__Variable__ParametersAssignment_2_1_4_35025 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Variable__ParametersAlternatives_2_1_4_4_3_0_in_rule__Variable__ParametersAssignment_2_1_4_4_35058 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLiteralValue_in_rule__Literal__ValueAssignment5091 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_8_in_rule__Dollar__EscapedAssignment_1_05127 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Variable__ExpectingParametersAssignment_2_1_4_1_in_rule__Variable__Group_2_1_4__1__Impl3604 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4__2__Impl_in_rule__Variable__Group_2_1_4__23634 = new BitSet(new long[]{0x00000000001C2050L});
+    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4__3_in_rule__Variable__Group_2_1_4__23637 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_WS_in_rule__Variable__Group_2_1_4__2__Impl3665 = new BitSet(new long[]{0x0000000000100002L});
+    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4__3__Impl_in_rule__Variable__Group_2_1_4__33696 = new BitSet(new long[]{0x00000000001C2050L});
+    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4__4_in_rule__Variable__Group_2_1_4__33699 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4_3__0_in_rule__Variable__Group_2_1_4__3__Impl3726 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4__4__Impl_in_rule__Variable__Group_2_1_4__43757 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_KEYWORD_3_in_rule__Variable__Group_2_1_4__4__Impl3785 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4_3__0__Impl_in_rule__Variable__Group_2_1_4_3__03826 = new BitSet(new long[]{0x0000000000104000L});
+    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4_3__1_in_rule__Variable__Group_2_1_4_3__03829 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Variable__ParametersAssignment_2_1_4_3_0_in_rule__Variable__Group_2_1_4_3__0__Impl3856 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4_3__1__Impl_in_rule__Variable__Group_2_1_4_3__13886 = new BitSet(new long[]{0x0000000000104000L});
+    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4_3__2_in_rule__Variable__Group_2_1_4_3__13889 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4_3_1__0_in_rule__Variable__Group_2_1_4_3__1__Impl3916 = new BitSet(new long[]{0x0000000000104002L});
+    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4_3__2__Impl_in_rule__Variable__Group_2_1_4_3__23947 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_WS_in_rule__Variable__Group_2_1_4_3__2__Impl3975 = new BitSet(new long[]{0x0000000000100002L});
+    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4_3_1__0__Impl_in_rule__Variable__Group_2_1_4_3_1__04012 = new BitSet(new long[]{0x0000000000104000L});
+    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4_3_1__1_in_rule__Variable__Group_2_1_4_3_1__04015 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_WS_in_rule__Variable__Group_2_1_4_3_1__0__Impl4043 = new BitSet(new long[]{0x0000000000100002L});
+    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4_3_1__1__Impl_in_rule__Variable__Group_2_1_4_3_1__14074 = new BitSet(new long[]{0x00000000001C0050L});
+    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4_3_1__2_in_rule__Variable__Group_2_1_4_3_1__14077 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_KEYWORD_4_in_rule__Variable__Group_2_1_4_3_1__1__Impl4105 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4_3_1__2__Impl_in_rule__Variable__Group_2_1_4_3_1__24136 = new BitSet(new long[]{0x00000000001C0050L});
+    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4_3_1__3_in_rule__Variable__Group_2_1_4_3_1__24139 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_WS_in_rule__Variable__Group_2_1_4_3_1__2__Impl4167 = new BitSet(new long[]{0x0000000000100002L});
+    public static final BitSet FOLLOW_rule__Variable__Group_2_1_4_3_1__3__Impl_in_rule__Variable__Group_2_1_4_3_1__34198 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Variable__ParametersAssignment_2_1_4_3_1_3_in_rule__Variable__Group_2_1_4_3_1__3__Impl4225 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FQN__Group__0__Impl_in_rule__FQN__Group__04263 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_rule__FQN__Group__1_in_rule__FQN__Group__04266 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__FQN__Group__0__Impl4293 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FQN__Group__1__Impl_in_rule__FQN__Group__14322 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FQN__Group_1__0_in_rule__FQN__Group__1__Impl4349 = new BitSet(new long[]{0x0000000000008002L});
+    public static final BitSet FOLLOW_rule__FQN__Group_1__0__Impl_in_rule__FQN__Group_1__04384 = new BitSet(new long[]{0x0000000000040050L});
+    public static final BitSet FOLLOW_rule__FQN__Group_1__1_in_rule__FQN__Group_1__04387 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_KEYWORD_5_in_rule__FQN__Group_1__0__Impl4415 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FQN__Group_1__1__Impl_in_rule__FQN__Group_1__14446 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__FQN__Group_1__1__Impl4473 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Dollar__Group__0__Impl_in_rule__Dollar__Group__04506 = new BitSet(new long[]{0x0000000000000980L});
+    public static final BitSet FOLLOW_rule__Dollar__Group__1_in_rule__Dollar__Group__04509 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Dollar__Group__1__Impl_in_rule__Dollar__Group__14567 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Dollar__Alternatives_1_in_rule__Dollar__Group__1__Impl4594 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFQN_in_rule__Codetemplates__LanguageAssignment_24637 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCodetemplate_in_rule__Codetemplates__TemplatesAssignment_44672 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__Codetemplate__NameAssignment_04703 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__Codetemplate__IdAssignment_24734 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_rule__Codetemplate__DescriptionAssignment_44765 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__Codetemplate__ContextAssignment_7_04800 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_rule__Codetemplate__KeywordContextAssignment_7_14835 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTemplateBodyWithQuotes_in_rule__Codetemplate__BodyAssignment_84866 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLiteral_in_rule__TemplateBody__PartsAssignment_14897 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVariableOrDollar_in_rule__TemplateBody__PartsAssignment_2_04928 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLiteral_in_rule__TemplateBody__PartsAssignment_2_14959 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__Variable__NameAssignment_2_04990 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__Variable__NameAssignment_2_1_0_05021 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__Variable__TypeAssignment_2_1_35052 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_KEYWORD_2_in_rule__Variable__ExpectingParametersAssignment_2_1_4_15088 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Variable__ParametersAlternatives_2_1_4_3_0_0_in_rule__Variable__ParametersAssignment_2_1_4_3_05127 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0_in_rule__Variable__ParametersAssignment_2_1_4_3_1_35160 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLiteralValue_in_rule__Literal__ValueAssignment5193 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_KEYWORD_8_in_rule__Dollar__EscapedAssignment_1_05229 = new BitSet(new long[]{0x0000000000000002L});
 
 }

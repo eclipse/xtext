@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.Variable#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.Variable#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.Variable#isExpectingParameters <em>Expecting Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.codetemplates.templates.Variable#getParameters <em>Parameters</em>}</li>
  * </ul>
  * </p>
@@ -78,6 +79,32 @@ public interface Variable extends TemplatePart
    * @generated
    */
   void setType(String value);
+
+  /**
+   * Returns the value of the '<em><b>Expecting Parameters</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Expecting Parameters</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Expecting Parameters</em>' attribute.
+   * @see #setExpectingParameters(boolean)
+   * @see org.eclipse.xtext.ui.codetemplates.templates.TemplatesPackage#getVariable_ExpectingParameters()
+   * @model
+   * @generated
+   */
+  boolean isExpectingParameters();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.ui.codetemplates.templates.Variable#isExpectingParameters <em>Expecting Parameters</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Expecting Parameters</em>' attribute.
+   * @see #isExpectingParameters()
+   * @generated
+   */
+  void setExpectingParameters(boolean value);
 
   /**
    * Returns the value of the '<em><b>Parameters</b></em>' attribute list.

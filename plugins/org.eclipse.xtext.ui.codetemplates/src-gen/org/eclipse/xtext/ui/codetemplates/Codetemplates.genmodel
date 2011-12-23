@@ -28,6 +28,7 @@
     <genClasses ecoreClass="Codetemplates.ecore#//Variable">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Codetemplates.ecore#//Variable/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Codetemplates.ecore#//Variable/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Codetemplates.ecore#//Variable/expectingParameters"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Codetemplates.ecore#//Variable/parameters"/>
     </genClasses>
     <genClasses ecoreClass="Codetemplates.ecore#//Literal">

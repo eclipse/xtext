@@ -283,32 +283,34 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTypeValidIDParserRuleCall_2_1_3_0 = (RuleCall)cTypeAssignment_2_1_3.eContents().get(0);
 		private final Group cGroup_2_1_4 = (Group)cGroup_2_1.eContents().get(4);
 		private final RuleCall cWSTerminalRuleCall_2_1_4_0 = (RuleCall)cGroup_2_1_4.eContents().get(0);
-		private final Keyword cLeftParenthesisKeyword_2_1_4_1 = (Keyword)cGroup_2_1_4.eContents().get(1);
+		private final Assignment cExpectingParametersAssignment_2_1_4_1 = (Assignment)cGroup_2_1_4.eContents().get(1);
+		private final Keyword cExpectingParametersLeftParenthesisKeyword_2_1_4_1_0 = (Keyword)cExpectingParametersAssignment_2_1_4_1.eContents().get(0);
 		private final RuleCall cWSTerminalRuleCall_2_1_4_2 = (RuleCall)cGroup_2_1_4.eContents().get(2);
-		private final Assignment cParametersAssignment_2_1_4_3 = (Assignment)cGroup_2_1_4.eContents().get(3);
-		private final Alternatives cParametersAlternatives_2_1_4_3_0 = (Alternatives)cParametersAssignment_2_1_4_3.eContents().get(0);
-		private final RuleCall cParametersSTRINGTerminalRuleCall_2_1_4_3_0_0 = (RuleCall)cParametersAlternatives_2_1_4_3_0.eContents().get(0);
-		private final RuleCall cParametersFQNParserRuleCall_2_1_4_3_0_1 = (RuleCall)cParametersAlternatives_2_1_4_3_0.eContents().get(1);
-		private final Group cGroup_2_1_4_4 = (Group)cGroup_2_1_4.eContents().get(4);
-		private final RuleCall cWSTerminalRuleCall_2_1_4_4_0 = (RuleCall)cGroup_2_1_4_4.eContents().get(0);
-		private final Keyword cCommaKeyword_2_1_4_4_1 = (Keyword)cGroup_2_1_4_4.eContents().get(1);
-		private final RuleCall cWSTerminalRuleCall_2_1_4_4_2 = (RuleCall)cGroup_2_1_4_4.eContents().get(2);
-		private final Assignment cParametersAssignment_2_1_4_4_3 = (Assignment)cGroup_2_1_4_4.eContents().get(3);
-		private final Alternatives cParametersAlternatives_2_1_4_4_3_0 = (Alternatives)cParametersAssignment_2_1_4_4_3.eContents().get(0);
-		private final RuleCall cParametersSTRINGTerminalRuleCall_2_1_4_4_3_0_0 = (RuleCall)cParametersAlternatives_2_1_4_4_3_0.eContents().get(0);
-		private final RuleCall cParametersFQNParserRuleCall_2_1_4_4_3_0_1 = (RuleCall)cParametersAlternatives_2_1_4_4_3_0.eContents().get(1);
-		private final RuleCall cWSTerminalRuleCall_2_1_4_5 = (RuleCall)cGroup_2_1_4.eContents().get(5);
-		private final Keyword cRightParenthesisKeyword_2_1_4_6 = (Keyword)cGroup_2_1_4.eContents().get(6);
+		private final Group cGroup_2_1_4_3 = (Group)cGroup_2_1_4.eContents().get(3);
+		private final Assignment cParametersAssignment_2_1_4_3_0 = (Assignment)cGroup_2_1_4_3.eContents().get(0);
+		private final Alternatives cParametersAlternatives_2_1_4_3_0_0 = (Alternatives)cParametersAssignment_2_1_4_3_0.eContents().get(0);
+		private final RuleCall cParametersSTRINGTerminalRuleCall_2_1_4_3_0_0_0 = (RuleCall)cParametersAlternatives_2_1_4_3_0_0.eContents().get(0);
+		private final RuleCall cParametersFQNParserRuleCall_2_1_4_3_0_0_1 = (RuleCall)cParametersAlternatives_2_1_4_3_0_0.eContents().get(1);
+		private final Group cGroup_2_1_4_3_1 = (Group)cGroup_2_1_4_3.eContents().get(1);
+		private final RuleCall cWSTerminalRuleCall_2_1_4_3_1_0 = (RuleCall)cGroup_2_1_4_3_1.eContents().get(0);
+		private final Keyword cCommaKeyword_2_1_4_3_1_1 = (Keyword)cGroup_2_1_4_3_1.eContents().get(1);
+		private final RuleCall cWSTerminalRuleCall_2_1_4_3_1_2 = (RuleCall)cGroup_2_1_4_3_1.eContents().get(2);
+		private final Assignment cParametersAssignment_2_1_4_3_1_3 = (Assignment)cGroup_2_1_4_3_1.eContents().get(3);
+		private final Alternatives cParametersAlternatives_2_1_4_3_1_3_0 = (Alternatives)cParametersAssignment_2_1_4_3_1_3.eContents().get(0);
+		private final RuleCall cParametersSTRINGTerminalRuleCall_2_1_4_3_1_3_0_0 = (RuleCall)cParametersAlternatives_2_1_4_3_1_3_0.eContents().get(0);
+		private final RuleCall cParametersFQNParserRuleCall_2_1_4_3_1_3_0_1 = (RuleCall)cParametersAlternatives_2_1_4_3_1_3_0.eContents().get(1);
+		private final RuleCall cWSTerminalRuleCall_2_1_4_3_2 = (RuleCall)cGroup_2_1_4_3.eContents().get(2);
+		private final Keyword cRightParenthesisKeyword_2_1_4_4 = (Keyword)cGroup_2_1_4.eContents().get(4);
 		private final RuleCall cWSTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//Variable hidden():
-		//	"${" WS* (name=ValidID | (name=ValidID WS*)? ":" WS* type=ValidID (WS* "(" WS* parameters+=(STRING | FQN) (WS* "," WS*
-		//	parameters+=(STRING | FQN))* WS* ")")?) WS* "}";
+		//	"${" WS* (name=ValidID | (name=ValidID WS*)? ":" WS* type=ValidID (WS* expectingParameters?="(" WS*
+		//	(parameters+=(STRING | FQN) (WS* "," WS* parameters+=(STRING | FQN))* WS*)? ")")?) WS* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"${" WS* (name=ValidID | (name=ValidID WS*)? ":" WS* type=ValidID (WS* "(" WS* parameters+=(STRING | FQN) (WS* "," WS*
-		//parameters+=(STRING | FQN))* WS* ")")?) WS* "}"
+		//"${" WS* (name=ValidID | (name=ValidID WS*)? ":" WS* type=ValidID (WS* expectingParameters?="(" WS* (parameters+=(STRING
+		//| FQN) (WS* "," WS* parameters+=(STRING | FQN))* WS*)? ")")?) WS* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"${"
@@ -317,8 +319,8 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		//WS*
 		public RuleCall getWSTerminalRuleCall_1() { return cWSTerminalRuleCall_1; }
 
-		//name=ValidID | (name=ValidID WS*)? ":" WS* type=ValidID (WS* "(" WS* parameters+=(STRING | FQN) (WS* "," WS*
-		//parameters+=(STRING | FQN))* WS* ")")?
+		//name=ValidID | (name=ValidID WS*)? ":" WS* type=ValidID (WS* expectingParameters?="(" WS* (parameters+=(STRING | FQN)
+		//(WS* "," WS* parameters+=(STRING | FQN))* WS*)? ")")?
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
 		//name=ValidID
@@ -327,8 +329,8 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		//ValidID
 		public RuleCall getNameValidIDParserRuleCall_2_0_0() { return cNameValidIDParserRuleCall_2_0_0; }
 
-		//(name=ValidID WS*)? ":" WS* type=ValidID (WS* "(" WS* parameters+=(STRING | FQN) (WS* "," WS* parameters+=(STRING |
-		//FQN))* WS* ")")?
+		//(name=ValidID WS*)? ":" WS* type=ValidID (WS* expectingParameters?="(" WS* (parameters+=(STRING | FQN) (WS* "," WS*
+		//parameters+=(STRING | FQN))* WS*)? ")")?
 		public Group getGroup_2_1() { return cGroup_2_1; }
 
 		//(name=ValidID WS*)?
@@ -355,59 +357,65 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		//ValidID
 		public RuleCall getTypeValidIDParserRuleCall_2_1_3_0() { return cTypeValidIDParserRuleCall_2_1_3_0; }
 
-		//(WS* "(" WS* parameters+=(STRING | FQN) (WS* "," WS* parameters+=(STRING | FQN))* WS* ")")?
+		//(WS* expectingParameters?="(" WS* (parameters+=(STRING | FQN) (WS* "," WS* parameters+=(STRING | FQN))* WS*)? ")")?
 		public Group getGroup_2_1_4() { return cGroup_2_1_4; }
 
 		//WS*
 		public RuleCall getWSTerminalRuleCall_2_1_4_0() { return cWSTerminalRuleCall_2_1_4_0; }
 
+		//expectingParameters?="("
+		public Assignment getExpectingParametersAssignment_2_1_4_1() { return cExpectingParametersAssignment_2_1_4_1; }
+
 		//"("
-		public Keyword getLeftParenthesisKeyword_2_1_4_1() { return cLeftParenthesisKeyword_2_1_4_1; }
+		public Keyword getExpectingParametersLeftParenthesisKeyword_2_1_4_1_0() { return cExpectingParametersLeftParenthesisKeyword_2_1_4_1_0; }
 
 		//WS*
 		public RuleCall getWSTerminalRuleCall_2_1_4_2() { return cWSTerminalRuleCall_2_1_4_2; }
 
+		//(parameters+=(STRING | FQN) (WS* "," WS* parameters+=(STRING | FQN))* WS*)?
+		public Group getGroup_2_1_4_3() { return cGroup_2_1_4_3; }
+
 		//parameters+=(STRING | FQN)
-		public Assignment getParametersAssignment_2_1_4_3() { return cParametersAssignment_2_1_4_3; }
+		public Assignment getParametersAssignment_2_1_4_3_0() { return cParametersAssignment_2_1_4_3_0; }
 
 		//STRING | FQN
-		public Alternatives getParametersAlternatives_2_1_4_3_0() { return cParametersAlternatives_2_1_4_3_0; }
+		public Alternatives getParametersAlternatives_2_1_4_3_0_0() { return cParametersAlternatives_2_1_4_3_0_0; }
 
 		//STRING
-		public RuleCall getParametersSTRINGTerminalRuleCall_2_1_4_3_0_0() { return cParametersSTRINGTerminalRuleCall_2_1_4_3_0_0; }
+		public RuleCall getParametersSTRINGTerminalRuleCall_2_1_4_3_0_0_0() { return cParametersSTRINGTerminalRuleCall_2_1_4_3_0_0_0; }
 
 		//FQN
-		public RuleCall getParametersFQNParserRuleCall_2_1_4_3_0_1() { return cParametersFQNParserRuleCall_2_1_4_3_0_1; }
+		public RuleCall getParametersFQNParserRuleCall_2_1_4_3_0_0_1() { return cParametersFQNParserRuleCall_2_1_4_3_0_0_1; }
 
 		//(WS* "," WS* parameters+=(STRING | FQN))*
-		public Group getGroup_2_1_4_4() { return cGroup_2_1_4_4; }
+		public Group getGroup_2_1_4_3_1() { return cGroup_2_1_4_3_1; }
 
 		//WS*
-		public RuleCall getWSTerminalRuleCall_2_1_4_4_0() { return cWSTerminalRuleCall_2_1_4_4_0; }
+		public RuleCall getWSTerminalRuleCall_2_1_4_3_1_0() { return cWSTerminalRuleCall_2_1_4_3_1_0; }
 
 		//","
-		public Keyword getCommaKeyword_2_1_4_4_1() { return cCommaKeyword_2_1_4_4_1; }
+		public Keyword getCommaKeyword_2_1_4_3_1_1() { return cCommaKeyword_2_1_4_3_1_1; }
 
 		//WS*
-		public RuleCall getWSTerminalRuleCall_2_1_4_4_2() { return cWSTerminalRuleCall_2_1_4_4_2; }
+		public RuleCall getWSTerminalRuleCall_2_1_4_3_1_2() { return cWSTerminalRuleCall_2_1_4_3_1_2; }
 
 		//parameters+=(STRING | FQN)
-		public Assignment getParametersAssignment_2_1_4_4_3() { return cParametersAssignment_2_1_4_4_3; }
+		public Assignment getParametersAssignment_2_1_4_3_1_3() { return cParametersAssignment_2_1_4_3_1_3; }
 
 		//STRING | FQN
-		public Alternatives getParametersAlternatives_2_1_4_4_3_0() { return cParametersAlternatives_2_1_4_4_3_0; }
+		public Alternatives getParametersAlternatives_2_1_4_3_1_3_0() { return cParametersAlternatives_2_1_4_3_1_3_0; }
 
 		//STRING
-		public RuleCall getParametersSTRINGTerminalRuleCall_2_1_4_4_3_0_0() { return cParametersSTRINGTerminalRuleCall_2_1_4_4_3_0_0; }
+		public RuleCall getParametersSTRINGTerminalRuleCall_2_1_4_3_1_3_0_0() { return cParametersSTRINGTerminalRuleCall_2_1_4_3_1_3_0_0; }
 
 		//FQN
-		public RuleCall getParametersFQNParserRuleCall_2_1_4_4_3_0_1() { return cParametersFQNParserRuleCall_2_1_4_4_3_0_1; }
+		public RuleCall getParametersFQNParserRuleCall_2_1_4_3_1_3_0_1() { return cParametersFQNParserRuleCall_2_1_4_3_1_3_0_1; }
 
 		//WS*
-		public RuleCall getWSTerminalRuleCall_2_1_4_5() { return cWSTerminalRuleCall_2_1_4_5; }
+		public RuleCall getWSTerminalRuleCall_2_1_4_3_2() { return cWSTerminalRuleCall_2_1_4_3_2; }
 
 		//")"
-		public Keyword getRightParenthesisKeyword_2_1_4_6() { return cRightParenthesisKeyword_2_1_4_6; }
+		public Keyword getRightParenthesisKeyword_2_1_4_4() { return cRightParenthesisKeyword_2_1_4_4; }
 
 		//WS*
 		public RuleCall getWSTerminalRuleCall_3() { return cWSTerminalRuleCall_3; }
@@ -640,8 +648,8 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Variable hidden():
-	//	"${" WS* (name=ValidID | (name=ValidID WS*)? ":" WS* type=ValidID (WS* "(" WS* parameters+=(STRING | FQN) (WS* "," WS*
-	//	parameters+=(STRING | FQN))* WS* ")")?) WS* "}";
+	//	"${" WS* (name=ValidID | (name=ValidID WS*)? ":" WS* type=ValidID (WS* expectingParameters?="(" WS*
+	//	(parameters+=(STRING | FQN) (WS* "," WS* parameters+=(STRING | FQN))* WS*)? ")")?) WS* "}";
 	public VariableElements getVariableAccess() {
 		return (pVariable != null) ? pVariable : (pVariable = new VariableElements());
 	}

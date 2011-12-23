@@ -245,13 +245,22 @@ public interface TemplatesPackage extends EPackage
   int VARIABLE__TYPE = TEMPLATE_PART_FEATURE_COUNT + 1;
 
   /**
+   * The feature id for the '<em><b>Expecting Parameters</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VARIABLE__EXPECTING_PARAMETERS = TEMPLATE_PART_FEATURE_COUNT + 2;
+
+  /**
    * The feature id for the '<em><b>Parameters</b></em>' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int VARIABLE__PARAMETERS = TEMPLATE_PART_FEATURE_COUNT + 2;
+  int VARIABLE__PARAMETERS = TEMPLATE_PART_FEATURE_COUNT + 3;
 
   /**
    * The number of structural features of the '<em>Variable</em>' class.
@@ -260,7 +269,7 @@ public interface TemplatesPackage extends EPackage
    * @generated
    * @ordered
    */
-  int VARIABLE_FEATURE_COUNT = TEMPLATE_PART_FEATURE_COUNT + 3;
+  int VARIABLE_FEATURE_COUNT = TEMPLATE_PART_FEATURE_COUNT + 4;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.ui.codetemplates.templates.impl.LiteralImpl <em>Literal</em>}' class.
@@ -491,6 +500,17 @@ public interface TemplatesPackage extends EPackage
   EAttribute getVariable_Type();
 
   /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.codetemplates.templates.Variable#isExpectingParameters <em>Expecting Parameters</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Expecting Parameters</em>'.
+   * @see org.eclipse.xtext.ui.codetemplates.templates.Variable#isExpectingParameters()
+   * @see #getVariable()
+   * @generated
+   */
+  EAttribute getVariable_ExpectingParameters();
+
+  /**
    * Returns the meta object for the attribute list '{@link org.eclipse.xtext.ui.codetemplates.templates.Variable#getParameters <em>Parameters</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -703,6 +723,14 @@ public interface TemplatesPackage extends EPackage
      * @generated
      */
     EAttribute VARIABLE__TYPE = eINSTANCE.getVariable_Type();
+
+    /**
+     * The meta object literal for the '<em><b>Expecting Parameters</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute VARIABLE__EXPECTING_PARAMETERS = eINSTANCE.getVariable_ExpectingParameters();
 
     /**
      * The meta object literal for the '<em><b>Parameters</b></em>' attribute list feature.

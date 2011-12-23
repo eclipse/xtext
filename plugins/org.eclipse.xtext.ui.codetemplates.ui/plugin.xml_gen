@@ -71,6 +71,19 @@
         </page>
     </extension>
     <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.codetemplates.ui.CodetemplatesExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.codetemplates.Codetemplates"
+            name="Codetemplates">
+            <keywordReference id="org.eclipse.xtext.ui.codetemplates.ui.keyword_Codetemplates"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.xtext.ui.codetemplates.ui.keyword_Codetemplates"
@@ -245,6 +258,19 @@
             id="org.eclipse.xtext.ui.codetemplates.SingleCodetemplate.templates"
             name="Templates">
             <keywordReference id="org.eclipse.xtext.ui.codetemplates.ui.keyword_SingleCodetemplate"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.codetemplates.ui.SingleCodetemplateExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.codetemplates.SingleCodetemplate"
+            name="SingleCodetemplate">
+            <keywordReference id="org.eclipse.xtext.ui.codetemplates.ui.keyword_SingleCodetemplate"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
         </page>
     </extension>
     <extension

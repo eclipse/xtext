@@ -42,8 +42,8 @@ public class SingleCodetemplateParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTemplatePartAccess().getAlternatives(), "rule__TemplatePart__Alternatives");
 					put(grammarAccess.getVariableOrDollarAccess().getAlternatives(), "rule__VariableOrDollar__Alternatives");
 					put(grammarAccess.getVariableAccess().getAlternatives_2(), "rule__Variable__Alternatives_2");
-					put(grammarAccess.getVariableAccess().getParametersAlternatives_2_1_4_3_0(), "rule__Variable__ParametersAlternatives_2_1_4_3_0");
-					put(grammarAccess.getVariableAccess().getParametersAlternatives_2_1_4_4_3_0(), "rule__Variable__ParametersAlternatives_2_1_4_4_3_0");
+					put(grammarAccess.getVariableAccess().getParametersAlternatives_2_1_4_3_0_0(), "rule__Variable__ParametersAlternatives_2_1_4_3_0_0");
+					put(grammarAccess.getVariableAccess().getParametersAlternatives_2_1_4_3_1_3_0(), "rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0");
 					put(grammarAccess.getValidIDAccess().getAlternatives(), "rule__ValidID__Alternatives");
 					put(grammarAccess.getDollarAccess().getAlternatives_1(), "rule__Dollar__Alternatives_1");
 					put(grammarAccess.getCodetemplatesAccess().getGroup(), "rule__Codetemplates__Group__0");
@@ -55,7 +55,8 @@ public class SingleCodetemplateParser extends AbstractContentAssistParser {
 					put(grammarAccess.getVariableAccess().getGroup_2_1(), "rule__Variable__Group_2_1__0");
 					put(grammarAccess.getVariableAccess().getGroup_2_1_0(), "rule__Variable__Group_2_1_0__0");
 					put(grammarAccess.getVariableAccess().getGroup_2_1_4(), "rule__Variable__Group_2_1_4__0");
-					put(grammarAccess.getVariableAccess().getGroup_2_1_4_4(), "rule__Variable__Group_2_1_4_4__0");
+					put(grammarAccess.getVariableAccess().getGroup_2_1_4_3(), "rule__Variable__Group_2_1_4_3__0");
+					put(grammarAccess.getVariableAccess().getGroup_2_1_4_3_1(), "rule__Variable__Group_2_1_4_3_1__0");
 					put(grammarAccess.getFQNAccess().getGroup(), "rule__FQN__Group__0");
 					put(grammarAccess.getFQNAccess().getGroup_1(), "rule__FQN__Group_1__0");
 					put(grammarAccess.getDollarAccess().getGroup(), "rule__Dollar__Group__0");
@@ -71,8 +72,9 @@ public class SingleCodetemplateParser extends AbstractContentAssistParser {
 					put(grammarAccess.getVariableAccess().getNameAssignment_2_0(), "rule__Variable__NameAssignment_2_0");
 					put(grammarAccess.getVariableAccess().getNameAssignment_2_1_0_0(), "rule__Variable__NameAssignment_2_1_0_0");
 					put(grammarAccess.getVariableAccess().getTypeAssignment_2_1_3(), "rule__Variable__TypeAssignment_2_1_3");
-					put(grammarAccess.getVariableAccess().getParametersAssignment_2_1_4_3(), "rule__Variable__ParametersAssignment_2_1_4_3");
-					put(grammarAccess.getVariableAccess().getParametersAssignment_2_1_4_4_3(), "rule__Variable__ParametersAssignment_2_1_4_4_3");
+					put(grammarAccess.getVariableAccess().getExpectingParametersAssignment_2_1_4_1(), "rule__Variable__ExpectingParametersAssignment_2_1_4_1");
+					put(grammarAccess.getVariableAccess().getParametersAssignment_2_1_4_3_0(), "rule__Variable__ParametersAssignment_2_1_4_3_0");
+					put(grammarAccess.getVariableAccess().getParametersAssignment_2_1_4_3_1_3(), "rule__Variable__ParametersAssignment_2_1_4_3_1_3");
 					put(grammarAccess.getLiteralAccess().getValueAssignment(), "rule__Literal__ValueAssignment");
 					put(grammarAccess.getDollarAccess().getEscapedAssignment_1_0(), "rule__Dollar__EscapedAssignment_1_0");
 				}
