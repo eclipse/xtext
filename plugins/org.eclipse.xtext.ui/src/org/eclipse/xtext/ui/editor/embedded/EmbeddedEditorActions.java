@@ -56,7 +56,7 @@ public class EmbeddedEditorActions {
 
 	public static class Factory {
 		
-		@Inject
+		@Inject(optional=true)
 		protected IWorkbench workbench;
 		
 		protected EmbeddedEditorActions createActions(ISourceViewer viewer) {
