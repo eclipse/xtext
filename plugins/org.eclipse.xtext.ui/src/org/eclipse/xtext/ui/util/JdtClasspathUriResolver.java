@@ -9,23 +9,22 @@ package org.eclipse.xtext.ui.util;
 
 import static org.eclipse.xtext.util.Strings.*;
 
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
-import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.core.ExternalPackageFragmentRoot;
 import org.eclipse.xtext.resource.ClasspathUriResolutionException;
 import org.eclipse.xtext.resource.ClasspathUriUtil;
 import org.eclipse.xtext.resource.IClasspathUriResolver;
-import org.eclipse.xtext.util.Wrapper;
 
 @SuppressWarnings("restriction")
 public class JdtClasspathUriResolver implements IClasspathUriResolver {
@@ -52,25 +51,27 @@ public class JdtClasspathUriResolver implements IClasspathUriResolver {
 		return classpathUri;
 	}
 
-	protected URI findResourceInWorkspace(IJavaProject javaProject, URI classpathUri) throws JavaModelException,
-			CoreException {
+	protected URI findResourceInWorkspace(IJavaProject javaProject, URI classpathUri) throws CoreException {
 		if (javaProject.exists()) {
-			String path = classpathUri.trimSegments(1).path();
+			String packagePath = classpathUri.trimSegments(1).path();
 			String fullPath = classpathUri.path();
-			final String name = classpathUri.lastSegment();
-			String packageName = isEmpty(path) ? "" : path.substring(1).replace('/', '.');	
+			String fileName = classpathUri.lastSegment();
+            IPath filePath = new Path(fileName);
+			String packageName = isEmpty(packagePath) ? "" : packagePath.substring(1).replace('/', '.');	
 			for(IPackageFragmentRoot packageFragmentRoot: javaProject.getAllPackageFragmentRoots()) {
-				IJavaElement foundElement = packageFragmentRoot.getPackageFragment(packageName);
-				if (foundElement instanceof IPackageFragment && foundElement.exists()) {
-					IPackageFragment packageFragment = (IPackageFragment) foundElement;
+				IPackageFragment packageFragment = packageFragmentRoot.getPackageFragment(packageName);
+				if (packageFragment.exists()) {
 					IResource packageFragmentResource = packageFragment.getResource();
-					if (packageFragmentResource == null || packageFragmentResource instanceof IFile) {
-						Object[] nonJavaResources = packageFragment.getNonJavaResources();
-						for(Object nonJavaResource: nonJavaResources) {
-							// we have to check for concrete class because getFullPath
-							// behaves differently
-							IJarEntryResource jarEntryResource = (IJarEntryResource) nonJavaResource;
-							if (packageFragmentRoot.isArchive()) {
+                    if (packageFragmentResource instanceof IContainer) {
+                        IFile file = ((IContainer)packageFragmentResource).getFile(filePath);
+                        if (file.exists())
+                            return createPlatformResourceURI(file);
+                    }
+                    else { // jar file or external class folder
+						if (packageFragmentRoot.isArchive()) { // jar file
+							Object[] nonJavaResources = packageFragment.getNonJavaResources();
+							for (Object nonJavaResource : nonJavaResources) {
+								IJarEntryResource jarEntryResource = (IJarEntryResource) nonJavaResource;
 								if (fullPath.equals(jarEntryResource.getFullPath().toString())) {
 									IResource packageFragmentRootResource = packageFragmentRoot.getResource();
 									if (packageFragmentRootResource != null) { // we have a resource - use nested platform/resource
@@ -85,33 +86,19 @@ public class JdtClasspathUriResolver implements IClasspathUriResolver {
 										return result;
 									}
 								}
-							} else {
-								String nonJavaResourceName = jarEntryResource.getName();
-								if (name.equals(nonJavaResourceName)) {
-									if (packageFragmentRoot.isExternal()) {
-										// the following code will return null
-//										IResource resource = packageFragmentRoot.getUnderlyingResource();
-										if (!(packageFragmentRoot instanceof ExternalPackageFragmentRoot))
-											throw new IllegalStateException();
-										IResource resource = ((ExternalPackageFragmentRoot)packageFragmentRoot).resource();
-										IPath absolutePath = resource.getFullPath();
-										absolutePath = absolutePath.append(fullPath);
-										return createPlatformResourceURI(absolutePath);
-									}
+							}
+						} else if (packageFragmentRoot.isExternal()) { // external class folder
+                            Object[] nonJavaResources = packageFragment.getNonJavaResources();
+                            for (Object nonJavaResource : nonJavaResources) {
+								IJarEntryResource jarEntryResource = (IJarEntryResource) nonJavaResource;
+								if (fileName.equals(jarEntryResource.getName())) {
+									IResource packageFragmentRootResource = ((ExternalPackageFragmentRoot)packageFragmentRoot).resource();
+									IPath absolutePath = packageFragmentRootResource.getFullPath();
+									absolutePath = absolutePath.append(fullPath);
+									return createPlatformResourceURI(absolutePath);
 								}
 							}
 						}
-					} else {
-						final Wrapper<IResource> result = Wrapper.<IResource>wrap(null);
-						packageFragmentResource.accept(new IResourceVisitor() {
-							public boolean visit(IResource resource) throws CoreException {
-								if (name.equals(resource.getName()))
-									result.set(resource);
-								return result.get() == null;
-							}
-						}, IResource.DEPTH_ONE, IResource.NONE);
-						if (result.get() != null)
-							return createPlatformResourceURI(result.get());
 					}
 				}
 			}
