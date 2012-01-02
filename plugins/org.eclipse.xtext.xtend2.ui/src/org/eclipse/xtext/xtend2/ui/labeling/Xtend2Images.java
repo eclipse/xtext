@@ -28,6 +28,14 @@ public class Xtend2Images {
 	@Inject
 	private IImageHelper imageHelper;
 
+	public ImageDescriptor forImplementsAnnotation() {
+		return JavaPluginImages.DESC_OBJ_IMPLEMENTS;
+	}
+
+	public ImageDescriptor forOverridesAnnotation() {
+		return JavaPluginImages.DESC_OBJ_OVERRIDES;
+	}
+
 	public Image forPackage() {
 		return getJdtImage(JavaPluginImages.DESC_OBJS_PACKDECL);
 	}
