@@ -796,4 +796,36 @@
             id="org.eclipse.xtend.XTEND_CONTAINER">
       </classpathContainerPage>
    </extension>
+   <extension point="org.eclipse.ui.editors.annotationTypes">
+       <type name="org.eclipse.xtext.ui.overrideIndicator"></type>
+   </extension>
+   <extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+       <specification
+          annotationType="org.eclipse.xtext.ui.overrideIndicator"
+          label="%OverrideIndicator.label"
+          icon="$nl$/icons/full/ovr16/over_co.gif"
+          annotationImageProvider="org.eclipse.xtext.xtend2.ui.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.xtend2.ui.editor.OverrideIndicatorImageProvider"
+          textPreferenceKey="overrideIndicator"
+          textPreferenceValue="false"
+          highlightPreferenceKey="overrideIndicatorHighlighting"
+          highlightPreferenceValue="false"
+          contributesToHeader="false"
+          overviewRulerPreferenceKey="overrideIndicatorInOverviewRuler"
+          overviewRulerPreferenceValue="false"
+          verticalRulerPreferenceKey="overrideIndicatorInVerticalRuler"
+          verticalRulerPreferenceValue="true"
+          colorPreferenceKey="overrideIndicatorColor"
+          colorPreferenceValue="180,207,205"
+          presentationLayer="3"
+          showInNextPrevDropdownToolbarActionKey="showoverrideIndicatorInNextPrevDropdownToolbarAction"
+          showInNextPrevDropdownToolbarAction="false"
+          isGoToNextNavigationTargetKey="isOverrideIndicatorGoToNextNavigationTarget"
+          isGoToNextNavigationTarget="false"
+          isGoToPreviousNavigationTargetKey="isOverrideIndicatorGoToPreviousNavigationTarget"
+          isGoToPreviousNavigationTarget="false"
+          textStylePreferenceKey="overrideIndicatorTextStyle"
+          textStylePreferenceValue="SQUIGGLES">
+       </specification>
+   </extension>
+
 </plugin>
