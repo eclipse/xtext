@@ -409,5 +409,11 @@ Export-Package: org.eclipse.xtext.generator.ecore,
  org.eclipse.xtext.metamodelreferencing.tests.ecoreReference,
  org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.impl,
  org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.util,
- org.eclipse.xtext.metamodelreferencing.tests.serializer
+ org.eclipse.xtext.metamodelreferencing.tests.serializer,
+ org.eclipse.xtext.linking.serializer,
+ org.eclipse.xtext.linking.scoping,
+ org.eclipse.xtext.linking.lazy.serializer,
+ org.eclipse.xtext.linking.bug362902,
+ org.eclipse.xtext.linking.bug362902.impl,
+ org.eclipse.xtext.linking.bug362902.util
 
