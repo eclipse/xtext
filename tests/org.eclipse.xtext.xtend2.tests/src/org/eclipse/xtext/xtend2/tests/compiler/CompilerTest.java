@@ -2490,6 +2490,16 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		}
 	}
 
+	public void testRemoveDuplicateExceptions() throws Exception {
+		Class<?> clazz = compileJavaCode("Foo", "class Foo {\n" +
+				"  def dispatch foo(Object o) throws Exception {}\n" +
+				"  def dispatch foo(Number m) throws Exception {}\n" +
+				"}");
+		Method methodFoo = clazz.getMethod("foo", Object.class);
+		assertEquals(1, methodFoo.getExceptionTypes().length);
+		assertEquals(Exception.class, methodFoo.getExceptionTypes()[0]);
+	}
+	
 	
 	@Inject
 	private EclipseRuntimeDependentJavaCompiler javaCompiler;
