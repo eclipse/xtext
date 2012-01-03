@@ -109,7 +109,6 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 		JvmGenericType inferredJvmType = transform(xtendClass, prelinkingPhase);
 		acceptor.accept(inferredJvmType);
 	}
-	
 
 	protected JvmGenericType transform(XtendClass source, boolean prelinkingPhase) {
 		JvmGenericType inferredJvmType = typesFactory.createJvmGenericType();
@@ -223,6 +222,8 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 				if(!func.isStatic())
 					allStatic = false;
 			}
+			for(JvmTypeReference declaredException: jvmOperation.getExceptions()) 
+				result.getExceptions().add(cloneWithProxies(declaredException));
 		}
 		if (commonVisibility == null)
 			result.setVisibility(JvmVisibility.PUBLIC);

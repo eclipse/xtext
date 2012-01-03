@@ -33,6 +33,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendParameter;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 
@@ -326,6 +327,26 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		}
 	}		
 
+	public void testDispatchFunction_06() throws Exception {
+		XtendFile xtendFile = file("class Foo {" +
+				"def dispatch foo(Object o) throws Exception " +
+				"def dispatch foo(Integer i) throws RuntimeException " +
+				"}");
+		JvmOperation dispatcher = find(getInferredType(xtendFile).getDeclaredOperations(), new Predicate<JvmOperation>() {
+			public boolean apply(JvmOperation input) {
+				return equal("foo", input.getSimpleName());
+			}
+		});
+		Iterable<String> exceptionTypeNames = transform(dispatcher.getExceptions(), new Function<JvmTypeReference, String>() {
+			public String apply(JvmTypeReference input) {
+				return input.getQualifiedName();
+			}
+		});
+		assertEquals(2, size(exceptionTypeNames));
+		assertTrue(contains(exceptionTypeNames, "java.lang.Exception")); 
+		assertTrue(contains(exceptionTypeNames, "java.lang.RuntimeException")); 
+	}
+		
 	public void testBug_340611() throws Exception {
 		XtendFile xtendFile = file(
 				"class Bug340611 {\n" + 
