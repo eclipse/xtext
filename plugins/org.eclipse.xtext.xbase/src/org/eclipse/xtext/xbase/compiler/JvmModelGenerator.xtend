@@ -29,6 +29,7 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
+import org.eclipse.xtext.common.types.JvmType
 
 /**
  * A generator implementation that processes the 
@@ -179,10 +180,10 @@ class JvmModelGenerator implements IGenerator {
 		'''«FOR it: constraints.filter(typeof(JvmUpperBound)) BEFORE " extends " SEPARATOR " & "»«typeReference.serialize(importManager)»«ENDFOR»'''
 	}
 	
-	def generateThrowsClause(JvmExecutable it, ImportManager importManager) '''«
-		FOR exc: it.exceptions BEFORE ' throws ' SEPARATOR ', '»«exc.serialize(importManager)»«ENDFOR
-	»'''
-
+	def generateThrowsClause(JvmExecutable it, ImportManager importManager) {
+		exceptions.map([type]).toSet.join(' throws ', ', ', '', [serialize(importManager)])
+	}
+	
 	def generateParameter(JvmFormalParameter it, ImportManager importManager) {
 		"final " + parameterType.serialize(importManager) + " " + simpleName
 	}
@@ -275,6 +276,12 @@ class JvmModelGenerator implements IGenerator {
 			}
 		}			
 		appendable.toString
+	}
+	
+	def String serialize(JvmType it, ImportManager importManager) {
+		val builder = new StringBuilder()
+		importManager.appendType(it, builder)
+		builder.toString
 	}
 	
 	def String serialize(JvmTypeReference it, ImportManager importManager) {
