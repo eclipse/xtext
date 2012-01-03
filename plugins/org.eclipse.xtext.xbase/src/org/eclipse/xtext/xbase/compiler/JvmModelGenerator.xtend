@@ -15,10 +15,12 @@ import org.eclipse.xtext.common.types.JvmExecutable
 import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.common.types.JvmGenericType
+import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.common.types.JvmMember
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmShortAnnotationValue
 import org.eclipse.xtext.common.types.JvmStringAnnotationValue
+import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.common.types.JvmTypeAnnotationValue
 import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.common.types.JvmTypeReference
@@ -29,8 +31,6 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
-import org.eclipse.xtext.common.types.JvmType
-import org.eclipse.xtext.common.types.JvmIdentifiableElement
 
 /**
  * A generator implementation that processes the 
@@ -144,7 +144,7 @@ class JvmModelGenerator implements IGenerator {
 	'''
 	
 	def dispatch generateMember(JvmConstructor it, ImportManager importManager) {
-		if(!parameters.empty || associatedExpression != null || compilationStrategy != null) '''
+		if(!parameters.empty || associatedExpression != null || compilationStrategy != null || declaringType.members.filter(typeof(JvmConstructor)).size != 1) '''
 			«it.generateJavaDoc»
 			«IF !annotations.empty»«it.annotations.generateAnnotations(importManager)»«ENDIF»
 			«it.generateModifier»«simpleName»(«it.parameters.map( p | p.generateParameter(importManager)).join(", ")»)«generateThrowsClause(it, importManager)» {
@@ -204,7 +204,7 @@ class JvmModelGenerator implements IGenerator {
 				};
 				compiler.compile(expression, appendable, returnType, op.exceptions.toSet)
 				return removeSurroundingCurlies(appendable.toString)
-			} else {
+			} else if(op instanceof JvmOperation) {
 				return '''throw new UnsupportedOperationException("«op.simpleName» is not implemented");'''
 			}
 		}
