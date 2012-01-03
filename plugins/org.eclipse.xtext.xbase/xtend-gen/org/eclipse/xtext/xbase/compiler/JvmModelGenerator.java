@@ -154,7 +154,7 @@ public class JvmModelGenerator implements IGenerator {
     String _simpleName = it.getSimpleName();
     _builder.append(_simpleName, "");
     EList<JvmTypeParameter> _typeParameters = it.getTypeParameters();
-    CharSequence _generateTypeParameterDeclaration = this.generateTypeParameterDeclaration(_typeParameters, importManager);
+    String _generateTypeParameterDeclaration = this.generateTypeParameterDeclaration(_typeParameters, importManager);
     _builder.append(_generateTypeParameterDeclaration, "");
     _builder.append(" ");
     String _generateExtendsClause = this.generateExtendsClause(it, importManager);
@@ -280,25 +280,29 @@ public class JvmModelGenerator implements IGenerator {
       String _switchResult = null;
       boolean matched = false;
       if (!matched) {
-        if (ObjectExtensions.operator_equals(visibility,JvmVisibility.PRIVATE)) {
+        JvmVisibility _PRIVATE = JvmVisibility.PRIVATE;
+        if (ObjectExtensions.operator_equals(visibility,_PRIVATE)) {
           matched=true;
           _switchResult = "private ";
         }
       }
       if (!matched) {
-        if (ObjectExtensions.operator_equals(visibility,JvmVisibility.PUBLIC)) {
+        JvmVisibility _PUBLIC = JvmVisibility.PUBLIC;
+        if (ObjectExtensions.operator_equals(visibility,_PUBLIC)) {
           matched=true;
           _switchResult = "public ";
         }
       }
       if (!matched) {
-        if (ObjectExtensions.operator_equals(visibility,JvmVisibility.PROTECTED)) {
+        JvmVisibility _PROTECTED = JvmVisibility.PROTECTED;
+        if (ObjectExtensions.operator_equals(visibility,_PROTECTED)) {
           matched=true;
           _switchResult = "protected ";
         }
       }
       if (!matched) {
-        if (ObjectExtensions.operator_equals(visibility,JvmVisibility.DEFAULT)) {
+        JvmVisibility _DEFAULT = JvmVisibility.DEFAULT;
+        if (ObjectExtensions.operator_equals(visibility,_DEFAULT)) {
           matched=true;
           _switchResult = "";
         }
@@ -458,7 +462,7 @@ public class JvmModelGenerator implements IGenerator {
     CharSequence _generateModifier = this.generateModifier(it);
     _builder.append(_generateModifier, "");
     EList<JvmTypeParameter> _typeParameters = it.getTypeParameters();
-    CharSequence _generateTypeParameterDeclaration = this.generateTypeParameterDeclaration(_typeParameters, importManager);
+    String _generateTypeParameterDeclaration = this.generateTypeParameterDeclaration(_typeParameters, importManager);
     _builder.append(_generateTypeParameterDeclaration, "");
     String _xifexpression = null;
     JvmTypeReference _returnType = it.getReturnType();
@@ -593,8 +597,9 @@ public class JvmModelGenerator implements IGenerator {
             {
               StringBuilderBasedAppendable _createAppendable = this.createAppendable(it, importManager);
               final StringBuilderBasedAppendable appendable = _createAppendable;
+              XbaseCompiler _compiler = this.compiler;
               JvmTypeReference _type = it.getType();
-              this.compiler.compileAsJavaExpression(expression, appendable, _type);
+              _compiler.compileAsJavaExpression(expression, appendable, _type);
               String _string = appendable.toString();
               String _operator_plus_1 = StringExtensions.operator_plus(" = ", _string);
               return _operator_plus_1;
@@ -611,55 +616,38 @@ public class JvmModelGenerator implements IGenerator {
     return _xblockexpression;
   }
   
-  public CharSequence generateTypeParameterDeclaration(final List<JvmTypeParameter> typeParameters, final ImportManager importManager) {
-    StringConcatenation _builder = new StringConcatenation();
-    {
-      boolean _hasElements = false;
-      for(final JvmTypeParameter it : typeParameters) {
-        if (!_hasElements) {
-          _hasElements = true;
-          _builder.append("<", "");
-        } else {
-          _builder.appendImmediate(", ", "");
+  public String generateTypeParameterDeclaration(final List<JvmTypeParameter> typeParameters, final ImportManager importManager) {
+    final Function1<JvmTypeParameter,CharSequence> _function = new Function1<JvmTypeParameter,CharSequence>() {
+        public CharSequence apply(final JvmTypeParameter it) {
+          CharSequence _generateTypeParameterDeclaration = JvmModelGenerator.this.generateTypeParameterDeclaration(it, importManager);
+          return _generateTypeParameterDeclaration;
         }
-        CharSequence _generateTypeParameterDeclaration = this.generateTypeParameterDeclaration(it, importManager);
-        _builder.append(_generateTypeParameterDeclaration, "");
-      }
-      if (_hasElements) {
-        _builder.append("> ", "");
-      }
-    }
-    return _builder;
+      };
+    String _join = IterableExtensions.<JvmTypeParameter>join(typeParameters, "<", ", ", ">", _function);
+    return _join;
   }
   
   public CharSequence generateTypeParameterDeclaration(final JvmTypeParameter it, final ImportManager importManager) {
     StringConcatenation _builder = new StringConcatenation();
     CharSequence _serialize = importManager.serialize(it);
     _builder.append(_serialize, "");
-    CharSequence _generateTypeParameterConstraints = this.generateTypeParameterConstraints(it, importManager);
+    String _generateTypeParameterConstraints = this.generateTypeParameterConstraints(it, importManager);
     _builder.append(_generateTypeParameterConstraints, "");
     return _builder;
   }
   
-  public CharSequence generateTypeParameterConstraints(final JvmTypeParameter it, final ImportManager importManager) {
-    StringConcatenation _builder = new StringConcatenation();
-    {
-      EList<JvmTypeConstraint> _constraints = it.getConstraints();
-      Iterable<JvmUpperBound> _filter = IterableExtensions.<JvmUpperBound>filter(_constraints, org.eclipse.xtext.common.types.JvmUpperBound.class);
-      boolean _hasElements = false;
-      for(final JvmUpperBound it_1 : _filter) {
-        if (!_hasElements) {
-          _hasElements = true;
-          _builder.append(" extends ", "");
-        } else {
-          _builder.appendImmediate(" & ", "");
+  public String generateTypeParameterConstraints(final JvmTypeParameter it, final ImportManager importManager) {
+    EList<JvmTypeConstraint> _constraints = it.getConstraints();
+    Iterable<JvmUpperBound> _filter = IterableExtensions.<JvmUpperBound>filter(_constraints, org.eclipse.xtext.common.types.JvmUpperBound.class);
+    final Function1<JvmUpperBound,String> _function = new Function1<JvmUpperBound,String>() {
+        public String apply(final JvmUpperBound it) {
+          JvmTypeReference _typeReference = it.getTypeReference();
+          String _serialize = JvmModelGenerator.this.serialize(_typeReference, importManager);
+          return _serialize;
         }
-        JvmTypeReference _typeReference = it_1.getTypeReference();
-        String _serialize = this.serialize(_typeReference, importManager);
-        _builder.append(_serialize, "");
-      }
-    }
-    return _builder;
+      };
+    String _join = IterableExtensions.<JvmUpperBound>join(_filter, " extends ", " & ", "", _function);
+    return _join;
   }
   
   public String generateThrowsClause(final JvmExecutable it, final ImportManager importManager) {
@@ -730,7 +718,8 @@ public class JvmModelGenerator implements IGenerator {
                 if (op instanceof JvmConstructor) {
                   final JvmConstructor _jvmConstructor = (JvmConstructor)op;
                   matched=true;
-                  JvmTypeReference _typeForName = this._typeReferences.getTypeForName(Void.TYPE, _jvmConstructor);
+                  Class<Void> _TYPE = Void.TYPE;
+                  JvmTypeReference _typeForName = this._typeReferences.getTypeForName(_TYPE, _jvmConstructor);
                   _switchResult = _typeForName;
                 }
               }
@@ -738,9 +727,10 @@ public class JvmModelGenerator implements IGenerator {
                 _switchResult = null;
               }
               final JvmTypeReference returnType = _switchResult;
+              XbaseCompiler _compiler = this.compiler;
               EList<JvmTypeReference> _exceptions = op.getExceptions();
               Set<JvmTypeReference> _set = IterableExtensions.<JvmTypeReference>toSet(_exceptions);
-              this.compiler.compile(expression, appendable, returnType, _set);
+              _compiler.compile(expression, appendable, returnType, _set);
               String _string = appendable.toString();
               String _removeSurroundingCurlies = this.removeSurroundingCurlies(_string);
               return _removeSurroundingCurlies;
@@ -838,23 +828,15 @@ public class JvmModelGenerator implements IGenerator {
           JvmAnnotationType _annotation = a.getAnnotation();
           CharSequence _serialize = importManager.serialize(_annotation);
           _builder.append(_serialize, "");
-          {
-            EList<JvmAnnotationValue> _values = a.getValues();
-            boolean _hasElements = false;
-            for(final JvmAnnotationValue value : _values) {
-              if (!_hasElements) {
-                _hasElements = true;
-                _builder.append("(", "");
-              } else {
-                _builder.appendImmediate(", ", "");
+          EList<JvmAnnotationValue> _values = a.getValues();
+          final Function1<JvmAnnotationValue,CharSequence> _function = new Function1<JvmAnnotationValue,CharSequence>() {
+              public CharSequence apply(final JvmAnnotationValue it) {
+                CharSequence _java = JvmModelGenerator.this.toJava(it, importManager);
+                return _java;
               }
-              CharSequence _java = this.toJava(value, importManager);
-              _builder.append(_java, "");
-            }
-            if (_hasElements) {
-              _builder.append(")", "");
-            }
-          }
+            };
+          String _join = IterableExtensions.<JvmAnnotationValue>join(_values, "(", ", ", ")", _function);
+          _builder.append(_join, "");
           _builder.newLineIfNotEmpty();
         }
       }
@@ -1010,17 +992,19 @@ public class JvmModelGenerator implements IGenerator {
       if (!matched) {
         if (ObjectExtensions.operator_equals(__valOfSwitchOver,1)) {
           matched=true;
+          XbaseCompiler _compiler = this.compiler;
           EList<Object> _values_1 = it.getValues();
           Object _head = IterableExtensions.<Object>head(_values_1);
-          this.compiler.toJavaExpression(((XExpression) _head), appendable);
+          _compiler.toJavaExpression(((XExpression) _head), appendable);
         }
       }
       if (!matched) {
         {
           appendable.append("{");
+          XbaseCompiler _compiler_1 = this.compiler;
           EList<Object> _values_2 = it.getValues();
           Object _head_1 = IterableExtensions.<Object>head(_values_2);
-          this.compiler.toJavaExpression(((XExpression) _head_1), appendable);
+          _compiler_1.toJavaExpression(((XExpression) _head_1), appendable);
           EList<Object> _values_3 = it.getValues();
           Iterable<Object> _tail = IterableExtensions.<Object>tail(_values_3);
           Iterable<XExpression> _filter = IterableExtensions.<XExpression>filter(_tail, org.eclipse.xtext.xbase.XExpression.class);
@@ -1028,7 +1012,8 @@ public class JvmModelGenerator implements IGenerator {
               public void apply(final XExpression it) {
                 {
                   appendable.append(",");
-                  JvmModelGenerator.this.compiler.toJavaExpression(it, appendable);
+                  XbaseCompiler _compiler = JvmModelGenerator.this.compiler;
+                  _compiler.toJavaExpression(it, appendable);
                 }
               }
             };
@@ -1059,8 +1044,9 @@ public class JvmModelGenerator implements IGenerator {
     {
       StringBuilderBasedAppendable _createAppendable = this.createAppendable(it, importManager);
       final StringBuilderBasedAppendable appendable = _createAppendable;
+      TypeReferenceSerializer _typeRefSerializer = this.typeRefSerializer;
       EObject _eContainer = it.eContainer();
-      this.typeRefSerializer.serialize(it, _eContainer, appendable);
+      _typeRefSerializer.serialize(it, _eContainer, appendable);
       String _string = appendable.toString();
       _xblockexpression = (_string);
     }

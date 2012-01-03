@@ -169,7 +169,7 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def generateTypeParameterDeclaration(List<JvmTypeParameter> typeParameters, ImportManager importManager) {
-		'''«FOR it: typeParameters BEFORE '<' SEPARATOR ', ' AFTER '> '»«it.generateTypeParameterDeclaration(importManager)»«ENDFOR»'''
+		typeParameters.join('<', ', ', '>', [it.generateTypeParameterDeclaration(importManager)])
 	}
 	
 	def generateTypeParameterDeclaration(JvmTypeParameter it, ImportManager importManager) {
@@ -177,7 +177,7 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def generateTypeParameterConstraints(JvmTypeParameter it, ImportManager importManager) {
-		'''«FOR it: constraints.filter(typeof(JvmUpperBound)) BEFORE " extends " SEPARATOR " & "»«typeReference.serialize(importManager)»«ENDFOR»'''
+		constraints.filter(typeof(JvmUpperBound)).join(' extends ', ' & ', '', [typeReference.serialize(importManager)])
 	}
 	
 	def generateThrowsClause(JvmExecutable it, ImportManager importManager) {
@@ -240,7 +240,7 @@ class JvmModelGenerator implements IGenerator {
 			return null
 		'''
 		«FOR a : annotations»
-			@«importManager.serialize(a.annotation)»«FOR value : a.values BEFORE '(' SEPARATOR ', ' AFTER ')'»«value.toJava(importManager)»«ENDFOR»
+			@«importManager.serialize(a.annotation)»«a.values.join('(', ', ', ')', [toJava(importManager)])»
 		«ENDFOR»
 		'''
 	}
