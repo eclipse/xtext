@@ -486,7 +486,7 @@ public class JvmModelGenerator implements IGenerator {
     String _join = IterableExtensions.join(_map, ", ");
     _builder.append(_join, "");
     _builder.append(")");
-    CharSequence _generateThrowsClause = this.generateThrowsClause(it, importManager);
+    String _generateThrowsClause = this.generateThrowsClause(it, importManager);
     _builder.append(_generateThrowsClause, "");
     {
       boolean _isAbstract = it.isAbstract();
@@ -551,7 +551,7 @@ public class JvmModelGenerator implements IGenerator {
       String _join = IterableExtensions.join(_map, ", ");
       _builder.append(_join, "");
       _builder.append(")");
-      CharSequence _generateThrowsClause = this.generateThrowsClause(it, importManager);
+      String _generateThrowsClause = this.generateThrowsClause(it, importManager);
       _builder.append(_generateThrowsClause, "");
       _builder.append(" {");
       _builder.newLineIfNotEmpty();
@@ -662,23 +662,24 @@ public class JvmModelGenerator implements IGenerator {
     return _builder;
   }
   
-  public CharSequence generateThrowsClause(final JvmExecutable it, final ImportManager importManager) {
-    StringConcatenation _builder = new StringConcatenation();
-    {
-      EList<JvmTypeReference> _exceptions = it.getExceptions();
-      boolean _hasElements = false;
-      for(final JvmTypeReference exc : _exceptions) {
-        if (!_hasElements) {
-          _hasElements = true;
-          _builder.append(" throws ", "");
-        } else {
-          _builder.appendImmediate(", ", "");
+  public String generateThrowsClause(final JvmExecutable it, final ImportManager importManager) {
+    EList<JvmTypeReference> _exceptions = it.getExceptions();
+    final Function1<JvmTypeReference,JvmType> _function = new Function1<JvmTypeReference,JvmType>() {
+        public JvmType apply(final JvmTypeReference it) {
+          JvmType _type = it.getType();
+          return _type;
         }
-        String _serialize = this.serialize(exc, importManager);
-        _builder.append(_serialize, "");
-      }
-    }
-    return _builder;
+      };
+    List<JvmType> _map = ListExtensions.<JvmTypeReference, JvmType>map(_exceptions, _function);
+    Set<JvmType> _set = IterableExtensions.<JvmType>toSet(_map);
+    final Function1<JvmType,String> _function_1 = new Function1<JvmType,String>() {
+        public String apply(final JvmType it) {
+          String _serialize = JvmModelGenerator.this.serialize(it, importManager);
+          return _serialize;
+        }
+      };
+    String _join = IterableExtensions.<JvmType>join(_set, " throws ", ", ", "", _function_1);
+    return _join;
   }
   
   public String generateParameter(final JvmFormalParameter it, final ImportManager importManager) {
@@ -1036,6 +1037,18 @@ public class JvmModelGenerator implements IGenerator {
         }
       }
       String _string = appendable.toString();
+      _xblockexpression = (_string);
+    }
+    return _xblockexpression;
+  }
+  
+  public String serialize(final JvmType it, final ImportManager importManager) {
+    String _xblockexpression = null;
+    {
+      StringBuilder _stringBuilder = new StringBuilder();
+      final StringBuilder builder = _stringBuilder;
+      importManager.appendType(it, builder);
+      String _string = builder.toString();
       _xblockexpression = (_string);
     }
     return _xblockexpression;
