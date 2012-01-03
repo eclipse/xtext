@@ -30,6 +30,7 @@ import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.common.types.JvmType
+import org.eclipse.xtext.common.types.JvmIdentifiableElement
 
 /**
  * A generator implementation that processes the 
@@ -143,7 +144,7 @@ class JvmModelGenerator implements IGenerator {
 	'''
 	
 	def dispatch generateMember(JvmConstructor it, ImportManager importManager) {
-		if(!parameters.empty || associatedExpression != null) '''
+		if(!parameters.empty || associatedExpression != null || compilationStrategy != null) '''
 			«it.generateJavaDoc»
 			«IF !annotations.empty»«it.annotations.generateAnnotations(importManager)»«ENDIF»
 			«it.generateModifier»«simpleName»(«it.parameters.map( p | p.generateParameter(importManager)).join(", ")»)«generateThrowsClause(it, importManager)» {
@@ -153,9 +154,8 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def CharSequence generateInitialization(JvmField it, ImportManager importManager) {
-		val adapter = it.eAdapters.filter(typeof(CompilationStrategyAdapter)).head
-		if (adapter != null) 
-			" = " + adapter.compilationStrategy.apply(importManager)			
+		if (compilationStrategy != null) 
+			" = " + compilationStrategy.apply(importManager)
 		else {
 			val expression = associatedExpression
 			if (expression != null) {
@@ -189,9 +189,8 @@ class JvmModelGenerator implements IGenerator {
 	}
 		
 	def CharSequence generateBody(JvmExecutable op, ImportManager importManager) {
-		val adapter = op.eAdapters.filter(typeof(CompilationStrategyAdapter)).head
-		if (adapter != null) {
-			return adapter.compilationStrategy.apply(importManager)			
+		if (op.compilationStrategy != null) {
+			return op.compilationStrategy.apply(importManager)			
 		} else {
 			val expression = op.getAssociatedExpression
 			if (expression != null) {
@@ -276,6 +275,14 @@ class JvmModelGenerator implements IGenerator {
 			}
 		}			
 		appendable.toString
+	}
+	
+	def compilationStrategy(JvmIdentifiableElement it) {
+		val adapter = eAdapters.filter(typeof(CompilationStrategyAdapter)).head
+		if (adapter != null) 
+			adapter.compilationStrategy
+		else 
+			null
 	}
 	
 	def String serialize(JvmType it, ImportManager importManager) {
