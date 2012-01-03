@@ -114,6 +114,10 @@ Workflow {
 			}
 		}
 		language = {
+			uri = "classpath:/org/eclipse/xtext/linking/Bug362902.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = {
 			uri = "classpath:/org/eclipse/xtext/linking/AbstractIgnoreCaseLinkingTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {
 				srcGenOnly = false

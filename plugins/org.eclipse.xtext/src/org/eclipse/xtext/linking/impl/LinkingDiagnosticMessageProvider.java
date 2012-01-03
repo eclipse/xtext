@@ -16,12 +16,19 @@ import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Holger Schill
  */
 public class LinkingDiagnosticMessageProvider implements ILinkingDiagnosticMessageProvider.Extended {
 
 	public DiagnosticMessage getUnresolvedProxyMessage(ILinkingDiagnosticContext context) {
 		EClass referenceType = context.getReference().getEReferenceType();
-		String msg = "Couldn't resolve reference to " + referenceType.getName() + " '" + context.getLinkText() + "'.";
+		String linkText = "";
+		try {
+			linkText = context.getLinkText();
+		} catch (IllegalNodeException e){
+			linkText = e.getNode().getText();
+		}
+		String msg = "Couldn't resolve reference to " + referenceType.getName() + " '" + linkText + "'.";
 		return new DiagnosticMessage(msg, Severity.ERROR, Diagnostic.LINKING_DIAGNOSTIC);
 	}
 	
