@@ -26,19 +26,20 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cPackageKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
 		private final Assignment cPackageAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
 		private final RuleCall cPackageQualifiedNameParserRuleCall_0_1_0 = (RuleCall)cPackageAssignment_0_1.eContents().get(0);
+		private final Keyword cSemicolonKeyword_0_2 = (Keyword)cGroup_0.eContents().get(2);
 		private final Assignment cImportsAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cImportsImportParserRuleCall_1_0 = (RuleCall)cImportsAssignment_1.eContents().get(0);
 		private final Assignment cXtendClassAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cXtendClassClassParserRuleCall_2_0 = (RuleCall)cXtendClassAssignment_2.eContents().get(0);
 		
 		//File returns XtendFile:
-		//	("package" package=QualifiedName)? imports+=Import* xtendClass=Class?;
+		//	("package" package=QualifiedName ";"?)? imports+=Import* xtendClass=Class?;
 		public ParserRule getRule() { return rule; }
 
-		//("package" package=QualifiedName)? imports+=Import* xtendClass=Class?
+		//("package" package=QualifiedName ";"?)? imports+=Import* xtendClass=Class?
 		public Group getGroup() { return cGroup; }
 
-		//("package" package=QualifiedName)?
+		//("package" package=QualifiedName ";"?)?
 		public Group getGroup_0() { return cGroup_0; }
 
 		//"package"
@@ -49,6 +50,9 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 
 		//QualifiedName
 		public RuleCall getPackageQualifiedNameParserRuleCall_0_1_0() { return cPackageQualifiedNameParserRuleCall_0_1_0; }
+
+		//";"?
+		public Keyword getSemicolonKeyword_0_2() { return cSemicolonKeyword_0_2; }
 
 		//imports+=Import*
 		public Assignment getImportsAssignment_1() { return cImportsAssignment_1; }
@@ -83,14 +87,15 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cImportedTypeJvmTypeQualifiedNameParserRuleCall_1_1_0_1 = (RuleCall)cImportedTypeJvmTypeCrossReference_1_1_0.eContents().get(1);
 		private final Assignment cImportedNamespaceAssignment_1_2 = (Assignment)cAlternatives_1.eContents().get(2);
 		private final RuleCall cImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_2_0 = (RuleCall)cImportedNamespaceAssignment_1_2.eContents().get(0);
+		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//Import returns XtendImport:
 		//	"import" (static?="static" extension?="extension"? importedType=[types::JvmType|QualifiedName] "." "*" |
-		//	importedType=[types::JvmType|QualifiedName] | importedNamespace=QualifiedNameWithWildCard);
+		//	importedType=[types::JvmType|QualifiedName] | importedNamespace=QualifiedNameWithWildCard) ";"?;
 		public ParserRule getRule() { return rule; }
 
 		//"import" (static?="static" extension?="extension"? importedType=[types::JvmType|QualifiedName] "." "*" |
-		//importedType=[types::JvmType|QualifiedName] | importedNamespace=QualifiedNameWithWildCard)
+		//importedType=[types::JvmType|QualifiedName] | importedNamespace=QualifiedNameWithWildCard) ";"?
 		public Group getGroup() { return cGroup; }
 
 		//"import"
@@ -144,6 +149,9 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 
 		//QualifiedNameWithWildCard
 		public RuleCall getImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_2_0() { return cImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_2_0; }
+
+		//";"?
+		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
 	}
 
 	public class QualifiedNameWithWildCardElements extends AbstractParserRuleElementFinder {
@@ -340,6 +348,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cEqualsSignKeyword_2_0_3_0 = (Keyword)cGroup_2_0_3.eContents().get(0);
 		private final Assignment cInitialValueAssignment_2_0_3_1 = (Assignment)cGroup_2_0_3.eContents().get(1);
 		private final RuleCall cInitialValueXExpressionParserRuleCall_2_0_3_1_0 = (RuleCall)cInitialValueAssignment_2_0_3_1.eContents().get(0);
+		private final Keyword cSemicolonKeyword_2_0_4 = (Keyword)cGroup_2_0.eContents().get(4);
 		private final Group cGroup_2_1 = (Group)cAlternatives_2.eContents().get(1);
 		private final Action cXtendFunctionAnnotationInfoAction_2_1_0 = (Action)cGroup_2_1.eContents().get(0);
 		private final Alternatives cAlternatives_2_1_1 = (Alternatives)cGroup_2_1.eContents().get(1);
@@ -447,7 +456,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		//Member returns XtendMember:
 		//	{XtendMember} annotations+=XAnnotation* ({XtendField.annotationInfo=current} visibility=Visibility?
 		//	(extension?="extension" type=JvmTypeReference name=ValidID? | static?="static"? type=JvmTypeReference name=ValidID)
-		//	("=" initialValue=XExpression)? | {XtendFunction.annotationInfo=current} ("def" | override?="override")
+		//	("=" initialValue=XExpression)? ";"? | {XtendFunction.annotationInfo=current} ("def" | override?="override")
 		//	visibility=Visibility? static?="static"? dispatch?="dispatch"? ("<" typeParameters+=JvmTypeParameter (","
 		//	typeParameters+=JvmTypeParameter)* ">")? (=> (returnType=JvmTypeReference createExtensionInfo=CreateExtensionInfo
 		//	name=ValidID "(") | => (returnType=JvmTypeReference name=ValidID "(") | => (createExtensionInfo=CreateExtensionInfo
@@ -461,7 +470,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 
 		//{XtendMember} annotations+=XAnnotation* ({XtendField.annotationInfo=current} visibility=Visibility?
 		//(extension?="extension" type=JvmTypeReference name=ValidID? | static?="static"? type=JvmTypeReference name=ValidID)
-		//("=" initialValue=XExpression)? | {XtendFunction.annotationInfo=current} ("def" | override?="override")
+		//("=" initialValue=XExpression)? ";"? | {XtendFunction.annotationInfo=current} ("def" | override?="override")
 		//visibility=Visibility? static?="static"? dispatch?="dispatch"? ("<" typeParameters+=JvmTypeParameter (","
 		//typeParameters+=JvmTypeParameter)* ">")? (=> (returnType=JvmTypeReference createExtensionInfo=CreateExtensionInfo
 		//name=ValidID "(") | => (returnType=JvmTypeReference name=ValidID "(") | => (createExtensionInfo=CreateExtensionInfo
@@ -483,7 +492,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getAnnotationsXAnnotationParserRuleCall_1_0() { return cAnnotationsXAnnotationParserRuleCall_1_0; }
 
 		//{XtendField.annotationInfo=current} visibility=Visibility? (extension?="extension" type=JvmTypeReference name=ValidID? |
-		//static?="static"? type=JvmTypeReference name=ValidID) ("=" initialValue=XExpression)? |
+		//static?="static"? type=JvmTypeReference name=ValidID) ("=" initialValue=XExpression)? ";"? |
 		//{XtendFunction.annotationInfo=current} ("def" | override?="override") visibility=Visibility? static?="static"?
 		//dispatch?="dispatch"? ("<" typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")? (=>
 		//(returnType=JvmTypeReference createExtensionInfo=CreateExtensionInfo name=ValidID "(") | =>
@@ -496,7 +505,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
 		//{XtendField.annotationInfo=current} visibility=Visibility? (extension?="extension" type=JvmTypeReference name=ValidID? |
-		//static?="static"? type=JvmTypeReference name=ValidID) ("=" initialValue=XExpression)?
+		//static?="static"? type=JvmTypeReference name=ValidID) ("=" initialValue=XExpression)? ";"?
 		public Group getGroup_2_0() { return cGroup_2_0; }
 
 		//{XtendField.annotationInfo=current}
@@ -564,6 +573,9 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 
 		//XExpression
 		public RuleCall getInitialValueXExpressionParserRuleCall_2_0_3_1_0() { return cInitialValueXExpressionParserRuleCall_2_0_3_1_0; }
+
+		//";"?
+		public Keyword getSemicolonKeyword_2_0_4() { return cSemicolonKeyword_2_0_4; }
 
 		//{XtendFunction.annotationInfo=current} ("def" | override?="override") visibility=Visibility? static?="static"?
 		//dispatch?="dispatch"? ("<" typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")? (=>
@@ -1587,7 +1599,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//File returns XtendFile:
-	//	("package" package=QualifiedName)? imports+=Import* xtendClass=Class?;
+	//	("package" package=QualifiedName ";"?)? imports+=Import* xtendClass=Class?;
 	public FileElements getFileAccess() {
 		return (pFile != null) ? pFile : (pFile = new FileElements());
 	}
@@ -1598,7 +1610,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 
 	//Import returns XtendImport:
 	//	"import" (static?="static" extension?="extension"? importedType=[types::JvmType|QualifiedName] "." "*" |
-	//	importedType=[types::JvmType|QualifiedName] | importedNamespace=QualifiedNameWithWildCard);
+	//	importedType=[types::JvmType|QualifiedName] | importedNamespace=QualifiedNameWithWildCard) ";"?;
 	public ImportElements getImportAccess() {
 		return (pImport != null) ? pImport : (pImport = new ImportElements());
 	}
@@ -1632,7 +1644,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	//Member returns XtendMember:
 	//	{XtendMember} annotations+=XAnnotation* ({XtendField.annotationInfo=current} visibility=Visibility?
 	//	(extension?="extension" type=JvmTypeReference name=ValidID? | static?="static"? type=JvmTypeReference name=ValidID)
-	//	("=" initialValue=XExpression)? | {XtendFunction.annotationInfo=current} ("def" | override?="override")
+	//	("=" initialValue=XExpression)? ";"? | {XtendFunction.annotationInfo=current} ("def" | override?="override")
 	//	visibility=Visibility? static?="static"? dispatch?="dispatch"? ("<" typeParameters+=JvmTypeParameter (","
 	//	typeParameters+=JvmTypeParameter)* ">")? (=> (returnType=JvmTypeReference createExtensionInfo=CreateExtensionInfo
 	//	name=ValidID "(") | => (returnType=JvmTypeReference name=ValidID "(") | => (createExtensionInfo=CreateExtensionInfo

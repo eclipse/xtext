@@ -14,14 +14,16 @@ import "http://www.eclipse.org/Xtext/Xbase/XAnnotations" as annotations
 import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
 
 File returns XtendFile : 
-    ('package' package=QualifiedName)?
+    ('package' package=QualifiedName ';'?)?
 	(imports+=Import)*
 	(xtendClass=Class)?
 ;
 
 Import returns XtendImport : 
 	'import' (
-		(static?='static' extension?='extension'? importedType=[types::JvmType|QualifiedName] '.' '*') | importedType=[types::JvmType|QualifiedName] | importedNamespace=QualifiedNameWithWildCard)
+		(static?='static' extension?='extension'? importedType=[types::JvmType|QualifiedName] '.' '*') 
+		| importedType=[types::JvmType|QualifiedName] 
+		| importedNamespace=QualifiedNameWithWildCard) ';'?
 ;
 
 QualifiedNameWithWildCard :
@@ -42,8 +44,7 @@ Member returns XtendMember:
 			visibility=Visibility?   
 		 	(extension?='extension' type=JvmTypeReference name=ValidID?
 			| static?='static'? type=JvmTypeReference name=ValidID)
-			('=' initialValue=XExpression)?
-		
+			('=' initialValue=XExpression)? ';'?
 	|	{XtendFunction.annotationInfo = current}
 			('def' | override?='override') visibility=Visibility? static?='static'? (dispatch?='dispatch'?) 
 			('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?

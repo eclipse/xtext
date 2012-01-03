@@ -6,7 +6,7 @@ grammar DebugInternalXtend2 ;
 // Rule File
 ruleFile :
 	(
-		'package' ruleQualifiedName
+		'package' ruleQualifiedName ';'?
 	)? ruleImport* ruleClass?
 ;
 
@@ -16,7 +16,7 @@ ruleImport :
 		'static' 'extension'? ruleQualifiedName '.' '*' |
 		ruleQualifiedName |
 		ruleQualifiedNameWithWildCard
-	)
+	) ';'?
 ;
 
 // Rule QualifiedNameWithWildCard
@@ -47,7 +47,7 @@ ruleMember :
 			'static'? ruleJvmTypeReference ruleValidID
 		) (
 			'=' ruleXExpression
-		)? |
+		)? ';'? |
 		(
 			'def' |
 			'override'
