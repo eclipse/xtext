@@ -1,0 +1,13 @@
+grammar org.eclipse.xtext.linking.Bug362902 with org.eclipse.xtext.common.Terminals
+generate bug362902 "http://www.xtext.org/linking/Bug362902"
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+Model:
+    greetings+=Greeting*
+    'favourite' favourite=[Greeting|MyId];
+
+Greeting:
+    'Hello' name=MyId '!';
+
+MyId returns ecore::EString :
+    ID;

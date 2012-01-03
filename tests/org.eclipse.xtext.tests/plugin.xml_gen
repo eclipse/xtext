@@ -104,6 +104,15 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://www.xtext.org/linking/Bug362902" 
+       class = "org.eclipse.xtext.linking.bug362902.Bug362902Package"
+       genModel = "org/eclipse/xtext/linking/Bug362902.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://eclipse.org/xtext/ignoreCaseLinkingTestLanguage" 
        class = "org.eclipse.xtext.linking.ignoreCaseLinkingTest.IgnoreCaseLinkingTestPackage"
        genModel = "org/eclipse/xtext/linking/AbstractIgnoreCaseLinkingTestLanguage.genmodel" /> 
