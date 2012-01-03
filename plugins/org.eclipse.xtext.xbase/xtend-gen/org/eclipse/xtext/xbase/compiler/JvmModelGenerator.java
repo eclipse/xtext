@@ -16,6 +16,7 @@ import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmCustomAnnotationValue;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -515,22 +516,33 @@ public class JvmModelGenerator implements IGenerator {
     CharSequence _xifexpression = null;
     boolean _operator_or = false;
     boolean _operator_or_1 = false;
+    boolean _operator_or_2 = false;
     EList<JvmFormalParameter> _parameters = it.getParameters();
     boolean _isEmpty = _parameters.isEmpty();
     boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
     if (_operator_not) {
-      _operator_or_1 = true;
+      _operator_or_2 = true;
     } else {
       XExpression _associatedExpression = this._iLogicalContainerProvider.getAssociatedExpression(it);
       boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_associatedExpression, null);
-      _operator_or_1 = BooleanExtensions.operator_or(_operator_not, _operator_notEquals);
+      _operator_or_2 = BooleanExtensions.operator_or(_operator_not, _operator_notEquals);
+    }
+    if (_operator_or_2) {
+      _operator_or_1 = true;
+    } else {
+      Function1<ImportManager,? extends CharSequence> _compilationStrategy = this.compilationStrategy(it);
+      boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_compilationStrategy, null);
+      _operator_or_1 = BooleanExtensions.operator_or(_operator_or_2, _operator_notEquals_1);
     }
     if (_operator_or_1) {
       _operator_or = true;
     } else {
-      Function1<ImportManager,? extends CharSequence> _compilationStrategy = this.compilationStrategy(it);
-      boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_compilationStrategy, null);
-      _operator_or = BooleanExtensions.operator_or(_operator_or_1, _operator_notEquals_1);
+      JvmDeclaredType _declaringType = it.getDeclaringType();
+      EList<JvmMember> _members = _declaringType.getMembers();
+      Iterable<JvmConstructor> _filter = IterableExtensions.<JvmConstructor>filter(_members, org.eclipse.xtext.common.types.JvmConstructor.class);
+      int _size = IterableExtensions.size(_filter);
+      boolean _operator_notEquals_2 = IntegerExtensions.operator_notEquals(_size, 1);
+      _operator_or = BooleanExtensions.operator_or(_operator_or_1, _operator_notEquals_2);
     }
     if (_operator_or) {
       StringConcatenation _builder = new StringConcatenation();
@@ -696,6 +708,7 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   public CharSequence generateBody(final JvmExecutable op, final ImportManager importManager) {
+    CharSequence _xifexpression = null;
     Function1<ImportManager,? extends CharSequence> _compilationStrategy = this.compilationStrategy(op);
     boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_compilationStrategy, null);
     if (_operator_notEquals) {
@@ -703,9 +716,11 @@ public class JvmModelGenerator implements IGenerator {
       CharSequence _apply = _compilationStrategy_1.apply(importManager);
       return _apply;
     } else {
+      CharSequence _xblockexpression = null;
       {
         XExpression _associatedExpression = this._iLogicalContainerProvider.getAssociatedExpression(op);
         final XExpression expression = _associatedExpression;
+        CharSequence _xifexpression_1 = null;
         boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(expression, null);
         if (_operator_notEquals_1) {
           {
@@ -748,15 +763,22 @@ public class JvmModelGenerator implements IGenerator {
             return _removeSurroundingCurlies;
           }
         } else {
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("throw new UnsupportedOperationException(\"");
-          String _simpleName_1 = op.getSimpleName();
-          _builder.append(_simpleName_1, "");
-          _builder.append(" is not implemented\");");
-          return _builder;
+          CharSequence _xifexpression_2 = null;
+          if ((op instanceof JvmOperation)) {
+            StringConcatenation _builder = new StringConcatenation();
+            _builder.append("throw new UnsupportedOperationException(\"");
+            String _simpleName_1 = op.getSimpleName();
+            _builder.append(_simpleName_1, "");
+            _builder.append(" is not implemented\");");
+            return _builder;
+          }
+          _xifexpression_1 = _xifexpression_2;
         }
+        _xblockexpression = (_xifexpression_1);
       }
+      _xifexpression = _xblockexpression;
     }
+    return _xifexpression;
   }
   
   public String removeSurroundingCurlies(final String code) {
