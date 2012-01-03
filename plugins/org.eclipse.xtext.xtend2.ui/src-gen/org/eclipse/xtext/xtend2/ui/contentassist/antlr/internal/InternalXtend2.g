@@ -3808,6 +3808,7 @@ rule__File__Group_0__1
     }
 :
 	rule__File__Group_0__1__Impl
+	rule__File__Group_0__2
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -3828,6 +3829,38 @@ rule__File__Group_0__1__Impl
 finally {
 	restoreStackSize(stackSize);
 }
+
+
+rule__File__Group_0__2
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__File__Group_0__2__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__File__Group_0__2__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getFileAccess().getSemicolonKeyword_0_2()); }
+(
+	';' 
+)?
+{ after(grammarAccess.getFileAccess().getSemicolonKeyword_0_2()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
 
 
 
@@ -3871,6 +3904,7 @@ rule__Import__Group__1
     }
 :
 	rule__Import__Group__1__Impl
+	rule__Import__Group__2
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -3891,6 +3925,38 @@ rule__Import__Group__1__Impl
 finally {
 	restoreStackSize(stackSize);
 }
+
+
+rule__Import__Group__2
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__Import__Group__2__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Import__Group__2__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getImportAccess().getSemicolonKeyword_2()); }
+(
+	';' 
+)?
+{ after(grammarAccess.getImportAccess().getSemicolonKeyword_2()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
 
 
 
@@ -5067,6 +5133,7 @@ rule__Member__Group_2_0__3
     }
 :
 	rule__Member__Group_2_0__3__Impl
+	rule__Member__Group_2_0__4
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -5087,6 +5154,38 @@ rule__Member__Group_2_0__3__Impl
 finally {
 	restoreStackSize(stackSize);
 }
+
+
+rule__Member__Group_2_0__4
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__Member__Group_2_0__4__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Member__Group_2_0__4__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getMemberAccess().getSemicolonKeyword_2_0_4()); }
+(
+	';' 
+)?
+{ after(grammarAccess.getMemberAccess().getSemicolonKeyword_2_0_4()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
 
 
 

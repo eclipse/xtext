@@ -870,6 +870,31 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 			}
 		''')
 	}
+	
+	def testOptionalSemicola() {
+		assertCompilesTo('''
+			package foo;
+			
+			import java.io.File;
+			
+			public class Foo {
+				private int bar;
+				
+				private File baz;
+			}
+		''', '''
+			package foo;
+			
+			import java.io.File;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  private int bar;
+			  
+			  private File baz;
+			}
+		''')
+	}
 
 	def assertCompilesTo(CharSequence input, CharSequence expected) {
 		val file = file(input.toString(), true)
