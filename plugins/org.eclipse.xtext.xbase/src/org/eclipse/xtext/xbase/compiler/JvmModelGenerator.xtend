@@ -185,7 +185,7 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def generateParameter(JvmFormalParameter it, ImportManager importManager) {
-		"final " + parameterType.serialize(importManager) + " " + simpleName
+		'''«IF !annotations.empty»«it.annotations.generateAnnotations(importManager)» «ENDIF»final «parameterType.serialize(importManager)» «simpleName»'''
 	}
 		
 	def CharSequence generateBody(JvmExecutable op, ImportManager importManager) {
