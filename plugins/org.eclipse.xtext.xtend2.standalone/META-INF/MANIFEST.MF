@@ -8,6 +8,7 @@ Bundle-Vendor: %providerName
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.xtext;bundle-version="2.2.1",
  org.eclipse.xtext.xtend2;bundle-version="2.2.1",
- org.eclipse.jdt.core;bundle-version="3.5.2"
+ org.eclipse.jdt.core;bundle-version="3.5.2",
+ org.eclipse.xtend2.lib;bundle-version="2.2.1"
 Import-Package: org.apache.log4j
 Export-Package: org.eclipse.xtext.xtend2.compiler.batch
