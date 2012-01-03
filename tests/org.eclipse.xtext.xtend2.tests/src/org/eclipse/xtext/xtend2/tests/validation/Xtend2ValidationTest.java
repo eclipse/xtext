@@ -895,4 +895,14 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 		XtendClass clazz = clazz("import java.io.IOException class X {def foo() throws IOException, NullPointerException { }}");
 		helper.assertNoIssues(clazz);
 	}
+	
+	public void testNoAssignmentsToThisConstructor() throws Exception {
+        XtendClass clazz = clazz("class X { new (String y) { this = new X('bar') val x = 2 x = 1}}");
+        helper.assertError(clazz, XbasePackage.Literals.XASSIGNMENT, LEFT_HAND_SIDE_MUST_BE_VARIABLE, "Left-hand side", "must be", "variable");
+    }
+		    
+    public void testNoAssignmentsToThisFunction() throws Exception {
+        XtendClass clazz = clazz("class X { def foo(){ this = new X() val x = 1 x = 2}}");
+        helper.assertError(clazz, XbasePackage.Literals.XASSIGNMENT, LEFT_HAND_SIDE_MUST_BE_VARIABLE, "Left-hand side", "must be", "variable");
+    }
 }

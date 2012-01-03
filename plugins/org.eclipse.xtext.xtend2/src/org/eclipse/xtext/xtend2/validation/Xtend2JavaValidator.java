@@ -75,6 +75,7 @@ import org.eclipse.xtext.xbase.annotations.validation.XbaseWithAnnotationsJavaVa
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.validation.UIStrings;
 import org.eclipse.xtext.xtend2.dispatch.DispatchingSupport;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
@@ -1101,4 +1102,10 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 		}
 	}
 	
+	@Check
+    public void checkLeftHandSideIsVariable(XAssignment assignment){
+        String concreteSyntaxFeatureName = assignment.getConcreteSyntaxFeatureName();
+        if(concreteSyntaxFeatureName.equals(XbaseScopeProvider.THIS.toString()))
+            error("Left-hand side of an assignment must be an variable", XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, LEFT_HAND_SIDE_MUST_BE_VARIABLE);
+    }
 }
