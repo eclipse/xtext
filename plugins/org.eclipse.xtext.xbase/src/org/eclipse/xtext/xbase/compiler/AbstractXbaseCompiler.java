@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.compiler;
 
 import static com.google.common.collect.Sets.*;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 
@@ -201,7 +202,7 @@ public abstract class AbstractXbaseCompiler {
 		return appendable;
 	}
 
-	protected boolean needsSneakyThrow(XExpression obj, Set<JvmTypeReference> declaredExceptions) {
+	protected boolean needsSneakyThrow(XExpression obj, Collection<JvmTypeReference> declaredExceptions) {
 		Iterable<JvmTypeReference> types = typeProvider.getThrownExceptionTypes(obj);
 		Iterable<JvmTypeReference> exceptions = jvmExceptions.findUnhandledExceptions(obj, types, declaredExceptions);
 		return ! Iterables.isEmpty(exceptions);

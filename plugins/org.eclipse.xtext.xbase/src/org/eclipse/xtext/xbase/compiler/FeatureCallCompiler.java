@@ -511,4 +511,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 	}
 
+	protected ILogicalContainerProvider getLogicalContainerProvider() {
+		return contextProvider;
+	}
 }

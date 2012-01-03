@@ -2447,6 +2447,48 @@ public class CompilerTest extends AbstractXtend2TestCase {
 						"		  } while (true)" + 
 						"    }", "whileLoopTest");
 	}
+	
+	public void testBug366525_0() throws Exception {
+		try {
+			invokeAndExpect2(null, 
+				"  def foo() {\n" +
+				"    return { if(true) throw new Exception(\"Bug366525\") else null }\n" +
+				"  }\n",
+				"foo");
+			fail("Expected Exception(\"Bug366525\")");
+		} catch(InvocationTargetException e) {
+			assertNotNull(e.getCause());
+			assertEquals("Bug366525", e.getCause().getMessage());
+		}
+	}
+
+	public void testBug366525_1() throws Exception {
+		try {
+			String javaCode = compileToJavaCode("class Foo {\n" +
+					"  def foo() {\n" +
+					"    return { if(true) throw new Exception(\"Bug366525\") else null }\n" +
+					"  }\n" +
+					"}");
+			assertTrue(javaCode.contains("Exceptions.sneakyThrow"));
+			javaCompiler.compileToClass("Foo", javaCode);
+		} catch(Exception e) {
+			assertEquals("Bug366525", e.getMessage());
+		}
+	}
+
+	public void testBug366525_2() throws Exception {
+		try {
+			String javaCode = compileToJavaCode("class Foo {\n" +
+					"  def foo() throws Exception {\n" +
+					"    return { if(true) throw new Exception(\"Bug366525\") else null }\n" +
+					"  }\n" +
+					"}");
+			assertFalse(javaCode.contains("Exceptions.sneakyThrow"));
+			javaCompiler.compileToClass("Foo", javaCode);
+		} catch(Exception e) {
+			assertEquals("Bug366525", e.getMessage());
+		}
+	}
 
 	
 	@Inject

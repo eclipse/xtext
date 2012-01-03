@@ -13,6 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -330,10 +331,29 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	
 	protected void _toJavaStatement(XReturnExpression expr, IAppendable b, boolean isReferenced) {
 		if (expr.getExpression()!=null) {
+			JvmIdentifiableElement logicalContainer = getLogicalContainerProvider().getNearestLogicalContainer(expr);
+			boolean needsSneakyThrow = false;
+			if(logicalContainer instanceof JvmExecutable) {
+				List<JvmTypeReference> declaredExceptions = ((JvmExecutable) logicalContainer).getExceptions();
+				needsSneakyThrow = needsSneakyThrow(expr.getExpression(), declaredExceptions);
+			}
+			if (needsSneakyThrow) {
+				b.append("\ntry {").increaseIndentation();
+			}
 			internalToJavaStatement(expr.getExpression(), b, true);
 			b.append("\nreturn ");
 			internalToJavaExpression(expr.getExpression(), b);
 			b.append(";");
+			if (needsSneakyThrow) {
+				String name = b.declareSyntheticVariable(new Object(), "_e");
+				b.decreaseIndentation().append("\n} catch (Exception "+name+") {").increaseIndentation();
+				b.append("\nthrow ");
+				b.append(getTypeReferences().findDeclaredType(Exceptions.class, expr));
+				b.append(".sneakyThrow(");
+				b.append(name);
+				b.append(");");
+				b.decreaseIndentation().append("\n}");
+			}
 		} else {
 			b.append("\nreturn;");
 		}
@@ -344,6 +364,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	protected void _toJavaExpression(XCastedExpression expr, IAppendable b) {
+		
 		b.append("((");
 		serialize(expr.getType(), expr, b);
 		b.append(") ");
