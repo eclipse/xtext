@@ -85,7 +85,8 @@ public class GenerateBootstrapDoc {
   }
   
   public Document loadDocument() {
-      ResourceSet _get = this.provider.get();
+      Provider<ResourceSet> _provider = this.provider;
+      ResourceSet _get = _provider.get();
       final ResourceSet rs = _get;
       PathTraverser _pathTraverser = new PathTraverser();
       List<String> _singletonList = Collections.<String>singletonList("../org.eclipse.xtext.xtend2.doc/xdoc");
@@ -114,12 +115,15 @@ public class GenerateBootstrapDoc {
       EList<Resource> _resources = rs.getResources();
       for (final Resource resource : _resources) {
         {
-          List<Issue> _validate = this.validator.validate(resource, CheckMode.ALL, null);
+          IResourceValidator _validator = this.validator;
+          CheckMode _ALL = CheckMode.ALL;
+          List<Issue> _validate = _validator.validate(resource, _ALL, null);
           final List<Issue> issues = _validate;
           final Function1<Issue,Boolean> _function_1 = new Function1<Issue,Boolean>() {
               public Boolean apply(final Issue i) {
                 Severity _severity = i.getSeverity();
-                boolean _operator_equals = ObjectExtensions.operator_equals(_severity, Severity.ERROR);
+                Severity _ERROR = Severity.ERROR;
+                boolean _operator_equals = ObjectExtensions.operator_equals(_severity, _ERROR);
                 return Boolean.valueOf(_operator_equals);
               }
             };
@@ -139,7 +143,8 @@ public class GenerateBootstrapDoc {
   
   public String main(final Document document) {
     StringConcatenation _builder = new StringConcatenation();
-    CharSequence _header = this.mainSite.header();
+    MainSite _mainSite = this.mainSite;
+    CharSequence _header = _mainSite.header();
     _builder.append(_header, "");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -150,7 +155,8 @@ public class GenerateBootstrapDoc {
     CharSequence _body = this._body.body(document);
     _builder.append(_body, "	");
     _builder.newLineIfNotEmpty();
-    CharSequence _footer = this.mainSite.footer();
+    MainSite _mainSite_1 = this.mainSite;
+    CharSequence _footer = _mainSite_1.footer();
     _builder.append(_footer, "");
     _builder.newLineIfNotEmpty();
     String _postProcess = this._postProcessor.postProcess(_builder);

@@ -57,9 +57,11 @@ public class HtmlExtensions {
       _xifexpression = _name_1;
     } else {
       String _xifexpression_1 = null;
-      boolean _containsKey = this.artificialHrefs.containsKey(it);
+      Map<Identifiable,String> _artificialHrefs = this.artificialHrefs;
+      boolean _containsKey = _artificialHrefs.containsKey(it);
       if (_containsKey) {
-        String _get = this.artificialHrefs.get(it);
+        Map<Identifiable,String> _artificialHrefs_1 = this.artificialHrefs;
+        String _get = _artificialHrefs_1.get(it);
         _xifexpression_1 = _get;
       } else {
         String _xblockexpression = null;
@@ -67,10 +69,12 @@ public class HtmlExtensions {
           EClass _eClass = it.eClass();
           String _name_2 = _eClass.getName();
           String _operator_plus = StringExtensions.operator_plus(_name_2, "_");
-          int _size = this.artificialHrefs.size();
+          Map<Identifiable,String> _artificialHrefs_2 = this.artificialHrefs;
+          int _size = _artificialHrefs_2.size();
           String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, Integer.valueOf(_size));
           final String newHref = _operator_plus_1;
-          this.artificialHrefs.put(it, newHref);
+          Map<Identifiable,String> _artificialHrefs_3 = this.artificialHrefs;
+          _artificialHrefs_3.put(it, newHref);
           _xblockexpression = (newHref);
         }
         _xifexpression_1 = _xblockexpression;

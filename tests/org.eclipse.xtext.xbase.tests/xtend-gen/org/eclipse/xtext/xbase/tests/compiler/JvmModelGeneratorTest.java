@@ -53,13 +53,19 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
         super.setUp();
         Injector _injector = this.getInjector();
         _injector.injectMembers(this);
-        this.javaCompiler.clearClassPath();
+        EclipseRuntimeDependentJavaCompiler _javaCompiler = this.javaCompiler;
+        _javaCompiler.clearClassPath();
+        EclipseRuntimeDependentJavaCompiler _javaCompiler_1 = this.javaCompiler;
         Class<? extends Object> _class = this.getClass();
-        this.javaCompiler.addClassPathOfClass(_class);
-        this.javaCompiler.addClassPathOfClass(org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest.class);
-        this.javaCompiler.addClassPathOfClass(org.eclipse.xtext.xbase.lib.Functions.class);
-        this.javaCompiler.addClassPathOfClass(com.google.inject.Provider.class);
-        this.javaCompiler.addClassPathOfClass(com.google.common.base.Supplier.class);
+        _javaCompiler_1.addClassPathOfClass(_class);
+        EclipseRuntimeDependentJavaCompiler _javaCompiler_2 = this.javaCompiler;
+        _javaCompiler_2.addClassPathOfClass(org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest.class);
+        EclipseRuntimeDependentJavaCompiler _javaCompiler_3 = this.javaCompiler;
+        _javaCompiler_3.addClassPathOfClass(org.eclipse.xtext.xbase.lib.Functions.class);
+        EclipseRuntimeDependentJavaCompiler _javaCompiler_4 = this.javaCompiler;
+        _javaCompiler_4.addClassPathOfClass(com.google.inject.Provider.class);
+        EclipseRuntimeDependentJavaCompiler _javaCompiler_5 = this.javaCompiler;
+        _javaCompiler_5.addClassPathOfClass(com.google.common.base.Supplier.class);
       }
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -74,12 +80,14 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
         final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
             public void apply(final JvmGenericType it) {
               EList<JvmMember> _members = it.getMembers();
-              JvmTypeReference _typeForName = JvmModelGeneratorTest.this.references.getTypeForName(java.lang.String.class, expression);
+              TypeReferences _references = JvmModelGeneratorTest.this.references;
+              JvmTypeReference _typeForName = _references.getTypeForName(java.lang.String.class, expression);
               final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
                   public void apply(final JvmOperation it) {
                     {
                       EList<JvmFormalParameter> _parameters = it.getParameters();
-                      JvmTypeReference _typeForName = JvmModelGeneratorTest.this.references.getTypeForName(java.lang.String.class, expression);
+                      TypeReferences _references = JvmModelGeneratorTest.this.references;
+                      JvmTypeReference _typeForName = _references.getTypeForName(java.lang.String.class, expression);
                       JvmFormalParameter _parameter = JvmModelGeneratorTest.this.builder.toParameter(expression, "s", _typeForName);
                       CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter);
                       JvmModelGeneratorTest.this.builder.setBody(it, expression);
@@ -208,13 +216,15 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
   }
   
   public JvmTypeReference typeRef(final EObject ctx, final Class<?> clazz) {
-    JvmTypeReference _typeForName = this.references.getTypeForName(clazz, ctx);
+    TypeReferences _references = this.references;
+    JvmTypeReference _typeForName = _references.getTypeForName(clazz, ctx);
     return _typeForName;
   }
   
   public JvmTypeReference typeRef(final EObject ctx, final Class<?> clazz, final Class<?> param) {
+    TypeReferences _references = this.references;
     JvmTypeReference _typeRef = this.typeRef(ctx, param);
-    JvmTypeReference _typeForName = this.references.getTypeForName(clazz, ctx, _typeRef);
+    JvmTypeReference _typeForName = _references.getTypeForName(clazz, ctx, _typeRef);
     return _typeForName;
   }
   
@@ -225,21 +235,25 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       res.eSetDeliver(true);
       InMemoryFileSystemAccess _inMemoryFileSystemAccess = new InMemoryFileSystemAccess();
       final InMemoryFileSystemAccess fsa = _inMemoryFileSystemAccess;
-      this.generator.doGenerate(res, fsa);
+      JvmModelGenerator _generator = this.generator;
+      _generator.doGenerate(res, fsa);
       Map<String,CharSequence> _files = fsa.getFiles();
+      String _DEFAULT_OUTPUT = IFileSystemAccess.DEFAULT_OUTPUT;
       String _identifier = type.getIdentifier();
       String _replace = _identifier.replace(".", "/");
-      String _operator_plus = StringExtensions.operator_plus(IFileSystemAccess.DEFAULT_OUTPUT, _replace);
+      String _operator_plus = StringExtensions.operator_plus(_DEFAULT_OUTPUT, _replace);
       String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, ".java");
       CharSequence _get = _files.get(_operator_plus_1);
       String _string = _get.toString();
       final String code = _string;
+      EclipseRuntimeDependentJavaCompiler _javaCompiler = this.javaCompiler;
       String _identifier_1 = type.getIdentifier();
-      Class<? extends Object> _compileToClass = this.javaCompiler.compileToClass(_identifier_1, code);
+      Class<? extends Object> _compileToClass = _javaCompiler.compileToClass(_identifier_1, code);
       final Class<? extends Object> compiledClass = _compileToClass;
+      ValidationTestHelper _helper = this.helper;
       EList<EObject> _contents_1 = res.getContents();
       EObject _head = IterableExtensions.<EObject>head(_contents_1);
-      this.helper.assertNoErrors(_head);
+      _helper.assertNoErrors(_head);
       return compiledClass;
   }
 }

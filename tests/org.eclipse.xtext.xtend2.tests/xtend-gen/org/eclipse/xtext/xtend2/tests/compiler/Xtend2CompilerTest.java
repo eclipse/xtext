@@ -1742,7 +1742,8 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
         XtendClass _xtendClass = file.getXtendClass();
         JvmGenericType _inferredType = this._iXtend2JvmAssociations.getInferredType(_xtendClass);
         final JvmGenericType inferredType = _inferredType;
-        CharSequence _generateType = this.generator.generateType(inferredType);
+        JvmModelGenerator _generator = this.generator;
+        CharSequence _generateType = _generator.generateType(inferredType);
         final CharSequence javaCode = _generateType;
         String _string_1 = expected.toString();
         String _string_2 = javaCode.toString();

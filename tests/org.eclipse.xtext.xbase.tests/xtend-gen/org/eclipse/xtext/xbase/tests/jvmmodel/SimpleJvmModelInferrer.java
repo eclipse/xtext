@@ -29,12 +29,14 @@ public class SimpleJvmModelInferrer implements IJvmModelInferrer {
     final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
         public void apply(final JvmGenericType it) {
           EList<JvmMember> _members = it.getMembers();
-          JvmTypeReference _typeForName = SimpleJvmModelInferrer.this.references.getTypeForName(java.lang.String.class, e);
+          TypeReferences _references = SimpleJvmModelInferrer.this.references;
+          JvmTypeReference _typeForName = _references.getTypeForName(java.lang.String.class, e);
           final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
               public void apply(final JvmOperation it) {
                 {
                   EList<JvmFormalParameter> _parameters = it.getParameters();
-                  JvmTypeReference _typeForName = SimpleJvmModelInferrer.this.references.getTypeForName(java.lang.String.class, e);
+                  TypeReferences _references = SimpleJvmModelInferrer.this.references;
+                  JvmTypeReference _typeForName = _references.getTypeForName(java.lang.String.class, e);
                   JvmFormalParameter _parameter = SimpleJvmModelInferrer.this._jvmTypesBuilder.toParameter(e, "s", _typeForName);
                   CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter);
                   SimpleJvmModelInferrer.this._jvmTypesBuilder.setBody(it, ((XExpression) e));

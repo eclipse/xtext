@@ -5,6 +5,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import junit.framework.Assert;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
@@ -35,7 +36,8 @@ public class JvmModelTest extends AbstractJvmModelTest {
         EList<EObject> _contents = _eResource.getContents();
         int _size = _contents.size();
         Assert.assertEquals(2, _size);
-        this.helper.assertNoErrors(expression);
+        ValidationTestHelper _helper = this.helper;
+        _helper.assertNoErrors(expression);
       }
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -52,7 +54,8 @@ public class JvmModelTest extends AbstractJvmModelTest {
         field.setAccessible(true);
         Object _get = field.get(resource);
         Assert.assertFalse((((Boolean) _get)).booleanValue());
-        IResourceDescription _resourceDescription = this.manager.getResourceDescription(resource);
+        Manager _manager = this.manager;
+        IResourceDescription _resourceDescription = _manager.getResourceDescription(resource);
         final IResourceDescription desc = _resourceDescription;
         Iterable<IEObjectDescription> _exportedObjects = desc.getExportedObjects();
         ArrayList<Iterable<IEObjectDescription>> _newArrayList = CollectionLiterals.<Iterable<IEObjectDescription>>newArrayList(_exportedObjects);
@@ -72,7 +75,10 @@ public class JvmModelTest extends AbstractJvmModelTest {
       {
         XExpression _expression = this.expression("return");
         final XExpression expression = _expression;
-        this.helper.assertError(expression, Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN);
+        ValidationTestHelper _helper = this.helper;
+        EClass _XRETURN_EXPRESSION = Literals.XRETURN_EXPRESSION;
+        String _INVALID_RETURN = IssueCodes.INVALID_RETURN;
+        _helper.assertError(expression, _XRETURN_EXPRESSION, _INVALID_RETURN);
       }
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);

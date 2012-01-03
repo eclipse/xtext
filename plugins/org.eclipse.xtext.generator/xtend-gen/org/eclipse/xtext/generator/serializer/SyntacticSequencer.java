@@ -28,7 +28,8 @@ public class SyntacticSequencer extends GeneratedFile {
     String _simpleName = this.getSimpleName();
     _builder.append(_simpleName, "");
     _builder.append(" extends ");
-    String _simpleName_1 = this.sequencer.getSimpleName();
+    AbstractSyntacticSequencer _sequencer = this.sequencer;
+    String _simpleName_1 = _sequencer.getSimpleName();
     _builder.append(_simpleName_1, "");
     _builder.append(" {");
     _builder.newLineIfNotEmpty();

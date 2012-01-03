@@ -1,5 +1,6 @@
 package xtend.tutorial.basics;
 
+import java.io.PrintStream;
 import java.util.Collections;
 import java.util.List;
 import org.eclipse.xtext.xbase.lib.InputOutput;
@@ -32,7 +33,8 @@ public class Xtend03_MethodInvocation {
   public String staticProperties() {
     String _xblockexpression = null;
     {
-      System.out.println("Hello World!");
+      PrintStream _out = System.out;
+      _out.println("Hello World!");
       String _println = InputOutput.<String>println("Hello World!");
       _xblockexpression = (_println);
     }

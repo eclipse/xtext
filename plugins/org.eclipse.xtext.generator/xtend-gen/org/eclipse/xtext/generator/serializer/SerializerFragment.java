@@ -91,19 +91,23 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
       if (_state.srcGenOnly) {
         {
           String _name = org.eclipse.xtext.serializer.sequencer.ISemanticSequencer.class.getName();
-          String _qualifiedName = this.abstractSemanticSequencer.getQualifiedName();
+          AbstractSemanticSequencer _abstractSemanticSequencer = this.abstractSemanticSequencer;
+          String _qualifiedName = _abstractSemanticSequencer.getQualifiedName();
           bf.addTypeToType(_name, _qualifiedName);
           String _name_1 = org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer.class.getName();
-          String _qualifiedName_1 = this.abstractSyntacticSequencer.getQualifiedName();
+          AbstractSyntacticSequencer _abstractSyntacticSequencer = this.abstractSyntacticSequencer;
+          String _qualifiedName_1 = _abstractSyntacticSequencer.getQualifiedName();
           bf.addTypeToType(_name_1, _qualifiedName_1);
         }
       } else {
         {
           String _name_2 = org.eclipse.xtext.serializer.sequencer.ISemanticSequencer.class.getName();
-          String _qualifiedName_2 = this.semanticSequencer.getQualifiedName();
+          SemanticSequencer _semanticSequencer = this.semanticSequencer;
+          String _qualifiedName_2 = _semanticSequencer.getQualifiedName();
           bf.addTypeToType(_name_2, _qualifiedName_2);
           String _name_3 = org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer.class.getName();
-          String _qualifiedName_3 = this.syntacticSequencer.getQualifiedName();
+          SyntacticSequencer _syntacticSequencer = this.syntacticSequencer;
+          String _qualifiedName_3 = _syntacticSequencer.getQualifiedName();
           bf.addTypeToType(_name_3, _qualifiedName_3);
         }
       }
@@ -119,38 +123,57 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
       boolean _operator_not = BooleanExtensions.operator_not(_state.srcGenOnly);
       if (_operator_not) {
         {
-          String _fileName = this.semanticSequencer.getFileName();
-          CharSequence _fileContents = this.semanticSequencer.getFileContents();
-          ctx.writeFile(Generator.SRC, _fileName, _fileContents);
-          String _fileName_1 = this.syntacticSequencer.getFileName();
-          CharSequence _fileContents_1 = this.syntacticSequencer.getFileContents();
-          ctx.writeFile(Generator.SRC, _fileName_1, _fileContents_1);
+          String _SRC = Generator.SRC;
+          SemanticSequencer _semanticSequencer = this.semanticSequencer;
+          String _fileName = _semanticSequencer.getFileName();
+          SemanticSequencer _semanticSequencer_1 = this.semanticSequencer;
+          CharSequence _fileContents = _semanticSequencer_1.getFileContents();
+          ctx.writeFile(_SRC, _fileName, _fileContents);
+          String _SRC_1 = Generator.SRC;
+          SyntacticSequencer _syntacticSequencer = this.syntacticSequencer;
+          String _fileName_1 = _syntacticSequencer.getFileName();
+          SyntacticSequencer _syntacticSequencer_1 = this.syntacticSequencer;
+          CharSequence _fileContents_1 = _syntacticSequencer_1.getFileContents();
+          ctx.writeFile(_SRC_1, _fileName_1, _fileContents_1);
         }
       }
-      String _fileName_2 = this.abstractSemanticSequencer.getFileName();
-      CharSequence _fileContents_2 = this.abstractSemanticSequencer.getFileContents();
-      ctx.writeFile(Generator.SRC_GEN, _fileName_2, _fileContents_2);
-      String _fileName_3 = this.abstractSyntacticSequencer.getFileName();
-      CharSequence _fileContents_3 = this.abstractSyntacticSequencer.getFileContents();
-      ctx.writeFile(Generator.SRC_GEN, _fileName_3, _fileContents_3);
+      String _SRC_GEN = Generator.SRC_GEN;
+      AbstractSemanticSequencer _abstractSemanticSequencer = this.abstractSemanticSequencer;
+      String _fileName_2 = _abstractSemanticSequencer.getFileName();
+      AbstractSemanticSequencer _abstractSemanticSequencer_1 = this.abstractSemanticSequencer;
+      CharSequence _fileContents_2 = _abstractSemanticSequencer_1.getFileContents();
+      ctx.writeFile(_SRC_GEN, _fileName_2, _fileContents_2);
+      String _SRC_GEN_1 = Generator.SRC_GEN;
+      AbstractSyntacticSequencer _abstractSyntacticSequencer = this.abstractSyntacticSequencer;
+      String _fileName_3 = _abstractSyntacticSequencer.getFileName();
+      AbstractSyntacticSequencer _abstractSyntacticSequencer_1 = this.abstractSyntacticSequencer;
+      CharSequence _fileContents_3 = _abstractSyntacticSequencer_1.getFileContents();
+      ctx.writeFile(_SRC_GEN_1, _fileName_3, _fileContents_3);
       SerializerFragmentState _state_1 = this.state();
       if (_state_1.generateDebugData) {
         {
-          String _fileName_4 = this.grammarConstraints.getFileName();
-          CharSequence _fileContents_4 = this.grammarConstraints.getFileContents();
-          ctx.writeFile(Generator.SRC_GEN, _fileName_4, _fileContents_4);
-          Iterable<Pair<String,String>> _render2Dot = this.dotRenderer.render2Dot(this.seq2dot, "pda");
+          String _SRC_GEN_2 = Generator.SRC_GEN;
+          GrammarConstraints _grammarConstraints = this.grammarConstraints;
+          String _fileName_4 = _grammarConstraints.getFileName();
+          GrammarConstraints _grammarConstraints_1 = this.grammarConstraints;
+          CharSequence _fileContents_4 = _grammarConstraints_1.getFileContents();
+          ctx.writeFile(_SRC_GEN_2, _fileName_4, _fileContents_4);
+          Context2DotRenderer _dotRenderer = this.dotRenderer;
+          SyntacticSequencerPDA2ExtendedDot _seq2dot = this.seq2dot;
+          Iterable<Pair<String,String>> _render2Dot = _dotRenderer.render2Dot(_seq2dot, "pda");
           for (final Pair<String,String> obj : _render2Dot) {
+            String _SRC_GEN_3 = Generator.SRC_GEN;
             String _key = obj.getKey();
             String _value = obj.getValue();
-            ctx.writeFile(Generator.SRC_GEN, _key, _value);
+            ctx.writeFile(_SRC_GEN_3, _key, _value);
           }
         }
       }
   }
   
   public List<String> getExportedPackagesRtList(final Grammar grammar) {
-    String _packageName = this.semanticSequencer.getPackageName();
+    SemanticSequencer _semanticSequencer = this.semanticSequencer;
+    String _packageName = _semanticSequencer.getPackageName();
     ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(_packageName);
     return _newArrayList;
   }

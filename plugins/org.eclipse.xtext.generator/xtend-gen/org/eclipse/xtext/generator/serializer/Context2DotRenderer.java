@@ -44,7 +44,8 @@ public class Context2DotRenderer {
   }
   
   public Iterable<Pair<EObject,EClass>> contexts() {
-    List<EObject> _allContexts = this.contextProvider.getAllContexts(this.grammar);
+    Grammar _grammar = this.grammar;
+    List<EObject> _allContexts = this.contextProvider.getAllContexts(_grammar);
     final Function1<EObject,Iterable<Pair<EObject,EClass>>> _function = new Function1<EObject,Iterable<Pair<EObject,EClass>>>() {
         public Iterable<Pair<EObject,EClass>> apply(final EObject c) {
           Iterable<Pair<EObject,EClass>> _types = Context2DotRenderer.this.types(c);
@@ -73,7 +74,8 @@ public class Context2DotRenderer {
   public String getFileName(final Pair<EObject,EClass> ctx, final String name) {
     String _xblockexpression = null;
     {
-      String _name = this.grammar.getName();
+      Grammar _grammar = this.grammar;
+      String _name = _grammar.getName();
       String _simpleName = this.naming.toSimpleName(_name);
       String _operator_plus = StringExtensions.operator_plus(_simpleName, "_");
       EClass _value = ctx.getValue();
@@ -86,7 +88,8 @@ public class Context2DotRenderer {
       String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, "_");
       String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, name);
       final String fn = _operator_plus_5;
-      String _basePackageRuntime = this.naming.basePackageRuntime(this.grammar);
+      Grammar _grammar_1 = this.grammar;
+      String _basePackageRuntime = this.naming.basePackageRuntime(_grammar_1);
       String _asPath = this.naming.asPath(_basePackageRuntime);
       String _operator_plus_6 = StringExtensions.operator_plus(_asPath, "/serializer/");
       String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, fn);

@@ -34,10 +34,12 @@ public class GrammarConstraints extends GeneratedFile {
   public CharSequence getFileContents() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("grammar ");
-    String _name = this.grammar.getName();
+    Grammar _grammar = this.grammar;
+    String _name = _grammar.getName();
     _builder.append(_name, "");
     {
-      EList<Grammar> _usedGrammars = this.grammar.getUsedGrammars();
+      Grammar _grammar_1 = this.grammar;
+      EList<Grammar> _usedGrammars = _grammar_1.getUsedGrammars();
       boolean _hasElements = false;
       for(final Grammar ug : _usedGrammars) {
         if (!_hasElements) {
@@ -53,7 +55,8 @@ public class GrammarConstraints extends GeneratedFile {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("generate model \"http://");
-    String _name_2 = this.grammar.getName();
+    Grammar _grammar_2 = this.grammar;
+    String _name_2 = _grammar_2.getName();
     _builder.append(_name_2, "");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
@@ -62,7 +65,8 @@ public class GrammarConstraints extends GeneratedFile {
     _builder.append("// ******** constraint contexts ********");
     _builder.newLine();
     {
-      List<IConstraintContext> _grammarConstraintContexts = this.sequencerUtil.getGrammarConstraintContexts(this.grammar);
+      Grammar _grammar_3 = this.grammar;
+      List<IConstraintContext> _grammarConstraintContexts = this.sequencerUtil.getGrammarConstraintContexts(_grammar_3);
       boolean _hasElements_1 = false;
       for(final IConstraintContext gcc : _grammarConstraintContexts) {
         if (!_hasElements_1) {
@@ -102,7 +106,8 @@ public class GrammarConstraints extends GeneratedFile {
     _builder.append("// ******** constraints ********");
     _builder.newLine();
     {
-      Collection<IConstraint> _grammarConstraints = this.sequencerUtil.getGrammarConstraints(this.grammar);
+      Grammar _grammar_4 = this.grammar;
+      Collection<IConstraint> _grammarConstraints = this.sequencerUtil.getGrammarConstraints(_grammar_4);
       boolean _hasElements_3 = false;
       for(final IConstraint constraint_1 : _grammarConstraints) {
         if (!_hasElements_3) {

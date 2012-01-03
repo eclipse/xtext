@@ -1,6 +1,7 @@
 package org.eclipse.xtext.xbase.tests.jvmmodel;
 
 import com.google.inject.Inject;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
@@ -18,7 +19,10 @@ public class CheckExceptionValiationTest extends AbstractJvmModelTest {
       {
         XExpression _expression = this.expression("throw new java.io.IOException()", false);
         final XExpression expression = _expression;
-        this.helper.assertError(expression, Literals.XTHROW_EXPRESSION, IssueCodes.UNHANDLED_EXCEPTION);
+        ValidationTestHelper _helper = this.helper;
+        EClass _XTHROW_EXPRESSION = Literals.XTHROW_EXPRESSION;
+        String _UNHANDLED_EXCEPTION = IssueCodes.UNHANDLED_EXCEPTION;
+        _helper.assertError(expression, _XTHROW_EXPRESSION, _UNHANDLED_EXCEPTION);
       }
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
