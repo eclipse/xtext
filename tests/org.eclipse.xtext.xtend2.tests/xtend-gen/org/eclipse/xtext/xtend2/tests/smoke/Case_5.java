@@ -20,7 +20,8 @@ public class Case_5 {
       int _indexOf = this.s.indexOf(i);
       boolean _operator_equals = IntegerExtensions.operator_equals(_indexOf, 0);
       if (_operator_equals) {
-        boolean _contains = this.myList.contains(Integer.valueOf(i));
+        ArrayList _myList = this.myList;
+        boolean _contains = _myList.contains(Integer.valueOf(i));
         return _contains;
       }
       Arrays.<Integer>asList(Integer.valueOf(i));
