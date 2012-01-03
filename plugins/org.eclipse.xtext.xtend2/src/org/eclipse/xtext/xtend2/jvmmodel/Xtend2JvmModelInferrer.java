@@ -282,6 +282,7 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			jvmParam.setParameterType(cloneWithProxies(parameter.getParameterType()));
 			operation.getParameters().add(jvmParam);
 			associator.associate(parameter, jvmParam);
+			jvmTypesBuilder.translateAnnotationsTo(parameter.getAnnotations(), jvmParam);
 		}
 		JvmTypeReference returnType = null;
 		if (source.getReturnType() != null) {

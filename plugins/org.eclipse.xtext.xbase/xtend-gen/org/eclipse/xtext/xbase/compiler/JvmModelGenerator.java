@@ -481,13 +481,13 @@ public class JvmModelGenerator implements IGenerator {
     _builder.append(_simpleName, "");
     _builder.append("(");
     EList<JvmFormalParameter> _parameters = it.getParameters();
-    final Function1<JvmFormalParameter,String> _function = new Function1<JvmFormalParameter,String>() {
-        public String apply(final JvmFormalParameter p) {
-          String _generateParameter = JvmModelGenerator.this.generateParameter(p, importManager);
+    final Function1<JvmFormalParameter,CharSequence> _function = new Function1<JvmFormalParameter,CharSequence>() {
+        public CharSequence apply(final JvmFormalParameter p) {
+          CharSequence _generateParameter = JvmModelGenerator.this.generateParameter(p, importManager);
           return _generateParameter;
         }
       };
-    List<String> _map = ListExtensions.<JvmFormalParameter, String>map(_parameters, _function);
+    List<CharSequence> _map = ListExtensions.<JvmFormalParameter, CharSequence>map(_parameters, _function);
     String _join = IterableExtensions.join(_map, ", ");
     _builder.append(_join, "");
     _builder.append(")");
@@ -554,13 +554,13 @@ public class JvmModelGenerator implements IGenerator {
       _builder.append(_simpleName, "");
       _builder.append("(");
       EList<JvmFormalParameter> _parameters_1 = it.getParameters();
-      final Function1<JvmFormalParameter,String> _function = new Function1<JvmFormalParameter,String>() {
-          public String apply(final JvmFormalParameter p) {
-            String _generateParameter = JvmModelGenerator.this.generateParameter(p, importManager);
+      final Function1<JvmFormalParameter,CharSequence> _function = new Function1<JvmFormalParameter,CharSequence>() {
+          public CharSequence apply(final JvmFormalParameter p) {
+            CharSequence _generateParameter = JvmModelGenerator.this.generateParameter(p, importManager);
             return _generateParameter;
           }
         };
-      List<String> _map = ListExtensions.<JvmFormalParameter, String>map(_parameters_1, _function);
+      List<CharSequence> _map = ListExtensions.<JvmFormalParameter, CharSequence>map(_parameters_1, _function);
       String _join = IterableExtensions.join(_map, ", ");
       _builder.append(_join, "");
       _builder.append(")");
@@ -672,14 +672,27 @@ public class JvmModelGenerator implements IGenerator {
     return _join;
   }
   
-  public String generateParameter(final JvmFormalParameter it, final ImportManager importManager) {
+  public CharSequence generateParameter(final JvmFormalParameter it, final ImportManager importManager) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      EList<JvmAnnotationReference> _annotations = it.getAnnotations();
+      boolean _isEmpty = _annotations.isEmpty();
+      boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
+      if (_operator_not) {
+        EList<JvmAnnotationReference> _annotations_1 = it.getAnnotations();
+        CharSequence _generateAnnotations = this.generateAnnotations(_annotations_1, importManager);
+        _builder.append(_generateAnnotations, "");
+        _builder.append(" ");
+      }
+    }
+    _builder.append("final ");
     JvmTypeReference _parameterType = it.getParameterType();
     String _serialize = this.serialize(_parameterType, importManager);
-    String _operator_plus = StringExtensions.operator_plus("final ", _serialize);
-    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, " ");
+    _builder.append(_serialize, "");
+    _builder.append(" ");
     String _simpleName = it.getSimpleName();
-    String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, _simpleName);
-    return _operator_plus_2;
+    _builder.append(_simpleName, "");
+    return _builder;
   }
   
   public CharSequence generateBody(final JvmExecutable op, final ImportManager importManager) {

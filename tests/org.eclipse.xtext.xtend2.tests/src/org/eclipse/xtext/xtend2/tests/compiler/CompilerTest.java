@@ -2495,11 +2495,19 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"  def dispatch foo(Object o) throws Exception {}\n" +
 				"  def dispatch foo(Number m) throws Exception {}\n" +
 				"}");
-		Method methodFoo = clazz.getMethod("foo", Object.class);
-		assertEquals(1, methodFoo.getExceptionTypes().length);
-		assertEquals(Exception.class, methodFoo.getExceptionTypes()[0]);
+		Method fooMethod = clazz.getMethod("foo", Object.class);
+		assertEquals(1, fooMethod.getExceptionTypes().length);
+		assertEquals(Exception.class, fooMethod.getExceptionTypes()[0]);
 	}
 	
+	public void testParameterAnnotation() throws Exception {
+		Class<?> clazz = compileJavaCode("Foo", "class Foo {\n" +
+				"  def foo(@Deprecated Object o) {}\n" +
+				"}");
+		Method fooMethod = clazz.getMethod("foo", Object.class);
+		assertEquals(1, fooMethod.getParameterAnnotations()[0].length);
+		assertEquals(Deprecated.class, fooMethod.getParameterAnnotations()[0][0].annotationType());
+	}
 	
 	@Inject
 	private EclipseRuntimeDependentJavaCompiler javaCompiler;
