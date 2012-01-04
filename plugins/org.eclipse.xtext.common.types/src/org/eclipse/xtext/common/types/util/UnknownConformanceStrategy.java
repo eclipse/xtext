@@ -20,6 +20,8 @@ class UnknownConformanceStrategy extends TypeConformanceStrategy<JvmUnknownTypeR
 
 	@Override
 	public TypeConformanceResult doVisitTypeReference(JvmUnknownTypeReference left, JvmTypeReference reference, TypeConformanceComputationArgument.Internal<JvmUnknownTypeReference> param) {
+		if (reference instanceof JvmUnknownTypeReference) 
+			return TypeConformanceResult.SUCCESS;
 		return TypeConformanceResult.FAILED;
 	}
 }
