@@ -32,6 +32,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeReferences;
@@ -386,10 +387,8 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		if (receiver == null || receiver.eIsProxy())
 			return IScope.NULLSCOPE;
 		JvmTypeReference receiverType = typeProvider.getType(receiver,true);
-		if (receiverType != null) {
-			return createFeatureScopeForTypeRef(receiverType, context, null, IScope.NULLSCOPE);
-		}
-		return IScope.NULLSCOPE;
+		receiverType = atLeastObject(receiverType, receiver);
+		return createFeatureScopeForTypeRef(receiverType, context, null, IScope.NULLSCOPE);
 	}
 	
 
@@ -458,15 +457,21 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			EObject implicitReceiver = implicitVariable.getEObjectOrProxy();
 			if (implicitReceiver instanceof JvmIdentifiableElement) {
 				JvmTypeReference receiverType = typeProvider.getTypeForIdentifiable((JvmIdentifiableElement) implicitReceiver);
-				if (receiverType != null) {
-					XFeatureCall receiver = XbaseFactory.eINSTANCE.createXFeatureCall();
-					receiver.setFeature((JvmIdentifiableElement) implicitReceiver);
-					addFeatureScopes(receiverType, expression, getContextType(expression), receiver, null, priority, featureScopeDescriptions);
-				}
+				receiverType = atLeastObject(receiverType, expression);
+				XFeatureCall receiver = XbaseFactory.eINSTANCE.createXFeatureCall();
+				receiver.setFeature((JvmIdentifiableElement) implicitReceiver);
+				addFeatureScopes(receiverType, expression, getContextType(expression), receiver, null, priority, featureScopeDescriptions);
 			}
 		}
 	}
 	
+	protected JvmTypeReference atLeastObject(JvmTypeReference receiverType, EObject context) {
+		if (receiverType == null || receiverType instanceof JvmUnknownTypeReference) {
+			return typeReferences.getTypeForName(Object.class, context);
+		}
+		return receiverType;
+	}
+
 	protected JvmDeclaredType getContextType(EObject obj) {
 		if (obj == null)
 			return null;
