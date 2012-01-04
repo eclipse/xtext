@@ -1209,6 +1209,16 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
+	@Test public void testClosure_19() throws Exception {
+		assertEvaluatesTo(newArrayList("bar","foo"), 
+				"{" +
+						"  val client = new testdata.ClosureClient()" +
+						"  val com.google.inject.Provider<String> provider = [|'foo']" +
+						"  val com.google.common.base.Supplier<String> supplier = [|'bar']" +
+						"  newArrayList(client.useProvider(supplier as =>String), client.useSupplier(provider as =>String))" +
+				"}");
+	}
+	
 	@Test public void testArrayConversion_01() throws Exception {
 		assertEvaluatesTo("LITERAL", 
 				"{" +

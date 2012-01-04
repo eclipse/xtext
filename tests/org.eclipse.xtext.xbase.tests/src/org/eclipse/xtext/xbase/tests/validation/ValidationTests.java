@@ -32,6 +32,11 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	@Inject
 	protected ValidationTestHelper helper;
 	
+	public void testIncompatibleTypes() throws Exception {
+		XExpression expr = expression("{ val com.google.inject.Provider<String> x = [| 'foo'] as com.google.common.base.Supplier<String> }");
+		helper.assertError(expr, XCASTED_EXPRESSION, INCOMPATIBLE_TYPES);
+	}
+	
 	public void testToLittleTypeInformation_01() throws Exception {
 		XExpression expr = expression("{ val x = [e | e.toString()] }");
 		helper.assertError(expr, XCLOSURE, TOO_LITTLE_TYPE_INFORMATION);

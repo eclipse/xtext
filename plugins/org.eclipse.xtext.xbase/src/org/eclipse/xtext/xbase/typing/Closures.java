@@ -19,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmCompoundTypeReference;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
@@ -80,7 +81,7 @@ public class Closures {
 			@Override
 			public JvmTypeReference doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference) {
 				JvmType type = reference.getType();
-				if (type instanceof JvmDeclaredType && !type.eIsProxy()) {
+				if (type instanceof JvmGenericType && !type.eIsProxy() && ((JvmGenericType)type).isInterface()) {
 					JvmOperation operation = findImplementingOperation(reference, type.eResource());
 					if (operation != null) {
 						JvmTypeReference result = null;
