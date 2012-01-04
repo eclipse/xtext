@@ -151,9 +151,9 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			return true;
 		if (expr instanceof XAbstractFeatureCall) {
 			JvmIdentifiableElement feature = ((XAbstractFeatureCall) expr).getFeature();
-			if ((feature instanceof JvmField && expr instanceof XMemberFeatureCall && !((XMemberFeatureCall) expr)
-					.isNullSafe()) || feature instanceof JvmFormalParameter)
-				return false;
+			if (feature instanceof JvmField || feature instanceof JvmFormalParameter) {
+				return expr instanceof XMemberFeatureCall && ((XMemberFeatureCall) expr).isNullSafe();
+			}
 			return b.getName(feature) == null;
 		}
 		return super.isVariableDeclarationRequired(expr, b);
