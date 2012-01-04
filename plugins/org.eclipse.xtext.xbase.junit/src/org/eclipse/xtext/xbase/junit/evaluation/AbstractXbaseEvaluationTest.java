@@ -843,11 +843,11 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	}
 	
 	@Test public void testNullSafeFieldAccess_0() throws Exception {
-		assertEvaluatesWithException(NullPointerException.class, "new foo.FieldAccess().child.child");
+		assertEvaluatesWithException(NullPointerException.class, "new testdata.FieldAccess().stringField.toUpperCase");
 	}
 
 	@Test public void testNullSafeFieldAccess_1() throws Exception {
-		assertEvaluatesTo(null, "new foo.FieldAccess()?.child?.child");
+		assertEvaluatesTo(null, "new testdata.FieldAccess()?.stringField?.toUpperCase");
 	}
 	
 //	TODO see https://bugs.eclipse.org/bugs/show_bug.cgi?id=341048
