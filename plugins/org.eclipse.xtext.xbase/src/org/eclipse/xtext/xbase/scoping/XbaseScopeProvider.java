@@ -387,8 +387,13 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		if (receiver == null || receiver.eIsProxy())
 			return IScope.NULLSCOPE;
 		JvmTypeReference receiverType = typeProvider.getType(receiver,true);
-		receiverType = atLeastObject(receiverType, receiver);
-		return createFeatureScopeForTypeRef(receiverType, context, null, IScope.NULLSCOPE);
+		receiverType = unkownToObject(receiverType, receiver);
+		if (receiverType != null) {
+			return createFeatureScopeForTypeRef(receiverType, context, null, IScope.NULLSCOPE);
+		} else {
+			return IScope.NULLSCOPE;
+		}
+		
 	}
 	
 
@@ -457,16 +462,18 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			EObject implicitReceiver = implicitVariable.getEObjectOrProxy();
 			if (implicitReceiver instanceof JvmIdentifiableElement) {
 				JvmTypeReference receiverType = typeProvider.getTypeForIdentifiable((JvmIdentifiableElement) implicitReceiver);
-				receiverType = atLeastObject(receiverType, expression);
-				XFeatureCall receiver = XbaseFactory.eINSTANCE.createXFeatureCall();
-				receiver.setFeature((JvmIdentifiableElement) implicitReceiver);
-				addFeatureScopes(receiverType, expression, getContextType(expression), receiver, null, priority, featureScopeDescriptions);
+				receiverType = unkownToObject(receiverType, expression);
+				if (receiverType != null) {
+					XFeatureCall receiver = XbaseFactory.eINSTANCE.createXFeatureCall();
+					receiver.setFeature((JvmIdentifiableElement) implicitReceiver);
+					addFeatureScopes(receiverType, expression, getContextType(expression), receiver, null, priority, featureScopeDescriptions);
+				}
 			}
 		}
 	}
 	
-	protected JvmTypeReference atLeastObject(JvmTypeReference receiverType, EObject context) {
-		if (receiverType == null || receiverType instanceof JvmUnknownTypeReference) {
+	protected JvmTypeReference unkownToObject(JvmTypeReference receiverType, EObject context) {
+		if (receiverType instanceof JvmUnknownTypeReference) {
 			return typeReferences.getTypeForName(Object.class, context);
 		}
 		return receiverType;
