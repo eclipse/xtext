@@ -28,6 +28,7 @@ public final class IssueCodes {
 	public static final String DISPATCH_FUNCTIONS_STATIC_EXPECTED = "dispatch_functions_static_expected";
 	public static final String DISPATCH_FUNCTIONS_NON_STATIC_EXPECTED = "dispatch_functions_non_static_expected";
 	public static final String SINGLE_DISPATCH_FUNCTION = ISSUE_CODE_PREFIX + "single_case_function";
+	public static final String DISPATCH_PLAIN_FUNCTION_NAME_CLASH = ISSUE_CODE_PREFIX + "dispatch_plain_function_name_clash";
 	public static final String WRONG_PACKAGE = ISSUE_CODE_PREFIX + "wrong_package";
 	public static final String WRONG_FILE = ISSUE_CODE_PREFIX + "wrong_file";
 	public static final String CLASS_EXPECTED = ISSUE_CODE_PREFIX + "class_expected";

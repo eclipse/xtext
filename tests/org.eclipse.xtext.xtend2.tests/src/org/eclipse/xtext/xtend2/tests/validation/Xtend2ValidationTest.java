@@ -8,8 +8,10 @@
 package org.eclipse.xtext.xtend2.tests.validation;
 
 import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 import static org.eclipse.xtext.xtend2.validation.IssueCodes.*;
+import static org.eclipse.xtext.xtend2.xtend2.Xtend2Package.Literals.*;
 
 import java.util.Iterator;
 
@@ -17,11 +19,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XBlockExpression;
-import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
-import org.eclipse.xtext.xtend2.validation.IssueCodes;
-import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendConstructor;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
@@ -40,7 +39,7 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testFieldInitializerType_01() throws Exception {
 		XtendClass clazz = clazz("class Z { String s = 1 }");
-		helper.assertError(clazz, XbasePackage.Literals.XINT_LITERAL, org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_RETURN_TYPE);
+		helper.assertError(clazz, XINT_LITERAL, INCOMPATIBLE_RETURN_TYPE);
 	}
 	
 	public void testFieldInitializerType_02() throws Exception {
@@ -50,7 +49,7 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testFieldInitializerType_03() throws Exception {
 		XtendClass clazz = clazz("class Z { String s = return 1 }");
-		helper.assertError(clazz, XbasePackage.Literals.XINT_LITERAL, org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_TYPES);
+		helper.assertError(clazz, XINT_LITERAL, INCOMPATIBLE_TYPES);
 	}
 	
 	public void testFieldInitializerType_04() throws Exception {
@@ -60,22 +59,22 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testForwardReferenceInFieldInitializer_01() throws Exception {
 		XtendClass clazz = clazz("class Z { String s = s }");
-		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.ILLEGAL_FORWARD_REFERENCE);
+		helper.assertError(clazz, XFEATURE_CALL, ILLEGAL_FORWARD_REFERENCE);
 	}
 	
 	public void testForwardReferenceInFieldInitializer_02() throws Exception {
 		XtendClass clazz = clazz("class Z { String s1 = newArrayList(s2 + '').toString String s2 = '' }");
-		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.ILLEGAL_FORWARD_REFERENCE);
+		helper.assertError(clazz, XFEATURE_CALL, ILLEGAL_FORWARD_REFERENCE);
 	}
 	
 	public void testForwardReferenceInFieldInitializer_03() throws Exception {
 		XtendClass clazz = clazz("class Z { static String s = s }");
-		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.ILLEGAL_FORWARD_REFERENCE);
+		helper.assertError(clazz, XFEATURE_CALL, ILLEGAL_FORWARD_REFERENCE);
 	}
 	
 	public void testForwardReferenceInFieldInitializer_04() throws Exception {
 		XtendClass clazz = clazz("class Z { static String s1 = s2 static String s2 = '' }");
-		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.ILLEGAL_FORWARD_REFERENCE);
+		helper.assertError(clazz, XFEATURE_CALL, ILLEGAL_FORWARD_REFERENCE);
 	}
 
 	public void testForwardReferenceInFieldInitializer_05() throws Exception {
@@ -100,13 +99,13 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testCircularConstructor_01() throws Exception {
 		XtendClass clazz = clazz("class Z { new() { this() }}");
-		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.CIRCULAR_CONSTRUCTOR_INVOCATION);
+		helper.assertError(clazz, XFEATURE_CALL, CIRCULAR_CONSTRUCTOR_INVOCATION);
 	}
 	
 	public void testCircularConstructor_02() throws Exception {
 		XtendClass clazz = clazz("class Z { new() { this(1) } new(int a) { this() } }");
-		helper.assertError(clazz.getMembers().get(0), XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.CIRCULAR_CONSTRUCTOR_INVOCATION);
-		helper.assertError(clazz.getMembers().get(1), XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.CIRCULAR_CONSTRUCTOR_INVOCATION);
+		helper.assertError(clazz.getMembers().get(0), XFEATURE_CALL, CIRCULAR_CONSTRUCTOR_INVOCATION);
+		helper.assertError(clazz.getMembers().get(1), XFEATURE_CALL, CIRCULAR_CONSTRUCTOR_INVOCATION);
 	}
 	
 	public void testCircularConstructor_03() throws Exception {
@@ -121,12 +120,12 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testConstructorCallIsFirst_02() throws Exception {
 		XtendClass clazz = clazz("class Z { new() { { this() } }}");
-		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_CONSTRUCTOR_INVOCATION);
+		helper.assertError(clazz, XFEATURE_CALL, INVALID_CONSTRUCTOR_INVOCATION);
 	}
 	
 	public void testConstructorCallIsFirst_03() throws Exception {
 		XtendClass clazz = clazz("class Z { new() { if (true) super() } }");
-		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_CONSTRUCTOR_INVOCATION);
+		helper.assertError(clazz, XFEATURE_CALL, INVALID_CONSTRUCTOR_INVOCATION);
 	}
 	
 	public void testConstructorArgumentIsValid_01() throws Exception {
@@ -141,12 +140,12 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testConstructorArgumentIsValid_03() throws Exception {
 		XtendClass clazz = clazz("class Z { int j new() { this(j) } new(int i) {} }");
-		helper.assertError(clazz.getMembers().get(1), XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_CONSTRUCTOR_ARGUMENT);
+		helper.assertError(clazz.getMembers().get(1), XFEATURE_CALL, INVALID_CONSTRUCTOR_ARGUMENT);
 	}
 	
 	public void testConstructorArgumentIsValid_04() throws Exception {
 		XtendClass clazz = clazz("class Z { new() { this(z()) } new(Object o) {} def z() { null } }");
-		helper.assertError(clazz.getMembers().get(0), XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_CONSTRUCTOR_ARGUMENT);
+		helper.assertError(clazz.getMembers().get(0), XFEATURE_CALL, INVALID_CONSTRUCTOR_ARGUMENT);
 	}
 	
 	public void testConstructorArgumentIsValid_05() throws Exception {
@@ -171,7 +170,7 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testConstructorArgumentIsValid_09() throws Exception {
 		XtendClass clazz = clazz("class Z { new() { this(z() as String) } new(Object o) {} def z() { null } }");
-		helper.assertError(clazz.getMembers().get(0), XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_CONSTRUCTOR_ARGUMENT);
+		helper.assertError(clazz.getMembers().get(0), XFEATURE_CALL, INVALID_CONSTRUCTOR_ARGUMENT);
 	}
 	
 	public void testConstructorArgumentIsValid_10() throws Exception {
@@ -181,34 +180,34 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testConstructorArgumentIsValid_11() throws Exception {
 		XtendClass clazz = clazz("class Z { new() { this(z().toString + '') } new(Object o) {} def z() { null } }");
-		helper.assertError(clazz.getMembers().get(0), XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_CONSTRUCTOR_ARGUMENT);
+		helper.assertError(clazz.getMembers().get(0), XFEATURE_CALL, INVALID_CONSTRUCTOR_ARGUMENT);
 	}
 	
 	public void testConstructorDuplicate() throws Exception {
 		XtendClass clazz = clazz("class K { new(Object o) {} new(Object o) {} }");
-		helper.assertError(clazz, Xtend2Package.Literals.XTEND_CONSTRUCTOR, IssueCodes.DUPLICATE_METHOD);
-		helper.assertError(clazz, Xtend2Package.Literals.XTEND_CONSTRUCTOR, IssueCodes.DUPLICATE_METHOD);
+		helper.assertError(clazz, XTEND_CONSTRUCTOR, DUPLICATE_METHOD);
+		helper.assertError(clazz, XTEND_CONSTRUCTOR, DUPLICATE_METHOD);
 	}
 	
 	public void testConstructorDuplicateErasure() throws Exception {
 		XtendClass clazz = clazz("class K { new(List<Object> o) {} new(List<String> o) {} }");
-		helper.assertError(clazz, Xtend2Package.Literals.XTEND_CONSTRUCTOR, IssueCodes.DUPLICATE_METHOD);
-		helper.assertError(clazz, Xtend2Package.Literals.XTEND_CONSTRUCTOR, IssueCodes.DUPLICATE_METHOD);
+		helper.assertError(clazz, XTEND_CONSTRUCTOR, DUPLICATE_METHOD);
+		helper.assertError(clazz, XTEND_CONSTRUCTOR, DUPLICATE_METHOD);
 	}
 	
 	public void testConstructorDoesNotSupportTypeArguments() throws Exception {
 		XtendClass clazz = clazz("class K { new<T>() {} }");
-		helper.assertError(clazz, Xtend2Package.Literals.XTEND_CONSTRUCTOR, IssueCodes.CONSTRUCTOR_TYPE_PARAMS_NOT_SUPPORTED);
+		helper.assertError(clazz, XTEND_CONSTRUCTOR, CONSTRUCTOR_TYPE_PARAMS_NOT_SUPPORTED);
 	}
 
 	public void testMissingConstructor() throws Exception {
 		XtendClass clazz = clazz("class K extends test.NoDefaultConstructor {}");
-		helper.assertError(clazz, Xtend2Package.Literals.XTEND_CLASS, IssueCodes.MISSING_CONSTRUCTOR);
+		helper.assertError(clazz, XTEND_CLASS, MISSING_CONSTRUCTOR);
 	}
 	
 	public void testMissingSuperConstructorCall() throws Exception {
 		XtendClass clazz = clazz("class K extends test.NoDefaultConstructor { new() {} }");
-		helper.assertError(clazz, Xtend2Package.Literals.XTEND_CONSTRUCTOR, IssueCodes.MUST_INVOKE_SUPER_CONSTRUCTOR);
+		helper.assertError(clazz, XTEND_CONSTRUCTOR, MUST_INVOKE_SUPER_CONSTRUCTOR);
 	}
 	
 	public void testSuperConstructorCall() throws Exception {
@@ -218,12 +217,12 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testReturnStatement() throws Exception {
 		XtendClass clazz = clazz("class Z { def void foo() { return 'holla' }}");
-		helper.assertError(clazz, XbasePackage.Literals.XRETURN_EXPRESSION, org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_RETURN);
+		helper.assertError(clazz, XRETURN_EXPRESSION, INVALID_RETURN);
 	}
 	
 	public void testReturnStatement1() throws Exception {
 		XtendClass clazz = clazz("class Z { def Object foo() { return }}");
-		helper.assertError(clazz, XbasePackage.Literals.XRETURN_EXPRESSION, org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_RETURN);
+		helper.assertError(clazz, XRETURN_EXPRESSION, INVALID_RETURN);
 	}
 	
 	public void testBug_357230() throws Exception {
@@ -232,12 +231,12 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 				"  def dispatch _foo(Object x, boolean b) {}\n" +
 				"  def dispatch _foo(String x, boolean b) {}\n" +
 				"}\n");
-		helper.assertError(clazz, Xtend2Package.Literals.XTEND_FUNCTION, IssueCodes.DISPATCH_FUNC_NAME_STARTS_WITH_UNDERSCORE);
+		helper.assertError(clazz, XTEND_FUNCTION, DISPATCH_FUNC_NAME_STARTS_WITH_UNDERSCORE);
 	}
 	
 	public void testAnnotationTarget_00() throws Exception {
 		XtendClass clazz = clazz("@testdata.Annotation2('foo') class X { }");
-		helper.assertError(clazz, XAnnotationsPackage.Literals.XANNOTATION, IssueCodes.ANNOTATION_WRONG_TARGET, "@Annotation2");
+		helper.assertError(clazz, XAnnotationsPackage.Literals.XANNOTATION, ANNOTATION_WRONG_TARGET, "@Annotation2");
 	}
 	
 	public void testAnnotationTarget_01() throws Exception {
@@ -247,37 +246,37 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testAnnotationTarget_02() throws Exception {
 		XtendClass clazz = clazz("class X { @testdata.Annotation2('foo') def String foo() }");
-		helper.assertError(clazz, XAnnotationsPackage.Literals.XANNOTATION, IssueCodes.ANNOTATION_WRONG_TARGET);
+		helper.assertError(clazz, XAnnotationsPackage.Literals.XANNOTATION, ANNOTATION_WRONG_TARGET);
 	}
 	
 	public void testAnnotationTarget_03() throws Exception {
 		XtendClass clazz = clazz("class X {  def String foo(@testdata.Annotation2('foo') String bar) }");
-		helper.assertError(clazz, XAnnotationsPackage.Literals.XANNOTATION, IssueCodes.ANNOTATION_WRONG_TARGET);
+		helper.assertError(clazz, XAnnotationsPackage.Literals.XANNOTATION, ANNOTATION_WRONG_TARGET);
 	}
 	
 	public void testShadowingVariableNames_00() throws Exception {
 		XtendClass clazz = clazz("class X { def foo() { val this = 'foo' } }");
-		helper.assertError(clazz, XbasePackage.Literals.XVARIABLE_DECLARATION, VARIABLE_NAME_SHADOWING);
+		helper.assertError(clazz, XVARIABLE_DECLARATION, VARIABLE_NAME_SHADOWING);
 	}
 	
 	public void testShadowingVariableNames_01() throws Exception {
 		XtendClass clazz = clazz("class X { def foo() { val ^super = 'foo' } }");
-		helper.assertError(clazz, XbasePackage.Literals.XVARIABLE_DECLARATION, VARIABLE_NAME_SHADOWING);
+		helper.assertError(clazz, XVARIABLE_DECLARATION, VARIABLE_NAME_SHADOWING);
 	}
 	
 	public void testShadowingVariableNames_03() throws Exception {
 		XtendClass clazz = clazz("class X { def foo(String this) { } }");
-		helper.assertError(clazz, Xtend2Package.Literals.XTEND_PARAMETER, VARIABLE_NAME_SHADOWING);
+		helper.assertError(clazz, XTEND_PARAMETER, VARIABLE_NAME_SHADOWING);
 	}
 	
 	public void testShadowingVariableNames_04() throws Exception {
 		XtendClass clazz = clazz("class X { def foo(String x) ''' «val x = 'foo'» «x» ''' }");
-		helper.assertError(clazz, XbasePackage.Literals.XVARIABLE_DECLARATION, VARIABLE_NAME_SHADOWING);
+		helper.assertError(clazz, XVARIABLE_DECLARATION, VARIABLE_NAME_SHADOWING);
 	}
 	
 	public void testShadowingVariableNames_05() throws Exception {
 		XtendClass clazz = clazz("class X { def foo() ''' «val x = 'foo'» «val x = 'bar'» ''' }");
-		helper.assertError(clazz, XbasePackage.Literals.XVARIABLE_DECLARATION, VARIABLE_NAME_SHADOWING);
+		helper.assertError(clazz, XVARIABLE_DECLARATION, VARIABLE_NAME_SHADOWING);
 	}
 	
 	public void testVoidInDependency() throws Exception {
@@ -302,27 +301,27 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testCreateMayNotBeStatic() throws Exception {
 		XtendFunction function = function("def static create new Object() newObject() { }");
-		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, INVALID_USE_OF_STATIC, "not", "static");
+		helper.assertError(function, XTEND_FUNCTION, INVALID_USE_OF_STATIC, "not", "static");
 	}
 	
 	public void testCreateExpressionMayNotReturnVoid_01() throws Exception {
 		XtendFunction function = function("def create result: while(true){} illegal() { }");
-		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, INVALID_USE_OF_TYPE, "void", "create", "method", "illegal");
+		helper.assertError(function, XTEND_FUNCTION, INVALID_USE_OF_TYPE, "void", "create", "method", "illegal");
 	}
 	
 	public void testCreateExpressionMayNotReturnVoid_02() throws Exception {
 		XtendFunction function = function("def String create result: while(true){} illegal() { }");
-		helper.assertError(function, XbasePackage.Literals.XWHILE_EXPRESSION, INCOMPATIBLE_RETURN_TYPE, "implicit", "return", "type", "void", "String");
+		helper.assertError(function, XWHILE_EXPRESSION, INCOMPATIBLE_RETURN_TYPE, "implicit", "return", "type", "void", "String");
 	}
 
 	public void testCreateExpressionMayNotReturnVoid_03() throws Exception {
 		XtendFunction function = function("override create result: while(true){} toString() { }");
-		helper.assertError(function, XbasePackage.Literals.XWHILE_EXPRESSION, INCOMPATIBLE_RETURN_TYPE, "implicit", "return", "type", "void", "String");
+		helper.assertError(function, XWHILE_EXPRESSION, INCOMPATIBLE_RETURN_TYPE, "implicit", "return", "type", "void", "String");
 	}
 	
 	public void testNoReturnInCreateFunctions() throws Exception {
 		XtendFunction function = function("def create result: if (true) return 'foo' else 'bar' foo() { }");
-		helper.assertError(function, XbasePackage.Literals.XRETURN_EXPRESSION, INVALID_EARLY_EXIT);
+		helper.assertError(function, XRETURN_EXPRESSION, INVALID_EARLY_EXIT);
 	}
 	
 	public void testNoReturnInCreateFunctions_00() throws Exception {
@@ -332,7 +331,7 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testNoReturnInCreateFunctions_01() throws Exception {
 		XtendFunction function = function("def create result:'foo' foo() { return 'bar' }");
-		helper.assertError(function, XbasePackage.Literals.XSTRING_LITERAL, INCOMPATIBLE_TYPES);
+		helper.assertError(function, XSTRING_LITERAL, INCOMPATIBLE_TYPES);
 	}
 	
 	public void testNoReturnInCreateFunctions_02() throws Exception {
@@ -347,7 +346,7 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testNoReturnInCreateFunctions_04() throws Exception {
 		XtendFunction function = function("def create result:'foo' foo() { if (true) 'foo'+'bar' else return 'baz' }");
-		helper.assertError(function, XbasePackage.Literals.XSTRING_LITERAL, INCOMPATIBLE_TYPES);
+		helper.assertError(function, XSTRING_LITERAL, INCOMPATIBLE_TYPES);
 	}
 
 	public void testReturnTypeCompatibility_00() throws Exception {
@@ -357,7 +356,7 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 
 	public void testReturnTypeCompatibility_01() throws Exception {
 		XtendFunction function = function("def String foo(int bar) { return 42 }");
-		helper.assertError(function, XbasePackage.Literals.XINT_LITERAL, INCOMPATIBLE_TYPES, "String", "int");
+		helper.assertError(function, XINT_LITERAL, INCOMPATIBLE_TYPES, "String", "int");
 	}
 
 	public void testReturnTypeCompatibility_02() throws Exception {
@@ -372,12 +371,12 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 				+ "  return if (false) 42 else new Object()" 
 				+ " }" 
 				+ "}");
-		helper.assertError(function, XbasePackage.Literals.XIF_EXPRESSION, INCOMPATIBLE_TYPES, "String", "Object");
+		helper.assertError(function, XIF_EXPRESSION, INCOMPATIBLE_TYPES, "String", "Object");
 	}
 
 	public void testReturnTypeCompatibility_04() throws Exception {
 		XtendClass clazz = clazz("class Foo implements test.SomeInterface { def foo() { 1 } }");
-		helper.assertError(clazz.getMembers().get(0), Xtend2Package.Literals.XTEND_FUNCTION, MISSING_OVERRIDE);
+		helper.assertError(clazz.getMembers().get(0), XTEND_FUNCTION, MISSING_OVERRIDE);
 	}
 
 	public void testReturnTypeCompatibility_05() throws Exception {
@@ -387,7 +386,7 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testReturnTypeCompatibility_06() throws Exception {
 		XtendClass clazz = clazz("class Foo { def dispatch void a(String x) {} def dispatch a(Object x) {return null} }");
-		helper.assertError(clazz.getMembers().get(1), Xtend2Package.Literals.XTEND_FUNCTION, INCOMPATIBLE_RETURN_TYPE);
+		helper.assertError(clazz.getMembers().get(1), XTEND_FUNCTION, INCOMPATIBLE_RETURN_TYPE);
 	}
 	
 	public void testReturnTypeCompatibility_07() throws Exception {
@@ -464,7 +463,7 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 				"  }" +
 				"}");
 		helper.assertNoError(clazz, UNHANDLED_EXCEPTION);
-//		helper.assertError(clazz, XbasePackage.Literals.XBLOCK_EXPRESSION, UNHANDLED_EXCEPTION, "unhandled", "exception");
+//		helper.assertError(clazz, XBLOCK_EXPRESSION, UNHANDLED_EXCEPTION, "unhandled", "exception");
 	}
 	
 	public void testThrowsClauseCompatibility_01() throws Exception {
@@ -485,7 +484,7 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 				"  }" +
 				"}");
 		helper.assertNoError(clazz, UNHANDLED_EXCEPTION);
-//		helper.assertError(clazz, XbasePackage.Literals.XBLOCK_EXPRESSION, UNHANDLED_EXCEPTION, "unhandled", "exception");
+//		helper.assertError(clazz, XBLOCK_EXPRESSION, UNHANDLED_EXCEPTION, "unhandled", "exception");
 	}
 	
 	public void testThrowsClauseCompatibility_03() throws Exception {
@@ -513,23 +512,23 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testAssignmentToFunctionParameter() throws Exception {
 		XtendFunction function = function("def void foo(int bar) { bar = 7 }");
-		helper.assertError(function, XbasePackage.Literals.XASSIGNMENT, ASSIGNMENT_TO_FINAL, "Assignment", "final",
+		helper.assertError(function, XASSIGNMENT, ASSIGNMENT_TO_FINAL, "Assignment", "final",
 				"parameter");
 	}
 
 	public void testClassExtendsInterface() throws Exception {
 		XtendClass clazz = clazz("class Foo extends Cloneable {}");
-		helper.assertError(clazz, Xtend2Package.Literals.XTEND_CLASS, CLASS_EXPECTED, "Superclass");
+		helper.assertError(clazz, XTEND_CLASS, CLASS_EXPECTED, "Superclass");
 	}
 
 	public void testClassImplementsClass() throws Exception {
 		XtendClass clazz = clazz("class Foo implements Object {}");
-		helper.assertError(clazz, Xtend2Package.Literals.XTEND_CLASS, INTERFACE_EXPECTED, "Implemented", "interface");
+		helper.assertError(clazz, XTEND_CLASS, INTERFACE_EXPECTED, "Implemented", "interface");
 	}
 	
 	public void testClassExtendsItself() throws Exception {
 		XtendClass clazz = clazz("class Foo extends Foo {}");
-		helper.assertError(clazz, Xtend2Package.Literals.XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
+		helper.assertError(clazz, XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
 	}
 	
 	public void testInheritanceCycle() throws Exception {
@@ -538,9 +537,9 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 				,"package test class Bar extends Baz {}"
 				,"package test class Baz extends Foo {}").iterator();
 		waitForAutoBuild();
-		helper.assertError(iter.next(), Xtend2Package.Literals.XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
-		helper.assertError(iter.next(), Xtend2Package.Literals.XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
-		helper.assertError(iter.next(), Xtend2Package.Literals.XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
+		helper.assertError(iter.next(), XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
+		helper.assertError(iter.next(), XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
+		helper.assertError(iter.next(), XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
 	}
 	
 	public void testInheritanceCycle_1() throws Exception {
@@ -548,8 +547,8 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 				 "package test class Foo extends Bar {}"
 				,"package test class Bar extends Foo {}").iterator();
 		waitForAutoBuild();
-		helper.assertError(iter.next(), Xtend2Package.Literals.XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
-		helper.assertError(iter.next(), Xtend2Package.Literals.XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
+		helper.assertError(iter.next(), XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
+		helper.assertError(iter.next(), XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
 	}
 	
 	public void testIgnoreInterfacesInCycleDetection() throws Exception {
@@ -561,67 +560,67 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 
 	public void testInvalidFieldName_00() throws Exception {
 		XtendClass clazz = clazz("class Foo { int this }");
-		helper.assertError(clazz.getMembers().get(0), Xtend2Package.Literals.XTEND_FIELD, INVALID_MEMBER_NAME, "'this'", "'it'", "names");
+		helper.assertError(clazz.getMembers().get(0), XTEND_FIELD, INVALID_MEMBER_NAME, "'this'", "'it'", "names");
 	}
 	
 	public void testInvalidFieldName_01() throws Exception {
 		XtendClass clazz = clazz("class Foo { int it }");
-		helper.assertError(clazz.getMembers().get(0), Xtend2Package.Literals.XTEND_FIELD, INVALID_MEMBER_NAME, "'this'", "'it'", "names");
+		helper.assertError(clazz.getMembers().get(0), XTEND_FIELD, INVALID_MEMBER_NAME, "'this'", "'it'", "names");
 	}
 	
 	public void testInvalidMethodName_00() throws Exception {
 		XtendClass clazz = clazz("class Foo { def void this() {} }");
-		helper.assertError(clazz.getMembers().get(0), Xtend2Package.Literals.XTEND_FUNCTION, INVALID_MEMBER_NAME, "'this'", "'it'", "names");
+		helper.assertError(clazz.getMembers().get(0), XTEND_FUNCTION, INVALID_MEMBER_NAME, "'this'", "'it'", "names");
 	}
 	
 	public void testInvalidMethodName_01() throws Exception {
 		XtendClass clazz = clazz("class Foo { def void it() {} }");
-		helper.assertError(clazz.getMembers().get(0), Xtend2Package.Literals.XTEND_FUNCTION, INVALID_MEMBER_NAME, "'this'", "'it'", "names");
+		helper.assertError(clazz.getMembers().get(0), XTEND_FUNCTION, INVALID_MEMBER_NAME, "'this'", "'it'", "names");
 	}
 	
 	public void testDuplicateFieldName() throws Exception {
 		XtendClass clazz = clazz("class Foo { int foo String foo double foo }");
 		for(XtendMember member: clazz.getMembers())
-			helper.assertError(member, Xtend2Package.Literals.XTEND_FIELD, DUPLICATE_FIELD, "foo", "duplicate");
+			helper.assertError(member, XTEND_FIELD, DUPLICATE_FIELD, "foo", "duplicate");
 	}
 	
 	public void testDuplicateAnonymousExtension() throws Exception {
 		XtendClass clazz = clazz("import com.google.inject.Inject class Foo { @Inject extension String @Inject extension String }");
 		for(XtendMember member: clazz.getMembers())
-			helper.assertError(member, Xtend2Package.Literals.XTEND_FIELD, DUPLICATE_FIELD, "duplicate", "same", "type");
+			helper.assertError(member, XTEND_FIELD, DUPLICATE_FIELD, "duplicate", "same", "type");
 	}
 	
 	public void testCaseFunctionNoParameters() throws Exception {
 		XtendFunction function = function("def dispatch foo() { null }");
-		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, IssueCodes.DISPATCH_FUNC_WITHOUT_PARAMS);
+		helper.assertError(function, XTEND_FUNCTION, DISPATCH_FUNC_WITHOUT_PARAMS);
 	}
 
 	public void testCaseFunctionWithTypeParams() throws Exception {
 		XtendFunction function = function("def dispatch <T> foo(T s) { null }");
-		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, IssueCodes.DISPATCH_FUNC_WITH_TYPE_PARAMS);
+		helper.assertError(function, XTEND_FUNCTION, DISPATCH_FUNC_WITH_TYPE_PARAMS);
 	}
 
 	public void testSingleCaseFunction() throws Exception {
 		XtendFunction function = function("def dispatch foo(String s) { null }");
-		helper.assertWarning(function, Xtend2Package.Literals.XTEND_FUNCTION, IssueCodes.SINGLE_DISPATCH_FUNCTION);
+		helper.assertWarning(function, XTEND_FUNCTION, SINGLE_DISPATCH_FUNCTION);
 	}
 
 	public void testDuplicateCaseFunction() throws Exception {
 		XtendFunction function = function("def dispatch foo(Integer s) { null } def dispatch foo(int s) { null }");
-		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, IssueCodes.DUPLICATE_METHOD, "dispatch");
+		helper.assertError(function, XTEND_FUNCTION, DUPLICATE_METHOD, "dispatch");
 	}
 
 	public void testInaccessibleMethod() throws Exception {
 		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { def foo() { privateMethod() }}");
 		helper.assertError(((XBlockExpression) ((XtendFunction) xtendClass.getMembers().get(0)).getExpression())
-				.getExpressions().get(0), XbasePackage.Literals.XABSTRACT_FEATURE_CALL, FEATURE_NOT_VISIBLE, "Feature",
+				.getExpressions().get(0), XABSTRACT_FEATURE_CALL, FEATURE_NOT_VISIBLE, "Feature",
 				"not", "visible");
 	}
 	
 	public void testInaccessibleStaticMethod() throws Exception {
 		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { def foo() { privateStaticMethod() }}");
 		helper.assertError(((XBlockExpression) ((XtendFunction) xtendClass.getMembers().get(0)).getExpression())
-				.getExpressions().get(0), XbasePackage.Literals.XABSTRACT_FEATURE_CALL, FEATURE_NOT_VISIBLE, "Feature",
+				.getExpressions().get(0), XABSTRACT_FEATURE_CALL, FEATURE_NOT_VISIBLE, "Feature",
 				"not", "visible");
 	}
 
@@ -629,37 +628,37 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 //	public void testInaccessibleMethod2() throws Exception {
 //		XtendClass xtendClass = clazz("class Foo { def foo() { val o = new Object() o.clone() }}");
 //		helper.assertError(((XBlockExpression) ((XtendFunction) xtendClass.getMembers().get(0)).getExpression())
-//				.getExpressions().get(1), XbasePackage.Literals.XABSTRACT_FEATURE_CALL, FEATURE_NOT_VISIBLE, "Feature",
+//				.getExpressions().get(1), XABSTRACT_FEATURE_CALL, FEATURE_NOT_VISIBLE, "Feature",
 //				"not", "visible");
 //	}
 
 	public void testDuplicateParameter() throws Exception {
 		XtendFunction function = function("def foo(int x, int x) {null}");
-		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, DUPLICATE_PARAMETER_NAME, "duplicate", "x");
+		helper.assertError(function, XTEND_FUNCTION, DUPLICATE_PARAMETER_NAME, "duplicate", "x");
 	}
 	
 	public void testDuplicateConstructorParameter() throws Exception {
 		XtendConstructor constructor = constructor("new(int x, int x) {null}");
-		helper.assertError(constructor, Xtend2Package.Literals.XTEND_CONSTRUCTOR, DUPLICATE_PARAMETER_NAME, "duplicate", "x");
+		helper.assertError(constructor, XTEND_CONSTRUCTOR, DUPLICATE_PARAMETER_NAME, "duplicate", "x");
 	}
 	
 	public void testDuplicateParameter_CreateExtension_01() throws Exception {
 		XtendFunction function = function("def create newArrayList foo(int it) {}");
-		helper.assertError(function, Xtend2Package.Literals.CREATE_EXTENSION_INFO, DUPLICATE_PARAMETER_NAME, "duplicate", "implicit", "it");
-		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, DUPLICATE_PARAMETER_NAME, "duplicate", "it");
+		helper.assertError(function, CREATE_EXTENSION_INFO, DUPLICATE_PARAMETER_NAME, "duplicate", "implicit", "it");
+		helper.assertError(function, XTEND_FUNCTION, DUPLICATE_PARAMETER_NAME, "duplicate", "it");
 	}
 	
 	public void testDuplicateParameter_CreateExtension_02() throws Exception {
 		XtendFunction function = function("def create result: newArrayList foo(int result) {}");
-		helper.assertError(function, Xtend2Package.Literals.CREATE_EXTENSION_INFO, DUPLICATE_PARAMETER_NAME, "duplicate", "result");
-		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, DUPLICATE_PARAMETER_NAME, "duplicate", "result");
+		helper.assertError(function, CREATE_EXTENSION_INFO, DUPLICATE_PARAMETER_NAME, "duplicate", "result");
+		helper.assertError(function, XTEND_FUNCTION, DUPLICATE_PARAMETER_NAME, "duplicate", "result");
 	}
 	
 	public void testRichStringIfPredicate() throws Exception {
 		assertNoConformanceError("'''«IF Boolean::FALSE»«ENDIF»'''");
 		assertNoConformanceError("'''«IF true»«ENDIF»'''");
 		assertNoConformanceError("'''«IF 1 == 1»«ENDIF»'''");
-		assertConformanceError("'''«IF 1»«ENDIF»'''", XbasePackage.Literals.XINT_LITERAL, "int",
+		assertConformanceError("'''«IF 1»«ENDIF»'''", XINT_LITERAL, "int",
 				"boolean", "java.lang.Boolean");
 	}
 	
@@ -668,15 +667,15 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 		assertNoConformanceError("'''«FOR i: 1..10 BEFORE 'a' SEPARATOR 1 AFTER true»«ENDFOR»'''");
 		assertConformanceError(
 				"'''«FOR i: 1..10 BEFORE while(true) null SEPARATOR 'b' AFTER 'c'»«ENDFOR»'''", 
-				XbasePackage.Literals.XWHILE_EXPRESSION, "void",
+				XWHILE_EXPRESSION, "void",
 				"java.lang.Object");
 		assertConformanceError(
 				"'''«FOR i: 1..10 BEFORE 'a' SEPARATOR while(true) null AFTER 'c'»«ENDFOR»'''", 
-				XbasePackage.Literals.XWHILE_EXPRESSION, "void",
+				XWHILE_EXPRESSION, "void",
 				"java.lang.Object");
 		assertConformanceError(
 				"'''«FOR i: 1..10 BEFORE 'a' SEPARATOR null AFTER while(true) null»«ENDFOR»'''", 
-				XbasePackage.Literals.XWHILE_EXPRESSION, "void",
+				XWHILE_EXPRESSION, "void",
 				"java.lang.Object");
 	}
 	
@@ -693,7 +692,7 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 				"def <T extends Integer> (T,T)=>T addFunction() {\n" + 
 				"    [T a,T b|a+(b as Integer)]\n" + 
 				"}");
-		helper.assertError(function, XbasePackage.Literals.XBLOCK_EXPRESSION, INCOMPATIBLE_RETURN_TYPE, "(T, T)=>T", "(T, T)=>int");
+		helper.assertError(function, XBLOCK_EXPRESSION, INCOMPATIBLE_RETURN_TYPE, "(T, T)=>T", "(T, T)=>int");
 	}
 	
 	public void testBug343088_02() throws Exception {
@@ -701,7 +700,7 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 				"def <T extends Integer> (T,T)=>T addFunction() {\n" + 
 				"    [T a,T b|a+b]\n" + 
 				"}");
-		helper.assertError(function, XbasePackage.Literals.XBLOCK_EXPRESSION, INCOMPATIBLE_RETURN_TYPE, "(T, T)=>T", "(T, T)=>int");
+		helper.assertError(function, XBLOCK_EXPRESSION, INCOMPATIBLE_RETURN_TYPE, "(T, T)=>T", "(T, T)=>int");
 	}
 	
 	public void testBug343088_03() throws Exception {
@@ -714,13 +713,13 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testDispatchFunctionVisibility() throws Exception {
 		XtendClass xtendClass = clazz("class Foo { def dispatch foo(String bar) {} def public dispatch foo(Object bar) {}}");
-		helper.assertError(xtendClass.getMembers().get(0), Xtend2Package.Literals.XTEND_FUNCTION, DISPATCH_FUNCTIONS_WITH_DIFFERENT_VISIBILITY, 
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, DISPATCH_FUNCTIONS_WITH_DIFFERENT_VISIBILITY, 
 				"local", "must", "same", "visibility");
 	}
 	
 	public void testDispatchFunctionStatic1() throws Exception {
 		XtendClass xtendClass = clazz("class Foo { def dispatch foo(String bar) {} def static dispatch foo(Object bar) {}}");
-		helper.assertError(xtendClass.getMembers().get(0), Xtend2Package.Literals.XTEND_FUNCTION, DISPATCH_FUNCTIONS_MIXED_STATIC_AND_NON_STATIC, 
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, DISPATCH_FUNCTIONS_MIXED_STATIC_AND_NON_STATIC, 
 				"Static", "non-static", "not", "mixed");
 	}
 	
@@ -729,7 +728,7 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 				 "package test class Bar extends XXX { def dispatch foo(Boolean bar) {} def static dispatch foo(Double bar) {} }"
 				,"package test class XXX { def static dispatch foo(String bar) {} def static dispatch foo(Float bar) {}}").iterator();
 		waitForAutoBuild();
-		helper.assertError(iter.next(), Xtend2Package.Literals.XTEND_FUNCTION, DISPATCH_FUNCTIONS_STATIC_EXPECTED, "must", "be", "static");
+		helper.assertError(iter.next(), XTEND_FUNCTION, DISPATCH_FUNCTIONS_STATIC_EXPECTED, "must", "be", "static");
 	}
 	
 	public void testDispatchFunctionStatic3() throws Exception {
@@ -737,7 +736,7 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 				"package test class Bar extends XXX { def dispatch foo(Boolean bar) {} def static dispatch foo(Double bar) {} }"
 				,"package test class XXX { def dispatch foo(String bar) {} def dispatch foo(Float bar) {}}").iterator();
 		waitForAutoBuild();
-		helper.assertError(iter.next(), Xtend2Package.Literals.XTEND_FUNCTION, DISPATCH_FUNCTIONS_NON_STATIC_EXPECTED, "must", "not", "be", "static");
+		helper.assertError(iter.next(), XTEND_FUNCTION, DISPATCH_FUNCTIONS_NON_STATIC_EXPECTED, "must", "not", "be", "static");
 	}
 	
 //	public void testBug343096() throws Exception {
@@ -768,12 +767,12 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testImportUnused() throws Exception {
 		XtendClass clazz = clazz("import java.util.List class X {}");
-		helper.assertWarning(clazz.eContainer(), Xtend2Package.Literals.XTEND_IMPORT, IMPORT_UNUSED);
+		helper.assertWarning(clazz.eContainer(), XTEND_IMPORT, IMPORT_UNUSED);
 	}
 	
 	public void testImportUnused_1() throws Exception {
 		XtendClass clazz = clazz("import java.util.List class X { private java.util.List sb }");
-		helper.assertWarning(clazz.eContainer(), Xtend2Package.Literals.XTEND_IMPORT, IMPORT_UNUSED);
+		helper.assertWarning(clazz.eContainer(), XTEND_IMPORT, IMPORT_UNUSED);
 	}
 	
 	public void testImportUnused_2() throws Exception {
@@ -798,17 +797,17 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testImportDuplicate() throws Exception {
 		XtendClass clazz = clazz("import java.util.List import java.util.List class X { private List sb def foo(){sb}}");
-		helper.assertWarning(clazz.eContainer(), Xtend2Package.Literals.XTEND_IMPORT, IMPORT_DUPLICATE);
+		helper.assertWarning(clazz.eContainer(), XTEND_IMPORT, IMPORT_DUPLICATE);
 	}
 	
 	public void testImportWildcard() throws Exception {
 		XtendClass clazz = clazz("import java.util.* import java.util.List class X { private List sb def foo(){sb}}");
-		helper.assertWarning(clazz.eContainer(), Xtend2Package.Literals.XTEND_IMPORT, IMPORT_WILDCARD_DEPRECATED);
+		helper.assertWarning(clazz.eContainer(), XTEND_IMPORT, IMPORT_WILDCARD_DEPRECATED);
 	}
 	
 	public void testPrivateUnusedField() throws Exception {
 		XtendClass clazz = clazz("import java.util.List class X { private List sb }");
-		helper.assertWarning(clazz.eContainer(), Xtend2Package.Literals.XTEND_FIELD,FIELD_LOCALLY_NEVER_READ , "not");
+		helper.assertWarning(clazz.eContainer(), XTEND_FIELD,FIELD_LOCALLY_NEVER_READ , "not");
 	}
 	
 	public void testUnusedField() throws Exception {
@@ -818,7 +817,7 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testUnusedFunction() throws Exception {
 		XtendClass clazz = clazz("class X { def private foo(String a, Integer b) }");
-		helper.assertWarning(clazz, Xtend2Package.Literals.XTEND_FUNCTION, FUNCTION_LOCALLY_NEVER_USED, "method","foo(String, Integer)","never", "used");
+		helper.assertWarning(clazz, XTEND_FUNCTION, FUNCTION_LOCALLY_NEVER_USED, "method","foo(String, Integer)","never", "used");
 	}
 	
 	public void testUsedFunction() throws Exception {
@@ -828,7 +827,7 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testUnusedDispatchFunction() throws Exception {
 		XtendClass clazz = clazz("class X { def private dispatch foo(String a) def private dispatch foo(Integer a) }");
-		helper.assertWarning(clazz, Xtend2Package.Literals.XTEND_FUNCTION, FUNCTION_LOCALLY_NEVER_USED, "method", "foo(Comparable<?>","never", "used");
+		helper.assertWarning(clazz, XTEND_FUNCTION, FUNCTION_LOCALLY_NEVER_USED, "method", "foo(Comparable<?>","never", "used");
 	}
 	
 	public void testUsedDispatchFunction() throws Exception {
@@ -843,7 +842,7 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testUnusedMemberOfExtensionField() throws Exception {
 		XtendClass clazz = clazz("class X { extension java.util.Collection def foo(){  }}");
-		helper.assertWarning(clazz, Xtend2Package.Literals.XTEND_FIELD,FIELD_LOCALLY_NEVER_READ , "not");
+		helper.assertWarning(clazz, XTEND_FIELD,FIELD_LOCALLY_NEVER_READ , "not");
 	}
 	
 	public void testUsedMemberOfExtensionFieldWithName() throws Exception {
@@ -858,27 +857,27 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testUnusedMemberOfExtensionFieldWithName() throws Exception {
 		XtendClass clazz = clazz("class X { extension java.util.Collection bar def foo(){  }}");
-		helper.assertWarning(clazz, Xtend2Package.Literals.XTEND_FIELD, FIELD_LOCALLY_NEVER_READ , "not");
+		helper.assertWarning(clazz, XTEND_FIELD, FIELD_LOCALLY_NEVER_READ , "not");
 	}
 	
 	public void testUnusedMemberOfExtensionField_No_False_Positive() throws Exception {
 		XtendClass clazz = clazz("class X { extension java.util.Collection foo def bar(){  newArrayList.add('42') }}");
-		helper.assertWarning(clazz, Xtend2Package.Literals.XTEND_FIELD,FIELD_LOCALLY_NEVER_READ , "not");
+		helper.assertWarning(clazz, XTEND_FIELD,FIELD_LOCALLY_NEVER_READ , "not");
 	}
 	
 	public void testConstructorThrownExceptionsOfTypeThrowable() throws Exception {
 		XtendClass clazz = clazz("class X { new () throws Integer { }}");
-		helper.assertError(clazz, Xtend2Package.Literals.XTEND_CONSTRUCTOR, EXCEPTION_NOT_THROWABLE, "No", "can", "subclass", "Throwable");
+		helper.assertError(clazz, XTEND_CONSTRUCTOR, EXCEPTION_NOT_THROWABLE, "No", "can", "subclass", "Throwable");
 	}
 	
 	public void testFunctionThrownExceptionsOfTypeThrowable() throws Exception {
 		XtendClass clazz = clazz("class X { def foo() throws Integer { } }");
-		helper.assertError(clazz, Xtend2Package.Literals.XTEND_FUNCTION, EXCEPTION_NOT_THROWABLE, "No", "can", "subclass", "Throwable");
+		helper.assertError(clazz, XTEND_FUNCTION, EXCEPTION_NOT_THROWABLE, "No", "can", "subclass", "Throwable");
 	}
 	
 	public void testExceptionsDeclaredTwiceOnConstructor() throws Exception {
 		XtendClass clazz = clazz("import java.io.IOException class X { new () throws IOException, IOException { }}");
-		helper.assertError(clazz, Xtend2Package.Literals.XTEND_CONSTRUCTOR, EXCEPTION_DECLARED_TWICE, "Exception", "declared", "twice");
+		helper.assertError(clazz, XTEND_CONSTRUCTOR, EXCEPTION_DECLARED_TWICE, "Exception", "declared", "twice");
 	}
 	
 	public void testExceptionsNotDeclaredTwiceOnConstructor() throws Exception {
@@ -888,7 +887,7 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testExceptionsDeclaredTwiceOnFunction() throws Exception {
 		XtendClass clazz = clazz("import java.io.IOException class X {def foo() throws IOException, IOException { }}");
-		helper.assertError(clazz, Xtend2Package.Literals.XTEND_FUNCTION, EXCEPTION_DECLARED_TWICE, "Exception", "declared", "twice");
+		helper.assertError(clazz, XTEND_FUNCTION, EXCEPTION_DECLARED_TWICE, "Exception", "declared", "twice");
 	}
 	
 	public void testExceptionsNotDeclaredTwiceOnFunction() throws Exception {
@@ -898,11 +897,17 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testNoAssignmentsToThisConstructor() throws Exception {
         XtendClass clazz = clazz("class X { new (String y) { this = new X('bar') val x = 2 x = 1}}");
-        helper.assertError(clazz, XbasePackage.Literals.XASSIGNMENT, LEFT_HAND_SIDE_MUST_BE_VARIABLE, "Left-hand side", "must be", "variable");
+        helper.assertError(clazz, XASSIGNMENT, LEFT_HAND_SIDE_MUST_BE_VARIABLE, "Left-hand side", "must be", "variable");
     }
 		    
     public void testNoAssignmentsToThisFunction() throws Exception {
         XtendClass clazz = clazz("class X { def foo(){ this = new X() val x = 1 x = 2}}");
-        helper.assertError(clazz, XbasePackage.Literals.XASSIGNMENT, LEFT_HAND_SIDE_MUST_BE_VARIABLE, "Left-hand side", "must be", "variable");
+        helper.assertError(clazz, XASSIGNMENT, LEFT_HAND_SIDE_MUST_BE_VARIABLE, "Left-hand side", "must be", "variable");
+    }
+    
+    public void testDispatchNonDispatchClash() throws Exception {
+    	XtendClass clazz = clazz("class Foo { def dispatch foo(Object x) {} def foo(int x) {} }");
+    	helper.assertWarning(clazz.getMembers().get(0), XTEND_FUNCTION, DISPATCH_PLAIN_FUNCTION_NAME_CLASH, "dispatch", "same", "name", "parameters");
+    	helper.assertWarning(clazz.getMembers().get(1), XTEND_FUNCTION, DISPATCH_PLAIN_FUNCTION_NAME_CLASH, "dispatch", "same", "name", "parameters");
     }
 }

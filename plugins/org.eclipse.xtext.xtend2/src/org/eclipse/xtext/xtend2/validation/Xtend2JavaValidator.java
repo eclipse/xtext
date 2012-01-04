@@ -59,6 +59,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
@@ -776,6 +777,7 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 		JvmGenericType type = associations.getInferredType(clazz);
 		if (type != null) {
 			Multimap<Pair<String, Integer>, JvmOperation> dispatchMethods = dispatchingSupport.getDispatchMethods(type);
+			checkDispatchNonDispatchConflict(clazz, dispatchMethods);
 			for (Pair<String, Integer> key : dispatchMethods.keySet()) {
 				Collection<JvmOperation> dispatchOperations = dispatchMethods.get(key);
 				JvmOperation syntheticDispatchMethod = dispatchingSupport.findSyntheticDispatchMethod(clazz, key);
@@ -866,6 +868,26 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 						}
 					}
 				}
+			}
+		}
+	}
+
+	protected void checkDispatchNonDispatchConflict(XtendClass clazz,
+			Multimap<Pair<String, Integer>, JvmOperation> dispatchMethods) {
+		Multimap<Pair<String, Integer>, XtendFunction> nonDispatchMethods = HashMultimap.create();
+		for(XtendFunction method: filter(clazz.getMembers(), XtendFunction.class)) {
+			if(!method.isDispatch()) {
+				nonDispatchMethods.put(Tuples.create(method.getName(), method.getParameters().size()), method);
+			}
+		}
+		for(Pair<String, Integer> dispatchSignature: dispatchMethods.keySet()) {
+			if(nonDispatchMethods.containsKey(dispatchSignature)) {
+				for(XtendFunction function: nonDispatchMethods.get(dispatchSignature)) 
+					warning("Non-dispatch method has same name and number of parameters as dispatch method", 
+							function, XTEND_FUNCTION__NAME, DISPATCH_PLAIN_FUNCTION_NAME_CLASH);
+				for(JvmOperation operation: dispatchMethods.get(dispatchSignature)) 
+					warning("Dispatch method has same name and number of parameters as non-dispatch method", 
+							associations.getXtendFunction(operation), XTEND_FUNCTION__NAME, DISPATCH_PLAIN_FUNCTION_NAME_CLASH);
 			}
 		}
 	}
