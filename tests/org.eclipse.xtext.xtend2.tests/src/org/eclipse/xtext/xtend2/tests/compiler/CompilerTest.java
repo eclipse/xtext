@@ -60,6 +60,18 @@ import com.google.inject.Injector;
  */
 public class CompilerTest extends AbstractXtend2TestCase {
 	
+	public void testBug367763() throws Exception {
+		String code = 
+				"  def String foo(Number x) { throw new IllegalArgumentException() }\n" + 
+				"\n" + 
+				"  def foo(Object x) {'Object'}\n" + 
+				"\n" + 
+				"  def test(Object it) {\n" + 
+				"    foo()\n" + 
+				"  }";
+		invokeAndExpect2("Object",code,"test", new Object());
+	}
+	
 	public void testClosuresAndExceptions() throws Exception {
 		String code = "" +
 				"def test() {\n" +
