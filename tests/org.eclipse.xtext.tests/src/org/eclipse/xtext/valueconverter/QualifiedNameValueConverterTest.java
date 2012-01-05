@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.valueconverter;
 
+import org.eclipse.xtext.conversion.impl.QualifiedNameValueConverter;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.valueconverter.qualifiedName.Element;
@@ -18,6 +19,7 @@ import org.eclipse.xtext.valueconverter.qualifiedName.QualifiedNameFactory;
 public class QualifiedNameValueConverterTest extends AbstractXtextTests {
 
 	public static final String KEYWORD = "keyword";
+	
 
 	@Override
 	protected void setUp() throws Exception {
@@ -52,6 +54,10 @@ public class QualifiedNameValueConverterTest extends AbstractXtextTests {
 		XtextResource resource = getResource(model, "tempuri");
 		Element element = (Element) resource.getContents().get(0);
 		assertEquals(nameAsValue, element.getQualifiedName());
+	}
+	
+	public void testBug367949() throws Exception {
+		assertEquals("org.eclipse.create", get(QualifiedNameValueConverter.class).toValue("org.eclipse.^create", null));
 	}
 	
 }
