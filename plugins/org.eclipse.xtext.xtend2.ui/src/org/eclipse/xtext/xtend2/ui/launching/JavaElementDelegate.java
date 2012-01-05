@@ -27,7 +27,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.builder.DerivedResourceMarkers;
+import org.eclipse.xtext.generator.IDerivedResourceMarkers;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -54,7 +54,7 @@ public class JavaElementDelegate implements IAdaptable {
 	private IFileEditorInput editorInput;
 
 	@Inject
-	private DerivedResourceMarkers derivedResourceMarkers;
+	private IDerivedResourceMarkers derivedResourceMarkers;
 
 	@Inject
 	private FileExtensionProvider fileExtensionProvider;
