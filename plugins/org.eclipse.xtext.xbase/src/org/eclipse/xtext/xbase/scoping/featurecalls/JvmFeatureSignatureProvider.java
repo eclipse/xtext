@@ -46,6 +46,8 @@ public class JvmFeatureSignatureProvider {
 			for (int i = 0; i < params.size(); i++) {
 				if (i != 0)
 					builder.append(",");
+				if (i<numberOfIrrelevantArguments)
+					builder.append("implicit ");
 				JvmTypeReference resolvedParameterType = ctx.getLowerBound(params.get(i).getParameterType());
 				if (resolvedParameterType != null)
 					builder.append(resolvedParameterType.getIdentifier());
@@ -53,9 +55,6 @@ public class JvmFeatureSignatureProvider {
 					builder.append("null");
 			}
 			builder.append(")");
-			if (numberOfIrrelevantArguments > 0) {
-				builder.append("-implicitArguments:").append(numberOfIrrelevantArguments);
-			}
 			return builder.toString();
 		}
 	}
