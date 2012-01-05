@@ -5,7 +5,7 @@
  */
 package org.eclipse.xtext.xbase;
 
-import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,30 +27,30 @@ import org.eclipse.xtext.common.types.JvmType;
 public interface XInstanceOfExpression extends XExpression
 {
 	/**
-	 * Returns the value of the '<em><b>Type</b></em>' reference.
+	 * Returns the value of the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Type</em>' reference isn't clear,
+	 * If the meaning of the '<em>Type</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Type</em>' reference.
-	 * @see #setType(JvmType)
+	 * @return the value of the '<em>Type</em>' containment reference.
+	 * @see #setType(JvmTypeReference)
 	 * @see org.eclipse.xtext.xbase.XbasePackage#getXInstanceOfExpression_Type()
-	 * @model required="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	JvmType getType();
+	JvmTypeReference getType();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XInstanceOfExpression#getType <em>Type</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XInstanceOfExpression#getType <em>Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type</em>' reference.
+	 * @param value the new value of the '<em>Type</em>' containment reference.
 	 * @see #getType()
 	 * @generated
 	 */
-	void setType(JvmType value);
+	void setType(JvmTypeReference value);
 
 	/**
 	 * Returns the value of the '<em><b>Expression</b></em>' containment reference.

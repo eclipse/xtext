@@ -1229,7 +1229,7 @@ public interface XbasePackage extends EPackage
 	int XINSTANCE_OF_EXPRESSION = 23;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * The feature id for the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2299,10 +2299,10 @@ public interface XbasePackage extends EPackage
 	EClass getXInstanceOfExpression();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.xtext.xbase.XInstanceOfExpression#getType <em>Type</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XInstanceOfExpression#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Type</em>'.
+	 * @return the meta object for the containment reference '<em>Type</em>'.
 	 * @see org.eclipse.xtext.xbase.XInstanceOfExpression#getType()
 	 * @see #getXInstanceOfExpression()
 	 * @generated
@@ -3149,7 +3149,7 @@ public interface XbasePackage extends EPackage
 		EClass XINSTANCE_OF_EXPRESSION = eINSTANCE.getXInstanceOfExpression();
 
 		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

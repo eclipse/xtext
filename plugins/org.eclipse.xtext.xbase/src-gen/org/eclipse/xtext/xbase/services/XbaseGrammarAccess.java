@@ -367,8 +367,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Action cXInstanceOfExpressionExpressionAction_1_0_0_0_0 = (Action)cGroup_1_0_0_0.eContents().get(0);
 		private final Keyword cInstanceofKeyword_1_0_0_0_1 = (Keyword)cGroup_1_0_0_0.eContents().get(1);
 		private final Assignment cTypeAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
-		private final CrossReference cTypeJvmTypeCrossReference_1_0_1_0 = (CrossReference)cTypeAssignment_1_0_1.eContents().get(0);
-		private final RuleCall cTypeJvmTypeQualifiedNameParserRuleCall_1_0_1_0_1 = (RuleCall)cTypeJvmTypeCrossReference_1_0_1_0.eContents().get(1);
+		private final RuleCall cTypeJvmTypeReferenceParserRuleCall_1_0_1_0 = (RuleCall)cTypeAssignment_1_0_1.eContents().get(0);
 		private final Group cGroup_1_1 = (Group)cAlternatives_1.eContents().get(1);
 		private final Group cGroup_1_1_0 = (Group)cGroup_1_1.eContents().get(0);
 		private final Group cGroup_1_1_0_0 = (Group)cGroup_1_1_0.eContents().get(0);
@@ -380,25 +379,25 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRightOperandXOtherOperatorExpressionParserRuleCall_1_1_1_0 = (RuleCall)cRightOperandAssignment_1_1_1.eContents().get(0);
 		
 		//XRelationalExpression returns XExpression:
-		//	XOtherOperatorExpression (=> ({XInstanceOfExpression.expression=current} "instanceof")
-		//	type=[types::JvmType|QualifiedName] | => ({XBinaryOperation.leftOperand=current}
-		//	feature=[types::JvmIdentifiableElement|OpCompare]) rightOperand=XOtherOperatorExpression)*;
+		//	XOtherOperatorExpression (=> ({XInstanceOfExpression.expression=current} "instanceof") type=JvmTypeReference | =>
+		//	({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpCompare])
+		//	rightOperand=XOtherOperatorExpression)*;
 		public ParserRule getRule() { return rule; }
 
-		//XOtherOperatorExpression (=> ({XInstanceOfExpression.expression=current} "instanceof")
-		//type=[types::JvmType|QualifiedName] | => ({XBinaryOperation.leftOperand=current}
-		//feature=[types::JvmIdentifiableElement|OpCompare]) rightOperand=XOtherOperatorExpression)*
+		//XOtherOperatorExpression (=> ({XInstanceOfExpression.expression=current} "instanceof") type=JvmTypeReference | =>
+		//({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpCompare])
+		//rightOperand=XOtherOperatorExpression)*
 		public Group getGroup() { return cGroup; }
 
 		//XOtherOperatorExpression
 		public RuleCall getXOtherOperatorExpressionParserRuleCall_0() { return cXOtherOperatorExpressionParserRuleCall_0; }
 
-		//(=> ({XInstanceOfExpression.expression=current} "instanceof") type=[types::JvmType|QualifiedName] | =>
+		//(=> ({XInstanceOfExpression.expression=current} "instanceof") type=JvmTypeReference | =>
 		//({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpCompare])
 		//rightOperand=XOtherOperatorExpression)*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//=> ({XInstanceOfExpression.expression=current} "instanceof") type=[types::JvmType|QualifiedName]
+		//=> ({XInstanceOfExpression.expression=current} "instanceof") type=JvmTypeReference
 		public Group getGroup_1_0() { return cGroup_1_0; }
 
 		//=> ({XInstanceOfExpression.expression=current} "instanceof")
@@ -413,14 +412,11 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//"instanceof"
 		public Keyword getInstanceofKeyword_1_0_0_0_1() { return cInstanceofKeyword_1_0_0_0_1; }
 
-		//type=[types::JvmType|QualifiedName]
+		//type=JvmTypeReference
 		public Assignment getTypeAssignment_1_0_1() { return cTypeAssignment_1_0_1; }
 
-		//[types::JvmType|QualifiedName]
-		public CrossReference getTypeJvmTypeCrossReference_1_0_1_0() { return cTypeJvmTypeCrossReference_1_0_1_0; }
-
-		//QualifiedName
-		public RuleCall getTypeJvmTypeQualifiedNameParserRuleCall_1_0_1_0_1() { return cTypeJvmTypeQualifiedNameParserRuleCall_1_0_1_0_1; }
+		//JvmTypeReference
+		public RuleCall getTypeJvmTypeReferenceParserRuleCall_1_0_1_0() { return cTypeJvmTypeReferenceParserRuleCall_1_0_1_0; }
 
 		//=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpCompare])
 		//rightOperand=XOtherOperatorExpression
@@ -2756,9 +2752,9 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XRelationalExpression returns XExpression:
-	//	XOtherOperatorExpression (=> ({XInstanceOfExpression.expression=current} "instanceof")
-	//	type=[types::JvmType|QualifiedName] | => ({XBinaryOperation.leftOperand=current}
-	//	feature=[types::JvmIdentifiableElement|OpCompare]) rightOperand=XOtherOperatorExpression)*;
+	//	XOtherOperatorExpression (=> ({XInstanceOfExpression.expression=current} "instanceof") type=JvmTypeReference | =>
+	//	({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpCompare])
+	//	rightOperand=XOtherOperatorExpression)*;
 	public XRelationalExpressionElements getXRelationalExpressionAccess() {
 		return (pXRelationalExpression != null) ? pXRelationalExpression : (pXRelationalExpression = new XRelationalExpressionElements());
 	}

@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
@@ -36,14 +36,14 @@ import org.eclipse.xtext.xbase.XbasePackage;
 public class XInstanceOfExpressionImpl extends XExpressionImpl implements XInstanceOfExpression
 {
 	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getType()
 	 * @generated
 	 * @ordered
 	 */
-	protected JvmType type;
+	protected JvmTypeReference type;
 
 	/**
 	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
@@ -81,27 +81,7 @@ public class XInstanceOfExpressionImpl extends XExpressionImpl implements XInsta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JvmType getType()
-	{
-		if (type != null && type.eIsProxy())
-		{
-			InternalEObject oldType = (InternalEObject)type;
-			type = (JvmType)eResolveProxy(oldType);
-			if (type != oldType)
-			{
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, XbasePackage.XINSTANCE_OF_EXPRESSION__TYPE, oldType, type));
-			}
-		}
-		return type;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JvmType basicGetType()
+	public JvmTypeReference getType()
 	{
 		return type;
 	}
@@ -111,12 +91,37 @@ public class XInstanceOfExpressionImpl extends XExpressionImpl implements XInsta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setType(JvmType newType)
+	public NotificationChain basicSetType(JvmTypeReference newType, NotificationChain msgs)
 	{
-		JvmType oldType = type;
+		JvmTypeReference oldType = type;
 		type = newType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XINSTANCE_OF_EXPRESSION__TYPE, oldType, type));
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XbasePackage.XINSTANCE_OF_EXPRESSION__TYPE, oldType, newType);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setType(JvmTypeReference newType)
+	{
+		if (newType != type)
+		{
+			NotificationChain msgs = null;
+			if (type != null)
+				msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XbasePackage.XINSTANCE_OF_EXPRESSION__TYPE, null, msgs);
+			if (newType != null)
+				msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XbasePackage.XINSTANCE_OF_EXPRESSION__TYPE, null, msgs);
+			msgs = basicSetType(newType, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XINSTANCE_OF_EXPRESSION__TYPE, newType, newType));
 	}
 
 	/**
@@ -177,6 +182,8 @@ public class XInstanceOfExpressionImpl extends XExpressionImpl implements XInsta
 	{
 		switch (featureID)
 		{
+			case XbasePackage.XINSTANCE_OF_EXPRESSION__TYPE:
+				return basicSetType(null, msgs);
 			case XbasePackage.XINSTANCE_OF_EXPRESSION__EXPRESSION:
 				return basicSetExpression(null, msgs);
 		}
@@ -194,8 +201,7 @@ public class XInstanceOfExpressionImpl extends XExpressionImpl implements XInsta
 		switch (featureID)
 		{
 			case XbasePackage.XINSTANCE_OF_EXPRESSION__TYPE:
-				if (resolve) return getType();
-				return basicGetType();
+				return getType();
 			case XbasePackage.XINSTANCE_OF_EXPRESSION__EXPRESSION:
 				return getExpression();
 		}
@@ -213,7 +219,7 @@ public class XInstanceOfExpressionImpl extends XExpressionImpl implements XInsta
 		switch (featureID)
 		{
 			case XbasePackage.XINSTANCE_OF_EXPRESSION__TYPE:
-				setType((JvmType)newValue);
+				setType((JvmTypeReference)newValue);
 				return;
 			case XbasePackage.XINSTANCE_OF_EXPRESSION__EXPRESSION:
 				setExpression((XExpression)newValue);
@@ -233,7 +239,7 @@ public class XInstanceOfExpressionImpl extends XExpressionImpl implements XInsta
 		switch (featureID)
 		{
 			case XbasePackage.XINSTANCE_OF_EXPRESSION__TYPE:
-				setType((JvmType)null);
+				setType((JvmTypeReference)null);
 				return;
 			case XbasePackage.XINSTANCE_OF_EXPRESSION__EXPRESSION:
 				setExpression((XExpression)null);

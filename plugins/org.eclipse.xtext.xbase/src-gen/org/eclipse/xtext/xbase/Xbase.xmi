@@ -209,12 +209,7 @@
               </elements>
             </elements>
             <elements xsi:type="xtext:Assignment" feature="type" operator="=">
-              <terminal xsi:type="xtext:CrossReference">
-                <type metamodel="/0/@metamodelDeclarations.1">
-                  <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmType"/>
-                </type>
-                <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.52"/>
-              </terminal>
+              <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
             </elements>
           </elements>
           <elements xsi:type="xtext:Group">

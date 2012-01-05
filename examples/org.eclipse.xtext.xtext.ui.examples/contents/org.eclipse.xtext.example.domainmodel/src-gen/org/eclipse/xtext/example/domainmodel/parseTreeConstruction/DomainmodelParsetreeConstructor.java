@@ -2956,15 +2956,15 @@ protected class XEqualityExpression_RightOperandAssignment_1_1 extends Assignmen
 /************ begin Rule XRelationalExpression ****************
  *
  * XRelationalExpression returns XExpression:
- * 	XOtherOperatorExpression (=> ({XInstanceOfExpression.expression=current} "instanceof")
- * 	type=[types::JvmType|QualifiedName] | => ({XBinaryOperation.leftOperand=current}
- * 	feature=[types::JvmIdentifiableElement|OpCompare]) rightOperand=XOtherOperatorExpression)*;
+ * 	XOtherOperatorExpression (=> ({XInstanceOfExpression.expression=current} "instanceof") type=JvmTypeReference | =>
+ * 	({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpCompare])
+ * 	rightOperand=XOtherOperatorExpression)*;
  *
  **/
 
-// XOtherOperatorExpression (=> ({XInstanceOfExpression.expression=current} "instanceof")
-// type=[types::JvmType|QualifiedName] | => ({XBinaryOperation.leftOperand=current}
-// feature=[types::JvmIdentifiableElement|OpCompare]) rightOperand=XOtherOperatorExpression)*
+// XOtherOperatorExpression (=> ({XInstanceOfExpression.expression=current} "instanceof") type=JvmTypeReference | =>
+// ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpCompare])
+// rightOperand=XOtherOperatorExpression)*
 protected class XRelationalExpression_Group extends GroupToken {
 	
 	public XRelationalExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3050,7 +3050,7 @@ protected class XRelationalExpression_XOtherOperatorExpressionParserRuleCall_0 e
 	}	
 }
 
-// (=> ({XInstanceOfExpression.expression=current} "instanceof") type=[types::JvmType|QualifiedName] | =>
+// (=> ({XInstanceOfExpression.expression=current} "instanceof") type=JvmTypeReference | =>
 // ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpCompare])
 // rightOperand=XOtherOperatorExpression)*
 protected class XRelationalExpression_Alternatives_1 extends AlternativesToken {
@@ -3083,7 +3083,7 @@ protected class XRelationalExpression_Alternatives_1 extends AlternativesToken {
 
 }
 
-// => ({XInstanceOfExpression.expression=current} "instanceof") type=[types::JvmType|QualifiedName]
+// => ({XInstanceOfExpression.expression=current} "instanceof") type=JvmTypeReference
 protected class XRelationalExpression_Group_1_0 extends GroupToken {
 	
 	public XRelationalExpression_Group_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3210,7 +3210,7 @@ protected class XRelationalExpression_InstanceofKeyword_1_0_0_0_1 extends Keywor
 
 
 
-// type=[types::JvmType|QualifiedName]
+// type=JvmTypeReference
 protected class XRelationalExpression_TypeAssignment_1_0_1 extends AssignmentToken  {
 	
 	public XRelationalExpression_TypeAssignment_1_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3225,7 +3225,7 @@ protected class XRelationalExpression_TypeAssignment_1_0_1 extends AssignmentTok
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new XRelationalExpression_Group_1_0_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new JvmTypeReference_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3234,17 +3234,26 @@ protected class XRelationalExpression_TypeAssignment_1_0_1 extends AssignmentTok
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("type",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("type");
-		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getXRelationalExpressionAccess().getTypeJvmTypeCrossReference_1_0_1_0().getType().getClassifier())) {
-				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getXRelationalExpressionAccess().getTypeJvmTypeCrossReference_1_0_1_0(); 
-				return obj;
+			if(param.isInstanceOf(grammarAccess.getJvmTypeReferenceRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getXRelationalExpressionAccess().getTypeJvmTypeReferenceParserRuleCall_1_0_1_0(); 
+				consumed = obj;
+				return param;
 			}
 		}
 		return null;
 	}
 
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new XRelationalExpression_Group_1_0_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
 }
 
 

@@ -126,7 +126,7 @@ ruleXRelationalExpression :
 	ruleXOtherOperatorExpression (
 		( (
 		'instanceof'
-		) => 'instanceof' ) ruleQualifiedName |
+		) => 'instanceof' ) ruleJvmTypeReference |
 		( (
 		ruleOpCompare
 		) => ruleOpCompare ) ruleXOtherOperatorExpression
