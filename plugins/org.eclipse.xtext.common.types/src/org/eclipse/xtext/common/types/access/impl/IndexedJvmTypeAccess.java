@@ -9,6 +9,7 @@ package org.eclipse.xtext.common.types.access.impl;
 
 import java.util.Iterator;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -35,6 +36,8 @@ import com.google.inject.Inject;
  */
 // TODO honor container configuration
 public class IndexedJvmTypeAccess {
+	
+	private final static Logger logger = Logger.getLogger(IndexedJvmTypeAccess.class);
 
 	@Inject
 	private ResourceDescriptionsProvider resourceDescriptionsProvider;
@@ -95,7 +98,12 @@ public class IndexedJvmTypeAccess {
 				paren = fragment.length();
 			int dollar = fragment.lastIndexOf('$', paren);
 			int dot = fragment.lastIndexOf('.', paren);
-			String subFragment = fragment.substring(0, Math.max(dollar, dot));
+			final int max = Math.max(dollar, dot);
+			if (max == -1) {
+				logger.warn("Couldn't resolve java object for root type "+rootType!=null?rootType.getQualifiedName():"null"+" and fragment '"+fragment);
+				return null;
+			}
+			String subFragment = fragment.substring(0, max);
 			EObject container = resolveJavaObject(rootType, subFragment);
 			if (container instanceof JvmDeclaredType) {
 				EList<JvmMember> members = ((JvmDeclaredType) container).getMembers();
