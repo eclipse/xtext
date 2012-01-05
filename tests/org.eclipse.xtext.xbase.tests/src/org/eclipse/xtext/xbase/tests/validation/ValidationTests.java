@@ -458,6 +458,40 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertNoError(expression, OBSOLETE_INSTANCEOF);
 	}
 	
+	public void testInstanceof_9() throws Exception {
+		XExpression expression = expression("[|'foo'] instanceof ()=>String");
+		helper.assertError(expression, XINSTANCE_OF_EXPRESSION, INVALID_INSTANCEOF, "parameterized");
+		helper.assertNoError(expression, OBSOLETE_INSTANCEOF);
+	}
+	
+	public void testInstanceof_10() throws Exception {
+		XExpression expression = expression("true instanceof Boolean");
+		helper.assertError(expression, XINSTANCE_OF_EXPRESSION, INVALID_INSTANCEOF, "Incompatible");
+		helper.assertNoError(expression, OBSOLETE_INSTANCEOF);
+	}
+	
+	public void testInstanceof_11() throws Exception {
+		XExpression expression = expression("newArrayList('foo','bar') instanceof String[]");
+		helper.assertError(expression, XINSTANCE_OF_EXPRESSION, INVALID_INSTANCEOF, "Incompatible");
+		helper.assertNoError(expression, OBSOLETE_INSTANCEOF);
+	}
+	
+	public void testInstanceof_12() throws Exception {
+		XExpression expression = expression("null instanceof String[]");
+		helper.assertNoErrors(expression);
+	}
+	
+	public void testInstanceof_13() throws Exception {
+		XExpression expression = expression("null instanceof java.util.List<?>");
+		helper.assertNoErrors(expression);
+	}
+	
+	public void testInstanceof_14() throws Exception {
+		XExpression expression = expression("'foo' instanceof java.util.List<? extends Object>");
+		helper.assertError(expression, XINSTANCE_OF_EXPRESSION, INVALID_INSTANCEOF, "parameterized");
+		helper.assertNoError(expression, OBSOLETE_INSTANCEOF);
+	}
+	
 	public void testPrimitiveAsTypeGuard() throws Exception {
 		XCasePart expression = ((XSwitchExpression) expression("switch(new Object()) { int: 1 }")).getCases().get(0);
 		helper.assertError(expression, XCASE_PART, INVALID_USE_OF_TYPE, "primitive", "not", "allowed", "type", "guard");
