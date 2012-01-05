@@ -7,12 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.util;
 
+import static com.google.common.collect.Iterables.*;
+
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmMultiTypeReference;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 
 import com.google.inject.Inject;
@@ -119,25 +127,56 @@ public class Primitives {
 	}
 
 	public JvmTypeReference asPrimitiveIfWrapperType(JvmTypeReference type) {
-		if (typeReferences.is(type, Byte.class)) {
-			return typeReferences.getTypeForName(Byte.TYPE, type.getType());
-		} else if (typeReferences.is(type, Short.class)) {
-			return typeReferences.getTypeForName(Short.TYPE, type.getType());
-		} else if (typeReferences.is(type, Character.class)) {
-			return typeReferences.getTypeForName(Character.TYPE, type.getType());
-		} else if (typeReferences.is(type, Integer.class)) {
-			return typeReferences.getTypeForName(Integer.TYPE, type.getType());
-		} else if (typeReferences.is(type, Long.class)) {
-			return typeReferences.getTypeForName(Long.TYPE, type.getType());
-		} else if (typeReferences.is(type, Float.class)) {
-			return typeReferences.getTypeForName(Float.TYPE, type.getType());
-		} else if (typeReferences.is(type, Double.class)) {
-			return typeReferences.getTypeForName(Double.TYPE, type.getType());
-		} else if (typeReferences.is(type, Boolean.class)) {
-			return typeReferences.getTypeForName(Boolean.TYPE, type.getType());
-		} else if (typeReferences.is(type, Void.class)) {
-			return typeReferences.getTypeForName(Void.TYPE, type.getType());
-		}
-		return type;
+		return new AbstractTypeReferenceVisitor.InheritanceAware<JvmTypeReference>() {
+
+			@Override
+			public JvmTypeReference doVisitMultiTypeReference(JvmMultiTypeReference reference) {
+				for(JvmTypeReference ref: reference.getReferences()) {
+					JvmTypeReference refAsPrimitiveIfWrapper = visit(ref);
+					if(refAsPrimitiveIfWrapper != ref)
+						return refAsPrimitiveIfWrapper;
+				}
+				return reference;
+			}
+			
+			@Override
+			public JvmTypeReference doVisitParameterizedTypeReference(JvmParameterizedTypeReference type) {
+				if(type.getType() instanceof JvmTypeParameter) {
+					EList<JvmTypeConstraint> constraints = ((JvmTypeParameter)type.getType()).getConstraints();
+					for(JvmUpperBound upperBound: filter(constraints, JvmUpperBound.class)) {
+						JvmTypeReference upperBoundType = upperBound.getTypeReference();
+						JvmTypeReference asPrimitive = visit(upperBoundType);
+						if(asPrimitive != upperBoundType) 
+							return asPrimitive;
+					}
+					return type;
+				} else if (typeReferences.is(type, Byte.class)) {
+					return typeReferences.getTypeForName(Byte.TYPE, type.getType());
+				} else if (typeReferences.is(type, Short.class)) {
+					return typeReferences.getTypeForName(Short.TYPE, type.getType());
+				} else if (typeReferences.is(type, Character.class)) {
+					return typeReferences.getTypeForName(Character.TYPE, type.getType());
+				} else if (typeReferences.is(type, Integer.class)) {
+					return typeReferences.getTypeForName(Integer.TYPE, type.getType());
+				} else if (typeReferences.is(type, Long.class)) {
+					return typeReferences.getTypeForName(Long.TYPE, type.getType());
+				} else if (typeReferences.is(type, Float.class)) {
+					return typeReferences.getTypeForName(Float.TYPE, type.getType());
+				} else if (typeReferences.is(type, Double.class)) {
+					return typeReferences.getTypeForName(Double.TYPE, type.getType());
+				} else if (typeReferences.is(type, Boolean.class)) {
+					return typeReferences.getTypeForName(Boolean.TYPE, type.getType());
+				} else if (typeReferences.is(type, Void.class)) {
+					return typeReferences.getTypeForName(Void.TYPE, type.getType());
+				}
+				return type;
+			}
+			
+			@Override
+			public JvmTypeReference doVisitTypeReference(JvmTypeReference reference) {
+				return reference;
+			}
+		}.visit(type);
+		
 	}
 }
