@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.navigation;
+package org.eclipse.xtext.common.types.ui.navigation;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;

@@ -13,9 +13,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.IMember;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.xtext.builder.navigation.IDerivedMemberAwareEditorOpener;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.access.jdt.TypeURIHelper;
+import org.eclipse.xtext.common.types.ui.navigation.IDerivedMemberAwareEditorOpener;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.LanguageSpecificURIEditorOpener;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
@@ -25,7 +25,6 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class DerivedMemberAwareEditorOpener extends LanguageSpecificURIEditorOpener implements IDerivedMemberAwareEditorOpener{
 
 	@Inject

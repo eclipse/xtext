@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.xtext.builder.internal.Activator;
+import org.eclipse.xtext.generator.IDerivedResourceMarkers;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 
 import com.google.inject.Inject;
@@ -32,18 +33,11 @@ import com.google.inject.Inject;
  */
 public class DerivedResourceCleanerJob extends Job {
 	public static final Object DERIVED_RESOURCE_CLEANER_JOB_FAMILY = new Object();
-	private DerivedResourceMarkers derivedResourceMarkers;
+	
+	@Inject
+	private IDerivedResourceMarkers derivedResourceMarkers;
 	private IProject projectToClean;
 	private String folderNameToClean;
-
-	public DerivedResourceMarkers getDerivedResourceMarkers() {
-		return derivedResourceMarkers;
-	}
-
-	@Inject
-	public void setDerivedResourceMarkers(DerivedResourceMarkers derivedResourceMarkers) {
-		this.derivedResourceMarkers = derivedResourceMarkers;
-	}
 
 	public DerivedResourceCleanerJob() {
 		super(Messages.DerivedResourceCleanerJob_JOB_NAME);

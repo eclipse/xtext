@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.eclipse.xtext.builder" version="2">
+    <resource path="src/org/eclipse/xtext/builder/DerivedResourceCleanerJob.java" type="org.eclipse.xtext.builder.DerivedResourceCleanerJob">
+        <filter comment="API cleanup" id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.builder.DerivedResourceCleanerJob"/>
+                <message_argument value="getDerivedResourceMarkers()"/>
+            </message_arguments>
+        </filter>
+        <filter comment="API cleanup" id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.builder.DerivedResourceCleanerJob"/>
+                <message_argument value="setDerivedResourceMarkers(DerivedResourceMarkers)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>

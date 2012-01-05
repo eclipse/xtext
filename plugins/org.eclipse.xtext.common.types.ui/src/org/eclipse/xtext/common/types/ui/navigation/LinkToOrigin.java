@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.navigation;
+package org.eclipse.xtext.common.types.ui.navigation;
 
 import org.eclipse.jdt.core.IMember;
 import org.eclipse.xtext.ui.editor.hyperlinking.XtextHyperlink;
