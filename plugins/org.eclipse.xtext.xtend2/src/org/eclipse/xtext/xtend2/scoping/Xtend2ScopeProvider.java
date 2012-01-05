@@ -245,6 +245,7 @@ public class Xtend2ScopeProvider extends XbaseWithAnnotationsScopeProvider {
 			EObject implicitReceiver = implicitThis.getEObjectOrProxy();
 			if (implicitReceiver instanceof JvmIdentifiableElement) {
 				JvmTypeReference receiverType = getTypeProvider().getTypeForIdentifiable((JvmIdentifiableElement) implicitReceiver);
+				receiverType = unkownToObject(receiverType, featureCall);
 				if (receiverType != null) {
 					XFeatureCall receiver = XbaseFactory.eINSTANCE.createXFeatureCall();
 					receiver.setFeature((JvmIdentifiableElement) implicitReceiver);
