@@ -184,7 +184,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	protected void _toJavaExpression(XInstanceOfExpression expr, IAppendable b) {
 		b.append("(");
 		internalToJavaExpression(expr.getExpression(), b);
-		b.append(" instanceof ").append(expr.getType()).append(")");
+		b.append(" instanceof ");
+		serialize(expr.getType(), expr, b);
+		b.append(")");
 	}
 
 	protected void _toJavaStatement(XInstanceOfExpression expr, IAppendable b, boolean isReferenced) {
