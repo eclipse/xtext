@@ -43,8 +43,8 @@ public class JvmFeatureSignatureProvider {
 			builder.append(object.getSimpleName());
 			builder.append("(");
 			List<JvmFormalParameter> params = object.getParameters();
-			for (int i = numberOfIrrelevantArguments; i < params.size(); i++) {
-				if (i != numberOfIrrelevantArguments)
+			for (int i = 0; i < params.size(); i++) {
+				if (i != 0)
 					builder.append(",");
 				JvmTypeReference resolvedParameterType = ctx.getLowerBound(params.get(i).getParameterType());
 				if (resolvedParameterType != null)
@@ -53,6 +53,9 @@ public class JvmFeatureSignatureProvider {
 					builder.append("null");
 			}
 			builder.append(")");
+			if (numberOfIrrelevantArguments > 0) {
+				builder.append("-implicitArguments:").append(numberOfIrrelevantArguments);
+			}
 			return builder.toString();
 		}
 	}

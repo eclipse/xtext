@@ -60,7 +60,7 @@ public class XbaseScopeProviderTest extends AbstractXbaseTestCase {
 		XExpression expression = expression("(null as java.util.List<String>).map(null)", true);
 		IScope scope = provider.getScope(expression, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
 		Iterable<IEObjectDescription> elements = scope.getElements(QualifiedName.create("map"));
-		assertEquals(elements.toString(), 1, size(elements));
+		assertEquals(elements.toString(), 2, size(elements));
 		IEObjectDescription description = elements.iterator().next();
 		JvmFeature feature = (JvmFeature) description.getEObjectOrProxy();
 		assertEquals(ListExtensions.class.getCanonicalName(), feature.getDeclaringType().getIdentifier());
