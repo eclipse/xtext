@@ -1209,7 +1209,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
-	@Test public void testClosure_19() throws Exception {
+	@Test public void testClosureConversion_01() throws Exception {
 		assertEvaluatesTo(newArrayList("bar","foo"), 
 				"{" +
 						"  val client = new testdata.ClosureClient()" +
