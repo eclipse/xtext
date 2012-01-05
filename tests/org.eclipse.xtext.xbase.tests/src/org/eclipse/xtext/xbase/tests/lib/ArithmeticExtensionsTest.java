@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
+import org.eclipse.xtext.xbase.lib.LongExtensions;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
@@ -23,7 +24,7 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class NumberExtensionsTest extends AbstractXbaseTestCase {
+public class ArithmeticExtensionsTest extends AbstractXbaseTestCase {
 
 	@Inject
 	private Primitives primitives;
@@ -42,7 +43,7 @@ public class NumberExtensionsTest extends AbstractXbaseTestCase {
 	}
 
 	public void testPrimitiveDoubleBindings() throws Exception {
-		XExpression expression = expression("{val double x=1; -x+x**x*x/x<x  x<=x x>x x>=x x!=x x==x}", true); 
+		XExpression expression = expression("{val double x=1; -x+x**x*x/x%x<x  x<=x x>x x>=x x!=x x==x}", true); 
 		assertOnlyPrimitveOperationsBound(expression);
 	}
 	
@@ -60,11 +61,98 @@ public class NumberExtensionsTest extends AbstractXbaseTestCase {
 		}
 		assertTrue("No operations found", operationsFound);
 	}
+	
+	public void testBinaryPromotion_0() throws Exception {
+		XExpression expression = expression("{" +
+				"  val float x = Float::parseFloat('1')" +
+				"  val double y = 1" +
+				"  x + y" +
+				"}", true);
+		assertEquals("double", typeProvider.getType(expression).getIdentifier());
+	}
 
-	public void testShiftOperators() {
+	public void testBinaryPromotion_1() throws Exception {
+		XExpression expression = expression("{" +
+				"  val long x = Long::parseLong('1')" +
+				"  val float y = 1" +
+				"  x - y" +
+				"}", true);
+		assertEquals("float", typeProvider.getType(expression).getIdentifier());
+	}
+
+	public void testBinaryPromotion_2() throws Exception {
+		XExpression expression = expression("{" +
+				"  val int x = Integer::parseInt('1')" +
+				"  val long y = 1" +
+				"  x * y" +
+				"}", true);
+		assertEquals("long", typeProvider.getType(expression).getIdentifier());
+	}
+
+	public void testBinaryPromotion_3() throws Exception {
+		XExpression expression = expression("{" +
+				"  val short x = Short::parseShort('1')" +
+				"  val int y = 1" +
+				"  x / y" +
+				"}", true);
+		assertEquals("int", typeProvider.getType(expression).getIdentifier());
+	}
+
+	public void testBinaryPromotion_4() throws Exception {
+		XExpression expression = expression("{" +
+				"  val char x = '1'.charAt(0)" +
+				"  val short y = Short::parseShort('1')" +
+				"  x % y" +
+				"}", true);
+		assertEquals("int", typeProvider.getType(expression).getIdentifier());
+	}
+
+	public void testBinaryPromotion_5() throws Exception {
+		XExpression expression = expression("{" +
+				"  val char x = '1'.charAt(0)" +
+				"  val byte y = Byte::parseByte('1')" +
+				"  x % y" +
+				"}", true);
+		assertEquals("int", typeProvider.getType(expression).getIdentifier());
+	}
+
+	public void testBinaryPromotion_6() throws Exception {
+		XExpression expression = expression("{" +
+				"  val x = new Byte('1')" +
+				"  val y = new Double('1')" +
+				"  x + y" +
+				"}", true);
+		assertEquals("double", typeProvider.getType(expression).getIdentifier());
+	}
+
+	public void testBinaryPromotion_7() throws Exception {
+		XExpression expression = expression("{" +
+				"  val x = new Byte('1')" +
+				"  val float y = 1" +
+				"  x - y" +
+				"}", true);
+		assertEquals("float", typeProvider.getType(expression).getIdentifier());
+	}
+
+	public void testBinaryPromotion_8() throws Exception {
+		XExpression expression = expression("{" +
+				"  val x = Byte::parseByte('1')" +
+				"  val y = new Long('1')" +
+				"  x * y" +
+				"}", true);
+		assertEquals("long", typeProvider.getType(expression).getIdentifier());
+	}
+
+	public void testShiftOperators_0() {
 		assertEquals(0x80000000, IntegerExtensions.shiftLeft(0x1, 31));
 		assertEquals(0xffffffff, IntegerExtensions.shiftRight(0x80000000, 31));
 		assertEquals(0x1, IntegerExtensions.shiftRightUnsigned(0x80000000, 31));
+	}
+
+	public void testShiftOperators_1() {
+		assertEquals(0x8000000000000000L, LongExtensions.shiftLeft(0x1L, 63));
+		assertEquals(0xffffffffffffffffL, LongExtensions.shiftRight(0x8000000000000000L, 63));
+		assertEquals(0x1L, LongExtensions.shiftRightUnsigned(0x8000000000000000L, 63));
 	}
 
 	public void testBigIntegerAllOperationsBound() throws Exception {
