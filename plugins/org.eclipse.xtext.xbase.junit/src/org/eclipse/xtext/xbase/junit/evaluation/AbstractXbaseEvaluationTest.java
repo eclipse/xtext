@@ -355,7 +355,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	}
 
 	@Test public void testPowerOnIntegers() throws Exception {
-		assertEvaluatesTo(new Integer(8), "2**3");
+		assertEvaluatesTo(new Double(8), "2**3");
 	}
 
 	@Test public void testLessThanOnIntegers_01() throws Exception {
