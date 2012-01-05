@@ -20,12 +20,15 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmCompoundTypeReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -36,6 +39,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.util.AbstractTypeReferenceVisitor;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
@@ -614,20 +618,58 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	@Check
 	public void checkInstanceOf(XInstanceOfExpression instanceOfExpression) {
 		JvmTypeReference expressionTypeRef = typeProvider.getType(instanceOfExpression.getExpression());
+		final JvmTypeReference instanceOfType = instanceOfExpression.getType();
+		if (containsTypeArgs(instanceOfType)) {
+			error("Cannot perform instanceof check against parameterized type " + this.getNameOfTypes(instanceOfType), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_INSTANCEOF);
+			return;
+		}
+		if (primitives.isPrimitive(instanceOfType)) {
+			error("Cannot perform instanceof check against primitive type " + this.getNameOfTypes(instanceOfType), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_INSTANCEOF);
+			return;
+		}
 		if (expressionTypeRef != null && expressionTypeRef.getType() instanceof JvmDeclaredType) {
-			boolean isConformant = isConformant(instanceOfExpression.getType(), expressionTypeRef);
+			boolean isConformant = isConformant(instanceOfType, expressionTypeRef);
 			if (isConformant) {
 				warning("The expression of type " + getNameOfTypes(expressionTypeRef) + " is already of type "
-						+ canonicalName(instanceOfExpression.getType()), null,
+						+ canonicalName(instanceOfType), null,
 						ValidationMessageAcceptor.INSIGNIFICANT_INDEX, OBSOLETE_INSTANCEOF);
 			} else {
 				if (isFinal(expressionTypeRef)) {
 					error("Incompatible conditional operand types " + getNameOfTypes(expressionTypeRef) + " and "
-							+ canonicalName(instanceOfExpression.getType()), null,
+							+ canonicalName(instanceOfType), null,
 							ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_INSTANCEOF);
 				}
 			}
 		}
+	}
+
+	protected boolean containsTypeArgs(JvmTypeReference instanceOfType) {
+		return instanceOfType.accept(new AbstractTypeReferenceVisitor.InheritanceAware<Boolean>() {
+			@Override
+			public Boolean doVisitTypeReference(JvmTypeReference reference) {
+				return false;
+			}
+			@Override
+			public Boolean doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference) {
+				return !reference.getArguments().isEmpty();
+			}
+			@Override
+			public Boolean doVisitGenericArrayTypeReference(JvmGenericArrayTypeReference reference) {
+				return reference.getComponentType().accept(this);
+			}
+			@Override
+			public Boolean doVisitDelegateTypeReference(JvmDelegateTypeReference reference) {
+				return reference.getDelegate().accept(this);
+			}
+			@Override
+			public Boolean doVisitCompoundTypeReference(JvmCompoundTypeReference reference) {
+				for (JvmTypeReference ele : reference.getReferences()) {
+					if (ele.accept(this))
+						return true;
+				}
+				return false;
+			}
+		});
 	}
 
 	protected boolean isFinal(JvmTypeReference expressionTypeRef) {
