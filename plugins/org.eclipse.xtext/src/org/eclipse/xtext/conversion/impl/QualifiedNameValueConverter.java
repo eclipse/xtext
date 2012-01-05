@@ -102,7 +102,7 @@ public class QualifiedNameValueConverter extends AbstractValueConverter<String> 
 				if(getWildcardLiteral().equals(segment)) {
 					buffer.append(getWildcardLiteral());
 				} else {
-					buffer.append(delegateToString(segment));
+					buffer.append((String) valueConverterService.toValue(segment, getDelegateRuleName(), null));
 				}
 			}
 		}
