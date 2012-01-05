@@ -245,7 +245,7 @@ public abstract class AbstractPureXbaseUiModule extends DefaultUiModule {
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.GlobalURIEditorOpener> bindGlobalURIEditorOpener() {
-		return org.eclipse.xtext.builder.navigation.GlobalDerivedMemberAwareURIEditorOpener.class;
+		return org.eclipse.xtext.common.types.ui.navigation.GlobalDerivedMemberAwareURIEditorOpener.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment

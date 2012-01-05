@@ -188,7 +188,7 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 				.addTypeToType("org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeElementOpener", 
 						"org.eclipse.xtext.xbase.ui.jvmmodel.outline.JvmOutlineNodeElementOpener")
 			    .addTypeToType("org.eclipse.xtext.ui.editor.GlobalURIEditorOpener", 
-						"org.eclipse.xtext.builder.navigation.GlobalDerivedMemberAwareURIEditorOpener")
+						"org.eclipse.xtext.common.types.ui.navigation.GlobalDerivedMemberAwareURIEditorOpener")
 			    .addTypeToType("org.eclipse.xtext.ui.editor.occurrences.IOccurrenceComputer", 
 						"org.eclipse.xtext.xbase.ui.jvmmodel.occurrence.JvmModelOccurrenceComputer");
 		} else {

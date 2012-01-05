@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.navigation;
+package org.eclipse.xtext.common.types.ui.navigation;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ import org.eclipse.jface.text.hyperlink.AbstractHyperlinkDetector;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.texteditor.ITextEditor;
-import org.eclipse.xtext.builder.DerivedResourceMarkers;
+import org.eclipse.xtext.generator.IDerivedResourceMarkers;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -43,7 +43,7 @@ public class LinkToOriginDetector extends AbstractHyperlinkDetector {
 	private Provider<LinkToOrigin> hyperlinkProvider;
 	
 	@Inject
-	private DerivedResourceMarkers derivedResourceMarkers;
+	private IDerivedResourceMarkers derivedResourceMarkers;
 	
 	@SuppressWarnings("restriction")
 	public IHyperlink[] detectHyperlinks(ITextViewer textViewer, IRegion region, boolean canShowMultipleHyperlinks) {

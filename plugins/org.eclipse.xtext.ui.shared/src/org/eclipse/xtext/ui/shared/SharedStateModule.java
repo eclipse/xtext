@@ -11,7 +11,9 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.xtext.builder.DerivedResourceMarkers;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
+import org.eclipse.xtext.generator.IDerivedResourceMarkers;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
@@ -47,6 +49,10 @@ public class SharedStateModule extends AbstractGenericModule {
 
 	public Provider<IURIEditorOpener> provideIURIEditorOpener() {
 		return Access.getIURIEditorOpener();
+	}
+	
+	public Class<? extends IDerivedResourceMarkers> bindDerivedResourceMarkers() {
+		return DerivedResourceMarkers.class;
 	}
 	
 	/**

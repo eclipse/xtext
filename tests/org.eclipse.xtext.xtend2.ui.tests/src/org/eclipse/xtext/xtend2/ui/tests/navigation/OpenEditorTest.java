@@ -22,7 +22,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IWorkbench;
-import org.eclipse.xtext.builder.DerivedResourceMarkers;
+import org.eclipse.xtext.generator.IDerivedResourceMarkers;
 import org.eclipse.xtext.ui.editor.GlobalURIEditorOpener;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
@@ -51,7 +51,7 @@ public class OpenEditorTest extends AbstractXtend2UITestCase {
 	private GlobalURIEditorOpener globalURIEditorOpener;
 
 	@Inject
-	private DerivedResourceMarkers derivedResourceMarkers;
+	private IDerivedResourceMarkers derivedResourceMarkers;
 
 	@Inject
 	private IOutlineTreeProvider treeProvider;

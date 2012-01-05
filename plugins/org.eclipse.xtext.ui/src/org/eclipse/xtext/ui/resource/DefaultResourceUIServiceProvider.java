@@ -21,7 +21,6 @@ import org.eclipse.xtext.ui.util.IJdtHelper;
 import org.eclipse.xtext.validation.IResourceValidator;
 
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -123,10 +122,7 @@ public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvi
 		return get(IReferenceUpdater.class);
 	}
 	
-	@Inject
-	private Injector injector;
-	
 	public <T> T get(Class<T> t) {
-		return injector.getInstance(t);
+		return delegate.get(t);
 	}
 }

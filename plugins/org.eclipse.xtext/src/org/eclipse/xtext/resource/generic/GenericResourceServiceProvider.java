@@ -16,6 +16,7 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.validation.IResourceValidator;
 
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 
 /**
  * An {@link IResourceServiceProvider} for non-Xtext resources. 
@@ -62,7 +63,10 @@ public class GenericResourceServiceProvider implements IResourceServiceProvider 
 		return encodingProvider;
 	}
 	
+	@Inject
+	private Injector injector;
+	
 	public <T> T get(Class<T> t) {
-		return null;
+		return injector.getInstance(t);
 	}
 }

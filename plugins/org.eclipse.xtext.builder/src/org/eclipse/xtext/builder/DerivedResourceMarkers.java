@@ -17,6 +17,7 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.generator.IDerivedResourceMarkers;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
@@ -25,7 +26,7 @@ import com.google.inject.name.Named;
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.1
  */
-public class DerivedResourceMarkers {
+public class DerivedResourceMarkers implements IDerivedResourceMarkers {
 
 	public final static String MARKER_ID = "org.eclipse.xtext.builder.derivedresource"; 
 	public final static String ATTR_SOURCE = "source"; 

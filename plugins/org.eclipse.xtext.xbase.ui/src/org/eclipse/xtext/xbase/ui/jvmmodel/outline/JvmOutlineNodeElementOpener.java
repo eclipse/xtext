@@ -15,9 +15,9 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IMember;
-import org.eclipse.xtext.builder.DerivedResourceMarkers;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
+import org.eclipse.xtext.generator.IDerivedResourceMarkers;
 import org.eclipse.xtext.ui.editor.GlobalURIEditorOpener;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeElementOpener;
 
@@ -34,7 +34,7 @@ public class JvmOutlineNodeElementOpener extends OutlineNodeElementOpener {
 	private IJavaElementFinder javaElementFinder;
 
 	@Inject
-	private DerivedResourceMarkers derivedResourceMarkers;
+	private IDerivedResourceMarkers derivedResourceMarkers;
 
 	@Inject
 	private GlobalURIEditorOpener globalURIEditorOpener;

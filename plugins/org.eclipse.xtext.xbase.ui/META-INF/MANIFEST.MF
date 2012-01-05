@@ -30,7 +30,7 @@ Export-Package: org.eclipse.xtext.xbase.annotations.ui;x-friends:="org.eclipse.x
  org.eclipse.xtext.xbase.ui.contentassist;x-friends:="org.eclipse.xtext.xbase.ui.tests",
  org.eclipse.xtext.xbase.ui.contentassist.antlr;x-friends:="org.eclipse.xtext.xbase.ui.tests",
  org.eclipse.xtext.xbase.ui.contentassist.antlr.internal;x-friends:="org.eclipse.xtext.xbase.ui.tests",
- org.eclipse.xtext.xbase.ui.hierarchy,
+ org.eclipse.xtext.xbase.ui.hierarchy;x-internal:=true,
  org.eclipse.xtext.xbase.ui.highlighting;x-friends:="org.eclipse.xtext.xbase.ui.tests,org.eclipse.xtext.xtend2.ui,org.eclipse.xtext.xtend2.ui.tests",
  org.eclipse.xtext.xbase.ui.hover;x-friends:="org.eclipse.xtext.xbase.ui.tests,org.eclipse.xtext.xtend2.ui",
  org.eclipse.xtext.xbase.ui.internal;x-friends:="org.eclipse.xtext.xbase.ui.tests",

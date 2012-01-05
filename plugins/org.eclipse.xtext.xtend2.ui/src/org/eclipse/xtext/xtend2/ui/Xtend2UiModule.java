@@ -12,7 +12,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
-import org.eclipse.xtext.builder.navigation.IDerivedMemberAwareEditorOpener;
+import org.eclipse.xtext.common.types.ui.navigation.IDerivedMemberAwareEditorOpener;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
 import org.eclipse.xtext.ui.LanguageSpecific;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
