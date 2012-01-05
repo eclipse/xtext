@@ -439,6 +439,12 @@ public class ParserTest extends AbstractXtend2TestCase {
 		assertTrue(importDeclaration.isExtension());
 	}
 	
+	public void testBug367949() throws Exception {
+		XtendImport importDeclaration = importDeclaration("import org.eclipse.xtext.^create");
+		assertNotNull(importDeclaration);
+		assertEquals("org.eclipse.xtext.create", importDeclaration.getImportedTypeName());
+	}
+	
 	public void testConstructor_01() throws Exception {
 		XtendConstructor constructor = constructor("new() {}");
 		assertTrue(constructor.getTypeParameters().isEmpty());

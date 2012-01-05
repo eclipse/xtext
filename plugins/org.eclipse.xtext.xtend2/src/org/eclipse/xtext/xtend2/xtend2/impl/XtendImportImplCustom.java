@@ -36,7 +36,7 @@ public class XtendImportImplCustom extends XtendImportImpl {
 						Xtend2Package.Literals.XTEND_IMPORT__IMPORTED_TYPE);
 				StringBuilder sb = new StringBuilder();
 				for (INode iNode : list) {
-					sb.append(NodeModelUtils.getTokenText(iNode));
+					sb.append(NodeModelUtils.getTokenText(iNode).replace("^", ""));
 				}
 				return sb.toString().replace(" ", "");
 			}
