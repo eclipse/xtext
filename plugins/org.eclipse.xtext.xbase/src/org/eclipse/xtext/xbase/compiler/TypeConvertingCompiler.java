@@ -92,9 +92,9 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 			convertArrayToList(left, appendable, context, expression);
 		} else if (isList(right) && getTypeReferences().isArray(left)) {
 			convertListToArray(left, appendable, context, expression);
-		} else if (isFunction(right)) {
+		} else if (isFunction(right) || (isFunction(left) && closures.findImplementingOperation(right, context.eResource()) != null)) {
 			convertFunctionType(left, right, appendable, expression, context);
-		} else if (isProcedure(right)) {
+		} else if (isProcedure(right) || (isProcedure(left) && closures.findImplementingOperation(right, context.eResource()) != null)) {
 			convertFunctionType(left, right, appendable, expression, context);
 		} else {
 			expression.exec();
@@ -192,7 +192,10 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		else
 			appendable.append("\n");
 		expression.exec();
-		appendable.append(".apply(");
+		appendable.append(".");
+		JvmOperation actualOperation = closures.findImplementingOperation(functionType, context.eResource());
+		appendable.append(actualOperation.getSimpleName());
+		appendable.append("(");
 		for (Iterator<JvmFormalParameter> iterator = params.iterator(); iterator.hasNext();) {
 			JvmFormalParameter p = iterator.next();
 			final String name = p.getName();
