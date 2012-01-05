@@ -23,10 +23,13 @@ import org.eclipse.xtext.util.ReflectionUtil;
 import org.eclipse.xtext.xbase.lib.BigDecimalExtensions;
 import org.eclipse.xtext.xbase.lib.BigIntegerExtensions;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
+import org.eclipse.xtext.xbase.lib.ByteExtensions;
+import org.eclipse.xtext.xbase.lib.CharacterExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ComparableExtensions;
 import org.eclipse.xtext.xbase.lib.DoubleExtensions;
+import org.eclipse.xtext.xbase.lib.FloatExtensions;
 import org.eclipse.xtext.xbase.lib.FunctionExtensions;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
@@ -34,10 +37,12 @@ import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.LongExtensions;
 import org.eclipse.xtext.xbase.lib.MapExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.ProcedureExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures;
+import org.eclipse.xtext.xbase.lib.ShortExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 import com.google.common.collect.ArrayListMultimap;
@@ -106,12 +111,15 @@ public class StaticImplicitMethodsFeatureForTypeProvider extends AbstractStaticM
 		
 		protected Multimap<Class<?>, Class<?>> simpleComputeExtensionClasses() {
 			Multimap<Class<?>, Class<?>> result = ArrayListMultimap.create();
-			result.put(Boolean.class, BooleanExtensions.class);
 			result.put(String.class, StringExtensions.class);
-			result.put(Integer.class, IntegerExtensions.class);
-			result.put(Integer.TYPE, IntegerExtensions.class);
-			result.put(Double.class, DoubleExtensions.class);
 			result.put(Double.TYPE, DoubleExtensions.class);
+			result.put(Float.TYPE, FloatExtensions.class);
+			result.put(Long.TYPE, LongExtensions.class);
+			result.put(Integer.TYPE, IntegerExtensions.class);
+			result.put(Character.TYPE, CharacterExtensions.class);
+			result.put(Short.TYPE, ShortExtensions.class);
+			result.put(Byte.TYPE, ByteExtensions.class);
+			result.put(Boolean.TYPE, BooleanExtensions.class);
 			result.put(BigInteger.class, BigIntegerExtensions.class);
 			result.put(BigDecimal.class, BigDecimalExtensions.class);
 			result.put(Comparable.class, ComparableExtensions.class);
