@@ -16,7 +16,7 @@ public class Case_3 {
           }
         };
       final Function1<? super Integer,? extends Integer> closure = _function;
-      Iterable<Integer> _operator_upTo = IntegerExtensions.operator_upTo(Integer.valueOf(1), Integer.valueOf(100));
+      Iterable<Integer> _operator_upTo = IntegerExtensions.operator_upTo(1, 100);
       for (final Integer x : _operator_upTo) {
         closure.apply(x);
       }
@@ -33,7 +33,7 @@ public class Case_3 {
             }
           };
         final Function1<? super Integer,? extends Integer> closure = _function;
-        Iterable<Integer> _operator_upTo = IntegerExtensions.operator_upTo(Integer.valueOf(1), Integer.valueOf(100));
+        Iterable<Integer> _operator_upTo = IntegerExtensions.operator_upTo(1, 100);
         for (final Integer x : _operator_upTo) {
           closure.apply(x);
         }
