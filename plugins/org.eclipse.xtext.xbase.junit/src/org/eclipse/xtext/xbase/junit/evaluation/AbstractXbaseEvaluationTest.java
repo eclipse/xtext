@@ -1045,6 +1045,16 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo(Boolean.FALSE, "null instanceof Boolean");
 	}
 	
+	@Test public void testInstanceOf_05() throws Exception {
+		assertEvaluatesTo(Boolean.FALSE, "[|'foo'] instanceof com.google.common.base.Supplier");
+		assertEvaluatesTo(Boolean.TRUE, "[|'foo'] instanceof org.eclipse.xtext.xbase.lib.Functions$Function0");
+	}
+	
+	@Test public void testInstanceOf_06() throws Exception {
+		assertEvaluatesTo(Boolean.FALSE, "newArrayList('foo','bar') as Object instanceof Object[]");
+		assertEvaluatesTo(Boolean.TRUE, "newArrayList('foo','bar') as String[] instanceof Object[]");
+	}
+	
 	@Test public void testClosure_01() throws Exception {
 		assertEvaluatesTo("literal", "new testdata.ClosureClient().invoke0(|'literal')");
 	}
