@@ -43,17 +43,17 @@ public class GenModelAccessTestGenerator extends AbstractWorkflowComponent2 {
 			print.println();
 			print.println("import org.eclipse.xtext.generator.ecore.genmodelaccess.nestedPackage1.NestedPackage1Package;");
 			print.println("import org.eclipse.xtext.generator.ecore.genmodelaccess.noLiterals.NoLiteralsPackage;");
-			print.println("import junit.framework.TestCase;");
-			print.println("import junit.framework.Assert;");
+			print.println("import org.junit.Assert;");
+			print.println("import org.junit.Test;");
 			print.println();
-			print.println("public abstract class AccessTest extends TestCase {");
+			print.println("public abstract class AccessTest extends Assert {");
 
 			EClass rootClass = (EClass) root.getEClassifier("RootClass");
 			EReference rootRef = (EReference) rootClass.getEStructuralFeature("reference1");
 			EAttribute rootAttr = (EAttribute) rootClass.getEStructuralFeature("attribute1");
 			EDataType rootDataType = (EDataType) root.getEClassifier("RootDataType");
 			EEnum rootEnum = (EEnum) root.getEClassifier("RootEnum");
-			print.println("	public void testRootPackage() {");
+			print.println("	@Test public void testRootPackage() {");
 			print.println("		Assert.assertNotNull(" + GenModelAccess.getGenTypeLiteral(root, rs) + ");");
 			print.println("		Assert.assertNotNull(" + GenModelAccess.getGenTypeLiteral(rootClass, rs) + ");");
 			print.println("		Assert.assertNotNull(" + GenModelAccess.getGenTypeLiteral(rootDataType, rs) + ");");
@@ -69,7 +69,7 @@ public class GenModelAccessTestGenerator extends AbstractWorkflowComponent2 {
 
 			EPackage nested = root.getESubpackages().get(0);
 			EClass nestedClass = (EClass) nested.getEClassifier("NestedClass1");
-			print.println("	public void testNestedPackage() {");
+			print.println("	@Test public void testNestedPackage() {");
 			print.println("		Assert.assertNotNull(" + GenModelAccess.getGenTypeLiteral(nested, rs) + ");");
 			print.println("		Assert.assertNotNull(" + GenModelAccess.getGenTypeLiteral(nestedClass, rs) + ");");
 			print.println("		Assert.assertEquals(0," + GenModelAccess.getGenIntLiteral(nestedClass, rs) + ");");
@@ -81,7 +81,7 @@ public class GenModelAccessTestGenerator extends AbstractWorkflowComponent2 {
 			EReference noLitRef = (EReference) noLitClass.getEStructuralFeature("reference2");
 			EAttribute noLitAttr = (EAttribute) noLitClass.getEStructuralFeature("attribute2");
 			EDataType noLitEnum = (EDataType) noLit.getEClassifier("NoLitEnum");
-			print.println("	public void testNoLiteralPackage() {");
+			print.println("	@Test public void testNoLiteralPackage() {");
 			print.println("		Assert.assertNotNull(" + GenModelAccess.getGenTypeLiteral(noLit, rs) + ");");
 			print.println("		Assert.assertFalse(" + GenModelAccess.getGenPackage(noLit, rs).isLiteralsInterface()
 					+ ");");

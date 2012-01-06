@@ -13,8 +13,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.ENamedElement;
@@ -32,6 +30,8 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.generic.GenericResourceDescriptionManager;
+import org.junit.Assert;
+import org.junit.Test;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
@@ -43,20 +43,20 @@ import com.google.inject.Injector;
  * @author Sven Efftinge - Initial contribution and API
  * @author Jan Koehnlein
  */
-public class EcoreResourceDescriptionManagerTest extends TestCase {
+public class EcoreResourceDescriptionManagerTest extends Assert {
 	
 	private GenericResourceDescriptionManager getEmfResourceDescriptionsManager() {
 		Injector injector = Guice.createInjector(new EcoreRuntimeModule());
 		return injector.getInstance(GenericResourceDescriptionManager.class);
 	}
 	
-	public void testEcore() throws Exception {
+	@Test public void testEcore() throws Exception {
 		Map<QualifiedName, IEObjectDescription> index = createIndex(EcorePackage.eINSTANCE.eResource());
 		checkEcore(index, "ecore", false);
 		checkEcore(index, EcorePackage.eNS_URI, true);
 	}
 	
-	public void testNestedPackage() throws Exception {
+	@Test public void testNestedPackage() throws Exception {
 		Resource resource = new XMIResourceImpl();
 		EPackage parent = EcoreFactory.eINSTANCE.createEPackage();
 		parent.setName("parent");
@@ -79,7 +79,7 @@ public class EcoreResourceDescriptionManagerTest extends TestCase {
 		assertEquals(6,index.size());
 	}
 
-	public void testMissingNsURI() {
+	@Test public void testMissingNsURI() {
 		Resource resource = new XMIResourceImpl();
 		EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
 		ePackage.setName("test");
@@ -93,7 +93,7 @@ public class EcoreResourceDescriptionManagerTest extends TestCase {
 		assertEquals(2,index.size());
 	}
 	
-	public void testMissingName() {
+	@Test public void testMissingName() {
 		Resource resource = new XMIResourceImpl();
 		EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
 		ePackage.setNsURI("http://test");
@@ -107,7 +107,7 @@ public class EcoreResourceDescriptionManagerTest extends TestCase {
 		assertEquals(2,index.size());
 	}
 	
-	public void testMissingMiddleName() {
+	@Test public void testMissingMiddleName() {
 		Resource resource = new XMIResourceImpl();
 		EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
 		ePackage.setName("test");
@@ -165,7 +165,7 @@ public class EcoreResourceDescriptionManagerTest extends TestCase {
 		return index;
 	}
 
-	public void testPerformance() throws Exception {
+	@Test public void testPerformance() throws Exception {
 		GenericResourceDescriptionManager manager = getEmfResourceDescriptionsManager();
 		Collection<String> uris = ImmutableList.copyOf(EPackage.Registry.INSTANCE.keySet());
 		for(String uri: uris) {

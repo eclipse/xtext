@@ -21,11 +21,12 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.SyntheticCompositeNode;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -33,12 +34,12 @@ import org.eclipse.xtext.nodemodel.impl.SyntheticCompositeNode;
  */
 public class NodeModelUtilsTest extends AbstractXtextTests {
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(new XtextStandaloneSetup());
 	}
 	
-	public void testFindNodesForFeature() throws Exception {
+	@Test public void testFindNodesForFeature() throws Exception {
 		Grammar grammar = (Grammar) getModel("grammar foo.Bar with org.eclipse.xtext.common.Terminals generate foo 'bar' Model : name=ID;");
 		List<INode> nodes = NodeModelUtils.findNodesForFeature(grammar, XtextPackage.eINSTANCE.getGrammar_Name());
 		assertEquals(1, nodes.size());
@@ -54,7 +55,7 @@ public class NodeModelUtilsTest extends AbstractXtextTests {
 		assertEquals("foo", nodes.get(0).getText().trim());
 	}
 	
-	public void testFindNodesForFeature_MultipleFeature() throws Exception {
+	@Test public void testFindNodesForFeature_MultipleFeature() throws Exception {
 		Grammar grammar = (Grammar) getModel("grammar foo.Bar with org.eclipse.xtext.common.Terminals generate foo 'bar' Model : foo=Foo; Foo : name=ID; ");
 		List<INode> nodes = NodeModelUtils.findNodesForFeature(grammar, XtextPackage.eINSTANCE.getGrammar_Rules());
 		assertEquals(2, nodes.size());
@@ -62,7 +63,7 @@ public class NodeModelUtilsTest extends AbstractXtextTests {
 		assertEquals("Foo : name=ID;", nodes.get(1).getText().trim());
 	}
 	
-	public void testFindNodesForFeature_CallToConcreteRule() throws Exception {
+	@Test public void testFindNodesForFeature_CallToConcreteRule() throws Exception {
 		Grammar grammar = (Grammar) getModel("grammar foo.Bar with org.eclipse.xtext.common.Terminals generate foo 'bar' Model returns X: name='foo';");
 		AbstractRule rule = grammar.getRules().get(0);
 		List<INode> nodes = NodeModelUtils.findNodesForFeature(rule, XtextPackage.eINSTANCE.getAbstractRule_Type());
@@ -70,7 +71,7 @@ public class NodeModelUtilsTest extends AbstractXtextTests {
 		assertEquals("X", nodes.get(0).getText().trim());
 	}
 	
-	public void testFindNodesForFeature_Cardinality_0() throws Exception {
+	@Test public void testFindNodesForFeature_Cardinality_0() throws Exception {
 		Grammar grammar = (Grammar) getModel("grammar foo.Bar with org.eclipse.xtext.common.Terminals generate foo 'bar' Model: name+='foo'*;");
 		Assignment assignment = (Assignment) grammar.getRules().get(0).getAlternatives();
 		List<INode> nodes = NodeModelUtils.findNodesForFeature(assignment, XtextPackage.eINSTANCE.getAbstractElement_Cardinality());
@@ -78,14 +79,14 @@ public class NodeModelUtilsTest extends AbstractXtextTests {
 		assertEquals("*", nodes.get(0).getText().trim());
 	}
 	
-	public void testFindNodesForFeature_Cardinality_1() throws Exception {
+	@Test public void testFindNodesForFeature_Cardinality_1() throws Exception {
 		Grammar grammar = (Grammar) getModel("grammar foo.Bar with org.eclipse.xtext.common.Terminals generate foo 'bar' Model: name+='foo'* name+='bar'*;");
 		Group group = (Group) grammar.getRules().get(0).getAlternatives();
 		List<INode> nodes = NodeModelUtils.findNodesForFeature(group, XtextPackage.eINSTANCE.getAbstractElement_Cardinality());
 		assertEquals(0, nodes.size());
 	}
 	
-	public void testFindNodesForFeature_Cardinality_2() throws Exception {
+	@Test public void testFindNodesForFeature_Cardinality_2() throws Exception {
 		Grammar grammar = (Grammar) getModel("grammar foo.Bar with org.eclipse.xtext.common.Terminals generate foo 'bar' Model: (name+='foo'*)?;");
 		Assignment assignment = (Assignment) grammar.getRules().get(0).getAlternatives();
 		List<INode> nodes = NodeModelUtils.findNodesForFeature(assignment, XtextPackage.eINSTANCE.getAbstractElement_Cardinality());
@@ -94,7 +95,7 @@ public class NodeModelUtilsTest extends AbstractXtextTests {
 		assertEquals("?", nodes.get(1).getText());
 	}
 	
-	public void testFindNodesForFeature_Elements() throws Exception {
+	@Test public void testFindNodesForFeature_Elements() throws Exception {
 		Grammar grammar = (Grammar) getModel("grammar foo.Bar with org.eclipse.xtext.common.Terminals generate foo 'bar' Model:name='foo'|name='bar';");
 		Alternatives body = (Alternatives) grammar.getRules().get(0).getAlternatives();
 		List<INode> nodes = NodeModelUtils.findNodesForFeature(body, XtextPackage.eINSTANCE.getCompoundElement_Elements());
@@ -103,7 +104,7 @@ public class NodeModelUtilsTest extends AbstractXtextTests {
 		assertEquals("name='bar'", nodes.get(1).getText());
 	}
 	
-	public void testFindActualSemanticObjectFor_01() throws Exception {
+	@Test public void testFindActualSemanticObjectFor_01() throws Exception {
 		String grammarString = "grammar foo.Bar with org.eclipse.xtext.common.Terminals generate foo 'bar' Model:((name=ID));";
 		Grammar grammar = (Grammar) getModel(grammarString);
 		ILeafNode leafNode = NodeModelUtils.findLeafNodeAtOffset(NodeModelUtils.getNode(grammar), grammarString.indexOf('('));
@@ -111,7 +112,7 @@ public class NodeModelUtilsTest extends AbstractXtextTests {
 		assertTrue(object instanceof Assignment);
 	}
 	
-	public void testFindActualSemanticObjectFor_02() throws Exception {
+	@Test public void testFindActualSemanticObjectFor_02() throws Exception {
 		String grammarString = "grammar foo.Bar with org.eclipse.xtext.common.Terminals generate foo 'bar' Model:((name=ID)*)?;";
 		Grammar grammar = (Grammar) getModel(grammarString);
 		ILeafNode star = NodeModelUtils.findLeafNodeAtOffset(NodeModelUtils.getNode(grammar), grammarString.indexOf('*'));
@@ -122,7 +123,7 @@ public class NodeModelUtilsTest extends AbstractXtextTests {
 		assertTrue(object instanceof Assignment);
 	}
 	
-	public void testFindActualSemanticObjectFor_03() throws Exception {
+	@Test public void testFindActualSemanticObjectFor_03() throws Exception {
 		String grammarString = "grammar foo.Bar with org.eclipse.xtext.common.Terminals generate foo 'bar' Model:name=ID;";
 		Grammar grammar = (Grammar) getModel(grammarString);
 		ILeafNode leafNode = NodeModelUtils.findLeafNodeAtOffset(NodeModelUtils.getNode(grammar), grammarString.indexOf('='));
@@ -130,7 +131,7 @@ public class NodeModelUtilsTest extends AbstractXtextTests {
 		assertTrue(object instanceof Assignment);
 	}
 	
-	public void testFindActualSemanticObjectFor_04() throws Exception {
+	@Test public void testFindActualSemanticObjectFor_04() throws Exception {
 		String grammarString = "grammar foo.Bar with org.eclipse.xtext.common.Terminals generate foo 'bar' Model:name=ID;";
 		Grammar grammar = (Grammar) getModel(grammarString);
 		ILeafNode leafNode = NodeModelUtils.findLeafNodeAtOffset(NodeModelUtils.getNode(grammar), grammarString.indexOf("name"));
@@ -138,7 +139,7 @@ public class NodeModelUtilsTest extends AbstractXtextTests {
 		assertTrue(object instanceof Assignment);
 	}
 	
-	public void testFindActualSemanticObjectFor_05() throws Exception {
+	@Test public void testFindActualSemanticObjectFor_05() throws Exception {
 		String grammarString = "grammar foo.Bar with org.eclipse.xtext.common.Terminals generate foo 'bar' Model:name=ID;";
 		Grammar grammar = (Grammar) getModel(grammarString);
 		ILeafNode leafNode = NodeModelUtils.findLeafNodeAtOffset(NodeModelUtils.getNode(grammar), grammarString.indexOf("ID"));
@@ -146,7 +147,7 @@ public class NodeModelUtilsTest extends AbstractXtextTests {
 		assertTrue(object instanceof RuleCall);
 	}
 	
-	public void testFindActualSemanticObjectFor_06() throws Exception {
+	@Test public void testFindActualSemanticObjectFor_06() throws Exception {
 		String grammarString = "grammar foo.Bar with org.eclipse.xtext.common.Terminals generate foo 'bar' Model: name=ID;";
 		Grammar grammar = (Grammar) getModel(grammarString);
 		ILeafNode leafNode = NodeModelUtils.findLeafNodeAtOffset(NodeModelUtils.getNode(grammar), grammarString.lastIndexOf(" "));
@@ -154,7 +155,7 @@ public class NodeModelUtilsTest extends AbstractXtextTests {
 		assertTrue(object instanceof Assignment);
 	}
 	
-	public void testFindActualSemanticObjectFor_07() throws Exception {
+	@Test public void testFindActualSemanticObjectFor_07() throws Exception {
 		String grammarString = "grammar foo.Bar with org.eclipse.xtext.common.Terminals generate foo 'bar' Model:(name=ID|name=STRING?)*;";
 		Grammar grammar = (Grammar) getModel(grammarString);
 		ILeafNode star = NodeModelUtils.findLeafNodeAtOffset(NodeModelUtils.getNode(grammar), grammarString.indexOf('*'));
@@ -165,7 +166,7 @@ public class NodeModelUtilsTest extends AbstractXtextTests {
 		assertTrue(object instanceof Assignment);
 	}
 	
-	public void testFindActualSemanticObjectFor_08() throws Exception {
+	@Test public void testFindActualSemanticObjectFor_08() throws Exception {
 		String grammarString = "grammar foo.Bar with org.eclipse.xtext.common.Terminals generate foo 'bar' Model:/**/name=ID;";
 		Grammar grammar = (Grammar) getModel(grammarString);
 		ILeafNode leadingComment = NodeModelUtils.findLeafNodeAtOffset(NodeModelUtils.getNode(grammar), grammarString.indexOf('*'));
@@ -173,7 +174,7 @@ public class NodeModelUtilsTest extends AbstractXtextTests {
 		assertTrue(object instanceof Assignment);
 	}
 	
-	public void testFindActualSemanticObjectFor_09() throws Exception {
+	@Test public void testFindActualSemanticObjectFor_09() throws Exception {
 		String grammarString = "grammar foo.Bar with org.eclipse.xtext.common.Terminals generate foo 'bar' Model:name=ID/**/;";
 		Grammar grammar = (Grammar) getModel(grammarString);
 		ILeafNode trailingComment = NodeModelUtils.findLeafNodeAtOffset(NodeModelUtils.getNode(grammar), grammarString.indexOf('*'));
@@ -181,7 +182,7 @@ public class NodeModelUtilsTest extends AbstractXtextTests {
 		assertTrue(object instanceof ParserRule);
 	}
 	
-	public void testCompactDump_1() throws Exception {
+	@Test public void testCompactDump_1() throws Exception {
 		String grammarString = "grammar foo.Bar with org.eclipse.xtext.common.Terminals generate foo 'bar' Model:name=ID;";
 		Grammar grammar = (Grammar) getModel(grammarString);
 		String actual = NodeModelUtils.compactDump(NodeModelUtils.getNode(grammar.getMetamodelDeclarations().get(0)), true);
@@ -197,7 +198,7 @@ public class NodeModelUtilsTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 	
-	public void testCompactDump_2() throws Exception {
+	@Test public void testCompactDump_2() throws Exception {
 		String grammarString = "grammar foo.Bar with org.eclipse.xtext.common.Terminals generate foo x 'bar' Model:name=ID;";
 		Grammar grammar = (Grammar) getModelAndExpect(getAsStream(grammarString), 1);
 		String actual = NodeModelUtils.compactDump(NodeModelUtils.getNode(grammar.getMetamodelDeclarations().get(0)), true);
@@ -215,7 +216,7 @@ public class NodeModelUtilsTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 	
-	public void testCompactDump_3() throws Exception {
+	@Test public void testCompactDump_3() throws Exception {
 		String grammarString = "grammar 1 2";
 		Grammar grammar = (Grammar) getModelAndExpect(getAsStream(grammarString), UNKNOWN_EXPECTATION);
 		String actual = NodeModelUtils.compactDump(NodeModelUtils.getNode(grammar), true);
@@ -232,7 +233,7 @@ public class NodeModelUtilsTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testFindLeafNodeAtOffset_1() throws Exception {
+	@Test public void testFindLeafNodeAtOffset_1() throws Exception {
 		String grammarText = "grammar foo.Bar with org.eclipse.xtext.common.Terminals generate foo 'bar' Model : (name=ID value=ID);";
 		Grammar grammar = (Grammar) getModel(grammarText);
 		int equalsSign = grammarText.indexOf('=');

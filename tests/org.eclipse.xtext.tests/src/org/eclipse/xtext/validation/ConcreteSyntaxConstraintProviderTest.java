@@ -18,9 +18,10 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.validation.IConcreteSyntaxConstraintProvider.ISyntaxConstraint;
 import org.eclipse.xtext.validation.impl.ConcreteSyntaxConstraintProvider;
+import org.junit.Test;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -54,7 +55,7 @@ public class ConcreteSyntaxConstraintProviderTest extends AbstractXtextTests {
 	}
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 	}
@@ -91,87 +92,87 @@ public class ConcreteSyntaxConstraintProviderTest extends AbstractXtextTests {
 		return "";
 	}
 
-	public void testSimple() throws Exception {
+	@Test public void testSimple() throws Exception {
 		String constraint = parseRule("Model: name=ID;");
 		assertEquals("<Model>name", constraint);
 	}
 
-	public void testGroup1() throws Exception {
+	@Test public void testGroup1() throws Exception {
 		String constraint = parseRule("Model: name=ID (val=INT 'somekw')?;");
 		assertEquals("<Model>(name val?)", constraint);
 	}
 
-	public void testAlternatives1() throws Exception {
+	@Test public void testAlternatives1() throws Exception {
 		String constraint = parseRule("Model: name=ID | val=INT | 'somekw';");
 		assertEquals("<Model>(name|val)?", constraint);
 	}
 
-	public void testAction1() throws Exception {
+	@Test public void testAction1() throws Exception {
 		String constraint = parseRule("Model: {Model} name=ID;");
 		assertEquals("<Model>({} name)", constraint);
 	}
 
-	public void testAction2() throws Exception {
+	@Test public void testAction2() throws Exception {
 		String constraint = parseRule("Model: {Type1} name=ID;");
 		assertEquals("<Type1>({} name)", constraint);
 	}
 
-	public void testAction3() throws Exception {
+	@Test public void testAction3() throws Exception {
 		String constraint = parseRule("Model: 'something' ({Type1} name=ID)? val=INT;");
 		assertEquals("<Model, Type1>(<Type1>({} name)? val)", constraint);
 	}
 
-	public void testAction4() throws Exception {
+	@Test public void testAction4() throws Exception {
 		String constraint = parseRule("Model: 't1' {Type1} | 't2' {Type2} | 't3' {Type3};");
 		assertEquals("<Type1, Type2, Type3>(<Type1>{}|<Type2>{}|<Type3>{})", constraint);
 	}
 
-	public void testAction5() throws Exception {
+	@Test public void testAction5() throws Exception {
 		String constraint = parseRule("Model: 't1' {Type1} | 't2' {Type2} | 't3' {Type3} | 't4';");
 		assertEquals("<Model, Type1, Type2, Type3>(<Type1>{}|<Type2>{}|<Type3>{})?", constraint);
 	}
 
-	public void testAction6() throws Exception {
+	@Test public void testAction6() throws Exception {
 		String constraint = parseRule("Model: 't1' {Type1} val=ID | 't2' {Type2} val=ID | 't3' {Type3} | 't4';");
 		assertEquals("<Model, Type1, Type2, Type3>(<Type1>({} val)|<Type2>({} val)|<Type3>{})?", constraint);
 	}
 
-	public void testAction7() throws Exception {
+	@Test public void testAction7() throws Exception {
 		String constraint = parseRule("Model: ('t1' {Type1} val=ID | 't2' {Type2} val=ID | 't3' {Type3})?;");
 		assertEquals("<Model, Type1, Type2, Type3>(<Type1>({} val)|<Type2>({} val)|<Type3>{})?", constraint);
 	}
 
-	public void testAction8() throws Exception {
+	@Test public void testAction8() throws Exception {
 		String constraint = parseRule("Model: 't1' {Type1} val=ID | ('something' ({Type2} 't2' | {Type3} 't3'));");
 		assertEquals("<Type1, Type2, Type3>(<Type1>({} val)|<Type2, Type3>(<Type2>{}|<Type3>{}))", constraint);
 	}
 
-	public void testAction9() throws Exception {
+	@Test public void testAction9() throws Exception {
 		String constraint = parseRule("Model: ('t1' {Type1} val1=ID | val2=ID) val3=ID;");
 		assertEquals("<Model, Type1>((<Type1>({} val1)|<Model>val2) val3)", constraint);
 	}
 
-	public void testSummarizeAssignments1() throws Exception {
+	@Test public void testSummarizeAssignments1() throws Exception {
 		String constraint = parseRule("Model: val+=ID (',' val+=ID)*;");
 		assertEquals("<Model>val+", constraint);
 	}
 
-	public void testSummarizeAssignments2() throws Exception {
+	@Test public void testSummarizeAssignments2() throws Exception {
 		String constraint = parseRule("Model: val+=ID (',' val+=ID)+;");
 		assertEquals("<Model>(val val+)", constraint);
 	}
 
-	public void testSummarizeAssignments3() throws Exception {
+	@Test public void testSummarizeAssignments3() throws Exception {
 		String constraint = parseRule("Model: (val+=ID (',' val+=ID)*)?;");
 		assertEquals("<Model>val*", constraint);
 	}
 
-	public void testMulti1() throws Exception {
+	@Test public void testMulti1() throws Exception {
 		String constraint = parseRule("model : ('kw1' a+=ID b+=ID)* ('kw2' a+=ID c+=ID)* ('kw3' b+=ID c+=ID)*;");
 		assertEquals("<model>((a b)* (a c)* (b c)*)", constraint);
 	}
 
-	public void testRuleCall1() throws Exception {
+	@Test public void testRuleCall1() throws Exception {
 		StringBuilder b = new StringBuilder();
 		b.append("Model: Sub; ");
 		b.append("Sub: val=ID; ");
@@ -179,7 +180,7 @@ public class ConcreteSyntaxConstraintProviderTest extends AbstractXtextTests {
 		assertEquals("<Sub>val", constraint);
 	}
 
-	public void testRuleCall2() throws Exception {
+	@Test public void testRuleCall2() throws Exception {
 		StringBuilder b = new StringBuilder();
 		b.append("Model: (Sub1 | Sub2) name=ID 'somekeyword'; ");
 		b.append("Sub1: 'sub1' val1=ID; ");
@@ -188,7 +189,7 @@ public class ConcreteSyntaxConstraintProviderTest extends AbstractXtextTests {
 		assertEquals("<Sub1, Sub2>((<Sub1>val1|<Sub2>val2) name)", constraint);
 	}
 
-	public void testRuleCall3() throws Exception {
+	@Test public void testRuleCall3() throws Exception {
 		StringBuilder b = new StringBuilder();
 		b.append("Model: (Sub1 | Sub2)? name=ID 'somekeyword'; ");
 		b.append("Sub1: 'sub1' val1=ID; ");
@@ -197,7 +198,7 @@ public class ConcreteSyntaxConstraintProviderTest extends AbstractXtextTests {
 		assertEquals("<Model, Sub1, Sub2>(<Sub1, Sub2>(<Sub1>val1|<Sub2>val2)? name)", constraint);
 	}
 
-	public void testRecursion() throws Exception {
+	@Test public void testRecursion() throws Exception {
 		StringBuilder b = new StringBuilder();
 		b.append("Model returns Model: Sub1 | name=ID 'somekeyword'; ");
 		b.append("Sub1 returns Model: '(' Model ')'; ");
@@ -205,14 +206,14 @@ public class ConcreteSyntaxConstraintProviderTest extends AbstractXtextTests {
 		assertNull(constraint);
 	}
 
-	public void testAssignedActions() throws Exception {
+	@Test public void testAssignedActions() throws Exception {
 		StringBuilder b = new StringBuilder();
 		b.append("Model: 'y' val=ID ({Evil.left=current} ',' right=ID)?; ");
 		String constraint = parseRule(b.toString());
 		assertNull(constraint);
 	}
 
-	public void testNestedAssignedActions() throws Exception {
+	@Test public void testNestedAssignedActions() throws Exception {
 		StringBuilder b = new StringBuilder();
 		b.append("Model: Foo | Bar; ");
 		b.append("Foo: 'x' val=ID; ");
@@ -222,12 +223,12 @@ public class ConcreteSyntaxConstraintProviderTest extends AbstractXtextTests {
 	}
 
 	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=312220
-	public void testUnassignedRuleCall() throws Exception {
+	@Test public void testUnassignedRuleCall() throws Exception {
 		String constraint = parseRule("WithoutHidden hidden(): '[' 'kw' WS x=INT '.' y=INT ']';");
 		assertEquals("<WithoutHidden>(x y)", constraint);
 	}
 
-	public void testNestedAlternative() throws Exception {
+	@Test public void testNestedAlternative() throws Exception {
 		StringBuilder b = new StringBuilder();
 		b.append("Model: (SE | Decl) ';'; ");
 		b.append("Decl:	type+=ID name+=ID; ");
@@ -236,12 +237,12 @@ public class ConcreteSyntaxConstraintProviderTest extends AbstractXtextTests {
 		assertEquals("<Decl, SE>(<SE>(ids|ints)+|<Decl>(type name))", constraint);
 	}
 
-	public void testEmptyAlternative() throws Exception {
+	@Test public void testEmptyAlternative() throws Exception {
 		String constraint = parseRule("Import: ('import' | 'imp') foo=ID?;");
 		assertEquals("<Import>foo?", constraint);
 	}
 	
-	public void testOptionalGroupWithUnassignedElements() throws Exception {
+	@Test public void testOptionalGroupWithUnassignedElements() throws Exception {
 		StringBuilder b = new StringBuilder();
 		b.append("Model: ('(' INT ')')? a=STRING b=STRING;");
 		String constraint = parseRule(b.toString());

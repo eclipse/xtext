@@ -9,13 +9,14 @@ package org.eclipse.xtext.parser.terminalrules;
 
 import java.io.ByteArrayOutputStream;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parser.terminalrules.unicode.AbstractString;
 import org.eclipse.xtext.parser.terminalrules.unicode.GString;
 import org.eclipse.xtext.parser.terminalrules.unicode.Model;
 import org.eclipse.xtext.parser.terminalrules.unicode.QuotedString;
 import org.eclipse.xtext.parser.terminalrules.unicode.UnicodeFactory;
 import org.eclipse.xtext.resource.XtextResource;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -27,12 +28,12 @@ public class UnicodeTest extends AbstractXtextTests {
 	private static final String MIXED_UMLAUTS = "\u00c4\\u00d6\u00dc";
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(UnicodeTestLanguageStandaloneSetup.class);
 	}
 
-	public void testParse() throws Exception {
+	@Test public void testParse() throws Exception {
 		XtextResource resource = getResource(UMLAUTS, "test.mydsl");
 		Model model = (Model) resource.getContents().get(0);
 		for(AbstractString s: model.getStrings()) {
@@ -40,7 +41,7 @@ public class UnicodeTest extends AbstractXtextTests {
 		}
 	}
 	
-	public void testParseSTRING() throws Exception {
+	@Test public void testParseSTRING() throws Exception {
 		XtextResource resource = getResource("'" + UMLAUTS + "' '" + QUOTED_UMLAUTS + "' '" + MIXED_UMLAUTS +"'", "test.mydsl");
 		Model model = (Model) resource.getContents().get(0);
 		for(AbstractString s: model.getStrings()) {
@@ -49,7 +50,7 @@ public class UnicodeTest extends AbstractXtextTests {
 	}
 	
 
-	public void testWrite() throws Exception {
+	@Test public void testWrite() throws Exception {
 		XtextResource resource = getResource("", "test.mydsl");
 		Model model = UnicodeFactory.eINSTANCE.createModel();
 		resource.getContents().add(model);

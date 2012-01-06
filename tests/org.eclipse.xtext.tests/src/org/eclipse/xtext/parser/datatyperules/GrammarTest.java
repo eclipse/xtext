@@ -13,8 +13,9 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguageGrammarAccess;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -25,19 +26,19 @@ public class GrammarTest extends AbstractXtextTests {
 	private Grammar grammar;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(DatatypeRulesTestLanguageStandaloneSetup.class);
 		grammarAccess = get(DatatypeRulesTestLanguageGrammarAccess.class);
 		grammar = grammarAccess.getGrammar();
 	}
 
-	public void testGrammarAccess() {
+	@Test public void testGrammarAccess() {
 		assertEquals(2, grammar.getMetamodelDeclarations().size());
 		assertEquals(8, grammar.getRules().size());
 	}
 
-	public void testRuleCompositeModel() {
+	@Test public void testRuleCompositeModel() {
 		AbstractRule rule = grammar.getRules().get(0);
 		assertEquals("CompositeModel", rule.getName());
 		ParserRule parserRule = (ParserRule) rule;
@@ -47,7 +48,7 @@ public class GrammarTest extends AbstractXtextTests {
 		assertEquals("CompositeModel", rule.getType().getClassifier().getName());
 	}
 
-	public void testRuleModel() {
+	@Test public void testRuleModel() {
 		AbstractRule rule = grammar.getRules().get(1);
 		assertEquals("Model", rule.getName());
 		ParserRule parserRule = (ParserRule) rule;
@@ -57,7 +58,7 @@ public class GrammarTest extends AbstractXtextTests {
 		assertEquals("Model", rule.getType().getClassifier().getName());
 	}
 
-	public void testRuleModelId() {
+	@Test public void testRuleModelId() {
 		AbstractRule rule = grammar.getRules().get(2);
 		assertEquals("ModelId", rule.getName());
 		ParserRule parserRule = (ParserRule) rule;
@@ -67,7 +68,7 @@ public class GrammarTest extends AbstractXtextTests {
 		assertEquals(EcorePackage.Literals.ESTRING, rule.getType().getClassifier());
 	}
 
-	public void testRuleNestedModelId() {
+	@Test public void testRuleNestedModelId() {
 		AbstractRule rule = grammar.getRules().get(3);
 		assertEquals("NestedModelId", rule.getName());
 		ParserRule parserRule = (ParserRule) rule;
@@ -77,7 +78,7 @@ public class GrammarTest extends AbstractXtextTests {
 		assertEquals(EcorePackage.Literals.ESTRING, rule.getType().getClassifier());
 	}
 
-	public void testRuleFraction() {
+	@Test public void testRuleFraction() {
 		AbstractRule rule = grammar.getRules().get(4);
 		assertEquals("Fraction", rule.getName());
 		ParserRule parserRule = (ParserRule) rule;

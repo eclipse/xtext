@@ -11,8 +11,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.generator.parser.antlr.splitting.ConditionSimplifier;
 import org.eclipse.xtext.generator.parser.antlr.splitting.SimpleExpressionsStandaloneSetup;
 import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.IfCondition;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.util.EmfFormatter;
+import org.junit.Test;
 
 
 /**
@@ -23,49 +24,49 @@ public class CondititionSimplifierTest extends AbstractXtextTests {
 	private ConditionSimplifier conditionSimplifier;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(SimpleExpressionsStandaloneSetup.class);
 		conditionSimplifier = new ConditionSimplifier();
 	}
 	
-	public void testAorA() throws Exception {
+	@Test public void testAorA() throws Exception {
 		String model = "if (a||a) {";
 		String expectation = "if (a) {";
 		check(expectation, model);
 	}
 	
-	public void testAandA() throws Exception {
+	@Test public void testAandA() throws Exception {
 		String model = "if (a&&a) {";
 		String expectation = "if (a) {";
 		check(expectation, model);
 	}
 	
-	public void testNotNotA() throws Exception {
+	@Test public void testNotNotA() throws Exception {
 		String model = "if (!(!a)) {";
 		String expectation = "if (a) {";
 		check(expectation, model);
 	}
 	
-	public void testAorAandB() throws Exception {
+	@Test public void testAorAandB() throws Exception {
 		String model = "if (a||a&&b) {";
 		String expectation = "if (a) {";
 		check(expectation, model);
 	}
 	
-	public void testAandBorA() throws Exception {
+	@Test public void testAandBorA() throws Exception {
 		String model = "if (a&&b||a) {";
 		String expectation = "if (a) {";
 		check(expectation, model);
 	}
 	
-	public void testAandBorAandB() throws Exception {
+	@Test public void testAandBorAandB() throws Exception {
 		String model = "if (a&&b||a&&b) {";
 		String expectation = "if (a&&b) {";
 		check(expectation, model);
 	}
 	
-	public void testNotAorBorBorNotAorB() throws Exception {
+	@Test public void testNotAorBorBorNotAorB() throws Exception {
 		String model = "if (!(a||b)||b||!(a||b)) {";
 		String expectation = "if (!(a||b)||b) {";
 		check(expectation, model);

@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
@@ -31,7 +31,7 @@ public abstract class AbstractXtextInspectorTest extends AbstractXtextTests impl
 	protected List<Triple<String, EObject, EStructuralFeature>> infos;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 		warnings = Lists.newArrayList();
@@ -40,7 +40,7 @@ public abstract class AbstractXtextInspectorTest extends AbstractXtextTests impl
 	}
 
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		infos = null;
 		warnings = null;
 		errors = null;

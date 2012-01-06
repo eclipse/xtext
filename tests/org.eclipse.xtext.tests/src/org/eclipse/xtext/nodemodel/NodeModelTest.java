@@ -21,14 +21,12 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
-import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.nodemodel.ILeafNode;
-import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.TestLanguageStandaloneSetup;
+import org.junit.Test;
 
 import com.google.common.collect.Lists;
 
@@ -42,12 +40,12 @@ public class NodeModelTest extends AbstractXtextTests {
 	}
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(TestLanguageStandaloneSetup.class);
 	}
 	
-	public void testNavigabilityAst2Node() throws Exception {
+	@Test public void testNavigabilityAst2Node() throws Exception {
 		EObject object = getModel(MODEL);
 		checkNavigabilityAst2Node(object);
 		for (Iterator<EObject> i = object.eAllContents(); i.hasNext();) {
@@ -55,7 +53,7 @@ public class NodeModelTest extends AbstractXtextTests {
 		}
 	}
 
-	public void testNavigabilityNode2Ast() throws Exception {
+	@Test public void testNavigabilityNode2Ast() throws Exception {
 		EObject object = getModel(MODEL);
 		EList<Adapter> adapters = object.eAdapters();
 		assertEquals(1 /* compositeNode */ + 1 /* cache */, adapters.size());
@@ -67,7 +65,7 @@ public class NodeModelTest extends AbstractXtextTests {
 		}
 	}
 
-	public void testGrammarElement() throws Exception {
+	@Test public void testGrammarElement() throws Exception {
 		ICompositeNode rootNode = getRootNode(MODEL);
 		EObject rootGrammarElement = rootNode.getGrammarElement();
 		assertTrue(rootGrammarElement instanceof ParserRule);
@@ -114,7 +112,7 @@ public class NodeModelTest extends AbstractXtextTests {
 		return false;
 	}
 
-	public void testTokenTexts() throws Exception {
+	@Test public void testTokenTexts() throws Exception {
 		Pattern whitespacePattern = Pattern.compile("\\s*");
 		String[] tokenTexts = MODEL.split(" ");
 		int tokenIndex = 0;
@@ -131,7 +129,7 @@ public class NodeModelTest extends AbstractXtextTests {
 		}
 	}
 
-	public void testKeywordInAlternative() throws Exception {
+	@Test public void testKeywordInAlternative() throws Exception {
 		with(SimpleExpressionsTestLanguageStandaloneSetup.class);
 		EObject object = getModel("d / e");
 		ICompositeNode root = NodeModelUtils.getNode(object).getRootNode();

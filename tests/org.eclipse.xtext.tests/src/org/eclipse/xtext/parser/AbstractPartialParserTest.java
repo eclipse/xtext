@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -26,14 +26,14 @@ public abstract class AbstractPartialParserTest extends AbstractXtextTests {
 	protected PartialParsingHelper partialParser;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		partialParser = new PartialParsingHelper();
 		comparator = new EmfStructureComparator();
 	}
 
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		comparator = null;
 		partialParser = null;
 		super.tearDown();

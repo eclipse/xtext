@@ -5,15 +5,16 @@ import org.eclipse.xtext.nodemodel.impl.InvariantChecker;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Test;
 
 public class OffsetInformationTest extends AbstractPartialParserTest {
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 	}
 	
-	public void testCheckParsing() throws Exception {
+	@Test public void testCheckParsing() throws Exception {
 		String string = "spielplatz 34 'holla' {\n"
 			+ "  kind (Horst 3)\n"
 			+ "  erwachsener (Julia 45)\n"

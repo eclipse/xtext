@@ -9,16 +9,16 @@ package org.eclipse.xtext.generator;
 
 import java.util.Set;
 
-import junit.framework.TestCase;
-
 import org.eclipse.xtext.Grammar;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class CompositeGeneratorFragmentTest extends TestCase {
+public class CompositeGeneratorFragmentTest extends Assert {
 	
-	public void testFinalBindingsPersist() throws Exception {
+	@Test public void testFinalBindingsPersist() throws Exception {
 		CompositeGeneratorFragment fragment = new CompositeGeneratorFragment();
 		fragment.addFragment(new DefaultGeneratorFragment() {
 				@Override
@@ -45,7 +45,7 @@ public class CompositeGeneratorFragmentTest extends TestCase {
 		assertEquals("BAR", bindings.iterator().next().getValue().getTypeName());
 	}
 	
-	public void testNonFinalBindingsOverride() throws Exception {
+	@Test public void testNonFinalBindingsOverride() throws Exception {
 		CompositeGeneratorFragment fragment = new CompositeGeneratorFragment();
 		fragment.addFragment(new DefaultGeneratorFragment() {
 			@Override
@@ -72,7 +72,7 @@ public class CompositeGeneratorFragmentTest extends TestCase {
 		assertEquals("FOO", bindings.iterator().next().getValue().getTypeName());
 	}
 	
-	public void testFinalBindingsConflict() throws Exception {
+	@Test public void testFinalBindingsConflict() throws Exception {
 		CompositeGeneratorFragment fragment = new CompositeGeneratorFragment();
 		fragment.addFragment(new DefaultGeneratorFragment() {
 			@Override

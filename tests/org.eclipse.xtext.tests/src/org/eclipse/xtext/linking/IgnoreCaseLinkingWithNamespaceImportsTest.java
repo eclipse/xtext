@@ -7,24 +7,26 @@
  *******************************************************************************/
 package org.eclipse.xtext.linking;
 
+import org.junit.Test;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class IgnoreCaseLinkingWithNamespaceImportsTest extends AbstractIgnoreCaseLinkingTest {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(IgnoreCaseNamespacesTestLanguageStandaloneSetup.class);
 	}
 	
 	@Override
-	public void testWithImports() throws Exception {
+	@Test public void testWithImports() throws Exception {
 		String input = "'a.b.*' a C { b a { c B {} d a {} } }";
 		getModel(input);
 	}
 	
-	public void testWithImportsIgnoreCase_01() throws Exception {
+	@Test public void testWithImportsIgnoreCase_01() throws Exception {
 		String input = "'A.B.*' a C { b a { c B {} d a {} } }";
 		getModel(input);
 	}

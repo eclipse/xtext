@@ -14,8 +14,8 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
-import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.junit.serializer.DebugSequenceAcceptor;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.junit4.serializer.DebugSequenceAcceptor;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -28,6 +28,7 @@ import org.eclipse.xtext.serializer.sequencer.IHiddenTokenSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
 import org.eclipse.xtext.serializer.sequencer.NodeModelSemanticSequencer;
+import org.junit.Test;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
@@ -40,7 +41,7 @@ import com.google.inject.Provider;
 public class HiddenTokenSequencerTest extends AbstractXtextTests {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(SyntacticSequencerTestLanguageStandaloneSetup.class);
 		getInjector().injectMembers(this);
@@ -106,7 +107,7 @@ public class HiddenTokenSequencerTest extends AbstractXtextTests {
 		assertEquals(Joiner.on("\n").join(getNodeSequence(model)), Joiner.on("\n").join(actual.getColumn(4)));
 	}
 
-	//	public void testXtext() throws Exception {
+	//	@Test public void testXtext() throws Exception {
 	//		with(XtextStandaloneSetup.class);
 	//		Grammar model = (Grammar) new XtextResourceSet()
 	//				.getResource(URI.createURI("classpath:/org/eclipse/xtext/Xtext.xtext"), true).getContents().get(0);
@@ -119,7 +120,7 @@ public class HiddenTokenSequencerTest extends AbstractXtextTests {
 	//		assertEquals(Join.join("\n", getNodeSequence(model)), Join.join("\n", actual.getColumn(4)));
 	//	}
 
-	public void testMandatoryKeywords() throws Exception {
+	@Test public void testMandatoryKeywords() throws Exception {
 		testSequence("#1 a kw1 b kw2 kw3 c kw4");
 	}
 
@@ -138,55 +139,55 @@ public class HiddenTokenSequencerTest extends AbstractXtextTests {
 		return result;
 	}
 
-	public void testExp0_a() throws Exception {
+	@Test public void testExp0_a() throws Exception {
 		testSequence("#2 a + b + c + d");
 	}
 
-	public void testExp1_a() throws Exception {
+	@Test public void testExp1_a() throws Exception {
 		testSequence("#3 a + b + c + d");
 	}
 
-	public void testExp1_b() throws Exception {
+	@Test public void testExp1_b() throws Exception {
 		testSequence("#3 a + b");
 	}
 
-	public void testExp1_c() throws Exception {
+	@Test public void testExp1_c() throws Exception {
 		testSequence("#3 (a + b)");
 	}
 
-	public void testExp2_a() throws Exception {
+	@Test public void testExp2_a() throws Exception {
 		testSequence("#4 a * (b + c)");
 	}
 
-	public void testExp2_b() throws Exception {
+	@Test public void testExp2_b() throws Exception {
 		testSequence("#4 a * (((b + c)))");
 	}
 
-	public void testExp2_c() throws Exception {
+	@Test public void testExp2_c() throws Exception {
 		testSequence("#4 (a * (((b + c))))");
 	}
 
-	public void testExp2_d() throws Exception {
+	@Test public void testExp2_d() throws Exception {
 		testSequence("#4 (b + c) * d");
 	}
 
-	public void testExp2_e() throws Exception {
+	@Test public void testExp2_e() throws Exception {
 		testSequence("#4 ((a * (((b + c)) * d) + e)) + f");
 	}
 
-	public void testCrossRef1_a() throws Exception {
+	@Test public void testCrossRef1_a() throws Exception {
 		testSequence("#5 $1terminal kw1 $1terminal");
 	}
 
-	public void testCrossRef1_b() throws Exception {
+	@Test public void testCrossRef1_b() throws Exception {
 		testSequence("#5 datatype kw2 datatype");
 	}
 
-	public void testCrossRef1_c() throws Exception {
+	@Test public void testCrossRef1_c() throws Exception {
 		testSequence("#5 someid kw3 someid");
 	}
 
-	public void testCrossRef1_d() throws Exception {
+	@Test public void testCrossRef1_d() throws Exception {
 		testSequence("#5 someid kw4 someid");
 	}
 }

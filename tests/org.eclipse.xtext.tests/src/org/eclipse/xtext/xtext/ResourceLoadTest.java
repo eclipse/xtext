@@ -7,18 +7,32 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Collection;
 import java.util.Iterator;
-
-import junit.framework.TestResult;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.XtextResource;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+
+import com.google.common.collect.Lists;
 
 /**
  * Really long running smoke tests for the xtext grammar. Uses all test grammars.
@@ -26,44 +40,88 @@ import org.eclipse.xtext.resource.XtextResource;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Jan Koehnlein
  */
+@RunWith(value = Parameterized.class)
 public class ResourceLoadTest extends AbstractXtextTests {
 
 	private String grammarPath;
 	private String model;
 	
 	private static boolean FIRST_ONLY = true; 
-
-	@Override
-	public int countTestCases() {
-		return super.countTestCases() * getAllTestGrammarPaths(FIRST_ONLY).size();
+	
+	public ResourceLoadTest(String grammarPath) {
+		this.grammarPath = grammarPath;
 	}
 
-	@Override
-	public String getName() {
-		return super.getName() + (grammarPath != null ? (" [" + grammarPath + "]") : "");
+	@Parameters
+	public static Collection<Object[]> data() {
+		List<Object[]> result = Lists.newArrayList();
+		try {
+			String mweFile = staticReadFileIntoString("org/eclipse/xtext/GenerateAllTestLanguages.mwe2");
+			Pattern pattern = Pattern.compile("uri\\s*=\\s*\"([^\"]*)\"");
+			Matcher matcher = pattern.matcher(mweFile);
+			while (matcher.find()) {
+				String grammarURI = matcher.group(1);
+				String grammarPath = grammarURI.replaceFirst("classpath:/", "");
+				result.add(new Object[] { grammarPath });
+				if(FIRST_ONLY) 
+					break;
+			}
+		} catch (Exception exc) {
+			// ignore
+		}
+		return result;
 	}
+	
+	protected static String staticReadFileIntoString(String filePath) throws IOException {
+		ClassLoader classLoader = ResourceLoadTest.class.getClassLoader();
+		URL url = classLoader.getResource(filePath);
+		if (url == null) {
+			fail("Could not read resource: '" + filePath + "'. Is your file system case sensitive?");
+		} else {
+			if(!new File(url.getPath()).getCanonicalPath().endsWith(filePath))
+				throw new RuntimeException(filePath + ":\n" +
+						"The file does not exist exactly as it was named.\n" +
+						"The test is likely to cause trouble on the build server.\n" +
+						"Is your filesystem case insensitive? Please verify the spelling.");
 
-	@Override
-	public void run(TestResult result) {
-		for (String testGrammarPath : getAllTestGrammarPaths(FIRST_ONLY)) {
+			InputStream resourceAsStream = classLoader.getResourceAsStream(filePath);
 			try {
-				model = null;
-				grammarPath = testGrammarPath;
-				model = readFileIntoString(testGrammarPath);
-				super.run(result);
-			} catch (Exception exc) {
-				result.addError(this, exc);
+				if (resourceAsStream == null) {
+					fail("Could not read resource: '" + filePath + "'. Is your file system case sensitive?");
+				} else {
+						byte[] buffer = new byte[2048];
+						int bytesRead = 0;
+						StringBuffer b = new StringBuffer();
+						do {
+							bytesRead = resourceAsStream.read(buffer);
+							if (bytesRead != -1)
+								b.append(new String(buffer, 0, bytesRead));
+						} while (bytesRead != -1);
+						String model = b.toString();
+						return model;
+				}
+			} finally {
+				if (resourceAsStream != null)
+					resourceAsStream.close();
 			}
 		}
+		throw new IllegalStateException("May not happen, but helps to suppress false positives in eclipse' control flow analysis.");
 	}
-
+	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
+		model = readFileIntoString(grammarPath);
+	}
+	
+	@Override
+	public void tearDown() throws Exception {
+		model = null;
+		super.tearDown();
 	}
 
-	public void testNoExceptionDiagnostics_01() throws Exception {
+	@Test public void testNoExceptionDiagnostics_01() throws Exception {
 		for (int i = 0; i < model.length(); i++) {
 			String model = this.model.substring(0, i);
 			Resource r = getResourceFromStringAndExpect(model, UNKNOWN_EXPECTATION);
@@ -71,7 +129,7 @@ public class ResourceLoadTest extends AbstractXtextTests {
 		}
 	}
 
-	public void testNoExceptionDiagnostics_02() throws Exception {
+	@Test public void testNoExceptionDiagnostics_02() throws Exception {
 		for (int i = 0; i < model.length(); i++) {
 			String model = this.model.substring(i);
 			Resource r = getResourceFromStringAndExpect(model, UNKNOWN_EXPECTATION);
@@ -79,7 +137,7 @@ public class ResourceLoadTest extends AbstractXtextTests {
 		}
 	}
 
-	public void testNoExceptionDiagnostics_03() throws Exception {
+	@Test public void testNoExceptionDiagnostics_03() throws Exception {
 		for (int i = 0; i < model.length() - 1; i++) {
 			String model = this.model.substring(0, i) + this.model.substring(i + 1);
 			//			System.out.println(model);
@@ -88,7 +146,7 @@ public class ResourceLoadTest extends AbstractXtextTests {
 		}
 	}
 
-	public void testNoExceptionDiagnostics_04() throws Exception {
+	@Test public void testNoExceptionDiagnostics_04() throws Exception {
 		XtextResource r = getResourceFromString(this.model);
 		assertTrue(r.getErrors().isEmpty());
 		ICompositeNode node = r.getParseResult().getRootNode();
@@ -109,7 +167,7 @@ public class ResourceLoadTest extends AbstractXtextTests {
 		}
 	}
 
-	public void testDummy() {
+	@Test public void testDummy() {
 		assertNotNull(model);
 	}
 

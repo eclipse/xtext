@@ -10,8 +10,6 @@ package org.eclipse.xtext.resource.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -26,6 +24,9 @@ import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.google.common.collect.Lists;
 
@@ -33,7 +34,7 @@ import com.google.common.collect.Lists;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DefaultResourceDescriptionTest extends TestCase {
+public class DefaultResourceDescriptionTest extends Assert {
 
 	private DefaultResourceDescription description;
 	private EPackage pack;
@@ -43,8 +44,8 @@ public class DefaultResourceDescriptionTest extends TestCase {
 	private IQualifiedNameProvider nameProvider;
 	private DefaultResourceDescriptionStrategy strategy;
 
-	@Override
-	protected void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		resource = new XMLResourceImpl();
 		resource.setURI(URI.createURI("foo:/test"));
 		nameProvider = new IQualifiedNameProvider.AbstractImpl() {
@@ -70,7 +71,7 @@ public class DefaultResourceDescriptionTest extends TestCase {
 
 	}
 
-	public void testGetExportedObject_1() throws Exception {
+	@Test public void testGetExportedObject_1() throws Exception {
 		strategy.setQualifiedNameProvider(new IQualifiedNameProvider.AbstractImpl() {
 			public QualifiedName getFullyQualifiedName(EObject obj) {
 				if (obj instanceof EPackage)
@@ -86,7 +87,7 @@ public class DefaultResourceDescriptionTest extends TestCase {
 		assertEquals(pack, list.get(0).getEObjectOrProxy());
 	}
 
-	public void testGetExportedObject_2() throws Exception {
+	@Test public void testGetExportedObject_2() throws Exception {
 		strategy.setQualifiedNameProvider(new IQualifiedNameProvider.AbstractImpl() {
 			public QualifiedName getFullyQualifiedName(EObject obj) {
 				if (obj instanceof EClassifier)
@@ -104,7 +105,7 @@ public class DefaultResourceDescriptionTest extends TestCase {
 		assertEquals(dtype, list.get(1).getEObjectOrProxy());
 	}
 
-	public void testGetExportedObject_3() throws Exception {
+	@Test public void testGetExportedObject_3() throws Exception {
 		Iterable<IEObjectDescription> iterable = description.getExportedObjects();
 		ArrayList<IEObjectDescription> list = Lists.newArrayList(iterable);
 		assertEquals(3, list.size());
@@ -116,19 +117,19 @@ public class DefaultResourceDescriptionTest extends TestCase {
 		assertEquals(dtype, list.get(2).getEObjectOrProxy());
 	}
 
-	public void testGetExportedEObjects_EClass_String() throws Exception {
+	@Test public void testGetExportedEObjects_EClass_String() throws Exception {
 		assertContains(description.getExportedObjects(pack.eClass(), QualifiedName.create(pack.getName()), false), pack);
 		assertContains(description.getExportedObjects(pack.eClass(), QualifiedName.create("foo"), false));
 		assertContains(description.getExportedObjects(eClass.eClass(), QualifiedName.create("foo"), false));
 	}
 	
-	public void testGetExportedEObjectsIgnoreCase() throws Exception {
+	@Test public void testGetExportedEObjectsIgnoreCase() throws Exception {
 		assertContains(description.getExportedObjects(pack.eClass(), QualifiedName.create(pack.getName().toUpperCase()), true), pack);
 		assertContains(description.getExportedObjects(pack.eClass(), QualifiedName.create("foo").toUpperCase(),true));
 		assertContains(description.getExportedObjects(eClass.eClass(), QualifiedName.create("foo").toUpperCase(),true));
 	}
 	
-	public void testGetExportedEObjects_EClass() throws Exception {
+	@Test public void testGetExportedEObjects_EClass() throws Exception {
 		assertContains(description.getExportedObjectsByType(EcorePackage.Literals.EPACKAGE),pack);
 		assertContains(description.getExportedObjectsByType(EcorePackage.Literals.ECLASSIFIER),eClass,dtype);
 		assertContains(description.getExportedObjectsByType(EcorePackage.Literals.ECLASS),eClass);
@@ -136,7 +137,7 @@ public class DefaultResourceDescriptionTest extends TestCase {
 		assertContains(description.getExportedObjectsByType(EcorePackage.Literals.EATTRIBUTE));
 	}
 	
-	public void testGetExportedEObjectsForEObject() throws Exception {
+	@Test public void testGetExportedEObjectsForEObject() throws Exception {
 		assertContains(description.getExportedObjectsByObject(pack), pack);
 		assertContains(description.getExportedObjectsByObject(eClass),eClass);
 		assertContains(description.getExportedObjectsByObject(dtype),dtype);
