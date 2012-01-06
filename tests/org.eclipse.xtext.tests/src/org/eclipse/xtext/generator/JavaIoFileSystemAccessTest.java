@@ -9,6 +9,8 @@ package org.eclipse.xtext.generator;
 
 import java.io.File;
 
+import org.eclipse.emf.common.util.URI;
+
 import junit.framework.TestCase;
 
 /**
@@ -30,5 +32,12 @@ public class JavaIoFileSystemAccessTest extends TestCase {
 		assertTrue(file.isFile());
 		file.delete();
 		dir.delete();
+	}
+	
+	public void testURI() throws Exception {
+		JavaIoFileSystemAccess fileSystemAccess = new JavaIoFileSystemAccess();
+		fileSystemAccess.setOutputPath("testOutput", "/testDir");
+		URI uri = fileSystemAccess.getURI("testFile", "testOutput");
+		assertEquals("file:/testDir/testFile", uri.toString());
 	}
 }
