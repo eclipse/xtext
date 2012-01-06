@@ -7,12 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.conversion;
 
-import org.eclipse.xtext.conversion.impl.QualifiedNameValueConverter;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class StaticQualifierValueConverter extends QualifiedNameValueConverter {
+public class StaticQualifierValueConverter extends XbaseQualifiedNameValueConverter {
 
 	@Deprecated
 	@Override

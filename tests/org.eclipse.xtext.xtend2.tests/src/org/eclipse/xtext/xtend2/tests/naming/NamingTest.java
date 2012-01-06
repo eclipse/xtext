@@ -9,8 +9,10 @@ package org.eclipse.xtext.xtend2.tests.naming;
 
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.xbase.conversion.XbaseQualifiedNameValueConverter;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
+import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
@@ -26,6 +28,9 @@ public class NamingTest extends AbstractXtend2TestCase {
 
 	@Inject
 	protected IXtend2JvmAssociations associations;
+	
+	@Inject
+	protected XbaseQualifiedNameValueConverter converter;
 
 	public void testQualifiedNameProvider_0() throws Exception {
 		XtendFile file = file("package foo class Bar {}");
@@ -42,6 +47,20 @@ public class NamingTest extends AbstractXtend2TestCase {
 		assertEquals(QualifiedName.create("foo", "Bar", "baz"), nameProvider.getFullyQualifiedName(function));
 		assertEquals(QualifiedName.create("foo", "Bar", "baz"),
 				nameProvider.getFullyQualifiedName(associations.getDirectlyInferredOperation(function)));
+	}
+	
+	public void testBug364508_toValue() throws Exception {
+		String model = "package foo.create import foo.baz.create class Bar {}";
+		XtendFile file = file(model);
+		XtendClass xtendClass = file.getXtendClass();
+		assertEquals(QualifiedName.create("foo", "create", "Bar"), nameProvider.getFullyQualifiedName(xtendClass));
+		assertEquals(QualifiedName.create("foo", "create", "Bar"),
+				nameProvider.getFullyQualifiedName(associations.getInferredConstructor(xtendClass)));
+	}
+	
+	public void testBug364508_toString() throws Exception {
+		String model = "foo.create";
+		assertEquals(model, converter.toString(model));
 	}
 
 }

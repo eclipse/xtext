@@ -12,7 +12,6 @@ import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.impl.KeywordAlternativeConverter;
 import org.eclipse.xtext.conversion.impl.KeywordBasedValueConverter;
-import org.eclipse.xtext.conversion.impl.QualifiedNameValueConverter;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -30,7 +29,7 @@ import com.google.inject.Singleton;
 public class XbaseValueConverterService extends DefaultTerminalConverters {
 
 	@Inject
-	private QualifiedNameValueConverter qualifiedNameValueConverter;
+	private XbaseQualifiedNameValueConverter qualifiedNameValueConverter;
 	
 	@Inject
 	private StaticQualifierValueConverter staticQualifierConverter;
