@@ -92,7 +92,7 @@ public class MemberFromSuperImplementor {
 				typeReferenceSerializer.serialize(exception, overridingType, appendable);
 			}
 		}
-		appendable.append(" {").increaseIndentation().append("\n");
+		appendable.append(" {").increaseIndentation().newLine();
 		if (isOperation) {
 			if (((JvmOperation) executableFromSuper).isAbstract()) {
 				appendable.append(DEFAULT_BODY);
@@ -103,7 +103,7 @@ public class MemberFromSuperImplementor {
 		} else if (!executableFromSuper.getParameters().isEmpty()) {
 			appendSignature(executableFromSuper, overridingType, typeArgumentContext, appendable, true);
 		}
-		appendable.decreaseIndentation().append("\n}");
+		appendable.decreaseIndentation().newLine().append("}");
 		appendable.closeScope();
 	}
 

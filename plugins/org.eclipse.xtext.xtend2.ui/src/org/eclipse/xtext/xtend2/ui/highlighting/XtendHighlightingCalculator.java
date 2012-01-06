@@ -213,7 +213,7 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 						currentOffset += 3;
 					} else if (node.getText().startsWith("\u00AB\u00AB")) {
 						String nodeText = node.getText();
-						int length = nodeText.indexOf('\n');
+						int length = Math.min(nodeText.indexOf('\n'), nodeText.indexOf('\r'));
 						int start = node.getTotalOffset();
 						if (length == -1) {
 							length = node.getTotalLength();

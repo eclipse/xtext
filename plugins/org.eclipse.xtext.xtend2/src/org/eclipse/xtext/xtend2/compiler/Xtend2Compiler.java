@@ -66,7 +66,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 
 		@Override
 		public void acceptSemanticLineBreak(int charCount, RichStringLiteral origin, boolean controlStructureSeen) {
-			appendable.append("\n");
+			appendable.newLine();
 			appendable.append(variableName);
 			if (!controlStructureSeen) {
 				appendable.append(".newLine();");
@@ -83,7 +83,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 		public void acceptSemanticText(CharSequence text, RichStringLiteral origin) {
 			if (text.length() == 0)
 				return;
-			appendable.append("\n");
+			appendable.newLine();
 			appendable.append(variableName);
 			appendable.append(".append(\"");
 			appendable.append(Strings.convertToJavaString(text.toString()));
@@ -93,7 +93,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 		@Override
 		public void acceptIfCondition(XExpression condition) {
 			ifStack.add((RichStringIf) condition.eContainer());
-			appendable.append("\n");
+			appendable.newLine();
 			appendable.append("{").increaseIndentation();
 			writeIf(condition);
 		}
@@ -106,7 +106,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 
 		protected void writeIf(XExpression condition) {
 			internalToJavaStatement(condition, appendable, true);
-			appendable.append("\n");
+			appendable.newLine();
 			appendable.append("if (");
 			internalToJavaExpression(condition, appendable);
 			appendable.append(") {").increaseIndentation();
@@ -114,7 +114,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 
 		protected void writeElse() {
 			appendable.decreaseIndentation();
-			appendable.append("\n");
+			appendable.newLine();
 			appendable.append("} else {");
 			appendable.increaseIndentation();
 		}
@@ -129,7 +129,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 			RichStringIf richStringIf = ifStack.removeLast();
 			for (int i = 0; i < richStringIf.getElseIfs().size() + 2; i++) {
 				appendable.decreaseIndentation();
-				appendable.append("\n");
+				appendable.newLine();
 				appendable.append("}");
 			}
 		}
@@ -139,17 +139,17 @@ public class Xtend2Compiler extends XbaseCompiler {
 			super.acceptForLoop(parameter, expression);
 			RichStringForLoop forLoop = (RichStringForLoop) expression.eContainer();
 			forStack.add(forLoop);
-			appendable.append("\n").append("{").increaseIndentation();
+			appendable.newLine().append("{").increaseIndentation();
 			internalToJavaStatement(expression, appendable, true);
 			String variableName = null;
 			if (forLoop.getAfter() != null || forLoop.getSeparator() != null || forLoop.getAfter() != null) {
 				variableName = appendable.declareSyntheticVariable(forLoop, "_hasElements");
-				appendable.append("\n");
+				appendable.newLine();
 				appendable.append("boolean ");
 				appendable.append(variableName);
 				appendable.append(" = false;");
 			}
-			appendable.append("\n");
+			appendable.newLine();
 			appendable.append("for(final ");
 			JvmTypeReference paramType = getTypeProvider().getTypeForIdentifiable(parameter);
 			serialize(paramType, parameter, appendable);
@@ -168,26 +168,26 @@ public class Xtend2Compiler extends XbaseCompiler {
 			RichStringForLoop forLoop = forStack.getLast();
 			String varName = getVarName(forLoop, appendable);
 			if (varName != null) {
-				appendable.append("\n");
+				appendable.newLine();
 				appendable.append("if (!");
 				appendable.append(varName);
 				appendable.append(") {");
 				appendable.increaseIndentation();
-				appendable.append("\n");
+				appendable.newLine();
 				appendable.append(varName);
 				appendable.append(" = true;");
 				if (before != null) {
 					writeExpression(before, indentation, false);
 				}
 				appendable.decreaseIndentation();
-				appendable.append("\n");
+				appendable.newLine();
 				appendable.append("}");
 				if (forLoop.getSeparator() != null) {
 					appendable.append(" else {");
 					appendable.increaseIndentation();
 					writeExpression(separator, indentation, true);
 					appendable.decreaseIndentation();
-					appendable.append("\n");
+					appendable.newLine();
 					appendable.append("}");
 				}
 			}
@@ -198,25 +198,25 @@ public class Xtend2Compiler extends XbaseCompiler {
 		public void acceptEndFor(XExpression after, CharSequence indentation) {
 			super.acceptEndFor(after, indentation);
 			appendable.decreaseIndentation();
-			appendable.append("\n");
+			appendable.newLine();
 			appendable.append("}");
 			
 			RichStringForLoop forLoop = forStack.removeLast();
 			if (after != null) {
 				String varName = getVarName(forLoop, appendable);
-				appendable.append("\n");
+				appendable.newLine();
 				appendable.append("if (");
 				appendable.append(varName);
 				appendable.append(") {");
 				appendable.increaseIndentation();
 				writeExpression(after, indentation, false);
 				appendable.decreaseIndentation();
-				appendable.append("\n");
+				appendable.newLine();
 				appendable.append("}");
 			}
 			
 			appendable.decreaseIndentation();
-			appendable.append("\n");
+			appendable.newLine();
 			appendable.append("}");
 		}
 
@@ -228,7 +228,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 		protected void writeExpression(XExpression expression, CharSequence indentation, boolean immediate) {
 			internalToJavaStatement(expression, appendable, true);
 			if (!getTypeReferences().is(getTypeProvider().getType(expression), Void.TYPE)) {
-				appendable.append("\n");
+				appendable.newLine();
 				appendable.append(variableName);
 				if (immediate)
 					appendable.append(".appendImmediate(");
@@ -247,7 +247,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 		// declare variable
 		JvmTypeReference type = getTypeReferences().getTypeForName(StringConcatenation.class, richString);
 		String variableName = b.declareSyntheticVariable(Tuples.pair(richString, "result"), "_builder");
-		b.append("\n");
+		b.newLine();
 		serialize(type, richString, b);
 		b.append(" ");
 		b.append(variableName);

@@ -17,6 +17,8 @@ public class StringBuilderBasedAppendable implements IAppendable {
 	private StringBuilder builder = new StringBuilder(8 * 1024);
 	private int indentationlevel = 0;
 	private String indentation = "  ";
+	private String lineSeparator = "\n";
+	
 	private ImportManager importManager;
 
 	public IAppendable append(JvmType type) {
@@ -25,14 +27,19 @@ public class StringBuilderBasedAppendable implements IAppendable {
 	}
 
 	public IAppendable append(String string) {
-		String replaced = string.replace("\n", getIndentationString());
+		String replaced = string.replace(lineSeparator, getIndentationString());
 		builder.append(replaced);
+		return this;
+	}
+	
+	public IAppendable newLine() {
+		builder.append(getIndentationString());
 		return this;
 	}
 
 	protected CharSequence getIndentationString() {
 		StringBuilder sb = new StringBuilder(10);
-		sb.append("\n");
+		sb.append(lineSeparator);
 		for (int i = 0; i < indentationlevel; i++) {
 			sb.append(indentation);
 		}
@@ -62,9 +69,10 @@ public class StringBuilderBasedAppendable implements IAppendable {
 		this.scopes = scopes;
 	}
 
-	public StringBuilderBasedAppendable(ImportManager typeSerializer, String indentation) {
+	public StringBuilderBasedAppendable(ImportManager typeSerializer, String indentation, String lineSeparator) {
 		this.importManager = typeSerializer;
 		this.indentation = indentation;
+		this.lineSeparator = lineSeparator;
 		openScope();
 	}
 
@@ -117,4 +125,7 @@ public class StringBuilderBasedAppendable implements IAppendable {
 		return scopes.get(name);
 	}
 	
+	protected String getLineSeparator() {
+		return lineSeparator;
+	}
 }

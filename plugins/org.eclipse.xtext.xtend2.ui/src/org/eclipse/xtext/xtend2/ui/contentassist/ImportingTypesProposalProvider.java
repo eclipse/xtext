@@ -15,6 +15,7 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentExtension4;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.ITextViewerExtension;
+import org.eclipse.jface.text.TextUtilities;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.xtext.common.types.xtext.ui.JdtTypesProposalProvider;
 import org.eclipse.xtext.conversion.IValueConverter;
@@ -114,6 +115,7 @@ public class ImportingTypesProposalProvider extends JdtTypesProposalProvider {
 				viewerExtension.setRedraw(false);
 			}
 			DocumentRewriteSession rewriteSession = null;
+			String lineSeparator = TextUtilities.getDefaultLineDelimiter(document);
 			try {
 				if (document instanceof IDocumentExtension4) {
 					rewriteSession = ((IDocumentExtension4) document).startRewriteSession(DocumentRewriteSessionType.UNRESTRICTED_SMALL);
@@ -146,9 +148,11 @@ public class ImportingTypesProposalProvider extends JdtTypesProposalProvider {
 				document.replace(proposal.getReplacementOffset(), proposal.getReplacementLength(), escapedShortname);
 			
 				// add import statement
-				String importStatement = (startWithLineBreak ? "\nimport " : "import ") + importConverter.toString(typeName);
-				if (endWithLineBreak)
-					importStatement += "\n\n";
+				String importStatement = (startWithLineBreak ? lineSeparator + "import " : "import ") + importConverter.toString(typeName);
+				if (endWithLineBreak) {
+					importStatement += lineSeparator;
+					importStatement += lineSeparator;
+				}
 				document.replace(offset, 0, importStatement.toString());
 				proposal.setCursorPosition(proposal.getCursorPosition() + importStatement.length());
 				

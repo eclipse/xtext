@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
+import org.eclipse.jface.text.TextUtilities;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -29,9 +30,12 @@ public class WhitespaceHelper {
 
 	private String suffix;
 
+	private String lineSeparator;
+
 	public void initialize(IDocument document, int offset, int length, boolean ensureEmptyLinesAround) {
 		this.offset = offset;
 		this.length = length;
+		this.lineSeparator = TextUtilities.getDefaultLineDelimiter(document);
 		if (ensureEmptyLinesAround) {
 			prefix = calculateLeadingWhitespace(document);
 			suffix = calculateTrailingWhitespace(document);
@@ -68,13 +72,13 @@ public class WhitespaceHelper {
 							int skipLeadingWhitespace = linePrefix.length() + lineDelimiterLength;
 							offset -= skipLeadingWhitespace;
 							length += skipLeadingWhitespace;
-							return "\n";
+							return lineSeparator;
 						} else {
-							return "\n";
+							return lineSeparator;
 						}
 					}
 				} else {
-					return "\n\n";
+					return lineSeparator + lineSeparator;
 				}
 			}
 		} catch (BadLocationException e) {
@@ -95,7 +99,7 @@ public class WhitespaceHelper {
 					if (lineNr < document.getNumberOfLines() - 1) {
 						IRegion lineInformation = document.getLineInformation(lineNr + 1);
 						if (!isEmpty(document.get(lineInformation.getOffset(), lineInformation.getLength()).trim())) {
-							return "\n";
+							return lineSeparator;
 						}
 					}
 				} else {
@@ -105,7 +109,7 @@ public class WhitespaceHelper {
 						else
 							break;
 					}
-					return "\n\n";
+					return lineSeparator + lineSeparator;
 				}
 			}
 		} catch (BadLocationException e) {

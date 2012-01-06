@@ -418,21 +418,22 @@ public class Xtend2QuickfixProvider extends DefaultQuickfixProvider {
 					new ISemanticModification() {
 						public void apply(EObject element, IModificationContext context) throws Exception {
 							XtendClass clazz = (XtendClass) element;
-							ReplacingAppendable appendable = appendableFactory.get(context.getXtextDocument(), clazz,
+							IXtextDocument document = context.getXtextDocument();
+							ReplacingAppendable appendable = appendableFactory.get(document, clazz,
 									superMemberImplementor.getFunctionInsertOffset(clazz), 0);
 							appendable.increaseIndentation();
 							for (String operationUriAsString : issue.getData()) {
 								URI operationURI = URI.createURI(operationUriAsString);
 								EObject overridden = clazz.eResource().getResourceSet().getEObject(operationURI, true);
 								if (overridden instanceof JvmOperation) {
-									appendable.append("\n");
+									appendable.newLine();
 									superMemberImplementor.appendOverrideFunction(clazz, (JvmOperation) overridden,
 											appendable);
-									appendable.append("\n");
+									appendable.newLine();
 								}
 							}
 							appendable.decreaseIndentation();
-							appendable.append("\n");
+							appendable.newLine();
 							appendable.commitChanges();
 						}
 					});
@@ -502,17 +503,24 @@ public class Xtend2QuickfixProvider extends DefaultQuickfixProvider {
 									appendable
 											.append("try {")
 											.increaseIndentation()
-											.append("\n")
-											.append(xtextDocument.get(toBeSurroundedNode.getOffset(),
-													toBeSurroundedNode.getLength())).decreaseIndentation()
-											.append("\n} catch (");
+												.newLine()
+												.append(xtextDocument.get(toBeSurroundedNode.getOffset(),
+														toBeSurroundedNode.getLength()))
+											.decreaseIndentation()
+											.newLine()
+											.append("} catch (");
 									typeRefSerializer.serialize(typeRefs.createTypeRef(exceptionType),
 											childThrowingException, appendable);
 									appendable.append(" ");
 									String exceptionVar = appendable.declareVariable(exceptionType, "exc");
-									appendable.append(exceptionVar).append(") {").increaseIndentation()
-											.append("\nthrow new RuntimeException(\"auto-generated try/catch\")")
-											.decreaseIndentation().append("\n}").closeScope();
+									appendable.append(exceptionVar)
+											.append(") {")
+											.increaseIndentation()
+												.newLine()
+												.append("throw new RuntimeException(\"auto-generated try/catch\")")
+											.decreaseIndentation()
+											.newLine()
+											.append("}").closeScope();
 									appendable.commitChanges();
 								}
 							}

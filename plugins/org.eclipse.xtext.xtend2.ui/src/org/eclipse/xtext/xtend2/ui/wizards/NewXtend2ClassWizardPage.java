@@ -17,6 +17,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.JavaModelException;
@@ -30,6 +31,8 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
+import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 
 import com.google.inject.Inject;
 
@@ -44,6 +47,12 @@ public class NewXtend2ClassWizardPage extends NewTypeWizardPage {
 	@Inject
 	private FieldInitializerUtil util;
 
+	@Inject 
+	private IWhitespaceInformationProvider whitespaceInformationProvider;
+	
+	@Inject 
+	private IStorage2UriMapper storage2UriMapper;
+	
 	private int size;
 
 	public NewXtend2ClassWizardPage() {
@@ -129,14 +138,16 @@ public class NewXtend2ClassWizardPage extends NewTypeWizardPage {
 			}
 		}
 		IResource res = getPackageFragment().getResource();
-		IFile xtendClass = null;
-			xtendClass = ((IFolder) res).getFile(getTypeName() + ".xtend"); //$NON-NLS-1$
+		IFile xtendClass = ((IFolder) res).getFile(getTypeName() + ".xtend"); //$NON-NLS-1$
 		try {
+			URI uri = storage2UriMapper.getUri(xtendClass);
 			String contents = XtendClassUtil.create(
 					getTypeName(),
 					getPackageFragment(),
 					getSuperClass(),
 					getSuperInterfaces(),
+					whitespaceInformationProvider.getIndentationInformation(uri).getIndentString(),
+					whitespaceInformationProvider.getLineSeparatorInformation(uri).getLineSeparator(),
 					monitor);
 			size = contents.length();
 			xtendClass.create(new ByteArrayInputStream(contents.getBytes()), true, monitor);

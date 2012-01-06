@@ -174,7 +174,7 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
   }
   
   public String compile(final XBlockExpression obj, final ImportManager mnr) {
-      StringBuilderBasedAppendable _stringBuilderBasedAppendable = new StringBuilderBasedAppendable(mnr, "\t");
+      StringBuilderBasedAppendable _stringBuilderBasedAppendable = new StringBuilderBasedAppendable(mnr, "\t", "\n");
       final StringBuilderBasedAppendable appendable = _stringBuilderBasedAppendable;
       appendable.increaseIndentation();
       XbaseCompiler _compiler = this.compiler;

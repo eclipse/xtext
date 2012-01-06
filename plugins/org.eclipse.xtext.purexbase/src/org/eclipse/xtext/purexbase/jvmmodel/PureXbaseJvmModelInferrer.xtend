@@ -78,7 +78,7 @@ class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
 	}
 	
 	def compile(XBlockExpression obj, ImportManager mnr) {
-		val appendable = new StringBuilderBasedAppendable(mnr,"\t")
+		val appendable = new StringBuilderBasedAppendable(mnr, "\t", "\n")
 		appendable.increaseIndentation
 		compiler.compile(obj, appendable, obj.newTypeRef(Void::TYPE))
 		return appendable.toString

@@ -96,7 +96,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 						};
 						declareSyntheticVariable(expr, b, later);
 					} else {
-						b.append("\n");
+						b.newLine();
 						featureCalltoJavaExpression(expr, b);
 						b.append(";");
 					}
@@ -107,7 +107,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 
 	protected void _toJavaStatement(final XFeatureCall expr, final IAppendable b, boolean isReferenced) {
 		if (expr.getFeature() instanceof JvmConstructor) {
-			b.append("\n");
+			b.newLine();
 			featureCalltoJavaExpression(expr, b, true);
 			b.append(";");
 		} else {
@@ -119,17 +119,17 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		XExpression leftOperand = ((XBinaryOperation) binaryOperation).getLeftOperand();
 		declareSyntheticVariable(binaryOperation, b);
 		prepareExpression(leftOperand, b);
-		b.append("\nif (");
+		b.newLine().append("if (");
 		if (binaryOperation.getConcreteSyntaxFeatureName().equals(expressionHelper.getAndOperator())) {
 			b.append("!");
 		}
 		toJavaExpression(leftOperand, b);
 		b.append(") {").increaseIndentation();
 		boolean rightOperand = binaryOperation.getConcreteSyntaxFeatureName().equals(expressionHelper.getOrOperator());
-		b.append("\n").append(b.getName(binaryOperation)).append(" = ").append(Boolean.toString(rightOperand))
+		b.newLine().append(b.getName(binaryOperation)).append(" = ").append(Boolean.toString(rightOperand))
 				.append(";");
 
-		b.decreaseIndentation().append("\n} else {").increaseIndentation();
+		b.decreaseIndentation().newLine().append("} else {").increaseIndentation();
 
 		if (binaryOperation.getImplicitReceiver() != null) {
 			internalToJavaStatement(binaryOperation.getImplicitReceiver(), b, true);
@@ -139,10 +139,10 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				prepareExpression(arg, b);
 		}
 
-		b.append("\n").append(b.getName(binaryOperation)).append(" = ");
+		b.newLine().append(b.getName(binaryOperation)).append(" = ");
 		featureCalltoJavaExpression(binaryOperation, b);
 		b.append(";");
-		b.decreaseIndentation().append("\n}");
+		b.decreaseIndentation().newLine().append("}");
 	}
 
 	@Override
@@ -163,12 +163,12 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		throw new UnsupportedOperationException("spread operator not yet supported");
 		//		prepareAllArguments(expr, b);
 		//		declareLocalVariable(expr, b, Lists.class.getCanonicalName() + ".newArrayList()");
-		//		b.append("\nfor(");
+		//		b.appendNL().append("for(");
 		//		final String varName = getJavaVarName(expr, b) + "_spread";
 		//		b.append(makeJavaIdentifier(varName)).append(" : ");
 		////		toConvertedJavaExpression(expr, b);
 		//		b.append(") {");
-		//		b.append("\n").append(getJavaVarName(expr, b)).append("add(");
+		//		b.appendNL().append(getJavaVarName(expr, b)).append("add(");
 		//		b.append(varName).append(".");
 		//		appendFeatureCall(expr, b);
 		//		b.append(";");
@@ -183,7 +183,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				String varName = getVarName(((XAbstractFeatureCall) arg).getFeature(), b);
 				String finalVariable = b.declareSyntheticVariable(Tuples.create("Convertable", arg), "_typeConverted_"
 						+ varName);
-				b.append("\n").append("final ");
+				b.newLine().append("final ");
 				serialize(type, arg, b);
 				b.append(" ").append(finalVariable).append(" = ").append("(");
 				serialize(type, arg, b);
