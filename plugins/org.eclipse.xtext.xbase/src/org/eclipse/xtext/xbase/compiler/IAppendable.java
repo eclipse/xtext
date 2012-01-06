@@ -21,6 +21,8 @@ public interface IAppendable {
 
 	IAppendable append(JvmType type);
 
+	IAppendable newLine();
+
 	IAppendable increaseIndentation();
 
 	IAppendable decreaseIndentation();

@@ -173,7 +173,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		serialize(resolvedExpectedType, null, appendable, true, false);
 		appendable.append("() {");
 		appendable.increaseIndentation().increaseIndentation();
-		appendable.append("\npublic ");
+		appendable.newLine().append("public ");
 		serialize(typeArgumentContext.resolve(operation.getReturnType()), null, appendable, true, false);
 		appendable.append(" ").append(operation.getSimpleName()).append("(");
 		EList<JvmFormalParameter> params = operation.getParameters();
@@ -188,9 +188,9 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		appendable.append(") {");
 		appendable.increaseIndentation();
 		if (!getTypeReferences().is(operation.getReturnType(), Void.TYPE))
-			appendable.append("\nreturn ");
+			appendable.newLine().append("return ");
 		else
-			appendable.append("\n");
+			appendable.newLine();
 		expression.exec();
 		appendable.append(".");
 		JvmOperation actualOperation = closures.findImplementingOperation(functionType, context.eResource());
@@ -205,9 +205,9 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		}
 		appendable.append(");");
 		appendable.decreaseIndentation();
-		appendable.append("\n}");
+		appendable.newLine().append("}");
 		appendable.decreaseIndentation().decreaseIndentation();
-		appendable.append("\n}");
+		appendable.newLine().append("}");
 	}
 
 	protected void convertListToArray(
