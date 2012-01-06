@@ -4,7 +4,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.LangATestLanguageStandaloneSetup;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -13,16 +13,17 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.SimpleAttributeResolver;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Test;
 
 public class DefaultResourceDescription2Test extends AbstractXtextTests {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(new LangATestLanguageStandaloneSetup());
 	}
 	
-	public void testNotYetLinked() throws Exception {
+	@Test public void testNotYetLinked() throws Exception {
 		XtextResourceSet rs = get(XtextResourceSet.class);
 		Resource res1 = rs.createResource(URI.createURI("foo.langatestlanguage"));
 		res1.load(new StringInputStream("type Foo"), null);
@@ -36,7 +37,7 @@ public class DefaultResourceDescription2Test extends AbstractXtextTests {
 	}
 	
 	
-	public void testValidExternalLink() throws Exception {
+	@Test public void testValidExternalLink() throws Exception {
 		XtextResourceSet rs = get(XtextResourceSet.class);
 		Resource res1 = rs.createResource(URI.createURI("foo.langatestlanguage"));
 		res1.load(new StringInputStream("type Foo"), null);
@@ -50,7 +51,7 @@ public class DefaultResourceDescription2Test extends AbstractXtextTests {
 		assertEquals(QualifiedName.create("foo"),names.iterator().next());
 	}
 	
-	public void testValidLocalLink() throws Exception {
+	@Test public void testValidLocalLink() throws Exception {
 		XtextResourceSet rs = get(XtextResourceSet.class);
 		Resource res1 = rs.createResource(URI.createURI("foo.langatestlanguage"));
 		res1.load(new StringInputStream("type Foo"), null);
@@ -64,7 +65,7 @@ public class DefaultResourceDescription2Test extends AbstractXtextTests {
 		assertFalse(names.iterator().hasNext());
 	}
 	
-	public void testBrokenLink() throws Exception {
+	@Test public void testBrokenLink() throws Exception {
 		XtextResourceSet rs = get(XtextResourceSet.class);
 		Resource res1 = rs.createResource(URI.createURI("foo.langatestlanguage"));
 		res1.load(new StringInputStream("type Foo"), null);
@@ -78,7 +79,7 @@ public class DefaultResourceDescription2Test extends AbstractXtextTests {
 		assertEquals(QualifiedName.create("baz"),names.iterator().next());
 	}
 	
-	public void testClasspathURIIsNormalized() {
+	@Test public void testClasspathURIIsNormalized() {
 		XtextResourceSet xtextResourceSet = new XtextResourceSet();
 		xtextResourceSet.setClasspathURIContext(this);
 		URI classpathURI = URI.createURI("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.ecore");

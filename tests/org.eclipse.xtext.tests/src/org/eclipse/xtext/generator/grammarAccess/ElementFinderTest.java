@@ -14,9 +14,10 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.junit.Test;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -24,7 +25,7 @@ import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFin
 public class ElementFinderTest extends AbstractXtextTests {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 	}
@@ -41,25 +42,25 @@ public class ElementFinderTest extends AbstractXtextTests {
 		};
 	}
 
-	public void testKeywords() {
+	@Test public void testKeywords() {
 		assertEquals(3, grammarFinder().findKeywords("myKeyword", "myKeyword2").size());
 	}
 
-	public void testKeywordsFromSuperGrammar() {
+	@Test public void testKeywordsFromSuperGrammar() {
 		assertEquals(1, grammarFinder().findKeywords("superKeyword").size());
 	}
 
-	public void testKeywordPairs() {
+	@Test public void testKeywordPairs() {
 		assertEquals(3, grammarFinder().findKeywordPairs("begin", "end").size());
 	}
 
-	public void testFindRuleCalls() {
+	@Test public void testFindRuleCalls() {
 		AbstractGrammarElementFinder f = grammarFinder();
 		AbstractRule r = GrammarUtil.findRuleForName(f.getGrammar(), "FinderKeywords");
 		assertEquals(2, f.findRuleCalls(r).size());
 	}
 
-	public void testFindCrossReferences() {
+	@Test public void testFindCrossReferences() {
 		AbstractGrammarElementFinder f = grammarFinder();
 		AbstractRule r = GrammarUtil.findRuleForName(f.getGrammar(), "FQN");
 		assertNotNull(r);

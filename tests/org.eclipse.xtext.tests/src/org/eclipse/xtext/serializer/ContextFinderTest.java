@@ -11,14 +11,15 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.junit.util.ParseHelper;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
 import org.eclipse.xtext.serializer.contextFinderTest.Model;
 import org.eclipse.xtext.serializer.contextFinderTest.ParentRefTest1;
 import org.eclipse.xtext.serializer.contextFinderTest.ParentRefTest2;
 import org.eclipse.xtext.serializer.contextFinderTest.ParentRefTestChild;
 import org.eclipse.xtext.serializer.sequencer.IContextFinder;
+import org.junit.Test;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
@@ -29,7 +30,7 @@ import com.google.inject.Inject;
  */
 public class ContextFinderTest extends AbstractXtextTests {
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(ContextFinderTestLanguageStandaloneSetup.class);
 		getInjector().injectMembers(this);
@@ -60,90 +61,90 @@ public class ContextFinderTest extends AbstractXtextTests {
 		return Joiner.on(", ").join(result);
 	}
 
-	public void testAttributeExclusionTest1() throws Exception {
+	@Test public void testAttributeExclusionTest1() throws Exception {
 		Model model = parseHelper.parse("#1 kw1 bar");
 		assertEquals("AttributeExclusionTest1", findContextsByContents(model.getAttributeExclusion()));
 	}
 
-	public void testAttributeExclusionTest2() throws Exception {
+	@Test public void testAttributeExclusionTest2() throws Exception {
 		Model model = parseHelper.parse("#1 kw2 bar");
 		assertEquals("AttributeExclusionTest2", findContextsByContents(model.getAttributeExclusion()));
 	}
 
-	public void testNestedTypeTest1() throws Exception {
+	@Test public void testNestedTypeTest1() throws Exception {
 		Model model = parseHelper.parse("#2 kw1 bar");
 		assertEquals("NestedTypeTest1", findContextsByContents(model.getNestedType()));
 	}
 
-	public void testNestedTypeTest2() throws Exception {
+	@Test public void testNestedTypeTest2() throws Exception {
 		Model model = parseHelper.parse("#2 kw2 bar");
 		assertEquals("NestedTypeTest2", findContextsByContents(model.getNestedType()));
 	}
 
-	public void testNestedTypeRecursiveTest1() throws Exception {
+	@Test public void testNestedTypeRecursiveTest1() throws Exception {
 		Model model = parseHelper.parse("#3 kw1 . .");
 		assertEquals("NestedTypeRecursiveTest1, NestedTypeRecursiveTest1_NestedTypeRecursiveTest_2_0",
 				findContextsByContents(model.getNestedTypeRecursiveTest2()));
 	}
 
-	public void testNestedTypeRecursiveTest2() throws Exception {
+	@Test public void testNestedTypeRecursiveTest2() throws Exception {
 		Model model = parseHelper.parse("#3 kw2 . .");
 		assertEquals("NestedTypeRecursiveTest2, NestedTypeRecursiveTest2_NestedTypeRecursiveTest_2_0",
 				findContextsByContents(model.getNestedTypeRecursiveTest2()));
 	}
 
-	public void testParentRefTest1() throws Exception {
+	@Test public void testParentRefTest1() throws Exception {
 		Model model = parseHelper.parse("#4 kw1 foo");
 		ParentRefTestChild child1 = ((ParentRefTest1) model.getParentRef()).getChild1();
 		assertEquals("ParentRefTestChild1", findContextsByContentsAndContainer(child1));
 	}
 
-	public void testParentRefTest2() throws Exception {
+	@Test public void testParentRefTest2() throws Exception {
 		Model model = parseHelper.parse("#4 kw2 foo");
 		ParentRefTestChild child2 = ((ParentRefTest2) model.getParentRef()).getChild2();
 		assertEquals("ParentRefTestChild2", findContextsByContentsAndContainer(child2));
 	}
 
-	public void testParentRefTest3() throws Exception {
+	@Test public void testParentRefTest3() throws Exception {
 		Model model = parseHelper.parse("#4 kw1 foo foo foo");
 		ParentRefTestChild child1 = ((ParentRefTest1) model.getParentRef()).getChild1().getChild().getChild();
 		assertEquals("ParentRefTestChild1", findContextsByContentsAndContainer(child1));
 	}
 
-	public void testParentRefTest4() throws Exception {
+	@Test public void testParentRefTest4() throws Exception {
 		Model model = parseHelper.parse("#4 kw2 foo foo foo");
 		ParentRefTestChild child2 = ((ParentRefTest2) model.getParentRef()).getChild2().getChild().getChild();
 		assertEquals("ParentRefTestChild2", findContextsByContentsAndContainer(child2));
 	}
 
-	public void testRootContainer() throws Exception {
+	@Test public void testRootContainer() throws Exception {
 		Model model = parseHelper.parse("#0 model #1 kw1 bar");
 		assertEquals("Model", findContextsByContentsAndContainer(model));
 		assertEquals("Model2", findContextsByContentsAndContainer(model.getModel()));
 	}
 
-	public void testQuantityExclusionTest1() throws Exception {
+	@Test public void testQuantityExclusionTest1() throws Exception {
 		Model model = parseHelper.parse("#5 kw1 bar");
 		assertEquals("QuantityExclusionTest1", findContextsByContents(model.getQuantityExclusion()));
 	}
 
-	public void testQuantityExclusionTest2() throws Exception {
+	@Test public void testQuantityExclusionTest2() throws Exception {
 		Model model = parseHelper.parse("#5 kw2 bar");
 		assertEquals("QuantityExclusionTest2", findContextsByContents(model.getQuantityExclusion()));
 	}
 
-	public void testQuantityExclusionTest3() throws Exception {
+	@Test public void testQuantityExclusionTest3() throws Exception {
 		Model model = parseHelper.parse("#5 kw2 bar baz");
 		assertEquals("QuantityExclusionTest1, QuantityExclusionTest2",
 				findContextsByContents(model.getQuantityExclusion()));
 	}
 
-	public void testValueExclusionTest1() throws Exception {
+	@Test public void testValueExclusionTest1() throws Exception {
 		Model model = parseHelper.parse("#6 lit1");
 		assertEquals("ValueExclusionTest1", findContextsByContents(model.getValueExclusion()));
 	}
 
-	public void testValueExclusionTest2() throws Exception {
+	@Test public void testValueExclusionTest2() throws Exception {
 		Model model = parseHelper.parse("#6 lit2");
 		assertEquals("ValueExclusionTest2", findContextsByContents(model.getValueExclusion()));
 	}

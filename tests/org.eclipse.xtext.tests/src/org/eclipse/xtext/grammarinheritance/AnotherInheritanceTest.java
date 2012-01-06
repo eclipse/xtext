@@ -11,19 +11,20 @@ package org.eclipse.xtext.grammarinheritance;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 import org.eclipse.xtext.grammarinheritance.services.InheritanceTest2LanguageGrammarAccess;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.junit.Test;
 
 public class AnotherInheritanceTest extends AbstractXtextTests {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		EPackage aMetamodel = AmetamodelPackage.eINSTANCE;
 		EPackage.Registry.INSTANCE.put(aMetamodel.getNsURI(), aMetamodel);
 		with(new InheritanceTest2LanguageStandaloneSetup());
 	}
 
-	public void testSimple() throws Exception {
+	@Test public void testSimple() throws Exception {
 		InheritanceTest2LanguageGrammarAccess g = (InheritanceTest2LanguageGrammarAccess) getGrammarAccess();
 		assertNotNull(g.getFQNAccess());
 		assertNotNull(g.getModelAccess());

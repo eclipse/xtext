@@ -19,9 +19,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.URIHandler;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -29,12 +30,12 @@ import org.eclipse.xtext.util.StringInputStream;
 public class Bug266082Test extends AbstractXtextTests {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(ImportUriTestLanguageStandaloneSetup.class);
 	}
 
-	public void testCircularImports() {
+	@Test public void testCircularImports() {
 		XtextResourceSet resourceSet = get(XtextResourceSet.class);
 		resourceSet.setClasspathURIContext(getClass().getClassLoader());
 		URI uri = URI.createURI("classpath:/org/eclipse/xtext/linking/01.importuritestlanguage");
@@ -44,7 +45,7 @@ public class Bug266082Test extends AbstractXtextTests {
 		assertFalse(res.getErrors().toString(), res.getErrors().isEmpty());
 	}
 
-	public void testManyUnresolvedImports() throws Exception {
+	@Test public void testManyUnresolvedImports() throws Exception {
 		StringBuilder model = new StringBuilder(200000);
 		int max = 10000;
 		for(int i = 1; i <= max; i++) {
@@ -55,7 +56,7 @@ public class Bug266082Test extends AbstractXtextTests {
 		assertEquals(res.getErrors().toString(), 1, res.getErrors().size());
 	}
 
-	public void testManyResolvedImports() throws Exception {
+	@Test public void testManyResolvedImports() throws Exception {
 		StringBuilder model = new StringBuilder(2000);
 		int max = 100;
 		for(int i = 1; i <= max; i++) {
@@ -133,7 +134,7 @@ public class Bug266082Test extends AbstractXtextTests {
 		assertEquals(res.getErrors().toString(), 1, res.getErrors().size());
 	}
 
-	public void testRedundantImport() {
+	@Test public void testRedundantImport() {
 		XtextResourceSet resourceSet = get(XtextResourceSet.class);
 		resourceSet.setClasspathURIContext(getClass().getClassLoader());
 		URI uri = URI.createURI("classpath:/org/eclipse/xtext/linking/03.importuritestlanguage");

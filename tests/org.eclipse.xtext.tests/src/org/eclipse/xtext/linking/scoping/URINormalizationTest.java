@@ -11,7 +11,7 @@ import static com.google.common.collect.Iterables.*;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.ImportUriTestLanguageStandaloneSetup;
 import org.eclipse.xtext.linking.importedURI.ImportedURIPackage;
 import org.eclipse.xtext.linking.importedURI.Main;
@@ -19,13 +19,14 @@ import org.eclipse.xtext.linking.importedURI.Type;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class URINormalizationTest extends AbstractXtextTests {
 
-	public void testGetElementByClasspathURIEObject() throws Exception {
+	@Test public void testGetElementByClasspathURIEObject() throws Exception {
 		with(ImportUriTestLanguageStandaloneSetup.class);
 		Main main = (Main) getModel("import 'classpath:/org/eclipse/xtext/linking/05.importuritestlanguage'\n"
 				+ "type Bar extends Foo");

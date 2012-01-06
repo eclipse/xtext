@@ -19,10 +19,11 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformer;
+import org.junit.Test;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -31,13 +32,13 @@ public class ToEcoreTrafoTest extends AbstractXtextTests {
 	private static final Logger logger = Logger.getLogger(ToEcoreTrafoTest.class);
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(new XtextStandaloneSetup());
 		EPackage.Registry.INSTANCE.put(AmetamodelPackage.eNS_URI, AmetamodelPackage.eINSTANCE);
 	}
 
-	public void testAbstractLanguageToMetamodel() throws Exception {
+	@Test public void testAbstractLanguageToMetamodel() throws Exception {
 		XtextResource r = getResource("classpath:/" + AbstractTestLanguage.class.getName().replace('.', '/') + ".xtext");
 		Grammar element = (Grammar) r.getParseResult().getRootASTElement();
 		if (!r.getErrors().isEmpty()) {
@@ -55,7 +56,7 @@ public class ToEcoreTrafoTest extends AbstractXtextTests {
 		assertEquals(0, list.size());
 	}
 
-	public void testConcreteLanguageToMetamodel() throws Exception {
+	@Test public void testConcreteLanguageToMetamodel() throws Exception {
 		XtextResource r = getResource("classpath:/" + ConcreteTestLanguage.class.getName().replace('.', '/') + ".xtext");
 		Grammar element = (Grammar) r.getContents().get(0);
 		List<TerminalRule> lexerRules = GrammarUtil.allTerminalRules(element);
@@ -72,7 +73,7 @@ public class ToEcoreTrafoTest extends AbstractXtextTests {
 		assertNotNull(feature.getEType());
 	}
 
-	public void testConcreteLanguageToMetamodel1() throws Exception {
+	@Test public void testConcreteLanguageToMetamodel1() throws Exception {
 		XtextResource r = getResource("classpath:/" + ConcreteTestLanguage.class.getName().replace('.', '/') + ".xtext");
 		EObject element = r.getContents().get(0);
 		Grammar g = (Grammar) element;
@@ -97,8 +98,4 @@ public class ToEcoreTrafoTest extends AbstractXtextTests {
 		return r;
 	}
 
-	@Override
-	protected String[] importedExtensions() {
-		return new String[] { "org::eclipse::xtext::ecore::Xtext2Ecore" };
-	}
 }

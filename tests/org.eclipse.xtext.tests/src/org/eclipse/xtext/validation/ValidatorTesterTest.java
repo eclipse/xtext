@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.validation;
 
-import static org.eclipse.xtext.junit.validation.AssertableDiagnostics.*;
+import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,8 +18,9 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.junit.validation.ValidatorTester;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.junit4.validation.ValidatorTester;
+import org.junit.Test;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -65,16 +66,16 @@ public class ValidatorTesterTest extends AbstractXtextTests {
 		tester = new ValidatorTester<TestingValidator>(validator, getInjector());
 	}
 
-	public void testError() {
+	@Test public void testError() {
 		tester.validator().someError(EcoreFactory.eINSTANCE.createEAnnotation());
 		tester.diagnose().assertError("101", "someError");
 	}
 
-	public void testError2() {
+	@Test public void testError2() {
 		tester.validate(EcoreFactory.eINSTANCE.createEAnnotation()).assertError("101", "someError");
 	}
 
-	public void testError2Fail() {
+	@Test public void testError2Fail() {
 		boolean caught = false;
 		try {
 			tester.validate(EcoreFactory.eINSTANCE.createEAnnotation()).assertError("234242");
@@ -85,12 +86,12 @@ public class ValidatorTesterTest extends AbstractXtextTests {
 		assertTrue(caught);
 	}
 
-	public void testTwoErrors() {
+	@Test public void testTwoErrors() {
 		tester.validator().manyMessages(EcorePackage.eINSTANCE.getEClass());
 		tester.diagnose().assertAll(warning("105", "WarningOne"), error("104", "ErrorTwo"), error("103", "ErrorOne"));
 	}
 
-	public void testFail() {
+	@Test public void testFail() {
 		tester.validator().someError(EcoreFactory.eINSTANCE.createEAnnotation());
 		boolean caught = false;
 		try {
@@ -102,7 +103,7 @@ public class ValidatorTesterTest extends AbstractXtextTests {
 		assertTrue(caught);
 	}
 
-	public void testWarning() {
+	@Test public void testWarning() {
 		tester.validator().someWarning(EcorePackage.eINSTANCE.getEClass());
 		tester.diagnose().assertWarning("102", "someWarning");
 	}

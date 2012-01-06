@@ -7,10 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.reconstr;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.reconstr.bug299395.Bug299395Factory;
 import org.eclipse.xtext.parsetree.reconstr.bug299395.Model;
 import org.eclipse.xtext.parsetree.reconstr.bug299395.SubModel;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -18,25 +19,25 @@ import org.eclipse.xtext.parsetree.reconstr.bug299395.SubModel;
 public class Bug299395Test extends AbstractXtextTests {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(Bug299395TestLanguageStandaloneSetup.class);
 	}
 	
-	public void testSerialization() {
+	@Test public void testSerialization() {
 		Model model = Bug299395Factory.eINSTANCE.createModel();
 		String serialized = getSerializer().serialize(model);
 		assertEquals("", serialized);
 	}
 	
-	public void testSerialization_02() {
+	@Test public void testSerialization_02() {
 		Model model = Bug299395Factory.eINSTANCE.createModel();
 		model.getStrings().add("Foo");
 		String serialized = getSerializer().serialize(model);
 		assertEquals("{ \"Foo\" }", serialized);
 	}
 	
-	public void testSerialization_03() {
+	@Test public void testSerialization_03() {
 		Model model = Bug299395Factory.eINSTANCE.createModel();
 		model.getStrings().add("Foo");
 		model.getStrings().add("Bar");
@@ -45,7 +46,7 @@ public class Bug299395Test extends AbstractXtextTests {
 		assertEquals("{ \"Foo\" } { \"Bar\" } { \"Zonk\" }", serialized);
 	}
 	
-	public void testSerialization_04() {
+	@Test public void testSerialization_04() {
 		Model model = Bug299395Factory.eINSTANCE.createModel();
 		model.getKeys().add("Key1");
 		model.getValues().add("Value1");
@@ -55,7 +56,7 @@ public class Bug299395Test extends AbstractXtextTests {
 		assertEquals("[ \"Key1\" \"Value1\" \"Key2\" \"Value2\" ]", serialized);
 	}
 	
-	public void testSerialization_05() {
+	@Test public void testSerialization_05() {
 		Model model = Bug299395Factory.eINSTANCE.createModel();
 		model.getStrings().add("Unused");
 		model.getKeys().add("Key1");
@@ -66,7 +67,7 @@ public class Bug299395Test extends AbstractXtextTests {
 		assertEquals("{ \"Unused\" } [ \"Key1\" \"Value1\" \"Key2\" \"Value2\" ]", serialized);
 	}
 	
-	public void testSerialization_06() {
+	@Test public void testSerialization_06() {
 		Model model = Bug299395Factory.eINSTANCE.createModel();
 		SubModel subModel = Bug299395Factory.eINSTANCE.createSubModel();
 		model.setSubModel(subModel);
@@ -74,7 +75,7 @@ public class Bug299395Test extends AbstractXtextTests {
 		assertEquals("subModel", serialized);
 	}
 	
-	public void testSerialization_07() {
+	@Test public void testSerialization_07() {
 		Model model = Bug299395Factory.eINSTANCE.createModel();
 		SubModel subModel = Bug299395Factory.eINSTANCE.createSubModel();
 		model.setSubModel(subModel);
@@ -83,7 +84,7 @@ public class Bug299395Test extends AbstractXtextTests {
 		assertEquals("subModel 1 2 \"s1\"", serialized);
 	}
 	
-	public void testSerialization_08() {
+	@Test public void testSerialization_08() {
 		Model model = Bug299395Factory.eINSTANCE.createModel();
 		SubModel subModel = Bug299395Factory.eINSTANCE.createSubModel();
 		model.setSubModel(subModel);

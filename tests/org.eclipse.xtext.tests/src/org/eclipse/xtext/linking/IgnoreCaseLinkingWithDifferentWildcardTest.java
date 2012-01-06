@@ -10,6 +10,7 @@ package org.eclipse.xtext.linking;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
+import org.junit.Test;
 
 import com.google.inject.Binder;
 import com.google.inject.Guice;
@@ -29,7 +30,7 @@ public class IgnoreCaseLinkingWithDifferentWildcardTest extends AbstractIgnoreCa
 	}
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(new IgnoreCaseNamespacesTestLanguageStandaloneSetup() {
 			@Override
@@ -45,22 +46,22 @@ public class IgnoreCaseLinkingWithDifferentWildcardTest extends AbstractIgnoreCa
 	}
 	
 	@Override
-	public void testWithImports() throws Exception {
+	@Test public void testWithImports() throws Exception {
 		String input = "'a.b.all' a C { b a { c B {} d a {} } }";
 		getModel(input);
 	}
 	
-	public void testWithImportsIgnoreCase_01() throws Exception {
+	@Test public void testWithImportsIgnoreCase_01() throws Exception {
 		String input = "'A.B.all' a C { b a { c B {} d a {} } }";
 		getModel(input);
 	}
 	
-	public void testWithImportsIgnoreCase_02() throws Exception {
+	@Test public void testWithImportsIgnoreCase_02() throws Exception {
 		String input = "'A.B.ALL' a C { b a { c B {} d a {} } }";
 		getModel(input);
 	}
 	
-	public void testWithImportsIgnoreCase_03() throws Exception {
+	@Test public void testWithImportsIgnoreCase_03() throws Exception {
 		String input = "'a.b.ALL' a C { b a { c B {} d a {} } }";
 		getModel(input);
 	}

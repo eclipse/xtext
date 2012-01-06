@@ -12,8 +12,9 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -24,7 +25,7 @@ public class SubPackageAwareGrammarAccessFragmentTest extends AbstractXtextTests
 	private GrammarAccessFragment fragment;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		XtextResourceSet set = new XtextResourceSet();
 		set.setClasspathURIContext(getClass());
@@ -34,12 +35,12 @@ public class SubPackageAwareGrammarAccessFragmentTest extends AbstractXtextTests
 	}
 	
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		metamodel = null;
 		super.tearDown();
 	}
 	
-	public void testMoveSubpackagesToNewResource() {
+	@Test public void testMoveSubpackagesToNewResource() {
 		String expected = metamodel.getESubpackages().get(0).getNsURI();
 		ResourceSet set = new ResourceSetImpl();
 		fragment.moveSubpackagesToNewResource(metamodel, set);

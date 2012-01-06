@@ -8,10 +8,11 @@
 package org.eclipse.xtext.linking.lazy;
 
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Type;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -26,7 +27,7 @@ public class Bug281990Test extends AbstractXtextTests {
 	}
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(new LazyLinkingTestLanguageRuntimeModule() {
 			@Override
@@ -37,7 +38,7 @@ public class Bug281990Test extends AbstractXtextTests {
 		new LazyLinkingTestLanguageStandaloneSetup().register(getInjector());
 	}
 
-	public void testRecursionErrorMessage() throws Exception {
+	@Test public void testRecursionErrorMessage() throws Exception {
 		try {
 			getModel("type Foo extends Foo.bar { Foo foo; }");
 			fail("Exception expected.");

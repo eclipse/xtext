@@ -9,14 +9,13 @@ package org.eclipse.xtext.ecore;
 
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.ResourceServiceProviderRegistryImpl;
-
-import junit.framework.TestCase;
-
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class EcoreSupportTest extends TestCase {
+public class EcoreSupportTest extends Assert {
 	
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
@@ -33,7 +32,7 @@ public class EcoreSupportTest extends TestCase {
 		}
 	}
 
-	public void testSimple() throws Exception {
+	@Test public void testSimple() throws Exception {
 		final ResourceServiceProviderRegistryImpl registry = new ResourceServiceProviderRegistryImpl();
 		EcoreSupport support = new EcoreSupport();
 		support.setGuiceModule(new EcoreRuntimeModuleForTest(registry));

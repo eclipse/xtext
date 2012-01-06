@@ -18,12 +18,13 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.xtext.diagnostics.Severity;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.LangATestLanguageStandaloneSetup;
 import org.eclipse.xtext.linking.langATestLanguage.LangATestLanguagePackage;
 import org.eclipse.xtext.linking.langATestLanguage.Type;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -31,7 +32,7 @@ import org.eclipse.xtext.util.StringInputStream;
 public class ResourceValidatorImplTest extends AbstractXtextTests {
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(new LangATestLanguageStandaloneSetup());
 		EValidator.Registry.INSTANCE.put(LangATestLanguagePackage.eINSTANCE, new EValidator(){
@@ -58,21 +59,21 @@ public class ResourceValidatorImplTest extends AbstractXtextTests {
 			}});
 	}
 	
-	public void testSyntaxError() throws Exception {
+	@Test public void testSyntaxError() throws Exception {
 		XtextResource resource = getResourceAndExpect(new StringInputStream("type foo."), 1);
 		List<Issue> list = getValidator().validate(resource, CheckMode.NORMAL_AND_FAST, null);
 		assertEquals(1,list.size());
 		assertTrue(list.get(0).isSyntaxError());
 	}
 	
-	public void testLinkingError() throws Exception {
+	@Test public void testLinkingError() throws Exception {
 		XtextResource resource = getResourceAndExpect(new StringInputStream("type foo extends Bar"), 1);
 		List<Issue> list = getValidator().validate(resource, CheckMode.NORMAL_AND_FAST, null);
 		assertEquals(1,list.size());
 		assertTrue(list.get(0).isSyntaxError());
 	}
 	
-	public void testSemanticError() throws Exception {
+	@Test public void testSemanticError() throws Exception {
 		XtextResource resource = getResourceAndExpect(new StringInputStream("type Foo"), 0);
 		List<Issue> list = getValidator().validate(resource, CheckMode.NORMAL_AND_FAST, null);
 		assertEquals(1,list.size());
@@ -80,7 +81,7 @@ public class ResourceValidatorImplTest extends AbstractXtextTests {
 		assertEquals(Severity.ERROR, list.get(0).getSeverity());
 	}
 	
-	public void testSemanticWarning() throws Exception {
+	@Test public void testSemanticWarning() throws Exception {
 		XtextResource resource = getResourceAndExpect(new StringInputStream("type Bar"), 0);
 		List<Issue> list = getValidator().validate(resource, CheckMode.NORMAL_AND_FAST, null);
 		assertEquals(1,list.size());

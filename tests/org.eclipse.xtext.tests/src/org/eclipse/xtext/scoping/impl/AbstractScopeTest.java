@@ -17,16 +17,18 @@ import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 
-import junit.framework.TestCase;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractScopeTest extends TestCase {
+public abstract class AbstractScopeTest extends Assert {
 
 	protected IEObjectDescription descriptionA;
 	protected IEObjectDescription descriptionA_aliased;
@@ -36,9 +38,8 @@ public abstract class AbstractScopeTest extends TestCase {
 	protected EAnnotation annotationB;
 	private Resource resource;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		resource = new ResourceImpl(URI.createURI("uri"));
 		annotationA = EcoreFactory.eINSTANCE.createEAnnotation();
 		annotationB = EcoreFactory.eINSTANCE.createEAnnotation();
@@ -50,8 +51,8 @@ public abstract class AbstractScopeTest extends TestCase {
 		descriptionB_as_A = EObjectDescription.create("a", annotationB);
 	}
 	
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		annotationA = null;
 		annotationB = null;
 		descriptionA = null;
@@ -59,96 +60,95 @@ public abstract class AbstractScopeTest extends TestCase {
 		descriptionB = null;
 		descriptionB_as_A = null;
 		resource = null;
-		super.tearDown();
 	}
 	
 	protected abstract IScope createScope(IScope parent, Iterable<IEObjectDescription> content);
 	
-	public void testSingleByName() {
+	@Test public void testSingleByName() {
 		IScope scope = createScope(IScope.NULLSCOPE, ImmutableList.of(descriptionA, descriptionB));
 		assertSame(descriptionA, scope.getSingleElement(descriptionA.getName()));
 		assertSame(descriptionB, scope.getSingleElement(descriptionB.getName()));
 	}
 	
-	public void testSingleByNameWithDuplicate() {
+	@Test public void testSingleByNameWithDuplicate() {
 		IScope scope = createScope(IScope.NULLSCOPE, ImmutableList.of(descriptionA, descriptionB_as_A, descriptionB));
 		assertSame(descriptionA, scope.getSingleElement(descriptionA.getName()));
 		assertSame(descriptionB, scope.getSingleElement(descriptionB.getName()));
 	}
 	
-	public void testSingleByObject() {
+	@Test public void testSingleByObject() {
 		IScope scope = createScope(IScope.NULLSCOPE, ImmutableList.of(descriptionA, descriptionB));
 		assertSame(descriptionA, scope.getSingleElement(annotationA));
 		assertSame(descriptionB, scope.getSingleElement(annotationB));
 	}
 	
-	public void testSingleByObjectWithDuplicate_01() {
+	@Test public void testSingleByObjectWithDuplicate_01() {
 		IScope scope = createScope(IScope.NULLSCOPE, ImmutableList.of(descriptionA, descriptionB_as_A, descriptionB));
 		assertSame(descriptionA, scope.getSingleElement(annotationA));
 		assertSame(descriptionB, scope.getSingleElement(annotationB));
 	}
 	
-	public void testSingleByObjectWithDuplicate_02() {
+	@Test public void testSingleByObjectWithDuplicate_02() {
 		IScope scope = createScope(IScope.NULLSCOPE, ImmutableList.of(descriptionB_as_A, descriptionA, descriptionB));
 		assertNull(scope.getSingleElement(annotationA));
 		assertSame(descriptionB_as_A, scope.getSingleElement(annotationB));
 	}
 	
-	public void testSingleByObjectWithDuplicate_03() {
+	@Test public void testSingleByObjectWithDuplicate_03() {
 		IScope scope = createScope(IScope.NULLSCOPE, ImmutableList.of(descriptionB_as_A, descriptionA, descriptionA_aliased));
 		assertSame(descriptionA_aliased, scope.getSingleElement(annotationA));
 		assertSame(descriptionB_as_A, scope.getSingleElement(annotationB));
 	}
 	
-	public void testByName() {
+	@Test public void testByName() {
 		IScope scope = createScope(IScope.NULLSCOPE, ImmutableList.of(descriptionA, descriptionB));
 		assertEqualElements(Collections.singleton(descriptionA), scope.getElements(descriptionA.getName()));
 		assertEqualElements(Collections.singleton(descriptionB), scope.getElements(descriptionB.getName()));
 	}
 	
-	public void testByNameWithDuplicate_01() {
+	@Test public void testByNameWithDuplicate_01() {
 		IScope scope = createScope(IScope.NULLSCOPE, ImmutableList.of(descriptionA, descriptionB_as_A, descriptionB));
 		assertEqualElements(ImmutableList.of(descriptionA, descriptionB_as_A), scope.getElements(descriptionA.getName()));
 		assertEqualElements(Collections.singleton(descriptionB), scope.getElements(descriptionB.getName()));
 	}
 	
-	public void testByNameWithDuplicate_02() {
+	@Test public void testByNameWithDuplicate_02() {
 		IScope scope = createScope(IScope.NULLSCOPE, ImmutableList.of(descriptionB_as_A, descriptionA, descriptionB));
 		assertEqualElements(ImmutableList.of(descriptionB_as_A, descriptionA), scope.getElements(descriptionA.getName()));
 		assertEqualElements(Collections.singleton(descriptionB), scope.getElements(descriptionB.getName()));
 	}
 	
-	public void testByObject() {
+	@Test public void testByObject() {
 		IScope scope = createScope(IScope.NULLSCOPE, ImmutableList.of(descriptionA, descriptionB));
 		assertEqualElements(ImmutableList.of(descriptionA), scope.getElements(annotationA));
 		assertEqualElements(ImmutableList.of(descriptionB), scope.getElements(annotationB));
 	}
 	
-	public void testByObjectWithDuplicate_01() {
+	@Test public void testByObjectWithDuplicate_01() {
 		IScope scope = createScope(IScope.NULLSCOPE, ImmutableList.of(descriptionA, descriptionB_as_A, descriptionB));
 		assertEqualElements(ImmutableList.of(descriptionA), scope.getElements(annotationA));
 		assertEqualElements(ImmutableList.of(descriptionB), scope.getElements(annotationB));
 	}
 	
-	public void testByObjectWithDuplicate_02() {
+	@Test public void testByObjectWithDuplicate_02() {
 		IScope scope = createScope(IScope.NULLSCOPE, ImmutableList.of(descriptionB_as_A, descriptionA, descriptionB));
 		assertEqualElements(ImmutableList.of(), scope.getElements(annotationA));
 		assertEqualElements(ImmutableList.of(descriptionB_as_A, descriptionB), scope.getElements(annotationB));
 	}
 	
-	public void testByObjectWithDuplicate_03() {
+	@Test public void testByObjectWithDuplicate_03() {
 		IScope scope = createScope(IScope.NULLSCOPE, ImmutableList.of(descriptionB_as_A, descriptionA, descriptionA_aliased));
 		assertEqualElements(ImmutableList.of(descriptionA_aliased), scope.getElements(annotationA));
 		assertEqualElements(ImmutableList.of(descriptionB_as_A), scope.getElements(annotationB));
 	}
 	
-	public void testByObjectWithDuplicate_04() {
+	@Test public void testByObjectWithDuplicate_04() {
 		IScope scope = createScope(IScope.NULLSCOPE, ImmutableList.of(descriptionA_aliased, descriptionB_as_A, descriptionA));
 		assertEqualElements(ImmutableList.of(descriptionA_aliased), scope.getElements(annotationA));
 		assertEqualElements(ImmutableList.of(descriptionB_as_A), scope.getElements(annotationB));
 	}
 	
-	public void testByObjectWithDuplicate_05() {
+	@Test public void testByObjectWithDuplicate_05() {
 		IScope scope = createScope(IScope.NULLSCOPE, ImmutableList.of(descriptionA_aliased, descriptionA, descriptionB_as_A));
 		assertEqualElements(ImmutableList.of(descriptionA_aliased, descriptionA), scope.getElements(annotationA));
 		assertEqualElements(ImmutableList.of(), scope.getElements(annotationB));

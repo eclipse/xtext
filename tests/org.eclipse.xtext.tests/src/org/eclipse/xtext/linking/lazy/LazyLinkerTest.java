@@ -28,7 +28,7 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextFactory;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.LeafNode;
@@ -38,6 +38,7 @@ import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
 import org.eclipse.xtext.util.Pair;
+import org.junit.Test;
 
 import com.google.common.collect.Lists;
 import com.google.inject.AbstractModule;
@@ -52,7 +53,7 @@ public class LazyLinkerTest extends AbstractXtextTests {
 	private XtextResourceSet resourceSet;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(new AbstractModule() {
 			@Override
@@ -85,14 +86,14 @@ public class LazyLinkerTest extends AbstractXtextTests {
 	}
 
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		lazyLinkingPackage = null;
 		linker = null;
 		resourceSet = null;
 		super.tearDown();
 	}
 
-	public void testSingleValuedResolveProxiesReference() throws Exception {
+	@Test public void testSingleValuedResolveProxiesReference() throws Exception {
 		final EObject foo = newEObject("Foo");
 		final EObject bar = newEObject("Bar");
 		final Resource resource = new ResourceImpl(URI.createURI("http://foo/bar.ecore")) {
@@ -114,7 +115,7 @@ public class LazyLinkerTest extends AbstractXtextTests {
 		assertEquals(bar, foo.eGet(eReference, false));
 	}
 
-	public void testManyValuedResolveProxiesReference() throws Exception {
+	@Test public void testManyValuedResolveProxiesReference() throws Exception {
 		final EObject foo = newEObject("Foo");
 		final List<EObject> bars = Lists.newArrayList(newEObject("Bar"), newEObject("Bar"));
 		final Iterator<EObject> barsIterator = bars.iterator();

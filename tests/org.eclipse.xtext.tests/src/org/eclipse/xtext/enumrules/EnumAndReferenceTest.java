@@ -8,10 +8,11 @@
 package org.eclipse.xtext.enumrules;
 
 import org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.EntityWithEnumAndReference;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.ParserTestHelper;
+import org.junit.Test;
 
 import com.google.common.collect.Iterables;
 
@@ -20,19 +21,19 @@ public class EnumAndReferenceTest extends AbstractXtextTests {
 	private ParserTestHelper helper;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(EnumAndReferenceTestLanguageStandaloneSetup.class);
 		helper = new ParserTestHelper(getResourceFactory(), getParser(), get(Keys.RESOURCE_SET_KEY),getCurrentFileExtension());
 	}
 	
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		helper = null;
 		super.tearDown();
 	}
 	
-	public void testSemantic() throws Exception {
+	@Test public void testSemantic() throws Exception {
 		String modelAsString = "kindOfKeyword Hoo reference Hoo";
 		EntityWithEnumAndReference model = (EntityWithEnumAndReference) helper.getModel(modelAsString);
 		assertNotNull(model);
@@ -41,7 +42,7 @@ public class EnumAndReferenceTest extends AbstractXtextTests {
 		assertEquals(model, model.getRef());
 	}
 	
-	public void testNodes() throws Exception {
+	@Test public void testNodes() throws Exception {
 		String modelAsString = "kindOfKeyword Hoo reference Hoo";
 		EntityWithEnumAndReference model = (EntityWithEnumAndReference) helper.getModel(modelAsString);
 		ICompositeNode node = NodeModelUtils.getNode(model);

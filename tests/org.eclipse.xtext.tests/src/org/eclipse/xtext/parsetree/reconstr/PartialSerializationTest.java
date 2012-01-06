@@ -8,9 +8,10 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.reconstr.partialserializationtest.NodeRoot;
 import org.eclipse.xtext.resource.SaveOptions;
+import org.junit.Test;
 
 /**
  * @author Moritz Eysholdt 
@@ -19,7 +20,7 @@ import org.eclipse.xtext.resource.SaveOptions;
 public class PartialSerializationTest extends AbstractXtextTests {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(PartialSerializationTestLanguageStandaloneSetup.class);
 	}
@@ -28,25 +29,25 @@ public class PartialSerializationTest extends AbstractXtextTests {
 		return getSerializer().serialize(obj, SaveOptions.defaultOptions());
 	}
 
-	public void testSimple() throws Exception {
+	@Test public void testSimple() throws Exception {
 		String model = " #1  node  test  (  node  subnode  )";
 		NodeRoot root = (NodeRoot) getModel(model);
 		assertEquals("node  test  (  node  subnode  )", doSerialize(root.getNode()));
 	}
 
-	public void testSimpleSurroundComments1() throws Exception {
+	@Test public void testSimpleSurroundComments1() throws Exception {
 		String model = "/* x1 */ #1 /* x2 */ node /* x3 */ test  (  node  subnode /* x4 */ ) /* x5 */";
 		NodeRoot root = (NodeRoot) getModel(model);
 		assertEquals(model, doSerialize(root));
 	}
 
-	public void testSimpleSurroundComments2() throws Exception {
+	@Test public void testSimpleSurroundComments2() throws Exception {
 		String model = "/* x1 */ #1 /* x2 */ node /* x3 */ test  (  node  subnode /* x4 */ ) /* x5 */";
 		NodeRoot root = (NodeRoot) getModel(model);
 		assertEquals("/* x2 */ node /* x3 */ test  (  node  subnode /* x4 */ ) /* x5 */", doSerialize(root.getNode()));
 	}
 
-	public void testSimpleSurroundComments3() throws Exception {
+	@Test public void testSimpleSurroundComments3() throws Exception {
 		String model = "/* x1 */ #1 /* x2 */ node /* x3 */ test /* x4 */  ( /* x5 */ node /* x6 */ subnode /* x7 */ ) /* x8 */";
 		NodeRoot root = (NodeRoot) getModel(model);
 		String ser = doSerialize(root.getNode().getChildren().get(0));

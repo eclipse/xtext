@@ -11,14 +11,15 @@ import java.io.File;
 
 import org.eclipse.emf.common.util.URI;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class JavaIoFileSystemAccessTest extends TestCase {
+public class JavaIoFileSystemAccessTest extends Assert {
 
-	public void testDirsAreCreated() throws Exception {
+	@Test public void testDirsAreCreated() throws Exception {
 		String tempDir = System.getProperties().getProperty("java.io.tmpdir") + File.separator;
 		File tmpDir = new File(tempDir);
 		JavaIoFileSystemAccess fileSystemAccess = new JavaIoFileSystemAccess();
@@ -34,7 +35,7 @@ public class JavaIoFileSystemAccessTest extends TestCase {
 		dir.delete();
 	}
 	
-	public void testURI() throws Exception {
+	@Test public void testURI() throws Exception {
 		JavaIoFileSystemAccess fileSystemAccess = new JavaIoFileSystemAccess();
 		fileSystemAccess.setOutputPath("testOutput", "/testDir");
 		URI uri = fileSystemAccess.getURI("testFile", "testOutput");

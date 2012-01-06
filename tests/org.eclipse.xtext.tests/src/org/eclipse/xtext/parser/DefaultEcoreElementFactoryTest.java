@@ -8,8 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser;
 
-import junit.framework.TestCase;
-
 import org.easymock.EasyMock;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EcoreFactory;
@@ -17,13 +15,15 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.impl.LeafNode;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Knut Wannheden - Initial contribution and API
  */
-public class DefaultEcoreElementFactoryTest extends TestCase {
+public class DefaultEcoreElementFactoryTest extends Assert {
 
-    public void testConvertNullInput() throws Exception {
+    @Test public void testConvertNullInput() throws Exception {
         EClass eClass = EcoreFactory.eINSTANCE.createEClass();
         IValueConverterService converter = EasyMock.createMock(IValueConverterService.class);
 
@@ -39,7 +39,7 @@ public class DefaultEcoreElementFactoryTest extends TestCase {
         assertEquals("FOO", eClass.getName());
     }
     
-    public void testNullInput() throws Exception {
+    @Test public void testNullInput() throws Exception {
     	EClass eClass = EcoreFactory.eINSTANCE.createEClass();
     	ILeafNode node = new LeafNode();
         IValueConverterService converter = EasyMock.createMock(IValueConverterService.class);
@@ -60,7 +60,7 @@ public class DefaultEcoreElementFactoryTest extends TestCase {
         EasyMock.verify(converter);
     }
     
-    public void testValueConverterException() throws Exception {
+    @Test public void testValueConverterException() throws Exception {
     	EClass eClass = EcoreFactory.eINSTANCE.createEClass();
     	ILeafNode node = new LeafNode();
     	ValueConverterException expected = new ValueConverterException("Foo", node, null);

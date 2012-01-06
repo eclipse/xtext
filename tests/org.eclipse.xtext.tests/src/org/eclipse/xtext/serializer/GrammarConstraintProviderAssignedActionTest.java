@@ -13,10 +13,11 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintContext;
+import org.junit.Test;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
@@ -65,7 +66,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 //	}
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 	}
@@ -97,7 +98,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		return Joiner.on("\n").join(result);
 	}
 
-	public void testXtext() {
+	@Test public void testXtext() {
 		IGrammarConstraintProvider gcp = get(IGrammarConstraintProvider.class);
 		List<IConstraintContext> ctxts = gcp.getConstraints(getGrammarAccess().getGrammar());
 		//		try {
@@ -117,7 +118,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		//		System.out.println(Joiner.on("\n").join(result));
 	}
 
-	public void testAssignedActionMandatory1() throws Exception {
+	@Test public void testAssignedActionMandatory1() throws Exception {
 		String actual = getParserRule("Rule: Foo {Bar.left=current} '+' right=ID; Foo: val=ID;");
 		StringBuilder expected = new StringBuilder();
 		expected.append("Rule: Rule_Bar;\n");
@@ -128,7 +129,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testAssignedActionMandatory2() throws Exception {
+	@Test public void testAssignedActionMandatory2() throws Exception {
 		String actual = getParserRule("Rule: val=ID {Bar.left=current} '+' right=ID;");
 		StringBuilder expected = new StringBuilder();
 		expected.append("Rule: Rule_Bar;\n");
@@ -138,7 +139,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testAssignedActionOptional() throws Exception {
+	@Test public void testAssignedActionOptional() throws Exception {
 		String actual = getParserRule("Rule: Foo ({Bar.left=current} '+' right=ID)?; Foo: val=ID;");
 		StringBuilder expected = new StringBuilder();
 		expected.append("Rule: Foo_Foo | Rule_Bar;\n");
@@ -149,7 +150,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testAssignedActionOptionalMany() throws Exception {
+	@Test public void testAssignedActionOptionalMany() throws Exception {
 		String actual = getParserRule("Rule: Foo ({Bar.left=current} '+' right=ID)*; Foo: val=ID;");
 		StringBuilder expected = new StringBuilder();
 		expected.append("Rule: Foo_Foo | Rule_Bar;\n");
@@ -160,7 +161,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testAssignedActionManadatoryMany() throws Exception {
+	@Test public void testAssignedActionManadatoryMany() throws Exception {
 		String actual = getParserRule("Rule: Foo ({Bar.left=current} '+' right=ID)+; Foo: val=ID;");
 		StringBuilder expected = new StringBuilder();
 		expected.append("Rule: Rule_Bar;\n");
@@ -171,7 +172,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testExpression1() throws Exception {
+	@Test public void testExpression1() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Addition returns Expr: Prim ({Add.left=current} '+' right=Prim)*;\n");
 		grammar.append("Prim returns Expr: {Val} name=ID | '(' Addition ')';\n");
@@ -185,7 +186,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testExpression2() throws Exception {
+	@Test public void testExpression2() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Addition returns Expr: Multiplication ({Add.left=current} '+' right=Multiplication)*;\n");
 		grammar.append("Multiplication returns Expr: Prim ({Mult.left=current} '*' right=Prim)*;\n");
@@ -203,7 +204,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testExpression3() throws Exception {
+	@Test public void testExpression3() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Addition returns Expr: Prim ({Add.children+=current} ('+' children+=Prim)+)?;\n");
 		grammar.append("Prim returns Expr: {Val} name=ID | '(' Addition ')';\n");
@@ -217,7 +218,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testExpression4() throws Exception {
+	@Test public void testExpression4() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Addition returns Expr: Multiplication ({Add.addCh+=current} ('+' addCh+=Multiplication)+)?;\n");
 		grammar.append("Multiplication returns Expr: Prim ({Mult.mulCh+=current} ('*' mulCh+=Prim)+)?;\n");
@@ -235,7 +236,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testExpression5() throws Exception {
+	@Test public void testExpression5() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Addition returns Expr: Multiplication ({Bin.left+=current} op='+' right=Multiplication)*;\n");
 		grammar.append("Multiplication returns Expr: Prim ({Bin.left+=current} op='*' right=Prim)*;\n");
@@ -252,7 +253,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testExpression6() throws Exception {
+	@Test public void testExpression6() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Assignment returns Expr: Addition ({Bin.left+=current} op='=' right=Addition)*;\n");
 		grammar.append("Addition returns Expr: Multiplication ({Bin.left+=current} op='+' right=Multiplication)*;\n");
@@ -276,7 +277,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testActionSequence1() throws Exception {
+	@Test public void testActionSequence1() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Rule: val1=ID {A.a1=current} a2=ID {B.b1=current} b2=ID {C.c1=current} c2=ID;\n");
 		String actual = getParserRule(grammar.toString());
@@ -292,7 +293,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testActionSequence2() throws Exception {
+	@Test public void testActionSequence2() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Rule: val1=ID {A.a1=current} a2=ID {A.a1=current} a2=ID {A.a1=current} a2=ID;\n");
 		String actual = getParserRule(grammar.toString());
@@ -308,7 +309,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testActionSequence3() throws Exception {
+	@Test public void testActionSequence3() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Rule: val1=ID ({A.a1=current} a2=ID ({A.a1=current} a2=ID ({A.a1=current} a2=ID)?)?)?;\n");
 		String actual = getParserRule(grammar.toString());
@@ -324,7 +325,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testActionSequence4() throws Exception {
+	@Test public void testActionSequence4() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Rule: {A1} ({A2.left=current})+;\n");
 		String actual = getParserRule(grammar.toString());
@@ -336,7 +337,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testActionSequence5() throws Exception {
+	@Test public void testActionSequence5() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Rule: INT? {Bar} 'bar' ({FooBar.bar=current} 'act')?;");
 		String actual = getParserRule(grammar.toString());
@@ -348,7 +349,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testActionAlternative1() throws Exception {
+	@Test public void testActionAlternative1() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Rule: root=ID (val1=ID | {A.a1=current} a2=ID | {B.b1=current} b2=ID | {C.c1=current} c2=ID);\n");
 		String actual = getParserRule(grammar.toString());
@@ -380,7 +381,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 			')')?
 		)*;
 	 */
-	public void testActionAlternative2() throws Exception {
+	@Test public void testActionAlternative2() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Model: Bar ({Foo.f1=current} f2=ID f3=ID? f4=ID)*; Bar: bar=ID;\n");
 		String actual = getParserRule(grammar.toString());
@@ -393,7 +394,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testActionAlternative3() throws Exception {
+	@Test public void testActionAlternative3() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Model: {Foo} foo=ID ({Bar.bar=current} bar2=ID | {Baz.baz=current} baz2=ID);");
 		String actual = getParserRule(grammar.toString());
@@ -407,7 +408,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testActionSingleAndAssigned() throws Exception {
+	@Test public void testActionSingleAndAssigned() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Model: {Act1} act1=ID | Foo ({Act2.left=current} act2=ID)?;\n");
 		grammar.append("Foo: foo=ID {Act1.f1=current} act1=ID val=ID;\n");

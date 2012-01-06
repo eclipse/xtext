@@ -14,8 +14,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.diagnostics.Diagnostic;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.linking.langATestLanguage.Main;
 import org.eclipse.xtext.resource.XtextResource;
+import org.junit.Test;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
@@ -25,23 +27,23 @@ public class LinkingErrorTest extends AbstractXtextTests {
 	private static final Logger logger = Logger.getLogger(CrossRefTest.class);
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(LangATestLanguageStandaloneSetup.class);
 	}
 
-	public void testNoErrors() throws Exception {
+	@Test public void testNoErrors() throws Exception {
 		XtextResource resource = getResourceFromString(" type A extends B \n type B extends A");
-		EObject model = getModel(resource);
-		assertWithXtend("2", "types.size", model);
+		Main model = (Main) getModel(resource);
+		assertEquals(2, model.getTypes().size());
 		assertEquals(0, resource.getErrors().size());
 		assertEquals(0, resource.getWarnings().size());
 	}
 
-	public void testLinkError() throws Exception {
+	@Test public void testLinkError() throws Exception {
 		XtextResource resource = getResourceFromStringAndExpect(" type A extends B \n type B extends C", 1);
-		EObject model = getModel(resource);
-		assertWithXtend("2", "types.size", model);
+		Main model = (Main) getModel(resource);
+		assertEquals(2, model.getTypes().size());
 		assertEquals(1, resource.getErrors().size());
 		assertEquals(0, resource.getWarnings().size());
 
@@ -52,7 +54,7 @@ public class LinkingErrorTest extends AbstractXtextTests {
 		assertEquals(1, verboseError.getLength());
 	}
 	
-	public void testLinkingErrorMessage() throws Exception {
+	@Test public void testLinkingErrorMessage() throws Exception {
 		XtextResource resource = getResourceFromStringAndExpect("type A extends B", 1);
 		assertEquals(1, resource.getErrors().size());
 		Diagnostic error = (Diagnostic) resource.getErrors().get(0);
@@ -79,17 +81,17 @@ public class LinkingErrorTest extends AbstractXtextTests {
 		return getTreeIteratorContentSize(iterator);
 	}
 
-	public void testReparse() throws Exception {
+	@Test public void testReparse() throws Exception {
 		String modelText = " type A extends B \n type B extends C";
 		XtextResource resource = getResourceFromStringAndExpect(modelText, 1);
-		EObject model = getModel(resource);
-
-		assertWithXtend("2", "types.size", model);
+		Main model = (Main) getModel(resource);
+		
+		assertEquals(2, model.getTypes().size());
 		assertEquals(4, getContentSize(model));
 
 		resource.reparse(modelText);
-		model = getModel(resource);
-		assertWithXtend("2", "types.size", model);
+		model = (Main) getModel(resource);
+		assertEquals(2, model.getTypes().size());
 		assertEquals(4, getContentSize(model));
 	}
 

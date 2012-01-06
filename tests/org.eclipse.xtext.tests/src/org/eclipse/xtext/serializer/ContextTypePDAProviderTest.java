@@ -18,7 +18,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
 import org.eclipse.xtext.serializer.analysis.IContextProvider;
 import org.eclipse.xtext.serializer.analysis.IContextTypePDAProvider;
@@ -27,6 +27,7 @@ import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.formallang.Pda;
 import org.eclipse.xtext.util.formallang.PdaListFormatter;
+import org.junit.Test;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -98,12 +99,12 @@ public class ContextTypePDAProviderTest extends AbstractXtextTests {
 	}
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 	}
 
-	public void testKeywordAlternative() throws Exception {
+	@Test public void testKeywordAlternative() throws Exception {
 		String actual = getParserRule("Rule: a1=ID ('kw1' | 'kw2') a2=ID;");
 		StringBuilder expected = new StringBuilder();
 		expected.append("Rule_Rule:\n");
@@ -115,7 +116,7 @@ public class ContextTypePDAProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testDelegation1() throws Exception {
+	@Test public void testDelegation1() throws Exception {
 		String actual = getParserRule("Rule: Delegate; Delegate: val=ID;");
 		StringBuilder expected = new StringBuilder();
 		expected.append("Delegate_Delegate:\n");
@@ -129,7 +130,7 @@ public class ContextTypePDAProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testLoop1() throws Exception {
+	@Test public void testLoop1() throws Exception {
 		String actual = getParserRule("Rule: ('x' x=ID*)*;");
 		StringBuilder expected = new StringBuilder();
 		expected.append("Rule_Rule:\n");
@@ -142,7 +143,7 @@ public class ContextTypePDAProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testLoop2() throws Exception {
+	@Test public void testLoop2() throws Exception {
 		String actual = getParserRule("Model: (('x' x+=ID*) | ('y' y+=ID*))*;");
 		StringBuilder expected = new StringBuilder();
 		expected.append("Model_Model:\n");
@@ -158,7 +159,7 @@ public class ContextTypePDAProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testDelegation2() throws Exception {
+	@Test public void testDelegation2() throws Exception {
 		String actual = getParserRule("Rule: Foo | Delegate1; Delegate1: 'del' Delegate2 bar=ID; Delegate2: val=ID; Foo: val2=ID;");
 		StringBuilder expected = new StringBuilder();
 		expected.append("Delegate2_Delegate1:\n");
@@ -191,7 +192,7 @@ public class ContextTypePDAProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testExpression1() throws Exception {
+	@Test public void testExpression1() throws Exception {
 		String actual = getParserRule("Exp: 'kw' Addit; Addit returns Exp: Prim ({Add.left=current} '+' right=Prim)*; Prim returns Exp: {Val} val=ID;");
 		StringBuilder expected = new StringBuilder();
 		expected.append("Add_Addit:\n");
@@ -240,7 +241,7 @@ public class ContextTypePDAProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testExpression2() throws Exception {
+	@Test public void testExpression2() throws Exception {
 		String actual = getParserRule("Addition returns Expr: Prim ({Add.left=current} '+' right=Prim)*; Prim returns Expr: {Val} name=ID | '(' Addition ')';");
 		StringBuilder expected = new StringBuilder();
 		expected.append("Add_Addition:\n");
@@ -309,7 +310,7 @@ public class ContextTypePDAProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
-	public void testOptionalDelegate() throws Exception {
+	@Test public void testOptionalDelegate() throws Exception {
 		String actual = getParserRule("Rule: Mand | Opt; Mand: 'm' mand=ID; Opt: 'o' opt=ID?;");
 		StringBuilder expected = new StringBuilder();
 		expected.append("Mand_Mand:\n");

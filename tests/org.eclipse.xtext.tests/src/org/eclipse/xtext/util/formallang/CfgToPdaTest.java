@@ -7,16 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.util.formallang;
 
-import junit.framework.Assert;
-import junit.framework.TestCase;
-
-import org.eclipse.xtext.util.formallang.StringProduction.ProdElement;
 import org.eclipse.xtext.util.formallang.StringPda.StringPdaFactory;
+import org.eclipse.xtext.util.formallang.StringProduction.ProdElement;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class CfgToPdaTest extends TestCase {
+public class CfgToPdaTest extends Assert {
 
 	private String createPda(StringCfg cfg) {
 		FollowerFunction<ProdElement> ff = new FollowerFunctionImpl<ProdElement, String>(cfg);
@@ -26,7 +25,7 @@ public class CfgToPdaTest extends TestCase {
 		return actual;
 	}
 
-	public void testSimple() {
+	@Test public void testSimple() {
 		StringCfg cfg = new StringCfg();
 		cfg.rule("Foo: 'foo' Bar");
 		cfg.rule("Bar: 'bar'");
@@ -41,7 +40,7 @@ public class CfgToPdaTest extends TestCase {
 		Assert.assertEquals(exp.toString(), createPda(cfg));
 	}
 
-	public void testSimple2() {
+	@Test public void testSimple2() {
 		StringCfg cfg = new StringCfg();
 		cfg.rule("Foo: Bar");
 		cfg.rule("Bar: 'bar1' Baz 'bar2'");
@@ -61,7 +60,7 @@ public class CfgToPdaTest extends TestCase {
 		Assert.assertEquals(exp.toString(), createPda(cfg));
 	}
 
-	public void testRecursion() {
+	@Test public void testRecursion() {
 		StringCfg cfg = new StringCfg();
 		cfg.rule("Foo: Bar");
 		cfg.rule("Bar: 'bar1' Foo? 'bar2'");
@@ -78,7 +77,7 @@ public class CfgToPdaTest extends TestCase {
 		Assert.assertEquals(exp.toString(), createPda(cfg));
 	}
 
-	public void testChain() {
+	@Test public void testChain() {
 		StringCfg cfg = new StringCfg();
 		cfg.rule("Foo: Bar1");
 		cfg.rule("Bar1: Bar2");

@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextGrammarTestLanguageStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -35,6 +35,7 @@ import org.eclipse.xtext.xtextTest.Assignment;
 import org.eclipse.xtext.xtextTest.Grammar;
 import org.eclipse.xtext.xtextTest.Keyword;
 import org.eclipse.xtext.xtextTest.RuleCall;
+import org.junit.Test;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -44,12 +45,12 @@ import com.google.common.collect.Lists;
 public class ParseErrorHandlingTest extends AbstractXtextTests {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextGrammarTestLanguageStandaloneSetup.class);
 	}
 
-	public void testLexerError_01() throws Exception {
+	@Test public void testLexerError_01() throws Exception {
 		String model = "grammar a import 'holla' % as foo";
 		EObject root = getModelAndExpect(model, 2);
 		Iterable<INode> errors = ((XtextResource) root.eResource()).getParseResult().getSyntaxErrors();
@@ -60,7 +61,7 @@ public class ParseErrorHandlingTest extends AbstractXtextTests {
 		assertEquals(1, errors.iterator().next().getTotalLength());
 	}
 
-	public void testParseError1() throws Exception {
+	@Test public void testParseError1() throws Exception {
 		String model = "grammar a import 'holla' foo returns x::y::Z : name=ID;";
 		EObject root = getModelAndExpect(model, 5);
 		Iterable<INode> errors = ((XtextResource) root.eResource()).getParseResult().getSyntaxErrors();
@@ -71,7 +72,7 @@ public class ParseErrorHandlingTest extends AbstractXtextTests {
 		assertEquals(1, Iterables.size(errors));
 	}
 
-	public void testParseError2() throws Exception {
+	@Test public void testParseError2() throws Exception {
 		Grammar grammar = (Grammar) getModelAndExpect("grammar a import 'holla' foo returns y::Z : name=foo #;", 4);
 		AbstractRule rule = grammar.getRules().get(0);
 		Assignment assignment = (Assignment) rule.getAlternatives();
@@ -80,7 +81,7 @@ public class ParseErrorHandlingTest extends AbstractXtextTests {
 //		assertWithXtend("'foo'", "rules.first().eAllContents().typeSelect(RuleCall).first().rule.name", grammar);
 	}
 
-	public void testParseError3() throws Exception {
+	@Test public void testParseError3() throws Exception {
 		Grammar grammar = (Grammar) getModelAndExpect("grammar a import 'holla' foo returns y::Z : name=foo #############", 4);
 		AbstractRule rule = grammar.getRules().get(0);
 		Assignment assignment = (Assignment) rule.getAlternatives();
@@ -89,7 +90,7 @@ public class ParseErrorHandlingTest extends AbstractXtextTests {
 //		assertWithXtend("'foo'", "rules.first().eAllContents().typeSelect(RuleCall).first().rule.name", grammar);
 	}
 
-	public void testParseError4() throws Exception {
+	@Test public void testParseError4() throws Exception {
 		Grammar grammar = (Grammar) getModelAndExpect("grammar a import 'holla' foo returns y::Z : name=foo # 'foo'; bar : 'stuff'", 5);
 		AbstractRule rule = grammar.getRules().get(0);
 		Assignment assignment = (Assignment) rule.getAlternatives();
@@ -103,7 +104,7 @@ public class ParseErrorHandlingTest extends AbstractXtextTests {
 //		assertWithXtend("'stuff'", "rules.get(1).eAllContents().typeSelect(Keyword).first().value", grammar);
 	}
 	
-	public void testExpectNoSuchMethodException() throws Exception {
+	@Test public void testExpectNoSuchMethodException() throws Exception {
 		IParser parser = get(IParser.class);
 		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
 		parserRule.setName("ruleDoesNotExist");
@@ -118,7 +119,7 @@ public class ParseErrorHandlingTest extends AbstractXtextTests {
 	}
 
 
-	public void testName() throws Exception {
+	@Test public void testName() throws Exception {
 		String model = "grammar a import 'holla' foo returns y::Z : name=ID # 'foo'; bar : 'stuff'";
 		for (int i=model.length();0<i;i--) {
 			getModelAndExpect(model.substring(0, i), EXPECT_ERRORS);
@@ -129,7 +130,7 @@ public class ParseErrorHandlingTest extends AbstractXtextTests {
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=236425
 	 * @throws Exception
 	 */
-	public void testBug236425() throws Exception {
+	@Test public void testBug236425() throws Exception {
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		String model = "spielplatz 100 }";
 		EObject object = getModelAndExpect(model, 1);
@@ -149,7 +150,7 @@ public class ParseErrorHandlingTest extends AbstractXtextTests {
 		};
 	}
 
-	public void testLexerError_02() throws Exception {
+	@Test public void testLexerError_02() throws Exception {
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		String model = "spielplatz 100 '}";
 		EObject object = getModelAndExpect(model, 1);
@@ -157,7 +158,7 @@ public class ParseErrorHandlingTest extends AbstractXtextTests {
 		assertEquals(1, Iterables.size(allSyntaxErrors(node)));
 	}
 
-	public void testTrailingRecoverableError() throws Exception {
+	@Test public void testTrailingRecoverableError() throws Exception {
 		with(TreeTestLanguageStandaloneSetup.class);
 		String model = "parent ('Teststring') { \n" +
 			"	child ('Teststring'){};\n" +

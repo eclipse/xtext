@@ -73,6 +73,19 @@ ExtendsPluginEObject:
 	)?
 ;
 
+Unused_01 returns ExtendsNsURIEObject:
+	{MyNamedElement_01} name = ValidID
+;
+
+Unused_02 returns ExtendsResourceEObject:
+	{MyNamedElement_02} name = ValidID
+;
+
+Unused_03 returns ExtendsPluginEObject:
+	{MyNamedElement_03} name = ValidID
+;
+
+
 ExtendsResourceEObject: 
 	'ExtendsResourceEObject' name=ValidID 
 	( 

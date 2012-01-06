@@ -12,8 +12,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.ENamedElement;
@@ -33,6 +31,9 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.util.IResourceScopeCache;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -43,7 +44,7 @@ import com.google.common.collect.Sets;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Holger Schill
  */
-public class ResourceSetBasedResourceDescriptionsTest extends TestCase implements IResourceServiceProvider.Registry, Function<IEObjectDescription, EObject> {
+public class ResourceSetBasedResourceDescriptionsTest extends Assert implements IResourceServiceProvider.Registry, Function<IEObjectDescription, EObject> {
 
 	private ResourceSet resourceSet;
 	private DefaultResourceDescriptionManager resourceDescriptionManager;
@@ -51,9 +52,8 @@ public class ResourceSetBasedResourceDescriptionsTest extends TestCase implement
 	private int nameCount;
 	private ResourceSetBasedResourceDescriptions resDescs;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		resourceSet = new ResourceSetImpl();
 		IQualifiedNameProvider qualifiedNameProvider = new IQualifiedNameProvider.AbstractImpl() {
 			
@@ -87,14 +87,14 @@ public class ResourceSetBasedResourceDescriptionsTest extends TestCase implement
 		};
 	}
 	
-	public void testEmptyResourceSet() {
+	@Test public void testEmptyResourceSet() {
 		Iterable<IEObjectDescription> iterable = container.getExportedObjectsByType(EcorePackage.Literals.EOBJECT);
 		assertTrue(Iterables.isEmpty(iterable));
 		iterable = container.getExportedObjects(EcorePackage.Literals.EOBJECT, QualifiedName.create("Zonk"), false);
 		assertTrue(Iterables.isEmpty(iterable));
 	}
 	
-	public void testOneElement_Mismatch() {
+	@Test public void testOneElement_Mismatch() {
 		QualifiedName qualifiedName = QualifiedName.create("SomeName");
 		EClass type = EcorePackage.Literals.EPACKAGE;
 		Resource resource = createResource();
@@ -107,7 +107,7 @@ public class ResourceSetBasedResourceDescriptionsTest extends TestCase implement
 		assertTrue(Iterables.isEmpty(iterable));
 	}
 	
-	public void testOneElement_Match() {
+	@Test public void testOneElement_Match() {
 		QualifiedName qualifiedName = QualifiedName.create("SomeName");
 		EClass type = EcorePackage.Literals.EPACKAGE;
 		Resource resource = createResource();
@@ -124,7 +124,7 @@ public class ResourceSetBasedResourceDescriptionsTest extends TestCase implement
 		assertSame(element, Iterables.getOnlyElement(iterable).getEObjectOrProxy());
 	}
 	
-	public void testTwoElements_OneMatch() {
+	@Test public void testTwoElements_OneMatch() {
 		QualifiedName qualifiedName = QualifiedName.create("SomeName");
 		EClass type = EcorePackage.Literals.EPACKAGE;
 		Resource resource = createResource();
@@ -142,7 +142,7 @@ public class ResourceSetBasedResourceDescriptionsTest extends TestCase implement
 		assertSame(element, Iterables.getOnlyElement(iterable).getEObjectOrProxy());
 	}
 	
-	public void testTwoResources_TwoMatches() {
+	@Test public void testTwoResources_TwoMatches() {
 		QualifiedName qualifiedName = QualifiedName.create("SomeName");
 		EClass type = EcorePackage.Literals.EPACKAGE;
 		Resource resource = createResource();
@@ -168,7 +168,7 @@ public class ResourceSetBasedResourceDescriptionsTest extends TestCase implement
 		assertEquals(expectedSet, transformedSet);
 	}
 	
-	public void testPerformance10Resources100EClassesEach() {
+	@Test public void testPerformance10Resources100EClassesEach() {
 		int resourceCount = 10;
 		int eClassCount = 100;
 		for(int i = 0; i < resourceCount; i++) {
@@ -220,7 +220,7 @@ public class ResourceSetBasedResourceDescriptionsTest extends TestCase implement
 		return getResourceServiceProvider(uri, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 	}
 	
-	public void testBug_352450 () throws Exception {
+	@Test public void testBug_352450 () throws Exception {
 		int resourceCount = 3;
 		int eClassCount = 1;
 		for(int i = 0; i < resourceCount; i++) {

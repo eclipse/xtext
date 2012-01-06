@@ -12,12 +12,13 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.tests.EmfAssert;
 import org.eclipse.xtext.util.EmfFormatter;
+import org.junit.Test;
 
 public class ComplexReconstrTest extends AbstractXtextTests {
 
@@ -25,7 +26,7 @@ public class ComplexReconstrTest extends AbstractXtextTests {
 			.getLogger(ComplexReconstrTest.class);
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(ComplexReconstrTestLanguageStandaloneSetup.class);
 	}
@@ -35,7 +36,7 @@ public class ComplexReconstrTest extends AbstractXtextTests {
 		return false;
 	}
 
-	public void testPrintGrammar() {
+	@Test public void testPrintGrammar() {
 		XtextResourceSet rs = get(XtextResourceSet.class);
 		rs.setClasspathURIContext(getClass());
 		URI u = URI
@@ -51,12 +52,12 @@ public class ComplexReconstrTest extends AbstractXtextTests {
 			}
 	}
 
-	public void testSimple() throws Exception {
+	@Test public void testSimple() throws Exception {
 		String model = "( a + b - c ) !";
 		assertEquals(model, parseAndSerialize(model));
 	}
 
-	public void testComplex() throws Exception {
+	@Test public void testComplex() throws Exception {
 		String model = "( ( a + b ) ! - c + d + e + f - ( ^x + s ) - ( ( a + b ) ! - c ) ! ) !";
 		assertEquals(model, parseAndSerialize(model));
 	}
@@ -68,22 +69,22 @@ public class ComplexReconstrTest extends AbstractXtextTests {
 		return getSerializer().serialize(result, SaveOptions.defaultOptions());
 	}
 
-	public void testNormalizableCompositeNodesIncluded() throws Exception {
+	@Test public void testNormalizableCompositeNodesIncluded() throws Exception {
 		reconstructAndCompare("a");
 		reconstructAndCompare("a + b");
 	}
 
-	public void testTrickyGSimple() throws Exception {
+	@Test public void testTrickyGSimple() throws Exception {
 		String model = "TG [[2]]";
 		assertEquals(model, parseAndSerialize(model));
 	}
 
-	public void testTrickyGWithNull() throws Exception {
+	@Test public void testTrickyGWithNull() throws Exception {
 		String model = "TG [0,[2,0],3,4,0]";
 		assertEquals(model, parseAndSerialize(model));
 	}
 
-	public void testTrickyGComplex() throws Exception {
+	@Test public void testTrickyGComplex() throws Exception {
 		String model = "TG [2, [2,3,45,6],242,[23423,[34,34,[242343],234]]]";
 		assertEquals(model, parseAndSerialize(model));
 	}

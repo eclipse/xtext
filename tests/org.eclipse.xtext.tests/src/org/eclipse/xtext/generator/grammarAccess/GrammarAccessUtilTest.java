@@ -8,13 +8,16 @@
 package org.eclipse.xtext.generator.grammarAccess;
 
 import static org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil.*;
-import junit.framework.TestCase;
+
+import org.junit.Assert;
+import org.junit.Test;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class GrammarAccessUtilTest extends TestCase {
+public class GrammarAccessUtilTest extends Assert {
 	
-	public void testToJavaIdentifier() throws Exception {
+	@Test public void testToJavaIdentifier() throws Exception {
 		assertEquals("FooBar",toJavaIdentifier("foo Bar", true));
 		assertEquals("Foo",toJavaIdentifier("foo;", true));
 		assertEquals("foo",toJavaIdentifier("foo;", false));
@@ -28,11 +31,11 @@ public class GrammarAccessUtilTest extends TestCase {
 	/**
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=298492
 	 */
-	public void testBug() throws Exception {
+	@Test public void testBug() throws Exception {
 		assertEquals("HiraganaLetterRu",toJavaIdentifier("\u308B",true));
 	}
 	
-	public void testSmoke() throws Exception {
+	@Test public void testSmoke() throws Exception {
 		for (int i = 0; i < 4000; i++) {
 			String identifier = toJavaIdentifier(String.valueOf((char)i), false);
 			

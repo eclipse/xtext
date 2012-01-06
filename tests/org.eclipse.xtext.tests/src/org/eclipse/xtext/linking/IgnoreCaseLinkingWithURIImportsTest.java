@@ -13,6 +13,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.scoping.impl.SyntheticModelAwareURIConverter;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -20,13 +21,13 @@ import org.eclipse.xtext.util.StringInputStream;
 public class IgnoreCaseLinkingWithURIImportsTest extends AbstractIgnoreCaseLinkingTest {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(IgnoreCaseImportsTestLanguageStandaloneSetup.class);
 	}
 
 	@Override
-	public void testWithImports() throws Exception {
+	@Test public void testWithImports() throws Exception {
 		SyntheticModelAwareURIConverter uriConverter = new SyntheticModelAwareURIConverter();
 		XtextResourceSet resourceSet = get(XtextResourceSet.class);
 		resourceSet.setURIConverter(uriConverter);

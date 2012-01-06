@@ -16,17 +16,17 @@ import java.lang.annotation.Target;
 import java.lang.reflect.Method;
 import java.math.BigInteger;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
-import com.ibm.icu.math.BigDecimal;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 @SuppressWarnings("unused")
-public class PolymorphicDispatcherTest extends TestCase {
+public class PolymorphicDispatcherTest extends Assert {
 
 	class SuperClass {
 		String label(Number i) {
@@ -34,7 +34,7 @@ public class PolymorphicDispatcherTest extends TestCase {
 		}
 	}
 
-	public void testPerformance() throws Exception {
+	@Test public void testPerformance() throws Exception {
 		Object first = new SuperClass() {
 			String label(Integer i) {
 				return "Integer_first_" + i;
@@ -68,7 +68,7 @@ public class PolymorphicDispatcherTest extends TestCase {
 		assertTrue(String.format("Expected %d < 2000", after - before), (after - before) < 2000);
 	}
 
-	public void testSimple() throws Exception {
+	@Test public void testSimple() throws Exception {
 		Object first = new SuperClass() {
 			String label(Integer i) {
 				return "Integer_first_" + i;
@@ -100,7 +100,7 @@ public class PolymorphicDispatcherTest extends TestCase {
 		assertEquals("Object_foo", dispatcher.invoke("foo"));
 	}
 	
-	public void testSimple_01() throws Exception {
+	@Test public void testSimple_01() throws Exception {
 		Object o1 = new Object() {
 			String label(CharSequence x) {return "c";}
 			String label(Comparable<?> x) {return "comp";}
@@ -115,7 +115,7 @@ public class PolymorphicDispatcherTest extends TestCase {
 		assertEquals("i",target.invoke(42));
 	}
 
-	public void testMixedTypes() throws Exception {
+	@Test public void testMixedTypes() throws Exception {
 		Object o1 = new Object() {
 
 			String label(Number i) {
@@ -136,7 +136,7 @@ public class PolymorphicDispatcherTest extends TestCase {
 		assertEquals("Integer_3", dispatcher.invoke(new Integer(3)));
 	}
 
-	public void testDifferentParamLength() throws Exception {
+	@Test public void testDifferentParamLength() throws Exception {
 		Object o1 = new Object() {
 			String label(Integer i, Object stuff) {
 				return "Integer_" + i + "_" + stuff;
@@ -163,7 +163,7 @@ public class PolymorphicDispatcherTest extends TestCase {
 		assertEquals("Number_3_foo", dispatcher.invoke(BigInteger.valueOf(3), "foo"));
 	}
 
-	public void testAmbiguous() throws Exception {
+	@Test public void testAmbiguous() throws Exception {
 		Object o1 = new Object() {
 
 			String label(CharSequence i) {
@@ -183,7 +183,7 @@ public class PolymorphicDispatcherTest extends TestCase {
 		}
 	}
 
-	public void testNullParams() throws Exception {
+	@Test public void testNullParams() throws Exception {
 		Object o1 = new Object() {
 
 			String label(String i, CharSequence y) {
@@ -202,7 +202,7 @@ public class PolymorphicDispatcherTest extends TestCase {
 		assertEquals(CharSequence.class.getSimpleName(), dispatcher.invoke(null, new StringBuilder()));
 	}
 	
-	public void testNullParams_1() throws Exception {
+	@Test public void testNullParams_1() throws Exception {
 		Object o1 = new Object() {
 			
 			String label(Void x, CharSequence y) {
@@ -221,7 +221,7 @@ public class PolymorphicDispatcherTest extends TestCase {
 		assertEquals(CharSequence.class.getSimpleName(), dispatcher.invoke(null, null));
 	}
 
-	public void testPrivateMethodAccess() {
+	@Test public void testPrivateMethodAccess() {
 		Object o1 = new Object() {
 			private String label(Integer i) {
 				return "Integer_" + i;
@@ -241,7 +241,7 @@ public class PolymorphicDispatcherTest extends TestCase {
 	private @interface TestLabelAnnotation {
 	}
 
-	public void testCustomFilter() {
+	@Test public void testCustomFilter() {
 		Object o1 = new Object() {
 			@TestLabelAnnotation
 			private String sillyMethodName(Integer i) {

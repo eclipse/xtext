@@ -8,20 +8,21 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Test;
 
 public class XtextGrammarReconcilationTest extends AbstractXtextTests {
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		XtextStandaloneSetup.doSetup();
 		with(XtextStandaloneSetup.class);
 	}
 
-	public void testSimple() throws Exception {
+	@Test public void testSimple() throws Exception {
 		// this fails see bug #252181
 		String model = "grammar foo with org.eclipse.xtext.common.Terminals Honolulu : name=ID;";
 
@@ -45,7 +46,7 @@ public class XtextGrammarReconcilationTest extends AbstractXtextTests {
 		assertEquals(expectedModel, result);
 	}
 
-	public void testSelf() {
+	@Test public void testSelf() {
 		Grammar g = getGrammarAccess().getGrammar();
 		for (AbstractRule r : g.getRules()) {
 			// AbstractRule r = GrammarUtil.findRuleForName(g, "GrammarID");
