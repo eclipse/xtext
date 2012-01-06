@@ -11,7 +11,7 @@ import static org.eclipse.xtext.util.Strings.*;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
