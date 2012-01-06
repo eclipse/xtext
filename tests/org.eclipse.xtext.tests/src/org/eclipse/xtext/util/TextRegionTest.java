@@ -7,14 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class TextRegionTest extends TestCase {
+public class TextRegionTest extends Assert {
 
-	public void testContainsByOffset() {
+	@Test public void testContainsByOffset() {
 		ITextRegion location = new TextRegion(3, 4);
 		assertTrue(location.contains(3));
 		assertTrue(location.contains(6));
@@ -22,7 +23,7 @@ public class TextRegionTest extends TestCase {
 		assertFalse(location.contains(7));
 	}
 	
-	public void testContainsByLocation() {
+	@Test public void testContainsByLocation() {
 		ITextRegion location = new TextRegion(3, 4);
 		assertTrue(location.contains(new TextRegion(4,2)));
 		assertTrue(location.contains(new TextRegion(4,3)));
@@ -33,7 +34,7 @@ public class TextRegionTest extends TestCase {
 		assertFalse(location.contains(new TextRegion(8,1)));
 	}
 	
-	public void testMerge() {
+	@Test public void testMerge() {
 		ITextRegion location = new TextRegion(2, 4);
 		ITextRegion merge = location.merge(ITextRegion.EMPTY_REGION);
 		assertEquals(2, merge.getOffset());

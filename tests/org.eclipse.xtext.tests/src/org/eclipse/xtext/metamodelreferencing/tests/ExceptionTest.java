@@ -8,8 +8,9 @@
 package org.eclipse.xtext.metamodelreferencing.tests;
 
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -17,12 +18,12 @@ import org.eclipse.xtext.resource.XtextResource;
 public class ExceptionTest extends AbstractXtextTests {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 	}
 
-	public void testExceptionOnRegenerate() throws Exception {
+	@Test public void testExceptionOnRegenerate() throws Exception {
 		String model = "grammar org.eclipse.xtext.ExceptionTest with org.eclipse.xtext.common.Terminals\n" +
 			"generate existing 'http://www.eclipse.org/xtext/tests/grammarinheritance'\n" +
 			"import 'classpath:/org/eclipse/xtext/grammarinheritance/ametamodel.ecore' as existing\n" +

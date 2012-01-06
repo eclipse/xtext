@@ -7,16 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.testlanguages.FowlerDslTestLanguageStandaloneSetup;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class XtextParserBugsTest extends AbstractXtextTests {
 
-	public void testFirstTokenIsIllegal_254841() throws Exception {
+	@Test public void testFirstTokenIsIllegal_254841() throws Exception {
 		with(FowlerDslTestLanguageStandaloneSetup.class);
 		String model = "firstToken";
 		ICompositeNode rootNode = getRootNodeAndExpect(model, 1);

@@ -13,7 +13,8 @@ package org.eclipse.xtext.documentation.impl;
 import org.eclipse.xtext.dummy.DummyTestLanguageStandaloneSetup;
 import org.eclipse.xtext.dummy.dummyLang.Element;
 import org.eclipse.xtext.dummy.dummyLang.Model;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.junit.Test;
 
 /**
  * @author Christoph Kulla - Initial contribution and API
@@ -25,7 +26,7 @@ public class MultiLineCommentDocumentationProviderTest extends AbstractXtextTest
 	final String document = "element A;";
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(DummyTestLanguageStandaloneSetup.class);
 	}
@@ -47,7 +48,7 @@ public class MultiLineCommentDocumentationProviderTest extends AbstractXtextTest
 		return mlcdp.getDocumentation(element);
 	}
 	
-	public void testSimple() throws Exception {
+	@Test public void testSimple() throws Exception {
 		String documentation = getComment (
 				"/**\n" +
 				"* " + expectedDocumentation + "\n" +
@@ -56,7 +57,7 @@ public class MultiLineCommentDocumentationProviderTest extends AbstractXtextTest
 		assertEquals (expectedDocumentation, documentation);
 	}
 
-	public void testMissingStartTag() throws Exception {
+	@Test public void testMissingStartTag() throws Exception {
 		String documentation = getComment (
 				"/*\n" +
 				"* " + expectedDocumentation + "\n" +
@@ -65,7 +66,7 @@ public class MultiLineCommentDocumentationProviderTest extends AbstractXtextTest
 		assertEquals (expectedDocumentation, documentation);
 	}
 	
-	public void testRect() throws Exception {
+	@Test public void testRect() throws Exception {
 		String documentation = getComment (
 				"/********************************************\n" +
 				" **                               **\n" +
@@ -76,7 +77,7 @@ public class MultiLineCommentDocumentationProviderTest extends AbstractXtextTest
 		assertEquals (expectedDocumentation, documentation);
 	}	
 	
-	public void testWhitespace() throws Exception {
+	@Test public void testWhitespace() throws Exception {
 		String documentation = getComment (
 				" \t \t /***\n" +
 				"** " + expectedDocumentation + " \t \t ** \t \t \n" +
@@ -85,7 +86,7 @@ public class MultiLineCommentDocumentationProviderTest extends AbstractXtextTest
 		assertEquals (expectedDocumentation, documentation);
 	}	
 	
-	public void testWithSingleLineComment() throws Exception {
+	@Test public void testWithSingleLineComment() throws Exception {
 		String documentation = getComment (
 				"/**\n" +
 				"* " + expectedDocumentation + "\n" +
@@ -95,7 +96,7 @@ public class MultiLineCommentDocumentationProviderTest extends AbstractXtextTest
 		assertEquals (expectedDocumentation, documentation);
 	}
 
-	public void testMultipleCommentsForOneObject() throws Exception {
+	@Test public void testMultipleCommentsForOneObject() throws Exception {
 		String documentation = getComment (
 				"/**\n" +
 				"* " + expectedDocumentation + "2\n" +
@@ -107,7 +108,7 @@ public class MultiLineCommentDocumentationProviderTest extends AbstractXtextTest
 		assertEquals (expectedDocumentation, documentation);
 	}
 	
-	public void testMultipleComments() throws Exception {
+	@Test public void testMultipleComments() throws Exception {
 		String s = 	"/**\n" +
 			"* " + expectedDocumentation + "\n" +
 			"*/\n" +
@@ -117,7 +118,7 @@ public class MultiLineCommentDocumentationProviderTest extends AbstractXtextTest
 		assertEquals (expectedDocumentation, documentation);
 	}
 
-	public void testMultipleMultiLineComments() throws Exception {
+	@Test public void testMultipleMultiLineComments() throws Exception {
 		String documentation = getComment ("/**\n" +
 			"* " + expectedDocumentation + "\n" +
 			"*/\n" +
@@ -126,7 +127,7 @@ public class MultiLineCommentDocumentationProviderTest extends AbstractXtextTest
 		assertEquals ("", documentation);
 	}
 	
-	public void testNoComment() throws Exception {
+	@Test public void testNoComment() throws Exception {
 		String documentation = getComment (document);
 		assertNull (documentation);		
 	}

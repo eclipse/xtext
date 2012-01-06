@@ -7,7 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.terminalrules;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -15,88 +16,88 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 public class Bug297105Test extends AbstractXtextTests {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(Bug297105TestLanguageStandaloneSetup.class);
 	}
 	
-	public void testBug297105_01() throws Exception {
+	@Test public void testBug297105_01() throws Exception {
 		getModel("1.1 + 2.2");
 	}
 	
-	public void testBug297105_02() throws Exception {
+	@Test public void testBug297105_02() throws Exception {
 		getModel("1.1+2.2");
 	}
 	
-	public void testBug297105_03() throws Exception {
+	@Test public void testBug297105_03() throws Exception {
 		getModel("1.1 + 2.2 ");
 	}
 	
-	public void testBug297105_04() throws Exception {
+	@Test public void testBug297105_04() throws Exception {
 		getModel("1.1+2.2 ");
 	}
 	
-	public void testBug297105_05() throws Exception {
+	@Test public void testBug297105_05() throws Exception {
 		getModel(".1 + .2");
 	}
 	
-	public void testBug297105_06() throws Exception {
+	@Test public void testBug297105_06() throws Exception {
 		getModel(".1+.2");
 	}
 	
-	public void testBug297105_07() throws Exception {
+	@Test public void testBug297105_07() throws Exception {
 		getModel(".1 + .2 ");
 	}
 	
-	public void testBug297105_08() throws Exception {
+	@Test public void testBug297105_08() throws Exception {
 		getModel(".1+.2 ");
 	}
 	
-	public void testBug297105_09() throws Exception {
+	@Test public void testBug297105_09() throws Exception {
 		getModel("1.1e+1 + 2.2e-1");
 	}
 	
-	public void testBug297105_10() throws Exception {
+	@Test public void testBug297105_10() throws Exception {
 		getModel("1.1e-1+2.2e+1");
 	}
 	
-	public void testBug297105_11() throws Exception {
+	@Test public void testBug297105_11() throws Exception {
 		getModel("1.1e+1 + 2.2e-1 ");
 	}
 	
-	public void testBug297105_12() throws Exception {
+	@Test public void testBug297105_12() throws Exception {
 		getModel("1.1e-1+2.2e+1 ");
 	}
 	
-	public void testBug297105_13() throws Exception {
+	@Test public void testBug297105_13() throws Exception {
 		getModel(".1e+1 + .2e-1");
 	}
 	
-	public void testBug297105_14() throws Exception {
+	@Test public void testBug297105_14() throws Exception {
 		getModel(".1e-1+.2e+1");
 	}
 	
-	public void testBug297105_15() throws Exception {
+	@Test public void testBug297105_15() throws Exception {
 		getModel(".1e+1 + .2e-1 ");
 	}
 	
-	public void testBug297105_16() throws Exception {
+	@Test public void testBug297105_16() throws Exception {
 		getModel(".1e-1+.2e-1 ");
 	}
 	
-	public void testBug297105_17() throws Exception {
+	@Test public void testBug297105_17() throws Exception {
 		getModel("1 + 2");
 	}
 	
-	public void testBug297105_18() throws Exception {
+	@Test public void testBug297105_18() throws Exception {
 		getModel("1+2");
 	}
 	
-	public void testBug297105_19() throws Exception {
+	@Test public void testBug297105_19() throws Exception {
 		getModel("1 + 2 ");
 	}
 	
-	public void testBug297105_20() throws Exception {
+	@Test public void testBug297105_20() throws Exception {
 		getModel("1+2 ");
 	}
 }

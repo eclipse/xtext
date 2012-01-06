@@ -8,10 +8,11 @@
 package org.eclipse.xtext.linking;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.bug287988Test.BaseAttribute;
 import org.eclipse.xtext.linking.bug287988Test.Model;
 import org.eclipse.xtext.resource.XtextResource;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -19,23 +20,17 @@ import org.eclipse.xtext.resource.XtextResource;
 public class Bug287988Test extends AbstractXtextTests {
 	
 	@Override
-	protected boolean shouldTestSerializer(XtextResource resource) {
-		// https://bugs.eclipse.org/bugs/show_bug.cgi?id=361355
-		return !"testInlinedActions_01".equals(getName());
-	}
-
-	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(Bug287988TestLanguageStandaloneSetup.class);
 	}
 	
-	public void testAction_01() throws Exception {
+	@Test public void testAction_01() throws Exception {
 		String modelAsString = "actions master mytype attr1; attribute ref attr1 attr2;";
 		checkSecondAttrRefersToFirst(modelAsString);
 	}
 	
-	public void testAction_02() throws Exception {
+	@Test public void testAction_02() throws Exception {
 		String modelAsString = "actions master mytype attr1; attribute myOtherType attr2;";
 		Model model = (Model) getModel(modelAsString);
 		assertEquals(2, model.getAttributes().size());
@@ -43,7 +38,7 @@ public class Bug287988Test extends AbstractXtextTests {
 		assertNull(baseAttribute.getTypeRef());
 	}
 	
-	public void testAction_03() throws Exception {
+	@Test public void testAction_03() throws Exception {
 		String modelAsString = "actions master mytype attr1; attribute ref attr3 attr2;";
 		Model model = (Model) getModelAndExpect(modelAsString, 1);
 		assertEquals(2, model.getAttributes().size());
@@ -53,27 +48,29 @@ public class Bug287988Test extends AbstractXtextTests {
 		assertTrue(eObject.eIsProxy());
 	}
 	
-	public void testSimple_01() throws Exception {
+	@Test public void testSimple_01() throws Exception {
 		String modelAsString = "simple mytype attr1; ref attr1 attr2;";
 		checkSecondAttrRefersToFirst(modelAsString);
 	}
 	
-	public void testRuleCall_01() throws Exception {
+	@Test public void testRuleCall_01() throws Exception {
 		String modelAsString = "rulecall mytype attr1; ref attr1 attr2;";
 		checkSecondAttrRefersToFirst(modelAsString);
 	}
 	
-	public void testRuleCall_02() throws Exception {
+	@Test public void testRuleCall_02() throws Exception {
 		String modelAsString = "rulecall2 attr1 mytype; attr2 ref attr1;";
 		checkSecondAttrRefersToFirst(modelAsString);
 	}
 	
-	public void testRuleCall_03() throws Exception {
+	@Test public void testRuleCall_03() throws Exception {
 		String modelAsString = "rulecall3 call me attr1 mytype; call me attr2 ref attr1;";
 		checkSecondAttrRefersToFirst(modelAsString);
 	}
 	
-	public void testInlinedActions_01() throws Exception {
+	@Test public void testInlinedActions_01() throws Exception {
+		// TODO https://bugs.eclipse.org/bugs/show_bug.cgi?id=361355
+		disableSerializerTest();
 		String modelAsString = "inlinedActions master mytype attr1; attribute ref attr1 attr2;";
 		checkSecondAttrRefersToFirst(modelAsString);
 	}

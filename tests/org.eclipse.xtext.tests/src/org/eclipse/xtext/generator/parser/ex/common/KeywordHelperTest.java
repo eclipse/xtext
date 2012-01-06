@@ -11,16 +11,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.eclipse.xtext.generator.parser.antlr.ex.common.KeywordHelper;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
  */
-public class KeywordHelperTest extends TestCase {
+public class KeywordHelperTest extends Assert {
 
-	public void testKeywordComparatorOnList() throws Exception {
+	@Test public void testKeywordComparatorOnList() throws Exception {
 		List<String> keywords = new ArrayList<String>();
 		keywords.add("AAA");
 		keywords.add("BBBB");
@@ -33,7 +33,7 @@ public class KeywordHelperTest extends TestCase {
 		assertEquals("CC", keywords.get(3));
 	}
 	
-	public void testKeyComparatorIsolated() throws Exception {
+	@Test public void testKeyComparatorIsolated() throws Exception {
 		assertTrue( KeywordHelper.keywordComparator.compare("A", "B")  < 0);
 		assertTrue( KeywordHelper.keywordComparator.compare("B", "A")  > 0);
 		assertTrue( KeywordHelper.keywordComparator.compare("AA", "A") < 0);

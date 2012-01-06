@@ -8,28 +8,30 @@
 package org.eclipse.xtext.parsetree;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.testlanguages.OptionalEmptyTestLanguageStandaloneSetup;
+import org.eclipse.xtext.testlanguages.optionalEmpty.Model;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Test;
 
 public class EmptyModelTest extends AbstractXtextTests {
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(OptionalEmptyTestLanguageStandaloneSetup.class);
 	}
 	
-	public void testParseEmpty() throws Exception {
-		EObject model = getModel("");
+	@Test public void testParseEmpty() throws Exception {
+		Model model = (Model) getModel("");
 		assertNull(model);
-		model = getModel("hallo welt");
-		assertWithXtend("'welt'", "child.name", model);
+		model = (Model) getModel("hallo welt");
+		assertEquals("welt", model.getChild().getName());
 	}
 	
-	public void testParseCommentOnly() throws Exception {
+	@Test public void testParseCommentOnly() throws Exception {
 	    String model = "// some single line comment \n /* and \n a \n \n multiline \n comment */";
         assertEmptyModel(model);
 	}
@@ -42,7 +44,7 @@ public class EmptyModelTest extends AbstractXtextTests {
         assertEquals(model, rootNode.getText());
     }
 	
-	public void testParseWhitespaceOnly() throws Exception {
+	@Test public void testParseWhitespaceOnly() throws Exception {
         String model = "    \t\n\r  \t\n\n ";
 	    assertEmptyModel(model);
 	}

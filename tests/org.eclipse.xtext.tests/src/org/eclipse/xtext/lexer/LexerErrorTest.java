@@ -8,18 +8,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.lexer;
 
-import junit.framework.TestCase;
-
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.apache.log4j.Logger;
 import org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalSimpleExpressionsTestLanguageLexer;
+import org.junit.Assert;
+import org.junit.Test;
 
-public class LexerErrorTest extends TestCase {
+public class LexerErrorTest extends Assert {
 
     private static final Logger logger = Logger.getLogger(LexerErrorTest.class);
 	
-	public void testLexerError() throws Exception {
+	@Test public void testLexerError() throws Exception {
         String model = "a /* uncomplete comment *";
         InternalSimpleExpressionsTestLanguageLexer lexer = new InternalSimpleExpressionsTestLanguageLexer();
         lexer.setCharStream(new ANTLRStringStream(model));

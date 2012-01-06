@@ -11,28 +11,29 @@ package org.eclipse.xtext.util;
 import java.util.Arrays;
 import java.util.List;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * 
  */
-public class StringsTest extends TestCase {
+public class StringsTest extends Assert {
 
-	public void testSplit() throws Exception {
+	@Test public void testSplit() throws Exception {
 		List<String> split = Strings.split("foo.bar", ".");
 		assertEquals(2, split.size());
 		assertEquals("foo", split.get(0));
 		assertEquals("bar", split.get(1));
 	}
 
-	public void testSplit2() throws Exception {
+	@Test public void testSplit2() throws Exception {
 		List<String> split = Strings.split("foobar", ".");
 		assertEquals(1, split.size());
 		assertEquals("foobar", split.get(0));
 	}
 
-	public void testSplit3() throws Exception {
+	@Test public void testSplit3() throws Exception {
 
 		List<String> split = Strings.split("foobar", "oo");
 		assertEquals(2, split.size());
@@ -41,7 +42,7 @@ public class StringsTest extends TestCase {
 
 	}
 
-	public void testSplit4() throws Exception {
+	@Test public void testSplit4() throws Exception {
 		List<String> split = Strings.split("foobar", "o");
 		assertEquals(3, split.size());
 		assertEquals("f", split.get(0));
@@ -49,7 +50,7 @@ public class StringsTest extends TestCase {
 		assertEquals("bar", split.get(2));
 	}
 	
-	public void testPackUnpack() throws Exception {
+	@Test public void testPackUnpack() throws Exception {
 		String[] strings = new String[] {
 			";" , ":", "foo","bar"
 		};
@@ -65,7 +66,7 @@ public class StringsTest extends TestCase {
 		assertNull(Strings.unpack(""));
 	}
 	
-	public void testRemoveLeadingWhitespace() throws Exception {
+	@Test public void testRemoveLeadingWhitespace() throws Exception {
 		assertEquals("foo ", Strings.removeLeadingWhitespace("foo "));
 		assertEquals("foo ", Strings.removeLeadingWhitespace(" foo "));
 		assertEquals("foo ", Strings.removeLeadingWhitespace("\nfoo "));

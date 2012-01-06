@@ -7,14 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.naming;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class DeclarativeQualifiedNameConverterTest extends TestCase {
+public class DeclarativeQualifiedNameConverterTest extends Assert {
 
-	public void testQualifiedNameConverter() throws Exception {
+	@Test public void testQualifiedNameConverter() throws Exception {
 		IQualifiedNameConverter qualifiedNameConverter = new IQualifiedNameConverter.DefaultImpl() {
 			@Override
 			public String getDelimiter() {

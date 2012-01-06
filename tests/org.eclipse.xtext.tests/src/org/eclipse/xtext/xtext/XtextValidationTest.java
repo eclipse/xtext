@@ -42,6 +42,7 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.validation.AbstractValidationMessageAcceptingTestCase;
 import org.eclipse.xtext.validation.AbstractValidationMessageAcceptor;
+import org.junit.Test;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
@@ -56,7 +57,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 	private String lastMessage;
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 		EValidator.Registry.INSTANCE.put(EcorePackage.eINSTANCE, EcoreValidator.INSTANCE);
@@ -65,7 +66,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 	/**
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=348052
 	 */
-	public void testGrammarHasNoNamespace() throws Exception {
+	@Test public void testGrammarHasNoNamespace() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'myURI'\n" +
@@ -79,7 +80,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 
-	public void testRulenamesAreNotEqualIgnoreCase() throws Exception {
+	@Test public void testRulenamesAreNotEqualIgnoreCase() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'myURI'\n" +
@@ -94,7 +95,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
-//	public void testBug322875_01() throws Exception {
+//	@Test public void testBug322875_01() throws Exception {
 //		String testGrammar = "grammar foo.Bar with org.eclipse.xtext.common.Terminals\n " +
 //				" import 'classpath:/org/eclipse/xtext/xtext/XtextValidationTest.ecore'  " +
 //				" import 'http://www.eclipse.org/2008/Xtext' as xtext\n" +
@@ -107,7 +108,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 //		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 //	}
 	
-//	public void testBug322875_02() throws Exception {
+//	@Test public void testBug322875_02() throws Exception {
 //		String testGrammar = "grammar foo.Bar with org.eclipse.xtext.common.Terminals\n " +
 //				" import 'platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore'  " +
 //				"Model returns EClass: name=ID;";
@@ -118,7 +119,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 //		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 //	}
 	
-	public void testBug322875_03() throws Exception {
+	@Test public void testBug322875_03() throws Exception {
 		String testGrammar = "grammar foo.Bar with org.eclipse.xtext.common.Terminals\n " +
 				" import 'http://www.eclipse.org/emf/2002/Ecore'  " +
 				"Model returns EClass: name=ID;";
@@ -128,7 +129,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals(diag.toString(), 0, diag.getChildren().size());
 	}
 	
-//	public void testBug322875_04() throws Exception {
+//	@Test public void testBug322875_04() throws Exception {
 //		String testGrammarOk = "grammar foo.Bar with org.eclipse.xtext.common.Terminals\n " +
 //				" import 'http://www.eclipse.org/emf/2002/Ecore'  " +
 //				"Model returns EClass: name=ID;";
@@ -147,7 +148,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 //		assertEquals("diag.isError", diagError.getSeverity(), Diagnostic.ERROR);
 //	}
 	
-	public void testBug_282852_01() throws Exception {
+	@Test public void testBug_282852_01() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'myURI'\n" +
@@ -162,7 +163,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
-	public void testBug_282852_02() throws Exception {
+	@Test public void testBug_282852_02() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'myURI'\n" +
@@ -177,7 +178,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 
-	public void testBug_282852_03() throws Exception {
+	@Test public void testBug_282852_03() throws Exception {
 		Grammar base = XtextFactory.eINSTANCE.createGrammar();
 		Grammar child = XtextFactory.eINSTANCE.createGrammar();
 		child.getUsedGrammars().add(base);
@@ -194,7 +195,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertNull(lastMessage);
 	}
 	
-	public void testBug_282852_04() throws Exception {
+	@Test public void testBug_282852_04() throws Exception {
 		Grammar base = XtextFactory.eINSTANCE.createGrammar();
 		Grammar child = XtextFactory.eINSTANCE.createGrammar();
 		child.getUsedGrammars().add(base);
@@ -211,7 +212,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("A rule's name has to be unique even case insensitive. A used grammar contains another rule 'Foo'.", lastMessage);
 	}
 	
-	public void testBug_282852_05() throws Exception {
+	@Test public void testBug_282852_05() throws Exception {
 		Grammar base = XtextFactory.eINSTANCE.createGrammar();
 		AbstractRule ruleFoo = XtextFactory.eINSTANCE.createParserRule();
 		ruleFoo.setName("Foo");
@@ -226,7 +227,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("A rule's name has to be unique even case insensitive. This grammar contains another rule 'Foo'.", lastMessage);
 	}
 	
-	public void testBug_282852_06() throws Exception {
+	@Test public void testBug_282852_06() throws Exception {
 		Grammar base = XtextFactory.eINSTANCE.createGrammar();
 		AbstractRule ruleFoo = XtextFactory.eINSTANCE.createParserRule();
 		ruleFoo.setName("Foo");
@@ -241,7 +242,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("A rule's name has to be unique.", lastMessage);
 	}
 	
-	public void testBug_282852_07() throws Exception {
+	@Test public void testBug_282852_07() throws Exception {
 		Grammar base = XtextFactory.eINSTANCE.createGrammar();
 		AbstractRule ruleFoo = XtextFactory.eINSTANCE.createParserRule();
 		ruleFoo.setName("Foo");
@@ -262,7 +263,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("A rule's name has to be unique even case insensitive. The conflicting rules are 'FOO' and 'Foo'.", lastMessage);
 	}
 	
-	public void testBug_282852_08() throws Exception {
+	@Test public void testBug_282852_08() throws Exception {
 		Grammar base = XtextFactory.eINSTANCE.createGrammar();
 		AbstractRule ruleFoo = XtextFactory.eINSTANCE.createParserRule();
 		ruleFoo.setName("Foo");
@@ -283,7 +284,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("A rule's name has to be unique even case insensitive. The conflicting rules are 'FOO', 'Foo' and 'fOO'.", lastMessage);
 	}
 	
-	public void testBug_283534_01() throws Exception {
+	@Test public void testBug_283534_01() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'myURI'\n" +
@@ -297,7 +298,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isOk", diag.getSeverity(), Diagnostic.OK);
 	}
 
-	public void testBug_283534_02() throws Exception {
+	@Test public void testBug_283534_02() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'myURI'\n" +
@@ -312,7 +313,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
-	public void testBug_283534_03() throws Exception {
+	@Test public void testBug_283534_03() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'myURI'\n" +
@@ -327,7 +328,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
-	public void testBug_283534_04() throws Exception {
+	@Test public void testBug_283534_04() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'myURI'\n" +
@@ -342,7 +343,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
-	public void testBug_283534_05() throws Exception {
+	@Test public void testBug_283534_05() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'myURI'\n" +
@@ -356,7 +357,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isOk", diag.getSeverity(), Diagnostic.OK);
 	}
 	
-	public void testBug_283534_06() throws Exception {
+	@Test public void testBug_283534_06() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"terminal TERMINAL: ID;\n");
@@ -369,7 +370,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isOk", diag.getSeverity(), Diagnostic.OK);
 	}
 	
-	public void testBug_283534_07() throws Exception {
+	@Test public void testBug_283534_07() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"Model: ID;\n");
@@ -382,7 +383,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isOk", diag.getSeverity(), Diagnostic.OK);
 	}
 	
-	public void testDuplicateEnumLiterals() throws Exception {
+	@Test public void testDuplicateEnumLiterals() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"import 'classpath:/org/eclipse/xtext/enumrules/enums.ecore'\n" +
@@ -398,7 +399,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
-	public void testDefinedLiteralTwice() throws Exception {
+	@Test public void testDefinedLiteralTwice() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate testLanguage 'http://www.eclipse.org/2009/tmf/xtext/validation/literal/2'\n" +
@@ -413,7 +414,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isWarning", diag.getSeverity(), Diagnostic.WARNING);
 	}
 	
-	public void testEnumWithEmptyLiteralGenerated() throws Exception {
+	@Test public void testEnumWithEmptyLiteralGenerated() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate testLanguage 'http://www.eclipse.org/2009/tmf/xtext/validation/literal/2'\n" +
@@ -428,7 +429,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 
-	public void testEnumWithEmptyLiteralImported() throws Exception {
+	@Test public void testEnumWithEmptyLiteralImported() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"import 'classpath:/org/eclipse/xtext/enumrules/enums.ecore'\n" +
@@ -444,7 +445,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
-	public void testEnumRuleReturnsEClass() throws Exception {
+	@Test public void testEnumRuleReturnsEClass() throws Exception {
 		XtextResource resource = getResourceFromStringAndExpect(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate testLanguage 'http://www.eclipse.org/2011/xtext/bug348749'\n" +
@@ -459,7 +460,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isOk", diag.getSeverity(), Diagnostic.OK);
 	}
 	
-	public void testBug_280413_01() throws Exception {
+	@Test public void testBug_280413_01() throws Exception {
 		XtextResource resource = getResourceFromStringAndExpect(
 				"grammar org.foo.Bar with org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguage\n" +
 				"import 'classpath:/org/eclipse/xtext/testlanguages/SimpleExpressionsTestLanguage.ecore' as mm\n" +
@@ -476,7 +477,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertNotNull(metamodel);
 	}
 	
-	public void testBug_280413_02() throws Exception {
+	@Test public void testBug_280413_02() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.Xtext\n" +
 				"import 'http://www.eclipse.org/2008/Xtext' as xtext\n" +
@@ -491,7 +492,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 	}
 	
 	//TODO this one should yield a warning, because two different instances of a package might be referenced.
-//	public void testBug_280413_03() throws Exception {
+//	@Test public void testBug_280413_03() throws Exception {
 //		XtextResource resource = getResourceFromString(
 //				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 //				"import 'classpath:/org/eclipse/xtext/Xtext.ecore' as xtext\n" +
@@ -505,7 +506,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 //		assertTrue(diag.getChildren().toString(), diag.getChildren().isEmpty());
 //	}
 	
-	public void testBug_281660() throws Exception {
+	@Test public void testBug_281660() throws Exception {
 		XtextResource resource = getResourceFromStringAndExpect(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate foo 'http://foo/bar'\n" +
@@ -520,7 +521,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertTrue(diag.getChildren().toString(), diag.getChildren().isEmpty());
 	}
 	
-	public void testLeftRecursion_Bug_285605_01() throws Exception {
+	@Test public void testLeftRecursion_Bug_285605_01() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate foo 'http://foo/bar'\n" +
@@ -534,7 +535,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
-	public void testLeftRecursion_Bug_285605_02() throws Exception {
+	@Test public void testLeftRecursion_Bug_285605_02() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate foo 'http://foo/bar'\n" +
@@ -549,7 +550,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
-	public void testLeftRecursion_Bug_285605_03() throws Exception {
+	@Test public void testLeftRecursion_Bug_285605_03() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate foo 'http://foo/bar'\n" +
@@ -565,7 +566,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
-	public void testLeftRecursion_Bug_285605_04() throws Exception {
+	@Test public void testLeftRecursion_Bug_285605_04() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate foo 'http://foo/bar'\n" +
@@ -581,7 +582,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
-	public void testLeftRecursion_Bug_285605_05() throws Exception {
+	@Test public void testLeftRecursion_Bug_285605_05() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate foo 'http://foo/bar'\n" +
@@ -597,7 +598,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
-	public void testLeftRecursion_Bug_285605_06() throws Exception {
+	@Test public void testLeftRecursion_Bug_285605_06() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate foo 'http://foo/bar'\n" +
@@ -613,7 +614,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
-	public void testLeftRecursion_Bug_285605_07() throws Exception {
+	@Test public void testLeftRecursion_Bug_285605_07() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate foo 'http://foo/bar'\n" +
@@ -629,7 +630,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
-	public void testLeftRecursion_Bug_285605_08() throws Exception {
+	@Test public void testLeftRecursion_Bug_285605_08() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate foo 'http://foo/bar'\n" +
@@ -645,7 +646,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertTrue(diag.getChildren().toString(), diag.getChildren().isEmpty());
 	}
 	
-	public void testLeftRecursion_Bug_285605_09() throws Exception {
+	@Test public void testLeftRecursion_Bug_285605_09() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate foo 'http://foo/bar'\n" +
@@ -661,7 +662,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
-	public void testLeftRecursion_Bug_285605_10() throws Exception {
+	@Test public void testLeftRecursion_Bug_285605_10() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate foo 'http://foo/bar'\n" +
@@ -676,7 +677,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertTrue(diag.getChildren().toString(), diag.getChildren().isEmpty());
 	}
 	
-	public void testLeftRecursion_Bug_285605_11() throws Exception {
+	@Test public void testLeftRecursion_Bug_285605_11() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate foo 'http://foo/bar'\n" +
@@ -692,7 +693,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
-	public void testLeftRecursion_Bug_285605_12() throws Exception {
+	@Test public void testLeftRecursion_Bug_285605_12() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate foo 'http://foo/bar'\n" +
@@ -708,7 +709,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
-	public void testLeftRecursion_Bug_285605_13() throws Exception {
+	@Test public void testLeftRecursion_Bug_285605_13() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate foo 'http://foo/bar'\n" +
@@ -724,7 +725,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
-	public void testLeftRecursion_Bug_285605_14() throws Exception {
+	@Test public void testLeftRecursion_Bug_285605_14() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate foo 'http://foo/bar'\n" +
@@ -740,7 +741,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
-	public void testLeftRecursion_Bug_285605_15() throws Exception {
+	@Test public void testLeftRecursion_Bug_285605_15() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate foo 'http://foo/bar'\n" +
@@ -756,7 +757,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
-	public void testLeftRecursion_Bug_285605_16() throws Exception {
+	@Test public void testLeftRecursion_Bug_285605_16() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate foo 'http://foo/bar'\n" +
@@ -772,7 +773,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertTrue(diag.getChildren().toString(), diag.getChildren().isEmpty());
 	}
 
-	public void testLeftRecursion_Bug_285605_17() throws Exception {
+	@Test public void testLeftRecursion_Bug_285605_17() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate foo 'http://foo/bar'\n" +
@@ -788,7 +789,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertTrue(diag.getChildren().toString(), diag.getChildren().isEmpty());
 	}
 	
-	public void testLeftRecursion_Bug_285605_18() throws Exception {
+	@Test public void testLeftRecursion_Bug_285605_18() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate foo 'http://foo/bar'\n" +
@@ -804,7 +805,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertTrue(diag.getChildren().toString(), diag.getChildren().isEmpty());
 	}
 	
-	public void testBug_286683() throws Exception {
+	@Test public void testBug_286683() throws Exception {
 		XtextResource resource = getResourceFromString("grammar org.xtext.example.MyDsl with org.xtext.example.MyDsl\n"+
 				"generate myDsl 'http://www.xtext.org/example/MyDsl'\n"+
 				"Model : {Model} 'name';");
@@ -817,7 +818,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals(diag.getChildren().toString(), 1, diag.getChildren().size());
 	}
 	
-	public void testBug_293110() throws Exception {
+	@Test public void testBug_293110() throws Exception {
 		XtextResource resource = doGetResource(new org.eclipse.xtext.util.StringInputStream("A: value=B; B: name=ID;"),URI.createURI("testBug_293110"));
 		Diagnostic diagnostic = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
 		Collection<Diagnostic> runtimeExceptions = Collections2.filter(diagnostic.getChildren(), new Predicate<Diagnostic>(){
@@ -827,7 +828,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertTrue(runtimeExceptions.isEmpty());
 	}
 	
-	public void testCheckCrossReferenceTerminal_01() throws Exception {
+	@Test public void testCheckCrossReferenceTerminal_01() throws Exception {
 		XtextValidator validator = get(XtextValidator.class);
 		CrossReference reference = XtextFactory.eINSTANCE.createCrossReference();
 		RuleCall call = XtextFactory.eINSTANCE.createRuleCall();
@@ -843,7 +844,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testCheckCrossReferenceTerminal_02() throws Exception {
+	@Test public void testCheckCrossReferenceTerminal_02() throws Exception {
 		XtextValidator validator = get(XtextValidator.class);
 		CrossReference reference = XtextFactory.eINSTANCE.createCrossReference();
 		RuleCall call = XtextFactory.eINSTANCE.createRuleCall();
@@ -859,7 +860,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testCheckCrossReferenceTerminal_05() throws Exception {
+	@Test public void testCheckCrossReferenceTerminal_05() throws Exception {
 		XtextValidator validator = get(XtextValidator.class);
 		CrossReference reference = XtextFactory.eINSTANCE.createCrossReference();
 		Keyword keyword = XtextFactory.eINSTANCE.createKeyword();
@@ -870,7 +871,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testCheckActionInUnorderedGroup_01() throws Exception {
+	@Test public void testCheckActionInUnorderedGroup_01() throws Exception {
 		XtextValidator validator = get(XtextValidator.class);
 		UnorderedGroup unorderedGroup = XtextFactory.eINSTANCE.createUnorderedGroup();
 		Action action = XtextFactory.eINSTANCE.createAction();
@@ -881,7 +882,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testCheckRuleCallInUnorderedGroup_01() throws Exception {
+	@Test public void testCheckRuleCallInUnorderedGroup_01() throws Exception {
 		XtextValidator validator = get(XtextValidator.class);
 		UnorderedGroup unorderedGroup = XtextFactory.eINSTANCE.createUnorderedGroup();
 		RuleCall ruleCall = XtextFactory.eINSTANCE.createRuleCall();
@@ -897,7 +898,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testCheckRuleCallInUnorderedGroup_02() throws Exception {
+	@Test public void testCheckRuleCallInUnorderedGroup_02() throws Exception {
 		XtextValidator validator = get(XtextValidator.class);
 		UnorderedGroup unorderedGroup = XtextFactory.eINSTANCE.createUnorderedGroup();
 		RuleCall ruleCall = XtextFactory.eINSTANCE.createRuleCall();
@@ -913,7 +914,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testCheckRuleCallInUnorderedGroup_03() throws Exception {
+	@Test public void testCheckRuleCallInUnorderedGroup_03() throws Exception {
 		XtextValidator validator = get(XtextValidator.class);
 		UnorderedGroup unorderedGroup = XtextFactory.eINSTANCE.createUnorderedGroup();
 		RuleCall ruleCall = XtextFactory.eINSTANCE.createRuleCall();
@@ -926,7 +927,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testCheckRuleCallInUnorderedGroup_04() throws Exception {
+	@Test public void testCheckRuleCallInUnorderedGroup_04() throws Exception {
 		XtextValidator validator = get(XtextValidator.class);
 		UnorderedGroup unorderedGroup = XtextFactory.eINSTANCE.createUnorderedGroup();
 		RuleCall ruleCall = XtextFactory.eINSTANCE.createRuleCall();
@@ -939,7 +940,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 
-	public void testCheckRuleCallInUnorderedGroup_05() throws Exception {
+	@Test public void testCheckRuleCallInUnorderedGroup_05() throws Exception {
 		XtextValidator validator = get(XtextValidator.class);
 		UnorderedGroup unorderedGroup = XtextFactory.eINSTANCE.createUnorderedGroup();
 		RuleCall ruleCall = XtextFactory.eINSTANCE.createRuleCall();
@@ -957,7 +958,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testBug318424_01() throws Exception {
+	@Test public void testBug318424_01() throws Exception {
 		XtextValidator validator = get(XtextValidator.class);
 		CrossReference reference = XtextFactory.eINSTANCE.createCrossReference();
 		TypeRef typeRef = XtextFactory.eINSTANCE.createTypeRef();
@@ -969,7 +970,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testBug318424_02() throws Exception {
+	@Test public void testBug318424_02() throws Exception {
 		XtextValidator validator = get(XtextValidator.class);
 		Action action = XtextFactory.eINSTANCE.createAction();
 		TypeRef typeRef = XtextFactory.eINSTANCE.createTypeRef();
@@ -981,7 +982,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testCycleInTypeHierarchy() throws Exception {
+	@Test public void testCycleInTypeHierarchy() throws Exception {
 		String grammarAsText = "grammar test with org.eclipse.xtext.common.Terminals" +
 				" generate test 'http://test'";
 		grammarAsText += " RuleA: RuleB;";
@@ -1003,7 +1004,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testDuplicateFeatures_01() throws Exception {
+	@Test public void testDuplicateFeatures_01() throws Exception {
 		String grammarAsText =
 				"grammar test with org.eclipse.xtext.common.Terminals\n" +
 				"generate test 'http://test'\n" +
@@ -1033,7 +1034,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 
-	public void testDuplicateFeatures_02() throws Exception {
+	@Test public void testDuplicateFeatures_02() throws Exception {
 		String grammarAsText =
 				"grammar test with org.eclipse.xtext.common.Terminals\n" +
 				"generate test 'http://test'\n" +
@@ -1062,7 +1063,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testNameClash_01() throws Exception {
+	@Test public void testNameClash_01() throws Exception {
 		String grammarAsText =
 				"grammar test with org.eclipse.xtext.common.Terminals\n" +
 				"generate test 'http://test'\n" +
@@ -1083,7 +1084,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testNameClash_02() throws Exception {
+	@Test public void testNameClash_02() throws Exception {
 		String grammarAsText =
 				"grammar test with org.eclipse.xtext.common.Terminals\n" +
 				"generate test 'http://test'\n" +
@@ -1104,7 +1105,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testNameClash_03() throws Exception {
+	@Test public void testNameClash_03() throws Exception {
 		String grammarAsText =
 				"grammar test with org.eclipse.xtext.common.Terminals\n" +
 				"generate test 'http://test'\n" +
@@ -1126,7 +1127,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testGeneratedPackageNotEmpty() throws Exception {
+	@Test public void testGeneratedPackageNotEmpty() throws Exception {
 		String grammarAsText =
 				"grammar test with org.eclipse.xtext.common.Terminals\n" +
 				"generate test 'http://test'\n" +
@@ -1142,7 +1143,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testHiddenTokenIsATerminal_01() throws Exception {
+	@Test public void testHiddenTokenIsATerminal_01() throws Exception {
 		String grammarAsText =
 			"grammar test with org.eclipse.xtext.common.Terminals hidden(Model)\n" +
 			"generate test 'http://test'\n" +
@@ -1156,7 +1157,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testHiddenTokenIsATerminal_02() throws Exception {
+	@Test public void testHiddenTokenIsATerminal_02() throws Exception {
 		String grammarAsText =
 			"grammar test with org.eclipse.xtext.common.Terminals\n" +
 			"generate test 'http://test'\n" +
@@ -1172,7 +1173,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testHiddenTokenIsATerminal_03() throws Exception {
+	@Test public void testHiddenTokenIsATerminal_03() throws Exception {
 		String grammarAsText =
 			"grammar test with org.eclipse.xtext.common.Terminals hidden(Fragment)\n" +
 			"generate test 'http://test'\n" +
@@ -1187,7 +1188,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testHiddenTokenIsATerminal_04() throws Exception {
+	@Test public void testHiddenTokenIsATerminal_04() throws Exception {
 		String grammarAsText =
 			"grammar test with org.eclipse.xtext.common.Terminals\n" +
 			"generate test 'http://test'\n" +
@@ -1203,7 +1204,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testHiddenTokenIsATerminal_05() throws Exception {
+	@Test public void testHiddenTokenIsATerminal_05() throws Exception {
 		String grammarAsText =
 			"grammar test with org.eclipse.xtext.common.Terminals hidden(WS)\n" +
 			"generate test 'http://test'\n" +
@@ -1217,7 +1218,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testHiddenTokenIsATerminal_06() throws Exception {
+	@Test public void testHiddenTokenIsATerminal_06() throws Exception {
 		String grammarAsText =
 			"grammar test with org.eclipse.xtext.common.Terminals\n" +
 			"generate test 'http://test'\n" +
@@ -1232,7 +1233,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testRuleCallAllowed_01() throws Exception {
+	@Test public void testRuleCallAllowed_01() throws Exception {
 		String grammarAsText =
 			"grammar test with org.eclipse.xtext.common.Terminals\n" +
 			"generate test 'http://test'\n" +
@@ -1251,7 +1252,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testRuleCallAllowed_02() throws Exception {
+	@Test public void testRuleCallAllowed_02() throws Exception {
 		String grammarAsText =
 			"grammar test with org.eclipse.xtext.common.Terminals\n" +
 			"generate test 'http://test'\n" +
@@ -1270,7 +1271,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testRuleCallAllowed_03() throws Exception {
+	@Test public void testRuleCallAllowed_03() throws Exception {
 		String grammarAsText =
 			"grammar test with org.eclipse.xtext.common.Terminals\n" +
 			"generate test 'http://test'\n" +
@@ -1289,7 +1290,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testRuleCallAllowed_04() throws Exception {
+	@Test public void testRuleCallAllowed_04() throws Exception {
 		String grammarAsText =
 			"grammar test with org.eclipse.xtext.common.Terminals\n" +
 			"generate test 'http://test'\n" +
@@ -1307,7 +1308,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testRuleCallAllowed_05() throws Exception {
+	@Test public void testRuleCallAllowed_05() throws Exception {
 		String grammarAsText =
 			"grammar test with org.eclipse.xtext.common.Terminals\n" +
 			"generate test 'http://test'\n" +
@@ -1325,7 +1326,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testRuleCallAllowed_06() throws Exception {
+	@Test public void testRuleCallAllowed_06() throws Exception {
 		String grammarAsText =
 			"grammar test with org.eclipse.xtext.common.Terminals\n" +
 			"generate test 'http://test'\n" +
@@ -1344,7 +1345,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testRuleCallAllowed_07() throws Exception {
+	@Test public void testRuleCallAllowed_07() throws Exception {
 		String grammarAsText =
 			"grammar test with org.eclipse.xtext.common.Terminals\n" +
 			"generate test 'http://test'\n" +
@@ -1362,7 +1363,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testRuleCallAllowed_08_335692() throws Exception {
+	@Test public void testRuleCallAllowed_08_335692() throws Exception {
 		String grammarAsText =
 			"grammar test with org.eclipse.xtext.common.Terminals\n" +
 			"generate test 'http://test'\n" +
@@ -1381,7 +1382,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testRuleCallAllowed_09_335692() throws Exception {
+	@Test public void testRuleCallAllowed_09_335692() throws Exception {
 		String grammarAsText =
 			"grammar test with org.eclipse.xtext.common.Terminals\n" +
 			"generate test 'http://test'\n" +
@@ -1400,7 +1401,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testPredicatedUnorderedGroup_01() throws Exception {
+	@Test public void testPredicatedUnorderedGroup_01() throws Exception {
 		String grammarAsText =
 				"grammar test with org.eclipse.xtext.common.Terminals\n" +
 				"generate test 'http://test'\n" +
@@ -1417,7 +1418,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testPredicatedUnorderedGroup_02() throws Exception {
+	@Test public void testPredicatedUnorderedGroup_02() throws Exception {
 		String grammarAsText =
 				"grammar test with org.eclipse.xtext.common.Terminals\n" +
 				"generate test 'http://test'\n" +
@@ -1437,7 +1438,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testPredicatedUnorderedGroup_03() throws Exception {
+	@Test public void testPredicatedUnorderedGroup_03() throws Exception {
 		String grammarAsText =
 				"grammar test with org.eclipse.xtext.common.Terminals\n" +
 				"generate test 'http://test'\n" +
@@ -1458,7 +1459,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
-	public void testPredicatedUnorderedGroup_04() throws Exception {
+	@Test public void testPredicatedUnorderedGroup_04() throws Exception {
 		String grammarAsText =
 				"grammar test with org.eclipse.xtext.common.Terminals\n" +
 				"generate test 'http://test'\n" +

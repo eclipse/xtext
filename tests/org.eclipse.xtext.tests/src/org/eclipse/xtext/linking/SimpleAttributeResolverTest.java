@@ -10,19 +10,20 @@ package org.eclipse.xtext.linking;
 import java.util.Arrays;
 import java.util.Iterator;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.util.SimpleAttributeResolver;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class SimpleAttributeResolverTest extends TestCase {
+public class SimpleAttributeResolverTest extends Assert {
 
 	private EcoreFactory factory;
 	
@@ -31,22 +32,21 @@ public class SimpleAttributeResolverTest extends TestCase {
 	@SuppressWarnings("rawtypes")
 	private SimpleAttributeResolver<EObject, EList> superClassResolver;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		factory = EcoreFactory.eINSTANCE;
 		nameResolver = SimpleAttributeResolver.newResolver(String.class, "name");
 		superClassResolver = SimpleAttributeResolver.newResolver(EList.class, "eSuperTypes");
 	}
 	
-	public void testGetNameValue() {
+	@Test public void testGetNameValue() {
 		EClass clazz = factory.createEClass();
 		clazz.setName("ClassName");
 		String name = nameResolver.getValue(clazz);
 		assertEquals("ClassName", name);
 	}
 	
-	public void testGetNameValueTwice() {
+	@Test public void testGetNameValueTwice() {
 		EClass clazz = factory.createEClass();
 		clazz.setName("ClassName");
 		assertEquals(0, clazz.eAdapters().size());
@@ -58,13 +58,13 @@ public class SimpleAttributeResolverTest extends TestCase {
 		assertEquals("ClassName2", name);
 	}
 	
-	public void testGetUnknownValue() {
+	@Test public void testGetUnknownValue() {
 		EFactory fact = factory.createEFactory();
 		String name = nameResolver.getValue(fact);
 		assertNull(name);
 	}
 	
-	public void testGetNameMatches() {
+	@Test public void testGetNameMatches() {
 		EClass clazzMatch = factory.createEClass();
 		EClass clazzNoMatch = factory.createEClass();
 		clazzMatch.setName("ClassName");
@@ -77,7 +77,7 @@ public class SimpleAttributeResolverTest extends TestCase {
 		assertFalse(iter.hasNext());
 	}
 	
-	public void testGetListValue() {
+	@Test public void testGetListValue() {
 		EClass clazz = factory.createEClass();
 		assertNotNull(clazz.getESuperTypes());
 		EList<?> superTypes = superClassResolver.getValue(clazz);

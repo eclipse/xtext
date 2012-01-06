@@ -7,31 +7,32 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.datatyperules;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.DatatypeRulesTestLanguagePackage;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class MetamodelTest extends TestCase {
+public class MetamodelTest extends Assert {
 	
-	@Override
-	protected void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		DatatypeRulesTestLanguageStandaloneSetup.doSetup();
 	}
 	
-	public void testDerivedPackage() {
+	@Test public void testDerivedPackage() {
 		EPackage pack = DatatypeRulesTestLanguagePackage.eINSTANCE;
 		assertNotNull(pack);
 		assertEquals(2, pack.getEClassifiers().size());
 	}
 
-	public void testDerivedModel() {
+	@Test public void testDerivedModel() {
 		EPackage pack = DatatypeRulesTestLanguagePackage.eINSTANCE;
 		EClass model = (EClass) pack.getEClassifier("Model");
 		assertNotNull(model);
@@ -49,7 +50,7 @@ public class MetamodelTest extends TestCase {
 		assertEquals(EcorePackage.Literals.ESTRING, feature.getEType());
 	}
 	
-	public void testDerivedCompositeModel() {
+	@Test public void testDerivedCompositeModel() {
 		EPackage pack = DatatypeRulesTestLanguagePackage.eINSTANCE;
 		EClass model = (EClass) pack.getEClassifier("CompositeModel");
 		assertNotNull(model);

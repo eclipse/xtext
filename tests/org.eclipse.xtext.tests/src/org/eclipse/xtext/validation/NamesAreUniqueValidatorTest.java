@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -29,6 +29,7 @@ import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.SimpleAttributeResolver;
+import org.junit.Test;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
@@ -45,7 +46,7 @@ public class NamesAreUniqueValidatorTest extends AbstractXtextTests implements I
 	private Resource resource;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		context = Maps.newHashMap();
 		validator = new NamesAreUniqueValidator() {
@@ -80,7 +81,7 @@ public class NamesAreUniqueValidatorTest extends AbstractXtextTests implements I
 		}
 	}
 	
-	public void testOnlyOnesPerResource() {
+	@Test public void testOnlyOnesPerResource() {
 		validator.checkUniqueNamesInResourceOf(resource.getContents().get(0));
 		validator.checkUniqueNamesInResourceOf(resource.getContents().get(1));
 		assertEquals(1, callCount);

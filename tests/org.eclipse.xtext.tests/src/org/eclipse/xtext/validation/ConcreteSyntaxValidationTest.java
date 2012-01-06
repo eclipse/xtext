@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.validation;
 
-import static org.eclipse.xtext.junit.validation.AssertableDiagnostics.*;
+import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.*;
 import static org.eclipse.xtext.validation.IConcreteSyntaxDiagnosticProvider.*;
 
 import org.eclipse.emf.common.util.BasicEList;
@@ -48,6 +48,7 @@ import org.eclipse.xtext.validation.csvalidationtest.UnassignedRuleCall2Sub;
 import org.eclipse.xtext.validation.csvalidationtest.UnassignedRuleCall2SubAction;
 import org.eclipse.xtext.validation.csvalidationtest.impl.TransientObjectImpl;
 import org.eclipse.xtext.validation.impl.ConcreteSyntaxValidator;
+import org.junit.Test;
 
 /**
  * @author meysholdt - Initial contribution and API
@@ -55,7 +56,7 @@ import org.eclipse.xtext.validation.impl.ConcreteSyntaxValidator;
 public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidationTest {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(ConcreteSyntaxValidationTestLanguageStandaloneSetup.class);
 		validator = getInjector().getInstance(ConcreteSyntaxValidator.class);
@@ -75,14 +76,14 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		return getModel(model).eContents().get(0);
 	}
 
-	public void testSimpleGroup1() throws Exception {
+	@Test public void testSimpleGroup1() throws Exception {
 		SimpleGroup m = (SimpleGroup) getModel2("#1 abc def");
 		validate(m).assertOK();
 		m.setVal2(null);
 		validate(m).assertAll(err(p.getSimpleGroup_Val2(), ERROR_VALUE_REQUIRED, 1, 1, ""));
 	}
 
-	public void testSimpleAlternative1() throws Exception {
+	@Test public void testSimpleAlternative1() throws Exception {
 		SimpleAlternative m = (SimpleAlternative) getModel2("#2 kw1 abc");
 		validate(m).assertOK();
 		m.setVal2("def2");
@@ -90,7 +91,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 				err(p.getSimpleAlternative_Val2(), ERROR_VALUE_PROHIBITED, null, 0, "(val1|val2)"));
 	}
 
-	public void testSimpleMultiplicities1() throws Exception {
+	@Test public void testSimpleMultiplicities1() throws Exception {
 		SimpleMultiplicities m = (SimpleMultiplicities) getModel2("#3 abc kw1 def kw2 fgh ijk kw3 lmn opq");
 		validate(m).assertOK();
 		m.setVal2(null);
@@ -107,7 +108,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		validate(copy).assertAll(err(p.getSimpleMultiplicities_Val3(), ERROR_LIST_TOO_FEW, 1, null, ""));
 	}
 
-	public void testGroupMultiplicities1() throws Exception {
+	@Test public void testGroupMultiplicities1() throws Exception {
 		GroupMultiplicities m = (GroupMultiplicities) getModel2("#4 abc kw1 def def kw2 fgh ijk kw3 lmn opq");
 		validate(m).assertOK();
 
@@ -150,7 +151,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 
 	}
 
-	public void testAlternativeMultiplicities1() throws Exception {
+	@Test public void testAlternativeMultiplicities1() throws Exception {
 		AlternativeMultiplicities m = (AlternativeMultiplicities) getModel2("#5 abc kw2 kw3 fgh kw3 xxx kw4 ijk lmn opq");
 		validate(m).assertOK();
 
@@ -183,7 +184,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		validate(copy).assertOK();
 	}
 
-	public void testAssignedAction1() throws Exception {
+	@Test public void testAssignedAction1() throws Exception {
 		AssignedAction m = (AssignedAction) getModel2("#6 id1 id2 id3");
 		validate(m).assertOK();
 		m.setVal1(null);
@@ -192,7 +193,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		validate(m).assertOK();
 	}
 
-	public void testAssignedAction2() throws Exception {
+	@Test public void testAssignedAction2() throws Exception {
 		AssignedAction m = (AssignedAction) getModel2("#7 id1 kw1 id3");
 		validate(m).assertOK();
 		m.setVal1(null);
@@ -201,21 +202,21 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		validate(m).assertOK();
 	}
 
-	public void testUnassignedAction1() throws Exception {
+	@Test public void testUnassignedAction1() throws Exception {
 		UnassignedAction1 m = (UnassignedAction1) getModel2("#8 id1");
 		validate(m).assertOK();
 		m.setVal1(null);
 		validate(m).assertAll(err(p.getUnassignedAction1_Val1(), ERROR_VALUE_REQUIRED, 1, null, ""));
 	}
 
-	public void testUnassignedAction2() throws Exception {
+	@Test public void testUnassignedAction2() throws Exception {
 		UnassignedAction2Sub m = (UnassignedAction2Sub) getModel2("#9 id1");
 		validate(m).assertOK();
 		m.setVal1(null);
 		validate(m).assertAll(err(p.getUnassignedAction2Sub_Val1(), ERROR_VALUE_REQUIRED, 1, 1, ""));
 	}
 
-	public void testUnassignedAction3() throws Exception {
+	@Test public void testUnassignedAction3() throws Exception {
 		UnassignedAction3 m = (UnassignedAction3) getModel2("#10 kw1 id1 id2");
 		validate(m).assertOK();
 		m.setVal1(null);
@@ -226,7 +227,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		validate(ua).assertAll(errorCode(ERROR_WRONG_TYPE));
 	}
 
-	public void testUnassignedRuleCall1() throws Exception {
+	@Test public void testUnassignedRuleCall1() throws Exception {
 		UnassignedRuleCall1Sub m = (UnassignedRuleCall1Sub) getModel2("#11 id1 id2");
 		validate(m).assertOK();
 
@@ -237,7 +238,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		validate(m1).assertAll(errorCode(ERROR_WRONG_TYPE));
 	}
 
-	public void testUnassignedRuleCall2() throws Exception {
+	@Test public void testUnassignedRuleCall2() throws Exception {
 		UnassignedRuleCall2SubAction a = f.createUnassignedRuleCall2SubAction();
 		a.setVal2("foo");
 		validate(a).assertOK();
@@ -250,7 +251,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		validate(c).assertAll(errorCode(ERROR_WRONG_TYPE));
 	}
 
-	public void testCombination1() throws Exception {
+	@Test public void testCombination1() throws Exception {
 		Combination1 copy, m = (Combination1) getModel2("#13 id1 kw1 id2 kw2 id3");
 		validate(m).assertOK();
 
@@ -271,7 +272,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 				err(p.getCombination1_Val4(), ERROR_VALUE_REQUIRED, 1, null, "(val2 (val3|val4))?"));
 	}
 
-	public void testCombination2() throws Exception {
+	@Test public void testCombination2() throws Exception {
 		Combination2 copy, m = (Combination2) getModel2("#14 id1 id31 id41 id32 id42");
 		validate(m).assertOK();
 
@@ -287,7 +288,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 				err(p.getCombination2_Val4(), ERROR_LIST_TOO_MANY, null, 0, "(val2|(val3 val4)*)"));
 	}
 
-	public void testCombination3() throws Exception {
+	@Test public void testCombination3() throws Exception {
 		Combination3 copy, m = (Combination3) getModel2("#15 'string' id1 1234");
 		validate(m).assertOK();
 
@@ -301,7 +302,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		validate(copy).assertOK();
 	}
 
-	public void testCombination4() throws Exception {
+	@Test public void testCombination4() throws Exception {
 		Combination4 copy, m = (Combination4) getModel2("#16 group id11 id12 id13 group id21 id22 id23");
 		validate(m).assertOK();
 
@@ -315,7 +316,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 				err(p.getCombination4_Val3(), ERROR_LIST_TOO_MANY, null, 1, "(val1 val2 val3)+"));
 	}
 
-	public void testList1() throws Exception {
+	@Test public void testList1() throws Exception {
 		List1 copy, m = (List1) getModel2("#17 id1, id2, id2");
 		validate(m).assertOK();
 
@@ -329,7 +330,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		validate(copy).assertAll(err(p.getList1_Val1(), ERROR_LIST_TOO_FEW, 1, null, ""));
 	}
 
-	public void testList2() throws Exception {
+	@Test public void testList2() throws Exception {
 		List2 copy, m = (List2) getModel2("#18 id1, id2, id2");
 		validate(m).assertOK();
 
@@ -343,7 +344,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		validate(copy).assertOK();
 	}
 
-	public void testList3() throws Exception {
+	@Test public void testList3() throws Exception {
 		List3 copy, m = (List3) getModel2("#19 id1, id2, id2");
 		validate(m).assertOK();
 
@@ -363,7 +364,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		validate(copy).assertOK();
 	}
 
-	public void testList4() throws Exception {
+	@Test public void testList4() throws Exception {
 		List4 copy, m = (List4) getModel2("#20 id11, id12, id13 kw3 id2");
 		validate(m).assertOK();
 
@@ -381,7 +382,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		validate(copy).assertAll(err(p.getList4_Val2(), ERROR_VALUE_REQUIRED, 1, null, ""));
 	}
 
-	public void testList5() throws Exception {
+	@Test public void testList5() throws Exception {
 		List5 copy, m = (List5) getModel2("#21 id11, id12, id13 kw3 id2");
 		validate(m).assertOK();
 
@@ -411,7 +412,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 				err(p.getList5_Val3(), ERROR_VALUE_PROHIBITED, null, 0, "((val1+ val2)|val3)"));
 	}
 
-	public void testAltList1() throws Exception {
+	@Test public void testAltList1() throws Exception {
 		AltList1 copy, m = (AltList1) getModel2("#22 id1 id2");
 		validate(m).assertOK();
 
@@ -430,7 +431,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		validate(copy).assertOK();
 	}
 
-	public void testAltList2() throws Exception {
+	@Test public void testAltList2() throws Exception {
 		AltList2 copy, m = (AltList2) getModel2("#23 id1 id2");
 		validate(m).assertOK();
 
@@ -447,7 +448,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		validate(copy).assertOK();
 	}
 
-	public void testTransientObject() {
+	@Test public void testTransientObject() {
 		TransientObject to = new TransientObjectImpl() {
 			@Override
 			public boolean eIsSet(int featureID) {
@@ -476,7 +477,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		validate(to).assertOK();
 	}
 
-	public void testTransientSerializeables1() throws Exception {
+	@Test public void testTransientSerializeables1() throws Exception {
 		TransientSerializeables1 m = f.createTransientSerializeables1();
 		validate(m).assertOK();
 
@@ -511,7 +512,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 				err(p.getTransientSerializeables1_Val2(), ERROR_VALUE_REQUIRED, 1, null, "(val2 int1)?"));
 	}
 
-	public void testStaticSimplification() {
+	@Test public void testStaticSimplification() {
 		StaticSimplification m = f.createStaticSimplification();
 		validate(m).assertOK();
 
@@ -551,7 +552,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		validate(m).assertOK();
 	}
 
-	public void testTwoVersion() {
+	@Test public void testTwoVersion() {
 		TwoVersion m = f.createTwoVersion();
 		validate(m).assertAll(
 				err(p.getTwoVersion_Shared2(), ERROR_VALUE_REQUIRED, null, null,
@@ -648,7 +649,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 	//		return result;
 	//	}
 	//
-	//	public void testHeuristic1() {
+	//	@Test public void testHeuristic1() {
 	//		Heuristic1 m = f.createHeuristic1();
 	//		m.getA().addAll(Lists.newArrayList("foo", "foo", "foo"));
 	//		m.getB().addAll(Lists.newArrayList("foo", "foo", "foo"));
@@ -682,7 +683,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 	//
 	//	}
 	//
-	//	public void testHeuristic1Large1() {
+	//	@Test public void testHeuristic1Large1() {
 	//		Heuristic1 m = f.createHeuristic1();
 	//		m.getA().addAll(strings(42));
 	//		m.getB().addAll(strings(42));
@@ -693,7 +694,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 	//		validate(m).assertOK();
 	//	}
 	//
-	//	public void testHeuristic1Large2() {
+	//	@Test public void testHeuristic1Large2() {
 	//		Heuristic1 m = f.createHeuristic1();
 	//		m.getA().addAll(strings(42));
 	//		m.getB().addAll(strings(42));

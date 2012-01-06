@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.actions;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -19,6 +19,7 @@ import org.eclipse.xtext.testlanguages.actionLang.ActionLangPackage;
 import org.eclipse.xtext.testlanguages.actionLang.Model;
 import org.eclipse.xtext.testlanguages.actionLang.Parent;
 import org.eclipse.xtext.testlanguages.services.ActionTestLanguageGrammarAccess;
+import org.junit.Test;
 
 import com.google.common.collect.Iterables;
 
@@ -31,7 +32,7 @@ public class AntlrParserTest extends AbstractXtextTests {
 	private ParserTestHelper helper;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(ActionTestLanguageStandaloneSetup.class);
 		grammarAccess = get(ActionTestLanguageGrammarAccess.class);
@@ -39,7 +40,7 @@ public class AntlrParserTest extends AbstractXtextTests {
 	}
 
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		grammarAccess = null;
 		super.tearDown();
 	}
@@ -55,7 +56,7 @@ public class AntlrParserTest extends AbstractXtextTests {
 	 * LeafNode (GrammarElement: RuleCall[ID], Element: null)
 	 * </pre>
 	 */
-	public void testParseWithoutActionCall() throws Exception {
+	@Test public void testParseWithoutActionCall() throws Exception {
 		XtextResource resource = helper.getResourceFromString("myID");
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 		Model model = (Model) resource.getContents().get(0);
@@ -91,7 +92,7 @@ public class AntlrParserTest extends AbstractXtextTests {
 	 * LeafNode (GrammarElement: RuleCall[ID], Element: null)
 	 * </pre>
 	 */
-	public void testParseWithActionCall() throws Exception {
+	@Test public void testParseWithActionCall() throws Exception {
 		XtextResource resource = helper.getResourceFromString("myID otherID");
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 		Model model = (Model) resource.getContents().get(0);

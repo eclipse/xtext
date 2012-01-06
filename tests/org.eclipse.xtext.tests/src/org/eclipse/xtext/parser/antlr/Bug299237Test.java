@@ -9,12 +9,13 @@ package org.eclipse.xtext.parser.antlr;
 
 import java.util.List;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.antlr.bug299237Test.Model;
+import org.junit.Test;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterators;
@@ -32,7 +33,7 @@ public class Bug299237Test extends AbstractXtextTests implements ISyntaxErrorMes
 	private String expectedMessage;
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(new Bug299237TestLanguageStandaloneSetup() {
 			@Override
@@ -48,27 +49,27 @@ public class Bug299237Test extends AbstractXtextTests implements ISyntaxErrorMes
 		syntaxErrorProvider = new SyntaxErrorMessageProvider();
 	}
 	
-	public void testValidModel_01() throws Exception {
+	@Test public void testValidModel_01() throws Exception {
 		Model model = (Model) getModel("model a;");
 		assertEquals("a", model.getName());
 	}
 	
-	public void testValidModel_02() throws Exception {
+	@Test public void testValidModel_02() throws Exception {
 		Model model = (Model) getModel("MODEL a;");
 		assertEquals("a", model.getName());
 	}
 	
-	public void testSyntaxError_01() throws Exception {
+	@Test public void testSyntaxError_01() throws Exception {
 		Model model = (Model) getModelAndExpect("model a", 1);
 		assertEquals("a", model.getName());
 	}
 	
-	public void testSyntaxError_02() throws Exception {
+	@Test public void testSyntaxError_02() throws Exception {
 		Model model = (Model) getModelAndExpect("MODEL a", 1);
 		assertEquals("a", model.getName());
 	}
 	
-	public void testSyntaxError_03() throws Exception {
+	@Test public void testSyntaxError_03() throws Exception {
 		syntaxErrorProvider = new SyntaxErrorMessageProvider() {
 			@Override
 			public SyntaxErrorMessage getSyntaxErrorMessage(IParserErrorContext context) {
@@ -80,7 +81,7 @@ public class Bug299237Test extends AbstractXtextTests implements ISyntaxErrorMes
 		getModelAndExpect("", 1);
 	}
 	
-	public void testCustomizedSyntaxError() throws Exception {
+	@Test public void testCustomizedSyntaxError() throws Exception {
 		expectedMessage = "expected message";
 		Model model = (Model) getModelAndExpect("model a", 1);
 		ICompositeNode node = NodeModelUtils.getNode(model);

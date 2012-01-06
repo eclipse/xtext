@@ -12,8 +12,9 @@ import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.INode;
+import org.junit.Test;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -87,7 +88,7 @@ public class DeclarativeValueConverterServiceTest extends AbstractXtextTests {
 	private String expectedIdent = null;
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(new XtextStandaloneSetup() {
 			@Override
@@ -111,19 +112,19 @@ public class DeclarativeValueConverterServiceTest extends AbstractXtextTests {
 		assertEquals(expectedIdent, ident);
 	}
 	
-	public void testSimpleIdConverter() {
+	@Test public void testSimpleIdConverter() {
 		IValueConverterService converter = get(SimpleIdConverter.class);
 		expectedIdent = "idConverter";
 		converter.toValue("Foo", "ID", null);
 	}
 	
-	public void testOverriddenIdConverter() {
+	@Test public void testOverriddenIdConverter() {
 		IValueConverterService converter = get(OverriddenIdConverter.class);
 		expectedIdent = "overriddenIdConverter";
 		converter.toString("Foo", "ID");
 	}
 
-	public void testDuplicateConverters() {
+	@Test public void testDuplicateConverters() {
 		IValueConverterService converter = get(DuplicateConverters.class);
 		try {
 			converter.toString("Foo", "unknown");

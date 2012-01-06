@@ -7,21 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.util.formallang;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
 
 import com.google.common.base.Functions;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class NfaToProductionTest extends TestCase {
+public class NfaToProductionTest extends Assert {
 
 	private String nfa2g(Nfa<String> nfa) {
 		NfaToProduction nfa2g = new NfaToProduction();
 		return nfa2g.nfaToGrammar(nfa, Functions.<String> identity(), new ProductionStringFactory<String>());
 	}
 
-	public void testAlternative() {
+	@Test public void testAlternative() {
 		StringNfa nfa = new StringNfa("start", "stop");
 		nfa.start().followedBy("x", "y");
 		nfa.state("x").followedBy("stop");
@@ -29,7 +30,7 @@ public class NfaToProductionTest extends TestCase {
 		assertEquals("start (x | y) stop", nfa2g(nfa));
 	}
 
-	public void testAlternative2() {
+	@Test public void testAlternative2() {
 		StringNfa nfa = new StringNfa("start", "stop");
 		nfa.start().followedBy("x", "y", "z");
 		nfa.state("x").followedBy("stop");
@@ -38,7 +39,7 @@ public class NfaToProductionTest extends TestCase {
 		assertEquals("start (x | y | z) stop", nfa2g(nfa));
 	}
 
-	public void testAlternative3() {
+	@Test public void testAlternative3() {
 		StringNfa nfa = new StringNfa("start", "stop");
 		nfa.start().followedBy("x", "y", "z", "v", "w");
 		nfa.state("x").followedBy("a");
@@ -51,7 +52,7 @@ public class NfaToProductionTest extends TestCase {
 		assertEquals("start ((v | w) b | (x | y | z) a) stop", nfa2g(nfa));
 	}
 
-	public void testAlternative4() {
+	@Test public void testAlternative4() {
 		StringNfa nfa = new StringNfa("start", "stop");
 		nfa.start().followedBy("x", "y", "stop");
 		nfa.state("x").followedBy("stop");
@@ -59,7 +60,7 @@ public class NfaToProductionTest extends TestCase {
 		assertEquals("start (x | y)? stop", nfa2g(nfa));
 	}
 
-	public void testAlternative5() {
+	@Test public void testAlternative5() {
 		StringNfa nfa = new StringNfa("start", "stop");
 		nfa.start().followedBy("x", "y");
 		nfa.state("x").followedBy("stop", "x");
@@ -67,7 +68,7 @@ public class NfaToProductionTest extends TestCase {
 		assertEquals("start (x+ | y) stop", nfa2g(nfa));
 	}
 
-	public void testAlternative6() {
+	@Test public void testAlternative6() {
 		StringNfa nfa = new StringNfa("start", "stop");
 		nfa.start().followedBy("x", "y", "stop");
 		nfa.state("x").followedBy("stop", "x");
@@ -75,7 +76,7 @@ public class NfaToProductionTest extends TestCase {
 		assertEquals("start (x* | y?) stop", nfa2g(nfa));
 	}
 
-	public void testAlternative7() {
+	@Test public void testAlternative7() {
 		StringNfa nfa = new StringNfa("start", "stop");
 		nfa.start().followedBy("a", "b");
 		nfa.state("a").followedBy("x", "y");
@@ -85,7 +86,7 @@ public class NfaToProductionTest extends TestCase {
 		assertEquals("start (a | b) (x | y) stop", nfa2g(nfa));
 	}
 
-	public void testAlternative8() {
+	@Test public void testAlternative8() {
 		StringNfa nfa = new StringNfa("start", "stop");
 		nfa.start().followedBy("a", "b");
 		nfa.state("a").followedBy("c", "d");
@@ -97,7 +98,7 @@ public class NfaToProductionTest extends TestCase {
 		assertEquals("start (a | b) (c | d) (x | y) stop", nfa2g(nfa));
 	}
 
-	public void testManyGroups1() {
+	@Test public void testManyGroups1() {
 		StringNfa nfa = new StringNfa("start", "stop");
 		nfa.start().followedBy("x", "y");
 		nfa.state("x").followedBy("x", "y");
@@ -105,7 +106,7 @@ public class NfaToProductionTest extends TestCase {
 		assertEquals("start (x* y)+ stop", nfa2g(nfa));
 	}
 
-	public void testManyAlternative1() {
+	@Test public void testManyAlternative1() {
 		StringNfa nfa = new StringNfa("start", "stop");
 		nfa.start().followedBy("x", "y", "stop");
 		nfa.state("x").followedBy("x", "y", "stop");
@@ -113,7 +114,7 @@ public class NfaToProductionTest extends TestCase {
 		assertEquals("start (x | y)* stop", nfa2g(nfa));
 	}
 
-	public void testManyAlternative2() {
+	@Test public void testManyAlternative2() {
 		StringNfa nfa = new StringNfa("start", "stop");
 		nfa.start().followedBy("a", "b", "c", "stop");
 		nfa.state("a").followedBy("a", "b", "c", "stop");
@@ -122,7 +123,7 @@ public class NfaToProductionTest extends TestCase {
 		assertEquals("start (a | b | c)* stop", nfa2g(nfa));
 	}
 
-	public void testManyAlternative3() {
+	@Test public void testManyAlternative3() {
 		StringNfa nfa = new StringNfa("start", "stop");
 		nfa.start().followedBy("a1", "b1", "stop");
 		nfa.state("a1").followedBy("a2");
@@ -132,7 +133,7 @@ public class NfaToProductionTest extends TestCase {
 		assertEquals("start (a1 a2 | b1 b2)* stop", nfa2g(nfa));
 	}
 
-	public void testManyAlternative4() {
+	@Test public void testManyAlternative4() {
 		StringNfa nfa = new StringNfa("start", "stop");
 		nfa.start().followedBy("a1", "b1", "c1", "stop");
 		nfa.state("a1").followedBy("a2");
@@ -144,7 +145,7 @@ public class NfaToProductionTest extends TestCase {
 		assertEquals("start (a1 a2 | b1 b2 | c1 c2)* stop", nfa2g(nfa));
 	}
 
-	public void testOptionalChain1() {
+	@Test public void testOptionalChain1() {
 		StringNfa nfa = new StringNfa("start", "stop");
 		nfa.start().followedBy("x", "y", "stop");
 		nfa.state("x").followedBy("y", "stop");
@@ -152,7 +153,7 @@ public class NfaToProductionTest extends TestCase {
 		assertEquals("start x? y? stop", nfa2g(nfa));
 	}
 
-	public void testOptionalChain2() {
+	@Test public void testOptionalChain2() {
 		StringNfa nfa = new StringNfa("start", "stop");
 		nfa.start().followedBy("x", "y", "z", "stop");
 		nfa.state("x").followedBy("y", "z", "stop");
@@ -161,27 +162,27 @@ public class NfaToProductionTest extends TestCase {
 		assertEquals("start x? y? z? stop", nfa2g(nfa));
 	}
 
-	public void testSimple() {
+	@Test public void testSimple() {
 		StringNfa nfa = new StringNfa("start", "stop");
 		nfa.start().followedBy("stop");
 		assertEquals("start stop", nfa2g(nfa));
 	}
 
-	public void testSimpleMany() {
+	@Test public void testSimpleMany() {
 		StringNfa nfa = new StringNfa("start", "stop");
 		nfa.start().followedBy("x");
 		nfa.state("x").followedBy("x", "stop");
 		assertEquals("start x+ stop", nfa2g(nfa));
 	}
 
-	public void testSimpleManyOptional() {
+	@Test public void testSimpleManyOptional() {
 		StringNfa nfa = new StringNfa("start", "stop");
 		nfa.start().followedBy("x", "stop");
 		nfa.state("x").followedBy("x", "stop");
 		assertEquals("start x* stop", nfa2g(nfa));
 	}
 
-	public void testSimpleManyOptional2() {
+	@Test public void testSimpleManyOptional2() {
 		StringNfa nfa = new StringNfa("start", "stop");
 		nfa.start().followedBy("x", "stop");
 		nfa.state("x").followedBy("y");
@@ -190,7 +191,7 @@ public class NfaToProductionTest extends TestCase {
 		assertEquals("start (x y z)* stop", nfa2g(nfa));
 	}
 
-	public void testSimpleManyOptional3() {
+	@Test public void testSimpleManyOptional3() {
 		StringNfa nfa = new StringNfa("start", "stop");
 		nfa.start().followedBy("x", "stop");
 		nfa.state("x").followedBy("y", "z");
@@ -199,28 +200,28 @@ public class NfaToProductionTest extends TestCase {
 		assertEquals("start (x y? z+)* stop", nfa2g(nfa));
 	}
 
-	public void testSimpleOne() {
+	@Test public void testSimpleOne() {
 		StringNfa nfa = new StringNfa("start", "stop");
 		nfa.start().followedBy("x");
 		nfa.state("x").followedBy("stop");
 		assertEquals("start x stop", nfa2g(nfa));
 	}
 
-	public void testSimpleOptional1() {
+	@Test public void testSimpleOptional1() {
 		StringNfa nfa = new StringNfa("start", "stop");
 		nfa.start().followedBy("x", "stop");
 		nfa.state("x").followedBy("stop");
 		assertEquals("start x? stop", nfa2g(nfa));
 	}
 
-	public void testSimpleStartStopIdentical() {
+	@Test public void testSimpleStartStopIdentical() {
 		StringNfa nfa = new StringNfa("foo", "foo");
 		nfa.start().followedBy("x", "foo");
 		nfa.state("x").followedBy("foo");
 		assertEquals("foo x? foo", nfa2g(nfa));
 	}
 
-	public void testSplitStateAlternatives1() {
+	@Test public void testSplitStateAlternatives1() {
 		StringNfa nfa = new StringNfa("start", "stop");
 		nfa.start().followedBy("b", "c");
 		nfa.state("b").followedBy("d", "e");
@@ -230,7 +231,7 @@ public class NfaToProductionTest extends TestCase {
 		assertEquals("start (b (d | e) | c e) stop", nfa2g(nfa));
 	}
 
-	public void testSplitStateAlternatives2() {
+	@Test public void testSplitStateAlternatives2() {
 		StringNfa nfa = new StringNfa("start", "stop");
 		nfa.start().followedBy("a", "b");
 		nfa.state("a").followedBy("c", "d");
@@ -243,7 +244,7 @@ public class NfaToProductionTest extends TestCase {
 		assertEquals("start ((a | b) d (f | g) | a c f | b e g) stop", nfa2g(nfa));
 	}
 
-	public void testSplitStateCycle1() {
+	@Test public void testSplitStateCycle1() {
 		StringNfa nfa = new StringNfa("start", "stop");
 		nfa.start().followedBy("x");
 		nfa.state("x").followedBy("stop", "y");

@@ -8,10 +8,11 @@
 package org.eclipse.xtext.util.formallang;
 
 import static org.eclipse.xtext.util.formallang.FollowerFunctionImpl.UnorderedStrategy.*;
-import junit.framework.TestCase;
 
 import org.eclipse.xtext.util.formallang.FollowerFunctionImpl.Direction;
 import org.eclipse.xtext.util.formallang.StringProduction.ProdElement;
+import org.junit.Assert;
+import org.junit.Test;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -20,7 +21,7 @@ import com.google.common.collect.Iterables;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class FollowerFunctionTest extends TestCase {
+public class FollowerFunctionTest extends Assert {
 
 	private class ElementFormatter implements Function<ProdElement, String> {
 		public String apply(ProdElement from) {
@@ -71,107 +72,107 @@ public class FollowerFunctionTest extends TestCase {
 		return result;
 	}
 
-	public void testSimple() {
+	@Test public void testSimple() {
 		StringProduction p = sp("'a'");
 		assertEquals("null", new FF(p).followers("a"));
 	}
 
-	public void testSequence1() {
+	@Test public void testSequence1() {
 		StringProduction p = sp("'a' 'b'");
 		assertEquals("'b'", new FF(p).followers("a"));
 	}
 
-	public void testSequence2() {
+	@Test public void testSequence2() {
 		StringProduction p = sp("'a' 'b'?");
 		assertEquals("'b', null", new FF(p).followers("a"));
 	}
 
-	public void testSequence3() {
+	@Test public void testSequence3() {
 		StringProduction p = sp("'a' 'b'? 'c'");
 		assertEquals("'b', 'c'", new FF(p).followers("a"));
 	}
 
-	public void testSequence4() {
+	@Test public void testSequence4() {
 		StringProduction p = sp("'a' 'b'? 'c'?");
 		assertEquals("'b', 'c', null", new FF(p).followers("a"));
 	}
 
-	public void testSequence5() {
+	@Test public void testSequence5() {
 		StringProduction p = sp("'a'+ 'b'");
 		assertEquals("'a', 'b'", new FF(p).followers("a"));
 	}
 
-	public void testSequence6() {
+	@Test public void testSequence6() {
 		StringProduction p = sp("'a'* 'b'");
 		assertEquals("'a', 'b'", new FF(p).followers("a"));
 	}
 
-	public void testSequence7() {
+	@Test public void testSequence7() {
 		StringProduction p = sp("'a' 'b'*");
 		assertEquals("'b', null", new FF(p).followers("a"));
 	}
 
-	public void testSequence8() {
+	@Test public void testSequence8() {
 		StringProduction p = sp("'a' 'b'* 'c'?");
 		assertEquals("'b', 'c', null", new FF(p).followers("a"));
 	}
 
-	public void testSequence9() {
+	@Test public void testSequence9() {
 		StringProduction p = sp("'a' ('b' 'c')");
 		assertEquals("'b'", new FF(p).followers("a"));
 	}
 
-	public void testSequence10() {
+	@Test public void testSequence10() {
 		StringProduction p = sp("'a' ('b'? 'c')");
 		assertEquals("'b', 'c'", new FF(p).followers("a"));
 	}
 
-	public void testSequence11() {
+	@Test public void testSequence11() {
 		StringProduction p = sp("'a' ('b'? 'c'?)");
 		assertEquals("'b', 'c', null", new FF(p).followers("a"));
 	}
 
-	public void testSequence12() {
+	@Test public void testSequence12() {
 		StringProduction p = sp("'a' ('b' 'c')*");
 		assertEquals("'b', null", new FF(p).followers("c"));
 	}
 
-	public void testAlternative1() {
+	@Test public void testAlternative1() {
 		StringProduction p = sp("'a' ('b' | 'c')");
 		assertEquals("'b', 'c'", new FF(p).followers("a"));
 	}
 
-	public void testAlternative2() {
+	@Test public void testAlternative2() {
 		StringProduction p = sp("'a' ('b'? | 'c')");
 		assertEquals("'b', 'c', null", new FF(p).followers("a"));
 	}
 
-	public void testAlternative3() {
+	@Test public void testAlternative3() {
 		StringProduction p = sp("'a' ('b' | 'c')?");
 		assertEquals("'b', 'c', null", new FF(p).followers("a"));
 	}
 
-	public void testAlternative4() {
+	@Test public void testAlternative4() {
 		StringProduction p = sp("'a' 'b'? ('c' | 'd')?");
 		assertEquals("'b', 'c', 'd', null", new FF(p).followers("a"));
 	}
 
-	public void testAlternative5() {
+	@Test public void testAlternative5() {
 		StringProduction p = sp("'a' ('b' | 'c')+");
 		assertEquals("'b', 'c'", new FF(p).followers("a"));
 	}
 
-	public void testAlternative6() {
+	@Test public void testAlternative6() {
 		StringProduction p = sp("'a' ('b' | 'c')+");
 		assertEquals("'b', 'c', null", new FF(p).followers("b"));
 	}
 
-	public void testAlternative7() {
+	@Test public void testAlternative7() {
 		StringProduction p = sp("'a' ('b' | 'c')+");
 		assertEquals("'b', 'c', null", new FF(p).followers("c"));
 	}
 
-	public void testUnordered1() {
+	@Test public void testUnordered1() {
 		StringProduction p = sp("'a' ('b' & 'c')");
 		FF mult = new FF(p).setUnorderedStrategy(MULIT_ALTERNATIVE);
 		FF seq = new FF(p).setUnorderedStrategy(SEQUENCE);
@@ -183,7 +184,7 @@ public class FollowerFunctionTest extends TestCase {
 		assertEquals("null", seq.followers("c"));
 	}
 
-	public void testUnordered2() {
+	@Test public void testUnordered2() {
 		StringProduction p = sp("'a' ('b' & 'c' & 'd')");
 		FF mult = new FF(p).setUnorderedStrategy(MULIT_ALTERNATIVE);
 		FF seq = new FF(p).setUnorderedStrategy(SEQUENCE);
@@ -197,7 +198,7 @@ public class FollowerFunctionTest extends TestCase {
 		assertEquals("null", seq.followers("d"));
 	}
 
-	public void testUnordered3() {
+	@Test public void testUnordered3() {
 		StringProduction p = sp("'a' ('b'? & 'c')");
 		FF mult = new FF(p).setUnorderedStrategy(MULIT_ALTERNATIVE);
 		FF seq = new FF(p).setUnorderedStrategy(SEQUENCE);
@@ -209,7 +210,7 @@ public class FollowerFunctionTest extends TestCase {
 		assertEquals("null", seq.followers("c"));
 	}
 
-	public void testUnordered4() {
+	@Test public void testUnordered4() {
 		StringProduction p = sp("'a' ('b'? & 'c'?)");
 		FF mult = new FF(p).setUnorderedStrategy(MULIT_ALTERNATIVE);
 		FF seq = new FF(p).setUnorderedStrategy(SEQUENCE);
@@ -221,47 +222,47 @@ public class FollowerFunctionTest extends TestCase {
 		assertEquals("null", seq.followers("c"));
 	}
 
-	public void testStarts1() {
+	@Test public void testStarts1() {
 		StringProduction p = sp("'a'");
 		assertEquals("'a'", new FF(p).starts());
 	}
 
-	public void testStarts2() {
+	@Test public void testStarts2() {
 		StringProduction p = sp("'a'?");
 		assertEquals("'a', null", new FF(p).starts());
 	}
 
-	public void testStarts3() {
+	@Test public void testStarts3() {
 		StringProduction p = sp("'a'*");
 		assertEquals("'a', null", new FF(p).starts());
 	}
 
-	public void testStarts4() {
+	@Test public void testStarts4() {
 		StringProduction p = sp("'a' 'b'");
 		assertEquals("'a'", new FF(p).starts());
 	}
 
-	public void testStarts5() {
+	@Test public void testStarts5() {
 		StringProduction p = sp("'a'? 'b'");
 		assertEquals("'a', 'b'", new FF(p).starts());
 	}
 
-	public void testStarts6() {
+	@Test public void testStarts6() {
 		StringProduction p = sp("('a' | 'b') 'c'");
 		assertEquals("'a', 'b'", new FF(p).starts());
 	}
 
-	public void testStarts7() {
+	@Test public void testStarts7() {
 		StringProduction p = sp("('a' | 'b')*");
 		assertEquals("'a', 'b', null", new FF(p).starts());
 	}
 
-	public void testStarts8() {
+	@Test public void testStarts8() {
 		StringProduction p = sp("('a' 'b')*");
 		assertEquals("'a', null", new FF(p).starts());
 	}
 
-	public void testStarts9() {
+	@Test public void testStarts9() {
 		StringProduction p = sp("('a' & 'b')*");
 		assertEquals("'a', 'b', null", new FF(p).starts());
 	}

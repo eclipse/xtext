@@ -25,7 +25,8 @@ import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.xtext.index.IndexTestLanguageStandaloneSetup;
 import org.eclipse.xtext.index.indexTestLanguage.Entity;
 import org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.junit.Test;
 
 import com.google.common.base.Predicate;
 
@@ -34,7 +35,7 @@ import com.google.common.base.Predicate;
  */
 public abstract class AbstractReaderTest extends AbstractXtextTests {
 
-	public void testLoadMatchNone() throws Exception {
+	@Test public void testLoadMatchNone() throws Exception {
 		Reader reader = getReader();
 		reader.addPath(pathTo("emptyFolder"));
 		reader.addPath(pathTo("nonemptyFolder"));
@@ -56,7 +57,7 @@ public abstract class AbstractReaderTest extends AbstractXtextTests {
 		assertTrue(slotContent.isEmpty());
 	}
 	
-	public void testLoadMatchAll() throws Exception {
+	@Test public void testLoadMatchAll() throws Exception {
 		Reader reader = getReader();
 		reader.addPath(pathTo("emptyFolder"));
 		reader.addPath(pathTo("nonemptyFolder"));
@@ -86,7 +87,7 @@ public abstract class AbstractReaderTest extends AbstractXtextTests {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void testLoadByType() throws Exception {
+	@Test public void testLoadByType() throws Exception {
 		Reader reader = getReader();
 		reader.addPath(pathTo("emptyFolder"));
 		reader.addPath(pathTo("nonemptyFolder"));
@@ -102,7 +103,7 @@ public abstract class AbstractReaderTest extends AbstractXtextTests {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void testLoadBySuperType() throws Exception {
+	@Test public void testLoadBySuperType() throws Exception {
 		Reader reader = getReader();
 		reader.addPath(pathTo("emptyFolder"));
 		reader.addPath(pathTo("nonemptyFolder"));
@@ -117,7 +118,7 @@ public abstract class AbstractReaderTest extends AbstractXtextTests {
 		assertEquals(3, entities.size());
 	}
 	
-	public void testLoadByType_FirstOnly() throws Exception {
+	@Test public void testLoadByType_FirstOnly() throws Exception {
 		Reader reader = getReader();
 		reader.addPath(pathTo("emptyFolder"));
 		reader.addPath(pathTo("nonemptyFolder"));
@@ -133,7 +134,7 @@ public abstract class AbstractReaderTest extends AbstractXtextTests {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void testLoadByType_withNsURI() throws Exception {
+	@Test public void testLoadByType_withNsURI() throws Exception {
 		Reader reader = getReader();
 		reader.addPath(pathTo("emptyFolder"));
 		reader.addPath(pathTo("nonemptyFolder"));
@@ -149,7 +150,7 @@ public abstract class AbstractReaderTest extends AbstractXtextTests {
 		assertEquals(2, entities.size());
 	}
 
-	public void testLoadByType_withUnkownNsURI() throws Exception {
+	@Test public void testLoadByType_withUnkownNsURI() throws Exception {
 		Reader reader = getReader();
 		reader.addPath(pathTo("emptyFolder"));
 		reader.addPath(pathTo("nonemptyFolder"));
@@ -178,7 +179,7 @@ public abstract class AbstractReaderTest extends AbstractXtextTests {
 		};
 	}
 
-	public void testParseClassPath() throws Exception {
+	@Test public void testParseClassPath() throws Exception {
 		Reader reader = getReader();
 		assertEquals(0, reader.getPathes().size());
 		reader.setUseJavaClassPath(true);

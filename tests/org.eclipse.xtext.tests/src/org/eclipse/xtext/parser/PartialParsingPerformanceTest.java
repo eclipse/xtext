@@ -12,6 +12,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.TreeTestLanguageStandaloneSetup;
+import org.junit.Test;
 
 import com.google.common.collect.Iterables;
 
@@ -22,11 +23,11 @@ public class PartialParsingPerformanceTest extends AbstractPartialParserTest {
 
 	private static final int NUM_ELEMENTS = 100 /* 0 */;
 	
-	public void testExpression_FirstTime() throws Exception {
+	@Test public void testExpression_FirstTime() throws Exception {
 		doTestExpression();
 	}
 	
-	public void testExpression_Again() throws Exception {
+	@Test public void testExpression_Again() throws Exception {
 		doTestExpression();
 	}
 	
@@ -48,7 +49,7 @@ public class PartialParsingPerformanceTest extends AbstractPartialParserTest {
 		assertFalse(reparse.hasSyntaxErrors());
 	}
 	
-	public void testReference() throws Exception {
+	@Test public void testReference() throws Exception {
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		StringBuffer modelBuffer = new StringBuffer();
 		modelBuffer.append("spielplatz 17 {\n");
@@ -75,7 +76,7 @@ public class PartialParsingPerformanceTest extends AbstractPartialParserTest {
 		}
 	}
 	
-	public void testReferenceWithErrorAtEnd() throws Exception {
+	@Test public void testReferenceWithErrorAtEnd() throws Exception {
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		StringBuffer modelBuffer = new StringBuffer();
 		modelBuffer.append("spielplatz 17 {\n");
@@ -103,7 +104,7 @@ public class PartialParsingPerformanceTest extends AbstractPartialParserTest {
 		assertTrue(reparse.hasSyntaxErrors());
 	}
 	
-	public void testBug_255015() throws Exception {
+	@Test public void testBug_255015() throws Exception {
 		with(TreeTestLanguageStandaloneSetup.class);
 		StringBuffer modelBuffer = new StringBuffer(NUM_ELEMENTS * 128);
 		for(int i = 0; i < Math.sqrt(NUM_ELEMENTS) * 2; i++) {

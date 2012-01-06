@@ -7,16 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.naming;
 
-import com.google.common.base.Function;
+import org.junit.Assert;
+import org.junit.Test;
 
-import junit.framework.TestCase;
+import com.google.common.base.Function;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class QualifiedNameTest extends TestCase {
+public class QualifiedNameTest extends Assert {
 
-	public void testCreateNull() {
+	@Test public void testCreateNull() {
 		assertEquals(QualifiedName.EMPTY, QualifiedName.create());
 		assertEquals(QualifiedName.EMPTY, QualifiedName.create(new String[0]));
 		assertEquals(QualifiedName.EMPTY, QualifiedName.create((String[]) null));
@@ -26,7 +27,7 @@ public class QualifiedNameTest extends TestCase {
 		} catch(IllegalArgumentException e) {}
 	}
 
-	public void testSegments() {
+	@Test public void testSegments() {
 		QualifiedName qn = QualifiedName.create("foo", "bar", "baz");
 		assertEquals(3, qn.getSegmentCount());
 		assertEquals("foo", qn.getSegment(0));
@@ -36,7 +37,7 @@ public class QualifiedNameTest extends TestCase {
 		assertEquals("baz", qn.getLastSegment());
 	}
 
-	public void testStartsWith() {
+	@Test public void testStartsWith() {
 		QualifiedName qn = QualifiedName.create("foo", "bar", "baz");
 		QualifiedName qn1 = QualifiedName.create("foo", "bar");
 		assertTrue(qn.startsWith(qn1));
@@ -50,7 +51,7 @@ public class QualifiedNameTest extends TestCase {
 		assertFalse(qn2.startsWithIgnoreCase(qn));
 	}
 
-	public void testSkip() throws Exception {
+	@Test public void testSkip() throws Exception {
 		QualifiedName qn = QualifiedName.create("foo", "bar", "baz");
 		QualifiedName baz = qn.skipFirst(2);
 		assertEquals(1, baz.getSegmentCount());
@@ -79,7 +80,7 @@ public class QualifiedNameTest extends TestCase {
 		} catch(IllegalArgumentException e) {}
 	}
 
-	public void testAppend() {
+	@Test public void testAppend() {
 		QualifiedName qn = QualifiedName.create("foo");
 		QualifiedName fooBar = qn.append("bar");
 		assertEquals(2, fooBar.getSegmentCount());
@@ -94,7 +95,7 @@ public class QualifiedNameTest extends TestCase {
 		assertEquals("bar", fooBarFooBar.getSegment(3));
 	}
 
-	public void testEquals() {
+	@Test public void testEquals() {
 		QualifiedName qn = QualifiedName.create("foo", "bar");
 		assertEquals(qn, qn);
 		assertNotSame(qn, qn.skipFirst(1));
@@ -109,7 +110,7 @@ public class QualifiedNameTest extends TestCase {
 	}
 	
 	
-	public void testCompare() throws Exception {
+	@Test public void testCompare() throws Exception {
 		QualifiedName a = QualifiedName.create("a");
 		QualifiedName b = QualifiedName.create("b");
 		assertTrue(a.compareTo(b) < 0);
@@ -137,12 +138,12 @@ public class QualifiedNameTest extends TestCase {
 		assertEquals(0, aa.compareToIgnoreCase(aA));
 	}
 	
-	public void testToString() throws Exception {
+	@Test public void testToString() throws Exception {
 		QualifiedName qn = QualifiedName.create("foo", "bar");
 		assertEquals("foo.bar", qn.toString());
 	}
 	
-	public void testToCase() throws Exception {
+	@Test public void testToCase() throws Exception {
 		QualifiedName qn = QualifiedName.create("foo", "bar");
 		QualifiedName qnUpper = qn.toUpperCase();
 		assertFalse(qnUpper.equals(qn));
@@ -152,7 +153,7 @@ public class QualifiedNameTest extends TestCase {
 		assertEquals(qn.toString(), qnUpper.toLowerCase().toString());
 	}
 	
-	public void testEmpty() {
+	@Test public void testEmpty() {
 		assertEquals(0, QualifiedName.EMPTY.getSegmentCount());
 		assertTrue(QualifiedName.EMPTY.getSegments().isEmpty());
 		try {
@@ -166,7 +167,7 @@ public class QualifiedNameTest extends TestCase {
 		assertEquals("foo", foo.getLastSegment());
 	}
 	
-	public void testWrapper() throws Exception {
+	@Test public void testWrapper() throws Exception {
 		Function<String, String> identity = new Function<String, String>() {
 			public String apply(String from) {
 				return from;

@@ -11,8 +11,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.TerminalRulesTestLanguagePackage;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -29,7 +30,7 @@ public class ParserTest extends AbstractXtextTests {
 	private EStructuralFeature anyOtherFeature;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(TerminalRulesTestLanguageStandaloneSetup.class);
 		EPackage pack = TerminalRulesTestLanguagePackage.eINSTANCE;
@@ -44,7 +45,7 @@ public class ParserTest extends AbstractXtextTests {
 		anyOtherFeature = model.getEStructuralFeature("anyValue");
 	}
 
-	public void testSetup() {
+	@Test public void testSetup() {
 		EPackage pack = TerminalRulesTestLanguagePackage.eINSTANCE;
 		EClass model = (EClass) pack.getEClassifier("Model");
 		assertEquals(model.getEStructuralFeatures().size(), getClass().getDeclaredFields().length);
@@ -59,127 +60,127 @@ public class ParserTest extends AbstractXtextTests {
 		assertEquals(expected, value);
 	}
 
-	public void testId_01() throws Exception {
+	@Test public void testId_01() throws Exception {
 		doTest("abc", "abc", idFeature);
 	}
 
-	public void testId_02() throws Exception {
+	@Test public void testId_02() throws Exception {
 		doTest("abc", "^abc", idFeature);
 	}
 
-	public void testId_03() throws Exception {
+	@Test public void testId_03() throws Exception {
 		doTest("abc1", "abc1", idFeature);
 	}
 
-	public void testId_04() throws Exception {
+	@Test public void testId_04() throws Exception {
 		doTest("abc1", "^abc1", idFeature);
 	}
 
-	public void testInt_01() throws Exception {
+	@Test public void testInt_01() throws Exception {
 		doTest("0", "0", intFeature);
 	}
 
-	public void testInt_02() throws Exception {
+	@Test public void testInt_02() throws Exception {
 		doTest("111", "111", intFeature);
 	}
 
-	public void testString_01() throws Exception {
+	@Test public void testString_01() throws Exception {
 		doTest("abc", "'abc'", stringFeature);
 	}
 
-	public void testString_02() throws Exception {
+	@Test public void testString_02() throws Exception {
 		doTest("abc", "\"abc\"", stringFeature);
 	}
 
-	public void testString_03() throws Exception {
+	@Test public void testString_03() throws Exception {
 		doTest("ab cd", "'ab cd'", stringFeature);
 	}
 	
-	public void testString_04() throws Exception {
+	@Test public void testString_04() throws Exception {
 		doTest("ab\\cd", "'ab\\\\cd'", stringFeature);
 	}
 	
-	public void testString_05() throws Exception {
+	@Test public void testString_05() throws Exception {
 		doTest("ab\ncd", "'ab\\ncd'", stringFeature);
 	}
 	
-	public void testString_06() throws Exception {
+	@Test public void testString_06() throws Exception {
 		doTest("", "''", stringFeature);
 	}
 	
-	public void testRichString_01() throws Exception {
+	@Test public void testRichString_01() throws Exception {
 		doTest("'''abc'''", "'''abc'''", richStringFeature);
 	}
 
-	public void testRichString_02() throws Exception {
+	@Test public void testRichString_02() throws Exception {
 		doTest("'''\n\\'''", "'''\n\\'''", richStringFeature);
 	}
 
-	public void testRichString_03() throws Exception {
+	@Test public void testRichString_03() throws Exception {
 		doTest("'''ab cd'''", "'''ab cd'''", richStringFeature);
 	}
 	
-	public void testRichString_04() throws Exception {
+	@Test public void testRichString_04() throws Exception {
 		doTest("'''test''", "'''test''", richStringFeature);
 	}
 	
-	public void testRichString_05() throws Exception {
+	@Test public void testRichString_05() throws Exception {
 		doTest("'''test'", "'''test'", richStringFeature);
 	}
 	
-	public void testRichString_06() throws Exception {
+	@Test public void testRichString_06() throws Exception {
 		doTest("'''test", "'''test", richStringFeature);
 	}
 	
-	public void testRichString_07() throws Exception {
+	@Test public void testRichString_07() throws Exception {
 		doTest("'''", "'''", richStringFeature);
 	}
 
-	public void testMlComment_01() throws Exception {
+	@Test public void testMlComment_01() throws Exception {
 		doTest("/* abc */", "/* abc */", mlCommentFeature);
 	}
 
-	public void testMlComment_02() throws Exception {
+	@Test public void testMlComment_02() throws Exception {
 		doTest("/* ab\nc */", "/* ab\nc */", mlCommentFeature);
 	}
 
-	public void testSlComment_01() throws Exception {
+	@Test public void testSlComment_01() throws Exception {
 		doTest("// abc" , "// abc", slCommentFeature);
 	}
 
-	public void testSlComment_02() throws Exception {
+	@Test public void testSlComment_02() throws Exception {
 		doTest("// abc\n" , "// abc\n", slCommentFeature);
 	}
 
-	public void testSlComment_03() throws Exception {
+	@Test public void testSlComment_03() throws Exception {
 		doTest("// abc\r\n" , "// abc\r\n", slCommentFeature);
 	}
 
-	public void testSlComment_04() throws Exception {
+	@Test public void testSlComment_04() throws Exception {
 		doTest("// abc" , "// abc", slCommentFeature);
 	}
 
-	public void testWs_01() throws Exception {
+	@Test public void testWs_01() throws Exception {
 		doTest("  ", "  ", wsFeature);
 	}
 
-	public void testWs_02() throws Exception {
+	@Test public void testWs_02() throws Exception {
 		doTest("\t", "\t", wsFeature);
 	}
 
-	public void testWs_03() throws Exception {
+	@Test public void testWs_03() throws Exception {
 		doTest(" \n ", " \n ", wsFeature);
 	}
 
-	public void testAnyOther_01() throws Exception {
+	@Test public void testAnyOther_01() throws Exception {
 		doTest("'", "'", anyOtherFeature);
 	}
 
-	public void testAnyOther_02() throws Exception {
+	@Test public void testAnyOther_02() throws Exception {
 		doTest(".", ".", anyOtherFeature);
 	}
 
-	public void testAnyOther_03() throws Exception {
+	@Test public void testAnyOther_03() throws Exception {
 		doTest("\b", "\b", anyOtherFeature);
 	}
 }

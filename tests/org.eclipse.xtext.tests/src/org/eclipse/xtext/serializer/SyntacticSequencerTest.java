@@ -18,7 +18,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -31,6 +31,7 @@ import org.eclipse.xtext.serializer.sequencer.EmitterNodeIterator;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
 import org.eclipse.xtext.serializer.sequencer.NodeModelSemanticSequencer;
+import org.junit.Test;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
@@ -48,7 +49,7 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 	}
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(SyntacticSequencerTestLanguageStandaloneSetup.class);
 		getInjector().injectMembers(this);
@@ -204,87 +205,87 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 		return result;
 	}
 
-	public void testMandatoryKeywords() throws Exception {
+	@Test public void testMandatoryKeywords() throws Exception {
 		testSequence("#1 a kw1 b kw2 kw3 c kw4");
 	}
 
-	public void testExp0_a() throws Exception {
+	@Test public void testExp0_a() throws Exception {
 		testSequence("#2 a + b + c + d");
 	}
 
-	public void testExp1_a() throws Exception {
+	@Test public void testExp1_a() throws Exception {
 		testSequence("#3 a + b + c + d");
 	}
 
-	public void testExp1_b() throws Exception {
+	@Test public void testExp1_b() throws Exception {
 		testSequence("#3 a + b");
 	}
 
-	public void testExp1_c() throws Exception {
+	@Test public void testExp1_c() throws Exception {
 		testSequence("#3 (a + b)");
 	}
 
-	public void testExp2_a() throws Exception {
+	@Test public void testExp2_a() throws Exception {
 		testSequence("#4 a * (b + c)");
 	}
 
-	public void testExp2_b() throws Exception {
+	@Test public void testExp2_b() throws Exception {
 		testSequence("#4 a * (((b + c)))");
 	}
 
-	public void testExp2_c() throws Exception {
+	@Test public void testExp2_c() throws Exception {
 		testSequence("#4 (a * (((b + c))))");
 	}
 
-	public void testExp2_d() throws Exception {
+	@Test public void testExp2_d() throws Exception {
 		testSequence("#4 (b + c) * d");
 	}
 
-	public void testExp2_e() throws Exception {
+	@Test public void testExp2_e() throws Exception {
 		testSequence("#4 ((a * (((b + c)) * d) + e)) + f");
 	}
 
-	public void testCrossRef1_a() throws Exception {
+	@Test public void testCrossRef1_a() throws Exception {
 		testSequence("#5 $1terminal kw1 $1terminal");
 	}
 
-	public void testCrossRef1_b() throws Exception {
+	@Test public void testCrossRef1_b() throws Exception {
 		testSequence("#5 datatype kw2 datatype");
 	}
 
-	public void testCrossRef1_c() throws Exception {
+	@Test public void testCrossRef1_c() throws Exception {
 		testSequence("#5 someid kw3 someid");
 	}
 
-	public void testCrossRef1_d() throws Exception {
+	@Test public void testCrossRef1_d() throws Exception {
 		testSequence("#5 someid kw4 someid");
 	}
 
-	public void testBooleanAlternative_a() throws Exception {
+	@Test public void testBooleanAlternative_a() throws Exception {
 		testSequence("#6 kw1");
 	}
 
-	public void testBooleanAlternative_b() throws Exception {
+	@Test public void testBooleanAlternative_b() throws Exception {
 		testSequence("#6 kw2");
 	}
 
-	public void testUnassignedDatatype() throws Exception {
+	@Test public void testUnassignedDatatype() throws Exception {
 		testSequence("#7 foo kw1", "#7 foo matched 1");
 	}
 
-	public void testOpionalSingleTransition() throws Exception {
+	@Test public void testOpionalSingleTransition() throws Exception {
 		testSequence("#8 kw1 foo", "#8 matched 2 foo");
 	}
 
-	public void testOpionalManyTransition() throws Exception {
+	@Test public void testOpionalManyTransition() throws Exception {
 		testSequence("#9 kw1 foo", "#9 matched 3 foo");
 	}
 
-	public void testMandatoryManyTransition() throws Exception {
+	@Test public void testMandatoryManyTransition() throws Exception {
 		testSequence("#10 kw1 foo", "#10 matched 4 foo");
 	}
 
-	public void testAlternativeTransition() throws Exception {
+	@Test public void testAlternativeTransition() throws Exception {
 		testSequence("#11 kw1 foo", "#11 matched 5 foo");
 	}
 }

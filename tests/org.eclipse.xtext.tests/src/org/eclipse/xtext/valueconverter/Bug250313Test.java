@@ -10,16 +10,17 @@ package org.eclipse.xtext.valueconverter;
 import java.io.InputStream;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parser.ParserTestHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.valueconverter.Bug250313RuntimeModule.Converters;
+import org.eclipse.xtext.valueconverter.bug250313.Model;
+import org.junit.Test;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Binder;
@@ -36,7 +37,7 @@ public class Bug250313Test extends AbstractXtextTests {
 	private String string;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(new Bug250313StandaloneSetup() {
 			@Override
@@ -48,7 +49,7 @@ public class Bug250313Test extends AbstractXtextTests {
 	}
 
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		string = null;
 		node = null;
 		lexerRule = null;
@@ -113,9 +114,9 @@ public class Bug250313Test extends AbstractXtextTests {
 		return helper.getResourceFromStream(in);
 	}
 	
-	public void testSTRINGConversion_01() throws Exception {
-		EObject model = getModel("1 'str'");
-		assertWithXtend("'str'", "this.value", model);
+	@Test public void testSTRINGConversion_01() throws Exception {
+		Model model = (Model) getModel("1 'str'");
+		assertEquals("str", model.getValue());
 		assertNotNull(lexerRule);
 		assertEquals("STRING", lexerRule);
 		assertTrue(node instanceof ILeafNode);
@@ -123,27 +124,27 @@ public class Bug250313Test extends AbstractXtextTests {
 		assertEquals(1, convertCallCount);
 	}
 
-	public void testSTRINGConversion_02() throws Exception {
-		EObject model = getModel("'str'");
-		assertWithXtend("'str'", "this.value", model);
+	@Test public void testSTRINGConversion_02() throws Exception {
+		Model model = (Model) getModel("'str'");
+		assertEquals("str", model.getValue());
 		assertEquals("STRING", lexerRule);
 		assertTrue(node instanceof ILeafNode);
 		assertEquals("'str'", string);
 		assertEquals(1, convertCallCount);
 	}
 
-	public void testSTRINGConversion_03() throws Exception {
-		EObject model = getModel("2 'str'");
-		assertWithXtend("'str'", "this.value", model);
+	@Test public void testSTRINGConversion_03() throws Exception {
+		Model model = (Model) getModel("2 'str'");
+		assertEquals("str", model.getValue());
 		assertEquals("STRING", lexerRule);
 		assertTrue(node instanceof ILeafNode);
 		assertEquals("'str'", string);
 		assertEquals(1, convertCallCount);
 	}
 
-	public void testSTRINGConversion_04() throws Exception {
-		EObject model = getModel("1+ 'str'");
-		assertWithXtend("{'str'}", "this.multiValue", model);
+	@Test public void testSTRINGConversion_04() throws Exception {
+		Model model = (Model) getModel("1+ 'str'");
+		assertEquals("[str]", model.getMultiValue().toString());
 		assertNotNull(lexerRule);
 		assertEquals("STRING", lexerRule);
 		assertTrue(node instanceof ILeafNode);
@@ -151,72 +152,72 @@ public class Bug250313Test extends AbstractXtextTests {
 		assertEquals(1, convertCallCount);
 	}
 
-	public void testSTRINGConversion_05() throws Exception {
-		EObject model = getModel("2+ 'str'");
-		assertWithXtend("{'str'}", "this.multiValue", model);
+	@Test public void testSTRINGConversion_05() throws Exception {
+		Model model = (Model) getModel("2+ 'str'");
+		assertEquals("[str]", model.getMultiValue().toString());
 		assertEquals("STRING", lexerRule);
 		assertTrue(node instanceof ILeafNode);
 		assertEquals("'str'", string);
 		assertEquals(1, convertCallCount);
 	}
 
-	public void testIDConversion_01() throws Exception {
-		EObject model = getModel("1 str");
-		assertWithXtend("'str'", "this.value", model);
+	@Test public void testIDConversion_01() throws Exception {
+		Model model = (Model) getModel("1 str");
+		assertEquals("str", model.getValue());
 		assertEquals("ID", lexerRule);
 		assertTrue(node instanceof ILeafNode);
 		assertEquals("str", string);
 		assertEquals(1, convertCallCount);
 	}
 
-	public void testIDConversion_02() throws Exception {
-		EObject model = getModel("1 ^str");
-		assertWithXtend("'str'", "this.value", model);
+	@Test public void testIDConversion_02() throws Exception {
+		Model model = (Model) getModel("1 ^str");
+		assertEquals("str", model.getValue());
 		assertEquals("ID", lexerRule);
 		assertTrue(node instanceof ILeafNode);
 		assertEquals("^str", string);
 		assertEquals(1, convertCallCount);
 	}
 
-	public void testIDConversion_03() throws Exception {
-		EObject model = getModel("str");
-		assertWithXtend("'str'", "this.value", model);
+	@Test public void testIDConversion_03() throws Exception {
+		Model model = (Model) getModel("str");
+		assertEquals("str", model.getValue());
 		assertEquals("ID", lexerRule);
 		assertTrue(node instanceof ILeafNode);
 		assertEquals("str", string);
 		assertEquals(1, convertCallCount);
 	}
 
-	public void testIDConversion_04() throws Exception {
-		EObject model = getModel("^str");
-		assertWithXtend("'str'", "this.value", model);
+	@Test public void testIDConversion_04() throws Exception {
+		Model model = (Model) getModel("^str");
+		assertEquals("str", model.getValue());
 		assertEquals("ID", lexerRule);
 		assertTrue(node instanceof ILeafNode);
 		assertEquals("^str", string);
 		assertEquals(1, convertCallCount);
 	}
 
-	public void testIDConversion_05() throws Exception {
-		EObject model = getModel("1+ str");
-		assertWithXtend("{'str'}", "this.multiValue", model);
+	@Test public void testIDConversion_05() throws Exception {
+		Model model = (Model) getModel("1+ str");
+		assertEquals("[str]", model.getMultiValue().toString());
 		assertEquals("ID", lexerRule);
 		assertTrue(node instanceof ILeafNode);
 		assertEquals("str", string);
 		assertEquals(1, convertCallCount);
 	}
 
-	public void testIDConversion_06() throws Exception {
-		EObject model = getModel("1+ ^str");
-		assertWithXtend("{'str'}", "this.multiValue", model);
+	@Test public void testIDConversion_06() throws Exception {
+		Model model = (Model) getModel("1+ ^str");
+		assertEquals("[str]", model.getMultiValue().toString());
 		assertEquals("ID", lexerRule);
 		assertTrue(node instanceof ILeafNode);
 		assertEquals("^str", string);
 		assertEquals(1, convertCallCount);
 	}
 
-	public void testDatatypeConversion_01() throws Exception {
-		EObject model = getModel("1 foo - bar");
-		assertWithXtend("'str'", "this.value", model);
+	@Test public void testDatatypeConversion_01() throws Exception {
+		Model model = (Model) getModel("1 foo - bar");
+		assertEquals("str", model.getValue());
 		assertEquals("Datatype", lexerRule);
 		assertTrue(node instanceof ICompositeNode);
 		assertEquals(6, Iterables.size(((ICompositeNode)node).getChildren()));
@@ -224,9 +225,9 @@ public class Bug250313Test extends AbstractXtextTests {
 		assertEquals(1, convertCallCount);
 	}
 
-	public void testDatatypeConversion_02() throws Exception {
-		EObject model = getModel("foo - bar");
-		assertWithXtend("'str'", "this.value", model);
+	@Test public void testDatatypeConversion_02() throws Exception {
+		Model model = (Model) getModel("foo - bar");
+		assertEquals("str", model.getValue());
 		assertEquals("Datatype", lexerRule);
 		assertTrue(node instanceof ICompositeNode);
 		assertEquals(5, Iterables.size(((ICompositeNode)node).getChildren()));
@@ -234,9 +235,9 @@ public class Bug250313Test extends AbstractXtextTests {
 		assertEquals(1, convertCallCount);
 	}
 
-	public void testDatatypeConversion_03() throws Exception {
-		EObject model = getModel("3 foo - bar");
-		assertWithXtend("'str'", "this.value", model);
+	@Test public void testDatatypeConversion_03() throws Exception {
+		Model model = (Model) getModel("3 foo - bar");
+		assertEquals("str", model.getValue());
 		assertEquals("Datatype", lexerRule);
 		assertTrue(node instanceof ICompositeNode);
 		assertEquals(6, Iterables.size(((ICompositeNode)node).getChildren()));
@@ -244,9 +245,9 @@ public class Bug250313Test extends AbstractXtextTests {
 		assertEquals(1, convertCallCount);
 	}
 
-	public void testDatatypeConversion_04() throws Exception {
-		EObject model = getModel("1+ foo - bar");
-		assertWithXtend("{'str'}", "this.multiValue", model);
+	@Test public void testDatatypeConversion_04() throws Exception {
+		Model model = (Model) getModel("1+ foo - bar");
+		assertEquals("[str]", model.getMultiValue().toString());
 		assertEquals("Datatype", lexerRule);
 		assertTrue(node instanceof ICompositeNode);
 		assertEquals(6, Iterables.size(((ICompositeNode)node).getChildren()));
@@ -254,9 +255,9 @@ public class Bug250313Test extends AbstractXtextTests {
 		assertEquals(1, convertCallCount);
 	}
 
-	public void testDatatypeConversion_05() throws Exception {
-		EObject model = getModel("3+ foo - bar");
-		assertWithXtend("{'str'}", "this.multiValue", model);
+	@Test public void testDatatypeConversion_05() throws Exception {
+		Model model = (Model) getModel("3+ foo - bar");
+		assertEquals("[str]", model.getMultiValue().toString());
 		assertEquals("Datatype", lexerRule);
 		assertTrue(node instanceof ICompositeNode);
 		assertEquals(6, Iterables.size(((ICompositeNode)node).getChildren()));
@@ -264,9 +265,9 @@ public class Bug250313Test extends AbstractXtextTests {
 		assertEquals(1, convertCallCount);
 	}
 
-	public void testNestedDatatypeConversion_01() throws Exception {
-		EObject model = getModel("1 zonk + foo - bar");
-		assertWithXtend("'str'", "this.value", model);
+	@Test public void testNestedDatatypeConversion_01() throws Exception {
+		Model model = (Model) getModel("1 zonk + foo - bar");
+		assertEquals("str", model.getValue());
 		assertEquals("NestedDatatype", lexerRule);
 		assertTrue(node instanceof ICompositeNode);
 		assertEquals(5, Iterables.size(((ICompositeNode)node).getChildren()));
@@ -274,9 +275,9 @@ public class Bug250313Test extends AbstractXtextTests {
 		assertEquals(1, convertCallCount);
 	}
 
-	public void testNestedDatatypeConversion_02() throws Exception {
-		EObject model = getModel("1 zonk +");
-		assertWithXtend("'str'", "this.value", model);
+	@Test public void testNestedDatatypeConversion_02() throws Exception {
+		Model model = (Model) getModel("1 zonk +");
+		assertEquals("str", model.getValue());
 		assertEquals("NestedDatatype", lexerRule);
 		assertTrue(node instanceof ICompositeNode);
 		assertEquals(4, Iterables.size(((ICompositeNode)node).getChildren()));
@@ -284,9 +285,9 @@ public class Bug250313Test extends AbstractXtextTests {
 		assertEquals(1, convertCallCount);
 	}
 
-	public void testNestedDatatypeConversion_03() throws Exception {
-		EObject model = getModel("zonk + foo - bar");
-		assertWithXtend("'str'", "this.value", model);
+	@Test public void testNestedDatatypeConversion_03() throws Exception {
+		Model model = (Model) getModel("zonk + foo - bar");
+		assertEquals("str", model.getValue());
 		assertEquals("NestedDatatype", lexerRule);
 		assertTrue(node instanceof ICompositeNode);
 		assertEquals(4, Iterables.size(((ICompositeNode)node).getChildren()));
@@ -294,9 +295,9 @@ public class Bug250313Test extends AbstractXtextTests {
 		assertEquals(1, convertCallCount);
 	}
 
-	public void testNestedDatatypeConversion_04() throws Exception {
-		EObject model = getModel("zonk +");
-		assertWithXtend("'str'", "this.value", model);
+	@Test public void testNestedDatatypeConversion_04() throws Exception {
+		Model model = (Model) getModel("zonk +");
+		assertEquals("str", model.getValue());
 		assertEquals("NestedDatatype", lexerRule);
 		assertTrue(node instanceof ICompositeNode);
 		assertEquals(3, Iterables.size(((ICompositeNode)node).getChildren()));
@@ -304,9 +305,9 @@ public class Bug250313Test extends AbstractXtextTests {
 		assertEquals(1, convertCallCount);
 	}
 
-	public void testNestedDatatypeConversion_05() throws Exception {
-		EObject model = getModel("4 zonk + foo - bar");
-		assertWithXtend("'str'", "this.value", model);
+	@Test public void testNestedDatatypeConversion_05() throws Exception {
+		Model model = (Model) getModel("4 zonk + foo - bar");
+		assertEquals("str", model.getValue());
 		assertEquals("NestedDatatype", lexerRule);
 		assertTrue(node instanceof ICompositeNode);
 		assertEquals(5, Iterables.size(((ICompositeNode)node).getChildren()));
@@ -314,9 +315,9 @@ public class Bug250313Test extends AbstractXtextTests {
 		assertEquals(1, convertCallCount);
 	}
 
-	public void testNestedDatatypeConversion_06() throws Exception {
-		EObject model = getModel("4 zonk +");
-		assertWithXtend("'str'", "this.value", model);
+	@Test public void testNestedDatatypeConversion_06() throws Exception {
+		Model model = (Model) getModel("4 zonk +");
+		assertEquals("str", model.getValue());
 		assertEquals("NestedDatatype", lexerRule);
 		assertTrue(node instanceof ICompositeNode);
 		assertEquals(4, Iterables.size(((ICompositeNode)node).getChildren()));
@@ -324,9 +325,9 @@ public class Bug250313Test extends AbstractXtextTests {
 		assertEquals(1, convertCallCount);
 	}
 
-	public void testNestedDatatypeConversion_07() throws Exception {
-		EObject model = getModel("1+ zonk + foo - bar");
-		assertWithXtend("{'str'}", "this.multiValue", model);
+	@Test public void testNestedDatatypeConversion_07() throws Exception {
+		Model model = (Model) getModel("1+ zonk + foo - bar");
+		assertEquals("[str]", model.getMultiValue().toString());
 		assertEquals("NestedDatatype", lexerRule);
 		assertTrue(node instanceof ICompositeNode);
 		assertEquals(5, Iterables.size(((ICompositeNode)node).getChildren()));
@@ -334,9 +335,9 @@ public class Bug250313Test extends AbstractXtextTests {
 		assertEquals(1, convertCallCount);
 	}
 
-	public void testNestedDatatypeConversion_08() throws Exception {
-		EObject model = getModel("1+ zonk +");
-		assertWithXtend("{'str'}", "this.multiValue", model);
+	@Test public void testNestedDatatypeConversion_08() throws Exception {
+		Model model = (Model) getModel("1+ zonk +");
+		assertEquals("[str]", model.getMultiValue().toString());
 		assertEquals("NestedDatatype", lexerRule);
 		assertTrue(node instanceof ICompositeNode);
 		assertEquals(4, Iterables.size(((ICompositeNode)node).getChildren()));
@@ -344,9 +345,9 @@ public class Bug250313Test extends AbstractXtextTests {
 		assertEquals(1, convertCallCount);
 	}
 
-	public void testNestedDatatypeConversion_09() throws Exception {
-		EObject model = getModel("4+ zonk + foo - bar");
-		assertWithXtend("{'str'}", "this.multiValue", model);
+	@Test public void testNestedDatatypeConversion_09() throws Exception {
+		Model model = (Model) getModel("4+ zonk + foo - bar");
+		assertEquals("[str]", model.getMultiValue().toString());
 		assertEquals("NestedDatatype", lexerRule);
 		assertTrue(node instanceof ICompositeNode);
 		assertEquals(5, Iterables.size(((ICompositeNode)node).getChildren()));
@@ -354,9 +355,9 @@ public class Bug250313Test extends AbstractXtextTests {
 		assertEquals(1, convertCallCount);
 	}
 
-	public void testNestedDatatypeConversion_10() throws Exception {
-		EObject model = getModel("4+ zonk +");
-		assertWithXtend("{'str'}", "this.multiValue", model);
+	@Test public void testNestedDatatypeConversion_10() throws Exception {
+		Model model = (Model) getModel("4+ zonk +");
+		assertEquals("[str]", model.getMultiValue().toString());
 		assertEquals("NestedDatatype", lexerRule);
 		assertTrue(node instanceof ICompositeNode);
 		assertEquals(4, Iterables.size(((ICompositeNode)node).getChildren()));
@@ -364,43 +365,39 @@ public class Bug250313Test extends AbstractXtextTests {
 		assertEquals(1, convertCallCount);
 	}
 
-	public void testKeywordConversion_01() throws Exception {
-		EObject model = getModel("1 mykeyword1");
-		assertWithXtend("'mykeyword1'", "this.value", model);
+	@Test public void testKeywordConversion_01() throws Exception {
+		Model model = (Model) getModel("1 mykeyword1");
+		assertEquals("mykeyword1", model.getValue());
 		// XXX value converter is not called for keywords?
 		// if this is a bug, all assertions 'assertEquals(1, convertCallCount)' have to be increased
 		assertEquals(lexerRule, 0, convertCallCount);
 	}
 
-	public void testKeywordConversion_02() throws Exception {
-		EObject model = getModel("mykeyword1");
-		assertWithXtend("'mykeyword1'", "this.value", model);
+	@Test public void testKeywordConversion_02() throws Exception {
+		Model model = (Model) getModel("mykeyword1");
+		assertEquals("mykeyword1", model.getValue());
 		assertEquals(lexerRule, 0, convertCallCount);
 	}
 
-	public void testKeywordConversion_03() throws Exception {
-		EObject model = getModel("1+ mykeyword1");
-		assertWithXtend("{'mykeyword1'}", "this.multiValue", model);
+	@Test public void testKeywordConversion_03() throws Exception {
+		Model model = (Model) getModel("1+ mykeyword1");
+		assertEquals("[mykeyword1]", model.getMultiValue().toString());
 		// XXX value converter is not called for keywords?
 		// if this is a bug, all assertions 'assertEquals(1, convertCallCount)' have to be increased
 		assertEquals(lexerRule, 0, convertCallCount);
 	}
 
-	public void testChild1_01() throws Exception {
+	@Test public void testChild1_01() throws Exception {
 		// tests only, if crossrefs in alternatives work
-		EObject model = getModel("content str ref 'str'");
-		assertWithXtend("org::eclipse::xtext::valueconverter::bug250313::impl::Child1Impl", "this.ref.metaType", model);
-		assertWithXtend("org::eclipse::xtext::valueconverter::bug250313::impl::Child1Impl", "this.children.metaType", model);
-		assertWithXtend("'str'", "this.ref.name", model);
+		Model model = (Model) getModel("content str ref 'str'");
+		assertEquals("str", model.getRef().getName());
 		assertEquals(lexerRule, 3, convertCallCount);
 	}
 
-	public void testChild2_01() throws Exception {
+	@Test public void testChild2_01() throws Exception {
 		// tests only, if crossrefs in alternatives work
-		EObject model = getModel("content 'str' ref str");
-		assertWithXtend("org::eclipse::xtext::valueconverter::bug250313::impl::Child2Impl", "this.ref.metaType", model);
-		assertWithXtend("org::eclipse::xtext::valueconverter::bug250313::impl::Child2Impl", "this.children.metaType", model);
-		assertWithXtend("'str'", "this.ref.name", model);
+		Model model = (Model) getModel("content 'str' ref str");
+		assertEquals("str", model.getRef().getName());
 		assertEquals(lexerRule, 3, convertCallCount);
 	}
 }

@@ -10,7 +10,7 @@ package org.eclipse.xtext.service;
 
 import java.lang.reflect.Type;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
 
 public class TestModule extends AbstractGenericModule {
 	public Class<? extends CharSequence> bindString() {
@@ -21,7 +21,7 @@ public class TestModule extends AbstractGenericModule {
 		return Class.class;
 	}
 
-	public Class<? extends TestCase> bindTestCase() {
+	public Class<? extends Assert> bindTestCase() {
 		return GenericModuleTest.class;
 	}
 	
