@@ -10,10 +10,11 @@ package org.eclipse.xtext.parsetree;
 
 import java.util.List;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.testlanguages.OptionalEmptyTestLanguageStandaloneSetup;
+import org.junit.Test;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterators;
@@ -24,7 +25,7 @@ import com.google.common.collect.Lists;
  */
 public class InvalidTokenTest extends AbstractXtextTests {
 
-	public void testInvalidTokenError() throws Exception {
+	@Test public void testInvalidTokenError() throws Exception {
 		with(OptionalEmptyTestLanguageStandaloneSetup.class);
 		ICompositeNode rootNode = getRootNodeAndExpect("/*", 1);
 		List<INode> allErrorNodes = Lists.newArrayList(Iterators.filter(rootNode.getAsTreeIterable().iterator(), new Predicate<INode>() {

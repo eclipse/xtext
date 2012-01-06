@@ -9,7 +9,7 @@ package org.eclipse.xtext.generator;
 
 //import org.eclipse.xtext.generator.generatorTestLanguage.GeneratorTestLanguagePackage;
 //import org.eclipse.xtext.generator.generatorTestLanguage.Rule;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -17,17 +17,17 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 public abstract class AbstractLargeMetamodelTest extends AbstractXtextTests {
 
 //	@Override
-//	protected void setUp() throws Exception {
+//	public void setUp() throws Exception {
 //		super.setUp();
 //		with(GeneratorTestLanguageStandaloneSetup.class);
 //	}
 //
-//	public void testRuleClass() {
+//	@Test public void testRuleClass() {
 //		Class<Rule> ruleClass = Rule.class;
 //		assertNotNull(ruleClass);
 //	}
 //
-//	public void testEPackage() {
+//	@Test public void testEPackage() {
 //		GeneratorTestLanguagePackage instance = GeneratorTestLanguagePackage.eINSTANCE;
 //		assertNotNull(instance);
 //	}

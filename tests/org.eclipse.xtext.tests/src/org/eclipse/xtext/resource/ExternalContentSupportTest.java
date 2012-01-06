@@ -18,8 +18,9 @@ import org.eclipse.emf.ecore.resource.URIHandler;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider;
+import org.junit.Test;
 
 import com.google.common.collect.Maps;
 
@@ -32,7 +33,7 @@ public class ExternalContentSupportTest extends AbstractXtextTests implements IE
 	private ExternalContentSupport support;
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 		uriToContent = Maps.newHashMap();
@@ -40,7 +41,7 @@ public class ExternalContentSupportTest extends AbstractXtextTests implements IE
 	}
 	
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		uriToContent = null;
 		support = null;
 		super.tearDown();
@@ -58,13 +59,13 @@ public class ExternalContentSupportTest extends AbstractXtextTests implements IE
 		return this;
 	}
 	
-	public void testConfigureConverter() {
+	@Test public void testConfigureConverter() {
 		URIConverter converter = new ExtensibleURIConverterImpl();
 		support.configureConverter(converter, this);
 		checkConverter(converter);
 	}
 	
-	public void testConfigureResourceSet() {
+	@Test public void testConfigureResourceSet() {
 		XtextResourceSet resourceSet = get(XtextResourceSet.class);
 		support.configureResourceSet(resourceSet, this);
 		checkConverter(resourceSet.getURIConverter());
@@ -77,7 +78,7 @@ public class ExternalContentSupportTest extends AbstractXtextTests implements IE
 		}
 	}
 	
-	public void testGetResource_01() {
+	@Test public void testGetResource_01() {
 		XtextResourceSet resourceSet = get(XtextResourceSet.class);
 		resourceSet.setClasspathURIContext(getClass());
 		support.configureResourceSet(resourceSet, this);
@@ -87,7 +88,7 @@ public class ExternalContentSupportTest extends AbstractXtextTests implements IE
 		assertEquals("org.eclipse.xtext.Xtext", ((Grammar) resource.getContents().get(0)).getName());
 	}
 	
-	public void testGetResource_02() {
+	@Test public void testGetResource_02() {
 		String grammarInstead = "grammar org.foo.bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate something 'http://something'\n" +
 				"Model: name=ID;";
@@ -102,7 +103,7 @@ public class ExternalContentSupportTest extends AbstractXtextTests implements IE
 		assertEquals("org.foo.bar", ((Grammar) resource.getContents().get(0)).getName());
 	}
 	
-	public void testGetResource_03() {
+	@Test public void testGetResource_03() {
 		String grammarInstead = "grammar org.foo.bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate something 'http://something'\n" +
 				"Model: name=ID;";
@@ -118,7 +119,7 @@ public class ExternalContentSupportTest extends AbstractXtextTests implements IE
 		assertEquals("org.foo.bar", ((Grammar) resource.getContents().get(0)).getName());
 	}
 	
-	public void testCreateResource_01() throws IOException {
+	@Test public void testCreateResource_01() throws IOException {
 		XtextResourceSet resourceSet = get(XtextResourceSet.class);
 		resourceSet.setClasspathURIContext(getClass());
 		support.configureResourceSet(resourceSet, this);
@@ -130,7 +131,7 @@ public class ExternalContentSupportTest extends AbstractXtextTests implements IE
 		assertEquals("org.eclipse.xtext.Xtext", ((Grammar) resource.getContents().get(0)).getName());
 	}
 	
-	public void testCreateResource_02() throws IOException {
+	@Test public void testCreateResource_02() throws IOException {
 		String grammarInstead = "grammar org.foo.bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate something 'http://something'\n" +
 				"Model: name=ID;";
@@ -147,7 +148,7 @@ public class ExternalContentSupportTest extends AbstractXtextTests implements IE
 		assertEquals("org.foo.bar", ((Grammar) resource.getContents().get(0)).getName());
 	}
 	
-	public void testCreateResource_03() throws IOException {
+	@Test public void testCreateResource_03() throws IOException {
 		String grammarInstead = "grammar org.foo.bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate something 'http://something'\n" +
 				"Model: name=ID;";

@@ -1,35 +1,36 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.SaveOptions;
+import org.junit.Test;
 
 public class WhitespacePreservingCallbackTest extends AbstractXtextTests {
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(ComplexReconstrTestLanguageStandaloneSetup.class);
 	}
 
-	public void testSimple() throws Exception {
+	@Test public void testSimple() throws Exception {
 		check("a");
 	}
 
-	public void testHiddenInBetween() throws Exception {
+	@Test public void testHiddenInBetween() throws Exception {
 		check("a \t /* foo bar */ + b");
 	}
 
 
 //	FIXME: Make this test work again
 
-//	public void testFail1() throws Exception {
+//	@Test public void testFail1() throws Exception {
 //		IAstFactory f = getASTFactory();
 //		failsWith(f.create("Add"), XtextSerializationException.class);
 //	}
 
 //	FIXME: Make this test work again
 
-//	public void testFail2() throws Exception {
+//	@Test public void testFail2() throws Exception {
 //		IAstFactory f = getASTFactory();
 //		EObject add = f.create("Add");
 //

@@ -13,8 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -22,6 +20,8 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
+import org.junit.Assert;
+import org.junit.Test;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
@@ -30,7 +30,7 @@ import com.google.common.collect.Sets;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class DefaultResourceDescriptionDeltaTest extends TestCase {
+public class DefaultResourceDescriptionDeltaTest extends Assert {
 	public static QualifiedName FOO = QualifiedName.create("foo");
 	public static QualifiedName FOP = QualifiedName.create("fop");
 	public static QualifiedName BAR = QualifiedName.create("bar");
@@ -69,13 +69,13 @@ public class DefaultResourceDescriptionDeltaTest extends TestCase {
 		
 	}
 	
-	public void testHasChanges_1() throws Exception {
+	@Test public void testHasChanges_1() throws Exception {
 		TestResDesc resourceDesc = new TestResDesc();
 		TestResDesc resourceDesc2 = new TestResDesc();
 		assertFalse(new DefaultResourceDescriptionDelta(resourceDesc, resourceDesc2).haveEObjectDescriptionsChanged());
 	}
 	
-	public void testHasChanges_2() throws Exception {
+	@Test public void testHasChanges_2() throws Exception {
 		TestResDesc resourceDesc = new TestResDesc();
 		resourceDesc.imported.add(FOO);
 		
@@ -85,7 +85,7 @@ public class DefaultResourceDescriptionDeltaTest extends TestCase {
 		assertFalse(new DefaultResourceDescriptionDelta(resourceDesc, resourceDesc2).haveEObjectDescriptionsChanged());
 	}
 	
-	public void testHasChanges_3() throws Exception {
+	@Test public void testHasChanges_3() throws Exception {
 		TestResDesc resourceDesc = new TestResDesc();
 		resourceDesc.imported.add(FOO);
 		resourceDesc.exported.add(EObjectDescription.create(BAR, EcorePackage.Literals.EANNOTATION, null));
@@ -97,7 +97,7 @@ public class DefaultResourceDescriptionDeltaTest extends TestCase {
 		assertFalse(new DefaultResourceDescriptionDelta(resourceDesc, resourceDesc2).haveEObjectDescriptionsChanged());
 	}
 	
-	public void testHasChanges_4() throws Exception {
+	@Test public void testHasChanges_4() throws Exception {
 		TestResDesc resourceDesc = new TestResDesc();
 		resourceDesc.imported.add(FOO);
 		resourceDesc.imported.add(BAR);
@@ -111,7 +111,7 @@ public class DefaultResourceDescriptionDeltaTest extends TestCase {
 		assertFalse(new DefaultResourceDescriptionDelta(resourceDesc, resourceDesc2).haveEObjectDescriptionsChanged());
 	}
 	
-	public void testHasChanges_5() throws Exception {
+	@Test public void testHasChanges_5() throws Exception {
 		TestResDesc resourceDesc = new TestResDesc();
 		resourceDesc.imported.add(FOO);
 		resourceDesc.exported.add(EObjectDescription.create(BAR, EcorePackage.Literals.EANNOTATION, null));
@@ -123,7 +123,7 @@ public class DefaultResourceDescriptionDeltaTest extends TestCase {
 		assertFalse(new DefaultResourceDescriptionDelta(resourceDesc, resourceDesc2).haveEObjectDescriptionsChanged());
 	}
 	
-	public void testHasChanges_6() throws Exception {
+	@Test public void testHasChanges_6() throws Exception {
 		TestResDesc resourceDesc = new TestResDesc();
 		resourceDesc.exported.add(EObjectDescription.create(BAR, EcorePackage.Literals.EANNOTATION, null));
 		
@@ -134,7 +134,7 @@ public class DefaultResourceDescriptionDeltaTest extends TestCase {
 		assertFalse(new DefaultResourceDescriptionDelta(resourceDesc, resourceDesc2).haveEObjectDescriptionsChanged());
 	}
 	
-	public void testHasChanges_7() throws Exception {
+	@Test public void testHasChanges_7() throws Exception {
 		TestResDesc resourceDesc = new TestResDesc();
 		resourceDesc.imported.add(FOO);
 		resourceDesc.exported.add(EObjectDescription.create(BAR, EcorePackage.Literals.EANNOTATION, Collections.singletonMap("foo", "bar")));
@@ -146,7 +146,7 @@ public class DefaultResourceDescriptionDeltaTest extends TestCase {
 		assertTrue(new DefaultResourceDescriptionDelta(resourceDesc, resourceDesc2).haveEObjectDescriptionsChanged());
 	}
 	
-	public void testHasChanges_8() throws Exception {
+	@Test public void testHasChanges_8() throws Exception {
 		TestResDesc resourceDesc = new TestResDesc();
 		resourceDesc.imported.add(FOO);
 		resourceDesc.exported.add(
@@ -161,7 +161,7 @@ public class DefaultResourceDescriptionDeltaTest extends TestCase {
 	}
 	
 	/** see https://bugs.eclipse.org/bugs/show_bug.cgi?id=356063 */
-	public void testHasChanges_9() throws Exception {
+	@Test public void testHasChanges_9() throws Exception {
 		TestResDesc resourceDesc = new TestResDesc();
 		resourceDesc.exported.add(
 				EObjectDescription.create(BAR, EcorePackage.Literals.EANNOTATION, ImmutableMap.of("foo", "bar", "qux", "quux")));
@@ -209,7 +209,7 @@ public class DefaultResourceDescriptionDeltaTest extends TestCase {
 		assertTrue(new DefaultResourceDescriptionDelta(resourceDesc, resourceDesc2).haveEObjectDescriptionsChanged());
 	}
 	
-	public void testHasChanges_DifferentTypes() throws Exception {
+	@Test public void testHasChanges_DifferentTypes() throws Exception {
 		TestResDesc resourceDesc = new TestResDesc();
 		resourceDesc.imported.add(FOO);
 		resourceDesc.exported.add(EObjectDescription.create(BAR, EcorePackage.Literals.EANNOTATION, Collections.singletonMap("foo", "bar")));
@@ -227,7 +227,7 @@ public class DefaultResourceDescriptionDeltaTest extends TestCase {
 		assertTrue(new DefaultResourceDescriptionDelta(resourceDesc, resourceDesc2).haveEObjectDescriptionsChanged());
 	}
 	
-	public void testHasChanges_DifferentURIs() throws Exception {
+	@Test public void testHasChanges_DifferentURIs() throws Exception {
 		TestResDesc resourceDesc = new TestResDesc();
 		resourceDesc.imported.add(FOO);
 		resourceDesc.exported.add(EObjectDescription.create(BAR, EcorePackage.Literals.EANNOTATION, Collections.singletonMap("foo", "bar")));
@@ -245,7 +245,7 @@ public class DefaultResourceDescriptionDeltaTest extends TestCase {
 		assertTrue(new DefaultResourceDescriptionDelta(resourceDesc, resourceDesc2).haveEObjectDescriptionsChanged());
 	}
 	
-	public void testHasChanges_MultipleEObjects() throws Exception {
+	@Test public void testHasChanges_MultipleEObjects() throws Exception {
 		TestResDesc resourceDesc = new TestResDesc();
 		resourceDesc.imported.add(FOO);
 		resourceDesc.exported.add(EObjectDescription.create(BAR, EcorePackage.Literals.EANNOTATION, Collections.singletonMap("foo", "bar")));
@@ -259,7 +259,7 @@ public class DefaultResourceDescriptionDeltaTest extends TestCase {
 		assertFalse(new DefaultResourceDescriptionDelta(resourceDesc, resourceDesc2).haveEObjectDescriptionsChanged());
 	}
 	
-	public void testHasChanged_differentOrder() throws Exception {
+	@Test public void testHasChanged_differentOrder() throws Exception {
 		TestResDesc resourceDesc = new TestResDesc();
 		resourceDesc.imported.add(FOO);
 		resourceDesc.exported.add(EObjectDescription.create(BAR, EcorePackage.Literals.EANNOTATION, Collections.singletonMap("foo", "bar")));

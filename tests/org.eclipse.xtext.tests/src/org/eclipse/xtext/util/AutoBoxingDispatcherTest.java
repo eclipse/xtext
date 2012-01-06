@@ -7,20 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
-import junit.framework.TestCase;
-
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class AutoBoxingDispatcherTest extends TestCase {
+public class AutoBoxingDispatcherTest extends Assert {
 
-	public void testPrimitiveToObject() throws Exception {
+	@Test public void testPrimitiveToObject() throws Exception {
 		PolymorphicDispatcher<Boolean> dispatcher = PolymorphicDispatcher.<Boolean>createForSingleTarget("methodWithObjectParameter", this);
 		assertTrue(dispatcher.invoke(true));
 	}
 	
-	public void testObjectToPrimitive() throws Exception {
+	@Test public void testObjectToPrimitive() throws Exception {
 		PolymorphicDispatcher<Boolean> dispatcher = PolymorphicDispatcher.<Boolean>createForSingleTarget("methodWithPrimitiveParameter", this);
 		assertTrue(dispatcher.invoke(Boolean.TRUE));
 	}

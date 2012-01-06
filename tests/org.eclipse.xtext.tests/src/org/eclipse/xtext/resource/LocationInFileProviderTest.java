@@ -10,7 +10,7 @@ package org.eclipse.xtext.resource;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.locationprovidertest.Bus;
 import org.eclipse.xtext.resource.locationprovidertest.Component;
 import org.eclipse.xtext.resource.locationprovidertest.Element;
@@ -19,6 +19,7 @@ import org.eclipse.xtext.resource.locationprovidertest.Mode;
 import org.eclipse.xtext.resource.locationprovidertest.Model;
 import org.eclipse.xtext.resource.locationprovidertest.Processor;
 import org.eclipse.xtext.util.ITextRegion;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -31,7 +32,7 @@ public class LocationInFileProviderTest extends AbstractXtextTests {
 	private ILocationInFileProvider locationInFileProvider;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(LocationProviderTestLanguageStandaloneSetup.class);
 		modelAsString = 
@@ -52,7 +53,7 @@ public class LocationInFileProviderTest extends AbstractXtextTests {
 	}
 	
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		elements = null;
 		modelAsString = null;
 		model = null;
@@ -60,7 +61,7 @@ public class LocationInFileProviderTest extends AbstractXtextTests {
 		super.tearDown();
 	}
 
-	public void testContainmentRefSignificantLocation() throws Exception {
+	@Test public void testContainmentRefSignificantLocation() throws Exception {
 		assertEquals(2, elements.size());
 		ITextRegion location = locationInFileProvider.getSignificantTextRegion(model, LocationprovidertestPackage.Literals.MODEL__ELEMENTS, 0);
 		assertEquals(modelAsString.indexOf("x"), location.getOffset());
@@ -74,7 +75,7 @@ public class LocationInFileProviderTest extends AbstractXtextTests {
 		assertEquals(modelAsString.length(), location.getLength());		
 	}
 	
-	public void testCrossRefSignificantLocation() throws Exception {
+	@Test public void testCrossRefSignificantLocation() throws Exception {
 			assertEquals(2, elements.size());
 		int indexOfFirstY = modelAsString.indexOf("y");
 		int indexOfSecondY = modelAsString.indexOf("y", indexOfFirstY + 1);
@@ -98,7 +99,7 @@ public class LocationInFileProviderTest extends AbstractXtextTests {
 		assertEquals(1, location.getLength());
 	}
 
-	public void testEObjectSignificantLocation() throws Exception {
+	@Test public void testEObjectSignificantLocation() throws Exception {
 		assertEquals(2, elements.size());
 		ITextRegion location = locationInFileProvider.getSignificantTextRegion(elements.get(0));
 		assertEquals(modelAsString.indexOf("x"), location.getOffset());
@@ -108,7 +109,7 @@ public class LocationInFileProviderTest extends AbstractXtextTests {
 		assertEquals(1, location.getLength());
 	}
 
-	public void testAttributeSignificantLocation() {
+	@Test public void testAttributeSignificantLocation() {
 		assertEquals(2, elements.size());
 		ITextRegion location = locationInFileProvider.getSignificantTextRegion(elements.get(0), LocationprovidertestPackage.Literals.ELEMENT__NAME, 0);
 		assertEquals(modelAsString.indexOf("x"), location.getOffset());
@@ -119,7 +120,7 @@ public class LocationInFileProviderTest extends AbstractXtextTests {
 		assertEquals(1, location.getLength());		
 	}
 
-	public void testContainmentRefFullLocation() throws Exception {
+	@Test public void testContainmentRefFullLocation() throws Exception {
 		assertEquals(2, elements.size());
 		ITextRegion location = locationInFileProvider.getFullTextRegion(model, LocationprovidertestPackage.Literals.MODEL__ELEMENTS, 0);
 		assertEquals(0, location.getOffset());
@@ -133,7 +134,7 @@ public class LocationInFileProviderTest extends AbstractXtextTests {
 		assertEquals(modelAsString.length(), location.getLength());		
 	}
 	
-	public void testCrossRefFullLocation() throws Exception {
+	@Test public void testCrossRefFullLocation() throws Exception {
 			assertEquals(2, elements.size());
 		int indexOfFirstY = modelAsString.indexOf("y");
 		int indexOfSecondY = modelAsString.indexOf("y", indexOfFirstY + 1);
@@ -157,7 +158,7 @@ public class LocationInFileProviderTest extends AbstractXtextTests {
 		assertEquals(modelAsString.indexOf(" element y"), location.getLength());
 	}
 
-	public void testEObjectFullLocation() throws Exception {
+	@Test public void testEObjectFullLocation() throws Exception {
 		assertEquals(2, elements.size());
 		ITextRegion location = locationInFileProvider.getFullTextRegion(elements.get(0));
 		assertEquals(modelAsString.indexOf("element x"), location.getOffset());
@@ -167,7 +168,7 @@ public class LocationInFileProviderTest extends AbstractXtextTests {
 		assertEquals("element y".length(), location.getLength());
 	}
 
-	public void testAttributeFullLocation() {
+	@Test public void testAttributeFullLocation() {
 		assertEquals(2, elements.size());
 		ITextRegion location = locationInFileProvider.getFullTextRegion(elements.get(0), LocationprovidertestPackage.Literals.ELEMENT__NAME, 0);
 		assertEquals(modelAsString.indexOf("x"), location.getOffset());
@@ -178,14 +179,14 @@ public class LocationInFileProviderTest extends AbstractXtextTests {
 		assertEquals("y".length(), location.getLength());		
 	}
 	
-	public void testBug353969_Setup() throws Exception {
+	@Test public void testBug353969_Setup() throws Exception {
 		EList<Component> components = model.getComponents();
 		assertEquals(2, components.size());
 		assertTrue(components.get(0) instanceof Processor);
 		assertTrue(components.get(1) instanceof Bus);
 	}
 	
-	public void testBug353969_01() throws Exception {
+	@Test public void testBug353969_01() throws Exception {
 		Processor p = (Processor) model.getComponents().get(0);
 		EList<Mode> modes = p.getMode();
 		assertEquals(2, modes.size());
@@ -198,7 +199,7 @@ public class LocationInFileProviderTest extends AbstractXtextTests {
 		assertEquals("m1".length(), m1SignificantRegion.getLength());
 	}
 	
-	public void testBug353969_02() throws Exception {
+	@Test public void testBug353969_02() throws Exception {
 		Processor p = (Processor) model.getComponents().get(0);
 		EList<Mode> modes = p.getMode();
 		assertEquals(2, modes.size());
@@ -211,7 +212,7 @@ public class LocationInFileProviderTest extends AbstractXtextTests {
 		assertEquals("m2".length(), m2SignificantRegion.getLength());
 	}
 	
-	public void testBug353969_03() throws Exception {
+	@Test public void testBug353969_03() throws Exception {
 		Bus b = (Bus) model.getComponents().get(1);
 		EList<Mode> modes = b.getMode();
 		assertEquals(2, modes.size());
@@ -224,7 +225,7 @@ public class LocationInFileProviderTest extends AbstractXtextTests {
 		assertEquals("mb1".length(), mb1SignificantRegion.getLength());
 	}
 	
-	public void testBug353969_04() throws Exception {
+	@Test public void testBug353969_04() throws Exception {
 		Bus b = (Bus) model.getComponents().get(1);
 		EList<Mode> modes = b.getMode();
 		assertEquals(2, modes.size());

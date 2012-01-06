@@ -12,12 +12,13 @@ import java.util.HashSet;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.ImportUriTestLanguageStandaloneSetup;
 import org.eclipse.xtext.linking.importedURI.ImportedURIPackage;
 import org.eclipse.xtext.linking.importedURI.Main;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.junit.Test;
 
 import com.google.common.collect.Sets;
 
@@ -27,12 +28,12 @@ import com.google.common.collect.Sets;
  */
 public class SimpleNameScopeProviderTest extends AbstractXtextTests {
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(ImportUriTestLanguageStandaloneSetup.class);
 	}
 
-	public void testSimple() throws Exception {
+	@Test public void testSimple() throws Exception {
 		SyntheticModelAwareURIConverter models = new SyntheticModelAwareURIConverter();
 		ResourceSetImpl rs = new ResourceSetImpl();
 		rs.setURIConverter(models);
@@ -41,12 +42,12 @@ public class SimpleNameScopeProviderTest extends AbstractXtextTests {
 		models.addModel("bar.importuritestlanguage", "type bar");
 
 		Resource resource = rs.getResource(URI.createURI("foo.importuritestlanguage"), true);
-
-		assertWithXtend("'bar'", "types.first().extends.name", resource.getContents().get(0));
+		Main main = (Main) resource.getContents().get(0);
+		assertEquals("bar", main.getTypes().get(0).getExtends().getName());
 	}
 
 	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=266879
-	public void testRelativeScope() throws Exception {
+	@Test public void testRelativeScope() throws Exception {
 		SyntheticModelAwareURIConverter models = new SyntheticModelAwareURIConverter();
 		ResourceSetImpl rs = new ResourceSetImpl();
 		rs.setURIConverter(models);
@@ -55,15 +56,15 @@ public class SimpleNameScopeProviderTest extends AbstractXtextTests {
 		models.addModel("testfile://my/folder/bar.importuritestlanguage", "type bar type bar2 extends bar");
 
 		Resource resource = rs.getResource(URI.createURI("testfile://my/folder/foo.importuritestlanguage"), true);
-
-		assertWithXtend("'bar'", "types.first().extends.name", resource.getContents().get(0));
-		assertWithXtend("'bar2'", "types.first().extends.extends.name", resource.getContents().get(0));
-		assertWithXtend("'bar'", "types.first().extends.extends.extends.name", resource.getContents().get(0));
-		assertWithXtend("null", "types.first().extends.extends.extends.extends", resource.getContents().get(0));
+		Main main = (Main) resource.getContents().get(0);
+		assertEquals("bar", main.getTypes().get(0).getExtends().getName());
+		assertEquals("bar2", main.getTypes().get(0).getExtends().getExtends().getName());
+		assertEquals("bar", main.getTypes().get(0).getExtends().getExtends().getExtends().getName());
+		assertNull(main.getTypes().get(0).getExtends().getExtends().getExtends().getExtends());
 	}
 
 	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=266879
-	public void testRelativeScopeWithPath() throws Exception {
+	@Test public void testRelativeScopeWithPath() throws Exception {
 		SyntheticModelAwareURIConverter models = new SyntheticModelAwareURIConverter();
 		ResourceSetImpl rs = new ResourceSetImpl();
 		rs.setURIConverter(models);
@@ -72,14 +73,14 @@ public class SimpleNameScopeProviderTest extends AbstractXtextTests {
 		models.addModel("testfile://my/folder/bar.importuritestlanguage", "type bar type bar2 extends bar");
 
 		Resource resource = rs.getResource(URI.createURI("testfile://my/folder/foo.importuritestlanguage"), true);
-
-		assertWithXtend("'bar'", "types.first().extends.name", resource.getContents().get(0));
-		assertWithXtend("'bar2'", "types.first().extends.extends.name", resource.getContents().get(0));
-		assertWithXtend("'bar'", "types.first().extends.extends.extends.name", resource.getContents().get(0));
-		assertWithXtend("null", "types.first().extends.extends.extends.extends", resource.getContents().get(0));
+		Main main = (Main) resource.getContents().get(0);
+		assertEquals("bar", main.getTypes().get(0).getExtends().getName());
+		assertEquals("bar2", main.getTypes().get(0).getExtends().getExtends().getName());
+		assertEquals("bar", main.getTypes().get(0).getExtends().getExtends().getExtends().getName());
+		assertNull(main.getTypes().get(0).getExtends().getExtends().getExtends().getExtends());
 	}
 
-	public void testScopeFileName() throws Exception {
+	@Test public void testScopeFileName() throws Exception {
 		SyntheticModelAwareURIConverter models = new SyntheticModelAwareURIConverter();
 		ResourceSetImpl rs = new ResourceSetImpl();
 		rs.setURIConverter(models);
@@ -88,14 +89,14 @@ public class SimpleNameScopeProviderTest extends AbstractXtextTests {
 		models.addModel("bar.importuritestlanguage", "type bar type bar2 extends bar");
 
 		Resource resource = rs.getResource(URI.createURI("foo.importuritestlanguage"), true);
-
-		assertWithXtend("'bar'", "types.first().extends.name", resource.getContents().get(0));
-		assertWithXtend("'bar2'", "types.first().extends.extends.name", resource.getContents().get(0));
-		assertWithXtend("'bar'", "types.first().extends.extends.extends.name", resource.getContents().get(0));
-		assertWithXtend("null", "types.first().extends.extends.extends.extends", resource.getContents().get(0));
+		Main main = (Main) resource.getContents().get(0);
+		assertEquals("bar", main.getTypes().get(0).getExtends().getName());
+		assertEquals("bar2", main.getTypes().get(0).getExtends().getExtends().getName());
+		assertEquals("bar", main.getTypes().get(0).getExtends().getExtends().getExtends().getName());
+		assertNull(main.getTypes().get(0).getExtends().getExtends().getExtends().getExtends());
 	}
 
-	public void testUnresolvableImport() throws Exception {
+	@Test public void testUnresolvableImport() throws Exception {
 		SyntheticModelAwareURIConverter models = new SyntheticModelAwareURIConverter();
 		ResourceSetImpl rs = new ResourceSetImpl();
 		rs.setURIConverter(models);
@@ -107,7 +108,7 @@ public class SimpleNameScopeProviderTest extends AbstractXtextTests {
 		assertNotNull(resource);
 	}
 
-	public void testCircularImport() throws Exception {
+	@Test public void testCircularImport() throws Exception {
 		SyntheticModelAwareURIConverter models = new SyntheticModelAwareURIConverter();
 		ResourceSetImpl rs = new ResourceSetImpl();
 		rs.setURIConverter(models);
@@ -116,16 +117,16 @@ public class SimpleNameScopeProviderTest extends AbstractXtextTests {
 		models.addModel("bar.importuritestlanguage", "import 'foo.importuritestlanguage' type bar extends foo");
 
 		Resource resource = rs.getResource(URI.createURI("foo.importuritestlanguage"), true);
-
-		assertWithXtend("'bar'", "types.first().extends.name", resource.getContents().get(0));
-		assertWithXtend("'foo'", "types.first().extends.extends.name", resource.getContents().get(0));
-		assertWithXtend("true", "types.first().extends.extends == types.first()", resource.getContents().get(0));
+		Main main = (Main) resource.getContents().get(0);
+		assertEquals("bar", main.getTypes().get(0).getExtends().getName());
+		assertEquals("foo", main.getTypes().get(0).getExtends().getExtends().getName());
+		assertSame(main.getTypes().get(0).getExtends().getExtends(), main.getTypes().get(0));
 	}
 
 	/**
 	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=261630
 	 */
-	public void testBug261630_duplicateImports() throws Exception {
+	@Test public void testBug261630_duplicateImports() throws Exception {
 		SyntheticModelAwareURIConverter models = new SyntheticModelAwareURIConverter();
 		ResourceSetImpl rs = new ResourceSetImpl();
 		rs.setURIConverter(models);
@@ -134,14 +135,14 @@ public class SimpleNameScopeProviderTest extends AbstractXtextTests {
 		models.addModel("bar.importuritestlanguage", "type bar type bar2 extends bar");
 
 		Resource resource = rs.getResource(URI.createURI("foo.importuritestlanguage"), true);
-
-		assertWithXtend("'bar'", "types.first().extends.name", resource.getContents().get(0));
-		assertWithXtend("'bar2'", "types.first().extends.extends.name", resource.getContents().get(0));
-		assertWithXtend("'bar'", "types.first().extends.extends.extends.name", resource.getContents().get(0));
-		assertWithXtend("null", "types.first().extends.extends.extends.extends", resource.getContents().get(0));
+		Main main = (Main) resource.getContents().get(0);
+		assertEquals("bar", main.getTypes().get(0).getExtends().getName());
+		assertEquals("bar2", main.getTypes().get(0).getExtends().getExtends().getName());
+		assertEquals("bar", main.getTypes().get(0).getExtends().getExtends().getExtends().getName());
+		assertNull(main.getTypes().get(0).getExtends().getExtends().getExtends().getExtends());
 	}
 	
-	public void testGetAllContents() throws Exception {
+	@Test public void testGetAllContents() throws Exception {
 		SyntheticModelAwareURIConverter models = new SyntheticModelAwareURIConverter();
 		ResourceSetImpl rs = new ResourceSetImpl();
 		rs.setURIConverter(models);

@@ -15,7 +15,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.lazy.lazyLinking.LazyLinkingPackage;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Model;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Property;
@@ -24,6 +24,7 @@ import org.eclipse.xtext.linking.lazy.lazyLinking.UnresolvedProxyProperty;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -37,12 +38,12 @@ public class BasicLazyLinkingTest extends AbstractXtextTests {
 	}
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(new LazyLinkingTestLanguageStandaloneSetup());
 	}
 	
-	public void testLazyLinking() throws Exception {
+	@Test public void testLazyLinking() throws Exception {
 		XtextResource resource = getResource(new StringInputStream("type A extends B.id{} type B { A id; }"));
 		doTest(resource);
 	}
@@ -58,17 +59,17 @@ public class BasicLazyLinkingTest extends AbstractXtextTests {
 		assertEquals(typeB.getProperties().get(0),parentId);
 	}
 
-	public void testRecursion() throws Exception {
+	@Test public void testRecursion() throws Exception {
 		XtextResource resource = getResource(new StringInputStream("type A extends B.a { B b; } type B extends A.b { A a; }"));
 		doTest(resource);
 	}
 	
-	public void testBackwardDependency() throws Exception {
+	@Test public void testBackwardDependency() throws Exception {
 		XtextResource resource = getResource(new StringInputStream("type A for a in B { B b; } type B for b in A { A a; }"));
 		doTest(resource);
 	}
 	
-	public void testLazyMultiRef() throws Exception {
+	@Test public void testLazyMultiRef() throws Exception {
 		XtextResource resource = getResource(new StringInputStream("type A {} type B { A B a; }"));
 		Model m = (Model) resource.getContents().get(0);
 		Type t2 = m.getTypes().get(1);
@@ -81,7 +82,7 @@ public class BasicLazyLinkingTest extends AbstractXtextTests {
 		assertFalse(((InternalEObject)types.get(1)).eIsProxy());
 	}
 	
-	public void testLazyMultiRefDuplicates() throws Exception {
+	@Test public void testLazyMultiRefDuplicates() throws Exception {
 		XtextResource resource = getResource(new StringInputStream("type A {} type B { A B A a; }"));
 		Model m = (Model) resource.getContents().get(0);
 		Type t1 = m.getTypes().get(0);
@@ -98,7 +99,7 @@ public class BasicLazyLinkingTest extends AbstractXtextTests {
 		assertEquals(t1, types.get(2));
 	}
 	
-	public void testBug281775_01() throws Exception {
+	@Test public void testBug281775_01() throws Exception {
 		String model = "type A {\n" +
 				"  A B a;\n" +
 				"}\n" +
@@ -123,7 +124,7 @@ public class BasicLazyLinkingTest extends AbstractXtextTests {
 		assertEquals(t1, propB.getType().get(1));
 	}
 	
-	public void testBug281775_02() throws Exception {
+	@Test public void testBug281775_02() throws Exception {
 		String model = "type A {\n" +
 				"  unresolved A B a;\n" +
 				"}\n" +
@@ -152,7 +153,7 @@ public class BasicLazyLinkingTest extends AbstractXtextTests {
     // see https://bugs.eclipse.org/bugs/show_bug.cgi?id=282486
 	// and https://bugs.eclipse.org/bugs/show_bug.cgi?id=303441
     @SuppressWarnings("unchecked")
-    public void testReferenceWithOpposite() throws Exception {
+    @Test public void testReferenceWithOpposite() throws Exception {
         XtextResource resource = getResourceAndExpect(new StringInputStream("type foo {} type bar extends foo {}"), 1);
         Model model = (Model) resource.getContents().get(0);
         Type typeFoo = model.getTypes().get(0);

@@ -7,13 +7,14 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.junit.Test;
 
 public class ResourceTest extends AbstractXtextTests {
 
 //	FIXME: Make this test work again
 
-//	public void testResource() throws Exception {
+//	@Test public void testResource() throws Exception {
 //		new Object(); // workaround for Java bug on MacOSX
 //		IServiceScope serviceScope = ServiceScopeFactory.get(ITestLanguage.ID);
 //		IResourceFactory resourceFactory = ServiceRegistry.getService(serviceScope, IResourceFactory.class);
@@ -39,7 +40,7 @@ public class ResourceTest extends AbstractXtextTests {
 //		assertFalse(ecoreModelComparator.modelsDiffer(resource, resource1));
 //	}
 
-	public void testDoNothing(){
+	@Test public void testDoNothing(){
 		// 'cause JUnit doesn't like test classes without test methods.
 	}
 

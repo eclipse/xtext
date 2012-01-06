@@ -11,50 +11,50 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
 import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
-
-import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractNodeTest extends TestCase {
+public abstract class AbstractNodeTest extends Assert {
 
 	protected NodeModelBuilder builder;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		builder = new NodeModelBuilder();
 	}
 	
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		builder = null;
-		super.tearDown();
 	}
 	
 	protected abstract AbstractNode createNode();
 	
-	public void testGetParent() {
+	@Test public void testGetParent() {
 		AbstractNode node = createNode();
 		ICompositeNode parent = builder.newRootNode("input");
 		builder.addChild(parent, node);
 		assertSame(parent, node.getParent());
 	}
 	
-	public void testGetParent_NoParent() {
+	@Test public void testGetParent_NoParent() {
 		AbstractNode node = createNode();
 		assertNull(node.getParent());
 	}
 	
-	public void testGetRootNode() {
+	@Test public void testGetRootNode() {
 		AbstractNode node = createNode();
 		ICompositeNode rootNode = builder.newRootNode("My input");
 		builder.addChild(rootNode, node);
 		assertSame(rootNode, node.getRootNode());
 	}
 	
-	public void testGetRootNode_Parent() {
+	@Test public void testGetRootNode_Parent() {
 		AbstractNode node = createNode();
 		ICompositeNode rootNode = builder.newRootNode("My input");
 		ICompositeNode parent = builder.newCompositeNode(null, 0, rootNode);
@@ -62,19 +62,19 @@ public abstract class AbstractNodeTest extends TestCase {
 		assertSame(rootNode, node.getRootNode());
 	}
 	
-	public void testGetRootNode_NoParent() {
+	@Test public void testGetRootNode_NoParent() {
 		AbstractNode node = createNode();
 		assertNull(node.getRootNode());
 	}
 	
-	public void testGetRootNode_NoRoot() {
+	@Test public void testGetRootNode_NoRoot() {
 		AbstractNode node = createNode();
 		ICompositeNode parent = new CompositeNode();
 		builder.addChild(parent, node);
 		assertNull(node.getRootNode());
 	}
 	
-	public void testIterator_Next() {
+	@Test public void testIterator_Next() {
 		AbstractNode node = createNode();
 		BidiIterator<INode> iterator = node.iterator();
 		assertTrue(iterator.hasNext());
@@ -88,7 +88,7 @@ public abstract class AbstractNodeTest extends TestCase {
 		}
 	}
 	
-	public void testIterator_Previous() {
+	@Test public void testIterator_Previous() {
 		AbstractNode node = createNode();
 		BidiIterator<INode> iterator = node.iterator();
 		assertTrue(iterator.hasPrevious());
@@ -102,7 +102,7 @@ public abstract class AbstractNodeTest extends TestCase {
 		}
 	}
 	
-	public void testIterator_Bidi() {
+	@Test public void testIterator_Bidi() {
 		AbstractNode node = createNode();
 		BidiIterator<INode> iterator = node.iterator();
 		assertSame(node, iterator.next());
@@ -111,7 +111,7 @@ public abstract class AbstractNodeTest extends TestCase {
 		assertTrue(iterator.hasNext());
 	}
 	
-	public void testTreeIterator_Next() {
+	@Test public void testTreeIterator_Next() {
 		ICompositeNode rootNode = builder.newRootNode("input");
 		AbstractNode node = createNode();
 		builder.addChild(rootNode, node);
@@ -127,7 +127,7 @@ public abstract class AbstractNodeTest extends TestCase {
 		}
 	}
 	
-	public void testTreeIterator_Next_NoParent() {
+	@Test public void testTreeIterator_Next_NoParent() {
 		AbstractNode node = createNode();
 		BidiIterator<INode> iterator = node.iterator();
 		assertTrue(iterator.hasNext());
@@ -141,7 +141,7 @@ public abstract class AbstractNodeTest extends TestCase {
 		}
 	}
 	
-	public void testTreeIterator_Previous() {
+	@Test public void testTreeIterator_Previous() {
 		ICompositeNode rootNode = builder.newRootNode("input");
 		AbstractNode node = createNode();
 		builder.addChild(rootNode, node);
@@ -157,7 +157,7 @@ public abstract class AbstractNodeTest extends TestCase {
 		}
 	}
 	
-	public void testTreeIterator_Previous_NoParent() {
+	@Test public void testTreeIterator_Previous_NoParent() {
 		AbstractNode node = createNode();
 		BidiIterator<INode> iterator = node.iterator();
 		assertTrue(iterator.hasPrevious());
@@ -171,7 +171,7 @@ public abstract class AbstractNodeTest extends TestCase {
 		}
 	}
 	
-	public void testTreeIterator_Bidi() {
+	@Test public void testTreeIterator_Bidi() {
 		ICompositeNode rootNode = builder.newRootNode("input");
 		AbstractNode node = createNode();
 		builder.addChild(rootNode, node);
@@ -182,7 +182,7 @@ public abstract class AbstractNodeTest extends TestCase {
 		assertTrue(iterator.hasNext());
 	}
 	
-	public void testTreeIterator_Bidi_NoParent() {
+	@Test public void testTreeIterator_Bidi_NoParent() {
 		AbstractNode node = createNode();
 		BidiIterator<INode> iterator = node.iterator();
 		assertSame(node, iterator.next());
@@ -193,7 +193,7 @@ public abstract class AbstractNodeTest extends TestCase {
 	
 	public abstract void testGetText_Default();
 	
-	public void testGetText_NoParent() {
+	@Test public void testGetText_NoParent() {
 		AbstractNode node = createNode();
 		assertNull(node.getText());
 	}
@@ -212,7 +212,7 @@ public abstract class AbstractNodeTest extends TestCase {
 	
 	public abstract void testGetSemanticElement();
 	
-	public void testGetNextSibling_SingleChild() {
+	@Test public void testGetNextSibling_SingleChild() {
 		ICompositeNode rootNode = builder.newRootNode("input");
 		AbstractNode node = createNode();
 		builder.addChild(rootNode, node);
@@ -220,7 +220,7 @@ public abstract class AbstractNodeTest extends TestCase {
 		assertNull(node.getNextSibling());
 	}
 	
-	public void testGetNextSibling_FirstChild() {
+	@Test public void testGetNextSibling_FirstChild() {
 		ICompositeNode rootNode = builder.newRootNode("input");
 		AbstractNode first = createNode();
 		AbstractNode second = createNode();
@@ -230,7 +230,7 @@ public abstract class AbstractNodeTest extends TestCase {
 		assertSame(second, first.getNextSibling());
 	}
 	
-	public void testGetNextSibling_LastChild() {
+	@Test public void testGetNextSibling_LastChild() {
 		ICompositeNode rootNode = builder.newRootNode("input");
 		AbstractNode first = createNode();
 		AbstractNode second = createNode();
@@ -240,7 +240,7 @@ public abstract class AbstractNodeTest extends TestCase {
 		assertNull(second.getNextSibling());
 	}
 	
-	public void testGetPreviousSibling_SingleChild() {
+	@Test public void testGetPreviousSibling_SingleChild() {
 		ICompositeNode rootNode = builder.newRootNode("input");
 		AbstractNode node = createNode();
 		builder.addChild(rootNode, node);
@@ -249,7 +249,7 @@ public abstract class AbstractNodeTest extends TestCase {
 		assertFalse(node.hasSiblings());
 	}
 	
-	public void testGetPreviousSibling_FirstChild() {
+	@Test public void testGetPreviousSibling_FirstChild() {
 		ICompositeNode rootNode = builder.newRootNode("input");
 		AbstractNode first = createNode();
 		AbstractNode second = createNode();
@@ -260,7 +260,7 @@ public abstract class AbstractNodeTest extends TestCase {
 		assertTrue(first.hasSiblings());
 	}
 	
-	public void testGetPreviousSibling_LastChild() {
+	@Test public void testGetPreviousSibling_LastChild() {
 		ICompositeNode rootNode = builder.newRootNode("input");
 		AbstractNode first = createNode();
 		AbstractNode second = createNode();

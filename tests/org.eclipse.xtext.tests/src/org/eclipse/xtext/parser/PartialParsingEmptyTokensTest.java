@@ -1,9 +1,10 @@
 package org.eclipse.xtext.parser;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguageStandaloneSetup;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Test;
 
 public class PartialParsingEmptyTokensTest extends AbstractXtextTests {
 	
@@ -19,16 +20,16 @@ public class PartialParsingEmptyTokensTest extends AbstractXtextTests {
 		"2";
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(IndentationAwareTestLanguageStandaloneSetup.class);
 	}
 
-	public void testValidDocument() throws Exception {
+	@Test public void testValidDocument() throws Exception {
 		getResource(new StringInputStream(DOC));
 	}
 
-	public void testMarkerEmptyTokens() throws Exception {
+	@Test public void testMarkerEmptyTokens() throws Exception {
 		int pos = DOC.indexOf("1b");
 		String brokenDoc = DOC.replace("1b", "");
 		XtextResource resource = getResourceAndExpect(new StringInputStream(brokenDoc), 1);

@@ -11,11 +11,12 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider;
 import org.eclipse.xtext.parser.antlr.SyntaxErrorMessageProvider;
 import org.eclipse.xtext.parser.unorderedGroups.services.SimpleUnorderedGroupsTestLanguageGrammarAccess;
+import org.junit.Test;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -32,7 +33,7 @@ public class ErrorMessagesTest extends AbstractXtextTests implements ISyntaxErro
 	private List<AbstractElement> expectation;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(new SimpleUnorderedGroupsTestLanguageStandaloneSetup() {
 			@Override
@@ -63,12 +64,12 @@ public class ErrorMessagesTest extends AbstractXtextTests implements ISyntaxErro
 		return delegate.getSyntaxErrorMessage(context);
 	}
 	
-	public void testParse_1_A() throws Exception {
+	@Test public void testParse_1_A() throws Exception {
 		expectation = Collections.<AbstractElement>singletonList(grammarAccess.getModelAccess().getSecondAssignment_1_0_1_1());
 		getModelAndExpect("1 a", 1);
 	}
 	
-	public void testParse_1_B() throws Exception {
+	@Test public void testParse_1_B() throws Exception {
 		expectation = Collections.<AbstractElement>singletonList(grammarAccess.getModelAccess().getFirstAssignment_1_0_1_0());
 		getModelAndExpect("1 b", 1);
 	}

@@ -22,6 +22,7 @@ import org.eclipse.xtext.testlanguages.LookaheadTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.PartialParserTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSetup;
+import org.junit.Test;
 
 import com.google.common.collect.Iterables;
 
@@ -31,19 +32,19 @@ import com.google.common.collect.Iterables;
  */
 public class PartialParserTest extends AbstractPartialParserTest {
 
-	public void testExpression() throws Exception {
+	@Test public void testExpression() throws Exception {
 		with(SimpleExpressionsTestLanguageStandaloneSetup.class);
 		String model = "(a+b+c)*(c/d)";
 		parseAndCompareAllSubstrings(model);
 	}
 	
-	public void testExpression_9_1() throws Exception {
+	@Test public void testExpression_9_1() throws Exception {
 		with(SimpleExpressionsTestLanguageStandaloneSetup.class);
 		String model = "(a+b+c)*(c/d)";
 		partiallyParseAndCompare(model, 9, 1);
 	}
 
-	public void testLookahead() throws Exception {
+	@Test public void testLookahead() throws Exception {
 		with(LookaheadTestLanguageStandaloneSetup.class);
 		String model = "bar a foo bar c b d foo bar b c";
 		parseAndCompareAllSubstrings(model);
@@ -57,7 +58,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		}
 	}
 
-	public void testErrorMarkers() throws Exception {
+	@Test public void testErrorMarkers() throws Exception {
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		// model contains an error due to missing ) at idx 23
 		String model = "spielplatz 1 {kind (k 1}"; 
@@ -79,7 +80,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		assertFalse("partial reparse is fine", reparse.hasSyntaxErrors());
 	}
 
-	public void testGrammarElementAssigned() throws Exception {
+	@Test public void testGrammarElementAssigned() throws Exception {
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		String model = "spielplatz 1 {kind (k 1)\n}";
 		XtextResource resource = getResourceFromString(model);
@@ -90,7 +91,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		checkGrammarAssigned(rootNode);
 	}
 
-	public void testParseIsPartial() throws Exception {
+	@Test public void testParseIsPartial() throws Exception {
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		String model = "spielplatz 1 {kind (k 1)\n}";
 		XtextResource resource = getResourceFromString(model);
@@ -99,7 +100,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		assertSame(rootNode, resource.getParseResult().getRootNode());
 	}
 
-	public void testParseIsPartialTwice() throws Exception {
+	@Test public void testParseIsPartialTwice() throws Exception {
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		String model = "spielplatz 1 {kind (k 1)\n}";
 		XtextResource resource = getResourceFromString(model);
@@ -113,7 +114,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		return NodeModelUtils.findLeafNodeAtOffset(root, model.indexOf(text));
 	}
 
-	public void testPartialParseConcreteRuleInnermostToken() throws Exception {
+	@Test public void testPartialParseConcreteRuleInnermostToken() throws Exception {
 		with(PartialParserTestLanguageStandaloneSetup.class);
 		String model = 
 				"container c1 {\n" +
@@ -133,7 +134,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		assertNotSame(ch1Leaf, findLeafNodeByText(root, model, "ch1"));
 	}
 
-	public void testPartialParseConcreteRuleInnerToken() throws Exception {
+	@Test public void testPartialParseConcreteRuleInnerToken() throws Exception {
 		with(PartialParserTestLanguageStandaloneSetup.class);
 		String model = "container c1 {\n" +
 				"  children {\n" +
@@ -152,7 +153,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		assertNotSame(cLeaf, findLeafNodeByText(root, model, "ch1"));
 	}
 
-	public void testPartialParseConcreteRuleFirstInnerToken() throws Exception {
+	@Test public void testPartialParseConcreteRuleFirstInnerToken() throws Exception {
 		with(PartialParserTestLanguageStandaloneSetup.class);
 		String model = "container c1 {\n" +
 				"  children {\n" +
@@ -171,7 +172,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		assertNotSame(arrowLeaf, findLeafNodeByText(root, model, "->"));
 	}
 
-	public void testPartialParseConcreteRuleFirstToken() throws Exception {
+	@Test public void testPartialParseConcreteRuleFirstToken() throws Exception {
 		with(PartialParserTestLanguageStandaloneSetup.class);
 		String model = "container c1 {\n" +
 				"  children {\n" +
@@ -198,7 +199,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		}
 	}
 
-	public void testNodeState() throws Exception {
+	@Test public void testNodeState() throws Exception {
 		with(SimpleExpressionsTestLanguageStandaloneSetup.class);
 		String model = 
 			    "(a\r\n" +
@@ -245,7 +246,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 	/**
 	 * @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=273209
 	 */
-	public void testBug273209_01() throws Exception {
+	@Test public void testBug273209_01() throws Exception {
 		with(XtextStandaloneSetup.class);
 		String model = "grammar org.eclipse.Bug273209_01 with org.eclipse.xtext.common.Terminals \n" +
 				"generate testLanguage 'http://www.eclipse.org/2009/tmf/xtext/partialParsing/Bug273209/1'\n" +
@@ -267,7 +268,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 	/**
 	 * @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=273209
 	 */
-	public void testBug273209_02() throws Exception {
+	@Test public void testBug273209_02() throws Exception {
 		with(XtextStandaloneSetup.class);
 		String model = "grammar org.eclipse.Bug273209_01 with org.eclipse.xtext.common.Terminals \n" +
 				"generate testLanguage 'http://www.eclipse.org/2009/tmf/xtext/partialParsing/Bug273209/2'\n" +
@@ -291,7 +292,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 	/**
 	 * @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=273209
 	 */
-	public void testBug273209_03() throws Exception {
+	@Test public void testBug273209_03() throws Exception {
 		with(XtextStandaloneSetup.class);
 		String model = "grammar org.eclipse.Bug273209_01 with org.eclipse.xtext.common.Terminals \n" +
 				"generate testLanguage 'http://www.eclipse.org/2009/tmf/xtext/partialParsing/Bug273209/3'\n" +
@@ -310,7 +311,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 	}
 	
-	public void testReparseEmptyString() throws Exception {
+	@Test public void testReparseEmptyString() throws Exception {
 		with(XtextStandaloneSetup.class);
 		String model = "grammar org.eclipse.Bug273209_01 with org.eclipse.xtext.common.Terminals \n" +
 		"generate testLanguage 'http://www.eclipse.org/2009/tmf/xtext/partialParsing/Bug273209/3'\n" +

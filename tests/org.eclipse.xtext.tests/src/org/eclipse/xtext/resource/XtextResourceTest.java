@@ -10,12 +10,13 @@ package org.eclipse.xtext.resource;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.util.Wrapper;
+import org.junit.Test;
 
 import com.google.common.collect.Iterables;
 
@@ -28,13 +29,13 @@ public class XtextResourceTest extends AbstractXtextTests {
 	private final String simpleModel = "spielplatz 1 { kind ( Bob 0 ) }";
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		resource = getResourceFromString("");
 	}
 
-	public void testInitialState() throws Exception {
+	@Test public void testInitialState() throws Exception {
 		assertNotNull(resource);
 		assertTrue(resource.isLoaded());
 		assertFalse("resource.isTrackingModification()", resource.isTrackingModification());
@@ -50,36 +51,36 @@ public class XtextResourceTest extends AbstractXtextTests {
 		assertNull(parseResult.getRootASTElement());
 	}
 
-	public void testModify_01() throws Exception {
+	@Test public void testModify_01() throws Exception {
 		resource.update(0, 0, simpleModel);
 		assertFalse(resource.isModified());
 	}
 
-	public void testModify_02() throws Exception {
+	@Test public void testModify_02() throws Exception {
 		resource.reparse(simpleModel);
 		assertFalse(resource.isModified());
 	}
 
-	public void testModify_03() throws Exception {
+	@Test public void testModify_03() throws Exception {
 		resource.reparse(simpleModel);
 		assertFalse(resource.isModified());
 		modifySpielplatz();
 		assertFalse(resource.isModified());
 	}
 
-	public void testModify_04() throws Exception {
+	@Test public void testModify_04() throws Exception {
 		resource.setTrackingModification(true);
 		resource.update(0, 0, simpleModel);
 		assertTrue(resource.isModified());
 	}
 
-	public void testModify_05() throws Exception {
+	@Test public void testModify_05() throws Exception {
 		resource.setTrackingModification(true);
 		resource.reparse(simpleModel);
 		assertFalse(resource.isModified());
 	}
 
-	public void testModify_06() throws Exception {
+	@Test public void testModify_06() throws Exception {
 		resource.setTrackingModification(true);
 		resource.reparse(simpleModel);
 		assertFalse(resource.isModified());
@@ -97,7 +98,7 @@ public class XtextResourceTest extends AbstractXtextTests {
 		obj.eSet(feature, 3);
 	}
 
-	public void testUnload() throws Exception {
+	@Test public void testUnload() throws Exception {
 		resource.reparse(simpleModel);
 		IParseResult parseResult = resource.getParseResult();
 		resource.unload();
@@ -105,7 +106,7 @@ public class XtextResourceTest extends AbstractXtextTests {
 		assertTrue(parseResult.getRootASTElement().eIsProxy());
 	}
 
-	public void testUnloadReferables() throws Exception {
+	@Test public void testUnloadReferables() throws Exception {
 		resource.reparse(simpleModel);
 		final Wrapper<Boolean> unloaded = Wrapper.wrap(Boolean.FALSE);
 		resource.setUnloader(new IReferableElementsUnloader() {
@@ -117,7 +118,7 @@ public class XtextResourceTest extends AbstractXtextTests {
 		assertTrue("unloaded", unloaded.get());
 	}
 	
-	public void testUpdate() throws Exception {
+	@Test public void testUpdate() throws Exception {
 		resource.update(0, 0, simpleModel);
 
 		IParseResult parseResult = resource.getParseResult();
@@ -128,7 +129,7 @@ public class XtextResourceTest extends AbstractXtextTests {
 		assertNotNull(parseResult.getRootASTElement());
 	}
 
-	public void testErrorMarkers() throws Exception {
+	@Test public void testErrorMarkers() throws Exception {
 		String model = "spielplatz 1 {kind(B 1) erwachsener(E 1) familie(F E E B, C)}";
 		resource.update(0, 0, model);
 		EcoreUtil.resolveAll(resource);

@@ -7,11 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.assignments;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parser.assignments.bug288432Test.Body;
 import org.eclipse.xtext.parser.assignments.bug288432Test.MyElement;
 import org.eclipse.xtext.parser.assignments.bug288432Test.MyInt;
 import org.eclipse.xtext.parser.assignments.bug288432Test.ParameterObject;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -19,12 +20,12 @@ import org.eclipse.xtext.parser.assignments.bug288432Test.ParameterObject;
 public class Bug288432Test extends AbstractXtextTests {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(Bug288432TestLanguageStandaloneSetup.class);
 	}
 	
-	public void testBug288432_01() throws Exception {
+	@Test public void testBug288432_01() throws Exception {
 		String modelAsText = "body\n" + 
 				"	content\n" + 
 				"		element 1\n" + 

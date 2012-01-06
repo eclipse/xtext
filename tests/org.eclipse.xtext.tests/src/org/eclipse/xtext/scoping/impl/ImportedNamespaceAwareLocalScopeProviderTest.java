@@ -24,17 +24,17 @@ import org.eclipse.xtext.index.IndexTestLanguageStandaloneSetup;
 import org.eclipse.xtext.index.indexTestLanguage.Datatype;
 import org.eclipse.xtext.index.indexTestLanguage.Entity;
 import org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.ResourceSetReferencingResourceSetImpl;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy;
@@ -42,6 +42,7 @@ import org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.ResourceServiceProviderRegistryImpl;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Test;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -94,7 +95,7 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 		scopeProvider = new ImportedNamespaceAwareLocalScopeProvider(globalScopeProvider, nameProvider, nameConverter, caseInsensitivityHelper);
 	}
 
-	public void testImports() throws Exception {
+	@Test public void testImports() throws Exception {
 		XtextResource resource = getResource(new StringInputStream("import foo.bar.* "), URI
 				.createURI("import.indextestlanguage"));
 		resource.getResourceSet().createResource(URI.createURI("foo.indextestlanguage")).load(
@@ -117,7 +118,7 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 		assertTrue(names.contains(nameConverter.toQualifiedName("foo.bar.String")));
 	}
 
-	public void testRelativeContext() throws Exception {
+	@Test public void testRelativeContext() throws Exception {
 		final XtextResource resource = getResource(new StringInputStream(
 				  "stuff { " 
 				+ "  baz { "
@@ -138,7 +139,7 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 		assertNotNull(scope.getSingleElement(nameConverter.toQualifiedName("stuff.baz.String")));
 	}
 
-	public void testRelativePath() throws Exception {
+	@Test public void testRelativePath() throws Exception {
 		final XtextResource resource = getResource(new StringInputStream(
 				  "stuff { " 
 				+ "  import baz.*" 
@@ -162,7 +163,7 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 		assertNotNull(scope.getSingleElement(nameConverter.toQualifiedName("stuff.baz.String")));
 	}
 
-	public void testReexports2() throws Exception {
+	@Test public void testReexports2() throws Exception {
 		final XtextResource resource = getResource(new StringInputStream(
 				  "A { " 
 				+ "  B { " 
@@ -187,7 +188,7 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 		assertNotNull(scope.getSingleElement(nameConverter.toQualifiedName("A.B.D")));
 	}
 
-	public void testLocalElementsNotFromIndex() throws Exception {
+	@Test public void testLocalElementsNotFromIndex() throws Exception {
 		final XtextResource resource = getResource(new StringInputStream(
 				  "A { " 
 				+ "  B { " 
@@ -207,7 +208,7 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 		assertNotNull(scope.getSingleElement(nameConverter.toQualifiedName("A.B.D")));
 	}
 
-	public void testImportsWithoutWildcard() throws Exception {
+	@Test public void testImportsWithoutWildcard() throws Exception {
 		final XtextResource resource = getResource(new StringInputStream(
 				  "foo { " 
 				+ "  import bar.Bar"
@@ -231,7 +232,7 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 		assertNotNull(scope.getSingleElement(nameConverter.toQualifiedName("Bar")));
 	}
 	
-	public void testDuplicateImportsAreIgnored() throws Exception {
+	@Test public void testDuplicateImportsAreIgnored() throws Exception {
 		final XtextResource resource = getResource(new StringInputStream(
 				  "foo { " 
 				+ "  entity Foo {}" 
@@ -268,7 +269,7 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 		}));
 	}
 	
-	public void testUnambiguousImportAreShadowed_00() throws Exception {
+	@Test public void testUnambiguousImportAreShadowed_00() throws Exception {
 		final XtextResource resource = getResource(new StringInputStream(
 				  "foo { " 
 				+ "  entity Foo {}" 
@@ -304,7 +305,7 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 			}
 		}));
 	}
-	public void testUnambiguousImportAreShadowed_01() throws Exception {
+	@Test public void testUnambiguousImportAreShadowed_01() throws Exception {
 		final XtextResource resource = getResource(new StringInputStream(
 				"foo { " 
 				+ "  entity Foo {}" 
@@ -340,7 +341,7 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 			}
 		}));
 	}
-	public void testUnambiguousImportAreShadowed_02() throws Exception {
+	@Test public void testUnambiguousImportAreShadowed_02() throws Exception {
 		final XtextResource resource = getResource(new StringInputStream(
 				"foo { " 
 				+ "  entity Foo {}" 
@@ -377,7 +378,7 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 		}));
 	}
 
-	public void testMultipleFiles() throws Exception {
+	@Test public void testMultipleFiles() throws Exception {
 		ResourceSetImpl rs = new ResourceSetImpl();
 		final Resource res1 = rs.createResource(URI.createURI("file1.indextestlanguage"));
 		Resource res2 = rs.createResource(URI.createURI("file2.indextestlanguage"));
@@ -397,7 +398,7 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 		assertNotNull(scope.getSingleElement(nameConverter.toQualifiedName("Bar")));
 	}
 
-	public void testResourceSetReferencingResourceSet() throws Exception {
+	@Test public void testResourceSetReferencingResourceSet() throws Exception {
 		ResourceSetReferencingResourceSetImpl rs = new ResourceSetReferencingResourceSetImpl();
 		Resource res = rs.createResource(URI.createURI("file2.indextestlanguage"));
 		res.load(new StringInputStream(
@@ -428,7 +429,7 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 		assertNotNull(scope.getSingleElement(nameConverter.toQualifiedName("bar.Bar")));
 	}
 
-	public void testResourceSetReferencingResourceSet2() throws Exception {
+	@Test public void testResourceSetReferencingResourceSet2() throws Exception {
 		ResourceSetReferencingResourceSetImpl rs = new ResourceSetReferencingResourceSetImpl();
 		Resource res = rs.createResource(URI.createURI("file2.indextestlanguage"));
 		res.load(new StringInputStream("bar {" + "  entity Bar{}" + "}"), null);

@@ -8,10 +8,11 @@
 package org.eclipse.xtext.nodemodel;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.impl.SyntheticCompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSetup;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -19,12 +20,12 @@ import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSe
 public class TreeIteratorTest extends AbstractXtextTests {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(SimpleExpressionsTestLanguageStandaloneSetup.class);
 	}
 	
-	public void testTreeIteratorForSyntheticNodes_Forward() throws Exception {
+	@Test public void testTreeIteratorForSyntheticNodes_Forward() throws Exception {
 		EObject object = getModel("(d - e) / e * d // fasdf s");
 		ICompositeNode root = NodeModelUtils.getNode(object).getRootNode();
 		INode firstChild = root.getFirstChild();
@@ -42,7 +43,7 @@ public class TreeIteratorTest extends AbstractXtextTests {
 		assertEquals(expectedLastChild, lastChild);
 	}
 
-	public void testTreeIteratorForSyntheticNodes_Backwards() throws Exception {
+	@Test public void testTreeIteratorForSyntheticNodes_Backwards() throws Exception {
 		EObject object = getModel("d - e / e * d");
 		ICompositeNode root = NodeModelUtils.getNode(object).getRootNode();
 		INode firstChild = root.getFirstChild();

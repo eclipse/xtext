@@ -16,17 +16,17 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.junit.Assert;
+import org.junit.Test;
 
 import com.google.common.collect.Iterables;
-
-import junit.framework.TestCase;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class ScopeTest extends TestCase {
+public class ScopeTest extends Assert {
 
-	public void testShadowing() throws Exception {
+	@Test public void testShadowing() throws Exception {
 		IEObjectDescription a = EObjectDescription.create(QualifiedName.create("foo"),
 				EcorePackage.Literals.EANNOTATION);
 		IEObjectDescription b = EObjectDescription
@@ -38,7 +38,7 @@ public class ScopeTest extends TestCase {
 		assertNull(inner.getSingleElement(EcorePackage.Literals.EANNOTATION));
 	}
 
-	public void testLaziness() throws Exception {
+	@Test public void testLaziness() throws Exception {
 		LazinessTestScope c = new LazinessTestScope("c");
 		LazinessTestScope b = new LazinessTestScope("b", c);
 		LazinessTestScope a = new LazinessTestScope("a", b);

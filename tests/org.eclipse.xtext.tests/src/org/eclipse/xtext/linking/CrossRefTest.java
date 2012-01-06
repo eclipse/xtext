@@ -2,7 +2,6 @@ package org.eclipse.xtext.linking;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -13,7 +12,7 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.impl.DefaultLinkingService;
 import org.eclipse.xtext.linking.impl.IllegalNodeException;
 import org.eclipse.xtext.linking.langATestLanguage.LangATestLanguageFactory;
@@ -32,13 +31,13 @@ import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.ICrossReferenceSeri
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.service.SingletonBinding;
+import org.junit.Test;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 public class CrossRefTest extends AbstractXtextTests {
-	private static final Logger logger = Logger.getLogger(CrossRefTest.class);
 	private ICrossReferenceSerializer crossRefSerializer;
 	private LangATestLanguageGrammarAccess grammar;
 	
@@ -76,7 +75,7 @@ public class CrossRefTest extends AbstractXtextTests {
 	}
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(new LangATestLanguageStandaloneSetup() {
 			@Override
@@ -94,21 +93,20 @@ public class CrossRefTest extends AbstractXtextTests {
 		grammar = (LangATestLanguageGrammarAccess) get(IGrammarAccess.class);
 	}
 
-	public void testSimple() throws Exception {
-		EObject model = getModel("type A extends B type B extends A");
-		logger.debug(invokeWithXtend("types.collect(e|e.name+' '+e.extends.name).toString(',')", model));
-		assertWithXtend("'B'", "types.first().extends.name", model);
-		assertWithXtend("types.first()", "types.first().extends.extends", model);
+	@Test public void testSimple() throws Exception {
+		Main model = (Main) getModel("type A extends B type B extends A");
+		assertEquals("B", model.getTypes().get(0).getExtends().getName());
+		assertEquals(model.getTypes().get(0), model.getTypes().get(0).getExtends().getExtends());
 	}
 
-	public void testGetLinkedObjects() throws Exception {
+	@Test public void testGetLinkedObjects() throws Exception {
 		XtextResource r = getResourceFromString("type TypeA extends TypeB type TypeB extends TypeA type AnotherType extends TypeA");
-		EObject model = r.getParseResult().getRootASTElement();
+		Main model = (Main) r.getParseResult().getRootASTElement();
 		ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(r.getParseResult().getRootNode(), 6);
 
-		assertWithXtend("3", "types.size", model);
+		assertEquals(3, model.getTypes().size());
 
-		EObject context = (EObject) invokeWithXtend("types.first()", model);
+		EObject context = model.getTypes().get(0);
 		Assignment asExtends = get(LangATestLanguageGrammarAccess.class).getTypeAccess().getExtendsAssignment_2_1();
 		CrossReference xref = (CrossReference) asExtends.getTerminal();
 		EReference ref = GrammarUtil.getReference(xref, context.eClass());
@@ -116,7 +114,7 @@ public class CrossRefTest extends AbstractXtextTests {
 		assertEquals(1, getLinkingService().getLinkedObjects(context, ref, leaf).size());
 	}
 
-	public void testGetSingleValuedLinkText() throws Exception {
+	@Test public void testGetSingleValuedLinkText() throws Exception {
 		XtextResource r = getResourceFromStringAndExpect("type TypeA extends ^extends type ^extends extends ^type", 1);
 		Main model = (Main) r.getContents().get(0);
 		assertEquals(2, model.getTypes().size());
@@ -140,7 +138,7 @@ public class CrossRefTest extends AbstractXtextTests {
 		assertNull(linkText);
 	}
 
-	public void testGetMultiValuedLinkText() throws Exception {
+	@Test public void testGetMultiValuedLinkText() throws Exception {
 		with(LazyLinkingTestLanguageStandaloneSetup.class);
 		crossRefSerializer =  get(ICrossReferenceSerializer.class);
 		LazyLinkingTestLanguageGrammarAccess g =  (LazyLinkingTestLanguageGrammarAccess) get(IGrammarAccess.class);
@@ -182,7 +180,7 @@ public class CrossRefTest extends AbstractXtextTests {
 	}
 
 	/* see https://bugs.eclipse.org/bugs/show_bug.cgi?id=287813 */
-	public void testNonDefaultLinkText() throws Exception {
+	@Test public void testNonDefaultLinkText() throws Exception {
 		XtextResource r = getResourceFromString("type TypeA extends ^TypeB type TypeB");
 		Main model = (Main) r.getContents().get(0);
 		assertEquals(2, model.getTypes().size());
@@ -197,7 +195,7 @@ public class CrossRefTest extends AbstractXtextTests {
 	}
 
 	/* see https://bugs.eclipse.org/bugs/show_bug.cgi?id=325435 */
-	public void testSerializingProxiedCrossReference() throws Exception {
+	@Test public void testSerializingProxiedCrossReference() throws Exception {
 		XtextResource r = getResourceFromString("type TypeA extends ^TypeB type TypeB ");
 		Main model = (Main) r.getContents().get(0);
 
@@ -215,7 +213,7 @@ public class CrossRefTest extends AbstractXtextTests {
 	}
 
 	/* see https://bugs.eclipse.org/bugs/show_bug.cgi?id=287813 */
-	public void testOutOfSyncNodeModel() throws Exception {
+	@Test public void testOutOfSyncNodeModel() throws Exception {
 		XtextResource r = getResourceFromString("type TypeA extends ^TypeB type TypeB ");
 		Main model = (Main) r.getContents().get(0);
 
@@ -228,7 +226,7 @@ public class CrossRefTest extends AbstractXtextTests {
 	}
 	
 	/* see https://bugs.eclipse.org/bugs/show_bug.cgi?id=298506 */
-	public void testCrossReferenceValueConverter() throws Exception {
+	@Test public void testCrossReferenceValueConverter() throws Exception {
 		Resource r = get(XtextResourceSet.class).createResource(URI.createURI("test." + getCurrentFileExtension()));
 		Main main = LangATestLanguageFactory.eINSTANCE.createMain();
 		Type ele = LangATestLanguageFactory.eINSTANCE.createType();

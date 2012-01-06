@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.LangATestLanguageStandaloneSetup;
 import org.eclipse.xtext.linking.langATestLanguage.LangATestLanguagePackage;
 import org.eclipse.xtext.linking.langATestLanguage.Main;
@@ -41,6 +41,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.SimpleAttributeResolver;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Test;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -50,7 +51,7 @@ import com.google.common.collect.Lists;
  */
 public class DefaultReferenceDescriptionTest extends AbstractXtextTests {
 	
-	public void testgetReferenceDescriptions() throws Exception {
+	@Test public void testgetReferenceDescriptions() throws Exception {
 		with(new LangATestLanguageStandaloneSetup());
 		XtextResource targetResource = getResource("type C", "bar.langatestlanguage");
 		EObject typeC = targetResource.getContents().get(0).eContents().get(0);
@@ -69,7 +70,7 @@ public class DefaultReferenceDescriptionTest extends AbstractXtextTests {
 		assertEquals(LangATestLanguagePackage.Literals.TYPE__EXTENDS,refDesc.getEReference());
 	}
 	
-	public void testgetReferenceDescriptionForMultiValue() throws Exception {
+	@Test public void testgetReferenceDescriptionForMultiValue() throws Exception {
 		with(new LangATestLanguageStandaloneSetup());
 		XtextResource targetResource = getResource("type C type D", "bar.langatestlanguage");
 		EObject typeC = targetResource.getContents().get(0).eContents().get(0);
@@ -95,7 +96,7 @@ public class DefaultReferenceDescriptionTest extends AbstractXtextTests {
 		assertEquals(LangATestLanguagePackage.Literals.TYPE__IMPLEMENTS,refDesc2.getEReference());
 	}
 	
-	public void testSpecialReferences() {
+	@Test public void testSpecialReferences() {
 		EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
 		ePackage.setName("test");
 		ePackage.setNsPrefix("test");
@@ -164,7 +165,7 @@ public class DefaultReferenceDescriptionTest extends AbstractXtextTests {
 		assertEquals(EcoreUtil.getURI(object), referenceDescription.getContainerEObjectURI());
 	}
 	
-	public void testCrossResourceContainment() {
+	@Test public void testCrossResourceContainment() {
 		EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
 		ePackage.setName("test");
 		ePackage.setNsPrefix("test");
@@ -229,7 +230,7 @@ public class DefaultReferenceDescriptionTest extends AbstractXtextTests {
 	}
 	
 	/** @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=330812 */
-	public void testLazyLinkingProxyReferences() {
+	@Test public void testLazyLinkingProxyReferences() {
 		URI resourceUri = URI.createPlatformResourceURI("test.ecore", true);
 		LazyURIEncoder lazyURIEncoder = new LazyURIEncoder();
 

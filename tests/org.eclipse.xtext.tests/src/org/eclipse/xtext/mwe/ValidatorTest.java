@@ -11,6 +11,7 @@ import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.issues.MWEDiagnostic;
 import org.eclipse.xtext.index.IndexTestLanguageStandaloneSetup;
+import org.junit.Test;
 
 /**
  * @author Michael Clay - Initial contribution and API
@@ -35,7 +36,7 @@ public class ValidatorTest extends AbstractReaderTest {
 	/**
 	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=322645
 	 */
-	public void testBugFix322645() throws Exception {
+	@Test public void testBugFix322645() throws Exception {
 		Reader reader = getReader();
 		reader.addPath(pathTo("nonemptyFolder"));
 		reader.addRegister(new IndexTestLanguageStandaloneSetup());

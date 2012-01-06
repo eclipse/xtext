@@ -12,15 +12,15 @@ import java.util.Collections;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.xtext.ecoreInference.EClassifierInfo.EClassInfo;
-
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class EClassInfoTest extends TestCase {
+public class EClassInfoTest extends Assert {
 
-	public void testContainsCompatibleFeature_01() throws Exception {
+	@Test public void testContainsCompatibleFeature_01() throws Exception {
 		EcorePackage pack = EcorePackage.eINSTANCE;
 		EClass eClass = pack.getEClass();
 		EClassInfo objectUnderTest = new EClassifierInfo.EClassInfo(eClass, false, Collections.<String>emptySet(), null);
@@ -37,7 +37,7 @@ public class EClassInfoTest extends TestCase {
 		assertEquals(false,objectUnderTest.containsCompatibleFeature("eStructuralFeatures", true, true, pack.getEAnnotation(), new StringBuilder()));
 	}
 	
-	public void testContainsCompatibleFeature_02() throws Exception {
+	@Test public void testContainsCompatibleFeature_02() throws Exception {
 		EcorePackage pack = EcorePackage.eINSTANCE;
 		EClass attribute = pack.getEAttribute();
 		EClassInfo objectUnderTest = new EClassifierInfo.EClassInfo(attribute, false, Collections.<String>emptySet(), null);

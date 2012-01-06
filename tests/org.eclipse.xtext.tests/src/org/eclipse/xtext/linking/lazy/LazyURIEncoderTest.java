@@ -15,16 +15,18 @@ import org.eclipse.xtext.nodemodel.impl.AbstractNode;
 import org.eclipse.xtext.nodemodel.impl.CompositeNode;
 import org.eclipse.xtext.nodemodel.impl.LeafNode;
 import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
-
-import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  *
  */
-public class LazyURIEncoderTest extends TestCase {
+public class LazyURIEncoderTest extends Assert {
 	
-	public void testNodePath() throws Exception {
+	@Test public void testNodePath() throws Exception {
 		NodeModelBuilder builder = new NodeModelBuilder();
 		ICompositeNode n = new CompositeNode();
 		ICompositeNode n1 = new CompositeNode();
@@ -45,16 +47,14 @@ public class LazyURIEncoderTest extends TestCase {
 	
 	private LazyURIEncoder encoder;
 	
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		encoder = new LazyURIEncoder();
 	}
 	
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		encoder = null;
-		super.tearDown();
 	}
 	
 	private INode find(INode parent, INode toFind) {

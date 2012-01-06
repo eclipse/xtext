@@ -10,12 +10,14 @@ package org.eclipse.xtext.util;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class LineFilterOutputStreamTest extends TestCase {
+public class LineFilterOutputStreamTest extends Assert {
 
 	private ByteArrayOutputStream result;
 
@@ -23,9 +25,8 @@ public class LineFilterOutputStreamTest extends TestCase {
 
 	private String input;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		result = new ByteArrayOutputStream(500);
 		filterStream = new LineFilterOutputStream(result, " * $Id" + "$");
 		input = "/**\n" +
@@ -37,7 +38,7 @@ public class LineFilterOutputStreamTest extends TestCase {
 				"package foo";
 	}
 
-	public void testWrite_01() throws IOException {
+	@Test public void testWrite_01() throws IOException {
 		filterStream.write(input.getBytes());
 		filterStream.flush();
 		String res = new String(result.toByteArray());
@@ -51,7 +52,7 @@ public class LineFilterOutputStreamTest extends TestCase {
 		assertEquals(expected, res);
 	}
 
-	public void testWrite_02() throws IOException {
+	@Test public void testWrite_02() throws IOException {
 		filterStream.write((" * $Id" + "$").getBytes());
 		filterStream.flush();
 		String res = new String(result.toByteArray());
@@ -59,7 +60,7 @@ public class LineFilterOutputStreamTest extends TestCase {
 		assertEquals(expected, res);
 	}
 
-	public void testWrite_03() throws IOException {
+	@Test public void testWrite_03() throws IOException {
 		filterStream.write(("\n * $Id" + "$").getBytes());
 		filterStream.flush();
 		String res = new String(result.toByteArray());
@@ -67,7 +68,7 @@ public class LineFilterOutputStreamTest extends TestCase {
 		assertEquals(expected, res);
 	}
 
-	public void testWrite_04() throws IOException {
+	@Test public void testWrite_04() throws IOException {
 		filterStream.write((" * $Id" + "$\n").getBytes());
 		filterStream.flush();
 		String res = new String(result.toByteArray());
@@ -75,7 +76,7 @@ public class LineFilterOutputStreamTest extends TestCase {
 		assertEquals(expected, res);
 	}
 
-	public void testWrite_05() throws IOException {
+	@Test public void testWrite_05() throws IOException {
 		filterStream.write(("*\n * $Id" + "$").getBytes());
 		filterStream.flush();
 		String res = new String(result.toByteArray());
@@ -83,7 +84,7 @@ public class LineFilterOutputStreamTest extends TestCase {
 		assertEquals(expected, res);
 	}
 
-	public void testWrite_06() throws IOException {
+	@Test public void testWrite_06() throws IOException {
 		filterStream.write((" * $Id" + "$\n *").getBytes());
 		filterStream.flush();
 		String res = new String(result.toByteArray());
@@ -91,7 +92,7 @@ public class LineFilterOutputStreamTest extends TestCase {
 		assertEquals(expected, res);
 	}
 
-	public void testWrite_07() throws IOException {
+	@Test public void testWrite_07() throws IOException {
 		filterStream.write((" * $Id" + "$\n *\n").getBytes());
 		filterStream.flush();
 		String res = new String(result.toByteArray());
@@ -99,7 +100,7 @@ public class LineFilterOutputStreamTest extends TestCase {
 		assertEquals(expected, res);
 	}
 
-	public void testWrite_08() throws IOException {
+	@Test public void testWrite_08() throws IOException {
 		filterStream.write((" * $Id" + "$\n */").getBytes());
 		filterStream.flush();
 		String res = new String(result.toByteArray());

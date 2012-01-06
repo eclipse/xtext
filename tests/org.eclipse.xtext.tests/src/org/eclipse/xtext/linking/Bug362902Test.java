@@ -9,10 +9,11 @@ package org.eclipse.xtext.linking;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.bug362902.Model;
 import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
 import org.eclipse.xtext.resource.XtextSyntaxDiagnostic;
+import org.junit.Test;
 
 /**
  * @author Holger Schill - Initial contribution and API
@@ -20,12 +21,12 @@ import org.eclipse.xtext.resource.XtextSyntaxDiagnostic;
 public class Bug362902Test extends AbstractXtextTests {
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(Bug362902StandaloneSetup.class);
 	}
 	
-	public void testNoExceptionUncaught() throws Exception {
+	@Test public void testNoExceptionUncaught() throws Exception {
 		String modelAsString = "Hello max ! Hello peter! favourite peter";
 		Model model = (Model)getModelAndExpect(modelAsString, 2);
 		EList<Diagnostic> errors = model.eResource().getErrors();

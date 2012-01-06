@@ -7,8 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.terminalrules;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -22,42 +23,42 @@ public class Bug292245Test extends AbstractXtextTests {
 	}
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(Bug292245TestLanguageStandaloneSetup.class);
 	}
 	
-	public void testBug292245_01() throws Exception {
+	@Test public void testBug292245_01() throws Exception {
 		getModel("TICK '");
 	}
 	
-	public void testBug292245_02() throws Exception {
+	@Test public void testBug292245_02() throws Exception {
 		getModel("FIX 'X'");
 	}
 	
-	public void testBug292245_03() throws Exception {
+	@Test public void testBug292245_03() throws Exception {
 		getModel("ERROR 'X'");
 	}
 	
-	public void testBug292245_04() throws Exception {
+	@Test public void testBug292245_04() throws Exception {
 		getModel("TICK ' ");
 	}
 	
-	public void testBug292245_05() throws Exception {
+	@Test public void testBug292245_05() throws Exception {
 		getModel("FIX 'X' ");
 	}
 	
-	public void testBug292245_06() throws Exception {
+	@Test public void testBug292245_06() throws Exception {
 		getModel("ERROR 'X' ");
 	}
 	
-	public void testBug292245_07() throws Exception {
+	@Test public void testBug292245_07() throws Exception {
 		getModel("TICK '\n" +
 				"FIX 'X'\n" +
 				"ERROR 'X'");
 	}
 	
-	public void testBug292245_08() throws Exception {
+	@Test public void testBug292245_08() throws Exception {
 		getModel("TICK ' \n" +
 				"FIX 'X' \n" +
 				"ERROR 'X' ");

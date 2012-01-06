@@ -19,11 +19,12 @@ import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.ImportUriTestLanguageStandaloneSetup;
 import org.eclipse.xtext.linking.importedURI.Type;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.junit.Test;
 
 import com.google.inject.Binder;
 import com.google.inject.Guice;
@@ -60,7 +61,7 @@ public class UriBasedReaderTest extends AbstractXtextTests {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void testTransitiveReferences() throws Exception {
+	@Test public void testTransitiveReferences() throws Exception {
 		UriBasedReader reader = new UriBasedReader();
 		reader.addRegister(new ImportUriTestLanguageStandaloneSetup());
 		reader.addUri("file:" + pathTo("importUriSubfolder/Start.importuritestlanguage"));
@@ -92,7 +93,7 @@ public class UriBasedReaderTest extends AbstractXtextTests {
 		}
 	}
 
-	public void testSimple() throws Exception {
+	@Test public void testSimple() throws Exception {
 		UriBasedReader reader = new UriBasedReader() {
 			{
 				getValidator().setStopOnError(false);
@@ -115,7 +116,7 @@ public class UriBasedReaderTest extends AbstractXtextTests {
 		assertEquals(issues.toString(), 1, issues.getErrors().length);
 	}
 
-	public void testMissingRegistration() throws Exception {
+	@Test public void testMissingRegistration() throws Exception {
 		with(new XtextErrorStandaloneSetup());
 		UriBasedReader reader = new UriBasedReader();
 		reader.setClasspathURIContext(getClass());
@@ -126,7 +127,7 @@ public class UriBasedReaderTest extends AbstractXtextTests {
 		assertTrue(issues.hasErrors());
 	}
 
-	public void testMissingUri() throws Exception {
+	@Test public void testMissingUri() throws Exception {
 		UriBasedReader reader = new UriBasedReader();
 		reader.setClasspathURIContext(getClass());
 		reader.addRegister(new XtextStandaloneSetup());
@@ -136,7 +137,7 @@ public class UriBasedReaderTest extends AbstractXtextTests {
 		assertTrue(issues.hasErrors());
 	}
 
-	public void testIssuesInOtherResource() throws Exception {
+	@Test public void testIssuesInOtherResource() throws Exception {
 		UriBasedReader reader = new UriBasedReader() {
 			{
 				getValidator().setStopOnError(false);

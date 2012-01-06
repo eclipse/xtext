@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.reconstr;
 
-import junit.framework.TestCase;
-
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
@@ -19,18 +17,20 @@ import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
 import org.eclipse.xtext.parsetree.reconstr.impl.DefaultHiddenTokenHelper;
 import org.eclipse.xtext.parsetree.reconstr.impl.HiddenAndTokenNodeIterator;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenUtil;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class HiddenAndTokenNodeIteratorTest extends TestCase {
+public class HiddenAndTokenNodeIteratorTest extends Assert {
 
 	private static final int NUM_NODES = 10;
 	private INode[] nodes;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		nodes = new INode[NUM_NODES];
 		NodeModelBuilder builder = new NodeModelBuilder();
 		nodes[0] = new CompositeNode();
@@ -79,7 +79,7 @@ public class HiddenAndTokenNodeIteratorTest extends TestCase {
 	}
 
 	
-	public void testIterator() throws Exception {
+	@Test public void testIterator() throws Exception {
 		HiddenAndTokenNodeIterator iterator = new HiddenAndTokenNodeIterator(nodes[0], getTokenUtil());
 		assertTrue(iterator.hasNext());
 		assertEquals(nodes[2], iterator.next());

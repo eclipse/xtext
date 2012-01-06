@@ -8,18 +8,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.services;
 
-import junit.framework.TestCase;
-
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.conversion.impl.INTValueConverter;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class DefaultTerminalConverterTest extends TestCase {
+public class DefaultTerminalConverterTest extends Assert {
 	
-	public void testINT() throws Exception {
+	@Test public void testINT() throws Exception {
 		IValueConverter<Integer> valueConverter = new INTValueConverter();
 		try {
 			valueConverter.toValue("", null);

@@ -15,6 +15,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
+import org.junit.Test;
 
 import com.google.common.collect.Iterators;
 
@@ -47,7 +48,7 @@ public class KeywordInspectorTest extends AbstractXtextInspectorTest {
 			inspector.inspectKeywordHidesTerminalRule(keywords.next());
 	}
 	
-	public void testBug285146_01() throws Exception {
+	@Test public void testBug285146_01() throws Exception {
 		String grammarAsString = "grammar org.xtext.example.MyDsl7 with org.eclipse.xtext.common.Terminals\n" + 
 				"generate myDsl \"http://www.xtext.org/example/MyDsl\"\n" + 
 				"Type : 'type' '#' name=ID;\n" + 
@@ -58,7 +59,7 @@ public class KeywordInspectorTest extends AbstractXtextInspectorTest {
 		assertEquals(errors.toString(), 1, errors.size());
 	}
 	
-	public void testBug285146_02() throws Exception {
+	@Test public void testBug285146_02() throws Exception {
 		String grammarAsString = "grammar org.xtext.example.MyDsl7 with org.eclipse.xtext.common.Terminals\n" + 
 				"generate myDsl \"http://www.xtext.org/example/MyDsl\"\n" + 
 				"Type : 'type' '#' name=ID;\n" + 
@@ -69,7 +70,7 @@ public class KeywordInspectorTest extends AbstractXtextInspectorTest {
 		assertEquals(errors.toString(), 0, errors.size());
 	}
 	
-	public void testBug285146_03() throws Exception {
+	@Test public void testBug285146_03() throws Exception {
 		String grammarAsString = "grammar org.xtext.example.MyDsl7 with org.eclipse.xtext.common.Terminals\n" + 
 				"generate myDsl \"http://www.xtext.org/example/MyDsl\"\n" + 
 				"Type : 'type' '#' name=ID;\n" + 
@@ -80,7 +81,7 @@ public class KeywordInspectorTest extends AbstractXtextInspectorTest {
 		assertEquals(errors.toString(), 1, errors.size());
 	}
 	
-	public void testBug285146_04() throws Exception {
+	@Test public void testBug285146_04() throws Exception {
 		String grammarAsString = "grammar org.xtext.example.MyDsl7 with org.eclipse.xtext.common.Terminals\n" + 
 				"generate myDsl \"http://www.xtext.org/example/MyDsl\"\n" + 
 				"Type : 'type' '#' name=ID;\n" + 
@@ -91,7 +92,7 @@ public class KeywordInspectorTest extends AbstractXtextInspectorTest {
 		assertEquals(errors.toString(), 0, errors.size());
 	}
 	
-	public void testIgnoreTerminalRules() throws Exception {
+	@Test public void testIgnoreTerminalRules() throws Exception {
 		String grammarAsString = "grammar org.xtext.example.MyDsl7 with org.eclipse.xtext.common.Terminals\n" + 
 				"generate myDsl \"http://www.xtext.org/example/MyDsl\"\n" + 
 				"Type : 'type' '#' name=ID;\n" + 

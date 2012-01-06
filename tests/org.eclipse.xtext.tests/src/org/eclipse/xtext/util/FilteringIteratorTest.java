@@ -12,7 +12,9 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.List;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterators;
@@ -20,15 +22,14 @@ import com.google.common.collect.Iterators;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class FilteringIteratorTest extends TestCase implements Predicate<String> {
+public class FilteringIteratorTest extends Assert implements Predicate<String> {
 
 	private String matchMe;
 
 	private List<String> list;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		matchMe = "matchMe";
 		list = new ArrayList<String>();
 	}
@@ -37,12 +38,12 @@ public class FilteringIteratorTest extends TestCase implements Predicate<String>
 		return param.equals(matchMe);
 	}
 
-	public void testEmptyList() {
+	@Test public void testEmptyList() {
 		Iterator<String> iter = Iterators.filter(list.iterator(), this);
 		assertFalse(iter.hasNext());
 	}
 
-	public void testConcurrentModificationException() {
+	@Test public void testConcurrentModificationException() {
 		Iterator<String> iter = Iterators.filter(list.iterator(), this);
 		list.add("null");
 		try {
@@ -52,7 +53,7 @@ public class FilteringIteratorTest extends TestCase implements Predicate<String>
 		}
 	}
 
-	public void testRemove() {
+	@Test public void testRemove() {
 		list.add(matchMe);
 		Iterator<String> iter = Iterators.filter(list.iterator(), this);
 		iter.next();
@@ -63,7 +64,7 @@ public class FilteringIteratorTest extends TestCase implements Predicate<String>
 		}
 	}
 
-	public void testHasNext() {
+	@Test public void testHasNext() {
 		list.add("null");
 		list.add(matchMe);
 		list.add("null");
@@ -74,7 +75,7 @@ public class FilteringIteratorTest extends TestCase implements Predicate<String>
 		assertFalse(iter.hasNext());
 	}
 
-	public void testNext() {
+	@Test public void testNext() {
 		list.add("null");
 		list.add(matchMe);
 		list.add("null");
@@ -87,7 +88,7 @@ public class FilteringIteratorTest extends TestCase implements Predicate<String>
 		assertFalse(iter.hasNext());
 	}
 
-	public void testNextCallsHasNext() {
+	@Test public void testNextCallsHasNext() {
 		list.add("null");
 		list.add(matchMe);
 		list.add("null");
