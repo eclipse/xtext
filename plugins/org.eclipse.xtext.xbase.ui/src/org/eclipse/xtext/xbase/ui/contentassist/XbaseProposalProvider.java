@@ -554,7 +554,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 							casted.setSelectionStart(casted.getReplacementOffset() + proposal.length() - 1);
 							casted.setSelectionLength(0);
 							casted.setAutoInsertable(false);
-							casted.setSimpleLinkedMode(myContentAssistContext.getViewer(), '\t', '\n');
+							casted.setSimpleLinkedMode(myContentAssistContext.getViewer(), '\t', '\n', '\r');
 						}
 					}
 					getPriorityHelper().adjustCrossReferencePriority(result, myContentAssistContext.getPrefix());
