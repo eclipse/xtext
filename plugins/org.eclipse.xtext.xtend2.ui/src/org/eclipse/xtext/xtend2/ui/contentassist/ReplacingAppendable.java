@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.TextUtilities;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
@@ -137,10 +138,10 @@ public class ReplacingAppendable extends StringBuilderBasedAppendable {
 	private XtendFile xtendFile;
 
 	private final WhitespaceHelper whitespaceHelper;
-
+	
 	public ReplacingAppendable(ImportManager importManager, String indentString, IXtextDocument document,
 			XtendFile xtendFile, WhitespaceHelper whitespaceHelper) {
-		super(importManager, indentString);
+		super(importManager, indentString, TextUtilities.getDefaultLineDelimiter(document));
 		this.document = document;
 		this.xtendFile = xtendFile;
 		this.whitespaceHelper = whitespaceHelper;
@@ -159,10 +160,10 @@ public class ReplacingAppendable extends StringBuilderBasedAppendable {
 	public String getCode() {
 		StringBuilder b = new StringBuilder();
 		if (whitespaceHelper.getPrefix() != null)
-			b.append(whitespaceHelper.getPrefix().replace("\n", getIndentationString()));
+			b.append(whitespaceHelper.getPrefix().replace(getLineSeparator(), getIndentationString()));
 		b.append(super.toString());
 		if (whitespaceHelper.getSuffix() != null)
-			b.append(whitespaceHelper.getSuffix().replace("\n", getIndentationString()));
+			b.append(whitespaceHelper.getSuffix().replace(getLineSeparator(), getIndentationString()));
 		return b.toString();
 	}
 
@@ -187,16 +188,16 @@ public class ReplacingAppendable extends StringBuilderBasedAppendable {
 			for (String newImport : newImports) {
 				importSection.append("import ");
 				importSection.append(newImport);
-				importSection.append("\n");
+				importSection.append(getLineSeparator());
 			}
 			int offset;
 			if (xtendFile.getImports().isEmpty()) {
 				offset = NodeModelUtils.findActualNodeFor(xtendFile.getXtendClass()).getOffset();
-				importSection.append("\n");
+				importSection.append(getLineSeparator());
 			} else {
 				ICompositeNode lastImportNode = NodeModelUtils.findActualNodeFor(xtendFile.getImports().get(
 						xtendFile.getImports().size() - 1));
-				importSection.insert(0, "\n");
+				importSection.insert(0, getLineSeparator());
 				importSection.replace(importSection.length() - 1, importSection.length(), "");
 				offset = lastImportNode.getOffset() + lastImportNode.getLength();
 			}
@@ -211,5 +212,5 @@ public class ReplacingAppendable extends StringBuilderBasedAppendable {
 		imports.removeAll(existingImports);
 		return imports;
 	}
-
+	
 }

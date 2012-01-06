@@ -20,6 +20,7 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -35,6 +36,7 @@ import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -61,11 +63,15 @@ public class OrganizeImports {
 	@Inject
 	private Provider<ReferenceAcceptor> referenceAcceptorProvider;
 	
+	@Inject
+	private IWhitespaceInformationProvider whitespaceInformationProvider;
+	
 	public String getOrganizedImportSection(XtextResource state) {
 		ReferenceAcceptor acceptor = intitializeReferenceAcceptor(state);
 		if(acceptor == null)
 			return null;
-		return serializeImports(acceptor);
+		String lineSeparator = whitespaceInformationProvider.getLineSeparatorInformation(state.getURI()).getLineSeparator();
+		return serializeImports(acceptor, lineSeparator);
 	}
 
 	public ReferenceAcceptor intitializeReferenceAcceptor(XtextResource state) {
@@ -78,27 +84,27 @@ public class OrganizeImports {
 		return acceptor;
 	}
 
-	public String serializeImports(ReferenceAcceptor acceptor) {
+	public String serializeImports(ReferenceAcceptor acceptor, String lineSeparator) {
 		StringBuilder importsSection = new StringBuilder();
 		List<String> listofImportedTypeNames = acceptor.getListofImportedTypeNames();
 		if (!listofImportedTypeNames.isEmpty()) {
-			importsSection.append("\n");
+			importsSection.append(lineSeparator);
 			for (String qn : listofImportedTypeNames) {
-				importsSection.append("\nimport ").append(qn);
+				importsSection.append(lineSeparator).append("import ").append(qn);
 			}
 		}
 		final List<String> listofStaticImports = acceptor.getListofStaticImports();
 		if (!listofStaticImports.isEmpty()) {
-			importsSection.append("\n");
+			importsSection.append(lineSeparator);
 			for (String qn : listofStaticImports) {
-				importsSection.append("\nimport static ").append(qn).append(".*");
+				importsSection.append(lineSeparator).append("import static ").append(qn).append(".*");
 			}
 		}
 		final List<String> listofStaticExtensionImports = acceptor.getListofStaticExtensionImports();
 		if (!listofStaticExtensionImports.isEmpty()) {
-			importsSection.append("\n");
+			importsSection.append(lineSeparator);
 			for (String qn : listofStaticExtensionImports) {
-				importsSection.append("\nimport static extension ").append(qn).append(".*");
+				importsSection.append(lineSeparator).append("import static extension ").append(qn).append(".*");
 			}
 		}
 		return importsSection.toString();

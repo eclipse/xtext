@@ -20,21 +20,23 @@ import org.eclipse.jdt.core.IPackageFragment;
 public class XtendClassUtil {
 
 	public static String create(String typeName, IPackageFragment packageFragment, String superClass,
-			@SuppressWarnings("rawtypes") List superInterfaces, IProgressMonitor monitor) throws CoreException {
+			@SuppressWarnings("rawtypes") List superInterfaces, String indentation, String lineSeparator, 
+			IProgressMonitor monitor) throws CoreException {
 		StringBuffer sb = new StringBuffer();
 		if(packageFragment.getElementName() != null && !packageFragment.getElementName().equals("")){
 			sb.append("package ");
 			sb.append(packageFragment.getElementName());
-			sb.append("\n\n");
+			sb.append(lineSeparator);
+			sb.append(lineSeparator);
 		}
 		if(!superClass.equals("java.lang.Object")) {
-			addImport(sb, superClass);
+			addImport(sb, superClass, lineSeparator);
 		}
 		for (Object object : superInterfaces) {
-			addImport(sb, object);
+			addImport(sb, object, lineSeparator);
 		}
 		if(superInterfaces.size() > 0 || !superClass.equals("java.lang.Object")) {
-			sb.append("\n");
+			sb.append(lineSeparator);
 		}
 		sb.append("class ");
 		sb.append(typeName);
@@ -52,7 +54,11 @@ public class XtendClassUtil {
 				sb.append(stripPackage(i.next()));
 			}
 		}
-		sb.append(" {\n\t\n}");
+		sb.append(" {");
+		sb.append(lineSeparator);
+		sb.append(indentation);
+		sb.append(lineSeparator);
+		sb.append("}");
 		return sb.toString();
 	}
 
@@ -60,10 +66,10 @@ public class XtendClassUtil {
 		return superType.toString().replaceAll("^(\\w+\\.)*", "") ;
 	}
 
-	private static void addImport(StringBuffer sb, Object object) {
+	private static void addImport(StringBuffer sb, Object object, String lineSeparator) {
 		sb.append("import ");
 		sb.append(removeGenerics(object));
-		sb.append("\n");
+		sb.append(lineSeparator);
 	}
 
 	private static String removeGenerics(Object object) {

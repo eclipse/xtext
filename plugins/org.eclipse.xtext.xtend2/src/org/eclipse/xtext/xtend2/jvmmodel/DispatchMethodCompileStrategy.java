@@ -54,7 +54,7 @@ public class DispatchMethodCompileStrategy implements Functions.Function1<Import
 	}
 
 	public CharSequence apply(ImportManager importManager) {
-		final StringBuilderBasedAppendable a = new StringBuilderBasedAppendable(importManager);
+		final StringBuilderBasedAppendable a = new StringBuilderBasedAppendable(importManager, "  ", "\n");
 		boolean needsElse = true;
 		int parameterCount = dispatchOperation.getParameters().size();
 		boolean[] allCasesSameType = new boolean[parameterCount];
@@ -113,13 +113,13 @@ public class DispatchMethodCompileStrategy implements Functions.Function1<Import
 				while (iterator.hasNext()) {
 					iterator.next().exec();
 					if (iterator.hasNext()) {
-						a.append("\n && ");
+						a.newLine().append(" && ");
 					}
 				}
 				a.decreaseIndentation().decreaseIndentation();
 				a.append(") {").increaseIndentation();
 			}
-			a.append("\n");
+			a.newLine();
 			final boolean isCurrentVoid = typeReferences.is(operation.getReturnType(), Void.TYPE);
 			final boolean isDispatchVoid = typeReferences.is(dispatchOperation.getReturnType(), Void.TYPE);
 			if (isDispatchVoid) {
@@ -128,20 +128,20 @@ public class DispatchMethodCompileStrategy implements Functions.Function1<Import
 			} else {
 				if (isCurrentVoid) {
 					generateActualDispatchCall(dispatchOperation, operation, a);
-					a.append(";\nreturn null");
+					a.append(";").newLine().append("return null");
 				} else {
 					a.append("return ");
 					generateActualDispatchCall(dispatchOperation, operation, a);
 				}
 				a.append(";");
 			}
-			a.decreaseIndentation().append("\n}");
+			a.decreaseIndentation().newLine().append("}");
 		}
 		if (needsElse) {
 			a.append(" else {").increaseIndentation();
-			a.append("\n");
+			a.newLine();
 			a.increaseIndentation();
-			a.append("throw new IllegalArgumentException(\"Unhandled parameter types: \" +\n");
+			a.append("throw new IllegalArgumentException(\"Unhandled parameter types: \" +").newLine();
 			JvmType jvmType = typeReferences.findDeclaredType("java.util.Arrays", dispatchOperation);
 			a.append(jvmType).append(".<Object>asList(");
 			Iterator<JvmFormalParameter> iterator = dispatchOperation.getParameters().iterator();
@@ -155,7 +155,7 @@ public class DispatchMethodCompileStrategy implements Functions.Function1<Import
 			}
 			a.append(").toString());");
 			a.decreaseIndentation();
-			a.decreaseIndentation().append("\n}");
+			a.decreaseIndentation().newLine().append("}");
 		}
 		return a.toString();
 	}

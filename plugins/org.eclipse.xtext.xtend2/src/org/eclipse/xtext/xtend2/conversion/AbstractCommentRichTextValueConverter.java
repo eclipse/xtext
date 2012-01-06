@@ -19,12 +19,13 @@ public abstract class AbstractCommentRichTextValueConverter extends AbstractRich
 	
 	@Override
 	protected String toEscapedString(String value) {
+		// TODO: Is this the correct line separator? 
 		return super.toEscapedString("\n" + value);
 	}
 	
 	@Override
 	protected String getWithoutLeadingTerminal(String string) {
-		int lineBreak = string.indexOf('\n');
+		int lineBreak = Math.max(string.indexOf('\n'), string.indexOf('\r'));
 		if (lineBreak == -1 || lineBreak == string.length() - 1)
 			return "";
 		return string.substring(lineBreak + 1);
