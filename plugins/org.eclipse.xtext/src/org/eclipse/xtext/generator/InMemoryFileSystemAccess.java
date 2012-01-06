@@ -11,6 +11,8 @@ import static com.google.common.collect.Maps.*;
 
 import java.util.Map;
 
+import org.eclipse.emf.common.util.URI;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.0
@@ -20,7 +22,7 @@ public class InMemoryFileSystemAccess extends AbstractFileSystemAccess {
 	private Map<String, CharSequence> files = newHashMap();
 
 	public void generateFile(String fileName, String outputConfigName, CharSequence contents) {
-		files.put(outputConfigName+fileName, contents);
+		files.put(outputConfigName+fileName, postProcess(fileName, outputConfigName, contents));
 	}
 
 	@Override
@@ -32,4 +34,10 @@ public class InMemoryFileSystemAccess extends AbstractFileSystemAccess {
 		return files;
 	}
 	
+	/**
+	 * @since 2.3
+	 */
+	public URI getURI(String fileName, String outputConfiguration) {
+		return URI.createURI("memory:/" + outputConfiguration + "/" + fileName);
+	}
 }

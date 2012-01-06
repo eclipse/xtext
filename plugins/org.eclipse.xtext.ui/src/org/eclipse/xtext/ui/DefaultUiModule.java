@@ -30,6 +30,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.formatting.IIndentationInformation;
+import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -58,6 +59,7 @@ import org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor;
 import org.eclipse.xtext.ui.editor.formatting.ContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.formatting.PreferenceStoreIndentationInformation;
+import org.eclipse.xtext.ui.editor.formatting.PreferenceStoreWhitespaceInformationProvider;
 import org.eclipse.xtext.ui.editor.hover.DefaultCompositeHover;
 import org.eclipse.xtext.ui.editor.hover.DispatchingEObjectTextHover;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
@@ -132,6 +134,10 @@ public class DefaultUiModule extends AbstractGenericModule {
 
 	public Class<? extends IIndentationInformation> bindIIndentationInformation() {
 		return PreferenceStoreIndentationInformation.class;
+	}
+
+	public Class<? extends IWhitespaceInformationProvider> bindIWhitespaceInformationProvider() {
+		return PreferenceStoreWhitespaceInformationProvider.class;
 	}
 
 	public IPreferenceStore bindIPreferenceStore() {
