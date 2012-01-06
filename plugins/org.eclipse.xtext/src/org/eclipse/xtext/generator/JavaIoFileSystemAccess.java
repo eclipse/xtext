@@ -11,6 +11,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import org.eclipse.emf.common.util.URI;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Jan Koehnlein
@@ -22,7 +24,7 @@ public class JavaIoFileSystemAccess extends AbstractFileSystemAccess {
 		try {
 			createFolder(file.getParentFile());
 			FileWriter writer = new FileWriter(file);
-			writer.append(contents);
+			writer.append(postProcess(fileName, outputConfigName, contents));
 			writer.close();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
@@ -58,4 +60,12 @@ public class JavaIoFileSystemAccess extends AbstractFileSystemAccess {
 	protected String toSystemFileName(String fileName) {
 		return fileName.replace("/", File.separator);
 	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public URI getURI(String fileName, String outputConfiguration) {
+		return URI.createURI(getFile(fileName, outputConfiguration).toURI().toString());
+	}
+
 }

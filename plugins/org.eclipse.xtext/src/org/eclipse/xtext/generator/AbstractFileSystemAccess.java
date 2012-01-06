@@ -11,13 +11,19 @@ import static com.google.common.collect.Maps.*;
 
 import java.util.Map;
 
+import org.eclipse.emf.common.util.URI;
+
 import com.google.common.base.Function;
+import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public abstract class AbstractFileSystemAccess implements IFileSystemAccess, IFileSystemAccessExtension {
+public abstract class AbstractFileSystemAccess implements IFileSystemAccess, IFileSystemAccessExtension, IFileSystemAccessExtension2 {
 
+	@Inject(optional=true)
+	private IFilePostProcessor postProcessor;
+	
 	private Map<String, OutputConfiguration> outputs = newLinkedHashMap();
 	
 	/**
@@ -82,4 +88,20 @@ public abstract class AbstractFileSystemAccess implements IFileSystemAccess, IFi
 		throw new UnsupportedOperationException();
 	}
 
+	/**
+	 * @since 2.3
+	 */
+	protected CharSequence postProcess(String fileName, String outputConfiguration, CharSequence content) {
+		if(postProcessor != null) 
+			return postProcessor.postProcess(getURI(fileName, outputConfiguration), content);
+		else
+			return content;
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public URI getURI(String fileName) {
+		return getURI(fileName, DEFAULT_OUTPUT);
+	}
 }
