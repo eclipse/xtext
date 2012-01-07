@@ -33,8 +33,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.ContentAssistCus
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.ContentAssistCustomizingTestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.ContentAssistCustomizingTestLanguageProposalProvider;
 import org.eclipse.xtext.util.Modules2;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import com.google.common.collect.Sets;
