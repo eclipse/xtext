@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.refactoring;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.CompositeChange;
@@ -16,27 +14,29 @@ import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.xtext.ui.refactoring.impl.RefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.tests.refactoring.MockRefactoringDocument.MockChange;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("restriction")
-public class UpdateAcceptorTest extends TestCase {
+public class UpdateAcceptorTest extends Assert {
 
 	private static final String CHANGE_NAME = "My change";
 	private RefactoringUpdateAcceptor updateAcceptor;
 	private URI resourceURI0;
 	private URI resourceURI1;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		updateAcceptor = new RefactoringUpdateAcceptor(new MockRefactoringDocument.Provider());
 		resourceURI0 = URI.createURI("resource0");
 		resourceURI1 = URI.createURI("resource1");
 	}
 
-	public void testAddTextEdit() throws Exception {
+	@Test public void testAddTextEdit() throws Exception {
 
 		updateAcceptor.accept(resourceURI0, new ReplaceEdit(0, 1, "foo"));
 		updateAcceptor.accept(resourceURI1, new ReplaceEdit(1, 2, "bar"));

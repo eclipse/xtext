@@ -13,12 +13,13 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
 import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
 import org.eclipse.xtext.ui.editor.outline.impl.IOutlineNodeComparer;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.editor.outline.outlineTest.OutlineTestFactory;
+import org.junit.Test;
 
 import com.google.inject.Injector;
 
@@ -33,7 +34,7 @@ public class OutlineNodeComparerTest extends AbstractXtextTests {
 	private EObject eObject;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		final Injector injector = Activator.getInstance().getInjector("org.eclipse.xtext.ui.tests.editor.outline.OutlineTestLanguage");
 		with(new ISetup() {
@@ -48,14 +49,14 @@ public class OutlineNodeComparerTest extends AbstractXtextTests {
 
 	}
 
-	public void testNull() {
+	@Test public void testNull() {
 		assertTrue(comparer.equals(null, null));
 		EObjectNode node = new EObjectNode(eObject, null, null, "parent", false);
 		assertFalse(comparer.equals(null, node));
 		assertFalse(comparer.equals(node, null));
 	}
 
-	public void testPropertyEquality() {
+	@Test public void testPropertyEquality() {
 		EObjectNode node = new EObjectNode(eObject, null, image, new StyledString("Node"), false);
 		assertFalse(comparer.equals(node, new DocumentRootNode(image, new StyledString("Node"), null, null)));
 		assertTrue(comparer.equals(node, new EObjectNode(OutlineTestFactory.eINSTANCE.createElement(), null, image, new StyledString("Node"), false)));
@@ -66,7 +67,7 @@ public class OutlineNodeComparerTest extends AbstractXtextTests {
 	}
 	
 	@SuppressWarnings("unused")
-	public void testEquivalentIndex() throws Exception {
+	@Test public void testEquivalentIndex() throws Exception {
 		DocumentRootNode rootNode = new DocumentRootNode(image, "Root", null, null);
 		EObjectNode node = new EObjectNode(eObject, rootNode, image, "Node", false);
 

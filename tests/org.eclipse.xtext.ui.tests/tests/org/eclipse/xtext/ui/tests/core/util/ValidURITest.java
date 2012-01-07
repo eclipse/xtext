@@ -7,35 +7,36 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.core.util;
 
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
-import junit.framework.TestCase;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.EcoreUtil2;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class ValidURITest extends TestCase {
+public class ValidURITest extends Assert {
 
 	private static final String FILE_PATH = "/test/test.txt";
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		createFile(FILE_PATH, "foo bar");
 	}
 
-	@Override
-	protected void tearDown() throws Exception {
-		super.tearDown();
+	@After
+	public void tearDown() throws Exception {
 		cleanWorkspace();
 	}
 
-	public void testIsValidURI() {
+	@Test public void testIsValidURI() {
 		// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=326760
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource dummyResource = resourceSet.createResource(URI.createURI("test.foo"));

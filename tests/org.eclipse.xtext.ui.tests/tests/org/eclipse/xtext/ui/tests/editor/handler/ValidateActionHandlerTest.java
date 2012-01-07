@@ -8,17 +8,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.handler;
 
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.ui.handlers.IHandlerService;
+import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
 import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.validation.ValidationJob;
-import org.eclipse.xtext.ui.junit.editor.AbstractEditorTest;
+import org.junit.Test;
 
 /**
  * @author Michael Clay - Initial contribution and API
@@ -30,7 +31,7 @@ public class ValidateActionHandlerTest extends AbstractEditorTest {
 		return "org.eclipse.xtext.ui.tests.TestLanguage";
 	}
 
-	public void testExpensiveMarkerCreation() throws Exception {
+	@Test public void testExpensiveMarkerCreation() throws Exception {
 		IFile iFile = createFile("foo/bar.testlanguage", "stuff foo");
 		XtextEditor xtextEditor = openEditor(iFile);
 		IHandlerService handlerService = (IHandlerService) xtextEditor.getSite().getService(IHandlerService.class);

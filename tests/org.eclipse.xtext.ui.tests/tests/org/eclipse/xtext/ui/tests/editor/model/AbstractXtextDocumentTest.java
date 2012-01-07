@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.model;
 
-import junit.framework.TestCase;
-
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.XtextAntlrTokenFileProvider;
@@ -17,21 +15,14 @@ import org.eclipse.xtext.ui.editor.model.DocumentTokenSource;
 import org.eclipse.xtext.ui.editor.model.PartitionTokenScanner;
 import org.eclipse.xtext.ui.editor.model.TerminalsTokenTypeToPartitionMapper;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
+import org.junit.Assert;
 
 import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public abstract class AbstractXtextDocumentTest extends TestCase {
-
-	public AbstractXtextDocumentTest() {
-		super();
-	}
-
-	public AbstractXtextDocumentTest(String name) {
-		super(name);
-	}
+public abstract class AbstractXtextDocumentTest extends Assert {
 
 	public XtextDocument getDocument(String s) {
 		TerminalsTokenTypeToPartitionMapper mapper = new TerminalsTokenTypeToPartitionMapper() {{

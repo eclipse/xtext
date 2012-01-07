@@ -7,14 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
-import junit.framework.Test;
-
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
+import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug289187TestLanguageUiModule;
 import org.eclipse.xtext.util.Modules2;
+import org.junit.Test;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -35,14 +34,10 @@ public class Bug289187Test extends AbstractContentAssistProcessorTest {
 		};
 	}
 	
-	public void testBug289187_01() throws Exception {
+	@Test public void testBug289187_01() throws Exception {
     	newBuilder().append(
     			"class Foo {\n" + 
     			"   PRIVATE ").assertText("attribute", "operation");
     }
 
-	public static Test suite() {
-		return AbstractContentAssistProcessorTest.suite(Bug289187Test.class);
-	}
-    
 }

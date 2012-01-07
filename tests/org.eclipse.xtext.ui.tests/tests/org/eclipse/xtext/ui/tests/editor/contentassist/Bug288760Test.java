@@ -7,14 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
-import junit.framework.Test;
-
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
+import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug288760TestLanguageUiModule;
 import org.eclipse.xtext.util.Modules2;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -35,34 +35,34 @@ public class Bug288760Test extends AbstractContentAssistProcessorTest {
 		};
 	}
 
-	public void testBug288760_01() throws Exception {
-//		newBuilder().append(
-//				"<workflow>\n" + 
-//				"    <first class=\"java.lang.StringBuffer\" />\n" + 
-//				"    <second class=\"java.lang.StringBuffer\" />\n" + 
-//				"    <third class=\"org.eclipse.xtend.typesystem.emf.XmiReader\" />\n" + 
-//				"</workflow>").assertTextAtCursorPosition("<first", "<workflow");
-//	}
-//	
-//	public void testBug288760_02() throws Exception {
-//		newBuilder().append(
-//				"<workflow>\n" + 
-//				"    <first class=\"java.lang.StringBuffer\" />\n" + 
-//				"    <second class=\"java.lang.StringBuffer\" />\n" + 
-//				"    <third class=\"org.eclipse.xtend.typesystem.emf.XmiReader\" />\n" + 
-//				"</workflow>").assertTextAtCursorPosition("<second", "<workflow");
-//	}
-//	
-//	public void testBug288760_03() throws Exception {
-//		newBuilder().append(
-//				"<workflow>\n" + 
-//				"    <first class=\"java.lang.StringBuffer\" />\n" + 
-//				"    <second class=\"java.lang.StringBuffer\" />\n" + 
-//				"    <third class=\"org.eclipse.xtend.typesystem.emf.XmiReader\" />\n" + 
-//				"</workflow>").assertTextAtCursorPosition("<third", "<workflow");
+	@Ignore
+	@Test public void testBug288760_01() throws Exception {
+		newBuilder().append(
+				"<workflow>\n" + 
+				"    <first class=\"java.lang.StringBuffer\" />\n" + 
+				"    <second class=\"java.lang.StringBuffer\" />\n" + 
+				"    <third class=\"org.eclipse.xtend.typesystem.emf.XmiReader\" />\n" + 
+				"</workflow>").assertTextAtCursorPosition("<first", "<workflow");
+	}
+	
+	@Ignore
+	@Test public void testBug288760_02() throws Exception {
+		newBuilder().append(
+				"<workflow>\n" + 
+				"    <first class=\"java.lang.StringBuffer\" />\n" + 
+				"    <second class=\"java.lang.StringBuffer\" />\n" + 
+				"    <third class=\"org.eclipse.xtend.typesystem.emf.XmiReader\" />\n" + 
+				"</workflow>").assertTextAtCursorPosition("<second", "<workflow");
+	}
+	
+	@Ignore
+	@Test public void testBug288760_03() throws Exception {
+		newBuilder().append(
+				"<workflow>\n" + 
+				"    <first class=\"java.lang.StringBuffer\" />\n" + 
+				"    <second class=\"java.lang.StringBuffer\" />\n" + 
+				"    <third class=\"org.eclipse.xtend.typesystem.emf.XmiReader\" />\n" + 
+				"</workflow>").assertTextAtCursorPosition("<third", "<workflow");
 	}
 
-	public static Test suite() {
-		return AbstractContentAssistProcessorTest.suite(Bug288760Test.class);
-	}
 }

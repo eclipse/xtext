@@ -14,6 +14,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.DocumentTokenSource;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.junit.Test;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Provider;
@@ -23,7 +24,7 @@ import com.google.inject.Provider;
  */
 public class DocumentLockerTest extends AbstractXtextDocumentTest {
 	
-	public void testNoUpdateContentProcessOnReentrant() throws Exception {
+	@Test public void testNoUpdateContentProcessOnReentrant() throws Exception {
 		final List<String> s = Lists.newArrayList();
 		DocumentTokenSource tokenSource = new DocumentTokenSource();
 		tokenSource.setLexer(new Provider<Lexer>() {

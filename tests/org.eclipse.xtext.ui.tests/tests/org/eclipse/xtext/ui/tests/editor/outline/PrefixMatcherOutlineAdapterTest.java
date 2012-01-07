@@ -11,6 +11,7 @@ import org.eclipse.xtext.ui.editor.contentassist.FQNPrefixMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.outline.quickoutline.PrefixMatcherOutlineAdapter;
 import org.eclipse.xtext.ui.editor.outline.quickoutline.StringMatcher;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -25,35 +26,35 @@ public class PrefixMatcherOutlineAdapterTest extends StringMatcherTest {
 		return new PrefixMatcherOutlineAdapter(pattern, fqnPrefixMatcher);
 	}
 	
-	public void testFQN() {
+	@Test public void testFQN() {
 		StringMatcher matcher = createStringMatcher("j.u.ArrayList");
 		assertTrue(matcher.match("java.util.ArrayList"));
 		assertTrue(matcher.match("java.util.concurrent.ArrayList"));
 		assertFalse(matcher.match("java.util.concurrent.BlockingArrayList"));
 	}
 	
-	public void testFQNWildcard() {
+	@Test public void testFQNWildcard() {
 		StringMatcher matcher = createStringMatcher("j.u.*ArrayList");
 		assertTrue(matcher.match("java.util.ArrayList"));
 		assertTrue(matcher.match("java.util.concurrent.ArrayList"));
 		assertTrue(matcher.match("java.util.concurrent.BlockingArrayList"));
 	}
 	
-	public void testCamelCase() {
+	@Test public void testCamelCase() {
 		StringMatcher matcher = createStringMatcher("ArrLis");
 		assertTrue(matcher.match("ArrayList"));
 		assertTrue(matcher.match("java.util.concurrent.ArrayList"));
 		assertFalse(matcher.match("java.util.concurrent.BlockingArrayList"));
 	}
 	
-	public void testMethodSignature() {
+	@Test public void testMethodSignature() {
 		StringMatcher matcher = createStringMatcher("cSM ( Str");
 		assertTrue(matcher.match("createStringMatcher(String)"));
 		assertTrue(matcher.match("createStringMatcher ( String, int)"));
 		assertFalse(matcher.match("createStringMatcher(int, String)"));
 	}
 	
-	public void testMethodSignature_02() {
+	@Test public void testMethodSignature_02() {
 		StringMatcher matcher = createStringMatcher("cSM ( Str, ArrL");
 		assertTrue(matcher.match("createStringMatcher(String, java.util.ArrayList)"));
 		assertTrue(matcher.match("createStringMatcher ( String, ArrayList)"));
@@ -61,7 +62,7 @@ public class PrefixMatcherOutlineAdapterTest extends StringMatcherTest {
 		assertFalse(matcher.match("createStringMatcher(ArrayList, String)"));
 	}
 	
-	public void testMethodSignature_03() {
+	@Test public void testMethodSignature_03() {
 		StringMatcher matcher = createStringMatcher("cSM ( Str,, ArrL");
 		assertFalse(matcher.match("createStringMatcher(String, java.util.ArrayList)"));
 		assertFalse(matcher.match("createStringMatcher ( String, ArrayList)"));
@@ -69,32 +70,32 @@ public class PrefixMatcherOutlineAdapterTest extends StringMatcherTest {
 		assertFalse(matcher.match("createStringMatcher(ArrayList, String)"));
 	}
 	
-	public void testMultiWordLabel_01() {
+	@Test public void testMultiWordLabel_01() {
 		StringMatcher matcher = createStringMatcher("mDs");
 		assertTrue(matcher.match("generate myDsl"));
 	}
 	
-	public void testMultiWordLabel_02() {
+	@Test public void testMultiWordLabel_02() {
 		StringMatcher matcher = createStringMatcher("g MYDs");
 		assertTrue(matcher.match("generate myDsl"));
 	}
 	
-	public void testMultiWordLabel_03() {
+	@Test public void testMultiWordLabel_03() {
 		StringMatcher matcher = createStringMatcher("g ");
 		assertTrue(matcher.match("generate myDsl"));
 	}
 	
-	public void testMultiWordLabelFqn() {
+	@Test public void testMultiWordLabelFqn() {
 		StringMatcher matcher = createStringMatcher("xtext");
 		assertTrue(matcher.match("grammar org.eclipse.xtext.Xtext"));
 	}
 	
-	public void testIgnoredStructuralDelimiterGuard() {
+	@Test public void testIgnoredStructuralDelimiterGuard() {
 		StringMatcher matcher = createStringMatcher("*:StrMat");
 		assertTrue(matcher.match("createStringMatcher(String) : StringMatcher"));
 	}
 	
-	public void testWildcardStarMatching2() {
+	@Test public void testWildcardStarMatching2() {
 		StringMatcher matcher = createStringMatcher("*J");
 		assertTrue(matcher.match("generateJavaDoc"));
 		assertTrue(matcher.match("generateJavaDoc(EObject) : StringConcatenation"));

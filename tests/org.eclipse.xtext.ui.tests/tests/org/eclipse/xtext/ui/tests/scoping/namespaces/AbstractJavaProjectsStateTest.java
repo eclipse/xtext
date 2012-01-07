@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.scoping.namespaces;
 
-import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
 
 import java.util.Collection;
 
@@ -18,11 +18,12 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.containers.AbstractJavaProjectsState;
-import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperImpl;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -38,7 +39,7 @@ public abstract class AbstractJavaProjectsStateTest extends AbstractAllContainer
 	protected IPackageFragmentRoot srcRoot;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		javaProject1 = makeJavaProject(project1);
 		addSourceFolder(javaProject1, "src2");
@@ -61,7 +62,7 @@ public abstract class AbstractJavaProjectsStateTest extends AbstractAllContainer
 	protected abstract AbstractJavaProjectsState createProjectsState(IStorage2UriMapper mapper);
 	
 	@Override
-	public void testRemoveNature() throws CoreException {
+	@Test public void testRemoveNature() throws CoreException {
 		Collection<URI> containedURIs = projectsState.getContainedURIs(srcRoot.getHandleIdentifier());
 		assertEquals(2, containedURIs.size());
 		IResourcesSetupUtil.removeNature(javaProject1.getProject(), XtextProjectHelper.NATURE_ID);
@@ -69,14 +70,14 @@ public abstract class AbstractJavaProjectsStateTest extends AbstractAllContainer
 		assertTrue(containedURIs.isEmpty());
 	}
 	
-	public void testGetContainerHandle_Bug316519_01() {
+	@Test public void testGetContainerHandle_Bug316519_01() {
 		IFile file = getFile(project1, "src/doesNotExist");
 		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
 		String handleIdent = projectsState.getContainerHandle(uri);
 		assertEquals(srcRoot.getHandleIdentifier(), handleIdent);
 	}
 	
-	public void testGetContainerHandle_Bug316519_02() throws CoreException {
+	@Test public void testGetContainerHandle_Bug316519_02() throws CoreException {
 		IFile file = getFile(project1, "src/doesNotExist");
 		IResourcesSetupUtil.removeNature(file.getProject(), XtextProjectHelper.NATURE_ID);
 		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);

@@ -7,12 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.core.resource;
 
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
-import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
 
 import java.util.Iterator;
-
-import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -20,18 +18,20 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.TextFile;
+import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.TextFile;
 import org.eclipse.xtext.ui.resource.JarEntryLocator;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class Storage2UriMapperJdtImplTest extends TestCase {
+public class Storage2UriMapperJdtImplTest extends Assert {
 	
-	public void testResourceInJar() throws Exception {
+	@Test public void testResourceInJar() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		IFile file = project.getProject().getFile("foo.jar");
 		file.create(jarInputStream(new TextFile("foo/bar.txt", "...")), true, monitor());
@@ -52,7 +52,7 @@ public class Storage2UriMapperJdtImplTest extends TestCase {
 		assertEquals(uri, impl.getUri(next.getFirst()));
 	}
 	
-	public void testResourceInExternalFolder() throws Exception {
+	@Test public void testResourceInExternalFolder() throws Exception {
 		IFolder externalFolder = createExternalFolder("externalFolder");
 		IJavaProject project = createJavaProject("foo");
 		IFile file = externalFolder.getFile("someFile.ext");

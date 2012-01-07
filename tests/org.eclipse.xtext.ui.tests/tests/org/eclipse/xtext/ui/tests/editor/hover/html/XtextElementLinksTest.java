@@ -18,15 +18,16 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.hover.html.XtextElementLinks;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.junit.editor.AbstractEditorTest;
-import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.foo.File;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.junit.Test;
 
 /**
  * @author Christoph Kulla - Initial contribution and API
@@ -44,7 +45,7 @@ public class XtextElementLinksTest extends AbstractEditorTest {
 	private File f;
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		modelAsText = "stuff mystuff\nstuff yourstuff";
 		IFile file = IResourcesSetupUtil.createFile("test/test.testlanguage", modelAsText);
@@ -59,30 +60,30 @@ public class XtextElementLinksTest extends AbstractEditorTest {
 	}
 	
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		super.tearDown();
 		editor.close(false);
 	}
 	
-	public void testDefaultScheme () throws Exception {
+	@Test public void testDefaultScheme () throws Exception {
 		String link = elementLinks.createLink (f.getStuff().get(0));
 		assertTrue (isLinkOfType (link, XtextElementLinks.XTEXTDOC_SCHEME));
 		assertEquals (f.getStuff().get(0), getEObject(link));
 	}
 	
-	public void testXTEXTDOC_SCHEME () throws Exception {
+	@Test public void testXTEXTDOC_SCHEME () throws Exception {
 		String link = elementLinks.createLink (XtextElementLinks.XTEXTDOC_SCHEME, f.getStuff().get(0));
 		assertTrue (isLinkOfType (link, XtextElementLinks.XTEXTDOC_SCHEME));
 		assertEquals (f.getStuff().get(0), getEObject(link));
 	}
 	
-	public void testOPEN_LINK_SCHEME () throws Exception {
+	@Test public void testOPEN_LINK_SCHEME () throws Exception {
 		String link = elementLinks.createLink (XtextElementLinks.OPEN_LINK_SCHEME, f.getStuff().get(0));
 		assertTrue (isLinkOfType (link, XtextElementLinks.OPEN_LINK_SCHEME));
 		assertEquals (f.getStuff().get(0), getEObject(link));
 	}
 	
-	public void testXTEXTDOC_VIEW_SCHEME () throws Exception {
+	@Test public void testXTEXTDOC_VIEW_SCHEME () throws Exception {
 		String link = elementLinks.createLink (XtextElementLinks.XTEXTDOC_VIEW_SCHEME ,f.getStuff().get(0));
 		assertTrue (isLinkOfType (link, XtextElementLinks.XTEXTDOC_VIEW_SCHEME));
 		assertEquals (f.getStuff().get(0), getEObject(link));

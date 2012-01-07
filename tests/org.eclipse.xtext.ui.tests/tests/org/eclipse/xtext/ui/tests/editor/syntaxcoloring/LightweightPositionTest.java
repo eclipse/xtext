@@ -9,47 +9,47 @@ package org.eclipse.xtext.ui.tests.editor.syntaxcoloring;
 
 import java.util.Arrays;
 
-import junit.framework.TestCase;
-
 import org.eclipse.xtext.ui.editor.syntaxcoloring.LightweightPosition;
 import org.eclipse.xtext.util.Strings;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class LightweightPositionTest extends TestCase {
+public class LightweightPositionTest extends Assert {
 
-	public void testMerge_01() {
+	@Test public void testMerge_01() {
 		LightweightPosition pos = new LightweightPosition(1, 1, 1, "1", "2");
 		pos.merge(2, "3");
 		checkIds(pos.getIds(), "1", "2", "3");
 	}
 	
-	public void testMerge_02() {
+	@Test public void testMerge_02() {
 		LightweightPosition pos = new LightweightPosition(1, 1, 2, "2", "3");
 		pos.merge(1, "1");
 		checkIds(pos.getIds(), "1", "2", "3");
 	}
 	
-	public void testMerge_03() {
+	@Test public void testMerge_03() {
 		LightweightPosition pos = new LightweightPosition(1, 1, 1, "1", "2");
 		pos.merge(2, "2", "3");
 		checkIds(pos.getIds(), "1", "2", "3");
 	}
 	
-	public void testMerge_04() {
+	@Test public void testMerge_04() {
 		LightweightPosition pos = new LightweightPosition(1, 1, 2, "2", "3");
 		pos.merge(1, "1", "2");
 		checkIds(pos.getIds(), "1", "2", "3");
 	}
 	
-	public void testMerge_05() {
+	@Test public void testMerge_05() {
 		LightweightPosition pos = new LightweightPosition(1, 1, 1, "1", "2");
 		pos.merge(2, "3", "2");
 		checkIds(pos.getIds(), "1", "3", "2");
 	}
 	
-	public void testMerge_06() {
+	@Test public void testMerge_06() {
 		LightweightPosition pos = new LightweightPosition(1, 1, 2, "3", "2");
 		pos.merge(1, "1", "2");
 		checkIds(pos.getIds(), "1", "3", "2");

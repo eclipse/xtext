@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.refactoring;
 
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
@@ -16,7 +16,7 @@ import org.eclipse.ltk.core.refactoring.FileStatusContext;
 import org.eclipse.ltk.core.refactoring.RefactoringStatusEntry;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.ui.refactoring.impl.CrossReferenceSerializerFacade;
@@ -26,6 +26,7 @@ import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.Main;
 import org.eclipse.xtext.ui.tests.refactoring.services.RefactoringTestLanguageGrammarAccess;
 import org.eclipse.xtext.util.TextRegion;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
@@ -51,25 +52,25 @@ public class CrossReferenceSerializerFacadeTest extends AbstractXtextTests {
 	private StatusWrapper status;
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		setInjector(Activator.getInstance().getInjector("org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage"));
 		getInjector().injectMembers(this);
 	}
 	
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		cleanWorkspace();
 		super.tearDown();
 	}
 	
-	public void testOldSerializer() throws Exception {
+	@Test public void testOldSerializer() throws Exception {
 		facade.setSerializer(oldSerializer);
 		assertFalse(facade.useNewSerializer());
 		performTest();
 	}
 
-	public void testNewSerializer() throws Exception {
+	@Test public void testNewSerializer() throws Exception {
 		facade.setSerializer(newSerializer);
 		assertTrue(facade.useNewSerializer());
 		performTest();

@@ -7,15 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
-import junit.framework.Test;
-
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
-import org.eclipse.xtext.ui.junit.editor.contentassist.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
+import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug347012TestLanguageUiModule;
 import org.eclipse.xtext.util.Modules2;
+import org.junit.Test;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -36,27 +35,27 @@ public class Bug347012Test extends AbstractContentAssistProcessorTest {
 		};
 	}
 	
-	public void testEmptyDocument() throws Exception {
+	@Test public void testEmptyDocument() throws Exception {
 		newBuilder().assertText("package");
 	}
 	
-	public void testCurlyAfterPackageName() throws Exception {
+	@Test public void testCurlyAfterPackageName() throws Exception {
 		newBuilder("package a ").assertText("{");
 	}
 	
-	public void testPublicClass() throws Exception {
+	@Test public void testPublicClass() throws Exception {
 		newBuilder("package a { ").assertText("public", "class", "}");
 	}
 	
-	public void testClassName() throws Exception {
+	@Test public void testClassName() throws Exception {
 		newBuilder("package a { public class ").assertText();
 	}
 	
-	public void testCurlyAfterClassName() throws Exception {
+	@Test public void testCurlyAfterClassName() throws Exception {
 		newBuilder("package a { public class Aa ").assertText("{");
 	}
 	
-	public void testInsideClass() throws Exception {
+	@Test public void testInsideClass() throws Exception {
 		// this will kill the production parser
 //		newBuilder("package a { public class Aa { ").assertText("public", "private", "var", "}");
 		newBuilder("package a { public class Aa { }").assertTextAtCursorPosition("}", "public", "private", "var" 
@@ -64,7 +63,7 @@ public class Bug347012Test extends AbstractContentAssistProcessorTest {
 		);
 	}
 	
-	public void testAfterVar() throws Exception {
+	@Test public void testAfterVar() throws Exception {
 		// those will kill the production parser
 //		newBuilder("package a { public class Aa { var ").assertText();
 //		newBuilder("package a { public class Aa { var }").assertTextAtCursorPosition("}");
@@ -72,11 +71,11 @@ public class Bug347012Test extends AbstractContentAssistProcessorTest {
 		newBuilder("package a { public class Aa { var  Name; }").assertTextAtCursorPosition(" Name");
 	}
 	
-	public void testAfterBindingName() throws Exception {
+	@Test public void testAfterBindingName() throws Exception {
 		newBuilder("package a { public class Aa { var Name  ;}").assertTextAtCursorPosition(" ;", ":", "=", ",");
 	}
 	
-	public void testAfterBindingType() throws Exception {
+	@Test public void testAfterBindingType() throws Exception {
 		newBuilder("package a { public class Aa { var name:String  ; }").assertTextAtCursorPosition(" ;", "=", ",");
 	}
 	
@@ -84,8 +83,4 @@ public class Bug347012Test extends AbstractContentAssistProcessorTest {
 		return newBuilder().appendNl(initial);
 	}
 
-	public static Test suite() {
-		return AbstractContentAssistProcessorTest.suite(Bug347012Test.class);
-	}
-	
 }

@@ -11,10 +11,11 @@ import static com.google.common.collect.Iterables.*;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultDependentElementsCalculator;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -31,7 +32,7 @@ public class DependentElementsCalculatorTest extends AbstractXtextTests {
 	private Element elementC;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(RefactoringTestLanguageStandaloneSetup.class);
 		resource = getResourceFromString("A { B { C } } D");
@@ -40,7 +41,7 @@ public class DependentElementsCalculatorTest extends AbstractXtextTests {
 		elementC = elementB.getContained().get(0);
 	}
 
-	public void testContentDependentElements() throws Exception {
+	@Test public void testContentDependentElements() throws Exception {
 		Iterable<URI> dependentElementURIs = get(DefaultDependentElementsCalculator.class)
 				.getDependentElementURIs(elementA, null);
 		assertEquals(2, size(dependentElementURIs));

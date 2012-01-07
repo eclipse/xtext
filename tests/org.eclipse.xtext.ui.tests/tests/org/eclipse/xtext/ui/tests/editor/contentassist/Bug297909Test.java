@@ -10,8 +10,6 @@ package org.eclipse.xtext.ui.tests.editor.contentassist;
 import java.nio.charset.Charset;
 import java.util.Collections;
 
-import junit.framework.Test;
-
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -22,11 +20,11 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.reconciler.XtextDocumentReconcileStrategy;
-import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.testlanguages.ContentAssistTestLanguageRuntimeModule;
@@ -35,6 +33,7 @@ import org.eclipse.xtext.ui.tests.testlanguages.services.ContentAssistTestLangua
 import org.eclipse.xtext.ui.tests.testlanguages.ui.ContentAssistTestLanguageUiModule;
 import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Test;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -63,7 +62,7 @@ public class Bug297909Test extends AbstractContentAssistProcessorTest {
 		};
 	}
 	
-	public void testGrammarAccessCannotResolveEClasses() {
+	@Test public void testGrammarAccessCannotResolveEClasses() {
 		Injector injector = doGetSetup().createInjectorAndDoEMFRegistration();
 		ContentAssistTestLanguageGrammarAccess grammarAccess = injector.getInstance(ContentAssistTestLanguageGrammarAccess.class);
 		AbstractRule firstRule = grammarAccess.getGrammar().getRules().get(0);
@@ -71,7 +70,7 @@ public class Bug297909Test extends AbstractContentAssistProcessorTest {
 		assertTrue(classifier.eIsProxy());
 	}
 
-	public void testExceptionOnContentAssist() throws Exception {
+	@Test public void testExceptionOnContentAssist() throws Exception {
 		try {
 			newBuilder().append("abstract rules firstRule ").assertCount(0);
 			fail("Expected ParseException");
@@ -80,7 +79,7 @@ public class Bug297909Test extends AbstractContentAssistProcessorTest {
 		}
 	}
 	
-	public void testReconcileDocument() throws Exception {
+	@Test public void testReconcileDocument() throws Exception {
 		Injector injector = doGetSetup().createInjectorAndDoEMFRegistration();
 		XtextDocument document = injector.getInstance(XtextDocument.class);
 		document.setValidationJob(new Job("Job") {
@@ -103,7 +102,4 @@ public class Bug297909Test extends AbstractContentAssistProcessorTest {
 		}
 	}
 
-	public static Test suite() {
-		return AbstractContentAssistProcessorTest.suite(Bug297909Test.class);
-	}
 }

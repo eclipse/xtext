@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.refactoring;
 
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.EObject;
@@ -16,14 +16,14 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.ui.texteditor.ITextEditor;
+import org.eclipse.xtext.junit4.ui.AbstractLinkedEditingIntegrationTest;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
+import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.junit.refactoring.AbstractLinkedEditingIntegrationTest;
-import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
-import org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler;
 import org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences;
@@ -31,6 +31,7 @@ import org.eclipse.xtext.ui.refactoring.ui.RefactoringType;
 import org.eclipse.xtext.ui.refactoring.ui.RenameRefactoringController;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -59,7 +60,7 @@ public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest 
 	private XtextEditor barEditor;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		IJavaProject project = JavaProjectSetupUtil.createJavaProject(TEST_PROJECT);
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
@@ -87,21 +88,21 @@ public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest 
 		}
 	}
 
-	public void testBothClean_0() throws Exception {
+	@Test public void testBothClean_0() throws Exception {
 		assertFalse(refactoringPreferences.isSaveAllBeforeRefactoring());
 		renameFooToFooBar(fooEditor);
 		assertFalse(fooEditor.isDirty());
 		assertFalse(barEditor.isDirty());
 	}
 
-	public void testCleanDirty_1() throws Exception {
+	@Test public void testCleanDirty_1() throws Exception {
 		assertFalse(refactoringPreferences.isSaveAllBeforeRefactoring());
 		renameFooToFooBar(barEditor);
 		assertFalse(fooEditor.isDirty());
 		assertFalse(barEditor.isDirty());
 	}
 
-	public void testBothClean_2() throws Exception {
+	@Test public void testBothClean_2() throws Exception {
 		try {
 			refactoringPreferences.setSaveAllBeforeRefactoring(true);
 			renameFooToFooBar(fooEditor);
@@ -112,7 +113,7 @@ public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest 
 		}
 	}
 
-	public void testBothClean_3() throws Exception {
+	@Test public void testBothClean_3() throws Exception {
 		try {
 			refactoringPreferences.setSaveAllBeforeRefactoring(true);
 			renameFooToFooBar(barEditor);
@@ -123,7 +124,7 @@ public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest 
 		}
 	}
 
-	public void testBothDirty_0() throws Exception {
+	@Test public void testBothDirty_0() throws Exception {
 		assertFalse(refactoringPreferences.isSaveAllBeforeRefactoring());
 		smudge(fooEditor, barEditor);
 		renameFooToFooBar(fooEditor);
@@ -131,7 +132,7 @@ public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest 
 		assertTrue(barEditor.isDirty());
 	}
 
-	public void testBothDirty_1() throws Exception {
+	@Test public void testBothDirty_1() throws Exception {
 		assertFalse(refactoringPreferences.isSaveAllBeforeRefactoring());
 		smudge(fooEditor, barEditor);
 		renameFooToFooBar(barEditor);
@@ -139,7 +140,7 @@ public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest 
 		assertTrue(barEditor.isDirty());
 	}
 
-	public void testBothDirty_2() throws Exception {
+	@Test public void testBothDirty_2() throws Exception {
 		try {
 			refactoringPreferences.setSaveAllBeforeRefactoring(true);
 			smudge(fooEditor, barEditor);
@@ -151,7 +152,7 @@ public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest 
 		}
 	}
 
-	public void testBothDirty_3() throws Exception {
+	@Test public void testBothDirty_3() throws Exception {
 		try {
 			refactoringPreferences.setSaveAllBeforeRefactoring(true);
 			smudge(fooEditor, barEditor);
@@ -163,7 +164,7 @@ public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest 
 		}
 	}
 
-	public void testDeclaratorDirty_0() throws Exception {
+	@Test public void testDeclaratorDirty_0() throws Exception {
 		assertFalse(refactoringPreferences.isSaveAllBeforeRefactoring());
 		smudge(fooEditor);
 		renameFooToFooBar(fooEditor);
@@ -171,7 +172,7 @@ public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest 
 		assertFalse(barEditor.isDirty());
 	}
 
-	public void testDeclaratorDirty_1() throws Exception {
+	@Test public void testDeclaratorDirty_1() throws Exception {
 		assertFalse(refactoringPreferences.isSaveAllBeforeRefactoring());
 		smudge(fooEditor);
 		renameFooToFooBar(barEditor);
@@ -179,7 +180,7 @@ public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest 
 		assertFalse(barEditor.isDirty());
 	}
 
-	public void testDeclaratorDirty_2() throws Exception {
+	@Test public void testDeclaratorDirty_2() throws Exception {
 		try {
 			refactoringPreferences.setSaveAllBeforeRefactoring(true);
 			smudge(fooEditor);
@@ -191,7 +192,7 @@ public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest 
 		}
 	}
 
-	public void testDeclaratorDirty_3() throws Exception {
+	@Test public void testDeclaratorDirty_3() throws Exception {
 		try {
 			refactoringPreferences.setSaveAllBeforeRefactoring(true);
 			smudge(fooEditor);
@@ -203,7 +204,7 @@ public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest 
 		}
 	}
 
-	public void testReferrerDirty_0() throws Exception {
+	@Test public void testReferrerDirty_0() throws Exception {
 		assertFalse(refactoringPreferences.isSaveAllBeforeRefactoring());
 		smudge(barEditor);
 		renameFooToFooBar(fooEditor);
@@ -211,7 +212,7 @@ public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest 
 		assertTrue(barEditor.isDirty());
 	}
 
-	public void testReferrerDirty_1() throws Exception {
+	@Test public void testReferrerDirty_1() throws Exception {
 		assertFalse(refactoringPreferences.isSaveAllBeforeRefactoring());
 		smudge(barEditor);
 		renameFooToFooBar(barEditor);
@@ -219,7 +220,7 @@ public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest 
 		assertTrue(barEditor.isDirty());
 	}
 
-	public void testReferrerDirty_2() throws Exception {
+	@Test public void testReferrerDirty_2() throws Exception {
 		try {
 			refactoringPreferences.setSaveAllBeforeRefactoring(true);
 			smudge(barEditor);
@@ -231,7 +232,7 @@ public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest 
 		}
 	}
 
-	public void testReferrerDirty_3() throws Exception {
+	@Test public void testReferrerDirty_3() throws Exception {
 		try {
 			refactoringPreferences.setSaveAllBeforeRefactoring(true);
 			smudge(barEditor);

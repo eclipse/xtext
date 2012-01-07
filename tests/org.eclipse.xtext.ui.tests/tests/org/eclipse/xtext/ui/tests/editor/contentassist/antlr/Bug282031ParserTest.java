@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.Set;
 
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.AbstractContentAssistParser;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
@@ -22,6 +22,7 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.LookAheadContent
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.LookAheadContentAssistTestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.LookAheadContentAssistTestLanguageParser;
 import org.eclipse.xtext.util.Modules2;
+import org.junit.Test;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -37,7 +38,7 @@ public class Bug282031ParserTest extends AbstractXtextTests {
 	protected LookAheadContentAssistTestLanguageGrammarAccess grammarAccess;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(new LookAheadContentAssistTestLanguageStandaloneSetup() {
 			@Override
@@ -52,12 +53,12 @@ public class Bug282031ParserTest extends AbstractXtextTests {
 	}
 
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		grammarAccess = null;
 		super.tearDown();
 	}
 	
-	public void testBug() {
+	@Test public void testBug() {
 		String input ="( value1 ";
 		Set<AbstractElement> expected = Sets.<AbstractElement>newHashSet(
 				grammarAccess.getPairAccess().getEqualsSignKeyword_1(),

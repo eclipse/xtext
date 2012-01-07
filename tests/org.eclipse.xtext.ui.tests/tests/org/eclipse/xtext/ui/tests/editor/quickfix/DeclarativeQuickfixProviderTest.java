@@ -9,8 +9,6 @@ package org.eclipse.xtext.ui.tests.editor.quickfix;
 
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.model.edit.IssueModificationContext;
@@ -19,6 +17,8 @@ import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolution;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.validation.Issue;
+import org.junit.Assert;
+import org.junit.Test;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Provider;
@@ -26,11 +26,11 @@ import com.google.inject.Provider;
 /**
  * @author Knut Wannheden - Initial contribution and API
  */
-public class DeclarativeQuickfixProviderTest extends TestCase {
+public class DeclarativeQuickfixProviderTest extends Assert {
 
 	private static final String DUMMY_CODE = "DeclarativeQuickfixProviderTest.DummyCode";
 
-	public void testHasResolutions() throws Exception {
+	@Test public void testHasResolutions() throws Exception {
 		AbstractDeclarativeQuickfixProvider provider = new AbstractDeclarativeQuickfixProvider() {
 			@Fix(DUMMY_CODE)
 			@SuppressWarnings("unused")
@@ -42,7 +42,7 @@ public class DeclarativeQuickfixProviderTest extends TestCase {
 		assertTrue(provider.hasResolutionFor(DUMMY_CODE));
 	}
 
-	public void testGetResolutions() throws Exception {
+	@Test public void testGetResolutions() throws Exception {
 		AbstractDeclarativeQuickfixProvider provider = new AbstractDeclarativeQuickfixProvider() {
 			@Fix(DUMMY_CODE)
 			@SuppressWarnings("unused")

@@ -14,8 +14,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 
-import junit.framework.Assert;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jface.text.Position;
@@ -26,18 +24,20 @@ import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.text.source.IAnnotationModelListener;
 import org.eclipse.jface.text.source.IAnnotationModelListenerExtension;
 import org.eclipse.jface.viewers.ISelectionProvider;
+import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
+import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.occurrences.IOccurrenceComputer;
 import org.eclipse.xtext.ui.editor.occurrences.MarkOccurrenceActionContributor;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
-import org.eclipse.xtext.ui.junit.editor.AbstractEditorTest;
-import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
-import org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.editor.outline.DisplaySafeSyncer;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
+import org.junit.Assert;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
@@ -63,7 +63,7 @@ public class MarkOccurrencesTest extends AbstractEditorTest {
 	}
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		Activator.getInstance().getInjector(getEditorId()).injectMembers(this);
 		IJavaProject project = JavaProjectSetupUtil.createJavaProject("test");
@@ -72,12 +72,12 @@ public class MarkOccurrencesTest extends AbstractEditorTest {
 	}
 
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		setMarkOccurrences(false);
 		super.tearDown();
 	}
 
-	public void testMarkOccurrences() throws Exception {
+	@Test public void testMarkOccurrences() throws Exception {
 		String model = "Foo { Bar(Foo) {} Baz(Foo Bar) {} }";
 		IFile modelFile = IResourcesSetupUtil.createFile("test/src/Test.outlinetestlanguage", model);
 		XtextEditor editor = openEditor(modelFile);
@@ -108,7 +108,7 @@ public class MarkOccurrencesTest extends AbstractEditorTest {
 		listener.verify(TIMEOUT);
 	}
 	
-	public void testMarkOccurrencesCrossFile() throws Exception {
+	@Test public void testMarkOccurrencesCrossFile() throws Exception {
 		String model1 = "Zonk { Bar(Foo) {} Baz(Foo Bar) {} }";
 		String model2 = "Foo {}";
 		IFile modelFile1 = IResourcesSetupUtil.createFile("test/src/Test1.outlinetestlanguage", model1);

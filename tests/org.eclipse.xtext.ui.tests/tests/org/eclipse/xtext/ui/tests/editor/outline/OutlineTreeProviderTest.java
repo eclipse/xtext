@@ -8,7 +8,7 @@
 package org.eclipse.xtext.ui.tests.editor.outline;
 
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.internal.InternalXtextLexer;
 import org.eclipse.xtext.resource.DefaultLocationInFileProvider;
@@ -23,6 +23,7 @@ import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.junit.Test;
 
 import com.google.inject.Injector;
 import com.google.inject.Provider;
@@ -36,7 +37,7 @@ public class OutlineTreeProviderTest extends AbstractXtextTests {
 	private DefaultOutlineTreeProvider treeProvider;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		final Injector injector = Activator.getInstance().getInjector("org.eclipse.xtext.ui.tests.editor.outline.OutlineTestLanguage");
 		with(new ISetup() {
@@ -48,7 +49,7 @@ public class OutlineTreeProviderTest extends AbstractXtextTests {
 				new DefaultLocationInFileProvider());
 	}
 
-	public void testCreateRoot() throws Exception {
+	@Test public void testCreateRoot() throws Exception {
 		XtextDocument document = createXtextDocument("element {}");
 		IOutlineNode rootNode = treeProvider.createRoot(document);
 		assertTrue(rootNode instanceof DocumentRootNode);
@@ -58,7 +59,7 @@ public class OutlineTreeProviderTest extends AbstractXtextTests {
 		assertEquals(document, ((DocumentRootNode) rootNode).getDocument());
 	}
 	
-	public void testCreateChildren() throws Exception {
+	@Test public void testCreateChildren() throws Exception {
 		final String modelAsText = "element1 { element11 {}} element2 {}";
 		IXtextDocument document = createXtextDocument(modelAsText);
 		final IOutlineNode rootNode = treeProvider.createRoot(document);
@@ -92,7 +93,7 @@ public class OutlineTreeProviderTest extends AbstractXtextTests {
 		});
 	}
 
-	public void testNoNames() throws Exception {
+	@Test public void testNoNames() throws Exception {
 		final DefaultOutlineTreeProvider noNamesTreeProvider = new DefaultOutlineTreeProvider(new DefaultEObjectLabelProvider(),
 				new DefaultLocationInFileProvider()) {
 			@Override

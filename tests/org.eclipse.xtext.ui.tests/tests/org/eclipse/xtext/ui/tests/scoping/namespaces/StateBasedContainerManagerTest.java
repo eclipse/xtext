@@ -13,7 +13,8 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.junit.util.URIBasedTestResourceDescription;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
+import org.eclipse.xtext.junit4.util.URIBasedTestResourceDescription;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -21,9 +22,9 @@ import org.eclipse.xtext.resource.containers.IAllContainersState;
 import org.eclipse.xtext.resource.containers.StateBasedContainerManager;
 import org.eclipse.xtext.ui.containers.WorkspaceProjectsState;
 import org.eclipse.xtext.ui.containers.WorkspaceProjectsStateHelper;
-import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperImpl;
+import org.junit.Test;
 
 import com.google.common.collect.Iterables;
 
@@ -40,7 +41,7 @@ public class StateBasedContainerManagerTest extends AbstractContainerRelatedTest
 	private StateBasedContainerManager containerManager;
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		IResourcesSetupUtil.setReference(project1, project2);
 		uri1 = createFileAndRegisterResource(project1, "file1");
@@ -67,7 +68,7 @@ public class StateBasedContainerManagerTest extends AbstractContainerRelatedTest
 		return projectsState;
 	}
 	
-	public void testGetContainer_01() {
+	@Test public void testGetContainer_01() {
 		IResourceDescription description = new URIBasedTestResourceDescription(uri1);
 		IContainer container = containerManager.getContainer(description, this);
 		assertEquals(2, Iterables.size(container.getResourceDescriptions()));
@@ -76,7 +77,7 @@ public class StateBasedContainerManagerTest extends AbstractContainerRelatedTest
 		assertNull(container.getResourceDescription(uri3));
 	}
 	
-	public void testGetContainer_02() {
+	@Test public void testGetContainer_02() {
 		IFile file = getFile(project1, "doesNotExist");
 		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
 		IResourceDescription description = new URIBasedTestResourceDescription(uri);
@@ -88,7 +89,7 @@ public class StateBasedContainerManagerTest extends AbstractContainerRelatedTest
 		assertNull(container.getResourceDescription(uri3));
 	}
 	
-	public void testGetVisibleContainers_01() {
+	@Test public void testGetVisibleContainers_01() {
 		IResourceDescription description = new URIBasedTestResourceDescription(uri1);
 		List<IContainer> visibleContainers = containerManager.getVisibleContainers(description, this);
 		assertEquals(2, visibleContainers.size());
@@ -99,7 +100,7 @@ public class StateBasedContainerManagerTest extends AbstractContainerRelatedTest
 		assertNotNull(visibleContainers.get(1).getResourceDescription(uri3));
 	}
 	
-	public void testGetVisibleContainers_02() {
+	@Test public void testGetVisibleContainers_02() {
 		IFile file = getFile(project1, "doesNotExist");
 		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
 		IResourceDescription description = new URIBasedTestResourceDescription(uri);

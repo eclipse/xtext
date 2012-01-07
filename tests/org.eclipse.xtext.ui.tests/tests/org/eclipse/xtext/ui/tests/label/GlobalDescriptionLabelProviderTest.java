@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.label;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
@@ -19,22 +17,24 @@ import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.label.GlobalDescriptionLabelProvider;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("restriction")
-public class GlobalDescriptionLabelProviderTest extends TestCase {
+public class GlobalDescriptionLabelProviderTest extends Assert {
 
 	private GlobalDescriptionLabelProvider globalDescriptionLabelProvider;
 	
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		globalDescriptionLabelProvider = new GlobalDescriptionLabelProvider();
 	}
 	
-	public void testReferenceDescription() throws Exception {
+	@Test public void testReferenceDescription() throws Exception {
 		ReferenceDescriptionImpl referenceDescription = (ReferenceDescriptionImpl) BuilderStateFactory.eINSTANCE.createReferenceDescription();
 		referenceDescription.setSourceEObjectUri(URI.createURI("test.referringtestlanguage#/"));
 		referenceDescription.setTargetEObjectUri(URI.createURI("test.referringtestlanguage#/"));
@@ -42,7 +42,7 @@ public class GlobalDescriptionLabelProviderTest extends TestCase {
 		assertNotNull(globalDescriptionLabelProvider.getImage(referenceDescription));
 	}
 	
-	public void testEObjectDescription() throws Exception {
+	@Test public void testEObjectDescription() throws Exception {
 		XtextResourceSet resourceSet = new XtextResourceSet();
 		Resource resource = resourceSet.createResource(URI.createPlatformResourceURI("test/test.ecore", true));
 		EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();

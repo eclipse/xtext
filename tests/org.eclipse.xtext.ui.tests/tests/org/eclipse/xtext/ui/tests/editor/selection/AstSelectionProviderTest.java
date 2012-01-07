@@ -10,12 +10,13 @@ package org.eclipse.xtext.ui.tests.editor.selection;
 import java.util.Stack;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.selection.AstSelectionProvider;
 import org.eclipse.xtext.ui.tests.editor.outline.OutlineTestLanguageStandaloneSetup;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.TextRegion;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -23,12 +24,12 @@ import org.eclipse.xtext.util.TextRegion;
 public class AstSelectionProviderTest extends AbstractXtextTests {
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(new OutlineTestLanguageStandaloneSetup());
 	}
 	
-	public void testSelectEnclosing() throws Exception {
+	@Test public void testSelectEnclosing() throws Exception {
 		String zonk = "zonk{}";
 		String zink = "zink{}";
 		String baz = "baz{"+zonk+zink+"}";
@@ -50,7 +51,7 @@ public class AstSelectionProviderTest extends AbstractXtextTests {
 		assertEquals(ITextRegion.EMPTY_REGION, provider.selectEnclosing(res, selection));
 	}
 	
-	public void testSelectNext() throws Exception {
+	@Test public void testSelectNext() throws Exception {
 		String zonk = "zonk{}";
 		String zink = "zink{}";
 		String baz = "baz{"+zonk+zink+"}";
@@ -78,7 +79,7 @@ public class AstSelectionProviderTest extends AbstractXtextTests {
 		assertEquals(ITextRegion.EMPTY_REGION, provider.selectNext(res, selection));
 	}
 	
-	public void testSelectPrevious() throws Exception {
+	@Test public void testSelectPrevious() throws Exception {
 		String zonk = "zonk{}";
 		String zink = "zink{}";
 		String baz = "baz{"+zonk+zink+"}";
@@ -106,7 +107,7 @@ public class AstSelectionProviderTest extends AbstractXtextTests {
 		assertEquals(ITextRegion.EMPTY_REGION, provider.selectPrevious(res, selection));
 	}
 	
-	public void testSelectComments() throws Exception {
+	@Test public void testSelectComments() throws Exception {
 		String zonk = "/* my coment \n*/\nzonk{}";
 		String zink = "zink{}";
 		String baz = "baz{\n"+zonk+zink+"}";
@@ -134,7 +135,7 @@ public class AstSelectionProviderTest extends AbstractXtextTests {
 		assertEquals(ITextRegion.EMPTY_REGION, provider.selectPrevious(res, selection));
 	}
 	
-	public void testSelectLast() throws Exception {
+	@Test public void testSelectLast() throws Exception {
 		String zonk = "/* my coment \n*/\nzonk{}";
 		String zink = "zink{}";
 		String baz = "baz{\n"+zonk+zink+"}";

@@ -7,20 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.core.resource;
 
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
-import junit.framework.TestCase;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperImpl;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class Storage2UriMapperTest extends TestCase {
+public class Storage2UriMapperTest extends Assert {
 	
-	public void testSimpleFileInProject() throws Exception {
+	@Test public void testSimpleFileInProject() throws Exception {
 		createProject("foo");
 		IFile file = createFile("foo/bar/baz.txt", "");
 		

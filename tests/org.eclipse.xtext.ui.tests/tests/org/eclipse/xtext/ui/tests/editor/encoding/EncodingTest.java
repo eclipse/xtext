@@ -7,17 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.encoding;
 
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.junit.editor.AbstractEditorTest;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -30,12 +31,12 @@ public class EncodingTest extends AbstractEditorTest {
 	}
 
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().closeAllEditors(false);
 		super.tearDown();
 	}
 
-	public void testFileEncodingIsUsedInEMFResource() throws Exception {
+	@Test public void testFileEncodingIsUsedInEMFResource() throws Exception {
 		IFile file = createFile("foo/x_default.encodinguitestlanguage", "");
 		openEditorAndCheckEncoding(file, ResourcesPlugin.getWorkspace().getRoot().getDefaultCharset());
 		file = createFile("foo/x_utf.encodinguitestlanguage", "");
