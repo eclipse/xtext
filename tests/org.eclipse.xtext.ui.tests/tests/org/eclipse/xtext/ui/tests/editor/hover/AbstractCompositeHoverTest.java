@@ -11,17 +11,19 @@
 package org.eclipse.xtext.ui.tests.editor.hover;
 
 import java.util.List;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextHover;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.Region;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.hover.AbstractCompositeHover;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.junit.editor.AbstractEditorTest;
-import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
+import org.junit.Test;
 
 import com.google.common.collect.Lists;
 
@@ -34,7 +36,7 @@ public class AbstractCompositeHoverTest extends AbstractEditorTest {
 	protected IXtextDocument document;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		String modelAsText = "// file content doesn't mater";
 		IFile file = IResourcesSetupUtil.createFile("test/test.testlanguage", modelAsText);
@@ -43,7 +45,7 @@ public class AbstractCompositeHoverTest extends AbstractEditorTest {
 	}
 
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		super.tearDown();
 		editor.close(false);
 	}
@@ -54,7 +56,7 @@ public class AbstractCompositeHoverTest extends AbstractEditorTest {
 	}
 
 	@SuppressWarnings("deprecation")
-	public void testNullHoverList () {
+	@Test public void testNullHoverList () {
 		AbstractCompositeHover hover = new AbstractCompositeHover() {
 
 			@Override
@@ -71,7 +73,7 @@ public class AbstractCompositeHoverTest extends AbstractEditorTest {
 	}
 	
 	@SuppressWarnings("deprecation")
-	public void testEmptyHoverList () {
+	@Test public void testEmptyHoverList () {
 		AbstractCompositeHover hover = new AbstractCompositeHover() {
 
 			@Override
@@ -89,7 +91,7 @@ public class AbstractCompositeHoverTest extends AbstractEditorTest {
 	}
 	
 	@SuppressWarnings("deprecation")
-	public void testSingleHover () {
+	@Test public void testSingleHover () {
 		AbstractCompositeHover hover = new AbstractCompositeHover() {
 
 			@Override
@@ -120,7 +122,7 @@ public class AbstractCompositeHoverTest extends AbstractEditorTest {
 	}
 	
 	@SuppressWarnings("deprecation")
-	public void testMultipleHovers () {
+	@Test public void testMultipleHovers () {
 		final ITextHover hover1 = new ITextHover() {
 			
 			public IRegion getHoverRegion(ITextViewer textViewer, int offset) {

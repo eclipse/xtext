@@ -17,7 +17,7 @@ import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.builder.builderState.BuilderStateFactory;
 import org.eclipse.xtext.builder.builderState.impl.ReferenceDescriptionImpl;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.DescriptionUtils;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -30,6 +30,7 @@ import org.eclipse.xtext.ui.editor.IDirtyResource;
 import org.eclipse.xtext.ui.editor.ValidationJobScheduler;
 import org.eclipse.xtext.ui.editor.model.DocumentTokenSource;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
+import org.junit.Test;
 
 import com.google.common.collect.Lists;
 
@@ -51,7 +52,7 @@ public class ValidationJobSchedulerTest extends AbstractXtextTests implements IR
 	private IResourceDescription targetResource;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		referenceDescriptions = Lists.newArrayList();
 		dirtyStateManager = new DirtyStateManager();
@@ -118,7 +119,7 @@ public class ValidationJobSchedulerTest extends AbstractXtextTests implements IR
 	}
 	
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		targetURI = null;
 		referenceDescriptions = null;
 		dirtyStateManager = null;
@@ -129,14 +130,14 @@ public class ValidationJobSchedulerTest extends AbstractXtextTests implements IR
 		super.tearDown();
 	}
 	
-	public void testNoResourceInDocument() {
+	@Test public void testNoResourceInDocument() {
 		documentURI = null;
 		validationScheduled = false;
 		testMe.scheduleInitialValidation(document);
 		assertFalse(validationScheduled);
 	}
 	
-	public void testNoResourceDescription() {
+	@Test public void testNoResourceDescription() {
 		documentURI = URI.createURI("document");
 		noDocumentDescription = true;
 		validationScheduled = false;
@@ -144,14 +145,14 @@ public class ValidationJobSchedulerTest extends AbstractXtextTests implements IR
 		assertFalse(validationScheduled);
 	}
 	
-	public void testNoOutgoingReferences() {
+	@Test public void testNoOutgoingReferences() {
 		documentURI = URI.createURI("document");
 		validationScheduled = false;
 		testMe.scheduleInitialValidation(document);
 		assertFalse(validationScheduled);
 	}
 	
-	public void testOutgoingReferencesToCleanResource() {
+	@Test public void testOutgoingReferencesToCleanResource() {
 		documentURI = URI.createURI("document");
 		targetURI = URI.createURI("target");
 		ReferenceDescriptionImpl reference = (ReferenceDescriptionImpl) BuilderStateFactory.eINSTANCE.createReferenceDescription();
@@ -163,7 +164,7 @@ public class ValidationJobSchedulerTest extends AbstractXtextTests implements IR
 		assertFalse(validationScheduled);
 	}
 	
-	public void testOutgoingReferencesToDirtyResource() {
+	@Test public void testOutgoingReferencesToDirtyResource() {
 		documentURI = URI.createURI("document");
 		targetURI = URI.createURI("target");
 		ReferenceDescriptionImpl reference = (ReferenceDescriptionImpl) BuilderStateFactory.eINSTANCE.createReferenceDescription();
@@ -176,7 +177,7 @@ public class ValidationJobSchedulerTest extends AbstractXtextTests implements IR
 		assertTrue(validationScheduled);
 	}
 	
-	public void testOutgoingReferencesToAnotherResource() {
+	@Test public void testOutgoingReferencesToAnotherResource() {
 		documentURI = URI.createURI("document");
 		targetURI = URI.createURI("target");
 		ReferenceDescriptionImpl reference = (ReferenceDescriptionImpl) BuilderStateFactory.eINSTANCE.createReferenceDescription();

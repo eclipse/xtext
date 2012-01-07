@@ -9,23 +9,22 @@ package org.eclipse.xtext.ui.tests.editor.contentassist;
 
 import java.util.Set;
 
-import junit.framework.Test;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
+import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor;
-import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
-import org.eclipse.xtext.ui.junit.editor.contentassist.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.CrossReferenceProposalTestPackage;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.CrossReferenceProposalTestLanguageGrammarAccess;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.CrossReferenceProposalTestLanguageUiModule;
 import org.eclipse.xtext.util.Modules2;
+import org.junit.Test;
 
 import com.google.common.collect.Sets;
 import com.google.inject.Guice;
@@ -50,11 +49,11 @@ public class CrossReferenceProposalTest extends AbstractContentAssistProcessorTe
 		};
 	}
 	
-	public void testBug276742_08() throws Exception {
+	@Test public void testBug276742_08() throws Exception {
 		newBuilder().append("Foo {}").assertText("Foo", "Name", "}");
 	}
 
-	public void testBug276742_08b() throws Exception {
+	@Test public void testBug276742_08b() throws Exception {
 		String modelAsString = "Foo {}";
 		ContentAssistProcessorTestBuilder builder = newBuilder();
 		XtextContentAssistProcessor processor = get(XtextContentAssistProcessor.class);
@@ -80,12 +79,12 @@ public class CrossReferenceProposalTest extends AbstractContentAssistProcessorTe
 		}
 	}
 
-	public void testBug276742_09() throws Exception {
+	@Test public void testBug276742_09() throws Exception {
 		newBuilder().append("Foo {}").assertTextAtCursorPosition(0,
 				"Foo", "Name");
 	}
 
-	public void testBug276742_09b() throws Exception {
+	@Test public void testBug276742_09b() throws Exception {
 		String modelAsString = "Foo {}";
 		ContentAssistProcessorTestBuilder builder = newBuilder();
 		XtextContentAssistProcessor processor = get(XtextContentAssistProcessor.class);
@@ -99,11 +98,8 @@ public class CrossReferenceProposalTest extends AbstractContentAssistProcessorTe
 		}
 	}
 
-	public void testBug276742_10() throws Exception {
+	@Test public void testBug276742_10() throws Exception {
 		newBuilder().assertText("Name");
 	}
 
-	public static Test suite() {
-		return AbstractContentAssistProcessorTest.suite(CrossReferenceProposalTest.class);
-	}
 }

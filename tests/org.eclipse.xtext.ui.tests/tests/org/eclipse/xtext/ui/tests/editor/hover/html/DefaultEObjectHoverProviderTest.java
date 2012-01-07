@@ -15,7 +15,7 @@ import org.eclipse.jface.internal.text.html.BrowserInformationControlInput;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.ui.editor.hover.html.DefaultEObjectHoverProvider;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
@@ -24,6 +24,7 @@ import org.eclipse.xtext.ui.tests.foo.File;
 import org.eclipse.xtext.ui.tests.parser.keywords.KeywordsUiTestLanguageStandaloneSetup;
 import org.eclipse.xtext.ui.tests.ui.TestLanguageUiModule;
 import org.eclipse.xtext.util.Modules2;
+import org.junit.Test;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -59,7 +60,7 @@ public class DefaultEObjectHoverProviderTest extends AbstractXtextTests {
 		}
 	}
 	
-	public void testElementHasNoDocumentation () throws Exception {
+	@Test public void testElementHasNoDocumentation () throws Exception {
 		with(getTestLanguageSetup(new IEObjectDocumentationProvider() {			
 			public String getDocumentation(EObject o) {
 				return null;
@@ -74,7 +75,7 @@ public class DefaultEObjectHoverProviderTest extends AbstractXtextTests {
 		return ((BrowserInformationControlInput)cut.getHoverInfo(obj,null,null).getInfo()).getHtml();
 	}
 	
-	public void testElementHasDocumentation () throws Exception {
+	@Test public void testElementHasDocumentation () throws Exception {
 		with(getTestLanguageSetup(new IEObjectDocumentationProvider() {			
 			public String getDocumentation(EObject o) {
 				return "Test";

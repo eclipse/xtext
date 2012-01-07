@@ -8,7 +8,7 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.ui.editor.contentassist.ProposalConflictHelper;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
@@ -16,6 +16,7 @@ import org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguageStandaloneSetup;
 import org.eclipse.xtext.ui.tests.ui.XtextGrammarUiTestLanguageUiModule;
 import org.eclipse.xtext.util.Modules2;
+import org.junit.Test;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -28,7 +29,7 @@ public abstract class AbstractProposalConflictHelperTest extends AbstractXtextTe
 	private ProposalConflictHelper helper;
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(getXtextGrammarTestSetup());
 		helper = createProposalConflictHelper();
@@ -49,96 +50,96 @@ public abstract class AbstractProposalConflictHelperTest extends AbstractXtextTe
 	protected abstract ProposalConflictHelper createProposalConflictHelper();
 
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		helper = null;
 		super.tearDown();
 	}
 	
-	public void testID_ID_01() {
+	@Test public void testID_ID_01() {
 		assertTrue(helper.existsConflict("foo", "bar", null));
 	}
 	
-	public void testID_ID_02() {
+	@Test public void testID_ID_02() {
 		assertTrue(helper.existsConflict("^foo", "bar", null));
 	}
 	
-	public void testID_ID_03() {
+	@Test public void testID_ID_03() {
 		assertFalse(helper.existsConflict("foo", "^bar", null));
 	}
 	
-	public void testID_ID_04() {
+	@Test public void testID_ID_04() {
 		assertFalse(helper.existsConflict("^foo", "^bar", null));
 	}
 	
-	public void testAlphaKeyword_ID_01() {
+	@Test public void testAlphaKeyword_ID_01() {
 		assertTrue(helper.existsConflict("grammar", "foo", null));
 	}
 	
-	public void testAlphaKeyword_ID_02() {
+	@Test public void testAlphaKeyword_ID_02() {
 		assertFalse(helper.existsConflict("grammar", "^foo", null));
 	}
 	
-	public void testID_AlphaKeyword() {
+	@Test public void testID_AlphaKeyword() {
 		assertTrue(helper.existsConflict("foo", "enum", null));
 	}
 	
-	public void testAlphaKeyword_AlphaKeyword() {
+	@Test public void testAlphaKeyword_AlphaKeyword() {
 		assertTrue(helper.existsConflict("enum", "terminal", null));
 	}
 	
-	public void testBraceKeyword_ID() {
+	@Test public void testBraceKeyword_ID() {
 		assertFalse(helper.existsConflict("{", "foo", null));
 	}
 	
-	public void testID_BraceKeyword() {
+	@Test public void testID_BraceKeyword() {
 		assertFalse(helper.existsConflict("foo", "{", null));
 	}
 	
-	public void testBraceKeyword_BraceKeyword() {
+	@Test public void testBraceKeyword_BraceKeyword() {
 		assertFalse(helper.existsConflict("{", "{", null));
 	}
 	
-	public void testSTRING_STRING() {
+	@Test public void testSTRING_STRING() {
 		assertFalse(helper.existsConflict("'String'", "'String'", null));
 	}
 	
-	public void testSTRING_ID() {
+	@Test public void testSTRING_ID() {
 		assertFalse(helper.existsConflict("'String'", "foo", null));
 	}
 	
-	public void testID_STRING() {
+	@Test public void testID_STRING() {
 		assertFalse(helper.existsConflict("foo", "'String'", null));
 	}
 
-	public void testID_INT() {
+	@Test public void testID_INT() {
 		assertTrue(helper.existsConflict("foo", "12", null));
 	}
 
-	public void testINT_ID() {
+	@Test public void testINT_ID() {
 		assertFalse(helper.existsConflict("11", "foo", null));
 	}
 	
-	public void testINT_INT() {
+	@Test public void testINT_INT() {
 		assertTrue(helper.existsConflict("11", "13", null));
 	}
 	
-	public void testID_GrammarID() {
+	@Test public void testID_GrammarID() {
 		assertTrue(helper.existsConflict("foo", "bar.zonk", null));
 	}
 	
-	public void testAlphaKeyword_GrammarID() {
+	@Test public void testAlphaKeyword_GrammarID() {
 		assertTrue(helper.existsConflict("grammar", "bar.zonk", null));
 	}
 	
-	public void testBraceKeyword_GrammarID() {
+	@Test public void testBraceKeyword_GrammarID() {
 		assertFalse(helper.existsConflict("{", "bar.zonk", null));
 	}
 	
-	public void testGrammarID_ID() {
+	@Test public void testGrammarID_ID() {
 		assertTrue(helper.existsConflict("foo.bar", "zonk", null));
 	}
 	
-	public void testGrammarID_GrammarID() {
+	@Test public void testGrammarID_GrammarID() {
 		assertTrue(helper.existsConflict("foo.bar", "zonk.stuff", null));
 	}
 }

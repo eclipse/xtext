@@ -15,12 +15,13 @@ import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.containers.WorkspaceProjectsState;
 import org.eclipse.xtext.ui.containers.WorkspaceProjectsStateHelper;
-import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperImpl;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -34,7 +35,7 @@ public class WorkspaceProjectsStateTest extends AbstractAllContainersStateTests 
 	private WorkspaceProjectsState projectsState;
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		uri1 = createFileAndRegisterResource(project1, "file1");
 		uri2 = createFileAndRegisterResource(project1, "file2");
@@ -53,7 +54,7 @@ public class WorkspaceProjectsStateTest extends AbstractAllContainersStateTests 
 		projectsState.setHelper(helper);
 	}
 
-	public void testGetContainerHandle_01() {
+	@Test public void testGetContainerHandle_01() {
 		String uri1ContainerHandle = projectsState.getContainerHandle(uri1);
 		String uri2ContainerHandle = projectsState.getContainerHandle(uri2);
 		String uri3ContainerHandle = projectsState.getContainerHandle(uri3);
@@ -62,7 +63,7 @@ public class WorkspaceProjectsStateTest extends AbstractAllContainersStateTests 
 		assertEquals(project2.getName(), uri3ContainerHandle);
 	}
 	
-	public void testGetContainerHandle_02() throws CoreException {
+	@Test public void testGetContainerHandle_02() throws CoreException {
 		IResourcesSetupUtil.removeNature(project1, XtextProjectHelper.NATURE_ID);
 		IResourcesSetupUtil.removeNature(project2, XtextProjectHelper.NATURE_ID);
 		String uri1ContainerHandle = projectsState.getContainerHandle(uri1);
@@ -73,14 +74,14 @@ public class WorkspaceProjectsStateTest extends AbstractAllContainersStateTests 
 		assertEquals(project2.getName(), uri3ContainerHandle);
 	}
 	
-	public void testGetContainerHandle_Bug316519_03() {
+	@Test public void testGetContainerHandle_Bug316519_03() {
 		IFile file = getFile(project1, "doesNotExist");
 		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
 		String handleIdent = projectsState.getContainerHandle(uri);
 		assertEquals(project1.getName(), handleIdent);
 	}
 	
-	public void testGetContainerHandle_Bug316519_04() throws CoreException {
+	@Test public void testGetContainerHandle_Bug316519_04() throws CoreException {
 		IFile file = getFile(project1, "doesNotExist");
 		IResourcesSetupUtil.removeNature(file.getProject(), XtextProjectHelper.NATURE_ID);
 		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
@@ -88,14 +89,14 @@ public class WorkspaceProjectsStateTest extends AbstractAllContainersStateTests 
 		assertEquals(project1.getName(), handleIdent);
 	}
 	
-	public void testGetContainedURIs_01() {
+	@Test public void testGetContainedURIs_01() {
 		Collection<URI> containedURIs = projectsState.getContainedURIs(project1.getName());
 		assertEquals(containedURIs.toString(), 2, containedURIs.size());
 		assertTrue(containedURIs.contains(uri1));
 		assertTrue(containedURIs.contains(uri2));
 	}
 	
-	public void testGetContainedURIs_02() throws CoreException, InvocationTargetException, InterruptedException {
+	@Test public void testGetContainedURIs_02() throws CoreException, InvocationTargetException, InterruptedException {
 		Collection<URI> containedURIs = projectsState.getContainedURIs(project1.getName());
 		assertEquals(containedURIs.toString(), 2, containedURIs.size());
 		URI uri = createFileAndRegisterResource(project1, "file3");
@@ -107,7 +108,7 @@ public class WorkspaceProjectsStateTest extends AbstractAllContainersStateTests 
 	}
 	
 	@Override
-	public void testRemoveNature() throws CoreException {
+	@Test public void testRemoveNature() throws CoreException {
 		Collection<URI> containedURIs = projectsState.getContainedURIs(project1.getName());
 		assertEquals(2, containedURIs.size());
 		IResourcesSetupUtil.removeNature(project1, XtextProjectHelper.NATURE_ID);

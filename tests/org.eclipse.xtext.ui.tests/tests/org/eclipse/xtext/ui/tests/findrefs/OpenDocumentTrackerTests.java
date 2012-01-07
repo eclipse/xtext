@@ -12,12 +12,13 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.findrefs.OpenDocumentTracker;
-import org.eclipse.xtext.ui.junit.editor.AbstractEditorTest;
-import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -34,7 +35,7 @@ public class OpenDocumentTrackerTests extends AbstractEditorTest {
 	}
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		tracker = Activator.getInstance().getInjector(getEditorId()).getInstance(OpenDocumentTracker.class);
 		IProject project = IResourcesSetupUtil.createProject("test");
@@ -43,7 +44,7 @@ public class OpenDocumentTrackerTests extends AbstractEditorTest {
 		uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
 	}
 	
-	public void testTracker() throws Exception {
+	@Test public void testTracker() throws Exception {
 		assertNull(tracker.getOpenDocument(uri));
 		XtextEditor editor = openEditor(file);
 		runAsyncJobs();

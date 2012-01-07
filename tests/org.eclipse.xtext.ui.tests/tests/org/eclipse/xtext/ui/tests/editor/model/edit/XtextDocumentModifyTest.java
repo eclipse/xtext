@@ -12,7 +12,7 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.internal.InternalXtextLexer;
 import org.eclipse.xtext.resource.XtextResource;
@@ -22,6 +22,7 @@ import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.ITextEditComposer;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.junit.Test;
 
 import com.google.inject.Provider;
 
@@ -35,12 +36,12 @@ public class XtextDocumentModifyTest extends AbstractXtextTests {
 	private Resource resource;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 	}
 
-	public void testProcess() throws Exception {
+	@Test public void testProcess() throws Exception {
 		String grammar = "grammar foo.Foo " + "generate foo \"foo://foo/42\" " + "Foo: \"foo\" | \"bar\" | \"baz\"; "
 				+ "Bar: foo=Foo;";
 		IXtextDocument document = createDocument(grammar);
@@ -59,7 +60,7 @@ public class XtextDocumentModifyTest extends AbstractXtextTests {
 		assertEquals(grammar.replaceFirst("foo\\.Foo", "foo.Bar"), document.get());
 	}
 
-	public void testCommentsNotDuplicated() throws Exception {
+	@Test public void testCommentsNotDuplicated() throws Exception {
 		String grammar = "grammar foo.Foo\n" 
 			+ "generate foo \"http://foo.net/foo\"\n" 
 			+ "Foo: // comment in Foo \n"

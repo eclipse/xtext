@@ -10,32 +10,32 @@ package org.eclipse.xtext.ui.tests.editor.syntaxcoloring;
 import java.util.Arrays;
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.eclipse.xtext.ui.editor.syntaxcoloring.LightweightPosition;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.MergingHighlightedPositionAcceptor;
 import org.eclipse.xtext.util.Strings;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class MergingHighlightedPositionAcceptorTest extends TestCase {
+public class MergingHighlightedPositionAcceptorTest extends Assert {
 
 	private MergingHighlightedPositionAcceptor acceptor;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		acceptor = new MergingHighlightedPositionAcceptor(null);
 	}
 	
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		acceptor = null;
-		super.tearDown();
 	}
 	
-	public void testAddPosition_01() {
+	@Test public void testAddPosition_01() {
 		acceptor.addPosition(0, 1, "1");
 		List<LightweightPosition> positions = acceptor.getPositions();
 		assertEquals(1, positions.size());
@@ -43,14 +43,14 @@ public class MergingHighlightedPositionAcceptorTest extends TestCase {
 		checkPosition(positions.get(0), -1, -1, -1, "1");
 	}
 	
-	public void testAddPosition_02() {
+	@Test public void testAddPosition_02() {
 		acceptor.addPosition(2, 4, "1", "2");
 		List<LightweightPosition> positions = acceptor.getPositions();
 		assertEquals(1, positions.size());
 		checkPosition(positions.get(0), 2, 4, 0, "1", "2");
 	}
 	
-	public void testAddPosition_03() {
+	@Test public void testAddPosition_03() {
 		acceptor.addPosition(2, 4, "1", "2");
 		acceptor.addPosition(0, 1, "3", "4");
 		List<LightweightPosition> positions = acceptor.getPositions();
@@ -59,7 +59,7 @@ public class MergingHighlightedPositionAcceptorTest extends TestCase {
 		checkPosition(positions.get(1), 0, 1, 1, "3", "4");
 	}
 	
-	public void testMergePositions_01() {
+	@Test public void testMergePositions_01() {
 		acceptor.addPosition(0, 1, "1");
 		acceptor.mergePositions();
 		List<LightweightPosition> positions = acceptor.getPositions();
@@ -67,7 +67,7 @@ public class MergingHighlightedPositionAcceptorTest extends TestCase {
 		checkPosition(positions.get(0), 0, 1, 0, "1");
 	}
 	
-	public void testMergePositions_02() {
+	@Test public void testMergePositions_02() {
 		acceptor.addPosition(2, 4, "1", "2");
 		acceptor.mergePositions();
 		List<LightweightPosition> positions = acceptor.getPositions();
@@ -75,7 +75,7 @@ public class MergingHighlightedPositionAcceptorTest extends TestCase {
 		checkPosition(positions.get(0), 2, 4, 0, "1", "2");
 	}
 	
-	public void testMergePositions_03() {
+	@Test public void testMergePositions_03() {
 		acceptor.addPosition(2, 4, "1", "2");
 		acceptor.addPosition(0, 1, "3", "4");
 		acceptor.mergePositions();
@@ -85,7 +85,7 @@ public class MergingHighlightedPositionAcceptorTest extends TestCase {
 		checkPosition(positions.get(1), 2, 4, 0, "1", "2");
 	}
 	
-	public void testMergePositions_04() {
+	@Test public void testMergePositions_04() {
 		acceptor.addPosition(0, 1, "1");
 		acceptor.addPosition(0, 1, "1");
 		acceptor.mergePositions();
@@ -94,7 +94,7 @@ public class MergingHighlightedPositionAcceptorTest extends TestCase {
 		checkPosition(positions.get(0), 0, 1, 1, "1");
 	}
 	
-	public void testMergePositions_05() {
+	@Test public void testMergePositions_05() {
 		acceptor.addPosition(0, 1, "1");
 		acceptor.addPosition(0, 1, "2");
 		acceptor.mergePositions();
@@ -103,7 +103,7 @@ public class MergingHighlightedPositionAcceptorTest extends TestCase {
 		checkPosition(positions.get(0), 0, 1, 1, "1", "2");
 	}
 	
-	public void testMergePositions_06() {
+	@Test public void testMergePositions_06() {
 		acceptor.addPosition(0, 2, "1");
 		acceptor.addPosition(0, 1, "2");
 		acceptor.mergePositions();
@@ -113,7 +113,7 @@ public class MergingHighlightedPositionAcceptorTest extends TestCase {
 		checkPosition(positions.get(1), 1, 1, 0, "1");
 	}
 	
-	public void testMergePositions_07() {
+	@Test public void testMergePositions_07() {
 		acceptor.addPosition(0, 3, "1");
 		acceptor.addPosition(1, 1, "2");
 		acceptor.mergePositions();
@@ -124,7 +124,7 @@ public class MergingHighlightedPositionAcceptorTest extends TestCase {
 		checkPosition(positions.get(2), 2, 1, 0, "1");
 	}
 	
-	public void testMergePositions_08() {
+	@Test public void testMergePositions_08() {
 		acceptor.addPosition(0, 3, "1");
 		acceptor.addPosition(1, 1, "2");
 		acceptor.addPosition(1, 1, "3");
@@ -136,7 +136,7 @@ public class MergingHighlightedPositionAcceptorTest extends TestCase {
 		checkPosition(positions.get(2), 2, 1, 0, "1");
 	}
 	
-	public void testMergePositions_09() {
+	@Test public void testMergePositions_09() {
 		acceptor.addPosition(0, 3, "1");
 		acceptor.addPosition(1, 1, "2");
 		acceptor.addPosition(1, 2, "3");
@@ -148,7 +148,7 @@ public class MergingHighlightedPositionAcceptorTest extends TestCase {
 		checkPosition(positions.get(2), 2, 1, 2, "1", "3");
 	}
 	
-	public void testMergePositions_10() {
+	@Test public void testMergePositions_10() {
 		acceptor.addPosition(0, 3, "1");
 		acceptor.addPosition(1, 2, "2");
 		acceptor.addPosition(1, 1, "3");
@@ -160,7 +160,7 @@ public class MergingHighlightedPositionAcceptorTest extends TestCase {
 		checkPosition(positions.get(2), 2, 1, 1, "1", "2");
 	}
 	
-	public void testMergePositions_11() {
+	@Test public void testMergePositions_11() {
 		acceptor.addPosition(0, 3, "1");
 		acceptor.addPosition(1, 2, "2");
 		acceptor.addPosition(1, 2, "3");
@@ -171,7 +171,7 @@ public class MergingHighlightedPositionAcceptorTest extends TestCase {
 		checkPosition(positions.get(1), 1, 2, 2, "1", "2", "3");
 	}
 	
-	public void testMergePositions_12() {
+	@Test public void testMergePositions_12() {
 		acceptor.addPosition(0, 3, "1");
 		acceptor.addPosition(1, 3, "2");
 		acceptor.addPosition(1, 1, "3");
@@ -184,7 +184,7 @@ public class MergingHighlightedPositionAcceptorTest extends TestCase {
 		checkPosition(positions.get(3), 3, 1, 1, "2");
 	}
 	
-	public void testMergePositions_13() {
+	@Test public void testMergePositions_13() {
 		acceptor.addPosition(0, 2, "1");
 		acceptor.addPosition(1, 2, "2");
 		acceptor.mergePositions();
@@ -195,7 +195,7 @@ public class MergingHighlightedPositionAcceptorTest extends TestCase {
 		checkPosition(positions.get(2), 2, 1, 1, "2");
 	}
 	
-	public void testMergePositions_14() {
+	@Test public void testMergePositions_14() {
 		acceptor.addPosition(1, 2, "2");
 		acceptor.addPosition(0, 2, "1");
 		acceptor.mergePositions();
@@ -206,7 +206,7 @@ public class MergingHighlightedPositionAcceptorTest extends TestCase {
 		checkPosition(positions.get(2), 2, 1, 0, "2");
 	}
 	
-	public void testMergePositions_15() {
+	@Test public void testMergePositions_15() {
 		acceptor.addPosition(0, 1, "1");
 		acceptor.addPosition(1, 1, "2");
 		acceptor.mergePositions();
@@ -216,7 +216,7 @@ public class MergingHighlightedPositionAcceptorTest extends TestCase {
 		checkPosition(positions.get(1), 1, 1, 1, "2");
 	}
 	
-	public void testMergePositions_16() {
+	@Test public void testMergePositions_16() {
 		acceptor.addPosition(0, 1, "1");
 		acceptor.addPosition(2, 1, "2");
 		acceptor.mergePositions();
@@ -226,7 +226,7 @@ public class MergingHighlightedPositionAcceptorTest extends TestCase {
 		checkPosition(positions.get(1), 2, 1, 1, "2");
 	}
 	
-	public void testMergePositions_17() {
+	@Test public void testMergePositions_17() {
 		acceptor.addPosition(0, 3, "1");
 		acceptor.addPosition(1, 3, "2");
 		acceptor.addPosition(2, 3, "3");
@@ -242,7 +242,7 @@ public class MergingHighlightedPositionAcceptorTest extends TestCase {
 		checkPosition(positions.get(5), 5, 1, 3, "4");
 	}
 	
-	public void testMergePositions_18() {
+	@Test public void testMergePositions_18() {
 		acceptor.addPosition(0, 3, "1");
 		acceptor.addPosition(1, 3, "2");
 		acceptor.addPosition(2, 2, "3");
@@ -257,7 +257,7 @@ public class MergingHighlightedPositionAcceptorTest extends TestCase {
 		checkPosition(positions.get(4), 4, 2, 3, "4");
 	}
 	
-	public void testMergePositions_19() {
+	@Test public void testMergePositions_19() {
 		acceptor.addPosition(0, 4, "1");
 		acceptor.addPosition(1, 3, "2");
 		acceptor.addPosition(2, 2, "3");
@@ -272,7 +272,7 @@ public class MergingHighlightedPositionAcceptorTest extends TestCase {
 		checkPosition(positions.get(4), 4, 2, 3, "4");
 	}
 	
-	public void testMergePositions_20() {
+	@Test public void testMergePositions_20() {
 		acceptor.addPosition(0, 5, "1");
 		acceptor.addPosition(1, 3, "2");
 		acceptor.addPosition(2, 2, "3");
@@ -288,7 +288,7 @@ public class MergingHighlightedPositionAcceptorTest extends TestCase {
 		checkPosition(positions.get(5), 5, 1, 3, "4");
 	}
 	
-	public void testMergePositions_Bug318704() {
+	@Test public void testMergePositions_Bug318704() {
 		acceptor.addPosition(5, 1, "1");
 		acceptor.addPosition(25, 1, "1");
 		acceptor.addPosition(14, 0, "2");
@@ -301,7 +301,7 @@ public class MergingHighlightedPositionAcceptorTest extends TestCase {
 		checkPosition(positions.get(2), 36, 1, 3, "1");
 	}
 	
-	public void testMergePositions_Bug344616_01() {
+	@Test public void testMergePositions_Bug344616_01() {
 		acceptor.addPosition(120, 4 , "1");
 		acceptor.addPosition(127, 1 , "1");
 		acceptor.addPosition(130, 12, "1");
@@ -327,7 +327,7 @@ public class MergingHighlightedPositionAcceptorTest extends TestCase {
 		checkPosition(positions.get(7), 167, 1, 10, "1");
 	}
 	
-	public void testMergePositions_Bug344616_02() {
+	@Test public void testMergePositions_Bug344616_02() {
 		acceptor.addPosition(120, 4 , "1");
 		acceptor.addPosition(127, 1 , "1");
 		acceptor.addPosition(130, 12, "1");
@@ -360,7 +360,7 @@ public class MergingHighlightedPositionAcceptorTest extends TestCase {
 		checkPosition(positions.get(13), 167, 1, 10, "1", "3");
 	}
 	
-	public void testMergePositions_Bug344616_03() {
+	@Test public void testMergePositions_Bug344616_03() {
 		acceptor.addPosition(22, 4 , "1");
 		acceptor.addPosition(27, 1 , "2");
 		acceptor.addPosition( 7, 21, "3");

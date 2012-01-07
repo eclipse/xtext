@@ -25,18 +25,19 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.undo.CreateMarkersOperation;
 import org.eclipse.ui.texteditor.MarkerUtilities;
+import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.hover.ProblemAnnotationHover;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
-import org.eclipse.xtext.ui.junit.editor.AbstractEditorTest;
-import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
+import org.junit.Test;
 
 /**
  * @author Christoph Kulla - Initial contribution and API
@@ -57,7 +58,7 @@ public class ProblemHoverTest extends AbstractEditorTest {
 	private ProblemAnnotationHover hover;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		modelAsText = "stuff mystuff\nstuff yourstuff refs _mystuff stuff hisstuff refs _yourstuff// Comment";
 		IFile file = IResourcesSetupUtil.createFile("test/test.testlanguage", modelAsText);
@@ -77,7 +78,7 @@ public class ProblemHoverTest extends AbstractEditorTest {
 	}
 
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		super.tearDown();
 		editor.close(false);
 	}
@@ -88,7 +89,7 @@ public class ProblemHoverTest extends AbstractEditorTest {
 	}
 
 	@SuppressWarnings("deprecation")
-	public void testAnnotations () {	
+	@Test public void testAnnotations () {	
 		assertNull(hover.getHoverInfo(editor.getInternalSourceViewer(), new Region(34, 1)));
 		assertEquals("Couldn't resolve reference to Stuff '_mystuff'.", hover.getHoverInfo(editor.getInternalSourceViewer(), new Region(35, 7)));
 		
@@ -102,7 +103,7 @@ public class ProblemHoverTest extends AbstractEditorTest {
 		assertTrue(hoverInfo.contains(expected3));
 	}
 	
-	public void testBug357516_warning() throws Exception {
+	@Test public void testBug357516_warning() throws Exception {
 		IResource resource = editor.getResource();
 		createCustomMarkerOnResource(resource, IMarker.SEVERITY_WARNING);
 		String hoverInfo = hover.getHoverInfo(editor.getInternalSourceViewer(), 0);
@@ -110,7 +111,7 @@ public class ProblemHoverTest extends AbstractEditorTest {
 		assertTrue(hoverInfo.contains(CUSTOM_MARKER_TEST_MESSAGE));
 	}
 	
-	public void testBug357516_error() throws Exception {
+	@Test public void testBug357516_error() throws Exception {
 		IResource resource = editor.getResource();
 		createCustomMarkerOnResource(resource, IMarker.SEVERITY_ERROR);
 		String hoverInfo = hover.getHoverInfo(editor.getInternalSourceViewer(), 0);
@@ -118,14 +119,14 @@ public class ProblemHoverTest extends AbstractEditorTest {
 		assertTrue(hoverInfo.contains(CUSTOM_MARKER_TEST_MESSAGE));
 	}
 	
-	public void testBug357516_info() throws Exception {
+	@Test public void testBug357516_info() throws Exception {
 		IResource resource = editor.getResource();
 		createCustomMarkerOnResource(resource, IMarker.SEVERITY_INFO);
 		String hoverInfo = hover.getHoverInfo(editor.getInternalSourceViewer(), 0);
 		assertNull(hoverInfo);
 	}
 	
-	public void testBug357516_bookmark() throws Exception {
+	@Test public void testBug357516_bookmark() throws Exception {
 		IResource resource = editor.getResource();
 		HashMap<String, Object> attributes = new HashMap<String, Object>();
 		attributes.put(IMarker.MESSAGE, CUSTOM_MARKER_TEST_MESSAGE);

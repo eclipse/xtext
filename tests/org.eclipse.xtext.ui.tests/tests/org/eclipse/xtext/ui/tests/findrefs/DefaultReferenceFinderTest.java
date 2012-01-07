@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -32,6 +32,7 @@ import org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguageStandaloneS
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.RefactoringPackage;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -50,7 +51,7 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 	private IReferenceFinder.ILocalResourceAccess localResourceAccess;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(RefactoringTestLanguageStandaloneSetup.class);
 		resourceSet = get(XtextResourceSet.class);
@@ -74,7 +75,7 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 		return resource;
 	}
 
-	public void testLocalRefs() throws Exception {
+	@Test public void testLocalRefs() throws Exception {
 		acceptor.expect(new DefaultReferenceDescription(elementB, elementA,
 				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementB)));
 		findAllRefs(elementA, localResourceAccess);
@@ -86,7 +87,7 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 		acceptor.assertFinished();
 	}
 
-	public void testExternalRefs() throws Exception {
+	@Test public void testExternalRefs() throws Exception {
 		Resource refResource = loadResource("ref.refactoringtestlanguage", "D { ref C }");
 		EObject elementD = refResource.getContents().get(0).eContents().get(0);
 
@@ -104,7 +105,7 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 		acceptor.assertFinished();
 	}
 
-	public void testLocalAndExternalRefs() throws Exception {
+	@Test public void testLocalAndExternalRefs() throws Exception {
 		Resource refResource = loadResource("ref.refactoringtestlanguage", "D { ref A }");
 		EObject elementD = refResource.getContents().get(0).eContents().get(0);
 
@@ -126,7 +127,7 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 		acceptor.assertFinished();
 	}
 
-	public void testExcludeLocalRefs() throws Exception {
+	@Test public void testExcludeLocalRefs() throws Exception {
 		Resource refResource = loadResource("ref.refactoringtestlanguage", "D { ref A }");
 		EObject elementD = refResource.getContents().get(0).eContents().get(0);
 

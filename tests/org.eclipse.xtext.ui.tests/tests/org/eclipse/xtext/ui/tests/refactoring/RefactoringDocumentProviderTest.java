@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.refactoring;
 
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
@@ -19,18 +19,19 @@ import org.eclipse.ltk.core.refactoring.DocumentChange;
 import org.eclipse.ltk.core.refactoring.TextFileChange;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
+import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
+import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.junit.editor.AbstractEditorTest;
-import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
-import org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRefactoringDocumentProvider.EditorDocument;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRefactoringDocumentProvider.FileDocument;
 import org.eclipse.xtext.ui.refactoring.impl.DisplayChangeWrapper;
 import org.eclipse.xtext.ui.refactoring.impl.IRefactoringDocument;
 import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
 import org.eclipse.xtext.ui.tests.Activator;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -63,7 +64,7 @@ public class RefactoringDocumentProviderTest extends AbstractEditorTest {
 	}
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		IJavaProject project = JavaProjectSetupUtil.createJavaProject(TEST_PROJECT);
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
@@ -73,7 +74,7 @@ public class RefactoringDocumentProviderTest extends AbstractEditorTest {
 		textEdit = new ReplaceEdit(0, 1, "C");
 	}
 
-	public void testFileDocument() throws Exception {
+	@Test public void testFileDocument() throws Exception {
 		IRefactoringDocument document = createAndCheckDocument(testFile);
 		assertTrue(document instanceof FileDocument);
 		assertEquals(testFile, ((FileDocument) document).getFile());
@@ -87,7 +88,7 @@ public class RefactoringDocumentProviderTest extends AbstractEditorTest {
 		assertNotNull(undoChange);
 	}
 
-	public void testDirtyEditorDocument() throws Exception {
+	@Test public void testDirtyEditorDocument() throws Exception {
 		XtextEditor editor = openEditor(testFile);
 		editor.getDocument().replace(0, 0, " ");
 		editor.getDocument().replace(0, 1, "");
@@ -111,7 +112,7 @@ public class RefactoringDocumentProviderTest extends AbstractEditorTest {
 		assertEquals(editorDocument, ((EditorDocument) dirtyDocument).getDocument());
 	}
 
-	public void testCleanEditorDocument() throws Exception {
+	@Test public void testCleanEditorDocument() throws Exception {
 		XtextEditor editor = openEditor(testFile);
 		assertFalse(editor.isDirty());
 		IRefactoringDocument document = createAndCheckDocument(testFile);

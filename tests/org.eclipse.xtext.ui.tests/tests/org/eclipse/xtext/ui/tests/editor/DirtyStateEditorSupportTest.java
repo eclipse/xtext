@@ -41,6 +41,7 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.IXtextModelListener;
 import org.eclipse.xtext.ui.notification.StateChangeEventBroker;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.junit.Test;
 
 import com.google.common.collect.Lists;
 
@@ -65,7 +66,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 	private List<IEObjectDescription> exportedObjects;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		document = this;
 		resourceSet = new ResourceSetImpl();
@@ -93,7 +94,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		exportedObjects = Collections.emptyList();
 	}
 	
-	public void testInitialize_01(){
+	@Test public void testInitialize_01(){
 		dirtyStateSupport.initializeDirtyStateSupport(this);
 		assertNotNull(verifyListener);
 		assertNotNull(modelListener);
@@ -101,7 +102,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		assertEquals(resourceURI, dirtyResource.getURI());
 	}
 	
-	public void testRemoveDirtyStateSupport_01(){
+	@Test public void testRemoveDirtyStateSupport_01(){
 		dirtyStateSupport.initializeDirtyStateSupport(this);
 		dirtyStateSupport.removeDirtyStateSupport(this);
 		assertNull(verifyListener);
@@ -115,7 +116,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		}
 	}
 	
-	public void testRemoveDirtyStateSupport_02(){
+	@Test public void testRemoveDirtyStateSupport_02(){
 		dirtyStateSupport.initializeDirtyStateSupport(this);
 		document = null; // client.getDocument() returns null when editor is disposing
 		dirtyStateSupport.removeDirtyStateSupport(this);
@@ -130,12 +131,12 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		}
 	}
 	
-	public void testDoVerify_01() {
+	@Test public void testDoVerify_01() {
 		dirtyStateSupport.initializeDirtyStateSupport(this);
 		assertTrue(dirtyStateSupport.doVerify());
 	}
 	
-	public void testDoVerify_02() {
+	@Test public void testDoVerify_02() {
 		ignoreConcurrentEditing.add(Boolean.FALSE);
 		dirtyStateManager.manageDirtyState(this);
 		dirtyStateSupport.initializeDirtyStateSupport(this);
@@ -144,7 +145,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		assertEquals(getContents(), dirtyStateManager.getContent(resourceURI));
 	}
 	
-	public void testDoVerify_03() {
+	@Test public void testDoVerify_03() {
 		ignoreConcurrentEditing.add(Boolean.TRUE);
 		dirtyStateManager.manageDirtyState(this);
 		dirtyStateSupport.initializeDirtyStateSupport(this);
@@ -153,12 +154,12 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		assertEquals(getContents(), dirtyStateManager.getContent(resourceURI));
 	}
 	
-	public void testIsEditingPossible_01() {
+	@Test public void testIsEditingPossible_01() {
 		dirtyStateSupport.initializeDirtyStateSupport(this);
 		assertTrue(dirtyStateSupport.isEditingPossible(this));
 	}
 	
-	public void testIsEditingPossible_02() {
+	@Test public void testIsEditingPossible_02() {
 		try {
 			assertTrue(dirtyStateSupport.isEditingPossible(this));
 			fail("Expected IllegalStateException");
@@ -167,7 +168,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		}
 	}
 	
-	public void testIsEditingPossible_03() {
+	@Test public void testIsEditingPossible_03() {
 		try {
 			assertTrue(dirtyStateSupport.isEditingPossible(null));
 			fail("Expected IllegalStateException");
@@ -176,7 +177,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		}
 	}
 
-	public void testIsEditingPossible_04() {
+	@Test public void testIsEditingPossible_04() {
 		ignoreConcurrentEditing.add(Boolean.FALSE);
 		dirtyStateManager.manageDirtyState(this);
 		dirtyStateSupport.initializeDirtyStateSupport(this);
@@ -185,7 +186,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		assertEquals(getContents(), dirtyStateManager.getContent(resourceURI));
 	}
 	
-	public void testIsEditingPossible_05() {
+	@Test public void testIsEditingPossible_05() {
 		ignoreConcurrentEditing.add(Boolean.TRUE);
 		dirtyStateManager.manageDirtyState(this);
 		dirtyStateSupport.initializeDirtyStateSupport(this);
@@ -194,7 +195,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		assertEquals(getContents(), dirtyStateManager.getContent(resourceURI));
 	}
 	
-	public void testIsEditingPossible_06() {
+	@Test public void testIsEditingPossible_06() {
 		ignoreConcurrentEditing.add(Boolean.TRUE);
 		dirtyStateManager.manageDirtyState(this);
 		dirtyStateSupport.initializeDirtyStateSupport(this);
@@ -202,7 +203,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		assertTrue(dirtyStateSupport.isEditingPossible(this));
 	}
 	
-	public void testIsEditingPossible_07() {
+	@Test public void testIsEditingPossible_07() {
 		ignoreConcurrentEditing.add(Boolean.FALSE);
 		ignoreConcurrentEditing.add(Boolean.FALSE);
 		dirtyStateManager.manageDirtyState(this);
@@ -211,7 +212,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		assertFalse(dirtyStateSupport.isEditingPossible(this));
 	}
 	
-	public void testMarkEditorClean_01() {
+	@Test public void testMarkEditorClean_01() {
 		try {
 			dirtyStateSupport.markEditorClean(this);
 			fail("Expected exception");
@@ -220,7 +221,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		}
 	}
 	
-	public void testMarkEditorClean_02() {
+	@Test public void testMarkEditorClean_02() {
 		try {
 			dirtyStateSupport.markEditorClean(null);
 			fail("Expected exception");
@@ -229,7 +230,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		}
 	}
 	
-	public void testMarkEditorClean_03() {
+	@Test public void testMarkEditorClean_03() {
 		assertFalse(dirtyStateManager.hasContent(resourceURI));
 		dirtyStateSupport.initializeDirtyStateSupport(this);
 		dirtyStateSupport.isEditingPossible(this);
@@ -240,13 +241,13 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		assertNotNull(verifyListener);
 	}
 	
-	public void testModelChanged_01() {
+	@Test public void testModelChanged_01() {
 		dirtyStateSupport.initializeDirtyStateSupport(this);
 		dirtyStateSupport.modelChanged(resource);
 		assertTrue(dirtyStateManager.hasContent(resourceURI));
 	}
 
-	public void testModelChanged_02() {
+	@Test public void testModelChanged_02() {
 		ignoreConcurrentEditing.add(Boolean.TRUE);
 		dirtyStateManager.manageDirtyState(this);
 		dirtyStateSupport.initializeDirtyStateSupport(this);
@@ -258,7 +259,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		assertEquals(get(), dirtyStateManager.getContent(resourceURI));
 	}
 	
-	public void testModelChanged_03() {
+	@Test public void testModelChanged_03() {
 		ignoreConcurrentEditing.add(Boolean.FALSE);
 		dirtyStateManager.manageDirtyState(this);
 		dirtyStateSupport.initializeDirtyStateSupport(this);
@@ -268,7 +269,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		assertEquals(getContents(), dirtyStateManager.getContent(resourceURI));
 	}
 	
-	public void testModelChanged_04() {
+	@Test public void testModelChanged_04() {
 		ignoreConcurrentEditing.add(Boolean.TRUE);
 		dirtyStateManager.manageDirtyState(this);
 		dirtyStateSupport.initializeDirtyStateSupport(this);
@@ -279,14 +280,14 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		assertEquals(getContents(), dirtyStateManager.getContent(resourceURI));
 	}
 	
-	public void testModelChanged_05() {
+	@Test public void testModelChanged_05() {
 		dirtyStateSupport.initializeDirtyStateSupport(this);
 		resource.setTrackingModification(true);
 		dirtyStateSupport.modelChanged(resource);
 		assertFalse(dirtyStateManager.hasContent(resourceURI));
 	}
 	
-	public void testModelChanged_06() {
+	@Test public void testModelChanged_06() {
 		dirtyStateSupport.initializeDirtyStateSupport(this);
 		resource.setTrackingModification(true);
 		resource.setModified(true);

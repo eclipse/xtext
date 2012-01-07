@@ -10,20 +10,20 @@ package org.eclipse.xtext.ui.tests.editor.model;
 import java.util.Arrays;
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.rules.Token;
 import org.eclipse.xtext.ui.editor.model.ILexerTokenRegion;
 import org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapper;
 import org.eclipse.xtext.ui.editor.model.PartitionTokenScanner;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class PartitionTokenScannerTest extends TestCase {
+public class PartitionTokenScannerTest extends Assert {
 
-	public void testWholePart() throws Exception {
+	@Test public void testWholePart() throws Exception {
 		PartitionTokenScanner scanner = getPartitionTokenScanner(t(2, 3),t(4,3),t(2,1),t(34,3));
 		scanner.setPartialRange(null, 0, 42, "3", 0);
 		
@@ -42,7 +42,7 @@ public class PartitionTokenScannerTest extends TestCase {
 		assertSame(Token.EOF, scanner.nextToken());
 	}
 	
-	public void testMiddlePart() throws Exception {
+	@Test public void testMiddlePart() throws Exception {
 		PartitionTokenScanner scanner = getPartitionTokenScanner(t(2, 3),t(4,3),t(2,1),t(34,3));
 		scanner.setPartialRange(null, 6, 2, "1", 6);
 		

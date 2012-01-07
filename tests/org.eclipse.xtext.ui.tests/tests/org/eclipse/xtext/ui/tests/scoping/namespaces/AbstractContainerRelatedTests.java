@@ -7,11 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.scoping.namespaces;
 
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
-
-import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -20,7 +19,8 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit.util.URIBasedTestResourceDescription;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
+import org.eclipse.xtext.junit4.util.URIBasedTestResourceDescription;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -28,23 +28,24 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.ISelectable;
 import org.eclipse.xtext.resource.impl.AbstractCompoundSelectable;
 import org.eclipse.xtext.ui.XtextProjectHelper;
-import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
 
 import com.google.common.collect.Maps;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractContainerRelatedTests extends TestCase implements IResourceDescriptions {
+public abstract class AbstractContainerRelatedTests extends Assert implements IResourceDescriptions {
 
 	protected IProject project1;
 	protected IProject project2;
 	protected Map<URI, IResourceDescription> uriToResourceDescription;
 	protected ISelectable selectableDelegate;
 	
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		cleanWorkspace();
 		waitForAutoBuild();
 		assertEquals(0, root().getProjects().length);
@@ -61,9 +62,8 @@ public abstract class AbstractContainerRelatedTests extends TestCase implements 
 		};
 	}
 	
-	@Override
-	protected void tearDown() throws Exception {
-		super.tearDown();
+	@After
+	public void tearDown() throws Exception {
 		cleanWorkspace();
 		waitForAutoBuild();
 		assertEquals(0, root().getProjects().length);

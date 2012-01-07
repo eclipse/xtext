@@ -8,25 +8,25 @@
 package org.eclipse.xtext.ui.tests.editor.outline;
 
 import org.eclipse.xtext.ui.editor.outline.quickoutline.StringMatcher;
-
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Peter Friese - Initial contribution and API
  */
-public class StringMatcherTest extends TestCase {
+public class StringMatcherTest extends Assert {
 
 	protected StringMatcher createStringMatcher(String pattern) {
 		return new StringMatcher(pattern, true);
 	}
 	
-	public void testSimpleMatching() {
+	@Test public void testSimpleMatching() {
 		StringMatcher matcher = createStringMatcher("simple");
 		assertTrue(matcher.match("simple"));
 		assertFalse(matcher.match("imple"));
 	}
 	
-	public void testWildcardStarMatching() {
+	@Test public void testWildcardStarMatching() {
 		StringMatcher matcher = createStringMatcher("*i");
 		assertTrue(matcher.match("abcdei"));
 		assertTrue(matcher.match("abcdeii"));
@@ -36,7 +36,7 @@ public class StringMatcherTest extends TestCase {
 		assertTrue(matcher.match("(i"));
 	}
 	
-	public void testWildcardQuestionmarkMatching() {
+	@Test public void testWildcardQuestionmarkMatching() {
 		StringMatcher matcher = createStringMatcher("h?llo");
 		assertTrue(matcher.match("hallo"));
 		assertTrue(matcher.match("hello"));
@@ -45,37 +45,37 @@ public class StringMatcherTest extends TestCase {
 		assertFalse(matcher.match("hllo"));
 	}
 	
-	public void testEscapeOpeningParenthesis() {
+	@Test public void testEscapeOpeningParenthesis() {
 		StringMatcher matcher = createStringMatcher("print*(");
 		assertTrue(matcher.match("println("));
 	}
 	
-	public void testEscapeClosingParenthesis() {
+	@Test public void testEscapeClosingParenthesis() {
 		StringMatcher matcher = createStringMatcher("print*)");
 		assertTrue(matcher.match("println(x)"));
 	}
 	
-	public void testEscapeOpeningBrackets() {
+	@Test public void testEscapeOpeningBrackets() {
 		StringMatcher matcher = createStringMatcher("arr*[");
 		assertTrue(matcher.match("array["));
 	}
 	
-	public void testEscapeClosingBrackets() {
+	@Test public void testEscapeClosingBrackets() {
 		StringMatcher matcher = createStringMatcher("arr*]");
 		assertTrue(matcher.match("array[x]"));
 	}
 
-	public void testEscapeOpeningCurlies() {
+	@Test public void testEscapeOpeningCurlies() {
 		StringMatcher matcher = createStringMatcher("blo*{")  ;
 		assertTrue(matcher.match("block{"));
 	}
 	
-	public void testEscapeClosingCurlies() {
+	@Test public void testEscapeClosingCurlies() {
 		StringMatcher matcher = createStringMatcher("blo*}");
 		assertTrue(matcher.match("block{moretext}"));
 	}
 	
-	public void testEscapeManyBraces() {
+	@Test public void testEscapeManyBraces() {
 		StringMatcher matcher = createStringMatcher("blo*([{some*text}])");
 		assertTrue(matcher.match("block([{some more text}])"));
 	}

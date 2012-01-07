@@ -8,12 +8,10 @@
 package org.eclipse.xtext.ui.tests.refactoring;
 
 import static com.google.common.collect.Iterables.*;
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-
-import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
@@ -21,7 +19,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.junit.util.URIBasedTestResourceDescription;
+import org.eclipse.xtext.junit4.util.URIBasedTestResourceDescription;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -34,6 +32,10 @@ import org.eclipse.xtext.ui.refactoring.impl.RefactoringResourceSetProvider;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
@@ -41,7 +43,7 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("restriction")
-public class RefactoringResourceSetProviderTest extends TestCase {
+public class RefactoringResourceSetProviderTest extends Assert {
 
 	@Inject
 	private RefactoringResourceSetProvider resourceSetProvider;
@@ -57,9 +59,8 @@ public class RefactoringResourceSetProviderTest extends TestCase {
 
 	private ResourceSet resourceSet;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		Activator.getInstance().getInjector("org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage")
 				.injectMembers(this);
 		IProject project = createProject("test");
@@ -67,13 +68,12 @@ public class RefactoringResourceSetProviderTest extends TestCase {
 		resourceSet = resourceSetProvider.get(workspace.getRoot().getProject("test"));
 	}
 
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		cleanWorkspace();
-		super.tearDown();
 	}
 
-	public void testDirtyStateAware() throws IOException {
+	@Test public void testDirtyStateAware() throws IOException {
 		final URI dirtyResourceURI = URI.createPlatformResourceURI("test/test.refactoringtestlanguage", true);
 		final String testModel = "A { B }";
 		IDirtyResource mockDirtyResource = new IDirtyResource() {
@@ -108,7 +108,7 @@ public class RefactoringResourceSetProviderTest extends TestCase {
 		}
 	}
 
-	public void testLiveScope() throws Exception {
+	@Test public void testLiveScope() throws Exception {
 		assertNotNull(resourceSet.getLoadOptions().get(ResourceDescriptionsProvider.LIVE_SCOPE));
 		final URI resourceURI = URI.createPlatformResourceURI("test/test.refactoringtestlanguage", true);
 		Resource resource = resourceSet.createResource(resourceURI);
@@ -119,7 +119,7 @@ public class RefactoringResourceSetProviderTest extends TestCase {
 		assertExportedObject(resource, "C");
 	}
 
-	public void testLiveScope2() throws Exception {
+	@Test public void testLiveScope2() throws Exception {
 		String pathName = "test/test.refactoringtestlanguage";
 		String pathName2 = "test/test2.refactoringtestlanguage";
 		String model = "A { ref B }";

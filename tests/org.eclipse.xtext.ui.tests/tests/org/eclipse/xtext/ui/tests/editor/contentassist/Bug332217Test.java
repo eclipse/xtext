@@ -7,15 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
-import junit.framework.Test;
-
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
-import org.eclipse.xtext.ui.junit.editor.contentassist.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug332217TestLanguageUiModule;
 import org.eclipse.xtext.util.Modules2;
+import org.junit.Test;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -39,7 +37,7 @@ public class Bug332217Test extends AbstractContentAssistProcessorTest {
 		};
 	}
 	
-	public void testInString() throws Exception {
+	@Test public void testInString() throws Exception {
 		String model =  
 				"tableview InventorDetail(Inventor inventor) {\n" + 
 				"	title: inventor.name\n" + 
@@ -55,8 +53,4 @@ public class Bug332217Test extends AbstractContentAssistProcessorTest {
 		newBuilder().append(model).assertTextAtCursorPosition(model.indexOf("\"ValueName\"") + 1, "\"Value\"");
 	}
 
-	public static Test suite() {
-		return AbstractContentAssistProcessorTest.suite(Bug332217Test.class);
-	}
-		
 }

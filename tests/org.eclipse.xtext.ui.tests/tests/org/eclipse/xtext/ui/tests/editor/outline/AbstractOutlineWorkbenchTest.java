@@ -22,12 +22,12 @@ import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
+import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.IOutlineNodeComparer;
-import org.eclipse.xtext.ui.junit.editor.AbstractEditorTest;
-import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -58,7 +58,7 @@ public abstract class AbstractOutlineWorkbenchTest extends AbstractEditorTest {
 	protected IOutlineNodeComparer comparer;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		preferenceStore = new ScopedPreferenceStore(new InstanceScope(), getEditorId());
 		comparer = new IOutlineNodeComparer.Default();
@@ -93,7 +93,7 @@ public abstract class AbstractOutlineWorkbenchTest extends AbstractEditorTest {
 	}
 
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		super.tearDown();
 		editor.close(false);
 		outlineView.getSite().getPage().hideView(outlineView);

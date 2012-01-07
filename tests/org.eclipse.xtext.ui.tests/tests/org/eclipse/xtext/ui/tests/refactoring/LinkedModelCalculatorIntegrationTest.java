@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.refactoring;
 
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
-import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -18,17 +18,18 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jface.text.link.LinkedPosition;
 import org.eclipse.jface.text.link.LinkedPositionGroup;
+import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.junit.editor.AbstractEditorTest;
 import org.eclipse.xtext.ui.refactoring.ILinkedPositionGroupCalculator;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -58,7 +59,7 @@ public class LinkedModelCalculatorIntegrationTest extends AbstractEditorTest {
 	}
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		project = createProject(TEST_PROJECT);
 		IJavaProject javaProject = makeJavaProject(project);
@@ -67,7 +68,7 @@ public class LinkedModelCalculatorIntegrationTest extends AbstractEditorTest {
 		injector.injectMembers(this);
 	}
 
-	public void testCorrectTextEditsDeclarationInFile() throws Exception {
+	@Test public void testCorrectTextEditsDeclarationInFile() throws Exception {
 		String initialModel1 = "A { B ref A } C { D ref A }";
 		createFile(pathToFile1, initialModel1);
 		String initialModel2 = "E { ref A } F { ref E ref A}";
@@ -94,7 +95,7 @@ public class LinkedModelCalculatorIntegrationTest extends AbstractEditorTest {
 		}
 	}
 
-	public void testCorrectTextEditsDeclarationNotInFile() throws Exception {
+	@Test public void testCorrectTextEditsDeclarationNotInFile() throws Exception {
 		String initialModel1 = "A { B ref A } C { D ref A }";
 		createFile(pathToFile1, initialModel1);
 		String initialModel2 = "E { ref A } F { ref E ref A}";

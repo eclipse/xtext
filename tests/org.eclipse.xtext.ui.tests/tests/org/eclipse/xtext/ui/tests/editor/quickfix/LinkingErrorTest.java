@@ -21,6 +21,7 @@ import org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Main;
 import org.eclipse.xtext.ui.tests.quickfix.ui.quickfix.QuickfixCrossrefTestLanguageQuickfixProvider;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
+import org.junit.Test;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
@@ -35,18 +36,18 @@ public class LinkingErrorTest extends AbstractQuickfixTest {
 	private XtextEditor xtextEditor;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE, MODEL_WITH_LINKING_ERROR);
 	}
 	
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		super.tearDown();
 		xtextEditor.close(false);
 	}
 
-	public void testQuickfixTurnaround() throws Exception {
+	@Test public void testQuickfixTurnaround() throws Exception {
 		IXtextDocument document = xtextEditor.getDocument();
 
 		List<Issue> issues = getIssues(document);
@@ -64,7 +65,7 @@ public class LinkingErrorTest extends AbstractQuickfixTest {
 		assertTrue(issues.isEmpty());
 	}
 
-	public void testSemanticIssueResolution() throws Exception {
+	@Test public void testSemanticIssueResolution() throws Exception {
 		URI uriToProblem = xtextEditor.getDocument().readOnly(new IUnitOfWork<URI, XtextResource>() {
 			public URI exec(XtextResource state) throws Exception {
 				Main main = (Main) state.getContents().get(0);

@@ -7,16 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
-import junit.framework.Test;
-
-import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
-import org.eclipse.xtext.ui.junit.editor.contentassist.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
+import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.testlanguages.ReferenceGrammarUiTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.testlanguages.ReferenceGrammarUiTestLanguageStandaloneSetup;
 import org.eclipse.xtext.ui.tests.testlanguages.ui.ReferenceGrammarUiTestLanguageUiModule;
 import org.eclipse.xtext.util.Modules2;
+import org.junit.Test;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -39,7 +38,7 @@ public class ReferenceGrammarUiContentAssistTest extends AbstractContentAssistPr
 		};
 	}
 	
-	public void testComputePrefix() throws Exception {
+	@Test public void testComputePrefix() throws Exception {
 		String model = "spielplatz 1 \"SpielplatzBeschreibung\" { kind(k1 0) kind(k2 0) erwachsener(e1 0) erwachsener(e2 0) ";
 		newBuilder()
 		.append(model+" familie( dfv(").assertMatchString("(").reset()
@@ -49,7 +48,7 @@ public class ReferenceGrammarUiContentAssistTest extends AbstractContentAssistPr
 		.append("").assertMatchString("");
 	}
 
-	public void testComputeCompletionProposalsCount() throws Exception {
+	@Test public void testComputeCompletionProposalsCount() throws Exception {
 		newBuilder().assertCount(1)
 			.append("spielplatz ").assertCount(1)
 			.append("1 ").assertCount(2)
@@ -61,7 +60,7 @@ public class ReferenceGrammarUiContentAssistTest extends AbstractContentAssistPr
 			.append("e2").assertCount(1);
 	}
 
-	public void testComputeCompletionProposalsText() throws Exception {
+	@Test public void testComputeCompletionProposalsText() throws Exception {
 		newBuilder().assertText("spielplatz")
 			.applyText().assertText("1")
 			.applyText().assertText("\"Beschreibung\"", "{")
@@ -86,7 +85,7 @@ public class ReferenceGrammarUiContentAssistTest extends AbstractContentAssistPr
 		;
 	}
 	
-	public void testComputeCompletionProposalsText_02() throws Exception {
+	@Test public void testComputeCompletionProposalsText_02() throws Exception {
 		newBuilder().
 			append("spielplatz 1 \"Beschreibung\" { " +
 					"erwachsener ( e1 1 ) " +
@@ -97,7 +96,7 @@ public class ReferenceGrammarUiContentAssistTest extends AbstractContentAssistPr
 		;
 	}
 	
-	public void testComputeCompletionProposalsText_03() throws Exception {
+	@Test public void testComputeCompletionProposalsText_03() throws Exception {
 		newBuilder().
 			append("spielplatz 1 \"Beschreibung\" { " +
 					"erwachsener ( e1 1 ) " +
@@ -108,13 +107,13 @@ public class ReferenceGrammarUiContentAssistTest extends AbstractContentAssistPr
 		;
 	}
 	
-	public void testBetweenContext() throws Exception {
+	@Test public void testBetweenContext() throws Exception {
 		newBuilder()
 		.append("spielplatz 1 \"1\" {kind")
 		.assertTextAtCursorPosition(18,"kind","erwachsener","spielzeug","familie","{", "}");
 	}
 
-	public void testComputeCompletionProposalsIgnoreCase() throws Exception {
+	@Test public void testComputeCompletionProposalsIgnoreCase() throws Exception {
 		ContentAssistProcessorTestBuilder builder = newBuilder();
 		builder = builder.append("spielplatz 1 \"SpielplatzBeschreibung\" { kind(k1 0) kind(k2 0) erwachsener(e1 0) erwachsener(e2 0) ");
 		builder.append(" KI").assertText("kind");
@@ -130,15 +129,11 @@ public class ReferenceGrammarUiContentAssistTest extends AbstractContentAssistPr
 		builder.append(" familie ( keyword e1 e2 k1,k2").assertText("k2", ",", ")");
 	}
 	
-	public void testDefaultRule() throws Exception {
+	@Test public void testDefaultRule() throws Exception {
 		ContentAssistProcessorTestBuilder builder = newBuilder();
 		builder.assertText("spielplatz");
 		builder.append(" spielplatz 1 \"SpielplatzBeschreibung\" { } ")
 			.assertTextAtCursorPosition(1, "spielplatz");
 	}
 
-	public static Test suite() {
-		return AbstractContentAssistProcessorTest.suite(ReferenceGrammarUiContentAssistTest.class);
-	}
-	
 }

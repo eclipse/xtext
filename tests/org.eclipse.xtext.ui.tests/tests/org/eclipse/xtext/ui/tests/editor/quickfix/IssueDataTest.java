@@ -25,6 +25,7 @@ import org.eclipse.xtext.ui.tests.quickfix.validation.QuickfixCrossrefTestLangua
 import org.eclipse.xtext.ui.util.IssueUtil;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Issue;
+import org.junit.Test;
 
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
@@ -39,7 +40,7 @@ public class IssueDataTest extends AbstractQuickfixTest {
 	private static final String MODEL_WITH_LINKING_ERROR = QuickfixCrossrefTestLanguageJavaValidator.TRIGGER_VALIDATION_ISSUE + "{}";
 
 
-	public void testIssueData() throws Exception {
+	@Test public void testIssueData() throws Exception {
 		XtextEditor xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE, MODEL_WITH_LINKING_ERROR);
 		IXtextDocument document = xtextEditor.getDocument();
 		IResource file = xtextEditor.getResource();

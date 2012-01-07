@@ -8,8 +8,9 @@
 package org.eclipse.xtext.ui.tests.editor.autoedit;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.xtext.junit4.ui.AbstractCStyleLanguageAutoEditTest;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.junit.editor.autoedit.AbstractCStyleLanguageAutoEditTest;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -26,19 +27,19 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 		return "bmtestlanguage";
 	}
 
-	public void testLongTerminalsBlock_1() throws Exception {
+	@Test public void testLongTerminalsBlock_1() throws Exception {
 		XtextEditor editor = openEditor("begin|");
 		pressKey(editor, '\n');
 		assertState("begin\n\t|\nend", editor);
 	}
 
-	public void testLongTerminalsBlock_2() throws Exception {
+	@Test public void testLongTerminalsBlock_2() throws Exception {
 		XtextEditor editor = openEditor("begin|\nend");
 		pressKey(editor, '\n');
 		assertState("begin\n\t|\nend", editor);
 	}
 
-	public void testShortcut_1() throws Exception {
+	@Test public void testShortcut_1() throws Exception {
 		XtextEditor editor = openEditor("fb|");
 		pressKey(editor, 'b');
 		assertState("foobarbaz|", editor);
@@ -47,7 +48,7 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 		assertState("fbb|", editor);
 	}
 	
-	public void testClosingTerminalNextToDifferentPartition() throws Exception {
+	@Test public void testClosingTerminalNextToDifferentPartition() throws Exception {
 		XtextEditor editor = openEditor("{|\n}'foo'");
 		pressKey(editor, '\n');
 		assertState("{\n\t|\n}'foo'", editor);

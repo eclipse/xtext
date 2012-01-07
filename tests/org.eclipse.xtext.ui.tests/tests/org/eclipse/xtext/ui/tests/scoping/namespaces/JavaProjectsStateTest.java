@@ -14,13 +14,14 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.containers.JavaProjectsState;
 import org.eclipse.xtext.ui.containers.JavaProjectsStateHelper;
 import org.eclipse.xtext.ui.containers.WorkspaceProjectsStateHelper;
-import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.shared.JdtHelper;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -32,7 +33,7 @@ public class JavaProjectsStateTest extends AbstractJavaProjectsStateTest {
 	private URI simpleUri3;
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		simpleUri1 = createFileAndRegisterResource(project1, "file1");
 		simpleUri2 = createFileAndRegisterResource(project1, "file2");
@@ -55,7 +56,7 @@ public class JavaProjectsStateTest extends AbstractJavaProjectsStateTest {
 		return result;
 	}
 	
-	public void testGetContainerHandle_01() {
+	@Test public void testGetContainerHandle_01() {
 		String uri1ContainerHandle = projectsState.getContainerHandle(uri1);
 		String uri2ContainerHandle = projectsState.getContainerHandle(uri2);
 		String uri3ContainerHandle = projectsState.getContainerHandle(uri3);
@@ -64,7 +65,7 @@ public class JavaProjectsStateTest extends AbstractJavaProjectsStateTest {
 		assertEquals(project2.getName(), uri3ContainerHandle);
 	}
 	
-	public void testGetContainerHandle_02() throws CoreException {
+	@Test public void testGetContainerHandle_02() throws CoreException {
 		IResourcesSetupUtil.removeNature(project1, XtextProjectHelper.NATURE_ID);
 		IResourcesSetupUtil.removeNature(project2, XtextProjectHelper.NATURE_ID);
 		String uri1ContainerHandle = projectsState.getContainerHandle(uri1);
@@ -75,14 +76,14 @@ public class JavaProjectsStateTest extends AbstractJavaProjectsStateTest {
 		assertEquals(project2.getName(), uri3ContainerHandle);
 	}
 	
-	public void testGetContainerHandle_Bug316519_03() {
+	@Test public void testGetContainerHandle_Bug316519_03() {
 		IFile file = getFile(project1, "doesNotExist");
 		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
 		String handleIdent = projectsState.getContainerHandle(uri);
 		assertEquals(project1.getName(), handleIdent);
 	}
 	
-	public void testGetContainerHandle_Bug316519_04() throws CoreException {
+	@Test public void testGetContainerHandle_Bug316519_04() throws CoreException {
 		IFile file = getFile(project1, "doesNotExist");
 		IResourcesSetupUtil.removeNature(file.getProject(), XtextProjectHelper.NATURE_ID);
 		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
@@ -90,7 +91,7 @@ public class JavaProjectsStateTest extends AbstractJavaProjectsStateTest {
 		assertEquals(project1.getName(), handleIdent);
 	}
 	
-	public void testGetContainedURIs_01() {
+	@Test public void testGetContainedURIs_01() {
 		Collection<URI> containedURIs = projectsState.getContainedURIs(srcRoot.getHandleIdentifier());
 		assertEquals(2, containedURIs.size());
 		assertTrue(containedURIs.contains(uri1));
@@ -98,7 +99,7 @@ public class JavaProjectsStateTest extends AbstractJavaProjectsStateTest {
 		assertFalse(containedURIs.contains(uri3));
 	}
 	
-	public void testGetContainedURIs_02() {
+	@Test public void testGetContainedURIs_02() {
 		Collection<URI> containedURIs = projectsState.getContainedURIs(project1.getName());
 		assertEquals(containedURIs.toString(), 4, containedURIs.size());
 		assertTrue(containedURIs.contains(uri1));
@@ -109,7 +110,7 @@ public class JavaProjectsStateTest extends AbstractJavaProjectsStateTest {
 		assertFalse(containedURIs.contains(simpleUri3));
 	}
 	
-	public void testGetContainedURIs_03() throws CoreException, InvocationTargetException, InterruptedException {
+	@Test public void testGetContainedURIs_03() throws CoreException, InvocationTargetException, InterruptedException {
 		Collection<URI> containedURIs = projectsState.getContainedURIs(project1.getName());
 		assertEquals(containedURIs.toString(), 4, containedURIs.size());
 		URI uri = createFileAndRegisterResource(project1, "file3");
@@ -122,7 +123,7 @@ public class JavaProjectsStateTest extends AbstractJavaProjectsStateTest {
 		assertTrue(containedURIs.contains(uri));
 	}
 	
-	public void testRemoveNature_02() throws CoreException {
+	@Test public void testRemoveNature_02() throws CoreException {
 		Collection<URI> containedURIs = projectsState.getContainedURIs(project1.getName());
 		assertEquals(4, containedURIs.size());
 		IResourcesSetupUtil.removeNature(project1, XtextProjectHelper.NATURE_ID);

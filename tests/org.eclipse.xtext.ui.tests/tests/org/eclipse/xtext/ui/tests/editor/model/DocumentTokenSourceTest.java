@@ -10,8 +10,6 @@ package org.eclipse.xtext.ui.tests.editor.model;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import junit.framework.TestCase;
-
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocumentListener;
@@ -19,6 +17,9 @@ import org.eclipse.jface.text.IRegion;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.ui.editor.model.DocumentTokenSource;
 import org.eclipse.xtext.ui.editor.model.ILexerTokenRegion;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Provider;
@@ -26,15 +27,14 @@ import com.google.inject.Provider;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class DocumentTokenSourceTest extends TestCase {
+public class DocumentTokenSourceTest extends Assert {
 	
 	
 	private DocumentTokenSource tokenSource;
 	private Document document;
 	
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		tokenSource = new DocumentTokenSource();
 		tokenSource.setLexer(new Provider<Lexer>() {
 			@SuppressWarnings("restriction")
@@ -55,7 +55,7 @@ public class DocumentTokenSourceTest extends TestCase {
 	}
 	
 	
-	public void testInsertComment() throws Exception {
+	@Test public void testInsertComment() throws Exception {
 		document.set("bar 345 grammar : so 'baz & so'");
 		IRegion region = tokenSource.getLastDamagedRegion();
 		ArrayList<ILexerTokenRegion> list = Lists.newArrayList(tokenSource.getTokenInfos());
@@ -66,7 +66,7 @@ public class DocumentTokenSourceTest extends TestCase {
 		assertTrue(!list.equals(list2));
 	}
 
-	public void testConcurrentModification() throws Exception {
+	@Test public void testConcurrentModification() throws Exception {
 		document.set("foo bar");
 		Iterator<ILexerTokenRegion> iterator = tokenSource.getTokenInfos().iterator();
 		ILexerTokenRegion region = iterator.next();

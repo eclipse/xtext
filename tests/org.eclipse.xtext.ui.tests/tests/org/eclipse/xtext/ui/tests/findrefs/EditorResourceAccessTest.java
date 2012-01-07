@@ -12,14 +12,15 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.findrefs.EditorResourceAccess;
-import org.eclipse.xtext.ui.junit.editor.AbstractEditorTest;
-import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -35,7 +36,7 @@ public class EditorResourceAccessTest extends AbstractEditorTest {
 	}
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		IProject project = IResourcesSetupUtil.createProject("test");
 		IResourcesSetupUtil.addNature(project, "org.eclipse.xtext.ui.shared.xtextNature");
@@ -44,7 +45,7 @@ public class EditorResourceAccessTest extends AbstractEditorTest {
 		uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
 	}
 
-	public void testAccess() throws Exception {
+	@Test public void testAccess() throws Exception {
 		EditorResourceAccess access = Activator.getInstance().getInjector(getEditorId())
 				.getInstance(EditorResourceAccess.class);
 		IUnitOfWork<Boolean, ResourceSet> isEmpty = new IUnitOfWork<Boolean, ResourceSet>(){

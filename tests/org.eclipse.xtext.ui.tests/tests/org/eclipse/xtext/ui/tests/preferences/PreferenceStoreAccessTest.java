@@ -9,8 +9,6 @@ package org.eclipse.xtext.ui.tests.preferences;
 
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.core.runtime.preferences.InstanceScope;
@@ -20,10 +18,14 @@ import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.ui.texteditor.ChainedPreferenceStore;
 import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
-import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Binder;
@@ -33,7 +35,7 @@ import com.google.inject.name.Names;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class PreferenceStoreAccessTest extends TestCase implements IPreferenceStoreInitializer {
+public class PreferenceStoreAccessTest extends Assert implements IPreferenceStoreInitializer {
 
 	private static final String LANGUAGE_ID = "org.xtext.MyLanguage";
 	private IPreferenceStoreAccess preferenceStoreAccess;
@@ -42,9 +44,8 @@ public class PreferenceStoreAccessTest extends TestCase implements IPreferenceSt
 		access.getWritablePreferenceStore().setDefault("someBoolean", true);
 	}
 	
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		preferenceStoreAccess = Guice.createInjector(new AbstractGenericModule() {
 			@SuppressWarnings("unused")
 			public void configureModule(Binder binder) {
@@ -54,17 +55,16 @@ public class PreferenceStoreAccessTest extends TestCase implements IPreferenceSt
 		}).getInstance(IPreferenceStoreAccess.class);
 	}
 	
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		getWritable().setToDefault("someBoolean");
 		getWritable().setToDefault("someInt");
 		getWritable().setToDefault("anotherInt");
 		getWritable().setToDefault("thirdInt");
 		getWritable().setToDefault("newValue");
-		super.tearDown();
 	}
 
-	public void testDefault() {
+	@Test public void testDefault() {
 		IPreferenceStore readable = getReadable();
 		assertTrue(readable.getDefaultBoolean("someBoolean"));
 		assertTrue(readable.getBoolean("someBoolean"));
@@ -75,17 +75,17 @@ public class PreferenceStoreAccessTest extends TestCase implements IPreferenceSt
 		assertTrue(readable.getBoolean("someBoolean"));
 	}
 
-	public void testScope() {
+	@Test public void testScope() {
 		ScopedPreferenceStore scopedPreferenceStore = new ScopedPreferenceStore(new ConfigurationScope(), "org");
 		assertFalse("partial keys are not supported", scopedPreferenceStore.getBoolean("xtext.MyLanguage.someBoolean"));
 	}
 	
-	public void testScopeWithAnotherInstance() {
+	@Test public void testScopeWithAnotherInstance() {
 		ScopedPreferenceStore scopedPreferenceStore = new ScopedPreferenceStore(new ConfigurationScope(), LANGUAGE_ID);
 		assertTrue(scopedPreferenceStore.getBoolean("someBoolean"));
 	}
 	
-	public void testChainedPreferenceStore() {
+	@Test public void testChainedPreferenceStore() {
 		ScopedPreferenceStore configurationStore = new ScopedPreferenceStore(new ConfigurationScope(), LANGUAGE_ID);
 		configurationStore.setValue("someInt", 12);
 		configurationStore.setValue("anotherInt", 12);
@@ -99,7 +99,7 @@ public class PreferenceStoreAccessTest extends TestCase implements IPreferenceSt
 		assertEquals(12, chainedStore.getInt("thirdInt"));
 	}
 	
-	public void testScopedEvents() {
+	@Test public void testScopedEvents() {
 		final List<String> keys = Lists.newArrayList();
 		getReadable().addPropertyChangeListener(new IPropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent event) {
@@ -111,7 +111,7 @@ public class PreferenceStoreAccessTest extends TestCase implements IPreferenceSt
 		assertEquals("newValue", keys.get(0));
 	}
 
-	public void testProjectScope() throws Exception {
+	@Test public void testProjectScope() throws Exception {
 		try {
 			IProject project = IResourcesSetupUtil.createProject("test");
 			final List<String> keys = Lists.newArrayList();
