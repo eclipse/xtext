@@ -7,13 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.tests.editor;
 
-import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
 
 import java.io.InputStream;
-
-import junit.extensions.TestSetup;
-import junit.framework.Test;
-import junit.framework.TestSuite;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
@@ -27,17 +23,32 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.junit.ui.AbstractXbaseContentAssistTest;
 import org.eclipse.xtext.xbase.ui.internal.XtypeActivator;
 import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseUITestCase;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 
 import com.google.inject.Injector;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class ContentAssistTest extends AbstractXbaseContentAssistTest implements IJavaProjectProvider  {
 
 	protected static final String PROJECT_NAME = "ContentAssistTestProject";
 
 	private IProject demandCreateProject;
+	
+	private static IProject staticProject;
+	
+	@BeforeClass
+	public static void createTestProject() throws Exception {
+		staticProject = AbstractXbaseUITestCase.createPluginProject(PROJECT_NAME);
+	}
+	
+	@AfterClass
+	public static void deleteTestProject() throws Exception {
+		deleteProject(staticProject);
+	}
 	
 	@Override
 	protected Injector getInjector() {
@@ -45,7 +56,7 @@ public class ContentAssistTest extends AbstractXbaseContentAssistTest implements
 	}
 	
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		if (demandCreateProject != null)
 			deleteProject(demandCreateProject);
 		super.tearDown();
@@ -81,25 +92,6 @@ public class ContentAssistTest extends AbstractXbaseContentAssistTest implements
 		XtextResource result = super.getResourceFor(stream);
 		initializeTypeProvider(result);
 		return result;
-	}
-	
-	public static Test suite() {
-		return new TestSetup(new TestSuite(ContentAssistTest.class)) {
-			private IProject project;
-
-			@Override
-			protected void setUp() throws Exception {
-				super.setUp();
-				project = AbstractXbaseUITestCase.createPluginProject(PROJECT_NAME);
-				
-			}
-			
-			@Override
-			protected void tearDown() throws Exception {
-				deleteProject(project);
-				super.tearDown();
-			}
-		};
 	}
 	
 }
