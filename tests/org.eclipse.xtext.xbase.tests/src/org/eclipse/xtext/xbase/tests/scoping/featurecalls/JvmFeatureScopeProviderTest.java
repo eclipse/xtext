@@ -19,6 +19,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScope;
+import org.junit.Test;
 
 import testdata.FieldAccess;
 import testdata.FieldAccessSub;
@@ -31,7 +32,7 @@ import com.google.common.collect.Sets;
  */
 public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProviderTest {
 
-	public void testPublicFieldShadowed_01() throws Exception {
+	@Test public void testPublicFieldShadowed_01() throws Exception {
 		JvmTypeReference reference = getTypeRef(FieldAccessSub.class.getCanonicalName());
 		JvmFeatureScope scope = getFeatureProvider().createFeatureScope(IScope.NULLSCOPE, 
 				createScopeDescriptions(reference,
@@ -49,7 +50,7 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 		assertTrue(expected.toString(), expected.isEmpty());
 	}
 	
-	public void testPublicFieldShadowed_02() throws Exception {
+	@Test public void testPublicFieldShadowed_02() throws Exception {
 		JvmTypeReference reference = getTypeRef(FieldAccessSub.class.getCanonicalName());
 		JvmFeatureScope scope = getFeatureProvider().createFeatureScope(IScope.NULLSCOPE, 
 				createScopeDescriptions(reference,
@@ -67,7 +68,7 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 		assertTrue(expected.toString(), expected.isEmpty());
 	}
 
-	public void testPrivateMemberDescriptions() throws Exception {
+	@Test public void testPrivateMemberDescriptions() throws Exception {
 		JvmTypeReference reference = getTypeRef(FieldAccessSub.class.getCanonicalName());
 		JvmFeatureScope scope = getFeatureProvider().createFeatureScope(IScope.NULLSCOPE, 
 				createScopeDescriptions(reference,
@@ -84,7 +85,7 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 		assertTrue(expected.toString(), expected.isEmpty());
 	}
 	
-	public void testInheritedDescriptions() throws Exception {
+	@Test public void testInheritedDescriptions() throws Exception {
 		JvmTypeReference reference = getTypeRef(FieldAccessSub.class.getCanonicalName());
 		JvmFeatureScope scope = getFeatureProvider().createFeatureScope(IScope.NULLSCOPE, 
 				createScopeDescriptions(reference,
@@ -102,7 +103,7 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 		assertTrue(expected.toString(), expected.isEmpty());
 	}
 
-	public void testTypeHierarchyLinearization() throws Exception {
+	@Test public void testTypeHierarchyLinearization() throws Exception {
 		JvmTypeReference reference = getTypeRef(FieldAccessSub.class.getCanonicalName());
 		Iterator<JvmTypeReference> hierarchy = getFeatureProvider().linearizeTypeHierarchy(reference).iterator();
 		assertEquals(FieldAccessSub.class.getCanonicalName(), hierarchy.next().getType().getIdentifier());

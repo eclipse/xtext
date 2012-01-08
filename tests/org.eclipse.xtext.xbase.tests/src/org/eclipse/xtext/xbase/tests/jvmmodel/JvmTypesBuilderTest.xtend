@@ -9,7 +9,8 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsFactory
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 
-import static junit.framework.Assert.*
+import static org.junit.Assert.*
+import org.junit.Test
 
 class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	
@@ -17,6 +18,7 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	
 	@Inject extension JvmTypesBuilder
 	
+	@Test
 	def void testEmptyAnnotation() {
 		val f = XAnnotationsFactory::eINSTANCE
 		val typesFactory = TypesFactory::eINSTANCE
@@ -30,6 +32,7 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 		assertEquals(anno.annotationType, type.annotations.head.annotation)
 	}
 	
+	@Test
 	def void testStringAnnotation() {
 		val f = XAnnotationsFactory::eINSTANCE
 		val typesFactory = TypesFactory::eINSTANCE
@@ -45,6 +48,7 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 		assertEquals("Foo", (type.annotations.head.values.head as JvmStringAnnotationValue).values.head)
 	}
 	
+	@Test
 	def void testStringAnnotationWithNullExpression() {
 		val f = XAnnotationsFactory::eINSTANCE
 		val typesFactory = TypesFactory::eINSTANCE
@@ -61,6 +65,7 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 		assertTrue(type.annotations.head.values.empty)
 	}
 	
+	@Test
 	def void testStringArrayAnnotation() {
 		val f = XAnnotationsFactory::eINSTANCE
 		val typesFactory = TypesFactory::eINSTANCE
@@ -82,6 +87,7 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 		assertEquals("Bar", (type.annotations.head.values.head as JvmStringAnnotationValue).values.get(1))
 	}
 	
+	@Test
 	def void testStringArrayAnnotationWithNullExpression() {
 		val f = XAnnotationsFactory::eINSTANCE
 		val typesFactory = TypesFactory::eINSTANCE
@@ -99,6 +105,7 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 		assertTrue(type.annotations.head.values.empty)
 	}
 	
+	@Test
 	def void testAnnotationCreation() {
 		val e = expression("'foo'")
 		val anno = e.toAnnotationType("foo.bar.MyAnnotation") [
@@ -108,6 +115,8 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 		assertEquals("MyAnnotation", anno.simpleName)
 		assertEquals("Foo", anno.documentation)
 	}
+	
+	@Test
 	def void testInterfaceCreation() {
 		val e = expression("'foo'")
 		val anno = e.toInterface("foo.bar.MyAnnotation") [
@@ -118,6 +127,8 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 		assertEquals("MyAnnotation", anno.simpleName)
 		assertEquals(1, anno.superTypes.size)
 	}
+	
+	@Test
 	def void testEnumCreation() {
 		val e = expression("'foo'")
 		val anno = e.toEnumerationType("MyEnum") [

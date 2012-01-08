@@ -9,8 +9,8 @@ package org.eclipse.xtext.xbase.tests.compiler;
 
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.junit.util.ParseHelper;
-import org.eclipse.xtext.junit.validation.ValidationTestHelper;
+import org.eclipse.xtext.junit4.util.ParseHelper;
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
@@ -22,6 +22,8 @@ import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.google.common.base.Supplier;
 import com.google.inject.Guice;
@@ -36,7 +38,7 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 	
 	// checked exceptions not supported by this implementation
 	@Override
-	public void testThrowExpression_01() {
+	@Test public void testThrowExpression_01() {
 	}
 	
 	static Injector injector = new XbaseStandaloneSetup() {
@@ -66,9 +68,8 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 	@Inject
 	private IResourceScopeCache cache;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		injector.injectMembers(this);
 		javaCompiler.clearClassPath();
 		javaCompiler.addClassPathOfClass(getClass());

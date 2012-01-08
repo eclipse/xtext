@@ -15,29 +15,30 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.junit.Test;
 
 /**
  * @author Sebastian Benz - Initial contribution and API
  */
 public class CustomExpressionTest extends AbstractXbaseTestCase {
 
-	public void testBinaryExpressionsShouldReturnArgumentsInInternalEList() throws Exception {
+	@Test public void testBinaryExpressionsShouldReturnArgumentsInInternalEList() throws Exception {
 		assertResolvingCrossReferencesThrowsNoException("1 == 1");
 	}
 	
-	public void testAssignmentShouldReturnArgumentsInInternalEList() throws Exception {
+	@Test public void testAssignmentShouldReturnArgumentsInInternalEList() throws Exception {
 		assertResolvingCrossReferencesThrowsNoException("{var x = 'literal' x = 'newValue'}");
 	} 
 
-	public void testFeatureCallShouldReturnArgumentsInInternalEList() throws Exception {
+	@Test public void testFeatureCallShouldReturnArgumentsInInternalEList() throws Exception {
 		assertResolvingCrossReferencesThrowsNoException("'literal'.toUpperCase()");
 	}
 	
-	public void testMemberFeatureCallShouldReturnArgumentsInInternalEList() throws Exception {
+	@Test public void testMemberFeatureCallShouldReturnArgumentsInInternalEList() throws Exception {
 		assertResolvingCrossReferencesThrowsNoException("'literal'.toUpperCase()");
 	}
 	
-	public void testNullValuesShouldBeIgnored() throws Exception {
+	@Test public void testNullValuesShouldBeIgnored() throws Exception {
 		//unary operations are not implemented yet
 		String input = "!";
 		XUnaryOperation expression = (XUnaryOperation) incompleteExpression(input);

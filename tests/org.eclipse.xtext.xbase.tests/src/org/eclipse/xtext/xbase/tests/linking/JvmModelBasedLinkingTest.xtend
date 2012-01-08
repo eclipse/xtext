@@ -5,12 +5,13 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.common.types.util.TypeReferences
-import org.eclipse.xtext.junit.validation.ValidationTestHelper
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.xbase.XFeatureCall
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 
-import static junit.framework.Assert.*
+import static org.junit.Assert.*
+import org.junit.Test
 
 class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
 	
@@ -18,6 +19,7 @@ class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
 	@Inject TypeReferences refs
 	@Inject extension ValidationTestHelper
 	
+	@Test
 	def void testLinkToParameter() {
 		val expr = expression("x", false)
 		val resource = expr.eResource
@@ -32,6 +34,7 @@ class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
 		expr.assertNoErrors
 	}
 	
+	@Test
 	def void testLinkToParameter_1() {
 		val expr = expression("x", false) as XFeatureCall
 		val resource = expr.eResource
@@ -47,6 +50,7 @@ class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
 		assertTrue( expr.feature instanceof JvmFormalParameter)
 	}
 	
+	@Test
 	def void testLinkToField() {
 		val expr = expression("x", false) as XFeatureCall
 		val resource = expr.eResource
@@ -62,6 +66,7 @@ class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
 		assertTrue( expr.feature instanceof JvmField)
 	}
 	
+	@Test
 	def void testLinkToField_1() {
 		val expr = expression("x", false) as XFeatureCall
 		val resource = expr.eResource
