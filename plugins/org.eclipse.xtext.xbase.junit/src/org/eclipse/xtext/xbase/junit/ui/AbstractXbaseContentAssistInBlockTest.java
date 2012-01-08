@@ -2,6 +2,7 @@ package org.eclipse.xtext.xbase.junit.ui;
 
 import org.junit.Test;
 
+@SuppressWarnings("restriction")
 public abstract class AbstractXbaseContentAssistInBlockTest extends AbstractXbaseContentAssistTest {
 
 	protected static String[] VARIABLE_DECL = {"val", "var"};
