@@ -10,8 +10,6 @@ package org.eclipse.xtext.common.types.ui.notification;
 import java.util.Collection;
 import java.util.Set;
 
-import junit.framework.TestCase;
-
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IType;
@@ -27,13 +25,17 @@ import org.eclipse.xtext.common.types.tests.AbstractActivator;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class TypeResourceUnloaderTest extends TestCase implements IResourceDescription.Event.Listener {
+public class TypeResourceUnloaderTest extends Assert implements IResourceDescription.Event.Listener {
 
 	private static final String NESTED_TYPES = "org.eclipse.xtext.common.types.testSetups.NestedTypes";
 
@@ -54,9 +56,8 @@ public class TypeResourceUnloaderTest extends TestCase implements IResourceDescr
 
 	private String originalContent;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		eventBroker = AbstractActivator.getInstance().getInjector(DUMMY_LANG_NAME).getInstance(IStateChangeEventBroker.class);
 		projectProvider = new MockJavaProjectProvider();
 		projectProvider.setUseSource(true);
@@ -70,8 +71,8 @@ public class TypeResourceUnloaderTest extends TestCase implements IResourceDescr
 		originalContent = document.get();
 	}
 	
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		document.set(originalContent);
 		editor.doSave(null);
 		closeEditors();
@@ -83,17 +84,16 @@ public class TypeResourceUnloaderTest extends TestCase implements IResourceDescr
 		type = null;
 		project = null;
 		event = null;
-		super.tearDown();
 	}
 	
-	public void testNullChange() throws BadLocationException, InterruptedException {
+	@Test public void testNullChange() throws BadLocationException, InterruptedException {
 		int lastBrace = document.get().lastIndexOf("}");
 		document.replace(lastBrace, 0, " ");
 		waitForEvent();
 		assertNull(event);
 	}
 	
-	public void testRemoveMethod() throws BadLocationException, JavaModelException, InterruptedException {
+	@Test public void testRemoveMethod() throws BadLocationException, JavaModelException, InterruptedException {
 		String lookup = "abstract boolean method();";
 		int idx = document.get().lastIndexOf(lookup);
 		document.replace(idx, lookup.length(), "");
@@ -118,7 +118,7 @@ public class TypeResourceUnloaderTest extends TestCase implements IResourceDescr
 		assertTrue(allNames.toString(), allNames.contains(NESTED_TYPES + "$Outer$Inner"));
 	}
 	
-	public void testAddParam() throws BadLocationException, JavaModelException, InterruptedException {
+	@Test public void testAddParam() throws BadLocationException, JavaModelException, InterruptedException {
 		int idx = document.get().lastIndexOf("(");
 		document.replace(idx + 1, 0, "int foobar");
 		waitForEvent();
@@ -130,7 +130,7 @@ public class TypeResourceUnloaderTest extends TestCase implements IResourceDescr
 		assertEquals(6, allNames.size());
 	}
 	
-	public void testAddMethod() throws BadLocationException, JavaModelException, InterruptedException {
+	@Test public void testAddMethod() throws BadLocationException, JavaModelException, InterruptedException {
 		String lookup = "abstract boolean method();";
 		int idx = document.get().lastIndexOf(lookup);
 		document.replace(idx + lookup.length(), 0, "abstract int foobar();");
@@ -144,7 +144,7 @@ public class TypeResourceUnloaderTest extends TestCase implements IResourceDescr
 		assertEquals(7, allNames.size());
 	}
 	
-	public void testRenameMethod() throws BadLocationException, JavaModelException, InterruptedException {
+	@Test public void testRenameMethod() throws BadLocationException, JavaModelException, InterruptedException {
 		int idx = document.get().lastIndexOf("method(");
 		document.replace(idx + "method".length(), 0, "2");
 		waitForEvent();
@@ -157,7 +157,7 @@ public class TypeResourceUnloaderTest extends TestCase implements IResourceDescr
 		assertEquals(7, allNames.size());
 	}
 	
-	public void testRenameInnerMethod() throws BadLocationException, JavaModelException, InterruptedException {
+	@Test public void testRenameInnerMethod() throws BadLocationException, JavaModelException, InterruptedException {
 		int idx = document.get().indexOf("method(");
 		document.replace(idx + "method".length(), 0, "2");
 		waitForEvent();
@@ -170,7 +170,7 @@ public class TypeResourceUnloaderTest extends TestCase implements IResourceDescr
 		assertEquals(7, allNames.size());
 	}
 	
-	public void testRenameClass() throws BadLocationException, JavaModelException, InterruptedException {
+	@Test public void testRenameClass() throws BadLocationException, JavaModelException, InterruptedException {
 		String foobar = "org.eclipse.xtext.common.types.testSetups.FooBar";
 		int idx = document.get().indexOf("NestedTypes");
 		document.replace(idx, "NestedTypes".length(), "FooBar");

@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.xtext.ui;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -25,11 +23,14 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JdtBasedSimpleTypeScopeProviderTest extends TestCase {
+public class JdtBasedSimpleTypeScopeProviderTest extends Assert {
 
 	private MockJavaProjectProvider projectProvider;
 	private JdtTypeProviderFactory factory;
@@ -39,9 +40,8 @@ public class JdtBasedSimpleTypeScopeProviderTest extends TestCase {
 	private JvmField field;
 	private ResourceImpl emptyResource;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		projectProvider = new MockJavaProjectProvider();
 		factory = new JdtTypeProviderFactory(projectProvider);
 		IQualifiedNameConverter qualifiedNameConverter = new IQualifiedNameConverter.DefaultImpl();
@@ -57,13 +57,13 @@ public class JdtBasedSimpleTypeScopeProviderTest extends TestCase {
 		resource.getContents().add(field);
 	}
 	
-	public void testGetScope_01() {
+	@Test public void testGetScope_01() {
 		JdtBasedSimpleTypeScope scope = (JdtBasedSimpleTypeScope) scopeProvider.getScope(field.eResource(), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
 		assertNotNull(scope);
 		assertSame(factory.findTypeProvider(resourceSet), scope.getTypeProvider());
 	}
 
-	public void testGetScope_02() {
+	@Test public void testGetScope_02() {
 		resourceSet.getResources().clear();
 		try {
 			scopeProvider.getScope(field.eResource(), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
@@ -73,7 +73,7 @@ public class JdtBasedSimpleTypeScopeProviderTest extends TestCase {
 		}
 	}
 	
-	public void testGetScope_03() {
+	@Test public void testGetScope_03() {
 		resource.getContents().clear();
 		try {
 			scopeProvider.getScope(field.eResource(), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
@@ -83,7 +83,7 @@ public class JdtBasedSimpleTypeScopeProviderTest extends TestCase {
 		}
 	}
 	
-	public void testGetScope_04() {
+	@Test public void testGetScope_04() {
 		resourceSet.getResources().clear();
 		try {
 			scopeProvider.getScope(field.eResource(), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
@@ -93,7 +93,7 @@ public class JdtBasedSimpleTypeScopeProviderTest extends TestCase {
 		}
 	}
 	
-	public void testGetScope_05() {
+	@Test public void testGetScope_05() {
 		resource.getContents().clear();
 		try {
 			scopeProvider.getScope(field.eResource(), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
@@ -103,12 +103,12 @@ public class JdtBasedSimpleTypeScopeProviderTest extends TestCase {
 		}
 	}
 	
-	public void testGetScope_06() {
+	@Test public void testGetScope_06() {
 		IScope scope = scopeProvider.getScope(field.eResource(), TypesPackage.Literals.JVM_CONSTRAINT_OWNER__CONSTRAINTS);
 		assertSame(IScope.NULLSCOPE, scope);
 	}
 	
-	public void testNotification_01() {
+	@Test public void testNotification_01() {
 		JdtBasedSimpleTypeScope scope = (JdtBasedSimpleTypeScope) scopeProvider.getScope(field.eResource(), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
 		assertTrue(resourceSet.eAdapters().isEmpty());
 		IEObjectDescription objectElement = scope.getSingleElement(QualifiedName.create(Object.class.getName()));
@@ -116,7 +116,7 @@ public class JdtBasedSimpleTypeScopeProviderTest extends TestCase {
 		assertEquals(1, resourceSet.eAdapters().size());
 	}
 	
-	public void testNotification_02() {
+	@Test public void testNotification_02() {
 		JdtBasedSimpleTypeScope scope = (JdtBasedSimpleTypeScope) scopeProvider.getScope(field.eResource(), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
 		assertTrue(resourceSet.eAdapters().isEmpty());
 		IEObjectDescription objectElement = scope.getSingleElement(QualifiedName.create(Object.class.getName()));
@@ -130,7 +130,7 @@ public class JdtBasedSimpleTypeScopeProviderTest extends TestCase {
 		assertFalse(objectResource.isLoaded());
 	}
 	
-	public void testNotification_03() {
+	@Test public void testNotification_03() {
 		JdtBasedSimpleTypeScope scope = (JdtBasedSimpleTypeScope) scopeProvider.getScope(field.eResource(), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
 		assertTrue(resourceSet.eAdapters().isEmpty());
 		IEObjectDescription objectElement = scope.getSingleElement(QualifiedName.create(Object.class.getName()));
@@ -143,7 +143,7 @@ public class JdtBasedSimpleTypeScopeProviderTest extends TestCase {
 		assertFalse(objectResource.isLoaded());
 	}
 	
-	public void testNotification_04() {
+	@Test public void testNotification_04() {
 		JdtBasedSimpleTypeScope scope = (JdtBasedSimpleTypeScope) scopeProvider.getScope(field.eResource(), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
 		assertTrue(resourceSet.eAdapters().isEmpty());
 		IEObjectDescription objectElement = scope.getSingleElement(QualifiedName.create(Object.class.getName()));

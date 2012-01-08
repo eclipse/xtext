@@ -7,40 +7,41 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JvmParameterizedTypeReferenceTest extends TestCase {
+public class JvmParameterizedTypeReferenceTest extends Assert {
 
 	private JvmParameterizedTypeReference parameterizedType;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		parameterizedType = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
 	}
 	
-	public void testGetIdentifier_01() {
+	@Test public void testGetIdentifier_01() {
 		assertNull(parameterizedType.getIdentifier());
 	}
 	
-	public void testGetIdentifier_02() {
+	@Test public void testGetIdentifier_02() {
 		JvmPrimitiveType primitiveType = TypesFactory.eINSTANCE.createJvmPrimitiveType();
 		primitiveType.setSimpleName("int");
 		parameterizedType.setType(primitiveType);
 		assertEquals("int", parameterizedType.getIdentifier());
 	}
 	
-	public void testGetIdentifier_03() {
+	@Test public void testGetIdentifier_03() {
 		JvmGenericType genericType = TypesFactory.eINSTANCE.createJvmGenericType();
 		genericType.internalSetIdentifier("java.util.List");
 		parameterizedType.setType(genericType);
 		assertEquals("java.util.List", parameterizedType.getIdentifier());
 	}
 	
-	public void testGetIdentifier_04() {
+	@Test public void testGetIdentifier_04() {
 		JvmGenericType genericType = TypesFactory.eINSTANCE.createJvmGenericType();
 		genericType.internalSetIdentifier("java.util.List");
 		parameterizedType.setType(genericType);
@@ -52,7 +53,7 @@ public class JvmParameterizedTypeReferenceTest extends TestCase {
 		assertEquals("java.util.List<java.lang.String>", parameterizedType.getIdentifier());
 	}
 	
-	public void testGetIdentifier_05() {
+	@Test public void testGetIdentifier_05() {
 		JvmPrimitiveType primitiveType = TypesFactory.eINSTANCE.createJvmPrimitiveType();
 		primitiveType.setSimpleName("int");
 		JvmArrayType arrayType = TypesFactory.eINSTANCE.createJvmArrayType();

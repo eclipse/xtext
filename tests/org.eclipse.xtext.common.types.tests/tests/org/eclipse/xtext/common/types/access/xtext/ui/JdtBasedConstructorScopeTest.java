@@ -21,6 +21,8 @@ import org.eclipse.xtext.common.types.xtext.ui.JdtBasedSimpleTypeScope;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -37,9 +39,8 @@ public class JdtBasedConstructorScopeTest extends AbstractConstructorScopeTest {
 	private JdtBasedSimpleTypeScope typeScope;
 	private JdtBasedConstructorScope constructorScope;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		projectProvider = new MockJavaProjectProvider();
 		factory = new JdtTypeProviderFactory(projectProvider);
 		resourceSet = new ResourceSetImpl();
@@ -47,7 +48,7 @@ public class JdtBasedConstructorScopeTest extends AbstractConstructorScopeTest {
 		constructorScope = new JdtBasedConstructorScope(typeScope);
 	}
 	
-	public void testGetContents_01() {
+	@Test public void testGetContents_01() {
 		Iterable<IEObjectDescription> contents = constructorScope.getAllElements();
 		assertFalse(Iterables.any(contents, new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
@@ -56,7 +57,7 @@ public class JdtBasedConstructorScopeTest extends AbstractConstructorScopeTest {
 		}));
 	}
 	
-	public void testGetContents_02() {
+	@Test public void testGetContents_02() {
 		Iterable<IEObjectDescription> contents = constructorScope.getAllElements();
 		assertFalse(Iterables.any(contents, new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
@@ -65,7 +66,7 @@ public class JdtBasedConstructorScopeTest extends AbstractConstructorScopeTest {
 		}));
 	}
 	
-	public void testGetContents_03() {
+	@Test public void testGetContents_03() {
 		Iterable<IEObjectDescription> contents = constructorScope.getAllElements();
 		assertFalse(Iterables.any(contents, new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
@@ -74,7 +75,7 @@ public class JdtBasedConstructorScopeTest extends AbstractConstructorScopeTest {
 		}));
 	}
 	
-	public void testGetContents_04() {
+	@Test public void testGetContents_04() {
 		Iterable<IEObjectDescription> contents = constructorScope.getAllElements();
 		// TODO Fix assertion
 //		assertTrue(Iterables.any(contents, new Predicate<IEObjectDescription>() {

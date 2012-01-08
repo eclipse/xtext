@@ -9,55 +9,55 @@ package org.eclipse.xtext.common.types.access.impl;
 
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
-
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class PrimitiveTypeFactoryTest extends TestCase implements ITypeFactory<Class<?>> {
+public class PrimitiveTypeFactoryTest extends Assert implements ITypeFactory<Class<?>> {
 
 	private PrimitiveTypeFactory provider;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		provider = new PrimitiveTypeFactory();
 	}
 	
-	public void testByte() {
+	@Test public void testByte() {
 		assertEquals("byte", createType(Byte.TYPE).getIdentifier());
 	}
 	
-	public void testShort() {
+	@Test public void testShort() {
 		assertEquals("short", createType(Short.TYPE).getIdentifier());
 	}
 	
-	public void testInt() {
+	@Test public void testInt() {
 		assertEquals("int", createType(Integer.TYPE).getIdentifier());
 	}
 	
-	public void testLong() {
+	@Test public void testLong() {
 		assertEquals("long", createType(Long.TYPE).getIdentifier());
 	}
 	
-	public void testFloat() {
+	@Test public void testFloat() {
 		assertEquals("float", createType(Float.TYPE).getIdentifier());
 	}
 	
-	public void testDouble() {
+	@Test public void testDouble() {
 		assertEquals("double", createType(Double.TYPE).getIdentifier());
 	}
 	
-	public void testChar() {
+	@Test public void testChar() {
 		assertEquals("char", createType(Character.TYPE).getIdentifier());
 	}
 	
-	public void testBoolean() {
+	@Test public void testBoolean() {
 		assertEquals("boolean", createType(Boolean.TYPE).getIdentifier());
 	}
 	
-	public void testVoid() {
+	@Test public void testVoid() {
 		assertTrue(provider.createType(Void.TYPE) instanceof org.eclipse.xtext.common.types.JvmVoid);
 	}
 
