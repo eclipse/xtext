@@ -8,10 +8,11 @@
 package org.eclipse.xtext.xbase.tests.validation;
 
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.junit.validation.ValidationTestHelper;
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
@@ -22,22 +23,22 @@ public class JvmTypeReferencesValidatorTest extends AbstractXbaseTestCase {
 	@Inject
 	protected ValidationTestHelper helper;
 	
-	public void testNoPrimitivesInTypeArgs() throws Exception {
+	@Test public void testNoPrimitivesInTypeArgs() throws Exception {
 		XExpression expression = expression("null as java.util.List<boolean>");
 		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.INVALID_USE_OF_TYPE);
 	}
 	
-	public void testNoPrimitivesInTypeArgs_00() throws Exception {
+	@Test public void testNoPrimitivesInTypeArgs_00() throws Exception {
 		XExpression expression = expression("null as java.util.List<? extends boolean>");
 		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.INVALID_USE_OF_TYPE);
 	}
 	
-	public void testNoPrimitivesInTypeArgs_01() throws Exception {
+	@Test public void testNoPrimitivesInTypeArgs_01() throws Exception {
 		XExpression expression = expression("{val (void)=>void func = [void s|s+'foo'] func}");
 		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.INVALID_USE_OF_TYPE);
 	}
 	
-	public void testFormalParameterTypeNotVoid() throws Exception {
+	@Test public void testFormalParameterTypeNotVoid() throws Exception {
 		XExpression expression = expression("for (void x : null as java.util.List<?>) 'foo'+'bar'");
 		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.INVALID_USE_OF_TYPE);
 	}

@@ -11,7 +11,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.InMemoryFileSystemAccess
-import org.eclipse.xtext.junit.validation.ValidationTestHelper
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler$EclipseRuntimeDependentJavaCompiler
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest
@@ -19,7 +19,8 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.lib.Functions
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 
-import static junit.framework.Assert.*
+import static org.junit.Assert.*
+import org.junit.Test
 
 class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	
@@ -40,6 +41,7 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 		javaCompiler.addClassPathOfClass(typeof(Supplier));
 	} 
 	
+	@Test
 	def void testSimple() {
 		val expression = expression("return s.toUpperCase", false);
 		val clazz = expression.toClass("my.test.Foo") [
@@ -54,6 +56,7 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 		assertEquals("FOO", compiledClass.getMethod("doStuff",typeof(String)).invoke(instance,"foo"))
 	}
 	
+	@Test
 	def void testImplements() {
 		val expression = expression("null", false);
 		val clazz = expression.toClass("my.test.Foo") [
@@ -64,6 +67,7 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 		assertTrue(typeof(Iterable).isAssignableFrom(compiled))
 	}
 	
+	@Test
 	def void testExtends() {
 		val expression = expression("null", false);
 		val clazz = expression.toClass("my.test.Foo") [
@@ -75,6 +79,7 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 		assertTrue(typeof(AbstractList).isAssignableFrom(compiled))
 	}
 	
+	@Test
 	def void testCompilationStrategy() {
 		val expression = expression("null", false);
 		val clazz = expression.toClass("my.test.Foo") [

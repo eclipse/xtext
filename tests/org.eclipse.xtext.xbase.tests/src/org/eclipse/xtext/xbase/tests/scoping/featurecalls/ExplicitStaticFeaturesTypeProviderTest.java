@@ -17,6 +17,7 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.scoping.featurecalls.DefaultJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScope;
+import org.junit.Test;
 
 import testdata.StaticVisibilitySubClass;
 import testdata.StaticVisibilitySuperType;
@@ -60,7 +61,7 @@ public class ExplicitStaticFeaturesTypeProviderTest extends AbstractJvmFeatureSc
 		return result;
 	}
 
-	public void testVisibilitySubType() throws Exception {
+	@Test public void testVisibilitySubType() throws Exception {
 		JvmTypeReference reference = getTypeRef(StaticVisibilitySubClass.class.getCanonicalName());
 		JvmFeatureScope scope = createScope(reference.eResource(), reference);
 		String actual = formatScope(scope);
@@ -102,7 +103,7 @@ public class ExplicitStaticFeaturesTypeProviderTest extends AbstractJvmFeatureSc
 		assertEquals(expectation.toString(), actual);
 	}
 
-	public void testVisibilitySuperType() throws Exception {
+	@Test public void testVisibilitySuperType() throws Exception {
 		JvmTypeReference reference = getTypeRef(StaticVisibilitySuperType.class.getCanonicalName());
 		JvmFeatureScope scope = createScope(reference.eResource(), reference);
 		String actual = formatScope(scope);

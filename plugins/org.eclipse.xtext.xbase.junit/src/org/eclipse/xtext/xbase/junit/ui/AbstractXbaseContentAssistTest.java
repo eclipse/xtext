@@ -8,19 +8,21 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.Constants;
-import org.eclipse.xtext.junit.util.ResourceLoadHelper;
+import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
+import org.eclipse.xtext.junit4.util.ResourceLoadHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.ui.junit.editor.contentassist.ContentAssistProcessorTestBuilder;
-import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XExpression;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
@@ -29,24 +31,23 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.name.Named;
 
-public abstract class AbstractXbaseContentAssistTest extends TestCase implements ResourceLoadHelper {
+@SuppressWarnings("restriction")
+public abstract class AbstractXbaseContentAssistTest extends Assert implements ResourceLoadHelper {
 
 	@Inject
 	protected IWorkspace workspace;
 
 	protected String fileExtension;
 
-	@Override
+	@Before
 	protected void setUp() throws Exception {
-		super.setUp();
 		getInjector().injectMembers(this);
 	}
 
-	@Override
+	@After
 	protected void tearDown() throws Exception {
 		if (doCleanWorkspace())
 			IResourcesSetupUtil.cleanWorkspace();
-		super.tearDown();
 	}
 	
 	protected boolean doCleanWorkspace() {

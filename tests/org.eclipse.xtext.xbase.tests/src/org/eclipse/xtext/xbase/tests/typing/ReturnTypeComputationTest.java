@@ -19,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.junit.Test;
 
 import com.google.common.base.Function;
 import com.google.inject.Inject;
@@ -30,51 +31,51 @@ public class ReturnTypeComputationTest extends AbstractXbaseTestCase {
 	@Inject
 	private ITypeProvider typeProvider;
 	
-	public void testReturnType_00() throws Exception {
+	@Test public void testReturnType_00() throws Exception {
 		assertReturnType("java.lang.String", "return 'foo'");
 	}
 	
-	public void testReturnType_01() throws Exception {
+	@Test public void testReturnType_01() throws Exception {
 		assertReturnType("void", "'foo'");
 	}
 	
-	public void testReturnType_02() throws Exception {
+	@Test public void testReturnType_02() throws Exception {
 		assertReturnType("null", "return null");
 	}
 	
-	public void testReturnType_03() throws Exception {
+	@Test public void testReturnType_03() throws Exception {
 		assertReturnType("void", "[| return e]");
 	}
 	
-	public void testReturnType_04() throws Exception {
+	@Test public void testReturnType_04() throws Exception {
 		assertReturnType("void", "{ [| return '']}");
 	}
 	
-	public void testReturnType_05() throws Exception {
+	@Test public void testReturnType_05() throws Exception {
 		assertReturnType("()=>java.lang.String", "return [| '']");
 	}
 	
-	public void testReturnType_06() throws Exception {
+	@Test public void testReturnType_06() throws Exception {
 		assertReturnType("()=>java.lang.String", "return [| return '']");
 	}
 	
-	public void testReturnType_07() throws Exception {
+	@Test public void testReturnType_07() throws Exception {
 		assertReturnType("java.lang.Object", "if (true) return 'x' else return new Object()");
 	}
 	
-	public void testReturnType_08() throws Exception {
+	@Test public void testReturnType_08() throws Exception {
 		assertReturnType("java.lang.Object", "if (true) return 'x' else return new Object()");
 	}
 	
-	public void testReturnType_09() throws Exception {
+	@Test public void testReturnType_09() throws Exception {
 		assertReturnTypeWithImplictReturnExpression("java.lang.Object", "if (true) return 'x' else [|'x']");
 	}
 	
-	public void testReturnType_10() throws Exception {
+	@Test public void testReturnType_10() throws Exception {
 		assertReturnTypeWithImplictReturnExpression("java.lang.String", "if (true) return 'x' else 'y'");
 	}
 	
-	public void testReturnType_11() throws Exception {
+	@Test public void testReturnType_11() throws Exception {
 		assertReturnTypeWithImplictReturnExpression("java.lang.Object", 
 				"{" +
 				" val x = [|if (true) return 'y' else new Object()]" +
@@ -82,7 +83,7 @@ public class ReturnTypeComputationTest extends AbstractXbaseTestCase {
 				"}");
 	}
 	
-	public void testReturnType_12() throws Exception {
+	@Test public void testReturnType_12() throws Exception {
 		assertReturnTypeWithImplictReturnExpression("java.lang.String", 
 				"{" +
 				" val x = [|if (true) return 'y' else 'x']" +
@@ -90,27 +91,27 @@ public class ReturnTypeComputationTest extends AbstractXbaseTestCase {
 		"}");
 	}
 	
-	public void testThrownTypes_00() throws Exception {
+	@Test public void testThrownTypes_00() throws Exception {
 		assertThrownTypes("throw new RuntimeException()", RuntimeException.class.getName());
 	}
 	
-	public void testThrownTypes_01() throws Exception {
+	@Test public void testThrownTypes_01() throws Exception {
 		assertThrownTypes("{ if (true) throw new RuntimeException() else throw new IllegalArgumentException() }", 
 				IllegalArgumentException.class.getName(), 
 				RuntimeException.class.getName());
 	}
 	
-	public void testThrownTypes_02() throws Exception {
+	@Test public void testThrownTypes_02() throws Exception {
 		assertThrownTypes("{ if (true) throw new RuntimeException() else [|throw new IllegalArgumentException()] }", 
 				RuntimeException.class.getName());
 	}
 	
-	public void testThrownTypes_03() throws Exception {
+	@Test public void testThrownTypes_03() throws Exception {
 		assertThrownTypes("try { if (true) throw new RuntimeException() else throw new IllegalArgumentException() } catch (IllegalArgumentException e) {}", 
 				RuntimeException.class.getName());
 	}
 	
-	public void testThrownTypes_04() throws Exception {
+	@Test public void testThrownTypes_04() throws Exception {
 		assertThrownTypes("try { if (true) throw new RuntimeException() else throw new IllegalArgumentException() } catch (IllegalArgumentException e) {" +
 				" throw new NullPointerException()" +
 				"}", 
@@ -118,7 +119,7 @@ public class ReturnTypeComputationTest extends AbstractXbaseTestCase {
 				RuntimeException.class.getName());
 	}
 	
-	public void testThrownTypes_05() throws Exception {
+	@Test public void testThrownTypes_05() throws Exception {
 		assertThrownTypes("try { if (true) throw new RuntimeException() else throw new IllegalArgumentException() } catch (IllegalArgumentException e) {" +
 				" throw new NullPointerException()" +
 				"} catch (NullPointerException e) {" + 
@@ -126,7 +127,7 @@ public class ReturnTypeComputationTest extends AbstractXbaseTestCase {
 				NullPointerException.class.getName());
 	}
 	
-	public void testThrownTypes_06() throws Exception {
+	@Test public void testThrownTypes_06() throws Exception {
 		assertThrownTypes("try { if (true) throw new RuntimeException() else throw new IllegalArgumentException() } catch (IllegalArgumentException e) {" +
 				" throw new NullPointerException()" +
 				"} catch (NullPointerException e) {" + 
@@ -138,12 +139,12 @@ public class ReturnTypeComputationTest extends AbstractXbaseTestCase {
 				UnsupportedOperationException.class.getName());
 	}
 	
-	public void testThrownTypes_07() throws Exception {
+	@Test public void testThrownTypes_07() throws Exception {
 		assertThrownTypes("{ if (true) throw new RuntimeException() else throw new RuntimeException() }", 
 				RuntimeException.class.getName());
 	}
 	
-	public void testThrownTypes_08() throws Exception {
+	@Test public void testThrownTypes_08() throws Exception {
 		assertThrownTypes("(null as java.io.InputStream).read()", 
 				IOException.class.getName());
 	}

@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.xmi.impl.URIHandlerImpl;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.junit.Test;
 
 import com.google.common.collect.Lists;
 
@@ -34,7 +35,7 @@ public class URIsInEcoreFilesTest extends AbstractXbaseTestCase {
 	private ResourceSet resourceSet;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		resourceSet = get(XtextResourceSet.class);
 		resourceSet.getLoadOptions().put(XMLResource.OPTION_URI_HANDLER, new URIHandlerImpl.PlatformSchemeAware() {
@@ -74,43 +75,43 @@ public class URIsInEcoreFilesTest extends AbstractXbaseTestCase {
 		}
 	}
 	
-	public void testXbase() {
+	@Test public void testXbase() {
 		doTestResource("org.eclipse.xtext.xbase/model/Xbase.ecore", "xbase");
 	}
 	
-	public void testXtype() {
+	@Test public void testXtype() {
 		doTestResource("org.eclipse.xtext.xbase/model/Xtype.ecore", "xtype");
 	}
 	
-	public void testXbaseWithAnnotations() {
+	@Test public void testXbaseWithAnnotations() {
 		doTestResource("org.eclipse.xtext.xbase/model/XAnnotations.ecore", "xAnnotations");
 	}
 	
-	public void testXbaseGenmodel() {
+	@Test public void testXbaseGenmodel() {
 		doTestResource("org.eclipse.xtext.xbase/model/Xbase.genmodel", "xbase", "xtype", "xAnnotations");
 	}
 	
-	public void testXtend2() {
+	@Test public void testXtend2() {
 		doTestResource("org.eclipse.xtext.xtend2/model/Xtend2.ecore", "xtend2");
 	}
 	
-	public void testXtend2GenModel() {
+	@Test public void testXtend2GenModel() {
 		doTestResource("org.eclipse.xtext.xtend2/model/Xtend2.genmodel", "xtend2");
 	}
 	
-	public void testRichStrings() {
+	@Test public void testRichStrings() {
 		doTestResource("org.eclipse.xtext.xtend2/model/RichStrings.ecore", "richstring");
 	}
 	
-	public void testRichStringsGenModel() {
+	@Test public void testRichStringsGenModel() {
 		doTestResource("org.eclipse.xtext.xtend2/model/RichStrings.genmodel", "richstring");
 	}
 	
-	public void testCommonTypes() {
+	@Test public void testCommonTypes() {
 		doTestResource("org.eclipse.xtext.common.types/model/JavaVMTypes.ecore", "types");
 	}
 
-	public void testCommonTypesGenModel() {
+	@Test public void testCommonTypesGenModel() {
 		doTestResource("org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel", "types");
 	}
 	

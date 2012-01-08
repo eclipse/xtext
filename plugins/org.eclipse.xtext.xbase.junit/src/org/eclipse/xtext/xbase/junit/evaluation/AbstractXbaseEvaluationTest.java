@@ -16,9 +16,7 @@ import java.math.BigInteger;
 import java.util.Collections;
 import java.util.Stack;
 
-import junit.framework.TestCase;
-
-import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.junit.Test;
 
 import testdata.ExceptionSubclass;
@@ -31,16 +29,8 @@ import com.google.common.collect.Sets;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge
  */
-public abstract class AbstractXbaseEvaluationTest extends TestCase {
+public abstract class AbstractXbaseEvaluationTest extends Assert {
 
-	private static final Logger log = Logger.getLogger(AbstractXbaseEvaluationTest.class);
-	
-	@Override
-	protected void setUp() throws Exception {
-		log.debug(getClass().getSimpleName() + "." + getName());
-		super.setUp();
-	}
-	
 	@Test public void testImplicitOneArgClosure() throws Exception {
 		assertEvaluatesTo("foo","[it].apply('foo')");
 	}

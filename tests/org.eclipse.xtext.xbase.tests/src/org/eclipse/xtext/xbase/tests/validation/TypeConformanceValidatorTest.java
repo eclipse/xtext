@@ -11,10 +11,11 @@ import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.junit.validation.ValidationTestHelper;
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
@@ -27,7 +28,7 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 	@Inject
 	protected ValidationTestHelper helper;
 
-	public void testIfPredicate() throws Exception {
+	@Test public void testIfPredicate() throws Exception {
 		assertNoConformanceError("if (true) 'foo'");
 		assertConformanceError("if (27) 'foo'", XbasePackage.Literals.XINT_LITERAL, "int",
 				"boolean");
@@ -36,7 +37,7 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 		assertNoConformanceError("if ({'foo'=='bar'}) 'foo'");
 	}
 	
-	public void testWhilePredicate() throws Exception {
+	@Test public void testWhilePredicate() throws Exception {
 		assertNoConformanceError("while (true) 'foo'");
 		assertConformanceError("while (27) 'foo'", XbasePackage.Literals.XINT_LITERAL, "int",
 				"boolean");
@@ -53,80 +54,80 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 		assertNoConformanceError("do 'foo' while ({'foo'=='bar'})");
 	}
 
-	public void testCast_00() throws Exception {
+	@Test public void testCast_00() throws Exception {
 		assertNoConformanceError("'foo' as Object");
 	}
 
-	public void testCast_01() throws Exception {
+	@Test public void testCast_01() throws Exception {
 		assertCastError("'foo' as Boolean", TypesPackage.Literals.JVM_TYPE_REFERENCE, "Cannot", "Boolean");
 	}
 
-	public void testCast_02() throws Exception {
+	@Test public void testCast_02() throws Exception {
 		assertCastError("new NullPointerException() as StringBuilder", TypesPackage.Literals.JVM_TYPE_REFERENCE,
 				"cannot", "StringBuilder");
 	}
 
-	public void testCast_03() throws Exception {
+	@Test public void testCast_03() throws Exception {
 		assertNoConformanceError("new NullPointerException() as CharSequence");
 	}
 
-	public void testCast_04() throws Exception {
+	@Test public void testCast_04() throws Exception {
 		// class MyNPE extends NullPointerException implements CharSequence {}
 		// TODO: should we check the actual type in case the a casted expression
 		// is an upcast?
 		assertNoConformanceError("('foo' as CharSequence) as NullPointerException");
 	}
 
-	public void testCast_05() throws Exception {
+	@Test public void testCast_05() throws Exception {
 		assertCastError("('foo' as CharSequence) as Integer", TypesPackage.Literals.JVM_TYPE_REFERENCE, "cannot",
 				"CharSequence", "Integer");
 	}
 	
 //	TODO fix me
-//	public void testCast_06() throws Exception {
+//	@Test public void testCast_06() throws Exception {
 //		assertCastError("newArrayList(new Object()) as java.util.List<String>", TypesPackage.Literals.JVM_TYPE_REFERENCE, "cannot",
 //				"ArrayList<Object>", "List<String>");
 //	}
 
 //	TODO fix me
-//	public void testCast_07() throws Exception {
+//	@Test public void testCast_07() throws Exception {
 //		assertNoConformanceError("42 as byte");
 //	}
 	
-	public void testSwitch_TypeGuard_01() throws Exception {
+	@Test public void testSwitch_TypeGuard_01() throws Exception {
 		String expression = "switch ('foo') { Integer : null }";
 		final XExpression xExpression = expression(expression, false);
 		helper.assertError(xExpression, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_CAST);
 	}
 	
-	public void testSwitch_TypeGuard_02() throws Exception {
+	@Test public void testSwitch_TypeGuard_02() throws Exception {
 		String expression = "switch (new java.util.ArrayList()) { java.util.HashSet : null }";
 		final XExpression xExpression = expression(expression, false);
 		helper.assertError(xExpression, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_CAST);
 	}
 
-	public void testVariableDeclaration() throws Exception {
+	@Test public void testVariableDeclaration() throws Exception {
 		assertNoConformanceError("{ var s = 'foo' }");
 		assertNoConformanceError("{ var java.lang.String s = 'foo' }");
 		assertConformanceError("{ var java.lang.Boolean s = 'foo' }", XbasePackage.Literals.XSTRING_LITERAL,
 				"java.lang.Boolean", "java.lang.String");
 	}
 
-	public void testCatchClause() throws Exception {
+	@Test public void testCatchClause() throws Exception {
 		assertNoConformanceError("try 'foo' catch (java.lang.Exception foo) 'bar'");
 		assertNoConformanceError("try 'foo' catch (java.lang.IllegalArgumentException foo) 'bar'");
 		assertConformanceError("try 'foo' catch (java.lang.String foo) 'bar'",
 				TypesPackage.Literals.JVM_FORMAL_PARAMETER, "Throwable", "java.lang.String");
 	}
 
-	public void testThrowsExpression() throws Exception {
+	@Test public void testThrowsExpression() throws Exception {
 		assertNoConformanceError("throw new java.lang.Exception()");
 		assertNoConformanceError("throw new java.lang.IllegalArgumentException()");
 		assertConformanceError("throw 42", XbasePackage.Literals.XINT_LITERAL, "int",
 				"java.lang.Throwable");
 	}
 
-	public void testForLoop() throws Exception {
+	@Test public void testForLoop() throws Exception {
 		assertNoConformanceError("for(String foo : new java.util.ArrayList<String>()) 'bar'");
 		assertConformanceError("for(Integer foo : true) 'bar'", XbasePackage.Literals.XBOOLEAN_LITERAL,
 				"boolean", "java.lang.Integer");
@@ -135,37 +136,37 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 				"java.util.ArrayList<java.lang.String>");
 	}
 	
-	public void testForLoop_02() throws Exception {
+	@Test public void testForLoop_02() throws Exception {
 		assertNoConformanceError("for(String s : newHashSet('s')) s");
 	}
 	
-	public void testForLoop_03() throws Exception {
+	@Test public void testForLoop_03() throws Exception {
 		assertNoConformanceError("{ val java.util.Set set = newHashSet() for(Object o : set) o }");
 	}
 	
-	public void testForLoop_04() throws Exception {
+	@Test public void testForLoop_04() throws Exception {
 		assertNoConformanceError("{ val java.util.Set<String> set = newHashSet() for(String s : set) s }");
 	}
 	
-	public void testForLoop_05() throws Exception {
+	@Test public void testForLoop_05() throws Exception {
 		assertConformanceError("{ val java.util.Set<Object> set = newHashSet() for(String s : set) s }", 
 				XbasePackage.Literals.XFEATURE_CALL, 
 				"java.lang.Iterable<? extends java.lang.String>", "java.lang.String[]", "java.util.Set<java.lang.Object>");
 	}
 	
-	public void testForLoop_06() throws Exception {
+	@Test public void testForLoop_06() throws Exception {
 		assertConformanceError("{ val java.util.Set set = newHashSet() for(String s : set) s }", 
 				XbasePackage.Literals.XFEATURE_CALL, 
 				"java.lang.Iterable<? extends java.lang.String>", "java.lang.String[]", "java.util.Set");
 	}
 	
-	public void testForLoop_07() throws Exception {
+	@Test public void testForLoop_07() throws Exception {
 		assertConformanceError("{ val java.util.Set set = <String>newHashSet() for(String s : set) s }", 
 				XbasePackage.Literals.XFEATURE_CALL, 
 				"java.lang.Iterable<? extends java.lang.String>", "java.lang.String[]", "java.util.Set");
 	}
 	
-	public void testForLoop_08() throws Exception {
+	@Test public void testForLoop_08() throws Exception {
 		assertNoConformanceError("{ val java.util.Set set = newHashSet() for(Object o : set) o }");
 	}
 

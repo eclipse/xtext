@@ -10,11 +10,12 @@ package org.eclipse.xtext.xbase.tests.typing;
 import java.util.List;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.junit.util.ParseHelper;
+import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
@@ -32,34 +33,34 @@ public class XbaseTypeConformanceTest extends AbstractXbaseTestCase {
 	@Inject
 	private ParseHelper<XExpression> parseHelper;
 	
-	public void testArrayConformsToIterable_01() throws Exception {
+	@Test public void testArrayConformsToIterable_01() throws Exception {
 		assertTrue(isConformantReturnTypes("null as "+Iterable.class.getName()+"<? extends "+Iterable.class.getName()+"<Integer>>", "new testdata.ArrayClient().getMultiArray"));
 	}
-	public void testArrayConformsToIterable_02() throws Exception {
+	@Test public void testArrayConformsToIterable_02() throws Exception {
 		assertTrue(isConformantReturnTypes("null as "+Iterable.class.getName()+"<? extends "+List.class.getName()+"<Integer>>", "new testdata.ArrayClient().getMultiArray"));
 	}
-	public void testArrayConformsToIterable_03() throws Exception {
+	@Test public void testArrayConformsToIterable_03() throws Exception {
 		assertTrue(isConformantReturnTypes("null as "+Iterable.class.getName()+"<? extends "+List.class.getName()+"<?>>", "new testdata.ArrayClient().getMultiArray"));
 	}
-	public void testArrayConformsToIterable_04() throws Exception {
+	@Test public void testArrayConformsToIterable_04() throws Exception {
 		assertFalse(isConformantReturnTypes("null as "+Iterable.class.getName()+"<"+List.class.getName()+"<String>>", "new testdata.ArrayClient().getMultiArray"));
 	}
-	public void testArrayConformsToIterable_05() throws Exception {
+	@Test public void testArrayConformsToIterable_05() throws Exception {
 		assertTrue(isConformantReturnTypes("null as "+Iterable.class.getName()+"<?>", "new testdata.ArrayClient().getArray"));
 	}
-	public void testArrayConformsToIterable_06() throws Exception {
+	@Test public void testArrayConformsToIterable_06() throws Exception {
 		assertTrue(isConformantReturnTypes("null as "+List.class.getName()+"<?>", "new testdata.ArrayClient().getArray"));
 	}
-	public void testArrayConformsToIterable_07() throws Exception {
+	@Test public void testArrayConformsToIterable_07() throws Exception {
 		assertFalse(isConformantReturnTypes("null as "+List.class.getName()+"<? extends String>", "new testdata.ArrayClient().getArray"));
 	}
-	public void testArrayConformsToIterable_08() throws Exception {
+	@Test public void testArrayConformsToIterable_08() throws Exception {
 		assertTrue(isConformantReturnTypes("null as "+Iterable.class.getName()+"<? extends Object>", "new testdata.ArrayClient().getArray"));
 	}
-	public void testArrayConformsToIterable_09() throws Exception {
+	@Test public void testArrayConformsToIterable_09() throws Exception {
 		assertTrue(isConformantReturnTypes("null as "+Iterable.class.getName(), "new testdata.ArrayClient().getArray"));
 	}
-	public void testArrayConformsToIterable_10() throws Exception {
+	@Test public void testArrayConformsToIterable_10() throws Exception {
 		assertTrue(isConformantReturnTypes("null as "+List.class.getName()+ "<Integer>", "new testdata.ArrayClient().getArray"));
 		assertTrue(isConformantReturnTypes("null as "+Iterable.class.getName()+ "<Integer>", "new testdata.ArrayClient().getArray"));
 	}
@@ -93,21 +94,21 @@ public class XbaseTypeConformanceTest extends AbstractXbaseTestCase {
 		return conformant;
 	}
 	
-	public void testIgnoreGenerics_00() throws Exception {
+	@Test public void testIgnoreGenerics_00() throws Exception {
 		String left = "null as Iterable<String>";
 		String right = "null as Iterable<Integer>";
 		assertTrue(isConformantReturnTypes(left, right, true));
 		assertFalse(isConformantReturnTypes(left, right, false));
 	}
 	
-	public void testIgnoreGenerics_01() throws Exception {
+	@Test public void testIgnoreGenerics_01() throws Exception {
 		String left = "null as (String)=>Boolean";
 		String right = "null as (Integer)=>Integer";
 		assertTrue(isConformantReturnTypes(left, right, true));
 		assertFalse(isConformantReturnTypes(left, right, false));
 	}
 	
-	public void testIgnoreGenerics_02() throws Exception {
+	@Test public void testIgnoreGenerics_02() throws Exception {
 		String left = "null as (String,String)=>Boolean";
 		String right = "null as (String)=>Boolean";
 		assertFalse(isConformantReturnTypes(left, right, true));

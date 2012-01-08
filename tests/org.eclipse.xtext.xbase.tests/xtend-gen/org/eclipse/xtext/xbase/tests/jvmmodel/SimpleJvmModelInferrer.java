@@ -1,6 +1,5 @@
 package org.eclipse.xtext.xbase.tests.jvmmodel;
 
-import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -17,6 +16,8 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
+import com.google.inject.Inject;
+
 @SuppressWarnings("all")
 public class SimpleJvmModelInferrer implements IJvmModelInferrer {
   @Inject
@@ -29,14 +30,12 @@ public class SimpleJvmModelInferrer implements IJvmModelInferrer {
     final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
         public void apply(final JvmGenericType it) {
           EList<JvmMember> _members = it.getMembers();
-          TypeReferences _references = SimpleJvmModelInferrer.this.references;
-          JvmTypeReference _typeForName = _references.getTypeForName(java.lang.String.class, e);
+          JvmTypeReference _typeForName = SimpleJvmModelInferrer.this.references.getTypeForName(java.lang.String.class, e);
           final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
               public void apply(final JvmOperation it) {
                 {
                   EList<JvmFormalParameter> _parameters = it.getParameters();
-                  TypeReferences _references = SimpleJvmModelInferrer.this.references;
-                  JvmTypeReference _typeForName = _references.getTypeForName(java.lang.String.class, e);
+                  JvmTypeReference _typeForName = SimpleJvmModelInferrer.this.references.getTypeForName(java.lang.String.class, e);
                   JvmFormalParameter _parameter = SimpleJvmModelInferrer.this._jvmTypesBuilder.toParameter(e, "s", _typeForName);
                   CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter);
                   SimpleJvmModelInferrer.this._jvmTypesBuilder.setBody(it, ((XExpression) e));

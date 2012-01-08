@@ -7,10 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.serializer;
 
-import org.eclipse.xtext.junit.serializer.SerializerTester;
+import org.eclipse.xtext.junit4.serializer.SerializerTester;
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.junit.Before;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -55,9 +56,8 @@ public class XbaseSerializerWithNodeModelTest extends AbstractXbaseEvaluationTes
 		tester.assertSerializeWithNodeModel(expected);
 	}
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		injector.injectMembers(this);
 	}
 

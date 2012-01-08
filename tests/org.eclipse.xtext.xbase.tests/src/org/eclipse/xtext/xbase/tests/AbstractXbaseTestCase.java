@@ -9,18 +9,18 @@ package org.eclipse.xtext.xbase.tests;
 
 import java.io.IOException;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
-import org.eclipse.xtext.junit.util.ParseHelper;
-import org.eclipse.xtext.junit.validation.ValidationTestHelper;
+import org.eclipse.xtext.junit4.util.ParseHelper;
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.resource.SynchronizedXtextResourceSet;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
+import org.junit.Assert;
+import org.junit.Before;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -31,7 +31,7 @@ import com.google.inject.Provider;
  * @author Sven Efftinge
  * 
  */
-public abstract class AbstractXbaseTestCase extends TestCase {
+public abstract class AbstractXbaseTestCase extends Assert {
 
 	public static class SynchronizedXtextResourceSetProvider implements Provider<SynchronizedXtextResourceSet> {
 
@@ -66,8 +66,8 @@ public abstract class AbstractXbaseTestCase extends TestCase {
 		}
 	}.createInjectorAndDoEMFRegistration();
 
-	@Override
-	protected void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		getInjector().injectMembers(this);
 	}
 

@@ -21,6 +21,7 @@ import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
@@ -32,7 +33,7 @@ public class SerializerTest extends AbstractXbaseTestCase {
 	@Inject
 	private IIndentationInformation indent;
 	
-	public void testSerialize_01() throws IOException {
+	@Test public void testSerialize_01() throws IOException {
 		Resource resource = newResource("'foo' as String");
 		XCastedExpression casted = (XCastedExpression) resource.getContents().get(0);
 		
@@ -54,7 +55,7 @@ public class SerializerTest extends AbstractXbaseTestCase {
 		assertEquals("[| \"value\"] instanceof String", string);
 	}
 	
-	public void testSerialize_02() throws IOException {
+	@Test public void testSerialize_02() throws IOException {
 		Resource resource = newResource("'foo' as String");
 		XCastedExpression casted = (XCastedExpression) resource.getContents().get(0);
 		

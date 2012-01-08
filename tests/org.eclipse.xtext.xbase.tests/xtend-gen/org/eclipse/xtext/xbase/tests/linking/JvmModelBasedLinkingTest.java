@@ -1,7 +1,6 @@
 package org.eclipse.xtext.xbase.tests.linking;
 
 import com.google.inject.Inject;
-import junit.framework.Assert;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -13,7 +12,7 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.junit.validation.ValidationTestHelper;
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
@@ -21,6 +20,8 @@ import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.junit.Assert;
+import org.junit.Test;
 
 @SuppressWarnings("all")
 public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
@@ -33,6 +34,7 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
   @Inject
   private ValidationTestHelper _validationTestHelper;
   
+  @Test
   public void testLinkToParameter() {
     try {
       {
@@ -70,6 +72,7 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
     }
   }
   
+  @Test
   public void testLinkToParameter_1() {
     try {
       {
@@ -115,6 +118,7 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
     }
   }
   
+  @Test
   public void testLinkToField() {
     try {
       {
@@ -160,6 +164,7 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
     }
   }
   
+  @Test
   public void testLinkToField_1() {
     try {
       {
@@ -200,8 +205,7 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
   }
   
   public JvmTypeReference stringType(final EObject ctx) {
-    TypeReferences _refs = this.refs;
-    JvmTypeReference _typeForName = _refs.getTypeForName(java.lang.String.class, ctx);
+    JvmTypeReference _typeForName = this.refs.getTypeForName(java.lang.String.class, ctx);
     return _typeForName;
   }
 }

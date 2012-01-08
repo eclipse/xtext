@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.xtext.xbase.junit
-Bundle-Version: 2.2.1.qualifier
+Bundle-Version: 2.3.0.qualifier
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.0.0";visibility:=reexport,
@@ -10,16 +10,15 @@ Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.0.0";visibility:=r
  org.eclipse.core.resources;resolution:=optional;visibility:=reexport,
  org.eclipse.emf.ecore;resolution:=optional;visibility:=reexport,
  org.eclipse.xtext;bundle-version="2.0.0";resolution:=optional;visibility:=reexport,
- org.eclipse.xtext.ui.junit;bundle-version="2.0.0";resolution:=optional;visibility:=reexport,
  org.eclipse.xtext.xbase;bundle-version="2.0.0";resolution:=optional;visibility:=reexport,
  org.eclipse.core.runtime;resolution:=optional;visibility:=reexport,
- org.eclipse.jdt.core;bundle-version="3.5.2";resolution:=optional
-Export-Package: org.eclipse.xtext.xbase.compiler;x-friends:="org.eclipse.xtext.xtend2.tests",
+ org.eclipse.jdt.core;bundle-version="3.5.2";resolution:=optional,
+ org.eclipse.xtext.junit4;bundle-version="2.3.0"
+Export-Package: org.eclipse.xtext.xbase.compiler;x-friends:="org.eclipse.xtext.xtend2.tests,org.eclipse.xtext.xbase.tests",
  org.eclipse.xtext.xbase.junit.evaluation,
  org.eclipse.xtext.xbase.junit.ui,
  testdata
 Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
-Import-Package: junit.framework;version="[3.0.0,4.0.0)",
- org.apache.log4j;version="1.2.15",
+Import-Package: org.apache.log4j;version="1.2.15",
  org.junit;version="[4.0.0,5.0.0)"
