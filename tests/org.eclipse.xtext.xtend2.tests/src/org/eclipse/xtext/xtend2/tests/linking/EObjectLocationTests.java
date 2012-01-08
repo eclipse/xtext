@@ -19,6 +19,7 @@ import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
@@ -36,7 +37,7 @@ public class EObjectLocationTests extends AbstractXtend2TestCase {
 	@Inject 
 	private IXtend2JvmAssociations xtend2jvmAssociations;
 	
-	public void testResolveElement() throws Exception {
+	@Test public void testResolveElement() throws Exception {
 		String model = "class Foo extends Object { def Foo foo() { hashCode(); this }}";
 		XtendFile file = file(model);
 		XtextResource resource = (XtextResource) file.eResource();
@@ -50,7 +51,7 @@ public class EObjectLocationTests extends AbstractXtend2TestCase {
 		assertTrue(hashCodeReference instanceof JvmOperation);
 	}
 	
-	public void testResolveCrossReference() throws Exception {
+	@Test public void testResolveCrossReference() throws Exception {
 		String model = "class Foo extends Object { def Foo foo() { hashCode(); this }}";
 		XtendFile file = file(model);
 		XtextResource resource = (XtextResource) file.eResource();
@@ -61,7 +62,7 @@ public class EObjectLocationTests extends AbstractXtend2TestCase {
 		assertTrue(hashCodeReference instanceof JvmOperation);
 	}
 	
-	public void testFullLocationInFile() throws Exception {
+	@Test public void testFullLocationInFile() throws Exception {
 		String model = "class Foo extends Object { def Foo foo() {this }}";
 		XtendClass clazz = clazz(model);
 		JvmGenericType inferredType = xtend2jvmAssociations.getInferredType(clazz);
@@ -73,7 +74,7 @@ public class EObjectLocationTests extends AbstractXtend2TestCase {
 		assertEquals(locationInFileProvider.getFullTextRegion(xtendFunction), locationInFileProvider.getFullTextRegion(inferredOperation));
 	}
 
-	public void testSignificantLocationInFile() throws Exception {
+	@Test public void testSignificantLocationInFile() throws Exception {
 		String model = "class Foo extends Object { def Foo foo() {this} }";
 		XtendClass clazz = clazz(model);
 		JvmGenericType inferredType = xtend2jvmAssociations.getInferredType(clazz);

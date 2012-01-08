@@ -11,6 +11,8 @@ import java.io.IOException;
 
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
@@ -22,24 +24,23 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 	@Inject
 	private CompilerTestHelper testHelper;
 	
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		AbstractXtend2TestCase.getInjector().injectMembers(this);
 		testHelper.setUp();
 	}
 	
-	public void testClosure_19() throws Exception {
+	@Test public void testClosure_19() throws Exception {
 		assertEvaluatesWithException(IOException.class, 
 				"{val ()=>void proc = [| throw new java.io.IOException()] proc.apply return null}");
 	}
 	
-	public void testClosure_20() throws Exception {
+	@Test public void testClosure_20() throws Exception {
 		assertEvaluatesWithException(IOException.class, 
 				"{ newArrayList('foo').forEach( s | throw new java.io.IOException() ) return null }");
 	}
 	
-	public void testTryCatch_06() throws Exception {
+	@Test public void testTryCatch_06() throws Exception {
 		assertEvaluatesTo("", 
 				"try new String() " +
 				"  catch(java.io.IOException e) 'foo'" +
@@ -56,7 +57,7 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 		testHelper.assertEvaluatesWithException(class1, string);
 	}
 
-	public void testIteratorExtensions() throws Exception {
+	@Test public void testIteratorExtensions() throws Exception {
 		assertEvaluatesTo("Foo", "newArrayList('Foo').iterator.toIterable.iterator.next");
 	}
 }

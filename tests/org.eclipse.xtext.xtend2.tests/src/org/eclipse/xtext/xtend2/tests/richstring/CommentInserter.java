@@ -20,7 +20,7 @@ import com.google.common.collect.Lists;
  */
 public class CommentInserter {
 	
-	private static boolean DISABLED = true;
+	private static boolean DISABLED = false;
 	
 	private Pattern pattern = Pattern.compile("('''|\u00BB)([^\u00AB]*)(\u00AB|''')");
 	

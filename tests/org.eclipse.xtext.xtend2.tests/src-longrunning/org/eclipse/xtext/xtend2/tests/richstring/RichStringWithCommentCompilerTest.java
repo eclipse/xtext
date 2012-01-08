@@ -9,6 +9,9 @@ package org.eclipse.xtext.xtend2.tests.richstring;
 
 import java.util.List;
 
+import org.junit.Ignore;
+import org.junit.Test;
+
 import com.google.inject.Inject;
 
 /**
@@ -27,6 +30,8 @@ public class RichStringWithCommentCompilerTest extends RichStringCompilerTest {
 	}
 	
 	@Override
+	@Ignore
+	@Test 
 	public void testBug343148() throws Exception {
 		// Simple CommentInserter cannot handle nested rich string literals
 //		assertOutput(" zonk a\n\n zonk b\n\n zonk c",

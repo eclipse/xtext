@@ -14,6 +14,7 @@ import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.XtendConstructor;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
@@ -30,7 +31,7 @@ public class TypeProviderTest extends AbstractXtend2TestCase {
 		return file(string, true);
 	}
 	
-	public void testReturnTypeInConstructor() throws Exception {
+	@Test public void testReturnTypeInConstructor() throws Exception {
 		XtendConstructor constructor = constructor(
 				"new() {\n" + 
 				"	''.toString\n" + 
@@ -43,7 +44,7 @@ public class TypeProviderTest extends AbstractXtend2TestCase {
 		assertEquals("void", typeProvider.getExpectedReturnType(toString, true).getIdentifier());
 	}
 	
-	public void testTypeOfSuperInConstructor() throws Exception {
+	@Test public void testTypeOfSuperInConstructor() throws Exception {
 		XtendConstructor constructor = constructor(
 				"new() {\n" + 
 				"	super()\n" + 
@@ -55,7 +56,7 @@ public class TypeProviderTest extends AbstractXtend2TestCase {
 		assertEquals("void", typeProvider.getType(superCall).getIdentifier());
 	}
 	
-	public void testTypeOfThisInConstructor() throws Exception {
+	@Test public void testTypeOfThisInConstructor() throws Exception {
 		XtendConstructor constructor = constructor(
 				"new(int a) {\n" + 
 				"	this()\n" + 

@@ -48,6 +48,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendParameter;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
+import org.junit.Test;
 
 import testdata.OverloadedMethods;
 
@@ -62,7 +63,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 	@Inject
 	private IXtend2JvmAssociations associator;
 	
-	public void testDeclaredConstructor_01() throws Exception {
+	@Test public void testDeclaredConstructor_01() throws Exception {
 		XtendClass clazz = clazz(
 				"class Foo { " +
 				"  int i" +
@@ -82,7 +83,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("i", parameter.getSimpleName());
 	}
 	
-	public void testCreateExtension_00() throws Exception {
+	@Test public void testCreateExtension_00() throws Exception {
 		XtendClass clazz = clazz(
 				"class Foo { " +
 				"  def create list: newArrayList('foo') getListWithFooAnd(String s) {" +
@@ -103,7 +104,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals(initializer.getParameters().get(0), featureCall.getFeature());
 	}
 	
-	public void testXtendField_00() throws Exception {
+	@Test public void testXtendField_00() throws Exception {
 		XtendClass clazz = clazz(
 				"class Foo {" +
 				"  @com.google.inject.Inject java.util.ArrayList<String> arrayList" +
@@ -114,7 +115,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertSame(field, ((XFeatureCall)((XBlockExpression)func.getExpression()).getExpressions().get(0)).getFeature());
 	}
 	
-	public void testInjectedExtensionMethodCall() throws Exception {
+	@Test public void testInjectedExtensionMethodCall() throws Exception {
 		XtendClass clazz = clazz("" +
 				"class Foo {" +
 				"  @com.google.inject.Inject extension String string" +
@@ -127,7 +128,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("Foo.string", ((XMemberFeatureCall)call.getImplicitReceiver()).getFeature().getIdentifier());
 	}
 	
-	public void testExtensionMethodCall_Bug351827_01() throws Exception {
+	@Test public void testExtensionMethodCall_Bug351827_01() throws Exception {
 		XtendClass clazz = clazz("" +
 				"class Foo {" +
 				"  extension testdata.Properties1 p\n" +
@@ -141,7 +142,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("Foo.setProp1(java.lang.String)", call.getFeature().getIdentifier());
 	}
 	
-	public void testExtensionMethodCall_Bug351827_02() throws Exception {
+	@Test public void testExtensionMethodCall_Bug351827_02() throws Exception {
 		XtendClass clazz = clazz("" +
 				"class Foo {" +
 				"  extension testdata.Properties1 p\n" +
@@ -155,7 +156,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("Foo.setProp1(java.lang.String)", call.getFeature().getIdentifier());
 	}
 	
-	public void testExtensionMethodCall_Bug351827_03() throws Exception {
+	@Test public void testExtensionMethodCall_Bug351827_03() throws Exception {
 		XtendClass clazz = clazz("" +
 				"class Foo {" +
 				"  extension testdata.Properties1 p\n" +
@@ -168,7 +169,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("testdata.Properties1.setProp1(java.lang.String)", call.getFeature().getIdentifier());
 	}
 	
-	public void testExtensionMethodCall_01() throws Exception {
+	@Test public void testExtensionMethodCall_01() throws Exception {
 		XtendClass clazz = clazz("" +
 				"class Foo {" +
 				"  def foo() {\n" + 
@@ -181,7 +182,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("org.eclipse.xtext.xbase.lib.ListExtensions.map(java.util.List,org.eclipse.xtext.xbase.lib.Functions$Function1)", call.getFeature().getIdentifier());
 	}
 	
-	public void testExtensionMethodCall_02() throws Exception {
+	@Test public void testExtensionMethodCall_02() throws Exception {
 		XtendClass clazz = clazz("" +
 				"class Foo {" +
 				"  def doSomething() {\n" + 
@@ -195,7 +196,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertNull(call.getInvalidFeatureIssueCode(), call.getInvalidFeatureIssueCode());
 	}
 	
-	public void testCaseFunction_00() throws Exception {
+	@Test public void testCaseFunction_00() throws Exception {
 		XtendFunction function = function("def dispatch String foo(String s) {_foo(s)}");
 		final XBlockExpression block = (XBlockExpression) function.getExpression();
 		final JvmOperation feature = (JvmOperation) ((XAbstractFeatureCall)block.getExpressions().get(0)).getFeature();
@@ -203,7 +204,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertSame(function,xtendFunction);
 	}
 	
-	public void testTypeReference_withImport() throws Exception {
+	@Test public void testTypeReference_withImport() throws Exception {
 		XtendFunction func = (XtendFunction) clazz("import java.lang.* class X { def (String)=>Boolean foo() {[|true]} }").getMembers().get(0);
 		XFunctionTypeRef type = (XFunctionTypeRef) func.getReturnType();
 		JvmTypeReference returnType = type.getReturnType();
@@ -212,14 +213,14 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("java.lang.String", paramType.getIdentifier());
 	}
 	
-	public void testTypeReference_0() throws Exception {
+	@Test public void testTypeReference_0() throws Exception {
 		XtendFunction func = function("def =>java.lang.Boolean foo() {[|true]}");
 		XFunctionTypeRef type = (XFunctionTypeRef) func.getReturnType();
 		JvmTypeReference returnType = type.getReturnType();
 		assertEquals("java.lang.Boolean", returnType.getIdentifier());
 	}
 	
-	public void testTypeParameterReference() throws Exception {
+	@Test public void testTypeParameterReference() throws Exception {
 		XtendFunction func = function("def <X> X foo(X x) {x}");
 		JvmTypeReference returnType = func.getReturnType();
 		JvmTypeParameter typeParamDecl = (JvmTypeParameter) returnType.getType();
@@ -230,7 +231,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals(typeParamDecl,paramType.getType());
 	}
 	
-	public void testTypeParameterReference_0() throws Exception {
+	@Test public void testTypeParameterReference_0() throws Exception {
 		XtendFunction func = (XtendFunction) file("import java.lang.* class X { def <String> String foo(String x) {x}}").getXtendClass().getMembers().get(0);
 		JvmTypeReference returnType = func.getReturnType();
 		JvmTypeParameter typeParamDecl = (JvmTypeParameter) returnType.getType();
@@ -241,7 +242,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals(typeParamDecl,paramType.getType());
 	}
 	
-	public void testTypeParameterReference_1() throws Exception {
+	@Test public void testTypeParameterReference_1() throws Exception {
 		XtendFunction func = (XtendFunction) file("import java.lang.* class X { def <String> String foo(java.lang.String x) {x}}")
 				.getXtendClass().getMembers().get(0);
 		JvmTypeReference returnType = func.getReturnType();
@@ -253,7 +254,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertNotSame(typeParamDecl,paramType.getType());
 	}
 	
-	public void testFeatureScope_1() throws Exception {
+	@Test public void testFeatureScope_1() throws Exception {
 		XtendFile file = file ("class X { def String foo() {'hello world'} def String bar(String foo) {foo}}");
 		XtendClass xClass = file.getXtendClass();
 		XtendFunction func  = (XtendFunction) xClass.getMembers().get(1);
@@ -263,7 +264,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals(operation.getParameters().get(0), featureCall1.getFeature());
 	}
 	
-	public void testFeatureScope_3() throws Exception {
+	@Test public void testFeatureScope_3() throws Exception {
 		XtendFile file = file ("import java.lang.String class X { def String foo(String foo) {[String foo|foo]}}");
 		XtendClass xClass = file.getXtendClass();
 		XtendFunction func  = (XtendFunction) xClass.getMembers().get(0);
@@ -272,7 +273,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals(closure.getFormalParameters().get(0), featureCall1.getFeature());
 	}
 	
-	public void testOverloadedMethods_01() throws Exception {
+	@Test public void testOverloadedMethods_01() throws Exception {
 		XtendFile file = file(
 				"import java.util.List\n" +
 				"class X {\n" +
@@ -292,7 +293,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("testdata.OverloadedMethods.overloaded(java.util.Collection,java.lang.Iterable)", overloaded.getIdentifier());
 	}
 	
-	public void testOverloadedMethods_02() throws Exception {
+	@Test public void testOverloadedMethods_02() throws Exception {
 		XtendFile file = file(
 				"import java.util.List\n" +
 				"class X {\n" +
@@ -312,7 +313,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("testdata.OverloadedMethods.overloaded(java.lang.Iterable,java.util.Collection)", overloaded.getIdentifier());
 	}
 	
-	public void testOverloadedMethods_03() throws Exception {
+	@Test public void testOverloadedMethods_03() throws Exception {
 		XtendFile file = file(
 				"import java.util.List\n" +
 				"class X {\n" +
@@ -331,7 +332,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("testdata.OverloadedMethods.overloaded(java.util.List,java.util.List)", overloaded.getIdentifier());
 	}
 	
-	public void testOverloadedMethods_04() throws Exception {
+	@Test public void testOverloadedMethods_04() throws Exception {
 		XtendFile file = file(
 				"import java.util.List\n" +
 				"class X {\n" +
@@ -350,7 +351,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("testdata.OverloadedMethods.overloaded(java.lang.Iterable,java.lang.Iterable)", overloaded.getIdentifier());
 	}
 	
-	public void testOverloadedMethodsJava_01() throws Exception {
+	@Test public void testOverloadedMethodsJava_01() throws Exception {
 		List<CharSequence> chars = null;
 		List<String> strings = null;
 		List<? extends Object> objects = null;
@@ -361,7 +362,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("overloaded(Iterable,Iterable)", new OverloadedMethods<Object>().overloaded(objects, objects));
 	}
 	
-	public void testOverloadedMethods_05() throws Exception {
+	@Test public void testOverloadedMethods_05() throws Exception {
 		XtendFile file = file(
 				"import java.util.List\n" +
 				"class X {\n" +
@@ -381,7 +382,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("testdata.OverloadedMethods.overloaded2(java.util.Collection,java.lang.Iterable)", overloaded.getIdentifier());
 	}
 	
-	public void testOverloadedMethods_06() throws Exception {
+	@Test public void testOverloadedMethods_06() throws Exception {
 		XtendFile file = file(
 				"import java.util.List\n" +
 				"class X {\n" +
@@ -401,7 +402,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("testdata.OverloadedMethods.overloaded2(java.lang.Iterable,java.util.Collection)", overloaded.getIdentifier());
 	}
 	
-	public void testOverloadedMethods_07() throws Exception {
+	@Test public void testOverloadedMethods_07() throws Exception {
 		XtendFile file = file(
 				"import java.util.List\n" +
 				"class X {\n" +
@@ -420,7 +421,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("testdata.OverloadedMethods.overloaded2(java.util.List,java.util.List)", overloaded.getIdentifier());
 	}
 	
-	public void testOverloadedMethods_08() throws Exception {
+	@Test public void testOverloadedMethods_08() throws Exception {
 		XtendFile file = file(
 				"import java.util.List\n" +
 				"class X {\n" +
@@ -439,7 +440,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("testdata.OverloadedMethods.overloaded2(java.lang.Iterable,java.lang.Iterable)", overloaded.getIdentifier());
 	}
 	
-	public void testOverloadedMethods_09() throws Exception {
+	@Test public void testOverloadedMethods_09() throws Exception {
 		XtendFile file = file(
 				"import java.util.List\n" +
 				"class X {\n" +
@@ -458,7 +459,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("testdata.OverloadedMethods.overloaded2(java.lang.Iterable,java.lang.Iterable)", overloaded.getIdentifier());
 	}
 	
-	public void testOverloadedMethodsJava_02() throws Exception {
+	@Test public void testOverloadedMethodsJava_02() throws Exception {
 		List<CharSequence> chars = null;
 		List<String> strings = null;
 		List<? extends Object> objects = null;
@@ -471,7 +472,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("overloaded2(Iterable,Iterable)", new OverloadedMethods<Object>().overloaded2(chars2, chars2));
 	}
 	
-	public void testOverloadedMethods_10() throws Exception {
+	@Test public void testOverloadedMethods_10() throws Exception {
 		XtendFile file = file(
 				"import java.util.List\n" +
 				"class X {\n" +
@@ -490,7 +491,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("testdata.OverloadedMethods.overloadedInt(int)", overloaded.getIdentifier());
 	}
 	
-	public void testOverloadedMethods_11() throws Exception {
+	@Test public void testOverloadedMethods_11() throws Exception {
 		XtendFile file = file(
 				"import java.util.List\n" +
 						"class X {\n" +
@@ -509,14 +510,14 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("testdata.OverloadedMethods.overloadedInt(java.lang.Integer)", overloaded.getIdentifier());
 	}
 	
-	public void testOverloadedMethodsJava_03() throws Exception {
+	@Test public void testOverloadedMethodsJava_03() throws Exception {
 		int i = 0;
 		Integer integer = null;
 		assertEquals("overloadedInt(int)", new OverloadedMethods<Object>().overloadedInt(i));
 		assertEquals("overloadedInt(Integer)", new OverloadedMethods<Object>().overloadedInt(integer));
 	}
 	
-	public void testMemberFeatureScope_0() throws Exception {
+	@Test public void testMemberFeatureScope_0() throws Exception {
 		XtendFile file = file ("import java.lang.String class X { def String foo(String foo) {foo.length()}}");
 		XtendClass xClass = file.getXtendClass();
 		XtendFunction func  = (XtendFunction) xClass.getMembers().get(0);
@@ -524,7 +525,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("length", ((JvmOperation)call.getFeature()).getSimpleName());
 	}
 	
-	public void testImplicitPackageImport() throws Exception {
+	@Test public void testImplicitPackageImport() throws Exception {
 		XtendFile file = file("package java.io class Foo implements Serializable {}");
 		List<JvmTypeReference> implementedInterfaces = file.getXtendClass().getImplements();
 		assertFalse(implementedInterfaces.isEmpty());
@@ -533,7 +534,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("java.io.Serializable", implementedInterface.getIdentifier());
 	}
 	
-	public void testStaticImports_01() throws Exception {
+	@Test public void testStaticImports_01() throws Exception {
 		String fileAsText= "import java.util.Collections.* class Clazz { def void method() { ''.singletonList() } }";
 		XtendFile file = file(fileAsText, false);
 		EcoreUtil.resolveAll(file);
@@ -544,7 +545,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals(fileAsText.indexOf("singletonList"),  diagnostic.getOffset());
 	}
 	
-	public void testStaticImports_02() throws Exception {
+	@Test public void testStaticImports_02() throws Exception {
 		String fileAsText= "import static java.util.Collections.* class Clazz { def void method() { ''.singletonList() } }";
 		XtendFile file = file(fileAsText, false);
 		EcoreUtil.resolveAll(file);
@@ -555,7 +556,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals(fileAsText.indexOf("singletonList"),  diagnostic.getOffset());
 	}
 	
-	public void testStaticImports_03() throws Exception {
+	@Test public void testStaticImports_03() throws Exception {
 		String fileAsText= "import static extension java.util.Collections.* class Clazz { def void method() {''.singletonList()} }";
 		XtendFile file = file(fileAsText, true);
 		XtendFunction function = (XtendFunction) file.getXtendClass().getMembers().get(0);
@@ -564,7 +565,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("java.util.Collections.singletonList(T)", identifier);
 	}
 	
-	public void testStaticImports_04() throws Exception {
+	@Test public void testStaticImports_04() throws Exception {
 		String fileAsText= "import static extension java.util.Collections.* class Clazz { def void method() {''.singletonList} }";
 		XtendFile file = file(fileAsText, true);
 		XtendFunction function = (XtendFunction) file.getXtendClass().getMembers().get(0);
@@ -573,7 +574,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("java.util.Collections.singletonList(T)", identifier);
 	}
 	
-	public void testStaticImports_05() throws Exception {
+	@Test public void testStaticImports_05() throws Exception {
 		String fileAsText= "import static java.util.Collections.* class Clazz { def void method() {singletonList('')} }";
 		XtendFile file = file(fileAsText, true);
 		XtendFunction function = (XtendFunction) file.getXtendClass().getMembers().get(0);
@@ -582,7 +583,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("java.util.Collections.singletonList(T)", identifier);
 	}
 	
-	public void testStaticImports_06() throws Exception {
+	@Test public void testStaticImports_06() throws Exception {
 		String fileAsText= 
 				"import static com.google.common.collect.Iterables.*\n" +
 				"import static java.util.Collections.*\n" +
@@ -594,7 +595,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("com.google.common.collect.Iterables.find(java.lang.Iterable,com.google.common.base.Predicate)", identifier);
 	}
 	
-	public void testStaticImports_07() throws Exception {
+	@Test public void testStaticImports_07() throws Exception {
 		String fileAsText= 
 				"import static extension com.google.common.collect.Iterables.*\n" +
 				"import static java.util.Collections.*\n" +
@@ -606,7 +607,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("com.google.common.collect.Iterables.find(java.lang.Iterable,com.google.common.base.Predicate)", identifier);
 	}
 	
-	public void testStaticImports_08() throws Exception {
+	@Test public void testStaticImports_08() throws Exception {
 		String fileAsText= 
 				"import static com.google.common.collect.Iterables.*\n" +
 				"import static java.util.Collections.*\n" +
@@ -618,7 +619,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("org.eclipse.xtext.xbase.lib.IterableExtensions.findFirst(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1)", identifier);
 	}
 	
-	public void testStaticImports_09() throws Exception {
+	@Test public void testStaticImports_09() throws Exception {
 		String fileAsText= "import static java.util.Collections.* class Clazz { def void method() {singletonList('').findFirst(String e|e!=null)} }";
 		XtendFile file = file(fileAsText, true);
 		XtendFunction function = (XtendFunction) file.getXtendClass().getMembers().get(0);
@@ -627,7 +628,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("org.eclipse.xtext.xbase.lib.IterableExtensions.findFirst(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1)", identifier);
 	}
 	
-	public void testStaticImports_10() throws Exception {
+	@Test public void testStaticImports_10() throws Exception {
 		String fileAsText= "import static extension java.util.Collections.* class Clazz { def void method() { singletonList('')} }";
 		XtendFile file = file(fileAsText, true);
 		XtendFunction function = (XtendFunction) file.getXtendClass().getMembers().get(0);
@@ -636,7 +637,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("java.util.Collections.singletonList(T)", identifier);
 	}
 	
-	public void testStaticImports_11() throws Exception {
+	@Test public void testStaticImports_11() throws Exception {
 		String fileAsText= 
 				"import static com.google.common.collect.Iterables.*\n" +
 				"import static java.util.Collections.*\n" +
@@ -648,7 +649,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("com.google.common.collect.Iterables.find(java.lang.Iterable,com.google.common.base.Predicate)", identifier);
 	}
 	
-	public void testStaticImports_12() throws Exception {
+	@Test public void testStaticImports_12() throws Exception {
 		String fileAsText= 
 				"import static extension com.google.common.collect.Iterables.*\n" +
 				"import static java.util.Collections.*\n" +
@@ -660,7 +661,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("com.google.common.collect.Iterables.find(java.lang.Iterable,com.google.common.base.Predicate)", identifier);
 	}
 	
-	public void testBug343102_01() throws Exception {
+	@Test public void testBug343102_01() throws Exception {
 		XtendFunction function = function(
 				"def <T extends java.lang.Object> test(T t) {\n" + 
 				"  t.getClass\n" + 
@@ -670,7 +671,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("java.lang.Object.getClass()", identifier);
 	}
 	
-	public void testBug343102_02() throws Exception {
+	@Test public void testBug343102_02() throws Exception {
 		XtendFunction function = function(
 				"def <T> test(T t) {\n" + 
 				"  t.getClass\n" + 
@@ -680,7 +681,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("java.lang.Object.getClass()", identifier);
 	}
 	
-	public void testBug345827_01() throws Exception {
+	@Test public void testBug345827_01() throws Exception {
 		XtendFunction function = function(
 				"def String name() {\n" + 
 				"  var name = ''\n" +
@@ -693,7 +694,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertSame(block.getExpressions().get(0), featureCall.getFeature());
 	}
 	
-	public void testBug345827_02() throws Exception {
+	@Test public void testBug345827_02() throws Exception {
 		XtendFunction function = function(
 				"def String name() {\n" + 
 				"  var name = ''\n" +
@@ -704,7 +705,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertSame(associator.getDirectlyInferredOperation(function), featureCall.getFeature());
 	}
 	
-	public void testBug345827_03() throws Exception {
+	@Test public void testBug345827_03() throws Exception {
 		XtendFunction function = function(
 				"def String name(String param) {\n" + 
 				"  var name = ''\n" +
@@ -717,7 +718,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertSame(block.getExpressions().get(0), featureCall.getFeature());
 	}
 	
-	public void testBug345827_04() throws Exception {
+	@Test public void testBug345827_04() throws Exception {
 		XtendFunction function = function(
 				"def String name(String param) {\n" + 
 				"  var name = ''\n" +
@@ -728,7 +729,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertSame(associator.getDirectlyInferredOperation(function), featureCall.getFeature());
 	}
 	
-	public void testBug345827_05() throws Exception {
+	@Test public void testBug345827_05() throws Exception {
 		XtendFunction function = function(
 				"def String name(String name) {\n" + 
 				"  name()" + 
@@ -741,7 +742,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertSame(operation.getParameters().get(0), featureCall.getFeature());
 	}
 	
-	public void testBug345827_06() throws Exception {
+	@Test public void testBug345827_06() throws Exception {
 		XtendFunction function = function("def String name(String param) {\n" + 
 				"  name('param')" + 
 		"}");
@@ -750,7 +751,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertSame(associator.getDirectlyInferredOperation(function), featureCall.getFeature());
 	}
 	
-	public void testBug345433_01() throws Exception {
+	@Test public void testBug345433_01() throws Exception {
 		String classAsString = 
 			"import static extension org.eclipse.xtext.GrammarUtil.*\n" +
 			"class Foo {" +
@@ -776,7 +777,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("java.util.ArrayList<org.eclipse.xtext.AbstractRule>", operation2.getReturnType().getIdentifier());
 	}
 	
-	public void testBug345433_02() throws Exception {
+	@Test public void testBug345433_02() throws Exception {
 		String classAsString = 
 			"import static extension org.eclipse.xtext.GrammarUtil.*\n" +
 			"class Foo {" +
@@ -804,7 +805,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("org.eclipse.xtext.RuleCall", typeProvider.getTypeForIdentifiable(e1).getIdentifier());
 	}
 	
-	public void testBug342848() throws Exception {
+	@Test public void testBug342848() throws Exception {
 		String fileAsText= 
 				"import org.eclipse.xtext.xbase.lib.Functions\n" +
 				"class Clazz { def void method(Functions$Function0<Integer> f) { f.apply } }";
@@ -815,7 +816,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals(Functions.Function0.class.getName()+ "<java.lang.Integer>", identifier);
 	}
 	
-	public void testRelativeImports() throws Exception {
+	@Test public void testRelativeImports() throws Exception {
 		XtendFile file = file (
 				"package annotation class X {\n" +
 				"  Annotation failed\n" +
@@ -831,7 +832,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertTrue("reflect.AccessibleObject", failedToo.getType().getType().eIsProxy());
 	}
 	
-	public void testImplicitFirstArgument_00() throws Exception {
+	@Test public void testImplicitFirstArgument_00() throws Exception {
 		XtendClass clazz = clazz(
 				"class MyXtendClass {\n" + 
 				"  def prependHello(String myString) {\n" + 
@@ -861,7 +862,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("it", implicitArgument.getFeature().getSimpleName());
 	}
 	
-	public void testImplicitFirstArgument_00_a() throws Exception {
+	@Test public void testImplicitFirstArgument_00_a() throws Exception {
 		XtendClass clazz = clazz(
 				"class MyXtendClass {\n" + 
 				"  def prependHello(String myString) {\n" + 
@@ -880,7 +881,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("MyXtendClass", firstReceiver.getFeature().getSimpleName());
 	}
 	
-	public void testImplicitFirstArgument_00_b() throws Exception {
+	@Test public void testImplicitFirstArgument_00_b() throws Exception {
 		XtendClass clazz = clazz(
 				"class MyXtendClass {\n" + 
 						"  def prependHello(String myString) {\n" + 
@@ -896,7 +897,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertNull(first.getInvalidFeatureIssueCode(), first.getInvalidFeatureIssueCode());
 	}
 	
-	public void testImplicitFirstArgument_01() throws Exception {
+	@Test public void testImplicitFirstArgument_01() throws Exception {
 		XtendClass clazz = clazz(
 				"import static extension test.ImplicitFirstArgumentStatics.*\n" +
 				"class MyXtendClass {\n" + 
@@ -918,7 +919,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertNull(first.getInvalidFeatureIssueCode());
 	}
 	
-	public void testImplicitFirstArgument_02() throws Exception {
+	@Test public void testImplicitFirstArgument_02() throws Exception {
 		XtendClass clazz = clazz(
 				"import static extension test.ImplicitFirstArgumentStatics.*\n" +
 				"class MyXtendClass {\n" + 
@@ -940,7 +941,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertNull(second.getInvalidFeatureIssueCode());
 	}
 	
-	public void testImplicitFirstArgument_03() throws Exception {
+	@Test public void testImplicitFirstArgument_03() throws Exception {
 		XtendClass clazz = clazz(
 				"import static extension test.ImplicitFirstArgumentStatics.*\n" +
 				"class MyXtendClass {\n" + 
@@ -960,7 +961,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertNull(third.getInvalidFeatureIssueCode(), third.getInvalidFeatureIssueCode());
 	}
 	
-	public void testImplicitFirstArgument_04() throws Exception {
+	@Test public void testImplicitFirstArgument_04() throws Exception {
 		XtendClass clazz = clazz(
 				"import static extension test.ImplicitFirstArgumentStatics.*\n" +
 				"class MyXtendClass {\n" + 
@@ -979,7 +980,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertNull(forth.getInvalidFeatureIssueCode());
 	}
 	
-	public void testImplicitFirstArgument_05() throws Exception {
+	@Test public void testImplicitFirstArgument_05() throws Exception {
 		XtendClass clazz = clazz(
 				"import static extension test.ImplicitFirstArgumentStatics.*\n" +
 				"class MyXtendClass {\n" + 
@@ -1002,7 +1003,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertNull(fifth.getInvalidFeatureIssueCode(), fifth.getInvalidFeatureIssueCode());
 	}
 	
-	public void testImplicitFirstArgument_06() throws Exception {
+	@Test public void testImplicitFirstArgument_06() throws Exception {
 		XtendClass clazz = clazz(
 				"import static extension test.ImplicitFirstArgumentStatics.*\n" +
 				"class MyXtendClass {\n" + 
@@ -1024,7 +1025,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertNull(sixth.getInvalidFeatureIssueCode(), sixth.getInvalidFeatureIssueCode());
 	}
 	
-	public void testImplicitFirstArgument_07() throws Exception {
+	@Test public void testImplicitFirstArgument_07() throws Exception {
 		XtendClass clazz = clazz(
 				"import static extension test.ImplicitFirstArgumentStatics.*\n" +
 				"class MyXtendClass {\n" + 

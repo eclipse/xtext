@@ -8,17 +8,17 @@
 package org.eclipse.xtext.xtend2.tests.richstring;
 
 import org.eclipse.xtend2.lib.StringConcatenation;
-
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class StringConcatenationTest extends TestCase {
+public class StringConcatenationTest extends Assert {
 
 	private String lineDelimiter = "\n";
 	
-	public void testImplementsCharSequence_01() {
+	@Test public void testImplementsCharSequence_01() {
 		CharSequence testMe = new StringConcatenation(lineDelimiter);
 		assertEquals("", testMe.toString());
 		assertEquals(0, testMe.length());
@@ -49,7 +49,7 @@ public class StringConcatenationTest extends TestCase {
 		}
 	}
 	
-	public void testImplementsCharSequence_02() {
+	@Test public void testImplementsCharSequence_02() {
 		StringConcatenation testMe = new StringConcatenation(lineDelimiter);
 		testMe.append("abc");
 		assertEquals("abc", testMe.toString());
@@ -72,14 +72,14 @@ public class StringConcatenationTest extends TestCase {
 		}
 	}
 	
-	public void testAppend_01() {
+	@Test public void testAppend_01() {
 		StringConcatenation testMe = new StringConcatenation(lineDelimiter);
 		testMe.append("abc");
 		testMe.append("abc");
 		assertEquals("abcabc", testMe.toString());
 	}
 	
-	public void testAppend_02() {
+	@Test public void testAppend_02() {
 		StringConcatenation testMe = new StringConcatenation(lineDelimiter);
 		testMe.append("abc");
 		testMe.newLine();
@@ -87,7 +87,7 @@ public class StringConcatenationTest extends TestCase {
 		assertEquals("abc\nabc", testMe.toString());
 	}
 	
-	public void testAppend_03() {
+	@Test public void testAppend_03() {
 		StringConcatenation testMe = new StringConcatenation(lineDelimiter);
 		testMe.newLineIfNotEmpty();
 		testMe.append("abc");
@@ -96,7 +96,7 @@ public class StringConcatenationTest extends TestCase {
 		assertEquals("abc\nabc", testMe.toString());
 	}
 	
-	public void testAppend_04() {
+	@Test public void testAppend_04() {
 		StringConcatenation testMe = new StringConcatenation(lineDelimiter);
 		testMe.append("abc");
 		testMe.newLineIfNotEmpty();
@@ -108,7 +108,7 @@ public class StringConcatenationTest extends TestCase {
 		assertEquals("abc\nabc", testMe.toString());
 	}
 	
-	public void testAppend_05() {
+	@Test public void testAppend_05() {
 		StringConcatenation testMe = new StringConcatenation(lineDelimiter);
 		testMe.append("abc");
 		testMe.newLineIfNotEmpty();
@@ -120,7 +120,7 @@ public class StringConcatenationTest extends TestCase {
 		assertEquals("abc\n \t\nabc", testMe.toString());
 	}
 	
-	public void testAppend_06() {
+	@Test public void testAppend_06() {
 		StringConcatenation testMe = new StringConcatenation(lineDelimiter);
 		testMe.append("abc");
 		testMe.newLineIfNotEmpty();
@@ -132,7 +132,7 @@ public class StringConcatenationTest extends TestCase {
 		assertEquals("abc\n\nabc", testMe.toString());
 	}
 	
-	public void testAppend_07() {
+	@Test public void testAppend_07() {
 		StringConcatenation testMe = new StringConcatenation(lineDelimiter);
 		testMe.append("abc");
 		testMe.newLineIfNotEmpty();
@@ -140,38 +140,38 @@ public class StringConcatenationTest extends TestCase {
 		assertEquals("abc\n", testMe.toString());
 	}
 
-	public void testAppendMultiLine_01() {
+	@Test public void testAppendMultiLine_01() {
 		StringConcatenation testMe = new StringConcatenation(lineDelimiter);
 		testMe.append("abc\ndef");
 		assertEquals("abc\ndef", testMe.toString());
 	}
 	
-	public void testAppendMultiLine_02() {
+	@Test public void testAppendMultiLine_02() {
 		StringConcatenation testMe = new StringConcatenation(lineDelimiter);
 		testMe.append("abc\rdef");
 		assertEquals("abc\ndef", testMe.toString());
 	}
 	
-	public void testAppendMultiLine_03() {
+	@Test public void testAppendMultiLine_03() {
 		StringConcatenation testMe = new StringConcatenation(lineDelimiter);
 		testMe.append("abc\r\ndef");
 		assertEquals("abc\ndef", testMe.toString());
 	}
 	
-	public void testAppendMultiLine_04() {
+	@Test public void testAppendMultiLine_04() {
 		StringConcatenation testMe = new StringConcatenation("\r");
 		testMe.append("abc\r\ndef");
 		assertEquals("abc\rdef", testMe.toString());
 	}
 	
 
-	public void testAppendIndented_01() {
+	@Test public void testAppendIndented_01() {
 		StringConcatenation testMe = new StringConcatenation(lineDelimiter);
 		testMe.append("abc\ndef", " ");
 		assertEquals("abc\n def", testMe.toString());
 	}
 	
-	public void testAppendIndented_02() {
+	@Test public void testAppendIndented_02() {
 		StringConcatenation testMe = new StringConcatenation(lineDelimiter);
 		StringConcatenation appendMe = new StringConcatenation("\r");
 		appendMe.append("abc\ndef\nghi");
@@ -180,7 +180,7 @@ public class StringConcatenationTest extends TestCase {
 		assertEquals("abc\n\tdef\n\tghi\n", testMe.toString());
 	}
 	
-	public void testAppendIndented_03() {
+	@Test public void testAppendIndented_03() {
 		StringConcatenation testMe = new StringConcatenation(lineDelimiter);
 		StringConcatenation appendMe = new StringConcatenation("\r");
 		appendMe.append("abc\ndef\nghi");

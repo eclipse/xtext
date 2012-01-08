@@ -4,6 +4,8 @@ import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
 import com.google.inject.Inject
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations
+import org.junit.Test
+import org.junit.Ignore
 
 class Xtend2CompilerTest extends AbstractXtend2TestCase {
 	
@@ -11,6 +13,7 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 	
 	@Inject extension IXtend2JvmAssociations 
 	
+	@Test
 	def testJavaLangReflectImport() { 
 		assertCompilesTo('''
 			package foo
@@ -30,6 +33,7 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''')
 	}
 	
+	@Test
 	def testTryCatch() { 
 		assertCompilesTo('''
 			package foo
@@ -98,7 +102,7 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 //		''')
 //	}
 	
-	
+	@Test
 	def testFieldInitialization_01() { 
 		assertCompilesTo('''
 			package foo
@@ -121,6 +125,7 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''')
 	}
 	
+	@Test
 	def testFieldInitialization_02() { 
 		assertCompilesTo('''
 			package foo
@@ -146,6 +151,7 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''')
 	}
 	
+	@Test
 	def testFieldInitialization_03() { 
 		assertCompilesTo('''
 			package foo
@@ -172,6 +178,7 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''')
 	}
 	
+	@Test
 	def testFieldInitialization_04() { 
 		assertCompilesTo('''
 			package foo
@@ -198,6 +205,7 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''')
 	}
 	
+	@Test
 	def testConstructorDeclaration_01() { 
 		assertCompilesTo('''
 			package foo
@@ -218,6 +226,7 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''')
 	}
 	
+	@Test
 	def testConstructorDeclaration_02() { 
 		assertCompilesTo('''
 			package foo
@@ -245,6 +254,7 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''')
 	}
 	
+	@Test
 	def testConstructorDeclaration_03() { 
 		assertCompilesTo('''
 			package foo
@@ -276,6 +286,7 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''')
 	}
 	
+	@Test
 	def testSneakyThrow() { 
 		assertCompilesTo('''
 			package foo
@@ -304,6 +315,7 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''')
 	}
 	
+	@Test
 	def testSneakyThrow_01() { 
 		assertCompilesTo('''
 			package foo
@@ -330,6 +342,7 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''')
 	}
 
+	@Test
 	def testSimple() { 
 		assertCompilesTo('''
 			package foo
@@ -349,6 +362,7 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''')
 	}
 
+	@Test
 	def testConstructor() { 
 		assertCompilesTo('''
 			package foo
@@ -368,6 +382,7 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''')
 	}
 
+	@Test
 	def testExtends() {
 		assertCompilesTo('''
 			package foo
@@ -382,6 +397,7 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''')
 	}
 
+	@Test
 	def testExtendsException() {
 		assertCompilesTo('''
 			package foo
@@ -397,6 +413,7 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''')
 	}
 
+	@Test
 	def testVisibilityOfDispatchMethods() {
 		assertCompilesTo('''
 			package foo
@@ -431,6 +448,7 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''')
 	}
 	
+	@Test
 	def testParenthesisInDispatchMethodsGuards() {
 		assertCompilesTo('''
 			package foo
@@ -474,6 +492,7 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''')
 	}
 	
+	@Test
 	def testParenthesisInDispatchMethodsGuards_reordered() {
 		assertCompilesTo('''
 			package foo
@@ -517,6 +536,7 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''')
 	}
 
+	@Test
 	def testNoUncessaryCastInDispatchMethods() {
 		assertCompilesTo('''
 			package foo
@@ -551,37 +571,42 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''')
 	}
 
-//	def testExtendsArrayList_01()  {
-//		assertCompilesTo('''
-//			package foo
-//			class MyList<T> extends java.util.ArrayList<T> {}
-//		''', '''
-//			package foo;
-//			
-//			import java.util.ArrayList;
-//			
-//			@SuppressWarnings("all")
-//			public class MyList<T> extends ArrayList<T> {
-//			}
-//		''')
-//	}
-//
-//	def testExtendsArrayList_02() {
-//		assertCompilesTo('''
-//			package foo
-//			class StringList extends java.util.ArrayList<String> {
-//			}
-//		''', '''
-//			package foo;
-//			
-//			import java.util.ArrayList;
-//			
-//			@SuppressWarnings("all")
-//			public class StringList<T> extends ArrayList<String> {
-//			}
-//		''')
-//	}
+	@Test
+	@Ignore
+	def testExtendsArrayList_01()  {
+		assertCompilesTo('''
+			package foo
+			class MyList<T> extends java.util.ArrayList<T> {}
+		''', '''
+			package foo;
+			
+			import java.util.ArrayList;
+			
+			@SuppressWarnings("all")
+			public class MyList<T> extends ArrayList<T> {
+			}
+		''')
+	}
 
+	@Test
+	@Ignore
+	def testExtendsArrayList_02() {
+		assertCompilesTo('''
+			package foo
+			class StringList extends java.util.ArrayList<String> {
+			}
+		''', '''
+			package foo;
+			
+			import java.util.ArrayList;
+			
+			@SuppressWarnings("all")
+			public class StringList<T> extends ArrayList<String> {
+			}
+		''')
+	}
+
+	@Test
 	def testImplements() {
 		assertCompilesTo('''
 			package foo
@@ -598,6 +623,7 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''')
 	}
 
+	@Test
 	def testConstructor_2() {
 		assertCompilesTo('''
 			package foo
@@ -620,6 +646,7 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''')
 	}
 
+	@Test
 	def testAnnotation() {
 		assertCompilesTo('''
 			package foo
@@ -639,6 +666,7 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''')
 	}
 	
+	@Test
 	def testSuperCall() {
 		assertCompilesTo('''
 			package x class Y extends Object {
@@ -671,6 +699,7 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''')
 	}
 	
+	@Test
 	def testCreateExtension() {
 		assertCompilesTo('''
 			package foo
@@ -712,6 +741,7 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''');
 	}
 
+	@Test
 	def testJavaDocs() {
 		assertCompilesTo('''
 			package foo
@@ -750,6 +780,7 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 			''');
 	}
 	
+	@Test
 	def testStaticMethod() {
 		assertCompilesTo('''
 			package foo
@@ -768,6 +799,7 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 			''');
 	}
 	
+	@Test
 	def testStaticField() {
 		assertCompilesTo('''
 			package foo
@@ -784,6 +816,7 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 			''');
 	}
 	
+	@Test
 	def testNestedClosureWithIt() {
 		assertCompilesTo('''
 			class X {
@@ -821,6 +854,7 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''')
 	}
 	
+	@Test
 	def testNestedClosureSuperCall() {
 		assertCompilesTo('''
 			class X {
@@ -853,6 +887,7 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''')
 	}
 
+	@Test
 	def testExplicitBoxingUnboxing() {
 		assertCompilesTo('''
 			class X {
@@ -871,6 +906,7 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		''')
 	}
 	
+	@Test
 	def testOptionalSemicola() {
 		assertCompilesTo('''
 			package foo;

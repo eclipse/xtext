@@ -1,6 +1,7 @@
 package org.eclipse.xtext.xtend2.tests.smoke;
 
 import java.util.Arrays;
+
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;

@@ -30,6 +30,8 @@ import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
+import org.junit.After;
+import org.junit.Test;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -50,9 +52,9 @@ public abstract class AbstractSmokeTest extends AbstractXtend2TestCase {
 	protected IResourceFactory resourceFactory;
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
-		int i = 9; // TODO sz: investigate how to speed things up here (parallelism)?
+		int i = 1; // TODO sz: investigate how to speed things up here (parallelism)?
 		smokeTestModels = Lists.newArrayList();
 		while(true) {
 			String location = "/" + SmokeTest.class.getPackage().getName().replace('.', '/') + "/Case_" + i + ".xtend";
@@ -66,10 +68,9 @@ public abstract class AbstractSmokeTest extends AbstractXtend2TestCase {
 		}
 	}
 	
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		smokeTestModels = null;
-		super.tearDown();
 	}
 	
 	protected void doParseAndCheckForSmoke(final String model) throws Exception {
@@ -116,7 +117,7 @@ public abstract class AbstractSmokeTest extends AbstractXtend2TestCase {
 		return resource;
 	}
 	
-	public void testSkipLastCharacters() throws Exception {
+	@Test public void testSkipLastCharacters() throws Exception {
 		for(String string: smokeTestModels) {
 			for (int i = 0; i < string.length(); i++) {
 				logProgress(i);
@@ -125,7 +126,7 @@ public abstract class AbstractSmokeTest extends AbstractXtend2TestCase {
 		}
 	}
 
-	public void testSkipFirstCharacters() throws Exception {
+	@Test public void testSkipFirstCharacters() throws Exception {
 		for(String string: smokeTestModels) {
 			for (int i = 0; i < string.length(); i++) {
 				logProgress(i);
@@ -134,7 +135,7 @@ public abstract class AbstractSmokeTest extends AbstractXtend2TestCase {
 		}
 	}
 
-	public void testSkipCharacterInBetween() throws Exception {
+	@Test public void testSkipCharacterInBetween() throws Exception {
 		for(String string: smokeTestModels) {
 			for (int i = 0; i < string.length() - 1; i++) {
 				logProgress(i);
@@ -143,7 +144,7 @@ public abstract class AbstractSmokeTest extends AbstractXtend2TestCase {
 		}
 	}
 	
-	public void testSkipTokensInBetween() throws Exception {
+	@Test public void testSkipTokensInBetween() throws Exception {
 		for(String string: smokeTestModels) {
 			List<CommonToken> tokenList = Lists.newArrayList();
 			{
@@ -164,7 +165,7 @@ public abstract class AbstractSmokeTest extends AbstractXtend2TestCase {
 		}
 	}
 	
-	public void testSkipNodesInBetween() throws Exception {
+	@Test public void testSkipNodesInBetween() throws Exception {
 		for(String string: smokeTestModels) {
 			LazyLinkingResource resource = createResource(string);
 			ICompositeNode rootNode = resource.getParseResult().getRootNode();
@@ -182,7 +183,7 @@ public abstract class AbstractSmokeTest extends AbstractXtend2TestCase {
 		}
 	}
 	
-	public void testSkipLastCharactersWithoutResourceSet() throws Exception {
+	@Test public void testSkipLastCharactersWithoutResourceSet() throws Exception {
 		for(String string: smokeTestModels) {
 			for (int i = 0; i < string.length(); i++) {
 				logProgress(i);
@@ -191,7 +192,7 @@ public abstract class AbstractSmokeTest extends AbstractXtend2TestCase {
 		}
 	}
 
-	public void testSkipFirstCharactersWithoutResourceSet() throws Exception {
+	@Test public void testSkipFirstCharactersWithoutResourceSet() throws Exception {
 		for(String string: smokeTestModels) {
 			for (int i = 0; i < string.length(); i++) {
 				logProgress(i);
@@ -200,7 +201,7 @@ public abstract class AbstractSmokeTest extends AbstractXtend2TestCase {
 		}
 	}
 
-	public void testSkipCharacterInBetweenWithoutResourceSet() throws Exception {
+	@Test public void testSkipCharacterInBetweenWithoutResourceSet() throws Exception {
 		for(String string: smokeTestModels) {
 			for (int i = 0; i < string.length() - 1; i++) {
 				logProgress(i);
@@ -209,7 +210,7 @@ public abstract class AbstractSmokeTest extends AbstractXtend2TestCase {
 		}
 	}
 	
-	public void testSkipTokensInBetweenWithoutResourceSet() throws Exception {
+	@Test public void testSkipTokensInBetweenWithoutResourceSet() throws Exception {
 		for(String string: smokeTestModels) {
 			List<CommonToken> tokenList = Lists.newArrayList();
 			{
@@ -230,7 +231,7 @@ public abstract class AbstractSmokeTest extends AbstractXtend2TestCase {
 		}
 	}
 	
-	public void testSkipNodesInBetweenWithoutResourceSet() throws Exception {
+	@Test public void testSkipNodesInBetweenWithoutResourceSet() throws Exception {
 		for(String string: smokeTestModels) {
 			LazyLinkingResource resource = createResource(string);
 			ICompositeNode rootNode = resource.getParseResult().getRootNode();

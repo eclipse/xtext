@@ -12,6 +12,7 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
@@ -24,68 +25,63 @@ public class LexingTest extends AbstractXtend2TestCase {
 	@Inject
 	private ITokenDefProvider tokenDefProvider;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-	}
-	
-	public void testRichString() throws Exception {
+	@Test public void testRichString() throws Exception {
 		assertLexing("''' foo bar '''", pair("''' foo bar '''","RULE_RICH_TEXT"));
 		assertLexing("''' foo bar «", pair("''' foo bar «","RULE_RICH_TEXT_START"));
 		assertLexing("» foo bar «", pair("» foo bar «","RULE_RICH_TEXT_INBETWEEN"));
 		assertLexing("» foo bar '''", pair("» foo bar '''","RULE_RICH_TEXT_END"));
 	}
 	
-	public void testRichString_01() throws Exception {
+	@Test public void testRichString_01() throws Exception {
 		assertLexing("''''''}", pair("''''''","RULE_RICH_TEXT"),pair("}","'}'"));
 	}
 	
-	public void testRichString_02() throws Exception {
+	@Test public void testRichString_02() throws Exception {
 		assertLexing("'''«", pair("'''«", "RULE_RICH_TEXT_START"));
 	}
 	
-	public void testRichString_03() throws Exception {
+	@Test public void testRichString_03() throws Exception {
 		assertLexing("''''«", pair("''''«", "RULE_RICH_TEXT_START"));
 		assertLexing("'''' «", pair("'''' «", "RULE_RICH_TEXT_START"));
 		assertLexing("''' '«", pair("''' '«", "RULE_RICH_TEXT_START"));
 	}
 	
-	public void testRichString_04() throws Exception {
+	@Test public void testRichString_04() throws Exception {
 		assertLexing("'''''«", pair("'''''«", "RULE_RICH_TEXT_START"));
 		assertLexing("''''' «", pair("''''' «", "RULE_RICH_TEXT_START"));
 		assertLexing("''' ''«", pair("''' ''«", "RULE_RICH_TEXT_START"));
 	}
 	
-	public void testRichString_05() throws Exception {
+	@Test public void testRichString_05() throws Exception {
 		assertLexing("»«", pair("»«", "RULE_RICH_TEXT_INBETWEEN"));
 	}
 	
-	public void testRichString_06() throws Exception {
+	@Test public void testRichString_06() throws Exception {
 		assertLexing("»'«", pair("»'«", "RULE_RICH_TEXT_INBETWEEN"));
 		assertLexing("»' «", pair("»' «", "RULE_RICH_TEXT_INBETWEEN"));
 		assertLexing("» '«", pair("» '«", "RULE_RICH_TEXT_INBETWEEN"));
 	}
 	
-	public void testRichString_07() throws Exception {
+	@Test public void testRichString_07() throws Exception {
 		assertLexing("»''«", pair("»''«", "RULE_RICH_TEXT_INBETWEEN"));
 		assertLexing("»'' «", pair("»'' «", "RULE_RICH_TEXT_INBETWEEN"));
 		assertLexing("» ''«", pair("» ''«", "RULE_RICH_TEXT_INBETWEEN"));
 	}
 	
-	public void testRichString_08() throws Exception {
+	@Test public void testRichString_08() throws Exception {
 		assertLexing("»''««", pair("»''«", "RULE_RICH_TEXT_INBETWEEN"), pair("«", "RULE_ANY_OTHER"));
 		assertLexing("»'' ««", pair("»'' «", "RULE_RICH_TEXT_INBETWEEN"), pair("«", "RULE_ANY_OTHER"));
 		assertLexing("» ''««", pair("» ''«", "RULE_RICH_TEXT_INBETWEEN"), pair("«", "RULE_ANY_OTHER"));
 	}
 	
-	public void testRichString_09() throws Exception {
+	@Test public void testRichString_09() throws Exception {
 		assertLexing("»«'", pair("»«", "RULE_RICH_TEXT_INBETWEEN"), pair("'", "RULE_ANY_OTHER"));
 		assertLexing("»'«'", pair("»'«", "RULE_RICH_TEXT_INBETWEEN"), pair("'", "RULE_ANY_OTHER"));
 		assertLexing("»' «'", pair("»' «", "RULE_RICH_TEXT_INBETWEEN"), pair("'", "RULE_ANY_OTHER"));
 		assertLexing("» '«'", pair("» '«", "RULE_RICH_TEXT_INBETWEEN"), pair("'", "RULE_ANY_OTHER"));
 	}
 	
-	public void testFunctionSig() throws Exception {
+	@Test public void testFunctionSig() throws Exception {
 		assertLexing("class X { foo() ''' foo ''' }",
 				pair("class","'class'"),
 				pair(" ","RULE_WS"),

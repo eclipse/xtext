@@ -33,6 +33,7 @@ import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
@@ -44,7 +45,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 	@Inject
 	private IXtend2JvmAssociations associations;
 	
-	public void testNoException_01() throws Exception {
+	@Test public void testNoException_01() throws Exception {
 		XtendFunction function = function("def noException() {\n" + 
 				// exception case is Integeri
 				"	    val closure = [Integeri| return i]\n" + 
@@ -56,7 +57,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 		assertNoExceptions(function);
 	}
 	
-	public void testNoException_02() throws Exception {
+	@Test public void testNoException_02() throws Exception {
 		XtendFunction function = function("def noException() {\n" + 
 				// exception case is i
 				"	    val closure = [ i| return i]\n" + 
@@ -68,7 +69,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 		assertNoExceptions(function);
 	}
 	
-	public void testNoException_03() throws Exception {
+	@Test public void testNoException_03() throws Exception {
 		XtendFile file = file("package org.eclipse.xtext.xtend2.tests.linking\n" + 
 				// error condition is empty class name
 				"class  {\n" + 
@@ -88,7 +89,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 		assertNoExceptions(file);
 	}
 	
-	public void testNoException_04() throws Exception {
+	@Test public void testNoException_04() throws Exception {
 		XtendFile file = file("package org.eclipse.xtext.xtend2.tests.linking\n" + 
 				"import java.util.ArrayList\n" + 
 				"import static java.util.Arrays.*\n" + 
@@ -103,7 +104,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 		assertNoExceptions(file);
 	}
 	
-	public void testNoException_05() throws Exception {
+	@Test public void testNoException_05() throws Exception {
 		XtendFile file = file("package org.eclipse.xtext.xtend2.tests.linking\n" + 
 				"import java.util.ArrayList\n" + 
 				"import static java.util.Arrays.*\n" + 
@@ -126,7 +127,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 		assertNoExceptions(file);
 	}
 	
-	public void testNoException_06() throws Exception {
+	@Test public void testNoException_06() throws Exception {
 		XtendFile file = file("package org.eclipse.xtext.xtend2.tests.linking\n" + 
 				"class NoException {\n" + 
 				"	def String foo(String a,) {\n" + 
@@ -138,7 +139,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 		assertNoExceptions(file);
 	}
 	
-	public void testNoException_07() throws Exception {
+	@Test public void testNoException_07() throws Exception {
 		XtendFile file = file("package org.eclipse.xtext.xtend2.tests.linking\n" + 
 				"import\n" +
 				"import static java.util.Arrays.*\n" + 
@@ -159,7 +160,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 		assertNoExceptions(file);
 	}
 	
-	public void testNoException_08() throws Exception {
+	@Test public void testNoException_08() throws Exception {
 		XtendFile file = file("package org.eclipse.xtext.xtend2.tests.linking\n" + 
 				"import java.util.ArrayList\n" + 
 				"import static.*\n" + 
@@ -180,7 +181,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 		assertNoExceptions(file);
 	}
 	
-	public void testNoException_09() throws Exception {
+	@Test public void testNoException_09() throws Exception {
 		XtendFile file = file("package org.eclipse.xtext.xtend2.tests.linking\n" + 
 				"class NoException {\n" + 
 				"	def String foo(String a, String b) {\n" + 
@@ -191,7 +192,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 		assertNoExceptions(file);
 	}
 	
-	public void testNoException_10() throws Exception {
+	@Test public void testNoException_10() throws Exception {
 		// error condition is empty package name
 		XtendFile file = file("package \n" + 
 				"class MyClass {\n" + 
@@ -202,7 +203,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 		assertNoExceptions(file);
 	}
 	
-	public void testNoException_11() throws Exception {
+	@Test public void testNoException_11() throws Exception {
 		XtendFile file = file("package foo\n" +
 				"import java.util.*\n" + 
 				"class MyClass {\n" + 
@@ -214,7 +215,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 		assertNoExceptions(file);
 	}
 	
-	public void testNoException_12() throws Exception {
+	@Test public void testNoException_12() throws Exception {
 		// error scenario is 'Iterable<haracter>' in line 4
 		XtendFile file = file(
 				"package foo\n" + 
@@ -227,7 +228,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 		assertNoExceptions(file);
 	}
 	
-	public void testNoException_13() throws Exception {
+	@Test public void testNoException_13() throws Exception {
 		XtendFile file = file(
 				"package com.acme\n" + 
 				"\n" + 
@@ -265,7 +266,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 		assertNoExceptions(file);
 	}
 	
-	public void testNoException_14() throws Exception {
+	@Test public void testNoException_14() throws Exception {
 		XtendFile file = file(
 				"package org.eclipse.xtext.xtend2.tests.smoke\n" + 
 				"import org.eclipse.emf.ecore.EClass\n" + 
@@ -285,12 +286,12 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 		assertNoExceptions(file);
 	}
 	
-	public void testBug343585() throws Exception {
+	@Test public void testBug343585() throws Exception {
 		XtendFile file = file("class Test extends Test {}");
 		assertNoExceptions(file);
 	}
 	
-	public void testBug_350167_01() throws Exception {
+	@Test public void testBug_350167_01() throws Exception {
 		XtendFunction fun = function("def fun(Object o) {\n" + 
 				"	switch(o) {\n" + 
 				"		String : concatPath(o, o)\n" + 
@@ -301,28 +302,28 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 		assertNoExceptions(fun);
 	}
 	
-	public void testBug_350167_02() throws Exception {
+	@Test public void testBug_350167_02() throws Exception {
 		XtendFunction fun = function("def fun(Object o) {\n" + 
 				"	try { ''.toString } catch(NullPointerException e) { . }\n" + 
 				"}");
 		assertNoExceptions(fun);
 	}
 	
-	public void testBug_350167_03() throws Exception {
+	@Test public void testBug_350167_03() throws Exception {
 		XtendFunction fun = function("def fun(Object o) {\n" + 
 				"	if (true) ''.toString != null else { . }\n" + 
 				"}");
 		assertNoExceptions(fun);
 	}
 	
-	public void testBug_350167_04() throws Exception {
+	@Test public void testBug_350167_04() throws Exception {
 		XtendFunction fun = function("@Something({ ., String::Foo }) def fun(Object o) {\n" + 
 				"	null\n" + 
 				"}");
 		assertNoExceptions(fun);
 	}
 	
-	public void testBug343096() throws Exception {
+	@Test public void testBug343096() throws Exception {
 		XtendFile file = file(
 				"class Bug343096 {\n" +
 				"    <T> test() {\n" + 
@@ -348,7 +349,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 		validateWithoutException((XtextResource) resource);
 	}
 	
-	public void testNoExceptionInValidator_01() throws Exception {
+	@Test public void testNoExceptionInValidator_01() throws Exception {
 		XtendClass clazz = clazz("package pack class Case_2 {\n" + 
 				"\n" + 
 				"	aOrB(String a, String b) {\n" + 
@@ -368,7 +369,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 		validateWithoutException(resource);
 	}
 	
-	public void testNoExceptionInValidator_02() throws Exception {
+	@Test public void testNoExceptionInValidator_02() throws Exception {
 		XtendClass clazz = clazz("package pack class Case_4 {\n" + 
 				"	richStrings_01() {\n" + 
 				"		'''foobar'''\n" + 
@@ -382,7 +383,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 		validateWithoutException(resource);
 	}
 	
-	public void testNoExceptionInValidator_03() throws Exception {
+	@Test public void testNoExceptionInValidator_03() throws Exception {
 		XtendClass clazz = clazz("package pack class Case_4 {\n" + 
 				"	richStrings_01() {\n" + 
 				"		'''foobar'''\n" + 
@@ -396,7 +397,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 		validateWithoutException(resource);
 	}
 	
-	public void testEmptyProxy_01() throws Exception {
+	@Test public void testEmptyProxy_01() throws Exception {
 		XtendFile file = file(
 				"class Name {\n" + 
 				"	def foo() {\n" + 
