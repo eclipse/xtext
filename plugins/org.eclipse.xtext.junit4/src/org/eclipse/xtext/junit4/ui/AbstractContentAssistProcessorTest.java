@@ -51,18 +51,18 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
 		
 	}
 	
-	private static boolean useStaticInjector = false;
+	protected static boolean useStaticInjector = false;
 	
 	private static SetupExtension staticSetup = null;
 	private static Injector staticInjector = null;
 	
 	@BeforeClass
-	public void useStaticInjector() {
+	public static void useStaticInjector() {
 		useStaticInjector = true;
 	}
 	
 	@AfterClass
-	public void discardStaticInjector() {
+	public static void discardStaticInjector() {
 		useStaticInjector = false;
 		staticSetup = null;
 		staticInjector = null;
@@ -76,7 +76,7 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
 		return new ContentAssistProcessorTestBuilder(setup, this);
 	}
 	
-	protected final ISetup getSetup() {
+	protected ISetup getSetup() {
 		if (!useStaticInjector) {
 			return doGetSetup();
 		}
