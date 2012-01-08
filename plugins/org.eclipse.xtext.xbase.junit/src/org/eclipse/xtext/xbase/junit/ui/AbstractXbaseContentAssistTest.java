@@ -40,12 +40,12 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 	protected String fileExtension;
 
 	@Before
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		getInjector().injectMembers(this);
 	}
 
 	@After
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		if (doCleanWorkspace())
 			IResourcesSetupUtil.cleanWorkspace();
 	}
