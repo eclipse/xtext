@@ -11,6 +11,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
+import org.junit.After;
+import org.junit.Before;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -21,19 +23,17 @@ public class JdtSuperTypeCollectorTest extends AbstractSuperTypeCollectorTest {
 	private JdtTypeProvider typeProvider;
 	private MockJavaProjectProvider projectProvider;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		resourceSet = new ResourceSetImpl();
 		projectProvider = new MockJavaProjectProvider();
 		typeProvider = new JdtTypeProvider(projectProvider.getJavaProject(resourceSet), resourceSet);
 	}
 	
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		resourceSet = null;
 		typeProvider = null;
-		super.tearDown();
 	}
 	
 	@Override

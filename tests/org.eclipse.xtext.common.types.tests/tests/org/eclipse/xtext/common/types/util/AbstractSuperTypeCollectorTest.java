@@ -18,13 +18,13 @@ import java.util.List;
 import java.util.RandomAccess;
 import java.util.Set;
 
-import junit.framework.TestCase;
-
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
+import org.junit.Assert;
+import org.junit.Test;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
@@ -35,32 +35,27 @@ import com.google.common.collect.Sets;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractSuperTypeCollectorTest extends TestCase {
+public abstract class AbstractSuperTypeCollectorTest extends Assert {
 
 	protected abstract IJvmTypeProvider getTypeProvider();
 	
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-	}
-
 	protected SuperTypeCollector getCollector() {
 		return new SuperTypeCollector(TypesFactory.eINSTANCE);
 	}
 	
-	public void testObject() {
+	@Test public void testObject() {
 		Collection<String> collected = getCollector().collectSuperTypeNames(getType(Object.class));
 		assertNotNull(collected);
 		assertTrue(collected.toString(), collected.isEmpty());
 	}
 	
-	public void testSerializable() {
+	@Test public void testSerializable() {
 		Collection<String> collected = getCollector().collectSuperTypeNames(getType(Serializable.class));
 		assertEquals(1,collected.size());
 		assertEquals(Object.class.getCanonicalName(),collected.iterator().next());
 	}
 	
-	public void testString() {
+	@Test public void testString() {
 		Collection<String> collected = getCollector().collectSuperTypeNames(getType(String.class));
 		assertNotNull(collected);
 		assertEquals(collected.toString(), ImmutableSet.of(
@@ -70,21 +65,21 @@ public abstract class AbstractSuperTypeCollectorTest extends TestCase {
 				CharSequence.class.getName()), collected);
 	}
 	
-	public void testCollections() {
+	@Test public void testCollections() {
 		Collection<String> collected = getCollector().collectSuperTypeNames(getType(Collections.class));
 		assertNotNull(collected);
 		assertEquals(collected.toString(), ImmutableSet.of(
 				Object.class.getName()), collected);
 	}
 	
-	public void testCollection() {
+	@Test public void testCollection() {
 		Collection<String> collected = getCollector().collectSuperTypeNames(getType(Collection.class));
 		assertNotNull(collected);
 		assertEquals(collected.toString(), ImmutableSet.of(
 				Iterable.class.getName(),Object.class.getName()), collected);
 	}
 	
-	public void testList() {
+	@Test public void testList() {
 		Collection<String> collected = getCollector().collectSuperTypeNames(getType(List.class));
 		assertNotNull(collected);
 		assertEquals(collected.toString(), ImmutableSet.of(
@@ -92,7 +87,7 @@ public abstract class AbstractSuperTypeCollectorTest extends TestCase {
 				Collection.class.getName(),Object.class.getName()), collected);
 	}
 	
-	public void testStringBuffer() {
+	@Test public void testStringBuffer() {
 		Collection<JvmTypeReference> collected = getCollector().collectSuperTypes(getType(StringBuffer.class));
 		assertNotNull(collected);
 		List<JvmType> rawTypes = Lists.newArrayList(Collections2.transform(collected, new Function<JvmTypeReference, JvmType>() {
@@ -104,7 +99,7 @@ public abstract class AbstractSuperTypeCollectorTest extends TestCase {
 		assertEquals(rawTypesWithoutDuplicates.size(), rawTypes.size());
 	}
 	
-	public void testSortedResultForList() {
+	@Test public void testSortedResultForList() {
 		Iterator<String> collected = getCollector().collectSuperTypeNames(getType(List.class)).iterator();
 		assertEquals(Collection.class.getName(),collected.next());
 		assertEquals(Iterable.class.getName(),collected.next());
@@ -112,7 +107,7 @@ public abstract class AbstractSuperTypeCollectorTest extends TestCase {
 		assertFalse(collected.hasNext());
 	}
 	
-	public void testSortedResultForArrayList() {
+	@Test public void testSortedResultForArrayList() {
 		Iterator<String> collected = getCollector().collectSuperTypeNames(getType(ArrayList.class)).iterator();
 		assertEquals(AbstractList.class.getName(),collected.next());
 		assertEquals(AbstractCollection.class.getName(),collected.next());
@@ -126,13 +121,13 @@ public abstract class AbstractSuperTypeCollectorTest extends TestCase {
 		assertFalse(collected.hasNext());
 	}
 	
-	public void testArgIsNull() {
+	@Test public void testArgIsNull() {
 		Collection<String> collected = getCollector().collectSuperTypeNames((JvmType)null);
 		assertNotNull(collected);
 		assertTrue(collected.isEmpty());
 	}
 	
-	public void testIsAssignable() throws Exception {
+	@Test public void testIsAssignable() throws Exception {
 		assertFalse(getCollector().isSuperType(null, null));
 		assertFalse(getCollector().isSuperType(null, getType(Object.class)));
 		assertFalse(getCollector().isSuperType(getType(Object.class), null));

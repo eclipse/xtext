@@ -31,6 +31,8 @@ import org.eclipse.xtext.common.types.testSetups.EmptyAbstractClass;
 import org.eclipse.xtext.common.types.util.jdt.JavaElementFinder;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.After;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -43,7 +45,7 @@ public class SourceBasedJdtTypeProviderTest extends AbstractTypeProviderTest {
 	private JavaElementFinder elementFinder;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		resourceSet = new ResourceSetImpl();
 		projectProvider = new MockJavaProjectProvider();
@@ -53,11 +55,10 @@ public class SourceBasedJdtTypeProviderTest extends AbstractTypeProviderTest {
 		elementFinder.setProjectProvider(projectProvider);
 	}
 	
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		resourceSet = null;
 		typeProvider = null;
-		super.tearDown();
 	}
 
 	@Override
@@ -115,7 +116,7 @@ public class SourceBasedJdtTypeProviderTest extends AbstractTypeProviderTest {
 		// TODO fix as soon as source types expose annotation defaults reliably
 	}
 	
-	public void testClassAnnotationValue_07() throws Exception {
+	@Test public void testClassAnnotationValue_07() throws Exception {
 		IJavaProject project = projectProvider.getJavaProject(null);
 		String typeName = EmptyAbstractClass.class.getName();
 		IFile javaFile = (IFile) project.getProject().findMember(new Path("src/" + typeName.replace('.', '/') + ".java"));

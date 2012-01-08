@@ -7,52 +7,53 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ClassNameUtilTest extends TestCase {
+public class ClassNameUtilTest extends Assert {
 
 	private ClassNameUtil classNameUtil;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		classNameUtil = new ClassNameUtil();
 	}
 	
-	public void testNormalizeClassName_01() {
+	@Test public void testNormalizeClassName_01() {
 		String name = String.class.getName();
 		assertEquals(name, classNameUtil.normalizeClassName(name));
 	}
 	
-	public void testNormalizeClassName_02() {
+	@Test public void testNormalizeClassName_02() {
 		String name = String[].class.getName();
 		assertEquals(name, classNameUtil.normalizeClassName(name));
 	}
 	
-	public void testNormalizeClassName_03() {
+	@Test public void testNormalizeClassName_03() {
 		String name = int.class.getName();
 		assertEquals(name, classNameUtil.normalizeClassName(name));
 	}
 	
-	public void testNormalizeClassName_04() {
+	@Test public void testNormalizeClassName_04() {
 		String name = int[].class.getName();
 		assertEquals(name, classNameUtil.normalizeClassName(name));
 	}
 	
-	public void testNormalizeClassName_05() {
+	@Test public void testNormalizeClassName_05() {
 		String name = String[].class.getName();
 		assertEquals(name, classNameUtil.normalizeClassName(String.class.getName() + "[]"));
 	}
 	
-	public void testNormalizeClassName_06() {
+	@Test public void testNormalizeClassName_06() {
 		String name = int[].class.getName();
 		assertEquals(name, classNameUtil.normalizeClassName(int.class.getName() + "[]"));
 	}
 	
-	public void testNormalizeClassName_07() {
+	@Test public void testNormalizeClassName_07() {
 		Class<?>[] allArrayTypes = {
 				boolean[].class,
 				int[].class,

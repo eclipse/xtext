@@ -10,24 +10,24 @@ package org.eclipse.xtext.common.types;
 import java.util.Iterator;
 
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
-
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class JvmDeclaredTypeTest extends TestCase {
+public abstract class JvmDeclaredTypeTest extends Assert {
 
 	protected abstract JvmDeclaredType getObjectUnderTest();
 
-	public void testGetIdentifier_01() {
+	@Test public void testGetIdentifier_01() {
 		assertNull(getObjectUnderTest().getIdentifier());
 		assertNull(getObjectUnderTest().getSimpleName());
 		assertNull(getObjectUnderTest().getQualifiedName());
 		assertNull(getObjectUnderTest().getPackageName());
 	}
 	
-	public void testGetIdentifier_02() {
+	@Test public void testGetIdentifier_02() {
 		getObjectUnderTest().internalSetIdentifier("java.lang.DoesNotExist");
 		assertEquals("java.lang.DoesNotExist", getObjectUnderTest().getIdentifier());
 		assertNull(getObjectUnderTest().getSimpleName());
@@ -35,20 +35,20 @@ public abstract class JvmDeclaredTypeTest extends TestCase {
 		assertNull(getObjectUnderTest().getPackageName());
 	}
 	
-	public void testGetIdentifier_03() {
+	@Test public void testGetIdentifier_03() {
 		JvmGenericType outerType = TypesFactory.eINSTANCE.createJvmGenericType();
 		outerType.getMembers().add(getObjectUnderTest());
 		getObjectUnderTest().internalSetIdentifier("java.lang.DoesNotExist$Something");
 		assertEquals("java.lang.DoesNotExist$Something", getObjectUnderTest().getIdentifier());
 	}
 	
-	public void testGetIdentifier_04() {
+	@Test public void testGetIdentifier_04() {
 		getObjectUnderTest().setPackageName("java.lang");
 		getObjectUnderTest().setSimpleName("DoesNotExist");
 		assertEquals("java.lang.DoesNotExist", getObjectUnderTest().getIdentifier());
 	}
 	
-	public void testGetIdentifier_05() {
+	@Test public void testGetIdentifier_05() {
 		JvmGenericType outerType = TypesFactory.eINSTANCE.createJvmGenericType();
 		outerType.internalSetIdentifier("java.lang.DoesNotExist");
 		outerType.getMembers().add(getObjectUnderTest());
@@ -56,17 +56,17 @@ public abstract class JvmDeclaredTypeTest extends TestCase {
 		assertEquals("java.lang.DoesNotExist$Something", getObjectUnderTest().getIdentifier());
 	}
 	
-	public void testGetQualifiedName_01() {
+	@Test public void testGetQualifiedName_01() {
 		getObjectUnderTest().setSimpleName("SimpleName");
 		assertEquals("SimpleName", getObjectUnderTest().getQualifiedName());
 	}
 	
-	public void testGetQualifiedName_02() {
+	@Test public void testGetQualifiedName_02() {
 		getObjectUnderTest().setPackageName("java.lang");
 		assertNull(getObjectUnderTest().getQualifiedName());
 	}
 	
-	public void testGetQualifiedName_03() {
+	@Test public void testGetQualifiedName_03() {
 		JvmGenericType outerType = TypesFactory.eINSTANCE.createJvmGenericType();
 		outerType.setSimpleName("DoesNotExist");
 		outerType.getMembers().add(getObjectUnderTest());
@@ -74,7 +74,7 @@ public abstract class JvmDeclaredTypeTest extends TestCase {
 		assertEquals("DoesNotExist$SimpleName", getObjectUnderTest().getQualifiedName());
 	}
 	
-	public void testGetQualifiedName_04() {
+	@Test public void testGetQualifiedName_04() {
 		JvmGenericType outerType = TypesFactory.eINSTANCE.createJvmGenericType();
 		outerType.setSimpleName("DoesNotExist");
 		outerType.setPackageName("java.lang");
@@ -84,7 +84,7 @@ public abstract class JvmDeclaredTypeTest extends TestCase {
 		assertEquals("java.lang.DoesNotExist$SimpleName", getObjectUnderTest().getQualifiedName());
 	}
 	
-	public void testGetQualifiedName_05() {
+	@Test public void testGetQualifiedName_05() {
 		JvmGenericType outerOuterType = TypesFactory.eINSTANCE.createJvmGenericType();
 		outerOuterType.setSimpleName("DoesNotExist");
 		outerOuterType.setPackageName("java.lang");
@@ -96,17 +96,17 @@ public abstract class JvmDeclaredTypeTest extends TestCase {
 		assertEquals("java.lang.DoesNotExist$Outer$SimpleName", getObjectUnderTest().getQualifiedName());
 	}
 	
-	public void testGetQualifiedNameWithDelimiter_01() {
+	@Test public void testGetQualifiedNameWithDelimiter_01() {
 		getObjectUnderTest().setSimpleName("SimpleName");
 		assertEquals("SimpleName", getObjectUnderTest().getQualifiedName('.'));
 	}
 	
-	public void testGetQualifiedNameWithDelimiter_02() {
+	@Test public void testGetQualifiedNameWithDelimiter_02() {
 		getObjectUnderTest().setPackageName("java.lang");
 		assertNull(getObjectUnderTest().getQualifiedName('.'));
 	}
 	
-	public void testGetQualifiedNameWithDelimiter_03() {
+	@Test public void testGetQualifiedNameWithDelimiter_03() {
 		JvmGenericType outerType = TypesFactory.eINSTANCE.createJvmGenericType();
 		outerType.setSimpleName("DoesNotExist");
 		outerType.getMembers().add(getObjectUnderTest());
@@ -114,7 +114,7 @@ public abstract class JvmDeclaredTypeTest extends TestCase {
 		assertEquals("DoesNotExist.SimpleName", getObjectUnderTest().getQualifiedName('.'));
 	}
 	
-	public void testGetQualifiedNameWithDelimiter_04() {
+	@Test public void testGetQualifiedNameWithDelimiter_04() {
 		JvmGenericType outerType = TypesFactory.eINSTANCE.createJvmGenericType();
 		outerType.setSimpleName("DoesNotExist");
 		outerType.setPackageName("java.lang");
@@ -124,7 +124,7 @@ public abstract class JvmDeclaredTypeTest extends TestCase {
 		assertEquals("java.lang.DoesNotExist.SimpleName", getObjectUnderTest().getQualifiedName('.'));
 	}
 	
-	public void testGetQualifiedNameWithDelimiter_05() {
+	@Test public void testGetQualifiedNameWithDelimiter_05() {
 		JvmGenericType outerOuterType = TypesFactory.eINSTANCE.createJvmGenericType();
 		outerOuterType.setSimpleName("DoesNotExist");
 		outerOuterType.setPackageName("java.lang");
@@ -136,7 +136,7 @@ public abstract class JvmDeclaredTypeTest extends TestCase {
 		assertEquals("java.lang.DoesNotExist.Outer.SimpleName", getObjectUnderTest().getQualifiedName('.'));
 	}
 	
-	public void testFindFeaturesByName_01() {
+	@Test public void testFindFeaturesByName_01() {
 		JvmDeclaredType type = getObjectUnderTest();
 		JvmOperation operation = TypesFactory.eINSTANCE.createJvmOperation();
 		operation.setSimpleName("foo");
@@ -148,7 +148,7 @@ public abstract class JvmDeclaredTypeTest extends TestCase {
 		assertFalse(iterator.hasNext());
 	}
 	
-	public void testFindFeaturesByName_02() {
+	@Test public void testFindFeaturesByName_02() {
 		JvmDeclaredType type = getObjectUnderTest();
 		JvmOperation operation = TypesFactory.eINSTANCE.createJvmOperation();
 		operation.setSimpleName("foo");
@@ -162,7 +162,7 @@ public abstract class JvmDeclaredTypeTest extends TestCase {
 		assertFalse(iterator.hasNext());
 	}
 	
-	public void testFindFeaturesByName_03() {
+	@Test public void testFindFeaturesByName_03() {
 		JvmDeclaredType type = getObjectUnderTest();
 		JvmGenericType superType = TypesFactory.eINSTANCE.createJvmGenericType();
 		ResourceImpl resource = new ResourceImpl();
@@ -181,7 +181,7 @@ public abstract class JvmDeclaredTypeTest extends TestCase {
 		assertFalse(iterator.hasNext());
 	}
 	
-	public void testFindFeaturesByName_04() {
+	@Test public void testFindFeaturesByName_04() {
 		JvmDeclaredType type = getObjectUnderTest();
 		JvmGenericType superType = TypesFactory.eINSTANCE.createJvmGenericType();
 		ResourceImpl resource = new ResourceImpl();
@@ -202,7 +202,7 @@ public abstract class JvmDeclaredTypeTest extends TestCase {
 		assertFalse(iterator.hasNext());
 	}
 	
-	public void testGetAllFeatures_01() {
+	@Test public void testGetAllFeatures_01() {
 		JvmDeclaredType type = getObjectUnderTest();
 		JvmOperation operation = TypesFactory.eINSTANCE.createJvmOperation();
 		type.getMembers().add(operation);
@@ -213,7 +213,7 @@ public abstract class JvmDeclaredTypeTest extends TestCase {
 		assertFalse(iterator.hasNext());
 	}
 	
-	public void testGetAllFeatures_02() {
+	@Test public void testGetAllFeatures_02() {
 		JvmDeclaredType type = getObjectUnderTest();
 		type.getAllFeatures();
 		JvmOperation operation = TypesFactory.eINSTANCE.createJvmOperation();
@@ -225,7 +225,7 @@ public abstract class JvmDeclaredTypeTest extends TestCase {
 		assertFalse(iterator.hasNext());
 	}
 	
-	public void testGetAllFeatures_03() {
+	@Test public void testGetAllFeatures_03() {
 		JvmDeclaredType type = getObjectUnderTest();
 		JvmGenericType superType = TypesFactory.eINSTANCE.createJvmGenericType();
 		ResourceImpl resource = new ResourceImpl();
@@ -243,7 +243,7 @@ public abstract class JvmDeclaredTypeTest extends TestCase {
 		assertFalse(iterator.hasNext());
 	}
 	
-	public void testGetAllFeatures_04() {
+	@Test public void testGetAllFeatures_04() {
 		JvmDeclaredType type = getObjectUnderTest();
 		JvmGenericType superType = TypesFactory.eINSTANCE.createJvmGenericType();
 		ResourceImpl resource = new ResourceImpl();

@@ -10,8 +10,6 @@ package org.eclipse.xtext.common.types.access.xtext;
 import java.util.AbstractList;
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -23,17 +21,19 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.AbstractScope;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractConstructorScopeTest extends TestCase {
+public abstract class AbstractConstructorScopeTest extends Assert {
 
-	public void testGetOuterScope_01() {
+	@Test public void testGetOuterScope_01() {
 		assertSame(IScope.NULLSCOPE, ((AbstractScope)getConstructorScope()).getParent());
 	}
 	
-	public void testGetElementByName_01() {
+	@Test public void testGetElementByName_01() {
 		IEObjectDescription objectElement = getConstructorScope().getSingleElement(QualifiedName.create(Object.class.getName()));
 		assertNotNull(objectElement);
 		assertFalse(objectElement.getEObjectOrProxy().eIsProxy());
@@ -41,27 +41,27 @@ public abstract class AbstractConstructorScopeTest extends TestCase {
 		assertEquals(QualifiedName.create("java.lang.Object"), objectElement.getName());
 	}
 	
-	public void testGetElementByName_02() {
+	@Test public void testGetElementByName_02() {
 		IEObjectDescription objectElement = getConstructorScope().getSingleElement(QualifiedName.create(Object.class.getName() + "SuperClass"));
 		assertNull(objectElement);
 	}
 	
-	public void testGetElementByName_03() {
+	@Test public void testGetElementByName_03() {
 		IEObjectDescription objectElement = getConstructorScope().getSingleElement(QualifiedName.create(int.class.getName()));
 		assertNull(objectElement);
 	}
 	
-	public void testGetElementByName_04() {
+	@Test public void testGetElementByName_04() {
 		IEObjectDescription objectElement = getConstructorScope().getSingleElement(QualifiedName.create(AbstractList.class.getName()));
 		assertNotNull(objectElement);
 	}
 	
-	public void testGetElementByName_05() {
+	@Test public void testGetElementByName_05() {
 		IEObjectDescription objectElement = getConstructorScope().getSingleElement(QualifiedName.create(List.class.getName()));
 		assertNull(objectElement);
 	}
 	
-	public void testGetElementByInstance_01() {
+	@Test public void testGetElementByInstance_01() {
 		JvmConstructor constructor = TypesFactory.eINSTANCE.createJvmConstructor();
 		JvmGenericType type = TypesFactory.eINSTANCE.createJvmGenericType();
 		type.setPackageName("java.lang");
@@ -74,13 +74,13 @@ public abstract class AbstractConstructorScopeTest extends TestCase {
 		assertEquals(new IQualifiedNameConverter.DefaultImpl().toQualifiedName("java.lang.Object"), element.getQualifiedName());
 	}
 	
-	public void testGetElementByInstance_02() {
+	@Test public void testGetElementByInstance_02() {
 		JvmVoid voidType = TypesFactory.eINSTANCE.createJvmVoid();
 		IEObjectDescription element = getConstructorScope().getSingleElement(voidType);
 		assertNull(element);
 	}
 	
-	public void testGetElementByInstance_03() {
+	@Test public void testGetElementByInstance_03() {
 		JvmAnnotationReference annotationReference = TypesFactory.eINSTANCE.createJvmAnnotationReference();
 		IEObjectDescription element = getConstructorScope().getSingleElement(annotationReference);
 		assertNull(element);

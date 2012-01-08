@@ -18,8 +18,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
@@ -93,6 +91,9 @@ import org.eclipse.xtext.common.types.testSetups.TestAnnotationWithStringDefault
 import org.eclipse.xtext.common.types.testSetups.TestEnum;
 import org.eclipse.xtext.common.types.testSetups.TypeWithInnerAnnotation;
 import org.eclipse.xtext.common.types.testSetups.TypeWithInnerEnum;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -104,15 +105,14 @@ import com.google.common.collect.Sets;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractTypeProviderTest extends TestCase {
+public abstract class AbstractTypeProviderTest extends Assert {
 
 	private Diagnostician diagnostician;
 
 	protected abstract IJvmTypeProvider getTypeProvider();
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		EValidator.Registry registry = new EValidatorRegistryImpl(EValidator.Registry.INSTANCE);
 		registry.put(TypesPackage.eINSTANCE, new EObjectValidator());
 		diagnostician = new Diagnostician(registry);
@@ -148,7 +148,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		}
 	}
 
-	public void testFindTypeByName_int() {
+	@Test public void testFindTypeByName_int() {
 		String typeName = "int";
 		JvmType type = getTypeProvider().findTypeByName(typeName);
 		assertNotNull(type);
@@ -160,14 +160,14 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		recomputeAndCheckIdentifiers(resource);
 	}
 
-	public void testFindTypeByName_int_twice() {
+	@Test public void testFindTypeByName_int_twice() {
 		String typeName = "int";
 		JvmType firstType = getTypeProvider().findTypeByName(typeName);
 		JvmType secondType = getTypeProvider().findTypeByName(typeName);
 		assertSame(firstType, secondType);
 	}
 
-	public void testFindTypeByName_int_array_01() {
+	@Test public void testFindTypeByName_int_array_01() {
 		String typeName = "int[]";
 		JvmType type = getTypeProvider().findTypeByName(typeName);
 		assertNotNull(type);
@@ -179,7 +179,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		recomputeAndCheckIdentifiers(resource);
 	}
 
-	public void testFindTypeByName_int_array_02() {
+	@Test public void testFindTypeByName_int_array_02() {
 		String typeName = int[].class.getName();
 		JvmType type = getTypeProvider().findTypeByName(typeName);
 		assertNotNull(type);
@@ -187,7 +187,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("int[]", type.getIdentifier());
 	}
 
-	public void testFindTypeByName_int_array_03() {
+	@Test public void testFindTypeByName_int_array_03() {
 		String typeName = int[][][].class.getName();
 		JvmType type = getTypeProvider().findTypeByName(typeName);
 		assertNotNull(type);
@@ -199,7 +199,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		recomputeAndCheckIdentifiers(resource);
 	}
 
-	public void testFindTypeByName_int_array_04() {
+	@Test public void testFindTypeByName_int_array_04() {
 		String typeName = "int[][][]";
 		JvmType type = getTypeProvider().findTypeByName(typeName);
 		assertNotNull(type);
@@ -207,7 +207,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(typeName, type.getIdentifier());
 	}
 
-	public void testFindTypeByName_javaLangCharSequence_01() {
+	@Test public void testFindTypeByName_javaLangCharSequence_01() {
 		String typeName = CharSequence.class.getName();
 		JvmType type = getTypeProvider().findTypeByName(typeName);
 		assertNotNull(type);
@@ -219,7 +219,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		recomputeAndCheckIdentifiers(resource);
 	}
 
-	public void testFindTypeByName_javaLangCharSequence_02() {
+	@Test public void testFindTypeByName_javaLangCharSequence_02() {
 		String typeName = CharSequence.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		assertEquals(4, type.getMembers().size());
@@ -231,7 +231,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		}
 	}
 
-	public void testFindTypeByName_javaLangCharSequence_03() {
+	@Test public void testFindTypeByName_javaLangCharSequence_03() {
 		String typeName = CharSequence.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmOperation length = (JvmOperation) type.eResource().getEObject("java.lang.CharSequence.length()");
@@ -242,7 +242,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("int", returnType.getIdentifier());
 	}
 
-	public void testFindTypeByName_javaLangCharSequence_04() {
+	@Test public void testFindTypeByName_javaLangCharSequence_04() {
 		String typeName = CharSequence.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmOperation charAt = (JvmOperation) type.eResource().getEObject("java.lang.CharSequence.charAt(int)");
@@ -256,7 +256,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(intType, charAt.getParameters().get(0).getParameterType().getType());
 	}
 
-	public void testFindTypeByName_javaLangNumber_01() {
+	@Test public void testFindTypeByName_javaLangNumber_01() {
 		String typeName = Number.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		assertEquals(type.getSuperTypes().toString(), 2, type.getSuperTypes().size());
@@ -272,7 +272,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		recomputeAndCheckIdentifiers(resource);
 	}
 
-	public void testFindTypeByName_javaLangNumber_02() {
+	@Test public void testFindTypeByName_javaLangNumber_02() {
 		String typeName = Number[][].class.getName();
 		JvmArrayType type = (JvmArrayType) getTypeProvider().findTypeByName(typeName);
 		JvmOperation longValue = (JvmOperation) type.eResource().getEObject("java.lang.Number.longValue()");
@@ -287,7 +287,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		recomputeAndCheckIdentifiers(resource);
 	}
 
-	public void testFindTypeByName_javaUtilList_01() {
+	@Test public void testFindTypeByName_javaUtilList_01() {
 		String typeName = List.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		assertNotNull(type);
@@ -309,7 +309,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		recomputeAndCheckIdentifiers(resource);
 	}
 
-	public void testFindTypeByName_javaUtilList_02() {
+	@Test public void testFindTypeByName_javaUtilList_02() {
 		String typeName = List.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmOperation toArray = (JvmOperation) type.eResource().getEObject("java.util.List.toArray()");
@@ -317,7 +317,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("java.lang.Object[]", toArray.getReturnType().getIdentifier());
 	}
 
-	public void testFindTypeByName_javaUtilList_03() {
+	@Test public void testFindTypeByName_javaUtilList_03() {
 		String typeName = List.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmOperation toArray = (JvmOperation) type.eResource().getEObject("java.util.List.toArray(T[])");
@@ -325,7 +325,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("T[]", toArray.getReturnType().getIdentifier());
 	}
 
-	public void testFindTypeByName_javaUtilList_04() {
+	@Test public void testFindTypeByName_javaUtilList_04() {
 		String typeName = List.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmOperation addAll = (JvmOperation) type.eResource().getEObject("java.util.List.addAll(java.util.Collection)");
@@ -333,7 +333,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("boolean", addAll.getReturnType().getIdentifier());
 	}
 
-	public void testFindTypeByName_javaUtilList_05() {
+	@Test public void testFindTypeByName_javaUtilList_05() {
 		String typeName = List.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmOperation addAll = (JvmOperation) type.eResource().getEObject("java.util.List.addAll(java.util.Collection)");
@@ -343,7 +343,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertFalse(parameterType.toString(), parameterType.eIsProxy());
 	}
 
-	public void testFindTypeByName_javaUtilList_06() {
+	@Test public void testFindTypeByName_javaUtilList_06() {
 		String typeName = List.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmOperation containsAll = (JvmOperation) type.eResource().getEObject(
@@ -354,7 +354,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertFalse(parameterType.toString(), parameterType.eIsProxy());
 	}
 
-	public void testFindTypeByName_javaUtilList_07() {
+	@Test public void testFindTypeByName_javaUtilList_07() {
 		String typeName = List.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		assertEquals(1, type.getSuperTypes().size());
@@ -371,7 +371,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(parameterType, type.getTypeParameters().get(0));
 	}
 	
-	public void testSuperTypeOfInterface() {
+	@Test public void testSuperTypeOfInterface() {
 		String typeName = Serializable.class.getName();
 		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
 		assertEquals(Object.class.getName(),type.getSuperTypes().get(0).getIdentifier());
@@ -386,7 +386,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		return result;
 	}
 
-	public void testMemberCount_01() {
+	@Test public void testMemberCount_01() {
 		String typeName = ParameterizedMethods.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		int methodCount = ParameterizedMethods.class.getDeclaredMethods().length;
@@ -400,7 +400,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		recomputeAndCheckIdentifiers(resource);
 	}
 
-	public void testMemberCount_02() {
+	@Test public void testMemberCount_02() {
 		String typeName = InitializerWithConstructor.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		int methodCount = InitializerWithConstructor.class.getDeclaredMethods().length;
@@ -414,7 +414,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		recomputeAndCheckIdentifiers(resource);
 	}
 
-	public void testMemberCount_03() {
+	@Test public void testMemberCount_03() {
 		String typeName = InitializerWithoutConstructor.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		int methodCount = InitializerWithoutConstructor.class.getDeclaredMethods().length;
@@ -428,7 +428,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		recomputeAndCheckIdentifiers(resource);
 	}
 
-	public void testMemberCount_04() {
+	@Test public void testMemberCount_04() {
 		String typeName = NestedTypes.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		int methodCount = NestedTypes.class.getDeclaredMethods().length;
@@ -444,7 +444,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		recomputeAndCheckIdentifiers(resource);
 	}
 
-	public void testMemberCount_05() {
+	@Test public void testMemberCount_05() {
 		String typeName = NestedTypes.Outer.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		int methodCount = NestedTypes.Outer.class.getDeclaredMethods().length;
@@ -456,7 +456,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(methodCount + constructorCount + nestedTypesCount, type.getMembers().size());
 	}
 
-	public void testMemberCount_06() {
+	@Test public void testMemberCount_06() {
 		String typeName = NestedTypes.Outer.Inner.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		int methodCount = NestedTypes.Outer.Inner.class.getDeclaredMethods().length;
@@ -466,7 +466,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(methodCount + constructorCount, type.getMembers().size());
 	}
 
-	public void testMemberCount_07() {
+	@Test public void testMemberCount_07() {
 		String typeName = StaticNestedTypes.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		int methodCount = StaticNestedTypes.class.getDeclaredMethods().length;
@@ -482,7 +482,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		recomputeAndCheckIdentifiers(resource);
 	}
 
-	public void testMemberCount_08() {
+	@Test public void testMemberCount_08() {
 		String typeName = StaticNestedTypes.Outer.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		int methodCount = StaticNestedTypes.Outer.class.getDeclaredMethods().length;
@@ -494,7 +494,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(methodCount + constructorCount + nestedTypesCount, type.getMembers().size());
 	}
 
-	public void testMemberCount_09() {
+	@Test public void testMemberCount_09() {
 		String typeName = StaticNestedTypes.Outer.Inner.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		int methodCount = StaticNestedTypes.Outer.Inner.class.getDeclaredMethods().length;
@@ -504,7 +504,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(methodCount + constructorCount, type.getMembers().size());
 	}
 
-	public void testMemberCount_10() {
+	@Test public void testMemberCount_10() {
 		String typeName = ParameterizedTypes.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		int methodCount = ParameterizedTypes.class.getDeclaredMethods().length;
@@ -520,7 +520,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		recomputeAndCheckIdentifiers(resource);
 	}
 
-	public void testMemberCount_11() {
+	@Test public void testMemberCount_11() {
 		String typeName = ParameterizedTypes.Inner.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		int methodCount = ParameterizedTypes.Inner.class.getDeclaredMethods().length;
@@ -530,7 +530,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(methodCount + fieldCount, type.getMembers().size());
 	}
 
-	public void testMemberCount_12() {
+	@Test public void testMemberCount_12() {
 		String typeName = Fields.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		int constructorCount = Fields.class.getDeclaredConstructors().length;
@@ -546,7 +546,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		recomputeAndCheckIdentifiers(resource);
 	}
 
-	public void testMemberCount_13() {
+	@Test public void testMemberCount_13() {
 		String typeName = Fields.Inner.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		int constructorCount = Fields.Inner.class.getDeclaredConstructors().length;
@@ -556,7 +556,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(constructorCount + fieldCount, type.getMembers().size());
 	}
 	
-	public void testMemberCount_14() {
+	@Test public void testMemberCount_14() {
 		String typeName = TestAnnotation.class.getName();
 		JvmAnnotationType type = (JvmAnnotationType) getTypeProvider().findTypeByName(typeName);
 		int methodCount = TestAnnotation.class.getDeclaredMethods().length;
@@ -566,7 +566,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(methodCount + innerTypesCount, type.getMembers().size());
 	}
 	
-	public void testMemberCount_15() {
+	@Test public void testMemberCount_15() {
 		String typeName = EmptyAbstractClass.class.getName();
 		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
 		int constructorCount = EmptyAbstractClass.class.getDeclaredConstructors().length;
@@ -574,7 +574,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(1, type.getMembers().size());
 	}
 	
-	public void testMemberCount_16() {
+	@Test public void testMemberCount_16() {
 		String typeName = TestEnum.class.getName();
 		JvmEnumerationType type = (JvmEnumerationType) getTypeProvider().findTypeByName(typeName);
 		int innerTypesCount = TestEnum.class.getDeclaredClasses().length;
@@ -591,7 +591,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(type.getMembers().toString(), innerTypesCount + methodCount + constructorCount + fieldCount - 1, type.getMembers().size());
 	}
 	
-	public void testMemberCount_17() {
+	@Test public void testMemberCount_17() {
 		String typeName = TestAnnotationWithDefaults.class.getName();
 		JvmAnnotationType type = (JvmAnnotationType) getTypeProvider().findTypeByName(typeName);
 		int methodCount = TestAnnotationWithDefaults.class.getDeclaredMethods().length;
@@ -601,7 +601,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(methodCount + innerTypesCount, type.getMembers().size());
 	}
 	
-	public void testMemberCount_18() {
+	@Test public void testMemberCount_18() {
 		String typeName = RawIterable.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		int constructorCount = RawIterable.class.getDeclaredConstructors().length;
@@ -609,12 +609,12 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(constructorCount, type.getMembers().size());
 	}
 
-	public void test_twoListParamsNoResult_01() {
+	@Test public void test_twoListParamsNoResult_01() {
 		JvmOperation twoListParamsNoResult = getMethodFromParameterizedMethods("twoListParamsNoResult(java.util.List,java.util.List)");
 		assertEquals(2, twoListParamsNoResult.getParameters().size());
 	}
 
-	public void test_twoListParamsNoResult_02() {
+	@Test public void test_twoListParamsNoResult_02() {
 		JvmOperation twoListParamsNoResult = getMethodFromParameterizedMethods("twoListParamsNoResult(java.util.List,java.util.List)");
 		JvmFormalParameter firstParam = twoListParamsNoResult.getParameters().get(0);
 		JvmTypeReference paramType = firstParam.getParameterType();
@@ -628,7 +628,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("java.util.List", rawType.getIdentifier());
 	}
 
-	public void test_twoListParamsNoResult_03() {
+	@Test public void test_twoListParamsNoResult_03() {
 		JvmOperation twoListParamsNoResult = getMethodFromParameterizedMethods("twoListParamsNoResult(java.util.List,java.util.List)");
 		JvmFormalParameter firstParam = twoListParamsNoResult.getParameters().get(0);
 		JvmTypeReference paramType = firstParam.getParameterType();
@@ -643,12 +643,12 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(twoListParamsNoResult, typeVar.getDeclarator());
 	}
 
-	public void test_twoListParamsListResult_01() {
+	@Test public void test_twoListParamsListResult_01() {
 		JvmOperation twoListParamsListResult = getMethodFromParameterizedMethods("twoListParamsListResult(java.util.List,java.util.List)");
 		assertEquals(2, twoListParamsListResult.getParameters().size());
 	}
 
-	public void test_twoListParamsListResult_02() {
+	@Test public void test_twoListParamsListResult_02() {
 		JvmOperation twoListParamsListResult = getMethodFromParameterizedMethods("twoListParamsListResult(java.util.List,java.util.List)");
 		JvmTypeReference returnType = twoListParamsListResult.getReturnType();
 		assertNotNull(returnType);
@@ -660,7 +660,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("java.util.List", rawType.getIdentifier());
 	}
 
-	public void test_twoListParamsListResult_03() {
+	@Test public void test_twoListParamsListResult_03() {
 		JvmOperation twoListParamsListResult = getMethodFromParameterizedMethods("twoListParamsListResult(java.util.List,java.util.List)");
 		JvmTypeReference returnType = twoListParamsListResult.getReturnType();
 		JvmParameterizedTypeReference parameterized = (JvmParameterizedTypeReference) returnType;
@@ -674,12 +674,12 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(twoListParamsListResult, typeVar.getDeclarator());
 	}
 
-	public void test_twoListWildcardsNoResult_01() {
+	@Test public void test_twoListWildcardsNoResult_01() {
 		JvmOperation twoListWildcardsNoResult = getMethodFromParameterizedMethods("twoListWildcardsNoResult(java.util.List,java.util.List)");
 		assertEquals(2, twoListWildcardsNoResult.getParameters().size());
 	}
 
-	public void test_twoListWildcardsNoResult_02() {
+	@Test public void test_twoListWildcardsNoResult_02() {
 		JvmOperation twoListWildcardsNoResult = getMethodFromParameterizedMethods("twoListWildcardsNoResult(java.util.List,java.util.List)");
 		JvmFormalParameter firstParam = twoListWildcardsNoResult.getParameters().get(0);
 		JvmTypeReference paramType = firstParam.getParameterType();
@@ -692,7 +692,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("java.util.List", rawType.getIdentifier());
 	}
 
-	public void test_twoListWildcardsNoResult_03() {
+	@Test public void test_twoListWildcardsNoResult_03() {
 		JvmOperation twoListWildcardsNoResult = getMethodFromParameterizedMethods("twoListWildcardsNoResult(java.util.List,java.util.List)");
 		JvmFormalParameter firstParam = twoListWildcardsNoResult.getParameters().get(0);
 		JvmTypeReference paramType = firstParam.getParameterType();
@@ -710,12 +710,12 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("java.lang.Object", upperBoundType.getIdentifier());
 	}
 
-	public void test_twoListWildcardsListResult_01() {
+	@Test public void test_twoListWildcardsListResult_01() {
 		JvmOperation twoListWildcardsListResult = getMethodFromParameterizedMethods("twoListWildcardsListResult(java.util.List,java.util.List)");
 		assertEquals(2, twoListWildcardsListResult.getParameters().size());
 	}
 
-	public void test_twoListWildcardsListResult_02() {
+	@Test public void test_twoListWildcardsListResult_02() {
 		JvmOperation twoListWildcardsListResult = getMethodFromParameterizedMethods("twoListWildcardsListResult(java.util.List,java.util.List)");
 		JvmTypeReference returnType = twoListWildcardsListResult.getReturnType();
 		assertNotNull(returnType);
@@ -728,7 +728,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("java.util.List", rawType.getIdentifier());
 	}
 
-	public void test_twoListWildcardsListResult_03() {
+	@Test public void test_twoListWildcardsListResult_03() {
 		JvmOperation twoListWildcardsListResult = getMethodFromParameterizedMethods("twoListWildcardsListResult(java.util.List,java.util.List)");
 		JvmTypeReference returnType = twoListWildcardsListResult.getReturnType();
 		JvmParameterizedTypeReference parameterized = (JvmParameterizedTypeReference) returnType;
@@ -745,12 +745,12 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("java.lang.Object", upperBoundType.getIdentifier());
 	}
 
-	public void test_arrayWildcard_01() {
+	@Test public void test_arrayWildcard_01() {
 		JvmOperation arrayWildcard = getMethodFromParameterizedMethods("arrayWildcard(java.util.List[])");
 		assertEquals(1, arrayWildcard.getParameters().size());
 	}
 
-	public void test_arrayWildcard_02() {
+	@Test public void test_arrayWildcard_02() {
 		JvmOperation arrayWildcard = getMethodFromParameterizedMethods("arrayWildcard(java.util.List[])");
 		JvmTypeReference paramType = arrayWildcard.getParameters().get(0).getParameterType();
 		assertEquals("java.util.List<? extends java.lang.Object>[]", paramType.getIdentifier());
@@ -761,12 +761,12 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertTrue(((JvmGenericArrayTypeReference) paramType).getComponentType() instanceof JvmParameterizedTypeReference);
 	}
 
-	public void test_nestedArrayWildcard_01() {
+	@Test public void test_nestedArrayWildcard_01() {
 		JvmOperation nestedArrayWildcard = getMethodFromParameterizedMethods("nestedArrayWildcard(java.util.List[][])");
 		assertEquals(1, nestedArrayWildcard.getParameters().size());
 	}
 
-	public void test_nestedArrayWildcard_02() {
+	@Test public void test_nestedArrayWildcard_02() {
 		JvmOperation nestedArrayWildcard = getMethodFromParameterizedMethods("nestedArrayWildcard(java.util.List[][])");
 		JvmTypeReference paramType = nestedArrayWildcard.getParameters().get(0).getParameterType();
 		assertTrue(paramType.getType() instanceof JvmArrayType);
@@ -784,12 +784,12 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertTrue(listWithWildcard.getArguments().get(0) instanceof JvmWildcardTypeReference);
 	}
 
-	public void test_arrayParameterized_01() {
+	@Test public void test_arrayParameterized_01() {
 		JvmOperation arrayParameterized = getMethodFromParameterizedMethods("arrayParameterized(java.util.List[])");
 		assertEquals(1, arrayParameterized.getParameters().size());
 	}
 
-	public void test_arrayParameterized_02() {
+	@Test public void test_arrayParameterized_02() {
 		JvmOperation arrayParameterized = getMethodFromParameterizedMethods("arrayParameterized(java.util.List[])");
 		JvmTypeReference paramType = arrayParameterized.getParameters().get(0).getParameterType();
 		assertEquals("java.util.List<T>[]", paramType.getIdentifier());
@@ -800,12 +800,12 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertTrue(((JvmGenericArrayTypeReference) paramType).getComponentType() instanceof JvmParameterizedTypeReference);
 	}
 
-	public void test_nestedArrayParameterized_01() {
+	@Test public void test_nestedArrayParameterized_01() {
 		JvmOperation nestedArrayParameterized = getMethodFromParameterizedMethods("nestedArrayParameterized(java.util.List[][])");
 		assertEquals(1, nestedArrayParameterized.getParameters().size());
 	}
 
-	public void test_nestedArrayParameterized_02() {
+	@Test public void test_nestedArrayParameterized_02() {
 		JvmOperation nestedArrayParameterized = getMethodFromParameterizedMethods("nestedArrayParameterized(java.util.List[][])");
 		JvmTypeReference paramType = nestedArrayParameterized.getParameters().get(0).getParameterType();
 		assertTrue(paramType.getType() instanceof JvmArrayType);
@@ -824,12 +824,12 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("T", listWithT.getArguments().get(0).getType().getSimpleName());
 	}
 
-	public void test_arrayVariable_01() {
+	@Test public void test_arrayVariable_01() {
 		JvmOperation arrayVariable = getMethodFromParameterizedMethods("arrayVariable(T[])");
 		assertEquals(1, arrayVariable.getParameters().size());
 	}
 
-	public void test_arrayVariable_02() {
+	@Test public void test_arrayVariable_02() {
 		JvmOperation arrayVariable = getMethodFromParameterizedMethods("arrayVariable(T[])");
 		JvmType paramType = arrayVariable.getParameters().get(0).getParameterType().getType();
 		assertEquals("T[]", paramType.getIdentifier());
@@ -838,12 +838,12 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertTrue(arrayType.getComponentType() instanceof JvmTypeParameter);
 	}
 
-	public void test_nestedArrayVariable_01() {
+	@Test public void test_nestedArrayVariable_01() {
 		JvmOperation nestedArrayVariable = getMethodFromParameterizedMethods("nestedArrayVariable(T[][])");
 		assertEquals(1, nestedArrayVariable.getParameters().size());
 	}
 
-	public void test_nestedArrayVariable_02() {
+	@Test public void test_nestedArrayVariable_02() {
 		JvmOperation nestedArrayVariable = getMethodFromParameterizedMethods("nestedArrayVariable(T[][])");
 		JvmType paramType = nestedArrayVariable.getParameters().get(0).getParameterType().getType();
 		assertTrue(paramType instanceof JvmArrayType);
@@ -853,7 +853,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertTrue(arrayType.getComponentType() instanceof JvmTypeParameter);
 	}
 
-	public void test_nestedTypes_Outer() {
+	@Test public void test_nestedTypes_Outer() {
 		String typeName = NestedTypes.Outer.class.getName();
 		String expectedSuffix = NestedTypes.class.getSimpleName() + "$" + NestedTypes.Outer.class.getSimpleName();
 		assertTrue(typeName + " endsWith " + expectedSuffix, typeName.endsWith(expectedSuffix));
@@ -864,7 +864,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(NestedTypes.class.getName(), outerType.getIdentifier());
 	}
 
-	public void test_nestedTypes_Outer_Inner() {
+	@Test public void test_nestedTypes_Outer_Inner() {
 		String typeName = NestedTypes.Outer.Inner.class.getName();
 		String expectedSuffix = NestedTypes.class.getSimpleName() + "$" + NestedTypes.Outer.class.getSimpleName() + "$"
 				+ NestedTypes.Outer.Inner.class.getSimpleName();
@@ -876,14 +876,14 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(NestedTypes.Outer.class.getName(), outerType.getIdentifier());
 	}
 
-	public void test_staticNestedTypes_method() {
+	@Test public void test_staticNestedTypes_method() {
 		String typeName = StaticNestedTypes.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmOperation operation = getMethodFromType(type, StaticNestedTypes.class, "method()");
 		assertEquals("boolean", operation.getReturnType().getIdentifier());
 	}
 
-	public void test_staticNestedTypes_Outer() {
+	@Test public void test_staticNestedTypes_Outer() {
 		String typeName = StaticNestedTypes.Outer.class.getName();
 		String expectedSuffix = StaticNestedTypes.class.getSimpleName() + "$"
 				+ StaticNestedTypes.Outer.class.getSimpleName();
@@ -895,14 +895,14 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(StaticNestedTypes.class.getName(), outerType.getIdentifier());
 	}
 
-	public void test_staticNestedTypes_Outer_method() {
+	@Test public void test_staticNestedTypes_Outer_method() {
 		String typeName = StaticNestedTypes.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmOperation operation = getMethodFromType(type, StaticNestedTypes.Outer.class, "method()");
 		assertEquals("int", operation.getReturnType().getIdentifier());
 	}
 
-	public void test_staticNestedTypes_Outer_Inner() {
+	@Test public void test_staticNestedTypes_Outer_Inner() {
 		String typeName = StaticNestedTypes.Outer.Inner.class.getName();
 		String expectedSuffix = StaticNestedTypes.class.getSimpleName() + "$"
 				+ StaticNestedTypes.Outer.class.getSimpleName() + "$"
@@ -915,7 +915,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(StaticNestedTypes.Outer.class.getName(), outerType.getIdentifier());
 	}
 
-	public void test_staticNestedTypes_Outer_Inner_method() {
+	@Test public void test_staticNestedTypes_Outer_Inner_method() {
 		String typeName = StaticNestedTypes.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmOperation operation = getMethodFromType(type, StaticNestedTypes.Outer.Inner.class, "method()");
@@ -938,14 +938,14 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		return result;
 	}
 
-	public void test_ParameterizedTypes_01() {
+	@Test public void test_ParameterizedTypes_01() {
 		String typeName = ParameterizedTypes.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		assertNotNull(type);
 		assertEquals(5, type.getTypeParameters().size());
 	}
 
-	public void test_ParameterizedTypes_02() {
+	@Test public void test_ParameterizedTypes_02() {
 		String typeName = ParameterizedTypes.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmOperation methodS = getMethodFromType(type, ParameterizedTypes.class, "methodS(S)");
@@ -964,7 +964,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(s, upperBound.getTypeReference().getType());
 	}
 
-	public void test_ParameterizedTypes_03() {
+	@Test public void test_ParameterizedTypes_03() {
 		String typeName = ParameterizedTypes.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmOperation methodT = getMethodFromType(type, ParameterizedTypes.class, "methodT(T)");
@@ -985,7 +985,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(t, lowerBound.getTypeReference().getType());
 	}
 
-	public void test_ParameterizedTypes_04() {
+	@Test public void test_ParameterizedTypes_04() {
 		String typeName = ParameterizedTypes.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmOperation methodY = getMethodFromType(type, ParameterizedTypes.class, "methodY(Y)");
@@ -1002,7 +1002,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(t, upperBound.getTypeReference().getType());
 	}
 
-	public void test_ParameterizedTypes_05() {
+	@Test public void test_ParameterizedTypes_05() {
 		String typeName = ParameterizedTypes.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmOperation methodZ = getMethodFromType(type, ParameterizedTypes.class, "methodZ(java.util.List)");
@@ -1027,7 +1027,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(z, lowerBound.getTypeReference().getType());
 	}
 
-	public void test_ParameterizedTypes_06() {
+	@Test public void test_ParameterizedTypes_06() {
 		String typeName = ParameterizedTypes.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmOperation methodMap = getMethodFromType(type, ParameterizedTypes.class, "methodMap(java.util.Map)");
@@ -1046,7 +1046,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(s, extendsS.getConstraints().get(0).getTypeReference().getType());
 	}
 
-	public void test_ParameterizedTypes_S_01() {
+	@Test public void test_ParameterizedTypes_S_01() {
 		String typeName = ParameterizedTypes.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmTypeParameter typeVariable = type.getTypeParameters().get(0);
@@ -1060,7 +1060,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("java.lang.Object", upperBound.getTypeReference().getIdentifier());
 	}
 
-	public void test_ParameterizedTypes_T_01() {
+	@Test public void test_ParameterizedTypes_T_01() {
 		String typeName = ParameterizedTypes.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmTypeParameter typeVariable = type.getTypeParameters().get(1);
@@ -1077,7 +1077,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(s, upperBound.getTypeReference().getType());
 	}
 
-	public void test_ParameterizedTypes_U_01() {
+	@Test public void test_ParameterizedTypes_U_01() {
 		String typeName = ParameterizedTypes.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmTypeParameter typeVariable = type.getTypeParameters().get(2);
@@ -1097,7 +1097,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(s, typeArgument.getType());
 	}
 
-	public void test_ParameterizedTypes_V_01() {
+	@Test public void test_ParameterizedTypes_V_01() {
 		String typeName = ParameterizedTypes.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmTypeParameter typeParameterV = type.getTypeParameters().get(3);
@@ -1123,7 +1123,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(typeParameterV, nestedUpperBound.getTypeReference().getType());
 	}
 
-	public void test_ParameterizedTypes_W_01() {
+	@Test public void test_ParameterizedTypes_W_01() {
 		String typeName = ParameterizedTypes.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmTypeParameter typeParameterW = type.getTypeParameters().get(4);
@@ -1144,7 +1144,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(s, typeArgument.getType());
 	}
 
-	public void test_ParameterizedTypes_W_02() {
+	@Test public void test_ParameterizedTypes_W_02() {
 		String typeName = ParameterizedTypes.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmTypeParameter typeParameterW = type.getTypeParameters().get(4);
@@ -1160,14 +1160,14 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("java.io.Serializable", secondUpperBound.getTypeReference().getIdentifier());
 	}
 
-	public void test_ParameterizedTypes_Inner_01() {
+	@Test public void test_ParameterizedTypes_Inner_01() {
 		String typeName = ParameterizedTypes.Inner.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		assertNotNull(type);
 		assertEquals(3, type.getTypeParameters().size());
 	}
 
-	public void test_ParameterizedTypes_Inner_02() {
+	@Test public void test_ParameterizedTypes_Inner_02() {
 		String typeName = ParameterizedTypes.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmOperation methodS = getMethodFromType(type, ParameterizedTypes.Inner.class, "methodS()");
@@ -1178,7 +1178,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(type, sParam.getDeclarator());
 	}
 
-	public void test_ParameterizedTypes_Inner_03() {
+	@Test public void test_ParameterizedTypes_Inner_03() {
 		String typeName = ParameterizedTypes.Inner.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmOperation methodX = getMethodFromType(type, ParameterizedTypes.Inner.class, "methodX()");
@@ -1189,7 +1189,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(type, xParam.getDeclarator());
 	}
 
-	public void test_ParameterizedTypes_Inner_04() {
+	@Test public void test_ParameterizedTypes_Inner_04() {
 		String typeName = ParameterizedTypes.Inner.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmOperation methodT = getMethodFromType(type, ParameterizedTypes.Inner.class, "methodT()");
@@ -1203,7 +1203,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(t, typeArgument.getType());
 	}
 
-	public void test_ParameterizedTypes_Inner_05() {
+	@Test public void test_ParameterizedTypes_Inner_05() {
 		String typeName = ParameterizedTypes.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmOperation methodV = getMethodFromType(type, ParameterizedTypes.Inner.class, "methodVArray_01()");
@@ -1221,7 +1221,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(v, upperBound.getTypeReference().getType());
 	}
 
-	public void test_ParameterizedTypes_Inner_06() {
+	@Test public void test_ParameterizedTypes_Inner_06() {
 		String typeName = ParameterizedTypes.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmOperation methodV = getMethodFromType(type, ParameterizedTypes.Inner.class, "methodVArray_02()");
@@ -1242,7 +1242,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(v, ((JvmArrayType) upperBoundType).getComponentType());
 	}
 
-	public void test_ParameterizedTypes_Inner_07() {
+	@Test public void test_ParameterizedTypes_Inner_07() {
 		String typeName = ParameterizedTypes.Inner.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmOperation methodV = getMethodFromType(type, ParameterizedTypes.Inner.class, "methodZArray_01()");
@@ -1259,7 +1259,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(z, componentType);
 	}
 
-	public void test_ParameterizedTypes_Inner_08() {
+	@Test public void test_ParameterizedTypes_Inner_08() {
 		String typeName = ParameterizedTypes.Inner.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmOperation methodV = getMethodFromType(type, ParameterizedTypes.Inner.class, "methodZArray_02()");
@@ -1275,7 +1275,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(z, componentType);
 	}
 
-	public void test_ParameterizedTypes_Inner_X_01() {
+	@Test public void test_ParameterizedTypes_Inner_X_01() {
 		String typeName = ParameterizedTypes.Inner.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmTypeParameter typeParameterX = type.getTypeParameters().get(0);
@@ -1293,7 +1293,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(type.getDeclaringType(), typeParameterW.getDeclarator());
 	}
 
-	public void test_ParameterizedTypes_Inner_Y_01() {
+	@Test public void test_ParameterizedTypes_Inner_Y_01() {
 		String typeName = ParameterizedTypes.Inner.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmTypeParameter typeParameterY = type.getTypeParameters().get(1);
@@ -1313,7 +1313,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(x, typeArgument.getType());
 	}
 
-	public void test_ParameterizedTypes_Inner_Z_01() {
+	@Test public void test_ParameterizedTypes_Inner_Z_01() {
 		String typeName = ParameterizedTypes.Inner.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmTypeParameter typeParameterZ = type.getTypeParameters().get(2);
@@ -1333,7 +1333,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(w, typeArgument.getType());
 	}
 
-	public void testFields_01() {
+	@Test public void testFields_01() {
 		String typeName = Fields.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		assertNotNull(type);
@@ -1347,7 +1347,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		return result;
 	}
 
-	public void testFields_privateT_01() {
+	@Test public void testFields_privateT_01() {
 		String typeName = Fields.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmField field = getFieldFromType(type, Fields.class, "privateT");
@@ -1357,7 +1357,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(type.getTypeParameters().get(0), fieldType);
 	}
 
-	public void testFields_defaultListT_01() {
+	@Test public void testFields_defaultListT_01() {
 		String typeName = Fields.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmField field = getFieldFromType(type, Fields.class, "defaultListT");
@@ -1371,7 +1371,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(type.getTypeParameters().get(0), refTypeArg.getType());
 	}
 
-	public void testFields_protectedString_01() {
+	@Test public void testFields_protectedString_01() {
 		String typeName = Fields.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmField field = getFieldFromType(type, Fields.class, "protectedString");
@@ -1381,7 +1381,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("java.lang.String", fieldType.getIdentifier());
 	}
 
-	public void testFields_protectedStaticString_01() {
+	@Test public void testFields_protectedStaticString_01() {
 		String typeName = Fields.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmField field = getFieldFromType(type, Fields.class, "protectedStaticString");
@@ -1392,7 +1392,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("java.lang.String", fieldType.getIdentifier());
 	}
 
-	public void testFields_publicInt_01() {
+	@Test public void testFields_publicInt_01() {
 		String typeName = Fields.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmField field = getFieldFromType(type, Fields.class, "publicInt");
@@ -1403,7 +1403,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertTrue(field.getType().getType() instanceof JvmPrimitiveType);
 	}
 
-	public void testFields_innerFields_01() {
+	@Test public void testFields_innerFields_01() {
 		String typeName = Fields.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmField field = getFieldFromType(type, Fields.Inner.class, "innerFields");
@@ -1418,7 +1418,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(type, parameterizedFieldType.getType());
 	}
 
-	public void testHashMap_01() {
+	@Test public void testHashMap_01() {
 		String typeName = HashMap.class.getName();
 		JvmType type = getTypeProvider().findTypeByName(typeName);
 		assertNotNull(type);
@@ -1428,7 +1428,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		recomputeAndCheckIdentifiers(resource);
 	}
 
-	public void testInnerEnumType() throws Exception {
+	@Test public void testInnerEnumType() throws Exception {
 		JvmDeclaredType declaredType = (JvmDeclaredType) getTypeProvider().findTypeByName(TypeWithInnerEnum.class.getName());
 		assertEquals(2, declaredType.getMembers().size());
 		// default constructor
@@ -1448,7 +1448,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		}));
 	}
 
-	public void testInnerAnnotationType() throws Exception {
+	@Test public void testInnerAnnotationType() throws Exception {
 		JvmDeclaredType declaredType = (JvmDeclaredType) getTypeProvider().findTypeByName(
 				TypeWithInnerAnnotation.class.getName());
 		assertEquals(2, declaredType.getMembers().size());
@@ -1469,7 +1469,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		}));
 	}
 
-	public void testAnnotationType_01() throws Exception {
+	@Test public void testAnnotationType_01() throws Exception {
 		String typeName = TestAnnotation.class.getName();
 		JvmType type = getTypeProvider().findTypeByName(typeName);
 		assertNotNull(type);
@@ -1480,14 +1480,14 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		recomputeAndCheckIdentifiers(resource);
 	}
 	
-	public void testAnnotationType_02() throws Exception {
+	@Test public void testAnnotationType_02() throws Exception {
 		String typeName = TestAnnotation.class.getName();
 		JvmAnnotationType type = (JvmAnnotationType) getTypeProvider().findTypeByName(typeName);
 		assertEquals(1, type.getSuperTypes().size());
 		assertEquals(Annotation.class.getName(), type.getSuperTypes().get(0).getIdentifier());
 	}
 	
-	public void testAnnotationType_03() throws Exception {
+	@Test public void testAnnotationType_03() throws Exception {
 		String typeName = TestAnnotationWithDefaults.class.getName();
 		JvmType type = getTypeProvider().findTypeByName(typeName);
 		assertNotNull(type);
@@ -1498,14 +1498,14 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		recomputeAndCheckIdentifiers(resource);
 	}
 	
-	public void testAnnotationType_04() throws Exception {
+	@Test public void testAnnotationType_04() throws Exception {
 		String typeName = TestAnnotationWithDefaults.class.getName();
 		JvmAnnotationType type = (JvmAnnotationType) getTypeProvider().findTypeByName(typeName);
 		assertEquals(1, type.getSuperTypes().size());
 		assertEquals(Annotation.class.getName(), type.getSuperTypes().get(0).getIdentifier());
 	}
 	
-	public void testEnum_01() throws Exception {
+	@Test public void testEnum_01() throws Exception {
 		String typeName = TestEnum.class.getName();
 		JvmType type = getTypeProvider().findTypeByName(typeName);
 		assertNotNull(type);
@@ -1516,7 +1516,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		recomputeAndCheckIdentifiers(resource);
 	}
 	
-	public void testEnum_02() throws Exception {
+	@Test public void testEnum_02() throws Exception {
 		String typeName = TestEnum.class.getName();
 		JvmEnumerationType type = (JvmEnumerationType) getTypeProvider().findTypeByName(typeName);
 		assertEquals(1, type.getSuperTypes().size());
@@ -1525,7 +1525,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(superTypeName, type.getSuperTypes().get(0).getIdentifier());
 	}
 	
-	public void testEnum_03() throws Exception {
+	@Test public void testEnum_03() throws Exception {
 		String typeName = TestEnum.class.getName();
 		JvmEnumerationType type = (JvmEnumerationType) getTypeProvider().findTypeByName(typeName);
 		assertEquals(2, type.getLiterals().size());
@@ -1538,7 +1538,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertTrue(expectedLiterals.toString(), expectedLiterals.isEmpty());
 	}
 	
-	public void testAnnotations_01() throws Exception {
+	@Test public void testAnnotations_01() throws Exception {
 		String typeName = TestAnnotation.Annotated.class.getName();
 		JvmAnnotationType annotationType = (JvmAnnotationType) getTypeProvider().findTypeByName(TestAnnotation.class.getName());
 		JvmAnnotationTarget target = (JvmAnnotationTarget) getTypeProvider().findTypeByName(typeName);
@@ -1548,130 +1548,130 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(14, annotationReference.getValues().size());
 	}
 	
-	public void testIntAnnotationValue_01() throws Exception {
+	@Test public void testIntAnnotationValue_01() throws Exception {
 		JvmIntAnnotationValue value = (JvmIntAnnotationValue) getAnnotationValue("intValue");
 		assertEquals(1, value.getValues().size());
 		Integer integer = value.getValues().get(0);
 		assertEquals(34, integer.intValue());
 	}
 	
-	public void testIntAnnotationValue_02() throws Exception {
+	@Test public void testIntAnnotationValue_02() throws Exception {
 		JvmIntAnnotationValue value = (JvmIntAnnotationValue) getMethodParameterAnnotationValue("intValue");
 		assertEquals(1, value.getValues().size());
 		Integer integer = value.getValues().get(0);
 		assertEquals(34, integer.intValue());
 	}
 	
-	public void testIntAnnotationValue_03() throws Exception {
+	@Test public void testIntAnnotationValue_03() throws Exception {
 		JvmIntAnnotationValue value = (JvmIntAnnotationValue) getConstructorParameterAnnotationValue("intValue");
 		assertEquals(1, value.getValues().size());
 		Integer integer = value.getValues().get(0);
 		assertEquals(34, integer.intValue());
 	}
 	
-	public void testBooleanAnnotationValue_01() throws Exception {
+	@Test public void testBooleanAnnotationValue_01() throws Exception {
 		JvmBooleanAnnotationValue value = (JvmBooleanAnnotationValue) getAnnotationValue("booleanValue");
 		assertEquals(1, value.getValues().size());
 		assertFalse(value.getValues().get(0));
 	}
 	
-	public void testBooleanAnnotationValue_02() throws Exception {
+	@Test public void testBooleanAnnotationValue_02() throws Exception {
 		JvmBooleanAnnotationValue value = (JvmBooleanAnnotationValue) getMethodParameterAnnotationValue("booleanValue");
 		assertEquals(1, value.getValues().size());
 		assertFalse(value.getValues().get(0));
 	}
 	
-	public void testBooleanAnnotationValue_03() throws Exception {
+	@Test public void testBooleanAnnotationValue_03() throws Exception {
 		JvmBooleanAnnotationValue value = (JvmBooleanAnnotationValue) getConstructorParameterAnnotationValue("booleanValue");
 		assertEquals(1, value.getValues().size());
 		assertFalse(value.getValues().get(0));
 	}
 	
-	public void testFloatAnnotationValue_01() throws Exception {
+	@Test public void testFloatAnnotationValue_01() throws Exception {
 		JvmFloatAnnotationValue value = (JvmFloatAnnotationValue) getAnnotationValue("floatValue");
 		assertEquals(1, value.getValues().size());
 		Float f = value.getValues().get(0);
-		assertEquals(0.8f, f.floatValue());
+		assertEquals(0.8f, f.floatValue(), 0.0001);
 	}
 	
-	public void testFloatAnnotationValue_02() throws Exception {
+	@Test public void testFloatAnnotationValue_02() throws Exception {
 		JvmFloatAnnotationValue value = (JvmFloatAnnotationValue) getMethodParameterAnnotationValue("floatValue");
 		assertEquals(1, value.getValues().size());
 		Float f = value.getValues().get(0);
-		assertEquals(0.8f, f.floatValue());
+		assertEquals(0.8f, f.floatValue(), 0.0001);
 	}
 	
-	public void testFloatAnnotationValue_03() throws Exception {
+	@Test public void testFloatAnnotationValue_03() throws Exception {
 		JvmFloatAnnotationValue value = (JvmFloatAnnotationValue) getConstructorParameterAnnotationValue("floatValue");
 		assertEquals(1, value.getValues().size());
 		Float f = value.getValues().get(0);
-		assertEquals(0.8f, f.floatValue());
+		assertEquals(0.8f, f.floatValue(), 0.0001);
 	}
 	
-	public void testDoubleAnnotationValue_01() throws Exception {
+	@Test public void testDoubleAnnotationValue_01() throws Exception {
 		JvmDoubleAnnotationValue value = (JvmDoubleAnnotationValue) getAnnotationValue("doubleValue");
 		assertEquals(1, value.getValues().size());
 		Double d = value.getValues().get(0);
-		assertEquals(0.5, d.doubleValue());
+		assertEquals(0.5, d.doubleValue(), 0.0001);
 	}
 
-	public void testDoubleAnnotationValue_02() throws Exception {
+	@Test public void testDoubleAnnotationValue_02() throws Exception {
 		JvmDoubleAnnotationValue value = (JvmDoubleAnnotationValue) getMethodParameterAnnotationValue("doubleValue");
 		assertEquals(1, value.getValues().size());
 		Double d = value.getValues().get(0);
-		assertEquals(0.5, d.doubleValue());
+		assertEquals(0.5, d.doubleValue(), 0.0001);
 	}
 	
-	public void testDoubleAnnotationValue_03() throws Exception {
+	@Test public void testDoubleAnnotationValue_03() throws Exception {
 		JvmDoubleAnnotationValue value = (JvmDoubleAnnotationValue) getConstructorParameterAnnotationValue("doubleValue");
 		assertEquals(1, value.getValues().size());
 		Double d = value.getValues().get(0);
-		assertEquals(0.5, d.doubleValue());
+		assertEquals(0.5, d.doubleValue(), 0.0001);
 	}
 	
-	public void testShortAnnotationValue_01() throws Exception {
+	@Test public void testShortAnnotationValue_01() throws Exception {
 		JvmShortAnnotationValue value = (JvmShortAnnotationValue) getAnnotationValue("shortValue");
 		assertEquals(1, value.getValues().size());
 		Short s = value.getValues().get(0);
 		assertEquals(4, s.shortValue());
 	}
 	
-	public void testShortAnnotationValue_02() throws Exception {
+	@Test public void testShortAnnotationValue_02() throws Exception {
 		JvmShortAnnotationValue value = (JvmShortAnnotationValue) getMethodParameterAnnotationValue("shortValue");
 		assertEquals(1, value.getValues().size());
 		Short s = value.getValues().get(0);
 		assertEquals(4, s.shortValue());
 	}
 	
-	public void testShortAnnotationValue_03() throws Exception {
+	@Test public void testShortAnnotationValue_03() throws Exception {
 		JvmShortAnnotationValue value = (JvmShortAnnotationValue) getConstructorParameterAnnotationValue("shortValue");
 		assertEquals(1, value.getValues().size());
 		Short s = value.getValues().get(0);
 		assertEquals(4, s.shortValue());
 	}
 	
-	public void testByteAnnotationValue_01() throws Exception {
+	@Test public void testByteAnnotationValue_01() throws Exception {
 		JvmByteAnnotationValue value = (JvmByteAnnotationValue) getAnnotationValue("byteValue");
 		assertEquals(1, value.getValues().size());
 		Byte b = value.getValues().get(0);
 		assertEquals(2, b.byteValue());
 	}
 	
-	public void testByteAnnotationValue_02() throws Exception {
+	@Test public void testByteAnnotationValue_02() throws Exception {
 		JvmByteAnnotationValue value = (JvmByteAnnotationValue) getMethodParameterAnnotationValue("byteValue");
 		assertEquals(1, value.getValues().size());
 		Byte b = value.getValues().get(0);
 		assertEquals(2, b.byteValue());
 	}
 	
-	public void testByteAnnotationValue_03() throws Exception {
+	@Test public void testByteAnnotationValue_03() throws Exception {
 		JvmByteAnnotationValue value = (JvmByteAnnotationValue) getConstructorParameterAnnotationValue("byteValue");
 		assertEquals(1, value.getValues().size());
 		Byte b = value.getValues().get(0);
 		assertEquals(2, b.byteValue());
 	}
 	
-	public void testLongAnnotationValue_01() throws Exception {
+	@Test public void testLongAnnotationValue_01() throws Exception {
 		JvmLongAnnotationValue value = (JvmLongAnnotationValue) getAnnotationValue("longValue");
 		assertEquals(2, value.getValues().size());
 		Long l = value.getValues().get(0);
@@ -1680,7 +1680,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(7, l.longValue());
 	}
 	
-	public void testLongAnnotationValue_02() throws Exception {
+	@Test public void testLongAnnotationValue_02() throws Exception {
 		JvmLongAnnotationValue value = (JvmLongAnnotationValue) getMethodParameterAnnotationValue("longValue");
 		assertEquals(2, value.getValues().size());
 		Long l = value.getValues().get(0);
@@ -1689,7 +1689,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(7, l.longValue());
 	}
 	
-	public void testLongAnnotationValue_03() throws Exception {
+	@Test public void testLongAnnotationValue_03() throws Exception {
 		JvmLongAnnotationValue value = (JvmLongAnnotationValue) getConstructorParameterAnnotationValue("longValue");
 		assertEquals(2, value.getValues().size());
 		Long l = value.getValues().get(0);
@@ -1698,35 +1698,35 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(7, l.longValue());
 	}
 	
-	public void testCharAnnotationValue_01() throws Exception {
+	@Test public void testCharAnnotationValue_01() throws Exception {
 		JvmCharAnnotationValue value = (JvmCharAnnotationValue) getAnnotationValue("charValue");
 		assertEquals(1, value.getValues().size());
 		Character c = value.getValues().get(0);
 		assertEquals('a', c.charValue());
 	}
 	
-	public void testCharAnnotationValue_03() throws Exception {
+	@Test public void testCharAnnotationValue_03() throws Exception {
 		JvmCharAnnotationValue value = (JvmCharAnnotationValue) getConstructorParameterAnnotationValue("charValue");
 		assertEquals(1, value.getValues().size());
 		Character c = value.getValues().get(0);
 		assertEquals('a', c.charValue());
 	}
 	
-	public void testCharAnnotationValue_02() throws Exception {
+	@Test public void testCharAnnotationValue_02() throws Exception {
 		JvmCharAnnotationValue value = (JvmCharAnnotationValue) getMethodParameterAnnotationValue("charValue");
 		assertEquals(1, value.getValues().size());
 		Character c = value.getValues().get(0);
 		assertEquals('a', c.charValue());
 	}
 	
-	public void testStringAnnotationValue_01() throws Exception {
+	@Test public void testStringAnnotationValue_01() throws Exception {
 		JvmStringAnnotationValue value = (JvmStringAnnotationValue) getAnnotationValue("stringValue");
 		assertEquals(1, value.getValues().size());
 		String s = value.getValues().get(0);
 		assertEquals("stringValue", s);
 	}
 	
-	public void testStringAnnotationValue_02() throws Exception {
+	@Test public void testStringAnnotationValue_02() throws Exception {
 		JvmStringAnnotationValue value = (JvmStringAnnotationValue) getAnnotationValue("stringArrayValue");
 		assertEquals(4, value.getValues().size());
 		String s = value.getValues().get(0);
@@ -1739,14 +1739,14 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("duplicate", s);
 	}
 	
-	public void testStringAnnotationValue_03() throws Exception {
+	@Test public void testStringAnnotationValue_03() throws Exception {
 		JvmStringAnnotationValue value = (JvmStringAnnotationValue) getMethodParameterAnnotationValue("stringValue");
 		assertEquals(1, value.getValues().size());
 		String s = value.getValues().get(0);
 		assertEquals("stringValue", s);
 	}
 	
-	public void testStringAnnotationValue_04() throws Exception {
+	@Test public void testStringAnnotationValue_04() throws Exception {
 		JvmStringAnnotationValue value = (JvmStringAnnotationValue) getMethodParameterAnnotationValue("stringArrayValue");
 		assertEquals(2, value.getValues().size());
 		String s = value.getValues().get(0);
@@ -1755,14 +1755,14 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("value", s);
 	}
 	
-	public void testStringAnnotationValue_05() throws Exception {
+	@Test public void testStringAnnotationValue_05() throws Exception {
 		JvmStringAnnotationValue value = (JvmStringAnnotationValue) getConstructorParameterAnnotationValue("stringValue");
 		assertEquals(1, value.getValues().size());
 		String s = value.getValues().get(0);
 		assertEquals("stringValue", s);
 	}
 	
-	public void testStringAnnotationValue_06() throws Exception {
+	@Test public void testStringAnnotationValue_06() throws Exception {
 		JvmStringAnnotationValue value = (JvmStringAnnotationValue) getConstructorParameterAnnotationValue("stringArrayValue");
 		assertEquals(2, value.getValues().size());
 		String s = value.getValues().get(0);
@@ -1771,7 +1771,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("value", s);
 	}
 	
-	public void testClassAnnotationValue_01() throws Exception {
+	@Test public void testClassAnnotationValue_01() throws Exception {
 		JvmTypeAnnotationValue value = (JvmTypeAnnotationValue) getAnnotationValue("charSequenceClass");
 		assertEquals(1, value.getValues().size());
 		JvmType type = value.getValues().get(0).getType();
@@ -1780,7 +1780,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(String.class.getName(), type.getIdentifier());
 	}
 	
-	public void testClassAnnotationValue_02() throws Exception {
+	@Test public void testClassAnnotationValue_02() throws Exception {
 		JvmTypeAnnotationValue value = (JvmTypeAnnotationValue) getAnnotationValue("classArray");
 		assertEquals(2, value.getValues().size());
 		JvmType type = value.getValues().get(0).getType();
@@ -1793,7 +1793,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(TestAnnotation.Annotated.class.getName(), type.getIdentifier());
 	}
 	
-	public void testClassAnnotationValue_04() throws Exception {
+	@Test public void testClassAnnotationValue_04() throws Exception {
 		JvmTypeAnnotationValue value = (JvmTypeAnnotationValue) getMethodParameterAnnotationValue("charSequenceClass");
 		assertEquals(1, value.getValues().size());
 		JvmType type = value.getValues().get(0).getType();
@@ -1802,7 +1802,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(String.class.getName(), type.getIdentifier());
 	}
 	
-	public void testClassAnnotationValue_03() throws Exception {
+	@Test public void testClassAnnotationValue_03() throws Exception {
 		JvmTypeAnnotationValue value = (JvmTypeAnnotationValue) getMethodParameterAnnotationValue("classArray");
 		assertEquals(2, value.getValues().size());
 		JvmType type = value.getValues().get(0).getType();
@@ -1815,7 +1815,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(TestAnnotation.Annotated.class.getName(), type.getIdentifier());
 	}
 	
-	public void testClassAnnotationValue_05() throws Exception {
+	@Test public void testClassAnnotationValue_05() throws Exception {
 		JvmTypeAnnotationValue value = (JvmTypeAnnotationValue) getConstructorParameterAnnotationValue("charSequenceClass");
 		assertEquals(1, value.getValues().size());
 		JvmType type = value.getValues().get(0).getType();
@@ -1824,7 +1824,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(String.class.getName(), type.getIdentifier());
 	}
 	
-	public void testClassAnnotationValue_06() throws Exception {
+	@Test public void testClassAnnotationValue_06() throws Exception {
 		JvmTypeAnnotationValue value = (JvmTypeAnnotationValue) getConstructorParameterAnnotationValue("classArray");
 		assertEquals(2, value.getValues().size());
 		JvmType type = value.getValues().get(0).getType();
@@ -1837,7 +1837,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(TestAnnotation.Annotated.class.getName(), type.getIdentifier());
 	}
 	
-	public void testAnnotationAnnotationValue_01() throws Exception {
+	@Test public void testAnnotationAnnotationValue_01() throws Exception {
 		JvmAnnotationAnnotationValue value = (JvmAnnotationAnnotationValue) getAnnotationValue("annotationValue");
 		assertEquals(1, value.getValues().size());
 		assertEquals(1, value.getAnnotations().size());
@@ -1849,7 +1849,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("MyString", nestedValue.getValues().get(0));
 	}
 	
-	public void testAnnotationAnnotationValue_02() throws Exception {
+	@Test public void testAnnotationAnnotationValue_02() throws Exception {
 		JvmAnnotationAnnotationValue value = (JvmAnnotationAnnotationValue) getConstructorParameterAnnotationValue("annotationValue");
 		assertEquals(1, value.getValues().size());
 		assertEquals(1, value.getAnnotations().size());
@@ -1861,7 +1861,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("MyString", nestedValue.getValues().get(0));
 	}
 	
-	public void testAnnotationAnnotationValue_03() throws Exception {
+	@Test public void testAnnotationAnnotationValue_03() throws Exception {
 		JvmAnnotationAnnotationValue value = (JvmAnnotationAnnotationValue) getMethodParameterAnnotationValue("annotationValue");
 		assertEquals(1, value.getValues().size());
 		assertEquals(1, value.getAnnotations().size());
@@ -1873,7 +1873,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("MyString", nestedValue.getValues().get(0));
 	}
 	
-	public void testEnumAnnotationValue_01() throws Exception {
+	@Test public void testEnumAnnotationValue_01() throws Exception {
 		JvmEnumAnnotationValue value = (JvmEnumAnnotationValue) getAnnotationValue("enumValue");
 		assertEquals(1, value.getValues().size());
 		JvmEnumerationLiteral enumLiteral = value.getValues().get(0);
@@ -1881,7 +1881,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(TestEnum.FirstValue.toString(), enumLiteral.getSimpleName());
 	}
 	
-	public void testEnumAnnotationValue_02() throws Exception {
+	@Test public void testEnumAnnotationValue_02() throws Exception {
 		JvmEnumAnnotationValue value = (JvmEnumAnnotationValue) getConstructorParameterAnnotationValue("enumValue");
 		assertEquals(1, value.getValues().size());
 		JvmEnumerationLiteral enumLiteral = value.getValues().get(0);
@@ -1889,7 +1889,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(TestEnum.FirstValue.toString(), enumLiteral.getSimpleName());
 	}
 	
-	public void testEnumAnnotationValue_03() throws Exception {
+	@Test public void testEnumAnnotationValue_03() throws Exception {
 		JvmEnumAnnotationValue value = (JvmEnumAnnotationValue) getMethodParameterAnnotationValue("enumValue");
 		assertEquals(1, value.getValues().size());
 		JvmEnumerationLiteral enumLiteral = value.getValues().get(0);
@@ -1929,7 +1929,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		return null;
 	}
 	
-	public void testAnnotatedMethod_01() throws Exception {
+	@Test public void testAnnotatedMethod_01() throws Exception {
 		String typeName = TestAnnotation.Annotated.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmOperation operation = getMethodFromType(type, TestAnnotation.Annotated.class, "method()");
@@ -1940,7 +1940,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("method", s);
 	}
 	
-	public void testAnnotatedConstructor_01() throws Exception {
+	@Test public void testAnnotatedConstructor_01() throws Exception {
 		String typeName = TestAnnotation.Annotated.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmConstructor constructor = getConstructorFromType(type, TestAnnotation.Annotated.class, "Annotated()");
@@ -1951,7 +1951,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("constructor", s);
 	}
 	
-	public void testAnnotatedConstructor_02() throws Exception {
+	@Test public void testAnnotatedConstructor_02() throws Exception {
 		String typeName = TestAnnotation.Annotated.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmConstructor constructor = getConstructorFromType(type, TestAnnotation.Annotated.class, "Annotated(java.lang.String)");
@@ -1962,7 +1962,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("secondConstructor", s);
 	}
 	
-	public void testAnnotatedConstructor_03() throws Exception {
+	@Test public void testAnnotatedConstructor_03() throws Exception {
 		String typeName = TestAnnotation.Annotated.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmConstructor constructor = getConstructorFromType(type, TestAnnotation.Annotated.class, "Annotated(java.lang.String,T)");
@@ -1973,7 +1973,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("parameterizedConstructor", s);
 	}
 	
-	public void testAnnotatedConstructor_04() throws Exception {
+	@Test public void testAnnotatedConstructor_04() throws Exception {
 		String typeName = TestAnnotation.Annotated.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmConstructor constructor = getConstructorFromType(type, TestAnnotation.Annotated.class, "Annotated(java.lang.String,java.lang.String)");
@@ -1984,7 +1984,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("thirdConstructorWithBody", s);
 	}
 	
-	public void testAnnotatedField_01() throws Exception {
+	@Test public void testAnnotatedField_01() throws Exception {
 		String typeName = TestAnnotation.Annotated.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmField field = getFieldFromType(type, TestAnnotation.Annotated.class, "field");
@@ -1995,7 +1995,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("MyString", s);
 	}
 	
-	public void testAnnotatedParameter_01() throws Exception {
+	@Test public void testAnnotatedParameter_01() throws Exception {
 		String typeName = TestAnnotation.Annotated.class.getName();
 		JvmAnnotationType annotationType = (JvmAnnotationType) getTypeProvider().findTypeByName(TestAnnotation.class.getName());
 		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
@@ -2010,7 +2010,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(annotationType, annotationReference.getAnnotation());
 	}
 	
-	public void testAnnotatedParameter_02() throws Exception {
+	@Test public void testAnnotatedParameter_02() throws Exception {
 		String typeName = TestAnnotation.Annotated.class.getName();
 		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
 		JvmConstructor constructor = getConstructorFromType(type, TestAnnotation.Annotated.class, "Annotated(java.lang.String,java.lang.String,java.lang.String)");
@@ -2018,7 +2018,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(0, target.getAnnotations().size());
 	}
 
-	public void testAnnotatedParameter_03() throws Exception {
+	@Test public void testAnnotatedParameter_03() throws Exception {
 		String typeName = TestAnnotation.Annotated.class.getName();
 		JvmAnnotationType annotationType = (JvmAnnotationType) getTypeProvider().findTypeByName(TestAnnotation.NestedAnnotation.class.getName());
 		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
@@ -2029,7 +2029,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(annotationType, annotationReference.getAnnotation());
 	}
 	
-	public void testAnnotatedParameter_04() throws Exception {
+	@Test public void testAnnotatedParameter_04() throws Exception {
 		String typeName = TestAnnotation.Annotated.class.getName();
 		JvmAnnotationType annotationType = (JvmAnnotationType) getTypeProvider().findTypeByName(TestAnnotation.class.getName());
 		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
@@ -2044,7 +2044,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(annotationType, annotationReference.getAnnotation());
 	}
 	
-	public void testAnnotatedParameter_05() throws Exception {
+	@Test public void testAnnotatedParameter_05() throws Exception {
 		String typeName = TestAnnotation.Annotated.class.getName();
 		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
 		JvmOperation method = getMethodFromType(type, TestAnnotation.Annotated.class, "method(java.lang.String,java.lang.String,java.lang.String)");
@@ -2052,7 +2052,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(0, target.getAnnotations().size());
 	}
 
-	public void testAnnotatedParameter_06() throws Exception {
+	@Test public void testAnnotatedParameter_06() throws Exception {
 		String typeName = TestAnnotation.Annotated.class.getName();
 		JvmAnnotationType annotationType = (JvmAnnotationType) getTypeProvider().findTypeByName(TestAnnotation.NestedAnnotation.class.getName());
 		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
@@ -2063,7 +2063,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(annotationType, annotationReference.getAnnotation());
 	}
 	
-	public void testAnnotationWithStringDefault_01() throws Exception {
+	@Test public void testAnnotationWithStringDefault_01() throws Exception {
 		String typeName = TestAnnotationWithStringDefault.Annotated.class.getName();
 		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
 		List<JvmAnnotationReference> annotations = type.getAnnotations();
@@ -2073,7 +2073,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		checkDefaultAnnotationValues(annotationReference);
 	}
 	
-	public void testAnnotationWithStringDefault_02() throws Exception {
+	@Test public void testAnnotationWithStringDefault_02() throws Exception {
 		String typeName = AnnotatedInterfaceWithStringDefault.class.getName();
 		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
 		List<JvmAnnotationReference> annotations = type.getAnnotations();
@@ -2083,7 +2083,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		checkDefaultAnnotationValuesAnnotatedExternalClass(annotationReference);
 	}
 	
-	public void testAnnotationWithStringDefault_03() throws Exception {
+	@Test public void testAnnotationWithStringDefault_03() throws Exception {
 		String typeName = TestAnnotationWithStringDefault.AnnotatedInterface.class.getName();
 		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
 		List<JvmAnnotationReference> annotations = type.getAnnotations();
@@ -2093,7 +2093,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		checkDefaultAnnotationValues(annotationReference);
 	}
 	
-	public void testAnnotationWithStringDefault_04() throws Exception {
+	@Test public void testAnnotationWithStringDefault_04() throws Exception {
 		String typeName = AnnotatedClassWithStringDefault.class.getName();
 		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
 		List<JvmAnnotationReference> annotations = type.getAnnotations();
@@ -2103,7 +2103,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		checkDefaultAnnotationValuesAnnotatedExternalClass(annotationReference);
 	}
 
-	public void testAbstractMethod() throws Exception {
+	@Test public void testAbstractMethod() throws Exception {
 		String typeName = AbstractMethods.class.getName();
 		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
 		assertEquals(2, size(type.getDeclaredOperations()));
@@ -2114,49 +2114,49 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertFalse(concreteMethod.isAbstract());
 	}
 	
-	public void testDefaultIntAnnotationValue_01() throws Exception {
+	@Test public void testDefaultIntAnnotationValue_01() throws Exception {
 		JvmIntAnnotationValue value = (JvmIntAnnotationValue) getDefaultAnnotationValue("intValue");
 		assertEquals(1, value.getValues().size());
 		Integer integer = value.getValues().get(0);
 		assertEquals(34, integer.intValue());
 	}
 	
-	public void testDefaultByteAnnotationValue_01() throws Exception {
+	@Test public void testDefaultByteAnnotationValue_01() throws Exception {
 		JvmByteAnnotationValue value = (JvmByteAnnotationValue) getDefaultAnnotationValue("byteValue");
 		assertEquals(1, value.getValues().size());
 		Byte b = value.getValues().get(0);
 		assertEquals(1, b.byteValue());
 	}
 	
-	public void testDefaultFloatAnnotationValue_01() throws Exception {
+	@Test public void testDefaultFloatAnnotationValue_01() throws Exception {
 		JvmFloatAnnotationValue value = (JvmFloatAnnotationValue) getDefaultAnnotationValue("floatValue");
 		assertEquals(1, value.getValues().size());
 		Float f = value.getValues().get(0);
-		assertEquals(5f, f.floatValue());
+		assertEquals(5f, f.floatValue(), 0.0001);
 	}
 	
-	public void testDefaultDoubleAnnotationValue_01() throws Exception {
+	@Test public void testDefaultDoubleAnnotationValue_01() throws Exception {
 		JvmDoubleAnnotationValue value = (JvmDoubleAnnotationValue) getDefaultAnnotationValue("doubleValue");
 		assertEquals(1, value.getValues().size());
 		Double d = value.getValues().get(0);
-		assertEquals(23d, d.doubleValue());
+		assertEquals(23d, d.doubleValue(), 0.0001);
 	}
 	
-	public void testDefaultBooleanAnnotationValue_01() throws Exception {
+	@Test public void testDefaultBooleanAnnotationValue_01() throws Exception {
 		JvmBooleanAnnotationValue value = (JvmBooleanAnnotationValue) getDefaultAnnotationValue("booleanValue");
 		assertEquals(1, value.getValues().size());
 		Boolean b = value.getValues().get(0);
 		assertEquals(true, b.booleanValue());
 	}
 	
-	public void testDefaultShortAnnotationValue_01() throws Exception {
+	@Test public void testDefaultShortAnnotationValue_01() throws Exception {
 		JvmShortAnnotationValue value = (JvmShortAnnotationValue) getDefaultAnnotationValue("shortValue");
 		assertEquals(1, value.getValues().size());
 		Short s = value.getValues().get(0);
 		assertEquals(12, s.shortValue());
 	}
 	
-	public void testDefaultLongArrayAnnotationValue_01() throws Exception {
+	@Test public void testDefaultLongArrayAnnotationValue_01() throws Exception {
 		JvmLongAnnotationValue value = (JvmLongAnnotationValue) getDefaultAnnotationValue("longArrayValue");
 		assertEquals(2, value.getValues().size());
 		Long l1 = value.getValues().get(0);
@@ -2165,21 +2165,21 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(60, l2.longValue());
 	}
 	
-	public void testDefaultCharArrayAnnotationValue_01() throws Exception {
+	@Test public void testDefaultCharArrayAnnotationValue_01() throws Exception {
 		JvmCharAnnotationValue value = (JvmCharAnnotationValue) getDefaultAnnotationValue("charArrayValue");
 		assertEquals(1, value.getValues().size());
 		Character c = value.getValues().get(0);
 		assertEquals('a', c.charValue());
 	}
 	
-	public void testDefaultEnumAnnotationValue_01() throws Exception {
+	@Test public void testDefaultEnumAnnotationValue_01() throws Exception {
 		JvmEnumAnnotationValue value = (JvmEnumAnnotationValue) getDefaultAnnotationValue("enumValue");
 		assertEquals(1, value.getValues().size());
 		JvmEnumerationLiteral literal = value.getValues().get(0);
 		assertEquals("org.eclipse.xtext.common.types.testSetups.TestEnum.FirstValue", literal.getIdentifier());
 	}
 	
-	public void testDefaultAnnotationAnnotationValue_01() throws Exception {
+	@Test public void testDefaultAnnotationAnnotationValue_01() throws Exception {
 		JvmAnnotationAnnotationValue value = (JvmAnnotationAnnotationValue) getDefaultAnnotationValue("annotationValue");
 		assertEquals(1, value.getValues().size());
 		JvmAnnotationReference reference = value.getValues().get(0);
@@ -2189,7 +2189,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("AnotherString", ((JvmStringAnnotationValue) nestedAnnotationValue).getValues().get(0));
 	}
 	
-	public void testDefaultAnnotationAnnotationValue_02() throws Exception {
+	@Test public void testDefaultAnnotationAnnotationValue_02() throws Exception {
 		JvmAnnotationAnnotationValue value = (JvmAnnotationAnnotationValue) getDefaultAnnotationValue("annotationArrayValue");
 		assertEquals(2, value.getValues().size());
 		JvmAnnotationReference reference1 = value.getValues().get(0);
@@ -2204,28 +2204,28 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("MyString", ((JvmStringAnnotationValue) nestedAnnotationValue2).getValues().get(0));
 	}
 	
-	public void testDefaultStringAnnotationValue_01() throws Exception {
+	@Test public void testDefaultStringAnnotationValue_01() throws Exception {
 		JvmStringAnnotationValue value = (JvmStringAnnotationValue) getDefaultAnnotationValue("stringValue");
 		assertEquals(1, value.getValues().size());
 		String string = value.getValues().get(0);
 		assertEquals("", string);
 	}
 	
-	public void testDefaultStringAnnotationValue_02() throws Exception {
+	@Test public void testDefaultStringAnnotationValue_02() throws Exception {
 		JvmStringAnnotationValue value = (JvmStringAnnotationValue) getDefaultAnnotationValue("stringArrayValue");
 		assertEquals(1, value.getValues().size());
 		String string = value.getValues().get(0);
 		assertEquals("arrayValue", string);
 	}
 	
-	public void testDefaultTypeAnnotationValue_01() throws Exception {
+	@Test public void testDefaultTypeAnnotationValue_01() throws Exception {
 		JvmTypeAnnotationValue value = (JvmTypeAnnotationValue) getDefaultAnnotationValue("charSequenceClass");
 		assertEquals(1, value.getValues().size());
 		JvmTypeReference typeReference = value.getValues().get(0);
 		assertEquals(String.class.getName(), typeReference.getIdentifier());
 	}
 	
-	public void testDefaultTypeAnnotationValue_02() throws Exception {
+	@Test public void testDefaultTypeAnnotationValue_02() throws Exception {
 		JvmTypeAnnotationValue value = (JvmTypeAnnotationValue) getDefaultAnnotationValue("classArray");
 		assertEquals(0, value.getValues().size());
 	}
@@ -2260,7 +2260,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertTrue(nameToValue.isEmpty());
 	}
 	
-	public void testVarArgs_01() {
+	@Test public void testVarArgs_01() {
 		String typeName = ClassWithVarArgs.class.getName();
 		JvmType type = getTypeProvider().findTypeByName(typeName);
 		assertNotNull(type);
@@ -2270,7 +2270,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		recomputeAndCheckIdentifiers(resource);
 	}
 	
-	public void testVarArgs_02() {
+	@Test public void testVarArgs_02() {
 		String typeName = ClassWithVarArgs.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmOperation method = getMethodFromType(type, ClassWithVarArgs.class, "method(java.lang.String[])");
@@ -2279,7 +2279,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertTrue(method.getParameters().get(0).getParameterType() instanceof JvmGenericArrayTypeReference);
 	}
 	
-	public void testVarArgs_03() {
+	@Test public void testVarArgs_03() {
 		String typeName = ClassWithVarArgs.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmConstructor constructor = getConstructorFromType(type, ClassWithVarArgs.class, "ClassWithVarArgs(int,java.lang.String[])");
@@ -2289,22 +2289,22 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertTrue(constructor.getParameters().get(1).getParameterType() instanceof JvmGenericArrayTypeReference);
 	}
 	
-	public void testArraysArraylist_01() {
+	@Test public void testArraysArraylist_01() {
 		assertNull(getTypeProvider().findTypeByName("java.util.Arrays.ArrayList"));
 	}
 	
-	public void testArraysArraylist_02() {
+	@Test public void testArraysArraylist_02() {
 		assertNotNull(getTypeProvider().findTypeByName("java.util.Arrays$ArrayList"));
 	}
 	
-	public void testGoogleFunction() {
+	@Test public void testGoogleFunction() {
 		String functionType = Function.class.getName();
 		assertNotNull(getTypeProvider().findTypeByName(functionType));
 	}
 	
 	protected abstract String getCollectionParamName();
 	
-	public void testPerformance() {
+	@Test public void testPerformance() {
 		for(int i = 0; i < 10/*00*/; i++) {
 			getTypeProvider().getResourceSet().getResources().clear();
 			getTypeProvider().findTypeByName(TestAnnotation.class.getName());
@@ -2314,7 +2314,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 //		fail();
 	}
 	
-	public void testBug347739_01() {
+	@Test public void testBug347739_01() {
 		String typeName = Bug347739.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		Resource resource = type.eResource();
@@ -2323,7 +2323,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		diagnose(type);
 	}
 	
-	public void testBug347739_02() {
+	@Test public void testBug347739_02() {
 		String typeName = Bug347739OneTypeParam.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		Resource resource = type.eResource();
@@ -2332,7 +2332,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		diagnose(type);
 	}
 	
-	public void testBug347739_03() {
+	@Test public void testBug347739_03() {
 		String typeName = Bug347739ThreeTypeParams.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		Resource resource = type.eResource();
@@ -2341,7 +2341,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		diagnose(type);
 	}
 	
-	public void testBug347739_04() {
+	@Test public void testBug347739_04() {
 		String typeName = Bug347739ThreeTypeParamsSuper.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		Resource resource = type.eResource();
@@ -2350,7 +2350,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		diagnose(type);
 	}
 	
-	public void testBug347739_05() {
+	@Test public void testBug347739_05() {
 		String typeName = Bug347739ThreeTypeParamsSuperSuper.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		Resource resource = type.eResource();
@@ -2359,7 +2359,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		diagnose(type);
 	}
 	
-	public void testBug347739_06() {
+	@Test public void testBug347739_06() {
 		String typeNameList = List.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeNameList);
 		Resource resource = type.eResource();
@@ -2368,7 +2368,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		diagnose(type);
 	}
 	
-	public void testRawIterable_01() {
+	@Test public void testRawIterable_01() {
 		String typeName = RawIterable.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		List<JvmTypeReference> superTypes = type.getSuperTypes();
