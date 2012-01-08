@@ -18,6 +18,8 @@ import org.eclipse.xtext.common.types.xtext.ui.JdtBasedSimpleTypeScope;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -33,16 +35,15 @@ public class JdtBasedSimpleTypeScopeTest extends AbstractTypeScopeTest {
 	private ResourceSet resourceSet;
 	private JdtBasedSimpleTypeScope typeScope;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		projectProvider = new MockJavaProjectProvider();
 		factory = new JdtTypeProviderFactory(projectProvider);
 		resourceSet = new ResourceSetImpl();
 		typeScope = new JdtBasedSimpleTypeScope(factory.createTypeProvider(resourceSet), new IQualifiedNameConverter.DefaultImpl(),Predicates.<IEObjectDescription>alwaysTrue());
 	}
 	
-	public void testGetContents_01() {
+	@Test public void testGetContents_01() {
 		Iterable<IEObjectDescription> contents = typeScope.getAllElements();
 		assertTrue(Iterables.any(contents, new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
@@ -51,7 +52,7 @@ public class JdtBasedSimpleTypeScopeTest extends AbstractTypeScopeTest {
 		}));
 	}
 	
-	public void testGetContents_02() {
+	@Test public void testGetContents_02() {
 		Iterable<IEObjectDescription> contents = typeScope.getAllElements();
 		assertTrue(Iterables.any(contents, new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {

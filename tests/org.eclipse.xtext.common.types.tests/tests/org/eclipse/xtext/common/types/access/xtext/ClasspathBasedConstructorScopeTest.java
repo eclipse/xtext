@@ -15,6 +15,8 @@ import org.eclipse.xtext.common.types.xtext.ClasspathBasedTypeScope;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.google.common.base.Predicates;
 
@@ -28,16 +30,15 @@ public class ClasspathBasedConstructorScopeTest extends AbstractConstructorScope
 	private ClasspathBasedTypeScope typeScope;
 	private ClasspathBasedConstructorScope constructorScope;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		factory = new ClasspathTypeProviderFactory(getClass().getClassLoader());
 		resourceSet = new ResourceSetImpl();
 		typeScope = new ClasspathBasedTypeScope(factory.createTypeProvider(resourceSet), new IQualifiedNameConverter.DefaultImpl(), Predicates.<IEObjectDescription>alwaysTrue());
 		constructorScope = new ClasspathBasedConstructorScope(typeScope);
 	}
 	
-	public void testGetContents_01() {
+	@Test public void testGetContents_01() {
 		try {
 			constructorScope.getAllElements();
 			fail("expected UnsupportedOperationException");

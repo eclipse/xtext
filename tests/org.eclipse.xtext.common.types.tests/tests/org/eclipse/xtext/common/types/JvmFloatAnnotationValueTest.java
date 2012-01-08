@@ -7,22 +7,23 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JvmFloatAnnotationValueTest extends TestCase {
+public class JvmFloatAnnotationValueTest extends Assert {
 
 	private JvmFloatAnnotationValue floatAnnotationValue;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		floatAnnotationValue = TypesFactory.eINSTANCE.createJvmFloatAnnotationValue();
 	}	
 	
-	public void testMultiValue() {
+	@Test public void testMultiValue() {
 		floatAnnotationValue.getValues().add(1f);
 		floatAnnotationValue.getValues().add(1f);
 		assertEquals(2, floatAnnotationValue.getValues().size());

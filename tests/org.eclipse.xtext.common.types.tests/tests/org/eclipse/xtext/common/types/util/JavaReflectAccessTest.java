@@ -12,8 +12,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -23,6 +21,10 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -30,7 +32,7 @@ import com.google.common.collect.Iterables;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class JavaReflectAccessTest extends TestCase {
+public class JavaReflectAccessTest extends Assert {
 	private ResourceSet resourceSet;
 	private ClasspathTypeProvider typeProvider;
 
@@ -38,31 +40,29 @@ public class JavaReflectAccessTest extends TestCase {
 		return (JvmDeclaredType) typeProvider.findTypeByName(class1.getName());
 	}
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		resourceSet = new ResourceSetImpl();
 		typeProvider = new ClasspathTypeProvider(getClass().getClassLoader(), resourceSet, null);
 	}
 
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		resourceSet = null;
 		typeProvider = null;
-		super.tearDown();
 	}
 
-	public void testGetRawType_1() throws Exception {
+	@Test public void testGetRawType_1() throws Exception {
 		JvmDeclaredType type = getType(String.class);
 		assertEquals(String.class, getJavaReflectAccess().getRawType(type));
 	}
 
-	public void testGetRawType_2() throws Exception {
+	@Test public void testGetRawType_2() throws Exception {
 		JvmDeclaredType type = getType(List.class);
 		assertEquals(List.class, getJavaReflectAccess().getRawType(type));
 	}
 
-	public void testGetMethod_1() throws Exception {
+	@Test public void testGetMethod_1() throws Exception {
 		JvmDeclaredType type = getType(List.class);
 		JvmMember addMethod = Iterables.find(type.getMembers(), new Predicate<JvmMember>() {
 			public boolean apply(JvmMember input) {
@@ -77,7 +77,7 @@ public class JavaReflectAccessTest extends TestCase {
 		assertEquals(method, getJavaReflectAccess().getMethod((JvmOperation)addMethod));
 	}
 
-	public void testGetMethod_2() throws Exception {
+	@Test public void testGetMethod_2() throws Exception {
 		JvmDeclaredType type = getType(X.class);
 		JvmMember addMethod = Iterables.find(type.getMembers(), new Predicate<JvmMember>() {
 			public boolean apply(JvmMember input) {
@@ -92,7 +92,7 @@ public class JavaReflectAccessTest extends TestCase {
 		assertEquals(method, getJavaReflectAccess().getMethod((JvmOperation)addMethod));
 	}
 	
-	public void testGetConstructor_1() throws Exception {
+	@Test public void testGetConstructor_1() throws Exception {
 		JvmGenericType type = (JvmGenericType) getType(X.class);
 		JvmMember firstConstructor = Iterables.find(type.getDeclaredConstructors(),new Predicate<JvmConstructor>() {
 			public boolean apply(JvmConstructor input) {
@@ -103,7 +103,7 @@ public class JavaReflectAccessTest extends TestCase {
 		assertEquals(expectation, getJavaReflectAccess().getConstructor((JvmConstructor)firstConstructor));
 	}
 	
-	public void testGetConstructor_2() throws Exception {
+	@Test public void testGetConstructor_2() throws Exception {
 		JvmGenericType type = (JvmGenericType) getType(X.class);
 		JvmMember secondConstructor = Iterables.find(type.getDeclaredConstructors(),new Predicate<JvmConstructor>() {
 			public boolean apply(JvmConstructor input) {
@@ -114,7 +114,7 @@ public class JavaReflectAccessTest extends TestCase {
 		assertEquals(expectation, getJavaReflectAccess().getConstructor((JvmConstructor)secondConstructor));
 	}
 
-	public void testGetField_1() throws Exception {
+	@Test public void testGetField_1() throws Exception {
 		JvmDeclaredType type = getType(Y.class);
 		JvmMember addMethod = Iterables.find(type.getMembers(), new Predicate<JvmMember>() {
 			public boolean apply(JvmMember input) {
