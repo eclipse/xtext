@@ -12,7 +12,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.junit.validation.ValidationTestHelper;
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
@@ -20,6 +20,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
@@ -31,7 +32,7 @@ public class AssignmentLinkingTest extends AbstractXtend2TestCase {
 	@Inject
 	private ValidationTestHelper validator;
 	
-	public void testLocalVariable() throws Exception {
+	@Test public void testLocalVariable() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method() {\n" + 
@@ -43,7 +44,7 @@ public class AssignmentLinkingTest extends AbstractXtend2TestCase {
 		assertLinksTo("aString", XbasePackage.Literals.XVARIABLE_DECLARATION, assignment);
 	}
 	
-	public void testParameter() throws Exception {
+	@Test public void testParameter() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method(String aString) {\n" + 
@@ -59,7 +60,7 @@ public class AssignmentLinkingTest extends AbstractXtend2TestCase {
 		assertNull(assignment.getInvalidFeatureIssueCode(), assignment.getInvalidFeatureIssueCode());
 	}
 	
-	public void testQualifiedField() throws Exception {
+	@Test public void testQualifiedField() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method() {\n" + 
@@ -71,7 +72,7 @@ public class AssignmentLinkingTest extends AbstractXtend2TestCase {
 		assertLinksTo("SomeClass.aString", assignment);
 	}
 	
-	public void testUnqualifiedField_onThis() throws Exception {
+	@Test public void testUnqualifiedField_onThis() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method() {\n" + 
@@ -83,7 +84,7 @@ public class AssignmentLinkingTest extends AbstractXtend2TestCase {
 		assertLinksTo("SomeClass.aString", assignment);
 	}
 	
-	public void testUnqualifiedField_onIt() throws Exception {
+	@Test public void testUnqualifiedField_onIt() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method(testdata.FieldAccess it) {\n" + 
@@ -94,7 +95,7 @@ public class AssignmentLinkingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.FieldAccess.stringField", assignment);
 	}
 	
-	public void testUnqualifiedField_onExtension() throws Exception {
+	@Test public void testUnqualifiedField_onExtension() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method() {\n" + 
@@ -106,7 +107,7 @@ public class AssignmentLinkingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.FieldAccess.stringField", assignment);
 	}
 	
-	public void testSugaredAssignment_onThis() throws Exception {
+	@Test public void testSugaredAssignment_onThis() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method() {\n" + 
@@ -118,7 +119,7 @@ public class AssignmentLinkingTest extends AbstractXtend2TestCase {
 		assertLinksTo("SomeClass.setString(java.lang.String)", assignment);
 	}
 	
-	public void testUnqualifiedField_withConflict_onIt() throws Exception {
+	@Test public void testUnqualifiedField_withConflict_onIt() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method(testdata.Properties1 it) {\n" + 
@@ -129,7 +130,7 @@ public class AssignmentLinkingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.Properties1.prop1", assignment);
 	}
 	
-	public void testSugaredAssignment_onIt() throws Exception {
+	@Test public void testSugaredAssignment_onIt() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method(testdata.Properties1 it) {\n" + 
@@ -140,7 +141,7 @@ public class AssignmentLinkingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.Properties1.setProp2(java.lang.String)", assignment);
 	}
 	
-	public void testSugaredAssignment_onExtension() throws Exception {
+	@Test public void testSugaredAssignment_onExtension() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method() {\n" + 
@@ -152,7 +153,7 @@ public class AssignmentLinkingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.Properties1.setProp2(java.lang.String)", assignment);
 	}
 	
-	public void testSugaredAssignment_asExtension() throws Exception {
+	@Test public void testSugaredAssignment_asExtension() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method(String something) {\n" + 
@@ -164,7 +165,7 @@ public class AssignmentLinkingTest extends AbstractXtend2TestCase {
 		assertLinksTo("SomeClass.setMyValue(java.lang.String,java.lang.String)", assignment);
 	}
 	
-	public void testSugaredAssignment_onThis_withIt() throws Exception {
+	@Test public void testSugaredAssignment_onThis_withIt() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method(String it) {\n" + 

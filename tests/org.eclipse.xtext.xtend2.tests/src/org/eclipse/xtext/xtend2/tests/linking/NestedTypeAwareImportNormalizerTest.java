@@ -10,15 +10,15 @@ package org.eclipse.xtext.xtend2.tests.linking;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.scoping.impl.ImportNormalizer;
 import org.eclipse.xtext.xtend2.scoping.NestedTypeAwareImportNormalizer;
-
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class NestedTypeAwareImportNormalizerTest extends TestCase {
+public class NestedTypeAwareImportNormalizerTest extends Assert {
 
-	public void testIgnoreCase() {
+	@Test public void testIgnoreCase() {
 		try {
 			new NestedTypeAwareImportNormalizer(QualifiedName.create("a"), false, true);
 			fail("Expected IllegalArgumentException");
@@ -26,7 +26,7 @@ public class NestedTypeAwareImportNormalizerTest extends TestCase {
 		}
 	}
 	
-	public void testResolve_ImportNormalizer() throws Exception {
+	@Test public void testResolve_ImportNormalizer() throws Exception {
 		QualifiedName xtextRelativeName = QualifiedName.create("xtext");
 		QualifiedName ytextRelativeName = QualifiedName.create("ytext");
 		QualifiedName xytextRelativeName = QualifiedName.create("xtext","ytext");
@@ -46,7 +46,7 @@ public class NestedTypeAwareImportNormalizerTest extends TestCase {
 		assertEquals(xtextRelativeName, xtextImportNormalizer.resolve(xtextRelativeName));
 	}
 	
-	public void testResolve_NestedTypes() throws Exception {
+	@Test public void testResolve_NestedTypes() throws Exception {
 		QualifiedName mapEntry = QualifiedName.create("Map$Entry");
 		QualifiedName maps = QualifiedName.create("Maps");
 		QualifiedName mapsInternal = QualifiedName.create("Maps$Internal");
@@ -67,7 +67,7 @@ public class NestedTypeAwareImportNormalizerTest extends TestCase {
 		assertEquals(imported.append(mapsInternal), wildCardImportNormalizer.resolve(mapsInternal));
 	}
 	
-	public void testDeresolve_ImportNormalizer() throws Exception {
+	@Test public void testDeresolve_ImportNormalizer() throws Exception {
 		QualifiedName namespace = QualifiedName.create("org", "eclipse", "xtext");
 		QualifiedName xtextFQN = namespace.append("Xtext");
 		QualifiedName ytextFQN = namespace.skipLast(1).append("ytext");
@@ -89,7 +89,7 @@ public class NestedTypeAwareImportNormalizerTest extends TestCase {
 		assertEquals(QualifiedName.create("ytext"), wildCardImportNormalizer.deresolve(xytextFQN));
 	}
 
-	public void testDeesolve_NestedTypes() throws Exception {
+	@Test public void testDeesolve_NestedTypes() throws Exception {
 		QualifiedName mapEntry = QualifiedName.create("Map$Entry");
 		QualifiedName imported = QualifiedName.create("java", "util", "Map");
 		QualifiedName fqnMapEntry = QualifiedName.create("java", "util", "Map$Entry");

@@ -32,6 +32,7 @@ import org.eclipse.xtext.validation.IDiagnosticConverter;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.validation.ResourceValidatorImpl;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
@@ -43,7 +44,7 @@ public class PartialParserTest extends AbstractXtend2TestCase {
 	@Inject
 	private InvariantChecker invariantChecker;
 	
-	public void testNoClassCastException() throws Exception {
+	@Test public void testNoClassCastException() throws Exception {
 		String model =
 				"package org.eclipse.xtext.xtend2.tests.parsing\n" + 
 				"\n" + 
@@ -55,7 +56,7 @@ public class PartialParserTest extends AbstractXtend2TestCase {
 		doTestUpdateAtEnd(model, '\n', "NoClassCastException.xtend");
 	}
 	
-	public void testSyntaxErrorOnLeafNode_01() throws Exception {
+	@Test public void testSyntaxErrorOnLeafNode_01() throws Exception {
 		String model =
 			"package org.eclipse.xtext.xtend2.tests.parsing\n" + 
 			"\n" + 
@@ -71,7 +72,7 @@ public class PartialParserTest extends AbstractXtend2TestCase {
 		doTestUpdateAtEnd(model, 'y', "SyntaxErrorOnLeafNode.xtend");
 	}
 	
-	public void testSyntaxErrorOnLeafNode_02() throws Exception {
+	@Test public void testSyntaxErrorOnLeafNode_02() throws Exception {
 		String model =
 			"package org.eclipse.xtext.xtend2.tests.linking\n" + 
 			"\n" + 
@@ -94,7 +95,7 @@ public class PartialParserTest extends AbstractXtend2TestCase {
 		doTestUpdateAtEnd(model, 't', "SyntaxErrorOnLeafNode.xtend");
 	}
 
-	public void testErroneousModelRemoved() throws Exception {
+	@Test public void testErroneousModelRemoved() throws Exception {
 		String model =
 				"\n" + 
 				"\n" + 
@@ -124,7 +125,7 @@ public class PartialParserTest extends AbstractXtend2TestCase {
 		assertTrue(resource.getContents().isEmpty());
 	}
 	
-	public void testEqualNodeModels() throws Exception {
+	@Test public void testEqualNodeModels() throws Exception {
 		String model =
 				"package org.eclipse.xtext.xtend2.tests.parsing\n" + 
 				"\n" + 
@@ -136,7 +137,7 @@ public class PartialParserTest extends AbstractXtend2TestCase {
 		doTestUpdateAtEnd(model, '\n', "EqualNodeModels.xtend");
 	}
 	
-	public void testEqualNodeModels_02() throws Exception {
+	@Test public void testEqualNodeModels_02() throws Exception {
 		String model = "package org.eclipse.xtext.xtend2.tests.linking\n" + 
 				"\n" + 
 				"class EqualNodeModels {\n" + 
@@ -165,7 +166,7 @@ public class PartialParserTest extends AbstractXtend2TestCase {
 		doTestUpdateAtOffset(model, 101, 1, " ", "EqualNodeModels.xtend");
 	}
 	
-	public void testEqualNodeModels_03() throws Exception {
+	@Test public void testEqualNodeModels_03() throws Exception {
 		String model = "package org.eclipse.xtext.xtend2.tests.linking\n" + 
 				"\n" + 
 				"class EqualNodeModels {\n" + 
@@ -194,7 +195,7 @@ public class PartialParserTest extends AbstractXtend2TestCase {
 		doTestUpdateAtOffset(model, 143, 1, "h", "EqualNodeModels.xtend");
 	}
 	
-	public void testEqualNodeModels_04() throws Exception {
+	@Test public void testEqualNodeModels_04() throws Exception {
 		String model = "package org.eclipse.xtext.xtend2.tests.linking\n" + 
 				"\n" + 
 				"class EqualNodeModels {\n" + 
@@ -222,7 +223,7 @@ public class PartialParserTest extends AbstractXtend2TestCase {
 		doTestUpdateAtOffset(model, 279, 1, " ", "EqualNodeModels.xtend");
 	}
 	
-	public void testEqualNodeModels_05() throws Exception {
+	@Test public void testEqualNodeModels_05() throws Exception {
 		String model = "package org.eclipse.xtext.xtend2.tests.smoke\n" + 
 				"\n" + 
 				"class EqualNodeModels {\n" + 
@@ -249,7 +250,7 @@ public class PartialParserTest extends AbstractXtend2TestCase {
 		doTestUpdateAtOffset(model, 170, 1, "apply", "EqualNodeModels.xtend");
 	}
 	
-	public void testEqualModels_01() throws Exception {
+	@Test public void testEqualModels_01() throws Exception {
 		String model = "package org.eclipse.xtext.xtend2.tests.smoke\n" + 
 				"\n" + 
 				"import java.util.ArrayList\n" + 
@@ -280,7 +281,7 @@ public class PartialParserTest extends AbstractXtend2TestCase {
 		doTestUpdateAtOffset(model, 295, 1, "f", "Case_5.xtend");
 	}
 	
-	public void testEqualModels_02() throws Exception {
+	@Test public void testEqualModels_02() throws Exception {
 		String model = "package org.eclipse.xtext.xtend2.tests.smoke\n" + 
 				"\n" + 
 				"import org.eclipse.emf.ecore.EClass\n" + 
@@ -298,7 +299,7 @@ public class PartialParserTest extends AbstractXtend2TestCase {
 		doTestUpdateAtOffset(model, 329, 0, "P", "Case_6.xtend");
 	}
 	
-	public void testEqualModels_03() throws Exception {
+	@Test public void testEqualModels_03() throws Exception {
 		String model = "package org.eclipse.xtext.xtend2.tests.smoke\n" + 
 				"\n" + 
 				"import org.eclipse.emf.ecore.EClass\n" + 
@@ -325,7 +326,7 @@ public class PartialParserTest extends AbstractXtend2TestCase {
 		doTestUpdateAtOffset(model, 286, 1, "e", "Case_6.xtend");
 	}
 	
-	public void testEqualModels_04() throws Exception {
+	@Test public void testEqualModels_04() throws Exception {
 		String model =
 				"package org.eclipse.xtext.xtend2.tests.smoke\n" + 
 				"\n" + 
@@ -362,7 +363,7 @@ public class PartialParserTest extends AbstractXtend2TestCase {
 		validateWithoutException(resource);
 	}
 	
-	public void testEqualModels_05() throws Exception {
+	@Test public void testEqualModels_05() throws Exception {
 		String model =
 				"package org.eclipse.xtext.xtend2.tests.smoke\n" + 
 				"\n" + 
@@ -389,7 +390,7 @@ public class PartialParserTest extends AbstractXtend2TestCase {
 		validateWithoutException(resource);
 	}
 	
-	public void testInferredModelRemoved() throws Exception {
+	@Test public void testInferredModelRemoved() throws Exception {
 		String model =
 				"package org.eclipse.xtext.xtend2.tests.smoke\n" + 
 				"\n" + 

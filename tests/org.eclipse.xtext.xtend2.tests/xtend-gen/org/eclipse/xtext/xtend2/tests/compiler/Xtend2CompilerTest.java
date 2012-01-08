@@ -1,7 +1,5 @@
 package org.eclipse.xtext.xtend2.tests.compiler;
 
-import com.google.inject.Inject;
-import junit.framework.Assert;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
@@ -10,6 +8,11 @@ import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
+import org.junit.Assert;
+import org.junit.Ignore;
+import org.junit.Test;
+
+import com.google.inject.Inject;
 
 @SuppressWarnings("all")
 public class Xtend2CompilerTest extends AbstractXtend2TestCase {
@@ -19,6 +22,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
   @Inject
   private IXtend2JvmAssociations _iXtend2JvmAssociations;
   
+  @Test
   public void testJavaLangReflectImport() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -52,6 +56,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
   public void testTryCatch() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -170,6 +175,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
   public void testFieldInitialization_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -213,6 +219,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
   public void testFieldInitialization_02() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -264,6 +271,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
   public void testFieldInitialization_03() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -316,6 +324,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
   public void testFieldInitialization_04() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -369,6 +378,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
   public void testConstructorDeclaration_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -408,6 +418,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
   public void testConstructorDeclaration_02() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -467,6 +478,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
   public void testConstructorDeclaration_03() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -535,6 +547,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
   public void testSneakyThrow() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -594,6 +607,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
   public void testSneakyThrow_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -643,6 +657,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
   public void testSimple() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -679,6 +694,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
   public void testConstructor() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -715,6 +731,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
   public void testExtends() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -736,6 +753,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
   public void testExtendsException() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -758,6 +776,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
   public void testVisibilityOfDispatchMethods() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -834,6 +853,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
   public void testParenthesisInDispatchMethodsGuards() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -936,6 +956,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
   public void testParenthesisInDispatchMethodsGuards_reordered() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -1038,6 +1059,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
   public void testNoUncessaryCastInDispatchMethods() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -1114,6 +1136,57 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
+  @Ignore
+  public void testExtendsArrayList_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.append("class MyList<T> extends java.util.ArrayList<T> {}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import java.util.ArrayList;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class MyList<T> extends ArrayList<T> {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  @Ignore
+  public void testExtendsArrayList_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.append("class StringList extends java.util.ArrayList<String> {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import java.util.ArrayList;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class StringList<T> extends ArrayList<String> {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testImplements() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -1138,6 +1211,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
   public void testConstructor_2() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -1179,6 +1253,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
   public void testAnnotation() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -1212,6 +1287,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
   public void testSuperCall() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package x class Y extends Object {");
@@ -1285,6 +1361,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
   public void testCreateExtension() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -1380,6 +1457,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
   public void testJavaDocs() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -1469,6 +1547,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
   public void testStaticMethod() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -1502,6 +1581,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
   public void testStaticField() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -1529,6 +1609,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
   public void testNestedClosureWithIt() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class X {");
@@ -1620,6 +1701,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
   public void testNestedClosureSuperCall() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class X {");
@@ -1696,6 +1778,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
   public void testExplicitBoxingUnboxing() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class X {");
@@ -1733,6 +1816,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
   public void testOptionalSemicola() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo;");
@@ -1786,8 +1870,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
         XtendClass _xtendClass = file.getXtendClass();
         JvmGenericType _inferredType = this._iXtend2JvmAssociations.getInferredType(_xtendClass);
         final JvmGenericType inferredType = _inferredType;
-        JvmModelGenerator _generator = this.generator;
-        CharSequence _generateType = _generator.generateType(inferredType);
+        CharSequence _generateType = this.generator.generateType(inferredType);
         final CharSequence javaCode = _generateType;
         String _string_1 = expected.toString();
         String _string_2 = javaCode.toString();

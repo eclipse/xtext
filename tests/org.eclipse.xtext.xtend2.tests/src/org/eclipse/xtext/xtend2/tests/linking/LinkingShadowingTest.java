@@ -10,7 +10,7 @@ package org.eclipse.xtext.xtend2.tests.linking;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.junit.validation.ValidationTestHelper;
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
@@ -18,6 +18,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
@@ -29,7 +30,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 	@Inject
 	private ValidationTestHelper validator;
 	
-	public void testField_noConflicts_local() throws Exception {
+	@Test public void testField_noConflicts_local() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method() {\n" + 
@@ -41,7 +42,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("SomeClass.aString", featureCall);
 	}
 	
-	public void testField_noConflicts_inheritedProtected() throws Exception {
+	@Test public void testField_noConflicts_inheritedProtected() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass extends testdata.LinkingType {\n" +
 				"  def void method() {\n" + 
@@ -52,7 +53,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.LinkingType.protectedField", featureCall);
 	}
 	
-	public void testField_noConflicts_publicOnIt() throws Exception {
+	@Test public void testField_noConflicts_publicOnIt() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method(testdata.LinkingType it) {\n" + 
@@ -63,7 +64,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.LinkingType.publicField", featureCall);
 	}
 	
-	public void testField_noConflicts_protectedOnIt() throws Exception {
+	@Test public void testField_noConflicts_protectedOnIt() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method(testdata.LinkingType it) {\n" + 
@@ -74,7 +75,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.LinkingType.protectedField", featureCall, true);
 	}
 	
-	public void testField_noConflicts_publicOnExtension() throws Exception {
+	@Test public void testField_noConflicts_publicOnExtension() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method() {\n" + 
@@ -86,7 +87,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.LinkingType.publicField", featureCall);
 	}
 	
-	public void testField_noConflicts_protectedOnExtension() throws Exception {
+	@Test public void testField_noConflicts_protectedOnExtension() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method() {\n" + 
@@ -98,7 +99,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.LinkingType.protectedField", featureCall, true);
 	}
 
-	public void testField_noConflicts_publicStaticImport() throws Exception {
+	@Test public void testField_noConflicts_publicStaticImport() throws Exception {
 		XtendClass clazz = clazz(
 				"import static testdata.LinkingStaticType.*\n" +
 				"class SomeClass {\n" +
@@ -110,7 +111,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.LinkingStaticType.publicField", featureCall);
 	}
 	
-	public void testField_noConflicts_protectedStaticImport() throws Exception {
+	@Test public void testField_noConflicts_protectedStaticImport() throws Exception {
 		XtendClass clazz = clazz(
 				"import static testdata.LinkingStaticType.*\n" +
 				"class SomeClass {\n" +
@@ -122,7 +123,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.LinkingStaticType.protectedField", featureCall, true);
 	}
 	
-	public void testField_noConflicts_publicStaticExtension() throws Exception {
+	@Test public void testField_noConflicts_publicStaticExtension() throws Exception {
 		XtendClass clazz = clazz(
 				"import static extension testdata.LinkingStaticType.*\n" +
 				"class SomeClass {\n" +
@@ -134,7 +135,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.LinkingStaticType.publicField", featureCall);
 	}
 	
-	public void testField_noConflicts_protectedStaticExtension() throws Exception {
+	@Test public void testField_noConflicts_protectedStaticExtension() throws Exception {
 		XtendClass clazz = clazz(
 				"import static extension testdata.LinkingStaticType.*\n" +
 				"class SomeClass {\n" +
@@ -146,7 +147,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.LinkingStaticType.protectedField", featureCall, true);
 	}
 	
-	public void testParameter_noConflict() throws Exception {
+	@Test public void testParameter_noConflict() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method(String aString) {\n" + 
@@ -157,7 +158,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("aString", featureCall);
 	}
 	
-	public void testParameter_shadows_field() throws Exception {
+	@Test public void testParameter_shadows_field() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method(String aString) {\n" + 
@@ -169,7 +170,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("aString", featureCall);
 	}
 	
-	public void testParameter_shadows_fieldOfIt() throws Exception {
+	@Test public void testParameter_shadows_fieldOfIt() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method(String publicField, testdata.LinkingType it) {\n" + 
@@ -180,7 +181,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("publicField", featureCall);
 	}
 	
-	public void testLocalVariable_noConflict() throws Exception {
+	@Test public void testLocalVariable_noConflict() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method() {\n" + 
@@ -192,7 +193,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("aString", featureCall);
 	}
 	
-	public void testLocalVariable_shadows_parameter() throws Exception {
+	@Test public void testLocalVariable_shadows_parameter() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method(String aString) {\n" + 
@@ -209,7 +210,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertNull(featureCall.getInvalidFeatureIssueCode(), featureCall.getInvalidFeatureIssueCode());
 	}
 	
-	public void testLocalVariable_shadows_field() throws Exception {
+	@Test public void testLocalVariable_shadows_field() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method() {\n" + 
@@ -222,7 +223,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("aString", XbasePackage.Literals.XVARIABLE_DECLARATION, featureCall);
 	}
 	
-	public void testLocalVariable_shadows_fieldOfIt() throws Exception {
+	@Test public void testLocalVariable_shadows_fieldOfIt() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method(testdata.LinkingType it) {\n" +
@@ -234,7 +235,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("publicField", featureCall);
 	}
 	
-	public void testField_onIt_shadows_local() throws Exception {
+	@Test public void testField_onIt_shadows_local() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method(testdata.LinkingType it) {\n" + 
@@ -246,7 +247,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.LinkingType.publicField", featureCall);
 	}
 	
-	public void testField_onIt_shadows_injectedExtension() throws Exception {
+	@Test public void testField_onIt_shadows_injectedExtension() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method(testdata.LinkingType it) {\n" + 
@@ -258,7 +259,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.LinkingType.publicField", featureCall);
 	}
 	
-	public void testField_onIt_shadows_importedExtension() throws Exception {
+	@Test public void testField_onIt_shadows_importedExtension() throws Exception {
 		XtendClass clazz = clazz(
 				"import static extension testdata.LinkingStaticType.*\n" +
 				"class SomeClass {\n" +
@@ -270,7 +271,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.LinkingType.publicField", featureCall);
 	}
 	
-	public void testField_onIt_shadows_staticallyImported() throws Exception {
+	@Test public void testField_onIt_shadows_staticallyImported() throws Exception {
 		XtendClass clazz = clazz(
 				"import static testdata.LinkingStaticType.*\n" +
 				"class SomeClass {\n" +
@@ -282,7 +283,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.LinkingType.publicField", featureCall);
 	}
 	
-	public void testField_local_shadows_injectedExtension() throws Exception {
+	@Test public void testField_local_shadows_injectedExtension() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method() {\n" + 
@@ -295,7 +296,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("SomeClass.publicField", featureCall);
 	}
 	
-	public void testField_local_shadows_importedExtension() throws Exception {
+	@Test public void testField_local_shadows_importedExtension() throws Exception {
 		XtendClass clazz = clazz(
 				"import static extension testdata.LinkingStaticType.*" +
 				"class SomeClass {\n" +
@@ -308,7 +309,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("SomeClass.publicField", featureCall);
 	}
 	
-	public void testField_local_shadows_staticallyImported() throws Exception {
+	@Test public void testField_local_shadows_staticallyImported() throws Exception {
 		XtendClass clazz = clazz(
 				"import static testdata.LinkingStaticType.*" +
 				"class SomeClass {\n" +
@@ -321,7 +322,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("SomeClass.publicField", featureCall);
 	}
 	
-	public void testField_inherited_shadows_injectedExtension() throws Exception {
+	@Test public void testField_inherited_shadows_injectedExtension() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass extends testdata.LinkingType {\n" +
 				"  def void method() {\n" + 
@@ -333,7 +334,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.LinkingType.publicField", featureCall);
 	}
 	
-	public void testField_inherited_shadows_importedExtension() throws Exception {
+	@Test public void testField_inherited_shadows_importedExtension() throws Exception {
 		XtendClass clazz = clazz(
 				"import static extension testdata.LinkingStaticType.*" +
 				"class SomeClass extends testdata.LinkingType {\n" +
@@ -345,7 +346,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.LinkingType.publicField", featureCall);
 	}
 	
-	public void testField_inherited_shadows_staticallyImported() throws Exception {
+	@Test public void testField_inherited_shadows_staticallyImported() throws Exception {
 		XtendClass clazz = clazz(
 				"import static testdata.LinkingStaticType.*" +
 				"class SomeClass extends testdata.LinkingType {\n" +
@@ -357,7 +358,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.LinkingType.publicField", featureCall);
 	}
 	
-	public void testField_injectedExtension_shadows_importedExtension() throws Exception {
+	@Test public void testField_injectedExtension_shadows_importedExtension() throws Exception {
 		XtendClass clazz = clazz(
 				"import static extension testdata.LinkingStaticType.*" +
 				"class SomeClass {\n" +
@@ -370,7 +371,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.LinkingType.publicField", featureCall);
 	}
 	
-	public void testField_injectedExtension_shadows_staticallyImported() throws Exception {
+	@Test public void testField_injectedExtension_shadows_staticallyImported() throws Exception {
 		XtendClass clazz = clazz(
 				"import static testdata.LinkingStaticType.*" +
 				"class SomeClass {\n" +
@@ -383,7 +384,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.LinkingType.publicField", featureCall);
 	}
 	
-	public void testField_local_shadowsInvisibleOnIt() throws Exception {
+	@Test public void testField_local_shadowsInvisibleOnIt() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method(testdata.LinkingType it) {\n" + 
@@ -395,7 +396,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("SomeClass.protectedField", featureCall);
 	}
 	
-	public void testField_inherited_shadowsInvisibleOnIt() throws Exception {
+	@Test public void testField_inherited_shadowsInvisibleOnIt() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass extends testdata.LinkingType {\n" +
 				"  def void method(testdata.LinkingTypeEquallyNamed it) {\n" + 
@@ -406,7 +407,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.LinkingType.protectedField", featureCall);
 	}
 	
-	public void testField_local_shadows_sugarOnIt() throws Exception {
+	@Test public void testField_local_shadows_sugarOnIt() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method(testdata.LinkingType it) {\n" + 
@@ -418,7 +419,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("SomeClass.fieldOverloadsMethod", featureCall);
 	}
 	
-	public void testField_inherited_shadows_sugarOnIt() throws Exception {
+	@Test public void testField_inherited_shadows_sugarOnIt() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass extends testdata.LinkingTypeEquallyNamed {\n" +
 				"  def void method(testdata.LinkingTypeEquallyNamed it) {\n" + 
@@ -429,7 +430,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.LinkingTypeEquallyNamed.fieldOverloadsMethod", featureCall);
 	}
 	
-	public void testField_staticallyImported_shadows_sugarOnIt() throws Exception {
+	@Test public void testField_staticallyImported_shadows_sugarOnIt() throws Exception {
 		XtendClass clazz = clazz(
 				"import static testdata.LinkingStaticType.*\n" +
 				"class SomeClass {\n" +
@@ -441,7 +442,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.LinkingStaticType.fieldOverloadsMethod", featureCall);
 	}
 	
-	public void testField_staticExtension_shadows_sugarOnIt() throws Exception {
+	@Test public void testField_staticExtension_shadows_sugarOnIt() throws Exception {
 		XtendClass clazz = clazz(
 				"import static extension testdata.LinkingStaticType.*\n" +
 				"class SomeClass {\n" +
@@ -453,7 +454,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.LinkingStaticType.fieldOverloadsMethod", featureCall);
 	}
 	
-	public void testOperation_sugarOnIt_shadows_sugarOnThis() throws Exception {
+	@Test public void testOperation_sugarOnIt_shadows_sugarOnThis() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method(testdata.LinkingType it) {\n" + 
@@ -465,7 +466,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.LinkingType.fieldOverloadsMethod()", featureCall);
 	}
 	
-	public void testOperation_sugarOnThis_shadows_sugarOnExtension() throws Exception {
+	@Test public void testOperation_sugarOnThis_shadows_sugarOnExtension() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method() {\n" + 
@@ -478,7 +479,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("SomeClass.fieldOverloadsMethod()", featureCall);
 	}
 	
-	public void testOperation_sugarOnExtension_shadows_sugarOnStatic() throws Exception {
+	@Test public void testOperation_sugarOnExtension_shadows_sugarOnStatic() throws Exception {
 		XtendClass clazz = clazz(
 				"import static testdata.LinkingStaticTypeEquallyNamed.*\n" +
 				"class SomeClass {\n" +
@@ -491,7 +492,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.LinkingType.fieldOverloadsMethod()", featureCall);
 	}
 	
-	public void testOperation_sugarOnStatic_shadows_implicitArgumentOnThis() throws Exception {
+	@Test public void testOperation_sugarOnStatic_shadows_implicitArgumentOnThis() throws Exception {
 		XtendClass clazz = clazz(
 				"import static testdata.LinkingStaticTypeEquallyNamed.*\n" +
 				"class SomeClass {\n" +
@@ -504,7 +505,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.LinkingStaticTypeEquallyNamed.fieldOverloadsMethod()", featureCall);
 	}
 	
-	public void testOperation_implicitArgumentOnThis_shadows_implicitArgumentOnExtension() throws Exception {
+	@Test public void testOperation_implicitArgumentOnThis_shadows_implicitArgumentOnExtension() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method(Object it) {\n" + 
@@ -517,7 +518,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("SomeClass.withArgument(java.lang.Object)", featureCall);
 	}
 	
-	public void testOperation_implicitArgumentOnExtension_shadows_implicitArgumentOnStaticExtension() throws Exception {
+	@Test public void testOperation_implicitArgumentOnExtension_shadows_implicitArgumentOnStaticExtension() throws Exception {
 		XtendClass clazz = clazz(
 				"import static extension testdata.LinkingStaticTypeEquallyNamed.*" +
 				"class SomeClass {\n" +
@@ -530,7 +531,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.LinkingType.withArgument(java.lang.Object)", featureCall);
 	}
 	
-	public void testOperation_implicitArgumentOnStaticExtension() throws Exception {
+	@Test public void testOperation_implicitArgumentOnStaticExtension() throws Exception {
 		XtendClass clazz = clazz(
 				"import static extension testdata.LinkingStaticTypeEquallyNamed.*" +
 				"class SomeClass {\n" +
@@ -542,7 +543,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.LinkingStaticTypeEquallyNamed.withArgument(java.lang.Object)", featureCall);
 	}
 	
-	public void testOperation_implicitArgumentOnStaticExtension_shadows_sugarImplicitArgumentOnThis() throws Exception {
+	@Test public void testOperation_implicitArgumentOnStaticExtension_shadows_sugarImplicitArgumentOnThis() throws Exception {
 		XtendClass clazz = clazz(
 				"import static extension testdata.LinkingStaticTypeEquallyNamed.*" +
 				"class SomeClass {\n" +
@@ -557,7 +558,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("SomeClass.getWithArgument(java.lang.Object)", featureCall);
 	}
 	
-	public void testOperation_sugarImplicitArgumentOnThis_shadows_sugarImplicitArgumentOnExtension() throws Exception {
+	@Test public void testOperation_sugarImplicitArgumentOnThis_shadows_sugarImplicitArgumentOnExtension() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method(Object it) {\n" + 
@@ -570,7 +571,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("SomeClass.getWithArgument2(java.lang.Object)", featureCall);
 	}
 	
-	public void testOperation_sugarImplicitArgumentOnExtension_shadows_sugarOnStaticExtension() throws Exception {
+	@Test public void testOperation_sugarImplicitArgumentOnExtension_shadows_sugarOnStaticExtension() throws Exception {
 		XtendClass clazz = clazz(
 				"import static extension testdata.LinkingStaticTypeEquallyNamed.*" +
 				"class SomeClass {\n" +
@@ -583,7 +584,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.LinkingType.getWithArgument2(java.lang.Object)", featureCall);
 	}
 
-	public void testOperation_sugarOnStaticExtension() throws Exception {
+	@Test public void testOperation_sugarOnStaticExtension() throws Exception {
 		XtendClass clazz = clazz(
 				"import static extension testdata.LinkingStaticTypeEquallyNamed.*" +
 				"class SomeClass {\n" +
@@ -595,7 +596,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("testdata.LinkingStaticTypeEquallyNamed.getWithArgument2(java.lang.Object)", featureCall);
 	}
 	
-	public void testOperation_implicitArgumentOnStatic() throws Exception {
+	@Test public void testOperation_implicitArgumentOnStatic() throws Exception {
 		XtendClass clazz = clazz(
 				"import static testdata.LinkingStaticTypeEquallyNamed.*" +
 				"class SomeClass {\n" +
@@ -613,7 +614,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertNotNull("Expected issues", featureCall.getInvalidFeatureIssueCode());
 	}
 	
-	public void testOperationWithParam_noConflict() throws Exception {
+	@Test public void testOperationWithParam_noConflict() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method() {\n" + 
@@ -625,7 +626,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("SomeClass.methodWithParam(java.lang.String)", featureCall);
 	}
 	
-	public void testOperationWithParam_itPresent() throws Exception {
+	@Test public void testOperationWithParam_itPresent() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method(String it) {\n" + 
@@ -638,7 +639,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertNull(featureCall.getImplicitFirstArgument());
 	}
 	
-	public void testOperationWithTwoParams_noConflict() throws Exception {
+	@Test public void testOperationWithTwoParams_noConflict() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method() {\n" + 
@@ -651,7 +652,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertNull(featureCall.getImplicitFirstArgument());
 	}
 	
-	public void testOperationWithTwoParams_itPresent() throws Exception {
+	@Test public void testOperationWithTwoParams_itPresent() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method(Object it) {\n" + 
@@ -663,7 +664,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("SomeClass.methodWithParam(java.lang.String,java.lang.String)", featureCall);
 	}
 	
-	public void testOperationWithParam_overloaded() throws Exception {
+	@Test public void testOperationWithParam_overloaded() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method() {\n" + 
@@ -676,7 +677,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertLinksTo("SomeClass.methodWithParam(java.lang.String)", featureCall);
 	}
 	
-	public void testOperationWithParam_overloaded_itPresent() throws Exception {
+	@Test public void testOperationWithParam_overloaded_itPresent() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method(String it) {\n" + 
@@ -690,7 +691,7 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertNull(featureCall.getImplicitFirstArgument());
 	}
 	
-	public void testOperationWithTwoParams_overloaded() throws Exception {
+	@Test public void testOperationWithTwoParams_overloaded() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method() {\n" + 
@@ -704,35 +705,35 @@ public class LinkingShadowingTest extends AbstractXtend2TestCase {
 		assertNull(featureCall.getImplicitFirstArgument());
 	}
 	
-	public void testStaticImport_overloaded() throws Exception {
+	@Test public void testStaticImport_overloaded() throws Exception {
 		XtendClass clazz = clazz(
-				"import static junit.framework.Assert.*\n" +
-				"class SomeClass extends junit.framework.TestCase {\n" +
+				"import static org.junit.Assert.*\n" +
+				"class SomeClass extends org.junit.Assert {\n" +
 				"  def void method() {\n" + 
 				"    assertTrue(false)\n" + 
 				"  }\n" +
 				"}");
 		XFeatureCall featureCall = (XFeatureCall) getFirstFeatureCall(clazz);
-		assertLinksTo("junit.framework.Assert.assertTrue(boolean)", featureCall);
+		assertLinksTo("org.junit.Assert.assertTrue(boolean)", featureCall);
 		assertNull(featureCall.getImplicitFirstArgument());
 		assertNull(featureCall.getImplicitReceiver());
 	}
 	
-	public void testStaticMethod_overloaded() throws Exception {
+	@Test public void testStaticMethod_overloaded() throws Exception {
 		XtendClass clazz = clazz(
-				"import junit.framework.Assert\n" +
-				"class SomeClass extends junit.framework.TestCase {\n" +
+				"import org.junit.Assert\n" +
+				"class SomeClass extends org.junit.Assert {\n" +
 				"  def void method() {\n" + 
 				"    Assert::assertTrue(false)\n" + 
 				"  }\n" +
 				"}");
 		XFeatureCall featureCall = (XFeatureCall) getFirstFeatureCall(clazz);
-		assertLinksTo("junit.framework.Assert.assertTrue(boolean)", featureCall);
+		assertLinksTo("org.junit.Assert.assertTrue(boolean)", featureCall);
 		assertNull(featureCall.getImplicitFirstArgument());
 		assertNull(featureCall.getImplicitReceiver());
 	}
 	
-	public void testOperationWithTwoParams_overloaded_itPresent() throws Exception {
+	@Test public void testOperationWithTwoParams_overloaded_itPresent() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
 				"  def void method(Object it) {\n" + 

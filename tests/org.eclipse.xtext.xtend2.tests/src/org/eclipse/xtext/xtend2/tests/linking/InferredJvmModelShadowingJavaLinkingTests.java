@@ -22,6 +22,7 @@ import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
@@ -37,30 +38,30 @@ public class InferredJvmModelShadowingJavaLinkingTests extends AbstractXtend2Tes
 	protected IXtend2JvmAssociations associations;
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		resourceSet.getResources().clear();
 		resourceSet.setClasspathURIContext(this);
 	}
-	public void testLinkJavaClass() throws Exception {
+	@Test public void testLinkJavaClass() throws Exception {
 		XtendClass bar = classFile("test/Bar", "package test class Bar extends Foo {}");
 		assertTrue(isJavaElement(bar.getSuperTypes().get(0).getType()));
 	}
 	
-	public void testLinkInferredJvmClass() throws Exception {
+	@Test public void testLinkInferredJvmClass() throws Exception {
 		XtendClass foo = classFile("test/Foo", "package test class Foo {}");
 		XtendClass bar = classFile("test/Bar", "package test class Bar extends Foo {}");
 		assertEquals(associations.getInferredType(foo), bar.getSuperTypes().get(0).getType());
 	}
 	
-	public void testLinkJavaConstructor() throws Exception {
+	@Test public void testLinkJavaConstructor() throws Exception {
 		XtendClass bar = classFile("test/Bar", "package test class Bar { def bar() {new Foo()} }");
 		final XExpression block = ((XtendFunction)bar.getMembers().get(0)).getExpression();
 		XConstructorCall constructorCall = (XConstructorCall) ((XBlockExpression)block).getExpressions().get(0);
 		assertTrue(isJavaElement(constructorCall.getConstructor()));
 	}
 	
-	public void testLinkInferredJvmConstructor() throws Exception {
+	@Test public void testLinkInferredJvmConstructor() throws Exception {
 		XtendClass foo = classFile("test/Foo", "package test class Foo {}");
 		XtendClass bar = classFile("test/Bar", "package test class Bar { def bar() {new Foo()} }");
 		final XExpression block = ((XtendFunction)bar.getMembers().get(0)).getExpression();
@@ -68,14 +69,14 @@ public class InferredJvmModelShadowingJavaLinkingTests extends AbstractXtend2Tes
 		assertEquals(associations.getInferredConstructor(foo), constructorCall.getConstructor());
 	}
 	
-	public void testLinkJavaMethod() throws Exception {
+	@Test public void testLinkJavaMethod() throws Exception {
 		XtendClass bar = classFile("test/Bar", "package test class Bar { def bar(Foo foo) {foo.foo()} }");
 		final XExpression block = ((XtendFunction)bar.getMembers().get(0)).getExpression();
 		XMemberFeatureCall methodCall = (XMemberFeatureCall) ((XBlockExpression)block).getExpressions().get(0);
 		assertTrue(isJavaElement(methodCall.getFeature()));
 	}
 	
-	public void testLinkInferredJvmOperation() throws Exception {
+	@Test public void testLinkInferredJvmOperation() throws Exception {
 		XtendClass foo = classFile("test/Foo", "package test class Foo { def foo() :this; }");
 		XtendClass bar = classFile("test/Bar", "package test class Bar { def bar(Foo foo) {foo.foo()} }");
 		final XBlockExpression block = (XBlockExpression) ((XtendFunction)bar.getMembers().get(0)).getExpression();

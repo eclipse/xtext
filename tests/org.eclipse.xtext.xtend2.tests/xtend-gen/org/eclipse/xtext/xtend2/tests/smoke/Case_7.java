@@ -3,6 +3,7 @@ package org.eclipse.xtext.xtend2.tests.smoke;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
+
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 

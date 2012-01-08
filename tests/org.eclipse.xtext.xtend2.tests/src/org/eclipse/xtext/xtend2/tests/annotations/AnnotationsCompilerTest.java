@@ -15,8 +15,8 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.junit.util.ParseHelper;
-import org.eclipse.xtext.junit.validation.ValidationTestHelper;
+import org.eclipse.xtext.junit4.util.ParseHelper;
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -27,6 +27,7 @@ import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
+import org.junit.Test;
 
 import testdata.Annotation1;
 import testdata.Annotation2;
@@ -42,42 +43,42 @@ import com.google.inject.Singleton;
  */
 public class AnnotationsCompilerTest extends AbstractXtend2TestCase {
 	
-	public void testSimpleAnnotationOnType() throws Exception {
+	@Test public void testSimpleAnnotationOnType() throws Exception {
 		final String text = "@com.google.inject.Singleton() class Foo {}";
 		assertNotNull(getAnnotationOnClass(text, Singleton.class));
 	}
 	
-	public void testParameterizedAnnotationOnType() throws Exception {
+	@Test public void testParameterizedAnnotationOnType() throws Exception {
 		final String text = "@com.google.inject.ImplementedBy(typeof(String)) class Foo {}";
 		ImplementedBy implementedBy = getAnnotationOnClass(text, ImplementedBy.class);
 		assertTrue(implementedBy.value() == String.class);
 	}
 	
-	public void testKeyValueParameterizedAnnotationOnType() throws Exception {
+	@Test public void testKeyValueParameterizedAnnotationOnType() throws Exception {
 		final String text = "@com.google.inject.ImplementedBy( value = typeof(String)) class Foo {}";
 		ImplementedBy implementedBy = getAnnotationOnClass(text, ImplementedBy.class);
 		assertTrue(implementedBy.value() == String.class);
 	}
 	
-	public void testKeyValueParameterizedAnnotationOnField() throws Exception {
+	@Test public void testKeyValueParameterizedAnnotationOnField() throws Exception {
 		final String text = "class Foo { @com.google.inject.Inject(optional = true) String string }";
 		Inject inject = getAnnotationOnField(text, Inject.class);
 		assertTrue(inject.optional());
 	}
 	
-	public void testMarkerAnnotationOnField() throws Exception {
+	@Test public void testMarkerAnnotationOnField() throws Exception {
 		final String text = "class Foo { @com.google.inject.Inject String string }";
 		Inject inject = getAnnotationOnField(text, Inject.class);
 		assertNotNull(inject);
 	}
 	
-	public void testAnnotationOnField() throws Exception {
+	@Test public void testAnnotationOnField() throws Exception {
 		final String text = "class Foo { @com.google.inject.Inject() String string }";
 		Inject inject = getAnnotationOnField(text, Inject.class);
 		assertNotNull(inject);
 	}
 	
-	public void testBug351554_01() throws Exception {
+	@Test public void testBug351554_01() throws Exception {
 		final String text = 
 			"class Foo {\n" +
 			"	@org.eclipse.xtext.validation.Check(org::eclipse::xtext::validation::CheckType::NORMAL)\n" +
@@ -88,7 +89,7 @@ public class AnnotationsCompilerTest extends AbstractXtend2TestCase {
 		assertEquals(CheckType.NORMAL, check.value());
 	}
 
-	public void testBug351554_02() throws Exception {
+	@Test public void testBug351554_02() throws Exception {
 		final String text = 
 			"@testdata.Annotation1(children = @testdata.Annotation2({'a', 'b'}), value=true)\n" +
 			"class Foo {}";
@@ -146,7 +147,7 @@ public class AnnotationsCompilerTest extends AbstractXtend2TestCase {
 	private JvmModelGenerator generator;
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		javaCompiler.addClassPathOfClass(getClass());
 		javaCompiler.addClassPathOfClass(Check.class);

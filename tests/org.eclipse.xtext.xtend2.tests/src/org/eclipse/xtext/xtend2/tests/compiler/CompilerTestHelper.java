@@ -10,15 +10,13 @@ package org.eclipse.xtext.xtend2.tests.compiler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import junit.framework.Assert;
-
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.junit.util.ParseHelper;
-import org.eclipse.xtext.junit.validation.ValidationTestHelper;
+import org.eclipse.xtext.junit4.util.ParseHelper;
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
@@ -28,6 +26,7 @@ import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
+import org.junit.Assert;
 
 import com.google.common.base.Supplier;
 import com.google.inject.Inject;
@@ -74,7 +73,7 @@ public class CompilerTestHelper {
 		try {
 			Object actual = apply(compile(string));
 			if (object instanceof String && actual instanceof String) {
-				Assert.assertEquals("String was:\n" + string + "\nJava code was " + compileToJavaCode, (String)object, (String)actual);	
+				Assert.assertEquals("String was:\n" + string + "\nJava code was " + compileToJavaCode, object, actual);	
 			} else {
 				Assert.assertEquals("String was:\n" + string + "\nJava code was " + compileToJavaCode, object, actual);
 			}

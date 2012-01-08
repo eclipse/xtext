@@ -15,6 +15,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendImport;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
@@ -26,7 +27,7 @@ public class ModelExtensionsTest extends AbstractXtend2TestCase {
 	@Inject
 	protected Xtend2Factory factory;
 	
-	public void testXtendClass() throws Exception {
+	@Test public void testXtendClass() throws Exception {
 		XtendFile file = file("package foo class Bar extends Object implements java.io.Serializable {}");
 		XtendClass xtendClass = file.getXtendClass();
 		assertEquals("foo", xtendClass.getPackageName());
@@ -37,13 +38,13 @@ public class ModelExtensionsTest extends AbstractXtend2TestCase {
 		assertEquals("java.io.Serializable", superTypes.get(1).getQualifiedName());
 	}
 	
-	public void testXtendFunction() throws Exception {
+	@Test public void testXtendFunction() throws Exception {
 		XtendFile file = file("package foo class Bar { def int foo() {1}}");
 		XtendFunction xtendFunction = (XtendFunction) file.getXtendClass().getMembers().get(0);
 		assertEquals("foo", xtendFunction.getName());
 	}
 	
-	public void testXtendImport() throws Exception {
+	@Test public void testXtendImport() throws Exception {
 		XtendImport xtendImport = factory.createXtendImport();
 		assertFalse(xtendImport.isWildcard());
 		assertNull(xtendImport.getImportedTypeName());

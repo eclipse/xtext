@@ -8,6 +8,8 @@
 package org.eclipse.xtext.xtend2.tests.richstring;
 
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
@@ -19,9 +21,8 @@ public class RichStringCompilerTest extends AbstractRichStringEvaluationTest {
 	@Inject
 	private RichStringCompilerTestHelper testHelper;
 	
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		AbstractXtend2TestCase.getInjector().injectMembers(this);
 		testHelper.setUp();
 	}
@@ -31,7 +32,7 @@ public class RichStringCompilerTest extends AbstractRichStringEvaluationTest {
 		testHelper.assertEvaluatesTo(expectedOutput, richString);
 	}
 
-	public void testIf_08() throws Exception {
+	@Test public void testIf_08() throws Exception {
 		assertOutput("foobar\n", 
 				"'''\n"+
 				"  «IF 'a'.charAt(0)!='a'»\n"+
@@ -39,11 +40,11 @@ public class RichStringCompilerTest extends AbstractRichStringEvaluationTest {
 				"'''");
 	}
 	
-	public void testVariableInString_01() throws Exception {
+	@Test public void testVariableInString_01() throws Exception {
 		assertOutput("1, 2, 3, 4, 5, 6, 7, 8, 9, 10", "'''«var max = 10»«FOR i: 1..max SEPARATOR ', '»«i»«ENDFOR»'''");
 	}
 	
-	public void testForLoop_26() throws Exception {
+	@Test public void testForLoop_26() throws Exception {
 		assertOutput(
 				"foo\n",
 				"'''«FOR a: newArrayList(new testdata.OuterClass$InnerClass())»\n" +
@@ -51,12 +52,12 @@ public class RichStringCompilerTest extends AbstractRichStringEvaluationTest {
 				"«ENDFOR»'''");
 	}
 	
-	public void testBug343148() throws Exception {
+	@Test public void testBug343148() throws Exception {
 		assertOutput(" zonk a\n\n zonk b\n\n zonk c",
 				"'''«newArrayList('a','b','c').join('\n\n',[e|''' zonk «e»'''])»'''");
 	}
 	
-	public void testBug349762() throws Exception {
+	@Test public void testBug349762() throws Exception {
 		assertOutput("1,2\n2,4\n",
 				"''' \n" + 
 				"        «FOR i:1..2»\n" + 

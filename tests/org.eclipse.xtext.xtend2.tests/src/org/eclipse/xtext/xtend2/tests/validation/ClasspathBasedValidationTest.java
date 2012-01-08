@@ -7,13 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.tests.validation;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.junit.GlobalRegistries;
-import org.eclipse.xtext.junit.GlobalRegistries.GlobalStateMemento;
-import org.eclipse.xtext.junit.validation.ValidationTestHelper;
+import org.eclipse.xtext.junit4.GlobalRegistries;
+import org.eclipse.xtext.junit4.GlobalRegistries.GlobalStateMemento;
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xtend2.Xtend2RuntimeModule;
 import org.eclipse.xtext.xtend2.Xtend2StandaloneSetup;
@@ -21,6 +19,10 @@ import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.validation.IssueCodes;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -29,7 +31,7 @@ import com.google.inject.Injector;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class ClasspathBasedValidationTest extends TestCase {
+public class ClasspathBasedValidationTest extends Assert {
 	
 	private Injector injector;
 
@@ -38,8 +40,8 @@ public class ClasspathBasedValidationTest extends TestCase {
 
 	private GlobalStateMemento memento;
 	
-	@Override
-	protected void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		memento = GlobalRegistries.makeCopyOfGlobalState();
 		GlobalRegistries.clearGlobalRegistries();
 		injector = new Xtend2StandaloneSetup() {
@@ -57,26 +59,25 @@ public class ClasspathBasedValidationTest extends TestCase {
 		injector.injectMembers(this);
 	}
 	
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		memento.restoreGlobalState();
-		super.tearDown();
 	}
 
-	public void testFileNamingConventions_0() throws Exception {
+	@Test public void testFileNamingConventions_0() throws Exception {
 		XtendFile xtendFile = loadExampleXtendFile();
 		helper.assertNoError(xtendFile, IssueCodes.WRONG_PACKAGE);
 		helper.assertNoError(xtendFile, IssueCodes.WRONG_FILE);
 	}
 	
-	public void testFileNamingConventions_1() throws Exception {
+	@Test public void testFileNamingConventions_1() throws Exception {
 		XtendFile xtendFile = loadExampleXtendFile();
 			xtendFile.getXtendClass().setName("Bar");
 		helper.assertNoError(xtendFile, IssueCodes.WRONG_PACKAGE);
 		helper.assertError(xtendFile, Xtend2Package.Literals.XTEND_CLASS, IssueCodes.WRONG_FILE);
 	}
 		
-	public void testFileNamingConventions_2() throws Exception {
+	@Test public void testFileNamingConventions_2() throws Exception {
 		XtendFile xtendFile = loadExampleXtendFile();
 		Resource resource = xtendFile.eResource();
 		URI resourceURI = resource.getURI();
@@ -86,14 +87,14 @@ public class ClasspathBasedValidationTest extends TestCase {
 		helper.assertNoError(xtendFile, IssueCodes.WRONG_FILE);
 	}
 	
-	public void testFileNamingConventions_3() throws Exception {
+	@Test public void testFileNamingConventions_3() throws Exception {
 		XtendFile xtendFile = loadExampleXtendFile();
 		xtendFile.setPackage(null);
 		helper.assertError(xtendFile, Xtend2Package.Literals.XTEND_FILE, IssueCodes.WRONG_PACKAGE);
 		helper.assertNoError(xtendFile, IssueCodes.WRONG_FILE);
 	}
 	
-	public void testFileNamingConventions_4() throws Exception {
+	@Test public void testFileNamingConventions_4() throws Exception {
 		XtendFile xtendFile = loadXtendFile("classpath:/NoPackage.xtend");
 		helper.assertNoError(xtendFile, IssueCodes.WRONG_PACKAGE);
 		helper.assertNoError(xtendFile, IssueCodes.WRONG_FILE);

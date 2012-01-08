@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.tests.serializer;
 
-import org.eclipse.xtext.junit.serializer.SerializerTester;
+import org.eclipse.xtext.junit4.serializer.SerializerTester;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 
 import com.google.inject.Inject;

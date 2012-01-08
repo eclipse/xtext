@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xtend2.tests.serializer;
 
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
+import org.junit.Test;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -16,17 +17,16 @@ public abstract class AbstractXtend2TestData extends AbstractXtend2TestCase {
 
 	protected abstract void doTest(String fileContents) throws Exception;
 
-	public void testHelloWorld() throws Exception {
+	@Test public void testHelloWorld() throws Exception {
 		StringBuilder str = new StringBuilder();
 		str.append("package xtend.tutorial.basics\n\n");
 		str.append("\n\n");
 		str.append("/*\n\n");
 		str.append(" * The classical hello world example\n\n");
 		str.append(" */\n\n");
-		str.append("import junit.framework.TestCase\n\n");
-		str.append("import junit.framework.Assert\n");
+		str.append("import org.junit.Assert\n");
 		str.append("\n\n");
-		str.append("class Xtend01_HelloWorld extends TestCase {\n");
+		str.append("class Xtend01_HelloWorld extends Assert {\n");
 		str.append("	\n");
 		str.append("	def void testHelloWorld() {\n");
 		str.append("		Assert::assertEquals('Hello Joe!', sayHelloTo('Joe'))\n");
@@ -63,7 +63,7 @@ public abstract class AbstractXtend2TestData extends AbstractXtend2TestCase {
 		doTest(str.toString());
 	}
 
-	public void testSimpleExpressions() throws Exception {
+	@Test public void testSimpleExpressions() throws Exception {
 		StringBuilder str = new StringBuilder();
 		str.append("package xtend.tutorial.basics\n");
 		str.append("\n");

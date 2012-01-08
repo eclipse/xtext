@@ -19,6 +19,7 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.xtend2.resource.DescriptionFlags;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
@@ -36,7 +37,7 @@ public class IndexingTest extends AbstractXtend2TestCase {
 	@Inject
 	private DescriptionFlags flags;
 	
-	public void testIndexing() throws Exception {
+	@Test public void testIndexing() throws Exception {
 		Iterator<IEObjectDescription> iterator = getExportedObjects(
 				"package test\n" +
 				"class Foo {\n" +
@@ -53,7 +54,7 @@ public class IndexingTest extends AbstractXtend2TestCase {
 		assertFalse(iterator.hasNext());
 	}
 
-	public void testDispatchMethod() throws Exception {
+	@Test public void testDispatchMethod() throws Exception {
 		Iterator<IEObjectDescription> iterator = getExportedObjects(
 				"package test\n" +
 				"class Foo {\n" +
@@ -71,7 +72,7 @@ public class IndexingTest extends AbstractXtend2TestCase {
 		assertFalse(iterator.hasNext()); 
 	}
 
-	public void testConstructors() throws Exception {
+	@Test public void testConstructors() throws Exception {
 		Iterator<IEObjectDescription> iterator = getExportedObjects("package test\n" +
 				"class Foo {\n" +
 				"  new(String x) {}\n" +
@@ -85,7 +86,7 @@ public class IndexingTest extends AbstractXtend2TestCase {
 		expect(iterator, "test.Foo", JVM_CONSTRUCTOR);
 	}
 	
-	public void testStaticFlags() throws Exception {
+	@Test public void testStaticFlags() throws Exception {
 		Iterator<IEObjectDescription> iterator = getExportedObjects("package test\n" +
 				"class Foo {\n" +
 				"  String bar\n" +

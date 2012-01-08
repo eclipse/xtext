@@ -12,6 +12,7 @@ import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xtend2.formatting.OrganizeImports;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
@@ -23,7 +24,7 @@ public class OrganizeImportsTest extends AbstractXtend2TestCase {
 	@Inject
 	private OrganizeImports organizeImports;
 	
-	public void testGetOrganizedImportSection_01() throws Exception {
+	@Test public void testGetOrganizedImportSection_01() throws Exception {
 		String model = 
 				"import java.lang.String\n" +
 				"import java.util.List\n" +
@@ -40,7 +41,7 @@ public class OrganizeImportsTest extends AbstractXtend2TestCase {
 				"\nimport java.util.List", section);
 	}
 	
-	public void testGetOrganizedImportSection_02() throws Exception {
+	@Test public void testGetOrganizedImportSection_02() throws Exception {
 		String model = 
 				"import java.lang.String\n" +
 				"import java.util.List\n" +
@@ -60,7 +61,7 @@ public class OrganizeImportsTest extends AbstractXtend2TestCase {
 				"\nimport java.util.List", section);
 	}
 	
-	public void testGetOrganizedImportSection_03() throws Exception {
+	@Test public void testGetOrganizedImportSection_03() throws Exception {
 		String model = 
 				"import java.util.*\n" +
 				"\n" +
@@ -79,7 +80,7 @@ public class OrganizeImportsTest extends AbstractXtend2TestCase {
 				"\nimport java.util.List", section);
 	}
 	
-	public void testGetOrganizedImportSection_04() throws Exception {
+	@Test public void testGetOrganizedImportSection_04() throws Exception {
 		String model = 
 				"import java.util.*\n" +
 				"import java.io.*\n" +
@@ -100,7 +101,7 @@ public class OrganizeImportsTest extends AbstractXtend2TestCase {
 				"\nimport java.util.Map", section);
 	}
 	
-	public void testGetOrganizedImportSection_05() throws Exception {
+	@Test public void testGetOrganizedImportSection_05() throws Exception {
 		String model = 
 				"import java.util.*\n" +
 				"import java.io.*\n" +
@@ -125,7 +126,7 @@ public class OrganizeImportsTest extends AbstractXtend2TestCase {
 				"\nimport java.util.Map", section);
 	}
 	
-	public void testGetOrganizedImportSectionWithInnerClasses_01() throws Exception {
+	@Test public void testGetOrganizedImportSectionWithInnerClasses_01() throws Exception {
 		String model = 
 						"class Foo {\n" +
 						"  def void test(org.eclipse.emf.ecore.resource.Resource$Factory a, org.eclipse.emf.ecore.resource.Resource$Factory$Registry b) {\n" +
@@ -140,7 +141,7 @@ public class OrganizeImportsTest extends AbstractXtend2TestCase {
 				"\nimport org.eclipse.emf.ecore.resource.Resource$Factory$Registry", section);
 	}
 	
-	public void testGetOrganizedImportSectionWithInnerClasses_02() throws Exception {
+	@Test public void testGetOrganizedImportSectionWithInnerClasses_02() throws Exception {
 		String model = 
 				"import org.eclipse.emf.ecore.resource.Resource\n" +
 				"import org.eclipse.emf.ecore.EPackage\n" +
@@ -161,7 +162,7 @@ public class OrganizeImportsTest extends AbstractXtend2TestCase {
 				"\nimport org.eclipse.emf.ecore.resource.Resource$Factory$Registry", section);
 	}
 	
-	public void testGetOrganizedImportSectionWithNameClash_01() throws Exception {
+	@Test public void testGetOrganizedImportSectionWithNameClash_01() throws Exception {
 		String model = 
 				"\n" +
 				"class Foo {\n" +
@@ -177,7 +178,7 @@ public class OrganizeImportsTest extends AbstractXtend2TestCase {
 				"\nimport java.awt.List", section);
 	}
 	
-	public void testGetOrganizedImportSectionWithNameClash_02() throws Exception {
+	@Test public void testGetOrganizedImportSectionWithNameClash_02() throws Exception {
 		String model = 
 				"\n" +
 						"class Foo {\n" +
@@ -193,7 +194,7 @@ public class OrganizeImportsTest extends AbstractXtend2TestCase {
 				"\nimport java.util.List", section);
 	}
 	
-	public void testGetOrganizedImportSectionWithStaticImport_01() throws Exception {
+	@Test public void testGetOrganizedImportSectionWithStaticImport_01() throws Exception {
 		String model = 
 				"import static extension java.util.Collections.* \n" +
 						"class Foo {\n" +
@@ -211,7 +212,7 @@ public class OrganizeImportsTest extends AbstractXtend2TestCase {
 				"\nimport static java.util.Collections.*", section);
 	}
 	
-	public void testGetOrganizedImportSectionWithStaticImport_02() throws Exception {
+	@Test public void testGetOrganizedImportSectionWithStaticImport_02() throws Exception {
 		String model = 
 				"import static extension java.util.Collections.* \n" +
 						"class Foo {\n" +
@@ -229,7 +230,7 @@ public class OrganizeImportsTest extends AbstractXtend2TestCase {
 				"\nimport static extension java.util.Collections.*", section);
 	}
 	
-	public void testGetOrganizedImportSectionWithImplicitExtensions() throws Exception {
+	@Test public void testGetOrganizedImportSectionWithImplicitExtensions() throws Exception {
 		String model = 
 						"class Foo {\n" +
 						"  def void test(java.util.List<String> s) {\n" +
@@ -245,7 +246,7 @@ public class OrganizeImportsTest extends AbstractXtend2TestCase {
 	}
 
 	
-	public void testGetRegion_01() throws Exception {
+	@Test public void testGetRegion_01() throws Exception {
 		String model = 
 				"class Foo {\n" +
 				"  def void test() {\n" +
@@ -257,7 +258,7 @@ public class OrganizeImportsTest extends AbstractXtend2TestCase {
 		assertEquals(0, region.getLength());
 	}
 	
-	public void testGetRegion_02() throws Exception {
+	@Test public void testGetRegion_02() throws Exception {
 		String model = 
 				"package foo.bar class Foo {\n" +
 						"  def void test() {\n" +
@@ -269,7 +270,7 @@ public class OrganizeImportsTest extends AbstractXtend2TestCase {
 		assertEquals(0, region.getLength());
 	}
 	
-	public void testGetRegion_03() throws Exception {
+	@Test public void testGetRegion_03() throws Exception {
 		String model = 
 				"package foo.bar\n" +
 				"import java.util.*\n" +
@@ -285,7 +286,7 @@ public class OrganizeImportsTest extends AbstractXtend2TestCase {
 		assertEquals(19, region.getLength());
 	}
 	
-	public void testInnerClassImport() throws Exception {
+	@Test public void testInnerClassImport() throws Exception {
 		String model = 
 				"package foo.bar\n" +
 						"import java.util.Map$Entry\n" +
@@ -302,7 +303,7 @@ public class OrganizeImportsTest extends AbstractXtend2TestCase {
 				"\nimport java.util.Map$Entry", section);
 	}
 	
-	public void testFunctionTypes_afterResolve() throws Exception {
+	@Test public void testFunctionTypes_afterResolve() throws Exception {
 		String model = 
 				"package foo.bar\n" +
 				"import java.util.Map$Entry\n" +
@@ -319,7 +320,7 @@ public class OrganizeImportsTest extends AbstractXtend2TestCase {
 				"\nimport java.util.Map$Entry", section);
 	}
 	
-	public void testFunctionTypes_beforeResolve() throws Exception {
+	@Test public void testFunctionTypes_beforeResolve() throws Exception {
 		String model = 
 				"package foo.bar\n" +
 				"import java.util.Map$Entry\n" +

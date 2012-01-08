@@ -41,6 +41,7 @@ import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.validation.ResourceValidatorImpl;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.junit.Test;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -65,7 +66,7 @@ public class SmokeTest extends AbstractSmokeTest {
 	@Inject
 	private ITypeProvider typeProvider;
 	
-	public void testResourceUpdateSkipLastCharacters() throws Exception {
+	@Test public void testResourceUpdateSkipLastCharacters() throws Exception {
 		for(String string: smokeTestModels) {
 			LazyLinkingResource resource = createResource("");
 			for (int i = 0; i < string.length(); i++) {
@@ -75,7 +76,7 @@ public class SmokeTest extends AbstractSmokeTest {
 		}
 	}
 
-	public void testResourceUpdateSkipFirstCharacters() throws Exception {
+	@Test public void testResourceUpdateSkipFirstCharacters() throws Exception {
 		for(String string: smokeTestModels) {
 			LazyLinkingResource resource = createResource("");
 			for (int i = string.length() - 1; i >= 0; i--) {
@@ -85,7 +86,7 @@ public class SmokeTest extends AbstractSmokeTest {
 		}
 	}
 
-	public void testResourceUpdateSkipCharacterInBetween() throws Exception {
+	@Test public void testResourceUpdateSkipCharacterInBetween() throws Exception {
 		for(String string: smokeTestModels) {
 			LazyLinkingResource resource = createResource(string.substring(1));
 			for (int i = 0; i < string.length() - 1; i++) {
@@ -95,7 +96,7 @@ public class SmokeTest extends AbstractSmokeTest {
 		}
 	}
 	
-	public void testResourceUpdateSkipTokensInBetween() throws Exception {
+	@Test public void testResourceUpdateSkipTokensInBetween() throws Exception {
 		for(String string: smokeTestModels) {
 			List<CommonToken> tokenList = Lists.newArrayList();
 			{

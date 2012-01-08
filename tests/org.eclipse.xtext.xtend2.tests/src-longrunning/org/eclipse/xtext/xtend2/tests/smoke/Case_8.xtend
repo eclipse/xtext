@@ -1,11 +1,12 @@
 package org.eclipse.xtext.xtend2.tests.smoke
 
-import static junit.framework.Assert.*
 import com.google.inject.Inject
-import org.eclipse.xtext.naming.IQualifiedNameProvider
-import org.eclipse.xtext.junit.util.ParseHelper
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.xtext.junit4.util.ParseHelper
+import org.eclipse.xtext.naming.IQualifiedNameProvider
+
+import static org.junit.Assert.*
 
 //@org.junit.runner.RunWith(typeof(XtextRunner))
 //@InjectWith(typeof(ClasspathAwareInjectorProvider))
