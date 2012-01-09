@@ -60,6 +60,7 @@ public class IssueCodes {
 	public static final String NULL_SAFE_FEATURE_CALL_ON_PRIMITIVE = ISSUE_CODE_PREFIX + "null_safe_feature_call_on_primitive";
 	public static final String NOT_INSTANTIABLE = ISSUE_CODE_PREFIX + "not_instantiable";
 	public static final String UNUSED_LOCAL_VARIABLE = "unused_local_variable";
+	public static final String INVALID_IDENTIFIER = "invalid_identifier";
 	
 	
 	// list is not necessarily complete

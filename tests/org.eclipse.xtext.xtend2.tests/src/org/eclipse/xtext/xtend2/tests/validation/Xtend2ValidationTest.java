@@ -912,4 +912,10 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
     	helper.assertWarning(clazz.getMembers().get(0), XTEND_FUNCTION, DISPATCH_PLAIN_FUNCTION_NAME_CLASH, "dispatch", "same", "name", "parameters");
     	helper.assertWarning(clazz.getMembers().get(1), XTEND_FUNCTION, DISPATCH_PLAIN_FUNCTION_NAME_CLASH, "dispatch", "same", "name", "parameters");
     }
+    
+    @Test public void testKeywordConflict() throws Exception {
+    	XtendClass clazz = clazz("class assert { def dispatch volatile(Object x) {} }");
+    	helper.assertError(clazz, XTEND_CLASS, INVALID_IDENTIFIER, "assert");
+    	helper.assertError(clazz.getMembers().get(0), XTEND_FUNCTION, INVALID_IDENTIFIER, "volatile");
+    }
 }
