@@ -123,7 +123,7 @@ public class Primitives {
 
 	public boolean isWrapperType(JvmTypeReference type) {
 		JvmTypeReference result = asPrimitiveIfWrapperType(type);
-		return result != type;
+		return result != type && result != null;
 	}
 
 	public JvmTypeReference asPrimitiveIfWrapperType(JvmTypeReference type) {
@@ -175,6 +175,11 @@ public class Primitives {
 			@Override
 			public JvmTypeReference doVisitTypeReference(JvmTypeReference reference) {
 				return reference;
+			}
+			
+			@Override
+			protected JvmTypeReference handleNullReference() {
+				return null;
 			}
 		}.visit(type);
 		

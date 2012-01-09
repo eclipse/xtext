@@ -229,7 +229,9 @@ public class SuperTypeCollector {
 			if (!object.eIsProxy()) {
 				collecting = true;
 				level++;
-				doSwitch(object.getEquivalent());
+				JvmTypeReference equivalent = object.getEquivalent();
+				if (equivalent != null)
+					doSwitch(equivalent);
 				level--;
 			}
 			return Boolean.FALSE;
