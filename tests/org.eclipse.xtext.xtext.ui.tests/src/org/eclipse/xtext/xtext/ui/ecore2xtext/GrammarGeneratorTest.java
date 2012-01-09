@@ -22,18 +22,20 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xpand2.XpandExecutionContextImpl;
 import org.eclipse.xpand2.XpandFacade;
 import org.eclipse.xtend.type.impl.java.JavaBeansMetaModel;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xtext.ui.OutputStringImpl;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.EPackageInfo;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextProjectInfo;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -55,21 +57,19 @@ public class GrammarGeneratorTest extends AbstractXtextTests {
 			.asList(new String[] { "http://www.eclipse.org/OCL2/1.0.0/ocl/uml" });
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
-		XtextStandaloneSetup.doSetup();
+		with(XtextStandaloneSetup.class);
 	}
 
-	public void testExampleEPackages() throws IOException {
+	@Test public void testExampleEPackages() throws IOException {
 		checkGeneratedGrammarIsValid(EXAMPLE_EPACKAGE_NS_URIS);
 	}
 
-	/*
-	// Smoke test 
-	public void testAllEPackagesFromRegistry() throws IOException {
+	@Ignore("Smoke test")
+	@Test public void testAllEPackagesFromRegistry() throws IOException {
 		checkGeneratedGrammarIsValid(Lists.newArrayList(EPackage.Registry.INSTANCE.keySet()));
 	}
-	*/
 
 	private void checkGeneratedGrammarIsValid(List<String> ePackageURIs) throws IOException {
 		for (String nsURI : ePackageURIs) {

@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.refactoring;
 
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
-import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
 
 import java.io.IOException;
 
@@ -37,24 +37,24 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextPackage;
+import org.eclipse.xtext.junit4.ui.AbstractLinkedEditingIntegrationTest;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.junit.refactoring.AbstractLinkedEditingIntegrationTest;
-import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.ui.refactoring.ui.RefactoringType;
 import org.eclipse.xtext.ui.refactoring.ui.RenameRefactoringController;
 import org.eclipse.xtext.util.SimpleAttributeResolver;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xtext.ui.Activator;
+import org.junit.Test;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
-import org.eclipse.xtext.xtext.ui.refactoring.EcoreRefactoringParticipant;
 
 /**
  * @author Holger Schill - Initial contribution and API
@@ -86,7 +86,7 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 
 	@SuppressWarnings("static-access")
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		FrameworkProperties.setProperty(EcoreRefactoringParticipant.ECORE_REFACTORING_PARTICIPANT_SHOW_WARNING_OPTION,
 				"false");
@@ -148,7 +148,7 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 		grammarResource.unload();
 	}
 
-	public void testRefactorXtextGrammarWithoutGeneratedClassifier() throws Exception {
+	@Test public void testRefactorXtextGrammarWithoutGeneratedClassifier() throws Exception {
 		waitForAutoBuild();
 		final XtextEditor editor = openEditor(grammaFile);
 		doRefactoring(editor);
@@ -158,7 +158,7 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 		checkConsistenceOfGrammar(editor);
 	}
 
-	public void testRefactorXtextGrammarWithGeneratedClassifier() throws Exception {
+	@Test public void testRefactorXtextGrammarWithGeneratedClassifier() throws Exception {
 		ResourceSet rs = resourceSetProvider.get();
 		Resource ecoreResource = createEcoreModel(rs, ecoreURI, initialModelRoot);
 		final EClass greetingClass = getGreetingClass(ecoreResource);
@@ -184,7 +184,7 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 	/**
 	 *	FIXME (dennis) Reactivate Testcase if fixed
 	 */
-	public void testRefactorXtextGrammarWithGeneratedClassifierAndModelWithRefToClassifier() throws Exception {
+	@Test public void testRefactorXtextGrammarWithGeneratedClassifierAndModelWithRefToClassifier() throws Exception {
 		ResourceSet rs = resourceSetProvider.get();
 		EcoreFactory eInstance = EcoreFactory.eINSTANCE;
 		Resource ecoreModelResource = createEcoreModel(rs, ecoreURI, initialModelRoot);
@@ -298,7 +298,7 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 	}
 
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		super.tearDown();
 		FrameworkProperties.setProperty(EcoreRefactoringParticipant.ECORE_REFACTORING_PARTICIPANT_SHOW_WARNING_OPTION,
 				"true");
