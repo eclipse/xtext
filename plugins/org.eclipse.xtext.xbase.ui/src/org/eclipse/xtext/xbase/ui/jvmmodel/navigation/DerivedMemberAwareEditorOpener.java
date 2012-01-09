@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.IMember;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.access.jdt.TypeURIHelper;
 import org.eclipse.xtext.common.types.ui.navigation.IDerivedMemberAwareEditorOpener;
 import org.eclipse.xtext.resource.XtextResource;
@@ -47,7 +48,7 @@ public class DerivedMemberAwareEditorOpener extends LanguageSpecificURIEditorOpe
 			TreeIterator<EObject> contents = EcoreUtil.<EObject>getAllContents(resource, true);
 			while(contents.hasNext()) {
 				EObject content = contents.next();
-				if (content instanceof JvmIdentifiableElement) {
+				if (content instanceof JvmMember) {
 					String identifierFromResource = ((JvmIdentifiableElement) content).getIdentifier();
 					if (identifier.equals(identifierFromResource)) {
 						EObject sourceElement = associations.getPrimarySourceElement(content);
