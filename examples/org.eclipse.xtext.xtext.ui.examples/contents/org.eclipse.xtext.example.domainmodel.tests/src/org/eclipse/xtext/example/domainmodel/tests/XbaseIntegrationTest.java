@@ -4,8 +4,8 @@ import java.lang.reflect.Method;
 
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainModel;
 import org.eclipse.xtext.generator.InMemoryFileSystemAccess;
-import org.eclipse.xtext.junit.util.ParseHelper;
-import org.eclipse.xtext.junit.validation.ValidationTestHelper;
+import org.eclipse.xtext.junit4.util.ParseHelper;
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
@@ -13,6 +13,7 @@ import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDepen
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.runner.RunWith;
 
 import com.google.common.base.Supplier;
@@ -33,11 +34,10 @@ import com.google.inject.Provider;
 @InjectWith(InjectorProviderCustom.class)
 public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 
-	/**
-	 * disabled, because checked exceptions are not supported by the domain model language
-	 */
 	@Override
+	@Ignore("checked exceptions are not supported by the domain model language")
 	public void testThrowExpression_01() throws Exception {
+		super.testThrowExpression_01();
 	}
 	
 	@Inject
