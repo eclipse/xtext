@@ -1,7 +1,7 @@
 package org.eclipse.xtext.example.domainmodel.tests
 
 import com.google.inject.Inject
-import junit.framework.Assert
+import org.junit.Assert
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainModel
 import org.eclipse.xtext.example.domainmodel.domainmodel.Entity
 import org.eclipse.xtext.example.domainmodel.domainmodel.PackageDeclaration

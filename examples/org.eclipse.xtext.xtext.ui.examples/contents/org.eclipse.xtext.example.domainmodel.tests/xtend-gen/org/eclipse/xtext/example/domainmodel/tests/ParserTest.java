@@ -1,7 +1,6 @@
 package org.eclipse.xtext.example.domainmodel.tests;
 
 import com.google.inject.Inject;
-import junit.framework.Assert;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -17,6 +16,7 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
