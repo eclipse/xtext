@@ -60,6 +60,7 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 		return editor;
 	}
 
+	@Override
 	public void testParenthesis_9() throws Exception {
 		XtextEditor editor = openEditor(SAMPLE_HEADER + "Greeting|: 'Hello' name=ID'!';");
 		pressKey(editor, '(');
@@ -68,6 +69,7 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 		assertState(SAMPLE_HEADER + "Greeting|: 'Hello' name=ID'!';", editor);
 	}
 
+	@Override
 	public void testParenthesis_10() throws Exception {
 		XtextEditor editor = openEditor(SAMPLE_HEADER + "Greeting: 'Hello' name=ID'!'|;");
 		pressKey(editor, '(');
@@ -192,9 +194,6 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 
 	public static void deleteProject(IProject project) throws CoreException {
 		if (project.exists()) {
-			if (project.isOpen()) {
-				project.close(null);
-			}
 			project.delete(true, true, null);
 		}
 	}
