@@ -56,6 +56,9 @@ public abstract class AbstractXbaseCompiler {
 	@Inject
 	private TypeReferenceSerializer referenceSerializer;
 	
+	@Inject
+	private JavaUtils javaUtils;
+	
 	protected TypeReferences getTypeReferences() {
 		return typeReferences;
 	}
@@ -348,8 +351,7 @@ public abstract class AbstractXbaseCompiler {
 	}
 
 	protected String makeJavaIdentifier(String name) {
-		//TODO escape all Java keywords
-		return name.equals("this") ? "_this" : name;
+		return javaUtils.isJavaKeyword(name) ? "_"+name : name;
 	}
 	
 	protected void declareSyntheticVariable(final XExpression expr, final IAppendable b) {
@@ -404,4 +406,5 @@ public abstract class AbstractXbaseCompiler {
 	protected TypeConformanceComputer getTypeConformanceComputer() {
 		return typeConformanceComputer;
 	}
+	
 }
